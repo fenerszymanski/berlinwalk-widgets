@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Berlin Kita Call List</title>
+<link rel="stylesheet" href="../css/brand.css">
+<style>
+  :root {
+    --green: #1B5E20;
+    --deep: #123D18;
+    --yellow: #FFE600;
+    --lime: #7CB342;
+    --soft: #C5E1A5;
+    --cream: #FAFAF5;
+    --ink: #212121;
+    --line: #E0E4DA;
+    --muted: #6b7360;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--cream); color: var(--ink); }
+  .kc { max-width: 820px; margin: 0 auto; padding: 14px 12px 12px; }
+  .kc-head h2 { font-size: 1.06rem; margin: 0; color: var(--green); line-height: 1.3; }
+  .kc-head p { margin: 5px 0 0; font-size: .77rem; line-height: 1.55; color: #555; }
+
+  .kc-controls { margin: 13px 0 0; display: flex; flex-wrap: wrap; gap: 8px; align-items: flex-end; }
+  .kc-field { flex: 1 1 190px; min-width: 150px; }
+  .kc-field label { display: block; font-size: .62rem; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; color: var(--deep); margin: 0 0 5px; }
+  .kc-field input {
+    font: inherit; font-size: .95rem; font-weight: 700; color: var(--deep);
+    width: 100%; padding: 9px 11px; border-radius: 9px; border: 2px solid var(--line);
+    background: #fff; min-height: 44px; letter-spacing: .06em;
+  }
+  .kc-field input:focus-visible { outline: 3px solid var(--green); outline-offset: 1px; }
+  .kc-go {
+    font: inherit; font-size: .78rem; font-weight: 800; color: var(--deep);
+    padding: 11px 16px; border-radius: 9px; border: 2px solid var(--green);
+    background: var(--yellow); cursor: pointer; min-height: 44px;
+  }
+  .kc-go:focus-visible { outline: 3px solid var(--deep); outline-offset: 2px; }
+  .kc-note { font-size: .7rem; color: var(--muted); margin: 7px 0 0; line-height: 1.5; }
+  .kc-note.bad { color: #B3261E; font-weight: 700; }
+
+  .kc-rings { margin: 12px 0 0; display: flex; gap: 5px; }
+  .kc-rings button {
+    flex: 1 1 0; font: inherit; font-size: .74rem; font-weight: 700; color: var(--muted);
+    padding: 8px 4px; border-radius: 9px; border: 2px solid var(--line);
+    background: #fff; cursor: pointer; min-height: 44px; line-height: 1.2;
+  }
+  .kc-rings button b { display: block; font-size: .58rem; letter-spacing: .04em; text-transform: uppercase; color: #9aa392; font-weight: 700; }
+  .kc-rings button[aria-pressed="true"] { background: var(--green); color: #fff; border-color: var(--green); }
+  .kc-rings button[aria-pressed="true"] b { color: var(--yellow); }
+  .kc-rings button:focus-visible { outline: 3px solid var(--deep); outline-offset: 2px; }
+
+  .kc-mapwrap { margin: 12px 0 0; position: relative; background: #fff; border: 2px solid var(--green); border-radius: 12px; overflow: hidden; }
+  .kc-map { display: block; width: 100%; height: auto; touch-action: manipulation; cursor: crosshair; }
+  .kc-maphint { position: absolute; left: 8px; bottom: 7px; font-size: .62rem; font-weight: 700; color: var(--deep); background: rgba(255,255,255,.88); padding: 3px 7px; border-radius: 6px; pointer-events: none; }
+
+  .kc-tally { margin: 11px 0 0; padding: 12px 13px; border-radius: 11px; background: var(--yellow); color: var(--deep); }
+  .kc-tally .kc-big { display: block; font-size: 1.45rem; font-weight: 800; line-height: 1.15; font-variant-numeric: tabular-nums; margin: 0 0 5px; }
+  .kc-tally p { margin: 0; font-size: .8rem; line-height: 1.5; color: var(--deep); }
+  .kc-tally p + p { margin-top: 6px; }
+  .kc-tally strong { font-variant-numeric: tabular-nums; }
+
+  .kc-listhead { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; margin: 16px 0 7px; }
+  .kc-listhead h3 { margin: 0; font-size: .84rem; color: var(--green); }
+  .kc-clear { font: inherit; font-size: .68rem; font-weight: 700; color: var(--deep); background: none; border: none; border-bottom: 2px solid var(--soft); padding: 2px 0; cursor: pointer; }
+  .kc-clear:focus-visible { outline: 3px solid var(--green); outline-offset: 2px; }
+
+  .kc-rows { list-style: none; margin: 0; padding: 0; }
+  .kc-rows li { border: 2px solid var(--line); border-radius: 10px; background: #fff; margin: 0 0 6px; padding: 8px 9px; display: flex; gap: 9px; align-items: flex-start; }
+  .kc-rows li.on { border-color: var(--green); background: #F4F8EC; }
+  .kc-pick {
+    font: inherit; flex: 0 0 auto; width: 34px; height: 34px; border-radius: 8px;
+    border: 2px solid var(--green); background: #fff; color: var(--green);
+    font-size: 1.1rem; font-weight: 800; line-height: 1; cursor: pointer;
+  }
+  .kc-rows li.on .kc-pick { background: var(--green); color: var(--yellow); }
+  .kc-pick:focus-visible { outline: 3px solid var(--deep); outline-offset: 2px; }
+  .kc-body { flex: 1 1 auto; min-width: 0; }
+  .kc-name { font-size: .81rem; font-weight: 700; color: var(--deep); line-height: 1.3; }
+  .kc-meta { font-size: .7rem; color: var(--muted); line-height: 1.5; margin-top: 2px; }
+  .kc-meta a { color: var(--green); font-weight: 700; }
+  .kc-size { flex: 0 0 auto; text-align: right; font-variant-numeric: tabular-nums; }
+  .kc-size b { display: block; font-size: .95rem; font-weight: 800; color: var(--deep); line-height: 1.1; }
+  .kc-size span { display: block; font-size: .56rem; letter-spacing: .04em; text-transform: uppercase; color: #9aa392; font-weight: 700; }
+
+  .kc-empty { font-size: .78rem; color: var(--muted); line-height: 1.6; padding: 10px 2px; }
+  .kc-src { margin: 14px 0 0; font-size: .66rem; color: var(--muted); line-height: 1.6; }
+  .kc-src a { color: var(--green); }
+  @media (max-width: 420px) {
+    .kc-rings button { font-size: .68rem; }
+    .kc-size b { font-size: .86rem; }
+  }
+</style>
+</head>
+<body>
+<div class="kc">
+  <div class="kc-head">
+    <h2>Which Kita doors are actually within a pram walk</h2>
+    <p>Berlin hands you the voucher and leaves the searching to you. Type your postcode, or tap your street on the map, and this shows every Kita in walking range from the Senate's own register, with its licensed size and its phone number, so you can build a call list that is worth the morning.</p>
+  </div>
+
+  <div class="kc-controls">
+    <div class="kc-field">
+      <label for="kcPlz">Your Berlin postcode</label>
+      <input id="kcPlz" type="text" inputmode="numeric" autocomplete="postal-code" maxlength="5" placeholder="10247">
+    </div>
+    <button class="kc-go" id="kcGo" type="button">Show my range</button>
+  </div>
+  <p class="kc-note" id="kcMsg">Every dot is one Kita, drawn at its real address and sized by its licensed places.</p>
+
+  <div class="kc-rings" id="kcRings" role="group" aria-label="Walking range"></div>
+
+  <div class="kc-mapwrap">
+    <svg class="kc-map" id="kcMap" viewBox="0 0 800 660" role="img" aria-label="Map of Berlin Kitas around the chosen point"></svg>
+    <span class="kc-maphint" id="kcScale"></span>
+  </div>
+
+  <div class="kc-tally" id="kcTally"></div>
+
+  <div class="kc-listhead">
+    <h3 id="kcListTitle">Doors in range</h3>
+    <button class="kc-clear" id="kcClear" type="button">Empty my call list</button>
+  </div>
+  <ul class="kc-rows" id="kcRows"></ul>
+  <p class="kc-empty" id="kcEmpty"></p>
+
+  <p class="kc-src" id="kcSrc"></p>
+</div>
+<script src="../js/brand.js"></script>
+<script>
+(function () {
+  'use strict';
+  var WALK_M_PER_MIN = 75;          // an honest pram pace, 4.5 km/h
+  var RINGS = [5, 10, 15, 20];
+  var minutes = 10;
+  var home = null;                  // {lat, lon, label}
+  var callList = [];                // accumulates as the reader picks doors
+  var DATA = null;
+
+  var elMap = document.getElementById('kcMap');
+  var elMsg = document.getElementById('kcMsg');
+  var elRings = document.getElementById('kcRings');
+  var elTally = document.getElementById('kcTally');
+  var elRows = document.getElementById('kcRows');
+  var elEmpty = document.getElementById('kcEmpty');
+  var elScale = document.getElementById('kcScale');
+  var elTitle = document.getElementById('kcListTitle');
+  var elSrc = document.getElementById('kcSrc');
+  var elPlz = document.getElementById('kcPlz');
+
+  function esc(s) {
+    return String(s).replace(/[&<>"]/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c];
+    });
+  }
+  function km(a, b) {
+    var p = Math.PI / 180, R = 6371;
+    var dla = (b.lat - a.lat) * p, dlo = (b.lon - a.lon) * p;
+    var h = Math.sin(dla / 2) * Math.sin(dla / 2)
+      + Math.cos(a.lat * p) * Math.cos(b.lat * p) * Math.sin(dlo / 2) * Math.sin(dlo / 2);
+    return 2 * R * Math.asin(Math.sqrt(h));
+  }
+
+  // --- projection -----------------------------------------------------------
+  var VW = 800, VH = 660, PAD = 10;
+  var KX = Math.cos(52.52 * Math.PI / 180);
+  function makeProjection(box) {
+    var w = (box.e - box.w) * KX, h = box.n - box.s;
+    var s = Math.min((VW - 2 * PAD) / w, (VH - 2 * PAD) / h);
+    var ox = (VW - w * s) / 2, oy = (VH - h * s) / 2;
+    return {
+      scale: s,
+      x: function (lon) { return ox + (lon - box.w) * KX * s; },
+      y: function (lat) { return oy + (box.n - lat) * s; },
+      pxPerKm: s / 111.32,
+      lon: function (px) { return box.w + (px - ox) / (KX * s); },
+      lat: function (py) { return box.n - (py - oy) / s; }
+    };
+  }
+  var CITY = { w: 13.085, e: 13.765, s: 52.335, n: 52.680 };
+  // The frame is sized for the widest ring and then left alone, so stepping the
+  // walk from 5 to 20 minutes does not make the whole map jump under the reader.
+  var FRAME_KM = RINGS[RINGS.length - 1] * WALK_M_PER_MIN / 1000 * 1.24;
+  function windowFor() {
+    if (!home) return CITY;
+    var dLat = FRAME_KM / 111.32, dLon = FRAME_KM / (111.32 * KX);
+    return { w: home.lon - dLon, e: home.lon + dLon, s: home.lat - dLat, n: home.lat + dLat };
+  }
+
+  function radiusFor(places, pxPerKm) {
+    var base = Math.sqrt(Math.max(places, 4)) * 0.42;
+    var zoom = Math.min(Math.max(pxPerKm / 12, 1), 3.2);
+    return Math.max(1.4, base * zoom * 0.5);
+  }
+
+  // --- the map --------------------------------------------------------------
+  function drawMap(inRange) {
+    var box = windowFor();
+    var p = makeProjection(box);
+    var parts = [];
+    parts.push('<rect x="0" y="0" width="800" height="660" fill="#FDFDF8"></rect>');
+
+    DATA.outline.forEach(function (d) {
+      var path = d.r.map(function (c, i) {
+        return (i ? 'L' : 'M') + p.x(c[0]).toFixed(1) + ' ' + p.y(c[1]).toFixed(1);
+      }).join(' ') + ' Z';
+      parts.push('<path d="' + path + '" fill="#F3F7EA" stroke="#C5E1A5" stroke-width="1.6"></path>');
+    });
+
+    var pad = 40 / p.scale;
+    var visible = DATA.kitas.filter(function (k) {
+      return k[6] > box.w - pad && k[6] < box.e + pad && k[5] > box.s - pad && k[5] < box.n + pad;
+    });
+    var picked = {};
+    callList.forEach(function (k) { picked[k.id] = true; });
+    var flagged = {};
+    inRange.forEach(function (k) { flagged[k.id] = true; });
+
+    visible.forEach(function (k) {
+      var r = radiusFor(k[4], p.pxPerKm);
+      var id = k[0] + '|' + k[1];
+      var fill = flagged[id] ? '#1B5E20' : '#9CBE7A';
+      if (picked[id]) fill = '#E08600';
+      parts.push('<circle cx="' + p.x(k[6]).toFixed(1) + '" cy="' + p.y(k[5]).toFixed(1)
+        + '" r="' + r.toFixed(1) + '" fill="' + fill + '" fill-opacity="' + (flagged[id] ? '.9' : '.55') + '"></circle>');
+    });
+
+    if (home) {
+      var hx = p.x(home.lon), hy = p.y(home.lat);
+      RINGS.forEach(function (m) {
+        var rr = m * WALK_M_PER_MIN / 1000 * p.pxPerKm;
+        var on = m === minutes;
+        parts.push('<circle cx="' + hx.toFixed(1) + '" cy="' + hy.toFixed(1) + '" r="' + rr.toFixed(1)
+          + '" fill="none" stroke="' + (on ? '#1B5E20' : '#B9C7A6') + '" stroke-width="' + (on ? 2.6 : 1.2)
+          + '" stroke-dasharray="' + (on ? '9 6' : '4 6') + '"></circle>');
+        if (rr > 26 && rr < 420) {
+          parts.push('<text x="' + hx.toFixed(1) + '" y="' + (hy - rr + 15).toFixed(1)
+            + '" text-anchor="middle" font-size="15" font-weight="700" fill="'
+            + (on ? '#1B5E20' : '#8C9B7C') + '">' + m + ' min</text>');
+        }
+      });
+      parts.push('<circle cx="' + hx.toFixed(1) + '" cy="' + hy.toFixed(1) + '" r="9" fill="#FFE600" stroke="#123D18" stroke-width="3"></circle>');
+
+      var placed = [];
+      inRange.slice(0, 8).forEach(function (k) {
+        if (placed.length >= 3) return;
+        var tx = p.x(k.lon), ty = p.y(k.lat);
+        var up = ty > hy;
+        var ly = ty + (up ? 27 : -17);
+        var clash = placed.some(function (q) { return Math.abs(q.x - tx) < 120 && Math.abs(q.y - ly) < 26; });
+        if (clash) return;
+        placed.push({ x: tx, y: ly });
+        parts.push('<text x="' + tx.toFixed(1) + '" y="' + ly.toFixed(1)
+          + '" text-anchor="middle" font-size="15" font-weight="800" fill="#123D18" stroke="#FDFDF8" stroke-width="3.5" paint-order="stroke">'
+          + esc(k.places) + ' places</text>');
+      });
+    }
+
+    // scale bar
+    var kmBar = p.pxPerKm > 90 ? 0.5 : (p.pxPerKm > 30 ? 1 : 5);
+    var barPx = kmBar * p.pxPerKm;
+    parts.push('<line x1="' + (VW - 30 - barPx).toFixed(1) + '" y1="632" x2="' + (VW - 30)
+      + '" y2="632" stroke="#123D18" stroke-width="3"></line>');
+    parts.push('<text x="' + (VW - 30 - barPx / 2).toFixed(1) + '" y="622" text-anchor="middle" font-size="15" font-weight="700" fill="#123D18">'
+      + kmBar + ' km</text>');
+
+    elMap.innerHTML = parts.join('');
+    elScale.textContent = home ? 'Tap the map to move your home point' : 'All ' + DATA.meta.kitas + ' located Kitas in Berlin';
+  }
+
+  // --- the reader's range ---------------------------------------------------
+  function doorsInRange() {
+    if (!home) return [];
+    var limit = minutes * WALK_M_PER_MIN / 1000;
+    var out = [];
+    DATA.kitas.forEach(function (k) {
+      var d = km(home, { lat: k[5], lon: k[6] });
+      if (d <= limit) {
+        out.push({
+          id: k[0] + '|' + k[1], name: k[0], addr: k[1], plz: k[2],
+          district: DATA.districts[k[3]], places: k[4], lat: k[5], lon: k[6],
+          phone: k[7], distance: d
+        });
+      }
+    });
+    out.sort(function (a, b) { return b.places - a.places || a.distance - b.distance; });
+    return out;
+  }
+
+  function sumPlaces(rows) {
+    return rows.reduce(function (t, r) { return t + r.places; }, 0);
+  }
+
+  function renderTally(inRange) {
+    if (!home) {
+      elTally.innerHTML = '<span class="kc-big">' + DATA.meta.placesAll.toLocaleString('en-GB') + ' licensed places</span>'
+        + '<p>The register lists <strong>' + DATA.meta.kitasAll + '</strong> Berlin Kitas, and <strong>'
+        + DATA.meta.kitas + '</strong> of them carry a usable coordinate, which is what this map draws. '
+        + 'A quarter of Berlin\'s Kitas hold more than half the places in the city, so a screen full of pins tells you very little on its own.</p>'
+        + '<p>Give it a postcode and it will count the places, not the pins.</p>';
+      return;
+    }
+    var total = sumPlaces(inRange);
+    var small = inRange.filter(function (r) { return r.places < 30; });
+    var big = inRange.filter(function (r) { return r.places >= 100; });
+    var listTotal = sumPlaces(callList);
+    var html = '<span class="kc-big">' + inRange.length + ' doors, ' + total.toLocaleString('en-GB') + ' places</span>'
+      + '<p>Inside a <strong>' + minutes + '-minute</strong> pram walk of ' + esc(home.label) + '. '
+      + (inRange.length
+        ? '<strong>' + big.length + '</strong> of them are licensed for 100 children or more and <strong>'
+          + small.length + '</strong> for fewer than 30.'
+        : 'Nothing at all, which is your answer: widen the ring.') + '</p>';
+    if (callList.length) {
+      html += '<p>Your call list holds <strong>' + callList.length + '</strong> '
+        + (callList.length === 1 ? 'door' : 'doors') + ' and <strong>'
+        + listTotal.toLocaleString('en-GB') + '</strong> licensed places.</p>';
+    } else if (inRange.length) {
+      html += '<p>Tap the plus on a row to put that Kita on your call list.</p>';
+    }
+    elTally.innerHTML = html;
+  }
+
+  function renderRows(inRange) {
+    var picked = {};
+    callList.forEach(function (k) { picked[k.id] = true; });
+    if (!home) {
+      elRows.innerHTML = '';
+      elEmpty.textContent = 'No postcode yet. The list fills in once the map knows where you start from.';
+      elTitle.textContent = 'Doors in range';
+      return;
+    }
+    elTitle.textContent = 'Doors within ' + minutes + ' minutes, biggest first';
+    if (!inRange.length) {
+      elRows.innerHTML = '';
+      elEmpty.textContent = 'No Kita inside that ring. Press 15 or 20 minutes, or move the home point.';
+      return;
+    }
+    var CAP = 10;
+    elEmpty.textContent = inRange.length > CAP
+      ? 'Ten biggest of ' + inRange.length + ' inside the ring.'
+        + (minutes > RINGS[0] ? ' Shorten the walk for the ones you would really do twice a day in February.' : '')
+      : '';
+    elRows.innerHTML = inRange.slice(0, CAP).map(function (r) {
+      var on = picked[r.id];
+      // The register writes some numbers without the Berlin prefix, so the dial
+      // link gets it back rather than sending the reader to a dead local number.
+      var tel = r.phone ? r.phone.replace(/[^\d+]/g, '') : '';
+      if (tel && tel[0] !== '+' && tel[0] !== '0') tel = '+4930' + tel;
+      return '<li class="' + (on ? 'on' : '') + '">'
+        + '<button class="kc-pick" type="button" data-id="' + esc(r.id) + '" aria-pressed="' + (on ? 'true' : 'false')
+        + '" aria-label="' + (on ? 'Take ' : 'Add ') + esc(r.name) + (on ? ' off' : ' to') + ' my call list">'
+        + (on ? '✓' : '+') + '</button>'
+        + '<div class="kc-body"><div class="kc-name">' + esc(r.name) + '</div>'
+        + '<div class="kc-meta">' + esc(r.addr) + ', ' + esc(r.plz) + ' &middot; '
+        + Math.round(r.distance * 1000) + ' m &middot; ' + Math.max(1, Math.round(r.distance * 1000 / WALK_M_PER_MIN)) + ' min walk'
+        + (tel ? ' &middot; <a href="tel:' + esc(tel) + '">' + esc(r.phone) + '</a>' : '')
+        + '</div></div>'
+        + '<div class="kc-size"><b>' + r.places + '</b><span>places</span></div></li>';
+    }).join('');
+  }
+
+  function render() {
+    var inRange = doorsInRange();
+    drawMap(inRange);
+    renderTally(inRange);
+    renderRows(inRange);
+    RINGS.forEach(function (m) {
+      var b = elRings.querySelector('[data-min="' + m + '"]');
+      if (b) b.setAttribute('aria-pressed', m === minutes ? 'true' : 'false');
+    });
+    document.getElementById('kcClear').hidden = callList.length === 0;
+  }
+
+  function setHomeFromPostcode(raw) {
+    var code = String(raw || '').replace(/\D/g, '').slice(0, 5);
+    if (code.length !== 5) {
+      elMsg.textContent = 'A Berlin postcode is five digits, for example 10247.';
+      elMsg.className = 'kc-note bad';
+      return;
+    }
+    var c = DATA.plz[code];
+    if (!c) {
+      elMsg.textContent = code + ' is not a Berlin postcode with a registered Kita. Try a neighbouring one, or tap the map.';
+      elMsg.className = 'kc-note bad';
+      return;
+    }
+    home = { lat: c[0], lon: c[1], label: 'postcode ' + code };
+    elMsg.innerHTML = 'Centred on the middle of postcode <strong>' + code
+      + '</strong>. Tap your own street on the map to measure from your door instead.';
+    elMsg.className = 'kc-note';
+    render();
+  }
+
+  function togglePick(id) {
+    var at = -1;
+    callList.forEach(function (k, i) { if (k.id === id) at = i; });
+    if (at >= 0) {
+      callList.splice(at, 1);
+    } else {
+      var row = doorsInRange().filter(function (r) { return r.id === id; })[0];
+      if (row) callList.push(row);
+    }
+    render();
+  }
+
+  elRings.innerHTML = RINGS.map(function (m) {
+    return '<button type="button" data-min="' + m + '" aria-pressed="' + (m === minutes) + '">'
+      + '<b>walk</b>' + m + ' min</button>';
+  }).join('');
+  elRings.addEventListener('click', function (e) {
+    var b = e.target.closest('button[data-min]');
+    if (!b) return;
+    minutes = Number(b.getAttribute('data-min'));
+    render();
+  });
+  elRows.addEventListener('click', function (e) {
+    var b = e.target.closest('button[data-id]');
+    if (!b) return;
+    togglePick(b.getAttribute('data-id'));
+  });
+  document.getElementById('kcClear').addEventListener('click', function () {
+    callList.splice(0, callList.length);
+    render();
+  });
+  document.getElementById('kcGo').addEventListener('click', function () { setHomeFromPostcode(elPlz.value); });
+  elPlz.addEventListener('keydown', function (e) {
+    if (e.key === 'Enter') { e.preventDefault(); setHomeFromPostcode(elPlz.value); }
+  });
+  elMap.addEventListener('click', function (e) {
+    if (!DATA) return;
+    var r = elMap.getBoundingClientRect();
+    var p = makeProjection(windowFor());
+    var px = (e.clientX - r.left) / r.width * VW;
+    var py = (e.clientY - r.top) / r.height * VH;
+    var lat = p.lat(py), lon = p.lon(px);
+    if (lat < CITY.s - 0.02 || lat > CITY.n + 0.02 || lon < CITY.w - 0.02 || lon > CITY.e + 0.02) return;
+    home = { lat: lat, lon: lon, label: 'that point' };
+    elMsg.textContent = 'Measuring from the point you tapped. Tap again to move it.';
+    elMsg.className = 'kc-note';
+    render();
+  });
+
+  fetch('data.json').then(function (r) { return r.json(); }).then(function (d) {
+    DATA = d;
+    elSrc.innerHTML = 'Data: ' + esc(d.meta.source)
+      + ', published as open data by the Land Berlin under the '
+      + '<a href="https://www.govdata.de/dl-de/by-2-0" target="_blank" rel="noopener">Datenlizenz Deutschland Namensnennung 2.0</a>. '
+      + 'Licensed places are what a Kita is permitted to hold, not what is free today. '
+      + 'Distances are straight lines, so a real walk is longer, and the Jugendamt itself treats a journey of up to 30 minutes on public transport as reasonable.';
+    render();
+  }).catch(function () {
+    elMsg.textContent = 'The Kita register did not load. Reload the page and it should come back.';
+    elMsg.className = 'kc-note bad';
+  });
+})();
+</script>
+</body>
+</html>
