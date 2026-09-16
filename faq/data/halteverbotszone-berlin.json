@@ -1,0 +1,113 @@
+{
+  "version": 1,
+  "slug": "halteverbotszone-berlin",
+  "key": "halteverbotszone-berlin",
+  "config": {
+    "title": "Halteverbotszone Berlin - FAQ",
+    "subtitle": "What the district order actually covers, how far ahead to apply, why the signs are a separate purchase, what the three full days rule means for a towing bill, and who to write to in each of the twelve districts.",
+    "items": [
+      {
+        "q": "How do I get a Halteverbotszone in Berlin for my move?",
+        "a": "You send an informal email to the traffic authority of the district the kerb is in. There is no form. Say where the zone should be, how long a stretch you need, and on which days, and the office sends back an order, the Anordnung. Berlin publishes an average processing time of about four weeks for this. The order is only the permission; you then rent the actual signs from a private firm and put them up yourself."
+      },
+      {
+        "q": "How much does a Halteverbotszone cost in Berlin?",
+        "a": "The official fee starts at 21 euros per zone and rises with the length of the zone and the number of days it runs. The signs are a separate cost and come from a private firm, starting at roughly 45 to 50 euros in Berlin for a simple one-address package. A normal move between two Berlin flats needs two zones, so the floor is 42 euros in official fees plus about 90 to 160 euros for the signs."
+      },
+      {
+        "q": "How far in advance should I apply?",
+        "a": "About five weeks before the van arrives. The arithmetic is four weeks of processing plus the four days the signs have to be standing before the restriction starts, which is thirty-two days in total. Most removal guides say two weeks, and that is where moving days go wrong. If you are inside four weeks, a full-service sign firm is the faster route."
+      },
+      {
+        "q": "What is the three full days rule?",
+        "a": "In May 2018 the Bundesverwaltungsgericht ruled that a car which was parked legally before a temporary no-stopping sign appeared can only be towed at its own driver’s cost if that sign had been standing for at least three full days. The court counts whole calendar days, with no hour-by-hour arithmetic and no special treatment for weekends or public holidays. In practice that means the signs go up four days before the van."
+      },
+      {
+        "q": "Do I get the no-stopping signs from the district office?",
+        "a": "No. Berlin’s own service page states that the traffic authority issues the order but not the traffic signs. You rent the signs from a removals firm or a specialist sign company, most of which also offer to handle the application for you as one package. Putting them up on time and taking them down afterwards is your responsibility."
+      },
+      {
+        "q": "Do I need two zones if both flats are in Berlin?",
+        "a": "Yes. You need one at the old address and one at the new one, because the van has to stand at both kerbs. If the two addresses are in different districts, that is two separate applications to two different offices with two different email addresses. Add a third zone if a container or a storage unit is part of the day."
+      },
+      {
+        "q": "Which office in my district handles it?",
+        "a": "It sits inside the Straßen- und Grünflächenamt in most Berlin districts and inside a separately named Straßenverkehrsbehörde in others. Mitte writes to sga@ba-mitte.berlin.de, Neukölln to svb@bezirksamt-neukoelln.de, Friedrichshain-Kreuzberg to tiefgruen@ba-fk.berlin.de. Charlottenburg-Wilmersdorf and Steglitz-Zehlendorf are the two districts where Berlin’s service page gives only the borough homepage, so the planner on this page carries their contacts too."
+      },
+      {
+        "q": "A car is parked in my zone on the morning. What do I do?",
+        "a": "Photograph the signs, the number plate and the time before anything moves, then call the police or the Ordnungsamt. They will ask to see your Anordnung and the record of when the signs went up, so keep both to hand. If the signs went up less than three full days before, the car can still be moved but the driver will probably not carry the cost, and the discussion takes longer."
+      }
+    ]
+  },
+  "schema": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How do I get a Halteverbotszone in Berlin for my move?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "You send an informal email to the traffic authority of the district the kerb is in. There is no form. Say where the zone should be, how long a stretch you need, and on which days, and the office sends back an order, the Anordnung. Berlin publishes an average processing time of about four weeks for this. The order is only the permission; you then rent the actual signs from a private firm and put them up yourself."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How much does a Halteverbotszone cost in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The official fee starts at 21 euros per zone and rises with the length of the zone and the number of days it runs. The signs are a separate cost and come from a private firm, starting at roughly 45 to 50 euros in Berlin for a simple one-address package. A normal move between two Berlin flats needs two zones, so the floor is 42 euros in official fees plus about 90 to 160 euros for the signs."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How far in advance should I apply?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "About five weeks before the van arrives. The arithmetic is four weeks of processing plus the four days the signs have to be standing before the restriction starts, which is thirty-two days in total. Most removal guides say two weeks, and that is where moving days go wrong. If you are inside four weeks, a full-service sign firm is the faster route."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the three full days rule?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "In May 2018 the Bundesverwaltungsgericht ruled that a car which was parked legally before a temporary no-stopping sign appeared can only be towed at its own driver’s cost if that sign had been standing for at least three full days. The court counts whole calendar days, with no hour-by-hour arithmetic and no special treatment for weekends or public holidays. In practice that means the signs go up four days before the van."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Do I get the no-stopping signs from the district office?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. Berlin’s own service page states that the traffic authority issues the order but not the traffic signs. You rent the signs from a removals firm or a specialist sign company, most of which also offer to handle the application for you as one package. Putting them up on time and taking them down afterwards is your responsibility."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Do I need two zones if both flats are in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. You need one at the old address and one at the new one, because the van has to stand at both kerbs. If the two addresses are in different districts, that is two separate applications to two different offices with two different email addresses. Add a third zone if a container or a storage unit is part of the day."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Which office in my district handles it?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "It sits inside the Straßen- und Grünflächenamt in most Berlin districts and inside a separately named Straßenverkehrsbehörde in others. Mitte writes to sga@ba-mitte.berlin.de, Neukölln to svb@bezirksamt-neukoelln.de, Friedrichshain-Kreuzberg to tiefgruen@ba-fk.berlin.de. Charlottenburg-Wilmersdorf and Steglitz-Zehlendorf are the two districts where Berlin’s service page gives only the borough homepage, so the planner on this page carries their contacts too."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "A car is parked in my zone on the morning. What do I do?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Photograph the signs, the number plate and the time before anything moves, then call the police or the Ordnungsamt. They will ask to see your Anordnung and the record of when the signs went up, so keep both to hand. If the signs went up less than three full days before, the car can still be moved but the driver will probably not carry the cost, and the discussion takes longer."
+        }
+      }
+    ]
+  }
+}

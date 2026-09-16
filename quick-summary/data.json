@@ -2527,7 +2527,7 @@
       "**Use a no-app browser route for one focused Berlin walk.** It opens on the phone you already have and removes the app-store, account and notification layer before the first chapter.",
       "**Save the MP3 and route card on Wi-Fi.** The browser is the convenient front door; the downloaded files are the fallback when signal becomes weak outside a station or memorial site.",
       "**Offline maps do not solve every walking problem.** Google notes that walking and public-transport directions are unavailable offline, so keep named stops and route-card directions as well as the map.",
-      "**The four available BerlinWalk audio walks cost €9.90 each.** Hidden Berlin, Berlin Wall, Medieval Berlin and Third Reich Berlin use the same browser-plus-backup format.",
+      "**All five BerlinWalk paid routes cost €4.99.** Hidden Berlin, Berlin Wall, Medieval Berlin, Third Reich Berlin and Kreuzberg Street Art use the same browser-plus-backup format.",
       "**My recommendation:** use an app for a multi-city catalogue. For one Berlin route this afternoon, open the browser route, download the backup and put the phone away between chapters."
     ]
   },
@@ -2536,9 +2536,9 @@
     "icon": "🗺️",
     "kicker": "BERLINWALK.COM • TOUR ROUTE",
     "items": [
-      "**Choose the route by its real start and finish, not only by the topic.** Nordbahnhof, Anhalter Bahnhof, the World Clock and the Reichstag sit in different parts of Berlin.",
+      "**Choose the route by its real start and finish, not only by the topic.** Nordbahnhof, Anhalter Bahnhof, the World Clock, the Reichstag and East Side Gallery sit in different parts of Berlin.",
       "**A useful audio walk is more than an MP3.** It needs a named starting point, short place-linked chapters, written directions or map links, an honest time range and an offline backup.",
-      "**The four available paid walks cost €9.90 each.** Allow about 75 to 120 minutes on the ground, depending on the route and your stops.",
+      "**The five paid routes cost €4.99 each.** Walking times range from 75 to 120 minutes: Medieval Berlin is shortest, while Hidden Berlin, Third Reich Berlin and Kreuzberg can take closer to two hours.",
       "**Add 30 minutes before any hard deadline.** Exhibitions, photographs, memorial panels, construction and station exits can turn a 90-minute route into a longer walk.",
       "**Use a live guide for first-day orientation and questions.** Use audio later for one focused subject at your own pace; the free tour does not follow the full Berlin Wall route.",
       "**Prepare the evening before.** Save the start, finish and return connection, download the audio and route card on Wi-Fi, charge the phone and keep one ear free at crossings."
@@ -4969,6 +4969,19 @@
       "**Berlin's fees are small: 37.50 euro** without a test, **45.10 euro** with one or from a third country, **26.50 euro** to swap an old German licence. The cost sits in the extras, and only the third-country lane needs the first aid course (about 35 to 70 euro in Berlin) and always the eyesight test.",
       "**The desk is weeks behind, and those weeks come out of your six months.** On 15 September 2026 the Berlin licence desk was processing third-country applications filed on **31 July**, EU applications from **27 July**, Anlage 11 from **20 August** and card swaps from **27 August**.",
       "**Old German licences expire as documents, not as entitlements.** Cards issued **2002 to 2004** must be swapped by **19 January 2027**, and the new card has to be in your hand by that date. Driving on an un-swapped one is a **10 euro** warning fine. Driving after your six months have run out is a criminal offence under section 21 StVG, worth up to a year inside."
+    ]
+  },
+  "halteverbotszone-berlin": {
+    "title": "Halteverbotszone Berlin - Quick Summary",
+    "icon": "🚚",
+    "kicker": "BERLINWALK.COM • LIVING IN BERLIN",
+    "items": [
+      "**The kerb outside your door is not yours on moving day.** You need a temporary no-stopping order, a **Halteverbotszone**, from the traffic authority of the district that kerb sits in. Berlin calls the service **Haltverbot für Umzüge** and the fee starts at **21 euros**.",
+      "**The order does not come with signs.** No Berlin office hands them over. You rent the physical signs from a private firm, which in Berlin starts at roughly **45 to 50 euros** for a simple one-address package, and you are responsible for putting them up and taking them down.",
+      "**Count back thirty-two days, not fourteen.** Berlin publishes an average processing time of **about four weeks**, and the signs have to be standing **four days** before the van arrives. Applying two weeks ahead, which most removal guides suggest, is already late.",
+      "**Three full days is the number that decides the towing bill.** The Bundesverwaltungsgericht set that lead time in May 2018. If the signs went up later, a car that was already parked there can still be moved, but its driver does not have to pay for it. The court counts whole calendar days and makes no exception for weekends.",
+      "**Most moves need two zones and two offices.** One kerb at the old address, one at the new, and the two addresses are often in different districts. The email addresses follow no pattern: Mitte answers on sga@, Neukölln on svb@, Friedrichshain-Kreuzberg on tiefgruen@.",
+      "**Two districts hide their desk.** Charlottenburg-Wilmersdorf and Steglitz-Zehlendorf are the only ones where Berlin's service page sends you to the borough homepage instead of a contact, so the planner on this page carries the addresses I dug out for all twelve, checked on **16 September 2026**."
     ]
   }
 }

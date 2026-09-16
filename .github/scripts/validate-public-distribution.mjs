@@ -74,7 +74,31 @@ const REQUIRED_SUBRESOURCE_INTEGRITY = [
     integrity: 'sha384-82q0nm29xZzIo5BMtDYnh2/NxeO6FoaK1S/0nF84w3cEsqbBfun3JdMyDVYWfVY5',
   },
 ];
-const ALLOWED_EMAILS = new Set(['info@berlinwalk.com', 'you@example.com']);
+// The guard exists to stop a customer or lead address reaching the public
+// distribution. Berlin's twelve district traffic-authority mailboxes are the
+// opposite of that: published contact points on berlin.de and service.berlin.de,
+// and they are the entire payload of the moving-permit planner, which exists to
+// tell a resident which office to write to. Listed one by one so a new address
+// still has to be added deliberately.
+const BERLIN_DISTRICT_TRAFFIC_AUTHORITY_EMAILS = [
+  'sga@ba-mitte.berlin.de',
+  'tiefgruen@ba-fk.berlin.de',
+  'svb@ba-pankow.berlin.de',
+  'svb@charlottenburg-wilmersdorf.de',
+  'sga@ba-spandau.berlin.de',
+  'svb@ba-sz.berlin.de',
+  'sv@ba-ts.berlin.de',
+  'svb@bezirksamt-neukoelln.de',
+  'sga-svb@ba-tk.berlin.de',
+  'sondernutzung_ag@ba-mh.berlin.de',
+  'sga@lichtenberg.berlin.de',
+  'strassenverkehrsbehoerde@reinickendorf.berlin.de',
+];
+const ALLOWED_EMAILS = new Set([
+  'info@berlinwalk.com',
+  'you@example.com',
+  ...BERLIN_DISTRICT_TRAFFIC_AUTHORITY_EMAILS,
+]);
 const MAX_PUBLIC_FILE_BYTES = 20 * 1024 * 1024;
 
 function sha256(value) {
