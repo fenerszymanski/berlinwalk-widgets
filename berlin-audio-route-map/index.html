@@ -215,6 +215,7 @@
       <button class="route-tab" type="button" aria-pressed="true" data-route="all">All routes</button>
       <button class="route-tab" type="button" aria-pressed="false" data-route="hidden">Hidden</button>
       <button class="route-tab" type="button" aria-pressed="false" data-route="wall">Berlin Wall</button>
+      <button class="route-tab" type="button" aria-pressed="false" data-route="medieval">Medieval</button>
       <button class="route-tab" type="button" aria-pressed="false" data-route="third-reich">Third Reich</button>
       <button class="route-tab" type="button" aria-pressed="false" data-route="sample">Free sampler</button>
     </nav>
@@ -229,7 +230,7 @@
 
       <aside class="route-panel">
         <div class="route-panel-head">
-          <p class="eyebrow" style="color:var(--green)">Three walks and a sampler</p>
+          <p class="eyebrow" style="color:var(--green)">Four walks and a sampler</p>
           <h2>Choose by geography.</h2>
           <p>A route near your current station usually beats a stronger theme on the other side of the city.</p>
         </div>
@@ -286,6 +287,12 @@
           start: 'S Nordbahnhof', finish: 'Mauerpark', time: 'about 90 min', price: '€9.90', color: '#365f91',
           points: [[52.53215, 13.38710], [52.54332, 13.40238]],
           url: 'https://www.berlinwalk.com/products/death-strip-audio-route'
+        },
+        {
+          id: 'medieval', name: 'Medieval Berlin', theme: 'Berlin-Cölln origins and Nikolaiviertel',
+          start: 'World Clock', finish: 'Lustgarten', time: '75-90 min', price: '€9.90', color: '#9b6b18',
+          points: [[52.52133, 13.41331], [52.51811, 13.39972]],
+          url: 'https://www.berlinwalk.com/products/medieval-berlin-audio-tour'
         },
         {
           id: 'third-reich', name: 'Third Reich Berlin', theme: 'Power, persecution and resistance',
