@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Berlin Driving Licence Runway</title>
+<link rel="stylesheet" href="../css/brand.css">
+<style>
+  :root {
+    --green: #1B5E20;
+    --deep: #123D18;
+    --yellow: #FFE600;
+    --lime: #7CB342;
+    --cream: #FAFAF5;
+    --ink: #212121;
+    --amber: #E08600;
+    --red: #C62828;
+    --line: #E0E4DA;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--cream); color: var(--ink); }
+  .lr { max-width: 780px; margin: 0 auto; padding: 14px 12px 12px; }
+  .lr-head h2 { font-size: 1.08rem; margin: 0; color: var(--green); }
+  .lr-head p { margin: 5px 0 0; font-size: .77rem; line-height: 1.55; color: #555; }
+
+  .lr-steps { display: flex; gap: 6px; margin: 14px 0 0; }
+  .lr-steps button {
+    flex: 1 1 0; font: inherit; font-size: .72rem; font-weight: 700; color: #6b7360;
+    padding: 9px 8px; border-radius: 9px 9px 0 0; border: 2px solid var(--line); border-bottom: none;
+    background: #fff; cursor: pointer; min-height: 44px; line-height: 1.25; text-align: left;
+  }
+  .lr-steps button b { display: block; font-size: .61rem; letter-spacing: .05em; text-transform: uppercase; color: #9aa392; }
+  .lr-steps button.on { background: var(--green); color: #fff; border-color: var(--green); }
+  .lr-steps button.on b { color: var(--yellow); }
+  .lr-steps button:focus-visible { outline: 3px solid var(--deep); outline-offset: 2px; }
+
+  .lr-card { background: #fff; border: 2px solid var(--green); border-radius: 0 0 12px 12px; padding: 11px; }
+  .lr-label { display: block; font-size: .63rem; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; color: var(--deep); margin: 0 0 6px; }
+  .lr-search { width: 100%; font: inherit; font-size: .84rem; padding: 10px 11px; border: 2px solid var(--line); border-radius: 9px; background: #fff; color: var(--ink); min-height: 44px; }
+  .lr-search:focus-visible { outline: 3px solid var(--green); outline-offset: 1px; }
+
+  .lr-hits { list-style: none; margin: 8px 0 0; padding: 0; max-height: 216px; overflow-y: auto; border: 1px solid var(--line); border-radius: 9px; }
+  .lr-hits li { border-bottom: 1px solid #F0F2EC; }
+  .lr-hits li:last-child { border-bottom: none; }
+  .lr-hits button {
+    display: block; width: 100%; text-align: left; font: inherit; font-size: .79rem; font-weight: 600;
+    color: var(--deep); background: #fff; border: none; cursor: pointer; padding: 9px 11px; min-height: 42px; line-height: 1.3;
+  }
+  .lr-hits button span { display: block; font-size: .65rem; font-weight: 600; color: #6b7360; margin-top: 2px; }
+  .lr-hits button.on { background: var(--yellow); }
+  .lr-hits button:focus-visible { outline: 3px solid var(--green); outline-offset: -3px; }
+  .lr-empty { padding: 11px; font-size: .76rem; color: #6b7360; line-height: 1.5; }
+
+  .lr-picked { margin: 10px 0 0; padding: 9px 11px; border-radius: 9px; background: #F2F6EC; border: 1px solid #D8E3CC; font-size: .78rem; line-height: 1.5; color: var(--deep); }
+  .lr-picked b { font-weight: 800; }
+
+  .lr-when { display: flex; flex-wrap: wrap; gap: 8px; margin: 9px 0 0; }
+  .lr-when label { flex: 1 1 130px; font-size: .63rem; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; color: var(--deep); }
+  .lr-when select { display: block; width: 100%; margin-top: 5px; font: inherit; font-size: .82rem; padding: 9px 8px; border: 2px solid var(--line); border-radius: 9px; background: #fff; color: var(--ink); min-height: 44px; }
+  .lr-when select:focus-visible { outline: 3px solid var(--green); outline-offset: 1px; }
+
+  .lr-canvas { display: block; width: 100%; height: auto; margin: 12px 0 0; border-radius: 8px; }
+  .lr-legend { display: flex; flex-wrap: wrap; gap: 10px; margin: 7px 2px 0; font-size: .66rem; color: #555; }
+  .lr-legend i { display: inline-block; width: 11px; height: 11px; border-radius: 3px; margin-right: 4px; vertical-align: -1px; }
+
+  .lr-result { margin: 11px 0 0; padding: 12px 13px; border-radius: 11px; background: var(--yellow); color: var(--deep); }
+  .lr-result h3 { margin: 0 0 6px; font-size: .95rem; color: var(--deep); line-height: 1.3; }
+  .lr-result .lr-big { font-size: 1.5rem; font-weight: 800; line-height: 1.15; font-variant-numeric: tabular-nums; display: block; margin: 0 0 6px; }
+  .lr-result p { margin: 0; font-size: .81rem; line-height: 1.5; color: var(--deep); }
+  .lr-result p + p { margin-top: 7px; }
+  .lr-result strong { font-variant-numeric: tabular-nums; }
+
+  .lr-flag { margin: 9px 0 0; padding: 9px 11px; border-radius: 9px; background: #FFF4E0; border: 1px solid #F0D9A8; font-size: .77rem; line-height: 1.5; color: #6B4A00; }
+
+  .lr-nav { display: flex; gap: 8px; margin: 11px 0 0; }
+  .lr-nav button {
+    font: inherit; font-size: .78rem; font-weight: 700; padding: 10px 14px; border-radius: 9px;
+    border: 2px solid var(--green); background: var(--green); color: #fff; cursor: pointer; min-height: 44px;
+  }
+  .lr-nav button.ghost { background: #fff; color: var(--green); }
+  .lr-nav button:focus-visible { outline: 3px solid var(--deep); outline-offset: 2px; }
+
+  .lr-foot { margin: 11px 2px 0; font-size: .66rem; line-height: 1.6; color: #6b7360; }
+  .lr-foot a { color: var(--green); }
+  @media (max-width: 420px) {
+    .lr-steps button { font-size: .68rem; padding: 8px 6px; }
+    .lr-result .lr-big { font-size: 1.3rem; }
+  }
+</style>
+</head>
+<body>
+<div class="lr">
+  <div class="lr-head">
+    <h2>Berlin Driving Licence Runway</h2>
+    <p>Berlin does not treat every licence the same way. Say where yours was issued and when your clock started, and this lays your remaining days against the queue the Berlin licence desk is actually working through.</p>
+  </div>
+
+  <div class="lr-steps" id="lrSteps"></div>
+
+  <div class="lr-card">
+    <div id="lrStage1">
+      <label class="lr-label" for="lrSearch">Where was your licence issued?</label>
+      <input class="lr-search" id="lrSearch" type="search" autocomplete="off" spellcheck="false" placeholder="Type a country, a US state, a Canadian province">
+      <ul class="lr-hits" id="lrHits"></ul>
+      <div class="lr-picked" id="lrPicked"></div>
+    </div>
+
+    <div id="lrStage2" hidden>
+      <div id="lrWhenIntro" class="lr-picked"></div>
+      <div class="lr-when">
+        <label id="lrLabA">Month
+          <select id="lrMonth"></select>
+        </label>
+        <label id="lrLabB">Year
+          <select id="lrYear"></select>
+        </label>
+      </div>
+    </div>
+
+    <canvas class="lr-canvas" id="lrCanvas" width="700" height="320" role="img" aria-label="Runway chart of the days left before your licence deadline, against the Berlin licence desk queue"></canvas>
+    <div class="lr-legend" id="lrLegend"></div>
+
+    <div class="lr-result" id="lrResult" aria-live="polite"></div>
+    <div class="lr-flag" id="lrFlag"></div>
+
+    <div class="lr-nav">
+      <button type="button" class="ghost" id="lrBack">Back a step</button>
+      <button type="button" id="lrNext">Next step</button>
+    </div>
+  </div>
+
+  <p class="lr-foot" id="lrFoot"></p>
+</div>
+
+<script src="../js/brand.js"></script>
+<script>
+(function () {
+  'use strict';
+
+  /* Lanes are not opinion. Anlage 11 FeV is a named list of states, US states,
+     Canadian provinces and Australian territories whose licences Berlin will
+     convert without a test. Anything not on that list is a Drittstaat and the
+     holder sits both exams. Checked against the official text on 16 Sep 2026. */
+  var EU = ('Austria|Belgium|Bulgaria|Croatia|Cyprus|Czechia|Denmark|Estonia|Finland|France|Greece|Hungary|Iceland|Ireland|Italy|Latvia|'
+    + 'Liechtenstein|Lithuania|Luxembourg|Malta|Netherlands|Norway|Poland|Portugal|Romania|Slovakia|Slovenia|Spain|Sweden').split('|');
+
+  var NO_TEST = ('Albania|Andorra|Bosnia and Herzegovina|French Polynesia|Gibraltar|Guernsey|Isle of Man|Israel|Japan|Jersey|Kosovo|'
+    + 'Monaco|Montenegro|Namibia|New Caledonia|New Zealand|North Macedonia|San Marino|Serbia|Singapore|South Africa|South Korea|'
+    + 'Switzerland|Taiwan|Ukraine|United Kingdom').split('|');
+
+  var US_THEORY = 'Connecticut|District of Columbia|Florida|Indiana|Minnesota|Mississippi|Missouri|Nebraska|North Carolina|Oregon|Tennessee'.split('|');
+  var US_NO_TEST = ('Alabama|Arizona|Arkansas|Colorado|Delaware|Idaho|Illinois|Iowa|Kansas|Kentucky|Louisiana|Maryland|Massachusetts|'
+    + 'Michigan|New Mexico|Ohio|Oklahoma|Pennsylvania|Puerto Rico|South Carolina|South Dakota|Texas|Utah|Virginia|Washington|'
+    + 'West Virginia|Wisconsin|Wyoming').split('|');
+  var US_BOTH = ('Alaska|California|Georgia|Hawaii|Maine|Montana|Nevada|New Hampshire|New Jersey|New York|North Dakota|Rhode Island|Vermont').split('|');
+
+  var CANADA = ('Alberta|British Columbia|Manitoba|New Brunswick|Newfoundland and Labrador|Northwest Territories|Nova Scotia|Ontario|'
+    + 'Prince Edward Island|Quebec|Saskatchewan|Yukon').split('|');
+  var AUSTRALIA = ('Australian Capital Territory|New South Wales|Northern Territory|Queensland|South Australia|Tasmania|Victoria|Western Australia').split('|');
+  /* The eyesight footnote in Anlage 11 lands on these entries, so the test is
+     waived but the optician visit is not. */
+  var EYE = { 'Texas': 1, 'Indiana': 1, 'Minnesota': 1, 'Oregon': 1,
+    'Australian Capital Territory': 1, 'New South Wales': 1, 'Northern Territory': 1, 'Queensland': 1, 'Western Australia': 1 };
+
+  var OTHER = ('Afghanistan|Algeria|Angola|Argentina|Armenia|Azerbaijan|Bangladesh|Belarus|Bolivia|Brazil|Cambodia|Cameroon|Chile|China|'
+    + 'Colombia|Costa Rica|Cuba|Dominican Republic|Ecuador|Egypt|El Salvador|Ethiopia|Fiji|Georgia|Ghana|Guatemala|Honduras|Hong Kong|'
+    + 'India|Indonesia|Iran|Iraq|Ivory Coast|Jordan|Kazakhstan|Kenya|Kuwait|Laos|Lebanon|Libya|Malaysia|Mexico|Mongolia|Morocco|'
+    + 'Mozambique|Myanmar|Nepal|Nicaragua|Nigeria|Oman|Pakistan|Panama|Papua New Guinea|Paraguay|Peru|Philippines|Qatar|Russia|'
+    + 'Saudi Arabia|Senegal|Sri Lanka|Sudan|Syria|Tanzania|Thailand|Tunisia|Turkey|Uganda|United Arab Emirates|Uruguay|Uzbekistan|'
+    + 'Venezuela|Vietnam|Yemen|Zimbabwe').split('|');
+
+  var LIST = [];
+  function add(name, lane, group) { LIST.push({ name: name, lane: lane, group: group, eye: !!EYE[name] }); }
+
+  add('Germany, card issued before 19 January 2013', 'card', 'German licence');
+  add('Germany, grey or pink paper licence', 'paper', 'German licence');
+  EU.forEach(function (n) { add(n, 'eu', 'EU or EEA'); });
+  NO_TEST.forEach(function (n) { add(n, 'none', 'Anlage 11 country'); });
+  US_NO_TEST.forEach(function (n) { add(n + ' (USA)', 'none', 'US state'); });
+  US_THEORY.forEach(function (n) { add(n + ' (USA)', 'theory', 'US state'); });
+  US_BOTH.forEach(function (n) { add(n + ' (USA)', 'both', 'US state, not on Anlage 11'); });
+  CANADA.forEach(function (n) { add(n + ' (Canada)', 'none', 'Canadian province'); });
+  AUSTRALIA.forEach(function (n) { add(n + ' (Australia)', 'none', 'Australian state'); });
+  add('Moldova', 'practical', 'Anlage 11 country');
+  OTHER.forEach(function (n) { add(n, 'both', 'Not on Anlage 11'); });
+
+  var LANE = {
+    eu: { title: 'EU or EEA licence', queue: 50, fee: 37.5, deadlineDays: 0,
+      line: 'Your licence stays valid in Germany until the date printed on it. There is no six month clock and no test.' },
+    none: { title: 'Anlage 11, no test', queue: 26, fee: 37.5, deadlineDays: 180,
+      line: 'Berlin converts this licence straight across. No theory test, no practical test, no first aid course.' },
+    theory: { title: 'Anlage 11, theory test', queue: 26, fee: 45.1, deadlineDays: 180,
+      line: 'Berlin converts this licence once you pass the German theory test. You name a driving school and a test centre on the application, and the test centre cannot be changed afterwards.' },
+    practical: { title: 'Anlage 11, practical test', queue: 26, fee: 45.1, deadlineDays: 180,
+      line: 'Berlin waives the theory test for this licence but asks for the practical drive.' },
+    both: { title: 'Third country, both tests', queue: 46, fee: 45.1, deadlineDays: 180,
+      line: 'This licence is not on Anlage 11, so Berlin asks for the theory test, the practical test, a first aid course and an eyesight test.' },
+    card: { title: 'German card licence, staged swap', queue: 19, fee: 26.5, deadlineDays: -1,
+      line: 'Your driving entitlement is safe. The plastic is what expires, on the date set by the year the card was issued.' },
+    paper: { title: 'German paper licence, staged swap', queue: 19, fee: 26.5, deadlineDays: -2,
+      line: 'Grey and pink paper licences went first, by birth year. Every one of those waves has already closed except the one for holders born before 1953.' }
+  };
+
+  var CARD_DEADLINE = { 1999: '2026-01-19', 2000: '2026-01-19', 2001: '2026-01-19',
+    2002: '2027-01-19', 2003: '2027-01-19', 2004: '2027-01-19',
+    2005: '2028-01-19', 2006: '2028-01-19', 2007: '2028-01-19',
+    2008: '2029-01-19', 2009: '2030-01-19', 2010: '2031-01-19', 2011: '2032-01-19',
+    2012: '2033-01-19', 2013: '2033-01-19' };
+  var PAPER_DEADLINE = { '1952': '2033-01-19', '1958': '2022-07-19', '1964': '2023-01-19', '1970': '2024-01-19', '1971': '2025-01-19' };
+  var PAPER_BANDS = [
+    { key: '1952', label: 'Born before 1953' },
+    { key: '1958', label: 'Born 1953 to 1958' },
+    { key: '1964', label: 'Born 1959 to 1964' },
+    { key: '1970', label: 'Born 1965 to 1970' },
+    { key: '1971', label: 'Born 1971 or later' }
+  ];
+
+  /* Landesamt fuer Buerger- und Ordnungsangelegenheiten backlog, Stand 15 Sep 2026. */
+  var DESK = [
+    { key: 'anlage11', name: 'Anlage 11 swap', days: 26 },
+    { key: 'drittstaat', name: 'Third country swap', days: 46 },
+    { key: 'eu', name: 'EU swap', days: 50 },
+    { key: 'cardSwap', name: 'German card swap', days: 19 }
+  ];
+  var LANE_DESK = { eu: 'eu', none: 'anlage11', theory: 'anlage11', practical: 'anlage11', both: 'drittstaat', card: 'cardSwap', paper: 'cardSwap' };
+
+  var MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+  var TODAY = new Date(Date.UTC(2026, 8, 16));
+
+  var CV = document.getElementById('lrCanvas');
+  var CTX = CV.getContext('2d');
+  var stepsEl = document.getElementById('lrSteps');
+  var searchEl = document.getElementById('lrSearch');
+  var hitsEl = document.getElementById('lrHits');
+  var pickedEl = document.getElementById('lrPicked');
+  var stage1El = document.getElementById('lrStage1');
+  var stage2El = document.getElementById('lrStage2');
+  var whenIntroEl = document.getElementById('lrWhenIntro');
+  var monthEl = document.getElementById('lrMonth');
+  var yearEl = document.getElementById('lrYear');
+  var labAEl = document.getElementById('lrLabA');
+  var labBEl = document.getElementById('lrLabB');
+  var legendEl = document.getElementById('lrLegend');
+  var resultEl = document.getElementById('lrResult');
+  var flagEl = document.getElementById('lrFlag');
+  var footEl = document.getElementById('lrFoot');
+
+  var currentStep = 0;
+  var picked = LIST[2 + EU.length + NO_TEST.indexOf('United Kingdom')];
+  var pickedMonth = 5;
+  var pickedYear = 2026;
+  var paperBand = 0;
+
+  function narrow() { return window.innerWidth < 560; }
+  function dayDiff(a, b) { return Math.round((b.getTime() - a.getTime()) / 86400000); }
+  function parseIso(s) {
+    var p = s.split('-');
+    return new Date(Date.UTC(+p[0], +p[1] - 1, +p[2]));
+  }
+  function fmt(d) {
+    return d.getUTCDate() + ' ' + MONTHS[d.getUTCMonth()].slice(0, 3) + ' ' + d.getUTCFullYear();
+  }
+
+  function renderSteps() {
+    var names = ['Where the licence is from', picked.lane === 'card' ? 'The year on the card'
+      : picked.lane === 'paper' ? 'The year you were born' : 'When the clock started'];
+    var html = '';
+    for (var i = 0; i < 2; i++) {
+      html += '<button type="button" class="' + (i === currentStep ? 'on' : '') + '" data-step="' + i
+        + '"><b>Step ' + (i + 1) + '</b>' + names[i] + '</button>';
+    }
+    stepsEl.innerHTML = html;
+  }
+
+  function matches(q) {
+    q = q.trim().toLowerCase();
+    var out = [];
+    for (var i = 0; i < LIST.length; i++) {
+      var it = LIST[i];
+      if (!q || it.name.toLowerCase().indexOf(q) >= 0 || it.group.toLowerCase().indexOf(q) >= 0) out.push(it);
+      if (out.length > 120) break;
+    }
+    return out;
+  }
+
+  function renderHits() {
+    var hits = matches(searchEl.value);
+    if (!hits.length) {
+      hitsEl.innerHTML = '<li><p class="lr-empty">Nothing with that name. Anlage 11 lists countries, US states, Canadian provinces and Australian states separately, so try the state rather than the country.</p></li>';
+      return;
+    }
+    var html = '';
+    for (var i = 0; i < hits.length; i++) {
+      var it = hits[i];
+      html += '<li><button type="button" class="' + (it.name === picked.name ? 'on' : '') + '" data-name="' + it.name
+        + '">' + it.name + '<span>' + it.group + ' &middot; ' + LANE[it.lane].title + '</span></button></li>';
+    }
+    hitsEl.innerHTML = html;
+  }
+
+  function buildWhen() {
+    var lane = picked.lane;
+    if (lane === 'paper') {
+      labAEl.firstChild.nodeValue = 'Birth year band';
+      labBEl.hidden = true;
+      var h = '';
+      for (var i = 0; i < PAPER_BANDS.length; i++) {
+        h += '<option value="' + i + '"' + (i === paperBand ? ' selected' : '') + '>' + PAPER_BANDS[i].label + '</option>';
+      }
+      monthEl.innerHTML = h;
+      whenIntroEl.innerHTML = 'The paper waves ran by birth year, not by the year on the document.';
+      return;
+    }
+    labBEl.hidden = false;
+    if (lane === 'card') {
+      labAEl.firstChild.nodeValue = 'Card issued';
+      labBEl.firstChild.nodeValue = 'Year';
+      monthEl.innerHTML = '<option value="0" selected>Year printed at field 4a</option>';
+      var hy = '';
+      for (var y = 1999; y <= 2013; y++) {
+        hy += '<option value="' + y + '"' + (y === pickedYear ? ' selected' : '') + '>' + y + '</option>';
+      }
+      yearEl.innerHTML = hy;
+      whenIntroEl.innerHTML = 'Field 4a on the card is the issue date. That year, not your age, sets the swap deadline.';
+      return;
+    }
+    if (pickedYear < 2022 || pickedYear > 2026) pickedYear = 2026;
+    labAEl.firstChild.nodeValue = 'Month you registered in Berlin';
+    labBEl.firstChild.nodeValue = 'Year';
+    var hm = '';
+    for (var m = 0; m < 12; m++) {
+      hm += '<option value="' + m + '"' + (m === pickedMonth ? ' selected' : '') + '>' + MONTHS[m] + '</option>';
+    }
+    monthEl.innerHTML = hm;
+    var hy2 = '';
+    for (var y2 = 2022; y2 <= 2026; y2++) {
+      hy2 += '<option value="' + y2 + '"' + (y2 === pickedYear ? ' selected' : '') + '>' + y2 + '</option>';
+    }
+    yearEl.innerHTML = hy2;
+    whenIntroEl.innerHTML = lane === 'eu'
+      ? 'There is no clock on an EU or EEA licence, so this step only sets the date the swap queue is measured from.'
+      : 'The six month clock in section 29 of the Fahrerlaubnis-Verordnung starts at your Anmeldung, not at the border.';
+  }
+
+  /* One model for every lane: a deadline, the days already gone, the days the
+     Berlin desk is currently behind, and what is left for you to actually file. */
+  function model() {
+    var lane = picked.lane;
+    var cfg = LANE[lane];
+    var queue = cfg.queue;
+    var start = new Date(Date.UTC(pickedYear, pickedMonth, 1));
+    var deadline, spent, span, label;
+
+    if (lane === 'card') {
+      deadline = parseIso(CARD_DEADLINE[pickedYear] || '2033-01-19');
+      span = 0;
+      spent = 0;
+      label = 'Swap deadline';
+    } else if (lane === 'paper') {
+      deadline = parseIso(PAPER_DEADLINE[PAPER_BANDS[paperBand].key]);
+      span = 0;
+      spent = 0;
+      label = 'Swap deadline';
+    } else if (lane === 'eu') {
+      deadline = null;
+      span = 0;
+      spent = 0;
+      label = 'No deadline';
+    } else {
+      deadline = new Date(start.getTime());
+      deadline.setUTCMonth(deadline.getUTCMonth() + 6);
+      span = 180;
+      spent = dayDiff(start, TODAY);
+      label = 'Six month deadline';
+    }
+
+    var untilDeadline = deadline ? dayDiff(TODAY, deadline) : null;
+    var fileWindow = untilDeadline === null ? null : untilDeadline - queue;
+
+    return { lane: lane, cfg: cfg, queue: queue, start: start, deadline: deadline,
+      spent: spent, span: span, label: label, untilDeadline: untilDeadline,
+      fileWindow: fileWindow };
+  }
+
+  function draw(m) {
+    var css = CV.clientWidth || 700;
+    var dpr = window.devicePixelRatio || 1;
+    var h = narrow() ? 230 : 216;
+    CV.width = Math.round(css * dpr);
+    CV.height = Math.round(h * dpr);
+    CV.style.height = h + 'px';
+    CTX.setTransform(dpr, 0, 0, dpr, 0, 0);
+    CTX.clearRect(0, 0, css, h);
+    CTX.fillStyle = '#FFFFFF';
+    CTX.fillRect(0, 0, css, h);
+
+    var padL = 12, padR = 12;
+    var w = css - padL - padR;
+    var fontS = narrow() ? 10 : 11;
+
+    /* Top half: your own runway. */
+    CTX.fillStyle = '#123D18';
+    CTX.font = '700 ' + (fontS + 1) + 'px Montserrat, sans-serif';
+    CTX.fillText('Your runway', padL, 18);
+
+    var barY = 32, barH = 34;
+    var unit = m.lane === 'eu' ? 1
+      : (m.span ? m.span : Math.max(m.untilDeadline + 40, 120));
+    var scale = w / unit;
+
+    if (m.lane === 'eu') {
+      CTX.fillStyle = '#E6F0DA';
+      CTX.fillRect(padL, barY, w, barH);
+      CTX.fillStyle = '#1B5E20';
+      CTX.font = '700 ' + (fontS + 1) + 'px Montserrat, sans-serif';
+      CTX.fillText('No expiry clock on an EU or EEA licence', padL + 10, barY + 22);
+    } else {
+      var spentW = Math.max(0, Math.min(w, m.spent * scale));
+      var queueW = Math.min(Math.max(0, w - spentW), m.queue * scale);
+      var leftW = Math.max(0, w - spentW - queueW);
+
+      CTX.fillStyle = '#D7DCD0';
+      CTX.fillRect(padL, barY, spentW, barH);
+      CTX.fillStyle = '#E08600';
+      CTX.fillRect(padL + spentW, barY, queueW, barH);
+      CTX.fillStyle = m.fileWindow !== null && m.fileWindow < 0 ? '#C62828' : '#7CB342';
+      CTX.fillRect(padL + spentW + queueW, barY, leftW, barH);
+
+      CTX.strokeStyle = '#123D18';
+      CTX.lineWidth = 1.5;
+      CTX.strokeRect(padL + 0.5, barY + 0.5, w - 1, barH - 1);
+
+      /* today marker */
+      if (m.span) {
+        var tx = padL + Math.max(0, Math.min(w, m.spent * scale));
+        CTX.strokeStyle = '#212121';
+        CTX.lineWidth = 2;
+        CTX.beginPath();
+        CTX.moveTo(tx, barY - 7);
+        CTX.lineTo(tx, barY + barH + 7);
+        CTX.stroke();
+        CTX.fillStyle = '#212121';
+        CTX.font = '700 ' + fontS + 'px Montserrat, sans-serif';
+        CTX.fillText('today', Math.min(tx + 4, css - padR - 34), barY - 10);
+      }
+    }
+
+    CTX.fillStyle = '#555555';
+    CTX.font = '600 ' + fontS + 'px Montserrat, sans-serif';
+    if (m.lane === 'eu') {
+      CTX.fillText('Swap only if you want to, or when the card expires', padL, barY + barH + 18);
+    } else {
+      var startTxt = (m.lane === 'card' || m.lane === 'paper')
+        ? 'Today' : 'Anmeldung ' + fmt(m.start);
+      CTX.fillText(startTxt, padL, barY + barH + 18);
+      var endTxt = m.label + ' ' + fmt(m.deadline);
+      var ew = CTX.measureText(endTxt).width;
+      CTX.fillText(endTxt, Math.max(padL, css - padR - ew), barY + barH + 18);
+    }
+
+    /* Bottom half: the desk itself. */
+    var deskTop = barY + barH + 42;
+    CTX.fillStyle = '#123D18';
+    CTX.font = '700 ' + (fontS + 1) + 'px Montserrat, sans-serif';
+    CTX.fillText('How far behind the Berlin licence desk is', padL, deskTop);
+
+    var maxDays = 50;
+    var rowH = narrow() ? 26 : 24;
+    var labelW = narrow() ? 116 : 152;
+    var trackX = padL + labelW;
+    var trackW = Math.max(60, w - labelW - 42);
+    var mine = LANE_DESK[m.lane];
+
+    for (var i = 0; i < DESK.length; i++) {
+      var d = DESK[i];
+      var y = deskTop + 14 + i * rowH;
+      var isMine = d.key === mine;
+      CTX.fillStyle = isMine ? '#123D18' : '#6b7360';
+      CTX.font = (isMine ? '700 ' : '600 ') + fontS + 'px Montserrat, sans-serif';
+      CTX.fillText(d.name, padL, y + 12);
+
+      CTX.fillStyle = '#EDEFE8';
+      CTX.fillRect(trackX, y + 2, trackW, 13);
+      CTX.fillStyle = isMine ? '#1B5E20' : '#C3CDB6';
+      CTX.fillRect(trackX, y + 2, trackW * (d.days / maxDays), 13);
+      CTX.fillStyle = isMine ? '#123D18' : '#6b7360';
+      CTX.font = '700 ' + fontS + 'px Montserrat, sans-serif';
+      CTX.fillText(d.days + 'd', trackX + trackW + 6, y + 13);
+    }
+  }
+
+  function renderLegend(m) {
+    if (m.lane === 'eu') {
+      legendEl.innerHTML = '<span><i style="background:#E6F0DA"></i>No clock to run down</span>'
+        + '<span><i style="background:#1B5E20"></i>Your queue at the desk</span>';
+      return;
+    }
+    legendEl.innerHTML = '<span><i style="background:#D7DCD0"></i>Already gone</span>'
+      + '<span><i style="background:#E08600"></i>Desk queue, ' + m.queue + ' days</span>'
+      + '<span><i style="background:' + (m.fileWindow < 0 ? '#C62828' : '#7CB342') + '"></i>Yours to file in</span>';
+  }
+
+  function renderResult(m) {
+    var cfg = m.cfg;
+    var fee = cfg.fee.toFixed(2).replace('.00', '');
+    var head, big, body;
+
+    if (m.lane === 'eu') {
+      head = picked.name + ': nothing is running out';
+      big = 'No deadline';
+      body = '<p>' + cfg.line + ' If you do swap, Berlin charges <strong>37.50 euro</strong>, and the desk is currently <strong>50 days</strong> behind on EU swaps, the longest queue on the board.</p>';
+    } else if (m.lane === 'card' || m.lane === 'paper') {
+      head = 'Your document expires on ' + fmt(m.deadline);
+      big = m.untilDeadline > 0 ? m.fileWindow + ' days to file' : 'That date has passed';
+      body = '<p>' + cfg.line + ' The swap costs <strong>' + fee + ' euro</strong> and the desk is <strong>' + m.queue + ' days</strong> behind on card swaps, so the safe filing window closes about ' + m.queue + ' days before the date itself.</p>';
+      if (m.untilDeadline <= 0) {
+        body += '<p>Driving on it is an offence worth a <strong>10 euro</strong> warning fine, not a criminal charge. Hiring a car abroad on it is the part that actually stops your weekend.</p>';
+      }
+    } else {
+      head = picked.name + ': ' + cfg.title;
+      if (m.fileWindow > 0) {
+        big = m.fileWindow + ' days to file';
+      } else if (m.untilDeadline > 0) {
+        big = 'Too late to land in time';
+      } else {
+        big = 'The six months are over';
+      }
+      body = '<p>' + cfg.line + ' Berlin charges <strong>' + fee + ' euro</strong> for this lane, and the desk is <strong>' + m.queue + ' days</strong> behind, so a card filed today would not be printed until around ' + fmt(new Date(TODAY.getTime() + m.queue * 86400000)) + '.</p>';
+      body += '<p>Your six months end on <strong>' + fmt(m.deadline) + '</strong>. ' + (m.untilDeadline > 0
+        ? 'That is ' + m.untilDeadline + ' days away.'
+        : 'That was ' + Math.abs(m.untilDeadline) + ' days ago.') + '</p>';
+    }
+
+    resultEl.innerHTML = '<h3>' + head + '</h3><span class="lr-big">' + big + '</span>' + body;
+  }
+
+  function renderFlag(m) {
+    var txt;
+    if (m.lane === 'eu') {
+      txt = 'One catch worth knowing: if you already lived in Germany when that EU licence was issued, section 29 says Berlin does not have to recognise it at all.';
+    } else if (m.lane === 'card' || m.lane === 'paper') {
+      txt = 'The entitlement itself never expires here. Only the plastic does, and the new licence has to be in your hand by the date, not merely applied for.';
+    } else if (m.untilDeadline !== null && m.untilDeadline <= 0) {
+      txt = 'Once the six months are up, driving on the old licence is Fahren ohne Fahrerlaubnis under section 21 of the Strassenverkehrsgesetz: up to a year inside or a fine, and your insurer can come after the damage.';
+    } else if (m.fileWindow !== null && m.fileWindow < 0) {
+      txt = 'Even if you file tomorrow, the queue runs past your deadline. Park the car for the gap rather than driving into it.';
+    } else if (m.lane === 'both') {
+      txt = 'The first aid course and the eyesight test only exist in this lane, and your foreign licence has to still be valid on the day you apply.';
+    } else if (picked.eye) {
+      txt = 'Anlage 11 waives the test for this one but keeps the eyesight check, so budget an optician visit before the appointment.';
+    } else {
+      txt = 'A licence not written in German or English needs a translation, and Berlin will ask for it before the file moves.';
+    }
+    flagEl.innerHTML = txt;
+  }
+
+  function render() {
+    renderSteps();
+    stage1El.hidden = currentStep !== 0;
+    stage2El.hidden = currentStep !== 1;
+    if (currentStep === 0) renderHits();
+    pickedEl.innerHTML = 'Picked: <b>' + picked.name + '</b> &middot; ' + LANE[picked.lane].title;
+    var m = model();
+    draw(m);
+    renderLegend(m);
+    renderResult(m);
+    renderFlag(m);
+  }
+
+  stepsEl.addEventListener('click', function (e) {
+    var b = e.target.closest('button[data-step]');
+    if (!b) return;
+    currentStep = +b.getAttribute('data-step');
+    if (currentStep === 1) buildWhen();
+    render();
+  });
+  hitsEl.addEventListener('click', function (e) {
+    var b = e.target.closest('button[data-name]');
+    if (!b) return;
+    var name = b.getAttribute('data-name');
+    for (var i = 0; i < LIST.length; i++) { if (LIST[i].name === name) { picked = LIST[i]; break; } }
+    if (picked.lane === 'card') { if (pickedYear < 1999 || pickedYear > 2013) pickedYear = 2003; }
+    else if (pickedYear < 2022 || pickedYear > 2026) pickedYear = 2026;
+    buildWhen();
+    render();
+  });
+  searchEl.addEventListener('input', renderHits);
+  monthEl.addEventListener('change', function () {
+    if (picked.lane === 'paper') paperBand = +monthEl.value;
+    else if (picked.lane !== 'card') pickedMonth = +monthEl.value;
+    render();
+  });
+  yearEl.addEventListener('change', function () { pickedYear = +yearEl.value; render(); });
+  document.getElementById('lrNext').addEventListener('click', function () {
+    currentStep = 1; buildWhen(); render();
+  });
+  document.getElementById('lrBack').addEventListener('click', function () {
+    currentStep = 0; render();
+  });
+
+  footEl.innerHTML = 'Lanes from <a href="https://www.gesetze-im-internet.de/fev_2010/anlage_11.html" target="_blank" rel="noopener">Anlage 11 FeV</a> and the six month rule from <a href="https://www.gesetze-im-internet.de/fev_2010/__29.html" target="_blank" rel="noopener">section 29 FeV</a>. Fees and queue depth from the '
+    + '<a href="https://www.berlin.de/labo/mobilitaet/aktuelles/aktuelle-bearbeitungsstaende-736453.php" target="_blank" rel="noopener">Berlin licence desk backlog board</a>, Stand 15 September 2026, and the Berlin fee table of 1 January 2025. Checked on 16 September 2026. Anlage 11 is amended from time to time, so confirm your own entry in the official text before you book anything.';
+
+  buildWhen();
+  render();
+
+  var lastNarrow = narrow();
+  window.addEventListener('resize', function () {
+    var n = narrow();
+    if (n !== lastNarrow) { lastNarrow = n; }
+    render();
+  });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,46 @@
+{
+  "checkedOn": "2026-09-16",
+  "backlogStand": "2026-09-15",
+  "note": "Lanes come from Anlage 11 FeV (Staatenliste zu den Sonderbestimmungen fuer Inhaber einer auslaendischen Fahrerlaubnis). Queue days are the Landesamt fuer Buerger- und Ordnungsangelegenheiten backlog table, Stand 15 September 2026.",
+  "sources": [
+    "https://www.gesetze-im-internet.de/fev_2010/anlage_11.html",
+    "https://www.gesetze-im-internet.de/fev_2010/__29.html",
+    "https://service.berlin.de/dienstleistung/327537/",
+    "https://service.berlin.de/dienstleistung/121598/",
+    "https://service.berlin.de/dienstleistung/121616/",
+    "https://www.berlin.de/labo/mobilitaet/aktuelles/aktuelle-bearbeitungsstaende-736453.php",
+    "https://www.berlin.de/labo/mobilitaet/fahrerlaubnisse-personen-und-gueterbefoerderung/aktuelles/artikel.1033551.php"
+  ],
+  "queueDays": {
+    "eu": 50,
+    "anlage11": 26,
+    "drittstaat": 46,
+    "cardSwap": 19,
+    "firstIssue": 46
+  },
+  "fees": {
+    "eu": 37.5,
+    "noTest": 37.5,
+    "withTest": 45.1,
+    "cardSwap": 26.5,
+    "international": 15.0,
+    "expressSurcharge": 7.7
+  },
+  "cardSwapDeadlines": [
+    { "issued": "1999-2001", "deadline": "2026-01-19" },
+    { "issued": "2002-2004", "deadline": "2027-01-19" },
+    { "issued": "2005-2007", "deadline": "2028-01-19" },
+    { "issued": "2008", "deadline": "2029-01-19" },
+    { "issued": "2009", "deadline": "2030-01-19" },
+    { "issued": "2010", "deadline": "2031-01-19" },
+    { "issued": "2011", "deadline": "2032-01-19" },
+    { "issued": "2012 to 18 Jan 2013", "deadline": "2033-01-19" }
+  ],
+  "paperSwapDeadlines": [
+    { "born": "before 1953", "deadline": "2033-01-19" },
+    { "born": "1953-1958", "deadline": "2022-07-19" },
+    { "born": "1959-1964", "deadline": "2023-01-19" },
+    { "born": "1965-1970", "deadline": "2024-01-19" },
+    { "born": "1971 or later", "deadline": "2025-01-19" }
+  ]
+}
