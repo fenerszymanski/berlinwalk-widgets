@@ -1,9 +1,26 @@
 {
-  "updatedAt": "2026-09-15T20:11:25.754Z",
+  "updatedAt": "2026-09-16T02:11:17.430Z",
   "source": "Wix Blog API",
-  "totalPosts": 389,
+  "totalPosts": 390,
   "bookingUrl": "https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based",
   "allPosts": [
+    {
+      "title": "Kita Place in Berlin: Nobody Finds It for You",
+      "slug": "kita-place-berlin",
+      "path": "/post/kita-place-berlin",
+      "url": "https://www.berlinwalk.com/post/kita-place-berlin",
+      "excerpt": "The Kita-Gutschein is money, not a placement. Berlin’s own wording is that you go looking for a free place in a Kita of your choice and contact them yourself, so the year turns on two dates on the voucher and on how much licensed capacity really sits within a pram walk of your street. Half of Berlin’s 2,917 Kitas hold fewer than fifty children, a quarter of them hold more than half the places in the city, and the Jugendamt calls a thirty minute ride reasonable.",
+      "category": "Living in Berlin",
+      "categorySlug": "living-in-berlin",
+      "topic": "living-in-berlin",
+      "topicLabel": "Living in Berlin",
+      "readTime": "9 min read",
+      "publishedDate": "2026-09-16T02:08:42.691Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_9aefc0ff8d514c30bc6716900b7fba66~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-lichtenberg-kita-entdeckerland.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_9aefc0ff8d514c30bc6716900b7fba66~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-lichtenberg-kita-entdeckerland.jpg",
+      "alt": "A long two-storey Kita on Otto-Marquardt-Strasse in Berlin-Lichtenberg under a clear blue sky, orange and yellow render, the words Kindertagesstaette Entdeckerland painted large on the end wall, Plattenbau housing behind",
+      "relatedToolSlug": "berlin-kita-call-list"
+    },
     {
       "title": "Berlin Flat Notice Period: The Three Days That Decide Your Last Month",
       "slug": "berlin-flat-notice-period",
@@ -36,7 +53,7 @@
       "image": "https://static.wixstatic.com/media/5a08a3_1b164f39ea934b0da1933829edfe8d85~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-wilmersdorf-snow-junction-night.jpg",
       "thumb": "https://static.wixstatic.com/media/5a08a3_1b164f39ea934b0da1933829edfe8d85~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-wilmersdorf-snow-junction-night.jpg",
       "alt": "A snowy junction at Konstanzer Strasse and Berliner Strasse in Berlin-Wilmersdorf at night, street lamps lit, a car blurring past through packed snow on the carriageway",
-      "relatedToolSlug": ""
+      "relatedToolSlug": "berlin-tyre-swap-window"
     },
     {
       "title": "Doctor Appointment in Berlin: The Four-Week Rule and What It Cannot Give You",
@@ -53,7 +70,7 @@
       "image": "https://static.wixstatic.com/media/5a08a3_b7a93d17fcc04940ac210e41275dfb44~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-aerztehaus-treptow.jpg",
       "thumb": "https://static.wixstatic.com/media/5a08a3_b7a93d17fcc04940ac210e41275dfb44~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-aerztehaus-treptow.jpg",
       "alt": "The Aerztehaus Treptow, a listed nineteenth century villa in Berlin Alt-Treptow painted with enormous daisies and green leaves across its white facade, with a Haus Apotheke sign at street level",
-      "relatedToolSlug": ""
+      "relatedToolSlug": "berlin-referral-route-board"
     },
     {
       "title": "Berlin Election: Which Ballot Your Passport Gets You",
