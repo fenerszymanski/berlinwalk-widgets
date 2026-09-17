@@ -360,19 +360,19 @@
     }
 
     body += '<div class="sc-facts">' +
-      '<div class="sc-fact"><b>' + ar.nearN + '</b><i>other public primary schools within 1.5 km</i></div>' +
+      '<div class="sc-fact"><b>' + ar.nearN + '</b><i>other public primary schools within 1.5 km of this area's centre</i></div>' +
       '<div class="sc-fact"><b>' + ar.km2.toFixed(2) + '</b><i>km&sup2; this area covers</i></div>' +
       '</div>';
 
     if (!state.showNear) {
-      body += '<button type="button" class="sc-go" id="goNear">Step 3 · Show what else is within 1.5 km</button>';
+      body += '<button type="button" class="sc-go" id="goNear">Step 3 · Show what else is within 1.5 km of the centre</button>';
     } else {
       body += '<div class="sc-near"><p class="sc-h" style="margin:2px 0 0">If you apply to a different school, this is the realistic field</p><ul>' +
         ar.near.map(function (n) {
           return '<li><span>' + esc(n.n) + '</span><i>' + n.km.toFixed(2) + ' km</i></li>';
         }).join('') + '</ul>' +
         (ar.nearN > ar.near.length ? '<p class="sc-sub" style="margin-top:6px">' + (ar.nearN - ar.near.length) + ' more sit inside the ring.</p>' : '') +
-        (ar.nearN === 0 ? '<p class="sc-warn">Nothing else within 1.5 km. Here a request for another school means a real commute, and the school office weighs that against the reason you give.</p>'
+        (ar.nearN === 0 ? '<p class="sc-warn">Nothing else within 1.5 km of this area's centre, which on a large area can mean the centre sits in a park. Here a request for another school means a real commute, and the school office weighs that against the reason you give.</p>'
           : '<p class="sc-warn">A request for one of these is only granted if that school still has room after its own catchment children are placed. Distance is not one of the legal reasons; siblings, a specific school programme, and care you can prove are.</p>') +
         '</div>' +
         '<button type="button" class="sc-go ghost" id="hideNear">Hide the 1.5 km field</button>';
