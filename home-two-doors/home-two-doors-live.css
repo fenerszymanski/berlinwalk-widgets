@@ -17,6 +17,7 @@
 bw-home-two-doors {
   background: #FAFAF5;
   display: block;
+  pointer-events: auto;
   width: 100%;
 }
 
