@@ -1,9 +1,9 @@
 {
-  "updatedAt": "2026-09-17T02:05:16.948Z",
+  "updatedAt": "2026-09-17T07:51:45.837Z",
   "source": "Wix Blog API",
   "popularSource": "Wix Blog metrics.views lifetime sort",
-  "totalPosts": 393,
-  "toolsTotal": 313,
+  "totalPosts": 394,
+  "toolsTotal": 314,
   "bookingUrl": "https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based",
   "navTopics": [
     {
@@ -1802,6 +1802,23 @@
   ],
   "latest": [
     {
+      "title": "Berlin School Registration: The School Your Address Already Picked",
+      "slug": "berlin-school-registration",
+      "path": "/post/berlin-school-registration",
+      "url": "https://www.berlinwalk.com/post/berlin-school-registration",
+      "excerpt": "There is a fortnight in October when Berlin decides where its next class of six year olds will spend the following six years. This year it is 5 to 16 October 2026, in person, at one specific school: the Grundschule that the boundary around your flat has already chosen. Berlin is cut into 394 of those Einschulungsbereiche holding 413 public primary schools, and 356 of them contain exactly one school, 28 contain two or three, and ten contain none at all.",
+      "category": "Living in Berlin",
+      "categorySlug": "living-in-berlin",
+      "topic": "living-in-berlin",
+      "topicLabel": "Living in Berlin",
+      "readTime": "8 min read",
+      "publishedDate": "2026-09-17T07:49:29.142Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_3ba503eae7f640ba8369c2f4fd0aa17c~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-grundschule-am-traveplatz.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_3ba503eae7f640ba8369c2f4fd0aa17c~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-grundschule-am-traveplatz.jpg",
+      "alt": "The orange facade of Grundschule am Traveplatz on Jessnerstrasse in Berlin-Friedrichshain, with the school name spelled in raised letters above the first-floor windows and cars parked along the kerb",
+      "relatedToolSlug": "berlin-school-catchment-map"
+    },
+    {
       "title": "Mould in Berlin Flats: When Airing Dries the Room and When It Soaks It",
       "slug": "mould-in-berlin-flats",
       "path": "/post/mould-in-berlin-flats",
@@ -1987,26 +2004,26 @@
       "thumb": "https://static.wixstatic.com/media/5a08a3_db8037a509db45ae887bf592fbf437d2~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/aok-hochhaus-kreuzberg.jpg",
       "alt": "The AOK administration tower on Wilhelmstrasse in Berlin-Kreuzberg, a 1960s high-rise by Hans Scharoun and Bodo Fleischer, with the green AOK logo near the roof and a lower wing in front of it",
       "relatedToolSlug": "berlin-krankenkasse-cost-spread"
-    },
+    }
+  ],
+  "allPosts": [
     {
-      "title": "Berlin Rent Increase: Which of the Four Limits Actually Stops the Letter",
-      "slug": "berlin-rent-increase",
-      "path": "/post/berlin-rent-increase",
-      "url": "https://www.berlinwalk.com/post/berlin-rent-increase",
-      "excerpt": "The Berliner Mietspiegel 2026 put the median net cold rent at 7.71 euro per square metre, and the rent letters built on it are landing now. Four separate limits decide whether yours holds up, and for most Berlin tenants the famous 15 per cent is not the one doing the work.",
+      "title": "Berlin School Registration: The School Your Address Already Picked",
+      "slug": "berlin-school-registration",
+      "path": "/post/berlin-school-registration",
+      "url": "https://www.berlinwalk.com/post/berlin-school-registration",
+      "excerpt": "There is a fortnight in October when Berlin decides where its next class of six year olds will spend the following six years. This year it is 5 to 16 October 2026, in person, at one specific school: the Grundschule that the boundary around your flat has already chosen. Berlin is cut into 394 of those Einschulungsbereiche holding 413 public primary schools, and 356 of them contain exactly one school, 28 contain two or three, and ten contain none at all.",
       "category": "Living in Berlin",
       "categorySlug": "living-in-berlin",
       "topic": "living-in-berlin",
       "topicLabel": "Living in Berlin",
       "readTime": "8 min read",
-      "publishedDate": "2026-09-13T19:40:22.423Z",
-      "image": "https://static.wixstatic.com/media/5a08a3_7123a9cf01154bfa8808b77d3fc83749~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-hermannstrasse-neukoelln.jpg",
-      "thumb": "https://static.wixstatic.com/media/5a08a3_7123a9cf01154bfa8808b77d3fc83749~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-hermannstrasse-neukoelln.jpg",
-      "alt": "A Gruenderzeit apartment building on Hermannstrasse in Berlin-Neukoelln, with red brick and stucco ornament above the ground floor windows and blue sky reflected in the panes",
-      "relatedToolSlug": "berlin-rent-increase-limits"
-    }
-  ],
-  "allPosts": [
+      "publishedDate": "2026-09-17T07:49:29.142Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_3ba503eae7f640ba8369c2f4fd0aa17c~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-grundschule-am-traveplatz.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_3ba503eae7f640ba8369c2f4fd0aa17c~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-grundschule-am-traveplatz.jpg",
+      "alt": "The orange facade of Grundschule am Traveplatz on Jessnerstrasse in Berlin-Friedrichshain, with the school name spelled in raised letters above the first-floor windows and cars parked along the kerb",
+      "relatedToolSlug": "berlin-school-catchment-map"
+    },
     {
       "title": "Mould in Berlin Flats: When Airing Dries the Room and When It Soaks It",
       "slug": "mould-in-berlin-flats",

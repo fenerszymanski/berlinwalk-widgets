@@ -1,9 +1,26 @@
 {
-  "updatedAt": "2026-09-17T02:05:16.948Z",
+  "updatedAt": "2026-09-17T07:51:45.837Z",
   "source": "Wix Blog API",
-  "totalPosts": 393,
+  "totalPosts": 394,
   "bookingUrl": "https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based",
   "allPosts": [
+    {
+      "title": "Berlin School Registration: The School Your Address Already Picked",
+      "slug": "berlin-school-registration",
+      "path": "/post/berlin-school-registration",
+      "url": "https://www.berlinwalk.com/post/berlin-school-registration",
+      "excerpt": "There is a fortnight in October when Berlin decides where its next class of six year olds will spend the following six years. This year it is 5 to 16 October 2026, in person, at one specific school: the Grundschule that the boundary around your flat has already chosen. Berlin is cut into 394 of those Einschulungsbereiche holding 413 public primary schools, and 356 of them contain exactly one school, 28 contain two or three, and ten contain none at all.",
+      "category": "Living in Berlin",
+      "categorySlug": "living-in-berlin",
+      "topic": "living-in-berlin",
+      "topicLabel": "Living in Berlin",
+      "readTime": "8 min read",
+      "publishedDate": "2026-09-17T07:49:29.142Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_3ba503eae7f640ba8369c2f4fd0aa17c~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-grundschule-am-traveplatz.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_3ba503eae7f640ba8369c2f4fd0aa17c~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-grundschule-am-traveplatz.jpg",
+      "alt": "The orange facade of Grundschule am Traveplatz on Jessnerstrasse in Berlin-Friedrichshain, with the school name spelled in raised letters above the first-floor windows and cars parked along the kerb",
+      "relatedToolSlug": "berlin-school-catchment-map"
+    },
     {
       "title": "Mould in Berlin Flats: When Airing Dries the Room and When It Soaks It",
       "slug": "mould-in-berlin-flats",
