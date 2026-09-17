@@ -618,6 +618,10 @@ bw-home-two-doors .bw-home-two-doors .bw-home-two-doors__review--dark .bw-home-t
   overflow: hidden;
 }
 
+.bw-home-two-doors .bw-home-two-doors__compare-mobile {
+  display: none;
+}
+
 .bw-home-two-doors .bw-home-two-doors__compare-row {
   border-top: 1px solid var(--bw-line);
   display: grid;
@@ -1320,40 +1324,66 @@ bw-home-two-doors .bw-home-two-doors .bw-home-two-doors__review--dark .bw-home-t
     font-size: 17px;
   }
 
-  .bw-home-two-doors .bw-home-two-doors__compare-row:first-child {
-    display: none;
+  .bw-home-two-doors .bw-home-two-doors__compare { display: none; }
+  .bw-home-two-doors .bw-home-two-doors__compare-mobile { display: grid; gap: 14px; }
+  .bw-home-two-doors .bw-home-two-doors__choice-card {
+    background: #fff;
+    border: 1px solid var(--bw-line);
+    border-radius: 16px;
+    padding: 22px;
   }
-
-  .bw-home-two-doors .bw-home-two-doors__compare-row {
-    grid-template-columns: 1fr;
-  }
-
-  .bw-home-two-doors .bw-home-two-doors__compare-row > div + div {
-    border-left: 0;
-    border-top: 1px dashed var(--bw-line);
-  }
-
-  .bw-home-two-doors .bw-home-two-doors__compare-row > div:first-child {
-    padding-bottom: 0;
-  }
-
-  .bw-home-two-doors .bw-home-two-doors__compare-row > div + div::before {
-    color: var(--bw-ink-2);
-    content: "Live tour";
+  .bw-home-two-doors .bw-home-two-doors__choice-card--live { border-top: 5px solid var(--bw-green); }
+  .bw-home-two-doors .bw-home-two-doors__choice-card--audio { border-top: 5px solid #F5D331; }
+  .bw-home-two-doors .bw-home-two-doors__choice-type {
+    color: var(--bw-green);
     display: block;
     font-family: var(--bw-mono);
-    font-size: 10px;
-    letter-spacing: 0.12em;
-    margin-bottom: 4px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .11em;
+  }
+  .bw-home-two-doors .bw-home-two-doors__choice-card h3 {
+    color: var(--bw-ink);
+    font-family: var(--bw-display);
+    font-size: 30px;
+    line-height: 1.15;
+    margin: 5px 0 8px;
+  }
+  .bw-home-two-doors .bw-home-two-doors__choice-summary {
+    color: var(--bw-ink-2);
+    font-size: 15px;
+    line-height: 1.45;
+    margin: 0 0 16px;
+  }
+  .bw-home-two-doors .bw-home-two-doors__choice-card dl { margin: 0; }
+  .bw-home-two-doors .bw-home-two-doors__choice-card dl > div {
+    border-top: 1px solid var(--bw-line);
+    display: grid;
+    gap: 12px;
+    grid-template-columns: 52px minmax(0, 1fr);
+    padding: 10px 0;
+  }
+  .bw-home-two-doors .bw-home-two-doors__choice-card dt {
+    color: var(--bw-green);
+    font-family: var(--bw-mono);
+    font-size: 11px;
+    font-weight: 700;
     text-transform: uppercase;
   }
-
-  .bw-home-two-doors .bw-home-two-doors__compare-row > div:nth-child(3)::before {
-    content: "Audio walk";
+  .bw-home-two-doors .bw-home-two-doors__choice-card dd {
+    color: var(--bw-ink);
+    font-size: 14px;
+    line-height: 1.4;
+    margin: 0;
   }
-
-  .bw-home-two-doors .bw-home-two-doors__compare-row--foot > div + div::before {
-    content: none;
+  .bw-home-two-doors .bw-home-two-doors__choice-card a {
+    color: var(--bw-green);
+    display: inline-block;
+    font-size: 14px;
+    font-weight: 700;
+    margin-top: 14px;
+    text-decoration: underline;
+    text-underline-offset: 3px;
   }
 
   .bw-home-two-doors .bw-home-two-doors__shelf {

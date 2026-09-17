@@ -305,6 +305,30 @@ class BWHomeTwoDoorsElement extends HTMLElement {
                 <div><b>Listen on your phone.</b><br>Recorded stories I researched and wrote. Bring headphones; no app needed. Audio download + PDF route guide included.</div>
               </div>
             </div>
+            <div class="bw-home-two-doors__compare-mobile" aria-label="Compare live and audio walks">
+              <article class="bw-home-two-doors__choice-card bw-home-two-doors__choice-card--live">
+                <span class="bw-home-two-doors__choice-type">WITH YOUR GUIDE</span>
+                <h3>Live tour</h3>
+                <p class="bw-home-two-doors__choice-summary">A shared walk where you can ask questions.</p>
+                <dl>
+                  <div><dt>When</dt><dd>A booked start time · about 2 hours</dd></div>
+                  <div><dt>Where</dt><dd>Meet me at the World Clock</dd></div>
+                  <div><dt>Price</dt><dd>Free to book · tip at the end</dd></div>
+                </dl>
+                <a href="${BW_HOME_TWO_DOORS_BOOKING_URL}" data-bw-cta-id="book_compare_mobile" data-bw-cta-placement="compare">Check live dates →</a>
+              </article>
+              <article class="bw-home-two-doors__choice-card bw-home-two-doors__choice-card--audio">
+                <span class="bw-home-two-doors__choice-type">ON YOUR OWN PHONE</span>
+                <h3>Audio walk</h3>
+                <p class="bw-home-two-doors__choice-summary">A story you can start, pause and continue at your pace.</p>
+                <dl>
+                  <div><dt>When</dt><dd>Start whenever you are ready</dd></div>
+                  <div><dt>Where</dt><dd>Choose the Berlin Wall, Hidden Berlin or Medieval Berlin route</dd></div>
+                  <div><dt>Price</dt><dd>€9.90 per walk · all three €24.90</dd></div>
+                </dl>
+                <a href="${BW_HOME_TWO_DOORS_AUDIO_HUB_URL}" data-bw-cta-id="audio_compare_mobile" data-bw-cta-placement="compare">Explore audio walks →</a>
+              </article>
+            </div>
           </div>
         </section>
 
