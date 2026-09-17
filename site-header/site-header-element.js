@@ -957,6 +957,12 @@ class BWHeaderElement extends HTMLElement {
           overflow-y: auto;
         }
 
+        /* Wix can briefly serve an old enabled Products embed after it is
+           disabled. Its marked legacy section must not duplicate this menu. */
+        .bw-header-mobile[data-bw-navigation="20260917"] .bw-header-mobile-nav > [data-bw-products-patch] {
+          display: none !important;
+        }
+
         .bw-header-mobile-nav a {
           border-bottom: 1px solid rgba(255, 255, 255, 0.12);
           color: #FFFFFF;
@@ -1169,7 +1175,7 @@ class BWHeaderElement extends HTMLElement {
           </div>
         </header>
 
-        <div id="${this._mobileMenuId}" class="bw-header-mobile" aria-hidden="true" aria-label="Mobile menu">
+        <div id="${this._mobileMenuId}" class="bw-header-mobile" data-bw-navigation="20260917" aria-hidden="true" aria-label="Mobile menu">
           <div class="bw-header-mobile-inner">
             <div class="bw-header-mobile-head">
               <img src="${BW_HEADER_LOGO_URL}" alt="BerlinWalk" width="897" height="188">
