@@ -12187,5 +12187,51 @@
         "a": "The Kinder- und Jugendgesundheitsdienst examines your child, and you get the booking information at registration. The Schulamt of your district, not the school at the door, allocates the place, and in individual cases it can place a child at a different Grundschule for organisational reasons and writes to tell you. If you applied for a Hort place, the Jugendamt sends a Bedarfsbescheid and you then sign a contract with the Jugendamt or the provider. The Einschulungsfeier is normally Saturday 21 August 2027, regular lessons begin Monday 23 August 2027, and Hort care can start from 1 August 2027."
       }
     ]
+  },
+  "berlin-monthly-ticket": {
+    "title": "Berlin Monthly Ticket - FAQ",
+    "subtitle": "What each Berlin season ticket costs, the ride count where a monthly ticket beats singles, what the Umweltkarte does that the Deutschlandticket cannot, zone C, bikes, and the cancellation deadline.",
+    "items": [
+      {
+        "q": "How much is a monthly transport ticket in Berlin?",
+        "a": "Checked on 17 September 2026, BVG's standard fares are: Deutschlandticket 63.00 euros, VBB Umweltkarte AB on a subscription 81.30 euros, Umweltkarte ABC on a subscription 103.30 euros, and the same Berlin AB Monatskarte bought month by month without a contract 113.00 euros. The Berlin-only ticket is therefore more expensive than the one valid on every local and regional service in Germany."
+      },
+      {
+        "q": "Is the Deutschlandticket cheaper than the BVG Umweltkarte?",
+        "a": "Yes, by 18.30 euros a month against the AB subscription and by 50 euros a month against the contract-free Monatskarte. Over a year that is 219.60 and 600 euros. The Umweltkarte costs more because it is transferable and because it carries extra passengers in the evenings and at weekends, which the Deutschlandticket does not do at all."
+      },
+      {
+        "q": "How many rides do I need before a monthly ticket is worth it?",
+        "a": "A normal AB single ride is 4.00 euros, so the 63 euro Deutschlandticket pays for itself on your sixteenth ride of the month, which is eight return journeys. If you buy 4-Fahrten-Karten at 12.40 euros, each ride costs 3.10 and the crossing point moves to twenty-one rides. The 81.30 euro Umweltkarte AB needs twenty-one single rides, and the 113 euro contract-free version needs twenty-nine."
+      },
+      {
+        "q": "Can someone else use my Berlin monthly ticket?",
+        "a": "Only the Umweltkarte. It belongs to the card rather than to a person, so a flatmate or partner can take it while you are away. The Deutschlandticket is personal and is checked against your name, so nobody else in the flat can use it, not even for one afternoon."
+      },
+      {
+        "q": "When can I take another adult along on a VBB Umweltkarte?",
+        "a": "From 20:00 on weekdays until 03:00 the next morning, and all day on Saturday, Sunday, public holidays, 24 and 31 December. One Umweltkarte then covers up to four people, of whom only one may be older than 14. In practice that is you plus one adult plus up to three children. Children under 6 and one dog already travel free at any time."
+      },
+      {
+        "q": "Which ticket is better for a couple in Berlin?",
+        "a": "It depends on when you both travel. Two separate Deutschlandtickets cost 126 euros a month. If one of you travels in the daytime and the other mostly after work and at weekends, one transferable Umweltkarte AB at 81.30 euros can honestly cover both and saves 44.70 euros a month. If both of you commute during working hours you cannot share one card, and two Deutschlandtickets win by about 18 euros."
+      },
+      {
+        "q": "Does a Berlin AB monthly ticket cover BER airport or Potsdam?",
+        "a": "No. Both sit in zone C. A single extension ticket into zone C is 2.40 euros each way. Your monthly options are an Umweltkarte ABC at 103.30 euros, or the Deutschlandticket at 63 euros, which covers the airport trains, Potsdam and every RE and RB out of Berlin. The ABC card is only worth its extra 40.30 euros a month if you also need the transfer and evening-carriage rights."
+      },
+      {
+        "q": "Can I take my bike on a Berlin monthly ticket?",
+        "a": "Not on any of them. A Monatskarte Fahrrad costs 14.60 euros for Berlin AB and 18.20 for ABC, it is transferable, and it is only valid alongside a valid main ticket. Bikes travel in the marked carriages of the S-Bahn, U-Bahn and regional trains when there is space, staff decide when it is full, and bikes are not allowed on buses at all."
+      },
+      {
+        "q": "Are there cheaper monthly tickets in Berlin?",
+        "a": "Three worth checking. A Deutschlandticket Job through a participating employer costs at most 44.10 euros, which is 226.80 euros a year less than buying it yourself. Berlin-Ticket S costs 27.50 euros for Berlin AB for people receiving benefits, with a VBB-Kundenkarte Berlin S or a current Leistungsbescheid, and it is not transferable. Apprentices and students have their own subscription from 55.40 euros, and the Schülerticket Berlin AB is free for school pupils with a Schülerausweis I."
+      },
+      {
+        "q": "How do I cancel a Berlin monthly ticket subscription?",
+        "a": "Both the Deutschlandticket and the VBB Umweltkarte are cancellable monthly, and the deadline is the 10th calendar day of the month for the subscription to end at the end of that month. Cancel on the 11th and you have bought another month. That single date is the only real deadline in the whole decision."
+      }
+    ]
   }
 }

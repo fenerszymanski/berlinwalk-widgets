@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Berlin Monthly Ticket Break-Even Board</title>
+<link rel="stylesheet" href="../css/brand.css">
+<style>
+  :root {
+    --green: #1B5E20; --deep: #123D18; --yellow: #FFE600; --lime: #7CB342;
+    --soft: #C5E1A5; --pale: #E8F2DA; --cream: #FAFAF5; --ink: #212121;
+    --muted: #5a665b; --line: rgba(27, 94, 32, .18);
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--cream); color: var(--ink); }
+  .bk { max-width: 840px; margin: 0 auto; padding: 14px 12px 16px; }
+  .bk-head h2 { font-size: 1.06rem; margin: 0 0 4px; color: var(--green); }
+  .bk-head p { margin: 0; font-size: .78rem; color: var(--muted); line-height: 1.55; }
+
+  .bk-label { font-size: .62rem; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); margin: 13px 0 6px; font-weight: 700; }
+  .bk-chips { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 6px; }
+  .bk-chips button { font-family: inherit; font-size: .67rem; font-weight: 600; line-height: 1.4;
+    padding: 8px 9px; border-radius: 9px; cursor: pointer; text-align: left;
+    border: 1px solid var(--green); background: #fff; color: var(--green);
+  }
+  .bk-chips button b { display: block; font-size: .72rem; font-weight: 800; margin-bottom: 2px; }
+  .bk-chips button[aria-pressed="true"] { background: var(--green); color: #fff; }
+  .bk-chips button[aria-pressed="true"] b { color: var(--yellow); }
+  .bk-chips button:focus-visible, .bk-step button:focus-visible, .bk-plot svg:focus-visible { outline: 3px solid var(--yellow); outline-offset: 2px; }
+
+  .bk-step { display: flex; align-items: center; gap: 10px; margin-top: 6px; flex-wrap: wrap; }
+  .bk-step button {
+    font-family: inherit; width: 40px; height: 40px; border-radius: 9px; cursor: pointer;
+    border: 1px solid var(--green); background: #fff; color: var(--green); font-size: 1.2rem; font-weight: 800; line-height: 1;
+  }
+  .bk-step .val { font-size: 1.32rem; font-weight: 800; color: var(--green); min-width: 3ch; text-align: center; }
+  .bk-step .cap { font-size: .69rem; color: var(--muted); line-height: 1.45; flex: 1 1 180px; }
+
+  .bk-plot { margin-top: 12px; background: #fff; border: 1px solid var(--line); border-radius: 10px; padding: 11px 10px 9px; }
+  .bk-plot svg { display: block; width: 100%; height: auto; touch-action: manipulation; }
+  .bk-key { display: flex; flex-wrap: wrap; gap: 5px 14px; margin-top: 9px; font-size: .63rem; color: var(--muted); }
+  .bk-key i { display: inline-block; width: 14px; height: 4px; border-radius: 2px; vertical-align: 3px; margin-right: 6px; }
+  .bk-key s { opacity: .55; text-decoration: line-through; }
+
+  .bk-out { margin-top: 12px; border-radius: 10px; background: var(--deep); color: #fff; padding: 13px 14px 14px; }
+  .bk-out .when { font-size: .63rem; letter-spacing: .07em; text-transform: uppercase; color: var(--soft); }
+  .bk-out .big { font-size: 1.42rem; font-weight: 800; line-height: 1.18; color: var(--yellow); margin-top: 5px; }
+  .bk-out .big span { font-size: .78rem; font-weight: 600; color: #fff; display: block; margin-top: 6px; line-height: 1.55; }
+  .bk-cells { display: flex; flex-wrap: wrap; gap: 10px 20px; margin-top: 12px; padding-top: 11px; border-top: 1px solid rgba(255,255,255,.2); }
+  .bk-cells .cell { min-width: 140px; }
+  .bk-cells .v { font-size: 1rem; font-weight: 700; color: var(--yellow); }
+  .bk-cells .k { font-size: .63rem; color: rgba(255,255,255,.85); line-height: 1.45; margin-top: 2px; }
+  .bk-out ul { margin: 11px 0 0; padding-left: 17px; font-size: .71rem; line-height: 1.6; color: rgba(255,255,255,.9); }
+  .bk-move { margin-top: 12px; padding: 11px 12px; border-radius: 9px; background: var(--yellow); color: var(--deep); font-size: .76rem; line-height: 1.55; font-weight: 600; }
+  .bk-foot { margin-top: 11px; font-size: .62rem; color: var(--muted); line-height: 1.55; }
+  .bk-foot a { color: var(--green); }
+  .bk-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+  @media (max-width: 430px) {
+    .bk-chips { grid-template-columns: 1fr; }
+    .bk-out .big { font-size: 1.22rem; }
+  }
+</style>
+</head>
+<body>
+<div class="bk">
+  <div class="bk-head">
+    <h2>Berlin monthly ticket break-even board</h2>
+    <p>Every Berlin season ticket on one pair of axes, against what the same month would cost you ride by ride. Say what your month has to survive, set how often you actually ride, and the board rules out the tickets that cannot do the job.</p>
+  </div>
+
+  <p class="bk-label" id="bk-req-label">What your ticket has to survive</p>
+  <div class="bk-chips" id="bk-chips" role="group" aria-labelledby="bk-req-label"></div>
+
+  <p class="bk-label" id="bk-rides-label">Rides in a normal month</p>
+  <div class="bk-step" role="group" aria-labelledby="bk-rides-label">
+    <button type="button" id="bk-minus" aria-label="One ride fewer">&minus;</button>
+    <span class="val" id="bk-val">34</span>
+    <button type="button" id="bk-plus" aria-label="One ride more">+</button>
+    <span class="cap">One ride is one journey, so a commute there and back on 21 working days is 42.</span>
+  </div>
+
+  <div class="bk-plot">
+    <svg id="bk-svg" viewBox="0 0 700 360" role="img" tabindex="0" aria-describedby="bk-svg-desc"></svg>
+    <p id="bk-svg-desc" class="bk-sr">A chart with rides per month along the bottom and euros per month up the side. Flat lines are season tickets, rising staircases are single tickets, and the upright marker is the ride count you set.</p>
+    <div class="bk-key" id="bk-key"></div>
+  </div>
+
+  <div class="bk-out" id="bk-out" aria-live="polite"></div>
+
+  <p class="bk-foot">
+    Prices are the standard fares published by <a href="https://www.bvg.de/de/abos-und-tickets/alle-tickets" target="_blank" rel="noopener">BVG</a>, checked on 17 September 2026. Fares change, so treat the shape of the board as the lasting part and re-check the numbers before you sign anything.
+  </p>
+</div>
+<script src="../js/brand.js"></script>
+<script>
+(function () {
+  'use strict';
+  var FARE = null;
+  var REQS = [
+    { id: 'beyondAB', title: 'It leaves Berlin', sub: 'BER, Potsdam, a Brandenburg lake, a regional train' },
+    { id: 'transferable', title: 'Someone else can use it', sub: 'you hand the card to a flatmate for the week you are away' },
+    { id: 'carriesAdult', title: 'It carries a second adult', sub: 'evenings from 20:00 and all weekend' },
+    { id: 'bikeIncluded', title: 'The bike comes too', sub: 'on the S-Bahn, not on a bus' },
+    { id: 'cheapest', title: 'No special scheme', sub: 'no employer job ticket, no benefits card' }
+  ];
+  var on = { beyondAB: false, transferable: false, carriesAdult: false, bikeIncluded: false, cheapest: true };
+  var stageIndex = 34;
+  var MINSTEP = 0, MAXSTEP = 44;
+
+  var svg = document.getElementById('bk-svg');
+  var chipBox = document.getElementById('bk-chips');
+  var keyBox = document.getElementById('bk-key');
+  var outBox = document.getElementById('bk-out');
+  var valBox = document.getElementById('bk-val');
+
+  var X0 = 86, X1 = 674, Y0 = 26, Y1 = 292, EMAX = 130, RMAX = 44;
+  function narrow() { return (window.innerWidth || 700) < 560; }
+  function fs(wide, small) { return narrow() ? small : wide; }
+  function px(r) { return X0 + (r / RMAX) * (X1 - X0); }
+  function py(e) { return Y1 - (Math.min(e, EMAX) / EMAX) * (Y1 - Y0); }
+  function eur(n) { return n.toFixed(2).replace('.00', '') + ' euros'; }
+  function eurShort(n) { return Math.round(n) + ' euros'; }
+
+  function singleCost(r) { return r * FARE.singles.einzel_ab; }
+  function fourCost(r) { return Math.ceil(r / 4) * FARE.singles.vierfahrten_ab; }
+
+  /* A ticket survives the month only if it can do every job the reader ticked. */
+  function qualifies(t) {
+    if (on.beyondAB && !t.beyondAB) return false;
+    if (on.transferable && !t.transferable) return false;
+    if (on.carriesAdult && !t.carriesAdult) return false;
+    if (on.cheapest && (t.needsEmployer || t.needsBenefit)) return false;
+    return true;
+  }
+  function priceOf(t) {
+    if (!on.bikeIncluded) return t.price;
+    var extra = (t.id === 'uk_abc' || t.id === 'dt' || t.id === 'job') ? FARE.bikeMonthly.abc : FARE.bikeMonthly.ab;
+    return t.price + (t.bikeIncluded ? 0 : extra);
+  }
+
+  function drawChips() {
+    var html = '';
+    for (var i = 0; i < REQS.length; i++) {
+      var q = REQS[i];
+      html += '<button type="button" data-req="' + q.id + '" aria-pressed="' + (on[q.id] ? 'true' : 'false') + '">'
+        + '<b>' + q.title + '</b>' + q.sub + '</button>';
+    }
+    chipBox.innerHTML = html;
+  }
+
+  function draw() {
+    var eligible = [], dimmed = [];
+    for (var i = 0; i < FARE.monthly.length; i++) {
+      (qualifies(FARE.monthly[i]) ? eligible : dimmed)[
+        (qualifies(FARE.monthly[i]) ? eligible : dimmed).length
+      ] = FARE.monthly[i];
+    }
+
+    var s = '';
+    s += '<rect x="0" y="0" width="700" height="360" fill="#ffffff"></rect>';
+
+    /* grid */
+    for (var e = 0; e <= EMAX; e += 20) {
+      s += '<line x1="' + X0 + '" y1="' + py(e) + '" x2="' + X1 + '" y2="' + py(e) + '" stroke="#e7eee2" stroke-width="1"></line>';
+      s += '<text x="' + (X0 - 9) + '" y="' + (py(e) + 5) + '" text-anchor="end" font-size="' + fs(11, 16) + '" fill="#5a665b">' + e + '</text>';
+    }
+    for (var r = 0; r <= RMAX; r += 8) {
+      s += '<line x1="' + px(r) + '" y1="' + Y0 + '" x2="' + px(r) + '" y2="' + Y1 + '" stroke="#f1f5ee" stroke-width="1"></line>';
+      s += '<text x="' + px(r) + '" y="' + (Y1 + 20) + '" text-anchor="middle" font-size="' + fs(11, 16) + '" fill="#5a665b">' + r + '</text>';
+    }
+    s += '<text x="' + X0 + '" y="' + (Y1 + 42) + '" font-size="' + fs(11.5, 16) + '" fill="#5a665b" font-weight="700">rides in a month</text>';
+    s += '<text x="' + (X0 - 9) + '" y="' + (Y0 - 9) + '" text-anchor="end" font-size="' + fs(11.5, 16) + '" fill="#5a665b" font-weight="700">euros</text>';
+
+    /* pay as you go, drawn as the staircases they really are */
+    var pts4 = '', ptsS = '';
+    for (var k = 0; k <= RMAX; k++) {
+      var c4 = fourCost(k), cs = singleCost(k);
+      if (c4 <= EMAX) pts4 += px(k) + ',' + py(c4) + ' ' + px(k + 1 > RMAX ? RMAX : k + 1) + ',' + py(c4) + ' ';
+      if (cs <= EMAX) ptsS += px(k) + ',' + py(cs) + ' ';
+    }
+    s += '<polyline points="' + pts4 + '" fill="none" stroke="#9aa79b" stroke-width="2" stroke-dasharray="5 4"></polyline>';
+    s += '<polyline points="' + ptsS + '" fill="none" stroke="#3a463b" stroke-width="2.4"></polyline>';
+
+    /* season tickets */
+    var labelled = [];
+    for (var m = 0; m < FARE.monthly.length; m++) {
+      var t = FARE.monthly[m], p = priceOf(t), ok = qualifies(t);
+      if (p > EMAX) continue;
+      s += '<line x1="' + X0 + '" y1="' + py(p) + '" x2="' + X1 + '" y2="' + py(p) + '" stroke="' + t.colour + '" stroke-width="' + (ok ? 3 : 1.6) + '"'
+        + (ok ? '' : ' stroke-dasharray="2 5"') + ' opacity="' + (ok ? 1 : .42) + '"></line>';
+      if (!narrow()) {
+        s += '<text x="' + (X1 - 4) + '" y="' + (py(p) - 6) + '" text-anchor="end" font-size="11.5" font-weight="700" fill="' + t.colour + '" opacity="' + (ok ? 1 : .45) + '">'
+          + t.name + ' ' + p.toFixed(2).replace('.00', '') + ' &euro;</text>';
+      }
+      labelled[labelled.length] = t;
+    }
+
+    /* where the season ticket starts winning against single tickets */
+    for (var q = 0; q < eligible.length; q++) {
+      var tq = eligible[q], pq = priceOf(tq);
+      var cross = Math.ceil(pq / FARE.singles.einzel_ab);
+      if (cross <= RMAX && pq <= EMAX) {
+        s += '<circle cx="' + px(cross) + '" cy="' + py(pq) + '" r="5" fill="#fff" stroke="' + tq.colour + '" stroke-width="2.6"></circle>';
+      }
+    }
+
+    /* the reader's own month */
+    s += '<line x1="' + px(stageIndex) + '" y1="' + Y0 + '" x2="' + px(stageIndex) + '" y2="' + Y1 + '" stroke="#FFC400" stroke-width="3"></line>';
+    var mw = narrow() ? 74 : 54;
+    var mx = Math.max(X0 + mw / 2, Math.min(X1 - mw / 2, px(stageIndex)));
+    s += '<rect x="' + (mx - mw / 2) + '" y="' + (Y0 - 22) + '" width="' + mw + '" height="20" rx="4" fill="#FFC400"></rect>';
+    s += '<text x="' + mx + '" y="' + (Y0 - 7) + '" text-anchor="middle" font-size="' + fs(11.5, 16) + '" font-weight="800" fill="#123D18">' + stageIndex + ' rides</text>';
+
+    svg.innerHTML = s;
+    drawKey(eligible, dimmed);
+    verdict(eligible);
+  }
+
+  function drawKey(eligible, dimmed) {
+    var html = '<span><i style="background:#3a463b"></i>single tickets, ' + eur(FARE.singles.einzel_ab) + ' each</span>'
+      + '<span><i style="background:#9aa79b"></i>4-Fahrten-Karte, ' + eur(FARE.singles.vierfahrten_ride) + ' a ride</span>';
+    for (var i = 0; i < eligible.length; i++) {
+      html += '<span><i style="background:' + eligible[i].colour + '"></i>' + eligible[i].name + ', ' + priceOf(eligible[i]).toFixed(2).replace('.00', '') + ' &euro;</span>';
+    }
+    for (var j = 0; j < dimmed.length; j++) {
+      html += '<span><i style="background:' + dimmed[j].colour + ';opacity:.4"></i><s>' + dimmed[j].name + ', ' + priceOf(dimmed[j]).toFixed(2).replace('.00', '') + ' &euro;</s></span>';
+    }
+    keyBox.innerHTML = html;
+  }
+
+  function verdict(eligible) {
+    var payGo = Math.min(singleCost(stageIndex), fourCost(stageIndex));
+    if (!eligible.length) {
+      outBox.innerHTML = '<div class="when">No season ticket left</div>'
+        + '<div class="big">Nothing on sale does all of that<span>No single Berlin season ticket carries a second adult, leaves the city and comes with a bike. Drop one requirement, or buy the bike month separately for '
+        + eur(FARE.bikeMonthly.ab) + ' on top.</span></div>';
+      return;
+    }
+    var best = eligible[0], i;
+    for (i = 1; i < eligible.length; i++) { if (priceOf(eligible[i]) < priceOf(best)) best = eligible[i]; }
+    var bestPrice = priceOf(best);
+    var runner = null;
+    for (i = 0; i < eligible.length; i++) {
+      var p = priceOf(eligible[i]);
+      if (eligible[i] !== best && (runner === null || p < priceOf(runner))) runner = eligible[i];
+    }
+    var winsAt = Math.ceil(bestPrice / FARE.singles.einzel_ab);
+    var beatsPayGo = payGo >= bestPrice;
+
+    var html = '<div class="when">Cheapest ticket that still does the job</div>';
+    html += '<div class="big">' + best.name + ', ' + eur(bestPrice)
+      + '<span>' + best.reach + '.</span></div>';
+    html += '<div class="bk-cells">';
+    html += '<div class="cell"><div class="v">' + eurShort(payGo) + '</div><div class="k">' + stageIndex + ' rides bought one by one, cheapest of singles and the 4-Fahrten-Karte</div></div>';
+    html += '<div class="cell"><div class="v">' + winsAt + ' rides</div><div class="k">where this season ticket starts beating single tickets</div></div>';
+    if (runner) {
+      var gap = (priceOf(runner) - bestPrice) * 12;
+      html += '<div class="cell"><div class="v">' + eurShort(gap) + ' a year</div><div class="k">what the next ticket up, ' + runner.name + ', costs you instead</div></div>';
+    }
+    html += '</div>';
+    html += '<ul>';
+    html += '<li>' + (beatsPayGo
+      ? 'At ' + stageIndex + ' rides you are already paying more on single tickets than the season ticket costs.'
+      : 'At ' + stageIndex + ' rides single tickets are still cheaper. The season ticket buys you the freedom to stop counting.') + '</li>';
+    if (!best.transferable) html += '<li>It is personal. Nobody else in your flat can use it, not even for a day.</li>';
+    if (best.transferable) html += '<li>It is transferable, so it can sit by the door and go out with whoever is leaving.</li>';
+    if (on.bikeIncluded) html += '<li>The price above includes the separate bike month, because no Berlin season ticket carries a bike on its own.</li>';
+    html += '</ul>';
+    html += '<div class="bk-move">My move: work out your real ride count for a normal week, double it, add the weekend, and only then look at the board. Most people guess high and buy a month they use eleven times.</div>';
+    outBox.innerHTML = html;
+  }
+
+  function setStep(n) {
+    stageIndex = Math.max(MINSTEP, Math.min(MAXSTEP, n));
+    valBox.textContent = stageIndex;
+    draw();
+  }
+
+  chipBox.addEventListener('click', function (ev) {
+    var b = ev.target.closest('button[data-req]');
+    if (!b) return;
+    var id = b.getAttribute('data-req');
+    on[id] = !on[id];
+    b.setAttribute('aria-pressed', on[id] ? 'true' : 'false');
+    draw();
+  });
+  document.getElementById('bk-minus').addEventListener('click', function () { setStep(stageIndex - 1); });
+  document.getElementById('bk-plus').addEventListener('click', function () { setStep(stageIndex + 1); });
+  var wasNarrow = null;
+  window.addEventListener('resize', function () {
+    if (!FARE) return;
+    var n = narrow();
+    if (n !== wasNarrow) { wasNarrow = n; draw(); }
+  });
+  svg.addEventListener('keydown', function (ev) {
+    if (ev.key === 'ArrowLeft') { setStep(stageIndex - 1); ev.preventDefault(); }
+    if (ev.key === 'ArrowRight') { setStep(stageIndex + 1); ev.preventDefault(); }
+  });
+
+  fetch('data.json').then(function (r) { return r.json(); }).then(function (j) {
+    FARE = j;
+    drawChips();
+    valBox.textContent = stageIndex;
+    draw();
+    if (window.__bwRequestEmbedResize) window.__bwRequestEmbedResize();
+  });
+}());
+</script>
+</body>
+</html>

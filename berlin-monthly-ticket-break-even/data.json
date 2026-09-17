@@ -1,0 +1,108 @@
+{
+  "source": "Berliner Verkehrsbetriebe (BVG) published fare tables, Regeltarif, read 17 September 2026",
+  "sourceUrls": [
+    "https://www.bvg.de/de/abos-und-tickets/alle-tickets",
+    "https://www.bvg.de/de/abos-und-tickets/alle-abos/vbb-umweltkarte",
+    "https://www.bvg.de/de/deutschlandticket",
+    "https://www.bvg.de/de/abos-und-tickets/alle-tickets/zeitkarten/monatskarte",
+    "https://www.bvg.de/de/abos-und-tickets/alle-tickets/fahrraeder/monatskarte",
+    "https://www.bvg.de/de/abos-und-tickets/alle-tickets/zeitkarten/berlin-ticket-s"
+  ],
+  "checkedOn": "2026-09-17",
+  "singles": {
+    "einzel_ab": 4.0,
+    "kurzstrecke": 2.8,
+    "vierfahrten_ab": 12.4,
+    "vierfahrten_ride": 3.1,
+    "tageskarte_ab": 11.2,
+    "anschluss_c": 2.4
+  },
+  "monthly": [
+    {
+      "id": "dt",
+      "name": "Deutschlandticket",
+      "sub": "subscription, cancel by the 10th",
+      "price": 63.0,
+      "reach": "every regional and local service in Germany, no IC, EC or ICE",
+      "beyondAB": true,
+      "transferable": false,
+      "carriesAdult": false,
+      "bikeIncluded": false,
+      "needsEmployer": false,
+      "needsBenefit": false,
+      "colour": "#1B5E20"
+    },
+    {
+      "id": "job",
+      "name": "Deutschlandticket Job",
+      "sub": "through a participating employer",
+      "price": 44.1,
+      "reach": "identical to the Deutschlandticket",
+      "beyondAB": true,
+      "transferable": false,
+      "carriesAdult": false,
+      "bikeIncluded": false,
+      "needsEmployer": true,
+      "needsBenefit": false,
+      "colour": "#7CB342"
+    },
+    {
+      "id": "uk_ab",
+      "name": "VBB Umweltkarte AB",
+      "sub": "subscription price",
+      "price": 81.3,
+      "reach": "Berlin AB only, so it stops at the city boundary",
+      "beyondAB": false,
+      "transferable": true,
+      "carriesAdult": true,
+      "bikeIncluded": false,
+      "needsEmployer": false,
+      "needsBenefit": false,
+      "colour": "#0B7FA8"
+    },
+    {
+      "id": "uk_abc",
+      "name": "VBB Umweltkarte ABC",
+      "sub": "subscription price",
+      "price": 103.3,
+      "reach": "Berlin ABC, so BER and Potsdam are in, the rest of Brandenburg is not",
+      "beyondAB": true,
+      "transferable": true,
+      "carriesAdult": true,
+      "bikeIncluded": false,
+      "needsEmployer": false,
+      "needsBenefit": false,
+      "colour": "#8E44AD"
+    },
+    {
+      "id": "mk_ab",
+      "name": "Monatskarte AB, no contract",
+      "sub": "same card bought month by month",
+      "price": 113.0,
+      "reach": "Berlin AB only",
+      "beyondAB": false,
+      "transferable": true,
+      "carriesAdult": true,
+      "bikeIncluded": false,
+      "needsEmployer": false,
+      "needsBenefit": false,
+      "colour": "#C0392B"
+    },
+    {
+      "id": "s",
+      "name": "Berlin-Ticket S",
+      "sub": "for people on benefits, with proof",
+      "price": 27.5,
+      "reach": "Berlin AB only",
+      "beyondAB": false,
+      "transferable": false,
+      "carriesAdult": false,
+      "bikeIncluded": false,
+      "needsEmployer": false,
+      "needsBenefit": true,
+      "colour": "#E0A33B"
+    }
+  ],
+  "bikeMonthly": { "ab": 14.6, "abc": 18.2 },
+  "carriage": "Monday to Friday from 20:00 until 03:00 the next morning, and all day on Saturday, Sunday, public holidays, 24 and 31 December: up to four people travel on one Umweltkarte, of whom only one may be older than 14."
+}
