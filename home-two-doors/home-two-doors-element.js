@@ -387,7 +387,7 @@ class BWHomeTwoDoorsElement extends HTMLElement {
         <section class="bw-home-two-doors__section bw-home-two-doors__section--cream-2" id="guide" data-bw-home-card="guide" data-bw-card-type="guide" data-bw-placement="guide">
           <div class="bw-home-two-doors__wrap bw-home-two-doors__guide">
             <div class="bw-home-two-doors__photo">
-              <img src="${asset('yusuf-rotes-rathaus.jpg')}" alt="Yusuf guiding in front of the Rotes Rathaus in Berlin" width="1200" height="1600" loading="lazy">
+              <img src="${asset('yusuf-rotes-rathaus-no-vest.jpg')}" alt="Yusuf guiding in front of the Rotes Rathaus in Berlin" width="880" height="1100" loading="lazy">
               <span class="bw-home-two-doors__chip bw-home-two-doors__chip--yellow bw-home-two-doors__tag">YOUR GUIDE · YUSUF</span>
             </div>
             <div class="bw-home-two-doors__guide-copy">
