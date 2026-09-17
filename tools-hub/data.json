@@ -9432,6 +9432,42 @@
       ],
       "iconStatus": "live-wix-media",
       "cmsItemId": "af15e80f-75d3-4e2c-8d6d-672dc377fb13"
+    },
+    {
+      "slug": "berlin-airing-hours",
+      "title": "Berlin Airing Hours",
+      "lead": "Everyone in Berlin is told to air the flat three times a day, and for four months of the year that advice does almost nothing. What decides it is how much water Berlin's outdoor air is already carrying compared with the air in your room. This takes ten complete years of Deutscher Wetterdienst hourly readings for Berlin-Tempelhof, 87,116 measured hours, and draws every month against every hour of the day: dark green where opening the window strips five grams of water from each cubic metre, orange and red where it puts water back in. Pick the room you are standing in, from a warm living room to a cold cellar, and the whole grid redraws around it.",
+      "category": "Weather",
+      "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/berlin-airing-hours/",
+      "embedHeight": 1010,
+      "image": "https://static.wixstatic.com/media/5a08a3_55c2cab68cda480caacbc9363c6e9311~mv2.png",
+      "hubCategory": "WeatherOutdoor",
+      "type": "Guide",
+      "priority": 3,
+      "tags": [
+        "damp",
+        "mould",
+        "schimmel",
+        "lueften",
+        "airing",
+        "humidity",
+        "altbau",
+        "winter",
+        "living in berlin",
+        "condensation"
+      ],
+      "aliases": [
+        "mould in berlin flats",
+        "when to air a berlin flat",
+        "lueften berlin",
+        "berlin humidity by month",
+        "damp berlin apartment",
+        "stosslueften berlin",
+        "berlin condensation window",
+        "schimmel wohnung berlin"
+      ],
+      "iconStatus": "live-wix-media",
+      "cmsItemId": "daa3cdad-0c8c-4ed8-a459-1a50d9c33d8d"
     }
   ],
   "hubCategories": [

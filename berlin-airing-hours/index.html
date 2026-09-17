@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Berlin Airing Hours</title>
+<link rel="stylesheet" href="../css/brand.css">
+<style>
+  :root {
+    --green: #1B5E20; --deep: #123D18; --yellow: #FFE600; --lime: #7CB342;
+    --soft: #C5E1A5; --pale: #E8F2DA; --cream: #FAFAF5; --ink: #212121;
+    --muted: #5a665b; --line: rgba(27, 94, 32, .18);
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--cream); color: var(--ink); }
+  .ah { max-width: 820px; margin: 0 auto; padding: 14px 12px 16px; }
+  .ah-head h2 { font-size: 1.06rem; margin: 0 0 4px; color: var(--green); }
+  .ah-head p { margin: 0; font-size: .78rem; color: var(--muted); line-height: 1.55; }
+
+  .ah-rooms { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; }
+  .ah-rooms button {
+    flex: 1 1 130px; font-family: inherit; font-size: .64rem; font-weight: 700; letter-spacing: .03em;
+    padding: 8px 7px; border-radius: 8px; cursor: pointer; line-height: 1.35;
+    border: 1px solid var(--green); background: #fff; color: var(--green); text-align: left;
+  }
+  .ah-rooms button b { display: block; font-size: .7rem; letter-spacing: 0; }
+  .ah-rooms button[aria-current="true"] { background: var(--green); color: #fff; }
+  .ah-rooms button:focus-visible, .ah-plot svg:focus-visible { outline: 3px solid var(--yellow); outline-offset: 2px; }
+
+  .ah-plot { margin-top: 11px; background: #fff; border: 1px solid var(--line); border-radius: 10px; padding: 11px 10px 9px; }
+  .ah-plot svg { display: block; width: 100%; height: auto; touch-action: manipulation; }
+  .ah-cell { cursor: pointer; }
+  .ah-key { display: flex; flex-wrap: wrap; gap: 5px 14px; margin-top: 9px; font-size: .63rem; color: var(--muted); }
+  .ah-key i { display: inline-block; width: 12px; height: 12px; border-radius: 2px; vertical-align: -2px; margin-right: 5px; border: 1px solid rgba(0,0,0,.12); }
+  .ah-hint { font-size: .63rem; color: var(--muted); margin: 7px 0 0; line-height: 1.5; }
+
+  .ah-out { margin-top: 12px; border-radius: 10px; background: var(--deep); color: #fff; padding: 13px 14px 14px; }
+  .ah-out .when { font-size: .64rem; letter-spacing: .07em; text-transform: uppercase; color: var(--soft); }
+  .ah-out .big { font-size: 1.5rem; font-weight: 800; line-height: 1.15; color: var(--yellow); margin-top: 5px; }
+  .ah-out .big span { font-size: .78rem; font-weight: 600; color: #fff; display: block; margin-top: 6px; line-height: 1.5; }
+  .ah-cells { display: flex; flex-wrap: wrap; gap: 10px 20px; margin-top: 12px; padding-top: 11px; border-top: 1px solid rgba(255,255,255,.2); }
+  .ah-cells .cell { min-width: 132px; }
+  .ah-cells .v { font-size: 1rem; font-weight: 700; color: var(--yellow); }
+  .ah-cells .k { font-size: .63rem; color: rgba(255,255,255,.85); line-height: 1.45; margin-top: 2px; }
+  .ah-move { margin-top: 12px; padding: 11px 12px; border-radius: 9px; background: var(--yellow); color: var(--deep); font-size: .76rem; line-height: 1.55; font-weight: 600; }
+  .ah-foot { margin-top: 11px; font-size: .62rem; color: var(--muted); line-height: 1.55; }
+  .ah-foot a { color: var(--green); }
+  .ah-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+</style>
+</head>
+<body>
+<div class="ah">
+  <div class="ah-head">
+    <h2>Berlin airing hours</h2>
+    <p>Ten years of Berlin's own hourly weather, asked one question: at this hour, in this month, does opening the window pull water out of the room or push more in. Pick the room you are standing in, then tap any square.</p>
+  </div>
+
+  <div class="ah-rooms" id="ah-rooms" role="group" aria-label="Which room"></div>
+
+  <div class="ah-plot">
+    <svg id="ah-svg" viewBox="0 0 700 330" role="img" tabindex="0" aria-describedby="ah-svg-desc"></svg>
+    <p id="ah-svg-desc" class="ah-sr">A grid of twelve months by twenty four hours. Each square shows how many grams of water one cubic metre of Berlin outdoor air can take out of this room at that hour. Use the arrow keys to move, or tap a square.</p>
+    <div class="ah-key">
+      <span><i style="background:#1B5E20"></i>4 g/m&sup3; or more removed</span>
+      <span><i style="background:#7CB342"></i>2 to 4 g</span>
+      <span><i style="background:#C5E1A5"></i>0.5 to 2 g</span>
+      <span><i style="background:#F2EFD9"></i>under 0.5 g, airing does nothing</span>
+      <span><i style="background:#E0A33B"></i>the air you let in is wetter</span>
+      <span><i style="background:#C0392B"></i>much wetter, 1 g or more added</span>
+    </div>
+    <p class="ah-hint">The ring marks the hour you are reading this. Squares are ten year averages, so a wet week sits worse than its square and a dry one better.</p>
+  </div>
+
+  <div class="ah-out" id="ah-out" aria-live="polite"></div>
+  <p class="ah-foot">
+    Built from <a href="https://opendata.dwd.de/climate_environment/CDC/observations_germany/climate/hourly/air_temperature/" target="_blank" rel="noopener">Deutscher Wetterdienst Climate Data Center</a> hourly temperature and humidity for Berlin-Tempelhof, station 433, ten complete years from 2016 to 2025, 87,116 measured hours. Data licence GeoNutzV. Averages describe a normal Berlin year, not today's weather.
+  </p>
+</div>
+<script src="../js/brand.js"></script>
+<script>
+(function () {
+  'use strict';
+  var MON = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+  var MONS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  var ROOMS = [
+    { id: 'living', name: 'Living room', sub: '20 &deg;C, 60% humidity', t: 20, rh: 60, vol: 60 },
+    { id: 'bedroom', name: 'Bedroom at 07:00', sub: '17 &deg;C, 70%', t: 17, rh: 70, vol: 40 },
+    { id: 'bath', name: 'After a shower', sub: '22 &deg;C, 85%', t: 22, rh: 85, vol: 12 },
+    { id: 'back', name: 'Cold back room', sub: '16 &deg;C, 65%', t: 16, rh: 65, vol: 35 },
+    { id: 'cellar', name: 'Cellar', sub: '12 &deg;C, 75%', t: 12, rh: 75, vol: 30 }
+  ];
+  var data = null, room = ROOMS[0], selM = 0, selH = 12;
+  var svg = document.getElementById('ah-svg');
+  var roomsBox = document.getElementById('ah-rooms');
+  var outBox = document.getElementById('ah-out');
+
+  function es(T) { return 6.112 * Math.exp(17.67 * T / (T + 243.5)); }
+  function ah(T, RH) { return 216.7 * (RH / 100 * es(T)) / (T + 273.15); }
+  function tempForRh(T, RH, target) {
+    var e = RH / 100 * es(T), want = e / (target / 100);
+    var lo = -30, hi = 60, mid;
+    for (var i = 0; i < 60; i++) { mid = (lo + hi) / 2; if (es(mid) < want) lo = mid; else hi = mid; }
+    return (lo + hi) / 2;
+  }
+  function colour(g) {
+    if (g >= 4) return '#1B5E20';
+    if (g >= 2) return '#7CB342';
+    if (g >= 0.5) return '#C5E1A5';
+    if (g >= -0.001) return '#F2EFD9';
+    if (g > -1) return '#E0A33B';
+    return '#C0392B';
+  }
+  function fmt(n, d) { return (Math.round(n * Math.pow(10, d)) / Math.pow(10, d)).toFixed(d); }
+
+  function berlinNow() {
+    var s = new Intl.DateTimeFormat('en-GB', { timeZone: 'Europe/Berlin', month: 'numeric', hour: 'numeric', hour12: false }).formatToParts(new Date());
+    var m = 9, h = 12;
+    for (var i = 0; i < s.length; i++) {
+      if (s[i].type === 'month') m = parseInt(s[i].value, 10);
+      if (s[i].type === 'hour') h = parseInt(s[i].value, 10) % 24;
+    }
+    return { m: m - 1, h: h };
+  }
+
+  function drawRooms() {
+    var html = '';
+    for (var i = 0; i < ROOMS.length; i++) {
+      html += '<button type="button" data-i="' + i + '" aria-current="' + (ROOMS[i].id === room.id) + '">' +
+        '<b>' + ROOMS[i].name + '</b>' + ROOMS[i].sub + '</button>';
+    }
+    roomsBox.innerHTML = html;
+  }
+
+  function draw() {
+    var L = 46, T = 26, CW = 26, CH = 22;
+    var inside = ah(room.t, room.rh);
+    var parts = '';
+    for (var h = 0; h < 24; h += 3) {
+      parts += '<text x="' + (L + h * CW + CW / 2) + '" y="18" text-anchor="middle" font-size="11" fill="#5a665b">' + (h < 10 ? '0' + h : h) + '</text>';
+    }
+    for (var m = 0; m < 12; m++) {
+      parts += '<text x="' + (L - 8) + '" y="' + (T + m * CH + CH / 2 + 4) + '" text-anchor="end" font-size="11" fill="#5a665b">' + MONS[m] + '</text>';
+      for (var k = 0; k < 24; k++) {
+        var g = inside - data.months[m].ah[k];
+        var x = L + k * CW, y = T + m * CH;
+        parts += '<rect class="ah-cell" data-m="' + m + '" data-h="' + k + '" x="' + x + '" y="' + y + '" width="' + (CW - 1.5) + '" height="' + (CH - 1.5) + '" rx="2" fill="' + colour(g) + '"><title>' + MON[m] + ', ' + (k < 10 ? '0' + k : k) + ':00, ' + fmt(g, 1) + ' g per cubic metre</title></rect>';
+      }
+    }
+    var sx = L + selH * CW - 1.5, sy = T + selM * CH - 1.5;
+    parts += '<rect x="' + sx + '" y="' + sy + '" width="' + (CW + 1.5) + '" height="' + (CH + 1.5) + '" rx="3" fill="none" stroke="#123D18" stroke-width="2.5"/>';
+    var nw = berlinNow();
+    parts += '<circle cx="' + (L + nw.h * CW + CW / 2 - 0.75) + '" cy="' + (T + nw.m * CH + CH / 2 - 0.75) + '" r="6.5" fill="none" stroke="#FFE600" stroke-width="2.5"/>';
+    parts += '<text x="' + L + '" y="322" font-size="11" fill="#5a665b">Hour of the day in Berlin, 00 to 23</text>';
+    svg.innerHTML = parts;
+    var cells = svg.querySelectorAll('.ah-cell');
+    for (var c = 0; c < cells.length; c++) cells[c].onclick = onCell;
+  }
+
+  function onCell(ev) {
+    selM = parseInt(ev.currentTarget.getAttribute('data-m'), 10);
+    selH = parseInt(ev.currentTarget.getAttribute('data-h'), 10);
+    draw(); report();
+  }
+
+  function report() {
+    var inside = ah(room.t, room.rh);
+    var outside = data.months[selM].ah[selH];
+    var g = inside - outside;
+    var litres = g * room.vol / 1000;
+    var dew = tempForRh(room.t, room.rh, 100);
+    var risk = tempForRh(room.t, room.rh, 80);
+    var arrived = outside / (216.7 * es(room.t) / (room.t + 273.15)) * 100;
+    var head, sub, move;
+    if (g >= 4) {
+      head = fmt(g, 1) + ' g of water leaves every cubic metre';
+      sub = 'This is the part of the year when a window earns its keep. Five minutes with two windows open across the flat, then shut them and let the radiators bring the room back.';
+      move = 'Open wide, both sides of the flat, five minutes, then close. Tilting the window instead does a fraction of this and chills the reveal where mould starts.';
+    } else if (g >= 2) {
+      head = fmt(g, 1) + ' g leaves every cubic metre';
+      sub = 'Airing works, at roughly half the rate it manages in January. Leave the windows open a little longer than the winter habit and it still clears the room.';
+      move = 'Same wide open windows, closer to ten minutes than five, and check the row for a paler hour before you bother.';
+    } else if (g >= 0.5) {
+      head = 'Only ' + fmt(g, 1) + ' g leaves every cubic metre';
+      sub = 'The window is down to about a tenth of its midwinter work. It will not dry a room that is already damp, it will only stop it getting worse.';
+      move = 'Look along this row for the darkest square, open then, and stop trusting the window as your only way of getting water out.';
+    } else if (g >= 0) {
+      head = 'Under half a gram moves';
+      sub = 'Outdoor air is carrying nearly as much water as your room. The window changes the temperature, not the dampness.';
+      move = 'Stop counting on the window at this hour. Cut the source instead: lid on the pan, extractor on, and wet laundry out of the flat.';
+    } else {
+      head = fmt(-g, 1) + ' g of water comes in per cubic metre';
+      sub = 'Berlin air at this hour is wetter than your room. Opening up now adds water to the walls instead of taking it away.';
+      move = 'Keep it shut at this hour. Look for the darkest square in this row, usually mid afternoon in summer, and air then.';
+    }
+    var lit = litres >= 0
+      ? 'One full change of this ' + room.vol + ' m&sup3; room takes out about ' + fmt(litres * 1000, 0) + ' g.'
+      : 'One full change puts about ' + fmt(-litres * 1000, 0) + ' g in.';
+    outBox.innerHTML =
+      '<div class="when">' + MON[selM] + ', ' + (selH < 10 ? '0' + selH : selH) + ':00 &middot; ' + room.name.toLowerCase() + '</div>' +
+      '<div class="big">' + head + '<span>' + sub + ' ' + lit + '</span></div>' +
+      '<div class="ah-cells">' +
+        '<div class="cell"><div class="v">' + fmt(data.months[selM].t[selH], 1) + ' &deg;C</div><div class="k">Berlin outdoors, ten year average for this hour</div></div>' +
+        '<div class="cell"><div class="v">' + fmt(data.months[selM].rh[selH], 0) + '%</div><div class="k">outdoor humidity, which is why it misleads: ' + fmt(arrived, 0) + '% once that air warms to ' + fmt(room.t, 0) + ' &deg;C</div></div>' +
+        '<div class="cell"><div class="v">' + fmt(risk, 1) + ' &deg;C</div><div class="k">any wall surface colder than this sits at 80% humidity, where mould grows</div></div>' +
+        '<div class="cell"><div class="v">' + fmt(dew, 1) + ' &deg;C</div><div class="k">and only here does water actually show on the glass</div></div>' +
+      '</div>' +
+      '<div class="ah-move">' + move + '</div>';
+  }
+
+  function onKey(ev) {
+    var k = ev.key, moved = true;
+    if (k === 'ArrowLeft') selH = (selH + 23) % 24;
+    else if (k === 'ArrowRight') selH = (selH + 1) % 24;
+    else if (k === 'ArrowUp') selM = (selM + 11) % 12;
+    else if (k === 'ArrowDown') selM = (selM + 1) % 12;
+    else moved = false;
+    if (moved) { ev.preventDefault(); draw(); report(); }
+  }
+
+  function onRoom(ev) {
+    var b = ev.target.closest ? ev.target.closest('button[data-i]') : null;
+    if (!b) return;
+    room = ROOMS[parseInt(b.getAttribute('data-i'), 10)];
+    drawRooms(); draw(); report();
+  }
+
+  fetch('data.json', { cache: 'default' }).then(function (r) { return r.json(); }).then(function (j) {
+    data = j;
+    var nw = berlinNow();
+    selM = nw.m; selH = nw.h;
+    drawRooms(); draw(); report();
+    roomsBox.onclick = onRoom;
+    svg.onkeydown = onKey;
+  }).catch(function () {
+    outBox.innerHTML = '<div class="big">The weather record did not load<span>Reload the page and it should come back.</span></div>';
+  });
+})();
+</script>
+</body>
+</html>
