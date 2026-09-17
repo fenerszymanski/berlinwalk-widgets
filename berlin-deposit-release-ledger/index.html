@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Berlin Deposit Release Ledger</title>
+<link rel="stylesheet" href="../css/brand.css">
+<style>
+  :root {
+    --green: #1B5E20;
+    --deep: #123D18;
+    --yellow: #FFE600;
+    --lime: #7CB342;
+    --soft: #C5E1A5;
+    --cream: #FAFAF5;
+    --ink: #212121;
+    --muted: #5a665b;
+    --line: rgba(27, 94, 32, .18);
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--cream); color: var(--ink); }
+  .dl { max-width: 780px; margin: 0 auto; padding: 14px 12px 16px; }
+
+  .dl-head h2 { font-size: 1.06rem; margin: 0 0 3px; color: var(--green); }
+  .dl-head p { margin: 0; font-size: .78rem; color: var(--muted); line-height: 1.5; }
+
+  .dl-box { margin-top: 12px; padding: 11px 12px; background: #fff; border: 1px solid var(--line); border-radius: 10px; }
+  .dl-fields { display: flex; flex-wrap: wrap; gap: 10px 14px; }
+  .dl-fields div { flex: 1 1 148px; min-width: 130px; }
+  label { font-size: .61rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--deep); display: block; margin-bottom: 5px; }
+  input, select {
+    font-family: inherit; font-size: .92rem; font-weight: 700; color: var(--deep);
+    width: 100%; padding: 7px 8px; border: 1px solid var(--green); border-radius: 8px; background: #fff;
+  }
+  input:focus-visible, select:focus-visible, button:focus-visible { outline: 3px solid var(--yellow); outline-offset: 1px; }
+
+  .dl-claims h3 { font-size: .63rem; letter-spacing: .07em; text-transform: uppercase; color: var(--deep); margin: 0 0 7px; }
+  .dl-add { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 9px; }
+  .dl-add button {
+    font-family: inherit; font-size: .71rem; font-weight: 700; cursor: pointer;
+    padding: 6px 11px; border-radius: 999px; border: 1px dashed var(--green);
+    background: #fff; color: var(--deep);
+  }
+  .dl-rows { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
+  .dl-rows li { display: flex; align-items: center; gap: 8px; padding: 7px 8px 7px 10px; border: 1px solid var(--line); border-radius: 9px; background: var(--cream); }
+  .dl-rows .nm { flex: 1 1 auto; font-size: .74rem; font-weight: 600; color: var(--deep); line-height: 1.35; }
+  .dl-rows .nm small { display: block; font-weight: 500; font-size: .63rem; color: var(--muted); }
+  .dl-rows input { width: 86px; flex: 0 0 auto; font-size: .82rem; padding: 5px 6px; }
+  .dl-rows .rm {
+    flex: 0 0 auto; font-family: inherit; font-size: .85rem; line-height: 1; cursor: pointer;
+    width: 26px; height: 26px; border-radius: 7px; border: 1px solid var(--line); background: #fff; color: var(--muted);
+  }
+  .dl-empty { margin: 0; font-size: .72rem; color: var(--muted); line-height: 1.5; }
+
+  .dl-chart { margin-top: 12px; background: #fff; border: 1px solid var(--line); border-radius: 10px; padding: 10px 6px 6px; }
+  .dl-chart svg { display: block; width: 100%; height: auto; }
+  .dl-chart text { font-family: 'Montserrat', sans-serif; }
+
+  .dl-legend { display: flex; flex-wrap: wrap; gap: 6px 14px; margin: 9px 6px 2px; font-size: .66rem; color: var(--muted); }
+  .dl-legend span { display: inline-flex; align-items: center; gap: 5px; }
+  .dl-key { width: 15px; height: 10px; border-radius: 2px; display: inline-block; border: 1px solid rgba(0,0,0,.14); }
+
+  .dl-nav { display: flex; align-items: center; gap: 8px; margin-top: 12px; }
+  .dl-nav button {
+    font-family: inherit; font-size: .76rem; font-weight: 700; cursor: pointer;
+    padding: 9px 14px; border-radius: 8px; border: 1px solid var(--green);
+    background: var(--green); color: #fff;
+  }
+  .dl-nav button[disabled] { opacity: .38; cursor: default; }
+  .dl-nav .dl-count { font-size: .67rem; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); margin-left: auto; font-weight: 700; }
+
+  .dl-stage { margin-top: 10px; padding: 13px 14px; border-radius: 10px; background: var(--deep); color: #fff; }
+  .dl-stage .when { display: block; font-size: 1.28rem; font-weight: 700; line-height: 1.1; color: var(--yellow); }
+  .dl-stage .what { display: block; font-size: .61rem; letter-spacing: .07em; text-transform: uppercase; color: rgba(255,255,255,.66); margin-top: 3px; }
+  .dl-stage .run { display: block; margin-top: 10px; font-size: 1.05rem; font-weight: 700; color: #fff; line-height: 1.3; }
+  .dl-stage .run b { color: var(--yellow); }
+  .dl-stage h3 { font-size: .93rem; margin: 10px 0 5px; color: #fff; }
+  .dl-stage p { margin: 0 0 8px; font-size: .78rem; line-height: 1.6; color: rgba(255,255,255,.92); }
+  .dl-stage p:last-child { margin-bottom: 0; }
+  .dl-stage .move { color: var(--yellow); font-weight: 600; }
+  .dl-stage .law { font-size: .65rem; color: rgba(255,255,255,.6); }
+
+  .dl-foot { margin: 11px 2px 0; font-size: .68rem; color: var(--muted); line-height: 1.6; }
+  .dl-foot b { color: var(--deep); }
+</style>
+</head>
+<body>
+<div class="dl">
+  <div class="dl-head">
+    <h2>Berlin deposit release ledger</h2>
+    <p>Put in the day you handed the keys back, what you paid, and every euro the landlord says they are keeping. Then step through the four dates and watch which of those claims the calendar kills.</p>
+  </div>
+
+  <div class="dl-box">
+    <div class="dl-fields">
+      <div>
+        <label for="dl-date">Keys handed back</label>
+        <input type="date" id="dl-date">
+      </div>
+      <div>
+        <label for="dl-paid">Deposit you paid</label>
+        <input type="number" id="dl-paid" min="0" max="50000" step="10" value="1860">
+      </div>
+      <div>
+        <label for="dl-period">Service-charge year ends</label>
+        <select id="dl-period">
+          <option value="12" selected>31 December</option>
+          <option value="3">31 March</option>
+          <option value="6">30 June</option>
+          <option value="9">30 September</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <div class="dl-box dl-claims">
+    <h3>What is being kept back</h3>
+    <div class="dl-add">
+      <button type="button" data-kind="damage">+ Damage or repairs</button>
+      <button type="button" data-kind="reserve">+ Service-charge reserve</button>
+      <button type="button" data-kind="rent">+ Unpaid rent</button>
+    </div>
+    <ul class="dl-rows" id="dl-rows"></ul>
+    <p class="dl-empty" id="dl-empty"></p>
+  </div>
+
+  <div class="dl-chart">
+    <svg id="dl-svg" viewBox="0 0 720 214" role="img" aria-label="Timeline plotting how much of a Berlin rental deposit is released on each of the four dates"></svg>
+  </div>
+  <div class="dl-legend">
+    <span><i class="dl-key" style="background:#FFE600"></i> released to you</span>
+    <span><i class="dl-key" style="background:#7CB342"></i> lawfully still held</span>
+    <span><i class="dl-key" style="background:#123D18"></i> under review, nothing decided</span>
+    <span><i class="dl-key" style="background:#D6D9D2"></i> too late to claim</span>
+  </div>
+
+  <div class="dl-nav">
+    <button type="button" id="dl-back">Back</button>
+    <button type="button" id="dl-next">Next date</button>
+    <span class="dl-count" id="dl-count"></span>
+  </div>
+
+  <div class="dl-stage" id="dl-stage" aria-live="polite"></div>
+
+  <p class="dl-foot" id="dl-foot"></p>
+</div>
+
+<script src="../js/brand.js"></script>
+<script>
+(function () {
+  var MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+  var dateEl = document.getElementById('dl-date');
+  var paidEl = document.getElementById('dl-paid');
+  var periodEl = document.getElementById('dl-period');
+  var rowsEl = document.getElementById('dl-rows');
+  var emptyEl = document.getElementById('dl-empty');
+  var svg = document.getElementById('dl-svg');
+  var stageEl = document.getElementById('dl-stage');
+  var footEl = document.getElementById('dl-foot');
+  var countEl = document.getElementById('dl-count');
+  var backEl = document.getElementById('dl-back');
+  var nextEl = document.getElementById('dl-next');
+
+  var stageIndex = 0;
+  var claims = [];
+  var nextId = 1;
+
+  var KINDS = {
+    damage: { label: 'Damage or repairs', note: 'time-barred six months after the flat came back', freedAt: 1, start: 400 },
+    reserve: { label: 'Service-charge reserve', note: 'may be held until the statement is due', freedAt: 2, start: 260 },
+    rent: { label: 'Unpaid rent', note: 'survives all four dates, three-year limitation', freedAt: 99, start: 300 }
+  };
+
+  function today() { var n = new Date(); return new Date(Date.UTC(n.getFullYear(), n.getMonth(), n.getDate())); }
+  function addMonths(d, n) {
+    var y = d.getUTCFullYear(), m = d.getUTCMonth() + n, day = d.getUTCDate();
+    var last = new Date(Date.UTC(y, m + 1, 0)).getUTCDate();
+    return new Date(Date.UTC(y, m, Math.min(day, last)));
+  }
+  function fmt(d) { return d.getUTCDate() + ' ' + MONTHS[d.getUTCMonth()] + ' ' + d.getUTCFullYear(); }
+  function shortFmt(d) { return MONTHS[d.getUTCMonth()].slice(0, 3) + ' ' + String(d.getUTCFullYear()).slice(2); }
+  function euro(n) { return '€' + Math.round(n).toLocaleString('en-GB'); }
+
+  function readDate() {
+    var v = dateEl.value; if (!v) return null;
+    var p = v.split('-');
+    var d = new Date(Date.UTC(Number(p[0]), Number(p[1]) - 1, Number(p[2])));
+    return isNaN(d.getTime()) ? null : d;
+  }
+
+  /** The four dates, from the handover and the service-charge year. */
+  function model() {
+    var handover = readDate() || today();
+    var endMonth = Number(periodEl.value);
+    var damage = addMonths(handover, 6);
+    var y = handover.getUTCFullYear();
+    var periodEnd = new Date(Date.UTC(y, endMonth, 0));
+    if (periodEnd < handover) periodEnd = new Date(Date.UTC(y + 1, endMonth, 0));
+    var statement = addMonths(periodEnd, 12);
+    var ownClock = new Date(Date.UTC(statement.getUTCFullYear() + 3, 11, 31));
+    return { handover: handover, damage: damage, statement: statement, ownClock: ownClock, periodEnd: periodEnd };
+  }
+
+  function paid() { return Math.max(0, Number(paidEl.value) || 0); }
+  function claimed() { return claims.reduce(function (a, c) { return a + (Number(c.amount) || 0); }, 0); }
+
+  /** Euros released by the end of stage i: the free part plus every claim the calendar has killed. */
+  function releasedAt(i) {
+    var free = Math.max(0, paid() - claimed());
+    var dead = claims.reduce(function (a, c) {
+      return a + (KINDS[c.kind].freedAt <= i ? (Number(c.amount) || 0) : 0);
+    }, 0);
+    return i === 0 ? 0 : Math.min(paid(), free + dead);
+  }
+
+  var STAGES = [
+    { key: 'handover', what: 'Date 1 of 4: the clock starts',
+      head: 'The day the keys change hands',
+      body: 'Handing the flat back starts the one clock your landlord cannot stretch, and it is the day every later date is measured from. Nothing is released yet: the law gives them a reasonable window to work out what they still want, and until they itemise it, the whole sum sits under review.',
+      move: 'My move: walk the flat together, write the meter readings and every mark into a handover protocol, both sign it, and photograph each room before you lock up.',
+      law: 'A signed handover protocol is not required by law. It is simply the document that decides the argument later.' },
+    { key: 'damage', what: 'Date 2 of 4: damage claims expire',
+      head: 'Six months after the keys',
+      body: 'A landlord’s claims for changes or damage to the flat are time-barred six months after the flat comes back. A scratched floor or a wall in the wrong colour cannot be taken out of your deposit after this date, whatever the letter says. Courts also treat roughly this point as the end of the normal review window, although the Federal Court of Justice has said the circumstances of a case can stretch it.',
+      move: 'My move: if this date passes with no itemised deduction and no money, write once, name the date, and ask for the rest by a set day about two weeks out.',
+      law: '§ 548 (1) BGB, six months from the return of the flat. BGH VIII ZR 71/05 on the reasonable review window.' },
+    { key: 'statement', what: 'Date 3 of 4: the service-charge deadline',
+      head: 'Twelve months after your service-charge year ends',
+      body: 'This is the reason a landlord may sit on part of your money once the six months are up. The deposit also secures the service-charge bill nobody has drawn up yet, so an appropriate part of it can be held until that statement is due. On this date the window shuts, and a statement that lands later can no longer be used to claim money from you unless the delay genuinely was not the landlord’s fault.',
+      move: 'My move: keep the reserve honest, and treat this date as payday. It has to relate to what your own past statements actually came to, not to a round number the landlord likes.',
+      law: '§ 556 (3) BGB, twelve months after the end of the accounting period. BGH VIII ZR 71/05 allows an appropriate part to be held until then.' },
+    { key: 'ownClock', what: 'Date 4 of 4: your own deadline',
+      head: 'The last day the money is worth chasing',
+      body: 'This one is not the landlord’s deadline, it is yours. A claim on the deposit runs out three years after the end of the year in which it fell due, and a claim nobody ever wrote down is the easiest kind to lose. From date 3 the money is simply yours, interest included, because the interest was always yours. After this date a court will not help you get it back.',
+      move: 'My move: do not let it drift this far. Send a dated demand with your account details, give a fortnight, and if it is ignored take it to the Amtsgericht for the district the flat sits in.',
+      law: '§§ 195, 199 BGB, three years from the end of the year the claim fell due. § 551 (3) BGB on separate investment and interest. § 29a (1) ZPO on which court hears it.' }
+  ];
+
+  function ns(name, attrs) {
+    var el = document.createElementNS('http://www.w3.org/2000/svg', name);
+    for (var k in attrs) el.setAttribute(k, attrs[k]);
+    return el;
+  }
+
+  function draw(m) {
+    while (svg.firstChild) svg.removeChild(svg.firstChild);
+    var W = 720, L = 30, Rr = 26, top = 44, H = 74;
+    var wide = W - L - Rr;
+    var t0 = m.handover.getTime(), tEnd = addMonths(m.ownClock, 3).getTime();
+    var x = function (d) { return L + wide * ((d.getTime() - t0) / (tEnd - t0)); };
+    var axisY = top + H + 26;
+    var cap = Math.max(paid(), 1);
+
+    var tick = new Date(Date.UTC(m.handover.getUTCFullYear(), m.handover.getUTCMonth() + 1, 1));
+    while (tick.getTime() < tEnd) {
+      var tx = x(tick);
+      svg.appendChild(ns('line', { x1: tx, y1: axisY - 4, x2: tx, y2: axisY + 4, stroke: '#c9d2c6', 'stroke-width': 1 }));
+      if (tick.getUTCMonth() === 0) {
+        svg.appendChild(ns('line', { x1: tx, y1: top - 4, x2: tx, y2: axisY + 4, stroke: '#e2e7df', 'stroke-width': 1 }));
+        var yl = ns('text', { x: tx + 3, y: axisY + 15, 'font-size': 10, fill: '#7d877c' });
+        yl.textContent = tick.getUTCFullYear();
+        svg.appendChild(yl);
+      }
+      tick = new Date(Date.UTC(tick.getUTCFullYear(), tick.getUTCMonth() + 1, 1));
+    }
+    svg.appendChild(ns('line', { x1: L, y1: axisY, x2: W - Rr, y2: axisY, stroke: '#aab5a8', 'stroke-width': 1.5 }));
+
+    var edges = [x(m.handover), x(m.damage), x(m.statement), x(m.ownClock), W - Rr];
+    for (var i = 0; i < 4; i++) {
+      var x0 = edges[i], x1 = Math.max(edges[i] + 2, edges[i + 1]);
+      var rel = releasedAt(i);
+      var relH = H * (rel / cap);
+      if (i === 0) {
+        svg.appendChild(ns('rect', { x: x0, y: top, width: x1 - x0, height: H, fill: '#123D18', rx: 2 }));
+      } else if (i === 3) {
+        svg.appendChild(ns('rect', { x: x0, y: top, width: x1 - x0, height: H, fill: '#D6D9D2', rx: 2 }));
+      } else {
+        svg.appendChild(ns('rect', { x: x0, y: top, width: x1 - x0, height: H - relH, fill: '#7CB342', rx: 2 }));
+        if (relH > 0.5) svg.appendChild(ns('rect', { x: x0, y: top + H - relH, width: x1 - x0, height: relH, fill: '#FFE600', rx: 2 }));
+      }
+      if (i === stageIndex) {
+        svg.appendChild(ns('rect', { x: x0, y: top - 3, width: x1 - x0, height: H + 6, fill: 'none', stroke: '#1B5E20', 'stroke-width': 2.4, rx: 4 }));
+      }
+    }
+
+    var marks = [
+      { x: edges[0], d: m.handover, n: '1' }, { x: edges[1], d: m.damage, n: '2' },
+      { x: edges[2], d: m.statement, n: '3' }, { x: edges[3], d: m.ownClock, n: '4' }
+    ];
+    for (var j = 0; j < marks.length; j++) {
+      var mk = marks[j], on = j === stageIndex;
+      svg.appendChild(ns('circle', { cx: mk.x, cy: top + H + 1, r: on ? 10 : 7, fill: on ? '#FFE600' : '#ffffff', stroke: '#1B5E20', 'stroke-width': on ? 2.4 : 1.8 }));
+      var num = ns('text', { x: mk.x, y: top + H + 5, 'font-size': on ? 11 : 9, 'font-weight': 700, fill: '#123D18', 'text-anchor': 'middle' });
+      num.textContent = mk.n;
+      svg.appendChild(num);
+      var anchor = mk.x < 62 ? 'start' : (mk.x > W - 74 ? 'end' : 'middle');
+      var lab = ns('text', { x: mk.x, y: top - 12, 'font-size': on ? 12 : 10.5, 'font-weight': on ? 700 : 600, fill: on ? '#1B5E20' : '#7d877c', 'text-anchor': anchor });
+      lab.textContent = shortFmt(mk.d);
+      svg.appendChild(lab);
+    }
+
+    var own = ns('text', { x: W - Rr, y: axisY + 32, 'font-size': 10, fill: '#7d877c', 'text-anchor': 'end' });
+    own.textContent = 'grey band: the money is still yours, a court will no longer help you get it';
+    svg.appendChild(own);
+  }
+
+  function drawRows() {
+    while (rowsEl.firstChild) rowsEl.removeChild(rowsEl.firstChild);
+    for (var i = 0; i < claims.length; i++) {
+      (function (c) {
+        var k = KINDS[c.kind];
+        var li = document.createElement('li');
+        var nm = document.createElement('span');
+        nm.className = 'nm';
+        nm.innerHTML = k.label + '<small>' + k.note + '</small>';
+        var inp = document.createElement('input');
+        inp.type = 'number'; inp.min = '0'; inp.max = '50000'; inp.step = '10'; inp.value = c.amount;
+        inp.setAttribute('aria-label', k.label + ' amount in euro');
+        inp.addEventListener('input', function () { c.amount = Math.max(0, Number(inp.value) || 0); render(); });
+        var rm = document.createElement('button');
+        rm.type = 'button'; rm.className = 'rm'; rm.textContent = '×';
+        rm.setAttribute('aria-label', 'Remove ' + k.label);
+        rm.addEventListener('click', function () {
+          claims = claims.filter(function (o) { return o.id !== c.id; });
+          render();
+        });
+        li.appendChild(nm); li.appendChild(inp); li.appendChild(rm);
+        rowsEl.appendChild(li);
+      })(claims[i]);
+    }
+    var over = claimed() > paid();
+    emptyEl.innerHTML = claims.length === 0
+      ? 'Nothing listed, so the whole deposit is simply waiting on the calendar.'
+      : (over
+        ? 'The claims add up to <b>' + euro(claimed()) + '</b>, more than the deposit itself. A landlord can keep a deposit, but anything beyond it they have to come and ask you for.'
+        : 'Claimed against the deposit: <b>' + euro(claimed()) + '</b> of ' + euro(paid()) + '. The rest was never in dispute and should not be waiting on any of these dates.');
+  }
+
+  function render() {
+    var m = model();
+    drawRows();
+    draw(m);
+
+    var s = STAGES[stageIndex];
+    var rel = releasedAt(stageIndex);
+    stageEl.innerHTML =
+      '<span class="when">' + fmt(m[s.key]) + '</span>' +
+      '<span class="what">' + s.what + '</span>' +
+      '<span class="run">Free by this date: <b>' + euro(rel) + '</b> of ' + euro(paid()) + '</span>' +
+      '<h3>' + s.head + '</h3>' +
+      '<p>' + s.body + '</p>' +
+      '<p class="move">' + s.move + '</p>' +
+      '<p class="law">' + s.law + '</p>';
+
+    countEl.textContent = 'Date ' + (stageIndex + 1) + ' of ' + STAGES.length;
+    backEl.disabled = stageIndex === 0;
+    nextEl.disabled = stageIndex === STAGES.length - 1;
+    nextEl.textContent = stageIndex === STAGES.length - 1 ? 'Last date' : 'Next date';
+
+    var days = Math.round((m.statement.getTime() - m.handover.getTime()) / 86400000);
+    footEl.innerHTML = 'Keys to the last euro on this setting: <b>' + days + ' days</b>. That is the outer edge of the law, not a normal wait. Most Berlin landlords settle well inside it, and a deposit still sitting there on date 4 is one you have to ask for. These are the statutory limits, not advice on your own tenancy.';
+  }
+
+  var addButtons = document.querySelectorAll('.dl-add button');
+  for (var b = 0; b < addButtons.length; b++) {
+    addButtons[b].addEventListener('click', function () {
+      var kind = this.getAttribute('data-kind');
+      claims.push({ id: nextId++, kind: kind, amount: KINDS[kind].start });
+      render();
+    });
+  }
+  backEl.addEventListener('click', function () { if (stageIndex > 0) { stageIndex--; render(); } });
+  nextEl.addEventListener('click', function () { if (stageIndex < STAGES.length - 1) { stageIndex++; render(); } });
+  dateEl.addEventListener('change', render);
+  paidEl.addEventListener('input', render);
+  periodEl.addEventListener('change', render);
+
+  dateEl.value = addMonths(today(), -2).toISOString().slice(0, 10);
+  claims.push({ id: nextId++, kind: 'damage', amount: KINDS.damage.start });
+  claims.push({ id: nextId++, kind: 'reserve', amount: KINDS.reserve.start });
+  render();
+})();
+</script>
+</body>
+</html>

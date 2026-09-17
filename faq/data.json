@@ -12233,5 +12233,47 @@
         "a": "Both the Deutschlandticket and the VBB Umweltkarte are cancellable monthly, and the deadline is the 10th calendar day of the month for the subscription to end at the end of that month. Cancel on the 11th and you have bought another month. That single date is the only real deadline in the whole decision."
       }
     ]
+  },
+  "berlin-rental-deposit": {
+    "title": "Berlin Rental Deposit - FAQ",
+    "subtitle": "How much a Berlin landlord may take as a deposit, the six-month limit on damage claims, the service-charge reserve and its deadline, how long you have to chase the money, and what to do when nothing comes back.",
+    "items": [
+      {
+        "q": "How much deposit can a Berlin landlord ask for?",
+        "a": "At most three times the monthly rent without the service-charge advances, under § 551 (1) BGB. It is three times the cold rent, not three times what leaves your account. The Berliner Mietspiegel 2026, published on 28 May 2026, puts the median net cold rent at 7.71 euros per square metre, so a 60 square metre flat at the median means 462.60 euros cold rent and a lawful ceiling of 1,387.80 euros. Any clause that is worse for the tenant than the statute is void."
+      },
+      {
+        "q": "Can I pay the Berlin deposit in instalments?",
+        "a": "Yes. § 551 (2) BGB gives every tenant the right to pay a money deposit in three equal monthly instalments. The first falls due at the start of the tenancy and the other two with the following rent payments. Almost no Berlin agent offers this, and the right applies whether or not the contract mentions it."
+      },
+      {
+        "q": "How long can a landlord keep my deposit after I move out?",
+        "a": "There is no single statutory deadline, but there are two real limits. Claims for damage or alterations to the flat are time-barred six months after the flat is returned (§ 548 (1) BGB), and the Federal Court of Justice (VIII ZR 71/05) allows only an appropriate part of the deposit to be held beyond that, and only until the pending service-charge statement is due. Around six months is the usual yardstick for the review window, though the court said the circumstances of a case can stretch it."
+      },
+      {
+        "q": "Why is my landlord holding part of the deposit for the Nebenkosten?",
+        "a": "Because the deposit secures claims that are not yet due, including a service-charge bill that has not been drawn up. The Federal Court of Justice confirmed this in VIII ZR 71/05 and allowed an appropriate part to be retained where a back-payment is expected. The reserve has to relate to what your own past statements actually came to, and it ends when the statement falls due: § 556 (3) BGB gives the landlord twelve months after the end of the accounting period, and after that no back-payment can be claimed at all unless the delay was not the landlord's fault."
+      },
+      {
+        "q": "Does my Berlin deposit earn interest, and who gets it?",
+        "a": "You do. § 551 (3) BGB requires the landlord to hold the money at a bank, separately from their own assets, at the rate usual for savings deposits with three months' notice. The interest belongs to the tenant and increases the security. Student and youth halls are the one exception to the interest duty."
+      },
+      {
+        "q": "Can I just not pay the last two months of rent instead?",
+        "a": "No, and this is the most expensive mistake in the whole process. The deposit is security, not prepaid rent. Withholding rent is simply arrears, and arrears reaching two months' rent is a ground for termination without notice under § 543 (2) no. 3 BGB. You would hand your landlord a reason to end the tenancy and still owe the money."
+      },
+      {
+        "q": "How long do I have to claim my deposit back?",
+        "a": "Three years, running from the end of the calendar year in which the claim fell due, under the standard limitation rule in §§ 195 and 199 BGB. A deposit that became payable during 2027 can be chased until 31 December 2030. After that a court will not enforce it."
+      },
+      {
+        "q": "Where do I sue for a deposit in Berlin?",
+        "a": "At the Amtsgericht for the district the flat is in. § 29a (1) ZPO gives exclusive local jurisdiction to the court of the place where the rooms are, so it is not the court near where you live now. Before that, send one dated letter: state the handover date, say which deadlines have already passed, itemise what you accept, give your account details, and set a deadline about two weeks out."
+      },
+      {
+        "q": "What should I do on handover day to protect the deposit?",
+        "a": "Walk the flat with the landlord, write the meter readings and every existing mark into a handover protocol, and have both sides sign it. Photograph every room before you lock up. A protocol is not required by law, but it is the document that decides the argument months later, and the six-month clock on damage claims starts the day the flat comes back."
+      }
+    ]
   }
 }
