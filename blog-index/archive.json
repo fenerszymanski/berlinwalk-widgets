@@ -1,9 +1,26 @@
 {
-  "updatedAt": "2026-09-17T07:51:45.837Z",
+  "updatedAt": "2026-09-17T14:06:14.077Z",
   "source": "Wix Blog API",
-  "totalPosts": 394,
+  "totalPosts": 395,
   "bookingUrl": "https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based",
   "allPosts": [
+    {
+      "title": "Berlin Monthly Ticket: The City One Costs More Than the Whole Country",
+      "slug": "berlin-monthly-ticket",
+      "path": "/post/berlin-monthly-ticket",
+      "url": "https://www.berlinwalk.com/post/berlin-monthly-ticket",
+      "excerpt": "Most people in Berlin sorted out their transport ticket once and never looked again. The prices moved. A VBB Umweltkarte for Berlin AB costs 81.30 euros a month on a subscription and 113 without a contract, while the Deutschlandticket covers every local and regional service in the country for 63. Here is where the break-even sits against single tickets, and the two things the expensive local card does that the cheap national one cannot.",
+      "category": "Living in Berlin",
+      "categorySlug": "living-in-berlin",
+      "topic": "living-in-berlin",
+      "topicLabel": "Living in Berlin",
+      "readTime": "7 min read",
+      "publishedDate": "2026-09-17T14:03:57.756Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_4cf948e50ed7414bab0e1fe8b10b932f~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-u7-adenauerplatz.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_4cf948e50ed7414bab0e1fe8b10b932f~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-u7-adenauerplatz.jpg",
+      "alt": "A yellow BVG U7 train to Rudow standing at the platform at Adenauerplatz U-Bahn station in Berlin-Charlottenburg, with passengers waiting along the platform edge and the departure board overhead",
+      "relatedToolSlug": "berlin-monthly-ticket-break-even"
+    },
     {
       "title": "Berlin School Registration: The School Your Address Already Picked",
       "slug": "berlin-school-registration",

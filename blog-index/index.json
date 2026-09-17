@@ -1,9 +1,9 @@
 {
-  "updatedAt": "2026-09-17T07:51:45.837Z",
+  "updatedAt": "2026-09-17T14:06:14.077Z",
   "source": "Wix Blog API",
   "popularSource": "Wix Blog metrics.views lifetime sort",
-  "totalPosts": 394,
-  "toolsTotal": 314,
+  "totalPosts": 395,
+  "toolsTotal": 315,
   "bookingUrl": "https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based",
   "navTopics": [
     {
@@ -281,23 +281,6 @@
       "relatedToolSlug": "berlin-beer-season-calendar"
     },
     {
-      "title": "Berlin Airport to Alexanderplatz: The Easy Way",
-      "slug": "how-to-get-from-berlin-airport-to-alexanderplatz-the-easy-way",
-      "path": "/post/how-to-get-from-berlin-airport-to-alexanderplatz-the-easy-way",
-      "url": "https://www.berlinwalk.com/post/how-to-get-from-berlin-airport-to-alexanderplatz-the-easy-way",
-      "excerpt": "Just landed at BER airport and need to get to Alexanderplatz? Here's the fastest, cheapest, and most stress-free way to get from Berlin Brandenburg Airport to the heart of the city — from a local who does this route constantly.",
-      "category": "Tourist Tips",
-      "categorySlug": "tourist-tips",
-      "topic": "first-day",
-      "topicLabel": "First Day in Berlin",
-      "readTime": "6 min read",
-      "publishedDate": "2026-03-03T12:12:58.270Z",
-      "image": "https://static.wixstatic.com/media/nsplsh_a03121bf8b20473fb5d65a66bb71db09~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/a%20red%20and%20yellow%20train%20traveling%20past%20a%20tall%20building.jpg",
-      "thumb": "https://static.wixstatic.com/media/nsplsh_a03121bf8b20473fb5d65a66bb71db09~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/a%20red%20and%20yellow%20train%20traveling%20past%20a%20tall%20building.jpg",
-      "alt": "sbahn berlin",
-      "relatedToolSlug": "berlin-landmarks-map"
-    },
-    {
       "title": "Public Toilets in Berlin: Where to Find Them, What They Cost, and Free Options",
       "slug": "public-toilets-in-berlin",
       "path": "/post/public-toilets-in-berlin",
@@ -313,6 +296,23 @@
       "thumb": "https://static.wixstatic.com/media/5a08a3_75e950f67226457e8af15fbe3a7f46fd~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/nsplsh_7bdfcc030bd74d1d99d1624e3799f48d~mv2.jpg",
       "alt": "Restroom sign with male and female symbols on a brick wall, pointing right. Green trees and glass buildings in the background.",
       "relatedToolSlug": "berlin-public-toilets"
+    },
+    {
+      "title": "Berlin Airport to Alexanderplatz: The Easy Way",
+      "slug": "how-to-get-from-berlin-airport-to-alexanderplatz-the-easy-way",
+      "path": "/post/how-to-get-from-berlin-airport-to-alexanderplatz-the-easy-way",
+      "url": "https://www.berlinwalk.com/post/how-to-get-from-berlin-airport-to-alexanderplatz-the-easy-way",
+      "excerpt": "Just landed at BER airport and need to get to Alexanderplatz? Here's the fastest, cheapest, and most stress-free way to get from Berlin Brandenburg Airport to the heart of the city — from a local who does this route constantly.",
+      "category": "Tourist Tips",
+      "categorySlug": "tourist-tips",
+      "topic": "first-day",
+      "topicLabel": "First Day in Berlin",
+      "readTime": "6 min read",
+      "publishedDate": "2026-03-03T12:12:58.270Z",
+      "image": "https://static.wixstatic.com/media/nsplsh_a03121bf8b20473fb5d65a66bb71db09~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/a%20red%20and%20yellow%20train%20traveling%20past%20a%20tall%20building.jpg",
+      "thumb": "https://static.wixstatic.com/media/nsplsh_a03121bf8b20473fb5d65a66bb71db09~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/a%20red%20and%20yellow%20train%20traveling%20past%20a%20tall%20building.jpg",
+      "alt": "sbahn berlin",
+      "relatedToolSlug": "berlin-landmarks-map"
     },
     {
       "title": "5 Best Döner Kebab Spots in Berlin You Need to Try",
@@ -1802,6 +1802,23 @@
   ],
   "latest": [
     {
+      "title": "Berlin Monthly Ticket: The City One Costs More Than the Whole Country",
+      "slug": "berlin-monthly-ticket",
+      "path": "/post/berlin-monthly-ticket",
+      "url": "https://www.berlinwalk.com/post/berlin-monthly-ticket",
+      "excerpt": "Most people in Berlin sorted out their transport ticket once and never looked again. The prices moved. A VBB Umweltkarte for Berlin AB costs 81.30 euros a month on a subscription and 113 without a contract, while the Deutschlandticket covers every local and regional service in the country for 63. Here is where the break-even sits against single tickets, and the two things the expensive local card does that the cheap national one cannot.",
+      "category": "Living in Berlin",
+      "categorySlug": "living-in-berlin",
+      "topic": "living-in-berlin",
+      "topicLabel": "Living in Berlin",
+      "readTime": "7 min read",
+      "publishedDate": "2026-09-17T14:03:57.756Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_4cf948e50ed7414bab0e1fe8b10b932f~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-u7-adenauerplatz.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_4cf948e50ed7414bab0e1fe8b10b932f~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-u7-adenauerplatz.jpg",
+      "alt": "A yellow BVG U7 train to Rudow standing at the platform at Adenauerplatz U-Bahn station in Berlin-Charlottenburg, with passengers waiting along the platform edge and the departure board overhead",
+      "relatedToolSlug": "berlin-monthly-ticket-break-even"
+    },
+    {
       "title": "Berlin School Registration: The School Your Address Already Picked",
       "slug": "berlin-school-registration",
       "path": "/post/berlin-school-registration",
@@ -1987,23 +2004,6 @@
       "thumb": "https://static.wixstatic.com/media/5a08a3_d5ae3461b0684a15b23eb839d532cade~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/haus-des-rundfunks.jpg",
       "alt": "The main entrance of the Haus des Rundfunks on Masurenallee in Berlin-Charlottenburg, gold lettering above a brick and glass doorway with people walking in",
       "relatedToolSlug": "berlin-rundfunkbeitrag-check"
-    },
-    {
-      "title": "Health Insurance in Berlin: Which Krankenkasse You Can Actually Join and What the Gap Costs",
-      "slug": "health-insurance-in-berlin",
-      "path": "/post/health-insurance-in-berlin",
-      "url": "https://www.berlinwalk.com/post/health-insurance-in-berlin",
-      "excerpt": "The treatment catalogue is written into federal law and is the same in every statutory fund. The Zusatzbeitrag is not, and in 2026 it runs from 2.18 to 4.39 per cent. Here is which of the 46 funds a Berlin address can actually join, what the spread costs you at your own pay, and the two dates in section 175 SGB V that decide when you can leave.",
-      "category": "Living in Berlin",
-      "categorySlug": "living-in-berlin",
-      "topic": "living-in-berlin",
-      "topicLabel": "Living in Berlin",
-      "readTime": "7 min read",
-      "publishedDate": "2026-09-14T07:40:56.197Z",
-      "image": "https://static.wixstatic.com/media/5a08a3_db8037a509db45ae887bf592fbf437d2~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/aok-hochhaus-kreuzberg.jpg",
-      "thumb": "https://static.wixstatic.com/media/5a08a3_db8037a509db45ae887bf592fbf437d2~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/aok-hochhaus-kreuzberg.jpg",
-      "alt": "The AOK administration tower on Wilhelmstrasse in Berlin-Kreuzberg, a 1960s high-rise by Hans Scharoun and Bodo Fleischer, with the green AOK logo near the roof and a lower wing in front of it",
-      "relatedToolSlug": "berlin-krankenkasse-cost-spread"
     }
   ]
 }
