@@ -954,6 +954,15 @@ bw-home-two-doors .bw-home-two-doors .bw-home-two-doors__review--dark .bw-home-t
   margin-top: 6px;
 }
 
+.bw-home-two-doors .bw-home-two-doors__facts .bw-home-two-doors__free-label {
+  font-size: 22px;
+  line-height: 1.15;
+}
+
+.bw-home-two-doors .bw-home-two-doors__guide-actions {
+  margin-top: 26px;
+}
+
 .bw-home-two-doors .bw-home-two-doors__live-actions,
 .bw-home-two-doors .bw-home-two-doors__guide-actions {
   align-items: center;
@@ -1105,6 +1114,16 @@ bw-home-two-doors .bw-home-two-doors .bw-home-two-doors__review--dark .bw-home-t
   padding: 22px;
 }
 
+.bw-home-two-doors .bw-home-two-doors__more-thumb {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 5 / 3;
+  object-fit: cover;
+  border-radius: 7px;
+  margin-bottom: 10px;
+}
+
 .bw-home-two-doors .bw-home-two-doors__more-card b {
   color: var(--bw-ink);
   font-family: var(--bw-display);
@@ -1121,9 +1140,18 @@ bw-home-two-doors .bw-home-two-doors .bw-home-two-doors__review--dark .bw-home-t
 
 .bw-home-two-doors .bw-home-two-doors__more-card .bw-home-two-doors__more-price {
   color: var(--bw-green);
+  font-family: var(--bw-sans);
+  font-size: 18px;
+  font-weight: 700;
+  margin-top: auto;
+  padding-top: 20px;
+}
+
+.bw-home-two-doors .bw-home-two-doors__more-card .bw-home-two-doors__more-cta {
+  color: var(--bw-green);
   font-family: var(--bw-mono);
   font-size: 12px;
-  margin-top: auto;
+  margin-top: 10px;
 }
 
 .bw-home-two-doors .bw-home-two-doors__faq {
@@ -1373,6 +1401,10 @@ bw-home-two-doors .bw-home-two-doors .bw-home-two-doors__review--dark .bw-home-t
   .bw-home-two-doors .bw-home-two-doors__facts > div:nth-child(odd) {
     border-right: 1px solid var(--bw-line);
     padding-right: 12px;
+  }
+
+  .bw-home-two-doors .bw-home-two-doors__facts > div:nth-child(even) {
+    padding-left: 20px;
   }
 
   .bw-home-two-doors .bw-home-two-doors__facts > div:nth-child(3),

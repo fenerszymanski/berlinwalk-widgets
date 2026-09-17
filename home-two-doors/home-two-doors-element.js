@@ -58,24 +58,36 @@ const BW_HOME_TWO_DOORS_MORE_PRODUCTS = [
   {
     label: 'PLAN',
     title: 'Berlin Trip Planner',
+    price: 'From €7.99',
+    image: 'more-trip-planner.jpg',
+    alt: 'Illustrated view of Berlin Cathedral and the River Spree',
     text: 'Build a realistic day around your dates, hotel area and pace.',
     href: 'https://www.berlinwalk.com/berlin-trip-planner',
   },
   {
     label: 'ARRIVE',
     title: 'First-Day Rescue Plan',
+    price: '€4.99',
+    image: 'more-first-day.jpg',
+    alt: 'Platforms and signs inside Berlin Hauptbahnhof',
     text: 'Know what to do between landing, check-in and your first Berlin evening.',
     href: 'https://www.berlinwalk.com/products/berlin-first-day-rescue-plan',
   },
   {
     label: 'LOOK CLOSER',
     title: 'Hidden Berlin Photo Missions',
+    price: '€3.99',
+    image: 'more-photo-missions.jpg',
+    alt: 'The surviving portico of Anhalter Bahnhof',
     text: 'Small prompts for noticing places such as Anhalter Bahnhof differently.',
     href: 'https://www.berlinwalk.com/products/hidden-berlin-photo-missions',
   },
   {
     label: 'TOOLS',
     title: 'Berlin Tools',
+    price: 'Free',
+    image: 'more-tools.webp',
+    alt: 'Map and phone for planning a walk through Berlin',
     text: 'Practical calculators and decision helpers for a day in the city.',
     href: 'https://www.berlinwalk.com/berlin-tools',
   },
@@ -212,10 +224,12 @@ class BWHomeTwoDoorsElement extends HTMLElement {
 
     const moreCards = BW_HOME_TWO_DOORS_MORE_PRODUCTS.map((product) => `
       <a class="bw-home-two-doors__more-card" href="${product.href}" data-bw-cta-id="more_${product.title.toLowerCase().replace(/[^a-z0-9]+/g, '_')}" data-bw-cta-placement="more-products">
+        <img class="bw-home-two-doors__more-thumb" src="${asset(product.image)}" alt="${product.alt}" loading="lazy" width="600" height="360">
         <span class="bw-home-two-doors__eyebrow">${product.label}</span>
         <b>${product.title}</b>
         <span>${product.text}</span>
-        <span class="bw-home-two-doors__more-price">Open guide →</span>
+        <span class="bw-home-two-doors__more-price">${product.price}</span>
+        <span class="bw-home-two-doors__more-cta">${product.label === 'TOOLS' ? 'Explore free tools' : 'Explore this product'} →</span>
       </a>`).join('');
 
     this.innerHTML = `
@@ -335,7 +349,7 @@ class BWHomeTwoDoorsElement extends HTMLElement {
                 <div><b>12</b><span>stops</span></div>
                 <div><b>~2h</b><span>walking time</span></div>
                 <div><b>~3km</b><span>route length</span></div>
-                <div><b>€0</b><span>tip-based</span></div>
+                <div><b class="bw-home-two-doors__free-label">Free to book</b><span>tip-based</span></div>
               </div>
               <div class="bw-home-two-doors__live-actions">
                 <a class="bw-home-two-doors__btn bw-home-two-doors__btn--green" href="${BW_HOME_TWO_DOORS_BOOKING_URL}" data-bw-cta-id="book_route" data-bw-cta-placement="live-route">Check dates</a>
