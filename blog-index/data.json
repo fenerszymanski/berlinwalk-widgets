@@ -1,9 +1,9 @@
 {
-  "updatedAt": "2026-09-16T20:09:38.291Z",
+  "updatedAt": "2026-09-17T01:45:13.073Z",
   "source": "Wix Blog API",
   "popularSource": "Wix Blog metrics.views lifetime sort",
-  "totalPosts": 392,
-  "toolsTotal": 312,
+  "totalPosts": 393,
+  "toolsTotal": 313,
   "bookingUrl": "https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based",
   "navTopics": [
     {
@@ -264,23 +264,6 @@
       "relatedToolSlug": "transport-ticket-calculator"
     },
     {
-      "title": "Public Toilets in Berlin: Where to Find Them, What They Cost, and Free Options",
-      "slug": "public-toilets-in-berlin",
-      "path": "/post/public-toilets-in-berlin",
-      "url": "https://www.berlinwalk.com/post/public-toilets-in-berlin",
-      "excerpt": "Need a toilet in Berlin? This tourist guide shows where to find public toilets, what they cost, where the free options are, and when stations, malls, or the Berliner Toilette app help.",
-      "category": "Tourist Tips",
-      "categorySlug": "tourist-tips",
-      "topic": "first-day",
-      "topicLabel": "First Day in Berlin",
-      "readTime": "5 min read",
-      "publishedDate": "2026-05-16T18:51:08.424Z",
-      "image": "https://static.wixstatic.com/media/5a08a3_75e950f67226457e8af15fbe3a7f46fd~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/nsplsh_7bdfcc030bd74d1d99d1624e3799f48d~mv2.jpg",
-      "thumb": "https://static.wixstatic.com/media/5a08a3_75e950f67226457e8af15fbe3a7f46fd~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/nsplsh_7bdfcc030bd74d1d99d1624e3799f48d~mv2.jpg",
-      "alt": "Restroom sign with male and female symbols on a brick wall, pointing right. Green trees and glass buildings in the background.",
-      "relatedToolSlug": "berlin-public-toilets"
-    },
-    {
       "title": "Oktoberfest in Berlin 2026: What Is Actually On",
       "slug": "oktoberfest-in-berlin",
       "path": "/post/oktoberfest-in-berlin",
@@ -313,6 +296,23 @@
       "thumb": "https://static.wixstatic.com/media/nsplsh_a03121bf8b20473fb5d65a66bb71db09~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/a%20red%20and%20yellow%20train%20traveling%20past%20a%20tall%20building.jpg",
       "alt": "sbahn berlin",
       "relatedToolSlug": "berlin-landmarks-map"
+    },
+    {
+      "title": "Public Toilets in Berlin: Where to Find Them, What They Cost, and Free Options",
+      "slug": "public-toilets-in-berlin",
+      "path": "/post/public-toilets-in-berlin",
+      "url": "https://www.berlinwalk.com/post/public-toilets-in-berlin",
+      "excerpt": "Need a toilet in Berlin? This tourist guide shows where to find public toilets, what they cost, where the free options are, and when stations, malls, or the Berliner Toilette app help.",
+      "category": "Tourist Tips",
+      "categorySlug": "tourist-tips",
+      "topic": "first-day",
+      "topicLabel": "First Day in Berlin",
+      "readTime": "5 min read",
+      "publishedDate": "2026-05-16T18:51:08.424Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_75e950f67226457e8af15fbe3a7f46fd~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/nsplsh_7bdfcc030bd74d1d99d1624e3799f48d~mv2.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_75e950f67226457e8af15fbe3a7f46fd~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/nsplsh_7bdfcc030bd74d1d99d1624e3799f48d~mv2.jpg",
+      "alt": "Restroom sign with male and female symbols on a brick wall, pointing right. Green trees and glass buildings in the background.",
+      "relatedToolSlug": "berlin-public-toilets"
     },
     {
       "title": "5 Best Döner Kebab Spots in Berlin You Need to Try",
@@ -1802,6 +1802,23 @@
   ],
   "latest": [
     {
+      "title": "Mould in Berlin Flats: When Airing Dries the Room and When It Soaks It",
+      "slug": "mould-in-berlin-flats",
+      "path": "/post/mould-in-berlin-flats",
+      "url": "https://www.berlinwalk.com/post/mould-in-berlin-flats",
+      "excerpt": "Every Berlin lease says the same thing: air the flat, windows wide open, three times a day. Ten years of Deutscher Wetterdienst readings for Berlin-Tempelhof show that in January this strips 5.5 grams of water from every cubic metre of air you swap, and in August it puts 0.7 grams back in. Across the full grid of twelve months by twenty four hours, 49 of the 288 hours make the room wetter. And mould needs only 80 percent humidity at a wall surface, which here means any wall below 15.4 degrees.",
+      "category": "Living in Berlin",
+      "categorySlug": "living-in-berlin",
+      "topic": "living-in-berlin",
+      "topicLabel": "Living in Berlin",
+      "readTime": "8 min read",
+      "publishedDate": "2026-09-17T01:43:27.003Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_5337acb059cb4efbb6ceecf091b53241~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-open-window-berlin.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_5337acb059cb4efbb6ceecf091b53241~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-open-window-berlin.jpg",
+      "alt": "A window in a Berlin flat standing wide open on a bright day, the near casement swung inwards, looking across to the pale render and tall windows of the Altbau facades on the far side of the street",
+      "relatedToolSlug": ""
+    },
+    {
       "title": "Berlin Snow Clearing Rules: Which Pavement Is Yours and How Wide",
       "slug": "berlin-snow-clearing-rules",
       "path": "/post/berlin-snow-clearing-rules",
@@ -1987,26 +2004,26 @@
       "thumb": "https://static.wixstatic.com/media/5a08a3_7123a9cf01154bfa8808b77d3fc83749~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-hermannstrasse-neukoelln.jpg",
       "alt": "A Gruenderzeit apartment building on Hermannstrasse in Berlin-Neukoelln, with red brick and stucco ornament above the ground floor windows and blue sky reflected in the panes",
       "relatedToolSlug": "berlin-rent-increase-limits"
-    },
+    }
+  ],
+  "allPosts": [
     {
-      "title": "Balcony Solar in Berlin: What Your Wall Earns Now the Grant Has Gone",
-      "slug": "balcony-solar-berlin",
-      "path": "/post/balcony-solar-berlin",
-      "url": "https://www.berlinwalk.com/post/balcony-solar-berlin",
-      "excerpt": "Berlin dropped its 500 euro balcony solar grant in January 2026, so the only question left is whether your own wall pays. A south railing makes 595 kWh a year here and a north one makes 153, but the number that really decides it is how much your flat is drawing while the sun is up.",
+      "title": "Mould in Berlin Flats: When Airing Dries the Room and When It Soaks It",
+      "slug": "mould-in-berlin-flats",
+      "path": "/post/mould-in-berlin-flats",
+      "url": "https://www.berlinwalk.com/post/mould-in-berlin-flats",
+      "excerpt": "Every Berlin lease says the same thing: air the flat, windows wide open, three times a day. Ten years of Deutscher Wetterdienst readings for Berlin-Tempelhof show that in January this strips 5.5 grams of water from every cubic metre of air you swap, and in August it puts 0.7 grams back in. Across the full grid of twelve months by twenty four hours, 49 of the 288 hours make the room wetter. And mould needs only 80 percent humidity at a wall surface, which here means any wall below 15.4 degrees.",
       "category": "Living in Berlin",
       "categorySlug": "living-in-berlin",
       "topic": "living-in-berlin",
       "topicLabel": "Living in Berlin",
-      "readTime": "9 min read",
-      "publishedDate": "2026-09-13T13:56:17.660Z",
-      "image": "https://static.wixstatic.com/media/5a08a3_10bbb87af829462c958d6708c15de1a9~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-moabit-balconies.jpg",
-      "thumb": "https://static.wixstatic.com/media/5a08a3_10bbb87af829462c958d6708c15de1a9~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-moabit-balconies.jpg",
-      "alt": "A Berlin apartment block on Lübecker Strasse in Moabit with solar panels on six balconies, some flat against the railing and some tilted out, in evening light",
-      "relatedToolSlug": "berlin-balcony-solar-year"
-    }
-  ],
-  "allPosts": [
+      "readTime": "8 min read",
+      "publishedDate": "2026-09-17T01:43:27.003Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_5337acb059cb4efbb6ceecf091b53241~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-open-window-berlin.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_5337acb059cb4efbb6ceecf091b53241~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-open-window-berlin.jpg",
+      "alt": "A window in a Berlin flat standing wide open on a bright day, the near casement swung inwards, looking across to the pale render and tall windows of the Altbau facades on the far side of the street",
+      "relatedToolSlug": ""
+    },
     {
       "title": "Berlin Snow Clearing Rules: Which Pavement Is Yours and How Wide",
       "slug": "berlin-snow-clearing-rules",

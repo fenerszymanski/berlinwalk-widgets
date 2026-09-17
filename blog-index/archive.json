@@ -1,9 +1,26 @@
 {
-  "updatedAt": "2026-09-16T20:09:38.291Z",
+  "updatedAt": "2026-09-17T01:45:13.073Z",
   "source": "Wix Blog API",
-  "totalPosts": 392,
+  "totalPosts": 393,
   "bookingUrl": "https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based",
   "allPosts": [
+    {
+      "title": "Mould in Berlin Flats: When Airing Dries the Room and When It Soaks It",
+      "slug": "mould-in-berlin-flats",
+      "path": "/post/mould-in-berlin-flats",
+      "url": "https://www.berlinwalk.com/post/mould-in-berlin-flats",
+      "excerpt": "Every Berlin lease says the same thing: air the flat, windows wide open, three times a day. Ten years of Deutscher Wetterdienst readings for Berlin-Tempelhof show that in January this strips 5.5 grams of water from every cubic metre of air you swap, and in August it puts 0.7 grams back in. Across the full grid of twelve months by twenty four hours, 49 of the 288 hours make the room wetter. And mould needs only 80 percent humidity at a wall surface, which here means any wall below 15.4 degrees.",
+      "category": "Living in Berlin",
+      "categorySlug": "living-in-berlin",
+      "topic": "living-in-berlin",
+      "topicLabel": "Living in Berlin",
+      "readTime": "8 min read",
+      "publishedDate": "2026-09-17T01:43:27.003Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_5337acb059cb4efbb6ceecf091b53241~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-open-window-berlin.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_5337acb059cb4efbb6ceecf091b53241~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-open-window-berlin.jpg",
+      "alt": "A window in a Berlin flat standing wide open on a bright day, the near casement swung inwards, looking across to the pale render and tall windows of the Altbau facades on the far side of the street",
+      "relatedToolSlug": ""
+    },
     {
       "title": "Berlin Snow Clearing Rules: Which Pavement Is Yours and How Wide",
       "slug": "berlin-snow-clearing-rules",
