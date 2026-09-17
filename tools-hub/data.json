@@ -9468,6 +9468,40 @@
       ],
       "iconStatus": "live-wix-media",
       "cmsItemId": "daa3cdad-0c8c-4ed8-a459-1a50d9c33d8d"
+    },
+    {
+      "slug": "berlin-school-catchment-map",
+      "title": "Berlin School Catchment Map",
+      "lead": "Berlin cuts the city into 394 Einschulungsbereiche, and the boundary around your flat, not your preference, names the Grundschule where you register in October. This map draws all 394 areas from the Senate's own geodata with the 413 public primary schools inside them, then shows how many other schools sit within 1.5 km if you want to ask for a different one.",
+      "category": "Maps",
+      "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/berlin-school-catchment-map/",
+      "embedHeight": 1780,
+      "image": "https://static.wixstatic.com/media/5a08a3_77e33fbbbc364db396430061f5b2129e~mv2.png",
+      "hubCategory": "Essentials",
+      "type": "Map",
+      "priority": 3,
+      "tags": [
+        "school registration",
+        "einschulungsbereich",
+        "grundschule berlin",
+        "schulanmeldung",
+        "catchment area",
+        "primary school",
+        "einschulung",
+        "living in berlin",
+        "bezirksschulamt",
+        "wunschschule"
+      ],
+      "aliases": [
+        "which primary school in berlin",
+        "berlin einschulungsbereich finden",
+        "schulanmeldung berlin oktober",
+        "which grundschule is my address",
+        "berlin school catchment",
+        "zustaendige grundschule berlin"
+      ],
+      "iconStatus": "live-wix-media",
+      "cmsItemId": "4bfa010a-4ccb-48b3-83ee-1b9fc98125b1"
     }
   ],
   "hubCategories": [

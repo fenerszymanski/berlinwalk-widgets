@@ -760,7 +760,7 @@
         "svgShapeNodes": 3,
         "svgCount": 1,
         "canvas": 0,
-        "contentImages": 43,
+        "contentImages": 27,
         "mapLibrary": true,
         "range": 0,
         "dateInput": 0,
@@ -1462,7 +1462,7 @@
         "ariaPressed": 0,
         "tables": 0,
         "details": 0,
-        "textLength": 547
+        "textLength": 543
       },
       "inputModel": "accumulate",
       "stateProgression": "accumulate",
@@ -1702,7 +1702,7 @@
         "ariaPressed": 0,
         "tables": 0,
         "details": 0,
-        "textLength": 3177
+        "textLength": 3115
       },
       "inputModel": "continuous-scrub",
       "stateProgression": "continuous-scrub",
@@ -1762,7 +1762,7 @@
         "ariaPressed": 0,
         "tables": 0,
         "details": 0,
-        "textLength": 2937
+        "textLength": 2931
       },
       "inputModel": "date",
       "stateProgression": "accumulate",
@@ -2182,7 +2182,7 @@
         "ariaPressed": 0,
         "tables": 0,
         "details": 0,
-        "textLength": 1933
+        "textLength": 1538
       },
       "inputModel": "button-pick",
       "stateProgression": "replace-on-pick",
@@ -2572,7 +2572,7 @@
         "ariaPressed": 6,
         "tables": 0,
         "details": 0,
-        "textLength": 25156
+        "textLength": 25154
       },
       "inputModel": "text-entry",
       "stateProgression": "replace-on-pick",
@@ -3172,7 +3172,7 @@
         "ariaPressed": 0,
         "tables": 0,
         "details": 0,
-        "textLength": 697
+        "textLength": 759
       },
       "inputModel": "button-pick",
       "stateProgression": "replace-on-pick",
@@ -3202,7 +3202,7 @@
         "ariaPressed": 0,
         "tables": 0,
         "details": 0,
-        "textLength": 1746
+        "textLength": 1808
       },
       "inputModel": "button-pick",
       "stateProgression": "replace-on-pick",
@@ -3442,7 +3442,7 @@
         "ariaPressed": 0,
         "tables": 0,
         "details": 0,
-        "textLength": 180
+        "textLength": 178
       },
       "inputModel": "continuous-scrub",
       "stateProgression": "continuous-scrub",
@@ -4282,7 +4282,7 @@
         "ariaPressed": 0,
         "tables": 0,
         "details": 1,
-        "textLength": 1557
+        "textLength": 1556
       },
       "inputModel": "accumulate",
       "stateProgression": "accumulate",
@@ -4702,7 +4702,7 @@
         "ariaPressed": 3,
         "tables": 0,
         "details": 0,
-        "textLength": 1898
+        "textLength": 1819
       },
       "inputModel": "text-entry",
       "stateProgression": "accumulate",
@@ -5032,7 +5032,7 @@
         "ariaPressed": 0,
         "tables": 0,
         "details": 0,
-        "textLength": 1256
+        "textLength": 1233
       },
       "inputModel": "button-pick",
       "stateProgression": "replace-on-pick",
@@ -6772,7 +6772,7 @@
         "ariaPressed": 0,
         "tables": 0,
         "details": 0,
-        "textLength": 727
+        "textLength": 766
       },
       "inputModel": "button-pick",
       "stateProgression": "replace-on-pick",
@@ -6940,7 +6940,7 @@
         "svgShapeNodes": 3,
         "svgCount": 1,
         "canvas": 0,
-        "contentImages": 6,
+        "contentImages": 4,
         "mapLibrary": false,
         "range": 1,
         "dateInput": 0,
@@ -6952,7 +6952,7 @@
         "ariaPressed": 7,
         "tables": 0,
         "details": 0,
-        "textLength": 1092
+        "textLength": 1036
       },
       "inputModel": "continuous-scrub",
       "stateProgression": "continuous-scrub",
@@ -8002,7 +8002,7 @@
         "ariaPressed": 21,
         "tables": 0,
         "details": 0,
-        "textLength": 1892
+        "textLength": 2064
       },
       "inputModel": "accumulate",
       "stateProgression": "accumulate",
@@ -9142,7 +9142,7 @@
         "ariaPressed": 5,
         "tables": 0,
         "details": 0,
-        "textLength": 2399
+        "textLength": 2398
       },
       "inputModel": "date",
       "stateProgression": "replace-on-pick",
@@ -9172,7 +9172,7 @@
         "ariaPressed": 4,
         "tables": 0,
         "details": 0,
-        "textLength": 2163
+        "textLength": 2161
       },
       "inputModel": "date",
       "stateProgression": "replace-on-pick",
@@ -9187,7 +9187,7 @@
       "addedAt": "2026-08-26",
       "measuredBy": "rendered",
       "signals": {
-        "svgShapeNodes": 32,
+        "svgShapeNodes": 44,
         "svgCount": 1,
         "canvas": 0,
         "contentImages": 0,
@@ -9199,10 +9199,10 @@
         "select": 0,
         "textInput": 0,
         "buttons": 1,
-        "ariaPressed": 3,
+        "ariaPressed": 5,
         "tables": 0,
         "details": 0,
-        "textLength": 1427
+        "textLength": 1561
       },
       "inputModel": "date",
       "stateProgression": "accumulate",
@@ -9382,7 +9382,7 @@
         "ariaPressed": 18,
         "tables": 0,
         "details": 0,
-        "textLength": 2465
+        "textLength": 2392
       },
       "inputModel": "continuous-scrub",
       "stateProgression": "continuous-scrub",
@@ -9772,7 +9772,7 @@
         "ariaPressed": 0,
         "tables": 0,
         "details": 0,
-        "textLength": 1125
+        "textLength": 1151
       },
       "inputModel": "single-choice",
       "stateProgression": "replace-on-pick",
@@ -10252,7 +10252,7 @@
         "ariaPressed": 0,
         "tables": 0,
         "details": 0,
-        "textLength": 1914
+        "textLength": 1912
       },
       "inputModel": "date",
       "stateProgression": "replace-on-pick",
@@ -10747,7 +10747,7 @@
       "addedAt": "2026-09-12",
       "measuredBy": "rendered",
       "signals": {
-        "svgShapeNodes": 108,
+        "svgShapeNodes": 109,
         "svgCount": 2,
         "canvas": 0,
         "contentImages": 0,
@@ -10762,7 +10762,7 @@
         "ariaPressed": 0,
         "tables": 0,
         "details": 0,
-        "textLength": 813
+        "textLength": 808
       },
       "inputModel": "date",
       "stateProgression": "stepped",
@@ -10792,7 +10792,7 @@
         "ariaPressed": 0,
         "tables": 0,
         "details": 0,
-        "textLength": 7612
+        "textLength": 7611
       },
       "inputModel": "single-choice",
       "stateProgression": "replace-on-pick",
@@ -11302,12 +11302,42 @@
         "ariaPressed": 0,
         "tables": 0,
         "details": 0,
-        "textLength": 1898
+        "textLength": 1865
       },
       "inputModel": "button-pick",
       "stateProgression": "replace-on-pick",
       "outputModel": "plotted-position",
       "visualGrammar": "plotted-geometry",
+      "hasVisualLayer": true,
+      "flatChipCard": false,
+      "pageErrors": []
+    },
+    "berlin-school-catchment-map": {
+      "slug": "berlin-school-catchment-map",
+      "addedAt": "2026-09-17",
+      "measuredBy": "rendered",
+      "signals": {
+        "svgShapeNodes": 807,
+        "svgCount": 1,
+        "canvas": 0,
+        "contentImages": 0,
+        "mapLibrary": false,
+        "range": 0,
+        "dateInput": 0,
+        "radio": 0,
+        "checkbox": 0,
+        "select": 0,
+        "textInput": 0,
+        "buttons": 35,
+        "ariaPressed": 0,
+        "tables": 0,
+        "details": 0,
+        "textLength": 1775
+      },
+      "inputModel": "button-pick",
+      "stateProgression": "stepped",
+      "outputModel": "plotted-position",
+      "visualGrammar": "geographic-map",
       "hasVisualLayer": true,
       "flatChipCard": false,
       "pageErrors": []

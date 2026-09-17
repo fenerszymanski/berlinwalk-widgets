@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Berlin School Catchment Map</title>
+<link rel="stylesheet" href="../css/brand.css">
+<style>
+  :root {
+    --green: #1B5E20; --deep: #123D18; --yellow: #FFE600; --lime: #7CB342;
+    --soft: #C5E1A5; --cream: #FAFAF5; --ink: #212121; --muted: #566057;
+    --line: rgba(27,94,32,.18); --amber: #E8A33D; --rust: #B4532A;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+         background: var(--cream); color: var(--ink); }
+  .sc { max-width: 800px; margin: 0 auto; padding: 12px 12px 16px; }
+
+  .sc-top { border-bottom: 3px solid var(--green); padding-bottom: 9px; }
+  .sc-top h2 { margin: 0; font-size: 1.04rem; line-height: 1.25; color: var(--green); }
+  .sc-top p { margin: 5px 0 0; font-size: .755rem; line-height: 1.5; color: var(--muted); }
+
+  .sc-steps { display: flex; gap: 5px; margin: 10px 0 8px; }
+  .sc-steps span { flex: 1 1 0; font-size: .6rem; font-weight: 700; letter-spacing: .04em;
+    text-transform: uppercase; text-align: center; padding: 5px 3px; border-radius: 6px;
+    background: #fff; border: 1px solid var(--line); color: var(--muted); line-height: 1.25; }
+  .sc-steps span.on { background: var(--yellow); border-color: var(--yellow); color: var(--deep); }
+  .sc-steps span.done { background: var(--soft); border-color: var(--soft); color: var(--deep); }
+
+  .sc-board { position: relative; background: #fff; border: 1px solid var(--line);
+    border-radius: 12px; padding: 8px; }
+  .sc-svg { display: block; width: 100%; height: auto; touch-action: manipulation; }
+  .sc-area { fill: #EFF4E6; stroke: #fff; stroke-width: .9; cursor: pointer; }
+  .sc-area.one { fill: #DCEBC6; }
+  .sc-area.two { fill: var(--lime); }
+  .sc-area.none { fill: #F3D9C8; }
+  .sc-area.dim { fill: #EFEFEA; stroke: #fff; cursor: default; }
+  .sc-area.pick { fill: var(--yellow); stroke: var(--deep); stroke-width: 1.6; }
+  .sc-dot { fill: var(--green); stroke: #fff; stroke-width: 1.1; pointer-events: none; }
+  .sc-dot.gem { fill: var(--rust); }
+  .sc-dot.far { fill: #fff; stroke: var(--green); stroke-width: 1.4; }
+  .sc-ring { fill: none; stroke: var(--deep); stroke-width: 1.4; stroke-dasharray: 5 4; opacity: .75; }
+  .sc-label { font-size: 9px; font-weight: 700; fill: var(--deep); pointer-events: none;
+    paint-order: stroke; stroke: #fff; stroke-width: 2.6px; stroke-linejoin: round; }
+
+  .sc-legend { display: flex; flex-wrap: wrap; gap: 4px 12px; margin-top: 7px;
+    font-size: .64rem; color: var(--muted); }
+  .sc-legend i { display: inline-block; width: 11px; height: 11px; border-radius: 3px;
+    margin-right: 4px; vertical-align: -1px; }
+
+  .sc-h { margin: 14px 0 6px; font-size: .68rem; font-weight: 800; letter-spacing: .07em;
+    text-transform: uppercase; color: var(--deep); }
+  .sc-chips { display: flex; flex-wrap: wrap; gap: 5px; }
+  .sc-chip { font: inherit; font-size: .715rem; font-weight: 600; padding: 7px 11px;
+    border-radius: 999px; border: 1.5px solid var(--line); background: #fff; color: var(--ink);
+    cursor: pointer; line-height: 1.2; }
+  .sc-chip:hover { border-color: var(--green); }
+  .sc-chip:focus-visible { outline: 3px solid var(--yellow); outline-offset: 1px; }
+  .sc-chip[aria-current="true"] { background: var(--green); border-color: var(--green); color: #fff; }
+
+  .sc-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(118px, 1fr));
+    gap: 5px; max-height: 172px; overflow-y: auto; padding: 2px; }
+  .sc-item { font: inherit; font-size: .69rem; font-weight: 600; text-align: left;
+    padding: 7px 8px; border-radius: 8px; border: 1.5px solid var(--line); background: #fff;
+    color: var(--ink); cursor: pointer; line-height: 1.3; }
+  .sc-item span { display: block; font-size: .61rem; font-weight: 500; color: var(--muted); margin-top: 2px; }
+  .sc-item:hover { border-color: var(--green); }
+  .sc-item:focus-visible { outline: 3px solid var(--yellow); outline-offset: 1px; }
+  .sc-item[aria-current="true"] { background: var(--yellow); border-color: var(--deep); }
+  .sc-item[aria-current="true"] span { color: var(--deep); }
+
+  .sc-out { margin-top: 12px; background: #fff; border: 1px solid var(--line);
+    border-left: 5px solid var(--green); border-radius: 10px; padding: 12px 13px; }
+  .sc-out h3 { margin: 0 0 3px; font-size: .95rem; color: var(--green); line-height: 1.3; }
+  .sc-out .sc-sub { font-size: .7rem; color: var(--muted); margin: 0 0 9px; }
+  .sc-school { border-top: 1px dashed var(--line); padding-top: 8px; margin-top: 8px; }
+  .sc-school:first-of-type { border-top: 0; padding-top: 0; margin-top: 0; }
+  .sc-school b { display: block; font-size: .83rem; color: var(--ink); line-height: 1.3; }
+  .sc-school em { display: block; font-style: normal; font-size: .7rem; color: var(--muted); margin-top: 2px; }
+  .sc-tag { display: inline-block; font-size: .58rem; font-weight: 800; letter-spacing: .05em;
+    text-transform: uppercase; padding: 2px 7px; border-radius: 999px; background: var(--soft);
+    color: var(--deep); margin-top: 5px; }
+  .sc-tag.gem { background: #F6DFD3; color: #7A3618; }
+  .sc-warn { margin: 9px 0 0; font-size: .73rem; line-height: 1.5; color: var(--deep);
+    background: #FFF7CC; border-radius: 8px; padding: 9px 10px; }
+  .sc-facts { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+  .sc-fact { flex: 1 1 96px; background: var(--cream); border-radius: 8px; padding: 7px 9px; }
+  .sc-fact b { display: block; font-size: .95rem; color: var(--green); }
+  .sc-fact i { display: block; font-style: normal; font-size: .6rem; color: var(--muted);
+    text-transform: uppercase; letter-spacing: .04em; margin-top: 1px; line-height: 1.3; }
+
+  .sc-go { font: inherit; font-size: .745rem; font-weight: 700; padding: 10px 15px; margin-top: 11px;
+    border-radius: 999px; border: 0; background: var(--yellow); color: var(--deep); cursor: pointer; }
+  .sc-go:hover { background: #F2DB00; }
+  .sc-go:focus-visible { outline: 3px solid var(--green); outline-offset: 2px; }
+  .sc-go.ghost { background: #fff; border: 1.5px solid var(--line); color: var(--deep); }
+
+  .sc-near { margin-top: 9px; }
+  .sc-near ul { margin: 6px 0 0; padding: 0; list-style: none; }
+  .sc-near li { display: flex; justify-content: space-between; gap: 10px; font-size: .71rem;
+    padding: 4px 0; border-bottom: 1px dotted var(--line); color: var(--ink); }
+  .sc-near li i { font-style: normal; color: var(--muted); white-space: nowrap; }
+
+  .sc-src { margin: 12px 0 0; font-size: .63rem; line-height: 1.55; color: var(--muted); }
+
+  @media (max-width: 420px) {
+    .sc { padding: 10px 9px 14px; }
+    .sc-top h2 { font-size: .95rem; }
+    .sc-list { grid-template-columns: repeat(auto-fill, minmax(102px, 1fr)); max-height: 150px; }
+    .sc-steps span { font-size: .54rem; }
+  }
+  @media (max-width: 310px) {
+    .sc-list { grid-template-columns: 1fr 1fr; }
+    .sc-chip { font-size: .66rem; padding: 6px 9px; }
+  }
+</style>
+</head>
+<body>
+<div class="sc">
+  <div class="sc-top">
+    <h2>Which Berlin primary school is your address sent to?</h2>
+    <p>Berlin is cut into 394 Einschulungsbereiche. The boundary around your flat, not your choice, names the Grundschule where you register. Every line below is the Senate's own catchment geometry.</p>
+  </div>
+
+  <div class="sc-steps" id="steps">
+    <span id="s1">1 · District</span>
+    <span id="s2">2 · Your area</span>
+    <span id="s3">3 · What else is near</span>
+  </div>
+
+  <div class="sc-board">
+    <svg class="sc-svg" id="map" viewBox="0 0 760 560" role="img" aria-label="Map of Berlin's 394 primary school catchment areas"></svg>
+    <div class="sc-legend" id="legend"></div>
+  </div>
+
+  <p class="sc-h" id="h1">Step 1 · Pick your district</p>
+  <div class="sc-chips" id="chips"></div>
+
+  <div id="areaWrap" hidden>
+    <p class="sc-h" id="h2">Step 2 · Pick your catchment, or tap it on the map</p>
+    <div class="sc-list" id="areas"></div>
+  </div>
+
+  <div class="sc-out" id="out"></div>
+
+  <p class="sc-src" id="src"></p>
+</div>
+
+<script>
+(function () {
+  'use strict';
+  var DATA = null;
+  var view = { minX: 0, minY: 0, w: 1, h: 1 };
+  var W = 760, H = 560, PAD = 14;
+  var state = { currentStep: 1, district: null, areaId: null, showNear: false };
+
+  var mapEl = document.getElementById('map');
+  var chipsEl = document.getElementById('chips');
+  var areasEl = document.getElementById('areas');
+  var areaWrap = document.getElementById('areaWrap');
+  var outEl = document.getElementById('out');
+  var legendEl = document.getElementById('legend');
+
+  function esc(s) {
+    return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+  }
+  function nf(n) { return n.toLocaleString('en-GB'); }
+
+  /* ---- projection -------------------------------------------------------- */
+  var LAT0 = 52.52, COSL = Math.cos(LAT0 * Math.PI / 180);
+  function px(lon) { return lon * COSL; }
+  function py(lat) { return -lat; }
+
+  function boundsOf(areas) {
+    var a = Infinity, b = Infinity, c = -Infinity, d = -Infinity;
+    areas.forEach(function (ar) {
+      ar.r.forEach(function (ring) {
+        ring.forEach(function (p) {
+          var x = px(p[0]), y = py(p[1]);
+          if (x < a) a = x; if (x > c) c = x;
+          if (y < b) b = y; if (y > d) d = y;
+        });
+      });
+    });
+    return { minX: a, minY: b, w: c - a, h: d - b };
+  }
+  function setView(areas) {
+    var bb = boundsOf(areas);
+    var scale = Math.min((W - 2 * PAD) / bb.w, (H - 2 * PAD) / bb.h);
+    view = { minX: bb.minX, minY: bb.minY, w: bb.w, h: bb.h, scale: scale,
+             offX: (W - bb.w * scale) / 2, offY: (H - bb.h * scale) / 2 };
+  }
+  function X(lon) { return view.offX + (px(lon) - view.minX) * view.scale; }
+  function Y(lat) { return view.offY + (py(lat) - view.minY) * view.scale; }
+
+  function pathOf(ar) {
+    var out = '';
+    for (var i = 0; i < ar.r.length; i++) {
+      var ring = ar.r[i];
+      for (var j = 0; j < ring.length; j++) {
+        out += (j === 0 ? 'M' : 'L') + X(ring[j][0]).toFixed(1) + ' ' + Y(ring[j][1]).toFixed(1);
+      }
+      out += 'Z';
+    }
+    return out;
+  }
+
+  function schoolClass(ar) {
+    if (!ar.s.length) return 'none';
+    if (ar.s.length > 1) return 'two';
+    return 'one';
+  }
+
+  /* ---- render ------------------------------------------------------------ */
+  function visibleAreas() {
+    if (!state.district) return DATA.areas;
+    var di = DATA.districts.indexOf(state.district);
+    return DATA.areas.filter(function (a) { return a.d === di; });
+  }
+
+  function renderMap() {
+    var shown = visibleAreas();
+    setView(shown);
+    var parts = [];
+    shown.forEach(function (ar) {
+      var cls = 'sc-area ' + schoolClass(ar) + (state.areaId === ar.id ? ' pick' : '');
+      parts.push('<path class="' + cls + '" data-a="' + ar.id + '" d="' + pathOf(ar) + '"><title>' +
+        esc(ar.s.length ? ar.s.map(function (s) { return s.n; }).join(' / ') : 'No school inside this area') +
+        '</title></path>');
+    });
+
+    var pick = state.areaId ? DATA.areas.filter(function (a) { return a.id === state.areaId; })[0] : null;
+
+    if (state.showNear && pick) {
+      var rx = (1.5 / 111.32) * view.scale;
+      parts.push('<circle class="sc-ring" cx="' + X(pick.c[0]).toFixed(1) + '" cy="' + Y(pick.c[1]).toFixed(1) +
+        '" r="' + rx.toFixed(1) + '"></circle>');
+      pick.near.forEach(function (n) {
+        var s = findSchool(n.n);
+        if (!s) return;
+        parts.push('<circle class="sc-dot far" cx="' + X(s.ll[0]).toFixed(1) + '" cy="' + Y(s.ll[1]).toFixed(1) + '" r="3.4"></circle>');
+      });
+    }
+
+    var rDot = state.district ? 4.6 : 2.4;
+    shown.forEach(function (ar) {
+      ar.s.forEach(function (s) {
+        parts.push('<circle class="sc-dot' + (s.t === 'gem' ? ' gem' : '') + '" cx="' + X(s.ll[0]).toFixed(1) +
+          '" cy="' + Y(s.ll[1]).toFixed(1) + '" r="' + rDot + '"></circle>');
+      });
+    });
+
+    if (pick && state.district) {
+      pick.s.forEach(function (s, i) {
+        parts.push('<text class="sc-label" x="' + (X(s.ll[0]) + 7).toFixed(1) + '" y="' +
+          (Y(s.ll[1]) + 3 + i * 12).toFixed(1) + '">' + esc(shortName(s.n)) + '</text>');
+      });
+    }
+    mapEl.innerHTML = parts.join('');
+  }
+
+  var SCHOOL_INDEX = null;
+  function findSchool(name) {
+    if (!SCHOOL_INDEX) {
+      SCHOOL_INDEX = {};
+      DATA.areas.forEach(function (a) {
+        a.s.forEach(function (s) { SCHOOL_INDEX[s.n] = s; });
+      });
+    }
+    return SCHOOL_INDEX[name] || null;
+  }
+  function shortName(n) {
+    return n.replace(/\s*\(.*\)\s*$/, '').replace(/-?(Grundschule|Gemeinschaftsschule|Schule)$/, '').trim() || n;
+  }
+
+  function renderLegend() {
+    legendEl.innerHTML =
+      '<span><i style="background:#DCEBC6"></i>one school inside</span>' +
+      '<span><i style="background:#7CB342"></i>two or three inside</span>' +
+      '<span><i style="background:#F3D9C8"></i>no school inside</span>' +
+      '<span><i style="background:#1B5E20;border-radius:50%"></i>Grundschule</span>' +
+      '<span><i style="background:#B4532A;border-radius:50%"></i>Gemeinschaftsschule</span>';
+  }
+
+  function renderChips() {
+    chipsEl.innerHTML = DATA.districts.map(function (d) {
+      return '<button type="button" class="sc-chip" data-d="' + esc(d) + '"' +
+        (state.district === d ? ' aria-current="true"' : '') + '>' + esc(d) + '</button>';
+    }).join('');
+  }
+
+  function renderAreas() {
+    if (!state.district) { areaWrap.hidden = true; return; }
+    areaWrap.hidden = false;
+    var list = visibleAreas();
+    areasEl.innerHTML = list.map(function (a) {
+      var label = a.s.length ? shortName(a.s[0].n) + (a.s.length > 1 ? ' +' + (a.s.length - 1) : '') : 'no school inside';
+      return '<button type="button" class="sc-item" data-a="' + a.id + '"' +
+        (state.areaId === a.id ? ' aria-current="true"' : '') + '>' + esc('Area ' + a.id) +
+        '<span>' + esc(label) + '</span></button>';
+    }).join('');
+  }
+
+  function cityStats() {
+    var one = 0, multi = 0, zero = 0;
+    DATA.areas.forEach(function (a) {
+      if (!a.s.length) zero++; else if (a.s.length > 1) multi++; else one++;
+    });
+    return { one: one, multi: multi, zero: zero };
+  }
+
+  function renderOut() {
+    if (!state.district) {
+      var st = cityStats();
+      outEl.innerHTML =
+        '<h3>The whole city, before you pick anything</h3>' +
+        '<p class="sc-sub">Berlin draws ' + nf(DATA.totals.areas) + ' catchment areas around ' +
+        nf(DATA.totals.schools) + ' public primary schools. Every school sits inside exactly one of them.</p>' +
+        '<div class="sc-facts">' +
+        '<div class="sc-fact"><b>' + nf(st.one) + '</b><i>areas with one school inside</i></div>' +
+        '<div class="sc-fact"><b>' + nf(st.multi) + '</b><i>with two or three</i></div>' +
+        '<div class="sc-fact"><b>' + nf(st.zero) + '</b><i>with none inside the line</i></div>' +
+        '</div>' +
+        '<p class="sc-warn">Pick your district above. The map redraws to that district only, and the areas become tappable.</p>';
+      return;
+    }
+    var di = DATA.districts.indexOf(state.district);
+    var mine = DATA.areas.filter(function (a) { return a.d === di; });
+    if (!state.areaId) {
+      var multi = mine.filter(function (a) { return a.s.length > 1; }).length;
+      var zero = mine.filter(function (a) { return !a.s.length; }).length;
+      var sum = mine.reduce(function (acc, a) { return acc + a.s.length; }, 0);
+      outEl.innerHTML =
+        '<h3>' + esc(state.district) + '</h3>' +
+        '<p class="sc-sub">Tap any shape on the map, or any area in the list, to see the school behind it.</p>' +
+        '<div class="sc-facts">' +
+        '<div class="sc-fact"><b>' + mine.length + '</b><i>catchment areas</i></div>' +
+        '<div class="sc-fact"><b>' + sum + '</b><i>public primary schools</i></div>' +
+        '<div class="sc-fact"><b>' + multi + '</b><i>areas with more than one</i></div>' +
+        '<div class="sc-fact"><b>' + zero + '</b><i>areas with none inside</i></div>' +
+        '</div>';
+      return;
+    }
+    var ar = DATA.areas.filter(function (a) { return a.id === state.areaId; })[0];
+    var body = '<h3>Area ' + esc(ar.id) + ' · ' + esc(state.district) + '</h3>' +
+      '<p class="sc-sub">' + ar.km2.toFixed(2) + ' km&sup2; of Berlin, holding ' +
+      (ar.s.length === 0 ? 'no public primary school' : ar.s.length === 1 ? 'one public primary school' : ar.s.length + ' public primary schools') + '.</p>';
+
+    if (!ar.s.length) {
+      body += '<p class="sc-warn">No school building stands inside this boundary, so the school your child is sent to is over the line. Ten of Berlin’s 394 areas are drawn like this. Your Bezirksschulamt letter is the only thing that names it.</p>';
+    } else {
+      ar.s.forEach(function (s) {
+        body += '<div class="sc-school"><b>' + esc(s.n) + '</b><em>' + esc(s.a) + '</em>' +
+          '<span class="sc-tag' + (s.t === 'gem' ? ' gem' : '') + '">' +
+          (s.t === 'gem' ? 'Gemeinschaftsschule' : 'Grundschule') + '</span></div>';
+      });
+      if (ar.s.length > 1) {
+        body += '<p class="sc-warn">More than one school stands inside this boundary. Berlin does run shared catchments, and where it does the school office lets you say which of them you want. Ask at registration; do not assume the nearer one.</p>';
+      }
+    }
+
+    body += '<div class="sc-facts">' +
+      '<div class="sc-fact"><b>' + ar.nearN + '</b><i>other public primary schools within 1.5 km</i></div>' +
+      '<div class="sc-fact"><b>' + ar.km2.toFixed(2) + '</b><i>km&sup2; this area covers</i></div>' +
+      '</div>';
+
+    if (!state.showNear) {
+      body += '<button type="button" class="sc-go" id="goNear">Step 3 · Show what else is within 1.5 km</button>';
+    } else {
+      body += '<div class="sc-near"><p class="sc-h" style="margin:2px 0 0">If you apply to a different school, this is the realistic field</p><ul>' +
+        ar.near.map(function (n) {
+          return '<li><span>' + esc(n.n) + '</span><i>' + n.km.toFixed(2) + ' km</i></li>';
+        }).join('') + '</ul>' +
+        (ar.nearN > ar.near.length ? '<p class="sc-sub" style="margin-top:6px">' + (ar.nearN - ar.near.length) + ' more sit inside the ring.</p>' : '') +
+        (ar.nearN === 0 ? '<p class="sc-warn">Nothing else within 1.5 km. Here a request for another school means a real commute, and the school office weighs that against the reason you give.</p>'
+          : '<p class="sc-warn">A request for one of these is only granted if that school still has room after its own catchment children are placed. Distance is not one of the legal reasons; siblings, a specific school programme, and care you can prove are.</p>') +
+        '</div>' +
+        '<button type="button" class="sc-go ghost" id="hideNear">Hide the 1.5 km field</button>';
+    }
+    outEl.innerHTML = body;
+  }
+
+  function renderSteps() {
+    [['s1', 1], ['s2', 2], ['s3', 3]].forEach(function (pair) {
+      var el = document.getElementById(pair[0]);
+      el.className = state.currentStep === pair[1] ? 'on' : (state.currentStep > pair[1] ? 'done' : '');
+    });
+    document.getElementById('h1').textContent = state.district
+      ? 'Step 1 · District: ' + state.district
+      : 'Step 1 · Pick your district';
+  }
+
+  function renderAll() {
+    renderChips(); renderAreas(); renderMap(); renderOut(); renderSteps(); renderLegend();
+  }
+
+  chipsEl.addEventListener('click', function (ev) {
+    var btn = ev.target.closest('.sc-chip');
+    if (!btn) return;
+    var d = btn.getAttribute('data-d');
+    state.district = (state.district === d) ? null : d;
+    state.areaId = null;
+    state.showNear = false;
+    state.currentStep = state.district ? 2 : 1;
+    renderAll();
+  });
+
+  function pickArea(id) {
+    state.areaId = (state.areaId === id) ? null : id;
+    state.showNear = false;
+    state.currentStep = state.areaId ? 3 : 2;
+    renderAll();
+  }
+
+  areasEl.addEventListener('click', function (ev) {
+    var btn = ev.target.closest('.sc-item');
+    if (btn) pickArea(btn.getAttribute('data-a'));
+  });
+
+  mapEl.addEventListener('click', function (ev) {
+    var p = ev.target.closest('.sc-area');
+    if (!p) return;
+    var id = p.getAttribute('data-a');
+    if (!state.district) {
+      var a = DATA.areas.filter(function (x) { return x.id === id; })[0];
+      state.district = DATA.districts[a.d];
+      state.areaId = id;
+      state.showNear = false;
+      state.currentStep = 3;
+      renderAll();
+      return;
+    }
+    pickArea(id);
+  });
+
+  outEl.addEventListener('click', function (ev) {
+    if (ev.target.id === 'goNear') { state.showNear = true; state.currentStep = 3; renderAll(); }
+    if (ev.target.id === 'hideNear') { state.showNear = false; renderAll(); }
+  });
+
+  fetch('data.json').then(function (r) { return r.json(); }).then(function (j) {
+    DATA = j;
+    document.getElementById('src').innerHTML =
+      'Catchment boundaries and school addresses: Geoportal Berlin, WFS <em>schulen</em> and <em>schulen_esb</em>, Senatsverwaltung f&uuml;r Bildung, Jugend und Familie, school year 2025/26, Datenlizenz Deutschland Zero 2.0. Boundaries simplified to about 20 m for drawing. Read on ' +
+      esc(j.measured) + '. The Bezirksschulamt letter is the binding answer for your address.';
+    renderAll();
+  });
+})();
+</script>
+<script defer src="../js/brand.js"></script>
+</body>
+</html>
