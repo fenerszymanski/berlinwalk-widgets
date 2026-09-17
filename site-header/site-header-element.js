@@ -109,6 +109,7 @@ class BWHeaderElement extends HTMLElement {
     this._gamesMenuId = `${this._instanceId}-games-menu`;
     this._blogMenuId = `${this._instanceId}-blog-menu`;
     this._hacksMenuId = `${this._instanceId}-hacks-menu`;
+    this.dataset.bwNavigation = "20260917";
     this._render();
     BW_HEADER_INSTANCES.add(this);
     this._visibilityChangeHandler = bwHeaderScheduleReconcile;
@@ -1100,8 +1101,6 @@ class BWHeaderElement extends HTMLElement {
               </span>
               <span class="bw-header-top-sep" aria-hidden="true">•</span>
               <span class="bw-header-top-item">Free · Tip-based</span>
-              <span class="bw-header-top-sep bw-header-top-item-hide-sm" aria-hidden="true">•</span>
-              <span class="bw-header-top-item bw-header-top-item-hide-sm">${BW_HEADER_SCHEDULE}</span>
             </div>
           </div>
         </div>
@@ -1116,7 +1115,7 @@ class BWHeaderElement extends HTMLElement {
               <ul class="bw-header-nav-list">
                 <li class="bw-header-dropdown">
                   <button class="bw-header-dropdown-trigger" type="button" aria-expanded="false" aria-controls="${this._tourMenuId}">
-                    Tour <span class="bw-header-caret" aria-hidden="true">⌄</span>
+                    Walking Tour <span class="bw-header-caret" aria-hidden="true">⌄</span>
                   </button>
                   <ul id="${this._tourMenuId}" class="bw-header-submenu">
                     <li><a href="${BW_HEADER_LINKS.route}">Tour Route</a></li>
@@ -1126,19 +1125,20 @@ class BWHeaderElement extends HTMLElement {
                     <li><a href="${BW_HEADER_LINKS.privateTour}">Private Tours</a></li>
                   </ul>
                 </li>
+                <li><a href="${BW_HEADER_LINKS.audioTours}">Audio Tours</a></li>
                 <li class="bw-header-dropdown">
                   <button class="bw-header-dropdown-trigger" type="button" aria-expanded="false" aria-controls="${this._productsMenuId}">
-                    Guides &amp; Downloads <span class="bw-header-caret" aria-hidden="true">⌄</span>
+                    Plan Your Visit <span class="bw-header-caret" aria-hidden="true">⌄</span>
                   </button>
                   <ul id="${this._productsMenuId}" class="bw-header-submenu">
-                    <li><a href="${BW_HEADER_LINKS.planner}">Berlin Trip Planner · <span style="font-size:.82em;font-weight:500;opacity:.85">from</span> €7.99</a></li>
-                    <li><a href="${BW_HEADER_LINKS.landmarksGuide}">Berlin Landmarks Guide · €2.99</a></li>
-                    <li><a href="${BW_HEADER_LINKS.audioTours}">Audio Tours · <span style="font-size:.82em;font-weight:500;opacity:.85">from</span> €4.99</a></li>
-                    <li><a href="${BW_HEADER_LINKS.firstDayRescue}">First-Day Rescue Plan · €4.99</a></li>
-                    <li><a href="${BW_HEADER_LINKS.photoMissions}">Photo Missions · €3.99</a></li>
+                    <li><a href="${BW_HEADER_LINKS.plan}">Free Berlin Tools</a></li>
+                    <li><a href="${BW_HEADER_LINKS.dateCheck}">Berlin Date Check</a></li>
+                    <li><a href="${BW_HEADER_LINKS.planner}">Berlin Trip Planner</a></li>
+                    <li><a href="${BW_HEADER_LINKS.firstDayRescue}">First-Day Rescue Plan</a></li>
+                    <li><a href="${BW_HEADER_LINKS.landmarksGuide}">Berlin Landmarks Guide</a></li>
+                    <li><a href="${BW_HEADER_LINKS.photoMissions}">Photo Missions</a></li>
                   </ul>
                 </li>
-                <li><a href="${BW_HEADER_LINKS.games}">Games</a></li>
                 <li class="bw-header-dropdown">
                   <a class="bw-header-dropdown-trigger" href="${BW_HEADER_LINKS.blog}" aria-expanded="false" aria-controls="${this._blogMenuId}">
                     Blog <span class="bw-header-caret" aria-hidden="true">⌄</span>
@@ -1153,24 +1153,11 @@ class BWHeaderElement extends HTMLElement {
                     <li><a href="${BW_HEADER_LINKS.blogBeforeAfter}">Before &amp; After</a></li>
                   </ul>
                 </li>
-                <li class="bw-header-dropdown">
-                  <a class="bw-header-dropdown-trigger" href="${BW_HEADER_LINKS.plan}" aria-expanded="false" aria-controls="${this._hacksMenuId}">
-                    Explore Berlin <span class="bw-header-caret" aria-hidden="true">⌄</span>
-                  </a>
-                  <ul id="${this._hacksMenuId}" class="bw-header-submenu">
-                    <li><a href="${BW_HEADER_LINKS.historyStory}">Berlin History Story</a></li>
-                    <li><a href="${BW_HEADER_LINKS.wallTimeline}">Berlin Wall Timeline</a></li>
-                    <li><a href="${BW_HEADER_LINKS.dateCheck}">Berlin Date Check</a></li>
-                    <li><a href="${BW_HEADER_LINKS.whatsOpen}">What's Open Today</a></li>
-                    <li><a href="${BW_HEADER_LINKS.ticketCalculator}">Transport Ticket Calculator</a></li>
-                    <li><a href="${BW_HEADER_LINKS.luggageStorage}">Luggage Storage Map</a></li>
-                  </ul>
-                </li>
               </ul>
             </nav>
 
             <div class="bw-header-cta">
-              <a class="bw-header-book" href="${BW_HEADER_BOOKING_URL}">Book Now</a>
+              <a class="bw-header-book" href="${BW_HEADER_BOOKING_URL}">Book Free Tour</a>
               <button class="bw-header-hamburger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="${this._mobileMenuId}">
                 <span></span><span></span><span></span>
               </button>
@@ -1191,7 +1178,7 @@ class BWHeaderElement extends HTMLElement {
 
             <nav class="bw-header-mobile-nav" aria-label="Mobile primary">
               <details class="bw-header-mobile-section">
-                <summary class="bw-header-mobile-section-label">Tour</summary>
+                <summary class="bw-header-mobile-section-label">Walking Tour</summary>
                 <a href="${BW_HEADER_LINKS.route}">Tour Route</a>
                 <a href="${BW_HEADER_LINKS.meetingPoint}">Meeting Point</a>
                 <a href="${BW_HEADER_LINKS.reviews}">Reviews</a>
@@ -1199,16 +1186,16 @@ class BWHeaderElement extends HTMLElement {
                 <a href="${BW_HEADER_LINKS.privateTour}">Private Tours</a>
               </details>
 
+              <a href="${BW_HEADER_LINKS.audioTours}">Audio Tours</a>
               <details class="bw-header-mobile-section">
-                <summary class="bw-header-mobile-section-label">Guides &amp; Downloads</summary>
-                <a href="${BW_HEADER_LINKS.planner}">Berlin Trip Planner · <span style="font-size:.82em;font-weight:500;opacity:.85">from</span> €7.99</a>
-                <a href="${BW_HEADER_LINKS.landmarksGuide}">Berlin Landmarks Guide · €2.99</a>
-                <a href="${BW_HEADER_LINKS.audioTours}">Audio Tours · <span style="font-size:.82em;font-weight:500;opacity:.85">from</span> €4.99</a>
-                <a href="${BW_HEADER_LINKS.firstDayRescue}">First-Day Rescue Plan · €4.99</a>
-                <a href="${BW_HEADER_LINKS.photoMissions}">Photo Missions · €3.99</a>
+                <summary class="bw-header-mobile-section-label">Plan Your Visit</summary>
+                <a href="${BW_HEADER_LINKS.plan}">Free Berlin Tools</a>
+                <a href="${BW_HEADER_LINKS.dateCheck}">Berlin Date Check</a>
+                <a href="${BW_HEADER_LINKS.planner}">Berlin Trip Planner</a>
+                <a href="${BW_HEADER_LINKS.firstDayRescue}">First-Day Rescue Plan</a>
+                <a href="${BW_HEADER_LINKS.landmarksGuide}">Berlin Landmarks Guide</a>
+                <a href="${BW_HEADER_LINKS.photoMissions}">Photo Missions</a>
               </details>
-
-              <a href="${BW_HEADER_LINKS.games}">Games</a>
 
               <details class="bw-header-mobile-section">
                 <summary class="bw-header-mobile-section-label"><a class="bw-header-mobile-section-link" href="${BW_HEADER_LINKS.blog}">Blog</a></summary>
@@ -1220,20 +1207,11 @@ class BWHeaderElement extends HTMLElement {
                 <a href="${BW_HEADER_LINKS.blogBerlinMyths}">Berlin Myths</a>
                 <a href="${BW_HEADER_LINKS.blogBeforeAfter}">Before &amp; After</a>
               </details>
-              <details class="bw-header-mobile-section">
-                <summary class="bw-header-mobile-section-label"><a class="bw-header-mobile-section-link" href="${BW_HEADER_LINKS.plan}">Explore Berlin</a></summary>
-                <a href="${BW_HEADER_LINKS.historyStory}">Berlin History Story</a>
-                <a href="${BW_HEADER_LINKS.wallTimeline}">Berlin Wall Timeline</a>
-                <a href="${BW_HEADER_LINKS.dateCheck}">Berlin Date Check</a>
-                <a href="${BW_HEADER_LINKS.whatsOpen}">What's Open Today</a>
-                <a href="${BW_HEADER_LINKS.ticketCalculator}">Transport Ticket Calculator</a>
-                <a href="${BW_HEADER_LINKS.luggageStorage}">Luggage Storage Map</a>
-              </details>
             </nav>
 
             <div class="bw-header-mobile-cta">
-              <a class="bw-header-book" href="${BW_HEADER_BOOKING_URL}">Book Your Free Tour</a>
-              <p class="bw-header-mobile-trust"><span aria-hidden="true">★ </span><strong>9.8 / 10</strong> on FreeTour · ${BW_HEADER_SCHEDULE}</p>
+              <a class="bw-header-book" href="${BW_HEADER_BOOKING_URL}">Book Free Tour</a>
+              <p class="bw-header-mobile-trust"><span aria-hidden="true">★ </span><strong>9.8 / 10</strong> on FreeTour · Free to book, tip-based</p>
             </div>
           </div>
         </div>
