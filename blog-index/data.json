@@ -1,9 +1,9 @@
 {
-  "updatedAt": "2026-09-17T14:06:14.077Z",
+  "updatedAt": "2026-09-17T20:09:13.432Z",
   "source": "Wix Blog API",
   "popularSource": "Wix Blog metrics.views lifetime sort",
-  "totalPosts": 395,
-  "toolsTotal": 315,
+  "totalPosts": 396,
+  "toolsTotal": 316,
   "bookingUrl": "https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based",
   "navTopics": [
     {
@@ -281,23 +281,6 @@
       "relatedToolSlug": "berlin-beer-season-calendar"
     },
     {
-      "title": "Public Toilets in Berlin: Where to Find Them, What They Cost, and Free Options",
-      "slug": "public-toilets-in-berlin",
-      "path": "/post/public-toilets-in-berlin",
-      "url": "https://www.berlinwalk.com/post/public-toilets-in-berlin",
-      "excerpt": "Need a toilet in Berlin? This tourist guide shows where to find public toilets, what they cost, where the free options are, and when stations, malls, or the Berliner Toilette app help.",
-      "category": "Tourist Tips",
-      "categorySlug": "tourist-tips",
-      "topic": "first-day",
-      "topicLabel": "First Day in Berlin",
-      "readTime": "5 min read",
-      "publishedDate": "2026-05-16T18:51:08.424Z",
-      "image": "https://static.wixstatic.com/media/5a08a3_75e950f67226457e8af15fbe3a7f46fd~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/nsplsh_7bdfcc030bd74d1d99d1624e3799f48d~mv2.jpg",
-      "thumb": "https://static.wixstatic.com/media/5a08a3_75e950f67226457e8af15fbe3a7f46fd~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/nsplsh_7bdfcc030bd74d1d99d1624e3799f48d~mv2.jpg",
-      "alt": "Restroom sign with male and female symbols on a brick wall, pointing right. Green trees and glass buildings in the background.",
-      "relatedToolSlug": "berlin-public-toilets"
-    },
-    {
       "title": "Berlin Airport to Alexanderplatz: The Easy Way",
       "slug": "how-to-get-from-berlin-airport-to-alexanderplatz-the-easy-way",
       "path": "/post/how-to-get-from-berlin-airport-to-alexanderplatz-the-easy-way",
@@ -313,6 +296,23 @@
       "thumb": "https://static.wixstatic.com/media/nsplsh_a03121bf8b20473fb5d65a66bb71db09~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/a%20red%20and%20yellow%20train%20traveling%20past%20a%20tall%20building.jpg",
       "alt": "sbahn berlin",
       "relatedToolSlug": "berlin-landmarks-map"
+    },
+    {
+      "title": "Public Toilets in Berlin: Where to Find Them, What They Cost, and Free Options",
+      "slug": "public-toilets-in-berlin",
+      "path": "/post/public-toilets-in-berlin",
+      "url": "https://www.berlinwalk.com/post/public-toilets-in-berlin",
+      "excerpt": "Need a toilet in Berlin? This tourist guide shows where to find public toilets, what they cost, where the free options are, and when stations, malls, or the Berliner Toilette app help.",
+      "category": "Tourist Tips",
+      "categorySlug": "tourist-tips",
+      "topic": "first-day",
+      "topicLabel": "First Day in Berlin",
+      "readTime": "5 min read",
+      "publishedDate": "2026-05-16T18:51:08.424Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_75e950f67226457e8af15fbe3a7f46fd~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/nsplsh_7bdfcc030bd74d1d99d1624e3799f48d~mv2.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_75e950f67226457e8af15fbe3a7f46fd~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/nsplsh_7bdfcc030bd74d1d99d1624e3799f48d~mv2.jpg",
+      "alt": "Restroom sign with male and female symbols on a brick wall, pointing right. Green trees and glass buildings in the background.",
+      "relatedToolSlug": "berlin-public-toilets"
     },
     {
       "title": "5 Best Döner Kebab Spots in Berlin You Need to Try",
@@ -1802,6 +1802,23 @@
   ],
   "latest": [
     {
+      "title": "Berlin Rental Deposit: The Four Dates That Decide When You Get It Back",
+      "slug": "berlin-rental-deposit",
+      "path": "/post/berlin-rental-deposit",
+      "url": "https://www.berlinwalk.com/post/berlin-rental-deposit",
+      "excerpt": "You handed the keys back months ago and nobody has written. That silence is the normal Berlin experience, and it is not a dead end. Four dates hang off the day the flat went back, each of them fixed by law, and each one kills a different reason your landlord has for holding on to the money. Here is where the cap sits, when damage claims expire, how long the service-charge reserve may lawfully wait, and the deadline that is yours rather than theirs.",
+      "category": "Living in Berlin",
+      "categorySlug": "living-in-berlin",
+      "topic": "living-in-berlin",
+      "topicLabel": "Living in Berlin",
+      "readTime": "8 min read",
+      "publishedDate": "2026-09-17T20:06:48.168Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_e8d4459746b54811a28bfa68735fd473~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/00-cover-hermannstrasse-facade.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_e8d4459746b54811a28bfa68735fd473~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/00-cover-hermannstrasse-facade.jpg",
+      "alt": "The ornamented brick and stone facade of an apartment building at Hermannstrasse 120 in Berlin-Neukoelln, with balconies and tall windows across two storeys",
+      "relatedToolSlug": "berlin-deposit-release-ledger"
+    },
+    {
       "title": "Berlin Monthly Ticket: The City One Costs More Than the Whole Country",
       "slug": "berlin-monthly-ticket",
       "path": "/post/berlin-monthly-ticket",
@@ -1987,26 +2004,26 @@
       "thumb": "https://static.wixstatic.com/media/5a08a3_6826ea13f1064d0c94df3606f6480d8a~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/hufeisensiedlung-aerial.jpg",
       "alt": "An aerial view of the Hufeisensiedlung in Berlin-Britz, the horseshoe-shaped white housing block curving around a green courtyard and a small pond, with rows of red-roofed terraced houses beyond",
       "relatedToolSlug": "berlin-wbs-income-ladder"
-    },
+    }
+  ],
+  "allPosts": [
     {
-      "title": "Rundfunkbeitrag in Berlin: One Flat, One Fee, and Four Ways to Pay Twice",
-      "slug": "rundfunkbeitrag-berlin",
-      "path": "/post/rundfunkbeitrag-berlin",
-      "url": "https://www.berlinwalk.com/post/rundfunkbeitrag-berlin",
-      "excerpt": "One flat, one contribution, 18.36 euro a month, whoever lives there and whatever they own. In a city where 977,000 households hold a single person that lands harder than anywhere else. Here is who owes it, the four places Berliners quietly pay twice, and the exemptions that are never granted automatically.",
+      "title": "Berlin Rental Deposit: The Four Dates That Decide When You Get It Back",
+      "slug": "berlin-rental-deposit",
+      "path": "/post/berlin-rental-deposit",
+      "url": "https://www.berlinwalk.com/post/berlin-rental-deposit",
+      "excerpt": "You handed the keys back months ago and nobody has written. That silence is the normal Berlin experience, and it is not a dead end. Four dates hang off the day the flat went back, each of them fixed by law, and each one kills a different reason your landlord has for holding on to the money. Here is where the cap sits, when damage claims expire, how long the service-charge reserve may lawfully wait, and the deadline that is yours rather than theirs.",
       "category": "Living in Berlin",
       "categorySlug": "living-in-berlin",
       "topic": "living-in-berlin",
       "topicLabel": "Living in Berlin",
-      "readTime": "7 min read",
-      "publishedDate": "2026-09-14T13:46:44.773Z",
-      "image": "https://static.wixstatic.com/media/5a08a3_d5ae3461b0684a15b23eb839d532cade~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/haus-des-rundfunks.jpg",
-      "thumb": "https://static.wixstatic.com/media/5a08a3_d5ae3461b0684a15b23eb839d532cade~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/haus-des-rundfunks.jpg",
-      "alt": "The main entrance of the Haus des Rundfunks on Masurenallee in Berlin-Charlottenburg, gold lettering above a brick and glass doorway with people walking in",
-      "relatedToolSlug": "berlin-rundfunkbeitrag-check"
-    }
-  ],
-  "allPosts": [
+      "readTime": "8 min read",
+      "publishedDate": "2026-09-17T20:06:48.168Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_e8d4459746b54811a28bfa68735fd473~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/00-cover-hermannstrasse-facade.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_e8d4459746b54811a28bfa68735fd473~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/00-cover-hermannstrasse-facade.jpg",
+      "alt": "The ornamented brick and stone facade of an apartment building at Hermannstrasse 120 in Berlin-Neukoelln, with balconies and tall windows across two storeys",
+      "relatedToolSlug": "berlin-deposit-release-ledger"
+    },
     {
       "title": "Berlin Monthly Ticket: The City One Costs More Than the Whole Country",
       "slug": "berlin-monthly-ticket",

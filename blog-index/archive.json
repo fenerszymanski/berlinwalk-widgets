@@ -1,9 +1,26 @@
 {
-  "updatedAt": "2026-09-17T14:06:14.077Z",
+  "updatedAt": "2026-09-17T20:09:13.432Z",
   "source": "Wix Blog API",
-  "totalPosts": 395,
+  "totalPosts": 396,
   "bookingUrl": "https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based",
   "allPosts": [
+    {
+      "title": "Berlin Rental Deposit: The Four Dates That Decide When You Get It Back",
+      "slug": "berlin-rental-deposit",
+      "path": "/post/berlin-rental-deposit",
+      "url": "https://www.berlinwalk.com/post/berlin-rental-deposit",
+      "excerpt": "You handed the keys back months ago and nobody has written. That silence is the normal Berlin experience, and it is not a dead end. Four dates hang off the day the flat went back, each of them fixed by law, and each one kills a different reason your landlord has for holding on to the money. Here is where the cap sits, when damage claims expire, how long the service-charge reserve may lawfully wait, and the deadline that is yours rather than theirs.",
+      "category": "Living in Berlin",
+      "categorySlug": "living-in-berlin",
+      "topic": "living-in-berlin",
+      "topicLabel": "Living in Berlin",
+      "readTime": "8 min read",
+      "publishedDate": "2026-09-17T20:06:48.168Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_e8d4459746b54811a28bfa68735fd473~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/00-cover-hermannstrasse-facade.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_e8d4459746b54811a28bfa68735fd473~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/00-cover-hermannstrasse-facade.jpg",
+      "alt": "The ornamented brick and stone facade of an apartment building at Hermannstrasse 120 in Berlin-Neukoelln, with balconies and tall windows across two storeys",
+      "relatedToolSlug": "berlin-deposit-release-ledger"
+    },
     {
       "title": "Berlin Monthly Ticket: The City One Costs More Than the Whole Country",
       "slug": "berlin-monthly-ticket",
