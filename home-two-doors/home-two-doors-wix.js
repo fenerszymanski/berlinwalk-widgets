@@ -6,6 +6,7 @@
   const base = new URL('./', document.currentScript.src);
   const style = document.createElement('style');
   style.textContent = `
+    html.bw-two-doors-active, html.bw-two-doors-active body { overflow-x:clip!important; }
     #c1dmp .bw-two-doors-layout { display:flex!important; flex-direction:column!important; gap:0!important; height:auto!important; min-height:0!important; }
     #c1dmp .bw-two-doors-layout > #comp-kbgakxea { position:relative!important; inset:auto!important; order:0!important; flex:none!important; width:100%!important; margin:0!important; }
     #c1dmp .bw-two-doors-layout > #PAGE_SECTIONSc1dmp { display:block!important; order:1!important; width:100%!important; min-height:0!important; height:auto!important; margin:0!important; padding:0!important; }
@@ -29,6 +30,7 @@
   function reconcile() {
     const isHome = /^\/$/.test(location.pathname);
     if (!isHome) {
+      document.documentElement.classList.remove('bw-two-doors-active');
       if (mounted) {
         mounted.parentElement?.classList.remove('bw-two-doors-layout');
         mounted.classList.remove('bw-two-doors-mounted');
@@ -46,6 +48,7 @@
       main.prepend(component);
     }
     main.classList.add('bw-two-doors-mounted');
+    document.documentElement.classList.add('bw-two-doors-active');
     main.parentElement.classList.add('bw-two-doors-layout');
     mounted = main;
   }
