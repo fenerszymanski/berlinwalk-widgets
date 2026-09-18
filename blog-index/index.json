@@ -1,9 +1,9 @@
 {
-  "updatedAt": "2026-09-18T13:47:45.013Z",
+  "updatedAt": "2026-09-18T19:49:28.923Z",
   "source": "Wix Blog API",
   "popularSource": "Wix Blog metrics.views lifetime sort",
-  "totalPosts": 399,
-  "toolsTotal": 319,
+  "totalPosts": 400,
+  "toolsTotal": 320,
   "bookingUrl": "https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based",
   "navTopics": [
     {
@@ -1802,6 +1802,23 @@
   ],
   "latest": [
     {
+      "title": "Tax Return in Berlin: The Years You Can Still Claim and What Your Commute Is Worth",
+      "slug": "tax-return-in-berlin",
+      "path": "/post/tax-return-in-berlin",
+      "url": "https://www.berlinwalk.com/post/tax-return-in-berlin",
+      "excerpt": "Filing a tax return is voluntary for most Berlin employees, but only four years back, and 2022 closes on 31 December 2026. A short Berlin commute rarely beats the €1,230 flat allowance on its own. Home office days, a work laptop or your own ticket usually do. Here is how to check each open year.",
+      "category": "Living in Berlin",
+      "categorySlug": "living-in-berlin",
+      "topic": "living-in-berlin",
+      "topicLabel": "Living in Berlin",
+      "readTime": "6 min read",
+      "publishedDate": "2026-09-18T19:47:30.905Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_81f2a6c0cefa45539029b978daf18e41~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/00-cover-finanzamt-kreuzberg-mehringdamm.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_81f2a6c0cefa45539029b978daf18e41~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/00-cover-finanzamt-kreuzberg-mehringdamm.jpg",
+      "alt": "The long yellow brick facade of the tax office on Mehringdamm in Kreuzberg under a clear blue sky, with a castle-like tower at the left end and an empty street in front",
+      "relatedToolSlug": "berlin-tax-refund-years"
+    },
+    {
       "title": "Wohngeld Berlin: What Your Household Would Get, and Why to Apply This Year",
       "slug": "wohngeld-berlin",
       "path": "/post/wohngeld-berlin",
@@ -1987,23 +2004,6 @@
       "thumb": "https://static.wixstatic.com/media/5a08a3_a96e5d84fdcc4c40957471c6814c2d28~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-weidenweg-corner-block.jpg",
       "alt": "A corner block on Weidenweg in Berlin-Friedrichshain under a clear blue sky, five storeys of pale render above an arcade of ground-floor openings, bare trees along the pavement and cars parked in front",
       "relatedToolSlug": "berlin-notice-deadline"
-    },
-    {
-      "title": "Winter Tyres in Berlin: When the Road Actually Freezes",
-      "slug": "winter-tyres-berlin",
-      "path": "/post/winter-tyres-berlin",
-      "url": "https://www.berlinwalk.com/post/winter-tyres-berlin",
-      "excerpt": "German law does not give you a date for winter tyres. It gives you a condition, and in Berlin that condition arrives on the road about five weeks before you can feel it in the air. Thirty winters of station records put the median first ground frost on 30 September and the median first air frost on 6 November. Here is what that means for the week you book the swap, what the Alpine symbol changed in 2024, and what the gap costs in fines and insurance.",
-      "category": "Living in Berlin",
-      "categorySlug": "living-in-berlin",
-      "topic": "living-in-berlin",
-      "topicLabel": "Living in Berlin",
-      "readTime": "8 min read",
-      "publishedDate": "2026-09-15T13:38:36.643Z",
-      "image": "https://static.wixstatic.com/media/5a08a3_1b164f39ea934b0da1933829edfe8d85~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-wilmersdorf-snow-junction-night.jpg",
-      "thumb": "https://static.wixstatic.com/media/5a08a3_1b164f39ea934b0da1933829edfe8d85~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-wilmersdorf-snow-junction-night.jpg",
-      "alt": "A snowy junction at Konstanzer Strasse and Berliner Strasse in Berlin-Wilmersdorf at night, street lamps lit, a car blurring past through packed snow on the carriageway",
-      "relatedToolSlug": "berlin-tyre-swap-window"
     }
   ]
 }
