@@ -9634,6 +9634,38 @@
       ],
       "iconStatus": "live-wix-media",
       "cmsItemId": "68bc7ccc-8145-4451-a411-354d548d2c63"
+    },
+    {
+      "slug": "berlin-wohngeld-estimator",
+      "title": "Berlin Wohngeld Estimator",
+      "lead": "Type in your household size, rent without heating and gross pay to estimate the Wohngeld a Berlin household would get under the current rules. A map of rent against pay shows where the claim runs out, and your district's waiting time shows when a decision is likely.",
+      "category": "Money",
+      "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/berlin-wohngeld-estimator/",
+      "embedHeight": 1650,
+      "image": "https://static.wixstatic.com/media/5a08a3_9e339dd1592145e09f28e049e4eca274~mv2.png",
+      "hubCategory": "MoneyShopping",
+      "type": "Calculator",
+      "priority": 3,
+      "tags": [
+        "wohngeld",
+        "housing benefit",
+        "rent subsidy",
+        "mietzuschuss",
+        "rent",
+        "wohnungsamt",
+        "living in berlin",
+        "money",
+        "bills"
+      ],
+      "aliases": [
+        "wohngeld berlin",
+        "wohngeld rechner berlin",
+        "housing benefit berlin calculator",
+        "wohngeld calculator",
+        "wohngeld 2027"
+      ],
+      "iconStatus": "live-wix-media",
+      "cmsItemId": "e4738f57-a6cc-404e-8b2d-7451b7b2fbce"
     }
   ],
   "hubCategories": [

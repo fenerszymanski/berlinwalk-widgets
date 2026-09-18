@@ -12343,5 +12343,35 @@
         "a": "No. The urban apes 10+1 card is tied to the person and to the hall where it was bought. To climb in every urban apes hall you need the L membership at €69.90 a month plus a €19.90 joining fee."
       }
     ]
+  },
+  "wohngeld-berlin": {
+    "title": "Wohngeld in Berlin - FAQ",
+    "subtitle": "Who gets Wohngeld in Berlin, how the rent cap and income rules work, what the 2027 reform changes and how long the Berlin offices take.",
+    "items": [
+      {
+        "q": "Who can get Wohngeld in Berlin?",
+        "a": "Households that pay their own rent and support themselves but struggle with the housing cost: low and middle earners, pensioners, one-earner families and single parents. It does not depend on citizenship, but you need a legal right to stay. People on Grundsicherungsgeld or Grundsicherung im Alter and most students with a BAföG claim are excluded."
+      },
+      {
+        "q": "How much rent counts for Wohngeld in Berlin?",
+        "a": "Berlin is in rent level IV. The formula counts your Bruttokaltmiete, base rent plus service charges without heating, up to €530.20 for one person, €643.80 for two, €766.60 for three, €892.40 for four and €1,021.20 for five. It then adds a fixed heating relief, €110.40 for one person and €197.80 for four."
+      },
+      {
+        "q": "How is income counted for Wohngeld?",
+        "a": "From gross income the office deducts the €1,230 employee allowance per earner and then 10% each if you pay income tax, health insurance and pension contributions, so a normal employee loses 30% before the formula starts. Single parents with a child under 18 get a further €1,320 a year off. Kindergeld is not counted."
+      },
+      {
+        "q": "What changes to Wohngeld in 2027?",
+        "a": "The federal cabinet approved a draft law on 6 July 2026 that would halve the permanent heating component, cancel the increase due in January 2027 and change the formula from 1 January 2027. Parliament still has to pass it. Under the draft, Wohngeld approved before 2027 runs on until the end of its approval period, and an application filed in 2026 keeps its December 2026 amount if the new rules would pay less."
+      },
+      {
+        "q": "How long does a Wohngeld application take in Berlin?",
+        "a": "In December 2025 the Berlin average was 13 weeks, from 8 weeks in Spandau to 21 in Friedrichshain-Kreuzberg, according to the Senate's answer to a written question. Wohngeld still counts from the first of the month in which your application arrives, so the wait does not cost you money once it is in."
+      },
+      {
+        "q": "How do I apply for Wohngeld in Berlin?",
+        "a": "Apply to the Wohnungsamt of your own district, online through the Berlin service portal, by post or in person. It is free. You need ID, your rental contract, proof of the last three months' rent and income proof for everyone in the household. Send the application even if a document is missing and deliver it later."
+      }
+    ]
   }
 }
