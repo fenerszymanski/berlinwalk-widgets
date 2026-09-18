@@ -66,6 +66,19 @@
     .stop .body{padding:12px 14px 14px}
   }
 
+  .toolCreditsRow{padding:0 16px 16px}
+  .toolCreditsTrigger{appearance:none;border:1.5px solid #bfd8b7;border-radius:999px;background:#fff;color:var(--green-deep);cursor:pointer;font:800 11px/1 Montserrat,system-ui,sans-serif;padding:8px 12px}
+  .toolCreditsTrigger:hover{background:#f1f7e8;border-color:var(--green)}
+  .toolCreditsTrigger:focus-visible,.toolCreditsClose:focus-visible{outline:3px solid var(--yellow);outline-offset:2px}
+  .toolCreditsBackdrop[hidden],.toolCreditsPanel[hidden]{display:none!important}
+  .toolCreditsBackdrop{position:fixed;inset:0;z-index:100;background:rgba(18,61,24,.48)}
+  .toolCreditsPanel{position:fixed;z-index:101;inset:auto auto 14px 50%;transform:translateX(-50%);width:min(640px,calc(100% - 28px));max-height:calc(100% - 28px);overflow:auto;background:#fff;border:2px solid var(--green);border-radius:16px;box-shadow:0 18px 50px rgba(18,61,24,.28);padding:18px}
+  .toolCreditsHead{display:flex;align-items:center;justify-content:space-between;gap:12px}
+  .toolCreditsPanel h2{color:var(--green-deep);font-size:18px;margin:0}
+  .toolCreditsPanel ul{margin:14px 0 0;padding-left:20px}
+  .toolCreditsPanel li{color:#4f514a;font-size:11.5px;line-height:1.55;margin-bottom:7px}
+  .toolCreditsPanel a{color:var(--green-deep);font-weight:700}
+  .toolCreditsClose{appearance:none;border:0;border-radius:999px;background:var(--yellow);color:var(--green-deep);cursor:pointer;flex:none;font:800 12px/1 Montserrat,system-ui,sans-serif;padding:9px 12px}
   .note{margin:4px 16px 16px;background:#fbfdf6;border:1px solid var(--line);border-left:4px solid var(--lime);border-radius:0 12px 12px 0;padding:11px 14px;font-size:12.6px;color:#3c4a37;line-height:1.55}
   .note b{color:var(--green-deep)}
 </style>
@@ -101,11 +114,51 @@
       <div id="stops"></div>
     </div>
     <div class="note" id="note"></div>
+    <div class="toolCreditsRow"><button class="toolCreditsTrigger" id="toolCreditsTrigger" type="button" aria-expanded="false" aria-controls="toolCreditsPanel">Tool visual credits</button></div>
   </div>
 </div>
 
+<div class="toolCreditsBackdrop" id="toolCreditsBackdrop" hidden></div>
+<section class="toolCreditsPanel" id="toolCreditsPanel" role="dialog" aria-modal="true" aria-labelledby="toolCreditsTitle" hidden>
+  <div class="toolCreditsHead">
+    <h2 id="toolCreditsTitle">Tool visual credits</h2>
+    <button class="toolCreditsClose" id="toolCreditsClose" type="button">Close</button>
+  </div>
+  <ul>
+    <li><a href="https://commons.wikimedia.org/wiki/File:East_Side_Gallery_-_Dmitri_Vrubel_-_Le_baiser_(Berlin).jpg" target="_blank" rel="noopener">East Side Gallery, Brotherhood Kiss</a> — © Gzen92 · <a href="https://creativecommons.org/licenses/by-sa/4.0" target="_blank" rel="noopener">CC BY-SA 4.0</a> · resized for tool display.</li>
+    <li><a href="https://commons.wikimedia.org/wiki/File:Oberbaum_Bridge,_Berlin_03.jpg" target="_blank" rel="noopener">Oberbaumbrücke</a> — © Ank Kumar · <a href="https://creativecommons.org/licenses/by-sa/4.0" target="_blank" rel="noopener">CC BY-SA 4.0</a> · resized for tool display.</li>
+    <li><a href="https://commons.wikimedia.org/wiki/File:Berlin_RAW-Gel%C3%A4nde_2020.jpg" target="_blank" rel="noopener">RAW-Gelände</a> — © DavideGorla · <a href="https://creativecommons.org/licenses/by/2.0" target="_blank" rel="noopener">CC BY 2.0</a> · resized for tool display.</li>
+    <li><a href="https://commons.wikimedia.org/wiki/File:Berlin_Boxhagener_Pl_pchli_targ.jpg" target="_blank" rel="noopener">Boxhagener Platz flea market</a> — © Andrzej Otrębski · <a href="https://creativecommons.org/licenses/by-sa/4.0" target="_blank" rel="noopener">CC BY-SA 4.0</a> · resized for tool display.</li>
+    <li><a href="https://commons.wikimedia.org/wiki/File:M%C3%A4rchenbrunnen_(Berlin-Friedrichshain).jpg" target="_blank" rel="noopener">Märchenbrunnen</a> — © Lukas Beck · <a href="https://creativecommons.org/licenses/by-sa/4.0" target="_blank" rel="noopener">CC BY-SA 4.0</a> · resized for tool display.</li>
+    <li><a href="https://commons.wikimedia.org/wiki/File:Berlin_Karl-Marx-Allee_Frankfurter_Tor_2.jpg" target="_blank" rel="noopener">Frankfurter Tor</a> — © Andreas Praefcke · <a href="https://creativecommons.org/licenses/by/3.0" target="_blank" rel="noopener">CC BY 3.0</a> · resized for tool display.</li>
+  </ul>
+</section>
+
 <script>
 (function(){
+  var creditsTrigger = document.getElementById('toolCreditsTrigger');
+  var creditsBackdrop = document.getElementById('toolCreditsBackdrop');
+  var creditsPanel = document.getElementById('toolCreditsPanel');
+  var creditsClose = document.getElementById('toolCreditsClose');
+  function openCredits(){
+    creditsBackdrop.hidden = false;
+    creditsPanel.hidden = false;
+    creditsTrigger.setAttribute('aria-expanded', 'true');
+    creditsClose.focus({ preventScroll: true });
+  }
+  function closeCredits(){
+    creditsBackdrop.hidden = true;
+    creditsPanel.hidden = true;
+    creditsTrigger.setAttribute('aria-expanded', 'false');
+    creditsTrigger.focus({ preventScroll: true });
+  }
+  creditsTrigger.addEventListener('click', openCredits);
+  creditsClose.addEventListener('click', closeCredits);
+  creditsBackdrop.addEventListener('click', closeCredits);
+  document.addEventListener('keydown', function(event){
+    if (event.key === 'Escape' && !creditsPanel.hidden) closeCredits();
+  });
+
   var DATA = {
     morning: {
       zones: ['spree'],
