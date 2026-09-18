@@ -1,9 +1,26 @@
 {
-  "updatedAt": "2026-09-17T20:09:13.432Z",
+  "updatedAt": "2026-09-18T01:53:53.109Z",
   "source": "Wix Blog API",
-  "totalPosts": 396,
+  "totalPosts": 397,
   "bookingUrl": "https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based",
   "allPosts": [
+    {
+      "title": "Apple Picking Near Berlin: Five Orchards, the Day Each One Opens and the Ride There",
+      "slug": "apple-picking-near-berlin",
+      "path": "/post/apple-picking-near-berlin",
+      "url": "https://www.berlinwalk.com/post/apple-picking-near-berlin",
+      "excerpt": "Every September somebody suggests apple picking on Saturday, and nobody checks whether the farm opens on a Saturday, whether the bus runs at the weekend, or whether the field is inside the ticket you already pay for. Five orchards around Berlin have apples on the trees right now. Only two pick on a Monday, all five at the weekend, and four of them sit inside the Berlin ABC area. Here is which field fits which day, and how the last few kilometres work.",
+      "category": "Living in Berlin",
+      "categorySlug": "living-in-berlin",
+      "topic": "living-in-berlin",
+      "topicLabel": "Living in Berlin",
+      "readTime": "7 min read",
+      "publishedDate": "2026-09-18T01:52:22.432Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_1e5f385f77804d34bf1137f3ff4cbf3f~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/00-cover-apples-ready.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_1e5f385f77804d34bf1137f3ff4cbf3f~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/00-cover-apples-ready.jpg",
+      "alt": "Ripe red apples hanging low on the branches of an apple tree in an orchard, with grass and a gravel path behind it",
+      "relatedToolSlug": "berlin-apple-orchard-planner"
+    },
     {
       "title": "Berlin Rental Deposit: The Four Dates That Decide When You Get It Back",
       "slug": "berlin-rental-deposit",
