@@ -68,8 +68,8 @@ const BW_BLOG_HOME_FALLBACK = {
       "category": "Tourist Tips",
       "readTime": "7 min read",
       "summary": "Five of Berlin's most-visited sights have no ticket at all, two of the best are free but only the venue can reserve them, and the paid half of a classic list comes to 93.90 euros. Here is which door each one is sold through, and how to spot the venue's own page before you pay.",
-      "image": "https://static.wixstatic.com/media/5a08a3_2766c5a7bb034ceb8c2e57bdd51c33c2~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-museumsinsel.jpg",
-      "alt": "The Bode-Museum on the tip of Museum Island seen across the Spree, with the Berlin TV Tower behind it"
+      "image": "https://static.wixstatic.com/media/5a08a3_a39fadc8e6ee4661829bf9e97d63d299~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/brandenburg-gate.jpg",
+      "alt": "Visitors walking through the columns of the Brandenburg Gate on Pariser Platz in daylight"
     },
     {
       "title": "Berlin Public Transport for Tourists: Tickets, Zones, Prices and Validation",
