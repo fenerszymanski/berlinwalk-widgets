@@ -1,0 +1,113 @@
+{
+  "version": 1,
+  "slug": "tax-return-in-berlin",
+  "key": "tax-return-in-berlin",
+  "config": {
+    "title": "Tax Return in Berlin - FAQ",
+    "subtitle": "Who has to file, which years are still open, what a Berlin commute is worth and how long the Berlin tax offices take.",
+    "items": [
+      {
+        "q": "Do I have to file a tax return in Berlin?",
+        "a": "Not if you had one job in tax class I, no other income and no benefits such as Elterngeld or Kurzarbeitergeld above €410. Then filing is voluntary. You have to file with the tax class III and V combination, class IV with a factor, two jobs at once, or more than €410 of untaxed side income or wage replacement benefits."
+      },
+      {
+        "q": "How many years back can I file a voluntary tax return?",
+        "a": "Four years. The 2022 return has to reach your tax office by 31 December 2026, 2023 by 31 December 2027, 2024 by the end of 2028 and 2025 by the end of 2029. After that the refund for that year is lost."
+      },
+      {
+        "q": "When was the 2025 tax return due?",
+        "a": "If you had to file and did it yourself, the 2025 return was due on 31 July 2026. A late mandatory return can cost a surcharge. Voluntary returns are not bound by that date."
+      },
+      {
+        "q": "How much is the commuting allowance worth in Berlin?",
+        "a": "For 2022 to 2025 it is 30 cents per kilometre for the first 20 km of the one-way road distance and 38 cents from the 21st, for every day you went to work. From 2026 it is 38 cents from the first kilometre. A 9 km commute on 200 days comes to €540, well under the €1,230 flat allowance."
+      },
+      {
+        "q": "Can I claim my Deutschlandticket instead?",
+        "a": "Yes, if you paid it yourself and it cost more than the distance allowance for the year. A Deutschlandticket cost €588 in 2024 and €696 in 2025. A tax-free Jobticket from your employer is subtracted from the allowance instead."
+      },
+      {
+        "q": "How much is the home office allowance?",
+        "a": "€6 for each day you worked from home and did not go to the office, up to €1,260 a year, from 2023. In 2022 it was €5 a day, up to €600."
+      },
+      {
+        "q": "How long does a Berlin Finanzamt take to process a return?",
+        "a": "A study of returns filed through the Lohnsteuer kompakt platform found a Berlin average of 46.3 days in 2025, the fastest of any German state. The Finanzamt Berlin International, which handles people living abroad, averaged 90.4 days."
+      },
+      {
+        "q": "Which Finanzamt is responsible for me in Berlin?",
+        "a": "The office for your home district, not your employer's. Berlin has seventeen district tax offices, and the berlin.de tax office finder tells you which one is yours."
+      }
+    ]
+  },
+  "schema": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Do I have to file a tax return in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Not if you had one job in tax class I, no other income and no benefits such as Elterngeld or Kurzarbeitergeld above €410. Then filing is voluntary. You have to file with the tax class III and V combination, class IV with a factor, two jobs at once, or more than €410 of untaxed side income or wage replacement benefits."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How many years back can I file a voluntary tax return?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Four years. The 2022 return has to reach your tax office by 31 December 2026, 2023 by 31 December 2027, 2024 by the end of 2028 and 2025 by the end of 2029. After that the refund for that year is lost."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "When was the 2025 tax return due?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "If you had to file and did it yourself, the 2025 return was due on 31 July 2026. A late mandatory return can cost a surcharge. Voluntary returns are not bound by that date."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How much is the commuting allowance worth in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "For 2022 to 2025 it is 30 cents per kilometre for the first 20 km of the one-way road distance and 38 cents from the 21st, for every day you went to work. From 2026 it is 38 cents from the first kilometre. A 9 km commute on 200 days comes to €540, well under the €1,230 flat allowance."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I claim my Deutschlandticket instead?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, if you paid it yourself and it cost more than the distance allowance for the year. A Deutschlandticket cost €588 in 2024 and €696 in 2025. A tax-free Jobticket from your employer is subtracted from the allowance instead."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How much is the home office allowance?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "€6 for each day you worked from home and did not go to the office, up to €1,260 a year, from 2023. In 2022 it was €5 a day, up to €600."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How long does a Berlin Finanzamt take to process a return?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "A study of returns filed through the Lohnsteuer kompakt platform found a Berlin average of 46.3 days in 2025, the fastest of any German state. The Finanzamt Berlin International, which handles people living abroad, averaged 90.4 days."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Which Finanzamt is responsible for me in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The office for your home district, not your employer's. Berlin has seventeen district tax offices, and the berlin.de tax office finder tells you which one is yours."
+        }
+      }
+    ]
+  }
+}
