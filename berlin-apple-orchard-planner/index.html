@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Berlin Apple Orchard Day Planner</title>
+<link rel="stylesheet" href="../css/brand.css">
+<style>
+  :root {
+    --green: #1B5E20;
+    --deep: #123D18;
+    --yellow: #FFE600;
+    --lime: #7CB342;
+    --soft: #C5E1A5;
+    --paper: #FFFDF6;
+    --ink: #212121;
+    --muted: #5d6a5e;
+    --apple: #C0392B;
+    --stone: #9aa39b;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--paper); color: var(--ink); }
+  .op { max-width: 800px; margin: 0 auto; padding: 14px 12px 14px; }
+  .op-top h2 { margin: 0 0 4px; font-size: 1.08rem; color: var(--deep); line-height: 1.3; }
+  .op-top p { margin: 0; font-size: .79rem; line-height: 1.5; color: var(--muted); }
+
+  .op-ctrl { margin-top: 12px; display: grid; gap: 8px; }
+  .op-row { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+  .op-row > span { font-size: .6rem; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: var(--deep); width: 72px; flex: 0 0 auto; }
+  .op-seg { display: flex; flex-wrap: wrap; gap: 4px; flex: 1 1 auto; }
+  .op-seg button {
+    font-family: inherit; font-size: .74rem; font-weight: 700; cursor: pointer;
+    padding: 6px 9px; border-radius: 6px; border: 1px solid rgba(27,94,32,.35);
+    background: #fff; color: var(--deep); min-width: 40px;
+  }
+  .op-seg button[aria-checked="true"] { background: var(--yellow); border-color: var(--deep); color: var(--deep); box-shadow: inset 0 -2px 0 var(--deep); }
+  .op-seg button:focus-visible { outline: 3px solid var(--green); outline-offset: 1px; }
+
+  .op-map { margin-top: 12px; background: #fff; border: 1px solid rgba(27,94,32,.2); border-radius: 12px; overflow: hidden; }
+  .op-map svg { display: block; width: 100%; height: auto; }
+  .op-cap { display: flex; flex-wrap: wrap; gap: 4px 14px; padding: 7px 10px 8px; font-size: .64rem; color: var(--muted); border-top: 1px solid rgba(27,94,32,.12); }
+  .op-cap i { display: inline-block; width: 10px; height: 10px; border-radius: 50%; vertical-align: -1px; margin-right: 4px; }
+
+  .op-verdict { margin-top: 12px; padding: 10px 12px; border-left: 4px solid var(--green); background: #F3F8EE; font-size: .82rem; line-height: 1.5; color: var(--deep); }
+  .op-verdict b { color: var(--deep); }
+
+  .op-list { list-style: none; margin: 10px 0 0; padding: 0; display: grid; gap: 8px; }
+  .op-list li { display: grid; grid-template-columns: 34px 1fr; gap: 10px; padding: 10px 11px; background: #fff; border: 1px solid rgba(27,94,32,.18); border-radius: 10px; }
+  .op-list li.shut { background: #F4F4F1; border-style: dashed; }
+  .op-rank { width: 34px; height: 34px; border-radius: 50%; display: grid; place-items: center; font-weight: 800; font-size: .9rem; background: var(--green); color: #fff; }
+  .shut .op-rank { background: #d9ddd8; color: #4b544c; font-size: .62rem; }
+  .op-name { margin: 0; font-size: .9rem; font-weight: 800; color: var(--deep); }
+  .op-name small { font-weight: 600; color: var(--muted); font-size: .7rem; }
+  .op-facts { margin: 4px 0 0; font-size: .75rem; line-height: 1.5; color: var(--ink); }
+  .op-facts b { color: var(--deep); }
+  .op-note { margin: 5px 0 0; font-size: .7rem; line-height: 1.45; color: var(--muted); }
+  .op-note.warn { color: #7a2b00; }
+  .op-foot { margin: 12px 0 0; font-size: .64rem; line-height: 1.5; color: var(--muted); }
+  @media (max-width: 480px) {
+    .op-row > span { width: 100%; }
+    .op-seg button { padding: 6px 7px; font-size: .7rem; min-width: 36px; }
+  }
+</style>
+</head>
+<body>
+<div class="op">
+  <div class="op-top">
+    <h2>Which apple orchard is open on your free day, and how long is the ride?</h2>
+    <p>Five pick-your-own fields around Berlin, their picking hours this season and the real VBB journey from your station. Pick a day and a starting station.</p>
+  </div>
+
+  <div class="op-ctrl">
+    <div class="op-row"><span id="lblDay">Free day</span><div class="op-seg" id="days" role="radiogroup" aria-labelledby="lblDay"></div></div>
+    <div class="op-row"><span id="lblFrom">Leaving from</span><div class="op-seg" id="froms" role="radiogroup" aria-labelledby="lblFrom"></div></div>
+  </div>
+
+  <div class="op-map">
+    <svg id="map" viewBox="0 0 640 400" role="img" aria-labelledby="mapTitle"><title id="mapTitle">Map of the five orchards around Berlin with lines from the chosen station</title></svg>
+    <div class="op-cap">
+      <span><i style="background:#C0392B"></i>open for picking that day</span>
+      <span><i style="background:#fff;border:2px solid #9aa39b"></i>closed that day</span>
+      <span><i style="background:#FFE600;border:2px solid #123D18"></i>your station</span>
+      <span>green area = Berlin city limit</span>
+    </div>
+  </div>
+
+  <div class="op-verdict" id="verdict" aria-live="polite"></div>
+  <ol class="op-list" id="list"></ol>
+  <p class="op-foot">Picking hours checked 18 September 2026 on each farm's own page. Farms change hours at short notice and close fields in heavy rain, so check the farm's page on the morning you go. Journey times are the fastest VBB connection after 10:00 on a typical weekday, Saturday or Sunday in late September, door to field gate.</p>
+</div>
+
+<script>
+(function () {
+  var RING = [[13.088,52.42],[13.091,52.412],[13.11,52.413],[13.106,52.409],[13.125,52.397],[13.138,52.398],[13.127,52.392],[13.131,52.387],[13.142,52.397],[13.172,52.396],[13.158,52.396],[13.159,52.403],[13.197,52.416],[13.246,52.421],[13.25,52.405],[13.274,52.405],[13.297,52.416],[13.312,52.399],[13.343,52.412],[13.372,52.394],[13.37,52.388],[13.387,52.389],[13.388,52.378],[13.421,52.376],[13.427,52.386],[13.419,52.41],[13.464,52.421],[13.48,52.396],[13.538,52.401],[13.535,52.389],[13.593,52.394],[13.606,52.374],[13.629,52.381],[13.643,52.378],[13.647,52.367],[13.639,52.361],[13.636,52.347],[13.648,52.338],[13.671,52.366],[13.692,52.367],[13.7,52.376],[13.699,52.382],[13.687,52.385],[13.739,52.407],[13.73,52.416],[13.741,52.427],[13.74,52.432],[13.73,52.434],[13.726,52.435],[13.723,52.437],[13.743,52.433],[13.751,52.441],[13.756,52.442],[13.754,52.437],[13.761,52.438],[13.755,52.438],[13.757,52.443],[13.754,52.443],[13.756,52.446],[13.729,52.451],[13.701,52.468],[13.705,52.455],[13.698,52.455],[13.695,52.464],[13.648,52.479],[13.625,52.474],[13.623,52.466],[13.611,52.471],[13.63,52.493],[13.624,52.494],[13.632,52.511],[13.659,52.526],[13.657,52.53],[13.626,52.53],[13.625,52.538],[13.637,52.542],[13.586,52.55],[13.582,52.571],[13.547,52.588],[13.508,52.592],[13.497,52.607],[13.506,52.626],[13.518,52.63],[13.523,52.645],[13.491,52.655],[13.485,52.659],[13.488,52.671],[13.475,52.668],[13.479,52.676],[13.451,52.663],[13.474,52.657],[13.47,52.652],[13.441,52.649],[13.434,52.644],[13.433,52.641],[13.434,52.638],[13.424,52.635],[13.395,52.648],[13.389,52.638],[13.376,52.628],[13.358,52.623],[13.303,52.627],[13.31,52.63],[13.309,52.643],[13.3,52.654],[13.31,52.657],[13.283,52.661],[13.284,52.641],[13.262,52.641],[13.264,52.627],[13.221,52.628],[13.202,52.607],[13.219,52.592],[13.217,52.587],[13.165,52.599],[13.129,52.587],[13.132,52.58],[13.15,52.583],[13.154,52.573],[13.146,52.553],[13.13,52.556],[13.117,52.517],[13.143,52.52],[13.169,52.509],[13.118,52.477],[13.109,52.451],[13.123,52.439],[13.088,52.42]];
+  var J = {"wkd":{"hbf":{"lindicke":[84,"S7 > 580",773],"marquardt":[82,"RE4 > 662",1109],"neumann":[63,"S7 > 650",124],"pomona":[52,"RE3 > 895",141],"mueller":[107,"S5 > R931",479]},"alex":{"lindicke":[91,"S7 > 580",773],"marquardt":[93,"S9 > RE4 > 662",1109],"neumann":[70,"S7 > 650",124],"pomona":[56,"U8 > RE3 > 895",141],"mueller":[101,"S5 > R931",479]},"ostkreuz":{"lindicke":[100,"S7 > 580",773],"marquardt":[103,"S3 > S9 > RE4 > 662",1109],"neumann":[87,"S7 > 614",124],"pomona":[45,"RB25 > 895",141],"mueller":[91,"S5 > R931",479]},"zoo":{"lindicke":[78,"S7 > 580",773],"marquardt":[94,"S3 > RE1 > 96 > 609",393],"neumann":[57,"S7 > 650",124],"pomona":[64,"U9 > S41 > S2 > 895",141],"mueller":[114,"S5 > R931",479]},"spandau":{"lindicke":[92,"RE8 > S42 > S7 > 580",773],"marquardt":[72,"638 > 609",393],"neumann":[58,"RB21 > 614",124],"pomona":[71,"RE2 > S2 > 895",141],"mueller":[145,"RB21 > S5 > 931",479]},"suedkreuz":{"lindicke":[86,"S41 > S7 > 580",773],"marquardt":[91,"RE4 > 662",1109],"neumann":[65,"S41 > S7 > 650",124],"pomona":[62,"RE3 > 895",141],"mueller":[113,"S42 > S5 > R931",479]}},"sat":{"hbf":{"lindicke":[84,"S7 > RE1 > 633",1570],"marquardt":[82,"RE4 > 662",1109],"neumann":[70,"S7 > 614",124],"pomona":[79,"RE3 > 892",1706],"mueller":null},"alex":{"lindicke":[91,"S7 > RE1 > 633",1570],"marquardt":[93,"S9 > RE4 > 662",1109],"neumann":[77,"S7 > 614",124],"pomona":[82,"U8 > RE3 > 892",1706],"mueller":null},"ostkreuz":{"lindicke":[100,"S7 > RE1 > 633",1570],"marquardt":[103,"S3 > S9 > RE4 > 662",1109],"neumann":[86,"S7 > 614",124],"pomona":[89,"S42 > RE3 > 892",1706],"mueller":null},"zoo":{"lindicke":[78,"S7 > RE1 > 633",1570],"marquardt":[94,"U2 > U7 > RE4 > 662",1109],"neumann":[64,"S7 > 614",124],"pomona":[91,"S9 > RE3 > 892",1706],"mueller":null},"spandau":{"lindicke":[87,"RB21 > 580",773],"marquardt":[73,"RE4 > 662",1109],"neumann":[79,"638 > 692 > 614",124],"pomona":[97,"RE2 > S2 > 892",1706],"mueller":[137,"RE4 > S5 > R931",479]},"suedkreuz":{"lindicke":[89,"S41 > S7 > 580",773],"marquardt":[91,"RE4 > 662",1109],"neumann":[72,"S41 > S7 > 614",124],"pomona":[90,"RE3 > 892",1706],"mueller":null}},"sun":{"hbf":{"lindicke":[84,"S7 > RE1 > 633",1570],"marquardt":[98,"S7 > RB21 > 619 > 609",1109],"neumann":[70,"S7 > 614",124],"pomona":[79,"RE3 > 892",1706],"mueller":[97,"S7 > RB26 > S5 > 931",479]},"alex":{"lindicke":[91,"S7 > RE1 > 633",1570],"marquardt":[105,"S7 > RB21 > 619 > 609",1109],"neumann":[77,"S7 > 614",124],"pomona":[82,"U8 > RE3 > 892",1706],"mueller":[90,"S7 > RB26 > S5 > 931",479]},"ostkreuz":{"lindicke":[100,"S7 > RE1 > 633",1570],"marquardt":[114,"S7 > RB21 > 619 > 609",1109],"neumann":[86,"S7 > 614",124],"pomona":[89,"S42 > RE3 > 892",1706],"mueller":[79,"RB26 > S5 > 931",479]},"zoo":{"lindicke":[78,"S7 > RE1 > 633",1570],"marquardt":[92,"S7 > RB21 > 619 > 609",1109],"neumann":[64,"S7 > 614",124],"pomona":[91,"S9 > RE3 > 892",1706],"mueller":[104,"S7 > RB26 > S5 > 931",479]},"spandau":{"lindicke":[87,"RB21 > 580",773],"marquardt":[78,"RB21 > 619 > 609",1109],"neumann":[79,"638 > 692 > 614",124],"pomona":[97,"RE2 > S2 > 892",1706],"mueller":[126,"RE8 > S5 > 931",479]},"suedkreuz":{"lindicke":[89,"S41 > S7 > 580",773],"marquardt":[106,"S46 > S7 > RB21 > 619 > 609",1109],"neumann":[72,"S41 > S7 > 614",124],"pomona":[90,"RE3 > 892",1706],"mueller":[100,"S42 > RB26 > S5 > 931",479]}}};
+  var STATIONS = {
+    hbf: { name: 'Hauptbahnhof', lat: 52.5251, lon: 13.3694 },
+    alex: { name: 'Alexanderplatz', lat: 52.5219, lon: 13.4132 },
+    ostkreuz: { name: 'Ostkreuz', lat: 52.5031, lon: 13.4692 },
+    zoo: { name: 'Zoo', lat: 52.5067, lon: 13.3325 },
+    suedkreuz: { name: 'Südkreuz', lat: 52.4757, lon: 13.3655 },
+    spandau: { name: 'Spandau', lat: 52.5346, lon: 13.1974 }
+  };
+  // Opening per weekday (0 = Sunday). open/close in minutes after midnight, arrive = latest sensible arrival.
+  var FARMS = [
+    { id: 'lindicke', name: 'Obsthof Lindicke', place: 'Glindow, Werder (Havel)', lat: 52.3695, lon: 12.8887, lx: 13, ly: 4, anchor: 'start', t: .86,
+      days: { 0: [540, 1020], 6: [540, 1020] }, arrive: 960,
+      price: 'Price: 2.20 euro a kilo up to 10 kg, windfalls 0.75, card accepted',
+      ticket: 'Werder station is inside Berlin ABC, the field in Glindow is not. On an ABC ticket, walk the last 4 km from Werder station or add an extension for the bus. A Deutschlandticket covers the whole trip.',
+      ticketWarn: true },
+    { id: 'marquardt', name: 'Obstgut Marquardt', place: 'Birnenweg, Satzkorn (Potsdam)', lat: 52.4681, lon: 12.9848, lx: -4, ly: -14, anchor: 'middle', t: .5,
+      days: { 0: [540, 990], 1: [540, 990], 2: [540, 990], 3: [540, 990], 4: [540, 990], 5: [540, 990], 6: [540, 990] }, arrive: 930,
+      price: 'No price list online, pay at the field',
+      ticket: 'Inside Berlin ABC.' },
+    { id: 'neumann', name: "Neumann's Erntegarten", place: 'Am Heineberg, Potsdam-Bornim', lat: 52.4327, lon: 12.9930, lx: -4, ly: 24, anchor: 'middle', t: .74,
+      days: { 0: [720, 1020], 5: [720, 1020], 6: [720, 1020] }, arrive: 960,
+      price: 'Entry 3 euro per person, fruit priced on the day. Gate opens at 12:00',
+      ticket: 'Inside Berlin ABC.' },
+    { id: 'pomona', name: 'Selbstpflücke Elisenau', place: 'Helenenauer Weg, Ahrensfelde', lat: 52.6420, lon: 13.6139, lx: 10, ly: -8, anchor: 'start', t: .55,
+      days: { 0: [540, 1080], 1: [540, 1080], 2: [540, 1080], 3: [540, 1080], 4: [540, 1080], 5: [540, 1080], 6: [540, 1080] }, arrive: 1020,
+      price: 'Last entry 17:30. The farm posts each morning whether the field opens',
+      ticket: 'Inside Berlin ABC.' },
+    { id: 'mueller', name: 'Bio Apfelhof Müller', place: 'Wesendahl, Altlandsberg', lat: 52.6058, lon: 13.8073, lx: 0, ly: 24, anchor: 'middle', t: .45,
+      days: { 0: [540, 1020], 2: [540, 1020], 3: [540, 1020], 4: [540, 1020], 5: [540, 1020], 6: [540, 1020] }, arrive: 960,
+      price: 'Organic orchard, pony rides and a café at weekends',
+      ticket: 'Inside Berlin ABC.' }
+  ];
+  var DAYS = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+  var DAY_LONG = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+  var ORDER = [1, 2, 3, 4, 5, 6, 0];
+  var state = { day: 6, from: 'hbf' };
+
+  var W = 640, H = 400, LON0 = 12.74, LON1 = 13.95, LAT0 = 52.31, LAT1 = 52.72;
+  var kx = Math.cos(52.5 * Math.PI / 180);
+  var sx = W / ((LON1 - LON0) * kx), sy = H / (LAT1 - LAT0), s = Math.min(sx, sy);
+  var offX = (W - (LON1 - LON0) * kx * s) / 2, offY = (H - (LAT1 - LAT0) * s) / 2;
+  function px(lon, lat) { return [offX + (lon - LON0) * kx * s, offY + (LAT1 - lat) * s]; }
+  function fmt(m) { var h = Math.floor(m / 60), mm = m % 60; return (h < 10 ? '0' : '') + h + ':' + (mm < 10 ? '0' : '') + mm; }
+  function dayType(d) { return d === 6 ? 'sat' : d === 0 ? 'sun' : 'wkd'; }
+  function esc(t) { return String(t).replace(/&/g, '&amp;').replace(/</g, '&lt;'); }
+  function viaText(v, walk) {
+    var t = v.split(' > ').map(function (x) { return /^\d/.test(x) ? 'bus ' + x : x; }).join(', then ');
+    if (walk >= 400) t += ', then ' + (walk / 1000).toFixed(1) + ' km on foot';
+    return t;
+  }
+
+  function seg(el, items, key) {
+    el.innerHTML = items.map(function (it) {
+      return '<button type="button" role="radio" data-v="' + it.v + '" aria-checked="' + (String(state[key]) === String(it.v)) + '">' + it.t + '</button>';
+    }).join('');
+    el.addEventListener('click', function (e) {
+      var b = e.target.closest('button'); if (!b) return;
+      state[key] = key === 'day' ? +b.getAttribute('data-v') : b.getAttribute('data-v');
+      Array.prototype.forEach.call(el.children, function (c) { c.setAttribute('aria-checked', String(c === b)); });
+      render();
+    });
+  }
+
+  function rows() {
+    var dt = dayType(state.day);
+    return FARMS.map(function (f) {
+      var hrs = f.days[state.day];
+      var j = (J[dt][state.from] || {})[f.id];
+      return { f: f, hrs: hrs, j: j, mins: j ? j[0] : null };
+    });
+  }
+
+  function drawMap(rs) {
+    var svg = document.getElementById('map');
+    var st = STATIONS[state.from], sp = px(st.lon, st.lat);
+    var d = RING.map(function (p, i) { var q = px(p[0], p[1]); return (i ? 'L' : 'M') + q[0].toFixed(1) + ' ' + q[1].toFixed(1); }).join(' ') + 'Z';
+    var out = '<title id="mapTitle">Map of the five orchards around Berlin with lines from ' + esc(st.name) + '</title>';
+    out += '<rect x="0" y="0" width="' + W + '" height="' + H + '" fill="#FBFCF7"/>';
+    out += '<path d="' + d + '" fill="#E4EFD9" stroke="#1B5E20" stroke-width="1.2" stroke-opacity=".55"/>';
+    out += '<text x="' + (px(13.40, 52.49)[0]) + '" y="' + (px(13.40, 52.49)[1] + 34) + '" text-anchor="middle" font-size="13" font-weight="800" fill="#1B5E20" fill-opacity=".35" letter-spacing="4">BERLIN</text>';
+    Object.keys(STATIONS).forEach(function (k) {
+      var q = px(STATIONS[k].lon, STATIONS[k].lat);
+      out += '<circle cx="' + q[0].toFixed(1) + '" cy="' + q[1].toFixed(1) + '" r="2.4" fill="#123D18" fill-opacity=".35"/>';
+    });
+    rs.forEach(function (r) {
+      var q = px(r.f.lon, r.f.lat), open = !!r.hrs;
+      out += '<line x1="' + sp[0].toFixed(1) + '" y1="' + sp[1].toFixed(1) + '" x2="' + q[0].toFixed(1) + '" y2="' + q[1].toFixed(1) + '" stroke="' + (open ? '#1B5E20' : '#9aa39b') + '" stroke-width="' + (open ? 2.2 : 1.2) + '" stroke-dasharray="' + (open ? '0' : '4 5') + '" stroke-opacity="' + (open ? .75 : .6) + '"/>';
+    });
+    rs.forEach(function (r) {
+      var q = px(r.f.lon, r.f.lat), open = !!r.hrs;
+      var mid = [sp[0] + (q[0] - sp[0]) * r.f.t, sp[1] + (q[1] - sp[1]) * r.f.t];
+      if (open) {
+        var lbl = r.mins ? r.mins + ' min' : 'call bus';
+        out += '<rect x="' + (mid[0] - 30).toFixed(1) + '" y="' + (mid[1] - 11).toFixed(1) + '" width="60" height="21" rx="10" fill="#fff" stroke="#1B5E20" stroke-width="1"/>';
+        out += '<text x="' + mid[0].toFixed(1) + '" y="' + (mid[1] + 4.5).toFixed(1) + '" text-anchor="middle" font-size="12.5" font-weight="800" fill="#123D18">' + lbl + '</text>';
+      }
+      out += '<circle cx="' + q[0].toFixed(1) + '" cy="' + q[1].toFixed(1) + '" r="' + (open ? 9 : 7) + '" fill="' + (open ? '#C0392B' : '#fff') + '" stroke="' + (open ? '#7a1f16' : '#9aa39b') + '" stroke-width="2"/>';
+      if (open) out += '<path d="M' + q[0].toFixed(1) + ' ' + (q[1] - 9).toFixed(1) + ' q3 -6 7 -5" stroke="#1B5E20" stroke-width="2" fill="none"/>';
+      out += '<text x="' + (q[0] + r.f.lx).toFixed(1) + '" y="' + (q[1] + r.f.ly).toFixed(1) + '" text-anchor="' + r.f.anchor + '" font-size="13.5" font-weight="800" paint-order="stroke" stroke="#FBFCF7" stroke-width="3" fill="' + (open ? '#123D18' : '#6b746c') + '">' + esc(r.f.name) + '</text>';
+    });
+    out += '<circle cx="' + sp[0].toFixed(1) + '" cy="' + sp[1].toFixed(1) + '" r="8" fill="#FFE600" stroke="#123D18" stroke-width="2.4"/>';
+    out += '<text x="' + sp[0].toFixed(1) + '" y="' + (sp[1] - 13).toFixed(1) + '" text-anchor="middle" font-size="13.5" font-weight="800" fill="#123D18" paint-order="stroke" stroke="#fff" stroke-width="3">' + esc(st.name) + '</text>';
+    var sb = px(12.82, 52.315), km = 10 / (111.32 * kx) * kx * s;
+    out += '<line x1="' + sb[0] + '" y1="' + sb[1] + '" x2="' + (sb[0] + 10 / 111.32 / kx * kx * s) + '" y2="' + sb[1] + '" stroke="#123D18" stroke-width="2"/>';
+    out += '<text x="' + sb[0] + '" y="' + (sb[1] - 5) + '" font-size="9" fill="#5d6a5e">10 km</text>';
+    svg.innerHTML = out;
+  }
+
+  function render() {
+    var rs = rows();
+    drawMap(rs);
+    var open = rs.filter(function (r) { return r.hrs; });
+    var shut = rs.filter(function (r) { return !r.hrs; });
+    open = open.slice().sort(function (a, b) { return (a.mins || 999) - (b.mins || 999); });
+    var st = STATIONS[state.from].name, dn = DAY_LONG[state.day], dt = dayType(state.day);
+    var v;
+    if (!open.length) v = 'Nothing is open for picking on ' + dn + '.';
+    else {
+      var best = open[0];
+      v = 'On a <b>' + dn + '</b> from <b>' + esc(st) + '</b>, ' + open.length + ' of 5 fields are open. The quickest is <b>' + esc(best.f.name) + '</b>, ' + best.mins + ' minutes away. Leave by <b>' + fmt(Math.floor((best.f.arrive - best.mins) / 5) * 5) + '</b> to arrive with an hour left before the gate shuts.';
+    }
+    document.getElementById('verdict').innerHTML = v;
+    var html = open.map(function (r, i) {
+      var f = r.f, notes = '';
+      if (f.id === 'pomona') notes = dt === 'wkd' ? 'Weekday bus 895 stops at Elisenau, Seestraße, 150 m from the field.' : 'No bus 895 at the weekend, so the field is a walk from the Bernau bus.';
+      if (f.id === 'mueller' && dt !== 'wkd') notes = 'Weekend buses into Wesendahl run partly as the R931 call bus. Phone (03341) 4494902 at least 90 minutes before you need it.';
+      var route = r.j ? viaText(r.j[1], r.j[2]) : 'no fixed connection from here, the R931 call bus from S Strausberg Nord is the public option';
+      return '<li><div class="op-rank">' + (i + 1) + '</div><div>' +
+        '<p class="op-name">' + esc(f.name) + ' <small>' + esc(f.place) + '</small></p>' +
+        '<p class="op-facts"><b>' + fmt(r.hrs[0]) + ' to ' + fmt(r.hrs[1]) + '</b> on ' + dn + 's · ' + (r.mins ? '<b>' + r.mins + ' min</b> from ' + esc(st) : '<b>call bus only</b>') + (r.mins ? ' · leave by <b>' + fmt(Math.floor((f.arrive - r.mins) / 5) * 5) + '</b>' : '') + '</p>' +
+        '<p class="op-note">Route: ' + esc(route) + '. ' + esc(f.price) + '.</p>' +
+        '<p class="op-note' + (f.ticketWarn ? ' warn' : '') + '">' + esc(f.ticket) + (notes ? ' ' + esc(notes) : '') + '</p>' +
+        '</div></li>';
+    }).join('') + shut.map(function (r) {
+      var list = ORDER.filter(function (d) { return r.f.days[d]; }).map(function (d) { return DAYS[d]; }).join(', ');
+      return '<li class="shut"><div class="op-rank">shut</div><div><p class="op-name">' + esc(r.f.name) + ' <small>' + esc(r.f.place) + '</small></p>' +
+        '<p class="op-facts">No picking on ' + dn + 's. Open <b>' + list + '</b>.</p></div></li>';
+    }).join('');
+    document.getElementById('list').innerHTML = html;
+  }
+
+  seg(document.getElementById('days'), ORDER.map(function (d) { return { v: d, t: DAYS[d] }; }), 'day');
+  seg(document.getElementById('froms'), Object.keys(STATIONS).map(function (k) { return { v: k, t: STATIONS[k].name }; }), 'from');
+  render();
+})();
+</script>
+<script src="../js/brand.js"></script>
+</body>
+</html>

@@ -1,0 +1,113 @@
+{
+  "version": 1,
+  "slug": "apple-picking-near-berlin",
+  "key": "apple-picking-near-berlin",
+  "config": {
+    "title": "Apple Picking Near Berlin - FAQ",
+    "subtitle": "Where to pick your own apples around Berlin, which days each orchard opens, whether the ABC ticket covers the trip, what it costs and which varieties are ripe.",
+    "items": [
+      {
+        "q": "Where can I pick my own apples near Berlin?",
+        "a": "Five orchards confirmed apple picking on their own pages in mid-September 2026: Obsthof Lindicke in Glindow near Werder (Havel), Obstgut Marquardt on the Birnenweg in Satzkorn, Neumann's Erntegarten in Potsdam-Bornim, Selbstpflücke Elisenau in Ahrensfelde and Bio Apfelhof Müller in Wesendahl near Altlandsberg."
+      },
+      {
+        "q": "Which apple orchards near Berlin are open on weekdays?",
+        "a": "Obstgut Marquardt and Selbstpflücke Elisenau pick every day, and Bio Apfelhof Müller opens Tuesday to Sunday. Obsthof Lindicke picks only on Saturdays and Sundays, and Neumann's Erntegarten was open Friday to Sunday in the week of 18 September. On a Monday only two of the five are open."
+      },
+      {
+        "q": "Does the Berlin ABC ticket cover apple picking trips?",
+        "a": "For four of the five fields, yes. The VBB list of destinations puts Satzkorn and Bornim in Potsdam, Elisenau, Bernau, Strausberg and Wesendahl inside Berlin C. Glindow, where the Lindicke orchard is, sits outside it even though Werder (Havel) station is inside, so on an ABC ticket you either buy an extension for the bus or walk the roughly 4 km from Werder station. A Deutschlandticket covers all five."
+      },
+      {
+        "q": "Which orchard is quickest to reach from Berlin?",
+        "a": "It depends on the day. On a weekday Selbstpflücke Elisenau is about 45 minutes from Ostkreuz on the RB25 and bus 895. At the weekend that bus does not run, and Neumann's Erntegarten in Potsdam-Bornim becomes the quickest from the centre, about 70 minutes from Hauptbahnhof on the S7 and one bus."
+      },
+      {
+        "q": "How much does apple picking cost around Berlin?",
+        "a": "Obsthof Lindicke is the only one of the five that publishes prices: 2.20 euro a kilo up to 10 kg, 2.00 up to 30 kg, 1.80 above that, and 0.75 for windfalls. Neumann's Erntegarten charges 3 euro entry per person and prices its fruit on the day. The other farms price at the field."
+      },
+      {
+        "q": "Can I get to Bio Apfelhof Müller in Wesendahl without a car?",
+        "a": "On weekdays the bus 931 from S Strausberg Nord stops a short walk from the farm. At the weekend part of the service runs as the R931 call bus, which the VBB says must be booked by phone at least 90 minutes ahead on (03341) 4494902. With a bike, S Strausberg Nord is the natural starting point."
+      },
+      {
+        "q": "Which apple varieties are ripe in late September?",
+        "a": "Obsthof Lindicke lists Elstar, Boskoop, Rubinette, Topaz and Sonnenglanz for 19 and 20 September 2026, with Pinova, Pilot and Jonagold from 26 September. Elisenau started its season on 31 August with Sissired, Santana, Elstar and Gala. Boskoop is the baking apple; Elstar and Rubinette are for eating."
+      },
+      {
+        "q": "Can I bring my dog apple picking?",
+        "a": "It depends on the farm. At Obsthof Lindicke dogs stay on the lawn by the entrance and do not go into the tree rows. Bio Apfelhof Müller welcomes dogs on a lead. Ask the other farms before you go."
+      }
+    ]
+  },
+  "schema": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Where can I pick my own apples near Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Five orchards confirmed apple picking on their own pages in mid-September 2026: Obsthof Lindicke in Glindow near Werder (Havel), Obstgut Marquardt on the Birnenweg in Satzkorn, Neumann's Erntegarten in Potsdam-Bornim, Selbstpflücke Elisenau in Ahrensfelde and Bio Apfelhof Müller in Wesendahl near Altlandsberg."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Which apple orchards near Berlin are open on weekdays?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Obstgut Marquardt and Selbstpflücke Elisenau pick every day, and Bio Apfelhof Müller opens Tuesday to Sunday. Obsthof Lindicke picks only on Saturdays and Sundays, and Neumann's Erntegarten was open Friday to Sunday in the week of 18 September. On a Monday only two of the five are open."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Does the Berlin ABC ticket cover apple picking trips?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "For four of the five fields, yes. The VBB list of destinations puts Satzkorn and Bornim in Potsdam, Elisenau, Bernau, Strausberg and Wesendahl inside Berlin C. Glindow, where the Lindicke orchard is, sits outside it even though Werder (Havel) station is inside, so on an ABC ticket you either buy an extension for the bus or walk the roughly 4 km from Werder station. A Deutschlandticket covers all five."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Which orchard is quickest to reach from Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "It depends on the day. On a weekday Selbstpflücke Elisenau is about 45 minutes from Ostkreuz on the RB25 and bus 895. At the weekend that bus does not run, and Neumann's Erntegarten in Potsdam-Bornim becomes the quickest from the centre, about 70 minutes from Hauptbahnhof on the S7 and one bus."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How much does apple picking cost around Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Obsthof Lindicke is the only one of the five that publishes prices: 2.20 euro a kilo up to 10 kg, 2.00 up to 30 kg, 1.80 above that, and 0.75 for windfalls. Neumann's Erntegarten charges 3 euro entry per person and prices its fruit on the day. The other farms price at the field."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I get to Bio Apfelhof Müller in Wesendahl without a car?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "On weekdays the bus 931 from S Strausberg Nord stops a short walk from the farm. At the weekend part of the service runs as the R931 call bus, which the VBB says must be booked by phone at least 90 minutes ahead on (03341) 4494902. With a bike, S Strausberg Nord is the natural starting point."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Which apple varieties are ripe in late September?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Obsthof Lindicke lists Elstar, Boskoop, Rubinette, Topaz and Sonnenglanz for 19 and 20 September 2026, with Pinova, Pilot and Jonagold from 26 September. Elisenau started its season on 31 August with Sissired, Santana, Elstar and Gala. Boskoop is the baking apple; Elstar and Rubinette are for eating."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I bring my dog apple picking?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "It depends on the farm. At Obsthof Lindicke dogs stay on the lawn by the entrance and do not go into the tree rows. Bio Apfelhof Müller welcomes dogs on a lead. Ask the other farms before you go."
+        }
+      }
+    ]
+  }
+}
