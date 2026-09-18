@@ -1,9 +1,9 @@
 {
-  "updatedAt": "2026-09-18T02:07:49.733Z",
+  "updatedAt": "2026-09-18T07:57:09.473Z",
   "source": "Wix Blog API",
   "popularSource": "Wix Blog metrics.views lifetime sort",
-  "totalPosts": 397,
-  "toolsTotal": 317,
+  "totalPosts": 398,
+  "toolsTotal": 318,
   "bookingUrl": "https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based",
   "navTopics": [
     {
@@ -1802,6 +1802,23 @@
   ],
   "latest": [
     {
+      "title": "Bouldering in Berlin: What Each Hall Costs at the Pace You Actually Climb",
+      "slug": "bouldering-in-berlin",
+      "path": "/post/bouldering-in-berlin",
+      "url": "https://www.berlinwalk.com/post/bouldering-in-berlin",
+      "excerpt": "Every autumn half of Berlin decides this is the winter they take up bouldering, and then stands at the counter choosing between a day ticket, a 10-visit card, a membership and the Urban Sports Club app. I checked the prices at fourteen halls, two multi-hall passes and Urban Sports Club. The cheapest choice depends almost entirely on how often you really go.",
+      "category": "Living in Berlin",
+      "categorySlug": "living-in-berlin",
+      "topic": "living-in-berlin",
+      "topicLabel": "Living in Berlin",
+      "readTime": "7 min read",
+      "publishedDate": "2026-09-18T07:55:22.847Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_609e7a9c546e4d99b545aec205e772f9~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/00-cover-boulder-wall.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_609e7a9c546e4d99b545aec205e772f9~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/00-cover-boulder-wall.jpg",
+      "alt": "A climber in a black shirt reaching across a steep indoor bouldering wall covered in colourful holds of every shape",
+      "relatedToolSlug": "berlin-bouldering-cost-curve"
+    },
+    {
       "title": "Apple Picking Near Berlin: Five Orchards, the Day Each One Opens and the Ride There",
       "slug": "apple-picking-near-berlin",
       "path": "/post/apple-picking-near-berlin",
@@ -1987,26 +2004,26 @@
       "thumb": "https://static.wixstatic.com/media/5a08a3_b7a93d17fcc04940ac210e41275dfb44~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-aerztehaus-treptow.jpg",
       "alt": "The Aerztehaus Treptow, a listed nineteenth century villa in Berlin Alt-Treptow painted with enormous daisies and green leaves across its white facade, with a Haus Apotheke sign at street level",
       "relatedToolSlug": "berlin-referral-route-board"
-    },
+    }
+  ],
+  "allPosts": [
     {
-      "title": "Berlin Election: Which Ballot Your Passport Gets You",
-      "slug": "berlin-election-2026",
-      "path": "/post/berlin-election-2026",
-      "url": "https://www.berlinwalk.com/post/berlin-election-2026",
-      "excerpt": "Berlin elects the Abgeordnetenhaus and twelve district assemblies on Sunday 20 September 2026, with no referendum attached. German citizens get two sheets and three votes, EU citizens get the district ballot only, everyone else gets none. The online postal-vote form closes on Tuesday, the Briefwahlstelle on Friday at 15:00, and the red envelope has to be in the district office by 18:00 on Sunday.",
+      "title": "Bouldering in Berlin: What Each Hall Costs at the Pace You Actually Climb",
+      "slug": "bouldering-in-berlin",
+      "path": "/post/bouldering-in-berlin",
+      "url": "https://www.berlinwalk.com/post/bouldering-in-berlin",
+      "excerpt": "Every autumn half of Berlin decides this is the winter they take up bouldering, and then stands at the counter choosing between a day ticket, a 10-visit card, a membership and the Urban Sports Club app. I checked the prices at fourteen halls, two multi-hall passes and Urban Sports Club. The cheapest choice depends almost entirely on how often you really go.",
       "category": "Living in Berlin",
       "categorySlug": "living-in-berlin",
       "topic": "living-in-berlin",
       "topicLabel": "Living in Berlin",
-      "readTime": "8 min read",
-      "publishedDate": "2026-09-15T05:57:21.521Z",
-      "image": "https://static.wixstatic.com/media/5a08a3_3c027bc2db78482192ec61bf04dccd7b~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/abgeordnetenhaus-niederkirchnerstrasse.jpg",
-      "thumb": "https://static.wixstatic.com/media/5a08a3_3c027bc2db78482192ec61bf04dccd7b~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/abgeordnetenhaus-niederkirchnerstrasse.jpg",
-      "alt": "The Abgeordnetenhaus von Berlin on Niederkirchnerstrasse, the former Prussian Landtag, a long neoclassical facade with columns and flags flying in front under a blue sky",
-      "relatedToolSlug": "berlin-ballot-board"
-    }
-  ],
-  "allPosts": [
+      "readTime": "7 min read",
+      "publishedDate": "2026-09-18T07:55:22.847Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_609e7a9c546e4d99b545aec205e772f9~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/00-cover-boulder-wall.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_609e7a9c546e4d99b545aec205e772f9~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/00-cover-boulder-wall.jpg",
+      "alt": "A climber in a black shirt reaching across a steep indoor bouldering wall covered in colourful holds of every shape",
+      "relatedToolSlug": "berlin-bouldering-cost-curve"
+    },
     {
       "title": "Apple Picking Near Berlin: Five Orchards, the Day Each One Opens and the Ride There",
       "slug": "apple-picking-near-berlin",

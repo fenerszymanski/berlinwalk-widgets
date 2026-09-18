@@ -1,9 +1,26 @@
 {
-  "updatedAt": "2026-09-18T02:07:49.733Z",
+  "updatedAt": "2026-09-18T07:57:09.473Z",
   "source": "Wix Blog API",
-  "totalPosts": 397,
+  "totalPosts": 398,
   "bookingUrl": "https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based",
   "allPosts": [
+    {
+      "title": "Bouldering in Berlin: What Each Hall Costs at the Pace You Actually Climb",
+      "slug": "bouldering-in-berlin",
+      "path": "/post/bouldering-in-berlin",
+      "url": "https://www.berlinwalk.com/post/bouldering-in-berlin",
+      "excerpt": "Every autumn half of Berlin decides this is the winter they take up bouldering, and then stands at the counter choosing between a day ticket, a 10-visit card, a membership and the Urban Sports Club app. I checked the prices at fourteen halls, two multi-hall passes and Urban Sports Club. The cheapest choice depends almost entirely on how often you really go.",
+      "category": "Living in Berlin",
+      "categorySlug": "living-in-berlin",
+      "topic": "living-in-berlin",
+      "topicLabel": "Living in Berlin",
+      "readTime": "7 min read",
+      "publishedDate": "2026-09-18T07:55:22.847Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_609e7a9c546e4d99b545aec205e772f9~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/00-cover-boulder-wall.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_609e7a9c546e4d99b545aec205e772f9~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/00-cover-boulder-wall.jpg",
+      "alt": "A climber in a black shirt reaching across a steep indoor bouldering wall covered in colourful holds of every shape",
+      "relatedToolSlug": "berlin-bouldering-cost-curve"
+    },
     {
       "title": "Apple Picking Near Berlin: Five Orchards, the Day Each One Opens and the Ride There",
       "slug": "apple-picking-near-berlin",
