@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Berlin Tenant Cover Clock</title>
+<link rel="stylesheet" href="../css/brand.css">
+<style>
+  :root {
+    --green: #1B5E20;
+    --deep: #123D18;
+    --yellow: #FFE600;
+    --lime: #7CB342;
+    --soft: #C5E1A5;
+    --ink: #212121;
+    --muted: #56604f;
+    --line: #dde2d3;
+    --wait: #F3C9B8;
+    --waitInk: #8A2E1C;
+    --paper: #FAF8F0;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: #fff; color: var(--ink); font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
+  .tc { max-width: 860px; margin: 0 auto; padding: 14px 12px 8px; }
+  .tc-head { border-bottom: 3px solid var(--deep); padding-bottom: 10px; }
+  .tc-kicker { font-size: .66rem; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; color: var(--green); }
+  .tc-head h2 { margin: 4px 0 0; font-size: 1.12rem; line-height: 1.28; color: var(--deep); }
+  .tc-head p { margin: 5px 0 0; font-size: .78rem; line-height: 1.5; color: var(--muted); max-width: 620px; }
+
+  .tc-letters { display: flex; flex-wrap: wrap; gap: 6px; margin: 12px 0 8px; }
+  .tc-letters button { font: inherit; font-size: .76rem; font-weight: 700; padding: 8px 11px; border-radius: 999px; border: 2px solid var(--deep); background: #fff; color: var(--deep); cursor: pointer; }
+  .tc-letters button[aria-pressed="true"] { background: var(--yellow); color: var(--deep); }
+  .tc-letters button:focus-visible { outline: 3px solid var(--lime); outline-offset: 2px; }
+
+  .tc-dates { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .tc-dates label { display: block; background: var(--paper); border: 1px solid var(--line); border-radius: 8px; padding: 8px 10px; }
+  .tc-dates span { display: block; font-size: .66rem; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); margin-bottom: 4px; }
+  .tc-dates input { font: inherit; font-size: .9rem; font-weight: 700; color: var(--deep); border: 0; background: transparent; width: 100%; padding: 0; }
+
+  .tc-chart { margin: 12px 0 4px; border: 1px solid var(--line); border-radius: 10px; background: #fff; overflow: hidden; }
+  .tc-chart svg { display: block; width: 100%; height: auto; }
+  .tc-legend { display: flex; flex-wrap: wrap; gap: 12px; font-size: .68rem; color: var(--muted); margin: 6px 2px 10px; }
+  .tc-legend i { display: inline-block; width: 14px; height: 9px; border-radius: 2px; vertical-align: -1px; margin-right: 5px; }
+
+  .tc-cards { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; }
+  .tc-card { border: 1px solid var(--line); border-top: 5px solid var(--green); border-radius: 8px; padding: 9px 10px; background: #fff; }
+  .tc-card.is-short { border-top-color: var(--waitInk); }
+  .tc-card.is-free { border-top-color: var(--lime); }
+  .tc-card h3 { margin: 0; font-size: .8rem; color: var(--deep); line-height: 1.3; }
+  .tc-verdict { margin: 5px 0 6px; font-size: .78rem; font-weight: 800; line-height: 1.35; }
+  .tc-card.is-short .tc-verdict { color: var(--waitInk); }
+  .tc-card:not(.is-short) .tc-verdict { color: var(--green); }
+  .tc-card dl { margin: 0; font-size: .7rem; line-height: 1.45; }
+  .tc-card dt { color: var(--muted); font-weight: 600; }
+  .tc-card dd { margin: 0 0 4px; color: var(--ink); font-weight: 700; }
+  .tc-note { font-size: .7rem; line-height: 1.5; color: var(--muted); margin: 10px 2px 4px; }
+  .tc-note strong { color: var(--deep); }
+
+  @media (max-width: 640px) {
+    .tc-cards { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 380px) {
+    .tc-dates { grid-template-columns: 1fr; }
+    .tc-cards { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+<main class="tc">
+  <header class="tc-head">
+    <div class="tc-kicker">Berlin tenant cover clock</div>
+    <h2>Which tenant association would still cover the letter you are expecting?</h2>
+    <p>Pick the letter, set the day you would join and the day it lands. Each lane shows when the court-cost cover really starts, measured against the published waiting periods of the three big Berlin associations.</p>
+  </header>
+
+  <div class="tc-letters" role="group" aria-label="Letter you are expecting">
+    <button type="button" data-letter="bill" aria-pressed="true">Service-charge bill</button>
+    <button type="button" data-letter="rent" aria-pressed="false">Rent increase letter</button>
+    <button type="button" data-letter="now" aria-pressed="false">It is already here</button>
+  </div>
+
+  <div class="tc-dates">
+    <label><span>I send the membership form on</span><input type="date" id="joinDate"></label>
+    <label><span>The letter lands on</span><input type="date" id="letterDate"></label>
+  </div>
+
+  <div class="tc-chart" id="chart" aria-live="polite"></div>
+  <div class="tc-legend">
+    <span><i style="background:var(--wait)"></i>Waiting period: advice only</span>
+    <span><i style="background:var(--soft)"></i>Court costs covered</span>
+    <span><i style="background:var(--yellow);border:1px solid var(--deep)"></i>Your letter</span>
+  </div>
+
+  <div class="tc-cards" id="cards"></div>
+
+  <p class="tc-note"><strong>How to read it.</strong> The association decides when a dispute began, and none of them covers a problem you already knew about when you joined. This clock counts from the day the letter lands, so treat a lane that is only a few days clear as a warning. Fees and waiting periods checked on 19 September 2026.</p>
+</main>
+
+<script>
+(function () {
+  var DAY = 86400000;
+  var ASSOC = [
+    {
+      key: 'bmv', name: 'Berliner Mieterverein',
+      start: function (j) { return new Date(j.getFullYear(), j.getMonth(), 1); },
+      cover: function (s) { return addMonths(s, 3); },
+      waitLabel: '3 months from the 1st',
+      firstYear: '€139.50 (€132 + €7.50 once)',
+      minimum: function (s) { return '24 months, to ' + fmt(new Date(addMonths(s, 24).getTime() - DAY)); },
+      letters: 'Included'
+    },
+    {
+      key: 'bmg', name: 'Berliner MieterGemeinschaft',
+      start: function (j) { return j; },
+      cover: function (s) { return addMonths(s, 1); },
+      waitLabel: '1 month from your payment',
+      firstYear: '€75 (no admission fee on direct debit)',
+      minimum: function () { return 'One full calendar year'; },
+      letters: 'Drop-in advice, no appointment'
+    },
+    {
+      key: 'msb', name: 'Mieterschutzbund Berlin',
+      start: function (j) { return j; },
+      cover: function (s) { return new Date(s.getTime() + 42 * DAY); },
+      waitLabel: '6 weeks, cover booked on top',
+      firstYear: '€108.20 (€54 + €5 + €49.20 cover)',
+      minimum: function () { return 'Fee paid 12 months ahead'; },
+      letters: '€12.50 per letter'
+    },
+    {
+      key: 'free', name: 'Free district advice',
+      start: function (j) { return j; },
+      cover: null,
+      waitLabel: 'No waiting, no court cover',
+      firstYear: '€0',
+      minimum: function () { return 'None'; },
+      letters: 'Advice only'
+    }
+  ];
+
+  var joinInput = document.getElementById('joinDate');
+  var letterInput = document.getElementById('letterDate');
+  var chart = document.getElementById('chart');
+  var cards = document.getElementById('cards');
+  var buttons = Array.prototype.slice.call(document.querySelectorAll('.tc-letters button'));
+  var letterKind = 'bill';
+
+  function addMonths(d, n) { return new Date(d.getFullYear(), d.getMonth() + n, d.getDate()); }
+  function iso(d) { var m = d.getMonth() + 1, x = d.getDate(); return d.getFullYear() + '-' + (m < 10 ? '0' : '') + m + '-' + (x < 10 ? '0' : '') + x; }
+  function parse(v) { var p = (v || '').split('-'); return p.length === 3 ? new Date(+p[0], +p[1] - 1, +p[2]) : null; }
+  var MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+  function fmt(d) { return d.getDate() + ' ' + MONTHS[d.getMonth()] + ' ' + d.getFullYear(); }
+  function today() { var n = new Date(); return new Date(n.getFullYear(), n.getMonth(), n.getDate()); }
+
+  function defaultLetter(kind, join) {
+    if (kind === 'now') return join;
+    if (kind === 'rent') return addMonths(join, 2);
+    // Service-charge statements for the previous year are due by 31 December; many land in December.
+    var dec = new Date(join.getFullYear(), 11, 10);
+    return dec.getTime() > join.getTime() + 20 * DAY ? dec : new Date(join.getFullYear() + 1, 11, 10);
+  }
+
+  function svgEl(tag, attrs, text) {
+    var el = document.createElementNS('http://www.w3.org/2000/svg', tag);
+    for (var k in attrs) el.setAttribute(k, attrs[k]);
+    if (text != null) el.textContent = text;
+    return el;
+  }
+
+  function draw() {
+    var join = parse(joinInput.value) || today();
+    var letter = parse(letterInput.value) || join;
+    var rows = ASSOC.map(function (a) {
+      var s = a.start(join);
+      var c = a.cover ? a.cover(s) : null;
+      var gap = c ? Math.ceil((c.getTime() - letter.getTime()) / DAY) : null;
+      return { a: a, start: s, cover: c, covered: c ? gap <= 0 : false, gap: gap };
+    });
+
+    var first = new Date(Math.min(join.getTime(), letter.getTime(), rows[0].start.getTime()));
+    var from = new Date(first.getFullYear(), first.getMonth(), 1);
+    var lastT = Math.max(letter.getTime(), rows[0].cover.getTime()) + 25 * DAY;
+    var to = new Date(new Date(lastT).getFullYear(), new Date(lastT).getMonth() + 1, 1);
+    if ((to - from) / DAY < 180) to = addMonths(from, 6);
+
+    var W = Math.max(300, chart.clientWidth || 740);
+    var narrow = W < 520;
+    var labelW = narrow ? 0 : 168;
+    var top = 30, laneH = narrow ? 50 : 44, gapH = 8, padR = 14;
+    var H = top + ASSOC.length * (laneH + gapH) + 8;
+    var x0 = labelW + 10, x1 = W - padR;
+    var span = to.getTime() - from.getTime();
+    function X(d) { return x0 + (d.getTime() - from.getTime()) / span * (x1 - x0); }
+
+    var svg = svgEl('svg', { viewBox: '0 0 ' + W + ' ' + H, role: 'img', 'aria-label': 'Timeline of waiting periods and cover for each tenant association against the letter date' });
+    svg.appendChild(svgEl('rect', { x: 0, y: 0, width: W, height: H, fill: '#FAF8F0' }));
+
+    // Month grid
+    for (var m = new Date(from); m < to; m = addMonths(m, 1)) {
+      var mx = X(m);
+      svg.appendChild(svgEl('line', { x1: mx, x2: mx, y1: top - 8, y2: H - 6, stroke: '#dde2d3', 'stroke-width': 1 }));
+      var label = MONTHS[m.getMonth()] + (m.getMonth() === 0 || +m === +from ? ' ' + String(m.getFullYear()).slice(2) : '');
+      svg.appendChild(svgEl('text', { x: mx + 3, y: 16, 'font-size': 10.5, fill: '#56604f', 'font-weight': 600 }, label));
+    }
+
+    rows.forEach(function (r, i) {
+      var y = top + i * (laneH + gapH);
+      var barY = narrow ? y + 20 : y + 10, barH = narrow ? 22 : 24;
+      var name = r.a.name;
+      if (narrow) {
+        svg.appendChild(svgEl('text', { x: 10, y: y + 13, 'font-size': 11, 'font-weight': 800, fill: '#123D18' }, name));
+      } else {
+        svg.appendChild(svgEl('text', { x: 10, y: y + 22, 'font-size': 11.5, 'font-weight': 800, fill: '#123D18' }, name));
+        svg.appendChild(svgEl('text', { x: 10, y: y + 36, 'font-size': 9.5, fill: '#56604f' }, r.a.waitLabel));
+      }
+      var sx = Math.max(x0, X(r.start));
+      if (r.cover) {
+        var cx = Math.min(x1, X(r.cover));
+        svg.appendChild(svgEl('rect', { x: sx, y: barY, width: Math.max(0, cx - sx), height: barH, fill: '#F3C9B8', rx: 3 }));
+        svg.appendChild(svgEl('rect', { x: cx, y: barY, width: Math.max(0, x1 - cx), height: barH, fill: '#C5E1A5', rx: 3 }));
+        svg.appendChild(svgEl('line', { x1: cx, x2: cx, y1: barY - 3, y2: barY + barH + 3, stroke: '#1B5E20', 'stroke-width': 2 }));
+        var tag = 'cover ' + r.cover.getDate() + ' ' + MONTHS[r.cover.getMonth()];
+        var tx = cx + 4 + 80 > x1 ? cx - 4 : cx + 4;
+        svg.appendChild(svgEl('text', { x: tx, y: barY + barH / 2 + 4, 'font-size': 10, 'font-weight': 700, fill: '#123D18', 'text-anchor': tx < cx ? 'end' : 'start' }, tag));
+      } else {
+        svg.appendChild(svgEl('rect', { x: sx, y: barY, width: Math.max(0, x1 - sx), height: barH, fill: '#fff', stroke: '#7CB342', 'stroke-dasharray': '4 3', rx: 3 }));
+        svg.appendChild(svgEl('text', { x: sx + 6, y: barY + barH / 2 + 4, 'font-size': 10, fill: '#56604f' }, 'advice only, any day'));
+      }
+      svg.appendChild(svgEl('circle', { cx: sx, cy: barY + barH / 2, r: 4.5, fill: '#123D18' }));
+    });
+
+    // Letter marker across all lanes
+    var lx = X(letter);
+    svg.appendChild(svgEl('line', { x1: lx, x2: lx, y1: top - 6, y2: H - 6, stroke: '#123D18', 'stroke-width': 2, 'stroke-dasharray': '5 3' }));
+    svg.appendChild(svgEl('rect', { x: lx - 30, y: top - 13, width: 60, height: 15, rx: 7, fill: '#FFE600', stroke: '#123D18' }));
+    svg.appendChild(svgEl('text', { x: lx, y: top - 2, 'font-size': 9.5, 'font-weight': 800, fill: '#123D18', 'text-anchor': 'middle' }, 'letter'));
+
+    chart.replaceChildren(svg);
+
+    cards.replaceChildren.apply(cards, rows.map(function (r) {
+      var card = document.createElement('article');
+      var verdict;
+      if (!r.cover) {
+        card.className = 'tc-card is-free';
+        verdict = 'Advice any day, but no court costs and no letters sent for you';
+      } else if (r.covered) {
+        card.className = 'tc-card';
+        verdict = 'Covered: cover starts ' + (-r.gap) + ' days before the letter';
+      } else {
+        card.className = 'tc-card is-short';
+        verdict = 'Advice yes, court costs no: ' + r.gap + ' days short';
+      }
+      card.innerHTML = '<h3></h3><p class="tc-verdict"></p><dl>' +
+        '<dt>Cover from</dt><dd></dd><dt>First year</dt><dd></dd><dt>Minimum stay</dt><dd></dd><dt>Letters to the landlord</dt><dd></dd></dl>';
+      card.querySelector('h3').textContent = r.a.name;
+      card.querySelector('.tc-verdict').textContent = verdict;
+      var dd = card.querySelectorAll('dd');
+      dd[0].textContent = r.cover ? fmt(r.cover) : 'No court cover';
+      dd[1].textContent = r.a.firstYear;
+      dd[2].textContent = r.a.minimum(r.start);
+      dd[3].textContent = r.a.letters;
+      return card;
+    }));
+    if (typeof window.__bwRequestEmbedResize === 'function') window.__bwRequestEmbedResize();
+  }
+
+  function pickLetter(kind) {
+    letterKind = kind;
+    buttons.forEach(function (b) { b.setAttribute('aria-pressed', b.getAttribute('data-letter') === kind ? 'true' : 'false'); });
+    var join = parse(joinInput.value) || today();
+    letterInput.value = iso(defaultLetter(kind, join));
+    draw();
+  }
+
+  buttons.forEach(function (b) { b.addEventListener('click', function () { pickLetter(b.getAttribute('data-letter')); }); });
+  joinInput.addEventListener('change', function () { pickLetter(letterKind); });
+  letterInput.addEventListener('change', draw);
+  var resizeTimer;
+  window.addEventListener('resize', function () { clearTimeout(resizeTimer); resizeTimer = setTimeout(draw, 120); });
+
+  joinInput.value = iso(today());
+  pickLetter('bill');
+})();
+</script>
+<script src="../js/brand.js"></script>
+</body>
+</html>

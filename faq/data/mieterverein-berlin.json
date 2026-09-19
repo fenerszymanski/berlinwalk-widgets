@@ -1,0 +1,101 @@
+{
+  "version": 1,
+  "slug": "mieterverein-berlin",
+  "key": "mieterverein-berlin",
+  "config": {
+    "title": "Mieterverein Berlin - FAQ",
+    "subtitle": "What the three Berlin tenant associations cost, when their legal cover starts, and what free district advice can and cannot do.",
+    "items": [
+      {
+        "q": "How much does the Berliner Mieterverein cost?",
+        "a": "€132 a year including legal cost cover, plus a one-off €7.50 admission fee. Households on Bürgergeld, social assistance or BAföG pay €78 on proof. The minimum membership is 24 months."
+      },
+      {
+        "q": "When does the legal cover start after I join?",
+        "a": "At the Berliner Mieterverein, three months after the 1st of the month in which your form arrives. At the Berliner MieterGemeinschaft, one month after your fee or direct-debit mandate arrives. At the Mieterschutzbund Berlin, six weeks after you add the optional cover."
+      },
+      {
+        "q": "Can I join a Mieterverein after my landlord has already sent the letter?",
+        "a": "Yes, and you will get advice and help with letters. What you will not get is legal cost cover for that dispute, because every association excludes problems that already existed when you joined."
+      },
+      {
+        "q": "Which Berlin tenant association is cheapest?",
+        "a": "The Berliner MieterGemeinschaft at €75 a year with legal cover, or €43 without it, and no admission fee if you pay by direct debit. The Mieterschutzbund starts at €54 but charges €12.50 per letter it writes and €50 to check service-charge receipts."
+      },
+      {
+        "q": "Is there free tenant advice in Berlin?",
+        "a": "Yes. All twelve districts run open tenant advice that every tenant living there can use for free. It is a good first stop, but it does not write to your landlord or cover court costs."
+      },
+      {
+        "q": "How long do I have to answer a rent increase?",
+        "a": "Until the end of the second full calendar month after the letter arrives. If you agree, the new rent applies from the start of the third month."
+      },
+      {
+        "q": "How do I leave the Berliner Mieterverein?",
+        "a": "In the first two years you can cancel with three months' notice to the end of month 24. After that the notice is three months to the end of a calendar year."
+      }
+    ]
+  },
+  "schema": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How much does the Berliner Mieterverein cost?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "€132 a year including legal cost cover, plus a one-off €7.50 admission fee. Households on Bürgergeld, social assistance or BAföG pay €78 on proof. The minimum membership is 24 months."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "When does the legal cover start after I join?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "At the Berliner Mieterverein, three months after the 1st of the month in which your form arrives. At the Berliner MieterGemeinschaft, one month after your fee or direct-debit mandate arrives. At the Mieterschutzbund Berlin, six weeks after you add the optional cover."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I join a Mieterverein after my landlord has already sent the letter?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, and you will get advice and help with letters. What you will not get is legal cost cover for that dispute, because every association excludes problems that already existed when you joined."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Which Berlin tenant association is cheapest?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The Berliner MieterGemeinschaft at €75 a year with legal cover, or €43 without it, and no admission fee if you pay by direct debit. The Mieterschutzbund starts at €54 but charges €12.50 per letter it writes and €50 to check service-charge receipts."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is there free tenant advice in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. All twelve districts run open tenant advice that every tenant living there can use for free. It is a good first stop, but it does not write to your landlord or cover court costs."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How long do I have to answer a rent increase?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Until the end of the second full calendar month after the letter arrives. If you agree, the new rent applies from the start of the third month."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do I leave the Berliner Mieterverein?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "In the first two years you can cancel with three months' notice to the end of month 24. After that the notice is three months to the end of a calendar year."
+        }
+      }
+    ]
+  }
+}
