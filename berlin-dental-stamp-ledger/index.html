@@ -83,6 +83,11 @@
     .sl-year i { font-size: .4rem; letter-spacing: 0; }
     .sl-start button { font-size: .7rem; padding: 7px 9px; }
   }
+  @media (max-width: 380px) {
+    .sl-year[aria-pressed="true"]:not(.is-free) i { font-size: 0; }
+    .sl-year[aria-pressed="true"]:not(.is-free) i::after { content: '\2713'; font-size: .72rem; }
+    .sl-year i { letter-spacing: 0; }
+  }
 </style>
 </head>
 <body>
