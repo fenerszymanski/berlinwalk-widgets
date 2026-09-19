@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Berlin Electricity Offer Lines</title>
+<link rel="stylesheet" href="../css/brand.css">
+<style>
+  :root {
+    --green: #1B5E20;
+    --deep: #123D18;
+    --yellow: #FFE600;
+    --lime: #7CB342;
+    --soft: #C5E1A5;
+    --ink: #212121;
+    --muted: #5a6152;
+    --paper: #F7F8F2;
+    --rule: rgba(18,61,24,.14);
+    --default: #B23A2E;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--paper); color: var(--ink); font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
+  .el { max-width: 840px; margin: 0 auto; padding: 14px 12px 10px; }
+  .el-top { display: flex; gap: 12px; align-items: flex-end; justify-content: space-between; flex-wrap: wrap; }
+  .el-top h2 { margin: 0; font-size: 1.08rem; line-height: 1.3; color: var(--deep); max-width: 520px; }
+  .el-top p { margin: 4px 0 0; font-size: .78rem; line-height: 1.5; color: var(--muted); max-width: 560px; }
+
+  .el-use { margin-top: 12px; display: grid; grid-template-columns: 170px 1fr; gap: 10px 14px; align-items: start; padding: 10px 12px; border-left: 4px solid var(--yellow); background: #fff; border-radius: 0 12px 12px 0; }
+  .el-kwh label { display: block; font-size: .6rem; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: var(--deep); }
+  .el-kwh input { width: 100%; margin-top: 3px; font: 800 1.35rem/1.1 'Montserrat', sans-serif; color: var(--deep); border: 0; border-bottom: 2px solid var(--green); background: transparent; padding: 2px 0; }
+  .el-kwh input:focus-visible, .el-row input:focus-visible { outline: 3px solid var(--lime); outline-offset: 2px; }
+  .el-kwh small { display: block; margin-top: 4px; font-size: .64rem; line-height: 1.35; color: var(--muted); }
+  .el-house p { margin: 0 0 5px; font-size: .68rem; color: var(--muted); line-height: 1.4; }
+  .el-house .people { display: flex; flex-wrap: wrap; gap: 5px; }
+  .el-house button { font: 700 .72rem 'Montserrat', sans-serif; padding: 6px 10px; border-radius: 999px; border: 1.5px solid var(--green); background: #fff; color: var(--deep); cursor: pointer; }
+  .el-house button[aria-pressed="true"] { background: var(--yellow); border-color: var(--yellow); color: var(--deep); }
+  .el-house label.hw { display: inline-flex; gap: 6px; align-items: center; margin-top: 7px; font-size: .72rem; font-weight: 600; color: var(--deep); cursor: pointer; }
+  .el-house label.hw input { accent-color: var(--green); width: 15px; height: 15px; }
+
+  .el-plot { margin-top: 12px; background: #fff; border-radius: 12px; border: 1px solid var(--rule); padding: 8px 6px 4px; }
+  .el-plot svg { display: block; width: 100%; height: auto; }
+  .el-plot .axis text { font: 600 10px 'Montserrat', sans-serif; fill: #6b7163; }
+  .el-plot .grid line { stroke: rgba(18,61,24,.08); }
+  .el-plot .lbl { font: 700 10.5px 'Montserrat', sans-serif; }
+  .el-key { display: flex; flex-wrap: wrap; gap: 4px 14px; padding: 4px 8px 4px; font-size: .66rem; color: var(--muted); }
+  .el-key i { display: inline-block; width: 18px; height: 0; border-top: 3px solid; vertical-align: middle; margin-right: 5px; }
+  .el-key i.dash { border-top-style: dashed; }
+
+  .el-verdict { margin-top: 10px; padding: 10px 12px; border-radius: 12px; background: var(--deep); color: #fff; font-size: .82rem; line-height: 1.5; }
+  .el-verdict b { color: var(--yellow); }
+
+  .el-rows { margin-top: 12px; display: grid; gap: 7px; }
+  .el-row { display: grid; grid-template-columns: 8px minmax(0,1.3fr) repeat(3, minmax(0, .8fr)) auto; gap: 8px; align-items: end; background: #fff; border: 1px solid var(--rule); border-radius: 10px; padding: 8px 10px 8px 0; overflow: hidden; }
+  .el-row .sw { align-self: stretch; }
+  .el-row label { display: grid; gap: 2px; font-size: .56rem; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; color: var(--deep); min-width: 0; }
+  .el-row input { width: 100%; min-width: 0; font: 700 .84rem 'Montserrat', sans-serif; color: var(--deep); border: 0; border-bottom: 1.5px solid rgba(27,94,32,.28); padding: 3px 0; background: transparent; }
+  .el-row .out { grid-column: 2 / -1; display: block; font-size: .7rem; line-height: 1.55; color: var(--muted); }
+  .el-row .out b { color: var(--deep); }
+  .el-row .out .win { color: var(--green); font-weight: 800; }
+  .el-row .out .lose { color: var(--default); font-weight: 800; }
+  .el-row button.rm { font: 700 .66rem 'Montserrat', sans-serif; border: 0; background: none; color: var(--muted); text-decoration: underline; cursor: pointer; padding: 4px; }
+  .el-add { margin-top: 8px; display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+  .el-add button { font: 800 .76rem 'Montserrat', sans-serif; padding: 9px 14px; border-radius: 10px; border: 0; background: var(--yellow); color: var(--deep); cursor: pointer; }
+  .el-add button:disabled { opacity: .45; cursor: default; }
+  .el-add small { font-size: .66rem; color: var(--muted); line-height: 1.4; }
+  .el-foot { margin-top: 10px; font-size: .64rem; line-height: 1.5; color: var(--muted); }
+
+  @media (max-width: 600px) {
+    .el-use { grid-template-columns: 1fr; }
+    .el-row { grid-template-columns: 6px repeat(3, minmax(0,1fr)); padding-right: 8px; }
+    .el-row .name { grid-column: 2 / -1; }
+    .el-row .sw { grid-row: span 4; }
+    .el-row button.rm { grid-column: 2 / -1; justify-self: start; padding: 2px 0; position: relative; z-index: 1; }
+    .el-row .out { grid-column: 2 / -1; }
+  }
+</style>
+</head>
+<body>
+<div class="el">
+  <div class="el-top">
+    <div>
+      <h2>Is that electricity offer cheaper at the amount you actually use?</h2>
+      <p>Each line is one tariff's yearly bill across every possible consumption. The yellow marker is your year. Type the two prices from any offer and see where it crosses Vattenfall's Berlin default tariff.</p>
+    </div>
+  </div>
+
+  <div class="el-use">
+    <div class="el-kwh">
+      <label for="kwh">Your year in kWh</label>
+      <input id="kwh" type="number" inputmode="numeric" min="100" max="9000" step="50" value="1900">
+      <small>Last bill, or two meter readings a year apart. No bill yet? Pick your household.</small>
+    </div>
+    <div class="el-house">
+      <p>Average yearly use in a flat (Stromspiegel), gas or district heating for hot water:</p>
+      <div class="people" id="people"></div>
+      <label class="hw"><input type="checkbox" id="hotwater"> Water heated by electricity (Durchlauferhitzer)</label>
+    </div>
+  </div>
+
+  <div class="el-plot">
+    <svg id="plot" viewBox="0 0 800 360" role="img" aria-label="Yearly electricity cost by consumption for each tariff"></svg>
+    <div class="el-key" id="key"></div>
+  </div>
+
+  <div class="el-verdict" id="verdict" aria-live="polite"></div>
+
+  <div class="el-rows" id="rows"></div>
+  <div class="el-add">
+    <button type="button" id="add">+ Add another offer</button>
+    <small>Up to four offers. Type the Arbeitspreis in cents and the Grundpreis per month, both gross, exactly as the offer lists them. A one-off bonus only counts in year one.</small>
+  </div>
+
+  <p class="el-foot">Default tariff: Vattenfall Berlin Basis (Grundversorgung) from 1 April 2026, 37.93 ct/kWh and €13.40 a month, gross. Offer A starts with example numbers only; overwrite them with the prices on your offer. Yearly cost = kWh × price per kWh + 12 × monthly base price, minus the bonus in year one.</p>
+</div>
+
+<script>
+(function () {
+  var DEFAULT = { name: 'Vattenfall default (Grundversorgung)', ct: 37.93, base: 13.40, bonus: 0, isDefault: true };
+  var COLORS = ['#1B5E20', '#0277BD', '#8E6A00', '#6A1B9A'];
+  var HOUSE = [
+    { n: 1, plain: 1200, hot: 1600 },
+    { n: 2, plain: 1900, hot: 2500 },
+    { n: 3, plain: 2400, hot: 3500 },
+    { n: 4, plain: 2600, hot: 4000 },
+    { n: 5, plain: 3100, hot: 5000 }
+  ];
+  var offers = [{ name: 'Offer A', ct: 27.5, base: 12.5, bonus: 0 }];
+  var kwhEl = document.getElementById('kwh');
+  var hotEl = document.getElementById('hotwater');
+  var rowsEl = document.getElementById('rows');
+  var svg = document.getElementById('plot');
+  var NS = 'http://www.w3.org/2000/svg';
+  var picked = 2;
+
+  function num(v, d) { var x = parseFloat(String(v).replace(',', '.')); return isFinite(x) && x >= 0 ? x : d; }
+  function eur(v) { return '€' + Math.round(v).toLocaleString('en-GB'); }
+  function yearCost(t, k, withBonus) { return k * t.ct / 100 + 12 * t.base - (withBonus ? t.bonus : 0); }
+  function el(tag, attrs, text) {
+    var n = document.createElementNS(NS, tag);
+    for (var a in attrs) n.setAttribute(a, attrs[a]);
+    if (text != null) n.textContent = text;
+    return n;
+  }
+
+  function buildPeople() {
+    var box = document.getElementById('people');
+    box.innerHTML = '';
+    HOUSE.forEach(function (h) {
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.textContent = h.n === 1 ? '1 person' : h.n + ' people';
+      b.setAttribute('aria-pressed', String(h.n === picked));
+      b.addEventListener('click', function () {
+        picked = h.n;
+        kwhEl.value = hotEl.checked ? h.hot : h.plain;
+        buildPeople();
+        draw();
+      });
+      box.appendChild(b);
+    });
+  }
+  hotEl.addEventListener('change', function () {
+    if (picked) { var h = HOUSE[picked - 1]; kwhEl.value = hotEl.checked ? h.hot : h.plain; }
+    draw();
+  });
+  kwhEl.addEventListener('input', function () { picked = 0; buildPeople(); draw(); });
+
+  function field(label, value, step, onInput, cls) {
+    var l = document.createElement('label');
+    if (cls) l.className = cls;
+    l.textContent = label;
+    var i = document.createElement('input');
+    i.type = step ? 'number' : 'text';
+    if (step) { i.step = step; i.min = '0'; i.inputMode = 'decimal'; }
+    i.value = value;
+    i.addEventListener('input', function () { onInput(i.value); draw(false); });
+    l.appendChild(i);
+    return l;
+  }
+
+  function buildRows() {
+    rowsEl.innerHTML = '';
+    var all = [DEFAULT].concat(offers);
+    all.forEach(function (t, idx) {
+      var r = document.createElement('div');
+      r.className = 'el-row';
+      var sw = document.createElement('span');
+      sw.className = 'sw';
+      sw.style.background = t.isDefault ? 'var(--default)' : COLORS[(idx - 1) % COLORS.length];
+      r.appendChild(sw);
+      r.appendChild(field('Tariff', t.name, null, function (v) { t.name = v || 'Offer'; }, 'name'));
+      r.appendChild(field('ct per kWh', t.ct, '0.01', function (v) { t.ct = num(v, t.ct); }));
+      r.appendChild(field('€ per month', t.base, '0.01', function (v) { t.base = num(v, t.base); }));
+      r.appendChild(field('Bonus €', t.bonus, '1', function (v) { t.bonus = num(v, 0); }));
+      if (!t.isDefault) {
+        var rm = document.createElement('button');
+        rm.type = 'button'; rm.className = 'rm'; rm.textContent = 'remove';
+        rm.addEventListener('click', function () { offers.splice(idx - 1, 1); buildRows(); draw(); });
+        r.appendChild(rm);
+      } else {
+        r.lastChild.querySelector('input').disabled = true;
+      }
+      var out = document.createElement('div');
+      out.className = 'out';
+      out.setAttribute('data-out', idx);
+      r.appendChild(out);
+      rowsEl.appendChild(r);
+    });
+    document.getElementById('add').disabled = offers.length >= 4;
+  }
+
+  document.getElementById('add').addEventListener('click', function () {
+    if (offers.length >= 4) return;
+    var letter = String.fromCharCode(65 + offers.length);
+    offers.push({ name: 'Offer ' + letter, ct: 30, base: 11, bonus: 0 });
+    buildRows();
+    draw();
+  });
+
+  function crossing(a, b) {
+    // kWh where two tariffs cost the same in a year without bonus
+    var dp = (a.ct - b.ct) / 100;
+    if (Math.abs(dp) < 1e-6) return null;
+    var k = (12 * b.base - 12 * a.base) / dp;
+    return k > 0 ? k : null;
+  }
+
+  function draw() {
+    var k = Math.min(9000, Math.max(100, num(kwhEl.value, 1900)));
+    var all = [DEFAULT].concat(offers);
+    var xMax = Math.max(4000, Math.ceil(k * 1.35 / 500) * 500);
+    var yMax = all.reduce(function (m, t) { return Math.max(m, yearCost(t, xMax, false)); }, 0);
+    yMax = Math.ceil(yMax / 250) * 250;
+    var W = Math.max(280, Math.round(svg.parentNode.clientWidth - 12)), H = W < 520 ? Math.round(W * 0.78) : 360, L = W < 520 ? 44 : 58, R = 12, T = 16, B = 38;
+    svg.setAttribute('viewBox', '0 0 ' + W + ' ' + H);
+    var X = function (v) { return L + (W - L - R) * v / xMax; };
+    var Y = function (v) { return T + (H - T - B) * (1 - v / yMax); };
+    while (svg.firstChild) svg.removeChild(svg.firstChild);
+
+    var grid = el('g', { class: 'grid' }), axis = el('g', { class: 'axis' });
+    for (var yv = 0; yv <= yMax; yv += (yMax > 1500 ? 500 : 250)) {
+      grid.appendChild(el('line', { x1: L, x2: W - R, y1: Y(yv), y2: Y(yv) }));
+      axis.appendChild(el('text', { x: L - 6, y: Y(yv) + 3, 'text-anchor': 'end' }, eur(yv)));
+    }
+    var xs = xMax > 6000 ? 1500 : (W < 520 ? 1000 : 500);
+    for (var xv = 0; xv <= xMax; xv += xs) {
+      grid.appendChild(el('line', { x1: X(xv), x2: X(xv), y1: T, y2: H - B }));
+      axis.appendChild(el('text', { x: X(xv), y: H - B + 14, 'text-anchor': xv + xs > xMax ? 'end' : (xv === 0 ? 'start' : 'middle') }, xv.toLocaleString('en-GB')));
+    }
+    axis.appendChild(el('text', { x: W - R, y: H - 6, 'text-anchor': 'end' }, 'kWh per year'));
+    svg.appendChild(grid); svg.appendChild(axis);
+
+    // your-year marker band
+    svg.appendChild(el('rect', { x: X(k) - 5, y: T, width: 10, height: H - T - B, fill: '#FFE600', opacity: '.55' }));
+    svg.appendChild(el('text', { x: Math.min(X(k) + 8, W - R - 70), y: T + 11, class: 'lbl', fill: '#123D18' }, 'your ' + Math.round(k).toLocaleString('en-GB') + ' kWh'));
+
+    all.forEach(function (t, idx) {
+      var c = t.isDefault ? '#B23A2E' : COLORS[(idx - 1) % COLORS.length];
+      svg.appendChild(el('line', { x1: X(0), y1: Y(yearCost(t, 0, false)), x2: X(xMax), y2: Y(yearCost(t, xMax, false)), stroke: c, 'stroke-width': 3, 'stroke-dasharray': t.bonus > 0 ? '7 5' : '' }));
+      if (t.bonus > 0) {
+        svg.appendChild(el('line', { x1: X(0), y1: Y(Math.max(0, yearCost(t, 0, true))), x2: X(xMax), y2: Y(yearCost(t, xMax, true)), stroke: c, 'stroke-width': 3 }));
+      }
+      var yy = yearCost(t, k, false);
+      svg.appendChild(el('circle', { cx: X(k), cy: Y(yy), r: 5, fill: '#fff', stroke: c, 'stroke-width': 3 }));
+      if (!t.isDefault) {
+        var kx = crossing(DEFAULT, t);
+        if (kx && kx < xMax) {
+          var cy = yearCost(t, kx, false);
+          svg.appendChild(el('circle', { cx: X(kx), cy: Y(cy), r: 4, fill: c }));
+          svg.appendChild(el('text', { x: Math.min(X(kx) + 6, W - R - 150), y: Math.min(Y(cy) + 16 + 12 * (idx - 1), H - B - 4), class: 'lbl', fill: c }, 'same cost at ' + Math.round(kx).toLocaleString('en-GB') + ' kWh'));
+        }
+      }
+    });
+    var dy = yearCost(DEFAULT, xMax, false);
+    svg.appendChild(el('text', { x: W - R - 4, y: Y(dy) - 8, 'text-anchor': 'end', class: 'lbl', fill: '#B23A2E' }, 'default tariff'));
+
+    var key = document.getElementById('key');
+    key.innerHTML = '<span><i style="border-color:#B23A2E"></i>default tariff</span>' +
+      offers.map(function (t, i) { return '<span><i style="border-color:' + COLORS[i % COLORS.length] + '"></i>' + t.name.replace(/[<>&]/g, '') + '</span>'; }).join('') +
+      '<span><i class="dash" style="border-color:#6b7163"></i>year two, once the bonus is gone</span>';
+
+    // per-row numbers
+    var dYear = yearCost(DEFAULT, k, false);
+    all.forEach(function (t, idx) {
+      var out = rowsEl.querySelector('[data-out="' + idx + '"]');
+      if (!out) return;
+      var y1 = yearCost(t, k, true), y2 = yearCost(t, k, false);
+      var eff = (y2 / k * 100).toFixed(1);
+      if (t.isDefault) {
+        out.innerHTML = 'Year: <b>' + eur(y2) + '</b> · monthly advance about <b>' + eur(y2 / 12) + '</b> · really <b>' + eff + ' ct</b> per kWh once the base price is spread over your use';
+      } else {
+        var two = (dYear - y1) + (dYear - y2);
+        out.innerHTML = 'Year one: <b>' + eur(y1) + '</b> · year two: <b>' + eur(y2) + '</b> · really <b>' + eff + ' ct</b>/kWh · ' +
+          (two >= 0 ? '<span class="win">saves ' + eur(two) + ' over two years</span>' : '<span class="lose">costs ' + eur(-two) + ' more over two years</span>');
+      }
+    });
+
+    var totals = offers.map(function (t) { return { t: t, two: (dYear - yearCost(t, k, true)) + (dYear - yearCost(t, k, false)), y2: dYear - yearCost(t, k, false) }; });
+    var best = totals.reduce(function (b, x) { return !b || x.y2 > b.y2 ? x : b; }, null);
+    var v = document.getElementById('verdict');
+    var base = 'At <b>' + Math.round(k).toLocaleString('en-GB') + ' kWh</b> the default tariff costs <b>' + eur(dYear) + '</b> a year, and <b>' + eur(12 * DEFAULT.base) + '</b> of that is the base price you pay even at zero use. ';
+    if (!best) v.innerHTML = base + 'Add an offer to compare.';
+    else if (best.y2 > 0) v.innerHTML = base + 'Without any bonus, <b>' + best.t.name.replace(/[<>&]/g, '') + '</b> is <b>' + eur(best.y2) + ' a year</b> cheaper, so it still wins when the bonus has gone.';
+    else v.innerHTML = base + 'None of these offers beats the default once the bonus is gone. Check the prices you typed, or look for a lower price per kWh.';
+  }
+
+  var rt; window.addEventListener('resize', function () { clearTimeout(rt); rt = setTimeout(draw, 120); });
+  buildPeople();
+  buildRows();
+  draw();
+})();
+</script>
+<script src="../js/brand.js"></script>
+</body>
+</html>
