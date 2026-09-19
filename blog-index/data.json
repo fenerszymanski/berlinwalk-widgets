@@ -1,9 +1,9 @@
 {
-  "updatedAt": "2026-09-18T19:49:28.923Z",
+  "updatedAt": "2026-09-19T01:53:03.703Z",
   "source": "Wix Blog API",
   "popularSource": "Wix Blog metrics.views lifetime sort",
-  "totalPosts": 400,
-  "toolsTotal": 320,
+  "totalPosts": 401,
+  "toolsTotal": 321,
   "bookingUrl": "https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based",
   "navTopics": [
     {
@@ -1802,6 +1802,23 @@
   ],
   "latest": [
     {
+      "title": "Electricity Provider in Berlin: What Staying on the Default Tariff Costs You",
+      "slug": "electricity-provider-berlin",
+      "path": "/post/electricity-provider-berlin",
+      "url": "https://www.berlinwalk.com/post/electricity-provider-berlin",
+      "excerpt": "If you never signed an electricity contract in Berlin, you pay Vattenfall’s default tariff: 37.93 cents per kWh plus €13.40 a month since April 2026. The base price hits small flats hardest. Here is how to find your real consumption, compare offers without the bonus and switch.",
+      "category": "Living in Berlin",
+      "categorySlug": "living-in-berlin",
+      "topic": "living-in-berlin",
+      "topicLabel": "Living in Berlin",
+      "readTime": "6 min read",
+      "publishedDate": "2026-09-19T01:50:49.363Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_96b9a98a62d446cc8845c34f78391875~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/00-cover-kraftwerk-klingenberg-spree.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_96b9a98a62d446cc8845c34f78391875~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/00-cover-kraftwerk-klingenberg-spree.jpg",
+      "alt": "The Klingenberg power station on the bank of the Spree in Rummelsburg seen from the air, with two tall chimneys, grey silos and the river in front under a blue sky with white clouds",
+      "relatedToolSlug": "berlin-electricity-offer-lines"
+    },
+    {
       "title": "Tax Return in Berlin: The Years You Can Still Claim and What Your Commute Is Worth",
       "slug": "tax-return-in-berlin",
       "path": "/post/tax-return-in-berlin",
@@ -1987,26 +2004,26 @@
       "thumb": "https://static.wixstatic.com/media/5a08a3_9aefc0ff8d514c30bc6716900b7fba66~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-lichtenberg-kita-entdeckerland.jpg",
       "alt": "A long two-storey Kita on Otto-Marquardt-Strasse in Berlin-Lichtenberg under a clear blue sky, orange and yellow render, the words Kindertagesstaette Entdeckerland painted large on the end wall, Plattenbau housing behind",
       "relatedToolSlug": "berlin-kita-call-list"
-    },
+    }
+  ],
+  "allPosts": [
     {
-      "title": "Berlin Flat Notice Period: The Three Days That Decide Your Last Month",
-      "slug": "berlin-flat-notice-period",
-      "path": "/post/berlin-flat-notice-period",
-      "url": "https://www.berlinwalk.com/post/berlin-flat-notice-period",
-      "excerpt": "German law does not count your notice from the day you post it. It counts back from the third working day of a calendar month, and in Berlin that day moves, because Saturdays are working days here and the city keeps ten public holidays that are not. Miss it by one day and the tenancy runs a whole month longer. Here is the exact date for the month you want to leave, how to deliver the letter so it counts, the clause that can cancel all of it, and what really happens to your deposit.",
+      "title": "Electricity Provider in Berlin: What Staying on the Default Tariff Costs You",
+      "slug": "electricity-provider-berlin",
+      "path": "/post/electricity-provider-berlin",
+      "url": "https://www.berlinwalk.com/post/electricity-provider-berlin",
+      "excerpt": "If you never signed an electricity contract in Berlin, you pay Vattenfall’s default tariff: 37.93 cents per kWh plus €13.40 a month since April 2026. The base price hits small flats hardest. Here is how to find your real consumption, compare offers without the bonus and switch.",
       "category": "Living in Berlin",
       "categorySlug": "living-in-berlin",
       "topic": "living-in-berlin",
       "topicLabel": "Living in Berlin",
-      "readTime": "7 min read",
-      "publishedDate": "2026-09-15T20:02:40.220Z",
-      "image": "https://static.wixstatic.com/media/5a08a3_a96e5d84fdcc4c40957471c6814c2d28~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-weidenweg-corner-block.jpg",
-      "thumb": "https://static.wixstatic.com/media/5a08a3_a96e5d84fdcc4c40957471c6814c2d28~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-weidenweg-corner-block.jpg",
-      "alt": "A corner block on Weidenweg in Berlin-Friedrichshain under a clear blue sky, five storeys of pale render above an arcade of ground-floor openings, bare trees along the pavement and cars parked in front",
-      "relatedToolSlug": "berlin-notice-deadline"
-    }
-  ],
-  "allPosts": [
+      "readTime": "6 min read",
+      "publishedDate": "2026-09-19T01:50:49.363Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_96b9a98a62d446cc8845c34f78391875~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/00-cover-kraftwerk-klingenberg-spree.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_96b9a98a62d446cc8845c34f78391875~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/00-cover-kraftwerk-klingenberg-spree.jpg",
+      "alt": "The Klingenberg power station on the bank of the Spree in Rummelsburg seen from the air, with two tall chimneys, grey silos and the river in front under a blue sky with white clouds",
+      "relatedToolSlug": "berlin-electricity-offer-lines"
+    },
     {
       "title": "Tax Return in Berlin: The Years You Can Still Claim and What Your Commute Is Worth",
       "slug": "tax-return-in-berlin",
@@ -5208,7 +5225,7 @@
       "slug": "self-guided-berlin-walking-tour-audio-guide",
       "path": "/post/self-guided-berlin-walking-tour-audio-guide",
       "url": "https://www.berlinwalk.com/post/self-guided-berlin-walking-tour-audio-guide",
-      "excerpt": "Compare the real start, finish and walking time of five self-guided Berlin audio routes. Use the route map, offline checklist and guide-versus-audio rule before setting off.",
+      "excerpt": "Compare the real start, finish and walking time of four self-guided Berlin audio walks. Use the route map, offline checklist and guide-versus-audio rule before setting off.",
       "category": "Tour Route",
       "categorySlug": "tour-route",
       "topic": "route-stories",
@@ -5225,7 +5242,7 @@
       "slug": "berlin-audio-guide-app-vs-no-app",
       "path": "/post/berlin-audio-guide-app-vs-no-app",
       "url": "https://www.berlinwalk.com/post/berlin-audio-guide-app-vs-no-app",
-      "excerpt": "A practical Berlin field test for audio guide apps, no-app browser routes and MP3 backups. Compare setup, battery, offline use and all five BerlinWalk routes before choosing.",
+      "excerpt": "A practical Berlin field test for audio guide apps, no-app browser routes and MP3 backups. Compare setup, battery, offline use and the four BerlinWalk audio walks before choosing.",
       "category": "Tourist Tips",
       "categorySlug": "tourist-tips",
       "topic": "route-stories",
@@ -7134,7 +7151,7 @@
       "categorySlug": "tourist-tips",
       "topic": "history-myths",
       "topicLabel": "Berlin History & Myths",
-      "readTime": "6 min read",
+      "readTime": "7 min read",
       "publishedDate": "2026-05-24T16:53:08Z",
       "image": "https://static.wixstatic.com/media/5a08a3_8ab84c4b106e41728be5c080f5c94a58~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/Nikolaiviertelfromabove.jpg",
       "thumb": "https://static.wixstatic.com/media/5a08a3_8ab84c4b106e41728be5c080f5c94a58~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/Nikolaiviertelfromabove.jpg",
