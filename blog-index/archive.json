@@ -1,9 +1,26 @@
 {
-  "updatedAt": "2026-09-19T13:57:00.839Z",
+  "updatedAt": "2026-09-19T19:49:08.388Z",
   "source": "Wix Blog API",
-  "totalPosts": 403,
+  "totalPosts": 404,
   "bookingUrl": "https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based",
   "allPosts": [
+    {
+      "title": "Dentist in Berlin: What the Krankenkasse Pays and the Stamp to Get Before December",
+      "slug": "dentist-in-berlin",
+      "path": "/post/dentist-in-berlin",
+      "url": "https://www.berlinwalk.com/post/dentist-in-berlin",
+      "excerpt": "The Krankenkasse pays a fixed subsidy for every crown, bridge and denture, and a small booklet decides whether it is 60, 70 or 75 percent. Here is what public insurance covers at a Berlin dentist, what the 2026 amounts are, and why the check-up you book before 31 December protects every treatment after it.",
+      "category": "Living in Berlin",
+      "categorySlug": "living-in-berlin",
+      "topic": "living-in-berlin",
+      "topicLabel": "Living in Berlin",
+      "readTime": "6 min read",
+      "publishedDate": "2026-09-19T19:47:24.387Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_0e50006ee4d34b8dbd53b99302e224ef~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/00-cover-kudamm-tooth.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_0e50006ee4d34b8dbd53b99302e224ef~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/00-cover-kudamm-tooth.jpg",
+      "alt": "A large white sculpture of a molar tooth hanging from a bracket above the corner entrance of a dental practice on Kurfürstendamm in Berlin-Halensee",
+      "relatedToolSlug": "berlin-dental-stamp-ledger"
+    },
     {
       "title": "Mieterverein Berlin: Which Tenant Association Covers You, and From Which Day",
       "slug": "mieterverein-berlin",

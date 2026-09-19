@@ -1,9 +1,9 @@
 {
-  "updatedAt": "2026-09-19T13:57:00.839Z",
+  "updatedAt": "2026-09-19T19:49:08.388Z",
   "source": "Wix Blog API",
   "popularSource": "Wix Blog metrics.views lifetime sort",
-  "totalPosts": 403,
-  "toolsTotal": 323,
+  "totalPosts": 404,
+  "toolsTotal": 324,
   "bookingUrl": "https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based",
   "navTopics": [
     {
@@ -1802,6 +1802,23 @@
   ],
   "latest": [
     {
+      "title": "Dentist in Berlin: What the Krankenkasse Pays and the Stamp to Get Before December",
+      "slug": "dentist-in-berlin",
+      "path": "/post/dentist-in-berlin",
+      "url": "https://www.berlinwalk.com/post/dentist-in-berlin",
+      "excerpt": "The Krankenkasse pays a fixed subsidy for every crown, bridge and denture, and a small booklet decides whether it is 60, 70 or 75 percent. Here is what public insurance covers at a Berlin dentist, what the 2026 amounts are, and why the check-up you book before 31 December protects every treatment after it.",
+      "category": "Living in Berlin",
+      "categorySlug": "living-in-berlin",
+      "topic": "living-in-berlin",
+      "topicLabel": "Living in Berlin",
+      "readTime": "6 min read",
+      "publishedDate": "2026-09-19T19:47:24.387Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_0e50006ee4d34b8dbd53b99302e224ef~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/00-cover-kudamm-tooth.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_0e50006ee4d34b8dbd53b99302e224ef~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/00-cover-kudamm-tooth.jpg",
+      "alt": "A large white sculpture of a molar tooth hanging from a bracket above the corner entrance of a dental practice on Kurfürstendamm in Berlin-Halensee",
+      "relatedToolSlug": "berlin-dental-stamp-ledger"
+    },
+    {
       "title": "Mieterverein Berlin: Which Tenant Association Covers You, and From Which Day",
       "slug": "mieterverein-berlin",
       "path": "/post/mieterverein-berlin",
@@ -1987,26 +2004,26 @@
       "thumb": "https://static.wixstatic.com/media/5a08a3_5337acb059cb4efbb6ceecf091b53241~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-open-window-berlin.jpg",
       "alt": "A window in a Berlin flat standing wide open on a bright day, the near casement swung inwards, looking across to the pale render and tall windows of the Altbau facades on the far side of the street",
       "relatedToolSlug": "berlin-airing-hours"
-    },
+    }
+  ],
+  "allPosts": [
     {
-      "title": "Berlin Snow Clearing Rules: Which Pavement Is Yours and How Wide",
-      "slug": "berlin-snow-clearing-rules",
-      "path": "/post/berlin-snow-clearing-rules",
-      "url": "https://www.berlinwalk.com/post/berlin-snow-clearing-rules",
-      "excerpt": "Berlin gives BSR the carriageway and leaves the pavement in front of your building to you, even though BSR already sweeps that same pavement up to ten times a week in normal weather. The width you owe depends on the cleaning class of your own street, nearly a quarter of Berlin streets change class partway along, and on 1,684 kilometres of category C the carriageway is yours as well.",
+      "title": "Dentist in Berlin: What the Krankenkasse Pays and the Stamp to Get Before December",
+      "slug": "dentist-in-berlin",
+      "path": "/post/dentist-in-berlin",
+      "url": "https://www.berlinwalk.com/post/dentist-in-berlin",
+      "excerpt": "The Krankenkasse pays a fixed subsidy for every crown, bridge and denture, and a small booklet decides whether it is 60, 70 or 75 percent. Here is what public insurance covers at a Berlin dentist, what the 2026 amounts are, and why the check-up you book before 31 December protects every treatment after it.",
       "category": "Living in Berlin",
       "categorySlug": "living-in-berlin",
       "topic": "living-in-berlin",
       "topicLabel": "Living in Berlin",
-      "readTime": "7 min read",
-      "publishedDate": "2026-09-16T20:04:56.281Z",
-      "image": "https://static.wixstatic.com/media/5a08a3_38890040cf0e4b36a7f3f4fe65c9e223~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-hertelstrasse.jpg",
-      "thumb": "https://static.wixstatic.com/media/5a08a3_38890040cf0e4b36a7f3f4fe65c9e223~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-hertelstrasse.jpg",
-      "alt": "A snow covered residential street in Berlin-Friedenau at night, cars parked along both kerbs under a thin layer of snow, tyre tracks down the middle of the carriageway and lit windows in the Altbau blocks on either side",
-      "relatedToolSlug": "berlin-pavement-duty-map"
-    }
-  ],
-  "allPosts": [
+      "readTime": "6 min read",
+      "publishedDate": "2026-09-19T19:47:24.387Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_0e50006ee4d34b8dbd53b99302e224ef~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/00-cover-kudamm-tooth.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_0e50006ee4d34b8dbd53b99302e224ef~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/00-cover-kudamm-tooth.jpg",
+      "alt": "A large white sculpture of a molar tooth hanging from a bracket above the corner entrance of a dental practice on Kurfürstendamm in Berlin-Halensee",
+      "relatedToolSlug": "berlin-dental-stamp-ledger"
+    },
     {
       "title": "Mieterverein Berlin: Which Tenant Association Covers You, and From Which Day",
       "slug": "mieterverein-berlin",
