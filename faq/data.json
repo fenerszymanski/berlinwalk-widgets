@@ -12411,5 +12411,43 @@
         "a": "The office for your home district, not your employer's. Berlin has seventeen district tax offices, and the berlin.de tax office finder tells you which one is yours."
       }
     ]
+  },
+  "electricity-provider-berlin": {
+    "title": "Electricity Provider in Berlin - FAQ",
+    "subtitle": "What the default tariff costs, how to find your consumption, how bonuses and price guarantees work and what switching involves.",
+    "items": [
+      {
+        "q": "Who is my electricity provider in Berlin if I never signed a contract?",
+        "a": "Vattenfall, as the local default supplier. If you move in and use electricity without a contract of your own, you are supplied and billed on the default tariff, the Grundversorgung."
+      },
+      {
+        "q": "How much does Vattenfall's default tariff cost in Berlin?",
+        "a": "Since 1 April 2026 the Basis tariff costs 37.93 cents per kWh and €13.40 a month, gross. That is €160.80 a year in base price before any consumption. A one-person flat using 1,200 kWh pays about €616 a year, a two-person flat on 1,900 kWh about €881."
+      },
+      {
+        "q": "How much electricity does a Berlin flat use in a year?",
+        "a": "The Stromspiegel averages for a flat without electric hot water are about 1,200 kWh for one person, 1,900 kWh for two and 2,400 kWh for three. With an electric Durchlauferhitzer, add a third or more. Your own figure is on your last annual bill as Verbrauch."
+      },
+      {
+        "q": "Should I pick the offer with the biggest bonus?",
+        "a": "Only if you plan to switch again every year. Compare the plain yearly cost without the bonus first. The bonus is often paid only after 12 months of supply, and it disappears in year two."
+      },
+      {
+        "q": "How long does it take to leave the default tariff?",
+        "a": "The default tariff can be cancelled at two weeks' notice at any time. The new supplier usually cancels it for you, and since June 2025 the technical switch happens within 24 hours on a working day."
+      },
+      {
+        "q": "How long can a special electricity contract lock me in?",
+        "a": "For contracts signed since March 2022, the first term can be at most two years. After that it extends by one year at a time and can be cancelled with one month's notice. A price increase gives you the right to leave before the new price starts."
+      },
+      {
+        "q": "What happens to my electricity when I move flat in Berlin?",
+        "a": "Sign up with a supplier for the new address before you move. Electricity contracts can no longer be registered backwards, so without one you start on Vattenfall's default supply at the new flat."
+      },
+      {
+        "q": "Why are the cheapest offers so close together?",
+        "a": "Grid charges, levies and taxes are the same for every supplier. Stromnetz Berlin, owned by the city, charges households 8.88 cents per kWh in 2026, down from 11.86. Suppliers only compete on the energy price and their margin."
+      }
+    ]
   }
 }

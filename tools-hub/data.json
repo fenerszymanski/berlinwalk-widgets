@@ -9698,6 +9698,37 @@
       ],
       "iconStatus": "live-wix-media",
       "cmsItemId": "d13bd7ac-8f7a-4a7f-9b03-e66332a5f922"
+    },
+    {
+      "slug": "berlin-electricity-offer-lines",
+      "title": "Berlin Electricity Offer Lines",
+      "lead": "Type your yearly kWh and the two prices from any electricity offer. The tool draws each tariff as a cost line against Vattenfall's Berlin default tariff (37.93 ct/kWh plus €13.40 a month since April 2026), marks where the lines cross, and shows what each offer costs in year one with its bonus and in year two without it.",
+      "category": "Money",
+      "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/berlin-electricity-offer-lines/",
+      "embedHeight": 1250,
+      "image": "https://static.wixstatic.com/media/5a08a3_1c5562bbbccb4980bccff4600bf48836~mv2.png",
+      "hubCategory": "MoneyShopping",
+      "type": "Calculator",
+      "priority": 3,
+      "tags": [
+        "electricity",
+        "strom",
+        "vattenfall",
+        "grundversorgung",
+        "energy bill",
+        "switching supplier",
+        "living in berlin",
+        "money"
+      ],
+      "aliases": [
+        "electricity provider berlin",
+        "cheapest electricity berlin",
+        "vattenfall grundversorgung preis",
+        "stromanbieter wechseln berlin",
+        "electricity cost calculator germany"
+      ],
+      "iconStatus": "live-wix-media",
+      "cmsItemId": "c550baa3-d1b4-47a1-9b79-6f10796cdc65"
     }
   ],
   "hubCategories": [
