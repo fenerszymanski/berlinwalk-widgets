@@ -10,6 +10,7 @@
   var STYLE_ID = 'bw-book-now-intro-patch-css-20260801b';
   var NUDGE_ID = 'bw-booking-calendar-next-nudge';
   var FORM_CARD_ID = 'bw-booking-form-trust-card';
+  var DEPOSIT_FORM_ID = 'form-1ab4472a-412d-42ae-a3f6-0da618ab0367';
   var TERMS_HELPER_ID = 'bw-booking-terms-helper';
   var FAQ_ID = 'bw-booking-management-faq';
   var INTRO_VERSION = 'booking-service-stage-20260801b';
@@ -338,6 +339,15 @@
     ].join('');
   }
 
+  function depositTrustCardHtml() {
+    return [
+      progressHtml('is-complete', 'Selected', 'is-active', 'Current step'),
+      '<strong>Complete your reservation</strong>',
+      '<p>A €2 refundable reservation deposit is charged per guest now. We refund it for each guest who attends after attendance is confirmed, or if you cancel at least 24 hours before the tour.</p>',
+      '<p>For a late cancellation or no-show, the deposit is not refunded. If BerlinWalk cancels, you receive a full refund. Tips are separate and entirely up to you.</p>'
+    ].join('');
+  }
+
   function findTermsTextNode() {
     var nodes = document.querySelectorAll('label,span,p,div');
     for (var i = 0; i < nodes.length; i++) {
@@ -385,6 +395,9 @@
 
   function applyBookingFormTrust() {
     if (!isBookingForm) return false;
+    var activeForm = document.querySelector('form[id^="form-"]');
+    if (!activeForm) return false;
+    var isDepositForm = activeForm.id === DEPOSIT_FORM_ID;
     document.documentElement.classList.add('bw-booking-form-trust-active');
 
     var introWrap = document.querySelector('[data-hook="form-field-c75b1793-ac5f-4491-a1d6-61cc895c7b94"]');
@@ -395,10 +408,17 @@
         card.id = FORM_CARD_ID;
         introWrap.appendChild(card);
       }
-      if (card.getAttribute('data-bw-booking-form-version') !== FORM_VERSION) {
-        card.setAttribute('data-bw-booking-form-version', FORM_VERSION);
-        card.innerHTML = trustCardHtml();
+      var cardVersion = FORM_VERSION + (isDepositForm ? '-deposit' : '-free');
+      if (card.getAttribute('data-bw-booking-form-version') !== cardVersion) {
+        card.setAttribute('data-bw-booking-form-version', cardVersion);
+        card.innerHTML = isDepositForm ? depositTrustCardHtml() : trustCardHtml();
       }
+    }
+
+    if (isDepositForm) {
+      var oldHelper = document.getElementById(TERMS_HELPER_ID);
+      if (oldHelper) oldHelper.remove();
+      return Boolean(introWrap);
     }
 
     var termsText = findTermsTextNode();
