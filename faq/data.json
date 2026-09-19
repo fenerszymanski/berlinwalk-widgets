@@ -12449,5 +12449,43 @@
         "a": "Grid charges, levies and taxes are the same for every supplier. Stromnetz Berlin, owned by the city, charges households 8.88 cents per kWh in 2026, down from 11.86. Suppliers only compete on the energy price and their margin."
       }
     ]
+  },
+  "german-citizenship-berlin": {
+    "title": "German Citizenship in Berlin - FAQ",
+    "subtitle": "How the five years are counted, what trips abroad do, how the LEA queue works, and what the test, language certificate and fee involve.",
+    "items": [
+      {
+        "q": "How many years do I need to live in Berlin before I can apply for German citizenship?",
+        "a": "Five years of lawful, habitual residence in Germany. Since 30 October 2025 the three-year fast track no longer exists. If you have been married to a German, or in a registered partnership, for at least two years, three years of residence are enough."
+      },
+      {
+        "q": "Do trips abroad break my five years?",
+        "a": "Stays abroad of up to six months do not. A longer stay breaks your residence unless the immigration office set you a deadline to return and you kept it. Residence also generally stops counting as continuous if your time abroad adds up to more than half the required period. After a break, up to three years of your earlier residence can be credited."
+      },
+      {
+        "q": "Who handles naturalisation applications in Berlin?",
+        "a": "The Landesamt für Einwanderung (LEA) has handled every application centrally since 1 January 2024. You apply online through service.berlin.de. The LEA asks applicants not to send status enquiries."
+      },
+      {
+        "q": "How long does German citizenship take in Berlin?",
+        "a": "There is no official figure. The Senate said in June 2026 that it keeps no statistics on processing times or open cases. The LEA made 39,034 naturalisations and other positive decisions in 2025 and 11,905 from January to April 2026. It does not handle older cases first and works partly by which files are ready for a decision, so a complete file matters."
+      },
+      {
+        "q": "What is the naturalisation test and where can I take it in Berlin?",
+        "a": "It has 33 questions, and 17 correct answers pass. You get 60 minutes and the fee is €25. Every Berlin Volkshochschule offers it. Places are scarce: Pankow runs one date a month for 120 people, takes registrations by email only and keeps no waiting list."
+      },
+      {
+        "q": "What level of German do I need?",
+        "a": "B1. A DTZ or other B1 certificate works, and so does a German school leaving certificate, a vocational qualification or a degree completed in German in Germany."
+      },
+      {
+        "q": "How much does the application cost?",
+        "a": "€255 per adult and €51 for a child under 16 applying with a parent. You pay by card or PayPal before you can submit. The fee is due in full if you are refused and halved if you withdraw after processing starts."
+      },
+      {
+        "q": "Can I keep my current passport?",
+        "a": "Under German law, yes: since 27 June 2024 you no longer have to give up your old nationality. Whether your other country lets you keep it is a separate question for its consulate, so check that before you apply."
+      }
+    ]
   }
 }

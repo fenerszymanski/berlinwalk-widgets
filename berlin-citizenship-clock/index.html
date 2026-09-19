@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Berlin Citizenship Clock</title>
+<link rel="stylesheet" href="../css/brand.css">
+<style>
+  :root {
+    --green: #1B5E20;
+    --deep: #123D18;
+    --yellow: #FFE600;
+    --lime: #7CB342;
+    --soft: #C5E1A5;
+    --ink: #212121;
+    --muted: #55604f;
+    --line: #dfe3d6;
+    --red: #B3372B;
+    --cream: #FBFAF4;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: #fff; color: var(--ink); font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
+  .cc { max-width: 860px; margin: 0 auto; padding: 14px 12px 8px; }
+
+  .cc-head { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 14px; align-items: end; border-bottom: 3px solid var(--deep); padding-bottom: 10px; }
+  .cc-head h2 { margin: 0; font-size: 1.1rem; line-height: 1.25; color: var(--deep); }
+  .cc-head p { margin: 4px 0 0; font-size: .76rem; line-height: 1.5; color: var(--muted); max-width: 540px; }
+  .cc-route { display: flex; border: 2px solid var(--deep); border-radius: 8px; overflow: hidden; }
+  .cc-route label { display: block; cursor: pointer; }
+  .cc-route input { position: absolute; opacity: 0; pointer-events: none; }
+  .cc-route span { display: block; padding: 7px 11px; font-size: .7rem; font-weight: 700; color: var(--deep); background: #fff; white-space: nowrap; }
+  .cc-route input:checked + span { background: var(--deep); color: #fff; }
+  .cc-route input:focus-visible + span { outline: 3px solid var(--lime); outline-offset: -3px; }
+
+  .cc-inputs { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 12px; }
+  .cc-field label { display: block; font-size: .62rem; font-weight: 800; letter-spacing: .07em; text-transform: uppercase; color: var(--deep); }
+  .cc-field input[type=date] { width: 100%; min-width: 0; margin-top: 4px; font: 700 1rem 'Montserrat', sans-serif; color: var(--deep); border: 1.5px solid var(--line); border-radius: 8px; padding: 8px 10px; background: var(--cream); }
+  .cc-field input:focus-visible, .cc-trip input:focus-visible, .cc button:focus-visible { outline: 3px solid var(--lime); outline-offset: 2px; }
+  .cc-field small { display: block; margin-top: 4px; font-size: .64rem; line-height: 1.4; color: var(--muted); }
+  .cc-field[hidden] { display: none; }
+
+  .cc-trips { margin-top: 12px; }
+  .cc-trips-top { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; flex-wrap: wrap; }
+  .cc-trips-top h3 { margin: 0; font-size: .82rem; color: var(--deep); }
+  .cc-trips-top span { font-size: .68rem; color: var(--muted); }
+  .cc-trip { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) auto auto; gap: 8px; align-items: center; margin-top: 7px; padding: 7px 8px; border-radius: 8px; background: var(--cream); border-left: 4px solid var(--lime); }
+  .cc-trip.is-long { border-left-color: var(--red); }
+  .cc-trip.is-kept { border-left-color: var(--yellow); }
+  .cc-trip input[type=date] { width: 100%; min-width: 0; font: 600 .78rem 'Montserrat', sans-serif; color: var(--deep); border: 1px solid var(--line); border-radius: 6px; padding: 6px 7px; background: #fff; }
+  .cc-trip .len { font-size: .66rem; font-weight: 700; color: var(--deep); white-space: nowrap; }
+  .cc-trip .kept { grid-column: 1 / -1; display: flex; gap: 6px; align-items: center; font-size: .66rem; color: var(--ink); }
+  .cc-trip .kept input { accent-color: var(--green); width: 15px; height: 15px; margin: 0; }
+  .cc-trip .kept[hidden] { display: none; }
+  .cc-trip .rm { border: 0; background: transparent; color: var(--red); font: 800 .7rem 'Montserrat', sans-serif; cursor: pointer; padding: 4px 6px; }
+  .cc-add { margin-top: 8px; border: 1.5px dashed var(--green); background: #fff; color: var(--deep); font: 700 .74rem 'Montserrat', sans-serif; border-radius: 8px; padding: 8px 12px; cursor: pointer; }
+
+  .cc-result { margin-top: 14px; display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 4px 16px; align-items: center; padding: 12px 14px; border-radius: 10px; background: var(--deep); color: #fff; }
+  .cc-result .big { font-size: 1.45rem; font-weight: 800; line-height: 1.1; color: var(--yellow); }
+  .cc-result .sub { font-size: .72rem; line-height: 1.45; color: #e7efe1; }
+  .cc-result .sub b { color: #fff; }
+
+  .cc-canvas-wrap { margin-top: 10px; border: 1px solid var(--line); border-radius: 10px; padding: 6px 4px 2px; background: #fff; }
+  canvas { display: block; width: 100%; height: 190px; }
+  .cc-key { display: flex; flex-wrap: wrap; gap: 6px 14px; padding: 4px 8px 6px; font-size: .64rem; color: var(--muted); }
+  .cc-key i { display: inline-block; width: 12px; height: 8px; border-radius: 2px; margin-right: 5px; vertical-align: middle; }
+
+  .cc-notes { margin: 10px 0 0; padding: 0; list-style: none; display: grid; gap: 6px; }
+  .cc-notes li { font-size: .72rem; line-height: 1.5; padding: 7px 10px; border-radius: 8px; background: var(--cream); }
+  .cc-notes li.warn { background: #fbe9e6; color: #5b1c15; }
+  .cc-notes li b { color: var(--deep); }
+  .cc-notes li.warn b { color: #5b1c15; }
+  .cc-foot { margin: 8px 0 4px; font-size: .62rem; line-height: 1.45; color: var(--muted); }
+
+  @media (max-width: 560px) {
+    .cc-head { grid-template-columns: 1fr; }
+    .cc-route { justify-self: start; }
+    .cc-inputs { grid-template-columns: 1fr; }
+    .cc-trip { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+    .cc-trip input[type=date] { font-size: .72rem; padding: 6px 4px; }
+    .cc-trip .len { grid-column: 1; }
+    .cc-trip .rm { grid-column: 2; justify-self: end; }
+    .cc-result { grid-template-columns: 1fr; }
+    .cc-result .big { font-size: 1.25rem; }
+    canvas { height: 210px; }
+  }
+</style>
+</head>
+<body>
+<div class="cc">
+  <div class="cc-head">
+    <div>
+      <h2>When are your years for German citizenship complete?</h2>
+      <p>Enter the first day you lived in Germany lawfully and every stay abroad. The clock follows § 12b of the citizenship act: up to six months away is fine, longer can reset it.</p>
+    </div>
+    <div class="cc-route" role="radiogroup" aria-label="Which route applies to you">
+      <label><input type="radio" name="route" value="5" checked><span>Standard: 5 years</span></label>
+      <label><input type="radio" name="route" value="3"><span>Married to a German</span></label>
+    </div>
+  </div>
+
+  <div class="cc-inputs">
+    <div class="cc-field">
+      <label for="arrival">First day of lawful residence</label>
+      <input type="date" id="arrival" value="2021-10-01">
+      <small>Usually the date on your first Anmeldung or your first permit, whichever came later.</small>
+    </div>
+    <div class="cc-field" id="marriageField" hidden>
+      <label for="marriage">Date of marriage or partnership</label>
+      <input type="date" id="marriage" value="2023-05-20">
+      <small>This route needs three years of residence and a marriage that has lasted two years.</small>
+    </div>
+  </div>
+
+  <div class="cc-trips">
+    <div class="cc-trips-top">
+      <h3>Stays abroad</h3>
+      <span id="absTotal"></span>
+    </div>
+    <div id="tripList"></div>
+    <button type="button" class="cc-add" id="addTrip">+ Add a stay abroad</button>
+  </div>
+
+  <div class="cc-result" aria-live="polite">
+    <div class="big" id="bigDate">&nbsp;</div>
+    <div class="sub" id="bigSub"></div>
+  </div>
+
+  <div class="cc-canvas-wrap">
+    <canvas id="line" role="img" aria-label="Timeline of your residence years"></canvas>
+    <div class="cc-key">
+      <span><i style="background:#1B5E20"></i>Counts as residence</span>
+      <span><i style="background:#7CB342"></i>Short stay abroad, still counts</span>
+      <span><i style="background:#B3372B"></i>Stay that resets the clock</span>
+      <span><i style="background:repeating-linear-gradient(45deg,#FFE600 0 3px,#1B5E20 3px 6px)"></i>Earlier years that may be credited</span>
+      <span><i style="background:#FFF4A3"></i>Book the test and B1 here</span>
+    </div>
+  </div>
+
+  <ul class="cc-notes" id="notes"></ul>
+  <p class="cc-foot">A planning aid based on § 9, § 10 and § 12b StAG as of September 2026. Crediting earlier years after a break is at the office's discretion, so the tool shows the date with and without it. The Landesamt für Einwanderung decides your case.</p>
+</div>
+
+<script>
+(function () {
+  var DAY = 86400000;
+  var HALF_YEAR_DAYS = 183;
+  var CREDIT_CAP_YEARS = 3;
+  var trips = [
+    { from: '2023-07-08', to: '2023-08-20', kept: false },
+    { from: '2024-02-01', to: '2024-09-15', kept: false }
+  ];
+
+  var el = function (id) { return document.getElementById(id); };
+  var arrivalInput = el('arrival');
+  var marriageInput = el('marriage');
+  var list = el('tripList');
+  var canvas = el('line');
+
+  function parse(v) {
+    if (!v) return null;
+    var p = v.split('-');
+    var d = new Date(Date.UTC(+p[0], +p[1] - 1, +p[2]));
+    return isNaN(d) ? null : d;
+  }
+  function iso(d) { return d.toISOString().slice(0, 10); }
+  function addYears(d, y) {
+    var whole = Math.floor(y);
+    var r = new Date(Date.UTC(d.getUTCFullYear() + whole, d.getUTCMonth(), d.getUTCDate()));
+    var rest = y - whole;
+    if (rest > 0) r = new Date(r.getTime() + Math.round(rest * 365.25) * DAY);
+    return r;
+  }
+  function addDays(d, n) { return new Date(d.getTime() + n * DAY); }
+  function days(a, b) { return Math.round((b - a) / DAY); }
+  function fmt(d) { return d.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' }); }
+  function fmtShort(d) { return d.toLocaleDateString('en-GB', { month: 'short', year: 'numeric', timeZone: 'UTC' }); }
+  function todayUTC() { var n = new Date(); return new Date(Date.UTC(n.getFullYear(), n.getMonth(), n.getDate())); }
+  function route() { return +document.querySelector('input[name=route]:checked').value; }
+
+  function renderTrips() {
+    list.innerHTML = '';
+    trips.forEach(function (t, i) {
+      var row = document.createElement('div');
+      row.className = 'cc-trip';
+      row.innerHTML =
+        '<input type="date" aria-label="Left Germany on" value="' + t.from + '">' +
+        '<input type="date" aria-label="Came back on" value="' + t.to + '">' +
+        '<span class="len"></span>' +
+        '<button type="button" class="rm" aria-label="Remove this stay">Remove</button>' +
+        '<label class="kept" hidden><input type="checkbox"' + (t.kept ? ' checked' : '') + '> The immigration office gave me a return deadline and I kept it</label>';
+      var inputs = row.querySelectorAll('input[type=date]');
+      inputs[0].addEventListener('change', function () { t.from = this.value; update(); });
+      inputs[1].addEventListener('change', function () { t.to = this.value; update(); });
+      row.querySelector('.kept input').addEventListener('change', function () { t.kept = this.checked; update(); });
+      row.querySelector('.rm').addEventListener('click', function () { trips.splice(i, 1); renderTrips(); update(); });
+      list.appendChild(row);
+    });
+  }
+
+  function compute() {
+    var arrival = parse(arrivalInput.value);
+    if (!arrival) return null;
+    var required = route();
+    var clean = trips.map(function (t, i) {
+      var a = parse(t.from), b = parse(t.to);
+      if (!a || !b || b <= a || a < arrival) return { i: i, bad: true };
+      var len = days(a, b);
+      return { i: i, a: a, b: b, len: len, long: len > HALF_YEAR_DAYS, kept: t.kept };
+    });
+    var valid = clean.filter(function (t) { return !t.bad; }).sort(function (x, y) { return x.a - y.a; });
+    var totalAbroad = valid.reduce(function (sum, t) { return sum + t.len; }, 0);
+    var breaks = valid.filter(function (t) { return t.long && !t.kept; });
+    var restart = arrival;
+    var credit = 0;
+    var lastBreak = breaks.length ? breaks[breaks.length - 1] : null;
+    if (lastBreak) {
+      restart = lastBreak.b;
+      // Residence before the last break: every day since arrival that was not spent on a breaking stay.
+      var before = days(arrival, lastBreak.a) - breaks.slice(0, -1).reduce(function (s, t) { return s + t.len; }, 0);
+      credit = Math.max(0, Math.min(before, Math.round(CREDIT_CAP_YEARS * 365.25)));
+      credit = Math.min(credit, Math.round(required * 365.25));
+    }
+    var best = addDays(addYears(restart, required), -credit);
+    var worst = addYears(restart, required);
+    var marriageDate = null;
+    if (required === 3) {
+      marriageDate = parse(marriageInput.value);
+      if (marriageDate) {
+        var m2 = addYears(marriageDate, 2);
+        if (m2 > best) best = m2;
+        if (m2 > worst) worst = m2;
+      }
+    }
+    var halfLimit = Math.round(required * 365.25 / 2);
+    return {
+      arrival: arrival, required: required, clean: clean, valid: valid, totalAbroad: totalAbroad,
+      breaks: breaks, lastBreak: lastBreak, restart: restart, credit: credit, best: best, worst: worst,
+      halfLimit: halfLimit, overHalf: totalAbroad > halfLimit, marriage: marriageDate
+    };
+  }
+
+  function update() {
+    el('marriageField').hidden = route() !== 3;
+    var r = compute();
+    var rows = list.querySelectorAll('.cc-trip');
+    if (!r) {
+      el('bigDate').textContent = 'Enter a date';
+      el('bigSub').textContent = 'Start with the first day you lived in Germany lawfully.';
+      draw(null);
+      return;
+    }
+    r.clean.forEach(function (t) {
+      var row = rows[t.i];
+      if (!row) return;
+      var len = row.querySelector('.len');
+      var kept = row.querySelector('.kept');
+      row.classList.remove('is-long', 'is-kept');
+      if (t.bad) { len.textContent = 'Check dates'; kept.hidden = true; return; }
+      var months = (t.len / 30.44).toFixed(1).replace('.0', '');
+      len.textContent = t.len + ' days (' + months + ' mo)';
+      kept.hidden = !t.long;
+      if (t.long) row.classList.add(t.kept ? 'is-kept' : 'is-long');
+    });
+    el('absTotal').textContent = 'Total abroad: ' + r.totalAbroad + ' days of ' + r.halfLimit + ' allowed';
+
+    var today = todayUTC();
+    var until = days(today, r.best);
+    var label = r.required === 5 ? 'Your five years' : 'Your three years';
+    el('bigDate').textContent = fmt(r.best);
+    var sub = '';
+    if (until > 0) sub = '<b>' + label + ' are complete in ' + until + ' days.</b> ';
+    else sub = '<b>' + label + ' were complete ' + (-until) + ' days ago.</b> You can apply now if the rest of the file is ready. ';
+    if (r.lastBreak) {
+      sub += r.credit > 0
+        ? 'This counts ' + (r.credit / 365.25).toFixed(1) + ' earlier years as credited. Without that credit the date is ' + fmt(r.worst) + '.'
+        : 'The clock restarted on ' + fmt(r.restart) + '.';
+    } else {
+      sub += 'No stay abroad breaks the count.';
+    }
+    el('bigSub').innerHTML = sub;
+
+    var notes = [];
+    var testFrom = addDays(r.best, -183), testTo = addDays(r.best, -91);
+    if (until > 91) notes.push('<b>Register for the naturalisation test and the B1 exam between ' + fmt(testFrom) + ' and ' + fmt(testTo) + '.</b> Places at the Volkshochschulen go within hours, and some run one date a month with no waiting list.');
+    else notes.push('<b>If you still need the test or B1 certificate, register now.</b> They take longer to get than the online application takes to fill in.');
+    if (r.lastBreak) notes.push('<b>Your stay from ' + fmt(r.lastBreak.a) + ' to ' + fmt(r.lastBreak.b) + ' lasted ' + r.lastBreak.len + ' days.</b> Over six months abroad without a return deadline from the immigration office resets the clock. Up to three earlier years can be credited, at the office’s discretion.');
+    if (r.overHalf) notes.push('<b>You spent ' + r.totalAbroad + ' days abroad, more than half of the ' + r.required + ' years.</b> At that point your residence generally no longer counts as continuous, even if each trip was short.');
+    if (r.required === 3 && r.marriage) notes.push('<b>This route also needs a marriage of two years:</b> yours reaches it on ' + fmt(addYears(r.marriage, 2)) + '.');
+    notes.push('<b>Fee: €255 per adult, €51 per child under 16</b>, paid online before you submit and kept if the application is refused.');
+    el('notes').innerHTML = notes.map(function (n, i) {
+      var warn = (r.lastBreak && n.indexOf('Your stay from') > -1) || (r.overHalf && n.indexOf('days abroad, more than half') > -1);
+      return '<li' + (warn ? ' class="warn"' : '') + '>' + n + '</li>';
+    }).join('');
+    draw(r);
+  }
+
+  function draw(r) {
+    var dpr = window.devicePixelRatio || 1;
+    var w = canvas.clientWidth, h = canvas.clientHeight;
+    canvas.width = Math.round(w * dpr); canvas.height = Math.round(h * dpr);
+    var ctx = canvas.getContext('2d');
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    ctx.clearRect(0, 0, w, h);
+    if (!r) return;
+    var small = w < 520;
+    var padL = 12, padR = 12;
+    var start = new Date(Date.UTC(r.arrival.getUTCFullYear(), 0, 1));
+    var endRef = r.worst > r.best ? r.worst : r.best;
+    var end = new Date(Date.UTC(endRef.getUTCFullYear() + 1, 0, 1));
+    var span = end - start;
+    var x = function (d) { return padL + (d - start) / span * (w - padL - padR); };
+    var barY = small ? 88 : 80, barH = 26;
+
+    // Year grid
+    ctx.font = '600 ' + (small ? 9 : 10) + 'px Montserrat, sans-serif';
+    ctx.textAlign = 'center';
+    var yearsSpan = end.getUTCFullYear() - start.getUTCFullYear();
+    var stepYears = (small && yearsSpan > 6) || yearsSpan > 12 ? 2 : 1;
+    for (var y = start.getUTCFullYear(); y <= end.getUTCFullYear(); y++) {
+      var gx = x(new Date(Date.UTC(y, 0, 1)));
+      ctx.strokeStyle = '#e6e9df'; ctx.lineWidth = 1;
+      ctx.beginPath(); ctx.moveTo(gx, 30); ctx.lineTo(gx, h - 22); ctx.stroke();
+      if ((y - start.getUTCFullYear()) % stepYears === 0 && y < end.getUTCFullYear()) {
+        ctx.fillStyle = '#55604f';
+        ctx.fillText(String(y), x(new Date(Date.UTC(y, 6, 1))), h - 8);
+      }
+    }
+
+    // Test and B1 booking window
+    var tFrom = addDays(r.best, -183), tTo = addDays(r.best, -91);
+    ctx.fillStyle = '#FFF4A3';
+    ctx.fillRect(x(tFrom), barY - 18, Math.max(2, x(tTo) - x(tFrom)), barH + 36);
+
+    // Residence bar
+    ctx.fillStyle = '#1B5E20';
+    ctx.fillRect(x(r.arrival), barY, x(r.worst) - x(r.arrival), barH);
+
+    // Credited earlier years (hatched)
+    if (r.lastBreak && r.credit > 0) {
+      var cFrom = addDays(r.lastBreak.a, -r.credit);
+      if (cFrom < r.arrival) cFrom = r.arrival;
+      var cx0 = x(cFrom), cx1 = x(r.lastBreak.a);
+      ctx.save();
+      ctx.beginPath(); ctx.rect(cx0, barY, cx1 - cx0, barH); ctx.clip();
+      ctx.fillStyle = '#FFE600'; ctx.fillRect(cx0, barY, cx1 - cx0, barH);
+      ctx.strokeStyle = '#1B5E20'; ctx.lineWidth = 3;
+      for (var hx = cx0 - barH; hx < cx1 + barH; hx += 7) { ctx.beginPath(); ctx.moveTo(hx, barY + barH); ctx.lineTo(hx + barH, barY); ctx.stroke(); }
+      ctx.restore();
+    }
+
+    // Stays abroad
+    r.valid.forEach(function (t) {
+      var bx = x(t.a), bw = Math.max(2, x(t.b) - x(t.a));
+      if (t.long && !t.kept) {
+        ctx.fillStyle = '#B3372B';
+        ctx.fillRect(bx, barY - 6, bw, barH + 12);
+      } else {
+        ctx.fillStyle = '#7CB342';
+        ctx.fillRect(bx, barY + 4, bw, barH - 8);
+      }
+    });
+
+    // Restart marker
+    if (r.lastBreak) {
+      var rx = x(r.restart);
+      ctx.strokeStyle = '#B3372B'; ctx.lineWidth = 2; ctx.setLineDash([4, 3]);
+      ctx.beginPath(); ctx.moveTo(rx, barY - 12); ctx.lineTo(rx, barY + barH + 22); ctx.stroke();
+      ctx.setLineDash([]);
+      ctx.fillStyle = '#B3372B'; ctx.textAlign = 'left';
+      ctx.font = '700 ' + (small ? 9 : 10) + 'px Montserrat, sans-serif';
+      ctx.fillText('clock restarts', Math.min(rx + 4, w - 80), barY + barH + 20);
+    }
+
+    // Worst case outline
+    if (r.worst - r.best > DAY) {
+      var wx = x(r.worst);
+      ctx.strokeStyle = '#123D18'; ctx.lineWidth = 2;
+      ctx.strokeRect(x(r.best), barY, wx - x(r.best), barH);
+      ctx.fillStyle = '#123D18'; ctx.textAlign = 'right';
+      ctx.font = '600 ' + (small ? 9 : 10) + 'px Montserrat, sans-serif';
+      ctx.fillText('without credit: ' + fmtShort(r.worst), Math.min(wx, w - 4), barY + barH + 14);
+    }
+
+    // Today
+    var today = todayUTC();
+    if (today > start && today < end) {
+      var tx = x(today);
+      ctx.strokeStyle = '#212121'; ctx.lineWidth = 1.5;
+      ctx.beginPath(); ctx.moveTo(tx, barY - 16); ctx.lineTo(tx, barY + barH + 4); ctx.stroke();
+      ctx.fillStyle = '#212121'; ctx.textAlign = 'center';
+      ctx.font = '700 ' + (small ? 9 : 10) + 'px Montserrat, sans-serif';
+      ctx.fillText('today', tx, barY - 20);
+    }
+
+    // Complete flag
+    var fx = x(r.best);
+    ctx.strokeStyle = '#123D18'; ctx.lineWidth = 2;
+    ctx.beginPath(); ctx.moveTo(fx, barY + barH); ctx.lineTo(fx, 16); ctx.stroke();
+    ctx.fillStyle = '#FFE600';
+    var flagText = 'Complete ' + fmtShort(r.best);
+    ctx.font = '800 ' + (small ? 10 : 11) + 'px Montserrat, sans-serif';
+    var tw = ctx.measureText(flagText).width + 14;
+    var flx = fx + tw > w - 4 ? fx - tw : fx;
+    ctx.fillRect(flx, 8, tw, 20);
+    ctx.fillStyle = '#123D18'; ctx.textAlign = 'left';
+    ctx.fillText(flagText, flx + 7, 22);
+
+    // Arrival label
+    ctx.fillStyle = '#123D18';
+    ctx.font = '700 ' + (small ? 9 : 10) + 'px Montserrat, sans-serif';
+    ctx.textAlign = 'left';
+    ctx.fillText('arrived ' + fmtShort(r.arrival), Math.max(2, x(r.arrival)), barY + barH + (r.lastBreak ? 34 : 20));
+  }
+
+  document.querySelectorAll('input[name=route]').forEach(function (input) { input.addEventListener('change', update); });
+  arrivalInput.addEventListener('change', update);
+  marriageInput.addEventListener('change', update);
+  el('addTrip').addEventListener('click', function () {
+    var last = trips.length ? parse(trips[trips.length - 1].to) : parse(arrivalInput.value);
+    var from = last ? addDays(last, 60) : todayUTC();
+    trips.push({ from: iso(from), to: iso(addDays(from, 21)), kept: false });
+    renderTrips(); update();
+  });
+  window.addEventListener('resize', function () { draw(compute()); });
+
+  renderTrips();
+  update();
+})();
+</script>
+<script src="../js/brand.js"></script>
+</body>
+</html>
