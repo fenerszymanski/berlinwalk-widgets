@@ -1,9 +1,26 @@
 {
-  "updatedAt": "2026-09-19T01:53:03.703Z",
+  "updatedAt": "2026-09-19T07:51:29.623Z",
   "source": "Wix Blog API",
-  "totalPosts": 401,
+  "totalPosts": 402,
   "bookingUrl": "https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based",
   "allPosts": [
+    {
+      "title": "German Citizenship in Berlin: The Date You Can Apply and the Queue After It",
+      "slug": "german-citizenship-berlin",
+      "path": "/post/german-citizenship-berlin",
+      "url": "https://www.berlinwalk.com/post/german-citizenship-berlin",
+      "excerpt": "German citizenship in Berlin needs five years of lawful residence since the three-year fast track ended in October 2025. One trip abroad of more than six months can reset that clock, and the LEA publishes no waiting times. Here is how to find your date and build a complete file around it.",
+      "category": "Living in Berlin",
+      "categorySlug": "living-in-berlin",
+      "topic": "living-in-berlin",
+      "topicLabel": "Living in Berlin",
+      "readTime": "6 min read",
+      "publishedDate": "2026-09-19T07:50:05.056Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_209117cf58f34edea110e3566db5760d~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/00-cover-reichstag-dem-deutschen-volke.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_209117cf58f34edea110e3566db5760d~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/00-cover-reichstag-dem-deutschen-volke.jpg",
+      "alt": "The west pediment of the Reichstag building in Berlin with the inscription Dem Deutschen Volke above the columns and the glass dome behind it under a clear blue sky",
+      "relatedToolSlug": "berlin-citizenship-clock"
+    },
     {
       "title": "Electricity Provider in Berlin: What Staying on the Default Tariff Costs You",
       "slug": "electricity-provider-berlin",

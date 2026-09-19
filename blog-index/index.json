@@ -1,9 +1,9 @@
 {
-  "updatedAt": "2026-09-19T01:53:03.703Z",
+  "updatedAt": "2026-09-19T07:51:29.623Z",
   "source": "Wix Blog API",
   "popularSource": "Wix Blog metrics.views lifetime sort",
-  "totalPosts": 401,
-  "toolsTotal": 321,
+  "totalPosts": 402,
+  "toolsTotal": 322,
   "bookingUrl": "https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based",
   "navTopics": [
     {
@@ -1802,6 +1802,23 @@
   ],
   "latest": [
     {
+      "title": "German Citizenship in Berlin: The Date You Can Apply and the Queue After It",
+      "slug": "german-citizenship-berlin",
+      "path": "/post/german-citizenship-berlin",
+      "url": "https://www.berlinwalk.com/post/german-citizenship-berlin",
+      "excerpt": "German citizenship in Berlin needs five years of lawful residence since the three-year fast track ended in October 2025. One trip abroad of more than six months can reset that clock, and the LEA publishes no waiting times. Here is how to find your date and build a complete file around it.",
+      "category": "Living in Berlin",
+      "categorySlug": "living-in-berlin",
+      "topic": "living-in-berlin",
+      "topicLabel": "Living in Berlin",
+      "readTime": "6 min read",
+      "publishedDate": "2026-09-19T07:50:05.056Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_209117cf58f34edea110e3566db5760d~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/00-cover-reichstag-dem-deutschen-volke.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_209117cf58f34edea110e3566db5760d~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/00-cover-reichstag-dem-deutschen-volke.jpg",
+      "alt": "The west pediment of the Reichstag building in Berlin with the inscription Dem Deutschen Volke above the columns and the glass dome behind it under a clear blue sky",
+      "relatedToolSlug": "berlin-citizenship-clock"
+    },
+    {
       "title": "Electricity Provider in Berlin: What Staying on the Default Tariff Costs You",
       "slug": "electricity-provider-berlin",
       "path": "/post/electricity-provider-berlin",
@@ -1987,23 +2004,6 @@
       "thumb": "https://static.wixstatic.com/media/5a08a3_a231bbc34bb54a2caf7de236a96fa105~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-neukoelln-weserstrasse-parked-cars.jpg",
       "alt": "Weserstrasse in Berlin-Neukoelln on an ordinary day, cars parked nose to tail along both kerbs under bare spring trees, cobbled carriageway, five-storey Altbau blocks and shopfronts running away down the street",
       "relatedToolSlug": "berlin-moving-permit-planner"
-    },
-    {
-      "title": "Kita Place in Berlin: Nobody Finds It for You",
-      "slug": "kita-place-berlin",
-      "path": "/post/kita-place-berlin",
-      "url": "https://www.berlinwalk.com/post/kita-place-berlin",
-      "excerpt": "The Kita-Gutschein is money, not a placement. Berlin’s own wording is that you go looking for a free place in a Kita of your choice and contact them yourself, so the year turns on two dates on the voucher and on how much licensed capacity really sits within a pram walk of your street. Half of Berlin’s 2,917 Kitas hold fewer than fifty children, a quarter of them hold more than half the places in the city, and the Jugendamt calls a thirty minute ride reasonable.",
-      "category": "Living in Berlin",
-      "categorySlug": "living-in-berlin",
-      "topic": "living-in-berlin",
-      "topicLabel": "Living in Berlin",
-      "readTime": "9 min read",
-      "publishedDate": "2026-09-16T02:08:42.691Z",
-      "image": "https://static.wixstatic.com/media/5a08a3_9aefc0ff8d514c30bc6716900b7fba66~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-lichtenberg-kita-entdeckerland.jpg",
-      "thumb": "https://static.wixstatic.com/media/5a08a3_9aefc0ff8d514c30bc6716900b7fba66~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-lichtenberg-kita-entdeckerland.jpg",
-      "alt": "A long two-storey Kita on Otto-Marquardt-Strasse in Berlin-Lichtenberg under a clear blue sky, orange and yellow render, the words Kindertagesstaette Entdeckerland painted large on the end wall, Plattenbau housing behind",
-      "relatedToolSlug": "berlin-kita-call-list"
     }
   ]
 }
