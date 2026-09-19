@@ -1,9 +1,26 @@
 {
-  "updatedAt": "2026-09-19T07:51:29.623Z",
+  "updatedAt": "2026-09-19T13:57:00.839Z",
   "source": "Wix Blog API",
-  "totalPosts": 402,
+  "totalPosts": 403,
   "bookingUrl": "https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based",
   "allPosts": [
+    {
+      "title": "Mieterverein Berlin: Which Tenant Association Covers You, and From Which Day",
+      "slug": "mieterverein-berlin",
+      "path": "/post/mieterverein-berlin",
+      "url": "https://www.berlinwalk.com/post/mieterverein-berlin",
+      "excerpt": "Most Berlin tenants join a Mieterverein on the evening a rent increase or service-charge bill arrives, and that is the one letter the legal cover will not pay for. Here is what the three big associations cost, how long each waiting period runs, and when to join.",
+      "category": "Living in Berlin",
+      "categorySlug": "living-in-berlin",
+      "topic": "living-in-berlin",
+      "topicLabel": "Living in Berlin",
+      "readTime": "7 min read",
+      "publishedDate": "2026-09-19T13:55:34.080Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_6134098eaf1f4f7980151095f2c8f7d6~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/00-cover-fraenkelufer-mietshaus.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_6134098eaf1f4f7980151095f2c8f7d6~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/00-cover-fraenkelufer-mietshaus.jpg",
+      "alt": "A long ornate Gründerzeit apartment building on Fraenkelufer in Kreuzberg with bay windows and balconies under a clear blue sky, trees along the pavement",
+      "relatedToolSlug": "berlin-tenant-cover-clock"
+    },
     {
       "title": "German Citizenship in Berlin: The Date You Can Apply and the Queue After It",
       "slug": "german-citizenship-berlin",
