@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Berlin Dental Stamp Ledger</title>
+<link rel="stylesheet" href="../css/brand.css">
+<style>
+  :root {
+    --green: #1B5E20;
+    --deep: #123D18;
+    --yellow: #FFE600;
+    --lime: #7CB342;
+    --soft: #C5E1A5;
+    --ink: #212121;
+    --muted: #55604f;
+    --line: #dfe3d6;
+    --paper: #FBF9F1;
+    --gap: #B3261E;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: #fff; color: var(--ink); font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
+  .sl { max-width: 860px; margin: 0 auto; padding: 14px 12px 8px; }
+  .sl-head { border-bottom: 3px solid var(--deep); padding-bottom: 10px; }
+  .sl-kicker { font-size: .66rem; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; color: var(--green); }
+  .sl-head h2 { margin: 4px 0 0; font-size: 1.12rem; line-height: 1.28; color: var(--deep); }
+  .sl-head p { margin: 5px 0 0; font-size: .78rem; line-height: 1.5; color: var(--muted); max-width: 640px; }
+
+  .sl-step { margin-top: 12px; }
+  .sl-label { font-size: .66rem; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; }
+
+  .sl-start { display: flex; gap: 6px; flex-wrap: wrap; }
+  .sl-start button { font: inherit; font-size: .76rem; font-weight: 700; padding: 8px 12px; border-radius: 6px; border: 2px solid var(--deep); background: #fff; color: var(--deep); cursor: pointer; }
+  .sl-start button[aria-pressed="true"] { background: var(--deep); color: #fff; }
+
+  .sl-strip { display: grid; grid-template-columns: repeat(11, minmax(0, 1fr)); gap: 4px; }
+  .sl-year { font: inherit; position: relative; min-width: 0; aspect-ratio: 1 / 1.08; min-height: 44px; border-radius: 6px; border: 2px dashed #b9bfae; background: #fff; color: var(--muted); cursor: pointer; padding: 2px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; }
+  .sl-year b { font-size: .72rem; font-weight: 800; }
+  .sl-year i { font-style: normal; font-size: .56rem; font-weight: 700; letter-spacing: .03em; text-transform: uppercase; }
+  .sl-year[aria-pressed="true"] { border: 2px solid var(--green); background: var(--soft); color: var(--deep); }
+  .sl-year[aria-pressed="true"] i::before { content: ''; }
+  .sl-year.is-out { opacity: .38; }
+  .sl-year.is-free { border-style: solid; border-color: var(--lime); background: #EEF6E3; color: var(--deep); cursor: default; }
+  .sl-year.is-open { box-shadow: 0 0 0 3px var(--yellow); }
+  .sl-year:focus-visible, .sl-start button:focus-visible, .sl-treat:focus-visible, .sl-steps button:focus-visible { outline: 3px solid var(--lime); outline-offset: 2px; }
+  .sl-window { position: relative; height: 16px; margin-top: 4px; }
+  .sl-window span { position: absolute; top: 0; height: 100%; border-radius: 3px; font-size: .56rem; font-weight: 800; letter-spacing: .04em; text-transform: uppercase; display: flex; align-items: center; justify-content: center; white-space: nowrap; overflow: hidden; }
+  .sl-w10 { background: #EEF1E8; color: var(--muted); }
+  .sl-w5 { background: var(--soft); color: var(--deep); top: 0; }
+
+  .sl-row { display: grid; grid-template-columns: minmax(0,1.1fr) minmax(0,1fr); gap: 10px; }
+  .sl-treats { display: grid; grid-template-columns: minmax(0,1fr); gap: 5px; }
+  .sl-treat { font: inherit; font-size: .76rem; font-weight: 700; color: var(--deep); text-align: left; width: 100%; padding: 8px 10px; border: 2px solid var(--deep); border-radius: 6px; background: #fff; cursor: pointer; }
+  .sl-treat[aria-pressed="true"] { background: var(--deep); color: #fff; }
+  .sl-bill { background: var(--paper); border: 1px solid var(--line); border-radius: 8px; padding: 8px 10px; }
+  .sl-bill output { display: block; font-size: 1.05rem; font-weight: 800; color: var(--deep); }
+  .sl-steps { display: flex; gap: 5px; margin: 6px 0 5px; }
+  .sl-steps button { font: inherit; flex: 1; font-size: .76rem; font-weight: 800; padding: 7px 4px; border-radius: 6px; border: 2px solid var(--deep); background: #fff; color: var(--deep); cursor: pointer; }
+  .sl-steps button:disabled { opacity: .35; cursor: default; }
+  .sl-bill small { display: block; font-size: .64rem; color: var(--muted); line-height: 1.35; }
+
+  .sl-chart { margin: 12px 0 4px; border: 1px solid var(--line); border-radius: 10px; background: #fff; padding: 8px 8px 4px; }
+  .sl-chart svg { display: block; width: 100%; max-width: 560px; margin: 0 auto; height: auto; }
+  .sl-verdict { margin-top: 10px; border-left: 5px solid var(--green); background: var(--paper); border-radius: 0 8px 8px 0; padding: 10px 12px; }
+  .sl-verdict .big { font-size: 1.02rem; font-weight: 800; color: var(--deep); line-height: 1.35; }
+  .sl-verdict p { margin: 5px 0 0; font-size: .78rem; line-height: 1.5; }
+  .sl-alert { margin-top: 8px; background: var(--yellow); color: var(--deep); border-radius: 8px; padding: 9px 12px; font-size: .78rem; font-weight: 700; line-height: 1.45; }
+  .sl-alert[hidden] { display: none; }
+  .sl-note { font-size: .7rem; line-height: 1.5; color: var(--muted); margin: 10px 0 4px; }
+
+  @media (max-width: 560px) {
+    .sl-row { grid-template-columns: minmax(0,1fr); }
+    .sl-strip { gap: 3px; }
+    .sl-year { min-height: 40px; border-radius: 5px; }
+    .sl-year b { font-size: .62rem; }
+    .sl-year i { font-size: .46rem; }
+    .sl-window span { font-size: .48rem; }
+  }
+  @media (max-width: 330px) {
+    .sl { padding: 12px 8px 6px; }
+    .sl-strip { gap: 2px; }
+    .sl-year { aspect-ratio: auto; height: 38px; min-height: 0; border-width: 1.5px; }
+    .sl-year i { font-size: .4rem; letter-spacing: 0; }
+    .sl-start button { font-size: .7rem; padding: 7px 9px; }
+  }
+</style>
+</head>
+<body>
+<main class="sl" aria-labelledby="sl-title">
+  <header class="sl-head">
+    <div class="sl-kicker">Berlin dental stamp ledger</div>
+    <h2 id="sl-title">What your Bonusheft stamps are worth on the next crown</h2>
+    <p>Tap the years your dentist stamped. The ledger reads the window your Krankenkasse looks at, picks your subsidy level and shows what stays on your own bill.</p>
+  </header>
+
+  <section class="sl-step" aria-label="When the treatment starts">
+    <div class="sl-label">1. When does the treatment start?</div>
+    <div class="sl-start" role="group" aria-label="Treatment start">
+      <button type="button" data-start="2026" aria-pressed="false">Before 31 December 2026</button>
+      <button type="button" data-start="2027" aria-pressed="true">In 2027</button>
+    </div>
+  </section>
+
+  <section class="sl-step" aria-label="Stamped years">
+    <div class="sl-label">2. Tap every year with a check-up stamp</div>
+    <div class="sl-strip" id="strip" role="group" aria-label="Check-up years"></div>
+    <div class="sl-window" id="window" aria-hidden="true"></div>
+  </section>
+
+  <section class="sl-step sl-row" aria-label="Treatment and bill">
+    <div>
+      <div class="sl-label">3. What is on the plan?</div>
+      <div class="sl-treats" id="treat" role="group" aria-label="Treatment"></div>
+    </div>
+    <div class="sl-bill">
+      <div class="sl-label" style="margin-bottom:2px">Total on your treatment plan</div>
+      <output id="billOut">€0</output>
+      <div class="sl-steps" role="group" aria-label="Change the total">
+        <button type="button" data-step="-500" aria-label="Minus 500 euros">−500</button>
+        <button type="button" data-step="-100" aria-label="Minus 100 euros">−100</button>
+        <button type="button" data-step="100" aria-label="Plus 100 euros">+100</button>
+        <button type="button" data-step="500" aria-label="Plus 500 euros">+500</button>
+      </div>
+      <small id="billHint"></small>
+    </div>
+  </section>
+
+  <div class="sl-chart">
+    <svg id="plot" viewBox="0 0 460 206" role="img" aria-label="Subsidy and own share at 60, 70 and 75 percent"></svg>
+  </div>
+
+  <div class="sl-verdict" aria-live="polite">
+    <div class="big" id="big"></div>
+    <p id="why"></p>
+  </div>
+  <div class="sl-alert" id="alert" hidden></div>
+
+  <p class="sl-note"><strong>How the ledger counts.</strong> For 70% you need a check-up in each of the five calendar years before the treatment starts, for 75% in each of the ten. 2020 never breaks the chain. The euro amounts are the fixed subsidies valid from 1 January 2026; the Krankenkasse pays that fixed amount whatever the dentist charges, so every euro above it is yours. Low earners can apply for the hardship rule, which this ledger leaves out. Checked on 19 September 2026.</p>
+</main>
+
+<script>
+(function () {
+  var FIRST = 2016, LAST = 2026, FREE = 2020;
+  // Fixed subsidies (Festzuschuesse) valid from 1 Jan 2026: 60 / 70 / 75 / 100 percent.
+  var TREATMENTS = [
+    { id: 'crown', label: 'Crown on a back tooth', finding: '1.1', fz: [239.03, 278.87, 298.79, 398.39] },
+    { id: 'front', label: 'Crown with a tooth-coloured facing, front tooth', finding: '1.1 + 1.3', fz: [319.69, 372.98, 399.62, 532.83] },
+    { id: 'bridge', label: 'Bridge or implant for one missing tooth', finding: '2.1', fz: [552.96, 645.12, 691.20, 921.60] },
+    { id: 'denture', label: 'Full denture, upper jaw', finding: '4.2', fz: [576.44, 672.52, 720.56, 960.74] }
+  ];
+  var LEVELS = ['60%', '70%', '75%'];
+
+  var state = { start: 2027, stamps: {}, treat: 'crown', bill: 398 };
+  for (var y = FIRST; y <= LAST; y++) state.stamps[y] = y <= 2025;
+
+  var strip = document.getElementById('strip');
+  var windowEl = document.getElementById('window');
+  var treatSel = document.getElementById('treat');
+  var MAXBILL = 6000;
+  var billOut = document.getElementById('billOut');
+  var billHint = document.getElementById('billHint');
+  var plot = document.getElementById('plot');
+  var big = document.getElementById('big');
+  var why = document.getElementById('why');
+  var alertEl = document.getElementById('alert');
+
+  function euro(n) { return '€' + Math.round(n).toLocaleString('en-GB'); }
+  function euro2(n) { return '€' + n.toLocaleString('en-GB', { minimumFractionDigits: 2, maximumFractionDigits: 2 }); }
+  function treatment() { return TREATMENTS.filter(function (t) { return t.id === state.treat; })[0]; }
+
+  TREATMENTS.forEach(function (t) {
+    var o = document.createElement('button');
+    o.type = 'button'; o.className = 'sl-treat';
+    o.dataset.treat = t.id; o.textContent = t.label;
+    treatSel.appendChild(o);
+  });
+
+  for (var yr = FIRST; yr <= LAST; yr++) {
+    var b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'sl-year';
+    b.dataset.year = yr;
+    b.innerHTML = '<b>' + String(yr).slice(2) + '</b><i></i>';
+    b.setAttribute('aria-label', 'Check-up stamp in ' + yr);
+    strip.appendChild(b);
+  }
+
+  function windowYears() {
+    var ten = [], five = [];
+    for (var y = state.start - 10; y <= state.start - 1; y++) ten.push(y);
+    for (var z = state.start - 5; z <= state.start - 1; z++) five.push(z);
+    return { ten: ten, five: five };
+  }
+  function counted(y) { return y === FREE || state.stamps[y]; }
+
+  function level() {
+    var w = windowYears();
+    var gaps10 = w.ten.filter(function (y) { return !counted(y); });
+    var gaps5 = w.five.filter(function (y) { return !counted(y); });
+    if (!gaps10.length) return { idx: 2, gaps10: gaps10, gaps5: gaps5, oneGap: false };
+    if (!gaps5.length) return { idx: 1, gaps10: gaps10, gaps5: gaps5, oneGap: gaps10.length === 1 };
+    return { idx: 0, gaps10: gaps10, gaps5: gaps5, oneGap: false };
+  }
+
+  function renderStrip() {
+    var w = windowYears();
+    Array.prototype.forEach.call(strip.children, function (btn) {
+      var y = Number(btn.dataset.year);
+      var inWin = w.ten.indexOf(y) !== -1;
+      var free = y === FREE;
+      var open = y === 2026 && state.start === 2027 && !state.stamps[2026];
+      btn.classList.toggle('is-out', !inWin);
+      btn.classList.toggle('is-free', free);
+      btn.classList.toggle('is-open', open);
+      btn.setAttribute('aria-pressed', String(free ? true : !!state.stamps[y]));
+      btn.querySelector('i').textContent = free ? 'free' : (state.stamps[y] ? 'stamp' : (open ? 'open' : 'gap'));
+      btn.disabled = free;
+    });
+    var cell = 100 / 11;
+    var s10 = (state.start - 10 - FIRST) * cell, s5 = (state.start - 5 - FIRST) * cell;
+    windowEl.innerHTML =
+      '<span class="sl-w10" style="left:' + s10 + '%;width:' + (cell * 5) + '%">10-year window</span>' +
+      '<span class="sl-w5" style="left:' + s5 + '%;width:' + (cell * 5) + '%">last 5 years</span>';
+  }
+
+  function renderPlot(lv) {
+    var t = treatment();
+    var total = state.bill;
+    var max = Math.max(total, t.fz[3]);
+    var x0 = 58, width = 340, rowH = 44, top = 30;
+    var svg = '';
+    svg += '<rect x="' + x0 + '" y="6" width="13" height="13" rx="2" fill="#1B5E20"/>';
+    svg += '<text x="' + (x0 + 19) + '" y="17" font-size="13" font-weight="700" fill="#55604f">Krankenkasse pays</text>';
+    svg += '<rect x="' + (x0 + 160) + '" y="6" width="13" height="13" rx="2" fill="#FFE600" stroke="#123D18" stroke-width="1"/>';
+    svg += '<text x="' + (x0 + 179) + '" y="17" font-size="13" font-weight="700" fill="#55604f">You pay</text>';
+    for (var i = 0; i < 3; i++) {
+      var y = top + i * rowH;
+      var fz = Math.min(t.fz[i], total);
+      var own = total - fz;
+      var wK = width * fz / max, wO = width * own / max;
+      var mine = i === lv.idx;
+      svg += '<text x="' + (x0 - 10) + '" y="' + (y + 22) + '" text-anchor="end" font-size="17" font-weight="800" fill="' + (mine ? '#123D18' : '#8a9384') + '">' + LEVELS[i] + '</text>';
+      if (mine) svg += '<rect x="3" y="' + (y - 3) + '" width="454" height="' + (rowH - 4) + '" rx="7" fill="none" stroke="#7CB342" stroke-width="2.5"/>';
+      svg += '<rect x="' + x0 + '" y="' + (y + 6) + '" width="' + wK.toFixed(1) + '" height="24" rx="3" fill="' + (mine ? '#1B5E20' : '#9DB59A') + '"/>';
+      svg += '<rect x="' + (x0 + wK).toFixed(1) + '" y="' + (y + 6) + '" width="' + Math.max(wO, 0).toFixed(1) + '" height="24" rx="3" fill="' + (mine ? '#FFE600' : '#F5EEB0') + '" stroke="#123D18" stroke-width="' + (mine ? 1 : 0.4) + '"/>';
+      if (wK > 62) svg += '<text x="' + (x0 + 8) + '" y="' + (y + 23) + '" font-size="14" font-weight="800" fill="#fff">' + euro(fz) + '</text>';
+      var ownLabelX = x0 + wK + wO + 6;
+      if (ownLabelX > 412) ownLabelX = Math.max(x0 + wK - 50, x0 + 4);
+      svg += '<text x="' + ownLabelX.toFixed(1) + '" y="' + (y + 23) + '" font-size="14" font-weight="800" fill="#123D18">' + euro(own) + '</text>';
+    }
+    var yB = top + 3 * rowH + 4;
+    var stdX = x0 + width * t.fz[3] / max;
+    svg += '<line x1="' + stdX.toFixed(1) + '" y1="' + (top - 2) + '" x2="' + stdX.toFixed(1) + '" y2="' + (yB - 4) + '" stroke="#B3261E" stroke-width="1.5" stroke-dasharray="4 3"/>';
+    var anchor = stdX > 300 ? 'end' : (stdX < 130 ? 'start' : 'middle');
+    svg += '<text x="' + stdX.toFixed(1) + '" y="' + (yB + 12) + '" text-anchor="' + anchor + '" font-size="12.5" font-weight="700" fill="#B3261E">standard version ' + euro(t.fz[3]) + '</text>';
+    plot.innerHTML = svg;
+  }
+
+  function render() {
+    var t = treatment();
+    Array.prototype.forEach.call(document.querySelectorAll('.sl-start button'), function (b) {
+      b.setAttribute('aria-pressed', String(Number(b.dataset.start) === state.start));
+    });
+    var minBill = Math.ceil(t.fz[3] / 10) * 10;
+    if (state.bill < minBill) state.bill = minBill;
+    if (state.bill > MAXBILL) state.bill = MAXBILL;
+    Array.prototype.forEach.call(treatSel.children, function (b) { b.setAttribute('aria-pressed', String(b.dataset.treat === state.treat)); });
+    Array.prototype.forEach.call(document.querySelectorAll('.sl-steps button'), function (b) {
+      var d = Number(b.dataset.step);
+      b.disabled = d < 0 ? state.bill <= minBill : state.bill >= MAXBILL;
+    });
+    billOut.textContent = euro(state.bill);
+    billHint.textContent = 'Finding ' + t.finding + '. The standard version costs about ' + euro(t.fz[3]) + '; step up to the total on your plan.';
+
+    renderStrip();
+    var lv = level();
+    renderPlot(lv);
+
+    var own = state.bill - Math.min(t.fz[lv.idx], state.bill);
+    var best = state.bill - Math.min(t.fz[2], state.bill);
+    big.textContent = 'At ' + LEVELS[lv.idx] + ' you pay ' + euro(own) + ' and the Krankenkasse pays ' + euro2(Math.min(t.fz[lv.idx], state.bill)) + '.';
+    var w = windowYears();
+    var span = w.ten[0] + ' to ' + w.ten[9];
+    if (lv.idx === 2) {
+      why.textContent = 'Every year from ' + span + ' counts, so you get the full bonus. Keep one check-up a year and it stays that way.';
+    } else if (lv.idx === 1) {
+      why.textContent = 'The last five years are complete, but ' + lv.gaps10.join(', ') + ' in the window from ' + span + ' ' + (lv.gaps10.length === 1 ? 'has' : 'have') + ' no stamp. The missing ' + (lv.gaps10.length === 1 ? 'year costs' : 'years cost') + ' you ' + euro(own - best) + ' on this plan.' + (lv.oneGap ? ' With exactly one gap, your Krankenkasse may still grant 75% on request, so ask before you sign.' : '');
+    } else {
+      why.textContent = 'No stamp for ' + lv.gaps5.join(', ') + ' in the last five years before ' + state.start + ', so you are on the base 60%. That costs you ' + euro(own - best) + ' more than a full ten-year ledger on this plan.';
+    }
+
+    var showAlert = state.start === 2027 && !state.stamps[2026];
+    alertEl.hidden = !showAlert;
+    if (showAlert) {
+      var withStamp = JSON.parse(JSON.stringify(state.stamps)); withStamp[2026] = true;
+      var saved = state.stamps; state.stamps = withStamp; var lv2 = level(); state.stamps = saved;
+      var own2 = state.bill - Math.min(t.fz[lv2.idx], state.bill);
+      alertEl.textContent = '2026 is still open. A check-up before 31 December puts you on ' + LEVELS[lv2.idx] + (own2 < own ? ' and saves ' + euro(own - own2) + ' on this plan.' : ' for a 2027 treatment.');
+    }
+  }
+
+  strip.addEventListener('click', function (e) {
+    var btn = e.target.closest('.sl-year');
+    if (!btn || btn.disabled) return;
+    var y = Number(btn.dataset.year);
+    state.stamps[y] = !state.stamps[y];
+    render();
+  });
+  document.querySelector('.sl-start').addEventListener('click', function (e) {
+    var btn = e.target.closest('button');
+    if (!btn) return;
+    state.start = Number(btn.dataset.start);
+    render();
+  });
+  treatSel.addEventListener('click', function (e) {
+    var b = e.target.closest('.sl-treat');
+    if (!b) return;
+    state.treat = b.dataset.treat;
+    state.bill = Math.ceil(treatment().fz[3] / 10) * 10;
+    render();
+  });
+  document.querySelector('.sl-steps').addEventListener('click', function (e) {
+    var b = e.target.closest('button');
+    if (!b || b.disabled) return;
+    state.bill = state.bill + Number(b.dataset.step);
+    render();
+  });
+
+  state.stamps[2026] = false;
+  state.stamps[2019] = false;
+  state.bill = 400;
+  render();
+})();
+</script>
+<script src="../js/brand.js"></script>
+</body>
+</html>

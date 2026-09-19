@@ -1,0 +1,101 @@
+{
+  "version": 1,
+  "slug": "dentist-in-berlin",
+  "key": "dentist-in-berlin",
+  "config": {
+    "title": "Dentist in Berlin - FAQ",
+    "subtitle": "What public insurance pays at a Berlin dentist, how the Bonusheft changes your share, and where to go on a weekend.",
+    "items": [
+      {
+        "q": "What does public health insurance pay at the dentist in Berlin?",
+        "a": "Two check-ups a year, tartar removal once a year, standard fillings and gum disease screening every two years, all billed directly to your Krankenkasse. Professional cleaning is usually private, though many Kassen pay a yearly allowance towards it."
+      },
+      {
+        "q": "How does the Bonusheft work?",
+        "a": "Your dentist stamps it at each check-up. With a check-up in each of the five calendar years before a treatment starts, the fixed subsidy for crowns, bridges and dentures rises from 60% to 70%. With ten unbroken years it rises to 75%."
+      },
+      {
+        "q": "Does a missing check-up in 2020 break my Bonusheft?",
+        "a": "No. The law exempts 2020 because of the pandemic, so a missing stamp for that year does not break the five-year or the ten-year chain."
+      },
+      {
+        "q": "What if I missed one year?",
+        "a": "For the 70% level you need all five of the last calendar years. For 75%, your Krankenkasse may still grant it with exactly one missed year in ten if your teeth show regular care, but it is a discretionary decision and you have to ask."
+      },
+      {
+        "q": "How much does the Krankenkasse pay for a crown in 2026?",
+        "a": "For a crown on a badly damaged back tooth, €239.03 at the base rate, €278.87 with the five-year bonus and €298.79 with the ten-year bonus. The amount is fixed, so a more expensive crown leaves you with a bigger share."
+      },
+      {
+        "q": "I lost my Bonusheft. What now?",
+        "a": "Ask your practice to fill in a new booklet from its patient records. If you have changed dentists, ask each old practice for the years they saw you."
+      },
+      {
+        "q": "Where do I find an emergency dentist in Berlin at the weekend?",
+        "a": "Call the on-call hotline on 030 89004-333. On weekends and public holidays every district has one dentist on duty from 9:00 to 12:00 and another from 15:00 to 18:00, and the Charité dental clinic on Aßmannshauser Straße covers extra evening hours."
+      }
+    ]
+  },
+  "schema": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What does public health insurance pay at the dentist in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Two check-ups a year, tartar removal once a year, standard fillings and gum disease screening every two years, all billed directly to your Krankenkasse. Professional cleaning is usually private, though many Kassen pay a yearly allowance towards it."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How does the Bonusheft work?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Your dentist stamps it at each check-up. With a check-up in each of the five calendar years before a treatment starts, the fixed subsidy for crowns, bridges and dentures rises from 60% to 70%. With ten unbroken years it rises to 75%."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Does a missing check-up in 2020 break my Bonusheft?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. The law exempts 2020 because of the pandemic, so a missing stamp for that year does not break the five-year or the ten-year chain."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What if I missed one year?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "For the 70% level you need all five of the last calendar years. For 75%, your Krankenkasse may still grant it with exactly one missed year in ten if your teeth show regular care, but it is a discretionary decision and you have to ask."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How much does the Krankenkasse pay for a crown in 2026?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "For a crown on a badly damaged back tooth, €239.03 at the base rate, €278.87 with the five-year bonus and €298.79 with the ten-year bonus. The amount is fixed, so a more expensive crown leaves you with a bigger share."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "I lost my Bonusheft. What now?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Ask your practice to fill in a new booklet from its patient records. If you have changed dentists, ask each old practice for the years they saw you."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Where do I find an emergency dentist in Berlin at the weekend?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Call the on-call hotline on 030 89004-333. On weekends and public holidays every district has one dentist on duty from 9:00 to 12:00 and another from 15:00 to 18:00, and the Charité dental clinic on Aßmannshauser Straße covers extra evening hours."
+        }
+      }
+    ]
+  }
+}
