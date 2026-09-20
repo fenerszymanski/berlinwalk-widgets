@@ -208,13 +208,23 @@
     if (!window.customElements || !customElements.get('bw-booking-calendar')) return false;
     var Ctor = customElements.get('bw-booking-calendar');
     var proto = Ctor && Ctor.prototype;
-    if (!proto || proto.__bwIntroHrefPatch || typeof proto._bookingHref !== 'function') return Boolean(proto && proto.__bwIntroHrefPatch);
-    var original = proto._bookingHref;
-    proto._bookingHref = function (slot) {
-      return preserveAttribution(original.call(this, slot));
-    };
-    proto.__bwIntroHrefPatch = true;
-    return true;
+    if (!proto) return false;
+    if (!proto.__bwIntroHrefPatch && typeof proto._bookingHref === 'function') {
+      var originalHref = proto._bookingHref;
+      proto._bookingHref = function (slot) {
+        return preserveAttribution(originalHref.call(this, slot));
+      };
+      proto.__bwIntroHrefPatch = true;
+    }
+    if (!proto.__bwDepositCtaLabelPatch && typeof proto._ctaLabel === 'function') {
+      var originalLabel = proto._ctaLabel;
+      proto._ctaLabel = function () {
+        var label = originalLabel.apply(this, arguments);
+        return label === 'Continue to free reservation' ? 'Continue to reservation' : label;
+      };
+      proto.__bwDepositCtaLabelPatch = true;
+    }
+    return Boolean(proto.__bwIntroHrefPatch && proto.__bwDepositCtaLabelPatch);
   }
 
   function applyIntro(calendar) {
@@ -462,18 +472,6 @@
     function watch() {
       var calendar = document.querySelector('bw-booking-calendar[navigation-mode="event"]:not([hide-intro])');
       if (!calendar) return false;
-      if (!calendar.__bwDepositCtaObserver && typeof MutationObserver !== 'undefined') {
-        calendar.__bwDepositCtaObserver = true;
-        var pending = false;
-        new MutationObserver(function () {
-          if (pending) return;
-          pending = true;
-          window.requestAnimationFrame(function () {
-            pending = false;
-            applyIntro(calendar);
-          });
-        }).observe(calendar, { childList: true, characterData: true, subtree: true });
-      }
       return applyIntro(calendar);
     }
 
@@ -487,17 +485,6 @@
     [0, 250, 750, 1500, 3000, 6000, 10000, 15000, 22000].forEach(function (delay) {
       window.setTimeout(watch, delay);
     });
-    if (typeof MutationObserver !== 'undefined') {
-      var pageWatchPending = false;
-      new MutationObserver(function () {
-        if (pageWatchPending) return;
-        pageWatchPending = true;
-        window.requestAnimationFrame(function () {
-          pageWatchPending = false;
-          watch();
-        });
-      }).observe(document.documentElement, { childList: true, characterData: true, subtree: true });
-    }
   }
 
   function launch() {
