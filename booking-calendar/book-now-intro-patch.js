@@ -124,7 +124,7 @@
       'html.bw-deposit-form-ui [data-hook="form-field-form_field_f9f6"] [data-hook="checkbox-core"]{align-items:flex-start;padding:12px;background:#f4f7ef;border-radius:8px}',
       'html.bw-deposit-form-ui .bw-form-compact-shell{padding-top:20px!important}',
       'html.bw-deposit-form-ui .bw-form-compact-heading{margin-bottom:24px!important}',
-      'html.bw-deposit-form-ui .bw-form-compact-back{margin-bottom:20px!important}',
+      'html.bw-deposit-form-ui .bw-form-compact-back{margin-bottom:20px!important;padding-bottom:0!important}',
       'html.bw-deposit-form-ui [data-hook="booking-details-book-now-cta"]{min-height:48px;font-family:Montserrat,Arial,sans-serif;font-weight:700;border-radius:6px}',
       '#bw-booking-payment-trust{margin:14px 0 0;padding:12px 10px;border:1px solid #dce5da;border-radius:8px;background:#f5f8f1;text-align:center;color:#24442b;font:13px/1.5 Montserrat,Arial,sans-serif}',
       '#bw-booking-payment-trust .bw-secure-line{display:flex;align-items:center;justify-content:center;gap:6px;font-weight:700}',
