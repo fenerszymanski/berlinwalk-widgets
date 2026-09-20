@@ -5182,5 +5182,19 @@
       "**Berlin is on paper right now.** The city's digital Elterngeld portal is being rebuilt, so new applications go by post to your district Elterngeldstelle, with the birth certificate in the original and your own Mutterschaftsgeld certificate enclosed.",
       "**Above 175,000 euros of taxable income there is nothing**, for births from 1 April 2025, couples and single parents alike. The 2024 births up to 31 March 2025 keep the older 200,000 euro line."
     ]
+  },
+  "sick-leave-in-berlin": {
+    "title": "Sick Leave in Berlin - Quick Summary",
+    "icon": "🩺",
+    "kicker": "BERLINWALK.COM • LIVING IN BERLIN",
+    "items": [
+      "**Tell your employer before your shift starts.** That duty is yours and it is separate from the certificate. The certificate itself is only due once you are off for **more than three calendar days**, unless your contract demands it sooner, and many Berlin contracts do.",
+      "**Six weeks of full pay means 42 calendar days, not 42 working days.** It only starts after **four uninterrupted weeks** in the job, and weekends inside a spell are counted.",
+      "**The same illness does not get a fresh six weeks.** A new 42 days opens only after **six months free of that illness**, or **twelve months** from the first day you were off with it. The earlier of the two dates wins.",
+      "**Krankengeld is 70 percent of gross, capped at 90 percent of net**, and capped again at **135.63 euros a day** in 2026, about **4,069 euros** a month before your own contributions of roughly 12.4 percent. It runs **78 weeks in three years** for one illness, the six weeks included.",
+      "**One day of gap ends it.** On Krankengeld the next certificate must be issued at the latest on the **next Werktag** after the last certified day, and Saturdays do not count. Book the follow-up before the current one expires.",
+      "**Child sick days shrink on 1 January 2027.** In 2026 it is **15 working days per child per parent**, capped at 35, and 30 for single parents, capped at 70. From 2027 it falls back to **10 and 20**, capped at 25 and 50.",
+      "**In Berlin, 116117 is the number that finds you a doctor** round the clock, including the Bereitschaftspraxen that can write a certificate on a Sunday. A doctor may establish incapacity on any calendar day."
+    ]
   }
 }

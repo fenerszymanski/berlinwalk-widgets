@@ -276,7 +276,7 @@
         "items": [
           {
             "q": "Is the tour really free?",
-            "a": "The walk has no fixed tour price. To book, you pay a €2 refundable deposit per guest. We refund it after confirmed attendance or when you cancel at least 24 hours before the tour. Late cancellations and no-shows are not refunded. Your tip at the end is separate and up to you."
+            "a": "Yes. There is no fixed price and no upfront payment. You reserve a spot for free, walk with me, and decide at the end what the experience was worth to you."
           },
           {
             "q": "How does tipping work?",
@@ -292,7 +292,7 @@
           },
           {
             "q": "Do I need to book in advance?",
-            "a": "Yes. Please book online at [berlinwalk.com](https://www.berlinwalk.com). A €2 refundable deposit per guest secures your place and helps me plan the group size."
+            "a": "Yes. Please book online at [berlinwalk.com](https://www.berlinwalk.com) so I can plan the group size and you have a confirmed free spot."
           }
         ]
       }
@@ -729,7 +729,7 @@
       },
       {
         "q": "Is the BerlinWalk tour really free?",
-        "a": "**The walk is tip-based, with no fixed tour price.** Booking requires a €2 refundable deposit per guest. We refund it after confirmed attendance or cancellation at least 24 hours before; late cancellations and no-shows are not refunded. Your tip at the end is separate and up to you."
+        "a": "**Yes — it's tip-based, not free-but-not-really.** There's no fixed price and no credit card required. At the end, you tip what the experience was worth to you. Most guests tip €10–20 per person depending on group size and budget, but it's entirely up to you."
       },
       {
         "q": "What will I see on the 12-stop walking tour?",
@@ -737,7 +737,7 @@
       },
       {
         "q": "Do I need to book the walking tour in advance?",
-        "a": "**Yes — please book online** so we can plan group sizes. Booking on **berlinwalk.com** requires a €2 refundable deposit per guest. Walk-ups are welcome only if there's space, but on busy days the tour can fill up."
+        "a": "**Yes — please book your free spot online** so we can plan group sizes. It only takes a minute on **berlinwalk.com**. Booking is free and doesn't require a credit card. Walk-ups are welcome only if there's space, but on busy days the tour can fill up."
       }
     ]
   },
@@ -12625,6 +12625,44 @@
       {
         "q": "Do both parents have to sign the Berlin application?",
         "a": "Yes. The application is signed by the parent making it and also, to confirm that they have seen it, by the other parent, except where one parent has sole custody. The second parent can apply at the same time or simply declare how many months they intend to claim."
+      }
+    ]
+  },
+  "sick-leave-in-berlin": {
+    "title": "Sick Leave in Berlin - FAQ",
+    "subtitle": "How long full pay lasts, when the six weeks start again, what Krankengeld pays and how to get a certificate in Berlin when your practice is full.",
+    "items": [
+      {
+        "q": "How many days can I be sick in Berlin before I need a doctor's note?",
+        "a": "Under the Entgeltfortzahlungsgesetz the certificate is due once the incapacity lasts longer than three calendar days, and then at the latest on the next working day. Your employer is allowed to demand it earlier, including from the first day, and many employment contracts in Berlin do exactly that. Telling your employer that you are ill is a separate duty and it applies from the first morning, before your shift starts."
+      },
+      {
+        "q": "Do I get six weeks of full pay every time I am ill?",
+        "a": "Only for a new illness. For one and the same illness a fresh six weeks opens only if you were free of that illness for at least six months before the new incapacity, or if twelve months have passed since the first day you were off with it. Between those dates every day off with that illness comes out of the same 42 calendar days. A different diagnosis has its own 42 days once the first entitlement is finished."
+      },
+      {
+        "q": "How much is Krankengeld in 2026?",
+        "a": "Krankengeld is 70 percent of your gross pay, capped at 90 percent of your net, and capped again by the contribution ceiling of 5,812.50 euros a month. That gives a maximum of 135.63 euros a day, or 4,068.90 euros for a 30-day month before deductions. Your own share of pension, unemployment and long-term care contributions comes off that, roughly 12.4 percent, so the highest amount that actually lands is around 3,560 euros a month. No health insurance contribution is charged on Krankengeld."
+      },
+      {
+        "q": "How long does Krankengeld last?",
+        "a": "For one and the same illness it runs for at most 78 weeks within any three years, counted from the day the incapacity began, and the six weeks of continued pay from your employer count towards that total. An additional illness arriving during the run does not extend it. A new three-year period only opens a new claim if you were free of that illness for six months and were working or available for work in the meantime."
+      },
+      {
+        "q": "Can I get a sick note by telephone in Germany?",
+        "a": "Yes, for up to five calendar days, as long as the practice already knows you from an earlier treatment, the illness has no severe symptoms and a video consultation is not the better route. A follow-up certificate by telephone only works when the first one was issued in person. The coalition agreed in July 2026 to abolish the telephone route and to require a certificate from the first day, but no law had been passed when this page was last checked, so the current rules still apply."
+      },
+      {
+        "q": "Where can I get a sick note in Berlin at the weekend?",
+        "a": "Call 116117, the patient service of the Kassenarztliche Vereinigung Berlin. It is free for everyone in statutory insurance, it runs round the clock, and it covers both the Arztlicher Bereitschaftsdienst and the appointment service. The Bereitschaftspraxen reached through that number can issue a certificate, and a doctor may establish incapacity on any calendar day, Sundays and public holidays included."
+      },
+      {
+        "q": "How many days can I take off for a sick child in 2026?",
+        "a": "In calendar year 2026 the entitlement is 15 working days per child per parent, capped at 35 days per parent across all children, and 30 per child for single parents, capped at 70. The payment is 90 percent of the net pay you lose and your employer owes you unpaid release from work for those days. From 1 January 2027 the figures fall back to 10 and 20 working days per child, capped at 25 and 50, unless the law is extended again."
+      },
+      {
+        "q": "What happens if I fall ill during my annual leave?",
+        "a": "Days of incapacity proved by a medical certificate are not counted against your annual leave, so you get them back. That only works with a certificate, which is why it is worth seeing a doctor even for a short spell during a holiday. Being ill is not in itself protection against dismissal in Germany, so do not assume a certificate changes anything about notice."
       }
     ]
   }

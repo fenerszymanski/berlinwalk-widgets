@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Berlin Sick Pay Clock</title>
+<link rel="stylesheet" href="../css/brand.css">
+<style>
+  :root {
+    --green: #1B5E20;
+    --deep: #123D18;
+    --yellow: #FFE600;
+    --lime: #7CB342;
+    --soft: #C5E1A5;
+    --cream: #FAFAF5;
+    --ink: #212121;
+    --muted: #5a665b;
+    --line: rgba(27, 94, 32, .18);
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--cream); color: var(--ink); }
+  .sc { max-width: 780px; margin: 0 auto; padding: 14px 12px 16px; }
+
+  .sc-head h2 { font-size: 1.06rem; margin: 0 0 3px; color: var(--green); }
+  .sc-head p { margin: 0; font-size: .78rem; color: var(--muted); line-height: 1.5; }
+
+  .sc-box { margin-top: 12px; padding: 11px 12px; background: #fff; border: 1px solid var(--line); border-radius: 10px; }
+  .sc-box h3 { font-size: .63rem; letter-spacing: .07em; text-transform: uppercase; color: var(--deep); margin: 0 0 8px; }
+  .sc-fields { display: flex; flex-wrap: wrap; gap: 10px 12px; align-items: flex-end; }
+  .sc-fields > div { flex: 1 1 140px; min-width: 126px; }
+  .sc-fields > .sc-act { flex: 0 0 auto; min-width: 0; }
+  label { font-size: .61rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--deep); display: block; margin-bottom: 5px; }
+  input {
+    font-family: inherit; font-size: .9rem; font-weight: 700; color: var(--deep);
+    width: 100%; padding: 7px 8px; border: 1px solid var(--green); border-radius: 8px; background: #fff;
+  }
+  input:focus-visible, button:focus-visible { outline: 3px solid var(--yellow); outline-offset: 1px; }
+
+  .sc-act button {
+    font-family: inherit; font-size: .74rem; font-weight: 700; cursor: pointer; white-space: nowrap;
+    padding: 9px 14px; border-radius: 8px; border: 1px solid var(--green); background: var(--green); color: #fff;
+  }
+  .sc-warn { margin: 8px 2px 0; font-size: .68rem; color: #8a3b12; line-height: 1.5; }
+  .sc-warn:empty { display: none; }
+
+  .sc-rows { list-style: none; margin: 9px 0 0; padding: 0; display: grid; gap: 6px; }
+  .sc-rows li { display: flex; align-items: center; gap: 8px; padding: 7px 8px 7px 10px; border: 1px solid var(--line); border-radius: 9px; background: var(--cream); }
+  .sc-rows .nm { flex: 1 1 auto; font-size: .74rem; font-weight: 700; color: var(--deep); line-height: 1.35; }
+  .sc-rows .nm small { display: block; font-weight: 500; font-size: .63rem; color: var(--muted); }
+  .sc-rows .rm {
+    flex: 0 0 auto; font-family: inherit; font-size: .85rem; line-height: 1; cursor: pointer;
+    width: 26px; height: 26px; border-radius: 7px; border: 1px solid var(--line); background: #fff; color: var(--muted);
+  }
+  .sc-empty { margin: 9px 0 0; font-size: .72rem; color: var(--muted); line-height: 1.5; }
+  .sc-empty:empty { display: none; }
+
+  .sc-chart { margin-top: 12px; background: #fff; border: 1px solid var(--line); border-radius: 10px; padding: 10px 6px 6px; }
+  .sc-chart svg { display: block; width: 100%; height: auto; }
+  .sc-chart text { font-family: 'Montserrat', sans-serif; }
+
+  .sc-legend { display: flex; flex-wrap: wrap; gap: 6px 14px; margin: 9px 6px 2px; font-size: .66rem; color: var(--muted); }
+  .sc-legend span { display: inline-flex; align-items: center; gap: 5px; }
+  .sc-key { width: 15px; height: 10px; border-radius: 2px; display: inline-block; border: 1px solid rgba(0,0,0,.14); }
+
+  .sc-out { margin-top: 12px; padding: 13px 14px; border-radius: 10px; background: var(--deep); color: #fff; }
+  .sc-out .big { display: block; font-size: 1.28rem; font-weight: 700; line-height: 1.15; color: var(--yellow); }
+  .sc-out .cap { display: block; font-size: .61rem; letter-spacing: .07em; text-transform: uppercase; color: rgba(255,255,255,.66); margin-top: 3px; }
+  .sc-out .run { display: block; margin-top: 11px; font-size: 1.02rem; font-weight: 700; color: #fff; line-height: 1.35; }
+  .sc-out .run b { color: var(--yellow); }
+  .sc-out p { margin: 9px 0 0; font-size: .78rem; line-height: 1.6; color: rgba(255,255,255,.92); }
+  .sc-out .law { font-size: .65rem; color: rgba(255,255,255,.6); margin-top: 9px; }
+
+  .sc-foot { margin: 11px 2px 0; font-size: .68rem; color: var(--muted); line-height: 1.6; }
+  .sc-foot b { color: var(--deep); }
+
+  @media (max-width: 430px) {
+    .sc-fields > div { flex: 1 1 100%; }
+    .sc-act button { width: 100%; }
+  }
+</style>
+</head>
+<body>
+<div class="sc">
+  <div class="sc-head">
+    <h2>Berlin sick pay clock</h2>
+    <p>Six weeks of full pay sounds like six weeks every time. It is not. For one and the same illness the clock keeps running until enough calendar has passed. Add every spell you have been off with that illness and the board lays them on one timeline, counts the 42 days you have spent, and marks the day the six weeks start again.</p>
+  </div>
+
+  <div class="sc-box">
+    <h3>Add a spell off work with the same illness</h3>
+    <div class="sc-fields">
+      <div>
+        <label for="sc-from">First day off</label>
+        <input type="date" id="sc-from">
+      </div>
+      <div>
+        <label for="sc-to">Last day off</label>
+        <input type="date" id="sc-to">
+      </div>
+      <div class="sc-act">
+        <button type="button" id="sc-add">Add this spell</button>
+      </div>
+    </div>
+    <p class="sc-warn" id="sc-warn"></p>
+    <ul class="sc-rows" id="sc-rows"></ul>
+    <p class="sc-empty" id="sc-empty"></p>
+  </div>
+
+  <div class="sc-box">
+    <h3>What the money step looks like</h3>
+    <div class="sc-fields">
+      <div>
+        <label for="sc-gross">Your monthly gross pay, euros</label>
+        <input type="number" id="sc-gross" min="0" max="30000" step="50" value="3800">
+      </div>
+    </div>
+  </div>
+
+  <div class="sc-chart">
+    <svg id="sc-svg" viewBox="0 0 720 268" role="img" aria-label="Timeline plotting spells off work against the six weeks of continued pay and the date the entitlement starts again"></svg>
+  </div>
+  <div class="sc-legend">
+    <span><i class="sc-key" style="background:#1B5E20"></i> Full pay from the employer</span>
+    <span><i class="sc-key" style="background:#FFE600"></i> Krankengeld from the Kasse</span>
+    <span><i class="sc-key" style="background:#C5E1A5"></i> The 42 days still unspent</span>
+  </div>
+
+  <div class="sc-out" id="sc-out"></div>
+  <p class="sc-foot" id="sc-foot"></p>
+</div>
+
+<script src="../js/brand.js"></script>
+<script>
+(function () {
+  var DAY = 86400000;
+  var FULL_PAY_DAYS = 42;              // six weeks, EntgFG section 3
+  var KRANKENGELD_WEEKS = 78;          // SGB V section 48
+  var BBG_MONTH_2026 = 5812.50;        // contribution ceiling, health insurance, 2026
+  var KG_DAILY_CAP_2026 = 135.63;      // 70 per cent of 69,750 / 360
+  var CONTRIB_SHARE = 0.124;           // pension 9.3, unemployment 1.3, care 1.8
+
+  var spells = [];
+  var nextId = 1;
+
+  var fromEl = document.getElementById('sc-from');
+  var toEl = document.getElementById('sc-to');
+  var addEl = document.getElementById('sc-add');
+  var warnEl = document.getElementById('sc-warn');
+  var rowsEl = document.getElementById('sc-rows');
+  var emptyEl = document.getElementById('sc-empty');
+  var grossEl = document.getElementById('sc-gross');
+  var svgEl = document.getElementById('sc-svg');
+  var outEl = document.getElementById('sc-out');
+  var footEl = document.getElementById('sc-foot');
+
+  function midnight(d) { return new Date(d.getFullYear(), d.getMonth(), d.getDate()); }
+  function today() { return midnight(new Date()); }
+  function parseDate(v) {
+    if (!v) return null;
+    var p = v.split('-');
+    if (p.length !== 3) return null;
+    var d = new Date(Number(p[0]), Number(p[1]) - 1, Number(p[2]));
+    return isNaN(d.getTime()) ? null : d;
+  }
+  function iso(d) {
+    return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
+  }
+  function addDays(d, n) { return new Date(d.getFullYear(), d.getMonth(), d.getDate() + n); }
+  function addMonths(d, n) {
+    var target = new Date(d.getFullYear(), d.getMonth() + n, 1);
+    var last = new Date(target.getFullYear(), target.getMonth() + 1, 0).getDate();
+    return new Date(target.getFullYear(), target.getMonth(), Math.min(d.getDate(), last));
+  }
+  function spanDays(a, b) { return Math.round((b - a) / DAY) + 1; }
+  var MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+  function pretty(d) { return d.getDate() + ' ' + MONTHS[d.getMonth()] + ' ' + d.getFullYear(); }
+  function euros(n) { return '€' + Math.round(n).toLocaleString('en-GB'); }
+
+  /**
+   * Walk the spells in order and apply EntgFG section 3 paragraph 1 sentence 2.
+   * A fresh six weeks only opens when the reader was free of that illness for
+   * six months, or when twelve months have passed since the first day of the
+   * run the current entitlement belongs to.
+   */
+  function model() {
+    var sorted = spells.slice().sort(function (a, b) { return a.from - b.from; });
+    var anchor = null;         // first day of the current entitlement run
+    var used = 0;              // full-pay days already spent inside it
+    var prevEnd = null;
+    var resets = [];
+    var laid = [];
+
+    for (var i = 0; i < sorted.length; i++) {
+      var s = sorted[i];
+      var reopened = false;
+      if (anchor === null) {
+        anchor = s.from;
+      } else if (s.from > addMonths(prevEnd, 6) || s.from >= addMonths(anchor, 12)) {
+        anchor = s.from;
+        used = 0;
+        reopened = true;
+        resets.push(s.from);
+      }
+      var days = spanDays(s.from, s.to);
+      var atFullPay = Math.max(0, Math.min(days, FULL_PAY_DAYS - used));
+      used += atFullPay;
+      laid.push({
+        id: s.id, from: s.from, to: s.to, days: days,
+        fullPay: atFullPay, sickPay: days - atFullPay, reopened: reopened,
+      });
+      if (prevEnd === null || s.to > prevEnd) prevEnd = s.to;
+    }
+
+    var left = Math.max(0, FULL_PAY_DAYS - used);
+    var bySixMonths = prevEnd ? addDays(addMonths(prevEnd, 6), 1) : null;
+    var byTwelveMonths = anchor ? addMonths(anchor, 12) : null;
+    var resetOn = null, resetRoute = '';
+    if (bySixMonths && byTwelveMonths) {
+      if (bySixMonths <= byTwelveMonths) { resetOn = bySixMonths; resetRoute = 'six clear months since your last day off'; }
+      else { resetOn = byTwelveMonths; resetRoute = 'twelve months since the first day of this run'; }
+    }
+    var horizon = anchor ? addDays(anchor, KRANKENGELD_WEEKS * 7 - 1) : null;
+
+    return {
+      laid: laid, used: used, left: left, anchor: anchor, lastEnd: prevEnd,
+      resetOn: resetOn, resetRoute: resetRoute, horizon: horizon,
+      bySixMonths: bySixMonths, byTwelveMonths: byTwelveMonths, resets: resets,
+    };
+  }
+
+  function money() {
+    var gross = Number(grossEl.value) || 0;
+    var capped = Math.min(gross, BBG_MONTH_2026);
+    var daily = Math.min(capped / 30 * 0.70, KG_DAILY_CAP_2026);
+    return { gross: gross, capped: capped, daily: daily, monthly: daily * 30, net: daily * 30 * (1 - CONTRIB_SHARE) };
+  }
+
+  function el(name, attrs, text) {
+    var n = document.createElementNS('http://www.w3.org/2000/svg', name);
+    for (var k in attrs) { if (Object.prototype.hasOwnProperty.call(attrs, k)) n.setAttribute(k, attrs[k]); }
+    if (text !== undefined) n.textContent = text;
+    return n;
+  }
+
+  function drawChart(m) {
+    while (svgEl.firstChild) { svgEl.removeChild(svgEl.firstChild); }
+    var narrow = (window.innerWidth || 740) < 520;
+    var VW = narrow ? 360 : 720;
+    var L = narrow ? 8 : 12, R = VW - L, W = R - L;
+    var F = narrow ? 1.3 : 1;               // type scale, so a phone reads the same chart
+    var perRow = narrow ? 14 : 42;
+    var cellRows = FULL_PAY_DAYS / perRow;
+
+    var laneTitleY = Math.round(20 * (narrow ? 1.3 : 1));
+    var monthY = laneTitleY + Math.round(38 * (narrow ? 1.1 : 1));
+    var laneY = monthY + Math.round(34 * (narrow ? 1.1 : 1));
+    var laneH = narrow ? 34 : 28;
+    var axisY = laneY + laneH + 6;
+    var cellTitleY = axisY + Math.round(48 * (narrow ? 1.2 : 1));
+    var cellTop = cellTitleY + 10;
+    var cellH = narrow ? 22 : 30;
+    var gap = narrow ? 2.6 : 2.2;
+    var rowGap = 5;
+    var cellsBottom = cellTop + cellRows * cellH + (cellRows - 1) * rowGap;
+    var VH = cellsBottom + Math.round(40 * (narrow ? 1.25 : 1));
+    svgEl.setAttribute('viewBox', '0 0 ' + VW + ' ' + VH);
+
+    if (!m.anchor) {
+      svgEl.setAttribute('viewBox', '0 0 ' + VW + ' 80');
+      svgEl.appendChild(el('rect', { x: L, y: 18, width: W, height: 44, rx: 8, fill: '#FAFAF5', stroke: 'rgba(27,94,32,.18)' }));
+      svgEl.appendChild(el('text', { x: VW / 2, y: 45, 'text-anchor': 'middle', 'font-size': 13 * F, fill: '#5a665b' },
+        'Add one spell and the calendar draws itself.'));
+      return;
+    }
+
+    var now = today();
+    var start = addDays(m.anchor, -12);
+    var endCandidates = [m.lastEnd, m.resetOn, now];
+    var end = endCandidates[0];
+    for (var c = 1; c < endCandidates.length; c++) { if (endCandidates[c] > end) end = endCandidates[c]; }
+    end = addDays(end, 18);
+    var total = Math.max(1, (end - start) / DAY);
+    function x(d) { return L + ((d - start) / DAY) / total * W; }
+
+    svgEl.appendChild(el('text', { x: L, y: laneTitleY, 'font-size': 11 * F, 'font-weight': 700, fill: '#123D18' },
+      'Every spell with this one illness'));
+
+    // Month grid, so the reader reads real calendar distance rather than a sketch.
+    var months = 0;
+    var g = new Date(start.getFullYear(), start.getMonth(), 1);
+    while (g <= end) { months += 1; g = new Date(g.getFullYear(), g.getMonth() + 1, 1); }
+    var everyOther = narrow && months > 6;
+    g = new Date(start.getFullYear(), start.getMonth(), 1);
+    var idx = 0;
+    while (g <= end) {
+      var gx = x(g);
+      if (gx >= L && gx <= R) {
+        svgEl.appendChild(el('line', { x1: gx, y1: monthY + 4, x2: gx, y2: axisY, stroke: 'rgba(27,94,32,.13)', 'stroke-width': 1 }));
+        if (!everyOther || idx % 2 === 0) {
+          svgEl.appendChild(el('text', { x: gx + 3, y: monthY, 'font-size': 9.5 * F, fill: '#5a665b' },
+            MONTHS[g.getMonth()]));
+        }
+      }
+      idx += 1;
+      g = new Date(g.getFullYear(), g.getMonth() + 1, 1);
+    }
+    svgEl.appendChild(el('line', { x1: L, y1: axisY, x2: R, y2: axisY, stroke: 'rgba(27,94,32,.35)', 'stroke-width': 1.2 }));
+
+    // The spells themselves, split where the employer stops and the Kasse starts.
+    for (var i = 0; i < m.laid.length; i++) {
+      var s = m.laid[i];
+      var bx = x(s.from);
+      var bw = Math.max(2.5, x(addDays(s.to, 1)) - bx);
+      var fullW = s.days ? bw * (s.fullPay / s.days) : 0;
+      if (fullW > 0) svgEl.appendChild(el('rect', { x: bx, y: laneY, width: fullW, height: laneH, rx: 3, fill: '#1B5E20' }));
+      if (bw - fullW > 0.4) svgEl.appendChild(el('rect', { x: bx + fullW, y: laneY, width: bw - fullW, height: laneH, rx: 3, fill: '#FFE600', stroke: '#1B5E20', 'stroke-width': .7 }));
+      if (bw > 13 * F) svgEl.appendChild(el('text', { x: bx + bw / 2, y: laneY + laneH * .64, 'text-anchor': 'middle', 'font-size': 10 * F, 'font-weight': 700, fill: fullW > bw / 2 ? '#fff' : '#123D18' }, String(s.days) + 'd'));
+      if (s.reopened) {
+        svgEl.appendChild(el('line', { x1: bx, y1: laneY - 11, x2: bx, y2: axisY, stroke: '#7CB342', 'stroke-width': 2 }));
+        svgEl.appendChild(el('text', { x: Math.min(bx + 4, R - 52 * F), y: laneY - 14, 'font-size': 9.5 * F, 'font-weight': 700, fill: '#33691E' }, 'clock reset'));
+      }
+    }
+
+    // Today, and the day the six weeks open again.
+    if (now >= start && now <= end) {
+      svgEl.appendChild(el('line', { x1: x(now), y1: monthY + 4, x2: x(now), y2: axisY + 8, stroke: '#212121', 'stroke-width': 1.4, 'stroke-dasharray': '3 3' }));
+      svgEl.appendChild(el('text', { x: Math.min(x(now) + 4, R - 26 * F), y: axisY + 18 * F, 'font-size': 9.5 * F, 'font-weight': 700, fill: '#212121' }, 'today'));
+    }
+    if (m.resetOn && m.resetOn >= start && m.resetOn <= end) {
+      svgEl.appendChild(el('line', { x1: x(m.resetOn), y1: monthY + 4, x2: x(m.resetOn), y2: axisY + 8, stroke: '#1B5E20', 'stroke-width': 1.6, 'stroke-dasharray': '6 4' }));
+      svgEl.appendChild(el('text', { x: Math.max(L, Math.min(x(m.resetOn) - 2, R - (narrow ? 96 : 84) * F)), y: laneTitleY + 17 * F, 'font-size': 10 * F, 'font-weight': 700, fill: '#1B5E20' }, narrow ? '42 days again' : 'six weeks reopen'));
+    }
+
+    // The 42 days as 42 real boxes, so the reader sees the budget, not a number.
+    svgEl.appendChild(el('text', { x: L, y: cellTitleY, 'font-size': 11 * F, 'font-weight': 700, fill: '#123D18' },
+      'The 42 days of full pay, one box a day'));
+    var cellW = (W - gap * (perRow - 1)) / perRow;
+    for (var k = 0; k < FULL_PAY_DAYS; k++) {
+      var col = k % perRow, row = Math.floor(k / perRow);
+      svgEl.appendChild(el('rect', {
+        x: L + col * (cellW + gap), y: cellTop + row * (cellH + rowGap), width: cellW, height: cellH, rx: 2.4,
+        fill: k < m.used ? '#1B5E20' : '#C5E1A5',
+        stroke: k === FULL_PAY_DAYS - 1 ? '#123D18' : 'rgba(27,94,32,.25)', 'stroke-width': k === FULL_PAY_DAYS - 1 ? 1.2 : .6,
+      }));
+    }
+    svgEl.appendChild(el('text', { x: L, y: cellsBottom + 15 * F, 'font-size': 10 * F, 'font-weight': 700, fill: '#1B5E20' },
+      String(m.used) + ' spent'));
+    svgEl.appendChild(el('text', { x: R, y: cellsBottom + 15 * F, 'text-anchor': 'end', 'font-size': 10 * F, 'font-weight': 700, fill: m.left ? '#33691E' : '#8a3b12' },
+      m.left ? String(m.left) + ' left' : (narrow ? 'Kasse pays from here' : 'the Kasse pays from here')));
+    svgEl.appendChild(el('text', { x: L, y: cellsBottom + 30 * F, 'font-size': 9.5 * F, fill: '#5a665b' },
+      narrow ? 'Calendar days, weekends counted.' : 'Calendar days, not working days. Weekends inside a spell count.'));
+  }
+
+  function rowLabel(s) {
+    return pretty(s.from) + ' to ' + pretty(s.to);
+  }
+
+  function render() {
+    var m = model();
+    var mo = money();
+
+    rowsEl.innerHTML = '';
+    for (var i = 0; i < m.laid.length; i++) {
+      (function (s) {
+        var li = document.createElement('li');
+        var nm = document.createElement('span');
+        nm.className = 'nm';
+        var sub = s.sickPay
+          ? s.fullPay + ' at full pay, ' + s.sickPay + ' on Krankengeld'
+          : s.days + ' calendar days, all at full pay';
+        nm.innerHTML = rowLabel(s) + '<small>' + sub + (s.reopened ? '. This one opened a fresh six weeks.' : '') + '</small>';
+        var rm = document.createElement('button');
+        rm.type = 'button';
+        rm.className = 'rm';
+        rm.setAttribute('aria-label', 'Remove the spell from ' + rowLabel(s));
+        rm.textContent = '×';
+        rm.addEventListener('click', function () {
+          for (var j = 0; j < spells.length; j++) {
+            if (spells[j].id === s.id) { spells.splice(j, 1); break; }
+          }
+          render();
+        });
+        li.appendChild(nm);
+        li.appendChild(rm);
+        rowsEl.appendChild(li);
+      })(m.laid[i]);
+    }
+    emptyEl.textContent = m.laid.length ? '' : 'Nothing on the board yet. Put in the first and last day you were signed off and press add.';
+
+    drawChart(m);
+
+    if (!m.anchor) {
+      outEl.innerHTML = '<span class="big">42 days</span><span class="cap">Full pay waiting, if this illness is new to you</span>'
+        + '<p>Add the spells you already had and the number above drops to what is actually left.</p>';
+      footEl.innerHTML = 'Statutory limits under <b>EntgFG section 3</b> and <b>SGB V sections 46 to 48</b>, on the 2026 figures, checked on 20 September 2026. Your contract or collective agreement can be kinder, never harsher.';
+      return;
+    }
+
+    var stillSpending = m.left > 0;
+    var resetLine = m.resetOn
+      ? 'Six weeks open again on <b>' + pretty(m.resetOn) + '</b>, by ' + m.resetRoute + '.'
+      : '';
+    var kgLine = 'If you are signed off after that, the Kasse pays about <b>' + euros(mo.monthly)
+      + '</b> a month before contributions, roughly <b>' + euros(mo.net) + '</b> after them';
+    if (mo.gross > BBG_MONTH_2026) {
+      kgLine += '. Pay above ' + euros(BBG_MONTH_2026) + ' a month does not count, so the ceiling of '
+        + euros(KG_DAILY_CAP_2026 * 30) + ' a month applies to you';
+    }
+    kgLine += '.';
+
+    outEl.innerHTML =
+      '<span class="big">' + m.left + ' of 42 days</span>'
+      + '<span class="cap">Full pay left for this illness</span>'
+      + '<span class="run">' + (stillSpending
+        ? 'Sign off tomorrow and your employer keeps paying for ' + m.left + ' more day' + (m.left === 1 ? '' : 's') + '.'
+        : 'Sign off tomorrow and the money steps down to Krankengeld on day one.') + '</span>'
+      + '<p>' + resetLine + '</p>'
+      + '<p>' + kgLine + '</p>'
+      + (m.horizon ? '<p class="law">Krankengeld for this one illness runs out on ' + pretty(m.horizon)
+        + ', 78 weeks from ' + pretty(m.anchor) + ', and the six weeks of full pay count towards it.</p>' : '');
+
+    footEl.innerHTML = 'Two dates decide the reset and the earlier one wins: <b>' + pretty(m.bySixMonths)
+      + '</b> is six clear months after your last day off, <b>' + pretty(m.byTwelveMonths)
+      + '</b> is twelve months after the first day of this run. A different illness starts its own 42 days on the same day, '
+      + 'so what matters is the diagnosis, not how ill you feel. Statutory limits under <b>EntgFG section 3</b> and '
+      + '<b>SGB V sections 46 to 48</b>, on the 2026 figures, checked on 20 September 2026. This is the statutory floor, not advice on your own contract, and the Kasse works out the exact euro.';
+  }
+
+  function commit() {
+    var a = parseDate(fromEl.value);
+    var b = parseDate(toEl.value);
+    if (!a || !b) { warnEl.textContent = 'Put a date in both boxes first.'; return; }
+    if (b < a) { warnEl.textContent = 'The last day off cannot come before the first one.'; return; }
+    if (spanDays(a, b) > 1095) { warnEl.textContent = 'That is longer than three years. Check the dates.'; return; }
+    warnEl.textContent = '';
+    spells.push({ id: nextId, from: a, to: b });
+    nextId += 1;
+    fromEl.value = iso(addDays(b, 30));
+    toEl.value = iso(addDays(b, 33));
+    render();
+  }
+
+  addEl.addEventListener('click', commit);
+  grossEl.addEventListener('input', render);
+  var wasNarrow = (window.innerWidth || 740) < 520;
+  window.addEventListener('resize', function () {
+    var isNarrow = (window.innerWidth || 740) < 520;
+    if (isNarrow !== wasNarrow) { wasNarrow = isNarrow; render(); }
+  });
+
+  // A worked case on load: a bad chest infection in the spring, the same thing
+  // back a few months later, well inside the six months, so nothing restarted.
+  var seedA = addMonths(today(), -6);
+  var seedB = addMonths(today(), -2);
+  spells.push({ id: nextId++, from: seedA, to: addDays(seedA, 15) });
+  spells.push({ id: nextId++, from: seedB, to: addDays(seedB, 13) });
+  fromEl.value = iso(addDays(today(), -3));
+  toEl.value = iso(addDays(today(), 11));
+  render();
+})();
+</script>
+</body>
+</html>

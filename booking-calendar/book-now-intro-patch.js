@@ -3,33 +3,27 @@
   var isBookingService = path.indexOf('/book-berlin-walking-tour/') === 0;
   var isBookingForm = path.indexOf('/booking-form') === 0;
   if (!isBookingService && !isBookingForm) return;
-  var RUNTIME_KEY = '__bwBookNowIntroPatchDepositUiSafe20260920';
+  var RUNTIME_KEY = '__bwBookNowIntroPatch20260801b';
   if (window[RUNTIME_KEY]) return;
   window[RUNTIME_KEY] = true;
-  // The native loader can serve a cached prior release. Let this pinned UI
-  // revision take over, and prevent a later legacy copy from replacing it.
-  window.__bwBookNowIntroPatchDeposit20260920 = true;
-  window.__bwBookNowIntroPatchDepositUi20260920 = true;
-  window.__bwBookNowIntroPatch20260801b = true;
 
   var STYLE_ID = 'bw-book-now-intro-patch-css-20260801b';
   var NUDGE_ID = 'bw-booking-calendar-next-nudge';
   var FORM_CARD_ID = 'bw-booking-form-trust-card';
-  var DEPOSIT_FORM_ID = 'form-1ab4472a-412d-42ae-a3f6-0da618ab0367';
   var TERMS_HELPER_ID = 'bw-booking-terms-helper';
   var FAQ_ID = 'bw-booking-management-faq';
   var INTRO_VERSION = 'booking-service-stage-20260801b';
-  var FORM_VERSION = 'booking-form-readability-20260920';
+  var FORM_VERSION = 'booking-form-stage-20260801b';
   var FAQ_VERSION = 'booking-management-faq-20260815a';
   var TERMS_LABEL = 'I agree to the free reservation terms listed below.';
   var INTRO_HTML = [
     "<div class='bw-cal-intro' data-bw-booking-intro-version='" + INTRO_VERSION + "'>",
     "<span class='bw-cal-intro-kicker'>Book the tour</span>",
-    '<h1>Reserve your place</h1>',
-    "<p>Pay a €2 refundable reservation deposit per guest now. We refund it after attendance is confirmed, or if you cancel at least 24 hours before the tour. The walk is tip-based and your tip is separate.</p>",
+    '<h1>Reserve your free spot</h1>',
+    "<p>No upfront payment. My walk takes about 2 hours, is tip-based at the end, and starts at the World Clock on Alexanderplatz.</p>",
     "<div class='bw-cal-intro-chips' aria-label='Tour booking details'>",
-    "<span class='bw-cal-intro-chip'>€2 refundable deposit per guest</span>",
-    "<span class='bw-cal-intro-chip'>Tip separately after the walk</span>",
+    "<span class='bw-cal-intro-chip'>Free reservation</span>",
+    "<span class='bw-cal-intro-chip'>No payment now</span>",
     "<span class='bw-cal-intro-chip'>About 2 hours</span>",
     "<span class='bw-cal-intro-chip'>World Clock meeting point</span>",
     "<span class='bw-cal-intro-chip'>Guided by Yusuf</span>",
@@ -117,24 +111,6 @@
       '@media(max-width:750px){html.bw-booking-funnel-active .bw-booking-stage-section{min-height:calc(100svh - 94px)!important}html.bw-booking-funnel-active .bw-booking-stage-inner{padding:20px 0!important}html.bw-booking-funnel-active .bw-booking-stage-wrap{width:100%!important}}',
       '@media(max-width:640px){bw-booking-calendar .bw-cal-standalone{padding:18px 16px 26px}bw-booking-calendar .bw-cal-intro h1{font-size:30px;line-height:1.05}bw-booking-calendar .bw-cal-intro p{font-size:14px}bw-booking-calendar .bw-cal-intro-chip{font-size:10.5px;min-height:28px;padding:6px 9px}bw-booking-calendar .bw-cal-booking-help{padding:9px 10px}bw-booking-calendar .bw-cal-booking-help p{font-size:11.5px}html.bw-booking-funnel-active .bw-booking-management-faq{margin:14px 12px 28px;padding:15px 14px;width:calc(100% - 24px)}html.bw-booking-funnel-active .bw-booking-management-faq h2{font-size:21px}html.bw-booking-funnel-active .bw-booking-management-faq summary{font-size:14px}html.bw-booking-funnel-active .bw-booking-management-faq details p{font-size:12px}bw-booking-calendar .bw-booking-progress ol,#'+FORM_CARD_ID+' .bw-booking-progress ol{gap:5px}bw-booking-calendar .bw-booking-progress li,#'+FORM_CARD_ID+' .bw-booking-progress li{padding:4px 6px}html body #'+FORM_CARD_ID+'{margin-bottom:12px;padding:11px 11px}html body #'+FORM_CARD_ID+'>strong{font-size:16px;margin-top:8px}html body #'+FORM_CARD_ID+' p{font-size:11.5px!important}#'+TERMS_HELPER_ID+'{font-size:11.5px;margin:7px 0 4px 32px;padding:8px 10px}html.bw-booking-form-trust-active .bw-booking-form-stack{margin-bottom:6px!important}html.bw-booking-form-trust-active .bw-booking-details-stack,html.bw-booking-form-trust-active .bw-booking-submit-stack{margin-top:6px!important}}',
       '@media(min-width:641px){#' + NUDGE_ID + '{display:none!important}}',
-      'html.bw-deposit-form-ui #'+FORM_CARD_ID+'{border-radius:10px;padding:16px 18px;margin-bottom:8px}',
-      'html.bw-deposit-form-ui #'+FORM_CARD_ID+'>strong{font-size:20px;line-height:1.3;margin:16px 0 12px}',
-      'html.bw-deposit-form-ui body #'+FORM_CARD_ID+' p{font-size:14px!important;font-weight:400!important;line-height:1.55!important}',
-      'html.bw-deposit-form-ui body #'+FORM_CARD_ID+' p+p{margin-top:10px!important}',
-      'html.bw-deposit-form-ui #'+FORM_CARD_ID+' p strong{font-weight:750;color:#183d22}',
-      'html.bw-deposit-form-ui #'+FORM_CARD_ID+' .bw-deposit-now{background:#eaf3e6;border-radius:6px;padding:10px 12px}',
-      'html.bw-deposit-form-ui #'+FORM_CARD_ID+' .bw-deposit-tip{border-top:1px solid #cfe4c8;padding-top:10px}',
-      'html.bw-deposit-form-ui [data-hook="form-field-form_field_f9f6"] p{font-size:15px!important;line-height:1.6!important;font-weight:400!important}',
-      'html.bw-deposit-form-ui [data-hook="form-field-form_field_f9f6"] strong{font-weight:750!important}',
-      'html.bw-deposit-form-ui [data-hook="form-field-form_field_f9f6"] [data-hook="checkbox-core"]{align-items:flex-start;padding:12px;background:#f4f7ef;border-radius:8px}',
-      'html.bw-deposit-form-ui .bw-form-compact-shell{padding-top:20px!important}',
-      'html.bw-deposit-form-ui .bw-form-compact-heading{margin-bottom:24px!important}',
-      'html.bw-deposit-form-ui .bw-form-compact-back{margin-bottom:20px!important;padding-bottom:0!important}',
-      'html.bw-deposit-form-ui [data-hook="booking-details-book-now-cta"]{min-height:48px;font-family:Montserrat,Arial,sans-serif;font-weight:700;border-radius:6px}',
-      '#bw-booking-payment-trust{margin:14px 0 0;padding:12px 10px;border:1px solid #dce5da;border-radius:8px;background:#f5f8f1;text-align:center;color:#24442b;font:13px/1.5 Montserrat,Arial,sans-serif}',
-      '#bw-booking-payment-trust .bw-secure-line{display:flex;align-items:center;justify-content:center;gap:6px;font-weight:700}',
-      '#bw-booking-payment-trust p{margin:5px 0 0;font-size:12px;line-height:1.5}',
-      '@media(max-width:640px){html.bw-deposit-form-ui #'+FORM_CARD_ID+'{padding:14px}html.bw-deposit-form-ui .bw-form-compact-shell{padding-top:12px!important}html.bw-deposit-form-ui .bw-form-compact-heading{margin-bottom:18px!important}html.bw-deposit-form-ui .bw-form-compact-back{margin-bottom:14px!important}}',
     ].join('');
     if (isNew) document.head.appendChild(style);
   }
@@ -190,7 +166,7 @@
     nudge.setAttribute('role', 'status');
     nudge.setAttribute('aria-live', 'polite');
     nudge.innerHTML = [
-      '<div><strong>Time selected</strong><span>Continue to the €2 per guest deposit form.</span></div>',
+      '<div><strong>Time selected</strong><span>Continue to the free reservation form.</span></div>',
       '<button type="button">Continue</button>',
     ].join('');
     document.body.appendChild(nudge);
@@ -231,23 +207,13 @@
     if (!window.customElements || !customElements.get('bw-booking-calendar')) return false;
     var Ctor = customElements.get('bw-booking-calendar');
     var proto = Ctor && Ctor.prototype;
-    if (!proto) return false;
-    if (!proto.__bwIntroHrefPatch && typeof proto._bookingHref === 'function') {
-      var originalHref = proto._bookingHref;
-      proto._bookingHref = function (slot) {
-        return preserveAttribution(originalHref.call(this, slot));
-      };
-      proto.__bwIntroHrefPatch = true;
-    }
-    if (!proto.__bwDepositCtaLabelPatch && typeof proto._ctaLabel === 'function') {
-      var originalLabel = proto._ctaLabel;
-      proto._ctaLabel = function () {
-        var label = originalLabel.apply(this, arguments);
-        return label === 'Continue to free reservation' ? 'Continue to reservation' : label;
-      };
-      proto.__bwDepositCtaLabelPatch = true;
-    }
-    return Boolean(proto.__bwIntroHrefPatch && proto.__bwDepositCtaLabelPatch);
+    if (!proto || proto.__bwIntroHrefPatch || typeof proto._bookingHref !== 'function') return Boolean(proto && proto.__bwIntroHrefPatch);
+    var original = proto._bookingHref;
+    proto._bookingHref = function (slot) {
+      return preserveAttribution(original.call(this, slot));
+    };
+    proto.__bwIntroHrefPatch = true;
+    return true;
   }
 
   function applyIntro(calendar) {
@@ -289,8 +255,8 @@
     }
 
     calendar.querySelectorAll('.bw-cal-cta').forEach(function (cta) {
-      if (/^(Reserve your spot|Continue to free reservation)$/.test(cta.textContent.trim())) {
-        cta.textContent = 'Continue to reservation';
+      if (cta.textContent.trim() === 'Reserve your spot') {
+        cta.textContent = 'Continue to free reservation';
       }
       if (cta.href) cta.href = preserveAttribution(cta.href);
     });
@@ -372,17 +338,6 @@
     ].join('');
   }
 
-  function depositTrustCardHtml() {
-    return [
-      progressHtml('is-complete', 'Selected', 'is-active', 'Current step'),
-      '<strong>Complete your reservation</strong>',
-      '<p class="bw-deposit-now"><strong>Pay now: €2 per guest</strong><br>A refundable reservation deposit, not the price of the tour.</p>',
-      '<p><strong>Attend the walk → get your deposit back.</strong><br>We issue the refund after attendance is confirmed.</p>',
-      '<p><strong>Cancel at least 24 hours before → full refund.</strong><br>Late cancellation or no-show: no deposit refund. If BerlinWalk cancels, you receive a full refund.</p>',
-      '<p class="bw-deposit-tip"><strong>Tips are separate</strong> and entirely up to you.</p>'
-    ].join('');
-  }
-
   function findTermsTextNode() {
     var nodes = document.querySelectorAll('label,span,p,div');
     for (var i = 0; i < nodes.length; i++) {
@@ -430,10 +385,6 @@
 
   function applyBookingFormTrust() {
     if (!isBookingForm) return false;
-    var activeForm = document.querySelector('form[id^="form-"]');
-    if (!activeForm) return false;
-    var isDepositForm = activeForm.id === DEPOSIT_FORM_ID;
-    if (isDepositForm) activeForm.setAttribute('aria-label', 'BerlinWalk live tour booking');
     document.documentElement.classList.add('bw-booking-form-trust-active');
 
     var introWrap = document.querySelector('[data-hook="form-field-c75b1793-ac5f-4491-a1d6-61cc895c7b94"]');
@@ -444,23 +395,10 @@
         card.id = FORM_CARD_ID;
         introWrap.appendChild(card);
       }
-      var cardVersion = FORM_VERSION + (isDepositForm ? '-deposit' : '-free');
-      if (card.getAttribute('data-bw-deposit-ui-version') !== cardVersion) {
-        // Never change the legacy observer's ownership marker: cached copies
-        // otherwise replace each other's HTML in an endless microtask loop.
-        if (!card.hasAttribute('data-bw-booking-form-version')) {
-          card.setAttribute('data-bw-booking-form-version', cardVersion);
-        }
-        card.setAttribute('data-bw-deposit-ui-version', cardVersion);
-        card.innerHTML = isDepositForm ? depositTrustCardHtml() : trustCardHtml();
+      if (card.getAttribute('data-bw-booking-form-version') !== FORM_VERSION) {
+        card.setAttribute('data-bw-booking-form-version', FORM_VERSION);
+        card.innerHTML = trustCardHtml();
       }
-    }
-
-    if (isDepositForm) {
-      applyDepositFormUi(activeForm);
-      var oldHelper = document.getElementById(TERMS_HELPER_ID);
-      if (oldHelper) oldHelper.remove();
-      return Boolean(introWrap);
     }
 
     var termsText = findTermsTextNode();
@@ -479,35 +417,6 @@
     return Boolean(introWrap || termsText);
   }
 
-  function applyDepositFormUi(form) {
-    document.documentElement.classList.add('bw-deposit-form-ui');
-    var heading = document.querySelector('[data-hook="header-title"]');
-    if (heading && heading.parentElement) {
-      heading.parentElement.classList.add('bw-form-compact-heading');
-      var shell = heading.parentElement.parentElement;
-      if (shell && shell.parentElement && shell.parentElement.getAttribute('data-hook') === 'widget-main-container') {
-        shell.classList.add('bw-form-compact-shell');
-        var before = heading.parentElement.previousElementSibling;
-        if (before && /Back/.test(textOf(before))) before.classList.add('bw-form-compact-back');
-      }
-    }
-    // Preserve the native checkbox, required state, label association and handlers.
-    var terms = form.querySelector('[data-hook="form-field-form_field_f9f6"] [data-hook="label-wrapper"] p span span:not([aria-hidden])');
-    if (terms && !terms.querySelector('strong') && /^I understand that €2 per guest/.test(textOf(terms))) {
-      terms.innerHTML = 'I understand that <strong>€2 per guest is charged now</strong> and <strong>refunded after attendance is confirmed</strong>, or if I <strong>cancel at least 24 hours before</strong> the tour. A <strong>late cancellation or no-show is not refunded</strong>. Tips are separate.';
-    }
-    var button = document.querySelector('[data-hook="booking-details-book-now-cta"]');
-    if (!button) return;
-    var label = button.querySelector('span');
-    if (label && label.textContent === 'Book Now') label.textContent = 'Continue to secure payment';
-    if (!document.getElementById('bw-booking-payment-trust')) {
-      var trust = document.createElement('div');
-      trust.id = 'bw-booking-payment-trust';
-      trust.innerHTML = '<div class="bw-secure-line"><svg aria-hidden="true" width="16" height="18" viewBox="0 0 20 22" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="9" width="14" height="11" rx="2"/><path d="M6 9V6a4 4 0 0 1 8 0v3"/><path d="M10 13v3"/></svg><span>Secure card payment · <strong>Stripe</strong></span></div><p>Enter your card details in the next step.</p>';
-      button.insertAdjacentElement('afterend', trust);
-    }
-  }
-
   function start() {
     installStyles();
     if (isBookingForm) {
@@ -516,16 +425,14 @@
         formTries += 1;
         if (applyBookingFormTrust() || formTries > 80) window.clearInterval(formTimer);
       }, 250);
-      // Bounded macrotask refresh handles Wix rerenders without observing our
-      // own mutations or starving hydration, input and paint.
-      var refreshes = 0;
-      var refreshTimer = window.setInterval(function () {
-        if (window.location.pathname.toLowerCase().indexOf('/booking-form') !== 0 || ++refreshes > 120) {
-          window.clearInterval(refreshTimer);
-          return;
-        }
-        applyBookingFormTrust();
-      }, 1000);
+      if (typeof MutationObserver !== 'undefined') {
+        try {
+          new MutationObserver(function () { applyBookingFormTrust(); }).observe(document.documentElement, {
+            childList: true,
+            subtree: true
+          });
+        } catch (e) {}
+      }
       return;
     }
 

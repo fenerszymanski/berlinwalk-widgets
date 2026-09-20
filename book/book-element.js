@@ -377,10 +377,10 @@ class BWBookHeroElement extends HTMLElement {
               <div>
                 <span class="bw-book-eyebrow">Book the tour</span>
                 <h1>Pick a date. Meet at the <span class="bw-book-highlight">World Clock</span>. Walk Berlin with a local.</h1>
-                <p class="bw-book-hero-lead">A small-group walk through Berlin's historic centre, guided by Yusuf. Pay a €2 refundable deposit per guest when booking; tip separately at the end.</p>
+                <p class="bw-book-hero-lead">A small-group walk through Berlin's historic centre, guided by Yusuf. Reserving is free, there is no upfront payment, and you tip at the end based on the value you got.</p>
 
                 <div class="bw-book-meta" aria-label="Tour key facts">
-                  <span class="bw-book-meta-chip">€2 refundable deposit · Tip-based</span>
+                  <span class="bw-book-meta-chip">Free · Tip-based</span>
                   <span class="bw-book-meta-chip">~2 hours</span>
                   <span class="bw-book-meta-chip">English</span>
                   <span class="bw-book-meta-chip">Dates in the calendar</span>
@@ -810,10 +810,10 @@ class BWBookDetailsElement extends HTMLElement {
         <div class="bw-book-section">
           <div class="bw-book-inner">
             <aside class="bw-book-explainer" aria-labelledby="bw-book-tip-title">
-              <span class="bw-book-eyebrow">Tip-based — what that means</span>
-              <h2 id="bw-book-tip-title">The €2 deposit secures your place. Your tip at the end is separate.</h2>
-              <p>We refund the deposit for each guest who attends after attendance is confirmed. Cancel at least 24 hours before the tour for a full refund; for a late cancellation or no-show it is retained. If we cancel, you receive a full refund.</p>
-              <p>After the walk, you decide what to tip based on the value you got and your budget. There is no fixed tour price.</p>
+              <span class="bw-book-eyebrow">Free, tip-based — what that means</span>
+              <h2 id="bw-book-tip-title">No payment to book. Tip the guide at the end based on what the walk was worth to you.</h2>
+              <p>You reserve a spot for free. After the walk, you decide what to tip based on the value you got, your budget, and how it compares to a paid tour. This is how I make a living, and how the tour stays accessible to travellers on every kind of budget.</p>
+              <p>For a good 2-hour walk, 10€ per adult is the fair minimum thank-you, 15€ is strong, and 20€+ is generous. There is no upfront payment and no awkward handover script at the end.</p>
             </aside>
           </div>
         </div>
@@ -864,7 +864,7 @@ class BWBookDetailsElement extends HTMLElement {
         <div class="bw-book-ending">
           <div class="bw-book-inner">
             <h2>Ready to walk Berlin with a local?</h2>
-            <p>€2 refundable deposit per guest to book. Tip separately at the end. Pick a date and meet at the World Clock.</p>
+            <p>Free to book. Tip-based at the end. Just pick a date and meet at the World Clock.</p>
             <a class="bw-book-btn bw-book-btn-yellow" href="#${BW_BOOK_ANCHOR_ID}">Pick your date ↑</a>
             <p class="bw-book-private">Coming with your own group? I also walk this route privately, on your date and at your pace. <a href="${BW_BOOK_PRIVATE_TOUR_URL}">See private tours</a></p>
           </div>

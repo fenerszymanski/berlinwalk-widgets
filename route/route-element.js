@@ -134,7 +134,7 @@ class BWRouteElement extends HTMLElement {
           </header>
           <div class="bw-route-map-wrapper bw-route-error">
             <p>Map temporarily unavailable. Visit our booking page to read about the tour.</p>
-            <a href="${BW_ROUTE_BOOKING_URL}" target="_blank" rel="noopener">Reserve your place</a>
+            <a href="${BW_ROUTE_BOOKING_URL}" target="_blank" rel="noopener">Book your free spot</a>
           </div>
         </div>
       </section>
@@ -197,7 +197,7 @@ class BWRouteElement extends HTMLElement {
               </p>
               <div class="bw-route-story-actions" aria-label="Open the route story or book the tour">
                 <a class="bw-route-btn bw-route-btn-primary" href="${BW_ROUTE_STORY_URL}">Explore the story map</a>
-                <a class="bw-route-btn bw-route-btn-ghost" href="${BW_ROUTE_BOOKING_URL}">Reserve your place</a>
+                <a class="bw-route-btn bw-route-btn-ghost" href="${BW_ROUTE_BOOKING_URL}">Book your free spot</a>
               </div>
             </div>
             <div class="bw-route-story-steps" aria-label="Story chapters from the route">
