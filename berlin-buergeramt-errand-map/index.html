@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Berlin Bürgeramt Errand Map</title>
+<link rel="stylesheet" href="../css/brand.css">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: #FAFAF5; color: #212121; padding: 16px 14px 10px;
+  }
+  .bea-head h1 { font-size: 19px; color: #1B5E20; line-height: 1.25; }
+  .bea-head p { font-size: 13px; color: #4a5548; margin-top: 5px; line-height: 1.45; }
+  .bea-pick { margin: 13px 0 11px; }
+  .bea-pick label { display: block; font-size: 11px; font-weight: 700; letter-spacing: .05em;
+    text-transform: uppercase; color: #1B5E20; margin-bottom: 5px; }
+  .bea-pick select {
+    font-family: inherit; font-size: 13.5px; font-weight: 600; color: #1B5E20;
+    width: 100%; background: #fff; border: 1.5px solid #1B5E20; border-radius: 10px;
+    padding: 10px 11px; line-height: 1.3; cursor: pointer; appearance: none;
+    background-image: linear-gradient(45deg, transparent 50%, #1B5E20 50%), linear-gradient(135deg, #1B5E20 50%, transparent 50%);
+    background-position: calc(100% - 17px) 19px, calc(100% - 12px) 19px;
+    background-size: 5px 5px, 5px 5px; background-repeat: no-repeat; padding-right: 32px;
+  }
+  .bea-doors { display: flex; gap: 6px; margin-bottom: 11px; }
+  .bea-door { flex: 1 1 0; background: #fff; border: 1.5px solid #e2e8d5; border-radius: 10px;
+    padding: 8px 8px 9px; text-align: center; }
+  .bea-door i { font-style: normal; display: block; font-size: 10px; letter-spacing: .05em;
+    text-transform: uppercase; color: #8b937f; font-weight: 700; }
+  .bea-door b { display: block; font-size: 12.5px; color: #4a5548; margin-top: 4px; line-height: 1.3; }
+  .bea-door.on { border-color: #1B5E20; background: #1B5E20; }
+  .bea-door.on i { color: #FFE600; }
+  .bea-door.on b { color: #fff; }
+  .bea-door.off b { color: #b0b6a8; }
+  .bea-map-wrap { background: #eef3e4; border: 1px solid #d7e3c2; border-radius: 12px; overflow: hidden; }
+  .bea-map-wrap svg { display: block; width: 100%; height: auto; }
+  .bea-dot { cursor: pointer; }
+  .bea-legend { display: flex; gap: 13px; flex-wrap: wrap; font-size: 11px; color: #4a5548;
+    padding: 7px 10px; border-top: 1px solid #d7e3c2; background: #f6f8ee; }
+  .bea-legend span { display: inline-flex; align-items: center; gap: 5px; }
+  .bea-swatch { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
+  .bea-panel { margin-top: 12px; background: #fff; border: 1px solid #e2e8d5; border-radius: 12px;
+    padding: 14px 14px 12px; }
+  .bea-panel h2 { font-size: 15px; color: #1B5E20; line-height: 1.3; }
+  .bea-count { display: inline-block; font-size: 12px; font-weight: 700; color: #1B5E20;
+    background: #FFE600; border-radius: 999px; padding: 4px 10px; margin-top: 9px; }
+  .bea-rows { margin-top: 11px; }
+  .bea-row { display: flex; gap: 10px; font-size: 12.5px; line-height: 1.5; padding: 5px 0;
+    border-bottom: 1px dashed #e6ebdc; }
+  .bea-row:last-child { border-bottom: none; }
+  .bea-row u { text-decoration: none; flex: 0 0 34%; color: #6a7565; font-size: 11.5px; }
+  .bea-row s { text-decoration: none; flex: 1 1 auto; color: #33402f; }
+  .bea-row s strong { color: #1B5E20; }
+  .bea-note { font-size: 12.5px; line-height: 1.5; color: #33402f; margin-top: 10px;
+    background: #F4F8EA; border: 1.5px solid #C5E1A5; border-radius: 10px; padding: 10px 12px; }
+  .bea-office { margin-top: 10px; background: #FAFAF5; border: 1px solid #e8ecdd;
+    border-radius: 10px; padding: 10px 12px; }
+  .bea-office h3 { font-size: 13.5px; color: #1B5E20; line-height: 1.3; }
+  .bea-office p { font-size: 12px; color: #4a5548; margin-top: 4px; line-height: 1.5; }
+  .bea-office .bea-tag { display: inline-block; font-size: 10.5px; font-weight: 700;
+    border-radius: 999px; padding: 3px 8px; margin-top: 6px; }
+  .bea-hint { font-size: 11.5px; color: #8b937f; margin-top: 8px; line-height: 1.45; }
+  .bea-src { font-size: 10.5px; color: #8b937f; margin-top: 10px; line-height: 1.45; }
+  @media (max-width: 420px) {
+    body { padding: 12px 10px 8px; }
+    .bea-head h1 { font-size: 17px; }
+    .bea-door i { font-size: 9px; }
+    .bea-door b { font-size: 11px; }
+    .bea-row u { flex-basis: 40%; font-size: 11px; }
+  }
+</style>
+</head>
+<body>
+<div class="bea-head">
+  <h1>Berlin Bürgeramt Errand Map</h1>
+  <p>Pick the errand you actually need. The map shows which of Berlin's 38 Bürgeramt counters take it without an appointment, and the panel shows whether there is an online door instead, what each route costs and which deadline is running.</p>
+</div>
+
+<div class="bea-pick">
+  <label for="beaErrand">What do you need from the Bürgeramt?</label>
+  <select id="beaErrand"></select>
+</div>
+
+<div class="bea-doors" id="beaDoors"></div>
+
+<div class="bea-map-wrap">
+  <svg id="beaSvg" viewBox="0 0 740 520" role="img" aria-label="Map of Berlin with all 38 Bürgeramt counters plotted, marked by whether the selected errand can be done there without an appointment"></svg>
+  <div class="bea-legend" id="beaLegend"></div>
+</div>
+
+<div class="bea-panel" id="beaPanel"></div>
+
+<script src="../js/brand.js"></script>
+<script>
+(function () {
+  'use strict';
+  var DATA = null;
+  var pick = 0;
+  var spot = null;
+  var selEl = document.getElementById('beaErrand');
+  var doorsEl = document.getElementById('beaDoors');
+  var svgEl = document.getElementById('beaSvg');
+  var legendEl = document.getElementById('beaLegend');
+  var panelEl = document.getElementById('beaPanel');
+
+  var W = 740, H = 520, PAD = 16;
+  var GREEN = '#1B5E20', GREY = '#a7b09d', LIME = '#7CB342';
+  var bounds = null;
+
+  function esc(s) {
+    return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  }
+
+  function computeBounds() {
+    var minLon = 999, maxLon = -999, minLat = 999, maxLat = -999;
+    DATA.outlines.forEach(function (o) {
+      o.rings.forEach(function (ring) {
+        ring.forEach(function (pt) {
+          if (pt[0] < minLon) minLon = pt[0];
+          if (pt[0] > maxLon) maxLon = pt[0];
+          if (pt[1] < minLat) minLat = pt[1];
+          if (pt[1] > maxLat) maxLat = pt[1];
+        });
+      });
+    });
+    var kx = Math.cos(((minLat + maxLat) / 2) * Math.PI / 180);
+    var spanX = (maxLon - minLon) * kx, spanY = maxLat - minLat;
+    var scale = Math.min((W - 2 * PAD) / spanX, (H - 2 * PAD) / spanY);
+    bounds = { minLon: minLon, maxLat: maxLat, kx: kx, scale: scale,
+      ox: (W - spanX * scale) / 2, oy: (H - spanY * scale) / 2 };
+  }
+  function px(lon) { return bounds.ox + (lon - bounds.minLon) * bounds.kx * bounds.scale; }
+  function py(lat) { return bounds.oy + (bounds.maxLat - lat) * bounds.scale; }
+
+  /* Which offices serve the chosen errand without an appointment. */
+  function servedBy(errand, office) {
+    if (errand.door === 'walkin') return office.w === 1;
+    if (errand.door === 'collect') return true;
+    return false;
+  }
+
+  function doorState(errand) {
+    if (errand.door === 'online') return { open: 'online', line: 'No office visit at all' };
+    if (errand.door === 'post') return { open: 'post', line: 'In writing, no office visit' };
+    if (errand.door === 'walkin') return { open: 'walkin', line: 'Walk in at ' + DATA.totals.walkIn + ' counters' };
+    if (errand.door === 'collect') return { open: 'walkin', line: 'No appointment at any counter' };
+    return { open: 'appointment', line: 'Booked slot, any counter in the city' };
+  }
+
+  function renderDoors() {
+    var e = DATA.errands[pick];
+    var st = doorState(e);
+    var cards = [
+      { key: 'online', label: 'Online', text: e.onlineFee ? e.onlineFee : 'Not possible' },
+      { key: 'walkin', label: 'Walk in', text: e.door === 'walkin' ? DATA.totals.walkIn + ' of ' + DATA.totals.offices + ' counters'
+        : (e.door === 'collect' ? 'Where you applied' : 'Not on the list') },
+      { key: 'appointment', label: 'Appointment', text: e.counterFee ? e.counterFee.split(',')[0] : 'Free' }
+    ];
+    var html = '';
+    cards.forEach(function (c) {
+      var isOn = c.key === st.open;
+      var dim = (c.key === 'online' && !e.onlineFee) || (c.key === 'walkin' && e.door !== 'walkin' && e.door !== 'collect');
+      html += '<div class="bea-door' + (isOn ? ' on' : (dim ? ' off' : '')) + '">'
+        + '<i>' + c.label + '</i><b>' + esc(c.text) + '</b></div>';
+    });
+    doorsEl.innerHTML = html;
+  }
+
+  function renderMap() {
+    var e = DATA.errands[pick];
+    var parts = [];
+    DATA.outlines.forEach(function (o) {
+      o.rings.forEach(function (ring) {
+        var d = '';
+        ring.forEach(function (pt, i) {
+          d += (i ? 'L' : 'M') + px(pt[0]).toFixed(1) + ' ' + py(pt[1]).toFixed(1);
+        });
+        parts.push('<path d="' + d + 'Z" fill="#e3ecd4" stroke="#c3d3a8" stroke-width="1"/>');
+      });
+    });
+    DATA.offices.forEach(function (o, i) {
+      var served = servedBy(e, o);
+      var x = px(o.lon).toFixed(1), y = py(o.lat).toFixed(1);
+      var on = spot === i;
+      if (served) {
+        parts.push('<circle class="bea-dot" data-o="' + i + '" cx="' + x + '" cy="' + y + '" r="'
+          + (on ? 11 : 7.5) + '" fill="' + GREEN + '" stroke="' + (on ? '#FFE600' : '#ffffff')
+          + '" stroke-width="' + (on ? 3.5 : 2) + '"><title>' + esc(o.n) + '</title></circle>');
+      } else {
+        parts.push('<circle class="bea-dot" data-o="' + i + '" cx="' + x + '" cy="' + y + '" r="'
+          + (on ? 10 : 6) + '" fill="#ffffff" stroke="' + (on ? '#1B5E20' : GREY)
+          + '" stroke-width="' + (on ? 3.5 : 2) + '"><title>' + esc(o.n) + '</title></circle>');
+      }
+    });
+    svgEl.innerHTML = parts.join('');
+  }
+
+  function renderLegend() {
+    var e = DATA.errands[pick];
+    var a, b;
+    if (e.door === 'walkin') { a = 'Walk in for this, no appointment'; b = 'Appointment only for this'; }
+    else if (e.door === 'collect') { a = 'Collection counter, no appointment'; b = ''; }
+    else { a = ''; b = 'Appointment, but you may book any of them'; }
+    var html = '';
+    if (a) html += '<span><span class="bea-swatch" style="background:' + GREEN + '"></span>' + a + '</span>';
+    if (b) html += '<span><span class="bea-swatch" style="background:#fff;border:2px solid ' + GREY + '"></span>' + b + '</span>';
+    html += '<span>Tap a counter for its address and hours</span>';
+    legendEl.innerHTML = html;
+  }
+
+  function renderPanel() {
+    var e = DATA.errands[pick];
+    var st = doorState(e);
+    var n = DATA.offices.filter(function (o) { return servedBy(e, o); }).length;
+    var html = '<h2>' + esc(e.label) + '</h2>';
+    if (e.door === 'walkin') {
+      html += '<span class="bea-count">' + n + ' of ' + DATA.totals.offices + ' counters take this without an appointment</span>';
+    } else if (e.door === 'collect') {
+      html += '<span class="bea-count">Every counter, but only the one you applied at</span>';
+    } else if (e.door === 'online' || e.door === 'post') {
+      html += '<span class="bea-count">No counter visit needed</span>';
+    } else {
+      html += '<span class="bea-count">Appointment at any of the ' + DATA.totals.offices + ' counters</span>';
+    }
+    html += '<div class="bea-rows">';
+    html += '<div class="bea-row"><u>Online route</u><s>' + esc(e.online) + '</s></div>';
+    if (e.onlineFee) html += '<div class="bea-row"><u>Online fee</u><s><strong>' + esc(e.onlineFee) + '</strong></s></div>';
+    html += '<div class="bea-row"><u>At the counter</u><s><strong>' + esc(e.counterFee) + '</strong></s></div>';
+    if (e.deadline) html += '<div class="bea-row"><u>Legal deadline</u><s><strong>' + esc(e.deadline) + '</strong></s></div>';
+    html += '<div class="bea-row"><u>How long</u><s>' + esc(e.wait) + '</s></div>';
+    html += '<div class="bea-row"><u>Best door</u><s>' + esc(st.line) + '</s></div>';
+    html += '</div>';
+    html += '<div class="bea-note">' + esc(e.note) + '</div>';
+
+    if (spot !== null) {
+      var o = DATA.offices[spot];
+      var served = servedBy(e, o);
+      var days = ['Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa'];
+      var en = { Mo: 'Mon', Di: 'Tue', Mi: 'Wed', Do: 'Thu', Fr: 'Fri', Sa: 'Sat' };
+      var hrs = [];
+      days.forEach(function (d) { if (o.h[d]) hrs.push(esc(en[d] + ' ' + o.h[d])); });
+      html += '<div class="bea-office"><h3>' + esc(o.n) + '</h3>'
+        + '<p>' + esc(o.a) + ' &middot; ' + esc(o.d) + '</p>'
+        + '<p>' + hrs.join(' &middot; ') + '</p>'
+        + '<span class="bea-tag" style="background:' + (served ? '#FFE600' : '#eef0ea') + ';color:'
+        + (served ? '#1B5E20' : '#6a7565') + '">'
+        + (served ? 'No appointment needed here' : 'Book a slot for this errand') + '</span></div>';
+    } else {
+      html += '<div class="bea-hint">Tap any counter on the map to see its address, its opening hours and whether it takes this errand off the street.</div>';
+    }
+    html += '<div class="bea-src">Source: Berlin ServicePortal (service.berlin.de) office and service pages, checked on 20 September 2026. Walk-in offers depend on how busy the counter is that day.</div>';
+    panelEl.innerHTML = html;
+  }
+
+  function renderAll() { renderDoors(); renderMap(); renderLegend(); renderPanel(); }
+
+  selEl.addEventListener('change', function () {
+    pick = parseInt(selEl.value, 10) || 0;
+    spot = null;
+    renderAll();
+  });
+
+  svgEl.addEventListener('click', function (ev) {
+    var dot = ev.target.closest('.bea-dot');
+    if (!dot) return;
+    var i = parseInt(dot.getAttribute('data-o'), 10);
+    spot = (spot === i) ? null : i;
+    renderAll();
+  });
+
+  fetch('data.json').then(function (r) { return r.json(); }).then(function (j) {
+    DATA = j;
+    var opts = '';
+    DATA.errands.forEach(function (e, i) { opts += '<option value="' + i + '">' + esc(e.label) + '</option>'; });
+    selEl.innerHTML = opts;
+    computeBounds();
+    renderAll();
+  });
+})();
+</script>
+</body>
+</html>

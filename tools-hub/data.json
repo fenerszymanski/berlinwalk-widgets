@@ -9822,6 +9822,37 @@
       ],
       "iconStatus": "live-wix-media",
       "cmsItemId": "7ccb59f9-6ee0-4e68-984d-ba29fbc25119"
+    },
+    {
+      "slug": "berlin-buergeramt-errand-map",
+      "title": "Berlin Bürgeramt Errand Map",
+      "lead": "Pick the errand you need from a Berlin Bürgeramt. The map plots all 38 counters and marks which of them take that job without an appointment, and the panel gives the online route, the counter fee and the deadline that is running. Survey of the city service portal, checked on 20 September 2026.",
+      "category": "Planning",
+      "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/berlin-buergeramt-errand-map/",
+      "embedHeight": 1400,
+      "hubCategory": "Essentials",
+      "type": "Map",
+      "priority": 3,
+      "tags": [
+        "bürgeramt",
+        "buergeramt",
+        "berlin admin",
+        "meldebescheinigung",
+        "führungszeugnis",
+        "anmeldung",
+        "eid",
+        "living in berlin"
+      ],
+      "aliases": [
+        "buergeramt berlin",
+        "bürgeramt termin berlin",
+        "berlin citizens office",
+        "meldebescheinigung berlin",
+        "anmeldung berlin appointment"
+      ],
+      "iconStatus": "live-wix-media",
+      "image": "https://static.wixstatic.com/media/5a08a3_dcda178d5f3b48a4abb9e7705610df54~mv2.png",
+      "cmsItemId": "6161037a-bef4-4426-92b6-28b0fa26fcb4"
     }
   ],
   "hubCategories": [

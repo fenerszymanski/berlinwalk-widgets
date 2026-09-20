@@ -12555,5 +12555,39 @@
         "a": "Call the on-call hotline on 030 89004-333. On weekends and public holidays every district has one dentist on duty from 9:00 to 12:00 and another from 15:00 to 18:00, and the Charité dental clinic on Aßmannshauser Straße covers extra evening hours."
       }
     ]
+  },
+  "buergeramt-berlin": {
+    "title": "Bürgeramt Berlin - FAQ",
+    "subtitle": "Which Berlin Bürgeramt errands are free online, which counters take walk-ins, and what the documents cost.",
+    "items": [
+      {
+        "q": "Can I go to a Bürgeramt in Berlin without an appointment?",
+        "a": "For some errands, yes. 26 of Berlin’s 38 Bürgeramt counters publish an Erweiterter Bürgerservice list you can walk in for: Meldebescheinigung, Führungszeugnis, Gewerbezentralregisterauskunft, eID PIN resets, collection of a finished ID card or passport, and advice on the online services. The offices note that spontaneous visits can be limited when the counter is busy."
+      },
+      {
+        "q": "How much does a Meldebescheinigung cost in Berlin?",
+        "a": "Nothing if you apply online, and 10 euros if you apply at the counter or in writing, plus 5 euros for each extra family member printed on the same certificate. The online route needs a BundID account and an activated eID."
+      },
+      {
+        "q": "Do I have to use the Bürgeramt in my own district?",
+        "a": "No. The ID card and passport services list 82 locations across Berlin, so you can book or walk into any Bürgeramt in the city. The one exception is collection: a finished document can only be picked up at the office where you applied."
+      },
+      {
+        "q": "What is the eID and why does it matter?",
+        "a": "The Online-Ausweisfunktion is the chip in a German Personalausweis, in the eID-Karte for EU and EEA citizens, and in the electronic residence permit. With it, plus a BundID account and the AusweisApp, several errands become free or half price online. Activating it and resetting the PIN are free and done on the spot."
+      },
+      {
+        "q": "What does a new passport or ID card cost in Berlin?",
+        "a": "A Personalausweis is 46 euros from age 24 and 27.60 euros under 24, with production of about three to four weeks. A Reisepass is 70 euros from 24 and 37.50 euros under 24, quoted at up to eight weeks. Express costs 32 euros more and is normally ready in about four working days if you apply before 11:00. A provisional passport is 26 euros and is handed over the same day."
+      },
+      {
+        "q": "Can I still bring my own passport photos?",
+        "a": "No. Since 1 May 2025 biometric photos for German ID cards and passports may only be produced digitally, either at the office or at a certified photo studio, and sent electronically. The office takes the photo for 6 euros."
+      },
+      {
+        "q": "How long do I have to register a new address in Berlin?",
+        "a": "14 days after moving in. Registering is free, but missing the deadline is an Ordnungswidrigkeit under the federal registration act and the law allows a fine of up to 1,000 euros. You need the Wohnungsgeberbestätigung from whoever gave you the flat."
+      }
+    ]
   }
 }
