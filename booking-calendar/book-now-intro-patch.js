@@ -398,6 +398,7 @@
     var activeForm = document.querySelector('form[id^="form-"]');
     if (!activeForm) return false;
     var isDepositForm = activeForm.id === DEPOSIT_FORM_ID;
+    if (isDepositForm) activeForm.setAttribute('aria-label', 'BerlinWalk live tour booking');
     document.documentElement.classList.add('bw-booking-form-trust-active');
 
     var introWrap = document.querySelector('[data-hook="form-field-c75b1793-ac5f-4491-a1d6-61cc895c7b94"]');
