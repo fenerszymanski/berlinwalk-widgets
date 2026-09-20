@@ -1,9 +1,26 @@
 {
-  "updatedAt": "2026-09-19T19:49:08.388Z",
+  "updatedAt": "2026-09-20T02:15:56.074Z",
   "source": "Wix Blog API",
-  "totalPosts": 404,
+  "totalPosts": 405,
   "bookingUrl": "https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based",
   "allPosts": [
+    {
+      "title": "Bürgeramt Berlin: The Errands You Can Do Without an Appointment",
+      "slug": "buergeramt-berlin",
+      "path": "/post/buergeramt-berlin",
+      "url": "https://www.berlinwalk.com/post/buergeramt-berlin",
+      "excerpt": "A Meldebescheinigung is free online and ten euros at the counter, 26 of Berlin’s 38 Bürgeramt counters now take a named list of errands without an appointment, and one free unbooked visit unlocks the online door for good. Here is which of the three doors your errand actually goes through.",
+      "category": "Living in Berlin",
+      "categorySlug": "living-in-berlin",
+      "topic": "living-in-berlin",
+      "topicLabel": "Living in Berlin",
+      "readTime": "6 min read",
+      "publishedDate": "2026-09-20T02:12:15.974Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_d25ac6ab16324246b38e61e919193cdc~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/00-rathaus-spandau.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_d25ac6ab16324246b38e61e919193cdc~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/00-rathaus-spandau.jpg",
+      "alt": "The symmetrical brick and stone front of Rathaus Spandau with its tall clock tower, seen from across the main road on an overcast day",
+      "relatedToolSlug": "berlin-buergeramt-errand-map"
+    },
     {
       "title": "Dentist in Berlin: What the Krankenkasse Pays and the Stamp to Get Before December",
       "slug": "dentist-in-berlin",
