@@ -12589,5 +12589,43 @@
         "a": "14 days after moving in. Registering is free, but missing the deadline is an Ordnungswidrigkeit under the federal registration act and the law allows a fine of up to 1,000 euros. You need the Wohnungsgeberbestätigung from whoever gave you the flat."
       }
     ]
+  },
+  "elterngeld-berlin": {
+    "title": "Elterngeld Berlin - FAQ",
+    "subtitle": "How the 14 months split, what ElterngeldPlus is really worth, and how a Berlin application reaches the district office.",
+    "items": [
+      {
+        "q": "How late can I apply for Elterngeld in Berlin?",
+        "a": "There is no hard deadline, but Elterngeld is paid retroactively only for the last three Lebensmonate before the month your application arrives at the office. Apply in your child's seventh month and the first three months are gone. Because of that, the usual advice is to post the form as soon as the birth is registered, even if you have not settled the split yet, since the choices can be changed later."
+      },
+      {
+        "q": "Can I apply for Elterngeld online in Berlin?",
+        "a": "Not at the moment. The Berlin service portal says the digital application system is being rebuilt and asks parents to send new applications by post to the Elterngeldstelle of their district. An Antragsassistent lets you fill the form digitally, then you print it, sign it and post it. Full online submission with a BundID account and an activated eID is expected to return, so check the service page in the week you apply."
+      },
+      {
+        "q": "How much Elterngeld will I get?",
+        "a": "Basiselterngeld is normally 65 percent of the net income you had before the birth and lose afterwards, with the pre-birth net counted only up to 2,770 euros a month. That gives a floor of 300 euros and a ceiling of 1,800. Below 1,240 euros the percentage climbs, reaching 67 percent between 1,200 and 1,000 euros and rising further under 1,000. The net used is not the net on your payslip: the law deducts a flat employee allowance, a flat tax amount by Steuerklasse and flat social shares of 9, 10 and 2 percent."
+      },
+      {
+        "q": "Is ElterngeldPlus worth more or less than Basiselterngeld?",
+        "a": "It depends entirely on whether you work. With no income after the birth, one Basis month becomes two Plus months at half the amount, so the total is identical and only the timing changes. If you work part time, the Plus ceiling is often not reached, so a Plus month can pay the same as a Basis month would have and you get twice as many of them. For a parent going back at 20 to 25 hours a week, ElterngeldPlus is usually the better choice."
+      },
+      {
+        "q": "What is the Partnerschaftsbonus and why do so few people take it?",
+        "a": "It is two, three or four extra ElterngeldPlus months for each parent, on top of the 14, available only in months where both of you work between 24 and 32 hours a week. Nationally in 2025 only 8.3 percent of the parents who planned ElterngeldPlus took it, mostly because the working-hours condition has to be agreed with two employers at the same time and the conversation starts too late."
+      },
+      {
+        "q": "What do I have to send with the Berlin application?",
+        "a": "The signed form in the version matching your child's birth date, both parents' ID or passport with the latest Meldebescheinigung, the child's birth certificate in the original, income evidence for the twelve months before the birth or before Mutterschutz for the mother, the Krankenkasse certificate on Mutterschaftsgeld and the employer's certificate on its top-up, the Elternzeit agreement, and a confirmation of working hours if you will be working. The electronic Mutterschaftsgeld lookup is still being built in Berlin, so enclose that certificate yourself."
+      },
+      {
+        "q": "Does Elterngeld affect my tax return?",
+        "a": "Elterngeld itself is tax free, but it is counted when the rate on the rest of your income is worked out, so it can push that rate up. More than 410 euros of it in a year also makes a tax return compulsory rather than voluntary."
+      },
+      {
+        "q": "Do both parents have to sign the Berlin application?",
+        "a": "Yes. The application is signed by the parent making it and also, to confirm that they have seen it, by the other parent, except where one parent has sole custody. The second parent can apply at the same time or simply declare how many months they intend to claim."
+      }
+    ]
   }
 }

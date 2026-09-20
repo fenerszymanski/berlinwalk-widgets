@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Berlin Elterngeld Split Board</title>
+<link rel="stylesheet" href="../css/brand.css">
+<style>
+  :root {
+    --green: #1B5E20;
+    --deep: #123D18;
+    --yellow: #FFE600;
+    --lime: #7CB342;
+    --soft: #C5E1A5;
+    --ink: #212121;
+    --muted: #5a6152;
+    --paper: #F7F8F2;
+    --rule: rgba(18,61,24,.14);
+    --bad: #B23A2E;
+    --p1: #1B5E20;
+    --p2: #7CB342;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--paper); color: var(--ink); font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
+  .eg { max-width: 860px; margin: 0 auto; padding: 14px 12px 12px; }
+  .eg-head h2 { margin: 0; font-size: 1.06rem; line-height: 1.3; color: var(--deep); }
+  .eg-head p { margin: 5px 0 0; font-size: .78rem; line-height: 1.55; color: var(--muted); }
+
+  .eg-parents { margin-top: 12px; display: grid; gap: 10px; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .eg-card { background: #fff; border: 1px solid var(--rule); border-radius: 12px; padding: 9px 10px 10px; border-left: 5px solid var(--p1); }
+  .eg-card.p2 { border-left-color: var(--p2); }
+  .eg-card h3 { margin: 0 0 2px; font-size: .74rem; letter-spacing: .05em; text-transform: uppercase; color: var(--deep); }
+  .eg-card .hint { margin: 0 0 8px; font-size: .63rem; line-height: 1.4; color: var(--muted); }
+
+  .eg-step { display: grid; grid-template-columns: 1fr auto; gap: 4px 8px; align-items: center; padding: 4px 0; border-top: 1px solid var(--rule); }
+  .eg-step:first-of-type { border-top: 0; }
+  .eg-step .lab { font-size: .64rem; font-weight: 700; line-height: 1.3; color: var(--deep); }
+  .eg-step .ctl { display: flex; align-items: center; gap: 4px; }
+  .eg-step button { width: 27px; height: 27px; flex: 0 0 27px; border-radius: 8px; border: 1.5px solid var(--green); background: #fff; color: var(--deep); font: 800 1rem/1 'Montserrat', sans-serif; cursor: pointer; padding: 0; }
+  .eg-step button:hover { background: var(--soft); }
+  .eg-step button:disabled { opacity: .3; cursor: default; background: #fff; }
+  .eg-step button:focus-visible { outline: 3px solid var(--lime); outline-offset: 2px; }
+  .eg-step .val { min-width: 54px; text-align: center; font: 800 .88rem/1 'Montserrat', sans-serif; color: var(--deep); }
+
+  .eg-bonus { margin-top: 10px; background: #fff; border: 1px solid var(--rule); border-left: 5px solid var(--yellow); border-radius: 12px; padding: 8px 10px; display: grid; grid-template-columns: 1fr auto; gap: 4px 10px; align-items: center; }
+  .eg-bonus .lab { font-size: .68rem; font-weight: 700; color: var(--deep); }
+  .eg-bonus .hint { grid-column: 1 / -1; margin: 0; font-size: .63rem; line-height: 1.45; color: var(--muted); }
+
+  .eg-board { margin-top: 12px; background: #fff; border: 1px solid var(--rule); border-radius: 12px; padding: 8px 6px 2px; }
+  .eg-scroll { overflow-x: auto; overflow-y: hidden; -webkit-overflow-scrolling: touch; }
+  .eg-board svg { display: block; width: 100%; min-width: 452px; height: auto; }
+  .eg-swipe { display: none; margin: 4px 8px 0; font-size: .62rem; color: var(--muted); }
+  @media (max-width: 500px) { .eg-swipe { display: block; } }
+  .eg-key { display: flex; flex-wrap: wrap; gap: 3px 12px; padding: 4px 8px 6px; font-size: .64rem; color: var(--muted); }
+  .eg-key i { display: inline-block; width: 15px; height: 9px; border-radius: 2px; vertical-align: -1px; margin-right: 5px; }
+  .eg-key i.b1 { background: var(--p1); }
+  .eg-key i.b2 { background: var(--p2); }
+  .eg-key i.pl { background: rgba(27,94,32,.42); border: 1.4px solid var(--green); }
+  .eg-key i.bo { background: var(--yellow); }
+
+  .eg-out { margin-top: 10px; display: grid; gap: 8px; grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .eg-out div { background: var(--deep); color: #fff; border-radius: 12px; padding: 8px 10px; }
+  .eg-out span { display: block; font-size: .58rem; letter-spacing: .07em; text-transform: uppercase; opacity: .78; }
+  .eg-out strong { display: block; margin-top: 2px; font-size: 1.12rem; color: var(--yellow); line-height: 1.2; }
+  .eg-out em { display: block; margin-top: 2px; font-size: .62rem; font-style: normal; opacity: .82; line-height: 1.35; }
+
+  .eg-rules { margin-top: 10px; display: grid; gap: 5px; }
+  .eg-rules p { margin: 0; font-size: .74rem; line-height: 1.5; padding: 7px 10px; border-radius: 10px; background: #fff; border: 1px solid var(--rule); border-left: 4px solid var(--lime); color: var(--ink); }
+  .eg-rules p.warn { border-left-color: var(--yellow); background: #FFFDF0; }
+  .eg-rules p.bad { border-left-color: var(--bad); background: #FDF3F1; }
+  .eg-rules b { color: var(--deep); }
+
+  .eg-foot { margin: 10px 0 0; font-size: .64rem; line-height: 1.5; color: var(--muted); }
+
+  @media (max-width: 560px) {
+    .eg-parents { grid-template-columns: 1fr; }
+    .eg-out { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 340px) {
+    .eg { padding: 10px 8px; }
+    .eg-step { grid-template-columns: 1fr; }
+    .eg-step .ctl { justify-content: flex-start; }
+    .eg-step .val { min-width: 48px; }
+  }
+</style>
+</head>
+<body>
+<div class="eg">
+  <div class="eg-head">
+    <h2>Plan your Elterngeld split before the form goes in the post</h2>
+    <p>Set how many months each of you takes and what a full Basiselterngeld month is worth, and the board lays the plan out over your child's Lebensmonate, checks it against the rules, and adds up what it pays.</p>
+  </div>
+
+  <div class="eg-parents">
+    <div class="eg-card p1">
+      <h3 id="h-p1">Parent 1 (birth parent)</h3>
+      <p class="hint">Months 1 and 2 are normally spoken for by Mutterschutz, which is counted as Basiselterngeld whether you apply for it or not.</p>
+      <div class="eg-step">
+        <span class="lab" id="l-a1">Basiselterngeld a month</span>
+        <span class="ctl"><button type="button" data-k="a1" data-d="-1" aria-label="Lower parent 1 monthly amount">&minus;</button><span class="val" id="v-a1">1,300</span><button type="button" data-k="a1" data-d="1" aria-label="Raise parent 1 monthly amount">+</button></span>
+      </div>
+      <div class="eg-step">
+        <span class="lab" id="l-b1">Basis months</span>
+        <span class="ctl"><button type="button" data-k="b1" data-d="-1" aria-label="Fewer Basis months for parent 1">&minus;</button><span class="val" id="v-b1">12</span><button type="button" data-k="b1" data-d="1" aria-label="More Basis months for parent 1">+</button></span>
+      </div>
+      <div class="eg-step">
+        <span class="lab" id="l-p1">ElterngeldPlus months</span>
+        <span class="ctl"><button type="button" data-k="p1" data-d="-1" aria-label="Fewer Plus months for parent 1">&minus;</button><span class="val" id="v-p1">0</span><button type="button" data-k="p1" data-d="1" aria-label="More Plus months for parent 1">+</button></span>
+      </div>
+    </div>
+
+    <div class="eg-card p2">
+      <h3 id="h-p2">Parent 2</h3>
+      <p class="hint">Two months here are what unlocks the 13th and 14th month for the household. Nobody else can use them.</p>
+      <div class="eg-step">
+        <span class="lab" id="l-a2">Basiselterngeld a month</span>
+        <span class="ctl"><button type="button" data-k="a2" data-d="-1" aria-label="Lower parent 2 monthly amount">&minus;</button><span class="val" id="v-a2">1,800</span><button type="button" data-k="a2" data-d="1" aria-label="Raise parent 2 monthly amount">+</button></span>
+      </div>
+      <div class="eg-step">
+        <span class="lab" id="l-b2">Basis months</span>
+        <span class="ctl"><button type="button" data-k="b2" data-d="-1" aria-label="Fewer Basis months for parent 2">&minus;</button><span class="val" id="v-b2">2</span><button type="button" data-k="b2" data-d="1" aria-label="More Basis months for parent 2">+</button></span>
+      </div>
+      <div class="eg-step">
+        <span class="lab" id="l-p2">ElterngeldPlus months</span>
+        <span class="ctl"><button type="button" data-k="p2" data-d="-1" aria-label="Fewer Plus months for parent 2">&minus;</button><span class="val" id="v-p2">0</span><button type="button" data-k="p2" data-d="1" aria-label="More Plus months for parent 2">+</button></span>
+      </div>
+    </div>
+  </div>
+
+  <div class="eg-bonus">
+    <span class="lab" id="l-pb">Partnerschaftsbonus months, each</span>
+    <span class="ctl" style="display:flex;align-items:center;gap:4px">
+      <button type="button" data-k="pb" data-d="-1" aria-label="Fewer Partnerschaftsbonus months">&minus;</button><span class="val" id="v-pb" style="min-width:54px;text-align:center;font:800 .88rem/1 Montserrat,sans-serif;color:var(--deep)">0</span><button type="button" data-k="pb" data-d="1" aria-label="More Partnerschaftsbonus months">+</button>
+    </span>
+    <p class="hint">Two, three or four extra ElterngeldPlus months each, on top of the 14, and only while you both work 24 to 32 hours a week in the same months.</p>
+  </div>
+
+  <div class="eg-board">
+    <div class="eg-scroll"><svg id="board" viewBox="0 0 700 318" role="img" aria-labelledby="board-t"><title id="board-t">Elterngeld months laid out over the child's first 32 Lebensmonate, with the monthly household payment below</title></svg></div>
+    <p class="eg-swipe">Swipe the board sideways to reach the later Lebensmonate.</p>
+    <div class="eg-key">
+      <span><i class="b1"></i>Parent 1 Basis</span>
+      <span><i class="b2"></i>Parent 2 Basis</span>
+      <span><i class="pl"></i>ElterngeldPlus</span>
+      <span><i class="bo"></i>Partnerschaftsbonus</span>
+    </div>
+  </div>
+
+  <div class="eg-out">
+    <div><span>Paid out in total</span><strong id="o-total">0</strong><em id="o-total-note">across the whole plan</em></div>
+    <div><span>Money stops after</span><strong id="o-last">Lebensmonat 0</strong><em id="o-last-note">the last month with a payment</em></div>
+    <div><span>Of the 14 Basis months</span><strong id="o-budget">0 used</strong><em id="o-budget-note">ElterngeldPlus counts half</em></div>
+  </div>
+
+  <div class="eg-rules" id="rules" aria-live="polite"></div>
+
+  <p class="eg-foot">The board assumes neither of you earns anything in the months you draw, which is the only case where an ElterngeldPlus month is exactly half a Basis month. Work part time and both numbers change, usually in ElterngeldPlus's favour. For the euro amount itself, use the federal Elterngeldrechner, then bring it back here. Rules from the Bundeselterngeld- und Elternzeitgesetz and the Berlin service portal, checked on 20 September 2026.</p>
+</div>
+
+<script>
+(function () {
+  var MAXM = 32;
+  var s = { a1: 1300, a2: 1800, b1: 12, p1: 0, b2: 2, p2: 0, pb: 0 };
+  var LIM = {
+    a1: { min: 300, max: 1800, step: 50 },
+    a2: { min: 300, max: 1800, step: 50 },
+    b1: { min: 0, max: 12, step: 1 },
+    b2: { min: 0, max: 12, step: 1 },
+    p1: { min: 0, max: 24, step: 1 },
+    p2: { min: 0, max: 24, step: 1 },
+    pb: { min: 0, max: 4, step: 1 }
+  };
+  var svg = document.getElementById('board');
+  var NS = 'http://www.w3.org/2000/svg';
+
+  function eur(n) { return '€' + Math.round(n).toLocaleString('en-GB'); }
+  function plusOf(a) { return Math.max(150, Math.round(a / 2)); }
+
+  function clamp(k, v) {
+    var l = LIM[k];
+    if (v < l.min) return l.min;
+    if (v > l.max) return l.max;
+    return v;
+  }
+
+  /** Lay the chosen months out over Lebensmonate 1..32 and bill each month. */
+  function layout() {
+    var blocks = [];
+    var months = [];
+    var i;
+    for (i = 0; i <= MAXM; i++) months.push({ pay: 0, parts: [] });
+
+    function put(lane, from, count, kind, pay) {
+      if (count <= 0) return from;
+      blocks.push({ lane: lane, from: from, to: from + count - 1, kind: kind });
+      for (var m = from; m < from + count; m++) {
+        if (m <= MAXM) { months[m].pay += pay; months[m].parts.push(kind); }
+      }
+      return from + count;
+    }
+
+    // Parent 1 opens at Lebensmonat 1 with the Mutterschutz months inside their Basis run.
+    var end1 = put(1, 1, s.b1, 'basis1', s.a1);
+    // Parent 2 takes their Basis months straight after, with no overlap month used by default.
+    var end2 = put(2, Math.max(1, end1), s.b2, 'basis2', s.a2);
+    // Plus months for both start once the Basis runs are done and may run in parallel.
+    var plusStart = Math.max(end1, end2, 2);
+    var e1 = put(1, plusStart, s.p1, 'plus1', plusOf(s.a1));
+    var e2 = put(2, plusStart, s.p2, 'plus2', plusOf(s.a2));
+    // The bonus months are taken together, in the same Lebensmonate.
+    var bonusStart = Math.max(e1, e2, plusStart);
+    var eb1 = put(1, bonusStart, s.pb, 'bonus', plusOf(s.a1));
+    var eb2 = put(2, bonusStart, s.pb, 'bonus', plusOf(s.a2));
+
+    var total = 0, last = 0;
+    for (i = 1; i <= MAXM; i++) { total += months[i].pay; if (months[i].pay > 0) last = i; }
+
+    return {
+      blocks: blocks, months: months, total: total, last: last,
+      basisEnd1: end1 - 1, basisEnd2: end2 - 1,
+      plusStart: plusStart, bonusStart: s.pb > 0 ? bonusStart : 0,
+      overflow: Math.max(eb1, eb2, e1, e2, end2, end1) - 1
+    };
+  }
+
+  function budgetUsed() { return s.b1 + s.b2 + (s.p1 + s.p2) / 2; }
+
+  function checks(L) {
+    var out = [];
+    var used = budgetUsed();
+    var both = (s.b1 + s.p1) > 0 && (s.b2 + s.p2) > 0;
+    var cap = both ? 14 : 12;
+
+    if (used > cap + 0.001) {
+      out.push(['bad', 'This plan spends <b>' + used.toFixed(1) + '</b> of the ' + cap + ' Basis months the household has. Take ' + (used - cap).toFixed(1) + ' month' + (Math.abs(used - cap) === 1 ? '' : 's') + ' back out, remembering that two Plus months cost one Basis month.']);
+    } else if (!both && (s.b1 + s.p1 > 0 || s.b2 + s.p2 > 0)) {
+      out.push(['warn', 'Only one of you is drawing anything, so the household is capped at <b>12 months</b>, not 14. The 13th and 14th exist only if the second parent takes at least two months.']);
+    } else if (cap - used >= 1) {
+      out.push(['warn', 'You are leaving <b>' + (cap - used).toFixed(1) + '</b> of your ' + cap + ' Basis months unused. Unused months are not paid out later and not carried over.']);
+    } else {
+      out.push(['ok', 'The plan uses <b>' + used.toFixed(1) + '</b> of the ' + cap + ' Basis months available to you.']);
+    }
+
+    if (s.b1 > 12 || s.b2 > 12) out.push(['bad', 'One parent cannot take more than <b>12 months</b> of Basiselterngeld.']);
+    if (L.basisEnd1 > 14 || L.basisEnd2 > 14) {
+      out.push(['bad', 'Basiselterngeld only exists inside the first <b>14 Lebensmonate</b>, and this plan pushes Basis months past month 14. Convert the tail into ElterngeldPlus.']);
+    }
+    if (s.pb > 0 && s.pb < 2) out.push(['bad', 'The Partnerschaftsbonus is <b>two, three or four</b> months. One month is not an option.']);
+    if (s.pb > 0 && L.bonusStart > 0 && L.plusStart < L.bonusStart && (s.p1 + s.p2) === 0 && L.bonusStart > 15) {
+      out.push(['warn', 'Your bonus months start long after the Basis run ends. After the 14th Lebensmonat the run may not be interrupted, so plan the months back to back.']);
+    }
+    if (L.overflow > MAXM) {
+      out.push(['bad', 'The plan runs past the <b>32nd Lebensmonat</b>, which is the outer edge for ElterngeldPlus. Months after that are lost.']);
+    }
+    // After the 14th Lebensmonat one empty month ends the entitlement for good.
+    var gap = 0;
+    for (var m = 15; m <= L.last; m++) if (L.months[m].pay === 0) { gap = m; break; }
+    if (gap) {
+      out.push(['bad', 'Nobody draws anything in <b>Lebensmonat ' + gap + '</b>. After the 14th month one empty Lebensmonat ends the entitlement, and the months after it are gone even though you still have them on paper.']);
+    } else if (L.last > 14) {
+      out.push(['ok', 'The tail runs without a break from month 15 to <b>month ' + L.last + '</b>. That matters: after the 14th Lebensmonat a single month in which neither of you draws ElterngeldPlus ends the entitlement, even with months left over.']);
+    }
+    if (s.pb >= 2 && !both) {
+      out.push(['warn', 'The Partnerschaftsbonus needs both of you working 24 to 32 hours a week in the same months. Single parents can take the whole bonus alone.']);
+    }
+    return out;
+  }
+
+  function draw(L) {
+    while (svg.firstChild && svg.firstChild.nodeName !== 'title') svg.removeChild(svg.lastChild);
+    if (svg.lastChild && svg.lastChild.nodeName === 'title') { /* keep */ }
+    var kids = [].slice.call(svg.childNodes);
+    kids.forEach(function (n) { if (n.nodeName !== 'title') svg.removeChild(n); });
+
+    var W = 700, padL = 30, padR = 14, top = 34;
+    var iw = (W - padL - padR) / MAXM;
+    var laneH = 26, laneGap = 7;
+    var barTop = top + 2 * laneH + laneGap + 34;
+    var barH = 118;
+
+    function el(name, attrs, text) {
+      var n = document.createElementNS(NS, name);
+      for (var k in attrs) n.setAttribute(k, attrs[k]);
+      if (text != null) n.textContent = text;
+      svg.appendChild(n);
+      return n;
+    }
+
+    // Month axis ticks every three months, plus the two rule lines that matter.
+    el('text', { x: 4, y: 13, fill: '#123D18', 'font-size': '10.5', 'font-weight': '800', 'font-family': 'Montserrat, sans-serif' }, 'LEBENSMONAT OF YOUR CHILD');
+    for (var m = 1; m <= MAXM; m++) {
+      if (m === 1 || m % 3 === 0) {
+        el('text', { x: padL + (m - 0.5) * iw, y: top - 8, 'text-anchor': 'middle', fill: '#6b7163', 'font-size': '10.5', 'font-weight': '600', 'font-family': 'Montserrat, sans-serif' }, m);
+      }
+    }
+
+    var ruleLabelY = top + 2 * laneH + laneGap + 14;
+    [14, 32].forEach(function (m) {
+      var x = padL + m * iw;
+      el('line', { x1: x, y1: top - 4, x2: x, y2: barTop + barH, stroke: '#B23A2E', 'stroke-width': '1.3', 'stroke-dasharray': '4 3', opacity: '.75' });
+      el('text', { x: m === 32 ? x - 4 : x + 4, y: ruleLabelY, 'text-anchor': m === 32 ? 'end' : 'start', fill: '#B23A2E', 'font-size': '10', 'font-weight': '800', 'font-family': 'Montserrat, sans-serif' }, m === 14 ? 'Basiselterngeld ends here' : 'ElterngeldPlus ends here');
+    });
+
+    // Two lanes of blocks.
+    var laneY = { 1: top, 2: top + laneH + laneGap };
+    [1, 2].forEach(function (lane) {
+      el('rect', { x: padL, y: laneY[lane], width: W - padL - padR, height: laneH, fill: '#F2F5EC', rx: '5' });
+      el('text', { x: 4, y: laneY[lane] + laneH / 2 + 3.5, fill: '#5a6152', 'font-size': '10', 'font-weight': '800', 'font-family': 'Montserrat, sans-serif' }, 'P' + lane);
+    });
+
+    var fill = { basis1: '#1B5E20', basis2: '#7CB342', plus1: '#1B5E20', plus2: '#7CB342', bonus: '#FFE600' };
+    L.blocks.forEach(function (b) {
+      var from = Math.min(b.from, MAXM + 1), to = Math.min(b.to, MAXM);
+      if (to < from) return;
+      var x = padL + (from - 1) * iw, w = (to - from + 1) * iw;
+      var isPlus = b.kind.indexOf('plus') === 0;
+      el('rect', {
+        x: x + 0.7, y: laneY[b.lane] + 3, width: Math.max(1.5, w - 1.4), height: laneH - 6, rx: '4',
+        fill: fill[b.kind], opacity: isPlus ? '.42' : '1',
+        stroke: b.kind === 'bonus' ? '#123D18' : (isPlus ? fill[b.kind] : 'none'),
+        'stroke-width': b.kind === 'bonus' ? '1' : (isPlus ? '1.4' : '0')
+      });
+      if (w > 34) {
+        el('text', {
+          x: x + w / 2, y: laneY[b.lane] + laneH / 2 + 3.5, 'text-anchor': 'middle',
+          fill: (b.kind === 'bonus' || isPlus) ? '#123D18' : '#fff',
+          'font-size': '10', 'font-weight': '800', 'font-family': 'Montserrat, sans-serif'
+        }, b.kind === 'bonus' ? 'Bonus' : (isPlus ? 'Plus' : 'Basis'));
+      }
+    });
+
+    // Monthly household payment, so the shape of the money is visible.
+    var peak = 0;
+    for (var k = 1; k <= MAXM; k++) peak = Math.max(peak, L.months[k].pay);
+    if (peak <= 0) peak = 1;
+    el('line', { x1: padL, y1: barTop + barH, x2: W - padR, y2: barTop + barH, stroke: 'rgba(18,61,24,.28)', 'stroke-width': '1' });
+    el('text', { x: padL, y: barTop - 7, fill: '#123D18', 'font-size': '10.5', 'font-weight': '800', 'font-family': 'Montserrat, sans-serif' }, 'PAID THAT MONTH, BOTH PARENTS');
+    el('text', { x: 4, y: barTop + 9, fill: '#5a6152', 'font-size': '9.5', 'font-weight': '700', 'font-family': 'Montserrat, sans-serif' }, eur(peak).replace('€', ''));
+
+    for (var mm = 1; mm <= MAXM; mm++) {
+      var pay = L.months[mm].pay;
+      if (pay <= 0) continue;
+      var h = Math.max(2, (pay / peak) * barH);
+      var isBonus = L.months[mm].parts.indexOf('bonus') >= 0;
+      var onlyPlus = L.months[mm].parts.every(function (p) { return p.indexOf('plus') === 0 || p === 'bonus'; });
+      el('rect', {
+        x: padL + (mm - 1) * iw + 0.8, y: barTop + barH - h, width: Math.max(1.4, iw - 1.6), height: h, rx: '2',
+        fill: isBonus ? '#FFE600' : (onlyPlus ? '#A5C97E' : '#1B5E20'),
+        stroke: isBonus ? '#123D18' : 'none', 'stroke-width': isBonus ? '.8' : '0'
+      });
+    }
+
+    // Cumulative line, because the split question is really about the total.
+    var run = 0, pts = [];
+    for (var c = 1; c <= MAXM; c++) {
+      run += L.months[c].pay;
+      pts.push((padL + (c - 0.5) * iw).toFixed(1) + ',' + (barTop + barH - (L.total ? (run / L.total) * barH : 0)).toFixed(1));
+    }
+    el('polyline', { points: pts.join(' '), fill: 'none', stroke: '#123D18', 'stroke-width': '1.8', 'stroke-dasharray': '3 3', opacity: '.65' });
+    el('text', { x: W - padR, y: barTop + 9, 'text-anchor': 'end', fill: '#123D18', 'font-size': '9.5', 'font-weight': '700', 'font-family': 'Montserrat, sans-serif' }, 'dashed: money paid so far');
+  }
+
+  function render() {
+    var L = layout();
+    document.getElementById('v-a1').textContent = s.a1.toLocaleString('en-GB');
+    document.getElementById('v-a2').textContent = s.a2.toLocaleString('en-GB');
+    document.getElementById('v-b1').textContent = s.b1;
+    document.getElementById('v-b2').textContent = s.b2;
+    document.getElementById('v-p1').textContent = s.p1;
+    document.getElementById('v-p2').textContent = s.p2;
+    document.getElementById('v-pb').textContent = s.pb;
+
+    document.getElementById('o-total').textContent = eur(L.total);
+    document.getElementById('o-total-note').textContent = L.total > 0
+      ? 'Plus months here are worth ' + eur(plusOf(s.a1)) + ' and ' + eur(plusOf(s.a2)) + ' a month'
+      : 'Give at least one parent a month to start';
+    document.getElementById('o-last').textContent = 'Lebensmonat ' + L.last;
+    document.getElementById('o-last-note').textContent = L.last >= 12
+      ? 'Your child is ' + Math.floor(L.last / 12) + ' year' + (L.last >= 24 ? 's' : '') + ' and ' + (L.last % 12) + ' months old'
+      : 'the last month with a payment';
+    var used = budgetUsed();
+    document.getElementById('o-budget').textContent = used.toFixed(1) + ' used';
+    document.getElementById('o-budget-note').textContent = 'Two Plus months spend one Basis month';
+
+    var box = document.getElementById('rules');
+    box.innerHTML = '';
+    checks(L).forEach(function (r) {
+      var p = document.createElement('p');
+      if (r[0] !== 'ok') p.className = r[0];
+      p.innerHTML = r[1];
+      box.appendChild(p);
+    });
+
+    [].slice.call(document.querySelectorAll('.eg-step button, .eg-bonus button')).forEach(function (b) {
+      var k = b.dataset.k, d = Number(b.dataset.d);
+      var next = s[k] + d * LIM[k].step;
+      b.disabled = next < LIM[k].min || next > LIM[k].max;
+    });
+
+    draw(L);
+  }
+
+  document.addEventListener('click', function (e) {
+    var b = e.target.closest ? e.target.closest('button[data-k]') : null;
+    if (!b) return;
+    var k = b.dataset.k, d = Number(b.dataset.d);
+    var next = clamp(k, s[k] + d * LIM[k].step);
+    // The bonus is two, three or four months, so one is skipped on the way up and down.
+    if (k === 'pb') {
+      if (d > 0 && s.pb === 0) next = 2;
+      if (d < 0 && s.pb === 2) next = 0;
+    }
+    if (next === s[k]) return;
+    s[k] = next;
+    render();
+  });
+
+  var rt; window.addEventListener('resize', function () { clearTimeout(rt); rt = setTimeout(render, 120); });
+  render();
+})();
+</script>
+<script src="../js/brand.js"></script>
+</body>
+</html>
