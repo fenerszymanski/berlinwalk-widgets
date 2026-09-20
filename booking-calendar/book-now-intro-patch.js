@@ -487,6 +487,17 @@
     [0, 250, 750, 1500, 3000, 6000, 10000, 15000, 22000].forEach(function (delay) {
       window.setTimeout(watch, delay);
     });
+    if (typeof MutationObserver !== 'undefined') {
+      var pageWatchPending = false;
+      new MutationObserver(function () {
+        if (pageWatchPending) return;
+        pageWatchPending = true;
+        window.requestAnimationFrame(function () {
+          pageWatchPending = false;
+          watch();
+        });
+      }).observe(document.documentElement, { childList: true, characterData: true, subtree: true });
+    }
   }
 
   function launch() {
