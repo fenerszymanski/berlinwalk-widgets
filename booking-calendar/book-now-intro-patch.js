@@ -462,6 +462,18 @@
     function watch() {
       var calendar = document.querySelector('bw-booking-calendar[navigation-mode="event"]:not([hide-intro])');
       if (!calendar) return false;
+      if (!calendar.__bwDepositCtaObserver && typeof MutationObserver !== 'undefined') {
+        calendar.__bwDepositCtaObserver = true;
+        var pending = false;
+        new MutationObserver(function () {
+          if (pending) return;
+          pending = true;
+          window.requestAnimationFrame(function () {
+            pending = false;
+            applyIntro(calendar);
+          });
+        }).observe(calendar, { childList: true, characterData: true, subtree: true });
+      }
       return applyIntro(calendar);
     }
 
