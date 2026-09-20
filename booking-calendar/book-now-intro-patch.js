@@ -14,7 +14,7 @@
   var TERMS_HELPER_ID = 'bw-booking-terms-helper';
   var FAQ_ID = 'bw-booking-management-faq';
   var INTRO_VERSION = 'booking-service-stage-20260801b';
-  var FORM_VERSION = 'booking-form-stage-20260801b';
+  var FORM_VERSION = 'booking-form-readability-20260920';
   var FAQ_VERSION = 'booking-management-faq-20260815a';
   var TERMS_LABEL = 'I agree to the free reservation terms listed below.';
   var INTRO_HTML = [
@@ -112,6 +112,24 @@
       '@media(max-width:750px){html.bw-booking-funnel-active .bw-booking-stage-section{min-height:calc(100svh - 94px)!important}html.bw-booking-funnel-active .bw-booking-stage-inner{padding:20px 0!important}html.bw-booking-funnel-active .bw-booking-stage-wrap{width:100%!important}}',
       '@media(max-width:640px){bw-booking-calendar .bw-cal-standalone{padding:18px 16px 26px}bw-booking-calendar .bw-cal-intro h1{font-size:30px;line-height:1.05}bw-booking-calendar .bw-cal-intro p{font-size:14px}bw-booking-calendar .bw-cal-intro-chip{font-size:10.5px;min-height:28px;padding:6px 9px}bw-booking-calendar .bw-cal-booking-help{padding:9px 10px}bw-booking-calendar .bw-cal-booking-help p{font-size:11.5px}html.bw-booking-funnel-active .bw-booking-management-faq{margin:14px 12px 28px;padding:15px 14px;width:calc(100% - 24px)}html.bw-booking-funnel-active .bw-booking-management-faq h2{font-size:21px}html.bw-booking-funnel-active .bw-booking-management-faq summary{font-size:14px}html.bw-booking-funnel-active .bw-booking-management-faq details p{font-size:12px}bw-booking-calendar .bw-booking-progress ol,#'+FORM_CARD_ID+' .bw-booking-progress ol{gap:5px}bw-booking-calendar .bw-booking-progress li,#'+FORM_CARD_ID+' .bw-booking-progress li{padding:4px 6px}html body #'+FORM_CARD_ID+'{margin-bottom:12px;padding:11px 11px}html body #'+FORM_CARD_ID+'>strong{font-size:16px;margin-top:8px}html body #'+FORM_CARD_ID+' p{font-size:11.5px!important}#'+TERMS_HELPER_ID+'{font-size:11.5px;margin:7px 0 4px 32px;padding:8px 10px}html.bw-booking-form-trust-active .bw-booking-form-stack{margin-bottom:6px!important}html.bw-booking-form-trust-active .bw-booking-details-stack,html.bw-booking-form-trust-active .bw-booking-submit-stack{margin-top:6px!important}}',
       '@media(min-width:641px){#' + NUDGE_ID + '{display:none!important}}',
+      'html.bw-deposit-form-ui #'+FORM_CARD_ID+'{border-radius:10px;padding:16px 18px;margin-bottom:8px}',
+      'html.bw-deposit-form-ui #'+FORM_CARD_ID+'>strong{font-size:20px;line-height:1.3;margin:16px 0 12px}',
+      'html.bw-deposit-form-ui body #'+FORM_CARD_ID+' p{font-size:14px!important;font-weight:400!important;line-height:1.55!important}',
+      'html.bw-deposit-form-ui body #'+FORM_CARD_ID+' p+p{margin-top:10px!important}',
+      'html.bw-deposit-form-ui #'+FORM_CARD_ID+' p strong{font-weight:750;color:#183d22}',
+      'html.bw-deposit-form-ui #'+FORM_CARD_ID+' .bw-deposit-now{background:#eaf3e6;border-radius:6px;padding:10px 12px}',
+      'html.bw-deposit-form-ui #'+FORM_CARD_ID+' .bw-deposit-tip{border-top:1px solid #cfe4c8;padding-top:10px}',
+      'html.bw-deposit-form-ui [data-hook="form-field-form_field_f9f6"] p{font-size:15px!important;line-height:1.6!important;font-weight:400!important}',
+      'html.bw-deposit-form-ui [data-hook="form-field-form_field_f9f6"] strong{font-weight:750!important}',
+      'html.bw-deposit-form-ui [data-hook="form-field-form_field_f9f6"] [data-hook="checkbox-core"]{align-items:flex-start;padding:12px;background:#f4f7ef;border-radius:8px}',
+      'html.bw-deposit-form-ui .bw-form-compact-shell{padding-top:20px!important}',
+      'html.bw-deposit-form-ui .bw-form-compact-heading{margin-bottom:24px!important}',
+      'html.bw-deposit-form-ui .bw-form-compact-back{margin-bottom:20px!important}',
+      'html.bw-deposit-form-ui [data-hook="booking-details-book-now-cta"]{min-height:48px;font-family:Montserrat,Arial,sans-serif;font-weight:700;border-radius:6px}',
+      '#bw-booking-payment-trust{margin:14px 0 0;padding:12px 10px;border:1px solid #dce5da;border-radius:8px;background:#f5f8f1;text-align:center;color:#24442b;font:13px/1.5 Montserrat,Arial,sans-serif}',
+      '#bw-booking-payment-trust .bw-secure-line{display:flex;align-items:center;justify-content:center;gap:6px;font-weight:700}',
+      '#bw-booking-payment-trust p{margin:5px 0 0;font-size:12px;line-height:1.5}',
+      '@media(max-width:640px){html.bw-deposit-form-ui #'+FORM_CARD_ID+'{padding:14px}html.bw-deposit-form-ui .bw-form-compact-shell{padding-top:12px!important}html.bw-deposit-form-ui .bw-form-compact-heading{margin-bottom:18px!important}html.bw-deposit-form-ui .bw-form-compact-back{margin-bottom:14px!important}}',
     ].join('');
     if (isNew) document.head.appendChild(style);
   }
@@ -353,8 +371,10 @@
     return [
       progressHtml('is-complete', 'Selected', 'is-active', 'Current step'),
       '<strong>Complete your reservation</strong>',
-      '<p>A €2 refundable reservation deposit is charged per guest now. We refund it for each guest who attends after attendance is confirmed, or if you cancel at least 24 hours before the tour.</p>',
-      '<p>For a late cancellation or no-show, the deposit is not refunded. If BerlinWalk cancels, you receive a full refund. Tips are separate and entirely up to you.</p>'
+      '<p class="bw-deposit-now"><strong>Pay now: €2 per guest</strong><br>A refundable reservation deposit, not the price of the tour.</p>',
+      '<p><strong>Attend the walk → get your deposit back.</strong><br>We issue the refund after attendance is confirmed.</p>',
+      '<p><strong>Cancel at least 24 hours before → full refund.</strong><br>Late cancellation or no-show: no deposit refund. If BerlinWalk cancels, you receive a full refund.</p>',
+      '<p class="bw-deposit-tip"><strong>Tips are separate</strong> and entirely up to you.</p>'
     ].join('');
   }
 
@@ -427,6 +447,7 @@
     }
 
     if (isDepositForm) {
+      applyDepositFormUi(activeForm);
       var oldHelper = document.getElementById(TERMS_HELPER_ID);
       if (oldHelper) oldHelper.remove();
       return Boolean(introWrap);
@@ -446,6 +467,35 @@
     }
 
     return Boolean(introWrap || termsText);
+  }
+
+  function applyDepositFormUi(form) {
+    document.documentElement.classList.add('bw-deposit-form-ui');
+    var heading = document.querySelector('[data-hook="header-title"]');
+    if (heading && heading.parentElement) {
+      heading.parentElement.classList.add('bw-form-compact-heading');
+      var shell = heading.parentElement.parentElement;
+      if (shell && shell.parentElement && shell.parentElement.getAttribute('data-hook') === 'widget-main-container') {
+        shell.classList.add('bw-form-compact-shell');
+        var before = heading.parentElement.previousElementSibling;
+        if (before && /Back/.test(textOf(before))) before.classList.add('bw-form-compact-back');
+      }
+    }
+    // Preserve the native checkbox, required state, label association and handlers.
+    var terms = form.querySelector('[data-hook="form-field-form_field_f9f6"] [data-hook="label-wrapper"] p span span:not([aria-hidden])');
+    if (terms && !terms.querySelector('strong') && /^I understand that €2 per guest/.test(textOf(terms))) {
+      terms.innerHTML = 'I understand that <strong>€2 per guest is charged now</strong> and <strong>refunded after attendance is confirmed</strong>, or if I <strong>cancel at least 24 hours before</strong> the tour. A <strong>late cancellation or no-show is not refunded</strong>. Tips are separate.';
+    }
+    var button = document.querySelector('[data-hook="booking-details-book-now-cta"]');
+    if (!button) return;
+    var label = button.querySelector('span');
+    if (label && label.textContent === 'Book Now') label.textContent = 'Continue to secure payment';
+    if (!document.getElementById('bw-booking-payment-trust')) {
+      var trust = document.createElement('div');
+      trust.id = 'bw-booking-payment-trust';
+      trust.innerHTML = '<div class="bw-secure-line"><svg aria-hidden="true" width="16" height="18" viewBox="0 0 20 22" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="9" width="14" height="11" rx="2"/><path d="M6 9V6a4 4 0 0 1 8 0v3"/><path d="M10 13v3"/></svg><span>Secure card payment · <strong>Stripe</strong></span></div><p>Enter your card details in the next step.</p>';
+      button.insertAdjacentElement('afterend', trust);
+    }
   }
 
   function start() {
