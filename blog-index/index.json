@@ -1,9 +1,9 @@
 {
-  "updatedAt": "2026-09-20T07:50:33.652Z",
+  "updatedAt": "2026-09-20T14:04:39.828Z",
   "source": "Wix Blog API",
   "popularSource": "Wix Blog metrics.views lifetime sort",
-  "totalPosts": 406,
-  "toolsTotal": 326,
+  "totalPosts": 407,
+  "toolsTotal": 327,
   "bookingUrl": "https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based",
   "navTopics": [
     {
@@ -281,23 +281,6 @@
       "relatedToolSlug": "berlin-beer-season-calendar"
     },
     {
-      "title": "Berlin Airport to Alexanderplatz: The Easy Way",
-      "slug": "how-to-get-from-berlin-airport-to-alexanderplatz-the-easy-way",
-      "path": "/post/how-to-get-from-berlin-airport-to-alexanderplatz-the-easy-way",
-      "url": "https://www.berlinwalk.com/post/how-to-get-from-berlin-airport-to-alexanderplatz-the-easy-way",
-      "excerpt": "Just landed at BER airport and need to get to Alexanderplatz? Here's the fastest, cheapest, and most stress-free way to get from Berlin Brandenburg Airport to the heart of the city — from a local who does this route constantly.",
-      "category": "Tourist Tips",
-      "categorySlug": "tourist-tips",
-      "topic": "first-day",
-      "topicLabel": "First Day in Berlin",
-      "readTime": "6 min read",
-      "publishedDate": "2026-03-03T12:12:58.270Z",
-      "image": "https://static.wixstatic.com/media/nsplsh_a03121bf8b20473fb5d65a66bb71db09~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/a%20red%20and%20yellow%20train%20traveling%20past%20a%20tall%20building.jpg",
-      "thumb": "https://static.wixstatic.com/media/nsplsh_a03121bf8b20473fb5d65a66bb71db09~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/a%20red%20and%20yellow%20train%20traveling%20past%20a%20tall%20building.jpg",
-      "alt": "sbahn berlin",
-      "relatedToolSlug": "berlin-landmarks-map"
-    },
-    {
       "title": "Public Toilets in Berlin: Where to Find Them, What They Cost, and Free Options",
       "slug": "public-toilets-in-berlin",
       "path": "/post/public-toilets-in-berlin",
@@ -313,6 +296,23 @@
       "thumb": "https://static.wixstatic.com/media/5a08a3_75e950f67226457e8af15fbe3a7f46fd~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/nsplsh_7bdfcc030bd74d1d99d1624e3799f48d~mv2.jpg",
       "alt": "Restroom sign with male and female symbols on a brick wall, pointing right. Green trees and glass buildings in the background.",
       "relatedToolSlug": "berlin-public-toilets"
+    },
+    {
+      "title": "Berlin Airport to Alexanderplatz: The Easy Way",
+      "slug": "how-to-get-from-berlin-airport-to-alexanderplatz-the-easy-way",
+      "path": "/post/how-to-get-from-berlin-airport-to-alexanderplatz-the-easy-way",
+      "url": "https://www.berlinwalk.com/post/how-to-get-from-berlin-airport-to-alexanderplatz-the-easy-way",
+      "excerpt": "Just landed at BER airport and need to get to Alexanderplatz? Here's the fastest, cheapest, and most stress-free way to get from Berlin Brandenburg Airport to the heart of the city — from a local who does this route constantly.",
+      "category": "Tourist Tips",
+      "categorySlug": "tourist-tips",
+      "topic": "first-day",
+      "topicLabel": "First Day in Berlin",
+      "readTime": "6 min read",
+      "publishedDate": "2026-03-03T12:12:58.270Z",
+      "image": "https://static.wixstatic.com/media/nsplsh_a03121bf8b20473fb5d65a66bb71db09~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/a%20red%20and%20yellow%20train%20traveling%20past%20a%20tall%20building.jpg",
+      "thumb": "https://static.wixstatic.com/media/nsplsh_a03121bf8b20473fb5d65a66bb71db09~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/a%20red%20and%20yellow%20train%20traveling%20past%20a%20tall%20building.jpg",
+      "alt": "sbahn berlin",
+      "relatedToolSlug": "berlin-landmarks-map"
     },
     {
       "title": "5 Best Döner Kebab Spots in Berlin You Need to Try",
@@ -1802,6 +1802,23 @@
   ],
   "latest": [
     {
+      "title": "Sick Leave in Berlin: How Long the Money Lasts and the Six-Month Rule Nobody Warns You About",
+      "slug": "sick-leave-in-berlin",
+      "path": "/post/sick-leave-in-berlin",
+      "url": "https://www.berlinwalk.com/post/sick-leave-in-berlin",
+      "excerpt": "Six weeks of full pay is 42 calendar days per illness, not a yearly allowance, and for the same illness it only starts again after six clear months or twelve months from the first day off. Here is what your employer owes you, what the Krankenkasse pays after that, and the one gap that ends it.",
+      "category": "Living in Berlin",
+      "categorySlug": "living-in-berlin",
+      "topic": "living-in-berlin",
+      "topicLabel": "Living in Berlin",
+      "readTime": "9 min read",
+      "publishedDate": "2026-09-20T14:02:35.804Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_8087766b6e5b4a8286a88cb84e9f12cd~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-aerztehaus-hohenzollerndamm.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_8087766b6e5b4a8286a88cb84e9f12cd~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-aerztehaus-hohenzollerndamm.jpg",
+      "alt": "A glass-fronted medical centre on Hohenzollerndamm in Berlin seen from across the street on an October afternoon, with autumn trees in front of it",
+      "relatedToolSlug": "berlin-sick-pay-clock"
+    },
+    {
       "title": "Elterngeld Berlin: The Split That Pays More and the Month You Cannot Leave Empty",
       "slug": "elterngeld-berlin",
       "path": "/post/elterngeld-berlin",
@@ -1987,23 +2004,6 @@
       "thumb": "https://static.wixstatic.com/media/5a08a3_e8d4459746b54811a28bfa68735fd473~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/00-cover-hermannstrasse-facade.jpg",
       "alt": "The ornamented brick and stone facade of an apartment building at Hermannstrasse 120 in Berlin-Neukoelln, with balconies and tall windows across two storeys",
       "relatedToolSlug": "berlin-deposit-release-ledger"
-    },
-    {
-      "title": "Berlin Monthly Ticket: The City One Costs More Than the Whole Country",
-      "slug": "berlin-monthly-ticket",
-      "path": "/post/berlin-monthly-ticket",
-      "url": "https://www.berlinwalk.com/post/berlin-monthly-ticket",
-      "excerpt": "Most people in Berlin sorted out their transport ticket once and never looked again. The prices moved. A VBB Umweltkarte for Berlin AB costs 81.30 euros a month on a subscription and 113 without a contract, while the Deutschlandticket covers every local and regional service in the country for 63. Here is where the break-even sits against single tickets, and the two things the expensive local card does that the cheap national one cannot.",
-      "category": "Living in Berlin",
-      "categorySlug": "living-in-berlin",
-      "topic": "living-in-berlin",
-      "topicLabel": "Living in Berlin",
-      "readTime": "7 min read",
-      "publishedDate": "2026-09-17T14:03:57.756Z",
-      "image": "https://static.wixstatic.com/media/5a08a3_4cf948e50ed7414bab0e1fe8b10b932f~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-u7-adenauerplatz.jpg",
-      "thumb": "https://static.wixstatic.com/media/5a08a3_4cf948e50ed7414bab0e1fe8b10b932f~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-u7-adenauerplatz.jpg",
-      "alt": "A yellow BVG U7 train to Rudow standing at the platform at Adenauerplatz U-Bahn station in Berlin-Charlottenburg, with passengers waiting along the platform edge and the departure board overhead",
-      "relatedToolSlug": "berlin-monthly-ticket-break-even"
     }
   ]
 }
