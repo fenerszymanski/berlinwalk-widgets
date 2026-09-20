@@ -1106,7 +1106,7 @@ class BWHeaderElement extends HTMLElement {
                 <span>9.8 / 10 on FreeTour</span>
               </span>
               <span class="bw-header-top-sep" aria-hidden="true">•</span>
-              <span class="bw-header-top-item">Free · Tip-based</span>
+              <span class="bw-header-top-item">€2 refundable deposit · Tip-based</span>
             </div>
           </div>
         </div>

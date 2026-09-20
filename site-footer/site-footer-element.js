@@ -443,7 +443,7 @@ class BWSiteFooterElement extends HTMLElement {
               <a class="bw-logo-link" href="${BW_SITE_FOOTER_LINKS.home}" aria-label="BerlinWalk home">
                 <img class="bw-logo-img" src="${BW_SITE_FOOTER_LOGO_URL}" alt="BerlinWalk" width="897" height="188" loading="lazy" decoding="async">
               </a>
-              <p>Free tip-based walking tours through Berlin's historic centre, built for travellers who want the city to make sense while they are standing inside it.</p>
+              <p>Tip-based walking tours through Berlin's historic centre, built for travellers who want the city to make sense while they are standing inside it.</p>
               ${this._renderSocialLinks()}
               <div class="bw-route-chip" aria-label="BerlinWalk route summary">
                 <div class="bw-route-line" aria-hidden="true">
