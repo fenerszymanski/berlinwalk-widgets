@@ -276,7 +276,7 @@
         "items": [
           {
             "q": "Is the tour really free?",
-            "a": "Yes. There is no fixed price and no upfront payment. You reserve a spot for free, walk with me, and decide at the end what the experience was worth to you."
+            "a": "The walk has no fixed tour price. To book, you pay a €2 refundable deposit per guest. We refund it after confirmed attendance or when you cancel at least 24 hours before the tour. Late cancellations and no-shows are not refunded. Your tip at the end is separate and up to you."
           },
           {
             "q": "How does tipping work?",
@@ -292,7 +292,7 @@
           },
           {
             "q": "Do I need to book in advance?",
-            "a": "Yes. Please book online at [berlinwalk.com](https://www.berlinwalk.com) so I can plan the group size and you have a confirmed free spot."
+            "a": "Yes. Please book online at [berlinwalk.com](https://www.berlinwalk.com). A €2 refundable deposit per guest secures your place and helps me plan the group size."
           }
         ]
       }
@@ -729,7 +729,7 @@
       },
       {
         "q": "Is the BerlinWalk tour really free?",
-        "a": "**Yes — it's tip-based, not free-but-not-really.** There's no fixed price and no credit card required. At the end, you tip what the experience was worth to you. Most guests tip €10–20 per person depending on group size and budget, but it's entirely up to you."
+        "a": "**The walk is tip-based, with no fixed tour price.** Booking requires a €2 refundable deposit per guest. We refund it after confirmed attendance or cancellation at least 24 hours before; late cancellations and no-shows are not refunded. Your tip at the end is separate and up to you."
       },
       {
         "q": "What will I see on the 12-stop walking tour?",
@@ -737,7 +737,7 @@
       },
       {
         "q": "Do I need to book the walking tour in advance?",
-        "a": "**Yes — please book your free spot online** so we can plan group sizes. It only takes a minute on **berlinwalk.com**. Booking is free and doesn't require a credit card. Walk-ups are welcome only if there's space, but on busy days the tour can fill up."
+        "a": "**Yes — please book online** so we can plan group sizes. Booking on **berlinwalk.com** requires a €2 refundable deposit per guest. Walk-ups are welcome only if there's space, but on busy days the tour can fill up."
       }
     ]
   },
