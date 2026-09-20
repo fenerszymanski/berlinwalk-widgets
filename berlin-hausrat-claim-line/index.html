@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Berlin Hausrat Claim Line</title>
+<link rel="stylesheet" href="../css/brand.css">
+<style>
+  :root {
+    --green: #1B5E20;
+    --deep: #123D18;
+    --yellow: #FFE600;
+    --amber: #B8860B;
+    --soft: #C5E1A5;
+    --cream: #FAFAF5;
+    --ink: #212121;
+    --muted: #5a665b;
+    --line: rgba(27, 94, 32, .18);
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--cream); color: var(--ink); }
+  .cl { max-width: 780px; margin: 0 auto; padding: 14px 12px 16px; }
+
+  .cl-head h2 { font-size: 1.06rem; margin: 0 0 3px; color: var(--green); }
+  .cl-head p { margin: 0; font-size: .78rem; color: var(--muted); line-height: 1.5; }
+
+  .cl-box { margin-top: 12px; padding: 12px; background: #fff; border: 1px solid var(--line); border-radius: 10px; }
+  .cl-slider + .cl-slider { margin-top: 14px; }
+  .cl-lab { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; margin-bottom: 6px; }
+  .cl-lab span { font-size: .61rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--deep); }
+  .cl-lab b { font-size: .95rem; color: var(--green); white-space: nowrap; }
+  input[type=range] { -webkit-appearance: none; appearance: none; width: 100%; height: 26px; background: transparent; margin: 0; display: block; }
+  input[type=range]::-webkit-slider-runnable-track { height: 6px; border-radius: 4px; background: var(--soft); }
+  input[type=range]::-moz-range-track { height: 6px; border-radius: 4px; background: var(--soft); }
+  input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 24px; height: 24px; margin-top: -9px; border-radius: 50%; background: var(--green); border: 3px solid #fff; box-shadow: 0 1px 4px rgba(0,0,0,.28); cursor: pointer; }
+  input[type=range]::-moz-range-thumb { width: 24px; height: 24px; border-radius: 50%; background: var(--green); border: 3px solid #fff; box-shadow: 0 1px 4px rgba(0,0,0,.28); cursor: pointer; }
+  input[type=range]:focus-visible { outline: 3px solid var(--yellow); outline-offset: 3px; border-radius: 6px; }
+  .cl-hint { margin: 5px 1px 0; font-size: .66rem; color: var(--muted); line-height: 1.5; }
+
+  .cl-chart { margin-top: 12px; background: #fff; border: 1px solid var(--line); border-radius: 10px; padding: 10px 6px 4px; }
+  .cl-chart svg { display: block; width: 100%; height: auto; }
+  .cl-chart text { font-family: 'Montserrat', sans-serif; }
+  .cl-cap { margin: 4px 8px 2px; font-size: .64rem; color: var(--muted); line-height: 1.5; }
+
+  .cl-legend { display: flex; flex-wrap: wrap; gap: 6px 14px; margin: 9px 6px 2px; font-size: .66rem; color: var(--muted); }
+  .cl-legend span { display: inline-flex; align-items: center; gap: 5px; }
+  .cl-key { width: 16px; height: 4px; border-radius: 2px; display: inline-block; }
+
+  .cl-out { margin-top: 12px; padding: 13px 14px; border-radius: 10px; background: var(--deep); color: #fff; }
+  .cl-out .cap { display: block; font-size: .61rem; letter-spacing: .07em; text-transform: uppercase; color: rgba(255,255,255,.66); }
+  .cl-out .big { display: block; font-size: 1.42rem; font-weight: 700; line-height: 1.15; color: var(--yellow); margin-top: 3px; }
+  .cl-out p { margin: 10px 0 0; font-size: .79rem; line-height: 1.6; color: rgba(255,255,255,.93); }
+  .cl-out p b { color: var(--yellow); }
+
+  .cl-note { margin: 12px 2px 0; font-size: .66rem; color: var(--muted); line-height: 1.6; }
+  .cl-note strong { color: var(--deep); }
+</style>
+</head>
+<body>
+<div class="cl">
+  <div class="cl-head">
+    <h2>What your Hausrat policy would actually pay</h2>
+    <p>Set the size of your flat and the sum insured written on your policy. The chart draws what you get back for a claim of any size, and where the two Berlin averages land on it.</p>
+  </div>
+
+  <div class="cl-box">
+    <div class="cl-slider">
+      <div class="cl-lab"><span>Your flat</span><b id="mqOut">68 m&#178;</b></div>
+      <input type="range" id="mq" min="20" max="150" step="1" value="68" aria-label="Flat size in square metres">
+      <p class="cl-hint" id="baseHint"></p>
+    </div>
+    <div class="cl-slider">
+      <div class="cl-lab"><span>Sum insured on the policy</span><b id="sumOut">30,000 &euro;</b></div>
+      <input type="range" id="sum" min="5000" max="130000" step="1000" value="30000" aria-label="Sum insured in euros">
+      <p class="cl-hint" id="ratioHint"></p>
+    </div>
+  </div>
+
+  <div class="cl-chart">
+    <svg id="chart" viewBox="0 0 700 430" role="img" aria-labelledby="chartTitle">
+      <title id="chartTitle">Payout against loss size</title>
+    </svg>
+    <p class="cl-cap">Loss along the bottom, what the insurer pays up the side. Both axes in euros.</p>
+  </div>
+  <div class="cl-legend">
+    <span><i class="cl-key" style="background:#1B5E20"></i> Insured at the benchmark</span>
+    <span><i class="cl-key" style="background:#B8860B"></i> Insured at your sum</span>
+    <span><i class="cl-key" style="background:#9aa79b"></i> Berlin averages</span>
+  </div>
+
+  <div class="cl-out">
+    <span class="cap">A Berlin burglary of average size costs 8,832 &euro;. You would get</span>
+    <span class="big" id="bigOut">&mdash;</span>
+    <p id="outText"></p>
+  </div>
+
+  <div class="cl-chart" style="margin-top:12px">
+    <svg id="bike" viewBox="0 0 700 168" role="img" aria-labelledby="bikeTitle">
+      <title id="bikeTitle">Bicycle cover against the average Berlin bike loss</title>
+    </svg>
+    <p class="cl-cap">Bicycle theft away from the flat is a separate clause, and it is capped at a small share of the sum insured.</p>
+  </div>
+
+  <p class="cl-note"><strong>How this is worked out.</strong> The benchmark is the 650 euro per square metre of living space that German insurers use as the minimum sum insured; take it and they normally waive the underinsurance cut. Below it, the payout is reduced in the same proportion as the sum insured to the real replacement value, even when only part of your things was hit. The euro figures are the average losses the Berlin police recorded per completed case in 2025, checked on 20 September 2026. This is an estimate to argue with your own policy, not a quote.</p>
+</div>
+<script src="../js/brand.js"></script>
+<script>
+(function () {
+  var BENCH = 650;              // euro per square metre, industry minimum sum insured
+  var BURGLARY = 8832;          // average Berlin home-burglary loss per case, 2025
+  var BIKE = 1246;              // average Berlin bike-theft loss per case, 2025
+  var XMAX = 20000;
+
+  var mq = document.getElementById('mq');
+  var sum = document.getElementById('sum');
+  var mqOut = document.getElementById('mqOut');
+  var sumOut = document.getElementById('sumOut');
+  var baseHint = document.getElementById('baseHint');
+  var ratioHint = document.getElementById('ratioHint');
+  var bigOut = document.getElementById('bigOut');
+  var outText = document.getElementById('outText');
+  var chart = document.getElementById('chart');
+  var bike = document.getElementById('bike');
+
+  function eur(n) { return Math.round(n).toLocaleString('en-GB') + ' €'; }
+  function svg(tag, attrs, text) {
+    var el = document.createElementNS('http://www.w3.org/2000/svg', tag);
+    for (var k in attrs) el.setAttribute(k, attrs[k]);
+    if (text != null) el.textContent = text;
+    return el;
+  }
+  function narrow() { return (document.body.clientWidth || 700) < 430; }
+
+  function render() {
+    var area = Number(mq.value);
+    var insured = Number(sum.value);
+    var baseline = area * BENCH;
+    var ratio = Math.min(1, insured / baseline);
+    var full = ratio >= 1;
+
+    mqOut.textContent = area + ' m²';
+    sumOut.textContent = eur(insured);
+    baseHint.textContent = 'At ' + area + ' m² the benchmark sum is ' + eur(baseline) + '.';
+    ratioHint.textContent = full
+      ? 'At or above the benchmark. Insurers normally waive the underinsurance cut, so a claim is paid in full up to the sum.'
+      : 'That is ' + Math.round(ratio * 100) + ' percent of the benchmark, so every claim is cut to ' + Math.round(ratio * 100) + ' percent of what you lost.';
+
+    var paid = function (loss) { return Math.min(loss * ratio, insured); };
+    var burg = paid(BURGLARY);
+    bigOut.textContent = eur(burg);
+    outText.innerHTML = full
+      ? 'Your sum covers the benchmark, so the whole ' + eur(BURGLARY) + ' comes back, minus any excess you agreed. Push the sum lower and watch the second line drop away from the first: that gap is the part you pay for yourself.'
+      : 'You would be left carrying <b>' + eur(BURGLARY - burg) + '</b>. The cut applies even if the burglars only took the laptop and the bike, because the insurer compares the sum on the policy with what everything in the flat would cost to replace new, not with the size of the claim.';
+
+    drawChart(baseline, insured, ratio);
+    drawBike(insured);
+  }
+
+  function drawChart(baseline, insured, ratio) {
+    var small = narrow();
+    var W = small ? 380 : 700, H = small ? 330 : 430;
+    var L = small ? 54 : 74, R = small ? 14 : 22, T = small ? 18 : 22, B = small ? 46 : 52;
+    var fs = small ? 11 : 13, fsS = small ? 10 : 12;
+    chart.setAttribute('viewBox', '0 0 ' + W + ' ' + H);
+    while (chart.childNodes.length > 1) chart.removeChild(chart.lastChild);
+
+    var pw = W - L - R, ph = H - T - B;
+    var X = function (v) { return L + (v / XMAX) * pw; };
+    var Y = function (v) { return T + ph - (v / XMAX) * ph; };
+
+    var step = 5000;
+    for (var g = 0; g <= XMAX; g += step) {
+      chart.appendChild(svg('line', { x1: L, x2: L + pw, y1: Y(g), y2: Y(g), stroke: '#e6ece6', 'stroke-width': 1 }));
+      chart.appendChild(svg('text', { x: L - 7, y: Y(g) + 4, 'text-anchor': 'end', 'font-size': fsS, fill: '#5a665b' }, g === 0 ? '0' : (g / 1000) + 'k'));
+      chart.appendChild(svg('text', { x: X(g), y: T + ph + 17, 'text-anchor': 'middle', 'font-size': fsS, fill: '#5a665b' }, g === 0 ? '0' : (g / 1000) + 'k'));
+    }
+    chart.appendChild(svg('line', { x1: L, x2: L + pw, y1: T + ph, y2: T + ph, stroke: '#9aa79b', 'stroke-width': 1.5 }));
+    chart.appendChild(svg('line', { x1: L, x2: L, y1: T, y2: T + ph, stroke: '#9aa79b', 'stroke-width': 1.5 }));
+
+    // Berlin reference markers.
+    [[BIKE, 'Average bike'], [BURGLARY, 'Average burglary']].forEach(function (m, i) {
+      chart.appendChild(svg('line', { x1: X(m[0]), x2: X(m[0]), y1: T, y2: T + ph, stroke: '#9aa79b', 'stroke-width': 1, 'stroke-dasharray': '4 4' }));
+      chart.appendChild(svg('text', {
+        x: X(m[0]) + 4, y: T + 12 + i * (small ? 26 : 18), 'font-size': fsS, fill: '#5a665b'
+      }, small ? m[1].replace('Average ', '') + ' ' + Math.round(m[0] / 1000 * 10) / 10 + 'k' : m[1] + ' ' + eur(m[0])));
+    });
+
+    // Full-cover line: paid one for one up to the benchmark sum.
+    var capFull = Math.min(baseline, XMAX);
+    var fullPts = 'M ' + X(0) + ' ' + Y(0) + ' L ' + X(capFull) + ' ' + Y(capFull) + (capFull < XMAX ? ' L ' + X(XMAX) + ' ' + Y(capFull) : '');
+    // Your line: cut in proportion, then flat at the sum.
+    var kneeX = Math.min(XMAX, insured / ratio);
+    var kneeY = Math.min(insured, kneeX * ratio);
+    var yourPts = 'M ' + X(0) + ' ' + Y(0) + ' L ' + X(kneeX) + ' ' + Y(kneeY) + (kneeX < XMAX ? ' L ' + X(XMAX) + ' ' + Y(kneeY) : '');
+
+    // The gap you carry yourself.
+    var gap = yourPts.replace('M ', 'M ') + ' L ' + X(XMAX) + ' ' + Y(Math.min(capFull, XMAX)) + (capFull < XMAX ? ' L ' + X(capFull) + ' ' + Y(capFull) : '') + ' L ' + X(0) + ' ' + Y(0) + ' Z';
+    chart.appendChild(svg('path', { d: gap, fill: '#1B5E20', 'fill-opacity': .10, stroke: 'none' }));
+    chart.appendChild(svg('path', { d: fullPts, fill: 'none', stroke: '#1B5E20', 'stroke-width': 3, 'stroke-linejoin': 'round' }));
+    chart.appendChild(svg('path', { d: yourPts, fill: 'none', stroke: '#B8860B', 'stroke-width': 3, 'stroke-linejoin': 'round' }));
+
+    // Where the two Berlin averages actually land on your line.
+    [BIKE, BURGLARY].forEach(function (loss) {
+      var p = Math.min(loss * ratio, insured);
+      chart.appendChild(svg('circle', { cx: X(loss), cy: Y(p), r: 5, fill: '#B8860B', stroke: '#fff', 'stroke-width': 2 }));
+    });
+    var burgPaid = Math.min(BURGLARY * ratio, insured);
+    chart.appendChild(svg('text', {
+      x: Math.min(X(BURGLARY) + 10, L + pw - (small ? 70 : 96)), y: Y(burgPaid) - 10,
+      'font-size': fs, 'font-weight': 700, fill: '#8a5a06'
+    }, eur(burgPaid)));
+
+    chart.appendChild(svg('text', { x: L + pw / 2, y: H - (small ? 10 : 12), 'text-anchor': 'middle', 'font-size': fsS, fill: '#5a665b' }, 'What the loss is worth'));
+    chart.appendChild(svg('text', { x: small ? 12 : 16, y: T + ph / 2, 'text-anchor': 'middle', 'font-size': fsS, fill: '#5a665b', transform: 'rotate(-90 ' + (small ? 12 : 16) + ' ' + (T + ph / 2) + ')' }, 'What you get paid'));
+  }
+
+  function drawBike(insured) {
+    var small = narrow();
+    var W = small ? 380 : 700, H = small ? 176 : 168;
+    var L = small ? 10 : 14, R = small ? 10 : 16, T = 16;
+    bike.setAttribute('viewBox', '0 0 ' + W + ' ' + H);
+    while (bike.childNodes.length > 1) bike.removeChild(bike.lastChild);
+    var pw = W - L - R;
+    var maxV = Math.max(BIKE, insured * 0.05) * 1.18;
+    var rows = [
+      { label: 'One percent cap', value: insured * 0.01, fill: '#B8860B' },
+      { label: 'Five percent cap', value: insured * 0.05, fill: '#7CB342' },
+      { label: 'Average Berlin bike lost in 2025', value: BIKE, fill: '#9aa79b' }
+    ];
+    var fsS = small ? 10 : 12;
+    var rowH = small ? 50 : 44;
+    rows.forEach(function (r, i) {
+      var y = T + i * rowH;
+      bike.appendChild(svg('text', { x: L, y: y, 'font-size': fsS, fill: '#5a665b' }, r.label));
+      var w = Math.max(2, (r.value / maxV) * pw);
+      bike.appendChild(svg('rect', { x: L, y: y + 7, width: w, height: small ? 15 : 14, rx: 3, fill: r.fill }));
+      bike.appendChild(svg('text', {
+        x: Math.min(L + w + 7, W - R - (small ? 54 : 62)), y: y + (small ? 20 : 19),
+        'font-size': fsS, 'font-weight': 700, fill: '#123D18'
+      }, eur(r.value)));
+    });
+    var bikeLine = L + (BIKE / maxV) * pw;
+    bike.appendChild(svg('line', { x1: bikeLine, x2: bikeLine, y1: T - 8, y2: T + rows.length * rowH - 12, stroke: '#9aa79b', 'stroke-width': 1, 'stroke-dasharray': '4 4' }));
+  }
+
+  mq.addEventListener('input', render);
+  sum.addEventListener('input', render);
+  window.addEventListener('resize', render);
+  render();
+})();
+</script>
+</body>
+</html>

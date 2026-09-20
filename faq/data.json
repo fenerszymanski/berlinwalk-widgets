@@ -12665,5 +12665,43 @@
         "a": "Days of incapacity proved by a medical certificate are not counted against your annual leave, so you get them back. That only works with a certificate, which is why it is worth seeing a doctor even for a short spell during a holiday. Being ill is not in itself protection against dismissal in Germany, so do not assume a certificate changes anything about notice."
       }
     ]
+  },
+  "home-insurance-in-berlin": {
+    "title": "Home Insurance in Berlin - FAQ",
+    "subtitle": "What a Hausratversicherung pays, how the sum insured changes the payout, what the bicycle clause really covers, and which liability clauses a Berlin renter needs.",
+    "items": [
+      {
+        "q": "Is home insurance compulsory in Berlin?",
+        "a": "No. Neither Hausratversicherung nor private liability is required by law for a tenant in Germany, although some landlords ask for liability cover in the tenancy agreement. Contents cover is a choice about money. Liability cover is the one most people in Berlin should treat as close to unavoidable, because in a rented flat you can do far more damage to other people’s property than you own yourself."
+      },
+      {
+        "q": "How high should the sum insured be for a Berlin flat?",
+        "a": "The industry benchmark is 650 euro per square metre of living space, and that figure is what buys the underinsurance waiver on most tariffs. For the average Berlin rented flat of 68.2 square metres it comes to 44,330 euro. If your things are genuinely worth more than that, for example because of instruments, bikes or camera gear, agree a higher sum rather than relying on the benchmark."
+      },
+      {
+        "q": "What happens if my sum insured is too low?",
+        "a": "The insurer reduces the payout in the same ratio as the sum insured to the real replacement value of your contents, and the model conditions say that reduction applies even when only part of the household was damaged. A flat insured for half of what it holds gets half of every claim. A burglary of the Berlin 2025 average, 8,832 euro, would pay 4,416 euro."
+      },
+      {
+        "q": "Is my bike covered by my Hausratversicherung in Berlin?",
+        "a": "Inside the flat, or inside a locked cellar or shared bike room on the same plot, yes, a break-in that takes it is covered as part of the contents. Locked up on the street it is a separate add-on clause, and that clause is normally capped at about one to two percent of the sum insured. Older contracts also carry a Nachtzeitklausel that excludes theft between 22:00 and 06:00 unless the bike was inside at the time."
+      },
+      {
+        "q": "Does contents insurance cover a cellar break-in?",
+        "a": "Yes. The model conditions name shared lockable rooms used to store household goods, including the Fahrradkeller and the Waschkeller, as part of the place of insurance when they are on the same plot as your flat. That matters in Berlin, where the police recorded 18,421 cellar break-ins in 2025 against 10,618 burglaries in homes."
+      },
+      {
+        "q": "What do I have to do after a burglary in Berlin for the insurance to pay?",
+        "a": "Report it to the police and get a case number, either at a Polizeiabschnitt or through the Berlin police online reporting form. Photograph the damage before you tidy, write a Stehlgutliste of what is gone with prices and purchase dates, and notify the insurer in writing straight away even if the list is not finished. Late notification is one of the common reasons a payout is reduced."
+      },
+      {
+        "q": "When can I cancel or change my policy?",
+        "a": "The standard notice period is three months before the end of the insurance year, which on a calendar-year contract falls on 30 September. The insurance year runs from the date your policy started, so check the Versicherungsschein before assuming the September date applies to you. If the problem is only the sum insured, you do not need to cancel at all, because raising it is an amendment the existing insurer will make at any point in the year."
+      },
+      {
+        "q": "What does private liability insurance need to include for a rented flat?",
+        "a": "At least 10 million euro of cover, flat, for personal injury and property damage, plus two specific clauses. Mietsachschaeden covers damage to the rented flat itself, such as scratched parquet or a cracked washbasin. Verlust fremder Schluessel covers the loss of someone else’s key, which in a Berlin building with a central locking system can mean replacing every cylinder in the stairwell."
+      }
+    ]
   }
 }
