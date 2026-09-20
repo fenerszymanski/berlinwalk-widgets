@@ -256,7 +256,7 @@
     }
 
     calendar.querySelectorAll('.bw-cal-cta').forEach(function (cta) {
-      if (cta.textContent.trim() === 'Reserve your spot') {
+      if (/^(Reserve your spot|Continue to free reservation)$/.test(cta.textContent.trim())) {
         cta.textContent = 'Continue to reservation';
       }
       if (cta.href) cta.href = preserveAttribution(cta.href);
