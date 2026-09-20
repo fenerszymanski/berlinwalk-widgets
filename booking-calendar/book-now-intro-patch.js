@@ -3,9 +3,12 @@
   var isBookingService = path.indexOf('/book-berlin-walking-tour/') === 0;
   var isBookingForm = path.indexOf('/booking-form') === 0;
   if (!isBookingService && !isBookingForm) return;
-  var RUNTIME_KEY = '__bwBookNowIntroPatchDeposit20260920';
+  var RUNTIME_KEY = '__bwBookNowIntroPatchDepositUi20260920';
   if (window[RUNTIME_KEY]) return;
   window[RUNTIME_KEY] = true;
+  // The native loader can serve a cached prior release. Let this pinned UI
+  // revision take over, and prevent a later legacy copy from replacing it.
+  window.__bwBookNowIntroPatchDeposit20260920 = true;
 
   var STYLE_ID = 'bw-book-now-intro-patch-css-20260801b';
   var NUDGE_ID = 'bw-booking-calendar-next-nudge';
