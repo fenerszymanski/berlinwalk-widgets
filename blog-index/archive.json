@@ -1,9 +1,26 @@
 {
-  "updatedAt": "2026-09-20T14:04:39.828Z",
+  "updatedAt": "2026-09-20T20:11:00.929Z",
   "source": "Wix Blog API",
-  "totalPosts": 407,
+  "totalPosts": 408,
   "bookingUrl": "https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based",
   "allPosts": [
+    {
+      "title": "Home Insurance in Berlin: The Number That Decides How Much of a Claim You Get Back",
+      "slug": "home-insurance-in-berlin",
+      "path": "/post/home-insurance-in-berlin",
+      "url": "https://www.berlinwalk.com/post/home-insurance-in-berlin",
+      "excerpt": "The premium is not the number that matters. The sum insured on your Hausratversicherung decides how much of any claim you get back, and below the industry benchmark the insurer cuts every payout in proportion, from the first euro. Here is what that costs on the two losses Berlin actually records.",
+      "category": "Living in Berlin",
+      "categorySlug": "living-in-berlin",
+      "topic": "living-in-berlin",
+      "topicLabel": "Living in Berlin",
+      "readTime": "8 min read",
+      "publishedDate": "2026-09-20T20:08:27.536Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_b89799d834a5415bba4efae6f87aa1cb~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-wohnhaus-oderstrasse-neukoelln.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_b89799d834a5415bba4efae6f87aa1cb~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-wohnhaus-oderstrasse-neukoelln.jpg",
+      "alt": "A five-storey Berlin residential block on the corner of Oderstrasse and Kienitzer Strasse in Neukoelln at dusk, its windows lit and cars parked along the kerb",
+      "relatedToolSlug": "berlin-hausrat-claim-line"
+    },
     {
       "title": "Sick Leave in Berlin: How Long the Money Lasts and the Six-Month Rule Nobody Warns You About",
       "slug": "sick-leave-in-berlin",
