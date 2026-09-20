@@ -3,12 +3,14 @@
   var isBookingService = path.indexOf('/book-berlin-walking-tour/') === 0;
   var isBookingForm = path.indexOf('/booking-form') === 0;
   if (!isBookingService && !isBookingForm) return;
-  var RUNTIME_KEY = '__bwBookNowIntroPatchDepositUi20260920';
+  var RUNTIME_KEY = '__bwBookNowIntroPatchDepositUiSafe20260920';
   if (window[RUNTIME_KEY]) return;
   window[RUNTIME_KEY] = true;
   // The native loader can serve a cached prior release. Let this pinned UI
   // revision take over, and prevent a later legacy copy from replacing it.
   window.__bwBookNowIntroPatchDeposit20260920 = true;
+  window.__bwBookNowIntroPatchDepositUi20260920 = true;
+  window.__bwBookNowIntroPatch20260801b = true;
 
   var STYLE_ID = 'bw-book-now-intro-patch-css-20260801b';
   var NUDGE_ID = 'bw-booking-calendar-next-nudge';
@@ -443,8 +445,13 @@
         introWrap.appendChild(card);
       }
       var cardVersion = FORM_VERSION + (isDepositForm ? '-deposit' : '-free');
-      if (card.getAttribute('data-bw-booking-form-version') !== cardVersion) {
-        card.setAttribute('data-bw-booking-form-version', cardVersion);
+      if (card.getAttribute('data-bw-deposit-ui-version') !== cardVersion) {
+        // Never change the legacy observer's ownership marker: cached copies
+        // otherwise replace each other's HTML in an endless microtask loop.
+        if (!card.hasAttribute('data-bw-booking-form-version')) {
+          card.setAttribute('data-bw-booking-form-version', cardVersion);
+        }
+        card.setAttribute('data-bw-deposit-ui-version', cardVersion);
         card.innerHTML = isDepositForm ? depositTrustCardHtml() : trustCardHtml();
       }
     }
@@ -509,14 +516,16 @@
         formTries += 1;
         if (applyBookingFormTrust() || formTries > 80) window.clearInterval(formTimer);
       }, 250);
-      if (typeof MutationObserver !== 'undefined') {
-        try {
-          new MutationObserver(function () { applyBookingFormTrust(); }).observe(document.documentElement, {
-            childList: true,
-            subtree: true
-          });
-        } catch (e) {}
-      }
+      // Bounded macrotask refresh handles Wix rerenders without observing our
+      // own mutations or starving hydration, input and paint.
+      var refreshes = 0;
+      var refreshTimer = window.setInterval(function () {
+        if (window.location.pathname.toLowerCase().indexOf('/booking-form') !== 0 || ++refreshes > 120) {
+          window.clearInterval(refreshTimer);
+          return;
+        }
+        applyBookingFormTrust();
+      }, 1000);
       return;
     }
 
