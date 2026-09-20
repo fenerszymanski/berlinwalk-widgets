@@ -1,9 +1,9 @@
 {
-  "updatedAt": "2026-09-20T02:15:56.074Z",
+  "updatedAt": "2026-09-20T07:50:33.652Z",
   "source": "Wix Blog API",
   "popularSource": "Wix Blog metrics.views lifetime sort",
-  "totalPosts": 405,
-  "toolsTotal": 325,
+  "totalPosts": 406,
+  "toolsTotal": 326,
   "bookingUrl": "https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based",
   "navTopics": [
     {
@@ -1802,6 +1802,23 @@
   ],
   "latest": [
     {
+      "title": "Elterngeld Berlin: The Split That Pays More and the Month You Cannot Leave Empty",
+      "slug": "elterngeld-berlin",
+      "path": "/post/elterngeld-berlin",
+      "url": "https://www.berlinwalk.com/post/elterngeld-berlin",
+      "excerpt": "Elterngeld is paid back only three Lebensmonate before the month your application arrives, Berlin is asking for new applications by post while its portal is rebuilt, and one empty month after the 14th ends the whole entitlement. Here is how to lay the months out before the envelope goes in the letterbox.",
+      "category": "Living in Berlin",
+      "categorySlug": "living-in-berlin",
+      "topic": "living-in-berlin",
+      "topicLabel": "Living in Berlin",
+      "readTime": "8 min read",
+      "publishedDate": "2026-09-20T07:48:51.885Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_2b0ee432d69f4a65a71b57815371f66a~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-mauerpark-playground.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_2b0ee432d69f4a65a71b57815371f66a~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-mauerpark-playground.jpg",
+      "alt": "A tall wooden climbing frame painted in red, yellow and blue on the sand playground in Berlin Mauerpark under a clear blue sky",
+      "relatedToolSlug": "berlin-elterngeld-split-board"
+    },
+    {
       "title": "Bürgeramt Berlin: The Errands You Can Do Without an Appointment",
       "slug": "buergeramt-berlin",
       "path": "/post/buergeramt-berlin",
@@ -1987,26 +2004,26 @@
       "thumb": "https://static.wixstatic.com/media/5a08a3_4cf948e50ed7414bab0e1fe8b10b932f~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-u7-adenauerplatz.jpg",
       "alt": "A yellow BVG U7 train to Rudow standing at the platform at Adenauerplatz U-Bahn station in Berlin-Charlottenburg, with passengers waiting along the platform edge and the departure board overhead",
       "relatedToolSlug": "berlin-monthly-ticket-break-even"
-    },
+    }
+  ],
+  "allPosts": [
     {
-      "title": "Berlin School Registration: The School Your Address Already Picked",
-      "slug": "berlin-school-registration",
-      "path": "/post/berlin-school-registration",
-      "url": "https://www.berlinwalk.com/post/berlin-school-registration",
-      "excerpt": "There is a fortnight in October when Berlin decides where its next class of six year olds will spend the following six years. This year it is 5 to 16 October 2026, in person, at one specific school: the Grundschule that the boundary around your flat has already chosen. Berlin is cut into 394 of those Einschulungsbereiche holding 413 public primary schools, and 356 of them contain exactly one school, 28 contain two or three, and ten contain none at all.",
+      "title": "Elterngeld Berlin: The Split That Pays More and the Month You Cannot Leave Empty",
+      "slug": "elterngeld-berlin",
+      "path": "/post/elterngeld-berlin",
+      "url": "https://www.berlinwalk.com/post/elterngeld-berlin",
+      "excerpt": "Elterngeld is paid back only three Lebensmonate before the month your application arrives, Berlin is asking for new applications by post while its portal is rebuilt, and one empty month after the 14th ends the whole entitlement. Here is how to lay the months out before the envelope goes in the letterbox.",
       "category": "Living in Berlin",
       "categorySlug": "living-in-berlin",
       "topic": "living-in-berlin",
       "topicLabel": "Living in Berlin",
       "readTime": "8 min read",
-      "publishedDate": "2026-09-17T07:49:29.142Z",
-      "image": "https://static.wixstatic.com/media/5a08a3_3ba503eae7f640ba8369c2f4fd0aa17c~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-grundschule-am-traveplatz.jpg",
-      "thumb": "https://static.wixstatic.com/media/5a08a3_3ba503eae7f640ba8369c2f4fd0aa17c~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-grundschule-am-traveplatz.jpg",
-      "alt": "The orange facade of Grundschule am Traveplatz on Jessnerstrasse in Berlin-Friedrichshain, with the school name spelled in raised letters above the first-floor windows and cars parked along the kerb",
-      "relatedToolSlug": "berlin-school-catchment-map"
-    }
-  ],
-  "allPosts": [
+      "publishedDate": "2026-09-20T07:48:51.885Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_2b0ee432d69f4a65a71b57815371f66a~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-mauerpark-playground.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_2b0ee432d69f4a65a71b57815371f66a~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-mauerpark-playground.jpg",
+      "alt": "A tall wooden climbing frame painted in red, yellow and blue on the sand playground in Berlin Mauerpark under a clear blue sky",
+      "relatedToolSlug": "berlin-elterngeld-split-board"
+    },
     {
       "title": "Bürgeramt Berlin: The Errands You Can Do Without an Appointment",
       "slug": "buergeramt-berlin",

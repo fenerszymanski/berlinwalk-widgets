@@ -1,9 +1,26 @@
 {
-  "updatedAt": "2026-09-20T02:15:56.074Z",
+  "updatedAt": "2026-09-20T07:50:33.652Z",
   "source": "Wix Blog API",
-  "totalPosts": 405,
+  "totalPosts": 406,
   "bookingUrl": "https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based",
   "allPosts": [
+    {
+      "title": "Elterngeld Berlin: The Split That Pays More and the Month You Cannot Leave Empty",
+      "slug": "elterngeld-berlin",
+      "path": "/post/elterngeld-berlin",
+      "url": "https://www.berlinwalk.com/post/elterngeld-berlin",
+      "excerpt": "Elterngeld is paid back only three Lebensmonate before the month your application arrives, Berlin is asking for new applications by post while its portal is rebuilt, and one empty month after the 14th ends the whole entitlement. Here is how to lay the months out before the envelope goes in the letterbox.",
+      "category": "Living in Berlin",
+      "categorySlug": "living-in-berlin",
+      "topic": "living-in-berlin",
+      "topicLabel": "Living in Berlin",
+      "readTime": "8 min read",
+      "publishedDate": "2026-09-20T07:48:51.885Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_2b0ee432d69f4a65a71b57815371f66a~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-mauerpark-playground.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_2b0ee432d69f4a65a71b57815371f66a~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-mauerpark-playground.jpg",
+      "alt": "A tall wooden climbing frame painted in red, yellow and blue on the sand playground in Berlin Mauerpark under a clear blue sky",
+      "relatedToolSlug": "berlin-elterngeld-split-board"
+    },
     {
       "title": "Bürgeramt Berlin: The Errands You Can Do Without an Appointment",
       "slug": "buergeramt-berlin",
