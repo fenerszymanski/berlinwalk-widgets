@@ -502,7 +502,7 @@ class BWSiteFooterElement extends HTMLElement {
           <div class="bw-footer-note-grid" aria-label="Tour details">
             <div class="bw-footer-note"><strong>Start</strong>World Clock at Alexanderplatz. Look for the green umbrella.</div>
             <div class="bw-footer-note"><strong>Duration</strong>About 2 hours. Ends at Hackescher Markt.</div>
-            <div class="bw-footer-note"><strong>Price</strong>Free to book, tip based at the end of the walk.</div>
+            <div class="bw-footer-note"><strong>Booking</strong>€2 refundable deposit per guest; tip separately after the walk.</div>
           </div>
 
           <div class="bw-footer-bottom">

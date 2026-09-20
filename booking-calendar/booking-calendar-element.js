@@ -838,7 +838,7 @@ class BWBookingCalendarElement extends HTMLElement {
         <div class="bw-cal-shell">
           <header class="bw-cal-head">
             <div class="bw-cal-title" role="heading" aria-level="3">${this._escape(serviceTitle)}</div>
-            ${showIntro ? this._progressMarkup() : '<span class="bw-cal-note">Free reservation. Tip at the end. Phone is only for tour-day coordination.</span>'}
+            ${showIntro ? this._progressMarkup() : '<span class="bw-cal-note">€2 refundable deposit per guest. Tip separately after the walk. Phone is only for tour-day coordination.</span>'}
           </header>
           <div class="bw-cal-body">
             ${loading ? '<div class="bw-cal-message">Loading real tour availability...</div>' : ''}
@@ -890,14 +890,14 @@ class BWBookingCalendarElement extends HTMLElement {
 
   _ctaLabel(showIntro = this._shouldShowIntro()) {
     const label = this.getAttribute('cta-label') || '';
-    if (showIntro && (!label || label === 'Reserve your spot')) return 'Continue to free reservation';
+    if (showIntro && (!label || label === 'Reserve your spot')) return 'Continue to reservation';
     return label || 'Reserve your spot';
   }
 
   _introMarkup() {
     const chips = [
-      'Free reservation',
-      'No payment now',
+      '€2 refundable deposit per guest',
+      'Tip separately after the walk',
       '~2h walk',
       'World Clock meeting point',
       'Guided by Yusuf',
@@ -905,8 +905,8 @@ class BWBookingCalendarElement extends HTMLElement {
     return `
       <div class="bw-cal-intro">
         <span class="bw-cal-intro-kicker">Book the tour</span>
-        <h2>Reserve your free spot</h2>
-        <p>No upfront payment. My walk is ~2h, tip-based at the end, and starts at the World Clock on Alexanderplatz.</p>
+        <h2>Reserve your place</h2>
+        <p>Pay a €2 refundable deposit per guest when booking. It is refunded after attendance is confirmed; your tip at the end is separate. My walk is ~2h and starts at the World Clock on Alexanderplatz.</p>
         <div class="bw-cal-intro-chips" aria-label="Tour booking details">
           ${chips.map((chip) => `<span class="bw-cal-intro-chip">${this._escape(chip)}</span>`).join('')}
         </div>

@@ -10,6 +10,7 @@
   var STYLE_ID = 'bw-book-now-intro-patch-css-20260801b';
   var NUDGE_ID = 'bw-booking-calendar-next-nudge';
   var FORM_CARD_ID = 'bw-booking-form-trust-card';
+  var DEPOSIT_FORM_ID = 'form-1ab4472a-412d-42ae-a3f6-0da618ab0367';
   var TERMS_HELPER_ID = 'bw-booking-terms-helper';
   var FAQ_ID = 'bw-booking-management-faq';
   var INTRO_VERSION = 'booking-service-stage-20260801b';
@@ -19,11 +20,11 @@
   var INTRO_HTML = [
     "<div class='bw-cal-intro' data-bw-booking-intro-version='" + INTRO_VERSION + "'>",
     "<span class='bw-cal-intro-kicker'>Book the tour</span>",
-    '<h1>Reserve your free spot</h1>',
-    "<p>No upfront payment. My walk takes about 2 hours, is tip-based at the end, and starts at the World Clock on Alexanderplatz.</p>",
+    '<h1>Reserve your place</h1>',
+    "<p>Pay a €2 refundable reservation deposit per guest now. We refund it after attendance is confirmed, or if you cancel at least 24 hours before the tour. The walk is tip-based and your tip is separate.</p>",
     "<div class='bw-cal-intro-chips' aria-label='Tour booking details'>",
-    "<span class='bw-cal-intro-chip'>Free reservation</span>",
-    "<span class='bw-cal-intro-chip'>No payment now</span>",
+    "<span class='bw-cal-intro-chip'>€2 refundable deposit per guest</span>",
+    "<span class='bw-cal-intro-chip'>Tip separately after the walk</span>",
     "<span class='bw-cal-intro-chip'>About 2 hours</span>",
     "<span class='bw-cal-intro-chip'>World Clock meeting point</span>",
     "<span class='bw-cal-intro-chip'>Guided by Yusuf</span>",
@@ -166,7 +167,7 @@
     nudge.setAttribute('role', 'status');
     nudge.setAttribute('aria-live', 'polite');
     nudge.innerHTML = [
-      '<div><strong>Time selected</strong><span>Continue to the free reservation form.</span></div>',
+      '<div><strong>Time selected</strong><span>Continue to the €2 per guest deposit form.</span></div>',
       '<button type="button">Continue</button>',
     ].join('');
     document.body.appendChild(nudge);
@@ -256,7 +257,7 @@
 
     calendar.querySelectorAll('.bw-cal-cta').forEach(function (cta) {
       if (cta.textContent.trim() === 'Reserve your spot') {
-        cta.textContent = 'Continue to free reservation';
+        cta.textContent = 'Continue to reservation';
       }
       if (cta.href) cta.href = preserveAttribution(cta.href);
     });
@@ -338,6 +339,15 @@
     ].join('');
   }
 
+  function depositTrustCardHtml() {
+    return [
+      progressHtml('is-complete', 'Selected', 'is-active', 'Current step'),
+      '<strong>Complete your reservation</strong>',
+      '<p>A €2 refundable reservation deposit is charged per guest now. We refund it for each guest who attends after attendance is confirmed, or if you cancel at least 24 hours before the tour.</p>',
+      '<p>For a late cancellation or no-show, the deposit is not refunded. If BerlinWalk cancels, you receive a full refund. Tips are separate and entirely up to you.</p>'
+    ].join('');
+  }
+
   function findTermsTextNode() {
     var nodes = document.querySelectorAll('label,span,p,div');
     for (var i = 0; i < nodes.length; i++) {
@@ -385,6 +395,9 @@
 
   function applyBookingFormTrust() {
     if (!isBookingForm) return false;
+    var activeForm = document.querySelector('form[id^="form-"]');
+    if (!activeForm) return false;
+    var isDepositForm = activeForm.id === DEPOSIT_FORM_ID;
     document.documentElement.classList.add('bw-booking-form-trust-active');
 
     var introWrap = document.querySelector('[data-hook="form-field-c75b1793-ac5f-4491-a1d6-61cc895c7b94"]');
@@ -395,10 +408,17 @@
         card.id = FORM_CARD_ID;
         introWrap.appendChild(card);
       }
-      if (card.getAttribute('data-bw-booking-form-version') !== FORM_VERSION) {
-        card.setAttribute('data-bw-booking-form-version', FORM_VERSION);
-        card.innerHTML = trustCardHtml();
+      var cardVersion = FORM_VERSION + (isDepositForm ? '-deposit' : '-free');
+      if (card.getAttribute('data-bw-booking-form-version') !== cardVersion) {
+        card.setAttribute('data-bw-booking-form-version', cardVersion);
+        card.innerHTML = isDepositForm ? depositTrustCardHtml() : trustCardHtml();
       }
+    }
+
+    if (isDepositForm) {
+      var oldHelper = document.getElementById(TERMS_HELPER_ID);
+      if (oldHelper) oldHelper.remove();
+      return Boolean(introWrap);
     }
 
     var termsText = findTermsTextNode();

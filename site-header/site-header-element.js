@@ -1163,7 +1163,7 @@ class BWHeaderElement extends HTMLElement {
             </nav>
 
             <div class="bw-header-cta">
-              <a class="bw-header-book" href="${BW_HEADER_BOOKING_URL}">Book Free Tour</a>
+              <a class="bw-header-book" href="${BW_HEADER_BOOKING_URL}">Book Live Tour</a>
               <button class="bw-header-hamburger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="${this._mobileMenuId}">
                 <span></span><span></span><span></span>
               </button>
@@ -1216,8 +1216,8 @@ class BWHeaderElement extends HTMLElement {
             </nav>
 
             <div class="bw-header-mobile-cta">
-              <a class="bw-header-book" href="${BW_HEADER_BOOKING_URL}">Book Free Tour</a>
-              <p class="bw-header-mobile-trust"><span aria-hidden="true">★ </span><strong>9.8 / 10</strong> on FreeTour · Free to book, tip-based</p>
+              <a class="bw-header-book" href="${BW_HEADER_BOOKING_URL}">Book Live Tour</a>
+              <p class="bw-header-mobile-trust"><span aria-hidden="true">★ </span><strong>9.8 / 10</strong> on FreeTour · €2 refundable deposit per guest · tip-based</p>
             </div>
           </div>
         </div>
