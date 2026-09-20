@@ -3,7 +3,7 @@
   var isBookingService = path.indexOf('/book-berlin-walking-tour/') === 0;
   var isBookingForm = path.indexOf('/booking-form') === 0;
   if (!isBookingService && !isBookingForm) return;
-  var RUNTIME_KEY = '__bwBookNowIntroPatch20260801b';
+  var RUNTIME_KEY = '__bwBookNowIntroPatchDeposit20260920';
   if (window[RUNTIME_KEY]) return;
   window[RUNTIME_KEY] = true;
 
