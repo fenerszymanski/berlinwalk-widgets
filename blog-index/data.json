@@ -1,9 +1,9 @@
 {
-  "updatedAt": "2026-09-21T13:36:17.621Z",
+  "updatedAt": "2026-09-21T20:01:33.631Z",
   "source": "Wix Blog API",
   "popularSource": "Wix Blog metrics.views lifetime sort",
-  "totalPosts": 411,
-  "toolsTotal": 331,
+  "totalPosts": 412,
+  "toolsTotal": 332,
   "bookingUrl": "https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based",
   "navTopics": [
     {
@@ -1802,6 +1802,23 @@
   ],
   "latest": [
     {
+      "title": "Cranes Near Berlin: Linum at Dusk, and How to Get Home Afterwards",
+      "slug": "cranes-near-berlin",
+      "path": "/post/cranes-near-berlin",
+      "url": "https://www.berlinwalk.com/post/cranes-near-berlin",
+      "excerpt": "Tens of thousands of cranes fly in to roost at Linum every autumn evening, about 40 km from Berlin. The peak usually comes in mid October, the last direct bus leaves before dark, and this season no bus runs at the weekend. Here is how to plan an evening that works.",
+      "category": "Living in Berlin",
+      "categorySlug": "living-in-berlin",
+      "topic": "living-in-berlin",
+      "topicLabel": "Living in Berlin",
+      "readTime": "7 min read",
+      "publishedDate": "2026-09-21T19:59:38.484Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_443bd58d0cc8455a9363044c4e08bed3~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-cranes-sunset-kremmener-luch.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_443bd58d0cc8455a9363044c4e08bed3~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-cranes-sunset-kremmener-luch.jpg",
+      "alt": "A long line of cranes flying over the Kremmener Luch as the sun sets behind a row of trees",
+      "relatedToolSlug": "berlin-crane-evening-planner"
+    },
+    {
       "title": "Vet in Berlin: What the Same Visit Costs at 10:00 and at 22:00",
       "slug": "vet-in-berlin",
       "path": "/post/vet-in-berlin",
@@ -1987,26 +2004,26 @@
       "thumb": "https://static.wixstatic.com/media/5a08a3_96b9a98a62d446cc8845c34f78391875~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/00-cover-kraftwerk-klingenberg-spree.jpg",
       "alt": "The Klingenberg power station on the bank of the Spree in Rummelsburg seen from the air, with two tall chimneys, grey silos and the river in front under a blue sky with white clouds",
       "relatedToolSlug": "berlin-electricity-offer-lines"
-    },
+    }
+  ],
+  "allPosts": [
     {
-      "title": "Tax Return in Berlin: The Years You Can Still Claim and What Your Commute Is Worth",
-      "slug": "tax-return-in-berlin",
-      "path": "/post/tax-return-in-berlin",
-      "url": "https://www.berlinwalk.com/post/tax-return-in-berlin",
-      "excerpt": "Filing a tax return is voluntary for most Berlin employees, but only four years back, and 2022 closes on 31 December 2026. A short Berlin commute rarely beats the €1,230 flat allowance on its own. Home office days, a work laptop or your own ticket usually do. Here is how to check each open year.",
+      "title": "Cranes Near Berlin: Linum at Dusk, and How to Get Home Afterwards",
+      "slug": "cranes-near-berlin",
+      "path": "/post/cranes-near-berlin",
+      "url": "https://www.berlinwalk.com/post/cranes-near-berlin",
+      "excerpt": "Tens of thousands of cranes fly in to roost at Linum every autumn evening, about 40 km from Berlin. The peak usually comes in mid October, the last direct bus leaves before dark, and this season no bus runs at the weekend. Here is how to plan an evening that works.",
       "category": "Living in Berlin",
       "categorySlug": "living-in-berlin",
       "topic": "living-in-berlin",
       "topicLabel": "Living in Berlin",
-      "readTime": "6 min read",
-      "publishedDate": "2026-09-18T19:47:30.905Z",
-      "image": "https://static.wixstatic.com/media/5a08a3_81f2a6c0cefa45539029b978daf18e41~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/00-cover-finanzamt-kreuzberg-mehringdamm.jpg",
-      "thumb": "https://static.wixstatic.com/media/5a08a3_81f2a6c0cefa45539029b978daf18e41~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/00-cover-finanzamt-kreuzberg-mehringdamm.jpg",
-      "alt": "The long yellow brick facade of the tax office on Mehringdamm in Kreuzberg under a clear blue sky, with a castle-like tower at the left end and an empty street in front",
-      "relatedToolSlug": "berlin-tax-refund-years"
-    }
-  ],
-  "allPosts": [
+      "readTime": "7 min read",
+      "publishedDate": "2026-09-21T19:59:38.484Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_443bd58d0cc8455a9363044c4e08bed3~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-cranes-sunset-kremmener-luch.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_443bd58d0cc8455a9363044c4e08bed3~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-cranes-sunset-kremmener-luch.jpg",
+      "alt": "A long line of cranes flying over the Kremmener Luch as the sun sets behind a row of trees",
+      "relatedToolSlug": "berlin-crane-evening-planner"
+    },
     {
       "title": "Vet in Berlin: What the Same Visit Costs at 10:00 and at 22:00",
       "slug": "vet-in-berlin",
