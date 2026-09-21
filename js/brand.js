@@ -257,7 +257,10 @@
       var refHost = new URL(document.referrer).hostname.toLowerCase();
       return refHost === 'www.berlinwalk.com'
         || refHost === 'berlinwalk.com'
-        || refHost.endsWith('.berlinwalk.com');
+        || refHost.endsWith('.berlinwalk.com')
+        || refHost === 'www.walkofberlin.com'
+        || refHost === 'walkofberlin.com'
+        || refHost.endsWith('.walkofberlin.com');
     } catch (e) {
       return false;
     }

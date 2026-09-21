@@ -681,6 +681,7 @@
           ['_fbp', '_fbc'].forEach(function (name) {
             document.cookie = name + '=; Max-Age=0; path=/';
             document.cookie = name + '=; Max-Age=0; path=/; domain=.berlinwalk.com';
+            document.cookie = name + '=; Max-Age=0; path=/; domain=.walkofberlin.com';
           });
         }
       } catch (err) {}

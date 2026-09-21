@@ -52,7 +52,9 @@
     var host = window.location.hostname;
     var isSafeHost = /^(localhost|127\.0\.0\.1)$/.test(host) ||
       host === 'www.berlinwalk.com' ||
-      host === 'berlinwalk.com';
+      host === 'berlinwalk.com' ||
+      host === 'www.walkofberlin.com' ||
+      host === 'walkofberlin.com';
     return isSafeHost && (
       window.location.search.indexOf('forceExitPreview=1') !== -1 ||
       window.location.search.indexOf('bwExitPreview=1') !== -1

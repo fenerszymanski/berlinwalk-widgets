@@ -405,7 +405,9 @@
       function trustedParentOrigin() {
         try {
           var origin = new URL(document.referrer).origin;
-          return origin === 'https://www.berlinwalk.com' || origin === 'https://berlinwalk.com' ? origin : '';
+          // Both site hosts: walkofberlin.com is the public address since 21 September 2026.
+          var trusted = ['https://www.berlinwalk.com', 'https://berlinwalk.com', 'https://www.walkofberlin.com', 'https://walkofberlin.com'];
+          return trusted.indexOf(origin) !== -1 ? origin : '';
         } catch (error) {
           return '';
         }
