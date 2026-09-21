@@ -9978,6 +9978,37 @@
       "iconStatus": "live-wix-media",
       "image": "https://static.wixstatic.com/media/5a08a3_8f703a4653964bfb8858103ae4fb6376~mv2.png",
       "cmsItemId": "b2f07a3c-ce36-4bd1-b4de-4571dcb49075"
+    },
+    {
+      "slug": "berlin-flu-wave-timer",
+      "title": "Berlin Flu Wave Timer",
+      "lead": "Pick the week you could get a flu shot and see how much of Berlin’s last four flu waves would have reached you after you were protected. The board plots weekly lab-confirmed flu cases in Berlin for 2022/23 to 2025/26 from Robert Koch Institute data, marks the two weeks the shot needs to work, splits each winter at the day you are covered, and names the week each wave peaked. Switch to people 60 and over for the age group the STIKO recommends it for. Checked on 21 September 2026.",
+      "category": "Discovery",
+      "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/berlin-flu-wave-timer/",
+      "embedHeight": 1510,
+      "hubCategory": "Essentials",
+      "type": "Planner",
+      "priority": 3,
+      "tags": [
+        "flu shot",
+        "flu vaccine",
+        "influenza",
+        "grippeimpfung",
+        "vaccination timing",
+        "flu season",
+        "living in berlin",
+        "health"
+      ],
+      "aliases": [
+        "when to get a flu shot berlin",
+        "flu season berlin",
+        "grippeimpfung berlin wann",
+        "flu vaccine timing germany",
+        "berlin flu wave"
+      ],
+      "iconStatus": "live-wix-media",
+      "image": "https://static.wixstatic.com/media/5a08a3_781500e3cd9a45628a13e00833b5a3a0~mv2.png",
+      "cmsItemId": "79bef817-c3e6-4a4e-908e-f96602b8ead2"
     }
   ],
   "hubCategories": [

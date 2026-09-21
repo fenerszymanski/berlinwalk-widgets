@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Berlin Flu Wave Timer</title>
+<link rel="stylesheet" href="../css/brand.css">
+<style>
+  :root {
+    --green: #1B5E20;
+    --deep: #123D18;
+    --yellow: #FFE600;
+    --lime: #7CB342;
+    --soft: #C5E1A5;
+    --cream: #FAFAF5;
+    --ink: #212121;
+    --muted: #5a665b;
+    --amber: #D9822B;
+    --line: rgba(27, 94, 32, .18);
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--cream); color: var(--ink); }
+  .fw { max-width: 780px; margin: 0 auto; padding: 14px 12px 16px; }
+
+  .fw-head h2 { font-size: 1.06rem; margin: 0 0 4px; color: var(--green); }
+  .fw-head p { margin: 0; font-size: .78rem; color: var(--muted); line-height: 1.55; }
+
+  .fw-dial { margin-top: 12px; background: var(--deep); border-radius: 12px; padding: 12px; color: #fff; display: grid; grid-template-columns: 52px 1fr 52px; align-items: center; gap: 10px; }
+  .fw-step { height: 52px; border-radius: 10px; border: 0; background: var(--yellow); color: var(--deep); font-family: inherit; font-size: 1.9rem; font-weight: 800; line-height: 1; cursor: pointer; }
+  .fw-step:disabled { background: rgba(255,255,255,.18); color: rgba(255,255,255,.5); cursor: default; }
+  .fw-step:focus-visible { outline: 3px solid #fff; outline-offset: 2px; }
+  .fw-now { text-align: center; }
+  .fw-now small { display: block; font-size: .6rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--soft); }
+  .fw-now strong { display: block; font-size: 1.28rem; margin: 3px 0 2px; letter-spacing: .01em; }
+  .fw-now span { display: block; font-size: .74rem; color: rgba(255,255,255,.82); }
+
+  .fw-ages { margin-top: 10px; display: flex; gap: 6px; flex-wrap: wrap; align-items: center; }
+  .fw-ages em { font-style: normal; font-size: .64rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--deep); margin-right: 4px; }
+  .fw-age { font-family: inherit; font-size: .76rem; font-weight: 700; padding: 7px 12px; border-radius: 999px; border: 1px solid var(--line); background: #fff; color: var(--green); cursor: pointer; }
+  .fw-age[aria-pressed="true"] { background: var(--green); color: #fff; border-color: var(--green); }
+  .fw-age:focus-visible { outline: 3px solid var(--yellow); outline-offset: 2px; }
+
+  .fw-board { margin-top: 10px; background: #fff; border: 1px solid var(--line); border-radius: 10px; padding: 8px 6px 4px; }
+  .fw-board svg { display: block; width: 100%; height: auto; }
+  .fw-key { display: flex; flex-wrap: wrap; gap: 4px 14px; padding: 6px 8px 4px; }
+  .fw-key span { display: inline-flex; align-items: center; gap: 6px; font-size: .64rem; color: var(--muted); }
+  .fw-key i { width: 14px; height: 10px; border-radius: 2px; display: inline-block; }
+
+  .fw-read { margin-top: 12px; display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  @media (max-width: 520px) { .fw-read { grid-template-columns: 1fr; } }
+  .fw-card { background: #fff; border: 1px solid var(--line); border-radius: 8px; padding: 10px 12px; }
+  .fw-card b { display: block; font-size: .61rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--deep); margin-bottom: 4px; }
+  .fw-card p { margin: 0; font-size: .84rem; line-height: 1.55; }
+  .fw-card p strong { color: var(--green); }
+  .fw-move { grid-column: 1 / -1; background: var(--yellow); border-color: rgba(0,0,0,.14); }
+  .fw-move b, .fw-move p, .fw-move p strong { color: var(--deep); }
+
+  .fw-foot { margin: 10px 2px 0; font-size: .64rem; color: var(--muted); line-height: 1.6; }
+  .fw-foot a { color: var(--green); }
+</style>
+</head>
+<body>
+<div class="fw">
+  <div class="fw-head">
+    <h2>The week your flu shot has to beat</h2>
+    <p>A flu shot needs about two weeks before it protects you, and Berlin's flu wave does not arrive on the same date every winter. Step through the calendar to the week you could actually book, and the four real Berlin winters below show how much of each wave would have reached you after you were covered.</p>
+  </div>
+
+  <div class="fw-dial" role="group" aria-label="Choose the week you get vaccinated">
+    <button class="fw-step" id="fwPrev" type="button" aria-label="One week earlier">&#8249;</button>
+    <div class="fw-now" aria-live="polite">
+      <small>I get the shot in the week of</small>
+      <strong id="fwWeek">2 November</strong>
+      <span id="fwCovered">covered from about 16 November</span>
+    </div>
+    <button class="fw-step" id="fwNext" type="button" aria-label="One week later">&#8250;</button>
+  </div>
+
+  <div class="fw-ages">
+    <em>Cases counted</em>
+    <button class="fw-age" type="button" data-age="all" aria-pressed="true">All ages</button>
+    <button class="fw-age" type="button" data-age="over60" aria-pressed="false">Only people 60 and over</button>
+  </div>
+
+  <div class="fw-board">
+    <svg id="fwPlot" viewBox="0 0 720 380" role="img" aria-label="Weekly lab-confirmed flu cases in Berlin for four winters, split at the week your protection starts"></svg>
+    <div class="fw-key">
+      <span><i style="background:var(--amber)"></i>cases before you are covered</span>
+      <span><i style="background:var(--lime)"></i>cases after you are covered</span>
+      <span><i style="background:repeating-linear-gradient(45deg,#FFE600 0 3px,#fff7b0 3px 6px)"></i>the two weeks the shot needs</span>
+    </div>
+  </div>
+
+  <div class="fw-read">
+    <div class="fw-card"><b>Worst of the four winters</b><p id="fwWorst"></p></div>
+    <div class="fw-card"><b>Where the wave peaked</b><p id="fwPeaks"></p></div>
+    <div class="fw-card fw-move"><b>My read on this week</b><p id="fwMove"></p></div>
+  </div>
+
+  <p class="fw-foot">Data: weekly lab-confirmed influenza cases reported in Berlin, <a href="https://github.com/robert-koch-institut/Influenzafaelle_in_Deutschland" target="_blank" rel="noopener">Robert Koch Institute</a>, CC BY 4.0, read on 21 September 2026. Each winter counts reporting weeks 35 to 20. Lab-confirmed cases are only the people who were tested, so the real wave is larger, but its timing is what matters here. The 2020/21 and 2021/22 seasons are left out: the first had almost no flu under pandemic rules and the second peaked in May. Dates are for the 2026/27 winter. This is timing guidance, not medical advice.</p>
+</div>
+<script src="../js/brand.js"></script>
+<script>
+(function () {
+  var DATA = null;
+  var currentStep = 0;
+  var age = 'all';
+  var FIRST = 3;   // axis index of week 38
+  var LAST = 23;   // axis index of week 5
+  var START = 10;  // axis index of week 45, the week I would book
+  var X0 = 58, X1 = 700, ROW = 78, TOP = 22, FS = 12, NARROW = false;
+  var VIEW_FIRST = 3, VIEW_LAST = 34; // week 38 to week 15
+  var MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+
+  function fmt(iso) {
+    var d = new Date(iso + 'T12:00:00Z');
+    return d.getUTCDate() + ' ' + MONTHS[d.getUTCMonth()];
+  }
+  function addDays(iso, n) {
+    var d = new Date(iso + 'T12:00:00Z');
+    d.setUTCDate(d.getUTCDate() + n);
+    return d.toISOString().slice(0, 10);
+  }
+  function xFor(i) { return X0 + (i - VIEW_FIRST) * (X1 - X0) / (VIEW_LAST - VIEW_FIRST); }
+  function seriesFor(s) { return age === 'all' ? s.all : s.over60; }
+  function seasonTotal(vals) { var t = 0; for (var i = 0; i < vals.length; i++) t += vals[i] || 0; return t; }
+  function coveredShare(vals, from) {
+    var t = seasonTotal(vals), a = 0;
+    for (var i = from; i < vals.length; i++) a += vals[i] || 0;
+    return t ? a / t : 0;
+  }
+  function el(tag, attrs, text) {
+    var n = document.createElementNS('http://www.w3.org/2000/svg', tag);
+    for (var k in attrs) n.setAttribute(k, attrs[k]);
+    if (text != null) n.textContent = text;
+    return n;
+  }
+
+  function areaPath(vals, from, to, base, scale) {
+    var pts = [];
+    for (var i = from; i <= to; i++) {
+      if (vals[i] == null) continue;
+      pts.push([xFor(i), base - vals[i] * scale]);
+    }
+    if (!pts.length) return '';
+    var d = 'M' + pts[0][0].toFixed(1) + ' ' + base;
+    for (var p = 0; p < pts.length; p++) d += ' L' + pts[p][0].toFixed(1) + ' ' + pts[p][1].toFixed(1);
+    d += ' L' + pts[pts.length - 1][0].toFixed(1) + ' ' + base + ' Z';
+    return d;
+  }
+
+  function draw() {
+    var svg = document.getElementById('fwPlot');
+    svg.replaceChildren();
+    NARROW = (svg.parentNode.clientWidth || 700) < 520;
+    var VW = NARROW ? 400 : 720;
+    X0 = NARROW ? 8 : 58; X1 = VW - 8; ROW = NARROW ? 92 : 78; TOP = NARROW ? 24 : 22; FS = NARROW ? 13 : 12;
+    svg.setAttribute('viewBox', '0 0 ' + VW + ' ' + (TOP + ROW * 4 + 26));
+    var vacc = currentStep;
+    var cover = vacc + 2;
+    var cal = DATA.calendar2026;
+    var bottom = TOP + ROW * DATA.seasons.length;
+
+    // month ticks on the 2026/27 calendar
+    var lastMonth = -1;
+    for (var i = VIEW_FIRST; i <= VIEW_LAST; i++) {
+      if (!cal[i]) continue;
+      var m = new Date(cal[i] + 'T12:00:00Z').getUTCMonth();
+      if (m !== lastMonth) {
+        lastMonth = m;
+        svg.appendChild(el('line', { x1: xFor(i), x2: xFor(i), y1: TOP - 6, y2: bottom, stroke: 'rgba(27,94,32,.10)', 'stroke-width': 1 }));
+        svg.appendChild(el('text', { x: xFor(i) + 3, y: bottom + 16, 'font-size': NARROW ? 12 : 11, fill: '#5a665b', 'font-family': 'Montserrat, sans-serif' }, NARROW ? MONTHS[m].slice(0, 1) : MONTHS[m].slice(0, 3)));
+      }
+    }
+
+    // the two weeks the shot needs, then the covered side
+    svg.appendChild(el('rect', { x: xFor(vacc), y: TOP - 8, width: Math.max(0, xFor(cover) - xFor(vacc)), height: bottom - TOP + 8, fill: 'url(#fwHatch)' }));
+    var defs = el('defs', {});
+    var pat = el('pattern', { id: 'fwHatch', width: 6, height: 6, patternUnits: 'userSpaceOnUse', patternTransform: 'rotate(45)' });
+    pat.appendChild(el('rect', { width: 6, height: 6, fill: '#fff7b0' }));
+    pat.appendChild(el('rect', { width: 3, height: 6, fill: '#FFE600' }));
+    defs.appendChild(pat);
+    svg.insertBefore(defs, svg.firstChild);
+
+    DATA.seasons.forEach(function (s, r) {
+      var vals = seriesFor(s);
+      var base = TOP + ROW * (r + 1) - 6;
+      var peak = 0, peakAt = 0;
+      for (var i = 0; i < vals.length; i++) if ((vals[i] || 0) > peak) { peak = vals[i]; peakAt = i; }
+      var scale = (ROW - 14) / (peak || 1);
+      svg.appendChild(el('line', { x1: X0, x2: X1, y1: base, y2: base, stroke: 'rgba(27,94,32,.25)', 'stroke-width': 1 }));
+      var before = areaPath(vals, VIEW_FIRST, Math.min(cover, VIEW_LAST), base, scale);
+      var after = areaPath(vals, Math.max(cover, VIEW_FIRST), VIEW_LAST, base, scale);
+      if (before) svg.appendChild(el('path', { d: before, fill: '#D9822B', opacity: .92 }));
+      if (after) svg.appendChild(el('path', { d: after, fill: '#7CB342', opacity: .95 }));
+      svg.appendChild(el('text', NARROW ? { x: X0, y: base - ROW + 26, 'font-size': FS, 'font-weight': 700, fill: '#123D18', 'font-family': 'Montserrat, sans-serif' } : { x: 4, y: base - ROW / 2 + 10, 'font-size': FS, 'font-weight': 700, fill: '#123D18', 'font-family': 'Montserrat, sans-serif' }, s.label));
+      var share = Math.round(coveredShare(vals, cover) * 100);
+      svg.appendChild(el('text', { x: X1, y: base - ROW + 26, 'text-anchor': 'end', 'font-size': FS, 'font-weight': 700, fill: share >= 90 ? '#1B5E20' : '#9a4d0f', 'font-family': 'Montserrat, sans-serif' }, share + (NARROW ? '% covered' : '% after you are covered')));
+      if (peakAt >= VIEW_FIRST && peakAt <= VIEW_LAST) {
+        svg.appendChild(el('circle', { cx: xFor(peakAt), cy: base - peak * scale, r: 3.2, fill: '#123D18' }));
+      }
+    });
+
+    svg.appendChild(el('line', { x1: xFor(vacc), x2: xFor(vacc), y1: TOP - 10, y2: bottom, stroke: '#123D18', 'stroke-width': 2, 'stroke-dasharray': '4 3' }));
+    svg.appendChild(el('text', { x: xFor(vacc) + 4, y: TOP - 11, 'font-size': NARROW ? 12 : 11, 'font-weight': 700, fill: '#123D18', 'font-family': 'Montserrat, sans-serif' }, 'shot'));
+    svg.appendChild(el('line', { x1: xFor(cover), x2: xFor(cover), y1: TOP - 10, y2: bottom, stroke: '#1B5E20', 'stroke-width': 2 }));
+
+    readout(vacc, cover);
+  }
+
+  function readout(vacc, cover) {
+    var cal = DATA.calendar2026;
+    var shotIso = cal[vacc];
+    document.getElementById('fwWeek').textContent = fmt(shotIso);
+    document.getElementById('fwCovered').textContent = 'covered from about ' + fmt(addDays(shotIso, 14));
+    document.getElementById('fwPrev').disabled = vacc <= FIRST;
+    document.getElementById('fwNext').disabled = vacc >= LAST;
+
+    var worst = null;
+    var peaks = [];
+    DATA.seasons.forEach(function (s) {
+      var vals = seriesFor(s);
+      var share = coveredShare(vals, cover);
+      if (!worst || share < worst.share) worst = { label: s.label, share: share };
+      var peak = 0, at = 0;
+      for (var i = 0; i < vals.length; i++) if ((vals[i] || 0) > peak) { peak = vals[i]; at = i; }
+      var pd = new Date(cal[at] + 'T12:00:00Z');
+      peaks.push(s.label + ': ' + pd.getUTCDate() + ' ' + MONTHS[pd.getUTCMonth()].slice(0, 3));
+    });
+    var pct = Math.round(worst.share * 100);
+    document.getElementById('fwWorst').innerHTML = 'In <strong>' + worst.label + '</strong> you would have been covered for <strong>' + pct + '%</strong> of the Berlin cases' + (age === 'all' ? '' : ' among people 60 and over') + '. ' +
+      (pct >= 95 ? 'Every one of the four winters stays at 95% or more.' : pct >= 85 ? 'That is the early winter that catches people out.' : 'Much of that wave had already been and gone.');
+    document.getElementById('fwPeaks').textContent = 'Peak week, moved onto this winter’s calendar. ' + peaks.join(', ') + '.';
+
+    var w = DATA.axisWeeks[vacc];
+    var move;
+    if (vacc <= 5) move = 'Early is fine if it is the only appointment you will actually keep. If you are over 60, I would still aim for late October, because the four peaks sat between mid-December and early February and protection fades over the winter.';
+    else if (vacc <= 10) move = 'This is the window I would book. In every one of the four winters you are covered for at least 95% of the Berlin cases, and there is no gain in going earlier than this unless it is the only slot you will actually keep.';
+    else if (vacc <= 12) move = 'Still a good week, and three of the four winters barely notice the difference. The exception is 2022/23, when the wave was already climbing in late November. Book it now rather than next week.';
+    else if (vacc <= 16) move = 'Worth doing, and the RKI still counts this inside the normal window until mid-December. In an early winter like 2022/23 you would already be in the middle of it, so do not push it further.';
+    else move = 'Later than I would plan, but not pointless. The RKI says a shot can still make sense once the wave has started, and the peak has come as late as February. If you missed the autumn, book the first slot you can get.';
+    document.getElementById('fwMove').innerHTML = move;
+  }
+
+  function bind() {
+    document.getElementById('fwPrev').addEventListener('click', function () { if (currentStep > FIRST) { currentStep--; draw(); } });
+    document.getElementById('fwNext').addEventListener('click', function () { if (currentStep < LAST) { currentStep++; draw(); } });
+    Array.prototype.forEach.call(document.querySelectorAll('.fw-age'), function (b) {
+      b.addEventListener('click', function () {
+        age = b.getAttribute('data-age');
+        Array.prototype.forEach.call(document.querySelectorAll('.fw-age'), function (o) { o.setAttribute('aria-pressed', o === b ? 'true' : 'false'); });
+        draw();
+      });
+    });
+  }
+
+  fetch('data.json', { cache: 'default' })
+    .then(function (r) { return r.json(); })
+    .then(function (j) { DATA = j; currentStep = START; bind(); draw(); window.addEventListener('resize', function () { if (DATA) draw(); }); })
+    .catch(function () {
+      document.getElementById('fwMove').textContent = 'The Berlin flu data did not load. Reload the page to try again.';
+    });
+})();
+</script>
+</body>
+</html>
