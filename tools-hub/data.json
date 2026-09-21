@@ -9946,6 +9946,38 @@
       "iconStatus": "live-wix-media",
       "image": "https://static.wixstatic.com/media/5a08a3_b6a80a11f0e84ce8933f8967c0296aa9~mv2.png",
       "cmsItemId": "26e5e88e-2c65-4985-9197-4b074e070aa7"
+    },
+    {
+      "slug": "berlin-dark-ride-window",
+      "title": "Berlin Dark Ride Window",
+      "lead": "Find the exact date your own Berlin commute crosses into the hours when bike lights are required by law. Pick the time you leave in the morning and the time you ride home, and the board plots Berlin sunrise, sunset and civil twilight for every day from September to March, marks the day the sun goes and the day the last twilight goes, counts the journeys in between, and draws the Tempelhofer Feld gate closing times on the same axes. Checked on 21 September 2026.",
+      "category": "Weather",
+      "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/berlin-dark-ride-window/",
+      "embedHeight": 1450,
+      "hubCategory": "WeatherOutdoor",
+      "type": "Planner",
+      "priority": 3,
+      "tags": [
+        "bike lights",
+        "daylight",
+        "sunset",
+        "civil twilight",
+        "cycling",
+        "stvzo",
+        "commute",
+        "living in berlin",
+        "tempelhofer feld"
+      ],
+      "aliases": [
+        "berlin sunset times",
+        "when do i need bike lights berlin",
+        "berlin daylight hours winter",
+        "fahrradbeleuchtung pflicht",
+        "berlin dark commute"
+      ],
+      "iconStatus": "live-wix-media",
+      "image": "https://static.wixstatic.com/media/5a08a3_8f703a4653964bfb8858103ae4fb6376~mv2.png",
+      "cmsItemId": "b2f07a3c-ce36-4bd1-b4de-4571dcb49075"
     }
   ],
   "hubCategories": [

@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Berlin Dark Ride Window</title>
+<link rel="stylesheet" href="../css/brand.css">
+<style>
+  :root {
+    --green: #1B5E20;
+    --deep: #123D18;
+    --yellow: #FFE600;
+    --soft: #C5E1A5;
+    --cream: #FAFAF5;
+    --ink: #212121;
+    --muted: #5a665b;
+    --line: rgba(27, 94, 32, .18);
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--cream); color: var(--ink); }
+  .dw { max-width: 780px; margin: 0 auto; padding: 14px 12px 16px; }
+
+  .dw-head h2 { font-size: 1.06rem; margin: 0 0 3px; color: var(--green); }
+  .dw-head p { margin: 0; font-size: .78rem; color: var(--muted); line-height: 1.5; }
+
+  .dw-pick { margin-top: 12px; padding: 12px; background: #fff; border: 1px solid var(--line); border-radius: 10px; display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  @media (max-width: 460px) { .dw-pick { grid-template-columns: 1fr; gap: 10px; } }
+  .dw-field label { display: block; font-size: .61rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--deep); margin-bottom: 5px; }
+  .dw-field select { width: 100%; font-family: inherit; font-size: .95rem; font-weight: 700; color: var(--green); background: var(--cream); border: 1px solid var(--line); border-radius: 8px; padding: 9px 10px; -webkit-appearance: none; appearance: none; background-image: linear-gradient(45deg, transparent 50%, var(--green) 50%), linear-gradient(135deg, var(--green) 50%, transparent 50%); background-position: calc(100% - 17px) 55%, calc(100% - 12px) 55%; background-size: 5px 5px, 5px 5px; background-repeat: no-repeat; }
+  .dw-field select:focus-visible { outline: 3px solid var(--yellow); outline-offset: 2px; }
+
+  .dw-board { margin-top: 12px; background: #fff; border: 1px solid var(--line); border-radius: 10px; padding: 10px 6px 2px; }
+  .dw-board svg { display: block; width: 100%; height: auto; }
+
+  .dw-key { display: flex; flex-wrap: wrap; gap: 4px 14px; padding: 8px 8px 4px; }
+  .dw-key span { display: inline-flex; align-items: center; gap: 6px; font-size: .64rem; color: var(--muted); }
+  .dw-key i { width: 14px; height: 10px; border-radius: 2px; display: inline-block; }
+
+  .dw-read { margin-top: 12px; display: grid; gap: 8px; }
+  .dw-card { background: #fff; border: 1px solid var(--line); border-left: 4px solid var(--green); border-radius: 8px; padding: 10px 12px; }
+  .dw-card.hi { background: var(--yellow); border-color: rgba(0,0,0,.14); border-left-color: var(--deep); }
+  .dw-card b { display: block; font-size: .61rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--deep); margin-bottom: 4px; }
+  .dw-card p { margin: 0; font-size: .85rem; line-height: 1.55; color: var(--ink); }
+  .dw-card p em { font-style: normal; font-weight: 700; color: var(--green); }
+  .dw-card.hi p em { color: var(--deep); }
+
+  .dw-strip { margin-top: 12px; background: #fff; border: 1px solid var(--line); border-radius: 10px; padding: 10px 10px 4px; }
+  .dw-strip h3 { margin: 0 0 2px; font-size: .68rem; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; color: var(--deep); }
+  .dw-strip p { margin: 0 0 6px; font-size: .68rem; color: var(--muted); line-height: 1.5; }
+  .dw-strip svg { display: block; width: 100%; height: auto; }
+
+  .dw-foot { margin: 10px 2px 0; font-size: .64rem; color: var(--muted); line-height: 1.6; }
+  .dw-foot a { color: var(--green); }
+</style>
+</head>
+<body>
+<div class="dw">
+  <div class="dw-head">
+    <h2>When your Berlin ride home goes dark</h2>
+    <p>Berlin loses light faster than almost anywhere else in Germany through October. Pick the two times you actually travel and the board below shows the dates your own commute crosses into the hours when lights are required by law.</p>
+  </div>
+
+  <div class="dw-pick">
+    <div class="dw-field">
+      <label for="dw-am">Morning departure</label>
+      <select id="dw-am"></select>
+    </div>
+    <div class="dw-field">
+      <label for="dw-pm">Ride home</label>
+      <select id="dw-pm"></select>
+    </div>
+  </div>
+
+  <div class="dw-board">
+    <svg id="dw-svg" role="img" aria-label="Daylight, twilight and darkness in Berlin from September to March, with your two travel times drawn across it"></svg>
+    <div class="dw-key">
+      <span><i style="background:#FFF1A8"></i>Daylight</span>
+      <span><i style="background:#8FA86F"></i>Twilight, lights already required</span>
+      <span><i style="background:#123D18"></i>Darkness</span>
+      <span><i style="background:#FFE600;border:1px solid rgba(0,0,0,.3)"></i>Your travel times</span>
+    </div>
+  </div>
+
+  <div class="dw-read" id="dw-read" aria-live="polite"></div>
+
+  <div class="dw-strip">
+    <h3>Berlin road accidents involving cyclists, by month</h3>
+    <p>Police-recorded accidents in Berlin in 2025. September sits above August and October, which is the month the evenings go dark while the number of people still riding stays high.</p>
+    <svg id="dw-bars" role="img" aria-label="Monthly bar chart of Berlin road accidents involving cyclists in 2025, with September highlighted"></svg>
+  </div>
+
+  <p class="dw-foot">Sun times are calculated for the centre of Berlin and cross-checked against published almanac values; they shift by about a minute across the city. Twilight here means civil twilight, the window when the sun is up to six degrees below the horizon and the sky still holds some light. Gate hours are the published monthly hours for Tempelhofer Feld. Accident counts come from the Berlin police annual road safety report for 2025. Checked on 21 September 2026.</p>
+</div>
+
+<script src="../js/brand.js"></script>
+<script>
+(function () {
+  var NS = 'http://www.w3.org/2000/svg';
+  var board = document.getElementById('dw-svg');
+  var bars = document.getElementById('dw-bars');
+  var read = document.getElementById('dw-read');
+  var amSel = document.getElementById('dw-am');
+  var pmSel = document.getElementById('dw-pm');
+  var D = null;
+
+  var MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+  var MSHORT = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+
+  function el(tag, attrs, text) {
+    var n = document.createElementNS(NS, tag);
+    for (var k in attrs) if (attrs[k] !== null && attrs[k] !== undefined) n.setAttribute(k, attrs[k]);
+    if (text !== undefined) n.textContent = text;
+    return n;
+  }
+  function clock(h) {
+    var t = Math.round(h * 60);
+    return String(Math.floor(t / 60)).padStart(2, '0') + ':' + String(t % 60).padStart(2, '0');
+  }
+  function pretty(iso) {
+    var p = iso.split('-');
+    return parseInt(p[2], 10) + ' ' + MONTHS[parseInt(p[1], 10) - 1];
+  }
+  function month(iso) { return parseInt(iso.split('-')[1], 10); }
+
+  function fillTimes() {
+    var i, o;
+    for (i = 12; i <= 21; i++) {
+      o = document.createElement('option');
+      o.value = String(i / 2);
+      o.textContent = clock(i / 2);
+      if (i === 16) o.selected = true;
+      amSel.appendChild(o);
+    }
+    for (i = 30; i <= 46; i++) {
+      o = document.createElement('option');
+      o.value = String(i / 2);
+      o.textContent = clock(i / 2);
+      if (i === 37) o.selected = true;
+      pmSel.appendChild(o);
+    }
+  }
+
+  /* First date on which the evening time falls after a given curve, and the date it clears it again. */
+  function crossings(hour, curve, evening) {
+    var first = -1, back = -1, count = 0, i;
+    for (i = 0; i < D.dates.length; i++) {
+      var dark = evening ? hour > curve[i] : hour < curve[i];
+      if (dark) {
+        count++;
+        if (first < 0) first = i;
+        back = i;
+      }
+    }
+    return { first: first, last: back, count: count };
+  }
+
+  function drawBoard(small) {
+    board.textContent = '';
+    var W = small ? 360 : 700;
+    var H = small ? 300 : 340;
+    var L = small ? 30 : 40, R = small ? 10 : 16, T = 12, B = small ? 26 : 28;
+    board.setAttribute('viewBox', '0 0 ' + W + ' ' + H);
+    var pw = W - L - R, ph = H - T - B;
+    var n = D.dates.length;
+    var TOP = 5, BOT = 23;
+    var x = function (i) { return L + (i / (n - 1)) * pw; };
+    var y = function (h) { return T + ((h - TOP) / (BOT - TOP)) * ph; };
+
+    board.appendChild(el('rect', { x: L, y: T, width: pw, height: ph, fill: '#123D18' }));
+
+    function band(top, bottom, fill) {
+      var pts = [], i;
+      for (i = 0; i < n; i++) pts.push(x(i).toFixed(1) + ',' + y(top[i]).toFixed(1));
+      for (i = n - 1; i >= 0; i--) pts.push(x(i).toFixed(1) + ',' + y(bottom[i]).toFixed(1));
+      board.appendChild(el('polygon', { points: pts.join(' '), fill: fill }));
+    }
+    band(D.dawn, D.dusk, '#8FA86F');
+    band(D.sunrise, D.sunset, '#FFF1A8');
+
+    /* hour grid */
+    var hSpacing = small ? 3 : 2;
+    for (var h = 6; h <= 22; h += hSpacing) {
+      board.appendChild(el('line', { x1: L, x2: L + pw, y1: y(h), y2: y(h), stroke: 'rgba(255,255,255,.16)', 'stroke-width': 1 }));
+      board.appendChild(el('text', { x: L - 5, y: y(h) + 3.5, 'text-anchor': 'end', 'font-size': small ? 9 : 10, fill: '#5a665b' }, clock(h)));
+    }
+
+    /* month divisions */
+    var seen = {};
+    for (var i = 0; i < n; i++) {
+      var m = month(D.dates[i]);
+      if (!seen[m]) {
+        seen[m] = true;
+        if (i > 0) board.appendChild(el('line', { x1: x(i), x2: x(i), y1: T, y2: T + ph, stroke: 'rgba(255,255,255,.28)', 'stroke-width': 1 }));
+        board.appendChild(el('text', {
+          x: x(i) + 3, y: H - B + (small ? 13 : 15),
+          'font-size': small ? 9 : 11, 'font-weight': 700, fill: '#5a665b'
+        }, small ? MSHORT[m - 1].charAt(0) : MSHORT[m - 1]));
+      }
+    }
+
+    /* the clock change */
+    var ccIndex = D.dates.indexOf(D.clockChange);
+    if (ccIndex > 0) {
+      board.appendChild(el('line', { x1: x(ccIndex), x2: x(ccIndex), y1: T, y2: T + ph, stroke: '#fff', 'stroke-width': 1.5, 'stroke-dasharray': '3 3' }));
+      board.appendChild(el('text', {
+        x: x(ccIndex) - 4, y: T + 11, 'text-anchor': 'end',
+        'font-size': small ? 8.5 : 10, 'font-weight': 700, fill: '#fff'
+      }, small ? 'Clocks' : 'Clocks back'));
+    }
+
+    /* Tempelhofer Feld gate closing, drawn as the stepped line it really is */
+    var gate = [], gi;
+    for (gi = 0; gi < n; gi++) gate.push(D.feld[String(month(D.dates[gi]))][1]);
+    var gpts = [];
+    for (gi = 0; gi < n; gi++) gpts.push(x(gi).toFixed(1) + ',' + y(gate[gi]).toFixed(1));
+    board.appendChild(el('polyline', { points: gpts.join(' '), fill: 'none', stroke: '#ffffff', 'stroke-width': 1.4, 'stroke-dasharray': '5 4', opacity: .75 }));
+    board.appendChild(el('text', {
+      x: L + 5, y: y(D.feld['9'][1]) + (small ? 12 : 14),
+      'font-size': small ? 8.5 : 10, fill: '#fff', opacity: .9
+    }, small ? 'Feld gates shut' : 'Tempelhofer Feld gates shut'));
+
+    /* the reader's two lines */
+    var am = parseFloat(amSel.value), pm = parseFloat(pmSel.value);
+    [[am, 'Morning'], [pm, 'Home']].forEach(function (pair) {
+      var hv = pair[0];
+      if (hv < TOP || hv > BOT) return;
+      board.appendChild(el('line', { x1: L, x2: L + pw, y1: y(hv), y2: y(hv), stroke: '#FFE600', 'stroke-width': 2.4 }));
+      board.appendChild(el('rect', { x: L + 3, y: y(hv) - (small ? 9 : 10), width: small ? 64 : 72, height: small ? 13 : 15, rx: 3, fill: '#FFE600' }));
+      board.appendChild(el('text', {
+        x: L + 7, y: y(hv) - (small ? 0.5 : 0.5),
+        'font-size': small ? 8.5 : 10, 'font-weight': 700, fill: '#212121'
+      }, pair[1] + ' ' + clock(hv)));
+    });
+
+    /* mark where the evening ride first loses the sun and then the last light */
+    var sunsetCross = crossings(pm, D.sunset, true);
+    var duskCross = crossings(pm, D.dusk, true);
+    [[sunsetCross.first, '#B8860B'], [duskCross.first, '#123D18']].forEach(function (pair) {
+      var idx = pair[0];
+      if (idx < 0) return;
+      board.appendChild(el('circle', { cx: x(idx), cy: y(pm), r: small ? 4 : 4.6, fill: '#fff', stroke: pair[1], 'stroke-width': 2.4 }));
+    });
+
+    board.appendChild(el('rect', { x: L, y: T, width: pw, height: ph, fill: 'none', stroke: 'rgba(27,94,32,.35)', 'stroke-width': 1 }));
+  }
+
+  function drawBars(small) {
+    bars.textContent = '';
+    var W = small ? 360 : 700, H = small ? 108 : 118;
+    var L = 6, R = 6, T = 10, B = 18;
+    bars.setAttribute('viewBox', '0 0 ' + W + ' ' + H);
+    var pw = W - L - R, ph = H - T - B;
+    var vals = [], i;
+    for (i = 1; i <= 12; i++) vals.push(D.cyclistAccidents[String(i)]);
+    var max = Math.max.apply(null, vals) * 1.12;
+    var slot = pw / 12;
+    var bw = slot * 0.66;
+    for (i = 0; i < 12; i++) {
+      var hgt = Math.max(2, (vals[i] / max) * ph);
+      var cx = L + slot * i + (slot - bw) / 2;
+      var sep = i === 8;
+      bars.appendChild(el('rect', { x: cx, y: T + ph - hgt, width: bw, height: hgt, rx: 2, fill: sep ? '#FFE600' : '#7CB342' }));
+      if (sep) {
+        bars.appendChild(el('text', {
+          x: cx + bw / 2, y: T + ph - hgt - 3, 'text-anchor': 'middle',
+          'font-size': small ? 9 : 10, 'font-weight': 700, fill: '#123D18'
+        }, String(vals[i])));
+      }
+      bars.appendChild(el('text', {
+        x: cx + bw / 2, y: H - 6, 'text-anchor': 'middle',
+        'font-size': small ? 8 : 9.5, 'font-weight': sep ? 700 : 400, fill: sep ? '#123D18' : '#5a665b'
+      }, small ? MSHORT[i].charAt(0) : MSHORT[i]));
+    }
+    bars.appendChild(el('line', { x1: L, x2: L + pw, y1: T + ph, y2: T + ph, stroke: 'rgba(27,94,32,.3)', 'stroke-width': 1 }));
+  }
+
+  function card(kind, label, html) {
+    var d = document.createElement('div');
+    d.className = 'dw-card' + (kind ? ' hi' : '');
+    var b = document.createElement('b'); b.textContent = label;
+    var p = document.createElement('p'); p.innerHTML = html;
+    d.appendChild(b); d.appendChild(p);
+    return d;
+  }
+
+  function writeReadout() {
+    read.textContent = '';
+    var am = parseFloat(amSel.value), pm = parseFloat(pmSel.value);
+
+    var sunsetCross = crossings(pm, D.sunset, true);
+    var duskCross = crossings(pm, D.dusk, true);
+    var lit = 'Your <em>' + clock(pm) + '</em> ride home stays in full daylight the whole way to April. Nothing to work out.';
+    if (sunsetCross.first >= 0) {
+      lit = 'From <em>' + pretty(D.dates[sunsetCross.first]) + '</em> your <em>' + clock(pm) +
+        '</em> ride home starts after the sun has gone, which is already the point where German law asks for lights. '
+        + (duskCross.first >= 0
+          ? 'From <em>' + pretty(D.dates[duskCross.first]) + '</em> the last of the twilight is gone too, so you are riding in real darkness.'
+          : 'It never quite loses the twilight before spring.');
+    }
+    read.appendChild(card(true, 'Your ride home', lit));
+
+    if (sunsetCross.count > 0) {
+      var backDate = sunsetCross.last < D.dates.length - 1
+        ? 'It gets its daylight back on <em>' + pretty(D.dates[sunsetCross.last + 1]) + '</em>, so that is <em>' + sunsetCross.count + ' rides home</em> in the dark half of the day.'
+        : 'It is still dark on 31 March, the last date this board covers, so the count of <em>' + sunsetCross.count + ' evenings</em> is the floor and not the total.';
+      read.appendChild(card(false, 'How long it lasts', backDate));
+    }
+
+    var dawnCross = crossings(am, D.sunrise, false);
+    var mText = 'Your <em>' + clock(am) + '</em> start keeps the sun all winter. That is unusual in Berlin and worth knowing.';
+    if (dawnCross.first >= 0) {
+      mText = 'Leaving at <em>' + clock(am) + '</em> puts you out before sunrise from <em>' + pretty(D.dates[dawnCross.first]) +
+        '</em>, on <em>' + dawnCross.count + ' mornings</em> in total. The front light matters more here: you are riding towards drivers who are looking into a low sun or no sun at all.';
+    }
+    read.appendChild(card(false, 'Your morning', mText));
+
+    /* Tempelhofer Feld: the month its gates shut before the reader gets there */
+    var shutMonth = -1, i;
+    for (i = 0; i < D.dates.length; i++) {
+      var g = D.feld[String(month(D.dates[i]))][1];
+      if (pm > g) { shutMonth = i; break; }
+    }
+    var feldText = shutMonth >= 0
+      ? 'The gates at Tempelhofer Feld follow the light, not the clock. From <em>' + pretty(D.dates[shutMonth]) +
+        '</em> they are shut by <em>' + clock(D.feld[String(month(D.dates[shutMonth]))][1]) +
+        '</em>, which is before your ride home, so the shortcut across the Feld is gone and you are back on the road around it.'
+      : 'Your ride home is early enough that the Tempelhofer Feld gates are still open all winter, even in December when they shut at ' + clock(D.feld['12'][1]) + '.';
+    read.appendChild(card(false, 'The route that closes with the light', feldText));
+
+    var sep1 = D.sunset[0], sep30 = D.sunset[D.dates.indexOf('2026-09-30')];
+    read.appendChild(card(false, 'Why September feels sudden',
+      'Berlin sunset moves from <em>' + clock(sep1) + '</em> on 1 September to <em>' + clock(sep30) +
+      '</em> on 30 September. That is <em>' + (Math.round(sep1 * 60) - Math.round(sep30 * 60)) +
+      ' minutes</em> in one month, and then the clocks take another hour on 25 October.'));
+  }
+
+  function render() {
+    if (!D) return;
+    var small = window.innerWidth < 520;
+    drawBoard(small);
+    drawBars(small);
+    writeReadout();
+  }
+
+  fillTimes();
+  amSel.addEventListener('change', render);
+  pmSel.addEventListener('change', render);
+  window.addEventListener('resize', render);
+
+  fetch('data.json', { cache: 'default' })
+    .then(function (r) { return r.json(); })
+    .then(function (json) { D = json; render(); })
+    .catch(function () {
+      read.appendChild(card(true, 'Sun data', 'The daylight table did not load. Reload the page and it should come back.'));
+    });
+})();
+</script>
+</body>
+</html>
