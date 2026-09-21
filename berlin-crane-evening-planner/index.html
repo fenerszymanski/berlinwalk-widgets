@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Linum Crane Evening Planner</title>
+<link rel="stylesheet" href="../css/brand.css">
+<style>
+  :root {
+    --green: #1B5E20;
+    --deep: #123D18;
+    --yellow: #FFE600;
+    --lime: #7CB342;
+    --soft: #C5E1A5;
+    --paper: #FFFFFF;
+    --wash: #F3F6EF;
+    --ink: #212121;
+    --muted: #56615a;
+    --dusk: #33415C;
+    --night: #1D2537;
+    --amber: #F2A541;
+    --water: #9CC7DA;
+    --line: #D9E2D3;
+    --stop: #B23A48;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--wash); color: var(--ink); }
+  .cp { max-width: 800px; margin: 0 auto; padding: 16px 14px 18px; }
+  .cp-top h2 { margin: 0 0 5px; font-size: 1.08rem; color: var(--deep); }
+  .cp-top p { margin: 0; font-size: .8rem; line-height: 1.55; color: var(--muted); }
+
+  .cp-controls { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 2fr); gap: 10px; margin-top: 12px; align-items: end; }
+  .cp-field label, .cp-field .cp-lab { display: block; font-size: .62rem; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: var(--green); margin-bottom: 4px; }
+  .cp-field input[type="date"] { font-family: inherit; font-size: .85rem; font-weight: 700; color: var(--ink); background: var(--paper); border: 1px solid var(--line); border-radius: 8px; padding: 8px 8px; width: 100%; min-height: 42px; }
+  .cp-modes { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px; }
+  .cp-mode { font-family: inherit; font-size: .74rem; font-weight: 800; line-height: 1.25; color: var(--deep); background: var(--paper); border: 1px solid var(--line); border-radius: 9px; padding: 8px 6px; min-height: 42px; cursor: pointer; }
+  .cp-mode[aria-current="true"] { background: var(--deep); color: #fff; border-color: var(--deep); }
+  .cp-mode:focus-visible, .cp-field input:focus-visible, .cp-jump:focus-visible { outline: 3px solid var(--lime); outline-offset: 2px; }
+
+  .cp-verdict { margin-top: 12px; background: var(--deep); color: #fff; border-radius: 12px; padding: 12px 14px; font-size: .82rem; line-height: 1.6; }
+  .cp-verdict strong { color: var(--yellow); }
+  .cp-verdict .cp-day { display: block; font-size: .64rem; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: var(--soft); margin-bottom: 3px; }
+  .cp-jump { display: inline-block; margin-top: 8px; font-family: inherit; font-size: .74rem; font-weight: 800; color: var(--deep); background: var(--yellow); border: 0; border-radius: 8px; padding: 8px 12px; cursor: pointer; }
+
+  .cp-panel { margin-top: 12px; background: var(--paper); border: 1px solid var(--line); border-radius: 12px; padding: 10px 10px 8px; }
+  .cp-panel h3 { margin: 0 0 2px; font-size: .86rem; color: var(--deep); }
+  .cp-panel .cp-sub { margin: 0 0 6px; font-size: .72rem; color: var(--muted); line-height: 1.5; }
+  .cp-panel svg { display: block; width: 100%; height: auto; }
+  .cp-legend { display: flex; flex-wrap: wrap; gap: 10px 14px; margin-top: 6px; font-size: .66rem; color: var(--muted); }
+  .cp-legend i { display: inline-block; width: 14px; height: 10px; border-radius: 3px; vertical-align: -1px; margin-right: 5px; }
+  .cp-note { margin-top: 10px; font-size: .68rem; color: var(--muted); line-height: 1.55; }
+  .cp-note b { color: var(--deep); }
+  .cp-grid2 { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 12px; }
+  .cp-grid2 .cp-panel { margin-top: 12px; }
+
+  @media (max-width: 600px) {
+    .cp { padding: 12px 10px 14px; }
+    .cp-controls { grid-template-columns: 1fr; }
+    .cp-grid2 { grid-template-columns: 1fr; }
+    .cp-mode { font-size: .7rem; }
+  }
+</style>
+</head>
+<body>
+<div class="cp">
+  <div class="cp-top">
+    <h2>Linum crane evening planner</h2>
+    <p>Pick the evening you want to go and how you will get there. The planner works out sunset and dusk at Linum for that date, when the cranes fly in, which bus or train gets you there and home, and how many cranes were counted on the same weeks in past years.</p>
+  </div>
+
+  <div class="cp-controls">
+    <div class="cp-field">
+      <label for="cp-date">Your evening</label>
+      <input type="date" id="cp-date" min="2026-09-15" max="2026-11-30" value="2026-10-03">
+    </div>
+    <div class="cp-field">
+      <span class="cp-lab" id="cp-mode-lab">Getting there</span>
+      <div class="cp-modes" role="group" aria-labelledby="cp-mode-lab">
+        <button type="button" class="cp-mode" data-mode="bus" aria-current="true">Train + bus</button>
+        <button type="button" class="cp-mode" data-mode="bike" aria-current="false">Train + bike via Kremmen</button>
+        <button type="button" class="cp-mode" data-mode="car" aria-current="false">Car</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="cp-verdict" id="cp-verdict" aria-live="polite"></div>
+
+  <div class="cp-panel">
+    <h3>Your evening at Linum</h3>
+    <p class="cp-sub" id="cp-evening-sub"></p>
+    <svg id="cp-evening" viewBox="0 0 720 250" role="img" aria-label="Timeline of the evening: light, crane fly-in and your connections"></svg>
+    <div class="cp-legend">
+      <span><i style="background:#F2A541"></i>Sunset</span>
+      <span><i style="background:#33415C"></i>Dusk</span>
+      <span><i style="background:#7CB342"></i>Crane fly-in window</span>
+      <span><i style="background:#1B5E20"></i>Your trip</span>
+    </div>
+  </div>
+
+  <div class="cp-grid2">
+    <div class="cp-panel">
+      <h3>How many cranes that week</h3>
+      <p class="cp-sub" id="cp-season-sub"></p>
+      <svg id="cp-season" viewBox="0 0 360 230" role="img" aria-label="Weekly crane counts at Linum, 2018 to 2025"></svg>
+      <div class="cp-legend">
+        <span><i style="background:#C5E1A5"></i>2018 to 2024</span>
+        <span><i style="background:#B23A48"></i>2025</span>
+        <span><i style="background:#123D18"></i>Your date</span>
+      </div>
+    </div>
+    <div class="cp-panel">
+      <h3>Where it happens</h3>
+      <p class="cp-sub" id="cp-map-sub"></p>
+      <svg id="cp-map" viewBox="0 0 360 300" role="img" aria-label="Map of Linum, the fish ponds, Kremmen and Nauen stations"></svg>
+    </div>
+  </div>
+
+  <p class="cp-note">Sunset and dusk are calculated for Linum. Bus and train times are the VBB timetable for autumn 2026, checked on 21 September 2026; no bus runs to Linum on Saturdays, Sundays or holidays this season. Crane counts are the Tuesday morning counts of the Landschaftsförderverein Oberes Rhinluch. <b>Stay on roads and paths, keep out of fields and the nature reserve, and never touch a sick or dead bird.</b></p>
+</div>
+
+<script src="../js/brand.js"></script>
+<script>
+(function () {
+  'use strict';
+  var LINUM = { lat: 52.757709, lon: 12.883016 };
+  var CLOCK_BACK = '2026-10-25';
+
+  // Tuesday morning counts at the Linum roost (Landschaftsfoerderverein Oberes Rhinluch, via kraniche-linum.de)
+  var COUNTS = {
+    2018: [['09-25',16340],['10-02',49840],['10-09',40140],['10-16',74440],['10-23',38800],['10-30',30900],['11-06',22450],['11-13',22940],['11-20',2580]],
+    2019: [['09-24',11814],['10-01',32321],['10-08',61090],['10-15',55220],['10-22',72040],['10-29',41390],['11-05',12850],['11-12',11850]],
+    2020: [['09-22',20300],['09-29',40067],['10-06',57711],['10-20',55240],['10-27',59710],['11-04',51910],['11-11',2262]],
+    2021: [['09-21',21600],['09-28',36740],['10-05',58560],['10-12',49230],['10-19',79240],['10-26',64320],['11-02',50000],['11-09',8327],['11-16',11500]],
+    2022: [['09-20',10290],['09-27',41665],['10-04',54120],['10-11',54190],['10-18',45750],['10-25',33330],['11-01',10870],['11-08',23090],['11-15',2000]],
+    2023: [['09-19',24450],['09-26',13870],['10-03',42560],['10-10',35550],['10-17',27840],['10-24',37060],['10-31',42740],['11-07',38790],['11-14',31500],['11-21',5100]],
+    2024: [['09-17',21880],['09-24',56915],['10-01',66240],['10-08',62040],['10-15',70895],['10-22',35350],['10-29',25220],['11-05',5780]],
+    2025: [['09-23',21240],['09-30',56630],['10-14',23690],['10-21',6960],['10-28',5730],['11-04',2840]]
+  };
+
+  // Weekday bus plans (VBB, autumn 2026). Minutes after midnight, local time.
+  var BUS_OUT = [
+    { from: 'Berlin Hbf', dep: 14 * 60 + 25, arr: 15 * 60 + 30, via: 'RE8 to Nauen, bus 758' },
+    { from: 'Berlin Hbf', dep: 16 * 60 + 25, arr: 17 * 60 + 30, via: 'RE8 to Nauen, bus 758' }
+  ];
+  var BUS_BACK = [
+    { dep: 18 * 60 + 24, home: 19 * 60 + 35, via: 'bus 758 to Nauen, RE8 to Berlin Hbf' },
+    { dep: 19 * 60 + 30, home: 21 * 60 + 49, via: 'bus 758 to Fehrbellin, bus 756 to Neuruppin, RE6 to Hennigsdorf, S25' }
+  ];
+  // Kremmen station, trains towards Hennigsdorf (every day), and arrival at Berlin Hbf
+  var KREMMEN = [[16*60+9,17*60+29],[16*60+50,17*60+49],[17*60+9,18*60+29],[17*60+50,18*60+49],[18*60+9,19*60+29],[18*60+50,19*60+49],[19*60+10,20*60+29],[19*60+50,20*60+49],[20*60+10,21*60+29],[20*60+50,21*60+49],[21*60+10,22*60+29],[21*60+49,22*60+49],[22*60+10,23*60+29],[22*60+56,24*60+5]];
+  var RIDE = 45; // Kremmen station to Linum by bike, 11.2 km
+
+  var PONDS = [[[52.7825,12.8818],[52.7838,12.8785],[52.784,12.8778],[52.7877,12.8808],[52.7868,12.8833],[52.7868,12.8846],[52.787,12.8853],[52.7865,12.8864],[52.7835,12.8842],[52.7825,12.8818]],[[52.7824,12.8824],[52.7832,12.8844],[52.7862,12.8867],[52.7856,12.8888],[52.7861,12.8915],[52.7859,12.8919],[52.7843,12.8909],[52.7831,12.8898],[52.7812,12.8889],[52.7819,12.8852],[52.7824,12.8824]],[[52.7808,12.8915],[52.7812,12.8906],[52.7814,12.8902],[52.7813,12.8899],[52.7814,12.8898],[52.7817,12.8905],[52.7817,12.8913],[52.7814,12.8919],[52.7812,12.8921],[52.7808,12.8915]],[[52.7799,12.888],[52.7803,12.8871],[52.7808,12.8874],[52.7805,12.8883],[52.7799,12.888]],[[52.7779,12.8868],[52.7786,12.8848],[52.7788,12.8845],[52.7791,12.8827],[52.7798,12.8803],[52.7821,12.8822],[52.7812,12.8873],[52.7804,12.8867],[52.7799,12.8868],[52.7797,12.8865],[52.7796,12.8866],[52.7792,12.886],[52.779,12.8874],[52.7779,12.8868]],[[52.7781,12.8847],[52.7772,12.8835],[52.7789,12.8794],[52.7795,12.88],[52.7781,12.8847]],[[52.777,12.8833],[52.7761,12.8821],[52.7781,12.8784],[52.7787,12.8791],[52.777,12.8833]],[[52.7759,12.882],[52.7753,12.8813],[52.7775,12.8776],[52.778,12.8782],[52.7759,12.882]],[[52.7752,12.8811],[52.7747,12.8805],[52.7768,12.8767],[52.7774,12.8774],[52.7752,12.8811]],[[52.7705,12.8878],[52.7685,12.8952],[52.7634,12.8907],[52.7656,12.8825],[52.7705,12.8878]],[[52.7664,12.8785],[52.7656,12.8773],[52.7658,12.8767],[52.7667,12.8776],[52.7667,12.8777],[52.7664,12.8785]],[[52.7657,12.8821],[52.7669,12.8779],[52.7672,12.8782],[52.7661,12.8825],[52.7657,12.8821]],[[52.7662,12.8826],[52.7673,12.8783],[52.7677,12.8788],[52.7666,12.883],[52.7662,12.8826]],[[52.7667,12.8831],[52.7678,12.879],[52.7681,12.8794],[52.7671,12.8835],[52.7667,12.8831]],[[52.7671,12.8836],[52.7682,12.8795],[52.7686,12.88],[52.7675,12.884],[52.7671,12.8836]],[[52.7677,12.8842],[52.7687,12.8802],[52.7695,12.8813],[52.7684,12.885],[52.7677,12.8842]],[[52.7686,12.8852],[52.7696,12.8815],[52.7705,12.8826],[52.7695,12.8862],[52.7686,12.8852]],[[52.7697,12.8863],[52.7706,12.8827],[52.7716,12.8836],[52.7706,12.8873],[52.7697,12.8863]],[[52.7734,12.8828],[52.7733,12.8831],[52.7729,12.8835],[52.7726,12.8837],[52.7722,12.8836],[52.7705,12.8817],[52.7711,12.8812],[52.7714,12.8817],[52.7723,12.8821],[52.7728,12.882],[52.7734,12.8828]],[[52.7733,12.8819],[52.775,12.8819],[52.7775,12.8849],[52.7777,12.8856],[52.7775,12.8865],[52.7733,12.8819]],[[52.7727,12.8789],[52.7725,12.8794],[52.772,12.8794],[52.7708,12.8804],[52.7702,12.8806],[52.7698,12.8802],[52.769,12.8798],[52.7672,12.8772],[52.7676,12.8763],[52.7669,12.875],[52.768,12.873],[52.7679,12.8728],[52.7679,12.8727],[52.768,12.8727],[52.7727,12.8789]],[[52.766,12.8732],[52.7666,12.8741],[52.7666,12.8742],[52.7665,12.8743],[52.7665,12.8743],[52.7659,12.8736],[52.766,12.8732]],[[52.7659,12.8728],[52.7654,12.8738],[52.7653,12.8737],[52.7651,12.8736],[52.765,12.8733],[52.7651,12.8726],[52.765,12.8725],[52.7651,12.8719],[52.7652,12.8717],[52.7653,12.8717],[52.7656,12.8723],[52.7659,12.8728]],[[52.7658,12.8743],[52.7659,12.8745],[52.7655,12.8753],[52.7653,12.8751],[52.7658,12.8743]],[[52.7667,12.8755],[52.767,12.8759],[52.7666,12.8767],[52.7663,12.8764],[52.7667,12.8755]],[[52.7746,12.8804],[52.774,12.8797],[52.7762,12.876],[52.7767,12.8765],[52.7746,12.8804]],[[52.7739,12.8795],[52.7733,12.8789],[52.7755,12.8751],[52.776,12.8757],[52.7739,12.8795]],[[52.7733,12.8787],[52.7727,12.8781],[52.7749,12.8743],[52.7754,12.875],[52.7733,12.8787]],[[52.7726,12.8779],[52.772,12.8773],[52.7743,12.8733],[52.7747,12.8741],[52.7726,12.8779]],[[52.7719,12.8771],[52.7714,12.8765],[52.7736,12.8724],[52.7742,12.8731],[52.7719,12.8771]],[[52.7713,12.8763],[52.7707,12.8756],[52.773,12.8717],[52.7735,12.8723],[52.7713,12.8763]],[[52.7706,12.8754],[52.7701,12.8749],[52.7723,12.8708],[52.7728,12.8715],[52.7706,12.8754]],[[52.77,12.8747],[52.7695,12.8741],[52.7694,12.874],[52.7701,12.8729],[52.7701,12.8728],[52.7704,12.8721],[52.7704,12.8722],[52.7717,12.87],[52.7722,12.8707],[52.77,12.8747]],[[52.7693,12.8739],[52.7688,12.8733],[52.7688,12.8732],[52.771,12.8692],[52.7715,12.8698],[52.7705,12.8719],[52.7704,12.8721],[52.7701,12.8728],[52.7699,12.8728],[52.7694,12.8739],[52.7693,12.8739]],[[52.7706,12.8677],[52.7705,12.8678],[52.7696,12.8667],[52.7696,12.8666],[52.7696,12.8664],[52.7711,12.8638],[52.7711,12.8638],[52.7722,12.8652],[52.7722,12.8653],[52.7708,12.8676],[52.7706,12.8677]],[[52.7704,12.8679],[52.7703,12.868],[52.7694,12.8697],[52.7693,12.8697],[52.7685,12.8687],[52.7685,12.8686],[52.7695,12.8667],[52.7695,12.8667],[52.7696,12.8667],[52.7704,12.8678],[52.7704,12.8679]],[[52.7693,12.8698],[52.7693,12.8699],[52.7689,12.8707],[52.7688,12.8707],[52.768,12.8696],[52.768,12.8695],[52.7684,12.8687],[52.7684,12.8688],[52.7693,12.8698]],[[52.7702,12.8688],[52.7702,12.8687],[52.7703,12.8685],[52.7704,12.8683],[52.7705,12.8683],[52.7705,12.8683],[52.7705,12.8683],[52.7704,12.8683],[52.7704,12.8684],[52.7705,12.8685],[52.7705,12.8684],[52.7705,12.8684],[52.7705,12.8683],[52.7709,12.8688],[52.7709,12.8689],[52.7707,12.8693],[52.7706,12.8693],[52.7702,12.8688]],[[52.7701,12.8688],[52.7702,12.8688],[52.7706,12.8694],[52.7706,12.8694],[52.7705,12.8696],[52.7705,12.8697],[52.7704,12.8697],[52.77,12.8692],[52.77,12.8691],[52.7701,12.8688]],[[52.7699,12.8692],[52.7704,12.8698],[52.7704,12.8698],[52.7703,12.87],[52.7702,12.8702],[52.7698,12.8696],[52.7698,12.8695],[52.7698,12.8694],[52.7699,12.8692]],[[52.7697,12.8696],[52.7702,12.8702],[52.7701,12.8704],[52.77,12.8706],[52.7695,12.87],[52.7696,12.8698],[52.7697,12.8696]],[[52.7695,12.8701],[52.7699,12.8706],[52.7698,12.8708],[52.7697,12.871],[52.7693,12.8704],[52.7693,12.8702],[52.7695,12.8701]],[[52.7692,12.8705],[52.7697,12.871],[52.7697,12.871],[52.7696,12.8712],[52.7695,12.8714],[52.7691,12.8708],[52.7691,12.8707],[52.7691,12.8706],[52.7692,12.8705]],[[52.769,12.8708],[52.7695,12.8714],[52.7695,12.8715],[52.7695,12.8715],[52.7693,12.8718],[52.7692,12.8718],[52.7688,12.8712],[52.7689,12.871],[52.769,12.8708]],[[52.7688,12.8713],[52.7692,12.8718],[52.7692,12.8719],[52.7691,12.8722],[52.769,12.8722],[52.7686,12.8716],[52.7688,12.8713],[52.7688,12.8713]],[[52.7686,12.8717],[52.769,12.8723],[52.769,12.8724],[52.7689,12.8725],[52.7689,12.8726],[52.7688,12.8726],[52.7684,12.8721],[52.7684,12.872],[52.7685,12.8718],[52.7686,12.8717]],[[52.7684,12.8721],[52.7688,12.8727],[52.7688,12.8728],[52.7686,12.8731],[52.7686,12.8731],[52.7681,12.8725],[52.7681,12.8724],[52.7683,12.8721],[52.7684,12.8721]],[[52.766,12.8745],[52.7661,12.8747],[52.7657,12.8755],[52.7655,12.8753],[52.766,12.8745]],[[52.7666,12.8754],[52.7666,12.8755],[52.7662,12.8762],[52.7662,12.8762],[52.7666,12.8754]],[[52.7662,12.8748],[52.7663,12.875],[52.7658,12.8757],[52.7658,12.8756],[52.7662,12.8748]],[[52.7656,12.874],[52.7657,12.8742],[52.7653,12.875],[52.7652,12.8748],[52.7656,12.874]],[[52.7663,12.8751],[52.7664,12.8752],[52.766,12.876],[52.7659,12.8758],[52.7663,12.8751]],[[52.768,12.8433],[52.7679,12.8433],[52.7678,12.8432],[52.7678,12.843],[52.7679,12.8429],[52.7679,12.8428],[52.768,12.8428],[52.7682,12.8431],[52.7682,12.8432],[52.7681,12.8433],[52.768,12.8433]],[[52.7676,12.8446],[52.7674,12.8444],[52.7673,12.8443],[52.7673,12.8441],[52.7674,12.8438],[52.7675,12.8438],[52.7675,12.8438],[52.7675,12.844],[52.7675,12.8442],[52.7676,12.8444],[52.7676,12.8445],[52.7676,12.8446],[52.7676,12.8446]],[[52.7857,12.8555],[52.7861,12.8538],[52.7852,12.8581],[52.7903,12.8666],[52.7859,12.8891],[52.7967,12.8976],[52.7965,12.8957],[52.7913,12.8941],[52.7866,12.8916],[52.7884,12.8813],[52.7906,12.8713],[52.7881,12.8618],[52.785,12.8566]],[[52.7849,12.921],[52.7849,12.9209],[52.7849,12.9209],[52.7849,12.9209],[52.7848,12.9209],[52.7848,12.9209],[52.7848,12.9211],[52.7848,12.9212],[52.7848,12.9212],[52.7847,12.9213],[52.7847,12.9213],[52.7848,12.9213],[52.7848,12.9213],[52.7848,12.9213],[52.7848,12.9212],[52.7849,12.9211],[52.7849,12.9211],[52.7849,12.921],[52.7849,12.921]],[[52.7664,12.8787],[52.7631,12.8903],[52.7621,12.8879],[52.7656,12.8775],[52.7664,12.8787]],[[52.7863,12.8927],[52.78,12.8885],[52.7736,12.883],[52.7722,12.8839],[52.7668,12.8772],[52.7673,12.8761],[52.7671,12.8769],[52.7672,12.8774],[52.7726,12.8838],[52.7735,12.8827],[52.773,12.8819],[52.7777,12.8869],[52.7811,12.889],[52.7863,12.8927]],[[52.7605,12.8707],[52.7605,12.8708],[52.7605,12.8709],[52.7604,12.871],[52.7604,12.871],[52.7603,12.871],[52.7603,12.8709],[52.7603,12.8709],[52.7604,12.8706],[52.7605,12.8706],[52.7605,12.8706],[52.7605,12.8707],[52.7605,12.8707]],[[52.7741,12.9365],[52.7742,12.9364],[52.7743,12.937],[52.7742,12.937],[52.7741,12.9365]]];
+  var ROUTE_BIKE = [[52.7532,13.0396],[52.7535,13.0392],[52.7533,13.0386],[52.7566,13.0346],[52.7563,13.0216],[52.752,13.0103],[52.7493,13.0074],[52.749,13.0063],[52.7499,12.9962],[52.7503,12.9839],[52.7512,12.9772],[52.7455,12.9341],[52.746,12.9167],[52.75,12.909],[52.752,12.9008],[52.7557,12.8889]];
+  var ROUTE_BUS = [[52.6124,12.8849],[52.6355,12.9075],[52.6416,12.9232],[52.6477,12.9264],[52.6583,12.9221],[52.6829,12.9368],[52.6874,12.9372],[52.72,12.9325],[52.7277,12.9272],[52.7292,12.9543],[52.7322,12.952],[52.7333,12.9542],[52.7402,12.9537],[52.7475,12.9475],[52.7455,12.9341],[52.7459,12.9172],[52.75,12.909],[52.7557,12.8889]];
+  var PLACES = [
+    { key: 'church', name: 'Church', lat: 52.75743, lon: 12.88282 },
+    { key: 'ponds', name: 'Pond area', lat: 52.76661, lon: 12.8748 },
+    { key: 'fields', name: 'Kuhhorster Weg fields', lat: 52.74, lon: 12.859 },
+    { key: 'schmiede', name: 'Storchenschmiede', lat: 52.75888, lon: 12.88031 },
+    { key: 'stop', name: 'Bus stop Küsterstege', lat: 52.755713, lon: 12.888823 },
+    { key: 'kremmen', name: 'Kremmen station', lat: 52.75316, lon: 13.039564 },
+    { key: 'nauen', name: 'Nauen station', lat: 52.612425, lon: 12.884904 }
+  ];
+  var HENNIGSDORF = { lat: 52.63889, lon: 13.20525 };
+
+  var mode = 'bus';
+  var $ = function (id) { return document.getElementById(id); };
+  var NS = 'http://www.w3.org/2000/svg';
+  function el(name, attrs, text) {
+    var n = document.createElementNS(NS, name);
+    for (var k in attrs) n.setAttribute(k, attrs[k]);
+    if (text != null) n.textContent = text;
+    return n;
+  }
+  function hm(m) { m = Math.round(m); var h = Math.floor(m / 60) % 24, mm = m % 60; return (h < 10 ? '0' : '') + h + ':' + (mm < 10 ? '0' : '') + mm; }
+  function parseDate(v) { var p = v.split('-'); return { y: +p[0], m: +p[1], d: +p[2] }; }
+  function weekday(dt) { return new Date(Date.UTC(dt.y, dt.m - 1, dt.d)).getUTCDay(); }
+  var DAYS = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+  var MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+  var HOLIDAYS = { '2026-10-03': 'German Unity Day', '2026-10-31': 'Reformation Day in Brandenburg' };
+
+  // NOAA sunrise/sunset approximation, returns local minutes after midnight
+  function sunEvent(dt, zenith, offsetMin) {
+    var rad = Math.PI / 180;
+    var N1 = Math.floor(275 * dt.m / 9), N2 = Math.floor((dt.m + 9) / 12), N3 = 1 + Math.floor((dt.y - 4 * Math.floor(dt.y / 4) + 2) / 3);
+    var N = N1 - N2 * N3 + dt.d - 30;
+    var lngHour = LINUM.lon / 15;
+    var t = N + (18 - lngHour) / 24;
+    var M = 0.9856 * t - 3.289;
+    var L = (M + 1.916 * Math.sin(M * rad) + 0.020 * Math.sin(2 * M * rad) + 282.634 + 360) % 360;
+    var RA = (Math.atan(0.91764 * Math.tan(L * rad)) / rad + 360) % 360;
+    RA = (RA + Math.floor(L / 90) * 90 - Math.floor(RA / 90) * 90) / 15;
+    var sinDec = 0.39782 * Math.sin(L * rad), cosDec = Math.cos(Math.asin(sinDec));
+    var cosH = (Math.cos(zenith * rad) - sinDec * Math.sin(LINUM.lat * rad)) / (cosDec * Math.cos(LINUM.lat * rad));
+    var H = Math.acos(cosH) / rad / 15;
+    var T = H + RA - 0.06571 * t - 6.622;
+    var UT = ((T - lngHour) % 24 + 24) % 24;
+    return Math.round(UT * 60 + offsetMin);
+  }
+
+  function evening(v) {
+    var dt = parseDate(v);
+    var summer = v < CLOCK_BACK;
+    var off = summer ? 120 : 60;
+    var sunset = sunEvent(dt, 90.833, off);
+    var dusk = sunEvent(dt, 96, off);
+    var wd = weekday(dt);
+    var holiday = HOLIDAYS[v] || null;
+    var noBus = wd === 0 || wd === 6 || !!holiday;
+    return { dt: dt, summer: summer, sunset: sunset, dusk: dusk, flyStart: summer ? 17 * 60 : 16 * 60, wd: wd, holiday: holiday, noBus: noBus };
+  }
+
+  function plan(ev) {
+    var need = ev.flyStart - 15;
+    if (mode === 'bus') {
+      if (ev.noBus) return { ok: false };
+      var out = BUS_OUT[0];
+      for (var i = 0; i < BUS_OUT.length; i++) if (BUS_OUT[i].arr <= need) out = BUS_OUT[i];
+      var back = BUS_BACK[0].dep >= ev.dusk + 5 ? BUS_BACK[0] : BUS_BACK[1];
+      return { ok: true, legs: [
+        { a: out.dep, b: out.arr, label: 'Hbf ' + hm(out.dep) + ' to Linum ' + hm(out.arr) },
+        { a: back.dep, b: back.home, label: 'Bus ' + hm(back.dep) + ', home ' + hm(back.home) }
+      ], out: out, back: back };
+    }
+    if (mode === 'bike') {
+      var atLinum = need;
+      var kArr = atLinum - RIDE - 5;
+      var trainArr = Math.floor((kArr - 7) / 60) * 60 + 7; // trains reach Kremmen at xx:07
+      var leave = trainArr - 61;
+      var readyAt = ev.dusk + 10 + RIDE;
+      var train = null;
+      for (var j = 0; j < KREMMEN.length; j++) { if (KREMMEN[j][0] >= readyAt) { train = KREMMEN[j]; break; } }
+      if (!train) train = KREMMEN[KREMMEN.length - 1];
+      return { ok: true, legs: [
+        { a: leave, b: trainArr, label: 'Train ' + hm(leave) + ' to Kremmen' },
+        { a: trainArr, b: trainArr + RIDE, label: 'Ride 11 km', bike: true },
+        { a: ev.dusk + 10, b: ev.dusk + 10 + RIDE, label: 'Ride back with lights', bike: true },
+        { a: train[0], b: train[1], label: 'Kremmen ' + hm(train[0]) + ', home ' + hm(train[1]) }
+      ], leave: leave, trainArr: trainArr, train: train };
+    }
+    var arrive = need - 15;
+    return { ok: true, legs: [
+      { a: arrive - 55, b: arrive, label: 'Drive about 55 min' },
+      { a: ev.dusk + 5, b: ev.dusk + 70, label: 'Queue out with everyone' }
+    ], arrive: arrive };
+  }
+
+  function dayLine(ev) {
+    return DAYS[ev.wd] + ' ' + ev.dt.d + ' ' + MONTHS[ev.dt.m - 1] + (ev.holiday ? ' (' + ev.holiday + ')' : '');
+  }
+
+  function renderVerdict(ev, p) {
+    var h = '<span class="cp-day">' + dayLine(ev) + '</span>';
+    h += 'Sunset at Linum is <strong>' + hm(ev.sunset) + '</strong> and it is dark by about <strong>' + hm(ev.dusk) + '</strong>. ';
+    if (mode === 'bus') {
+      if (!p.ok) {
+        h += 'No bus runs to Linum on this day. The weekend crane bus of earlier years has not been announced for 2026, so on Saturdays, Sundays and holidays <strong>the train plus an 11 km ride from Kremmen is the way in</strong>.';
+        h += '<br><button type="button" class="cp-jump" id="cp-to-bike">Show the bike plan</button>';
+      } else {
+        h += 'Take the <strong>' + hm(p.out.dep) + '</strong> from Berlin Hbf (' + p.out.via + ') and you are in Linum at ' + hm(p.out.arr) + '. ';
+        if (p.back === BUS_BACK[0]) h += 'The last direct bus back leaves at <strong>18:24</strong>, after dark on this date, and you are at Hbf by 19:35.';
+        else h += 'The 18:24 bus leaves before it is dark, so stay for the <strong>19:30</strong> bus via Fehrbellin and Neuruppin and you are at Hbf by <strong>21:49</strong>.';
+      }
+    } else if (mode === 'bike') {
+      h += 'Leave Berlin Hbf at <strong>' + hm(p.leave) + '</strong> (S-Bahn to Hennigsdorf, RE6 to Kremmen), ride 11 km in daylight, and ride back after dark to catch the <strong>' + hm(p.train[0]) + '</strong> from Kremmen, home by ' + hm(p.train[1]) + '. ';
+      h += 'The bike needs its own ticket: <strong>€4.60</strong> each way for the whole VBB network.';
+    } else {
+      h += 'Be parked by about <strong>' + hm(p.arrive) + '</strong>, on a proper car park, not a field track or the verge of a main road. When it gets dark every visitor drives off at the same time, so budget extra time on the road back to the A24.';
+    }
+    $('cp-verdict').innerHTML = h;
+    var jump = $('cp-to-bike');
+    if (jump) jump.addEventListener('click', function () { setMode('bike'); });
+  }
+
+  var T0 = 14 * 60, T1 = 23 * 60;
+  function drawEvening(ev, p) {
+    var svg = $('cp-evening');
+    svg.textContent = '';
+    var narrow = window.innerWidth < 560;
+    var VBW = narrow ? 400 : 720;
+    var nLegs = p.ok ? p.legs.length : 1;
+    var H = 138 + nLegs * 30 + 26;
+    svg.setAttribute('viewBox', '0 0 ' + VBW + ' ' + H);
+    var L = narrow ? 62 : 92, R = VBW - 18, W = R - L;
+    var x = function (m) { return L + (Math.max(T0, Math.min(T1, m)) - T0) / (T1 - T0) * W; };
+    var defs = el('defs', {});
+    var g = el('linearGradient', { id: 'cp-sky', x1: '0', x2: '1', y1: '0', y2: '0' });
+    var s1 = (x(ev.sunset - 60) - L) / W, s2 = (x(ev.sunset) - L) / W, s3 = (x(ev.dusk) - L) / W;
+    [[0, '#DCEBF5'], [s1, '#DCEBF5'], [s2, '#F2A541'], [s3, '#33415C'], [1, '#1D2537']].forEach(function (st) { g.appendChild(el('stop', { offset: Math.max(0, Math.min(1, st[0])), 'stop-color': st[1] })); });
+    defs.appendChild(g); svg.appendChild(defs);
+
+    for (var hh = 14; hh <= 23; hh++) {
+      if (narrow && hh % 2) continue;
+      var gx = x(hh * 60);
+      svg.appendChild(el('line', { x1: gx, x2: gx, y1: 22, y2: H - 16, stroke: '#E6ECE2', 'stroke-width': 1 }));
+      svg.appendChild(el('text', { x: gx, y: H - 4, 'text-anchor': 'middle', 'font-size': 11, fill: '#56615a' }, hh + ':00'));
+    }
+    var rows = [['Light', 30], ['Cranes', 82], [narrow ? 'Trip' : 'Your trip', 134]];
+    rows.forEach(function (r) { svg.appendChild(el('text', { x: 4, y: r[1] + 22, 'font-size': narrow ? 10.5 : 12, 'font-weight': 700, fill: '#123D18' }, r[0])); });
+
+    svg.appendChild(el('rect', { x: L, y: 30, width: W, height: 36, rx: 6, fill: 'url(#cp-sky)' }));
+    svg.appendChild(el('line', { x1: x(ev.sunset), x2: x(ev.sunset), y1: 24, y2: 72, stroke: '#B23A48', 'stroke-width': 2 }));
+    svg.appendChild(el('text', { x: x(ev.sunset) - 4, y: 20, 'text-anchor': 'end', 'font-size': 11, 'font-weight': 700, fill: '#123D18' }, 'Sunset ' + hm(ev.sunset)));
+    svg.appendChild(el('text', { x: x(ev.dusk) + 4, y: 20, 'font-size': 11, 'font-weight': 700, fill: '#123D18' }, 'Dark ' + hm(ev.dusk)));
+
+    var fx = x(ev.flyStart), fw = x(ev.dusk) - fx;
+    svg.appendChild(el('rect', { x: fx, y: 84, width: fw, height: 34, rx: 6, fill: '#7CB342' }));
+    svg.appendChild(el('text', { x: fx + 8, y: 106, 'font-size': 12, 'font-weight': 700, fill: '#123D18' }, (narrow ? 'Fly-in ' : 'Fly-in ') + hm(ev.flyStart) + (narrow ? '' : ' to dark')));
+    for (var k = 0; k < 7; k++) {
+      var cx = fx + 150 + k * 16, cy = 92 + (k % 3) * 8;
+      if (cx < fx + fw - 8) svg.appendChild(el('path', { d: 'M' + (cx - 6) + ' ' + cy + ' q6 -5 6 0 q0 -5 6 0', stroke: '#123D18', 'stroke-width': 1.6, fill: 'none' }));
+    }
+
+    if (!p.ok) {
+      svg.appendChild(el('rect', { x: L, y: 138, width: W, height: 34, rx: 6, fill: '#F7E3E5', stroke: '#B23A48', 'stroke-dasharray': '5 4' }));
+      svg.appendChild(el('text', { x: L + W / 2, y: 160, 'text-anchor': 'middle', 'font-size': 12, 'font-weight': 700, fill: '#B23A48' }, 'No bus to Linum on this day'));
+    } else {
+      p.legs.forEach(function (lg, i) {
+        var y = 136 + i * 30;
+        var x1 = x(lg.a), x2 = Math.max(x(lg.b), x1 + 8);
+        svg.appendChild(el('rect', { x: x1, y: y, width: x2 - x1, height: 24, rx: 6, fill: lg.bike ? '#C5E1A5' : '#1B5E20', stroke: lg.bike ? '#1B5E20' : 'none' }));
+        var cw = 6.2;
+        var inside = (x2 - x1) > lg.label.length * cw + 12;
+        var tx = inside ? x1 + 8 : (x2 + 6 + lg.label.length * cw > VBW ? x1 - 6 : x2 + 6);
+        var anchor = inside ? 'start' : (tx < x1 ? 'end' : 'start');
+        svg.appendChild(el('text', { x: tx, y: y + 16, 'text-anchor': anchor, 'font-size': 11, 'font-weight': 700, fill: inside && !lg.bike ? '#FFFFFF' : '#123D18' }, lg.label));
+      });
+    }
+    $('cp-evening-sub').textContent = ev.summer
+      ? 'Before the clocks go back on 25 October the first cranes come in from about 17:00.'
+      : 'After the clocks go back the fly-in starts around 16:00 and the whole evening moves an hour earlier.';
+  }
+
+  function doy(m, d) { return Math.floor((Date.UTC(2026, m - 1, d) - Date.UTC(2026, 0, 1)) / 86400000); }
+  function drawSeason(ev) {
+    var svg = $('cp-season');
+    svg.textContent = '';
+    var L = 44, R = 350, TOP = 12, B = 196;
+    var D0 = doy(9, 15), D1 = doy(11, 30), YMAX = 80000;
+    var x = function (dd) { return L + (dd - D0) / (D1 - D0) * (R - L); };
+    var y = function (c) { return B - c / YMAX * (B - TOP); };
+    [0, 20000, 40000, 60000, 80000].forEach(function (c) {
+      svg.appendChild(el('line', { x1: L, x2: R, y1: y(c), y2: y(c), stroke: '#E6ECE2' }));
+      svg.appendChild(el('text', { x: L - 5, y: y(c) + 4, 'text-anchor': 'end', 'font-size': 10, fill: '#56615a' }, c ? (c / 1000) + 'k' : '0'));
+    });
+    [[9, 15, '15 Sep'], [10, 1, '1 Oct'], [10, 15, '15 Oct'], [11, 1, '1 Nov'], [11, 15, '15 Nov']].forEach(function (t) {
+      svg.appendChild(el('text', { x: x(doy(t[0], t[1])), y: B + 16, 'text-anchor': 'middle', 'font-size': 10, fill: '#56615a' }, t[2]));
+    });
+    var pick = doy(ev.dt.m, ev.dt.d);
+    var near = [];
+    Object.keys(COUNTS).forEach(function (yr) {
+      var pts = COUNTS[yr].map(function (r) { var md = r[0].split('-'); return [doy(+md[0], +md[1]), r[1]]; });
+      var last = yr === '2025';
+      svg.appendChild(el('polyline', { points: pts.map(function (q) { return x(q[0]).toFixed(1) + ',' + y(q[1]).toFixed(1); }).join(' '), fill: 'none', stroke: last ? '#B23A48' : '#9CBF7E', 'stroke-width': last ? 2.4 : 1.3, opacity: last ? 1 : 0.85 }));
+      pts.forEach(function (q) {
+        svg.appendChild(el('circle', { cx: x(q[0]), cy: y(q[1]), r: last ? 2.8 : 1.8, fill: last ? '#B23A48' : '#7CB342' }));
+        if (Math.abs(q[0] - pick) <= 3) near[near.length] = { yr: yr, n: q[1] };
+      });
+    });
+    var px = x(Math.max(D0, Math.min(D1, pick)));
+    svg.appendChild(el('line', { x1: px, x2: px, y1: TOP, y2: B, stroke: '#123D18', 'stroke-width': 2, 'stroke-dasharray': '4 3' }));
+    var lo = null, hi = null;
+    near.forEach(function (r) { if (lo === null || r.n < lo.n) lo = r; if (hi === null || r.n > hi.n) hi = r; });
+    var fmt = function (n) { return n.toLocaleString('en-GB'); };
+    $('cp-season-sub').textContent = near.length
+      ? 'Counted within three days of your date: from ' + fmt(lo.n) + ' (' + lo.yr + ') to ' + fmt(hi.n) + ' (' + hi.yr + ').'
+      : 'No count fell within three days of your date in 2018 to 2025.';
+  }
+
+  function drawMap(ev) {
+    var svg = $('cp-map');
+    svg.textContent = '';
+    var kx = Math.cos(52.7 * Math.PI / 180);
+    function proj(lat0, lat1, lon0, lon1, ox, oy, w, h) {
+      var sc = Math.min(w / ((lon1 - lon0) * kx), h / (lat1 - lat0));
+      return { X: function (lon) { return ox + (lon - lon0) * kx * sc; }, Y: function (lat) { return oy + (lat1 - lat) * sc; }, sc: sc };
+    }
+    var line = function (P, pts, color, w, dash) {
+      svg.appendChild(el('polyline', { points: pts.map(function (q) { return P.X(q[1]).toFixed(1) + ',' + P.Y(q[0]).toFixed(1); }).join(' '), fill: 'none', stroke: color, 'stroke-width': w, 'stroke-dasharray': dash || 'none', 'stroke-linecap': 'round', 'stroke-linejoin': 'round' }));
+    };
+    var dot = function (x, y, r, fill) { svg.appendChild(el('circle', { cx: x, cy: y, r: r, fill: fill, stroke: '#fff', 'stroke-width': 1.5 })); };
+    var label = function (x, y, txt, anchor, size, weight) { svg.appendChild(el('text', { x: x, y: y, 'text-anchor': anchor || 'start', 'font-size': size || 10, 'font-weight': weight || 600, fill: '#123D18' }, txt)); };
+    svg.appendChild(el('rect', { x: 0, y: 0, width: 360, height: 300, fill: '#F4F7EF', rx: 8 }));
+
+    // Region: Nauen, Kremmen, Linum
+    var P = proj(52.60, 52.80, 12.82, 13.075, 14, 22, 200, 262);
+    var busOn = mode === 'bus', bikeOn = mode !== 'bus';
+    line(P, ROUTE_BUS, busOn ? (ev.noBus ? '#B23A48' : '#1B5E20') : '#C9D3C4', busOn ? 3 : 1.5, busOn && ev.noBus ? '6 5' : null);
+    line(P, ROUTE_BIKE, bikeOn ? '#1B5E20' : '#C9D3C4', bikeOn ? 3 : 1.5, mode === 'bike' ? '2 4' : null);
+    var lx = P.X(LINUM.lon), ly = P.Y(LINUM.lat);
+    dot(lx, ly, 6, '#F2A541'); label(lx - 8, ly - 9, 'Linum', 'start', 11, 800);
+    var kr = PLACES[5], na = PLACES[6];
+    dot(P.X(kr.lon), P.Y(kr.lat), 5, '#123D18'); label(P.X(kr.lon), P.Y(kr.lat) + 16, 'Kremmen', 'middle', 10.5, 700);
+    dot(P.X(na.lon), P.Y(na.lat), 5, '#123D18'); label(P.X(na.lon) + 9, P.Y(na.lat) + 4, 'Nauen', 'start', 10.5, 700);
+    var hy = P.Y(HENNIGSDORF.lat);
+    svg.appendChild(el('path', { d: 'M' + (P.X(13.075) - 26) + ' ' + hy + ' h24 m-7 -5 l7 5 l-7 5', stroke: '#56615a', 'stroke-width': 1.6, fill: 'none' }));
+    label(P.X(13.075) - 2, hy + 16, 'to Hennigsdorf', 'end', 9, 500);
+    label(P.X(13.075) - 2, hy + 27, 'and Berlin', 'end', 9, 500);
+    svg.appendChild(el('text', { x: P.X(12.93) + 4, y: P.Y(52.69), 'font-size': 9, fill: '#56615a' }, busOn ? 'Bus 758' : ''));
+    var km5 = 5 / (111.32 * kx) * kx * P.sc;
+    svg.appendChild(el('line', { x1: 16, x2: 16 + km5, y1: 290, y2: 290, stroke: '#123D18', 'stroke-width': 2 }));
+    label(16, 284, '5 km', 'start', 9, 600);
+
+    // Inset: Linum village and ponds
+    var ox = 232, oy = 12, iw = 118, ih = 180;
+    svg.appendChild(el('rect', { x: ox - 4, y: oy - 4, width: iw + 8, height: ih + 24, rx: 6, fill: '#FFFFFF', stroke: '#D9E2D3' }));
+    svg.appendChild(el('line', { x1: lx + 6, y1: ly, x2: ox - 4, y2: oy + 40, stroke: '#D9E2D3', 'stroke-width': 1 }));
+    var I = proj(52.733, 52.80, 12.842, 12.905, ox, oy, iw, ih);
+    var cdefs = el('defs', {}), clip = el('clipPath', { id: 'cp-inset-clip' });
+    clip.appendChild(el('rect', { x: ox - 3, y: oy - 3, width: iw + 6, height: ih + 6 }));
+    cdefs.appendChild(clip); svg.appendChild(cdefs);
+    var pondLayer = el('g', { 'clip-path': 'url(#cp-inset-clip)' });
+    svg.appendChild(pondLayer);
+    PONDS.forEach(function (poly) {
+      pondLayer.appendChild(el('polygon', { points: poly.map(function (q) { return I.X(q[1]).toFixed(1) + ',' + I.Y(q[0]).toFixed(1); }).join(' '), fill: '#9CC7DA', stroke: '#6FA7BF', 'stroke-width': 0.5 }));
+    });
+    var pl = function (i) { return PLACES[i]; };
+    var ch = pl(0), po = pl(1), fi = pl(2), sm = pl(3), st = pl(4);
+    dot(I.X(po.lon), I.Y(po.lat), 3.5, '#56615a'); label(I.X(po.lon) - 5, I.Y(po.lat) - 5, 'Ponds', 'end', 9);
+    dot(I.X(fi.lon), I.Y(fi.lat), 3.5, '#56615a'); label(I.X(fi.lon) + 6, I.Y(fi.lat) + 4, 'Fields', 'start', 9);
+    dot(I.X(sm.lon), I.Y(sm.lat), 3, '#56615a'); label(I.X(sm.lon) - 5, I.Y(sm.lat) - 3, 'Storchenschmiede', 'end', 8.5);
+    dot(I.X(ch.lon), I.Y(ch.lat), 4.5, '#F2A541'); label(I.X(ch.lon) + 7, I.Y(ch.lat) - 1, 'Church', 'start', 9.5, 700);
+    dot(I.X(st.lon), I.Y(st.lat), 3.5, ev.noBus ? '#B23A48' : '#1B5E20'); label(I.X(st.lon) + 6, I.Y(st.lat) + 11, 'Bus stop', 'start', 9);
+    label(ox + iw / 2, oy + ih + 15, 'Linum close up', 'middle', 9, 700);
+    $('cp-map-sub').textContent = mode === 'bus'
+      ? (ev.noBus ? 'Bus 758 from Nauen runs on weekdays only this season.' : 'Bus 758 runs from Nauen station on weekdays, about 30 minutes.')
+      : (mode === 'bike' ? 'From Kremmen station it is 11.2 km, mostly on country roads without a cycle path.' : 'Linum is about 54 km from Berlin Hbf by road, off the A24 at Kremmen.');
+  }
+
+  function render() {
+    var v = $('cp-date').value || '2026-10-03';
+    if (v < '2026-09-15') v = '2026-09-15';
+    if (v > '2026-11-30') v = '2026-11-30';
+    var ev = evening(v);
+    var p = plan(ev);
+    renderVerdict(ev, p);
+    drawEvening(ev, p);
+    drawSeason(ev);
+    drawMap(ev);
+  }
+  function setMode(m) {
+    mode = m;
+    var btns = document.querySelectorAll('.cp-mode');
+    for (var i = 0; i < btns.length; i++) btns[i].setAttribute('aria-current', btns[i].getAttribute('data-mode') === m ? 'true' : 'false');
+    render();
+  }
+  var modeBtns = document.querySelectorAll('.cp-mode');
+  for (var b = 0; b < modeBtns.length; b++) modeBtns[b].addEventListener('click', function () { setMode(this.getAttribute('data-mode')); });
+  var wasNarrow = window.innerWidth < 560;
+  window.addEventListener('resize', function () { var n = window.innerWidth < 560; if (n !== wasNarrow) { wasNarrow = n; render(); } });
+  $('cp-date').addEventListener('input', render);
+  $('cp-date').addEventListener('change', render);
+  render();
+})();
+</script>
+</body>
+</html>
