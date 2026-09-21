@@ -205,7 +205,7 @@
 
           <footer class="bw-gsl-footer">
             <span>BerlinWalk.com</span>
-            <a href="https://www.instagram.com/berlinwalkingtour/">@berlinwalkingtour</a>
+            <a href="https://www.instagram.com/walkofberlin/">@walkofberlin</a>
           </footer>
         </main>
       `;

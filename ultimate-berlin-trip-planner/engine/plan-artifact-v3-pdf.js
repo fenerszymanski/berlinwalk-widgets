@@ -616,7 +616,7 @@
     setColor(doc, 'setDrawColor', COLORS.border);
     doc.line(MARGIN, FOOTER_Y - 12, PAGE_WIDTH - MARGIN, FOOTER_Y - 12);
     setFont(doc, 8.2, 'bold', COLORS.green);
-    doc.text('berlinwalk.com | @berlinwalkingtour', MARGIN, FOOTER_Y + 4);
+    doc.text('berlinwalk.com | @walkofberlin', MARGIN, FOOTER_Y + 4);
     doc.text('Page ' + pageNumber + ' / ' + pageCount, PAGE_WIDTH - MARGIN, FOOTER_Y + 4, { align: 'right' });
   }
 

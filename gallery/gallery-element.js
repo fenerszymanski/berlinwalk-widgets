@@ -471,7 +471,7 @@ class BWGalleryElement extends HTMLElement {
             ${this._renderSkeleton()}
           </div>
 
-          <a class="bw-instagram-cta" href="https://www.instagram.com/berlinwalkingtour/">More moments on Instagram - @berlinwalkingtour</a>
+          <a class="bw-instagram-cta" href="https://www.instagram.com/walkofberlin/">More moments on Instagram - @walkofberlin</a>
         </div>
 
         <div class="bw-lightbox" data-lightbox role="dialog" aria-modal="true" aria-label="Photo gallery viewer" aria-hidden="true" hidden>

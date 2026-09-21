@@ -21,9 +21,9 @@ const BW_SITE_FOOTER_LINKS = {
   smile: 'https://www.berlinwalk.com/games/berlin-smile-challenge',
   tools: 'https://www.berlinwalk.com/berlin-tools',
   widgets: 'https://www.berlinwalk.com/widgets',
-  instagram: 'https://www.instagram.com/berlinwalkingtour/',
-  facebook: 'https://www.facebook.com/berlinwalkingtour',
-  tiktok: 'https://www.tiktok.com/@berlinwalkingtour',
+  instagram: 'https://www.instagram.com/walkofberlin/',
+  facebook: 'https://www.facebook.com/walkofberlin',
+  tiktok: 'https://www.tiktok.com/@walkofberlin',
   transport: 'https://www.berlinwalk.com/post/berlin-public-transport-explained-for-tourists-u-bahn-s-bahn-tram-bus',
   stay: 'https://www.berlinwalk.com/post/where-to-stay-in-berlin-best-neighborhoods-for-every-type-of-tourist',
   bestTime: 'https://www.berlinwalk.com/post/what-s-the-best-time-to-visit-berlin-a-month-by-month-guide',
@@ -509,7 +509,7 @@ class BWSiteFooterElement extends HTMLElement {
             <span>&copy; 2026 BerlinWalk. All rights reserved.</span>
             <div class="bw-footer-bottom-links">
               <a href="${BW_SITE_FOOTER_LINKS.home}">berlinwalk.com</a>
-              <a href="${BW_SITE_FOOTER_LINKS.instagram}">@berlinwalkingtour</a>
+              <a href="${BW_SITE_FOOTER_LINKS.instagram}">@walkofberlin</a>
               <button type="button" data-bw-privacy-settings="true">Privacy Settings</button>
             </div>
           </div>

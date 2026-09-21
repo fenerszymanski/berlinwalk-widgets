@@ -2603,7 +2603,7 @@
           rgb('setDrawColor', line);
           doc.line(margin, pageH - 36, pageW - margin, pageH - 36);
           drawLogo(margin, pageH - 29, 18);
-          text('berlinwalk.com | @berlinwalkingtour', margin + 26, pageH - 16, 8.5, 'bold', green);
+          text('berlinwalk.com | @walkofberlin', margin + 26, pageH - 16, 8.5, 'bold', green);
           text('Page ' + page + ' / ' + pages, pageW - margin, pageH - 16, 8, 'normal', muted, { align: 'right' });
         }
       }
@@ -2672,7 +2672,7 @@
       '<div class="section transport"><div class="k">Public transport</div><p><strong>' + escapeHtml(data.transport.title) + '</strong><br>' + escapeHtml(data.transport.ticket) + '</p><table>' + transportRows + '</table><p class="note">' + escapeHtml(data.transport.luggage + ' ' + data.transport.note) + '</p></div>' +
       '<div class="section"><div class="k">Timeline</div><ol>' + steps + '</ol></div>' +
       '<div class="section book"><div class="k">Book</div><p>Daily 11:30 from the World Clock at Alexanderplatz. The walk is about 2 hours and tip-based.</p><p><a href="' + escapeHtml(BOOKING_SHORT_URL) + '">' + escapeHtml(BOOKING_SHORT_LABEL) + '</a></p></div>' +
-      '<div class="foot">berlinwalk.com · @berlinwalkingtour</div></body></html>';
+      '<div class="foot">berlinwalk.com · @walkofberlin</div></body></html>';
   }
 
   function printPlan() {
