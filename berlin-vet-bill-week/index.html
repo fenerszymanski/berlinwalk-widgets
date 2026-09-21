@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Berlin Vet Bill Week</title>
+<link rel="stylesheet" href="../css/brand.css">
+<style>
+  :root {
+    --green: #1B5E20;
+    --deep: #123D18;
+    --yellow: #FFE600;
+    --lime: #7CB342;
+    --soft: #C5E1A5;
+    --paper: #FFFFFF;
+    --wash: #F3F6EF;
+    --ink: #212121;
+    --muted: #56615a;
+    --night: #243447;
+    --night2: #3B5373;
+    --line: #D9E2D3;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--wash); color: var(--ink); }
+  .vb { max-width: 800px; margin: 0 auto; padding: 16px 14px 18px; }
+  .vb-top h2 { margin: 0 0 5px; font-size: 1.08rem; color: var(--deep); letter-spacing: .01em; }
+  .vb-top p { margin: 0; font-size: .8rem; line-height: 1.55; color: var(--muted); }
+
+  .vb-controls { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; margin-top: 12px; }
+  .vb-field { display: flex; flex-direction: column; gap: 4px; }
+  .vb-field label { font-size: .62rem; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: var(--green); }
+  .vb-field select { font-family: inherit; font-size: .8rem; font-weight: 600; color: var(--ink); background: var(--paper); border: 1px solid var(--line); border-radius: 8px; padding: 8px 8px; width: 100%; }
+  .vb-field select:focus-visible { outline: 3px solid var(--lime); outline-offset: 1px; }
+
+  .vb-board { margin-top: 12px; background: var(--paper); border: 1px solid var(--line); border-radius: 12px; padding: 10px 10px 8px; }
+  .vb-board svg { display: block; width: 100%; height: auto; }
+  .vb-cell { cursor: pointer; }
+  .vb-cell:focus { outline: none; }
+  .vb-legend { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 6px; font-size: .68rem; color: var(--muted); }
+  .vb-legend i { display: inline-block; width: 12px; height: 12px; border-radius: 3px; vertical-align: -2px; margin-right: 5px; }
+
+  .vb-nav { display: grid; grid-template-columns: 44px 1fr 44px; gap: 8px; align-items: center; margin-top: 10px; }
+  .vb-btn { font-family: inherit; border: 0; border-radius: 9px; cursor: pointer; font-weight: 800; }
+  .vb-arrow { height: 44px; background: var(--deep); color: #fff; font-size: 1.3rem; }
+  .vb-arrow:focus-visible, .vb-link:focus-visible, .vb-hol:focus-visible { outline: 3px solid var(--lime); outline-offset: 2px; }
+  .vb-when { text-align: center; }
+  .vb-when strong { display: block; font-size: 1.05rem; color: var(--deep); }
+  .vb-when span { display: block; font-size: .72rem; color: var(--muted); margin-top: 2px; }
+  .vb-row2 { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; justify-content: center; }
+  .vb-link { background: var(--yellow); color: var(--deep); font-size: .74rem; padding: 9px 12px; }
+  .vb-hol { background: var(--paper); color: var(--green); border: 1px solid var(--line); font-size: .74rem; padding: 8px 12px; }
+  .vb-hol[aria-pressed="true"] { background: var(--night); color: #fff; border-color: var(--night); }
+
+  .vb-bill { margin-top: 12px; background: var(--paper); border: 1px solid var(--line); border-radius: 12px; padding: 12px; }
+  .vb-bill h3 { margin: 0 0 2px; font-size: .9rem; color: var(--deep); }
+  .vb-bill .vb-sub { margin: 0 0 8px; font-size: .74rem; color: var(--muted); line-height: 1.5; }
+  .vb-lines { margin: 10px 0 0; padding: 0; list-style: none; font-size: .72rem; color: var(--ink); }
+  .vb-lines li { display: flex; justify-content: space-between; gap: 10px; padding: 4px 0; border-top: 1px dashed var(--line); }
+  .vb-lines li b { font-weight: 700; white-space: nowrap; }
+  .vb-verdict { margin-top: 10px; background: var(--deep); color: #fff; border-radius: 10px; padding: 10px 12px; font-size: .8rem; line-height: 1.55; }
+  .vb-verdict strong { color: var(--yellow); }
+  .vb-warn { margin-top: 8px; font-size: .7rem; color: var(--muted); line-height: 1.5; }
+  .vb-warn b { color: var(--deep); }
+
+  @media (max-width: 560px) {
+    .vb { padding: 12px 10px 14px; }
+    .vb-controls { grid-template-columns: 1fr; }
+    .vb-when strong { font-size: .95rem; }
+  }
+</style>
+</head>
+<body>
+<div class="vb">
+  <div class="vb-top">
+    <h2>Berlin vet bill week</h2>
+    <p>Pick your animal and what it needs, then pick the hour it happens. The board shows when your own practice charges its normal fee and when the only option is the emergency service, and what the same visit costs at each.</p>
+  </div>
+
+  <div class="vb-controls">
+    <div class="vb-field">
+      <label for="vb-animal">Animal</label>
+      <select id="vb-animal">
+        <option value="dog">Dog</option>
+        <option value="cat">Cat</option>
+        <option value="small">Rabbit or guinea pig</option>
+      </select>
+    </div>
+    <div class="vb-field">
+      <label for="vb-case">What it needs</label>
+      <select id="vb-case">
+        <option value="check">A quick look and advice</option>
+        <option value="jab">Look plus one injection</option>
+        <option value="limp">Limping: sedation and two X-rays</option>
+        <option value="swallow">Swallowed something: X-rays and ultrasound</option>
+        <option value="paw">Cut paw: wound check and bandage</option>
+      </select>
+    </div>
+    <div class="vb-field">
+      <label for="vb-hours">Your practice's hours</label>
+      <select id="vb-hours">
+        <option value="a">Mon to Fri, 8:00 to 18:00</option>
+        <option value="b" selected>Mon to Fri, 8:00 to 20:00</option>
+        <option value="c">Mon to Fri 8:00 to 20:00, Sat 9:00 to 13:00</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="vb-board">
+    <svg id="vb-svg" viewBox="0 0 760 250" role="img" aria-label="Week board of vet fees by hour"></svg>
+    <div class="vb-legend">
+      <span><i style="background:#7CB342"></i>Your practice: 1x to 3x the fee</span>
+      <span><i style="background:#3B5373"></i>Emergency service: 2x to 4x plus €50</span>
+      <span><i style="background:#FFE600;border:1px solid #123D18"></i>Your hour</span>
+    </div>
+  </div>
+
+  <div class="vb-nav">
+    <button class="vb-btn vb-arrow" id="vb-prev" aria-label="One hour earlier">‹</button>
+    <div class="vb-when"><strong id="vb-when"></strong><span id="vb-zone"></span></div>
+    <button class="vb-btn vb-arrow" id="vb-next" aria-label="One hour later">›</button>
+  </div>
+  <div class="vb-row2">
+    <button class="vb-btn vb-link" id="vb-jump">Jump to my practice's next open hour</button>
+    <button class="vb-btn vb-hol" id="vb-hol" aria-pressed="false">This day is a Berlin public holiday</button>
+  </div>
+
+  <div class="vb-bill">
+    <h3 id="vb-bill-title">What this visit can cost</h3>
+    <p class="vb-sub" id="vb-bill-sub"></p>
+    <svg id="vb-bars" viewBox="0 0 760 150" role="img" aria-label="Bill range now and at the next practice hour"></svg>
+    <ul class="vb-lines" id="vb-lines"></ul>
+    <div class="vb-verdict" id="vb-verdict"></div>
+    <p class="vb-warn"><b>Go now, whatever the hour,</b> if your animal cannot breathe properly, is bleeding heavily, has collapsed, has eaten poison or bait, or is a dog with a swollen belly retching without bringing anything up. The price comparison is for the cases that can safely wait.</p>
+    <p class="vb-warn">Fees from the German veterinary fee schedule (GOT), checked on 21 September 2026. All ranges include 19% VAT; medicine, lab work and anything beyond the listed items come on top. A cost guide, not veterinary advice.</p>
+  </div>
+</div>
+
+<script src="../js/brand.js"></script>
+<script>
+(function () {
+  // Fee rates from the GOT fee schedule (Tierärztegebührenordnung), in euros at the single (1x) rate, before VAT.
+  var FEES = {
+    exam:   { dog: 23.62, cat: 23.62, small: 15.39, label: 'General examination with advice' },
+    inj:    { dog: 11.50, cat: 11.50, small: 11.50, label: 'Injection under the skin or into the muscle' },
+    sed:    { dog: 19.78, cat: 19.78, small: 19.78, label: 'Sedation by injection' },
+    xray:   { dog: 26.53, cat: 26.53, small: 26.53, label: 'X-ray image' },
+    us:     { dog: 58.92, cat: 58.92, small: 58.92, label: 'Ultrasound examination' },
+    wound:  { dog: 16.50, cat: 16.50, small: 16.50, label: 'Examination of skin or wound' },
+    band:   { dog: 17.25, cat: 17.25, small: 17.25, label: 'Putting on a bandage' }
+  };
+  var CASES = {
+    check:   [['exam', 1]],
+    jab:     [['exam', 1], ['inj', 1]],
+    limp:    [['exam', 1], ['sed', 1], ['xray', 2]],
+    swallow: [['exam', 1], ['xray', 2], ['us', 1]],
+    paw:     [['exam', 1], ['sed', 1], ['wound', 1], ['band', 1]]
+  };
+  var HOURS = {
+    a: { wk: [8, 18], sat: null },
+    b: { wk: [8, 20], sat: null },
+    c: { wk: [8, 20], sat: [9, 13] }
+  };
+  var VAT = 1.19, ND_FEE = 50;
+  var DAYS = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+  var SHORT = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+
+  var $ = function (id) { return document.getElementById(id); };
+  var svg = $('vb-svg'), bars = $('vb-bars');
+  var NS = 'http://www.w3.org/2000/svg';
+  var holidays = {};
+
+  // Start at the current hour in Berlin.
+  var currentStep = (function () {
+    try {
+      var parts = new Intl.DateTimeFormat('en-GB', { timeZone: 'Europe/Berlin', weekday: 'short', hour: '2-digit', hour12: false }).formatToParts(new Date());
+      var wd = parts.filter(function (p) { return p.type === 'weekday'; })[0].value;
+      var hr = parseInt(parts.filter(function (p) { return p.type === 'hour'; })[0].value, 10) % 24;
+      return SHORT.indexOf(wd) * 24 + hr;
+    } catch (e) { return 5 * 24 + 21; }
+  })();
+  if (currentStep < 0) currentStep = 5 * 24 + 21;
+
+  function isPractice(step) {
+    var day = Math.floor(step / 24), hr = step % 24, h = HOURS[$('vb-hours').value];
+    if (holidays[day]) return false;
+    if (day <= 4) return hr >= h.wk[0] && hr < h.wk[1];
+    if (day === 5 && h.sat) return hr >= h.sat[0] && hr < h.sat[1];
+    return false;
+  }
+  function feeBase() {
+    var animal = $('vb-animal').value;
+    return CASES[$('vb-case').value].reduce(function (sum, item) { return sum + FEES[item[0]][animal] * item[1]; }, 0);
+  }
+  function range(step) {
+    var base = feeBase();
+    if (isPractice(step)) return { lo: base * VAT, hi: base * 3 * VAT, nd: false };
+    return { lo: (base * 2 + ND_FEE) * VAT, hi: (base * 4 + ND_FEE) * VAT, nd: true };
+  }
+  function nextPractice(step) {
+    for (var i = 1; i <= 24 * 7 * 2; i++) {
+      var s = (step + i) % 168;
+      if (isPractice(s)) return { step: s, wait: i };
+    }
+    return null;
+  }
+  function eur(v) { return '€' + Math.round(v); }
+  function eur2(v) { return '€' + v.toFixed(2); }
+  function label(step) {
+    var hr = step % 24;
+    return DAYS[Math.floor(step / 24)] + ', ' + (hr < 10 ? '0' : '') + hr + ':00';
+  }
+  function el(name, attrs, text) {
+    var n = document.createElementNS(NS, name);
+    for (var k in attrs) n.setAttribute(k, attrs[k]);
+    if (text != null) n.textContent = text;
+    return n;
+  }
+
+  function narrow() { return (document.querySelector('.vb-board').clientWidth || 700) < 540; }
+
+  function drawBoard() {
+    svg.innerHTML = '';
+    var v = narrow(), base = feeBase(), maxHi = (base * 4 + ND_FEE) * VAT;
+    var F = 'Montserrat, sans-serif';
+    // Horizontal: days are rows, hours are columns. Narrow: days are columns, hours are rows.
+    var x0 = v ? 34 : 40, y0 = v ? 24 : 22, cw = v ? 46 : 29, ch = v ? 21 : 30;
+    svg.setAttribute('viewBox', v ? '0 0 360 ' + (y0 + 24 * ch + 30) : '0 0 760 250');
+    function pos(d, hr) { return v ? { x: x0 + d * cw, y: y0 + hr * ch } : { x: x0 + hr * cw, y: y0 + d * ch }; }
+    for (var h = 0; h <= 24; h += 3) {
+      if (v) { if (h < 24) svg.appendChild(el('text', { x: 0, y: y0 + h * ch + 15, 'font-size': 11, fill: '#56615a', 'font-family': F }, (h < 10 ? '0' : '') + h + ':00')); }
+      else svg.appendChild(el('text', { x: x0 + h * cw, y: 14, 'font-size': 10, 'text-anchor': 'middle', fill: '#56615a', 'font-family': F }, (h < 10 ? '0' : '') + h));
+    }
+    for (var d = 0; d < 7; d++) {
+      var lp = pos(d, 0);
+      svg.appendChild(v
+        ? el('text', { x: lp.x + cw / 2, y: 15, 'font-size': 12, 'font-weight': 700, 'text-anchor': 'middle', fill: '#123D18', 'font-family': F }, SHORT[d] + (holidays[d] ? '*' : ''))
+        : el('text', { x: 2, y: lp.y + 19, 'font-size': 11, 'font-weight': 700, fill: '#123D18', 'font-family': F }, SHORT[d] + (holidays[d] ? '*' : '')));
+      for (var hr = 0; hr < 24; hr++) {
+        var step = d * 24 + hr, r = range(step), p = pos(d, hr);
+        var shade = 0.55 + 0.45 * (r.hi / maxHi);
+        var rect = el('rect', {
+          x: p.x + 1, y: p.y + 1, width: cw - 2, height: ch - 2, rx: 4,
+          fill: r.nd ? '#3B5373' : '#7CB342', 'fill-opacity': shade.toFixed(2),
+          class: 'vb-cell', 'data-step': step
+        });
+        rect.appendChild(el('title', {}, label(step) + ': ' + eur(r.lo) + ' to ' + eur(r.hi)));
+        svg.appendChild(rect);
+      }
+    }
+    var sel = pos(Math.floor(currentStep / 24), currentStep % 24);
+    svg.appendChild(el('rect', { x: sel.x - 1, y: sel.y - 1, width: cw + 2, height: ch + 2, rx: 5, fill: '#FFE600', stroke: '#123D18', 'stroke-width': 2, 'pointer-events': 'none' }));
+    var np = nextPractice(currentStep);
+    if (np && !isPractice(currentStep)) {
+      var q = pos(Math.floor(np.step / 24), np.step % 24);
+      svg.appendChild(el('rect', { x: q.x + 2, y: q.y + 2, width: cw - 4, height: ch - 4, rx: 4, fill: 'none', stroke: '#FFE600', 'stroke-width': 3, 'stroke-dasharray': '4 3', 'pointer-events': 'none' }));
+    }
+    // The GOT night window starts at 18:00 on every day.
+    if (v) {
+      svg.appendChild(el('line', { x1: x0 - 4, x2: x0 + 7 * cw + 2, y1: y0 + 18 * ch, y2: y0 + 18 * ch, stroke: '#243447', 'stroke-width': 1.2, 'stroke-dasharray': '3 3' }));
+      svg.appendChild(el('text', { x: x0, y: y0 + 24 * ch + 18, 'font-size': 10.5, fill: '#243447', 'font-family': F }, 'Dashed line: legal night starts at 18:00'));
+    } else {
+      svg.appendChild(el('line', { x1: x0 + 18 * cw, x2: x0 + 18 * cw, y1: y0 - 4, y2: y0 + 7 * ch + 2, stroke: '#243447', 'stroke-width': 1, 'stroke-dasharray': '3 3' }));
+      svg.appendChild(el('text', { x: x0 + 18 * cw + 4, y: y0 + 7 * ch + 14, 'font-size': 9.5, fill: '#243447', 'font-family': F }, 'legal night starts 18:00'));
+    }
+  }
+
+  function drawBars() {
+    bars.innerHTML = '';
+    var v = narrow(), F = 'Montserrat, sans-serif';
+    var now = range(currentStep), np = nextPractice(currentStep);
+    var later = np ? range(np.step) : null;
+    var two = later && !isPractice(currentStep);
+    var maxV = Math.max(now.hi, two ? later.hi : 0) * 1.08;
+    var W = v ? 360 : 760, x0 = v ? 8 : 150, w = W - x0 - 12;
+    var rowH = v ? 62 : 52, top = v ? 18 : 26;
+    bars.setAttribute('viewBox', '0 0 ' + W + ' ' + (top + (two ? 2 : 1) * rowH + (two ? 24 : 50)));
+    var sc = function (val) { return x0 + (val / maxV) * w; };
+    var rows = [{ name: 'At ' + label(currentStep).replace(/^(\w{3})\w*,/, '$1'), r: now }];
+    if (two) rows[1] = { name: 'Wait ' + np.wait + ' h, ' + label(np.step).replace(/^(\w{3})\w*,/, '$1'), r: later };
+    var axisY = top + rows.length * rowH;
+    var stepV = maxV > 600 ? 100 : 50;
+    for (var t = 0; t <= maxV; t += stepV) {
+      if (v && (t / stepV) % 2) continue;
+      bars.appendChild(el('line', { x1: sc(t), x2: sc(t), y1: top - 8, y2: axisY - 6, stroke: '#D9E2D3', 'stroke-width': 1 }));
+      bars.appendChild(el('text', { x: sc(t), y: axisY + 8, 'font-size': v ? 11 : 10, 'text-anchor': t === 0 ? 'start' : 'middle', fill: '#56615a', 'font-family': F }, '€' + t));
+    }
+    rows.forEach(function (row, i) {
+      var y = top + i * rowH + (v ? 16 : 0), c = row.r.nd ? '#3B5373' : '#7CB342';
+      bars.appendChild(el('text', v ? { x: x0, y: y - 5, 'font-size': 12, 'font-weight': 700, fill: '#123D18', 'font-family': F } : { x: 0, y: y + 16, 'font-size': 12, 'font-weight': 700, fill: '#123D18', 'font-family': F }, row.name));
+      bars.appendChild(el('rect', { x: sc(0), y: y + 4, width: w * (row.r.hi / maxV), height: 16, rx: 3, fill: c, 'fill-opacity': .18 }));
+      var bx = sc(row.r.lo), bw = Math.max(4, sc(row.r.hi) - sc(row.r.lo));
+      bars.appendChild(el('rect', { x: bx, y: y, width: bw, height: 24, rx: 5, fill: c }));
+      var txt = eur(row.r.lo) + ' to ' + eur(row.r.hi);
+      var inside = bw > txt.length * 7.2 + 10;
+      bars.appendChild(el('text', { x: inside ? bx + 6 : Math.max(x0, bx - 6), y: y + 16.5, 'font-size': 12, 'font-weight': 800, 'text-anchor': inside ? 'start' : 'end', fill: inside ? '#fff' : '#123D18', 'font-family': F }, txt));
+    });
+    if (!two) {
+      bars.appendChild(el('text', { x: x0, y: top + rowH + 16, 'font-size': 11.5, fill: '#56615a', 'font-family': F }, v ? 'Your practice is open at this hour.' : 'Your practice is open at this hour, so the normal fee range applies.'));
+    }
+  }
+
+  function render() {
+    var r = range(currentStep), base = feeBase(), animal = $('vb-animal').value;
+    $('vb-when').textContent = label(currentStep) + (holidays[Math.floor(currentStep / 24)] ? ' (holiday)' : '');
+    $('vb-zone').textContent = r.nd ? 'Your practice is closed: emergency service rates apply' : 'Inside your practice\'s opening hours: normal rates';
+    $('vb-hol').setAttribute('aria-pressed', holidays[Math.floor(currentStep / 24)] ? 'true' : 'false');
+    $('vb-hol').textContent = holidays[Math.floor(currentStep / 24)] ? 'Holiday set for ' + DAYS[Math.floor(currentStep / 24)] + ' (tap to undo)' : 'Make ' + DAYS[Math.floor(currentStep / 24)] + ' a Berlin public holiday';
+    $('vb-bill-sub').textContent = 'Fee items at the single rate add up to ' + eur2(base) + ' before VAT. Medicine and lab work come on top.';
+    $('vb-lines').innerHTML = CASES[$('vb-case').value].map(function (item) {
+      return '<li><span>' + FEES[item[0]].label + (item[1] > 1 ? ' x' + item[1] : '') + '</span><b>' + eur2(FEES[item[0]][animal] * item[1]) + '</b></li>';
+    }).join('') + (r.nd ? '<li><span>Emergency service fee (Notdienstgebühr), once per case</span><b>€50.00</b></li>' : '') + '<li><span>VAT</span><b>19%</b></li>';
+    var np = nextPractice(currentStep), msg;
+    if (!r.nd) {
+      msg = 'At this hour your own practice can charge between <strong>' + eur(r.lo) + ' and ' + eur(r.hi) + '</strong> including VAT. Most routine visits land toward the lower end; the 3x ceiling is for difficult or long cases.';
+    } else if (np) {
+      var later = range(np.step);
+      msg = 'At this hour the range is <strong>' + eur(r.lo) + ' to ' + eur(r.hi) + '</strong>. If it can safely wait ' + np.wait + ' hours until ' + label(np.step) + ', the same visit at your practice is <strong>' + eur(later.lo) + ' to ' + eur(later.hi) + '</strong>. The floor alone is ' + eur(r.lo - later.lo) + ' higher in the emergency service.';
+    } else {
+      msg = 'No practice hour in reach on this board: the emergency service range is <strong>' + eur(r.lo) + ' to ' + eur(r.hi) + '</strong>.';
+    }
+    $('vb-verdict').innerHTML = msg;
+    drawBoard();
+    drawBars();
+  }
+
+  svg.addEventListener('click', function (e) {
+    var t = e.target.closest ? e.target.closest('.vb-cell') : null;
+    if (!t) return;
+    currentStep = parseInt(t.getAttribute('data-step'), 10);
+    render();
+  });
+  $('vb-prev').addEventListener('click', function () { currentStep = (currentStep + 167) % 168; render(); });
+  $('vb-next').addEventListener('click', function () { currentStep = (currentStep + 1) % 168; render(); });
+  $('vb-jump').addEventListener('click', function () { var np = nextPractice(currentStep); if (np) currentStep = np.step; render(); });
+  $('vb-hol').addEventListener('click', function () { var d = Math.floor(currentStep / 24); holidays[d] = !holidays[d]; render(); });
+  ['vb-animal', 'vb-case', 'vb-hours'].forEach(function (id) { $(id).addEventListener('change', render); });
+  var lastNarrow = null;
+  window.addEventListener('resize', function () { if (narrow() !== lastNarrow) { lastNarrow = narrow(); render(); } });
+  lastNarrow = narrow();
+  render();
+})();
+</script>
+</body>
+</html>

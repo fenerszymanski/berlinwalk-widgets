@@ -12783,5 +12783,35 @@
         "a": "About 10 to 14 days. That is why the useful question is not when you get the shot but whether those two weeks end before the local wave starts. In Berlin the wave started to climb in late November in the early 2022/23 winter and between mid-December and early January in the other three."
       }
     ]
+  },
+  "vet-in-berlin": {
+    "title": "Vet in Berlin - FAQ",
+    "subtitle": "What a vet visit costs in Berlin, why the same visit costs more at night and at weekends, where the 24-hour emergency service is, and when it can wait until morning.",
+    "items": [
+      {
+        "q": "How much does a vet visit cost in Berlin?",
+        "a": "Vets bill from the national fee schedule, the GOT. A general examination with advice for a dog or cat is listed at €23.62 and can be charged at one to three times that during opening hours, plus 19% VAT. That puts a quick look at **€28 to €84**. Medicine, lab work and any extra treatment are billed on top."
+      },
+      {
+        "q": "Why is a vet more expensive at night or at the weekend?",
+        "a": "In the emergency service, which covers nights from 18:00 to 08:00, weekends from Friday 18:00 to Monday 08:00 and public holidays, the fee range moves to **two to four times** the listed fee and a flat **€50 emergency fee** is added once per case. A quick look at a dog or cat then costs about €116 to €172 including VAT."
+      },
+      {
+        "q": "Does a late appointment at my own vet count as the emergency service?",
+        "a": "No. The night and weekend rules do not apply during a practice’s regular consultation hours. If your vet is open until 20:00, a visit at 19:30 is billed at normal rates, and the same goes for a regular Saturday morning surgery."
+      },
+      {
+        "q": "Where is the vet emergency service in Berlin?",
+        "a": "The Tierärztekammer Berlin lists five clinics and practices with a 24-hour small-animal emergency service: Klinik für Klein- und Heimtiere in Biesdorf, Valera in Zehlendorf, Tierarztpraxis Bärenwiese in Wilmersdorf, Tierarztpraxis Rödiger in Reinickendorf and VetZentrum Berlin in Marzahn. Call ahead, because animals are seen by urgency."
+      },
+      {
+        "q": "When should I go to an emergency vet straight away?",
+        "a": "Go now if your animal has trouble breathing, is bleeding heavily, has collapsed or is having a seizure, has eaten poison, bait, chocolate, grapes or medicine, is a dog with a swollen belly retching without bringing anything up, or is a cat straining without producing urine. For anything else, a phone call first usually tells you whether it can wait."
+      },
+      {
+        "q": "Are public holidays billed as emergency time in Berlin?",
+        "a": "Yes, for the whole day. The next Berlin holidays are 3 October, 25 and 26 December and 1 January, and 8 March is a public holiday in Berlin but not in most of Germany. 31 October is a holiday in Brandenburg but a normal day in Berlin."
+      }
+    ]
   }
 }
