@@ -1,9 +1,9 @@
 {
-  "updatedAt": "2026-09-20T20:11:00.929Z",
+  "updatedAt": "2026-09-21T01:59:49.255Z",
   "source": "Wix Blog API",
   "popularSource": "Wix Blog metrics.views lifetime sort",
-  "totalPosts": 408,
-  "toolsTotal": 328,
+  "totalPosts": 409,
+  "toolsTotal": 329,
   "bookingUrl": "https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based",
   "navTopics": [
     {
@@ -1802,6 +1802,23 @@
   ],
   "latest": [
     {
+      "title": "Bike Lights in Berlin: The Date Your Ride Home Goes Dark",
+      "slug": "bike-lights-in-berlin",
+      "path": "/post/bike-lights-in-berlin",
+      "url": "https://www.berlinwalk.com/post/bike-lights-in-berlin",
+      "excerpt": "Berlin sunset moves 68 minutes across September, and then the clocks take another hour on 25 October. German law asks for lights from twilight, not from darkness, so a normal 18:30 ride home is inside the legal window from 8 October. Here are the dates, the approved kit, and the routes that close with the light.",
+      "category": "Living in Berlin",
+      "categorySlug": "living-in-berlin",
+      "topic": "living-in-berlin",
+      "topicLabel": "Living in Berlin",
+      "readTime": "9 min read",
+      "publishedDate": "2026-09-21T01:57:28.121Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_34705bb0f682425e995a10b0418fe25a~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-thf-sunset.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_34705bb0f682425e995a10b0418fe25a~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-thf-sunset.jpg",
+      "alt": "Sunset over Tempelhofer Feld in Berlin, with people silhouetted on the path in the last light of the day",
+      "relatedToolSlug": "berlin-dark-ride-window"
+    },
+    {
       "title": "Home Insurance in Berlin: The Number That Decides How Much of a Claim You Get Back",
       "slug": "home-insurance-in-berlin",
       "path": "/post/home-insurance-in-berlin",
@@ -1987,26 +2004,26 @@
       "thumb": "https://static.wixstatic.com/media/5a08a3_609e7a9c546e4d99b545aec205e772f9~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/00-cover-boulder-wall.jpg",
       "alt": "A climber in a black shirt reaching across a steep indoor bouldering wall covered in colourful holds of every shape",
       "relatedToolSlug": "berlin-bouldering-cost-curve"
-    },
+    }
+  ],
+  "allPosts": [
     {
-      "title": "Apple Picking Near Berlin: Five Orchards, the Day Each One Opens and the Ride There",
-      "slug": "apple-picking-near-berlin",
-      "path": "/post/apple-picking-near-berlin",
-      "url": "https://www.berlinwalk.com/post/apple-picking-near-berlin",
-      "excerpt": "Every September somebody suggests apple picking on Saturday, and nobody checks whether the farm opens on a Saturday, whether the bus runs at the weekend, or whether the field is inside the ticket you already pay for. Five orchards around Berlin have apples on the trees right now. Only two pick on a Monday, all five at the weekend, and four of them sit inside the Berlin ABC area. Here is which field fits which day, and how the last few kilometres work.",
+      "title": "Bike Lights in Berlin: The Date Your Ride Home Goes Dark",
+      "slug": "bike-lights-in-berlin",
+      "path": "/post/bike-lights-in-berlin",
+      "url": "https://www.berlinwalk.com/post/bike-lights-in-berlin",
+      "excerpt": "Berlin sunset moves 68 minutes across September, and then the clocks take another hour on 25 October. German law asks for lights from twilight, not from darkness, so a normal 18:30 ride home is inside the legal window from 8 October. Here are the dates, the approved kit, and the routes that close with the light.",
       "category": "Living in Berlin",
       "categorySlug": "living-in-berlin",
       "topic": "living-in-berlin",
       "topicLabel": "Living in Berlin",
-      "readTime": "7 min read",
-      "publishedDate": "2026-09-18T01:52:22.432Z",
-      "image": "https://static.wixstatic.com/media/5a08a3_1e5f385f77804d34bf1137f3ff4cbf3f~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/00-cover-apples-ready.jpg",
-      "thumb": "https://static.wixstatic.com/media/5a08a3_1e5f385f77804d34bf1137f3ff4cbf3f~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/00-cover-apples-ready.jpg",
-      "alt": "Ripe red apples hanging low on the branches of an apple tree in an orchard, with grass and a gravel path behind it",
-      "relatedToolSlug": "berlin-apple-orchard-planner"
-    }
-  ],
-  "allPosts": [
+      "readTime": "9 min read",
+      "publishedDate": "2026-09-21T01:57:28.121Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_34705bb0f682425e995a10b0418fe25a~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-thf-sunset.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_34705bb0f682425e995a10b0418fe25a~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-thf-sunset.jpg",
+      "alt": "Sunset over Tempelhofer Feld in Berlin, with people silhouetted on the path in the last light of the day",
+      "relatedToolSlug": "berlin-dark-ride-window"
+    },
     {
       "title": "Home Insurance in Berlin: The Number That Decides How Much of a Claim You Get Back",
       "slug": "home-insurance-in-berlin",
