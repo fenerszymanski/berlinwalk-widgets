@@ -1,9 +1,9 @@
 {
-  "updatedAt": "2026-09-21T02:06:24.150Z",
+  "updatedAt": "2026-09-21T07:42:50.421Z",
   "source": "Wix Blog API",
   "popularSource": "Wix Blog metrics.views lifetime sort",
-  "totalPosts": 409,
-  "toolsTotal": 329,
+  "totalPosts": 410,
+  "toolsTotal": 330,
   "bookingUrl": "https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based",
   "navTopics": [
     {
@@ -1802,6 +1802,23 @@
   ],
   "latest": [
     {
+      "title": "Flu Shot in Berlin: The Week That Beats the Winter Wave",
+      "slug": "flu-shot-in-berlin",
+      "path": "/post/flu-shot-in-berlin",
+      "url": "https://www.berlinwalk.com/post/flu-shot-in-berlin",
+      "excerpt": "A flu shot needs two weeks to work, and Berlin’s flu wave has peaked on four different dates in four winters, from 12 December to 5 February. A shot in the week of 2 November would have covered at least 95% of the cases in all of them. Here is the data, who the shot is recommended for, and who pays.",
+      "category": "Living in Berlin",
+      "categorySlug": "living-in-berlin",
+      "topic": "living-in-berlin",
+      "topicLabel": "Living in Berlin",
+      "readTime": "7 min read",
+      "publishedDate": "2026-09-21T07:41:08.026Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_65e3048d3d1e422ab6692532a9bb99f2~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-akazienstrasse-apotheke.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_65e3048d3d1e422ab6692532a9bb99f2~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-akazienstrasse-apotheke.jpg",
+      "alt": "A pharmacy sign pointing down Akazienstraße in Berlin-Schöneberg, with a red Apotheke A above the word Apotheke",
+      "relatedToolSlug": "berlin-flu-wave-timer"
+    },
+    {
       "title": "Bike Lights in Berlin: The Date Your Ride Home Goes Dark",
       "slug": "bike-lights-in-berlin",
       "path": "/post/bike-lights-in-berlin",
@@ -1987,23 +2004,6 @@
       "thumb": "https://static.wixstatic.com/media/5a08a3_9eeadf89f20b4bf2832e964d684ecd53~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/00-cover-charlottenburg-altbau.jpg",
       "alt": "A row of Berlin Altbau apartment buildings in Charlottenburg, one with a pale blue decorated facade and green plants climbing the ground floor, cars parked in front",
       "relatedToolSlug": "berlin-wohngeld-estimator"
-    },
-    {
-      "title": "Bouldering in Berlin: What Each Hall Costs at the Pace You Actually Climb",
-      "slug": "bouldering-in-berlin",
-      "path": "/post/bouldering-in-berlin",
-      "url": "https://www.berlinwalk.com/post/bouldering-in-berlin",
-      "excerpt": "Every autumn half of Berlin decides this is the winter they take up bouldering, and then stands at the counter choosing between a day ticket, a 10-visit card, a membership and the Urban Sports Club app. I checked the prices at fourteen halls, two multi-hall passes and Urban Sports Club. The cheapest choice depends almost entirely on how often you really go.",
-      "category": "Living in Berlin",
-      "categorySlug": "living-in-berlin",
-      "topic": "living-in-berlin",
-      "topicLabel": "Living in Berlin",
-      "readTime": "7 min read",
-      "publishedDate": "2026-09-18T07:55:22.847Z",
-      "image": "https://static.wixstatic.com/media/5a08a3_609e7a9c546e4d99b545aec205e772f9~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/00-cover-boulder-wall.jpg",
-      "thumb": "https://static.wixstatic.com/media/5a08a3_609e7a9c546e4d99b545aec205e772f9~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/00-cover-boulder-wall.jpg",
-      "alt": "A climber in a black shirt reaching across a steep indoor bouldering wall covered in colourful holds of every shape",
-      "relatedToolSlug": "berlin-bouldering-cost-curve"
     }
   ]
 }

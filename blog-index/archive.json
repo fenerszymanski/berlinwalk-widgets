@@ -1,9 +1,26 @@
 {
-  "updatedAt": "2026-09-21T02:06:24.150Z",
+  "updatedAt": "2026-09-21T07:42:50.421Z",
   "source": "Wix Blog API",
-  "totalPosts": 409,
+  "totalPosts": 410,
   "bookingUrl": "https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based",
   "allPosts": [
+    {
+      "title": "Flu Shot in Berlin: The Week That Beats the Winter Wave",
+      "slug": "flu-shot-in-berlin",
+      "path": "/post/flu-shot-in-berlin",
+      "url": "https://www.berlinwalk.com/post/flu-shot-in-berlin",
+      "excerpt": "A flu shot needs two weeks to work, and Berlin’s flu wave has peaked on four different dates in four winters, from 12 December to 5 February. A shot in the week of 2 November would have covered at least 95% of the cases in all of them. Here is the data, who the shot is recommended for, and who pays.",
+      "category": "Living in Berlin",
+      "categorySlug": "living-in-berlin",
+      "topic": "living-in-berlin",
+      "topicLabel": "Living in Berlin",
+      "readTime": "7 min read",
+      "publishedDate": "2026-09-21T07:41:08.026Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_65e3048d3d1e422ab6692532a9bb99f2~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-akazienstrasse-apotheke.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_65e3048d3d1e422ab6692532a9bb99f2~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-akazienstrasse-apotheke.jpg",
+      "alt": "A pharmacy sign pointing down Akazienstraße in Berlin-Schöneberg, with a red Apotheke A above the word Apotheke",
+      "relatedToolSlug": "berlin-flu-wave-timer"
+    },
     {
       "title": "Bike Lights in Berlin: The Date Your Ride Home Goes Dark",
       "slug": "bike-lights-in-berlin",
