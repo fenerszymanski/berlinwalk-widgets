@@ -1917,7 +1917,7 @@
     return {
       label: 'Free walk',
       title: bookingTitle,
-      copy: slot ? 'Free, tip-based, about 2 hours. Reserve a spot, pay nothing upfront.' : '',
+      copy: slot ? 'Tip-based, about 2 hours. A \u20AC2 deposit holds your spot and comes back after the walk.' : '',
       url: bookingUrl,
       image: TOUR_IMAGE,
       bookLink: true,
@@ -2000,7 +2000,7 @@
 
     if (intent === 'direct-booking') {
       strategy.title = 'Walk this context in Berlin';
-      strategy.intro = 'If this guide made the city clearer, the easiest next step is my tip-based walk: free reservation, no upfront payment, about 2 hours.';
+      strategy.intro = 'If this guide made the city clearer, the easiest next step is my tip-based walk: about 2 hours, with a \u20AC2 refundable deposit to hold your spot.';
       strategy.cards = dedupeJourneyCards([directBookCard, wallTimelineCard, toolCard, readCard], 3);
       return strategy;
     }
@@ -2248,9 +2248,9 @@
       '<div class="bw-tool-bridge-main">' +
         '<div>' +
           '<h2>' + escapeHtml(toolBridgeTitle(slot)) + '</h2>' +
-          '<p class="bw-blog-journey-intro">I meet at the World Clock on Alexanderplatz. About 2 hours, tip-based, reserve a spot and pay nothing upfront.</p>' +
+          '<p class="bw-blog-journey-intro">I meet at the World Clock on Alexanderplatz. About 2 hours, tip-based, with a \u20AC2 refundable deposit to hold your spot.</p>' +
         '</div>' +
-        '<a class="bw-blog-tool-button bw-tool-bridge-book" href="' + escapeAttr(bookingUrl) + '" target="_top" data-book-link="1" data-bw-book-context="tool_bridge_booking" data-bw-book-event="bw_tool_book_bridge_click" data-bw-book-link-kind="tool_bridge" data-bw-book-once-key="bw_tool_book_bridge_click:' + escapeAttr(tool.slug || currentSlug() || 'tool') + '" data-bw-book-variant="' + escapeAttr(activeBookingVariant()) + '">Reserve a free spot</a>' +
+        '<a class="bw-blog-tool-button bw-tool-bridge-book" href="' + escapeAttr(bookingUrl) + '" target="_top" data-book-link="1" data-bw-book-context="tool_bridge_booking" data-bw-book-event="bw_tool_book_bridge_click" data-bw-book-link-kind="tool_bridge" data-bw-book-once-key="bw_tool_book_bridge_click:' + escapeAttr(tool.slug || currentSlug() || 'tool') + '" data-bw-book-variant="' + escapeAttr(activeBookingVariant()) + '">Reserve a spot</a>' +
       '</div>';
 
     section.addEventListener('click', function (event) {

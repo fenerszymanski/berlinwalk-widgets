@@ -1726,9 +1726,9 @@ class BWBlogIndexElement extends HTMLElement {
         <div class="bw-inner">
           <div>
             <h2>Want Berlin to click in real life?</h2>
-            <p>Join the free tip-based BerlinWalk tour: 12 stops, about 2 hours, starting at the World Clock in Alexanderplatz.</p>
+            <p>Join the tip-based BerlinWalk tour: 11 stops, about 2 hours, starting at the World Clock in Alexanderplatz.</p>
           </div>
-          <a class="bw-cta" href="${this._escapeAttribute(this._data.bookingUrl || BW_BLOG_INDEX_FALLBACK.bookingUrl)}" target="_top">Book your free spot</a>
+          <a class="bw-cta" href="${this._escapeAttribute(this._data.bookingUrl || BW_BLOG_INDEX_FALLBACK.bookingUrl)}" target="_top">Book your spot</a>
         </div>
       </footer>
     `;

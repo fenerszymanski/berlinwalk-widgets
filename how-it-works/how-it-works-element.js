@@ -16,9 +16,9 @@ class BWHowItWorksElement extends HTMLElement {
 
   _render() {
     const steps = [
-      { num: 1, icon: 'calendar', title: 'Reserve free', subtitle: 'On Freetour, no payment needed', chip: '~30 SEC' },
+      { num: 1, icon: 'calendar', title: 'Reserve your spot', subtitle: '\u20AC2 deposit, refunded after the walk', chip: '~2 MIN' },
       { num: 2, icon: 'umbrella', title: 'Show up at Alexanderplatz', subtitle: 'Meeting point at World Clock', chip: '11:30 AM TUE-SAT' },
-      { num: 3, icon: 'walking', title: 'Walk + tip what you feel', subtitle: '12 stops, Alexanderplatz to Hackescher Markt', chip: '~2 HOURS - 12 STOPS' }
+      { num: 3, icon: 'walking', title: 'Walk + tip what you feel', subtitle: '11 stops, Alexanderplatz to Hackescher Markt', chip: '~2 HOURS - 11 STOPS' }
     ];
 
     this.innerHTML = `
@@ -391,7 +391,7 @@ class BWHowItWorksElement extends HTMLElement {
           </div>
 
           <div class="bw-how-cta-row">
-            <a class="bw-how-cta" href="https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based">Book your free spot</a>
+            <a class="bw-how-cta" href="https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based">Book your spot</a>
           </div>
         </div>
       </section>

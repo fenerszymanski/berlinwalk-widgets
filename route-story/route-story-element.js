@@ -219,7 +219,7 @@ class BWRouteStoryElement extends HTMLElement {
             <h1 id="bw-rs-title">The 12-stop route that makes Berlin click.</h1>
             <p class="bw-rs-hero-lead">This is not a checklist of monuments. It is a two-hour story map from the World Clock at Alexanderplatz to Hackescher Markt, built around what you understand at each stop.</p>
             <div class="bw-rs-actions">
-              <a class="bw-rs-btn bw-rs-btn-primary" href="${BW_ROUTE_STORY_BOOKING_URL}" data-bw-book-route-story>Book your free spot</a>
+              <a class="bw-rs-btn bw-rs-btn-primary" href="${BW_ROUTE_STORY_BOOKING_URL}" data-bw-book-route-story>Book your spot</a>
               <a class="bw-rs-btn bw-rs-btn-ghost" href="#bw-route-story-map">Explore the stops</a>
             </div>
             <dl class="bw-rs-facts" aria-label="Tour facts">
@@ -307,9 +307,9 @@ class BWRouteStoryElement extends HTMLElement {
             <div>
               <span class="bw-rs-eyebrow">Join the route</span>
               <h2>Walk the story in person.</h2>
-              <p>Meet at the World Clock, follow the old centre west through 12 stops, and leave near Hackescher Markt with Berlin arranged in your head.</p>
+              <p>Meet at the World Clock, follow the old centre west through 11 stops, and leave near Hackescher Markt with Berlin arranged in your head.</p>
               <div class="bw-rs-actions">
-                <a class="bw-rs-btn bw-rs-btn-yellow" href="${BW_ROUTE_STORY_BOOKING_URL}" data-bw-book-route-story>Book your free spot</a>
+                <a class="bw-rs-btn bw-rs-btn-yellow" href="${BW_ROUTE_STORY_BOOKING_URL}" data-bw-book-route-story>Book your spot</a>
                 <a class="bw-rs-btn bw-rs-btn-outline-light" href="${BW_ROUTE_STORY_MEETING_URL}">Meeting point</a>
                 <a class="bw-rs-btn bw-rs-btn-outline-light" href="${BW_ROUTE_STORY_GUIDE_URL}">Meet Yusuf</a>
               </div>

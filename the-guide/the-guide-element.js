@@ -807,7 +807,7 @@ class BWTheGuideElement extends HTMLElement {
         <section class="bw-guide-final" aria-label="Book BerlinWalk">
           <div class="bw-guide-inner">
             <h2>Walk Berlin with the person who built the route.</h2>
-            <p>Book your free spot, meet at the World Clock, and spend about 2 hours seeing Berlin's historic centre with context.</p>
+            <p>Book your spot, meet at the World Clock, and spend about 2 hours seeing Berlin's historic centre with context.</p>
             <div class="bw-guide-final-actions">
               <a class="bw-guide-btn bw-guide-btn-primary" href="${BW_GUIDE_BOOKING_URL}">Book your spot</a>
               <a class="bw-guide-btn bw-guide-btn-ghost" href="${BW_GUIDE_REVIEWS_URL}">Read more reviews</a>

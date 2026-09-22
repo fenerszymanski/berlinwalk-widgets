@@ -134,7 +134,7 @@ class BWRouteElement extends HTMLElement {
           </header>
           <div class="bw-route-map-wrapper bw-route-error">
             <p>Map temporarily unavailable. Visit our booking page to read about the tour.</p>
-            <a href="${BW_ROUTE_BOOKING_URL}" target="_blank" rel="noopener">Book your free spot</a>
+            <a href="${BW_ROUTE_BOOKING_URL}" target="_blank" rel="noopener">Book your spot</a>
           </div>
         </div>
       </section>
@@ -191,13 +191,13 @@ class BWRouteElement extends HTMLElement {
               <p class="bw-route-story-kicker">Route as story map</p>
               <h3 id="bw-route-story-title">Not just where you stop. What you understand there.</h3>
               <p>
-                The full route page turns the 12 stops into a short Berlin story:
+                The full route page turns the 11 stops into a short Berlin story:
                 medieval origins, royal ambition, war scars, East Berlin, and the city
                 you walk through today.
               </p>
               <div class="bw-route-story-actions" aria-label="Open the route story or book the tour">
                 <a class="bw-route-btn bw-route-btn-primary" href="${BW_ROUTE_STORY_URL}">Explore the story map</a>
-                <a class="bw-route-btn bw-route-btn-ghost" href="${BW_ROUTE_BOOKING_URL}">Book your free spot</a>
+                <a class="bw-route-btn bw-route-btn-ghost" href="${BW_ROUTE_BOOKING_URL}">Book your spot</a>
               </div>
             </div>
             <div class="bw-route-story-steps" aria-label="Story chapters from the route">

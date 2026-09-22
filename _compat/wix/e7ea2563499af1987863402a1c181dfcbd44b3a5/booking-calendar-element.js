@@ -737,7 +737,7 @@ class BWBookingCalendarElement extends HTMLElement {
         <div class="bw-cal-shell">
           <header class="bw-cal-head">
             <div class="bw-cal-title" role="heading" aria-level="3">${this._escape(serviceTitle)}</div>
-            <span class="bw-cal-note">Free reservation. Tip at the end. Phone is only for tour-day coordination.</span>
+            <span class="bw-cal-note">&euro;2 refundable deposit per guest. Tip at the end. Phone is only for tour-day coordination.</span>
           </header>
           <div class="bw-cal-body">
             ${loading ? '<div class="bw-cal-message">Loading real tour availability...</div>' : ''}
@@ -789,14 +789,14 @@ class BWBookingCalendarElement extends HTMLElement {
 
   _ctaLabel(showIntro = this._shouldShowIntro()) {
     const label = this.getAttribute('cta-label') || '';
-    if (showIntro && (!label || label === 'Reserve your spot')) return 'Continue to free reservation';
+    if (showIntro && (!label || label === 'Reserve your spot')) return 'Continue to reservation';
     return label || 'Reserve your spot';
   }
 
   _introMarkup() {
     const chips = [
-      'Free reservation',
-      'No payment now',
+      '\u20AC2 refundable deposit',
+      'Tip at the end',
       '~2h walk',
       'World Clock meeting point',
       'Guided by Yusuf',
@@ -804,8 +804,8 @@ class BWBookingCalendarElement extends HTMLElement {
     return `
       <div class="bw-cal-intro">
         <span class="bw-cal-intro-kicker">Book the tour</span>
-        <h2>Reserve your free spot</h2>
-        <p>No upfront payment. My walk is ~2h, tip-based at the end, and starts at the World Clock on Alexanderplatz.</p>
+        <h2>Reserve your spot</h2>
+        <p>A &euro;2 deposit per guest holds your place and comes back after the walk. My walk is ~2h, tip-based at the end, and starts at the World Clock on Alexanderplatz.</p>
         <div class="bw-cal-intro-chips" aria-label="Tour booking details">
           ${chips.map((chip) => `<span class="bw-cal-intro-chip">${this._escape(chip)}</span>`).join('')}
         </div>

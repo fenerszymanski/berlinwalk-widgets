@@ -1217,7 +1217,7 @@ class BWHeaderElement extends HTMLElement {
 
             <div class="bw-header-mobile-cta">
               <a class="bw-header-book" href="${BW_HEADER_BOOKING_URL}">Book Free Tour</a>
-              <p class="bw-header-mobile-trust"><span aria-hidden="true">★ </span><strong>9.8 / 10</strong> on FreeTour · Free to book, tip-based</p>
+              <p class="bw-header-mobile-trust"><span aria-hidden="true">★ </span><strong>9.8 / 10</strong> on FreeTour · Tip-based · &euro;2 refundable deposit</p>
             </div>
           </div>
         </div>

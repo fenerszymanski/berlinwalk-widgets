@@ -2,15 +2,15 @@
   "header": {
     "eyebrow": "HOW IT WORKS",
     "title": "From booking to walking — in three steps",
-    "subtitle": "Booking takes 30 seconds. The rest is on me."
+    "subtitle": "Booking takes about 2 minutes. The rest is on me."
   },
   "steps": [
     {
       "number": 1,
       "icon": "calendar",
-      "timeChip": "~30 SEC",
+      "timeChip": "~2 MIN",
       "title": "Book Your Spot",
-      "description": "Pick a date and reserve. Just your name and email."
+      "description": "Pick a date and reserve with a €2 deposit per guest. It comes back after the walk."
     },
     {
       "number": 2,
@@ -22,13 +22,13 @@
     {
       "number": 3,
       "icon": "walking",
-      "timeChip": "~2 HOURS · 12 STOPS",
+      "timeChip": "~2 HOURS · 11 STOPS",
       "title": "Walk + Tip",
       "description": "Walk Berlin with me. Tip what feels fair at the end."
     }
   ],
   "cta": {
-    "text": "Book your free spot →",
+    "text": "Book your spot →",
     "url": "https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based"
   }
 }

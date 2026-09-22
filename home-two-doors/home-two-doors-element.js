@@ -255,13 +255,13 @@ class BWHomeTwoDoorsElement extends HTMLElement {
             <span class="bw-home-two-doors__chip bw-home-two-doors__chip--yellow bw-home-two-doors__corner">LIVE · FREE · TIP-BASED</span>
             <span class="bw-home-two-doors__eyebrow bw-home-two-doors__eyebrow--dark">FREE BERLIN WALKING TOUR</span>
             <h2>Walk <em>with me.</em></h2>
-            <p>About 2 hours, 12 stops, World Clock to Hackescher Markt. Reserve a free spot and tip what it was worth at the end.</p>
+            <p>About 2 hours, 11 stops, World Clock to Hackescher Markt. Book with a €2 refundable deposit per guest; tip separately at the end.</p>
             <div class="bw-home-two-doors__door-actions">
-              <a class="bw-home-two-doors__btn bw-home-two-doors__btn--yellow" href="${BW_HOME_TWO_DOORS_BOOKING_URL}" data-bw-cta-id="book_live_tour" data-bw-cta-placement="hero-live">Book a free spot</a>
+              <a class="bw-home-two-doors__btn bw-home-two-doors__btn--yellow" href="${BW_HOME_TWO_DOORS_BOOKING_URL}" data-bw-cta-id="book_live_tour" data-bw-cta-placement="hero-live">Reserve your place</a>
               <a class="bw-home-two-doors__link bw-home-two-doors__link--light" href="#live-route" data-bw-cta-id="learn_live_route" data-bw-cta-placement="hero-live">Route &amp; meeting point</a>
             </div>
             <div class="bw-home-two-doors__door-meta">
-              <span class="bw-home-two-doors__chip">12 stops · ~2 hours</span>
+              <span class="bw-home-two-doors__chip">11 stops · ~2 hours</span>
               <span class="bw-home-two-doors__chip">9.8 / 10 on FreeTour</span>
             </div>
           </article>
@@ -303,7 +303,7 @@ class BWHomeTwoDoorsElement extends HTMLElement {
               </div>
               <div class="bw-home-two-doors__compare-row">
                 <div>PRICE</div>
-                <div><b>Free to book.</b><br>Choose your tip at the end of the walk.</div>
+                <div><b>€2 refundable deposit per guest.</b><br>Refunded after attendance is confirmed. Tip separately at the end.</div>
                 <div><b>€9.90 per walk.</b><br>Berlin Wall + Hidden Berlin + Medieval Berlin: €24.90 as a trio.</div>
               </div>
               <div class="bw-home-two-doors__compare-row">
@@ -320,7 +320,7 @@ class BWHomeTwoDoorsElement extends HTMLElement {
                 <dl>
                   <div><dt>When</dt><dd>A booked start time · about 2 hours</dd></div>
                   <div><dt>Where</dt><dd>Meet me at the World Clock</dd></div>
-                  <div><dt>Price</dt><dd>Free to book · tip at the end</dd></div>
+                  <div><dt>Booking</dt><dd>€2 refundable deposit per guest · tip separately</dd></div>
                 </dl>
                 <a href="${BW_HOME_TWO_DOORS_BOOKING_URL}" data-bw-cta-id="book_compare_mobile" data-bw-cta-placement="compare">Check live dates →</a>
               </article>
@@ -377,10 +377,10 @@ class BWHomeTwoDoorsElement extends HTMLElement {
               <h2>A short walk with a clear arc.</h2>
               <p>I start at Alexanderplatz's World Clock and move through the historic centre of former East Berlin, finishing near Hackescher Markt. The tour connects divided-city history to the places around you; it does not trace the full Berlin Wall line.</p>
               <div class="bw-home-two-doors__facts">
-                <div><b>12</b><span>stops</span></div>
+                <div><b>11</b><span>stops</span></div>
                 <div><b>~2h</b><span>walking time</span></div>
                 <div><b>~3km</b><span>route length</span></div>
-                <div><b class="bw-home-two-doors__free-label">Free to book</b><span>tip-based</span></div>
+                <div><b class="bw-home-two-doors__free-label">€2 deposit</b><span>per guest · refunded after attendance</span></div>
               </div>
               <div class="bw-home-two-doors__live-actions">
                 <a class="bw-home-two-doors__btn bw-home-two-doors__btn--green" href="${BW_HOME_TWO_DOORS_BOOKING_URL}" data-bw-cta-id="book_route" data-bw-cta-placement="live-route">Check dates</a>

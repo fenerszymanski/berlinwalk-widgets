@@ -1150,7 +1150,7 @@ class BWThankYouElement extends HTMLElement {
               </li>
               <li class="bw-ty-step" data-bw-ty-reveal>
                 <h3>Come ready to walk</h3>
-                <p>Wear comfortable shoes, check the weather, and bring curiosity. The tour is free to book and tip-based at the end.</p>
+                <p>Wear comfortable shoes, check the weather, and bring curiosity. Your &euro;2 deposit comes back after the walk, and the tip at the end is up to you.</p>
               </li>
             </ol>
           </div>

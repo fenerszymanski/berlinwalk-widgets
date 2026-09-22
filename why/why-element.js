@@ -22,9 +22,9 @@ const CARDS = [
 ];
 
 const FLOW_STEPS = [
-  { label: 'Reserve free', detail: 'On Freetour, no payment needed' },
+  { label: 'Reserve your spot', detail: '\u20AC2 deposit, refunded after the walk' },
   { label: 'Show up at Alexanderplatz', detail: 'Meeting point at World Clock' },
-  { label: 'Walk + tip what you feel', detail: '12 stops, ~2 hours' }
+  { label: 'Walk + tip what you feel', detail: '11 stops, ~2 hours' }
 ];
 
 class BWWhyElement extends HTMLElement {

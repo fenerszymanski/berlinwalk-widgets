@@ -55,7 +55,7 @@ const REQUIRED_PATHS = [
 const EXPECTED_COMPATIBILITY_HASHES = new Map([
   ['homepage-editorial/homepage-editorial.css', '7077de8a302995ad3ad2db5caeb9c6b3f674ee979fac2e8176848f272c2c2ee3'],
   ['_compat/wix/f985d8f5288df84d46e904298ad9186236561df1/history-lead-magnet-element.js', '83559f72195084595b178cbbdb9c12f505328bfbf73b2d9469c33b50c25d46d0'],
-  ['_compat/wix/e7ea2563499af1987863402a1c181dfcbd44b3a5/booking-calendar-element.js', '468312ec8492c74fb036e968b78974313711290b836313c4de9570aaf3a6d5c5'],
+  ['_compat/wix/e7ea2563499af1987863402a1c181dfcbd44b3a5/booking-calendar-element.js', 'dcc49ee9a72c2b94071e0a64279e22916c41c292637990eedb8edf79ab2ddc4c'],
 ]);
 const REQUIRED_SUBRESOURCE_INTEGRITY = [
   {
