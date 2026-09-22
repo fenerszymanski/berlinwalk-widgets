@@ -1,9 +1,26 @@
 {
-  "updatedAt": "2026-09-22T06:25:20.067Z",
+  "updatedAt": "2026-09-22T07:59:17.903Z",
   "source": "Wix Blog API",
-  "totalPosts": 413,
+  "totalPosts": 414,
   "bookingUrl": "https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based",
   "allPosts": [
+    {
+      "title": "Cargo Bike in Berlin: How to Borrow One Free for the Weekend",
+      "slug": "cargo-bike-berlin",
+      "path": "/post/cargo-bike-berlin",
+      "url": "https://www.berlinwalk.com/post/cargo-bike-berlin",
+      "excerpt": "Berlin has more than 240 cargo bikes you can borrow for free, at bookshops, cafés and libraries in every district. The catch is the weekend: only 70 hand over on a Saturday and 12 on a Sunday. Here is how the fLotte works, what you need for the first booking, and how to get a bike for Saturday anyway.",
+      "category": "Living in Berlin",
+      "categorySlug": "living-in-berlin",
+      "topic": "living-in-berlin",
+      "topicLabel": "Living in Berlin",
+      "readTime": "7 min read",
+      "publishedDate": "2026-09-22T07:56:05.519Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_0150793df04141eba2ea20bce0cebac0~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/02-flotte-anton-library.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_0150793df04141eba2ea20bce0cebac0~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/02-flotte-anton-library.jpg",
+      "alt": "A red box bike with the fLotte Berlin sticker and the name Anton parked on cobbles outside a library in Lichtenberg",
+      "relatedToolSlug": "berlin-cargo-bike-map"
+    },
     {
       "title": "Autumn Leaves in Berlin: The Week the Beech Woods Turn Gold",
       "slug": "autumn-leaves-in-berlin",
