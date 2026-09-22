@@ -233,7 +233,7 @@
                 '<a class="bw-dslp-chip" href="https://www.berlinwalk.com/games/berlin-smile-challenge?utm_source=day_survival&utm_medium=game_landing&utm_campaign=berlinwalk_games&utm_content=more_games">Berlin Smile Challenge</a>',
               '</div>',
             '</div>',
-            '<a class="bw-dslp-btn primary" href="' + BOOK_URL + '">Book your free spot</a>',
+            '<a class="bw-dslp-btn primary" href="' + BOOK_URL + '">Book your spot</a>',
           '</div>',
         '</section>',
       '</main>'

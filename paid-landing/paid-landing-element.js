@@ -314,7 +314,7 @@
                 <aside class="bw-paid-booking-panel" id="bw-paid-calendar" aria-label="Pick your tour date">
                   <div class="bw-paid-booking-above">
                     <strong>Live availability</strong>
-                    <span>&euro;2 refundable deposit per guest. Tip at the end. Phone is only for tour-day coordination.</span>
+                    <span>Pick a date below. Phone is only for tour-day coordination.</span>
                   </div>
                   <bw-booking-calendar
                     availability-days="${this.getAttribute('availability-days') || '365'}"

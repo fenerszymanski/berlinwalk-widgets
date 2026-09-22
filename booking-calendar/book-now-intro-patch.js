@@ -28,7 +28,7 @@
     "<div class='bw-cal-intro' data-bw-booking-intro-version='" + INTRO_VERSION + "'>",
     "<span class='bw-cal-intro-kicker'>Book the tour</span>",
     '<h1>Reserve your place</h1>',
-    "<p>Pay a €2 refundable reservation deposit per guest now. We refund it after attendance is confirmed, or if you cancel at least 24 hours before the tour. The walk is tip-based and your tip is separate.</p>",
+    "<p>Pay a €2 refundable reservation deposit per guest now. I refund it after attendance is confirmed, or if you cancel at least 24 hours before the tour. The walk is tip-based and your tip is separate.</p>",
     "<div class='bw-cal-intro-chips' aria-label='Tour booking details'>",
     "<span class='bw-cal-intro-chip'>€2 refundable deposit per guest</span>",
     "<span class='bw-cal-intro-chip'>Tip separately after the walk</span>",
@@ -386,7 +386,7 @@
       progressHtml('is-complete', 'Selected', 'is-active', 'Current step'),
       '<strong>Complete your reservation</strong>',
       '<p class="bw-deposit-now"><strong>Pay now: €2 per guest</strong><br>A refundable reservation deposit, not the price of the tour.</p>',
-      '<p><strong>Attend the walk → get your deposit back.</strong><br>We issue the refund after attendance is confirmed.</p>',
+      '<p><strong>Attend the walk → get your deposit back.</strong><br>I issue the refund after attendance is confirmed.</p>',
       '<p><strong>Cancel at least 24 hours before → full refund.</strong><br>Late cancellation or no-show: no deposit refund. If BerlinWalk cancels, you receive a full refund.</p>',
       '<p class="bw-deposit-tip"><strong>Tips are separate</strong> and entirely up to you.</p>'
     ].join('');
