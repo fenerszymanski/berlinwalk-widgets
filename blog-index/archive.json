@@ -1,9 +1,26 @@
 {
-  "updatedAt": "2026-09-22T07:59:17.903Z",
+  "updatedAt": "2026-09-22T13:47:14.660Z",
   "source": "Wix Blog API",
-  "totalPosts": 414,
+  "totalPosts": 415,
   "bookingUrl": "https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based",
   "allPosts": [
+    {
+      "title": "Pumpkin Patch in Berlin: Where You Can Really Pick Your Own",
+      "slug": "pumpkin-patch-berlin",
+      "path": "/post/pumpkin-patch-berlin",
+      "url": "https://www.berlinwalk.com/post/pumpkin-patch-berlin",
+      "excerpt": "Berlin has pumpkins everywhere in October, but a field you can pick from yourself is rare. Inside the city there is one real harvest, for one weekend. Here is where it is, which pumpkin shows and festivals are worth a Saturday, and how long each one takes from Alexanderplatz.",
+      "category": "Living in Berlin",
+      "categorySlug": "living-in-berlin",
+      "topic": "living-in-berlin",
+      "topicLabel": "Living in Berlin",
+      "readTime": "8 min read",
+      "publishedDate": "2026-09-22T13:45:37.144Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_70327d193189425fa423d71a53909ffb~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/00-cover-klaistow-pumpkin-mound.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_70327d193189425fa423d71a53909ffb~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/00-cover-klaistow-pumpkin-mound.jpg",
+      "alt": "A huge football built from small white and green pumpkins on a mound of orange pumpkins at the Klaistow pumpkin show near Berlin",
+      "relatedToolSlug": "berlin-pumpkin-weekend-map"
+    },
     {
       "title": "Cargo Bike in Berlin: How to Borrow One Free for the Weekend",
       "slug": "cargo-bike-berlin",
@@ -6916,7 +6933,7 @@
       "categorySlug": "tourist-tips",
       "topic": "first-day",
       "topicLabel": "First Day in Berlin",
-      "readTime": "9 min read",
+      "readTime": "10 min read",
       "publishedDate": "2026-02-26T14:44:04.615Z",
       "image": "https://static.wixstatic.com/media/nsplsh_7a1723d95fbd40129e7e14039803ec91~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/people%20walking%20on%20street%20during%20daytime.jpg",
       "thumb": "https://static.wixstatic.com/media/nsplsh_7a1723d95fbd40129e7e14039803ec91~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/people%20walking%20on%20street%20during%20daytime.jpg",
