@@ -1,9 +1,26 @@
 {
-  "updatedAt": "2026-09-21T20:01:33.631Z",
+  "updatedAt": "2026-09-22T06:25:20.067Z",
   "source": "Wix Blog API",
-  "totalPosts": 412,
+  "totalPosts": 413,
   "bookingUrl": "https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based",
   "allPosts": [
+    {
+      "title": "Autumn Leaves in Berlin: The Week the Beech Woods Turn Gold",
+      "slug": "autumn-leaves-in-berlin",
+      "path": "/post/autumn-leaves-in-berlin",
+      "url": "https://www.berlinwalk.com/post/autumn-leaves-in-berlin",
+      "excerpt": "Autumn leaves in Berlin follow a tighter calendar than most people think. Eleven years of weather service records put the beech peak in the last full week of October, the clocks go back right in the middle of it, and most woods around Berlin are pine. Here is when and where to go.",
+      "category": "Living in Berlin",
+      "categorySlug": "living-in-berlin",
+      "topic": "living-in-berlin",
+      "topicLabel": "Living in Berlin",
+      "readTime": "8 min read",
+      "publishedDate": "2026-09-22T06:23:33.646Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_61c0a916dc7442708a780bca882aa788~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-schlachtensee-golden-autumn.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_61c0a916dc7442708a780bca882aa788~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-schlachtensee-golden-autumn.jpg",
+      "alt": "Schlachtensee in late October, with a wall of orange and gold broadleaf trees on the far shore above the water",
+      "relatedToolSlug": "berlin-leaf-turn-map"
+    },
     {
       "title": "Cranes Near Berlin: Linum at Dusk, and How to Get Home Afterwards",
       "slug": "cranes-near-berlin",
