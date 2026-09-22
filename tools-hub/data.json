@@ -10108,6 +10108,40 @@
       "iconStatus": "live-wix-media",
       "image": "https://static.wixstatic.com/media/5a08a3_e29644b2f70d4501932c4b1adc8ec2f9~mv2.png",
       "cmsItemId": "a80882ef-08e7-4ed2-8971-ffaa89593376"
+    },
+    {
+      "slug": "berlin-cargo-bike-map",
+      "title": "Berlin Free Cargo Bike Map",
+      "lead": "Every free fLotte cargo bike in Berlin and the Brandenburg belt on a real map, at its actual pickup point. Pick the day you want to collect it and what it needs, from a child bench to electric assist or a flatbed, and see which stations hand one over that day, with each bike's next two weeks as booked, free or closed. Two charts show how full the weekend and each district were. Checked on 22 September 2026.",
+      "category": "Maps",
+      "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/berlin-cargo-bike-map/",
+      "embedHeight": 1960,
+      "hubCategory": "Transport",
+      "type": "Map",
+      "priority": 3,
+      "tags": [
+        "cargo bike",
+        "lastenrad",
+        "flotte",
+        "bike",
+        "moving",
+        "kleinanzeigen",
+        "living in berlin",
+        "weekend",
+        "kids"
+      ],
+      "aliases": [
+        "cargo bike berlin",
+        "cargo bike rental berlin",
+        "free cargo bike berlin",
+        "lastenrad berlin",
+        "lastenrad ausleihen berlin",
+        "flotte berlin",
+        "borrow a cargo bike in berlin"
+      ],
+      "iconStatus": "live-wix-media",
+      "image": "https://static.wixstatic.com/media/5a08a3_82ec6ba3f1744f8bb0fc3e39f2b4e816~mv2.png",
+      "cmsItemId": "2a93375e-e7bd-4912-908f-c02ef6ca2fda"
     }
   ],
   "hubCategories": [

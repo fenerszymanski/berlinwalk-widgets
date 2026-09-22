@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Berlin Free Cargo Bike Map</title>
+<link rel="stylesheet" href="../css/brand.css">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: #FFFFFF; color: #1d231c; padding: 14px 12px 10px;
+  }
+  .cb-top { border-left: 5px solid #FFE600; padding: 2px 0 2px 11px; }
+  .cb-top h1 { font-size: 19px; line-height: 1.25; color: #1B5E20; }
+  .cb-top p { font-size: 13px; line-height: 1.5; color: #434b40; margin-top: 5px; }
+  .cb-step { font-size: 10.5px; font-weight: 800; letter-spacing: .07em; text-transform: uppercase;
+    color: #1B5E20; margin: 15px 0 7px; }
+  .cb-week { display: grid; grid-template-columns: repeat(7, 1fr); gap: 5px; }
+  .cb-day { font-family: inherit; border: 1.5px solid #d9e2cf; background: #fff; border-radius: 9px;
+    padding: 6px 2px 5px; cursor: pointer; display: flex; flex-direction: column; align-items: center;
+    gap: 3px; color: #1d231c; min-height: 72px; }
+  .cb-day b { font-size: 12px; }
+  .cb-day .cb-bar { width: 12px; height: 34px; background: #eef2e8; border-radius: 3px; position: relative; overflow: hidden; }
+  .cb-day .cb-bar i { position: absolute; left: 0; right: 0; bottom: 0; background: #7CB342; border-radius: 3px; }
+  .cb-day em { font-style: normal; font-size: 10.5px; color: #5d6758; font-weight: 700; }
+  .cb-day[aria-pressed="true"] { background: #1B5E20; border-color: #1B5E20; color: #fff; }
+  .cb-day[aria-pressed="true"] .cb-bar { background: rgba(255,255,255,.18); }
+  .cb-day[aria-pressed="true"] .cb-bar i { background: #FFE600; }
+  .cb-day[aria-pressed="true"] em { color: #FFE600; }
+  .cb-jobs { display: flex; flex-wrap: wrap; gap: 6px; }
+  .cb-job { font-family: inherit; font-size: 12px; font-weight: 700; border: 1.5px solid #1B5E20;
+    color: #1B5E20; background: #fff; border-radius: 999px; padding: 6px 11px; cursor: pointer; }
+  .cb-job[aria-pressed="true"] { background: #FFE600; color: #123D18; border-color: #123D18; }
+  .cb-count { margin-top: 12px; font-size: 13.5px; line-height: 1.45; color: #1d231c; }
+  .cb-count strong { color: #1B5E20; }
+  .cb-map { margin-top: 9px; border: 1px solid #dfe6d6; border-radius: 12px; overflow: hidden; background: #f5f8f0; position: relative; }
+  .cb-map svg { display: block; width: 100%; height: auto; touch-action: manipulation; }
+  .cb-key { display: flex; flex-wrap: wrap; gap: 12px; font-size: 11px; color: #4d5649; padding: 7px 10px;
+    border-top: 1px solid #dfe6d6; background: #fbfcf8; }
+  .cb-key span { display: inline-flex; align-items: center; gap: 5px; }
+  .cb-key i { display: inline-block; width: 10px; height: 10px; border-radius: 50%; }
+  .cb-station { margin-top: 11px; border: 1.5px solid #1B5E20; border-radius: 12px; padding: 12px 12px 10px; }
+  .cb-station h2 { font-size: 15px; color: #1B5E20; line-height: 1.3; }
+  .cb-station .cb-addr { font-size: 12px; color: #4d5649; margin-top: 3px; line-height: 1.45; }
+  .cb-station .cb-hours { font-size: 12px; color: #1d231c; margin-top: 6px; line-height: 1.45; background: #f5f8f0;
+    border-radius: 8px; padding: 6px 8px; }
+  .cb-bike { margin-top: 10px; padding-top: 9px; border-top: 1px dashed #d9e2cf; }
+  .cb-bike-head { display: flex; justify-content: space-between; gap: 8px; align-items: baseline; }
+  .cb-bike-head b { font-size: 13.5px; }
+  .cb-bike-head a { font-size: 11.5px; font-weight: 700; color: #1B5E20; white-space: nowrap; }
+  .cb-bike p { font-size: 11.5px; color: #4d5649; margin-top: 2px; line-height: 1.4; }
+  .cb-strip { display: grid; grid-template-columns: repeat(15, 1fr); gap: 2px; margin-top: 6px; }
+  .cb-strip span { height: 16px; border-radius: 3px; font-size: 8.5px; line-height: 16px; text-align: center; color: #fff; font-weight: 700; }
+  .cb-strip .B { background: #c0392b; }
+  .cb-strip .F { background: #2e7d32; }
+  .cb-strip .C { background: #d4d9cd; color: #6a7365; }
+  .cb-strip .X { background: #8d8d8d; }
+  .cb-strip .sel { outline: 2px solid #FFE600; outline-offset: 1px; }
+  .cb-dates { display: grid; grid-template-columns: repeat(15, 1fr); gap: 2px; margin-top: 2px; font-size: 8.5px; color: #7a8475; text-align: center; }
+  .cb-empty { font-size: 12.5px; color: #4d5649; margin-top: 8px; line-height: 1.5; }
+  .cb-charts { margin-top: 14px; border-top: 2px solid #1B5E20; padding-top: 10px; }
+  .cb-charts h3 { font-size: 13.5px; color: #1B5E20; line-height: 1.35; }
+  .cb-charts .cb-sub { font-size: 11.5px; color: #5d6758; margin-top: 3px; line-height: 1.45; }
+  .cb-chart { margin-top: 8px; }
+  .cb-chart svg { display: block; width: 100%; height: auto; }
+  .cb-src { font-size: 10.5px; color: #7a8475; margin-top: 10px; line-height: 1.5; }
+  @media (max-width: 420px) {
+    body { padding: 12px 9px 8px; }
+    .cb-top h1 { font-size: 17px; }
+    .cb-day { min-height: 66px; }
+    .cb-day b { font-size: 11px; }
+    .cb-job { font-size: 11.5px; padding: 6px 9px; }
+  }
+</style>
+</head>
+<body>
+<div class="cb-top">
+  <h1>Berlin Free Cargo Bike Map</h1>
+  <p>Every free fLotte cargo bike in Berlin and the belt around it, placed at its real pickup point. Pick the day you want to collect it and what it has to carry, then tap a dot to see that bike's next two weeks.</p>
+</div>
+
+<div class="cb-step">1. Which day do you want to collect it?</div>
+<div class="cb-week" id="cbWeek" role="group" aria-label="Collection day"></div>
+
+<div class="cb-step">2. What does it need?</div>
+<div class="cb-jobs" id="cbJobs" role="group" aria-label="Bike features"></div>
+
+<div class="cb-count" id="cbCount" aria-live="polite"></div>
+
+<div class="cb-map">
+  <svg id="cbSvg" viewBox="0 0 720 600" role="img" aria-label="Map of Berlin with every fLotte cargo bike pickup point, lit when a matching bike can be collected on the chosen day"></svg>
+  <div class="cb-key">
+    <span><i style="background:#1B5E20"></i>Hands over a matching bike that day</span>
+    <span><i style="background:#c9d1bf"></i>Closed that day or no match</span>
+    <span><i style="background:transparent;border:2px dashed #7a8475;border-radius:2px;width:14px;height:0"></i>S-Bahn ring</span>
+    <span id="cbBelt"></span>
+  </div>
+</div>
+
+<div class="cb-station" id="cbStation"></div>
+
+<div class="cb-charts">
+  <h3>How full the next 14 days were</h3>
+  <p class="cb-sub" id="cbSnap"></p>
+  <div class="cb-chart"><svg id="cbWd" viewBox="0 0 700 250" role="img" aria-label="Share of bookable bike days already booked, by weekday"></svg></div>
+  <div class="cb-chart"><svg id="cbBz" viewBox="0 0 700 420" role="img" aria-label="Share of bookable bike days already booked, by district"></svg></div>
+</div>
+
+<p class="cb-src" id="cbSrc"></p>
+
+<script src="../js/brand.js"></script>
+<script>
+(function () {
+  'use strict';
+  var DAYS = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+  var JOBS = [
+    { id: 'electric', label: 'Electric assist' },
+    { id: 'kids', label: 'Child bench' },
+    { id: 'raincover', label: 'Rain cover' },
+    { id: 'trike', label: 'Three wheels' },
+    { id: 'flatbed', label: 'Flatbed' }
+  ];
+  var W = 720, H = 600, PAD = 8;
+  var D = null, day = 5, jobs = {}, sel = null, proj = null, inFrame = null;
+  var weekEl = document.getElementById('cbWeek');
+  var jobsEl = document.getElementById('cbJobs');
+  var countEl = document.getElementById('cbCount');
+  var svg = document.getElementById('cbSvg');
+  var stEl = document.getElementById('cbStation');
+
+  function esc(s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;'); }
+
+  function fits(b) {
+    if (b.wd.indexOf(day) < 0) return false;
+    for (var k in jobs) { if (jobs[k] && b.f.indexOf(k) < 0) return false; }
+    return true;
+  }
+  function matches(loc) { return loc.bikes.filter(fits); }
+
+  function setup() {
+    // Frame the map on Berlin itself; the few belt stations beyond the frame are counted in the note below the map.
+    var minLon = 999, maxLon = -999, minLat = 999, maxLat = -999;
+    D.outlines.forEach(function (o) { o.rings.forEach(function (r) { r.forEach(function (p) {
+      if (p[0] < minLon) minLon = p[0]; if (p[0] > maxLon) maxLon = p[0];
+      if (p[1] < minLat) minLat = p[1]; if (p[1] > maxLat) maxLat = p[1];
+    }); }); });
+    minLon -= 0.035; maxLon += 0.035; minLat -= 0.02; maxLat += 0.02;
+    var kx = Math.cos((minLat + maxLat) / 2 * Math.PI / 180);
+    var sx = (W - 2 * PAD) / ((maxLon - minLon) * kx), sy = (H - 2 * PAD) / (maxLat - minLat);
+    var s = Math.min(sx, sy);
+    var ox = (W - (maxLon - minLon) * kx * s) / 2, oy = (H - (maxLat - minLat) * s) / 2;
+    proj = function (lon, lat) { return [ox + (lon - minLon) * kx * s, oy + (maxLat - lat) * s]; };
+    inFrame = function (l) { var q = proj(l.lon, l.lat); return q[0] > 4 && q[0] < W - 4 && q[1] > 4 && q[1] < H - 4; };
+  }
+
+  function drawMap() {
+    var out = [];
+    D.outlines.forEach(function (o) {
+      o.rings.forEach(function (ring) {
+        var d = ring.map(function (p, i) { var q = proj(p[0], p[1]); return (i ? 'L' : 'M') + q[0].toFixed(1) + ' ' + q[1].toFixed(1); }).join('');
+        out.push('<path d="' + d + 'Z" fill="#e8efdf" stroke="#c6d4b3" stroke-width="1"/>');
+      });
+    });
+    var rd = D.ring.map(function (p, i) { var q = proj(p[0], p[1]); return (i ? 'L' : 'M') + q[0].toFixed(1) + ' ' + q[1].toFixed(1); }).join('') + 'Z';
+    out.push('<path d="' + rd + '" fill="none" stroke="#7a8475" stroke-width="1.6" stroke-dasharray="5 4"/>');
+    var lit = [], dim = [];
+    D.locations.forEach(function (l, i) {
+      if (!inFrame(l)) return;
+      var m = matches(l).length;
+      var q = proj(l.lon, l.lat);
+      var g = '<g class="cb-dot" data-i="' + i + '" tabindex="0" role="button" aria-label="' + esc(l.name) + ', ' + m + ' matching bike' + (m === 1 ? '' : 's') + '" style="cursor:pointer">' +
+        '<circle cx="' + q[0].toFixed(1) + '" cy="' + q[1].toFixed(1) + '" r="17" fill="transparent"/>';
+      if (m) {
+        g += '<circle cx="' + q[0].toFixed(1) + '" cy="' + q[1].toFixed(1) + '" r="' + (4.6 + 1.6 * Math.min(m, 3)) + '" fill="#1B5E20" stroke="#fff" stroke-width="1.4"/>';
+      } else {
+        g += '<circle cx="' + q[0].toFixed(1) + '" cy="' + q[1].toFixed(1) + '" r="3.4" fill="#c9d1bf"/>';
+      }
+      if (sel === i) g += '<circle cx="' + q[0].toFixed(1) + '" cy="' + q[1].toFixed(1) + '" r="13" fill="none" stroke="#FFE600" stroke-width="4"/><circle cx="' + q[0].toFixed(1) + '" cy="' + q[1].toFixed(1) + '" r="13" fill="none" stroke="#123D18" stroke-width="1.2"/>';
+      g += '</g>';
+      (m ? lit : dim).push(g);
+    });
+    svg.innerHTML = out.join('') + dim.join('') + lit.join('');
+  }
+
+  function drawWeek() {
+    var max = Math.max.apply(null, D.byWeekday.map(function (d) { return d.handover; }));
+    weekEl.innerHTML = D.byWeekday.map(function (d, i) {
+      var h = Math.max(2, Math.round(34 * d.handover / max));
+      return '<button type="button" class="cb-day" aria-pressed="' + (i === day) + '" data-d="' + i + '" aria-label="' + DAYS[i] + ': ' + d.handover + ' bikes hand over">' +
+        '<b>' + DAYS[i] + '</b><span class="cb-bar"><i style="height:' + h + 'px"></i></span><em>' + d.handover + '</em></button>';
+    }).join('');
+  }
+
+  function drawJobs() {
+    jobsEl.innerHTML = JOBS.map(function (j) {
+      return '<button type="button" class="cb-job" aria-pressed="' + (!!jobs[j.id]) + '" data-j="' + j.id + '">' + j.label + '</button>';
+    }).join('');
+  }
+
+  function drawBelt() {
+    var n = 0;
+    D.locations.forEach(function (l) { if (!inFrame(l)) n += matches(l).length; });
+    document.getElementById('cbBelt').textContent = n ? '+ ' + n + ' matching in the Brandenburg belt, off this frame' : '';
+  }
+
+  function drawCount() {
+    var bikes = 0, sites = 0, all = 0;
+    D.locations.forEach(function (l) {
+      var m = matches(l).length; bikes += m; if (m) sites++;
+      l.bikes.forEach(function (b) { if (b.wd.indexOf(day) >= 0) all++; });
+    });
+    var anyJob = Object.keys(jobs).some(function (k) { return jobs[k]; });
+    var txt = '<strong>' + all + ' of ' + D.totals.active + '</strong> bikes can be collected on a ' + ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'][day] + '.';
+    if (anyJob) txt += ' <strong>' + bikes + '</strong> of them have everything you ticked, at ' + sites + ' pickup point' + (sites === 1 ? '' : 's') + '.';
+    if (day >= 5) txt += ' Weekday-only stations still work: book Friday to Monday, and the closed weekend counts as one booking day.';
+    countEl.innerHTML = txt;
+  }
+
+  function dateLabel(iso) { var p = iso.split('-'); return String(+p[2]); }
+
+  function drawStation() {
+    if (sel === null) {
+      stEl.innerHTML = '<h2>Tap a dot on the map</h2><p class="cb-empty">You will see the pickup point, its hand-over hours and every bike parked there, with the next 14 days as booked, free or closed.</p>';
+      return;
+    }
+    var l = D.locations[sel];
+    var html = '<h2>' + esc(l.name) + '</h2><p class="cb-addr">' + esc(l.street) + ', ' + esc(l.area) + (l.ring ? ' &middot; inside the S-Bahn ring' : '') + '</p>' +
+      '<p class="cb-hours"><strong>Hand-over hours:</strong> ' + esc(l.hours || 'see the bike page') + '</p>';
+    l.bikes.forEach(function (b) {
+      var ok = fits(b);
+      html += '<div class="cb-bike"><div class="cb-bike-head"><b>' + esc(b.name) + (ok ? '' : ' <span style="font-weight:600;color:#7a8475;font-size:11px">(not a match)</span>') + '</b>' +
+        '<a href="' + esc(b.link) + '" target="_blank" rel="noopener">Booking page</a></div><p>' + esc(b.desc) + '</p>' +
+        '<div class="cb-strip">' + b.days.split('').map(function (c, i) {
+          var wd = (new Date(D.dates[i] + 'T12:00:00Z').getUTCDay() + 6) % 7;
+          var t = { B: 'booked', F: 'free', C: 'closed', X: 'out of service', R: 'not open for booking yet' }[c] || c;
+          var cls = c === 'R' ? 'F' : c;
+          return '<span class="' + cls + (wd === day ? ' sel' : '') + '" title="' + D.dates[i] + ': ' + t + '">' + (c === 'B' ? '&times;' : '') + '</span>';
+        }).join('') + '</div><div class="cb-dates">' + D.dates.map(function (d) { return '<span>' + dateLabel(d) + '</span>'; }).join('') + '</div></div>';
+    });
+    stEl.innerHTML = html;
+  }
+
+  function bars(el, rows, labelW, valueKey, labelKey, subKey) {
+    var w = Math.max(280, Math.round(el.parentNode.clientWidth || 700));
+    if (w < 480) labelW = Math.round(labelW * 0.78);
+    var rowH = 24, top = 6, barW = w - labelW - 44;
+    var h = top + rows.length * rowH + 22;
+    el.setAttribute('viewBox', '0 0 ' + w + ' ' + h);
+    var out = [];
+    [0, 25, 50, 75, 100].forEach(function (t) {
+      var x = labelW + barW * t / 100;
+      out.push('<line x1="' + x + '" x2="' + x + '" y1="' + top + '" y2="' + (h - 18) + '" stroke="#e3e9da" stroke-width="1"/>');
+      out.push('<text x="' + x + '" y="' + (h - 4) + '" font-size="11" fill="#7a8475" text-anchor="middle">' + t + '%</text>');
+    });
+    rows.forEach(function (r, i) {
+      var y = top + i * rowH;
+      var v = r[valueKey];
+      var hot = v >= 50;
+      out.push('<text x="' + (labelW - 8) + '" y="' + (y + 17) + '" font-size="12" fill="#1d231c" text-anchor="end" font-weight="' + (hot ? 700 : 500) + '">' + esc(r[labelKey]) + '</text>');
+      out.push('<rect x="' + labelW + '" y="' + (y + 5) + '" width="' + barW + '" height="15" rx="3" fill="#eef2e8"/>');
+      out.push('<rect x="' + labelW + '" y="' + (y + 5) + '" width="' + (barW * v / 100).toFixed(1) + '" height="15" rx="3" fill="' + (hot ? '#c0392b' : '#7CB342') + '"/>');
+      out.push('<text x="' + (labelW + barW * v / 100 + 6).toFixed(1) + '" y="' + (y + 17) + '" font-size="12" font-weight="700" fill="#1d231c">' + v + '%' + (subKey ? '' : '') + '</text>');
+    });
+    el.innerHTML = out.join('');
+  }
+
+  function drawCharts() {
+    var snap = D.snapshot.slice(0, 10).split('-');
+    document.getElementById('cbSnap').textContent = 'Share of bookable bike days already taken, read from the fLotte calendar on ' + (+snap[2]) + ' September ' + snap[0] + ' at 09:15, for the fortnight that was open for booking. Red means more than half gone.';
+    bars(document.getElementById('cbWd'), D.byWeekday.map(function (d) { return { l: d.day, v: d.pct }; }), 70, 'v', 'l');
+    var narrow = (document.getElementById('cbBz').parentNode.clientWidth || 700) < 480;
+    var SHORT = { 'Charlottenburg-Wilmersdorf': 'Charlottenburg-W.', 'Friedrichshain-Kreuzberg': 'Friedrichshain-K.', 'Tempelhof-Schöneberg': 'Tempelhof-Sch.', 'Steglitz-Zehlendorf': 'Steglitz-Zehl.', 'Treptow-Köpenick': 'Treptow-Köp.', 'Marzahn-Hellersdorf': 'Marzahn-Hell.', 'Brandenburg belt': 'Brandenburg belt' };
+    bars(document.getElementById('cbBz'), D.byDistrict.map(function (d) { return { l: narrow ? (SHORT[d.name] || d.name) : d.name, v: d.pct }; }), 190, 'v', 'l');
+    document.getElementById('cbSrc').textContent = 'Source: fLotte Berlin public availability calendar and station map, read 22 September 2026. ' + D.totals.listed + ' bikes listed, ' + D.totals.outOfService + ' out of service for the whole fortnight and left off the map. Ringbahn stations from the VBB timetable API. Bookings change every hour; the booking page always has the live calendar.';
+  }
+
+  function pickDefault() {
+    var best = null, bestD = 1e9;
+    D.locations.forEach(function (l, i) {
+      if (!matches(l).length) return;
+      var dd = Math.pow(l.lat - 52.52, 2) + Math.pow((l.lon - 13.405) * 0.61, 2);
+      if (dd < bestD) { bestD = dd; best = i; }
+    });
+    sel = best;
+  }
+
+  function render() { drawWeek(); drawJobs(); drawCount(); drawMap(); drawBelt(); drawStation(); }
+
+  weekEl.addEventListener('click', function (e) {
+    var b = e.target.closest('.cb-day'); if (!b) return;
+    day = +b.getAttribute('data-d');
+    if (sel !== null && !matches(D.locations[sel]).length) pickDefault();
+    render();
+  });
+  jobsEl.addEventListener('click', function (e) {
+    var b = e.target.closest('.cb-job'); if (!b) return;
+    var id = b.getAttribute('data-j'); jobs[id] = !jobs[id];
+    if (sel !== null && !matches(D.locations[sel]).length) pickDefault();
+    render();
+  });
+  function choose(e) {
+    var g = e.target.closest('.cb-dot'); if (!g) return;
+    sel = +g.getAttribute('data-i'); drawMap(); drawStation();
+  }
+  svg.addEventListener('click', choose);
+  svg.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); choose(e); } });
+
+  fetch('data.json', { cache: 'default' }).then(function (r) { return r.json(); }).then(function (data) {
+    D = data; setup(); pickDefault(); render(); drawCharts();
+    var rt = null;
+    window.addEventListener('resize', function () { clearTimeout(rt); rt = setTimeout(drawCharts, 120); });
+  }).catch(function () {
+    countEl.textContent = 'The map data did not load. Please reload the page.';
+  });
+})();
+</script>
+</body>
+</html>

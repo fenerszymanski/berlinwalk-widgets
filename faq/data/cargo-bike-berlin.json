@@ -1,0 +1,101 @@
+{
+  "version": 1,
+  "slug": "cargo-bike-berlin",
+  "key": "cargo-bike-berlin",
+  "config": {
+    "title": "Cargo Bike in Berlin - FAQ",
+    "subtitle": "How to borrow a free cargo bike in Berlin, what you need for the first booking, and how to get one for a weekend.",
+    "items": [
+      {
+        "q": "Can I borrow a cargo bike for free in Berlin?",
+        "a": "Yes. The **fLotte** network lends cargo bikes for free across all twelve districts and some towns in the Brandenburg belt. On 22 September its calendar showed 243 bikes in service at 227 pickup points. There is a donation box at every pickup point."
+      },
+      {
+        "q": "What do I need to book a fLotte cargo bike?",
+        "a": "An account on flotte-berlin.de, to be **18 or older**, and a **German mobile number** for the SMS check. At pickup you show a Personalausweis, or a passport together with your Meldebescheinigung, and sign the lending contract."
+      },
+      {
+        "q": "How long can I keep a free cargo bike?",
+        "a": "**One to three consecutive days**, booked as whole days up to 14 days ahead. Days when the pickup point is closed count together as one booking day, so a Friday to Monday booking at a weekday-only station still counts as three."
+      },
+      {
+        "q": "Why is it so hard to get a cargo bike on a Saturday?",
+        "a": "Most pickup points are shops and offices with weekday hours. In the 22 September calendars, **70 bikes** could be collected on a Saturday and **12 on a Sunday**, against about 200 to 230 on weekdays, and 78% of Saturday bike-days were already booked."
+      },
+      {
+        "q": "Can I take a cargo bike on the S-Bahn or U-Bahn?",
+        "a": "No. fLotte bikes never go on a tram, U-Bahn, S-Bahn or regional train, because the carriage rules exclude cargo bikes. Your whole trip has to be rideable, and the bike goes back to the station where you collected it."
+      },
+      {
+        "q": "Are there electric cargo bikes to borrow in Berlin?",
+        "a": "Some. Only **49 of the 243 bikes** in service on 22 September had electric assist. Filter for them on the map and book them as soon as the day opens, especially for weekends."
+      },
+      {
+        "q": "How much can a fLotte cargo bike carry?",
+        "a": "The box on most fLotte bikes takes **80 kg**, some take 100 kg, and each bike page states its limit. Riders can weigh up to 130 kg. For a wardrobe, a sofa or a one-way trip, a van is still the better call."
+      }
+    ]
+  },
+  "schema": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Can I borrow a cargo bike for free in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. The fLotte network lends cargo bikes for free across all twelve districts and some towns in the Brandenburg belt. On 22 September its calendar showed 243 bikes in service at 227 pickup points. There is a donation box at every pickup point."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What do I need to book a fLotte cargo bike?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "An account on flotte-berlin.de, to be 18 or older, and a German mobile number for the SMS check. At pickup you show a Personalausweis, or a passport together with your Meldebescheinigung, and sign the lending contract."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How long can I keep a free cargo bike?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "One to three consecutive days, booked as whole days up to 14 days ahead. Days when the pickup point is closed count together as one booking day, so a Friday to Monday booking at a weekday-only station still counts as three."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Why is it so hard to get a cargo bike on a Saturday?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Most pickup points are shops and offices with weekday hours. In the 22 September calendars, 70 bikes could be collected on a Saturday and 12 on a Sunday, against about 200 to 230 on weekdays, and 78% of Saturday bike-days were already booked."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I take a cargo bike on the S-Bahn or U-Bahn?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. fLotte bikes never go on a tram, U-Bahn, S-Bahn or regional train, because the carriage rules exclude cargo bikes. Your whole trip has to be rideable, and the bike goes back to the station where you collected it."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Are there electric cargo bikes to borrow in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Some. Only 49 of the 243 bikes in service on 22 September had electric assist. Filter for them on the map and book them as soon as the day opens, especially for weekends."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How much can a fLotte cargo bike carry?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The box on most fLotte bikes takes 80 kg, some take 100 kg, and each bike page states its limit. Riders can weigh up to 130 kg. For a wardrobe, a sofa or a one-way trip, a van is still the better call."
+        }
+      }
+    ]
+  }
+}
