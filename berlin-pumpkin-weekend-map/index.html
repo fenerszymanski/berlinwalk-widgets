@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Berlin Pumpkin Weekend Map</title>
+<link rel="stylesheet" href="../css/brand.css">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: #FFFFFF; color: #1f241d; padding: 14px 12px 10px;
+  }
+  .pk-head { display: flex; gap: 10px; align-items: flex-start; }
+  .pk-head .pk-dot { flex: 0 0 auto; width: 30px; height: 30px; border-radius: 50%; background: #E8761C;
+    box-shadow: inset -4px -4px 0 rgba(0,0,0,.12); position: relative; margin-top: 2px; }
+  .pk-head .pk-dot::after { content: ''; position: absolute; left: 13px; top: -5px; width: 4px; height: 8px; background: #1B5E20; border-radius: 2px; }
+  .pk-head h1 { font-size: 19px; line-height: 1.25; color: #1B5E20; }
+  .pk-head p { font-size: 13px; line-height: 1.5; color: #454d42; margin-top: 4px; }
+  .pk-label { font-size: 10.5px; font-weight: 800; letter-spacing: .07em; text-transform: uppercase; color: #1B5E20; margin: 15px 0 7px; }
+  .pk-stepper { display: grid; grid-template-columns: 40px 1fr 40px; gap: 6px; align-items: stretch; }
+  .pk-arrow { font-family: inherit; font-size: 18px; font-weight: 800; border: 1.5px solid #1B5E20; background: #fff; color: #1B5E20;
+    border-radius: 10px; cursor: pointer; }
+  .pk-arrow:disabled { opacity: .3; cursor: default; }
+  .pk-now { border-radius: 10px; background: #1B5E20; color: #fff; padding: 8px 10px; text-align: center; }
+  .pk-now b { display: block; font-size: 16px; }
+  .pk-now span { display: block; font-size: 11.5px; color: #FFE600; margin-top: 2px; font-weight: 700; }
+  .pk-strip { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 4px; margin-top: 7px; }
+  .pk-wk { font-family: inherit; border: 1.5px solid #dde5d3; background: #fff; border-radius: 8px; padding: 5px 1px 4px; cursor: pointer;
+    display: flex; flex-direction: column; align-items: center; gap: 3px; color: #3f473c; min-width: 0; overflow: hidden; }
+  .pk-wk em { font-style: normal; font-size: 9.5px; font-weight: 700; line-height: 1.15; text-align: center; }
+  .pk-wk .pk-pips { display: flex; gap: 2px; height: 8px; }
+  .pk-wk .pk-pips i { width: 6px; height: 8px; border-radius: 2px; background: #e3e8dc; }
+  .pk-wk .pk-pips i.E { background: #E8761C; }
+  .pk-wk.is-on { border-color: #1B5E20; background: #f1f6ea; color: #1B5E20; }
+  .pk-kinds { display: flex; flex-wrap: wrap; gap: 6px; }
+  .pk-kind { font-family: inherit; font-size: 12px; font-weight: 700; border: 1.5px solid #1B5E20; color: #1B5E20; background: #fff;
+    border-radius: 999px; padding: 6px 11px; cursor: pointer; }
+  .pk-kind[aria-pressed="true"] { background: #FFE600; color: #123D18; border-color: #123D18; }
+  .pk-count { margin-top: 12px; font-size: 13.5px; line-height: 1.45; }
+  .pk-count strong { color: #1B5E20; }
+  .pk-map { margin-top: 9px; border: 1px solid #dfe6d6; border-radius: 12px; overflow: hidden; background: #f7f9f3; }
+  .pk-map svg { display: block; width: 100%; height: auto; touch-action: manipulation; }
+  .pk-map .pk-pin { cursor: pointer; }
+  .pk-map .pk-pin:focus { outline: none; }
+  .pk-map .pk-pin:focus circle.pk-c { stroke: #123D18; stroke-width: 3; }
+  .pk-key { display: flex; flex-wrap: wrap; gap: 11px; font-size: 11px; color: #4d5649; padding: 7px 10px; border-top: 1px solid #dfe6d6; background: #fcfdf9; }
+  .pk-key span { display: inline-flex; align-items: center; gap: 5px; }
+  .pk-key i { display: inline-block; width: 10px; height: 10px; border-radius: 50%; }
+  .pk-card { margin-top: 11px; border: 1.5px solid #1B5E20; border-radius: 12px; padding: 12px 12px 11px; }
+  .pk-card h2 { font-size: 15.5px; color: #1B5E20; line-height: 1.3; }
+  .pk-card .pk-area { font-size: 12px; color: #596254; margin-top: 2px; }
+  .pk-status { margin-top: 8px; border-radius: 8px; padding: 7px 9px; font-size: 12.5px; line-height: 1.45; font-weight: 700; }
+  .pk-status.E { background: #FFE600; color: #123D18; }
+  .pk-status.O { background: #e7f1dc; color: #1B5E20; }
+  .pk-status.U { background: #efefea; color: #4b4b44; }
+  .pk-status.X { background: #f4f4f1; color: #7a7a72; font-weight: 600; }
+  .pk-card p { font-size: 12.5px; line-height: 1.5; margin-top: 7px; color: #2b3128; }
+  .pk-card dl { margin-top: 8px; display: grid; grid-template-columns: 62px 1fr; gap: 5px 8px; font-size: 12px; line-height: 1.45; }
+  .pk-card dt { font-weight: 800; color: #1B5E20; }
+  .pk-card dd { color: #333a30; }
+  .pk-card a { color: #1B5E20; font-weight: 700; font-size: 11.5px; display: inline-block; margin-top: 8px; }
+  .pk-tag { display: inline-block; font-size: 10.5px; font-weight: 800; border-radius: 6px; padding: 2px 6px; margin-left: 6px; vertical-align: 2px; }
+  .pk-tag.abc { background: #1B5E20; color: #fff; }
+  .pk-tag.out { background: #fbe3cf; color: #8a3c00; }
+  .pk-bars { margin-top: 14px; border-top: 2px solid #1B5E20; padding-top: 10px; }
+  .pk-bars h3 { font-size: 13.5px; color: #1B5E20; line-height: 1.35; }
+  .pk-bars .pk-sub { font-size: 11.5px; color: #5d6758; margin-top: 3px; line-height: 1.45; }
+  .pk-bars svg { display: block; width: 100%; height: auto; margin-top: 8px; }
+  .pk-src { font-size: 10.5px; color: #7a8475; margin-top: 10px; line-height: 1.5; }
+  @media (max-width: 420px) {
+    body { padding: 12px 9px 8px; }
+    .pk-head h1 { font-size: 17px; }
+    .pk-wk em { font-size: 8.5px; }
+    .pk-wk .pk-pips { gap: 1px; }
+    .pk-wk .pk-pips i { width: 3px; }
+    .pk-card dl { grid-template-columns: 56px 1fr; }
+  }
+</style>
+</head>
+<body>
+  <div class="pk-head">
+    <div class="pk-dot" aria-hidden="true"></div>
+    <div>
+      <h1>Berlin Pumpkin Weekend Map</h1>
+      <p>Six pumpkin places in and around Berlin, one weekend at a time. Step through the autumn to see which one is worth the trip that Saturday, and how long the train takes from Alexanderplatz.</p>
+    </div>
+  </div>
+
+  <div class="pk-label">1. Pick a weekend</div>
+  <div class="pk-stepper">
+    <button class="pk-arrow" id="pkPrev" type="button" aria-label="Previous weekend">&lsaquo;</button>
+    <div class="pk-now" id="pkNow" aria-live="polite"></div>
+    <button class="pk-arrow" id="pkNext" type="button" aria-label="Next weekend">&rsaquo;</button>
+  </div>
+  <div class="pk-strip" id="pkStrip"></div>
+
+  <div class="pk-label">2. What kind of pumpkin day</div>
+  <div class="pk-kinds" id="pkKinds"></div>
+
+  <div class="pk-count" id="pkCount"></div>
+  <div class="pk-map">
+    <svg id="pkMap" viewBox="0 0 640 470" role="img" aria-label="Map of Berlin and the surrounding Brandenburg belt with pumpkin places and travel times from Alexanderplatz"></svg>
+    <div class="pk-key">
+      <span><i style="background:#E8761C"></i>Special event this weekend</span>
+      <span><i style="background:#2e7d32"></i>Open as usual</span>
+      <span><i style="background:#a9ab9f"></i>Unconfirmed</span>
+      <span><i style="background:#dcded6;border:1px solid #b9bbb2"></i>Nothing on</span>
+    </div>
+  </div>
+
+  <div class="pk-card" id="pkCard"></div>
+
+  <div class="pk-bars">
+    <h3>Door to door from Alexanderplatz</h3>
+    <div class="pk-sub" id="pkBarsSub">Fastest Saturday morning connection in the VBB timetable, coloured by what is on the weekend you picked.</div>
+    <svg id="pkBars" viewBox="0 0 640 230" aria-label="Travel time bars"></svg>
+  </div>
+  <div class="pk-src" id="pkSrc"></div>
+
+<script src="../js/brand.js"></script>
+<script>
+(function () {
+  var D = null, currentStep = 0, sel = null;
+  var kinds = { cut: true, show: true, market: true, fest: true, free: false, abc: false };
+  var KIND_LABEL = { cut: 'Cut your own', show: 'Pumpkin show', market: 'Farm market', fest: 'Village festival', free: 'Free entry only', abc: 'Inside ABC ticket' };
+  var COL = { E: '#E8761C', O: '#2e7d32', U: '#a9ab9f', X: '#dcded6' };
+  var mapEl = document.getElementById('pkMap'), barsEl = document.getElementById('pkBars');
+  var NS = 'http://www.w3.org/2000/svg';
+
+  function el(tag, attrs, parent) {
+    var n = document.createElementNS(NS, tag);
+    Object.keys(attrs || {}).forEach(function (k) { n.setAttribute(k, attrs[k]); });
+    if (parent) parent.appendChild(n);
+    return n;
+  }
+  // Equirectangular projection around 52.5 N, framed on the six places plus Berlin.
+  var LON0 = 12.76, LON1 = 13.86, LAT0 = 52.24, LAT1 = 52.80, KX = Math.cos(52.52 * Math.PI / 180);
+  function px(lon) { return 20 + (lon - LON0) * KX / ((LON1 - LON0) * KX) * 600; }
+  function py(lat) { return 450 - (lat - LAT0) / (LAT1 - LAT0) * 430; }
+
+  function status(p) { return p.weeks[currentStep]; }
+  function visible(p) {
+    if (!kinds[p.kind]) return false;
+    if (kinds.free && !p.free) return false;
+    if (kinds.abc && p.zone === 'outside ABC') return false;
+    return true;
+  }
+
+  function drawStepper() {
+    document.getElementById('pkNow').innerHTML = '<b>' + D.weekendLabels[currentStep] + '</b><span>' +
+      D.places.filter(function (p) { return status(p)[0] === 'E'; }).length + ' special event' + (D.places.filter(function (p) { return status(p)[0] === 'E'; }).length === 1 ? '' : 's') + ', ' +
+      D.places.filter(function (p) { return status(p)[0] === 'O'; }).length + ' open as usual</span>';
+    document.getElementById('pkPrev').disabled = currentStep === 0;
+    document.getElementById('pkNext').disabled = currentStep === D.weekends.length - 1;
+    var strip = document.getElementById('pkStrip');
+    strip.innerHTML = D.weekendLabels.map(function (l, i) {
+      var pips = D.places.map(function (p) { return '<i class="' + (p.weeks[i][0] === 'E' ? 'E' : '') + '"></i>'; }).join('');
+      return '<button type="button" class="pk-wk' + (i === currentStep ? ' is-on' : '') + '" data-w="' + i + '"><span class="pk-pips">' + pips + '</span><em>' + l.replace(' ', '<br>') + '</em></button>';
+    }).join('');
+  }
+
+  function drawKinds() {
+    document.getElementById('pkKinds').innerHTML = Object.keys(KIND_LABEL).map(function (k) {
+      return '<button type="button" class="pk-kind" data-k="' + k + '" aria-pressed="' + (kinds[k] ? 'true' : 'false') + '">' + KIND_LABEL[k] + '</button>';
+    }).join('');
+  }
+
+  function drawCount() {
+    var vis = D.places.filter(visible);
+    var live = vis.filter(function (p) { return status(p)[0] === 'E' || status(p)[0] === 'O'; });
+    var ev = vis.filter(function (p) { return status(p)[0] === 'E'; });
+    var txt;
+    if (!vis.length) txt = 'No place matches those filters. Switch one back on.';
+    else if (!live.length) txt = 'Nothing that matches is on over <strong>' + D.weekendLabels[currentStep] + '</strong>. Step to another weekend.';
+    else txt = '<strong>' + live.length + ' of ' + vis.length + '</strong> matching places are worth going to over ' + D.weekendLabels[currentStep] +
+      (ev.length ? ', and <strong>' + ev.map(function (p) { return p.name; }).join(' and ') + '</strong> ' + (ev.length > 1 ? 'have' : 'has') + ' something special on.' : '.');
+    document.getElementById('pkCount').innerHTML = txt;
+  }
+
+  function drawMap() {
+    while (mapEl.firstChild) mapEl.removeChild(mapEl.firstChild);
+    el('rect', { x: 0, y: 0, width: 640, height: 470, fill: '#f7f9f3' }, mapEl);
+    var d = D.outline.map(function (c, i) { return (i ? 'L' : 'M') + px(c[0]).toFixed(1) + ' ' + py(c[1]).toFixed(1); }).join(' ') + 'Z';
+    el('path', { d: d, fill: '#e3efd6', stroke: '#9cbf83', 'stroke-width': 1.2 }, mapEl);
+    var rd = D.ring.map(function (c, i) { return (i ? 'L' : 'M') + px(c[0]).toFixed(1) + ' ' + py(c[1]).toFixed(1); }).join(' ') + 'Z';
+    el('path', { d: rd, fill: 'none', stroke: '#7CB342', 'stroke-width': 1.4, 'stroke-dasharray': '3 3' }, mapEl);
+    var t = el('text', { x: px(13.2), y: py(52.6), 'font-size': window.innerWidth < 560 ? 17 : 12, 'font-weight': 800, fill: '#5f8a46' }, mapEl); t.textContent = 'BERLIN';
+    var t2 = el('text', { x: 28, y: 40, 'font-size': window.innerWidth < 560 ? 16 : 11, fill: '#8b9483', 'font-weight': 700 }, mapEl); t2.textContent = 'Brandenburg';
+    var ax = px(D.alex[0]), ay = py(D.alex[1]);
+    D.places.forEach(function (p, i) {
+      if (!visible(p)) return;
+      var s = status(p)[0], x = px(p.lon), y = py(p.lat);
+      el('line', { x1: ax, y1: ay, x2: x, y2: y, stroke: s === 'X' ? '#cfd2c8' : COL[s], 'stroke-width': s === 'E' ? 2.2 : 1.3, 'stroke-dasharray': '5 4', opacity: s === 'X' ? .6 : .85 }, mapEl);
+    });
+    el('rect', { x: ax - 5, y: ay - 5, width: 10, height: 10, fill: '#123D18', transform: 'rotate(45 ' + ax + ' ' + ay + ')' }, mapEl);
+    var at = el('text', { x: ax - 8, y: ay - 10, 'text-anchor': 'end', 'font-size': window.innerWidth < 560 ? 16 : 11, 'font-weight': 700, fill: '#123D18' }, mapEl); at.textContent = 'Alexanderplatz';
+    var big = window.innerWidth < 560, FS = big ? 20 : 13, FS2 = big ? 17 : 11;
+    var LAB = { dahlem: [-12, 26, 'end'], spaeth: [12, 26, 'start'], klaistow: [16, 6, 'start'], karls: [0, -22, 'middle'], kremmen: [16, 6, 'start'], fredersdorf: [4, 30, 'end'] };
+    D.places.forEach(function (p, i) {
+      if (!visible(p)) return;
+      var s = status(p)[0], x = px(p.lon), y = py(p.lat);
+      var g = el('g', { class: 'pk-pin', 'data-i': i, tabindex: 0, role: 'button', 'aria-label': p.name + ', ' + p.min + ' minutes' }, mapEl);
+      if (sel === i) el('circle', { cx: x, cy: y, r: 17, fill: 'none', stroke: '#FFE600', 'stroke-width': 4 }, g);
+      el('circle', { class: 'pk-c', cx: x, cy: y, r: s === 'E' ? 11 : (s === 'X' ? 7 : 9), fill: COL[s], stroke: s === 'X' ? '#b9bbb2' : '#fff', 'stroke-width': 2 }, g);
+      el('rect', { x: x - 1.5, y: y - (s === 'E' ? 15 : 12), width: 3, height: 5, rx: 1, fill: s === 'X' ? '#b9bbb2' : '#1B5E20' }, g);
+      var o = LAB[p.id] || [10, 4, 'start'];
+      var tx = el('text', { x: x + o[0], y: y + o[1], 'text-anchor': o[2], 'font-size': FS, 'font-weight': 800, fill: s === 'X' ? '#9a9c92' : '#1f241d' }, g);
+      tx.textContent = p.short;
+      var tm = el('text', { x: x + o[0], y: y + o[1] + FS2 + 3, 'text-anchor': o[2], 'font-size': FS2, 'font-weight': 700, fill: s === 'X' ? '#a6a89e' : '#1B5E20' }, g);
+      tm.textContent = p.min + ' min';
+    });
+  }
+
+  function drawCard() {
+    var card = document.getElementById('pkCard');
+    if (sel === null || !visible(D.places[sel])) {
+      card.innerHTML = '<p>Tap a pumpkin on the map to see what is on there that weekend, the hours, the price and the way there.</p>';
+      return;
+    }
+    var p = D.places[sel], s = status(p);
+    card.innerHTML = '<h2>' + p.name + (p.zone === 'outside ABC' ? '<span class="pk-tag out">Outside ABC</span>' : '<span class="pk-tag abc">' + p.zone + ' ticket</span>') + '</h2>' +
+      '<div class="pk-area">' + p.area + '</div>' +
+      '<div class="pk-status ' + s[0] + '">' + D.weekendLabels[currentStep] + ': ' + s[1] + '</div>' +
+      '<p>' + p.what + '</p>' +
+      '<dl><dt>Hours</dt><dd>' + p.hours + '</dd><dt>Cost</dt><dd>' + p.price + '</dd><dt>Getting there</dt><dd>' + p.trip + '</dd></dl>' +
+      '<a href="' + p.src + '" target="_blank" rel="noopener">Official page for ' + p.name + ' &rarr;</a>';
+  }
+
+  function drawBars() {
+    while (barsEl.firstChild) barsEl.removeChild(barsEl.firstChild);
+    var rows = D.places.map(function (p, i) { return { p: p, i: i }; }).filter(function (r) { return visible(r.p); });
+    var order = rows.slice(0).sort(function (a, b) { return a.p.min - b.p.min; });
+    var narrow = window.innerWidth < 460, VW = narrow ? 400 : 640, LW = narrow ? 130 : 150, H = 30, top = 8;
+    barsEl.setAttribute('viewBox', '0 0 ' + VW + ' ' + (top + order.length * H + 24));
+    var scale = (VW - LW - (narrow ? 72 : 110)) / 90;
+    [0, 30, 60, 90].forEach(function (m) {
+      var x = LW + m * scale;
+      el('line', { x1: x, y1: top - 2, x2: x, y2: top + order.length * H, stroke: '#e3e8dc', 'stroke-width': 1 }, barsEl);
+      var tt = el('text', { x: x, y: top + order.length * H + 15, 'text-anchor': 'middle', 'font-size': 11, fill: '#7a8475' }, barsEl); tt.textContent = m + ' min';
+    });
+    order.forEach(function (r, k) {
+      var p = r.p, s = status(p)[0], y = top + k * H;
+      var name = p.short;
+      var nt = el('text', { x: LW - 8, y: y + 18, 'text-anchor': 'end', 'font-size': narrow ? 12 : 12.5, 'font-weight': 700, fill: s === 'X' ? '#9a9c92' : '#1f241d' }, barsEl); nt.textContent = name;
+      el('rect', { x: LW, y: y + 6, width: Math.max(4, p.min * scale), height: 16, rx: 4, fill: COL[s], stroke: sel === r.i ? '#123D18' : 'none', 'stroke-width': 2 }, barsEl);
+      var vt = el('text', { x: LW + p.min * scale + 6, y: y + 18, 'font-size': 11.5, 'font-weight': 800, fill: '#1B5E20' }, barsEl);
+      vt.textContent = p.min + ' min' + (narrow ? '' : (p.changes ? ', ' + p.changes + ' change' + (p.changes > 1 ? 's' : '') : ''));
+    });
+  }
+
+  function pickDefault() {
+    var best = null;
+    D.places.forEach(function (p, i) {
+      if (!visible(p)) return;
+      var s = status(p)[0];
+      if (best === null) { best = i; return; }
+      var bs = status(D.places[best])[0];
+      var rank = { E: 0, O: 1, U: 2, X: 3 };
+      if (rank[s] < rank[bs] || (rank[s] === rank[bs] && p.min < D.places[best].min)) best = i;
+    });
+    sel = best;
+  }
+
+  function render() { drawStepper(); drawKinds(); drawCount(); drawMap(); drawCard(); drawBars(); }
+  function goTo(n) { currentStep = Math.max(0, Math.min(D.weekends.length - 1, n)); pickDefault(); render(); }
+
+  document.getElementById('pkPrev').addEventListener('click', function () { goTo(currentStep - 1); });
+  document.getElementById('pkNext').addEventListener('click', function () { goTo(currentStep + 1); });
+  document.getElementById('pkStrip').addEventListener('click', function (e) {
+    var b = e.target.closest('.pk-wk'); if (b) goTo(+b.getAttribute('data-w'));
+  });
+  document.getElementById('pkKinds').addEventListener('click', function (e) {
+    var b = e.target.closest('.pk-kind'); if (!b) return;
+    var k = b.getAttribute('data-k'); kinds[k] = !kinds[k];
+    if (sel === null || !visible(D.places[sel])) pickDefault();
+    render();
+  });
+  function choose(e) {
+    var g = e.target.closest('.pk-pin'); if (!g) return;
+    sel = +g.getAttribute('data-i'); drawMap(); drawCard(); drawBars();
+  }
+  mapEl.addEventListener('click', choose);
+  mapEl.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); choose(e); } });
+
+  fetch('data.json', { cache: 'default' }).then(function (r) { return r.json(); }).then(function (data) {
+    D = data;
+    var today = new Date().toISOString().slice(0, 10);
+    D.weekends.forEach(function (w, i) {
+      var sun = new Date(w + 'T12:00:00Z'); sun.setUTCDate(sun.getUTCDate() + 1);
+      if (sun.toISOString().slice(0, 10) < today) currentStep = Math.min(i + 1, D.weekends.length - 1);
+    });
+    pickDefault(); render();
+    document.getElementById('pkSrc').textContent = 'Checked on ' + D.checked + ' against each place\'s own page: Domäne Dahlem, Späth\'sche Baumschulen, Spargelhof Klaistow, Karls, Spargelhof Kremmen and the berlin.de listing for Fredersdorf. Journey times from the VBB timetable for a Saturday around 10:00. Farms change plans with the weather, so check the official page on the morning you go.';
+    var rt = null;
+    window.addEventListener('resize', function () { clearTimeout(rt); rt = setTimeout(function () { drawMap(); drawBars(); }, 120); });
+  }).catch(function () {
+    document.getElementById('pkCount').textContent = 'The map data did not load. Please reload the page.';
+  });
+})();
+</script>
+</body>
+</html>

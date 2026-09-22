@@ -1,0 +1,101 @@
+{
+  "version": 1,
+  "slug": "pumpkin-patch-berlin",
+  "key": "pumpkin-patch-berlin",
+  "config": {
+    "title": "Pumpkin Patch in Berlin - FAQ",
+    "subtitle": "Where to pick your own pumpkin in Berlin, which pumpkin shows and festivals are worth the trip, and which ticket you need.",
+    "items": [
+      {
+        "q": "Is there a pumpkin patch in Berlin where you can pick your own?",
+        "a": "Yes, but only one weekend a year inside the city. The **Erntefest at Domäne Dahlem** opens its pumpkin field on **Saturday 3 and Sunday 4 October 2026**, 10:00 to 18:00, and harvesting stops at 17:00. You get a harvest sack for a €2 deposit and pay at the field tills."
+      },
+      {
+        "q": "How much does the Domäne Dahlem pumpkin harvest cost?",
+        "a": "Entry is **€4.50**, €2 reduced, and children under 12 go in free. The pumpkins you pick are paid for separately at the field tills, and the farm lists cash payment."
+      },
+      {
+        "q": "What is the biggest pumpkin show near Berlin?",
+        "a": "The **Spargel- und Erlebnishof Klaistow** near Beelitz, with more than 100,000 pumpkins built into figures. It is open daily 9:00 to 18:00 until 15 November, costs **€6 at weekends** and €4 on weekdays, and children under 12 are free."
+      },
+      {
+        "q": "Where can I see pumpkins in Berlin for free?",
+        "a": "The pumpkin show at the **Späth'sche Baumschulen** in Baumschulenweg is free to walk around until early November, and you buy pumpkins by weight in the farm shop. **Karls in Elstal** is also free to enter and keeps its pumpkin season until 1 November."
+      },
+      {
+        "q": "Which pumpkin places can I reach with a Berlin ABC ticket?",
+        "a": "Domäne Dahlem and Späth are in zone AB, and Karls in Elstal and the Fredersdorf festival are in ABC. **Klaistow and Kremmen lie outside ABC**, so you need a ticket to that zone or the Deutschlandticket."
+      },
+      {
+        "q": "When are the pumpkin festivals around Berlin in October?",
+        "a": "**Kremmen** holds its Kürbisfest in the historic barn quarter on **17 and 18 October**, 10:00 to 18:00. **Fredersdorf** has a village pumpkin festival with a bonfire on **Saturday 24 October** from 15:00, with free entry."
+      },
+      {
+        "q": "Where do I throw away my Halloween pumpkin in Berlin?",
+        "a": "In the **brown Biotonne**, the organic waste bin in your courtyard, like any other vegetable scraps. Cut a large pumpkin into pieces first."
+      }
+    ]
+  },
+  "schema": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Is there a pumpkin patch in Berlin where you can pick your own?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, but only one weekend a year inside the city. The Erntefest at Domäne Dahlem opens its pumpkin field on Saturday 3 and Sunday 4 October 2026, 10:00 to 18:00, and harvesting stops at 17:00. You get a harvest sack for a €2 deposit and pay at the field tills."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How much does the Domäne Dahlem pumpkin harvest cost?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Entry is €4.50, €2 reduced, and children under 12 go in free. The pumpkins you pick are paid for separately at the field tills, and the farm lists cash payment."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the biggest pumpkin show near Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The Spargel- und Erlebnishof Klaistow near Beelitz, with more than 100,000 pumpkins built into figures. It is open daily 9:00 to 18:00 until 15 November, costs €6 at weekends and €4 on weekdays, and children under 12 are free."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Where can I see pumpkins in Berlin for free?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The pumpkin show at the Späth'sche Baumschulen in Baumschulenweg is free to walk around until early November, and you buy pumpkins by weight in the farm shop. Karls in Elstal is also free to enter and keeps its pumpkin season until 1 November."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Which pumpkin places can I reach with a Berlin ABC ticket?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Domäne Dahlem and Späth are in zone AB, and Karls in Elstal and the Fredersdorf festival are in ABC. Klaistow and Kremmen lie outside ABC, so you need a ticket to that zone or the Deutschlandticket."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "When are the pumpkin festivals around Berlin in October?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Kremmen holds its Kürbisfest in the historic barn quarter on 17 and 18 October, 10:00 to 18:00. Fredersdorf has a village pumpkin festival with a bonfire on Saturday 24 October from 15:00, with free entry."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Where do I throw away my Halloween pumpkin in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "In the brown Biotonne, the organic waste bin in your courtyard, like any other vegetable scraps. Cut a large pumpkin into pieces first."
+        }
+      }
+    ]
+  }
+}

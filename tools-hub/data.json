@@ -10142,6 +10142,40 @@
       "iconStatus": "live-wix-media",
       "image": "https://static.wixstatic.com/media/5a08a3_82ec6ba3f1744f8bb0fc3e39f2b4e816~mv2.png",
       "cmsItemId": "2a93375e-e7bd-4912-908f-c02ef6ca2fda"
+    },
+    {
+      "slug": "berlin-pumpkin-weekend-map",
+      "title": "Berlin Pumpkin Weekend Map",
+      "lead": "Six pumpkin places in and around Berlin on a real map, one autumn weekend at a time: the one cut-your-own harvest at Domäne Dahlem, the pumpkin shows at Späth, Klaistow and Karls, and the Kremmen and Fredersdorf festivals. Step through the weekends to see what is on, filter by kind of day, free entry or ABC ticket, and compare train times from Alexanderplatz. Checked on 22 September 2026.",
+      "category": "Maps",
+      "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/berlin-pumpkin-weekend-map/",
+      "embedHeight": 1760,
+      "hubCategory": "WeatherOutdoor",
+      "type": "Map",
+      "priority": 3,
+      "tags": [
+        "pumpkin",
+        "kürbis",
+        "autumn",
+        "halloween",
+        "kids",
+        "weekend",
+        "brandenburg",
+        "living in berlin",
+        "day out"
+      ],
+      "aliases": [
+        "pumpkin patch berlin",
+        "pumpkin picking berlin",
+        "kürbis selbst pflücken berlin",
+        "kürbisausstellung berlin",
+        "pumpkin festival berlin",
+        "klaistow pumpkin exhibition",
+        "domäne dahlem erntefest"
+      ],
+      "iconStatus": "live-wix-media",
+      "image": "https://static.wixstatic.com/media/5a08a3_a575851c44fe45b7bd1034a56e6a1a93~mv2.png",
+      "cmsItemId": "fab819f1-a16c-40fa-bc0a-11fa8d915c65"
     }
   ],
   "hubCategories": [
