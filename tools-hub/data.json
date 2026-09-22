@@ -6511,7 +6511,7 @@
         "Berlin modernism map"
       ],
       "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/berlin-bauhaus-lineage-map/",
-      "embedHeight": 2300,
+      "embedHeight": 2520,
       "image": "https://static.wixstatic.com/media/5a08a3_a4ec81b1719648d898ca02a0261e33b8~mv2.png",
       "relatedBlogSlug": "bauhaus-in-berlin-modernism",
       "iconStatus": "live-wix-media",
@@ -7759,7 +7759,7 @@
         "watch champions league berlin"
       ],
       "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/berlin-football-screen-board/",
-      "embedHeight": 2300,
+      "embedHeight": 2520,
       "image": "https://static.wixstatic.com/media/5a08a3_c0913e82f6774be5a627202a9e173631~mv2.png",
       "iconStatus": "live-wix-media",
       "priority": 9,
@@ -10074,6 +10074,40 @@
       "iconStatus": "live-wix-media",
       "image": "https://static.wixstatic.com/media/5a08a3_8021bdb9617546ada209ac26fa48f27a~mv2.png",
       "cmsItemId": "aea48d32-9427-479f-91c5-adf55fd64250"
+    },
+    {
+      "slug": "berlin-leaf-turn-map",
+      "title": "Berlin Leaf Turn Map",
+      "lead": "Drag a date through the autumn and watch every tree the German weather service observes within 100 km of Berlin change colour on a real map, from green to half coloured to half bare. Switch between beech, oak, birch and horse chestnut, see the whole season as bars built from 2015 to 2025 records, and get six places worth the trip, from Schlachtensee to the beech woods at Buckow and Chorin, with the time to leave Alexanderplatz for three hours of daylight. Checked on 22 September 2026.",
+      "category": "Weather",
+      "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/berlin-leaf-turn-map/",
+      "embedHeight": 2520,
+      "hubCategory": "WeatherOutdoor",
+      "type": "Map",
+      "priority": 3,
+      "tags": [
+        "autumn",
+        "autumn leaves",
+        "fall foliage",
+        "beech",
+        "forest",
+        "day trip",
+        "brandenburg",
+        "living in berlin",
+        "weekend"
+      ],
+      "aliases": [
+        "autumn leaves berlin",
+        "autumn leaves in berlin",
+        "fall foliage berlin",
+        "autumn colours near berlin",
+        "herbstlaub berlin",
+        "when do leaves change colour in berlin",
+        "where to see autumn leaves near berlin"
+      ],
+      "iconStatus": "live-wix-media",
+      "image": "https://static.wixstatic.com/media/5a08a3_e29644b2f70d4501932c4b1adc8ec2f9~mv2.png",
+      "cmsItemId": "a80882ef-08e7-4ed2-8971-ffaa89593376"
     }
   ],
   "hubCategories": [

@@ -1,0 +1,101 @@
+{
+  "version": 1,
+  "slug": "autumn-leaves-in-berlin",
+  "key": "autumn-leaves-in-berlin",
+  "config": {
+    "title": "Autumn Leaves in Berlin - FAQ",
+    "subtitle": "When the leaves turn around Berlin, where the colour is best, and how to get there before the light goes.",
+    "items": [
+      {
+        "q": "When do the autumn leaves peak in Berlin?",
+        "a": "For beech, the tree with the strongest colour, in the **last full week of October**. In DWD records from 2015 to 2025 the typical beech around Berlin was half coloured on 21 October and half bare on 4 November. Oak runs a couple of days later, birch and horse chestnut earlier."
+      },
+      {
+        "q": "Which weekend is best for autumn leaves in 2026?",
+        "a": "The weekend of **24 and 25 October**, with Saturday 31 October as the backup. Single years move by about ten days: the typical beech turned on 15 October in 2018 and on 26 October in 2023."
+      },
+      {
+        "q": "Where are the best autumn colours near Berlin?",
+        "a": "Where the broadleaf trees are. Inside the city, **Schlachtensee and Krumme Lanke** and the lakes of the Grunewald. Outside, the beech woods at **Liepnitzsee**, around **Buckow** in the Märkische Schweiz and around **Chorin** monastery. Most forest around Berlin is pine, which stays green."
+      },
+      {
+        "q": "Do the leaves turn earlier outside Berlin?",
+        "a": "Not in any way you can plan around. In the DWD records Berlin's own stations and the Brandenburg stations share the same median beech date, 21 October, and two trees in the same town can be a week apart. The kind of tree matters far more than the place."
+      },
+      {
+        "q": "How does the clock change affect a leaf trip?",
+        "a": "The clocks go back on **Sunday 25 October 2026**. Sunset in Berlin moves from 17:54 on 24 October to 16:52 on 25 October and 16:40 by 31 October. For Buckow or Chorin after the change, be on the train by noon."
+      },
+      {
+        "q": "Can I reach these places with the Deutschlandticket?",
+        "a": "Yes, all six, including the Heidekrautbahn to Wandlitzsee and bus 928 to Buckow, which runs hourly on Saturdays and Sundays. With single tickets, Potsdam and Wandlitzsee need Berlin ABC, and Buckow and Chorin are outside the Berlin zones."
+      },
+      {
+        "q": "Why are the horse chestnuts already brown in summer?",
+        "a": "Mostly because of the **horse chestnut leaf miner**, a tiny moth that has spread across Germany since the late 1990s. Its larvae eat the leaves from the inside and the brown trails show up in summer. How bad it is varies from tree to tree and year to year."
+      }
+    ]
+  },
+  "schema": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "When do the autumn leaves peak in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "For beech, the tree with the strongest colour, in the last full week of October. In DWD records from 2015 to 2025 the typical beech around Berlin was half coloured on 21 October and half bare on 4 November. Oak runs a couple of days later, birch and horse chestnut earlier."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Which weekend is best for autumn leaves in 2026?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The weekend of 24 and 25 October, with Saturday 31 October as the backup. Single years move by about ten days: the typical beech turned on 15 October in 2018 and on 26 October in 2023."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Where are the best autumn colours near Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Where the broadleaf trees are. Inside the city, Schlachtensee and Krumme Lanke and the lakes of the Grunewald. Outside, the beech woods at Liepnitzsee, around Buckow in the Märkische Schweiz and around Chorin monastery. Most forest around Berlin is pine, which stays green."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Do the leaves turn earlier outside Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Not in any way you can plan around. In the DWD records Berlin's own stations and the Brandenburg stations share the same median beech date, 21 October, and two trees in the same town can be a week apart. The kind of tree matters far more than the place."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How does the clock change affect a leaf trip?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The clocks go back on Sunday 25 October 2026. Sunset in Berlin moves from 17:54 on 24 October to 16:52 on 25 October and 16:40 by 31 October. For Buckow or Chorin after the change, be on the train by noon."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I reach these places with the Deutschlandticket?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, all six, including the Heidekrautbahn to Wandlitzsee and bus 928 to Buckow, which runs hourly on Saturdays and Sundays. With single tickets, Potsdam and Wandlitzsee need Berlin ABC, and Buckow and Chorin are outside the Berlin zones."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Why are the horse chestnuts already brown in summer?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Mostly because of the horse chestnut leaf miner, a tiny moth that has spread across Germany since the late 1990s. Its larvae eat the leaves from the inside and the brown trails show up in summer. How bad it is varies from tree to tree and year to year."
+        }
+      }
+    ]
+  }
+}

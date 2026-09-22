@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Berlin Leaf Turn Map</title>
+<link rel="stylesheet" href="../css/brand.css">
+<style>
+  :root {
+    --forest: #1B5E20;
+    --bark: #3E2A1C;
+    --yellow: #FFE600;
+    --leafg: #6E9B3A;
+    --turn: #E7C93B;
+    --peak: #E07B24;
+    --late: #9A4A1E;
+    --bare: #8C8279;
+    --paper: #FFFDF7;
+    --sheet: #F6F1E4;
+    --ink: #22201B;
+    --muted: #5E5A50;
+    --rule: #E1D8C3;
+    --lake: #BFD9E3;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--sheet); color: var(--ink); }
+  .lt { max-width: 820px; margin: 0 auto; padding: 16px 14px 18px; }
+  .lt-head { display: flex; justify-content: space-between; align-items: flex-end; gap: 10px; flex-wrap: wrap; }
+  .lt-head h2 { margin: 0; font-size: 1.06rem; color: var(--forest); letter-spacing: -.01em; }
+  .lt-head p { margin: 4px 0 0; font-size: .76rem; color: var(--muted); line-height: 1.5; max-width: 560px; }
+
+  .lt-dial { margin-top: 12px; background: var(--paper); border: 1px solid var(--rule); border-radius: 14px; padding: 12px 14px 10px; }
+  .lt-dial-row { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; flex-wrap: wrap; }
+  .lt-date { font-size: 1.25rem; font-weight: 800; color: var(--bark); }
+  .lt-sun { font-size: .72rem; color: var(--muted); }
+  .lt-sun b { color: var(--bark); }
+  .lt-range { width: 100%; margin: 10px 0 2px; accent-color: var(--peak); height: 28px; }
+  .lt-ticks { display: flex; justify-content: space-between; font-size: .6rem; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: .06em; }
+  .lt-species { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 6px; margin-top: 10px; }
+  .lt-sp { font-family: inherit; font-size: .74rem; font-weight: 800; color: var(--bark); background: var(--sheet); border: 1px solid var(--rule); border-radius: 999px; padding: 8px 6px; min-height: 40px; cursor: pointer; }
+  .lt-sp[aria-pressed="true"] { background: var(--forest); color: #fff; border-color: var(--forest); }
+  .lt-sp:focus-visible, .lt-range:focus-visible { outline: 3px solid var(--yellow); outline-offset: 2px; }
+
+  .lt-read { margin-top: 10px; display: grid; grid-template-columns: auto minmax(0,1fr); gap: 12px; align-items: center; background: var(--bark); color: #fff; border-radius: 12px; padding: 11px 14px; }
+  .lt-state { font-size: .64rem; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; padding: 6px 9px; border-radius: 8px; color: var(--ink); background: var(--turn); white-space: nowrap; }
+  .lt-read p { margin: 0; font-size: .8rem; line-height: 1.55; }
+  .lt-read b { color: var(--yellow); }
+
+  .lt-cols { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); gap: 12px; margin-top: 12px; }
+  .lt-card { background: var(--paper); border: 1px solid var(--rule); border-radius: 12px; padding: 10px 10px 8px; }
+  .lt-card h3 { margin: 0 0 2px; font-size: .84rem; color: var(--forest); }
+  .lt-card .lt-sub { margin: 0 0 6px; font-size: .68rem; color: var(--muted); line-height: 1.45; }
+  .lt-card svg { display: block; width: 100%; height: auto; }
+  .lt-key { display: flex; flex-wrap: wrap; gap: 6px 12px; margin-top: 6px; font-size: .64rem; color: var(--muted); }
+  .lt-key i { display: inline-block; width: 10px; height: 10px; border-radius: 50%; vertical-align: -1px; margin-right: 4px; }
+
+  .lt-places { margin-top: 12px; display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 8px; }
+  .lt-place { background: var(--paper); border: 1px solid var(--rule); border-left: 6px solid var(--leafg); border-radius: 10px; padding: 9px 11px; }
+  .lt-place h4 { margin: 0; font-size: .8rem; color: var(--bark); display: flex; justify-content: space-between; gap: 8px; }
+  .lt-place h4 span { font-size: .62rem; font-weight: 800; color: var(--muted); white-space: nowrap; }
+  .lt-place p { margin: 4px 0 0; font-size: .7rem; line-height: 1.5; color: var(--muted); }
+  .lt-place .lt-now { color: var(--ink); font-weight: 700; }
+  .lt-foot { margin-top: 10px; font-size: .64rem; color: var(--muted); line-height: 1.55; }
+
+  @media (max-width: 640px) {
+    .lt { padding: 12px 10px 14px; }
+    .lt-cols { grid-template-columns: 1fr; }
+    .lt-places { grid-template-columns: 1fr; }
+    .lt-species { grid-template-columns: repeat(2, minmax(0,1fr)); }
+    .lt-read { grid-template-columns: 1fr; gap: 6px; }
+    .lt-state { justify-self: start; }
+    .lt-date { font-size: 1.1rem; }
+  }
+</style>
+</head>
+<body>
+<div class="lt" id="lt">
+  <div class="lt-head">
+    <div>
+      <h2>Berlin leaf turn map</h2>
+      <p>Drag the date. Every dot is a tree the German weather service (DWD) watches every autumn within 100 km of Berlin, coloured by where it usually stands on that day, 2015 to 2025.</p>
+    </div>
+  </div>
+
+  <div class="lt-dial">
+    <div class="lt-dial-row">
+      <div class="lt-date" id="ltDate">Sat 24 Oct</div>
+      <div class="lt-sun" id="ltSun">Sunset <b>17:54</b></div>
+    </div>
+    <input class="lt-range" id="ltRange" type="range" min="258" max="335" step="1" value="297" aria-label="Date between 15 September and 1 December">
+    <div class="lt-ticks"><span>15 Sep</span><span>1 Oct</span><span>15 Oct</span><span>1 Nov</span><span>15 Nov</span><span>1 Dec</span></div>
+    <div class="lt-species" role="group" aria-label="Tree species">
+      <button class="lt-sp" type="button" data-sp="beech" aria-pressed="true">Beech</button>
+      <button class="lt-sp" type="button" data-sp="oak" aria-pressed="false">Oak</button>
+      <button class="lt-sp" type="button" data-sp="birch" aria-pressed="false">Birch</button>
+      <button class="lt-sp" type="button" data-sp="chestnut" aria-pressed="false">Horse chestnut</button>
+    </div>
+  </div>
+
+  <div class="lt-read" aria-live="polite">
+    <span class="lt-state" id="ltState">Peak colour</span>
+    <p id="ltRead"></p>
+  </div>
+
+  <div class="lt-cols">
+    <div class="lt-card">
+      <h3>The map: 100 km around Berlin</h3>
+      <p class="lt-sub">Dots are DWD observation trees. Diamonds are the six places in the list below. Rings at 50 and 100 km from Alexanderplatz.</p>
+      <svg id="ltMap" viewBox="0 0 400 400" role="img" aria-label="Map of DWD observation trees around Berlin coloured by leaf state"></svg>
+      <div class="lt-key">
+        <span><i style="background:var(--leafg)"></i>Green</span>
+        <span><i style="background:var(--turn)"></i>Turning</span>
+        <span><i style="background:var(--peak)"></i>Half coloured</span>
+        <span><i style="background:var(--late)"></i>Falling</span>
+        <span><i style="background:var(--bare)"></i>Half bare</span>
+      </div>
+    </div>
+    <div class="lt-card">
+      <h3>The season, species by species</h3>
+      <p class="lt-sub">Bars cover the middle half of all observations. Orange: half the leaves coloured. Brown: half the leaves down. The gap between them is the good week.</p>
+      <svg id="ltBands" viewBox="0 0 360 300" role="img" aria-label="Leaf colouring and leaf fall windows for beech, oak, birch and horse chestnut"></svg>
+    </div>
+  </div>
+
+  <div class="lt-places" id="ltPlaces"></div>
+  <p class="lt-foot">Data: Deutscher Wetterdienst, phenological annual reporters, stations within 100 km of Alexanderplatz, 2015 to 2025 (beech 388 colouring and 368 leaf fall records). One tree per station, so single dots are noisy; the bars are the reliable part. Door-to-door times from Alexanderplatz on a Saturday, VBB timetable checked 22 September 2026.</p>
+</div>
+<script src="../js/brand.js"></script>
+<script>
+(function () {
+  var D = {"species":{"beech":{"c":[245,273,279,281,284,286,288,289,291,293,294,294,295,296,297,298,300,302,303,308,319],"f":[253,291,295,299,301,302,303,305,306,307,308,309,311,312,313,314,316,317,320,324,335],"nc":388,"nf":368},"oak":{"c":[246,276,282,285,287,289,290,292,293,294,296,297,298,299,300,301,303,305,307,310,320],"f":[255,294,298,302,304,306,307,308,309,311,312,314,316,317,318,320,322,324,328,332,344],"nc":473,"nf":453},"birch":{"c":[251,265,269,273,275,278,281,283,285,287,288,290,291,293,293,295,296,298,301,304,313],"f":[240,283,289,293,295,298,300,301,303,304,305,305,307,309,310,311,313,315,318,321,344],"nc":470,"nf":456},"chestnut":{"c":[222,260,264,268,271,273,274,276,277,280,281,283,284,284,286,287,288,290,292,295,312],"f":[250,273,283,287,289,291,292,293,294,295,296,297,298,299,301,302,303,305,307,310,332],"nc":340,"nf":365}},"stations":[{"id":12335,"n":"Blumenfelde","la":52.017,"lo":13.867,"be":false,"beech":[293,314],"oak":[291,321],"birch":[286,310],"chestnut":[286,296]},{"id":14091,"n":"Kr\u00e4nzlin","la":52.9,"lo":12.75,"be":false,"beech":[289,304],"oak":[296,311],"birch":[287,302],"chestnut":[289,302]},{"id":13094,"n":"Jerichow","la":52.5,"lo":12.033,"be":false,"beech":[303,321],"oak":[302,318],"birch":[300,312],"chestnut":[284,295]},{"id":12441,"n":"Reitwein","la":52.5,"lo":14.583,"be":false,"beech":[291,317],"oak":[297,328],"birch":[286,315],"chestnut":[274,302]},{"id":12162,"n":"Passow","la":53.15,"lo":14.117,"be":false,"beech":[294,313],"oak":[296,312],"birch":[301,316],"chestnut":[283,298]},{"id":12132,"n":"Berlin-Dahlem","la":52.448,"lo":13.297,"be":true,"beech":[297,315],"oak":[289,300],"birch":[293,303],"chestnut":[null,301]},{"id":12306,"n":"Sch\u00f6newalde","la":51.817,"lo":13.233,"be":false,"oak":[295,309],"birch":[294,304],"chestnut":[273,292]},{"id":12406,"n":"Geltow","la":52.361,"lo":12.967,"be":false,"beech":[290,307],"oak":[294,313],"birch":[290,304],"chestnut":[288,309]},{"id":15253,"n":"Drewitz","la":52.217,"lo":12.163,"be":false,"beech":[294,304],"oak":[298,316],"birch":[291,307],"chestnut":[283,298]},{"id":19485,"n":"Lindenberg","la":52.209,"lo":14.118,"be":false,"beech":[296,312],"oak":[299,315],"birch":[281,298],"chestnut":[null,294]},{"id":13318,"n":"Zahna","la":51.917,"lo":12.783,"be":false,"beech":[296,306],"oak":[297,310],"birch":[286,null],"chestnut":[282,null]},{"id":12152,"n":"Potsdam-Bornim","la":52.417,"lo":13.033,"be":false,"beech":[283,298],"oak":[290,307],"birch":[272,287],"chestnut":[271,288]},{"id":12458,"n":"M\u00fcncheberg","la":52.517,"lo":14.117,"be":false,"beech":[285,318],"oak":[288,312],"birch":[281,303],"chestnut":[268,288]},{"id":12380,"n":"Wall","la":52.833,"lo":12.983,"be":false,"oak":[297,314],"birch":[294,308],"chestnut":[284,295]},{"id":12625,"n":"Neustrelitz","la":53.35,"lo":13.083,"be":false,"beech":[290,310],"oak":[292,310],"birch":[285,305],"chestnut":[284,297]},{"id":15216,"n":"L\u00e4rz-Kr\u00fcmmel","la":53.267,"lo":12.717,"be":false,"beech":[295,306],"oak":[294,312],"birch":[289,305],"chestnut":[283,307]},{"id":12365,"n":"Wansdorf","la":52.65,"lo":13.1,"be":false,"oak":[286,317],"birch":[294,309],"chestnut":[279,293]},{"id":12389,"n":"Lehnitz","la":52.75,"lo":13.283,"be":false,"beech":[300,310],"oak":[288,296],"birch":[296,306],"chestnut":[282,297]},{"id":12454,"n":"Bruchm\u00fchle","la":52.55,"lo":13.783,"be":false,"oak":[290,306],"birch":[275,296],"chestnut":[284,null]},{"id":12206,"n":"Wiesenburg/Mark","la":52.117,"lo":12.45,"be":false,"beech":[293,305],"oak":[298,315],"birch":[292,306],"chestnut":[282,298]},{"id":12188,"n":"Beeskow (Beob.-Stelle 1)","la":52.167,"lo":14.25,"be":false,"beech":[292,318],"oak":[293,328],"birch":[293,318],"chestnut":[284,303]},{"id":12130,"n":"Berlin-Marienfelde","la":52.4,"lo":13.367,"be":true,"beech":[294,317],"oak":[301,318],"birch":[298,320]},{"id":12286,"n":"F\u00fcrstenberg/Havel","la":53.2,"lo":13.15,"be":false,"beech":[302,314],"oak":[294,318],"birch":[270,293],"chestnut":[278,298]},{"id":12329,"n":"Kyritz","la":52.933,"lo":12.417,"be":false,"beech":[298,313],"oak":[296,315],"birch":[290,305],"chestnut":[289,302]},{"id":12347,"n":"Walddrehna","la":51.783,"lo":13.617,"be":false,"beech":[281,314],"oak":[288,325],"birch":[285,308],"chestnut":[264,293]},{"id":12483,"n":"Sperenberg","la":52.15,"lo":13.367,"be":false,"beech":[298,317],"oak":[299,317],"birch":[301,312],"chestnut":[290,301]},{"id":14335,"n":"Treuenbrietzen-Stadt","la":52.1,"lo":12.883,"be":false,"beech":[293,307],"oak":[309,322],"birch":[298,316],"chestnut":[283,298]},{"id":15504,"n":"Lieberose","la":51.986,"lo":14.303,"be":false,"beech":[276,292],"oak":[275,296],"birch":[270,296],"chestnut":[null,268]},{"id":12173,"n":"Neuk\u00fcstrinchen","la":52.8,"lo":14.167,"be":false,"oak":[308,334],"birch":[290,308],"chestnut":[284,302]},{"id":12151,"n":"Potsdam-Hermannswerder","la":52.382,"lo":13.05,"be":false,"beech":[288,305],"oak":[284,295],"birch":[270,306]},{"id":15556,"n":"Berlin-K\u00f6penick","la":52.455,"lo":13.629,"be":true,"beech":[285,292],"oak":[289,306],"birch":[288,298],"chestnut":[276,280]},{"id":12408,"n":"Michendorf","la":52.283,"lo":13.033,"be":false,"beech":[294,312],"oak":[301,317],"birch":[291,307],"chestnut":[283,299]},{"id":19182,"n":"Wusterwitz","la":52.371,"lo":12.428,"be":false,"beech":[295,null],"oak":[304,null],"birch":[296,310],"chestnut":[293,310]},{"id":14334,"n":"Brandenburg-M\u00f6tzower Vorstadt","la":52.433,"lo":12.583,"be":false,"beech":[297,309],"oak":[297,318],"birch":[271,293],"chestnut":[271,300]},{"id":19475,"n":"Angerm\u00fcnde","la":53.032,"lo":13.991,"be":false,"beech":[296,312],"oak":[307,324],"birch":[300,311],"chestnut":[274,294]},{"id":12316,"n":"Bindow","la":52.283,"lo":13.75,"be":false,"beech":[299,315],"oak":[291,306],"birch":[282,300],"chestnut":[285,297]},{"id":12418,"n":"Prenzlau","la":53.317,"lo":13.9,"be":false,"beech":[302,317],"oak":[312,326],"birch":[292,306],"chestnut":[275,292]},{"id":15469,"n":"Lunow","la":52.923,"lo":14.112,"be":false,"beech":[295,302],"oak":[296,310],"birch":[294,302],"chestnut":[284,295]},{"id":15203,"n":"Rathenow","la":52.583,"lo":12.35,"be":false,"beech":[298,312],"oak":[299,319],"birch":[290,300],"chestnut":[279,299]},{"id":12471,"n":"Wittstock/Dosse","la":53.167,"lo":12.483,"be":false,"beech":[296,304],"oak":[298,308],"birch":[278,294],"chestnut":[276,294]},{"id":15034,"n":"Gro\u00df Sch\u00f6nebeck","la":52.917,"lo":13.583,"be":false,"beech":[278,293],"oak":[284,302],"birch":[268,290],"chestnut":[266,286]},{"id":12240,"n":"Joachimsthal (Beob.-Stelle 1)","la":52.967,"lo":13.767,"be":false,"beech":[294,309],"oak":[291,307],"birch":[293,304],"chestnut":[286,300]},{"id":12334,"n":"L\u00fcbben/Spreewald","la":51.933,"lo":13.867,"be":false,"beech":[283,307],"oak":[282,302],"birch":[270,296],"chestnut":[253,271]},{"id":12289,"n":"Schulzendorf","la":53.033,"lo":13.05,"be":false,"beech":[295,307],"oak":[302,311],"birch":[299,313]},{"id":12236,"n":"Eberswalde-Finow","la":52.833,"lo":13.833,"be":false,"beech":[289,305],"oak":[295,307],"birch":[288,308],"chestnut":[284,300]},{"id":12468,"n":"Fretzdorf","la":53.067,"lo":12.55,"be":false,"beech":[294,305],"oak":[295,300],"birch":[277,296],"chestnut":[272,null]},{"id":12413,"n":"Werder/Havel","la":52.367,"lo":12.95,"be":false,"beech":[307,null],"birch":[286,309],"chestnut":[null,313]},{"id":13102,"n":"Selbitz b. Bitterfeld","la":51.817,"lo":12.55,"be":false,"oak":[301,311],"birch":[294,307],"chestnut":[279,293]},{"id":12168,"n":"Altwriezen-Beauregard","la":52.733,"lo":14.217,"be":false,"oak":[307,322],"birch":[289,311],"chestnut":[285,299]},{"id":12291,"n":"Zehdenick","la":52.983,"lo":13.35,"be":false,"oak":[null,302],"birch":[279,298]},{"id":12326,"n":"Dreetz b. Neustadt/Dosse","la":52.8,"lo":12.367,"be":false,"beech":[308,323],"oak":[295,320],"birch":[294,null],"chestnut":[287,null]},{"id":19563,"n":"Potsdam","la":52.381,"lo":13.062,"be":false,"beech":[266,302],"oak":[290,317],"birch":[278,311],"chestnut":[267,294]},{"id":19113,"n":"Nordwestuckermark-Christianenhof","la":53.359,"lo":13.666,"be":false,"beech":[291,312],"oak":[281,304],"birch":[274,287],"chestnut":[274,284]},{"id":19092,"n":"Klosterfelde","la":52.796,"lo":13.482,"be":false,"beech":[283,null],"oak":[289,314],"birch":[283,318],"chestnut":[279,294]},{"id":12135,"n":"Berlin-Frohnau","la":52.632,"lo":13.301,"be":true,"beech":[295,305],"oak":[284,312],"birch":[278,292],"chestnut":[281,301]},{"id":13961,"n":"Berlin-Zehlendorf","la":52.417,"lo":13.25,"be":true,"oak":[null,296],"birch":[280,null]},{"id":12455,"n":"Dahlwitz-Hoppegarten","la":52.517,"lo":13.65,"be":false,"oak":[null,317],"birch":[null,303]},{"id":15962,"n":"Dannenwalde","la":53.027,"lo":12.239,"be":false,"beech":[288,305],"oak":[289,301]},{"id":15208,"n":"Berlin-Rahnsdorf","la":52.45,"lo":13.7,"be":false,"beech":[284,292]},{"id":12457,"n":"Hermersdorf-Obersdorf","la":52.567,"lo":14.183,"be":false,"oak":[288,null]}],"years":{"beech":{"31":{"2012":290,"2013":285,"2014":291,"2015":293,"2016":294,"2017":289,"2018":288,"2019":295,"2020":296,"2021":295,"2022":289,"2023":299,"2024":295,"2025":292},"32":{"2012":301,"2013":298,"2014":310,"2015":306,"2016":307,"2017":303,"2018":308,"2019":310,"2020":310,"2021":308,"2022":305,"2023":314,"2024":309,"2025":308}},"oak":{"31":{"2012":292,"2013":289,"2014":293,"2015":294,"2016":297,"2017":291,"2018":294,"2019":297,"2020":299,"2021":293,"2022":293,"2023":302,"2024":295,"2025":296},"32":{"2012":307,"2013":302,"2014":312,"2015":307,"2016":310,"2017":306,"2018":315,"2019":316,"2020":312,"2021":309,"2022":316,"2023":318,"2024":316,"2025":310}},"birch":{"31":{"2012":284,"2013":287,"2014":281,"2015":289,"2016":290,"2017":283,"2018":287,"2019":288,"2020":293,"2021":288,"2022":288,"2023":294,"2024":288,"2025":285},"32":{"2012":301,"2013":300,"2014":298,"2015":302,"2016":304,"2017":296,"2018":307,"2019":308,"2020":306,"2021":304,"2022":305,"2023":314,"2024":308,"2025":301}},"chestnut":{"31":{"2012":276,"2013":275,"2014":273,"2015":282,"2016":282,"2017":274,"2018":273,"2019":280,"2020":286,"2021":284,"2022":276,"2023":286,"2024":279,"2025":281},"32":{"2012":293,"2013":291,"2014":294,"2015":298,"2016":299,"2017":291,"2018":292,"2019":295,"2020":301,"2021":295,"2022":296,"2023":304,"2024":294,"2025":295}}},"berlin":[[13.088,52.42],[13.091,52.412],[13.11,52.413],[13.106,52.409],[13.125,52.397],[13.138,52.398],[13.127,52.392],[13.131,52.387],[13.142,52.397],[13.172,52.396],[13.158,52.396],[13.159,52.403],[13.197,52.416],[13.246,52.421],[13.25,52.405],[13.274,52.405],[13.297,52.416],[13.312,52.399],[13.343,52.412],[13.372,52.394],[13.37,52.388],[13.387,52.389],[13.388,52.378],[13.421,52.376],[13.427,52.386],[13.419,52.41],[13.464,52.421],[13.48,52.396],[13.538,52.401],[13.535,52.389],[13.593,52.394],[13.606,52.374],[13.629,52.381],[13.643,52.378],[13.647,52.367],[13.636,52.347],[13.648,52.338],[13.671,52.366],[13.692,52.367],[13.7,52.376],[13.687,52.385],[13.739,52.407],[13.73,52.416],[13.74,52.432],[13.73,52.434],[13.726,52.435],[13.723,52.437],[13.761,52.438],[13.756,52.446],[13.729,52.451],[13.701,52.468],[13.705,52.455],[13.695,52.464],[13.648,52.479],[13.625,52.474],[13.623,52.466],[13.611,52.471],[13.63,52.493],[13.624,52.494],[13.632,52.511],[13.657,52.53],[13.626,52.53],[13.625,52.538],[13.637,52.542],[13.586,52.55],[13.582,52.571],[13.547,52.588],[13.508,52.592],[13.497,52.607],[13.506,52.626],[13.518,52.63],[13.523,52.645],[13.491,52.655],[13.488,52.671],[13.475,52.668],[13.479,52.676],[13.451,52.663],[13.474,52.657],[13.47,52.652],[13.441,52.649],[13.424,52.635],[13.395,52.648],[13.389,52.638],[13.376,52.628],[13.358,52.623],[13.303,52.627],[13.31,52.63],[13.309,52.643],[13.3,52.654],[13.31,52.657],[13.283,52.661],[13.284,52.641],[13.262,52.641],[13.264,52.627],[13.221,52.628],[13.202,52.607],[13.217,52.587],[13.165,52.599],[13.129,52.587],[13.132,52.58],[13.15,52.583],[13.154,52.573],[13.146,52.553],[13.13,52.556],[13.117,52.517],[13.143,52.52],[13.169,52.509],[13.118,52.477],[13.109,52.451],[13.123,52.439],[13.088,52.42]]};
+  var SPN = { beech: 'beech', oak: 'oak', birch: 'birch', chestnut: 'horse chestnut' };
+  var PLACES = [
+    { n: 'Grunewald and Grunewaldsee', la: 52.4747, lo: 13.2644, sp: 'oak', m: 22, t: '22 min', how: 'S7 to Grunewald, then 3 km on forest paths to the lake.', trees: 'Mostly pine, with oak, birch and beech around the lakes.' },
+    { n: 'Schlachtensee and Krumme Lanke', la: 52.4396, lo: 13.2152, sp: 'beech', m: 38, t: '38 min', how: 'S7 and S1 to Schlachtensee; the shore path runs on to Krumme Lanke.', trees: 'Broadleaf lake shore: beech, oak, maple.' },
+    { n: 'Park Sanssouci, Potsdam', la: 52.4040, lo: 13.0260, sp: 'oak', m: 52, t: '46 to 52 min', how: 'S-Bahn to Charlottenburg, then RE1 or RB21 to Park Sanssouci station.', trees: 'Old park avenues: oak, lime, horse chestnut.' },
+    { n: 'Liepnitzsee', la: 52.7420, lo: 13.5120, sp: 'beech', m: 90, t: '53 to 56 min', how: 'S2 to Karow, Heidekrautbahn RB27 to Wandlitzsee, then about 2.5 km on foot.', trees: 'Beech wood on a clear lake, the closest proper beech walk.' },
+    { n: 'Buckow and Schermützelsee', la: 52.5673, lo: 14.0736, sp: 'beech', m: 88, t: '83 to 88 min', how: 'U5 to Lichtenberg, RB26 to Müncheberg, bus 928 to Buckow Markt. Hourly, weekends too.', trees: 'Beech slopes of the Märkische Schweiz around a deep lake.' },
+    { n: 'Chorin monastery and Amtssee', la: 52.8922, lo: 13.8852, sp: 'beech', m: 80, t: '54 min + 25 min walk', how: 'U8 to Gesundbrunnen, RE3 to Chorin, walk to the monastery. RE3 back at 43 past the hour.', trees: 'Old beech woods of Schorfheide-Chorin, the north where Brandenburg keeps its beech.' }
+  ];
+  var C = { green: '#6E9B3A', turn: '#E7C93B', peak: '#E07B24', late: '#9A4A1E', bare: '#8C8279' };
+  var state = { doy: 297, sp: 'beech' };
+  var range = document.getElementById('ltRange');
+  var YEAR = new Date().getFullYear();
+  var DST = (function () { var d = new Date(Date.UTC(YEAR, 9, 31)); d.setUTCDate(31 - d.getUTCDay()); return Math.round((d - Date.UTC(YEAR, 0, 0)) / 864e5); })();
+
+  function dateOf(doy) { var d = new Date(Date.UTC(YEAR, 0, 1)); d.setUTCDate(doy); return d; }
+  function fmt(doy, withDay) {
+    var d = dateOf(doy);
+    var m = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'][d.getUTCMonth()];
+    var w = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'][d.getUTCDay()];
+    return (withDay ? w + ' ' : '') + d.getUTCDate() + ' ' + m;
+  }
+  // share of observations at or before doy, from 21 quantiles (0..100 by 5)
+  function share(q, doy) {
+    if (doy < q[0]) return 0;
+    if (doy >= q[20]) return 1;
+    for (var i = 0; i < 20; i++) {
+      if (doy >= q[i] && doy < q[i + 1]) return (i + (doy - q[i]) / Math.max(1, q[i + 1] - q[i])) / 20;
+    }
+    return 1;
+  }
+  function stationState(c, f, doy) {
+    if (c == null && f == null) return null;
+    if (f != null && doy >= f) return 'bare';
+    if (c != null && doy >= c) return (f != null && doy >= f - 6) ? 'late' : 'peak';
+    if (c != null && doy >= c - 9) return 'turn';
+    if (c == null && f != null && doy >= f - 14) return 'late';
+    return 'green';
+  }
+  function regionState(sp, doy) {
+    var s = D.species[sp], pc = share(s.c, doy), pf = share(s.f, doy);
+    var k, word;
+    if (pf >= 0.5) { k = 'bare'; word = 'Mostly bare'; }
+    else if (pf >= 0.2) { k = 'late'; word = 'Late colour, falling'; }
+    else if (pc >= 0.5) { k = 'peak'; word = 'Peak colour'; }
+    else if (pc >= 0.15) { k = 'turn'; word = 'Turning'; }
+    else { k = 'green'; word = 'Still green'; }
+    return { k: k, word: word, pc: pc, pf: pf };
+  }
+  // NOAA sunset for Berlin, Europe/Berlin clock (DST ends 25 Oct 2026)
+  function sunsetMin(doy) {
+    var lat = 52.52, lon = 13.405, g = 2 * Math.PI / 365 * (doy - 1 + (18 - 12) / 24);
+    var eq = 229.18 * (0.000075 + 0.001868 * Math.cos(g) - 0.032077 * Math.sin(g) - 0.014615 * Math.cos(2 * g) - 0.040849 * Math.sin(2 * g));
+    var dec = 0.006918 - 0.399912 * Math.cos(g) + 0.070257 * Math.sin(g) - 0.006758 * Math.cos(2 * g) + 0.000907 * Math.sin(2 * g) - 0.002697 * Math.cos(3 * g) + 0.00148 * Math.sin(3 * g);
+    var r = Math.PI / 180;
+    var ha = Math.acos(Math.cos(90.833 * r) / (Math.cos(lat * r) * Math.cos(dec)) - Math.tan(lat * r) * Math.tan(dec)) / r;
+    return 720 - 4 * (lon - ha) - eq + (doy < DST ? 120 : 60);
+  }
+  function hm(m) { var h = Math.floor(m / 60), mm = Math.floor(m % 60); return (h < 10 ? '0' : '') + h + ':' + (mm < 10 ? '0' : '') + mm; }
+  function sunset(doy) { return hm(sunsetMin(doy)); }
+
+  // ---------- map ----------
+  var CX = 13.405, CY = 52.52, KM = 1.72; // px per km
+  function px(lo, la) {
+    var x = (lo - CX) * 111.32 * Math.cos(CY * Math.PI / 180), y = (la - CY) * 110.57;
+    return [200 + x * KM, 200 - y * KM];
+  }
+  var NS = 'http://www.w3.org/2000/svg';
+  function el(tag, attrs, parent) { var e = document.createElementNS(NS, tag); for (var k in attrs) e.setAttribute(k, attrs[k]); if (parent) parent.appendChild(e); return e; }
+  var map = document.getElementById('ltMap');
+  el('rect', { x: 0, y: 0, width: 400, height: 400, rx: 10, fill: '#FBF8EF' }, map);
+  [100, 50].forEach(function (r) { el('circle', { cx: 200, cy: 200, r: r * KM, fill: 'none', stroke: '#D8CDB4', 'stroke-dasharray': '3 4' }, map); });
+  el('text', { x: 200, y: 200 - 100 * KM + 11, 'text-anchor': 'middle', 'font-size': 9, fill: '#8a826f' }, map).textContent = '100 km';
+  el('text', { x: 200, y: 200 - 50 * KM + 11, 'text-anchor': 'middle', 'font-size': 9, fill: '#8a826f' }, map).textContent = '50 km';
+  var bp = D.berlin.map(function (p) { var q = px(p[0], p[1]); return q[0].toFixed(1) + ',' + q[1].toFixed(1); }).join(' ');
+  el('polygon', { points: bp, fill: '#EDE6D3', stroke: '#1B5E20', 'stroke-width': 1.2 }, map);
+  el('text', { x: 206, y: 188, 'text-anchor': 'middle', 'font-size': 10, 'font-weight': 800, fill: '#1B5E20', stroke: '#EDE6D3', 'stroke-width': 3, 'paint-order': 'stroke' }, map).textContent = 'BERLIN';
+  var dots = D.stations.map(function (s) {
+    var p = px(s.lo, s.la);
+    var c = el('circle', { cx: p[0].toFixed(1), cy: p[1].toFixed(1), r: 5, stroke: '#fff', 'stroke-width': 1.2 }, map);
+    var t = el('title', {}, c); t.textContent = s.n;
+    return { s: s, c: c, t: t };
+  });
+  PLACES.forEach(function (pl, i) {
+    var p = px(pl.lo, pl.la);
+    el('rect', { x: p[0] - 5, y: p[1] - 5, width: 10, height: 10, transform: 'rotate(45 ' + p[0] + ' ' + p[1] + ')', fill: '#22201B', stroke: '#FFE600', 'stroke-width': 1.6 }, map);
+    var LO = [[-9, -12, 'end'], [-9, 6, 'end'], [-9, 24, 'end'], [9, -6, 'start'], [9, -8, 'start'], [9, -8, 'start']][i];
+    var label = el('text', { x: p[0] + LO[0], y: p[1] + LO[1], 'text-anchor': LO[2], 'font-size': 9.5, 'font-weight': 800, fill: '#22201B', stroke: '#FBF8EF', 'stroke-width': 3, 'paint-order': 'stroke' }, map);
+    label.textContent = (i + 1) + ' ' + pl.n.split(' and ')[0].split(',')[0];
+  });
+
+  // ---------- bands ----------
+  var bands = document.getElementById('ltBands');
+  var X0 = 62, X1 = 350, D0 = 258, D1 = 335;
+  function bx(doy) { return X0 + (doy - D0) / (D1 - D0) * (X1 - X0); }
+  [258, 274, 288, 305, 319, 335].forEach(function (d, i) {
+    el('line', { x1: bx(d), x2: bx(d), y1: 18, y2: 262, stroke: '#EAE2CF' }, bands);
+    el('text', { x: bx(d), y: 278, 'text-anchor': i === 0 ? 'start' : (i === 5 ? 'end' : 'middle'), 'font-size': 9, fill: '#6b6558' }, bands).textContent = fmt(d);
+  });
+  el('line', { x1: bx(DST), x2: bx(DST), y1: 14, y2: 262, stroke: '#3E2A1C', 'stroke-dasharray': '2 3' }, bands);
+  el('text', { x: bx(DST) + 3, y: 12, 'font-size': 8.5, fill: '#3E2A1C' }, bands).textContent = 'clocks back ' + fmt(DST);
+  var rows = {};
+  ['beech', 'oak', 'birch', 'chestnut'].forEach(function (sp, i) {
+    var y = 34 + i * 58, s = D.species[sp];
+    var g = el('g', {}, bands);
+    var lab = el('text', { x: 4, y: y + 16, 'font-size': 10, 'font-weight': 800, fill: '#3E2A1C' }, g);
+    lab.textContent = sp === 'chestnut' ? 'Chestnut' : sp[0].toUpperCase() + sp.slice(1);
+    el('rect', { x: bx(s.c[10]), y: y + 4, width: Math.max(2, bx(s.f[10]) - bx(s.c[10])), height: 22, fill: '#FFE600', opacity: .55, rx: 3 }, g);
+    el('rect', { x: bx(s.c[5]), y: y, width: bx(s.c[15]) - bx(s.c[5]), height: 12, fill: '#E07B24', rx: 3 }, g);
+    el('rect', { x: bx(s.f[5]), y: y + 18, width: bx(s.f[15]) - bx(s.f[5]), height: 12, fill: '#9A4A1E', rx: 3 }, g);
+    el('line', { x1: bx(s.c[10]), x2: bx(s.c[10]), y1: y - 3, y2: y + 15, stroke: '#22201B', 'stroke-width': 2 }, g);
+    el('line', { x1: bx(s.f[10]), x2: bx(s.f[10]), y1: y + 15, y2: y + 33, stroke: '#22201B', 'stroke-width': 2 }, g);
+    var cap = el('text', { x: bx(s.c[10]), y: y + 46, 'text-anchor': 'middle', 'font-size': 8.5, fill: '#5E5A50' }, g);
+    cap.textContent = 'best ' + fmt(s.c[10]) + ' to ' + fmt(s.f[10]);
+    rows[sp] = { g: g, lab: lab };
+  });
+  var nowLine = el('line', { x1: 0, x2: 0, y1: 18, y2: 262, stroke: '#1B5E20', 'stroke-width': 2.5 }, bands);
+
+  // ---------- places ----------
+  var placesEl = document.getElementById('ltPlaces');
+  var placeNodes = PLACES.map(function (pl, i) {
+    var d = document.createElement('div'); d.className = 'lt-place';
+    d.innerHTML = '<h4>' + (i + 1) + '. ' + pl.n + '<span>' + pl.t + '</span></h4><p class="lt-now"></p><p>' + pl.trees + ' ' + pl.how + '</p>';
+    placesEl.appendChild(d);
+    return { pl: pl, el: d, now: d.querySelector('.lt-now') };
+  });
+
+  function render() {
+    var doy = state.doy, sp = state.sp;
+    document.getElementById('ltDate').textContent = fmt(doy, true);
+    var ss = sunset(doy);
+    document.getElementById('ltSun').innerHTML = 'Sunset in Berlin <b>' + ss + '</b>' + (doy >= DST ? ' (winter time)' : '');
+    var r = regionState(sp, doy);
+    var st = document.getElementById('ltState');
+    st.textContent = r.word; st.style.background = C[r.k]; st.style.color = (r.k === 'late' || r.k === 'bare') ? '#fff' : '#22201B';
+    var s = D.species[sp];
+    document.getElementById('ltRead').innerHTML = 'Across the region, <b>' + Math.round(r.pc * 100) + '%</b> of ' + SPN[sp] + ' records are half coloured by this date and <b>' + Math.round(r.pf * 100) + '%</b> are half bare. The typical ' + SPN[sp] + ' is half coloured on <b>' + fmt(s.c[10]) + '</b> and half bare on <b>' + fmt(s.f[10]) + '</b>.';
+    dots.forEach(function (d) {
+      var v = d.s[sp];
+      var k = v ? stationState(v[0], v[1], doy) : null;
+      if (!k) { d.c.setAttribute('fill', 'none'); d.c.setAttribute('stroke', '#cfc5ae'); d.c.setAttribute('r', 2.5); d.t.textContent = d.s.n + ': no ' + SPN[sp] + ' record'; return; }
+      d.c.setAttribute('fill', C[k]); d.c.setAttribute('stroke', '#fff'); d.c.setAttribute('r', 5);
+      d.t.textContent = d.s.n + ': ' + SPN[sp] + ' half coloured ' + (v[0] ? fmt(v[0]) : 'n/a') + ', half bare ' + (v[1] ? fmt(v[1]) : 'n/a');
+    });
+    nowLine.setAttribute('x1', bx(doy)); nowLine.setAttribute('x2', bx(doy));
+    Object.keys(rows).forEach(function (k) { rows[k].g.setAttribute('opacity', k === sp ? 1 : .38); });
+    placeNodes.forEach(function (p) {
+      var rr = regionState(p.pl.sp, doy);
+      p.el.style.borderLeftColor = C[rr.k];
+      var leave = Math.floor((sunsetMin(doy) - 180 - p.pl.m) / 5) * 5;
+      p.now.textContent = rr.word + ' for its ' + SPN[p.pl.sp] + '. Leave Alexanderplatz by ' + hm(leave) + ' for three hours of daylight there.';
+    });
+  }
+
+  range.addEventListener('input', function () { state.doy = +range.value; render(); });
+  Array.prototype.forEach.call(document.querySelectorAll('.lt-sp'), function (b) {
+    b.addEventListener('click', function () {
+      state.sp = b.getAttribute('data-sp');
+      Array.prototype.forEach.call(document.querySelectorAll('.lt-sp'), function (x) { x.setAttribute('aria-pressed', x === b ? 'true' : 'false'); });
+      render();
+    });
+  });
+  var today = new Date(), td = Math.floor((Date.UTC(today.getFullYear(), today.getMonth(), today.getDate()) - Date.UTC(today.getFullYear(), 0, 0)) / 864e5);
+  if (td >= 280 && td <= 330) { state.doy = td; range.value = td; }
+  render();
+})();
+</script>
+</body>
+</html>
