@@ -1,9 +1,9 @@
 {
-  "updatedAt": "2026-09-22T13:47:14.660Z",
+  "updatedAt": "2026-09-22T20:03:16.132Z",
   "source": "Wix Blog API",
   "popularSource": "Wix Blog metrics.views lifetime sort",
-  "totalPosts": 415,
-  "toolsTotal": 335,
+  "totalPosts": 416,
+  "toolsTotal": 336,
   "bookingUrl": "https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based",
   "navTopics": [
     {
@@ -281,23 +281,6 @@
       "relatedToolSlug": "berlin-beer-season-calendar"
     },
     {
-      "title": "Public Toilets in Berlin: Where to Find Them, What They Cost, and Free Options",
-      "slug": "public-toilets-in-berlin",
-      "path": "/post/public-toilets-in-berlin",
-      "url": "https://www.berlinwalk.com/post/public-toilets-in-berlin",
-      "excerpt": "Need a toilet in Berlin? This tourist guide shows where to find public toilets, what they cost, where the free options are, and when stations, malls, or the Berliner Toilette app help.",
-      "category": "Tourist Tips",
-      "categorySlug": "tourist-tips",
-      "topic": "first-day",
-      "topicLabel": "First Day in Berlin",
-      "readTime": "5 min read",
-      "publishedDate": "2026-05-16T18:51:08.424Z",
-      "image": "https://static.wixstatic.com/media/5a08a3_75e950f67226457e8af15fbe3a7f46fd~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/nsplsh_7bdfcc030bd74d1d99d1624e3799f48d~mv2.jpg",
-      "thumb": "https://static.wixstatic.com/media/5a08a3_75e950f67226457e8af15fbe3a7f46fd~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/nsplsh_7bdfcc030bd74d1d99d1624e3799f48d~mv2.jpg",
-      "alt": "Restroom sign with male and female symbols on a brick wall, pointing right. Green trees and glass buildings in the background.",
-      "relatedToolSlug": "berlin-public-toilets"
-    },
-    {
       "title": "Berlin Airport to Alexanderplatz: The Easy Way",
       "slug": "how-to-get-from-berlin-airport-to-alexanderplatz-the-easy-way",
       "path": "/post/how-to-get-from-berlin-airport-to-alexanderplatz-the-easy-way",
@@ -313,6 +296,23 @@
       "thumb": "https://static.wixstatic.com/media/nsplsh_a03121bf8b20473fb5d65a66bb71db09~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/a%20red%20and%20yellow%20train%20traveling%20past%20a%20tall%20building.jpg",
       "alt": "sbahn berlin",
       "relatedToolSlug": "berlin-landmarks-map"
+    },
+    {
+      "title": "Public Toilets in Berlin: Where to Find Them, What They Cost, and Free Options",
+      "slug": "public-toilets-in-berlin",
+      "path": "/post/public-toilets-in-berlin",
+      "url": "https://www.berlinwalk.com/post/public-toilets-in-berlin",
+      "excerpt": "Need a toilet in Berlin? This tourist guide shows where to find public toilets, what they cost, where the free options are, and when stations, malls, or the Berliner Toilette app help.",
+      "category": "Tourist Tips",
+      "categorySlug": "tourist-tips",
+      "topic": "first-day",
+      "topicLabel": "First Day in Berlin",
+      "readTime": "5 min read",
+      "publishedDate": "2026-05-16T18:51:08.424Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_75e950f67226457e8af15fbe3a7f46fd~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/nsplsh_7bdfcc030bd74d1d99d1624e3799f48d~mv2.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_75e950f67226457e8af15fbe3a7f46fd~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/nsplsh_7bdfcc030bd74d1d99d1624e3799f48d~mv2.jpg",
+      "alt": "Restroom sign with male and female symbols on a brick wall, pointing right. Green trees and glass buildings in the background.",
+      "relatedToolSlug": "berlin-public-toilets"
     },
     {
       "title": "5 Best Döner Kebab Spots in Berlin You Need to Try",
@@ -1802,6 +1802,23 @@
   ],
   "latest": [
     {
+      "title": "Church Tax in Berlin: The Month You Leave Decides Your Last Payment",
+      "slug": "church-tax-berlin",
+      "path": "/post/church-tax-berlin",
+      "url": "https://www.berlinwalk.com/post/church-tax-berlin",
+      "excerpt": "There is a line on your payslip marked Kirchensteuer that most English speakers in Berlin never read. Here is what it costs in euros, which of the ten courts takes your declaration, and why signing on 29 September and signing on 2 October are a full month of salary apart.",
+      "category": "Living in Berlin",
+      "categorySlug": "living-in-berlin",
+      "topic": "living-in-berlin",
+      "topicLabel": "Living in Berlin",
+      "readTime": "7 min read",
+      "publishedDate": "2026-09-22T19:59:33.820Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_fa3b702c61e34809b49a9c15b6d61098~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/ag-mitte-treppenhaus.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_fa3b702c61e34809b49a9c15b6d61098~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/ag-mitte-treppenhaus.jpg",
+      "alt": "The main staircase hall inside the Littenstrasse court building in Berlin-Mitte, with two curving stone stairways under a vaulted ceiling",
+      "relatedToolSlug": "berlin-church-tax-map"
+    },
+    {
       "title": "Pumpkin Patch in Berlin: Where You Can Really Pick Your Own",
       "slug": "pumpkin-patch-berlin",
       "path": "/post/pumpkin-patch-berlin",
@@ -1987,26 +2004,26 @@
       "thumb": "https://static.wixstatic.com/media/5a08a3_d25ac6ab16324246b38e61e919193cdc~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/00-rathaus-spandau.jpg",
       "alt": "The symmetrical brick and stone front of Rathaus Spandau with its tall clock tower, seen from across the main road on an overcast day",
       "relatedToolSlug": "berlin-buergeramt-errand-map"
-    },
+    }
+  ],
+  "allPosts": [
     {
-      "title": "Dentist in Berlin: What the Krankenkasse Pays and the Stamp to Get Before December",
-      "slug": "dentist-in-berlin",
-      "path": "/post/dentist-in-berlin",
-      "url": "https://www.berlinwalk.com/post/dentist-in-berlin",
-      "excerpt": "The Krankenkasse pays a fixed subsidy for every crown, bridge and denture, and a small booklet decides whether it is 60, 70 or 75 percent. Here is what public insurance covers at a Berlin dentist, what the 2026 amounts are, and why the check-up you book before 31 December protects every treatment after it.",
+      "title": "Church Tax in Berlin: The Month You Leave Decides Your Last Payment",
+      "slug": "church-tax-berlin",
+      "path": "/post/church-tax-berlin",
+      "url": "https://www.berlinwalk.com/post/church-tax-berlin",
+      "excerpt": "There is a line on your payslip marked Kirchensteuer that most English speakers in Berlin never read. Here is what it costs in euros, which of the ten courts takes your declaration, and why signing on 29 September and signing on 2 October are a full month of salary apart.",
       "category": "Living in Berlin",
       "categorySlug": "living-in-berlin",
       "topic": "living-in-berlin",
       "topicLabel": "Living in Berlin",
-      "readTime": "6 min read",
-      "publishedDate": "2026-09-19T19:47:24.387Z",
-      "image": "https://static.wixstatic.com/media/5a08a3_0e50006ee4d34b8dbd53b99302e224ef~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/00-cover-kudamm-tooth.jpg",
-      "thumb": "https://static.wixstatic.com/media/5a08a3_0e50006ee4d34b8dbd53b99302e224ef~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/00-cover-kudamm-tooth.jpg",
-      "alt": "A large white sculpture of a molar tooth hanging from a bracket above the corner entrance of a dental practice on Kurfürstendamm in Berlin-Halensee",
-      "relatedToolSlug": "berlin-dental-stamp-ledger"
-    }
-  ],
-  "allPosts": [
+      "readTime": "7 min read",
+      "publishedDate": "2026-09-22T19:59:33.820Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_fa3b702c61e34809b49a9c15b6d61098~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/ag-mitte-treppenhaus.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_fa3b702c61e34809b49a9c15b6d61098~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/ag-mitte-treppenhaus.jpg",
+      "alt": "The main staircase hall inside the Littenstrasse court building in Berlin-Mitte, with two curving stone stairways under a vaulted ceiling",
+      "relatedToolSlug": "berlin-church-tax-map"
+    },
     {
       "title": "Pumpkin Patch in Berlin: Where You Can Really Pick Your Own",
       "slug": "pumpkin-patch-berlin",

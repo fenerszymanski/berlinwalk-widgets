@@ -1,9 +1,26 @@
 {
-  "updatedAt": "2026-09-22T13:47:14.660Z",
+  "updatedAt": "2026-09-22T20:03:16.132Z",
   "source": "Wix Blog API",
-  "totalPosts": 415,
+  "totalPosts": 416,
   "bookingUrl": "https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based",
   "allPosts": [
+    {
+      "title": "Church Tax in Berlin: The Month You Leave Decides Your Last Payment",
+      "slug": "church-tax-berlin",
+      "path": "/post/church-tax-berlin",
+      "url": "https://www.berlinwalk.com/post/church-tax-berlin",
+      "excerpt": "There is a line on your payslip marked Kirchensteuer that most English speakers in Berlin never read. Here is what it costs in euros, which of the ten courts takes your declaration, and why signing on 29 September and signing on 2 October are a full month of salary apart.",
+      "category": "Living in Berlin",
+      "categorySlug": "living-in-berlin",
+      "topic": "living-in-berlin",
+      "topicLabel": "Living in Berlin",
+      "readTime": "7 min read",
+      "publishedDate": "2026-09-22T19:59:33.820Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_fa3b702c61e34809b49a9c15b6d61098~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/ag-mitte-treppenhaus.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_fa3b702c61e34809b49a9c15b6d61098~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/ag-mitte-treppenhaus.jpg",
+      "alt": "The main staircase hall inside the Littenstrasse court building in Berlin-Mitte, with two curving stone stairways under a vaulted ceiling",
+      "relatedToolSlug": "berlin-church-tax-map"
+    },
     {
       "title": "Pumpkin Patch in Berlin: Where You Can Really Pick Your Own",
       "slug": "pumpkin-patch-berlin",
