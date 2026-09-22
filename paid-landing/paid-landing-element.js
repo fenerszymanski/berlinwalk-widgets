@@ -427,7 +427,7 @@
               <div class="bw-paid-faq-grid">
                 <details open>
                   <summary>Do I pay anything now?</summary>
-                  <p>Only a &euro;2 deposit per guest to hold your place. It comes back after the walk, or if you cancel at least 24 hours before. It is not refunded for a no-show or a late cancellation. The walk itself is tip-based.</p>
+                  <p>Only a &euro;2 deposit per guest to hold your place. It comes back after the walk, or if you cancel at least 24 hours before. You can change the date free of charge up to 2 hours before the start, and the deposit moves to the new date. It is not refunded for a no-show or a late cancellation. The walk itself is tip-based.</p>
                 </details>
                 <details>
                   <summary>Where do we meet?</summary>

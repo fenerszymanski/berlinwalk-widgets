@@ -1150,7 +1150,7 @@ class BWThankYouElement extends HTMLElement {
               </li>
               <li class="bw-ty-step" data-bw-ty-reveal>
                 <h3>Come ready to walk</h3>
-                <p>Wear comfortable shoes, check the weather, and bring curiosity. Your &euro;2 deposit comes back after the walk, and the tip at the end is up to you.</p>
+                <p>Wear comfortable shoes, check the weather, and bring curiosity. Your &euro;2 deposit comes back after the walk, and the tip at the end is up to you. You can change the date free of charge up to 2 hours before the start, and the deposit moves to the new date.</p>
               </li>
             </ol>
           </div>
