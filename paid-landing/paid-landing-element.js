@@ -284,7 +284,7 @@
       this.innerHTML = `
         <style>${this._styles()}</style>
         <main class="bw-paid-landing" style="--bw-paid-hero-image: url('${heroImage}'); --bw-paid-route-image: url('${routeImage}'); --bw-paid-guide-image: url('${guideImage}');">
-          <div class="bw-paid-top-strip">9.8 / 10 on FreeTour - Free reservation - ~2h - Sep: Tue-Sat 11:30 &amp; 15:30 - Oct: selected Wed-Sun 11:30 - Check calendar</div>
+          <div class="bw-paid-top-strip">9.8 / 10 on FreeTour - Tip-based - &euro;2 refundable deposit - ~2h - Sep: Tue-Sat 11:30 &amp; 15:30 - Oct: selected Wed-Sun 11:30 - Check calendar</div>
 
           <section class="bw-paid-hero" id="bw-paid-book">
             <div class="bw-paid-inner">
@@ -295,12 +295,12 @@
 
               <div class="bw-paid-hero-grid">
                 <div class="bw-paid-hero-copy">
-                  <p class="bw-paid-eyebrow">No upfront payment</p>
+                  <p class="bw-paid-eyebrow">Tip-based, no ticket price</p>
                   <h1>Free Berlin Walking Tour</h1>
                   <p class="bw-paid-lead">Most Berlin tours focus on the Wall and Cold War. This walk starts where Berlin began: the historic centre, from Alexanderplatz through medieval streets and Museum Island to Hackescher Markt.</p>
                   <div class="bw-paid-facts" aria-label="Tour facts">
                     <span>~2 hours</span>
-                    <span>12 stops</span>
+                    <span>11 stops</span>
                     <span>English</span>
                     <span>Tip-based</span>
                     <span>Small groups</span>
@@ -314,7 +314,7 @@
                 <aside class="bw-paid-booking-panel" id="bw-paid-calendar" aria-label="Pick your tour date">
                   <div class="bw-paid-booking-above">
                     <strong>Live availability</strong>
-                    <span>Free reservation. Tip at the end. Phone is only for tour-day coordination.</span>
+                    <span>&euro;2 refundable deposit per guest. Tip at the end. Phone is only for tour-day coordination.</span>
                   </div>
                   <bw-booking-calendar
                     availability-days="${this.getAttribute('availability-days') || '365'}"
@@ -328,7 +328,7 @@
 
           <section class="bw-paid-trust" aria-label="Trust signals">
             <div class="bw-paid-inner bw-paid-trust-grid">
-              <div><b>Free to reserve</b>No card and no upfront payment.</div>
+              <div><b>&euro;2 deposit, refunded</b>Back after the walk, or if you cancel 24h ahead.</div>
               <div><b>Central start</b>World Clock, Alexanderplatz.</div>
               <div><b>Clear finish</b>Hackescher Markt.</div>
               <div><b>Local guide</b>Berlin explained while you walk.</div>
@@ -361,7 +361,7 @@
                   <div class="bw-paid-feature-img" style="background-image: url('${featureTip}');"></div>
                   <div class="bw-paid-feature-body">
                     <b>Tip-based, not prepaid</b>
-                    <p>Reserve for free. At the end, you decide the tip based on the value of the walk and your own budget.</p>
+                    <p>A &euro;2 deposit holds your place and comes back after the walk. At the end, you decide the tip based on the value of the walk and your own budget.</p>
                   </div>
                 </article>
               </div>
@@ -380,7 +380,7 @@
                 <div class="bw-paid-route-line" aria-hidden="true">
                   <span>1</span>
                   <i></i>
-                  <span>12</span>
+                  <span>11</span>
                   <i></i>
                   <span>2h</span>
                 </div>
@@ -390,7 +390,7 @@
                     <small>Meet at the World Clock, easy to reach by U-Bahn, S-Bahn, tram, and bus.</small>
                   </div>
                   <div>
-                    <b>Connect 12 stops</b>
+                    <b>Connect 11 stops</b>
                     <small>Medieval Berlin, Museum Island, political memory, and practical shortcuts between sights.</small>
                   </div>
                   <div>
@@ -427,7 +427,7 @@
               <div class="bw-paid-faq-grid">
                 <details open>
                   <summary>Do I pay anything now?</summary>
-                  <p>No. The reservation is free and there is no upfront payment. You can tip at the end of the walk.</p>
+                  <p>Only a &euro;2 deposit per guest to hold your place. It comes back after the walk, or if you cancel at least 24 hours before. It is not refunded for a no-show or a late cancellation. The walk itself is tip-based.</p>
                 </details>
                 <details>
                   <summary>Where do we meet?</summary>
@@ -449,7 +449,7 @@
             <div class="bw-paid-inner">
               <div>
                 <h2>Pick a date while there are still spots.</h2>
-                <p>Reserve for free now. Add your attendee details on the next step.</p>
+                <p>Hold your spot with a &euro;2 refundable deposit. Add your attendee details on the next step.</p>
               </div>
               <a class="bw-paid-button" href="#bw-paid-calendar" data-scroll-target="bw-paid-calendar" data-track-pick-date>Pick your date</a>
             </div>
