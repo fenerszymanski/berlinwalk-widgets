@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Berlin Church Tax Map</title>
+<link rel="stylesheet" href="../css/brand.css">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: #FFFFFF; color: #1f241d; padding: 14px 12px 10px;
+  }
+  .ct-head h1 { font-size: 19px; line-height: 1.25; color: #1B5E20; }
+  .ct-head p { font-size: 13px; line-height: 1.5; color: #454d42; margin-top: 5px; }
+  .ct-label { font-size: 10.5px; font-weight: 800; letter-spacing: .07em; text-transform: uppercase; color: #1B5E20; margin: 16px 0 7px; }
+
+  .ct-map { border: 1px solid #dfe6d6; border-radius: 12px; overflow: hidden; background: #f7f9f3; }
+  .ct-map svg { display: block; width: 100%; height: auto; touch-action: manipulation; }
+  .ct-area { cursor: pointer; stroke: #ffffff; stroke-width: .8; }
+  .ct-area:focus { outline: none; }
+  .ct-area.is-on { stroke: #10230f; stroke-width: 2.4; }
+  .ct-pin { pointer-events: none; }
+  .ct-hint { font-size: 11.5px; color: #4d5649; padding: 7px 10px; border-top: 1px solid #dfe6d6; background: #fcfdf9; line-height: 1.45; }
+
+  .ct-key { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 9px; }
+  .ct-kb { font-family: inherit; font-size: 11.5px; font-weight: 700; border: 1.5px solid #dde5d3; background: #fff; color: #3f473c;
+    border-radius: 999px; padding: 5px 10px 5px 7px; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; }
+  .ct-kb i { width: 11px; height: 11px; border-radius: 3px; display: inline-block; }
+  .ct-kb.is-on { border-color: #10230f; background: #FFE600; color: #123D18; }
+
+  .ct-card { margin-top: 12px; border: 1.5px solid #1B5E20; border-radius: 12px; padding: 12px; }
+  .ct-card h2 { font-size: 16px; color: #1B5E20; line-height: 1.3; }
+  .ct-card .ct-where { font-size: 12.5px; color: #596254; margin-top: 3px; }
+  .ct-card dl { margin-top: 9px; display: grid; grid-template-columns: 74px 1fr; gap: 5px 9px; font-size: 12.5px; line-height: 1.45; }
+  .ct-card dt { font-weight: 800; color: #1B5E20; }
+  .ct-flag { margin-top: 9px; background: #FFE600; color: #123D18; border-radius: 8px; padding: 7px 9px; font-size: 12.5px; line-height: 1.45; font-weight: 700; }
+
+  .ct-money { margin-top: 18px; border-top: 1px solid #e6ece0; padding-top: 14px; }
+  .ct-in { display: flex; flex-wrap: wrap; align-items: center; gap: 9px; }
+  .ct-in label { font-size: 13px; line-height: 1.4; color: #2b3128; flex: 1 1 190px; }
+  .ct-in .ct-euro { position: relative; }
+  .ct-in .ct-euro span { position: absolute; left: 10px; top: 50%; transform: translateY(-50%); font-size: 14px; font-weight: 800; color: #1B5E20; }
+  .ct-in input { font-family: inherit; font-size: 15px; font-weight: 700; color: #123D18; width: 118px;
+    border: 1.5px solid #1B5E20; border-radius: 10px; padding: 9px 10px 9px 24px; background: #fff; }
+  .ct-in input:focus { outline: 2px solid #FFE600; outline-offset: 1px; }
+
+  .ct-verdict { margin-top: 12px; font-size: 14px; line-height: 1.5; color: #2b3128; }
+  .ct-verdict strong { color: #1B5E20; }
+  .ct-chart { margin-top: 10px; border: 1px solid #dfe6d6; border-radius: 12px; background: #fcfdf9; padding: 6px 4px 2px; }
+  .ct-chart svg { display: block; width: 100%; height: auto; }
+  .ct-months { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 4px; margin-top: 9px; }
+  .ct-mo { font-family: inherit; font-size: 10.5px; font-weight: 700; border: 1.5px solid #dde5d3; background: #fff; color: #3f473c;
+    border-radius: 8px; padding: 6px 1px; cursor: pointer; min-width: 0; overflow: hidden; }
+  .ct-mo.is-on { border-color: #10230f; background: #1B5E20; color: #fff; }
+  .ct-fee { margin-top: 11px; font-size: 12.5px; line-height: 1.5; color: #454d42; }
+  .ct-fee b { color: #1B5E20; }
+  .ct-src { margin-top: 14px; font-size: 11px; line-height: 1.5; color: #6b7366; }
+  .ct-src a { color: #1B5E20; }
+  @media (max-width: 420px) {
+    .ct-head h1 { font-size: 17px; }
+    .ct-card dl { grid-template-columns: 66px 1fr; }
+  }
+</style>
+</head>
+<body>
+  <div class="ct-head">
+    <h1>Which Berlin court takes your church exit, and what waiting costs</h1>
+    <p>Berlin runs the declaration through ten Amtsgerichte, and their map is the old district map, not today's twelve Bezirke. Tap where you live, then put your own payslip figure in.</p>
+  </div>
+
+  <div class="ct-label">Tap your Ortsteil</div>
+  <div class="ct-map">
+    <svg id="ctMap" viewBox="0 0 640 530" role="img" aria-label="Map of Berlin coloured by the Amtsgericht that takes a church exit declaration"></svg>
+    <div class="ct-hint" id="ctHint"></div>
+  </div>
+  <div class="ct-key" id="ctKey"></div>
+
+  <div class="ct-card" id="ctCard"></div>
+
+  <div class="ct-money">
+    <div class="ct-label">What the delay costs</div>
+    <div class="ct-in">
+      <label for="ctMonthly">Church tax on your monthly payslip, the line marked <b>Kirchensteuer</b> or <b>KiSt</b></label>
+      <div class="ct-euro"><span>&euro;</span><input id="ctMonthly" type="number" min="0" max="900" step="1" value="54" inputmode="decimal" aria-label="Church tax per month in euros"></div>
+    </div>
+    <div class="ct-verdict" id="ctVerdict"></div>
+    <div class="ct-chart">
+      <svg id="ctChart" viewBox="0 0 640 300" role="img" aria-label="Church tax still deducted over the next twelve months"></svg>
+    </div>
+    <div class="ct-months" id="ctMonths"></div>
+    <div class="ct-fee" id="ctFee"></div>
+  </div>
+
+  <div class="ct-src" id="ctSrc"></div>
+
+<script src="../js/brand.js"></script>
+<script>
+(function () {
+  var D = null, picked = null, later = 5, MONTHS = [];
+  var MON = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
+  function buildMonths() {
+    var now = new Date();
+    var y = now.getFullYear(), m = now.getMonth();
+    var list = [];
+    for (var i = 0; i < 12; i += 1) {
+      var mm = (m + i) % 12, yy = y + Math.floor((m + i) / 12);
+      list.push({ short: MON[mm], label: MON[mm] + ' ' + yy });
+    }
+    return list;
+  }
+  var NS = 'http://www.w3.org/2000/svg';
+  var COL = {
+    mitte: '#1B5E20', wedding: '#4C956C', pankow: '#8FBF7F', kreuzberg: '#C1440E',
+    schoeneberg: '#E8A33D', charlottenburg: '#3A6EA5', neukoelln: '#7D4E9E',
+    spandau: '#2A9D8F', lichtenberg: '#A4133C', koepenick: '#6B4A2F'
+  };
+  var mapEl = document.getElementById('ctMap');
+  var chartEl = document.getElementById('ctChart');
+
+  function el(tag, attrs, parent) {
+    var n = document.createElementNS(NS, tag);
+    Object.keys(attrs || {}).forEach(function (k) { n.setAttribute(k, attrs[k]); });
+    if (parent) parent.appendChild(n);
+    return n;
+  }
+  function esc(s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
+  function eur(n) { return '€' + Math.round(n).toLocaleString('en-GB'); }
+
+  /* Equirectangular projection framed on the Berlin city boundary, true aspect at 52.51 N. */
+  var LON0 = 13.088, LON1 = 13.761, LAT0 = 52.338, LAT1 = 52.675;
+  var KX = Math.cos(52.51 * Math.PI / 180);
+  var MW = 616, MH = MW * (LAT1 - LAT0) / ((LON1 - LON0) * KX);
+  function px(lon) { return 12 + (lon - LON0) / (LON1 - LON0) * MW; }
+  function py(lat) { return 12 + MH - (lat - LAT0) / (LAT1 - LAT0) * MH; }
+
+  function courtById(id) {
+    for (var i = 0; i < D.courts.length; i += 1) { if (D.courts[i].id === id) return D.courts[i]; }
+    return D.courts[0];
+  }
+
+  function drawMap() {
+    mapEl.innerHTML = '';
+    var g = el('g', {}, mapEl);
+    D.areas.forEach(function (a, i) {
+      var d = a.r.map(function (ring) {
+        return 'M' + ring.map(function (p) { return px(p[0]).toFixed(1) + ' ' + py(p[1]).toFixed(1); }).join('L') + 'Z';
+      }).join(' ');
+      var path = el('path', {
+        d: d, fill: COL[a.c], 'fill-opacity': '.86', class: 'ct-area', tabindex: '0',
+        role: 'button', 'data-i': String(i)
+      }, g);
+      el('title', {}, path).textContent = a.n + ' – ' + courtById(a.c).name;
+    });
+    var pins = el('g', { class: 'ct-pin' }, mapEl);
+    D.courts.forEach(function (c) {
+      var x = px(c.at[0]), y = py(c.at[1]);
+      el('rect', { x: (x - 5).toFixed(1), y: (y - 5).toFixed(1), width: '10', height: '10', rx: '2', fill: '#ffffff', stroke: '#10230f', 'stroke-width': '2' }, pins);
+      el('rect', { x: (x - 2).toFixed(1), y: (y - 2).toFixed(1), width: '4', height: '4', fill: '#10230f' }, pins);
+    });
+  }
+
+  function drawKey() {
+    document.getElementById('ctKey').innerHTML = D.courts.map(function (c) {
+      return '<button type="button" class="ct-kb" data-c="' + c.id + '"><i style="background:' + COL[c.id] + '"></i>' +
+        esc(c.name.replace('Amtsgericht ', '')) + '</button>';
+    }).join('');
+  }
+
+  function paintSelection() {
+    var nodes = mapEl.querySelectorAll('.ct-area');
+    for (var i = 0; i < nodes.length; i += 1) {
+      var a = D.areas[Number(nodes[i].getAttribute('data-i'))];
+      var on = picked && a.c === picked.c;
+      nodes[i].setAttribute('fill-opacity', on ? '1' : (picked ? '.3' : '.86'));
+      nodes[i].setAttribute('class', 'ct-area' + (picked && a.n === picked.n ? ' is-on' : ''));
+    }
+    var keys = document.querySelectorAll('.ct-kb');
+    for (var k = 0; k < keys.length; k += 1) {
+      keys[k].className = 'ct-kb' + (picked && keys[k].getAttribute('data-c') === picked.c ? ' is-on' : '');
+    }
+    document.getElementById('ctHint').innerHTML = picked
+      ? '<b>' + esc(picked.n) + '</b> sits in Bezirk ' + esc(picked.b) + ', and signs at ' + esc(courtById(picked.c).name) + '.'
+      : 'Ten colours, ten courts. Four Bezirke are split between two of them, which is the whole trap.';
+  }
+
+  function drawCard() {
+    var box = document.getElementById('ctCard');
+    if (!picked) {
+      box.innerHTML = '<h2>Pick the part of Berlin you live in</h2>' +
+        '<p class="ct-where">Your court follows your registered address, not your Bezirk and not the church you belong to. ' +
+        'Tap the map or a colour above.</p>';
+      return;
+    }
+    var c = courtById(picked.c);
+    box.innerHTML = '<h2>' + esc(c.name) + '</h2>' +
+      '<div class="ct-where">' + esc(picked.n) + ', Bezirk ' + esc(picked.b) + '</div>' +
+      '<dl><dt>Address</dt><dd>' + esc(c.street) + ', ' + esc(c.postcode) + '</dd>' +
+      '<dt>Covers</dt><dd>' + esc(c.covers) + '</dd>' +
+      '<dt>Fee</dt><dd>' + eur(D.fee) + ', in person, no online route</dd></dl>' +
+      '<div class="ct-flag">' + esc(c.note) + '</div>';
+  }
+
+  function drawMonths() {
+    document.getElementById('ctMonths').innerHTML = MONTHS.map(function (m, i) {
+      if (i === 0) return '';
+      return '<button type="button" class="ct-mo' + (i === later ? ' is-on' : '') + '" data-m="' + i + '">' +
+        esc(m.short) + '<br>' + esc(m.label.split(' ')[1]) + '</button>';
+    }).join('');
+  }
+
+  function monthly() {
+    var v = Number(document.getElementById('ctMonthly').value);
+    if (!isFinite(v) || v < 0) return 0;
+    return Math.min(v, 900);
+  }
+
+  function drawChart() {
+    var m = monthly();
+    var n = MONTHS.length;
+    var nowLine = [], lateLine = [];
+    for (var i = 0; i < n; i += 1) {
+      nowLine.push(m);
+      lateLine.push(m * Math.min(i + 1, later + 1));
+    }
+    var top = Math.max(lateLine[n - 1], m * 2, 1);
+    var X0 = 68, X1 = 624, Y0 = 26, Y1 = 246;
+    function cx(i) { return X0 + i / (n - 1) * (X1 - X0); }
+    function cy(v) { return Y1 - v / top * (Y1 - Y0); }
+
+    chartEl.innerHTML = '';
+    el('rect', { x: '0', y: '0', width: '640', height: '300', fill: '#fcfdf9' }, chartEl);
+    [0, 0.5, 1].forEach(function (f) {
+      var v = top * f;
+      el('line', { x1: X0, y1: cy(v).toFixed(1), x2: X1, y2: cy(v).toFixed(1), stroke: '#e2e9da', 'stroke-width': '1' }, chartEl);
+      var t = el('text', { x: X0 - 8, y: (cy(v) + 4).toFixed(1), 'text-anchor': 'end', 'font-size': '13', fill: '#6b7366' }, chartEl);
+      t.textContent = eur(v);
+    });
+
+    var lateD = lateLine.map(function (v, i) { return (i ? 'L' : 'M') + cx(i).toFixed(1) + ' ' + cy(v).toFixed(1); }).join('');
+    el('path', { d: lateD + 'L' + cx(n - 1).toFixed(1) + ' ' + Y1 + 'L' + cx(0).toFixed(1) + ' ' + Y1 + 'Z', fill: '#C1440E', 'fill-opacity': '.12' }, chartEl);
+    el('path', { d: lateD, fill: 'none', stroke: '#C1440E', 'stroke-width': '3', 'stroke-linejoin': 'round' }, chartEl);
+
+    var nowD = nowLine.map(function (v, i) { return (i ? 'L' : 'M') + cx(i).toFixed(1) + ' ' + cy(v).toFixed(1); }).join('');
+    el('path', { d: nowD, fill: 'none', stroke: '#1B5E20', 'stroke-width': '3', 'stroke-dasharray': '7 5' }, chartEl);
+
+    el('circle', { cx: cx(later).toFixed(1), cy: cy(lateLine[later]).toFixed(1), r: '6', fill: '#C1440E', stroke: '#fff', 'stroke-width': '2' }, chartEl);
+    el('circle', { cx: cx(0).toFixed(1), cy: cy(m).toFixed(1), r: '6', fill: '#1B5E20', stroke: '#fff', 'stroke-width': '2' }, chartEl);
+
+    MONTHS.forEach(function (mo, i) {
+      if (i % 2) return;
+      var t = el('text', { x: cx(i).toFixed(1), y: Y1 + 22, 'text-anchor': 'middle', 'font-size': '13', fill: '#6b7366' }, chartEl);
+      t.textContent = mo.short;
+    });
+
+    var l1 = el('text', { x: X0, y: 282, 'font-size': '14', fill: '#1B5E20', 'font-weight': '700' }, chartEl);
+    l1.textContent = '– –  you go this month';
+    var l2 = el('text', { x: X0 + 286, y: 282, 'font-size': '14', fill: '#C1440E', 'font-weight': '700' }, chartEl);
+    l2.textContent = '—  you wait until ' + MONTHS[later].label;
+
+    var cost = lateLine[n - 1] - nowLine[n - 1];
+    document.getElementById('ctVerdict').innerHTML = m === 0
+      ? 'Put the number from your payslip in and the two lines separate.'
+      : 'Sign this month and <strong>' + eur(m) + '</strong> is the last church tax that leaves your salary. Wait until ' +
+        esc(MONTHS[later].label) + ' and another <strong>' + eur(cost) + '</strong> goes first.';
+
+    var days = m > 0 ? Math.ceil(D.fee / m * 30.4) : 0;
+    document.getElementById('ctFee').innerHTML = m > 0
+      ? 'The court charges <b>' + eur(D.fee) + '</b>. At ' + eur(m) + ' a month that fee is back in your pocket after about <b>' +
+        days + ' days</b>. The exemption starts at the end of the month your declaration reaches the court, so the calendar, not the queue, is what you are racing.'
+      : 'The court charges <b>' + eur(D.fee) + '</b> whatever you earn.';
+  }
+
+  function drawSrc() {
+    document.getElementById('ctSrc').innerHTML =
+      'Court addresses and jurisdictions from the Berlin service portal and the courts’ own Gerichtsbezirk pages. ' +
+      'Ortsteil boundaries from the Berlin Geoportal (Geoportal Berlin, Ortsteile). Checked ' + esc(D.checked) + '.';
+  }
+
+  function redraw() { paintSelection(); drawCard(); drawChart(); }
+
+  mapEl.addEventListener('click', function (ev) {
+    var t = ev.target.closest ? ev.target.closest('.ct-area') : null;
+    if (!t) return;
+    picked = D.areas[Number(t.getAttribute('data-i'))];
+    redraw();
+  });
+  mapEl.addEventListener('keydown', function (ev) {
+    if (ev.key !== 'Enter' && ev.key !== ' ') return;
+    var t = ev.target.closest ? ev.target.closest('.ct-area') : null;
+    if (!t) return;
+    ev.preventDefault();
+    picked = D.areas[Number(t.getAttribute('data-i'))];
+    redraw();
+  });
+  document.getElementById('ctKey').addEventListener('click', function (ev) {
+    var b = ev.target.closest('.ct-kb');
+    if (!b) return;
+    var id = b.getAttribute('data-c');
+    for (var i = 0; i < D.areas.length; i += 1) { if (D.areas[i].c === id) { picked = D.areas[i]; break; } }
+    redraw();
+  });
+  document.getElementById('ctMonths').addEventListener('click', function (ev) {
+    var b = ev.target.closest('.ct-mo');
+    if (!b) return;
+    later = Number(b.getAttribute('data-m'));
+    drawMonths();
+    drawChart();
+  });
+  document.getElementById('ctMonthly').addEventListener('input', drawChart);
+
+  fetch('data.json').then(function (r) { return r.json(); }).then(function (json) {
+    D = json;
+    MONTHS = buildMonths();
+    document.getElementById('ctMonthly').value = String(D.defaultMonthly);
+    drawMap(); drawKey(); drawMonths(); drawSrc(); redraw();
+    if (window.BW && window.BW.resize) window.BW.resize();
+  });
+})();
+</script>
+</body>
+</html>

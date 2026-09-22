@@ -10176,6 +10176,37 @@
       "iconStatus": "live-wix-media",
       "image": "https://static.wixstatic.com/media/5a08a3_a575851c44fe45b7bd1034a56e6a1a93~mv2.png",
       "cmsItemId": "fab819f1-a16c-40fa-bc0a-11fa8d915c65"
+    },
+    {
+      "slug": "berlin-church-tax-map",
+      "title": "Berlin Church Tax Map",
+      "lead": "Which of Berlin's ten Amtsgerichte takes your church exit declaration, on a real map of all 97 Ortsteile, because the court map still follows the districts the city had before 2001. Tap where you live for the address and what that court covers, then put the Kirchensteuer line from your payslip in to see what each month of waiting costs and how fast the €30 fee pays for itself. Checked on 22 September 2026.",
+      "category": "Money",
+      "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/berlin-church-tax-map/",
+      "embedHeight": 1740,
+      "hubCategory": "MoneyShopping",
+      "type": "Map",
+      "priority": 3,
+      "tags": [
+        "church tax",
+        "kirchensteuer",
+        "kirchenaustritt",
+        "amtsgericht",
+        "tax",
+        "payslip",
+        "living in berlin",
+        "admin"
+      ],
+      "aliases": [
+        "church tax berlin",
+        "kirchensteuer berlin",
+        "kirchenaustritt berlin",
+        "leave the church berlin",
+        "amtsgericht kirchenaustritt",
+        "church tax germany 9 percent"
+      ],
+      "iconStatus": "live-wix-media",
+      "image": "https://static.wixstatic.com/media/5a08a3_18b8a687cc7e4e668075aab439cca572~mv2.png"
     }
   ],
   "hubCategories": [

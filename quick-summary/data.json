@@ -5305,5 +5305,18 @@
       "**Check your ticket zone.** Dahlem and Späth are AB, Elstal and Fredersdorf ABC. Klaistow and Kremmen are outside ABC, so take the Deutschlandticket.",
       "**Bring cash** for field tills and village festivals, and a sturdy bag for the ride home."
     ]
+  },
+  "church-tax-berlin": {
+    "title": "Church Tax in Berlin - Quick Summary",
+    "icon": "🧾",
+    "kicker": "BERLINWALK.COM • LIVING IN BERLIN",
+    "items": [
+      "**Berlin charges 9 per cent of your income tax**, not of your salary, and caps it at **3 per cent of taxable income** automatically. On taxable income of €40,000 that is about **€649 a year**; at €60,000 about **€1,281**.",
+      "**The fastest check is your payslip.** Find the line marked **Kirchensteuer** or **KiSt** and multiply by twelve. If there is no such line, you are not paying it.",
+      "**You cannot leave online.** The declaration is signed in person at the Amtsgericht for your registered address, or written out and notarised. The court fee is **€30**, and the Berlin police warn about sites that offer to do it for you.",
+      "**Your court is not your Bezirk.** Ten courts follow the pre-2001 district map: Prenzlauer Berg goes to Mitte, Wedding and Gesundbrunnen to Wedding, Tempelhof and Mariendorf to Kreuzberg, Marzahn-Hellersdorf to Lichtenberg.",
+      "**The month decides the money.** The exemption starts at the end of the month your declaration reaches the court, so the month you sign is the last month you pay.",
+      "**Check before you book if you work for a church employer.** Caritas, Diakonie, church kindergartens and hospitals treat leaving as a loyalty question, although a March 2026 European Court of Justice ruling limits dismissal on that ground alone."
+    ]
   }
 }

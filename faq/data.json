@@ -12949,5 +12949,39 @@
         "a": "In the **brown Biotonne**, the organic waste bin in your courtyard, like any other vegetable scraps. Cut a large pumpkin into pieces first."
       }
     ]
+  },
+  "church-tax-berlin": {
+    "title": "Church Tax in Berlin - FAQ",
+    "subtitle": "What church tax costs in Berlin, which of the ten Amtsgerichte takes your declaration, and why the month you sign decides your last payment.",
+    "items": [
+      {
+        "q": "How much is church tax in Berlin?",
+        "a": "Berlin charges **9 per cent of your income tax**, not of your gross salary, with an automatic cap at **3 per cent of taxable income**. On the 2026 tariff that works out at roughly **€380 a year** on €30,000 of taxable income, **€649** on €40,000, **€1,281** on €60,000 and **€2,022** on €80,000. The cap only starts to matter above about €128,500 on the single-person tariff."
+      },
+      {
+        "q": "How do I know whether I am paying church tax?",
+        "a": "Look at your monthly payslip for a line marked **Kirchensteuer** or **KiSt**, under the income tax. Multiply it by twelve for the annual figure. If the line is not there, you are not registered as a member and there is nothing to do."
+      },
+      {
+        "q": "Can I leave the church online in Berlin?",
+        "a": "No. The declaration has to be signed in person at the Amtsgericht for your registered address, or written out yourself and certified by a notary and then filed with that court. **There is no online route**, nobody can do it for you with a power of attorney, and the Berlin police have warned about sites that take a payment and promise to file it."
+      },
+      {
+        "q": "Which Amtsgericht do I go to?",
+        "a": "The one covering your registered address, and the court map follows the districts Berlin had before 2001. **Prenzlauer Berg** goes to Amtsgericht Mitte, **Wedding and Gesundbrunnen** to Amtsgericht Wedding with all of Reinickendorf, **Tempelhof, Mariendorf, Marienfelde and Lichtenrade** to Amtsgericht Kreuzberg, and **Marzahn-Hellersdorf** to Amtsgericht Lichtenberg. The map in this article colours every Ortsteil by its court."
+      },
+      {
+        "q": "When does the church tax actually stop?",
+        "a": "The exemption starts **at the end of the month in which your declaration reaches the court**. The month you sign is your last month of church tax, so signing on 29 September and signing on 2 October are one full month of salary apart."
+      },
+      {
+        "q": "What does it cost and what do I need to bring?",
+        "a": "The court fee is **€30**; a notarised signature costs extra on top. Bring a **valid Personalausweis, or a passport with a Meldebescheinigung**. Children’s birth certificates are needed if you are declaring for them as well, and a marriage certificate if you want the entry added to the marriage register."
+      },
+      {
+        "q": "What do I give up by leaving?",
+        "a": "A church wedding, a church funeral and the right to act as a godparent, and in the Catholic church the exit counts as a serious break. You can rejoin later through a Wiedereintrittsstelle. If you work for Caritas, Diakonie, a church kindergarten or a church hospital, take advice first: leaving is still treated as a loyalty question, although the European Court of Justice ruled in March 2026 that it cannot on its own justify dismissal where membership is not a genuine requirement for the job."
+      }
+    ]
   }
 }
