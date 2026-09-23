@@ -1,9 +1,9 @@
 {
-  "updatedAt": "2026-09-23T07:46:07.046Z",
+  "updatedAt": "2026-09-23T14:02:54.352Z",
   "source": "Wix Blog API",
   "popularSource": "Wix Blog metrics.views lifetime sort",
-  "totalPosts": 418,
-  "toolsTotal": 338,
+  "totalPosts": 419,
+  "toolsTotal": 339,
   "bookingUrl": "https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based",
   "navTopics": [
     {
@@ -1802,6 +1802,23 @@
   ],
   "latest": [
     {
+      "title": "Kindergeld in Berlin: The Six Months You Will Never Get Back",
+      "slug": "kindergeld-berlin",
+      "path": "/post/kindergeld-berlin",
+      "url": "https://www.berlinwalk.com/post/kindergeld-berlin",
+      "excerpt": "Kindergeld is 259 euros a month for every child, it does not depend on what you earn, and the Familienkasse pays it back exactly six months from the month your application arrives. Six lost months are 1,554 euros. Here is who is entitled, what the office needs, and the one deadline that repeats on the first of every month.",
+      "category": "Living in Berlin",
+      "categorySlug": "living-in-berlin",
+      "topic": "living-in-berlin",
+      "topicLabel": "Living in Berlin",
+      "readTime": "6 min read",
+      "publishedDate": "2026-09-23T13:58:59.938Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_42b9610e37f04bf498cd07368794cbd9~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-playground-rheingaustrasse.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_42b9610e37f04bf498cd07368794cbd9~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-playground-rheingaustrasse.jpg",
+      "alt": "A quiet morning at the playground on Rheingaustrasse in Berlin-Friedenau, sand and climbing frames under mature trees with a pale apartment gable behind",
+      "relatedToolSlug": "berlin-kindergeld-backpay-clock"
+    },
+    {
       "title": "Milieuschutz in Berlin: The 82 Areas and What Your Landlord Cannot Install",
       "slug": "milieuschutz-berlin",
       "path": "/post/milieuschutz-berlin",
@@ -1987,26 +2004,26 @@
       "thumb": "https://static.wixstatic.com/media/5a08a3_b89799d834a5415bba4efae6f87aa1cb~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-wohnhaus-oderstrasse-neukoelln.jpg",
       "alt": "A five-storey Berlin residential block on the corner of Oderstrasse and Kienitzer Strasse in Neukoelln at dusk, its windows lit and cars parked along the kerb",
       "relatedToolSlug": "berlin-hausrat-claim-line"
-    },
+    }
+  ],
+  "allPosts": [
     {
-      "title": "Sick Leave in Berlin: How Long the Money Lasts and the Six-Month Rule Nobody Warns You About",
-      "slug": "sick-leave-in-berlin",
-      "path": "/post/sick-leave-in-berlin",
-      "url": "https://www.berlinwalk.com/post/sick-leave-in-berlin",
-      "excerpt": "Six weeks of full pay is 42 calendar days per illness, not a yearly allowance, and for the same illness it only starts again after six clear months or twelve months from the first day off. Here is what your employer owes you, what the Krankenkasse pays after that, and the one gap that ends it.",
+      "title": "Kindergeld in Berlin: The Six Months You Will Never Get Back",
+      "slug": "kindergeld-berlin",
+      "path": "/post/kindergeld-berlin",
+      "url": "https://www.berlinwalk.com/post/kindergeld-berlin",
+      "excerpt": "Kindergeld is 259 euros a month for every child, it does not depend on what you earn, and the Familienkasse pays it back exactly six months from the month your application arrives. Six lost months are 1,554 euros. Here is who is entitled, what the office needs, and the one deadline that repeats on the first of every month.",
       "category": "Living in Berlin",
       "categorySlug": "living-in-berlin",
       "topic": "living-in-berlin",
       "topicLabel": "Living in Berlin",
-      "readTime": "9 min read",
-      "publishedDate": "2026-09-20T14:02:35.804Z",
-      "image": "https://static.wixstatic.com/media/5a08a3_8087766b6e5b4a8286a88cb84e9f12cd~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-aerztehaus-hohenzollerndamm.jpg",
-      "thumb": "https://static.wixstatic.com/media/5a08a3_8087766b6e5b4a8286a88cb84e9f12cd~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-aerztehaus-hohenzollerndamm.jpg",
-      "alt": "A glass-fronted medical centre on Hohenzollerndamm in Berlin seen from across the street on an October afternoon, with autumn trees in front of it",
-      "relatedToolSlug": "berlin-sick-pay-clock"
-    }
-  ],
-  "allPosts": [
+      "readTime": "6 min read",
+      "publishedDate": "2026-09-23T13:58:59.938Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_42b9610e37f04bf498cd07368794cbd9~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-playground-rheingaustrasse.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_42b9610e37f04bf498cd07368794cbd9~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-playground-rheingaustrasse.jpg",
+      "alt": "A quiet morning at the playground on Rheingaustrasse in Berlin-Friedenau, sand and climbing frames under mature trees with a pale apartment gable behind",
+      "relatedToolSlug": "berlin-kindergeld-backpay-clock"
+    },
     {
       "title": "Milieuschutz in Berlin: The 82 Areas and What Your Landlord Cannot Install",
       "slug": "milieuschutz-berlin",
