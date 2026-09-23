@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Berlin Broadband Speed Claim</title>
+<link rel="stylesheet" href="../css/brand.css">
+<style>
+  :root {
+    --green: #1B5E20;
+    --deep: #123D18;
+    --yellow: #FFE600;
+    --lime: #7CB342;
+    --cream: #FAFAF5;
+    --ink: #212121;
+    --amber: #E08600;
+    --red: #C62828;
+    --line: #E0E4DA;
+    --muted: #6b7360;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--cream); color: var(--ink); }
+  .bsc { max-width: 780px; margin: 0 auto; padding: 14px 12px 12px; }
+
+  .bsc-head h2 { font-size: 1.06rem; margin: 0; color: var(--green); line-height: 1.3; }
+  .bsc-head p { margin: 5px 0 0; font-size: .77rem; line-height: 1.55; color: #555; }
+
+  /* the chart is the tool: it is drawn before anything is touched */
+  .bsc-plot { margin: 13px 0 0; background: #fff; border: 2px solid var(--green); border-radius: 12px; padding: 8px 6px 4px; }
+  .bsc-plot svg { display: block; width: 100%; height: auto; }
+
+  .bsc-verdict { margin: 9px 0 0; border-radius: 12px; padding: 11px 12px; border: 2px solid var(--green); background: var(--yellow); color: var(--deep); }
+  .bsc-verdict.no { background: #F2F6EC; border-color: #C8D6B8; }
+  .bsc-verdict h3 { margin: 0; font-size: .92rem; line-height: 1.35; }
+  .bsc-verdict p { margin: 6px 0 0; font-size: .78rem; line-height: 1.55; }
+  .bsc-crit { list-style: none; margin: 9px 0 0; padding: 0; display: grid; gap: 6px; }
+  .bsc-crit li { display: flex; gap: 8px; align-items: flex-start; font-size: .745rem; line-height: 1.45; }
+  .bsc-crit .mark { flex: 0 0 auto; width: 19px; height: 19px; border-radius: 50%; display: grid; place-items: center; font-size: .66rem; font-weight: 800; color: #fff; background: #98A38C; }
+  .bsc-crit li.hit .mark { background: var(--red); }
+  .bsc-crit li.hit b { color: var(--deep); }
+
+  .bsc-money { margin: 9px 0 0; display: flex; flex-wrap: wrap; gap: 8px; }
+  .bsc-money div { flex: 1 1 150px; background: #fff; border: 1px solid var(--line); border-radius: 10px; padding: 8px 10px; }
+  .bsc-money span { display: block; font-size: .6rem; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; color: var(--muted); }
+  .bsc-money b { display: block; font-size: 1.02rem; color: var(--deep); margin-top: 2px; }
+  .bsc-money i { display: block; font-style: normal; font-size: .67rem; color: var(--muted); margin-top: 2px; line-height: 1.4; }
+
+  .bsc-steps { display: flex; gap: 6px; margin: 14px 0 0; }
+  .bsc-steps button {
+    flex: 1 1 0; font: inherit; font-size: .71rem; font-weight: 700; color: var(--muted);
+    padding: 9px 8px; border-radius: 9px 9px 0 0; border: 2px solid var(--line); border-bottom: none;
+    background: #fff; cursor: pointer; min-height: 46px; line-height: 1.25; text-align: left;
+  }
+  .bsc-steps button b { display: block; font-size: .6rem; letter-spacing: .05em; text-transform: uppercase; color: #9aa392; font-weight: 800; }
+  .bsc-steps button.on { background: var(--green); color: #fff; border-color: var(--green); }
+  .bsc-steps button.on b { color: var(--yellow); }
+  .bsc-steps button:focus-visible { outline: 3px solid var(--deep); outline-offset: 2px; }
+
+  .bsc-panel { background: #fff; border: 2px solid var(--green); border-radius: 0 0 12px 12px; padding: 12px 11px; }
+  .bsc-panel p.hint { margin: 0 0 10px; font-size: .74rem; line-height: 1.55; color: var(--muted); }
+  .bsc-grid { display: flex; flex-wrap: wrap; gap: 9px; align-items: end; }
+  .bsc-f { flex: 1 1 150px; min-width: 130px; }
+  .bsc-f label { display: block; font-size: .61rem; font-weight: 800; letter-spacing: .04em; text-transform: uppercase; color: var(--deep); }
+  .bsc-f em { display: block; font-style: normal; font-size: .64rem; color: var(--muted); margin: 2px 0 4px; line-height: 1.35; min-height: 2.1em; }
+  .bsc-f input {
+    width: 100%; font: inherit; font-size: .88rem; font-weight: 700; padding: 9px 10px;
+    border: 2px solid var(--line); border-radius: 9px; background: #fff; color: var(--ink); min-height: 44px;
+  }
+  .bsc-f input:focus-visible { outline: 3px solid var(--green); outline-offset: 1px; }
+
+  .bsc-day { display: flex; gap: 9px; align-items: flex-end; margin: 0 0 9px; }
+  .bsc-day > span { flex: 0 0 52px; font-size: .64rem; font-weight: 800; text-transform: uppercase; letter-spacing: .04em; color: var(--deep); padding-bottom: 12px; }
+
+  .bsc-note { margin: 10px 0 0; font-size: .7rem; line-height: 1.5; color: var(--muted); }
+  .bsc-note a { color: var(--green); }
+
+  @media (max-width: 430px) {
+    .bsc-steps button { font-size: .65rem; padding: 8px 6px; }
+    .bsc-day { flex-wrap: wrap; }
+    .bsc-day > span { flex: 1 1 100%; padding-bottom: 0; }
+  }
+</style>
+</head>
+<body>
+<div class="bsc">
+  <div class="bsc-head">
+    <h2>Is your line slow enough to cut the bill?</h2>
+    <p>Germany lets you reduce a broadband bill, or walk out of the contract, when the measured speed misses the contract badly enough. Three rules decide it, and only one of them has to be met. Put your own numbers in and see which ones you are already hitting.</p>
+  </div>
+
+  <div class="bsc-plot">
+    <svg id="plot" viewBox="0 0 700 300" role="img" aria-label="Measured download speeds on three days against the three legal thresholds"></svg>
+  </div>
+
+  <div class="bsc-verdict" id="verdict">
+    <h3 id="vTitle"></h3>
+    <p id="vBody"></p>
+    <ul class="bsc-crit" id="vCrit"></ul>
+  </div>
+
+  <div class="bsc-money" id="money"></div>
+
+  <div class="bsc-steps" role="tablist" aria-label="Steps">
+    <button type="button" id="s0" role="tab" aria-selected="true" class="on"><b>Step 1</b>Your contract</button>
+    <button type="button" id="s1" role="tab" aria-selected="false"><b>Step 2</b>Three measurement days</button>
+    <button type="button" id="s2" role="tab" aria-selected="false"><b>Step 3</b>All 30 readings</button>
+  </div>
+
+  <div class="bsc-panel">
+    <div id="p0">
+      <p class="hint">These three numbers are on the Vertragsinformationsblatt your provider had to give you before you signed, and on your contract summary. They are not the same number, and only the first one is ever advertised. Download in Mbit/s.</p>
+      <div class="bsc-grid">
+        <div class="bsc-f"><label for="mx">Maximum</label><em>the "bis zu" number</em><input id="mx" type="number" min="1" max="10000" step="1" value="250"></div>
+        <div class="bsc-f"><label for="nm">Normally available</label><em>what it should do most of the time</em><input id="nm" type="number" min="1" max="10000" step="1" value="175"></div>
+        <div class="bsc-f"><label for="mn">Minimum</label><em>the floor it may never go under</em><input id="mn" type="number" min="1" max="10000" step="1" value="100"></div>
+        <div class="bsc-f"><label for="pr">Monthly price</label><em>euro, after any promotion ends</em><input id="pr" type="number" min="1" max="300" step="0.01" value="44.99"></div>
+      </div>
+    </div>
+
+    <div id="p1" hidden>
+      <p class="hint">The official Desktop-App wants 10 measurements a day on three different calendar days, with at least one clear day between them and no more than 14 days end to end. Enter the fastest and the slowest download it recorded on each day.</p>
+      <div class="bsc-day"><span>Day 1</span>
+        <div class="bsc-f"><label for="d1h">Fastest</label><input id="d1h" type="number" min="0" max="10000" step="0.1" value="148"></div>
+        <div class="bsc-f"><label for="d1l">Slowest</label><input id="d1l" type="number" min="0" max="10000" step="0.1" value="62"></div>
+      </div>
+      <div class="bsc-day"><span>Day 2</span>
+        <div class="bsc-f"><label for="d2h">Fastest</label><input id="d2h" type="number" min="0" max="10000" step="0.1" value="231"></div>
+        <div class="bsc-f"><label for="d2l">Slowest</label><input id="d2l" type="number" min="0" max="10000" step="0.1" value="104"></div>
+      </div>
+      <div class="bsc-day"><span>Day 3</span>
+        <div class="bsc-f"><label for="d3h">Fastest</label><input id="d3h" type="number" min="0" max="10000" step="0.1" value="139"></div>
+        <div class="bsc-f"><label for="d3l">Slowest</label><input id="d3l" type="number" min="0" max="10000" step="0.1" value="57"></div>
+      </div>
+    </div>
+
+    <div id="p2" hidden>
+      <p class="hint">The second rule counts every reading, not just the best one of the day. Open the measurement report and count how many of the 30 downloads reached the normally available speed.</p>
+      <div class="bsc-grid">
+        <div class="bsc-f"><label for="ok">Readings at or above normal</label><em>out of 30</em><input id="ok" type="number" min="0" max="30" step="1" value="11"></div>
+      </div>
+      <p class="bsc-note">The report is produced by the Bundesnetzagentur's own Desktop-App at <a href="https://www.breitbandmessung.de/desktop-app" target="_blank" rel="noopener">breitbandmessung.de</a>. A browser speed test proves nothing here; the protocol from that app is the evidence your provider has to answer.</p>
+    </div>
+  </div>
+
+  <p class="bsc-note">The three tests come from the Bundesnetzagentur's Allgemeinverfügung of 8 December 2021. The law sets the proportion of the reduction, not the arithmetic, so the euro figures above are the band an argument sits in, not a settled amount.</p>
+</div>
+
+<script>
+(function () {
+  var $ = function (id) { return document.getElementById(id); };
+  var NS = 'http://www.w3.org/2000/svg';
+  var currentStep = 0;
+  var PANELS = ['p0', 'p1', 'p2'];
+  var TABS = ['s0', 's1', 's2'];
+
+  function showStep(i) {
+    currentStep = i;
+    for (var k = 0; k < PANELS.length; k++) {
+      $(PANELS[k]).hidden = (k !== currentStep);
+      $(TABS[k]).classList.toggle('on', k === currentStep);
+      $(TABS[k]).setAttribute('aria-selected', k === currentStep ? 'true' : 'false');
+    }
+  }
+  TABS.forEach(function (id, i) { $(id).addEventListener('click', function () { showStep(i); }); });
+
+  function num(id, fallback) {
+    var v = parseFloat($(id).value);
+    return (isFinite(v) && v >= 0) ? v : fallback;
+  }
+  function euro(v) {
+    return '€' + v.toFixed(2).replace(/\.00$/, '');
+  }
+
+  function read() {
+    var mx = Math.max(1, num('mx', 250));
+    var nm = Math.min(mx, Math.max(1, num('nm', 175)));
+    var mn = Math.min(nm, Math.max(0, num('mn', 100)));
+    var days = [
+      { hi: num('d1h', 0), lo: num('d1l', 0) },
+      { hi: num('d2h', 0), lo: num('d2l', 0) },
+      { hi: num('d3h', 0), lo: num('d3l', 0) }
+    ];
+    days.forEach(function (d) { if (d.lo > d.hi) { var t = d.lo; d.lo = d.hi; d.hi = t; } });
+    return { mx: mx, nm: nm, mn: mn, price: Math.max(0, num('pr', 44.99)), ok: Math.min(30, Math.round(num('ok', 0))), days: days };
+  }
+
+  function judge(s) {
+    var gate = s.mx * 0.9;
+    var reached = s.days.filter(function (d) { return d.hi >= gate; }).length;
+    var under = s.days.filter(function (d) { return d.lo < s.mn; }).length;
+    return {
+      gate: gate,
+      c1: reached < 2,
+      c1text: reached + ' of 3 days touched ' + Math.round(gate) + ' Mbit/s at least once',
+      c2: s.ok < 27,
+      c2text: s.ok + ' of 30 readings reached ' + Math.round(s.nm) + ' Mbit/s',
+      c3: under >= 2,
+      c3text: under + ' of 3 days dropped under ' + Math.round(s.mn) + ' Mbit/s'
+    };
+  }
+
+  function el(name, attrs, parent) {
+    var n = document.createElementNS(NS, name);
+    for (var k in attrs) n.setAttribute(k, attrs[k]);
+    (parent || $('plot')).appendChild(n);
+    return n;
+  }
+  function txt(x, y, s, anchor, fill, size, weight) {
+    var t = el('text', { x: x, y: y, 'text-anchor': anchor || 'middle', fill: fill || '#6b7360', 'font-size': size || 11, 'font-family': 'Montserrat, sans-serif', 'font-weight': weight || 600 });
+    t.textContent = s;
+    return t;
+  }
+
+  function draw(s, v) {
+    var svg = $('plot');
+    while (svg.firstChild) svg.removeChild(svg.firstChild);
+    var narrow = (svg.getBoundingClientRect().width || 700) < 520;
+    var W = narrow ? 430 : 700, H = narrow ? 300 : 300, padL = narrow ? 42 : 52, padR = narrow ? 88 : 122, padT = 16, padB = 34;
+    svg.setAttribute('viewBox', '0 0 ' + W + ' ' + H);
+    var top = Math.max(s.mx * 1.1, 1);
+    var Y = function (val) { return padT + (H - padT - padB) * (1 - Math.min(val, top) / top); };
+    var colW = (W - padL - padR) / 3;
+    var X = function (i) { return padL + colW * (i + 0.5); };
+
+    el('rect', { x: padL, y: padT, width: W - padL - padR, height: H - padT - padB, fill: '#FCFDFA', stroke: '#EDF0E7' });
+
+    // y ticks
+    var stepY = top > 600 ? 200 : top > 260 ? 100 : top > 120 ? 50 : 20;
+    for (var g = 0; g <= top; g += stepY) {
+      el('line', { x1: padL, x2: W - padR, y1: Y(g), y2: Y(g), stroke: '#EDF0E7' });
+      txt(padL - 7, Y(g) + 4, String(g), 'end', '#6b7360', narrow ? 12 : 11);
+    }
+    txt(13, padT + (H - padT - padB) / 2, 'Mbit/s down', 'middle', '#6b7360', narrow ? 12 : 11).setAttribute('transform', 'rotate(-90 13 ' + (padT + (H - padT - padB) / 2) + ')');
+
+    // the three legal lines
+    function rule(val, colour, label, dash) {
+      if (val > top) return;
+      el('line', { x1: padL, x2: W - padR, y1: Y(val), y2: Y(val), stroke: colour, 'stroke-width': 2, 'stroke-dasharray': dash || '0' });
+      var t = txt(W - padR + 6, Y(val) + 4, label, 'start', colour, narrow ? 12.5 : 10.5, 800);
+      t.setAttribute('paint-order', 'stroke'); t.setAttribute('stroke', '#FCFDFA'); t.setAttribute('stroke-width', 3);
+    }
+    rule(v.gate, '#123D18', narrow ? '90% max' : '90% of max', '7 5');
+    rule(s.nm, '#7CB342', narrow ? 'normal' : 'normally available');
+    rule(s.mn, '#C62828', narrow ? 'min' : 'minimum', '3 4');
+
+    // one range bar per measurement day
+    s.days.forEach(function (d, i) {
+      var x = X(i);
+      var yHi = Y(d.hi), yLo = Y(d.lo);
+      var bad = (d.lo < s.mn) || (d.hi < v.gate);
+      el('rect', { x: x - 17, y: Math.min(yHi, yLo), width: 34, height: Math.max(3, Math.abs(yLo - yHi)), rx: 9, fill: bad ? '#FBE3E3' : '#EAF3DF', stroke: bad ? '#C62828' : '#7CB342', 'stroke-width': 2 });
+      el('circle', { cx: x, cy: yHi, r: 6, fill: '#FFE600', stroke: '#123D18', 'stroke-width': 2 });
+      el('circle', { cx: x, cy: yLo, r: 6, fill: '#fff', stroke: '#123D18', 'stroke-width': 2 });
+      var hiLab = txt(x + 22, yHi + 4, Math.round(d.hi) + '', 'start', '#123D18', narrow ? 12.5 : 10.5, 800);
+      hiLab.setAttribute('paint-order', 'stroke'); hiLab.setAttribute('stroke', '#FCFDFA'); hiLab.setAttribute('stroke-width', 3);
+      var loLab = txt(x + 22, yLo + 4, Math.round(d.lo) + '', 'start', bad ? '#C62828' : '#6b7360', narrow ? 12.5 : 10.5, 800);
+      loLab.setAttribute('paint-order', 'stroke'); loLab.setAttribute('stroke', '#FCFDFA'); loLab.setAttribute('stroke-width', 3);
+      txt(x, H - padB + 16, 'Day ' + (i + 1), 'middle', '#123D18', narrow ? 13 : 11, 700);
+    });
+  }
+
+  function render() {
+    var s = read();
+    var v = judge(s);
+    draw(s, v);
+
+    var hits = [v.c1, v.c2, v.c3].filter(Boolean).length;
+    var box = $('verdict');
+    box.classList.toggle('no', hits === 0);
+    $('vTitle').textContent = hits === 0
+      ? 'On these numbers, no rule is met yet'
+      : (hits === 1 ? 'One rule is met, and one is enough' : (hits === 3 ? 'All three rules are met' : 'Two of the three rules are met'));
+    $('vBody').textContent = hits === 0
+      ? 'The line is under-delivering but not by enough to trigger the legal test. Run the campaign again in a worse week, at the hours the flat actually uses, before you write to anyone.'
+      : 'Any single rule is enough to claim a reduced price or to leave the contract without notice. Send the measurement report from the official app, in writing, and say which rule it meets.';
+
+    var rows = [
+      { hit: v.c1, t: '<b>Rule 1.</b> 90 per cent of the maximum is not reached at least once on at least two of the three days. ' + v.c1text + '.' },
+      { hit: v.c2, t: '<b>Rule 2.</b> The normally available speed is missed in more than 10 per cent of the readings. ' + v.c2text + '.' },
+      { hit: v.c3, t: '<b>Rule 3.</b> The minimum speed is undercut at least once on at least two of the three days. ' + v.c3text + '.' }
+    ];
+    $('vCrit').innerHTML = rows.map(function (r) {
+      return '<li class="' + (r.hit ? 'hit' : '') + '"><span class="mark">' + (r.hit ? '✓' : '–') + '</span><span>' + r.t + '</span></li>';
+    }).join('');
+
+    var all = s.days.reduce(function (a, d) { return a + d.hi + d.lo; }, 0) / 6;
+    var gapMax = Math.max(0, 1 - all / s.mx);
+    var gapNorm = Math.max(0, 1 - all / s.nm);
+    $('money').innerHTML =
+      '<div><span>Your typical download</span><b>' + all.toFixed(0) + ' Mbit/s</b><i>mean of the six readings you entered</i></div>' +
+      '<div><span>Measured against the maximum</span><b>' + euro(s.price * gapMax) + ' a month</b><i>' + Math.round(gapMax * 100) + ' per cent short of ' + Math.round(s.mx) + ' Mbit/s</i></div>' +
+      '<div><span>Measured against normal</span><b>' + euro(s.price * gapNorm) + ' a month</b><i>' + Math.round(gapNorm * 100) + ' per cent short of ' + Math.round(s.nm) + ' Mbit/s</i></div>';
+  }
+
+  ['mx', 'nm', 'mn', 'pr', 'd1h', 'd1l', 'd2h', 'd2l', 'd3h', 'd3l', 'ok'].forEach(function (id) {
+    $(id).addEventListener('input', render);
+  });
+  showStep(0);
+  render();
+  var tm; window.addEventListener('resize', function () { clearTimeout(tm); tm = setTimeout(render, 120); });
+})();
+</script>
+<script src="../js/brand.js"></script>
+</body>
+</html>

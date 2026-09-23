@@ -1,0 +1,113 @@
+{
+  "version": 1,
+  "slug": "home-internet-berlin",
+  "key": "home-internet-berlin",
+  "config": {
+    "title": "Home Internet in Berlin - FAQ",
+    "subtitle": "What reaches a Berlin flat, how to prove the line is slower than the contract, and what the proof is worth.",
+    "items": [
+      {
+        "q": "Can I really reduce my internet bill in Germany if the speed is too low?",
+        "a": "Yes. Section 57 of the Telekommunikationsgesetz has given consumers that right since December 2021. When a measured deviation is significant, continuous or regularly recurring, you may **reduce the agreed charge in proportion to the shortfall** or **terminate the contract without notice**. The reduction runs for as long as the fault lasts, and once the breach is proven it keeps running until the provider proves it is delivering properly."
+      },
+      {
+        "q": "What counts as proof that my internet is too slow?",
+        "a": "Only the measurement report from the Bundesnetzagentur's **Breitbandmessung Desktop-App**. A browser speed test, a router screenshot or an app reading carries no weight. The campaign needs **10 measurements a day on three different calendar days**, with at least one clear calendar day between measurement days, no more than **14 calendar days** between the first and last day, at least **three hours** between the fifth and sixth measurement of a day and at least **five minutes** between the others."
+      },
+      {
+        "q": "Which speed does the law compare my measurements against?",
+        "a": "All three of the figures on your **Vertragsinformationsblatt**. Any one of these makes a claim: 90 per cent of the **maximum** speed is not reached at least once on at least two of the three days; the **normally available** speed is not reached in 90 per cent of the measurements; or the **minimum** speed is undercut at least once on at least two of the three days. The Bundesnetzagentur fixed those tests in its general ruling of 8 December 2021."
+      },
+      {
+        "q": "How common is it to get less than the advertised speed?",
+        "a": "Common enough that it is close to normal. In the Bundesnetzagentur's tenth annual broadband report, published **18 June 2026** and covering October 2024 to September 2025, **45.9 per cent** of measuring fixed-line users reached or beat their full contracted download rate and **85.9 per cent** got at least half of it. The report rests on 184,452 valid fixed-line measurements."
+      },
+      {
+        "q": "What can I claim when the technician does not turn up or the line stays down?",
+        "a": "A missed service or installation appointment is worth **€10 or 20 per cent of your monthly charge**, whichever is higher, per appointment. A fault that is not fixed within two calendar days of being reported is worth **€5 or 10 per cent** for the third and fourth day and **€10 or 20 per cent** from the fifth day, for each day of complete outage. A provider switch may leave you offline for at most **one working day**; every further working day is **€10 or 20 per cent**. None of it is paid automatically, so claim it in writing."
+      },
+      {
+        "q": "Can my Berlin landlord still charge cable television through the service charges?",
+        "a": "No. The Nebenkostenprivileg ran out with **30 June 2024**, so since 1 July 2024 a monthly broadband or cable basic fee may not be passed to residential tenants through the Betriebskostenabrechnung. A **Glasfaserbereitstellungsentgelt** for a newly fitted fibre installation in the building is still allowed, capped at **€60 a year** and **€540 in total** per dwelling, for at most five years and nine in exceptional cases."
+      },
+      {
+        "q": "Is fibre available in Berlin yet?",
+        "a": "Partly. The Berlin Senate's figure of **4 March 2026** is that **53.4 per cent** of households and business premises are passed by fibre, up 12.6 percentage points in a year and ahead of the federal average of 42.9 per cent, with the city aiming for full coverage by **2028**. Counting coaxial cable too, **96.2 per cent** of Berlin is gigabit-capable. Check the exact address on the Bundesnetzagentur's Breitbandatlas before you believe a provider's availability checker."
+      },
+      {
+        "q": "What happens to my internet contract when I move flat in Berlin?",
+        "a": "Under section 60 of the Telekommunikationsgesetz the provider must continue the contract at the new address **unchanged**, on the same term and conditions, wherever it offers service there, and the move fee may not be higher than its own charge for a new connection. If it cannot serve the new address, you may terminate with **one month's notice**. Separately, a consumer contract may run for at most 24 months initially, and after the first term ends you can cancel at any time with one month's notice, free of charge."
+      }
+    ]
+  },
+  "schema": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Can I really reduce my internet bill in Germany if the speed is too low?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. Section 57 of the Telekommunikationsgesetz has given consumers that right since December 2021. When a measured deviation is significant, continuous or regularly recurring, you may reduce the agreed charge in proportion to the shortfall or terminate the contract without notice. The reduction runs for as long as the fault lasts, and once the breach is proven it keeps running until the provider proves it is delivering properly."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What counts as proof that my internet is too slow?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Only the measurement report from the Bundesnetzagentur's Breitbandmessung Desktop-App. A browser speed test, a router screenshot or an app reading carries no weight. The campaign needs 10 measurements a day on three different calendar days, with at least one clear calendar day between measurement days, no more than 14 calendar days between the first and last day, at least three hours between the fifth and sixth measurement of a day and at least five minutes between the others."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Which speed does the law compare my measurements against?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "All three of the figures on your Vertragsinformationsblatt. Any one of these makes a claim: 90 per cent of the maximum speed is not reached at least once on at least two of the three days; the normally available speed is not reached in 90 per cent of the measurements; or the minimum speed is undercut at least once on at least two of the three days. The Bundesnetzagentur fixed those tests in its general ruling of 8 December 2021."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How common is it to get less than the advertised speed?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Common enough that it is close to normal. In the Bundesnetzagentur's tenth annual broadband report, published 18 June 2026 and covering October 2024 to September 2025, 45.9 per cent of measuring fixed-line users reached or beat their full contracted download rate and 85.9 per cent got at least half of it. The report rests on 184,452 valid fixed-line measurements."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What can I claim when the technician does not turn up or the line stays down?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "A missed service or installation appointment is worth €10 or 20 per cent of your monthly charge, whichever is higher, per appointment. A fault that is not fixed within two calendar days of being reported is worth €5 or 10 per cent for the third and fourth day and €10 or 20 per cent from the fifth day, for each day of complete outage. A provider switch may leave you offline for at most one working day; every further working day is €10 or 20 per cent. None of it is paid automatically, so claim it in writing."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can my Berlin landlord still charge cable television through the service charges?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. The Nebenkostenprivileg ran out with 30 June 2024, so since 1 July 2024 a monthly broadband or cable basic fee may not be passed to residential tenants through the Betriebskostenabrechnung. A Glasfaserbereitstellungsentgelt for a newly fitted fibre installation in the building is still allowed, capped at €60 a year and €540 in total per dwelling, for at most five years and nine in exceptional cases."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is fibre available in Berlin yet?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Partly. The Berlin Senate's figure of 4 March 2026 is that 53.4 per cent of households and business premises are passed by fibre, up 12.6 percentage points in a year and ahead of the federal average of 42.9 per cent, with the city aiming for full coverage by 2028. Counting coaxial cable too, 96.2 per cent of Berlin is gigabit-capable. Check the exact address on the Bundesnetzagentur's Breitbandatlas before you believe a provider's availability checker."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What happens to my internet contract when I move flat in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Under section 60 of the Telekommunikationsgesetz the provider must continue the contract at the new address unchanged, on the same term and conditions, wherever it offers service there, and the move fee may not be higher than its own charge for a new connection. If it cannot serve the new address, you may terminate with one month's notice. Separately, a consumer contract may run for at most 24 months initially, and after the first term ends you can cancel at any time with one month's notice, free of charge."
+        }
+      }
+    ]
+  }
+}
