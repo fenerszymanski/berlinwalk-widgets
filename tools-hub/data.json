@@ -10276,6 +10276,36 @@
       "cmsItemId": "04ddb3ee-999c-4a19-922d-c02b5095e8a6"
     },
     {
+      "slug": "berlin-coop-share-payback",
+      "title": "Berlin Co-op Share Payback Plotter",
+      "lead": "A Berlin housing cooperative asks for share money before it hands you a key, usually between about 800 and 3,000 euros set by floor area, and that money stays with the cooperative for as long as you live there. Put in the flat size, the cooperative's rent and the rent you would otherwise sign, and this plots both routes across twelve years and marks the month the share money has earned itself back. It also shows the share ladder at a real Berlin cooperative and the notice rule that decides when you could get the money out again. Checked on 23 September 2026.",
+      "category": "Money",
+      "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/berlin-coop-share-payback/",
+      "embedHeight": 1050,
+      "hubCategory": "MoneyShopping",
+      "type": "Calculator",
+      "priority": 3,
+      "tags": [
+        "housing cooperative",
+        "genossenschaft",
+        "share money",
+        "rent",
+        "housing",
+        "money",
+        "living in berlin"
+      ],
+      "aliases": [
+        "berlin housing cooperative",
+        "genossenschaft berlin",
+        "genossenschaftsanteile",
+        "wohnungsbaugenossenschaft berlin",
+        "co-op flat berlin"
+      ],
+      "iconStatus": "live-wix-media",
+      "image": "https://static.wixstatic.com/media/5a08a3_09a066f87f4c46ed869064dc5de881b4~mv2.png",
+      "cmsItemId": "0e8743f3-a98d-417b-909c-78238c0f7b56"
+    },
+    {
       "slug": "berlin-kindergeld-backpay-clock",
       "title": "Berlin Kindergeld Back-Pay Clock",
       "lead": "Kindergeld is paid backwards for six months and not a day more, so every month you put off the application is a month of money you will never see. Put in the date the entitlement began and this draws the calendar: the months still within reach, the months already gone, what each is worth at the rate that applied then, and the exact date the next month falls out. It also reads section 62 (2) of the Income Tax Act against five common residence situations. Checked on 23 September 2026.",

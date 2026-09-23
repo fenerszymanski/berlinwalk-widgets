@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Berlin Co-op Share Payback Plotter</title>
+<link rel="stylesheet" href="../css/brand.css">
+<style>
+  :root {
+    --green: #1B5E20;
+    --deep: #123D18;
+    --yellow: #FFE600;
+    --lightgreen: #C5E1A5;
+    --lime: #7CB342;
+    --cream: #FAFAF5;
+    --ink: #212121;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--cream); color: var(--ink); }
+  .cp { max-width: 720px; margin: 0 auto; padding: 14px 12px 12px; }
+  .cp-head h2 { font-size: 1.08rem; margin: 0; color: var(--green); }
+  .cp-head p { margin: 5px 0 0; font-size: .76rem; line-height: 1.55; color: #555; }
+
+  .cp-rail { display: flex; gap: 6px; margin: 13px 0 0; }
+  .cp-rail i { flex: 1 1 0; height: 4px; border-radius: 999px; background: #DCDCD2; font-style: normal; }
+  .cp-rail i.on { background: var(--green); }
+
+  .cp-stage { margin: 11px 0 0; padding: 13px 13px 14px; background: #fff; border: 1px solid #E2E2D8; border-radius: 10px; }
+  .cp-stage[hidden] { display: none; }
+  .cp-num { display: inline-block; font-size: .62rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: #fff; background: var(--green); border-radius: 999px; padding: 3px 9px; }
+  .cp-stage h3 { margin: 9px 0 3px; font-size: .95rem; color: var(--deep); }
+  .cp-note { margin: 0 0 10px; font-size: .74rem; line-height: 1.55; color: #666; }
+
+  .cp-field { margin: 10px 0 0; }
+  .cp-field label { display: block; font-size: .8rem; font-weight: 700; color: var(--deep); margin: 0 0 4px; }
+  .cp-field input { width: 100%; font: inherit; font-size: .9rem; padding: 9px 10px; border: 2px solid var(--green); border-radius: 8px; background: #fff; color: var(--ink); }
+  .cp-field small { display: block; margin: 5px 0 0; font-size: .7rem; line-height: 1.5; color: #6B6B60; }
+
+  .cp-ladder { margin: 11px 0 0; padding: 10px 12px; border-radius: 9px; background: var(--lightgreen); color: var(--deep); font-size: .76rem; line-height: 1.55; }
+  .cp-ladder b { font-size: .9rem; }
+
+  .cp-go { margin: 12px 0 0; width: 100%; font: inherit; font-size: .88rem; font-weight: 700; cursor: pointer; padding: 10px 14px; border: 0; border-radius: 8px; background: var(--green); color: #fff; }
+  .cp-go:disabled { background: #9E9E9E; cursor: not-allowed; }
+  .cp-back { margin: 9px 0 0; font: inherit; font-size: .76rem; font-weight: 600; cursor: pointer; padding: 7px 12px; border: 2px solid var(--green); border-radius: 999px; background: #fff; color: var(--green); }
+
+  .cp-plotwrap { margin: 13px 0 0; }
+  canvas { display: block; width: 100%; height: auto; }
+  .cp-legend { display: flex; flex-wrap: wrap; gap: 12px; margin: 8px 0 0; font-size: .71rem; color: #444; }
+  .cp-legend span { display: inline-flex; align-items: center; gap: 6px; }
+  .cp-key { width: 16px; height: 4px; border-radius: 2px; }
+
+  .cp-figures { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0 0; }
+  .cp-fig { flex: 1 1 150px; padding: 11px 12px; border-radius: 10px; border: 1px solid #E2E2D8; background: #fff; }
+  .cp-fig b { display: block; font-size: 1.28rem; line-height: 1.15; color: var(--deep); }
+  .cp-fig i { display: block; font-style: normal; font-size: .69rem; letter-spacing: .04em; text-transform: uppercase; color: #6B6B60; margin-top: 3px; }
+  .cp-fig.cp-warn b { color: #8A2B14; }
+
+  .cp-verdict { margin: 12px 0 0; padding: 12px 14px; border-radius: 10px; background: var(--yellow); color: var(--deep); }
+  .cp-verdict h4 { margin: 0 0 5px; font-size: .95rem; }
+  .cp-verdict p { margin: 0; font-size: .85rem; line-height: 1.55; }
+
+  .cp-lock { margin: 10px 0 0; padding: 11px 13px; border-radius: 10px; background: var(--lightgreen); color: var(--deep); }
+  .cp-lock h4 { margin: 0 0 4px; font-size: .88rem; }
+  .cp-lock p { margin: 0; font-size: .79rem; line-height: 1.55; }
+
+  .cp-foot { margin: 11px 0 0; font-size: .69rem; line-height: 1.6; color: #777; }
+  .cp-foot a { color: #4A6B2A; }
+</style>
+</head>
+<body>
+<div class="cp">
+  <div class="cp-head">
+    <h2>Berlin Co-op Share Payback Plotter</h2>
+    <p>A Berlin housing cooperative asks for share money before you get the keys, and that money sits with the cooperative for as long as you stay. This plots the two routes side by side: the share payment plus a low cooperative rent, against the open-market rent you would otherwise sign. Checked on 23 September 2026.</p>
+  </div>
+
+  <div class="cp-rail" aria-hidden="true"><i id="cpR1" class="on"></i><i id="cpR2"></i><i id="cpR3"></i></div>
+
+  <section class="cp-stage" id="cpStage1">
+    <span class="cp-num">Step 1 of 3</span>
+    <h3>The flat you are aiming at</h3>
+    <p class="cp-note">Share money is set by floor area, not by what you earn. The ladder below is the published one at Wohnungsgenossenschaft Treptower Park eG, where one share is 256 euros. Other Berlin cooperatives set their own, so treat it as a realistic starting figure and overwrite it in the next step if you have a real number.</p>
+    <div class="cp-field">
+      <label for="cpSize">Floor area in square metres</label>
+      <input type="number" id="cpSize" min="15" max="200" step="1" value="62" inputmode="numeric">
+      <small>The living space on the contract, not the room you sleep in.</small>
+    </div>
+    <div class="cp-ladder" id="cpLadder"></div>
+    <button type="button" class="cp-go" id="cpNext1">Next: the two rents</button>
+  </section>
+
+  <section class="cp-stage" id="cpStage2" hidden>
+    <span class="cp-num">Step 2 of 3</span>
+    <h3>The two rents, and the money you park</h3>
+    <p class="cp-note">Use net cold rent per square metre on both lines so the comparison is fair. The Berliner Mietspiegel 2026, in force since 28 May 2026, puts the Berlin average for existing tenancies at 7.71 euros. Member companies of the BBU, which is where most cooperative stock sits, averaged 7.10 euros on 30 June 2025. A new open-market contract in Berlin usually costs a good deal more than either, so put in the figure from the listing you are actually looking at.</p>
+    <div class="cp-field">
+      <label for="cpCoop">Cooperative rent, euros per square metre</label>
+      <input type="number" id="cpCoop" min="3" max="30" step="0.01" value="7.10" inputmode="decimal">
+    </div>
+    <div class="cp-field">
+      <label for="cpMarket">The open-market rent you would otherwise sign, euros per square metre</label>
+      <input type="number" id="cpMarket" min="3" max="40" step="0.01" value="7.71" inputmode="decimal">
+      <small>This starts at the Mietspiegel average, which is deliberately cautious. Put in the rent from the listing you are actually looking at and the picture usually changes hard.</small>
+    </div>
+    <div class="cp-field">
+      <label for="cpShare">Share money you must pay in, euros</label>
+      <input type="number" id="cpShare" min="0" max="60000" step="10" value="1792" inputmode="numeric">
+      <small>Filled in from the ladder for your floor area. Overwrite it with the cooperative's own figure, and add the joining fee if it charges one.</small>
+    </div>
+    <button type="button" class="cp-go" id="cpNext2">Plot the payback</button>
+    <button type="button" class="cp-back" id="cpBack2">Back</button>
+  </section>
+
+  <section class="cp-stage" id="cpStage3" hidden>
+    <span class="cp-num">Step 3 of 3</span>
+    <h3 id="cpTitle">What the two routes cost you</h3>
+    <p class="cp-note">Cumulative outlay over twelve years. The cooperative line starts high because the share money is paid before you move in, then climbs more slowly. Where the lines cross is the month the cooperative route has paid for itself.</p>
+    <div class="cp-plotwrap"><canvas id="cpPlot" width="1360" height="800" role="img" aria-label="Cumulative cost of the cooperative route against the open-market route over twelve years"></canvas></div>
+    <div class="cp-legend">
+      <span><i class="cp-key" style="background:#1B5E20"></i> Cooperative: share money plus rent</span>
+      <span><i class="cp-key" style="background:#8A2B14"></i> Open market: rent only</span>
+      <span><i class="cp-key" style="background:#FFE600;border:1px solid rgba(0,0,0,.3)"></i> Break-even</span>
+    </div>
+    <div class="cp-figures" id="cpFigures"></div>
+    <div class="cp-verdict" id="cpVerdict"></div>
+    <div class="cp-lock">
+      <h4>The share money is not savings you can reach</h4>
+      <p id="cpLockText"></p>
+    </div>
+    <button type="button" class="cp-back" id="cpBack3">Change the numbers</button>
+    <p class="cp-foot">Share ladder and share price: Wohnungsgenossenschaft Treptower Park eG. Notice and settlement rules: the Satzung of Berliner Bau- und Wohnungsgenossenschaft von 1892 eG as amended on 27 November 2024, and sections 65 and 73 of the Genossenschaftsgesetz. Rent anchors: Berliner Mietspiegel 2026 and the BBU Marktmonitor 2025. This is a cost comparison, not financial or legal advice, and it ignores heating and service charges because they land on both routes.</p>
+  </section>
+</div>
+
+<script src="../js/brand.js"></script>
+<script>
+(function () {
+  var SHARE_PRICE = 256;
+  var MONTHS = 144;
+  var currentStep = 1;
+
+  var elSize = document.getElementById('cpSize');
+  var elCoop = document.getElementById('cpCoop');
+  var elMarket = document.getElementById('cpMarket');
+  var elShare = document.getElementById('cpShare');
+  var elLadder = document.getElementById('cpLadder');
+  var stages = [document.getElementById('cpStage1'), document.getElementById('cpStage2'), document.getElementById('cpStage3')];
+  var rails = [document.getElementById('cpR1'), document.getElementById('cpR2'), document.getElementById('cpR3')];
+  var shareTouched = false;
+
+  function euro(n) {
+    return Math.round(n).toLocaleString('en-GB') + ' EUR';
+  }
+
+  function sharesFor(sqm) {
+    if (sqm <= 40) return 3;
+    if (sqm <= 60) return 5;
+    if (sqm <= 80) return 7;
+    if (sqm <= 100) return 9;
+    if (sqm <= 120) return 11;
+    return 11 + Math.ceil((sqm - 120) / 10);
+  }
+
+  function num(el, fallback) {
+    var v = parseFloat(el.value);
+    return isFinite(v) && v > 0 ? v : fallback;
+  }
+
+  function paintLadder() {
+    var sqm = num(elSize, 62);
+    var n = sharesFor(sqm);
+    var totalShare = n * SHARE_PRICE;
+    elLadder.innerHTML = 'At ' + sqm + ' square metres that ladder asks for <b>' + n + ' shares, ' +
+      euro(totalShare) + '</b>, before you are handed a key. A joining fee comes on top, from about 30 euros at some houses to a full share elsewhere.';
+    if (!shareTouched) elShare.value = String(totalShare);
+  }
+
+  function show(step) {
+    currentStep = step;
+    for (var i = 0; i < 3; i++) {
+      stages[i].hidden = (i + 1) !== step;
+      rails[i].className = (i + 1) <= step ? 'on' : '';
+    }
+    if (window.__bwRequestEmbedResize) window.__bwRequestEmbedResize();
+  }
+
+  /** The twelve-year total a cumulative series has reached. */
+  function total(series) {
+    return series[series.length - 1];
+  }
+
+  /** Cumulative outlay on both routes, month by month. */
+  function model() {
+    var sqm = num(elSize, 62);
+    var coopMonth = num(elCoop, 7.1) * sqm;
+    var marketMonth = num(elMarket, 7.71) * sqm;
+    var share = Math.max(0, parseFloat(elShare.value) || 0);
+    var coopLine = new Array(MONTHS + 1);
+    var marketLine = new Array(MONTHS + 1);
+    var crossing = -1;
+    for (var m = 0; m <= MONTHS; m++) {
+      coopLine[m] = share + coopMonth * m;
+      marketLine[m] = marketMonth * m;
+      if (crossing < 0 && m > 0 && marketLine[m] >= coopLine[m]) crossing = m;
+    }
+    return {
+      sqm: sqm, share: share, coopMonth: coopMonth, marketMonth: marketMonth,
+      monthlySaving: marketMonth - coopMonth, coopLine: coopLine, marketLine: marketLine,
+      crossing: crossing, totalCoop: total(coopLine), totalMarket: total(marketLine),
+    };
+  }
+
+  function draw(d) {
+    var cv = document.getElementById('cpPlot');
+    var g = cv.getContext('2d');
+    var W = cv.width, H = cv.height;
+    var L = 132, R = W - 34, T = 34, B = H - 62;
+    g.clearRect(0, 0, W, H);
+    g.fillStyle = '#FFFFFF';
+    g.fillRect(0, 0, W, H);
+
+    var top = Math.max(d.coopLine[MONTHS], d.marketLine[MONTHS], 1);
+    // Aim for four to six gridlines, so the axis stays readable at 390px.
+    var magnitude = Math.pow(10, Math.floor(Math.log(top / 5) / Math.LN10));
+    var raw = (top / 5) / magnitude;
+    var stepY = magnitude * (raw <= 1 ? 1 : raw <= 2 ? 2 : raw <= 5 ? 5 : 10);
+    var ceiling = Math.ceil(top / stepY) * stepY;
+    var x = function (m) { return L + (R - L) * (m / MONTHS); };
+    var y = function (v) { return B - (B - T) * (v / ceiling); };
+
+    g.strokeStyle = '#E2E2D8';
+    g.fillStyle = '#6B6B60';
+    g.font = '22px Montserrat, sans-serif';
+    g.textAlign = 'right';
+    g.lineWidth = 2;
+    for (var v = 0; v <= ceiling + 1; v += stepY) {
+      var yy = y(v);
+      g.beginPath(); g.moveTo(L, yy); g.lineTo(R, yy); g.stroke();
+      g.fillText(stepY >= 1000 ? Math.round(v / 1000) + 'k' : Math.round(v).toLocaleString('en-GB'), L - 14, yy + 8);
+    }
+    g.textAlign = 'center';
+    for (var yr = 0; yr <= 12; yr += 2) {
+      var xx = x(yr * 12);
+      g.fillText(yr === 0 ? 'move in' : 'year ' + yr, xx, B + 34);
+    }
+
+    var line = function (series, colour) {
+      g.strokeStyle = colour;
+      g.lineWidth = 6;
+      g.beginPath();
+      for (var m = 0; m <= MONTHS; m++) {
+        var px = x(m), py = y(series[m]);
+        if (m === 0) g.moveTo(px, py); else g.lineTo(px, py);
+      }
+      g.stroke();
+    };
+    line(d.marketLine, '#8A2B14');
+    line(d.coopLine, '#1B5E20');
+
+    g.fillStyle = '#123D18';
+    g.textAlign = 'left';
+    g.font = '700 24px Montserrat, sans-serif';
+    g.fillText('Cumulative rent and share money, euros', L, T - 6);
+
+    if (d.crossing > 0 && d.crossing <= MONTHS) {
+      var cx = x(d.crossing), cy = y(d.coopLine[d.crossing]);
+      g.strokeStyle = '#B8A600';
+      g.lineWidth = 3;
+      g.setLineDash([9, 8]);
+      g.beginPath(); g.moveTo(cx, T); g.lineTo(cx, B); g.stroke();
+      g.setLineDash([]);
+      g.fillStyle = '#FFE600';
+      g.strokeStyle = '#123D18';
+      g.lineWidth = 3;
+      g.beginPath(); g.arc(cx, cy, 13, 0, Math.PI * 2); g.fill(); g.stroke();
+      g.fillStyle = '#123D18';
+      g.font = '700 23px Montserrat, sans-serif';
+      var label = 'break-even, month ' + d.crossing;
+      g.textAlign = cx > (L + R) / 2 ? 'right' : 'left';
+      g.fillText(label, cx + (cx > (L + R) / 2 ? -20 : 20), T + 48);
+    }
+  }
+
+  function report(d) {
+    var figs = document.getElementById('cpFigures');
+    var years = d.crossing > 0 ? (d.crossing / 12) : 0;
+    var breakLabel = d.crossing > 0 ? (years < 1 ? d.crossing + ' months' : years.toFixed(1) + ' years') : 'never';
+    var cells = [
+      { v: euro(d.share), k: 'share money before the keys', warn: false },
+      { v: euro(d.monthlySaving) + ' / month', k: 'rent difference', warn: d.monthlySaving <= 0 },
+      { v: breakLabel, k: 'when the share money is earned back', warn: d.crossing <= 0 },
+      { v: euro(d.totalMarket - d.totalCoop), k: 'difference after twelve years', warn: (d.totalMarket - d.totalCoop) <= 0 },
+    ];
+    figs.innerHTML = cells.map(function (c) {
+      return '<div class="cp-fig' + (c.warn ? ' cp-warn' : '') + '"><b>' + c.v + '</b><i>' + c.k + '</i></div>';
+    }).join('');
+
+    var verdict = document.getElementById('cpVerdict');
+    var head, body;
+    if (d.monthlySaving <= 0) {
+      head = 'On these numbers the cooperative is not the cheaper flat';
+      body = 'The cooperative rent you entered is not below the open-market rent, so the share money never comes back as savings. That happens with newly built cooperative stock. Join for the security of tenure if you want it, but do not tell yourself it is the cheap option.';
+    } else if (d.crossing > 0 && d.crossing <= 36) {
+      head = 'The share money is back inside ' + breakLabel;
+      body = 'You are ' + euro(d.monthlySaving) + ' a month better off, so the ' + euro(d.share) +
+        ' is earned back in ' + breakLabel + ' and everything after that is clear. At this gap the question is not whether it pays, it is whether you can raise the share money and survive the waiting list.';
+    } else if (d.crossing > 0) {
+      head = 'It pays, but slowly: ' + breakLabel;
+      body = 'At ' + euro(d.monthlySaving) + ' a month the share money takes ' + breakLabel +
+        ' to earn back. That is fine if you mean to stay, and it is a bad trade if you expect to leave Berlin or move up in size within a few years.';
+    } else {
+      head = 'Twelve years is not long enough on these numbers';
+      body = 'The gap between the two rents is too small to recover ' + euro(d.share) + ' inside twelve years. Check the rent figures again, and check whether the cooperative charges a joining fee you have not counted.';
+    }
+    verdict.innerHTML = '<h4>' + head + '</h4><p>' + body + '</p>';
+
+    document.getElementById('cpLockText').textContent =
+      'The ' + euro(d.share) + ' is not a deposit and not an investment you can sell. At 1892 eG, one of the older Berlin cooperatives, notice to leave has to be given two years ahead and only takes effect at the end of a financial year, and the payout is then worked out from the balance sheet for that year. Give notice in the spring and you are looking at the money roughly three years later. Budget it as gone for as long as you live there.';
+
+    document.getElementById('cpTitle').textContent =
+      d.sqm + ' square metres: ' + euro(d.coopMonth) + ' a month against ' + euro(d.marketMonth) + ' a month';
+  }
+
+  elSize.addEventListener('input', paintLadder);
+  elShare.addEventListener('input', function () { shareTouched = true; });
+  document.getElementById('cpNext1').addEventListener('click', function () { paintLadder(); show(2); });
+  document.getElementById('cpBack2').addEventListener('click', function () { show(1); });
+  document.getElementById('cpBack3').addEventListener('click', function () { show(2); });
+  document.getElementById('cpNext2').addEventListener('click', function () {
+    var d = model();
+    draw(d);
+    report(d);
+    show(3);
+  });
+
+  paintLadder();
+  show(1);
+})();
+</script>
+</body>
+</html>

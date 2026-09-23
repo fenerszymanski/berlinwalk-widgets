@@ -13109,5 +13109,43 @@
         "a": "**Kinderzuschlag** adds up to **297 euros a month per child** for parents who earn enough for themselves but not for the children, with an income floor of 900 euros gross for a couple and 600 euros for a single parent. The **Kinderfreibetrag** is 9,756 euros in 2026 and the Finanzamt automatically applies whichever of the two leaves you better off. On top of that, Berlin gives a free Kita place from the age of one, a free school ticket, and from 1 August 2026 an eight-hour all-day place for first-year primary pupils."
       }
     ]
+  },
+  "berlin-housing-cooperative": {
+    "title": "Berlin Housing Cooperatives - FAQ",
+    "subtitle": "What share money a Berlin housing cooperative asks for, how long the waiting lists run, when you get the money back, and whether the rent is really cheaper.",
+    "items": [
+      {
+        "q": "How much does it cost to join a housing cooperative in Berlin?",
+        "a": "Between roughly **800 and 3,000 euros in shares** for a normal flat, set by floor area rather than income. Wohnungsgenossenschaft Treptower Park eG publishes the ladder: one share is 256 euros, a flat up to 40 square metres needs three shares, 60 to 80 square metres needs seven, and 100 to 120 square metres needs eleven, plus a 30 euro joining fee. Berliner Bau- und Wohnungsgenossenschaft von 1892 charges two shares of 300 euros for membership itself plus a 300 euro joining fee, with further shares by flat size before you move in. Newly built cooperatives can ask for much more, sometimes hundreds of euros per square metre."
+      },
+      {
+        "q": "Is the share money the same thing as a deposit?",
+        "a": "No, and this is the most expensive misunderstanding in the whole subject. A Kaution is capped at three months' net cold rent and comes back within months of moving out. Share money is capital in the cooperative, and most cooperatives still ask for a separate deposit on top. **Ask about the Kaution as a separate question.**"
+      },
+      {
+        "q": "When do I get my share money back if I leave?",
+        "a": "Much later than people expect. Section 65 of the Genossenschaftsgesetz allows you to leave only at the end of a financial year, and the statutes may set a long notice period. The 1892 statutes as amended on 27 November 2024 require **two years' written notice**, and the settlement is then worked out from the balance sheet for the financial year in which you left, which is only adopted the following year. Give notice in March 2027 and you are realistically looking at the money in 2030."
+      },
+      {
+        "q": "How long are the waiting lists for a Berlin cooperative flat?",
+        "a": "Long, and honest cooperatives say so. 1892 writes on its own membership page that in sought-after estates the wait can run to **ten years or more**, and that you become a member when the cooperative can offer you a flat and a contract is signed. Some cooperatives keep open member lists and take your share money up front without promising anything, and some close their lists for years. Apply to eight or ten of them, early, and treat it as a background process."
+      },
+      {
+        "q": "Is cooperative rent actually cheaper in Berlin?",
+        "a": "On an existing tenancy, less than the reputation suggests. The Berliner Mietspiegel 2026, in force since 28 May 2026, puts the Berlin average at **7.71 euros per square metre** net cold, and member companies of the BBU averaged **7.10 euros** on 30 June 2025. On 62 square metres that gap is about 38 euros a month. The real saving shows up when you sign something new, because a cooperative re-lets near its own level while the open market re-lets at the asking price."
+      },
+      {
+        "q": "Can I get help paying for the shares?",
+        "a": "Yes, and almost nobody uses it. The Investitionsbank Berlin runs an interest-free loan for households buying cooperative shares for the first time, from **2,000 to 50,000 euros**, with 15 percent written off when it is paid out and a further 10 percent written off near the end of the term. The term runs up to 30 years, the minimum repayment is 50 euros a month, and repayment can be deferred for up to five years. You need your main residence in Berlin and a valid Wohnberechtigungsschein."
+      },
+      {
+        "q": "Do I need a Wohnberechtigungsschein for a cooperative flat?",
+        "a": "Not for every flat, but for some. Cooperatives hold a mix of freely lettable flats and flats with a Belegungsbindung that only a WBS holder may take. You always need a WBS for the IBB share loan. Check both questions on each cooperative's own website before you apply."
+      },
+      {
+        "q": "What actually makes a cooperative flat worth the wait?",
+        "a": "Security of tenure more than price. A Dauernutzungsvertrag is not a normal tenancy: the cooperative owns the building and its members are the cooperative, so the block does not get sold to an investor, converted into owner-occupied flats, or emptied with an Eigenbedarf letter. In Berlin that, not a rent rise, is what usually moves people out of a flat they liked."
+      }
+    ]
   }
 }
