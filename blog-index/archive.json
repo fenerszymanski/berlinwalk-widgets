@@ -1,9 +1,26 @@
 {
-  "updatedAt": "2026-09-23T14:02:54.352Z",
+  "updatedAt": "2026-09-23T20:04:41.392Z",
   "source": "Wix Blog API",
-  "totalPosts": 419,
+  "totalPosts": 420,
   "bookingUrl": "https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based",
   "allPosts": [
+    {
+      "title": "Berlin Housing Cooperative Flats: The Rent Is Low, the Money Is Locked",
+      "slug": "berlin-housing-cooperative",
+      "path": "/post/berlin-housing-cooperative",
+      "url": "https://www.berlinwalk.com/post/berlin-housing-cooperative",
+      "excerpt": "Berlin has more than 80 housing cooperatives holding roughly 190,000 flats, and the advice always stops at the word itself. Here is the rest: what the shares cost by flat size, why the money takes about three years to come back, how long the waiting lists really are, and the interest-free Berlin loan that pays the shares for you.",
+      "category": "Living in Berlin",
+      "categorySlug": "living-in-berlin",
+      "topic": "living-in-berlin",
+      "topicLabel": "Living in Berlin",
+      "readTime": "7 min read",
+      "publishedDate": "2026-09-23T20:02:51.208Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_eefe56072d4844f886977ec9784de70a~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-falkenberg-akazienhof-street.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_eefe56072d4844f886977ec9784de70a~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-falkenberg-akazienhof-street.jpg",
+      "alt": "A cobbled street in Gartenstadt Falkenberg lined with a long terrace of ochre and orange houses behind wooden fences and front gardens",
+      "relatedToolSlug": "berlin-coop-share-payback"
+    },
     {
       "title": "Kindergeld in Berlin: The Six Months You Will Never Get Back",
       "slug": "kindergeld-berlin",

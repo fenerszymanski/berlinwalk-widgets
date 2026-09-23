@@ -1,9 +1,9 @@
 {
-  "updatedAt": "2026-09-23T14:02:54.352Z",
+  "updatedAt": "2026-09-23T20:04:41.392Z",
   "source": "Wix Blog API",
   "popularSource": "Wix Blog metrics.views lifetime sort",
-  "totalPosts": 419,
-  "toolsTotal": 339,
+  "totalPosts": 420,
+  "toolsTotal": 340,
   "bookingUrl": "https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based",
   "navTopics": [
     {
@@ -1802,6 +1802,23 @@
   ],
   "latest": [
     {
+      "title": "Berlin Housing Cooperative Flats: The Rent Is Low, the Money Is Locked",
+      "slug": "berlin-housing-cooperative",
+      "path": "/post/berlin-housing-cooperative",
+      "url": "https://www.berlinwalk.com/post/berlin-housing-cooperative",
+      "excerpt": "Berlin has more than 80 housing cooperatives holding roughly 190,000 flats, and the advice always stops at the word itself. Here is the rest: what the shares cost by flat size, why the money takes about three years to come back, how long the waiting lists really are, and the interest-free Berlin loan that pays the shares for you.",
+      "category": "Living in Berlin",
+      "categorySlug": "living-in-berlin",
+      "topic": "living-in-berlin",
+      "topicLabel": "Living in Berlin",
+      "readTime": "7 min read",
+      "publishedDate": "2026-09-23T20:02:51.208Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_eefe56072d4844f886977ec9784de70a~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-falkenberg-akazienhof-street.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_eefe56072d4844f886977ec9784de70a~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-falkenberg-akazienhof-street.jpg",
+      "alt": "A cobbled street in Gartenstadt Falkenberg lined with a long terrace of ochre and orange houses behind wooden fences and front gardens",
+      "relatedToolSlug": "berlin-coop-share-payback"
+    },
+    {
       "title": "Kindergeld in Berlin: The Six Months You Will Never Get Back",
       "slug": "kindergeld-berlin",
       "path": "/post/kindergeld-berlin",
@@ -1987,26 +2004,26 @@
       "thumb": "https://static.wixstatic.com/media/5a08a3_34705bb0f682425e995a10b0418fe25a~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-thf-sunset.jpg",
       "alt": "Sunset over Tempelhofer Feld in Berlin, with people silhouetted on the path in the last light of the day",
       "relatedToolSlug": "berlin-dark-ride-window"
-    },
+    }
+  ],
+  "allPosts": [
     {
-      "title": "Home Insurance in Berlin: The Number That Decides How Much of a Claim You Get Back",
-      "slug": "home-insurance-in-berlin",
-      "path": "/post/home-insurance-in-berlin",
-      "url": "https://www.berlinwalk.com/post/home-insurance-in-berlin",
-      "excerpt": "The premium is not the number that matters. The sum insured on your Hausratversicherung decides how much of any claim you get back, and below the industry benchmark the insurer cuts every payout in proportion, from the first euro. Here is what that costs on the two losses Berlin actually records.",
+      "title": "Berlin Housing Cooperative Flats: The Rent Is Low, the Money Is Locked",
+      "slug": "berlin-housing-cooperative",
+      "path": "/post/berlin-housing-cooperative",
+      "url": "https://www.berlinwalk.com/post/berlin-housing-cooperative",
+      "excerpt": "Berlin has more than 80 housing cooperatives holding roughly 190,000 flats, and the advice always stops at the word itself. Here is the rest: what the shares cost by flat size, why the money takes about three years to come back, how long the waiting lists really are, and the interest-free Berlin loan that pays the shares for you.",
       "category": "Living in Berlin",
       "categorySlug": "living-in-berlin",
       "topic": "living-in-berlin",
       "topicLabel": "Living in Berlin",
-      "readTime": "8 min read",
-      "publishedDate": "2026-09-20T20:08:27.536Z",
-      "image": "https://static.wixstatic.com/media/5a08a3_b89799d834a5415bba4efae6f87aa1cb~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-wohnhaus-oderstrasse-neukoelln.jpg",
-      "thumb": "https://static.wixstatic.com/media/5a08a3_b89799d834a5415bba4efae6f87aa1cb~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-wohnhaus-oderstrasse-neukoelln.jpg",
-      "alt": "A five-storey Berlin residential block on the corner of Oderstrasse and Kienitzer Strasse in Neukoelln at dusk, its windows lit and cars parked along the kerb",
-      "relatedToolSlug": "berlin-hausrat-claim-line"
-    }
-  ],
-  "allPosts": [
+      "readTime": "7 min read",
+      "publishedDate": "2026-09-23T20:02:51.208Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_eefe56072d4844f886977ec9784de70a~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-falkenberg-akazienhof-street.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_eefe56072d4844f886977ec9784de70a~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-falkenberg-akazienhof-street.jpg",
+      "alt": "A cobbled street in Gartenstadt Falkenberg lined with a long terrace of ochre and orange houses behind wooden fences and front gardens",
+      "relatedToolSlug": "berlin-coop-share-payback"
+    },
     {
       "title": "Kindergeld in Berlin: The Six Months You Will Never Get Back",
       "slug": "kindergeld-berlin",
