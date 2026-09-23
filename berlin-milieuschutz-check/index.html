@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Berlin Milieuschutz Check</title>
+<link rel="stylesheet" href="../css/brand.css">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: #FFFFFF; color: #1f241d; padding: 14px 12px 10px; }
+
+  .ms-head h1 { font-size: 19px; line-height: 1.25; color: #1B5E20; }
+  .ms-head p { font-size: 13px; line-height: 1.5; color: #454d42; margin-top: 5px; }
+
+  /* Step rail */
+  .ms-rail { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; margin: 14px 0 4px; }
+  .ms-rail div { border-top: 3px solid #e2e8d9; padding-top: 6px; font-size: 10.5px; font-weight: 800;
+    letter-spacing: .05em; text-transform: uppercase; color: #9aa394; line-height: 1.3; }
+  .ms-rail div.is-done { border-top-color: #8FBF7F; color: #4C956C; }
+  .ms-rail div.is-now { border-top-color: #1B5E20; color: #1B5E20; }
+  .ms-rail b { display: block; font-size: 9.5px; letter-spacing: .08em; }
+
+  .ms-find { display: flex; gap: 8px; align-items: stretch; margin-top: 10px; flex-wrap: wrap; }
+  .ms-find input { flex: 1 1 190px; min-width: 0; font-family: inherit; font-size: 14px; color: #1f241d;
+    border: 1.5px solid #cfd9c4; border-radius: 9px; padding: 9px 11px; background: #fff; }
+  .ms-find input:focus { outline: none; border-color: #1B5E20; }
+  .ms-find button { font-family: inherit; font-size: 12.5px; font-weight: 800; border: 1.5px solid #cfd9c4;
+    background: #fff; color: #3f473c; border-radius: 9px; padding: 9px 12px; cursor: pointer; }
+  .ms-find button:hover { border-color: #1B5E20; }
+
+  .ms-hits { margin-top: 8px; display: flex; flex-wrap: wrap; gap: 6px; }
+  .ms-hit { font-family: inherit; font-size: 12px; font-weight: 700; border: 1.5px solid #dde5d3; background: #fff;
+    color: #3f473c; border-radius: 999px; padding: 5px 10px; cursor: pointer; }
+  .ms-hit:hover { border-color: #1B5E20; }
+  .ms-hit em { font-style: normal; color: #7c856f; font-weight: 600; }
+  .ms-none { font-size: 12.5px; color: #8a5a1c; background: #FFF7DE; border-radius: 8px; padding: 8px 10px; margin-top: 8px; line-height: 1.45; }
+
+  .ms-map { margin-top: 10px; border: 1px solid #dfe6d6; border-radius: 12px; overflow: hidden; background: #f7f9f3; }
+  .ms-map svg { display: block; width: 100%; height: auto; touch-action: manipulation; }
+  .ms-bez { fill: #e6ecdc; stroke: #ccd8bd; stroke-width: 1; }
+  .ms-zone { fill: #4C956C; fill-opacity: .92; stroke: #ffffff; stroke-width: .7; cursor: pointer; }
+  .ms-zone:hover { fill: #1B5E20; }
+  .ms-zone.is-on { fill: #FFE600; stroke: #10230f; stroke-width: 1.8; fill-opacity: 1; }
+  .ms-zone:focus { outline: none; }
+  .ms-legend { font-size: 11.5px; color: #4d5649; padding: 7px 10px; border-top: 1px solid #dfe6d6;
+    background: #fcfdf9; line-height: 1.45; }
+
+  .ms-area { margin-top: 12px; border: 1.5px solid #1B5E20; border-radius: 12px; padding: 12px; }
+  .ms-area h2 { font-size: 16.5px; color: #1B5E20; line-height: 1.3; }
+  .ms-area .ms-sub { font-size: 12.5px; color: #596254; margin-top: 3px; }
+  .ms-facts { margin-top: 9px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+  .ms-facts div { background: #f4f8ee; border-radius: 9px; padding: 7px 8px; }
+  .ms-facts dt { font-size: 9.5px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; color: #6d7766; }
+  .ms-facts dd { font-size: 14.5px; font-weight: 800; color: #1B5E20; margin-top: 2px; line-height: 1.2; }
+  .ms-new { margin-top: 9px; background: #FFE600; color: #123D18; border-radius: 8px; padding: 7px 9px;
+    font-size: 12.5px; line-height: 1.45; font-weight: 700; }
+
+  .ms-label { font-size: 10.5px; font-weight: 800; letter-spacing: .07em; text-transform: uppercase;
+    color: #1B5E20; margin: 18px 0 7px; }
+  .ms-work { display: flex; flex-wrap: wrap; gap: 6px; }
+  .ms-wb { font-family: inherit; font-size: 12.5px; font-weight: 700; border: 1.5px solid #dde5d3; background: #fff;
+    color: #3f473c; border-radius: 999px; padding: 6px 11px; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; }
+  .ms-wb:hover { border-color: #1B5E20; }
+  .ms-wb.is-on { border-color: #10230f; background: #FFE600; color: #123D18; }
+  .ms-wb i { width: 9px; height: 9px; border-radius: 50%; display: inline-block; flex: none; }
+
+  .ms-out { margin-top: 12px; border-radius: 12px; padding: 13px; border: 1.5px solid #dde5d3; background: #fbfcf8; }
+  .ms-out.v-refused { border-color: #C1440E; background: #fdf3ef; }
+  .ms-out.v-allowed { border-color: #1B5E20; background: #f2f8ee; }
+  .ms-out.v-conditional { border-color: #B8860B; background: #fdf9ea; }
+  .ms-stamp { display: inline-block; font-size: 11px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase;
+    border-radius: 999px; padding: 4px 11px; color: #fff; }
+  .v-refused .ms-stamp { background: #C1440E; }
+  .v-allowed .ms-stamp { background: #1B5E20; }
+  .v-conditional .ms-stamp { background: #B8860B; }
+  .ms-out h3 { font-size: 16px; color: #1f241d; line-height: 1.3; margin-top: 8px; }
+  .ms-out .ms-rule { font-size: 13px; line-height: 1.55; color: #3c433a; margin-top: 7px; }
+  .ms-out .ms-why { font-size: 12.5px; line-height: 1.5; color: #596254; margin-top: 8px;
+    border-left: 3px solid #8FBF7F; padding-left: 9px; }
+  .ms-out .ms-clause { font-size: 11px; color: #7c856f; margin-top: 9px; font-weight: 700; letter-spacing: .03em; }
+  .ms-wait { font-size: 13px; line-height: 1.5; color: #7c856f; }
+
+  .ms-src { margin-top: 14px; font-size: 11px; line-height: 1.5; color: #7c856f; border-top: 1px solid #e6ece0; padding-top: 9px; }
+
+  @media (max-width: 430px) {
+    body { padding: 12px 10px 8px; }
+    .ms-head h1 { font-size: 17.5px; }
+    .ms-facts { grid-template-columns: 1fr 1fr; }
+    .ms-rail div { font-size: 9.5px; }
+  }
+</style>
+</head>
+<body>
+  <div class="ms-head">
+    <h1>Is your flat inside a Milieuschutz area, and what does that stop?</h1>
+    <p>Berlin has 82 social preservation areas. Find yours on the map, then pick the work someone wants to do to the building and read what the borough is allowed to say to it.</p>
+  </div>
+
+  <div class="ms-rail" id="msRail">
+    <div data-s="1"><b>Step 1</b>Find your area</div>
+    <div data-s="2"><b>Step 2</b>Pick the work</div>
+    <div data-s="3"><b>Step 3</b>Read the answer</div>
+  </div>
+
+  <div class="ms-find">
+    <input type="text" id="msQ" placeholder="Type an area or a Bezirk, e.g. Boxhagener" autocomplete="off" aria-label="Search a Milieuschutz area or a Bezirk">
+    <button type="button" id="msClear">Clear</button>
+  </div>
+  <div class="ms-hits" id="msHits"></div>
+
+  <div class="ms-map">
+    <svg id="msMap" viewBox="0 0 640 470" role="img" aria-label="Map of Berlin showing the 82 social preservation areas"></svg>
+    <div class="ms-legend" id="msLegend"></div>
+  </div>
+
+  <div id="msArea"></div>
+
+  <div id="msWorkWrap" hidden>
+    <div class="ms-label">Step 2 &middot; what is planned for the building</div>
+    <div class="ms-work" id="msWork"></div>
+  </div>
+
+  <div class="ms-out" id="msOut"><p class="ms-wait">Pick an area on the map to start.</p></div>
+
+  <div class="ms-src" id="msSrc"></div>
+
+<script src="../js/brand.js"></script>
+<script>
+(function () {
+  var D = null, picked = null, work = null, currentStep = 1;
+  var NS = 'http://www.w3.org/2000/svg';
+  var mapEl = document.getElementById('msMap');
+
+  function el(tag, attrs, parent) {
+    var n = document.createElementNS(NS, tag);
+    Object.keys(attrs || {}).forEach(function (k) { n.setAttribute(k, attrs[k]); });
+    if (parent) parent.appendChild(n);
+    return n;
+  }
+  function esc(s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
+  function fold(s) {
+    return String(s).toLowerCase()
+      .replace(/ä/g, 'a').replace(/ö/g, 'o').replace(/ü/g, 'u').replace(/ß/g, 'ss')
+      .replace(/[^a-z0-9]/g, '');
+  }
+
+  /* Equirectangular projection framed on the Berlin city boundary, true aspect at 52.50 N. */
+  var LON0 = 13.088, LON1 = 13.761, LAT0 = 52.338, LAT1 = 52.675;
+  var KX = Math.cos(52.50 * Math.PI / 180);
+  var MW = 616, MH = MW * (LAT1 - LAT0) / ((LON1 - LON0) * KX);
+  function px(lon) { return 12 + (lon - LON0) / (LON1 - LON0) * MW; }
+  function py(lat) { return 12 + MH - (lat - LAT0) / (LAT1 - LAT0) * MH; }
+  function pathOf(ring) {
+    var out = '', i;
+    for (i = 0; i < ring.length; i += 1) {
+      out += (i ? 'L' : 'M') + px(ring[i][0]).toFixed(1) + ' ' + py(ring[i][1]).toFixed(1);
+    }
+    return out + 'Z';
+  }
+
+  function drawMap() {
+    mapEl.setAttribute('viewBox', '0 0 640 ' + Math.round(MH + 24));
+    D.boroughs.forEach(function (b) {
+      el('path', { d: pathOf(b.r), class: 'ms-bez' }, mapEl);
+    });
+    D.areas.forEach(function (a, i) {
+      var d = a.rings.map(pathOf).join(' ');
+      var n = el('path', {
+        d: d, class: 'ms-zone', 'data-i': String(i), tabindex: '0', role: 'button',
+        'fill-rule': 'evenodd'
+      }, mapEl);
+      el('title', {}, n).textContent = a.n + ' (' + a.b + ')';
+    });
+  }
+
+  function redrawZones() {
+    var nodes = mapEl.querySelectorAll('.ms-zone'), i;
+    for (i = 0; i < nodes.length; i += 1) {
+      var on = picked && Number(nodes[i].getAttribute('data-i')) === D.areas.indexOf(picked);
+      nodes[i].setAttribute('class', 'ms-zone' + (on ? ' is-on' : ''));
+      if (on) mapEl.appendChild(nodes[i]);
+    }
+  }
+
+  function drawLegend() {
+    document.getElementById('msLegend').innerHTML =
+      '<strong>' + D.areaCount + ' social preservation areas</strong>, ' +
+      D.totalHa.toLocaleString('en-GB') + ' hectares in all. Tap a green shape, or search above. ' +
+      'The pale outlines are the twelve Bezirke.';
+  }
+
+  function drawHits() {
+    var q = fold(document.getElementById('msQ').value);
+    var box = document.getElementById('msHits'), out = '';
+    if (q.length < 2) { box.innerHTML = ''; return; }
+    var hits = D.areas.filter(function (a) { return fold(a.n).indexOf(q) >= 0 || fold(a.b).indexOf(q) >= 0; });
+    if (!hits.length) {
+      box.innerHTML = '<p class="ms-none">Nothing by that name. The areas are named after a square, a street or a estate, not after your Kiez nickname, so try the Bezirk instead.</p>';
+      return;
+    }
+    hits.slice(0, 14).forEach(function (a) {
+      out += '<button type="button" class="ms-hit" data-i="' + D.areas.indexOf(a) + '">' +
+        esc(a.n) + ' <em>' + esc(a.b) + '</em></button>';
+    });
+    if (hits.length > 14) out += '<span class="ms-hit" style="cursor:default">and ' + (hits.length - 14) + ' more</span>';
+    box.innerHTML = out;
+  }
+
+  function drawArea() {
+    var box = document.getElementById('msArea');
+    if (!picked) { box.innerHTML = ''; return; }
+    var newIn2026 = /\.2026$/.test(picked.since);
+    box.innerHTML =
+      '<div class="ms-area"><h2>' + esc(picked.n) + '</h2>' +
+      '<p class="ms-sub">' + esc(picked.b) + ' &middot; reference ' + esc(picked.k) + '</p>' +
+      '<dl class="ms-facts">' +
+      '<div><dt>In force since</dt><dd>' + esc(picked.since) + '</dd></div>' +
+      '<div><dt>Area</dt><dd>' + picked.ha.toLocaleString('en-GB') + ' ha</dd></div>' +
+      '<div><dt>Amended</dt><dd>' + (picked.amended ? esc(picked.amended) : 'No') + '</dd></div>' +
+      '</dl>' +
+      (newIn2026 ? '<p class="ms-new">This one is new. It came into force in 2026, so a flat here was outside the rules last year and is inside them now.</p>' : '') +
+      '</div>';
+  }
+
+  function drawWork() {
+    var wrap = document.getElementById('msWorkWrap');
+    if (!picked) { wrap.hidden = true; return; }
+    wrap.hidden = false;
+    var out = '';
+    D.measures.forEach(function (m) {
+      var col = m.verdict === 'refused' ? '#C1440E' : (m.verdict === 'allowed' ? '#1B5E20' : '#B8860B');
+      out += '<button type="button" class="ms-wb' + (work && work.id === m.id ? ' is-on' : '') +
+        '" data-m="' + m.id + '"><i style="background:' + col + '"></i>' + esc(m.label) + '</button>';
+    });
+    document.getElementById('msWork').innerHTML = out;
+  }
+
+  function drawOut() {
+    var box = document.getElementById('msOut');
+    if (!picked) {
+      box.className = 'ms-out';
+      box.innerHTML = '<p class="ms-wait">Pick an area on the map to start.</p>';
+      return;
+    }
+    if (!work) {
+      box.className = 'ms-out';
+      box.innerHTML = '<p class="ms-wait">You are inside <strong>' + esc(picked.n) + '</strong>. Now pick what is planned for the building.</p>';
+      return;
+    }
+    var head = work.verdict === 'refused' ? 'The borough can refuse this'
+      : (work.verdict === 'allowed' ? 'This has to be approved' : 'It depends, and here is on what');
+    box.className = 'ms-out v-' + work.verdict;
+    box.innerHTML =
+      '<span class="ms-stamp">' + esc(work.verdict) + '</span>' +
+      '<h3>' + esc(head) + '</h3>' +
+      '<p class="ms-rule">' + esc(work.rule) + '</p>' +
+      '<p class="ms-why">' + esc(work.why) + '</p>' +
+      '<p class="ms-clause">' + esc(work.clause) + ' &middot; applies in ' + esc(picked.n) + ', ' + esc(picked.b) + '</p>';
+  }
+
+  function drawRail() {
+    currentStep = !picked ? 1 : (!work ? 2 : 3);
+    var nodes = document.getElementById('msRail').children, i;
+    for (i = 0; i < nodes.length; i += 1) {
+      var s = Number(nodes[i].getAttribute('data-s'));
+      nodes[i].className = s < currentStep ? 'is-done' : (s === currentStep ? 'is-now' : '');
+    }
+  }
+
+  function drawSrc() {
+    document.getElementById('msSrc').innerHTML =
+      'Area boundaries: Geoportal Berlin, Erhaltungsverordnungsgebiete, read ' + esc(D.checked) + '. ' +
+      'Rules: ' + esc(D.vv) + ', ' + esc(D.source) + '. ' +
+      'This is a reading aid, not legal advice. Your borough decides every case on its own facts.';
+  }
+
+  function redraw() { redrawZones(); drawArea(); drawWork(); drawOut(); drawRail();
+    if (window.BW && window.BW.resize) window.BW.resize(); }
+
+  function pick(i) {
+    var next = D.areas[i];
+    picked = (picked === next) ? null : next;
+    redraw();
+  }
+
+  mapEl.addEventListener('click', function (ev) {
+    var t = ev.target.closest ? ev.target.closest('.ms-zone') : null;
+    if (t) pick(Number(t.getAttribute('data-i')));
+  });
+  mapEl.addEventListener('keydown', function (ev) {
+    if (ev.key !== 'Enter' && ev.key !== ' ') return;
+    var t = ev.target.closest ? ev.target.closest('.ms-zone') : null;
+    if (!t) return;
+    ev.preventDefault();
+    pick(Number(t.getAttribute('data-i')));
+  });
+  document.getElementById('msHits').addEventListener('click', function (ev) {
+    var b = ev.target.closest('.ms-hit');
+    if (!b || !b.getAttribute('data-i')) return;
+    picked = D.areas[Number(b.getAttribute('data-i'))];
+    redraw();
+  });
+  document.getElementById('msWork').addEventListener('click', function (ev) {
+    var b = ev.target.closest('.ms-wb');
+    if (!b) return;
+    var id = b.getAttribute('data-m'), i;
+    for (i = 0; i < D.measures.length; i += 1) { if (D.measures[i].id === id) { work = (work === D.measures[i]) ? null : D.measures[i]; break; } }
+    redraw();
+  });
+  document.getElementById('msQ').addEventListener('input', function () { drawHits();
+    if (window.BW && window.BW.resize) window.BW.resize(); });
+  document.getElementById('msClear').addEventListener('click', function () {
+    document.getElementById('msQ').value = '';
+    picked = null; work = null;
+    drawHits(); redraw();
+  });
+
+  fetch('data.json').then(function (r) { return r.json(); }).then(function (json) {
+    D = json;
+    drawMap(); drawLegend(); drawSrc(); redraw();
+    if (window.BW && window.BW.resize) window.BW.resize();
+  });
+})();
+</script>
+</body>
+</html>

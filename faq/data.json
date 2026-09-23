@@ -13021,5 +13021,51 @@
         "a": "Under section 60 of the Telekommunikationsgesetz the provider must continue the contract at the new address **unchanged**, on the same term and conditions, wherever it offers service there, and the move fee may not be higher than its own charge for a new connection. If it cannot serve the new address, you may terminate with **one month's notice**. Separately, a consumer contract may run for at most 24 months initially, and after the first term ends you can cancel at any time with one month's notice, free of charge."
       }
     ]
+  },
+  "milieuschutz-berlin": {
+    "title": "Milieuschutz in Berlin - FAQ",
+    "subtitle": "Which 82 areas are protected, what a borough can refuse inside one, and what the conversion rules do everywhere else in the city.",
+    "items": [
+      {
+        "q": "How do I find out whether my flat is in a Milieuschutz area?",
+        "a": "Use the map in this article, which draws all **82 areas** straight from the Geoportal Berlin register, or ask the Stadtentwicklungsamt of your Bezirk. The boundaries follow blocks and streets, not Kiez nicknames, so being two streets out really does put you outside the rules. Each area also carries a reference code such as **EM0206** for Boxhagener Platz."
+      },
+      {
+        "q": "What exactly can the borough refuse inside a Milieuschutz area?",
+        "a": "Four things are refused outright with no threshold: **demolishing a building or a flat**, **merging two flats or splitting one**, **changing a home to any other use**, and **especially high-value fittings**. That last list is written out in the rules and includes underfloor heating, a fireplace, hidden heating pipes, stucco or panelling, high-grade parquet or stone, video entry phones, a basin at least 80 cm wide or two basins, a free-standing fixed kitchen island, floor-to-ceiling windows, and show entrances or stairwells."
+      },
+      {
+        "q": "Can my landlord put in a second bathroom?",
+        "a": "Not normally. An extra bathroom, shower, bath or WC is **not approvable**. The one written exception is a flat with **at least five habitable rooms** where the work does not change the number of rooms. A **first** bathroom in standard build has to be approved: one WC, one single hand basin, a bath or shower, tiled walls and floor."
+      },
+      {
+        "q": "What about a balcony or a lift?",
+        "a": "A **first** balcony, loggia or terrace **under 4 square metres** has to be approved when it is a standard bolted-on build. A second outdoor space is refused if the flat already has one, whatever its size. For lifts, a building with **four floors or fewer above ground** cannot get a new one at all. Above four floors it is approvable unless it is unusually expensive, which the rules define down to cabin speed, shaft size and a published cost ceiling."
+      },
+      {
+        "q": "Does Milieuschutz stop my building being turned into condominiums?",
+        "a": "Inside the areas, conversion has needed permission since **14 March 2015**. Since **1 January 2026** a second, city-wide rule also applies: conversion needs a permit in **any Berlin building with more than five flats**, running to **31 December 2030**. Completed conversions across Berlin fell from **28,783 flats in 2021** to **17,116**, **4,475** and then **1,552 in 2024**."
+      },
+      {
+        "q": "If my flat is sold, how long am I protected from an own-use notice?",
+        "a": "**Ten years**, across the whole of Berlin. Section 577a of the Civil Code sets a three-year block after a converted flat is sold, and Berlin's Kündigungsschutzklausel-Verordnung extends it to ten. The current ordinance took effect on **1 October 2023** and runs to 2033. The clock starts when the person now claiming own-use bought the flat, not when the block first changed hands."
+      },
+      {
+        "q": "Why are so many Berlin listings furnished and fixed-term?",
+        "a": "Because it was the way around the rules. Furnished fixed-term listings went from **13 per cent of Berlin ads in 2012 to 48 per cent in 2025**, and the median asking rent for them rose from **€14.37 to €24.12 per square metre**. Since **18 April 2026**, converting an open-ended tenancy into a fixed-term one inside the 82 areas counts as a change of use and needs a permit. A genuine fixed term under section 575 of the Civil Code, and subletting your own registered home for a period, stay approvable."
+      },
+      {
+        "q": "Is Milieuschutz the same thing as Denkmalschutz?",
+        "a": "No. **Denkmalschutz protects the building**, its fabric and its appearance. **Milieuschutz protects the people living in it**, by keeping the composition of the resident population in that area. A plain 1960s block with no architectural merit can sit inside a Milieuschutz area, and a listed villa can sit outside one."
+      },
+      {
+        "q": "Does the permit apply to me if I own my flat and live in it?",
+        "a": "Yes. The preservation permit requirement explicitly extends to **empty flats and to owner-occupied ones**. It does not apply to building new structures, to ordinary maintenance under section 555a of the Civil Code, or to changes of fittings that involve no building work at all. A plug-in balcony solar panel also needs no preservation permit."
+      },
+      {
+        "q": "What do I do if work starts in my building?",
+        "a": "Write down exactly what is being built, using the words the rulebook uses, then ask the **Stadtentwicklungsamt of your Bezirk** whether a permit exists. They grant it and they enforce it. The permit is the owner's obligation, not yours. Get advice before signing anything: a Mieterverein membership costs less than one hour of a lawyer and covers exactly this kind of letter."
+      }
+    ]
   }
 }
