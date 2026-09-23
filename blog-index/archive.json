@@ -1,9 +1,26 @@
 {
-  "updatedAt": "2026-09-22T20:03:16.132Z",
+  "updatedAt": "2026-09-23T01:42:32.748Z",
   "source": "Wix Blog API",
-  "totalPosts": 416,
+  "totalPosts": 417,
   "bookingUrl": "https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based",
   "allPosts": [
+    {
+      "title": "Home Internet in Berlin: What Reaches Your Flat and the Rule That Cuts Your Bill",
+      "slug": "home-internet-berlin",
+      "path": "/post/home-internet-berlin",
+      "url": "https://www.berlinwalk.com/post/home-internet-berlin",
+      "excerpt": "Only 45.9 per cent of measured German households get the full download speed their contract promises. Here is what fibre and cable really reach a Berlin flat, the exact measurement campaign that counts as proof, and the three tests that let you cut the bill or walk out of the contract without notice.",
+      "category": "Living in Berlin",
+      "categorySlug": "living-in-berlin",
+      "topic": "living-in-berlin",
+      "topicLabel": "Living in Berlin",
+      "readTime": "8 min read",
+      "publishedDate": "2026-09-23T01:40:35.180Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_2b61dfdcbc1444a3b97b4a34ce1e94f6~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/courtyard-knesebeck-01.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_2b61dfdcbc1444a3b97b4a34ce1e94f6~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/courtyard-knesebeck-01.jpg",
+      "alt": "A green courtyard in Berlin-Charlottenburg seen through the entrance passage of an old apartment block, with trees and a path leading to the back building",
+      "relatedToolSlug": "berlin-broadband-speed-claim"
+    },
     {
       "title": "Church Tax in Berlin: The Month You Leave Decides Your Last Payment",
       "slug": "church-tax-berlin",
