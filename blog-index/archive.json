@@ -1,9 +1,26 @@
 {
-  "updatedAt": "2026-09-23T02:08:57.998Z",
+  "updatedAt": "2026-09-23T07:46:07.046Z",
   "source": "Wix Blog API",
-  "totalPosts": 417,
+  "totalPosts": 418,
   "bookingUrl": "https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based",
   "allPosts": [
+    {
+      "title": "Milieuschutz in Berlin: The 82 Areas and What Your Landlord Cannot Install",
+      "slug": "milieuschutz-berlin",
+      "path": "/post/milieuschutz-berlin",
+      "url": "https://www.berlinwalk.com/post/milieuschutz-berlin",
+      "excerpt": "Berlin has 82 social preservation areas covering 5,318 hectares, and inside them a single rulebook decides what an owner may build. Merging flats, a second bathroom, underfloor heating and turning a home into a holiday let are all refused outright. Here is how to find your area and what the protection is actually worth.",
+      "category": "Living in Berlin",
+      "categorySlug": "living-in-berlin",
+      "topic": "living-in-berlin",
+      "topicLabel": "Living in Berlin",
+      "readTime": "9 min read",
+      "publishedDate": "2026-09-23T07:42:46.906Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_df0c8d1922cc4155959d58953584806f~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-chamissoplatz-square.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_df0c8d1922cc4155959d58953584806f~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-chamissoplatz-square.jpg",
+      "alt": "A wide view over Chamissoplatz in Berlin-Kreuzberg, a green square with mature trees ringed by five-storey Gruenderzeit apartment blocks under a bright sky",
+      "relatedToolSlug": "berlin-milieuschutz-check"
+    },
     {
       "title": "Home Internet in Berlin: What Reaches Your Flat and the Rule That Cuts Your Bill",
       "slug": "home-internet-berlin",

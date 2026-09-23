@@ -1,9 +1,9 @@
 {
-  "updatedAt": "2026-09-23T02:08:57.998Z",
+  "updatedAt": "2026-09-23T07:46:07.046Z",
   "source": "Wix Blog API",
   "popularSource": "Wix Blog metrics.views lifetime sort",
-  "totalPosts": 417,
-  "toolsTotal": 337,
+  "totalPosts": 418,
+  "toolsTotal": 338,
   "bookingUrl": "https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based",
   "navTopics": [
     {
@@ -1802,6 +1802,23 @@
   ],
   "latest": [
     {
+      "title": "Milieuschutz in Berlin: The 82 Areas and What Your Landlord Cannot Install",
+      "slug": "milieuschutz-berlin",
+      "path": "/post/milieuschutz-berlin",
+      "url": "https://www.berlinwalk.com/post/milieuschutz-berlin",
+      "excerpt": "Berlin has 82 social preservation areas covering 5,318 hectares, and inside them a single rulebook decides what an owner may build. Merging flats, a second bathroom, underfloor heating and turning a home into a holiday let are all refused outright. Here is how to find your area and what the protection is actually worth.",
+      "category": "Living in Berlin",
+      "categorySlug": "living-in-berlin",
+      "topic": "living-in-berlin",
+      "topicLabel": "Living in Berlin",
+      "readTime": "9 min read",
+      "publishedDate": "2026-09-23T07:42:46.906Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_df0c8d1922cc4155959d58953584806f~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-chamissoplatz-square.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_df0c8d1922cc4155959d58953584806f~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-chamissoplatz-square.jpg",
+      "alt": "A wide view over Chamissoplatz in Berlin-Kreuzberg, a green square with mature trees ringed by five-storey Gruenderzeit apartment blocks under a bright sky",
+      "relatedToolSlug": "berlin-milieuschutz-check"
+    },
+    {
       "title": "Home Internet in Berlin: What Reaches Your Flat and the Rule That Cuts Your Bill",
       "slug": "home-internet-berlin",
       "path": "/post/home-internet-berlin",
@@ -1987,26 +2004,26 @@
       "thumb": "https://static.wixstatic.com/media/5a08a3_8087766b6e5b4a8286a88cb84e9f12cd~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-aerztehaus-hohenzollerndamm.jpg",
       "alt": "A glass-fronted medical centre on Hohenzollerndamm in Berlin seen from across the street on an October afternoon, with autumn trees in front of it",
       "relatedToolSlug": "berlin-sick-pay-clock"
-    },
+    }
+  ],
+  "allPosts": [
     {
-      "title": "Elterngeld Berlin: The Split That Pays More and the Month You Cannot Leave Empty",
-      "slug": "elterngeld-berlin",
-      "path": "/post/elterngeld-berlin",
-      "url": "https://www.berlinwalk.com/post/elterngeld-berlin",
-      "excerpt": "Elterngeld is paid back only three Lebensmonate before the month your application arrives, Berlin is asking for new applications by post while its portal is rebuilt, and one empty month after the 14th ends the whole entitlement. Here is how to lay the months out before the envelope goes in the letterbox.",
+      "title": "Milieuschutz in Berlin: The 82 Areas and What Your Landlord Cannot Install",
+      "slug": "milieuschutz-berlin",
+      "path": "/post/milieuschutz-berlin",
+      "url": "https://www.berlinwalk.com/post/milieuschutz-berlin",
+      "excerpt": "Berlin has 82 social preservation areas covering 5,318 hectares, and inside them a single rulebook decides what an owner may build. Merging flats, a second bathroom, underfloor heating and turning a home into a holiday let are all refused outright. Here is how to find your area and what the protection is actually worth.",
       "category": "Living in Berlin",
       "categorySlug": "living-in-berlin",
       "topic": "living-in-berlin",
       "topicLabel": "Living in Berlin",
-      "readTime": "8 min read",
-      "publishedDate": "2026-09-20T07:48:51.885Z",
-      "image": "https://static.wixstatic.com/media/5a08a3_2b0ee432d69f4a65a71b57815371f66a~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-mauerpark-playground.jpg",
-      "thumb": "https://static.wixstatic.com/media/5a08a3_2b0ee432d69f4a65a71b57815371f66a~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-mauerpark-playground.jpg",
-      "alt": "A tall wooden climbing frame painted in red, yellow and blue on the sand playground in Berlin Mauerpark under a clear blue sky",
-      "relatedToolSlug": "berlin-elterngeld-split-board"
-    }
-  ],
-  "allPosts": [
+      "readTime": "9 min read",
+      "publishedDate": "2026-09-23T07:42:46.906Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_df0c8d1922cc4155959d58953584806f~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-chamissoplatz-square.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_df0c8d1922cc4155959d58953584806f~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-chamissoplatz-square.jpg",
+      "alt": "A wide view over Chamissoplatz in Berlin-Kreuzberg, a green square with mature trees ringed by five-storey Gruenderzeit apartment blocks under a bright sky",
+      "relatedToolSlug": "berlin-milieuschutz-check"
+    },
     {
       "title": "Home Internet in Berlin: What Reaches Your Flat and the Rule That Cuts Your Bill",
       "slug": "home-internet-berlin",
