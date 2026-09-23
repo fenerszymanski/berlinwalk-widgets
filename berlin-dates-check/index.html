@@ -158,6 +158,7 @@
   #bw-date-check .pocket-preview-list li { display: grid; grid-template-columns: 22px minmax(0, 1fr); column-gap: 7px; padding: 9px 10px; border: 1px solid #B8CBB0; background: rgba(255,255,255,.56); color: #234429; font-size: 12px; line-height: 1.35; }
   #bw-date-check .pocket-preview-item-icon { margin-top: 1px; color: #1B5E20; font-size: 20px; }
   #bw-date-check .pocket-preview-item-copy { min-width: 0; }
+  #bw-date-check .pocket-preview-list li:last-child:nth-child(odd) { grid-column: 1 / -1; }
   #bw-date-check .pocket-preview-list strong { display: block; margin-bottom: 2px; color: #1B5E20; font-family: var(--f-mono); font-size: 10px; letter-spacing: .04em; text-transform: uppercase; }
 
   /* ---- result ---- */
@@ -547,15 +548,15 @@
         <div class="gate-control-preview" id="gateControlPreview">
           <div class="pocket-preview-copy">
             <p class="eyebrow">BerlinWalk bonus</p>
-            <h2 id="gateHeading">BERLIN UNLOCKED</h2>
-            <p class="unlock-promise" id="gateLede">Your dates. My local shortcuts. One phone-ready guide.</p>
+            <h2 id="gateHeading">TIMED TO YOUR TRIP</h2>
+            <p class="unlock-promise" id="gateLede">Berlin Unlocked lands now. Then short emails, each on the day it is useful.</p>
             <p class="gate-stake" id="gateStake"></p>
           </div>
-          <ul class="pocket-preview-list" aria-label="Berlin Unlocked contents">
-            <li><span class="material-symbols-outlined pocket-preview-item-icon" aria-hidden="true">restaurant</span><span class="pocket-preview-item-copy"><strong>50 picks</strong>Food and drink by situation</span></li>
-            <li><span class="material-symbols-outlined pocket-preview-item-icon" aria-hidden="true">map</span><span class="pocket-preview-item-copy"><strong>Transport</strong>Maps and ticket shortcuts</span></li>
-            <li><span class="material-symbols-outlined pocket-preview-item-icon" aria-hidden="true">account_balance</span><span class="pocket-preview-item-copy"><strong>19 places</strong>Essential landmark map with stations</span></li>
-            <li><span class="material-symbols-outlined pocket-preview-item-icon" aria-hidden="true">rule</span><span class="pocket-preview-item-copy"><strong>12 rules</strong>Small local moves that save time and money</span></li>
+          <ul class="pocket-preview-list" id="gateTimeline" aria-label="Emails timed to your trip">
+            <li><span class="material-symbols-outlined pocket-preview-item-icon" aria-hidden="true">event_available</span><span class="pocket-preview-item-copy"><strong>3 weeks before</strong>What to book now</span></li>
+            <li><span class="material-symbols-outlined pocket-preview-item-icon" aria-hidden="true">payments</span><span class="pocket-preview-item-copy"><strong>1 week before</strong>Tickets and money</span></li>
+            <li><span class="material-symbols-outlined pocket-preview-item-icon" aria-hidden="true">wb_twilight</span><span class="pocket-preview-item-copy"><strong>3 days before</strong>Your first morning</span></li>
+            <li><span class="material-symbols-outlined pocket-preview-item-icon" aria-hidden="true">flight_land</span><span class="pocket-preview-item-copy"><strong>Arrival day</strong>Today in Berlin</span></li>
           </ul>
           <!-- pocket-kit-hero.jpg: real Berlin editorial frame, U-Bahn leaving Alexanderplatz.
                Source assets/stock-images/berlin-trip-planner/2026-08-04/alexanderplatz-ubahn-motion.jpg
@@ -587,7 +588,7 @@
           </div>
           <div class="gate-row">
             <input type="email" id="gateEmail" name="email" inputmode="email" autocomplete="email" placeholder="you@example.com" required>
-            <button type="submit" id="gateSubmit">Send me Berlin Unlocked</button>
+            <button type="submit" id="gateSubmit">Email me before my trip</button>
           </div>
           <div class="honeypot"><label>Website<input type="text" name="website" id="gateWebsite" tabindex="-1" autocomplete="off"></label></div>
           <label class="consent">
@@ -633,20 +634,32 @@
   var DATA_URL = './data.json';
   var API_BASE = 'https://app.berlinwalk.com/api/download-lead';
   var ASSET_ID = 'berlin-date-check';
-  // Email-gate experiment ended by owner decision on 2026-09-08.
-  // Keep subsequent control traffic out of the historical A/B cohort.
-  var EXPERIMENT_ID = 'berlin_date_check_email_gate_control_only_20260908';
+  // Email-gate experiment ended by owner decision on 2026-09-08. On
+  // 2026-09-23 the offer moved from the generic guide to emails timed to the
+  // visitor's own dates; a fresh cohort id keeps the before/after comparison
+  // clean. Consent text and version are unchanged on purpose: the server
+  // validates them, and the ladder mail was already inside that consent.
+  var EXPERIMENT_ID = 'berlin_date_check_email_gate_trip_timed_20260923';
+  var GATE_HEADING = 'TIMED TO YOUR TRIP';
+  // Mirrors date-check-sequence.js STEP_OFFSETS / step subjects. A step due
+  // today is left out: enrollment is a daily cron, so it may already have run.
+  var GATE_TIMELINE_STEPS = [
+    { offset: 21, icon: 'event_available', text: 'What to book now' },
+    { offset: 7, icon: 'payments', text: 'Tickets and money' },
+    { offset: 3, icon: 'wb_twilight', text: 'Your first morning' },
+    { offset: 0, icon: 'flight_land', text: 'Today in Berlin' }
+  ];
   var GATE_VARIANT_CONTROL = 'control';
   var GATE_VARIANT_OPTION3 = 'option3_preview_handoff';
   // Static author-written markup, no user input interpolated. Deliberately does
   // not promise a confirmation link: an already-confirmed subscriber gets the
   // pack straight away, a new one gets the DOI mail first.
-  var GATE_SENT_HTML = 'Berlin Unlocked is on its way.'
+  var GATE_SENT_HTML = 'Your first email is on its way.'
     + '<span class="gate-spam">'
     + '<span class="gs-eyebrow">Check your spam folder</span>'
     + '<span class="gs-body">Gmail often files my email under <b>Spam</b> or <b>Promotions</b>. '
     + 'Look for a message from <b>info@berlinwalk.com</b>.</span>'
-    + '<span class="gs-tail">If it asks you to confirm, click that link. Without it the guide cannot reach you.</span>'
+    + '<span class="gs-tail">If it asks you to confirm, click that link. Without it my emails cannot reach you.</span>'
     + '</span>';
   var CONSENT_VERSION = 'berlin-date-check-pack-v1-2026-08-21';
   var SOURCE_SLUG = 'berlin-dates-check';
@@ -1175,7 +1188,7 @@
     if (!gate || !heading || !form) return false;
     gate.classList.add('is-complete', 'is-hydrated');
     if (zone) zone.classList.add('is-complete');
-    heading.textContent = 'BERLIN UNLOCKED';
+    heading.textContent = GATE_HEADING;
     if (stake) stake.hidden = true;
     if (lede) lede.hidden = true;
     form.hidden = true;
@@ -1212,13 +1225,45 @@
     var stake = document.getElementById('gateStake');
     var lede = document.getElementById('gateLede');
     if (!lede) return;
-    if (heading) heading.textContent = 'BERLIN UNLOCKED';
+    if (heading) heading.textContent = GATE_HEADING;
     if (stake) {
       stake.textContent = 'Built for ' + fmtCompactTripRange(STATE.arrivalStr, STATE.days[STATE.days.length - 1]) + '.';
     }
     var option3Meta = document.getElementById('gateOption3Meta');
     if (option3Meta) option3Meta.textContent = fmtOption3GateMeta(STATE.arrivalStr, STATE.days[STATE.days.length - 1], STATE.nights);
-    lede.textContent = 'Your dates. My local shortcuts. One phone-ready guide.';
+    var ahead = renderGateTimeline();
+    lede.textContent = ahead > 0
+      ? 'Berlin Unlocked lands now. Then ' + (ahead === 1 ? 'one short email, on the day it is useful.' : ['', '', 'two', 'three', 'four'][ahead] + ' short emails, each on the day it is useful.')
+      : 'Berlin Unlocked lands now, ready for your first day.';
+  }
+
+  function renderGateTimeline() {
+    var list = document.getElementById('gateTimeline');
+    if (!list || !STATE.arrivalStr) return 0;
+    var today = todayStr();
+    var ahead = GATE_TIMELINE_STEPS.filter(function (step) {
+      return addDaysStr(STATE.arrivalStr, -step.offset) > today;
+    });
+    list.textContent = '';
+    ahead.forEach(function (step) {
+      var due = addDaysStr(STATE.arrivalStr, -step.offset);
+      var li = document.createElement('li');
+      var icon = document.createElement('span');
+      icon.className = 'material-symbols-outlined pocket-preview-item-icon';
+      icon.setAttribute('aria-hidden', 'true');
+      icon.textContent = step.icon;
+      var copy = document.createElement('span');
+      copy.className = 'pocket-preview-item-copy';
+      var strong = document.createElement('strong');
+      strong.textContent = weekdayShort(due) + ' ' + partsOf(due)[2] + ' ' + monthShort(due);
+      copy.appendChild(strong);
+      copy.appendChild(document.createTextNode(step.text));
+      li.appendChild(icon);
+      li.appendChild(copy);
+      list.appendChild(li);
+    });
+    list.hidden = ahead.length === 0;
+    return ahead.length;
   }
 
   // ---------------------------------------------------------------------
