@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Berlin Kindergeld Back-Pay Clock</title>
+<link rel="stylesheet" href="../css/brand.css">
+<style>
+  :root {
+    --green: #1B5E20;
+    --deep: #123D18;
+    --yellow: #FFE600;
+    --lightgreen: #C5E1A5;
+    --cream: #FAFAF5;
+    --ink: #212121;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--cream); color: var(--ink); }
+  .kg { max-width: 720px; margin: 0 auto; padding: 14px 12px 12px; }
+  .kg-head h2 { font-size: 1.08rem; margin: 0; color: var(--green); }
+  .kg-head p { margin: 5px 0 0; font-size: .76rem; line-height: 1.55; color: #555; }
+  .kg-step { margin: 14px 0 0; padding: 12px 12px 13px; background: #fff; border: 1px solid #E2E2D8; border-radius: 10px; }
+  .kg-step[hidden] { display: none; }
+  .kg-num { display: inline-block; font-size: .62rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: #fff; background: var(--green); border-radius: 999px; padding: 3px 9px; }
+  .kg-step label.kg-q { display: block; font-size: .9rem; font-weight: 700; color: var(--deep); margin: 9px 0 3px; }
+  .kg-hint { margin: 0 0 8px; font-size: .73rem; line-height: 1.5; color: #666; }
+  .kg-step input[type=date], .kg-step select {
+    width: 100%; font: inherit; font-size: .88rem; padding: 9px 10px;
+    border: 2px solid var(--green); border-radius: 8px; background: #fff; color: var(--ink);
+  }
+  .kg-go { margin: 10px 0 0; width: 100%; font: inherit; font-size: .88rem; font-weight: 700; cursor: pointer; padding: 10px 14px; border: 0; border-radius: 8px; background: var(--green); color: #fff; }
+  .kg-go:disabled { background: #9E9E9E; cursor: not-allowed; }
+  .kg-gridwrap { margin: 14px 0 0; }
+  canvas { display: block; width: 100%; height: auto; }
+  .kg-legend { display: flex; flex-wrap: wrap; gap: 11px; margin: 8px 0 0; font-size: .71rem; color: #444; }
+  .kg-legend span { display: inline-flex; align-items: center; gap: 6px; }
+  .kg-swatch { width: 13px; height: 13px; border-radius: 3px; border: 1px solid rgba(0,0,0,.25); }
+  .kg-figures { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0 0; }
+  .kg-fig { flex: 1 1 150px; padding: 11px 12px; border-radius: 10px; border: 1px solid #E2E2D8; background: #fff; }
+  .kg-fig b { display: block; font-size: 1.3rem; line-height: 1.15; color: var(--deep); }
+  .kg-fig i { display: block; font-style: normal; font-size: .69rem; letter-spacing: .04em; text-transform: uppercase; color: #6B6B60; margin-top: 3px; }
+  .kg-fig.kg-gone b { color: #8A2B14; }
+  .kg-verdict { margin: 12px 0 0; padding: 12px 14px; border-radius: 10px; background: var(--yellow); color: var(--deep); }
+  .kg-verdict h3 { margin: 0 0 5px; font-size: .95rem; }
+  .kg-verdict p { margin: 0; font-size: .85rem; line-height: 1.55; }
+  .kg-status { margin: 10px 0 0; padding: 11px 13px; border-radius: 10px; background: var(--lightgreen); color: var(--deep); }
+  .kg-status h3 { margin: 0 0 4px; font-size: .88rem; }
+  .kg-status p { margin: 0; font-size: .8rem; line-height: 1.55; }
+  .kg-foot { margin: 11px 0 0; font-size: .69rem; line-height: 1.6; color: #777; }
+  .kg-foot a { color: #4A6B2A; }
+  .kg-back { margin: 10px 0 0; font: inherit; font-size: .76rem; font-weight: 600; cursor: pointer; padding: 7px 12px; border: 2px solid var(--green); border-radius: 999px; background: #fff; color: var(--green); }
+</style>
+</head>
+<body>
+<div class="kg">
+  <div class="kg-head">
+    <h2>Berlin Kindergeld Back-Pay Clock</h2>
+    <p>Kindergeld is paid backwards for six months and not a day more. Put in the month your entitlement began and this marks every month that is still within reach, every month that has already gone, and what each month of waiting costs you.</p>
+  </div>
+
+  <div class="kg-step" id="kg-step1">
+    <span class="kg-num">Step 1</span>
+    <label class="kg-q" for="kg-date">When did the entitlement begin?</label>
+    <p class="kg-hint">Your child's date of birth, or the day you started living or working in Germany, whichever came later. If you are not sure of the day, the first of the month is close enough.</p>
+    <input type="date" id="kg-date" max="2036-12-31">
+    <button class="kg-go" type="button" id="kg-next">Next</button>
+  </div>
+
+  <div class="kg-step" id="kg-step2" hidden>
+    <span class="kg-num">Step 2</span>
+    <label class="kg-q" for="kg-status">What is your status in Germany?</label>
+    <p class="kg-hint">Section 62 (2) of the Income Tax Act decides this by residence title, not by nationality alone.</p>
+    <select id="kg-status"></select>
+    <button class="kg-go" type="button" id="kg-run">Show my window</button>
+  </div>
+
+  <div id="kg-out" hidden>
+    <div class="kg-gridwrap"><canvas id="kg-canvas" aria-label="Calendar of months since the entitlement began, marking the months Kindergeld can still be paid for and the months that are out of reach"></canvas></div>
+    <div class="kg-legend">
+      <span><i class="kg-swatch" style="background:#1B5E20"></i> Still payable</span>
+      <span><i class="kg-swatch" style="background:#FFE600"></i> Drops out first</span>
+      <span><i class="kg-swatch" style="background:#C9C9BE"></i> Out of reach</span>
+      <span><i class="kg-swatch" style="background:#FFFFFF"></i> Before the entitlement</span>
+    </div>
+    <div class="kg-figures">
+      <div class="kg-fig"><b id="kg-payable">&mdash;</b><i id="kg-payable-label">payable if you apply now</i></div>
+      <div class="kg-fig kg-gone"><b id="kg-lost">&mdash;</b><i id="kg-lost-label">already out of reach</i></div>
+    </div>
+    <div class="kg-verdict"><h3 id="kg-vh">&nbsp;</h3><p id="kg-vp">&nbsp;</p></div>
+    <div class="kg-status"><h3 id="kg-sh">&nbsp;</h3><p id="kg-sp">&nbsp;</p></div>
+    <button class="kg-back" type="button" id="kg-again">Change my answers</button>
+  </div>
+
+  <p class="kg-foot" id="kg-foot"></p>
+</div>
+<script src="../js/brand.js"></script>
+<script>
+(function () {
+  var DATA = null;
+  var currentStep = 1;
+  var startKey = null;
+  var statusId = null;
+
+  var MONTHS = ['J', 'F', 'M', 'A', 'M', 'J', 'J', 'A', 'S', 'O', 'N', 'D'];
+  var LONG = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+
+  var today = new Date();
+  var nowY = today.getFullYear();
+  var nowM = today.getMonth();
+
+  function idx(y, m) { return y * 12 + m; }
+  function rateFor(y, m) {
+    var key = y * 12 + m;
+    var amount = DATA.rates[0].amount;
+    for (var i = 0; i < DATA.rates.length; i++) {
+      var parts = DATA.rates[i].from.split('-');
+      var ri = parseInt(parts[0], 10) * 12 + (parseInt(parts[1], 10) - 1);
+      if (key >= ri) amount = DATA.rates[i].amount;
+    }
+    return amount;
+  }
+  function euro(n) { return '€' + String(n).replace(/\B(?=(\d{3})+(?!\d))/g, ','); }
+
+  function buildMonths() {
+    var parts = startKey.split('-');
+    var sy = parseInt(parts[0], 10);
+    var sm = parseInt(parts[1], 10) - 1;
+    var startIndex = idx(sy, sm);
+    var nowIndex = idx(nowY, nowM);
+    var windowStart = nowIndex - DATA.meta.windowMonths;
+    var floorIndex = nowIndex - DATA.meta.maxYearsBack * 12;
+    var firstShown = Math.max(Math.min(startIndex, windowStart), floorIndex);
+    var firstRowYear = Math.floor(firstShown / 12);
+
+    var rows = [];
+    var payableCount = 0, payableSum = 0, lostCount = 0, lostSum = 0;
+    for (var y = firstRowYear; y <= nowY; y++) {
+      var cells = [];
+      for (var m = 0; m < 12; m++) {
+        var key = idx(y, m);
+        var state = 'none';
+        if (key >= startIndex && key <= nowIndex) {
+          if (key >= windowStart) state = (key === windowStart) ? 'edge' : 'live';
+          else state = 'gone';
+        } else if (key > nowIndex) {
+          state = 'future';
+        }
+        if (state === 'live' || state === 'edge') { payableCount++; payableSum += rateFor(y, m); }
+        if (state === 'gone') { lostCount++; lostSum += rateFor(y, m); }
+        cells.push({ y: y, m: m, state: state });
+      }
+      rows.push({ year: y, cells: cells });
+    }
+    var edgeY = Math.floor(windowStart / 12);
+    var edgeM = windowStart - edgeY * 12;
+    var capped = startIndex < floorIndex;
+    return {
+      rows: rows,
+      payableCount: payableCount,
+      payableSum: payableSum,
+      lostCount: lostCount,
+      lostSum: lostSum,
+      edgeLabel: LONG[edgeM] + ' ' + edgeY,
+      edgeAmount: rateFor(edgeY, edgeM),
+      nextDropLabel: LONG[(nowM + 1) % 12] + ' ' + (nowM === 11 ? nowY + 1 : nowY),
+      startsLater: startIndex > nowIndex,
+      capped: capped
+    };
+  }
+
+  var model = null;
+
+  function draw() {
+    if (!model) return;
+    var canvas = document.getElementById('kg-canvas');
+    var wrap = canvas.parentNode;
+    var width = wrap.clientWidth || 360;
+    var padL = 46, padR = 6, padT = 22, gap = 4;
+    var cols = 12;
+    var cell = Math.floor((width - padL - padR - gap * (cols - 1)) / cols);
+    if (cell < 12) cell = 12;
+    var rows = model.rows.length;
+    var height = padT + rows * (cell + gap);
+    var dpr = window.devicePixelRatio || 1;
+    canvas.width = Math.round(width * dpr);
+    canvas.height = Math.round(height * dpr);
+    canvas.style.height = height + 'px';
+    var ctx = canvas.getContext('2d');
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    ctx.clearRect(0, 0, width, height);
+
+    ctx.font = '600 10px Montserrat, sans-serif';
+    ctx.fillStyle = '#6B6B60';
+    ctx.textBaseline = 'middle';
+    for (var c = 0; c < cols; c++) {
+      ctx.textAlign = 'center';
+      ctx.fillText(MONTHS[c], padL + c * (cell + gap) + cell / 2, padT - 11);
+    }
+
+    for (var r = 0; r < rows; r++) {
+      var row = model.rows[r];
+      var yTop = padT + r * (cell + gap);
+      ctx.textAlign = 'right';
+      ctx.fillStyle = '#123D18';
+      ctx.font = '700 11px Montserrat, sans-serif';
+      ctx.fillText(String(row.year), padL - 8, yTop + cell / 2);
+      for (var k = 0; k < 12; k++) {
+        var st = row.cells[k].state;
+        var x = padL + k * (cell + gap);
+        var fill = '#FFFFFF', stroke = '#E2E2D8', lw = 1;
+        if (st === 'gone') { fill = '#C9C9BE'; stroke = '#B4B4A8'; }
+        if (st === 'live') { fill = '#1B5E20'; stroke = '#123D18'; }
+        if (st === 'edge') { fill = '#FFE600'; stroke = '#123D18'; lw = 2; }
+        ctx.fillStyle = fill;
+        ctx.strokeStyle = stroke;
+        ctx.lineWidth = lw;
+        roundRect(ctx, x + lw / 2, yTop + lw / 2, cell - lw, cell - lw, 3);
+        ctx.fill();
+        ctx.stroke();
+      }
+    }
+  }
+
+  function roundRect(ctx, x, y, w, h, r) {
+    ctx.beginPath();
+    ctx.moveTo(x + r, y);
+    ctx.lineTo(x + w - r, y);
+    ctx.quadraticCurveTo(x + w, y, x + w, y + r);
+    ctx.lineTo(x + w, y + h - r);
+    ctx.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
+    ctx.lineTo(x + r, y + h);
+    ctx.quadraticCurveTo(x, y + h, x, y + h - r);
+    ctx.lineTo(x, y + r);
+    ctx.quadraticCurveTo(x, y, x + r, y);
+    ctx.closePath();
+  }
+
+  function render() {
+    model = buildMonths();
+    var status = null;
+    for (var i = 0; i < DATA.statuses.length; i++) {
+      if (DATA.statuses[i].id === statusId) status = DATA.statuses[i];
+    }
+    document.getElementById('kg-out').hidden = false;
+    draw();
+
+    if (model.startsLater) {
+      document.getElementById('kg-payable').innerHTML = '&mdash;';
+      document.getElementById('kg-payable-label').textContent = 'nothing to claim yet';
+      document.getElementById('kg-lost').innerHTML = '&mdash;';
+      document.getElementById('kg-lost-label').textContent = 'no month has passed';
+      document.getElementById('kg-vh').textContent = 'That date has not arrived.';
+      document.getElementById('kg-vp').textContent = 'Put the application in during the month the entitlement starts and nothing is ever at risk.';
+    } else {
+      document.getElementById('kg-payable').textContent = euro(model.payableSum);
+      document.getElementById('kg-payable-label').textContent = model.payableCount + (model.payableCount === 1 ? ' month within reach' : ' months within reach');
+      document.getElementById('kg-lost').textContent = model.lostCount ? euro(model.lostSum) : euro(0);
+      document.getElementById('kg-lost-label').textContent = model.lostCount ? model.lostCount + ' months out of reach' : 'nothing lost yet';
+      var total = model.payableSum + model.lostSum;
+      if (model.lostCount) {
+        document.getElementById('kg-vh').textContent = 'Apply this month or ' + euro(model.edgeAmount) + ' more goes.';
+        document.getElementById('kg-vp').textContent = model.edgeLabel + ' is the oldest month you can still be paid for. On 1 ' + model.nextDropLabel + ' it drops out of the window and the next month takes its place. Those months are worth ' + euro(total) + ' in total and only ' + euro(model.payableSum) + ' of that is still reachable.';
+      } else {
+        document.getElementById('kg-vh').textContent = 'Nothing has gone yet. Keep it that way.';
+        document.getElementById('kg-vp').textContent = 'Every month since the entitlement began is still inside the six-month window. From ' + model.edgeLabel + ' onwards the oldest month starts falling out, so send the application before you forget it.';
+      }
+    }
+
+    if (status) {
+      document.getElementById('kg-sh').textContent = status.headline;
+      document.getElementById('kg-sp').textContent = status.detail;
+    }
+
+    var foot = 'Checked on ' + DATA.meta.checkedOn + '. Kindergeld is ' + euro(259) + ' a month for every child since January 2026, and payment reaches back six months from the month the Familienkasse receives your application. Figures before 2023 use the first and second child rate, which was lower than the rate for a third or later child. This is a reading aid, not a decision by the Familienkasse. ';
+    var links = [];
+    for (var s = 0; s < DATA.sources.length; s++) {
+      links.push('<a href="' + DATA.sources[s].url + '" target="_blank" rel="noopener">' + DATA.sources[s].label + '</a>');
+    }
+    document.getElementById('kg-foot').innerHTML = foot + links.join(' &middot; ');
+  }
+
+  document.getElementById('kg-next').addEventListener('click', function () {
+    var value = document.getElementById('kg-date').value;
+    if (!value) { document.getElementById('kg-date').focus(); return; }
+    startKey = value.slice(0, 7);
+    currentStep = 2;
+    document.getElementById('kg-step1').hidden = true;
+    document.getElementById('kg-step2').hidden = false;
+    document.getElementById('kg-status').focus();
+  });
+
+  document.getElementById('kg-run').addEventListener('click', function () {
+    statusId = document.getElementById('kg-status').value;
+    currentStep = 3;
+    document.getElementById('kg-step2').hidden = true;
+    render();
+  });
+
+  document.getElementById('kg-again').addEventListener('click', function () {
+    currentStep = 1;
+    document.getElementById('kg-out').hidden = true;
+    document.getElementById('kg-step1').hidden = false;
+    document.getElementById('kg-step2').hidden = true;
+    document.getElementById('kg-date').focus();
+  });
+
+  window.addEventListener('resize', draw);
+
+  fetch('data.json').then(function (r) { return r.json(); }).then(function (json) {
+    DATA = json;
+    var sel = document.getElementById('kg-status');
+    var markup = '';
+    for (var i = 0; i < DATA.statuses.length; i++) {
+      markup += '<option value="' + DATA.statuses[i].id + '">' + DATA.statuses[i].label + '</option>';
+    }
+    sel.innerHTML = markup;
+    var d = new Date();
+    d.setMonth(d.getMonth() - 14);
+    document.getElementById('kg-date').value = d.toISOString().slice(0, 10);
+    document.getElementById('kg-foot').textContent = 'Checked on ' + DATA.meta.checkedOn + '.';
+  });
+})();
+</script>
+</body>
+</html>

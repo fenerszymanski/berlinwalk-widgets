@@ -1,0 +1,60 @@
+{
+  "meta": {
+    "slug": "berlin-kindergeld-backpay-clock",
+    "title": "Berlin Kindergeld Back-Pay Clock",
+    "checkedOn": "2026-09-23",
+    "windowMonths": 6,
+    "maxYearsBack": 6
+  },
+  "rates": [
+    { "from": "2018-01", "amount": 194, "note": "first and second child" },
+    { "from": "2019-07", "amount": 204, "note": "first and second child" },
+    { "from": "2021-01", "amount": 219, "note": "first and second child" },
+    { "from": "2023-01", "amount": 250, "note": "same for every child" },
+    { "from": "2025-01", "amount": 255, "note": "same for every child" },
+    { "from": "2026-01", "amount": 259, "note": "same for every child" }
+  ],
+  "statuses": [
+    {
+      "id": "eu",
+      "label": "German, EU, EEA or Swiss citizen",
+      "verdict": "clear",
+      "headline": "No permit test applies to you.",
+      "detail": "Living in Germany is enough under section 62 (1) of the Income Tax Act. If you work here while your children live in another EU country, you can still claim, and the other country's family benefit is set against it."
+    },
+    {
+      "id": "settled",
+      "label": "Settlement permit or EU long-term residence permit",
+      "verdict": "clear",
+      "headline": "A Niederlassungserlaubnis settles it.",
+      "detail": "Section 62 (2) names the Niederlassungserlaubnis and the Erlaubnis zum Daueraufenthalt-EU first. Nothing else has to be proved."
+    },
+    {
+      "id": "work",
+      "label": "A residence permit that lets you work (Blue Card, skilled worker, family reunion with work access)",
+      "verdict": "clear",
+      "headline": "A work-bearing permit normally qualifies.",
+      "detail": "Section 62 (2) covers permits that allow employment, with a short list of exceptions. Read the exceptions in the law before you assume, and keep the permit page that shows the work permission."
+    },
+    {
+      "id": "study",
+      "label": "Study, training, au pair, voluntary service or job-seeking permit",
+      "verdict": "conditional",
+      "headline": "The permit alone does not do it.",
+      "detail": "Permits under sections 16b, 16d, 16e, 19c, 19e, 20 and 20a (5) of the Residence Act are named as exceptions. You still qualify if you are actually employed or self-employed, on Elternzeit, or drawing benefits under Book III of the Social Code."
+    },
+    {
+      "id": "humanitarian",
+      "label": "Humanitarian permit under section 23 (1), 23a or 25 (3) to (5)",
+      "verdict": "conditional",
+      "headline": "There is a fifteen-month clock on top.",
+      "detail": "For these permits section 62 (2) asks for fifteen months of lawful, permitted or tolerated residence in Germany, unless you are working, on Elternzeit or drawing Book III benefits, in which case it starts earlier."
+    }
+  ],
+  "sources": [
+    { "label": "Section 66 (1) Income Tax Act, the 259 euro rate", "url": "https://www.gesetze-im-internet.de/estg/__66.html" },
+    { "label": "Section 70 (1) Income Tax Act, the six-month payout limit", "url": "https://www.gesetze-im-internet.de/estg/__70.html" },
+    { "label": "Section 62 (2) Income Tax Act, residence titles", "url": "https://www.gesetze-im-internet.de/estg/__62.html" },
+    { "label": "Familienkasse Berlin-Brandenburg", "url": "https://www.arbeitsagentur.de/familie-und-kinder/kindergeld" }
+  ]
+}
