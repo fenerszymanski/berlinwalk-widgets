@@ -7,8 +7,9 @@
   // visitor on this page and handles the existing checkout backend/payment flow.
   const CALENDAR_SCRIPT_URL = new URL('booking-calendar/booking-calendar-element.js?v=paid-landing-event-button-20260924', BASE_URL).toString();
   const LANDING_AVAILABILITY_DAYS = '45';
-  // Stop order and illustration coordinates match route/data.json.
-  const ROUTE_OVERVIEW_PATH = 'M97 37 L82 36 L89 47 L73 42 L72 35 L76 58 L55 80 L38 72 L46 64 L37 56 L31 46 L25 10';
+  // OSM walking-way overview projected onto the approved geographic map v2.
+  // This is an illustrative overview; route/data.json belongs to the older map.
+  const ROUTE_OVERVIEW_PATH = 'M88.013 40.802 L87.860 40.294 L85.988 42.869 L85.712 43.250 L85.602 43.401 L84.863 44.314 L84.269 45.051 L83.391 46.137 L82.440 48.010 L80.225 50.832 L78.942 52.468 L78.781 52.367 L78.699 52.316 L78.596 52.251 L77.382 51.491 L74.796 49.873 L72.244 48.256 L71.888 48.762 L71.687 49.166 L70.492 50.732 L69.539 51.392 L68.021 53.222 L68.265 53.569 L68.336 54.024 L68.363 54.186 L68.350 54.368 L68.118 55.604 L68.109 55.759 L68.109 55.934 L68.113 56.131 L68.131 56.307 L68.207 56.881 L68.370 57.564 L68.623 58.443 L68.613 58.827 L68.543 59.480 L68.410 60.044 L68.247 60.450 L67.981 60.832 L68.222 61.320 L68.600 62.043 L67.972 62.269 L67.683 62.373 L66.187 64.146 L66.033 64.329 L65.767 64.644 L64.881 65.241 L64.460 65.751 L61.528 60.318 L61.104 59.606 L61.363 59.184 L61.545 58.676 L61.639 58.111 L61.637 57.529 L61.541 56.966 L61.357 56.459 L61.099 56.043 L60.782 55.742 L60.427 55.574 L60.056 55.550 L59.693 55.671 L59.670 54.097 L60.742 52.849 L60.490 52.396 L58.048 47.781 L58.195 47.111 L58.535 46.686 L59.286 45.746 L60.758 45.511 L59.286 45.746 L58.535 46.686 L58.195 47.111 L58.048 47.781 L57.264 47.753 L53.503 52.596 L53.212 53.194 L53.263 53.737 L53.040 54.011 L52.733 54.389 L52.319 54.899 L52.171 55.081 L52.033 55.251 L51.853 55.472 L51.747 55.603 L51.449 55.971 L51.599 56.156 L51.155 58.982 L50.970 59.838 L50.708 60.531 L50.265 61.457 L49.932 62.128 L49.641 62.939 L49.548 63.618 L49.139 63.821 L48.787 64.060 L48.390 64.390 L48.174 64.644 L47.912 64.976 L48.174 64.644 L48.390 64.390 L47.793 62.960 L47.210 63.494 L46.628 64.171 L45.979 64.839 L45.306 65.454 L44.661 65.962 L43.975 66.469 L43.509 66.666 L42.772 66.022 L42.361 66.407 L42.177 66.579 L39.530 69.346 L39.403 69.497 L38.891 70.061 L38.816 70.176 L38.556 70.573 L39.821 73.292 L40.106 73.903 L39.895 74.128 L37.344 76.852 L37.116 76.343 L35.745 73.328 L34.089 74.957 L33.438 75.614 L33.376 75.457 L33.273 75.197 L33.120 74.793 L32.696 73.741 L32.530 73.318 L32.457 73.130 L33.110 72.491 L33.560 72.048 L32.877 70.354 L31.386 66.754 L30.261 64.006 L31.136 63.142 L30.261 64.006 L28.947 60.821 L27.128 62.646 L27.070 62.573 L26.956 62.486 L26.833 62.437 L26.705 62.429 L26.580 62.462 L26.461 62.534 L26.353 62.260 L26.107 61.636 L26.353 62.260 L26.461 62.534 L26.365 62.631 L26.283 62.753 L26.216 62.897 L26.168 63.058 L26.140 63.230 L26.132 63.407 L26.138 63.481 L23.931 65.629 L21.763 60.254 L21.647 59.966 L21.177 58.738 L22.082 57.841 L21.630 56.977 L21.704 56.883 L21.744 56.836 L22.924 55.559 L23.991 54.404 L22.687 51.892 L22.795 51.742 L22.824 51.706 L22.283 50.671 L22.226 50.564 L22.534 50.146 L22.719 50.518 L22.534 50.146 L22.226 50.564 L22.283 50.671 L22.824 51.706 L22.795 51.742 L22.687 51.892 L23.991 54.404 L24.425 53.934 L25.678 52.589 L26.258 51.967 L28.091 49.998 L28.407 49.646 L28.425 49.624 L29.289 48.660 L29.479 48.441 L29.649 48.411 L30.149 49.060 L30.279 48.951 L32.114 47.063 L33.958 45.167 L34.073 45.064 L34.314 44.850 L34.555 44.430 L34.767 44.060 L34.927 43.957 L34.484 42.452 L34.147 41.106 L33.332 35.273 L33.343 35.054 L33.516 31.501 L33.608 29.614 L33.605 28.928 L33.604 28.820 L33.601 28.248 L35.079 28.208 L35.638 28.094 L36.926 27.707 L38.151 27.403 L38.044 26.796 L37.795 25.284 L37.756 25.051 L37.715 24.810 L37.643 24.387 L37.546 23.881 L37.357 23.177 L38.956 20.880 L39.886 19.243 L41.226 16.847';
   const TRACK_ENDPOINT = 'https://berlinwalk-content-app.vercel.app/api/pf-event';
   const PAID_TRACKING_KEY = 'bwPaidTracking.v1';
   const PAID_VISITOR_KEY = 'bwVisitorId.v1';
@@ -360,7 +361,7 @@
 
     .bw-paid-landing .route-overview__map {
       position: relative;
-      aspect-ratio: 1200 / 670;
+      aspect-ratio: 1562 / 1007;
       overflow: hidden;
       background: #f4f1e8;
     }
@@ -407,8 +408,8 @@
       pointer-events: none;
     }
 
-    .bw-paid-landing .route-overview__pin--start { left: 97%; top: 37%; }
-    .bw-paid-landing .route-overview__pin--finish { left: 25%; top: 10%; }
+    .bw-paid-landing .route-overview__pin--start { left: 88.283%; top: 40.444%; }
+    .bw-paid-landing .route-overview__pin--finish { left: 41.304%; top: 17.778%; }
 
     .bw-paid-landing .route-overview__visual figcaption {
       display: flex;
@@ -423,6 +424,29 @@
 
     .bw-paid-landing .route-overview__visual figcaption strong {
       margin-right: 5px;
+    }
+
+    .bw-paid-landing .route-overview__tools {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0 14px;
+      padding: 0 15px 5px;
+      font-size: 12px;
+    }
+
+    .bw-paid-landing .route-overview__tools a {
+      display: inline-flex;
+      align-items: center;
+      min-height: 44px;
+      color: var(--green-deep);
+      text-underline-offset: 3px;
+    }
+
+    .bw-paid-landing .route-overview__tools .route-overview__credit {
+      font-size: 10px;
+      color: #526358;
     }
 
     .bw-paid-landing .route-overview__copy {
@@ -776,7 +800,8 @@
       const heroImage = asset('paid-landing/assets/tour-cta-yusuf-rathaus-solo.jpg');
       const brandLogo = asset('paid-landing/assets/berlinwalk-wordmark-green.png');
       const storyImage = asset('paid-landing/assets/museum-island.webp');
-      const routeMap = asset('route/assets/berlin-mitte-illustration-960w.webp');
+      const routeMap = asset('paid-landing/assets/berlin-mitte-map-v2-1280w.webp');
+      const fullRouteMap = asset('paid-landing/assets/berlin-mitte-map-v2-1562w.webp');
       const icon = (name) => asset(`paid-landing/assets/icons/${name}.svg`);
 
       this.innerHTML = `
@@ -838,7 +863,7 @@
           <section class="route-overview section-wrap" aria-labelledby="route-overview-title">
             <figure class="route-overview__visual">
               <div class="route-overview__map">
-                <img src="${routeMap}" srcset="${asset('route/assets/berlin-mitte-illustration-720w.webp')} 720w, ${routeMap} 960w, ${asset('route/assets/berlin-mitte-illustration-1200w.webp')} 1200w" sizes="(max-width: 680px) calc(100vw - 40px), 720px" width="1200" height="670" loading="lazy" decoding="async" alt="Illustrated Berlin Mitte map with the walking route from the World Clock at Alexanderplatz to Hackescher Markt">
+                <img src="${routeMap}" srcset="${asset('paid-landing/assets/berlin-mitte-map-v2-780w.webp')} 780w, ${routeMap} 1280w, ${fullRouteMap} 1562w" sizes="(max-width: 680px) calc(100vw - 40px), 720px" width="1562" height="1007" loading="lazy" decoding="async" alt="Illustrated Berlin Mitte map with the walking route from the World Clock at Alexanderplatz to Hackescher Markt">
                 <svg class="route-overview__path" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
                   <path class="route-overview__halo" d="${ROUTE_OVERVIEW_PATH}"></path>
                   <path class="route-overview__line" d="${ROUTE_OVERVIEW_PATH}"></path>
@@ -847,6 +872,10 @@
                 <span class="route-overview__pin route-overview__pin--finish" aria-hidden="true"></span>
               </div>
               <figcaption><span><strong>Start</strong> World Clock, Alexanderplatz</span><span><strong>Finish</strong> Hackescher Markt</span></figcaption>
+              <div class="route-overview__tools">
+                <a href="${fullRouteMap}" target="_blank" rel="noopener">View larger map <span aria-hidden="true">↗</span></a>
+                <a class="route-overview__credit" href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">© OpenStreetMap contributors</a>
+              </div>
             </figure>
             <div class="route-overview__copy">
               <span class="section-mark" aria-hidden="true"></span>
