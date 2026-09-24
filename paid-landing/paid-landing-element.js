@@ -7,6 +7,8 @@
   // visitor on this page and handles the existing checkout backend/payment flow.
   const CALENDAR_SCRIPT_URL = new URL('booking-calendar/booking-calendar-element.js?v=paid-landing-event-button-20260924', BASE_URL).toString();
   const LANDING_AVAILABILITY_DAYS = '45';
+  // Stop order and illustration coordinates match route/data.json.
+  const ROUTE_OVERVIEW_PATH = 'M97 37 L82 36 L89 47 L73 42 L72 35 L76 58 L55 80 L38 72 L46 64 L37 56 L31 46 L25 10';
   const TRACK_ENDPOINT = 'https://berlinwalk-content-app.vercel.app/api/pf-event';
   const PAID_TRACKING_KEY = 'bwPaidTracking.v1';
   const PAID_VISITOR_KEY = 'bwVisitorId.v1';
@@ -337,6 +339,164 @@
         width: 100%;
       }
     }
+
+    .bw-paid-landing .route-overview {
+      display: grid;
+      grid-template-columns: minmax(0, 1.35fr) minmax(280px, 0.65fr);
+      align-items: center;
+      gap: clamp(24px, 4vw, 58px);
+      padding-block: 28px 66px;
+    }
+
+    .bw-paid-landing .route-overview__visual {
+      overflow: hidden;
+      min-width: 0;
+      margin: 0;
+      border: 1px solid var(--line);
+      border-radius: 15px;
+      background: var(--white);
+      box-shadow: 0 12px 35px rgb(18 61 24 / 7%);
+    }
+
+    .bw-paid-landing .route-overview__map {
+      position: relative;
+      aspect-ratio: 1200 / 670;
+      overflow: hidden;
+      background: #f4f1e8;
+    }
+
+    .bw-paid-landing .route-overview__map img,
+    .bw-paid-landing .route-overview__path {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+
+    .bw-paid-landing .route-overview__path {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+    }
+
+    .bw-paid-landing .route-overview__halo,
+    .bw-paid-landing .route-overview__line {
+      fill: none;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      vector-effect: non-scaling-stroke;
+    }
+
+    .bw-paid-landing .route-overview__halo {
+      stroke: #fffefa;
+      stroke-width: 7;
+    }
+
+    .bw-paid-landing .route-overview__line {
+      stroke: var(--green);
+      stroke-width: 3;
+    }
+
+    .bw-paid-landing .route-overview__pin {
+      position: absolute;
+      width: 16px;
+      height: 16px;
+      border: 3px solid var(--green-deep);
+      border-radius: 50%;
+      background: var(--yellow);
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+    }
+
+    .bw-paid-landing .route-overview__pin--start { left: 97%; top: 37%; }
+    .bw-paid-landing .route-overview__pin--finish { left: 25%; top: 10%; }
+
+    .bw-paid-landing .route-overview__visual figcaption {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px 20px;
+      justify-content: space-between;
+      padding: 11px 15px;
+      color: var(--green-deep);
+      font-size: 12px;
+      line-height: 1.4;
+    }
+
+    .bw-paid-landing .route-overview__visual figcaption strong {
+      margin-right: 5px;
+    }
+
+    .bw-paid-landing .route-overview__copy {
+      min-width: 0;
+    }
+
+    .bw-paid-landing .route-overview__copy h2 {
+      margin-top: 12px;
+      color: var(--green-deep);
+      font-size: clamp(34px, 3.7vw, 52px);
+      font-weight: 800;
+      letter-spacing: -0.055em;
+      line-height: 1.05;
+    }
+
+    .bw-paid-landing .route-overview__copy > p:last-of-type {
+      margin-top: 16px;
+      color: #263b2b;
+      font-size: 16px;
+      line-height: 1.55;
+    }
+
+    .bw-paid-landing .route-overview__link {
+      display: inline-flex;
+      min-height: 44px;
+      align-items: center;
+      gap: 8px;
+      margin-top: 13px;
+      color: var(--green-deep);
+      font-size: 14px;
+      font-weight: 800;
+      text-decoration-thickness: 2px;
+      text-underline-offset: 4px;
+    }
+
+    @media (max-width: 900px) {
+      .bw-paid-landing .route-overview {
+        grid-template-columns: minmax(0, 1fr) minmax(240px, 0.75fr);
+      }
+    }
+
+    @media (max-width: 680px) {
+      .bw-paid-landing .route-overview {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 22px;
+        padding-block: 14px 36px;
+      }
+
+      .bw-paid-landing .route-overview__visual figcaption {
+        padding: 10px 12px;
+        font-size: 11px;
+      }
+
+      .bw-paid-landing .route-overview__copy h2 {
+        font-size: 32px;
+      }
+
+      .bw-paid-landing .route-overview__copy > p:last-of-type {
+        margin-top: 10px;
+        font-size: 14px;
+      }
+
+      .bw-paid-landing .story {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 22px;
+        padding-block: 36px 40px;
+      }
+
+      .bw-paid-landing .story-photo img {
+        aspect-ratio: 1.45;
+      }
+    }
   `;
 
   function consentBoolean(value) {
@@ -616,6 +776,7 @@
       const heroImage = asset('paid-landing/assets/tour-cta-yusuf-rathaus-solo.jpg');
       const brandLogo = asset('paid-landing/assets/berlinwalk-wordmark-green.png');
       const storyImage = asset('paid-landing/assets/museum-island.webp');
+      const routeMap = asset('route/assets/berlin-mitte-illustration-960w.webp');
       const icon = (name) => asset(`paid-landing/assets/icons/${name}.svg`);
 
       this.innerHTML = `
@@ -674,22 +835,34 @@
             </div>
           </section>
 
+          <section class="route-overview section-wrap" aria-labelledby="route-overview-title">
+            <figure class="route-overview__visual">
+              <div class="route-overview__map">
+                <img src="${routeMap}" srcset="${asset('route/assets/berlin-mitte-illustration-720w.webp')} 720w, ${routeMap} 960w, ${asset('route/assets/berlin-mitte-illustration-1200w.webp')} 1200w" sizes="(max-width: 680px) calc(100vw - 40px), 720px" width="1200" height="670" loading="lazy" decoding="async" alt="Illustrated Berlin Mitte map with the walking route from the World Clock at Alexanderplatz to Hackescher Markt">
+                <svg class="route-overview__path" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+                  <path class="route-overview__halo" d="${ROUTE_OVERVIEW_PATH}"></path>
+                  <path class="route-overview__line" d="${ROUTE_OVERVIEW_PATH}"></path>
+                </svg>
+                <span class="route-overview__pin route-overview__pin--start" aria-hidden="true"></span>
+                <span class="route-overview__pin route-overview__pin--finish" aria-hidden="true"></span>
+              </div>
+              <figcaption><span><strong>Start</strong> World Clock, Alexanderplatz</span><span><strong>Finish</strong> Hackescher Markt</span></figcaption>
+            </figure>
+            <div class="route-overview__copy">
+              <span class="section-mark" aria-hidden="true"></span>
+              <p class="eyebrow">YOUR WALK AT A GLANCE</p>
+              <h2 id="route-overview-title">Across Berlin's historic centre.</h2>
+              <p>Meet me at the World Clock. From Alexanderplatz, we pass Rotes Rathaus and Museum Island before finishing at Hackescher Markt.</p>
+              <a class="route-overview__link" href="/berlin-walking-tour-route">Explore the full route and its 12 stops <span aria-hidden="true">→</span></a>
+            </div>
+          </section>
+
           <section class="story section-wrap" id="story" aria-labelledby="story-title">
             <div class="story-copy">
               <span class="section-mark" aria-hidden="true"></span>
               <p class="eyebrow">A WALK THROUGH THE HISTORIC CENTRE</p>
-              <h2 id="story-title">Old photos.<br>Real places.</h2>
-              <p class="story-intro">I bring historic photos to show you what stood here before.</p>
-              <div class="route-points">
-                <div class="route-point">
-                  <img src="${icon('map-pin')}" alt="">
-                  <p><span>Start</span><strong>World Clock, Alexanderplatz</strong></p>
-                </div>
-                <div class="route-point">
-                  <img src="${icon('flag')}" alt="">
-                  <p><span>Finish</span><strong>Hackescher Markt</strong></p>
-                </div>
-              </div>
+              <h2 id="story-title">Berlin's stories.<br>On the streets.</h2>
+              <p class="story-intro">At Rotes Rathaus and Museum Island, I connect the buildings you see with the people and decisions behind them. Historic photos help when a place has changed.</p>
             </div>
             <figure class="story-photo">
               <img src="${storyImage}" alt="The historic colonnade and entrance of the Alte Nationalgalerie on Museum Island">
