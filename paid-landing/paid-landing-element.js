@@ -1225,6 +1225,7 @@
         submit.disabled = false;
         this._setSubmitLabel('Continue to payment');
       }
+      this._syncAutoHeight();
     }
 
     _setSubmitLabel(label) {
@@ -1476,12 +1477,11 @@
       this.style.setProperty('width', '100%', 'important');
 
       const parent = this.parentElement;
-      if (parent) {
-        const parentHeight = Math.ceil(parent.getBoundingClientRect().height);
-        if (parentHeight > height + 180) {
-          parent.style.setProperty('height', `${height}px`, 'important');
-          parent.style.setProperty('min-height', '0', 'important');
-        }
+      // Wix clips the page to this host's layout height. Keep it in sync in
+      // both directions when the details form or viewport changes size.
+      if (parent && parent !== document.body && parent !== document.documentElement) {
+        parent.style.setProperty('height', `${height}px`, 'important');
+        parent.style.setProperty('min-height', '0', 'important');
       }
 
       if (window.parent && window.parent !== window) {
