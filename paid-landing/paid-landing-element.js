@@ -853,7 +853,7 @@
               <p class="eyebrow">YOUR WALK AT A GLANCE</p>
               <h2 id="route-overview-title">Across Berlin's historic centre.</h2>
               <p>Meet me at the World Clock. From Alexanderplatz, we pass Rotes Rathaus and Museum Island before finishing at Hackescher Markt.</p>
-              <a class="route-overview__link" href="/berlin-walking-tour-route">Explore the full route and its 12 stops <span aria-hidden="true">→</span></a>
+              <a class="route-overview__link" href="https://www.berlinwalk.com/berlin-walking-tour-route">Explore the full route and its 12 stops <span aria-hidden="true">→</span></a>
             </div>
           </section>
 
