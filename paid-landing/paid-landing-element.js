@@ -631,7 +631,7 @@
             </button>
             <nav id="site-navigation" class="site-nav" data-site-nav aria-label="Main navigation">
               <a href="#story" data-scroll-target="story">The walk</a>
-              <a href="#booking" data-scroll-target="booking">Sample dates</a>
+              <a href="#booking" data-scroll-target="booking">Book your walk</a>
               <a href="#faq" data-scroll-target="faq">FAQ</a>
               <button class="site-nav__cta" type="button" data-scroll-target="booking" data-track-pick-date>See dates <img src="${icon('arrow-right')}" alt=""></button>
             </nav>
