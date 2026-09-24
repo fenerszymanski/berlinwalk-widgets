@@ -5,7 +5,7 @@
     : 'https://fenerszymanski.github.io/berlinwalk-widgets/';
   // This calendar build supports an event-owned continue action; Velo keeps the
   // visitor on this page and handles the existing checkout backend/payment flow.
-  const CALENDAR_SCRIPT_URL = new URL('booking-calendar/booking-calendar-element.js?v=paid-landing-inline-20260924', BASE_URL).toString();
+  const CALENDAR_SCRIPT_URL = new URL('booking-calendar/booking-calendar-element.js?v=paid-landing-event-button-20260924', BASE_URL).toString();
   const LANDING_AVAILABILITY_DAYS = '45';
   const TRACK_ENDPOINT = 'https://berlinwalk-content-app.vercel.app/api/pf-event';
   const PAID_TRACKING_KEY = 'bwPaidTracking.v1';

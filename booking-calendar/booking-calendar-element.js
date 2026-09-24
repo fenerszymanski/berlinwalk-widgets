@@ -1065,10 +1065,13 @@ class BWBookingCalendarElement extends HTMLElement {
 
   _ctaMarkup(selectedSlot, ctaLabel, manual, guestText) {
     if (selectedSlot) {
-      const href = this._bookingHref(selectedSlot);
       const aria = manual
         ? ` aria-label="${this._escape(`${ctaLabel}: ${this._formatDate(selectedSlot.startDate)} at ${this._formatTime(selectedSlot.startDate)}${this._isCheckoutHandoff() ? `, ${guestText}` : ''}`)}"`
         : '';
+      if (this.getAttribute('navigation-mode') === 'event') {
+        return `<button class="bw-cal-cta" type="button" data-action="continue"${aria}>${this._escape(ctaLabel)}</button>`;
+      }
+      const href = this._bookingHref(selectedSlot);
       if (href) {
         return `<a class="bw-cal-cta" href="${this._escape(href)}" target="_top" data-action="continue"${aria}>${this._escape(ctaLabel)}</a>`;
       }
