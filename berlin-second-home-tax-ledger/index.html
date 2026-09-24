@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Berlin Second Home Tax Ledger</title>
+<link rel="stylesheet" href="../css/brand.css">
+<style>
+  :root {
+    --green: #1B5E20;
+    --deep: #123D18;
+    --yellow: #FFE600;
+    --lightgreen: #C5E1A5;
+    --cream: #FAFAF5;
+    --ink: #212121;
+    --rust: #8A2B14;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--cream); color: var(--ink); }
+  .zl { max-width: 720px; margin: 0 auto; padding: 14px 12px 12px; }
+  .zl-head h2 { font-size: 1.08rem; margin: 0; color: var(--green); }
+  .zl-head p { margin: 5px 0 0; font-size: .76rem; line-height: 1.55; color: #555; }
+
+  .zl-steps { display: flex; gap: 6px; margin: 13px 0 0; padding: 0; list-style: none; }
+  .zl-steps li { flex: 1 1 0; font-size: .64rem; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; color: #8A8A7E; border-top: 4px solid #DCDCD2; padding-top: 5px; }
+  .zl-steps li.done { color: var(--deep); border-top-color: var(--green); }
+
+  .zl-card { margin: 11px 0 0; padding: 13px 13px 14px; background: #fff; border: 1px solid #E2E2D8; border-radius: 10px; }
+  .zl-card[hidden] { display: none; }
+  .zl-card h3 { margin: 0 0 3px; font-size: .95rem; color: var(--deep); }
+  .zl-note { margin: 0 0 8px; font-size: .74rem; line-height: 1.55; color: #666; }
+
+  .zl-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .zl-field label { display: block; font-size: .76rem; font-weight: 700; color: var(--deep); margin: 0 0 4px; }
+  .zl-field input[type=number], .zl-field input[type=date] { width: 100%; font: inherit; font-size: .9rem; padding: 9px 10px; border: 2px solid var(--green); border-radius: 8px; background: #fff; color: var(--ink); }
+  .zl-field small { display: block; margin: 4px 0 0; font-size: .68rem; line-height: 1.45; color: #6B6B60; }
+  .zl-check { display: flex; gap: 9px; align-items: flex-start; margin: 12px 0 0; padding: 10px 11px; border-radius: 9px; background: var(--cream); border: 1px dashed #C9C9BC; font-size: .75rem; line-height: 1.5; color: #333; }
+  .zl-check input { margin: 3px 0 0; width: 18px; height: 18px; accent-color: var(--green); flex: 0 0 auto; }
+
+  .zl-share { margin: 11px 0 0; padding: 10px 12px; border-radius: 9px; background: var(--lightgreen); color: var(--deep); font-size: .76rem; line-height: 1.55; }
+  .zl-share b { font-size: .9rem; }
+  .zl-error { margin: 9px 0 0; font-size: .74rem; color: var(--rust); font-weight: 600; }
+
+  .zl-go { margin: 12px 0 0; width: 100%; font: inherit; font-size: .88rem; font-weight: 700; cursor: pointer; padding: 10px 14px; border: 0; border-radius: 8px; background: var(--green); color: #fff; }
+  .zl-back { margin: 9px 0 0; font: inherit; font-size: .76rem; font-weight: 600; cursor: pointer; padding: 7px 12px; border: 2px solid var(--green); border-radius: 999px; background: #fff; color: var(--green); }
+
+  canvas { display: block; width: 100%; height: auto; margin: 12px 0 0; }
+  .zl-legend { display: flex; flex-wrap: wrap; gap: 12px; margin: 7px 0 0; font-size: .7rem; color: #444; }
+  .zl-legend span { display: inline-flex; align-items: center; gap: 6px; }
+  .zl-key { width: 16px; height: 4px; border-radius: 2px; display: inline-block; }
+
+  .zl-figs { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0 0; }
+  .zl-fig { flex: 1 1 140px; padding: 10px 11px; border-radius: 10px; border: 1px solid #E2E2D8; background: #fff; }
+  .zl-fig b { display: block; font-size: 1.18rem; line-height: 1.15; color: var(--deep); }
+  .zl-fig i { display: block; font-style: normal; font-size: .66rem; letter-spacing: .04em; text-transform: uppercase; color: #6B6B60; margin-top: 3px; }
+
+  .zl-bills { margin: 12px 0 0; padding: 0; list-style: none; border-top: 1px solid #E2E2D8; }
+  .zl-bills li { display: flex; justify-content: space-between; gap: 10px; padding: 8px 2px; border-bottom: 1px solid #EFEFE6; font-size: .78rem; line-height: 1.4; }
+  .zl-bills li span { color: #444; }
+  .zl-bills li b { color: var(--deep); white-space: nowrap; }
+
+  .zl-verdict { margin: 12px 0 0; padding: 12px 14px; border-radius: 10px; background: var(--yellow); color: var(--deep); }
+  .zl-verdict h4 { margin: 0 0 5px; font-size: .95rem; color: var(--deep); }
+  .zl-verdict p { margin: 0; font-size: .84rem; line-height: 1.55; color: var(--deep); }
+
+  .zl-foot { margin: 11px 0 0; font-size: .68rem; line-height: 1.6; color: #777; }
+  @media (max-width: 460px) { .zl-grid { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<div class="zl">
+  <div class="zl-head">
+    <h2>Berlin Second Home Tax Ledger</h2>
+    <p>Berlin taxes a flat or a WG room that is registered as your Nebenwohnung at 20 percent of its net cold rent, and since 2025 that includes subtenants paying for a share of someone else's flat. Put in your flat and the day it became your second address, and this adds up every month the Finanzamt will bill you for. Checked on 24 September 2026.</p>
+  </div>
+
+  <ol class="zl-steps" aria-hidden="true">
+    <li id="zlS1" class="done">1. The flat</li>
+    <li id="zlS2">2. The dates</li>
+    <li id="zlS3">3. The bill</li>
+  </ol>
+
+  <section class="zl-card" id="zlCard1">
+    <h3>The flat, and how much of it is yours</h3>
+    <p class="zl-note">If you rent the whole flat alone, put the full floor area as your own rooms and 0 shared. In a WG the law splits the kitchen, bathroom and hall equally between everyone who uses them and adds your own room on top.</p>
+    <div class="zl-grid">
+      <div class="zl-field">
+        <label for="zlRent">Net cold rent of the whole flat, euros a month</label>
+        <input type="number" id="zlRent" min="50" max="20000" step="1" value="1100" inputmode="decimal">
+        <small>Kaltmiete without heating and service charges.</small>
+      </div>
+      <div class="zl-field">
+        <label for="zlArea">Floor area of the whole flat, square metres</label>
+        <input type="number" id="zlArea" min="10" max="400" step="1" value="82" inputmode="decimal">
+      </div>
+      <div class="zl-field">
+        <label for="zlOwn">Rooms only you use, square metres</label>
+        <input type="number" id="zlOwn" min="0" max="400" step="1" value="16" inputmode="decimal">
+      </div>
+      <div class="zl-field">
+        <label for="zlCommon">Shared rooms, square metres</label>
+        <input type="number" id="zlCommon" min="0" max="400" step="1" value="24" inputmode="decimal">
+        <small>Kitchen, bathroom, hall, shared living room.</small>
+      </div>
+      <div class="zl-field">
+        <label for="zlPeople">People sharing those rooms, you included</label>
+        <input type="number" id="zlPeople" min="1" max="12" step="1" value="3" inputmode="numeric">
+      </div>
+    </div>
+    <label class="zl-check"><input type="checkbox" id="zlExempt"> I am married or in a registered partnership, not separated, I keep this Berlin flat for work, and our shared family home is outside Berlin and registered as my main residence.</label>
+    <div class="zl-share" id="zlShareBox"></div>
+    <div class="zl-error" id="zlErr1"></div>
+    <button type="button" class="zl-go" id="zlNext1">Next: the dates</button>
+  </section>
+
+  <section class="zl-card" id="zlCard2" hidden>
+    <h3>When it became your second address</h3>
+    <p class="zl-note">The tax follows your registration, not your lease. It starts on the first day of the month after the flat became your Nebenwohnung, or that same day if it was the first. It stops at the end of the month before the change if you re-register it as your main residence or move out.</p>
+    <div class="zl-grid">
+      <div class="zl-field">
+        <label for="zlStart">Registered here as second residence on</label>
+        <input type="date" id="zlStart" value="2026-10-15" min="2025-01-01" max="2030-12-31">
+      </div>
+      <div class="zl-field">
+        <label for="zlEnd">Switch to main residence or move out on (optional)</label>
+        <input type="date" id="zlEnd" value="" min="2025-01-01" max="2030-12-31">
+        <small>Leave empty to count to the end of 2028.</small>
+      </div>
+    </div>
+    <div class="zl-error" id="zlErr2"></div>
+    <button type="button" class="zl-go" id="zlNext2">Add up the bills</button>
+    <button type="button" class="zl-back" id="zlBack2">Back</button>
+  </section>
+
+  <section class="zl-card" id="zlCard3" hidden>
+    <h3 id="zlTitle">What the Finanzamt will add up</h3>
+    <p class="zl-note">Running total of the tax, month by month. Each yellow marker is a 15 July due date, when that year's amount falls due as one payment.</p>
+    <canvas id="zlPlot" width="900" height="560" role="img" aria-label="Running total of Berlin second home tax month by month with the yearly due dates marked"></canvas>
+    <div class="zl-legend">
+      <span><i class="zl-key" style="background:#1B5E20"></i> Tax owed so far</span>
+      <span><i class="zl-key" style="background:#FFE600;border:1px solid rgba(0,0,0,.3)"></i> 15 July due date</span>
+    </div>
+    <div class="zl-figs" id="zlFigs"></div>
+    <ul class="zl-bills" id="zlBills"></ul>
+    <div class="zl-verdict" id="zlVerdict"></div>
+    <button type="button" class="zl-back" id="zlBack3">Change the numbers</button>
+    <p class="zl-foot">Rules: Berliner Zweitwohnungsteuergesetz, rate 20 percent from 2025 under the fourth amending law (Abgeordnetenhaus Drucksache 19/2052), share rule for jointly used flats in section 2 (3), start and end of the liability in section 3 (2), due date 15 July in section 10. Declaration deadline 31 May, or the end of the month after the liability starts if that is later. This is an estimate, not tax advice; the Finanzamt Mitte/Tiergarten sets the real figure.</p>
+  </section>
+</div>
+
+<script src="../js/brand.js"></script>
+<script>
+(function () {
+  var RATE = 0.20;
+  var HORIZON_END = { y: 2028, m: 11 };
+  var MONTHS_EN = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+  var currentStep = 1;
+  var cards = [el('zlCard1'), el('zlCard2'), el('zlCard3')];
+  var steps = [el('zlS1'), el('zlS2'), el('zlS3')];
+
+  function el(id) { return document.getElementById(id); }
+  function num(id, fallback) {
+    var v = parseFloat(el(id).value);
+    return isFinite(v) && v >= 0 ? v : fallback;
+  }
+  function euro(n) {
+    return Math.round(n).toLocaleString('en-GB') + ' EUR';
+  }
+  function euro2(n) {
+    return n.toLocaleString('en-GB', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' EUR';
+  }
+  function parseDate(v) {
+    var m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(v || '');
+    return m ? { y: +m[1], m: +m[2] - 1, d: +m[3] } : null;
+  }
+  function idx(ym) { return ym.y * 12 + ym.m; }
+  function lastDay(y, m) { return new Date(y, m + 1, 0).getDate(); }
+
+  function show(step) {
+    currentStep = step;
+    for (var i = 0; i < 3; i++) {
+      cards[i].hidden = (i + 1) !== step;
+      if (i + 1 <= step) steps[i].classList.add('done'); else steps[i].classList.remove('done');
+    }
+    if (window.__bwRequestEmbedResize) window.__bwRequestEmbedResize();
+  }
+
+  /** Taxable share of the flat under section 2 (3): own rooms plus an equal slice of the shared ones. */
+  function share() {
+    var rent = num('zlRent', 1100), area = num('zlArea', 82), own = num('zlOwn', 16);
+    var common = num('zlCommon', 0), people = Math.max(1, Math.round(num('zlPeople', 1)));
+    var mine = own + common / people;
+    var frac = area > 0 ? Math.min(1, mine / area) : 0;
+    var exempt = el('zlExempt').checked;
+    return {
+      rent: rent, area: area, own: own, common: common, people: people, mine: mine, frac: frac,
+      exempt: exempt, monthlyTax: exempt ? 0 : rent * frac * RATE,
+      ok: area > 0 && own + common <= area + 0.01 && rent > 0,
+    };
+  }
+
+  function paintShare() {
+    var s = share();
+    var box = el('zlShareBox');
+    if (s.exempt) {
+      box.innerHTML = 'That combination is one of the few exemptions in section 2 (5) no. 7, so this flat is <b>not a taxable second home</b>. You still file the form the Finanzamt sends you, as a Negativerklärung.';
+      return;
+    }
+    box.innerHTML = 'Your taxable share is <b>' + s.mine.toFixed(1).replace(/\.0$/, '') + ' of ' + s.area + ' square metres</b> (' +
+      Math.round(s.frac * 100) + ' percent), so ' + euro2(s.rent * s.frac) + ' of the net cold rent counts. At 20 percent that is <b>' +
+      euro2(s.monthlyTax) + ' a month, ' + euro(s.monthlyTax * 12) + ' a year</b>.';
+  }
+
+  /** Month-by-month running total and the yearly bills, from the first taxable month to the end. */
+  function ledger() {
+    var s = share();
+    var st = parseDate(el('zlStart').value);
+    var en = parseDate(el('zlEnd').value);
+    if (!st) return { error: 'Put in the date the flat became your second residence.' };
+    var first = st.d === 1 ? { y: st.y, m: st.m } : { y: st.m === 11 ? st.y + 1 : st.y, m: (st.m + 1) % 12 };
+    var last = HORIZON_END;
+    if (en) {
+      var endsOnLastDay = en.d === lastDay(en.y, en.m);
+      last = endsOnLastDay ? { y: en.y, m: en.m } : { y: en.m === 0 ? en.y - 1 : en.y, m: (en.m + 11) % 12 };
+      if (idx(last) > idx(HORIZON_END)) last = HORIZON_END;
+    }
+    if (idx(last) < idx(first)) {
+      return { error: 'On these dates the flat never counts as a second home for a full month, so no tax arises.', s: s, first: first, last: last, months: [], bills: [] };
+    }
+    var months = [];
+    var bills = [];
+    var running = 0;
+    for (var k = idx(first); k <= idx(last); k++) {
+      running += s.monthlyTax;
+      months.push({ y: Math.floor(k / 12), m: k % 12, total: running });
+    }
+    for (var y = first.y; y <= last.y; y++) {
+      var n = months.filter(function (mo) { return mo.y === y; }).length;
+      if (n) bills.push({ year: y, months: n, amount: n * s.monthlyTax });
+    }
+    var total = bills.reduce(function (a, b) { return a + b.amount; }, 0);
+    // Section 8 (1): 31 May, or the end of the month after the liability began if it began after 1 May.
+    var declMonth = first.m > 4 ? { y: first.m === 11 ? first.y + 1 : first.y, m: (first.m + 1) % 12 } : { y: first.y, m: 4 };
+    var declaration = lastDay(declMonth.y, declMonth.m) + ' ' + MONTHS_EN[declMonth.m] + ' ' + declMonth.y;
+    return { s: s, first: first, last: last, months: months, bills: bills, total: total, declaration: declaration };
+  }
+
+  function draw(L) {
+    var cv = el('zlPlot'), g = cv.getContext('2d');
+    var W = cv.width, H = cv.height;
+    var left = 104, right = W - 20, top = 50, bottom = H - 56;
+    g.clearRect(0, 0, W, H);
+    g.fillStyle = '#FFFFFF'; g.fillRect(0, 0, W, H);
+    var span0 = idx(L.first) - (L.first.m);
+    var span1 = Math.max(idx(L.last), idx(L.first) + 11);
+    var spanN = span1 - span0 + 1;
+    var ceilRaw = Math.max(L.total, 1);
+    var mag = Math.pow(10, Math.floor(Math.log(ceilRaw / 4) / Math.LN10));
+    var r = (ceilRaw / 4) / mag;
+    var stepY = mag * (r <= 1 ? 1 : r <= 2 ? 2 : r <= 5 ? 5 : 10);
+    var ceiling = Math.ceil(ceilRaw / stepY) * stepY;
+    var x = function (k) { return left + (right - left) * ((k - span0 + 1) / spanN); };
+    var y = function (v) { return bottom - (bottom - top) * (v / ceiling); };
+
+    g.font = '28px Montserrat, sans-serif';
+    g.lineWidth = 2; g.strokeStyle = '#E2E2D8'; g.fillStyle = '#6B6B60'; g.textAlign = 'right';
+    for (var v = 0; v <= ceiling + 0.01; v += stepY) {
+      g.beginPath(); g.moveTo(left, y(v)); g.lineTo(right, y(v)); g.stroke();
+      g.fillText(Math.round(v).toLocaleString('en-GB'), left - 12, y(v) + 10);
+    }
+    g.textAlign = 'center';
+    for (var yr = Math.floor(span0 / 12); yr * 12 <= span1; yr++) {
+      var xx = x(yr * 12 - 1);
+      g.strokeStyle = '#C9C9BC';
+      g.beginPath(); g.moveTo(xx, top); g.lineTo(xx, bottom); g.stroke();
+      g.fillStyle = '#6B6B60';
+      g.fillText(String(yr), (xx + x(Math.min(yr * 12 + 11, span1))) / 2, bottom + 40);
+    }
+
+    var bw = Math.max(4, (right - left) / spanN * 0.72);
+    g.fillStyle = '#C5E1A5';
+    L.months.forEach(function (mo) {
+      var k = mo.y * 12 + mo.m;
+      g.fillRect(x(k) - bw, y(mo.total), bw, bottom - y(mo.total));
+    });
+    g.strokeStyle = '#1B5E20'; g.lineWidth = 5; g.beginPath();
+    L.months.forEach(function (mo, i) {
+      var k = mo.y * 12 + mo.m;
+      if (i === 0) g.moveTo(x(k - 1), bottom);
+      g.lineTo(x(k), y(mo.total));
+    });
+    g.stroke();
+
+    L.bills.forEach(function (b) {
+      var k = b.year * 12 + 6;
+      if (k < span0 || k > span1 || k < idx(L.first)) return;
+      var before = L.months.filter(function (mo) { return mo.y * 12 + mo.m <= k; });
+      var val = before.length ? before[before.length - 1].total : 0;
+      g.fillStyle = '#FFE600'; g.strokeStyle = '#123D18'; g.lineWidth = 3;
+      g.beginPath(); g.arc(x(k) - bw / 2, y(val), 13, 0, Math.PI * 2); g.fill(); g.stroke();
+    });
+
+    g.fillStyle = '#123D18'; g.textAlign = 'left'; g.font = '700 30px Montserrat, sans-serif';
+    g.fillText('Tax owed so far, euros', 8, top - 18);
+  }
+
+  function report(L) {
+    var s = L.s;
+    el('zlTitle').textContent = s.exempt ? 'Exempt: no second home tax on this flat' :
+      euro2(s.monthlyTax) + ' a month from ' + MONTHS_EN[L.first.m] + ' ' + L.first.y;
+    var figs = [
+      { v: euro2(s.monthlyTax), k: 'tax per month' },
+      { v: euro(s.monthlyTax * 12), k: 'a full year' },
+      { v: L.bills.length ? euro(L.bills[0].amount) : '0 EUR', k: 'first year bill' },
+      { v: euro(L.total), k: 'total to ' + MONTHS_EN[L.last.m] + ' ' + L.last.y },
+    ];
+    el('zlFigs').innerHTML = figs.map(function (f) { return '<div class="zl-fig"><b>' + f.v + '</b><i>' + f.k + '</i></div>'; }).join('');
+    var rows = [];
+    rows.push('<li><span>Declaration due</span><b>' + L.declaration + '</b></li>');
+    L.bills.forEach(function (b) {
+      var due = (b.year === L.first.y && L.first.m > 6) ? 'due one month after the tax notice' : 'due 15 July ' + b.year;
+      rows.push('<li><span>' + b.year + ': ' + b.months + ' month' + (b.months === 1 ? '' : 's') + ', ' + due + '</span><b>' + euro(b.amount) + '</b></li>');
+    });
+    el('zlBills').innerHTML = rows.join('');
+
+    var head, body;
+    if (s.exempt) {
+      head = 'Send the form back anyway';
+      body = 'The work-flat exemption for married couples and registered partners only works if you tell the Finanzamt. Fill in the declaration it sends you as a Negativerklärung and keep your family home registered as your main residence.';
+    } else if (s.monthlyTax * 12 < 300) {
+      head = 'Small, but it arrives every year';
+      body = 'At ' + euro(s.monthlyTax * 12) + ' a year this is not worth a fight, but it is worth a calendar entry. If Berlin is really where you spend most of your nights, the honest fix is to make this your main residence, which ends the tax at the end of the month before.';
+    } else {
+      head = euro(s.monthlyTax * 12) + ' a year for a registration choice';
+      body = 'If you actually live here most of the week, your main residence is here under the registration law, and registering it that way ends this bill at the end of the month before the change. If your life really is somewhere else, budget ' + euro(s.monthlyTax * 12) + ' for every 15 July and check the rent figure in the declaration.';
+    }
+    el('zlVerdict').innerHTML = '<h4>' + head + '</h4><p>' + body + '</p>';
+  }
+
+  ['zlRent', 'zlArea', 'zlOwn', 'zlCommon', 'zlPeople', 'zlExempt'].forEach(function (id) {
+    el(id).addEventListener('input', paintShare);
+    el(id).addEventListener('change', paintShare);
+  });
+  el('zlNext1').addEventListener('click', function () {
+    var s = share();
+    el('zlErr1').textContent = s.ok ? '' : 'Your own rooms plus the shared rooms cannot be larger than the whole flat.';
+    if (!s.ok) return;
+    show(2);
+  });
+  el('zlBack2').addEventListener('click', function () { show(1); });
+  el('zlBack3').addEventListener('click', function () { show(2); });
+  el('zlNext2').addEventListener('click', function () {
+    var L = ledger();
+    if (L.error && !L.months) { el('zlErr2').textContent = L.error; return; }
+    el('zlErr2').textContent = L.error || '';
+    if (L.error) return;
+    draw(L);
+    report(L);
+    show(3);
+  });
+
+  paintShare();
+  show(1);
+})();
+</script>
+</body>
+</html>

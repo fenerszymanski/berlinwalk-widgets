@@ -13147,5 +13147,43 @@
         "a": "Security of tenure more than price. A Dauernutzungsvertrag is not a normal tenancy: the cooperative owns the building and its members are the cooperative, so the block does not get sold to an investor, converted into owner-occupied flats, or emptied with an Eigenbedarf letter. In Berlin that, not a rent rise, is what usually moves people out of a flat they liked."
       }
     ]
+  },
+  "second-home-tax-berlin": {
+    "title": "Berlin Second Home Tax - FAQ",
+    "subtitle": "Who pays the Berlin Zweitwohnungsteuer, how the 20 percent is worked out for a flat or a WG room, when it starts and ends, and the one exemption for couples.",
+    "items": [
+      {
+        "q": "How much is the second home tax in Berlin?",
+        "a": "**20 percent of the yearly net cold rent** for tax years from 2025, up from 15 percent before. A flat at 600 euros cold a month costs 7,200 euros a year in rent and so 1,440 euros in second home tax. If you pay no rent, for example because you own the flat, the Finanzamt uses the Berlin Mietspiegel figure for a comparable flat instead."
+      },
+      {
+        "q": "Do I pay second home tax on a WG room in Berlin?",
+        "a": "Yes, if the room is registered as your Nebenwohnung. Since 1 January 2025 the Berlin law taxes each person who shares a flat on their own portion: **your own room plus an equal share of the rooms everyone uses**. The change was made specifically so that subtenants, who were outside the tax before, now pay it too."
+      },
+      {
+        "q": "Do students have to pay Berlin second home tax?",
+        "a": "Yes. Students with a Berlin flat or room registered as a second residence pay it like anyone else. The Berlin tax office points to a Bundesfinanzhof ruling of 17 February 2010, which confirmed that even a childhood bedroom at the parents' home can be the main residence that makes the Berlin room a taxable second home."
+      },
+      {
+        "q": "Can I just register my Berlin flat as my main residence?",
+        "a": "Only if it is true. Under the federal registration law your main residence is the flat you **mainly use**, and for a married person or registered partner who is not separated it is the family's flat. If you really live in Berlin most of the time, registering it as your Hauptwohnung is correct and ends the tax at the end of the month before the change."
+      },
+      {
+        "q": "When does Berlin second home tax start and end?",
+        "a": "It starts on the first day of the month after the flat becomes your Nebenwohnung, or that same day if it happens on the first. It ends on the last day of the month before the flat stops being your second home, unless the change falls on the last day of a month. The declaration is due by **31 May** of the year it covers, or by the end of the month after the tax starts if that is later, and the yearly amount is due on **15 July**."
+      },
+      {
+        "q": "Is there an exemption for couples who live apart for work?",
+        "a": "Only for married couples and registered partners who are not separated. If you keep the Berlin flat **for work** and your shared home, which is your main residence, lies **outside Berlin**, the Berlin flat is not a taxable second home. Unmarried couples do not qualify. You still return the declaration the Finanzamt sends you, as a Negativerklärung, explaining why the flat is exempt."
+      },
+      {
+        "q": "Who collects the second home tax in Berlin?",
+        "a": "The Finanzamt Mitte/Tiergarten is responsible for the whole city. It normally writes to you about a month after you register a second residence at a Bürgeramt, but the duty to file exists even if no letter arrives. It reassesses every third year, and if your rent goes down in between you can report it by 31 December to be taxed on the lower figure."
+      },
+      {
+        "q": "Does a flat abroad make my Berlin flat a second home?",
+        "a": "No. The registration law only weighs flats inside Germany against each other. If your Berlin flat is the only one you have in Germany, it is your main residence here, whatever you keep in another country, and no second home tax arises on it."
+      }
+    ]
   }
 }
