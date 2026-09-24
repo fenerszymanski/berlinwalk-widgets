@@ -3,7 +3,20 @@
   const BASE_URL = SCRIPT_URL
     ? new URL('../', SCRIPT_URL).toString()
     : 'https://fenerszymanski.github.io/berlinwalk-widgets/';
-  const CALENDAR_SCRIPT_URL = new URL('booking-calendar/booking-calendar-element.js', BASE_URL).toString();
+  // The query busts browser/CDN copies of the calendar that predate the
+  // checkout A handoff; bump it whenever the landing needs a newer calendar.
+  const CALENDAR_SCRIPT_URL = new URL('booking-calendar/booking-calendar-element.js?v=checkout-a-20260924', BASE_URL).toString();
+  // Checkout A (Wix page ob6t5), contract C1: ?start=YYYY-MM-DDTHH:MM&guests=N
+  // plus the five incoming UTM keys. Never click ids (fbclid/fbc/fbp) or PII.
+  const CHECKOUT_PATH = '/book-berlin-walking-tour/berlin-free-walking-tour-tip-based';
+  const CHECKOUT_ORIGIN = 'https://www.berlinwalk.com';
+  const CHECKOUT_HOSTS = /^(www\.)?(berlinwalk|walkofberlin)\.com$/i;
+  const CHECKOUT_UTM_KEYS = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term'];
+  const CHECKOUT_MAX_GUESTS = 8;
+  // Checkout A lists sessions 45 days ahead (listTourSessions in
+  // tourCheckout.web.js). Offering later dates here would hand off a start
+  // that checkout A cannot show, so the landing calendar uses the same window.
+  const CHECKOUT_WINDOW_DAYS = '45';
   const TRACK_ENDPOINT = 'https://berlinwalk-content-app.vercel.app/api/pf-event';
   const LOGO_URL = new URL('assets/berlinwalk-wordmark-white.png', BASE_URL).toString();
   const PAID_TRACKING_KEY = 'bwPaidTracking.v1';
@@ -12,6 +25,56 @@
   const PAID_AD_IDENTIFIER_KEYS = ['fbclid', 'fbc', 'fbp'];
 
   const asset = (path) => new URL(path, BASE_URL).toString();
+
+  function berlinStartKey(value) {
+    const raw = String(value || '');
+    if (/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}/.test(raw) && !/(Z|[+-]\d{2}:?\d{2})$/i.test(raw)) return raw.slice(0, 16);
+    const date = new Date(raw);
+    if (Number.isNaN(date.getTime())) return '';
+    const parts = Object.fromEntries(new Intl.DateTimeFormat('en-CA', {
+      timeZone: 'Europe/Berlin',
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit',
+      hour: '2-digit',
+      minute: '2-digit',
+      hourCycle: 'h23',
+    }).formatToParts(date).map((part) => [part.type, part.value]));
+    return `${parts.year}-${parts.month}-${parts.day}T${parts.hour}:${parts.minute}`;
+  }
+
+  // Same output as bwCheckoutHandoffHref in booking-calendar-element.js. The
+  // landing keeps its own copy so a stale calendar build (cached, or defined
+  // earlier by another page in the same Wix session) still hands off to
+  // checkout A instead of the legacy /booking-form.
+  function checkoutHandoffHref(start, guests, pageLocation = window.location) {
+    const startKey = String(start || '');
+    if (!/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}$/.test(startKey)) return '';
+    const rawGuests = Math.round(Number(guests));
+    const guestCount = Math.max(1, Math.min(CHECKOUT_MAX_GUESTS, Number.isFinite(rawGuests) ? rawGuests : 2));
+    const loc = pageLocation || {};
+    const sameOrigin = /^https:$/.test(String(loc.protocol || ''))
+      && CHECKOUT_HOSTS.test(String(loc.hostname || ''))
+      && loc.origin;
+    const url = new URL(`${sameOrigin || CHECKOUT_ORIGIN}${CHECKOUT_PATH}`);
+    url.searchParams.set('start', startKey);
+    url.searchParams.set('guests', String(guestCount));
+    const incoming = new URLSearchParams(String(loc.search || ''));
+    CHECKOUT_UTM_KEYS.forEach((key) => {
+      const value = String(incoming.get(key) || '').replace(/[\u0000-\u001F\u007F]/g, '').trim().slice(0, 100);
+      if (value) url.searchParams.set(key, value);
+    });
+    return url.toString();
+  }
+
+  function isCheckoutHandoffHref(href) {
+    try {
+      const url = new URL(String(href || ''));
+      return url.pathname === CHECKOUT_PATH && /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}$/.test(url.searchParams.get('start') || '');
+    } catch {
+      return false;
+    }
+  }
 
   function consentBoolean(value) {
     return value === true || value === 1 || value === '1' || value === 'true';
@@ -284,7 +347,7 @@
       this.innerHTML = `
         <style>${this._styles()}</style>
         <main class="bw-paid-landing" style="--bw-paid-hero-image: url('${heroImage}'); --bw-paid-route-image: url('${routeImage}'); --bw-paid-guide-image: url('${guideImage}');">
-          <div class="bw-paid-top-strip">9.8 / 10 on FreeTour - Tip-based - &euro;2 refundable deposit - ~2h - Sep: Tue-Sat 11:30 &amp; 15:30 - Oct: selected Wed-Sun 11:30 - Check calendar</div>
+          <div class="bw-paid-top-strip">9.8 / 10 on FreeTour - Tip-based - &euro;2 refundable deposit - ~2h - <span data-bw-paid-schedule>Live dates in the calendar below</span></div>
 
           <section class="bw-paid-hero" id="bw-paid-book">
             <div class="bw-paid-inner">
@@ -317,7 +380,8 @@
                     <span>Pick a date below. Phone is only for tour-day coordination.</span>
                   </div>
                   <bw-booking-calendar
-                    availability-days="${this.getAttribute('availability-days') || '365'}"
+                    handoff="checkout-a"
+                    availability-days="${this.getAttribute('availability-days') || CHECKOUT_WINDOW_DAYS}"
                     service-title="Pick your tour date"
                     cta-label="Reserve your spot">
                   </bw-booking-calendar>
@@ -482,6 +546,7 @@
       if (calendar) {
         calendar.addEventListener('bw-booking-calendar-change', (event) => {
           const detail = event.detail || {};
+          if (detail.action === 'guests') return;
           const eventName = detail.action === 'slot' ? 'bw_booking_slot_select' : 'bw_booking_pick_date_click';
           this._track(eventName, {
             source: 'booking_calendar',
@@ -496,11 +561,37 @@
             source: 'booking_calendar',
             date: detail.date,
             time: detail.time,
+            guests: detail.guests,
           });
+          if (isCheckoutHandoffHref(detail.href)) return;
+          // A calendar build without the checkout A handoff is on the page:
+          // take over the navigation so paid visitors never reach /booking-form.
+          const href = checkoutHandoffHref(berlinStartKey(detail.slot && detail.slot.startDate), detail.guests);
+          if (!href) return;
+          event.preventDefault();
+          this._goTo(href);
+        });
+        calendar.addEventListener('bw-booking-calendar-availability', (event) => {
+          this._renderSchedule(event.detail || {});
         });
       }
 
       this._setupStickyCta(calendar);
+    }
+
+    _renderSchedule(detail) {
+      const target = this.querySelector('[data-bw-paid-schedule]');
+      const first = detail && detail.first;
+      if (!target || !first || !first.label || !first.time) return;
+      target.textContent = `Next walk: ${first.label}, ${first.time}`;
+    }
+
+    _goTo(href) {
+      try {
+        window.top.location.href = href;
+        return;
+      } catch {}
+      window.location.href = href;
     }
 
     _setupStickyCta(calendar) {
@@ -1543,6 +1634,9 @@
       consentState,
       canonicalTrackingState,
       purgeAdvertisingIdentifiers,
+      checkoutHandoffHref,
+      isCheckoutHandoffHref,
+      berlinStartKey,
       BWPaidLandingElement,
     };
   }

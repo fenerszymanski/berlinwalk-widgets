@@ -494,46 +494,46 @@
       beaconFallback();
     }
 
-    function bookingCompleteKey() {
-      var match = path.match(/\/(?:thank-you-page|booking-confirmation)\/([^\/?#]+)/);
-      return 'bwBookingCompleteFired:' + (match ? match[1] : path);
+    // bw_booking_complete counts one real booking, so it is keyed by the order
+    // or booking id in the URL the visitor is on when the event is sent (see
+    // bookingCompleteIdFromLocation). The marker lives in localStorage so a
+    // refresh, a new tab or a later revisit of the same thank-you URL is not a
+    // second booking. The in-memory map covers browsers that block storage.
+    var bookingCompleteAnalyticsSent = {};
+
+    function bookingCompleteAnalyticsKey(bookingId) {
+      return 'bwBookingCompleteFired:' + bookingId;
     }
 
-    function bookingCompleteAnalyticsAlreadyFired() {
-      try { return Boolean(window.localStorage.getItem(bookingCompleteKey())); } catch (err) { return false; }
+    function bookingCompleteAnalyticsAlreadyFired(bookingId) {
+      if (bookingCompleteAnalyticsSent[bookingId]) return true;
+      try { return Boolean(window.localStorage.getItem(bookingCompleteAnalyticsKey(bookingId))); } catch (err) { return false; }
     }
 
-    function markBookingCompleteAnalyticsFired() {
-      try { window.localStorage.setItem(bookingCompleteKey(), new Date().toISOString()); } catch (err) {}
-    }
-
-    function bookingCompleteAdvertisingKey() {
-      var hash = 0;
-      for (var index = 0; index < path.length; index += 1) {
-        hash = ((hash << 5) - hash) + path.charCodeAt(index);
-        hash |= 0;
-      }
-      return 'bwBookingCompleteAdvertisingFired.v1:' + (hash >>> 0).toString(36);
-    }
-
-    function bookingCompleteAdvertisingAlreadyFired() {
-      try { return Boolean(window.sessionStorage.getItem(bookingCompleteAdvertisingKey())); } catch (err) { return false; }
-    }
-
-    function markBookingCompleteAdvertisingFired() {
-      try { window.sessionStorage.setItem(bookingCompleteAdvertisingKey(), '1'); } catch (err) {}
+    function markBookingCompleteAnalyticsFired(bookingId) {
+      bookingCompleteAnalyticsSent[bookingId] = true;
+      try { window.localStorage.setItem(bookingCompleteAnalyticsKey(bookingId), new Date().toISOString()); } catch (err) {}
     }
 
     function sendEvent(name, detail) {
       var channels = arguments[2] || {};
       var consent = currentConsentState();
       var isBookingComplete = name === 'bw_booking_complete';
+      // A bare /thank-you-page visit, a non-id path segment, or a listener that
+      // outlived an SPA navigation away from the thank-you page carries no id
+      // and must not count as a booking on any channel.
+      var bookingId = isBookingComplete ? bookingCompleteIdFromLocation(window.location) : '';
+      if (isBookingComplete && !bookingId) return { analytics: false, advertising: false };
       var allowAnalytics = channels.analytics !== false
         && consent.analytics
-        && (!isBookingComplete || !bookingCompleteAnalyticsAlreadyFired());
+        && (!isBookingComplete || !bookingCompleteAnalyticsAlreadyFired(bookingId));
+      // The Meta pixel copy of bw_booking_complete (and its paired Lead) is
+      // owned by the Wix embed "BerlinWalk Booking Funnel Advertising Events".
+      // Sending it from here too was the second pixel event behind every real
+      // booking, so this script only records the first-party analytics copy.
       var allowAdvertising = channels.advertising !== false
         && consent.advertising
-        && (!isBookingComplete || !bookingCompleteAdvertisingAlreadyFired());
+        && !isBookingComplete;
       if (!allowAnalytics && !allowAdvertising) return { analytics: false, advertising: false };
       var state = allowAnalytics ? ensureTracking() : null;
       if (allowAnalytics && !state) return { analytics: false, advertising: false };
@@ -555,13 +555,12 @@
           if (typeof window.gtag === 'function') window.gtag('event', name, payload);
         } catch (err) {}
         sendEndpoint(name, payload, state);
-        if (isBookingComplete) markBookingCompleteAnalyticsFired();
+        if (isBookingComplete) markBookingCompleteAnalyticsFired(bookingId);
       }
       var advertisingSent = false;
       if (allowAdvertising && typeof window.fbq === 'function') {
         window.fbq('trackCustom', name, Object.assign({}, payload));
         advertisingSent = true;
-        if (isBookingComplete) markBookingCompleteAdvertisingFired();
       }
       return { analytics: allowAnalytics, advertising: advertisingSent };
     }
@@ -2553,6 +2552,30 @@
     };
   }
 
+  // A real booking lands on /thank-you-page/<eCom order id> (native Wix
+  // checkout and checkout A), /booking-confirmation/<booking id> (legacy), or
+  // /thank-you-page?order=<order id>. Wix renders the same thank-you page for
+  // every one of these URLs and for the bare path, so the id in the URL is the
+  // only evidence that a booking just happened. Wix order and booking ids are
+  // GUIDs; anything else is not treated as an id. The pattern stays inside the
+  // function: installConsentGatedBookingAnalytics() runs near the top of this
+  // file, before a module-level var assigned down here would exist.
+  function bookingCompleteIdFromLocation(loc) {
+    var idPattern = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/;
+    var pathname = String(loc && loc.pathname || '').toLowerCase();
+    var page = pathname.match(/^\/(?:thank-you-page|booking-confirmation)(?:\/([^\/?#]*))?\/?$/);
+    if (!page) return '';
+    var candidates = [page[1] || ''];
+    try {
+      candidates.push(String(new URLSearchParams(loc.search || '').get('order') || '').toLowerCase());
+    } catch (err) {}
+    for (var index = 0; index < candidates.length; index += 1) {
+      var candidate = candidates[index].trim();
+      if (idPattern.test(candidate)) return candidate;
+    }
+    return '';
+  }
+
   function trackingRandomId(prefix) {
     try {
       if (window.crypto && typeof window.crypto.getRandomValues === 'function') {
@@ -3151,6 +3174,7 @@
       applyBookAttribution: applyBookAttribution,
       trackPaidEvent: trackPaidEvent,
       installConsentGatedBookingAnalytics: installConsentGatedBookingAnalytics,
+      bookingCompleteIdFromLocation: bookingCompleteIdFromLocation,
     };
     return;
   }

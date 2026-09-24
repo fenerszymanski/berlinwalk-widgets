@@ -1,5 +1,46 @@
 const BW_BOOKING_CALENDAR_BOOKING_URL = 'https://www.berlinwalk.com/booking-form';
 const BW_BOOKING_CALENDAR_AVAILABILITY_ENDPOINT = 'https://berlinwalk-content-app.vercel.app/api/booking-calendar-availability';
+// Checkout A (Wix page ob6t5) is the canonical booking page. `handoff="checkout-a"`
+// sends the chosen slot there as ?start=YYYY-MM-DDTHH:MM&guests=N plus the five
+// incoming UTM keys (contract C1). Click ids (fbclid/fbc/fbp) are never added.
+const BW_BOOKING_CALENDAR_CHECKOUT_PATH = '/book-berlin-walking-tour/berlin-free-walking-tour-tip-based';
+const BW_BOOKING_CALENDAR_CHECKOUT_ORIGIN = 'https://www.berlinwalk.com';
+const BW_BOOKING_CALENDAR_CHECKOUT_HOSTS = /^(www\.)?(berlinwalk|walkofberlin)\.com$/i;
+const BW_BOOKING_CALENDAR_UTM_KEYS = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term'];
+const BW_BOOKING_CALENDAR_MAX_GUESTS = 8;
+
+function bwCheckoutHandoffHref(options) {
+  const opts = options || {};
+  const start = String(opts.start || '');
+  if (!/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}$/.test(start)) return '';
+  const rawGuests = Math.round(Number(opts.guests));
+  const guests = Math.max(1, Math.min(BW_BOOKING_CALENDAR_MAX_GUESTS, Number.isFinite(rawGuests) ? rawGuests : 2));
+  const pageLocation = opts.location || {};
+  let base = opts.base || '';
+  if (!base) {
+    const sameOrigin = /^https:$/.test(String(pageLocation.protocol || ''))
+      && BW_BOOKING_CALENDAR_CHECKOUT_HOSTS.test(String(pageLocation.hostname || ''))
+      && pageLocation.origin;
+    base = `${sameOrigin || BW_BOOKING_CALENDAR_CHECKOUT_ORIGIN}${BW_BOOKING_CALENDAR_CHECKOUT_PATH}`;
+  }
+  let url;
+  try {
+    url = new URL(base);
+  } catch {
+    return '';
+  }
+  // Only the contract keys survive, in a fixed order.
+  url.search = '';
+  url.searchParams.set('start', start);
+  url.searchParams.set('guests', String(guests));
+  const incoming = new URLSearchParams(String(pageLocation.search || ''));
+  BW_BOOKING_CALENDAR_UTM_KEYS.forEach((key) => {
+    const value = String(incoming.get(key) || '').replace(/[\u0000-\u001F\u007F]/g, '').trim().slice(0, 100);
+    if (value) url.searchParams.set(key, value);
+  });
+  url.hash = '';
+  return url.toString();
+}
 
 function bwConsentBoolean(value) {
   return value === true || value === 1 || value === '1' || value === 'true';
@@ -574,6 +615,103 @@ const BW_BOOKING_CALENDAR_STYLES = `
     pointer-events: none;
   }
 
+  .bw-booking-calendar .bw-cal-cta.is-waiting {
+    background: #EEF3EC;
+    border: 1px dashed #7FA877;
+    color: #1B5E20;
+    cursor: pointer;
+    font-weight: 800;
+  }
+
+  .bw-cal-slots .bw-cal-empty {
+    grid-column: 1 / -1;
+  }
+
+  .bw-booking-calendar .bw-cal-cta.is-waiting:hover,
+  .bw-booking-calendar .bw-cal-cta.is-waiting:focus-visible {
+    background: #E2EEDD;
+    color: #123D18;
+  }
+
+  .bw-booking-calendar .bw-cal-cta:focus-visible,
+  .bw-booking-calendar .bw-cal-day:focus-visible,
+  .bw-booking-calendar .bw-cal-slot:focus-visible,
+  .bw-booking-calendar .bw-cal-step:focus-visible {
+    outline: 3px solid #123D18;
+    outline-offset: 2px;
+  }
+
+  .bw-cal-guest-row {
+    align-items: center;
+    display: grid;
+    gap: 8px;
+    grid-template-columns: minmax(0, 1fr) 132px;
+    min-width: 0;
+  }
+
+  .bw-cal-guest-copy {
+    display: grid;
+    gap: 3px;
+    min-width: 0;
+  }
+
+  .bw-cal-guest-copy .bw-cal-label {
+    margin-bottom: 0;
+  }
+
+  .bw-cal-guest-hint {
+    color: var(--muted);
+    font-size: 11px;
+    font-weight: 700;
+    line-height: 1.25;
+  }
+
+  .bw-cal-stepper {
+    background: #F8FBF4;
+    border: 1px solid #CFE4C8;
+    border-radius: 8px;
+    display: grid;
+    grid-template-columns: 38px 1fr 38px;
+    overflow: hidden;
+  }
+
+  .bw-cal-stepper .bw-cal-step {
+    border: 0;
+    border-radius: 0;
+    font-size: 18px;
+    font-weight: 800;
+    height: 38px;
+    line-height: 1;
+    padding: 0;
+  }
+
+  .bw-cal-stepper .bw-cal-step:disabled {
+    cursor: default;
+    opacity: 0.38;
+  }
+
+  .bw-cal-guests {
+    align-items: center;
+    color: var(--green);
+    display: inline-flex;
+    font-size: 15px;
+    font-weight: 800;
+    justify-content: center;
+    min-width: 0;
+  }
+
+  .bw-cal-sr {
+    border: 0;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    white-space: nowrap;
+    width: 1px;
+  }
+
   .bw-cal-message {
     background: #FFFDE7;
     border: 1px solid #EFE6A3;
@@ -627,14 +765,14 @@ const BW_BOOKING_CALENDAR_STYLES = `
     }
 
     .bw-cal-guest-row {
-      grid-template-columns: 1fr;
+      grid-template-columns: minmax(0, 1fr) 128px;
     }
 
     .bw-cal-stepper {
-      grid-template-columns: 44px 1fr 44px;
+      grid-template-columns: 40px 1fr 40px;
     }
 
-    .bw-cal-step {
+    .bw-cal-stepper .bw-cal-step {
       height: 40px;
     }
   }
@@ -658,6 +796,9 @@ class BWBookingCalendarElement extends HTMLElement {
       'cta-label',
       'hide-intro',
       'demo',
+      'handoff',
+      'checkout-url',
+      'no-preselect',
     ];
   }
 
@@ -693,10 +834,24 @@ class BWBookingCalendarElement extends HTMLElement {
   }
 
   _hydrate() {
-    this.state.guests = this._boundedGuests(Number(this.getAttribute('default-guests') || this.state.guests || 2));
+    if (!this._guestsTouched) {
+      this.state.guests = this._boundedGuests(Number(this.getAttribute('default-guests') || this.state.guests || 2));
+    }
     this.state.slots = this._readSlots();
     const firstSlot = this.state.slots[0];
     const dates = this._availableDates();
+    if (this._manualSelection()) {
+      // Nothing is picked for the visitor: keep only a choice they made that
+      // still exists after an availability refresh.
+      if (this.state.selectedDate && !dates.includes(this.state.selectedDate)) {
+        this.state.selectedDate = '';
+        this.state.selectedSlotId = '';
+      }
+      if (this.state.selectedSlotId && !this._slotsForSelectedDate().some((slot) => slot.id === this.state.selectedSlotId)) {
+        this.state.selectedSlotId = '';
+      }
+      return;
+    }
     if (firstSlot && (!this.state.selectedDate || !dates.includes(this.state.selectedDate))) {
       this.state.selectedDate = this._dateKey(firstSlot.startDate);
       this.state.selectedSlotId = '';
@@ -762,6 +917,7 @@ class BWBookingCalendarElement extends HTMLElement {
       this._isFetchingAvailability = false;
       this.removeAttribute('error-message');
       this.setAttribute('availability-json', JSON.stringify(slots));
+      this._emitAvailability();
     } catch (error) {
       this._isFetchingAvailability = false;
       this.setAttribute('error-message', 'Could not load live availability. Please try again in a moment.');
@@ -827,9 +983,30 @@ class BWBookingCalendarElement extends HTMLElement {
     const dates = this._availableDates();
     const months = this._availableMonths(dates);
     const slots = this._slotsForSelectedDate();
-    const selectedText = selectedSlot
-      ? `<strong>${this._formatDate(selectedSlot.startDate)} at ${this._formatTime(selectedSlot.startDate)}</strong>`
+    const manual = this._manualSelection();
+    const handoff = this._isCheckoutHandoff();
+    const guestText = `${this.state.guests} ${this.state.guests === 1 ? 'guest' : 'guests'}`;
+    let selectedText = selectedSlot
+      ? `<strong>${this._formatDate(selectedSlot.startDate)} at ${this._formatTime(selectedSlot.startDate)}</strong>${handoff ? ` for ${guestText}` : ''}`
       : 'Choose a date and time.';
+    let statusText = '';
+    if (manual) {
+      if (selectedSlot) {
+        statusText = `${this._formatDate(selectedSlot.startDate)} at ${this._formatTime(selectedSlot.startDate)} selected.`;
+      } else if (this.state.selectedDate) {
+        selectedText = `<strong>${this._escape(this._formatDate(this.state.selectedDate))}</strong>: now pick a start time.`;
+        statusText = `${this._formatDate(this.state.selectedDate)} selected. Now pick a start time.`;
+      } else {
+        selectedText = 'No date picked yet.';
+      }
+    }
+    const ctaMarkup = this._ctaMarkup(selectedSlot, ctaLabel, manual, guestText);
+    const nextNote = handoff
+      ? 'Your contact details and the deposit come on the next step. Phone is only for tour-day coordination.'
+      : 'Attendees + phone on the next step. Phone is only for tour-day coordination.';
+    if (this._pendingAnnouncement) statusText = this._pendingAnnouncement;
+    this._pendingAnnouncement = '';
+    const focusKey = this._activeFocusKey();
 
     this.innerHTML = `
       <style>${BW_BOOKING_CALENDAR_STYLES}</style>
@@ -852,7 +1029,7 @@ class BWBookingCalendarElement extends HTMLElement {
                 <div class="bw-cal-date-row">
                   <button class="bw-cal-date-nav" type="button" data-action="scroll-days" data-direction="-1" aria-label="Show earlier dates">&lsaquo;</button>
                   <div class="bw-cal-date-viewport">
-                    <div class="bw-cal-days" data-days>
+                    <div class="bw-cal-days" data-days role="group" aria-label="Tour dates">
                       ${dates.map((date) => this._dayButton(date)).join('')}
                       ${this._futureTbdCard(dates)}
                     </div>
@@ -863,17 +1040,17 @@ class BWBookingCalendarElement extends HTMLElement {
             </div>
             <div>
               <span class="bw-cal-label">Time</span>
-              <div class="bw-cal-slots">
-                ${slots.length ? slots.map((slot) => this._slotButton(slot)).join('') : loading ? '' : '<div class="bw-cal-empty">No open slots on this date.</div>'}
+              <div class="bw-cal-slots" data-slots role="group" aria-label="Start times">
+                ${slots.length ? slots.map((slot) => this._slotButton(slot)).join('') : loading ? '' : manual && !this.state.selectedDate ? (dates.length ? '<div class="bw-cal-empty">Start times appear after you pick a date.</div>' : '') : '<div class="bw-cal-empty">No open slots on this date.</div>'}
               </div>
             </div>
+            ${handoff ? this._guestMarkup() : ''}
           </div>
           <footer class="bw-cal-summary">
             <span class="bw-cal-selected">${selectedText}</span>
-            <span class="bw-cal-next-note">Attendees + phone on the next step. Phone is only for tour-day coordination.</span>
-            ${selectedSlot
-              ? `<a class="bw-cal-cta" href="${this._escape(this._bookingHref(selectedSlot))}" target="_top" data-action="continue">${this._escape(ctaLabel)}</a>`
-              : `<span class="bw-cal-cta is-disabled" aria-disabled="true">${this._escape(ctaLabel)}</span>`}
+            <span class="bw-cal-next-note">${this._escape(nextNote)}</span>
+            ${ctaMarkup}
+            ${manual ? '<span class="bw-cal-sr" role="status" aria-live="polite" data-live></span>' : ''}
           </footer>
         </div>
       </section>
@@ -881,7 +1058,143 @@ class BWBookingCalendarElement extends HTMLElement {
 
     this._bind();
     this._applyDateScrollPosition();
+    this._restoreFocus(focusKey);
+    this._announce(statusText);
     this._postResize();
+  }
+
+  _ctaMarkup(selectedSlot, ctaLabel, manual, guestText) {
+    if (selectedSlot) {
+      const href = this._bookingHref(selectedSlot);
+      const aria = manual
+        ? ` aria-label="${this._escape(`${ctaLabel}: ${this._formatDate(selectedSlot.startDate)} at ${this._formatTime(selectedSlot.startDate)}${this._isCheckoutHandoff() ? `, ${guestText}` : ''}`)}"`
+        : '';
+      if (href) {
+        return `<a class="bw-cal-cta" href="${this._escape(href)}" target="_top" data-action="continue"${aria}>${this._escape(ctaLabel)}</a>`;
+      }
+    }
+    if (!manual) {
+      return `<span class="bw-cal-cta is-disabled" aria-disabled="true">${this._escape(ctaLabel)}</span>`;
+    }
+    // Waiting state: visibly not ready, but still focusable and clickable so it
+    // can move the visitor to the control that is missing.
+    const needsTime = Boolean(this.state.selectedDate);
+    const label = needsTime ? 'Now pick a start time' : 'Pick a date first';
+    const hint = needsTime
+      ? `Now pick a start time for ${this._formatDate(this.state.selectedDate)} to reserve your spot`
+      : 'Pick a date first, then a start time, to reserve your spot';
+    return `<button class="bw-cal-cta is-waiting" type="button" aria-disabled="true" data-action="needs-${needsTime ? 'time' : 'date'}" aria-label="${this._escape(hint)}">${this._escape(label)}</button>`;
+  }
+
+  _guestMarkup() {
+    const max = this._maxGuests();
+    const guests = this.state.guests;
+    return `
+      <div class="bw-cal-guest-row">
+        <div class="bw-cal-guest-copy">
+          <span class="bw-cal-label">Guests</span>
+          <span class="bw-cal-guest-hint">&euro;2 refundable deposit each</span>
+        </div>
+        <div class="bw-cal-stepper" role="group" aria-label="Guests">
+          <button class="bw-cal-step" type="button" data-guest-step="-1" aria-label="Remove a guest"${guests <= 1 ? ' disabled' : ''}>&minus;</button>
+          <span class="bw-cal-guests">${guests}<span class="bw-cal-sr"> ${guests === 1 ? 'guest' : 'guests'}</span></span>
+          <button class="bw-cal-step" type="button" data-guest-step="1" aria-label="Add a guest"${guests >= max ? ' disabled' : ''}>+</button>
+        </div>
+      </div>
+    `;
+  }
+
+  _isCheckoutHandoff() {
+    return this.getAttribute('handoff') === 'checkout-a';
+  }
+
+  _manualSelection() {
+    return this._isCheckoutHandoff() || this.getAttribute('no-preselect') !== null;
+  }
+
+  _maxGuests() {
+    const raw = Number(this.getAttribute('max-guests') || BW_BOOKING_CALENDAR_MAX_GUESTS);
+    const max = Number.isFinite(raw) ? Math.round(raw) : BW_BOOKING_CALENDAR_MAX_GUESTS;
+    return Math.max(1, Math.min(BW_BOOKING_CALENDAR_MAX_GUESTS, max));
+  }
+
+  _slotStartKey(slot) {
+    if (!slot || !slot.startDate) return '';
+    return `${this._dateKey(slot.startDate)}T${this._formatTime(slot.startDate)}`;
+  }
+
+  _checkoutHref(slot) {
+    if (!slot) return '';
+    let pageLocation = {};
+    try {
+      pageLocation = window.location || {};
+    } catch {}
+    return bwCheckoutHandoffHref({
+      start: this._slotStartKey(slot),
+      guests: this.state.guests,
+      location: pageLocation,
+      base: this.getAttribute('checkout-url') || '',
+    });
+  }
+
+  _activeFocusKey() {
+    const active = document.activeElement;
+    if (!active || !this.contains(active)) return '';
+    if (active.hasAttribute('data-date')) return `[data-date="${active.getAttribute('data-date')}"]`;
+    if (active.hasAttribute('data-slot')) return `[data-slot="${active.getAttribute('data-slot')}"]`;
+    if (active.hasAttribute('data-guest-step')) return `[data-guest-step="${active.getAttribute('data-guest-step')}"]`;
+    if (active.classList.contains('bw-cal-cta')) return '.bw-cal-cta';
+    if (active.hasAttribute('data-month-select')) return '[data-month-select]';
+    return '';
+  }
+
+  _restoreFocus(selector) {
+    if (!selector) return;
+    try {
+      let target = this.querySelector(selector);
+      if (target && target.disabled) target = this.querySelector('[data-guest-step]:not([disabled])');
+      if (target) target.focus({ preventScroll: true });
+    } catch {}
+  }
+
+  _announce(text) {
+    if (!text || text === this._lastAnnouncement) {
+      if (!text) this._lastAnnouncement = '';
+      return;
+    }
+    this._lastAnnouncement = text;
+    window.setTimeout(() => {
+      const live = this.querySelector('[data-live]');
+      if (live) live.textContent = text;
+    }, 80);
+  }
+
+  _emitAvailability() {
+    const slots = this.state.slots || [];
+    const first = slots[0] || null;
+    const times = [];
+    slots.forEach((slot) => {
+      const time = this._formatTime(slot.startDate);
+      if (!times.includes(time)) times.push(time);
+    });
+    this.dispatchEvent(new CustomEvent('bw-booking-calendar-availability', {
+      bubbles: true,
+      composed: true,
+      detail: {
+        count: slots.length,
+        dates: this._availableDates().length,
+        times: times.sort(),
+        first: first ? {
+          date: this._dateKey(first.startDate),
+          time: this._formatTime(first.startDate),
+          label: this._formatDate(first.startDate),
+        } : null,
+        last: slots.length ? {
+          date: this._dateKey(slots[slots.length - 1].startDate),
+          label: this._formatDate(slots[slots.length - 1].startDate),
+        } : null,
+      },
+    }));
   }
 
   _shouldShowIntro() {
@@ -937,11 +1250,59 @@ class BWBookingCalendarElement extends HTMLElement {
     this.querySelectorAll('[data-date]').forEach((button) => {
       button.addEventListener('click', () => {
         this._preserveDateScroll();
+        const previousSlot = this._selectedSlot();
         this.state.selectedDate = button.getAttribute('data-date') || '';
-        const nextSlot = this._slotsForSelectedDate()[0];
-        this.state.selectedSlotId = nextSlot ? nextSlot.id : '';
+        this.state.viewMonth = this._monthKey(this.state.selectedDate);
+        const dateSlots = this._slotsForSelectedDate();
+        if (this._manualSelection()) {
+          // The visitor picked the date. A date with one start time needs no
+          // second choice; otherwise keep their earlier time when it exists.
+          const previousTime = previousSlot ? this._formatTime(previousSlot.startDate) : '';
+          const sameTime = previousTime ? dateSlots.find((slot) => this._formatTime(slot.startDate) === previousTime) : null;
+          const nextSlot = dateSlots.length === 1 ? dateSlots[0] : sameTime;
+          this.state.selectedSlotId = nextSlot ? nextSlot.id : '';
+        } else {
+          const nextSlot = dateSlots[0];
+          this.state.selectedSlotId = nextSlot ? nextSlot.id : '';
+        }
         this._emitChange('date');
         this._render();
+      });
+    });
+
+    this.querySelectorAll('[data-guest-step]').forEach((button) => {
+      button.addEventListener('click', () => {
+        const step = Number(button.getAttribute('data-guest-step') || 0);
+        const next = this._boundedGuests(this.state.guests + step);
+        if (next === this.state.guests) return;
+        this._preserveDateScroll();
+        this._guestsTouched = true;
+        this.state.guests = next;
+        this._pendingAnnouncement = `${next} ${next === 1 ? 'guest' : 'guests'}.`;
+        this._emitChange('guests');
+        this._render();
+      });
+    });
+
+    this.querySelectorAll('[data-action="needs-date"], [data-action="needs-time"]').forEach((button) => {
+      button.addEventListener('click', (event) => {
+        event.preventDefault();
+        const needsTime = button.getAttribute('data-action') === 'needs-time';
+        const target = needsTime
+          ? this.querySelector('[data-slot]')
+          : (this.querySelector('[data-date]') && this._firstVisibleDateButton());
+        if (!target) return;
+        try {
+          target.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'nearest' });
+        } catch {}
+        try {
+          target.focus({ preventScroll: true });
+        } catch {}
+        this.dispatchEvent(new CustomEvent('bw-booking-calendar-prompt', {
+          bubbles: true,
+          composed: true,
+          detail: { needs: needsTime ? 'time' : 'date' },
+        }));
       });
     });
 
@@ -971,6 +1332,14 @@ class BWBookingCalendarElement extends HTMLElement {
         const month = monthSelect.value;
         const nextDate = this._availableDates().find((date) => this._monthKey(date) === month);
         if (!nextDate) return;
+        if (this._manualSelection()) {
+          // Jump the date strip to that month without choosing a date.
+          this.state.viewMonth = month;
+          this._dateScrollMode = 'target';
+          this._dateScrollTarget = nextDate;
+          this._render();
+          return;
+        }
         this.state.selectedDate = nextDate;
         const nextSlot = this._slotsForSelectedDate()[0];
         this.state.selectedSlotId = nextSlot ? nextSlot.id : '';
@@ -1025,9 +1394,12 @@ class BWBookingCalendarElement extends HTMLElement {
   _applyDateScrollPosition() {
     const mode = this._dateScrollMode;
     const preservedLeft = this._dateScrollLeft;
+    const targetDate = this._dateScrollTarget || '';
     const align = () => {
       const days = this.querySelector('[data-days]');
-      const selected = this.querySelector('.bw-cal-day.is-active');
+      const selected = mode === 'target' && targetDate
+        ? this.querySelector(`.bw-cal-day[data-date="${targetDate}"]`)
+        : this.querySelector('.bw-cal-day.is-active');
       if (!days) {
         this._syncDayNav();
         return;
@@ -1043,6 +1415,15 @@ class BWBookingCalendarElement extends HTMLElement {
     align();
     window.requestAnimationFrame(align);
     this._dateScrollMode = 'align';
+    this._dateScrollTarget = '';
+  }
+
+  _firstVisibleDateButton() {
+    const days = this.querySelector('[data-days]');
+    const buttons = Array.from(this.querySelectorAll('[data-date]'));
+    if (!days || !buttons.length) return buttons[0] || null;
+    const left = days.scrollLeft;
+    return buttons.find((button) => button.offsetLeft - days.offsetLeft + button.offsetWidth > left + 1) || buttons[0];
   }
 
   _syncDayNav() {
@@ -1081,6 +1462,10 @@ class BWBookingCalendarElement extends HTMLElement {
   }
 
   _selectedSlot() {
+    if (this._manualSelection()) {
+      if (!this.state.selectedSlotId) return null;
+      return this._slotsForSelectedDate().find((slot) => slot.id === this.state.selectedSlotId) || null;
+    }
     return this.state.slots.find((slot) => slot.id === this.state.selectedSlotId) || this._slotsForSelectedDate()[0] || this.state.slots[0] || null;
   }
 
@@ -1089,9 +1474,11 @@ class BWBookingCalendarElement extends HTMLElement {
     const weekday = new Intl.DateTimeFormat('en-GB', { weekday: 'short' }).format(date);
     const day = new Intl.DateTimeFormat('en-GB', { day: 'numeric' }).format(date);
     const month = new Intl.DateTimeFormat('en-GB', { month: 'short' }).format(date);
-    const active = dateKey === this.state.selectedDate ? ' is-active' : '';
+    const isActive = dateKey === this.state.selectedDate;
+    const active = isActive ? ' is-active' : '';
+    const fullLabel = new Intl.DateTimeFormat('en-GB', { weekday: 'long', day: 'numeric', month: 'long' }).format(date);
     return `
-      <button class="bw-cal-day${active}" type="button" data-date="${this._escape(dateKey)}">
+      <button class="bw-cal-day${active}" type="button" data-date="${this._escape(dateKey)}" aria-pressed="${isActive ? 'true' : 'false'}" aria-label="${this._escape(fullLabel)}">
         <span>${this._escape(weekday)}</span>
         <b>${this._escape(day)}</b>
         <small>${this._escape(month)}</small>
@@ -1129,7 +1516,7 @@ class BWBookingCalendarElement extends HTMLElement {
   }
 
   _monthSelect(months, dates) {
-    const selectedMonth = this._monthKey(this.state.selectedDate || months[0]?.key || '');
+    const selectedMonth = this._monthKey(this.state.selectedDate || this.state.viewMonth || months[0]?.key || '');
     const tbd = this._futureTbdMeta(dates);
     return `
       <label class="bw-cal-month-wrap">
@@ -1144,15 +1531,17 @@ class BWBookingCalendarElement extends HTMLElement {
   }
 
   _slotButton(slot) {
-    const active = slot.id === this.state.selectedSlotId ? ' is-active' : '';
+    const isActive = slot.id === this.state.selectedSlotId;
+    const active = isActive ? ' is-active' : '';
     return `
-      <button class="bw-cal-slot${active}" type="button" data-slot="${this._escape(slot.id)}">
+      <button class="bw-cal-slot${active}" type="button" data-slot="${this._escape(slot.id)}" aria-pressed="${isActive ? 'true' : 'false'}" aria-label="Start at ${this._escape(this._formatTime(slot.startDate))}">
         <b>${this._escape(this._formatTime(slot.startDate))}</b>
       </button>
     `;
   }
 
   _bookingHref(slot) {
+    if (this._isCheckoutHandoff()) return this._checkoutHref(slot);
     const base = slot?.bookingUrl || this.getAttribute('booking-url') || BW_BOOKING_CALENDAR_BOOKING_URL;
     const url = new URL(base, window.location.href);
     if (slot) {
@@ -1182,8 +1571,9 @@ class BWBookingCalendarElement extends HTMLElement {
       slot,
       guests: this.state.guests,
       href: this._bookingHref(slot),
-      date: slot ? this._dateKey(slot.startDate) : '',
+      date: slot ? this._dateKey(slot.startDate) : (this.state.selectedDate || ''),
       time: slot ? this._formatTime(slot.startDate) : '',
+      start: slot ? this._slotStartKey(slot) : '',
     };
   }
 
@@ -1199,8 +1589,9 @@ class BWBookingCalendarElement extends HTMLElement {
   }
 
   _boundedGuests(value) {
-    const max = Number(this.getAttribute('max-guests') || 8);
-    return Math.max(1, Math.min(max, Number.isFinite(value) ? value : 2));
+    const max = this._maxGuests();
+    const rounded = Math.round(Number(value));
+    return Math.max(1, Math.min(max, Number.isFinite(rounded) ? rounded : 2));
   }
 
   _dateKey(value) {
@@ -1295,6 +1686,7 @@ if (window.BW_BOOKING_CALENDAR_TEST_HOOKS) {
   window.__bwBookingCalendarTestHooks = {
     BWBookingCalendarElement,
     bwAdvertisingConsentAllowed,
+    bwCheckoutHandoffHref,
   };
 }
 
