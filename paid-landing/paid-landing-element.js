@@ -243,8 +243,14 @@
       min-width: 190px;
     }
 
+    .bw-paid-landing .details-form .phone-row {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      gap: 12px;
+    }
+
     .bw-paid-landing .payment-note {
-      margin: -6px 0 0;
+      margin: 16px 0 0;
       color: #5d685e;
       font-size: 12px;
       line-height: 1.4;
