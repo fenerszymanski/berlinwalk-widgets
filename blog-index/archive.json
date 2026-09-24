@@ -1,9 +1,26 @@
 {
-  "updatedAt": "2026-09-23T20:04:41.392Z",
+  "updatedAt": "2026-09-24T08:44:40.410Z",
   "source": "Wix Blog API",
-  "totalPosts": 420,
+  "totalPosts": 421,
   "bookingUrl": "https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based",
   "allPosts": [
+    {
+      "title": "Second Home Tax in Berlin: Who Pays 20 Percent, and Why WG Rooms Now Count",
+      "slug": "second-home-tax-berlin",
+      "path": "/post/second-home-tax-berlin",
+      "url": "https://www.berlinwalk.com/post/second-home-tax-berlin",
+      "excerpt": "Berlin taxes any flat registered as your Nebenwohnung at 20 percent of the net cold rent, up from 15 percent, and since 2025 a room in a shared flat counts too. Here is who actually pays, how a WG share is calculated, the month rules and deadlines that decide the bill, and the one exemption most couples miss.",
+      "category": "Living in Berlin",
+      "categorySlug": "living-in-berlin",
+      "topic": "living-in-berlin",
+      "topicLabel": "Living in Berlin",
+      "readTime": "7 min read",
+      "publishedDate": "2026-09-24T08:43:08.956Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_380d9b9ac81945548359a441f290932f~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-steglitz-mietshaus-facade.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_380d9b9ac81945548359a441f290932f~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-steglitz-mietshaus-facade.jpg",
+      "alt": "A cream Berlin apartment building in Steglitz with rows of arched balconies and bay windows behind bare autumn trees, cars parked along the street in front",
+      "relatedToolSlug": "berlin-second-home-tax-ledger"
+    },
     {
       "title": "Berlin Housing Cooperative Flats: The Rent Is Low, the Money Is Locked",
       "slug": "berlin-housing-cooperative",
