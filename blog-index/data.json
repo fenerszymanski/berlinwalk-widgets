@@ -1,9 +1,9 @@
 {
-  "updatedAt": "2026-09-24T08:44:40.410Z",
+  "updatedAt": "2026-09-25T08:50:55.784Z",
   "source": "Wix Blog API",
   "popularSource": "Wix Blog metrics.views lifetime sort",
-  "totalPosts": 421,
-  "toolsTotal": 341,
+  "totalPosts": 422,
+  "toolsTotal": 342,
   "bookingUrl": "https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based",
   "navTopics": [
     {
@@ -1802,6 +1802,23 @@
   ],
   "latest": [
     {
+      "title": "Blood Donation in Berlin: Which Centres Pay, How Often You Can Give, and the German Catch",
+      "slug": "blood-donation-berlin",
+      "path": "/post/blood-donation-berlin",
+      "url": "https://www.berlinwalk.com/post/blood-donation-berlin",
+      "excerpt": "Berlin has 14 fixed blood and plasma centres, and they could hardly be more different: one pays 20 euros for a bag, another pays nothing, and the plasma chains do not print a rate. Here is who pays what, how often you are allowed to give, where you can go on a Saturday, and the language rule that stops many English speakers at the desk.",
+      "category": "Living in Berlin",
+      "categorySlug": "living-in-berlin",
+      "topic": "living-in-berlin",
+      "topicLabel": "Living in Berlin",
+      "readTime": "7 min read",
+      "publishedDate": "2026-09-25T08:49:18.252Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_18b7d059872545f1913360729f0c40ab~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-blood-bag-mixer.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_18b7d059872545f1913360729f0c40ab~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-blood-bag-mixer.jpg",
+      "alt": "A full bag of donated blood resting on a white mixing scale beside a donor chair on a wooden floor",
+      "relatedToolSlug": "berlin-blood-donor-map"
+    },
+    {
       "title": "Second Home Tax in Berlin: Who Pays 20 Percent, and Why WG Rooms Now Count",
       "slug": "second-home-tax-berlin",
       "path": "/post/second-home-tax-berlin",
@@ -1987,26 +2004,26 @@
       "thumb": "https://static.wixstatic.com/media/5a08a3_c14a2ff9d95f4a5a886a513554d4805a~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-vet-exam-maltese.jpg",
       "alt": "A vet listens to a small white Maltese dog with a stethoscope on a blue examination table",
       "relatedToolSlug": "berlin-vet-bill-week"
-    },
+    }
+  ],
+  "allPosts": [
     {
-      "title": "Flu Shot in Berlin: The Week That Beats the Winter Wave",
-      "slug": "flu-shot-in-berlin",
-      "path": "/post/flu-shot-in-berlin",
-      "url": "https://www.berlinwalk.com/post/flu-shot-in-berlin",
-      "excerpt": "A flu shot needs two weeks to work, and Berlin’s flu wave has peaked on four different dates in four winters, from 12 December to 5 February. A shot in the week of 2 November would have covered at least 95% of the cases in all of them. Here is the data, who the shot is recommended for, and who pays.",
+      "title": "Blood Donation in Berlin: Which Centres Pay, How Often You Can Give, and the German Catch",
+      "slug": "blood-donation-berlin",
+      "path": "/post/blood-donation-berlin",
+      "url": "https://www.berlinwalk.com/post/blood-donation-berlin",
+      "excerpt": "Berlin has 14 fixed blood and plasma centres, and they could hardly be more different: one pays 20 euros for a bag, another pays nothing, and the plasma chains do not print a rate. Here is who pays what, how often you are allowed to give, where you can go on a Saturday, and the language rule that stops many English speakers at the desk.",
       "category": "Living in Berlin",
       "categorySlug": "living-in-berlin",
       "topic": "living-in-berlin",
       "topicLabel": "Living in Berlin",
       "readTime": "7 min read",
-      "publishedDate": "2026-09-21T07:41:08.026Z",
-      "image": "https://static.wixstatic.com/media/5a08a3_65e3048d3d1e422ab6692532a9bb99f2~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-akazienstrasse-apotheke.jpg",
-      "thumb": "https://static.wixstatic.com/media/5a08a3_65e3048d3d1e422ab6692532a9bb99f2~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-akazienstrasse-apotheke.jpg",
-      "alt": "A pharmacy sign pointing down Akazienstraße in Berlin-Schöneberg, with a red Apotheke A above the word Apotheke",
-      "relatedToolSlug": "berlin-flu-wave-timer"
-    }
-  ],
-  "allPosts": [
+      "publishedDate": "2026-09-25T08:49:18.252Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_18b7d059872545f1913360729f0c40ab~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-blood-bag-mixer.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_18b7d059872545f1913360729f0c40ab~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-blood-bag-mixer.jpg",
+      "alt": "A full bag of donated blood resting on a white mixing scale beside a donor chair on a wooden floor",
+      "relatedToolSlug": "berlin-blood-donor-map"
+    },
     {
       "title": "Second Home Tax in Berlin: Who Pays 20 Percent, and Why WG Rooms Now Count",
       "slug": "second-home-tax-berlin",
