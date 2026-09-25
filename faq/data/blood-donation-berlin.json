@@ -1,0 +1,89 @@
+{
+  "version": 1,
+  "slug": "blood-donation-berlin",
+  "key": "blood-donation-berlin",
+  "config": {
+    "title": "Blood Donation in Berlin - FAQ",
+    "subtitle": "Where to give blood or plasma in Berlin, what each centre pays, how often you can go and what the German questionnaire means for English speakers.",
+    "items": [
+      {
+        "q": "Where can I donate blood in Berlin?",
+        "a": "At **14 fixed centres**: Haema in Wedding, Prenzlauer Berg, Charlottenburg, Tegel, Marzahn and Hellersdorf, the Charité at Campus Mitte and Campus Virchow, and the Red Cross at the ALEXA shopping centre and its institute in Lichterfelde. CSL Plasma and Octapharma take plasma only. The Red Cross also runs mobile whole-blood drives listed on its donation calendar."
+      },
+      {
+        "q": "Do you get paid for donating blood in Berlin?",
+        "a": "At some centres. **Haema pays 20 euros for whole blood and 25 euros for plasma**, and the Charité pays 20 euros for whole blood plus a 10 euro bonus after four donations. The Red Cross pays nothing for whole blood. CSL and Octapharma pay for plasma but do not publish the amount."
+      },
+      {
+        "q": "How often can I donate blood in Germany?",
+        "a": "Whole blood at least **8 weeks apart**, up to **6 times a year for men and 4 times for women**. Plasma needs two free days between donations and is capped at 60 a year, and platelets 14 days apart and 26 a year. Haema and the Charité space women 12 weeks apart for whole blood."
+      },
+      {
+        "q": "Can I donate blood in Berlin if I do not speak German?",
+        "a": "Usually not. **Haema, the Charité, the Red Cross and Octapharma all require German** for the questionnaire and the doctor's talk, and the Charité says interpreters are not allowed. CSL does not state a rule, so call before you go."
+      },
+      {
+        "q": "Which donation centres in Berlin are open on Saturday?",
+        "a": "Only **CSL Plasma at Alexanderstraße and in the Linden-Center** (08:00 to 14:00) and **Octapharma in Köpenick** on Saturday morning, all for plasma. No fixed centre opens on Sunday. For whole blood at the weekend, check the Red Cross mobile drive calendar."
+      },
+      {
+        "q": "Is there an upper age limit for donating blood?",
+        "a": "Not since 2023. You need to be **at least 18 and weigh at least 50 kilos**, and a doctor decides at any age, including for a first donation. Haema asks first-time donors over 60 to bring their medical records."
+      }
+    ]
+  },
+  "schema": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Where can I donate blood in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "At 14 fixed centres: Haema in Wedding, Prenzlauer Berg, Charlottenburg, Tegel, Marzahn and Hellersdorf, the Charité at Campus Mitte and Campus Virchow, and the Red Cross at the ALEXA shopping centre and its institute in Lichterfelde. CSL Plasma and Octapharma take plasma only. The Red Cross also runs mobile whole-blood drives listed on its donation calendar."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Do you get paid for donating blood in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "At some centres. Haema pays 20 euros for whole blood and 25 euros for plasma, and the Charité pays 20 euros for whole blood plus a 10 euro bonus after four donations. The Red Cross pays nothing for whole blood. CSL and Octapharma pay for plasma but do not publish the amount."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How often can I donate blood in Germany?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Whole blood at least 8 weeks apart, up to 6 times a year for men and 4 times for women. Plasma needs two free days between donations and is capped at 60 a year, and platelets 14 days apart and 26 a year. Haema and the Charité space women 12 weeks apart for whole blood."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I donate blood in Berlin if I do not speak German?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Usually not. Haema, the Charité, the Red Cross and Octapharma all require German for the questionnaire and the doctor's talk, and the Charité says interpreters are not allowed. CSL does not state a rule, so call before you go."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Which donation centres in Berlin are open on Saturday?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Only CSL Plasma at Alexanderstraße and in the Linden-Center (08:00 to 14:00) and Octapharma in Köpenick on Saturday morning, all for plasma. No fixed centre opens on Sunday. For whole blood at the weekend, check the Red Cross mobile drive calendar."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is there an upper age limit for donating blood?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Not since 2023. You need to be at least 18 and weigh at least 50 kilos, and a doctor decides at any age, including for a first donation. Haema asks first-time donors over 60 to bring their medical records."
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Berlin Blood Donor Map</title>
+<link rel="stylesheet" href="../css/brand.css">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #FFFFFF; color: #1d231b; padding: 14px 12px 12px; }
+  .dm-head h1 { font-size: 19px; line-height: 1.25; color: #1B5E20; }
+  .dm-head p { font-size: 13px; line-height: 1.5; color: #475044; margin-top: 5px; }
+
+  .dm-steps { display: flex; gap: 6px; margin-top: 14px; }
+  .dm-tab { flex: 1 1 0; font-family: inherit; font-size: 11px; font-weight: 800; letter-spacing: .05em; text-transform: uppercase;
+    border: 1.5px solid #d9e2cf; background: #f7f9f3; color: #56604f; border-radius: 10px; padding: 7px 6px; cursor: pointer; text-align: left; line-height: 1.3; }
+  .dm-tab b { display: block; font-size: 12.5px; letter-spacing: 0; text-transform: none; color: #1d231b; margin-top: 2px; font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .dm-tab.is-on { border-color: #1B5E20; background: #FFE600; color: #123D18; }
+  .dm-tab.is-on b { color: #123D18; }
+
+  .dm-panel { margin-top: 10px; border: 1.5px solid #1B5E20; border-radius: 12px; padding: 12px; }
+  .dm-q { font-size: 14px; font-weight: 700; color: #1B5E20; line-height: 1.35; }
+  .dm-sub { font-size: 12.5px; color: #596254; margin-top: 4px; line-height: 1.45; }
+  .dm-opts { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 10px; }
+  .dm-opt { font-family: inherit; font-size: 13px; font-weight: 700; border: 1.5px solid #cdd8c1; background: #fff; color: #2f372c; border-radius: 999px; padding: 8px 13px; cursor: pointer; }
+  .dm-opt.is-on { border-color: #10230f; background: #FFE600; color: #123D18; }
+  .dm-date { display: flex; flex-wrap: wrap; align-items: center; gap: 9px; margin-top: 10px; }
+  .dm-date input { font-family: inherit; font-size: 15px; font-weight: 700; color: #123D18; border: 1.5px solid #1B5E20; border-radius: 10px; padding: 8px 10px; background: #fff; }
+  .dm-date input:focus { outline: 2px solid #FFE600; outline-offset: 1px; }
+  .dm-link { font-family: inherit; font-size: 12.5px; font-weight: 700; color: #1B5E20; background: none; border: 0; text-decoration: underline; cursor: pointer; }
+  .dm-next { font-family: inherit; margin-top: 12px; font-size: 13px; font-weight: 800; border: 0; border-radius: 10px; padding: 9px 14px; background: #1B5E20; color: #fff; cursor: pointer; }
+
+  .dm-label { font-size: 10.5px; font-weight: 800; letter-spacing: .07em; text-transform: uppercase; color: #1B5E20; margin: 16px 0 7px; }
+  .dm-year { border: 1px solid #dfe6d6; border-radius: 12px; background: #fcfdf9; padding: 8px 6px 4px; }
+  .dm-year svg { display: block; width: 100%; height: auto; }
+  .dm-sum { margin-top: 10px; font-size: 14px; line-height: 1.5; color: #2b3128; }
+  .dm-sum strong { color: #1B5E20; }
+
+  .dm-map { border: 1px solid #dfe6d6; border-radius: 12px; overflow: hidden; background: #f4f7ef; }
+  .dm-map svg { display: block; width: 100%; height: auto; touch-action: manipulation; }
+  .dm-d { fill: #e4ebdb; stroke: #ffffff; stroke-width: 1.6; }
+  .dm-dn { font-size: 15px; font-weight: 700; fill: #8a9682; pointer-events: none; }
+  .dm-pin { cursor: pointer; }
+  .dm-pin:focus { outline: none; }
+  .dm-pin.is-off { opacity: .22; }
+  .dm-pin.is-on circle.dm-ring { stroke: #10230f; stroke-width: 4; }
+  .dm-key { display: flex; flex-wrap: wrap; gap: 6px 12px; font-size: 11.5px; color: #4d5649; padding: 8px 10px; border-top: 1px solid #dfe6d6; background: #fcfdf9; }
+  .dm-key i { width: 11px; height: 11px; border-radius: 50%; display: inline-block; vertical-align: -1px; margin-right: 5px; }
+
+  .dm-card { margin-top: 12px; border: 1.5px solid #1B5E20; border-radius: 12px; padding: 12px; }
+  .dm-card h2 { font-size: 16px; color: #1B5E20; line-height: 1.3; }
+  .dm-card .dm-where { font-size: 12.5px; color: #596254; margin-top: 3px; line-height: 1.45; }
+  .dm-card dl { margin-top: 9px; display: grid; grid-template-columns: 78px 1fr; gap: 5px 9px; font-size: 12.5px; line-height: 1.45; }
+  .dm-card dt { font-weight: 800; color: #1B5E20; }
+  .dm-hours { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 3px; margin-top: 10px; }
+  .dm-hours div { border-radius: 6px; padding: 4px 2px; text-align: center; font-size: 10.5px; line-height: 1.3; background: #eef2e8; color: #7b8574; }
+  .dm-hours div b { display: block; font-size: 11px; color: #3a4236; }
+  .dm-hours div.is-open { background: #1B5E20; color: #e9f3e3; }
+  .dm-hours div.is-open b { color: #FFE600; }
+  .dm-flag { margin-top: 10px; background: #FFE600; color: #123D18; border-radius: 8px; padding: 7px 9px; font-size: 12.5px; line-height: 1.45; font-weight: 700; }
+
+  .dm-list { margin-top: 12px; list-style: none; }
+  .dm-list li { display: flex; gap: 9px; align-items: baseline; padding: 7px 2px; border-top: 1px solid #edf1e7; font-size: 12.5px; line-height: 1.4; cursor: pointer; }
+  .dm-list li i { width: 10px; height: 10px; border-radius: 50%; flex: 0 0 10px; }
+  .dm-list li span { flex: 1 1 auto; }
+  .dm-list li em { font-style: normal; font-weight: 800; color: #1B5E20; white-space: nowrap; }
+  .dm-list li.is-off { display: none; }
+  .dm-note { font-size: 11.5px; color: #69725f; line-height: 1.5; margin-top: 12px; }
+  @media (max-width: 420px) { .dm-card dl { grid-template-columns: 66px 1fr; } .dm-tab { font-size: 10px; } }
+</style>
+</head>
+<body>
+<div class="dm-wrap">
+  <header class="dm-head">
+    <h1>Berlin Blood Donor Map</h1>
+    <p>All 14 fixed blood and plasma centres in Berlin, what each one takes, what it pays and when it is open, plus the dates you can next give.</p>
+  </header>
+
+  <div class="dm-steps" role="tablist" id="dmTabs"></div>
+  <section class="dm-panel" id="dmPanel" aria-live="polite"></section>
+
+  <div class="dm-label">Your next 12 months</div>
+  <div class="dm-year"><svg id="dmYear" viewBox="0 0 640 120" role="img" aria-label="Timeline of the dates you can donate in the next twelve months"></svg></div>
+  <p class="dm-sum" id="dmSum"></p>
+
+  <div class="dm-label">Where you can give it</div>
+  <div class="dm-map">
+    <svg id="dmMap" viewBox="0 0 913 748" role="img" aria-label="Map of Berlin districts with the fixed donation centres"></svg>
+    <div class="dm-key">
+      <span><i style="background:#1B5E20"></i>Haema, published pay</span>
+      <span><i style="background:#3A6EA5"></i>Charité clinic centre</span>
+      <span><i style="background:#C1440E"></i>DRK, whole blood unpaid</span>
+      <span><i style="background:#7D4E9E"></i>Plasma only, pay on request</span>
+    </div>
+  </div>
+  <div class="dm-card" id="dmCard"></div>
+  <ul class="dm-list" id="dmList"></ul>
+  <p class="dm-note">Centre data read on the operators' own sites on 25 September 2026: Haema, the Charité and DRK transfusion centre (ZTB), DRK-Blutspendedienst Nord-Ost, CSL Plasma and Octapharma Plasma. Intervals follow the German Hämotherapie guideline of 2023. Haema, the Charité, the Red Cross and Octapharma ask for the questionnaire and the doctor's talk in German; CSL does not say. Pay and hours change; check the centre's page before you go.</p>
+</div>
+<script src="../js/brand.js"></script>
+<script>
+(function () {
+  var NS = 'http://www.w3.org/2000/svg';
+  var DISTRICTS = [{"n":"Mitte","d":"M406.8,239.9L393.8,242.8L391.9,255.1L383.3,255.3L376.5,260.6L374.8,253.9L368.8,255.5L368.3,252.4L353.9,252.3L337.6,246.7L330.4,252.9L323.6,251.3L300.4,261.6L289.4,281.3L311.6,282.5L324.4,297.6L326.8,304.7L302.8,310.4L305,318.7L311.1,317.6L305.4,322.3L309.9,342.8L315.9,335.1L323.8,336.7L327.8,350L336.3,357.4L328.8,360.8L333.5,363.3L328.1,366.9L334.4,369.9L335.4,376.3L349,380.5L381.3,392.1L392.6,371.6L421.8,371.3L423.2,368.5L441.9,380.3L459.7,376.7L462.7,370.2L453.7,362.1L462.4,342.3L443.5,328.3L430.4,323.6L434.2,313.2L429.2,300.3L425.6,300.5L421.4,276.7L418.6,277.1L417.9,254.1L406.8,239.9Z"},{"n":"Friedrichshain-Kreuzberg","d":"M516.4,387.9L528.2,356.6L523.4,346.9L520.6,343.4L497.8,342.2L493.6,327.7L486.8,330.8L480.2,320.6L475.4,325.6L454.9,327.5L449.6,332.7L462.4,342.3L453.7,362.1L462.7,370.2L459.7,376.7L441.9,380.3L423.1,368.5L421.8,371.3L392.6,371.6L388.6,382.1L380.4,395L379.8,404L390.9,407.6L387.7,422L384.3,422.5L415.1,420.7L415.1,424.4L431.5,427.3L433.6,413.8L455.4,418.8L457.3,415.6L450.5,398.4L476.1,412.2L483.8,401.5L496.1,394.6L522.9,409L529.4,417.9L533,416.3L535.3,420.1L545.8,417L516.4,387.9Z"},{"n":"Pankow","d":"M568.1,61.1L545.9,46.9L538.6,36.7L542.7,11.5L525.4,20.6L530.6,1.1L527.6,4.6L525.2,2.2L512.3,19.6L503.6,15.5L491.7,29.5L507.4,40.8L522.5,43.1L523,48.4L503.8,61.7L489.3,57.5L478.2,59.1L476.8,68L469,70.1L467.2,85.4L460.3,85.1L455.9,89.6L439.5,71.9L433.6,73.7L420.1,61.3L415.4,63L408.3,84.8L398.2,87.6L399.6,90.2L390.1,98.2L390.9,105.3L378,111L390.8,144.4L383,169.2L369.5,187.4L351.8,190L406.6,235.2L413.9,246.7L424.1,296.4L434.2,313.2L430.4,323.6L449.6,332.7L454.9,327.5L475.4,325.6L480.2,320.6L486.8,330.8L493.6,327.7L497.8,342.2L520.6,343.4L499,326.7L516,312.5L512.8,308.1L517.5,299.7L513.7,282.8L530.8,284.1L530.4,280.2L539.6,273.3L550.9,276.9L551.9,273.2L551,264.2L536.3,246.7L541.6,236.1L530.6,228.5L530.9,209.7L542.7,190.7L565.4,175.9L557.1,156.8L553.9,156.9L556.3,144.5L565.8,123.9L566.3,111.1L582.6,102.7L589.6,68.5L586,68.8L584.5,64.3L575.8,67.7L568.1,61.1Z"},{"n":"Charlottenburg-Wilmersdorf","d":"M338,410.1L340.2,390.5L337.5,387.7L343.5,378.4L335.1,376.1L334.4,369.9L328.1,366.9L333.5,363.3L328.8,360.8L336.3,357.4L327.8,350L322.3,335.6L314.8,335.7L310,343L305.4,322.3L311.1,317.6L305,318.7L302.8,310.4L326.8,304.7L311.6,282.5L247.1,280.1L249.8,303.3L263.2,314L261.4,322.7L245.4,325.2L225.7,329.4L215.1,326.6L216.2,335.5L206,331.5L181.6,331.3L178,343.1L180.2,359.1L172.9,368.9L167.7,368.8L165,382.8L138,394.6L133.6,412.9L138.5,427.6L134.5,436.4L135.8,451.5L147.2,452.6L150.4,458.3L156.9,454.4L167.4,456.8L194.5,453.9L231.6,463.3L272.5,454.4L301.8,462.4L314.4,462.2L315,439L337.6,437.6L338,410.1Z"},{"n":"Spandau","d":"M172.1,368.2L180.2,359.1L178,343.1L181.6,331.3L206,331.5L216.2,335.5L215.1,326.6L225.7,329.4L253,325.4L261.4,322.7L263.2,313.9L249.8,303.3L247.1,280.1L223.6,277.6L190.1,249.6L186,228L177.4,218.6L172.4,203.7L175.4,195.8L161.7,193.8L160.9,197.7L116.1,178.4L103.7,170.7L93.6,173.3L82.8,186.3L64.7,195.9L55.5,196.1L54.2,205.4L60.3,213.2L83.5,204.9L88.8,227.2L78.3,255.2L78.4,272.2L65.5,272.7L57.6,265.3L42.9,321L39.8,351.5L74.8,345.6L109.5,368.8L54.7,433.8L40.2,439.4L39.6,448.3L30.6,465.2L33.4,483.4L28.9,498.4L47.6,522.7L82,514.4L100.6,494.5L112.3,486.3L121.2,486.7L131.9,472L133.7,463.2L134.5,436.4L138.5,427.6L133.6,412.9L138,394.6L165,382.8L166.7,370.4L172.1,368.2Z"},{"n":"Steglitz-Zehlendorf","d":"M345.6,584.2L345.3,579L373.1,563L384.4,546L363.4,487.4L353.9,484.8L339.9,463.1L336.5,461.3L325.5,468.1L315.8,462.3L301.8,462.4L272.5,454.4L231.6,463.3L194.5,453.9L167.4,456.8L156.9,454.4L150.4,458.3L147.2,452.6L135.8,451.5L131.9,472L121.2,486.7L112.3,486.3L100.6,494.5L82,514.4L49,520.4L32.6,538.9L33.6,545.8L22.5,557.3L15.3,554.3L10.6,561.8L0.5,566.9L3.8,584.8L12.7,589.5L14.9,586.4L13.4,580.7L17.4,579.9L17.6,587L24.3,589.2L25.9,581.1L29.3,581.7L32.3,587.2L24.9,591.1L49.9,617.3L61.7,611.7L67.9,615.1L63.9,616.4L69.1,619.2L57.2,631.4L58.5,628.4L53.3,628.9L52.5,633.4L58.7,638.6L62.3,635.3L57.4,631.7L72.9,616.8L96.1,623.7L109.5,622.7L113.5,620L112.7,615.2L94.6,618.4L96.7,604L148.1,576L164.8,573.3L185.8,563.7L214.1,563.5L219.3,599.3L230.5,596.2L242.6,600.9L252.4,599.8L283,574.4L281.8,578.3L303.7,612.3L345.6,584.2Z"},{"n":"Tempelhof-Schöneberg","d":"M406.1,640L407.2,659.3L450,663.1L460.1,641.8L447.8,594.7L449.5,587.1L436.4,580.7L426.3,582.2L422.2,570.5L429.4,566.1L430.3,562.2L426.4,561.3L445.7,494.8L451.6,484.8L458.9,485L450.8,479.1L454.4,476.8L452.1,464.8L445.7,465.7L441.1,436.3L431.9,437.4L431.5,427.3L415.1,424.4L415.1,420.7L384.3,422.5L387.7,422L390.9,407.6L379.8,404L381.6,391.7L371.7,389.7L343.3,378.6L337.5,387.7L340.2,390.5L337.6,437.6L315,439L314.4,462.2L325.5,468.1L336.9,461.5L353.8,480.4L353.9,484.8L363.4,487.4L384.4,546L373.1,563L345.3,579L345.7,593.3L384.9,624.1L382.7,635.9L405.7,635.6L406.1,640Z"},{"n":"Neukölln","d":"M494.9,420.7L450.9,398.4L457.3,415.6L455,419.4L433.3,414.1L431.8,437.3L441.1,436.3L445.7,465.7L452.1,464.8L454.4,476.8L450.8,479.1L458.9,485L451.6,484.8L445.7,494.8L426.4,561.3L430.3,562.2L429.4,566.1L422.2,570.5L426.3,582.2L437.3,580.9L449.4,587.8L487.8,572.4L503.5,564.9L515.1,566L531,619.3L580.1,606.4L591,580.3L583.5,560.4L586.2,551.6L568.1,546.1L507.8,497.1L500.1,479.4L524.5,480.4L529.2,466.6L517.3,447.8L518.5,440.3L501.7,420.6L498.9,424L494.9,420.7Z"},{"n":"Treptow-Köpenick","d":"M658.6,440L641.6,448.3L612.4,444.5L600.1,460.1L587.7,444L569,444.7L561,427.7L550.5,426.5L545.9,417L535.3,420.1L533,416.3L529.4,417.9L526,411.4L508.8,399.4L493.3,394.8L476.6,411.5L483.1,416.9L486.2,413.6L498.9,424L501.8,420.7L518.5,440.3L517.3,447.8L529.2,466.6L524.5,480.4L500.1,479.8L512.5,502.4L568.1,546.1L586.2,551.6L583.5,560.4L591,580.3L580.1,606.4L598.6,616.3L610.5,608.9L606.5,634.7L645.4,636.6L684,624L687.6,639.6L702.6,656.5L701.8,668.7L732.6,651.6L739,662.9L751.8,660.1L751,674.9L757.4,676.3L757.9,683.3L746,699.4L743.8,731.5L752,743.2L759.6,746.8L764,744.2L763.3,737.3L768.9,727.5L790.4,684.5L805.3,677.5L818.9,682.9L829.4,664.3L830,660.1L825.7,660.2L827.9,651.3L813.1,648L811.6,642.8L816.9,642.3L827.1,628.5L829.7,629.9L851,611L860.4,614.2L871.9,610.2L877.4,597.1L882.4,594.1L869.9,573.9L880.5,551.3L885.4,551.2L883.8,538.5L869.7,535.2L860.4,528.2L872.1,535.6L887.6,537.5L889.2,526.2L897.9,518.6L905.8,518.3L903.3,529.2L910.8,530.4L912.1,526.6L904.4,525.4L906,508.2L896.2,502.7L868.9,498L851.1,471.2L831.2,459.5L828.2,459.4L836.6,478L836.6,487.4L827.2,488.1L823.3,468.4L806.1,464.2L785.1,446.1L777.3,446.6L759.4,436.2L752.5,435.1L728.3,447.4L724.8,463.4L722.6,454.5L705.4,453.3L705.3,449.2L697.9,449.3L675.4,431L666.4,431.2L658.6,440Z"},{"n":"Marzahn-Hellersdorf","d":"M732.5,407L734.2,404.6L726.5,401.9L737.7,365.6L751,348.6L773.2,331.8L771.1,323.2L728.8,322.5L727.6,304.9L739.9,305.9L744.6,295.8L675.5,279.1L677.3,267.4L671.4,239.4L668.9,232L664,231.9L660,225.9L651.7,227.6L650.2,224.4L613.2,244.5L592.8,266.9L602.1,302.3L581.3,310.6L583.5,358.4L604.5,359.1L609,362.4L606.1,376.9L626.4,421.3L623.3,433.9L628.9,447.3L648.7,447.3L658.6,441.1L660.2,434.6L675.4,431L709.3,454.5L716.3,444.9L712.3,443.1L714.1,431.7L732.5,407Z"},{"n":"Lichtenberg","d":"M583.8,358.5L581.3,310.6L602.1,302.3L592.8,266.9L614.2,243.2L645.7,229.6L650.2,224.4L640.5,209.5L622.3,194.9L595.9,185.2L569.4,185.5L565.4,175.9L543.4,190.1L536.2,203.2L531.9,204.5L530.6,228.5L541.6,236.1L536.2,243L541.6,253.9L551.8,265.8L550.9,276.9L539.6,273.3L530.4,280.2L530.8,284.1L514.2,282.3L517.5,299.7L512.8,308.1L516,312.5L499,326.7L503.7,332.8L517.1,338.6L528.2,356.6L515.8,390L521.9,391.4L546.8,415.2L550.5,426.5L561,427.7L569,444.7L587.7,444L600.1,460.1L612.4,444.5L629.7,447.5L623.3,433.9L626.4,421.3L606.1,376.9L609,362.4L604.5,359.1L583.8,358.5Z"},{"n":"Reinickendorf","d":"M389.6,153.6L390,138.8L378.3,111.9L365.5,117.3L337.1,118L305,105.7L290.9,107.9L301.3,101.7L295.2,85.7L299.8,70.9L287.9,49.7L301,41.1L297,36.2L264,33.7L262.8,51.4L267.2,51.7L265.4,77.1L236,78.1L239.5,100.3L238.9,108.7L179.6,105.4L174.5,123.5L161.1,147.9L154,153.6L162.9,170.3L177.4,184.9L172.4,203.7L177.4,218.6L186,228L189.9,249.3L225.3,278.4L289.4,281.3L300.4,261.6L323.6,251.3L330.4,252.9L337.6,246.7L353.9,252.3L368.3,252.4L368.8,255.5L374.8,253.9L375.6,260.7L383.3,255.3L391.9,255.1L393.8,242.8L406.5,240.4L407,235.6L351.8,190L369.5,187.4L389.6,153.6Z"}];
+  var KX = 1355.346, KY = 2211.4, LON0 = 13.088, LAT0 = 52.676;
+  function px(lon) { return (lon - LON0) * KX; }
+  function py(lat) { return (LAT0 - lat) * KY; }
+  var COL = { haema: '#1B5E20', charite: '#3A6EA5', drk: '#C1440E', plasma: '#7D4E9E' };
+  var DAYS = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+
+  /* w = whole blood, p = plasma, t = platelets. pay in euro per donation where the operator publishes it. */
+  var C = [
+    { id: 'haema-wedding', name: 'Haema Wedding', op: 'haema', lat: 52.54942, lon: 13.38813, addr: 'Badstraße 4a, outside entrance of the Gesundbrunnen-Center', stn: 'S+U Gesundbrunnen', w: 1, p: 1, t: 0, payW: 20, payP: 25, hours: ['08-19','08-19','08-19','08-19','08-19','',''], book: 'Book online or by phone first.' },
+    { id: 'haema-prenzlauer-berg', name: 'Haema Prenzlauer Berg', op: 'haema', lat: 52.52894, lon: 13.45606, addr: 'Forum Landsberger Allee, Landsberger Allee 117, 5th floor', stn: 'S Landsberger Allee', w: 1, p: 1, t: 0, payW: 20, payP: 25, hours: ['07:30-19','07:30-19','07:30-19','07:30-19','07:30-19','',''], book: 'Book online or by phone first.' },
+    { id: 'haema-charlottenburg', name: 'Haema Charlottenburg', op: 'haema', lat: 52.50836, lon: 13.30597, addr: 'Wilmersdorfer Straße 54, office wing of the Wilmersdorfer Arcaden', stn: 'U7 Wilmersdorfer Straße, S Charlottenburg', w: 1, p: 1, t: 0, payW: 20, payP: 25, hours: ['08-19','08-19','08-19','08-19','08-19','',''], book: 'Book online or by phone first.' },
+    { id: 'haema-tegel', name: 'Haema Tegel', op: 'haema', lat: 52.58389, lon: 13.28833, addr: 'Gesundheitszentrum am Borsigturm, Berliner Straße 25', stn: 'U6 Borsigwerke, S25 Tegel', w: 1, p: 1, t: 0, payW: 20, payP: 25, hours: ['08-18','08-18','08-18','08-18','08-18','',''], book: 'Book online or by phone first. Special hours were posted for late September.' },
+    { id: 'haema-marzahn', name: 'Haema Marzahn', op: 'haema', lat: 52.56899, lon: 13.56917, addr: 'Havemannstraße 12b', stn: 'S7 Ahrensfelde, tram M8 and 16 Barnimplatz', w: 1, p: 1, t: 1, payW: 20, payP: 25, hours: ['07:30-19','07:30-19','07:30-19','07:30-19','07:30-19','',''], book: 'Book online or by phone first. One of two Haema sites that also take platelets.' },
+    { id: 'haema-hellersdorf', name: 'Haema Hellersdorf', op: 'haema', lat: 52.53755, lon: 13.60566, addr: 'Marktplatz Center Hellersdorf, Peter-Weiss-Gasse 1, 3rd floor', stn: 'U5 Hellersdorf', w: 1, p: 1, t: 1, payW: 20, payP: 25, hours: ['08-18','08-18','08-18','08-18','08-18','',''], book: 'Book online or by phone first. Also takes platelets.' },
+    { id: 'charite-mitte', name: 'Charité Campus Mitte', op: 'charite', lat: 52.52339, lon: 13.37793, addr: 'Schumannstraße 22, next to the main vehicle entrance', stn: 'S+U Friedrichstraße, bus 147 Schumannstraße', w: 1, p: 1, t: 1, payW: 20, payP: null, hours: ['10-16:30','11-18:30','11-18:30','10-16:30','11-18','',''], book: 'Whole blood without an appointment. Plasma and platelets only after a check at a whole-blood visit, by appointment.' },
+    { id: 'charite-virchow', name: 'Charité Campus Virchow', op: 'charite', lat: 52.54223, lon: 13.34735, addr: 'Augustenburger Platz 1, entrance Seestraße, Haus 37', stn: 'U6 Seestraße', w: 1, p: 1, t: 1, payW: 20, payP: null, hours: ['08-13','11-13:30','11-13:30','','','',''], book: 'Whole blood without an appointment in the short morning slots. Plasma and platelets by appointment, weekday mornings.' },
+    { id: 'drk-alexa', name: 'DRK ALEXA', op: 'drk', lat: 52.51907, lon: 13.41602, addr: 'Grunerstraße 20, ALEXA shopping centre, level 2', stn: 'S+U Alexanderplatz', w: 1, p: 0, t: 0, payW: 0, payP: null, hours: ['10-19','10-19','10-19','10-19','10-19','',''], book: 'Reserve online. The Red Cross pays nothing for whole blood; you get a snack and a drink.' },
+    { id: 'drk-lichterfelde', name: 'DRK Institute Lichterfelde', op: 'drk', lat: 52.44191, lon: 13.32054, addr: 'Hindenburgdamm 30 A, on the Campus Benjamin Franklin', stn: 'Bus M85 and 285, Charité Campus Benjamin Franklin', w: 1, p: 1, t: 1, payW: 0, payP: null, hours: ['12-18','08-19','12-18','12-18','08-19','',''], book: 'Plasma by appointment only; the first check visit is paid. Whole blood only Tue and Fri afternoons and the first Monday morning of the month, unpaid.' },
+    { id: 'csl-alexanderstrasse', name: 'CSL Plasma Alexanderstraße', op: 'plasma', lat: 52.52353, lon: 13.41501, addr: 'Alexanderstraße 3', stn: 'near Alexanderplatz', w: 0, p: 1, t: 0, payW: null, payP: null, hours: ['08-19','08-19','08-19','08-19','08-19','08-14',''], book: 'First visit is a registration and blood check; first donation about three days later. Pay is shown in their app, not published.' },
+    { id: 'csl-linden', name: 'CSL Plasma Linden-Center', op: 'plasma', lat: 52.56525, lon: 13.50623, addr: 'Linden-Center, Prerower Platz 3, 5th floor', stn: 'Tram at Prerower Platz', w: 0, p: 1, t: 0, payW: null, payP: null, hours: ['08-19','08-19','08-19','08-19','08-19','08-14',''], book: 'Same process as CSL Alexanderstraße. Open Saturday mornings.' },
+    { id: 'octa-koepenick', name: 'Octapharma Köpenick', op: 'plasma', lat: 52.44144, lon: 13.58694, addr: 'Allende-Center, Pablo-Neruda-Straße 2-4, 1st floor', stn: 'Tram 27 and 67 Pablo-Neruda-Straße', w: 0, p: 1, t: 0, payW: null, payP: null, hours: ['07:30-19','07:30-19','10-19','07:30-19','07:30-19','09-13:15',''], book: 'Pay depends on the plasma volume and is not published. Registered donors can come without booking.' },
+    { id: 'octa-spandau', name: 'Octapharma Spandau', op: 'plasma', lat: 52.55764, lon: 13.20847, addr: 'Carossa Quartier, Streitstraße 13, 5th floor, clock tower entrance', stn: 'Bus X36, 136, 236 Amorbacher Weg', w: 0, p: 1, t: 0, payW: null, payP: null, hours: ['08-19:15','08-19:15','10-19:15','08-19:15','08-19:15','',''], book: 'Pay depends on the plasma volume and is not published.' }
+  ];
+
+  /* Guideline 2023: whole blood min 8 weeks, 6 a year for men and 4 for women (Haema and Charité space women 12 weeks);
+     plasma two free days between donations, up to 60 a year; platelets 14 days apart, up to 26 a year. */
+  var RULES = {
+    w: { label: 'Whole blood', gap: { m: 56, f: 84 }, max: { m: 6, f: 4 }, time: 'about an hour, 5 to 12 minutes of it on the needle' },
+    p: { label: 'Plasma', gap: { m: 3, f: 3 }, max: { m: 60, f: 60 }, time: 'about 60 to 80 minutes' },
+    t: { label: 'Platelets', gap: { m: 14, f: 14 }, max: { m: 26, f: 26 }, time: 'about 90 minutes' }
+  };
+
+  var state = { kind: 'w', sex: 'f', last: '', pick: 'haema-wedding' };
+  var currentStep = 0;
+  var STEPS = [
+    { key: 'kind', title: 'You give' },
+    { key: 'sex', title: 'Limits for' },
+    { key: 'last', title: 'Last time' }
+  ];
+
+  function el(tag, attrs, parent) {
+    var n = document.createElementNS(NS, tag);
+    Object.keys(attrs || {}).forEach(function (k) { n.setAttribute(k, attrs[k]); });
+    if (parent) parent.appendChild(n);
+    return n;
+  }
+  function esc(s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
+  function today() { var d = new Date(); d.setHours(12, 0, 0, 0); return d; }
+  function addDays(d, n) { var x = new Date(d.getTime()); x.setDate(x.getDate() + n); return x; }
+  function fmt(d) { return d.toLocaleDateString('en-GB', { day: 'numeric', month: 'short' }); }
+  function offers(c, k) { return !!c[k]; }
+
+  function tabSummary(i) {
+    if (i === 0) return RULES[state.kind].label;
+    if (i === 1) return state.sex === 'm' ? 'Men' : 'Women';
+    return state.last ? fmt(new Date(state.last + 'T12:00:00')) : 'Never / first time';
+  }
+
+  function renderTabs() {
+    var box = document.getElementById('dmTabs');
+    box.innerHTML = '';
+    STEPS.forEach(function (s, i) {
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'dm-tab' + (i === currentStep ? ' is-on' : '');
+      b.setAttribute('role', 'tab');
+      b.setAttribute('aria-selected', i === currentStep ? 'true' : 'false');
+      b.innerHTML = (i + 1) + '. ' + esc(s.title) + '<b>' + esc(tabSummary(i)) + '</b>';
+      b.addEventListener('click', function () { currentStep = i; renderAll(); });
+      box.appendChild(b);
+    });
+  }
+
+  function optButtons(list, key) {
+    return '<div class="dm-opts">' + list.map(function (o) {
+      return '<button type="button" class="dm-opt' + (state[key] === o[0] ? ' is-on' : '') + '" data-k="' + key + '" data-v="' + o[0] + '">' + esc(o[1]) + '</button>';
+    }).join('') + '</div>';
+  }
+
+  function renderPanel() {
+    var p = document.getElementById('dmPanel');
+    var h = '';
+    if (currentStep === 0) {
+      h = '<p class="dm-q">What do you want to give?</p><p class="dm-sub">Whole blood is the classic bag. Plasma and platelets come out through a machine that returns the rest of your blood, so you can give far more often.</p>' +
+        optButtons([['w', 'Whole blood'], ['p', 'Plasma'], ['t', 'Platelets']], 'kind');
+    } else if (currentStep === 1) {
+      h = '<p class="dm-q">Which yearly limit applies to you?</p><p class="dm-sub">For whole blood the guideline allows six donations a year for men and four for women, and Berlin centres space women twelve weeks apart. Plasma and platelets have the same limits for everyone.</p>' +
+        optButtons([['f', 'Women'], ['m', 'Men']], 'sex');
+    } else {
+      h = '<p class="dm-q">When did you last give ' + esc(RULES[state.kind].label.toLowerCase()) + '?</p><p class="dm-sub">Leave it empty if you have never given, or if it was more than a year ago.</p>' +
+        '<div class="dm-date"><input type="date" id="dmLast" value="' + esc(state.last) + '" max="' + today().toISOString().slice(0, 10) + '" aria-label="Date of your last donation"><button type="button" class="dm-link" id="dmClear">First time</button></div>';
+    }
+    if (currentStep < STEPS.length - 1) h += '<button type="button" class="dm-next" id="dmNext">Next step</button>';
+    p.innerHTML = h;
+    [].forEach.call(p.querySelectorAll('.dm-opt'), function (b) {
+      b.addEventListener('click', function () { state[b.getAttribute('data-k')] = b.getAttribute('data-v'); renderAll(); });
+    });
+    var nx = document.getElementById('dmNext');
+    if (nx) nx.addEventListener('click', function () { currentStep += 1; renderAll(); });
+    var inp = document.getElementById('dmLast');
+    if (inp) inp.addEventListener('change', function () { state.last = inp.value; renderAll(); });
+    var cl = document.getElementById('dmClear');
+    if (cl) cl.addEventListener('click', function () { state.last = ''; renderAll(); });
+  }
+
+  /* Walk forward from the last donation: each date is the later of the minimum gap and the
+     day the rolling twelve-month window has room again. */
+  function schedule() {
+    var r = RULES[state.kind], gap = r.gap[state.sex], max = r.max[state.sex];
+    var start = today(), end = addDays(start, 365), dates = [], past = [];
+    if (state.last) past.push(new Date(state.last + 'T12:00:00'));
+    var d = past.length ? addDays(past[0], gap) : start;
+    if (d < start) d = start;
+    var guard = 0;
+    while (d <= end && guard < 200) {
+      guard += 1;
+      var windowStart = addDays(d, -365);
+      var inWindow = past.concat(dates).filter(function (x) { return x > windowStart; });
+      if (inWindow.length >= max) {
+        inWindow.sort(function (a, b) { return a - b; });
+        d = addDays(inWindow[inWindow.length - max], 366);
+        continue;
+      }
+      dates.push(d);
+      d = addDays(d, gap);
+    }
+    return dates;
+  }
+
+  function payFor(c) { return state.kind === 'w' ? c.payW : state.kind === 'p' ? c.payP : null; }
+
+  function renderYear(dates) {
+    var svg = document.getElementById('dmYear');
+    while (svg.firstChild) svg.removeChild(svg.firstChild);
+    var start = today(), W = 600, X0 = 20;
+    var MON = ['J', 'F', 'M', 'A', 'M', 'J', 'J', 'A', 'S', 'O', 'N', 'D'];
+    el('rect', { x: X0, y: 44, width: W, height: 26, rx: 8, fill: '#eef2e8' }, svg);
+    for (var i = 0; i <= 12; i += 1) {
+      var md = new Date(start.getFullYear(), start.getMonth() + i, 1, 12);
+      var x = X0 + (md - start) / (365 * 864e5) * W;
+      if (x < X0 || x > X0 + W) continue;
+      el('line', { x1: x, y1: 40, x2: x, y2: 74, stroke: '#cfd9c4', 'stroke-width': 1 }, svg);
+      var t = el('text', { x: x + 4, y: 94, 'font-size': 17, fill: '#7a8572', 'font-family': 'Montserrat, sans-serif' }, svg);
+      t.textContent = MON[md.getMonth()];
+    }
+    var dense = dates.length > 20;
+    dates.forEach(function (d, k) {
+      var x = X0 + (d - start) / (365 * 864e5) * W;
+      if (dense) el('rect', { x: x - 1, y: 46, width: 2.4, height: 22, fill: '#1B5E20' }, svg);
+      else {
+        el('circle', { cx: x, cy: 57, r: 11, fill: k === 0 ? '#FFE600' : '#1B5E20', stroke: '#123D18', 'stroke-width': 1.5 }, svg);
+        if (k === 0 || dates.length <= 8) {
+          var lb = el('text', { x: Math.min(Math.max(x, 50), 590), y: 30, 'font-size': 17, 'font-weight': 700, 'text-anchor': 'middle', fill: '#1B5E20', 'font-family': 'Montserrat, sans-serif' }, svg);
+          lb.textContent = fmt(d);
+        }
+      }
+    });
+    if (dense && dates.length) {
+      var lb2 = el('text', { x: 24, y: 30, 'font-size': 18, 'font-weight': 700, fill: '#1B5E20', 'font-family': 'Montserrat, sans-serif' }, svg);
+      lb2.textContent = 'First slot ' + fmt(dates[0]) + ', then every ' + RULES[state.kind].gap[state.sex] + ' days';
+    }
+    var tag = el('text', { x: 24, y: 116, 'font-size': 15, fill: '#69725f', 'font-family': 'Montserrat, sans-serif' }, svg);
+    tag.textContent = 'Today';
+    var tag2 = el('text', { x: 616, y: 116, 'font-size': 15, fill: '#69725f', 'text-anchor': 'end', 'font-family': 'Montserrat, sans-serif' }, svg);
+    tag2.textContent = fmt(addDays(start, 365));
+  }
+
+  function renderSum(dates) {
+    var r = RULES[state.kind];
+    var pays = C.filter(function (c) { return offers(c, state.kind) && typeof payFor(c) === 'number'; }).map(payFor);
+    var top = pays.length ? Math.max.apply(null, pays) : null;
+    var total = top ? dates.reduce(function (s) { return s + top; }, 0) : null;
+    var h = 'You could give <strong>' + r.label.toLowerCase() + ' ' + dates.length + ' times</strong> in the next twelve months, first on <strong>' + (dates.length ? fmt(dates[0]) : 'n/a') + '</strong>. Each visit takes ' + r.time + '.';
+    if (total) h += ' At the highest published rate (€' + top + ' a donation) that is at most <strong>€' + total.toLocaleString('en-GB') + '</strong>.';
+    else if (state.kind === 't') h += ' No centre publishes a platelet rate; the Charité and Haema tell you on site.';
+    if (state.kind === 'p') h += ' In practice most regulars go once or twice a week, not every third day.';
+    document.getElementById('dmSum').innerHTML = h;
+  }
+
+  function renderMap() {
+    var svg = document.getElementById('dmMap');
+    while (svg.firstChild) svg.removeChild(svg.firstChild);
+    DISTRICTS.forEach(function (d) { el('path', { d: d.d, 'class': 'dm-d' }, svg); });
+    var active = [];
+    C.forEach(function (c) {
+      var on = offers(c, state.kind);
+      var g = el('g', { 'class': 'dm-pin' + (on ? '' : ' is-off') + (c.id === state.pick ? ' is-on' : ''), tabindex: on ? 0 : -1, role: 'button', 'aria-label': c.name }, svg);
+      el('circle', { cx: px(c.lon), cy: py(c.lat), r: 24, fill: COL[c.op], 'class': 'dm-ring', stroke: '#ffffff', 'stroke-width': 3 }, g);
+      var pay = payFor(c);
+      var t = el('text', { x: px(c.lon), y: py(c.lat) + 7, 'font-size': 20, 'font-weight': 800, 'text-anchor': 'middle', fill: '#ffffff', 'font-family': 'Montserrat, sans-serif' }, g);
+      t.textContent = on ? (typeof pay === 'number' ? (pay ? pay : '0') : '?') : '';
+      if (on) active.push(c.id);
+      g.addEventListener('click', function () { if (!on) return; state.pick = c.id; renderAll(); });
+      g.addEventListener('keydown', function (e) { if (on && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); state.pick = c.id; renderAll(); } });
+    });
+    return active;
+  }
+
+  function renderCard() {
+    var c = C.filter(function (x) { return x.id === state.pick; })[0];
+    var pay = payFor(c);
+    var payTxt = typeof pay === 'number' ? (pay ? '€' + pay + ' per donation' : 'Nothing; snack and drink') : 'Not published, asked on site';
+    var takes = [c.w ? 'whole blood' : '', c.p ? 'plasma' : '', c.t ? 'platelets' : ''].filter(Boolean).join(', ');
+    var h = '<h2>' + esc(c.name) + '</h2><p class="dm-where">' + esc(c.addr) + ' · ' + esc(c.stn) + '</p>' +
+      '<dl><dt>Takes</dt><dd>' + esc(takes) + '</dd><dt>' + esc(RULES[state.kind].label) + '</dt><dd>' + esc(payTxt) + '</dd><dt>Booking</dt><dd>' + esc(c.book) + '</dd></dl>' +
+      '<div class="dm-hours">' + DAYS.map(function (d, i) { return '<div class="' + (c.hours[i] ? 'is-open' : '') + '"><b>' + d + '</b>' + (c.hours[i] || 'shut') + '</div>'; }).join('') + '</div>';
+    if (c.hours[5]) h += '<p class="dm-flag">One of the few Berlin centres open on Saturday.</p>';
+    document.getElementById('dmCard').innerHTML = h;
+  }
+
+  function renderList(active) {
+    var ul = document.getElementById('dmList');
+    var rows = C.slice().sort(function (a, b) {
+      var pa = payFor(a), pb = payFor(b);
+      pa = typeof pa === 'number' ? pa : -1; pb = typeof pb === 'number' ? pb : -1;
+      return pb - pa || a.name.localeCompare(b.name);
+    });
+    ul.innerHTML = '';
+    rows.forEach(function (c) {
+      var li = document.createElement('li');
+      if (active.indexOf(c.id) === -1) li.className = 'is-off';
+      var pay = payFor(c);
+      li.innerHTML = '<i style="background:' + COL[c.op] + '"></i><span>' + esc(c.name) + (c.hours[5] ? ' · open Sat' : '') + '</span><em>' + (typeof pay === 'number' ? (pay ? '€' + pay : '€0') : 'ask') + '</em>';
+      li.addEventListener('click', function () { state.pick = c.id; renderAll(); });
+      ul.appendChild(li);
+    });
+  }
+
+  function renderAll() {
+    var chosen = C.filter(function (c) { return c.id === state.pick; })[0];
+    if (!offers(chosen, state.kind)) {
+      var firstOn = C.filter(function (c) { return offers(c, state.kind); })[0];
+      state.pick = firstOn.id;
+    }
+    renderTabs();
+    renderPanel();
+    var dates = schedule();
+    renderYear(dates);
+    renderSum(dates);
+    var active = renderMap();
+    renderCard();
+    renderList(active);
+    var pinned = document.querySelectorAll('.dm-pin.is-on');
+    [].forEach.call(document.querySelectorAll('.dm-list li'), function (li) { li.classList.remove('is-picked'); });
+    if (window.BW && window.BW.resize) window.BW.resize();
+    return pinned.length;
+  }
+
+  renderAll();
+})();
+</script>
+</body>
+</html>

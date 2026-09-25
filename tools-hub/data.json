@@ -10276,6 +10276,38 @@
       "cmsItemId": "04ddb3ee-999c-4a19-922d-c02b5095e8a6"
     },
     {
+      "slug": "berlin-blood-donor-map",
+      "title": "Berlin Blood Donor Map",
+      "lead": "All 14 fixed blood and plasma donation centres in Berlin on one map: what each one takes, what it pays and which days it is open. Pick whole blood, plasma or platelets, add your last donation date, and it draws every date you can give in the next twelve months. Checked on 25 September 2026.",
+      "category": "Maps",
+      "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/berlin-blood-donor-map/",
+      "embedHeight": 1900,
+      "hubCategory": "Essentials",
+      "type": "Map",
+      "priority": 3,
+      "tags": [
+        "blood donation",
+        "plasma",
+        "platelets",
+        "haema",
+        "charite",
+        "drk",
+        "health",
+        "living in berlin"
+      ],
+      "aliases": [
+        "blood donation berlin",
+        "donate blood berlin",
+        "plasma donation berlin",
+        "blutspende berlin",
+        "plasmaspende berlin",
+        "paid blood donation berlin"
+      ],
+      "iconStatus": "live-wix-media",
+      "image": "https://static.wixstatic.com/media/5a08a3_9fc0286c36194f56a6120031dc6b3aff~mv2.png",
+      "cmsItemId": "c2a4e027-f02f-469c-9d92-f51d1e7b5bac"
+    },
+    {
       "slug": "berlin-second-home-tax-ledger",
       "title": "Berlin Second Home Tax Ledger",
       "lead": "Berlin taxes a flat or a WG room registered as your Nebenwohnung at 20 percent of its net cold rent, and since 2025 subtenants and shared-flat rooms count too. Put in the rent, your own room and the shared rooms, then the day it became your second address, and this adds up every month the Finanzamt will bill, marks each 15 July due date and gives the declaration deadline. Checked on 24 September 2026.",
