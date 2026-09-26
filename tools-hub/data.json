@@ -10396,6 +10396,40 @@
       "iconStatus": "live-wix-media",
       "image": "https://static.wixstatic.com/media/5a08a3_af4af576894e4a51b005759fb851de32~mv2.png",
       "cmsItemId": "9f165dd1-2ddf-4693-9b6d-cbf1aee158e3"
+    },
+    {
+      "slug": "berlin-therme-soak-timeline",
+      "title": "Berlin Therme Soak Timeline",
+      "lead": "Six thermal baths within a regional-ticket ride of Berlin on one Saturday timeline: Ludwigsfelde, Bad Saarow, Neuruppin, Bad Belzig, Templin and Burg. Set when you leave Hauptbahnhof and how long you want in the water, and it shows the train out, the hours you really get, the ticket price and the last connection home. Checked on 26 September 2026.",
+      "category": "Weather",
+      "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/berlin-therme-soak-timeline/",
+      "embedHeight": 1900,
+      "hubCategory": "WeatherOutdoor",
+      "type": "Planner",
+      "priority": 3,
+      "tags": [
+        "thermal baths",
+        "therme",
+        "spa",
+        "sauna",
+        "day trip",
+        "brandenburg",
+        "regional train",
+        "living in berlin"
+      ],
+      "aliases": [
+        "thermal baths near berlin",
+        "therme near berlin",
+        "spa near berlin",
+        "thermal spa berlin",
+        "saarow therme",
+        "naturtherme templin",
+        "kristall therme ludwigsfelde",
+        "fontane therme neuruppin"
+      ],
+      "iconStatus": "live-wix-media",
+      "image": "https://static.wixstatic.com/media/5a08a3_8a6cb04ee539490183c6ef91d207db01~mv2.png",
+      "cmsItemId": "2f5be927-c665-4056-a90e-76927c9d8a72"
     }
   ],
   "hubCategories": [

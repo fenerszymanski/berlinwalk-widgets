@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Berlin Therme Soak Timeline</title>
+<link rel="stylesheet" href="../css/brand.css">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #FFFFFF; color: #1d231b; padding: 14px 12px 12px; }
+  .st-head h1 { font-size: 19px; line-height: 1.25; color: #1B5E20; }
+  .st-head p { font-size: 13px; line-height: 1.5; color: #475044; margin-top: 5px; }
+
+  .st-controls { margin-top: 14px; display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .st-ctl { border: 1.5px solid #1B5E20; border-radius: 12px; padding: 10px 12px 8px; background: #fbfcf8; }
+  .st-ctl label { display: block; font-size: 10.5px; font-weight: 800; letter-spacing: .07em; text-transform: uppercase; color: #1B5E20; }
+  .st-ctl output { display: block; font-size: 24px; font-weight: 800; color: #10230f; margin-top: 2px; font-variant-numeric: tabular-nums; }
+  .st-ctl output small { font-size: 12px; font-weight: 600; color: #596254; margin-left: 4px; }
+  .st-ctl input[type=range] { width: 100%; margin-top: 6px; accent-color: #1B5E20; height: 28px; }
+  .st-ctl .st-hint { font-size: 11.5px; color: #596254; line-height: 1.4; }
+
+  .st-label { font-size: 10.5px; font-weight: 800; letter-spacing: .07em; text-transform: uppercase; color: #1B5E20; margin: 16px 0 7px; }
+  .st-chart { border: 1px solid #dfe6d6; border-radius: 12px; background: #fcfdf9; padding: 6px 4px 4px; }
+  .st-chart canvas { display: block; width: 100%; }
+  .st-legend { display: flex; flex-wrap: wrap; gap: 6px 14px; font-size: 11.5px; color: #475044; margin-top: 7px; padding: 0 4px; }
+  .st-legend i { display: inline-block; width: 18px; height: 9px; border-radius: 3px; vertical-align: -1px; margin-right: 5px; }
+
+  .st-verdict { margin-top: 12px; border-radius: 12px; background: #FFE600; color: #123D18; padding: 11px 13px; font-size: 14px; line-height: 1.5; }
+  .st-verdict strong { color: #10230f; }
+
+  .st-rows { margin-top: 10px; display: grid; gap: 8px; }
+  .st-row { border: 1px solid #dfe6d6; border-radius: 12px; padding: 10px 12px; background: #fff; }
+  .st-row.is-short { border-color: #e6c7b8; background: #fffaf6; }
+  .st-row h3 { font-size: 14.5px; color: #1B5E20; display: flex; justify-content: space-between; gap: 8px; align-items: baseline; }
+  .st-row h3 span { font-size: 13px; color: #10230f; font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .st-row p { font-size: 12.5px; line-height: 1.5; color: #3b4337; margin-top: 3px; }
+  .st-row .st-rule { color: #7a3b1a; font-weight: 600; }
+  .st-times { font-variant-numeric: tabular-nums; }
+
+  .st-mapwrap { border: 1px solid #dfe6d6; border-radius: 12px; background: #f4f7ef; overflow: hidden; }
+  .st-mapwrap canvas { display: block; width: 100%; }
+  .st-foot { font-size: 11.5px; color: #596254; line-height: 1.5; margin-top: 12px; }
+
+  @media (max-width: 520px) {
+    .st-controls { grid-template-columns: 1fr; }
+    .st-ctl output { font-size: 21px; }
+  }
+</style>
+</head>
+<body>
+<div class="st-head">
+  <h1>Therme Soak Timeline</h1>
+  <p>Six thermal baths within a regional-ticket ride of Berlin, run on the real Saturday timetable from Berlin Hauptbahnhof. Move the two sliders and see how much of your day ends up in the water, what the ticket costs, and when you are back in town.</p>
+</div>
+
+<div class="st-controls">
+  <div class="st-ctl">
+    <label for="st-leave">Leave Hauptbahnhof at</label>
+    <output id="st-leave-out">09:00</output>
+    <input id="st-leave" type="range" min="400" max="1080" step="5" value="540" aria-describedby="st-leave-hint">
+    <div class="st-hint" id="st-leave-hint">Saturday, first train at or after this time.</div>
+  </div>
+  <div class="st-ctl">
+    <label for="st-soak">Time you want in the water</label>
+    <output id="st-soak-out">4 h</output>
+    <input id="st-soak" type="range" min="60" max="540" step="30" value="240" aria-describedby="st-soak-hint">
+    <div class="st-hint" id="st-soak-hint">Changing and showering time is added on both ends.</div>
+  </div>
+</div>
+
+<div class="st-label">Your Saturday, spa by spa</div>
+<div class="st-chart"><canvas id="st-gantt" role="img" aria-label="Timeline of train out, time in the water and train home for each thermal bath"></canvas>
+  <div class="st-legend">
+    <span><i style="background:#b9c2b3"></i>Train and walk</span>
+    <span><i style="background:#1B5E20"></i>In the water</span>
+    <span><i style="background:#FFE600;border:1px solid #9a8a00"></i>Time you wanted but lose</span>
+    <span><i style="background:#c0392b"></i>Closing time</span>
+  </div>
+</div>
+
+<div class="st-verdict" id="st-verdict" aria-live="polite"></div>
+<div class="st-rows" id="st-rows"></div>
+
+<div class="st-label">Where they sit around Berlin</div>
+<div class="st-mapwrap"><canvas id="st-map" role="img" aria-label="Map of the six thermal baths around Berlin with door-to-door travel times from Hauptbahnhof"></canvas></div>
+
+<p class="st-foot">Timetable read from the VBB journey planner for a normal Saturday in October, door to door from Hauptbahnhof, regional trains and buses only, so a Deutschlandticket covers every leg. Ludwigsfelde also sits inside the Berlin ABC fare area. Adult Saturday prices with sauna from each operator's own price list, checked on 26 September 2026. Engineering works and the December timetable change can move these trains: check the journey planner on the morning you go.</p>
+
+<script src="../js/brand.js"></script>
+<script>
+// Saturday journeys from the VBB planner, minutes after midnight: [depart, arrive, lines]
+var TRAINS = {"templin":{"out":[[448,569,"U5 > RB12 > 531"],[508,629,"U5 > RB12 > 531"],[568,689,"U5 > RB12 > 531"],[628,749,"U5 > RB12 > 531"],[688,809,"U5 > RB12 > 531"],[748,869,"U5 > RB12 > 531"],[808,929,"U5 > RB12 > 531"],[868,989,"U5 > RB12 > 531"],[928,1049,"U5 > RB12 > 531"],[988,1109,"U5 > RB12 > 531"],[1048,1169,"U5 > RB12 > 531"],[1108,1229,"U5 > RB12 > 531"]],"back":[[600,741,"531 > RB12 > U5"],[660,801,"531 > RB12 > U5"],[720,861,"531 > RB12 > U5"],[780,921,"531 > RB12 > U5"],[840,981,"531 > RB12 > U5"],[900,1041,"531 > RB12 > U5"],[960,1101,"531 > RB12 > U5"],[1020,1147,"531 > 515 > RB63"],[1080,1221,"531 > RB12 > U5"],[1140,1281,"531 > RB12 > U5"],[1200,1341,"531 > RB12 > U5"],[1260,1406,"531 > RB12 > U5"]]},"belzig":{"out":[[429,530,"S9 > RE7 > 570"],[489,591,"S9 > RE7 > 582"],[549,643,"S9 > RE7 > 572"],[609,711,"S9 > RE7 > 582"],[669,763,"S9 > RE7 > 572"],[727,831,"S7 > RE7 > 582"],[789,883,"S9 > RE7 > 572"],[849,951,"S9 > RE7 > 582"],[904,1003,"S5 > RE7 > 572"],[969,1071,"S9 > RE7 > 582"],[1024,1123,"S5 > RE7 > 572"],[1084,1191,"S5 > RE7 > 582"]],"back":[[550,650,"570 > RE7 > S5"],[616,715,"590 > RE7 > S9"],[670,775,"570 > RE7 > S9"],[736,830,"590 > RE7 > S5"],[790,890,"570 > RE7 > S5"],[856,955,"590 > RE7 > S9"],[910,1010,"570 > RE7 > S5"],[976,1070,"590 > RE7 > S5"],[1030,1133,"570 > RE7 > S3"],[1096,1195,"590 > RE7 > S9"],[1150,1255,"570 > RE7 > S9"],[1216,1315,"590 > RE7 > S9"],[1304,1435,"581 > RE7 > S9"]]},"saarow":{"out":[[391,481,"S5 > RE1 > RB35"],[451,536,"S5 > RE1 > RB35"],[478,569,"S7 > RE1 > 431"],[511,596,"S5 > RE1 > RB35"],[571,656,"S5 > RE1 > RB35"],[598,689,"S7 > RE1 > 430"],[631,716,"S5 > RE1 > RB35"],[693,775,"S3 > RE1 > RB35"],[718,809,"S7 > RE1 > 431"],[753,835,"S3 > RE1 > RB35"],[813,895,"S3 > RE1 > RB35"],[838,929,"S7 > RE1 > 430"],[876,955,"S9 > S3 > RE1 > RB35"],[933,1015,"S3 > RE1 > RB35"],[958,1049,"S7 > RE1 > 431"],[993,1075,"S3 > RE1 > RB35"],[1053,1135,"S3 > RE1 > RB35"]],"back":[[595,684,"RB35 > RE1 > S5"],[625,724,"430 > RE1 > S5"],[655,744,"RB35 > RE1 > S5"],[715,804,"RB35 > RE1 > S5"],[745,844,"431 > RE1 > S5"],[775,864,"RB35 > RE1 > S5"],[791,904,"412 > RE1 > S5"],[835,924,"RB35 > RE1 > S5"],[865,964,"430 > RE1 > S5"],[895,984,"RB35 > RE1 > S5"],[955,1044,"RB35 > RE1 > S5"],[985,1084,"431 > RE1 > S5"],[1015,1104,"RB35 > RE1 > S5"],[1075,1164,"RB35 > RE1 > S5"],[1105,1204,"430 > RE1 > S5"],[1135,1224,"RB35 > RE1 > S5"],[1174,1276,"RB36 > RE7 > S7"],[1225,1316,"431 > RE1 > S7"],[1258,1379,"RB35 > RE1 > S3"],[1309,1389,"RB35 > RE1 > S3 > S9"],[1375,1459,"RB35 > RE1 > S3"]]},"neuruppin":{"out":[[428,515,"M10 > S25 > RE6"],[441,573,"RE8 > RB73 > 711"],[488,578,"M10 > S25 > RE6"],[548,635,"M10 > S25 > RE6"],[559,693,"RE8 > 711 > 711"],[606,698,"S3 > S25 > RE6"],[666,755,"S3 > S25 > RE6"],[681,813,"RE8 > RB73 > 711"],[726,818,"S3 > S25 > RE6"],[786,875,"S3 > S25 > RE6"],[846,938,"S3 > S25 > RE6"],[906,995,"S3 > S25 > RE6"],[919,1053,"RE8 > RB73 > 711"],[966,1058,"S3 > S25 > RE6"],[1026,1116,"S3 > S25 > RE6"],[1086,1178,"S3 > S25 > RE6"]],"back":[[560,649,"RE6 > S25 > S9"],[564,695,"711 > 711 > RE8"],[622,709,"RE6 > S25 > S9"],[680,769,"RE6 > S25 > S9"],[684,815,"711 > RB73 > RE8"],[742,829,"RE6 > S25 > S9"],[800,889,"RE6 > S25 > S9"],[862,949,"RE6 > S25 > S9"],[920,1009,"RE6 > S25 > S9"],[924,1055,"711 > RB73 > RE8"],[982,1069,"RE6 > S25 > S9"],[1040,1129,"RE6 > S25 > S9"],[1102,1189,"RE6 > S25 > S9"],[1160,1249,"RE6 > S25 > S9"],[1164,1295,"711 > RB73 > RE8"],[1222,1309,"RE6 > S25 > S9"],[1279,1369,"RE6 > S25 > S9"],[1347,1445,"RE6 > X36 > RE4"]]},"ludwigsfelde":{"out":[[400,446,"RE3"],[428,466,"RE4"],[456,504,"FEX > RE3"],[486,526,"RE4"],[520,566,"RE3"],[548,586,"RE4"],[576,624,"FEX > RE3"],[606,644,"RE4"],[640,686,"RE3"],[668,706,"RE4"],[696,744,"FEX > RE3"],[726,764,"RE4"],[760,806,"RE3"],[788,826,"RE4"],[816,864,"FEX > RE3"],[846,884,"RE4"],[880,926,"RE3"],[908,946,"RE4"],[936,984,"FEX > RE3"],[966,1006,"RE4"],[1000,1046,"RE3"],[1028,1066,"RE4"],[1051,1103,"RE3"],[1056,1120,"FEX > RB32"],[1086,1124,"RE4"]],"back":[[553,593,"RE4"],[567,621,"RE3"],[613,653,"RE4"],[632,679,"RE3"],[671,716,"RE4"],[687,740,"RE3"],[733,773,"RE4"],[751,798,"RE3"],[793,833,"RE4"],[807,860,"RE3"],[853,893,"RE4"],[871,918,"RE3"],[913,953,"RE4"],[927,979,"RE3"],[973,1013,"RE4"],[991,1038,"RE3"],[1033,1073,"RE4"],[1047,1100,"RE3"],[1093,1133,"RE4"],[1111,1158,"RE3"],[1151,1195,"RE4 > RE20"],[1167,1220,"RE3"],[1213,1253,"RE4"],[1231,1278,"RE3"],[1273,1313,"RE4"],[1287,1339,"RE3"],[1332,1384,"RE4"],[1337,1404,"RB32 > FEX"],[1411,1457,"RE3"]]},"burg":{"out":[[441,559,"S5 > RE2 > 38"],[501,654,"S5 > RE2 > 47"],[561,679,"S5 > RE2 > 38"],[621,774,"S5 > RE2 > 47"],[681,799,"S5 > RE2 > 38"],[741,894,"S5 > RE2 > 47"],[801,919,"S5 > RE2 > 38"],[861,1014,"S5 > RE2 > 47"],[921,1039,"S5 > RE2 > 38"],[981,1134,"S5 > RE2 > 47"],[1041,1159,"S5 > RE2 > 38"]],"back":[[548,704,"47 > RE2 > S5"],[640,764,"38 > RE2 > S5"],[668,824,"47 > RE2 > S5"],[760,884,"38 > RE2 > S5"],[788,944,"47 > RE2 > S5"],[880,1004,"38 > RE2 > S5"],[908,1064,"47 > RE2 > S5"],[1000,1124,"38 > RE2 > S5"],[1028,1184,"47 > RE2 > S5"],[1120,1244,"38 > RE2 > S5"],[1148,1306,"47 > RE2 > S7"],[1240,1366,"38 > RE2 > S7"],[1320,1499,"47 > RE2 > S3"]]}};
+
+
+var CHANGE_IN = 15;   // minutes from the door to the water
+var CHANGE_OUT = 20;  // minutes from the water back to the door
+var HBF = { lat: 52.5251, lon: 13.3694 };
+
+// Adult Saturday tickets with sauna. [from, to, max minutes, euros, label]
+var SPAS = [
+  { key: 'ludwigsfelde', name: 'Kristall Therme Ludwigsfelde', town: 'Ludwigsfelde', lat: 52.3066, lon: 13.2639,
+    tickets: [[540, 1380, 180, 29.5, '3-hour ticket'], [540, 1380, 300, 38.5, '5-hour ticket'], [540, 1380, 840, 46, 'day ticket']],
+    rule: 'Textile-free on Saturdays: swimwear is only allowed on Wednesdays and on Sundays until 17:30.',
+    reach: 'RE3 or RE4, then a 17-minute walk. Inside the Berlin ABC fare area.' },
+  { key: 'saarow', name: 'SaarowTherme', town: 'Bad Saarow', lat: 52.2910, lon: 14.0607,
+    tickets: [[600, 1380, 180, 42.5, '3-hour bath and sauna'], [600, 1380, 780, 47.5, 'day bath and sauna']],
+    rule: 'Fridays and Saturdays are 16+ only, with ID.',
+    reach: 'RE1 to Fürstenwalde, RB35 to Bad Saarow, then an 8-minute walk.' },
+  { key: 'neuruppin', name: 'Fontane Therme', town: 'Neuruppin', lat: 52.9246, lon: 12.8144,
+    tickets: [[540, 780, 180, 30, 'Early Fit, 9:00 to 13:00'], [720, 1320, 240, 45, 'Flex and Relax, 4 hours'], [1080, 1320, 240, 40, 'Sundowner from 18:00'], [720, 1320, 600, 95, 'Relaxing Time day ticket'], [540, 1320, 780, 135, 'Premium day ticket']],
+    rule: 'Day guests start at 12:00 unless you buy the early or premium ticket.',
+    reach: 'S-Bahn to Hennigsdorf, RE6 to Rheinsberger Tor, then a 10-minute walk.' },
+  { key: 'belzig', name: 'SteinTherme', town: 'Bad Belzig', lat: 52.1506, lon: 12.5963,
+    tickets: [[600, 1320, 60, 12.5, '1-hour bath and sauna'], [600, 1320, 180, 32.5, '3-hour bath and sauna'], [600, 1320, 720, 39.5, 'day bath and sauna']],
+    rule: 'The last train home leaves at 21:44, before the pools close.',
+    reach: 'S-Bahn to Wannsee, RE7 to Bad Belzig, then a town bus or a 15-minute walk.' },
+  { key: 'templin', name: 'NaturTherme Templin', town: 'Templin', lat: 53.1022, lon: 13.5264,
+    tickets: [[540, 1260, 120, 26, '2-hour brine bath and sauna'], [540, 1260, 720, 36, 'day brine bath and sauna']],
+    rule: 'The bus from Templin Stadt runs once an hour, so every return is on the hour.',
+    reach: 'U5 to Lichtenberg, RB12 to Templin Stadt, then bus 531.' },
+  { key: 'burg', name: 'Spreewald Therme', town: 'Burg (Spreewald)', lat: 51.8382, lon: 14.1339,
+    tickets: [[540, 1320, 120, 29, '2-hour brine bath and sauna'], [540, 1320, 180, 33, '3-hour brine bath and sauna'], [540, 1320, 240, 37, '4-hour brine bath and sauna'], [540, 1320, 780, 45, 'day brine bath and sauna']],
+    rule: 'The longest ride of the six: two hours each way on a good connection.',
+    reach: 'RE2 to Lübbenau or Cottbus, then bus 38 or 47 to the door.' }
+];
+
+var LABEL = { ludwigsfelde: 'left', saarow: 'below', burg: 'right', belzig: 'below', templin: 'right', neuruppin: 'right' };
+var CLOSE = { ludwigsfelde: 1380, saarow: 1380, neuruppin: 1320, belzig: 1320, templin: 1260, burg: 1320 };
+
+function hm(m) {
+  m = Math.round(m);
+  var h = Math.floor(m / 60) % 24, mi = m % 60;
+  return (h < 10 ? '0' : '') + h + ':' + (mi < 10 ? '0' : '') + mi;
+}
+function dur(m) {
+  m = Math.max(0, Math.round(m));
+  var h = Math.floor(m / 60), mi = m % 60;
+  if (!h) return mi + ' min';
+  return h + ' h' + (mi ? ' ' + mi + ' min' : '');
+}
+function euro(v) { return '€' + (v % 1 ? v.toFixed(2) : String(v)); }
+
+function plan(spa, leave, want) {
+  var t = TRAINS[spa.key];
+  var out = null;
+  for (var i = 0; i < t.out.length; i++) { if (t.out[i][0] >= leave) { out = t.out[i]; break; } }
+  if (!out) return { spa: spa, none: true };
+  var ready = out[1] + CHANGE_IN;
+  var best = null;
+  spa.tickets.forEach(function (tk) {
+    var start = Math.max(ready, tk[0]);
+    var hardEnd = Math.min(tk[1], start + tk[2]);
+    // latest return train you can still make after leaving the water
+    var lastOk = null;
+    for (var j = 0; j < t.back.length; j++) { if (t.back[j][0] - CHANGE_OUT >= start && t.back[j][0] - CHANGE_OUT <= hardEnd) lastOk = t.back[j]; }
+    var desired = start + want;
+    var end = Math.min(desired, hardEnd);
+    var back = null;
+    for (var k = 0; k < t.back.length; k++) { if (t.back[k][0] >= end + CHANGE_OUT) { back = t.back[k]; break; } }
+    if (!back) {
+      if (!lastOk) return;
+      back = lastOk; end = Math.min(end, lastOk[0] - CHANGE_OUT);
+    }
+    var soak = end - start;
+    if (soak <= 0) return;
+    var cand = { ticket: tk, start: start, end: end, back: back, soak: soak };
+    if (!best || soak > best.soak + 1 || (Math.abs(soak - best.soak) <= 1 && (back[1] < best.back[1] || (back[1] === best.back[1] && tk[3] < best.ticket[3])))) best = cand;
+  });
+  if (!best) return { spa: spa, out: out, none: true };
+  return {
+    spa: spa, out: out, start: best.start, end: best.end, soak: best.soak, want: want,
+    back: best.back, ticket: best.ticket, home: best.back[1], lost: Math.max(0, want - best.soak)
+  };
+}
+
+var leaveEl = document.getElementById('st-leave');
+var soakEl = document.getElementById('st-soak');
+var gantt = document.getElementById('st-gantt');
+var mapCv = document.getElementById('st-map');
+
+function sizeCanvas(cv, cssH) {
+  var w = cv.parentNode.clientWidth - 8;
+  var dpr = window.devicePixelRatio || 1;
+  cv.style.height = cssH + 'px';
+  cv.width = Math.max(260, w) * dpr; cv.height = cssH * dpr;
+  var ctx = cv.getContext('2d'); ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  return { ctx: ctx, w: Math.max(260, w), h: cssH };
+}
+
+function drawGantt(plans) {
+  var rowH = 44, top = 26, narrow = gantt.parentNode.clientWidth < 520;
+  var labelW = narrow ? 0 : 128;
+  var c = sizeCanvas(gantt, top + plans.length * rowH + (narrow ? plans.length * 14 : 0) + 8);
+  var ctx = c.ctx, x0 = labelW + (narrow ? 18 : 6), x1 = c.w - (narrow ? 16 : 8);
+  var T0 = 360, T1 = 1500;
+  function X(m) { return x0 + (Math.min(Math.max(m, T0), T1) - T0) / (T1 - T0) * (x1 - x0); }
+  ctx.clearRect(0, 0, c.w, c.h);
+  ctx.font = '600 10px Montserrat, sans-serif'; ctx.fillStyle = '#6b7466'; ctx.textAlign = 'center';
+  for (var h = 6; h <= 25; h += (narrow ? 3 : 2)) {
+    var gx = X(h * 60);
+    ctx.fillText(hm(h * 60), gx, 12);
+    ctx.strokeStyle = '#e6ebe0'; ctx.lineWidth = 1; ctx.beginPath(); ctx.moveTo(gx, 17); ctx.lineTo(gx, c.h - 4); ctx.stroke();
+  }
+  var y = top;
+  plans.forEach(function (p) {
+    var rowTop = y;
+    if (narrow) {
+      ctx.textAlign = 'left'; ctx.font = '700 11px Montserrat, sans-serif'; ctx.fillStyle = '#1B5E20';
+      ctx.fillText(p.spa.town, x0, y + 10); y += 14;
+    } else {
+      ctx.textAlign = 'right'; ctx.font = '700 11.5px Montserrat, sans-serif'; ctx.fillStyle = '#1B5E20';
+      ctx.fillText(p.spa.town, labelW, y + 20);
+    }
+    var by = y + 8, bh = 18;
+    if (p.none) {
+      ctx.textAlign = 'left'; ctx.fillStyle = '#7a3b1a'; ctx.font = '600 11px Montserrat, sans-serif';
+      ctx.fillText('No useful train left today', x0 + 4, by + 13);
+    } else {
+      ctx.fillStyle = '#b9c2b3';
+      ctx.fillRect(X(p.out[0]), by + 5, X(p.start) - X(p.out[0]), bh - 10);
+      ctx.fillRect(X(p.end), by + 5, X(p.home) - X(p.end), bh - 10);
+      if (p.lost > 0) {
+        ctx.fillStyle = '#FFE600'; ctx.strokeStyle = '#9a8a00'; ctx.lineWidth = 1;
+        var lx = X(p.end), lw = X(p.end + p.lost) - X(p.end);
+        ctx.fillRect(lx, by + 2, lw, bh - 4); ctx.strokeRect(lx + .5, by + 2.5, lw - 1, bh - 5);
+      }
+      ctx.fillStyle = '#1B5E20';
+      ctx.fillRect(X(p.start), by, Math.max(2, X(p.end) - X(p.start)), bh);
+      ctx.fillStyle = '#FFFFFF'; ctx.font = '700 10.5px Montserrat, sans-serif'; ctx.textAlign = 'center';
+      if (X(p.end) - X(p.start) > 34) ctx.fillText(dur(p.soak), (X(p.start) + X(p.end)) / 2, by + 13);
+      ctx.fillStyle = '#10230f'; ctx.beginPath(); ctx.arc(X(p.home), by + bh / 2, 3.5, 0, 6.3); ctx.fill();
+    }
+    ctx.strokeStyle = '#c0392b'; ctx.lineWidth = 2;
+    var cx = X(CLOSE[p.spa.key]);
+    ctx.beginPath(); ctx.moveTo(cx, by - 3); ctx.lineTo(cx, by + bh + 3); ctx.stroke();
+    y = rowTop + rowH + (narrow ? 14 : 0);
+  });
+  // leave marker
+  var lx2 = X(Number(leaveEl.value));
+  ctx.strokeStyle = '#10230f'; ctx.setLineDash([3, 3]); ctx.lineWidth = 1;
+  ctx.beginPath(); ctx.moveTo(lx2, 17); ctx.lineTo(lx2, c.h - 4); ctx.stroke(); ctx.setLineDash([]);
+}
+
+function drawMap(plans) {
+  var c = sizeCanvas(mapCv, mapCv.parentNode.clientWidth < 520 ? 400 : 320), ctx = c.ctx;
+  var latMin = 51.75, latMax = 53.2, lonMin = 12.45, lonMax = 14.3;
+  var k = Math.cos(52.5 * Math.PI / 180);
+  var spanX = (lonMax - lonMin) * k, spanY = latMax - latMin;
+  var s = Math.min((c.w - 30) / spanX, (c.h - 30) / spanY);
+  var ox = (c.w - spanX * s) / 2, oy = (c.h - spanY * s) / 2;
+  function P(lat, lon) { return [ox + (lon - lonMin) * k * s, oy + (latMax - lat) * s]; }
+  ctx.clearRect(0, 0, c.w, c.h);
+  var hb = P(HBF.lat, HBF.lon);
+  // distance rings every 25 km
+  ctx.strokeStyle = '#d3dccb'; ctx.lineWidth = 1; ctx.fillStyle = '#8a9483'; ctx.font = '600 9.5px Montserrat, sans-serif'; ctx.textAlign = 'left';
+  [25, 50, 75, 100].forEach(function (km) {
+    var r = km / 111 * s; ctx.beginPath(); ctx.arc(hb[0], hb[1], r, 0, 6.3); ctx.stroke();
+    if (hb[0] - r > 18) { ctx.textAlign = 'center'; ctx.fillText(km + ' km', hb[0] - r, hb[1] - 4); }
+  });
+  plans.forEach(function (p) {
+    var q = P(p.spa.lat, p.spa.lon);
+    ctx.strokeStyle = '#1B5E20'; ctx.setLineDash([2, 3]); ctx.beginPath(); ctx.moveTo(hb[0], hb[1]); ctx.lineTo(q[0], q[1]); ctx.stroke(); ctx.setLineDash([]);
+    ctx.fillStyle = p.none ? '#c0392b' : '#FFE600'; ctx.strokeStyle = '#1B5E20'; ctx.lineWidth = 2;
+    ctx.beginPath(); ctx.arc(q[0], q[1], 7, 0, 6.3); ctx.fill(); ctx.stroke();
+    var ride = p.out ? dur(p.out[1] - p.out[0]) : '';
+    ctx.fillStyle = '#10230f'; ctx.font = '700 11px Montserrat, sans-serif';
+    var pos = LABEL[p.spa.key] || 'right';
+    if (pos === 'right' && q[0] > c.w - 120) pos = 'left';
+    var tx = q[0], ty = q[1] - 1;
+    if (pos === 'right') { ctx.textAlign = 'left'; tx = q[0] + 11; }
+    else if (pos === 'left') { ctx.textAlign = 'right'; tx = q[0] - 11; }
+    else if (pos === 'below') { ctx.textAlign = 'center'; ty = q[1] + 20; }
+    else if (pos === 'belowleft') { ctx.textAlign = 'right'; tx = q[0] - 6; ty = q[1] + 20; }
+    ctx.fillText(p.spa.town, tx, ty);
+    ctx.font = '600 10px Montserrat, sans-serif'; ctx.fillStyle = '#475044';
+    ctx.fillText(ride + ' door to door', tx, ty + 12);
+    ctx.textAlign = 'left';
+  });
+  ctx.fillStyle = '#10230f'; ctx.beginPath(); ctx.arc(hb[0], hb[1], 5, 0, 6.3); ctx.fill();
+  ctx.font = '800 11px Montserrat, sans-serif'; ctx.textAlign = 'left';
+  ctx.lineWidth = 4; ctx.strokeStyle = '#f4f7ef'; ctx.strokeText('Berlin Hbf', hb[0] + 8, hb[1] + 4);
+  ctx.fillText('Berlin Hbf', hb[0] + 8, hb[1] + 4);
+}
+
+function render() {
+  var leave = Number(leaveEl.value), want = Number(soakEl.value);
+  document.getElementById('st-leave-out').textContent = hm(leave);
+  document.getElementById('st-soak-out').innerHTML = dur(want);
+  var plans = SPAS.map(function (s) { return plan(s, leave, want); });
+  drawGantt(plans);
+  drawMap(plans);
+  var ok = plans.filter(function (p) { return !p.none; });
+  var full = ok.filter(function (p) { return p.lost < 1; });
+  var v = document.getElementById('st-verdict');
+  if (!ok.length) {
+    v.innerHTML = 'Leaving at <strong>' + hm(leave) + '</strong> is too late for all six on a Saturday. Move the first slider earlier.';
+  } else {
+    var earliest = ok.slice().sort(function (a, b) { return a.home - b.home; })[0];
+    var cheapest = ok.slice().sort(function (a, b) { return a.ticket[3] - b.ticket[3]; })[0];
+    v.innerHTML = '<strong>' + full.length + ' of 6</strong> give you the full ' + dur(want) + ' in the water. '
+      + 'Home earliest from <strong>' + earliest.spa.town + '</strong> (Hbf ' + hm(earliest.home) + '), '
+      + 'cheapest entry at <strong>' + cheapest.spa.town + '</strong> (' + euro(cheapest.ticket[3]) + ').';
+  }
+  var rows = document.getElementById('st-rows');
+  rows.innerHTML = plans.map(function (p) {
+    if (p.none) {
+      return '<div class="st-row is-short"><h3>' + p.spa.name + '<span>not today</span></h3><p>No Saturday train gets you in with time to soak and back home. ' + p.spa.reach + '</p></div>';
+    }
+    var short = p.lost >= 1;
+    return '<div class="st-row' + (short ? ' is-short' : '') + '"><h3>' + p.spa.name + ', ' + p.spa.town + '<span>' + euro(p.ticket[3]) + '</span></h3>'
+      + '<p class="st-times">Train ' + hm(p.out[0]) + ', at the door ' + hm(p.out[1]) + '. In the water ' + hm(p.start) + ' to ' + hm(p.end) + ' (' + dur(p.soak) + '). Leave ' + hm(p.back[0]) + ', Hauptbahnhof ' + hm(p.home) + '.</p>'
+      + '<p>' + p.ticket[4].charAt(0).toUpperCase() + p.ticket[4].slice(1) + '. ' + (short ? 'You lose ' + dur(p.lost) + ' of what you wanted to closing time or the last train. ' : '') + p.spa.reach + '</p>'
+      + '<p class="st-rule">' + p.spa.rule + '</p></div>';
+  }).join('');
+  if (window.__bwRequestEmbedResize) window.__bwRequestEmbedResize();
+}
+
+leaveEl.addEventListener('input', render);
+soakEl.addEventListener('input', render);
+var rt; window.addEventListener('resize', function () { clearTimeout(rt); rt = setTimeout(render, 120); });
+render();
+</script>
+</body>
+</html>

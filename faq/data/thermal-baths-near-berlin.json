@@ -1,0 +1,89 @@
+{
+  "version": 1,
+  "slug": "thermal-baths-near-berlin",
+  "key": "thermal-baths-near-berlin",
+  "config": {
+    "title": "Thermal Baths Near Berlin - FAQ",
+    "subtitle": "Which thermal baths near Berlin you can reach by regional train, what a Saturday costs and when the last connection home leaves.",
+    "items": [
+      {
+        "q": "Which thermal baths near Berlin can I reach by train?",
+        "a": "Six are within a regional-ticket ride: **Kristall Therme Ludwigsfelde, SaarowTherme in Bad Saarow, Fontane Therme in Neuruppin, SteinTherme in Bad Belzig, NaturTherme Templin and Spreewald Therme in Burg**. All six are reachable with regional trains and buses from Berlin Hauptbahnhof."
+      },
+      {
+        "q": "Which thermal bath is closest to Berlin?",
+        "a": "**Kristall Therme Ludwigsfelde.** RE3 and RE4 get you from Hauptbahnhof to the door in 38 to 53 minutes including a 17-minute walk, and Ludwigsfelde sits in fare zone C, so a Berlin ABC ticket covers it."
+      },
+      {
+        "q": "Is the Kristall Therme Ludwigsfelde a nude spa?",
+        "a": "Yes, it is **textile-free**. Swimwear is only allowed on Wednesdays and on Sundays until 17:30; on Saturdays the pools and saunas are clothes-free."
+      },
+      {
+        "q": "How much does a thermal bath near Berlin cost on a Saturday?",
+        "a": "With sauna, **Templin costs €26 for 2 hours, Burg €29 for 2 hours, Ludwigsfelde €29.50 for 3 hours, Bad Belzig €32.50 for 3 hours, Bad Saarow €42.50 for 3 hours and Neuruppin €45 for 4 hours**. Day tickets run from €36 in Templin to €95 for the Relaxing Time ticket in Neuruppin."
+      },
+      {
+        "q": "Can I stay until closing time and still get back to Berlin?",
+        "a": "At most of them, yes. **Bad Saarow is open until 23:00 and the 22:55 train reaches Hauptbahnhof at 00:19**, and Ludwigsfelde has a train at 23:31. **Bad Belzig is the exception:** the last useful train leaves at 21:44, before the pools close at 22:00."
+      },
+      {
+        "q": "Does the Deutschlandticket cover the trip to the thermal baths?",
+        "a": "Yes. **All six routes use regional trains and buses**, so a Deutschlandticket at €63 a month covers every leg. Without one, the Brandenburg-Berlin-Ticket costs €36.50 and covers up to five adults for the whole Saturday."
+      }
+    ]
+  },
+  "schema": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Which thermal baths near Berlin can I reach by train?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Six are within a regional-ticket ride: Kristall Therme Ludwigsfelde, SaarowTherme in Bad Saarow, Fontane Therme in Neuruppin, SteinTherme in Bad Belzig, NaturTherme Templin and Spreewald Therme in Burg. All six are reachable with regional trains and buses from Berlin Hauptbahnhof."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Which thermal bath is closest to Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Kristall Therme Ludwigsfelde. RE3 and RE4 get you from Hauptbahnhof to the door in 38 to 53 minutes including a 17-minute walk, and Ludwigsfelde sits in fare zone C, so a Berlin ABC ticket covers it."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is the Kristall Therme Ludwigsfelde a nude spa?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, it is textile-free. Swimwear is only allowed on Wednesdays and on Sundays until 17:30; on Saturdays the pools and saunas are clothes-free."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How much does a thermal bath near Berlin cost on a Saturday?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "With sauna, Templin costs €26 for 2 hours, Burg €29 for 2 hours, Ludwigsfelde €29.50 for 3 hours, Bad Belzig €32.50 for 3 hours, Bad Saarow €42.50 for 3 hours and Neuruppin €45 for 4 hours. Day tickets run from €36 in Templin to €95 for the Relaxing Time ticket in Neuruppin."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I stay until closing time and still get back to Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "At most of them, yes. Bad Saarow is open until 23:00 and the 22:55 train reaches Hauptbahnhof at 00:19, and Ludwigsfelde has a train at 23:31. Bad Belzig is the exception: the last useful train leaves at 21:44, before the pools close at 22:00."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Does the Deutschlandticket cover the trip to the thermal baths?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. All six routes use regional trains and buses, so a Deutschlandticket at €63 a month covers every leg. Without one, the Brandenburg-Berlin-Ticket costs €36.50 and covers up to five adults for the whole Saturday."
+        }
+      }
+    ]
+  }
+}
