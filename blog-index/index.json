@@ -1,9 +1,9 @@
 {
-  "updatedAt": "2026-09-25T08:50:55.784Z",
+  "updatedAt": "2026-09-26T08:47:55.369Z",
   "source": "Wix Blog API",
   "popularSource": "Wix Blog metrics.views lifetime sort",
-  "totalPosts": 422,
-  "toolsTotal": 342,
+  "totalPosts": 423,
+  "toolsTotal": 343,
   "bookingUrl": "https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based",
   "navTopics": [
     {
@@ -1802,6 +1802,23 @@
   ],
   "latest": [
     {
+      "title": "Thermal Baths Near Berlin: How Much of Your Saturday Ends Up in the Water",
+      "slug": "thermal-baths-near-berlin",
+      "path": "/post/thermal-baths-near-berlin",
+      "url": "https://www.berlinwalk.com/post/thermal-baths-near-berlin",
+      "excerpt": "Six thermal baths sit within a regional-ticket ride of Berlin, and the pool is rarely what decides the day. The timetable does: when you reach the door, when the pools close and when the last connection gets you back to Hauptbahnhof. Here is what a Saturday costs at Ludwigsfelde, Bad Saarow, Neuruppin, Bad Belzig, Templin and Burg, and which one fits the day you have.",
+      "category": "Living in Berlin",
+      "categorySlug": "living-in-berlin",
+      "topic": "living-in-berlin",
+      "topicLabel": "Living in Berlin",
+      "readTime": "7 min read",
+      "publishedDate": "2026-09-26T08:46:24.607Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_2ba3f3352a644e4aa79f42a5ea0fa5ca~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-saarow-therme-outdoor-pool.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_2ba3f3352a644e4aa79f42a5ea0fa5ca~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-saarow-therme-outdoor-pool.jpg",
+      "alt": "The outdoor thermal pool at the SaarowTherme in Bad Saarow, framed by the white colonnades of the spa building",
+      "relatedToolSlug": "berlin-therme-soak-timeline"
+    },
+    {
       "title": "Blood Donation in Berlin: Which Centres Pay, How Often You Can Give, and the German Catch",
       "slug": "blood-donation-berlin",
       "path": "/post/blood-donation-berlin",
@@ -1987,23 +2004,6 @@
       "thumb": "https://static.wixstatic.com/media/5a08a3_443bd58d0cc8455a9363044c4e08bed3~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-cranes-sunset-kremmener-luch.jpg",
       "alt": "A long line of cranes flying over the Kremmener Luch as the sun sets behind a row of trees",
       "relatedToolSlug": "berlin-crane-evening-planner"
-    },
-    {
-      "title": "Vet in Berlin: What the Same Visit Costs at 10:00 and at 22:00",
-      "slug": "vet-in-berlin",
-      "path": "/post/vet-in-berlin",
-      "url": "https://www.berlinwalk.com/post/vet-in-berlin",
-      "excerpt": "The same limping dog with sedation and two X-rays costs €115 to €344 at a Berlin practice on a Monday morning and €289 to €519 on a Saturday night. Here is how the vet fee schedule works, where the 24-hour emergency service is, and which cases cannot wait.",
-      "category": "Living in Berlin",
-      "categorySlug": "living-in-berlin",
-      "topic": "living-in-berlin",
-      "topicLabel": "Living in Berlin",
-      "readTime": "7 min read",
-      "publishedDate": "2026-09-21T13:34:30.210Z",
-      "image": "https://static.wixstatic.com/media/5a08a3_c14a2ff9d95f4a5a886a513554d4805a~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-vet-exam-maltese.jpg",
-      "thumb": "https://static.wixstatic.com/media/5a08a3_c14a2ff9d95f4a5a886a513554d4805a~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-vet-exam-maltese.jpg",
-      "alt": "A vet listens to a small white Maltese dog with a stethoscope on a blue examination table",
-      "relatedToolSlug": "berlin-vet-bill-week"
     }
   ]
 }

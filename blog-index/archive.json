@@ -1,9 +1,26 @@
 {
-  "updatedAt": "2026-09-25T08:50:55.784Z",
+  "updatedAt": "2026-09-26T08:47:55.369Z",
   "source": "Wix Blog API",
-  "totalPosts": 422,
+  "totalPosts": 423,
   "bookingUrl": "https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based",
   "allPosts": [
+    {
+      "title": "Thermal Baths Near Berlin: How Much of Your Saturday Ends Up in the Water",
+      "slug": "thermal-baths-near-berlin",
+      "path": "/post/thermal-baths-near-berlin",
+      "url": "https://www.berlinwalk.com/post/thermal-baths-near-berlin",
+      "excerpt": "Six thermal baths sit within a regional-ticket ride of Berlin, and the pool is rarely what decides the day. The timetable does: when you reach the door, when the pools close and when the last connection gets you back to Hauptbahnhof. Here is what a Saturday costs at Ludwigsfelde, Bad Saarow, Neuruppin, Bad Belzig, Templin and Burg, and which one fits the day you have.",
+      "category": "Living in Berlin",
+      "categorySlug": "living-in-berlin",
+      "topic": "living-in-berlin",
+      "topicLabel": "Living in Berlin",
+      "readTime": "7 min read",
+      "publishedDate": "2026-09-26T08:46:24.607Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_2ba3f3352a644e4aa79f42a5ea0fa5ca~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-saarow-therme-outdoor-pool.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_2ba3f3352a644e4aa79f42a5ea0fa5ca~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-saarow-therme-outdoor-pool.jpg",
+      "alt": "The outdoor thermal pool at the SaarowTherme in Bad Saarow, framed by the white colonnades of the spa building",
+      "relatedToolSlug": "berlin-therme-soak-timeline"
+    },
     {
       "title": "Blood Donation in Berlin: Which Centres Pay, How Often You Can Give, and the German Catch",
       "slug": "blood-donation-berlin",
