@@ -640,6 +640,9 @@
     let countdownInterval;
     let shareToastTimeout;
     let trackingSequence = 0;
+    // The session id survives an iframe reload in the same tab but trackingSequence
+    // restarts, so eventId also carries a per-load id to stay unique.
+    const TRACKING_PAGE_ID = randomId('bbouncer_p');
     let shareInFlight = false;
     let runId = '';
     let runIndex = 0;
@@ -1021,7 +1024,7 @@
       const payload = currentRunPayload(Object.assign({}, detail));
       const body = {
         eventName,
-        eventId: `${trackingSessionId()}:${eventName}:${++trackingSequence}`,
+        eventId: `${trackingSessionId()}:${TRACKING_PAGE_ID}:${eventName}:${++trackingSequence}`,
         sessionId: trackingSessionId(),
         visitorId: trackingVisitorId(),
         timestamp,
