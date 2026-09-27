@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Berlin Observatory Sky Board</title>
+<link rel="stylesheet" href="../css/brand.css">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #FFFFFF; color: #1d231b; padding: 14px 12px 12px; }
+  .sk-head h1 { font-size: 19px; line-height: 1.25; color: #1B5E20; }
+  .sk-head p { font-size: 13px; line-height: 1.5; color: #475044; margin-top: 5px; }
+
+  .sk-night { margin-top: 14px; border-radius: 14px; background: #0f1a2c; color: #f2f5ee; padding: 12px 14px 10px; }
+  .sk-night label { display: block; font-size: 10.5px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: #FFE600; }
+  .sk-night output { display: block; font-size: 23px; font-weight: 800; margin-top: 2px; font-variant-numeric: tabular-nums; }
+  .sk-night output small { font-size: 12.5px; font-weight: 600; color: #b9c6d8; margin-left: 6px; }
+  .sk-cal { margin-top: 10px; }
+  .sk-cal svg { display: block; width: 100%; height: auto; }
+  .sk-cal .cell { cursor: pointer; }
+  .sk-cal .cell:focus { outline: none; }
+  .sk-cal .cell:focus rect.bg { stroke: #FFE600; stroke-width: 2; }
+  .sk-hours { display: flex; gap: 6px; margin-top: 6px; flex-wrap: wrap; }
+  .sk-hours button { font: inherit; font-size: 13px; font-weight: 700; border-radius: 999px; border: 1.5px solid #53627a; background: transparent; color: #dfe6f0; padding: 6px 13px; cursor: pointer; }
+  .sk-hours button[aria-pressed="true"] { background: #FFE600; border-color: #FFE600; color: #123D18; }
+  .sk-hours button:disabled { opacity: .38; cursor: default; }
+
+  .sk-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 12px; margin-top: 12px; align-items: start; }
+  .sk-dome { border-radius: 14px; background: #0f1a2c; padding: 8px; }
+  .sk-dome canvas { display: block; width: 100%; }
+  .sk-key { display: flex; flex-wrap: wrap; gap: 5px 12px; font-size: 11.5px; color: #c9d3e0; padding: 6px 4px 2px; }
+  .sk-key i { display: inline-block; width: 9px; height: 9px; border-radius: 50%; margin-right: 5px; vertical-align: 0; }
+
+  .sk-verdict { border-radius: 12px; background: #FFE600; color: #123D18; padding: 11px 13px; font-size: 14px; line-height: 1.5; }
+  .sk-verdict strong { color: #10230f; }
+  .sk-cards { margin-top: 10px; display: grid; gap: 8px; }
+  .sk-card { border: 1px solid #dfe6d6; border-radius: 12px; padding: 10px 12px; background: #fff; }
+  .sk-card.is-off { background: #f6f7f4; border-style: dashed; }
+  .sk-card h3 { font-size: 14px; color: #1B5E20; display: flex; justify-content: space-between; gap: 8px; align-items: baseline; }
+  .sk-card h3 span { font-size: 12px; font-weight: 800; white-space: nowrap; color: #10230f; }
+  .sk-card.is-off h3 span { color: #7a847a; }
+  .sk-card p { font-size: 12.5px; line-height: 1.5; color: #3b4337; margin-top: 3px; }
+
+  .sk-label { font-size: 10.5px; font-weight: 800; letter-spacing: .07em; text-transform: uppercase; color: #1B5E20; margin: 16px 0 7px; }
+  .sk-strip { border: 1px solid #dfe6d6; border-radius: 12px; background: #fcfdf9; padding: 6px 4px 4px; }
+  .sk-strip canvas { display: block; width: 100%; cursor: pointer; }
+  .sk-legend { display: flex; flex-wrap: wrap; gap: 6px 14px; font-size: 11.5px; color: #475044; margin-top: 7px; padding: 0 4px; }
+  .sk-legend i { display: inline-block; width: 16px; height: 9px; border-radius: 3px; vertical-align: -1px; margin-right: 5px; }
+  .sk-en { margin-top: 12px; border-left: 4px solid #7CB342; background: #f4f8ee; border-radius: 0 10px 10px 0; padding: 9px 12px; font-size: 12.5px; line-height: 1.5; color: #2f372c; }
+  .sk-foot { font-size: 11.5px; color: #596254; line-height: 1.5; margin-top: 12px; }
+
+  @media (max-width: 620px) {
+    .sk-grid { grid-template-columns: 1fr; }
+    .sk-night output { font-size: 20px; }
+  }
+</style>
+</head>
+<body>
+<div class="sk-head">
+  <h1>Observatory Sky Board</h1>
+  <p>Every public telescope night at Berlin's two big observatories this autumn, with the sky computed for that exact hour over the city. Pick a night and a start time to see where the Moon and Saturn stand, how bright the Moon is, and which observatory has its telescope open.</p>
+</div>
+
+<div class="sk-night">
+  <label id="sk-date-lbl">Night</label>
+  <output id="sk-date-out" aria-labelledby="sk-date-lbl">Fri 9 Oct</output>
+  <div class="sk-hours" role="group" aria-label="Start time">
+    <button type="button" data-h="18" aria-pressed="false">18:00 kids</button>
+    <button type="button" data-h="20" aria-pressed="false">20:00</button>
+    <button type="button" data-h="22" aria-pressed="true">22:00</button>
+  </div>
+  <div class="sk-cal" id="sk-cal"></div>
+  <div class="sk-key" style="padding-left:0">
+    <span><i style="background:#1B5E20;border:1px solid #7CB342;border-radius:2px"></i>Archenhold open</span>
+    <span><i style="background:#7CB342;border-radius:2px"></i>Wilhelm-Foerster open</span>
+    <span>Pale cell = bright Moon up at that hour</span>
+    <span>Clocks go back on 25 October</span>
+  </div>
+</div>
+
+<div class="sk-grid">
+  <div class="sk-dome">
+    <canvas id="sk-sky" role="img" aria-label="Sky chart over Berlin for the chosen night and time, horizon at the edge and the point overhead in the middle"></canvas>
+    <div class="sk-key">
+      <span><i style="background:#f5f1d8"></i>Moon</span>
+      <span><i style="background:#FFE600"></i>Saturn</span>
+      <span><i style="background:#ffb36b"></i>Jupiter</span>
+      <span><i style="background:transparent;border:1.2px solid #C5E1A5"></i>Deep-sky target</span>
+      <span><i style="background:#3b4d6b"></i>Too low over the rooftops</span>
+    </div>
+  </div>
+  <div>
+    <div class="sk-verdict" id="sk-verdict" aria-live="polite"></div>
+    <div class="sk-cards" id="sk-cards"></div>
+  </div>
+</div>
+
+<div class="sk-en" id="sk-en"></div>
+
+<p class="sk-foot">Programme of the Stiftung Planetarium Berlin as published on 27 September 2026. Tickets €12, reduced €8, 90 minutes, from age 12 (the 18:00 Sternenkieker sessions are for children from 8). Sky positions are computed for central Berlin and are accurate to about a degree. Clouds decide on the night: if the sky is closed, the observatory moves you into its planetarium or lecture hall instead.</p>
+<script src="../js/brand.js"></script>
+<script>
+// Low-precision ephemeris for Berlin sky widget (sun, moon, jupiter, saturn).
+var AST = (function () {
+  var rad = Math.PI / 180, dayMs = 86400000, J2000 = 2451545;
+  function jd(date) { return date.valueOf() / dayMs + 2440587.5; }
+  function norm(a) { a = a % 360; return a < 0 ? a + 360 : a; }
+  var e = rad * 23.4397;
+  function eclToEq(l, b) { // radians -> ra, dec radians
+    var ra = Math.atan2(Math.sin(l) * Math.cos(e) - Math.tan(b) * Math.sin(e), Math.cos(l));
+    var dec = Math.asin(Math.sin(b) * Math.cos(e) + Math.cos(b) * Math.sin(e) * Math.sin(l));
+    return { ra: ra, dec: dec };
+  }
+  function sidereal(d, lw) { return rad * (280.16 + 360.9856235 * d) - lw; }
+  function altAz(ra, dec, date, lat, lon) {
+    var d = jd(date) - J2000, lw = rad * -lon, phi = rad * lat;
+    var H = sidereal(d, lw) - ra;
+    var alt = Math.asin(Math.sin(phi) * Math.sin(dec) + Math.cos(phi) * Math.cos(dec) * Math.cos(H));
+    var az = Math.atan2(Math.sin(H), Math.cos(H) * Math.sin(phi) - Math.tan(dec) * Math.cos(phi));
+    return { alt: alt / rad, az: norm(az / rad + 180) }; // az from north, clockwise
+  }
+  function sunEcl(d) {
+    var M = rad * (357.5291 + 0.98560028 * d);
+    var C = rad * (1.9148 * Math.sin(M) + 0.02 * Math.sin(2 * M) + 0.0003 * Math.sin(3 * M));
+    var L = M + C + rad * 102.9372 + Math.PI;
+    return L;
+  }
+  function sun(date, lat, lon) {
+    var d = jd(date) - J2000, L = sunEcl(d), q = eclToEq(L, 0);
+    return altAz(q.ra, q.dec, date, lat, lon);
+  }
+  function moonEcl(d) {
+    var L = rad * (218.316 + 13.176396 * d), M = rad * (134.963 + 13.064993 * d), F = rad * (93.272 + 13.229350 * d);
+    var l = L + rad * 6.289 * Math.sin(M), b = rad * 5.128 * Math.sin(F), dt = 385001 - 20905 * Math.cos(M);
+    return { l: l, b: b, dist: dt };
+  }
+  function moon(date, lat, lon) {
+    var d = jd(date) - J2000, m = moonEcl(d), q = eclToEq(m.l, m.b);
+    var p = altAz(q.ra, q.dec, date, lat, lon);
+    // illumination
+    var sL = sunEcl(d), sq = eclToEq(sL, 0);
+    var sdist = 149598000;
+    var phi = Math.acos(Math.sin(sq.dec) * Math.sin(q.dec) + Math.cos(sq.dec) * Math.cos(q.dec) * Math.cos(sq.ra - q.ra));
+    var inc = Math.atan2(sdist * Math.sin(phi), m.dist - sdist * Math.cos(phi));
+    var angle = Math.atan2(Math.cos(sq.dec) * Math.sin(sq.ra - q.ra), Math.sin(sq.dec) * Math.cos(q.dec) - Math.cos(sq.dec) * Math.sin(q.dec) * Math.cos(sq.ra - q.ra));
+    p.frac = (1 + Math.cos(inc)) / 2;
+    p.waxing = angle < 0;
+    // elongation sign: moon longitude minus sun longitude
+    var el = norm((m.l - sL) / rad);
+    p.phaseAngle = el; // 0 new, 180 full
+    return p;
+  }
+  // JPL approximate Keplerian elements (1800-2050): a, e, I, L, varpi, Omega and rates per century
+  var EL = {
+    earth: [1.00000261, 0.00000562, 0.01671123, -0.00004392, -0.00001531, -0.01294668, 100.46457166, 35999.37244981, 102.93768193, 0.32327364, 0, 0],
+    jupiter: [5.20288700, -0.00011607, 0.04838624, -0.00013253, 1.30439695, -0.00183714, 34.39644051, 3034.74612775, 14.72847983, 0.21252668, 100.47390909, 0.20469106],
+    saturn: [9.53667594, -0.00125060, 0.05386179, -0.00050991, 2.48599187, 0.00193609, 49.95424423, 1222.49362201, 92.59887831, -0.41897216, 113.66242448, -0.28867794]
+  };
+  function helio(name, T) {
+    var k = EL[name];
+    var a = k[0] + k[1] * T, ec = k[2] + k[3] * T, I = k[4] + k[5] * T, L = k[6] + k[7] * T, w = k[8] + k[9] * T, O = k[10] + k[11] * T;
+    var M = norm(L - w); if (M > 180) M -= 360;
+    var om = w - O;
+    var E = M + (ec / rad) * Math.sin(M * rad);
+    for (var i = 0; i < 8; i++) { var dM = M - (E - (ec / rad) * Math.sin(E * rad)); E += dM / (1 - ec * Math.cos(E * rad)); }
+    var xp = a * (Math.cos(E * rad) - ec), yp = a * Math.sqrt(1 - ec * ec) * Math.sin(E * rad);
+    var co = Math.cos(om * rad), so = Math.sin(om * rad), cO = Math.cos(O * rad), sO = Math.sin(O * rad), cI = Math.cos(I * rad), sI = Math.sin(I * rad);
+    return {
+      x: (co * cO - so * sO * cI) * xp + (-so * cO - co * sO * cI) * yp,
+      y: (co * sO + so * cO * cI) * xp + (-so * sO + co * cO * cI) * yp,
+      z: (so * sI) * xp + (co * sI) * yp
+    };
+  }
+  function planet(name, date, lat, lon) {
+    var T = (jd(date) - J2000) / 36525, p = helio(name, T), ea = helio('earth', T);
+    var x = p.x - ea.x, y = p.y - ea.y, z = p.z - ea.z;
+    var l = Math.atan2(y, x), b = Math.atan2(z, Math.sqrt(x * x + y * y));
+    var q = eclToEq(l, b), r = altAz(q.ra, q.dec, date, lat, lon);
+    var sl = Math.atan2(-ea.y, -ea.x);
+    r.elong = norm((l - sl) / rad);
+    return r;
+  }
+  return { sun: sun, moon: moon, planet: planet, altAz: altAz };
+})();
+var SESS = {"archNight":["10-01","10-02","10-03","10-08","10-09","10-10","10-15","10-16","10-17","10-22","10-23","10-24","10-29","10-30","10-31","11-05","11-06","11-07","11-12","11-13","11-14","11-19","11-20","11-21","11-26","11-27","11-28","12-03","12-04","12-05","12-11","12-12","12-17","12-18","12-19","12-26"],"wfsNight":["10-02","10-03","10-09","10-10","10-16","10-17","10-23","10-24","10-30","10-31","11-06","11-07","11-13","11-14","11-20","11-21","11-27","11-28","12-04","12-05","12-11","12-12","12-18","12-19","12-26"],"archKids":["10-30","10-31","11-06","11-07","11-13","11-14","11-20","11-21","11-27","11-28","12-04","12-05","12-11","12-12","12-18","12-19"],"wfsKids":["10-30","10-31","11-06","11-07","11-13","11-14","11-20","11-21","11-27","11-28","12-04","12-05","12-11","12-12","12-18","12-19"],"english":[["10-09","18:30","Starry Night","Archenhold Observatory"],["10-10","19:00","Starry Night","Zeiss-Großplanetarium"],["10-11","18:00","Encounters in the Milky Way","Archenhold Observatory"],["10-16","17:00","Encounters in the Milky Way","Zeiss-Großplanetarium"],["10-23","18:30","Starry Night","Zeiss-Großplanetarium"],["10-30","17:00","Encounters in the Milky Way","Zeiss-Großplanetarium"],["11-06","17:00","Encounters in the Milky Way","Zeiss-Großplanetarium"],["11-13","17:00","Encounters in the Milky Way","Zeiss-Großplanetarium"],["11-13","18:30","Starry Night","Archenhold Observatory"],["11-14","18:15","Starry Night","Zeiss-Großplanetarium"],["11-22","16:30","Encounters in the Milky Way","Archenhold Observatory"],["11-28","18:15","Starry Night","Zeiss-Großplanetarium"],["12-04","17:00","Encounters in the Milky Way","Zeiss-Großplanetarium"],["12-12","17:45","Starry Night","Zeiss-Großplanetarium"],["12-19","17:00","Starry Night","Archenhold Observatory"],["12-22","18:30","Starry Night","Zeiss-Großplanetarium"],["12-28","18:30","Encounters in the Milky Way","Zeiss-Großplanetarium"]]};
+
+var LAT = 52.52, LON = 13.40;
+var START = { y: 2026, m: 9, d: 1 }; // 1 October 2026 (month index 9)
+var NIGHTS = 87;
+var DOW = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+var MON = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+var OBS = {
+  arch: {
+    name: 'Archenhold Observatory', where: 'Treptower Park, Alt-Treptow 1',
+    scope: '500 mm Cassegrain mirror telescope, 42 seats a session',
+    getThere: 'S Treptower Park or S Plänterwald, then about 12 minutes on foot through the park.'
+  },
+  wfs: {
+    name: 'Wilhelm-Foerster Observatory', where: 'Insulaner hill, Munsterdamm 90',
+    scope: '12-inch Bamberg refractor, 50 seats a session',
+    getThere: 'S Priesterweg, then about 12 minutes on foot up the hill.'
+  }
+};
+
+function nightDate(i) { return new Date(START.y, START.m, START.d + i); }
+function key(dt) { return String(dt.getMonth() + 1).padStart(2, '0') + '-' + String(dt.getDate()).padStart(2, '0'); }
+function label(dt) { return DOW[dt.getDay()] + ' ' + dt.getDate() + ' ' + MON[dt.getMonth()]; }
+// Berlin wall-clock hour on a date -> real instant (CEST until 25 Oct 2026 03:00, CET after)
+function berlinInstant(dt, h) {
+  var cest = dt < new Date(2026, 9, 25);
+  return new Date(Date.UTC(dt.getFullYear(), dt.getMonth(), dt.getDate(), h - (cest ? 2 : 1), 0));
+}
+function has(list, k) { return list.indexOf(k) !== -1; }
+function sessionsOn(k, h) {
+  var out = [];
+  if (h === 18) {
+    if (has(SESS.archKids, k)) out.push('arch');
+    if (has(SESS.wfsKids, k)) out.push('wfs');
+  } else {
+    if (has(SESS.archNight, k)) out.push('arch');
+    if (has(SESS.wfsNight, k)) out.push('wfs');
+  }
+  return out;
+}
+function compass(az) { return ['north', 'north-east', 'east', 'south-east', 'south', 'south-west', 'west', 'north-west'][Math.round(az / 45) % 8]; }
+function skyAt(i, h) {
+  var dt = nightDate(i), t = berlinInstant(dt, h);
+  return {
+    dt: dt, t: t,
+    sun: AST.sun(t, LAT, LON),
+    moon: AST.moon(t, LAT, LON),
+    saturn: AST.planet('saturn', t, LAT, LON),
+    jupiter: AST.planet('jupiter', t, LAT, LON)
+  };
+}
+
+var STARS = [
+  ['Polaris', 2.530, 89.26, 2.0, 1], ['Vega', 18.615, 38.78, 0.0, 1], ['Deneb', 20.690, 45.28, 1.3, 0], ['Altair', 19.846, 8.87, 0.8, 0],
+  ['Capella', 5.278, 46.00, 0.1, 1], ['Aldebaran', 4.599, 16.51, 0.9, 1], ['Betelgeuse', 5.919, 7.41, 0.5, 1], ['Rigel', 5.242, -8.20, 0.1, 0],
+  ['Sirius', 6.752, -16.72, -1.4, 1], ['Procyon', 7.655, 5.22, 0.4, 0], ['Pollux', 7.755, 28.03, 1.1, 0], ['Castor', 7.577, 31.89, 1.6, 0],
+  ['Arcturus', 14.261, 19.18, -0.1, 0], ['Fomalhaut', 22.961, -29.62, 1.2, 0], ['Regulus', 10.139, 11.97, 1.4, 0]
+];
+var DEEP = [['Pleiades', 3.791, 24.11], ['Andromeda Galaxy', 0.712, 41.27]];
+var hourBtns = Array.prototype.slice.call(document.querySelectorAll('.sk-hours button'));
+var hour = 22;
+
+function setupCanvas(cv, cssH) {
+  var w = cv.clientWidth || cv.parentNode.clientWidth || 320, dpr = window.devicePixelRatio || 1;
+  var hgt = cssH === 'square' ? w : cssH;
+  cv.style.height = hgt + 'px';
+  cv.width = Math.round(w * dpr); cv.height = Math.round(hgt * dpr);
+  var ctx = cv.getContext('2d'); ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  return { ctx: ctx, w: w, h: hgt };
+}
+
+function drawSky(s) {
+  var c = setupCanvas(document.getElementById('sk-sky'), 'square'), ctx = c.ctx, W = c.w;
+  var cx = W / 2, cy = W / 2, R = W / 2 - 22;
+  // sky colour by sun depth
+  var depth = s.sun.alt;
+  var sky = depth > -6 ? '#3a5680' : depth > -12 ? '#243a5c' : depth > -18 ? '#16253d' : '#0b1526';
+  ctx.fillStyle = '#0f1a2c'; ctx.fillRect(0, 0, W, W);
+  ctx.beginPath(); ctx.arc(cx, cy, R, 0, Math.PI * 2); ctx.fillStyle = sky; ctx.fill();
+  // rooftop band: below 15 degrees
+  var r15 = R * (1 - 15 / 90);
+  ctx.beginPath(); ctx.arc(cx, cy, R, 0, Math.PI * 2); ctx.arc(cx, cy, r15, 0, Math.PI * 2, true);
+  ctx.fillStyle = 'rgba(59,77,107,0.55)'; ctx.fill();
+  // altitude rings
+  ctx.strokeStyle = 'rgba(255,255,255,0.14)'; ctx.lineWidth = 1;
+  [30, 60].forEach(function (a) { ctx.beginPath(); ctx.arc(cx, cy, R * (1 - a / 90), 0, Math.PI * 2); ctx.stroke(); });
+  ctx.beginPath(); ctx.moveTo(cx - R, cy); ctx.lineTo(cx + R, cy); ctx.moveTo(cx, cy - R); ctx.lineTo(cx, cy + R); ctx.stroke();
+  ctx.beginPath(); ctx.arc(cx, cy, R, 0, Math.PI * 2); ctx.strokeStyle = 'rgba(255,230,0,0.55)'; ctx.lineWidth = 1.5; ctx.stroke();
+  // compass (south at bottom, east on the left: looking up)
+  ctx.fillStyle = '#FFE600'; ctx.font = '800 11px Montserrat, sans-serif'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+  ctx.fillText('N', cx, cy - R - 11); ctx.fillText('S', cx, cy + R + 11); ctx.fillText('E', cx - R - 11, cy); ctx.fillText('W', cx + R + 11, cy);
+  ctx.fillStyle = 'rgba(255,255,255,0.5)'; ctx.font = '600 9px Montserrat, sans-serif';
+  ctx.fillText('overhead', cx, cy - 9);
+  ctx.fillText('30°', cx + 4, cy + R * (1 - 30 / 90) - 6);
+  function pos(p) {
+    var r = R * (1 - Math.max(p.alt, 0) / 90), a = p.az * Math.PI / 180;
+    return [cx - r * Math.sin(a), cy - r * Math.cos(a)];
+  }
+  // bright stars and two deep-sky targets
+  var rd = Math.PI / 180;
+  STARS.forEach(function (st) {
+    var p = AST.altAz(st[1] * 15 * rd, st[2] * rd, s.t, LAT, LON); if (p.alt < 2) return;
+    var xy = pos(p), sz = Math.max(1, 2.6 - st[3] * 0.7);
+    ctx.beginPath(); ctx.arc(xy[0], xy[1], sz, 0, Math.PI * 2); ctx.fillStyle = 'rgba(255,255,255,0.9)'; ctx.fill();
+    if (st[4] && p.alt > 12) { ctx.font = '600 9px Montserrat, sans-serif'; ctx.fillStyle = 'rgba(214,224,238,0.75)'; ctx.textAlign = 'left'; ctx.fillText(st[0], xy[0] + 5, xy[1] + 3); }
+  });
+  DEEP.forEach(function (dp) {
+    var p = AST.altAz(dp[1] * 15 * rd, dp[2] * rd, s.t, LAT, LON); if (p.alt < 10) return;
+    var xy = pos(p);
+    ctx.beginPath(); ctx.ellipse(xy[0], xy[1], 6, 3.5, 0.6, 0, Math.PI * 2); ctx.strokeStyle = 'rgba(197,225,165,0.85)'; ctx.lineWidth = 1.2; ctx.stroke();
+    ctx.font = '700 9px Montserrat, sans-serif'; ctx.fillStyle = 'rgba(197,225,165,0.95)'; ctx.textAlign = 'left'; ctx.fillText(dp[0], xy[0] + 8, xy[1] + 3);
+  });
+  // planets
+  [['jupiter', '#ffb36b', 'Jupiter'], ['saturn', '#FFE600', 'Saturn']].forEach(function (pl) {
+    var p = s[pl[0]]; if (p.alt < 0) return;
+    var xy = pos(p);
+    ctx.beginPath(); ctx.arc(xy[0], xy[1], 10, 0, Math.PI * 2); ctx.fillStyle = 'rgba(255,230,0,0.14)'; ctx.fill();
+    ctx.beginPath(); ctx.arc(xy[0], xy[1], 4.5, 0, Math.PI * 2); ctx.fillStyle = pl[1]; ctx.fill();
+    ctx.font = '800 11px Montserrat, sans-serif'; ctx.fillStyle = pl[1]; ctx.textAlign = 'left';
+    ctx.fillText(pl[2] + ' ' + Math.round(p.alt) + '°', xy[0] + 9, xy[1] - 9);
+  });
+  // moon with its phase
+  if (s.moon.alt > 0) {
+    var m = pos(s.moon), mr = 11, f = s.moon.frac;
+    ctx.save(); ctx.translate(m[0], m[1]);
+    ctx.beginPath(); ctx.arc(0, 0, mr + 10, 0, Math.PI * 2); ctx.fillStyle = 'rgba(245,241,216,' + (0.08 + 0.22 * f) + ')'; ctx.fill();
+    ctx.beginPath(); ctx.arc(0, 0, mr, 0, Math.PI * 2); ctx.fillStyle = '#2b3a52'; ctx.fill();
+    // lit part: waxing lit on the right (as seen from Berlin, roughly)
+    var dir = s.moon.phaseAngle < 180 ? 1 : -1, k = Math.cos(f * Math.PI);
+    ctx.beginPath(); ctx.arc(0, 0, mr, -Math.PI / 2, Math.PI / 2, dir < 0);
+    ctx.ellipse(0, 0, Math.abs(k) * mr, mr, 0, Math.PI / 2, -Math.PI / 2, (k > 0) === (dir > 0));
+    ctx.fillStyle = '#f5f1d8'; ctx.fill();
+    ctx.restore();
+    ctx.font = '800 11px Montserrat, sans-serif'; ctx.fillStyle = '#f5f1d8'; ctx.textAlign = 'left';
+    ctx.fillText('Moon ' + Math.round(f * 100) + '% lit', m[0] + 16, m[1] + 14);
+  }
+  ctx.textAlign = 'left'; ctx.textBaseline = 'alphabetic';
+}
+
+var NS = 'http://www.w3.org/2000/svg';
+var selIdx = 8; // Fri 9 October, the first new-Moon weekend
+function el(tag, attrs, parent) { var n = document.createElementNS(NS, tag); for (var k in attrs) n.setAttribute(k, attrs[k]); if (parent) parent.appendChild(n); return n; }
+function drawCalendar() {
+  var box = document.getElementById('sk-cal'), W = box.clientWidth || 320;
+  var weeks = [];
+  for (var i = 0; i < NIGHTS; i++) { var dt = nightDate(i), d = dt.getDay(); if (d === 4 || d === 5 || d === 6) { var w = Math.floor(i / 7); (weeks[w] = weeks[w] || [null, null, null])[d - 4] = i; } }
+  var wide = W >= 620, cols = wide ? weeks.length : 3, rows = wide ? 3 : weeks.length;
+  var lab = wide ? 30 : 0, head = wide ? 0 : 18, gap = 3;
+  var cw = (W - lab - gap * (cols - 1)) / cols, ch = wide ? 46 : 40;
+  var H = head + rows * ch + gap * (rows - 1);
+  box.innerHTML = '';
+  var svg = el('svg', { viewBox: '0 0 ' + W + ' ' + H, role: 'group', 'aria-label': 'Thursday, Friday and Saturday nights from 1 October to 26 December' }, box);
+  ['Thu', 'Fri', 'Sat'].forEach(function (d, j) {
+    var t = wide ? el('text', { x: 0, y: j * (ch + gap) + ch / 2 + 4, fill: '#b9c6d8', 'font-size': 10, 'font-weight': 700 }, svg)
+                 : el('text', { x: j * (cw + gap) + cw / 2, y: 12, fill: '#b9c6d8', 'font-size': 10, 'font-weight': 700, 'text-anchor': 'middle' }, svg);
+    t.textContent = d;
+  });
+  weeks.forEach(function (wk, w) {
+    wk.forEach(function (i, j) {
+      if (i === null) return;
+      var col = wide ? w : j, row = wide ? j : w;
+      var x = lab + col * (cw + gap), y = head + row * (ch + gap);
+      var s = skyAt(i, hour), k = key(s.dt), on = sessionsOn(k, hour);
+      var moonUp = s.moon.alt > 0, glow = moonUp ? s.moon.frac : 0;
+      var g = el('g', { 'class': 'cell', tabindex: 0, role: 'button', 'aria-pressed': String(i === selIdx), 'aria-label': label(s.dt) + ', ' + (on.length ? on.length + ' observatory open' : 'no session') + ', Moon ' + (moonUp ? Math.round(s.moon.frac * 100) + '% lit and up' : 'down'), 'data-i': i }, svg);
+      var r = Math.round(20 + glow * 150), gg = Math.round(32 + glow * 150), bb = Math.round(56 + glow * 110);
+      el('rect', { 'class': 'bg', x: x, y: y, width: cw, height: ch, rx: 7, fill: 'rgb(' + r + ',' + gg + ',' + bb + ')', stroke: i === selIdx ? '#FFE600' : 'rgba(255,255,255,0.12)', 'stroke-width': i === selIdx ? 2.5 : 1 }, g);
+      var txt = el('text', { x: x + 6, y: y + 15, fill: glow > 0.55 ? '#10230f' : '#f2f5ee', 'font-size': wide ? 11 : 11.5, 'font-weight': 800 }, g);
+      txt.textContent = s.dt.getDate() + ' ' + MON[s.dt.getMonth()];
+      // moon glyph
+      var mx = x + cw - 12, my = y + 13, mr = 6;
+      el('circle', { cx: mx, cy: my, r: mr, fill: '#2b3a52', stroke: 'rgba(255,255,255,0.35)', 'stroke-width': 0.8 }, g);
+      var f = s.moon.frac, dir = s.moon.phaseAngle < 180 ? 1 : -1, kk = Math.cos(f * Math.PI);
+      var sweepOuter = dir > 0 ? 1 : 0, rx = Math.abs(kk) * mr;
+      var sweepInner = (kk > 0) === (dir > 0) ? 0 : 1;
+      el('path', { d: 'M' + mx + ' ' + (my - mr) + ' A' + mr + ' ' + mr + ' 0 0 ' + sweepOuter + ' ' + mx + ' ' + (my + mr) + ' A' + rx + ' ' + mr + ' 0 0 ' + sweepInner + ' ' + mx + ' ' + (my - mr) + ' Z', fill: '#f5f1d8' }, g);
+      // observatory markers
+      var bx = x + 6, by = y + ch - 12;
+      if (on.indexOf('arch') !== -1) { el('rect', { x: bx, y: by, width: 16, height: 7, rx: 2, fill: '#1B5E20', stroke: '#7CB342', 'stroke-width': 1 }, g); bx += 20; }
+      if (on.indexOf('wfs') !== -1) { el('rect', { x: bx, y: by, width: 16, height: 7, rx: 2, fill: '#7CB342' }, g); }
+      if (!on.length) { var t2 = el('text', { x: x + 6, y: y + ch - 6, fill: glow > 0.55 ? '#3b4337' : '#8f9bb0', 'font-size': 9, 'font-weight': 600 }, g); t2.textContent = 'closed'; }
+      g.addEventListener('click', function () { selIdx = i; render(); });
+      g.addEventListener('keydown', function (ev) { if (ev.key === 'Enter' || ev.key === ' ') { ev.preventDefault(); selIdx = i; render(); } });
+    });
+  });
+}
+
+function moonLine(s) {
+  var m = s.moon, pct = Math.round(m.frac * 100);
+  if (m.alt <= 0) return 'The <strong>Moon is below the horizon</strong>, so this is a good hour for faint star clusters, nebulae and galaxies.';
+  if (m.frac > 0.8) return 'A <strong>bright Moon (' + pct + '% lit)</strong> is up. It is the best target itself, but it washes out faint galaxies.';
+  if (m.frac >= 0.3) return 'A <strong>half-lit Moon (' + pct + '%)</strong> is up. Craters look sharpest along the line between light and shadow.';
+  return 'A <strong>thin Moon (' + pct + '% lit)</strong> is up and barely brightens the sky.';
+}
+
+function render() {
+  var i = selIdx, s = skyAt(i, hour), k = key(s.dt);
+  hourBtns.forEach(function (b) {
+    var h = Number(b.dataset.h);
+    b.setAttribute('aria-pressed', String(h === hour));
+  });
+  var on = sessionsOn(k, hour);
+  document.getElementById('sk-date-out').innerHTML = label(s.dt) + '<small> ' + (hour === 18 ? '18:00 kids' : hour + ':00') + ', ' + (on.length ? on.length + ' telescope' + (on.length > 1 ? 's' : '') + ' open' : 'no public session') + '</small>';
+  drawSky(s);
+  drawCalendar();
+
+  var parts = [];
+  if (!on.length) parts.push('<strong>No public telescope session</strong> at this hour on ' + label(s.dt) + '. The chart still shows what you would see from a dark park.');
+  else parts.push('<strong>' + on.map(function (o) { return OBS[o].name; }).join(' and ') + '</strong> ' + (on.length > 1 ? 'both open' : 'opens') + ' the telescope at ' + hour + ':00.');
+  if (s.sun.alt > -12) parts.push('The sky is <strong>not fully dark yet</strong> at this hour; bright objects only.');
+  if (s.saturn.alt > 15) parts.push('<strong>Saturn stands ' + Math.round(s.saturn.alt) + '° high in the ' + compass(s.saturn.az) + '</strong>, clear of the rooftops and an easy target for the big telescopes.');
+  else if (s.saturn.alt > 0) parts.push('Saturn is only ' + Math.round(s.saturn.alt) + '° up in the ' + compass(s.saturn.az) + ' and may sit behind trees or buildings.');
+  else parts.push('Saturn has set.');
+  if (s.jupiter.alt > 10) parts.push('<strong>Jupiter</strong> is up too, ' + Math.round(s.jupiter.alt) + '° in the ' + compass(s.jupiter.az) + '.');
+  parts.push(moonLine(s));
+  document.getElementById('sk-verdict').innerHTML = parts.join(' ');
+
+  document.getElementById('sk-cards').innerHTML = ['arch', 'wfs'].map(function (o) {
+    var open = on.indexOf(o) !== -1, ob = OBS[o];
+    var status = open ? (hour === 18 ? '18:00 kids' : hour + ':00 open') : 'closed';
+    return '<div class="sk-card' + (open ? '' : ' is-off') + '"><h3>' + ob.name + '<span>' + status + '</span></h3>'
+      + '<p>' + ob.where + '. ' + ob.scope + '.</p>'
+      + (open ? '<p>' + ob.getThere + '</p>' : '') + '</div>';
+  }).join('');
+
+  var en = SESS.english.filter(function (e) {
+    var d = new Date(2026, Number(e[0].slice(0, 2)) - 1, Number(e[0].slice(3, 5)));
+    return d >= s.dt;
+  })[0];
+  document.getElementById('sk-en').innerHTML = 'Telescope sessions are hosted in German. '
+    + (en ? 'The next <strong>English-language</strong> sky show after this date is <strong>' + en[2] + '</strong> at the ' + en[3] + ' on <strong>' + label(new Date(2026, Number(en[0].slice(0, 2)) - 1, Number(en[0].slice(3, 5)))) + ' at ' + en[1] + '</strong>. It runs under the dome, not at the telescope.' : 'No English-language sky show is listed after this date.');
+  if (window.__bwRequestEmbedResize) window.__bwRequestEmbedResize();
+}
+
+hourBtns.forEach(function (b) { b.addEventListener('click', function () { hour = Number(b.dataset.h); render(); }); });
+var rt; window.addEventListener('resize', function () { clearTimeout(rt); rt = setTimeout(render, 120); });
+render();
+</script>
+</body>
+</html>
