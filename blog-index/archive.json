@@ -1,9 +1,26 @@
 {
-  "updatedAt": "2026-09-27T02:04:01.604Z",
+  "updatedAt": "2026-09-27T08:55:56.937Z",
   "source": "Wix Blog API",
-  "totalPosts": 423,
+  "totalPosts": 424,
   "bookingUrl": "https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based",
   "allPosts": [
+    {
+      "title": "Stargazing in Berlin: Which Observatory Night Actually Shows You the Sky",
+      "slug": "stargazing-in-berlin",
+      "path": "/post/stargazing-in-berlin",
+      "url": "https://www.berlinwalk.com/post/stargazing-in-berlin",
+      "excerpt": "Berlin has two public observatories that open their big telescopes to anyone with a €12 ticket, several nights a week from October to December. What you actually see depends on the night you pick: the Moon, the hour and Saturn's height above the trees. Here is how the Archenhold and Wilhelm-Foerster nights work, which weekends are darkest, and the one night I would book.",
+      "category": "Living in Berlin",
+      "categorySlug": "living-in-berlin",
+      "topic": "living-in-berlin",
+      "topicLabel": "Living in Berlin",
+      "readTime": "7 min read",
+      "publishedDate": "2026-09-27T08:54:23.926Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_f6b2c96c7a6449e1b716fc5e47d213af~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-archenhold-great-refractor.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_f6b2c96c7a6449e1b716fc5e47d213af~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-archenhold-great-refractor.jpg",
+      "alt": "The Great Refractor of the Archenhold Observatory in Treptower Park, a long grey steel telescope tube on its massive mount above the observatory roof",
+      "relatedToolSlug": "berlin-observatory-sky-board"
+    },
     {
       "title": "Thermal Baths Near Berlin: How Much of Your Saturday Ends Up in the Water",
       "slug": "thermal-baths-near-berlin",
