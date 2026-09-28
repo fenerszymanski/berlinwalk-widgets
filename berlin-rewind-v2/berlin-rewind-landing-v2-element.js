@@ -12,7 +12,7 @@
   'use strict';
 
   var TAG = 'bw-berlin-rewind-landing-v2';
-  var GAME_TAG = 'bw-berlin-rewind-result-games-v2';
+  var GAME_TAG = 'bw-berlin-rewind-archive-v2';
   var BUILD = 'berlin-rewind-landing-v2-canonical-set-20260712';
   var GAME_BUILD = 'berlin-rewind-v2-canonical-set-20260712';
   var SCRIPT_URL = document.currentScript && document.currentScript.src ? document.currentScript.src : '';
