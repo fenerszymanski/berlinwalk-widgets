@@ -1,9 +1,9 @@
 {
-  "updatedAt": "2026-09-27T08:55:56.937Z",
+  "updatedAt": "2026-09-28T09:04:08.543Z",
   "source": "Wix Blog API",
   "popularSource": "Wix Blog metrics.views lifetime sort",
-  "totalPosts": 424,
-  "toolsTotal": 344,
+  "totalPosts": 425,
+  "toolsTotal": 345,
   "bookingUrl": "https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based",
   "navTopics": [
     {
@@ -1802,6 +1802,23 @@
   ],
   "latest": [
     {
+      "title": "Berlin Zoo Annual Pass: Which Card Pays Off for Your Household",
+      "slug": "berlin-zoo-annual-pass",
+      "path": "/post/berlin-zoo-annual-pass",
+      "url": "https://www.berlinwalk.com/post/berlin-zoo-annual-pass",
+      "excerpt": "Zoo, Aquarium and Tierpark Berlin sell four annual cards, family versions of each and a cheaper subscription with a two-year catch. Whether one pays off depends on how your household really uses the three places. Here is what each card costs, when it overtakes day tickets, and what changes with the new card from 2 November.",
+      "category": "Living in Berlin",
+      "categorySlug": "living-in-berlin",
+      "topic": "living-in-berlin",
+      "topicLabel": "Living in Berlin",
+      "readTime": "7 min read",
+      "publishedDate": "2026-09-28T09:02:36.883Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_b5d80d25e7a64875a2e1ceb3e354e5f2~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-elefantentor-blue-hour.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_b5d80d25e7a64875a2e1ceb3e354e5f2~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-elefantentor-blue-hour.jpg",
+      "alt": "The Elefantentor of Zoo Berlin at blue hour, the red and gold pagoda roof lit above two stone elephants on Budapester Straße",
+      "relatedToolSlug": "berlin-zoo-annual-pass-planner"
+    },
+    {
       "title": "Stargazing in Berlin: Which Observatory Night Actually Shows You the Sky",
       "slug": "stargazing-in-berlin",
       "path": "/post/stargazing-in-berlin",
@@ -1987,26 +2004,26 @@
       "thumb": "https://static.wixstatic.com/media/5a08a3_0150793df04141eba2ea20bce0cebac0~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/02-flotte-anton-library.jpg",
       "alt": "A red box bike with the fLotte Berlin sticker and the name Anton parked on cobbles outside a library in Lichtenberg",
       "relatedToolSlug": "berlin-cargo-bike-map"
-    },
+    }
+  ],
+  "allPosts": [
     {
-      "title": "Autumn Leaves in Berlin: The Week the Beech Woods Turn Gold",
-      "slug": "autumn-leaves-in-berlin",
-      "path": "/post/autumn-leaves-in-berlin",
-      "url": "https://www.berlinwalk.com/post/autumn-leaves-in-berlin",
-      "excerpt": "Autumn leaves in Berlin follow a tighter calendar than most people think. Eleven years of weather service records put the beech peak in the last full week of October, the clocks go back right in the middle of it, and most woods around Berlin are pine. Here is when and where to go.",
+      "title": "Berlin Zoo Annual Pass: Which Card Pays Off for Your Household",
+      "slug": "berlin-zoo-annual-pass",
+      "path": "/post/berlin-zoo-annual-pass",
+      "url": "https://www.berlinwalk.com/post/berlin-zoo-annual-pass",
+      "excerpt": "Zoo, Aquarium and Tierpark Berlin sell four annual cards, family versions of each and a cheaper subscription with a two-year catch. Whether one pays off depends on how your household really uses the three places. Here is what each card costs, when it overtakes day tickets, and what changes with the new card from 2 November.",
       "category": "Living in Berlin",
       "categorySlug": "living-in-berlin",
       "topic": "living-in-berlin",
       "topicLabel": "Living in Berlin",
-      "readTime": "8 min read",
-      "publishedDate": "2026-09-22T06:23:33.646Z",
-      "image": "https://static.wixstatic.com/media/5a08a3_61c0a916dc7442708a780bca882aa788~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-schlachtensee-golden-autumn.jpg",
-      "thumb": "https://static.wixstatic.com/media/5a08a3_61c0a916dc7442708a780bca882aa788~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-schlachtensee-golden-autumn.jpg",
-      "alt": "Schlachtensee in late October, with a wall of orange and gold broadleaf trees on the far shore above the water",
-      "relatedToolSlug": "berlin-leaf-turn-map"
-    }
-  ],
-  "allPosts": [
+      "readTime": "7 min read",
+      "publishedDate": "2026-09-28T09:02:36.883Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_b5d80d25e7a64875a2e1ceb3e354e5f2~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-elefantentor-blue-hour.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_b5d80d25e7a64875a2e1ceb3e354e5f2~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-elefantentor-blue-hour.jpg",
+      "alt": "The Elefantentor of Zoo Berlin at blue hour, the red and gold pagoda roof lit above two stone elephants on Budapester Straße",
+      "relatedToolSlug": "berlin-zoo-annual-pass-planner"
+    },
     {
       "title": "Stargazing in Berlin: Which Observatory Night Actually Shows You the Sky",
       "slug": "stargazing-in-berlin",
