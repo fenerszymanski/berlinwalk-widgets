@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Berlin Zoo Annual Pass Planner</title>
+<link rel="stylesheet" href="../css/brand.css">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #FFFFFF; color: #1d231b; padding: 14px 12px 12px; }
+  .zp-head h1 { font-size: 19px; line-height: 1.25; color: #1B5E20; }
+  .zp-head p { font-size: 13px; line-height: 1.5; color: #475044; margin-top: 5px; }
+
+  .zp-label { font-size: 10.5px; font-weight: 800; letter-spacing: .07em; text-transform: uppercase; color: #1B5E20; margin: 14px 0 7px; }
+  .zp-house { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+  .zp-who { border: 1px solid #dfe6d6; border-radius: 12px; padding: 8px 10px; background: #fcfdf9; }
+  .zp-who b { display: block; font-size: 12.5px; color: #10230f; }
+  .zp-who small { display: block; font-size: 11px; color: #5d6758; line-height: 1.35; min-height: 15px; }
+  .zp-step { display: flex; align-items: center; gap: 8px; margin-top: 6px; }
+  .zp-step button { font: inherit; font-size: 17px; font-weight: 800; width: 32px; height: 32px; border-radius: 50%; border: 1.5px solid #1B5E20; background: #fff; color: #1B5E20; cursor: pointer; line-height: 1; }
+  .zp-step button:disabled { opacity: .3; cursor: default; }
+  .zp-step output { font-size: 20px; font-weight: 800; min-width: 18px; text-align: center; font-variant-numeric: tabular-nums; }
+
+  .zp-parks { display: flex; flex-wrap: wrap; gap: 6px; }
+  .zp-parks button, .zp-tools button { font: inherit; font-size: 12.5px; font-weight: 700; border-radius: 999px; border: 1.5px solid #c9d4bf; background: #fff; color: #243021; padding: 7px 12px; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; }
+  .zp-parks button i { width: 11px; height: 11px; border-radius: 50%; display: inline-block; }
+  .zp-parks button[aria-pressed="true"] { border-color: #1B5E20; background: #1B5E20; color: #fff; }
+  .zp-tools { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+  .zp-tools button { font-size: 12px; padding: 6px 11px; }
+  .zp-tools button[aria-pressed="true"] { background: #FFE600; border-color: #d8c400; color: #123D18; }
+
+  .zp-board { margin-top: 10px; border: 1px solid #dfe6d6; border-radius: 14px; background: #fcfdf9; padding: 8px 6px 6px; }
+  .zp-board canvas { display: block; width: 100%; }
+  #zp-year { cursor: pointer; }
+  #zp-year:focus { outline: 2px solid #FFE600; outline-offset: 2px; border-radius: 8px; }
+  .zp-hint { font-size: 11.5px; color: #5d6758; padding: 4px 6px 2px; line-height: 1.45; }
+  .zp-legend { display: flex; flex-wrap: wrap; gap: 5px 13px; font-size: 11.5px; color: #475044; padding: 6px 6px 2px; }
+  .zp-legend i { display: inline-block; width: 16px; height: 4px; border-radius: 2px; vertical-align: 3px; margin-right: 5px; }
+
+  .zp-verdict { margin-top: 12px; border-radius: 12px; background: #FFE600; color: #123D18; padding: 11px 13px; font-size: 14px; line-height: 1.5; }
+  .zp-verdict strong { color: #10230f; }
+  .zp-rank { margin-top: 10px; display: grid; gap: 7px; }
+  .zp-row { border: 1px solid #dfe6d6; border-radius: 12px; padding: 9px 12px; background: #fff; display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 2px 10px; align-items: baseline; }
+  .zp-row.is-best { border-color: #1B5E20; box-shadow: inset 4px 0 0 #1B5E20; }
+  .zp-row h3 { font-size: 13.5px; color: #1B5E20; }
+  .zp-row span.sum { font-size: 14px; font-weight: 800; color: #10230f; white-space: nowrap; font-variant-numeric: tabular-nums; }
+  .zp-row p { grid-column: 1 / -1; font-size: 12px; line-height: 1.45; color: #3b4337; }
+  .zp-foot { font-size: 11.5px; color: #596254; line-height: 1.5; margin-top: 12px; }
+
+  @media (max-width: 520px) {
+    .zp-house { grid-template-columns: 1fr 1fr 1fr; gap: 6px; }
+    .zp-who { padding: 7px 7px; }
+    .zp-who small { font-size: 10.5px; }
+    .zp-step { gap: 5px; }
+    .zp-step button { width: 28px; height: 28px; font-size: 15px; }
+    .zp-step output { font-size: 17px; }
+  }
+</style>
+</head>
+<body>
+<div class="zp-head">
+  <h1>Zoo Annual Pass Planner</h1>
+  <p>Put your household and the visits you would really make in the next twelve months on the year strip. The chart adds up what those visits cost on day tickets and on each annual card for Zoo, Aquarium and Tierpark Berlin, and shows the month a card starts paying for itself.</p>
+</div>
+
+<div class="zp-label">Who comes along</div>
+<div class="zp-house">
+  <div class="zp-who"><b>Adults</b><small>16 and over</small>
+    <div class="zp-step"><button type="button" data-k="adults" data-d="-1" aria-label="One adult less">−</button><output id="zp-adults">2</output><button type="button" data-k="adults" data-d="1" aria-label="One adult more">+</button></div></div>
+  <div class="zp-who"><b>Children</b><small>4 to 15, under 4 free</small>
+    <div class="zp-step"><button type="button" data-k="kids" data-d="-1" aria-label="One child less">−</button><output id="zp-kids">1</output><button type="button" data-k="kids" data-d="1" aria-label="One child more">+</button></div></div>
+  <div class="zp-who"><b>Reduced</b><small>students, trainees</small>
+    <div class="zp-step"><button type="button" data-k="reduced" data-d="-1" aria-label="One reduced visitor less">−</button><output id="zp-reduced">0</output><button type="button" data-k="reduced" data-d="1" aria-label="One reduced visitor more">+</button></div></div>
+</div>
+
+<div class="zp-label">Tap a month to add a visit to</div>
+<div class="zp-parks" role="group" aria-label="Which place the next visit goes to">
+  <button type="button" data-p="zoo" aria-pressed="true"><i style="background:#1B5E20"></i>Zoo</button>
+  <button type="button" data-p="za" aria-pressed="false"><i style="background:#2f7fb6"></i>Zoo + Aquarium</button>
+  <button type="button" data-p="aq" aria-pressed="false"><i style="background:#7fc4e8"></i>Aquarium</button>
+  <button type="button" data-p="tp" aria-pressed="false"><i style="background:#e0a21b"></i>Tierpark</button>
+</div>
+
+<div class="zp-board">
+  <canvas id="zp-year" tabindex="0" role="img" aria-label="Year strip from October 2026 to September 2027. Each dot is one planned visit. Tap a month to add a visit, tap a dot to remove it. With the keyboard, use the arrow keys to pick a month, Enter to add and Backspace to remove."></canvas>
+  <p class="zp-hint">Tap a month to add a visit, tap a dot to take it off. Grey months: the Zoo and Tierpark close at 16:30 with last entry 15:30.</p>
+  <canvas id="zp-chart" role="img" aria-label="Running cost over the year: day tickets as a band between the online and the gate price, and one line per annual card"></canvas>
+  <div class="zp-legend">
+    <span><i style="background:#c9d4bf;height:9px"></i>Day tickets, online low to gate price</span>
+    <span><i style="background:#1B5E20"></i>Zoo card</span>
+    <span><i style="background:#e0a21b"></i>Tierpark card</span>
+    <span><i style="background:#2f7fb6"></i>Zoo + Aquarium card</span>
+    <span><i style="background:#8e3b8e"></i>All three</span>
+  </div>
+</div>
+
+<div class="zp-tools" role="group" aria-label="Options and sample years">
+  <button type="button" id="zp-abo" aria-pressed="false">Price the cards as a 2-year subscription</button>
+  <button type="button" data-preset="zoo">Zoo regulars</button>
+  <button type="button" data-preset="rain">Rainy-day Aquarium</button>
+  <button type="button" data-preset="dog">Tierpark with the dog</button>
+  <button type="button" id="zp-clear">Clear the year</button>
+</div>
+
+<div class="zp-verdict" id="zp-verdict" aria-live="polite"></div>
+<div class="zp-rank" id="zp-rank"></div>
+
+<p class="zp-foot">Prices as published by Zoo, Aquarium and Tierpark Berlin, checked on 28 September 2026. Online day tickets start at the lower figure and cost more closer to the day; the gate price is the upper one. Card holders pay half the regular day price at the two places their card does not cover. Family cards need everyone at the same postal address and proof for each child. The subscription renews itself and runs at least 24 months; reduced cards have no subscription except for disabled visitors. All prices include the optional species-protection contribution.</p>
+<script src="../js/brand.js"></script>
+<script>
+// Day tickets per person: [online from, gate]. Children 4-15, reduced = students, trainees and similar.
+var DAY = {
+  zoo: { A: [16, 25], K: [7.5, 12.5], R: [9, 14] },
+  aq:  { A: [16, 25], K: [7.5, 12.5], R: [9, 14] },
+  za:  { A: [24, 37], K: [11, 17.5], R: [13, 20] },
+  tp:  { A: [14.5, 22.5], K: [7, 11], R: [7.5, 11.5] }
+};
+// Annual cards: [regular, subscription]. S = one parent + own children, B = both parents + own children.
+var CARD = {
+  zoo: { name: 'Zoo card', color: '#1B5E20', covers: ['zoo'], A: [69, 62.5], K: [37, 34], R: [46, 46], S: [88.5, 78.5], B: [143.5, 129.5] },
+  tp:  { name: 'Tierpark card', color: '#e0a21b', covers: ['tp'], A: [69, 62.5], K: [37, 34], R: [46, 46], S: [88.5, 78.5], B: [143.5, 129.5] },
+  za:  { name: 'Zoo + Aquarium card', color: '#2f7fb6', covers: ['zoo', 'aq', 'za'], A: [102.5, 92.5], K: [54.5, 49.5], R: [69, 69], S: [128.5, 116], B: [214, 193] },
+  all: { name: 'All three: Zoo, Aquarium and Tierpark', color: '#8e3b8e', covers: ['zoo', 'aq', 'za', 'tp'], A: [119, 107.5], K: [63, 57], R: [85, 85], S: [149.5, 135], B: [249.5, 225] }
+};
+var PARK = {
+  zoo: { name: 'Zoo', color: '#1B5E20' },
+  za:  { name: 'Zoo + Aquarium', color: '#2f7fb6' },
+  aq:  { name: 'Aquarium', color: '#7fc4e8' },
+  tp:  { name: 'Tierpark', color: '#e0a21b' }
+};
+var MONTHS = ['Oct', 'Nov', 'Dec', 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep'];
+var MONTH_LONG = ['October', 'November', 'December', 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September'];
+var SHORT_DAYS = [1, 2, 3, 4]; // Nov-Feb: closing 16:30, last entry 15:30 (26 Oct to 22 Feb)
+var PRESETS = {
+  zoo:  { h: { adults: 2, kids: 1, reduced: 0 }, v: [[0, 'zoo'], [1, 'aq'], [3, 'zoo'], [5, 'zoo'], [6, 'za'], [7, 'zoo'], [9, 'zoo'], [10, 'tp']] },
+  rain: { h: { adults: 1, kids: 2, reduced: 0 }, v: [[1, 'aq'], [2, 'aq'], [3, 'za'], [4, 'aq'], [6, 'zoo'], [9, 'za']] },
+  dog:  { h: { adults: 1, kids: 0, reduced: 0 }, v: [[0, 'tp'], [1, 'tp'], [2, 'tp'], [4, 'tp'], [5, 'tp'], [6, 'tp'], [8, 'tp'], [10, 'zoo']] }
+};
+
+var house = { adults: 2, kids: 1, reduced: 0 };
+var visits = [];
+var park = 'zoo';
+var abo = false;
+var focusMonth = 0;
+var dotBoxes = [];
+
+function euro(n) { return '€' + (Math.round(n * 100) / 100).toFixed(n % 1 ? 2 : 0); }
+function people() { return house.adults + house.kids + house.reduced; }
+
+function dayCost(p, which) { // which: 0 online low, 1 gate
+  var d = DAY[p];
+  return house.adults * d.A[which] + house.kids * d.K[which] + house.reduced * d.R[which];
+}
+function cardPrice(key) {
+  var c = CARD[key], i = abo ? 1 : 0;
+  var single = house.adults * c.A[i] + house.kids * c.K[i] + house.reduced * c.R[i];
+  var fam = Infinity;
+  if (house.kids > 0 && house.adults === 1) fam = c.S[i] + house.reduced * c.R[i];
+  if (house.kids > 0 && house.adults >= 2) fam = c.B[i] + (house.adults - 2) * c.A[i] + house.reduced * c.R[i];
+  return fam < single ? { total: fam, family: house.adults === 1 ? 'small' : 'large' } : { total: single, family: '' };
+}
+function visitUnderCard(key, p) {
+  var c = CARD[key];
+  if (c.covers.indexOf(p) !== -1) return 0;
+  if (p === 'za' && c.covers.indexOf('zoo') !== -1) return dayCost('aq', 1) / 2; // Zoo covered, Aquarium at half the regular price
+  return dayCost(p, 1) / 2;
+}
+
+function months() {
+  var per = MONTHS.map(function () { return []; });
+  visits.forEach(function (v) { per[v.m].push(v.p); });
+  return per;
+}
+
+// Running cost at the end of each month for every option.
+function series() {
+  var per = months();
+  var out = { low: [0], gate: [0] };
+  Object.keys(CARD).forEach(function (k) { out[k] = [cardPrice(k).total]; });
+  per.forEach(function (list, m) {
+    var low = out.low[m], gate = out.gate[m];
+    list.forEach(function (p) { low += dayCost(p, 0); gate += dayCost(p, 1); });
+    out.low.push(low); out.gate.push(gate);
+    Object.keys(CARD).forEach(function (k) {
+      var total = out[k][m];
+      list.forEach(function (p) { total += visitUnderCard(k, p); });
+      out[k].push(total);
+    });
+  });
+  return out;
+}
+
+function sizeCanvas(cv, h) {
+  var w = cv.parentNode.clientWidth - 12, dpr = window.devicePixelRatio || 1;
+  cv.style.height = h + 'px';
+  cv.width = Math.round(w * dpr); cv.height = Math.round(h * dpr);
+  var ctx = cv.getContext('2d'); ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  return { ctx: ctx, w: w, h: h };
+}
+
+function drawYear() {
+  var cv = document.getElementById('zp-year');
+  var per = months();
+  var maxStack = Math.max(4, per.reduce(function (a, l) { return Math.max(a, l.length); }, 0));
+  var narrow = cv.parentNode.clientWidth < 480;
+  var r = narrow ? 6 : 8, gap = narrow ? 3 : 4;
+  var h = 34 + maxStack * (r * 2 + gap) + 8;
+  var s = sizeCanvas(cv, h), ctx = s.ctx, w = s.w;
+  var colW = w / 12;
+  dotBoxes = [];
+  ctx.clearRect(0, 0, w, h);
+  for (var m = 0; m < 12; m++) {
+    var x = m * colW;
+    if (SHORT_DAYS.indexOf(m) !== -1) { ctx.fillStyle = '#eef0ea'; ctx.fillRect(x + 1, 0, colW - 2, h); }
+    if (m === focusMonth && document.activeElement === cv) { ctx.strokeStyle = '#d8c400'; ctx.lineWidth = 2; ctx.strokeRect(x + 2, 1, colW - 4, h - 2); }
+    ctx.fillStyle = '#243021';
+    ctx.font = '700 ' + (narrow ? 10 : 11.5) + 'px Montserrat, sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText(MONTHS[m], x + colW / 2, 14);
+    if (m === 0 || m === 3) {
+      ctx.fillStyle = '#7a847a'; ctx.font = '600 ' + (narrow ? 8.5 : 9.5) + 'px Montserrat, sans-serif';
+      ctx.fillText(m === 0 ? '2026' : '2027', x + colW / 2, 26);
+    }
+    per[m].forEach(function (p, i) {
+      var cy = h - 8 - r - i * (r * 2 + gap), cx = x + colW / 2;
+      ctx.beginPath(); ctx.arc(cx, cy, r, 0, Math.PI * 2);
+      ctx.fillStyle = PARK[p].color; ctx.fill();
+      if (p === 'za') { ctx.beginPath(); ctx.arc(cx, cy, r * 0.45, 0, Math.PI * 2); ctx.fillStyle = '#7fc4e8'; ctx.fill(); }
+      dotBoxes.push({ m: m, i: i, x: cx, y: cy, r: r + 3 });
+    });
+  }
+  ctx.strokeStyle = '#dfe6d6'; ctx.lineWidth = 1;
+  ctx.beginPath(); ctx.moveTo(0, h - 3.5); ctx.lineTo(w, h - 3.5); ctx.stroke();
+  cv.dataset.colW = colW;
+}
+
+function drawChart(sr) {
+  var cv = document.getElementById('zp-chart');
+  var narrow = cv.parentNode.clientWidth < 480;
+  var s = sizeCanvas(cv, narrow ? 230 : 270), ctx = s.ctx, w = s.w, h = s.h;
+  var padL = narrow ? 40 : 48, padR = 8, padT = 12, padB = 22;
+  var keys = Object.keys(CARD);
+  var top = Math.max.apply(null, [].concat.apply(sr.gate, keys.map(function (k) { return sr[k]; })));
+  top = Math.max(50, Math.ceil(top / 50) * 50);
+  var X = function (i) { return padL + (w - padL - padR) * i / 12; };
+  var Y = function (v) { return padT + (h - padT - padB) * (1 - v / top); };
+  ctx.clearRect(0, 0, w, h);
+  ctx.font = '600 ' + (narrow ? 9.5 : 10.5) + 'px Montserrat, sans-serif';
+  ctx.textAlign = 'right'; ctx.fillStyle = '#6a7466'; ctx.strokeStyle = '#eceee8'; ctx.lineWidth = 1;
+  var stepV = top <= 200 ? 50 : top <= 500 ? 100 : top <= 1000 ? 200 : 500;
+  for (var v = 0; v <= top; v += stepV) {
+    ctx.beginPath(); ctx.moveTo(padL, Y(v)); ctx.lineTo(w - padR, Y(v)); ctx.stroke();
+    ctx.fillText('€' + v, padL - 5, Y(v) + 3.5);
+  }
+  ctx.textAlign = 'center';
+  for (var m = 0; m < 12; m += (narrow ? 2 : 1)) ctx.fillText(MONTHS[m], (X(m) + X(m + 1)) / 2, h - 6);
+  // Day tickets band
+  ctx.beginPath();
+  for (var i = 0; i <= 12; i++) { if (i === 0) ctx.moveTo(X(i), Y(sr.gate[i])); else { ctx.lineTo(X(i), Y(sr.gate[i - 1])); ctx.lineTo(X(i), Y(sr.gate[i])); } }
+  for (var j = 12; j >= 0; j--) { ctx.lineTo(X(j), Y(sr.low[j])); if (j > 0) ctx.lineTo(X(j), Y(sr.low[j - 1])); }
+  ctx.closePath(); ctx.fillStyle = 'rgba(160,176,150,.38)'; ctx.fill();
+  ctx.strokeStyle = '#9aa792'; ctx.lineWidth = 1.2; ctx.setLineDash([4, 3]);
+  [sr.low, sr.gate].forEach(function (line) {
+    ctx.beginPath(); ctx.moveTo(X(0), Y(line[0]));
+    for (var i = 1; i <= 12; i++) { ctx.lineTo(X(i), Y(line[i - 1])); ctx.lineTo(X(i), Y(line[i])); }
+    ctx.stroke();
+  });
+  ctx.setLineDash([]);
+  var best = rankOptions(sr)[0];
+  keys.forEach(function (k) {
+    var line = sr[k];
+    ctx.strokeStyle = CARD[k].color; ctx.lineWidth = best.key === k ? 3.2 : 1.8; ctx.globalAlpha = best.key === k || best.key === 'day' ? 1 : 0.6;
+    ctx.beginPath(); ctx.moveTo(X(0), Y(line[0]));
+    for (var i = 1; i <= 12; i++) { ctx.lineTo(X(i), Y(line[i - 1])); ctx.lineTo(X(i), Y(line[i])); }
+    ctx.stroke(); ctx.globalAlpha = 1;
+  });
+  // Where the best card crosses the gate-price day tickets
+  if (best.key !== 'day') {
+    var cross = crossMonth(sr.gate, sr[best.key]);
+    if (cross !== -1) {
+      var cx = X(cross + 1), cy = Y(sr[best.key][cross + 1]);
+      ctx.beginPath(); ctx.arc(cx, cy, 6, 0, Math.PI * 2); ctx.fillStyle = '#FFE600'; ctx.fill();
+      ctx.lineWidth = 2; ctx.strokeStyle = '#123D18'; ctx.stroke();
+    }
+  }
+}
+
+function crossMonth(dayLine, cardLine) {
+  for (var i = 1; i <= 12; i++) if (dayLine[i] >= cardLine[i] && dayLine[i] > 0) return i - 1;
+  return -1;
+}
+
+function rankOptions(sr) {
+  var list = [{ key: 'day', name: 'Day tickets only', total: sr.gate[12], low: sr.low[12] }];
+  Object.keys(CARD).forEach(function (k) { list.push({ key: k, name: CARD[k].name, total: sr[k][12], card: cardPrice(k) }); });
+  // Rank day tickets by the middle of their range so an optimistic online price does not win by default.
+  list.sort(function (a, b) { return score(a) - score(b); });
+  return list;
+}
+function score(o) { return o.key === 'day' ? (o.low + o.total) / 2 : o.total; }
+
+function familyNote(c) {
+  if (c.family === 'small') return ' Priced as the small family card (one parent and own children).';
+  if (c.family === 'large') return ' Priced as the large family card (both parents and own children)' + (house.adults > 2 ? ', with single cards for the extra adults.' : '.');
+  return '';
+}
+
+function render() {
+  ['adults', 'kids', 'reduced'].forEach(function (k) { document.getElementById('zp-' + k).textContent = house[k]; });
+  document.querySelectorAll('.zp-step button').forEach(function (b) {
+    var k = b.dataset.k, d = Number(b.dataset.d);
+    b.disabled = (d < 0 && (house[k] === 0 || (k === 'adults' && house.adults === 1 && house.kids > 0))) || (d > 0 && house[k] >= 6) || (d < 0 && people() === 1 && house[k] === 1);
+  });
+  drawYear();
+  var sr = series();
+  drawChart(sr);
+  var ranked = rankOptions(sr);
+  var n = visits.length, best = ranked[0];
+  var who = [house.adults ? house.adults + (house.adults === 1 ? ' adult' : ' adults') : '', house.kids ? house.kids + (house.kids === 1 ? ' child' : ' children') : '', house.reduced ? house.reduced + ' reduced' : ''].filter(Boolean).join(', ');
+  var verdict;
+  if (!n) {
+    verdict = '<strong>Add the visits you would really make.</strong> Tap a month on the strip. For ' + who + ', the cheapest card on its own costs ' + euro(Math.min.apply(null, Object.keys(CARD).map(function (k) { return cardPrice(k).total; }))) + '.';
+  } else if (best.key === 'day') {
+    verdict = '<strong>Stay on day tickets.</strong> ' + n + (n === 1 ? ' visit' : ' visits') + ' for ' + who + ' cost ' + euro(best.low) + ' if you book online early and ' + euro(best.total) + ' at the gate. The nearest card, the ' + ranked[1].name + ', comes to ' + euro(ranked[1].total) + '.';
+  } else {
+    var cross = crossMonth(sr.gate, sr[best.key]);
+    var lowCross = crossMonth(sr.low, sr[best.key]);
+    verdict = '<strong>The ' + best.name + ' wins: ' + euro(best.total) + ' for the year</strong>, against ' + euro(sr.low[12]) + ' to ' + euro(sr.gate[12]) + ' on day tickets. '
+      + (cross !== -1 ? 'At gate prices it has paid for itself by the end of <strong>' + MONTH_LONG[cross] + '</strong>' : 'It only beats day tickets once you count the discounts')
+      + (lowCross !== -1 ? (lowCross === cross ? ', even against the cheapest online tickets.' : '; against the cheapest online tickets, by ' + MONTH_LONG[lowCross] + '.') : '. Against the cheapest online tickets it never quite does, so the card is a bet on booking late or turning up spontaneously.')
+      + familyNote(best.card);
+  }
+  document.getElementById('zp-verdict').innerHTML = verdict;
+  document.getElementById('zp-rank').innerHTML = ranked.map(function (o, i) {
+    var body;
+    if (o.key === 'day') body = 'Online from ' + euro(o.low) + ', at the gate ' + euro(o.total) + '. Online prices rise closer to the day.';
+    else {
+      var extra = o.total - o.card.total;
+      body = 'Card ' + euro(o.card.total) + (extra > 0 ? ' plus ' + euro(extra) + ' in half-price tickets where it does not cover you.' : ', nothing extra on your visits.') + familyNote(o.card);
+    }
+    return '<div class="zp-row' + (i === 0 && n ? ' is-best' : '') + '"><h3>' + o.name + '</h3><span class="sum">' + (o.key === 'day' ? euro(o.low) + ' to ' + euro(o.total) : euro(o.total)) + '</span><p>' + body + '</p></div>';
+  }).join('');
+  if (window.__bwRequestEmbedResize) window.__bwRequestEmbedResize();
+}
+
+function addVisit(m) { visits.push({ m: m, p: park }); focusMonth = m; render(); }
+function removeVisit(m, i) {
+  var seen = -1;
+  for (var k = 0; k < visits.length; k++) {
+    if (visits[k].m === m) { seen++; if (seen === i) { visits.splice(k, 1); break; } }
+  }
+  render();
+}
+
+document.getElementById('zp-year').addEventListener('click', function (e) {
+  var rect = this.getBoundingClientRect(), x = e.clientX - rect.left, y = e.clientY - rect.top;
+  for (var k = 0; k < dotBoxes.length; k++) {
+    var d = dotBoxes[k];
+    if (Math.abs(x - d.x) <= d.r && Math.abs(y - d.y) <= d.r) { removeVisit(d.m, d.i); return; }
+  }
+  var m = Math.min(11, Math.max(0, Math.floor(x / Number(this.dataset.colW))));
+  addVisit(m);
+});
+document.getElementById('zp-year').addEventListener('keydown', function (e) {
+  if (e.key === 'ArrowRight') { focusMonth = Math.min(11, focusMonth + 1); drawYear(); e.preventDefault(); }
+  else if (e.key === 'ArrowLeft') { focusMonth = Math.max(0, focusMonth - 1); drawYear(); e.preventDefault(); }
+  else if (e.key === 'Enter' || e.key === ' ') { addVisit(focusMonth); e.preventDefault(); }
+  else if (e.key === 'Backspace' || e.key === 'Delete') {
+    var inMonth = visits.filter(function (v) { return v.m === focusMonth; }).length;
+    if (inMonth) removeVisit(focusMonth, inMonth - 1);
+    e.preventDefault();
+  }
+});
+document.getElementById('zp-year').addEventListener('focus', drawYear);
+document.getElementById('zp-year').addEventListener('blur', drawYear);
+document.querySelectorAll('.zp-step button').forEach(function (b) {
+  b.addEventListener('click', function () { house[b.dataset.k] = Math.max(0, house[b.dataset.k] + Number(b.dataset.d)); render(); });
+});
+var parkBtns = document.querySelectorAll('.zp-parks button');
+parkBtns.forEach(function (b) {
+  b.addEventListener('click', function () {
+    park = b.dataset.p;
+    parkBtns.forEach(function (o) { o.setAttribute('aria-pressed', String(o === b)); });
+  });
+});
+document.getElementById('zp-abo').addEventListener('click', function () {
+  abo = !abo; this.setAttribute('aria-pressed', String(abo)); render();
+});
+document.querySelectorAll('[data-preset]').forEach(function (b) {
+  b.addEventListener('click', function () { loadPreset(b.dataset.preset); });
+});
+document.getElementById('zp-clear').addEventListener('click', function () { visits = []; render(); });
+
+function loadPreset(key) {
+  var pr = PRESETS[key];
+  house = { adults: pr.h.adults, kids: pr.h.kids, reduced: pr.h.reduced };
+  visits = pr.v.map(function (v) { return { m: v[0], p: v[1] }; });
+  render();
+}
+
+var rt; window.addEventListener('resize', function () { clearTimeout(rt); rt = setTimeout(render, 120); });
+loadPreset('zoo');
+</script>
+</body>
+</html>
