@@ -1,48 +1,52 @@
-const BW_HEADER_MONTH = new Intl.DateTimeFormat('en-CA', { timeZone: 'Europe/Berlin', year: 'numeric', month: '2-digit' }).format(new Date());
-const BW_HEADER_SCHEDULE = BW_HEADER_MONTH === '2026-09' ? 'Sep: 11:30 &amp; 15:30 (Tue-Sat) · Oct: 11:30 (selected Wed-Sun) · Check dates' : BW_HEADER_MONTH === '2026-10' ? 'Oct: selected Wed-Sun 11:30 · Check calendar dates · World Clock' : 'Check the calendar for dates and times · World Clock';
 const BW_HEADER_SCRIPT_URL = (document.currentScript && document.currentScript.src) || 'https://fenerszymanski.github.io/berlinwalk-widgets/site-header/site-header-element.js';
 const BW_HEADER_LOGO_URL = new URL('../assets/berlinwalk-wordmark-green.png', BW_HEADER_SCRIPT_URL).href;
-const BW_HEADER_BOOKING_URL = 'https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based';
+// Berlin Then and Now (service 145cb27e). The legacy booking path stays
+// reachable for guests who booked before 30 September, but nothing links to it.
+const BW_HEADER_BUILD = 'site-header-then-and-now-20260929';
+const BW_HEADER_BOOKING_URL = 'https://www.walkofberlin.com/book-berlin-walking-tour/berlin-then-and-now';
+const BW_HEADER_TOUR_FACTS = ['about 2.5 hours', 'max 8 people', '€25']
+  .map((fact) => `<span class="bw-header-fact">${fact}</span>`)
+  .join(' · ');
 const BW_HEADER_LINKS = {
-  home: 'https://www.berlinwalk.com/',
-  privateTour: 'https://www.berlinwalk.com/private-tour',
-  route: 'https://www.berlinwalk.com/berlin-walking-tour-route',
-  guide: 'https://www.berlinwalk.com/the-guide',
-  historyStory: 'https://www.berlinwalk.com/berlin-history-story',
-  wallTimeline: 'https://www.berlinwalk.com/berlin-wall-timeline',
-  reviews: 'https://www.berlinwalk.com/reviews',
-  meetingPoint: 'https://www.berlinwalk.com/meeting-point',
-  plan: 'https://www.berlinwalk.com/berlin-tools',
-  planner: 'https://www.berlinwalk.com/berlin-trip-planner',
-  landmarksGuide: 'https://www.berlinwalk.com/products/berlin-landmarks-guide',
-  audioTours: 'https://www.berlinwalk.com/audio-tours',
-  photoMissions: 'https://www.berlinwalk.com/products/hidden-berlin-photo-missions',
-  games: 'https://www.berlinwalk.com/games',
-  timeDetective: 'https://www.berlinwalk.com/games/berlin-time-detective',
-  whereInBerlin: 'https://www.berlinwalk.com/games/where-in-berlin',
-  berlinBattle: 'https://www.berlinwalk.com/games/berlin-battle',
-  berghainBouncer: 'https://www.berlinwalk.com/games/berghain-bouncer',
-  kitkatDoorTest: 'https://www.berlinwalk.com/games/kitkat-door-test',
-  daySurvival: 'https://www.berlinwalk.com/games/berlin-day-survival',
-  berlinRewind: 'https://www.berlinwalk.com/games/berlin-rewind',
-  smileChallenge: 'https://www.berlinwalk.com/games/berlin-smile-challenge',
-  blog: 'https://www.berlinwalk.com/blog',
+  home: 'https://www.walkofberlin.com/',
+  privateTour: 'https://www.walkofberlin.com/private-tour',
+  route: 'https://www.walkofberlin.com/berlin-walking-tour-route',
+  guide: 'https://www.walkofberlin.com/the-guide',
+  historyStory: 'https://www.walkofberlin.com/berlin-history-story',
+  wallTimeline: 'https://www.walkofberlin.com/berlin-wall-timeline',
+  reviews: 'https://www.walkofberlin.com/reviews',
+  meetingPoint: 'https://www.walkofberlin.com/meeting-point',
+  plan: 'https://www.walkofberlin.com/berlin-tools',
+  planner: 'https://www.walkofberlin.com/berlin-trip-planner',
+  landmarksGuide: 'https://www.walkofberlin.com/products/berlin-landmarks-guide',
+  audioTours: 'https://www.walkofberlin.com/audio-tours',
+  photoMissions: 'https://www.walkofberlin.com/products/hidden-berlin-photo-missions',
+  games: 'https://www.walkofberlin.com/games',
+  timeDetective: 'https://www.walkofberlin.com/games/berlin-time-detective',
+  whereInBerlin: 'https://www.walkofberlin.com/games/where-in-berlin',
+  berlinBattle: 'https://www.walkofberlin.com/games/berlin-battle',
+  berghainBouncer: 'https://www.walkofberlin.com/games/berghain-bouncer',
+  kitkatDoorTest: 'https://www.walkofberlin.com/games/kitkat-door-test',
+  daySurvival: 'https://www.walkofberlin.com/games/berlin-day-survival',
+  berlinRewind: 'https://www.walkofberlin.com/games/berlin-rewind',
+  smileChallenge: 'https://www.walkofberlin.com/games/berlin-smile-challenge',
+  blog: 'https://www.walkofberlin.com/blog',
   // The blog menu points at the real Wix blog categories, each of which now
   // renders its own category page, instead of at #bw-topic anchors inside the
   // /blog hub. Two taxonomies were being shown as one: the hub's seven derived
   // topics and the seven categories a post is actually filed under.
-  blogLivingInBerlin: 'https://www.berlinwalk.com/blog/categories/living-in-berlin',
-  blogTouristTips: 'https://www.berlinwalk.com/blog/categories/tourist-tips',
-  blogBerlinHistory: 'https://www.berlinwalk.com/blog/categories/berlin-history',
-  blogTourRoute: 'https://www.berlinwalk.com/blog/categories/tour-route',
-  blogGermanLanguage: 'https://www.berlinwalk.com/blog/categories/german-language',
-  blogBerlinMyths: 'https://www.berlinwalk.com/blog/categories/berlin-myths',
-  blogBeforeAfter: 'https://www.berlinwalk.com/blog/categories/before-after',
-  firstDayRescue: 'https://www.berlinwalk.com/products/berlin-first-day-rescue-plan',
-  dateCheck: 'https://www.berlinwalk.com/berlin-dates-check',
-  whatsOpen: 'https://www.berlinwalk.com/tools/whats-open-in-berlin-today',
-  ticketCalculator: 'https://www.berlinwalk.com/tools/transport-ticket-calculator',
-  luggageStorage: 'https://www.berlinwalk.com/tools/berlin-luggage-storage'
+  blogLivingInBerlin: 'https://www.walkofberlin.com/blog/categories/living-in-berlin',
+  blogTouristTips: 'https://www.walkofberlin.com/blog/categories/tourist-tips',
+  blogBerlinHistory: 'https://www.walkofberlin.com/blog/categories/berlin-history',
+  blogTourRoute: 'https://www.walkofberlin.com/blog/categories/tour-route',
+  blogGermanLanguage: 'https://www.walkofberlin.com/blog/categories/german-language',
+  blogBerlinMyths: 'https://www.walkofberlin.com/blog/categories/berlin-myths',
+  blogBeforeAfter: 'https://www.walkofberlin.com/blog/categories/before-after',
+  firstDayRescue: 'https://www.walkofberlin.com/products/berlin-first-day-rescue-plan',
+  dateCheck: 'https://www.walkofberlin.com/berlin-dates-check',
+  whatsOpen: 'https://www.walkofberlin.com/tools/whats-open-in-berlin-today',
+  ticketCalculator: 'https://www.walkofberlin.com/tools/transport-ticket-calculator',
+  luggageStorage: 'https://www.walkofberlin.com/tools/berlin-luggage-storage'
 };
 
 const BW_HEADER_INSTANCES = new Set();
@@ -110,6 +114,7 @@ class BWHeaderElement extends HTMLElement {
     this._blogMenuId = `${this._instanceId}-blog-menu`;
     this._hacksMenuId = `${this._instanceId}-hacks-menu`;
     this.dataset.bwNavigation = "20260917";
+    this.dataset.bwHeaderBuild = BW_HEADER_BUILD;
     this._render();
     BW_HEADER_INSTANCES.add(this);
     this._visibilityChangeHandler = bwHeaderScheduleReconcile;
@@ -573,6 +578,14 @@ class BWHeaderElement extends HTMLElement {
           color: var(--yellow);
           font-size: 13px;
           line-height: 1;
+        }
+
+        .bw-header-top-name {
+          color: var(--yellow);
+        }
+
+        .bw-header-fact {
+          white-space: nowrap;
         }
 
         .bw-header-top-sep {
@@ -1101,12 +1114,7 @@ class BWHeaderElement extends HTMLElement {
         <div class="bw-header-top" aria-hidden="false">
           <div class="bw-header-inner">
             <div class="bw-header-top-items">
-              <span class="bw-header-top-item">
-                <span class="bw-header-top-star" aria-hidden="true">★</span>
-                <span>9.8 / 10 on FreeTour</span>
-              </span>
-              <span class="bw-header-top-sep" aria-hidden="true">•</span>
-              <span class="bw-header-top-item">Free · Tip-based</span>
+              <span class="bw-header-top-item" data-bw-header-tour-line="true"><span class="bw-header-top-name">Berlin Then and Now</span> · ${BW_HEADER_TOUR_FACTS}</span>
             </div>
           </div>
         </div>
@@ -1137,7 +1145,7 @@ class BWHeaderElement extends HTMLElement {
                     Plan Your Visit <span class="bw-header-caret" aria-hidden="true">⌄</span>
                   </button>
                   <ul id="${this._productsMenuId}" class="bw-header-submenu">
-                    <li><a href="${BW_HEADER_LINKS.plan}">Free Berlin Tools</a></li>
+                    <li><a href="${BW_HEADER_LINKS.plan}">Berlin Tools</a></li>
                     <li><a href="${BW_HEADER_LINKS.dateCheck}">Berlin Date Check</a></li>
                     <li><a href="${BW_HEADER_LINKS.planner}">Berlin Trip Planner</a></li>
                     <li><a href="${BW_HEADER_LINKS.firstDayRescue}">First-Day Rescue Plan</a></li>
@@ -1163,7 +1171,7 @@ class BWHeaderElement extends HTMLElement {
             </nav>
 
             <div class="bw-header-cta">
-              <a class="bw-header-book" href="${BW_HEADER_BOOKING_URL}">Book Free Tour</a>
+              <a class="bw-header-book" href="${BW_HEADER_BOOKING_URL}">See dates and book</a>
               <button class="bw-header-hamburger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="${this._mobileMenuId}">
                 <span></span><span></span><span></span>
               </button>
@@ -1195,7 +1203,7 @@ class BWHeaderElement extends HTMLElement {
               <a href="${BW_HEADER_LINKS.audioTours}">Audio Tours</a>
               <details class="bw-header-mobile-section">
                 <summary class="bw-header-mobile-section-label">Plan Your Visit</summary>
-                <a href="${BW_HEADER_LINKS.plan}">Free Berlin Tools</a>
+                <a href="${BW_HEADER_LINKS.plan}">Berlin Tools</a>
                 <a href="${BW_HEADER_LINKS.dateCheck}">Berlin Date Check</a>
                 <a href="${BW_HEADER_LINKS.planner}">Berlin Trip Planner</a>
                 <a href="${BW_HEADER_LINKS.firstDayRescue}">First-Day Rescue Plan</a>
@@ -1216,8 +1224,8 @@ class BWHeaderElement extends HTMLElement {
             </nav>
 
             <div class="bw-header-mobile-cta">
-              <a class="bw-header-book" href="${BW_HEADER_BOOKING_URL}">Book Free Tour</a>
-              <p class="bw-header-mobile-trust"><span aria-hidden="true">★ </span><strong>9.8 / 10</strong> on FreeTour · Tip-based · &euro;2 refundable deposit</p>
+              <a class="bw-header-book" href="${BW_HEADER_BOOKING_URL}">See dates and book</a>
+              <p class="bw-header-mobile-trust" data-bw-header-tour-line="true"><strong>Berlin Then and Now</strong> · ${BW_HEADER_TOUR_FACTS}</p>
             </div>
           </div>
         </div>
