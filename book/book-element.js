@@ -386,7 +386,7 @@ class BWBookHeroElement extends HTMLElement {
                 <div class="bw-book-meta" aria-label="Tour key facts">
                   <span class="bw-book-meta-chip">€25 per person</span>
                   <span class="bw-book-meta-chip">About 2.5 hours</span>
-                  <span class="bw-book-meta-chip">Max 8 people</span>
+                  <span class="bw-book-meta-chip">Max 10 people</span>
                   <span class="bw-book-meta-chip">English</span>
                 </div>
 
@@ -394,7 +394,7 @@ class BWBookHeroElement extends HTMLElement {
                   <a class="bw-book-btn bw-book-btn-primary" href="#${BW_BOOK_ANCHOR_ID}">Pick your date ↓</a>
                   <a class="bw-book-btn bw-book-btn-ghost" href="${BW_BOOK_MEETING_POINT_URL}">Meeting point</a>
                 </div>
-                <p class="bw-book-cta-note">The walk starts at 12:30 at the World Clock on Alexanderplatz. Every date runs, even if you are the only guest.</p>
+                <p class="bw-book-cta-note">The walk starts at 12:30 at the World Clock on Alexanderplatz and needs at least 2 guests. If you are the only guest one hour before the start, I cancel it and refund you in full.</p>
 
                 <div class="bw-book-trust" aria-label="Guest reviews">
                   <span>Read what guests say on my <a href="${BW_BOOK_REVIEWS_URL}">reviews page</a>.</span>
@@ -409,7 +409,7 @@ class BWBookHeroElement extends HTMLElement {
                   <div><dt>Duration</dt><dd>About 2.5 hours, about 3 km</dd></div>
                   <div><dt>Start</dt><dd>12:30, World Clock, Alexanderplatz</dd></div>
                   <div><dt>Ends at</dt><dd>Hackescher Markt</dd></div>
-                  <div><dt>Group</dt><dd>No more than 8 people</dd></div>
+                  <div><dt>Group</dt><dd>2 to 10 people</dd></div>
                   <div><dt>Language</dt><dd>English</dd></div>
                 </dl>
                 <p class="bw-book-hero-card-foot">Cancel up to 24 hours before the start for a full refund, or move to another date if there is space.</p>
@@ -816,7 +816,7 @@ class BWBookDetailsElement extends HTMLElement {
             <aside class="bw-book-explainer" aria-labelledby="bw-book-price-title">
               <span class="bw-book-eyebrow">Price and cancellation</span>
               <h2 id="bw-book-price-title">€25 per person, paid when you book.</h2>
-              <p>That is the same price on every site that sells it. The group is never bigger than 8, and every date runs, even if you are the only guest.</p>
+              <p>That is the same price on every site that sells it. The group is never bigger than 10, and a walk needs at least 2 guests. If you are the only guest one hour before the start, I cancel the walk, refund you in full and give you one of my audio walks for free.</p>
               <p>Cancel up to 24 hours before the start and you get a full refund, or move to another date if there is space. Later than that, or if you do not come, I cannot refund. If I have to cancel, for weather or anything else, you get your money back in full.</p>
             </aside>
           </div>
@@ -843,7 +843,7 @@ class BWBookDetailsElement extends HTMLElement {
               </details>
               <details>
                 <summary>How big is the group, and does my date run?</summary>
-                <p>No more than 8 people. Every date runs, even if you are the only guest.</p>
+                <p>No more than 10 people. A walk needs at least 2 guests. If you are the only guest one hour before the start, I cancel the walk, refund you in full and give you one of my audio walks for free.</p>
               </details>
               <details>
                 <summary>Where do I meet you?</summary>

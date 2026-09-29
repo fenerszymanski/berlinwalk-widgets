@@ -393,7 +393,7 @@
     wrapper.innerHTML = [
       '<div class="bw-blog-booking-strip"><span data-bw-booking-strip-label>My walking tour</span><span>Archive photo at every stop</span></div>',
       '<div class="bw-blog-booking-inner"><div class="bw-blog-booking-media"><picture><source srcset="' + imageBase + '.webp" type="image/webp"><img src="' + imageBase + '.jpg" alt="BerlinWalk guide Yusuf leading guests outside the Altes Museum on Museum Island" loading="lazy"></picture></div>',
-      '<div class="bw-blog-booking-body"><div class="bw-blog-booking-title" role="heading" aria-level="2">Walk the Berlin that disappeared, with me</div><div class="bw-blog-booking-facts">Berlin Then and Now · about 2.5 hours · 11 stops, 16 places · max 8 · €25</div>',
+      '<div class="bw-blog-booking-body"><div class="bw-blog-booking-title" role="heading" aria-level="2">Walk the Berlin that disappeared, with me</div><div class="bw-blog-booking-facts">Berlin Then and Now · about 2.5 hours · 11 stops, 16 places · max 10 · €25</div>',
       '<div class="bw-blog-booking-dates" data-bw-booking-dates aria-label="Pick a tour date" hidden></div>',
       '<div class="bw-blog-booking-day" data-bw-booking-day hidden><span class="bw-blog-booking-times-label">Start time</span><div class="bw-blog-booking-times" data-bw-booking-times></div><span class="bw-blog-booking-meta" data-bw-booking-meta></span></div>',
       '<div class="bw-blog-booking-cta"><a href="' + escapeAttr(bookingHref()) + '" target="_top" data-bw-booking-cta>See dates and book</a></div></div></div>'

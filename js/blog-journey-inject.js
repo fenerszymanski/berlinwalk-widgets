@@ -33,7 +33,7 @@
   var BOOKING_DEST_LANDING = BOOKING_URL;
   var TOUR_AVAILABILITY_URL = 'https://berlinwalk-content-app.vercel.app/api/booking-calendar-availability?days=60&serviceId=145cb27e-c5bd-456d-bfbd-a09d4d6f5f9d';
   var TOUR_HEADLINE = 'Walk the Berlin that disappeared, with me';
-  var TOUR_FACTS = 'Berlin Then and Now: about 2.5 hours, 11 stops covering 16 places, no more than 8 people, \u20AC25.';
+  var TOUR_FACTS = 'Berlin Then and Now: about 2.5 hours, 11 stops covering 16 places, no more than 10 people, \u20AC25.';
   var BOOKING_EXPERIMENT_VARIANT = 'service';
   var BOOKING_NEXT_ACTION_PATCH_URL = 'https://fenerszymanski.github.io/berlinwalk-widgets/booking-calendar/book-now-intro-patch.js';
   var TRACK_ENDPOINT = 'https://berlinwalk-content-app.vercel.app/api/pf-event';

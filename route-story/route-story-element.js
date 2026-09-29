@@ -215,7 +215,7 @@ class BWRouteStoryElement extends HTMLElement {
               <div><dt>Stops</dt><dd>11 stops, 16 places</dd></div>
               <div><dt>Duration</dt><dd>About 2.5 hours, about 3 km</dd></div>
               <div><dt>Route</dt><dd>World Clock to Hackescher Markt, 12:30 start</dd></div>
-              <div><dt>Price</dt><dd>&euro;25 per person, max 8 people</dd></div>
+              <div><dt>Price</dt><dd>&euro;25 per person, max 10 people</dd></div>
             </dl>
           </div>
         </section>
@@ -296,7 +296,7 @@ class BWRouteStoryElement extends HTMLElement {
             <div>
               <span class="bw-rs-eyebrow">Join the route</span>
               <h2>Walk the story in person.</h2>
-              <p>Meet me at the World Clock on Alexanderplatz at 12:30 and look for my green umbrella. We walk 11 stops west through the old centre and finish at Hackescher Markt. &euro;25 per person, no more than 8 people, and every date runs, even if you are the only guest. You can cancel for free or change your date up to 24 hours before the start.</p>
+              <p>Meet me at the World Clock on Alexanderplatz at 12:30 and look for my green umbrella. We walk 11 stops west through the old centre and finish at Hackescher Markt. &euro;25 per person, no more than 10 people, and a walk needs at least 2 guests. If you are the only guest one hour before the start, I cancel the walk, refund you in full and give you one of my audio walks for free. You can cancel for free or change your date up to 24 hours before the start.</p>
               <div class="bw-rs-actions">
                 <a class="bw-rs-btn bw-rs-btn-yellow" href="${BW_ROUTE_STORY_BOOKING_URL}" data-bw-book-route-story>See dates and book</a>
                 <a class="bw-rs-btn bw-rs-btn-outline-light" href="${BW_ROUTE_STORY_MEETING_URL}">Meeting point</a>

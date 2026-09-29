@@ -519,7 +519,7 @@
     var ids = unique(options.placeIds).filter(function (placeId) { return placeId !== 'arrival_transfer'; });
     if (options.kind === 'transfer') return text(options.fallback, 'Use the route link and check the live departure before you leave.');
     if (time === 'arrival') return text(options.arrivalCopy, 'Go to your stay and leave your bags before sightseeing.');
-    if (options.isTour) return 'Meet at the World Clock 10 minutes early. The BerlinWalk tour takes about two hours.';
+    if (options.isTour) return 'Meet at the World Clock 10 minutes early. The BerlinWalk tour takes about 2.5 hours.';
     if (time === 'lunch') return mealCopy({ meal: 'lunch', placeIds: ids, area: options.area });
     if (/^(evening|dinner|later)$/.test(time)) return mealCopy({ meal: 'dinner', placeIds: ids, area: options.area });
     if (ids.length) return ids.slice(0, 2).map(function (placeId) { return placeCopy(placeId, '', options.area); }).join(' ');

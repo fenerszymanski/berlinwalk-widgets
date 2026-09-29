@@ -2583,7 +2583,7 @@
         ensure(88);
         rounded(margin, y, contentW, 86, [246, 250, 239], line);
         text('Book your spot', margin + 14, y + 24, 12, 'bold', green);
-        text('Berlin Then and Now starts at 12:30 at the World Clock: about 2.5 hours, max 8 people.', margin + 14, y + 42, 9.2, 'normal', [55, 68, 55]);
+        text('Berlin Then and Now starts at 12:30 at the World Clock: about 2.5 hours, max 10 people.', margin + 14, y + 42, 9.2, 'normal', [55, 68, 55]);
         rgb('setTextColor', [47, 128, 237]);
         doc.setFont('helvetica', 'bold');
         doc.setFontSize(11);
@@ -2671,7 +2671,7 @@
       '<div class="section weather"><div class="k">Expected weather</div><p><strong>' + escapeHtml(data.weather.title) + '</strong><br>' + escapeHtml(data.weather.copy || '') + '</p>' + weatherMetrics + '<p>' + escapeHtml(data.weather.advice) + '</p></div>' +
       '<div class="section transport"><div class="k">Public transport</div><p><strong>' + escapeHtml(data.transport.title) + '</strong><br>' + escapeHtml(data.transport.ticket) + '</p><table>' + transportRows + '</table><p class="note">' + escapeHtml(data.transport.luggage + ' ' + data.transport.note) + '</p></div>' +
       '<div class="section"><div class="k">Timeline</div><ol>' + steps + '</ol></div>' +
-      '<div class="section book"><div class="k">Book</div><p>Berlin Then and Now starts at 12:30 at the World Clock on Alexanderplatz: about 2.5 hours, max 8 people, €25.</p><p><a href="' + escapeHtml(BOOKING_SHORT_URL) + '">' + escapeHtml(BOOKING_SHORT_LABEL) + '</a></p></div>' +
+      '<div class="section book"><div class="k">Book</div><p>Berlin Then and Now starts at 12:30 at the World Clock on Alexanderplatz: about 2.5 hours, max 10 people, €25.</p><p><a href="' + escapeHtml(BOOKING_SHORT_URL) + '">' + escapeHtml(BOOKING_SHORT_LABEL) + '</a></p></div>' +
       '<div class="foot">berlinwalk.com · @walkofberlin</div></body></html>';
   }
 

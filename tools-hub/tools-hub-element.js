@@ -915,7 +915,7 @@ class BWToolsHubElement extends HTMLElement {
 
         <div class="bw-hub-footer">
           <h2>Walk the Berlin that disappeared, with me</h2>
-          <p>Berlin Then and Now: about 2.5 hours, 11 stops, 16 places, max 8 people, €25. An archive photo at every stop.</p>
+          <p>Berlin Then and Now: about 2.5 hours, 11 stops, 16 places, max 10 people, €25. An archive photo at every stop.</p>
           <a href="https://www.walkofberlin.com/book-berlin-walking-tour/berlin-then-and-now" class="bw-btn-primary">See dates and book</a>
         </div>
       </section>

@@ -335,7 +335,7 @@ class BWGuideHomeElement extends HTMLElement {
                 <span>Relaxed pace, no rushed checklist.</span>
               </div>
               <div class="bw-guide-home-proof-item">
-                <strong>Max 8 people</strong>
+                <strong>Max 10 people</strong>
                 <span>An archive photo at every stop.</span>
               </div>
             </div>

@@ -34,8 +34,8 @@
     {
       icon: 'flag',
       q: 'How big is the group, and does my date run?',
-      short: 'No more than 8 people. Every date runs.',
-      a: 'No more than 8 people. Every date runs, even if you are the only guest.',
+      short: 'No more than 10 people. A walk needs at least 2 guests.',
+      a: 'No more than 10 people. A walk needs at least 2 guests. If you are the only guest one hour before the start, I cancel the walk, refund you in full and give you one of my audio walks for free.',
     },
     {
       icon: 'map-pin',
@@ -802,7 +802,7 @@
               </li>
               <li class="feature">
                 <img src="${icon('chat-circle')}" alt="">
-                <span><strong>Max 8 people</strong><small>in English</small></span>
+                <span><strong>Max 10 people</strong><small>in English</small></span>
               </li>
               <li class="feature">
                 <img src="${icon('coins')}" alt="">
@@ -869,7 +869,7 @@
                 <div><dt>Start</dt><dd>12:30 at the World Clock, Alexanderplatz</dd></div>
                 <div><dt>Finish</dt><dd>Hackescher Markt, about 2.5 hours and 3 km later</dd></div>
                 <div><dt>Price</dt><dd>€25 per person, paid when you book</dd></div>
-                <div><dt>Group</dt><dd>No more than 8 people. Every date runs, even if you are the only guest.</dd></div>
+                <div><dt>Group</dt><dd>No more than 10 people. A walk needs at least 2 guests. If you are the only guest one hour before the start, I cancel the walk, refund you in full and give you one of my audio walks for free.</dd></div>
                 <div><dt>Changes</dt><dd>Cancel up to 24 hours before the start for a full refund, or move to another date if there is space. Later than that, or if you do not come, I cannot refund.</dd></div>
               </dl>
               <div class="handoff-actions">

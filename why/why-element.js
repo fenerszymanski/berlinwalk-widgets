@@ -22,7 +22,7 @@ const CARDS = [
 ];
 
 const FLOW_STEPS = [
-  { label: 'Book your date', detail: '\u20AC25 per person, max 8 people' },
+  { label: 'Book your date', detail: '\u20AC25 per person, max 10 people' },
   { label: 'Show up at Alexanderplatz', detail: 'Meeting point at World Clock' },
   { label: 'Walk the vanished city', detail: '11 stops, about 2.5 hours' }
 ];

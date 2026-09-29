@@ -639,7 +639,7 @@ class BWMeetingPointElement extends HTMLElement {
         <footer class="bw-mp-final">
           <div class="bw-mp-inner">
             <h2>Walk the Berlin that disappeared, with me</h2>
-            <p>Berlin Then and Now runs from Alexanderplatz to Hackescher Markt in about 2.5 hours. €25 per person, no more than 8 people, and every date runs.</p>
+            <p>Berlin Then and Now runs from Alexanderplatz to Hackescher Markt in about 2.5 hours. €25 per person, no more than 10 people, and a walk needs at least 2 guests.</p>
             <a class="bw-mp-btn bw-mp-btn-primary" href="${BW_MEETING_POINT_BOOKING_URL}">See dates and book</a>
           </div>
         </footer>

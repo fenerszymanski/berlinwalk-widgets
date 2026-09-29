@@ -501,7 +501,7 @@ class BWHeroHomeElement extends HTMLElement {
                 <span>On foot</span>
               </div>
               <div class="bw-hero-proof-item">
-                <strong>Max 8</strong>
+                <strong>Max 10</strong>
                 <span>People</span>
               </div>
             </div>

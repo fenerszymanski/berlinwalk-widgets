@@ -401,7 +401,7 @@
           <div class="at-cta">
             <div class="at-cta-text">
               <small>Liked what you heard?</small>
-              Walk the rest with me on Berlin Then and Now: about 2.5 hours from the World Clock, max 8 people, €25. Check the booking calendar for your date.
+              Walk the rest with me on Berlin Then and Now: about 2.5 hours from the World Clock, max 10 people, €25. Check the booking calendar for your date.
             </div>
             <a class="at-cta-btn" href="${BOOK_URL}" target="_top" rel="noopener" data-at-cta="book">See dates and book →</a>
           </div>

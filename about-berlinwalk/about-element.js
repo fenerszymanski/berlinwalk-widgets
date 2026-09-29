@@ -239,7 +239,7 @@ class BWAboutCompanyElement extends HTMLElement {
             <div class="bw-about-copy">
               <h2>Berlin Then and Now</h2>
               <p>Berlin's old city did not survive. I walk you through where it stood and hold up an archive photo of the same place at every stop.</p>
-              <p>We start at 12:30 at the World Clock on Alexanderplatz and end at Hackescher Markt: 11 stops covering 16 places, about 3 km, about 2.5 hours. It costs €25 per person, the group is never bigger than 8, and every date runs, even if you are the only guest.</p>
+              <p>We start at 12:30 at the World Clock on Alexanderplatz and end at Hackescher Markt: 11 stops covering 16 places, about 3 km, about 2.5 hours. It costs €25 per person and the group is never bigger than 10. A walk needs at least 2 guests: if you are the only guest one hour before the start, I cancel the walk, refund you in full and give you one of my audio walks for free.</p>
               <a class="bw-about-btn" href="${BW_ABOUT_BOOKING_URL}">See dates and book</a>
             </div>
           </section>

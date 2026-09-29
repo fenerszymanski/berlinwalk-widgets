@@ -2,9 +2,9 @@ const BW_HEADER_SCRIPT_URL = (document.currentScript && document.currentScript.s
 const BW_HEADER_LOGO_URL = new URL('../assets/berlinwalk-wordmark-green.png', BW_HEADER_SCRIPT_URL).href;
 // Berlin Then and Now (service 145cb27e). The legacy booking path stays
 // reachable for guests who booked before 30 September, but nothing links to it.
-const BW_HEADER_BUILD = 'site-header-then-and-now-20260929';
+const BW_HEADER_BUILD = 'site-header-then-and-now-20260929-max10';
 const BW_HEADER_BOOKING_URL = 'https://www.walkofberlin.com/book-berlin-walking-tour/berlin-then-and-now';
-const BW_HEADER_TOUR_FACTS = ['about 2.5 hours', 'max 8 people', '€25']
+const BW_HEADER_TOUR_FACTS = ['about 2.5 hours', 'max 10 people', '€25']
   .map((fact) => `<span class="bw-header-fact">${fact}</span>`)
   .join(' · ');
 const BW_HEADER_LINKS = {

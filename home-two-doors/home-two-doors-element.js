@@ -32,7 +32,7 @@ const BW_HOME_TWO_DOORS_FAQ = [
   },
   {
     q: 'How big is the group, and does my date run?',
-    a: 'No more than 8 people. Every date runs, even if you are the only guest.',
+    a: 'No more than 10 people. A walk needs at least 2 guests. If you are the only guest one hour before the start, I cancel the walk, refund you in full and give you one of my audio walks for free.',
   },
   {
     q: 'Where do I meet you?',
@@ -299,18 +299,18 @@ class BWHomeTwoDoorsElement extends HTMLElement {
           <article class="bw-home-two-doors__door bw-home-two-doors__door--live" data-bw-home-card="live_tour" data-bw-card-type="live-tour" data-bw-placement="hero">
             <img class="bw-home-two-doors__background" src="${asset('tour-altes-museum.webp')}" alt="Yusuf explaining Berlin history to guests outside the Altes Museum" width="1600" height="900">
             <span class="bw-home-two-doors__scrim" aria-hidden="true"></span>
-            <span class="bw-home-two-doors__chip bw-home-two-doors__chip--yellow bw-home-two-doors__corner">LIVE · MAX 8 PEOPLE</span>
+            <span class="bw-home-two-doors__chip bw-home-two-doors__chip--yellow bw-home-two-doors__corner">LIVE · MAX 10 PEOPLE</span>
             <span class="bw-home-two-doors__eyebrow bw-home-two-doors__eyebrow--dark">BERLIN THEN AND NOW</span>
             <h2>Walk <em>with me.</em></h2>
             <p>Berlin's old city did not survive. I walk you through where it stood and hold up an archive photo of the same place at every stop.</p>
-            <p class="bw-home-two-doors__door-facts">About 2.5 hours · 11 stops, 16 places · max 8 · €25</p>
+            <p class="bw-home-two-doors__door-facts">About 2.5 hours · 11 stops, 16 places · max 10 · €25</p>
             <div class="bw-home-two-doors__door-actions">
               <a class="bw-home-two-doors__btn bw-home-two-doors__btn--yellow" href="${BW_HOME_TWO_DOORS_BOOKING_URL}" data-bw-cta-id="book_live_tour" data-bw-cta-placement="hero-live">See dates and book</a>
               <a class="bw-home-two-doors__link bw-home-two-doors__link--light" href="#live-route" data-bw-cta-id="learn_live_route" data-bw-cta-placement="hero-live">Route &amp; meeting point</a>
             </div>
             <div class="bw-home-two-doors__door-meta">
               <span class="bw-home-two-doors__chip">About 2.5 hours · 11 stops, 16 places</span>
-              <span class="bw-home-two-doors__chip">Max 8 · €25</span>
+              <span class="bw-home-two-doors__chip">Max 10 · €25</span>
             </div>
           </article>
 
@@ -351,7 +351,7 @@ class BWHomeTwoDoorsElement extends HTMLElement {
               </div>
               <div class="bw-home-two-doors__compare-row">
                 <div>PRICE</div>
-                <div><b>€25 per person.</b><br>Paid when you book. No more than 8 people, and every date runs.</div>
+                <div><b>€25 per person.</b><br>Paid when you book. No more than 10 people, and a walk needs at least 2 guests.</div>
                 <div><b>€9.90 per walk.</b><br>Berlin Wall + Hidden Berlin + Medieval Berlin: €24.90 as a trio.</div>
               </div>
               <div class="bw-home-two-doors__compare-row">
@@ -368,7 +368,7 @@ class BWHomeTwoDoorsElement extends HTMLElement {
                 <dl>
                   <div><dt>When</dt><dd>12:30 start · about 2.5 hours</dd></div>
                   <div><dt>Where</dt><dd>Meet me at the World Clock</dd></div>
-                  <div><dt>Price</dt><dd>€25 per person · max 8 people</dd></div>
+                  <div><dt>Price</dt><dd>€25 per person · max 10 people</dd></div>
                 </dl>
                 <a href="${BW_HOME_TWO_DOORS_BOOKING_URL}" data-bw-cta-id="book_compare_mobile" data-bw-cta-placement="compare">See dates and book →</a>
               </article>
@@ -434,7 +434,7 @@ class BWHomeTwoDoorsElement extends HTMLElement {
                 <a class="bw-home-two-doors__btn bw-home-two-doors__btn--green" href="${BW_HOME_TWO_DOORS_BOOKING_URL}" data-bw-cta-id="book_route" data-bw-cta-placement="live-route">See dates and book</a>
                 <a class="bw-home-two-doors__link" href="${BW_HOME_TWO_DOORS_REVIEWS_URL}" data-bw-cta-id="reviews_route" data-bw-cta-placement="live-route">Read reviews</a>
               </div>
-              <p class="bw-home-two-doors__schedule">12:30 start at the World Clock, Alexanderplatz · max 8 people</p>
+              <p class="bw-home-two-doors__schedule">12:30 start at the World Clock, Alexanderplatz · max 10 people</p>
               <div class="bw-home-two-doors__dates" data-bw-live-dates aria-label="Next tour dates" hidden></div>
             </div>
           </div>

@@ -13712,7 +13712,7 @@
           <button class="bw-secondary" type="button" data-download-pdf disabled>Download PDF</button>
           <button class="bw-secondary" type="button" data-print-plan disabled>Print plan</button>
         </div>
-        <a class="bw-primary bw-plan-tour-book" data-plan-tour-book data-book-link data-book-surface="plan_actions" data-cta-kind="plan_actions" href="https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based?utm_source=trip_planner&utm_medium=widget&utm_campaign=tp_tour_bridge&utm_content=plan_actions" target="_top" hidden>Reserve the tour spot</a>
+        <a class="bw-primary bw-plan-tour-book" data-plan-tour-book data-book-link data-book-surface="plan_actions" data-cta-kind="plan_actions" href="https://www.walkofberlin.com/book-berlin-walking-tour/berlin-then-and-now?utm_source=trip_planner&utm_medium=widget&utm_campaign=tp_tour_bridge&utm_content=plan_actions" target="_top" hidden>Reserve the tour spot</a>
         <div class="bw-message" data-action-status aria-live="polite"></div>
       </div>
       <div data-after-itinerary-divider></div>
@@ -13726,7 +13726,7 @@
 </div>
 
 <script src="engine/trip-planner-route-logic-v1.js?v=20260721-phase1b"></script>
-<script src="engine/trip-planner-plain-copy-v1.js?v=20260721-phase1c"></script>
+<script src="engine/trip-planner-plain-copy-v1.js?v=20260929-then-and-now"></script>
 <script src="engine/trip-planner-runtime-v3-1.js"></script>
 <script src="engine/plan-artifact-v3.js?v=20260721-phase1b"></script>
 <script src="engine/plan-artifact-v3-pdf.js?v=20260721-readable-routes"></script>
@@ -13766,16 +13766,16 @@
   var LIVE_FORECAST_MAX_OFFSET_DAYS = 14;
   var OPEN_METEO_FORECAST_DAYS = 15;
   var WEATHER_TIMEOUT_MS = 6500;
-  var BOOKING_ROUTE_URL = 'https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based';
+  var BOOKING_ROUTE_URL = 'https://www.walkofberlin.com/book-berlin-walking-tour/berlin-then-and-now';
   var BOOKING_URL = plannerBookingUrl('tour_day_card');
-  var BOOKING_SHORT_URL = 'https://www.berlinwalk.com/book';
-  var BOOKING_SHORT_LABEL = 'berlinwalk.com/book';
+  var BOOKING_SHORT_URL = 'https://www.walkofberlin.com/book';
+  var BOOKING_SHORT_LABEL = 'walkofberlin.com/book';
   var TICKET_CALCULATOR_URL = 'https://www.berlinwalk.com/tools/transport-ticket-calculator';
   var WHATS_OPEN_URL = 'https://www.berlinwalk.com/tools/whats-open-in-berlin-today';
-  var TOUR_START_LABEL = '11:30';
-  var TOUR_END_LABEL = '13:30';
+  var TOUR_START_LABEL = '12:30';
+  var TOUR_END_LABEL = '15:00';
   var TOUR_TIME_LABEL = TOUR_START_LABEL + '-' + TOUR_END_LABEL;
-  var TOUR_DEFAULT_SLOT = { start: '11:30', end: '13:30' };
+  var TOUR_DEFAULT_SLOT = { start: '12:30', end: '15:00' };
   var TOUR_SUMMER_AFTERNOON_SLOT = { start: '15:30', end: '17:30' };
   var TOUR_LOCATION = 'World Clock, Alexanderplatz, Berlin';
   var PDF_ENGINE_URL = 'https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js';
@@ -15071,10 +15071,11 @@
       if (arrivalSlot) return arrivalSlot.timeLabel;
       var slot = tourSlotForPlan();
       if (slot && slot.insideTrip) return slot.dayLabel + ' at ' + slot.startLabel;
-      return '11:30-13:30';
+      return TOUR_TIME_LABEL;
     }
 
     if (firstDay && label.indexOf('afternoon') !== -1) {
+      if (arrivalDayTourEligible() && state.tourIntent !== 'booked') return '16:00-18:00';
       if (state.arrivalTime === 'morning') return '14:00-16:30';
       if (state.arrivalTime === 'lateMorning') return '14:00-16:30';
       if (state.arrivalTime === 'midday') return '15:00-17:00';
@@ -15104,7 +15105,7 @@
     if (label.indexOf('lunch') !== -1) {
       var hasTour = day && day.blocks && day.blocks.some(isTourBlock);
       if (hasTour) {
-        return '13:30-14:30';
+        return '15:00-16:00';
       }
       return '12:00-13:30';
     }
@@ -15127,7 +15128,7 @@
       var hasTourLunchBefore = day && day.blocks && day.blocks.some(isTourBlock) && day.blocks.slice(0, index).some(function (previousBlock) {
         return /lunch/i.test(String((previousBlock && previousBlock.time) || '') + ' ' + String((previousBlock && previousBlock.title) || ''));
       });
-      if (hasTourLunchBefore) return state.pace === 'packed' ? '14:30-17:00' : '14:30-16:30';
+      if (hasTourLunchBefore) return state.pace === 'packed' ? '16:00-18:30' : '16:00-18:00';
       if (state.pace === 'gentle' || state.groupType === 'family' || state.groupType === 'slow') return '14:00-16:30';
       if (state.pace === 'packed') return '13:00-17:00';
       return '13:30-16:30';
@@ -16001,7 +16002,7 @@
     var tourCopy = state.tourIntent === 'booked'
       ? 'You already booked the tour. Meet at the World Clock 10 minutes early.'
       : arrivalDayTourEligible()
-        ? 'Meet at the World Clock at ' + ((slot && slot.startLabel) || TOUR_START_LABEL) + '. The tour takes about two hours.'
+        ? 'Meet at the World Clock at ' + ((slot && slot.startLabel) || TOUR_START_LABEL) + '. The tour takes about 2.5 hours.'
         : slot && slot.insideTrip
           ? 'Take the BerlinWalk tour on ' + slot.dayLabel + ' at ' + slot.startLabel + '. Use Day 1 for check-in.'
           : 'There is no BerlinWalk tour during this trip. Check the live calendar for available dates.';
@@ -16028,7 +16029,7 @@
       return 'Take the train to your stay. Leave your bags. Then go to the first stop.';
     }
     if (isTourBlock(block)) {
-      return 'Meet at the World Clock 10 minutes early. The tour takes about two hours.';
+      return 'Meet at the World Clock 10 minutes early. The tour takes about 2.5 hours.';
     }
     return cleanPlannerText(rawCopy, '', 112)
       .replace(/\bour walking tour\b/ig, 'the BerlinWalk tour')
@@ -16054,7 +16055,7 @@
     var risks = riskTagsForDay(day);
     var risk = risks[0];
     var routeDetail = slot
-      ? 'Meet at the World Clock at ' + slot.timeLabel + '. Continue to the next nearby stop after the tour.'
+      ? 'Meet at the World Clock at ' + slot.startLabel + '. The tour ends at Hackescher Markt, so continue from there.'
       : 'Visit ' + routeCopy + ' in the order shown.';
     var weatherDetail = weather
       ? cleanPlannerText(weather.cue, 'Use the indoor backup if it rains.', 118)
@@ -17284,16 +17285,24 @@
     return state.arrivalPoint === 'hotel' && state.stayArea === 'mitte';
   }
 
+  // Berlin Then and Now calendar (Wix service 145cb27e): 12:30-15:00 on
+  // 2, 3, 7-11, 23-25 and 28-31 October, Wednesday to Sunday in November.
+  // No other dates are on sale, so the planner suggests none.
+  var THEN_AND_NOW_OCTOBER_DAYS = [2, 3, 7, 8, 9, 10, 11, 23, 24, 25, 28, 29, 30, 31];
+
   function isBerlinWalkTourDay(dateKey) {
-    if (dateKey >= '2026-11-01') return false;
-    if (dateKey.slice(0, 7) === '2026-10') return [1,2,3,7,8,9,10,11,21,22,23,24,25,28,29,30,31].indexOf(Number(dateKey.slice(8))) !== -1;
-    var weekday = dateFromKey(dateKey).getUTCDay();
-    return weekday >= 2 && weekday <= 6;
+    var month = String(dateKey || '').slice(0, 7);
+    if (month === '2026-10') return THEN_AND_NOW_OCTOBER_DAYS.indexOf(Number(dateKey.slice(8))) !== -1;
+    if (month === '2026-11') {
+      var weekday = dateFromKey(dateKey).getUTCDay();
+      return weekday === 0 || weekday >= 3;
+    }
+    return false;
   }
 
   function isSummerDoubleTourSeason(dateKey) {
-    var month = dateParts(dateKey).month;
-    return month >= 7 && month <= 9;
+    // One daily start at 12:30; there is no seasonal second slot any more.
+    return false;
   }
 
   function makeTourSlot(dateKey, slot) {
@@ -17381,6 +17390,7 @@
   function recommendedTourDay() {
     if (state.tourIntent === 'booked') return 'Already booked';
     var offset = firstTourOffsetForPlan();
+    if (offset < 0) return 'Check tour dates';
     var slot = tourSlotForOffset(offset) || makeTourSlot(addDays(state.arrivalDate, offset), TOUR_DEFAULT_SLOT);
     if (offset === 0) return 'Arrival day ' + slot.startLabel;
     if (offset > 0 && offset < state.tripLength) return tourDayLabelFromOffset(offset) + ' at ' + slot.startLabel;
@@ -17462,6 +17472,27 @@
       };
     }
     var offset = firstTourOffsetForPlan();
+    if (offset < 0) {
+      // No Berlin Then and Now date within a week of this trip: no calendar hold,
+      // no invented date, just a pointer to the booking page.
+      return {
+        booked: false,
+        none: true,
+        title: 'Tour anchor: check the tour dates',
+        dateKey: '',
+        dateLabel: 'No tour date near this trip yet',
+        dayLabel: 'Check dates',
+        offset: -1,
+        insideTrip: false,
+        startLabel: TOUR_START_LABEL,
+        endLabel: TOUR_END_LABEL,
+        timeLabel: TOUR_TIME_LABEL,
+        seasonal: false,
+        location: TOUR_LOCATION,
+        meetingUrl: meetingPointUrl(),
+        copy: 'No Berlin Then and Now date is on sale near these dates yet. Check the booking page before you travel.'
+      };
+    }
     var dateKey = addDays(state.arrivalDate, offset);
     var slot = tourSlotForOffset(offset) || makeTourSlot(dateKey, TOUR_DEFAULT_SLOT);
     var dayLabel = tourDayLabelFromOffset(offset);
@@ -17492,7 +17523,7 @@
     var date = compactCalendarDate(slot.dateKey);
     var startTime = String(slot.startLabel || TOUR_START_LABEL).replace(':', '') + '00';
     var endTime = String(slot.endLabel || TOUR_END_LABEL).replace(':', '') + '00';
-    var description = 'BerlinWalk free walking tour. Book your spot first: ' + BOOKING_SHORT_URL + '\\nMeeting point map: ' + slot.meetingUrl;
+    var description = 'Berlin Then and Now walking tour with BerlinWalk. Book your spot first: ' + BOOKING_ROUTE_URL + '\\nMeeting point map: ' + slot.meetingUrl;
     return [
       'BEGIN:VCALENDAR',
       'VERSION:2.0',
@@ -17506,10 +17537,10 @@
       'DTSTAMP:' + compactTimestamp(new Date()),
       'DTSTART;TZID=Europe/Berlin:' + date + 'T' + startTime,
       'DTEND;TZID=Europe/Berlin:' + date + 'T' + endTime,
-      'SUMMARY:' + escapeIcsText('BerlinWalk Free Walking Tour'),
+      'SUMMARY:' + escapeIcsText('Berlin Then and Now walking tour'),
       'LOCATION:' + escapeIcsText(slot.location),
       'DESCRIPTION:' + escapeIcsText(description),
-      'URL:' + BOOKING_SHORT_URL,
+      'URL:' + plannerBookingUrl('calendar_hold'),
       'END:VEVENT',
       'END:VCALENDAR'
     ].join('\r\n');
@@ -18893,6 +18924,14 @@
         kind: 'link',
         url: slot.meetingUrl,
         track: 'meeting'
+      } : slot.none ? {
+        label: 'Tour dates',
+        value: 'Check dates',
+        detail: slot.dateLabel,
+        action: 'See dates',
+        icon: 'calendar',
+        kind: 'link',
+        url: plannerBookingUrl('tour_dates')
       } : {
         label: 'Tour hold',
         value: slot.dayLabel + ' ' + slot.timeLabel,
@@ -19087,7 +19126,7 @@
         { label: 'Daily baseline', value: low ? 'EUR25-45/day' : (comfort ? 'EUR75+/day' : 'EUR45-75/day'), icon: 'coin' },
         { label: 'Transit', value: plan.ticket, icon: 'ticket' },
         { label: 'Paid anchors', value: paidAnchor, icon: comfort ? 'landmark' : 'check' },
-        { label: 'Cash/tips', value: state.tourIntent === 'booked' ? 'Tip cash ready' : 'Small notes ready', icon: 'coin' }
+        { label: 'Cash/tips', value: 'Small notes ready', icon: 'coin' }
       ]
     };
   }
@@ -20714,7 +20753,7 @@
       return { label: 'Save World Clock meeting point', href: meetingPointUrl(), target: '_blank', kind: 'meeting', surface: bookingSurface };
     }
     var weekday = slot && slot.dateKey ? formatWeekday(slot.dateKey) : 'next available';
-    var label = 'Reserve the ' + weekday + ' ' + (slot && slot.startLabel || TOUR_START_LABEL) + ' spot';
+    var label = slot && slot.none ? 'See the tour dates' : 'Reserve the ' + weekday + ' ' + (slot && slot.startLabel || TOUR_START_LABEL) + ' spot';
     var kind = state.tourIntent === 'maybe' ? 'tour_details' : 'tour_day';
     if (arrivalDayTourEligible()) {
       kind = 'arrival_day';
@@ -21299,7 +21338,7 @@
       if (arrivalSlot.startLabel === TOUR_DEFAULT_SLOT.start) {
         blocks.push({
           time: 'Lunch',
-          window: '13:30-14:30',
+          window: '15:00-16:00',
           title: 'Lunch near Hackescher Markt',
           copy: ''
         });
@@ -21549,7 +21588,7 @@
       time: 'BerlinWalk',
       window: slot ? slot.timeLabel : TOUR_TIME_LABEL,
       title: 'Recommended: BerlinWalk at ' + (slot ? slot.startLabel : TOUR_START_LABEL) + ' from the World Clock',
-      copy: 'Start with the 2-hour walk, then keep the rest of this day nearby.'
+      copy: 'The walk takes about 2.5 hours and ends at Hackescher Markt. Keep the rest of this day nearby.'
     };
     var focusBlock = {
       time: 'Afternoon',
@@ -22853,7 +22892,7 @@
       items.push({
         title: 'World Clock meeting point',
         detail: slot.dayLabel + ' at ' + slot.startLabel + '. Arrive 10–15 minutes early.',
-        url: plannerBookingUrl('artifact_before_you_go')
+        url: meetingPointUrl()
       });
     }
     (artifactDays || []).forEach(function (day) {
@@ -22874,7 +22913,7 @@
         url: artifactDay && artifactDay.route ? artifactDay.route.url : dayDirectionsUrl(day)
       };
     });
-    items.push({ title: 'BerlinWalk meeting point', detail: 'World Clock, Alexanderplatz.', url: plannerBookingUrl('artifact_carry_pack') });
+    items.push({ title: 'BerlinWalk meeting point', detail: 'World Clock, Alexanderplatz.', url: meetingPointUrl() });
     items.push({ title: 'Offline PDF backup', detail: 'The PDF works offline. Map links need mobile data.' });
     return items.slice(0, 10);
   }
@@ -23670,7 +23709,7 @@
     if (legacyWhatsappLink) legacyWhatsappLink.setAttribute('aria-label', 'Share this Berlin plan on WhatsApp');
     if (legacyPrintButton) legacyPrintButton.hidden = false;
     var slot = tourSlotForPlan(plan);
-    var tourLine = slot && !slot.booked
+    var tourLine = slot && !slot.booked && !slot.none
       ? ' Recommended BerlinWalk: ' + (slot.insideTrip ? slot.dayLabel + ' at ' + slot.startLabel : slot.dayLabel + ' at ' + slot.startLabel) + '.'
       : '';
     setText('[data-full-sub]', state.tripLength + (state.tripLength === 1 ? ' day' : ' days') + ' from ' + plan.displayDate + '. Built around daily areas, maps, and Berlin essentials.' + tourLine);
@@ -27216,8 +27255,8 @@
       } : {
         badge: 'BOOK',
         label: 'BerlinWalk tour',
-        title: 'Book the free walking tour',
-        copy: 'The tour makes the historic centre easier to read before the rest of the trip gets looser.',
+        title: 'Book Berlin Then and Now',
+        copy: 'An archive photo at every stop makes the historic centre easier to read before the rest of the trip gets looser.',
         url: BOOKING_SHORT_URL,
         linkLabel: BOOKING_SHORT_LABEL
       }, margin + cardW + gap, cardY, cardW, slot.booked ? 'light' : 'dark');
