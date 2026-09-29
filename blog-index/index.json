@@ -1,9 +1,9 @@
 {
-  "updatedAt": "2026-09-28T09:04:08.543Z",
+  "updatedAt": "2026-09-29T08:46:13.591Z",
   "source": "Wix Blog API",
   "popularSource": "Wix Blog metrics.views lifetime sort",
-  "totalPosts": 425,
-  "toolsTotal": 345,
+  "totalPosts": 426,
+  "toolsTotal": 346,
   "bookingUrl": "https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based",
   "navTopics": [
     {
@@ -1802,6 +1802,23 @@
   ],
   "latest": [
     {
+      "title": "Winter Swimming in Berlin: Where It Is Legal and How Cold the Lakes Get",
+      "slug": "winter-swimming-in-berlin",
+      "path": "/post/winter-swimming-in-berlin",
+      "url": "https://www.berlinwalk.com/post/winter-swimming-in-berlin",
+      "excerpt": "Berlin lidos close in September, but swimming stays legal all year in the right lakes. Here is where you can get in between October and March, how fast each lake cooled last winter by the city gauges, the groups and public ice swims, and how to start without getting hurt.",
+      "category": "Living in Berlin",
+      "categorySlug": "living-in-berlin",
+      "topic": "living-in-berlin",
+      "topicLabel": "Living in Berlin",
+      "readTime": "7 min read",
+      "publishedDate": "2026-09-29T08:44:19.424Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_5bcc80c146344dfcb3097fef8f07c476~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-muggelsee-ladder-winter-night.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_5bcc80c146344dfcb3097fef8f07c476~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-muggelsee-ladder-winter-night.jpg",
+      "alt": "The DLRG lifeguard tower at Friedrichshagen on a frozen Müggelsee on a starry winter night, with ice floes and a yellow swimming ladder in the foreground",
+      "relatedToolSlug": "berlin-winter-swim-lake-board"
+    },
+    {
       "title": "Berlin Zoo Annual Pass: Which Card Pays Off for Your Household",
       "slug": "berlin-zoo-annual-pass",
       "path": "/post/berlin-zoo-annual-pass",
@@ -1987,23 +2004,6 @@
       "thumb": "https://static.wixstatic.com/media/5a08a3_70327d193189425fa423d71a53909ffb~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/00-cover-klaistow-pumpkin-mound.jpg",
       "alt": "A huge football built from small white and green pumpkins on a mound of orange pumpkins at the Klaistow pumpkin show near Berlin",
       "relatedToolSlug": "berlin-pumpkin-weekend-map"
-    },
-    {
-      "title": "Cargo Bike in Berlin: How to Borrow One Free for the Weekend",
-      "slug": "cargo-bike-berlin",
-      "path": "/post/cargo-bike-berlin",
-      "url": "https://www.berlinwalk.com/post/cargo-bike-berlin",
-      "excerpt": "Berlin has more than 240 cargo bikes you can borrow for free, at bookshops, cafés and libraries in every district. The catch is the weekend: only 70 hand over on a Saturday and 12 on a Sunday. Here is how the fLotte works, what you need for the first booking, and how to get a bike for Saturday anyway.",
-      "category": "Living in Berlin",
-      "categorySlug": "living-in-berlin",
-      "topic": "living-in-berlin",
-      "topicLabel": "Living in Berlin",
-      "readTime": "7 min read",
-      "publishedDate": "2026-09-22T07:56:05.519Z",
-      "image": "https://static.wixstatic.com/media/5a08a3_0150793df04141eba2ea20bce0cebac0~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/02-flotte-anton-library.jpg",
-      "thumb": "https://static.wixstatic.com/media/5a08a3_0150793df04141eba2ea20bce0cebac0~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/02-flotte-anton-library.jpg",
-      "alt": "A red box bike with the fLotte Berlin sticker and the name Anton parked on cobbles outside a library in Lichtenberg",
-      "relatedToolSlug": "berlin-cargo-bike-map"
     }
   ]
 }

@@ -1,9 +1,26 @@
 {
-  "updatedAt": "2026-09-28T09:04:08.543Z",
+  "updatedAt": "2026-09-29T08:46:13.591Z",
   "source": "Wix Blog API",
-  "totalPosts": 425,
+  "totalPosts": 426,
   "bookingUrl": "https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based",
   "allPosts": [
+    {
+      "title": "Winter Swimming in Berlin: Where It Is Legal and How Cold the Lakes Get",
+      "slug": "winter-swimming-in-berlin",
+      "path": "/post/winter-swimming-in-berlin",
+      "url": "https://www.berlinwalk.com/post/winter-swimming-in-berlin",
+      "excerpt": "Berlin lidos close in September, but swimming stays legal all year in the right lakes. Here is where you can get in between October and March, how fast each lake cooled last winter by the city gauges, the groups and public ice swims, and how to start without getting hurt.",
+      "category": "Living in Berlin",
+      "categorySlug": "living-in-berlin",
+      "topic": "living-in-berlin",
+      "topicLabel": "Living in Berlin",
+      "readTime": "7 min read",
+      "publishedDate": "2026-09-29T08:44:19.424Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_5bcc80c146344dfcb3097fef8f07c476~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-muggelsee-ladder-winter-night.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_5bcc80c146344dfcb3097fef8f07c476~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-muggelsee-ladder-winter-night.jpg",
+      "alt": "The DLRG lifeguard tower at Friedrichshagen on a frozen Müggelsee on a starry winter night, with ice floes and a yellow swimming ladder in the foreground",
+      "relatedToolSlug": "berlin-winter-swim-lake-board"
+    },
     {
       "title": "Berlin Zoo Annual Pass: Which Card Pays Off for Your Household",
       "slug": "berlin-zoo-annual-pass",
