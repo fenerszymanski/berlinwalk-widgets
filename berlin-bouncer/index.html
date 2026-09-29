@@ -624,7 +624,7 @@
         <button class="restart-btn share-btn" id="share-result-btn" type="button" onclick="shareResult()">CHALLENGE A FRIEND</button>
         <button class="restart-btn" type="button" onclick="replayGame()">TRY AGAIN</button>
       </div>
-      <a class="result-next-step" id="result-next-step" href="https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based" onclick="trackResultTourClick()">My ~2h walking tour starts at Alexanderplatz and explores the historic centre of former East Berlin.</a>
+      <a class="result-next-step" id="result-next-step" href="https://www.walkofberlin.com/book-berlin-walking-tour/berlin-then-and-now" onclick="trackResultTourClick()">My walking tour starts at Alexanderplatz and shows you where Berlin's old city stood, with an archive photo at every stop.</a>
     </div>
     <div class="share-toast" id="share-toast" role="status" aria-live="polite"></div>
   </main>
@@ -1106,8 +1106,8 @@
     function trackResultTourClick() {
       sendBouncerEvent('bw_berlin_bouncer_tour_cta_click', {
         ctaName: 'historic_centre_tour',
-        targetPath: '/book-berlin-walking-tour/berlin-free-walking-tour-tip-based',
-        href: 'https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based'
+        targetPath: '/book-berlin-walking-tour/berlin-then-and-now',
+        href: 'https://www.walkofberlin.com/book-berlin-walking-tour/berlin-then-and-now'
       });
     }
 

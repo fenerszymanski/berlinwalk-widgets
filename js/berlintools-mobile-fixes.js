@@ -938,7 +938,7 @@
   style.textContent = css;
   document.head.appendChild(style);
 
-  var bookingUrl = 'https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based';
+  var bookingUrl = 'https://www.walkofberlin.com/book-berlin-walking-tour/berlin-then-and-now';
 
   function fixTourCtaLink() {
     var isSmall = window.matchMedia('(max-width: 380px)').matches;

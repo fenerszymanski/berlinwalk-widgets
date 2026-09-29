@@ -16,7 +16,7 @@
   var SHARE_CARD_URL = asset('js/bw-share-card.js');
   var TRACKING_ENDPOINT_PROD = 'https://berlinwalk-content-app.vercel.app/api/where-in-berlin-event';
   var TRACKING_ENDPOINT_LOCAL = 'http://127.0.0.1:5173/api/where-in-berlin-event';
-  var BOOKING_URL = 'https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based';
+  var BOOKING_URL = 'https://www.walkofberlin.com/book-berlin-walking-tour/berlin-then-and-now';
   var STORAGE_PREFIX = 'bw_where_in_berlin_';
   var BERLIN_TIMEZONE = 'Europe/Berlin';
 

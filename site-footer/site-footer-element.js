@@ -1,4 +1,4 @@
-const BW_SITE_FOOTER_BOOKING_URL = 'https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based';
+const BW_SITE_FOOTER_BOOKING_URL = 'https://www.walkofberlin.com/book-berlin-walking-tour/berlin-then-and-now';
 const BW_SITE_FOOTER_SCRIPT_URL = (document.currentScript && document.currentScript.src) || 'https://fenerszymanski.github.io/berlinwalk-widgets/site-footer/site-footer-element.js';
 const BW_SITE_FOOTER_LOGO_URL = new URL('../assets/berlinwalk-wordmark-yellow.png', BW_SITE_FOOTER_SCRIPT_URL).href;
 const BW_SITE_FOOTER_LINKS = {
@@ -443,7 +443,7 @@ class BWSiteFooterElement extends HTMLElement {
               <a class="bw-logo-link" href="${BW_SITE_FOOTER_LINKS.home}" aria-label="BerlinWalk home">
                 <img class="bw-logo-img" src="${BW_SITE_FOOTER_LOGO_URL}" alt="BerlinWalk" width="897" height="188" loading="lazy" decoding="async">
               </a>
-              <p>Free tip-based walking tours through Berlin's historic centre, built for travellers who want the city to make sense while they are standing inside it.</p>
+              <p>Berlin Then and Now, my walking tour through the Berlin that disappeared, with an archive photo at every stop. Plus audio walks for your own pace.</p>
               ${this._renderSocialLinks()}
               <div class="bw-route-chip" aria-label="BerlinWalk route summary">
                 <div class="bw-route-line" aria-hidden="true">
@@ -455,7 +455,7 @@ class BWSiteFooterElement extends HTMLElement {
                 </div>
                 <div class="bw-route-stops">
                   <span>Alexanderplatz</span>
-                  <span>12 stops</span>
+                  <span>11 stops</span>
                   <span>Hackescher Markt</span>
                 </div>
               </div>
@@ -501,8 +501,8 @@ class BWSiteFooterElement extends HTMLElement {
 
           <div class="bw-footer-note-grid" aria-label="Tour details">
             <div class="bw-footer-note"><strong>Start</strong>World Clock at Alexanderplatz. Look for the green umbrella.</div>
-            <div class="bw-footer-note"><strong>Duration</strong>About 2 hours. Ends at Hackescher Markt.</div>
-            <div class="bw-footer-note"><strong>Price</strong>Free to book, tip based at the end of the walk.</div>
+            <div class="bw-footer-note"><strong>Duration</strong>About 2.5 hours. Ends at Hackescher Markt.</div>
+            <div class="bw-footer-note"><strong>Price</strong>€25 per person, paid when you book.</div>
           </div>
 
           <div class="bw-footer-bottom">

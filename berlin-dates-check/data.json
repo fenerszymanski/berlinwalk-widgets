@@ -366,12 +366,12 @@
     "12": "photos/month-12.jpg"
   },
   "tour": {
-    "serviceId": "448872c2-4bd8-4f15-8030-594f5b2162c7",
-    "serviceName": "BerlinWalk Free Walking Tour",
+    "serviceId": "145cb27e-c5bd-456d-bfbd-a09d4d6f5f9d",
+    "serviceName": "Berlin Then and Now",
     "locationId": "b8364059-983c-40ac-8266-aa0f6a664d01",
     "locationName": "Alexanderplatz",
     "meetingPoint": "World Clock, Alexanderplatz",
-    "durationText": "about 2 hours",
+    "durationText": "about 2.5 hours",
     "stopsText": "11 stops covering 16 places",
     "availabilityEndpoint": "https://berlinwalk-content-app.vercel.app/api/booking-calendar-availability",
     "bookingFormBase": "https://www.berlinwalk.com/booking-form"

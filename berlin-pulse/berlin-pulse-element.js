@@ -7,7 +7,7 @@
   const DATA_URL = new URL('berlin-pulse/data/daily-pulses.json', BASE_URL).toString();
   const TRACKING_ENDPOINT_PROD = 'https://berlinwalk-content-app.vercel.app/api/tp-event';
   const TRACKING_ENDPOINT_LOCAL = 'http://127.0.0.1:5173/api/tp-event';
-  const BOOKING_URL = 'https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based?utm_source=game&utm_medium=berlin_pulse&utm_campaign=berlinwalk_games&utm_content=book_tour';
+  const BOOKING_URL = 'https://www.walkofberlin.com/book-berlin-walking-tour/berlin-then-and-now?utm_source=game&utm_medium=berlin_pulse&utm_campaign=berlinwalk_games&utm_content=book_tour';
   const STORAGE_PREFIX = 'bw_berlin_pulse_';
 
   const FALLBACK_DATA = {

@@ -88,7 +88,7 @@
     <div class="head">
       <p class="kick">BerlinWalk.com • Tourist Tips</p>
       <h1>Is the Hop-On Hop-Off Worth It for Your Trip?</h1>
-      <p>Set up your Berlin trip and see the honest cost of the sightseeing bus against the two things locals actually use: the €4 Bus 100/200 corridor and a tip-based walking tour. The numbers move as you change your plan.</p>
+      <p>Set up your Berlin trip and see the honest cost of the sightseeing bus against two better ways to see the centre: the €4 Bus 100/200 corridor and a walking tour on foot. The numbers move as you change your plan.</p>
     </div>
 
     <div class="body">
@@ -158,15 +158,15 @@
         </div>
         <div class="barrow" id="row-walk">
           <div class="bartop">
-            <div class="n">Free walking tour + walk <span id="tag-walk"></span><small id="sub-walk">Tip-based guide, then explore on foot</small></div>
-            <div class="money" id="money-walk">€0</div>
+            <div class="n">Walking tour with me + walk <span id="tag-walk"></span><small id="sub-walk">Berlin Then and Now, €25 a person, then explore on foot</small></div>
+            <div class="money" id="money-walk">€50</div>
           </div>
           <div class="track"><div class="fill walk" id="fill-walk"></div></div>
         </div>
       </div>
 
       <p class="foot" id="foot"></p>
-      <p class="disc">Typical 2026 figures. Hop-on hop-off is shown as a mid-range price across Berlin's main operators (roughly €30–€45 per adult for 24 hours); exact fares, child prices and multi-day passes vary by operator. Bus 100/200 is a normal BVG bus covered by any valid ticket, so its cost is just the €11.20 AB day ticket. The walking-tour line is tip-based, so what you pay is up to you.</p>
+      <p class="disc">Typical 2026 figures. Hop-on hop-off is shown as a mid-range price across Berlin's main operators (roughly €30–€45 per adult for 24 hours); exact fares, child prices and multi-day passes vary by operator. Bus 100/200 is a normal BVG bus covered by any valid ticket, so its cost is just the €11.20 AB day ticket. The walking-tour line is my Berlin Then and Now walk at €25 a person, booked once for the trip.</p>
     </div>
   </div>
 </div>
@@ -188,9 +188,9 @@
     var d = state.days, a = state.adults, c = state.children;
     var bus = a*HOHO_ADULT[d] + c*HOHO_CHILD[d];
     var hundred = d * (a*DAY_ADULT + c*DAY_CHILD);
-    // Free walking tour is fixed 0; if they still want to ride the long stretch, one day ticket helps,
-    // but the honest cheapest anchor is on-foot + tip, so keep the fixed cost at 0.
-    var walk = 0;
+    // One Berlin Then and Now walk (EUR 25 a person, children included) for the whole trip;
+    // the rest of the centre is on foot.
+    var walk = 25 * (a + c);
     return { bus:bus, hundred:hundred, walk:walk };
   }
 
@@ -218,7 +218,7 @@
     return {
       cls:'local',
       head:'You like walking, so the bus is the expensive way to see a walkable centre.',
-      why:'Almost every headline sight sits in a tight line from Alexanderplatz to the Brandenburg Gate, about 30 flat minutes on foot. Start with a tip-based walking tour to get the story and your bearings, use Bus 100/200 for the one longer stretch, and keep the sightseeing-bus money for food.' + (hasKids ? ' With kids, one AB day ticket per adult plus Bus 100 gives you the ride days without the pass price.' : ''),
+      why:'Almost every headline sight sits in a tight line from Alexanderplatz to the Brandenburg Gate, about 30 flat minutes on foot. Start with a walking tour to get the story and your bearings, use Bus 100/200 for the one longer stretch, and keep the sightseeing-bus money for food.' + (hasKids ? ' With kids, one AB day ticket per adult plus Bus 100 gives you the ride days without the pass price.' : ''),
       save: saveVsBus > 1 ? 'That is about ' + euro(saveVsBus) + ' less than the bus pass for your group' : '',
       pick:'walk'
     };
@@ -231,11 +231,11 @@
 
     document.getElementById('money-bus').textContent = euro(cost.bus);
     document.getElementById('money-hundred').textContent = euro(cost.hundred);
-    document.getElementById('money-walk').textContent = cost.walk === 0 ? '€0 + tip' : euro(cost.walk);
+    document.getElementById('money-walk').textContent = euro(cost.walk);
 
     document.getElementById('fill-bus').style.width = (cost.bus/max*100) + '%';
     document.getElementById('fill-hundred').style.width = Math.max(cost.hundred/max*100, 4) + '%';
-    document.getElementById('fill-walk').style.width = '4%';
+    document.getElementById('fill-walk').style.width = Math.max(cost.walk/max*100, 4) + '%';
 
     var passLabel = {1:'24-hour pass', 2:'48-hour pass', 3:'72-hour pass'};
     document.getElementById('sub-bus').textContent = passLabel[state.days] + ', whole group';

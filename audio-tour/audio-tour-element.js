@@ -23,7 +23,7 @@
     { id: 'outro',           t:  486, label: 'Book the tour' }
   ];
 
-  const BOOK_URL = 'https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based';
+  const BOOK_URL = 'https://www.walkofberlin.com/book-berlin-walking-tour/berlin-then-and-now';
   const DEFAULT_AUDIO_SRC = 'https://music.wixstatic.com/mp3/5a08a3_9eb16d58f6f14741aee87b164cdd6fec.mp3';
 
   function fmtTime(seconds) {
@@ -401,9 +401,9 @@
           <div class="at-cta">
             <div class="at-cta-text">
               <small>Liked what you heard?</small>
-              Walk the rest with me. Free and tip-based, starting at the World Clock. September: Tue-Sat at 11:30 and 15:30. October: selected Wed-Sun dates at 11:30. Check the booking calendar for your date.
+              Walk the rest with me on Berlin Then and Now: about 2.5 hours from the World Clock, max 8 people, €25. Check the booking calendar for your date.
             </div>
-            <a class="at-cta-btn" href="${BOOK_URL}" target="_top" rel="noopener" data-at-cta="book">Book Free Tour →</a>
+            <a class="at-cta-btn" href="${BOOK_URL}" target="_top" rel="noopener" data-at-cta="book">See dates and book →</a>
           </div>
 
           <div class="at-foot">Written and checked by Yusuf · AI-narrated · berlinwalk.com</div>

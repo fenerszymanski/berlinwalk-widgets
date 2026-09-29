@@ -4,7 +4,7 @@
     ? SCRIPT_URL.replace(/berlin-pulse-page\/berlin-pulse-page-element\.js(?:\?.*)?$/, '')
     : 'https://fenerszymanski.github.io/berlinwalk-widgets/';
   const BUILD = 'berlin-pulse-page-20260708a';
-  const BOOKING_URL = 'https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based?utm_source=game&utm_medium=berlin_pulse_page&utm_campaign=berlinwalk_games&utm_content=book_tour';
+  const BOOKING_URL = 'https://www.walkofberlin.com/book-berlin-walking-tour/berlin-then-and-now?utm_source=game&utm_medium=berlin_pulse_page&utm_campaign=berlinwalk_games&utm_content=book_tour';
   const GAMES_URL = 'https://www.berlinwalk.com/games?utm_source=game&utm_medium=berlin_pulse_page&utm_campaign=berlinwalk_games&utm_content=all_games';
 
   function asset(path) {

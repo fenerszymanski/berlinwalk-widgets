@@ -1,4 +1,4 @@
-const BW_QUIZ_BOOKING_URL = 'https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based';
+const BW_QUIZ_BOOKING_URL = 'https://www.walkofberlin.com/book-berlin-walking-tour/berlin-then-and-now';
 
 const BW_QUIZ_QUESTIONS = [
   { q: 'Fastest way from BER Airport to city center?',
@@ -17,10 +17,10 @@ const BW_QUIZ_QUESTIONS = [
     options: ['Brandenburg Gate', 'Checkpoint Charlie', 'Alexanderplatz', 'Potsdamer Platz'],
     correct: 2, tag: '📍 Stop 2',
     fact: 'The 368m TV Tower was built in the 1960s — and accidentally reflects a cross when the sun hits it.' },
-  { q: 'Tip etiquette on a free walking tour?',
-    options: ['Must tip at least €20', 'Fixed €5 fee', 'Tips not expected', "Tip what you feel it's worth"],
+  { q: 'Tip etiquette in a Berlin restaurant?',
+    options: ['Must tip at least 20%', 'Fixed €5 fee', 'Tips not expected', 'Round up or add 5-10%'],
     correct: 3, tag: '💶 Tipping',
-    fact: "Free tours are tip-based — no fixed price. Tip what the experience was worth. It's the guide's income!" },
+    fact: "Berlin tipping is modest: round up or add 5 to 10 percent, and say the total you want to pay when you hand over the money." },
   { q: 'What color is the Rotes Rathaus?',
     options: ['Red', 'Grey', 'White', 'Yellow'],
     correct: 0, tag: '📍 Stop 1',
@@ -64,7 +64,7 @@ const BW_QUIZ_QUESTIONS = [
 ];
 
 const BW_QUIZ_RESULT_TIERS = [
-  { min: 0,  max: 4,  emoji: '🗺️', title: 'Berlin Newbie',     desc: 'No worries — our free tour teaches you everything! 12 stops, 800 years, plus all the practical tips.' },
+  { min: 0,  max: 4,  emoji: '🗺️', title: 'Berlin Newbie',     desc: 'No worries, my walking tour fills the gaps: 11 stops, 16 places and an archive photo at every stop.' },
   { min: 5,  max: 8,  emoji: '🎒', title: 'Curious Explorer',  desc: 'You know the basics! Our tour goes deeper — hidden stories and local insider tips.' },
   { min: 9,  max: 12, emoji: '🏛️', title: 'History Buff',      desc: 'Impressive! But do you know why Marx & Engels face west? Our tour goes beyond any guidebook.' },
   { min: 13, max: 15, emoji: '👑', title: 'Berlin Expert',     desc: 'Practically a local! Even experts learn something new. Come prove it in person.' }
@@ -716,7 +716,7 @@ class BWBerlinQuizElement extends HTMLElement {
                 <span class="bw-quiz-tag-pill" aria-label="Food"><span aria-hidden="true">🍽️ </span>Food</span>
                 <span class="bw-quiz-tag-pill" aria-label="Money"><span aria-hidden="true">💳 </span>Money</span>
               </div>
-              <p class="bw-quiz-watermark">berlinwalk.com — Free Walking Tours</p>
+              <p class="bw-quiz-watermark">walkofberlin.com · Walking tour and audio walks</p>
             </div>
           </div>
 
@@ -748,7 +748,7 @@ class BWBerlinQuizElement extends HTMLElement {
               </div>
               <h2 data-bw-quiz-result-title></h2>
               <p class="bw-quiz-result-desc" data-bw-quiz-result-desc></p>
-              <a class="bw-quiz-btn-cta" href="${BW_QUIZ_BOOKING_URL}">BOOK YOUR FREE TOUR →</a>
+              <a class="bw-quiz-btn-cta" href="${BW_QUIZ_BOOKING_URL}">SEE DATES AND BOOK →</a>
               <br>
               <button class="bw-quiz-btn-restart" type="button" data-bw-quiz-restart>↺ Try Again</button>
               <p class="bw-quiz-watermark" style="margin-top:12px;">berlinwalk.com</p>

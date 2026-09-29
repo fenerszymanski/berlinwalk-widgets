@@ -13,7 +13,7 @@
 (function () {
   'use strict';
 
-  var BOOK_URL = 'https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based';
+  var BOOK_URL = 'https://www.walkofberlin.com/book-berlin-walking-tour/berlin-then-and-now';
   var GAMES_URL = 'https://www.berlinwalk.com/games';
   var BUILD = 'day-survival-v2-stable-frame-20260708a';
 

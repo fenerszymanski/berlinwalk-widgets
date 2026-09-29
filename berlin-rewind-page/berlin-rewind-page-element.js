@@ -248,7 +248,7 @@ class BwBerlinRewindPage extends HTMLElement {
         <aside class="bw-rewind-cta">
           <h2>Why this one matters</h2>
           <p>Berlin Rewind is the game that connects fastest back to the actual walking tour. A lot of these corners still sit in the route I guide through the centre. The fun part is scoring well. The better part is seeing how much older Berlin is still standing in plain sight.</p>
-          <a href="https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based?utm_source=games&utm_medium=rewind&utm_campaign=bw_rewind&utm_content=page_cta">Walk the real route</a>
+          <a href="https://www.walkofberlin.com/book-berlin-walking-tour/berlin-then-and-now?utm_source=games&utm_medium=rewind&utm_campaign=bw_rewind&utm_content=page_cta">Walk the real route</a>
         </aside>
 
         <div class="bw-rewind-more" id="bw-rewind-more"></div>

@@ -4,8 +4,8 @@
     "subtitle": "Long days, outdoor time, historical depth",
     "days": [
       { "dayNumber": 1, "theme": "East Berlin, the historical core", "schedule": [
-        { "time": "Morning", "activity": "Breakfast in Mitte. Walk to Alexanderplatz before 11:30." },
-        { "time": "11:30", "activity": "Free walking tour (Tue to Sat). Two hours. Alexanderplatz to Hackescher Markt via Rotes Rathaus, TV Tower, Marx-Engels-Forum, Museum Island.", "isCTA": true, "link": "https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based" },
+        { "time": "Morning", "activity": "Breakfast in Mitte. Walk to Alexanderplatz before 12:30." },
+        { "time": "12:30", "activity": "Berlin Then and Now, my walking tour. About 2.5 hours. Alexanderplatz to Hackescher Markt via Rotes Rathaus, TV Tower, Marx-Engels-Forum, Museum Island.", "isCTA": true, "link": "https://www.walkofberlin.com/book-berlin-walking-tour/berlin-then-and-now" },
         { "time": "Afternoon", "activity": "Lunch in Hackesche Hofe. Loop back to Museum Island for Neues Museum or Alte Nationalgalerie." },
         { "time": "Evening", "activity": "Dinner along the Spree. Sunset from a bridge. Light until 21:30+." }
       ]},
@@ -29,7 +29,7 @@
     "days": [
       { "dayNumber": 1, "theme": "Historic core before the heat builds", "schedule": [
         { "time": "Morning", "activity": "Start at Alexanderplatz while the city is still cooler. Coffee, water bottle, comfortable shoes." },
-        { "time": "11:30", "activity": "Free walking tour (Tue to Sat). Two hours from Alexanderplatz to Hackescher Markt through the historic center.", "isCTA": true, "link": "https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based" },
+        { "time": "12:30", "activity": "Berlin Then and Now, my walking tour. About 2.5 hours from Alexanderplatz to Hackescher Markt through the historic center.", "isCTA": true, "link": "https://www.walkofberlin.com/book-berlin-walking-tour/berlin-then-and-now" },
         { "time": "Afternoon", "activity": "Lunch near Hackescher Markt, then an indoor stop on Museum Island or a shaded break by the Spree." },
         { "time": "Evening", "activity": "Walk Unter den Linden toward Brandenburg Gate after the heat drops. Sunset stays late." }
       ]},
@@ -53,7 +53,7 @@
     "days": [
       { "dayNumber": 1, "theme": "Historic core before the city heats up", "schedule": [
         { "time": "Morning", "activity": "Start early at Alexanderplatz. Bring water and use the cooler part of the day for the historic center." },
-        { "time": "11:30", "activity": "Free walking tour (Tue to Sat). Two hours from Alexanderplatz to Hackescher Markt through the city's oldest layers.", "isCTA": true, "link": "https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based" },
+        { "time": "12:30", "activity": "Berlin Then and Now, my walking tour. About 2.5 hours from Alexanderplatz to Hackescher Markt through the city's oldest layers.", "isCTA": true, "link": "https://www.walkofberlin.com/book-berlin-walking-tour/berlin-then-and-now" },
         { "time": "Afternoon", "activity": "Lunch near Hackescher Markt, then choose an indoor stop on Museum Island or a shaded riverside break." },
         { "time": "Evening", "activity": "Spree walk, beer garden, open-air cinema, or a slow sunset loop through Mitte." }
       ]},
@@ -77,7 +77,7 @@
     "days": [
       { "dayNumber": 1, "theme": "Historic core in the best walking weather", "schedule": [
         { "time": "Morning", "activity": "Start at Alexanderplatz while the light is good and the temperature is comfortable." },
-        { "time": "11:30", "activity": "Free walking tour (Tue to Sat). Two hours from Alexanderplatz to Hackescher Markt through the city's oldest layers.", "isCTA": true, "link": "https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based" },
+        { "time": "12:30", "activity": "Berlin Then and Now, my walking tour. About 2.5 hours from Alexanderplatz to Hackescher Markt through the city's oldest layers.", "isCTA": true, "link": "https://www.walkofberlin.com/book-berlin-walking-tour/berlin-then-and-now" },
         { "time": "Afternoon", "activity": "Museum Island, Humboldt Forum, or a cafe break if September rain appears." },
         { "time": "Evening", "activity": "Spree walk, Gendarmenmarkt, or dinner before the evening cools down." }
       ]},
@@ -101,7 +101,7 @@
     "days": [
       { "dayNumber": 1, "theme": "Historic core in autumn light", "schedule": [
         { "time": "Morning", "activity": "Start at Alexanderplatz while you have the best of the daylight. Layers and a rain jacket." },
-        { "time": "11:30", "activity": "Free walking tour (Tue to Sat). Two hours from Alexanderplatz to Hackescher Markt through the historic center.", "isCTA": true, "link": "https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based" },
+        { "time": "12:30", "activity": "Berlin Then and Now, my walking tour. About 2.5 hours from Alexanderplatz to Hackescher Markt through the historic center.", "isCTA": true, "link": "https://www.walkofberlin.com/book-berlin-walking-tour/berlin-then-and-now" },
         { "time": "Afternoon", "activity": "Lunch near Hackescher Markt, then Museum Island or the Humboldt Forum as the light fades." },
         { "time": "Evening", "activity": "During the Festival of Lights (Oct 9-18), walk the illuminated centre after dark." }
       ]},
@@ -125,7 +125,7 @@
     "days": [
       { "dayNumber": 1, "theme": "Historic core, then warm indoors", "schedule": [
         { "time": "Late morning", "activity": "Start at Alexanderplatz to use the limited daylight. Warm coat, hat and gloves." },
-        { "time": "11:30", "activity": "Free walking tour (Tue to Sat). Two hours from Alexanderplatz to Hackescher Markt through the historic center.", "isCTA": true, "link": "https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based" },
+        { "time": "12:30", "activity": "Berlin Then and Now, my walking tour. About 2.5 hours from Alexanderplatz to Hackescher Markt through the historic center.", "isCTA": true, "link": "https://www.walkofberlin.com/book-berlin-walking-tour/berlin-then-and-now" },
         { "time": "Afternoon", "activity": "Warm lunch, then Museum Island or the Humboldt Forum as it gets dark early." },
         { "time": "Evening", "activity": "Dinner, a concert, or a warm bar. In late November, the first Christmas markets open." }
       ]},
@@ -149,7 +149,7 @@
     "days": [
       { "dayNumber": 1, "theme": "Historic core, then the markets light up", "schedule": [
         { "time": "Late morning", "activity": "Start at Alexanderplatz to use the short daylight. Warm coat and waterproof boots." },
-        { "time": "11:30", "activity": "Free walking tour (Tue to Sat). Two hours from Alexanderplatz to Hackescher Markt through the historic center.", "isCTA": true, "link": "https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based" },
+        { "time": "12:30", "activity": "Berlin Then and Now, my walking tour. About 2.5 hours from Alexanderplatz to Hackescher Markt through the historic center.", "isCTA": true, "link": "https://www.walkofberlin.com/book-berlin-walking-tour/berlin-then-and-now" },
         { "time": "Afternoon", "activity": "Warm lunch, then a museum as the light fades early." },
         { "time": "Evening", "activity": "The Gendarmenmarkt Christmas market or another lit market as it comes alive." }
       ]},
@@ -173,7 +173,7 @@
     "days": [
       { "dayNumber": 1, "theme": "Historic core, then deep indoors", "schedule": [
         { "time": "Late morning", "activity": "Start at Alexanderplatz to use the short daylight. Real winter layers, hat and gloves." },
-        { "time": "11:30", "activity": "Free walking tour (Tue to Sat). Two hours from Alexanderplatz to Hackescher Markt through the historic center.", "isCTA": true, "link": "https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based" },
+        { "time": "12:30", "activity": "Berlin Then and Now, my walking tour. About 2.5 hours from Alexanderplatz to Hackescher Markt through the historic center.", "isCTA": true, "link": "https://www.walkofberlin.com/book-berlin-walking-tour/berlin-then-and-now" },
         { "time": "Afternoon", "activity": "Warm lunch, then go deep on Museum Island as it gets dark early." },
         { "time": "Evening", "activity": "A long dinner or a coffee house. The light goes early, so lean into the evening." }
       ]},
@@ -197,7 +197,7 @@
     "days": [
       { "dayNumber": 1, "theme": "Historic core in late winter", "schedule": [
         { "time": "Morning", "activity": "Start at Alexanderplatz, especially on a brighter day. Warm coat, hat and gloves." },
-        { "time": "11:30", "activity": "Free walking tour (Tue to Sat). Two hours from Alexanderplatz to Hackescher Markt through the historic center.", "isCTA": true, "link": "https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based" },
+        { "time": "12:30", "activity": "Berlin Then and Now, my walking tour. About 2.5 hours from Alexanderplatz to Hackescher Markt through the historic center.", "isCTA": true, "link": "https://www.walkofberlin.com/book-berlin-walking-tour/berlin-then-and-now" },
         { "time": "Afternoon", "activity": "Warm lunch, then Museum Island or a gallery." },
         { "time": "Evening", "activity": "During the Berlinale (Feb 10-21), book a film, or enjoy the buzz around Potsdamer Platz." }
       ]},
@@ -221,7 +221,7 @@
     "days": [
       { "dayNumber": 1, "theme": "Historic core as spring begins", "schedule": [
         { "time": "Morning", "activity": "Start at Alexanderplatz. Layers and a rain jacket, since March weather swings." },
-        { "time": "11:30", "activity": "Free walking tour (Tue to Sat). Two hours from Alexanderplatz to Hackescher Markt through the historic center.", "isCTA": true, "link": "https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based" },
+        { "time": "12:30", "activity": "Berlin Then and Now, my walking tour. About 2.5 hours from Alexanderplatz to Hackescher Markt through the historic center.", "isCTA": true, "link": "https://www.walkofberlin.com/book-berlin-walking-tour/berlin-then-and-now" },
         { "time": "Afternoon", "activity": "Lunch near Hackescher Markt, then Museum Island or a cafe if it rains." },
         { "time": "Evening", "activity": "After the clock change (Mar 28), use the new long evenings for the Spree or a first terrace drink." }
       ]},
@@ -245,7 +245,7 @@
     "days": [
       { "dayNumber": 1, "theme": "Historic core in spring light", "schedule": [
         { "time": "Morning", "activity": "Start at Alexanderplatz. Pack for sun and rain, since April does both." },
-        { "time": "11:30", "activity": "Free walking tour (Tue to Sat). Two hours from Alexanderplatz to Hackescher Markt through the historic center.", "isCTA": true, "link": "https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based" },
+        { "time": "12:30", "activity": "Berlin Then and Now, my walking tour. About 2.5 hours from Alexanderplatz to Hackescher Markt through the historic center.", "isCTA": true, "link": "https://www.walkofberlin.com/book-berlin-walking-tour/berlin-then-and-now" },
         { "time": "Afternoon", "activity": "Lunch near Hackescher Markt, then Museum Island or a covered stop if it rains." },
         { "time": "Evening", "activity": "Use the long light for the Spree, a canal in Kreuzberg, or a terrace dinner." }
       ]},
@@ -269,7 +269,7 @@
     "days": [
       { "dayNumber": 1, "theme": "Historic core in fine spring weather", "schedule": [
         { "time": "Morning", "activity": "Start at Alexanderplatz. Layers for warm days and cool evenings, plus a water bottle." },
-        { "time": "11:30", "activity": "Free walking tour (Tue to Sat). Two hours from Alexanderplatz to Hackescher Markt through the historic center.", "isCTA": true, "link": "https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based" },
+        { "time": "12:30", "activity": "Berlin Then and Now, my walking tour. About 2.5 hours from Alexanderplatz to Hackescher Markt through the historic center.", "isCTA": true, "link": "https://www.walkofberlin.com/book-berlin-walking-tour/berlin-then-and-now" },
         { "time": "Afternoon", "activity": "Lunch near Hackescher Markt, then Museum Island or a riverside walk." },
         { "time": "Evening", "activity": "Use the long light for a beer garden, the Spree, or a terrace dinner." }
       ]},

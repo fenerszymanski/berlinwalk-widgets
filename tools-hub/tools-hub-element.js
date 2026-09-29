@@ -914,9 +914,9 @@ class BWToolsHubElement extends HTMLElement {
         </main>
 
         <div class="bw-hub-footer">
-          <h2>Want a real local with you?</h2>
-          <p>The 2-hour walking tour covers Berlin's historic center and East Berlin stories. Tip-based, no fixed price.</p>
-          <a href="https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based" class="bw-btn-primary">Reserve your spot</a>
+          <h2>Walk the Berlin that disappeared, with me</h2>
+          <p>Berlin Then and Now: about 2.5 hours, 11 stops, 16 places, max 8 people, €25. An archive photo at every stop.</p>
+          <a href="https://www.walkofberlin.com/book-berlin-walking-tour/berlin-then-and-now" class="bw-btn-primary">See dates and book</a>
         </div>
       </section>
     `;

@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>What Does a Tip-Based Walking Tour Actually Cost? | BerlinWalk</title>
+  <title>What Does the Walking Tour Cost? | BerlinWalk</title>
   <link rel="stylesheet" href="../css/brand.css">
   <script defer src="../js/brand.js"></script>
 </head>
@@ -55,23 +55,21 @@
 
   <div class="tv-card">
     <div class="tv-head">
-      <h2>What does a tip-based walking tour actually cost?</h2>
-      <p>The walk is tip-based and nobody announces a figure, which is exactly what makes people uneasy. Here are the real numbers, and what the same afternoon costs the paid way.</p>
+      <h2>What does the walking tour cost for your group?</h2>
+      <p>Berlin Then and Now has one price: €25 per person, paid when you book. Set your group size and see the total next to what the same afternoon costs on a sightseeing bus or on your own.</p>
     </div>
 
     <div class="tv-body">
       <p class="tv-label">How many of you?</p>
       <div class="tv-row" id="tv-people" role="group" aria-label="Group size"></div>
 
-      <p class="tv-label">If the walk was worth it, what would you give per person?</p>
-      <div class="tv-row" id="tv-level" role="group" aria-label="Tip level"></div>
 
       <div class="tv-total">
         <div class="tv-big" id="tv-big"></div>
         <div class="tv-cap" id="tv-cap"></div>
       </div>
 
-      <p class="tv-label">The same afternoon, paid</p>
+      <p class="tv-label">The same afternoon, other ways</p>
       <div class="tv-compare" id="tv-compare"></div>
 
       <p class="tv-note" id="tv-note"></p>
@@ -82,19 +80,15 @@
 
   <script>
   (function(){
-    // Tip bands are the practical guidance from the published BerlinWalk tipping guide.
+    // Berlin Then and Now: EUR 25 per person, paid at booking, max 8 people, about
+    // 2.5 hours, 11 stops covering 16 places, World Clock to Hackescher Markt.
+    // Private walks: EUR 249 for up to 6 people, EUR 299 for up to 10.
     // Comparison prices come from the published hop-on hop-off guide: roughly EUR 30 to
     // 45 per adult for a 24 hour sightseeing bus pass, against a BVG day ticket at
-    // EUR 11.20. The walk itself is about 2 hours, 11 stops covering 16 places,
-    // Hackescher Markt.
-    var LEVELS=[
-      {k:'modest', v:5,  l:'EUR 5',      d:'a modest thank-you'},
-      {k:'common', v:10, l:'EUR 10',     d:'a solid, common tip'},
-      {k:'generous', v:17, l:'EUR 15 to 20', d:'generous, for a guide who made the city click'},
-      {k:'nothing', v:0, l:'Nothing',    d:'you can walk away, and some do'}
-    ];
-    var SIZES=[{v:1,l:'Just me'},{v:2,l:'Two'},{v:3,l:'Three'},{v:4,l:'Four'},{v:5,l:'Five or more'}];
-    var state={people:2, level:'common'};
+    // EUR 11.20.
+    var PRICE=25;
+    var SIZES=[{v:1,l:'Just me'},{v:2,l:'Two'},{v:3,l:'Three'},{v:4,l:'Four'},{v:5,l:'Five'},{v:6,l:'Six'}];
+    var state={people:2};
 
     function el(id){ return document.getElementById(id); }
     function money(n){
@@ -104,26 +98,14 @@
     }
 
     function render(){
-      var lv=LEVELS.filter(function(x){return x.k===state.level;})[0];
-      var total=lv.v*state.people;
-      var big=el('tv-big'), cap=el('tv-cap');
-
-      if(lv.k==='nothing'){
-        big.textContent='EUR 0';
-        cap.textContent='No ticket, no obligation. That is genuinely how the model works.';
-      } else if(lv.k==='generous'){
-        big.textContent='EUR '+(15*state.people)+' to '+(20*state.people);
-        cap.textContent=state.people===1 ? 'Generous for one person, about 2 hours of guiding.'
-          : 'For '+state.people+' people, thinking per person then adjusting for budget.';
-      } else {
-        big.textContent=money(total);
-        cap.textContent=state.people===1 ? lv.d.charAt(0).toUpperCase()+lv.d.slice(1)+', for about 2 hours.'
-          : lv.l+' each for '+state.people+', which is how families and groups usually think about it.';
-      }
+      var total=PRICE*state.people;
+      el('tv-big').textContent=money(total);
+      el('tv-cap').textContent=state.people===1 ? 'One place on Berlin Then and Now, about 2.5 hours with me.'
+        : state.people+' places at EUR 25 each, paid when you book.';
 
       var busLow=30*state.people, busHigh=45*state.people, bvg=11.20*state.people;
       var rows=[
-        {w:'This walk, tipped at your level', c: lv.k==='generous' ? 'EUR '+(15*state.people)+' to '+(20*state.people) : money(total), you:true},
+        {w:'Berlin Then and Now with me', c:money(total), you:true},
         {w:'Hop-on hop-off bus, 24 hour pass', c:'EUR '+busLow+' to '+busHigh},
         {w:'BVG day ticket, and walk it yourself', c:money(bvg)},
         {w:'Bus 100 or 200 on that day ticket', c:'included'}
@@ -136,9 +118,9 @@
         d.appendChild(w); d.appendChild(c); box.appendChild(d);
       });
 
-      el('tv-note').innerHTML = lv.k==='nothing'
-        ? '<strong>Nobody will stop you, and nothing is announced to the group.</strong> The honest version is that the guide is paid only by what the group decides, so a walk everyone enjoyed and nobody paid for is a walk that does not happen again. Tip what it was worth to you, including nothing if it was not.'
-        : '<strong>The sightseeing bus stops running around 18:00</strong> and thins out in winter, so a 24 hour pass is really a daytime pass. The walk is about 2 hours on foot with 11 stops, from the World Clock at Alexanderplatz to Hackescher Markt. Cash is easiest at the end, though card works.';
+      el('tv-note').innerHTML = state.people>=5
+        ? '<strong>With five or six of you, a private walk can make sense.</strong> I run the same route just for your group: EUR 249 for up to 6 people or EUR 299 for up to 10. The public walk stays at no more than 8 people.'
+        : '<strong>The sightseeing bus stops running around 18:00</strong> and thins out in winter, so a 24 hour pass is really a daytime pass. The walk is about 2.5 hours on foot with 11 stops, from the World Clock at Alexanderplatz to Hackescher Markt, and never more than 8 people.';
     }
 
     function chips(id, items, key, valueOf){
@@ -158,10 +140,9 @@
       });
     }
     chips('tv-people', SIZES, 'people', function(it){return it.v;});
-    chips('tv-level', LEVELS, 'level', function(it){return it.k;});
 
-    el('tv-foot').innerHTML='There is no set figure and nothing is announced on the walk. '+
-      '<a href="https://www.berlinwalk.com/post/tipping-in-berlin" target="_blank" rel="noopener">How tipping works across Berlin ›</a>';
+    el('tv-foot').innerHTML='Cancel up to 24 hours before the start for a full refund. '+
+      '<a href="https://www.walkofberlin.com/book-berlin-walking-tour/berlin-then-and-now" target="_top">See dates and book ›</a>';
 
     render();
   })();

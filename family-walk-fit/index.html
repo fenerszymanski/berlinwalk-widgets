@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Will the 2-Hour Walk Work With Your Kids? | BerlinWalk</title>
+  <title>Will the Walking Tour Work With Your Kids? | BerlinWalk</title>
   <link rel="stylesheet" href="../css/brand.css">
   <script defer src="../js/brand.js"></script>
 </head>
@@ -53,8 +53,8 @@
 
   <div class="ff-card">
     <div class="ff-head">
-      <h2>Will the two-hour walk work with your kids?</h2>
-      <p>It is two hours outdoors on mostly flat ground, eleven stops, no museum interiors. That suits some ages and not others. Tell me who is coming and I will be honest about it.</p>
+      <h2>Will my walking tour work with your kids?</h2>
+      <p>It is about two and a half hours outdoors on mostly flat ground, eleven stops, no museum interiors. That suits some ages and not others. Tell me who is coming and I will be honest about it.</p>
     </div>
 
     <div class="ff-body">
@@ -81,7 +81,7 @@
 
   <script>
   (function(){
-    // Tour facts from the published BerlinWalk guides: about 2 hours, roughly 3 km,
+    // Tour facts for Berlin Then and Now: about 2.5 hours from 12:30, roughly 3 km,
     // 11 stops covering 16 places, mostly flat, entirely outdoors, no museum interiors,
     // Hackescher Markt. Family guidance from the Berlin with kids guide: plan at child
     // speed, and under 6 travel free on public transport with 6 to 14 at reduced fare.
@@ -105,15 +105,15 @@
 
       if(age.k==='toddler'){
         badge.textContent='Probably not'; badge.className='ff-badge warn';
-        verdict.textContent='Two hours outdoors is a lot to ask of a two to four year old.';
-        why.textContent='This is the age the walk suits least. It is two hours with eleven stops where the interesting part is a story rather than something to climb on, and a child that age will be done long before the end. I would rather tell you that now than have you leave halfway.';
+        verdict.textContent='Two and a half hours outdoors is a lot to ask of a two to four year old.';
+        why.textContent='This is the age the walk suits least. It is two and a half hours with eleven stops where the interesting part is a story rather than something to climb on, and a child that age will be done long before the end. I would rather tell you that now than have you leave halfway.';
         add('If you still want the history, one parent walks and the other takes the children somewhere with space to run.');
         add('Plan at child speed instead: one main attraction, one food stop, one movement break, one optional extra.');
         add('The Natural History Museum works far better at this age than any walking tour.');
       } else if(age.k==='young'){
         badge.textContent='Doable with planning'; badge.className='ff-badge';
         verdict.textContent='Five to seven can manage it, if the day is built around it.';
-        why.textContent='Two hours, roughly 3 km, mostly flat, and entirely outdoors. Children this age usually cope with the walking and lose interest in the talking, so the trick is giving them something to look for rather than expecting them to listen.';
+        why.textContent='About 2.5 hours, roughly 3 km, mostly flat, and entirely outdoors. Children this age usually cope with the walking and lose interest in the talking, so the trick is giving them something to look for rather than expecting them to listen.';
         add('Come rested. Do not stack the walk on top of a museum morning.');
         add('Bring water and a snack. There is nowhere to sit for long stretches and we do not go indoors.');
         add('Give them a job: spot the Ampelmann, count the cobblestone line where it crosses the route.');
@@ -129,8 +129,8 @@
           : 'Eight to twelve is the age this walk lands best.';
         why.textContent= age.k==='teen'
           ? 'The Cold War material is the part that hooks them. The route runs through the former East, and standing where the Wall crossed the street does more than any classroom did.'
-          : 'Old enough to walk two hours comfortably and old enough for the stories to stick. This is the age group I see enjoying it most.';
-        add('Two hours, about 3 km, mostly flat, entirely outdoors.');
+          : 'Old enough to walk two and a half hours comfortably and old enough for the stories to stick. This is the age group I see enjoying it most.';
+        add('About 2.5 hours, about 3 km, mostly flat, entirely outdoors.');
         add('We walk the edges of Museum Island rather than going into the galleries, so nobody is dragged around exhibits.');
       }
 
@@ -138,12 +138,12 @@
         add('With a pushchair: the route is flat and manageable, but there are cobbles in places and the group moves off the moment a stop ends.');
       }
       if(state.nap==='morning'){
-        add('Late morning nap: a walk that starts before it will collide with it. Pick a later start or accept the child sleeps through part of the route.');
+        add('Late morning nap: the walk starts at 12:30, so let the nap happen first and arrive fed and rested.');
       } else if(state.nap==='afternoon'){
-        add('Early afternoon dip: a late morning start finishes before the worst of it, which is the better side of the problem to be on.');
+        add('Early afternoon dip: the walk runs from 12:30 to about 15:00, right through it. Bring a pushchair the child can sleep in, or pick a day when the nap can move.');
       }
 
-      note.innerHTML='<strong>The honest limit:</strong> this is a two hour outdoor walk with no indoor breaks and no fixed toilet stops built in, so plan those before you start. On public transport, children under 6 travel free and 6 to 14 pay reduced fare.';
+      note.innerHTML='<strong>The honest limit:</strong> this is a two and a half hour outdoor walk with no indoor breaks and no fixed toilet stops built in, so plan those before you start. On public transport, children under 6 travel free and 6 to 14 pay reduced fare.';
     }
 
     function chips(id, items, key){

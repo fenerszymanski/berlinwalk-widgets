@@ -20,7 +20,7 @@
     ? new URL('./', SCRIPT_URL).toString()
     : 'https://fenerszymanski.github.io/berlinwalk-widgets/berlin-day-survival-v2/';
 
-  var BOOK_URL = 'https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based?utm_source=day_survival&utm_medium=game_landing&utm_campaign=berlinwalk_games&utm_content=book_cta';
+  var BOOK_URL = 'https://www.walkofberlin.com/book-berlin-walking-tour/berlin-then-and-now?utm_source=day_survival&utm_medium=game_landing&utm_campaign=berlinwalk_games&utm_content=book_cta';
   var GAMES_URL = 'https://www.berlinwalk.com/games?utm_source=day_survival&utm_medium=game_landing&utm_campaign=berlinwalk_games&utm_content=more_games';
   var FINAL_URL = 'https://www.berlinwalk.com/games/berlin-day-survival';
   var SEO = {
@@ -172,7 +172,7 @@
               '<p class="bw-dslp-note">Berlin can feel cheap until the tiny decisions stack up: water at the wrong place, lunch on the square, one tired cafe stop too many. I built this as a quick budget instinct test before you try the real city.</p>',
               '<div class="bw-dslp-actions">',
                 '<a class="bw-dslp-btn primary" href="#bw-day-survival-game">Play now</a>',
-                '<a class="bw-dslp-btn secondary" href="' + BOOK_URL + '">Book the free walk</a>',
+                '<a class="bw-dslp-btn secondary" href="' + BOOK_URL + '">Book the walk</a>',
               '</div>',
               '<div class="bw-dslp-facts" aria-label="Game facts">',
                 '<div class="bw-dslp-fact"><b>6</b><span>Berlin decisions</span></div>',

@@ -350,8 +350,8 @@ class BwBerlinSmileChallengePage extends HTMLElement {
 
         <aside class="bw-smile-tour-cta">
           <h2>If you survive the social weather...</h2>
-          <p>Come walk the city with me. I run a tip-based Berlin walking tour through the places where the real city starts to make sense.</p>
-          <a href="https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based">Book the walking tour</a>
+          <p>Come walk the city with me. I run a Berlin walking tour through the places where the real city starts to make sense.</p>
+          <a href="https://www.walkofberlin.com/book-berlin-walking-tour/berlin-then-and-now">Book the walking tour</a>
         </aside>
 
         <section class="bw-smile-games-preview" data-bw-games-preview aria-label="More BerlinWalk games"></section>

@@ -4,7 +4,7 @@
     ? new URL('../', SCRIPT_URL).toString()
     : 'https://fenerszymanski.github.io/berlinwalk-widgets/';
   const GAME_PATH = 'berlin-battle/';
-  const BOOKING_URL = 'https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based';
+  const BOOKING_URL = 'https://www.walkofberlin.com/book-berlin-walking-tour/berlin-then-and-now';
   const ASSET_BUILD = 'battle-result-mobile-polish-20260707a';
   const GAMES_PREVIEW_BUILD = 'games-preview-rail-hero-preview-20260708a';
   const NATIVE_GAME_BUILD = 'native-games-20260707a';
@@ -150,7 +150,7 @@
 
               <div class="bw-battle-tour-cta">
                 <h3>Want the real city version?</h3>
-                <p>After your winner, come walk the streets behind the choices. Join my tip-based Berlin walking tour and turn the game into places you can stand in.</p>
+                <p>After your winner, come walk the streets behind the choices. Join my Berlin walking tour and turn the game into places you can stand in.</p>
                 <a href="${BOOKING_URL}">Book the Walking Tour</a>
               </div>
             </div>

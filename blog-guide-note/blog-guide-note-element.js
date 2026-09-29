@@ -5,7 +5,7 @@ const BW_BLOG_GUIDE_NOTE_BASE_URL = (() => {
 
 const BW_BLOG_GUIDE_NOTE_IMAGE_URL = new URL('./yusuf-tour-note.jpg', BW_BLOG_GUIDE_NOTE_BASE_URL).href;
 const BW_BLOG_GUIDE_NOTE_GUIDE_URL = 'https://www.berlinwalk.com/the-guide';
-const BW_BLOG_GUIDE_NOTE_BOOKING_URL = 'https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based';
+const BW_BLOG_GUIDE_NOTE_BOOKING_URL = 'https://www.walkofberlin.com/book-berlin-walking-tour/berlin-then-and-now';
 const BW_BLOG_GUIDE_NOTE_TOOLS_URL = 'https://www.berlinwalk.com/berlin-tools';
 
 class BWBlogGuideNoteElement extends HTMLElement {

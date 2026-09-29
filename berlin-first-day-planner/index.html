@@ -1170,7 +1170,7 @@
           <p class="bw-alert" data-alert></p>
 
           <div class="bw-actions">
-            <a class="bw-primary" data-book-link href="https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based?utm_source=berlinwalk&utm_medium=widget&utm_campaign=berlin_first_day_planner&utm_content=book_free_spot" target="_top" rel="noopener">Book your free spot</a>
+            <a class="bw-primary" data-book-link href="https://www.walkofberlin.com/book-berlin-walking-tour/berlin-then-and-now?utm_source=berlinwalk&utm_medium=widget&utm_campaign=berlin_first_day_planner&utm_content=book_free_spot" target="_top" rel="noopener">Book your free spot</a>
             <button class="bw-secondary" type="button" data-download-pdf>Download PDF</button>
             <button class="bw-secondary" type="button" data-print-plan>Print plan</button>
             <div class="bw-action-status" data-action-status aria-live="polite"></div>
@@ -1225,7 +1225,7 @@
   var COORDS = { latitude: 52.521918, longitude: 13.413215 };
   var TIMEZONE = 'Europe/Berlin';
   var FORECAST_MAX_DAYS = 15;
-  var BOOKING_URL = 'https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based?utm_source=berlinwalk&utm_medium=widget&utm_campaign=berlin_first_day_planner&utm_content=book_free_spot';
+  var BOOKING_URL = 'https://www.walkofberlin.com/book-berlin-walking-tour/berlin-then-and-now?utm_source=berlinwalk&utm_medium=widget&utm_campaign=berlin_first_day_planner&utm_content=book_free_spot';
   var BOOKING_SHORT_URL = 'https://www.berlinwalk.com/book';
   var BOOKING_SHORT_LABEL = 'berlinwalk.com/book';
   var LEAD_API_URL = 'https://www.berlinwalk.com/_functions/firstDayPlannerLead';
@@ -1428,9 +1428,9 @@
   }
 
   function tourFit() {
-    if (state.arrival === 'morning') return 'Arrival day 11:30';
-    if (state.arrival === 'midday') return 'Next morning';
-    return 'Next morning 11:30';
+    if (state.arrival === 'morning') return 'Arrival day 12:30';
+    if (state.arrival === 'midday') return 'Next day 12:30';
+    return 'Next day 12:30';
   }
 
   function ticketNudge() {
@@ -1487,22 +1487,22 @@
   function tourStep() {
     if (state.arrival === 'morning') {
       return {
-        time: '11:30',
-        title: 'Join the BerlinWalk free tour',
-        copy: 'Meet at the World Clock and use the 2 hours walk as your first city framework: medieval Berlin, GDR layers, Museum Island, and Hackescher Markt.'
+        time: '12:30',
+        title: 'Join Berlin Then and Now',
+        copy: 'Meet at the World Clock and use the 2.5-hour walk as your first city framework: medieval Berlin, GDR layers, Museum Island, and Hackescher Markt.'
       };
     }
     if (state.arrival === 'midday') {
       return {
         time: 'Next',
-        title: 'If you missed 11:30, book tomorrow',
+        title: 'If you missed 12:30, book tomorrow',
         copy: 'Use today as a soft orientation day, then take the BerlinWalk tour tomorrow morning before the city gets fragmented by random stops.'
       };
     }
     return {
       time: 'Tomorrow',
       title: 'Make the tour your first full morning',
-      copy: 'Do the practical arrival work tonight. Tomorrow at 11:30, start with a guide at the World Clock instead of guessing your way through Mitte.'
+      copy: 'Do the practical arrival work tonight. Tomorrow at 12:30, start with a guide at the World Clock instead of guessing your way through Mitte.'
     };
   }
 
@@ -1583,7 +1583,7 @@
 
     var summary;
     if (state.arrival === 'morning') {
-      summary = 'This is the cleanest first-day setup: get central, meet at the World Clock, then let the 2 hours walk give the city a structure before you improvise.';
+      summary = 'This is the cleanest first-day setup: get central, meet at the World Clock, then let the 2.5-hour walk give the city a structure before you improvise.';
     } else if (state.arrival === 'evening') {
       summary = 'Do not force a full sightseeing day out of an evening arrival. Handle transport, food, and tomorrow morning so Berlin starts calmly.';
     } else {
@@ -1905,7 +1905,7 @@
 
     if (temp !== null && temp <= 3) pieces.push('Add a warm coat, hat, and gloves; the city center is exposed.');
     else if (temp !== null && temp <= 9) pieces.push('Add a warm layer under your jacket.');
-    else if (temp !== null && temp <= 16) pieces.push('A jacket or sweater is sensible if you will be outside for about 2 hours.');
+    else if (temp !== null && temp <= 16) pieces.push('A jacket or sweater is sensible if you will be outside for about 2.5 hours.');
     else if (temp !== null && temp >= 25) pieces.push('Wear light layers and bring water.');
 
     if (wind >= 45) pieces.push('Use a windproof layer; umbrellas can be awkward on open squares.');
@@ -2266,7 +2266,7 @@
         rows: [
           { label: 'Best first walk', copy: 'World Clock, TV Tower, Marienkirche, Nikolaiviertel, and the Museum Island edge make a compact orientation loop.' },
           { label: 'If you are tired', copy: 'Use one-stop U-Bahn or S-Bahn hops only when they genuinely save your legs.' },
-          { label: 'For BerlinWalk', copy: 'Stay close to S+U Alexanderplatz and the World Clock so the 11:30 tour is easy to join.' }
+          { label: 'For BerlinWalk', copy: 'Stay close to S+U Alexanderplatz and the World Clock so the 12:30 tour is easy to join.' }
         ],
         luggage: luggage ? 'If you have luggage, store it before the loop. Alexanderplatz is practical, but rolling bags are annoying on cobbles and crossings.' : 'This is the easiest start point: walk first, ride later.',
         note: 'Do not over-plan transport here. The value is that central Berlin is already under your feet.'
@@ -2582,8 +2582,8 @@
         var lines = split(BOOKING_SHORT_LABEL, contentW - 28, 11, 'bold');
         ensure(88);
         rounded(margin, y, contentW, 86, [246, 250, 239], line);
-        text('Book your free spot', margin + 14, y + 24, 12, 'bold', green);
-        text('Daily 11:30 from the World Clock at Alexanderplatz. The walk is about 2 hours and tip-based.', margin + 14, y + 42, 9.2, 'normal', [55, 68, 55]);
+        text('Book your spot', margin + 14, y + 24, 12, 'bold', green);
+        text('Berlin Then and Now starts at 12:30 at the World Clock: about 2.5 hours, max 8 people.', margin + 14, y + 42, 9.2, 'normal', [55, 68, 55]);
         rgb('setTextColor', [47, 128, 237]);
         doc.setFont('helvetica', 'bold');
         doc.setFontSize(11);
@@ -2671,7 +2671,7 @@
       '<div class="section weather"><div class="k">Expected weather</div><p><strong>' + escapeHtml(data.weather.title) + '</strong><br>' + escapeHtml(data.weather.copy || '') + '</p>' + weatherMetrics + '<p>' + escapeHtml(data.weather.advice) + '</p></div>' +
       '<div class="section transport"><div class="k">Public transport</div><p><strong>' + escapeHtml(data.transport.title) + '</strong><br>' + escapeHtml(data.transport.ticket) + '</p><table>' + transportRows + '</table><p class="note">' + escapeHtml(data.transport.luggage + ' ' + data.transport.note) + '</p></div>' +
       '<div class="section"><div class="k">Timeline</div><ol>' + steps + '</ol></div>' +
-      '<div class="section book"><div class="k">Book</div><p>Daily 11:30 from the World Clock at Alexanderplatz. The walk is about 2 hours and tip-based.</p><p><a href="' + escapeHtml(BOOKING_SHORT_URL) + '">' + escapeHtml(BOOKING_SHORT_LABEL) + '</a></p></div>' +
+      '<div class="section book"><div class="k">Book</div><p>Berlin Then and Now starts at 12:30 at the World Clock on Alexanderplatz: about 2.5 hours, max 8 people, €25.</p><p><a href="' + escapeHtml(BOOKING_SHORT_URL) + '">' + escapeHtml(BOOKING_SHORT_LABEL) + '</a></p></div>' +
       '<div class="foot">berlinwalk.com · @walkofberlin</div></body></html>';
   }
 

@@ -1,4 +1,4 @@
-const BWGPQ_BOOKING_URL = 'https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based';
+const BWGPQ_BOOKING_URL = 'https://www.walkofberlin.com/book-berlin-walking-tour/berlin-then-and-now';
 
 const BWGPQ_QUESTIONS = [
   { q: "What does 'Entschuldigung' mean?",
@@ -575,7 +575,7 @@ bw-german-phrases-quiz { display: block; width: 100%; }
         <div class="bwgpq-result-score" data-bwgpq-final-score></div>
         <p class="bwgpq-result-msg" data-bwgpq-result-msg></p>
         <div class="bwgpq-result-actions">
-          <a class="bwgpq-btn-book" href="${BWGPQ_BOOKING_URL}" target="_blank">Book your free tour -&gt;</a>
+          <a class="bwgpq-btn-book" href="${BWGPQ_BOOKING_URL}" target="_blank">See dates and book -&gt;</a>
           <button class="bwgpq-btn-retry" type="button" data-bwgpq-start>Try again</button>
         </div>
       </div>

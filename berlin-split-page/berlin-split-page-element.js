@@ -288,7 +288,7 @@ class BwBerlinSplitPage extends HTMLElement {
           <aside class="bw-split-tour-cta">
             <h2>You restored the archive. Now walk the real city.</h2>
             <p>My walking tour follows the same kind of layered Berlin: old center, war damage, Wall traces, rebuilding, and the details tourists usually miss.</p>
-            <a href="https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based?utm_source=berlin_split&utm_medium=game_page&utm_campaign=berlin_split&utm_content=page_cta">Book the Berlin walking tour</a>
+            <a href="https://www.walkofberlin.com/book-berlin-walking-tour/berlin-then-and-now?utm_source=berlin_split&utm_medium=game_page&utm_campaign=berlin_split&utm_content=page_cta">Book the Berlin walking tour</a>
           </aside>
         </section>
         <section class="bw-split-device" id="berlin-split-game" aria-label="Berlin Split game">

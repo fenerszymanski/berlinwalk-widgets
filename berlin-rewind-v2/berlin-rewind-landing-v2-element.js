@@ -23,7 +23,7 @@
   var COVER_URL = ROOT_URL + 'berlin-rewind/assets/social/berlin-rewind-social-1200x630.jpg';
 
   var FINAL_URL = 'https://www.berlinwalk.com/games/berlin-rewind';
-  var BOOK_URL = 'https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based?utm_source=berlin_rewind&utm_medium=game_landing&utm_campaign=berlinwalk_games&utm_content=book_cta';
+  var BOOK_URL = 'https://www.walkofberlin.com/book-berlin-walking-tour/berlin-then-and-now?utm_source=berlin_rewind&utm_medium=game_landing&utm_campaign=berlinwalk_games&utm_content=book_cta';
   var SEO = {
     title: 'Berlin Rewind Game | Guess Old Berlin Photos',
     description: 'Play Berlin Rewind by BerlinWalk. Read real old Berlin photos, guess the year and district, and keep a daily streak alive.',

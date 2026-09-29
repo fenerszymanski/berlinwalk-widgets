@@ -27,7 +27,7 @@
 (function () {
   'use strict';
 
-  var BOOK_URL = 'https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based';
+  var BOOK_URL = 'https://www.walkofberlin.com/book-berlin-walking-tour/berlin-then-and-now';
   var GAMES_URL = 'https://www.berlinwalk.com/games?utm_source=berlin_rewind&utm_medium=result_screen&utm_campaign=berlinwalk_games&utm_content=play_other_games';
   var BUILD = 'berlin-rewind-v2-canonical-set-20260712';
   var TRACKING_ENDPOINT_PROD = 'https://app.berlinwalk.com/api/rewind-event';
@@ -869,7 +869,7 @@
             this._scoreTableHtml(st, 3) +
             '<p class="bw-rw-tomorrow"><b>New 5 photos tomorrow.</b> Keep the streak going.</p>' +
             '<div class="bw-rw-btnrow">' +
-              '<a class="bw-rw-btn" href="' + BOOK_URL + '" target="_blank" rel="noopener" data-book="gate">See these places on my free walk</a>' +
+              '<a class="bw-rw-btn" href="' + BOOK_URL + '" target="_blank" rel="noopener" data-book="gate">See these places on my walk</a>' +
               '<button type="button" class="bw-rw-btn ghost" data-start="practice">Practice round (no streak)</button>' +
             '</div>' +
           '</div>' +
@@ -1146,7 +1146,7 @@
             streakLine +
             (this._mode === 'daily' ? this._leaderboardHtml() : '') +
             '<div class="bw-rw-btnrow">' +
-              '<a class="bw-rw-btn" href="' + BOOK_URL + '" target="_blank" rel="noopener" data-book="result">See these places on my free walk</a>' +
+              '<a class="bw-rw-btn" href="' + BOOK_URL + '" target="_blank" rel="noopener" data-book="result">See these places on my walk</a>' +
               practiceReturn +
               secondaryActions +
               (this._mode === 'practice' ? '<button type="button" class="bw-rw-btn link" data-copy2="1">Copy my score</button>' : '') +

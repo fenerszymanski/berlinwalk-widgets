@@ -578,8 +578,8 @@ class BwBerlinBouncerPage extends HTMLElement {
 
         <div class="bw-bouncer-tour-cta">
           <h3>Survived the door?</h3>
-          <p>My ~2h tip-based walking tour starts at Alexanderplatz and explores the historic centre of former East Berlin.</p>
-          <a href="https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based">Book the Walking Tour</a>
+          <p>My walking tour starts at Alexanderplatz and shows you where Berlin's old city stood, with an archive photo at every stop.</p>
+          <a href="https://www.walkofberlin.com/book-berlin-walking-tour/berlin-then-and-now">Book the Walking Tour</a>
         </div>
 
         <section class="bw-bouncer-seo-support" aria-labelledby="bouncer-how-title">
