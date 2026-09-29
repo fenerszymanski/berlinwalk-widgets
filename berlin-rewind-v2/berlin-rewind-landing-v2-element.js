@@ -23,7 +23,7 @@
   var COVER_URL = ROOT_URL + 'berlin-rewind/assets/social/berlin-rewind-social-1200x630.jpg';
 
   var FINAL_URL = 'https://www.berlinwalk.com/games/berlin-rewind';
-  var BOOK_URL = 'https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based?utm_source=berlin_rewind&utm_medium=game_landing&utm_campaign=berlinwalk_games&utm_content=book_cta';
+  var BOOK_URL = 'https://www.walkofberlin.com/book-berlin-walking-tour/berlin-then-and-now?utm_source=berlin_rewind&utm_medium=game_landing&utm_campaign=berlinwalk_games&utm_content=book_cta';
   var SEO = {
     title: 'Berlin Rewind Game | Guess Old Berlin Photos',
     description: 'Play Berlin Rewind by BerlinWalk. Read real old Berlin photos, guess the year and district, and keep a daily streak alive.',
@@ -170,8 +170,8 @@
           '<section class="bw-rwlp-tour">',
             '<div class="bw-rwlp-wrap bw-rwlp-tour-inner">',
               '<h2>The photo is quick. The city is better on foot.</h2>',
-              '<p>On my free Berlin walking tour, the same skill becomes useful in the real city: look at the street, connect the layers, and understand why one square can carry five different Berlins at once.</p>',
-              '<a class="bw-rwlp-btn primary" href="' + esc(BOOK_URL) + '">Book your spot</a>',
+              '<p>On my Berlin Then and Now walking tour, the same skill works in the real city: I hold up an archive photo at every stop, so you can read the street, connect the layers, and see why one square can carry five different Berlins at once.</p>',
+              '<a class="bw-rwlp-btn primary" href="' + esc(BOOK_URL) + '">See dates and book</a>',
             '</div>',
           '</section>',
         '</main>'
