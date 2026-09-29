@@ -391,7 +391,7 @@
     wrapper.setAttribute('aria-label', 'Book Berlin Then and Now, my walking tour');
     var imageBase = 'https://fenerszymanski.github.io/berlinwalk-widgets/gallery/images/01-800w';
     wrapper.innerHTML = [
-      '<div class="bw-blog-booking-strip"><span data-bw-booking-strip-label>My Berlin walking tour</span><span>Archive photo at every stop</span></div>',
+      '<div class="bw-blog-booking-strip"><span data-bw-booking-strip-label>My walking tour</span><span>Archive photo at every stop</span></div>',
       '<div class="bw-blog-booking-inner"><div class="bw-blog-booking-media"><picture><source srcset="' + imageBase + '.webp" type="image/webp"><img src="' + imageBase + '.jpg" alt="BerlinWalk guide Yusuf leading guests outside the Altes Museum on Museum Island" loading="lazy"></picture></div>',
       '<div class="bw-blog-booking-body"><div class="bw-blog-booking-title" role="heading" aria-level="2">Walk the Berlin that disappeared, with me</div><div class="bw-blog-booking-facts">Berlin Then and Now · about 2.5 hours · 11 stops, 16 places · max 8 · €25</div>',
       '<div class="bw-blog-booking-dates" data-bw-booking-dates aria-label="Pick a tour date" hidden></div>',
