@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Berlin Tour Time Window | BerlinWalk</title>
-  <meta name="description" content="Set the earliest time you can reach the World Clock and the latest time you must be free. See whether the 11:30 or 15:30 Berlin walking-tour window fits.">
+  <meta name="description" content="Set the earliest time you can reach the World Clock and the latest time you must be free. See whether the Berlin Then and Now walk, 12:30 to about 15:00, fits your day.">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%231B5E20'/%3E%3Ccircle cx='16' cy='16' r='10' fill='%23FFE600'/%3E%3Cpath d='M16 9v7l5 3' fill='none' stroke='%23123D18' stroke-width='2.5' stroke-linecap='round'/%3E%3C/svg%3E">
   <link rel="stylesheet" href="../css/brand.css">
   <script defer src="../js/brand.js"></script>
@@ -44,8 +44,7 @@
     #bw-time-window .tw-track{position:relative; height:92px; margin:0 9px; border-radius:16px; background:linear-gradient(90deg,#DCE9F4 0%,#FFF5C9 38%,#FFEAA0 58%,#E7D8EE 100%); overflow:hidden; box-shadow:inset 0 0 0 1px rgba(18,61,24,.08);}
     #bw-time-window .tw-window{position:absolute; top:0; bottom:0; background:rgba(27,94,32,.14); border-left:3px solid var(--green); border-right:3px solid var(--green); transition:left .16s,width .16s;}
     #bw-time-window .tw-slot{position:absolute; top:25px; height:42px; display:flex; align-items:center; justify-content:center; border-radius:11px; border:2px solid var(--deep); color:var(--deep); font-size:.8rem; font-weight:900; letter-spacing:.01em; box-shadow:0 4px 9px rgba(18,61,24,.12); transition:filter .16s,opacity .16s,transform .16s;}
-    #bw-time-window .tw-slot[data-slot="morning"]{background:var(--morning);}
-    #bw-time-window .tw-slot[data-slot="afternoon"]{background:var(--afternoon);}
+    #bw-time-window .tw-slot[data-slot="walk"]{background:var(--morning);}
     #bw-time-window .tw-slot.is-out{filter:grayscale(.72); opacity:.42; transform:scaleY(.88);}
     #bw-time-window .tw-marker{position:absolute; top:0; bottom:0; width:3px; background:var(--deep); transform:translateX(-1px); transition:left .16s;}
     #bw-time-window .tw-marker:before{content:""; position:absolute; top:6px; left:50%; width:12px; height:12px; border-radius:50%; background:var(--yellow); border:3px solid var(--deep); transform:translateX(-50%);}
@@ -87,57 +86,55 @@
       <img src="assets/world-clock-dayline.jpg" alt="Alexanderplatz World Clock under a blue sky">
       <div class="tw-hero-copy">
         <p class="tw-kicker">BerlinWalk dayline</p>
-        <h2>Which tour window fits your real Berlin day?</h2>
+        <h2>Does the 12:30 walk fit your real Berlin day?</h2>
         <p>Set the earliest time you can stand at the World Clock and the latest time you must be free near Hackescher Markt.</p>
       </div>
     </header>
 
     <section class="tw-body" aria-labelledby="tw-instructions">
-      <p class="tw-intro" id="tw-instructions">Use realistic times after luggage, transport and hotel stops. The bands below compare September 2026 planning windows at 11:30 and 15:30, each allowing about 2 hours plus a 5-minute early arrival. October has only 11:30 on selected Wed-Sun dates; no tours on 4 or 13-20 October. Check the live calendar before choosing a window.</p>
+      <p class="tw-intro" id="tw-instructions">Use realistic times after work, transport and whatever else is fixed that day. The band below is Berlin Then and Now: I meet you at the World Clock at 12:30 and we finish at Hackescher Markt at about 15:00. Come 5 minutes early. Dates change from week to week, so check the live calendar before you plan around one.</p>
 
       <div class="tw-controls">
         <div class="tw-control">
           <label for="tw-earliest"><span>I can reach the World Clock by</span><output class="tw-time" id="tw-earliest-value" for="tw-earliest">10:30</output></label>
           <p class="tw-help">Use your meeting-point arrival, not your flight or train arrival.</p>
           <input id="tw-earliest" type="range" min="480" max="1020" step="5" value="630" aria-describedby="tw-earliest-help">
-          <span id="tw-earliest-help" hidden>The tour asks guests to arrive 5 minutes before the booked start.</span>
+          <span id="tw-earliest-help" hidden>I ask guests to arrive 5 minutes before the start.</span>
         </div>
         <div class="tw-control">
           <label for="tw-latest"><span>I need to be free again by</span><output class="tw-time" id="tw-latest-value" for="tw-latest">18:30</output></label>
-          <p class="tw-help">The tour ends at Hackescher Markt, not back at Alexanderplatz.</p>
+          <p class="tw-help">The walk ends at Hackescher Markt, not back at Alexanderplatz.</p>
           <input id="tw-latest" type="range" min="810" max="1260" step="5" value="1110" aria-describedby="tw-latest-help">
           <span id="tw-latest-help" hidden>Add separate travel time from Hackescher Markt to your next reservation.</span>
         </div>
       </div>
 
-      <div class="tw-dayline-wrap" aria-label="Your available day window and two tour planning bands">
+      <div class="tw-dayline-wrap" aria-label="Your available day window and the walking tour band">
         <div class="tw-dayline-title"><strong>Your usable window</strong><span>08:00 to 21:00 dayline</span></div>
         <div class="tw-track" id="tw-track">
           <div class="tw-window" id="tw-window"></div>
-          <div class="tw-slot" data-slot="morning" id="tw-morning">11:30 to 13:30</div>
-          <div class="tw-slot" data-slot="afternoon" id="tw-afternoon">15:30 to 17:30</div>
+          <div class="tw-slot" data-slot="walk" id="tw-walk">12:30 to 15:00</div>
           <div class="tw-marker earliest" id="tw-earliest-marker" aria-hidden="true"></div>
           <div class="tw-marker latest" id="tw-latest-marker" aria-hidden="true"></div>
         </div>
         <div class="tw-axis" aria-hidden="true"><span>08:00</span><span>11:00</span><span>14:00</span><span>17:00</span><span>21:00</span></div>
         <div class="tw-legend" aria-hidden="true">
-          <span><i class="tw-dot" style="background:#FFE600"></i>11:30 window</span>
-          <span><i class="tw-dot" style="background:#85C66B"></i>15:30 window</span>
+          <span><i class="tw-dot" style="background:#FFE600"></i>Berlin Then and Now, 12:30 to about 15:00</span>
           <span><i class="tw-dot" style="background:rgba(27,94,32,.16)"></i>Your available time</span>
         </div>
       </div>
 
       <section class="tw-result" id="tw-result" aria-live="polite" aria-atomic="true">
         <p class="tw-result-kicker" id="tw-result-kicker">Your fit</p>
-        <h3 id="tw-result-title">Both windows fit</h3>
+        <h3 id="tw-result-title">The 12:30 walk fits</h3>
         <p class="tw-result-copy" id="tw-result-copy"></p>
         <div class="tw-margins" id="tw-margins"></div>
         <p class="tw-place" id="tw-place"></p>
       </section>
 
       <footer class="tw-foot">
-        <p>This is a planning tool, not live availability. The booking calendar confirms the exact date and time. The walk is about 2 hours and ends at Hackescher Markt. <a class="tw-tool-link" href="https://www.berlinwalk.com/tools/berlin-tour-time-window" target="_blank" rel="noopener">Open the full Berlin Tour Time Window page.</a></p>
-        <a class="tw-cta" href="https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based" target="_blank" rel="noopener">Check live availability</a>
+        <p>This is a planning tool, not live availability. The booking calendar shows the real dates. The walk takes about 2.5 hours and ends at Hackescher Markt. <a class="tw-tool-link" href="https://www.walkofberlin.com/tools/berlin-tour-time-window" target="_blank" rel="noopener">Open the full Berlin Tour Time Window page.</a></p>
+        <a class="tw-cta" href="https://www.walkofberlin.com/book-berlin-walking-tour/berlin-then-and-now" target="_top">See dates and book</a>
       </footer>
     </section>
   </main>
@@ -145,10 +142,7 @@
   <script>
   (function(){
     var DAY_START=480, DAY_END=1260;
-    var slots={
-      morning:{start:690,end:810,label:'11:30',name:'Morning'},
-      afternoon:{start:930,end:1050,label:'15:30',name:'Afternoon'}
-    };
+    var walk={start:750,end:900,label:'12:30',finish:'15:00'};
     var earliest=document.getElementById('tw-earliest');
     var latest=document.getElementById('tw-latest');
     var earliestValue=document.getElementById('tw-earliest-value');
@@ -156,6 +150,7 @@
     var windowEl=document.getElementById('tw-window');
     var earliestMarker=document.getElementById('tw-earliest-marker');
     var latestMarker=document.getElementById('tw-latest-marker');
+    var walkEl=document.getElementById('tw-walk');
     var resultTitle=document.getElementById('tw-result-title');
     var resultCopy=document.getElementById('tw-result-copy');
     var resultKicker=document.getElementById('tw-result-kicker');
@@ -172,10 +167,11 @@
       var h=Math.floor(minutes/60), m=minutes%60;
       return h+'h'+(m?' '+m+'m':'');
     }
-    function fits(slot,a,b){return a<=slot.start-5 && b>=slot.end;}
-    function marginCard(slot,a,b){
-      var before=(slot.start-5)-a, after=b-slot.end;
-      return '<div class="tw-margin"><strong>'+slot.label+' '+slot.name.toLowerCase()+'</strong>'+duration(before)+' before meeting · '+duration(after)+' after finish</div>';
+    function fits(a,b){return a<=walk.start-5 && b>=walk.end;}
+    function marginCards(a,b){
+      var before=(walk.start-5)-a, after=b-walk.end;
+      return '<div class="tw-margin"><strong>Before the '+walk.label+' start</strong>'+duration(before)+' spare before you meet me</div>'+
+        '<div class="tw-margin"><strong>After the '+walk.finish+' finish</strong>'+duration(after)+' spare after Hackescher Markt</div>';
     }
     function update(){
       var a=Number(earliest.value), b=Number(latest.value);
@@ -184,46 +180,29 @@
       var left=pct(a), right=pct(b);
       windowEl.style.left=left+'%'; windowEl.style.width=Math.max(0,right-left)+'%';
       earliestMarker.style.left=left+'%'; latestMarker.style.left=right+'%';
-      Object.keys(slots).forEach(function(key){
-        var slot=slots[key], el=document.getElementById('tw-'+key);
-        el.style.left=pct(slot.start)+'%'; el.style.width=(pct(slot.end)-pct(slot.start))+'%';
-        el.classList.toggle('is-out',!fits(slot,a,b));
-      });
-      var morning=fits(slots.morning,a,b), afternoon=fits(slots.afternoon,a,b);
+      walkEl.style.left=pct(walk.start)+'%'; walkEl.style.width=(pct(walk.end)-pct(walk.start))+'%';
+      var ok=fits(a,b);
+      walkEl.classList.toggle('is-out',!ok);
       margins.innerHTML='';
       if(a>=b){
         resultKicker.textContent='Window needs fixing';
         resultTitle.textContent='Your finish must be later than your arrival';
-        resultCopy.textContent='Move one boundary so the day contains a real open block. Then the tour bands can be checked honestly.';
-        place.textContent='Practical move: start with the next reservation you cannot move, then work backwards from Hackescher Markt.';
-      } else if(morning&&afternoon){
-        resultKicker.textContent='Both fit';
-        resultTitle.textContent='Choose the shape of the day, not a fake winner';
-        resultCopy.textContent='In September, choose 11:30 for an open afternoon or 15:30 for a slower morning. In October, only the 11:30 start is offered on available dates. Confirm your date in the live calendar.';
-        margins.innerHTML=marginCard(slots.morning,a,b)+marginCard(slots.afternoon,a,b);
-        place.textContent='Place-first move: morning can lead from Hackescher Markt to one Museum Island visit; afternoon can lead into dinner around Hackesche Höfe or the Scheunenviertel.';
-      } else if(morning){
-        resultKicker.textContent='One clean fit';
-        resultTitle.textContent='The 11:30 morning window fits';
-        resultCopy.textContent='The afternoon band misses one of your boundaries. Keep the morning tour and protect the fixed plan that follows.';
-        margins.innerHTML=marginCard(slots.morning,a,b);
-        place.textContent='Place-first move: after the tour ends at Hackescher Markt, choose one afternoon destination such as Museum Island or Bernauer Strasse.';
-      } else if(afternoon){
-        resultKicker.textContent='One clean fit';
-        resultTitle.textContent='The 15:30 afternoon window fits';
-        resultCopy.textContent='The morning band misses one of your boundaries. Use the earlier part of the day for arrival, luggage or one fixed commitment.';
-        margins.innerHTML=marginCard(slots.afternoon,a,b);
-        place.textContent='Place-first move: finish at Hackescher Markt, then keep dinner close around Hackesche Höfe, the Scheunenviertel or the Spree.';
+        resultCopy.textContent='Move one boundary so the day contains a real open block. Then the walk can be checked honestly.';
+        place.textContent='Practical move: start with the next plan you cannot move, then work backwards from Hackescher Markt.';
+      } else if(ok){
+        resultKicker.textContent='It fits';
+        resultTitle.textContent='The 12:30 walk fits';
+        resultCopy.textContent='You can be at the World Clock by 12:25 and stay until the walk ends at Hackescher Markt at about 15:00. Pick a date in the live calendar.';
+        margins.innerHTML=marginCards(a,b);
+        place.textContent='Place-first move: after the walk, keep the rest of the afternoon close. Hackesche H\u00f6fe, the Scheunenviertel or one Museum Island visit are all a few minutes away.';
       } else {
-        resultKicker.textContent='Neither fits';
+        resultKicker.textContent='It does not fit';
         resultTitle.textContent='Do not turn this date into a race';
         var why=[];
-        if(a>slots.morning.start-5) why.push('you cannot reach the 11:30 meeting in time');
-        if(b<slots.morning.end) why.push('your hard stop is before the morning finish');
-        if(a>slots.afternoon.start-5) why.push('you cannot reach the 15:30 meeting in time');
-        if(b<slots.afternoon.end) why.push('your hard stop is before the afternoon finish');
-        resultCopy.textContent=(why.length?'With these limits, '+why.join(' and ')+'. ':'')+'Choose another date or move the fixed commitment instead of cutting the walk short.';
-        place.textContent='Practical move: check the live calendar for another date, then rebuild the day from the World Clock start and Hackescher Markt finish.';
+        if(a>walk.start-5) why.push('you cannot reach the 12:30 meeting in time');
+        if(b<walk.end) why.push('your hard stop is before the walk ends at about 15:00');
+        resultCopy.textContent=(why.length?'With these limits, '+why.join(' and ')+'. ':'')+'Choose another date or move the fixed plan instead of cutting the walk short.';
+        place.textContent='Practical move: check the live calendar for another date, then rebuild the day from the World Clock start and the Hackescher Markt finish.';
       }
       requestHeight();
     }

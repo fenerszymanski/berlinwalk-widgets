@@ -11,16 +11,14 @@
   if (typeof module !== 'undefined' && module.exports) module.exports = api;
 })(typeof globalThis !== 'undefined' ? globalThis : this, function () {
   var TIME_ZONE = 'Europe/Berlin';
-  var DEFAULT_START_LABELS = ['11:30'];
-  var SUMMER_START_LABELS = ['11:30', '15:30'];
+  // Berlin Then and Now (Wix service 145cb27e) replaced the free walk on
+  // 29 September 2026. There is no fixed weekday schedule any more: every date
+  // comes from the live availability feed, and the static helpers below return
+  // nothing so no consumer can print an old schedule. Callers hide dates until
+  // the feed has a bookable one.
+  var TOUR_SERVICE_ID = '145cb27e-c5bd-456d-bfbd-a09d4d6f5f9d';
   var LIVE_AVAILABILITY_URL = 'https://berlinwalk-content-app.vercel.app/api/booking-calendar-availability';
-  var SAME_DAY_CUTOFF_LEAD_MINUTES = 180;
-  // Live booking copy currently says "From 3 July 2026: 11:30 + 15:30".
-  // If that exact public start changes, update the window here.
-  var DOUBLE_SLOT_START_MONTH_DAY = 703;
-  var DOUBLE_SLOT_END_MONTH_DAY = 930;
   var DAY_MS = 24 * 60 * 60 * 1000;
-  var TOUR_DAYS = { Tue: true, Wed: true, Thu: true, Fri: true, Sat: true };
   var BERLIN_FORMATTER = new Intl.DateTimeFormat('en-US', {
     timeZone: TIME_ZONE,
     weekday: 'short',
@@ -74,42 +72,9 @@
     };
   }
 
-  function isTourDay(parts) {
-    if (parts.year === 2026 && parts.month === 10) return [1,2,3,7,8,9,10,11,21,22,23,24,25,28,29,30,31].indexOf(parts.day) !== -1;
-    if (parts.dateKey >= "2026-11-01") return false;
-    return Boolean(TOUR_DAYS[parts.weekdayShort]);
-  }
-
-  function monthDayKey(parts) {
-    return (parts.month * 100) + parts.day;
-  }
-
-  function isDoubleSlotSeason(parts) {
-    var key = monthDayKey(parts);
-    return key >= DOUBLE_SLOT_START_MONTH_DAY && key <= DOUBLE_SLOT_END_MONTH_DAY;
-  }
-
-  function startLabelsForDay(parts) {
-    return isDoubleSlotSeason(parts) ? SUMMER_START_LABELS.slice() : DEFAULT_START_LABELS.slice();
-  }
-
   function minutesForLabel(label) {
     var parts = String(label || '').split(':');
     return (Number(parts[0]) * 60) + Number(parts[1]);
-  }
-
-  function currentMinutes(parts) {
-    return (parts.hour * 60) + parts.minute;
-  }
-
-  function bookableStartLabels(targetParts, nowParts) {
-    var labels = startLabelsForDay(targetParts);
-    if (!nowParts || targetParts.dateKey !== nowParts.dateKey) return labels;
-
-    var nowMinutes = currentMinutes(nowParts);
-    return labels.filter(function (label) {
-      return nowMinutes < (minutesForLabel(label) - SAME_DAY_CUTOFF_LEAD_MINUTES);
-    });
   }
 
   function slotsLabelFor(labels) {
@@ -147,46 +112,6 @@
     return Math.floor(value);
   }
 
-  function findTargets(now, count) {
-    var today = slotInfo(now);
-    var targets = [];
-    var seen = {};
-
-    for (var offset = 0; offset <= 14 && targets.length < count; offset += 1) {
-      var candidate = slotInfo(new Date(now.getTime() + (offset * DAY_MS)));
-      if (!isTourDay(candidate) || seen[candidate.dateKey]) continue;
-      if (!bookableStartLabels(candidate, today).length) continue;
-      targets.push(candidate);
-      seen[candidate.dateKey] = true;
-    }
-
-    return targets;
-  }
-
-  function findStartEntries(now, count) {
-    var today = slotInfo(now);
-    var tomorrow = slotInfo(new Date(now.getTime() + DAY_MS));
-    var entries = [];
-
-    for (var offset = 0; offset <= 14 && entries.length < count; offset += 1) {
-      var candidate = slotInfo(new Date(now.getTime() + (offset * DAY_MS)));
-      if (!isTourDay(candidate)) continue;
-      bookableStartLabels(candidate, today).forEach(function (label) {
-        if (entries.length >= count) return;
-        entries.push({
-          dateKey: candidate.dateKey,
-          weekdayShort: candidate.weekdayShort,
-          weekdayLabel: candidate.weekdayLabel,
-          relativeLabel: relativeLabelFor(candidate, today, tomorrow),
-          compactRelativeLabel: compactRelativeLabelFor(candidate, today, tomorrow),
-          startLabel: label,
-        });
-      });
-    }
-
-    return entries;
-  }
-
   function startEntriesLabelFor(entries) {
     if (!entries.length) return '';
     if (entries.length === 1) {
@@ -206,7 +131,7 @@
   function availabilityEndpoint(input) {
     if (input && input.endpoint) return String(input.endpoint);
     var days = input && Number.isFinite(Number(input.days)) ? Math.max(1, Math.min(365, Math.floor(Number(input.days)))) : 60;
-    return LIVE_AVAILABILITY_URL + '?days=' + encodeURIComponent(days);
+    return LIVE_AVAILABILITY_URL + '?days=' + encodeURIComponent(days) + '&serviceId=' + encodeURIComponent(TOUR_SERVICE_ID);
   }
 
   function fetchLiveAvailability(input) {
@@ -275,50 +200,21 @@
     return grouped;
   }
 
-  function bwNextTourSlots(input, fallbackCount) {
-    var now = normalizeNow(input);
-    var today = slotInfo(now);
-    var tomorrow = slotInfo(new Date(now.getTime() + DAY_MS));
-    var count = normalizeCount(input, fallbackCount || 1);
-
-    return findTargets(now, count).map(function (target) {
-      var startLabels = bookableStartLabels(target, today);
-      return {
-        dateKey: target.dateKey,
-        weekdayShort: target.weekdayShort,
-        weekdayLabel: target.weekdayLabel,
-        relativeLabel: relativeLabelFor(target, today, tomorrow),
-        startLabel: startLabels[0] || '',
-        startLabels: startLabels,
-        slotsLabel: slotsLabelFor(startLabels),
-        slotCount: startLabels.length,
-      };
-    });
+  // Static schedule helpers: kept for API compatibility, always empty.
+  function bwNextTourSlots() {
+    return [];
   }
 
-  function bwNextTourSlot(input) {
-    var target = bwNextTourSlots(input, 1)[0];
-    if (!target) return null;
-    return {
-      dateKey: target.dateKey,
-      weekdayShort: target.weekdayShort,
-      weekdayLabel: target.weekdayLabel,
-      relativeLabel: target.relativeLabel,
-      startLabel: target.startLabel,
-      startLabels: target.startLabels,
-      slotsLabel: target.slotsLabel,
-      slotCount: target.slotCount,
-    };
+  function bwNextTourSlot() {
+    return null;
   }
 
-  function bwNextTourStarts(input, fallbackCount) {
-    var now = normalizeNow(input);
-    var count = normalizeCount(input, fallbackCount || 2);
-    return findStartEntries(now, count);
+  function bwNextTourStarts() {
+    return [];
   }
 
-  function bwNextTourStartsLabel(input, fallbackCount) {
-    return startEntriesLabelFor(bwNextTourStarts(input, fallbackCount || 2));
+  function bwNextTourStartsLabel() {
+    return '';
   }
 
   function bwLiveNextTourStarts(input, fallbackCount) {

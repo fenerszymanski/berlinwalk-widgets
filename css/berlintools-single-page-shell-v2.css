@@ -1008,7 +1008,7 @@ html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozmgdoo.bw-tools-shell-v2-tou
 
 html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozmgdoo.bw-tools-shell-v2-tour-band #comp-mozmi7u3::before {
   color: var(--bw-shell-light) !important;
-  content: 'FREE BERLIN WALKING TOUR \00B7  ~2H \00B7  TIP-BASED' !important;
+  content: 'BERLIN THEN AND NOW' !important;
   display: block !important;
   font: 700 9px/1.2 'IBM Plex Mono', monospace !important;
   letter-spacing: .16em !important;
@@ -1022,6 +1022,41 @@ html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozmgdoo.bw-tools-shell-v2-tou
   font: 400 16px/1.65 Montserrat, Arial, sans-serif !important;
   margin: 0 0 26px !important;
   text-align: left !important;
+}
+
+/* Berlin Then and Now facts and live dates (29 Sep 2026). The dates line is
+ * rendered only when the availability feed returns a bookable date. */
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozmgdoo.bw-tools-shell-v2-tour-band .bw-tools-shell-v2-tour-facts,
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozmgdoo.bw-tools-shell-v2-tour-band .bw-tools-shell-v2-tour-dates {
+  box-sizing: border-box !important;
+  display: block !important;
+  font: 600 14px/1.5 Montserrat, Arial, sans-serif !important;
+  letter-spacing: 0 !important;
+  margin: -8px 0 26px !important;
+  max-width: 610px !important;
+  position: relative !important;
+  text-align: left !important;
+  width: 100% !important;
+}
+
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozmgdoo.bw-tools-shell-v2-tour-band .bw-tools-shell-v2-tour-facts {
+  color: #FFFFFF !important;
+}
+
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozmgdoo.bw-tools-shell-v2-tour-band .bw-tools-shell-v2-tour-dates {
+  color: var(--bw-shell-light) !important;
+  margin-top: -14px !important;
+}
+
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozmgdoo.bw-tools-shell-v2-tour-band .bw-tools-shell-v2-tour-dates[hidden],
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozmt2at .bw-tools-shell-v2-tour-rail-dates[hidden] {
+  display: none !important;
+}
+
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozmt2at[data-bw-shell-v2-toc-host="1"] .bw-tools-shell-v2-tour-rail-dates {
+  color: var(--bw-shell-light) !important;
+  font: 700 11px/1.45 'Space Grotesk', Montserrat, Arial, sans-serif !important;
+  margin: -6px 0 13px !important;
 }
 
 html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozmgdoo.bw-tools-shell-v2-tour-band #comp-mozmlwb5 a {

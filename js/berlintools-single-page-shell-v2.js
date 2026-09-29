@@ -8,7 +8,7 @@
 (function () {
   'use strict';
 
-  var VERSION = 'berlintools-shell-v3-20260826-global-polish';
+  var VERSION = 'berlintools-shell-v3-20260929-then-and-now';
   var ENABLE_ALL = true;
   var PILOT_SLUGS = [
     'berlin-first-day-planner',
@@ -72,8 +72,8 @@
       lead: 'Compare central lockers, staffed storage and airport options so your route stays light.'
     },
     'berlin-tour-time-window': {
-      title: 'Berlin Tour Time Window: Morning or Afternoon?',
-      lead: 'Set the earliest time you can reach the World Clock and the latest time you must be free near Hackescher Markt. See whether the September 2026 11:30 or 15:30 planning window (October offers 11:30 only) fits without rushing the rest of your Berlin day.'
+      title: 'Berlin Tour Time Window: Does the Walk Fit Your Day?',
+      lead: 'Set the earliest time you can reach the World Clock and the latest time you must be free near Hackescher Markt. See whether the Berlin Then and Now walk, 12:30 to about 15:00, fits without rushing the rest of your day.'
     }
   };
 
@@ -169,8 +169,8 @@
       imageAlt: 'BerlinWalk Berlin Bakery Counter icon'
     },
     'berlin-tour-time-window': {
-      title: 'Berlin Tour Time Window: Morning or Afternoon? | BerlinWalk',
-      description: 'Set your real arrival at the World Clock and finish at Hackescher Markt. See whether the morning or afternoon Berlin walking-tour window fits.',
+      title: 'Berlin Tour Time Window: Does the Walk Fit? | BerlinWalk',
+      description: 'Set your real arrival at the World Clock and your finish at Hackescher Markt. See whether the Berlin Then and Now walking tour, 12:30 to about 15:00, fits your day.',
       image: 'https://static.wixstatic.com/media/5a08a3_c4b967dd5fac4ae4ba7432ffd5bfaeba~mv2.png',
       imageAlt: 'BerlinWalk Berlin Tour Time Window icon'
     }
@@ -672,6 +672,158 @@
     return true;
   }
 
+  /* Berlin Then and Now (Wix service 145cb27e) replaced the free walk on
+   * 29 September 2026. The Studio text of the native CTA (comp-mozmi7u3,
+   * comp-mozmkgew, comp-mozmlwb5) still carries the old free-tour copy until
+   * it is edited in Studio, so the shell owns the visible tour copy here and
+   * rewrites the native nodes whatever their current text is. Dates come only
+   * from the live availability feed and stay hidden until a bookable date
+   * exists. */
+  var TOUR_COPY = {
+    eyebrow: 'Berlin Then and Now',
+    heading: 'Walk the Berlin that disappeared, with me',
+    body: 'Berlin\'s old city did not survive. I walk you through where it stood and hold up an archive photo of the same place at every stop.',
+    facts: 'About 2.5 hours · 11 stops, 16 places · max 8 · €25',
+    cta: 'See dates and book',
+    href: 'https://www.walkofberlin.com/book-berlin-walking-tour/berlin-then-and-now',
+    railTitle: 'Walk the Berlin that disappeared',
+    railCopy: 'About 2.5 hours from the World Clock, with an archive photo at every stop. Max 8 people, €25.',
+    railCta: 'See dates and book'
+  };
+  var TOUR_AVAILABILITY_URL = 'https://berlinwalk-content-app.vercel.app/api/booking-calendar-availability?days=60&serviceId=145cb27e-c5bd-456d-bfbd-a09d4d6f5f9d';
+  var tourAvailability = { requested: false, dates: [] };
+
+  function tourSlotParts(value) {
+    var raw = String(value || '');
+    var match = raw.match(/^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2})/);
+    if (!match) return null;
+    var hasOffset = /(?:Z|[+-]\d{2}:?\d{2})$/i.test(raw);
+    var date = new Date(raw);
+    if (isNaN(date.getTime())) return null;
+    if (date.getTime() <= Date.now()) return null;
+    var parts = null;
+    if (hasOffset && typeof Intl === 'object' && Intl.DateTimeFormat) {
+      try {
+        var map = {};
+        new Intl.DateTimeFormat('en-GB', {
+          timeZone: 'Europe/Berlin', weekday: 'short', day: 'numeric', month: 'short',
+          year: 'numeric', hour: '2-digit', minute: '2-digit', hour12: false
+        }).formatToParts(date).forEach(function (part) { map[part.type] = part.value; });
+        parts = {
+          key: map.year + '-' + map.month + '-' + map.day,
+          day: map.weekday + ' ' + Number(map.day) + ' ' + map.month,
+          time: String(map.hour).replace(/^24$/, '00') + ':' + map.minute
+        };
+      } catch (e) { parts = null; }
+    }
+    if (!parts) {
+      var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+      var days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+      var local = new Date(Date.UTC(Number(match[1]), Number(match[2]) - 1, Number(match[3]), 12));
+      parts = {
+        key: match[1] + '-' + match[2] + '-' + match[3],
+        day: days[local.getUTCDay()] + ' ' + Number(match[3]) + ' ' + months[Number(match[2]) - 1],
+        time: match[4] + ':' + match[5]
+      };
+    }
+    parts.timestamp = date.getTime();
+    return parts;
+  }
+
+  function tourDatesFromFeed(data) {
+    var slots = data && Array.isArray(data.slots) ? data.slots : [];
+    var seen = {};
+    return slots.map(function (slot) {
+      if (!slot || (typeof slot.openSpots === 'number' && slot.openSpots <= 0)) return null;
+      return tourSlotParts(slot.startDate);
+    }).filter(Boolean).sort(function (a, b) {
+      return a.timestamp - b.timestamp;
+    }).filter(function (entry) {
+      if (seen[entry.key]) return false;
+      seen[entry.key] = true;
+      return true;
+    }).slice(0, 3);
+  }
+
+  function tourDatesLabel(dates, limit) {
+    var list = dates.slice(0, limit);
+    if (!list.length) return '';
+    var sameTime = list.every(function (entry) { return entry.time === list[0].time; });
+    var prefix = list.length === 1 ? 'Next date: ' : 'Next dates: ';
+    if (sameTime) {
+      return prefix + list.map(function (entry) { return entry.day; }).join(' · ') + ', ' + list[0].time;
+    }
+    return prefix + list.map(function (entry) { return entry.day + ', ' + entry.time; }).join(' · ');
+  }
+
+  function applyTourDates() {
+    var dates = tourAvailability.dates;
+    document.querySelectorAll('[data-bw-shell-v2-tour-dates]').forEach(function (node) {
+      var limit = node.getAttribute('data-bw-shell-v2-tour-dates') === 'rail' ? 1 : 3;
+      var label = tourDatesLabel(dates, limit);
+      if (label) {
+        if (node.textContent !== label) node.textContent = label;
+        node.hidden = false;
+        node.removeAttribute('aria-hidden');
+      } else {
+        if (node.textContent) node.textContent = '';
+        node.hidden = true;
+        node.setAttribute('aria-hidden', 'true');
+      }
+    });
+  }
+
+  function requestTourDates() {
+    if (tourAvailability.requested || typeof fetch !== 'function') return;
+    tourAvailability.requested = true;
+    fetch(TOUR_AVAILABILITY_URL, { mode: 'cors', credentials: 'omit' })
+      .then(function (response) {
+        if (!response || !response.ok) throw new Error('availability unavailable');
+        return response.json();
+      })
+      .then(function (data) {
+        tourAvailability.dates = tourDatesFromFeed(data);
+        applyTourDates();
+      })
+      .catch(function () {
+        tourAvailability.dates = [];
+        applyTourDates();
+      });
+  }
+
+  function makeTourDatesNode(className, kind) {
+    var node = makeNode('p', className, '');
+    node.setAttribute('data-bw-shell-v2-tour-dates', kind);
+    node.hidden = true;
+    node.setAttribute('aria-hidden', 'true');
+    return node;
+  }
+
+  function setNodeCopy(node, text) {
+    if (!node || cleanText(node.textContent) === cleanText(text)) return;
+    node.textContent = text;
+  }
+
+  function nativeTourTextNode(container, selectors) {
+    if (!container) return null;
+    for (var i = 0; i < selectors.length; i += 1) {
+      var match = container.querySelector(selectors[i]);
+      if (match) return match;
+    }
+    return null;
+  }
+
+  function nativeTourCopyCurrent(section) {
+    if (!section) return true;
+    var heading = nativeTourTextNode(byId('comp-mozmi7u3'), ['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'p']);
+    var body = nativeTourTextNode(byId('comp-mozmkgew'), ['p', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6']);
+    var link = section.querySelector('#comp-mozmlwb5 a[href]');
+    if (heading && cleanText(heading.textContent) !== TOUR_COPY.heading) return false;
+    if (body && cleanText(body.textContent) !== TOUR_COPY.body) return false;
+    if (link && link.getAttribute('href') !== TOUR_COPY.href) return false;
+    return Boolean(section.querySelector('[data-bw-shell-v2-tour-facts]'));
+  }
+
   function decorateNativeTourCta(section) {
     if (!section) return false;
     var link = section.querySelector('a[href]');
@@ -680,21 +832,47 @@
       setShellSectionVisibility(section, false);
       return false;
     }
-    var oldSchedule = 'Walk Berlin with someone who actually lives here. Free 2-hour tour, tip-based, runs every Tuesday to Saturday at 11:30.';
-    section.querySelectorAll('p,span').forEach(function (node) {
-      if (cleanText(node.textContent) === oldSchedule) node.textContent = 'Walk Berlin with me. Free, tip-based, about 2 hours. September 2026: Tue-Sat at 11:30 and 15:30. October: Wed-Sun at 11:30, except 4 and 13-20 October. Check the calendar for your date.';
-    });
+    var headingHost = byId('comp-mozmi7u3');
+    var bodyHost = byId('comp-mozmkgew');
+    setNodeCopy(nativeTourTextNode(headingHost, ['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'p']), TOUR_COPY.heading);
+    setNodeCopy(nativeTourTextNode(bodyHost, ['p', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6']), TOUR_COPY.body);
+
+    var button = section.querySelector('#comp-mozmlwb5 a[href]') || link;
+    if (button) {
+      if (button.getAttribute('href') !== TOUR_COPY.href) button.setAttribute('href', TOUR_COPY.href);
+      button.setAttribute('target', '_top');
+      button.setAttribute('aria-label', TOUR_COPY.cta);
+      button.setAttribute('data-bw-shell-v2-tour-cta', '1');
+      setNodeCopy(button.querySelector('.wixui-button__label,span') || button, TOUR_COPY.cta);
+    }
+
+    var anchor = bodyHost && section.contains(bodyHost) ? bodyHost : null;
+    var facts = section.querySelector('[data-bw-shell-v2-tour-facts]');
+    if (!facts && anchor) {
+      facts = makeNode('p', 'bw-tools-shell-v2-tour-facts', TOUR_COPY.facts);
+      facts.setAttribute('data-bw-shell-v2-tour-facts', '1');
+      anchor.insertAdjacentElement('afterend', facts);
+    } else if (facts) {
+      setNodeCopy(facts, TOUR_COPY.facts);
+    }
+    if (facts && !section.querySelector('[data-bw-shell-v2-tour-dates]')) {
+      facts.insertAdjacentElement('afterend', makeTourDatesNode('bw-tools-shell-v2-tour-dates', 'band'));
+    }
+
     section.classList.add('bw-tools-shell-v2-tour-band');
     section.setAttribute('data-bw-shell-v2-tour-band', '1');
+    section.setAttribute('data-bw-shell-v2-tour-product', 'berlin-then-and-now');
     section.removeAttribute('data-bw-tools-shell-v2-hidden');
     setShellSectionVisibility(section, true);
+    requestTourDates();
+    applyTourDates();
     return true;
   }
 
   /* The approved editorial layout has two visual treatments for the same
    * native tour CTA: a compact context card in the desktop rail and the
-   * full-width end-of-article band. Derive both presentations from the one
-   * hydrated native section so Wix/CMS remains the source of truth. */
+   * full-width end-of-article band. The rail is built once and then only
+   * refreshed, so live dates are not wiped by later decorate passes. */
   function decorateTourRail(nativeCta) {
     var introSection = byId('comp-mozmt2at');
     var toc = introSection && introSection.querySelector('[data-bw-shell-v2-toc]');
@@ -704,33 +882,26 @@
       return false;
     }
 
-    var headingNode = nativeCta.querySelector('h1,h2,h3,h4,h5,h6,[data-hook="heading"]') ||
-      nativeCta.querySelector('[data-hook="text"]');
-    var paragraphNode = nativeCta.querySelector('p');
-    var actionNode = nativeCta.querySelector('a[href]');
-    var heading = cleanText(headingNode && headingNode.textContent);
-    var description = cleanText(paragraphNode && paragraphNode.textContent);
-    var actionHref = actionNode && actionNode.getAttribute('href');
-    if (!heading || !description || !actionHref) {
-      if (existing) existing.remove();
-      return false;
+    var rail = existing;
+    if (!rail || rail.getAttribute('data-bw-shell-v2-tour-product') !== 'berlin-then-and-now') {
+      if (rail) rail.remove();
+      rail = makeNode('aside', 'bw-tools-shell-v2-tour-rail');
+      rail.setAttribute('data-bw-shell-v2-tour-rail', '1');
+      rail.setAttribute('data-bw-shell-v2-tour-source', 'comp-mozmgdoo');
+      rail.setAttribute('data-bw-shell-v2-tour-product', 'berlin-then-and-now');
+      rail.setAttribute('aria-label', 'Berlin Then and Now walking tour');
+      rail.appendChild(makeNode('p', 'bw-tools-shell-v2-tour-rail-eyebrow', TOUR_COPY.eyebrow));
+      rail.appendChild(makeNode('strong', 'bw-tools-shell-v2-tour-rail-title', TOUR_COPY.railTitle));
+      rail.appendChild(makeNode('p', 'bw-tools-shell-v2-tour-rail-copy', TOUR_COPY.railCopy));
+      rail.appendChild(makeTourDatesNode('bw-tools-shell-v2-tour-rail-dates', 'rail'));
+      var action = makeNode('a', 'bw-tools-shell-v2-tour-rail-link', TOUR_COPY.railCta);
+      action.href = TOUR_COPY.href;
+      action.target = '_top';
+      action.setAttribute('data-bw-shell-v2-tour-rail-link', '1');
+      rail.appendChild(action);
     }
-
-    var rail = existing || makeNode('aside', 'bw-tools-shell-v2-tour-rail');
-    rail.setAttribute('data-bw-shell-v2-tour-rail', '1');
-    rail.setAttribute('data-bw-shell-v2-tour-source', 'comp-mozmgdoo');
-    rail.setAttribute('aria-label', 'Berlin walking tour information');
-    rail.innerHTML = '';
-    rail.appendChild(makeNode('p', 'bw-tools-shell-v2-tour-rail-eyebrow', 'WHILE YOU ARE IN BERLIN'));
-    rail.appendChild(makeNode('strong', 'bw-tools-shell-v2-tour-rail-title', 'See the centre with me'));
-    rail.appendChild(makeNode('p', 'bw-tools-shell-v2-tour-rail-copy', 'About 2 hours, tip-based, starting at the World Clock.'));
-    var action = makeNode('a', 'bw-tools-shell-v2-tour-rail-link', 'RESERVE A SPOT');
-    action.href = actionHref;
-    action.setAttribute('data-bw-shell-v2-tour-rail-link', '1');
-    if (actionNode.getAttribute('target')) action.target = actionNode.getAttribute('target');
-    if (actionNode.getAttribute('rel')) action.rel = actionNode.getAttribute('rel');
-    rail.appendChild(action);
     if (rail.parentNode !== toc) toc.appendChild(rail);
+    applyTourDates();
     return true;
   }
 
@@ -1065,6 +1236,8 @@
     var nativeCta = byId('comp-mozmgdoo');
     if (nativeCta && shellQuery(nativeCta, 'a[href]') && cleanText(nativeCta.textContent) &&
         !hasShellAttribute(nativeCta, 'data-bw-shell-v2-tour-band', '1')) return false;
+    if (nativeCta && hasShellAttribute(nativeCta, 'data-bw-shell-v2-tour-band', '1') &&
+        !nativeTourCopyCurrent(nativeCta)) return false;
     var toc = document.querySelector('[data-bw-shell-v2-toc]');
     if (nativeCta && toc && shellQuery(nativeCta, 'a[href]') && cleanText(nativeCta.textContent) &&
         !shellQuery(toc, '[data-bw-shell-v2-tour-rail]')) return false;
