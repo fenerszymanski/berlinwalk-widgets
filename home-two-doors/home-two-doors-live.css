@@ -1067,6 +1067,23 @@ bw-home-two-doors .bw-home-two-doors .bw-home-two-doors__review--dark .bw-home-t
   margin-top: 14px;
 }
 
+.bw-home-two-doors .bw-home-two-doors__door-facts {
+  display: none;
+}
+
+@media (max-width: 900px) {
+  .bw-home-two-doors .bw-home-two-doors__door--live .bw-home-two-doors__door-facts {
+    color: var(--bw-yellow);
+    display: block;
+    font-family: var(--bw-mono);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    line-height: 1.5;
+    margin: 10px 0 0;
+  }
+}
+
 .bw-home-two-doors .bw-home-two-doors__dates {
   align-items: center;
   display: flex;
@@ -1582,9 +1599,11 @@ bw-home-two-doors .bw-home-two-doors .bw-home-two-doors__review--dark .bw-home-t
     grid-template-columns: 1fr;
   }
 
+  .bw-home-two-doors .bw-home-two-doors__faq details,
   .bw-home-two-doors .bw-home-two-doors__faq details:nth-child(even) {
     border-left: 0;
     padding-left: 0;
+    padding-right: 0;
   }
 
   .bw-home-two-doors .bw-home-two-doors__faq details:nth-child(even) p {

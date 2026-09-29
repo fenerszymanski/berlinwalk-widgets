@@ -303,6 +303,7 @@ class BWHomeTwoDoorsElement extends HTMLElement {
             <span class="bw-home-two-doors__eyebrow bw-home-two-doors__eyebrow--dark">BERLIN THEN AND NOW</span>
             <h2>Walk <em>with me.</em></h2>
             <p>Berlin's old city did not survive. I walk you through where it stood and hold up an archive photo of the same place at every stop.</p>
+            <p class="bw-home-two-doors__door-facts">About 2.5 hours · 11 stops, 16 places · max 8 · €25</p>
             <div class="bw-home-two-doors__door-actions">
               <a class="bw-home-two-doors__btn bw-home-two-doors__btn--yellow" href="${BW_HOME_TWO_DOORS_BOOKING_URL}" data-bw-cta-id="book_live_tour" data-bw-cta-placement="hero-live">See dates and book</a>
               <a class="bw-home-two-doors__link bw-home-two-doors__link--light" href="#live-route" data-bw-cta-id="learn_live_route" data-bw-cta-placement="hero-live">Route &amp; meeting point</a>
