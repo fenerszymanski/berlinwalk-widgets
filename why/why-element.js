@@ -22,9 +22,9 @@ const CARDS = [
 ];
 
 const FLOW_STEPS = [
-  { label: 'Reserve your spot', detail: '\u20AC2 deposit, refunded after the walk' },
+  { label: 'Book your date', detail: '\u20AC25 per person, max 8 people' },
   { label: 'Show up at Alexanderplatz', detail: 'Meeting point at World Clock' },
-  { label: 'Walk + tip what you feel', detail: '11 stops, ~2 hours' }
+  { label: 'Walk the vanished city', detail: '11 stops, about 2.5 hours' }
 ];
 
 class BWWhyElement extends HTMLElement {

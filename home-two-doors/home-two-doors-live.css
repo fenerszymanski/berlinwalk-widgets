@@ -1067,6 +1067,48 @@ bw-home-two-doors .bw-home-two-doors .bw-home-two-doors__review--dark .bw-home-t
   margin-top: 14px;
 }
 
+.bw-home-two-doors .bw-home-two-doors__dates {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.bw-home-two-doors .bw-home-two-doors__dates[hidden] {
+  display: none !important;
+}
+
+.bw-home-two-doors .bw-home-two-doors__dates-label {
+  color: var(--bw-ink-2);
+  font-family: var(--bw-mono);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.bw-home-two-doors .bw-home-two-doors__date {
+  background: #FFFFFF;
+  border: 1px solid var(--bw-line);
+  border-radius: 999px;
+  color: var(--bw-green-deep);
+  font-family: var(--bw-mono);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  padding: 7px 12px;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.bw-home-two-doors .bw-home-two-doors__date:hover,
+.bw-home-two-doors .bw-home-two-doors__date:focus-visible {
+  background: var(--bw-yellow);
+  border-color: #D8C400;
+  outline: none;
+}
+
 .bw-home-two-doors .bw-home-two-doors__guide {
   grid-template-columns: 0.9fr 1.1fr;
 }

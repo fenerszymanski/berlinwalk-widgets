@@ -2,7 +2,7 @@ const BW_ROUTE_DATA_URL = 'https://fenerszymanski.github.io/berlinwalk-widgets/r
 const BW_ROUTE_LOCAL_DATA_URL = document.currentScript && document.currentScript.src
   ? new URL('./data.json', document.currentScript.src).href
   : './data.json';
-const BW_ROUTE_BOOKING_URL = 'https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based';
+const BW_ROUTE_BOOKING_URL = 'https://www.walkofberlin.com/book-berlin-walking-tour/berlin-then-and-now';
 const BW_ROUTE_STORY_URL = 'https://www.berlinwalk.com/berlin-walking-tour-route';
 const BW_ROUTE_GALLERY_IMAGE_BASE = 'https://fenerszymanski.github.io/berlinwalk-widgets/gallery/images';
 const BW_ROUTE_GALLERY = [
@@ -133,8 +133,8 @@ class BWRouteElement extends HTMLElement {
             <p class="bw-route-subtitle">Alexanderplatz &rarr; Hackescher Markt</p>
           </header>
           <div class="bw-route-map-wrapper bw-route-error">
-            <p>Map temporarily unavailable. Visit our booking page to read about the tour.</p>
-            <a href="${BW_ROUTE_BOOKING_URL}" target="_blank" rel="noopener">Book your spot</a>
+            <p>Map temporarily unavailable. My booking page has the route and the dates.</p>
+            <a href="${BW_ROUTE_BOOKING_URL}" target="_blank" rel="noopener">See dates and book</a>
           </div>
         </div>
       </section>
@@ -197,7 +197,7 @@ class BWRouteElement extends HTMLElement {
               </p>
               <div class="bw-route-story-actions" aria-label="Open the route story or book the tour">
                 <a class="bw-route-btn bw-route-btn-primary" href="${BW_ROUTE_STORY_URL}">Explore the story map</a>
-                <a class="bw-route-btn bw-route-btn-ghost" href="${BW_ROUTE_BOOKING_URL}">Book your spot</a>
+                <a class="bw-route-btn bw-route-btn-ghost" href="${BW_ROUTE_BOOKING_URL}">See dates and book</a>
               </div>
             </div>
             <div class="bw-route-story-steps" aria-label="Story chapters from the route">
@@ -500,11 +500,11 @@ class BWRouteElement extends HTMLElement {
   }
 
   _metaLabel(meta) {
-    return `${meta.stopCount || 12} stops, ${meta.duration || '~2 hours'}, ${meta.distance || '~3 km'}`;
+    return `${meta.stopCount || 11} stops, ${meta.duration || '~2.5 hours'}, ${meta.distance || '~3 km'}`;
   }
 
   _compactDuration(duration) {
-    return this._escapeHTML(String(duration || '~2 hours').replace(/\s*hours?\b/i, 'h'));
+    return this._escapeHTML(String(duration || '~2.5 hours').replace(/\s*hours?\b/i, 'h'));
   }
 
   _compactDistance(distance) {

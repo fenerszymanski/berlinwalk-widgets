@@ -15,7 +15,7 @@
       "location": "Alexanderplatz",
       "x": 97,
       "y": 37,
-      "hook": "Where the tour begins. A Cold War-era monument under which generations of Berliners have met without giving an address.",
+      "hook": "Where the walk begins. A Cold War-era monument under which generations of Berliners have met without giving an address.",
       "image": null
     },
     {
@@ -29,24 +29,15 @@
     },
     {
       "id": 3,
-      "name": "Rotes Rathaus",
-      "location": "Berlin's Town Hall",
+      "name": "Rotes Rathaus & Neptunbrunnen",
+      "location": "Town Hall and Neptune Fountain",
       "x": 89,
       "y": 47,
-      "hook": "Red brick that has watched Berlin become Berlin since 1869. Empire, war, division, reunification — all from one balcony.",
+      "hook": "Red brick that has watched Berlin become Berlin since 1869: empire, war, division, reunification, all from one balcony. In front, four river goddesses sit around a sea god most people never stop to look at.",
       "image": null
     },
     {
       "id": 4,
-      "name": "Neptun Brunnen",
-      "location": "Neptune Fountain",
-      "x": 73,
-      "y": 42,
-      "hook": "Four river goddesses around a sea god in the middle of Berlin. The detail no one notices until you stop to look.",
-      "image": null
-    },
-    {
-      "id": 5,
       "name": "St. Mary's Church",
       "location": "Marienkirche",
       "x": 72,
@@ -55,12 +46,21 @@
       "image": null
     },
     {
-      "id": 6,
+      "id": 5,
       "name": "Marx-Engels Forum",
       "location": "The bronze meeting",
       "x": 76,
       "y": 58,
       "hook": "Two seated philosophers, a bit weathered. The plaza around them tells a longer story than the statue itself.",
+      "image": null
+    },
+    {
+      "id": 6,
+      "name": "Sanchi Gate",
+      "location": "Outside the Humboldt Forum",
+      "x": 64,
+      "y": 73,
+      "hook": "A copy of a stone gateway from the Great Stupa at Sanchi in India, standing beside a rebuilt Prussian palace. It asks whose history a museum city chooses to show.",
       "image": null
     },
     {
@@ -74,55 +74,47 @@
     },
     {
       "id": 8,
-      "name": "Lustgarten",
-      "location": "Pleasure Garden",
-      "x": 38,
-      "y": 72,
-      "hook": "Royal park, military parade ground, Nazi rally site, and finally a garden again. Same lawn, very different uses.",
+      "name": "Lustgarten, Berliner Dom & Altes Museum",
+      "location": "Museum Island",
+      "x": 41,
+      "y": 64,
+      "hook": "Royal garden, parade ground, rally site and a garden again, framed by the cathedral's green dome and Berlin's first public museum from 1830.",
       "image": null
     },
     {
       "id": 9,
-      "name": "Berliner Dom",
-      "location": "Berlin Cathedral",
-      "x": 46,
-      "y": 64,
-      "hook": "Prussian ambition in stone. The Hohenzollern family vault below, the green dome above, the bullet holes still on the facade.",
+      "name": "Neues Museum, Alte Nationalgalerie & Pergamon",
+      "location": "Museum Island",
+      "x": 31,
+      "y": 46,
+      "hook": "Nefertiti's home, a temple of 19th-century German painting and the Pergamon Museum behind its renovation fences. UNESCO-protected and hard-won.",
       "image": null
     },
     {
       "id": 10,
-      "name": "Altes Museum",
-      "location": "Old Museum",
-      "x": 37,
-      "y": 56,
-      "hook": "Berlin's first public museum, 1830. Eighteen Ionic columns built to convince a young city it deserved to keep ancient treasures.",
+      "name": "Friedrichsbrücke",
+      "location": "Bridge over the Spree",
+      "x": 51,
+      "y": 44,
+      "hook": "The bridge off Museum Island. Stop halfway and look back at the cathedral and the museums before the last stretch.",
       "image": null
     },
     {
       "id": 11,
-      "name": "Neues Museum & Alte Nationalgalerie",
-      "location": "Museum Island",
-      "x": 31,
-      "y": 46,
-      "hook": "Nefertiti's home and a temple of 19th-century German painting, side by side. UNESCO-protected, hard-won, fully restored.",
-      "image": null
-    },
-    {
-      "id": 12,
       "name": "Hackescher Markt",
       "location": "End of the tour",
       "x": 25,
       "y": 10,
-      "hook": "Where the tour ends and Berlin's most photogenic courtyards begin. Coffee, S-Bahn, your next adventure.",
+      "hook": "Where the walk ends and Berlin's courtyards begin. Coffee, the S-Bahn and the rest of your day.",
       "image": null
     }
   ],
   "meta": {
-    "stopCount": 12,
-    "duration": "~2 hours",
+    "stopCount": 11,
+    "placeCount": 16,
+    "duration": "~2.5 hours",
     "distance": "~3 km",
     "startStop": 1,
-    "endStop": 12
+    "endStop": 11
   }
 }

@@ -4,11 +4,53 @@ const BW_HOME_TWO_DOORS_ASSET_BASE = new URL('./assets/', BW_HOME_TWO_DOORS_SCRI
 const BW_HOME_TWO_DOORS_FONT_BASE = new URL('../home-products/assets/fonts/', BW_HOME_TWO_DOORS_SCRIPT_URL).href;
 const BW_HOME_TWO_DOORS_CSS_URL = new URL('./home-two-doors-live.css', BW_HOME_TWO_DOORS_SCRIPT_URL).href;
 
-const BW_HOME_TWO_DOORS_BOOKING_URL = 'https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based';
+// Berlin Then and Now (Wix Bookings service 145cb27e). A picked date travels to
+// the booking page as ?start=YYYY-MM-DDTHH:MM (Berlin time).
+const BW_HOME_TWO_DOORS_BOOKING_URL = 'https://www.walkofberlin.com/book-berlin-walking-tour/berlin-then-and-now';
+const BW_HOME_TWO_DOORS_TOUR_SERVICE_ID = '145cb27e-c5bd-456d-bfbd-a09d4d6f5f9d';
+const BW_HOME_TWO_DOORS_AVAILABILITY_URL = `https://berlinwalk-content-app.vercel.app/api/booking-calendar-availability?days=120&guests=1&serviceId=${BW_HOME_TWO_DOORS_TOUR_SERVICE_ID}`;
 const BW_HOME_TWO_DOORS_AUDIO_HUB_URL = 'https://www.berlinwalk.com/audio-tours';
-const BW_HOME_TWO_DOORS_REVIEWS_URL = 'https://www.freetour.com/company/97387';
+const BW_HOME_TWO_DOORS_REVIEWS_URL = 'https://www.walkofberlin.com/reviews';
+const BW_HOME_TWO_DOORS_CONTACT_URL = 'https://www.walkofberlin.com/contact';
 const BW_HOME_TWO_DOORS_TRIO_URL = 'https://www.berlinwalk.com/products/berlin-audio-trio-bundle';
 const BW_HOME_TWO_DOORS_REVIEWS_API = 'https://www.berlinwalk.com/_functions/listReviews?limit=100';
+
+// Same eight questions as the homepage FAQPage JSON-LD (Wix SEO tags on c1dmp)
+// and faq/data/home.json. Change all three together.
+const BW_HOME_TWO_DOORS_FAQ = [
+  {
+    q: 'What is Berlin Then and Now?',
+    a: 'It is my walking tour through the part of Berlin that is gone. The streets where the city grew up were cleared after the war, and much of what people call the old town today is a 1980s rebuild. At every stop I hold up an archive photo of the same place, so you can see what stood there and what is left.',
+  },
+  {
+    q: 'How long is it and where does it go?',
+    a: 'About 2.5 hours and about 3 km on foot. We start at the World Clock on Alexanderplatz and end at Hackescher Markt: 11 stops covering 16 places, from the TV Tower and the Marienkirche to the Humboldt Forum and Museum Island.',
+  },
+  {
+    q: 'How much does it cost?',
+    a: '€25 per person, paid when you book. That is the same price on every site that sells it.',
+  },
+  {
+    q: 'How big is the group, and does my date run?',
+    a: 'No more than 8 people. Every date runs, even if you are the only guest.',
+  },
+  {
+    q: 'Where do I meet you?',
+    a: 'At the World Clock (Weltzeituhr) on Alexanderplatz. Come 5 minutes before the start and look for my green umbrella.',
+  },
+  {
+    q: 'Can I cancel or change my date?',
+    a: 'Yes. Cancel up to 24 hours before the start and you get a full refund, or move to another date if there is space. Later than that I cannot refund. If I have to cancel, for weather or anything else, you get your money back in full.',
+  },
+  {
+    q: 'What if it rains?',
+    a: 'The walk runs in light rain, so bring a jacket. If the weather makes it unsafe, I cancel and refund you in full.',
+  },
+  {
+    q: 'Is it in English, and can I book it just for my group?',
+    a: 'The walk is in English. For your own group I run private walks: €249 for up to 6 people or €299 for up to 10.',
+  },
+];
 
 const BW_HOME_TWO_DOORS_WALKS = [
   {
@@ -180,6 +222,7 @@ class BWHomeTwoDoorsElement extends HTMLElement {
     this._bindCtas();
     this._bindAudioPlayers();
     this._loadReviews();
+    this._loadDates();
     this._bindImpressions();
   }
 
@@ -190,6 +233,7 @@ class BWHomeTwoDoorsElement extends HTMLElement {
     this._consentEvents?.forEach((eventName) => window.removeEventListener(eventName, this._consentHandler));
     document.removeEventListener('visibilitychange', this._visibilityHandler);
     this._reviewRequest?.abort();
+    this._datesRequest?.abort();
     this._reviewObserver?.disconnect();
     this._stopReviewRotation();
     document.removeEventListener('visibilitychange', this._reviewVisibilityHandler);
@@ -239,12 +283,15 @@ class BWHomeTwoDoorsElement extends HTMLElement {
         <span class="bw-home-two-doors__more-cta">${product.label === 'TOOLS' ? 'Explore free tools' : 'Explore this product'} →</span>
       </a>`).join('');
 
+    const faqItems = BW_HOME_TWO_DOORS_FAQ.map((item) => `
+              <details><summary>${item.q}</summary><p>${item.a}</p></details>`).join('');
+
     this.innerHTML = `
       <div class="bw-home-two-doors" id="bw-home-two-doors" ${this.hasAttribute('embedded') ? '' : 'role="main"'}>
         <section class="bw-home-two-doors__doors-title" aria-labelledby="bw-home-two-doors-title">
           <div class="bw-home-two-doors__wrap">
             <h1 id="bw-home-two-doors-title">One guide. <em>Two ways</em> to walk Berlin.</h1>
-            <p>Walk with me on the free tour, or take one of my audio walks on your own phone.</p>
+            <p>Walk with me on Berlin Then and Now, or take one of my audio walks on your own phone.</p>
           </div>
         </section>
 
@@ -252,17 +299,17 @@ class BWHomeTwoDoorsElement extends HTMLElement {
           <article class="bw-home-two-doors__door bw-home-two-doors__door--live" data-bw-home-card="live_tour" data-bw-card-type="live-tour" data-bw-placement="hero">
             <img class="bw-home-two-doors__background" src="${asset('tour-altes-museum.webp')}" alt="Yusuf explaining Berlin history to guests outside the Altes Museum" width="1600" height="900">
             <span class="bw-home-two-doors__scrim" aria-hidden="true"></span>
-            <span class="bw-home-two-doors__chip bw-home-two-doors__chip--yellow bw-home-two-doors__corner">LIVE · FREE · TIP-BASED</span>
-            <span class="bw-home-two-doors__eyebrow bw-home-two-doors__eyebrow--dark">FREE BERLIN WALKING TOUR</span>
+            <span class="bw-home-two-doors__chip bw-home-two-doors__chip--yellow bw-home-two-doors__corner">LIVE · MAX 8 PEOPLE</span>
+            <span class="bw-home-two-doors__eyebrow bw-home-two-doors__eyebrow--dark">BERLIN THEN AND NOW</span>
             <h2>Walk <em>with me.</em></h2>
-            <p>About 2 hours, 11 stops, World Clock to Hackescher Markt. Book with a €2 refundable deposit per guest; tip separately at the end.</p>
+            <p>Berlin's old city did not survive. I walk you through where it stood and hold up an archive photo of the same place at every stop.</p>
             <div class="bw-home-two-doors__door-actions">
-              <a class="bw-home-two-doors__btn bw-home-two-doors__btn--yellow" href="${BW_HOME_TWO_DOORS_BOOKING_URL}" data-bw-cta-id="book_live_tour" data-bw-cta-placement="hero-live">Reserve your place</a>
+              <a class="bw-home-two-doors__btn bw-home-two-doors__btn--yellow" href="${BW_HOME_TWO_DOORS_BOOKING_URL}" data-bw-cta-id="book_live_tour" data-bw-cta-placement="hero-live">See dates and book</a>
               <a class="bw-home-two-doors__link bw-home-two-doors__link--light" href="#live-route" data-bw-cta-id="learn_live_route" data-bw-cta-placement="hero-live">Route &amp; meeting point</a>
             </div>
             <div class="bw-home-two-doors__door-meta">
-              <span class="bw-home-two-doors__chip">11 stops · ~2 hours</span>
-              <span class="bw-home-two-doors__chip">9.8 / 10 on FreeTour</span>
+              <span class="bw-home-two-doors__chip">About 2.5 hours · 11 stops, 16 places</span>
+              <span class="bw-home-two-doors__chip">Max 8 · €25</span>
             </div>
           </article>
 
@@ -298,17 +345,17 @@ class BWHomeTwoDoorsElement extends HTMLElement {
               </div>
               <div class="bw-home-two-doors__compare-row">
                 <div>WHEN &amp; WHERE</div>
-                <div><b>A booked start time.</b><br>Meet at the World Clock. About 2 hours through the historic centre.</div>
+                <div><b>A 12:30 start on my tour dates.</b><br>Meet at the World Clock. About 2.5 hours through Berlin's vanished old city.</div>
                 <div><b>Your own start time.</b><br>Choose a route and start at its meeting point. Pause whenever you like.</div>
               </div>
               <div class="bw-home-two-doors__compare-row">
                 <div>PRICE</div>
-                <div><b>€2 refundable deposit per guest.</b><br>Refunded after attendance is confirmed. Tip separately at the end.</div>
+                <div><b>€25 per person.</b><br>Paid when you book. No more than 8 people, and every date runs.</div>
                 <div><b>€9.90 per walk.</b><br>Berlin Wall + Hidden Berlin + Medieval Berlin: €24.90 as a trio.</div>
               </div>
               <div class="bw-home-two-doors__compare-row">
                 <div>HOW IT WORKS</div>
-                <div><b>Walk with me.</b><br>Bring your questions and comfortable shoes.</div>
+                <div><b>Walk with me.</b><br>At every stop I hold up an archive photo of the same place. Bring your questions and comfortable shoes.</div>
                 <div><b>Listen on your phone.</b><br>Recorded stories I researched and wrote. Bring headphones; no app needed. Audio download + PDF route guide included.</div>
               </div>
             </div>
@@ -316,13 +363,13 @@ class BWHomeTwoDoorsElement extends HTMLElement {
               <article class="bw-home-two-doors__choice-card bw-home-two-doors__choice-card--live">
                 <span class="bw-home-two-doors__choice-type">WITH YOUR GUIDE</span>
                 <h3>Live tour</h3>
-                <p class="bw-home-two-doors__choice-summary">A shared walk where you can ask questions.</p>
+                <p class="bw-home-two-doors__choice-summary">A small-group walk with archive photos, where you can ask questions.</p>
                 <dl>
-                  <div><dt>When</dt><dd>A booked start time · about 2 hours</dd></div>
+                  <div><dt>When</dt><dd>12:30 start · about 2.5 hours</dd></div>
                   <div><dt>Where</dt><dd>Meet me at the World Clock</dd></div>
-                  <div><dt>Booking</dt><dd>€2 refundable deposit per guest · tip separately</dd></div>
+                  <div><dt>Price</dt><dd>€25 per person · max 8 people</dd></div>
                 </dl>
-                <a href="${BW_HOME_TWO_DOORS_BOOKING_URL}" data-bw-cta-id="book_compare_mobile" data-bw-cta-placement="compare">Check live dates →</a>
+                <a href="${BW_HOME_TWO_DOORS_BOOKING_URL}" data-bw-cta-id="book_compare_mobile" data-bw-cta-placement="compare">See dates and book →</a>
               </article>
               <article class="bw-home-two-doors__choice-card bw-home-two-doors__choice-card--audio">
                 <span class="bw-home-two-doors__choice-type">ON YOUR OWN PHONE</span>
@@ -373,20 +420,21 @@ class BWHomeTwoDoorsElement extends HTMLElement {
               <span class="bw-home-two-doors__chip bw-home-two-doors__chip--yellow bw-home-two-doors__tag">WORLD CLOCK → HACKESCHER MARKT</span>
             </div>
             <div class="bw-home-two-doors__live-copy">
-              <span class="bw-home-two-doors__eyebrow">THE FREE TOUR</span>
-              <h2>A short walk with a clear arc.</h2>
-              <p>I start at Alexanderplatz's World Clock and move through the historic centre of former East Berlin, finishing near Hackescher Markt. The tour connects divided-city history to the places around you; it does not trace the full Berlin Wall line.</p>
+              <span class="bw-home-two-doors__eyebrow">BERLIN THEN AND NOW</span>
+              <h2>The Berlin that disappeared, stop by stop.</h2>
+              <p>I start at the World Clock on Alexanderplatz and walk you through the streets where Berlin grew up, most of them cleared after the war. At every stop I hold up an archive photo of the same place, so you can see what stood there and what is left. We finish at Hackescher Markt. The walk does not follow the Berlin Wall; my Berlin Wall audio walk does.</p>
               <div class="bw-home-two-doors__facts">
-                <div><b>11</b><span>stops</span></div>
-                <div><b>~2h</b><span>walking time</span></div>
+                <div><b>11</b><span>stops, 16 places</span></div>
+                <div><b>~2.5h</b><span>on foot</span></div>
                 <div><b>~3km</b><span>route length</span></div>
-                <div><b class="bw-home-two-doors__free-label">€2 deposit</b><span>per guest · refunded after attendance</span></div>
+                <div><b>€25</b><span>per person</span></div>
               </div>
               <div class="bw-home-two-doors__live-actions">
-                <a class="bw-home-two-doors__btn bw-home-two-doors__btn--green" href="${BW_HOME_TWO_DOORS_BOOKING_URL}" data-bw-cta-id="book_route" data-bw-cta-placement="live-route">Check dates</a>
+                <a class="bw-home-two-doors__btn bw-home-two-doors__btn--green" href="${BW_HOME_TWO_DOORS_BOOKING_URL}" data-bw-cta-id="book_route" data-bw-cta-placement="live-route">See dates and book</a>
                 <a class="bw-home-two-doors__link" href="${BW_HOME_TWO_DOORS_REVIEWS_URL}" data-bw-cta-id="reviews_route" data-bw-cta-placement="live-route">Read reviews</a>
               </div>
-              <p class="bw-home-two-doors__schedule">Sep: 11:30 &amp; 15:30 (Tue–Sat) · Oct: 11:30 (selected Wed–Sun) · Check dates</p>
+              <p class="bw-home-two-doors__schedule">12:30 start at the World Clock, Alexanderplatz · max 8 people</p>
+              <div class="bw-home-two-doors__dates" data-bw-live-dates aria-label="Next tour dates" hidden></div>
             </div>
           </div>
         </section>
@@ -420,12 +468,8 @@ class BWHomeTwoDoorsElement extends HTMLElement {
                 <span class="bw-home-two-doors__eyebrow"><span class="bw-home-two-doors__dot"></span>Guest feedback</span>
                 <h2>Clear history. Easy pace. Good questions.</h2>
               </div>
-              <p class="bw-home-two-doors__lead">Short comments from recent live-tour guests. You can read more on FreeTour. These are not audio-walk reviews.</p>
+              <p class="bw-home-two-doors__lead">Short comments from guests who walked this route with me. These are not audio-walk reviews. <a class="bw-home-two-doors__link" href="${BW_HOME_TWO_DOORS_REVIEWS_URL}" data-bw-cta-id="reviews_rating" data-bw-cta-placement="reviews">Read all guest reviews</a></p>
             </div>
-            <article class="bw-home-two-doors__rating-panel" data-bw-home-card="review_rating" data-bw-card-type="review-rating" data-bw-placement="reviews">
-              <div><span class="bw-home-two-doors__score">9.8</span><span class="bw-home-two-doors__scope">/ 10 on FreeTour · live tour guests</span></div>
-              <div><p>Read what guests say about the live walk, the stories and the pace. This rating is for the guided tour, not the audio walks.</p><a class="bw-home-two-doors__link bw-home-two-doors__link--light" href="${BW_HOME_TWO_DOORS_REVIEWS_URL}" data-bw-cta-id="reviews_rating" data-bw-cta-placement="reviews">Read guest reviews</a></div>
-            </article>
             <div class="bw-home-two-doors__review-carousel" aria-label="Guest comments from the live tour">
               <div class="bw-home-two-doors__review-viewport" role="region" aria-roledescription="carousel" aria-label="Recent guest reviews" aria-live="off" data-bw-review-viewport>
                 <p class="bw-home-two-doors__review-status">Loading guest comments…</p>
@@ -458,19 +502,83 @@ class BWHomeTwoDoorsElement extends HTMLElement {
             <div class="bw-home-two-doors__section-head">
               <div>
                 <span class="bw-home-two-doors__eyebrow"><span class="bw-home-two-doors__dot"></span>Before you choose</span>
-                <h2>Four quick answers.</h2>
+                <h2>Quick answers about the walk.</h2>
               </div>
-              <p class="bw-home-two-doors__lead">If your question is not here, open the booking or audio page and I will give you the current detail there.</p>
+              <p class="bw-home-two-doors__lead">If your question is not here, <a class="bw-home-two-doors__link" href="${BW_HOME_TWO_DOORS_CONTACT_URL}" data-bw-cta-id="faq_contact" data-bw-cta-placement="faq">send me a message</a> and I will answer it myself.</p>
             </div>
-            <div class="bw-home-two-doors__faq">
-              <details><summary>Where does the free tour start?</summary><p>At the World Clock on Alexanderplatz. The route then moves through the historic centre of former East Berlin and finishes near Hackescher Markt.</p></details>
-              <details><summary>Does the free tour follow the Berlin Wall?</summary><p>No. It connects divided-city history to the central places around you; it does not trace the full Berlin Wall line. The Berlin Wall audio walk is the focused route for that subject.</p></details>
-              <details><summary>How do the audio walks work?</summary><p>Open a route in your browser, go to its named start point and play each chapter when you are ready. You can pause, stop and continue at your own pace.</p></details>
-              <details><summary>How do I choose a live tour date?</summary><p>Open the booking page and choose a date that is currently offered. Times can change by month, so use the date picker for the day you actually want.</p></details>
+            <div class="bw-home-two-doors__faq">${faqItems}
             </div>
           </div>
         </section>
       </div>`;
+  }
+
+  // Live dates for Berlin Then and Now. While the service has no bookable date
+  // (booking not open yet) or the feed fails, the strip stays hidden and the
+  // "See dates and book" buttons carry the visitor to the booking page.
+  async _loadDates() {
+    const strip = this.querySelector('[data-bw-live-dates]');
+    if (!strip || typeof fetch !== 'function') return;
+    this._datesRequest = new AbortController();
+    try {
+      const response = await fetch(BW_HOME_TWO_DOORS_AVAILABILITY_URL, { signal: this._datesRequest.signal, cache: 'no-cache' });
+      if (!response.ok) return;
+      const data = await response.json();
+      if (!this.isConnected || !data || !Array.isArray(data.slots)) return;
+      const read = (value, options) => {
+        const map = {};
+        new Intl.DateTimeFormat('en-GB', { timeZone: 'Europe/Berlin', ...options })
+          .formatToParts(new Date(value))
+          .forEach((part) => { if (part.type !== 'literal') map[part.type] = part.value; });
+        return map;
+      };
+      // The feed can send Berlin wall-clock times without a zone
+      // ("2026-10-02T12:30:00") or UTC instants; both become YYYY-MM-DDTHH:MM.
+      const berlinKey = (value) => {
+        const text = String(value || '');
+        if (/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}/.test(text) && !/(Z|[+-]\d{2}:?\d{2})$/i.test(text)) return text.slice(0, 16);
+        const date = new Date(text);
+        if (Number.isNaN(date.getTime())) return '';
+        const num = read(date, { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', hourCycle: 'h23' });
+        return `${num.year}-${num.month}-${num.day}T${num.hour}:${num.minute}`;
+      };
+      const nowKey = berlinKey(new Date().toISOString());
+      const seen = new Set();
+      const slots = data.slots
+        .filter((slot) => slot && (slot.openSpots === null || slot.openSpots === undefined || Number(slot.openSpots) > 0))
+        .map((slot) => berlinKey(slot.startDate))
+        .filter((key) => /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}$/.test(key) && key > nowKey)
+        .sort()
+        .filter((key) => !seen.has(key.slice(0, 10)) && seen.add(key.slice(0, 10)))
+        .slice(0, 4)
+        .map((key) => {
+          const txt = read(`${key.slice(0, 10)}T12:00:00Z`, { weekday: 'short', day: 'numeric', month: 'short' });
+          return { key, label: `${txt.weekday} ${txt.day} ${txt.month} · ${key.slice(11, 16)}` };
+        });
+      if (!slots.length) return;
+      const label = document.createElement('span');
+      label.className = 'bw-home-two-doors__dates-label';
+      label.textContent = 'Next dates';
+      const links = slots.map(({ key, label: text }) => {
+        const url = new URL(BW_HOME_TWO_DOORS_BOOKING_URL);
+        url.searchParams.set('start', key);
+        const link = document.createElement('a');
+        link.className = 'bw-home-two-doors__date';
+        link.href = url.toString();
+        link.dataset.bwCtaId = 'book_date_chip';
+        link.dataset.bwCtaPlacement = 'live-route';
+        link.textContent = text;
+        link.addEventListener('click', () => bwHomeTwoDoorsTrack('bw_home_two_doors_cta_click', {
+          surface: 'homepage', placement: 'live-route', cardId: 'live_route', cardType: 'live-route',
+          ctaId: 'book_date_chip', action: 'click',
+        }));
+        return link;
+      });
+      strip.replaceChildren(label, ...links);
+      strip.hidden = false;
+    } catch (_error) {
+      // Leave the strip hidden.
+    }
   }
 
   async _loadReviews() {
@@ -531,7 +639,7 @@ class BWHomeTwoDoorsElement extends HTMLElement {
       viewport.replaceChildren();
       const message = document.createElement('p');
       message.className = 'bw-home-two-doors__review-status';
-      message.textContent = 'Guest comments are unavailable right now. Read them on FreeTour.com.';
+      message.textContent = 'Guest comments are unavailable right now. You can read them on my reviews page.';
       viewport.append(message);
     }
   }

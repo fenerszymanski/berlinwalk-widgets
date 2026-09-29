@@ -532,7 +532,7 @@ class BWTestimonialsElement extends HTMLElement {
           <div class="bw-trust-strip" aria-label="Review platform rating"></div>
 
           <div class="bw-cta-row">
-            <a class="bw-booking-cta" href="https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based">Reserve your spot</a>
+            <a class="bw-booking-cta" href="https://www.walkofberlin.com/book-berlin-walking-tour/berlin-then-and-now">See dates and book</a>
           </div>
         </div>
       </section>
@@ -828,17 +828,14 @@ class BWTestimonialsElement extends HTMLElement {
     const strip = this.querySelector('.bw-trust-strip');
     if (!strip) return;
 
-    const freetourHref = links.freetour || 'https://www.freetour.com/berlin/berlin-behind-the-landmarks-a-walk-through-power-faith-change';
-    const platforms = [
-      { name: 'FreeTour.com', rating: '9.8/10', href: freetourHref }
-    ];
-
-    strip.innerHTML = platforms.map(platform => `
-      <a class="bw-trust-card" href="${platform.href}">
-        <span class="bw-trust-logo">${this._escapeHtml(platform.name)}</span>
-        <span class="bw-trust-rating">${this._escapeHtml(platform.rating)} traveler rating</span>
+    // Berlin Then and Now (29 Sep 2026): no platform rating on sales surfaces.
+    // One link to the on-site reviews page instead.
+    strip.innerHTML = `
+      <a class="bw-trust-card" href="https://www.walkofberlin.com/reviews">
+        <span class="bw-trust-logo">All guest reviews</span>
+        <span class="bw-trust-rating">Guests who walked this route with me</span>
       </a>
-    `).join('');
+    `;
   }
 
   _setupInteractions() {

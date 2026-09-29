@@ -1,4 +1,4 @@
-const BW_GUIDE_HOME_BOOKING_URL = 'https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based';
+const BW_GUIDE_HOME_BOOKING_URL = 'https://www.walkofberlin.com/book-berlin-walking-tour/berlin-then-and-now';
 const BW_GUIDE_HOME_GUIDE_URL = 'https://www.berlinwalk.com/the-guide';
 const BW_GUIDE_HOME_IMAGE_URL = 'https://static.wixstatic.com/media/5a08a3_ac78d5df37b2486ab6662cf3872ea9a6~mv2.jpg/v1/fill/w_900,h_675,al_c,q_85/file.jpg';
 
@@ -327,22 +327,22 @@ class BWGuideHomeElement extends HTMLElement {
 
             <div class="bw-guide-home-proof" aria-label="Tour highlights">
               <div class="bw-guide-home-proof-item">
-                <strong>12 stops</strong>
-                <span>Alexanderplatz to Hackescher Markt.</span>
+                <strong>11 stops</strong>
+                <span>16 places, Alexanderplatz to Hackescher Markt.</span>
               </div>
               <div class="bw-guide-home-proof-item">
-                <strong>About 2 hours</strong>
+                <strong>About 2.5 hours</strong>
                 <span>Relaxed pace, no rushed checklist.</span>
               </div>
               <div class="bw-guide-home-proof-item">
-                <strong>5.0 rating</strong>
-                <span>Stories, humor, and real context.</span>
+                <strong>Max 8 people</strong>
+                <span>An archive photo at every stop.</span>
               </div>
             </div>
 
             <div class="bw-guide-home-actions">
               <a class="bw-guide-home-btn bw-guide-home-btn-primary" href="${BW_GUIDE_HOME_GUIDE_URL}">Meet Yusuf</a>
-              <a class="bw-guide-home-btn bw-guide-home-btn-secondary" href="${BW_GUIDE_HOME_BOOKING_URL}">Book your spot</a>
+              <a class="bw-guide-home-btn bw-guide-home-btn-secondary" href="${BW_GUIDE_HOME_BOOKING_URL}">See dates and book</a>
             </div>
           </div>
         </div>

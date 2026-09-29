@@ -269,30 +269,42 @@
     ]
   },
   "home": {
-    "subtitle": "Everything you need to know about my free walking tour through Berlin's historic city center.",
+    "subtitle": "Quick answers about Berlin Then and Now, my walk through Berlin's vanished old city.",
     "tabs": [
       {
         "name": "FAQ",
         "items": [
           {
-            "q": "Is the tour really free?",
-            "a": "Yes. There is no fixed price and no upfront payment. You reserve a spot for free, walk with me, and decide at the end what the experience was worth to you."
+            "q": "What is Berlin Then and Now?",
+            "a": "It is my walking tour through the part of Berlin that is gone. The streets where the city grew up were cleared after the war, and much of what people call the old town today is a 1980s rebuild. At every stop I hold up an archive photo of the same place, so you can see what stood there and what is left."
           },
           {
-            "q": "How does tipping work?",
-            "a": "At the end, I collect tips in cash. For a good tour of about 2 hours, €10 per person is the minimum fair tip, €15 is a strong thank-you, and €20+ is generous."
+            "q": "How long is it and where does it go?",
+            "a": "About 2.5 hours and about 3 km on foot. We start at the World Clock on Alexanderplatz and end at Hackescher Markt: 11 stops covering 16 places, from the TV Tower and the Marienkirche to the Humboldt Forum and Museum Island."
           },
           {
-            "q": "Where is the meeting point?",
-            "a": "The meeting point is the Weltzeituhr (World Clock) at Alexanderplatz. I use a green umbrella so you can spot me there. Please arrive 5 minutes before the tour starts."
+            "q": "How much does it cost?",
+            "a": "€25 per person, paid when you book. That is the same price on every site that sells it."
           },
           {
-            "q": "How long is the tour?",
-            "a": "The tour lasts about 2 hours and covers about 3 kilometers on foot, from Alexanderplatz toward Hackescher Markt at a comfortable walking pace."
+            "q": "How big is the group, and does my date run?",
+            "a": "No more than 8 people. Every date runs, even if you are the only guest."
           },
           {
-            "q": "Do I need to book in advance?",
-            "a": "Yes. Please book online at [berlinwalk.com](https://www.berlinwalk.com) so I can plan the group size and you have a confirmed free spot."
+            "q": "Where do I meet you?",
+            "a": "At the World Clock (Weltzeituhr) on Alexanderplatz. Come 5 minutes before the start and look for my green umbrella."
+          },
+          {
+            "q": "Can I cancel or change my date?",
+            "a": "Yes. Cancel up to 24 hours before the start and you get a full refund, or move to another date if there is space. Later than that I cannot refund. If I have to cancel, for weather or anything else, you get your money back in full."
+          },
+          {
+            "q": "What if it rains?",
+            "a": "The walk runs in light rain, so bring a jacket. If the weather makes it unsafe, I cancel and refund you in full."
+          },
+          {
+            "q": "Is it in English, and can I book it just for my group?",
+            "a": "The walk is in English. For your own group I run private walks: €249 for up to 6 people or €299 for up to 10."
           }
         ]
       }

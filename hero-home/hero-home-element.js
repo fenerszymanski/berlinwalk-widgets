@@ -1,4 +1,4 @@
-const BW_HERO_HOME_BOOKING_URL = 'https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based';
+const BW_HERO_HOME_BOOKING_URL = 'https://www.walkofberlin.com/book-berlin-walking-tour/berlin-then-and-now';
 const BW_HERO_HOME_PRIVATE_TOUR_URL = 'https://www.berlinwalk.com/private-tour';
 
 const BW_HERO_HOME_ASSET_BASE = (() => {
@@ -478,31 +478,31 @@ class BWHeroHomeElement extends HTMLElement {
 
         <div class="bw-hero-inner">
           <div class="bw-hero-content">
-            <span class="bw-hero-kicker">Tip based · 11 stops · ~2h</span>
-            <h1 id="bw-hero-home-title" class="bw-hero-title">Free Berlin <span class="bw-hero-title-mark">Walking Tour</span>.</h1>
-            <p class="bw-hero-lead">Berlin was founded in 1237, but most tours skip straight to 1933. In about 2 hours, walk the medieval core from Alexanderplatz to Hackescher Markt with Yusuf, and see the city the way a Berliner reads it: oldest streets first.</p>
+            <span class="bw-hero-kicker">11 stops · 16 places · ~2.5h</span>
+            <h1 id="bw-hero-home-title" class="bw-hero-title">Berlin Then <span class="bw-hero-title-mark">and Now</span>.</h1>
+            <p class="bw-hero-lead">Berlin's old city did not survive. I walk you through where it stood, from Alexanderplatz to Hackescher Markt, and hold up an archive photo of the same place at every stop.</p>
 
             <div class="bw-hero-actions">
-              <a class="bw-hero-btn bw-hero-btn-primary" href="${BW_HERO_HOME_BOOKING_URL}" target="_top">Book your spot</a>
+              <a class="bw-hero-btn bw-hero-btn-primary" href="${BW_HERO_HOME_BOOKING_URL}" target="_top">See dates and book</a>
               <a class="bw-hero-btn bw-hero-btn-secondary" href="${BW_HERO_HOME_PRIVATE_TOUR_URL}" target="_top">Private tour</a>
             </div>
 
             <div class="bw-hero-proof" aria-label="Tour highlights">
               <div class="bw-hero-proof-item">
-                <strong>9.8</strong>
-                <span>On Freetour</span>
+                <strong>€25</strong>
+                <span>Per person</span>
               </div>
               <div class="bw-hero-proof-item">
                 <strong>11</strong>
                 <span>Story stops</span>
               </div>
               <div class="bw-hero-proof-item">
-                <strong>~2h</strong>
-                <span>Easy walk</span>
+                <strong>~2.5h</strong>
+                <span>On foot</span>
               </div>
               <div class="bw-hero-proof-item">
-                <strong>Tip</strong>
-                <span>Based</span>
+                <strong>Max 8</strong>
+                <span>People</span>
               </div>
             </div>
           </div>
