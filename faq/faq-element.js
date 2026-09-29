@@ -1,3 +1,8 @@
+// FAQ data is regenerated independently of this element, so it is fetched with
+// cache: 'default' and expires with the host's Cache-Control (GitHub Pages
+// max-age=600). The stamp only moves readers off responses that older builds
+// stored with cache: 'force-cache'; it is a build stamp, not the cache key.
+const BW_FAQ_DATA_STAMP = '20260929-thenandnow';
 const BW_FAQ_REMOTE_DATA_BASE = 'https://fenerszymanski.github.io/berlinwalk-widgets/faq/data/';
 const BW_FAQ_REMOTE_AGGREGATE_URL = 'https://fenerszymanski.github.io/berlinwalk-widgets/faq/data.json';
 const BW_FAQ_LOCAL_DATA_BASE = document.currentScript && document.currentScript.src
@@ -58,7 +63,7 @@ class BWFAQElement extends HTMLElement {
 
   async _loadData() {
     const post = this.getAttribute('post') || 'home';
-    const shardName = `${encodeURIComponent(post)}.json`;
+    const shardName = `${encodeURIComponent(post)}.json?v=${BW_FAQ_DATA_STAMP}`;
     const shardUrls = [...new Set([
       `${BW_FAQ_LOCAL_DATA_BASE}${shardName}`,
       `${BW_FAQ_REMOTE_DATA_BASE}${shardName}`,
@@ -67,7 +72,7 @@ class BWFAQElement extends HTMLElement {
     let lastError = null;
     for (const url of shardUrls) {
       try {
-        const res = await fetch(url, { signal: this._controller.signal, cache: 'force-cache' });
+        const res = await fetch(url, { signal: this._controller.signal, cache: 'default' });
         if (!res.ok) throw new Error(`FAQ data unavailable: ${res.status}`);
         const payload = await res.json();
         const config = payload && payload.config ? payload.config : payload;
@@ -77,10 +82,11 @@ class BWFAQElement extends HTMLElement {
       }
     }
 
-    const aggregateUrls = [...new Set([BW_FAQ_LOCAL_AGGREGATE_URL, BW_FAQ_REMOTE_AGGREGATE_URL])];
+    const aggregateUrls = [...new Set([BW_FAQ_LOCAL_AGGREGATE_URL, BW_FAQ_REMOTE_AGGREGATE_URL])]
+      .map((url) => `${url}?v=${BW_FAQ_DATA_STAMP}`);
     for (const url of aggregateUrls) {
       try {
-        const res = await fetch(url, { signal: this._controller.signal, cache: 'force-cache' });
+        const res = await fetch(url, { signal: this._controller.signal, cache: 'default' });
         if (!res.ok) throw new Error(`FAQ aggregate unavailable: ${res.status}`);
         return await res.json();
       } catch (err) {

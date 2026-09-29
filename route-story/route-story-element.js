@@ -1,7 +1,7 @@
-const BW_ROUTE_STORY_BOOKING_URL = 'https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based';
-const BW_ROUTE_STORY_MEETING_URL = 'https://www.berlinwalk.com/meeting-point';
-const BW_ROUTE_STORY_GUIDE_URL = 'https://www.berlinwalk.com/the-guide';
-const BW_ROUTE_STORY_AUDIO_URL = 'https://www.berlinwalk.com/tools/free-berlin-audio-tour';
+const BW_ROUTE_STORY_BOOKING_URL = 'https://www.walkofberlin.com/book-berlin-walking-tour/berlin-then-and-now';
+const BW_ROUTE_STORY_MEETING_URL = 'https://www.walkofberlin.com/meeting-point';
+const BW_ROUTE_STORY_GUIDE_URL = 'https://www.walkofberlin.com/the-guide';
+const BW_ROUTE_STORY_AUDIO_URL = 'https://www.walkofberlin.com/tools/free-berlin-audio-tour';
 const BW_ROUTE_STORY_MAP_IMAGE_URL = 'https://fenerszymanski.github.io/berlinwalk-widgets/route/assets/berlin-mitte-illustration-960w.webp';
 const BW_ROUTE_STORY_MAP_IMAGE_720_URL = 'https://fenerszymanski.github.io/berlinwalk-widgets/route/assets/berlin-mitte-illustration-720w.webp';
 const BW_ROUTE_STORY_MAP_IMAGE_1200_URL = 'https://fenerszymanski.github.io/berlinwalk-widgets/route/assets/berlin-mitte-illustration-1200w.webp';
@@ -10,6 +10,8 @@ const BW_ROUTE_STORY_HERO_FALLBACK_URL = 'https://fenerszymanski.github.io/berli
 const BW_ROUTE_STORY_DOM_IMAGE_URL = 'https://fenerszymanski.github.io/berlinwalk-widgets/gallery/images/07-1200w.webp';
 const BW_ROUTE_STORY_GROUP_IMAGE_URL = 'https://fenerszymanski.github.io/berlinwalk-widgets/gallery/images/01-1200w.webp';
 
+// Berlin Then and Now: the canonical 11 stops covering 16 places (same order and
+// merged names as route/data.json). Pin x/y are percentages on the route map.
 const BW_ROUTE_STORY_STOPS = [
   {
     id: 1,
@@ -18,11 +20,11 @@ const BW_ROUTE_STORY_STOPS = [
     x: 95,
     y: 37,
     act: 'Start',
-    layer: 'Orientation',
-    question: 'Why begin with a clock?',
-    understand: 'You understand Berlin as a city of arrivals, meetings, systems, and shared public space. The World Clock is not just a meeting point; it is the first clue that modern Berlin is built around movement.',
-    notice: 'The square is loud, practical, and strangely symbolic: trams, U-Bahn exits, the TV Tower above you, and a Cold War-era object that still works as Berliners intended.',
-    takeaway: 'Berlin starts to feel readable before the walking really begins.'
+    layer: 'The question',
+    question: "Where is Berlin's old city?",
+    understand: 'I start with the question the whole walk answers. The World Clock went up in 1969 on a square the GDR rebuilt as a modern showcase, a short walk from where Berlin began in the 13th century.',
+    thenNow: 'My archive photo shows Alexanderplatz before the war, a crowded junction of trams and department stores. Hold it up and you can see how much bigger and emptier the square became when it was rebuilt.',
+    takeaway: 'Keep the question in mind. Every stop after this one adds part of the answer.'
   },
   {
     id: 2,
@@ -32,140 +34,127 @@ const BW_ROUTE_STORY_STOPS = [
     y: 36,
     act: 'Start',
     layer: 'GDR skyline',
-    question: 'What does a state put in the sky?',
-    understand: 'You understand how East Berlin tried to project confidence through architecture. The TV Tower was a technical achievement, a political statement, and, through the Pope\'s Revenge story, a reminder that symbols do not always behave.',
-    notice: 'The tower is visible from almost everywhere, which means the GDR skyline follows you even when the tour has moved on.',
-    takeaway: 'Berlin history is not only underground or in museums. Sometimes it is 368 meters tall.'
+    question: 'What did the GDR build over the old streets?',
+    understand: "The TV Tower opened in 1969 as East Berlin's statement to the world, 368 metres tall. The ground at its feet was not empty before: the streets of the Marienviertel, one of the oldest parts of the city, stood here until the late 1960s.",
+    thenNow: "Then: a quarter of narrow streets and houses. Now: open lawns, a fountain terrace and the tower's concrete base. The archive print shows what filled this space before it was cleared.",
+    takeaway: 'The biggest thing missing at Alexanderplatz is not a building. It is a whole neighbourhood.'
   },
   {
     id: 3,
-    name: 'Rotes Rathaus',
-    location: "Berlin's Town Hall",
+    name: 'Rotes Rathaus & Neptunbrunnen',
+    location: 'Town Hall and Neptune Fountain',
     x: 89,
     y: 47,
-    act: 'Power',
-    layer: 'Civic Berlin',
-    question: 'Who runs a city that keeps changing?',
-    understand: 'You understand Berlin through the institutions that survived regime changes. Empire, republic, dictatorship, division, reunification: the red-brick town hall helps the whole timeline sit in one place.',
-    notice: 'The building looks steady, but the city around it has been redesigned again and again.',
-    takeaway: 'Berlin becomes less like a random collection of sights and more like a city with a nervous system.'
+    act: 'Old Berlin',
+    layer: 'A fountain that moved',
+    question: 'Why is a palace fountain standing by the town hall?',
+    understand: 'The red-brick town hall was finished in 1869 and has watched empire, war, division and reunification. The Neptune Fountain in front of it did not start here: Reinhold Begas made it in 1891 for the square outside the royal palace, and the GDR set it up on this spot in 1969, after the palace was gone.',
+    thenNow: 'The archive photo shows the Neptune Fountain in front of the royal palace. Hold it up here and you are looking at the same fountain in a different city.',
+    takeaway: 'In Berlin, even a fountain can tell you what was demolished.'
   },
   {
     id: 4,
-    name: 'Neptune Fountain',
-    location: 'Neptunbrunnen',
-    x: 73,
-    y: 42,
-    act: 'Power',
-    layer: 'Imperial symbols',
-    question: 'Why is a sea god in the middle of Berlin?',
-    understand: 'You understand how imperial Berlin used art to make claims about power, geography, and culture. The four river figures around Neptune are not decoration; they are a map of what Prussia wanted to represent.',
-    notice: 'Most people photograph the fountain. Fewer people read the fountain.',
-    takeaway: 'Once you know how to look, even a public square starts speaking in symbols.'
-  },
-  {
-    id: 5,
-    name: "St. Mary's Church",
-    location: 'Marienkirche',
+    name: 'Marienkirche',
+    location: "St. Mary's Church",
     x: 72,
     y: 35,
     act: 'Old Berlin',
-    layer: 'Medieval survival',
-    question: 'Where is the old city hiding?',
-    understand: 'You understand that medieval Berlin is not gone; it is simply surrounded by newer versions of the city. Marienkirche makes the oldest layer visible, especially through the Dance of Death fresco inside.',
-    notice: 'The church stands almost alone now, which tells a story about what was removed around it.',
-    takeaway: 'Berlin is older than visitors expect, but it rarely announces that politely.'
+    layer: 'Medieval survivor',
+    question: 'Why does a medieval church stand alone in an open square?',
+    understand: 'Marienkirche goes back to the late 13th century and is one of the oldest churches in Berlin. Inside is a Dance of Death fresco from the 1480s. For most of its life the church sat inside a dense quarter of houses and lanes. The open space around it came much later.',
+    thenNow: 'The archive photo from around 1880 shows the church boxed in by houses. Today it stands alone under the TV Tower, and the houses are the part that is gone.',
+    takeaway: 'The church survived. The neighbourhood around it did not.'
   },
   {
-    id: 6,
-    name: 'Marx-Engels Forum',
-    location: 'The bronze meeting',
+    id: 5,
+    name: 'Marx-Engels-Forum',
+    location: 'Spree bank',
     x: 76,
     y: 58,
     act: 'Old Berlin',
     layer: 'Memory and erasure',
-    question: 'What did East Berlin choose to remember?',
-    understand: 'You understand how the GDR used open space and monuments to rewrite the centre of the city. The statue matters, but the emptiness around it matters just as much.',
-    notice: 'The plaza feels calm today, yet it sits on land where older streets and buildings once made a very different city.',
+    question: 'What did East Berlin put where the old streets were?',
+    understand: "The GDR laid out this park and set up the bronze Marx and Engels in 1986. The ground under it was part of Berlin's oldest quarter, heavily damaged in the war and then cleared instead of rebuilt.",
+    thenNow: 'The archive print shows this ground when it was still a quarter of streets and houses. Line it up with the lawn in front of you and the empty space starts to read differently.',
     takeaway: 'In Berlin, empty space is often evidence.'
+  },
+  {
+    id: 6,
+    name: 'Sanchi Gate',
+    location: 'Outside the Humboldt Forum',
+    x: 64,
+    y: 73,
+    act: 'Palace site',
+    layer: 'Whose history',
+    question: 'Why is an Indian gateway standing outside a Prussian palace?',
+    understand: 'The gate is a copy of a stone gateway from the Great Stupa at Sanchi in India. It stands at the edge of the palace site and raises the question the whole building lives with: whose history this place shows, and on whose terms.',
+    thenNow: 'The archive print here comes from the palace set: the royal palace this corner belonged to until the GDR blew it up in 1950.',
+    takeaway: 'The rebuilt palace does not only bring back a facade. It brings back the argument.'
   },
   {
     id: 7,
     name: 'Humboldt Forum',
-    location: 'Berlin City Palace',
+    location: 'Berlin Palace site',
     x: 55,
     y: 80,
-    act: 'Rebuild',
+    act: 'Palace site',
     layer: 'Reconstruction debate',
-    question: 'Can a city rebuild an argument?',
-    understand: 'You understand why Berlin reconstruction is never just about architecture. The palace, the GDR-era Palace of the Republic, the new museum, and the colonial debates all sit inside one building story.',
-    notice: 'The facade looks historical, but the questions around it are very present-day.',
+    question: 'How many buildings can one site have?',
+    understand: 'Someone born here in 1940 has seen three buildings on this ground: the royal palace, blown up in 1950; the Palast der Republik, opened in 1976 and torn down in the 2000s; and the Humboldt Forum behind rebuilt baroque facades, finished in 2020.',
+    thenNow: 'Here I hold up more than one print: the palace and the Palast der Republik, so you can compare both with the building in front of you.',
     takeaway: 'Berlin does not simply preserve history. It negotiates with it in public.'
   },
   {
     id: 8,
-    name: 'Lustgarten',
-    location: 'Pleasure Garden',
-    x: 38,
-    y: 72,
-    act: 'Rebuild',
-    layer: 'Public space',
+    name: 'Lustgarten, Berliner Dom & Altes Museum',
+    location: 'Museum Island',
+    x: 41,
+    y: 64,
+    act: 'Museum Island',
+    layer: 'Power on display',
     question: 'How many lives can one lawn have?',
-    understand: 'You understand how one public space can change meaning completely: royal garden, parade ground, propaganda stage, open city lawn. The place stays still while politics moves through it.',
-    notice: 'The same open view that feels relaxed today once served very different performances of power.',
-    takeaway: 'Berlin parks are rarely just parks.'
+    understand: "Three places around one lawn. The Lustgarten has been a royal garden, a parade ground, a Nazi rally site and a garden again. The Berliner Dom, finished in 1905, is Prussian ambition in stone. The Altes Museum opened in 1830 as Berlin's first public museum.",
+    thenNow: "The cathedral's dome was rebuilt after the war lower and plainer than the original. The archive photo shows the difference at a glance.",
+    takeaway: 'Grandeur and damage can share one facade.'
   },
   {
     id: 9,
-    name: 'Berliner Dom',
-    location: 'Berlin Cathedral',
-    x: 46,
-    y: 64,
-    act: 'Rebuild',
-    layer: 'Prussian ambition',
-    question: 'What does a dynasty build for itself?',
-    understand: 'You understand Prussian self-image in stone: dome, crypt, facade, scars. The cathedral is less about quiet religion and more about the public memory of power.',
-    notice: 'The building looks grand from far away, but the details become more human when you know what happened to it.',
-    takeaway: 'Grandeur and damage can occupy the same facade.'
-  },
-  {
-    id: 10,
-    name: 'Altes Museum',
-    location: 'Museum Island',
-    x: 37,
-    y: 56,
-    act: 'Museum Island',
-    layer: 'Public culture',
-    question: 'When did Berlin decide culture should be public?',
-    understand: 'You understand Museum Island as a civic project, not just a museum cluster. The Altes Museum announced that ancient objects, public education, and urban prestige belonged together.',
-    notice: 'The columns are doing more than looking classical; they are telling visitors how to behave in front of culture.',
-    takeaway: 'Museum Island begins as an idea about who gets access to knowledge.'
-  },
-  {
-    id: 11,
-    name: 'Neues Museum & Alte Nationalgalerie',
+    name: 'Neues Museum, Alte Nationalgalerie & Pergamon',
     location: 'Museum Island',
     x: 31,
     y: 46,
     act: 'Museum Island',
     layer: 'Repair and identity',
-    question: 'How should a damaged city restore itself?',
-    understand: 'You understand restoration as a Berlin language. Nefertiti, war damage, careful repair, 19th-century painting, UNESCO status: this stop shows how the city handles beauty after catastrophe.',
-    notice: 'Some repairs are visible on purpose. Berlin often lets the break remain part of the story.',
-    takeaway: 'The city is most powerful when it stops pretending nothing happened.'
+    question: 'How should a damaged city repair itself?',
+    understand: 'The Neues Museum, home of the Nefertiti bust, stood as a war ruin for decades before David Chipperfield rebuilt it. It reopened in 2009 with its scars left visible on purpose. Next to it the Alte Nationalgalerie sits like a temple, and the Pergamon Museum is closed for a long renovation.',
+    thenNow: 'The archive photo shows the Neues Museum when it was still a ruin. Look at the walls today and you can see where the surviving building ends and the new work begins.',
+    takeaway: 'Berlin is at its most honest when it stops pretending nothing happened.'
   },
   {
-    id: 12,
+    id: 10,
+    name: 'Friedrichsbrücke',
+    location: 'Bridge over the Spree',
+    x: 50,
+    y: 45,
+    act: 'Museum Island',
+    layer: 'The view back',
+    question: 'Why did the city grow up on this river?',
+    understand: 'The bridge takes you off Museum Island. Halfway across I stop the group: the Bode-Museum sits at the tip of the island, the S-Bahn crosses behind it, and the Spree shows you why Berlin and its twin town Cölln grew up on these banks.',
+    thenNow: 'My print here is an old view of the cathedral and this bridge from around 1890. Hold it next to the real view and look for what changed.',
+    takeaway: 'Look back once before you leave. It is the view that ties the island together.'
+  },
+  {
+    id: 11,
     name: 'Hackescher Markt',
-    location: 'End of the tour',
-    x: 25,
-    y: 10,
-    act: 'After the walk',
-    layer: 'Next Berlin',
-    question: 'Where does the story go next?',
-    understand: 'You understand why the tour ends here instead of looping back. Hackescher Markt gives you food, S-Bahn, courtyards, shops, and a natural next chapter after two hours of history.',
-    notice: 'The area feels lighter and more lived-in, which is exactly what you want after absorbing the city centre.',
-    takeaway: 'The tour ends, but your mental map of Berlin keeps opening.'
+    location: 'End of the walk',
+    x: 43,
+    y: 12,
+    act: 'Finish',
+    layer: 'The answer',
+    question: 'So where is the old city?',
+    understand: 'I answer the question from the World Clock here. The old city is not one place you can visit. It is scattered across the stops you just walked: a church, a fountain that moved, an empty lawn, a rebuilt facade and a museum that kept its scars.',
+    thenNow: 'The S-Bahn station here opened in 1882 and its brick viaduct is still standing, so this is one of the few stops where the archive photo and the view in front of you line up.',
+    takeaway: 'The walk ends here, with courtyards, coffee and the S-Bahn around you. You will read the rest of Berlin differently.'
   }
 ];
 
@@ -215,18 +204,18 @@ class BWRouteStoryElement extends HTMLElement {
           </picture>
           <div class="bw-rs-hero-overlay" aria-hidden="true"></div>
           <div class="bw-rs-inner bw-rs-hero-inner">
-            <span class="bw-rs-kicker">Berlin walking tour route</span>
-            <h1 id="bw-rs-title">The 12-stop route that makes Berlin click.</h1>
-            <p class="bw-rs-hero-lead">This is not a checklist of monuments. It is a two-hour story map from the World Clock at Alexanderplatz to Hackescher Markt, built around what you understand at each stop.</p>
+            <span class="bw-rs-kicker">Berlin Then and Now: the route</span>
+            <h1 id="bw-rs-title">Berlin Walking Tour Route from Alexanderplatz</h1>
+            <p class="bw-rs-hero-lead">Berlin's old city did not survive. This is my walk through where it stood, from the World Clock on Alexanderplatz to Hackescher Markt: 11 stops covering 16 places, about 3 km and about 2.5 hours. At every stop I hold up an archive photo of the same place, so you can see what stood there and what is left.</p>
             <div class="bw-rs-actions">
-              <a class="bw-rs-btn bw-rs-btn-primary" href="${BW_ROUTE_STORY_BOOKING_URL}" data-bw-book-route-story>Book your spot</a>
+              <a class="bw-rs-btn bw-rs-btn-primary" href="${BW_ROUTE_STORY_BOOKING_URL}" data-bw-book-route-story>See dates and book</a>
               <a class="bw-rs-btn bw-rs-btn-ghost" href="#bw-route-story-map">Explore the stops</a>
             </div>
             <dl class="bw-rs-facts" aria-label="Tour facts">
-              <div><dt>Stops</dt><dd>12</dd></div>
-              <div><dt>Duration</dt><dd>~2h</dd></div>
-              <div><dt>Route</dt><dd>Alexanderplatz to Hackescher Markt</dd></div>
-              <div><dt>Price</dt><dd>Free, tip-based</dd></div>
+              <div><dt>Stops</dt><dd>11 stops, 16 places</dd></div>
+              <div><dt>Duration</dt><dd>About 2.5 hours, about 3 km</dd></div>
+              <div><dt>Route</dt><dd>World Clock to Hackescher Markt, 12:30 start</dd></div>
+              <div><dt>Price</dt><dd>&euro;25 per person, max 8 people</dd></div>
             </dl>
           </div>
         </section>
@@ -235,9 +224,9 @@ class BWRouteStoryElement extends HTMLElement {
           <div class="bw-rs-inner bw-rs-intro-grid">
             <div>
               <span class="bw-rs-eyebrow">Route logic</span>
-              <h2>Each stop answers a different Berlin question.</h2>
+              <h2>Each stop answers part of one question: where did old Berlin go?</h2>
             </div>
-            <p>By the end, Alexanderplatz, medieval Berlin, the GDR centre, Museum Island, Prussian ambition, reconstruction, and Hackescher Markt are no longer separate sights. They become one mental map.</p>
+            <p>The streets where the city grew up were cleared after the war, and much of what people call the old town today is a 1980s rebuild. So I walk you across the ground where the old city actually stood. By Hackescher Markt, the medieval centre, the GDR centre, the palace site and Museum Island are no longer separate sights. They are one story of a city that was cleared, rebuilt and argued over.</p>
           </div>
         </section>
 
@@ -270,7 +259,7 @@ class BWRouteStoryElement extends HTMLElement {
                 </div>
                 <div class="bw-rs-map-caption">
                   <strong>World Clock to Hackescher Markt</strong>
-                  <span>About 2 hours, flat and walkable, with time for questions.</span>
+                  <span>About 2.5 hours and about 3 km, flat and walkable, with an archive photo at every stop.</span>
                 </div>
               </aside>
 
@@ -288,11 +277,11 @@ class BWRouteStoryElement extends HTMLElement {
               <figcaption>Same route, different layers of Berlin.</figcaption>
             </figure>
             <div class="bw-rs-proof-copy">
-              <span class="bw-rs-eyebrow">What you leave with</span>
-              <h2>The route is built to give you a clear mental map of Berlin.</h2>
-              <p>You can see the logic, pacing, and historical layers before the walk begins. By Hackescher Markt, the stops connect as one story rather than a list of monuments.</p>
+              <span class="bw-rs-eyebrow">Then and now</span>
+              <h2>An archive photo of the same place at every stop.</h2>
+              <p>I print an old photo of each place and hold it up where it was taken, as close to the same view as the street allows today. My advice: hold your phone up next to my print and take the same shot. It is the best souvenir I know from this walk.</p>
               <div class="bw-rs-proof-actions">
-                <a class="bw-rs-btn bw-rs-btn-primary" href="${BW_ROUTE_STORY_BOOKING_URL}" data-bw-book-route-story>Book the free walking tour</a>
+                <a class="bw-rs-btn bw-rs-btn-primary" href="${BW_ROUTE_STORY_BOOKING_URL}" data-bw-book-route-story>See dates and book</a>
                 <a class="bw-rs-text-link" href="${BW_ROUTE_STORY_AUDIO_URL}">Listen to the 9-minute audio preview</a>
               </div>
             </div>
@@ -307,9 +296,9 @@ class BWRouteStoryElement extends HTMLElement {
             <div>
               <span class="bw-rs-eyebrow">Join the route</span>
               <h2>Walk the story in person.</h2>
-              <p>Meet at the World Clock, follow the old centre west through 11 stops, and leave near Hackescher Markt with Berlin arranged in your head.</p>
+              <p>Meet me at the World Clock on Alexanderplatz at 12:30 and look for my green umbrella. We walk 11 stops west through the old centre and finish at Hackescher Markt. &euro;25 per person, no more than 8 people, and every date runs, even if you are the only guest. You can cancel for free or change your date up to 24 hours before the start.</p>
               <div class="bw-rs-actions">
-                <a class="bw-rs-btn bw-rs-btn-yellow" href="${BW_ROUTE_STORY_BOOKING_URL}" data-bw-book-route-story>Book your spot</a>
+                <a class="bw-rs-btn bw-rs-btn-yellow" href="${BW_ROUTE_STORY_BOOKING_URL}" data-bw-book-route-story>See dates and book</a>
                 <a class="bw-rs-btn bw-rs-btn-outline-light" href="${BW_ROUTE_STORY_MEETING_URL}">Meeting point</a>
                 <a class="bw-rs-btn bw-rs-btn-outline-light" href="${BW_ROUTE_STORY_GUIDE_URL}">Meet Yusuf</a>
               </div>
@@ -352,8 +341,8 @@ class BWRouteStoryElement extends HTMLElement {
           </div>
           <div class="bw-rs-detail-grid">
             <div>
-              <strong>What you notice</strong>
-              <p>${this._escapeHTML(stop.notice)}</p>
+              <strong>Then and now</strong>
+              <p>${this._escapeHTML(stop.thenNow)}</p>
             </div>
             <div>
               <strong>Takeaway</strong>
