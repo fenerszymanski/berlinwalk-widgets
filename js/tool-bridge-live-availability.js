@@ -1,9 +1,10 @@
-/* Updates the booking bridge on /tools/* from live bookable-tour availability.
- * It deliberately leaves the bridge's rule-based label in place only while the
- * availability request is loading or unavailable.
+/* Updates the booking bridge on /tools/* from live bookable availability of
+ * Berlin Then and Now (Wix service 145cb27e). While the request is loading, or
+ * the service has no bookable date yet, the bridge keeps its static title.
  */
 (function () {
-  var LIVE_AVAILABILITY_URL = 'https://berlinwalk-content-app.vercel.app/api/booking-calendar-availability?days=60';
+  var TOUR_SERVICE_ID = '145cb27e-c5bd-456d-bfbd-a09d4d6f5f9d';
+  var LIVE_AVAILABILITY_URL = 'https://berlinwalk-content-app.vercel.app/api/booking-calendar-availability?days=60&serviceId=' + TOUR_SERVICE_ID;
   var BRIDGE_SELECTOR = '[data-bw-blog-journey][data-bw-blog-journey-intent="tool_bridge"]';
   var TIME_ZONE = 'Europe/Berlin';
   var DAY_MS = 24 * 60 * 60 * 1000;
@@ -74,11 +75,11 @@
 
   function bridgeTitle(slots) {
     if (!slots.length) return '';
-    if (slots.length === 1) return 'Next free walk: ' + slots[0].label + ' at ' + slots[0].start;
+    if (slots.length === 1) return 'Next Berlin Then and Now walk: ' + slots[0].label + ' at ' + slots[0].start;
     if (slots[0].dateKey === slots[1].dateKey) {
-      return 'Next free walks: ' + slots[0].label + ' at ' + slots[0].start + ' and ' + slots[1].start;
+      return 'Next Berlin Then and Now walks: ' + slots[0].label + ' at ' + slots[0].start + ' and ' + slots[1].start;
     }
-    return 'Next free walks: ' + slots[0].label + ' at ' + slots[0].start + ' and ' + slots[1].label + ' at ' + slots[1].start;
+    return 'Next Berlin Then and Now walks: ' + slots[0].label + ' at ' + slots[0].start + ' and ' + slots[1].label + ' at ' + slots[1].start;
   }
 
   function applyLiveTitle() {

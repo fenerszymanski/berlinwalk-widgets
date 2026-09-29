@@ -25,9 +25,15 @@
   var TOUR_IMAGE = 'https://static.wixstatic.com/media/5a08a3_ac78d5df37b2486ab6662cf3872ea9a6~mv2.jpg/v1/fill/w_700,h_420,al_c,q_86,enc_avif,quality_auto/file.jpg';
   var TOOL_ICON_BASE_URL = 'https://fenerszymanski.github.io/berlinwalk-widgets/tools-home/icons/';
   var DEFAULT_TOOL_IMAGE = TOOL_ICON_BASE_URL + 'generic-tool.svg';
-  var BOOKING_URL = 'https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based';
-  var BOOKING_DEST_SERVICE = 'https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based';
-  var BOOKING_DEST_LANDING = 'https://www.berlinwalk.com/free-berlin-walking-tour';
+  // Berlin Then and Now, the paid walking tour (Wix service 145cb27e). Both
+  // booking variants point at its booking page; the old landing and the old
+  // service's booking slug are no longer sold from here.
+  var BOOKING_URL = 'https://www.walkofberlin.com/book-berlin-walking-tour/berlin-then-and-now';
+  var BOOKING_DEST_SERVICE = BOOKING_URL;
+  var BOOKING_DEST_LANDING = BOOKING_URL;
+  var TOUR_AVAILABILITY_URL = 'https://berlinwalk-content-app.vercel.app/api/booking-calendar-availability?days=60&serviceId=145cb27e-c5bd-456d-bfbd-a09d4d6f5f9d';
+  var TOUR_HEADLINE = 'Walk the Berlin that disappeared, with me';
+  var TOUR_FACTS = 'Berlin Then and Now: about 2.5 hours, 11 stops covering 16 places, no more than 8 people, \u20AC25.';
   var BOOKING_EXPERIMENT_VARIANT = 'service';
   var BOOKING_NEXT_ACTION_PATCH_URL = 'https://fenerszymanski.github.io/berlinwalk-widgets/booking-calendar/book-now-intro-patch.js';
   var TRACK_ENDPOINT = 'https://berlinwalk-content-app.vercel.app/api/pf-event';
@@ -219,10 +225,10 @@
     }
     if (typeof window.bwLiveNextTourStarts !== 'function') return Promise.resolve('');
     if (liveJourneyTitlePromise) return liveJourneyTitlePromise;
-    liveJourneyTitlePromise = window.bwLiveNextTourStarts({ days: 60, count: count || 2 }).then(function (starts) {
+    liveJourneyTitlePromise = window.bwLiveNextTourStarts({ days: 60, count: count || 2, endpoint: TOUR_AVAILABILITY_URL }).then(function (starts) {
       var label = startEntriesLabel(starts || [], false);
       if (label) {
-        liveJourneyTitle = 'Next tours: ' + label;
+        liveJourneyTitle = 'Next Berlin Then and Now dates: ' + label;
         liveJourneyTitleUpdatedAt = Date.now();
       }
       return liveJourneyTitle;
@@ -1906,17 +1912,14 @@
   }
 
   function bookingJourneyCard(bookingUrl, title, context) {
-    var slot = getNextTourSlot();
-    var nextToursLabel = getNextTourStartsLabel(2, false);
     var variant = activeBookingVariant();
-    var bookingTitle = title || 'Walk this context with me in Berlin';
-    if (nextToursLabel) {
-      bookingTitle = 'Next tours: ' + nextToursLabel;
-    }
+    // The title is static: live dates for the paid tour replace it through
+    // refreshJourneyBookingTitle(). The old hard-coded schedule is not used.
+    var bookingTitle = title || TOUR_HEADLINE;
     return {
-      label: 'Free walk',
+      label: 'Walking tour',
       title: bookingTitle,
-      copy: slot ? 'Tip-based, about 2 hours. A \u20AC2 deposit holds your spot and comes back after the walk.' : '',
+      copy: TOUR_FACTS,
       url: bookingUrl,
       image: TOUR_IMAGE,
       bookLink: true,
@@ -1925,7 +1928,7 @@
       bookLinkKind: 'booking_bridge',
       bookOnceKey: 'bw_blog_book_bridge_click:' + (currentSlug() || 'post'),
       bookingVariant: variant,
-      proofChip: '9.8/10 on FreeTour',
+      proofChip: 'Archive photo at every stop',
       ctaKind: 'booking'
     };
   }
@@ -1988,7 +1991,7 @@
     var readCard = relatedJourneyCard(posts && posts[0]);
     var wallTimelineCard = wallTimelineJourneyCard(post);
     var directBookCard = bookingJourneyCard(bookingUrl, 'Walk this context with me in Berlin', 'blog_journey_direct_booking_nextslot');
-    var softBookCard = bookingJourneyCard(bookingUrl, 'Book my 2-hour Berlin orientation walk', 'blog_journey_soft_booking_nextslot');
+    var softBookCard = bookingJourneyCard(bookingUrl, TOUR_HEADLINE, 'blog_journey_soft_booking_nextslot');
     var strategy = {
       intent: intent,
       kicker: 'Next step',
@@ -1999,7 +2002,7 @@
 
     if (intent === 'direct-booking') {
       strategy.title = 'Walk this context in Berlin';
-      strategy.intro = 'If this guide made the city clearer, the easiest next step is my tip-based walk: about 2 hours, with a \u20AC2 refundable deposit to hold your spot.';
+      strategy.intro = 'If this guide made the city clearer, the easiest next step is my walking tour. ' + TOUR_FACTS;
       strategy.cards = dedupeJourneyCards([directBookCard, wallTimelineCard, toolCard, readCard], 3);
       return strategy;
     }
@@ -2211,22 +2214,20 @@
     return null;
   }
 
-  function toolBridgeTitle(slot) {
-    if (slot && slot.relativeLabel && slot.slotsLabel) {
-      return 'Next free walk' + (slot.slotCount > 1 ? 's' : '') + ': ' + slot.relativeLabel + ' at ' + slot.slotsLabel;
-    }
-    return 'Check the calendar for the next free walk';
+  // Static title. tool-bridge-live-availability.js swaps in the next live
+  // Berlin Then and Now dates once that service has bookable sessions.
+  function toolBridgeTitle() {
+    return TOUR_HEADLINE;
   }
 
   function insertToolBridge(data) {
     var tool = currentTool(data);
     if (!tool || !tool.url) return;
     var bookingUrl = toolBridgeBookingUrl(tool);
-    var slot = getNextTourSlot();
     var journeyKey = [
       'tool',
       tool.slug || currentSlug(),
-      toolBridgeTitle(slot)
+      toolBridgeTitle()
     ].join('|');
     var old = document.querySelector('[' + JOURNEY_MARKER + ']');
     if (old && old.getAttribute('data-bw-blog-journey-key') === journeyKey) return;
@@ -2246,10 +2247,10 @@
       '<span class="bw-blog-journey-kicker">While you are in Berlin</span>' +
       '<div class="bw-tool-bridge-main">' +
         '<div>' +
-          '<h2>' + escapeHtml(toolBridgeTitle(slot)) + '</h2>' +
-          '<p class="bw-blog-journey-intro">I meet at the World Clock on Alexanderplatz. About 2 hours, tip-based, with a \u20AC2 refundable deposit to hold your spot.</p>' +
+          '<h2>' + escapeHtml(toolBridgeTitle()) + '</h2>' +
+          '<p class="bw-blog-journey-intro">I meet you at the World Clock on Alexanderplatz and hold up an archive photo at every stop. ' + escapeHtml(TOUR_FACTS) + '</p>' +
         '</div>' +
-        '<a class="bw-blog-tool-button bw-tool-bridge-book" href="' + escapeAttr(bookingUrl) + '" target="_top" data-book-link="1" data-bw-book-context="tool_bridge_booking" data-bw-book-event="bw_tool_book_bridge_click" data-bw-book-link-kind="tool_bridge" data-bw-book-once-key="bw_tool_book_bridge_click:' + escapeAttr(tool.slug || currentSlug() || 'tool') + '" data-bw-book-variant="' + escapeAttr(activeBookingVariant()) + '">Reserve a spot</a>' +
+        '<a class="bw-blog-tool-button bw-tool-bridge-book" href="' + escapeAttr(bookingUrl) + '" target="_top" data-book-link="1" data-bw-book-context="tool_bridge_booking" data-bw-book-event="bw_tool_book_bridge_click" data-bw-book-link-kind="tool_bridge" data-bw-book-once-key="bw_tool_book_bridge_click:' + escapeAttr(tool.slug || currentSlug() || 'tool') + '" data-bw-book-variant="' + escapeAttr(activeBookingVariant()) + '">See dates and book</a>' +
       '</div>';
 
     section.addEventListener('click', function (event) {
@@ -2268,7 +2269,7 @@
       return trackPaidEvent('bw_tool_bridge_view', {
         slug: currentSlug(),
         tool_slug: tool.slug || '',
-        slot_count: slot && slot.slotCount || 0,
+        slot_count: 0,
         booking_variant: activeBookingVariant()
       });
     });

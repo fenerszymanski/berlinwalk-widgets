@@ -200,7 +200,11 @@
  * Runs in both standalone and iframe contexts.
  */
 (function () {
-  var BOOKING_URL = 'https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based';
+  // Berlin Then and Now, the paid walking tour (Wix service 145cb27e). The CTA
+  // row only appears when that service has a live bookable date; the old
+  // hard-coded weekday/start-time schedule is never used for a label.
+  var BOOKING_URL = 'https://www.walkofberlin.com/book-berlin-walking-tour/berlin-then-and-now';
+  var TOUR_AVAILABILITY_URL = 'https://berlinwalk-content-app.vercel.app/api/booking-calendar-availability?days=60&serviceId=145cb27e-c5bd-456d-bfbd-a09d4d6f5f9d';
   var nextTourSlotRequested = false;
   var params = null;
   var isToolPageSurface = false;
@@ -315,15 +319,8 @@
     requestContentReflow();
   }
 
-  function readNextTourSlot() {
-    try {
-      if (typeof window.bwNextTourSlot === 'function') return window.bwNextTourSlot();
-    } catch (e) {}
-    return null;
-  }
-
   function ensureNextTourSlotHelper(done, fail) {
-    if (typeof window.bwNextTourSlot === 'function') {
+    if (typeof window.bwLiveNextTourSlot === 'function') {
       if (done) done();
       return;
     }
@@ -343,21 +340,31 @@
 
   function tourCtaText(slot) {
     if (slot && slot.relativeLabel && slot.slotsLabel) {
-      return 'Next free Berlin walk' + (slot.slotCount > 1 ? 's' : '') + ': ' + slot.relativeLabel + ' ' + slot.slotsLabel;
+      return 'Next Berlin Then and Now walk' + (slot.slotCount > 1 ? 's' : '') + ': ' + slot.relativeLabel + ' ' + slot.slotsLabel;
     }
     return '';
   }
 
   function injectFirstPartyTourCta() {
     var slug = widgetSlug();
-    var slot = readNextTourSlot();
-    var text = tourCtaText(slot);
-    if (!text) {
+    var live = null;
+    try {
+      if (typeof window.bwLiveNextTourSlot === 'function') {
+        live = window.bwLiveNextTourSlot({ days: 60, endpoint: TOUR_AVAILABILITY_URL });
+      }
+    } catch (e) {}
+    if (!live || typeof live.then !== 'function') {
       injectBadgeOnly();
       return;
     }
-    renderFirstPartyTourCta(slug, text);
-    updateFirstPartyTourCtaFromLiveAvailability();
+    live.then(function (liveSlot) {
+      var text = tourCtaText(liveSlot);
+      if (!text) {
+        injectBadgeOnly();
+        return;
+      }
+      renderFirstPartyTourCta(slug, text);
+    }, injectBadgeOnly);
   }
 
   function renderFirstPartyTourCta(slug, text) {
@@ -381,20 +388,6 @@
     if (!isQuickSummary) row.appendChild(badgeNode(slug, 'bw-attr-badge-inline', '_top'));
     document.body.appendChild(row);
     requestContentReflow();
-  }
-
-  function updateFirstPartyTourCtaFromLiveAvailability() {
-    try {
-      if (typeof window.bwLiveNextTourSlot !== 'function') return;
-      window.bwLiveNextTourSlot({ days: 60 }).then(function (liveSlot) {
-        var text = tourCtaText(liveSlot);
-        var textNode = text && document.querySelector('.bw-tour-cta-row .bw-tour-cta-text');
-        if (textNode && textNode.textContent !== text) {
-          textNode.textContent = text;
-          requestContentReflow();
-        }
-      });
-    } catch (e) {}
   }
 
   function inject() {

@@ -1,9 +1,11 @@
 /* lead-form-inject.js — the two public inline surfaces on every BerlinWalk post.
  *
- * The compact Free Berlin Walking Tour card keeps its existing placement and
- * live date picker. The Date Check card is a separate, no-email decision aid
- * placed later in the article, after the compact tour card and a short stretch
- * of editorial copy. Both cards are light DOM, page-local, and owned by this
+ * The compact Berlin Then and Now tour card keeps its existing placement.
+ * Its date chips read live availability for the paid tour's Wix service and
+ * stay hidden while that service has no bookable dates (booking not open yet).
+ * The Date Check card is a separate, no-email decision aid placed later in
+ * the article, after the compact tour card and a short stretch of editorial
+ * copy. Both cards are light DOM, page-local, and owned by this
  * one idempotent injector.
  */
 (function () {
@@ -14,9 +16,13 @@
   var ENABLED = !DISABLED && (location.pathname.indexOf('/post/') === 0 || PREVIEW_ENABLED);
   if (!ENABLED) return;
 
-  var AVAILABILITY_URL = 'https://berlinwalk-content-app.vercel.app/api/booking-calendar-availability?days=120&guests=1';
-  var BOOKING_URL = 'https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based';
-  var BOOKING_FORM_URL = 'https://www.berlinwalk.com/booking-form';
+  // Berlin Then and Now (Wix Bookings service 145cb27e). The old service
+  // 448872c2 must never feed this card again.
+  var TOUR_SERVICE_ID = '145cb27e-c5bd-456d-bfbd-a09d4d6f5f9d';
+  var AVAILABILITY_URL = 'https://berlinwalk-content-app.vercel.app/api/booking-calendar-availability?days=120&guests=1&serviceId=' + TOUR_SERVICE_ID;
+  // Checkout A booking page for the paid tour. A picked date travels as
+  // ?start=YYYY-MM-DDTHH:MM (Berlin time), the page's landing hand-off contract.
+  var BOOKING_URL = 'https://www.walkofberlin.com/book-berlin-walking-tour/berlin-then-and-now';
   var DATE_CHECK_URL = 'https://www.berlinwalk.com/berlin-dates-check';
   var BOOKING_MARKER = 'data-bw-blog-booking';
   var DATE_CHECK_MARKER = 'data-bw-date-check-card';
@@ -233,15 +239,16 @@
     };
   }
 
+  function slotStartKey(slot) {
+    var time = formatTime(slot && slot.startDate);
+    var key = slot && slot.dateKey ? slot.dateKey + 'T' + time : '';
+    return /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}$/.test(key) ? key : '';
+  }
+
   function bookingHref(slot) {
-    var base = slot ? (slot.bookingUrl || BOOKING_FORM_URL) : BOOKING_URL;
-    var url = new URL(base, window.location.href);
-    if (slot) {
-      url.searchParams.set('bookings_timezone', slot.timezone || 'Europe/Berlin');
-      if (slot.serviceId) url.searchParams.set('bookings_serviceId', slot.serviceId);
-      if (slot.locationId) url.searchParams.set('bookings_locationId', slot.locationId);
-      if (slot.sessionId || slot.eventId) url.searchParams.set('bookings_sessionId', slot.sessionId || slot.eventId);
-    }
+    var url = new URL(BOOKING_URL, window.location.href);
+    var start = slot ? slotStartKey(slot) : '';
+    if (start) url.searchParams.set('start', start);
     url.searchParams.set('utm_content', 'blog_booking_card');
     if (!url.searchParams.has('utm_source')) url.searchParams.set('utm_source', 'berlinwalk');
     if (!url.searchParams.has('utm_medium')) url.searchParams.set('utm_medium', 'blog_booking_card');
@@ -281,7 +288,7 @@
     style.id = BOOKING_STYLE_ID;
     style.textContent = [
       '.bw-blog-booking-card{box-sizing:border-box;display:block;margin:30px 0;max-width:100%;min-width:0;padding:0;background:#fff;border:1px solid #CFE4C8;border-radius:14px;box-shadow:0 8px 22px rgba(27,94,32,.08);font-family:Montserrat,Arial,sans-serif;color:#212121;overflow:hidden;}',
-      '.bw-blog-booking-card *{box-sizing:border-box;}',
+      '.bw-blog-booking-card *{box-sizing:border-box;}.bw-blog-booking-card [hidden]{display:none!important;}',
       '.bw-blog-booking-strip{display:flex;align-items:center;justify-content:space-between;gap:10px;background:#1B5E20;color:#fff;padding:8px 14px;font-size:10px;font-weight:900;letter-spacing:.12em;line-height:1.3;text-transform:uppercase;}',
       '.bw-blog-booking-strip span{color:#fff!important;}.bw-blog-booking-strip .bw-star{color:#FFE600;}',
       '.bw-blog-booking-inner{display:flex;min-width:0;}.bw-blog-booking-media{flex:0 0 116px;min-width:0;margin:14px 0 14px 14px;}',
@@ -329,9 +336,11 @@
       var isSelected = index === state.slotIndex;
       return '<button type="button" class="bw-blog-booking-time' + (isSelected ? ' bw-selected' : '') + '" data-bw-slot-index="' + index + '" aria-pressed="' + (isSelected ? 'true' : 'false') + '">' + escapeHtml(formatTime(daySlot.startDate) || 'Time TBC') + '</button>';
     }).join('');
+    var spots = slot.openSpots !== null && slot.openSpots > 0 && slot.openSpots <= 3
+      ? slot.openSpots + (slot.openSpots === 1 ? ' spot left' : ' spots left')
+      : 'Spots available';
     panel.querySelector('[data-bw-booking-meta]').textContent =
-      (slot.openSpots === null || slot.openSpots > 0 ? 'Spots available' : 'Few spots left') +
-      ' for ' + parts.weekday + ' ' + parts.day + ' ' + parts.month + ' · ends at Hackescher Markt';
+      spots + ' for ' + parts.weekday + ' ' + parts.day + ' ' + parts.month + ' · ends at Hackescher Markt';
     var cta = panel.querySelector('[data-bw-booking-cta]');
     cta.setAttribute('href', bookingHref(slot));
     cta.textContent = 'Reserve ' + parts.weekday + ' ' + parts.day + ' ' + parts.month + (startTime ? ' · ' + startTime : '');
@@ -339,15 +348,17 @@
 
   function setupPicker(panel, days) {
     var datesEl = panel.querySelector('[data-bw-booking-dates]');
-    if (!days.length) {
-      datesEl.innerHTML = '<div class="bw-blog-booking-empty">Dates are loading slowly. You can still check availability below.</div>';
-      return;
-    }
+    // No bookable date yet (booking not open, or the feed is down): keep the
+    // chips hidden and let the CTA carry the visitor to the booking page.
+    if (!datesEl || !days.length) return;
     var state = { days: days, dayIndex: 0, slotIndex: 0 };
     datesEl.innerHTML = days.map(function (day, index) {
       var parts = formatDateParts(day.dateKey);
       return '<button type="button" class="bw-blog-booking-date" data-bw-day-index="' + index + '" aria-pressed="false"><span>' + escapeHtml(parts.weekday) + '</span><b>' + escapeHtml(parts.day) + '</b><small>' + escapeHtml(parts.month) + '</small></button>';
     }).join('') + moreDatesChip();
+    datesEl.hidden = false;
+    var stripLabel = panel.querySelector('[data-bw-booking-strip-label]');
+    if (stripLabel) stripLabel.textContent = 'Live tour dates';
     datesEl.addEventListener('click', function (event) {
       var chip = event.target.closest('[data-bw-day-index]');
       if (!chip) return;
@@ -369,10 +380,7 @@
     window.fetch(AVAILABILITY_URL, { cache: 'no-cache' })
       .then(function (response) { return response.json(); })
       .then(function (data) { setupPicker(panel, normalizeSlots(data && data.slots)); })
-      .catch(function () {
-        var dates = panel.querySelector('[data-bw-booking-dates]');
-        if (dates) dates.innerHTML = '<div class="bw-blog-booking-empty">Dates are loading slowly. You can still check availability below.</div>';
-      });
+      .catch(function () {});
   }
 
   function buildBookingCard() {
@@ -380,15 +388,15 @@
     var wrapper = document.createElement('section');
     wrapper.setAttribute(BOOKING_MARKER, '1');
     wrapper.className = 'bw-blog-booking-card';
-    wrapper.setAttribute('aria-label', 'Book the BerlinWalk walking tour');
+    wrapper.setAttribute('aria-label', 'Book Berlin Then and Now, my walking tour');
     var imageBase = 'https://fenerszymanski.github.io/berlinwalk-widgets/gallery/images/01-800w';
     wrapper.innerHTML = [
-      '<div class="bw-blog-booking-strip"><span>Free Berlin walking tour · live dates</span><span><span class="bw-star" aria-hidden="true">★</span> 9.8 / 10 on FreeTour</span></div>',
+      '<div class="bw-blog-booking-strip"><span data-bw-booking-strip-label>My Berlin walking tour</span><span>Archive photo at every stop</span></div>',
       '<div class="bw-blog-booking-inner"><div class="bw-blog-booking-media"><picture><source srcset="' + imageBase + '.webp" type="image/webp"><img src="' + imageBase + '.jpg" alt="BerlinWalk guide Yusuf leading guests outside the Altes Museum on Museum Island" loading="lazy"></picture></div>',
-      '<div class="bw-blog-booking-body"><div class="bw-blog-booking-title" role="heading" aria-level="2">Berlin: Free Walking Tour of the Historic Centre</div><div class="bw-blog-booking-facts">Free, tip-based · about 2 hours · starts at the World Clock, Alexanderplatz</div>',
-      '<div class="bw-blog-booking-dates" data-bw-booking-dates aria-label="Pick a tour date"><div class="bw-blog-booking-loading">Loading live tour dates...</div></div>',
+      '<div class="bw-blog-booking-body"><div class="bw-blog-booking-title" role="heading" aria-level="2">Walk the Berlin that disappeared, with me</div><div class="bw-blog-booking-facts">Berlin Then and Now · about 2.5 hours · 11 stops, 16 places · max 8 · €25</div>',
+      '<div class="bw-blog-booking-dates" data-bw-booking-dates aria-label="Pick a tour date" hidden></div>',
       '<div class="bw-blog-booking-day" data-bw-booking-day hidden><span class="bw-blog-booking-times-label">Start time</span><div class="bw-blog-booking-times" data-bw-booking-times></div><span class="bw-blog-booking-meta" data-bw-booking-meta></span></div>',
-      '<div class="bw-blog-booking-cta"><a href="' + escapeAttr(bookingHref()) + '" target="_top" data-bw-booking-cta>Check availability</a></div></div></div>'
+      '<div class="bw-blog-booking-cta"><a href="' + escapeAttr(bookingHref()) + '" target="_top" data-bw-booking-cta>See dates and book</a></div></div></div>'
     ].join('');
     loadDates(wrapper);
     return wrapper;

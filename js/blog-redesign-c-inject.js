@@ -9,8 +9,9 @@
   var ARCHIVE_URL = BASE + 'blog-index/archive.json?v=blog-redesign-c-20260823';
   var TOOLS_URL = BASE + 'tools-hub/data.json?v=blog-redesign-c-20260823';
   var HERO_HIGHLIGHTS_URL = BASE + 'blog-hero/data.json?v=blog-redesign-c-20260823-qa1';
-  var BOOKING_URL = 'https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based';
-  var AUDIO_TOURS_URL = 'https://www.berlinwalk.com/audio-tours';
+  // Berlin Then and Now, the paid walking tour (Wix service 145cb27e).
+  var BOOKING_URL = 'https://www.walkofberlin.com/book-berlin-walking-tour/berlin-then-and-now';
+  var AUDIO_TOURS_URL = 'https://www.walkofberlin.com/audio-tours';
   var PORTRAIT_URL = BASE + 'blog-hero/assets/yusuf-guide-portrait.jpg';
   var TOUR_BAND_IMAGE = BASE + 'blog-hero/assets/tour-cta-yusuf-rathaus-solo.jpg';
   var state = { archive: null, tools: null, heroHighlights: null, timer: null, observer: null, until: 0, adviceObserver: null, adviceBody: null, adviceScheduled: false, rendering: false };
@@ -393,15 +394,6 @@
     return title;
   }
 
-  function nextTourLabel() {
-    try {
-      if (typeof window.bwNextTourStartsLabel === 'function') return text(window.bwNextTourStartsLabel({ count: 2, compact: false }));
-    } catch (error) {}
-    var publishedSchedule = text(document.body && document.body.innerText).match(/\bTue(?:\s*[-–]\s*Sat)?\s+11:30\s*(?:&|\+)\s*15:30\b/i);
-    if (publishedSchedule) return publishedSchedule[0].replace(/\s*[-–]\s*/g, '–').replace(/\s*\+\s*/g, ' & ');
-    return '';
-  }
-
   function unlockEndHeights(node) {
     if (state.endHeightObserver) state.endHeightObserver.disconnect();
     function clear() {
@@ -426,7 +418,7 @@
     var currentMobile = document.querySelector('.bw-c-mobile-toc');
     // Renders run on every Wix mutation for the first 31s. Tearing the rail and
     // the mobile TOC down each time is churn that re-triggers this script's own
-    // observer, so rebuild only when the links, tool or schedule changed.
+    // observer, so rebuild only when the links or the tool changed.
     if (currentRail && currentMobile
       && currentRail.getAttribute('data-bw-toc-signature') === signature
       && currentMobile.nextElementSibling === body
@@ -437,7 +429,7 @@
     document.querySelectorAll('.bw-c-mobile-toc,.bw-c-rail').forEach(function (node) { node.remove(); });
     var mobile = document.createElement('nav'); mobile.className = 'bw-c-mobile-toc'; mobile.setAttribute(MARK, 'toc'); mobile.innerHTML = '<div class="bw-c-mobile-toc-scroll">' + links + '</div>'; body.before(mobile);
     var rail = document.createElement('aside'); rail.className = 'bw-c-rail'; rail.setAttribute(MARK, 'rail'); rail.setAttribute('data-bw-toc-signature', signature);
-    rail.innerHTML = '<span class="bw-c-rail-progress" aria-hidden="true"><i></i></span><p class="bw-c-rail-title">ON THIS PAGE</p><nav class="bw-c-rail-list">' + links + '</nav><div class="bw-c-rail-tour"><span class="bw-c-rail-label">EXPLORE BERLIN</span><strong>Walk at your pace or with me.</strong><a class="bw-c-rail-choice bw-c-rail-choice-audio" href="' + AUDIO_TOURS_URL + '"><span>AUDIO TOURS<small>Listen as you walk</small></span><span aria-hidden="true">↗</span></a><a class="bw-c-rail-choice bw-c-rail-choice-walk" href="' + BOOKING_URL + '"><span>FREE WALKING TOUR<small>Join me · 2 hours · tip-based</small></span><span aria-hidden="true">↗</span></a></div>' + (tool ? '<a class="bw-c-rail-tool" href="/tools/' + escapeHtml(tool.slug) + '"><span class="bw-c-rail-label">ARTICLE TOOL</span><strong>' + escapeHtml(tool.title) + '</strong><small>Open the tool →</small></a>' : '') + '<a class="bw-c-rail-all" href="/blog">← ALL GUIDES</a>';
+    rail.innerHTML = '<span class="bw-c-rail-progress" aria-hidden="true"><i></i></span><p class="bw-c-rail-title">ON THIS PAGE</p><nav class="bw-c-rail-list">' + links + '</nav><div class="bw-c-rail-tour"><span class="bw-c-rail-label">EXPLORE BERLIN</span><strong>Walk at your pace or with me.</strong><a class="bw-c-rail-choice bw-c-rail-choice-audio" href="' + AUDIO_TOURS_URL + '"><span>AUDIO TOURS<small>Listen as you walk</small></span><span aria-hidden="true">↗</span></a><a class="bw-c-rail-choice bw-c-rail-choice-walk" href="' + BOOKING_URL + '"><span>BERLIN THEN AND NOW<small>With me · about 2.5 hours · €25</small></span><span aria-hidden="true">↗</span></a></div>' + (tool ? '<a class="bw-c-rail-tool" href="/tools/' + escapeHtml(tool.slug) + '"><span class="bw-c-rail-label">ARTICLE TOOL</span><strong>' + escapeHtml(tool.title) + '</strong><small>Open the tool →</small></a>' : '') + '<a class="bw-c-rail-all" href="/blog">← ALL GUIDES</a>';
     page.insertBefore(rail, page.firstChild);
     rail.addEventListener('click', function (event) { var link = event.target.closest('a[href^="#"]'); if (!link) return; event.preventDefault(); var target = document.getElementById(link.getAttribute('href').slice(1)); if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' }); });
     function position() {
@@ -527,9 +519,8 @@
     var node = document.createElement('section'); node.className = 'bw-c-end'; node.setAttribute('data-bw-redesign-end', '1');
     var cards = post ? related(post).map(function (item) { return '<a href="' + escapeHtml(item.path || '/post/' + item.slug) + '">' + (item.thumb || item.image ? '<img src="' + escapeHtml(item.thumb || item.image) + '" alt="' + escapeHtml(item.alt || '') + '">' : '') + '<div class="bw-c-related-copy"><span class="bw-c-related-kicker">' + escapeHtml(item.category || 'Guide') + '</span><strong>' + escapeHtml(item.title) + '</strong></div></a>'; }).join('') : '';
     var shareUrl = encodeURIComponent(location.href.split('#')[0]), title = encodeURIComponent(document.title);
-    var schedule = nextTourLabel();
-    var bandSub = 'FREE, TIP-BASED · ABOUT 2 HOURS' + (schedule ? ' · ' + schedule.toUpperCase() : '') + '.<br> STARTS AT THE WORLD CLOCK · ENDS AT HACKESCHER MARKT';
-    node.innerHTML = '<div class="bw-c-tourband"><div class="bw-c-tourband-inner"><figure class="bw-c-tourband-photo"><img src="' + TOUR_BAND_IMAGE + '" alt="Yusuf guiding in front of Berlin’s Rotes Rathaus" loading="lazy" decoding="async"></figure><div class="bw-c-tourband-copy"><p class="bw-c-end-kicker">FREE BERLIN WALKING TOUR · ★ 9.8/10 ON FREETOUR</p><h2>See Berlin’s historic centre with me.</h2><p class="bw-c-tourband-sub">' + bandSub + '</p><div class="bw-c-tourband-div"></div><a class="bw-c-book" href="' + BOOKING_URL + '">Reserve a spot · free</a></div></div></div><div class="bw-c-bottom">' + (cards ? '<p class="bw-c-section-label">RELATED GUIDES</p><div class="bw-c-related">' + cards + '</div>' : '') + (faqHost ? '<p class="bw-c-section-label">QUESTIONS PEOPLE ACTUALLY ASK</p><div class="bw-c-faq-slot"></div>' : '') + '<div class="bw-c-share"><span class="bw-c-share-label">SHARE THIS GUIDE</span><a target="_blank" rel="noopener" href="https://wa.me/?text=' + shareUrl + '">WhatsApp</a><a target="_blank" rel="noopener" href="https://www.facebook.com/sharer/sharer.php?u=' + shareUrl + '">Facebook</a><a target="_blank" rel="noopener" href="https://twitter.com/intent/tweet?url=' + shareUrl + '&text=' + title + '">X</a><button type="button" data-bw-c-copy>Copy link</button></div></div>';
+    var bandSub = 'ABOUT 2.5 HOURS · 11 STOPS, 16 PLACES · MAX 8 · €25' + '.<br> STARTS AT THE WORLD CLOCK · ENDS AT HACKESCHER MARKT';
+    node.innerHTML = '<div class="bw-c-tourband"><div class="bw-c-tourband-inner"><figure class="bw-c-tourband-photo"><img src="' + TOUR_BAND_IMAGE + '" alt="Yusuf guiding in front of Berlin’s Rotes Rathaus" loading="lazy" decoding="async"></figure><div class="bw-c-tourband-copy"><p class="bw-c-end-kicker">BERLIN THEN AND NOW · AN ARCHIVE PHOTO AT EVERY STOP</p><h2>Walk the Berlin that disappeared, with me.</h2><p class="bw-c-tourband-sub">' + bandSub + '</p><div class="bw-c-tourband-div"></div><a class="bw-c-book" href="' + BOOKING_URL + '">See dates and book</a></div></div></div><div class="bw-c-bottom">' + (cards ? '<p class="bw-c-section-label">RELATED GUIDES</p><div class="bw-c-related">' + cards + '</div>' : '') + (faqHost ? '<p class="bw-c-section-label">QUESTIONS PEOPLE ACTUALLY ASK</p><div class="bw-c-faq-slot"></div>' : '') + '<div class="bw-c-share"><span class="bw-c-share-label">SHARE THIS GUIDE</span><a target="_blank" rel="noopener" href="https://wa.me/?text=' + shareUrl + '">WhatsApp</a><a target="_blank" rel="noopener" href="https://www.facebook.com/sharer/sharer.php?u=' + shareUrl + '">Facebook</a><a target="_blank" rel="noopener" href="https://twitter.com/intent/tweet?url=' + shareUrl + '&text=' + title + '">X</a><button type="button" data-bw-c-copy>Copy link</button></div></div>';
     node.addEventListener('click', function (event) { if (!event.target.matches('[data-bw-c-copy]')) return; navigator.clipboard && navigator.clipboard.writeText ? navigator.clipboard.writeText(location.href.split('#')[0]) : null; event.target.textContent = 'Copied'; setTimeout(function () { event.target.textContent = 'Copy link'; }, 1200); }); var pageNode = body.closest('.bw-c-page'); (pageNode || body).after(node); fitStage(node);
     var faqSlot = node.querySelector('.bw-c-faq-slot');
     if (faqSlot && faqHost) faqSlot.appendChild(faqFragment);
