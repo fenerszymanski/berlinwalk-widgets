@@ -10496,6 +10496,36 @@
       "iconStatus": "live-wix-media",
       "image": "https://static.wixstatic.com/media/5a08a3_3532affa82e246bda1a81e25fcb43e6b~mv2.png",
       "cmsItemId": "befb2849-597d-4262-a507-a533a62ee47a"
+    },
+    {
+      "slug": "berlin-winter-swim-lake-board",
+      "title": "Berlin Winter Swim Lake Board",
+      "lead": "Nine lake and river gauges you are allowed to swim at, on one map and one chart: how fast each one cooled through the last two winters, when it went under 10, 6 and 4 °C, and when it warmed up again. Tap any day to colour every gauge. Daily data from the Berlin Wasserportal, checked on 29 September 2026.",
+      "category": "Weather",
+      "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/berlin-winter-swim-lake-board/",
+      "embedHeight": 1350,
+      "hubCategory": "WeatherOutdoor",
+      "type": "Map",
+      "priority": 3,
+      "tags": [
+        "winter swimming",
+        "lakes",
+        "cold water",
+        "water temperature",
+        "outdoors",
+        "living in berlin"
+      ],
+      "aliases": [
+        "winter swimming berlin",
+        "eisbaden berlin",
+        "cold water swimming berlin",
+        "berlin lake water temperature",
+        "winterschwimmen berlin",
+        "ice swimming berlin"
+      ],
+      "iconStatus": "live-wix-media",
+      "image": "https://static.wixstatic.com/media/5a08a3_fd76e60a2a8e460498b383c804a5dcef~mv2.png",
+      "cmsItemId": "9d671179-c6a4-45e7-a403-9b556013e20f"
     }
   ],
   "hubCategories": [

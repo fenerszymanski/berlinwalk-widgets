@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Berlin Winter Swim Lake Board</title>
+<link rel="stylesheet" href="../css/brand.css">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #FFFFFF; color: #1d231b; padding: 14px 12px 12px; }
+  .ws-head h1 { font-size: 19px; line-height: 1.25; color: #1B5E20; }
+  .ws-head p { font-size: 13px; line-height: 1.5; color: #475044; margin-top: 5px; }
+  .ws-label { font-size: 10.5px; font-weight: 800; letter-spacing: .07em; text-transform: uppercase; color: #1B5E20; margin: 14px 0 7px; }
+
+  .ws-winters { display: flex; gap: 6px; flex-wrap: wrap; }
+  .ws-winters button, .ws-lakes button, .ws-nudge button {
+    font: inherit; font-size: 12.5px; font-weight: 700; border-radius: 999px; border: 1.5px solid #c9d4bf;
+    background: #fff; color: #243021; padding: 7px 12px; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; }
+  .ws-winters button[aria-current="true"] { background: #1B5E20; border-color: #1B5E20; color: #fff; }
+  .ws-lakes { display: flex; flex-wrap: wrap; gap: 6px; }
+  .ws-lakes button { font-size: 12px; padding: 6px 10px; }
+  .ws-lakes button i { width: 11px; height: 11px; border-radius: 50%; display: inline-block; border: 1px solid rgba(0,0,0,.18); }
+  .ws-lakes button[aria-current="true"] { border-color: #1B5E20; box-shadow: inset 0 0 0 1.5px #1B5E20; background: #f1f7ec; }
+
+  .ws-grid { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); gap: 10px; margin-top: 12px; }
+  .ws-card { border: 1px solid #dfe6d6; border-radius: 14px; background: #fcfdf9; padding: 8px; }
+  .ws-card h2 { font-size: 12.5px; color: #1B5E20; margin: 2px 4px 6px; }
+  #ws-map { display: block; width: 100%; cursor: pointer; border-radius: 10px; }
+  #ws-chart { display: block; width: 100%; height: auto; cursor: crosshair; touch-action: pan-y; }
+  #ws-chart:focus { outline: 2px solid #FFE600; outline-offset: 2px; border-radius: 8px; }
+  .ws-scale { display: flex; flex-wrap: wrap; gap: 4px 10px; font-size: 11px; color: #475044; margin: 6px 4px 0; }
+  .ws-scale i { display: inline-block; width: 12px; height: 12px; border-radius: 50%; vertical-align: -2px; margin-right: 4px; border: 1px solid rgba(0,0,0,.15); }
+  .ws-nudge { display: flex; gap: 6px; align-items: center; margin: 6px 4px 0; flex-wrap: wrap; }
+  .ws-nudge button { font-size: 12px; padding: 5px 10px; }
+  .ws-nudge span { font-size: 12px; color: #475044; }
+
+  .ws-read { margin-top: 12px; border-radius: 12px; background: #FFE600; color: #123D18; padding: 11px 13px; font-size: 14px; line-height: 1.5; }
+  .ws-read strong { color: #10230f; }
+  .ws-read p + p { margin-top: 6px; font-size: 13px; }
+  .ws-rank { margin-top: 10px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 5px 12px; }
+  .ws-rank div { display: flex; justify-content: space-between; gap: 8px; font-size: 12.5px; border-bottom: 1px dashed #dfe6d6; padding: 3px 2px; }
+  .ws-rank div.is-on { font-weight: 800; color: #1B5E20; }
+  .ws-rank b { font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .ws-foot { font-size: 11.5px; color: #596254; line-height: 1.5; margin-top: 12px; }
+
+  @media (max-width: 620px) {
+    .ws-grid { grid-template-columns: 1fr; }
+    .ws-rank { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+<div class="ws-head">
+  <h1>Winter Swim Lake Board</h1>
+  <p>Berlin's water gauges log every lake's temperature each day. Pick a lake or river you are allowed to swim in, see how its water cooled through a whole winter, then tap the chart to colour every gauge on the map for that day.</p>
+</div>
+
+<div class="ws-label">Which winter</div>
+<div class="ws-winters" id="ws-winters"></div>
+
+<div class="ws-label">Which water</div>
+<div class="ws-lakes" id="ws-lakes"></div>
+
+<div class="ws-grid">
+  <div class="ws-card">
+    <h2 id="ws-map-title">Every gauge on the day</h2>
+    <canvas id="ws-map" width="600" height="500" aria-label="Map of Berlin with lake gauges coloured by water temperature"></canvas>
+    <div class="ws-scale" id="ws-scale"></div>
+  </div>
+  <div class="ws-card">
+    <h2 id="ws-chart-title">Water temperature, October to mid April</h2>
+    <svg id="ws-chart" viewBox="0 0 360 250" role="img" aria-label="Daily water temperature curve" tabindex="0">
+      <rect x="34" y="12" width="316" height="206" fill="#ffffff" stroke="#dfe6d6"></rect>
+      <rect id="ws-band4" x="34" y="0" width="316" height="0" fill="#cfe3f5"></rect>
+      <rect id="ws-band6" x="34" y="0" width="316" height="0" fill="#e4eff9"></rect>
+      <line id="ws-l10" x1="34" x2="350" stroke="#9fb3c8" stroke-dasharray="3 3"></line>
+      <text id="ws-t10" x="30" text-anchor="end" font-size="9" fill="#475044">10°</text>
+      <text id="ws-t6" x="30" text-anchor="end" font-size="9" fill="#475044">6°</text>
+      <text id="ws-t4" x="30" text-anchor="end" font-size="9" fill="#475044">4°</text>
+      <text id="ws-t0" x="30" text-anchor="end" font-size="9" fill="#475044">0°</text>
+      <text id="ws-t15" x="30" text-anchor="end" font-size="9" fill="#475044">15°</text>
+      <g id="ws-months"></g>
+      <g id="ws-others"></g>
+      <polyline id="ws-main" fill="none" stroke="#1B5E20" stroke-width="2.4" stroke-linejoin="round" points=""></polyline>
+      <line id="ws-day" y1="12" y2="218" stroke="#123D18" stroke-width="1.2"></line>
+      <circle id="ws-dot" r="4.5" fill="#FFE600" stroke="#123D18" stroke-width="1.5"></circle>
+    </svg>
+    <div class="ws-nudge">
+      <button type="button" id="ws-back" aria-label="One week earlier">&#8592; week</button>
+      <button type="button" id="ws-fwd" aria-label="One week later">week &#8594;</button>
+      <span id="ws-daylabel"></span>
+    </div>
+  </div>
+</div>
+
+<div class="ws-read" id="ws-read" aria-live="polite"></div>
+<div class="ws-label">All gauges on that day, coldest first</div>
+<div class="ws-rank" id="ws-rank"></div>
+
+<p class="ws-foot" id="ws-foot">Daily mean water temperature from the Berlin Wasserportal gauges (Land Berlin), downloaded 29 Sep 2026. Map outlines: Geoportal Berlin. A gauge sits at one fixed point and depth, so the water at your entry spot can be a degree or two off, and the surface of a still lake is often colder on a frosty morning.</p>
+
+<script src="../js/brand.js"></script>
+<script>
+(function () {
+  var DATA = null;
+  var state = { winter: '2025-26', lake: '5800316', day: 61 };
+  var MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+  var BANDS = [
+    { max: 4, color: '#1f5fa8', label: 'under 4°' },
+    { max: 6, color: '#4b8fd1', label: '4 to 6°' },
+    { max: 10, color: '#9cc9ec', label: '6 to 10°' },
+    { max: 14, color: '#f3e7a1', label: '10 to 14°' },
+    { max: 99, color: '#f2b25c', label: '14° and up' }
+  ];
+  var CH = { x0: 34, x1: 350, y0: 218, y1: 12, tMax: 18 };
+
+  function colorFor(t) {
+    if (t == null) return '#d4d8d0';
+    for (var i = 0; i < BANDS.length; i++) if (t < BANDS[i].max) return BANDS[i].color;
+    return BANDS[BANDS.length - 1].color;
+  }
+  function winterMeta() { return DATA.winters.filter(function (w) { return w.key === state.winter; })[0]; }
+  function lakeById(id) { return DATA.lakes.filter(function (l) { return l.id === id; })[0]; }
+  function dateOf(i) { var d = new Date(winterMeta().from + 'T12:00:00Z'); d.setUTCDate(d.getUTCDate() + i); return d; }
+  function fmt(d, withYear) { return d.getUTCDate() + ' ' + MONTHS[d.getUTCMonth()] + (withYear ? ' ' + d.getUTCFullYear() : ''); }
+  function tempAt(lake, i) { var s = lake.winters[state.winter]; return s ? s[i] : null; }
+  function fmtT(t) { return t == null ? 'no reading' : t.toFixed(1) + ' °C'; }
+
+  function firstBelow(lake, lim) {
+    var s = lake.winters[state.winter];
+    for (var i = 0; i < s.length; i++) if (s[i] != null && s[i] < lim) return i;
+    return -1;
+  }
+  function backAbove(lake, lim, after) {
+    var s = lake.winters[state.winter];
+    for (var i = Math.max(after, 100); i < s.length; i++) if (s[i] != null && s[i] >= lim) return i;
+    return -1;
+  }
+  function daysUnder(lake, lim) {
+    var s = lake.winters[state.winter], n = 0;
+    for (var i = 0; i < s.length; i++) if (s[i] != null && s[i] < lim) n++;
+    return n;
+  }
+  function coldest(lake) {
+    var s = lake.winters[state.winter], best = -1;
+    for (var i = 0; i < s.length; i++) if (s[i] != null && (best < 0 || s[i] < s[best])) best = i;
+    return best;
+  }
+
+  /* ---------- controls ---------- */
+  function buildControls() {
+    var wbox = document.getElementById('ws-winters');
+    wbox.innerHTML = DATA.winters.map(function (w) {
+      return '<button type="button" data-w="' + w.key + '">Winter ' + w.key.replace('-', '/') + '</button>';
+    }).join('');
+    var lbox = document.getElementById('ws-lakes');
+    lbox.innerHTML = DATA.lakes.map(function (l) {
+      return '<button type="button" data-l="' + l.id + '"><i></i>' + l.name + '</button>';
+    }).join('');
+    wbox.addEventListener('click', function (e) {
+      var b = e.target.closest('button'); if (!b) return;
+      state.winter = b.getAttribute('data-w'); render();
+    });
+    lbox.addEventListener('click', function (e) {
+      var b = e.target.closest('button'); if (!b) return;
+      state.lake = b.getAttribute('data-l'); render();
+    });
+    document.getElementById('ws-scale').innerHTML = BANDS.map(function (b) {
+      return '<span><i style="background:' + b.color + '"></i>' + b.label + '</span>';
+    }).join('');
+    document.getElementById('ws-back').addEventListener('click', function () { moveDay(-7); });
+    document.getElementById('ws-fwd').addEventListener('click', function () { moveDay(7); });
+
+    var svg = document.getElementById('ws-chart');
+    var dragging = false;
+    function pickFromEvent(ev) {
+      var r = svg.getBoundingClientRect();
+      var x = (ev.clientX - r.left) / r.width * 360;
+      var n = winterMeta().days;
+      var i = Math.round((x - CH.x0) / (CH.x1 - CH.x0) * (n - 1));
+      state.day = Math.max(0, Math.min(n - 1, i)); render();
+    }
+    svg.addEventListener('pointerdown', function (ev) { dragging = true; pickFromEvent(ev); });
+    svg.addEventListener('pointermove', function (ev) { if (dragging) pickFromEvent(ev); });
+    window.addEventListener('pointerup', function () { dragging = false; });
+    svg.addEventListener('keydown', function (ev) {
+      if (ev.key === 'ArrowLeft') { moveDay(-1); ev.preventDefault(); }
+      if (ev.key === 'ArrowRight') { moveDay(1); ev.preventDefault(); }
+    });
+
+    var cv = document.getElementById('ws-map');
+    cv.addEventListener('click', function (ev) {
+      var r = cv.getBoundingClientRect();
+      var px = (ev.clientX - r.left) * (cv.width / r.width), py = (ev.clientY - r.top) * (cv.height / r.height);
+      var hit = null, bestD = 1e9;
+      DATA.lakes.forEach(function (l) {
+        var p = proj(l.x, l.y); var d = Math.hypot(p[0] - px, p[1] - py);
+        if (d < bestD) { bestD = d; hit = l; }
+      });
+      if (hit && bestD < 40 * (cv.width / 600)) { state.lake = hit.id; render(); }
+    });
+  }
+  function moveDay(n) {
+    var max = winterMeta().days - 1;
+    state.day = Math.max(0, Math.min(max, state.day + n)); render();
+  }
+
+  /* ---------- map ---------- */
+  var BOUNDS = null, SCALE = 1, OFF = [0, 0];
+  function computeBounds() {
+    var minX = 1e9, minY = 1e9, maxX = -1e9, maxY = -1e9;
+    DATA.districts.forEach(function (r) { r.forEach(function (p) {
+      if (p[0] < minX) minX = p[0]; if (p[0] > maxX) maxX = p[0];
+      if (p[1] < minY) minY = p[1]; if (p[1] > maxY) maxY = p[1];
+    }); });
+    BOUNDS = { minX: minX, minY: minY, maxX: maxX, maxY: maxY };
+  }
+  function proj(x, y) { return [OFF[0] + (x - BOUNDS.minX) * SCALE, OFF[1] + (BOUNDS.maxY - y) * SCALE]; }
+  function drawMap() {
+    var cv = document.getElementById('ws-map');
+    var cssW = cv.clientWidth || 300, dpr = Math.min(window.devicePixelRatio || 1, 2);
+    var w = BOUNDS.maxX - BOUNDS.minX, h = BOUNDS.maxY - BOUNDS.minY;
+    var cssH = Math.round(cssW * (h / w) + 8);
+    cv.width = Math.round(cssW * dpr); cv.height = Math.round(cssH * dpr); cv.style.height = cssH + 'px';
+    var pad = 10 * dpr;
+    SCALE = Math.min((cv.width - 2 * pad) / w, (cv.height - 2 * pad) / h);
+    OFF = [(cv.width - w * SCALE) / 2, (cv.height - h * SCALE) / 2];
+    var ctx = cv.getContext('2d');
+    ctx.clearRect(0, 0, cv.width, cv.height);
+    ctx.fillStyle = '#f4f6ef'; ctx.fillRect(0, 0, cv.width, cv.height);
+    function ring(r) { ctx.beginPath(); r.forEach(function (p, i) { var q = proj(p[0], p[1]); if (i) ctx.lineTo(q[0], q[1]); else ctx.moveTo(q[0], q[1]); }); ctx.closePath(); }
+    DATA.districts.forEach(function (r) { ring(r); ctx.fillStyle = '#e6ebdc'; ctx.fill(); ctx.strokeStyle = '#ffffff'; ctx.lineWidth = 1.2 * dpr; ctx.stroke(); });
+    DATA.water.forEach(function (r) { ring(r); ctx.fillStyle = '#a9cbe6'; ctx.fill(); });
+    var sel = null;
+    DATA.lakes.forEach(function (l) {
+      var p = proj(l.x, l.y), t = tempAt(l, state.day);
+      ctx.beginPath(); ctx.arc(p[0], p[1], 7.5 * dpr, 0, Math.PI * 2);
+      ctx.fillStyle = colorFor(t); ctx.fill(); ctx.lineWidth = 1.5 * dpr; ctx.strokeStyle = '#123D18'; ctx.stroke();
+      if (l.id === state.lake) sel = { l: l, p: p, t: t };
+    });
+    if (sel) {
+      ctx.beginPath(); ctx.arc(sel.p[0], sel.p[1], 12 * dpr, 0, Math.PI * 2);
+      ctx.lineWidth = 3 * dpr; ctx.strokeStyle = '#1B5E20'; ctx.stroke();
+      var label = sel.l.name + '  ' + (sel.t == null ? 'n/a' : sel.t.toFixed(1) + '°');
+      ctx.font = '700 ' + (12 * dpr) + 'px Montserrat, sans-serif';
+      var tw = ctx.measureText(label).width + 12 * dpr, lx = Math.min(Math.max(sel.p[0] - tw / 2, 4 * dpr), cv.width - tw - 4 * dpr);
+      var ly = sel.p[1] - 34 * dpr; if (ly < 4 * dpr) ly = sel.p[1] + 16 * dpr;
+      ctx.fillStyle = '#FFE600'; ctx.strokeStyle = '#123D18'; ctx.lineWidth = 1 * dpr;
+      ctx.beginPath(); ctx.rect(lx, ly, tw, 20 * dpr); ctx.fill(); ctx.stroke();
+      ctx.fillStyle = '#123D18'; ctx.fillText(label, lx + 6 * dpr, ly + 14.5 * dpr);
+    }
+    ctx.font = '600 ' + (10 * dpr) + 'px Montserrat, sans-serif'; ctx.fillStyle = '#5d6758';
+    var bar = 5000 / 10 * SCALE; ctx.fillRect(12 * dpr, cv.height - 12 * dpr, bar, 2 * dpr);
+    ctx.fillText('5 km', 12 * dpr, cv.height - 17 * dpr);
+  }
+
+  /* ---------- chart ---------- */
+  function yOf(t) { return CH.y0 - Math.max(0, Math.min(CH.tMax, t)) / CH.tMax * (CH.y0 - CH.y1); }
+  function xOf(i) { return CH.x0 + i / (winterMeta().days - 1) * (CH.x1 - CH.x0); }
+  function pointsFor(lake) {
+    var s = lake.winters[state.winter], out = '', parts = [];
+    for (var i = 0; i < s.length; i++) {
+      if (s[i] == null) { if (out) { parts[parts.length] = out; out = ''; } continue; }
+      out += xOf(i).toFixed(1) + ',' + yOf(s[i]).toFixed(1) + ' ';
+    }
+    if (out) parts[parts.length] = out;
+    return parts;
+  }
+  function setAttrs(el, o) { for (var k in o) el.setAttribute(k, o[k]); }
+  function drawChart() {
+    setAttrs(document.getElementById('ws-band4'), { y: yOf(4), height: CH.y0 - yOf(4) });
+    setAttrs(document.getElementById('ws-band6'), { y: yOf(6), height: yOf(4) - yOf(6) });
+    setAttrs(document.getElementById('ws-l10'), { y1: yOf(10), y2: yOf(10) });
+    [['ws-t10', 10], ['ws-t6', 6], ['ws-t4', 4], ['ws-t0', 0], ['ws-t15', 15]].forEach(function (a) {
+      document.getElementById(a[0]).setAttribute('y', yOf(a[1]) + 3);
+    });
+    var n = winterMeta().days, m = '';
+    for (var i = 0; i < n; i++) {
+      var d = dateOf(i);
+      if (d.getUTCDate() === 1) {
+        m += '<line x1="' + xOf(i) + '" x2="' + xOf(i) + '" y1="12" y2="218" stroke="#eef1e8"></line>' +
+             '<text x="' + (xOf(i) + 3) + '" y="232" font-size="9" fill="#475044">' + MONTHS[d.getUTCMonth()] + '</text>';
+      }
+    }
+    document.getElementById('ws-months').innerHTML = m;
+    var others = '';
+    DATA.lakes.forEach(function (l) {
+      if (l.id === state.lake) return;
+      pointsFor(l).forEach(function (p) { others += '<polyline fill="none" stroke="#b9c4b2" stroke-width="1" points="' + p + '"></polyline>'; });
+    });
+    document.getElementById('ws-others').innerHTML = others;
+    var lake = lakeById(state.lake);
+    document.getElementById('ws-main').setAttribute('points', pointsFor(lake).join(' '));
+    var x = xOf(state.day), t = tempAt(lake, state.day);
+    setAttrs(document.getElementById('ws-day'), { x1: x, x2: x });
+    setAttrs(document.getElementById('ws-dot'), { cx: x, cy: t == null ? -20 : yOf(t) });
+    document.getElementById('ws-chart-title').textContent = lake.name + ', October to mid April';
+  }
+
+  /* ---------- text ---------- */
+  function render() {
+    if (!DATA) return;
+    var max = winterMeta().days - 1; if (state.day > max) state.day = max;
+    document.querySelectorAll('#ws-winters button').forEach(function (b) { b.setAttribute('aria-current', String(b.getAttribute('data-w') === state.winter)); });
+    document.querySelectorAll('#ws-lakes button').forEach(function (b) {
+      var l = lakeById(b.getAttribute('data-l'));
+      b.setAttribute('aria-current', String(l.id === state.lake));
+      b.querySelector('i').style.background = colorFor(tempAt(l, state.day));
+    });
+    drawMap(); drawChart();
+    var lake = lakeById(state.lake), d = dateOf(state.day), t = tempAt(lake, state.day);
+    document.getElementById('ws-daylabel').textContent = fmt(d, true);
+    document.getElementById('ws-map-title').textContent = 'Every gauge on ' + fmt(d, true);
+    var f10 = firstBelow(lake, 10), f6 = firstBelow(lake, 6), f4 = firstBelow(lake, 4), c = coldest(lake);
+    var back = backAbove(lake, 8, c);
+    var line1 = 'On <strong>' + fmt(d, true) + '</strong> the gauge at <strong>' + lake.name + '</strong> read <strong>' + fmtT(t) + '</strong>.';
+    var bits = [];
+    if (f10 >= 0) bits[bits.length] = 'under 10° from <strong>' + fmt(dateOf(f10)) + '</strong>';
+    if (f6 >= 0) bits[bits.length] = 'under 6° from <strong>' + fmt(dateOf(f6)) + '</strong>';
+    if (f4 >= 0) bits[bits.length] = 'under 4° from <strong>' + fmt(dateOf(f4)) + '</strong> (' + daysUnder(lake, 4) + ' days in all)';
+    else bits[bits.length] = 'never under 4° at this gauge';
+    var line2 = 'That winter it went ' + bits.join(', ') + '. Coldest day: <strong>' + fmt(dateOf(c)) + '</strong> at ' + fmtT(lake.winters[state.winter][c]) +
+      (back >= 0 ? '. Back above 8° on <strong>' + fmt(dateOf(back)) + '</strong>.' : '.');
+    var line3 = lake.note ? lake.note : '';
+    var latest = lake.latest != null ? ' Latest daily mean before this board was built: <strong>' + lake.latest.toFixed(1) + ' °C on 28 Sep 2026</strong>.' : '';
+    document.getElementById('ws-read').innerHTML = '<p>' + line1 + ' ' + line2 + '</p><p>' + line3 + latest + '</p>';
+
+    var rows = DATA.lakes.map(function (l) { return { l: l, t: tempAt(l, state.day) }; })
+      .filter(function (r) { return r.t != null; })
+      .sort(function (a, b) { return a.t - b.t; });
+    document.getElementById('ws-rank').innerHTML = rows.map(function (r) {
+      return '<div class="' + (r.l.id === state.lake ? 'is-on' : '') + '"><span>' + r.l.name + '</span><b>' + r.t.toFixed(1) + ' °C</b></div>';
+    }).join('');
+  }
+
+  var rt; window.addEventListener('resize', function () { clearTimeout(rt); rt = setTimeout(render, 120); });
+  fetch('data.json').then(function (r) { return r.json(); }).then(function (d) {
+    DATA = d; computeBounds(); buildControls(); render();
+  });
+})();
+</script>
+</body>
+</html>
