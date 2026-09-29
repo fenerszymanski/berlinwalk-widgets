@@ -1,5 +1,6 @@
 const BW_ABOUT_PROFILE_IMAGE_URL = 'https://static.wixstatic.com/media/5a08a3_ac78d5df37b2486ab6662cf3872ea9a6~mv2.jpg/v1/fill/w_800,h_1067,al_c,q_85/file.jpg';
 const BW_ABOUT_GROUP_IMAGE_URL = 'https://fenerszymanski.github.io/berlinwalk-widgets/gallery/images/05-1200w.webp';
+const BW_ABOUT_BOOKING_URL = 'https://www.walkofberlin.com/book-berlin-walking-tour/berlin-then-and-now';
 
 class BWAboutCompanyElement extends HTMLElement {
   connectedCallback() {
@@ -133,6 +134,23 @@ class BWAboutCompanyElement extends HTMLElement {
           margin-bottom: 16px;
         }
 
+        .bw-about-btn {
+          background: var(--yellow);
+          border-radius: 8px;
+          color: var(--green-dark) !important;
+          display: inline-block;
+          font-size: 15px;
+          font-weight: 800;
+          margin-top: 4px;
+          padding: 14px 22px;
+          text-decoration: none;
+        }
+
+        .bw-about-btn:hover,
+        .bw-about-btn:focus-visible {
+          background: #F5DC00;
+        }
+
         .bw-about-faq-section {
           background: #FFFFFF;
           border-radius: 12px;
@@ -204,24 +222,25 @@ class BWAboutCompanyElement extends HTMLElement {
           <header class="bw-about-hero">
             <span class="bw-about-kicker">Company Profile</span>
             <h1>About BerlinWalk</h1>
-            <p>An independent, locally run walking tour focused on delivering clarity, context, and a genuine human connection to Berlin's complex history.</p>
+            <p>An independent Berlin walking tour and audio walks, run by me, Yusuf. I show you the city through the places that changed and what they looked like before.</p>
           </header>
 
           <section class="bw-about-grid">
             <img class="bw-about-image" src="${BW_ABOUT_PROFILE_IMAGE_URL}" alt="Yusuf, founder of BerlinWalk" loading="eager">
             <div class="bw-about-copy">
               <h2>Founded by Yusuf</h2>
-              <p>BerlinWalk is an independent local project created and run by Yusuf. I started this tour because I didn't want visitors to experience Berlin as just a dry checklist of historical dates.</p>
-              <p>My goal is to provide clear context, connect the dots between different eras, and give you a human sense of the city. When you join BerlinWalk, you are joining a tour built with personal passion, not a mass-produced corporate script.</p>
+              <p>BerlinWalk is an independent local project I created and run myself. I started it because I did not want people to experience Berlin as a dry checklist of historical dates.</p>
+              <p>My goal is to give clear context, connect the dots between different eras, and give you a human sense of the city. When you walk with me, you get the person who built the route, not a corporate script.</p>
             </div>
           </section>
 
           <section class="bw-about-grid reverse">
             <img class="bw-about-image landscape" src="${BW_ABOUT_GROUP_IMAGE_URL}" alt="BerlinWalk group tour" loading="lazy">
             <div class="bw-about-copy">
-              <h2>The Tip-Based Philosophy</h2>
-              <p>We operate on a "free-to-join, tip-what-you-want" model. There is no upfront ticket price.</p>
-              <p>At the end of the tour, you decide what the experience was worth to you. This keeps high-quality tours accessible to all travelers and ensures that I am highly motivated to give an excellent performance every single day. If you have a great time, your tip is the best compliment.</p>
+              <h2>Berlin Then and Now</h2>
+              <p>Berlin's old city did not survive. I walk you through where it stood and hold up an archive photo of the same place at every stop.</p>
+              <p>We start at 12:30 at the World Clock on Alexanderplatz and end at Hackescher Markt: 11 stops covering 16 places, about 3 km, about 2.5 hours. It costs €25 per person, the group is never bigger than 8, and every date runs, even if you are the only guest.</p>
+              <a class="bw-about-btn" href="${BW_ABOUT_BOOKING_URL}">See dates and book</a>
             </div>
           </section>
 
@@ -231,21 +250,21 @@ class BWAboutCompanyElement extends HTMLElement {
             <div class="bw-faq-item">
               <button class="bw-faq-btn" aria-expanded="false">Is BerlinWalk the same as Original Berlin Walks?</button>
               <div class="bw-faq-content" hidden>
-                <p><strong>No.</strong> BerlinWalk is an independent, tip-based free walking tour founded and operated exclusively by Yusuf. We are a completely separate entity and are <strong>not affiliated with the older company "Original Berlin Walks"</strong> or any large international tour networks. By booking with us, you are supporting a 100% independent local guide.</p>
+                <p><strong>No.</strong> BerlinWalk is an independent walking tour that I founded and run myself. It is <strong>not affiliated with the older company "Original Berlin Walks"</strong> or any large international tour network. When you book, you book with me.</p>
               </div>
             </div>
 
             <div class="bw-faq-item">
-              <button class="bw-faq-btn" aria-expanded="false">Why is the tour free to join?</button>
+              <button class="bw-faq-btn" aria-expanded="false">How much does it cost?</button>
               <div class="bw-faq-content" hidden>
-                <p>We believe everyone should have access to a great walking tour, regardless of their budget. You join for free, and at the end, you tip the guide based on how much you enjoyed the experience. This model guarantees that the guide works hard to earn your appreciation on every single tour.</p>
+                <p>€25 per person, paid when you book. That is the same price on every site that sells it. For your own group I run private walks: €249 for up to 6 people or €299 for up to 10.</p>
               </div>
             </div>
 
             <div class="bw-faq-item">
-              <button class="bw-faq-btn" aria-expanded="false">Do I need to book in advance?</button>
+              <button class="bw-faq-btn" aria-expanded="false">Can I cancel or change my date?</button>
               <div class="bw-faq-content" hidden>
-                <p>Yes, booking online in advance is highly recommended. It takes less than a minute, is completely free, and ensures we don't overcrowd the groups. It also allows us to notify you in the rare event of a severe weather cancellation.</p>
+                <p>Yes. Cancel up to 24 hours before the start and you get a full refund, or move to another date if there is space. Later than that I cannot refund. If I have to cancel, for weather or anything else, you get your money back in full.</p>
               </div>
             </div>
             

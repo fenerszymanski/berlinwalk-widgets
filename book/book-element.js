@@ -47,6 +47,10 @@ function readBookNextTourSlot() {
 }
 
 const BW_BOOK_SHARED_STYLES = `
+  .bw-book [hidden] {
+    display: none !important;
+  }
+
   .bw-book {
     --green: #1B5E20;
     --green-dark: #102414;
@@ -375,26 +379,25 @@ class BWBookHeroElement extends HTMLElement {
           <div class="bw-book-inner">
             <div class="bw-book-hero-grid">
               <div>
-                <span class="bw-book-eyebrow">Book the tour</span>
-                <h1>Pick a date. Meet at the <span class="bw-book-highlight">World Clock</span>. Walk Berlin with a local.</h1>
-                <p class="bw-book-hero-lead">A small-group walk through Berlin's historic centre, guided by Yusuf. Reserving is free, there is no upfront payment, and you tip at the end based on the value you got.</p>
+                <span class="bw-book-eyebrow">Berlin Then and Now</span>
+                <h1>Pick a date. Meet me at the <span class="bw-book-highlight">World Clock</span>. Walk the Berlin that disappeared.</h1>
+                <p class="bw-book-hero-lead">Berlin's old city did not survive. I walk you through where it stood and hold up an archive photo of the same place at every stop.</p>
 
                 <div class="bw-book-meta" aria-label="Tour key facts">
-                  <span class="bw-book-meta-chip">Free · Tip-based</span>
-                  <span class="bw-book-meta-chip">~2 hours</span>
+                  <span class="bw-book-meta-chip">€25 per person</span>
+                  <span class="bw-book-meta-chip">About 2.5 hours</span>
+                  <span class="bw-book-meta-chip">Max 8 people</span>
                   <span class="bw-book-meta-chip">English</span>
-                  <span class="bw-book-meta-chip">Dates in the calendar</span>
                 </div>
 
                 <div class="bw-book-actions">
                   <a class="bw-book-btn bw-book-btn-primary" href="#${BW_BOOK_ANCHOR_ID}">Pick your date ↓</a>
                   <a class="bw-book-btn bw-book-btn-ghost" href="${BW_BOOK_MEETING_POINT_URL}">Meeting point</a>
                 </div>
-                <p class="bw-book-cta-note">September 2026: Tue-Sat at 11:30 and 15:30. October 2026: Wed-Sun at 11:30, except 4 and 13-20 October. Pick an available date in the calendar. Free to reserve; tip at the end.</p>
+                <p class="bw-book-cta-note">The walk starts at 12:30 at the World Clock on Alexanderplatz. Every date runs, even if you are the only guest.</p>
 
-                <div class="bw-book-trust" aria-label="Tour rating">
-                  <span class="bw-book-trust-score">9.8 / 10</span>
-                  <span>On <a href="https://www.freetour.com/company/97387" rel="noopener" target="_blank">FreeTour</a>, from real walkers who took the same tour.</span>
+                <div class="bw-book-trust" aria-label="Guest reviews">
+                  <span>Read what guests say on my <a href="${BW_BOOK_REVIEWS_URL}">reviews page</a>.</span>
                 </div>
               </div>
 
@@ -402,13 +405,14 @@ class BWBookHeroElement extends HTMLElement {
                 <h2>At a glance</h2>
                 <dl>
                   <div data-bw-book-next-walk-row hidden><dt>Next walk</dt><dd data-bw-book-next-walk>Loading...</dd></div>
-                  <div><dt>Price</dt><dd>Free · Tip-based</dd></div>
-                  <div><dt>Duration</dt><dd>~2 hours</dd></div>
-                  <div><dt>Meeting point</dt><dd>World Clock, Alexanderplatz</dd></div>
-                  <div><dt>Ends near</dt><dd>Hackescher Markt</dd></div>
+                  <div><dt>Price</dt><dd>€25 per person</dd></div>
+                  <div><dt>Duration</dt><dd>About 2.5 hours, about 3 km</dd></div>
+                  <div><dt>Start</dt><dd>12:30, World Clock, Alexanderplatz</dd></div>
+                  <div><dt>Ends at</dt><dd>Hackescher Markt</dd></div>
+                  <div><dt>Group</dt><dd>No more than 8 people</dd></div>
                   <div><dt>Language</dt><dd>English</dd></div>
                 </dl>
-                <p class="bw-book-hero-card-foot">No payment to book. A fair thank-you for a good 2-hour walk is usually 10€-20€ per adult.</p>
+                <p class="bw-book-hero-card-foot">Cancel up to 24 hours before the start for a full refund, or move to another date if there is space.</p>
               </aside>
             </div>
           </div>
@@ -752,25 +756,25 @@ class BWBookDetailsElement extends HTMLElement {
           <div class="bw-book-inner">
             <div class="bw-book-section-head">
               <span class="bw-book-eyebrow">What you get</span>
-              <h2>A relaxed walk built for first-time visitors and history lovers.</h2>
-              <p class="bw-book-section-lead">No rush, no scripts, no fake enthusiasm. Just the stories that make Berlin's centre click — the medieval corner, the royal ambition, the wall that ran through, the city that keeps rebuilding itself.</p>
+              <h2>A walk through the old city that disappeared.</h2>
+              <p class="bw-book-section-lead">The streets where Berlin grew up were cleared after the war, and much of what people call the old town today is a 1980s rebuild. I show you where the old city stood, one archive photo at a time.</p>
             </div>
             <div class="bw-book-included" role="list">
               <article class="bw-book-included-card" role="listitem">
-                <strong>~2 hours on foot</strong>
-                <span>Easy pace, lots of stops, no rush.</span>
+                <strong>About 2.5 hours on foot</strong>
+                <span>About 3 km at an easy pace, with a stop every few minutes.</span>
               </article>
               <article class="bw-book-included-card" role="listitem">
-                <strong>A real local guide</strong>
-                <span>Yusuf, the same person every day. Not a rotating script.</span>
+                <strong>The guide who built the route</strong>
+                <span>Me, Yusuf, on every walk. Not a rotating script.</span>
               </article>
               <article class="bw-book-included-card" role="listitem">
-                <strong>Historic centre, end to end</strong>
-                <span>Alexanderplatz to Hackescher Markt, through Berlin's oldest streets.</span>
+                <strong>11 stops covering 16 places</strong>
+                <span>From the World Clock and the TV Tower to Museum Island and Hackescher Markt.</span>
               </article>
               <article class="bw-book-included-card" role="listitem">
-                <strong>Old maps and photos</strong>
-                <span>Compare what stood here before with what you are looking at now.</span>
+                <strong>An archive photo at every stop</strong>
+                <span>See what stood in the same place before, and what is left of it now.</span>
               </article>
             </div>
           </div>
@@ -780,15 +784,15 @@ class BWBookDetailsElement extends HTMLElement {
           <div class="bw-book-inner">
             <div class="bw-book-section-head">
               <span class="bw-book-eyebrow">What to expect on the walk</span>
-              <h2>One compact route through 800 years of Berlin.</h2>
-              <p class="bw-book-section-lead">A loose outline. The walk shifts with the group, the weather, and the questions you bring.</p>
+              <h2>From Alexanderplatz to Hackescher Markt.</h2>
+              <p class="bw-book-section-lead">A short outline of the 11 stops. The pace shifts with the group, the weather, and the questions you bring.</p>
             </div>
             <ol class="bw-book-route">
-              <li><span class="bw-book-route-num">1</span><div><strong>Alexanderplatz &amp; the socialist redesign</strong><p>Why East Berlin's flagship square looks the way it does, and what stood here before.</p></div></li>
-              <li><span class="bw-book-route-num">2</span><div><strong>Marienkirche &amp; medieval Berlin</strong><p>The 800-year-old church that survived everything, and the medieval city most visitors walk past.</p></div></li>
-              <li><span class="bw-book-route-num">3</span><div><strong>Nikolaiviertel &amp; the rebuilt old town</strong><p>Berlin's oldest quarter — destroyed, rebuilt, and quietly strange when you look closely.</p></div></li>
-              <li><span class="bw-book-route-num">4</span><div><strong>Museum Island &amp; Prussian ambition</strong><p>How a sandy island in the Spree became one of the great museum complexes in Europe.</p></div></li>
-              <li><span class="bw-book-route-num">5</span><div><strong>Hackescher Markt &amp; Berlin's quiet corners</strong><p>Hidden courtyards, traces of the wall, and the parts of Berlin most tours skip.</p></div></li>
+              <li><span class="bw-book-route-num">1</span><div><strong>The World Clock and the TV Tower</strong><p>Why East Berlin's flagship square looks the way it does, and what stood here before.</p></div></li>
+              <li><span class="bw-book-route-num">2</span><div><strong>Rotes Rathaus, Neptunbrunnen and the Marienkirche</strong><p>The red town hall, the fountain, and the medieval church that outlived the streets around it.</p></div></li>
+              <li><span class="bw-book-route-num">3</span><div><strong>Marx-Engels-Forum, the Sanchi Gate and the Humboldt Forum</strong><p>An open park where a dense old quarter once stood, and the rebuilt palace facade across the river.</p></div></li>
+              <li><span class="bw-book-route-num">4</span><div><strong>Lustgarten, Berliner Dom and Museum Island</strong><p>How a sandy island in the Spree became one of the great museum complexes in Europe.</p></div></li>
+              <li><span class="bw-book-route-num">5</span><div><strong>Friedrichsbrücke to Hackescher Markt</strong><p>Across the Spree to the end of the walk, with cafes, food and S-Bahn connections close by.</p></div></li>
             </ol>
           </div>
         </div>
@@ -800,7 +804,7 @@ class BWBookDetailsElement extends HTMLElement {
               <div class="bw-book-mp-copy">
                 <span class="bw-book-eyebrow">Meeting point</span>
                 <h2>The World Clock, Alexanderplatz.</h2>
-                <p>Hard to miss, easy to reach — directly above U/S-Bahn Alexanderplatz. Look for the guide with a BerlinWalk sign a few minutes before start time.</p>
+                <p>Hard to miss and easy to reach, right above U-Bahn and S-Bahn Alexanderplatz. Come 5 minutes before 12:30 and look for my green umbrella.</p>
                 <a class="bw-book-btn bw-book-btn-ghost" href="${BW_BOOK_MEETING_POINT_URL}">Meeting point details →</a>
               </div>
             </div>
@@ -809,11 +813,11 @@ class BWBookDetailsElement extends HTMLElement {
 
         <div class="bw-book-section">
           <div class="bw-book-inner">
-            <aside class="bw-book-explainer" aria-labelledby="bw-book-tip-title">
-              <span class="bw-book-eyebrow">Free, tip-based — what that means</span>
-              <h2 id="bw-book-tip-title">No payment to book. Tip the guide at the end based on what the walk was worth to you.</h2>
-              <p>You reserve a spot for free. After the walk, you decide what to tip based on the value you got, your budget, and how it compares to a paid tour. This is how I make a living, and how the tour stays accessible to travellers on every kind of budget.</p>
-              <p>For a good 2-hour walk, 10€ per adult is the fair minimum thank-you, 15€ is strong, and 20€+ is generous. There is no upfront payment and no awkward handover script at the end.</p>
+            <aside class="bw-book-explainer" aria-labelledby="bw-book-price-title">
+              <span class="bw-book-eyebrow">Price and cancellation</span>
+              <h2 id="bw-book-price-title">€25 per person, paid when you book.</h2>
+              <p>That is the same price on every site that sells it. The group is never bigger than 8, and every date runs, even if you are the only guest.</p>
+              <p>Cancel up to 24 hours before the start and you get a full refund, or move to another date if there is space. Later than that, or if you do not come, I cannot refund. If I have to cancel, for weather or anything else, you get your money back in full.</p>
             </aside>
           </div>
         </div>
@@ -826,36 +830,36 @@ class BWBookDetailsElement extends HTMLElement {
             </div>
             <div class="bw-book-faq">
               <details>
-                <summary>Is the tour really free?</summary>
-                <p>Yes. There is no charge to book or join. At the end of the walk you decide what to tip based on the value you got; for a good 2-hour tour, most guests treat 10€ per adult as the fair minimum thank-you.</p>
+                <summary>What is Berlin Then and Now?</summary>
+                <p>It is my walking tour through the part of Berlin that is gone. The streets where the city grew up were cleared after the war, and much of what people call the old town today is a 1980s rebuild. At every stop I hold up an archive photo of the same place, so you can see what stood there and what is left.</p>
               </details>
               <details>
-                <summary>What does the tour cover?</summary>
-                <p>Berlin's historic centre, end to end: Alexanderplatz, the medieval city, Nikolaiviertel, Museum Island, traces of the wall, and the hidden corners around Hackescher Markt.</p>
+                <summary>How long is it and where does it go?</summary>
+                <p>About 2.5 hours and about 3 km on foot. We start at the World Clock on Alexanderplatz and end at Hackescher Markt: 11 stops covering 16 places, from the TV Tower and the Marienkirche to the Humboldt Forum and Museum Island.</p>
               </details>
               <details>
-                <summary>How long does the tour last?</summary>
-                <p>About 2 hours on foot at a relaxed pace, with frequent stops for stories, old photos, and your questions.</p>
+                <summary>How much does it cost?</summary>
+                <p>€25 per person, paid when you book. That is the same price on every site that sells it.</p>
               </details>
               <details>
-                <summary>What language is the tour in?</summary>
-                <p>English. The walk is built around stories and context, so the explanations work for first-time visitors and history lovers alike.</p>
+                <summary>How big is the group, and does my date run?</summary>
+                <p>No more than 8 people. Every date runs, even if you are the only guest.</p>
               </details>
               <details>
-                <summary>Do we go inside museums or buildings?</summary>
-                <p>No. The walk is fully outdoors, so there are no ticket purchases or queues. You will leave the tour with a clear shortlist of museums and interiors worth coming back to on your own.</p>
+                <summary>Where do I meet you?</summary>
+                <p>At the World Clock (Weltzeituhr) on Alexanderplatz. Come 5 minutes before the start and look for my green umbrella.</p>
               </details>
               <details>
-                <summary>Will I see the Berlin Wall on this tour?</summary>
-                <p>This walk focuses on the historic centre. You will see traces of the wall's path and the East-West divide, but for full Berlin Wall context the East Side Gallery or Bernauer Straße are better dedicated visits afterwards.</p>
+                <summary>Can I cancel or change my date?</summary>
+                <p>Yes. Cancel up to 24 hours before the start and you get a full refund, or move to another date if there is space. Later than that I cannot refund. If I have to cancel, for weather or anything else, you get your money back in full.</p>
               </details>
               <details>
-                <summary>How much should I tip?</summary>
-                <p>Whatever the walk was worth to you. For a good 2-hour walk, 10€ per adult is the fair minimum thank-you, 15€ is strong, and 20€+ is generous. Cash is easiest, card works too.</p>
+                <summary>What if it rains?</summary>
+                <p>The walk runs in light rain, so bring a jacket. If the weather makes it unsafe, I cancel and refund you in full.</p>
               </details>
               <details>
-                <summary>Can I change or cancel my booking?</summary>
-                <p>Yes. Open your confirmation email and use the &lsquo;Change my date or time&rsquo; or &lsquo;Cancel my booking&rsquo; button. No account is required. If you cannot find the email, contact us on WhatsApp with your name and booking date.</p>
+                <summary>Is it in English, and can I book it just for my group?</summary>
+                <p>The walk is in English. For your own group I run private walks: €249 for up to 6 people or €299 for up to 10.</p>
               </details>
             </div>
           </div>
@@ -863,10 +867,10 @@ class BWBookDetailsElement extends HTMLElement {
 
         <div class="bw-book-ending">
           <div class="bw-book-inner">
-            <h2>Ready to walk Berlin with a local?</h2>
-            <p>Free to book. Tip-based at the end. Just pick a date and meet at the World Clock.</p>
+            <h2>Ready to walk the Berlin that disappeared?</h2>
+            <p>Pick a date and meet me at the World Clock at 12:30.</p>
             <a class="bw-book-btn bw-book-btn-yellow" href="#${BW_BOOK_ANCHOR_ID}">Pick your date ↑</a>
-            <p class="bw-book-private">Coming with your own group? I also walk this route privately, on your date and at your pace. <a href="${BW_BOOK_PRIVATE_TOUR_URL}">See private tours</a></p>
+            <p class="bw-book-private">Coming with your own group? I also run this walk privately: €249 for up to 6 people or €299 for up to 10. <a href="${BW_BOOK_PRIVATE_TOUR_URL}">See private walks</a></p>
           </div>
         </div>
       </section>

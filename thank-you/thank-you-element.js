@@ -18,14 +18,14 @@ const BW_THANK_YOU_WEATHER_COORDS = {
 };
 const BW_THANK_YOU_FORECAST_DAYS = 16;
 const BW_THANK_YOU_CALENDAR = {
-  title: 'BerlinWalk Free Walking Tour',
+  title: 'Berlin Then and Now walking tour with BerlinWalk',
   location: 'World Clock, Alexanderplatz, 10178 Berlin, Germany',
   timezone: 'Europe/Berlin',
-  durationMinutes: 120,
+  durationMinutes: 150,
   details: [
     'Your BerlinWalk spot is booked.',
     'Meeting point: World Clock, Alexanderplatz.',
-    'Look for the BerlinWalk guide with a green umbrella.',
+    'Look for Yusuf with a green umbrella.',
     'Please arrive 5 minutes early.',
     BW_THANK_YOU_MEETING_POINT_URL
   ].join('\n')
@@ -1011,7 +1011,7 @@ class BWThankYouElement extends HTMLElement {
             <div data-bw-ty-reveal>
               <span class="bw-ty-eyebrow">Booking confirmed</span>
               <h1 id="bw-ty-title">You are booked. See you at the <span class="bw-ty-highlight">World Clock.</span></h1>
-              <p class="bw-ty-lead">Thank you for reserving your spot on BerlinWalk. Your confirmation email is on its way with the date, time, and booking details. I am looking forward to walking Berlin with you.</p>
+              <p class="bw-ty-lead">Thank you for booking with me. Your confirmation email is on its way with the date, time, and booking details. I am looking forward to walking Berlin with you.</p>
               <div class="bw-ty-actions" aria-label="Useful tour-day links">
                 <a class="bw-ty-btn bw-ty-btn-primary" href="${BW_THANK_YOU_MAPS_URL}" target="_blank" rel="noopener" data-bw-ty-event="directions_clicked">Open meeting point map</a>
                 <a class="bw-ty-btn bw-ty-btn-secondary" href="${BW_THANK_YOU_MEETING_POINT_URL}" data-bw-ty-event="meeting_guide_clicked">View meeting point guide</a>
@@ -1059,7 +1059,7 @@ class BWThankYouElement extends HTMLElement {
                 <dl class="bw-ty-facts">
                   <div class="bw-ty-fact">
                     <dt>Look for</dt>
-                    <dd>BerlinWalk guide with a green umbrella</dd>
+                    <dd>Yusuf with a green umbrella</dd>
                   </div>
                   <div class="bw-ty-fact">
                     <dt>Arrive</dt>
@@ -1067,7 +1067,7 @@ class BWThankYouElement extends HTMLElement {
                   </div>
                   <div class="bw-ty-fact">
                     <dt>Walk</dt>
-                    <dd>About 2 hours. Ends at Hackescher Markt</dd>
+                    <dd>About 2.5 hours. Ends at Hackescher Markt</dd>
                   </div>
                 </dl>
               </div>
@@ -1117,7 +1117,7 @@ class BWThankYouElement extends HTMLElement {
                 <div>
                   <span class="bw-ty-card-kicker">Meeting point map</span>
                   <h3>World Clock, Alexanderplatz</h3>
-                  <p>Arrive 5 minutes early and look for the BerlinWalk guide with a green umbrella.</p>
+                  <p>Arrive 5 minutes early and look for my green umbrella.</p>
                 </div>
                 <div class="bw-ty-map-frame" role="img" aria-label="Map to the World Clock at Alexanderplatz">
                   <div class="bw-ty-map-tile-grid" aria-hidden="true">
@@ -1150,7 +1150,7 @@ class BWThankYouElement extends HTMLElement {
               </li>
               <li class="bw-ty-step" data-bw-ty-reveal>
                 <h3>Come ready to walk</h3>
-                <p>Wear comfortable shoes, check the weather, and bring curiosity. Your &euro;2 deposit comes back after the walk, and the tip at the end is up to you. You can change the date free of charge up to 2 hours before the start, and the deposit moves to the new date.</p>
+                <p>Wear comfortable shoes, check the weather, and bring curiosity. If your plans change, cancel up to 24 hours before the start for a full refund, or move to another date if there is space. Later than that I cannot refund.</p>
               </li>
             </ol>
           </div>
@@ -1178,7 +1178,7 @@ class BWThankYouElement extends HTMLElement {
               <a class="bw-ty-link-card" href="${BW_THANK_YOU_TOOLS_URL}" data-bw-ty-event="planning_tool_clicked" data-bw-ty-reveal>
                 <span class="bw-ty-link-kicker">Planning</span>
                 <h3>Use the Berlin planning tools</h3>
-                <p>Weather, budget, luggage, toilets, free things to do, and practical maps for your trip.</p>
+                <p>Weather, budget, luggage, toilets, things to do, and practical maps for your trip.</p>
                 <span class="bw-ty-link-action">Explore tools</span>
               </a>
             </div>
@@ -1498,7 +1498,7 @@ class BWThankYouElement extends HTMLElement {
 
     if (diffMs <= 0) {
       value.textContent = 'Head to the World Clock';
-      copy.textContent = 'The tour is starting now. Look for the BerlinWalk guide with a green umbrella.';
+      copy.textContent = 'The walk is starting now. Look for my green umbrella at the World Clock.';
       return;
     }
 
@@ -1750,7 +1750,7 @@ class BWThankYouElement extends HTMLElement {
     } else if (temp !== null && temp <= 9) {
       pieces.push('Add a warm layer under your jacket.');
     } else if (temp !== null && temp <= 16) {
-      pieces.push('A jacket or sweater is sensible for a 2-hour walk.');
+      pieces.push('A jacket or sweater is sensible for a walk of about 2.5 hours.');
     } else if (temp !== null && temp >= 25) {
       title = rainy ? title : 'Warm-day walking setup';
       pieces.push('Wear light layers and bring water.');

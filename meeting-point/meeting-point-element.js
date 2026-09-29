@@ -1,5 +1,5 @@
 const BW_MEETING_POINT_MAPS_URL = 'https://www.google.com/maps/search/?api=1&query=Weltzeituhr%20Alexanderplatz%20Berlin';
-const BW_MEETING_POINT_BOOKING_URL = 'https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based';
+const BW_MEETING_POINT_BOOKING_URL = 'https://www.walkofberlin.com/book-berlin-walking-tour/berlin-then-and-now';
 const BW_MEETING_POINT_IMAGE_URL = 'https://fenerszymanski.github.io/berlinwalk-widgets/gallery/images/06-1200w.webp';
 const BW_MEETING_POINT_IMAGE_FALLBACK_URL = 'https://fenerszymanski.github.io/berlinwalk-widgets/gallery/images/06-1200w.jpg';
 
@@ -524,10 +524,10 @@ class BWMeetingPointElement extends HTMLElement {
             <div>
               <span class="bw-mp-eyebrow">Meeting Point</span>
               <h1 id="bw-meeting-point-title">Meet at the <span class="bw-mp-highlight">World Clock</span></h1>
-              <p class="bw-mp-hero-lead">Your BerlinWalk tour starts at the Weltzeituhr on Alexanderplatz. Arrive 5 minutes early, look for the green umbrella, and get ready to walk from Alexanderplatz to Hackescher Markt.</p>
+              <p class="bw-mp-hero-lead">Berlin Then and Now starts at 12:30 at the Weltzeituhr on Alexanderplatz. Arrive 5 minutes early, look for my green umbrella, and get ready to walk from Alexanderplatz to Hackescher Markt.</p>
               <div class="bw-mp-actions">
                 <a class="bw-mp-btn bw-mp-btn-primary" href="${BW_MEETING_POINT_MAPS_URL}" target="_blank" rel="noopener">Open in Google Maps</a>
-                <a class="bw-mp-btn bw-mp-btn-ghost" href="${BW_MEETING_POINT_BOOKING_URL}">Book the Tour</a>
+                <a class="bw-mp-btn bw-mp-btn-ghost" href="${BW_MEETING_POINT_BOOKING_URL}">See dates and book</a>
               </div>
             </div>
 
@@ -551,6 +551,10 @@ class BWMeetingPointElement extends HTMLElement {
                 <div class="bw-mp-board-row">
                   <span class="bw-mp-board-label">Look for</span>
                   <span class="bw-mp-board-value">Green umbrella</span>
+                </div>
+                <div class="bw-mp-board-row">
+                  <span class="bw-mp-board-label">Start</span>
+                  <span class="bw-mp-board-value">12:30</span>
                 </div>
                 <div class="bw-mp-board-row">
                   <span class="bw-mp-board-label">Arrive</span>
@@ -591,7 +595,7 @@ class BWMeetingPointElement extends HTMLElement {
                 <span class="bw-mp-arrival-number" aria-hidden="true">03</span>
                 <div>
                   <h3>Look for the green umbrella</h3>
-                  <p>I meet the group beside the World Clock. Arrive 5 minutes early so the walk can start on time.</p>
+                  <p>I meet the group beside the World Clock. Arrive 5 minutes before 12:30 so the walk can start on time.</p>
                 </div>
               </li>
             </ol>
@@ -607,7 +611,7 @@ class BWMeetingPointElement extends HTMLElement {
               </div>
               <div class="bw-mp-route-stop">
                 <h3>Walk</h3>
-                <p>About 2 hours through Berlin's historic centre</p>
+                <p>About 2.5 hours and about 3 km: 11 stops covering 16 places, with an archive photo at every stop</p>
               </div>
               <div class="bw-mp-route-stop">
                 <h3>End</h3>
@@ -634,9 +638,9 @@ class BWMeetingPointElement extends HTMLElement {
 
         <footer class="bw-mp-final">
           <div class="bw-mp-inner">
-            <h2>Ready to walk through Berlin's historic centre?</h2>
-            <p>Reserve your spot for the free tip-based Berlin walking tour from Alexanderplatz to Hackescher Markt.</p>
-            <a class="bw-mp-btn bw-mp-btn-primary" href="${BW_MEETING_POINT_BOOKING_URL}">Book your spot</a>
+            <h2>Walk the Berlin that disappeared, with me</h2>
+            <p>Berlin Then and Now runs from Alexanderplatz to Hackescher Markt in about 2.5 hours. €25 per person, no more than 8 people, and every date runs.</p>
+            <a class="bw-mp-btn bw-mp-btn-primary" href="${BW_MEETING_POINT_BOOKING_URL}">See dates and book</a>
           </div>
         </footer>
       </section>
