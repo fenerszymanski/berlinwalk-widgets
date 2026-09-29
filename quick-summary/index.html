@@ -581,7 +581,9 @@
       function loadPostConfig() {
         var shardUrl = './data/' + encodeURIComponent(postSlug) + '.json' + versionSuffix();
         var controller = typeof AbortController === 'function' ? new AbortController() : null;
-        var fetchOptions = { cache: 'force-cache' };
+        // Shards are rebuilt independently of this page: use the normal HTTP
+        // cache (GitHub Pages max-age=600), not force-cache, so edits reach readers.
+        var fetchOptions = { cache: 'default' };
         if (controller) fetchOptions.signal = controller.signal;
         var deadline;
         var request = fetch(shardUrl, fetchOptions)

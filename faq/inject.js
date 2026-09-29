@@ -47,7 +47,7 @@
   try { version = loaderUrl ? new URL(loaderUrl).searchParams.get('v') || '' : ''; } catch (error) {}
   var dataUrl = dataBase + encodeURIComponent(slug) + '.json' + (version ? '?v=' + encodeURIComponent(version) : '');
 
-  fetch(dataUrl, { cache: 'force-cache', credentials: 'omit' })
+  fetch(dataUrl, { cache: 'default', credentials: 'omit' })
     .then(function (response) { return response.ok ? response.json() : null; })
     .then(function (payload) { if (payload && payload.schema) injectSchema(payload.schema); })
     .catch(function () {});

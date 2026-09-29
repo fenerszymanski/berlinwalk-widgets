@@ -280,13 +280,16 @@
         return version ? '?v=' + encodeURIComponent(version) : '';
       }
 
+      // FAQ shards are rebuilt independently of this page, so they use the
+      // browser's normal HTTP cache (GitHub Pages max-age=600). force-cache kept
+      // readers on old answers indefinitely (30 Sep 2026 Then and Now switch).
       function loadConfig() {
         var shardUrl = './data/' + encodeURIComponent(slug) + '.json' + versionSuffix();
-        return fetch(shardUrl, { cache: 'force-cache' })
+        return fetch(shardUrl, { cache: 'default' })
           .then(function (r) { if (!r.ok) throw new Error('shard_not_found'); return r.json(); })
           .then(function (payload) { return payload && payload.config ? payload.config : payload; })
           .catch(function () {
-            return fetch('./data.json' + versionSuffix(), { cache: 'force-cache' })
+            return fetch('./data.json' + versionSuffix(), { cache: 'default' })
               .then(function (r) { if (!r.ok) throw new Error('aggregate_not_found'); return r.json(); })
               .then(function (data) { return data[slug] || null; });
           });
