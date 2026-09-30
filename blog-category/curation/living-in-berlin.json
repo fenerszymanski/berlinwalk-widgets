@@ -1,5 +1,5 @@
 {
-  "_note": "Hand-curated layer for the /blog/categories/living-in-berlin page. The generator pulls title, excerpt, image, read time and date from the live Wix Blog API; everything in this file is the part a human decides. A post with no entry here still appears on its shelf through the keyword fallback in the generator, but it will not appear in the glossary. Add one entry per new Living in Berlin post.",
+  "_note": "Hand-curated layer for the /blog/categories/living-in-berlin page. The generator pulls title, excerpt, image, read time and date from the live Wix Blog API; everything in this file is the part a human decides. A post with no entry here lands on the \"More in this category\" shelf with the first sentence of its excerpt as its line, and stays out of the glossary. Add one entry per new Living in Berlin post.",
   "_shelfLeads": {
     "wohnung": "The flat, and what it costs to keep",
     "geld": "Money, forms and the rules behind them",
@@ -158,6 +158,206 @@
       "term": "Briefwahl",
       "gloss": "The postal vote. The online form closes on the Tuesday before the election, written applications and walk-in voting at the Briefwahlstelle on the Friday at 15:00, and the red Wahlbrief has to be physically at the Bezirkswahlamt by 18:00 on election day. Postmarked is not there.",
       "termCta": "Which sheets and which deadline are yours"
+    },
+    "berlin-flat-notice-period": {
+      "shelf": "wohnung",
+      "figure": "3rd working day",
+      "line": "of the month is the deadline, and in Berlin it moves, because Saturday counts and ten public holidays do not."
+    },
+    "berlin-rental-deposit": {
+      "shelf": "wohnung",
+      "figure": "6 months",
+      "line": "after the keys go back, damage claims expire. The service charge reserve is the one lawful reason to wait longer."
+    },
+    "mould-in-berlin-flats": {
+      "shelf": "wohnung",
+      "figure": "49 of 288",
+      "line": "hours on the month by hour grid make the room wetter when you air it. In January the same window takes 5.5 g out of every cubic metre."
+    },
+    "berlin-snow-clearing-rules": {
+      "shelf": "wohnung",
+      "figure": "1.5 m",
+      "line": "of pavement on main roads and 1 metre everywhere else, clear by 07:00, with grit and never salt."
+    },
+    "wohngeld-berlin": {
+      "shelf": "wohnung",
+      "figure": "530 &euro;",
+      "line": "is the rent Berlin counts for one person, 892 for four, and most households who qualify have never applied."
+    },
+    "electricity-provider-berlin": {
+      "shelf": "wohnung",
+      "figure": "37.93 ct/kWh",
+      "line": "plus 13.40 &euro; a month is what you pay Vattenfall if you never signed a contract."
+    },
+    "mieterverein-berlin": {
+      "shelf": "wohnung",
+      "figure": "3 months",
+      "line": "of waiting before the Berliner Mieterverein's legal cover starts, and the letter that made you join is never covered."
+    },
+    "home-insurance-in-berlin": {
+      "shelf": "wohnung",
+      "figure": "650 &euro;/m&sup2;",
+      "line": "is the benchmark sum insured. Go below it and every claim is cut in proportion, from the first euro."
+    },
+    "home-internet-berlin": {
+      "shelf": "wohnung",
+      "figure": "45.9 %",
+      "line": "of measured German households get their full contracted download speed. Any one of three tests lets you cut the bill or walk out."
+    },
+    "milieuschutz-berlin": {
+      "shelf": "wohnung",
+      "figure": "82 areas",
+      "line": "on 5,318 hectares, where merging flats, underfloor heating and a holiday let are refused outright."
+    },
+    "berlin-housing-cooperative": {
+      "shelf": "wohnung",
+      "figure": "190,000 flats",
+      "line": "in more than 80 cooperatives. The share money takes about three years to come back, and a popular estate can mean ten on the list."
+    },
+    "second-home-tax-berlin": {
+      "shelf": "wohnung",
+      "figure": "20 %",
+      "line": "of the net cold rent on a Nebenwohnung, up from 15, and since 2025 a WG room counts too."
+    },
+    "doctor-appointment-berlin": {
+      "shelf": "geld",
+      "figure": "4 weeks",
+      "line": "is the promise on 116117, and for most specialists the clock only starts with a twelve-digit code on the referral."
+    },
+    "kita-place-berlin": {
+      "shelf": "geld",
+      "figure": "2,917 Kitas",
+      "line": "and half of them hold fewer than fifty children. The Gutschein pays for a place, it does not find one."
+    },
+    "berlin-school-registration": {
+      "shelf": "geld",
+      "figure": "394 areas",
+      "line": "and 356 of them hold exactly one school. Your address picks it, and the window is 5 to 16 October."
+    },
+    "tax-return-in-berlin": {
+      "shelf": "geld",
+      "figure": "4 years",
+      "line": "back is as far as a voluntary return reaches, and 2022 closes on 31 December 2026."
+    },
+    "german-citizenship-berlin": {
+      "shelf": "geld",
+      "figure": "5 years",
+      "line": "of lawful residence since the fast track ended, and one trip abroad of more than six months can reset the clock."
+    },
+    "dentist-in-berlin": {
+      "shelf": "geld",
+      "figure": "60, 70 or 75 %",
+      "line": "of the standard price of a crown comes from the Krankenkasse, and the stamp you get before 31 December decides which."
+    },
+    "buergeramt-berlin": {
+      "shelf": "geld",
+      "figure": "26 of 38",
+      "line": "counters take a named list of errands without an appointment, and a Meldebescheinigung is free online."
+    },
+    "elterngeld-berlin": {
+      "shelf": "geld",
+      "figure": "3 months",
+      "line": "is all the back pay there is, Berlin wants the form by post, and one empty month after the 14th ends the claim."
+    },
+    "sick-leave-in-berlin": {
+      "shelf": "geld",
+      "figure": "42 days",
+      "line": "of full pay per illness. The same illness gets a fresh six weeks only after six clear months, or twelve from the first day off."
+    },
+    "flu-shot-in-berlin": {
+      "shelf": "geld",
+      "figure": "2 November",
+      "line": "is the week a shot would have covered at least 95 per cent of Berlin's cases in all four of the last winters."
+    },
+    "vet-in-berlin": {
+      "shelf": "geld",
+      "figure": "115 to 519 &euro;",
+      "line": "for the same limping dog with two X-rays, depending on whether it is Monday morning or Saturday night."
+    },
+    "church-tax-berlin": {
+      "shelf": "geld",
+      "figure": "9 %",
+      "line": "of your income tax. The month you sign at the court is the last month you pay."
+    },
+    "kindergeld-berlin": {
+      "shelf": "geld",
+      "figure": "259 &euro;",
+      "line": "a month per child, paid back six months and no further. Six lost months are 1,554 &euro;."
+    },
+    "blood-donation-berlin": {
+      "shelf": "geld",
+      "figure": "14 centres",
+      "line": "in the city. One pays 20 &euro; for a bag, another pays nothing, and four of the five operators want German at the desk."
+    },
+    "apple-picking-near-berlin": {
+      "shelf": "draussen",
+      "figure": "5 orchards",
+      "line": "around the city. Only two pick on a Monday, and four sit inside the Berlin ABC ticket."
+    },
+    "bouldering-in-berlin": {
+      "shelf": "draussen",
+      "figure": "5 visits",
+      "line": "a month is where a membership usually overtakes the 10-visit card. I priced fourteen halls and two passes."
+    },
+    "cranes-near-berlin": {
+      "shelf": "draussen",
+      "figure": "40 km",
+      "line": "out at Linum, tens of thousands of cranes fly in at dusk, and this season no bus runs there at the weekend."
+    },
+    "autumn-leaves-in-berlin": {
+      "shelf": "draussen",
+      "figure": "21 October",
+      "line": "is when the typical beech is half coloured. Most of the woods around Berlin are pine and never turn."
+    },
+    "pumpkin-patch-berlin": {
+      "shelf": "draussen",
+      "figure": "1 field",
+      "line": "inside the city lets you cut your own: Dom&auml;ne Dahlem, on 3 and 4 October only."
+    },
+    "thermal-baths-near-berlin": {
+      "shelf": "draussen",
+      "figure": "6 baths",
+      "line": "sit inside a regional ticket. Bad Belzig's last useful train leaves at 21:44, before the pools close."
+    },
+    "stargazing-in-berlin": {
+      "shelf": "draussen",
+      "figure": "12 &euro;",
+      "line": "opens the big telescope at Archenhold or Wilhelm-Foerster, and Saturn is at opposition on 4 October."
+    },
+    "berlin-zoo-annual-pass": {
+      "shelf": "draussen",
+      "figure": "3 visits",
+      "line": "pay off a 69 &euro; Zoo card against the 25 &euro; gate price. Against online tickets it takes about five."
+    },
+    "winter-swimming-in-berlin": {
+      "shelf": "draussen",
+      "figure": "10 &deg;C",
+      "line": "is the line most lakes dropped under between 27 October and 17 November last winter, and the Spree stays banned all year."
+    },
+    "winter-tyres-berlin": {
+      "shelf": "wege",
+      "figure": "30 September",
+      "line": "is the median first ground frost, about five weeks before the first air frost on 6 November."
+    },
+    "halteverbotszone-berlin": {
+      "shelf": "wege",
+      "figure": "32 days",
+      "line": "is the real lead time: four weeks of processing plus four days of signs. Most removal guides say fourteen."
+    },
+    "berlin-monthly-ticket": {
+      "shelf": "wege",
+      "figure": "81.30 &euro;",
+      "line": "for the Berlin AB card on subscription, against 63 for the Deutschlandticket that covers the whole country."
+    },
+    "bike-lights-in-berlin": {
+      "shelf": "wege",
+      "figure": "8 October",
+      "line": "is when an 18:30 ride home loses the sun, and the law asks for lights from twilight."
+    },
+    "cargo-bike-berlin": {
+      "shelf": "wege",
+      "figure": "243 bikes",
+      "line": "are free to borrow, but only 70 hand over on a Saturday and 12 on a Sunday."
     }
   }
 }
