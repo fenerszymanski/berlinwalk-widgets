@@ -1,9 +1,9 @@
 {
-  "updatedAt": "2026-09-30T02:05:44.807Z",
+  "updatedAt": "2026-09-30T08:45:12.102Z",
   "source": "Wix Blog API",
   "popularSource": "Wix Blog metrics.views lifetime sort",
-  "totalPosts": 426,
-  "toolsTotal": 346,
+  "totalPosts": 427,
+  "toolsTotal": 347,
   "bookingUrl": "https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based",
   "navTopics": [
     {
@@ -759,7 +759,7 @@
           "categorySlug": "tourist-tips",
           "topic": "free-budget",
           "topicLabel": "Free & Budget",
-          "readTime": "8 min read",
+          "readTime": "9 min read",
           "publishedDate": "2026-03-20T14:19:34.627Z",
           "image": "https://static.wixstatic.com/media/5a08a3_9e7f6e57549540d9bc4b579b5b4f8a81~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/no100-post.jpg",
           "thumb": "https://static.wixstatic.com/media/5a08a3_9e7f6e57549540d9bc4b579b5b4f8a81~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/no100-post.jpg",
@@ -1802,6 +1802,23 @@
   ],
   "latest": [
     {
+      "title": "Free vs Paid Walking Tour in Berlin: What a Small Group Really Changes",
+      "slug": "free-vs-paid-walking-tour-berlin",
+      "path": "/post/free-vs-paid-walking-tour-berlin",
+      "url": "https://www.berlinwalk.com/post/free-vs-paid-walking-tour-berlin",
+      "excerpt": "A free walking tour in Berlin costs nothing upfront and usually a tip of €10 or more. A paid one costs about €20 to €28, or more for a real small group. Here is what each costs in practice, how big the groups are, what that does to what you see and hear, and why I changed my own walk to a small group with a fixed price.",
+      "category": "Tourist Tips",
+      "categorySlug": "tourist-tips",
+      "topic": "practical",
+      "topicLabel": "Practical Berlin",
+      "readTime": "7 min read",
+      "publishedDate": "2026-09-30T08:43:31.734Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_339ada94c77d4a68b2a5cb33c4cd6a94~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-small-group-museum-island.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_339ada94c77d4a68b2a5cb33c4cd6a94~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-small-group-museum-island.jpg",
+      "alt": "A small walking tour group of five guests standing with their guide on the Friedrichsbrücke in Berlin, with the Alte Nationalgalerie and the Museum Island colonnade behind them",
+      "relatedToolSlug": "berlin-tour-group-size-viewer"
+    },
+    {
       "title": "Winter Swimming in Berlin: Where It Is Legal and How Cold the Lakes Get",
       "slug": "winter-swimming-in-berlin",
       "path": "/post/winter-swimming-in-berlin",
@@ -1987,23 +2004,6 @@
       "thumb": "https://static.wixstatic.com/media/5a08a3_fa3b702c61e34809b49a9c15b6d61098~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/ag-mitte-treppenhaus.jpg",
       "alt": "The main staircase hall inside the Littenstrasse court building in Berlin-Mitte, with two curving stone stairways under a vaulted ceiling",
       "relatedToolSlug": "berlin-church-tax-map"
-    },
-    {
-      "title": "Pumpkin Patch in Berlin: Where You Can Really Pick Your Own",
-      "slug": "pumpkin-patch-berlin",
-      "path": "/post/pumpkin-patch-berlin",
-      "url": "https://www.berlinwalk.com/post/pumpkin-patch-berlin",
-      "excerpt": "Berlin has pumpkins everywhere in October, but a field you can pick from yourself is rare. Inside the city there is one real harvest, for one weekend. Here is where it is, which pumpkin shows and festivals are worth a Saturday, and how long each one takes from Alexanderplatz.",
-      "category": "Living in Berlin",
-      "categorySlug": "living-in-berlin",
-      "topic": "living-in-berlin",
-      "topicLabel": "Living in Berlin",
-      "readTime": "8 min read",
-      "publishedDate": "2026-09-22T13:45:37.144Z",
-      "image": "https://static.wixstatic.com/media/5a08a3_70327d193189425fa423d71a53909ffb~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/00-cover-klaistow-pumpkin-mound.jpg",
-      "thumb": "https://static.wixstatic.com/media/5a08a3_70327d193189425fa423d71a53909ffb~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/00-cover-klaistow-pumpkin-mound.jpg",
-      "alt": "A huge football built from small white and green pumpkins on a mound of orange pumpkins at the Klaistow pumpkin show near Berlin",
-      "relatedToolSlug": "berlin-pumpkin-weekend-map"
     }
   ]
 }
