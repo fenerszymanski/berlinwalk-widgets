@@ -1,5 +1,5 @@
 {
- "updatedAt": "2026-09-16T14:18:01.507Z",
+ "updatedAt": "2026-09-30T09:23:28.763Z",
  "source": "Wix Blog API + blog-category/categories.json",
  "slug": "living-in-berlin",
  "categoryId": "00af1018-ef7b-465a-93b6-916187609da4",
@@ -8,28 +8,28 @@
  "shelfMode": "curated",
  "shelfLegend": "By the part of life it hits",
  "shelfLegendSub": "Four shelves, because that is how the questions actually arrive",
- "totalPosts": 25,
- "toolCount": 24,
+ "totalPosts": 60,
+ "toolCount": 60,
  "lead": {
-  "title": "Halteverbotszone Berlin: How to Hold the Space for Your Moving Van",
-  "slug": "halteverbotszone-berlin",
-  "path": "/post/halteverbotszone-berlin",
-  "excerpt": "In Berlin the kerb outside your door belongs to everyone until a district office says otherwise, and that order takes longer to get than the van does. The fee starts at 21 euros, the district issues the paper but never the signs, and the Bundesverwaltungsgericht wants three full days of signage before a towed driver can be billed. Four weeks of processing plus four days of signs is thirty-two days, and almost every removals guide says fourteen.",
+  "title": "Winter Swimming in Berlin: Where It Is Legal and How Cold the Lakes Get",
+  "slug": "winter-swimming-in-berlin",
+  "path": "/post/winter-swimming-in-berlin",
+  "excerpt": "Berlin lidos close in September, but swimming stays legal all year in the right lakes. Here is where you can get in between October and March, how fast each lake cooled last winter by the city gauges, the groups and public ice swims, and how to start without getting hurt.",
   "minutes": 7,
   "readTime": "7 min read",
-  "publishedDate": "2026-09-16T14:15:52.796Z",
-  "alt": "Weserstrasse in Berlin-Neukoelln on an ordinary day, cars parked nose to tail along both kerbs under bare spring trees, cobbled carriageway, five-storey Altbau blocks and shopfronts running away down the street",
-  "lead": "https://static.wixstatic.com/media/5a08a3_a231bbc34bb54a2caf7de236a96fa105~mv2.jpg/v1/fill/w_1400,h_620,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
-  "thumb": "https://static.wixstatic.com/media/5a08a3_a231bbc34bb54a2caf7de236a96fa105~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
-  "square": "https://static.wixstatic.com/media/5a08a3_a231bbc34bb54a2caf7de236a96fa105~mv2.jpg/v1/fill/w_184,h_184,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+  "publishedDate": "2026-09-29T08:44:19.424Z",
+  "alt": "The DLRG lifeguard tower at Friedrichshagen on a frozen Müggelsee on a starry winter night, with ice floes and a yellow swimming ladder in the foreground",
+  "lead": "https://static.wixstatic.com/media/5a08a3_5bcc80c146344dfcb3097fef8f07c476~mv2.jpg/v1/fill/w_1400,h_620,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+  "thumb": "https://static.wixstatic.com/media/5a08a3_5bcc80c146344dfcb3097fef8f07c476~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+  "square": "https://static.wixstatic.com/media/5a08a3_5bcc80c146344dfcb3097fef8f07c476~mv2.jpg/v1/fill/w_184,h_184,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
   "shelf": "",
   "topic": "living-in-berlin",
   "figure": "",
-  "line": "In Berlin the kerb outside your door belongs to everyone until a district office says otherwise, and that order takes longer to get than the van does.",
+  "line": "Berlin lidos close in September, but swimming stays legal all year in the right lakes.",
   "term": "",
   "gloss": "",
   "termCta": "",
-  "tool": ""
+  "tool": "berlin-winter-swim-lake-board"
  },
  "glossary": [
   {
@@ -409,13 +409,364 @@
    "lead": "Everything else filed here",
    "posts": [
     {
+     "title": "Winter Swimming in Berlin: Where It Is Legal and How Cold the Lakes Get",
+     "slug": "winter-swimming-in-berlin",
+     "path": "/post/winter-swimming-in-berlin",
+     "minutes": 7,
+     "alt": "The DLRG lifeguard tower at Friedrichshagen on a frozen Müggelsee on a starry winter night, with ice floes and a yellow swimming ladder in the foreground",
+     "thumb": "https://static.wixstatic.com/media/5a08a3_5bcc80c146344dfcb3097fef8f07c476~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+     "line": "Berlin lidos close in September, but swimming stays legal all year in the right lakes.",
+     "tool": "berlin-winter-swim-lake-board"
+    },
+    {
+     "title": "Berlin Zoo Annual Pass: Which Card Pays Off for Your Household",
+     "slug": "berlin-zoo-annual-pass",
+     "path": "/post/berlin-zoo-annual-pass",
+     "minutes": 7,
+     "alt": "The Elefantentor of Zoo Berlin at blue hour, the red and gold pagoda roof lit above two stone elephants on Budapester Straße",
+     "thumb": "https://static.wixstatic.com/media/5a08a3_b5d80d25e7a64875a2e1ceb3e354e5f2~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+     "line": "Zoo, Aquarium and Tierpark Berlin sell four annual cards, family versions of each and a cheaper subscription with a two-year catch.",
+     "tool": "berlin-zoo-annual-pass-planner"
+    },
+    {
+     "title": "Stargazing in Berlin: Which Observatory Night Actually Shows You the Sky",
+     "slug": "stargazing-in-berlin",
+     "path": "/post/stargazing-in-berlin",
+     "minutes": 7,
+     "alt": "The Great Refractor of the Archenhold Observatory in Treptower Park, a long grey steel telescope tube on its massive mount above the observatory roof",
+     "thumb": "https://static.wixstatic.com/media/5a08a3_f6b2c96c7a6449e1b716fc5e47d213af~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+     "line": "Berlin has two public observatories that open their big telescopes to anyone with a €12 ticket, several nights a week from October to December.",
+     "tool": "berlin-observatory-sky-board"
+    },
+    {
+     "title": "Thermal Baths Near Berlin: How Much of Your Saturday Ends Up in the Water",
+     "slug": "thermal-baths-near-berlin",
+     "path": "/post/thermal-baths-near-berlin",
+     "minutes": 7,
+     "alt": "The outdoor thermal pool at the SaarowTherme in Bad Saarow, framed by the white colonnades of the spa building",
+     "thumb": "https://static.wixstatic.com/media/5a08a3_2ba3f3352a644e4aa79f42a5ea0fa5ca~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+     "line": "Six thermal baths sit within a regional-ticket ride of Berlin, and the pool is rarely what decides the day.",
+     "tool": "berlin-therme-soak-timeline"
+    },
+    {
+     "title": "Blood Donation in Berlin: Which Centres Pay, How Often You Can Give, and the German Catch",
+     "slug": "blood-donation-berlin",
+     "path": "/post/blood-donation-berlin",
+     "minutes": 7,
+     "alt": "A full bag of donated blood resting on a white mixing scale beside a donor chair on a wooden floor",
+     "thumb": "https://static.wixstatic.com/media/5a08a3_18b7d059872545f1913360729f0c40ab~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+     "line": "Berlin has 14 fixed blood and plasma centres, and they could hardly be more different: one pays 20 euros for a bag, another pays nothing, and the plasma chains do not print a rate.",
+     "tool": "berlin-blood-donor-map"
+    },
+    {
+     "title": "Second Home Tax in Berlin: Who Pays 20 Percent, and Why WG Rooms Now Count",
+     "slug": "second-home-tax-berlin",
+     "path": "/post/second-home-tax-berlin",
+     "minutes": 7,
+     "alt": "A cream Berlin apartment building in Steglitz with rows of arched balconies and bay windows behind bare autumn trees, cars parked along the street in front",
+     "thumb": "https://static.wixstatic.com/media/5a08a3_380d9b9ac81945548359a441f290932f~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+     "line": "Berlin taxes any flat registered as your Nebenwohnung at 20 percent of the net cold rent, up from 15 percent, and since 2025 a room in a shared flat counts too.",
+     "tool": "berlin-second-home-tax-ledger"
+    },
+    {
+     "title": "Berlin Housing Cooperative Flats: The Rent Is Low, the Money Is Locked",
+     "slug": "berlin-housing-cooperative",
+     "path": "/post/berlin-housing-cooperative",
+     "minutes": 7,
+     "alt": "A cobbled street in Gartenstadt Falkenberg lined with a long terrace of ochre and orange houses behind wooden fences and front gardens",
+     "thumb": "https://static.wixstatic.com/media/5a08a3_eefe56072d4844f886977ec9784de70a~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+     "line": "Berlin has more than 80 housing cooperatives holding roughly 190,000 flats, and the advice always stops at the word itself.",
+     "tool": "berlin-coop-share-payback"
+    },
+    {
+     "title": "Kindergeld in Berlin: The Six Months You Will Never Get Back",
+     "slug": "kindergeld-berlin",
+     "path": "/post/kindergeld-berlin",
+     "minutes": 6,
+     "alt": "A quiet morning at the playground on Rheingaustrasse in Berlin-Friedenau, sand and climbing frames under mature trees with a pale apartment gable behind",
+     "thumb": "https://static.wixstatic.com/media/5a08a3_42b9610e37f04bf498cd07368794cbd9~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+     "line": "Kindergeld is 259 euros a month for every child, it does not depend on what you earn, and the Familienkasse pays it back exactly six months from the month your application arrives.",
+     "tool": "berlin-kindergeld-backpay-clock"
+    },
+    {
+     "title": "Milieuschutz in Berlin: The 82 Areas and What Your Landlord Cannot Install",
+     "slug": "milieuschutz-berlin",
+     "path": "/post/milieuschutz-berlin",
+     "minutes": 9,
+     "alt": "A wide view over Chamissoplatz in Berlin-Kreuzberg, a green square with mature trees ringed by five-storey Gruenderzeit apartment blocks under a bright sky",
+     "thumb": "https://static.wixstatic.com/media/5a08a3_df0c8d1922cc4155959d58953584806f~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+     "line": "Berlin has 82 social preservation areas covering 5,318 hectares, and inside them a single rulebook decides what an owner may build.",
+     "tool": "berlin-milieuschutz-check"
+    },
+    {
+     "title": "Home Internet in Berlin: What Reaches Your Flat and the Rule That Cuts Your Bill",
+     "slug": "home-internet-berlin",
+     "path": "/post/home-internet-berlin",
+     "minutes": 8,
+     "alt": "A green courtyard in Berlin-Charlottenburg seen through the entrance passage of an old apartment block, with trees and a path leading to the back building",
+     "thumb": "https://static.wixstatic.com/media/5a08a3_2b61dfdcbc1444a3b97b4a34ce1e94f6~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+     "line": "Only 45.9 per cent of measured German households get the full download speed their contract promises.",
+     "tool": "berlin-broadband-speed-claim"
+    },
+    {
+     "title": "Church Tax in Berlin: The Month You Leave Decides Your Last Payment",
+     "slug": "church-tax-berlin",
+     "path": "/post/church-tax-berlin",
+     "minutes": 7,
+     "alt": "The main staircase hall inside the Littenstrasse court building in Berlin-Mitte, with two curving stone stairways under a vaulted ceiling",
+     "thumb": "https://static.wixstatic.com/media/5a08a3_fa3b702c61e34809b49a9c15b6d61098~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+     "line": "There is a line on your payslip marked Kirchensteuer that most English speakers in Berlin never read.",
+     "tool": "berlin-church-tax-map"
+    },
+    {
+     "title": "Pumpkin Patch in Berlin: Where You Can Really Pick Your Own",
+     "slug": "pumpkin-patch-berlin",
+     "path": "/post/pumpkin-patch-berlin",
+     "minutes": 8,
+     "alt": "A huge football built from small white and green pumpkins on a mound of orange pumpkins at the Klaistow pumpkin show near Berlin",
+     "thumb": "https://static.wixstatic.com/media/5a08a3_70327d193189425fa423d71a53909ffb~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+     "line": "Berlin has pumpkins everywhere in October, but a field you can pick from yourself is rare.",
+     "tool": "berlin-pumpkin-weekend-map"
+    },
+    {
+     "title": "Cargo Bike in Berlin: How to Borrow One Free for the Weekend",
+     "slug": "cargo-bike-berlin",
+     "path": "/post/cargo-bike-berlin",
+     "minutes": 7,
+     "alt": "A red box bike with the fLotte Berlin sticker and the name Anton parked on cobbles outside a library in Lichtenberg",
+     "thumb": "https://static.wixstatic.com/media/5a08a3_0150793df04141eba2ea20bce0cebac0~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+     "line": "Berlin has more than 240 cargo bikes you can borrow for free, at bookshops, cafés and libraries in every district.",
+     "tool": "berlin-cargo-bike-map"
+    },
+    {
+     "title": "Autumn Leaves in Berlin: The Week the Beech Woods Turn Gold",
+     "slug": "autumn-leaves-in-berlin",
+     "path": "/post/autumn-leaves-in-berlin",
+     "minutes": 8,
+     "alt": "Schlachtensee in late October, with a wall of orange and gold broadleaf trees on the far shore above the water",
+     "thumb": "https://static.wixstatic.com/media/5a08a3_61c0a916dc7442708a780bca882aa788~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+     "line": "Autumn leaves in Berlin follow a tighter calendar than most people think.",
+     "tool": "berlin-leaf-turn-map"
+    },
+    {
+     "title": "Cranes Near Berlin: Linum at Dusk, and How to Get Home Afterwards",
+     "slug": "cranes-near-berlin",
+     "path": "/post/cranes-near-berlin",
+     "minutes": 7,
+     "alt": "A long line of cranes flying over the Kremmener Luch as the sun sets behind a row of trees",
+     "thumb": "https://static.wixstatic.com/media/5a08a3_443bd58d0cc8455a9363044c4e08bed3~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+     "line": "Tens of thousands of cranes fly in to roost at Linum every autumn evening, about 40 km from Berlin.",
+     "tool": "berlin-crane-evening-planner"
+    },
+    {
+     "title": "Vet in Berlin: What the Same Visit Costs at 10:00 and at 22:00",
+     "slug": "vet-in-berlin",
+     "path": "/post/vet-in-berlin",
+     "minutes": 7,
+     "alt": "A vet listens to a small white Maltese dog with a stethoscope on a blue examination table",
+     "thumb": "https://static.wixstatic.com/media/5a08a3_c14a2ff9d95f4a5a886a513554d4805a~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+     "line": "The same limping dog with sedation and two X-rays costs €115 to €344 at a Berlin practice on a Monday morning and €289 to €519 on a Saturday night.",
+     "tool": "berlin-vet-bill-week"
+    },
+    {
+     "title": "Flu Shot in Berlin: The Week That Beats the Winter Wave",
+     "slug": "flu-shot-in-berlin",
+     "path": "/post/flu-shot-in-berlin",
+     "minutes": 7,
+     "alt": "A pharmacy sign pointing down Akazienstraße in Berlin-Schöneberg, with a red Apotheke A above the word Apotheke",
+     "thumb": "https://static.wixstatic.com/media/5a08a3_65e3048d3d1e422ab6692532a9bb99f2~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+     "line": "A flu shot needs two weeks to work, and Berlin’s flu wave has peaked on four different dates in four winters, from 12 December to 5 February.",
+     "tool": "berlin-flu-wave-timer"
+    },
+    {
+     "title": "Bike Lights in Berlin: The Date Your Ride Home Goes Dark",
+     "slug": "bike-lights-in-berlin",
+     "path": "/post/bike-lights-in-berlin",
+     "minutes": 9,
+     "alt": "Sunset over Tempelhofer Feld in Berlin, with people silhouetted on the path in the last light of the day",
+     "thumb": "https://static.wixstatic.com/media/5a08a3_34705bb0f682425e995a10b0418fe25a~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+     "line": "Berlin sunset moves 68 minutes across September, and then the clocks take another hour on 25 October.",
+     "tool": "berlin-dark-ride-window"
+    },
+    {
+     "title": "Home Insurance in Berlin: The Number That Decides How Much of a Claim You Get Back",
+     "slug": "home-insurance-in-berlin",
+     "path": "/post/home-insurance-in-berlin",
+     "minutes": 8,
+     "alt": "A five-storey Berlin residential block on the corner of Oderstrasse and Kienitzer Strasse in Neukoelln at dusk, its windows lit and cars parked along the kerb",
+     "thumb": "https://static.wixstatic.com/media/5a08a3_b89799d834a5415bba4efae6f87aa1cb~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+     "line": "The premium is not the number that matters.",
+     "tool": "berlin-hausrat-claim-line"
+    },
+    {
+     "title": "Sick Leave in Berlin: How Long the Money Lasts and the Six-Month Rule Nobody Warns You About",
+     "slug": "sick-leave-in-berlin",
+     "path": "/post/sick-leave-in-berlin",
+     "minutes": 9,
+     "alt": "A glass-fronted medical centre on Hohenzollerndamm in Berlin seen from across the street on an October afternoon, with autumn trees in front of it",
+     "thumb": "https://static.wixstatic.com/media/5a08a3_8087766b6e5b4a8286a88cb84e9f12cd~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+     "line": "Six weeks of full pay is 42 calendar days per illness, not a yearly allowance, and for the same illness it only starts again after six clear months or twelve months from the first day off.",
+     "tool": "berlin-sick-pay-clock"
+    },
+    {
+     "title": "Elterngeld Berlin: The Split That Pays More and the Month You Cannot Leave Empty",
+     "slug": "elterngeld-berlin",
+     "path": "/post/elterngeld-berlin",
+     "minutes": 8,
+     "alt": "A tall wooden climbing frame painted in red, yellow and blue on the sand playground in Berlin Mauerpark under a clear blue sky",
+     "thumb": "https://static.wixstatic.com/media/5a08a3_2b0ee432d69f4a65a71b57815371f66a~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+     "line": "Elterngeld is paid back only three Lebensmonate before the month your application arrives, Berlin is asking for new applications by post while its portal is rebuilt, and",
+     "tool": "berlin-elterngeld-split-board"
+    },
+    {
+     "title": "Bürgeramt Berlin: The Errands You Can Do Without an Appointment",
+     "slug": "buergeramt-berlin",
+     "path": "/post/buergeramt-berlin",
+     "minutes": 6,
+     "alt": "The symmetrical brick and stone front of Rathaus Spandau with its tall clock tower, seen from across the main road on an overcast day",
+     "thumb": "https://static.wixstatic.com/media/5a08a3_d25ac6ab16324246b38e61e919193cdc~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+     "line": "A Meldebescheinigung is free online and ten euros at the counter, 26 of Berlin’s 38 Bürgeramt counters now take a named list of errands without an appointment, and one fr",
+     "tool": "berlin-buergeramt-errand-map"
+    },
+    {
+     "title": "Dentist in Berlin: What the Krankenkasse Pays and the Stamp to Get Before December",
+     "slug": "dentist-in-berlin",
+     "path": "/post/dentist-in-berlin",
+     "minutes": 6,
+     "alt": "A large white sculpture of a molar tooth hanging from a bracket above the corner entrance of a dental practice on Kurfürstendamm in Berlin-Halensee",
+     "thumb": "https://static.wixstatic.com/media/5a08a3_0e50006ee4d34b8dbd53b99302e224ef~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+     "line": "The Krankenkasse pays a fixed subsidy for every crown, bridge and denture, and a small booklet decides whether it is 60, 70 or 75 percent.",
+     "tool": "berlin-dental-stamp-ledger"
+    },
+    {
+     "title": "Mieterverein Berlin: Which Tenant Association Covers You, and From Which Day",
+     "slug": "mieterverein-berlin",
+     "path": "/post/mieterverein-berlin",
+     "minutes": 7,
+     "alt": "A long ornate Gründerzeit apartment building on Fraenkelufer in Kreuzberg with bay windows and balconies under a clear blue sky, trees along the pavement",
+     "thumb": "https://static.wixstatic.com/media/5a08a3_6134098eaf1f4f7980151095f2c8f7d6~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+     "line": "Most Berlin tenants join a Mieterverein on the evening a rent increase or service-charge bill arrives, and that is the one letter the legal cover will not pay for.",
+     "tool": "berlin-tenant-cover-clock"
+    },
+    {
+     "title": "German Citizenship in Berlin: The Date You Can Apply and the Queue After It",
+     "slug": "german-citizenship-berlin",
+     "path": "/post/german-citizenship-berlin",
+     "minutes": 6,
+     "alt": "The west pediment of the Reichstag building in Berlin with the inscription Dem Deutschen Volke above the columns and the glass dome behind it under a clear blue sky",
+     "thumb": "https://static.wixstatic.com/media/5a08a3_209117cf58f34edea110e3566db5760d~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+     "line": "German citizenship in Berlin needs five years of lawful residence since the three-year fast track ended in October 2025.",
+     "tool": "berlin-citizenship-clock"
+    },
+    {
+     "title": "Electricity Provider in Berlin: What Staying on the Default Tariff Costs You",
+     "slug": "electricity-provider-berlin",
+     "path": "/post/electricity-provider-berlin",
+     "minutes": 6,
+     "alt": "The Klingenberg power station on the bank of the Spree in Rummelsburg seen from the air, with two tall chimneys, grey silos and the river in front under a blue sky with white clouds",
+     "thumb": "https://static.wixstatic.com/media/5a08a3_96b9a98a62d446cc8845c34f78391875~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+     "line": "If you never signed an electricity contract in Berlin, you pay Vattenfall’s default tariff: 37.93 cents per kWh plus €13.40 a month since April 2026.",
+     "tool": "berlin-electricity-offer-lines"
+    },
+    {
+     "title": "Tax Return in Berlin: The Years You Can Still Claim and What Your Commute Is Worth",
+     "slug": "tax-return-in-berlin",
+     "path": "/post/tax-return-in-berlin",
+     "minutes": 6,
+     "alt": "The long yellow brick facade of the tax office on Mehringdamm in Kreuzberg under a clear blue sky, with a castle-like tower at the left end and an empty street in front",
+     "thumb": "https://static.wixstatic.com/media/5a08a3_81f2a6c0cefa45539029b978daf18e41~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+     "line": "Filing a tax return is voluntary for most Berlin employees, but only four years back, and 2022 closes on 31 December 2026.",
+     "tool": "berlin-tax-refund-years"
+    },
+    {
+     "title": "Wohngeld Berlin: What Your Household Would Get, and Why to Apply This Year",
+     "slug": "wohngeld-berlin",
+     "path": "/post/wohngeld-berlin",
+     "minutes": 6,
+     "alt": "A row of Berlin Altbau apartment buildings in Charlottenburg, one with a pale blue decorated facade and green plants climbing the ground floor, cars parked in front",
+     "thumb": "https://static.wixstatic.com/media/5a08a3_9eeadf89f20b4bf2832e964d684ecd53~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+     "line": "Most people in Berlin who could get Wohngeld have never applied.",
+     "tool": "berlin-wohngeld-estimator"
+    },
+    {
+     "title": "Bouldering in Berlin: What Each Hall Costs at the Pace You Actually Climb",
+     "slug": "bouldering-in-berlin",
+     "path": "/post/bouldering-in-berlin",
+     "minutes": 7,
+     "alt": "A climber in a black shirt reaching across a steep indoor bouldering wall covered in colourful holds of every shape",
+     "thumb": "https://static.wixstatic.com/media/5a08a3_609e7a9c546e4d99b545aec205e772f9~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+     "line": "Every autumn half of Berlin decides this is the winter they take up bouldering, and then stands at the counter choosing between a day ticket, a 10-visit card, a membershi",
+     "tool": "berlin-bouldering-cost-curve"
+    },
+    {
+     "title": "Apple Picking Near Berlin: Five Orchards, the Day Each One Opens and the Ride There",
+     "slug": "apple-picking-near-berlin",
+     "path": "/post/apple-picking-near-berlin",
+     "minutes": 7,
+     "alt": "Ripe red apples hanging low on the branches of an apple tree in an orchard, with grass and a gravel path behind it",
+     "thumb": "https://static.wixstatic.com/media/5a08a3_1e5f385f77804d34bf1137f3ff4cbf3f~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+     "line": "Every September somebody suggests apple picking on Saturday, and nobody checks whether the farm opens on a Saturday, whether the bus runs at the weekend, or whether the f",
+     "tool": "berlin-apple-orchard-planner"
+    },
+    {
+     "title": "Berlin Rental Deposit: The Four Dates That Decide When You Get It Back",
+     "slug": "berlin-rental-deposit",
+     "path": "/post/berlin-rental-deposit",
+     "minutes": 8,
+     "alt": "The ornamented brick and stone facade of an apartment building at Hermannstrasse 120 in Berlin-Neukoelln, with balconies and tall windows across two storeys",
+     "thumb": "https://static.wixstatic.com/media/5a08a3_e8d4459746b54811a28bfa68735fd473~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+     "line": "You handed the keys back months ago and nobody has written.",
+     "tool": "berlin-deposit-release-ledger"
+    },
+    {
+     "title": "Berlin Monthly Ticket: The City One Costs More Than the Whole Country",
+     "slug": "berlin-monthly-ticket",
+     "path": "/post/berlin-monthly-ticket",
+     "minutes": 7,
+     "alt": "A yellow BVG U7 train to Rudow standing at the platform at Adenauerplatz U-Bahn station in Berlin-Charlottenburg, with passengers waiting along the platform edge and the departure board overhead",
+     "thumb": "https://static.wixstatic.com/media/5a08a3_4cf948e50ed7414bab0e1fe8b10b932f~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+     "line": "Most people in Berlin sorted out their transport ticket once and never looked again.",
+     "tool": "berlin-monthly-ticket-break-even"
+    },
+    {
+     "title": "Berlin School Registration: The School Your Address Already Picked",
+     "slug": "berlin-school-registration",
+     "path": "/post/berlin-school-registration",
+     "minutes": 8,
+     "alt": "The orange facade of Grundschule am Traveplatz on Jessnerstrasse in Berlin-Friedrichshain, with the school name spelled in raised letters above the first-floor windows and cars parked along the kerb",
+     "thumb": "https://static.wixstatic.com/media/5a08a3_3ba503eae7f640ba8369c2f4fd0aa17c~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+     "line": "There is a fortnight in October when Berlin decides where its next class of six year olds will spend the following six years.",
+     "tool": "berlin-school-catchment-map"
+    },
+    {
+     "title": "Mould in Berlin Flats: When Airing Dries the Room and When It Soaks It",
+     "slug": "mould-in-berlin-flats",
+     "path": "/post/mould-in-berlin-flats",
+     "minutes": 8,
+     "alt": "A window in a Berlin flat standing wide open on a bright day, the near casement swung inwards, looking across to the pale render and tall windows of the Altbau facades on the far side of the street",
+     "thumb": "https://static.wixstatic.com/media/5a08a3_5337acb059cb4efbb6ceecf091b53241~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+     "line": "Every Berlin lease says the same thing: air the flat, windows wide open, three times a day.",
+     "tool": "berlin-airing-hours"
+    },
+    {
+     "title": "Berlin Snow Clearing Rules: Which Pavement Is Yours and How Wide",
+     "slug": "berlin-snow-clearing-rules",
+     "path": "/post/berlin-snow-clearing-rules",
+     "minutes": 7,
+     "alt": "A snow covered residential street in Berlin-Friedenau at night, cars parked along both kerbs under a thin layer of snow, tyre tracks down the middle of the carriageway and lit windows in the Altbau blocks on either side",
+     "thumb": "https://static.wixstatic.com/media/5a08a3_38890040cf0e4b36a7f3f4fe65c9e223~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+     "line": "Berlin gives BSR the carriageway and leaves the pavement in front of your building to you, even though BSR already sweeps that same pavement up to ten times a week in normal weather.",
+     "tool": "berlin-pavement-duty-map"
+    },
+    {
      "title": "Halteverbotszone Berlin: How to Hold the Space for Your Moving Van",
      "slug": "halteverbotszone-berlin",
      "path": "/post/halteverbotszone-berlin",
      "minutes": 7,
      "alt": "Weserstrasse in Berlin-Neukoelln on an ordinary day, cars parked nose to tail along both kerbs under bare spring trees, cobbled carriageway, five-storey Altbau blocks and shopfronts running away down the street",
      "thumb": "https://static.wixstatic.com/media/5a08a3_a231bbc34bb54a2caf7de236a96fa105~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
-     "line": "In Berlin the kerb outside your door belongs to everyone until a district office says otherwise, and that order takes longer to get than the van does."
+     "line": "In Berlin the kerb outside your door belongs to everyone until a district office says otherwise, and that order takes longer to get than the van does.",
+     "tool": "berlin-moving-permit-planner"
     },
     {
      "title": "Kita Place in Berlin: Nobody Finds It for You",

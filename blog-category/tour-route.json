@@ -1,5 +1,5 @@
 {
- "updatedAt": "2026-09-16T14:18:04.245Z",
+ "updatedAt": "2026-09-30T09:23:31.868Z",
  "source": "Wix Blog API + blog-category/categories.json",
  "slug": "tour-route",
  "categoryId": "f9b304de-4490-4535-b9e9-64b8f2ff63b0",
@@ -8,28 +8,28 @@
  "shelfMode": "topic",
  "shelfLegend": "Along the walk",
  "shelfLegendSub": "Grouped by what each stop is really about",
- "totalPosts": 32,
- "toolCount": 19,
+ "totalPosts": 33,
+ "toolCount": 20,
  "lead": {
-  "title": "Berlin War Damage Still Visible: The Walls That Were Never Repaired",
-  "slug": "berlin-war-damage-still-visible",
-  "path": "/post/berlin-war-damage-still-visible",
-  "excerpt": "Berlin never patched most of what April 1945 did to its walls. The clearest place to start is a free, open courtyard on Museum Island, where bullet strikes sit in the colonnade stone at the height of a standing person. Here are seventeen places across the city where the marks are still there to find, how to tell what made each one, and which two need planning before you go.",
+  "title": "Free vs Paid Walking Tour in Berlin: What a Small Group Really Changes",
+  "slug": "free-vs-paid-walking-tour-berlin",
+  "path": "/post/free-vs-paid-walking-tour-berlin",
+  "excerpt": "A free walking tour in Berlin costs nothing upfront and usually a tip of €10 or more. A paid one costs about €20 to €28, or more for a real small group. Here is what each costs in practice, how big the groups are, what that does to what you see and hear, and why I changed my own walk to a small group with a fixed price.",
   "minutes": 7,
   "readTime": "7 min read",
-  "publishedDate": "2026-09-06T14:03:38.210Z",
-  "alt": "The rear of the ruined portico of the Anhalter Bahnhof in Berlin-Kreuzberg, its brick arches open to the sky with modern office towers behind",
-  "lead": "https://static.wixstatic.com/media/5a08a3_7998bec069d345c68e9461b70634a209~mv2.jpg/v1/fill/w_1400,h_620,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
-  "thumb": "https://static.wixstatic.com/media/5a08a3_7998bec069d345c68e9461b70634a209~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
-  "square": "https://static.wixstatic.com/media/5a08a3_7998bec069d345c68e9461b70634a209~mv2.jpg/v1/fill/w_184,h_184,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+  "publishedDate": "2026-09-30T08:43:31.734Z",
+  "alt": "A small walking tour group of five guests standing with their guide on the Friedrichsbrücke in Berlin, with the Alte Nationalgalerie and the Museum Island colonnade behind them",
+  "lead": "https://static.wixstatic.com/media/5a08a3_339ada94c77d4a68b2a5cb33c4cd6a94~mv2.jpg/v1/fill/w_1400,h_620,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+  "thumb": "https://static.wixstatic.com/media/5a08a3_339ada94c77d4a68b2a5cb33c4cd6a94~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+  "square": "https://static.wixstatic.com/media/5a08a3_339ada94c77d4a68b2a5cb33c4cd6a94~mv2.jpg/v1/fill/w_184,h_184,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
   "shelf": "",
-  "topic": "free-budget",
+  "topic": "practical",
   "figure": "",
-  "line": "Berlin never patched most of what April 1945 did to its walls.",
+  "line": "A free walking tour in Berlin costs nothing upfront and usually a tip of €10 or more.",
   "term": "",
   "gloss": "",
   "termCta": "",
-  "tool": "berlin-war-scars-map"
+  "tool": "berlin-tour-group-size-viewer"
  },
  "glossary": [],
  "shelves": [
@@ -123,6 +123,16 @@
    "lead": "Transport, money, opening hours, safety",
    "posts": [
     {
+     "title": "Free vs Paid Walking Tour in Berlin: What a Small Group Really Changes",
+     "slug": "free-vs-paid-walking-tour-berlin",
+     "path": "/post/free-vs-paid-walking-tour-berlin",
+     "minutes": 7,
+     "alt": "A small walking tour group of five guests standing with their guide on the Friedrichsbrücke in Berlin, with the Alte Nationalgalerie and the Museum Island colonnade behind them",
+     "thumb": "https://static.wixstatic.com/media/5a08a3_339ada94c77d4a68b2a5cb33c4cd6a94~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+     "line": "A free walking tour in Berlin costs nothing upfront and usually a tip of €10 or more.",
+     "tool": "berlin-tour-group-size-viewer"
+    },
+    {
      "title": "What Happens on a Berlin Free Walking Tour",
      "slug": "what-happens-on-a-berlin-free-walking-tour",
      "path": "/post/what-happens-on-a-berlin-free-walking-tour",
@@ -174,14 +184,14 @@
      "minutes": 5,
      "alt": "The preserved former border strip at the Berlin Wall Memorial on Bernauer Strasse.",
      "thumb": "https://static.wixstatic.com/media/5a08a3_5304f80fb26349a8b0eed05ffb95d359~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
-     "line": "Compare the real start, finish and walking time of five self-guided Berlin audio routes.",
+     "line": "Compare the real start, finish and walking time of four self-guided Berlin audio walks.",
      "tool": "free-berlin-audio-tour"
     },
     {
      "title": "Unter den Linden Berlin: How to Walk the Grand Boulevard Without Missing the Point",
      "slug": "unter-den-linden-berlin",
      "path": "/post/unter-den-linden-berlin",
-     "minutes": 7,
+     "minutes": 8,
      "alt": "Unter den Linden boulevard in Berlin with trees, the Frederick the Great statue and the TV Tower in the distance",
      "thumb": "https://static.wixstatic.com/media/5a08a3_bf98985572c44e1ca26711a80de8bff0~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
      "line": "A practical local guide to walking Unter den Linden in Berlin, with the best direction, stops, shortcuts, mistakes to avoid and a simple route planner.",
@@ -302,7 +312,7 @@
      "line": "Why are Marx and Engels still standing in Berlin?"
     },
     {
-     "title": "12 Stops Through Berlin’s Ancient Core: What You’ll See on My Free Walking Tour",
+     "title": "What You See on My Berlin Walking Tour: 11 Stops Through the Old City",
      "slug": "12-stops-through-berlin-s-ancient-core-what-you-ll-see-on-our-free-walking-tour",
      "path": "/post/12-stops-through-berlin-s-ancient-core-what-you-ll-see-on-our-free-walking-tour",
      "minutes": 8,
