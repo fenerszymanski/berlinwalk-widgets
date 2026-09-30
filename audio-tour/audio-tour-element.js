@@ -7,24 +7,25 @@
 (function () {
   if (typeof customElements === 'undefined' || customElements.get('bw-audio-tour')) return;
 
-  // Chapter markers — derived from the real chapter durations after the
-  // ElevenLabs run on 2026-07-15 (1-second silence inserted between each chapter).
-  // Total: ~8:44. Keep these markers aligned whenever the narration is regenerated.
+  // Chapter markers — chapters 2 to 9 are the ElevenLabs run of 2026-07-15; the intro and
+  // outro were re-recorded on 2026-09-30 with the Berlin Then and Now facts (no spoken price).
+  // Each marker sits about 0.3 s before the chapter's first word, inside the gap between
+  // chapters. Total: ~8:54. Keep these markers aligned whenever the narration is regenerated.
   const CHAPTERS = [
-    { id: 'welcome',         t:    0, label: 'Welcome' },
-    { id: 'world-clock',     t:   42, label: 'World Clock' },
-    { id: 'tv-tower',        t:  104, label: 'TV Tower & the Pope’s Revenge' },
-    { id: 'marienkirche',    t:  172, label: 'Marienkirche & Rotes Rathaus' },
-    { id: 'nikolaiviertel',  t:  225, label: 'Nikolaiviertel' },
-    { id: 'berliner-dom',    t:  275, label: 'Berliner Dom' },
-    { id: 'lustgarten',      t:  341, label: 'Lustgarten & Altes Museum' },
-    { id: 'museum-island',   t:  382, label: 'Museum Island & Pergamon' },
-    { id: 'bode-walk',       t:  447, label: 'Bode Museum walk' },
-    { id: 'outro',           t:  486, label: 'Book the tour' }
+    { id: 'welcome',         t:     0, label: 'Welcome' },
+    { id: 'world-clock',     t:  48.2, label: 'World Clock' },
+    { id: 'tv-tower',        t: 109.8, label: 'TV Tower & the Pope’s Revenge' },
+    { id: 'marienkirche',    t: 178.6, label: 'Marienkirche & Rotes Rathaus' },
+    { id: 'nikolaiviertel',  t: 231.0, label: 'Nikolaiviertel' },
+    { id: 'berliner-dom',    t: 281.2, label: 'Berliner Dom' },
+    { id: 'lustgarten',      t: 347.3, label: 'Lustgarten & Altes Museum' },
+    { id: 'museum-island',   t: 387.8, label: 'Museum Island & Pergamon' },
+    { id: 'bode-walk',       t: 453.1, label: 'Bode Museum walk' },
+    { id: 'outro',           t: 492.0, label: 'Book the tour' }
   ];
 
   const BOOK_URL = 'https://www.walkofberlin.com/book-berlin-walking-tour/berlin-then-and-now';
-  const DEFAULT_AUDIO_SRC = 'https://music.wixstatic.com/mp3/5a08a3_9eb16d58f6f14741aee87b164cdd6fec.mp3';
+  const DEFAULT_AUDIO_SRC = 'https://music.wixstatic.com/mp3/5a08a3_8d2a2b90e0d64d9c8da95959747d62e4.mp3';
 
   function fmtTime(seconds) {
     if (!isFinite(seconds) || seconds < 0) seconds = 0;
@@ -48,7 +49,7 @@
       const audioSrc = this.getAttribute('audio-src') || DEFAULT_AUDIO_SRC;
       this._audioSrc = audioSrc;
       this._currentChapterIdx = 0;
-      this._duration = 524; // expected total seconds (~8:44); updated from real audio metadata on load
+      this._duration = 535; // expected total seconds (~8:54); updated from real audio metadata on load
 
       this.innerHTML = this._render(audioSrc);
       this._wire();
@@ -379,7 +380,7 @@
                 <div class="at-now">
                   <div class="at-now-label">Now playing</div>
                   <div class="at-now-title">${this._esc(CHAPTERS[0].label)}</div>
-                  <div class="at-times"><span class="at-current">0:00</span> / <span class="at-total">8:44</span></div>
+                  <div class="at-times"><span class="at-current">0:00</span> / <span class="at-total">8:54</span></div>
                 </div>
               </div>
 
@@ -406,7 +407,7 @@
             <a class="at-cta-btn" href="${BOOK_URL}" target="_top" rel="noopener" data-at-cta="book">See dates and book →</a>
           </div>
 
-          <div class="at-foot">Written and checked by Yusuf · AI-narrated · berlinwalk.com</div>
+          <div class="at-foot">Written and checked by Yusuf · AI-narrated · walkofberlin.com</div>
         </div>
 
         <audio class="at-audio" preload="metadata" src="${this._esc(audioSrc)}"></audio>
