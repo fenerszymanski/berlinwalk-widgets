@@ -224,7 +224,7 @@
           '<div class="bw-dslp-wrap bw-dslp-finalBox">',
             '<div>',
               '<h2>The game is quick. The real walk is better.</h2>',
-              '<p>On my free Berlin walking tour, I help you read the city the same way: what to ignore, where to slow down, and which Berlin details actually change how the day feels.</p>',
+              '<p>On my Berlin walking tour, I help you read the city the same way: what to ignore, where to slow down, and which Berlin details actually change how the day feels.</p>',
               '<div class="bw-dslp-more" aria-label="More BerlinWalk games">',
                 '<a class="bw-dslp-chip" href="' + GAMES_URL + '">All BerlinWalk games</a>',
                 '<a class="bw-dslp-chip" href="https://www.berlinwalk.com/games/berlin-battle?utm_source=day_survival&utm_medium=game_landing&utm_campaign=berlinwalk_games&utm_content=more_games">Berlin Battle</a>',

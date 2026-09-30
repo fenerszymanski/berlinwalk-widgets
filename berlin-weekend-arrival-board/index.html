@@ -48,6 +48,7 @@
     .wab__row[data-status="buffer"]{background:#fff9d9}
     .wab__row[data-status="buffer"] .wab__place:before{content:"BUFFER";display:inline-block;margin:0 7px 2px 0;padding:3px 5px;background:var(--yellow);color:#123d18;font:600 9px/1 "IBM Plex Mono",monospace;letter-spacing:.08em}
     .wab__note{margin:0 34px 28px;padding:15px 17px;border-left:4px solid var(--yellow);background:#fffbe6;color:#3b483e;font-size:14px;line-height:1.5}
+    .wab__note a,.wab__note a:visited{color:var(--brand);font-weight:700}
     .wab__cta{display:flex;gap:18px;align-items:center;justify-content:space-between;padding:24px 34px;background:#082a18;color:#fff}
     .wab__cta p{max-width:600px;margin:0;color:#e0e9df;line-height:1.5}
     .wab__cta a,.wab__cta a:visited{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:12px 18px;border-radius:10px;background:var(--yellow);color:#123d18!important;font-weight:800;text-decoration:none;white-space:nowrap}
@@ -98,7 +99,7 @@
 
     <section class="wab__board" id="schedule" aria-label="Adjusted Berlin weekend schedule"></section>
 
-    <p class="wab__note"><strong>Check before you go:</strong> Guided tour slots need an available date in the booking calendar. September 2026 offers 11:30 and 15:30 on selected Tue-Sat dates; October offers 11:30 on selected Wed-Sun dates, excluding 4 and 13-20 October. Museum entrances, Reichstag registration, transport works and weather-dependent Mauerpark karaoke can change. The board gives the order, not a promise that every door is open.</p>
+    <p class="wab__note"><strong>Check before you go:</strong> My walking tour starts at 12:30 on selected days only, so <a href="https://www.walkofberlin.com/book-berlin-walking-tour/berlin-then-and-now?utm_source=blog-widget&amp;utm_medium=arrival-board&amp;utm_campaign=weekend-in-berlin-48-hour-itinerary" target="_blank" rel="noopener">check the booking page</a> for your Saturday before you plan around it. Museum entrances, Reichstag registration, transport works and weather-dependent Mauerpark karaoke can change. The board gives the order, not a promise that every door is open.</p>
 
     <footer class="wab__cta">
       <p>Different hotel, interests or mobility needs? Put the real dates and stay area into the Berlin Trip Planner instead of forcing this first-visit line.</p>
@@ -118,10 +119,10 @@
               ["22:00", "Hotel", "Stop. Saturday is more valuable than squeezing in one more district.", "buffer"]
             ]],
             ["SATURDAY", [
-              ["10:30", "Alexanderplatz", "Find the World Clock, get coffee and let the transport stress finish."],
-              ["11:30", "BerlinWalk tour", "Walk the historic centre for about 2 hours and finish at Hackescher Markt."],
-              ["14:15", "Museum Island", "Choose one museum. Do not stack three buildings into the afternoon."],
-              ["17:30", "Brandenburg Gate", "Walk Unter den Linden west and use the gate as the end of the central line."],
+              ["11:15", "Alexanderplatz", "Find the World Clock, eat an early lunch and let the transport stress finish."],
+              ["12:30", "BerlinWalk tour", "Walk the historic centre for about 2.5 hours and finish at Hackescher Markt."],
+              ["15:30", "Museum Island", "Choose one museum. Do not stack three buildings into the afternoon."],
+              ["18:00", "Brandenburg Gate", "Walk Unter den Linden west and use the gate as the end of the central line."],
               ["20:00", "Kreuzberg", "Eat around Oranienstraße and stay in the district for the evening."]
             ]],
             ["SUNDAY", [
@@ -133,14 +134,14 @@
         },
         fri22: {
           hours: { sun16: 42, sun20: 46, mon10: 60 },
-          summary: "Friday is a landing night. Eat near the hotel and protect the 11:30 Saturday start.",
+          summary: "Friday is a landing night. Eat near the hotel and protect the 12:30 Saturday start.",
           days: [
             ["FRIDAY", [["22:30", "Hotel area", "Eat close to the hotel. Do not turn a late arrival into a cross-city mission.", "buffer"]]],
             ["SATURDAY", [
-              ["10:30", "Alexanderplatz", "Find the World Clock and begin with the central historic line."],
-              ["11:30", "BerlinWalk tour", "Walk the historic centre for about 2 hours and finish at Hackescher Markt."],
-              ["14:15", "Museum Island", "Choose one museum and give it your real attention."],
-              ["17:30", "Brandenburg Gate", "Walk Unter den Linden west, with a booked Reichstag slot only if you have one."],
+              ["11:15", "Alexanderplatz", "Eat an early lunch, find the World Clock and begin with the central historic line."],
+              ["12:30", "BerlinWalk tour", "Walk the historic centre for about 2.5 hours and finish at Hackescher Markt."],
+              ["15:30", "Museum Island", "Choose one museum and give it your real attention."],
+              ["18:00", "Brandenburg Gate", "Walk Unter den Linden west, with a booked Reichstag slot only if you have one."],
               ["20:00", "Kreuzberg", "Choose dinner and the rest of the evening around Oranienstraße."]
             ]],
             ["SUNDAY", [
@@ -156,9 +157,9 @@
           days: [
             ["SATURDAY", [
               ["09:30", "Bag drop", "Use the hotel or a locker before the city. Do not sightsee with luggage."],
-              ["11:30", "BerlinWalk tour", "Start at the World Clock and walk the historic centre for about 2 hours."],
-              ["14:15", "Museum Island", "Have lunch, then choose one museum."],
-              ["17:30", "Brandenburg Gate", "Walk Unter den Linden west and stop at the gate or Tiergarten."],
+              ["12:30", "BerlinWalk tour", "Eat first, then start at the World Clock and walk the historic centre for about 2.5 hours."],
+              ["15:30", "Museum Island", "Get a coffee, then choose one museum."],
+              ["18:00", "Brandenburg Gate", "Walk Unter den Linden west and stop at the gate or Tiergarten."],
               ["20:00", "Kreuzberg", "Eat around Oranienstraße and stay in one district."]
             ]],
             ["SUNDAY", [
@@ -174,7 +175,7 @@
           days: [
             ["SATURDAY", [
               ["14:15", "Bag drop", "Leave the luggage before moving into the centre."],
-              ["15:30", "Historic centre on foot", "Walk independently from the World Clock towards Hackescher Markt. October has no 15:30 guided start."],
+              ["15:30", "Historic centre on foot", "Walk independently from the World Clock towards Hackescher Markt."],
               ["18:00", "Museum Island outside", "Walk the Spree and courtyards. Save an indoor museum for another visit."],
               ["20:00", "Hackescher Markt", "Eat nearby. Kreuzberg is optional, not a task."]
             ]],

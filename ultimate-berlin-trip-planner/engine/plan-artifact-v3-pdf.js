@@ -36,6 +36,8 @@
     'berlinwalk.com': true,
     'www.berlinwalk.com': true,
     'app.berlinwalk.com': true,
+    'walkofberlin.com': true,
+    'www.walkofberlin.com': true,
     'google.com': true,
     'www.google.com': true,
     'maps.google.com': true,
@@ -363,7 +365,7 @@
     }
     var before = cards(view.beforeYouGo);
     var carry = cards(view.carryPack);
-    var site = { label: 'berlinwalk.com', url: 'https://www.berlinwalk.com/', kind: 'support' };
+    var site = { label: 'walkofberlin.com', url: 'https://www.walkofberlin.com/', kind: 'support' };
     return {
       type: 'carry-support',
       title: 'Save your plan on your phone and as a PDF',
@@ -616,7 +618,7 @@
     setColor(doc, 'setDrawColor', COLORS.border);
     doc.line(MARGIN, FOOTER_Y - 12, PAGE_WIDTH - MARGIN, FOOTER_Y - 12);
     setFont(doc, 8.2, 'bold', COLORS.green);
-    doc.text('berlinwalk.com | @walkofberlin', MARGIN, FOOTER_Y + 4);
+    doc.text('walkofberlin.com | @walkofberlin', MARGIN, FOOTER_Y + 4);
     doc.text('Page ' + pageNumber + ' / ' + pageCount, PAGE_WIDTH - MARGIN, FOOTER_Y + 4, { align: 'right' });
   }
 

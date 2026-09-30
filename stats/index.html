@@ -207,14 +207,16 @@
         'map-pin': '<svg class="bw-stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg>',
         clock: '<svg class="bw-stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>',
         heart: '<svg class="bw-stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.29 1.51 4.04 3 5.5l7 7Z"/></svg>',
-        star: '<svg class="bw-stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>'
+        star: '<svg class="bw-stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>',
+        ticket: '<svg class="bw-stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 9a3 3 0 0 1 0 6v2a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-2a3 3 0 0 1 0-6V7a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z"/><path d="M13 5v2"/><path d="M13 17v2"/><path d="M13 11v2"/></svg>',
+        users: '<svg class="bw-stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>'
       };
       var fallbackData = {
         stats: [
-          { id: 'stops', icon: 'map-pin', prefix: '', value: 12, suffix: '', label: 'Stops', animation: 'count', decimals: 0 },
-          { id: 'duration', icon: 'clock', prefix: '~', value: 2, suffix: 'h', label: 'Duration', animation: 'count', decimals: 0 },
-          { id: 'price', icon: 'heart', prefix: '', value: 'FREE', suffix: '', label: 'Tip-based', animation: 'fade', decimals: 0 },
-          { id: 'rating', icon: 'star', prefix: '', value: 9.8, suffix: '/10', label: 'On Freetour', animation: 'count', decimals: 1 }
+          { id: 'stops', icon: 'map-pin', prefix: '', value: 11, suffix: '', label: 'Stops', animation: 'count', decimals: 0 },
+          { id: 'duration', icon: 'clock', prefix: '~', value: 2.5, suffix: 'h', label: 'Duration', animation: 'count', decimals: 1 },
+          { id: 'price', icon: 'ticket', prefix: '\u20AC', value: 25, suffix: '', label: 'Per person', animation: 'count', decimals: 0 },
+          { id: 'group', icon: 'users', prefix: '', value: 10, suffix: '', label: 'Guests max', animation: 'count', decimals: 0 }
         ]
       };
 
@@ -267,7 +269,7 @@
 
       function accessibleValue(stat) {
         if (stat.id === 'duration') return 'approximately ' + stat.value + ' hours';
-        if (stat.id === 'rating') return stat.value + ' out of 10';
+        if (stat.id === 'price') return String(stat.prefix || '') + stat.value;
         return String(stat.value);
       }
 

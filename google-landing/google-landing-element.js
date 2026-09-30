@@ -4,7 +4,7 @@
     ? new URL('../', SCRIPT_URL).toString()
     : 'https://fenerszymanski.github.io/berlinwalk-widgets/';
   const AVAILABILITY_ENDPOINT = 'https://berlinwalk-content-app.vercel.app/api/booking-calendar-availability';
-  const BOOKING_URL = 'https://www.berlinwalk.com/booking-form';
+  const BOOKING_URL = 'https://www.walkofberlin.com/book-berlin-walking-tour/berlin-then-and-now';
 
   const asset = (path) => new URL(path, ROOT_URL).toString();
 
@@ -99,7 +99,7 @@
     _headline() {
       return this._variant() === 'english_tour'
         ? 'English Walking Tour in Berlin'
-        : 'Free Berlin Walking Tour in English';
+        : 'Berlin Walking Tour in English';
     }
 
     _render() {
@@ -115,9 +115,9 @@
         <style>${this._styles()}</style>
         <main class="bw-gsl" data-headline-variant="${this._variant()}">
           <header class="bw-gsl-header">
-            <a class="bw-gsl-brand" href="https://www.berlinwalk.com/" aria-label="BerlinWalk.com home">
+            <a class="bw-gsl-brand" href="https://www.walkofberlin.com/" aria-label="walkofberlin.com home">
               <img src="${logoImage}" alt="" width="54" height="54">
-              <span>BerlinWalk.com</span>
+              <span>walkofberlin.com</span>
             </a>
             <a class="bw-gsl-details" href="#bw-google-route" data-scroll-route>
               Tour details
@@ -126,12 +126,12 @@
           </header>
 
           <section class="bw-gsl-intro" aria-labelledby="bw-gsl-title">
-            <p class="bw-gsl-eyebrow">Free to reserve · Tip-based</p>
+            <p class="bw-gsl-eyebrow">Berlin Then and Now · €25 per person</p>
             <h1 id="bw-gsl-title">${headline}</h1>
             <p class="bw-gsl-lead">Walk Berlin's historic centre with Yusuf, starting at the World Clock.</p>
             <div class="bw-gsl-proof" aria-label="Tour trust signals">
-              <span><i class="material-symbols-rounded" aria-hidden="true">star</i>9.8/10 on FreeTour</span>
-              <span><i class="material-symbols-rounded" aria-hidden="true">groups</i>Small groups</span>
+              <span><i class="material-symbols-rounded" aria-hidden="true">route</i>11 stops, 16 places</span>
+              <span><i class="material-symbols-rounded" aria-hidden="true">groups</i>Max 10 guests</span>
             </div>
           </section>
 
@@ -146,7 +146,7 @@
           </section>
 
           <section class="bw-gsl-facts" aria-label="Tour facts">
-            <span><i class="material-symbols-rounded" aria-hidden="true">schedule</i><b>~2h</b></span>
+            <span><i class="material-symbols-rounded" aria-hidden="true">schedule</i><b>~2.5h</b></span>
             <span><i class="material-symbols-rounded" aria-hidden="true">chat_bubble</i><b>English</b></span>
             <span><i class="material-symbols-rounded" aria-hidden="true">location_on</i><b>World Clock</b></span>
           </section>
@@ -179,11 +179,11 @@
           </section>
 
           <section class="bw-gsl-faq">
-            <p class="bw-gsl-section-label">Before you reserve</p>
+            <p class="bw-gsl-section-label">Before you book</p>
             <h2>Three quick answers</h2>
             <details open>
-              <summary>Do I pay now?</summary>
-              <p>No. Reserving is free. You decide the tip after the walk.</p>
+              <summary>What does it cost?</summary>
+              <p>€25 per person. You can cancel or change the date for free up to 24 hours before the start.</p>
             </details>
             <details>
               <summary>Where do we meet?</summary>
@@ -191,7 +191,7 @@
             </details>
             <details>
               <summary>How long is the walk?</summary>
-              <p>About 2 hours. Ends at Hackescher Markt.</p>
+              <p>About 2.5 hours and about 3 km. It ends at Hackescher Markt.</p>
             </details>
           </section>
 
@@ -204,7 +204,7 @@
           </section>
 
           <footer class="bw-gsl-footer">
-            <span>BerlinWalk.com</span>
+            <span>walkofberlin.com</span>
             <a href="https://www.instagram.com/walkofberlin/">@walkofberlin</a>
           </footer>
         </main>
@@ -252,9 +252,9 @@
             </button>
           `).join('')}
         </div>
-        <p class="bw-gsl-reassurance">Free reservation. No upfront payment.</p>
+        <p class="bw-gsl-reassurance">€25 per person. Free cancellation up to 24 hours before the start.</p>
         <a class="bw-gsl-cta" href="${this._escape(this._bookingHref(selected))}" target="_top" data-continue>
-          Reserve your free spot
+          Book your spot
         </a>
       `;
     }

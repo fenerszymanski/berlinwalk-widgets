@@ -442,7 +442,7 @@
     if (options.hasTour) {
       if (has(ids, 'topography_terror')) return 'The BerlinWalk tour explains the historic centre. Topography of Terror shows the former Gestapo and SS headquarters site.';
       if (has(ids, 'museum_island')) return 'The BerlinWalk tour explains the historic centre. Visit one Museum Island museum after lunch.';
-      return 'Meet at the World Clock 10 minutes early. The two-hour tour explains the historic centre.';
+      return 'Meet at the World Clock 10 minutes early. The tour takes about 2.5 hours and explains the historic centre.';
     }
     if (has(ids, 'wall_memorial') && has(ids, 'east_side_gallery')) {
       return 'Bernauer Straße shows how the border worked. East Side Gallery shows a surviving Wall section after 1989. Cross Oberbaum Bridge at the end.';

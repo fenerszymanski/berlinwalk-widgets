@@ -23,16 +23,16 @@
   var INTRO_VERSION = 'booking-service-stage-20260801b';
   var FORM_VERSION = 'booking-form-readability-20260920';
   var FAQ_VERSION = 'booking-management-faq-20260815a';
-  var TERMS_LABEL = 'I agree to the free reservation terms listed below.';
+  var TERMS_LABEL = 'I agree to the booking terms listed below.';
   var INTRO_HTML = [
     "<div class='bw-cal-intro' data-bw-booking-intro-version='" + INTRO_VERSION + "'>",
     "<span class='bw-cal-intro-kicker'>Book the tour</span>",
     '<h1>Reserve your place</h1>',
-    "<p>Pay a €2 refundable reservation deposit per guest now. I refund it after attendance is confirmed, or if you cancel at least 24 hours before the tour. The walk is tip-based and your tip is separate.</p>",
+    "<p>Berlin Then and Now costs €25 per person. Free cancellation or date change up to 24 hours before the start.</p>",
     "<div class='bw-cal-intro-chips' aria-label='Tour booking details'>",
-    "<span class='bw-cal-intro-chip'>€2 refundable deposit per guest</span>",
-    "<span class='bw-cal-intro-chip'>Tip separately after the walk</span>",
-    "<span class='bw-cal-intro-chip'>About 2 hours</span>",
+    "<span class='bw-cal-intro-chip'>€25 per person</span>",
+    "<span class='bw-cal-intro-chip'>Small group, max 10</span>",
+    "<span class='bw-cal-intro-chip'>About 2.5 hours</span>",
     "<span class='bw-cal-intro-chip'>World Clock meeting point</span>",
     "<span class='bw-cal-intro-chip'>Guided by Yusuf</span>",
     '</div>',
@@ -49,7 +49,7 @@
     "<h2 id='bw-booking-management-faq-title'>Frequently asked</h2>",
     "<details>",
     "<summary>Can I change or cancel my booking?</summary>",
-    "<p>Yes. Open your confirmation email and use the &#x2018;Change my date or time&#x2019; or &#x2018;Cancel my booking&#x2019; button. No account is required. If you cannot find the email, contact us on WhatsApp with your name and booking date.</p>",
+    "<p>Yes. Open your confirmation email and use the &#x2018;Change my date or time&#x2019; or &#x2018;Cancel my booking&#x2019; button. No account is required. If you cannot find the email, contact me on WhatsApp with your name and booking date.</p>",
     "</details>",
     "<details>",
     "<summary>Coming as a group? Can I book a private walk?</summary>",
@@ -198,7 +198,7 @@
     nudge.setAttribute('role', 'status');
     nudge.setAttribute('aria-live', 'polite');
     nudge.innerHTML = [
-      '<div><strong>Time selected</strong><span>Continue to the €2 per guest deposit form.</span></div>',
+      '<div><strong>Time selected</strong><span>Continue to the booking form.</span></div>',
       '<button type="button">Continue</button>',
     ].join('');
     document.body.appendChild(nudge);
@@ -375,12 +375,16 @@
   function trustCardHtml() {
     return [
       progressHtml('is-complete', 'Selected', 'is-active', 'Current step'),
-      '<strong>Complete your free reservation</strong>',
-      '<p>Add the guest details below. There is no upfront payment; you tip after the walk.</p>',
+      '<strong>Complete your reservation</strong>',
+      '<p>Add the guest details below.</p>',
       '<p>I use your email for tour details and reminders. Phone is only for tour-day coordination.</p>'
     ].join('');
   }
 
+  // Old tip-based service 448872c2 only: this card and applyDepositFormUi() run
+  // solely on its own Wix form (DEPOSIT_FORM_ID), which still charges the
+  // EUR 2 deposit. Guests who booked it before it closed hold those terms, so
+  // the wording stays until that service and form are retired.
   function depositTrustCardHtml() {
     return [
       progressHtml('is-complete', 'Selected', 'is-active', 'Current step'),
@@ -398,7 +402,7 @@
       var node = nodes[i];
       if (node.querySelector && node.querySelector('input,select,textarea,button')) continue;
       var text = textOf(node);
-      if (/^I agree to terms and conditions\.?$/i.test(text) || /^I agree to the free reservation terms(?: listed below)?\.?$/i.test(text)) return node;
+      if (/^I agree to terms and conditions\.?$/i.test(text) || /^I agree to the (?:free reservation|booking) terms(?: listed below)?\.?$/i.test(text)) return node;
     }
     return null;
   }
@@ -479,7 +483,7 @@
       if (termsRow && !document.getElementById(TERMS_HELPER_ID)) {
         var helper = document.createElement('div');
         helper.id = TERMS_HELPER_ID;
-        helper.textContent = 'Free reservation terms: no upfront payment, tip-based at the end, and please cancel from your confirmation email if plans change.';
+        helper.textContent = 'Booking terms: if your plans change, please change or cancel from your confirmation email.';
         termsRow.insertAdjacentElement('afterend', helper);
       }
       tightenBookingFormSpacing(document.getElementById(TERMS_HELPER_ID) || termsRow);

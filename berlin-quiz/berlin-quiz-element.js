@@ -8,7 +8,7 @@ const BW_QUIZ_QUESTIONS = [
   { q: 'What should you wear on a Berlin walking tour?',
     options: ['Flip-flops in summer', 'High heels or dress shoes', "Doesn't matter — it's flat", 'Comfy shoes + layers'],
     correct: 3, tag: '👟 Clothing',
-    fact: 'Our tour covers ~3km over cobblestones. Layers work best — Berlin mornings are cool even in summer.' },
+    fact: 'My tour covers about 3 km over cobblestones. Layers work best: Berlin mornings are cool even in summer.' },
   { q: 'Can you drink the tap water in Berlin?',
     options: ['Only if you boil it first', 'Yes — safe and high quality', 'No — buy bottled water', 'Only in hotels'],
     correct: 1, tag: '💧 Practical',
@@ -23,7 +23,7 @@ const BW_QUIZ_QUESTIONS = [
     fact: "Berlin tipping is modest: round up or add 5 to 10 percent, and say the total you want to pay when you hand over the money." },
   { q: 'What color is the Rotes Rathaus?',
     options: ['Red', 'Grey', 'White', 'Yellow'],
-    correct: 0, tag: '📍 Stop 1',
+    correct: 0, tag: '📍 Stop 3',
     fact: "'Rotes Rathaus' = 'Red City Hall' — named for its red bricks from the 1860s, not politics." },
   { q: 'Which ticket from the airport to Berlin center?',
     options: ['Special airport ticket', 'Zone A', 'Zone AB', 'Zone ABC'],
@@ -31,15 +31,15 @@ const BW_QUIZ_QUESTIONS = [
     fact: 'BER is in Zone C — you need an ABC ticket (€5). Works on trains, U-Bahn, buses & trams.' },
   { q: 'Which Berlin island is UNESCO World Heritage?',
     options: ['Spree Island', 'Rabbit Island', 'Peacock Island', 'Museum Island'],
-    correct: 3, tag: '📍 Stops 9–10',
-    fact: 'Museum Island has five world-class museums — all on our walking tour route.' },
+    correct: 3, tag: '📍 Stops 8–9',
+    fact: 'Museum Island has five world-class museums, and my walking tour route passes four of them.' },
   { q: 'Order water at a Berlin restaurant — what comes?',
     options: ['No water served', 'Free tap water', 'Flavored water', 'Sparkling (ask for still)'],
     correct: 3, tag: '🍽️ Restaurant',
     fact: "Restaurants serve sparkling by default. Still = 'stilles Wasser.' Tap = 'Leitungswasser.'" },
   { q: "Medieval painting inside St. Mary's Church?",
     options: ['Portrait of Luther', 'Creation of Adam', 'The Last Supper', 'Dance of Death (Totentanz)'],
-    correct: 3, tag: '📍 Stop 3',
+    correct: 3, tag: '📍 Stop 4',
     fact: "A 22-meter 'Dance of Death' fresco from 1484 — one of Europe's oldest. Entry is free!" },
   { q: 'What to avoid at Alexanderplatz?',
     options: ['Looking for TV Tower', 'Eating at square restaurants', 'Using the U-Bahn', 'Photos of World Clock'],
@@ -65,8 +65,8 @@ const BW_QUIZ_QUESTIONS = [
 
 const BW_QUIZ_RESULT_TIERS = [
   { min: 0,  max: 4,  emoji: '🗺️', title: 'Berlin Newbie',     desc: 'No worries, my walking tour fills the gaps: 11 stops, 16 places and an archive photo at every stop.' },
-  { min: 5,  max: 8,  emoji: '🎒', title: 'Curious Explorer',  desc: 'You know the basics! Our tour goes deeper — hidden stories and local insider tips.' },
-  { min: 9,  max: 12, emoji: '🏛️', title: 'History Buff',      desc: 'Impressive! But do you know why Marx & Engels face west? Our tour goes beyond any guidebook.' },
+  { min: 5,  max: 8,  emoji: '🎒', title: 'Curious Explorer',  desc: 'You know the basics! My tour goes deeper, with hidden stories and local insider tips.' },
+  { min: 9,  max: 12, emoji: '🏛️', title: 'History Buff',      desc: 'Impressive! But do you know why Marx & Engels face west? My tour goes beyond any guidebook.' },
   { min: 13, max: 15, emoji: '👑', title: 'Berlin Expert',     desc: 'Practically a local! Even experts learn something new. Come prove it in person.' }
 ];
 
@@ -751,7 +751,7 @@ class BWBerlinQuizElement extends HTMLElement {
               <a class="bw-quiz-btn-cta" href="${BW_QUIZ_BOOKING_URL}">SEE DATES AND BOOK →</a>
               <br>
               <button class="bw-quiz-btn-restart" type="button" data-bw-quiz-restart>↺ Try Again</button>
-              <p class="bw-quiz-watermark" style="margin-top:12px;">berlinwalk.com</p>
+              <p class="bw-quiz-watermark" style="margin-top:12px;">walkofberlin.com</p>
             </div>
           </div>
         </div>

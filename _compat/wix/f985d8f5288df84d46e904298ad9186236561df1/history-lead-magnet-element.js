@@ -11,7 +11,7 @@
 
   var TAG = 'bw-history-lead-magnet';
   var API_BASE_DEFAULT = 'https://app.berlinwalk.com/api/history-lead';
-  var BOOKING_URL = 'https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based';
+  var BOOKING_URL = 'https://www.walkofberlin.com/book-berlin-walking-tour/berlin-then-and-now';
   var PRIVACY_URL_DEFAULT = 'https://www.berlinwalk.com/privacy-policy';
   var CONSENT_VERSION = 'history-series-v2-2026-07-17';
   var INLINE_CONSENT_VERSION = 'history-series-v3-compact-2026-07-17';
@@ -619,7 +619,7 @@
       return [
         '<aside class="bw-history-lead__tour">',
         '<div><strong>Want more Berlin history in person?</strong>',
-        '<span>Join my free walking tour from Alexanderplatz.</span></div>',
+        '<span>Join my small-group walking tour from Alexanderplatz.</span></div>',
         '<a class="bw-blog-tool-button" href="' + escapeHtml(bookingHref(mode)) + '" target="_top" data-bw-history-tour>Check the next tour</a>',
         '</aside>'
       ].join('');

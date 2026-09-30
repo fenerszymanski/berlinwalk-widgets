@@ -17,7 +17,8 @@ const BW_BLOG_INDEX_TOURBAND_IMAGE_URL = new URL('../blog-hero/assets/tour-cta-y
 const BW_BLOG_INDEX_FRAUNCES_URL = new URL('../brand/fonts/editorial-v2/Fraunces-Variable.woff2', BW_BLOG_INDEX_BASE_URL).href;
 const BW_BLOG_INDEX_FRAUNCES_ITALIC_URL = new URL('../brand/fonts/editorial-v2/Fraunces-Italic-Variable.woff2', BW_BLOG_INDEX_BASE_URL).href;
 const BW_BLOG_INDEX_PLEX_MONO_URL = new URL('../brand/fonts/editorial-v2/IBMPlexMono-SemiBold.woff2', BW_BLOG_INDEX_BASE_URL).href;
-const BW_BLOG_INDEX_BOOKING_URL = 'https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based';
+// Berlin Then and Now, the paid walking tour.
+const BW_BLOG_INDEX_BOOKING_URL = 'https://www.walkofberlin.com/book-berlin-walking-tour/berlin-then-and-now';
 const BW_BLOG_INDEX_TOPIC_TAGS = {
   'first-day': 'AIRPORT · TICKETS · SUNDAYS',
   'practical': 'TRANSPORT · MONEY · SAFETY',
@@ -120,7 +121,7 @@ bwInstallBlogIndexNativeFeedPrehide();
 
 const BW_BLOG_INDEX_FALLBACK = {
   totalPosts: 0,
-  bookingUrl: 'https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based',
+  bookingUrl: BW_BLOG_INDEX_BOOKING_URL,
   navTopics: [],
   hero: { lead: null, secondary: [] },
   startHere: [],
@@ -146,7 +147,6 @@ class BWBlogIndexElement extends HTMLElement {
     this._showAllArchive = false;
     this._scrollspyBound = false;
     this._scrollspyHandler = null;
-    this._lastKnownScheduleC = '';
     this._initialTopicHashHandled = false;
   }
 
@@ -166,7 +166,6 @@ class BWBlogIndexElement extends HTMLElement {
     }
     this._installWixNativeBlogFeedSuppressor();
     this._loadDataAndRender();
-    if (this._redesignOn) this._scheduleScheduleRecheckC();
   }
 
   // Loads the category renderer and hands this element to it. Any failure
@@ -1726,7 +1725,7 @@ class BWBlogIndexElement extends HTMLElement {
         <div class="bw-inner">
           <div>
             <h2>Want Berlin to click in real life?</h2>
-            <p>Join the tip-based BerlinWalk tour: 11 stops, about 2 hours, starting at the World Clock in Alexanderplatz.</p>
+            <p>Join Berlin Then and Now, my small-group walking tour: 11 stops, about 2.5 hours, starting at the World Clock on Alexanderplatz.</p>
           </div>
           <a class="bw-cta" href="${this._escapeAttribute(this._data.bookingUrl || BW_BLOG_INDEX_FALLBACK.bookingUrl)}" target="_top">Book your spot</a>
         </div>
@@ -2288,7 +2287,7 @@ class BWBlogIndexElement extends HTMLElement {
           <div class="bw-ci-tile"><div class="bw-ci-tl">GUIDES</div><div class="bw-ci-tv">${this._escapeHtml(guidesValue)}</div><div class="bw-ci-tn">Practical, route and history</div></div>
           <div class="bw-ci-tile"><div class="bw-ci-tl">UPDATED</div><div class="bw-ci-tv">${this._escapeHtml(updated)}</div><div class="bw-ci-tn">New guides most mornings</div></div>
           <div class="bw-ci-tile"><div class="bw-ci-tl">FREE TOOLS</div><div class="bw-ci-tv">${this._escapeHtml(this._toolsTotalLabelC())}</div><div class="bw-ci-tn">Maps, tickets, day plans</div></div>
-          <div class="bw-ci-tile"><div class="bw-ci-tl">FREE TOUR</div><div class="bw-ci-tv">${this._escapeHtml(tour.value)}</div><div class="bw-ci-tn">${this._escapeHtml(tour.note)}</div></div>
+          <div class="bw-ci-tile"><div class="bw-ci-tl">WALKING TOUR</div><div class="bw-ci-tv">${this._escapeHtml(tour.value)}</div><div class="bw-ci-tn">${this._escapeHtml(tour.note)}</div></div>
         </div>
       </div>
     `;
@@ -2308,7 +2307,6 @@ class BWBlogIndexElement extends HTMLElement {
 
   _renderRailC() {
     const topics = this._data.navTopics || [];
-    const schedule = this._nextTourLabelC();
     const tool = (this._data.tools || [])[0];
     return `
       <aside class="bw-ci-rail">
@@ -2321,9 +2319,9 @@ class BWBlogIndexElement extends HTMLElement {
             </a>
           `).join('')}
           <div class="bw-ci-rail-tour">
-            <div class="bw-ci-rt-label">FREE WALKING TOUR</div>
-            <div class="bw-ci-rt-title">See the centre with me in 2 hours</div>
-            <div class="bw-ci-rt-line">${schedule ? `${this._escapeHtml(schedule)}<br>` : ''}★ 9.8/10 · FREE, TIP-BASED</div>
+            <div class="bw-ci-rt-label">BERLIN THEN AND NOW</div>
+            <div class="bw-ci-rt-title">See the centre with me in about 2.5 hours</div>
+            <div class="bw-ci-rt-line">12:30 ON SELECTED DAYS<br>MAX 10 PEOPLE · €25</div>
             <a class="bw-ci-rt-cta" href="${this._escapeAttribute(this._data.bookingUrl || BW_BLOG_INDEX_BOOKING_URL)}" target="_top">Reserve a spot</a>
           </div>
           ${tool ? `
@@ -2524,8 +2522,7 @@ class BWBlogIndexElement extends HTMLElement {
   }
 
   _renderTourBandC() {
-    const schedule = this._nextTourLabelC();
-    const sub = `FREE, TIP-BASED · ABOUT 2 HOURS${schedule ? ` · ${schedule.toUpperCase()}` : ''}<br>STARTS AT THE WORLD CLOCK · ENDS AT HACKESCHER MARKT`;
+    const sub = 'ABOUT 2.5 HOURS · 11 STOPS, 16 PLACES · MAX 10 · €25<br>STARTS AT THE WORLD CLOCK · ENDS AT HACKESCHER MARKT';
     return `
       <section class="bw-ci-tourband">
         <div class="bw-ci-tourband-inner">
@@ -2533,11 +2530,11 @@ class BWBlogIndexElement extends HTMLElement {
             <img src="${this._escapeAttribute(BW_BLOG_INDEX_TOURBAND_IMAGE_URL)}" alt="Yusuf guiding in front of Berlin's Rotes Rathaus" loading="lazy" decoding="async">
           </figure>
           <div class="bw-ci-tourband-copy">
-            <p class="bw-ci-tb-eyebrow">FREE BERLIN WALKING TOUR · ★ 9.8/10 ON FREETOUR</p>
+            <p class="bw-ci-tb-eyebrow">BERLIN THEN AND NOW · AN ARCHIVE PHOTO AT EVERY STOP</p>
             <h2>See Berlin's historic centre with me.</h2>
             <p class="bw-ci-tb-sub">${sub}</p>
             <div class="bw-ci-tb-div"></div>
-            <a class="bw-ci-tb-cta" href="${this._escapeAttribute(this._data.bookingUrl || BW_BLOG_INDEX_BOOKING_URL)}" target="_top">Reserve a spot · free</a>
+            <a class="bw-ci-tb-cta" href="${this._escapeAttribute(this._data.bookingUrl || BW_BLOG_INDEX_BOOKING_URL)}" target="_top">See dates and book</a>
           </div>
         </div>
       </section>
@@ -2692,51 +2689,8 @@ class BWBlogIndexElement extends HTMLElement {
     });
   }
 
-  _scheduleScheduleRecheckC() {
-    // The site header (source of the tour schedule text) can render slightly
-    // after this element's first paint. Re-check a few times over the first
-    // few seconds and patch just the schedule-dependent nodes in place, so a
-    // late header never leaves the fallback text stuck after first paint.
-    [500, 1200, 2500, 5000, 9000].forEach((delay) => {
-      setTimeout(() => this._maybeUpdateScheduleC(), delay);
-    });
-  }
-
-  _maybeUpdateScheduleC() {
-    if (!this.isConnected || !this._redesignOn) return;
-    const schedule = this._nextTourLabelC();
-    if (!schedule || schedule === this._lastKnownScheduleC) return;
-    this._lastKnownScheduleC = schedule;
-
-    const tourTileValue = this.querySelector('.bw-ci-tile:nth-child(4) .bw-ci-tv');
-    const tourTileNote = this.querySelector('.bw-ci-tile:nth-child(4) .bw-ci-tn');
-    if (tourTileValue) tourTileValue.textContent = schedule.toUpperCase();
-    if (tourTileNote) tourTileNote.textContent = 'Starts at the World Clock';
-
-    const railLine = this.querySelector('.bw-ci-rt-line');
-    if (railLine) railLine.innerHTML = `${this._escapeHtml(schedule)}<br>★ 9.8/10 · FREE, TIP-BASED`;
-
-    const bandSub = this.querySelector('.bw-ci-tb-sub');
-    if (bandSub) {
-      bandSub.innerHTML = `FREE, TIP-BASED · ABOUT 2 HOURS · ${this._escapeHtml(schedule.toUpperCase())}<br>STARTS AT THE WORLD CLOCK · ENDS AT HACKESCHER MARKT`;
-    }
-  }
-
-  _nextTourLabelC() {
-    try {
-      const bodyText = String((document.body && document.body.innerText) || '').replace(/\s+/g, ' ').trim();
-      const match = bodyText.match(/\bTue(?:\s*[-–]\s*Sat)?\s+11:30\s*(?:&|\+)\s*15:30\b/i);
-      if (match) return match[0].replace(/\s*[-–]\s*/g, '–').replace(/\s*\+\s*/g, ' & ');
-    } catch (error) {
-      // ignore: fall through to empty schedule
-    }
-    return '';
-  }
-
   _tourTileC() {
-    const schedule = this._nextTourLabelC();
-    if (schedule) return { value: schedule.toUpperCase(), note: 'Starts at the World Clock' };
-    return { value: 'Free, tip-based', note: 'About 2 hours' };
+    return { value: 'About 2.5 hours', note: '11 stops, 16 places' };
   }
 
   _updatedTileValueC() {

@@ -16,9 +16,9 @@ class BWHowItWorksElement extends HTMLElement {
 
   _render() {
     const steps = [
-      { num: 1, icon: 'calendar', title: 'Reserve your spot', subtitle: '\u20AC2 deposit, refunded after the walk', chip: '~2 MIN' },
-      { num: 2, icon: 'umbrella', title: 'Show up at Alexanderplatz', subtitle: 'Meeting point at World Clock', chip: '11:30 AM TUE-SAT' },
-      { num: 3, icon: 'walking', title: 'Walk + tip what you feel', subtitle: '11 stops, Alexanderplatz to Hackescher Markt', chip: '~2 HOURS - 11 STOPS' }
+      { num: 1, icon: 'calendar', title: 'Book your spot', subtitle: '\u20AC25 per person, free cancellation up to 24 hours before the start', chip: '~2 MIN' },
+      { num: 2, icon: 'umbrella', title: 'Show up at Alexanderplatz', subtitle: 'Meeting point at World Clock', chip: '12:30 - SELECTED DAYS' },
+      { num: 3, icon: 'walking', title: 'Walk Berlin Then and Now', subtitle: '11 stops, Alexanderplatz to Hackescher Markt', chip: '~2.5 HOURS - 11 STOPS' }
     ];
 
     this.innerHTML = `
@@ -382,7 +382,7 @@ class BWHowItWorksElement extends HTMLElement {
           <header class="bw-how-header">
             <span class="bw-how-eyebrow">HOW IT WORKS</span>
             <h2 class="bw-how-title">From booking to walking - in three steps</h2>
-            <p class="bw-how-subtitle">Booking takes 30 seconds. The rest is on me.</p>
+            <p class="bw-how-subtitle">Booking takes about 2 minutes. The rest is on me.</p>
           </header>
 
           <div class="bw-timeline">
@@ -391,7 +391,7 @@ class BWHowItWorksElement extends HTMLElement {
           </div>
 
           <div class="bw-how-cta-row">
-            <a class="bw-how-cta" href="https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based">Book your spot</a>
+            <a class="bw-how-cta" href="https://www.walkofberlin.com/book-berlin-walking-tour/berlin-then-and-now">Book your spot</a>
           </div>
         </div>
       </section>

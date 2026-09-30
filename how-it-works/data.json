@@ -10,25 +10,25 @@
       "icon": "calendar",
       "timeChip": "~2 MIN",
       "title": "Book Your Spot",
-      "description": "Pick a date and reserve with a €2 deposit per guest. It comes back after the walk."
+      "description": "Pick a date and book online. €25 per person, with free cancellation up to 24 hours before the start."
     },
     {
       "number": 2,
       "icon": "umbrella",
-      "timeChip": "11:30 AM TUE–SAT",
+      "timeChip": "12:30 · SELECTED DAYS",
       "title": "Meet at Alexanderplatz",
       "description": "Find me at the World Clock. Look for the **GREEN UMBRELLA**."
     },
     {
       "number": 3,
       "icon": "walking",
-      "timeChip": "~2 HOURS · 11 STOPS",
-      "title": "Walk + Tip",
-      "description": "Walk Berlin with me. Tip what feels fair at the end."
+      "timeChip": "~2.5 HOURS · 11 STOPS",
+      "title": "Walk Berlin Then and Now",
+      "description": "Walk with me to Hackescher Markt, with an archive photo at every stop."
     }
   ],
   "cta": {
     "text": "Book your spot →",
-    "url": "https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based"
+    "url": "https://www.walkofberlin.com/book-berlin-walking-tour/berlin-then-and-now"
   }
 }

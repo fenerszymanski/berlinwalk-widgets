@@ -4,7 +4,7 @@
       "id": "stops",
       "icon": "map-pin",
       "prefix": "",
-      "value": 12,
+      "value": 11,
       "suffix": "",
       "label": "Stops",
       "animation": "count",
@@ -14,31 +14,31 @@
       "id": "duration",
       "icon": "clock",
       "prefix": "~",
-      "value": 2,
+      "value": 2.5,
       "suffix": "h",
       "label": "Duration",
       "animation": "count",
-      "decimals": 0
+      "decimals": 1
     },
     {
       "id": "price",
-      "icon": "heart",
-      "prefix": "",
-      "value": "FREE",
+      "icon": "ticket",
+      "prefix": "€",
+      "value": 25,
       "suffix": "",
-      "label": "Tip-based",
-      "animation": "fade",
+      "label": "Per person",
+      "animation": "count",
       "decimals": 0
     },
     {
-      "id": "rating",
-      "icon": "star",
+      "id": "group",
+      "icon": "users",
       "prefix": "",
-      "value": 9.8,
-      "suffix": "/10",
-      "label": "On Freetour",
+      "value": 10,
+      "suffix": "",
+      "label": "Guests max",
       "animation": "count",
-      "decimals": 1
+      "decimals": 0
     }
   ]
 }

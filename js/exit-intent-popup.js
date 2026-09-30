@@ -2,7 +2,7 @@
  * Load sitewide via Wix Custom Code, body-end.
  */
 (function () {
-  var BOOKING_URL = 'https://www.berlinwalk.com/free-berlin-walking-tour';
+  var BOOKING_URL = 'https://www.walkofberlin.com/book-berlin-walking-tour/berlin-then-and-now';
   var TRACK_ENDPOINT = 'https://app.berlinwalk.com/api/pf-event';
   var VISITOR_KEY = 'bwVisitorId.v1';
   var ANALYTICS_SESSION_KEY = 'bwSessionId.v1';
@@ -21,15 +21,11 @@
   var STYLE_ID = 'bw-exit-intent-styles';
   var OVERLAY_ID = 'bw-exit-intent-popup';
   var DWELL_TIME_MS = isPreviewForced() ? 500 : 30000;
-  var DEFAULT_START_LABELS = ['11:30'];
-  var SUMMER_START_LABELS = ['11:30', '15:30'];
+  var DEFAULT_START_LABELS = ['12:30'];
   var SAME_DAY_CUTOFF_LEAD_MINUTES = 180;
-  var DOUBLE_SLOT_START_MONTH_DAY = 703;
-  var DOUBLE_SLOT_END_MONTH_DAY = 930;
   var LIVE_AVAILABILITY_URL = 'https://berlinwalk-content-app.vercel.app/api/booking-calendar-availability';
   var LIVE_AVAILABILITY_DAYS = 60;
   var DAY_MS = 24 * 60 * 60 * 1000;
-  var TOUR_DAYS = { Tue: true, Wed: true, Thu: true, Fri: true, Sat: true };
 
   var dwellReady = false;
   var popupShown = false;
@@ -329,7 +325,6 @@
       path.indexOf('/tools/') === 0 ||
       path.indexOf('/products/') === 0 ||
       path.indexOf('/book-berlin-walking-tour') === 0 ||
-      path.indexOf('/free-berlin-walking-tour') === 0 ||
       path.indexOf('/berlin-trip-planner') === 0 ||
       path.indexOf('/thank-you') !== -1 ||
       path.indexOf('/thank_you') !== -1 ||
@@ -492,13 +487,8 @@
     };
   }
 
-  function isDoubleSlotDay(parts) {
-    var key = (parts.month * 100) + parts.day;
-    return key >= DOUBLE_SLOT_START_MONTH_DAY && key <= DOUBLE_SLOT_END_MONTH_DAY;
-  }
-
-  function startLabelsForDay(parts) {
-    return isDoubleSlotDay(parts) ? SUMMER_START_LABELS.slice() : DEFAULT_START_LABELS.slice();
+  function startLabelsForDay() {
+    return DEFAULT_START_LABELS.slice();
   }
 
   function minutesForLabel(label) {
@@ -708,13 +698,13 @@
           '<source type="image/webp" srcset="' + HERO_IMAGE_WEBP_560 + ' 1x, ' + HERO_IMAGE_WEBP_1120 + ' 2x">',
           '<img src="' + HERO_IMAGE_WEBP_560 + '" srcset="' + HERO_IMAGE_WEBP_560 + ' 1x, ' + HERO_IMAGE_WEBP_1120 + ' 2x" alt="Yusuf guiding a BerlinWalk group on Museum Island" width="560" height="240">',
         '</picture>',
-        '<span class="bw-exit-badge">Free Berlin walking tour</span>',
+        '<span class="bw-exit-badge">Berlin Then and Now walking tour</span>',
       '</div>',
       '<div class="bw-exit-inner">',
       '<section class="bw-exit-step bw-exit-active" data-bw-exit-step="1">',
-      '<h2 class="bw-exit-title" id="bw-exit-title">Give me 2 hours. I\'ll make Berlin make sense.</h2>',
+      '<h2 class="bw-exit-title" id="bw-exit-title">Give me 2.5 hours. I\'ll make Berlin make sense.</h2>',
       (nextLine ? '<p class="bw-exit-next" data-bw-exit-next data-bw-exit-next-source="fallback">' + nextLine + '</p>' : ''),
-      '<p class="bw-exit-copy">Meet me at the World Clock. A &euro;2 deposit holds your spot and comes back after the walk. The tip at the end is up to you.</p>',
+      '<p class="bw-exit-copy">Meet me at the World Clock. &euro;25 per person, at most 10 guests, with an archive photo at every stop. Free cancellation up to 24 hours before the start.</p>',
       '<div class="bw-exit-actions">',
       '<a class="bw-exit-primary" href="' + booking.href + '" data-bw-exit-book data-bw-exit-attribution="' + booking.attributionMode + '">Reserve a spot</a>',
       '</div>',

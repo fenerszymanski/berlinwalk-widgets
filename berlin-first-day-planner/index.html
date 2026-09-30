@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Berlin First-Day Planner | BerlinWalk</title>
-  <meta name="description" content="Arriving in Berlin today? Build a realistic first-day plan with weather, transport, what is open, and the free BerlinWalk tour.">
+  <meta name="description" content="Arriving in Berlin today? Build a realistic first-day plan with weather, transport, what is open, and the BerlinWalk tour.">
   <link rel="icon" href="data:,">
   <link rel="stylesheet" href="../css/brand.css">
   <script defer src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
@@ -1059,7 +1059,7 @@
     <header class="bw-head" data-bw-tool-header>
       <p class="bw-kicker">BerlinWalk local planner</p>
       <h1 id="bw-first-day-title" class="bw-title">Plan Your First 24 Hours in Berlin</h1>
-      <p class="bw-sub">Pick your arrival date, answer five quick choices, and get a realistic first-day route with weather, transport, opening-day logic, and the easiest moment to join the free BerlinWalk tour.</p>
+      <p class="bw-sub">Pick your arrival date, answer five quick choices, and get a realistic first-day route with weather, transport, opening-day logic, and the easiest moment to join the BerlinWalk tour.</p>
     </header>
 
     <div class="bw-body">
@@ -1078,7 +1078,7 @@
         <div class="bw-question">
           <span class="bw-label">When do you arrive or start?</span>
           <div class="bw-options cols-4" data-group="arrival">
-            <button class="bw-option active" type="button" data-value="morning"><span class="bw-opt-icon">☀️</span><span class="bw-opt-copy"><span class="bw-opt-title">Before 10:30</span><span class="bw-opt-sub">Best tour window</span></span></button>
+            <button class="bw-option active" type="button" data-value="morning"><span class="bw-opt-icon">☀️</span><span class="bw-opt-copy"><span class="bw-opt-title">Before 10:30</span><span class="bw-opt-sub">Fits the 12:30 tour</span></span></button>
             <button class="bw-option" type="button" data-value="midday"><span class="bw-opt-icon">🕛</span><span class="bw-opt-copy"><span class="bw-opt-title">10:30-14:30</span><span class="bw-opt-sub">Use the day lightly</span></span></button>
             <button class="bw-option" type="button" data-value="afternoon"><span class="bw-opt-icon">🌤️</span><span class="bw-opt-copy"><span class="bw-opt-title">14:30-18:00</span><span class="bw-opt-sub">Evening setup</span></span></button>
             <button class="bw-option" type="button" data-value="evening"><span class="bw-opt-icon">🌙</span><span class="bw-opt-copy"><span class="bw-opt-title">After 18:00</span><span class="bw-opt-sub">Keep it calm</span></span></button>
@@ -1142,7 +1142,7 @@
             </div>
             <div class="bw-status">
               <span class="bw-status-label">Tour fit</span>
-              <span class="bw-status-value" data-tour-fit>Today</span>
+              <span class="bw-status-value" data-tour-fit>Arrival day 12:30, if it runs</span>
             </div>
           </div>
 
@@ -1170,7 +1170,7 @@
           <p class="bw-alert" data-alert></p>
 
           <div class="bw-actions">
-            <a class="bw-primary" data-book-link href="https://www.walkofberlin.com/book-berlin-walking-tour/berlin-then-and-now?utm_source=berlinwalk&utm_medium=widget&utm_campaign=berlin_first_day_planner&utm_content=book_free_spot" target="_top" rel="noopener">Book your free spot</a>
+            <a class="bw-primary" data-book-link href="https://www.walkofberlin.com/book-berlin-walking-tour/berlin-then-and-now?utm_source=berlinwalk&utm_medium=widget&utm_campaign=berlin_first_day_planner&utm_content=book_free_spot" target="_top" rel="noopener">Book your spot</a>
             <button class="bw-secondary" type="button" data-download-pdf>Download PDF</button>
             <button class="bw-secondary" type="button" data-print-plan>Print plan</button>
             <div class="bw-action-status" data-action-status aria-live="polite"></div>
@@ -1226,8 +1226,8 @@
   var TIMEZONE = 'Europe/Berlin';
   var FORECAST_MAX_DAYS = 15;
   var BOOKING_URL = 'https://www.walkofberlin.com/book-berlin-walking-tour/berlin-then-and-now?utm_source=berlinwalk&utm_medium=widget&utm_campaign=berlin_first_day_planner&utm_content=book_free_spot';
-  var BOOKING_SHORT_URL = 'https://www.berlinwalk.com/book';
-  var BOOKING_SHORT_LABEL = 'berlinwalk.com/book';
+  var BOOKING_SHORT_URL = 'https://walkofberlin.com/book';
+  var BOOKING_SHORT_LABEL = 'walkofberlin.com/book';
   var LEAD_API_URL = 'https://www.berlinwalk.com/_functions/firstDayPlannerLead';
   var LEAD_STORAGE_KEY = 'bw_first_day_lead_unlock';
   var LEAD_UNLOCK_MS = 30 * 24 * 60 * 60 * 1000;
@@ -1406,7 +1406,7 @@
         key: 'monday',
         short: 'Monday',
         label: 'Monday museum caution',
-        note: 'Many museums close on Mondays. Keep the plan flexible: outdoor history, Museum Island from outside, Topography of Terror, food, and the tour still make sense.'
+        note: 'Many museums close on Mondays. Keep the plan flexible: outdoor history, Museum Island from outside, Topography of Terror, food, and the tour (on a day it runs) still make sense.'
       };
     }
     return {
@@ -1428,9 +1428,9 @@
   }
 
   function tourFit() {
-    if (state.arrival === 'morning') return 'Arrival day 12:30';
-    if (state.arrival === 'midday') return 'Next day 12:30';
-    return 'Next day 12:30';
+    if (state.arrival === 'morning') return 'Arrival day 12:30, if it runs';
+    if (state.arrival === 'midday') return 'Another day at 12:30';
+    return 'Another day at 12:30';
   }
 
   function ticketNudge() {
@@ -1441,7 +1441,7 @@
   }
 
   function planTitle() {
-    if (state.arrival === 'evening') return 'Arrive calmly, book the morning walk';
+    if (state.arrival === 'evening') return 'Arrive calmly, book the 12:30 walk for another day';
     if (state.start === 'ber' && state.luggage === 'luggage') return 'Land, drop bags, then keep the center simple';
     if (state.priority === 'nightlife') return 'Save your legs for tonight, learn Berlin tomorrow';
     if (state.priority === 'museums') return 'Use Museum Island smartly, without overloading day one';
@@ -1489,20 +1489,20 @@
       return {
         time: '12:30',
         title: 'Join Berlin Then and Now',
-        copy: 'Meet at the World Clock and use the 2.5-hour walk as your first city framework: medieval Berlin, GDR layers, Museum Island, and Hackescher Markt.'
+        copy: 'Meet at the World Clock and use the 2.5-hour walk as your first city framework: medieval Berlin, GDR layers, Museum Island, and Hackescher Markt. I run it on selected days, so check the booking page for your date.'
       };
     }
     if (state.arrival === 'midday') {
       return {
         time: 'Next',
-        title: 'If you missed 12:30, book tomorrow',
-        copy: 'Use today as a soft orientation day, then take the BerlinWalk tour tomorrow morning before the city gets fragmented by random stops.'
+        title: 'If 12:30 is too tight, book another day',
+        copy: 'Use today as a soft orientation day, then take the BerlinWalk tour at 12:30 on another day before the city gets fragmented by random stops. I run it on selected days, so check the booking page.'
       };
     }
     return {
-      time: 'Tomorrow',
-      title: 'Make the tour your first full morning',
-      copy: 'Do the practical arrival work tonight. Tomorrow at 12:30, start with a guide at the World Clock instead of guessing your way through Mitte.'
+      time: 'Next',
+      title: 'Put the tour on a full day',
+      copy: 'Do the practical arrival work tonight. The tour starts at 12:30 on selected days: check the booking page, pick your date, and start with a guide at the World Clock instead of guessing your way through Mitte.'
     };
   }
 
@@ -1583,11 +1583,11 @@
 
     var summary;
     if (state.arrival === 'morning') {
-      summary = 'This is the cleanest first-day setup: get central, meet at the World Clock, then let the 2.5-hour walk give the city a structure before you improvise.';
+      summary = 'If the walk runs on your date, this is the cleanest first-day setup: get central, meet at the World Clock, then let the 2.5-hour walk give the city a structure before you improvise.';
     } else if (state.arrival === 'evening') {
       summary = 'Do not force a full sightseeing day out of an evening arrival. Handle transport, food, and tomorrow morning so Berlin starts calmly.';
     } else {
-      summary = 'Use today for orientation and practical decisions, then make the BerlinWalk tour your first complete morning in the city.';
+      summary = 'Use today for orientation and practical decisions, then build a later day around the BerlinWalk tour, which starts at 12:30 on selected days.';
     }
 
     if (state.energy === 'gentle') {
@@ -1743,7 +1743,7 @@
   }
 
   function planHour() {
-    if (state.arrival === 'morning') return 11;
+    if (state.arrival === 'morning') return 12;
     if (state.arrival === 'midday') return 14;
     if (state.arrival === 'afternoon') return 17;
     return 19;
@@ -2603,7 +2603,7 @@
           rgb('setDrawColor', line);
           doc.line(margin, pageH - 36, pageW - margin, pageH - 36);
           drawLogo(margin, pageH - 29, 18);
-          text('berlinwalk.com | @walkofberlin', margin + 26, pageH - 16, 8.5, 'bold', green);
+          text('walkofberlin.com | @walkofberlin', margin + 26, pageH - 16, 8.5, 'bold', green);
           text('Page ' + page + ' / ' + pages, pageW - margin, pageH - 16, 8, 'normal', muted, { align: 'right' });
         }
       }
@@ -2672,7 +2672,7 @@
       '<div class="section transport"><div class="k">Public transport</div><p><strong>' + escapeHtml(data.transport.title) + '</strong><br>' + escapeHtml(data.transport.ticket) + '</p><table>' + transportRows + '</table><p class="note">' + escapeHtml(data.transport.luggage + ' ' + data.transport.note) + '</p></div>' +
       '<div class="section"><div class="k">Timeline</div><ol>' + steps + '</ol></div>' +
       '<div class="section book"><div class="k">Book</div><p>Berlin Then and Now starts at 12:30 at the World Clock on Alexanderplatz: about 2.5 hours, max 10 people, €25.</p><p><a href="' + escapeHtml(BOOKING_SHORT_URL) + '">' + escapeHtml(BOOKING_SHORT_LABEL) + '</a></p></div>' +
-      '<div class="foot">berlinwalk.com · @walkofberlin</div></body></html>';
+      '<div class="foot">walkofberlin.com · @walkofberlin</div></body></html>';
   }
 
   function printPlan() {

@@ -6,6 +6,14 @@ const BW_BOOKING_CALENDAR_AVAILABILITY_ENDPOINT = 'https://berlinwalk-content-ap
 const BW_BOOKING_CALENDAR_CHECKOUT_PATH = '/book-berlin-walking-tour/berlin-free-walking-tour-tip-based';
 const BW_BOOKING_CALENDAR_CHECKOUT_ORIGIN = 'https://www.berlinwalk.com';
 const BW_BOOKING_CALENDAR_CHECKOUT_HOSTS = /^(www\.)?(berlinwalk|walkofberlin)\.com$/i;
+// Berlin Then and Now (Wix service 145cb27e) is the tour this calendar sells:
+// live dates load for it by default and its slots always hand off to its own
+// booking page with the same ?start=&guests=&utm_* contract. The /booking-form
+// URL and the checkout path above are the closed tip-based service 448872c2;
+// they only serve slots that carry another service id or none.
+const BW_BOOKING_CALENDAR_TOUR_SERVICE_ID = '145cb27e-c5bd-456d-bfbd-a09d4d6f5f9d';
+const BW_BOOKING_CALENDAR_TOUR_CHECKOUT_PATH = '/book-berlin-walking-tour/berlin-then-and-now';
+const BW_BOOKING_CALENDAR_TOUR_CHECKOUT_ORIGIN = 'https://www.walkofberlin.com';
 const BW_BOOKING_CALENDAR_UTM_KEYS = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term'];
 const BW_BOOKING_CALENDAR_MAX_GUESTS = 8;
 
@@ -21,7 +29,10 @@ function bwCheckoutHandoffHref(options) {
     const sameOrigin = /^https:$/.test(String(pageLocation.protocol || ''))
       && BW_BOOKING_CALENDAR_CHECKOUT_HOSTS.test(String(pageLocation.hostname || ''))
       && pageLocation.origin;
-    base = `${sameOrigin || BW_BOOKING_CALENDAR_CHECKOUT_ORIGIN}${BW_BOOKING_CALENDAR_CHECKOUT_PATH}`;
+    const tour = String(opts.serviceId || '') === BW_BOOKING_CALENDAR_TOUR_SERVICE_ID;
+    base = tour
+      ? `${sameOrigin || BW_BOOKING_CALENDAR_TOUR_CHECKOUT_ORIGIN}${BW_BOOKING_CALENDAR_TOUR_CHECKOUT_PATH}`
+      : `${sameOrigin || BW_BOOKING_CALENDAR_CHECKOUT_ORIGIN}${BW_BOOKING_CALENDAR_CHECKOUT_PATH}`;
   }
   let url;
   try {
@@ -894,7 +905,7 @@ class BWBookingCalendarElement extends HTMLElement {
     if (!url.searchParams.has('guests')) {
       url.searchParams.set('guests', '1');
     }
-    const serviceId = this.getAttribute('service-id');
+    const serviceId = this.getAttribute('service-id') || BW_BOOKING_CALENDAR_TOUR_SERVICE_ID;
     if (serviceId && !url.searchParams.has('serviceId')) {
       url.searchParams.set('serviceId', serviceId);
     }
@@ -953,21 +964,20 @@ class BWBookingCalendarElement extends HTMLElement {
     const slots = [];
     const now = new Date();
     const demoDays = Math.max(14, Math.min(Number(this.getAttribute('demo-days') || 180), 365));
+    const pad = (value) => String(value).padStart(2, '0');
     for (let day = 1; day <= demoDays; day += 1) {
+      // Demo only: one 12:30 start of about 2.5 hours, and not every day,
+      // because the real walk runs on selected days.
+      if (day % 3 === 0) continue;
       const date = new Date(now.getFullYear(), now.getMonth(), now.getDate() + day);
-      [11.5, 14.5].forEach((hour, index) => {
-        if (index === 1 && day % 3 !== 0) return;
-        const start = new Date(date);
-        const wholeHour = Math.floor(hour);
-        start.setHours(wholeHour, hour % 1 ? 30 : 0, 0, 0);
-        const end = new Date(start.getTime() + 2 * 60 * 60 * 1000);
-        slots.push({
-          id: `${this._dateKey(start)}-${wholeHour}-${index}`,
-          startDate: start.toISOString(),
-          endDate: end.toISOString(),
-          timezone: 'Europe/Berlin',
-          openSpots: index === 0 ? 8 : 4,
-        });
+      const dateKey = `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())}`;
+      slots.push({
+        id: `${dateKey}-12-0`,
+        serviceId: BW_BOOKING_CALENDAR_TOUR_SERVICE_ID,
+        startDate: `${dateKey}T12:30:00`,
+        endDate: `${dateKey}T15:00:00`,
+        timezone: 'Europe/Berlin',
+        openSpots: 10,
       });
     }
     return slots;
@@ -1002,7 +1012,7 @@ class BWBookingCalendarElement extends HTMLElement {
     }
     const ctaMarkup = this._ctaMarkup(selectedSlot, ctaLabel, manual, guestText);
     const nextNote = handoff
-      ? 'Your contact details and the deposit come on the next step. Phone is only for tour-day coordination.'
+      ? 'Your contact details and payment come on the next step. Phone is only for tour-day coordination.'
       : 'Attendees + phone on the next step. Phone is only for tour-day coordination.';
     if (this._pendingAnnouncement) statusText = this._pendingAnnouncement;
     this._pendingAnnouncement = '';
@@ -1015,7 +1025,7 @@ class BWBookingCalendarElement extends HTMLElement {
         <div class="bw-cal-shell">
           <header class="bw-cal-head">
             <div class="bw-cal-title" role="heading" aria-level="3">${this._escape(serviceTitle)}</div>
-            ${showIntro ? this._progressMarkup() : '<span class="bw-cal-note">&euro;2 refundable deposit per guest. Tip at the end. Phone is only for tour-day coordination.</span>'}
+            ${showIntro ? this._progressMarkup() : '<span class="bw-cal-note">&euro;25 per person. Free cancellation up to 24 hours before the start. Phone is only for tour-day coordination.</span>'}
           </header>
           <div class="bw-cal-body">
             ${loading ? '<div class="bw-cal-message">Loading real tour availability...</div>' : ''}
@@ -1096,7 +1106,7 @@ class BWBookingCalendarElement extends HTMLElement {
       <div class="bw-cal-guest-row">
         <div class="bw-cal-guest-copy">
           <span class="bw-cal-label">Guests</span>
-          <span class="bw-cal-guest-hint">&euro;2 refundable deposit each</span>
+          <span class="bw-cal-guest-hint">&euro;25 per person</span>
         </div>
         <div class="bw-cal-stepper" role="group" aria-label="Guests">
           <button class="bw-cal-step" type="button" data-guest-step="-1" aria-label="Remove a guest"${guests <= 1 ? ' disabled' : ''}>&minus;</button>
@@ -1126,6 +1136,10 @@ class BWBookingCalendarElement extends HTMLElement {
     return `${this._dateKey(slot.startDate)}T${this._formatTime(slot.startDate)}`;
   }
 
+  _isTourSlot(slot) {
+    return Boolean(slot) && (slot.serviceId || this.getAttribute('service-id') || '') === BW_BOOKING_CALENDAR_TOUR_SERVICE_ID;
+  }
+
   _checkoutHref(slot) {
     if (!slot) return '';
     let pageLocation = {};
@@ -1135,6 +1149,7 @@ class BWBookingCalendarElement extends HTMLElement {
     return bwCheckoutHandoffHref({
       start: this._slotStartKey(slot),
       guests: this.state.guests,
+      serviceId: slot.serviceId || this.getAttribute('service-id') || '',
       location: pageLocation,
       base: this.getAttribute('checkout-url') || '',
     });
@@ -1212,9 +1227,9 @@ class BWBookingCalendarElement extends HTMLElement {
 
   _introMarkup() {
     const chips = [
-      '\u20AC2 refundable deposit',
-      'Tip at the end',
-      '~2h walk',
+      '\u20AC25 per person',
+      'Small group, max 10',
+      '~2.5h walk',
       'World Clock meeting point',
       'Guided by Yusuf',
     ];
@@ -1222,7 +1237,7 @@ class BWBookingCalendarElement extends HTMLElement {
       <div class="bw-cal-intro">
         <span class="bw-cal-intro-kicker">Book the tour</span>
         <h2>Reserve your spot</h2>
-        <p>A &euro;2 deposit per guest holds your place and comes back after the walk. My walk is ~2h, tip-based at the end, and starts at the World Clock on Alexanderplatz.</p>
+        <p>&euro;25 per person, with free cancellation up to 24 hours before the start. My Berlin Then and Now walk is ~2.5h and starts at the World Clock on Alexanderplatz.</p>
         <div class="bw-cal-intro-chips" aria-label="Tour booking details">
           ${chips.map((chip) => `<span class="bw-cal-intro-chip">${this._escape(chip)}</span>`).join('')}
         </div>
@@ -1545,7 +1560,10 @@ class BWBookingCalendarElement extends HTMLElement {
 
   _bookingHref(slot) {
     if (this._isCheckoutHandoff()) return this._checkoutHref(slot);
-    const base = slot?.bookingUrl || this.getAttribute('booking-url') || BW_BOOKING_CALENDAR_BOOKING_URL;
+    const explicitBase = slot?.bookingUrl || this.getAttribute('booking-url') || '';
+    // Berlin Then and Now is booked on its own booking page, never on /booking-form.
+    if (!explicitBase && this._isTourSlot(slot)) return this._checkoutHref(slot);
+    const base = explicitBase || BW_BOOKING_CALENDAR_BOOKING_URL;
     const url = new URL(base, window.location.href);
     if (slot) {
       url.searchParams.set('bookings_timezone', slot.timezone || 'Europe/Berlin');
