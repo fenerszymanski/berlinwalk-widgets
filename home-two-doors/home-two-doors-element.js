@@ -316,7 +316,75 @@ class BWHomeTwoDoorsElement extends HTMLElement {
 
           <article class="bw-home-two-doors__door bw-home-two-doors__door--audio" data-bw-home-card="audio_door" data-bw-card-type="audio-door" data-bw-placement="hero">
             <div class="bw-home-two-doors__audio-image">
-              <img src="${asset('phone-bernauer.jpg')}" alt="A phone showing the Berlin Wall audio walk above the former border strip" width="1467" height="1072">
+              <div class="bw-audio-art bw-audio-art--phone-dusk" role="img" aria-label="A phone in front of the Berlin TV Tower at dusk. Its screen lists the three audio walks: Berlin Wall, Hidden Berlin and Medieval Berlin.">
+                <picture class="bw-audio-art__photo" aria-hidden="true">
+                  <source media="(max-width: 900px)" srcset="${asset('audio-door-dusk-strip.webp')}">
+                  <img class="bw-audio-art__photo-img" fetchpriority="high" src="${asset('audio-door-dusk-column.webp')}" alt="" width="672" height="1792">
+                </picture>
+                <span class="bw-audio-art__grade" aria-hidden="true"></span>
+                <span class="bw-audio-art__ground" aria-hidden="true"></span>
+                <div class="bw-audio-art__phone" aria-hidden="true">
+                  <span class="bw-audio-art__btn bw-audio-art__btn--action"></span>
+                  <span class="bw-audio-art__btn bw-audio-art__btn--vol-up"></span>
+                  <span class="bw-audio-art__btn bw-audio-art__btn--vol-down"></span>
+                  <span class="bw-audio-art__btn bw-audio-art__btn--power"></span>
+                  <div class="bw-audio-art__bezel">
+                    <div class="bw-audio-art__screen">
+                      <span class="bw-audio-art__island"></span>
+                      <div class="bw-audio-art__head">
+                        <span class="bw-audio-art__eyebrow">Three audio walks</span>
+                        <span class="bw-audio-art__title">Berlin Audio <span class="bw-audio-art__title-em">Trio</span></span>
+                      </div>
+                      <div class="bw-audio-art__list">
+                        <div class="bw-audio-art__row">
+                          <span class="bw-audio-art__thumb-wrap">
+                            <img class="bw-audio-art__thumb" src="${asset('audio-door-thumb-wall.webp')}" alt="" width="128" height="128">
+                            <span class="bw-audio-art__num">01</span>
+                          </span>
+                          <div class="bw-audio-art__row-text">
+                            <span class="bw-audio-art__tag">Divided city</span>
+                            <span class="bw-audio-art__name">Berlin Wall</span>
+                            <span class="bw-audio-art__route"><span class="bw-audio-art__route-line">Nordbahnhof</span><span class="bw-audio-art__route-line">→ Mauerpark</span></span>
+                          </div>
+                        </div>
+                        <div class="bw-audio-art__row">
+                          <span class="bw-audio-art__thumb-wrap">
+                            <img class="bw-audio-art__thumb" src="${asset('audio-door-thumb-hidden.webp')}" alt="" width="128" height="128">
+                            <span class="bw-audio-art__num">02</span>
+                          </span>
+                          <div class="bw-audio-art__row-text">
+                            <span class="bw-audio-art__tag">Lost places</span>
+                            <span class="bw-audio-art__name">Hidden Berlin</span>
+                            <span class="bw-audio-art__route"><span class="bw-audio-art__route-line">Anhalter Bahnhof</span><span class="bw-audio-art__route-line">Friedrichstraße</span></span>
+                          </div>
+                        </div>
+                        <div class="bw-audio-art__row">
+                          <span class="bw-audio-art__thumb-wrap">
+                            <img class="bw-audio-art__thumb" src="${asset('audio-door-thumb-medieval.webp')}" alt="" width="128" height="128">
+                            <span class="bw-audio-art__num">03</span>
+                          </span>
+                          <div class="bw-audio-art__row-text">
+                            <span class="bw-audio-art__tag">The city begins</span>
+                            <span class="bw-audio-art__name">Medieval Berlin</span>
+                            <span class="bw-audio-art__route"><span class="bw-audio-art__route-line">World Clock</span><span class="bw-audio-art__route-line">→ Museum Island</span></span>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="bw-audio-art__now">
+                        <span class="bw-audio-art__play"><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" focusable="false"><path d="M9 6.5v11l9-5.5z" fill="#123D18"/></svg></span>
+                        <span class="bw-audio-art__now-text">
+                          <span class="bw-audio-art__now-name">Berlin Wall</span>
+                          <span class="bw-audio-art__now-meta">Audio walk · 01</span>
+                        </span>
+                        <svg class="bw-audio-art__wave" viewBox="0 0 40 16" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="M1 8v0M4 5v6M7 3v10M10 6v4M13 2v12M16 5v6M19 7v2M22 4v8M25 1v14M28 6v4M31 3v10M34 5v6M37 7v2" stroke="#FFE600" stroke-width="1.6" stroke-linecap="round" fill="none"/></svg>
+                        <span class="bw-audio-art__progress"><span class="bw-audio-art__progress-fill"></span></span>
+                      </div>
+                      <span class="bw-audio-art__home"></span>
+                      <span class="bw-audio-art__glass"></span>
+                    </div>
+                  </div>
+                </div>
+              </div>
               <span class="bw-home-two-doors__chip bw-home-two-doors__chip--yellow bw-home-two-doors__corner-right">TRIO · €24.90</span>
             </div>
             <div class="bw-home-two-doors__audio-copy">
@@ -509,6 +577,13 @@ class BWHomeTwoDoorsElement extends HTMLElement {
             </div>
             <div class="bw-home-two-doors__faq">${faqItems}
             </div>
+            <details class="bw-home-two-doors__credits">
+              <summary>Photo credits</summary>
+              <ul>
+                <li>Anhalter Bahnhof portico: <a href="https://commons.wikimedia.org/wiki/File:Berlin_Anhalter_Bahnhof_-_01.jpg" rel="noopener" target="_blank">Carlos Delgado, Wikimedia Commons</a>, <a href="https://creativecommons.org/licenses/by-sa/4.0/" rel="noopener license" target="_blank">CC BY-SA 4.0</a>, cropped.</li>
+                <li>St. Mary’s Church and the TV Tower: <a href="https://commons.wikimedia.org/wiki/File:Berlin_Marienkirche_Exterior_0326_02.jpg" rel="noopener" target="_blank">Dosseman, Wikimedia Commons</a>, <a href="https://creativecommons.org/licenses/by-sa/4.0/" rel="noopener license" target="_blank">CC BY-SA 4.0</a>, cropped.</li>
+              </ul>
+            </details>
           </div>
         </section>
       </div>`;

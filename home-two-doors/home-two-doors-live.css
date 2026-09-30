@@ -324,8 +324,7 @@ bw-home-two-doors .bw-home-two-doors .bw-home-two-doors__review--dark .bw-home-t
   padding: 40px;
 }
 
-.bw-home-two-doors .bw-home-two-doors__door--live .bw-home-two-doors__background,
-.bw-home-two-doors .bw-home-two-doors__door--audio .bw-home-two-doors__audio-image img {
+.bw-home-two-doors .bw-home-two-doors__door--live .bw-home-two-doors__background {
   height: 100%;
   object-fit: cover;
   position: absolute;
@@ -393,13 +392,6 @@ bw-home-two-doors .bw-home-two-doors .bw-home-two-doors__review--dark .bw-home-t
   min-height: 100%;
   overflow: hidden;
   position: relative;
-}
-
-.bw-home-two-doors .bw-home-two-doors__door--audio .bw-home-two-doors__audio-image img {
-  inset: 0;
-  object-position: 84% 50%;
-  -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 24%);
-  mask-image: linear-gradient(90deg, transparent 0%, #000 24%);
 }
 
 .bw-home-two-doors .bw-home-two-doors__audio-image .bw-home-two-doors__corner-right {
@@ -1415,12 +1407,6 @@ bw-home-two-doors .bw-home-two-doors .bw-home-two-doors__review--dark .bw-home-t
     min-height: 0;
   }
 
-  .bw-home-two-doors .bw-home-two-doors__door--audio .bw-home-two-doors__audio-image img {
-    object-position: 66% 48%;
-    -webkit-mask-image: none;
-    mask-image: none;
-  }
-
   .bw-home-two-doors .bw-home-two-doors__audio-image .bw-home-two-doors__corner-right {
     display: none;
   }
@@ -1683,4 +1669,468 @@ bw-home-two-doors .bw-home-two-doors .bw-home-two-doors__review--dark .bw-home-t
   .bw-home-two-doors .bw-home-two-doors__review {
     min-height: 0;
   }
+}
+
+/* Audio door art (30 Sep 2026): the TV Tower at dusk (licensed stock photo,
+   no credit line needed) with a large HTML/CSS phone in front of it, screen =
+   Berlin Audio Trio list. Source and QA: output/design/2026-09-30-audio-door-claude/.
+   Desktop = tall column, mobile (<= 900px) = wide strip with the phone tilted and
+   cropped so its three rows fill the strip height. All phone geometry is in --p
+   (1% of the phone width) so the device scales with the slot. */
+
+.bw-home-two-doors .bw-audio-art--phone-dusk {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  container-type: size;
+  background: #2a2c5c;
+  font-family: var(--bw-sans);
+  color: #fff;
+  --pw: 84cqw;
+  --p: calc(var(--pw) / 100);
+  --mono: var(--bw-mono);
+  --display: var(--bw-display);
+  --yellow: #FFE600;
+  --green-deep: #123D18;
+  --screen-top: #185a2b;
+  --screen-mid: #123D18;
+  --screen-end: #102414;
+}
+
+/* ---------- photograph ---------- */
+.bw-home-two-doors .bw-audio-art--phone-dusk .bw-audio-art__photo {
+  position: absolute;
+  inset: 0;
+  display: block;
+}
+/* The column photo is 0.375 wide per 1 high (the top 10.7% is soft extended sky);
+   the tower axis sits at 40.5% of its width, the sphere centre at 45.1% of its
+   height, the antenna tip at 12.9%.
+   --ph = rendered photo height, --tx = where the tower axis lands, --sy = where
+   the sphere centre lands. */
+.bw-home-two-doors .bw-audio-art--phone-dusk .bw-audio-art__photo img.bw-audio-art__photo-img {
+  --ph: 155cqh;
+  --tx: 28cqw;
+  --sy: 19cqh;
+  position: absolute;
+  inset: auto;
+  height: var(--ph);
+  width: calc(var(--ph) * 0.375);
+  left: calc(var(--tx) - var(--ph) * 0.375 * 0.405);
+  top: calc(var(--sy) - var(--ph) * 0.451);
+  max-width: none;
+  object-fit: fill;
+  -webkit-mask-image: none;
+  mask-image: none;
+  display: block;
+}
+.bw-home-two-doors .bw-audio-art--phone-dusk .bw-audio-art__grade {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(16, 36, 20, 0) 40%, rgba(16, 36, 20, 0.28) 70%, rgba(16, 36, 20, 0.6) 100%);
+  pointer-events: none;
+}
+/* soft pool of shadow under the phone */
+.bw-home-two-doors .bw-audio-art--phone-dusk .bw-audio-art__ground {
+  position: absolute;
+  left: 50%;
+  bottom: calc(4cqw - var(--p) * 2);
+  width: calc(var(--pw) * 0.98);
+  height: calc(var(--p) * 9);
+  transform: translateX(-50%);
+  border-radius: 50%;
+  background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.55) 0%, rgba(0, 0, 0, 0.25) 45%, rgba(0, 0, 0, 0) 72%);
+  filter: blur(calc(var(--p) * 2));
+  pointer-events: none;
+}
+
+/* ---------- phone body ---------- */
+.bw-home-two-doors .bw-audio-art--phone-dusk .bw-audio-art__phone {
+  position: absolute;
+  left: 50%;
+  bottom: 4cqw;
+  width: var(--pw);
+  height: calc(var(--pw) * 2.03);
+  transform: translateX(-50%);
+  border-radius: calc(var(--p) * 15.5);
+  background: linear-gradient(160deg, #5a5d5b 0%, #2a2d2b 18%, #17191a 50%, #2b2e2c 84%, #4a4d4b 100%);
+  box-shadow:
+    0 calc(var(--p) * 12) calc(var(--p) * 26) rgba(0, 0, 0, 0.42),
+    0 calc(var(--p) * 3) calc(var(--p) * 7) rgba(0, 0, 0, 0.35),
+    0 0 0 0.5px rgba(255, 255, 255, 0.28);
+}
+.bw-home-two-doors .bw-audio-art--phone-dusk .bw-audio-art__bezel {
+  position: absolute;
+  inset: calc(var(--p) * 1.4);
+  border-radius: calc(var(--p) * 14.2);
+  background: #050706;
+}
+.bw-home-two-doors .bw-audio-art--phone-dusk .bw-audio-art__screen {
+  position: absolute;
+  inset: calc(var(--p) * 2);
+  border-radius: calc(var(--p) * 12.4);
+  overflow: hidden;
+  background: linear-gradient(180deg, var(--screen-top) 0%, var(--screen-mid) 32%, var(--screen-end) 100%);
+  box-shadow: inset 0 0 0 0.5px rgba(255, 255, 255, 0.08);
+  display: flex;
+  flex-direction: column;
+  padding: calc(var(--p) * 17) calc(var(--p) * 6.5) calc(var(--p) * 6);
+  box-sizing: border-box;
+}
+.bw-home-two-doors .bw-audio-art--phone-dusk .bw-audio-art__btn {
+  position: absolute;
+  width: calc(var(--p) * 1.4);
+  border-radius: calc(var(--p) * 0.6);
+  background: linear-gradient(90deg, #3a3d3b, #1c1e1d);
+}
+.bw-home-two-doors .bw-audio-art--phone-dusk .bw-audio-art__btn--action { left: calc(var(--p) * -1.3); top: calc(var(--p) * 30); height: calc(var(--p) * 7); }
+.bw-home-two-doors .bw-audio-art--phone-dusk .bw-audio-art__btn--vol-up { left: calc(var(--p) * -1.3); top: calc(var(--p) * 42); height: calc(var(--p) * 13); }
+.bw-home-two-doors .bw-audio-art--phone-dusk .bw-audio-art__btn--vol-down { left: calc(var(--p) * -1.3); top: calc(var(--p) * 58); height: calc(var(--p) * 13); }
+.bw-home-two-doors .bw-audio-art--phone-dusk .bw-audio-art__btn--power { right: calc(var(--p) * -1.3); top: calc(var(--p) * 48); height: calc(var(--p) * 20); background: linear-gradient(90deg, #1c1e1d, #3a3d3b); }
+
+.bw-home-two-doors .bw-audio-art--phone-dusk .bw-audio-art__island {
+  position: absolute;
+  top: calc(var(--p) * 3.6);
+  left: 50%;
+  transform: translateX(-50%);
+  width: calc(var(--p) * 29);
+  height: calc(var(--p) * 8.6);
+  border-radius: calc(var(--p) * 5);
+  background: #050706;
+}
+.bw-home-two-doors .bw-audio-art--phone-dusk .bw-audio-art__glass {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(112deg, rgba(255, 255, 255, 0.12) 0%, rgba(255, 255, 255, 0.04) 26%, rgba(255, 255, 255, 0) 46%);
+}
+.bw-home-two-doors .bw-audio-art--phone-dusk .bw-audio-art__home {
+  position: absolute;
+  bottom: calc(var(--p) * 2.4);
+  left: 50%;
+  transform: translateX(-50%);
+  width: calc(var(--p) * 32);
+  height: calc(var(--p) * 1.3);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.55);
+}
+
+/* ---------- screen content ---------- */
+.bw-home-two-doors .bw-audio-art--phone-dusk .bw-audio-art__head {
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--p) * 1.2);
+  padding: 0 calc(var(--p) * 1);
+}
+.bw-home-two-doors .bw-audio-art--phone-dusk .bw-audio-art__eyebrow {
+  font-family: var(--mono);
+  font-size: max(9px, calc(var(--p) * 4.3));
+  line-height: 1.2;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--yellow);
+  white-space: nowrap;
+}
+.bw-home-two-doors .bw-audio-art--phone-dusk .bw-audio-art__title {
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: calc(var(--p) * 9.4);
+  line-height: 1.02;
+  letter-spacing: -0.01em;
+  color: #fff;
+  white-space: nowrap;
+}
+.bw-home-two-doors .bw-audio-art--phone-dusk .bw-audio-art__title-em {
+  font-style: italic;
+  font-weight: 500;
+  color: var(--yellow);
+}
+
+.bw-home-two-doors .bw-audio-art--phone-dusk .bw-audio-art__list {
+  display: flex;
+  flex-direction: column;
+  margin-top: calc(var(--p) * 8);
+}
+.bw-home-two-doors .bw-audio-art--phone-dusk .bw-audio-art__row {
+  display: flex;
+  align-items: center;
+  gap: calc(var(--p) * 4);
+  padding: calc(var(--p) * 7.5) calc(var(--p) * 1);
+  border-top: 1px solid rgba(255, 255, 255, 0.13);
+}
+.bw-home-two-doors .bw-audio-art--phone-dusk .bw-audio-art__thumb-wrap {
+  position: relative;
+  flex: 0 0 auto;
+  display: block;
+  width: calc(var(--p) * 24);
+  height: calc(var(--p) * 24);
+}
+.bw-home-two-doors .bw-audio-art--phone-dusk .bw-audio-art__row img.bw-audio-art__thumb {
+  position: static;
+  inset: auto;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  border-radius: calc(var(--p) * 4.5);
+  object-fit: cover;
+  object-position: 50% 50%;
+  -webkit-mask-image: none;
+  mask-image: none;
+  display: block;
+  box-shadow: 0 0 0 0.5px rgba(255, 255, 255, 0.22);
+}
+.bw-home-two-doors .bw-audio-art--phone-dusk .bw-audio-art__row-text {
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--p) * 0.9);
+  min-width: 0;
+}
+.bw-home-two-doors .bw-audio-art--phone-dusk .bw-audio-art__num {
+  position: absolute;
+  left: calc(var(--p) * -1.5);
+  top: calc(var(--p) * -1.5);
+  padding: 0 calc(var(--p) * 1.8);
+  height: calc(var(--p) * 6.4);
+  display: flex;
+  align-items: center;
+  border-radius: 999px;
+  background: var(--yellow);
+  color: var(--green-deep);
+  font-family: var(--mono);
+  font-weight: 700;
+  font-size: max(9px, calc(var(--p) * 4.2));
+  line-height: 1;
+  letter-spacing: 0.04em;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.35);
+}
+.bw-home-two-doors .bw-audio-art--phone-dusk .bw-audio-art__tag {
+  font-family: var(--mono);
+  font-size: max(9px, calc(var(--p) * 4.2));
+  line-height: 1.15;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: rgba(255, 255, 255, 0.66);
+}
+.bw-home-two-doors .bw-audio-art--phone-dusk .bw-audio-art__name {
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: max(11px, calc(var(--p) * 7));
+  line-height: 1.05;
+  letter-spacing: -0.012em;
+  color: #fff;
+  white-space: nowrap;
+}
+.bw-home-two-doors .bw-audio-art--phone-dusk .bw-audio-art__route {
+  display: flex;
+  flex-direction: column;
+  font-family: var(--mono);
+  font-size: max(9px, calc(var(--p) * 4.2));
+  line-height: 1.3;
+  color: rgba(255, 255, 255, 0.74);
+  white-space: nowrap;
+}
+.bw-home-two-doors .bw-audio-art--phone-dusk .bw-audio-art__route-line { display: block; }
+
+/* now-playing bar, in the real player's grammar */
+.bw-home-two-doors .bw-audio-art--phone-dusk .bw-audio-art__now {
+  position: relative;
+  margin-top: auto;
+  display: flex;
+  align-items: center;
+  gap: calc(var(--p) * 3.5);
+  padding: calc(var(--p) * 3.5) calc(var(--p) * 4) calc(var(--p) * 4.5);
+  border-radius: calc(var(--p) * 5);
+  background: rgba(255, 255, 255, 0.07);
+  box-shadow: 0 0 0 0.5px rgba(255, 255, 255, 0.12);
+}
+.bw-home-two-doors .bw-audio-art--phone-dusk .bw-audio-art__play {
+  flex: 0 0 auto;
+  width: calc(var(--p) * 13);
+  height: calc(var(--p) * 13);
+  border-radius: 50%;
+  background: var(--yellow);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.bw-home-two-doors .bw-audio-art--phone-dusk .bw-audio-art__play svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+.bw-home-two-doors .bw-audio-art--phone-dusk .bw-audio-art__now-text {
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--p) * 0.8);
+  min-width: 0;
+  flex: 1 1 auto;
+}
+.bw-home-two-doors .bw-audio-art--phone-dusk .bw-audio-art__now-name {
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: max(10px, calc(var(--p) * 6.2));
+  line-height: 1.05;
+  color: #fff;
+  white-space: nowrap;
+}
+.bw-home-two-doors .bw-audio-art--phone-dusk .bw-audio-art__now-meta {
+  font-family: var(--mono);
+  font-size: max(9px, calc(var(--p) * 4));
+  line-height: 1.15;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.6);
+  white-space: nowrap;
+}
+.bw-home-two-doors .bw-audio-art--phone-dusk .bw-audio-art__wave {
+  flex: 0 0 auto;
+  width: calc(var(--p) * 17);
+  height: calc(var(--p) * 7);
+  display: block;
+  opacity: 0.9;
+}
+.bw-home-two-doors .bw-audio-art--phone-dusk .bw-audio-art__progress {
+  position: absolute;
+  left: calc(var(--p) * 4);
+  right: calc(var(--p) * 4);
+  bottom: calc(var(--p) * 2);
+  height: 1.5px;
+  background: rgba(255, 255, 255, 0.18);
+  border-radius: 2px;
+}
+.bw-home-two-doors .bw-audio-art--phone-dusk .bw-audio-art__progress-fill {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 37%;
+  background: var(--yellow);
+  border-radius: 2px;
+}
+
+/* ---------- desktop breakpoints: where the tower sits vs the chip ---------- */
+/* 920-1000px: the column is 183px wide and the chip spans most of it, so the
+   whole tower stands centred, its antenna tip just below the chip. */
+@media (max-width: 1000px) {
+  .bw-home-two-doors .bw-audio-art--phone-dusk .bw-audio-art__photo img.bw-audio-art__photo-img {
+    --ph: 100cqh;
+    --tx: 50cqw;
+    top: 0;
+  }
+}
+
+@container (max-width: 240px) {
+  .bw-home-two-doors .bw-audio-art--phone-dusk .bw-audio-art__row { padding-top: calc(var(--p) * 6); padding-bottom: calc(var(--p) * 6); }
+  .bw-home-two-doors .bw-audio-art--phone-dusk .bw-audio-art__list { margin-top: calc(var(--p) * 6); }
+  .bw-home-two-doors .bw-audio-art--phone-dusk .bw-audio-art__screen { padding-top: calc(var(--p) * 15); }
+}
+
+/* narrow column: the screen keeps its three rows, drops the tag and the eyebrow tail */
+@container (max-width: 205px) {
+  .bw-home-two-doors .bw-audio-art--phone-dusk .bw-audio-art__tag { display: none; }
+  .bw-home-two-doors .bw-audio-art--phone-dusk .bw-audio-art__wave { display: none; }
+  .bw-home-two-doors .bw-audio-art--phone-dusk .bw-audio-art__screen { padding: calc(var(--p) * 13.5) calc(var(--p) * 5) calc(var(--p) * 6); }
+  .bw-home-two-doors .bw-audio-art--phone-dusk .bw-audio-art__list { margin-top: calc(var(--p) * 4); }
+  .bw-home-two-doors .bw-audio-art--phone-dusk .bw-audio-art__row { gap: calc(var(--p) * 3.5); padding-top: calc(var(--p) * 4); padding-bottom: calc(var(--p) * 4); }
+  .bw-home-two-doors .bw-audio-art--phone-dusk .bw-audio-art__thumb-wrap { width: calc(var(--p) * 19); height: calc(var(--p) * 19); }
+  .bw-home-two-doors .bw-audio-art--phone-dusk .bw-audio-art__now { padding: calc(var(--p) * 3) calc(var(--p) * 3.5) calc(var(--p) * 4); }
+}
+
+/* ---------- mobile strip (<= 900px): phone tilted and cropped, tower to the right ---------- */
+@media (max-width: 900px) {
+  .bw-home-two-doors .bw-audio-art--phone-dusk {
+    --pw: 105cqh;
+  }
+  .bw-home-two-doors .bw-audio-art--phone-dusk .bw-audio-art__photo img.bw-audio-art__photo-img {
+    inset: 0;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 50% 70%;
+  }
+  .bw-home-two-doors .bw-audio-art--phone-dusk .bw-audio-art__grade {
+    background: linear-gradient(90deg, rgba(16, 36, 20, 0.26) 0%, rgba(16, 36, 20, 0.08) 40%, rgba(16, 36, 20, 0) 70%);
+  }
+  .bw-home-two-doors .bw-audio-art--phone-dusk .bw-audio-art__ground { display: none; }
+  .bw-home-two-doors .bw-audio-art--phone-dusk .bw-audio-art__phone {
+    left: 10cqh;
+    bottom: auto;
+    top: -21cqh;
+    transform: rotate(-4deg);
+    transform-origin: 50% 50%;
+  }
+  .bw-home-two-doors .bw-audio-art--phone-dusk .bw-audio-art__screen {
+    padding: calc(var(--p) * 26) calc(var(--p) * 6.5) calc(var(--p) * 6);
+  }
+  .bw-home-two-doors .bw-audio-art--phone-dusk .bw-audio-art__thumb-wrap { width: calc(var(--p) * 21); height: calc(var(--p) * 21); }
+  .bw-home-two-doors .bw-audio-art--phone-dusk .bw-audio-art__name { font-size: max(11px, calc(var(--p) * 7)); }
+  .bw-home-two-doors .bw-audio-art--phone-dusk .bw-audio-art__route { line-height: 1.2; }
+  .bw-home-two-doors .bw-audio-art--phone-dusk .bw-audio-art__head,
+  .bw-home-two-doors .bw-audio-art--phone-dusk .bw-audio-art__now,
+  .bw-home-two-doors .bw-audio-art--phone-dusk .bw-audio-art__home,
+  .bw-home-two-doors .bw-audio-art--phone-dusk .bw-audio-art__tag {
+    display: none;
+  }
+  .bw-home-two-doors .bw-audio-art--phone-dusk .bw-audio-art__list { margin-top: 0; }
+  .bw-home-two-doors .bw-audio-art--phone-dusk .bw-audio-art__row {
+    padding: calc(var(--p) * 2.2) calc(var(--p) * 1);
+    gap: calc(var(--p) * 4);
+  }
+  .bw-home-two-doors .bw-audio-art--phone-dusk .bw-audio-art__row:first-child { border-top-color: transparent; }
+}
+
+/* phone strip: bring the tower closer so the sphere reads at 168px */
+@media (max-width: 620px) {
+  .bw-home-two-doors .bw-audio-art--phone-dusk .bw-audio-art__photo img.bw-audio-art__photo-img {
+    width: 130%;
+    height: 130%;
+    left: -24%;
+    top: -26%;
+  }
+}
+
+/* wide strip (tablet portrait): give the phone a little air from the rounded corner */
+@media (max-width: 900px) and (min-width: 621px) {
+  .bw-home-two-doors .bw-audio-art--phone-dusk .bw-audio-art__phone {
+    left: 26cqh;
+  }
+  .bw-home-two-doors .bw-audio-art--phone-dusk .bw-audio-art__grade {
+    background: linear-gradient(90deg, rgba(16, 36, 20, 0.2) 0%, rgba(16, 36, 20, 0.06) 45%, rgba(16, 36, 20, 0) 65%);
+  }
+}
+
+/* Photo credits for the Commons photos used on this page, closed by default. */
+.bw-home-two-doors .bw-home-two-doors__credits {
+  color: var(--bw-ink-2);
+  font-size: 13px;
+  line-height: 1.5;
+  margin-top: 28px;
+}
+
+.bw-home-two-doors .bw-home-two-doors__credits summary {
+  cursor: pointer;
+  font-family: var(--bw-mono);
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  width: max-content;
+}
+
+.bw-home-two-doors .bw-home-two-doors__credits ul {
+  list-style: none;
+  margin: 10px 0 0;
+  padding: 0;
+}
+
+.bw-home-two-doors .bw-home-two-doors__credits li + li {
+  margin-top: 4px;
+}
+
+.bw-home-two-doors .bw-home-two-doors__credits a {
+  color: var(--bw-green);
+  text-decoration: underline;
 }
