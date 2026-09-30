@@ -88,8 +88,12 @@
 
   function applySeoSafetyNet() {
     var path = location.pathname.replace(/\/+$/, '') || '/';
-    var isFinal = /(^|\.)berlinwalk\.com$/i.test(location.hostname) && path === '/games/berlin-day-survival';
-    var canonical = isFinal ? FINAL_URL : location.origin + path;
+    // Both site hosts count as final: the Wix site runs on www.walkofberlin.com
+    // since the primary-domain flip of 29 September 2026. The canonical stays
+    // self-referencing there, exactly as it was before this host was accepted.
+    var isOldSiteHost = /(^|\.)berlinwalk\.com$/i.test(location.hostname);
+    var isFinal = (isOldSiteHost || /^(www\.)?walkofberlin\.com$/i.test(location.hostname)) && path === '/games/berlin-day-survival';
+    var canonical = isFinal && isOldSiteHost ? FINAL_URL : location.origin + path;
     document.title = isFinal ? SEO.title : 'Day Survival Test | BerlinWalk';
     upsertMeta('name', 'description', SEO.description);
     upsertMeta('name', 'robots', isFinal ? 'index, follow, max-image-preview:large' : 'noindex, nofollow');

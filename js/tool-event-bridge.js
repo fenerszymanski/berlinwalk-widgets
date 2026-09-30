@@ -52,10 +52,14 @@
 
   // Mirrors TOOL_PLATFORM_PRODUCTION_ORIGINS + TOOL_PLATFORM_LOCAL_QA_ORIGINS
   // in the backend's tool-platform-shared.js. A parent origin outside this
-  // list never receives a message.
+  // list never receives a message. Both site hosts: the Wix site runs on
+  // www.walkofberlin.com since the primary-domain flip of 29 September 2026,
+  // the berlinwalk.com hosts stay for cached pages and the redirect period.
   var ALLOWED_PARENT_ORIGINS = [
     'https://www.berlinwalk.com',
     'https://berlinwalk.com',
+    'https://www.walkofberlin.com',
+    'https://walkofberlin.com',
     'http://localhost:5173',
     'http://127.0.0.1:5173',
     'http://localhost:8765',

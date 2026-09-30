@@ -1122,7 +1122,7 @@
         window.fbq('trackCustom', name, Object.assign({}, detailPayload));
       }
 
-      if (allowAnalytics && /(^|\.)berlinwalk\.com$/i.test(window.location.hostname)) {
+      if (allowAnalytics && /(^|\.)berlinwalk\.com$|^(www\.)?walkofberlin\.com$/i.test(window.location.hostname)) {
         fetch(TRACK_ENDPOINT, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },

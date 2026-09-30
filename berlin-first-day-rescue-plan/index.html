@@ -1185,7 +1185,7 @@
         try {
           if (!document.referrer) return new URLSearchParams();
           var url = new URL(document.referrer);
-          if (!/berlinwalk\.com$/i.test(url.hostname)) return new URLSearchParams();
+          if (!/berlinwalk\.com$|^(www\.)?walkofberlin\.com$/i.test(url.hostname)) return new URLSearchParams();
           return url.searchParams;
         } catch (_) {
           return new URLSearchParams();
@@ -1200,7 +1200,7 @@
         try {
           if (document.referrer) {
             var ref = new URL(document.referrer);
-            if (/berlinwalk\.com$/i.test(ref.hostname) && /\/(tools|products)\/berlin-first-day-rescue-plan\/?$/i.test(ref.pathname)) return ref.toString();
+            if (/berlinwalk\.com$|^(www\.)?walkofberlin\.com$/i.test(ref.hostname) && /\/(tools|products)\/berlin-first-day-rescue-plan\/?$/i.test(ref.pathname)) return ref.toString();
           }
         } catch (_) {}
         return window.location.href;

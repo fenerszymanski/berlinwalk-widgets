@@ -14389,7 +14389,7 @@
       var origin = new URL(event.origin);
       var ref = referrerUrl();
       if (ref && origin.origin === ref.origin) return true;
-      return /(^|\.)berlinwalk\.com$/i.test(origin.hostname);
+      return /(^|\.)berlinwalk\.com$|^(www\.)?walkofberlin\.com$/i.test(origin.hostname);
     } catch (error) {
       return false;
     }
@@ -14589,7 +14589,7 @@
       var raw = params.get('parent_url') || params.get('parentUrl') || '';
       if (!raw) return '';
       var url = new URL(raw);
-      if (/(^|\.)berlinwalk\.com$/i.test(url.hostname)) return url.toString().slice(0, 700);
+      if (/(^|\.)berlinwalk\.com$|^(www\.)?walkofberlin\.com$/i.test(url.hostname)) return url.toString().slice(0, 700);
       return '';
     } catch (error) {
       return '';
@@ -14600,7 +14600,7 @@
     var parentPath = parentPagePathParam();
     if (parentPath) return parentPath;
     var ref = referrerUrl();
-    if (ref && /(^|\.)berlinwalk\.com$/i.test(ref.hostname)) return ref.pathname || '/';
+    if (ref && /(^|\.)berlinwalk\.com$|^(www\.)?walkofberlin\.com$/i.test(ref.hostname)) return ref.pathname || '/';
     return window.location.pathname || '/';
   }
 
@@ -14608,7 +14608,7 @@
     var parentUrl = parentPageUrlParam();
     if (parentUrl) return parentUrl;
     var ref = referrerUrl();
-    if (ref && /(^|\.)berlinwalk\.com$/i.test(ref.hostname)) return ref.toString();
+    if (ref && /(^|\.)berlinwalk\.com$|^(www\.)?walkofberlin\.com$/i.test(ref.hostname)) return ref.toString();
     return window.location.href;
   }
 

@@ -74,7 +74,10 @@
   // isAllowedChildOrigin below).
   var LOCAL_CHILD_ORIGIN_PATTERN = /^http:\/\/(localhost|127\.0\.0\.1):\d+$/;
 
-  var PRODUCTION_HOST_ORIGINS = ['https://www.berlinwalk.com', 'https://berlinwalk.com'];
+  // Both site hosts: the Wix site runs on www.walkofberlin.com since the
+  // primary-domain flip of 29 September 2026; the berlinwalk.com hosts stay
+  // for cached pages and the redirect period.
+  var PRODUCTION_HOST_ORIGINS = ['https://www.berlinwalk.com', 'https://berlinwalk.com', 'https://www.walkofberlin.com', 'https://walkofberlin.com'];
   var LOCAL_QA_HOST_ORIGINS = ['http://localhost:5173', 'http://127.0.0.1:5173', 'http://localhost:8765', 'http://127.0.0.1:8765'];
   var DEFAULT_ENDPOINT = 'https://berlinwalk-content-app.vercel.app/api?route=tool-event';
   var QUALIFIED_VIEW_VISIBILITY_RATIO = 0.5;
