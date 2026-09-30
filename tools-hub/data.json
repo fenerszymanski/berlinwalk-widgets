@@ -10526,6 +10526,34 @@
       "iconStatus": "live-wix-media",
       "image": "https://static.wixstatic.com/media/5a08a3_fd76e60a2a8e460498b383c804a5dcef~mv2.png",
       "cmsItemId": "9d671179-c6a4-45e7-a403-9b556013e20f"
+    },
+    {
+      "slug": "berlin-tour-group-size-viewer",
+      "title": "Berlin Tour Group Size Viewer",
+      "lead": "Pick a walking tour group size from 6 to 45 and see the group standing around its guide, drawn to scale. Tap a spot to see how far it is from the guide, how small a hand-held archive photo looks from there, and how much quieter the voice arrives.",
+      "category": "Discovery",
+      "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/berlin-tour-group-size-viewer/",
+      "embedHeight": 1250,
+      "hubCategory": "TripPlans",
+      "type": "Guide",
+      "priority": 3,
+      "tags": [
+        "walking tour",
+        "group size",
+        "small group",
+        "guided tour",
+        "tour planning"
+      ],
+      "aliases": [
+        "small group walking tour berlin",
+        "free vs paid walking tour berlin",
+        "walking tour group size",
+        "how big are walking tour groups",
+        "berlin walking tour max group size"
+      ],
+      "iconStatus": "live-wix-media",
+      "image": "https://static.wixstatic.com/media/5a08a3_9d24a405eb8c4ba0b8fe1d6ef4d3dd23~mv2.png",
+      "cmsItemId": "677062cc-e8df-4832-90ab-db9aed658c3c"
     }
   ],
   "hubCategories": [

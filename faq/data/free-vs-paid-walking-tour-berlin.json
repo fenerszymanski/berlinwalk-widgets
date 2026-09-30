@@ -1,0 +1,101 @@
+{
+  "version": 1,
+  "slug": "free-vs-paid-walking-tour-berlin",
+  "key": "free-vs-paid-walking-tour-berlin",
+  "config": {
+    "title": "Free vs Paid Walking Tour in Berlin - FAQ",
+    "subtitle": "What a free and a paid walking tour in Berlin really cost, how big the groups are and which one suits you.",
+    "items": [
+      {
+        "q": "Is a free walking tour in Berlin really free?",
+        "a": "It is free to join, and you pay what you decide at the end. **Berlin operators say most guests give between €10 and €50 per person,** and one asks for an optional €3 to confirm a booking. If the guide was poor, you can give less."
+      },
+      {
+        "q": "How much does a paid walking tour in Berlin cost?",
+        "a": "Standard public tours from the established operators cost **about €20 to €28 per adult** for two to three and a half hours. Tours with a stated cap of 8 to 15 people range from about €21 to €130 per person. My own walk, Berlin Then and Now, costs €25 per person."
+      },
+      {
+        "q": "How big are walking tour groups in Berlin?",
+        "a": "SANDEMANs says it works towards an average of 26 people and tries to stay under 30. Standard paid tours state maximums of 20, 25 or 30. **Tours that put a small number in writing cap at 8 to 15 people.**"
+      },
+      {
+        "q": "Is a small group walking tour in Berlin worth the money?",
+        "a": "It is if you ask questions, travel with parents or children, or hear less well in street noise. **In a group of 10 nobody stands further than about 2.4 m from the guide.** If your budget is tight or you only want the famous first-day route, a tip-based tour is the better choice."
+      },
+      {
+        "q": "What do I get on Berlin Then and Now?",
+        "a": "A walk of about 2.5 hours and about 3 km from the World Clock on Alexanderplatz to Hackescher Markt, with **11 stops covering 16 places and an archive photo of the same place at every stop.** It starts at 12:30 on selected days, costs €25 per person and takes no more than 10 people."
+      },
+      {
+        "q": "What happens if I am the only person booked on Berlin Then and Now?",
+        "a": "A walk needs at least 2 guests. **If you are the only guest one hour before the start, I cancel the walk, refund you in full and give you one of my audio walks for free.** Cancellation or a date change is free up to 24 hours before the start."
+      },
+      {
+        "q": "Does Berlin Then and Now go to the Brandenburg Gate or the Berlin Wall?",
+        "a": "No. **It stays in the historic centre between Alexanderplatz and Hackescher Markt** and does not go to the Brandenburg Gate, the Reichstag or Checkpoint Charlie. If those are your priority for a first day, take a tour that goes there."
+      }
+    ]
+  },
+  "schema": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Is a free walking tour in Berlin really free?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "It is free to join, and you pay what you decide at the end. Berlin operators say most guests give between €10 and €50 per person, and one asks for an optional €3 to confirm a booking. If the guide was poor, you can give less."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How much does a paid walking tour in Berlin cost?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Standard public tours from the established operators cost about €20 to €28 per adult for two to three and a half hours. Tours with a stated cap of 8 to 15 people range from about €21 to €130 per person. My own walk, Berlin Then and Now, costs €25 per person."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How big are walking tour groups in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "SANDEMANs says it works towards an average of 26 people and tries to stay under 30. Standard paid tours state maximums of 20, 25 or 30. Tours that put a small number in writing cap at 8 to 15 people."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is a small group walking tour in Berlin worth the money?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "It is if you ask questions, travel with parents or children, or hear less well in street noise. In a group of 10 nobody stands further than about 2.4 m from the guide. If your budget is tight or you only want the famous first-day route, a tip-based tour is the better choice."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What do I get on Berlin Then and Now?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "A walk of about 2.5 hours and about 3 km from the World Clock on Alexanderplatz to Hackescher Markt, with 11 stops covering 16 places and an archive photo of the same place at every stop. It starts at 12:30 on selected days, costs €25 per person and takes no more than 10 people."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What happens if I am the only person booked on Berlin Then and Now?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "A walk needs at least 2 guests. If you are the only guest one hour before the start, I cancel the walk, refund you in full and give you one of my audio walks for free. Cancellation or a date change is free up to 24 hours before the start."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Does Berlin Then and Now go to the Brandenburg Gate or the Berlin Wall?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. It stays in the historic centre between Alexanderplatz and Hackescher Markt and does not go to the Brandenburg Gate, the Reichstag or Checkpoint Charlie. If those are your priority for a first day, take a tour that goes there."
+        }
+      }
+    ]
+  }
+}
