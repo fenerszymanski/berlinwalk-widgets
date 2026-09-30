@@ -42,6 +42,12 @@ const REQUIRED_PATHS = [
   'embed-resize.js',
   'homepage-editorial/homepage-editorial.css',
   'history-lead-magnet/assets-manifest.json',
+  'history-lead-magnet/assets/optimized/bethlehem-before.jpg',
+  'history-lead-magnet/assets/optimized/bethlehem-now.jpg',
+  'history-lead-magnet/assets/optimized/engelbecken-before.jpg',
+  'history-lead-magnet/assets/optimized/engelbecken-now.jpg',
+  'history-lead-magnet/assets/optimized/monbijou-before.jpg',
+  'history-lead-magnet/assets/optimized/monbijou-now.jpg',
   'history-lead-magnet/history-lead-magnet-element.js',
   'js/blog-journey-inject.js',
   'js/brand.js',
@@ -50,11 +56,12 @@ const REQUIRED_PATHS = [
   'tools-hub/data.json',
   'tools-hub/open-today.json',
   'tools-hub/tools-hub-element.js',
+  'ultimate-berlin-trip-planner/assets/berlinwalk-logo-rounded.png',
   'widgets-hub/widgets-hub-element.js',
 ];
 const EXPECTED_COMPATIBILITY_HASHES = new Map([
   ['homepage-editorial/homepage-editorial.css', '7077de8a302995ad3ad2db5caeb9c6b3f674ee979fac2e8176848f272c2c2ee3'],
-  ['_compat/wix/f985d8f5288df84d46e904298ad9186236561df1/history-lead-magnet-element.js', '0911e7cf048d8d14a76e99a916626108b504ea8e0393d33a5d4c897edd0454b3'],
+  ['_compat/wix/f985d8f5288df84d46e904298ad9186236561df1/history-lead-magnet-element.js', '0e2f99098dd6dee94d112b0349a1542b61194b9b1cf8fb0e9cb88a858405666d'],
   ['_compat/wix/e7ea2563499af1987863402a1c181dfcbd44b3a5/booking-calendar-element.js', 'dcc49ee9a72c2b94071e0a64279e22916c41c292637990eedb8edf79ab2ddc4c'],
 ]);
 const REQUIRED_SUBRESOURCE_INTEGRITY = [

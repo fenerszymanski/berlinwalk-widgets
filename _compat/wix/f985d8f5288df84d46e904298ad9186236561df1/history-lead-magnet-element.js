@@ -58,10 +58,10 @@
     }
   })();
   var assetManifestUrl = scriptUrl
-    ? new URL('assets-manifest.json', scriptUrl).toString()
+    ? new URL('../../../history-lead-magnet/assets-manifest.json', scriptUrl).toString()
     : 'assets-manifest.json';
   var brandMarkUrl = scriptUrl
-    ? new URL('../ultimate-berlin-trip-planner/assets/berlinwalk-logo-rounded.png', scriptUrl).toString()
+    ? new URL('../../../ultimate-berlin-trip-planner/assets/berlinwalk-logo-rounded.png', scriptUrl).toString()
     : '../ultimate-berlin-trip-planner/assets/berlinwalk-logo-rounded.png';
 
   var STORIES = {
