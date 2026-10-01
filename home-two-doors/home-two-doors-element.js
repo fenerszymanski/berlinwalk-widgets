@@ -32,7 +32,7 @@ const BW_HOME_TWO_DOORS_FAQ = [
   },
   {
     q: 'How big is the group, and does my date run?',
-    a: 'No more than 10 people. A walk needs at least 2 guests. If you are the only guest one hour before the start, I cancel the walk, refund you in full and give you one of my audio walks for free.',
+    a: 'No more than 10 people. A walk needs at least 2 guests. If you are the only guest two hours before the start, I cancel the walk, refund you in full and give you one of my audio walks for free.',
   },
   {
     q: 'Where do I meet you?',

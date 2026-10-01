@@ -28,7 +28,7 @@
       },
       {
         "q": "What happens if I am the only person booked on Berlin Then and Now?",
-        "a": "A walk needs at least 2 guests. **If you are the only guest one hour before the start, I cancel the walk, refund you in full and give you one of my audio walks for free.** Cancellation or a date change is free up to 24 hours before the start."
+        "a": "A walk needs at least 2 guests. **If you are the only guest two hours before the start, I cancel the walk, refund you in full and give you one of my audio walks for free.** Cancellation or a date change is free up to 24 hours before the start."
       },
       {
         "q": "Does Berlin Then and Now go to the Brandenburg Gate or the Berlin Wall?",
@@ -85,7 +85,7 @@
         "name": "What happens if I am the only person booked on Berlin Then and Now?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "A walk needs at least 2 guests. If you are the only guest one hour before the start, I cancel the walk, refund you in full and give you one of my audio walks for free. Cancellation or a date change is free up to 24 hours before the start."
+          "text": "A walk needs at least 2 guests. If you are the only guest two hours before the start, I cancel the walk, refund you in full and give you one of my audio walks for free. Cancellation or a date change is free up to 24 hours before the start."
         }
       },
       {
