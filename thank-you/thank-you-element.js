@@ -1003,6 +1003,186 @@ class BWThankYouElement extends HTMLElement {
             padding: 36px 0 44px;
           }
         }
+        /* post-booking offer (then_now_post_booking_offer) */
+        .bw-thank-you .bw-ty-offer {
+          background: linear-gradient(180deg, #FFFFFF 0%, #F8FBF2 100%);
+          border-top: 1px solid rgba(27, 94, 32, 0.13);
+          color: var(--text);
+          padding: 44px 0 48px;
+        }
+
+        .bw-thank-you .bw-ty-offer .bw-ty-section-head {
+          color: var(--text);
+        }
+
+        .bw-thank-you .bw-ty-offer .bw-ty-section-head p {
+          color: var(--muted);
+        }
+
+        .bw-thank-you .bw-ty-offer-card {
+          align-items: stretch;
+          background: #FFFFFF;
+          border: 1px solid rgba(27, 94, 32, 0.16);
+          border-radius: 8px;
+          box-shadow: 0 16px 34px rgba(27, 94, 32, 0.09);
+          display: grid;
+          grid-template-columns: minmax(0, 0.9fr) minmax(0, 1fr);
+          overflow: hidden;
+          position: relative;
+        }
+
+        .bw-thank-you .bw-ty-offer-card::before {
+          background: var(--yellow);
+          content: "";
+          height: 5px;
+          left: 0;
+          position: absolute;
+          right: 0;
+          top: 0;
+          z-index: 1;
+        }
+
+        .bw-thank-you .bw-ty-offer-media {
+          background: #E8F0E0;
+          display: flex;
+          flex-direction: column;
+          margin: 0;
+          min-width: 0;
+        }
+
+        .bw-thank-you .bw-ty-offer-media > a {
+          display: block;
+          flex: 1 1 auto;
+          min-height: 0;
+        }
+
+        .bw-thank-you .bw-ty-offer-media img {
+          display: block;
+          height: 100%;
+          min-height: 260px;
+          object-fit: cover;
+          object-position: center;
+          width: 100%;
+        }
+
+        .bw-thank-you .bw-ty-offer-credit {
+          background: #FFFFFF;
+          border-top: 1px solid rgba(27, 94, 32, 0.12);
+          color: var(--muted);
+          font-size: 11px;
+          line-height: 1.45;
+          padding: 8px 14px 9px;
+        }
+
+        .bw-thank-you .bw-ty-offer-credit a {
+          color: var(--green);
+          text-decoration: underline;
+          text-underline-offset: 2px;
+        }
+
+        .bw-thank-you .bw-ty-offer-body {
+          min-width: 0;
+          padding: 30px 30px 28px;
+        }
+
+        .bw-thank-you .bw-ty-offer-body h3 {
+          color: var(--green);
+          font-size: 27px;
+          font-weight: 800;
+          letter-spacing: 0;
+          line-height: 1.12;
+          margin-bottom: 12px;
+        }
+
+        .bw-thank-you .bw-ty-offer-advice {
+          color: var(--text);
+          font-family: var(--serif);
+          font-size: 16px;
+          line-height: 1.66;
+          margin-bottom: 12px;
+        }
+
+        .bw-thank-you .bw-ty-offer-small {
+          color: var(--muted);
+          font-size: 13px;
+          line-height: 1.55;
+          margin-bottom: 20px;
+        }
+
+        .bw-thank-you .bw-ty-offer-actions {
+          align-items: center;
+          display: flex;
+          flex-wrap: wrap;
+          gap: 14px 22px;
+        }
+
+        .bw-thank-you .bw-ty-offer-link {
+          color: var(--green);
+          font-size: 12px;
+          font-weight: 800;
+          text-decoration: underline;
+          text-transform: uppercase;
+          text-underline-offset: 4px;
+        }
+
+        .bw-thank-you .bw-ty-offer-alt {
+          background: #FFFFFF;
+          border: 1px solid var(--light-green);
+          border-left: 6px solid var(--yellow);
+          border-radius: 8px;
+          color: var(--text);
+          font-size: 14px;
+          line-height: 1.6;
+          margin: 16px 0 0;
+          max-width: 760px;
+          padding: 14px 18px;
+        }
+
+        .bw-thank-you .bw-ty-offer-alt a {
+          color: var(--green);
+          font-weight: 800;
+          text-decoration: underline;
+          text-underline-offset: 3px;
+        }
+
+        @media (max-width: 900px) {
+          .bw-thank-you .bw-ty-offer-card {
+            grid-template-columns: 1fr;
+          }
+
+          .bw-thank-you .bw-ty-offer-media img {
+            aspect-ratio: 1121 / 820;
+            height: auto;
+            min-height: 0;
+          }
+        }
+
+        @media (max-width: 560px) {
+          .bw-thank-you .bw-ty-offer {
+            padding: 36px 0;
+          }
+
+          .bw-thank-you .bw-ty-offer-body {
+            padding: 22px 20px 22px;
+          }
+
+          .bw-thank-you .bw-ty-offer-body h3 {
+            font-size: 24px;
+          }
+
+          .bw-thank-you .bw-ty-offer-actions {
+            align-items: stretch;
+            flex-direction: column;
+          }
+
+          .bw-thank-you .bw-ty-offer-actions .bw-ty-btn {
+            width: 100%;
+          }
+
+          .bw-thank-you .bw-ty-offer-link {
+            text-align: center;
+          }
+        }
       </style>
 
       <section class="bw-thank-you" aria-labelledby="bw-ty-title">
@@ -1153,6 +1333,31 @@ class BWThankYouElement extends HTMLElement {
                 <p>Wear comfortable shoes, check the weather, and bring curiosity. If your plans change, cancel up to 24 hours before the start for a full refund, or move to another date if there is space. Later than that I cannot refund.</p>
               </li>
             </ol>
+          </div>
+        </section>
+
+        <section class="bw-ty-offer" aria-labelledby="bw-ty-offer-title" data-bw-ty-offer="then_now_post_booking_offer">
+          <div class="bw-ty-inner">
+            <div class="bw-ty-section-head" data-bw-ty-reveal>
+              <h2 id="bw-ty-offer-title">After the walk</h2>
+              <p>My walk stays in the old city and ends at Hackescher Markt, so it does not reach the Berlin Wall. If the Wall is on your list too, go to Bernauer Straße, where part of the old border strip is preserved.</p>
+            </div>
+            <article class="bw-ty-offer-card" data-bw-ty-reveal>
+              <figure class="bw-ty-offer-media">
+                <a href="https://www.walkofberlin.com/products/death-strip-audio-route?utm_source=then_now_booking&amp;utm_medium=thank_you_page&amp;utm_campaign=then_now_post_booking_offer&amp;utm_content=death_strip" data-bw-ty-event="post_booking_offer_clicked" tabindex="-1" aria-hidden="true"><img src="https://app.berlinwalk.com/assets/death-strip-audio-route/photos/bernauer-memorial-strip.jpg" alt="The preserved border strip of the Berlin Wall on Bernauer Straße, with the TV Tower in the distance" width="1121" height="820" loading="lazy" decoding="async"></a>
+                <figcaption class="bw-ty-offer-credit">Bernauer Straße. Photo: <a href="https://commons.wikimedia.org/wiki/File:Berlin_Bernauer_Stra%C3%9Fe_Mauerstreifen.jpg" target="_blank" rel="noopener">Pedelecs</a>, <a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank" rel="noopener">CC BY-SA 3.0</a>, via Wikimedia Commons</figcaption>
+              </figure>
+              <div class="bw-ty-offer-body">
+                <span class="bw-ty-card-kicker">Audio walk · €9.90</span>
+                <h3>Berlin Wall: The Death Strip</h3>
+                <p class="bw-ty-offer-advice">My advice: keep it for another day, when your legs are fresh. Start outside Nordbahnhof and press play at each of the 10 outdoor stops to Mauerpark. The first chapter is free, so you can hear it before you buy.</p>
+                <p class="bw-ty-offer-small">Allow 75 to 100 minutes with pauses. Full refund within 14 days, even after you listen.</p>
+                <div class="bw-ty-offer-actions">
+                  <a class="bw-ty-btn bw-ty-btn-primary" href="https://www.walkofberlin.com/products/death-strip-audio-route?utm_source=then_now_booking&amp;utm_medium=thank_you_page&amp;utm_campaign=then_now_post_booking_offer&amp;utm_content=death_strip" data-bw-ty-event="post_booking_offer_clicked">Play the free chapter</a>
+                  <a class="bw-ty-offer-link" href="https://www.walkofberlin.com/audio-tours?utm_source=then_now_booking&amp;utm_medium=thank_you_page&amp;utm_campaign=then_now_post_booking_offer&amp;utm_content=audio_walks" data-bw-ty-event="post_booking_offer_clicked">See all my audio walks</a>
+                </div>
+              </div>
+            </article>
           </div>
         </section>
 
