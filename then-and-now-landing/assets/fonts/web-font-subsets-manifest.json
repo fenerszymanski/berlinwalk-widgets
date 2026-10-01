@@ -1,0 +1,95 @@
+{
+  "createdAt": "2026-10-01T11:58:14.926255+00:00",
+  "fontTools": "4.60.2",
+  "brotli": "1.2.0",
+  "method": "fontTools.subset, WOFF2/Brotli, preserved variable axes and all layout features",
+  "scope": "Latin and Latin Extended-A; general punctuation; currency; arrows; all current landing-file characters",
+  "copyrightLicence": "SIL Open Font License 1.1. Original copyright and licence files retained beside generated fonts. Modified web-font subsets remain under OFL.",
+  "originalsUnchanged": true,
+  "imagesChanged": false,
+  "files": [
+    {
+      "original": "Fraunces-Variable.ttf",
+      "output": "Fraunces-Latin.woff2",
+      "originalBytes": 360440,
+      "bytes": 162812,
+      "reductionPercent": 54.8,
+      "originalSha256": "177ff6c0f14e5550a3c624247cd1189611d4eb65d000b14944c63d967958abbb",
+      "sha256": "824ce899b1ba042b988ed93df4a5aa9187f0d7c79033d1227c116c17c85f55dd",
+      "licenceFile": "OFL-Fraunces.txt",
+      "licenceSha256": "bdf4c22802eaf804f998195871c6b8938aac2ac14b2d78a8bd66a6f1eced833b",
+      "axes": [
+        {
+          "tag": "opsz",
+          "min": 9.0,
+          "default": 9.0,
+          "max": 144.0
+        },
+        {
+          "tag": "wght",
+          "min": 100.0,
+          "default": 900.0,
+          "max": 900.0
+        },
+        {
+          "tag": "SOFT",
+          "min": 0.0,
+          "default": 0.0,
+          "max": 100.0
+        },
+        {
+          "tag": "WONK",
+          "min": 0.0,
+          "default": 1.0,
+          "max": 1.0
+        }
+      ],
+      "englishPunctuationGlyphsPreserved": true,
+      "glyphCount": 405,
+      "reservedNameHandling": "No Reserved Font Name declared in bundled licence",
+      "unsupportedSymbolsUseFallback": []
+    },
+    {
+      "original": "SpaceGrotesk-Variable.ttf",
+      "output": "SpaceGrotesk-Latin.woff2",
+      "originalBytes": 136676,
+      "bytes": 32596,
+      "reductionPercent": 76.2,
+      "originalSha256": "acad6de1fc93436f5c0f1f4137751ef04f1aea3063e7036535970ffcfbd79f72",
+      "sha256": "49a07b19991225853989cdd4d9534cd0af105aede746c03e242a535238544a5e",
+      "licenceFile": "OFL-SpaceGrotesk.txt",
+      "licenceSha256": "564ce565c371c5e5bbf286006565a7c9aa55a9f56e7ca58d56e05d649dd61a72",
+      "axes": [
+        {
+          "tag": "wght",
+          "min": 300.0,
+          "default": 300.0,
+          "max": 700.0
+        }
+      ],
+      "englishPunctuationGlyphsPreserved": true,
+      "glyphCount": 590,
+      "reservedNameHandling": "No Reserved Font Name declared in bundled licence",
+      "unsupportedSymbolsUseFallback": []
+    },
+    {
+      "original": "IBMPlexMono-Regular.ttf",
+      "output": "BerlinWalkMono-Latin.woff2",
+      "originalBytes": 135580,
+      "bytes": 21264,
+      "reductionPercent": 84.3,
+      "originalSha256": "6a3412f058c7d8dfd9170c41e85ade48e5156ecb89356110ca57a0a27734af46",
+      "sha256": "55aa60c3fdf2af2806fa001dc3c0bdf29133f9c35d1bcd81a16ced7280d4379a",
+      "licenceFile": "OFL-IBMPlexMono.txt",
+      "licenceSha256": "7e6b2818edbd8f6a01ae80641cc8f16a51080d08fb4e532be3a0b6f74adb07da",
+      "axes": [],
+      "englishPunctuationGlyphsPreserved": true,
+      "glyphCount": 474,
+      "reservedNameHandling": "Modified Plex subset family renamed to BerlinWalk Mono Subset; copyright retained",
+      "unsupportedSymbolsUseFallback": []
+    }
+  ],
+  "totalOriginalBytes": 632696,
+  "totalBytes": 216672,
+  "totalReductionPercent": 65.8
+}
