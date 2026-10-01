@@ -2134,3 +2134,40 @@ bw-home-two-doors .bw-home-two-doors .bw-home-two-doors__review--dark .bw-home-t
   color: var(--bw-green);
   text-decoration: underline;
 }
+
+/* Berlin Night In card (1 Oct 2026): a fifth "next move" card that spans the
+   whole row, so the four existing cards keep their grid. Photo = the cleared
+   Night In preview at its natural aspect (credited in Photo credits, no crop). */
+.bw-home-two-doors .bw-home-two-doors__more-card--wide {
+  grid-column: 1 / -1;
+}
+
+.bw-home-two-doors .bw-home-two-doors__more-card--wide > .bw-home-two-doors__more-thumb {
+  aspect-ratio: 640 / 481;
+}
+
+@media (min-width: 621px) {
+  .bw-home-two-doors .bw-home-two-doors__more-card--wide {
+    column-gap: 28px;
+    display: grid;
+    grid-template-columns: min(300px, 40%) minmax(0, 1fr);
+    grid-template-rows: 1fr repeat(5, auto) 1fr;
+  }
+
+  .bw-home-two-doors .bw-home-two-doors__more-card--wide > .bw-home-two-doors__more-thumb {
+    grid-column: 1;
+    grid-row: 1 / -1;
+    margin-bottom: 0;
+  }
+
+  .bw-home-two-doors .bw-home-two-doors__more-card--wide > :not(img) {
+    grid-column: 2;
+    max-width: 62ch;
+  }
+
+  .bw-home-two-doors .bw-home-two-doors__more-card--wide > :nth-child(2) { grid-row: 2; margin-top: 0; }
+  .bw-home-two-doors .bw-home-two-doors__more-card--wide > :nth-child(3) { grid-row: 3; }
+  .bw-home-two-doors .bw-home-two-doors__more-card--wide > :nth-child(4) { grid-row: 4; }
+  .bw-home-two-doors .bw-home-two-doors__more-card--wide > :nth-child(5) { grid-row: 5; margin-top: 4px; padding-top: 14px; }
+  .bw-home-two-doors .bw-home-two-doors__more-card--wide > :nth-child(6) { grid-row: 6; }
+}

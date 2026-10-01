@@ -134,6 +134,19 @@ const BW_HOME_TWO_DOORS_MORE_PRODUCTS = [
     text: 'Practical calculators and decision helpers for a day in the city.',
     href: 'https://www.berlinwalk.com/berlin-tools',
   },
+  {
+    label: 'STAY IN',
+    title: 'Berlin Night In',
+    price: 'First chapter free · €6.90',
+    imageUrl: 'https://app.berlinwalk.com/products/berlin-night-in/assets/marketing/market-preview.jpg',
+    width: 640,
+    height: 481,
+    alt: 'Colourful scarves, signs and yellow train-car shops inside the then-unused upper Nollendorfplatz station in 1983.',
+    text: 'One Berlin railway line, four lives, in real archive photographs. You play it at home.',
+    href: 'https://www.walkofberlin.com/products/berlin-night-in',
+    cta: 'Play the free chapter',
+    wide: true,
+  },
 ];
 
 function bwHomeTwoDoorsFormatTime(seconds) {
@@ -274,13 +287,13 @@ class BWHomeTwoDoorsElement extends HTMLElement {
       </article>`).join('');
 
     const moreCards = BW_HOME_TWO_DOORS_MORE_PRODUCTS.map((product) => `
-      <a class="bw-home-two-doors__more-card" href="${product.href}" data-bw-cta-id="more_${product.title.toLowerCase().replace(/[^a-z0-9]+/g, '_')}" data-bw-cta-placement="more-products">
-        <img class="bw-home-two-doors__more-thumb" src="${asset(product.image)}" alt="${product.alt}" loading="lazy" width="600" height="360">
+      <a class="bw-home-two-doors__more-card${product.wide ? ' bw-home-two-doors__more-card--wide' : ''}" href="${product.href}" data-bw-cta-id="more_${product.title.toLowerCase().replace(/[^a-z0-9]+/g, '_')}" data-bw-cta-placement="more-products">
+        <img class="bw-home-two-doors__more-thumb" src="${product.imageUrl || asset(product.image)}" alt="${product.alt}" loading="lazy" width="${product.width || 600}" height="${product.height || 360}">
         <span class="bw-home-two-doors__eyebrow">${product.label}</span>
         <b>${product.title}</b>
         <span>${product.text}</span>
         <span class="bw-home-two-doors__more-price">${product.price}</span>
-        <span class="bw-home-two-doors__more-cta">${product.label === 'TOOLS' ? 'Explore free tools' : 'Explore this product'} →</span>
+        <span class="bw-home-two-doors__more-cta">${product.cta || (product.label === 'TOOLS' ? 'Explore free tools' : 'Explore this product')} →</span>
       </a>`).join('');
 
     const faqItems = BW_HOME_TWO_DOORS_FAQ.map((item) => `
@@ -582,6 +595,7 @@ class BWHomeTwoDoorsElement extends HTMLElement {
               <ul>
                 <li>Anhalter Bahnhof portico: <a href="https://commons.wikimedia.org/wiki/File:Berlin_Anhalter_Bahnhof_-_01.jpg" rel="noopener" target="_blank">Carlos Delgado, Wikimedia Commons</a>, <a href="https://creativecommons.org/licenses/by-sa/4.0/" rel="noopener license" target="_blank">CC BY-SA 4.0</a>, cropped.</li>
                 <li>St. Mary’s Church and the TV Tower: <a href="https://commons.wikimedia.org/wiki/File:Berlin_Marienkirche_Exterior_0326_02.jpg" rel="noopener" target="_blank">Dosseman, Wikimedia Commons</a>, <a href="https://creativecommons.org/licenses/by-sa/4.0/" rel="noopener license" target="_blank">CC BY-SA 4.0</a>, cropped.</li>
+                <li>Flea market at Nollendorfplatz, 1983: <a href="https://commons.wikimedia.org/wiki/File:Berlin_Flohmarkt_U-_Nollendorfplatz_1983.jpg" rel="noopener" target="_blank">Hrz29vv, Wikimedia Commons</a>, <a href="https://creativecommons.org/licenses/by-sa/3.0/" rel="noopener license" target="_blank">CC BY-SA 3.0</a>, resized, no crop.</li>
               </ul>
             </details>
           </div>
