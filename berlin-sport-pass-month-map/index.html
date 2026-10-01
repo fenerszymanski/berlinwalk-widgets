@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Berlin Sport Pass Month Map</title>
+<link rel="stylesheet" href="../css/brand.css">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #FFFFFF; color: #1d231b; padding: 14px 12px 12px; }
+  .sp-head h1 { font-size: 19px; line-height: 1.25; color: #1B5E20; }
+  .sp-head p { font-size: 13px; line-height: 1.5; color: #475044; margin-top: 5px; }
+  .sp-term { display: inline-flex; margin-top: 10px; border: 1.5px solid #1B5E20; border-radius: 999px; overflow: hidden; }
+  .sp-term button { font: inherit; font-size: 12px; font-weight: 700; border: 0; background: #fff; color: #1B5E20; padding: 7px 13px; cursor: pointer; }
+  .sp-term button[aria-current="true"] { background: #1B5E20; color: #fff; }
+
+  .sp-grid { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); gap: 12px; margin-top: 12px; align-items: start; }
+  .sp-map { border: 1px solid #dfe6d6; border-radius: 14px; background: #f7f9f2; overflow: hidden; }
+  .sp-map svg { display: block; width: 100%; height: auto; }
+  .sp-map .dist { fill: #eef2e6; stroke: #c7d1bb; stroke-width: 1; }
+  .sp-map .ring { fill: none; stroke: #8a9a7e; stroke-width: 2; stroke-dasharray: 6 5; }
+  .sp-map .ringlbl { font-size: 11px; fill: #6d7a63; font-weight: 700; }
+  .sp-map .dlbl { font-size: 10px; fill: #98a38d; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; }
+  .sp-map .pin { cursor: pointer; }
+  .sp-map .pin circle.halo { fill: #FFE600; opacity: .55; }
+  .sp-map .pin circle.dot { fill: #1B5E20; stroke: #fff; stroke-width: 2.5; }
+  .sp-map .pin text.n { fill: #fff; font-size: 12px; font-weight: 800; text-anchor: middle; dominant-baseline: central; pointer-events: none; }
+  .sp-map .pin text.lbl { font-size: 11.5px; font-weight: 700; fill: #10230f; paint-order: stroke; stroke: #f7f9f2; stroke-width: 4px; stroke-linejoin: round; pointer-events: none; }
+  .sp-map .pin:focus { outline: none; }
+  .sp-map .pin:focus circle.dot { stroke: #FFE600; stroke-width: 4; }
+  .sp-maphint { font-size: 11.5px; color: #5d6758; padding: 6px 10px 8px; line-height: 1.4; }
+
+  .sp-label { font-size: 10.5px; font-weight: 800; letter-spacing: .07em; text-transform: uppercase; color: #1B5E20; margin: 0 0 7px; }
+  .sp-venues { display: grid; gap: 7px; }
+  .sp-v { border: 1px solid #dfe6d6; border-radius: 12px; padding: 8px 10px; background: #fcfdf9; display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 2px 8px; align-items: center; }
+  .sp-v b { font-size: 12.5px; color: #10230f; }
+  .sp-v small { grid-column: 1 / 2; font-size: 11px; color: #5d6758; line-height: 1.35; }
+  .sp-v .cnt { grid-row: 1 / 3; grid-column: 2; display: flex; align-items: center; gap: 6px; }
+  .sp-v .cnt button { font: inherit; font-size: 16px; font-weight: 800; width: 30px; height: 30px; border-radius: 50%; border: 1.5px solid #1B5E20; background: #fff; color: #1B5E20; cursor: pointer; line-height: 1; }
+  .sp-v .cnt button:disabled { opacity: .3; cursor: default; }
+  .sp-v .cnt output { font-size: 18px; font-weight: 800; min-width: 20px; text-align: center; font-variant-numeric: tabular-nums; }
+  .sp-v.over { border-color: #b8860b; box-shadow: inset 4px 0 0 #FFE600; }
+  .sp-presets { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 9px; }
+  .sp-presets button { font: inherit; font-size: 12px; font-weight: 700; border-radius: 999px; border: 1.5px solid #c9d4bf; background: #fff; color: #243021; padding: 6px 11px; cursor: pointer; }
+  .sp-presets button:hover { border-color: #1B5E20; }
+
+  .sp-verdict { margin-top: 12px; border-radius: 12px; background: #FFE600; color: #123D18; padding: 11px 13px; font-size: 14px; line-height: 1.5; }
+  .sp-verdict strong { color: #10230f; }
+  .sp-bars { margin-top: 10px; display: grid; gap: 7px; }
+  .sp-bar { border: 1px solid #dfe6d6; border-radius: 12px; padding: 8px 11px; background: #fff; }
+  .sp-bar.is-best { border-color: #1B5E20; box-shadow: inset 4px 0 0 #1B5E20; }
+  .sp-bar .top { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; }
+  .sp-bar h3 { font-size: 13px; color: #1B5E20; }
+  .sp-bar .sum { font-size: 14px; font-weight: 800; color: #10230f; font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .sp-bar .track { margin-top: 6px; height: 9px; border-radius: 5px; background: #eef2e6; overflow: hidden; display: flex; }
+  .sp-bar .track i { display: block; height: 100%; }
+  .sp-bar .track i.fee { background: #1B5E20; }
+  .sp-bar .track i.extra { background: #e0a800; }
+  .sp-bar p { font-size: 11.5px; line-height: 1.45; color: #3b4337; margin-top: 5px; }
+  .sp-key { display: flex; flex-wrap: wrap; gap: 4px 14px; font-size: 11.5px; color: #475044; margin-top: 8px; }
+  .sp-key i { display: inline-block; width: 14px; height: 8px; border-radius: 3px; margin-right: 5px; vertical-align: 0; }
+  .sp-foot { font-size: 11.5px; color: #596254; line-height: 1.5; margin-top: 12px; }
+
+  @media (max-width: 620px) {
+    .sp-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+<div class="sp-head">
+  <h1>Berlin Sport Pass Month Map</h1>
+  <p>Build one normal month of training at five real Berlin venues. Tap a pin or press + for each visit, and the board prices that month with each Urban Sports Club plan and without one, using every venue&rsquo;s own visit limit.</p>
+  <div class="sp-term" role="group" aria-label="Contract length">
+    <button type="button" data-term="month" aria-current="true">Cancel any month</button>
+    <button type="button" data-term="year" aria-current="false">Commit for 12 months</button>
+  </div>
+</div>
+
+<div class="sp-grid">
+  <div class="sp-map">
+    <svg id="sp-svg" viewBox="0 0 600 380" role="img" aria-label="Map of the five venues inside and around the Berlin Ringbahn"></svg>
+    <p class="sp-maphint">Dashed line: the S-Bahn Ring. A pin grows with every visit you add; a yellow halo means you passed that venue&rsquo;s cheapest-plan limit.</p>
+  </div>
+  <div>
+    <p class="sp-label">Your month, visit by visit</p>
+    <div class="sp-venues" id="sp-venues"></div>
+    <div class="sp-presets">
+      <button type="button" data-preset="climber">Twice a week bouldering</button>
+      <button type="button" data-preset="mix">Mixed week</button>
+      <button type="button" data-preset="gym">Gym four times a week</button>
+      <button type="button" data-preset="swim">Swim three times a week</button>
+      <button type="button" data-preset="clear">Clear</button>
+    </div>
+  </div>
+</div>
+
+<div class="sp-verdict" id="sp-verdict" aria-live="polite"></div>
+<div class="sp-bars" id="sp-bars"></div>
+<div class="sp-key"><span><i style="background:#1B5E20"></i>Membership fee</span><span><i style="background:#e0a800"></i>Visits the plan does not cover, paid at the venue</span></div>
+
+<p class="sp-foot" id="sp-foot"></p>
+
+<script src="../js/brand.js"></script>
+<script>
+var DATA = null;
+var visits = [];
+var term = 'month';
+var VB = { w: 600, h: 380 };
+
+var PRESETS = {
+  climber: ['bk', 'bk', 'bk', 'bk', 'ua', 'ua', 'ua', 'ua'],
+  mix: ['evo', 'evo', 'evo', 'evo', 'sse', 'sse', 'sse', 'sse', 'bk', 'bk', 'hx', 'hx'],
+  gym: ['evo', 'evo', 'evo', 'evo', 'evo', 'evo', 'evo', 'evo', 'evo', 'evo', 'evo', 'evo', 'evo', 'evo', 'evo', 'evo', 'bk', 'bk'],
+  swim: ['sse', 'sse', 'sse', 'sse', 'sse', 'sse', 'sse', 'sse', 'sse', 'sse', 'sse', 'sse', 'sse'],
+  clear: []
+};
+
+function euro(v) { return '€' + (Math.round(v * 100) / 100).toFixed(v % 1 ? 2 : 0).replace('.', ','); }
+function count(id) { return visits.filter(function (x) { return x === id; }).length; }
+function venue(id) { return DATA.venues.filter(function (v) { return v.id === id; })[0]; }
+function short(v) { return v.short || v.name; }
+function flatPrice(v) { return term === 'year' && v.flatYear ? v.flatYear : v.flat; }
+function capText(c) { return c === 0 ? 'not in plan' : (c >= 31 ? 'daily' : c + '/month'); }
+
+// What paying the venue directly costs for k visits: per-visit tickets or its own membership, whichever is lower.
+function ownCost(v, k) {
+  if (k <= 0) return 0;
+  if (v.visit == null) return flatPrice(v);
+  return Math.min(k * v.visit, flatPrice(v));
+}
+
+function priceNone() {
+  var lines = [];
+  var total = DATA.venues.reduce(function (sum, v) {
+    var k = count(v.id), c = ownCost(v, k);
+    if (k) lines.push(short(v) + ' ' + euro(c));
+    return sum + c;
+  }, 0);
+  return { id: 'none', name: 'No sport pass', fee: 0, extra: total, total: total, note: lines.length ? lines.join(' · ') : 'Nothing booked yet.' };
+}
+
+function pricePlan(p) {
+  var fee = term === 'year' ? p.year : p.month;
+  var left = p.total == null ? Infinity : p.total;
+  // Spend a limited check-in budget on the dearest visits first.
+  var order = DATA.venues.slice().sort(function (a, b) { return (b.visit || b.flat / 4) - (a.visit || a.flat / 4); });
+  var extra = 0, bites = [];
+  order.forEach(function (v) {
+    var k = count(v.id); if (!k) return;
+    var covered = Math.min(k, v.cap[p.id], left);
+    left -= covered;
+    var over = k - covered;
+    if (over > 0) {
+      var c = ownCost(v, over);
+      extra += c;
+      bites.push(short(v) + ': ' + over + ' over (' + (v.cap[p.id] === 0 ? 'not in this plan' : 'limit ' + capText(v.cap[p.id])) + ') ' + euro(c));
+    }
+  });
+  var note = bites.length ? bites.join(' · ') : 'Every visit fits inside the plan.';
+  if (p.total != null) note = p.total + ' check-ins a month in total. ' + note;
+  return { id: p.id, name: 'Urban Sports Club ' + p.name, fee: fee, extra: extra, total: fee + extra, note: note };
+}
+
+function project(lon, lat) {
+  var b = DATA.view;
+  var k = Math.cos(52.515 * Math.PI / 180);
+  var sx = VB.w / ((b.e - b.w) * k), sy = VB.h / (b.n - b.s);
+  var s = Math.min(sx, sy);
+  var ox = (VB.w - (b.e - b.w) * k * s) / 2, oy = (VB.h - (b.n - b.s) * s) / 2;
+  return [ox + (lon - b.w) * k * s, oy + (b.n - lat) * s];
+}
+function pathOf(ring) {
+  return ring.map(function (p, i) { var q = project(p[0], p[1]); return (i ? 'L' : 'M') + q[0].toFixed(1) + ' ' + q[1].toFixed(1); }).join('') + 'Z';
+}
+
+var NS = 'http://www.w3.org/2000/svg';
+function el(tag, attrs, parent) {
+  var e = document.createElementNS(NS, tag);
+  for (var a in attrs) e.setAttribute(a, attrs[a]);
+  if (parent) parent.appendChild(e);
+  return e;
+}
+
+var LABEL_SIDE = { bk: 'below', ua: 'left', sse: 'right', hx: 'below', evo: 'above' };
+
+function drawMap() {
+  var svg = document.getElementById('sp-svg');
+  var base = el('g', {}, svg);
+  DATA.outlines.forEach(function (o) {
+    o.rings.forEach(function (r) { el('path', { d: pathOf(r), class: 'dist' }, base); });
+  });
+  var names = { 'Mitte': [13.385, 52.517], 'Friedrichshain': [13.462, 52.514], 'Kreuzberg': [13.385, 52.4915], 'Prenzlauer Berg': [13.428, 52.538], 'Lichtenberg': [13.478, 52.531] };
+  Object.keys(names).forEach(function (n) {
+    var q = project(names[n][0], names[n][1]);
+    var t = el('text', { x: q[0], y: q[1], class: 'dlbl', 'text-anchor': 'middle' }, base);
+    t.textContent = n;
+  });
+  el('path', { d: pathOf(DATA.ring), class: 'ring' }, base);
+  var rl = project(13.4705, 52.4995);
+  var rt = el('text', { x: rl[0], y: rl[1], class: 'ringlbl' }, base); rt.textContent = 'Ring';
+  var pins = el('g', { id: 'sp-pins' }, svg);
+  DATA.venues.forEach(function (v) {
+    var q = project(v.lon, v.lat);
+    var g = el('g', { class: 'pin', tabindex: '0', role: 'button', 'data-id': v.id, transform: 'translate(' + q[0].toFixed(1) + ',' + q[1].toFixed(1) + ')' }, pins);
+    g.setAttribute('aria-label', 'Add a visit to ' + v.name);
+    el('circle', { class: 'halo', r: 0 }, g);
+    el('circle', { class: 'dot', r: 11 }, g);
+    var n = el('text', { class: 'n' }, g); n.textContent = '0';
+    var side = LABEL_SIDE[v.id];
+    var lbl = el('text', { class: 'lbl', 'text-anchor': side === 'right' ? 'start' : (side === 'left' ? 'end' : 'middle'), x: side === 'right' ? 20 : (side === 'left' ? -20 : 0), y: side === 'below' ? 32 : (side === 'above' ? -22 : 4) }, g);
+    lbl.textContent = short(v);
+    g.addEventListener('click', function () { add(v.id); });
+    g.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); add(v.id); } });
+  });
+}
+
+function buildList() {
+  var box = document.getElementById('sp-venues');
+  DATA.venues.forEach(function (v) {
+    var row = document.createElement('div');
+    row.className = 'sp-v'; row.id = 'row-' + v.id;
+    var own = v.visit == null ? 'no single visits, ' + euro(v.flat) + ' a month' : euro(v.visit) + ' a visit or ' + euro(v.flat) + ' a month';
+    row.innerHTML = '<b>' + v.name + '</b>' +
+      '<div class="cnt"><button type="button" data-d="-1" aria-label="Remove a visit">−</button><output>0</output><button type="button" data-d="1" aria-label="Add a visit">+</button></div>' +
+      '<small>' + v.kind + ', ' + v.street + '. On its own: ' + own + '. Sport pass limit: Essential ' + capText(v.cap.essential) + ', Classic ' + capText(v.cap.classic) + ', Premium ' + capText(v.cap.premium) + ', Max ' + capText(v.cap.max) + '.</small>';
+    row.querySelectorAll('button').forEach(function (b) {
+      b.addEventListener('click', function () { if (b.dataset.d === '1') add(v.id); else drop(v.id); });
+    });
+    box.appendChild(row);
+  });
+}
+
+function add(id) { if (visits.length >= 30) return; visits.push(id); render(); }
+function drop(id) { var i = visits.lastIndexOf(id); if (i > -1) visits.splice(i, 1); render(); }
+
+function render() {
+  if (!DATA) return;
+  var rows = [priceNone()].concat(DATA.plans.map(pricePlan));
+  var max = Math.max.apply(null, rows.map(function (r) { return r.total; }).concat([1]));
+  var best = rows.slice().sort(function (a, b) { return a.total - b.total; })[0];
+  var classicCaps = {};
+  DATA.venues.forEach(function (v) {
+    var k = count(v.id);
+    var row = document.getElementById('row-' + v.id);
+    row.querySelector('output').textContent = k;
+    row.querySelector('button[data-d="-1"]').disabled = k === 0;
+    row.querySelector('button[data-d="1"]').disabled = visits.length >= 30;
+    var cheapest = Math.max(v.cap.essential, v.cap.classic);
+    classicCaps[v.id] = k > cheapest;
+    row.classList.toggle('over', k > cheapest);
+    var g = document.querySelector('.pin[data-id="' + v.id + '"]');
+    var r = 11 + Math.min(k, 16) * 1.1;
+    g.querySelector('circle.dot').setAttribute('r', r.toFixed(1));
+    g.querySelector('circle.halo').setAttribute('r', k > cheapest ? (r + 7).toFixed(1) : 0);
+    g.querySelector('text.n').textContent = k;
+    g.setAttribute('aria-label', 'Add a visit to ' + v.name + ', ' + k + ' so far');
+  });
+
+  var bars = document.getElementById('sp-bars');
+  bars.innerHTML = '';
+  rows.forEach(function (r) {
+    var d = document.createElement('div');
+    d.className = 'sp-bar' + (r === best && visits.length ? ' is-best' : '');
+    d.innerHTML = '<div class="top"><h3>' + r.name + '</h3><span class="sum">' + euro(r.total) + '</span></div>' +
+      '<div class="track"><i class="fee" style="width:' + (100 * r.fee / max).toFixed(1) + '%"></i><i class="extra" style="width:' + (100 * r.extra / max).toFixed(1) + '%"></i></div>' +
+      '<p>' + (r.id === 'none' ? r.note : euro(r.fee) + ' fee. ' + r.note) + '</p>';
+    bars.appendChild(d);
+  });
+
+  var v = document.getElementById('sp-verdict');
+  if (!visits.length) {
+    v.innerHTML = 'Add the visits of a normal month, or start from one of the sample weeks.';
+  } else {
+    var none = rows[0];
+    var gap = none.total - best.total;
+    if (best.id === 'none') {
+      v.innerHTML = '<strong>Pay the venues directly.</strong> ' + visits.length + ' visits cost ' + euro(none.total) + ' on their own terms, which beats every sport pass this month.';
+    } else {
+      v.innerHTML = '<strong>' + best.name + ' wins at ' + euro(best.total) + '.</strong> That is ' + euro(gap) + ' less than paying the venues for the same ' + visits.length + ' visits' + (best.extra ? ', and it still includes ' + euro(best.extra) + ' for visits past a venue limit.' : '.');
+    }
+  }
+}
+
+document.querySelectorAll('.sp-term button').forEach(function (b) {
+  b.addEventListener('click', function () {
+    term = b.dataset.term;
+    document.querySelectorAll('.sp-term button').forEach(function (o) { o.setAttribute('aria-current', String(o === b)); });
+    render();
+  });
+});
+document.querySelectorAll('[data-preset]').forEach(function (b) {
+  b.addEventListener('click', function () { visits = PRESETS[b.dataset.preset].slice(); render(); });
+});
+
+fetch('data.json').then(function (r) { return r.json(); }).then(function (d) {
+  DATA = d;
+  document.getElementById('sp-foot').textContent = 'Prices and limits checked on 1 October 2026. Urban Sports Club: plan prices from its Berlin price page (monthly term or 12-month term, paid monthly) and each venue’s visit limit from its partner page; a venue can change its limit at any time, so check its profile before you sign up. Venue prices are each venue’s own adult rate: Boulderklub day pass and monthly membership, urban apes day pass and L membership, Berliner Bäder 90-minute ticket and Flex subscription, HYROX Kreuzberg single session and BASE membership, EVO Flex and Smart memberships. Joining fees are not included: EVO charges €19.90 once. The board stops at 30 visits, one a day.';
+  drawMap(); buildList();
+  visits = PRESETS.mix.slice();
+  render();
+});
+</script>
+</body>
+</html>
