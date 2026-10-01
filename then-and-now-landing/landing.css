@@ -27,7 +27,7 @@
 .hero-review-note .text-link{font-size:12px;margin-top:12px}
 .benefit-media{width:100%;margin-bottom:24px;overflow:hidden;border:1px solid var(--line);border-radius:7px;background:var(--pale)}
 .benefit-media img{width:100%;height:auto;aspect-ratio:4/3;object-fit:cover}
-.benefit-media--ask img{object-position:50% 45%}
+.benefit-media--ask img{object-position:70% 50%}
 .benefit-media--connect img{object-position:72% 50%}
 .benefit-grid:has(.benefit-media){gap:30px}
 .benefit-grid:has(.benefit-media) article{padding-right:0}
