@@ -1,9 +1,9 @@
 {
-  "updatedAt": "2026-10-01T02:03:46.711Z",
+  "updatedAt": "2026-10-01T08:51:52.534Z",
   "source": "Wix Blog API",
   "popularSource": "Wix Blog metrics.views lifetime sort",
-  "totalPosts": 427,
-  "toolsTotal": 347,
+  "totalPosts": 428,
+  "toolsTotal": 348,
   "bookingUrl": "https://www.walkofberlin.com/book-berlin-walking-tour/berlin-then-and-now",
   "navTopics": [
     {
@@ -1802,6 +1802,23 @@
   ],
   "latest": [
     {
+      "title": "Urban Sports Club vs Gym in Berlin: When the Flat Rate Actually Pays",
+      "slug": "urban-sports-club-vs-gym-berlin",
+      "path": "/post/urban-sports-club-vs-gym-berlin",
+      "url": "https://www.berlinwalk.com/post/urban-sports-club-vs-gym-berlin",
+      "excerpt": "Urban Sports Club costs €45 to €165 a month in Berlin, and every venue sets its own visit limit per plan. Here is when the flat rate beats a normal gym, a bouldering membership or the Berliner Bäder swim subscription, with a map that prices your own month.",
+      "category": "Living in Berlin",
+      "categorySlug": "living-in-berlin",
+      "topic": "living-in-berlin",
+      "topicLabel": "Living in Berlin",
+      "readTime": "6 min read",
+      "publishedDate": "2026-10-01T08:48:43.292Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_b5e8111fb75249798e638b7857a25338~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-stadtbad-neukoelln-pool-hall.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_b5e8111fb75249798e638b7857a25338~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-stadtbad-neukoelln-pool-hall.jpg",
+      "alt": "The main pool hall of Stadtbad Neukölln with its stone columns, a vaulted ceiling and turquoise water behind two starting blocks",
+      "relatedToolSlug": "berlin-sport-pass-month-map"
+    },
+    {
       "title": "Free vs Paid Walking Tour in Berlin: What a Small Group Really Changes",
       "slug": "free-vs-paid-walking-tour-berlin",
       "path": "/post/free-vs-paid-walking-tour-berlin",
@@ -1987,26 +2004,26 @@
       "thumb": "https://static.wixstatic.com/media/5a08a3_2b61dfdcbc1444a3b97b4a34ce1e94f6~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/courtyard-knesebeck-01.jpg",
       "alt": "A green courtyard in Berlin-Charlottenburg seen through the entrance passage of an old apartment block, with trees and a path leading to the back building",
       "relatedToolSlug": "berlin-broadband-speed-claim"
-    },
+    }
+  ],
+  "allPosts": [
     {
-      "title": "Church Tax in Berlin: The Month You Leave Decides Your Last Payment",
-      "slug": "church-tax-berlin",
-      "path": "/post/church-tax-berlin",
-      "url": "https://www.berlinwalk.com/post/church-tax-berlin",
-      "excerpt": "There is a line on your payslip marked Kirchensteuer that most English speakers in Berlin never read. Here is what it costs in euros, which of the ten courts takes your declaration, and why signing on 29 September and signing on 2 October are a full month of salary apart.",
+      "title": "Urban Sports Club vs Gym in Berlin: When the Flat Rate Actually Pays",
+      "slug": "urban-sports-club-vs-gym-berlin",
+      "path": "/post/urban-sports-club-vs-gym-berlin",
+      "url": "https://www.berlinwalk.com/post/urban-sports-club-vs-gym-berlin",
+      "excerpt": "Urban Sports Club costs €45 to €165 a month in Berlin, and every venue sets its own visit limit per plan. Here is when the flat rate beats a normal gym, a bouldering membership or the Berliner Bäder swim subscription, with a map that prices your own month.",
       "category": "Living in Berlin",
       "categorySlug": "living-in-berlin",
       "topic": "living-in-berlin",
       "topicLabel": "Living in Berlin",
-      "readTime": "7 min read",
-      "publishedDate": "2026-09-22T19:59:33.820Z",
-      "image": "https://static.wixstatic.com/media/5a08a3_fa3b702c61e34809b49a9c15b6d61098~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/ag-mitte-treppenhaus.jpg",
-      "thumb": "https://static.wixstatic.com/media/5a08a3_fa3b702c61e34809b49a9c15b6d61098~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/ag-mitte-treppenhaus.jpg",
-      "alt": "The main staircase hall inside the Littenstrasse court building in Berlin-Mitte, with two curving stone stairways under a vaulted ceiling",
-      "relatedToolSlug": "berlin-church-tax-map"
-    }
-  ],
-  "allPosts": [
+      "readTime": "6 min read",
+      "publishedDate": "2026-10-01T08:48:43.292Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_b5e8111fb75249798e638b7857a25338~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-stadtbad-neukoelln-pool-hall.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_b5e8111fb75249798e638b7857a25338~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-stadtbad-neukoelln-pool-hall.jpg",
+      "alt": "The main pool hall of Stadtbad Neukölln with its stone columns, a vaulted ceiling and turquoise water behind two starting blocks",
+      "relatedToolSlug": "berlin-sport-pass-month-map"
+    },
     {
       "title": "Free vs Paid Walking Tour in Berlin: What a Small Group Really Changes",
       "slug": "free-vs-paid-walking-tour-berlin",
@@ -7843,7 +7860,7 @@
       "slug": "berlin-lakes-guide-2026",
       "path": "/post/berlin-lakes-guide-2026",
       "url": "https://www.berlinwalk.com/post/berlin-lakes-guide-2026",
-      "excerpt": "Berlin sits on a glacial outwash plain that left the city ringed with lakes. Here's where Berliners actually swim — and how to combine a lake afternoon with our walking tour.",
+      "excerpt": "Berlin sits on a glacial outwash plain that left the city ringed with lakes. Here's where Berliners actually swim — and how to combine a lake afternoon with my walking tour.",
       "category": "Tourist Tips",
       "categorySlug": "tourist-tips",
       "topic": "route-stories",
@@ -8256,7 +8273,7 @@
       "categorySlug": "tourist-tips",
       "topic": "first-day",
       "topicLabel": "First Day in Berlin",
-      "readTime": "8 min read",
+      "readTime": "9 min read",
       "publishedDate": "2026-03-17T09:13:57.861Z",
       "image": "https://static.wixstatic.com/media/nsplsh_c96436fa0f8540deaaac9d8e62da98c5~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/G%C3%B6rlitzer%20Park%20in%20summer.jpg",
       "thumb": "https://static.wixstatic.com/media/nsplsh_c96436fa0f8540deaaac9d8e62da98c5~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/G%C3%B6rlitzer%20Park%20in%20summer.jpg",
