@@ -563,6 +563,16 @@ class BWTheGuideElement extends HTMLElement {
           margin: 0;
         }
 
+        .bw-guide .bw-guide-name-note .bw-guide-proof-item strong {
+          font-size: 16px;
+          margin-bottom: 6px;
+        }
+
+        .bw-guide .bw-guide-name-note .bw-guide-proof-item span {
+          font-size: 15px;
+          line-height: 1.6;
+        }
+
         .bw-guide .bw-guide-final {
           background:
             linear-gradient(90deg, rgba(255, 230, 0, 0.16) 0 1px, transparent 1px 84px),
@@ -800,6 +810,18 @@ class BWTheGuideElement extends HTMLElement {
             </header>
             <div class="bw-guide-audio-slot">
               <bw-audio-tour></bw-audio-tour>
+            </div>
+          </div>
+        </section>
+
+        <section class="bw-guide-section bw-guide-section-white bw-guide-name-note" aria-labelledby="bw-guide-name-title">
+          <div class="bw-guide-inner">
+            <div class="bw-guide-proof">
+              <h2 id="bw-guide-name-title">A note on the name</h2>
+              <div class="bw-guide-proof-item">
+                <strong>Is Walk of Berlin the same as BerlinWalk?</strong>
+                <span>Yes. BerlinWalk is now Walk of Berlin. It is still me, Yusuf, guiding the walk, recording the audio walks and writing the weekly letter. Old berlinwalk.com links still bring you here.</span>
+              </div>
             </div>
           </div>
         </section>
