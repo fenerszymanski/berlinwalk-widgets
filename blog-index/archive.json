@@ -1,9 +1,26 @@
 {
-  "updatedAt": "2026-10-01T08:51:52.534Z",
+  "updatedAt": "2026-10-02T08:47:36.099Z",
   "source": "Wix Blog API",
-  "totalPosts": 428,
+  "totalPosts": 429,
   "bookingUrl": "https://www.walkofberlin.com/book-berlin-walking-tour/berlin-then-and-now",
   "allPosts": [
+    {
+      "title": "Herbstferien Berlin: How Working Parents Cover the Two Weeks",
+      "slug": "herbstferien-berlin",
+      "path": "/post/herbstferien-berlin",
+      "url": "https://www.berlinwalk.com/post/herbstferien-berlin",
+      "excerpt": "Berlin’s autumn school holidays run from 19 to 31 October, which leaves working parents ten days to cover. The Hort covers 7:30 to 16:00 for free in grades 1 to 3, but rarely the whole working day. Here is where the hours go missing, what is free in the two weeks, and a planner for your own fortnight.",
+      "category": "Living in Berlin",
+      "categorySlug": "living-in-berlin",
+      "topic": "living-in-berlin",
+      "topicLabel": "Living in Berlin",
+      "readTime": "6 min read",
+      "publishedDate": "2026-10-02T08:45:11.874Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_2ad875f8cb3d47539fcf30e87b18e83d~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-treptower-park-autumn-alley.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_2ad875f8cb3d47539fcf30e87b18e83d~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-treptower-park-autumn-alley.jpg",
+      "alt": "A long autumn alley of tall poplars in Treptower Park, Berlin, with a grass path running straight between the two rows of trees",
+      "relatedToolSlug": "berlin-herbstferien-cover-planner"
+    },
     {
       "title": "Urban Sports Club vs Gym in Berlin: When the Flat Rate Actually Pays",
       "slug": "urban-sports-club-vs-gym-berlin",

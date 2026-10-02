@@ -1,5 +1,5 @@
 {
- "updatedAt": "2026-10-01T08:52:18.378Z",
+ "updatedAt": "2026-10-02T08:47:36.919Z",
  "source": "Wix Blog API + blog-category/categories.json",
  "slug": "living-in-berlin",
  "categoryId": "00af1018-ef7b-465a-93b6-916187609da4",
@@ -8,28 +8,28 @@
  "shelfMode": "curated",
  "shelfLegend": "By the part of life it hits",
  "shelfLegendSub": "Four shelves, because that is how the questions actually arrive",
- "totalPosts": 61,
- "toolCount": 61,
+ "totalPosts": 62,
+ "toolCount": 62,
  "lead": {
-  "title": "Urban Sports Club vs Gym in Berlin: When the Flat Rate Actually Pays",
-  "slug": "urban-sports-club-vs-gym-berlin",
-  "path": "/post/urban-sports-club-vs-gym-berlin",
-  "excerpt": "Urban Sports Club costs €45 to €165 a month in Berlin, and every venue sets its own visit limit per plan. Here is when the flat rate beats a normal gym, a bouldering membership or the Berliner Bäder swim subscription, with a map that prices your own month.",
+  "title": "Herbstferien Berlin: How Working Parents Cover the Two Weeks",
+  "slug": "herbstferien-berlin",
+  "path": "/post/herbstferien-berlin",
+  "excerpt": "Berlin’s autumn school holidays run from 19 to 31 October, which leaves working parents ten days to cover. The Hort covers 7:30 to 16:00 for free in grades 1 to 3, but rarely the whole working day. Here is where the hours go missing, what is free in the two weeks, and a planner for your own fortnight.",
   "minutes": 6,
   "readTime": "6 min read",
-  "publishedDate": "2026-10-01T08:48:43.292Z",
-  "alt": "The main pool hall of Stadtbad Neukölln with its stone columns, a vaulted ceiling and turquoise water behind two starting blocks",
-  "lead": "https://static.wixstatic.com/media/5a08a3_b5e8111fb75249798e638b7857a25338~mv2.jpg/v1/fill/w_1400,h_620,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
-  "thumb": "https://static.wixstatic.com/media/5a08a3_b5e8111fb75249798e638b7857a25338~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
-  "square": "https://static.wixstatic.com/media/5a08a3_b5e8111fb75249798e638b7857a25338~mv2.jpg/v1/fill/w_184,h_184,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
-  "shelf": "draussen",
+  "publishedDate": "2026-10-02T08:45:11.874Z",
+  "alt": "A long autumn alley of tall poplars in Treptower Park, Berlin, with a grass path running straight between the two rows of trees",
+  "lead": "https://static.wixstatic.com/media/5a08a3_2ad875f8cb3d47539fcf30e87b18e83d~mv2.jpg/v1/fill/w_1400,h_620,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+  "thumb": "https://static.wixstatic.com/media/5a08a3_2ad875f8cb3d47539fcf30e87b18e83d~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+  "square": "https://static.wixstatic.com/media/5a08a3_2ad875f8cb3d47539fcf30e87b18e83d~mv2.jpg/v1/fill/w_184,h_184,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+  "shelf": "geld",
   "topic": "living-in-berlin",
-  "figure": "4 visits",
-  "line": "a month is all EVO Rosenthaler Platz allows on Urban Sports Club Classic, so a four-times-a-week gym habit is cheaper at FitX for 29 &euro;.",
+  "figure": "16:00",
+  "line": "is when a free Hort day ends, so an 8:30 to 17:00 job with half an hour each way leaves ninety minutes open every holiday day.",
   "term": "",
   "gloss": "",
   "termCta": "",
-  "tool": "berlin-sport-pass-month-map"
+  "tool": "berlin-herbstferien-cover-planner"
  },
  "glossary": [
   {
@@ -365,6 +365,17 @@
    "title": "Geld & Papiere",
    "lead": "Money, forms and the rules behind them",
    "posts": [
+    {
+     "title": "Herbstferien Berlin: How Working Parents Cover the Two Weeks",
+     "slug": "herbstferien-berlin",
+     "path": "/post/herbstferien-berlin",
+     "minutes": 6,
+     "alt": "A long autumn alley of tall poplars in Treptower Park, Berlin, with a grass path running straight between the two rows of trees",
+     "thumb": "https://static.wixstatic.com/media/5a08a3_2ad875f8cb3d47539fcf30e87b18e83d~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+     "line": "is when a free Hort day ends, so an 8:30 to 17:00 job with half an hour each way leaves ninety minutes open every holiday day.",
+     "figure": "16:00",
+     "tool": "berlin-herbstferien-cover-planner"
+    },
     {
      "title": "Blood Donation in Berlin: Which Centres Pay, How Often You Can Give, and the German Catch",
      "slug": "blood-donation-berlin",
