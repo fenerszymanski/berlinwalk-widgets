@@ -820,7 +820,7 @@ class BWTheGuideElement extends HTMLElement {
               <h2 id="bw-guide-name-title">A note on the name</h2>
               <div class="bw-guide-proof-item">
                 <strong>Is Walk of Berlin the same as BerlinWalk?</strong>
-                <span>Yes. BerlinWalk is now Walk of Berlin. It is still me, Yusuf, guiding the walk, recording the audio walks and writing the weekly letter. Old berlinwalk.com links still bring you here.</span>
+                <span>Yes. BerlinWalk is now Walk of Berlin. It is still me, Yusuf, guiding the walk, writing the audio walks and writing the weekly letter. Old berlinwalk.com links still bring you here.</span>
               </div>
             </div>
           </div>
