@@ -2253,7 +2253,7 @@ class BWBlogIndexElement extends HTMLElement {
 
   _renderHeroC() {
     const total = this._data.totalPosts;
-    const eyebrow = `THE BERLINWALK BLOG${total ? ` · ${total} GUIDES` : ''} · NEW MOST MORNINGS`;
+    const eyebrow = `WALK OF BERLIN BLOG${total ? ` · ${total} GUIDES` : ''} · NEW MOST MORNINGS`;
     const topics = this._data.navTopics || [];
     return `
       <header class="bw-ci-hero">
