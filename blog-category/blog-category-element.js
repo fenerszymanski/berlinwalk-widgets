@@ -36,8 +36,12 @@
   var LETTER_API = 'https://app.berlinwalk.com/api/download-lead';
   var LETTER_ASSET_ID = 'berlin-weekly-letter';
   var LETTER_ASSET_VERSION = '2026-09-v1';
-  var LETTER_CONSENT_VERSION = 'berlin-weekly-letter-v1-2026-09-14';
-  var LETTER_CONSENT_TEXT = 'Send me the BerlinWalk Monday letter: one email a week about what is actually changing in Berlin, plus occasional BerlinWalk emails. I can unsubscribe from any email with one click.';
+  // Renamed to Walk of Berlin Weekly on 2 October 2026 (decision A15). The
+  // label below plus ' Read the Privacy Policy.' is, word for word, the v2
+  // consentText in the content-app registry, so the stored snapshot equals
+  // what the reader saw. The server still accepts v1 from cached copies.
+  var LETTER_CONSENT_VERSION = 'berlin-weekly-letter-v2-2026-10-02';
+  var LETTER_CONSENT_TEXT = 'Send me Walk of Berlin Weekly, my Monday letter: one email a week about what is actually changing in Berlin, plus occasional Walk of Berlin emails. I can unsubscribe from any email with one click.';
 
   function categorySlug() {
     var m = window.location.pathname.toLowerCase().match(/\/blog\/categories\/([^/?#]+)/);
@@ -340,7 +344,7 @@
       '<label class="f"><span>Your email</span>' +
       '<input type="email" name="email" autocomplete="email" required placeholder="you@example.com"></label>' +
       '<label class="cs"><input type="checkbox" name="consent" required>' +
-      '<span>' + LETTER_CONSENT_TEXT + ' <a href="/privacy-policy" target="_blank" rel="noopener">Privacy Policy</a>.</span></label>' +
+      '<span>' + LETTER_CONSENT_TEXT + ' Read the <a href="/privacy-policy" target="_blank" rel="noopener">Privacy Policy</a>.</span></label>' +
       '<label class="hp" aria-hidden="true" tabindex="-1">Leave this empty' +
       '<input type="text" name="website" tabindex="-1" autocomplete="off"></label>' +
       '<button type="submit" class="m">Send it to me</button>' +
