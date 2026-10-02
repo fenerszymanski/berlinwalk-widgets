@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>BerlinWalk Quick Summary</title>
+  <title>Walk of Berlin Quick Summary</title>
   <link rel="icon" href="data:,">
   <link rel="stylesheet" href="../css/brand.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -346,7 +346,7 @@
         <div class="bw-icon" data-field="icon" aria-hidden="true">📝</div>
         <div>
           <h2 class="bw-title" data-field="title">Quick Summary</h2>
-          <div class="bw-kicker" data-field="kicker">WALKOFBERLIN.COM • TOURIST TIPS</div>
+          <div class="bw-kicker" data-field="kicker">WALK OF BERLIN • TOURIST TIPS</div>
         </div>
       </div>
 
@@ -483,11 +483,14 @@
         return raw && raw.trim() ? raw.trim() : fallback;
       }
 
-      // The kicker is per-post data ('BERLINWALK.COM • <TOPIC>'). The address
-      // the reader sees is walkofberlin.com, so the renderer swaps the host
-      // here and data.json, the shards and ?kicker= need no rewrite.
+      // The kicker is per-post data ('WALK OF BERLIN • <TOPIC>'). Older data
+      // and ?kicker= links in published posts may still open with a host
+      // (the old or the new host followed by ' • '), so the renderer shows
+      // the brand name there instead and the reader always sees Walk of Berlin.
       function publicAddressLabel(text) {
-        return String(text).replace(/(?:www\.)?berlinwalk\.com/gi, 'WALKOFBERLIN.COM');
+        return String(text)
+          .replace(/^\s*(?:www\.)?(?:berlinwalk|walkofberlin)\.com(?=\s*(?:•|·|-\s))/i, 'WALK OF BERLIN')
+          .replace(/(?:www\.)?berlinwalk\.com/gi, 'walkofberlin.com');
       }
 
       function escapeHtml(text) {
@@ -522,7 +525,7 @@
 
         icon.textContent = config.icon || value('icon', '📝');
         title.textContent = config.title || value('title', 'Quick Summary');
-        kicker.textContent = publicAddressLabel(config.kicker || value('kicker', 'WALKOFBERLIN.COM • TOURIST TIPS'));
+        kicker.textContent = publicAddressLabel(config.kicker || value('kicker', 'WALK OF BERLIN • TOURIST TIPS'));
         audioLabel.textContent = config.audioLabel || value('audioLabel', 'Listen to the Quick Summary');
 
         var audioUrl = safeAudioUrl(config.audio || value('audio', ''));

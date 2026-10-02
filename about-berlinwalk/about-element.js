@@ -246,7 +246,14 @@ class BWAboutCompanyElement extends HTMLElement {
 
           <section class="bw-about-faq-section">
             <h2>Frequently Asked Questions</h2>
-            
+
+            <div class="bw-faq-item">
+              <button class="bw-faq-btn" aria-expanded="false">Is Walk of Berlin the same as BerlinWalk?</button>
+              <div class="bw-faq-content" hidden>
+                <p>Yes. BerlinWalk is now Walk of Berlin. It is still me, Yusuf, guiding the walk, recording the audio walks and writing the weekly letter. Old berlinwalk.com links still bring you here.</p>
+              </div>
+            </div>
+
             <div class="bw-faq-item">
               <button class="bw-faq-btn" aria-expanded="false">Is BerlinWalk the same as Original Berlin Walks?</button>
               <div class="bw-faq-content" hidden>
