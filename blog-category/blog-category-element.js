@@ -23,7 +23,8 @@
   })();
   var DATA_VERSION = '20260914-aushang-2';
   var MONO_URL = new URL('../brand/fonts/editorial-v2/IBMPlexMono-SemiBold.woff2', BASE).href;
-  var WORDMARK = new URL('../assets/berlinwalk-wordmark-green.png', BASE).href;
+  // Walk of Berlin wordmark (A15a). Green on the light --pa paper; 140 px is the brand minimum width.
+  var WORDMARK = new URL('../assets/walkofberlin-wordmark-green.png', BASE).href;
   var PORTRAIT = new URL('./assets/yusuf-portrait.jpg', BASE).href;
   var STYLE_ID = 'bw-lib-styles';
   // A shelf longer than this opens collapsed. The rows are already in the DOM,
@@ -168,7 +169,7 @@
       '.bw-lib-note .r a{display:block;border:1px solid var(--ink);padding:11px 14px;font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;text-align:center;color:var(--ink);background:#fff;}',
       '.bw-lib-note .r a:hover{background:var(--hl);border-color:#123D18;color:#123D18;}',
       '.bw-lib-foot{margin-top:34px;border-top:2px solid var(--ink);padding:16px 0 0;display:flex;justify-content:space-between;gap:20px;align-items:center;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--mut);}',
-      '.bw-lib-foot img{height:17px;width:auto;display:block;}',
+      '.bw-lib-foot img{width:140px;height:auto;aspect-ratio:900/142;flex:none;display:block;}',
 
       /* responsive */
       '@media (max-width:900px){',
@@ -431,7 +432,7 @@
       (d.toolCount ? '<a class="m" href="/berlin-tools">' + esc(d.toolCount) + ' of these carry a free calculator</a>' : '<a class="m" href="/berlin-tools">Free Berlin tools</a>') +
       '<a class="m" href="/blog">The rest of the blog</a>' +
       '</div></div>' +
-      '<div class="bw-lib-foot"><img src="' + WORDMARK + '" alt="BerlinWalk">' +
+      '<div class="bw-lib-foot"><img src="' + WORDMARK + '" alt="Walk of Berlin" width="140" height="22">' +
       '<span class="m">' + esc(d.label) + ' &middot; ' + esc(d.totalPosts) + ' guides</span></div>' +
       '</div></div>'
     );
