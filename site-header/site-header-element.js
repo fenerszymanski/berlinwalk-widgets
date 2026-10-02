@@ -1,8 +1,13 @@
 const BW_HEADER_SCRIPT_URL = (document.currentScript && document.currentScript.src) || 'https://fenerszymanski.github.io/berlinwalk-widgets/site-header/site-header-element.js';
-const BW_HEADER_LOGO_URL = new URL('../assets/berlinwalk-wordmark-green.png', BW_HEADER_SCRIPT_URL).href;
+// Walk of Berlin wordmark (A15a, live 2 October 2026). The old berlinwalk-wordmark-*
+// files stay in assets/ untouched. The "formerly berlinwalk.com" line is HTML text in
+// IBM Plex Mono SemiBold, the same font file the blog pages load as BWPlexMono.
+const BW_HEADER_LOGO_URL = new URL('../assets/walkofberlin-wordmark-green.png', BW_HEADER_SCRIPT_URL).href;
+const BW_HEADER_LOGO_ON_GREEN_URL = new URL('../assets/walkofberlin-wordmark-yellow.png', BW_HEADER_SCRIPT_URL).href;
+const BW_HEADER_MONO_URL = new URL('../brand/fonts/editorial-v2/IBMPlexMono-SemiBold.woff2', BW_HEADER_SCRIPT_URL).href;
 // Berlin Then and Now (service 145cb27e). The legacy booking path stays
 // reachable for guests who booked before 30 September, but nothing links to it.
-const BW_HEADER_BUILD = 'site-header-then-and-now-20260929-max10';
+const BW_HEADER_BUILD = 'site-header-walkofberlin-logo-20261002';
 const BW_HEADER_BOOKING_URL = 'https://www.walkofberlin.com/book-berlin-walking-tour/berlin-then-and-now';
 const BW_HEADER_TOUR_FACTS = ['about 2.5 hours', 'max 10 people', '€25']
   .map((fact) => `<span class="bw-header-fact">${fact}</span>`)
@@ -504,6 +509,14 @@ class BWHeaderElement extends HTMLElement {
   _render() {
     this.innerHTML = `
       <style>
+        @font-face {
+          font-family: BWPlexMono;
+          font-style: normal;
+          font-weight: 600;
+          font-display: swap;
+          src: url(${BW_HEADER_MONO_URL}) format('woff2');
+        }
+
         bw-site-header {
           display: block;
           width: 100%;
@@ -605,21 +618,34 @@ class BWHeaderElement extends HTMLElement {
           display: flex;
           gap: 24px;
           justify-content: space-between;
-          padding: 30px 24px;
+          padding: 28px 24px;
           transition: padding 200ms ease;
         }
 
         .bw-header-logo {
-          align-items: center;
+          align-items: flex-start;
           display: inline-flex;
           flex: 0 0 auto;
+          flex-direction: column;
         }
 
         .bw-header-logo img {
           display: block;
-          height: 40px;
+          height: 36px;
           transition: height 200ms ease;
           width: auto;
+        }
+
+        .bw-header-formerly {
+          color: #1B5E20;
+          display: block;
+          font-family: BWPlexMono, monospace;
+          font-size: 11px;
+          font-weight: 600;
+          letter-spacing: 0.04em;
+          line-height: 1;
+          margin-top: 4px;
+          white-space: nowrap;
         }
 
         .bw-header-nav {
@@ -874,7 +900,12 @@ class BWHeaderElement extends HTMLElement {
         }
 
         .bw-header-shrunk .bw-header-logo img {
-          height: 32px;
+          height: 28px;
+        }
+
+        .bw-header-shrunk .bw-header-formerly {
+          font-size: 9px;
+          margin-top: 3px;
         }
 
         .bw-header-shrunk .bw-header-book {
@@ -942,11 +973,9 @@ class BWHeaderElement extends HTMLElement {
         }
 
         .bw-header-mobile-head img {
-          background: #FFFFFF;
-          border-radius: 6px;
           display: block;
-          height: 34px;
-          padding: 5px 9px;
+          height: 30px;
+          max-width: calc(100% - 56px);
           width: auto;
         }
 
@@ -1092,9 +1121,13 @@ class BWHeaderElement extends HTMLElement {
           }
           .bw-header-logo img {
             display: block !important;
-            height: 36px !important;
+            height: 28px !important;
             max-width: 200px;
             width: auto !important;
+          }
+          .bw-header-formerly {
+            font-size: 9px;
+            margin-top: 3px;
           }
           .bw-header-cta {
             display: flex !important;
@@ -1105,7 +1138,7 @@ class BWHeaderElement extends HTMLElement {
             padding: 8px 18px !important;
           }
           .bw-header-shrunk .bw-header-logo img {
-            height: 30px !important;
+            height: 26px !important;
           }
         }
       </style>
@@ -1121,8 +1154,9 @@ class BWHeaderElement extends HTMLElement {
 
         <header class="bw-header" role="banner">
           <div class="bw-header-inner bw-header-main">
-            <a class="bw-header-logo" href="${BW_HEADER_LINKS.home}" aria-label="BerlinWalk home">
-              <img src="${BW_HEADER_LOGO_URL}" alt="BerlinWalk" width="897" height="188" loading="eager" decoding="async">
+            <a class="bw-header-logo" href="${BW_HEADER_LINKS.home}" aria-label="Walk of Berlin home">
+              <img src="${BW_HEADER_LOGO_URL}" alt="Walk of Berlin" width="900" height="142" loading="eager" decoding="async">
+              <span class="bw-header-formerly">formerly berlinwalk.com</span>
             </a>
 
             <nav class="bw-header-nav" aria-label="Primary">
@@ -1186,7 +1220,7 @@ class BWHeaderElement extends HTMLElement {
         <div id="${this._mobileMenuId}" class="bw-header-mobile" data-bw-navigation="20260917" aria-hidden="true" aria-label="Mobile menu">
           <div class="bw-header-mobile-inner">
             <div class="bw-header-mobile-head">
-              <img src="${BW_HEADER_LOGO_URL}" alt="BerlinWalk" width="897" height="188">
+              <img src="${BW_HEADER_LOGO_ON_GREEN_URL}" alt="Walk of Berlin" width="900" height="142">
               <button class="bw-header-mobile-close" type="button" aria-label="Close menu">×</button>
             </div>
 
