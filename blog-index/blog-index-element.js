@@ -6,7 +6,7 @@ const BW_BLOG_INDEX_DATA_VERSION = '20260918-featured-listings';
 const BW_BLOG_INDEX_DATA_URL = `${new URL('./index.json', BW_BLOG_INDEX_BASE_URL).href}?v=${BW_BLOG_INDEX_DATA_VERSION}`;
 const BW_BLOG_INDEX_ARCHIVE_URL = `${new URL('./archive.json', BW_BLOG_INDEX_BASE_URL).href}?v=${BW_BLOG_INDEX_DATA_VERSION}`;
 const BW_BLOG_INDEX_LEGACY_DATA_URL = `${new URL('./data.json', BW_BLOG_INDEX_BASE_URL).href}?v=${BW_BLOG_INDEX_DATA_VERSION}`;
-const BW_BLOG_INDEX_LOGO_URL = `${new URL('./assets/berlin-travel-history-notes-logo.png', BW_BLOG_INDEX_BASE_URL).href}?v=20260529`;
+const BW_BLOG_INDEX_LOGO_URL = `${new URL('./assets/walkofberlin-blog-logo.png', BW_BLOG_INDEX_BASE_URL).href}?v=20261002`;
 const BW_BLOG_INDEX_NATIVE_FEED_STYLE_ID = 'bw-blog-index-native-feed-suppressor';
 
 // Redesign C (flag-gated preview of the /blog hub in the live single-post
@@ -1515,7 +1515,7 @@ class BWBlogIndexElement extends HTMLElement {
           <div class="bw-masthead">
             <div>
               <h1 id="bw-blog-index-title" class="bw-visually-hidden">Berlin Travel &amp; History Notes</h1>
-              <a class="bw-blog-logo-link" href="https://www.berlinwalk.com/blog" target="_top" aria-label="Berlin Travel and History Notes by BerlinWalk">
+              <a class="bw-blog-logo-link" href="https://www.berlinwalk.com/blog" target="_top" aria-label="Berlin Travel and History Notes by Walk of Berlin">
                 <img class="bw-blog-logo" src="${this._escapeAttribute(BW_BLOG_INDEX_LOGO_URL)}" alt="Berlin Travel &amp; History Notes" loading="eager" decoding="async">
               </a>
             </div>
@@ -1779,7 +1779,7 @@ class BWBlogIndexElement extends HTMLElement {
       <a class="bw-shelf-card" href="${this._escapeAttribute(post.url)}" target="_top">
         ${this._renderMedia(post, 'thumb')}
         <span class="bw-shelf-title">${this._escapeHtml(post.title)}</span>
-        <span class="bw-byline">By BerlinWalk</span>
+        <span class="bw-byline">By Walk of Berlin</span>
       </a>
     `;
   }
@@ -1792,7 +1792,7 @@ class BWBlogIndexElement extends HTMLElement {
           ${this._renderMeta(post)}
           <span class="bw-feature-title">${this._escapeHtml(post.title)}</span>
           <span class="bw-feature-excerpt">${this._escapeHtml(post.excerpt || '')}</span>
-          <span class="bw-byline">By BerlinWalk</span>
+          <span class="bw-byline">By Walk of Berlin</span>
         </span>
       </a>
     `;
@@ -1805,7 +1805,7 @@ class BWBlogIndexElement extends HTMLElement {
         ${this._renderMeta(post)}
         <span class="bw-feature-title">${this._escapeHtml(post.title)}</span>
         <span class="bw-feature-excerpt">${this._escapeHtml(post.excerpt || '')}</span>
-        <span class="bw-byline">By BerlinWalk</span>
+        <span class="bw-byline">By Walk of Berlin</span>
       </a>
     `;
   }
