@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Berlin Herbstferien Cover Planner</title>
+<link rel="stylesheet" href="../css/brand.css">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #FFFFFF; color: #1d231b; padding: 14px 12px 12px; }
+  .hf-head h1 { font-size: 19px; line-height: 1.25; color: #1B5E20; }
+  .hf-head p { font-size: 13px; line-height: 1.5; color: #475044; margin-top: 5px; }
+
+  .hf-set { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: 10px; margin-top: 12px; }
+  .hf-box { border: 1px solid #dfe6d6; border-radius: 14px; background: #f7f9f2; padding: 10px 11px; }
+  .hf-label { font-size: 10.5px; font-weight: 800; letter-spacing: .07em; text-transform: uppercase; color: #1B5E20; margin: 0 0 7px; }
+  .hf-care { display: grid; gap: 5px; }
+  .hf-care button { font: inherit; text-align: left; font-size: 12px; line-height: 1.35; border: 1.5px solid #c9d4bf; background: #fff; color: #243021; border-radius: 10px; padding: 6px 9px; cursor: pointer; }
+  .hf-care button small { display: block; font-size: 11px; color: #5d6758; font-weight: 500; }
+  .hf-care button[aria-current="true"] { border-color: #1B5E20; box-shadow: inset 4px 0 0 #1B5E20; font-weight: 700; }
+  .hf-step { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 6px; padding: 5px 0; border-bottom: 1px dashed #d6dfcc; }
+  .hf-step:last-of-type { border-bottom: 0; }
+  .hf-step span { font-size: 12px; color: #243021; }
+  .hf-step span b { display: block; font-size: 15px; color: #10230f; font-variant-numeric: tabular-nums; }
+  .hf-step .pm { display: flex; gap: 5px; }
+  .hf-step .pm button { font: inherit; font-size: 16px; font-weight: 800; width: 30px; height: 30px; border-radius: 50%; border: 1.5px solid #1B5E20; background: #fff; color: #1B5E20; cursor: pointer; line-height: 1; }
+  .hf-step .pm button:disabled { opacity: .3; cursor: default; }
+  .hf-two { margin-top: 7px; font: inherit; font-size: 12px; font-weight: 700; border: 1.5px solid #c9d4bf; background: #fff; color: #243021; border-radius: 999px; padding: 6px 11px; cursor: pointer; }
+  .hf-two[aria-current="true"] { border-color: #1B5E20; background: #1B5E20; color: #fff; }
+  .hf-need { margin-top: 8px; font-size: 12px; color: #3b4337; line-height: 1.45; }
+
+  .hf-days { display: grid; grid-template-columns: repeat(10, minmax(0, 1fr)); gap: 4px; margin-top: 12px; }
+  .hf-days button { font: inherit; border: 1.5px solid #c9d4bf; background: #fff; border-radius: 9px; padding: 5px 2px 6px; cursor: pointer; text-align: center; color: #243021; }
+  .hf-days button b { display: block; font-size: 10px; letter-spacing: .04em; text-transform: uppercase; color: #5d6758; }
+  .hf-days button span { display: block; font-size: 15px; font-weight: 800; font-variant-numeric: tabular-nums; }
+  .hf-days button i { display: block; height: 5px; border-radius: 3px; margin: 4px 5px 0; background: #eceee8; }
+  .hf-days button.is-now { border-color: #1B5E20; box-shadow: 0 0 0 2px #FFE600; }
+
+  .hf-pick { margin-top: 10px; border: 1px solid #dfe6d6; border-radius: 14px; padding: 10px 11px; background: #fcfdf9; }
+  .hf-pick h2 { font-size: 14px; color: #10230f; }
+  .hf-pick h2 small { font-size: 12px; font-weight: 600; color: #5d6758; }
+  .hf-opts { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+  .hf-opts button { font: inherit; font-size: 12px; font-weight: 700; border-radius: 999px; border: 1.5px solid #c9d4bf; background: #fff; color: #243021; padding: 6px 11px 6px 9px; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; }
+  .hf-opts button:hover:not(:disabled) { border-color: #1B5E20; }
+  .hf-opts button:disabled { opacity: .35; cursor: default; }
+  .hf-opts button i { width: 11px; height: 11px; border-radius: 3px; display: inline-block; }
+  .hf-nav { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 9px; }
+  .hf-nav button { font: inherit; font-size: 12px; font-weight: 700; border-radius: 10px; border: 1.5px solid #1B5E20; background: #fff; color: #1B5E20; padding: 6px 11px; cursor: pointer; }
+  .hf-nav button:disabled { opacity: .35; cursor: default; }
+  .hf-nav button.fill { background: #FFE600; border-color: #FFE600; color: #123D18; }
+
+  .hf-chart { margin-top: 12px; border: 1px solid #dfe6d6; border-radius: 14px; background: #fff; overflow: hidden; }
+  .hf-chart svg { display: block; width: 100%; height: auto; }
+  .hf-chart .ax { font-size: 10px; fill: #7a8570; font-weight: 700; }
+  .hf-chart .dl { font-size: 11px; fill: #243021; font-weight: 700; }
+  .hf-chart .gl { stroke: #eceee8; stroke-width: 1; }
+  .hf-chart .need { fill: none; stroke: #1B5E20; stroke-width: 1.5; stroke-dasharray: 4 3; }
+  .hf-chart .gapt { font-size: 10.5px; font-weight: 800; fill: #b3261e; }
+  .hf-chart .okt { font-size: 10.5px; font-weight: 800; fill: #1B5E20; }
+  .hf-chart .note { font-size: 10.5px; fill: #5d6758; font-weight: 600; }
+  .hf-chart .now { fill: #FFE600; opacity: .35; }
+  .hf-key { display: flex; flex-wrap: wrap; gap: 4px 12px; font-size: 11.5px; color: #475044; padding: 7px 10px 9px; border-top: 1px solid #eceee8; }
+  .hf-key i { display: inline-block; width: 13px; height: 8px; border-radius: 3px; margin-right: 5px; }
+
+  .hf-sum { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 7px; margin-top: 10px; }
+  .hf-sum div { border: 1px solid #dfe6d6; border-radius: 12px; padding: 8px 9px; background: #fcfdf9; }
+  .hf-sum b { display: block; font-size: 20px; color: #10230f; font-variant-numeric: tabular-nums; }
+  .hf-sum span { font-size: 11px; color: #5d6758; line-height: 1.3; display: block; }
+  .hf-sum div.warn b { color: #b3261e; }
+  .hf-verdict { margin-top: 10px; border-radius: 12px; background: #FFE600; color: #123D18; padding: 11px 13px; font-size: 14px; line-height: 1.5; }
+  .hf-verdict strong { color: #10230f; }
+  .hf-free { margin-top: 10px; font-size: 12px; line-height: 1.5; color: #3b4337; }
+  .hf-free li { margin: 3px 0 0 18px; }
+  .hf-foot { font-size: 11.5px; color: #596254; line-height: 1.5; margin-top: 10px; }
+
+  @media (max-width: 620px) {
+    .hf-set { grid-template-columns: 1fr; }
+    .hf-days { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+    .hf-sum { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  }
+</style>
+</head>
+<body>
+<div class="hf-head">
+  <h1>Berlin Herbstferien Cover Planner</h1>
+  <p>Berlin&rsquo;s autumn school holidays run from Monday 19 to Saturday 31 October 2026, so ten working days need an answer. Set your child&rsquo;s Hort hours and your working day, then go through the two weeks one day at a time. The chart shows every hour of your working day that nobody is covering.</p>
+</div>
+
+<div class="hf-set">
+  <div class="hf-box">
+    <p class="hf-label">Your child&rsquo;s holiday care</p>
+    <div class="hf-care" id="hf-care"></div>
+  </div>
+  <div class="hf-box">
+    <p class="hf-label">Your working day</p>
+    <div class="hf-step"><span>Start work<b id="hf-start"></b></span><div class="pm"><button type="button" data-k="start" data-d="-0.5" aria-label="Start earlier">&minus;</button><button type="button" data-k="start" data-d="0.5" aria-label="Start later">+</button></div></div>
+    <div class="hf-step"><span>Finish work<b id="hf-end"></b></span><div class="pm"><button type="button" data-k="end" data-d="-0.5" aria-label="Finish earlier">&minus;</button><button type="button" data-k="end" data-d="0.5" aria-label="Finish later">+</button></div></div>
+    <div class="hf-step"><span>Door to door, each way<b id="hf-commute"></b></span><div class="pm"><button type="button" data-k="commute" data-d="-0.25" aria-label="Shorter journey">&minus;</button><button type="button" data-k="commute" data-d="0.25" aria-label="Longer journey">+</button></div></div>
+    <button type="button" class="hf-two" id="hf-two" aria-current="true">Two adults can take leave</button>
+    <p class="hf-need" id="hf-need"></p>
+  </div>
+</div>
+
+<div class="hf-days" id="hf-days" role="group" aria-label="Holiday weekdays"></div>
+
+<div class="hf-pick">
+  <h2 id="hf-dayname"></h2>
+  <div class="hf-opts" id="hf-opts"></div>
+  <div class="hf-nav">
+    <button type="button" id="hf-prev">&larr; Previous day</button>
+    <button type="button" id="hf-next">Next day &rarr;</button>
+    <button type="button" id="hf-undo">Undo last pick</button>
+    <button type="button" class="fill" id="hf-fill">Hort for every open day</button>
+  </div>
+</div>
+
+<div class="hf-chart">
+  <svg id="hf-svg" viewBox="0 0 640 420" role="img" aria-label="Coverage chart for the ten holiday weekdays"></svg>
+  <div class="hf-key" id="hf-key"></div>
+</div>
+
+<div class="hf-sum">
+  <div id="hf-s-gap" class="warn"><b>0</b><span>hours of your working day uncovered</span></div>
+  <div id="hf-s-me"><b>0</b><span>of your leave days used</span></div>
+  <div id="hf-s-partner"><b>0</b><span>of your partner&rsquo;s leave days</span></div>
+  <div id="hf-s-owe"><b>0</b><span>swap days you owe back</span></div>
+</div>
+<div class="hf-verdict" id="hf-verdict"></div>
+
+<ul class="hf-free">
+  <li><strong>Super-Ferien-Pass, &euro;9:</strong> one free swim every holiday day in the Berliner B&auml;der indoor pools, entry by 12:00 and out by 14:00, for Berlin children up to and including 18.</li>
+  <li><strong>Staatliche Museen zu Berlin:</strong> free for everyone under 18, every day the museum is open.</li>
+  <li><strong>Sunday 25 October:</strong> the clocks go back one hour, so the second week gets dark around 16:50.</li>
+</ul>
+<p class="hf-foot" id="hf-foot">Dates from the Berlin Ferienordnung 2024/25 to 2029/30 (Senatsverwaltung f&uuml;r Bildung, Jugend und Familie). Hort hours from the Berlin rules for erg&auml;nzende F&ouml;rderung und Betreuung: grades 1 to 3 pay nothing and need no needs check for 7:30 to 16:00; early care from 6:00 and late care to 18:00 are booked modules; an open all-day school guarantees 7:30 to 13:30. Grades 4 to 6 pay an income-based contribution. Your own Hort may set its holiday hours differently, so check its holiday list. Checked on 2 October 2026.</p>
+
+<script src="../js/brand.js"></script>
+<script>
+var DAYS = [
+  { d: 19, w: 'Mon' }, { d: 20, w: 'Tue' }, { d: 21, w: 'Wed' }, { d: 22, w: 'Thu' }, { d: 23, w: 'Fri' },
+  { d: 26, w: 'Mon' }, { d: 27, w: 'Tue' }, { d: 28, w: 'Wed' }, { d: 29, w: 'Thu' }, { d: 30, w: 'Fri' }
+];
+var CARE = [
+  { id: 'hort16', name: 'Hort, grade 1 to 3', note: '7:30 to 16:00, free, no needs check', from: 7.5, to: 16 },
+  { id: 'hort18', name: 'Hort with the late module', note: '7:30 to 18:00', from: 7.5, to: 18 },
+  { id: 'hort618', name: 'Hort with early and late modules', note: '6:00 to 18:00', from: 6, to: 18 },
+  { id: 'core', name: 'Open all-day school, core hours only', note: '7:30 to 13:30', from: 7.5, to: 13.5 },
+  { id: 'none', name: 'No Hort place', note: 'every day needs an adult', from: null, to: null }
+];
+var COVER = {
+  hort: { name: 'Hort day', color: '#7CB342', full: false },
+  me: { name: 'My leave day', color: '#1B5E20', full: true },
+  partner: { name: 'Partner’s leave day', color: '#2E7D9A', full: true },
+  swap: { name: 'Swap with another family', color: '#8E6CC0', full: true },
+  family: { name: 'Grandparents or friends', color: '#C98A1B', full: true },
+  home: { name: 'Home office', color: '#B9B9B0', full: false }
+};
+var ORDER = ['hort', 'me', 'partner', 'swap', 'family', 'home'];
+var X0 = 6, X1 = 20;
+
+var state = { care: 'hort16', start: 8.5, end: 17, commute: 0.5, two: true };
+var plan = DAYS.map(function () { return null; });
+var log = [];
+var currentStep = 0;
+
+function hm(h) { var m = Math.round(h * 60); return Math.floor(m / 60) + ':' + ('0' + (m % 60)).slice(-2); }
+function hrs(h) { var r = Math.round(h * 4) / 4; return r % 1 ? r.toFixed(2).replace(/0$/, '') : String(r); }
+function care() { return CARE.filter(function (c) { return c.id === state.care; })[0]; }
+function need() { return [state.start - state.commute, state.end + state.commute]; }
+
+function covered(kind) {
+  if (!kind || kind === 'home') return null;
+  if (kind === 'hort') { var c = care(); return c.from == null ? null : [c.from, c.to]; }
+  return [X0, X1];
+}
+
+// Uncovered pieces of the working day for one weekday.
+function gaps(kind) {
+  var n = need(), c = covered(kind), out = [];
+  if (!c) return [n];
+  if (c[0] > n[0]) out.push([n[0], Math.min(c[0], n[1])]);
+  if (c[1] < n[1]) out.push([Math.max(c[1], n[0]), n[1]]);
+  return out.filter(function (g) { return g[1] - g[0] > 0.001; });
+}
+function gapHours(kind) { return gaps(kind).reduce(function (s, g) { return s + g[1] - g[0]; }, 0); }
+
+function pick(kind) {
+  if (kind === 'hort' && care().from == null) return;
+  if (kind === 'partner' && !state.two) return;
+  log.push({ i: currentStep, prev: plan[currentStep] });
+  plan[currentStep] = kind;
+  if (currentStep < DAYS.length - 1) currentStep++;
+  render();
+}
+function undo() {
+  if (!log.length) return;
+  var last = log.splice(log.length - 1, 1)[0];
+  plan[last.i] = last.prev;
+  currentStep = last.i;
+  render();
+}
+function fillHort() {
+  if (care().from == null) return;
+  plan.forEach(function (k, i) { if (!k) { log.push({ i: i, prev: null }); plan[i] = 'hort'; } });
+  render();
+}
+
+function buildCare() {
+  var box = document.getElementById('hf-care');
+  box.innerHTML = '';
+  CARE.forEach(function (c) {
+    var b = document.createElement('button');
+    b.type = 'button';
+    b.setAttribute('aria-current', String(c.id === state.care));
+    b.innerHTML = c.name + '<small>' + c.note + '</small>';
+    b.addEventListener('click', function () {
+      state.care = c.id;
+      if (c.from == null) plan = plan.map(function (k) { return k === 'hort' ? null : k; });
+      render();
+    });
+    box.appendChild(b);
+  });
+}
+
+function buildDays() {
+  var box = document.getElementById('hf-days');
+  box.innerHTML = '';
+  DAYS.forEach(function (d, i) {
+    var b = document.createElement('button');
+    b.type = 'button';
+    b.className = i === currentStep ? 'is-now' : '';
+    var k = plan[i];
+    b.innerHTML = '<b>' + d.w + '</b><span>' + d.d + '</span><i style="background:' + (k ? COVER[k].color : '#eceee8') + '"></i>';
+    b.setAttribute('aria-label', d.w + ' ' + d.d + ' October: ' + (k ? COVER[k].name : 'not planned'));
+    b.addEventListener('click', function () { currentStep = i; render(); });
+    box.appendChild(b);
+  });
+}
+
+function buildOpts() {
+  var d = DAYS[currentStep];
+  document.getElementById('hf-dayname').innerHTML = 'Day ' + (currentStep + 1) + ' of 10: ' + d.w + ' ' + d.d + ' October <small>Who has the children?</small>';
+  var box = document.getElementById('hf-opts');
+  box.innerHTML = '';
+  ORDER.forEach(function (k) {
+    var b = document.createElement('button');
+    b.type = 'button';
+    b.innerHTML = '<i style="background:' + COVER[k].color + '"></i>' + COVER[k].name;
+    if ((k === 'hort' && care().from == null) || (k === 'partner' && !state.two)) b.disabled = true;
+    b.addEventListener('click', function () { pick(k); });
+    box.appendChild(b);
+  });
+  document.getElementById('hf-prev').disabled = currentStep === 0;
+  document.getElementById('hf-next').disabled = currentStep === DAYS.length - 1;
+  document.getElementById('hf-undo').disabled = !log.length;
+  document.getElementById('hf-fill').disabled = care().from == null || plan.every(function (k) { return k; });
+}
+
+function el(tag, attrs, text) {
+  var e = document.createElementNS('http://www.w3.org/2000/svg', tag);
+  for (var a in attrs) e.setAttribute(a, attrs[a]);
+  if (text != null) e.textContent = text;
+  return e;
+}
+
+function drawChart() {
+  var svg = document.getElementById('hf-svg');
+  while (svg.firstChild) svg.removeChild(svg.firstChild);
+  var VW = Math.max(300, Math.min(640, Math.round(svg.parentNode.clientWidth || 640)));
+  var narrow = VW < 520;
+  var L = narrow ? 50 : 64, R = VW - (narrow ? 40 : 54), T = 26, RH = narrow ? 30 : 34, W = R - L;
+  var VH = T + RH * 10 + 22 + (narrow ? 34 : 22);
+  svg.setAttribute('viewBox', '0 0 ' + VW + ' ' + VH);
+  function x(h) { return L + (h - X0) / (X1 - X0) * W; }
+  for (var h = X0; h <= X1; h += (narrow ? 4 : 2)) {
+    svg.appendChild(el('line', { x1: x(h), x2: x(h), y1: T - 6, y2: T + RH * 10 + 22, class: 'gl' }));
+    svg.appendChild(el('text', { x: x(h), y: 14, 'text-anchor': 'middle', class: 'ax' }, h + ':00'));
+  }
+  var n = need();
+  DAYS.forEach(function (d, i) {
+    var y = T + i * RH + (i >= 5 ? 22 : 0);
+    if (i === currentStep) svg.appendChild(el('rect', { x: 2, y: y - 3, width: VW - 4, height: RH - 2, rx: 6, class: 'now' }));
+    svg.appendChild(el('text', { x: 6, y: y + 17, class: 'dl' }, (narrow ? d.w.slice(0, 2) : d.w) + ' ' + d.d));
+    svg.appendChild(el('rect', { x: L, y: y + 5, width: W, height: 18, rx: 4, fill: '#f4f6ef' }));
+    var k = plan[i], c = covered(k);
+    if (k === 'home') svg.appendChild(el('rect', { x: x(n[0]), y: y + 5, width: x(n[1]) - x(n[0]), height: 18, rx: 4, fill: COVER.home.color }));
+    if (c) svg.appendChild(el('rect', { x: x(c[0]), y: y + 5, width: x(c[1]) - x(c[0]), height: 18, rx: 4, fill: COVER[k].color }));
+    gaps(k).forEach(function (g) {
+      svg.appendChild(el('rect', { x: x(g[0]), y: y + 9, width: Math.max(2, x(g[1]) - x(g[0])), height: 10, rx: 2, fill: '#E63946', opacity: k === 'home' ? 0.55 : 0.9 }));
+    });
+    svg.appendChild(el('rect', { x: x(n[0]), y: y + 2, width: x(n[1]) - x(n[0]), height: 24, rx: 5, class: 'need' }));
+    var gh = gapHours(k);
+    svg.appendChild(el('text', { x: R + 6, y: y + 18, class: gh > 0 ? 'gapt' : 'okt' }, gh > 0 ? hrs(gh) + ' h' : 'OK'));
+  });
+  var ym = T + RH * 5 + 8;
+  svg.appendChild(el('text', { x: narrow ? 6 : L, y: ym + 4, class: 'note' }, narrow ? 'Sun 25 Oct: clocks go back one hour' : 'Weekend 24 to 25 October: the clocks go back one hour on Sunday 25 October.'));
+  if (narrow) {
+    svg.appendChild(el('text', { x: 6, y: T + RH * 10 + 36, class: 'note' }, 'Dashed: work day plus journey.'));
+    svg.appendChild(el('text', { x: 6, y: T + RH * 10 + 50, class: 'note' }, 'Red: nobody has the children.'));
+  } else svg.appendChild(el('text', { x: L, y: T + RH * 10 + 34, class: 'note' }, 'Dashed box: your working day plus the journey. Red: nobody has the children.'));
+}
+
+function buildKey() {
+  var box = document.getElementById('hf-key');
+  box.innerHTML = '';
+  ORDER.forEach(function (k) {
+    var s = document.createElement('span');
+    s.innerHTML = '<i style="background:' + COVER[k].color + '"></i>' + COVER[k].name;
+    box.appendChild(s);
+  });
+  var g = document.createElement('span');
+  g.innerHTML = '<i style="background:#E63946"></i>Uncovered';
+  box.appendChild(g);
+}
+
+function verdict(total, me, partner, owe, open, home) {
+  var v = document.getElementById('hf-verdict');
+  if (open === 10) {
+    v.innerHTML = '<strong>Ten working days, nobody planned yet.</strong> Start with Monday 19 October and pick who has the children, or press <strong>Hort for every open day</strong> to see what the Hort alone leaves uncovered.';
+    return;
+  }
+  var parts = [];
+  if (open) parts.push('<strong>' + open + ' day' + (open > 1 ? 's still have' : ' still has') + ' no plan.</strong>');
+  if (total > 0) {
+    var daily = gaps('hort').length && care().from != null ? gapHours('hort') : 0;
+    parts.push('Your plan leaves <strong>' + hrs(total) + ' hours</strong> of your working day uncovered.');
+    if (daily > 0 && plan.indexOf('hort') > -1) parts.push('Every Hort day is short by ' + hrs(daily) + ' h: book the late module, shift your hours, or line up a pick-up.');
+  } else if (!open) parts.push('<strong>Every working hour is covered.</strong>');
+  if (home) parts.push(home + ' home-office day' + (home > 1 ? 's count' : ' counts') + ' as uncovered: working with a seven-year-old in the room is not childcare.');
+  if (owe) parts.push('You owe ' + owe + ' swap day' + (owe > 1 ? 's' : '') + ' back, so put them in the calendar now.');
+  parts.push('Leave used: ' + me + ' for you' + (state.two ? ', ' + partner + ' for your partner' : '') + '.');
+  v.innerHTML = parts.join(' ');
+}
+
+function render() {
+  document.getElementById('hf-start').textContent = hm(state.start);
+  document.getElementById('hf-end').textContent = hm(state.end);
+  document.getElementById('hf-commute').textContent = Math.round(state.commute * 60) + ' min';
+  var n = need();
+  document.getElementById('hf-need').innerHTML = 'Someone has to have the children from <strong>' + hm(n[0]) + ' to ' + hm(n[1]) + '</strong> on every working day.';
+  var two = document.getElementById('hf-two');
+  two.setAttribute('aria-current', String(state.two));
+  two.textContent = state.two ? 'Two adults can take leave' : 'Only I can take leave';
+  document.querySelectorAll('.hf-step button').forEach(function (b) {
+    var k = b.getAttribute('data-k'), d = parseFloat(b.getAttribute('data-d'));
+    var lim = { start: [6, 11], end: [12, 20], commute: [0, 1.5] }[k];
+    var nv = state[k] + d;
+    b.disabled = nv < lim[0] || nv > lim[1] || (k === 'start' && nv >= state.end - 2) || (k === 'end' && nv <= state.start + 2);
+  });
+  buildCare(); buildDays(); buildOpts(); drawChart();
+  var total = plan.reduce(function (s, k) { return s + gapHours(k); }, 0);
+  var me = plan.filter(function (k) { return k === 'me'; }).length;
+  var partner = plan.filter(function (k) { return k === 'partner'; }).length;
+  var owe = plan.filter(function (k) { return k === 'swap'; }).length;
+  var home = plan.filter(function (k) { return k === 'home'; }).length;
+  var open = plan.filter(function (k) { return !k; }).length;
+  document.querySelector('#hf-s-gap b').textContent = hrs(total);
+  document.querySelector('#hf-s-me b').textContent = me;
+  document.querySelector('#hf-s-partner b').textContent = state.two ? partner : 'n/a';
+  document.querySelector('#hf-s-owe b').textContent = owe;
+  document.getElementById('hf-s-gap').className = total > 0 ? 'warn' : '';
+  verdict(total, me, partner, owe, open, home);
+}
+
+document.querySelectorAll('.hf-step button').forEach(function (b) {
+  b.addEventListener('click', function () {
+    var k = b.getAttribute('data-k');
+    state[k] = Math.round((state[k] + parseFloat(b.getAttribute('data-d'))) * 4) / 4;
+    render();
+  });
+});
+document.getElementById('hf-two').addEventListener('click', function () {
+  state.two = !state.two;
+  if (!state.two) plan = plan.map(function (k) { return k === 'partner' ? null : k; });
+  render();
+});
+document.getElementById('hf-prev').addEventListener('click', function () { if (currentStep > 0) { currentStep--; render(); } });
+document.getElementById('hf-next').addEventListener('click', function () { if (currentStep < DAYS.length - 1) { currentStep++; render(); } });
+document.getElementById('hf-undo').addEventListener('click', undo);
+document.getElementById('hf-fill').addEventListener('click', fillHort);
+buildKey();
+render();
+var lastW = 0;
+window.addEventListener('resize', function () { var w = document.getElementById('hf-svg').parentNode.clientWidth; if (Math.abs(w - lastW) > 20) { lastW = w; drawChart(); } });
+</script>
+</body>
+</html>

@@ -1,0 +1,89 @@
+{
+  "version": 1,
+  "slug": "herbstferien-berlin",
+  "key": "herbstferien-berlin",
+  "config": {
+    "title": "Herbstferien Berlin - FAQ",
+    "subtitle": "The autumn school holiday dates, what the Hort covers, and the cheapest ways to fill the two weeks.",
+    "items": [
+      {
+        "q": "When are the Herbstferien in Berlin in 2026?",
+        "a": "From **Monday 19 October to Saturday 31 October 2026**. The last school day is Friday 16 October and school starts again on Monday 2 November. In 2027 the autumn break is 11 to 23 October."
+      },
+      {
+        "q": "Does the Hort stay open in the Herbstferien?",
+        "a": "Yes. The holidays are part of ergänzende Förderung und Betreuung (eFöB), so a child with a Hort place is cared for in the holidays too. Many Horte staff the holidays from a list of the days parents need, so **return that list early**."
+      },
+      {
+        "q": "How long does the Hort look after children in the holidays?",
+        "a": "For grades 1 to 3 the care from **7:30 to 16:00 is free and needs no needs check.** Early care from 6:00 and late care until 18:00 are extra modules. At an open all-day school the guaranteed core is 7:30 to 13:30."
+      },
+      {
+        "q": "Can I still get a Hort place for these holidays?",
+        "a": "Not through a new application. Berlin asks for the application **at least three months before** care should start, and the decision takes six to eight weeks. For these two weeks only an existing Hort place helps."
+      },
+      {
+        "q": "What does the Super-Ferien-Pass cost and what is included?",
+        "a": "It costs **€9** and is valid in every school holiday from summer 2026 to Easter 2027 for Berlin children up to and including 18. It includes one free swim a day in the Berliner Bäder indoor pools (entry by 12:00, out by 14:00) and coupons such as free Zoo and Tierpark entry up to age 15."
+      },
+      {
+        "q": "Is 31 October a holiday in Berlin?",
+        "a": "No. **Reformationstag is a public holiday in Brandenburg, not in Berlin.** In 2026 it falls on Saturday 31 October, so shops in Potsdam and the rest of Brandenburg are closed that day while Berlin shops are open."
+      }
+    ]
+  },
+  "schema": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "When are the Herbstferien in Berlin in 2026?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "From Monday 19 October to Saturday 31 October 2026. The last school day is Friday 16 October and school starts again on Monday 2 November. In 2027 the autumn break is 11 to 23 October."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Does the Hort stay open in the Herbstferien?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. The holidays are part of ergänzende Förderung und Betreuung (eFöB), so a child with a Hort place is cared for in the holidays too. Many Horte staff the holidays from a list of the days parents need, so return that list early."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How long does the Hort look after children in the holidays?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "For grades 1 to 3 the care from 7:30 to 16:00 is free and needs no needs check. Early care from 6:00 and late care until 18:00 are extra modules. At an open all-day school the guaranteed core is 7:30 to 13:30."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I still get a Hort place for these holidays?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Not through a new application. Berlin asks for the application at least three months before care should start, and the decision takes six to eight weeks. For these two weeks only an existing Hort place helps."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What does the Super-Ferien-Pass cost and what is included?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "It costs €9 and is valid in every school holiday from summer 2026 to Easter 2027 for Berlin children up to and including 18. It includes one free swim a day in the Berliner Bäder indoor pools (entry by 12:00, out by 14:00) and coupons such as free Zoo and Tierpark entry up to age 15."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is 31 October a holiday in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. Reformationstag is a public holiday in Brandenburg, not in Berlin. In 2026 it falls on Saturday 31 October, so shops in Potsdam and the rest of Brandenburg are closed that day while Berlin shops are open."
+        }
+      }
+    ]
+  }
+}
