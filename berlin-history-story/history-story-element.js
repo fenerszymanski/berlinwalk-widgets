@@ -17,7 +17,7 @@
     ? new URL('./', SCRIPT_URL).toString()
     : 'https://fenerszymanski.github.io/berlinwalk-widgets/berlin-history-story/';
   var HOME_URL = 'https://www.berlinwalk.com/?utm_source=berlin_history_story&utm_medium=story&utm_campaign=history_v1&utm_content=wordmark';
-  var BOOK_URL = 'https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based?utm_source=berlin_history_story&utm_medium=story&utm_campaign=history_v1&utm_content=closing_cta';
+  var BOOK_URL = 'https://www.walkofberlin.com/book-berlin-walking-tour/berlin-then-and-now?utm_source=berlin_history_story&utm_medium=story&utm_campaign=history_v1&utm_content=closing_cta';
   var WALL_URL = 'https://www.berlinwalk.com/berlin-wall-timeline?utm_source=berlin_history_story&utm_medium=story&utm_campaign=history_v1&utm_content=wall_chapter';
   var FINAL_URL = 'https://www.berlinwalk.com/berlin-history-story';
   // Lead delivery is intentionally adapter-shaped. The defaults match the
@@ -361,7 +361,7 @@
     return '<section class="bw-hs-lead-section" aria-label="Berlin, Remade field guide sign-up"><div class="bw-hs-lead-section-inner">'
       + leadFieldPreview()
       + leadGate()
-      + '<div class="bw-hs-tour-bridge"><p class="bw-hs-tour-bridge-label">Prefer a live walk?</p><a class="bw-hs-btn bw-hs-btn-secondary" data-bw-history-track="closing_cta" href="' + esc(BOOK_URL) + '">Book my Free Berlin Walking Tour</a><p class="bw-hs-final-note">My free tour starts at Alexanderplatz. It lasts 2 hours and explores the historic centre of former East Berlin: 11 stops, 16 places and about 3 km. It does not follow the Berlin Wall line.</p></div>'
+      + '<div class="bw-hs-tour-bridge"><p class="bw-hs-tour-bridge-label">Prefer a live walk?</p><a class="bw-hs-btn bw-hs-btn-secondary" data-bw-history-track="closing_cta" href="' + esc(BOOK_URL) + '">Book Berlin Then and Now</a><p class="bw-hs-final-note">My walk Berlin Then and Now starts at the World Clock on Alexanderplatz and ends at Hackescher Markt. It takes about 2.5 hours through the historic centre of former East Berlin, with an archive photo at every stop: 11 stops, 16 places, about 3 km, max 10 people, €25 per person. It does not follow the Berlin Wall line.</p></div>'
       + '</div></section>';
   }
 
@@ -815,7 +815,7 @@
             event_location: 'closing_cta',
             story_version: 'v2',
             page_path: '/berlin-history-story',
-            destination: 'free_tour'
+            destination: 'then_and_now_tour'
           }
         },
         wall_timeline: {

@@ -153,14 +153,15 @@ test('submit adapter keeps DOI and secure delivery on the backend', () => {
   assert.doesNotMatch(runtime, /bw_lead_asset_control_booking_click/);
 });
 
-test('Book the Tour remains a secondary final-chapter action', () => {
+test('Berlin Then and Now booking remains a secondary final-chapter action', () => {
   const closing = section('function leadSection()', 'function cover()');
   assert.match(closing, /bw-hs-btn-secondary/);
   assert.match(closing, /data-bw-history-track="closing_cta"/);
-  assert.match(closing, /Book my Free Berlin Walking Tour/);
-  assert.match(closing, /starts at Alexanderplatz/);
-  assert.match(closing, /2 hours/);
+  assert.match(closing, /Book Berlin Then and Now/);
+  assert.match(closing, /starts at the World Clock on Alexanderplatz/);
+  assert.match(closing, /about 2\.5 hours/);
   assert.match(closing, /does not follow the Berlin Wall line/);
+  assert.doesNotMatch(closing, /\bfree\b|tip-based|\b2 hours/i);
   assert.doesNotMatch(closing, /bw_lead_asset_control_booking_click/);
 });
 
@@ -185,4 +186,10 @@ test('adapter documentation records backend handoff and privacy boundaries', () 
   assert.match(adapter, /secure inline access page/);
   assert.match(adapter, /at least 50% visible for 2 seconds/);
   assert.doesNotMatch(adapter, /bw_lead_asset_control_booking_click/);
+});
+
+test('closing CTA links to Berlin Then and Now, not the retired tip-based slug', () => {
+  assert.match(runtime, /var BOOK_URL = 'https:\/\/www\.walkofberlin\.com\/book-berlin-walking-tour\/berlin-then-and-now\?/);
+  assert.doesNotMatch(runtime, /berlin-free-walking-tour-tip-based/);
+  assert.doesNotMatch(runtime, /destination: 'free_tour'/);
 });
