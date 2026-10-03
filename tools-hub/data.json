@@ -10615,6 +10615,36 @@
       "iconStatus": "live-wix-media",
       "image": "https://static.wixstatic.com/media/5a08a3_b56d6a544d9e472b9978bc613f987af0~mv2.png",
       "cmsItemId": "aa55dff4-9519-43e8-b541-7d75f751ecfb"
+    },
+    {
+      "slug": "berlin-cold-night-help-map",
+      "title": "Berlin Cold Night Help Map",
+      "lead": "Pick a night between October and April and an hour, and see which Berlin emergency shelters on the Kältehilfe list are open then, for everyone, women, men, families or night cafés, and which help line answers: the Kältehilfetelefon, the Kältebus, the Wärmebus or 112. Shelter list of 30 September and phone hours checked on 3 October 2026.",
+      "category": "Maps",
+      "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/berlin-cold-night-help-map/",
+      "embedHeight": 1750,
+      "hubCategory": "Essentials",
+      "type": "Map",
+      "priority": 3,
+      "tags": [
+        "kältehilfe",
+        "homeless help",
+        "night shelter",
+        "kältebus",
+        "winter",
+        "living in berlin"
+      ],
+      "aliases": [
+        "kaeltehilfe berlin",
+        "kältebus berlin",
+        "berlin homeless shelter",
+        "notübernachtung berlin",
+        "wärmebus berlin",
+        "help homeless berlin winter"
+      ],
+      "iconStatus": "live-wix-media",
+      "image": "https://static.wixstatic.com/media/5a08a3_c2775e4f5c80469482e875cab63ec46b~mv2.png",
+      "cmsItemId": "2023f417-a70d-46f2-9448-ae385ef09518"
     }
   ],
   "hubCategories": [

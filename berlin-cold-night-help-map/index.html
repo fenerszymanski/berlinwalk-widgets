@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Berlin Cold Night Help Map</title>
+<link rel="stylesheet" href="../css/brand.css">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #FFFFFF; color: #1c2219; padding: 12px; }
+  .cn { border-radius: 16px; background: #0f1f12; color: #e8efe2; overflow: hidden; }
+  .cn-top { padding: 14px 14px 10px; }
+  .cn-top h1 { font-size: 18px; line-height: 1.25; color: #FFE600; }
+  .cn-top p { font-size: 12.5px; line-height: 1.5; color: #b9c8b0; margin-top: 4px; }
+
+  .cn-when { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; padding: 0 14px 10px; }
+  .cn-when label { font-size: 10.5px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: #9fb595; }
+  .cn-when input[type=date] { font-family: inherit; font-size: 14px; font-weight: 700; color: #123D18; background: #FFE600; border: 0; border-radius: 9px; padding: 7px 9px; }
+  .cn-step { display: flex; align-items: center; gap: 6px; margin-left: auto; }
+  .cn-step button { font-family: inherit; width: 34px; height: 34px; border-radius: 50%; border: 1.5px solid #3f5a39; background: #183019; color: #e8efe2; font-size: 17px; font-weight: 800; cursor: pointer; }
+  .cn-step button:focus-visible { outline: 2px solid #FFE600; outline-offset: 2px; }
+  .cn-clock { min-width: 64px; text-align: center; font-size: 22px; font-weight: 800; color: #FFE600; font-variant-numeric: tabular-nums; }
+
+  .cn-hours { display: grid; grid-template-columns: repeat(20, minmax(0, 1fr)); gap: 2px; padding: 0 14px 12px; }
+  .cn-hours button { font-family: inherit; border: 0; border-radius: 4px; padding: 6px 0; background: #1d3420; color: #9fb595; font-size: 9.5px; font-weight: 700; cursor: pointer; font-variant-numeric: tabular-nums; }
+  .cn-hours button.is-on { background: #FFE600; color: #123D18; }
+
+  .cn-sum { margin: 0 14px; padding: 10px 12px; border-radius: 12px; background: #183019; font-size: 13.5px; line-height: 1.5; }
+  .cn-sum b { color: #FFE600; }
+  .cn-warn { margin: 8px 14px 0; padding: 8px 11px; border-radius: 10px; background: #FFE600; color: #123D18; font-size: 12px; line-height: 1.45; font-weight: 600; }
+
+  .cn-filter { display: flex; flex-wrap: wrap; gap: 6px; padding: 12px 14px 8px; }
+  .cn-filter button { font-family: inherit; font-size: 12px; font-weight: 700; border-radius: 999px; padding: 6px 11px; border: 1.5px solid #3f5a39; background: transparent; color: #cbd8c3; cursor: pointer; }
+  .cn-filter button[aria-pressed=true] { background: #e8efe2; color: #10230f; border-color: #e8efe2; }
+  .cn-filter i { display: inline-block; width: 9px; height: 9px; border-radius: 50%; margin-right: 5px; vertical-align: 0; }
+
+  .cn-zoom { display: flex; gap: 6px; padding: 0 14px 8px; }
+  .cn-zoom button { font-family: inherit; font-size: 11.5px; font-weight: 700; border: 0; border-radius: 8px; padding: 6px 10px; background: #1d3420; color: #b9c8b0; cursor: pointer; }
+  .cn-zoom button[aria-pressed=true] { background: #FFE600; color: #123D18; }
+  .cn-map { position: relative; }
+  .cn-map svg { display: block; width: 100%; height: auto; touch-action: manipulation; }
+  .cn-d { fill: #1a2e1c; stroke: #0f1f12; stroke-width: 2.2; }
+  .cn-dn { font-size: 15px; font-weight: 700; fill: #4a6444; pointer-events: none; }
+  .cn-pin { cursor: pointer; }
+  .cn-pin .halo { fill: #FFE600; opacity: 0; pointer-events: none; }
+  .cn-pin.is-open .halo { opacity: .18; }
+  .cn-pin.is-closed { opacity: .35; }
+  .cn-pin.is-hidden { display: none; }
+  .cn-pin.is-pick .ring { stroke: #ffffff; stroke-width: 4px; }
+  .cn-pin:focus { outline: none; }
+  .is-inner .cn-pin.is-pick .ring { stroke-width: 1.6px; }
+  .is-inner .cn-pin:focus-visible .ring { stroke-width: 2px; }
+  .cn-pin:focus-visible .ring { stroke: #FFE600; stroke-width: 5px; }
+
+  .cn-card { margin: 10px 14px 0; padding: 12px; border-radius: 12px; background: #e8efe2; color: #1c2219; }
+  .cn-card h2 { font-size: 15.5px; line-height: 1.3; color: #1B5E20; }
+  .cn-card .meta { font-size: 12.5px; color: #4c5747; margin-top: 3px; line-height: 1.45; }
+  .cn-card .state { display: inline-block; margin-top: 8px; font-size: 11px; font-weight: 800; letter-spacing: .05em; text-transform: uppercase; border-radius: 6px; padding: 4px 8px; }
+  .cn-card .state.open { background: #1B5E20; color: #ffffff; }
+  .cn-card .state.closed { background: #cfd9c6; color: #2c3628; }
+  .cn-card p { font-size: 12.5px; line-height: 1.5; margin-top: 7px; }
+  .cn-card a { color: #1B5E20; font-weight: 800; }
+
+  .cn-lines { padding: 14px 14px 6px; }
+  .cn-lines h3 { font-size: 10.5px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: #9fb595; margin-bottom: 6px; }
+  .cn-lines svg { display: block; width: 100%; height: auto; }
+  .cn-ln-name { font-size: 12px; font-weight: 700; fill: #e8efe2; }
+  .cn-ln-sub { font-size: 10px; fill: #8fa486; }
+  .cn-ln-track { fill: #1a2e1c; }
+  .cn-ln-bar { fill: #3f6b37; }
+  .cn-ln-bar.is-live { fill: #FFE600; }
+  .cn-ln-axis { font-size: 9.5px; fill: #8fa486; }
+  .cn-calls { list-style: none; padding: 4px 14px 14px; display: grid; gap: 6px; }
+  .cn-calls li { display: flex; justify-content: space-between; gap: 10px; align-items: baseline; font-size: 12.5px; line-height: 1.4; border-top: 1px solid #22391f; padding-top: 6px; }
+  .cn-calls a { color: #FFE600; font-weight: 800; white-space: nowrap; text-decoration: none; }
+  .cn-calls .off { color: #6f8768; }
+  .cn-foot { padding: 10px 14px 14px; font-size: 11px; line-height: 1.5; color: #8fa486; border-top: 1px solid #22391f; }
+  @media (max-width: 480px) {
+    .cn-hours { grid-template-columns: repeat(10, minmax(0, 1fr)); }
+    .cn-step { margin-left: 0; }
+  }
+</style>
+</head>
+<body>
+<div class="cn">
+  <div class="cn-top">
+    <h1>Berlin Cold Night Help Map</h1>
+    <p>Pick a night and an hour. The map lights up the emergency shelters on the Kältehilfe list that are open then, and the strip below shows which help lines are answering.</p>
+  </div>
+  <div class="cn-when">
+    <label for="cnDate">Night of</label>
+    <input type="date" id="cnDate" min="2026-10-01" max="2027-04-30">
+    <div class="cn-step">
+      <button type="button" id="cnPrev" aria-label="One hour earlier">&#8249;</button>
+      <div class="cn-clock" id="cnClock" aria-live="polite">21:00</div>
+      <button type="button" id="cnNext" aria-label="One hour later">&#8250;</button>
+    </div>
+  </div>
+  <div class="cn-hours" id="cnHours" role="group" aria-label="Hour of the night"></div>
+  <div class="cn-sum" id="cnSum" aria-live="polite"></div>
+  <div class="cn-warn" id="cnWarn" hidden></div>
+  <div class="cn-filter" id="cnFilter" role="group" aria-label="Who the shelter takes"></div>
+  <div class="cn-zoom" id="cnZoom" role="group" aria-label="Map view"><button type="button" data-z="city" aria-pressed="true">Whole city</button><button type="button" data-z="inner" aria-pressed="false">Inner city close-up</button></div>
+  <div class="cn-map"><svg id="cnMap" viewBox="0 0 913 748" role="img" aria-label="Map of Berlin districts with the emergency shelters on the Kältehilfe list"></svg></div>
+  <div class="cn-card" id="cnCard"></div>
+  <div class="cn-lines">
+    <h3>Who answers the phone at this hour</h3>
+    <svg id="cnLines" viewBox="0 0 640 226" role="img" aria-label="Opening hours of the Berlin cold-weather help lines across the night"></svg>
+  </div>
+  <ul class="cn-calls" id="cnCalls"></ul>
+  <div class="cn-foot">Shelters: the Kältehilfe list of emergency overnight places for October 2026, as published on 30 September 2026. Phone lines and hours: the city’s notice of 30 September 2026. Most of the winter places open in November and are not on this list yet; the Kältehilfe app has the current list. Checked on 3 October 2026.</div>
+</div>
+<script src="../js/brand.js"></script>
+<script>
+(function () {
+  var NS = 'http://www.w3.org/2000/svg';
+  var DISTRICTS = [{"n":"Mitte","d":"M406.8,239.9L393.8,242.8L391.9,255.1L383.3,255.3L376.5,260.6L374.8,253.9L368.8,255.5L368.3,252.4L353.9,252.3L337.6,246.7L330.4,252.9L323.6,251.3L300.4,261.6L289.4,281.3L311.6,282.5L324.4,297.6L326.8,304.7L302.8,310.4L305,318.7L311.1,317.6L305.4,322.3L309.9,342.8L315.9,335.1L323.8,336.7L327.8,350L336.3,357.4L328.8,360.8L333.5,363.3L328.1,366.9L334.4,369.9L335.4,376.3L349,380.5L381.3,392.1L392.6,371.6L421.8,371.3L423.2,368.5L441.9,380.3L459.7,376.7L462.7,370.2L453.7,362.1L462.4,342.3L443.5,328.3L430.4,323.6L434.2,313.2L429.2,300.3L425.6,300.5L421.4,276.7L418.6,277.1L417.9,254.1L406.8,239.9Z"},{"n":"Friedrichshain-Kreuzberg","d":"M516.4,387.9L528.2,356.6L523.4,346.9L520.6,343.4L497.8,342.2L493.6,327.7L486.8,330.8L480.2,320.6L475.4,325.6L454.9,327.5L449.6,332.7L462.4,342.3L453.7,362.1L462.7,370.2L459.7,376.7L441.9,380.3L423.1,368.5L421.8,371.3L392.6,371.6L388.6,382.1L380.4,395L379.8,404L390.9,407.6L387.7,422L384.3,422.5L415.1,420.7L415.1,424.4L431.5,427.3L433.6,413.8L455.4,418.8L457.3,415.6L450.5,398.4L476.1,412.2L483.8,401.5L496.1,394.6L522.9,409L529.4,417.9L533,416.3L535.3,420.1L545.8,417L516.4,387.9Z"},{"n":"Pankow","d":"M568.1,61.1L545.9,46.9L538.6,36.7L542.7,11.5L525.4,20.6L530.6,1.1L527.6,4.6L525.2,2.2L512.3,19.6L503.6,15.5L491.7,29.5L507.4,40.8L522.5,43.1L523,48.4L503.8,61.7L489.3,57.5L478.2,59.1L476.8,68L469,70.1L467.2,85.4L460.3,85.1L455.9,89.6L439.5,71.9L433.6,73.7L420.1,61.3L415.4,63L408.3,84.8L398.2,87.6L399.6,90.2L390.1,98.2L390.9,105.3L378,111L390.8,144.4L383,169.2L369.5,187.4L351.8,190L406.6,235.2L413.9,246.7L424.1,296.4L434.2,313.2L430.4,323.6L449.6,332.7L454.9,327.5L475.4,325.6L480.2,320.6L486.8,330.8L493.6,327.7L497.8,342.2L520.6,343.4L499,326.7L516,312.5L512.8,308.1L517.5,299.7L513.7,282.8L530.8,284.1L530.4,280.2L539.6,273.3L550.9,276.9L551.9,273.2L551,264.2L536.3,246.7L541.6,236.1L530.6,228.5L530.9,209.7L542.7,190.7L565.4,175.9L557.1,156.8L553.9,156.9L556.3,144.5L565.8,123.9L566.3,111.1L582.6,102.7L589.6,68.5L586,68.8L584.5,64.3L575.8,67.7L568.1,61.1Z"},{"n":"Charlottenburg-Wilmersdorf","d":"M338,410.1L340.2,390.5L337.5,387.7L343.5,378.4L335.1,376.1L334.4,369.9L328.1,366.9L333.5,363.3L328.8,360.8L336.3,357.4L327.8,350L322.3,335.6L314.8,335.7L310,343L305.4,322.3L311.1,317.6L305,318.7L302.8,310.4L326.8,304.7L311.6,282.5L247.1,280.1L249.8,303.3L263.2,314L261.4,322.7L245.4,325.2L225.7,329.4L215.1,326.6L216.2,335.5L206,331.5L181.6,331.3L178,343.1L180.2,359.1L172.9,368.9L167.7,368.8L165,382.8L138,394.6L133.6,412.9L138.5,427.6L134.5,436.4L135.8,451.5L147.2,452.6L150.4,458.3L156.9,454.4L167.4,456.8L194.5,453.9L231.6,463.3L272.5,454.4L301.8,462.4L314.4,462.2L315,439L337.6,437.6L338,410.1Z"},{"n":"Spandau","d":"M172.1,368.2L180.2,359.1L178,343.1L181.6,331.3L206,331.5L216.2,335.5L215.1,326.6L225.7,329.4L253,325.4L261.4,322.7L263.2,313.9L249.8,303.3L247.1,280.1L223.6,277.6L190.1,249.6L186,228L177.4,218.6L172.4,203.7L175.4,195.8L161.7,193.8L160.9,197.7L116.1,178.4L103.7,170.7L93.6,173.3L82.8,186.3L64.7,195.9L55.5,196.1L54.2,205.4L60.3,213.2L83.5,204.9L88.8,227.2L78.3,255.2L78.4,272.2L65.5,272.7L57.6,265.3L42.9,321L39.8,351.5L74.8,345.6L109.5,368.8L54.7,433.8L40.2,439.4L39.6,448.3L30.6,465.2L33.4,483.4L28.9,498.4L47.6,522.7L82,514.4L100.6,494.5L112.3,486.3L121.2,486.7L131.9,472L133.7,463.2L134.5,436.4L138.5,427.6L133.6,412.9L138,394.6L165,382.8L166.7,370.4L172.1,368.2Z"},{"n":"Steglitz-Zehlendorf","d":"M345.6,584.2L345.3,579L373.1,563L384.4,546L363.4,487.4L353.9,484.8L339.9,463.1L336.5,461.3L325.5,468.1L315.8,462.3L301.8,462.4L272.5,454.4L231.6,463.3L194.5,453.9L167.4,456.8L156.9,454.4L150.4,458.3L147.2,452.6L135.8,451.5L131.9,472L121.2,486.7L112.3,486.3L100.6,494.5L82,514.4L49,520.4L32.6,538.9L33.6,545.8L22.5,557.3L15.3,554.3L10.6,561.8L0.5,566.9L3.8,584.8L12.7,589.5L14.9,586.4L13.4,580.7L17.4,579.9L17.6,587L24.3,589.2L25.9,581.1L29.3,581.7L32.3,587.2L24.9,591.1L49.9,617.3L61.7,611.7L67.9,615.1L63.9,616.4L69.1,619.2L57.2,631.4L58.5,628.4L53.3,628.9L52.5,633.4L58.7,638.6L62.3,635.3L57.4,631.7L72.9,616.8L96.1,623.7L109.5,622.7L113.5,620L112.7,615.2L94.6,618.4L96.7,604L148.1,576L164.8,573.3L185.8,563.7L214.1,563.5L219.3,599.3L230.5,596.2L242.6,600.9L252.4,599.8L283,574.4L281.8,578.3L303.7,612.3L345.6,584.2Z"},{"n":"Tempelhof-Schöneberg","d":"M406.1,640L407.2,659.3L450,663.1L460.1,641.8L447.8,594.7L449.5,587.1L436.4,580.7L426.3,582.2L422.2,570.5L429.4,566.1L430.3,562.2L426.4,561.3L445.7,494.8L451.6,484.8L458.9,485L450.8,479.1L454.4,476.8L452.1,464.8L445.7,465.7L441.1,436.3L431.9,437.4L431.5,427.3L415.1,424.4L415.1,420.7L384.3,422.5L387.7,422L390.9,407.6L379.8,404L381.6,391.7L371.7,389.7L343.3,378.6L337.5,387.7L340.2,390.5L337.6,437.6L315,439L314.4,462.2L325.5,468.1L336.9,461.5L353.8,480.4L353.9,484.8L363.4,487.4L384.4,546L373.1,563L345.3,579L345.7,593.3L384.9,624.1L382.7,635.9L405.7,635.6L406.1,640Z"},{"n":"Neukölln","d":"M494.9,420.7L450.9,398.4L457.3,415.6L455,419.4L433.3,414.1L431.8,437.3L441.1,436.3L445.7,465.7L452.1,464.8L454.4,476.8L450.8,479.1L458.9,485L451.6,484.8L445.7,494.8L426.4,561.3L430.3,562.2L429.4,566.1L422.2,570.5L426.3,582.2L437.3,580.9L449.4,587.8L487.8,572.4L503.5,564.9L515.1,566L531,619.3L580.1,606.4L591,580.3L583.5,560.4L586.2,551.6L568.1,546.1L507.8,497.1L500.1,479.4L524.5,480.4L529.2,466.6L517.3,447.8L518.5,440.3L501.7,420.6L498.9,424L494.9,420.7Z"},{"n":"Treptow-Köpenick","d":"M658.6,440L641.6,448.3L612.4,444.5L600.1,460.1L587.7,444L569,444.7L561,427.7L550.5,426.5L545.9,417L535.3,420.1L533,416.3L529.4,417.9L526,411.4L508.8,399.4L493.3,394.8L476.6,411.5L483.1,416.9L486.2,413.6L498.9,424L501.8,420.7L518.5,440.3L517.3,447.8L529.2,466.6L524.5,480.4L500.1,479.8L512.5,502.4L568.1,546.1L586.2,551.6L583.5,560.4L591,580.3L580.1,606.4L598.6,616.3L610.5,608.9L606.5,634.7L645.4,636.6L684,624L687.6,639.6L702.6,656.5L701.8,668.7L732.6,651.6L739,662.9L751.8,660.1L751,674.9L757.4,676.3L757.9,683.3L746,699.4L743.8,731.5L752,743.2L759.6,746.8L764,744.2L763.3,737.3L768.9,727.5L790.4,684.5L805.3,677.5L818.9,682.9L829.4,664.3L830,660.1L825.7,660.2L827.9,651.3L813.1,648L811.6,642.8L816.9,642.3L827.1,628.5L829.7,629.9L851,611L860.4,614.2L871.9,610.2L877.4,597.1L882.4,594.1L869.9,573.9L880.5,551.3L885.4,551.2L883.8,538.5L869.7,535.2L860.4,528.2L872.1,535.6L887.6,537.5L889.2,526.2L897.9,518.6L905.8,518.3L903.3,529.2L910.8,530.4L912.1,526.6L904.4,525.4L906,508.2L896.2,502.7L868.9,498L851.1,471.2L831.2,459.5L828.2,459.4L836.6,478L836.6,487.4L827.2,488.1L823.3,468.4L806.1,464.2L785.1,446.1L777.3,446.6L759.4,436.2L752.5,435.1L728.3,447.4L724.8,463.4L722.6,454.5L705.4,453.3L705.3,449.2L697.9,449.3L675.4,431L666.4,431.2L658.6,440Z"},{"n":"Marzahn-Hellersdorf","d":"M732.5,407L734.2,404.6L726.5,401.9L737.7,365.6L751,348.6L773.2,331.8L771.1,323.2L728.8,322.5L727.6,304.9L739.9,305.9L744.6,295.8L675.5,279.1L677.3,267.4L671.4,239.4L668.9,232L664,231.9L660,225.9L651.7,227.6L650.2,224.4L613.2,244.5L592.8,266.9L602.1,302.3L581.3,310.6L583.5,358.4L604.5,359.1L609,362.4L606.1,376.9L626.4,421.3L623.3,433.9L628.9,447.3L648.7,447.3L658.6,441.1L660.2,434.6L675.4,431L709.3,454.5L716.3,444.9L712.3,443.1L714.1,431.7L732.5,407Z"},{"n":"Lichtenberg","d":"M583.8,358.5L581.3,310.6L602.1,302.3L592.8,266.9L614.2,243.2L645.7,229.6L650.2,224.4L640.5,209.5L622.3,194.9L595.9,185.2L569.4,185.5L565.4,175.9L543.4,190.1L536.2,203.2L531.9,204.5L530.6,228.5L541.6,236.1L536.2,243L541.6,253.9L551.8,265.8L550.9,276.9L539.6,273.3L530.4,280.2L530.8,284.1L514.2,282.3L517.5,299.7L512.8,308.1L516,312.5L499,326.7L503.7,332.8L517.1,338.6L528.2,356.6L515.8,390L521.9,391.4L546.8,415.2L550.5,426.5L561,427.7L569,444.7L587.7,444L600.1,460.1L612.4,444.5L629.7,447.5L623.3,433.9L626.4,421.3L606.1,376.9L609,362.4L604.5,359.1L583.8,358.5Z"},{"n":"Reinickendorf","d":"M389.6,153.6L390,138.8L378.3,111.9L365.5,117.3L337.1,118L305,105.7L290.9,107.9L301.3,101.7L295.2,85.7L299.8,70.9L287.9,49.7L301,41.1L297,36.2L264,33.7L262.8,51.4L267.2,51.7L265.4,77.1L236,78.1L239.5,100.3L238.9,108.7L179.6,105.4L174.5,123.5L161.1,147.9L154,153.6L162.9,170.3L177.4,184.9L172.4,203.7L177.4,218.6L186,228L189.9,249.3L225.3,278.4L289.4,281.3L300.4,261.6L323.6,251.3L330.4,252.9L337.6,246.7L353.9,252.3L368.3,252.4L368.8,255.5L374.8,253.9L375.6,260.7L383.3,255.3L391.9,255.1L393.8,242.8L406.5,240.4L407,235.6L351.8,190L369.5,187.4L389.6,153.6Z"}];
+  var DATA = {"places": [{"id": "franklin", "name": "Notübernachtung Franklinstraße", "addr": "Franklinstraße 27a", "area": "Charlottenburg", "phone": "030 3912722", "beds": 65, "group": "all", "season": "year", "open": 18, "close": 8, "days": null, "note": "", "lat": 52.51896, "lon": 13.32546}, {"id": "nac", "name": "Notübernachtung am Containerbahnhof", "addr": "Am Containerbahnhof 1", "area": "Friedrichshain", "phone": "030 66628770", "beds": 58, "group": "all", "season": "year", "open": 19.5, "close": 7.5, "days": null, "note": "", "lat": 52.51468, "lon": 13.4774}, {"id": "strassenfeger", "name": "Notübernachtung Strassenfeger", "addr": "Storkower Straße 101a", "area": "Prenzlauer Berg", "phone": "030 47905810", "beds": 22, "group": "all", "season": "year", "open": 18, "close": 8, "days": null, "note": "Not step-free.", "lat": 52.53742, "lon": 13.45259}, {"id": "neustart8", "name": "Neustart, Otto-Rosenberg-Straße 8", "addr": "Otto-Rosenberg-Straße 8/8a", "area": "Marzahn", "phone": "030 93668739", "beds": 8, "group": "all", "season": ["10-01", "04-30"], "open": 20, "close": 8, "days": null, "note": "", "lat": 52.55148, "lon": 13.5455}, {"id": "neustart3", "name": "Neustart, Otto-Rosenberg-Straße 3", "addr": "Otto-Rosenberg-Straße 3 and 10", "area": "Marzahn", "phone": "030 99273376", "beds": 5, "group": "all", "season": ["10-01", "04-30"], "open": 20, "close": 8, "days": null, "note": "", "lat": 52.55124, "lon": 13.54538}, {"id": "heimat", "name": "Herberge zur Heimat", "addr": "Falkenseer Chaussee 154", "area": "Spandau", "phone": "030 37499050", "beds": 8, "group": "all", "season": ["10-01", "04-30"], "open": 18, "close": 8, "days": null, "note": "", "lat": 52.55364, "lon": 13.15023}, {"id": "kurmark", "name": "Notübernachtung Kurmärkische Straße", "addr": "Kurmärkische Straße 1-3", "area": "Schöneberg", "phone": "0152 24132628", "beds": 30, "group": "all", "season": ["10-01", "04-30"], "open": 18, "close": 8, "days": null, "note": "", "lat": 52.49948, "lon": 13.35922}, {"id": "sophie", "name": "Haus Sophie", "addr": "Wollenberger Straße 10", "area": "Hohenschönhausen", "phone": "030 98694701", "beds": 33, "group": "all", "season": ["10-01", "04-30"], "open": 17, "close": 8, "days": null, "note": "", "lat": 52.55038, "lon": 13.5123}, {"id": "kiez-f", "name": "Notübernachtung für Frauen „Mitten im Kiez“", "addr": "Petersburger Straße 92", "area": "Friedrichshain", "phone": "030 29350557", "beds": 9, "group": "women", "season": "year", "open": 19, "close": null, "days": null, "note": "Opens 19:00; closing time not listed. Trans-inclusive. Not step-free.", "lat": 52.51727, "lon": 13.45304}, {"id": "hallesches", "name": "24/7 Notunterkunft für Frauen", "addr": "Hallesches Ufer 30", "area": "Kreuzberg", "phone": "030 202159870", "beds": 65, "group": "women", "season": "year", "open": 0, "close": 24, "days": null, "note": "Open around the clock. Ask for a place by phone only, from 10:30.", "lat": 52.49896, "lon": 13.38688}, {"id": "lichtblick", "name": "Notübernachtung Lichtblick", "addr": "Wrangelstraße 30", "area": "Kreuzberg", "phone": "0178 3421347", "beds": 25, "group": "women", "season": ["10-01", "04-30"], "open": 19, "close": 8, "days": null, "note": "Saturday and Sunday nights until 9:00.", "lat": 52.50177, "lon": 13.43378}, {"id": "tieck", "name": "Notübernachtung für Frauen, GEBEWO", "addr": "Tieckstraße 17, rear building", "area": "Mitte", "phone": "030 2832939", "beds": 9, "group": "women", "season": "year", "open": 19, "close": 8, "days": null, "note": "", "lat": 52.52958, "lon": 13.39075}, {"id": "marie", "name": "Notübernachtung „Marie“", "addr": "Tieckstraße 17, front building, basement", "area": "Mitte", "phone": "030 40006209", "beds": 10, "group": "women", "season": "year", "open": 19.17, "close": 8, "days": null, "note": "Opens 19:10; on Tuesdays already from 15:00. Closing time not listed.", "lat": 52.52958, "lon": 13.39075}, {"id": "evas-obdach", "name": "Evas Obdach", "addr": "Fuldastraße 9", "area": "Neukölln", "phone": "030 477532670", "beds": 30, "group": "women", "season": "year", "open": 19, "close": 9, "days": null, "note": "Please phone ahead. Not step-free.", "lat": 52.48336, "lon": 13.4355}, {"id": "evas-halt", "name": "Evas Haltestelle", "addr": "Müllerstraße 126", "area": "Wedding", "phone": "030 4623279", "beds": 20, "group": "women", "season": ["10-01", "04-30"], "open": 18, "close": 8, "days": null, "note": "", "lat": 52.55287, "lon": 13.34723}, {"id": "fam-wrangel", "name": "Notunterkunft für wohnungslose Familien", "addr": "Wrangelstraße 12", "area": "Kreuzberg", "phone": "030 61073256", "beds": 9, "group": "families", "season": "year", "open": 0, "close": 24, "days": null, "note": "Nine family rooms, adults with children only. Phone first to ask whether a room is free.", "lat": 52.50357, "lon": 13.42817}, {"id": "fam-baer", "name": "Familien-Notübernachtung „Am Bärensprung“", "addr": "Am Bärensprung 52/56", "area": "Heiligensee", "phone": "0175 1885103", "beds": 44, "group": "families", "season": "year", "open": 0, "close": 24, "days": null, "note": "Adults with children only. Phone first to ask whether places are free.", "lat": 52.61136, "lon": 13.24716}, {"id": "johanniter", "name": "Notübernachtung der Johanniter", "addr": "Ohlauer Straße 22", "area": "Kreuzberg", "phone": "030 50562540", "beds": 88, "group": "men", "season": "year", "open": 20, "close": 7.75, "days": null, "note": "", "lat": 52.49673, "lon": 13.4302}, {"id": "pius", "name": "Notübernachtung St. Pius / St. Nikolaus", "addr": "Palisadenstraße 72", "area": "Friedrichshain", "phone": "030 53219333", "beds": 15, "group": "men", "season": ["10-01", "04-30"], "open": 19, "close": 8, "days": null, "note": "", "lat": 52.5199, "lon": 13.43619}, {"id": "awo", "name": "AWO Kiezcafé", "addr": "Petersburger Straße 92, 2nd floor", "area": "Friedrichshain", "phone": "030 29350556", "beds": 8, "group": "men", "season": ["10-01", "04-30"], "open": 20, "close": 8, "days": null, "note": "", "lat": 52.51727, "lon": 13.45304}, {"id": "kubus", "name": "KUBUS Kältehilfe", "addr": "Teupitzer Straße 39, entrance left of the main building", "area": "Neukölln", "phone": "030 810335161", "beds": 25, "group": "men", "season": ["10-01", "04-30"], "open": 19, "close": 7, "days": null, "note": "", "lat": 52.4803, "lon": 13.45615}, {"id": "arche", "name": "Nachtcafé Die Arche", "addr": "Plesserstraße 3", "area": "Treptow", "phone": "030 5337104", "beds": 16, "group": "cafe", "season": ["10-01", "04-30"], "open": 19, "close": 8, "days": [0, 1, 2, 3, 4, 6], "note": "Nights from Monday to Friday and Sunday.", "lat": 52.48921, "lon": 13.4522}, {"id": "hirten", "name": "Nachtcafé Zum guten Hirten", "addr": "Goßlerstraße 30", "area": "Friedenau", "phone": "0152 57187272", "beds": 18, "group": "cafe", "season": ["10-27", "04-30"], "open": 20.5, "close": 8, "days": [1, 2, 3, 4], "note": "Tuesday to Friday nights, from 27 October.", "lat": 52.471, "lon": 13.32786}, {"id": "tabor", "name": "Nachtcafé Ev. Taborgemeinde", "addr": "Taborstraße 17", "area": "Kreuzberg", "phone": "030 61285833", "beds": 40, "group": "cafe", "season": ["10-14", "04-24"], "open": 21.5, "close": 8, "days": [1], "note": "Tuesday nights from 14 October. No entry between 23:00 and 7:00.", "lat": 52.49676, "lon": 13.44623}, {"id": "mehringhof", "name": "Kälteschutz im Mehringhof", "addr": "Gneisenaustraße 2a", "area": "Kreuzberg", "phone": "030 120535822", "beds": 25, "group": "cafe", "season": ["10-29", "04-01"], "open": 20, "close": 9, "days": [3], "note": "Thursday nights from 29 October.", "lat": 52.49195, "lon": 13.38896}], "lines": [{"id": "kht", "name": "Kältehilfetelefon", "who": "GEBEWO coordination line: where is a free place tonight", "phone": "030 34397140", "season": ["10-01", "04-30"], "spans": [[19, 23]]}, {"id": "waerme", "name": "Wärmebus, Red Cross", "who": "Drives out to a person you report", "phone": "030 6003001010", "season": ["11-01", "03-31"], "spans": [[18, 24]]}, {"id": "kaelte", "name": "Kältebus, Stadtmission", "who": "Drives out to a person you report", "phone": "030 690333690", "season": ["11-01", "03-31"], "spans": [[20, 26]]}, {"id": "obdach", "name": "Obdachbus DRK-Südwest", "who": "Steglitz-Zehlendorf only", "phone": "0157 58094952", "season": null, "spans": [[15, 22]]}, {"id": "karuna", "name": "Karuna Sub bus line", "who": "Daytime, Monday to Friday", "phone": "0157 86605080", "season": null, "spans": [[15, 16], [32, 34]], "weekdays": true}, {"id": "sos", "name": "112 or 110", "who": "Someone is unresponsive or in danger", "phone": "112", "season": null, "spans": [[15, 34]]}]};
+  var KX = 1355.346, KY = 2211.4, LON0 = 13.088, LAT0 = 52.676;
+  function px(lon) { return (lon - LON0) * KX; }
+  function py(lat) { return (LAT0 - lat) * KY; }
+  var GROUPS = [
+    { id: 'all', label: 'Everyone', col: '#FFE600' },
+    { id: 'women', label: 'Women', col: '#F28C8C' },
+    { id: 'men', label: 'Men', col: '#8CC4F2' },
+    { id: 'families', label: 'Families', col: '#B7E59C' },
+    { id: 'cafe', label: 'Night cafés', col: '#E3B5F0' }
+  ];
+  var GCOL = {}; GROUPS.forEach(function (g) { GCOL[g.id] = g.col; });
+  var DAYNAMES = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+  var MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+  /* The night runs from 15:00 on the picked day to 10:00 the next morning. t is hours since midnight of the picked day. */
+  var STEPS = []; for (var t = 15; t <= 34; t++) STEPS.push(t);
+  var currentStep = 6;
+  var shown = { all: true, women: true, men: true, families: true, cafe: true };
+  var picked = 'johanniter';
+
+  function el(name, attrs, parent) {
+    var n = document.createElementNS(NS, name);
+    for (var k in attrs) n.setAttribute(k, attrs[k]);
+    if (parent) parent.appendChild(n);
+    return n;
+  }
+  function hh(t) { var h = Math.floor(t) % 24, m = Math.round((t - Math.floor(t)) * 60); return (h < 10 ? '0' : '') + h + ':' + (m < 10 ? '0' : '') + m; }
+  function parseDay(v) { var p = v.split('-'); return new Date(+p[0], +p[1] - 1, +p[2], 12); }
+  function iso(d) { return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0'); }
+  function wd(d) { return (d.getDay() + 6) % 7; }
+  function seasonKey(d) { var m = d.getMonth() + 1; return (m >= 7 ? m : m + 12) * 100 + d.getDate(); }
+  function keyOf(md) { var p = md.split('-'); var m = +p[0]; return (m >= 7 ? m : m + 12) * 100 + (+p[1]); }
+  function inSeason(season, d) {
+    if (!season || season === 'year') return true;
+    var k = seasonKey(d); return k >= keyOf(season[0]) && k <= keyOf(season[1]);
+  }
+
+  function placeOpen(p, d, t) {
+    if (!inSeason(p.season, d)) return false;
+    if (p.days && p.days.indexOf(wd(d)) < 0) return false;
+    if (p.open === 0 && p.close === 24) return true;
+    var o = p.open;
+    if (p.id === 'marie' && wd(d) === 1) o = 15;
+    var c = p.close === null ? 34 : p.close + 24;
+    if (p.id === 'lichtblick' && (wd(d) === 5 || wd(d) === 6)) c = 33;
+    return t >= o && t < c;
+  }
+  function lineLive(l, d, t) {
+    if (!inSeason(l.season, d)) return false;
+    var next = new Date(d.getTime() + 864e5);
+    return l.spans.some(function (s) {
+      if (t < s[0] || t >= s[1]) return false;
+      if (l.weekdays) { var day = t >= 24 ? next : d; return wd(day) < 5; }
+      return true;
+    });
+  }
+
+  var dateIn = document.getElementById('cnDate');
+  var today = new Date(); today.setHours(12, 0, 0, 0);
+  var lo = parseDay('2026-10-01'), hi = parseDay('2027-04-30');
+  var start = today < lo ? lo : (today > hi ? hi : today);
+  dateIn.value = iso(start);
+
+  var hoursBox = document.getElementById('cnHours');
+  STEPS.forEach(function (t, i) {
+    var b = document.createElement('button');
+    b.type = 'button'; b.textContent = hh(t).slice(0, 2);
+    b.setAttribute('aria-label', hh(t));
+    b.addEventListener('click', function () { currentStep = i; render(); });
+    hoursBox.appendChild(b);
+  });
+  document.getElementById('cnPrev').addEventListener('click', function () { if (currentStep > 0) { currentStep--; render(); } });
+  document.getElementById('cnNext').addEventListener('click', function () { if (currentStep < STEPS.length - 1) { currentStep++; render(); } });
+  dateIn.addEventListener('change', function () {
+    if (!dateIn.value) dateIn.value = iso(start);
+    var d = parseDay(dateIn.value); if (d < lo) dateIn.value = '2026-10-01'; if (d > hi) dateIn.value = '2027-04-30';
+    render();
+  });
+
+  var filterBox = document.getElementById('cnFilter');
+  GROUPS.forEach(function (g) {
+    var b = document.createElement('button');
+    b.type = 'button'; b.setAttribute('aria-pressed', 'true');
+    b.innerHTML = '<i style="background:' + g.col + '"></i>' + g.label;
+    b.addEventListener('click', function () {
+      shown[g.id] = !shown[g.id];
+      b.setAttribute('aria-pressed', shown[g.id] ? 'true' : 'false');
+      render();
+    });
+    filterBox.appendChild(b);
+  });
+
+  var svg = document.getElementById('cnMap');
+  DISTRICTS.forEach(function (d) { el('path', { d: d.d, 'class': 'cn-d' }, svg); });
+  [['Mitte', 372, 312], ['Pankow', 470, 190], ['Spandau', 110, 300], ['Neukölln', 478, 528], ['Reinickendorf', 255, 170], ['Lichtenberg', 560, 330], ['Marzahn-Hellersdorf', 630, 290], ['Treptow-Köpenick', 690, 560], ['Steglitz-Zehlendorf', 210, 520], ['Charlottenburg-Wilm.', 160, 410]].forEach(function (n) {
+    var tx = el('text', { x: n[1], y: n[2], 'class': 'cn-dn', 'text-anchor': 'middle' }, svg); tx.textContent = n[0];
+  });
+  var nudge = { 'kiez-f': [-9, -6], awo: [9, 6], tieck: [-9, -5], marie: [9, 5] };
+  var pins = {};
+  var VIEWS = { city: { box: '0 0 913 748', k: 1 }, inner: { box: '285 235 300 246', k: 3.04 } };
+  var view = 'city';
+  var order = DATA.places.slice().sort(function (a, b) { return b.beds - a.beds; });
+  order.forEach(function (p) {
+    var x = px(p.lon) + (nudge[p.id] ? nudge[p.id][0] : 0), y = py(p.lat) + (nudge[p.id] ? nudge[p.id][1] : 0);
+    var r = 6 + Math.sqrt(p.beds) * 1.15;
+    p._r = r;
+    var g = el('g', { 'class': 'cn-pin', tabindex: '0', role: 'button', 'aria-label': p.name + ', ' + p.addr }, svg);
+    el('circle', { cx: x, cy: y, r: r + 9, 'class': 'halo' }, g);
+    el('circle', { cx: x, cy: y, r: r, fill: GCOL[p.group], 'class': 'ring', stroke: '#0f1f12', 'stroke-width': 2 }, g);
+    function pick() { picked = p.id; render(); }
+    g.addEventListener('click', pick);
+    g.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); pick(); } });
+    pins[p.id] = g;
+  });
+
+  [].forEach.call(document.querySelectorAll('#cnZoom button'), function (b) {
+    b.addEventListener('click', function () {
+      view = b.getAttribute('data-z');
+      [].forEach.call(document.querySelectorAll('#cnZoom button'), function (o) { o.setAttribute('aria-pressed', o === b ? 'true' : 'false'); });
+      svg.setAttribute('viewBox', VIEWS[view].box); svg.classList.toggle('is-inner', view === 'inner');
+      var k = VIEWS[view].k;
+      DATA.places.forEach(function (p) {
+        var c = pins[p.id].querySelectorAll('circle');
+        var r = view === 'inner' ? Math.max(4, p._r / k * 1.25) : p._r;
+        c[0].setAttribute('r', r + 9 / (view === 'inner' ? k / 1.25 : 1)); c[1].setAttribute('r', r);
+        c[1].setAttribute('stroke-width', view === 'inner' ? 0.9 : 2);
+      });
+      [].forEach.call(svg.querySelectorAll('.cn-dn'), function (t) { t.style.fontSize = (view === 'inner' ? 6 : 15) + 'px'; });
+      if (window.BW && window.BW.resize) window.BW.resize();
+    });
+  });
+
+  var lineSvg = document.getElementById('cnLines');
+  var X0 = 150, X1 = 630, ROW = 34, TOP = 22, VW = 640;
+  function tx(t) { return X0 + (t - 15) / 19 * (X1 - X0); }
+  var SHORT = { kht: 'Kältehilfetelefon', waerme: 'Wärmebus', kaelte: 'Kältebus', obdach: 'Obdachbus', karuna: 'Karuna Sub', sos: '112 or 110' };
+
+  function render() {
+    var d = parseDay(dateIn.value), t = STEPS[currentStep];
+    var later = t >= 24 ? new Date(d.getTime() + 864e5) : d;
+    document.getElementById('cnClock').textContent = hh(t);
+    [].forEach.call(hoursBox.children, function (b, i) { b.classList.toggle('is-on', i === currentStep); b.setAttribute('aria-pressed', i === currentStep ? 'true' : 'false'); });
+
+    var openN = 0, beds = 0, inGroups = 0;
+    DATA.places.forEach(function (p) {
+      var g = pins[p.id], on = placeOpen(p, d, t), vis = shown[p.group];
+      g.classList.toggle('is-hidden', !vis);
+      g.classList.toggle('is-open', on);
+      g.classList.toggle('is-closed', !on);
+      g.classList.toggle('is-pick', p.id === picked);
+      if (vis) { inGroups++; if (on) { openN++; beds += p.beds; } }
+    });
+    var when = DAYNAMES[wd(later)] + ' ' + later.getDate() + ' ' + MONTHS[later.getMonth()] + ', ' + hh(t);
+    var total = openN === 1 ? 'place' : 'places';
+    document.getElementById('cnSum').innerHTML = when + ': <b>' + openN + ' of ' + inGroups + '</b> listed ' + total + ' open, about <b>' + beds + ' beds</b> between them. A bed is not guaranteed: ask the Kältehilfetelefon or the shelter which one still has room.';
+
+    var warn = document.getElementById('cnWarn');
+    if (seasonKey(d) >= keyOf('11-01')) { warn.hidden = false; warn.textContent = 'From November the city runs about 1,000 places, so more shelters open than this October list shows. Use it for the pattern, and check the Kältehilfe app for tonight.'; }
+    else { warn.hidden = true; }
+
+    var p = DATA.places.filter(function (x) { return x.id === picked; })[0];
+    var on = placeOpen(p, d, t);
+    var who = { all: 'Everyone', women: 'Women only', men: 'Men only', families: 'Adults with children only', cafe: 'Night café, everyone' }[p.group];
+    var hours = (p.open === 0 && p.close === 24) ? 'Open day and night' : ('From ' + hh(p.id === 'marie' && wd(d) === 1 ? 15 : p.open) + (p.close === null ? '' : ' to ' + hh(p.id === 'lichtblick' && (wd(d) > 4) ? 9 : p.close)));
+    var season = p.season === 'year' ? 'All year' : (p.season[0] === '10-01' && p.season[1] === '04-30' ? '1 October to 30 April' : 'Winter season only, see note');
+    document.getElementById('cnCard').innerHTML = '<h2>' + p.name + '</h2><div class="meta">' + p.addr + ', ' + p.area + ' &middot; ' + who + ' &middot; ' + p.beds + ' places</div>' +
+      '<span class="state ' + (on ? 'open' : 'closed') + '">' + (on ? 'Open at ' + hh(t) : 'Closed at ' + hh(t)) + '</span>' +
+      '<p>' + hours + '. ' + season + '. ' + (p.note ? p.note + ' ' : '') + 'Phone <a href="tel:' + p.phone.replace(/\s/g, '') + '">' + p.phone + '</a>.</p>';
+
+    while (lineSvg.firstChild) lineSvg.removeChild(lineSvg.firstChild);
+    var cw = lineSvg.parentNode.clientWidth || 640;
+    VW = Math.max(330, Math.min(640, cw)); X0 = VW < 480 ? 104 : 140; X1 = VW - 4;
+    lineSvg.setAttribute('viewBox', '0 0 ' + VW + ' ' + (TOP + ROW * DATA.lines.length));
+    (VW < 480 ? [15, 21, 27, 33] : [15, 18, 21, 24, 27, 30, 33]).forEach(function (h) {
+      el('line', { x1: tx(h), x2: tx(h), y1: 12, y2: TOP + ROW * DATA.lines.length - 6, stroke: '#22391f', 'stroke-width': 1 }, lineSvg);
+      var a = el('text', { x: tx(h), y: 9, 'class': 'cn-ln-axis', 'text-anchor': 'middle' }, lineSvg); a.textContent = hh(h);
+    });
+    var calls = document.getElementById('cnCalls'); calls.innerHTML = '';
+    DATA.lines.forEach(function (l, i) {
+      var y = TOP + i * ROW, live = lineLive(l, d, t), season = inSeason(l.season, d);
+      var n = el('text', { x: 0, y: y + 11, 'class': 'cn-ln-name' }, lineSvg); n.textContent = SHORT[l.id];
+      var s = el('text', { x: 0, y: y + 24, 'class': 'cn-ln-sub' }, lineSvg); s.textContent = season ? (l.weekdays ? 'Mon to Fri' : 'daily') : 'not in season';
+      el('rect', { x: X0, y: y + 3, width: X1 - X0, height: 18, rx: 5, 'class': 'cn-ln-track' }, lineSvg);
+      if (season) l.spans.forEach(function (sp) {
+        var a = Math.max(15, sp[0]), b = Math.min(34, sp[1]);
+        if (l.weekdays) { var day = a >= 24 ? new Date(d.getTime() + 864e5) : d; if (wd(day) > 4) return; }
+        el('rect', { x: tx(a), y: y + 3, width: Math.max(2, tx(b) - tx(a)), height: 18, rx: 5, 'class': 'cn-ln-bar' + (live ? ' is-live' : '') }, lineSvg);
+      });
+      var li = document.createElement('li');
+      li.innerHTML = '<span><b>' + l.name + '</b> ' + l.who + '</span>' + (live ? '<a href="tel:' + l.phone.replace(/\s/g, '') + '">' + l.phone + '</a>' : '<span class="off">' + (season ? 'not at ' + hh(t) : 'from ' + (l.season[0] === '11-01' ? '1 November' : '1 October')) + '</span>');
+      calls.appendChild(li);
+    });
+    el('line', { x1: tx(t), x2: tx(t), y1: 12, y2: TOP + ROW * DATA.lines.length - 6, stroke: '#ffffff', 'stroke-width': 2 }, lineSvg);
+
+    if (window.BW && window.BW.resize) window.BW.resize();
+  }
+  var lastW = 0;
+  window.addEventListener('resize', function () { var w = lineSvg.parentNode.clientWidth; if (Math.abs(w - lastW) > 20) { lastW = w; render(); } });
+  render();
+})();
+</script>
+</body>
+</html>

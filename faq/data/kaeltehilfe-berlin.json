@@ -1,0 +1,101 @@
+{
+  "version": 1,
+  "slug": "kaeltehilfe-berlin",
+  "key": "kaeltehilfe-berlin",
+  "config": {
+    "title": "Kältehilfe Berlin - FAQ",
+    "subtitle": "Who to call for someone sleeping out in the cold in Berlin, when the buses run, and what to donate.",
+    "items": [
+      {
+        "q": "When does the Kältehilfe in Berlin run?",
+        "a": "The season runs from **1 October to 30 April**. The city plans about 670 emergency places in October and about 1,000 in the cold months from November to March."
+      },
+      {
+        "q": "What is the Kältebus number in Berlin?",
+        "a": "The Kältebus of the Berliner Stadtmission is **030 690 333 690**, daily from November to March, 20:00 to 2:00. The Red Cross Wärmebus is **030 600 300 1010**, daily from November to March, 18:00 to midnight."
+      },
+      {
+        "q": "Who can I call in October, before the buses start?",
+        "a": "The **Kältehilfetelefon, 030 343 971 40**, answers daily from October to April between 19:00 and 23:00. In Steglitz-Zehlendorf the DRK-Südwest Obdachbus answers on 0157 58 09 49 52 from 11:00 to 22:00. In an emergency, call 112."
+      },
+      {
+        "q": "When should I call 112 instead of the Kältebus?",
+        "a": "When the person **does not respond, seems confused, lies still in the cold or could be in danger.** That is an emergency for the fire brigade and ambulance on 112, or the police on 110."
+      },
+      {
+        "q": "Should I call the Kältebus without asking the person?",
+        "a": "No. Ask politely first whether they need anything. The Stadtmission asks callers to make sure the person wants their help, because a wasted trip delays help for someone else."
+      },
+      {
+        "q": "Where can women and families sleep?",
+        "a": "Berlin has separate shelters for women, among them the **24/7 shelter on Hallesches Ufer**, and two family shelters, on Wrangelstraße in Kreuzberg and Am Bärensprung in Heiligensee, which take only adults with children. Phone first to ask whether places are free."
+      },
+      {
+        "q": "What should I donate, and where?",
+        "a": "Clean, intact winter clothing, **new and unopened hygiene items, sleeping bags, fleece or wool blankets and sleeping mats.** The Stadtmission's Textilhafen at Storkower Straße 139 D takes up to five bags without an appointment, Monday to Friday 9:00 to 16:00 and Saturday 10:00 to 15:00."
+      }
+    ]
+  },
+  "schema": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "When does the Kältehilfe in Berlin run?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The season runs from 1 October to 30 April. The city plans about 670 emergency places in October and about 1,000 in the cold months from November to March."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the Kältebus number in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The Kältebus of the Berliner Stadtmission is 030 690 333 690, daily from November to March, 20:00 to 2:00. The Red Cross Wärmebus is 030 600 300 1010, daily from November to March, 18:00 to midnight."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Who can I call in October, before the buses start?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The Kältehilfetelefon, 030 343 971 40, answers daily from October to April between 19:00 and 23:00. In Steglitz-Zehlendorf the DRK-Südwest Obdachbus answers on 0157 58 09 49 52 from 11:00 to 22:00. In an emergency, call 112."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "When should I call 112 instead of the Kältebus?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "When the person does not respond, seems confused, lies still in the cold or could be in danger. That is an emergency for the fire brigade and ambulance on 112, or the police on 110."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Should I call the Kältebus without asking the person?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. Ask politely first whether they need anything. The Stadtmission asks callers to make sure the person wants their help, because a wasted trip delays help for someone else."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Where can women and families sleep?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Berlin has separate shelters for women, among them the 24/7 shelter on Hallesches Ufer, and two family shelters, on Wrangelstraße in Kreuzberg and Am Bärensprung in Heiligensee, which take only adults with children. Phone first to ask whether places are free."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What should I donate, and where?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Clean, intact winter clothing, new and unopened hygiene items, sleeping bags, fleece or wool blankets and sleeping mats. The Stadtmission's Textilhafen at Storkower Straße 139 D takes up to five bags without an appointment, Monday to Friday 9:00 to 16:00 and Saturday 10:00 to 15:00."
+        }
+      }
+    ]
+  }
+}
