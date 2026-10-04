@@ -25,7 +25,7 @@
     const main=document.querySelector('main');if(!main)return null;
     const faq=all('#faq,[data-bw-faq],bw-faq,.faq-section',main).find(visible);
     if(faq){return {parent:faq.parentNode,before:faq,placement:'pre-faq'};}
-    const heading=all('h2,h3',main).find(h=>visible(h)&&/^(frequently asked questions|faq|quick answers about the walk|questions(?: and answers)?)/i.test(h.textContent.trim()));
+    const heading=all('h2,h3',main).find(h=>visible(h)&&/^(frequently asked questions|faq|quick questions|quick answers about the walk|questions(?: and answers)?)/i.test(h.textContent.trim()));
     if(heading){const section=heading.closest('section');const dedicated=section&&section!==main&&section.querySelector('h2,h3')===heading;const target=dedicated?section:(heading.closest('[data-breakout]')||heading);return {parent:target.parentNode,before:target,placement:'pre-faq'};}
     return {parent:main,before:null,placement:'pre-footer'};
   }
