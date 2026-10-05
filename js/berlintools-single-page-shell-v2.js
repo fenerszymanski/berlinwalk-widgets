@@ -1007,10 +1007,19 @@
     return true;
   }
 
+  var TOOL_BRAND_RELEASE = 'ec1106807a7752e772f95695dda1b977bb54bc6b';
+  var TOOL_BRAND_REFRESH_PATHS = ["alexanderplatz-parking-map/","audio-tour/","basketball-worldcup-fixtures/","basketball-worldcup-venues-map/","bebelplatz-memory-lens/","berlin-art-week-route-builder/","berlin-atm-fee-checker/","berlin-battle/","berlin-ber-airport-departure-planner/","berlin-bike-lane-reflex-checker/","berlin-bike-rental-finder/","berlin-breakfast-clock/","berlin-check-in-gap-planner/","berlin-deutschlandticket-checker/","berlin-doner-order-builder/","berlin-first-day-planner/","berlin-flea-market-picker/","berlin-hotel-location-checker/","berlin-last-day-buffer-planner/","berlin-layover-planner/","berlin-lost-item-router/","berlin-medical-help-router/","berlin-mobility-app-picker/","berlin-money-exchange-reality-check/","berlin-museum-bag-planner/","berlin-museum-three-slot-builder/","berlin-parking-calculator/","berlin-plug-adapter-checker/","berlin-public-transport-ferry-picker/","berlin-quiz/","berlin-sign-decoder/","berlin-station-arrival-planner/","berlin-step-free-planner/","berlin-street-art-worth-the-trip/","berlin-street-sense-drill/","berlin-sunset-planner/","berlin-ticket-fine-step-planner/","berlin-train-station-first-move/","berlin-transport-backup-planner/","berlin-two-day-route-map/","berlin-umweltzone-sticker-checker/","berlin-zone-ticket-decoder/","berliner-dom-visit-planner/","charlottenburg-palace-visit-planner/","club-picker/","connectivity-picker/","currywurst-finder/","ddr-museum-crowd-planner/","dinner-neighbourhood-picker/","hackescher-after-tour-planner/","hamburg-day-fit/","hohenzollern-berlin-footprint-map/","holocaust-memorial-visit-planner/","ifa-after-show-evening/","ilb-day-shape/","innotrans-three-evening-board/","jewish-museum-visit-sequence/","koepenick-waterside-route/","leipzig-day-trip-planner/","markthalle-neun-week-planner/","maybachufer-market-clock/","museum-night-route-shaper/","musikfest-evening-shape/","open-monument-day-shortlist/","pharmacy-in-berlin-helper/","potsdam-day-trip-planner/","potsdamer-platz-time-layer-walk/","rave-the-planet-day-fit/","sachsenhausen-visit-planner/","technikmuseum-train-builder/","tempelhof-field-planner/","topography-of-terror-visit-planner/","traenenpalast-visit-planner/","tropical-islands-cost-planner/","unter-den-linden-walk-planner/","victory-column-climb-planner/","worldcup-berlin/"];
+
   function appendToolPageSurface(src) {
     if (!src) return '';
     try {
       var url = new URL(src, window.location.href);
+      /* Reload only the exact corrected widget files; preserve all existing parameters. */
+      if (url.hostname === 'fenerszymanski.github.io' &&
+          url.pathname.indexOf('/berlinwalk-widgets/') === 0 &&
+          TOOL_BRAND_REFRESH_PATHS.indexOf(url.pathname.slice('/berlinwalk-widgets/'.length).replace(/index\.html$/, '')) !== -1) {
+        url.searchParams.set('bw_brand_release', TOOL_BRAND_RELEASE);
+      }
       if (url.searchParams.get('surface') === 'tool-page') return url.toString();
       url.searchParams.set('surface', 'tool-page');
       return url.toString();
