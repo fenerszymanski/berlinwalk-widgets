@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Berlin First-Day Planner | BerlinWalk</title>
-  <meta name="description" content="Arriving in Berlin today? Build a realistic first-day plan with weather, transport, what is open, and the BerlinWalk tour.">
+  <title>Berlin First-Day Planner | Walk of Berlin</title>
+  <meta name="description" content="Arriving in Berlin today? Build a realistic first-day plan with weather, transport, what is open, and the Berlin Then and Now walking tour.">
   <link rel="icon" href="data:,">
   <link rel="stylesheet" href="../css/brand.css">
   <script defer src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
@@ -1057,9 +1057,9 @@
 
   <section class="bw-wrap" aria-labelledby="bw-first-day-title">
     <header class="bw-head" data-bw-tool-header>
-      <p class="bw-kicker">BerlinWalk local planner</p>
+      <p class="bw-kicker">Walk of Berlin local planner</p>
       <h1 id="bw-first-day-title" class="bw-title">Plan Your First 24 Hours in Berlin</h1>
-      <p class="bw-sub">Pick your arrival date, answer five quick choices, and get a realistic first-day route with weather, transport, opening-day logic, and the easiest moment to join the BerlinWalk tour.</p>
+      <p class="bw-sub">Pick your arrival date, answer five quick choices, and get a realistic first-day route with weather, transport, opening-day logic, and the easiest moment to join the Berlin Then and Now walking tour.</p>
     </header>
 
     <div class="bw-body">
@@ -1231,7 +1231,7 @@
   var LEAD_API_URL = 'https://www.berlinwalk.com/_functions/firstDayPlannerLead';
   var LEAD_STORAGE_KEY = 'bw_first_day_lead_unlock';
   var LEAD_UNLOCK_MS = 30 * 24 * 60 * 60 * 1000;
-  var BW_MINI_LOGO_URL = 'https://static.wixstatic.com/media/5a08a3_4d96e164d26241fd9eb009843ec2084a~mv2.png';
+  var BW_COMPACT_BRAND = '@walkofberlin';
   var MONTH_CLIMATE = [
     { name: 'January', hi: 3, lo: -2, rain: 40, rainDays: '10', sun: 2, icon: '❄️', season: 'winter', pack: 'Heavy winter coat, warm hat, gloves, scarf, and waterproof shoes.' },
     { name: 'February', hi: 5, lo: -2, rain: 33, rainDays: '8', sun: 3, icon: '🌨️', season: 'winter', pack: 'Heavy coat, layers, waterproof shoes, and warm accessories.' },
@@ -1496,7 +1496,7 @@
       return {
         time: 'Next',
         title: 'If 12:30 is too tight, book another day',
-        copy: 'Use today as a soft orientation day, then take the BerlinWalk tour at 12:30 on another day before the city gets fragmented by random stops. I run it on selected days, so check the booking page.'
+        copy: 'Use today as a soft orientation day, then take the Berlin Then and Now walking tour at 12:30 on another day before the city gets fragmented by random stops. I run it on selected days, so check the booking page.'
       };
     }
     return {
@@ -1587,7 +1587,7 @@
     } else if (state.arrival === 'evening') {
       summary = 'Do not force a full sightseeing day out of an evening arrival. Handle transport, food, and tomorrow morning so Berlin starts calmly.';
     } else {
-      summary = 'Use today for orientation and practical decisions, then build a later day around the BerlinWalk tour, which starts at 12:30 on selected days.';
+      summary = 'Use today for orientation and practical decisions, then build a later day around the Berlin Then and Now walking tour, which starts at 12:30 on selected days.';
     }
 
     if (state.energy === 'gentle') {
@@ -2206,29 +2206,9 @@
     });
   }
 
-  var pdfLogoDataUrlPromise = null;
-
   function loadPdfLogoDataUrl() {
-    if (pdfLogoDataUrlPromise) return pdfLogoDataUrlPromise;
-    if (typeof fetch !== 'function' || typeof FileReader === 'undefined') {
-      pdfLogoDataUrlPromise = Promise.resolve('');
-      return pdfLogoDataUrlPromise;
-    }
-    pdfLogoDataUrlPromise = fetch(BW_MINI_LOGO_URL, { mode: 'cors' })
-      .then(function (response) {
-        if (!response.ok) throw new Error('Logo request failed');
-        return response.blob();
-      })
-      .then(function (blob) {
-        return new Promise(function (resolve, reject) {
-          var reader = new FileReader();
-          reader.onload = function () { resolve(reader.result || ''); };
-          reader.onerror = function () { reject(new Error('Logo read failed')); };
-          reader.readAsDataURL(blob);
-        });
-      })
-      .catch(function () { return ''; });
-    return pdfLogoDataUrlPromise;
+    // Keep the export's async entry point; compact text replaces the retired icon.
+    return Promise.resolve('');
   }
 
   function transportAdvice() {
@@ -2266,7 +2246,7 @@
         rows: [
           { label: 'Best first walk', copy: 'World Clock, TV Tower, Marienkirche, Nikolaiviertel, and the Museum Island edge make a compact orientation loop.' },
           { label: 'If you are tired', copy: 'Use one-stop U-Bahn or S-Bahn hops only when they genuinely save your legs.' },
-          { label: 'For BerlinWalk', copy: 'Stay close to S+U Alexanderplatz and the World Clock so the 12:30 tour is easy to join.' }
+          { label: 'For Walk of Berlin', copy: 'Stay close to S+U Alexanderplatz and the World Clock so the 12:30 tour is easy to join.' }
         ],
         luggage: luggage ? 'If you have luggage, store it before the loop. Alexanderplatz is practical, but rolling bags are annoying on cobbles and crossings.' : 'This is the easiest start point: walk first, ride later.',
         note: 'Do not over-plan transport here. The value is that central Berlin is already under your feet.'
@@ -2376,33 +2356,15 @@
         }
       }
 
-      function drawVectorLogo(x, posY, size) {
-        var cx = x + size / 2;
-        var cy = posY + size / 2;
-        rgb('setFillColor', yellow);
-        doc.circle(cx, cy, size / 2, 'F');
-        rgb('setDrawColor', green);
-        doc.setLineWidth(2);
-        doc.circle(cx, cy, size / 2 - 1, 'S');
-        text('BW', cx, cy + size * 0.12, size * 0.3, 'bold', green, { align: 'center' });
-      }
-
       function drawLogo(x, posY, size) {
-        if (logoDataUrl) {
-          try {
-            var format = logoDataUrl.indexOf('image/jpeg') !== -1 ? 'JPEG' : 'PNG';
-            doc.addImage(logoDataUrl, format, x, posY, size, size);
-            return;
-          } catch (error) {}
-        }
-        drawVectorLogo(x, posY, size);
+        text(BW_COMPACT_BRAND, x, posY + size / 2, 7, 'bold', yellow);
       }
 
       function drawHeader() {
         rgb('setFillColor', green);
         doc.rect(0, 0, pageW, 118, 'F');
         drawLogo(margin, 28, 52);
-        text('BERLINWALK', margin + 66, 45, 12, 'bold', yellow);
+        text('WALK OF BERLIN', margin + 66, 45, 12, 'bold', yellow);
         text('Berlin First-Day Plan', margin + 66, 75, 23, 'bold', [255, 255, 255]);
         text(data.plan.displayDate + ' | ' + data.plan.title, margin + 66, 96, 10.5, 'normal', [240, 248, 236]);
         y = 142;
@@ -2662,8 +2624,8 @@
       return '<tr><th>' + (index + 1) + '</th><td><strong>' + escapeHtml(row.label) + '</strong><br>' + escapeHtml(row.copy) + '</td></tr>';
     }).join('');
     return '<!doctype html><html><head><title>Berlin First-Day Plan</title>' +
-      '<style>@page{size:A4;margin:16mm}*{box-sizing:border-box}body{font-family:Arial,sans-serif;color:#223024;margin:0}.head{background:#1B5E20;color:#fff;padding:18px 20px;border-radius:10px;display:flex;gap:14px;align-items:center}.logo{width:50px;height:50px;border-radius:50%}.brand{color:#FFE600;font-weight:900;letter-spacing:1.4px;font-size:12px}.head h1{margin:5px 0 4px;font-size:27px;line-height:1.1}.head p{margin:0;color:#eef7ea}.section{margin:16px 0}.k{color:#1B5E20;font-weight:900;text-transform:uppercase;letter-spacing:1px;font-size:12px;margin-bottom:8px}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.cell{border:1px solid #CFE0BC;border-radius:8px;padding:8px 10px}.cell span{display:block;color:#5C7056;font-size:10px;font-weight:900;text-transform:uppercase}.cell strong{display:block;color:#1B5E20;font-size:13px;margin-top:4px}.chip{display:inline-block;border:1px solid #C5E1A5;border-radius:999px;padding:6px 10px;margin:0 5px 5px 0;font-size:12px;font-weight:700}.summary,.weather,.transport,.book{border-radius:10px;padding:13px 14px;border:1px solid #CFE0BC;background:#F8FBF2}.weather{border-left:7px solid #7CB342}.transport{background:#FFFDF4;border-color:#E6CB5E}.transport table{width:100%;border-collapse:collapse}.transport th{width:30px;color:#fff;background:#1B5E20;border-radius:50%;display:block;margin:6px 10px 6px 0;padding:5px 0}.transport td{padding:5px 0 9px;font-size:12.5px;line-height:1.42}.transport tr+tr td{border-top:1px solid #EBDFA8}.transport .note{border-top:1px solid #EBDFA8;margin-top:7px;padding-top:9px;color:#5A5236}p,li{font-size:13px;line-height:1.48}li{margin-bottom:9px}.book a{color:#2F80ED;word-break:break-word}.foot{border-top:1px solid #DCE8C8;margin-top:18px;padding-top:10px;color:#1B5E20;font-weight:900;font-size:12px}</style>' +
-      '</head><body><div class="head"><img class="logo" src="' + BW_MINI_LOGO_URL + '" alt=""><div><div class="brand">BERLINWALK</div><h1>Berlin First-Day Plan</h1><p>' + escapeHtml(data.plan.displayDate + ' | ' + data.plan.title) + '</p></div></div>' +
+      '<style>@page{size:A4;margin:16mm}*{box-sizing:border-box}body{font-family:Arial,sans-serif;color:#223024;margin:0}.head{background:#1B5E20;color:#fff;padding:18px 20px;border-radius:10px;display:flex;gap:14px;align-items:center}.logo{width:90px;flex:0 0 90px;color:#FFE600;font-size:10px;font-weight:800;white-space:nowrap}.brand{color:#FFE600;font-weight:900;letter-spacing:1.4px;font-size:12px}.head h1{margin:5px 0 4px;font-size:27px;line-height:1.1}.head p{margin:0;color:#eef7ea}.section{margin:16px 0}.k{color:#1B5E20;font-weight:900;text-transform:uppercase;letter-spacing:1px;font-size:12px;margin-bottom:8px}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.cell{border:1px solid #CFE0BC;border-radius:8px;padding:8px 10px}.cell span{display:block;color:#5C7056;font-size:10px;font-weight:900;text-transform:uppercase}.cell strong{display:block;color:#1B5E20;font-size:13px;margin-top:4px}.chip{display:inline-block;border:1px solid #C5E1A5;border-radius:999px;padding:6px 10px;margin:0 5px 5px 0;font-size:12px;font-weight:700}.summary,.weather,.transport,.book{border-radius:10px;padding:13px 14px;border:1px solid #CFE0BC;background:#F8FBF2}.weather{border-left:7px solid #7CB342}.transport{background:#FFFDF4;border-color:#E6CB5E}.transport table{width:100%;border-collapse:collapse}.transport th{width:30px;color:#fff;background:#1B5E20;border-radius:50%;display:block;margin:6px 10px 6px 0;padding:5px 0}.transport td{padding:5px 0 9px;font-size:12.5px;line-height:1.42}.transport tr+tr td{border-top:1px solid #EBDFA8}.transport .note{border-top:1px solid #EBDFA8;margin-top:7px;padding-top:9px;color:#5A5236}p,li{font-size:13px;line-height:1.48}li{margin-bottom:9px}.book a{color:#2F80ED;word-break:break-word}.foot{border-top:1px solid #DCE8C8;margin-top:18px;padding-top:10px;color:#1B5E20;font-weight:900;font-size:12px}</style>' +
+      '</head><body><div class="head"><span class="logo">' + BW_COMPACT_BRAND + '</span><div><div class="brand">WALK OF BERLIN</div><h1>Berlin First-Day Plan</h1><p>' + escapeHtml(data.plan.displayDate + ' | ' + data.plan.title) + '</p></div></div>' +
       '<div class="section"><div class="k">' + escapeHtml(data.plan.displayDate) + '</div><h2>' + escapeHtml(data.plan.title) + '</h2><p>' + escapeHtml(data.plan.summary) + '</p></div>' +
       '<div class="section summary"><p>' + escapeHtml(data.plan.summary) + '</p></div>' +
       '<div class="section"><div class="k">Choices</div><div class="grid">' + choices + '</div></div>' +
