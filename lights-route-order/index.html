@@ -91,22 +91,22 @@
   <script>
   (function(){
     // Route, timings and locations come from the published BerlinWalk Festival of
-    // Lights guide, which sources the official festival programme preview and
-    // visitBerlin. Individual artworks and the final map can still change.
+    // Lights guide, which sources the official festival programme and
+    // visitBerlin. Show lengths and location-specific exceptions were checked on October 5.
     var LIGHTS_END = 23*60; // 23:00, the standard end of the lighting window
     var STOPS = [
       {n:'Alexanderplatz: TV Tower and St. Mary\'s Church', walk:0,  dwell:15,
        d:'Easy to reach and right next to the first confirmed locations. St. Mary\'s is one of the oldest surviving churches in the city.'},
       {n:'Nikolai Quarter', walk:8, dwell:10,
-       d:'The reconstructed old town East Berlin rebuilt in the 1980s. Quick stop, then keep moving west.'},
+       d:'The reconstructed old town East Berlin rebuilt in the 1980s. Wait about 4 minutes for Babylon Berlin at Rathausstraße 17.'},
       {n:'Berlin Cathedral and Museum Island', walk:8, dwell:15,
-       d:'Usually the most satisfying photo stop: big, detailed and visible across the open Lustgarten. Slow down properly here.'},
+       d:'Wait for the six-minute facade show from Lustgarten. The indoor Dom programme needs a separate ticket.'},
       {n:'Bebelplatz cluster', walk:10, dwell:20,
-       d:'Humboldt University, the State Opera, Saint Hedwig\'s Cathedral, Hotel de Rome and Behren Palais. Projections work from several angles.'},
+       d:'Humboldt University, the State Opera, Saint Hedwig\'s Cathedral, Hotel de Rome and Behren Palais. Allow 6 minutes at Humboldt University and 12 at Hotel de Rome & Behren Palais.'},
       {n:'Brandenburg Gate', walk:15, dwell:15,
-       d:'The classic, and where the crowds get serious. Better as a reward after the calmer eastern half than as a start.'},
+       d:'Wait about 10 minutes for a full mapping loop. Pariser Platz can be crowded.'},
       {n:'Potsdamer Platz', walk:12, dwell:20,
-       d:'P5, The Ritz-Carlton, Kollhoff Tower and Forum Tower sit close together. Modern Berlin, a different mood from the old centre.'}
+       d:'Kollhoff Tower has a five-minute show. Explore the floor projections, Papillons, The Playce and Das Center nearby.'}
     ];
     var STARTS=[{v:19*60,l:'19:00'},{v:19*60+15,l:'19:15'},{v:19*60+30,l:'19:30'},{v:20*60,l:'20:00'},{v:20*60+30,l:'20:30'},{v:21*60,l:'21:00'}];
     var BUDGETS=[{v:60,l:'About an hour'},{v:90,l:'90 minutes'},{v:150,l:'The whole walk'}];
@@ -152,7 +152,7 @@
       if(r.reached === STOPS.length){
         v.textContent='Whole route'; v.className='lr-verdict';
         h.textContent='You get the full walk, finishing around '+hhmm(r.endsAt)+'.';
-        sub.textContent='About 4.5 to 5 km with the stops, which is the pace the route is built for. Starting between 19:15 and 19:45 avoids the switch-on crush and still leaves room before the lights go off at 23:00.';
+        sub.textContent='About 4.5 to 5 km with the stops, which is the pace the route is built for. Starting around 19:15 leaves time for full shows before the normal 23:00 finish. These are planning estimates, not fixed show slots.';
       } else if(r.reached === 0){
         v.textContent='Too late'; v.className='lr-verdict warn';
         h.textContent='There is not enough light time left for the walk.';
@@ -170,7 +170,7 @@
       if(state.start <= 19*60){
         tips.push('<strong>19:00 is the switch-on crush.</strong> I would start 19:15 to 19:45 instead: the lights have settled and the first wave has moved on.');
       }
-      tips.push('<strong>Pick your night.</strong> Sunday to Thursday is noticeably calmer. Friday and Saturday get heavy around the Gate, Bebelplatz and Potsdamer Platz.');
+      tips.push('<strong>Pick your night.</strong> I would choose Monday to Thursday if your dates are flexible. Friday and Saturday get heavy around the Gate, Bebelplatz and Potsdamer Platz.');
       tip.innerHTML = tips.join(' ');
     }
 
@@ -192,8 +192,8 @@
     chips('lr-start', STARTS, 'start');
     chips('lr-budget', BUDGETS, 'budget');
 
-    el('lr-foot').innerHTML='Festival of Lights runs 9 to 18 October 2026, normally 19:00 to 23:00, though individual illuminations vary and the final map can still change. '+
-      '<a href="https://festival-of-lights.de/en/" target="_blank" rel="noopener">Check the official programme ›</a>';
+    el('lr-foot').innerHTML='Festival of Lights runs 9 to 18 October 2026, normally 19:00 to 23:00, with location-specific exceptions. Konzerthaus skips October 11; Rathaus Lichtenberg park is October 9 only. Indoor Dom shows need separate tickets. '+
+      '<a href="https://festival-of-lights.de/en/programme-2026/" target="_blank" rel="noopener">Check the official programme ›</a>';
 
     render();
   })();
