@@ -10645,6 +10645,36 @@
       "iconStatus": "live-wix-media",
       "image": "https://static.wixstatic.com/media/5a08a3_c2775e4f5c80469482e875cab63ec46b~mv2.png",
       "cmsItemId": "2023f417-a70d-46f2-9448-ae385ef09518"
+    },
+    {
+      "slug": "gardens-of-the-world-fit-map",
+      "title": "Gardens of the World Visit Planner",
+      "lead": "Pick when you are going and when you reach the gate, and a map of the Gärten der Welt in Marzahn numbers the gardens you can still see in walking order, hatches the ones closed for the season, and shows the cable car, ticket price and closing time for that window. Opening times, prices and cable car dates checked on 5 October 2026.",
+      "category": "Maps",
+      "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/gardens-of-the-world-fit-map/",
+      "embedHeight": 1700,
+      "hubCategory": "WeatherOutdoor",
+      "type": "Map",
+      "priority": 3,
+      "tags": [
+        "gardens of the world",
+        "gärten der welt",
+        "marzahn",
+        "cable car",
+        "parks",
+        "day out"
+      ],
+      "aliases": [
+        "gardens of the world berlin",
+        "gärten der welt berlin",
+        "gaerten der welt opening hours",
+        "marzahn cable car",
+        "chinese garden berlin",
+        "japanese garden berlin"
+      ],
+      "iconStatus": "live-wix-media",
+      "image": "https://static.wixstatic.com/media/5a08a3_6ba2f0d90a704a0f976121428651f4e1~mv2.png",
+      "cmsItemId": "81f00af5-909c-45d6-a07b-58f343d516a9"
     }
   ],
   "hubCategories": [

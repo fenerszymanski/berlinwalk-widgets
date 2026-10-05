@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gardens of the World: What Fits Before the Gate Shuts</title>
+<link rel="stylesheet" href="../css/brand.css">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #FFFFFF; color: #1f2a1c; padding: 12px; }
+  .gw { border: 1px solid #dfe8d6; border-radius: 16px; overflow: hidden; background: #fbfcf8; }
+  .gw-top { background: #1B5E20; color: #f2f7ec; padding: 14px 16px 12px; }
+  .gw-top h1 { font-size: 18px; line-height: 1.25; }
+  .gw-top h1 span { color: #FFE600; }
+  .gw-top p { font-size: 12.5px; line-height: 1.5; color: #cfe3c4; margin-top: 4px; }
+
+  .gw-ctl { padding: 12px 16px 6px; }
+  .gw-ctl legend, .gw-ctl .gw-lab { display: block; font-size: 10.5px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: #5b6f52; margin-bottom: 6px; }
+  .gw-ctl fieldset { border: 0; }
+  .gw-wins { display: flex; flex-wrap: wrap; gap: 6px; }
+  .gw-wins button { font-family: inherit; cursor: pointer; font-size: 12px; font-weight: 700; padding: 7px 11px; border-radius: 999px; border: 1.5px solid #c9d8bd; background: #fff; color: #2c3d27; }
+  .gw-wins button[aria-checked=true] { background: #FFE600; border-color: #FFE600; color: #123D18; }
+  .gw-wins button:focus-visible, .gw-arr button:focus-visible { outline: 2px solid #1B5E20; outline-offset: 2px; }
+  .gw-arr { display: flex; align-items: center; gap: 6px; }
+  .gw-arr button { font-family: inherit; cursor: pointer; font-size: 12px; font-weight: 800; padding: 8px 10px; border-radius: 10px; border: 1.5px solid #1B5E20; background: #fff; color: #1B5E20; }
+  .gw-arr button:disabled { opacity: .35; cursor: default; }
+  .gw-arr output { min-width: 62px; text-align: center; font-size: 20px; font-weight: 800; color: #123D18; font-variant-numeric: tabular-nums; }
+  .gw-row { display: flex; flex-wrap: wrap; gap: 10px 16px; align-items: flex-end; margin-top: 12px; }
+  .gw-facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 6px; flex: 1 1 320px; }
+  .gw-fact { background: #eef4e7; border-radius: 10px; padding: 7px 9px; }
+  .gw-fact b { display: block; font-size: 10px; letter-spacing: .07em; text-transform: uppercase; color: #5b6f52; }
+  .gw-fact span { font-size: 12.5px; font-weight: 700; color: #1f2a1c; line-height: 1.35; }
+  .gw-fact.is-off span { color: #a33a2f; }
+
+  .gw-map { position: relative; margin: 8px 16px 0; border-radius: 12px; overflow: hidden; background: #e9f0e1; }
+  .gw-map svg { display: block; width: 100%; height: auto; max-height: 540px; margin: 0 auto; }
+  .gw-map .g-shape { stroke: #6f8f5f; stroke-width: 1; cursor: pointer; }
+  .gw-map .g-fit { fill: #FFE600; stroke: #1B5E20; stroke-width: 1.4; }
+  .gw-map .g-skip { fill: #ffffff; }
+  .gw-map .g-closed { fill: url(#gwHatch); stroke: #9aa494; }
+  .gw-map .g-sel { stroke: #c62828; stroke-width: 2.6; }
+  .gw-map .g-num { font-size: 12px; font-weight: 800; fill: #123D18; text-anchor: middle; dominant-baseline: central; pointer-events: none; }
+  .gw-map .g-badge { fill: #1B5E20; }
+  .gw-map .g-num-w { fill: #FFE600; }
+  .gw-legend { display: flex; flex-wrap: wrap; gap: 6px 14px; padding: 8px 16px 0; font-size: 11.5px; color: #44563d; }
+  .gw-legend i { display: inline-block; width: 12px; height: 12px; border-radius: 3px; margin-right: 5px; vertical-align: -2px; border: 1px solid #6f8f5f; }
+
+  .gw-time { margin: 10px 16px 0; }
+  .gw-time svg { display: block; width: 100%; height: auto; }
+
+  .gw-out { margin: 10px 16px 0; padding: 11px 13px; border-radius: 12px; background: #fff; border: 1px solid #dfe8d6; font-size: 13.5px; line-height: 1.55; }
+  .gw-out ol { margin: 6px 0 0 18px; }
+  .gw-out li { margin: 2px 0; }
+  .gw-out .muted { color: #5b6f52; font-size: 12.5px; }
+  .gw-move { margin: 10px 16px 0; padding: 10px 13px; border-radius: 12px; background: #FFE600; color: #123D18; font-size: 13px; line-height: 1.5; font-weight: 600; }
+  .gw-move b { font-weight: 800; }
+  .gw-detail { margin: 10px 16px 0; padding: 10px 13px; border-radius: 12px; background: #eef4e7; font-size: 12.5px; line-height: 1.5; min-height: 40px; }
+  .gw-foot { padding: 10px 16px 14px; font-size: 11px; color: #6b7c63; line-height: 1.5; }
+</style>
+</head>
+<body>
+<div class="gw" id="gw">
+  <div class="gw-top">
+    <h1>Gardens of the World: <span>what fits before the gate shuts</span></h1>
+    <p>Pick when you are going and when you reach the gate. The map shows which of the 13 gardens you can see, in walking order, and which are closed for the season.</p>
+  </div>
+  <div class="gw-ctl">
+    <div class="gw-lab" id="gwWinsLab">When are you going?</div>
+    <div class="gw-wins" id="gwWins" role="radiogroup" aria-labelledby="gwWinsLab"></div>
+    <div class="gw-row">
+      <div>
+        <div class="gw-lab" id="gwArrLab">At the gate at</div>
+        <div class="gw-arr" role="group" aria-labelledby="gwArrLab">
+          <button type="button" id="gwEarlier" aria-label="30 minutes earlier">&minus; 30 min</button>
+          <output id="gwArr" aria-live="polite">13:00</output>
+          <button type="button" id="gwLater" aria-label="30 minutes later">+ 30 min</button>
+        </div>
+      </div>
+      <div class="gw-facts" id="gwFacts"></div>
+    </div>
+  </div>
+  <div class="gw-map" id="gwMap"></div>
+  <div class="gw-legend">
+    <span><i style="background:#FFE600;border-color:#1B5E20"></i>Fits, numbered in walking order</span>
+    <span><i style="background:#fff"></i>No time left</span>
+    <span><i style="background:repeating-linear-gradient(45deg,#c7cdc3 0 2px,#eef1ec 2px 5px)"></i>Closed this season</span>
+    <span><i style="background:#fff;border:2px dashed #1B5E20;border-radius:50%"></i>Cable car</span>
+  </div>
+  <div class="gw-time" id="gwTime"></div>
+  <div class="gw-out" id="gwOut" aria-live="polite"></div>
+  <div class="gw-move" id="gwMove"></div>
+  <div class="gw-detail" id="gwDetail">Tap a garden on the map to see what is in it.</div>
+  <div class="gw-foot" id="gwFoot"></div>
+</div>
+<script>
+(function () {
+  var D = null, win = null, picked = null, arrMin = 13 * 60;
+  var NS = 'http://www.w3.org/2000/svg';
+  var $ = function (id) { return document.getElementById(id); };
+  function el(tag, attrs, parent) { var n = document.createElementNS(NS, tag); for (var k in attrs) n.setAttribute(k, attrs[k]); if (parent) parent.appendChild(n); return n; }
+  function toMin(t) { var p = t.split(':'); return (+p[0]) * 60 + (+p[1]); }
+  function hhmm(m) { m = Math.round(m); return String(Math.floor(m / 60)).padStart(2, '0') + ':' + String(m % 60).padStart(2, '0'); }
+  function metres(a, b) { var R = 6371000, la = (a[0] + b[0]) / 2 * Math.PI / 180; var dx = (b[1] - a[1]) * Math.PI / 180 * Math.cos(la) * R, dy = (b[0] - a[0]) * Math.PI / 180 * R; return Math.sqrt(dx * dx + dy * dy); }
+  function walk(a, b) { return metres(a, b) * 1.35 / 70; }
+
+  var proj, W = 640, H = 0;
+  function setupProjection() {
+    W = Math.min(640, Math.max(300, ($('gwMap').clientWidth || 640)));
+    var pts = D.outline.concat([D.stations[1].at]);
+    var la0 = Infinity, la1 = -Infinity, lo0 = Infinity, lo1 = -Infinity;
+    pts.forEach(function (p) { la0 = Math.min(la0, p[0]); la1 = Math.max(la1, p[0]); lo0 = Math.min(lo0, p[1]); lo1 = Math.max(lo1, p[1]); });
+    var k = Math.cos((la0 + la1) / 2 * Math.PI / 180), pad = 16;
+    var sx = (W - 2 * pad) / ((lo1 - lo0) * k);
+    H = Math.round((la1 - la0) * sx + 2 * pad);
+    proj = function (p) { return [pad + (p[1] - lo0) * k * sx, pad + (la1 - p[0]) * sx]; };
+  }
+  function pathOf(pts, close) { return pts.map(function (p, i) { var q = proj(p); return (i ? 'L' : 'M') + q[0].toFixed(1) + ' ' + q[1].toFixed(1); }).join(' ') + (close ? ' Z' : ''); }
+
+  function plan() {
+    var arr = arrMin, end = toMin(win.end);
+    var open = D.gardens.filter(function (g) { return win.closed.indexOf(g.key) < 0; });
+    var byPri = open.slice().sort(function (a, b) { return a.pri - b.pri; });
+    var chosen = [];
+    function schedule(list) {
+      var ordered = D.gardens.filter(function (g) { return list.indexOf(g) >= 0; });
+      var t = arr, here = D.gate.at, rows = [];
+      for (var i = 0; i < ordered.length; i++) {
+        var g = ordered[i];
+        t += walk(here, g.at);
+        if (g.opens && t < toMin(g.opens)) t = toMin(g.opens);
+        rows.push({ g: g, from: t, to: t + g.min });
+        t += g.min; here = g.at;
+      }
+      return { rows: rows, finish: t };
+    }
+    if (arr < end) {
+      byPri.forEach(function (g) {
+        var trial = chosen.concat([g]);
+        if (schedule(trial).finish <= end) chosen = trial;
+      });
+    }
+    var s = schedule(chosen);
+    return { arr: arr, end: end, rows: s.rows, finish: s.finish, open: open, chosen: chosen };
+  }
+
+  function drawMap(p) {
+    var box = $('gwMap'); box.innerHTML = '';
+    var svg = el('svg', { viewBox: '0 0 ' + W + ' ' + H, role: 'img', 'aria-label': 'Map of the Gardens of the World in Marzahn with the themed gardens, the main entrance and the cable car to U5 Kienberg' }, box);
+    var defs = el('defs', {}, svg);
+    var pat = el('pattern', { id: 'gwHatch', width: 6, height: 6, patternUnits: 'userSpaceOnUse', patternTransform: 'rotate(45)' }, defs);
+    el('rect', { width: 6, height: 6, fill: '#eef1ec' }, pat); el('rect', { width: 2.4, height: 6, fill: '#c7cdc3' }, pat);
+    el('path', { d: pathOf(D.outline, true), fill: '#d5e5c6', stroke: '#8fae7b', 'stroke-width': 1.5 }, svg);
+    var cableOn = win.cableOn === true || win.cableOn === 'weekend';
+    el('path', { d: pathOf(D.cable, false), fill: 'none', stroke: cableOn ? '#1B5E20' : '#9aa494', 'stroke-width': 2.4, 'stroke-dasharray': '6 5' }, svg);
+    D.stations.forEach(function (s) { var q = proj(s.at); var c = el('circle', { cx: q[0], cy: q[1], r: 7, fill: '#fff', stroke: cableOn ? '#1B5E20' : '#9aa494', 'stroke-width': 2 }, svg); el('title', {}, c).textContent = s.name; });
+    var u = proj(D.ubahn.at); u = [Math.min(u[0], W - 14), Math.min(u[1], H - 14)];
+    var ur = el('rect', { x: u[0] - 10, y: u[1] - 10, width: 20, height: 20, rx: 3, fill: '#1565C0' }, svg); el('title', {}, ur).textContent = D.ubahn.name + ', about 1.5 km away by cable car';
+    var ut = el('text', { x: u[0], y: u[1] + 1, 'font-size': 13, 'font-weight': 800, fill: '#fff', 'text-anchor': 'middle', 'dominant-baseline': 'central' }, svg); ut.textContent = 'U';
+    el('text', { x: u[0] + 10, y: u[1] - 16, 'font-size': 12, 'font-weight': 700, fill: '#24341f', 'text-anchor': 'end' }, svg).textContent = 'to U5 Kienberg';
+    var gq = proj(D.gate.at);
+    el('path', { d: 'M' + (gq[0] - 8) + ' ' + (gq[1] + 7) + ' L' + gq[0] + ' ' + (gq[1] - 8) + ' L' + (gq[0] + 8) + ' ' + (gq[1] + 7) + ' Z', fill: '#c62828' }, svg);
+    el('text', { x: gq[0] + 11, y: gq[1] + 4, 'font-size': 13, 'font-weight': 800, fill: '#7a1c16' }, svg).textContent = 'Main gate';
+    var order = {}; p.rows.forEach(function (r, i) { order[r.g.key] = i + 1; });
+    D.gardens.forEach(function (g) {
+      var closed = win.closed.indexOf(g.key) >= 0, cls = closed ? 'g-closed' : (order[g.key] ? 'g-fit' : 'g-skip');
+      if (picked === g.key) cls += ' g-sel';
+      var shape;
+      if (g.shape) shape = el('path', { d: pathOf(g.shape, true), 'class': 'g-shape ' + cls, tabindex: 0 }, svg);
+      else { var q = proj(g.at); shape = el('circle', { cx: q[0], cy: q[1], r: 13, 'class': 'g-shape ' + cls, tabindex: 0 }, svg); }
+      el('title', {}, shape).textContent = g.name;
+      shape.addEventListener('click', function () { picked = g.key; render(); });
+      shape.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); picked = g.key; render(); } });
+      if (order[g.key]) { var c = proj(g.at); el('circle', { cx: c[0], cy: c[1], r: 11, 'class': 'g-badge' }, svg); el('text', { x: c[0], y: c[1] + .5, 'class': 'g-num g-num-w' }, svg).textContent = order[g.key]; }
+    });
+  }
+
+  function drawTime(p) {
+    var box = $('gwTime'); box.innerHTML = '';
+    var t0 = 9 * 60, t1 = Math.max(toMin(win.desk), toMin(win.end)) + 30, Wt = Math.max(300, box.clientWidth || 640), Ht = 74;
+    var x = function (m) { return 14 + (m - t0) / (t1 - t0) * (Wt - 28); };
+    var svg = el('svg', { viewBox: '0 0 ' + Wt + ' ' + Ht, role: 'img', 'aria-label': 'Timeline of your visit from arrival to closing' }, box);
+    el('rect', { x: x(t0), y: 22, width: x(t1) - x(t0), height: 22, rx: 6, fill: '#eef1ec' }, svg);
+    el('rect', { x: x(t0), y: 22, width: Math.max(0, x(Math.min(toMin(win.end), t1)) - x(t0)), height: 22, rx: 6, fill: '#e2edd6' }, svg);
+    p.rows.forEach(function (r, i) {
+      el('rect', { x: x(r.from), y: 24, width: Math.max(3, x(r.to) - x(r.from)), height: 18, rx: 3, fill: '#FFE600', stroke: '#1B5E20', 'stroke-width': .8 }, svg);
+      if (x(r.to) - x(r.from) > 13) el('text', { x: (x(r.from) + x(r.to)) / 2, y: 33.5, 'font-size': 10, 'font-weight': 800, fill: '#123D18', 'text-anchor': 'middle', 'dominant-baseline': 'central' }, svg).textContent = i + 1;
+    });
+    function mark(m, label, colour, up) {
+      if (m < t0 || m > t1) return;
+      el('line', { x1: x(m), x2: x(m), y1: up ? 10 : 18, y2: up ? 48 : 56, stroke: colour, 'stroke-width': 2 }, svg);
+      var xm = x(m), anc = xm > Wt - 70 ? 'end' : (xm < 70 ? 'start' : 'middle');
+      el('text', { x: xm, y: up ? 8 : 68, 'font-size': 10.5, 'font-weight': 700, fill: colour, 'text-anchor': anc }, svg).textContent = label;
+    }
+    mark(p.arr, 'You ' + hhmm(p.arr), '#1B5E20', true);
+    mark(toMin(win.end), (win.end === win.desk ? 'Gardens close ' : 'Dark by ') + win.end, '#c62828', false);
+    for (var h = Math.ceil(t0 / 60); h * 60 <= t1; h += 2) el('text', { x: x(h * 60), y: 56, 'font-size': 9, fill: '#7d8b76', 'text-anchor': 'middle' }, svg).textContent = String(h).padStart(2, '0');
+  }
+
+  function render() {
+    setupProjection();
+    var p = plan();
+    var f = $('gwFacts');
+    var cableOff = win.cableOn === false;
+    f.innerHTML = '<div class="gw-fact"><b>Ticket desks close</b><span>' + win.desk + '</span></div>' +
+      '<div class="gw-fact"><b>Sunset</b><span>' + win.sunset + '</span></div>' +
+      '<div class="gw-fact"><b>Adult ticket</b><span>' + win.price + '</span></div>' +
+      '<div class="gw-fact' + (cableOff ? ' is-off' : '') + '"><b>Cable car</b><span>' + win.cable + '</span></div>';
+    drawMap(p); drawTime(p);
+    var out = $('gwOut');
+    if (p.arr >= p.end) {
+      out.innerHTML = '<b>Too late for this window.</b> The themed gardens shut at ' + win.end + '. Move your arrival earlier.';
+    } else if (!p.rows.length) {
+      out.innerHTML = '<b>Not enough time for a single garden</b> between ' + hhmm(p.arr) + ' and ' + win.end + '.';
+    } else {
+      var inside = Math.round(p.rows.reduce(function (a, r) { return a + r.g.min; }, 0));
+      var skipped = p.open.filter(function (g) { return p.chosen.indexOf(g) < 0; }).map(function (g) { return g.name; });
+      var closed = D.gardens.filter(function (g) { return win.closed.indexOf(g.key) >= 0; }).map(function (g) { return g.name; });
+      out.innerHTML = '<b>' + p.rows.length + ' of 13 gardens</b>, about ' + inside + ' minutes inside them, finishing around ' + hhmm(p.finish) + '.' +
+        '<ol>' + p.rows.map(function (r) { return '<li>' + hhmm(r.from) + ' ' + r.g.name + (r.g.indoor ? ' (indoors)' : '') + '</li>'; }).join('') + '</ol>' +
+        (skipped.length ? '<p class="muted" style="margin-top:6px">No time left for: ' + skipped.join(', ') + '.</p>' : '') +
+        (closed.length ? '<p class="muted">Closed in this window in past years: ' + closed.join(', ') + '.</p>' : '');
+    }
+    $('gwMove').innerHTML = '<b>My move:</b> ' + win.move;
+    var g = D.gardens.filter(function (x) { return x.key === picked; })[0];
+    $('gwDetail').innerHTML = g ? '<b>' + g.name + '</b> (about ' + g.min + ' min): ' + g.note : 'Tap a garden on the map to see what is in it.';
+  }
+
+  function init() {
+    setupProjection();
+    var wins = $('gwWins');
+    D.windows.forEach(function (w, i) {
+      var b = document.createElement('button');
+      b.type = 'button'; b.setAttribute('role', 'radio'); b.setAttribute('aria-checked', i === 0 ? 'true' : 'false'); b.textContent = w.label;
+      b.addEventListener('click', function () {
+        win = w;
+        Array.prototype.forEach.call(wins.children, function (x) { x.setAttribute('aria-checked', x === b ? 'true' : 'false'); });
+        clampArrival(); render();
+      });
+      wins.appendChild(b);
+    });
+    win = D.windows[0];
+    clampArrival();
+    $('gwEarlier').addEventListener('click', function () { arrMin -= 30; clampArrival(); render(); });
+    $('gwLater').addEventListener('click', function () { arrMin += 30; clampArrival(); render(); });
+    var lastW = 0; window.addEventListener('resize', function () { var w = $('gwMap').clientWidth; if (Math.abs(w - lastW) > 20) { lastW = w; render(); } });
+    $('gwFoot').textContent = 'Opening times, prices and cable car dates from the Gärten der Welt and Grün Berlin pages, checked on ' + D.checked + '. The park opens daily at 09:00, the Japanese Garden at 10:00. Minutes per garden are my own pace estimates. Map data © OpenStreetMap contributors.';
+    render();
+  }
+  function clampArrival() {
+    var last = Math.max(9 * 60, toMin(win.end) - 30);
+    arrMin = Math.min(Math.max(arrMin, 9 * 60), last);
+    $('gwArr').textContent = hhmm(arrMin);
+    $('gwEarlier').disabled = arrMin <= 9 * 60;
+    $('gwLater').disabled = arrMin >= last;
+  }
+  fetch('data.json', { cache: 'no-cache' }).then(function (r) { return r.json(); }).then(function (d) { D = d; init(); });
+})();
+</script>
+<script src="../js/brand.js"></script>
+</body>
+</html>
