@@ -4,11 +4,14 @@
   if (window.BWDateCheckMeasurement) return;
   var ENDPOINT = 'https://app.berlinwalk.com/api/download-lead?action=event';
   var EXPERIMENT = 'berlin_date_check_blog_card_ab_v2_2026_09';
-  var VERSION = 'date-check-direct-v1-2026-10-05';
+  var VERSION = 'date-check-direct-v2-2026-10-05';
   var CONSENT_EVENTS = ['consentPolicyChanged', 'consentPolicyInitialized', 'ucConsentEvent', 'bwConsentPolicyChanged'];
   var ERROR_CODES = ['network', 'http', 'validation', 'unavailable'];
   var bindings = new WeakMap();
-  var pageJourney = '';
+  // Wix may replace a card's DOM node while the same article is still open.
+  // Keep the logical event receipts in page memory, without retaining DOM nodes.
+  var logicalCards = new Map();
+  var pageJourneys = new Map();
 
   function token(value, fallback) {
     return typeof value === 'string' && /^[a-z0-9][a-z0-9._-]{0,99}$/i.test(value) ? value : fallback;
@@ -71,11 +74,14 @@
     var placement = variant === 'form' ? 'blog_inline_after_tour' : 'blog_inline_direct_email';
     var version = token(options.version, variant === 'form' ? 'date-check-measurement-v1-2026-10-05' : VERSION);
     var pagePath = safePath(window.location.pathname);
-    var sent = {};
-    var requests = {};
-    var started = false;
+    var logicalKey = JSON.stringify([pagePath, source, version, variant, options.qa === true]);
+    if (!logicalCards.has(logicalKey)) logicalCards.set(logicalKey, { sent: {}, requests: {}, started: false });
+    var logical = logicalCards.get(logicalKey);
+    var sent = logical.sent;
+    var requests = logical.requests;
     var visible = false;
     var disposed = false;
+    var wasConnected = false;
     var timer = null;
     var observer = null;
     var attempt = null;
@@ -85,9 +91,30 @@
       timer = null;
     }
 
+    function liveCard() {
+      if (disposed) return false;
+      if (safePath(window.location.pathname) !== pagePath) { dispose(); return false; }
+      if (card.isConnected === false) {
+        // bind() can run while the form is being built, just before insertion.
+        if (wasConnected) dispose();
+        return false;
+      }
+      wasConnected = true;
+      return true;
+    }
+
+    function journey() {
+      var id = pageJourneys.get(pagePath);
+      if (!id) {
+        id = randomToken('dcj_');
+        if (id) pageJourneys.set(pagePath, id);
+      }
+      return id;
+    }
+
     function analyticsContext() {
-      if (disposed || !consent('analytics')) return { analyticsConsentAtSubmit: false, advertisingConsentAtSubmit: false, advertisingConsent: false };
-      if (!pageJourney) pageJourney = randomToken('dcj_');
+      if (!liveCard() || !consent('analytics')) return { analyticsConsentAtSubmit: false, advertisingConsentAtSubmit: false, advertisingConsent: false };
+      var pageJourney = journey();
       if (!pageJourney) return { analyticsConsentAtSubmit: false, advertisingConsentAtSubmit: false, advertisingConsent: false };
       var advertising = consent('advertising');
       return {
@@ -109,7 +136,7 @@
     }
 
     function payload(stage, data, requestId) {
-      if (!pageJourney) pageJourney = randomToken('dcj_');
+      var pageJourney = journey();
       var id = randomToken('dcbe_');
       if (!id || !pageJourney) return null;
       var event = {
@@ -156,24 +183,29 @@
     }
 
     function transport(entry) {
-      if (disposed || !consent('analytics') || entry.inFlight || entry.complete || typeof window.fetch !== 'function') return;
-      // Re-read advertising consent at each network attempt; withdrawal cannot replay a campaign.
-      if (!consent('advertising')) { entry.body.advertisingConsent = false; delete entry.body.utm; }
-      entry.inFlight = true;
+      if (!liveCard() || !consent('analytics') || entry.inFlight || entry.complete || typeof window.fetch !== 'function') return;
       Promise.resolve().then(function () {
-        if (disposed || !consent('analytics')) return null;
+        // A remount may take over a queued receipt before this microtask runs.
+        if (!liveCard() || !consent('analytics') || entry.inFlight || entry.complete) return;
+        // Re-read advertising consent at each attempt; withdrawal cannot replay a campaign.
         if (!consent('advertising')) { entry.body.advertisingConsent = false; delete entry.body.utm; }
-        return window.fetch(ENDPOINT, {
-        method: 'POST', credentials: 'omit', keepalive: true,
-        headers: { 'content-type': 'application/json' },
-        body: JSON.stringify(entry.body)
-      }); }).then(function (response) {
-        entry.complete = Boolean(response && response.ok);
-      }).catch(function () {}).then(function () { entry.inFlight = false; });
+        entry.inFlight = true;
+        var result;
+        try {
+          result = window.fetch(ENDPOINT, {
+            method: 'POST', credentials: 'omit', keepalive: true,
+            headers: { 'content-type': 'application/json' },
+            body: JSON.stringify(entry.body)
+          });
+        } catch (error) { entry.inFlight = false; return; }
+        return Promise.resolve(result).then(function (response) {
+          entry.complete = Boolean(response && response.ok);
+        }).catch(function () {}).then(function () { entry.inFlight = false; });
+      });
     }
 
     function emit(stage, data, key, requestId) {
-      if (disposed || !consent('analytics') || sent[key]) return false;
+      if (!liveCard() || !consent('analytics') || sent[key]) return false;
       var body = payload(stage, data, requestId);
       if (!body) return false;
       sent[key] = true;
@@ -192,16 +224,17 @@
     }
 
     function start() {
-      started = true;
+      if (!liveCard()) return false;
+      logical.started = true;
       return emit('start', null, 'start');
     }
 
     function refresh() {
-      if (disposed) return;
+      if (!liveCard()) return;
       cancelTimer();
       if (!consent('analytics')) return;
       emit('mount', null, 'mount');
-      if (started) emit('start', null, 'start');
+      if (logical.started) emit('start', null, 'start');
       if (visible && document.visibilityState !== 'hidden' && !sent.seen) {
         timer = window.setTimeout(function () {
           timer = null;
@@ -213,7 +246,7 @@
 
     function submit(data) {
       // A new conscious attempt gets a new request ID; retries reuse its event ID.
-      attempt = consent('analytics') ? { id: randomToken('dcr_'), data: { arrivalDate: data && data.arrivalDate, nights: data && data.nights } } : null;
+      attempt = liveCard() && consent('analytics') ? { id: randomToken('dcr_'), data: { arrivalDate: data && data.arrivalDate, nights: data && data.nights } } : null;
       if (!attempt || !attempt.id) return null;
       start();
       emit('submit', attempt.data, 'submit:' + attempt.id, attempt.id);
@@ -231,6 +264,7 @@
     }
 
     function dispose() {
+      if (disposed) return;
       disposed = true;
       cancelTimer();
       if (observer) observer.disconnect();
@@ -240,6 +274,7 @@
       document.removeEventListener('visibilitychange', refresh);
       window.removeEventListener('online', refresh);
       bindings.delete(card);
+      // Pending logical receipts can be retried by a replacement card, with the same ID.
       requests = {};
       attempt = null;
     }

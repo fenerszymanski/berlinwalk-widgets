@@ -592,6 +592,19 @@
     form.insertBefore(intro, form.querySelector('.bw-date-check-blog-card__fields'));
     form.insertBefore(card.querySelector('.bw-date-check-blog-card__eyebrow'), intro);
     card.classList.add('bw-c-date-card');
+    // Wix article rules include high-specificity !important paragraph styles.
+    // Keep the form's disclosure readable at its own size inside that article.
+    var disclosure = card.querySelector('.bw-date-check-blog-card__consent');
+    disclosure.style.setProperty('font', '400 12px/1.5 Montserrat,Arial,sans-serif', 'important');
+    disclosure.style.setProperty('color', '#fff', 'important');
+    disclosure.style.setProperty('margin', '14px 0 0', 'important');
+    disclosure.style.setProperty('padding', '0', 'important');
+    var privacyLink = disclosure.querySelector('a');
+    privacyLink.style.setProperty('color', '#fff', 'important');
+    privacyLink.style.setProperty('font', 'inherit', 'important');
+    privacyLink.style.setProperty('background', 'none', 'important');
+    privacyLink.style.setProperty('box-shadow', 'none', 'important');
+    privacyLink.style.setProperty('text-decoration', 'underline', 'important');
     var status = card.querySelector('.bw-date-check-blog-card__status');
     var arrivalInput = form.elements.arrival;
     var dateControl = card.querySelector('.bw-date-check-blog-card__date-control');
