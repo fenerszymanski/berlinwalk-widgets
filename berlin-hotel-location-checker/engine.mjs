@@ -46,9 +46,9 @@ export const PRIORITIES = Object.freeze([
   }),
   Object.freeze({
     id: 'meeting',
-    label: 'BerlinWalk meeting point',
+    label: 'Berlin Then and Now meeting point',
     shortLabel: 'Meeting point',
-    description: 'A simpler start for the BerlinWalk tour at Alexanderplatz.',
+    description: 'A simpler start for the Berlin Then and Now walking tour at Alexanderplatz.',
   }),
 ]);
 
@@ -186,7 +186,7 @@ function scoreReason(key, score, nearest, extra = '') {
     ber: `The BER planning anchor is approximately ${distance} away. This is a location signal only; VBB should decide the live airport route.`,
     nightlife: `The closest fixed evening anchor is ${nearest.anchor.label}, approximately ${distance} away. This is an area-fit signal, not a venue or safety rating.`,
     quiet: `The closest fixed park or quiet-evening anchor is ${nearest.anchor.label}, approximately ${distance} away. It is an atmosphere proxy, not a safety score.`,
-    meeting: `The World Clock at Alexanderplatz is approximately ${distance} away. My BerlinWalk tour starts there and takes about 2.5 hours; check the current tour page for details.`,
+    meeting: `The World Clock at Alexanderplatz is approximately ${distance} away. My Berlin Then and Now walking tour starts there and takes about 2.5 hours; check the current tour page for details.`,
   };
   return `${reasons[key]}${extra}`;
 }
@@ -245,7 +245,7 @@ function buildSubscores(location) {
     },
     {
       id: 'meeting',
-      label: 'BerlinWalk meeting point',
+      label: 'Berlin Then and Now meeting point',
       score: distanceScore(meeting.distanceKm, 7, 15),
       distanceKm: meeting.distanceKm,
       anchorLabel: meeting.anchor.label,

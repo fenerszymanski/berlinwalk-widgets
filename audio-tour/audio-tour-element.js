@@ -367,7 +367,7 @@
 
           <div class="at-hero">
             <h3 class="at-title">Berlin in 9 Minutes</h3>
-            <p class="at-sub">A short audio walk from Alexanderplatz to Hackescher Markt, written and checked by Yusuf, then narrated with BerlinWalk’s approved AI tour voice. Listen before you book.</p>
+            <p class="at-sub">A short audio walk from Alexanderplatz to Hackescher Markt, written and checked by Yusuf, then narrated with Walk of Berlin’s approved AI tour voice. Listen before you book.</p>
           </div>
 
           <div class="at-player">

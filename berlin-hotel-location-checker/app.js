@@ -3,7 +3,7 @@ import {
   PRIORITIES,
   calculateLocationFit,
   haversineKm,
-} from './engine.mjs';
+} from './engine.mjs?bw_brand_release=20261005-brand-2';
 import { emitHotelEvent } from './analytics.mjs';
 import { searchBerlinAddress } from './location-adapter.mjs';
 
