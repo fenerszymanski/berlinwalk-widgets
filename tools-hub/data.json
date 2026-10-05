@@ -400,7 +400,7 @@
     {
       "slug": "basketball-worldcup-venues-map",
       "title": "Women's Basketball World Cup Berlin Venues Map",
-      "lead": "Map the two Berlin arenas, nearest stations, Berlin Wall sites and the BerlinWalk tour start for match-day planning.",
+      "lead": "Map the two Berlin arenas, nearest stations, Berlin Wall sites and the Walk of Berlin tour start for match-day planning.",
       "category": "Discovery",
       "image": "https://static.wixstatic.com/media/5a08a3_a52c708588db4f1e8b50b0a600274b1f~mv2.png",
       "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/basketball-worldcup-venues-map/",
@@ -1421,7 +1421,7 @@
     {
       "slug": "ultimate-berlin-trip-planner",
       "title": "Ultimate Berlin Trip Planner",
-      "lead": "Build a realistic 1-7 day Berlin plan with arrival-date logic, weather, opening-day notes, and the best time to join BerlinWalk.",
+      "lead": "Build a realistic 1-7 day Berlin plan with arrival-date logic, weather, opening-day notes, and the best time to join Walk of Berlin.",
       "category": "Discovery",
       "image": "https://static.wixstatic.com/media/5a08a3_2ce36b06e4354d7db943e072d10f6dd0~mv2.png",
       "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/ultimate-berlin-trip-planner/",
@@ -1476,7 +1476,7 @@
     {
       "slug": "berlin-first-day-planner",
       "title": "Berlin First-Day Planner",
-      "lead": "Arriving in Berlin today? Build a realistic first-day plan with weather, transport, what is open, and the BerlinWalk tour.",
+      "lead": "Arriving in Berlin today? Build a realistic first-day plan with weather, transport, what is open, and the Walk of Berlin tour.",
       "category": "Discovery",
       "image": "https://static.wixstatic.com/media/5a08a3_592aa7ec14f543708051cd10faf55a0a~mv2.png",
       "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/berlin-first-day-planner/",
@@ -1503,7 +1503,7 @@
     {
       "slug": "berlin-hotel-location-checker",
       "title": "Berlin Hotel Location Checker",
-      "lead": "Check whether a Berlin hotel location fits your sightseeing, public-transport, BER, nightlife, quiet-evening and BerlinWalk meeting-point priorities.",
+      "lead": "Check whether a Berlin hotel location fits your sightseeing, public-transport, BER, nightlife, quiet-evening and Walk of Berlin meeting-point priorities.",
       "category": "Discovery",
       "image": "https://static.wixstatic.com/media/5a08a3_10cdc0e541ed4ad4b4b69a8864621343~mv2.png",
       "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/berlin-hotel-location-checker/",
@@ -1561,7 +1561,7 @@
     {
       "slug": "free-berlin-audio-tour",
       "title": "Berlin in 9 Minutes (Free Audio Tour)",
-      "lead": "A 9-minute audio walk from Alexanderplatz to Hackescher Markt, written and checked by local guide Yusuf and narrated with BerlinWalk's approved AI tour voice.",
+      "lead": "A 9-minute audio walk from Alexanderplatz to Hackescher Markt, written and checked by local guide Yusuf and narrated with Walk of Berlin's approved AI tour voice.",
       "category": "Discovery",
       "image": "https://static.wixstatic.com/media/5a08a3_07be42aa668d40609b76729420f587b0~mv2.png",
       "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/audio-tour/",
@@ -1790,7 +1790,7 @@
     {
       "slug": "alexanderplatz-parking-map",
       "title": "Alexanderplatz Parking Map",
-      "lead": "Find practical parking near the BerlinWalk tour start, with Google Maps directions to the World Clock.",
+      "lead": "Find practical parking near the Walk of Berlin tour start, with Google Maps directions to the World Clock.",
       "category": "Maps",
       "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/alexanderplatz-parking-map/",
       "embedHeight": 660,
@@ -6375,7 +6375,7 @@
     {
       "slug": "berlin-private-route-brief",
       "title": "Berlin Private Route Brief",
-      "lead": "See the main stopping points on BerlinWalk's historic-centre route, then choose the pace and emphasis your group needs before you enquire.",
+      "lead": "See the main stopping points on Walk of Berlin's historic-centre route, then choose the pace and emphasis your group needs before you enquire.",
       "category": "Discovery",
       "hubCategory": "TripPlans",
       "type": "Map",
@@ -6390,7 +6390,7 @@
       "aliases": [
         "private Berlin group tour",
         "Berlin group route",
-        "BerlinWalk route stops",
+        "Walk of Berlin route stops",
         "private walking tour Berlin centre"
       ],
       "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/berlin-private-route-brief/",

@@ -191,7 +191,7 @@
   setTimeout(reportThrottled, 3000);
 })();
 
-/* Attribution badge — injects a "by walkofberlin.com" footer link into every
+/* Attribution badge — injects a "by @walkofberlin" footer link into every
  * widget so embeds on third-party sites carry our branding + backlink. Skipped
  * when ?attribution=none is in the URL (used by gallery preview iframes that
  * don't need a second badge). The first-party BerlinTools shell also passes
@@ -292,10 +292,9 @@
     a.href = badgeUrl(slug);
     a.target = target || '_blank';
     a.rel = 'noopener';
-    a.setAttribute('aria-label', 'Made by BerlinWalk. Open walkofberlin.com');
+    a.setAttribute('aria-label', 'BerlinTools by Walk of Berlin. Open walkofberlin.com');
     a.innerHTML =
-      '<img class="bw-attr-logo" alt="" style="width:18px;height:18px;border-radius:50%;object-fit:cover;display:block;flex:0 0 18px" src="https://static.wixstatic.com/media/5a08a3_4d96e164d26241fd9eb009843ec2084a~mv2.png" loading="lazy" decoding="async">' +
-      '<span class="bw-attr-text">by <strong>walkofberlin.com</strong></span>' +
+      '<span class="bw-attr-text">by <strong>@walkofberlin</strong></span>' +
       '<span class="bw-attr-arrow" aria-hidden="true">&rarr;</span>';
     return a;
   }

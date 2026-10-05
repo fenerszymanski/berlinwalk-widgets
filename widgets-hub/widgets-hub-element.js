@@ -735,7 +735,7 @@ class BWWidgetsHubElement extends HTMLElement {
             <p class="bw-hero-lead">Interactive Berlin calculators, maps, and planning widgets built by a local guide. Copy one snippet and use them on WordPress, Squarespace, Wix, hotel sites, travel blogs, anywhere.</p>
             <div class="bw-hero-tags">
               <span class="bw-hero-tag">No signup</span>
-              <span class="bw-hero-tag">No tracking</span>
+              <span class="bw-hero-tag">BerlinTools by Walk of Berlin</span>
               <span class="bw-hero-tag">Mobile friendly</span>
               <span class="bw-hero-tag">Auto-height</span>
             </div>
@@ -747,9 +747,9 @@ class BWWidgetsHubElement extends HTMLElement {
             <strong>How it works:</strong> choose a tool, open its preview if you need it, then click "Get embed code" and paste the snippet into your site's HTML or custom HTML block.
             <ul>
               <li>Free for any use, including commercial sites and hotels.</li>
-              <li>The "by berlinwalk.com" badge at the bottom of each widget must stay visible.</li>
+              <li>The "by @walkofberlin" badge at the bottom of each widget must stay visible.</li>
               <li>Widgets update automatically: data, design, mobile fixes. Your embed always loads the latest version.</li>
-              <li>Auto-resize to content height, lazy-loaded. No impact on your page speed score.</li>
+              <li>Previews load when you open them. Embedded widgets resize to their content height.</li>
             </ul>
           </div>
 
@@ -928,22 +928,22 @@ class BWWidgetsHubElement extends HTMLElement {
     const theme = BW_WIDGETS_THEMES[themeKey] || BW_WIDGETS_THEMES.standard;
     const safeTitle = this._escapeHtml(tool.title || tool.slug);
     const safeLead = this._escapeHtml(tool.lead || '');
-    const deepLink = 'https://www.berlinwalk.com/tools/' + (tool.slug || '');
-    const utmHome = 'https://www.berlinwalk.com/widgets?utm_source=embed&amp;utm_medium=textlink&amp;utm_campaign=' + (tool.slug || '');
-    return `<!-- ${safeTitle} by BerlinWalk -->
+    const deepLink = 'https://walkofberlin.com/tools/' + (tool.slug || '');
+    const utmHome = 'https://walkofberlin.com/widgets?utm_source=embed&amp;utm_medium=textlink&amp;utm_campaign=' + (tool.slug || '');
+    return `<!-- ${safeTitle}: BerlinTools by Walk of Berlin -->
 <aside class="bw-embed" style="margin:1em 0; max-width:100%; font-family:Arial,Helvetica,sans-serif;${theme.aside ? ' ' + theme.aside : ''}">
   <h3 style="font:800 18px/1.3 Arial,sans-serif; color:${theme.headingColor}; margin:0 0 6px;">
     <a href="${this._escapeHtml(deepLink)}" rel="noopener" style="color:${theme.headingColor}; text-decoration:none;">${safeTitle}</a>
   </h3>
   <p style="font:14px/1.55 Arial,sans-serif; color:${theme.textColor}; margin:0 0 10px;">${safeLead}</p>
   <iframe data-bw-frame src="${tool.widgetUrl}"
-    title="${safeTitle} by BerlinWalk"
+    title="${safeTitle}: BerlinTools by Walk of Berlin"
     width="100%" height="480"
     frameborder="0" loading="lazy" scrolling="no"
     style="border:0; width:100%; max-width:100%; transition:height .2s ease;"></iframe>
   <p style="margin:8px 0 0; font:600 12px/1.4 Arial,sans-serif; text-align:center;">
     <a href="${utmHome}" rel="noopener" style="color:${theme.linkColor}; text-decoration:none;">
-      Free Berlin widget by <strong style="color:${theme.footerStrong};">BerlinWalk</strong> <span style="color:${theme.footerArrow};">&rarr;</span>
+      BerlinTools by <strong style="color:${theme.footerStrong};">Walk of Berlin</strong> <span style="color:${theme.footerArrow};">&rarr;</span>
     </a>
   </p>
 </aside>

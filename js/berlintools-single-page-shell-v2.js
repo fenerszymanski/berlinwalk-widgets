@@ -157,22 +157,22 @@
 
   var SEO_MAP = {
     'baltic-beach-day-planner': {
-      title: 'Baltic Beach Day Planner from Berlin | BerlinWalk',
+      title: 'Baltic Beach Day Planner from Berlin | Walk of Berlin',
       description: 'Free planner for a Baltic Sea day trip from Berlin. Compare Warnemünde, the Usedom piers and Binz on Rügen by real train times, Deutschlandticket coverage and actual beach hours.',
       image: 'https://static.wixstatic.com/media/5a08a3_51af2914e7c94b3496c32983c1fabb9d~mv2.png',
-      imageAlt: 'BerlinWalk Baltic Beach Day Planner icon'
+      imageAlt: 'Walk of Berlin Baltic Beach Day Planner icon'
     },
     'berlin-bakery-counter': {
-      title: 'Berlin Bakery Counter: Order in German | BerlinWalk',
+      title: 'Berlin Bakery Counter: Order in German | Walk of Berlin',
       description: 'Free trainer for ordering at a Berlin bakery in German. Build a real order, learn the words for Schrippe, Pfannkuchen and Brezel, and rehearse the questions the counter asks back.',
       image: 'https://static.wixstatic.com/media/5a08a3_d8a7250b42544578aefc35723649019b~mv2.png',
-      imageAlt: 'BerlinWalk Berlin Bakery Counter icon'
+      imageAlt: 'Walk of Berlin Berlin Bakery Counter icon'
     },
     'berlin-tour-time-window': {
-      title: 'Berlin Tour Time Window: Does the Walk Fit? | BerlinWalk',
+      title: 'Berlin Tour Time Window: Does the Walk Fit? | Walk of Berlin',
       description: 'Set your real arrival at the World Clock and your finish at Hackescher Markt. See whether the Berlin Then and Now walking tour, 12:30 to about 15:00, fits your day.',
       image: 'https://static.wixstatic.com/media/5a08a3_c4b967dd5fac4ae4ba7432ffd5bfaeba~mv2.png',
-      imageAlt: 'BerlinWalk Berlin Tour Time Window icon'
+      imageAlt: 'Walk of Berlin Berlin Tour Time Window icon'
     }
   };
 
