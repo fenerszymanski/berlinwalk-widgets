@@ -2356,8 +2356,8 @@
         }
       }
 
-      function drawLogo(x, posY, size) {
-        text(BW_COMPACT_BRAND, x, posY + size / 2, 7, 'bold', yellow);
+      function drawLogo(x, posY, size, color) {
+        text(BW_COMPACT_BRAND, x, posY + size / 2, 7, 'bold', color || yellow);
       }
 
       function drawHeader() {
@@ -2564,8 +2564,8 @@
           doc.setPage(page);
           rgb('setDrawColor', line);
           doc.line(margin, pageH - 36, pageW - margin, pageH - 36);
-          drawLogo(margin, pageH - 29, 18);
-          text('walkofberlin.com | @walkofberlin', margin + 26, pageH - 16, 8.5, 'bold', green);
+          drawLogo(margin, pageH - 29, 18, green);
+          text('walkofberlin.com | @walkofberlin', margin + 62, pageH - 16, 8.5, 'bold', green);
           text('Page ' + page + ' / ' + pages, pageW - margin, pageH - 16, 8, 'normal', muted, { align: 'right' });
         }
       }

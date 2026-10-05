@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Unter den Linden Walk Planner | BerlinWalk</title>
+  <title>Unter den Linden Walk Planner | Walk of Berlin</title>
   <meta name="description" content="Plan an Unter den Linden walk in Berlin by time, direction and travel mood, from Brandenburg Gate to Museum Island.">
   <link rel="icon" href="data:,">
   <link rel="stylesheet" href="../css/brand.css">
@@ -314,7 +314,7 @@
 
   <section class="bw-shell" aria-labelledby="bw-linden-title">
     <header class="bw-head">
-      <p class="bw-kicker">BerlinWalk route helper</p>
+      <p class="bw-kicker">Walk of Berlin route helper</p>
       <h2 class="bw-title" id="bw-linden-title">Unter den Linden Walk Planner</h2>
       <p class="bw-sub">Choose your time, direction and mood. The planner turns Berlin's grand boulevard into a realistic walk instead of a rushed line between photo stops.</p>
     </header>
@@ -366,8 +366,8 @@
             <span id="bw-pause">Bebelplatz if the square is calm; Museum Island if you want the best ending.</span>
           </div>
           <div class="bw-mini">
-            <strong>BerlinWalk fit</strong>
-            <span id="bw-tour-fit">Best before or after the BerlinWalk tour of about 2.5 hours, not as a rushed detour during it.</span>
+            <strong>Berlin Then and Now fit</strong>
+            <span id="bw-tour-fit">Best before or after the Berlin Then and Now walking tour of about 2.5 hours, not as a rushed detour during it.</span>
           </div>
         </div>
 
@@ -443,8 +443,8 @@
           ? 'U5 is useful at both ends; keep Museumsinsel as the rescue stop if the walk grows long.'
           : 'U5 Brandenburger Tor, Unter den Linden or Museumsinsel lets you shorten the walk cleanly.';
         tourFit.textContent = state.time === 'deep'
-          ? 'Do this as a separate half-day layer around the BerlinWalk tour, which takes about 2.5 hours.'
-          : 'Works well before or after the BerlinWalk tour from Alexanderplatz, which takes about 2.5 hours.';
+          ? 'Do this as a separate half-day layer around the Berlin Then and Now walking tour, which takes about 2.5 hours.'
+          : 'Works well before or after the Berlin Then and Now walking tour from Alexanderplatz, which takes about 2.5 hours.';
         note.textContent = mood.note;
         route.innerHTML = stops.map(function (stop, index) {
           return '<div class="bw-stop"><div class="bw-dot">' + (index + 1) + '</div><div><strong>' + stop + '</strong><span>' + descriptions[stop] + '</span></div></div>';

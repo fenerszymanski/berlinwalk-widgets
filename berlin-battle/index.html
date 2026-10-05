@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Berlin Battle | BerlinWalk</title>
-  <meta name="description" content="Play Berlin Battle by BerlinWalk: choose between Berlin food, neighborhoods, museums and night-out moods until one winner survives.">
+  <title>Berlin Battle | Walk of Berlin</title>
+  <meta name="description" content="Play Berlin Battle by Walk of Berlin: choose between Berlin food, neighborhoods, museums and night-out moods until one winner survives.">
   <link rel="icon" href="../tools-home/icons/berlin-battle-160.png">
   <link rel="stylesheet" href="../css/brand.css">
   <script defer src="../js/brand.js"></script>
@@ -1242,7 +1242,7 @@
       '<section class="bb-shell is-' + escapeHtml(safeViewClass()) + '">' +
         '<header class="bb-hero">' +
           '<div>' +
-            '<span class="bb-kicker">BerlinWalk Games</span>' +
+            '<span class="bb-kicker">Walk of Berlin Games</span>' +
             heroHtml +
           '</div>' +
           '<div class="bb-hero-visual" aria-hidden="true">' +
@@ -1487,7 +1487,7 @@
 
   function resultCaption(winner) {
     var shareTitle = (state.topic && state.topic.shareTitle) || 'My Berlin Battle winner';
-    return shareTitle + ' is ' + winner.name + '. Play your own Berlin Battle by BerlinWalk: ' + resultShareUrl(winner);
+    return shareTitle + ' is ' + winner.name + '. Play your own Berlin Battle by Walk of Berlin: ' + resultShareUrl(winner);
   }
 
   function setStatus(message) {
@@ -1581,7 +1581,7 @@
     wrapText(ctx, resultLine(winner), 70, 1220, 900, 40, 2);
     ctx.fillStyle = '#1B5E20';
     ctx.font = '900 28px Montserrat, Arial, sans-serif';
-    ctx.fillText('berlinwalk.com', 70, 1318);
+    ctx.fillText('walkofberlin.com', 70, 1318);
     ctx.fillStyle = '#FFE600';
     ctx.fillRect(760, 1288, 250, 14);
   }
