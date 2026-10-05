@@ -530,7 +530,7 @@ class BWHomeTwoDoorsElement extends HTMLElement {
             <div class="bw-home-two-doors__guide-copy">
               <span class="bw-home-two-doors__eyebrow">ONE GUIDE · TWO WAYS TO WALK</span>
               <h2>I want Berlin to make sense, not just look impressive.</h2>
-              <p>I built BerlinWalk around the moments when a place becomes easier to read: a border crossing, a missing station, a street that changed countries without moving. Join me for the live route, or take one of my audio walks when you want more time at one subject.</p>
+              <p>I built Walk of Berlin around the moments when a place becomes easier to read: a border crossing, a missing station, a street that changed countries without moving. Join me for the live route, or take one of my audio walks when you want more time at one subject.</p>
               <div class="bw-home-two-doors__guide-two">
                 <div><b>In person</b><p>Start at the World Clock, ask questions and follow the historic centre with me.</p></div>
                 <div><b>In your own time</b><p>Open a route in your browser and pause at the places you want to keep.</p></div>
@@ -570,7 +570,7 @@ class BWHomeTwoDoorsElement extends HTMLElement {
           <div class="bw-home-two-doors__wrap">
             <div class="bw-home-two-doors__section-head">
               <div>
-                <span class="bw-home-two-doors__eyebrow">MORE FROM BERLINWALK</span>
+                <span class="bw-home-two-doors__eyebrow">MORE FROM WALK OF BERLIN</span>
                 <h2>Useful when you need a next move.</h2>
               </div>
               <p class="bw-home-two-doors__lead">Pick the one that answers the question you have today.</p>
@@ -710,7 +710,7 @@ class BWHomeTwoDoorsElement extends HTMLElement {
         const initial = typeof review.lastInitial === 'string' ? review.lastInitial.trim().replace(/\.$/, '') : '';
         const displayName = review.showName === true && firstName
           ? `${firstName}${initial ? ` ${initial}.` : ''}` : 'Anonymous guest';
-        const source = review.source && review.source !== 'direct' ? ` · ${review.source}` : ' · BerlinWalk guest';
+        const source = review.source && review.source !== 'direct' ? ` · ${review.source}` : ' · Walk of Berlin guest';
         byline.textContent = `${displayName}${source} · ${Number(review.rating)}/5`;
         slide.append(quote, byline);
         return slide;
