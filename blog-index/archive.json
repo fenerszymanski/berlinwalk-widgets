@@ -1,9 +1,26 @@
 {
-  "updatedAt": "2026-10-05T02:07:35.969Z",
+  "updatedAt": "2026-10-05T08:47:49.426Z",
   "source": "Wix Blog API",
-  "totalPosts": 430,
+  "totalPosts": 431,
   "bookingUrl": "https://www.walkofberlin.com/book-berlin-walking-tour/berlin-then-and-now",
   "allPosts": [
+    {
+      "title": "Gardens of the World Berlin: When the Trip to Marzahn Pays Off",
+      "slug": "gardens-of-the-world-berlin",
+      "path": "/post/gardens-of-the-world-berlin",
+      "url": "https://www.berlinwalk.com/post/gardens-of-the-world-berlin",
+      "excerpt": "The Gärten der Welt are 26 minutes from Alexanderplatz on the U5, and the season decides how much of them you see. Here is the calendar of gate times, cable car dates and winter closures, which gardens to see first, and a map that shows what fits before the gate shuts.",
+      "category": "Tourist Tips",
+      "categorySlug": "tourist-tips",
+      "topic": "first-day",
+      "topicLabel": "First Day in Berlin",
+      "readTime": "7 min read",
+      "publishedDate": "2026-10-05T08:46:07.247Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_c796a2a70ca84a45a9fb41471635d106~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-chinese-garden.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_c796a2a70ca84a45a9fb41471635d106~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-chinese-garden.jpg",
+      "alt": "The red pagoda on a small island in the lake of the Chinese Garden at the Gardens of the World in Berlin-Marzahn, framed by weeping willows and reflected in the water",
+      "relatedToolSlug": "gardens-of-the-world-fit-map"
+    },
     {
       "title": "Kältehilfe Berlin: What to Do When Someone Is Sleeping Out in the Cold",
       "slug": "kaeltehilfe-berlin",
