@@ -1,9 +1,9 @@
-/* lead-form-inject.js — the two public inline surfaces on every BerlinWalk post.
+/* lead-form-direct-inject.js — the two public inline surfaces on every BerlinWalk post.
  *
  * The compact Berlin Then and Now tour card keeps its existing placement.
  * Its date chips read live availability for the paid tour's Wix service and
  * stay hidden while that service has no bookable dates (booking not open yet).
- * The Date Check card is a separate, no-email decision aid placed later in
+ * The Date Check card requests the dated Berlin Unlocked emails directly in
  * the article, after the compact tour card and a short stretch of editorial
  * copy. Both cards are light DOM, page-local, and owned by this
  * one idempotent injector.
@@ -23,7 +23,10 @@
   // Checkout A booking page for the paid tour. A picked date travels as
   // ?start=YYYY-MM-DDTHH:MM (Berlin time), the page's landing hand-off contract.
   var BOOKING_URL = 'https://www.walkofberlin.com/book-berlin-walking-tour/berlin-then-and-now';
-  var DATE_CHECK_URL = 'https://www.berlinwalk.com/berlin-dates-check';
+  var DATE_CHECK_URL = 'https://www.walkofberlin.com/berlin-dates-check';
+  var DATE_CHECK_API = 'https://app.berlinwalk.com/api/download-lead';
+  var DIRECT_CONSENT_VERSION = 'berlin-date-check-submit-v2-2026-10-05';
+  var DIRECT_CONSENT_TEXT = 'By clicking “Email my Berlin dates”, you agree to receive Berlin Unlocked, emails timed to your trip, and occasional Berlin tips and offers from Walk of Berlin by email. You can unsubscribe at any time.';
   var BOOKING_MARKER = 'data-bw-blog-booking';
   var DATE_CHECK_MARKER = 'data-bw-date-check-card';
   var BOOKING_STYLE_ID = 'bw-blog-booking-inject-style';
@@ -42,7 +45,7 @@
   var LOG = '[BW blog surfaces]';
   var MAX_RETRIES = 12;
   var RETRY_DELAYS = [0, 120, 420, 900, 1600, 2800, 4500, 7000, 10000, 14000, 18000, 24000];
-  var DATE_CHECK_IMAGE = 'https://fenerszymanski.github.io/berlinwalk-widgets/gallery/images/06-1600w.webp';
+  var DATE_CHECK_IMAGE = 'https://fenerszymanski.github.io/berlinwalk-widgets/arrival-card/brandenburg-gate.jpg';
   var dateCardCount = 0;
   var retryTimer = null;
   var observer = null;
@@ -529,6 +532,9 @@
       '.bw-date-check-blog-card[data-bw-date-check-card] .bw-date-check-blog-card__form>.bw-c-date-intro p{margin:0!important;padding:0!important;font:400 15px/1.6 Merriweather,Georgia,serif!important;color:#5C665A!important}',
       '@media(prefers-reduced-motion:reduce){.bw-date-check-blog-card *{scroll-behavior:auto!important;transition:none!important}}'
     ].join('');
+    style.textContent += '.bw-date-check-blog-card[data-bw-direct-email][data-bw-date-check-card]{border-radius:22px!important}.bw-date-check-blog-card[data-bw-direct-email][data-bw-date-check-card] [hidden]{display:none!important}.bw-date-check-blog-card[data-bw-direct-email][data-bw-date-check-card] .bw-date-check-blog-card__fields{display:grid!important;grid-template-columns:minmax(0,1.1fr) minmax(75px,.55fr) minmax(0,1.35fr)!important}.bw-date-check-blog-card[data-bw-direct-email][data-bw-date-check-card] input[type=email]{width:100%;min-width:0;max-width:100%;height:54px;padding:0 13px;border:1.5px solid #123d18;border-radius:8px;background:#fff;color:#212121;font:500 16px/1.2 Montserrat,Arial,sans-serif}.bw-date-check-blog-card[data-bw-direct-email][data-bw-date-check-card] .bw-date-check-blog-card__consent{font:400 12.5px/1.55 Montserrat,Arial,sans-serif!important;color:#475643!important;margin:15px 0 0!important}.bw-date-check-blog-card[data-bw-direct-email][data-bw-date-check-card] .bw-date-check-blog-card__consent a{color:#123d18!important;text-decoration:underline!important}.bw-date-check-blog-card__trap{position:absolute;left:-10000px;width:1px;height:1px;overflow:hidden}.bw-date-check-blog-card[data-bw-direct-email][data-bw-date-check-card] .bw-date-check-blog-card__success{font:400 16px/1.55 Montserrat,Arial,sans-serif;color:#123d18;padding:10px 0}.bw-date-check-blog-card__success strong{display:block;font-size:24px;margin-bottom:9px}.bw-date-check-blog-card[data-bw-direct-email][data-bw-date-check-card] .bw-date-check-blog-card__submit:disabled{opacity:.7;cursor:wait}@media(max-width:700px){.bw-date-check-blog-card[data-bw-direct-email][data-bw-date-check-card] .bw-date-check-blog-card__fields{grid-template-columns:minmax(0,1fr) minmax(75px,.5fr)!important}.bw-date-check-blog-card__email-field{grid-column:1/-1}}@media(max-width:520px){.bw-date-check-blog-card[data-bw-direct-email][data-bw-date-check-card] .bw-date-check-blog-card__fields{grid-template-columns:minmax(0,1fr)!important}}';
+    style.textContent += '.bw-date-check-blog-card[data-bw-direct-email][data-bw-date-check-card]{display:grid!important;grid-template-columns:34% minmax(0,66%)!important;background:#1b5e20!important;border:0!important;box-shadow:none!important}.bw-date-check-blog-card[data-bw-direct-email][data-bw-date-check-card] .bw-date-check-blog-card__visual{display:block!important;position:relative!important;min-height:390px!important;background:#1b5e20!important}.bw-date-check-blog-card[data-bw-direct-email][data-bw-date-check-card] .bw-date-check-blog-card__visual img{display:block!important;position:absolute!important;inset:0!important;width:100%!important;height:100%!important;object-fit:cover!important;object-position:49% 50%!important}.bw-date-check-blog-card[data-bw-direct-email][data-bw-date-check-card] .bw-date-check-blog-card__scrim{display:none!important}.bw-date-check-blog-card[data-bw-direct-email][data-bw-date-check-card] .bw-date-check-blog-card__form{display:block!important;padding:24px!important}.bw-date-check-blog-card[data-bw-direct-email][data-bw-date-check-card] .bw-date-check-blog-card__form>.bw-date-check-blog-card__eyebrow{display:inline-block!important;background:#ffe600!important;color:#123d18!important;border-radius:12px!important;padding:7px 11px!important;margin:0 0 12px!important;font:800 11px/1.3 Montserrat,Arial,sans-serif!important;letter-spacing:0!important}.bw-date-check-blog-card[data-bw-direct-email][data-bw-date-check-card] .bw-date-check-blog-card__eyebrow:before{display:none!important}.bw-date-check-blog-card[data-bw-direct-email][data-bw-date-check-card] .bw-date-check-blog-card__form>.bw-c-date-intro h2.bw-date-check-blog-card__title{color:#fff!important;font-size:26px!important;font-weight:800!important;line-height:1.16!important;letter-spacing:-.025em!important;margin:0 0 12px!important}.bw-date-check-blog-card[data-bw-direct-email][data-bw-date-check-card] .bw-c-date-intro p{color:#fff!important;font:400 15px/1.45 Montserrat,Arial,sans-serif!important;margin:0 0 16px!important}.bw-date-check-blog-card[data-bw-direct-email][data-bw-date-check-card] .bw-date-check-blog-card__field label{color:#e3f0dc!important;letter-spacing:0!important;font:600 13px/1.4 Montserrat,Arial,sans-serif!important}.bw-date-check-blog-card[data-bw-direct-email][data-bw-date-check-card] .bw-date-check-blog-card__fields{grid-template-columns:minmax(0,1fr) minmax(70px,.42fr)!important}.bw-date-check-blog-card[data-bw-direct-email][data-bw-date-check-card] .bw-date-check-blog-card__email-field{grid-column:1/-1}.bw-date-check-blog-card[data-bw-direct-email][data-bw-date-check-card] .bw-date-check-blog-card__consent,.bw-date-check-blog-card[data-bw-direct-email][data-bw-date-check-card] .bw-date-check-blog-card__consent a,.bw-date-check-blog-card[data-bw-direct-email][data-bw-date-check-card] .bw-date-check-blog-card__success,.bw-date-check-blog-card[data-bw-direct-email][data-bw-date-check-card] .bw-date-check-blog-card__status{color:#fff!important}.bw-date-check-blog-card[data-bw-direct-email][data-bw-date-check-card] .bw-date-check-blog-card__submit{width:100%!important;justify-content:center!important;gap:12px!important;min-height:54px!important;margin-top:14px!important}@media(max-width:760px){.bw-date-check-blog-card[data-bw-direct-email][data-bw-date-check-card]{grid-template-columns:minmax(0,1fr)!important}.bw-date-check-blog-card[data-bw-direct-email][data-bw-date-check-card] .bw-date-check-blog-card__visual{height:180px!important;min-height:0!important}.bw-date-check-blog-card[data-bw-direct-email][data-bw-date-check-card] .bw-date-check-blog-card__visual img{object-position:50% 44%!important}.bw-date-check-blog-card[data-bw-direct-email][data-bw-date-check-card] .bw-date-check-blog-card__form{padding:22px 20px!important}}@media(max-width:520px){.bw-date-check-blog-card[data-bw-direct-email][data-bw-date-check-card] .bw-date-check-blog-card__fields{grid-template-columns:minmax(0,1fr)!important}}';
+    style.textContent += '.bw-date-check-blog-card[data-bw-direct-email][data-bw-date-check-card] form [hidden]{display:none!important}';
     document.head.appendChild(style);
   }
 
@@ -539,9 +545,9 @@
 
   function dateCheckVisualHtml(id) {
     return [
-      '<div class="bw-date-check-blog-card__visual"><img src="' + DATE_CHECK_IMAGE + '" alt="World Clock at Alexanderplatz" loading="lazy" decoding="async"><div class="bw-date-check-blog-card__scrim">',
-      '<div class="bw-date-check-blog-card__eyebrow">Berlin Date Check</div>',
-      '<h2 class="bw-date-check-blog-card__title" id="' + id + '-title">Check your Berlin trip dates</h2><div class="bw-date-check-blog-card__copy">See closures, book-by dates and daylight for your exact stay.</div>',
+      '<div class="bw-date-check-blog-card__visual"><img src="' + DATE_CHECK_IMAGE + '" alt="Brandenburg Gate in warm evening light" loading="lazy" decoding="async"><div class="bw-date-check-blog-card__scrim">',
+      '<div class="bw-date-check-blog-card__eyebrow">FREE BERLIN DATE CHECK</div>',
+      '<h2 class="bw-date-check-blog-card__title" id="' + id + '-title">Check your Berlin trip dates</h2><div class="bw-date-check-blog-card__copy">Get Berlin Unlocked for your dates, plus tips before you arrive.</div>',
       '<div class="bw-date-check-blog-card__proof" aria-label="Date Check covers"><span>Closures</span><span>Book-by</span><span>Daylight</span></div></div></div>'
     ].join('');
   }
@@ -553,6 +559,7 @@
     var variant = normaliseDateCheckVariant(forcedVariant) || dateCheckCardVariant();
     var card = document.createElement('aside');
     card.setAttribute(DATE_CHECK_MARKER, '1');
+    card.setAttribute('data-bw-direct-email', '2');
     card.setAttribute('data-bw-leadform', '1');
     card.setAttribute('data-bw-date-check-variant', variant);
     card.className = 'bw-date-check-blog-card';
@@ -560,20 +567,31 @@
     card.setAttribute('aria-labelledby', id + '-title');
     card.innerHTML = [
       dateCheckVisualHtml(id),
-      '<form class="bw-date-check-blog-card__form" method="get" action="' + escapeAttr(DATE_CHECK_URL) + '" target="_top">',
-      // Without these the native GET fallback would arrive untagged and the
-      // experiment would silently undercount this variant.
+      '<form class="bw-date-check-blog-card__form" method="post">',
+      // Preserve the legacy card dimensions; the POST payload uses gated attribution.
       '<input type="hidden" name="utm_source" value="blog"><input type="hidden" name="utm_medium" value="inline_tool">',
       '<input type="hidden" name="utm_campaign" value="berlin_date_check"><input type="hidden" name="utm_content" value="' + escapeAttr(slug || 'blog-post') + '">',
       '<input type="hidden" name="utm_term" value="form">',
       '<input type="hidden" name="bw_entry" value="blog_card"><input type="hidden" name="bw_card_exp" value="' + DATE_CHECK_CARD_EXPERIMENT + '">',
       '<input type="hidden" name="bw_card_variant" value="form"><input type="hidden" name="bw_card_source" value="' + escapeAttr(slug || 'blog-post') + '">',
       '<div class="bw-date-check-blog-card__fields"><div class="bw-date-check-blog-card__field"><label for="' + id + '-arrival">When do you arrive?</label><div class="bw-date-check-blog-card__date-control" data-has-value="0"><span class="bw-date-check-blog-card__date-display" aria-hidden="true">Select arrival date</span><input id="' + id + '-arrival" name="arrival" type="date" min="' + todayString() + '" max="' + maxDateString() + '" required></div></div>',
-      '<div class="bw-date-check-blog-card__field"><label for="' + id + '-nights">Nights</label><select id="' + id + '-nights" name="nights" required><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4" selected>4</option><option value="5">5</option><option value="6">6</option><option value="7">7+</option></select></div></div>',
-      '<button class="bw-date-check-blog-card__submit" type="submit"><span>Check my Berlin dates</span><span class="bw-date-check-blog-card__arrow" aria-hidden="true">→</span></button>',
-      '<div class="bw-date-check-blog-card__micro">The result is built around your arrival date and number of nights.</div><div class="bw-date-check-blog-card__status" role="status" aria-live="polite"></div></form>'
+      '<div class="bw-date-check-blog-card__field"><label for="' + id + '-nights">Nights</label><select id="' + id + '-nights" name="nights" required><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4" selected>4</option><option value="5">5</option><option value="6">6</option><option value="7">7+</option></select></div><div class="bw-date-check-blog-card__field bw-date-check-blog-card__email-field"><label for="' + id + '-email">Email</label><input id="' + id + '-email" name="email" type="email" inputmode="email" autocomplete="email" autocapitalize="none" spellcheck="false" placeholder="Your email address" maxlength="180" required aria-describedby="' + id + '-consent"></div></div>',
+      '<button class="bw-date-check-blog-card__submit" type="submit"><span>Email my Berlin dates</span><span class="bw-date-check-blog-card__arrow" aria-hidden="true">→</span></button>',
+      '<div class="bw-date-check-blog-card__trap" aria-hidden="true"><label>Website<input name="website" tabindex="-1" autocomplete="off"></label></div>',
+      '<p class="bw-date-check-blog-card__consent" id="' + id + '-consent">' + escapeHtml(DIRECT_CONSENT_TEXT) + ' <a href="https://walkofberlin.com/privacy-policy" target="_blank" rel="noopener">Privacy Policy</a>.</p>',
+      '<div class="bw-date-check-blog-card__success" hidden role="status" aria-live="polite"><strong>Check your inbox.</strong>Open my email to confirm your address and get Berlin Unlocked for your dates. If it is missing, check your spam folder.</div><div class="bw-date-check-blog-card__status" role="status" aria-live="polite"></div></form>'
     ].join('');
     var form = card.querySelector('form');
+    // Own the compact layout so the article redesign cannot hide the new form's photo.
+    var intro = document.createElement('div');
+    intro.className = 'bw-c-date-intro';
+    intro.appendChild(card.querySelector('.bw-date-check-blog-card__title'));
+    var paragraph = document.createElement('p');
+    paragraph.textContent = card.querySelector('.bw-date-check-blog-card__copy').textContent;
+    intro.appendChild(paragraph);
+    form.insertBefore(intro, form.querySelector('.bw-date-check-blog-card__fields'));
+    form.insertBefore(card.querySelector('.bw-date-check-blog-card__eyebrow'), intro);
+    card.classList.add('bw-c-date-card');
     var status = card.querySelector('.bw-date-check-blog-card__status');
     var arrivalInput = form.elements.arrival;
     var dateControl = card.querySelector('.bw-date-check-blog-card__date-control');
@@ -596,8 +614,12 @@
       try { arrivalInput.showPicker(); } catch (err) {}
     });
     syncDateDisplay();
-    var measurement = window.BWDateCheckMeasurement && window.BWDateCheckMeasurement.bind(card, {sourceSlug: slug, variant: 'form', version: 'date-check-measurement-v1-2026-10-05'});
+    var measurement = window.BWDateCheckMeasurement && window.BWDateCheckMeasurement.bind(card, {sourceSlug: slug, variant: 'direct_email', version: 'date-check-direct-v2-2026-10-05'});
     card._bwDateCheckMeasurement = measurement;
+    var formStartedAt = new Date().toISOString();
+    var requestId = window.crypto && typeof window.crypto.randomUUID === 'function' ? window.crypto.randomUUID() : String(Date.now()) + '_' + String(Math.random()).slice(2);
+    var sending = false;
+    var button = form.querySelector('button[type=submit]');
     var started = false;
     var markStart = function () {
       if (measurement) { measurement.start(); return; }
@@ -607,30 +629,61 @@
     };
     arrivalInput.addEventListener('focus', markStart);
     form.elements.nights.addEventListener('focus', markStart);
+    form.elements.email.addEventListener('focus', markStart);
     if (!measurement) {
       pushDateCheckEvent('bw_date_check_blog_card_mount', slug, 'form');
       trackDateCheckSeen(card, slug, 'form');
     }
-    form.addEventListener('submit', function (event) {
+    form.addEventListener('submit', async function (event) {
       event.preventDefault();
+      if (sending || !form.reportValidity()) return;
       status.textContent = '';
       var arrival = form.elements.arrival.value;
-      var nights = form.elements.nights.value;
+      var nights = Number(form.elements.nights.value);
       if (!validDateFields(arrival, nights, form.elements.arrival.min, form.elements.arrival.max)) {
-        status.textContent = arrival ? 'Choose a valid stay length and date.' : 'Choose your arrival date.';
-        if (!arrival) form.elements.arrival.focus();
+        status.textContent = 'Choose a valid arrival date and number of nights.';
+        if (measurement) measurement.error('validation');
         return;
       }
-      var target = dateCheckTargetUrl(DATE_CHECK_URL, slug, arrival, nights, window.location.href, 'form');
-      if (measurement) measurement.submit({arrivalDate: arrival, nights: Number(nights)});
-      else pushDateCheckEvent('bw_date_check_blog_card_submit', slug, 'form');
-      var CustomEventCtor = window.CustomEvent || CustomEvent;
-      var handoff = new CustomEventCtor('bw-date-check-blog-submit', { bubbles: true, cancelable: true, detail: { arrival: arrival, nights: Number(nights), targetUrl: target.toString() } });
-      if (!card.dispatchEvent(handoff)) {
-        status.textContent = 'Preview target: ' + target.pathname + target.search;
+      var submittedAt = new Date().toISOString();
+      if (Date.parse(submittedAt) - Date.parse(formStartedAt) < 750) {
+        status.textContent = 'Please check your details, then try again.';
         return;
       }
-      window.location.assign(target.toString());
+      if (measurement) measurement.submit({arrivalDate: arrival, nights: nights});
+      sending = true; button.disabled = true; button.querySelector('span').textContent = 'Sending…';
+      form.setAttribute('aria-busy', 'true');
+      var controller = new AbortController();
+      var timeout = setTimeout(function () { controller.abort(); }, 20000);
+      var granted = window.BWDateCheckMeasurement && window.BWDateCheckMeasurement.analyticsAllowed
+        ? window.BWDateCheckMeasurement.analyticsAllowed() : false;
+      var payload = {
+        assetId: 'berlin-date-check', assetVersion: '2026-08-v1',
+        arrivalDate: arrival, nights: nights, email: form.elements.email.value.trim().toLowerCase(),
+        consent: true, consentMethod: 'submit_button_with_visible_disclosure', consentVersion: DIRECT_CONSENT_VERSION,
+        consentText: DIRECT_CONSENT_TEXT, startedAt: formStartedAt, submittedAt: submittedAt,
+        website: form.elements.website.value, idempotencyKey: requestId,
+        sourceSlug: slug, pagePath: location.pathname, sourceUrl: location.origin + location.pathname,
+        placement: 'blog_inline_direct_email', experiment: 'berlin_date_check_inline_email_20261005', variant: 'direct-email',
+        analyticsConsentAtSubmit: granted === true, advertisingConsent: !!(window.BWDateCheckMeasurement && window.BWDateCheckMeasurement.advertisingAllowed()),
+        entryPoint: 'blog_card', cardExperiment: DATE_CHECK_CARD_EXPERIMENT, cardVariant: 'form', cardSourceSlug: slug,
+        daysUntilArrival: Math.max(0, Math.round((Date.parse(arrival + 'T12:00:00Z') - Date.parse(todayString() + 'T12:00:00Z')) / 86400000))
+      };
+      if (measurement && measurement.analyticsContext) Object.assign(payload, measurement.analyticsContext());
+      try {
+        var response = await fetch(DATE_CHECK_API + '?action=submit', {method: 'POST', credentials: 'include', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(payload), signal: controller.signal});
+        var result = await response.json();
+        if (!response.ok || result.ok === false) throw new Error('http');
+        if (measurement) measurement.accepted();
+        card.querySelector('.bw-date-check-blog-card__fields').hidden = true;
+        button.hidden = true;
+        card.querySelector('.bw-date-check-blog-card__consent').hidden = true;
+        card.querySelector('.bw-date-check-blog-card__success').hidden = false;
+      } catch (err) {
+        if (measurement) measurement.error(err.message === 'http' ? 'http' : 'network');
+        status.textContent = 'I could not complete this request. Please try again.';
+        sending = false; button.disabled = false; button.querySelector('span').textContent = 'Email my Berlin dates';
+      } finally { clearTimeout(timeout); form.setAttribute('aria-busy', 'false'); }
     });
     return card;
   }
