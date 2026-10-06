@@ -132,6 +132,7 @@
       transition: all 0.15s ease;
     }
 
+    #bw-wc-calc .bw-attraction[data-unavailable="true"] { opacity: .6; cursor: not-allowed; }
     #bw-wc-calc .bw-attraction:hover {
       border-color: var(--bw-lime);
       background: var(--bw-lime-soft);
@@ -380,15 +381,15 @@
             <div class="bw-attr-name">Museum Island (day pass)</div>
             <div class="bw-attr-price">€24</div>
           </div>
-          <div class="bw-attraction" data-id="tv-tower" data-price="24.50" data-discount="25">
+          <div class="bw-attraction" data-id="tv-tower" data-price="28.50" data-discount="25">
             <div class="bw-checkbox"><svg viewBox="0 0 16 16"><polyline points="3,8 7,12 13,4" fill="none" stroke="#FFE600" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
             <div class="bw-attr-name">TV Tower observation deck</div>
-            <div class="bw-attr-price">€24.50</div>
+            <div class="bw-attr-price">from €28.50 at desk</div>
           </div>
-          <div class="bw-attraction" data-id="ddr-museum" data-price="12.50" data-discount="25">
+          <div class="bw-attraction" data-id="ddr-museum" data-price="13.90" data-discount="25">
             <div class="bw-checkbox"><svg viewBox="0 0 16 16"><polyline points="3,8 7,12 13,4" fill="none" stroke="#FFE600" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
             <div class="bw-attr-name">DDR Museum</div>
-            <div class="bw-attr-price">€12.50</div>
+            <div class="bw-attr-price">€13.90</div>
           </div>
           <div class="bw-attraction" data-id="spree-tour" data-price="22" data-discount="25">
             <div class="bw-checkbox"><svg viewBox="0 0 16 16"><polyline points="3,8 7,12 13,4" fill="none" stroke="#FFE600" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
@@ -400,10 +401,10 @@
             <div class="bw-attr-name">Madame Tussauds</div>
             <div class="bw-attr-price">€29</div>
           </div>
-          <div class="bw-attraction" data-id="aquadom" data-price="20" data-discount="25">
+          <div class="bw-attraction" data-id="aquadom" data-price="20" data-discount="25" data-unavailable="true" aria-disabled="true">
             <div class="bw-checkbox"><svg viewBox="0 0 16 16"><polyline points="3,8 7,12 13,4" fill="none" stroke="#FFE600" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-            <div class="bw-attr-name">SEA LIFE Berlin</div>
-            <div class="bw-attr-price">€20</div>
+            <div class="bw-attr-name">SEA LIFE Berlin · permanently closed</div>
+            <div class="bw-attr-price">Unavailable</div>
           </div>
         </div>
       </div>
@@ -418,6 +419,8 @@
           </div>
         </div>
       </div>
+
+      <p class="bw-toggle-sub">Estimated savings only: the TV Tower uses a ticket-desk starting price, with the 25% discount available on site, not online. Recheck the current price for your visit. DDR Museum discounts are also redeemed at its ticket desk. SEA LIFE Berlin closed on 13 December 2024 and is excluded.</p>
 
       <div class="bw-result" id="bw-result">
         <div class="bw-verdict-kicker" id="bw-verdict-kicker">YOUR VERDICT</div>
@@ -467,6 +470,7 @@
 
       attractionEls.forEach(function (el) {
         el.addEventListener('click', function () {
+          if (el.getAttribute('data-unavailable') === 'true') return;
           var id = el.getAttribute('data-id');
           el.classList.toggle('active');
           if (el.classList.contains('active')) {
@@ -577,7 +581,7 @@
         } else if (best.key === 'C') {
           verdictKicker.textContent = '✅ BEST OPTION';
           verdictText.textContent = "Get the Museum Island WelcomeCard.";
-          tip.innerHTML = "You save <strong>€" + savings.toFixed(2) + "</strong> vs. buying separately. The €62 card covers transport plus all 5 Museum Island museums — the best deal for your plan.";
+          tip.innerHTML = "You save <strong>€" + savings.toFixed(2) + "</strong> vs. buying separately. The €62 card covers transport plus the participating Museum Island museums, including Pergamonmuseum. Das Panorama — the best deal for your plan.";
         } else if (best.key === 'B') {
           verdictKicker.textContent = '✅ BEST OPTION';
           verdictText.textContent = "Get the Classic WelcomeCard.";

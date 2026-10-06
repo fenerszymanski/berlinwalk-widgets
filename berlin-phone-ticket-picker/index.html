@@ -133,7 +133,7 @@
               <div class="pt__apps" id="pt-apps"><span>BVG Fahrinfo</span><span>BVG Tickets</span></div>
               <div class="pt__valid">
                 <span class="pt__vic">✓</span>
-                <span class="pt__vtext" id="pt-valid">A phone ticket is <strong>valid the moment you buy it</strong>. No yellow box, no stamping.</span>
+                <span class="pt__vtext" id="pt-valid">Buy before boarding and <strong>wait until the app shows the ticket as valid</strong>; a mobile ticket can have a 60-second countdown. No stamping.</span>
               </div>
             </div>
           </div>
@@ -160,41 +160,41 @@
           app: 'BVG Tickets', apps: ['BVG Fahrinfo', 'BVG Tickets'], zone: 'AB',
           name: 'Single ticket AB', de: 'Einzelfahrschein AB', why: 'One ride across the city, changes and all, for up to 2 hours in one direction.',
           price: '€4.00', pnote: 'Or a Kurzstrecke short-trip for €2.80 if it is 3 rail stops or fewer with no change.',
-          valid: 'A single you buy in the app is <strong>valid straight away</strong>. Buy it just before you board; never stamp it.'
+          valid: 'Buy before boarding and <strong>wait until the app shows the ticket as valid</strong>; a mobile ticket can have a 60-second countdown. Never stamp it.'
         };
       case 'day':
         if (group === 'group') return {
           app: 'BVG Tickets', apps: ['BVG Fahrinfo', 'BVG Tickets'], zone: 'AB',
           name: '24-hour ticket AB, group', de: '24-Stunden-Karte Kleingruppe AB', why: 'Unlimited rides for up to 5 people together for 24 hours. Cheaper than five separate day tickets.',
           price: '€35.30', pnote: 'One ticket covers the whole group; you all travel together.',
-          valid: 'Valid the moment you buy it. Keep it open on <strong>one phone</strong> for the whole group when checked.'
+          valid: 'Buy before boarding and wait until the app shows the ticket as valid. Keep it open on <strong>one phone</strong> for the whole group when checked.'
         };
         return {
           app: 'BVG Tickets', apps: ['BVG Fahrinfo', 'BVG Tickets'], zone: 'AB',
           name: '24-hour ticket AB', de: '24-Stunden-Karte AB', why: 'Unlimited U-Bahn, S-Bahn, tram and bus for 24 hours. Pays off from about the third ride.',
           price: '€11.20', pnote: 'Runs 24 hours from the start time, not just to midnight.',
-          valid: 'Valid the moment you buy it. No yellow box, no stamping; just keep it open in the app.'
+          valid: 'Buy before boarding and wait until the app shows the ticket as valid. No stamping; keep the live ticket open in the app.'
         };
       case 'ber':
         return {
           app: 'BVG Fahrinfo', apps: ['BVG Fahrinfo', 'VBB Bus & Bahn', 'DB Navigator'], zone: 'ABC',
           name: 'Single ticket ABC', de: 'Einzelfahrschein ABC', why: 'BER Airport is in zone C, so you need the ABC ticket the app rarely picks for you by default.',
           price: '€5.00', pnote: 'Sightseeing the same day too? A 24-hour ABC ticket is €12.90.',
-          valid: 'Buy the <strong>ABC</strong> ticket before you leave the airport station. Valid at once; no stamping.'
+          valid: 'Buy the <strong>ABC</strong> ticket before boarding and wait until the app shows it as valid. No stamping.'
         };
       case 'potsdam':
         return {
           app: 'VBB Bus & Bahn', apps: ['VBB Bus & Bahn', 'DB Navigator', 'BVG Fahrinfo'], zone: 'ABC',
           name: 'Single ticket ABC', de: 'Einzelfahrausweis Berlin ABC', why: 'Potsdam sits in zone C. The regional RE and S-Bahn there are both covered by one ABC ticket.',
           price: '€5.00', pnote: 'Out and back and around all day? A 24-hour ABC ticket is €12.90.',
-          valid: 'Pick <strong>zone ABC</strong>. Valid the moment you buy it, on regional trains too.'
+          valid: 'Pick <strong>zone ABC</strong>. Buy before boarding and wait until the app shows it as valid; it covers regional trains too.'
         };
       case 'stay':
         return {
-          app: 'BVG app (subscription)', apps: ['BVG Fahrinfo', 'BVG Tickets'], zone: 'AB',
+          app: 'BVG app (subscription)', apps: ['BVG Fahrinfo', 'BVG Tickets'], zone: 'Nationwide',
           name: 'Deutschlandticket', why: 'Riding daily for about 6+ days? This flat monthly ticket beats stacking day tickets, and works nationwide.',
           price: '€63', pnote: 'Per month. It is a subscription: cancel by the 10th so it does not renew.',
-          valid: 'A registered mobile ticket in the app. Always valid; <strong>zone C and BER are not included</strong>, buy an add-on for the airport.'
+          valid: 'A personal monthly ticket for local and regional transport nationwide, <strong>including Berlin ABC, BER and Potsdam</strong>. No IC, EC or ICE; carry your photo ID.'
         };
       default:
         return null;
