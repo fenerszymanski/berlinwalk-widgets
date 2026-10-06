@@ -6,6 +6,21 @@
   src: url("assets/fonts/Fraunces-Variable-latin.woff2") format("woff2"), url("../home-products/assets/fonts/Fraunces-Variable.ttf") format("truetype");
 }
 
+/* Width-matched stand-ins while Fraunces loads: without them the H1 wraps to
+   two lines in Georgia and snaps back to one (mobile CLS ~0.22). Ratios measured
+   on the H1 copy at weight 600, opsz 144: Georgia 0.765, Times 0.912. */
+@font-face {
+  font-family: "BW Two Doors Fraunces Fallback G";
+  src: local("Georgia");
+  size-adjust: 76.5%;
+}
+
+@font-face {
+  font-family: "BW Two Doors Fraunces Fallback T";
+  src: local("Times New Roman"), local("TimesNewRomanPSMT"), local("Times");
+  size-adjust: 91.2%;
+}
+
 @font-face {
   font-display: swap;
   font-family: "BW Two Doors Space Grotesk";
@@ -66,7 +81,7 @@ bw-home-two-doors .bw-home-two-doors .bw-home-two-doors__review--dark .bw-home-t
   --bw-ink: #212121;
   --bw-ink-2: #4A4F47;
   --bw-line: rgba(18, 61, 24, 0.14);
-  --bw-display: "BW Two Doors Fraunces", Georgia, serif;
+  --bw-display: "BW Two Doors Fraunces", "BW Two Doors Fraunces Fallback G", "BW Two Doors Fraunces Fallback T", Georgia, serif;
   --bw-sans: "BW Two Doors Space Grotesk", Arial, sans-serif;
   --bw-mono: ui-monospace, SFMono-Regular, Menlo, monospace;
   --bw-wrap: 1240px;
