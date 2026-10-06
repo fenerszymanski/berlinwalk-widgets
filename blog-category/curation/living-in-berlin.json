@@ -373,6 +373,12 @@
       "shelf": "draussen",
       "figure": "23:00",
       "line": "is when the K&auml;ltehilfetelefon stops answering in October, and the K&auml;ltebus and the W&auml;rmebus only start on 1 November."
+    },
+    "missed-parcel-in-berlin": {
+      "shelf": "wohnung",
+      "figure": "3 days",
+      "line": "in a DPD locker, 8 working days at a GLS shop. The card in your letterbox does not tell you which clock you are on.",
+      "tool": "berlin-parcel-pickup-clock"
     }
   }
 }

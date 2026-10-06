@@ -1,9 +1,26 @@
 {
-  "updatedAt": "2026-10-06T02:05:30.937Z",
+  "updatedAt": "2026-10-06T08:27:57.208Z",
   "source": "Wix Blog API",
-  "totalPosts": 431,
+  "totalPosts": 432,
   "bookingUrl": "https://www.walkofberlin.com/book-berlin-walking-tour/berlin-then-and-now",
   "allPosts": [
+    {
+      "title": "Missed Parcel in Berlin: Where It Goes and How Long It Waits",
+      "slug": "missed-parcel-in-berlin",
+      "path": "/post/missed-parcel-in-berlin",
+      "url": "https://www.berlinwalk.com/post/missed-parcel-in-berlin",
+      "excerpt": "A card in the letterbox starts a countdown, and its length depends on who brought the parcel: 3 days in a DPD locker, 7 working days at a DHL branch or Hermes shop, 8 at GLS. Where each carrier leaves a missed parcel in Berlin, what to bring, and a clock that shows your last day.",
+      "category": "Living in Berlin",
+      "categorySlug": "living-in-berlin",
+      "topic": "living-in-berlin",
+      "topicLabel": "Living in Berlin",
+      "readTime": "5 min read",
+      "publishedDate": "2026-10-06T08:26:26.467Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_70b1c599a57e4b7ea1881a8e56d35f2d~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-packstation-241.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_70b1c599a57e4b7ea1881a8e56d35f2d~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-packstation-241.jpg",
+      "alt": "A yellow DHL Packstation numbered 241 standing on a paved square in Berlin, with trees and a railway line behind it",
+      "relatedToolSlug": "berlin-parcel-pickup-clock"
+    },
     {
       "title": "Gardens of the World Berlin: When the Trip to Marzahn Pays Off",
       "slug": "gardens-of-the-world-berlin",
@@ -5352,7 +5369,7 @@
       "categorySlug": "tourist-tips",
       "topic": "food-nightlife",
       "topicLabel": "Food & Nightlife",
-      "readTime": "12 min read",
+      "readTime": "11 min read",
       "publishedDate": "2026-06-07T10:50:14.548Z",
       "image": "https://static.wixstatic.com/media/5a08a3_f8ac892c6dfd4b5eb74c6252ca2ee8a2~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/gendarmenmarkt.jpg",
       "thumb": "https://static.wixstatic.com/media/5a08a3_f8ac892c6dfd4b5eb74c6252ca2ee8a2~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/gendarmenmarkt.jpg",

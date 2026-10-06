@@ -1,9 +1,9 @@
 {
-  "updatedAt": "2026-10-06T02:05:30.937Z",
+  "updatedAt": "2026-10-06T08:27:57.208Z",
   "source": "Wix Blog API",
   "popularSource": "Wix Blog metrics.views lifetime sort",
-  "totalPosts": 431,
-  "toolsTotal": 351,
+  "totalPosts": 432,
+  "toolsTotal": 352,
   "bookingUrl": "https://www.walkofberlin.com/book-berlin-walking-tour/berlin-then-and-now",
   "navTopics": [
     {
@@ -1802,6 +1802,23 @@
   ],
   "latest": [
     {
+      "title": "Missed Parcel in Berlin: Where It Goes and How Long It Waits",
+      "slug": "missed-parcel-in-berlin",
+      "path": "/post/missed-parcel-in-berlin",
+      "url": "https://www.berlinwalk.com/post/missed-parcel-in-berlin",
+      "excerpt": "A card in the letterbox starts a countdown, and its length depends on who brought the parcel: 3 days in a DPD locker, 7 working days at a DHL branch or Hermes shop, 8 at GLS. Where each carrier leaves a missed parcel in Berlin, what to bring, and a clock that shows your last day.",
+      "category": "Living in Berlin",
+      "categorySlug": "living-in-berlin",
+      "topic": "living-in-berlin",
+      "topicLabel": "Living in Berlin",
+      "readTime": "5 min read",
+      "publishedDate": "2026-10-06T08:26:26.467Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_70b1c599a57e4b7ea1881a8e56d35f2d~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-packstation-241.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_70b1c599a57e4b7ea1881a8e56d35f2d~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-packstation-241.jpg",
+      "alt": "A yellow DHL Packstation numbered 241 standing on a paved square in Berlin, with trees and a railway line behind it",
+      "relatedToolSlug": "berlin-parcel-pickup-clock"
+    },
+    {
       "title": "Gardens of the World Berlin: When the Trip to Marzahn Pays Off",
       "slug": "gardens-of-the-world-berlin",
       "path": "/post/gardens-of-the-world-berlin",
@@ -1987,23 +2004,6 @@
       "thumb": "https://static.wixstatic.com/media/5a08a3_380d9b9ac81945548359a441f290932f~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-steglitz-mietshaus-facade.jpg",
       "alt": "A cream Berlin apartment building in Steglitz with rows of arched balconies and bay windows behind bare autumn trees, cars parked along the street in front",
       "relatedToolSlug": "berlin-second-home-tax-ledger"
-    },
-    {
-      "title": "Berlin Housing Cooperative Flats: The Rent Is Low, the Money Is Locked",
-      "slug": "berlin-housing-cooperative",
-      "path": "/post/berlin-housing-cooperative",
-      "url": "https://www.berlinwalk.com/post/berlin-housing-cooperative",
-      "excerpt": "Berlin has more than 80 housing cooperatives holding roughly 190,000 flats, and the advice always stops at the word itself. Here is the rest: what the shares cost by flat size, why the money takes about three years to come back, how long the waiting lists really are, and the interest-free Berlin loan that pays the shares for you.",
-      "category": "Living in Berlin",
-      "categorySlug": "living-in-berlin",
-      "topic": "living-in-berlin",
-      "topicLabel": "Living in Berlin",
-      "readTime": "7 min read",
-      "publishedDate": "2026-09-23T20:02:51.208Z",
-      "image": "https://static.wixstatic.com/media/5a08a3_eefe56072d4844f886977ec9784de70a~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-falkenberg-akazienhof-street.jpg",
-      "thumb": "https://static.wixstatic.com/media/5a08a3_eefe56072d4844f886977ec9784de70a~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-falkenberg-akazienhof-street.jpg",
-      "alt": "A cobbled street in Gartenstadt Falkenberg lined with a long terrace of ochre and orange houses behind wooden fences and front gardens",
-      "relatedToolSlug": "berlin-coop-share-payback"
     }
   ]
 }
