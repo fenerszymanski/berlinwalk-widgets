@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-05T15:46:35.280Z",
+  "updatedAt": "2026-10-06T02:05:30.937Z",
   "source": "Wix Blog API",
   "popularSource": "Wix Blog metrics.views lifetime sort",
   "totalPosts": 431,
@@ -281,23 +281,6 @@
       "relatedToolSlug": "berlin-beer-season-calendar"
     },
     {
-      "title": "Berlin Airport to Alexanderplatz: The Easy Way",
-      "slug": "how-to-get-from-berlin-airport-to-alexanderplatz-the-easy-way",
-      "path": "/post/how-to-get-from-berlin-airport-to-alexanderplatz-the-easy-way",
-      "url": "https://www.berlinwalk.com/post/how-to-get-from-berlin-airport-to-alexanderplatz-the-easy-way",
-      "excerpt": "Just landed at BER airport and need to get to Alexanderplatz? Here's the fastest, cheapest, and most stress-free way to get from Berlin Brandenburg Airport to the heart of the city — from a local who does this route constantly.",
-      "category": "Tourist Tips",
-      "categorySlug": "tourist-tips",
-      "topic": "first-day",
-      "topicLabel": "First Day in Berlin",
-      "readTime": "6 min read",
-      "publishedDate": "2026-03-03T12:12:58.270Z",
-      "image": "https://static.wixstatic.com/media/nsplsh_a03121bf8b20473fb5d65a66bb71db09~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/a%20red%20and%20yellow%20train%20traveling%20past%20a%20tall%20building.jpg",
-      "thumb": "https://static.wixstatic.com/media/nsplsh_a03121bf8b20473fb5d65a66bb71db09~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/a%20red%20and%20yellow%20train%20traveling%20past%20a%20tall%20building.jpg",
-      "alt": "sbahn berlin",
-      "relatedToolSlug": "berlin-landmarks-map"
-    },
-    {
       "title": "Public Toilets in Berlin: Where to Find Them, What They Cost, and Free Options",
       "slug": "public-toilets-in-berlin",
       "path": "/post/public-toilets-in-berlin",
@@ -313,6 +296,23 @@
       "thumb": "https://static.wixstatic.com/media/5a08a3_75e950f67226457e8af15fbe3a7f46fd~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/nsplsh_7bdfcc030bd74d1d99d1624e3799f48d~mv2.jpg",
       "alt": "Restroom sign with male and female symbols on a brick wall, pointing right. Green trees and glass buildings in the background.",
       "relatedToolSlug": "berlin-public-toilets"
+    },
+    {
+      "title": "Berlin Airport to Alexanderplatz: The Easy Way",
+      "slug": "how-to-get-from-berlin-airport-to-alexanderplatz-the-easy-way",
+      "path": "/post/how-to-get-from-berlin-airport-to-alexanderplatz-the-easy-way",
+      "url": "https://www.berlinwalk.com/post/how-to-get-from-berlin-airport-to-alexanderplatz-the-easy-way",
+      "excerpt": "Just landed at BER airport and need to get to Alexanderplatz? Here's the fastest, cheapest, and most stress-free way to get from Berlin Brandenburg Airport to the heart of the city — from a local who does this route constantly.",
+      "category": "Tourist Tips",
+      "categorySlug": "tourist-tips",
+      "topic": "first-day",
+      "topicLabel": "First Day in Berlin",
+      "readTime": "6 min read",
+      "publishedDate": "2026-03-03T12:12:58.270Z",
+      "image": "https://static.wixstatic.com/media/nsplsh_a03121bf8b20473fb5d65a66bb71db09~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/a%20red%20and%20yellow%20train%20traveling%20past%20a%20tall%20building.jpg",
+      "thumb": "https://static.wixstatic.com/media/nsplsh_a03121bf8b20473fb5d65a66bb71db09~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/a%20red%20and%20yellow%20train%20traveling%20past%20a%20tall%20building.jpg",
+      "alt": "sbahn berlin",
+      "relatedToolSlug": "berlin-landmarks-map"
     },
     {
       "title": "5 Best Döner Kebab Spots in Berlin You Need to Try",
