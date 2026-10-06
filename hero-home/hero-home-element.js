@@ -9,6 +9,8 @@ const BW_HERO_HOME_ASSET_BASE = (() => {
 
 class BWHeroHomeElement extends HTMLElement {
   connectedCallback() {
+    // The replacement homepage's HEAD embed opts in; disabling it restores this section.
+    if (location.pathname === '/' && window.__bwHomeRetireLegacy === true) return;
     this._ensureHeroPreload();
     this._render();
   }

@@ -23,6 +23,7 @@ class BWTestimonialsElement extends HTMLElement {
   }
 
   connectedCallback() {
+    if (location.pathname === '/' && window.__bwHomeRetireLegacy === true) return;
     this._controller = new AbortController();
     this._reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     this._renderShell();

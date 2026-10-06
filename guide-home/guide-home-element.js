@@ -4,6 +4,7 @@ const BW_GUIDE_HOME_IMAGE_URL = 'https://static.wixstatic.com/media/5a08a3_ac78d
 
 class BWGuideHomeElement extends HTMLElement {
   connectedCallback() {
+    if (location.pathname === '/' && window.__bwHomeRetireLegacy === true) return;
     this._render();
   }
 

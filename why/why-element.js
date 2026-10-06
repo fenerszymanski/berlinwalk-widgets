@@ -35,6 +35,7 @@ class BWWhyElement extends HTMLElement {
   }
 
   connectedCallback() {
+    if (location.pathname === '/' && window.__bwHomeRetireLegacy === true) return;
     this._render();
     this._setupAnimations();
   }

@@ -23,7 +23,7 @@
   css.onload = () => { cssReady = true; reconcile(); };
   document.head.appendChild(css);
   const script = document.createElement('script');
-  script.src = new URL('home-two-doors-element.js', base).href;
+  script.src = new URL('home-two-doors-element.js?release=startup-20261006', base).href;
   script.onload = () => reconcile();
   document.head.appendChild(script);
   let mounted = null;

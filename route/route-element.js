@@ -49,6 +49,7 @@ class BWRouteElement extends HTMLElement {
   }
 
   async connectedCallback() {
+    if (location.pathname === '/' && window.__bwHomeRetireLegacy === true) return;
     this._controller = new AbortController();
     this._renderLoading();
 

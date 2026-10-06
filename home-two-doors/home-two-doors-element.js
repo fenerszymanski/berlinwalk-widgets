@@ -217,7 +217,7 @@ function bwHomeTwoDoorsPlayerMarkup(walk, idPrefix) {
       </span>
       <input class="bw-home-two-doors__sample-seek" type="range" min="0" max="${walk.sampleDuration}" value="0" step="1" data-bw-audio-seek aria-label="Seek ${walk.title} sample">
       <span class="bw-home-two-doors__sample-time" data-bw-audio-time>0:00 / ${bwHomeTwoDoorsFormatTime(walk.sampleDuration)}</span>
-      <audio class="bw-home-two-doors__sample-audio" id="${playerId}-audio" preload="metadata" src="${walk.sampleSrc}" aria-label="${walk.title} audio sample"></audio>
+      <audio class="bw-home-two-doors__sample-audio" id="${playerId}-audio" preload="none" data-bw-audio-src="${walk.sampleSrc}" aria-label="${walk.title} audio sample"></audio>
       <span class="bw-home-two-doors__sample-status" role="status" aria-live="polite" data-bw-audio-status></span>
     </div>`;
 }
@@ -855,13 +855,14 @@ class BWHomeTwoDoorsElement extends HTMLElement {
       title: player.dataset.sampleTitle || 'audio',
       sampleId: player.dataset.sampleId || '',
       expectedDuration: Number(player.dataset.sampleDuration) || 0,
+      pendingTime: null,
     })).filter(({ audio, button, seek }) => audio && button && seek);
 
     const updateTime = (item) => {
       const duration = Number.isFinite(item.audio.duration) && item.audio.duration > 0
         ? item.audio.duration
         : item.expectedDuration;
-      const current = Number.isFinite(item.audio.currentTime) ? item.audio.currentTime : 0;
+      const current = item.pendingTime ?? (Number.isFinite(item.audio.currentTime) ? item.audio.currentTime : 0);
       item.time.textContent = `${bwHomeTwoDoorsFormatTime(current)} / ${bwHomeTwoDoorsFormatTime(duration)}`;
       item.seek.max = String(Math.max(1, Math.round(duration)));
       item.seek.value = String(Math.min(Math.max(0, Math.round(current)), Number(item.seek.max)));
@@ -875,8 +876,25 @@ class BWHomeTwoDoorsElement extends HTMLElement {
       item.icon.textContent = playing ? 'Ⅱ' : '▶';
     };
 
+    const seekTo = (item, nextTime) => {
+      const loaded = item.audio.readyState >= 1 && Number.isFinite(item.audio.duration);
+      const duration = loaded ? item.audio.duration : item.expectedDuration;
+      const time = Math.min(Math.max(0, nextTime), duration);
+      // Seeking before the first play must not start a download. Apply it once
+      // the user's play click has loaded the real duration.
+      if (loaded) item.audio.currentTime = time;
+      else item.pendingTime = time;
+      updateTime(item);
+    };
+
     this._audioCards.forEach((item) => {
-      item.audio.addEventListener('loadedmetadata', () => updateTime(item));
+      item.audio.addEventListener('loadedmetadata', () => {
+        if (item.pendingTime !== null) {
+          item.audio.currentTime = Math.min(item.pendingTime, item.audio.duration);
+          item.pendingTime = null;
+        }
+        updateTime(item);
+      });
       item.audio.addEventListener('durationchange', () => updateTime(item));
       item.audio.addEventListener('timeupdate', () => updateTime(item));
       item.audio.addEventListener('play', () => {
@@ -907,6 +925,9 @@ class BWHomeTwoDoorsElement extends HTMLElement {
         item.status.textContent = '';
         if (item.audio.paused) {
           try {
+            // No src is present during startup: some browsers fetch most of a
+            // short sample even with preload="metadata". Keep play in the gesture.
+            if (!item.audio.hasAttribute('src')) item.audio.src = item.audio.dataset.bwAudioSrc;
             await item.audio.play();
           } catch (_error) {
             item.status.textContent = 'Playback was blocked. Press play again or open the audio walk page.';
@@ -917,23 +938,19 @@ class BWHomeTwoDoorsElement extends HTMLElement {
       });
       item.seek.addEventListener('input', () => {
         const nextTime = Number(item.seek.value);
-        if (Number.isFinite(nextTime) && Number.isFinite(item.audio.duration)) {
-          item.audio.currentTime = nextTime;
-          updateTime(item);
-        }
+        if (Number.isFinite(nextTime)) seekTo(item, nextTime);
       });
       item.seek.addEventListener('keydown', (event) => {
         if (!['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key)) return;
         event.preventDefault();
         const duration = Number.isFinite(item.audio.duration) ? item.audio.duration : item.expectedDuration;
-        const current = Number.isFinite(item.audio.currentTime) ? item.audio.currentTime : 0;
+        const current = item.pendingTime ?? (Number.isFinite(item.audio.currentTime) ? item.audio.currentTime : 0);
         const next = event.key === 'Home'
           ? 0
           : event.key === 'End'
             ? duration
             : current + (event.key === 'ArrowRight' ? 5 : -5);
-        item.audio.currentTime = Math.min(Math.max(0, next), duration);
-        updateTime(item);
+        seekTo(item, next);
       });
       updateTime(item);
       setPlaying(item, false);

@@ -31,6 +31,7 @@ class BWFAQElement extends HTMLElement {
   }
 
   connectedCallback() {
+    if (location.pathname === '/' && window.__bwHomeRetireLegacy === true) return;
     this._controller = new AbortController();
     this._ensureAnchorId();
     this._renderLoading();
