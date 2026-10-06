@@ -13311,5 +13311,39 @@
         "a": "On a two-day first visit, usually not, because the round trip and a proper look take most of half a day. From the third day on, it is one of the best half days in Berlin, especially for garden lovers and families."
       }
     ]
+  },
+  "missed-parcel-in-berlin": {
+    "title": "Missed Parcel in Berlin - FAQ",
+    "subtitle": "Where a missed parcel goes in Berlin, how long each carrier keeps it, and what to bring when you collect it.",
+    "items": [
+      {
+        "q": "How long does DHL keep a missed parcel in Berlin?",
+        "a": "In a DHL branch or partner shop, **7 working days**, with Saturdays counted and Sundays and holidays not. In a Packstation, **usually 7 calendar days**, weekends and holidays included. After that it goes back to the sender."
+      },
+      {
+        "q": "How long does Hermes keep a parcel in a PaketShop?",
+        "a": "**7 working days**, starting on the day the parcel reaches the shop. Hermes says the period cannot be extended. Older guides that still say 10 days are out of date."
+      },
+      {
+        "q": "How long does a DPD or GLS parcel wait?",
+        "a": "DPD keeps a parcel **7 calendar days in a Pickup shop and only 3 calendar days in a DPD locker**. GLS keeps it **8 working days** from the day after it arrives at the ParcelShop."
+      },
+      {
+        "q": "What ID do I need to collect a parcel in Berlin?",
+        "a": "Bring **ID with your name on it**. Hermes accepts an EU, EEA or Swiss ID card, a passport, a German residence permit or a travel document, but **not a driving licence or a health insurance card**. A DHL Packstation opens with the code in the Post & DHL app."
+      },
+      {
+        "q": "Can someone else pick up my parcel?",
+        "a": "Yes, with a **signed authorisation (Vollmacht)** and their own ID. Hermes has a printable form, and DHL prints an authorisation field on the back of its card."
+      },
+      {
+        "q": "Do Berlin public holidays give me more time?",
+        "a": "Only on the **working-day clocks** of DHL shops, Hermes and GLS. Lockers count every day. 31 October is a normal working day in Berlin, unlike in Brandenburg, so it does not add a day."
+      },
+      {
+        "q": "How do I stop missing parcels?",
+        "a": "Set a **named neighbour, a safe place or a Packstation or PaketShop** as your delivery choice with each carrier, and switch on tracking emails so the clock never starts without you knowing."
+      }
+    ]
   }
 }

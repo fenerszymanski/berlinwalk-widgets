@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Berlin Parcel Pickup Clock: Your Last Day, Carrier by Carrier</title>
+<link rel="stylesheet" href="../css/brand.css">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #FFFFFF; color: #1f2a1c; padding: 12px; }
+  .pc { border: 1px solid #dfe8d6; border-radius: 16px; overflow: hidden; background: #fbfcf8; }
+  .pc-top { background: #1B5E20; color: #f2f7ec; padding: 14px 16px 12px; }
+  .pc-top h1 { font-size: 18px; line-height: 1.25; }
+  .pc-top h1 span { color: #FFE600; }
+  .pc-top p { font-size: 12.5px; line-height: 1.5; color: #cfe3c4; margin-top: 4px; }
+  .pc-ctl { display: flex; flex-wrap: wrap; gap: 10px 14px; align-items: flex-end; padding: 12px 16px 4px; }
+  .pc-lab { display: block; font-size: 10.5px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: #5b6f52; margin-bottom: 6px; }
+  .pc-date { font-family: inherit; font-size: 15px; font-weight: 700; color: #123D18; padding: 8px 10px; border: 1.5px solid #1B5E20; border-radius: 10px; background: #fff; min-width: 170px; }
+  .pc-quick { display: flex; flex-wrap: wrap; gap: 6px; }
+  .pc-quick button { font-family: inherit; cursor: pointer; font-size: 12px; font-weight: 700; padding: 8px 11px; border-radius: 999px; border: 1.5px solid #c9d8bd; background: #fff; color: #2c3d27; }
+  .pc-quick button.on { background: #FFE600; border-color: #FFE600; color: #123D18; }
+  .pc-quick button:focus-visible, .pc-date:focus-visible, .pc-row:focus-visible { outline: 2px solid #1B5E20; outline-offset: 2px; }
+  .pc-board { padding: 8px 16px 4px; }
+  .pc-board canvas { display: block; width: 100%; border-radius: 12px; background: #fff; border: 1px solid #e4ecdb; }
+  .pc-key { display: flex; flex-wrap: wrap; gap: 6px 14px; font-size: 11px; color: #4d5f46; margin-top: 6px; }
+  .pc-key i { display: inline-block; width: 12px; height: 10px; border-radius: 3px; vertical-align: -1px; margin-right: 5px; }
+  .pc-ruler { padding: 10px 16px 0; }
+  .pc-ruler svg { display: block; width: 100%; height: auto; }
+  .pc-list { list-style: none; padding: 8px 16px 6px; display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 8px; }
+  .pc-row { cursor: pointer; text-align: left; font-family: inherit; width: 100%; border: 1.5px solid #e1e9d8; background: #fff; border-radius: 12px; padding: 9px 11px; display: grid; grid-template-columns: 1fr auto; gap: 2px 10px; }
+  .pc-row.sel { border-color: #1B5E20; box-shadow: 0 0 0 2px #C5E1A5; }
+  .pc-row b { font-size: 13px; color: #123D18; }
+  .pc-row small { grid-column: 1 / -1; font-size: 11.5px; line-height: 1.45; color: #4d5f46; }
+  .pc-row em { font-style: normal; font-size: 12px; font-weight: 800; padding: 2px 8px; border-radius: 999px; align-self: start; white-space: nowrap; }
+  .st-ok { background: #e3f1d6; color: #1B5E20; }
+  .st-soon { background: #FFE600; color: #123D18; }
+  .st-gone { background: #f8dcdc; color: #8f1d24; }
+  .pc-detail { margin: 6px 16px 12px; background: #eef4e7; border-radius: 12px; padding: 10px 12px; font-size: 13px; line-height: 1.55; color: #24361f; }
+  .pc-detail strong { color: #123D18; }
+  .pc-note { padding: 0 16px 14px; font-size: 11.5px; line-height: 1.5; color: #5b6f52; }
+  @media (max-width: 420px) { .pc-top h1 { font-size: 16px; } .pc-date { min-width: 0; width: 100%; } }
+</style>
+</head>
+<body>
+<div class="pc">
+  <div class="pc-top">
+    <h1>Berlin Parcel Pickup Clock: <span>your last day</span>, carrier by carrier</h1>
+    <p>Pick the day your parcel landed in the shop or locker. Every carrier's window lines up below, with Sundays and Berlin holidays marked.</p>
+  </div>
+
+  <div class="pc-ctl">
+    <div>
+      <label class="pc-lab" for="pcDate">Arrived at the shop or locker on</label>
+      <input class="pc-date" id="pcDate" type="date">
+    </div>
+    <div>
+      <span class="pc-lab">Or tap</span>
+      <div class="pc-quick" id="pcQuick">
+        <button type="button" data-ago="0">Today</button>
+        <button type="button" data-ago="1">Yesterday</button>
+        <button type="button" data-ago="3">3 days ago</button>
+        <button type="button" data-ago="6">6 days ago</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="pc-board">
+    <canvas id="pcCanvas" height="300" aria-label="Pickup windows for each carrier on a calendar" role="img"></canvas>
+    <div class="pc-key">
+      <span><i style="background:#7CB342"></i>Still waiting for you</span>
+      <span><i style="background:#E63946"></i>Last day</span>
+      <span><i style="background:#d9dfd2"></i>Sunday or Berlin holiday</span>
+      <span><i style="background:#123D18"></i>Today</span>
+    </div>
+  </div>
+
+  <div class="pc-ruler" aria-hidden="true">
+    <svg id="pcRuler" viewBox="0 0 640 112" preserveAspectRatio="xMidYMid meet"></svg>
+  </div>
+
+  <ul class="pc-list" id="pcList"></ul>
+  <div class="pc-detail" id="pcDetail" aria-live="polite"></div>
+  <p class="pc-note">Rules as the carriers state them, checked on 6 October 2026. I count Saturdays as working days, which gives the earliest date the rules allow. If the app or the email shows a later date, that date is yours. UPS and Amazon print their own pick-up date in the notice.</p>
+</div>
+
+<script>
+(function () {
+  var HOLIDAYS = ['2026-10-03','2026-12-25','2026-12-26','2027-01-01','2027-03-08','2027-03-26','2027-03-29','2027-05-01','2027-05-06','2027-05-17','2027-10-03','2027-12-25','2027-12-26'];
+  var HOLIDAY_NAMES = { '2026-10-03':'German Unity Day','2026-12-25':'Christmas Day','2026-12-26':'Boxing Day','2027-01-01':'New Year','2027-03-08':'Women’s Day','2027-03-26':'Good Friday','2027-03-29':'Easter Monday','2027-05-01':'Labour Day','2027-05-06':'Ascension Day','2027-05-17':'Whit Monday','2027-10-03':'German Unity Day','2027-12-25':'Christmas Day','2027-12-26':'Boxing Day' };
+
+  var CARRIERS = [
+    { id: 'dhl-shop', name: 'DHL branch or partner shop', short: 'DHL shop', colour: '#C9A400', kind: 'work', n: 7, countArrival: false,
+      rule: '7 working days, counted from the day after the parcel arrives. Saturdays count, Sundays and holidays do not.',
+      bring: 'The card or pick-up code and your ID.' },
+    { id: 'dhl-locker', name: 'DHL Packstation', short: 'DHL locker', colour: '#C9A400', kind: 'cal', n: 7, countArrival: true,
+      rule: 'Usually 7 calendar days, weekends and holidays included, with the arrival day counted.',
+      bring: 'The pick-up code in the Post & DHL app. Open day and night.' },
+    { id: 'hermes', name: 'Hermes PaketShop or locker', short: 'Hermes', colour: '#1f6fb2', kind: 'work', n: 7, countArrival: true,
+      rule: '7 working days, starting on the day the parcel reaches the shop. No extension.',
+      bring: 'ID card, passport or German residence permit. No driving licence, no health card.' },
+    { id: 'dpd-shop', name: 'DPD Pickup shop', short: 'DPD shop', colour: '#b0123b', kind: 'cal', n: 7, countArrival: false,
+      rule: '7 calendar days. In at a shop on a Monday means collect by the Monday after.',
+      bring: 'Your ID, or a signed authorisation for whoever collects it.' },
+    { id: 'dpd-locker', name: 'DPD locker (Paketstation)', short: 'DPD locker', colour: '#b0123b', kind: 'cal', n: 3, countArrival: false,
+      rule: 'Only 3 calendar days, weekends included. The shortest clock in Berlin.',
+      bring: 'The code from the DPD email or app.' },
+    { id: 'gls', name: 'GLS ParcelShop', short: 'GLS', colour: '#16357a', kind: 'work', n: 8, countArrival: false,
+      rule: '8 working days, counted from the day after the parcel arrives.',
+      bring: 'Your ID and the GLS notification.' }
+  ];
+
+  var dateEl = document.getElementById('pcDate');
+  var canvas = document.getElementById('pcCanvas');
+  var ruler = document.getElementById('pcRuler');
+  var listEl = document.getElementById('pcList');
+  var detailEl = document.getElementById('pcDetail');
+  var quick = document.getElementById('pcQuick');
+  var selected = 'dpd-locker';
+
+  function berlinToday() {
+    var parts = new Intl.DateTimeFormat('en-CA', { timeZone: 'Europe/Berlin', year: 'numeric', month: '2-digit', day: '2-digit' }).format(new Date());
+    return parts;
+  }
+  function toDate(iso) { var p = iso.split('-'); return new Date(Date.UTC(+p[0], +p[1] - 1, +p[2])); }
+  function toIso(d) { return d.toISOString().slice(0, 10); }
+  function plus(iso, days) { var d = toDate(iso); d.setUTCDate(d.getUTCDate() + days); return toIso(d); }
+  function diff(a, b) { return Math.round((toDate(b) - toDate(a)) / 86400000); }
+  function isOff(iso) { return toDate(iso).getUTCDay() === 0 || HOLIDAYS.indexOf(iso) !== -1; }
+  function label(iso) { return toDate(iso).toLocaleDateString('en-GB', { weekday: 'short', day: 'numeric', month: 'short', timeZone: 'UTC' }); }
+
+  function lastDay(c, arrival) {
+    if (c.kind === 'cal') return plus(arrival, c.countArrival ? c.n - 1 : c.n);
+    var d = c.countArrival ? arrival : plus(arrival, 1);
+    var counted = 0;
+    while (true) {
+      if (!isOff(d)) { counted += 1; if (counted === c.n) return d; }
+      d = plus(d, 1);
+    }
+  }
+
+  function status(left) {
+    if (left < 0) return { cls: 'st-gone', text: 'Gone back' };
+    if (left === 0) return { cls: 'st-soon', text: 'Last day today' };
+    if (left <= 2) return { cls: 'st-soon', text: left + (left === 1 ? ' day left' : ' days left') };
+    return { cls: 'st-ok', text: left + ' days left' };
+  }
+
+  function rows(arrival, today) {
+    return CARRIERS.map(function (c) {
+      var end = lastDay(c, arrival);
+      return { c: c, end: end, left: diff(arrival > today ? arrival : today, end) };
+    });
+  }
+
+  function drawBoard(arrival, today, data) {
+    var dpr = window.devicePixelRatio || 1;
+    var w = canvas.clientWidth || 600;
+    var narrow = w < 520;
+    var labelW = narrow ? 76 : 150;
+    var span = 16;
+    var start = plus(arrival, -1);
+    var rowH = 34, top = 44, h = top + rowH * data.length + 14;
+    canvas.width = Math.round(w * dpr); canvas.height = Math.round(h * dpr); canvas.style.height = h + 'px';
+    var ctx = canvas.getContext('2d');
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    ctx.clearRect(0, 0, w, h);
+    var colW = (w - labelW - 8) / span;
+    ctx.font = '700 10px Montserrat, sans-serif';
+    ctx.textAlign = 'center';
+    for (var i = 0; i < span; i++) {
+      var iso = plus(start, i), x = labelW + i * colW;
+      if (isOff(iso)) { ctx.fillStyle = '#eef0ea'; ctx.fillRect(x, 30, colW, h - 36); }
+      var dd = toDate(iso);
+      ctx.fillStyle = isOff(iso) ? '#8f1d24' : '#4d5f46';
+      ctx.fillText(dd.toLocaleDateString('en-GB', { weekday: 'narrow', timeZone: 'UTC' }), x + colW / 2, 14);
+      ctx.fillStyle = '#123D18';
+      ctx.fillText(String(dd.getUTCDate()), x + colW / 2, 27);
+      ctx.strokeStyle = '#f0f3ec'; ctx.beginPath(); ctx.moveTo(x, 30); ctx.lineTo(x, h - 6); ctx.stroke();
+    }
+    data.forEach(function (r, k) {
+      var y = top + k * rowH;
+      var sel = r.c.id === selected;
+      ctx.textAlign = 'left';
+      ctx.font = (sel ? '800 ' : '600 ') + (narrow ? '10.5px' : '12px') + ' Montserrat, sans-serif';
+      ctx.fillStyle = sel ? '#123D18' : '#3b4d35';
+      ctx.fillText(narrow ? r.c.short : r.c.name.replace(' or partner shop', ' shop').replace(' (Paketstation)', ''), 4, y + 15);
+      var a = diff(start, arrival), e = diff(start, r.end);
+      var x0 = labelW + a * colW + 2, x1 = labelW + Math.min(e + 1, span) * colW - 2;
+      ctx.fillStyle = sel ? '#7CB342' : '#b9d79a';
+      roundRect(ctx, x0, y + 4, Math.max(x1 - x0, 4), 16, 6); ctx.fill();
+      if (e < span) {
+        ctx.fillStyle = '#E63946';
+        roundRect(ctx, labelW + e * colW + 2, y + 4, colW - 4, 16, 6); ctx.fill();
+      }
+      ctx.fillStyle = '#123D18';
+      ctx.beginPath(); ctx.arc(x0 + 6, y + 12, 3, 0, Math.PI * 2); ctx.fill();
+    });
+    var t = diff(start, today);
+    if (t >= 0 && t < span) {
+      var tx = labelW + (t + 0.5) * colW;
+      ctx.strokeStyle = '#123D18'; ctx.lineWidth = 2; ctx.setLineDash([4, 3]);
+      ctx.beginPath(); ctx.moveTo(tx, 30); ctx.lineTo(tx, h - 4); ctx.stroke();
+      ctx.setLineDash([]); ctx.lineWidth = 1;
+    }
+  }
+
+  function roundRect(ctx, x, y, w, h, r) {
+    ctx.beginPath(); ctx.moveTo(x + r, y); ctx.arcTo(x + w, y, x + w, y + h, r); ctx.arcTo(x + w, y + h, x, y + h, r);
+    ctx.arcTo(x, y + h, x, y, r); ctx.arcTo(x, y, x + w, y, r); ctx.closePath();
+  }
+
+  function drawRuler(data) {
+    var ns = 'http://www.w3.org/2000/svg';
+    ruler.textContent = '';
+    function el(tag, attrs, text) { var n = document.createElementNS(ns, tag); for (var k in attrs) n.setAttribute(k, attrs[k]); if (text) n.textContent = text; ruler.appendChild(n); return n; }
+    var W = Math.max(300, Math.round(ruler.parentNode.clientWidth - 32) || 640);
+    ruler.setAttribute('viewBox', '0 0 ' + W + ' 112');
+    var x0 = 30, x1 = W - 22, maxD = W < 460 ? 10 : 12;
+    function px(d) { return x0 + (Math.max(-1, Math.min(maxD, d)) + 1) / (maxD + 1) * (x1 - x0); }
+    el('text', { x: 4, y: 14, 'font-size': 11, 'font-weight': 800, fill: '#5b6f52' }, 'DAYS LEFT TO COLLECT');
+    el('line', { x1: x0, y1: 62, x2: x1, y2: 62, stroke: '#1B5E20', 'stroke-width': 3, 'stroke-linecap': 'round' });
+    el('rect', { x: x0 - 4, y: 54, width: px(0) - x0 + 4, height: 16, rx: 6, fill: '#f8dcdc' });
+    for (var d = -1; d <= maxD; d++) {
+      el('line', { x1: px(d), y1: 58, x2: px(d), y2: 66, stroke: '#1B5E20', 'stroke-width': 1 });
+      if (d >= 0 && d % 2 === 0) el('text', { x: px(d), y: 84, 'font-size': 11, 'text-anchor': 'middle', fill: '#4d5f46' }, String(d));
+    }
+    el('text', { x: px(-1), y: 84, 'font-size': 10, 'text-anchor': 'middle', fill: '#8f1d24' }, 'gone');
+    var placed = {};
+    data.forEach(function (r) {
+      var d = Math.max(-1, Math.min(maxD, r.left));
+      var slot = placed[d] || 0; placed[d] = slot + 1;
+      var cy = 44 - slot * 13;
+      var sel = r.c.id === selected;
+      el('circle', { cx: px(d), cy: cy, r: sel ? 7 : 5.5, fill: r.c.colour, stroke: sel ? '#FFE600' : '#fff', 'stroke-width': sel ? 3 : 1.5 });
+    });
+    var s = data.filter(function (r) { return r.c.id === selected; })[0];
+    if (s) el('text', { x: px(Math.max(-1, Math.min(maxD, s.left))), y: 104, 'font-size': 11, 'font-weight': 800, 'text-anchor': 'middle', fill: '#123D18' }, s.c.short);
+  }
+
+  function renderList(data) {
+    listEl.innerHTML = '';
+    data.forEach(function (r) {
+      var li = document.createElement('li');
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'pc-row' + (r.c.id === selected ? ' sel' : '');
+      b.setAttribute('data-id', r.c.id);
+      var st = status(r.left);
+      b.innerHTML = '<b>' + r.c.name + '</b><em class="' + st.cls + '">' + st.text + '</em><small>Last day: ' + label(r.end) + '</small>';
+      b.addEventListener('click', function () { selected = r.c.id; render(); });
+      li.appendChild(b); listEl.appendChild(li);
+    });
+  }
+
+  function renderDetail(arrival, data) {
+    var r = data.filter(function (x) { return x.c.id === selected; })[0];
+    var hol = [];
+    for (var d = arrival; d <= r.end; d = plus(d, 1)) if (HOLIDAY_NAMES[d]) hol.push(HOLIDAY_NAMES[d] + ' (' + label(d) + ')');
+    var line = '<strong>' + r.c.name + ':</strong> ' + r.c.rule + ' Arrived ' + label(arrival) + ', so the last day I would plan for is <strong>' + label(r.end) + '</strong>. ' + r.c.bring;
+    if (hol.length) line += ' Berlin holiday in this window: ' + hol.join(', ') + '.';
+    if (r.left < 0) line += ' By these rules the parcel is already on its way back to the sender. Check the tracking page before you walk over.';
+    detailEl.innerHTML = line;
+  }
+
+  function render() {
+    var today = berlinToday();
+    var arrival = dateEl.value || today;
+    var data = rows(arrival, today);
+    drawBoard(arrival, today, data);
+    drawRuler(data);
+    renderList(data);
+    renderDetail(arrival, data);
+    Array.prototype.forEach.call(quick.querySelectorAll('button'), function (b) {
+      b.classList.toggle('on', plus(today, -Number(b.getAttribute('data-ago'))) === arrival);
+    });
+  }
+
+  dateEl.value = plus(berlinToday(), -1);
+  dateEl.max = plus(berlinToday(), 90);
+  dateEl.addEventListener('input', render);
+  dateEl.addEventListener('change', render);
+  quick.addEventListener('click', function (e) {
+    var b = e.target.closest('button'); if (!b) return;
+    dateEl.value = plus(berlinToday(), -Number(b.getAttribute('data-ago')));
+    render();
+  });
+  var rt; window.addEventListener('resize', function () { clearTimeout(rt); rt = setTimeout(render, 120); });
+  render();
+})();
+</script>
+<script src="../js/brand.js"></script>
+</body>
+</html>
