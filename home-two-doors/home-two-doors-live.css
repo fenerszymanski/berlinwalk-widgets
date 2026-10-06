@@ -3,7 +3,7 @@
   font-family: "BW Two Doors Fraunces";
   font-style: normal;
   font-weight: 100 900;
-  src: url("../home-products/assets/fonts/Fraunces-Variable.ttf") format("truetype");
+  src: url("assets/fonts/Fraunces-Variable-latin.woff2") format("woff2"), url("../home-products/assets/fonts/Fraunces-Variable.ttf") format("truetype");
 }
 
 @font-face {
@@ -11,7 +11,7 @@
   font-family: "BW Two Doors Space Grotesk";
   font-style: normal;
   font-weight: 300 700;
-  src: url("../home-products/assets/fonts/SpaceGrotesk-Variable.ttf") format("truetype");
+  src: url("assets/fonts/SpaceGrotesk-Variable-latin.woff2") format("woff2"), url("../home-products/assets/fonts/SpaceGrotesk-Variable.ttf") format("truetype");
 }
 
 bw-home-two-doors {

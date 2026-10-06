@@ -27,6 +27,7 @@
   script.onload = () => reconcile();
   document.head.appendChild(script);
   let mounted = null;
+  let component = null;
   function reconcile() {
     const isHome = /^\/$/.test(location.pathname);
     if (!isHome) {
@@ -43,8 +44,12 @@
     const main = document.getElementById('PAGE_SECTIONSc1dmp');
     if (!main || !main.parentElement.querySelector('#comp-kbgakxea') || !main.querySelector('bw-hero-home')) return;
     if (!main.querySelector('bw-home-two-doors')) {
-      const component = document.createElement('bw-home-two-doors');
-      component.setAttribute('embedded', '');
+      // Reuse the rendered node when Wix hydration replaces the container, so
+      // the hero is not rebuilt (second LCP paint, refetched reviews/dates).
+      if (!component) {
+        component = document.createElement('bw-home-two-doors');
+        component.setAttribute('embedded', '');
+      }
       main.prepend(component);
     }
     main.classList.add('bw-two-doors-mounted');

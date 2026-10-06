@@ -64,7 +64,7 @@ const BW_HOME_TWO_DOORS_WALKS = [
     sampleLabel: 'Berlin Wall · 45-second sample',
     sampleSrc: 'https://app.berlinwalk.com/assets/death-strip-audio-route/preview/chapel-v2-45.m4a',
     href: 'https://www.berlinwalk.com/products/death-strip-audio-route',
-    image: 'card-berlin-wall.jpg',
+    image: 'card-berlin-wall.webp',
     alt: 'A section of the Berlin Wall beside a Berlin street',
   },
   {
@@ -78,7 +78,7 @@ const BW_HOME_TWO_DOORS_WALKS = [
     sampleLabel: 'Hidden Berlin · 42-second sample',
     sampleSrc: 'https://app.berlinwalk.com/assets/hidden-berlin-audio-route/preview/anhalter-v2-42.m4a',
     href: 'https://www.berlinwalk.com/products/hidden-berlin-audio-route',
-    image: 'card-hidden-berlin.jpg',
+    image: 'card-hidden-berlin.webp',
     alt: 'The surviving entrance hall of Anhalter Bahnhof in Berlin',
   },
   {
@@ -92,7 +92,7 @@ const BW_HOME_TWO_DOORS_WALKS = [
     sampleLabel: 'Medieval Berlin · 45-second sample',
     sampleSrc: 'https://app.berlinwalk.com/assets/medieval-berlin-audio-tour/preview/01-alexanderplatz-v2-proof-45.m4a',
     href: 'https://www.berlinwalk.com/products/medieval-berlin-audio-tour',
-    image: 'card-medieval-berlin.jpg',
+    image: 'card-medieval-berlin.webp',
     alt: 'St. Mary’s Church with the Berlin TV Tower behind it',
   },
 ];
@@ -102,7 +102,7 @@ const BW_HOME_TWO_DOORS_MORE_PRODUCTS = [
     label: 'PLAN',
     title: 'Berlin Trip Planner',
     price: 'From €7.99',
-    image: 'more-trip-planner.jpg',
+    image: 'more-trip-planner.webp',
     alt: 'Illustrated view of Berlin Cathedral and the River Spree',
     text: 'Build a realistic day around your dates, hotel area and pace.',
     href: 'https://www.berlinwalk.com/berlin-trip-planner',
@@ -111,7 +111,7 @@ const BW_HOME_TWO_DOORS_MORE_PRODUCTS = [
     label: 'ARRIVE',
     title: 'First-Day Rescue Plan',
     price: '€4.99',
-    image: 'more-first-day.jpg',
+    image: 'more-first-day.webp',
     alt: 'Platforms and signs inside Berlin Hauptbahnhof',
     text: 'Know what to do between landing, check-in and your first Berlin evening.',
     href: 'https://www.berlinwalk.com/products/berlin-first-day-rescue-plan',
@@ -120,7 +120,7 @@ const BW_HOME_TWO_DOORS_MORE_PRODUCTS = [
     label: 'LOOK CLOSER',
     title: 'Hidden Berlin Photo Missions',
     price: '€3.99',
-    image: 'more-photo-missions.jpg',
+    image: 'more-photo-missions.webp',
     alt: 'The surviving portico of Anhalter Bahnhof',
     text: 'Small prompts for noticing places such as Anhalter Bahnhof differently.',
     href: 'https://www.berlinwalk.com/products/hidden-berlin-photo-missions',
@@ -225,8 +225,18 @@ function bwHomeTwoDoorsPlayerMarkup(walk, idPrefix) {
 class BWHomeTwoDoorsElement extends HTMLElement {
   connectedCallback() {
     if (this.dataset.bwRendered === 'true') {
+      // Wix hydration swaps the page container and the adapter re-attaches this
+      // same node. Keep the painted DOM; only redo work the disconnect cut off.
       this._bindImpressions();
-      this._startReviewRotation();
+      if (this._reviewsLoaded) {
+        if (this._reviewVisibilityHandler) document.addEventListener('visibilitychange', this._reviewVisibilityHandler);
+        const carousel = this.querySelector('.bw-home-two-doors__review-carousel');
+        if (this._reviewObserver && carousel) this._reviewObserver.observe(carousel);
+        this._startReviewRotation();
+      } else {
+        this._loadReviews();
+      }
+      if (!this._datesLoaded) this._loadDates();
       return;
     }
     this.dataset.bwRendered = 'true';
@@ -310,7 +320,7 @@ class BWHomeTwoDoorsElement extends HTMLElement {
 
         <section class="bw-home-two-doors__wrap bw-home-two-doors__doors" aria-label="Choose how to explore Berlin">
           <article class="bw-home-two-doors__door bw-home-two-doors__door--live" data-bw-home-card="live_tour" data-bw-card-type="live-tour" data-bw-placement="hero">
-            <img class="bw-home-two-doors__background" src="${asset('tour-altes-museum.webp')}" alt="Yusuf explaining Berlin history to guests outside the Altes Museum" width="1600" height="900">
+            <img class="bw-home-two-doors__background" src="${asset('tour-altes-museum.webp')}" srcset="${asset('tour-altes-museum-800w.webp')} 800w, ${asset('tour-altes-museum.webp')} 1600w" sizes="(max-width: 900px) 100vw, 50vw" fetchpriority="high" decoding="async" alt="Yusuf explaining Berlin history to guests outside the Altes Museum" width="1600" height="900">
             <span class="bw-home-two-doors__scrim" aria-hidden="true"></span>
             <span class="bw-home-two-doors__chip bw-home-two-doors__chip--yellow bw-home-two-doors__corner">LIVE · MAX 10 PEOPLE</span>
             <span class="bw-home-two-doors__eyebrow bw-home-two-doors__eyebrow--dark">BERLIN THEN AND NOW</span>
@@ -524,7 +534,7 @@ class BWHomeTwoDoorsElement extends HTMLElement {
         <section class="bw-home-two-doors__section bw-home-two-doors__section--cream-2" id="guide" data-bw-home-card="guide" data-bw-card-type="guide" data-bw-placement="guide">
           <div class="bw-home-two-doors__wrap bw-home-two-doors__guide">
             <div class="bw-home-two-doors__photo">
-              <img src="${asset('yusuf-rotes-rathaus-no-vest.jpg')}" alt="Yusuf guiding in front of the Rotes Rathaus in Berlin" width="880" height="1100" loading="lazy">
+              <img src="${asset('yusuf-rotes-rathaus-no-vest.webp')}" alt="Yusuf guiding in front of the Rotes Rathaus in Berlin" width="880" height="1100" loading="lazy">
               <span class="bw-home-two-doors__chip bw-home-two-doors__chip--yellow bw-home-two-doors__tag">YOUR GUIDE · YUSUF</span>
             </div>
             <div class="bw-home-two-doors__guide-copy">
@@ -615,6 +625,7 @@ class BWHomeTwoDoorsElement extends HTMLElement {
       if (!response.ok) return;
       const data = await response.json();
       if (!this.isConnected || !data || !Array.isArray(data.slots)) return;
+      this._datesLoaded = true;
       const read = (value, options) => {
         const map = {};
         new Intl.DateTimeFormat('en-GB', { timeZone: 'Europe/Berlin', ...options })
@@ -724,8 +735,10 @@ class BWHomeTwoDoorsElement extends HTMLElement {
         controls.querySelector('[data-bw-review-toggle]').hidden = true;
       }
       if (this._reviews.length > 1) this._bindReviewControls();
+      this._reviewsLoaded = true;
     } catch (error) {
       if (error.name === 'AbortError' || !this.isConnected) return;
+      this._reviewsLoaded = true;
       viewport.replaceChildren();
       const message = document.createElement('p');
       message.className = 'bw-home-two-doors__review-status';
