@@ -26,7 +26,7 @@ const BW_HEADER_LINKS = {
   landmarksGuide: 'https://www.walkofberlin.com/products/berlin-landmarks-guide',
   audioTours: 'https://www.walkofberlin.com/audio-tours',
   virtualTours: 'https://www.walkofberlin.com/virtual-walking-tours',
-  weeklyLetter: 'https://www.walkofberlin.com/blog/categories/living-in-berlin',
+  weeklyLetter: 'https://www.walkofberlin.com/weekly',
   photoMissions: 'https://www.walkofberlin.com/products/hidden-berlin-photo-missions',
   games: 'https://www.walkofberlin.com/games',
   timeDetective: 'https://www.walkofberlin.com/games/berlin-time-detective',
