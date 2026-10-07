@@ -1,9 +1,26 @@
 {
-  "updatedAt": "2026-10-07T06:45:59.442Z",
+  "updatedAt": "2026-10-07T08:26:27.353Z",
   "source": "Wix Blog API",
-  "totalPosts": 432,
+  "totalPosts": 433,
   "bookingUrl": "https://www.walkofberlin.com/book-berlin-walking-tour/berlin-then-and-now",
   "allPosts": [
+    {
+      "title": "Churches in Berlin: Which to Go Inside and When They Are Open",
+      "slug": "churches-in-berlin",
+      "path": "/post/churches-in-berlin",
+      "url": "https://www.berlinwalk.com/post/churches-in-berlin",
+      "excerpt": "The Berliner Dom costs EUR 15, St. Marienkirche next to the TV Tower is free, one church opens only on weekday mornings and another shuts every Monday. Which churches in Berlin are worth going inside, what they cost, and a board that shows which are open on your day.",
+      "category": "Tourist Tips",
+      "categorySlug": "tourist-tips",
+      "topic": "free-budget",
+      "topicLabel": "Free & Budget",
+      "readTime": "7 min read",
+      "publishedDate": "2026-10-07T08:24:45.557Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_ca35bd51777745a7b90dde593011b7c8~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-berliner-dom-spree-cover.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_ca35bd51777745a7b90dde593011b7c8~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-berliner-dom-spree-cover.jpg",
+      "alt": "The green copper dome of the Berliner Dom rising behind the Friedrichsbrücke, with the long stone colonnade of Museum Island running along the Spree in soft morning light",
+      "relatedToolSlug": "berlin-church-hours-board"
+    },
     {
       "title": "Missed Parcel in Berlin: Where It Goes and How Long It Waits",
       "slug": "missed-parcel-in-berlin",
