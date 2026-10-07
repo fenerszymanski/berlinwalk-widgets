@@ -7,7 +7,7 @@ const BW_HEADER_LOGO_ON_GREEN_URL = new URL('../assets/walkofberlin-wordmark-yel
 const BW_HEADER_MONO_URL = new URL('../brand/fonts/editorial-v2/IBMPlexMono-SemiBold.woff2', BW_HEADER_SCRIPT_URL).href;
 // Berlin Then and Now (service 145cb27e). The legacy booking path stays
 // reachable for guests who booked before 30 September, but nothing links to it.
-const BW_HEADER_BUILD = 'site-header-walkofberlin-logo-20261002';
+const BW_HEADER_BUILD = 'site-header-menu-20261007';
 const BW_HEADER_BOOKING_URL = 'https://www.walkofberlin.com/book-berlin-walking-tour/berlin-then-and-now';
 const BW_HEADER_TOUR_FACTS = ['about 2.5 hours', 'max 10 people', '€25']
   .map((fact) => `<span class="bw-header-fact">${fact}</span>`)
@@ -25,6 +25,8 @@ const BW_HEADER_LINKS = {
   planner: 'https://www.walkofberlin.com/berlin-trip-planner',
   landmarksGuide: 'https://www.walkofberlin.com/products/berlin-landmarks-guide',
   audioTours: 'https://www.walkofberlin.com/audio-tours',
+  virtualTours: 'https://www.walkofberlin.com/virtual-walking-tours',
+  weeklyLetter: 'https://www.walkofberlin.com/blog/categories/living-in-berlin',
   photoMissions: 'https://www.walkofberlin.com/products/hidden-berlin-photo-missions',
   games: 'https://www.walkofberlin.com/games',
   timeDetective: 'https://www.walkofberlin.com/games/berlin-time-detective',
@@ -468,6 +470,23 @@ class BWHeaderElement extends HTMLElement {
           setOpen(!isOpen);
         }
       });
+      trigger.addEventListener('keydown', (event) => {
+        if (event.key !== 'ArrowDown' && event.key !== 'ArrowUp') return;
+        event.preventDefault(); cancelClose(); closeAll(context); setOpen(true);
+        const links = [...menu.querySelectorAll('a')];
+        (event.key === 'ArrowUp' ? links[links.length - 1] : links[0])?.focus();
+      });
+      menu.addEventListener('keydown', (event) => {
+        const links = [...menu.querySelectorAll('a')];
+        const index = links.indexOf(document.activeElement);
+        if (event.key === 'ArrowDown' || event.key === 'ArrowUp') {
+          event.preventDefault();
+          links[(index + (event.key === 'ArrowDown' ? 1 : -1) + links.length) % links.length]?.focus();
+        }
+        if (event.key === 'Tab' && ((event.shiftKey && index === 0) || (!event.shiftKey && index === links.length - 1))) {
+          setOpen(false); trigger.focus();
+        }
+      });
       wrap.addEventListener('mouseenter', () => {
         cancelClose();
         closeAll(context);
@@ -813,6 +832,13 @@ class BWHeaderElement extends HTMLElement {
           gap: 12px;
         }
 
+        .bw-header-mobile-book { display: none; }
+        @media (min-width: 981px) and (max-width: 1190px) {
+          .bw-header-main { gap: 10px; padding-left: 16px; padding-right: 16px; }
+          .bw-header-logo img { height: 28px; }
+          .bw-header-nav a, .bw-header-dropdown-trigger { padding-left: 8px; padding-right: 8px; font-size: 12px; letter-spacing: .6px; }
+          .bw-header-cta .bw-header-book { padding-left: 14px; padding-right: 14px; letter-spacing: .6px; font-size: 12px; }
+        }
         .bw-header-book {
           align-items: center;
           background: var(--yellow);
@@ -1099,6 +1125,13 @@ class BWHeaderElement extends HTMLElement {
           .bw-header-cta .bw-header-book {
             display: none !important;
           }
+          .bw-header-cta a.bw-header-mobile-book,
+          .bw-header-cta a.bw-header-mobile-book:is(:hover, :focus, :active, :visited) {
+            display: inline-flex !important; align-items: center; justify-content: center;
+            background: #FFE600; color: #123D18 !important; border-radius: 999px;
+            min-height: 44px; padding: 0 14px; font-size: 12px; font-weight: 800;
+            text-decoration: none; line-height: 1;
+          }
           .bw-header-hamburger {
             display: flex !important;
           }
@@ -1110,7 +1143,7 @@ class BWHeaderElement extends HTMLElement {
             background: #FFFFFF !important;
             display: flex !important;
             flex-direction: row !important;
-            gap: 12px;
+            gap: 8px;
             justify-content: space-between !important;
             min-height: 90px;
             padding: 10px 18px !important;
@@ -1122,7 +1155,7 @@ class BWHeaderElement extends HTMLElement {
           .bw-header-logo img {
             display: block !important;
             height: 28px !important;
-            max-width: 200px;
+            max-width: min(200px, calc(100vw - 160px));
             width: auto !important;
           }
           .bw-header-formerly {
@@ -1166,6 +1199,8 @@ class BWHeaderElement extends HTMLElement {
                     Walking Tour <span class="bw-header-caret" aria-hidden="true">⌄</span>
                   </button>
                   <ul id="${this._tourMenuId}" class="bw-header-submenu">
+                    <li><a href="${BW_HEADER_BOOKING_URL}">Berlin Then and Now</a></li>
+                    <li><a href="${BW_HEADER_LINKS.virtualTours}">Virtual Walking Tours</a></li>
                     <li><a href="${BW_HEADER_LINKS.route}">Tour Route</a></li>
                     <li><a href="${BW_HEADER_LINKS.meetingPoint}">Meeting Point</a></li>
                     <li><a href="${BW_HEADER_LINKS.reviews}">Reviews</a></li>
@@ -1188,23 +1223,26 @@ class BWHeaderElement extends HTMLElement {
                   </ul>
                 </li>
                 <li class="bw-header-dropdown">
-                  <a class="bw-header-dropdown-trigger" href="${BW_HEADER_LINKS.blog}" aria-expanded="false" aria-controls="${this._blogMenuId}">
+                  <button class="bw-header-dropdown-trigger" type="button" aria-expanded="false" aria-controls="${this._blogMenuId}">
                     Blog <span class="bw-header-caret" aria-hidden="true">⌄</span>
-                  </a>
+                  </button>
                   <ul id="${this._blogMenuId}" class="bw-header-submenu">
+                    <li><a href="${BW_HEADER_LINKS.blog}">All posts</a></li>
                     <li><a href="${BW_HEADER_LINKS.blogLivingInBerlin}">Living in Berlin</a></li>
                     <li><a href="${BW_HEADER_LINKS.blogTouristTips}">Tourist Tips</a></li>
                     <li><a href="${BW_HEADER_LINKS.blogBerlinHistory}">Berlin History</a></li>
-                    <li><a href="${BW_HEADER_LINKS.blogTourRoute}">Tour Route</a></li>
+                    <li><a href="${BW_HEADER_LINKS.blogTourRoute}">Stories from the Route</a></li>
                     <li><a href="${BW_HEADER_LINKS.blogGermanLanguage}">German Language</a></li>
                     <li><a href="${BW_HEADER_LINKS.blogBerlinMyths}">Berlin Myths</a></li>
                     <li><a href="${BW_HEADER_LINKS.blogBeforeAfter}">Before &amp; After</a></li>
                   </ul>
                 </li>
+                <li><a href="${BW_HEADER_LINKS.weeklyLetter}">Weekly letter</a></li>
               </ul>
             </nav>
 
             <div class="bw-header-cta">
+              <a class="bw-header-mobile-book" href="${BW_HEADER_BOOKING_URL}">Book</a>
               <a class="bw-header-book" href="${BW_HEADER_BOOKING_URL}">See dates and book</a>
               <button class="bw-header-hamburger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="${this._mobileMenuId}">
                 <span></span><span></span><span></span>
@@ -1227,6 +1265,8 @@ class BWHeaderElement extends HTMLElement {
             <nav class="bw-header-mobile-nav" aria-label="Mobile primary">
               <details class="bw-header-mobile-section">
                 <summary class="bw-header-mobile-section-label">Walking Tour</summary>
+                <a href="${BW_HEADER_BOOKING_URL}">Berlin Then and Now</a>
+                <a href="${BW_HEADER_LINKS.virtualTours}">Virtual Walking Tours</a>
                 <a href="${BW_HEADER_LINKS.route}">Tour Route</a>
                 <a href="${BW_HEADER_LINKS.meetingPoint}">Meeting Point</a>
                 <a href="${BW_HEADER_LINKS.reviews}">Reviews</a>
@@ -1246,15 +1286,17 @@ class BWHeaderElement extends HTMLElement {
               </details>
 
               <details class="bw-header-mobile-section">
-                <summary class="bw-header-mobile-section-label"><a class="bw-header-mobile-section-link" href="${BW_HEADER_LINKS.blog}">Blog</a></summary>
+                <summary class="bw-header-mobile-section-label">Blog</summary>
+                <a href="${BW_HEADER_LINKS.blog}">All posts</a>
                 <a href="${BW_HEADER_LINKS.blogLivingInBerlin}">Living in Berlin</a>
                 <a href="${BW_HEADER_LINKS.blogTouristTips}">Tourist Tips</a>
                 <a href="${BW_HEADER_LINKS.blogBerlinHistory}">Berlin History</a>
-                <a href="${BW_HEADER_LINKS.blogTourRoute}">Tour Route</a>
+                <a href="${BW_HEADER_LINKS.blogTourRoute}">Stories from the Route</a>
                 <a href="${BW_HEADER_LINKS.blogGermanLanguage}">German Language</a>
                 <a href="${BW_HEADER_LINKS.blogBerlinMyths}">Berlin Myths</a>
                 <a href="${BW_HEADER_LINKS.blogBeforeAfter}">Before &amp; After</a>
               </details>
+              <a href="${BW_HEADER_LINKS.weeklyLetter}">Weekly letter</a>
             </nav>
 
             <div class="bw-header-mobile-cta">
