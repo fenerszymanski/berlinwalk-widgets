@@ -1,0 +1,408 @@
+{
+  "checked": "7 October 2026",
+  "axis": {
+    "start": 9,
+    "end": 20
+  },
+  "days": [
+    "Mon",
+    "Tue",
+    "Wed",
+    "Thu",
+    "Fri",
+    "Sat",
+    "Sun"
+  ],
+  "churches": [
+    {
+      "id": "dom",
+      "name": "Berliner Dom",
+      "place": "Lustgarten, Museum Island",
+      "price": "EUR 15 (reduced EUR 12)",
+      "paid": true,
+      "minutes": 90,
+      "hours": {
+        "Mon": [
+          [
+            9,
+            18
+          ]
+        ],
+        "Tue": [
+          [
+            9,
+            18
+          ]
+        ],
+        "Wed": [
+          [
+            9,
+            18
+          ]
+        ],
+        "Thu": [
+          [
+            9,
+            18
+          ]
+        ],
+        "Fri": [
+          [
+            9,
+            18
+          ]
+        ],
+        "Sat": [
+          [
+            9,
+            18
+          ]
+        ],
+        "Sun": [
+          [
+            12,
+            18
+          ]
+        ]
+      },
+      "lastEntry": 17,
+      "see": "The preaching church under the main dome, the Hohenzollern crypt, the museum and the dome walkway 50 metres up.",
+      "note": "Last entry 17:00. Services and concerts can change the day's hours, so check the Dom's own calendar that morning."
+    },
+    {
+      "id": "marien",
+      "name": "St. Marienkirche",
+      "place": "Next to the TV Tower, Alexanderplatz",
+      "price": "Free",
+      "paid": false,
+      "minutes": 20,
+      "hours": {
+        "Mon": [
+          [
+            10,
+            18
+          ]
+        ],
+        "Tue": [
+          [
+            10,
+            18
+          ]
+        ],
+        "Wed": [
+          [
+            10,
+            18
+          ]
+        ],
+        "Thu": [
+          [
+            10,
+            18
+          ]
+        ],
+        "Fri": [
+          [
+            10,
+            18
+          ]
+        ],
+        "Sat": [
+          [
+            10,
+            18
+          ]
+        ],
+        "Sun": [
+          [
+            10,
+            18
+          ]
+        ]
+      },
+      "see": "The oldest church in Berlin still used for services, with the 22-metre Totentanz (Dance of Death) mural in the tower hall.",
+      "note": "From 6 January to Easter it closes at 16:00. Visits are limited during services and concerts."
+    },
+    {
+      "id": "nikolai",
+      "name": "Nikolaikirche",
+      "place": "Nikolaiviertel",
+      "price": "EUR 7 (under 18 free)",
+      "paid": true,
+      "minutes": 45,
+      "hours": {
+        "Mon": [
+          [
+            10,
+            18
+          ]
+        ],
+        "Tue": [
+          [
+            10,
+            18
+          ]
+        ],
+        "Wed": [
+          [
+            10,
+            18
+          ]
+        ],
+        "Thu": [
+          [
+            12,
+            20
+          ]
+        ],
+        "Fri": [
+          [
+            10,
+            18
+          ]
+        ],
+        "Sat": [
+          [
+            10,
+            18
+          ]
+        ],
+        "Sun": [
+          [
+            10,
+            18
+          ]
+        ]
+      },
+      "see": "Now a museum, not a parish church: the story of medieval Berlin, tomb monuments and a sound installation in the nave.",
+      "note": "Thursday is the late day, 12:00 to 20:00. The EUR 15 combined ticket also covers the Ephraim-Palais and the Knoblauchhaus on two days."
+    },
+    {
+      "id": "parochial",
+      "name": "Parochialkirche",
+      "place": "Klosterstraße",
+      "price": "Free",
+      "paid": false,
+      "minutes": 15,
+      "hours": {
+        "Mon": [
+          [
+            9,
+            14
+          ]
+        ],
+        "Tue": [
+          [
+            9,
+            14
+          ]
+        ],
+        "Wed": [
+          [
+            9,
+            14
+          ]
+        ],
+        "Thu": [
+          [
+            9,
+            14
+          ]
+        ],
+        "Fri": [
+          [
+            9,
+            14
+          ]
+        ],
+        "Sat": [],
+        "Sun": []
+      },
+      "chimes": [
+        9,
+        12,
+        15,
+        18
+      ],
+      "see": "A bare, unplastered Baroque interior left that way after the war, and a carillon you can hear from the street.",
+      "note": "Open as a rule on weekdays from 9:00 to 14:00. The carillon plays at 9, 12, 15 and 18 every day, so you can hear it even when the door is shut."
+    },
+    {
+      "id": "werder",
+      "name": "Friedrichswerdersche Kirche",
+      "place": "Werderscher Markt",
+      "price": "Free",
+      "paid": false,
+      "minutes": 25,
+      "hours": {
+        "Mon": [],
+        "Tue": [
+          [
+            10,
+            18
+          ]
+        ],
+        "Wed": [
+          [
+            10,
+            18
+          ]
+        ],
+        "Thu": [
+          [
+            10,
+            18
+          ]
+        ],
+        "Fri": [
+          [
+            10,
+            18
+          ]
+        ],
+        "Sat": [
+          [
+            10,
+            18
+          ]
+        ],
+        "Sun": [
+          [
+            10,
+            18
+          ]
+        ]
+      },
+      "see": "Schinkel's brick Gothic church, used by the state museums as a gallery of 19th-century sculpture.",
+      "note": "Closed on Mondays."
+    },
+    {
+      "id": "hedwig",
+      "name": "St. Hedwig's Cathedral",
+      "place": "Bebelplatz",
+      "price": "Free",
+      "paid": false,
+      "minutes": 20,
+      "hours": {
+        "Mon": [
+          [
+            11,
+            18
+          ]
+        ],
+        "Tue": [
+          [
+            11,
+            18
+          ]
+        ],
+        "Wed": [
+          [
+            11,
+            18
+          ]
+        ],
+        "Thu": [
+          [
+            11,
+            18
+          ]
+        ],
+        "Fri": [
+          [
+            11,
+            20
+          ]
+        ],
+        "Sat": [
+          [
+            11,
+            18
+          ]
+        ],
+        "Sun": [
+          [
+            13,
+            18
+          ]
+        ]
+      },
+      "see": "The round Catholic cathedral, reopened in November 2024 with a white, almost empty interior and a stone half-sphere as the altar.",
+      "note": "The crypt closes 15 minutes before the church. Friday runs to 20:00. There are no public toilets."
+    },
+    {
+      "id": "kwg",
+      "name": "Kaiser Wilhelm Memorial Church",
+      "place": "Breitscheidplatz, Charlottenburg",
+      "price": "Free",
+      "paid": false,
+      "minutes": 20,
+      "hours": {
+        "Mon": [
+          [
+            10,
+            18
+          ]
+        ],
+        "Tue": [
+          [
+            10,
+            18
+          ]
+        ],
+        "Wed": [
+          [
+            10,
+            18
+          ]
+        ],
+        "Thu": [
+          [
+            10,
+            18
+          ]
+        ],
+        "Fri": [
+          [
+            10,
+            18
+          ]
+        ],
+        "Sat": [
+          [
+            10,
+            18
+          ]
+        ],
+        "Sun": [
+          [
+            10,
+            18
+          ]
+        ]
+      },
+      "see": "The blue-glass octagon of 1961 next to the bombed old tower.",
+      "note": "The exhibition in the old tower's memorial hall is closed for renovation since 29 August 2026. The new church stays open, except during services and concerts. It sits out west at Zoologischer Garten, not in Mitte."
+    },
+    {
+      "id": "french",
+      "name": "Französische Friedrichstadtkirche",
+      "place": "Gendarmenmarkt",
+      "price": "Varies",
+      "paid": false,
+      "irregular": true,
+      "minutes": 0,
+      "hours": {
+        "Mon": [],
+        "Tue": [],
+        "Wed": [],
+        "Thu": [],
+        "Fri": [],
+        "Sat": [],
+        "Sun": []
+      },
+      "see": "The Huguenot church under the domed tower on Gendarmenmarkt.",
+      "note": "The congregation says the church is only open irregularly at the moment. See it from the square, or come for a service or an organ half-hour."
+    }
+  ]
+}

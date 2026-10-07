@@ -10707,6 +10707,36 @@
       "iconStatus": "live-wix-media",
       "image": "https://static.wixstatic.com/media/5a08a3_bd8486e5d2b14588ba17a118aac8597f~mv2.png",
       "cmsItemId": "46db9229-8881-4e02-8dbf-3912160424fa"
+    },
+    {
+      "slug": "berlin-church-hours-board",
+      "title": "Berlin Church Hours Board",
+      "lead": "Pick a day and see which churches in central Berlin are open and when: the Berliner Dom, St. Marienkirche, the Nikolaikirche, the Parochialkirche, the Friedrichswerdersche Kirche, St. Hedwig’s Cathedral and the Kaiser Wilhelm Memorial Church on one timeline, paid tickets and free entry marked, with the hours when the most of them overlap. Hours and prices checked on 7 October 2026.",
+      "category": "Discovery",
+      "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/berlin-church-hours-board/",
+      "embedHeight": 1150,
+      "hubCategory": "CultureLandmarks",
+      "type": "Planner",
+      "priority": 3,
+      "tags": [
+        "churches",
+        "berliner dom",
+        "marienkirche",
+        "st hedwig",
+        "opening hours",
+        "mitte"
+      ],
+      "aliases": [
+        "churches in berlin",
+        "berlin churches opening hours",
+        "berlin cathedral opening hours",
+        "free churches berlin",
+        "st hedwigs cathedral opening hours",
+        "marienkirche berlin opening hours"
+      ],
+      "iconStatus": "live-wix-media",
+      "image": "https://static.wixstatic.com/media/5a08a3_9f8c1bf9c30740c2a47fc24fff59e532~mv2.png",
+      "cmsItemId": "512084d9-43af-433b-90ed-8a6d4ec39e58"
     }
   ],
   "hubCategories": [

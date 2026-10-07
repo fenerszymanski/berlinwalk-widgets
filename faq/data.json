@@ -13345,5 +13345,35 @@
         "a": "Set a **named neighbour, a safe place or a Packstation or PaketShop** as your delivery choice with each carrier, and switch on tracking emails so the clock never starts without you knowing."
       }
     ]
+  },
+  "churches-in-berlin": {
+    "title": "Churches in Berlin - FAQ",
+    "subtitle": "Which Berlin churches to go inside, what they cost, when they are open and how to fit them into one day.",
+    "items": [
+      {
+        "q": "Is the Berliner Dom free to enter?",
+        "a": "No. A visit costs **EUR 15, reduced EUR 12**, with an audio guide included, and one adult ticket covers up to four children under 18. The ticket includes the Hohenzollern crypt, the museum and the dome walkway."
+      },
+      {
+        "q": "Which churches in Berlin are free to visit?",
+        "a": "In the centre, **St. Marienkirche, St. Hedwig's Cathedral, the Friedrichswerdersche Kirche and the Parochialkirche** are free, and so is the new church of the **Kaiser Wilhelm Memorial Church** at Breitscheidplatz. The Berliner Dom (EUR 15) and the Nikolaikirche museum (EUR 7) charge entry."
+      },
+      {
+        "q": "What are the Berliner Dom opening hours?",
+        "a": "**Monday to Saturday 9:00 to 18:00 and Sunday 12:00 to 18:00**, with last entry at 17:00. Services, concerts and events can change the hours on a given day, so check the Dom's own calendar that morning."
+      },
+      {
+        "q": "Can I visit Berlin churches on a Sunday?",
+        "a": "Yes, but not in the morning. Services come first: the Berliner Dom opens to visitors at 12:00 and St. Hedwig's Cathedral at 13:00, and the Parochialkirche stays shut. **St. Marienkirche opens at 10:00**, which makes it the best Sunday start."
+      },
+      {
+        "q": "Is the Kaiser Wilhelm Memorial Church open?",
+        "a": "The new blue-glass church is open **daily from 10:00 to 18:00**, free, except during services and concerts. The exhibition in the memorial hall of the old tower has been **closed for renovation since 29 August 2026**."
+      },
+      {
+        "q": "Which is the oldest church in Berlin?",
+        "a": "The **Nikolaikirche** in the Nikolaiviertel is the oldest church building, now a museum. **St. Marienkirche** by the TV Tower is the oldest church still used for services."
+      }
+    ]
   }
 }
