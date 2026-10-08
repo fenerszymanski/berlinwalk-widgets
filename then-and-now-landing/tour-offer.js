@@ -9,7 +9,7 @@
   const scopes = 'bw-home-two-doors,bw-route-story,bw-meeting-point,bw-then-now-landing,bw-the-guide,.bw-footer-note,.bw-home-booking-facts,.bw-blog-booking-facts,.bw-c-rail-choice-walk,.bw-c-tourband-sub,.bw-ci-rt-line,.bw-exit-copy,.bw-tools-shell-v2-tour-facts,#bw-ca05-strip,[data-bw-tour-offer-scope]';
   const excluded = 'bw-tour-checkout,[data-bw-offer-price],script,style,textarea,input,select,code,pre,del';
   const context = /Berlin Then and Now|2[.,]5\s*h(?:ours?)?|11 stops|archive photo|World Clock|max(?:imum)?\s*10|walking tour with me/i;
-  const token = /(?:€\s*25|EUR\s+25)(?:[.,]00)?(?![\d.,])/g;
+  const token = /(?:€\s*25|EUR\s+25)(?:[.,]00)?(?!\d|[.,]\d)/g;
   const observed = new WeakSet();
   const replaced = new Set();
   const schemas = new Map();
@@ -29,6 +29,9 @@
   }
   function display(node) {
     const text = node.nodeValue;
+    if (node.parentElement.closest('summary') && /^What is included in the €25\?$/.test(text.trim())) {
+      node.nodeValue = 'What is included in the walk?'; return;
+    }
     token.lastIndex = 0;
     if (!token.test(text)) return;
     token.lastIndex = 0;
