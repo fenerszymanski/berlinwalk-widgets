@@ -184,13 +184,15 @@
 
   function euro(n){ return '€' + (Math.round(n*100)/100).toFixed(n % 1 === 0 ? 0 : 2); }
 
+  function tourPrice(){var now=Date.now();return now>=Date.parse('2026-10-07T22:00:00Z')&&now<Date.parse('2026-11-07T23:00:00Z')?20:25;}
+
   function costs(){
     var d = state.days, a = state.adults, c = state.children;
     var bus = a*HOHO_ADULT[d] + c*HOHO_CHILD[d];
     var hundred = d * (a*DAY_ADULT + c*DAY_CHILD);
     // One Berlin Then and Now walk (EUR 25 a person, children included) for the whole trip;
     // the rest of the centre is on foot.
-    var walk = 25 * (a + c);
+    var walk = tourPrice() * (a + c);
     return { bus:bus, hundred:hundred, walk:walk };
   }
 
@@ -287,5 +289,6 @@
 })();
 </script>
 <script src="../js/brand.js"></script>
+<script src="https://app.berlinwalk.com/then-and-now-landing/tour-offer.js" defer></script>
 </body>
 </html>

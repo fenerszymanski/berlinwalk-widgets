@@ -56,7 +56,7 @@
   <div class="tv-card">
     <div class="tv-head">
       <h2>What does the walking tour cost for your group?</h2>
-      <p>Berlin Then and Now has one price: €25 per person, paid when you book. Set your group size and see the total next to what the same afternoon costs on a sightseeing bus or on your own.</p>
+      <p>Berlin Then and Now: €25 per person, paid when you book. Set your group size and see the total next to what the same afternoon costs on a sightseeing bus or on your own.</p>
     </div>
 
     <div class="tv-body">
@@ -86,7 +86,7 @@
     // Comparison prices come from the published hop-on hop-off guide: roughly EUR 30 to
     // 45 per adult for a 24 hour sightseeing bus pass, against a BVG day ticket at
     // EUR 11.20.
-    var PRICE=25;
+    function tourPrice(){var now=Date.now();return now>=Date.parse('2026-10-07T22:00:00Z')&&now<Date.parse('2026-11-07T23:00:00Z')?20:25;}
     var SIZES=[{v:1,l:'Just me'},{v:2,l:'Two'},{v:3,l:'Three'},{v:4,l:'Four'},{v:5,l:'Five'},{v:6,l:'Six'}];
     var state={people:2};
 
@@ -98,10 +98,11 @@
     }
 
     function render(){
+      var PRICE=tourPrice();
       var total=PRICE*state.people;
       el('tv-big').textContent=money(total);
       el('tv-cap').textContent=state.people===1 ? 'One place on Berlin Then and Now, about 2.5 hours with me.'
-        : state.people+' places at EUR 25 each, paid when you book.';
+        : state.people+' places at EUR '+PRICE+' each, paid when you book.';
 
       var busLow=30*state.people, busHigh=45*state.people, bvg=11.20*state.people;
       var rows=[
@@ -148,5 +149,6 @@
   })();
   </script>
 </div>
+<script src="https://app.berlinwalk.com/then-and-now-landing/tour-offer.js" defer></script>
 </body>
 </html>
