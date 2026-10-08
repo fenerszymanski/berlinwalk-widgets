@@ -53,7 +53,7 @@
       amount.append(old, document.createTextNode(' '), current);
       const label = document.createElement('small');
       label.textContent = ' · Limited-time offer';
-      label.style.cssText = 'display:inline;font-family:inherit;font-size:.85em;font-weight:600;line-height:inherit;white-space:nowrap;text-transform:none;letter-spacing:0;margin:0;color:inherit';
+      label.style.cssText = 'display:inline;font-family:inherit;font-size:12px;font-weight:600;line-height:inherit;white-space:nowrap;text-transform:none;letter-spacing:0;margin:0;color:inherit';
       span.append(amount, label); fragment.append(span); replaced.add(span);
       at = m.index + m[0].length;
     }
@@ -67,8 +67,8 @@
       const label = span.querySelector('small');
       if (label) {
         if (label.textContent !== ' · Limited-time offer') label.textContent = ' · Limited-time offer';
-        const compact = !!span.closest('#bw-ca05-strip li,.bw-home-booking-facts li,.bw-blog-booking-facts li');
-        label.style.cssText = 'display:' + (compact ? 'none' : 'inline') + ';font-family:inherit;font-size:.85em;font-weight:600;line-height:inherit;white-space:nowrap;text-transform:none;letter-spacing:0;margin:0;color:inherit';
+        const compact = !!span.closest('#bw-ca05-strip li,.bw-home-booking-facts li,.bw-blog-booking-facts li,.bw-home-two-doors__chip,.bw-home-two-doors__facts');
+        label.style.cssText = 'display:' + (compact ? 'none' : 'inline') + ';font-family:inherit;font-size:12px;font-weight:600;line-height:inherit;white-space:nowrap;text-transform:none;letter-spacing:0;margin:0;color:inherit';
       }
       replaced.add(span);
     }
