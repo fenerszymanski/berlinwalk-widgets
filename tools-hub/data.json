@@ -10737,6 +10737,36 @@
       "iconStatus": "live-wix-media",
       "image": "https://static.wixstatic.com/media/5a08a3_9f8c1bf9c30740c2a47fc24fff59e532~mv2.png",
       "cmsItemId": "512084d9-43af-433b-90ed-8a6d4ec39e58"
+    },
+    {
+      "slug": "berlin-rink-season-board",
+      "title": "Berlin Rink Season Board",
+      "lead": "Six public ice rinks in Berlin on a real map and a season chart from October to March. Pick a date, mark the days you are free and see which rink has a session you can make, with prices and indoor or outdoor at a glance. Dates checked on 8 October 2026.",
+      "category": "Discovery",
+      "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/berlin-rink-season-board/",
+      "embedHeight": 1350,
+      "hubCategory": "WeatherOutdoor",
+      "type": "Planner",
+      "priority": 3,
+      "tags": [
+        "ice skating",
+        "ice rink",
+        "eisstadion",
+        "winter",
+        "living in berlin"
+      ],
+      "aliases": [
+        "ice skating berlin",
+        "eislaufen berlin",
+        "schlittschuhlaufen berlin",
+        "eisstadion berlin öffnungszeiten",
+        "sportforum hohenschönhausen eislaufen",
+        "horst-dohm-eisstadion",
+        "winterquartier eisbahn"
+      ],
+      "iconStatus": "live-wix-media",
+      "image": "https://static.wixstatic.com/media/5a08a3_4d697682e7de4854827e086998b02e41~mv2.png",
+      "cmsItemId": "29012a34-c8e9-449b-b9b4-23613e4a72ce"
     }
   ],
   "hubCategories": [

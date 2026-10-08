@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Berlin Rink Season Board: Which Ice Rink Is Open on Your Day</title>
+<link rel="stylesheet" href="../css/brand.css">
+<style>
+  *, *::before, *::after { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body { font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #ffffff; color: #17271a; }
+  .rk { margin: 10px; border-radius: 18px; overflow: hidden; background: #f4f8fb; border: 1px solid #d6e3ea; }
+  .rk-head { padding: 16px 18px 12px; background: linear-gradient(180deg, #0f3a1a 0%, #1B5E20 100%); color: #eef6ea; }
+  .rk-head h1 { margin: 0; font-size: 19px; line-height: 1.25; letter-spacing: -.01em; }
+  .rk-head h1 mark { background: #FFE600; color: #123D18; padding: 0 5px; border-radius: 4px; }
+  .rk-head p { margin: 6px 0 0; font-size: 12.5px; line-height: 1.5; color: #cfe5c6; max-width: 640px; }
+  .rk-pick { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; padding: 12px 18px; background: #ffffff; border-bottom: 1px solid #dbe6ec; }
+  .rk-pick label { font-size: 12px; font-weight: 800; color: #123D18; }
+  .rk-pick input[type=date] { font-family: inherit; font-size: 15px; font-weight: 700; color: #123D18; border: 2px solid #1B5E20; border-radius: 10px; padding: 7px 10px; background: #fff; }
+  .rk-pick input[type=date]:focus-visible { outline: 3px solid #FFE600; outline-offset: 1px; }
+  .rk-pick output { font-size: 12.5px; color: #33503a; line-height: 1.4; flex: 1 1 220px; }
+  .rk-pick output b { color: #123D18; }
+  .rk-free { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; padding: 0 18px 12px; background: #ffffff; border-bottom: 1px solid #dbe6ec; }
+  .rk-free-lab { font-size: 12px; font-weight: 800; color: #123D18; }
+  .rk-days { display: flex; flex-wrap: wrap; gap: 4px; }
+  .rk-days button, .rk-eve { font: inherit; font-size: 12px; font-weight: 800; cursor: pointer; border-radius: 8px; border: 1.5px solid #b9cbd4; background: #ffffff; color: #24363d; padding: 6px 9px; }
+  .rk-days button[aria-pressed=true], .rk-eve[aria-pressed=true] { background: #FFE600; border-color: #d8c200; color: #123D18; }
+  .rk-days button:focus-visible, .rk-eve:focus-visible { outline: 3px solid #1B5E20; outline-offset: 1px; }
+  .rk-card .wk { margin: 7px 0 0; padding: 0; list-style: none; font-size: 12.5px; line-height: 1.5; color: #1f3324; }
+  .rk-card .wk li b { color: #123D18; }
+  .rk-card .wk li.x { color: #6b7f88; }
+  .rk-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr); gap: 0; }
+  .rk-map, .rk-season { padding: 12px 14px 10px; }
+  .rk-map { border-right: 1px solid #dbe6ec; }
+  .rk-cap { margin: 0 0 6px; font-size: 10.5px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: #4f6a57; }
+  .rk-map svg, .rk-season svg { display: block; width: 100%; height: auto; }
+  .rk-key { display: flex; flex-wrap: wrap; gap: 4px 12px; margin-top: 6px; font-size: 11px; color: #3e5845; }
+  .rk-key span { display: inline-flex; align-items: center; gap: 5px; }
+  .rk-key i { width: 14px; height: 9px; border-radius: 3px; display: inline-block; }
+  .k-open { background: #1B5E20; }
+  .k-likely { background: repeating-linear-gradient(45deg, #7CB342 0 3px, #d9ecc6 3px 6px); }
+  .k-none { background: #c8d3da; }
+  .rk-cards { list-style: none; margin: 0; padding: 10px 14px 14px; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 10px; border-top: 1px solid #dbe6ec; background: #ffffff; }
+  .rk-card { border: 1.5px solid #dbe6ec; border-radius: 14px; padding: 10px 12px 11px; background: #fbfdfe; cursor: pointer; text-align: left; font: inherit; color: inherit; width: 100%; }
+  .rk-card[aria-pressed=true] { border-color: #1B5E20; box-shadow: 0 0 0 3px #C5E1A5; background: #ffffff; }
+  .rk-card:focus-visible { outline: 3px solid #FFE600; outline-offset: 1px; }
+  .rk-card .t { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; }
+  .rk-card .t b { font-size: 13.5px; color: #123D18; line-height: 1.3; }
+  .rk-card .t em { font-style: normal; font-size: 11px; font-weight: 800; white-space: nowrap; padding: 2px 8px; border-radius: 999px; }
+  .s-open { background: #1B5E20; color: #ffffff; }
+  .s-likely { background: #FFE600; color: #123D18; }
+  .s-none { background: #e3e9ed; color: #34474f; }
+  .s-over { background: #f3dede; color: #7d1f26; }
+  .rk-card .m { margin: 3px 0 0; font-size: 11.5px; color: #4d6656; }
+  .rk-card .sess { margin: 7px 0 0; font-size: 12.5px; line-height: 1.5; color: #1f3324; }
+  .rk-card .sess strong { color: #123D18; }
+  .rk-card .p { margin: 5px 0 0; font-size: 12px; color: #33503a; }
+  .rk-foot { margin: 0; padding: 0 18px 14px; font-size: 11.5px; line-height: 1.55; color: #4f6a57; background: #ffffff; }
+  .pin { cursor: pointer; }
+  .pin:focus-visible circle.ring { stroke: #FFE600; stroke-width: 4; }
+  @media (max-width: 680px) {
+    .rk-free { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; padding: 0 18px 12px; background: #ffffff; border-bottom: 1px solid #dbe6ec; }
+  .rk-free-lab { font-size: 12px; font-weight: 800; color: #123D18; }
+  .rk-days { display: flex; flex-wrap: wrap; gap: 4px; }
+  .rk-days button, .rk-eve { font: inherit; font-size: 12px; font-weight: 800; cursor: pointer; border-radius: 8px; border: 1.5px solid #b9cbd4; background: #ffffff; color: #24363d; padding: 6px 9px; }
+  .rk-days button[aria-pressed=true], .rk-eve[aria-pressed=true] { background: #FFE600; border-color: #d8c200; color: #123D18; }
+  .rk-days button:focus-visible, .rk-eve:focus-visible { outline: 3px solid #1B5E20; outline-offset: 1px; }
+  .rk-card .wk { margin: 7px 0 0; padding: 0; list-style: none; font-size: 12.5px; line-height: 1.5; color: #1f3324; }
+  .rk-card .wk li b { color: #123D18; }
+  .rk-card .wk li.x { color: #6b7f88; }
+  .rk-grid { grid-template-columns: 1fr; }
+    .rk-map { border-right: 0; border-bottom: 1px solid #dbe6ec; }
+    .rk-head h1 { font-size: 17px; }
+  }
+</style>
+</head>
+<body>
+<div class="rk">
+  <div class="rk-head">
+    <h1>Berlin Rink Season Board: <mark>which rink</mark> is open on your day</h1>
+    <p>Six public ice rinks, plotted where they really are, with each one's season laid out from October to March. Pick a date, mark the days you are free, and every rink lists the sessions you could actually make in the next seven days.</p>
+  </div>
+
+  <div class="rk-pick">
+    <label for="rkDate">Skating on</label>
+    <input id="rkDate" type="date" min="2026-10-01" max="2027-03-31">
+    <output id="rkSay" for="rkDate"></output>
+  </div>
+  <div class="rk-free">
+    <span class="rk-free-lab">Days I can actually go</span>
+    <div class="rk-days" id="rkDays">
+      <button type="button" data-d="1" aria-pressed="false">Mon</button><button type="button" data-d="2" aria-pressed="false">Tue</button><button type="button" data-d="3" aria-pressed="false">Wed</button><button type="button" data-d="4" aria-pressed="false">Thu</button><button type="button" data-d="5" aria-pressed="false">Fri</button><button type="button" data-d="6" aria-pressed="true">Sat</button><button type="button" data-d="0" aria-pressed="true">Sun</button>
+    </div>
+    <button type="button" class="rk-eve" id="rkEve" aria-pressed="false">Only after work (past 18:00)</button>
+  </div>
+
+  <div class="rk-grid">
+    <div class="rk-map">
+      <p class="rk-cap">Where they are (S-Bahn Ring for orientation)</p>
+      <svg id="rkMap" viewBox="0 0 360 300" role="img" aria-label="Map of six Berlin ice rinks around the S-Bahn Ring"></svg>
+      <div class="rk-key"><span><i class="k-open"></i>Season announced, open</span><span><i class="k-likely"></i>Expected, date not confirmed</span><span><i class="k-none"></i>Not announced yet</span></div>
+    </div>
+    <div class="rk-season">
+      <p class="rk-cap">Season, October to March</p>
+      <svg id="rkSeason" viewBox="0 0 400 300" role="img" aria-label="Season bars for six Berlin ice rinks from October to March"></svg>
+    </div>
+  </div>
+
+  <ul class="rk-cards" id="rkCards"></ul>
+  <p class="rk-foot">Dates and prices from the operators and berlin.de, checked on 8 October 2026. Where a 2026/27 timetable is not out yet, the session times are the last ones the rink published, so check its page before a long trip across town.</p>
+</div>
+
+<script>
+(function () {
+  'use strict';
+  var RINKS = [
+    { id: 'sportforum', short: 'Sportforum', name: 'Sportforum Hohenschönhausen', area: 'Alt-Hohenschönhausen', roof: 'Indoor speed-skating hall', lat: 52.5379, lon: 13.4975,
+      open: '2026-10-12', close: null, likelyClose: '2027-03-14', status: 'Start provisional because of building work',
+      price: 'Adults 4 euros, reduced 2, skate hire 7. Friday to Sunday, Monday evening and school-holiday tickets online only.',
+      days: { 1: ['10:30-12:30 (mostly school classes)', '19:00-21:00'], 2: ['10:30-12:30 (mostly school classes)', '19:00-21:00'], 3: ['10:30-12:30 (mostly school classes)', '19:00-21:00'], 4: ['10:30-12:30 (mostly school classes)', '19:00-21:00'], 5: ['19:00-21:00'], 6: ['16:00-18:00 (families)', '19:00-21:00'], 0: ['10:30-12:30 (families)', '15:00-17:00 (families)'] }, timesFresh: true },
+    { id: 'winterquartier', short: 'Winterquartier', name: 'Winterquartier at Ostkreuz', area: 'Friedrichshain', roof: 'Indoor, 1,000 square metres', lat: 52.5040, lon: 13.4640,
+      open: '2026-11-06', close: null, likelyClose: '2027-02-28', status: 'Season runs into February',
+      price: 'Adults 6 to 9.50 euros by time slot (6 on weekdays before 16:00), skate hire 5. Book online.',
+      days: { 1: [], 2: ['90-minute slots, times on its booking page'], 3: ['90-minute slots, times on its booking page'], 4: ['90-minute slots, times on its booking page'], 5: ['90-minute slots, ice disco in the evening'], 6: ['90-minute slots, ice disco in the evening'], 0: ['90-minute slots, times on its booking page'] }, mondayShut: true, timesFresh: true },
+    { id: 'horstdohm', short: 'Horst-Dohm', name: 'Horst-Dohm-Eisstadion', area: 'Wilmersdorf', roof: 'Outdoor 400-metre oval', lat: 52.4812, lon: 13.2975,
+      open: null, likelyOpen: '2026-11-01', likelyClose: '2027-03-07', status: 'berlin.de expects November to early March',
+      price: 'Adults 4 euros, reduced 2. Skate hire and sharpening on site.',
+      days: { 1: ['19:15-22:00'], 2: ['09:00-18:00', '19:30-22:00'], 3: ['09:00-18:00', '19:30-22:00'], 4: ['09:00-18:00', '19:30-22:00'], 5: ['09:00-18:00', '19:30-22:00'], 6: ['09:00-22:00'], 0: ['10:00-18:00'] } },
+    { id: 'lankwitz', short: 'Lankwitz', name: 'Eisbahn Lankwitz', area: 'Lankwitz', roof: 'Outdoor rink', lat: 52.4370, lon: 13.3450,
+      open: null, likelyOpen: '2026-11-01', likelyClose: '2027-02-28', status: 'Usually opens at the start of November',
+      price: 'Adults 7 euros, reduced 6, children under 12 4, skate hire 7.',
+      days: { 1: ['10:00-13:00'], 2: ['10:00-14:30'], 3: ['10:00-14:30'], 4: ['10:00-14:30'], 5: ['10:00-18:00'], 6: ['12:00-21:00'], 0: ['12:00-18:00'] } },
+    { id: 'neukoelln', short: 'Neukölln', name: 'Eisstadion Neukölln', area: 'Neukölln, Oderstraße', roof: 'Outdoor, open to the sky', lat: 52.4715, lon: 13.4225,
+      open: null, status: 'No 2026/27 date yet. In 2024 it opened on 2 November',
+      price: 'Adults 4 euros, reduced 2. Cheaper happy hour near the end of a session.',
+      days: { 1: ['09:00-13:00', '15:00-18:00', '19:00-21:30'], 2: ['09:00-13:00', '15:00-18:00', '19:00-21:30'], 3: ['09:00-13:00', '15:00-18:00', '19:00-21:30'], 4: ['09:00-13:00', '15:00-18:00', '19:00-21:30'], 5: ['09:00-13:00', '15:00-18:00', '19:00-21:30'], 6: ['09:00-13:00', '15:00-18:00', '19:00-21:30'], 0: ['09:00-13:00', '14:00-17:00'] } },
+    { id: 'erikahess', short: 'Erika-Heß', name: 'Erika-Heß-Eisstadion', area: 'Wedding, Müllerstraße', roof: 'Indoor hall plus outdoor rink', lat: 52.5440, lon: 13.3640,
+      open: null, status: 'No 2026/27 date yet. The outdoor rink came back in January 2026',
+      price: 'Adults 7 euros, reduced 6, children 4.',
+      days: { 1: ['09:00-13:00'], 2: ['09:00-13:00'], 3: ['09:00-13:00', '17:00-21:00'], 4: ['09:00-13:00', '17:00-21:00'], 5: ['10:00-21:00'], 6: ['10:00-21:00'], 0: ['10:00-19:00'] } }
+  ];
+  var RING = [[52.5487,13.3884],[52.5492,13.4146],[52.5446,13.4271],[52.5402,13.4384],[52.5291,13.4552],[52.5236,13.4649],[52.5136,13.4752],[52.5031,13.4693],[52.4935,13.4613],[52.4728,13.4555],[52.4693,13.4428],[52.4675,13.4316],[52.4709,13.3858],[52.4753,13.3654],[52.4795,13.3519],[52.4782,13.3428],[52.4776,13.3290],[52.4802,13.3121],[52.4886,13.3004],[52.4963,13.2906],[52.5013,13.2834],[52.5076,13.2833],[52.5185,13.2846],[52.5306,13.2996],[52.5344,13.3291],[52.5361,13.3436],[52.5426,13.3664],[52.5487,13.3884]];
+  var ALEX = [52.5219, 13.4132];
+  var WEEK = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+  var SEASON_START = '2026-10-01', SEASON_END = '2027-03-31';
+  var NS = 'http://www.w3.org/2000/svg';
+  var dateEl = document.getElementById('rkDate');
+  var sayEl = document.getElementById('rkSay');
+  var mapEl = document.getElementById('rkMap');
+  var seasonEl = document.getElementById('rkSeason');
+  var cardsEl = document.getElementById('rkCards');
+  var focusId = null;
+  var freeDays = new Set([6, 0]);
+  var eveningOnly = false;
+  function endHour(slot) { var m = slot.match(/-(\d{2}):(\d{2})/); return m ? +m[1] + (+m[2]) / 60 : 0; }
+  function plusDays(iso, n) { return new Date((dayNum(iso) + n) * 864e5).toISOString().slice(0, 10); }
+  // The reader's week: the seven days from the chosen date, kept only where the day is one they marked.
+  function weekPlan(r, iso) {
+    var rows = [];
+    for (var n = 0; n < 7; n++) {
+      var day = plusDays(iso, n), wd = weekday(day);
+      if (!freeDays.has(wd)) continue;
+      var st = stateFor(r, day);
+      var slots = (r.days[wd] || []).filter(function (x) { return !eveningOnly || endHour(x) > 18 || /evening/.test(x); });
+      rows.push({ day: day, wd: wd, st: st, slots: slots });
+    }
+    return rows;
+  }
+  function usable(r, iso) { return weekPlan(r, iso).filter(function (w) { return w.st.k === 'open' && w.slots.length; }).length; }
+
+  function el(name, attrs, text) {
+    var n = document.createElementNS(NS, name);
+    for (var k in attrs) n.setAttribute(k, attrs[k]);
+    if (text != null) n.textContent = text;
+    return n;
+  }
+  function dayNum(iso) { var p = iso.split('-'); return Date.UTC(+p[0], +p[1] - 1, +p[2]) / 864e5; }
+  function weekday(iso) { return new Date(dayNum(iso) * 864e5).getUTCDay(); }
+  function nice(iso) { var d = new Date(dayNum(iso) * 864e5); return d.getUTCDate() + ' ' + ['January','February','March','April','May','June','July','August','September','October','November','December'][d.getUTCMonth()]; }
+  function berlinToday() {
+    try { return new Intl.DateTimeFormat('en-CA', { timeZone: 'Europe/Berlin', year: 'numeric', month: '2-digit', day: '2-digit' }).format(new Date()); }
+    catch (e) { return new Date().toISOString().slice(0, 10); }
+  }
+  function clampDay(iso) { if (iso < SEASON_START) return SEASON_START; if (iso > SEASON_END) return SEASON_END; return iso; }
+
+  function stateFor(r, iso) {
+    if (r.open) {
+      if (iso < r.open) return { k: 'none', label: 'From ' + nice(r.open) };
+      var end = r.close || r.likelyClose;
+      if (end && iso > end) return { k: r.close ? 'over' : 'likely', label: r.close ? 'Season over' : 'End not announced' };
+      if (r.mondayShut && weekday(iso) === 1) return { k: 'over', label: 'Shut on Mondays' };
+      return { k: 'open', label: 'Open' };
+    }
+    if (r.likelyOpen && iso >= r.likelyOpen && iso <= r.likelyClose) return { k: 'likely', label: 'Expected, not confirmed' };
+    return { k: 'none', label: 'Not announced' };
+  }
+
+  // Map: equirectangular projection with a cos(latitude) correction, from the rows' own coordinates.
+  var LAT0 = 52.405, LAT1 = 52.575, LON0 = 13.255, LON1 = 13.545;
+  var KX = Math.cos(52.5 * Math.PI / 180);
+  function project(lat, lon) {
+    var w = (LON1 - LON0) * KX, h = LAT1 - LAT0;
+    var s = Math.min(340 / w, 280 / h);
+    return [10 + (lon - LON0) * KX * s, 10 + (LAT1 - lat) * s];
+  }
+  function drawMap(iso) {
+    while (mapEl.firstChild) mapEl.removeChild(mapEl.firstChild);
+    mapEl.appendChild(el('rect', { x: 0, y: 0, width: 360, height: 300, rx: 12, fill: '#e9f1f5' }));
+    var pts = RING.map(function (p) { return project(p[0], p[1]).map(function (v) { return v.toFixed(1); }).join(','); }).join(' ');
+    mapEl.appendChild(el('polyline', { points: pts, fill: '#f8fbfc', stroke: '#9fb4bf', 'stroke-width': 3, 'stroke-linejoin': 'round' }));
+    RING.forEach(function (p, i) { if (i % 3 === 0) { var q = project(p[0], p[1]); mapEl.appendChild(el('circle', { cx: q[0], cy: q[1], r: 2.2, fill: '#7f97a3' })); } });
+    var a = project(ALEX[0], ALEX[1]);
+    mapEl.appendChild(el('rect', { x: a[0] - 3.5, y: a[1] - 3.5, width: 7, height: 7, fill: '#123D18', transform: 'rotate(45 ' + a[0] + ' ' + a[1] + ')' }));
+    mapEl.appendChild(el('text', { x: a[0] + 7, y: a[1] + 4, 'font-size': 10, fill: '#123D18', 'font-weight': 700 }, 'Alexanderplatz'));
+    RINKS.forEach(function (r, i) {
+      var p = project(r.lat, r.lon), st = stateFor(r, iso);
+      var g = el('g', { class: 'pin', tabindex: 0, role: 'button', 'aria-label': r.name + ': ' + st.label, 'data-id': r.id });
+      var fill = st.k === 'open' ? '#1B5E20' : (st.k === 'likely' ? '#7CB342' : '#b9c6cd');
+      var on = focusId === r.id, fit = usable(r, iso);
+      g.appendChild(el('circle', { class: 'ring', cx: p[0], cy: p[1], r: (on ? 14 : 11) + fit * 1.5, fill: '#ffffff', stroke: on ? '#FFE600' : fill, 'stroke-width': on ? 4 : 2.5 }));
+      g.appendChild(el('circle', { cx: p[0], cy: p[1], r: on ? 9 : 7, fill: fill }));
+      g.appendChild(el('text', { x: p[0], y: p[1] + 3.5, 'text-anchor': 'middle', 'font-size': 9, 'font-weight': 800, fill: st.k === 'none' ? '#24363d' : '#ffffff' }, String(i + 1)));
+      var right = p[0] < 250;
+      g.appendChild(el('text', { x: right ? p[0] + 16 : p[0] - 16, y: p[1] + 4, 'text-anchor': right ? 'start' : 'end', 'font-size': 10.5, 'font-weight': 700, fill: '#1f3324', stroke: '#e9f1f5', 'stroke-width': 3, 'paint-order': 'stroke' }, r.short));
+      g.addEventListener('click', function () { focusId = focusId === r.id ? null : r.id; render(); });
+      g.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); focusId = focusId === r.id ? null : r.id; render(); } });
+      mapEl.appendChild(g);
+    });
+  }
+
+  // Season chart: one row per rink, x axis from 1 October to 31 March.
+  function drawSeason(iso) {
+    while (seasonEl.firstChild) seasonEl.removeChild(seasonEl.firstChild);
+    var x0 = 92, x1 = 392, d0 = dayNum(SEASON_START), d1 = dayNum(SEASON_END) + 1;
+    function X(isoDay) { return x0 + (dayNum(isoDay) - d0) / (d1 - d0) * (x1 - x0); }
+    var defs = el('defs', {});
+    var pat = el('pattern', { id: 'rkHatch', width: 6, height: 6, patternUnits: 'userSpaceOnUse', patternTransform: 'rotate(45)' });
+    pat.appendChild(el('rect', { width: 6, height: 6, fill: '#d9ecc6' }));
+    pat.appendChild(el('rect', { width: 3, height: 6, fill: '#7CB342' }));
+    defs.appendChild(pat); seasonEl.appendChild(defs);
+    var months = [['2026-10-01','Oct'],['2026-11-01','Nov'],['2026-12-01','Dec'],['2027-01-01','Jan'],['2027-02-01','Feb'],['2027-03-01','Mar']];
+    months.forEach(function (m, i) {
+      var x = X(m[0]);
+      seasonEl.appendChild(el('line', { x1: x, x2: x, y1: 22, y2: 276, stroke: '#d3dfe6', 'stroke-width': 1 }));
+      seasonEl.appendChild(el('text', { x: x + 3, y: 16, 'font-size': 10.5, 'font-weight': 700, fill: '#4f6a57' }, m[1]));
+    });
+    RINKS.forEach(function (r, i) {
+      var y = 30 + i * 41, on = focusId === r.id;
+      seasonEl.appendChild(el('rect', { x: 0, y: y - 4, width: 400, height: 36, rx: 8, fill: on ? '#fff8c2' : (i % 2 ? '#eef4f7' : '#f7fafc') }));
+      seasonEl.appendChild(el('text', { x: 6, y: y + 11, 'font-size': 10.5, 'font-weight': 800, fill: '#123D18' }, (i + 1) + '. ' + r.short));
+      seasonEl.appendChild(el('text', { x: 6, y: y + 24, 'font-size': 9, fill: '#4f6a57' }, r.roof.indexOf('Indoor') === 0 ? 'indoor' : 'outdoor'));
+      if (r.open) {
+        var end = r.close || r.likelyClose;
+        seasonEl.appendChild(el('rect', { x: X(r.open), y: y + 2, width: Math.max(4, X(end) - X(r.open)), height: 22, rx: 6, fill: '#1B5E20' }));
+        if (!r.close && r.likelyClose) seasonEl.appendChild(el('rect', { x: X(end) - 26, y: y + 2, width: 26, height: 22, rx: 6, fill: 'url(#rkHatch)' }));
+        seasonEl.appendChild(el('text', { x: X(r.open) + 5, y: y + 17, 'font-size': 9.5, 'font-weight': 700, fill: '#ffffff' }, 'from ' + nice(r.open)));
+      } else if (r.likelyOpen) {
+        seasonEl.appendChild(el('rect', { x: X(r.likelyOpen), y: y + 2, width: X(r.likelyClose) - X(r.likelyOpen), height: 22, rx: 6, fill: 'url(#rkHatch)', stroke: '#7CB342', 'stroke-width': 1 }));
+        seasonEl.appendChild(el('text', { x: X(r.likelyOpen) + 5, y: y + 17, 'font-size': 9.5, 'font-weight': 800, fill: '#123D18' }, 'expected'));
+      } else {
+        seasonEl.appendChild(el('line', { x1: x0, x2: x1, y1: y + 21, y2: y + 21, stroke: '#b9c6cd', 'stroke-width': 2, 'stroke-dasharray': '4 5' }));
+        seasonEl.appendChild(el('text', { x: x0 + 6, y: y + 9, 'font-size': 9.5, 'font-weight': 700, fill: '#34474f' }, 'no date announced'));
+      }
+    });
+    var xd = X(iso);
+    seasonEl.appendChild(el('line', { x1: xd, x2: xd, y1: 20, y2: 280, stroke: '#E63946', 'stroke-width': 2 }));
+    seasonEl.appendChild(el('rect', { x: Math.min(xd - 28, 340), y: 280, width: 58, height: 16, rx: 8, fill: '#E63946' }));
+    seasonEl.appendChild(el('text', { x: Math.min(xd - 28, 340) + 29, y: 292, 'text-anchor': 'middle', 'font-size': 9.5, 'font-weight': 800, fill: '#ffffff' }, nice(iso).replace(/ (\w{3})\w*$/, ' $1')));
+  }
+
+  function drawCards(iso) {
+    cardsEl.innerHTML = '';
+    var order = RINKS.map(function (r, i) { return { r: r, i: i, st: stateFor(r, iso), n: usable(r, iso) }; });
+    var rank = { open: 0, likely: 1, over: 2, none: 3 };
+    order.sort(function (a, b) { return (focusId === b.r.id) - (focusId === a.r.id) || b.n - a.n || rank[a.st.k] - rank[b.st.k] || a.i - b.i; });
+    order.forEach(function (o) {
+      var r = o.r, st = o.st, li = document.createElement('li');
+      var b = document.createElement('button');
+      b.type = 'button'; b.className = 'rk-card'; b.setAttribute('aria-pressed', focusId === r.id ? 'true' : 'false');
+      var plan = weekPlan(r, iso), lines = '';
+      plan.forEach(function (w) {
+        var head = WEEK[w.wd].slice(0, 3) + ' ' + nice(w.day).replace(/ (\w{3})\w*$/, ' $1');
+        if (w.st.k === 'open') lines += '<li><b>' + head + ':</b> ' + (w.slots.length ? w.slots.join(', ') : (eveningOnly ? 'nothing past 18:00' : 'no public skating')) + '</li>';
+        else if (w.st.k === 'likely') lines += '<li><b>' + head + ':</b> expected, last season ' + (w.slots.length ? w.slots.join(', ') : 'nothing that fits') + '</li>';
+        else lines += '<li class="x"><b>' + head + ':</b> ' + w.st.label.toLowerCase() + '</li>';
+      });
+      if (!plan.length) lines = '<li class="x">Mark at least one day above.</li>';
+      var tag = o.n ? o.n + (o.n === 1 ? ' day fits' : ' days fit') : st.label;
+      var cls = o.n ? 'open' : st.k;
+      b.innerHTML = '<span class="t"><b>' + (o.i + 1) + '. ' + r.name + '</b><em class="s-' + cls + '">' + tag + '</em></span>' +
+        '<p class="m">' + r.area + ' · ' + r.roof + '</p>' +
+        '<ul class="wk">' + lines + '</ul>' +
+        (st.k === 'none' ? '<p class="p">' + r.status + '.</p>' : '') +
+        '<p class="p">' + r.price + '</p>';
+      b.addEventListener('click', function () { focusId = focusId === r.id ? null : r.id; render(); });
+      li.appendChild(b); cardsEl.appendChild(li);
+    });
+  }
+
+  function render() {
+    var iso = clampDay(dateEl.value || berlinToday());
+    if (dateEl.value !== iso) dateEl.value = iso;
+    var openN = 0, likelyN = 0;
+    RINKS.forEach(function (r) { var k = stateFor(r, iso).k; if (k === 'open') openN++; else if (k === 'likely') likelyN++; });
+    sayEl.innerHTML = '<b>' + WEEK[weekday(iso)] + ' ' + nice(iso) + ':</b> ' +
+      (openN ? openN + ' of 6 rinks have an announced season running' : 'no rink has an announced season running yet') +
+      (likelyN ? ', ' + likelyN + ' more are expected but not confirmed.' : '.') +
+      ' The cards show the next seven days on the days you marked.';
+    drawMap(iso); drawSeason(iso); drawCards(iso);
+  }
+
+  document.getElementById('rkDays').addEventListener('click', function (e) {
+    var bt = e.target.closest('button'); if (!bt) return;
+    var d = +bt.getAttribute('data-d');
+    if (freeDays.has(d)) freeDays.delete(d); else freeDays.add(d);
+    bt.setAttribute('aria-pressed', freeDays.has(d) ? 'true' : 'false');
+    render();
+  });
+  var eveEl = document.getElementById('rkEve');
+  eveEl.addEventListener('click', function () { eveningOnly = !eveningOnly; eveEl.setAttribute('aria-pressed', eveningOnly ? 'true' : 'false'); render(); });
+  dateEl.value = clampDay(berlinToday());
+  dateEl.addEventListener('input', render);
+  dateEl.addEventListener('change', render);
+  render();
+})();
+</script>
+<script src="../js/brand.js"></script>
+</body>
+</html>
