@@ -1,9 +1,9 @@
 {
-  "updatedAt": "2026-10-07T08:26:27.353Z",
+  "updatedAt": "2026-10-08T08:29:32.526Z",
   "source": "Wix Blog API",
   "popularSource": "Wix Blog metrics.views lifetime sort",
-  "totalPosts": 433,
-  "toolsTotal": 353,
+  "totalPosts": 434,
+  "toolsTotal": 354,
   "bookingUrl": "https://www.walkofberlin.com/book-berlin-walking-tour/berlin-then-and-now",
   "navTopics": [
     {
@@ -1802,6 +1802,23 @@
   ],
   "latest": [
     {
+      "title": "Ice Skating in Berlin: Which Rink Opens When and What It Costs",
+      "slug": "ice-skating-in-berlin",
+      "path": "/post/ice-skating-in-berlin",
+      "url": "https://www.berlinwalk.com/post/ice-skating-in-berlin",
+      "excerpt": "Berlin's ice rinks open weeks apart and charge anything from 4 to 9.50 euros. Which rink starts first, which ones run in the rain, what a skating afternoon really costs, and a board that shows the sessions you can make on the days you are free.",
+      "category": "Living in Berlin",
+      "categorySlug": "living-in-berlin",
+      "topic": "living-in-berlin",
+      "topicLabel": "Living in Berlin",
+      "readTime": "6 min read",
+      "publishedDate": "2026-10-08T08:27:34.034Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_764845390bf540879b1ff16715370312~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/neptunbrunnen-rink-from-tv-tower.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_764845390bf540879b1ff16715370312~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/neptunbrunnen-rink-from-tv-tower.jpg",
+      "alt": "A large ring-shaped ice rink around the Neptune Fountain seen from the TV Tower in December, with skaters on the ice and red-roofed Christmas market stalls around it",
+      "relatedToolSlug": "berlin-rink-season-board"
+    },
+    {
       "title": "Churches in Berlin: Which to Go Inside and When They Are Open",
       "slug": "churches-in-berlin",
       "path": "/post/churches-in-berlin",
@@ -1987,23 +2004,6 @@
       "thumb": "https://static.wixstatic.com/media/5a08a3_2ba3f3352a644e4aa79f42a5ea0fa5ca~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-saarow-therme-outdoor-pool.jpg",
       "alt": "The outdoor thermal pool at the SaarowTherme in Bad Saarow, framed by the white colonnades of the spa building",
       "relatedToolSlug": "berlin-therme-soak-timeline"
-    },
-    {
-      "title": "Blood Donation in Berlin: Which Centres Pay, How Often You Can Give, and the German Catch",
-      "slug": "blood-donation-berlin",
-      "path": "/post/blood-donation-berlin",
-      "url": "https://www.berlinwalk.com/post/blood-donation-berlin",
-      "excerpt": "Berlin has 14 fixed blood and plasma centres, and they could hardly be more different: one pays 20 euros for a bag, another pays nothing, and the plasma chains do not print a rate. Here is who pays what, how often you are allowed to give, where you can go on a Saturday, and the language rule that stops many English speakers at the desk.",
-      "category": "Living in Berlin",
-      "categorySlug": "living-in-berlin",
-      "topic": "living-in-berlin",
-      "topicLabel": "Living in Berlin",
-      "readTime": "7 min read",
-      "publishedDate": "2026-09-25T08:49:18.252Z",
-      "image": "https://static.wixstatic.com/media/5a08a3_18b7d059872545f1913360729f0c40ab~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-blood-bag-mixer.jpg",
-      "thumb": "https://static.wixstatic.com/media/5a08a3_18b7d059872545f1913360729f0c40ab~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-blood-bag-mixer.jpg",
-      "alt": "A full bag of donated blood resting on a white mixing scale beside a donor chair on a wooden floor",
-      "relatedToolSlug": "berlin-blood-donor-map"
     }
   ]
 }
