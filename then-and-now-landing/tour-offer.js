@@ -1,7 +1,8 @@
 /* Berlin Then and Now: the dated offer display. Checkout prices are enforced separately in Wix. */
 (() => {
   'use strict';
-  if (window.BWTourOffer) { window.BWTourOffer.refresh(); return; }
+  const VERSION = '20261008-layout1';
+  if (window.BWTourOffer && window.BWTourOffer.version === VERSION) { window.BWTourOffer.refresh(); return; }
   const START = Date.parse('2026-10-07T22:00:00Z');
   const END = Date.parse('2026-11-07T23:00:00Z');
   const active = (now = Date.now()) => now >= START && now < END;
@@ -51,13 +52,35 @@
       current.style.cssText = 'font-weight:800;color:inherit';
       amount.append(old, document.createTextNode(' '), current);
       const label = document.createElement('small');
-      label.textContent = 'Limited-time offer · 8 Oct–7 Nov';
-      label.style.cssText = 'display:block;font-family:inherit;font-size:11px;font-weight:600;line-height:1.4;text-transform:none;letter-spacing:0;margin:3px 0;color:inherit';
+      label.textContent = ' · Limited-time offer';
+      label.style.cssText = 'display:inline;font-family:inherit;font-size:.85em;font-weight:600;line-height:inherit;white-space:nowrap;text-transform:none;letter-spacing:0;margin:0;color:inherit';
       span.append(amount, label); fragment.append(span); replaced.add(span);
       at = m.index + m[0].length;
     }
     fragment.append(document.createTextNode(text.slice(at)));
     node.replaceWith(fragment);
+  }
+  function tidy(root) {
+    // Price replacements inherit the surrounding line; never introduce block rows in fact bars or chips.
+    for (const span of root.querySelectorAll('[data-bw-offer-price]')) {
+      span.style.cssText = 'display:inline;white-space:normal';
+      const label = span.querySelector('small');
+      if (label) {
+        if (label.textContent !== ' · Limited-time offer') label.textContent = ' · Limited-time offer';
+        const compact = !!span.closest('#bw-ca05-strip li,.bw-home-booking-facts li,.bw-blog-booking-facts li');
+        label.style.cssText = 'display:' + (compact ? 'none' : 'inline') + ';font-family:inherit;font-size:.85em;font-weight:600;line-height:inherit;white-space:nowrap;text-transform:none;letter-spacing:0;margin:0;color:inherit';
+      }
+      replaced.add(span);
+    }
+    // The published Wix frontend still emits the old date detail on every guest/date render.
+    // Keep this removal narrow; the selected-date pricing and all payment rules remain untouched.
+    for (const detail of root.querySelectorAll('bw-tour-checkout .bwtc-guests .bwtc-hint small')) {
+      if (/^For walks from 8 Oct to 7 Nov 2026/.test(detail.textContent.trim())) {
+        const lineBreak = detail.previousSibling;
+        if (lineBreak && lineBreak.nodeName === 'BR') lineBreak.remove();
+        detail.remove();
+      }
+    }
   }
   function updateSchema(root) {
     for (const script of root.querySelectorAll('script[type="application/ld+json"]')) {
@@ -86,6 +109,7 @@
     const nodes = []; let node;
     while ((node = walker.nextNode())) if (inTour(node, inherited)) nodes.push(node);
     nodes.forEach(display);
+    tidy(root);
     updateSchema(root);
     for (const el of root.querySelectorAll('*')) if (el.shadowRoot) visit(el.shadowRoot, inherited || el.matches(scopes));
   }
@@ -102,7 +126,7 @@
   function queue() {
     if (!scheduled) { scheduled = true; requestAnimationFrame(refresh); }
   }
-  window.BWTourOffer = Object.freeze({ active, price, refresh });
+  window.BWTourOffer = Object.freeze({ version: VERSION, active, price, refresh });
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', refresh, { once: true });
   else refresh();
   // Handles late custom-element registration, SPA navigation, and an open page at expiry.

@@ -405,4 +405,4 @@
 })();
 
 // Dated Then and Now offer: only existing guided-tour prices are decorated.
-(function(){if(document.querySelector('script[data-bw-tour-offer-loader]'))return;var s=document.createElement('script');s.dataset.bwTourOfferLoader='';s.src='https://app.berlinwalk.com/then-and-now-landing/tour-offer.js';document.head.appendChild(s);})();
+(function(){if(document.querySelector('script[data-bw-tour-offer-loader]'))return;var s=document.createElement('script');s.dataset.bwTourOfferLoader='';s.src='https://app.berlinwalk.com/then-and-now-landing/tour-offer.js?v=20261008-layout1';document.head.appendChild(s);})();

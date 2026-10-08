@@ -6,7 +6,7 @@
   const approvedOrigins = new Set(['https://app.berlinwalk.com']);
   const isLocal = ['localhost', '127.0.0.1', '[::1]'].includes(base.hostname) && base.origin === location.origin;
   if (!approvedOrigins.has(base.origin) && !isLocal) return;
-  if (!document.querySelector('script[data-bw-tour-offer-loader]')) { const offer = document.createElement('script'); offer.dataset.bwTourOfferLoader = ''; offer.src = new URL('tour-offer.js', base).href; document.head.append(offer); }
+  if (!document.querySelector('script[data-bw-tour-offer-loader]')) { const offer = document.createElement('script'); offer.dataset.bwTourOfferLoader = ''; offer.src = new URL('tour-offer.js?v=20261008-layout1', base).href; document.head.append(offer); }
   const CONFIG_ENDPOINT = 'https://app.berlinwalk.com/api/tour-landing-config';
 
   const absoluteUrl = (value) => new URL(value, base).href;
