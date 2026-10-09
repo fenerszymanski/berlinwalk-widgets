@@ -1,5 +1,5 @@
 {
- "updatedAt": "2026-10-08T08:29:38.429Z",
+ "updatedAt": "2026-10-09T08:46:18.752Z",
  "source": "Wix Blog API + blog-category/categories.json",
  "slug": "german-language",
  "categoryId": "bf46ccbb-3db8-499a-95fe-4623868d6e1a",
@@ -8,8 +8,8 @@
  "shelfMode": "flat",
  "shelfLegend": "",
  "shelfLegendSub": "",
- "totalPosts": 19,
- "toolCount": 13,
+ "totalPosts": 15,
+ "toolCount": 11,
  "lead": {
   "title": "German Courses in Berlin: What a Lesson Costs and Why the Rules Change at B1",
   "slug": "german-courses-in-berlin",
@@ -124,26 +124,6 @@
    "line": "The one German word that gets you through Berlin's doors, corridors and counters faster than sorry ever will, with pronunciation, the formal/informal split, and where you"
   },
   {
-   "title": "Berlin Restaurant Phrases: How to Order, Pay and Handle Allergies",
-   "slug": "berlin-restaurant-phrases",
-   "path": "/post/berlin-restaurant-phrases",
-   "minutes": 5,
-   "alt": "A quiet Berlin cafe terrace with tables, trees and a chalkboard menu",
-   "thumb": "https://static.wixstatic.com/media/5a08a3_84346044f58c4163809f987562960b4e~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
-   "line": "A practical German phrase guide for Berlin restaurants, cafes, bakeries and street-food counters, with allergy, card payment and tipping lines.",
-   "tool": "berlin-restaurant-phrase-card"
-  },
-  {
-   "title": "German Signs in Berlin: The Words Tourists Actually Need",
-   "slug": "german-signs-in-berlin",
-   "path": "/post/german-signs-in-berlin",
-   "minutes": 5,
-   "alt": "Green German Ausgang exit sign on a Berlin-style wall for tourists learning German signs in Berlin",
-   "thumb": "https://static.wixstatic.com/media/5a08a3_4210b7a6ac144c338eb126ab500f66b0~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
-   "line": "A practical guide to the German signs tourists actually need in Berlin: exits, platforms, ticket validation, replacement transport, cash-only shops, Pfand and emergency words.",
-   "tool": "berlin-sign-decoder"
-  },
-  {
    "title": "Pfand in Germany: Berlin Bottle Deposits Explained for Tourists",
    "slug": "pfand-in-germany",
    "path": "/post/pfand-in-germany",
@@ -191,28 +171,10 @@
    "line": "Staring at a German menu full of words like Schweinshaxe, Kartoffelpuffer, and Apfelschorle?"
   },
   {
-   "title": "Kaffee vs. Coffee: A Beginner's Guide to German Café Culture",
-   "slug": "kaffee-vs-coffee-a-beginner-s-guide-to-german-café-culture",
-   "path": "/post/kaffee-vs-coffee-a-beginner-s-guide-to-german-café-culture",
-   "minutes": 8,
-   "alt": "",
-   "thumb": "https://static.wixstatic.com/media/nsplsh_98256110acda465d924f0871591d8e5f~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
-   "line": "How to order coffee in Berlin: Kaffee, Café, Eiskaffee, Kaffee und Kuchen, café etiquette, tipping, cards and where to go after the tour."
-  },
-  {
-   "title": "Feierabend, Fernweh, Schadenfreude: 7 German Words With No English Translation",
-   "slug": "feierabend-fernweh-schadenfreude-7-german-words-with-no-english-translation",
-   "path": "/post/feierabend-fernweh-schadenfreude-7-german-words-with-no-english-translation",
-   "minutes": 8,
-   "alt": "Illustration of seven German words including Feierabend, Fernweh and Schadenfreude",
-   "thumb": "https://static.wixstatic.com/media/5a08a3_85cf3adb5cf64e37beb6019f1623596d~mv2.jpeg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
-   "line": "A visitor-friendly guide to Feierabend, Fernweh, Schadenfreude and four more German words that need more than one English word to explain."
-  },
-  {
    "title": "10 German Words Every Tourist Should Know Before Visiting Berlin",
    "slug": "10-german-words-every-tourist-should-know-before-visiting-berlin",
    "path": "/post/10-german-words-every-tourist-should-know-before-visiting-berlin",
-   "minutes": 7,
+   "minutes": 10,
    "alt": "",
    "thumb": "https://static.wixstatic.com/media/nsplsh_f0208352f62b402b81731e60049ad692~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
    "line": "Learn 10 practical German words and phrases for a smoother Berlin trip, from Danke and Bitte to Stimmt so, Karte and transport signs.",

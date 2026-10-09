@@ -1,5 +1,5 @@
 {
- "updatedAt": "2026-10-08T08:29:37.912Z",
+ "updatedAt": "2026-10-09T08:46:18.398Z",
  "source": "Wix Blog API + blog-category/categories.json",
  "slug": "tour-route",
  "categoryId": "f9b304de-4490-4535-b9e9-64b8f2ff63b0",
@@ -8,7 +8,7 @@
  "shelfMode": "topic",
  "shelfLegend": "Along the walk",
  "shelfLegendSub": "Grouped by what each stop is really about",
- "totalPosts": 33,
+ "totalPosts": 32,
  "toolCount": 20,
  "lead": {
   "title": "Free vs Paid Walking Tour in Berlin: What a Small Group Really Changes",
@@ -58,22 +58,13 @@
      "line": "Is the Berlin TV Tower worth it in 2026? A local guide compares the view, EUR 28.50 tickets, queues, accessibility and better free or cheap alternatives."
     },
     {
-     "title": "The Totentanz: A 700-Year-Old Dance of Death Inside Berlin's Oldest Parish Church",
+     "title": "The Totentanz: Berlin's Medieval Dance of Death Inside St. Mary's",
      "slug": "the-totentanz-a-700-year-old-dance-of-death-inside-berlin-s-oldest-church",
      "path": "/post/the-totentanz-a-700-year-old-dance-of-death-inside-berlin-s-oldest-church",
-     "minutes": 7,
+     "minutes": 9,
      "alt": "",
      "thumb": "https://static.wixstatic.com/media/5a08a3_1c71ee51e7e84ec8b7bb9ad0c6090064~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
-     "line": "Hidden inside St. Mary's Church near Alexanderplatz is the Totentanz, a 22-metre medieval Dance of Death fresco that reveals Berlin's oldest layer."
-    },
-    {
-     "title": "St. Mary's Church: The Medieval Survivor in the Shadow of the TV Tower",
-     "slug": "st-mary-s-church-the-medieval-survivor-in-the-shadow-of-the-tv-tower",
-     "path": "/post/st-mary-s-church-the-medieval-survivor-in-the-shadow-of-the-tv-tower",
-     "minutes": 9,
-     "alt": "St. Mary's Church in Berlin near Alexanderplatz with autumn trees and open space",
-     "thumb": "https://static.wixstatic.com/media/5a08a3_7b7b631e94b04e159091391249bc4906~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
-     "line": "St. Mary's Church near Alexanderplatz explains medieval Berlin, the vanished Marienviertel, the Totentanz and the TV Tower contrast.",
+     "line": "Hidden inside St. Mary's Church near Alexanderplatz is the Totentanz, a 22-metre medieval Dance of Death fresco that reveals Berlin's oldest layer.",
      "tool": "medieval-berlin-mini-walk"
     },
     {

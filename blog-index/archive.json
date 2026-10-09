@@ -1,9 +1,26 @@
 {
-  "updatedAt": "2026-10-09T02:07:09.299Z",
+  "updatedAt": "2026-10-09T08:46:02.202Z",
   "source": "Wix Blog API",
-  "totalPosts": 424,
+  "totalPosts": 425,
   "bookingUrl": "https://www.walkofberlin.com/book-berlin-walking-tour/berlin-then-and-now",
   "allPosts": [
+    {
+      "title": "Potsdam in Winter: Which Palaces Are Open and Which Close",
+      "slug": "potsdam-in-winter",
+      "path": "/post/potsdam-in-winter",
+      "url": "https://www.berlinwalk.com/post/potsdam-in-winter",
+      "excerpt": "From 1 November most Potsdam palaces shorten their hours and many close until spring. Which ones stay open on which days, why a Monday from January leaves every palace door shut, and a board that shows the palaces open on your date.",
+      "category": "Tourist Tips",
+      "categorySlug": "tourist-tips",
+      "topic": "when-to-visit",
+      "topicLabel": "Month-by-Month Berlin",
+      "readTime": "7 min read",
+      "publishedDate": "2026-10-09T08:44:33.203Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_ae24478d416140839e21cc6f32dfdc85~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/sanssouci-snow-terraces.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_ae24478d416140839e21cc6f32dfdc85~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/sanssouci-snow-terraces.jpg",
+      "alt": "The vineyard terraces of Sanssouci Palace covered in snow, with the yellow palace and its green dome at the top and small conical yews in the white lawn below",
+      "relatedToolSlug": "potsdam-winter-palace-board"
+    },
     {
       "title": "Ice Skating in Berlin: Which Rink Opens When and What It Costs",
       "slug": "ice-skating-in-berlin",

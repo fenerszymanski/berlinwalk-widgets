@@ -1,5 +1,5 @@
 {
- "updatedAt": "2026-10-08T08:29:39.509Z",
+ "updatedAt": "2026-10-09T08:46:19.398Z",
  "source": "Wix Blog API + blog-category/categories.json",
  "slug": "before-after",
  "categoryId": "af526c68-60e5-4783-a31b-4e215760626f",
@@ -8,8 +8,8 @@
  "shelfMode": "flat",
  "shelfLegend": "",
  "shelfLegendSub": "",
- "totalPosts": 11,
- "toolCount": 8,
+ "totalPosts": 10,
+ "toolCount": 7,
  "lead": {
   "title": "The Brandenburg Gate, Before and After: One Landmark, Berlin’s Whole Century",
   "slug": "brandenburg-gate-before-after",
@@ -130,16 +130,6 @@
    "alt": "Marienviertel information panel and open space near St. Mary's Church in Berlin",
    "thumb": "https://static.wixstatic.com/media/5a08a3_c3ff467d4f2a4a95af1380c59d80e738~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
    "line": "Berlin's lost Marienviertel explains why the space near the TV Tower feels so open: Nazi plans, war damage, GDR demolition and a vanished medieval street plan."
-  },
-  {
-   "title": "Alexanderplatz Then and Now: From Medieval Market to Modern Chaos",
-   "slug": "alexanderplatz-then-and-now-from-medieval-market-to-modern-chaos",
-   "path": "/post/alexanderplatz-then-and-now-from-medieval-market-to-modern-chaos",
-   "minutes": 10,
-   "alt": "Alexanderplatz photo in 1889",
-   "thumb": "https://static.wixstatic.com/media/5a08a3_d800723c43a94bf2ace1623c83b07f1c~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
-   "line": "Alexanderplatz then and now: how Berlin changed from medieval market edge to Weimar hub, GDR showcase, 1989 protest stage and modern chaos.",
-   "tool": "medieval-berlin-mini-walk"
   }
  ]
 }
