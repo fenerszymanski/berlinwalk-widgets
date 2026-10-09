@@ -1,8 +1,8 @@
 {
-  "updatedAt": "2026-10-08T08:29:32.526Z",
+  "updatedAt": "2026-10-09T02:07:09.299Z",
   "source": "Wix Blog API",
   "popularSource": "Wix Blog metrics.views lifetime sort",
-  "totalPosts": 434,
+  "totalPosts": 424,
   "toolsTotal": 354,
   "bookingUrl": "https://www.walkofberlin.com/book-berlin-walking-tour/berlin-then-and-now",
   "navTopics": [
@@ -1159,23 +1159,6 @@
           "relatedToolSlug": ""
         },
         {
-          "title": "Alexanderplatz Then and Now: From Medieval Market to Modern Chaos",
-          "slug": "alexanderplatz-then-and-now-from-medieval-market-to-modern-chaos",
-          "path": "/post/alexanderplatz-then-and-now-from-medieval-market-to-modern-chaos",
-          "url": "https://www.berlinwalk.com/post/alexanderplatz-then-and-now-from-medieval-market-to-modern-chaos",
-          "excerpt": "Alexanderplatz then and now: how Berlin changed from medieval market edge to Weimar hub, GDR showcase, 1989 protest stage and modern chaos.",
-          "category": "Before & After",
-          "categorySlug": "before-after",
-          "topic": "history-myths",
-          "topicLabel": "Berlin History & Myths",
-          "readTime": "10 min read",
-          "publishedDate": "2026-02-26T14:43:48.550Z",
-          "image": "https://static.wixstatic.com/media/5a08a3_d800723c43a94bf2ace1623c83b07f1c~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/Markt-auf-dem-Alexanderplatz-1889_edited.jpg",
-          "thumb": "https://static.wixstatic.com/media/5a08a3_d800723c43a94bf2ace1623c83b07f1c~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/Markt-auf-dem-Alexanderplatz-1889_edited.jpg",
-          "alt": "Alexanderplatz photo in 1889",
-          "relatedToolSlug": "medieval-berlin-mini-walk"
-        },
-        {
           "title": "Why Berlin Doesn't Have a Beautiful Old Town (And Why That's the Point)",
           "slug": "why-berlin-doesn-t-have-a-beautiful-old-town-and-why-that-s-the-point",
           "path": "/post/why-berlin-doesn-t-have-a-beautiful-old-town-and-why-that-s-the-point",
@@ -1210,21 +1193,38 @@
           "relatedToolSlug": "east-or-west-1989"
         },
         {
-          "title": "Did JFK Really Call Himself a Jelly Donut? The Ich Bin Ein Berliner Myth",
-          "slug": "did-jfk-really-call-himself-a-jelly-donut-the-ich-bin-ein-berliner-myth",
-          "path": "/post/did-jfk-really-call-himself-a-jelly-donut-the-ich-bin-ein-berliner-myth",
-          "url": "https://www.berlinwalk.com/post/did-jfk-really-call-himself-a-jelly-donut-the-ich-bin-ein-berliner-myth",
-          "excerpt": "Did JFK call himself a jelly donut? No. Here is the real Ich bin ein Berliner story, the German grammar, the Berlin pastry name and why the myth spread.",
-          "category": "Berlin Myths",
-          "categorySlug": "berlin-myths",
+          "title": "Sachsenhausen from Berlin: Train, Tickets and How to Visit Respectfully",
+          "slug": "sachsenhausen-from-berlin",
+          "path": "/post/sachsenhausen-from-berlin",
+          "url": "https://www.berlinwalk.com/post/sachsenhausen-from-berlin",
+          "excerpt": "A practical guide to visiting Sachsenhausen from Berlin: train routes, ABC tickets, opening hours, free entry, audio guides, public tours and respectful timing.",
+          "category": "Berlin History",
+          "categorySlug": "berlin-history",
           "topic": "history-myths",
           "topicLabel": "Berlin History & Myths",
-          "readTime": "7 min read",
-          "publishedDate": "2026-03-03T12:12:36.812Z",
-          "image": "https://static.wixstatic.com/media/5a08a3_42bff55d66fb465eb52d8c5d7e2d8b79~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/Kennedy_12_dpa.jpg",
-          "thumb": "https://static.wixstatic.com/media/5a08a3_42bff55d66fb465eb52d8c5d7e2d8b79~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/Kennedy_12_dpa.jpg",
-          "alt": "@dpa",
-          "relatedToolSlug": ""
+          "readTime": "6 min read",
+          "publishedDate": "2026-06-26T03:49:02.920Z",
+          "image": "https://static.wixstatic.com/media/5a08a3_3446c472b6ac429fa4780b19ba7a40ab~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/sachsenhausen-from-berlin-01-sachsenhausen-tower-a-cover.jpg",
+          "thumb": "https://static.wixstatic.com/media/5a08a3_3446c472b6ac429fa4780b19ba7a40ab~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/sachsenhausen-from-berlin-01-sachsenhausen-tower-a-cover.jpg",
+          "alt": "Tower A entrance building at Sachsenhausen Memorial in Oranienburg near Berlin",
+          "relatedToolSlug": "sachsenhausen-visit-planner"
+        },
+        {
+          "title": "Charlottenburg Palace Berlin: Tickets, Gardens and What to See First",
+          "slug": "charlottenburg-palace-berlin",
+          "path": "/post/charlottenburg-palace-berlin",
+          "url": "https://www.berlinwalk.com/post/charlottenburg-palace-berlin",
+          "excerpt": "A practical, historically grounded Charlottenburg Palace Berlin guide: which ticket to buy, how long to allow, what to see first, and how to avoid the common planning mistakes.",
+          "category": "Berlin History",
+          "categorySlug": "berlin-history",
+          "topic": "history-myths",
+          "topicLabel": "Berlin History & Myths",
+          "readTime": "6 min read",
+          "publishedDate": "2026-06-25T06:33:40.963Z",
+          "image": "https://static.wixstatic.com/media/5a08a3_38a5398327814054a24c8a865b3a4acc~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/charlottenburg-palace-berlin-01-palace-cover.jpg",
+          "thumb": "https://static.wixstatic.com/media/5a08a3_38a5398327814054a24c8a865b3a4acc~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/charlottenburg-palace-berlin-01-palace-cover.jpg",
+          "alt": "Charlottenburg Palace in Berlin seen across water and fountains with the palace dome above",
+          "relatedToolSlug": "charlottenburg-palace-visit-planner"
         }
       ]
     },
@@ -1389,21 +1389,21 @@
           "relatedToolSlug": "berlin-tip-calculator"
         },
         {
-          "title": "Berlin Restaurant Phrases: How to Order, Pay and Handle Allergies",
-          "slug": "berlin-restaurant-phrases",
-          "path": "/post/berlin-restaurant-phrases",
-          "url": "https://www.berlinwalk.com/post/berlin-restaurant-phrases",
-          "excerpt": "A practical German phrase guide for Berlin restaurants, cafes, bakeries and street-food counters, with allergy, card payment and tipping lines.",
-          "category": "German Language",
-          "categorySlug": "german-language",
+          "title": "Berlin Weekly Markets: Which One Is Open on the Day You Are Free",
+          "slug": "berlin-weekly-markets",
+          "path": "/post/berlin-weekly-markets",
+          "url": "https://www.berlinwalk.com/post/berlin-weekly-markets",
+          "excerpt": "Berlin does not have one market you can turn up to whenever you like. It has around a hundred of them, each tied to a fixed weekday and a fixed square, and most are folded away by mid-afternoon. Saturday carries nine, Wednesday is the classic morning, Thursday runs latest, Monday has one, and Sunday has none at all. Here is the shape of the market week, and how to pick the one that fits the day you are actually free.",
+          "category": "Tourist Tips",
+          "categorySlug": "tourist-tips",
           "topic": "food-nightlife",
           "topicLabel": "Food & Nightlife",
-          "readTime": "5 min read",
-          "publishedDate": "2026-07-02T03:40:51.356Z",
-          "image": "https://static.wixstatic.com/media/5a08a3_84346044f58c4163809f987562960b4e~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-berlin-restaurant-phrases-cafe-terrace-cover-1600.jpg",
-          "thumb": "https://static.wixstatic.com/media/5a08a3_84346044f58c4163809f987562960b4e~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-berlin-restaurant-phrases-cafe-terrace-cover-1600.jpg",
-          "alt": "A quiet Berlin cafe terrace with tables, trees and a chalkboard menu",
-          "relatedToolSlug": "berlin-restaurant-phrase-card"
+          "readTime": "6 min read",
+          "publishedDate": "2026-08-26T07:59:49.635Z",
+          "image": "https://static.wixstatic.com/media/5a08a3_d77bfcd37ddb4788a623fb490bc5c077~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/winterfeldt.jpg",
+          "thumb": "https://static.wixstatic.com/media/5a08a3_d77bfcd37ddb4788a623fb490bc5c077~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/winterfeldt.jpg",
+          "alt": "A fruit and vegetable stall under a red and white striped canopy at Winterfeldtplatz market in Berlin",
+          "relatedToolSlug": "berlin-market-week"
         }
       ]
     },
