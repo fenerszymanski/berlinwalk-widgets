@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Potsdam Winter Palace Board: Which Palaces Are Open on Your Day</title>
+<link rel="stylesheet" href="../css/brand.css">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #FFFFFF; color: #1d2733; padding: 12px; }
+  .pw { border: 1px solid #d9e0e6; border-radius: 18px; overflow: hidden; background: #f7f9fb; }
+  .pw-head { padding: 16px 16px 14px; background: linear-gradient(160deg, #e9f0f5 0%, #f7f9fb 70%); border-bottom: 1px solid #dde4ea; }
+  .pw-eyebrow { font-size: 11px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: #1B5E20; }
+  .pw-head h1 { font-size: 19px; line-height: 1.25; font-weight: 800; margin-top: 3px; color: #16212b; }
+  .pw-head p { font-size: 12.5px; line-height: 1.5; color: #4a5866; margin-top: 4px; }
+  .pw-pick { display: flex; align-items: center; gap: 8px; margin-top: 12px; flex-wrap: wrap; }
+  .pw-pick label { font-size: 12px; font-weight: 700; color: #33414f; }
+  .pw-pick input[type=date] { font-family: inherit; font-size: 15px; font-weight: 700; padding: 8px 10px; border: 1.5px solid #9fb0bf; border-radius: 10px; background: #fff; color: #16212b; min-width: 0; }
+  .pw-pick button { font-family: inherit; font-size: 15px; font-weight: 800; width: 40px; height: 40px; border-radius: 10px; border: 1.5px solid #9fb0bf; background: #fff; color: #1B5E20; cursor: pointer; }
+  .pw-pick button:disabled { opacity: .35; cursor: default; }
+  .pw-pick input:focus-visible, .pw-pick button:focus-visible, .pw-season rect:focus-visible { outline: 2px solid #c62828; outline-offset: 2px; }
+  .pw-dayname { font-size: 13px; font-weight: 700; color: #1B5E20; }
+  .pw-season { padding: 12px 12px 2px; }
+  .pw-season h2, .pw-board h2 { font-size: 12px; font-weight: 800; letter-spacing: .04em; text-transform: uppercase; color: #4a5866; padding: 0 4px 6px; }
+  .pw-season svg, .pw-board svg { display: block; width: 100%; height: auto; overflow: visible; }
+  .pw-season rect.day { cursor: pointer; }
+  .pw-board { padding: 12px 12px 0; }
+  .pw-note { margin: 10px 16px 0; padding: 12px 14px; border-radius: 14px; background: #fff; border: 1px solid #dde4ea; font-size: 13.5px; line-height: 1.55; }
+  .pw-note b { color: #16212b; }
+  .pw-note .big { font-size: 15px; font-weight: 800; color: #1B5E20; display: block; margin-bottom: 3px; }
+  .pw-note .big.is-shut { color: #a33a2f; }
+  .pw-ticket { margin: 10px 16px 0; padding: 11px 14px; border-radius: 14px; background: #FFE600; color: #123D18; font-size: 13px; line-height: 1.5; font-weight: 600; }
+  .pw-ticket b { font-weight: 800; color: #123D18; }
+  .pw-legend { display: flex; flex-wrap: wrap; gap: 6px 14px; padding: 8px 16px 0; font-size: 11.5px; color: #4a5866; }
+  .pw-legend i { display: inline-block; width: 14px; height: 10px; border-radius: 3px; margin-right: 5px; vertical-align: -1px; }
+  .pw-foot { padding: 10px 16px 14px; font-size: 11px; color: #5f6c78; line-height: 1.5; }
+  .t-name { font-size: 11.5px; font-weight: 700; fill: #16212b; }
+  .t-sub { font-size: 10px; fill: #5f6c78; }
+  .t-axis { font-size: 10px; fill: #5f6c78; text-anchor: middle; }
+  .t-group { font-size: 10px; font-weight: 800; letter-spacing: .06em; fill: #1B5E20; text-transform: uppercase; }
+  .t-bar { font-size: 10px; font-weight: 700; fill: #ffffff; }
+  .t-shut { font-size: 10.5px; fill: #8a5a52; font-style: italic; }
+  .t-sun { font-size: 10px; font-weight: 800; fill: #a35a00; }
+  .t-month { font-size: 10px; font-weight: 700; fill: #4a5866; }
+</style>
+</head>
+<body>
+<div class="pw" id="pw">
+  <div class="pw-head">
+    <div class="pw-eyebrow">Potsdam palaces, winter season</div>
+    <h1>Which Potsdam palaces are open on your day</h1>
+    <p>Pick a date between 1 November and 31 March. The board shows every Potsdam palace the foundation lists for the season, its hours on that day, and where the sun sets.</p>
+    <div class="pw-pick">
+      <label for="pw-date">Your day</label>
+      <button type="button" id="pw-prev" aria-label="Previous day">&lsaquo;</button>
+      <input type="date" id="pw-date" min="2026-11-01" max="2027-03-31" value="2026-11-14">
+      <button type="button" id="pw-next" aria-label="Next day">&rsaquo;</button>
+      <span class="pw-dayname" id="pw-dayname"></span>
+    </div>
+  </div>
+
+  <div class="pw-season">
+    <h2>The whole season: palaces open per day (tap a day)</h2>
+    <svg id="pw-season" role="img" aria-label="Season strip from November to March with the number of open palaces per day"></svg>
+  </div>
+
+  <div class="pw-board">
+    <h2 id="pw-board-title">Hours on the day</h2>
+    <svg id="pw-chart" role="img" aria-label="Opening hours of Potsdam palaces on the chosen day"></svg>
+  </div>
+  <div class="pw-legend">
+    <span><i style="background:#1B5E20"></i>Open, self-guided</span>
+    <span><i style="background:#3f6f95"></i>Open, guided tour in German</span>
+    <span><i style="background:#7a5a8c"></i>Christmas market</span>
+    <span><i style="background:#f6e7c8"></i>Daylight</span>
+  </div>
+
+  <div class="pw-note" id="pw-note"></div>
+  <div class="pw-ticket" id="pw-ticket"></div>
+
+  <div class="pw-foot">Hours from the Prussian Palaces and Gardens Foundation (SPSG) season overview for winter 2026/27 and its palace pages, Christmas market dates from Potsdam's tourism office, checked on 9 October 2026. Last entry is 30 minutes before closing. On public holidays the palaces keep weekend hours. Sunset is calculated for Potsdam.</div>
+</div>
+
+<script>
+(function () {
+  var START = new Date(2026, 10, 1), END = new Date(2027, 2, 31);
+  var DOW = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+  var MON = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  // Brandenburg public holidays inside the season. 24 Dec and 31 Dec carry their own rules.
+  var HOLIDAYS = { '2026-12-25': 1, '2026-12-26': 1, '2027-01-01': 1, '2027-03-26': 1, '2027-03-29': 1 };
+
+  function key(d) { return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0'); }
+  function weekendLike(d) { var w = d.getDay(); return w === 0 || w === 6 || !!HOLIDAYS[key(d)]; }
+  function hm(x) { var h = Math.floor(x), m = Math.round((x - h) * 60); return h + ':' + String(m).padStart(2, '0'); }
+
+  // Each rule returns null (shut, with a reason) or [open, close, kind].
+  var SITES = [
+    { group: 'Sanssouci Park', name: 'Sanssouci Palace', sub: '14 euros, timed entry', main: true,
+      rule: function (d) {
+        var k = key(d);
+        if (k === '2026-12-24' || k === '2026-12-25') return { shut: 'Closed for Christmas' };
+        if (k === '2026-12-31') return [10, 14, 'self'];
+        if (k === '2027-01-01') return [11, 16.5, 'self'];
+        if (d.getDay() === 1 && !HOLIDAYS[k]) return { shut: 'Closed on Mondays' };
+        return [10, 16.5, 'self'];
+      } },
+    { group: 'Sanssouci Park', name: 'New Palace', sub: '14 euros, German tour', main: true,
+      rule: function (d) {
+        var k = key(d);
+        if (k === '2026-12-24' || k === '2026-12-25') return { shut: 'Closed for Christmas' };
+        if (k === '2026-12-31') return [10, 14, 'guided'];
+        if (k === '2027-01-01') return [11, 16.5, 'guided'];
+        var shutDay = d.getFullYear() >= 2027 ? 1 : 2;
+        if (d.getDay() === shutDay && !HOLIDAYS[k]) return { shut: shutDay === 1 ? 'Closed on Mondays from 2027' : 'Closed on Tuesdays' };
+        return [10, 16.5, 'guided'];
+      } },
+    { group: 'Sanssouci Park', name: 'Church of Peace', sub: 'Friedenskirche',
+      rule: function (d) {
+        var spring = d >= new Date(2027, 2, 15);
+        if (spring) return d.getDay() === 0 ? [12, 17, 'self'] : [11, 17, 'self'];
+        if (d.getDay() === 6) return [11.5, 16, 'self'];
+        if (d.getDay() === 0) return [12, 16, 'self'];
+        return { shut: 'Weekends only until 14 March' };
+      } },
+    { group: 'Sanssouci Park', name: 'Historic Windmill', sub: '5 euros',
+      rule: function (d) {
+        if (d.getMonth() === 11) return { shut: 'Closed in December' };
+        if (d.getDay() === 0 || d.getDay() === 6) return [10, 16, 'self'];
+        return { shut: 'Weekends only in winter' };
+      } },
+    { group: 'Sanssouci Park', name: 'Picture Gallery', sub: 'Bildergalerie', rule: function () { return { shut: 'Winter break, back in May' }; } },
+    { group: 'Sanssouci Park', name: 'New Chambers', sub: 'Neue Kammern', rule: function () { return { shut: 'Winter break, back in April' }; } },
+    { group: 'Sanssouci Park', name: 'Chinese House', sub: 'Chinesisches Haus', rule: function () { return { shut: 'Winter break, back in May' }; } },
+    { group: 'Sanssouci Park', name: 'Charlottenhof Villa', sub: 'Schloss Charlottenhof', rule: function () { return { shut: 'Winter break, back in May' }; } },
+    { group: 'Sanssouci Park', name: 'Orangery Palace', sub: 'Orangerieschloss', rule: function () { return { shut: 'Closed for restoration' }; } },
+    { group: 'Sanssouci Park', name: 'Roman Baths', sub: 'Römische Bäder', rule: function () { return { shut: 'Closed for restoration' }; } },
+    { group: 'New Garden and Pfingstberg', name: 'Marble House', sub: '8 euros, German tour', main: true,
+      rule: function (d) {
+        var k = key(d);
+        if (k === '2026-12-24' || k === '2026-12-25' || k === '2026-12-31') return { shut: 'Closed for the holidays' };
+        if (k === '2027-01-01') return [11, 16, 'guided'];
+        if (weekendLike(d)) return [10, 16, 'guided'];
+        return { shut: 'Saturdays and Sundays only' };
+      } },
+    { group: 'New Garden and Pfingstberg', name: 'Cecilienhof', sub: 'Conference site', rule: function () { return { shut: 'Closed for restoration' }; } },
+    { group: 'New Garden and Pfingstberg', name: 'Belvedere', sub: 'Pfingstberg, 6 euros',
+      rule: function (d) {
+        var m = d.getMonth();
+        if (m === 11 || m === 0 || m === 1) return { shut: 'Closed December to February' };
+        if (d.getDay() === 0 || d.getDay() === 6) return [10, 16, 'self'];
+        return { shut: 'Weekends only in November and March' };
+      } },
+    { group: 'Babelsberg', name: 'Babelsberg Palace', sub: 'Schloss Babelsberg', rule: function () { return { shut: 'Closed for restoration' }; } },
+    { group: 'In town after dark', name: 'Christmas market', sub: 'Luisenplatz to Bassinplatz', market: true,
+      rule: function (d) {
+        var k = key(d);
+        if (d < new Date(2026, 10, 23) || d > new Date(2026, 11, 27)) return { shut: 'Runs 23 November to 27 December' };
+        if (k === '2026-12-24') return { shut: 'Closed on Christmas Eve' };
+        if (k === '2026-12-25' || k === '2026-12-26') return [11, 18, 'market'];
+        var w = d.getDay();
+        return (w === 5 || w === 6) ? [11, 22, 'market'] : [11, 21, 'market'];
+      } }
+  ];
+
+  // Sunrise and sunset for Potsdam (about 52.4 N, 13.06 E), NOAA approximation, local clock time.
+  function sunTimes(d) {
+    var lat = 52.4 * Math.PI / 180, lon = 13.06;
+    var start = new Date(d.getFullYear(), 0, 0);
+    var n = Math.round((d - start) / 86400000);
+    var g = 2 * Math.PI / 365 * (n - 1);
+    var eq = 229.18 * (0.000075 + 0.001868 * Math.cos(g) - 0.032077 * Math.sin(g) - 0.014615 * Math.cos(2 * g) - 0.040849 * Math.sin(2 * g));
+    var decl = 0.006918 - 0.399912 * Math.cos(g) + 0.070257 * Math.sin(g) - 0.006758 * Math.cos(2 * g) + 0.000907 * Math.sin(2 * g) - 0.002697 * Math.cos(3 * g) + 0.00148 * Math.sin(3 * g);
+    var ha = Math.acos(Math.cos(90.833 * Math.PI / 180) / (Math.cos(lat) * Math.cos(decl)) - Math.tan(lat) * Math.tan(decl)) * 180 / Math.PI;
+    var noonUtc = 720 - 4 * lon - eq;
+    var offset = d >= new Date(2027, 2, 28) ? 2 : 1; // summer time starts 28 March 2027
+    return { rise: (noonUtc - 4 * ha) / 60 + offset, set: (noonUtc + 4 * ha) / 60 + offset };
+  }
+
+  function openPalaces(d) {
+    var n = 0;
+    SITES.forEach(function (s) { if (!s.market && Array.isArray(s.rule(d))) n++; });
+    return n;
+  }
+
+  function frameWidth(id) { var w = document.getElementById(id).parentNode.clientWidth - 24; return Math.max(300, Math.round(w)); }
+
+  var NS = 'http://www.w3.org/2000/svg';
+  function el(name, attrs, text) {
+    var e = document.createElementNS(NS, name);
+    for (var a in attrs) e.setAttribute(a, attrs[a]);
+    if (text != null) e.textContent = text;
+    return e;
+  }
+
+  var input = document.getElementById('pw-date');
+  var current = new Date(2026, 10, 14);
+
+  function setDate(d) {
+    if (d < START) d = new Date(START);
+    if (d > END) d = new Date(END);
+    current = d;
+    input.value = key(d);
+    render();
+  }
+
+  function drawSeason() {
+    var svg = document.getElementById('pw-season');
+    svg.textContent = '';
+    var days = Math.round((END - START) / 86400000) + 1;
+    var W = frameWidth('pw-season'), H = 92, left = 4, colW = (W - left * 2) / days, base = 62;
+    svg.setAttribute('viewBox', '0 0 ' + W + ' ' + H);
+    var maxN = 6;
+    for (var i = 0; i < days; i++) {
+      var d = new Date(2026, 10, 1 + i);
+      var n = openPalaces(d);
+      var h = 6 + (n / maxN) * 48;
+      var sel = key(d) === key(current);
+      var r = el('rect', { 'class': 'day', x: (left + i * colW).toFixed(2), y: (base - h).toFixed(2), width: Math.max(colW - 0.6, 1).toFixed(2), height: h.toFixed(2), rx: 1,
+        fill: sel ? '#c62828' : (n >= 4 ? '#1B5E20' : n >= 2 ? '#7CB342' : '#c9d3db'), 'data-day': key(d) });
+      r.appendChild(el('title', {}, d.getDate() + ' ' + MON[d.getMonth()] + ': ' + n + ' open'));
+      svg.appendChild(r);
+      if (d.getDate() === 1) {
+        svg.appendChild(el('line', { x1: left + i * colW, x2: left + i * colW, y1: base + 2, y2: base + 10, stroke: '#9fb0bf' }));
+        svg.appendChild(el('text', { 'class': 't-month', x: left + i * colW + 3, y: base + 20 }, MON[d.getMonth()]));
+      }
+    }
+  }
+
+  function drawBoard() {
+    var svg = document.getElementById('pw-chart');
+    svg.textContent = '';
+    var W = frameWidth('pw-chart'), narrow = W < 520, labelW = narrow ? 122 : 186, x0 = labelW, x1 = W - 6, h0 = 8, h1 = 22;
+    var rowH = 30, top = 26;
+    var groups = [];
+    SITES.forEach(function (s) { if (groups.indexOf(s.group) < 0) groups = groups.concat([s.group]); });
+    var H = top + SITES.length * rowH + groups.length * 18 + 10;
+    svg.setAttribute('viewBox', '0 0 ' + W + ' ' + H);
+    function X(t) { return x0 + (Math.max(h0, Math.min(h1, t)) - h0) / (h1 - h0) * (x1 - x0); }
+
+    var sun = sunTimes(current);
+    svg.appendChild(el('rect', { x: X(sun.rise), y: top - 6, width: X(sun.set) - X(sun.rise), height: H - top, fill: '#f6e7c8', rx: 4 }));
+    svg.appendChild(el('rect', { x: X(sun.set), y: top - 6, width: x1 - X(sun.set), height: H - top, fill: '#e3e8ef', rx: 4 }));
+    for (var t = h0; t <= h1; t += (narrow ? 4 : 2)) {
+      svg.appendChild(el('line', { x1: X(t), x2: X(t), y1: top - 6, y2: H - 4, stroke: '#ffffff', 'stroke-width': 1 }));
+      svg.appendChild(el('text', { 'class': 't-axis', x: X(t), y: 14 }, narrow ? String(t) : t + ':00'));
+    }
+    svg.appendChild(el('line', { x1: X(sun.set), x2: X(sun.set), y1: top - 10, y2: H - 4, stroke: '#a35a00', 'stroke-width': 1.5, 'stroke-dasharray': '4 3' }));
+    svg.appendChild(el('text', { 'class': 't-sun', x: X(sun.set) + 4, y: top + 2 }, 'sunset ' + hm(sun.set)));
+
+    var y = top;
+    var lastGroup = null;
+    SITES.forEach(function (s) {
+      if (s.group !== lastGroup) {
+        y += 4;
+        svg.appendChild(el('text', { 'class': 't-group', x: 4, y: y + 10 }, s.group));
+        y += 14;
+        lastGroup = s.group;
+      }
+      var r = s.rule(current);
+      svg.appendChild(el('text', { 'class': 't-name', x: 4, y: y + 13 }, s.name));
+      svg.appendChild(el('text', { 'class': 't-sub', x: 4, y: y + 25 }, s.sub));
+      if (Array.isArray(r)) {
+        var color = r[2] === 'market' ? '#7a5a8c' : r[2] === 'guided' ? '#3f6f95' : '#1B5E20';
+        svg.appendChild(el('rect', { x: X(r[0]), y: y + 5, width: X(r[1]) - X(r[0]), height: 18, rx: 6, fill: color }));
+        if (!s.market) svg.appendChild(el('line', { x1: X(r[1] - 0.5), x2: X(r[1] - 0.5), y1: y + 3, y2: y + 25, stroke: '#FFE600', 'stroke-width': 2 }));
+        var lbl = narrow ? hm(r[0]) + '-' + hm(r[1]) : hm(r[0]) + ' to ' + hm(r[1]);
+        var fits = X(r[1]) - X(r[0]) > lbl.length * 6 + 10;
+        var tx = el('text', { 'class': 't-bar', x: fits ? X(r[0]) + 5 : X(r[1]) + 5, y: y + 18 }, lbl);
+        if (!fits) tx.setAttribute('style', 'fill:#16212b');
+        svg.appendChild(tx);
+      } else {
+        svg.appendChild(el('line', { x1: x0, x2: x1, y1: y + 14, y2: y + 14, stroke: '#d3b9b3', 'stroke-dasharray': '2 4' }));
+        svg.appendChild(el('rect', { x: x0 + 4, y: y + 6, width: Math.min(x1 - x0 - 8, r.shut.length * 5.9 + 12), height: 16, rx: 5, fill: '#f7f9fb' }));
+        svg.appendChild(el('text', { 'class': 't-shut', x: x0 + 10, y: y + 18 }, r.shut));
+      }
+      y += rowH;
+    });
+  }
+
+  function summary() {
+    var open = SITES.filter(function (s) { return !s.market && Array.isArray(s.rule(current)); });
+    var sun = sunTimes(current);
+    var noteEl = document.getElementById('pw-note');
+    var label = DOW[current.getDay()] + ' ' + current.getDate() + ' ' + MON[current.getMonth()] + ' ' + current.getFullYear();
+    document.getElementById('pw-dayname').textContent = DOW[current.getDay()];
+    document.getElementById('pw-board-title').textContent = 'Hours on ' + label;
+    var names = open.map(function (s) { return s.name; });
+    var html;
+    if (!open.length) {
+      html = '<span class="big is-shut">No palace interior is open on this day.</span>The park itself stays open and free to walk, but every palace door is shut. Pick another day if you want to see a room.';
+    } else {
+      html = '<span class="big">' + open.length + ' of ' + SITES.filter(function (s) { return !s.market; }).length + ' palaces open</span>' +
+        '<b>Open:</b> ' + names.join(', ') + '.<br>' +
+        'The sun sets at <b>' + hm(sun.set) + '</b>. ';
+      var sans = SITES[0].rule(current);
+      if (Array.isArray(sans)) {
+        var lastIn = sans[1] - 0.5;
+        html += 'Last entry at Sanssouci Palace is <b>' + hm(lastIn) + '</b>' + (lastIn > sun.set ? ', after dark, so walk the terraces first.' : ', so see the park in daylight before your slot.');
+      } else {
+        html += 'Sanssouci Palace is shut, so plan the day around the palaces that are open.';
+      }
+    }
+    noteEl.innerHTML = html;
+
+    var a = SITES[0].rule(current), b = SITES[1].rule(current), c = SITES[10].rule(current);
+    var both = Array.isArray(a) && Array.isArray(b);
+    var t = document.getElementById('pw-ticket');
+    if (both) {
+      var singles = 28 + (Array.isArray(c) ? 8 : 0);
+      t.innerHTML = '<b>Ticket move:</b> Sanssouci and the New Palace are both open. The <b>sanssouci+ ticket at 22 euros</b> covers them' + (Array.isArray(c) ? ' and the Marble House' : '') + ' for the day, against ' + singles + ' euros in single tickets. Book it online with your Sanssouci time slot.';
+    } else if (Array.isArray(a)) {
+      t.innerHTML = '<b>Ticket move:</b> only Sanssouci Palace among the big two is open. A <b>single ticket at 14 euros</b> is enough; book the time slot ahead, the daily number is limited.';
+    } else if (Array.isArray(b)) {
+      t.innerHTML = '<b>Ticket move:</b> Sanssouci Palace is closed, the New Palace is open. Buy its <b>14 euro ticket</b> at the visitor centre for a German-language tour.';
+    } else {
+      t.innerHTML = '<b>Ticket move:</b> neither Sanssouci nor the New Palace opens on this day. Save your money for another date.';
+    }
+  }
+
+  function render() {
+    document.getElementById('pw-prev').disabled = key(current) === key(START);
+    document.getElementById('pw-next').disabled = key(current) === key(END);
+    drawSeason();
+    drawBoard();
+    summary();
+  }
+
+  input.addEventListener('change', function () {
+    var p = input.value.split('-');
+    if (p.length === 3) setDate(new Date(+p[0], +p[1] - 1, +p[2]));
+  });
+  document.getElementById('pw-prev').addEventListener('click', function () { setDate(new Date(current.getFullYear(), current.getMonth(), current.getDate() - 1)); });
+  document.getElementById('pw-next').addEventListener('click', function () { setDate(new Date(current.getFullYear(), current.getMonth(), current.getDate() + 1)); });
+  document.getElementById('pw-season').addEventListener('click', function (e) {
+    var k = e.target && e.target.getAttribute && e.target.getAttribute('data-day');
+    if (!k) return;
+    var p = k.split('-');
+    setDate(new Date(+p[0], +p[1] - 1, +p[2]));
+  });
+
+  var lastW = 0;
+  window.addEventListener('resize', function () { var w = frameWidth('pw-chart'); if (Math.abs(w - lastW) > 8) { lastW = w; render(); } });
+  render();
+  lastW = frameWidth('pw-chart');
+})();
+</script>
+<script src="../js/brand.js"></script>
+</body>
+</html>

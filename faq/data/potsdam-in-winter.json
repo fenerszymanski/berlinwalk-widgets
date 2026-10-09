@@ -1,0 +1,101 @@
+{
+  "version": 1,
+  "slug": "potsdam-in-winter",
+  "key": "potsdam-in-winter",
+  "config": {
+    "title": "Potsdam in Winter - FAQ",
+    "subtitle": "Which Potsdam palaces open from November to March, on which days, and how to plan a winter day.",
+    "items": [
+      {
+        "q": "Is Sanssouci Palace open in winter?",
+        "a": "Yes. From November to March Sanssouci Palace opens **Tuesday to Sunday, 10:00 to 16:30**, with the last entry at 16:00. It is closed on Mondays, on 24 and 25 December, and closes at 14:00 on 31 December. Entry is by **timed slot**, so book ahead."
+      },
+      {
+        "q": "Which Potsdam palaces are closed in winter?",
+        "a": "The **Chinese House**, the **Picture Gallery** and **Charlottenhof** close until May, and the **New Chambers** until April. **Cecilienhof**, the **Orangery**, the **Roman Baths** and **Babelsberg Palace** are closed for restoration regardless of the season."
+      },
+      {
+        "q": "Can I visit the New Palace in winter?",
+        "a": "Yes, from **10:00 to 16:30**, but from November to March only on a **guided tour in German**. It closes on Tuesdays in November and December and, from January 2027, on **Mondays**."
+      },
+      {
+        "q": "Is anything open in Potsdam on a Monday in winter?",
+        "a": "From January 2027 **no palace interior opens on a Monday**, because both Sanssouci Palace and the New Palace close that day. In November and December the New Palace is open on Mondays. The park itself is open and free every day."
+      },
+      {
+        "q": "What is open in Potsdam only at weekends in winter?",
+        "a": "The **Marble House** (Saturday and Sunday, 10:00 to 16:00), the **Church of Peace** until 14 March, the **Historic Windmill** (not in December) and the **Belvedere on Pfingstberg** (only in November and March)."
+      },
+      {
+        "q": "Is the sanssouci+ ticket worth it in winter?",
+        "a": "On a day when both Sanssouci Palace and the New Palace are open, yes: **22 euros** against **28 euros** for two single tickets, or 36 euros with the Marble House at a weekend. If only Sanssouci is open, the **14 euro** single ticket is enough."
+      },
+      {
+        "q": "When is the Christmas market in Potsdam?",
+        "a": "The **Potsdamer Weihnachtszauber** runs from **23 November to 27 December 2026** between Luisenplatz, Brandenburger Straße and Bassinplatz, closed on 24 December. The Bohemian market in Babelsberg runs from 27 November to 6 December."
+      }
+    ]
+  },
+  "schema": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Is Sanssouci Palace open in winter?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. From November to March Sanssouci Palace opens Tuesday to Sunday, 10:00 to 16:30, with the last entry at 16:00. It is closed on Mondays, on 24 and 25 December, and closes at 14:00 on 31 December. Entry is by timed slot, so book ahead."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Which Potsdam palaces are closed in winter?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The Chinese House, the Picture Gallery and Charlottenhof close until May, and the New Chambers until April. Cecilienhof, the Orangery, the Roman Baths and Babelsberg Palace are closed for restoration regardless of the season."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I visit the New Palace in winter?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, from 10:00 to 16:30, but from November to March only on a guided tour in German. It closes on Tuesdays in November and December and, from January 2027, on Mondays."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is anything open in Potsdam on a Monday in winter?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "From January 2027 no palace interior opens on a Monday, because both Sanssouci Palace and the New Palace close that day. In November and December the New Palace is open on Mondays. The park itself is open and free every day."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is open in Potsdam only at weekends in winter?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The Marble House (Saturday and Sunday, 10:00 to 16:00), the Church of Peace until 14 March, the Historic Windmill (not in December) and the Belvedere on Pfingstberg (only in November and March)."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is the sanssouci+ ticket worth it in winter?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "On a day when both Sanssouci Palace and the New Palace are open, yes: 22 euros against 28 euros for two single tickets, or 36 euros with the Marble House at a weekend. If only Sanssouci is open, the 14 euro single ticket is enough."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "When is the Christmas market in Potsdam?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The Potsdamer Weihnachtszauber runs from 23 November to 27 December 2026 between Luisenplatz, Brandenburger Straße and Bassinplatz, closed on 24 December. The Bohemian market in Babelsberg runs from 27 November to 6 December."
+        }
+      }
+    ]
+  }
+}
