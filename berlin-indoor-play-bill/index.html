@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Berlin Indoor Play Bill: What a Rainy Day Costs Your Family, Hall by Hall</title>
+<link rel="stylesheet" href="../css/brand.css">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #FFFFFF; color: #23261f; padding: 12px; }
+  .pb { border-radius: 20px; overflow: hidden; background: #fffdf5; border: 1px solid #ece5c9; }
+  .pb-head { padding: 16px 16px 12px; background: #1B5E20; color: #fff; }
+  .pb-eyebrow { font-size: 11px; font-weight: 800; letter-spacing: .09em; text-transform: uppercase; color: #FFE600; }
+  .pb-head h1 { font-size: 19px; line-height: 1.25; font-weight: 800; margin-top: 4px; }
+  .pb-head p { font-size: 12.5px; line-height: 1.5; color: #dfeedd; margin-top: 5px; }
+  .pb-controls { padding: 14px 16px 6px; display: grid; gap: 12px; }
+  .pb-row { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; }
+  .pb-lab { font-size: 11px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; color: #5b5f4f; }
+  .pb-date { font-family: inherit; font-size: 15px; font-weight: 700; padding: 8px 10px; border: 1.5px solid #b9b394; border-radius: 10px; background: #fff; color: #23261f; min-width: 0; }
+  .pb-daytag { font-size: 12px; font-weight: 800; padding: 5px 10px; border-radius: 999px; background: #e8f1e3; color: #1B5E20; }
+  .pb-daytag.is-peak { background: #FFE600; color: #123D18; }
+  .pb-time { display: grid; grid-template-columns: auto 1fr; gap: 4px 12px; align-items: center; }
+  .pb-clock { font-size: 26px; font-weight: 800; color: #1B5E20; font-variant-numeric: tabular-nums; min-width: 82px; }
+  .pb-range { width: 100%; accent-color: #1B5E20; height: 30px; }
+  .pb-ticks { grid-column: 2; display: flex; justify-content: space-between; font-size: 10px; color: #77796a; margin-top: -4px; }
+  .pb-fam { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 6px; }
+  .pb-step { background: #fff; border: 1px solid #e3dcbc; border-radius: 12px; padding: 7px 4px 6px; text-align: center; }
+  .pb-step span { display: block; font-size: 10.5px; font-weight: 700; color: #5b5f4f; line-height: 1.2; min-height: 26px; }
+  .pb-step .ctl { display: flex; align-items: center; justify-content: center; gap: 4px; margin-top: 3px; }
+  .pb-step button { font-family: inherit; width: 28px; height: 28px; border-radius: 8px; border: 1.5px solid #b9b394; background: #fffdf5; font-size: 16px; font-weight: 800; color: #1B5E20; cursor: pointer; line-height: 1; }
+  .pb-step button:disabled { opacity: .3; cursor: default; }
+  .pb-step b { font-size: 16px; font-weight: 800; min-width: 16px; display: inline-block; color: #23261f; }
+  .pb-date:focus-visible, .pb-range:focus-visible, .pb-step button:focus-visible { outline: 2px solid #c62828; outline-offset: 2px; }
+  .pb-board { padding: 8px 10px 0; }
+  .pb-board svg { display: block; width: 100%; height: auto; }
+  .t-name { font-size: 12px; font-weight: 800; fill: #23261f; }
+  .t-sub { font-size: 10px; fill: #6b6e5e; }
+  .t-axis { font-size: 10px; fill: #77796a; text-anchor: middle; }
+  .t-price { font-size: 15px; font-weight: 800; fill: #1B5E20; text-anchor: end; }
+  .t-price.is-off { fill: #9a9888; font-size: 11px; font-weight: 700; }
+  .t-rate { font-size: 10px; fill: #6b6e5e; text-anchor: end; }
+  .t-bar { font-size: 10px; font-weight: 700; fill: #123D18; }
+  .t-cursor { font-size: 10px; font-weight: 800; fill: #c62828; text-anchor: middle; }
+  .pb-verdict { margin: 10px 14px 0; padding: 12px 14px; border-radius: 14px; background: #FFE600; color: #123D18; font-size: 13.5px; line-height: 1.55; }
+  .pb-verdict b { font-weight: 800; color: #123D18; }
+  .pb-notes { margin: 10px 14px 0; display: grid; gap: 6px; }
+  .pb-notes p { font-size: 12.5px; line-height: 1.5; background: #fff; border: 1px solid #ece5c9; border-radius: 12px; padding: 9px 12px; color: #33362b; }
+  .pb-notes p b { color: #1B5E20; }
+  .pb-legend { display: flex; flex-wrap: wrap; gap: 6px 14px; padding: 10px 16px 0; font-size: 11px; color: #5b5f4f; }
+  .pb-legend i { display: inline-block; width: 14px; height: 10px; border-radius: 3px; margin-right: 5px; vertical-align: -1px; }
+  .pb-foot { padding: 10px 16px 14px; font-size: 11px; color: #6b6e5e; line-height: 1.5; }
+  @media (max-width: 520px) {
+    .pb-fam { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .pb-head h1 { font-size: 17px; }
+    .pb-clock { font-size: 22px; min-width: 70px; }
+  }
+</style>
+</head>
+<body>
+<div class="pb" id="pb">
+  <div class="pb-head">
+    <div class="pb-eyebrow">Berlin indoor play bill</div>
+    <h1>What a rainy afternoon costs your family, hall by hall</h1>
+    <p>Pick the day, slide to the time you will actually arrive, and set who is coming. Each row shows when the hall is open, how much play you get from your arrival, and the bill at the till.</p>
+  </div>
+
+  <div class="pb-controls">
+    <div class="pb-row">
+      <label class="pb-lab" for="pb-date">Day</label>
+      <input class="pb-date" type="date" id="pb-date" min="2026-10-10" max="2027-03-31">
+      <span class="pb-daytag" id="pb-daytag"></span>
+    </div>
+    <div class="pb-time">
+      <label class="pb-lab" for="pb-arrive" style="grid-column:1 / 3">You arrive at</label>
+      <output class="pb-clock" id="pb-clock" for="pb-arrive">15:00</output>
+      <input class="pb-range" type="range" id="pb-arrive" min="600" max="1110" step="15" value="900" aria-label="Arrival time">
+      <div class="pb-ticks"><span>10:00</span><span>12:00</span><span>14:00</span><span>16:00</span><span>18:30</span></div>
+    </div>
+    <div>
+      <div class="pb-lab" style="margin-bottom:6px">Who is coming</div>
+      <div class="pb-fam" id="pb-fam"></div>
+    </div>
+  </div>
+
+  <div class="pb-board"><svg id="pb-svg" role="img" aria-label="Opening hours and family price for six Berlin indoor play places"></svg></div>
+  <div class="pb-legend">
+    <span><i style="background:#cfe3c6"></i>open</span>
+    <span><i style="background:#FFE600;border:1px solid #c9b700"></i>your play time</span>
+    <span><i style="background:repeating-linear-gradient(45deg,#e7e3d2 0 3px,#f6f3e6 3px 6px)"></i>closed</span>
+    <span><i style="background:repeating-linear-gradient(45deg,#f2d5a8 0 3px,#fbefdc 3px 6px)"></i>hours not published yet</span>
+  </div>
+  <div class="pb-verdict" id="pb-verdict"></div>
+  <div class="pb-notes" id="pb-notes"></div>
+  <div class="pb-foot">Prices and hours from each venue's own website, checked on 10 October 2026, for the autumn and winter season up to 31 March 2027. Tommys prices are its online prices; at the till they are 5 euros higher. Travel times are from S+U Alexanderplatz on a Saturday morning. Christmas hours are only shown where a venue has published them.</div>
+</div>
+
+<script>
+(function () {
+  var FERIEN = [['2026-10-19', '2026-10-31'], ['2026-12-23', '2027-01-02'], ['2027-02-01', '2027-02-06'], ['2027-03-22', '2027-04-02']];
+  var HOLIDAYS = { '2026-12-25': 1, '2026-12-26': 1, '2027-01-01': 1, '2027-03-08': 1, '2027-03-26': 1 };
+  var XMAS = { '2026-12-24': 1, '2026-12-25': 1, '2026-12-26': 1, '2026-12-31': 1, '2027-01-01': 1 };
+  var DAYS = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+
+  var fam = { adult: 2, baby: 0, one: 0, two: 1, kid: 1 };
+  var FAM_LABELS = [['adult', 'Adults', 1, 4], ['baby', 'Baby under 1', 0, 3], ['one', '1 year old', 0, 3], ['two', '2 years old', 0, 3], ['kid', 'Kids 3 to 12', 0, 5]];
+
+  function key(d) { return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0'); }
+  function inFerien(k) { for (var i = 0; i < FERIEN.length; i++) { if (k >= FERIEN[i][0] && k <= FERIEN[i][1]) return true; } return false; }
+  function hm(m) { return String(Math.floor(m / 60)).padStart(2, '0') + ':' + String(m % 60).padStart(2, '0'); }
+  function eur(x) { return '€' + x.toFixed(2); }
+  function H(h, m) { return h * 60 + (m || 0); }
+
+  // Each venue returns {sessions:[[open, close, lastEntry]], unknown, note} for a day context, and a price function.
+  var VENUES = [
+    {
+      id: 'labyrinth', name: 'Labyrinth Kindermuseum', sub: 'Wedding, U8, 17 min',
+      hours: function (c) {
+        if (XMAS[c.k]) return { unknown: true };
+        if (c.k === '2026-10-31') return { sessions: [[H(11), H(19), H(18)]] };
+        var herbst = c.k >= '2026-10-19' && c.k <= '2026-11-01';
+        if (herbst) return { sessions: c.dow === 0 || c.dow === 6 ? [[H(11), H(18), H(17)]] : [[H(10), H(18), H(17)]] };
+        if (c.dow === 5) return { sessions: [[H(13), H(18), H(17)]], soft: c.ferien };
+        if (c.dow === 0 || c.dow === 6) return { sessions: [[H(11), H(18), H(17)]], soft: c.ferien };
+        return { sessions: [], soft: c.ferien };
+      },
+      price: function (c, f, entry) {
+        var n = f.adult + f.two + f.kid;
+        if (c.dow === 5 && !c.ferien && entry >= H(13)) return { sum: 5 * n, why: 'Freutag: €5 a head on Fridays outside the school holidays' };
+        var fam = n <= 4 ? 23 : 23 + 5 * (n - 4);
+        return fam < 7 * n ? { sum: fam, why: 'family ticket' } : { sum: 7 * n, why: '€7 a head' };
+      }
+    },
+    {
+      id: 'machmit', name: 'MACHmit! Museum', sub: 'Prenzlauer Berg, tram M2, 12 min',
+      hours: function (c) {
+        if (XMAS[c.k]) return { unknown: true };
+        if (c.k >= '2026-10-19' && c.k <= '2026-10-31') return { sessions: c.dow === 1 ? [] : [[H(10), H(18), H(18)]] };
+        if (c.dow >= 3 && c.dow <= 5) return { sessions: [[H(14), H(18), H(18)]], soft: c.ferien };
+        if (c.dow === 0 || c.dow === 6) return { sessions: [[H(10), H(18), H(18)]], soft: c.ferien };
+        return { sessions: [], soft: c.ferien };
+      },
+      price: function (c, f) {
+        var n = f.adult + f.two + f.kid;
+        var fam = n <= 5 ? 34 : 34 + 9 * (n - 5);
+        return fam < 9 * n ? { sum: fam, why: 'family ticket' } : { sum: 9 * n, why: '€9 a head' };
+      }
+    },
+    {
+      id: 'jolo', name: "JOLOs Kinderwelt", sub: 'Kreuzberg, U6, 25 min',
+      hours: function (c) {
+        if (XMAS[c.k]) return { unknown: true };
+        var peakDay = c.ferien || c.holiday || c.dow === 0 || c.dow === 6;
+        if (peakDay) return { sessions: [[H(10), H(14), H(14)], [H(15), H(19), H(19)]] };
+        if (c.dow >= 3 && c.dow <= 5) return { sessions: [[H(14), H(19), H(19)]] };
+        return { sessions: [] };
+      },
+      price: function (c, f) {
+        var hi = c.ferien || c.holiday || c.dow === 5 || c.dow === 6 || c.dow === 0;
+        var kid = hi ? 14 : 11, small = hi ? 9 : 8, adult = hi ? 9 : 8;
+        return { sum: kid * f.kid + small * (f.baby + f.one + f.two) + adult * f.adult, why: hi ? 'Friday, weekend and holiday price' : 'Wednesday and Thursday price' };
+      }
+    },
+    {
+      id: 'bimboom', name: 'Bim & Boom', sub: 'Marzahn, S7, 29 min',
+      hours: function (c) {
+        if (XMAS[c.k]) return { unknown: true };
+        if (c.ferien || c.holiday || c.dow === 0 || c.dow === 6) return { sessions: [[H(10), H(19), H(19)]] };
+        if (c.dow >= 2 && c.dow <= 5) return { sessions: [[H(14), H(19), H(19)]] };
+        return { sessions: [] };
+      },
+      price: function (c, f, entry) {
+        var hi = c.ferien || c.holiday || c.dow === 0 || c.dow === 6;
+        var sum = (hi ? 14.5 : 10.5) * f.kid + 6.5 * (f.one + f.two) + (hi ? 10.5 : 7.5) * f.adult;
+        if (!c.holiday && c.dow >= 2 && c.dow <= 5 && entry >= H(17)) return { sum: sum / 2, why: 'half price from 17:00, Tuesday to Friday' };
+        return { sum: sum, why: hi ? 'weekend and holiday price' : 'weekday price' };
+      }
+    },
+    {
+      id: 'bamboo', name: 'Bambooland', sub: 'Spandau, U7, 38 min',
+      hours: function (c) {
+        if (c.k === '2026-12-24' || c.k === '2026-12-25' || c.k === '2026-12-26' || c.k === '2027-01-01') return { sessions: [] };
+        if (c.k === '2026-12-31') return { sessions: [[H(10), H(16), H(16)]] };
+        if (c.dow === 6) return { sessions: [[H(10), H(20), H(20)]] };
+        if (c.dow === 0 || c.holiday || c.ferien) return { sessions: [[H(10), H(19), H(19)]] };
+        return { sessions: [[H(12), H(19), H(19)]] };
+      },
+      price: function (c, f, entry, play) {
+        var hi = c.dow === 5 || c.dow === 6 || c.dow === 0;
+        var day = hi ? 15 : 10.8, rate = hi ? 1.25 : 0.9;
+        var kids = f.one + f.two + f.kid;
+        var each = day, why = hi ? 'Friday to Sunday price' : 'Monday to Thursday price';
+        if (play < 110) { each = Math.min(day, Math.ceil(play / 10) * rate); why = 'short stay: kids pay per started 10 minutes'; }
+        return { sum: each * kids + (hi ? 10 : 7.5) * f.adult, why: why };
+      }
+    },
+    {
+      id: 'tommys', name: 'Tommys Tobewelt', sub: 'Weißensee, tram M4, 35 min',
+      hours: function (c) {
+        var two = [[H(10), H(14), H(14)], [H(15), H(19), H(19)]];
+        if (c.k === '2026-12-24' || c.k === '2026-12-25') return { sessions: [] };
+        if (c.k === '2026-12-26' || c.k === '2026-12-31') return { sessions: [[H(10), H(18), H(18)]] };
+        if (c.k === '2027-01-01') return { sessions: [[H(12), H(18), H(18)]] };
+        if (c.ferien || c.holiday || c.dow === 0 || c.dow === 6) return { sessions: two };
+        return { sessions: [[H(14), H(19), H(19)]] };
+      },
+      price: function (c, f) {
+        var hi = c.ferien || c.holiday || c.dow === 5 || c.dow === 6 || c.dow === 0;
+        var crawl = f.baby + f.one;
+        var coveredAdults = Math.min(crawl, f.adult);
+        var sum = (hi ? 12 : 10) * crawl + (hi ? 13 : 11) * (f.two + f.kid) + (hi ? 11 : 9) * (f.adult - coveredAdults);
+        return { sum: sum, why: (hi ? 'Friday to Sunday and holiday' : 'Monday to Thursday') + ' online price' };
+      }
+    }
+  ];
+
+  var dateEl = document.getElementById('pb-date');
+  var rangeEl = document.getElementById('pb-arrive');
+  var clockEl = document.getElementById('pb-clock');
+  var current = new Date();
+  current.setHours(12, 0, 0, 0);
+  var MIN = new Date(2026, 9, 10), MAX = new Date(2027, 2, 31);
+  if (current < MIN) current = new Date(MIN);
+  if (current > MAX) current = new Date(MAX);
+  dateEl.value = key(current);
+
+  function ctx() {
+    var k = key(current);
+    return { k: k, dow: current.getDay(), ferien: inFerien(k), holiday: !!HOLIDAYS[k] };
+  }
+
+  function buildFamily() {
+    var box = document.getElementById('pb-fam');
+    box.innerHTML = FAM_LABELS.map(function (r) {
+      return '<div class="pb-step"><span>' + r[1] + '</span><div class="ctl">' +
+        '<button type="button" data-k="' + r[0] + '" data-d="-1" aria-label="Fewer: ' + r[1] + '">−</button>' +
+        '<b id="pb-n-' + r[0] + '">' + fam[r[0]] + '</b>' +
+        '<button type="button" data-k="' + r[0] + '" data-d="1" aria-label="More: ' + r[1] + '">+</button></div></div>';
+    }).join('');
+    box.addEventListener('click', function (e) {
+      var b = e.target.closest && e.target.closest('button');
+      if (!b) return;
+      var k = b.getAttribute('data-k'), d = +b.getAttribute('data-d');
+      var r = FAM_LABELS.filter(function (x) { return x[0] === k; })[0];
+      fam[k] = Math.max(r[2], Math.min(r[3], fam[k] + d));
+      render();
+    });
+  }
+
+  function syncFamily() {
+    FAM_LABELS.forEach(function (r) {
+      document.getElementById('pb-n-' + r[0]).textContent = fam[r[0]];
+      document.querySelector('button[data-k="' + r[0] + '"][data-d="-1"]').disabled = fam[r[0]] <= r[2];
+      document.querySelector('button[data-k="' + r[0] + '"][data-d="1"]').disabled = fam[r[0]] >= r[3];
+    });
+  }
+
+  function evaluate(v, c, arrive) {
+    var h = v.hours(c);
+    if (h.unknown) return { state: 'unknown', h: h };
+    var s = h.sessions || [];
+    if (!s.length) return { state: 'closed', h: h };
+    for (var i = 0; i < s.length; i++) {
+      var open = s[i][0], close = s[i][1], last = s[i][2];
+      if (arrive <= last) {
+        var entry = Math.max(arrive, open);
+        var play = close - entry;
+        if (play <= 0) continue;
+        var p = v.price(c, fam, entry, play);
+        return { state: 'open', h: h, entry: entry, close: close, play: play, wait: entry - arrive, price: p };
+      }
+    }
+    return { state: 'late', h: h };
+  }
+
+  function frameWidth() { var el = document.getElementById('pb-svg'); return Math.max(300, Math.round(el.getBoundingClientRect().width || 600)); }
+
+  function draw(c, arrive, results) {
+    var W = frameWidth();
+    var narrow = W < 560;
+    var padL = narrow ? 18 : 196, padR = narrow ? 18 : 96;
+    var rowH = narrow ? 62 : 44, top = 22;
+    var trackTop = narrow ? 30 : 12;
+    var t0 = H(10), t1 = H(20);
+    var x = function (m) { return padL + (m - t0) / (t1 - t0) * (W - padL - padR); };
+    var Hgt = top + rowH * VENUES.length + 8;
+    var out = '<defs>' +
+      '<pattern id="pb-shut" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="6" height="6" fill="#f6f3e6"/><rect width="3" height="6" fill="#e7e3d2"/></pattern>' +
+      '<pattern id="pb-unk" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="6" height="6" fill="#fbefdc"/><rect width="3" height="6" fill="#f2d5a8"/></pattern></defs>';
+    for (var hr = 10; hr <= 20; hr += 2) {
+      out += '<line x1="' + x(H(hr)) + '" x2="' + x(H(hr)) + '" y1="' + (top - 6) + '" y2="' + (Hgt - 6) + '" stroke="#ece5c9" stroke-width="1"/>';
+      out += '<text class="t-axis" x="' + x(H(hr)) + '" y="' + (top - 9) + '">' + hr + ':00</text>';
+    }
+    results.forEach(function (r, i) {
+      var v = r.v, y = top + i * rowH, ty = y + trackTop, th = 18;
+      if (narrow) {
+        out += '<text class="t-name" x="8" y="' + (y + 13) + '">' + v.name + '</text>';
+        out += '<text class="t-sub" x="8" y="' + (y + 25) + '">' + v.sub + '</text>';
+      } else {
+        out += '<text class="t-name" x="8" y="' + (y + 22) + '">' + v.name + '</text>';
+        out += '<text class="t-sub" x="8" y="' + (y + 34) + '">' + v.sub + '</text>';
+      }
+      out += '<rect x="' + x(t0) + '" y="' + ty + '" width="' + (x(t1) - x(t0)) + '" height="' + th + '" rx="5" fill="url(#' + (r.e.state === 'unknown' ? 'pb-unk' : 'pb-shut') + ')"/>';
+      (r.e.h.sessions || []).forEach(function (s) {
+        out += '<rect x="' + x(s[0]) + '" y="' + ty + '" width="' + (x(s[1]) - x(s[0])) + '" height="' + th + '" rx="5" fill="#cfe3c6"/>';
+      });
+      if (r.e.state === 'open') {
+        out += '<rect x="' + x(r.e.entry) + '" y="' + (ty + 2) + '" width="' + Math.max(2, x(r.e.close) - x(r.e.entry)) + '" height="' + (th - 4) + '" rx="4" fill="#FFE600" stroke="#c9b700" stroke-width="1"/>';
+        var lbl = Math.floor(r.e.play / 60) + 'h' + (r.e.play % 60 ? String(r.e.play % 60).padStart(2, '0') : '') + ' of play';
+        if (x(r.e.close) - x(r.e.entry) > 70) out += '<text class="t-bar" x="' + (x(r.e.entry) + 6) + '" y="' + (ty + 13) + '">' + lbl + '</text>';
+      }
+      var px = W - 6;
+      var py = narrow ? y + 13 : y + 24;
+      if (r.e.state === 'open') {
+        out += '<text class="t-price" x="' + px + '" y="' + py + '">' + eur(r.e.price.sum) + '</text>';
+        out += '<text class="t-rate" x="' + px + '" y="' + (py + 12) + '">' + eur(r.e.price.sum / (r.e.play / 60)) + ' an hour</text>';
+      } else {
+        var word = r.e.state === 'unknown' ? 'check hours' : r.e.state === 'late' ? 'too late' : 'closed';
+        out += '<text class="t-price is-off" x="' + px + '" y="' + py + '">' + word + '</text>';
+      }
+    });
+    var cx = x(Math.min(arrive, t1));
+    out += '<line x1="' + cx + '" x2="' + cx + '" y1="' + (top - 2) + '" y2="' + (Hgt - 6) + '" stroke="#c62828" stroke-width="2" stroke-dasharray="4 3"/>';
+    out += '<circle cx="' + cx + '" cy="' + (top - 2) + '" r="4" fill="#c62828"/>';
+    var svg = document.getElementById('pb-svg');
+    svg.setAttribute('viewBox', '0 0 ' + W + ' ' + Hgt);
+    svg.innerHTML = out;
+  }
+
+  function render() {
+    var c = ctx();
+    var arrive = +rangeEl.value;
+    clockEl.textContent = hm(arrive);
+    var peak = c.ferien || c.holiday || c.dow === 0 || c.dow === 6;
+    var tag = DAYS[c.dow] + (c.holiday ? ', public holiday' : '') + (c.ferien ? ', school holidays' : '');
+    var dt = document.getElementById('pb-daytag');
+    dt.textContent = tag + (peak ? ': peak prices in most halls' : c.dow === 5 ? ': weekend prices at JOLOs, Bambooland and Tommys' : ': weekday prices');
+    dt.className = 'pb-daytag' + (peak ? ' is-peak' : '');
+    syncFamily();
+
+    var results = VENUES.map(function (v) { return { v: v, e: evaluate(v, c, arrive) }; });
+    draw(c, arrive, results);
+
+    var open = results.filter(function (r) { return r.e.state === 'open' && r.e.wait <= 30; });
+    var verdict = document.getElementById('pb-verdict');
+    if (!open.length) {
+      verdict.innerHTML = results.some(function (r) { return r.e.state === 'unknown'; }) ? '<b>Holiday hours are still missing</b> for some places on this date. Call ahead, or pick a day either side.' : '<b>Nothing fits that arrival time.</b> Slide earlier, or pick another day: on a normal Monday only Bambooland and Tommys Tobewelt open, and both shut at 19:00.';
+    } else {
+      var cheap = open.slice().sort(function (a, b) { return a.e.price.sum - b.e.price.sum; })[0];
+      var value = open.slice().sort(function (a, b) { return a.e.price.sum / a.e.play - b.e.price.sum / b.e.play; })[0];
+      var dear = open.slice().sort(function (a, b) { return b.e.price.sum - a.e.price.sum; })[0];
+      var html = '<b>Cheapest from ' + hm(arrive) + ': ' + cheap.v.name + ', ' + eur(cheap.e.price.sum) + '</b> for ' + Math.floor(cheap.e.play / 60) + 'h' + (cheap.e.play % 60 ? String(cheap.e.play % 60).padStart(2, '0') : '') + ' (' + cheap.e.price.why + ').';
+      if (value !== cheap) html += ' Most play per euro: <b>' + value.v.name + '</b> at ' + eur(value.e.price.sum / (value.e.play / 60)) + ' an hour.';
+      if (dear !== cheap) html += ' The same visit at ' + dear.v.name + ' costs ' + eur(dear.e.price.sum) + '.';
+      verdict.innerHTML = html;
+    }
+
+    var notes = [];
+    var j = results.filter(function (r) { return r.v.id === 'jolo'; })[0];
+    if (j.e.state === 'open' && j.e.h.sessions.length > 1) notes[notes.length] = '<b>JOLOs splits the day</b> into 10:00 to 14:00 and 15:00 to 19:00. You come for one half, and outside food costs a €50 fee.';
+    var bb = results.filter(function (r) { return r.v.id === 'bimboom'; })[0];
+    if (bb.e.state === 'open' && /half price/.test(bb.e.price.why)) notes[notes.length] = '<b>Bim & Boom halves its entry from 17:00</b> on Tuesdays to Fridays. Two hours before closing is plenty for under-fives.';
+    var bm = results.filter(function (r) { return r.v.id === 'bamboo'; })[0];
+    if (bm.e.state === 'open' && /short stay/.test(bm.e.price.why)) notes[notes.length] = '<b>Bambooland charges kids by the 10 minutes</b> when the visit is under 110 minutes, so a late arrival is cheaper than the day ticket.';
+    var ty = results.filter(function (r) { return r.v.id === 'tommys'; })[0];
+    if (ty.e.state === 'open' && (c.ferien || c.dow === 0 || c.dow === 6 || c.dow === 5)) notes[notes.length] = '<b>Tommys asks for online tickets</b> on weekends and in the holidays because it fills up; the till price is 5 euros higher.';
+    if (c.ferien) notes[notes.length] = '<b>School holidays count as weekends</b> at JOLOs, Bim & Boom and Tommys, so a Tuesday in the Herbstferien costs Saturday money.';
+    if (results.some(function (r) { return r.e.h.soft; })) notes[notes.length] = '<b>Museum holiday hours:</b> MACHmit! and Labyrinth had not published hours for these holidays when I checked, so the board shows their normal week.';
+    if (fam.kid + fam.two + fam.one + fam.baby === 0) notes[notes.length] = '<b>No children selected.</b> Every hall here needs a child with you; add one to see a real bill.';
+    notes[notes.length] = '<b>Bring socks.</b> The four halls and the Labyrinth ban street shoes on the play floor, for adults too at JOLOs, Bambooland and the Labyrinth. The Labyrinth sells stopper socks for €6.';
+    document.getElementById('pb-notes').innerHTML = notes.map(function (n) { return '<p>' + n + '</p>'; }).join('');
+  }
+
+  dateEl.addEventListener('change', function () {
+    var p = dateEl.value.split('-');
+    if (p.length !== 3) return;
+    var d = new Date(+p[0], +p[1] - 1, +p[2], 12);
+    if (d < MIN) d = new Date(MIN);
+    if (d > MAX) d = new Date(MAX);
+    current = d;
+    dateEl.value = key(current);
+    render();
+  });
+  rangeEl.addEventListener('input', render);
+
+  buildFamily();
+  var lastW = 0;
+  window.addEventListener('resize', function () { var w = frameWidth(); if (Math.abs(w - lastW) > 8) { lastW = w; render(); } });
+  render();
+  lastW = frameWidth();
+})();
+</script>
+<script src="../js/brand.js"></script>
+</body>
+</html>

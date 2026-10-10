@@ -1,0 +1,89 @@
+{
+  "version": 1,
+  "slug": "indoor-playgrounds-in-berlin",
+  "key": "indoor-playgrounds-in-berlin",
+  "config": {
+    "title": "Indoor Playgrounds in Berlin - FAQ",
+    "subtitle": "What Berlin's indoor playgrounds and children's museums cost, when they open, and how to pay less.",
+    "items": [
+      {
+        "q": "What are the best indoor playgrounds in Berlin?",
+        "a": "The four big halls are **JOLOs Kinderwelt** in Kreuzberg, **Bambooland** in Spandau, **Bim & Boom** in Marzahn and **Tommys Tobewelt** in Weißensee. Calmer and closer to the centre are the **MACHmit! Museum** in Prenzlauer Berg and the **Labyrinth Kindermuseum** in Wedding."
+      },
+      {
+        "q": "How much does an indoor playground cost in Berlin?",
+        "a": "Children pay about **10.50 to 15 euros** at the big halls and adults **7.50 to 11 euros**. One Saturday afternoon for two adults, a five-year-old and a two-year-old cost between **41 and 50 euros** in the halls, **34 euros** at MACHmit! and **23 euros** at the Labyrinth when checked on 10 October 2026."
+      },
+      {
+        "q": "Do adults have to pay at Berlin indoor playgrounds?",
+        "a": "Yes, at all four big halls. JOLOs charges adults **8 or 9 euros**, Bambooland **7.50 or 10**, Bim & Boom **7.50 or 10.50** and Tommys **9 or 11** online. The two museums sell **family tickets** that cover the adults."
+      },
+      {
+        "q": "Are Berlin indoor playgrounds more expensive in the school holidays?",
+        "a": "At **JOLOs, Bim & Boom and Tommys** every school holiday day costs the weekend price. Bambooland's price list goes by weekday only. The Herbstferien run from **19 to 31 October 2026**."
+      },
+      {
+        "q": "Which indoor playground in Berlin is open on Monday?",
+        "a": "Outside the school holidays only **Bambooland**, from 12:00 in the winter months, and **Tommys Tobewelt**, from 14:00. JOLOs, Bim & Boom and both museums are closed on a normal Monday."
+      },
+      {
+        "q": "How can I pay less at a Berlin indoor playground?",
+        "a": "Go to **Bim & Boom after 17:00** on a Tuesday to Friday for half price, use the **Labyrinth's 5-euro Freutag** on Fridays outside the holidays, keep a Bambooland visit **under 110 minutes**, and buy Tommys tickets **online**, which saves 5 euros a ticket."
+      }
+    ]
+  },
+  "schema": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What are the best indoor playgrounds in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The four big halls are JOLOs Kinderwelt in Kreuzberg, Bambooland in Spandau, Bim & Boom in Marzahn and Tommys Tobewelt in Weißensee. Calmer and closer to the centre are the MACHmit! Museum in Prenzlauer Berg and the Labyrinth Kindermuseum in Wedding."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How much does an indoor playground cost in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Children pay about 10.50 to 15 euros at the big halls and adults 7.50 to 11 euros. One Saturday afternoon for two adults, a five-year-old and a two-year-old cost between 41 and 50 euros in the halls, 34 euros at MACHmit! and 23 euros at the Labyrinth when checked on 10 October 2026."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Do adults have to pay at Berlin indoor playgrounds?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, at all four big halls. JOLOs charges adults 8 or 9 euros, Bambooland 7.50 or 10, Bim & Boom 7.50 or 10.50 and Tommys 9 or 11 online. The two museums sell family tickets that cover the adults."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Are Berlin indoor playgrounds more expensive in the school holidays?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "At JOLOs, Bim & Boom and Tommys every school holiday day costs the weekend price. Bambooland's price list goes by weekday only. The Herbstferien run from 19 to 31 October 2026."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Which indoor playground in Berlin is open on Monday?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Outside the school holidays only Bambooland, from 12:00 in the winter months, and Tommys Tobewelt, from 14:00. JOLOs, Bim & Boom and both museums are closed on a normal Monday."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How can I pay less at a Berlin indoor playground?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Go to Bim & Boom after 17:00 on a Tuesday to Friday for half price, use the Labyrinth's 5-euro Freutag on Fridays outside the holidays, keep a Bambooland visit under 110 minutes, and buy Tommys tickets online, which saves 5 euros a ticket."
+        }
+      }
+    ]
+  }
+}
