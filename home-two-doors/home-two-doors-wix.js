@@ -27,23 +27,41 @@
   script.onload = () => reconcile();
   document.head.appendChild(script);
   let mounted = null;
+  let layout = null;
   let component = null;
+  function setClass(node, name, active) {
+    if (node && node.classList.contains(name) !== active) node.classList.toggle(name, active);
+  }
+  function mountIntact() {
+    return mounted?.isConnected && component?.parentElement === mounted
+      && mounted.parentElement === layout
+      && mounted.classList.contains('bw-two-doors-mounted')
+      && layout.classList.contains('bw-two-doors-layout')
+      && document.documentElement.classList.contains('bw-two-doors-active');
+  }
+  function clearMount() {
+    setClass(layout, 'bw-two-doors-layout', false);
+    setClass(mounted, 'bw-two-doors-mounted', false);
+    mounted = null;
+    layout = null;
+  }
   function reconcile() {
-    const isHome = /^\/$/.test(location.pathname);
+    const isHome = location.pathname === '/';
     if (!isHome) {
-      document.documentElement.classList.remove('bw-two-doors-active');
-      if (mounted) {
-        mounted.parentElement?.classList.remove('bw-two-doors-layout');
-        mounted.classList.remove('bw-two-doors-mounted');
-        mounted.querySelector('bw-home-two-doors')?.remove();
-        mounted = null;
-      }
+      setClass(document.documentElement, 'bw-two-doors-active', false);
+      component?.remove();
+      clearMount();
       return;
     }
     if (!cssReady || !customElements.get('bw-home-two-doors')) return;
+    if (mountIntact()) return;
     const main = document.getElementById('PAGE_SECTIONSc1dmp');
     if (!main || !main.parentElement.querySelector('#comp-kbgakxea') || !main.querySelector('bw-hero-home')) return;
-    if (!main.querySelector('bw-home-two-doors')) {
+    if (mounted !== main || layout !== main.parentElement) clearMount();
+    const existing = main.querySelector('bw-home-two-doors');
+    if (existing) {
+      component = existing;
+    } else {
       // Reuse the rendered node when Wix hydration replaces the container, so
       // the hero is not rebuilt (second LCP paint, refetched reviews/dates).
       if (!component) {
@@ -52,17 +70,25 @@
       }
       main.prepend(component);
     }
-    main.classList.add('bw-two-doors-mounted');
-    document.documentElement.classList.add('bw-two-doors-active');
-    main.parentElement.classList.add('bw-two-doors-layout');
+    setClass(main, 'bw-two-doors-mounted', true);
+    setClass(document.documentElement, 'bw-two-doors-active', true);
+    setClass(main.parentElement, 'bw-two-doors-layout', true);
     mounted = main;
+    layout = main.parentElement;
   }
   let scheduled = false;
   new MutationObserver(() => {
+    // Reviews, audio controls and price text change inside the mounted page.
+    // They cannot affect its placement: avoid re-querying the Wix shell or
+    // rewriting its classes for every such change (including our own mount).
+    if (location.pathname === '/') {
+      if (!cssReady || !customElements.get('bw-home-two-doors') || mountIntact()) return;
+    } else if (!mounted) return;
     if (scheduled) return;
     scheduled = true;
     requestAnimationFrame(() => { scheduled = false; reconcile(); });
   }).observe(document.documentElement, { childList:true, subtree:true });
   window.addEventListener('popstate', reconcile);
+  customElements.whenDefined('bw-home-two-doors').then(reconcile);
   reconcile();
 })();
