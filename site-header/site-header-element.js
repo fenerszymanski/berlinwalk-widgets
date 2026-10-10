@@ -11,7 +11,7 @@ const BW_HEADER_MONO_URL = new URL('../brand/fonts/editorial-v2/IBMPlexMono-Semi
 const BW_HEADER_MENU_FONT_URL = new URL('../home-two-doors/assets/fonts/Fraunces-Variable-latin.woff2', BW_HEADER_SCRIPT_URL).href;
 // Berlin Then and Now (service 145cb27e). The legacy booking path stays
 // reachable for guests who booked before 30 September, but nothing links to it.
-const BW_HEADER_BUILD = 'site-header-tour-hub-20261010';
+const BW_HEADER_BUILD = 'site-header-tour-hub-20261010-r2';
 const BW_HEADER_BOOKING_URL = 'https://www.walkofberlin.com/book-berlin-walking-tour/berlin-then-and-now';
 const BW_HEADER_TOUR_FACTS = ['about 2.5 hours', 'max 10 people', '€25']
   .map((fact) => `<span class="bw-header-fact">${fact}</span>`)
@@ -68,6 +68,56 @@ let BW_HEADER_ACTIVE_INSTANCE = null;
 let BW_HEADER_RECONCILE_FRAME = 0;
 let BW_HEADER_INSTANCE_SEQUENCE = 0;
 let BW_HEADER_SCROLL_LOCK_OWNER = null;
+
+// The All Tours content mounts after Wix. Wait for its real mobile card,
+// since the format-heading anchor itself uses display:contents on phones.
+function bwHeaderScrollToVirtualTours() {
+  if (location.pathname.replace(/\/$/, '') !== '/all-tours' || location.hash !== '#tour-virtual') return;
+  let observer, timeout, scheduled = false;
+  const cleanup = () => {
+    observer?.disconnect();
+    clearTimeout(timeout);
+    document.removeEventListener('load', attempt, true);
+  };
+  const attempt = () => {
+    const root = document.getElementById('bw-all-tours-root');
+    const heading = root?.querySelector('#tour-virtual');
+    const stylesheet = [...document.querySelectorAll('link[rel="stylesheet"]')]
+      .find(link => link.href.includes('/all-tours/assets/'));
+    if (!heading || (stylesheet && !stylesheet.sheet) || scheduled) return;
+    const target = getComputedStyle(heading).display === 'contents' ? heading.closest('article') : heading;
+    if (!target || target.getBoundingClientRect().height < 2) return;
+    scheduled = true;
+    cleanup();
+    requestAnimationFrame(() => requestAnimationFrame(() => {
+      const headerBottom = Math.max(0, ...[...document.querySelectorAll('.bw-header-main')]
+        .filter(el => el.getBoundingClientRect().height > 0).map(el => el.getBoundingClientRect().bottom));
+      window.scrollTo({ top: Math.max(0, scrollY + target.getBoundingClientRect().top - headerBottom - 16), behavior: 'instant' });
+      const title = heading.querySelector('h2');
+      if (title) { title.setAttribute('tabindex', '-1'); title.focus({ preventScroll: true }); }
+    }));
+  };
+  observer = new MutationObserver(attempt);
+  observer.observe(document.documentElement, { childList: true, subtree: true });
+  document.addEventListener('load', attempt, true);
+  timeout = setTimeout(cleanup, 20000);
+  attempt();
+}
+
+function bwHeaderNavigateTourLink(event, link) {
+  if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey || event.button !== 0) return;
+  event.preventDefault();
+  event.stopPropagation();
+  const target = new URL(link.href);
+  // A full document navigation runs the page's existing mount code. Wix SPA
+  // interception otherwise swaps the native shell without running that code.
+  if (target.pathname === location.pathname && target.hash === '#tour-virtual') {
+    location.hash = target.hash;
+    bwHeaderScrollToVirtualTours();
+  } else {
+    window.location.assign(link.href);
+  }
+}
 
 function bwHeaderVisibilityScore(instance) {
   if (!instance || !instance.isConnected) return 0;
@@ -208,6 +258,7 @@ class BWHeaderElement extends HTMLElement {
     this._setupScroll();
     this._setupMobile();
     this._setupDropdown();
+    this.querySelector('.bw-header-tour-link')?.addEventListener('click', event => bwHeaderNavigateTourLink(event, event.currentTarget));
     this._setupViewportMode();
   }
 
@@ -381,9 +432,8 @@ class BWHeaderElement extends HTMLElement {
       });
       const sectionLink = summary.querySelector('.bw-header-mobile-section-link');
       if (sectionLink) sectionLink.addEventListener('click', (e) => {
-        if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0) return;
-        e.preventDefault();
-        window.location.href = sectionLink.href;
+        this._setMobileOpen?.(false);
+        bwHeaderNavigateTourLink(e, sectionLink);
       });
     });
     const setOpen = (open) => {
@@ -411,7 +461,10 @@ class BWHeaderElement extends HTMLElement {
       setOpen(false);
       btn.focus();
     });
-    overlay.querySelectorAll('a').forEach((a) => a.addEventListener('click', () => setOpen(false)));
+    overlay.querySelectorAll('a').forEach((a) => a.addEventListener('click', (event) => {
+      setOpen(false);
+      if (!a.classList.contains('bw-header-mobile-section-link') && a.closest('details')?.querySelector('.bw-header-mobile-tour-label')) bwHeaderNavigateTourLink(event, a);
+    }));
     overlay.addEventListener('click', (e) => {
       if (e.target === overlay) {
         setOpen(false);
@@ -541,7 +594,10 @@ class BWHeaderElement extends HTMLElement {
       wrap.addEventListener('mouseleave', scheduleClose);
       menu.addEventListener('mouseenter', cancelClose);
       menu.addEventListener('mouseleave', scheduleClose);
-      menu.querySelectorAll('a').forEach((link) => link.addEventListener('click', () => closeAll()));
+      menu.querySelectorAll('a').forEach((link) => link.addEventListener('click', (event) => {
+        closeAll();
+        if (wrap.classList.contains('bw-header-tours-dropdown')) bwHeaderNavigateTourLink(event, link);
+      }));
       if (trigger.getBoundingClientRect().width > 0) positionMenu();
     });
 
@@ -1415,4 +1471,5 @@ class BWHeaderElement extends HTMLElement {
 if (!customElements.get('bw-site-header')) {
   customElements.define('bw-site-header', BWHeaderElement);
 }
+bwHeaderScrollToVirtualTours();
 })();
