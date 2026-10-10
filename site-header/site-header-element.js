@@ -8,15 +8,19 @@ const BW_HEADER_SCRIPT_URL = (document.currentScript && document.currentScript.s
 const BW_HEADER_LOGO_URL = new URL('../assets/walkofberlin-wordmark-green.png', BW_HEADER_SCRIPT_URL).href;
 const BW_HEADER_LOGO_ON_GREEN_URL = new URL('../assets/walkofberlin-wordmark-yellow.png', BW_HEADER_SCRIPT_URL).href;
 const BW_HEADER_MONO_URL = new URL('../brand/fonts/editorial-v2/IBMPlexMono-SemiBold.woff2', BW_HEADER_SCRIPT_URL).href;
+const BW_HEADER_MENU_FONT_URL = new URL('../home-two-doors/assets/fonts/Fraunces-Variable-latin.woff2', BW_HEADER_SCRIPT_URL).href;
 // Berlin Then and Now (service 145cb27e). The legacy booking path stays
 // reachable for guests who booked before 30 September, but nothing links to it.
-const BW_HEADER_BUILD = 'site-header-menu-20261007';
+const BW_HEADER_BUILD = 'site-header-tour-hub-20261010';
 const BW_HEADER_BOOKING_URL = 'https://www.walkofberlin.com/book-berlin-walking-tour/berlin-then-and-now';
 const BW_HEADER_TOUR_FACTS = ['about 2.5 hours', 'max 10 people', '€25']
   .map((fact) => `<span class="bw-header-fact">${fact}</span>`)
   .join(' · ');
 const BW_HEADER_LINKS = {
   home: 'https://www.walkofberlin.com/',
+  allTours: 'https://walkofberlin.com/all-tours',
+  guidedTours: 'https://walkofberlin.com/berlin-then-and-now',
+  virtualTourCategory: 'https://walkofberlin.com/all-tours#tour-virtual',
   privateTour: 'https://www.walkofberlin.com/private-tour',
   route: 'https://www.walkofberlin.com/berlin-walking-tour-route',
   guide: 'https://www.walkofberlin.com/the-guide',
@@ -465,7 +469,7 @@ class BWHeaderElement extends HTMLElement {
       this._dropdownMenus.push(menu);
 
       const positionMenu = () => {
-        const rect = trigger.getBoundingClientRect();
+        const rect = (wrap.classList.contains('bw-header-tours-dropdown') ? wrap : trigger).getBoundingClientRect();
         const menuRect = menu.getBoundingClientRect();
         const cx = rect.left + rect.width / 2;
         const viewportW = window.innerWidth || document.documentElement.clientWidth;
@@ -575,6 +579,13 @@ class BWHeaderElement extends HTMLElement {
           font-weight: 600;
           font-display: swap;
           src: url(${BW_HEADER_MONO_URL}) format('woff2');
+        }
+        @font-face {
+          font-family: BWMenuFraunces;
+          font-style: normal;
+          font-weight: 100 900;
+          font-display: swap;
+          src: url(${BW_HEADER_MENU_FONT_URL}) format('woff2');
         }
 
         bw-site-header {
@@ -729,13 +740,13 @@ class BWHeaderElement extends HTMLElement {
           border-radius: 8px;
           color: var(--green);
           cursor: pointer;
-          font-family: inherit;
-          font-size: 13px;
-          font-weight: 800;
-          letter-spacing: 1.2px;
-          line-height: 1;
-          padding: 12px 14px;
-          text-transform: uppercase;
+          font-family: BWMenuFraunces, Georgia, serif;
+          font-size: 17px;
+          font-weight: 500;
+          letter-spacing: 0;
+          line-height: 1.2;
+          padding: 12px 11px;
+          text-transform: none;
           transition: background 140ms ease, color 140ms ease;
         }
 
@@ -744,7 +755,11 @@ class BWHeaderElement extends HTMLElement {
         .bw-header-dropdown-trigger:hover,
         .bw-header-dropdown-trigger:focus-visible {
           background: var(--cream);
-          outline: none;
+        }
+        .bw-header-nav a:focus-visible,
+        .bw-header-dropdown-trigger:focus-visible {
+          outline: 2px solid var(--green);
+          outline-offset: 2px;
         }
 
         .bw-header-wrap .bw-badge-new,
@@ -791,6 +806,21 @@ class BWHeaderElement extends HTMLElement {
         .bw-header-dropdown {
           position: relative;
         }
+        .bw-header-tour-heading {
+          align-items: center;
+          display: flex;
+        }
+        .bw-header-nav .bw-header-tour-link {
+          padding-right: 3px;
+          white-space: nowrap;
+        }
+        .bw-header-tour-heading .bw-header-dropdown-trigger {
+          justify-content: center;
+          min-height: 44px;
+          min-width: 32px;
+          padding: 10px 6px;
+        }
+        .bw-header-tours-submenu { min-width: 285px; }
 
         .bw-header-dropdown-trigger {
           align-items: center;
@@ -818,7 +848,7 @@ class BWHeaderElement extends HTMLElement {
           border: 1px solid var(--light-green);
           border-radius: 10px;
           box-shadow: 0 18px 44px rgba(27, 94, 32, 0.16);
-          font-family: Montserrat, Arial, sans-serif;
+          font-family: BWMenuFraunces, Georgia, serif;
           left: 0;
           list-style: none;
           margin: 0;
@@ -852,9 +882,9 @@ class BWHeaderElement extends HTMLElement {
           border-radius: 6px;
           color: var(--green);
           display: block;
-          font-size: 13px;
-          font-weight: 700;
-          letter-spacing: 0.4px;
+          font-size: 17px;
+          font-weight: 500;
+          letter-spacing: 0;
           line-height: 1.3;
           padding: 12px 14px;
           text-transform: none;
@@ -877,7 +907,8 @@ class BWHeaderElement extends HTMLElement {
         @media (min-width: 981px) and (max-width: 1190px) {
           .bw-header-main { gap: 10px; padding-left: 16px; padding-right: 16px; }
           .bw-header-logo img { height: 28px; }
-          .bw-header-nav a, .bw-header-dropdown-trigger { padding-left: 8px; padding-right: 8px; font-size: 12px; letter-spacing: .6px; }
+          .bw-header-nav a, .bw-header-dropdown-trigger { padding-left: 7px; padding-right: 7px; font-size: 16px; letter-spacing: 0; }
+          .bw-header-nav .bw-header-tour-link { padding-right: 2px; }
           .bw-header-cta .bw-header-book { padding-left: 14px; padding-right: 14px; letter-spacing: .6px; font-size: 12px; }
         }
         .bw-header-book {
@@ -1076,9 +1107,10 @@ class BWHeaderElement extends HTMLElement {
           border-bottom: 1px solid rgba(255, 255, 255, 0.12);
           color: #FFFFFF;
           display: block;
-          font-size: 19px;
-          font-weight: 800;
-          letter-spacing: 0.4px;
+          font-family: BWMenuFraunces, Georgia, serif;
+          font-size: 22px;
+          font-weight: 500;
+          letter-spacing: 0;
           line-height: 1.2;
           padding: 14px 0;
           text-transform: none;
@@ -1092,9 +1124,10 @@ class BWHeaderElement extends HTMLElement {
           border-bottom: 1px solid rgba(255, 255, 255, 0.12);
           color: #FFFFFF;
           cursor: pointer;
-          font-size: 19px;
-          font-weight: 800;
-          letter-spacing: 0.4px;
+          font-family: BWMenuFraunces, Georgia, serif;
+          font-size: 22px;
+          font-weight: 500;
+          letter-spacing: 0;
           line-height: 1.2;
           padding: 14px 0;
           text-transform: none;
@@ -1120,8 +1153,42 @@ class BWHeaderElement extends HTMLElement {
         }
 
         .bw-header-mobile-section a {
-          font-size: 16px;
-          padding: 11px 0 11px 18px;
+          font-size: 18px;
+          padding: 12px 0 12px 18px;
+        }
+        .bw-header-mobile-section-label.bw-header-mobile-tour-label {
+          align-items: center;
+          display: flex;
+          gap: 8px;
+          list-style: none;
+          min-height: 52px;
+          padding: 0;
+        }
+        .bw-header-mobile-tour-label::-webkit-details-marker { display: none; }
+        .bw-header-mobile-tour-label .bw-header-mobile-section-link {
+          flex: 1;
+          min-width: 0;
+          padding: 14px 0;
+        }
+        .bw-header-mobile-tour-caret {
+          align-items: center;
+          color: var(--yellow);
+          display: inline-flex;
+          flex: 0 0 44px;
+          justify-content: center;
+          min-height: 44px;
+          transition: transform 160ms ease;
+        }
+        .bw-header-mobile-section[open] .bw-header-mobile-tour-caret {
+          transform: rotate(180deg);
+        }
+        .bw-header-mobile-nav a:focus-visible,
+        .bw-header-mobile-section-label:focus-visible {
+          outline: 2px solid var(--yellow);
+          outline-offset: -2px;
+        }
+        @media (prefers-reduced-motion: reduce) {
+          .bw-header-mobile-tour-caret { transition: none; }
         }
 
         .bw-header-mobile-cta {
@@ -1235,21 +1302,20 @@ class BWHeaderElement extends HTMLElement {
 
             <nav class="bw-header-nav" aria-label="Primary">
               <ul class="bw-header-nav-list">
-                <li class="bw-header-dropdown">
-                  <button class="bw-header-dropdown-trigger" type="button" aria-expanded="false" aria-controls="${this._tourMenuId}">
-                    Walking Tour <span class="bw-header-caret" aria-hidden="true">⌄</span>
-                  </button>
-                  <ul id="${this._tourMenuId}" class="bw-header-submenu">
-                    <li><a href="${BW_HEADER_BOOKING_URL}">Berlin Then and Now</a></li>
-                    <li><a href="${BW_HEADER_LINKS.virtualTours}">Virtual Walking Tours</a></li>
-                    <li><a href="${BW_HEADER_LINKS.route}">Tour Route</a></li>
-                    <li><a href="${BW_HEADER_LINKS.meetingPoint}">Meeting Point</a></li>
-                    <li><a href="${BW_HEADER_LINKS.reviews}">Reviews</a></li>
-                    <li><a href="${BW_HEADER_LINKS.guide}">The Guide</a></li>
+                <li class="bw-header-dropdown bw-header-tours-dropdown">
+                  <div class="bw-header-tour-heading">
+                    <a class="bw-header-tour-link" href="${BW_HEADER_LINKS.allTours}">Berlin Walking Tours</a>
+                    <button class="bw-header-dropdown-trigger" type="button" aria-label="Show Berlin Walking Tours categories" aria-expanded="false" aria-controls="${this._tourMenuId}">
+                      <span class="bw-header-caret" aria-hidden="true">⌄</span>
+                    </button>
+                  </div>
+                  <ul id="${this._tourMenuId}" class="bw-header-submenu bw-header-tours-submenu">
+                    <li><a href="${BW_HEADER_LINKS.guidedTours}">Guided Walking Tours</a></li>
+                    <li><a href="${BW_HEADER_LINKS.audioTours}">Self-Guided Audio Walks</a></li>
+                    <li><a href="${BW_HEADER_LINKS.virtualTourCategory}">Virtual Tours</a></li>
                     <li><a href="${BW_HEADER_LINKS.privateTour}">Private Tours</a></li>
                   </ul>
                 </li>
-                <li><a href="${BW_HEADER_LINKS.audioTours}">Audio Tours</a></li>
                 <li class="bw-header-dropdown">
                   <button class="bw-header-dropdown-trigger" type="button" aria-expanded="false" aria-controls="${this._productsMenuId}">
                     Plan Your Visit <span class="bw-header-caret" aria-hidden="true">⌄</span>
@@ -1305,17 +1371,12 @@ class BWHeaderElement extends HTMLElement {
 
             <nav class="bw-header-mobile-nav" aria-label="Mobile primary">
               <details class="bw-header-mobile-section">
-                <summary class="bw-header-mobile-section-label">Walking Tour</summary>
-                <a href="${BW_HEADER_BOOKING_URL}">Berlin Then and Now</a>
-                <a href="${BW_HEADER_LINKS.virtualTours}">Virtual Walking Tours</a>
-                <a href="${BW_HEADER_LINKS.route}">Tour Route</a>
-                <a href="${BW_HEADER_LINKS.meetingPoint}">Meeting Point</a>
-                <a href="${BW_HEADER_LINKS.reviews}">Reviews</a>
-                <a href="${BW_HEADER_LINKS.guide}">The Guide</a>
+                <summary class="bw-header-mobile-section-label bw-header-mobile-tour-label" aria-label="Berlin Walking Tours categories"><a class="bw-header-mobile-section-link" href="${BW_HEADER_LINKS.allTours}">Berlin Walking Tours</a><span class="bw-header-mobile-tour-caret" aria-hidden="true">⌄</span></summary>
+                <a href="${BW_HEADER_LINKS.guidedTours}">Guided Walking Tours</a>
+                <a href="${BW_HEADER_LINKS.audioTours}">Self-Guided Audio Walks</a>
+                <a href="${BW_HEADER_LINKS.virtualTourCategory}">Virtual Tours</a>
                 <a href="${BW_HEADER_LINKS.privateTour}">Private Tours</a>
               </details>
-
-              <a href="${BW_HEADER_LINKS.audioTours}">Audio Tours</a>
               <details class="bw-header-mobile-section">
                 <summary class="bw-header-mobile-section-label">Plan Your Visit</summary>
                 <a href="${BW_HEADER_LINKS.plan}">Berlin Tools</a>
