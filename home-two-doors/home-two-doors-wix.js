@@ -59,6 +59,13 @@
     layout = null;
   }
   function reconcile() {
+    const readyScreen = window.__bwHomeReadyBoot;
+    if (readyScreen?.ready || readyScreen?.pending) {
+      component?.remove();
+      clearMount();
+      setClass(document.documentElement, 'bw-two-doors-active', false);
+      return;
+    }
     const isHome = location.pathname === '/';
     if (!isHome) {
       setClass(document.documentElement, 'bw-two-doors-active', false);
@@ -101,6 +108,7 @@
     // Reviews, audio controls and price text change inside the mounted page.
     // They cannot affect its placement: avoid re-querying the Wix shell or
     // rewriting its classes for every such change (including our own mount).
+    if (window.__bwHomeReadyBoot?.ready || window.__bwHomeReadyBoot?.pending) return;
     if (location.pathname === '/') {
       if (!cssReady || !customElements.get('bw-home-two-doors') || mountIntact()) return;
     } else if (!mounted) return;
@@ -109,6 +117,7 @@
     requestAnimationFrame(() => { scheduled = false; reconcile(); });
   }).observe(document.documentElement, { childList:true, subtree:true });
   window.addEventListener('popstate', reconcile);
+  window.addEventListener('bw-home-ready', reconcile);
   customElements.whenDefined('bw-home-two-doors').then(reconcile);
   reconcile();
 })();

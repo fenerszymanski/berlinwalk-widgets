@@ -224,7 +224,7 @@ function bwHomeTwoDoorsPlayerMarkup(walk, idPrefix) {
 
 class BWHomeTwoDoorsElement extends HTMLElement {
   connectedCallback() {
-    if (this.dataset.bwRendered === 'true') {
+    if (this._runtimeBound) {
       // Wix hydration swaps the page container and the adapter re-attaches this
       // same node. Keep the painted DOM; only redo work the disconnect cut off.
       this._bindImpressions();
@@ -239,14 +239,30 @@ class BWHomeTwoDoorsElement extends HTMLElement {
       if (!this._datesLoaded) this._loadDates();
       return;
     }
+    const adopt = this._hasPrerenderedMarkup();
+    if (!adopt && this.dataset.bwPrerender === 'ready-screen-v1'
+      && !this._prerenderParsed && document.readyState === 'loading') {
+      if (!this._prerenderWaiting) {
+        this._prerenderWaiting = true;
+        document.addEventListener('DOMContentLoaded', () => {
+          this._prerenderParsed = true;
+          this._prerenderWaiting = false;
+          if (this.isConnected) this.connectedCallback();
+        }, { once: true });
+      }
+      return;
+    }
     this.dataset.bwRendered = 'true';
     this._ensureStyles();
-    this._render();
+    // The ready-screen embed contains this renderer's complete HTML. Upgrade
+    // it in place so the already-painted hero and heading keep their identity.
+    if (!adopt) this._render();
     this._bindCtas();
     this._bindAudioPlayers();
     this._loadReviews();
     this._loadDates();
     this._bindImpressions();
+    this._runtimeBound = true;
   }
 
   disconnectedCallback() {
@@ -263,12 +279,37 @@ class BWHomeTwoDoorsElement extends HTMLElement {
   }
 
   _ensureStyles() {
-    if (document.querySelector('link[data-bw-home-two-doors-css]')) return;
+    if (document.querySelector('link[data-bw-home-two-doors-css],style[data-bw-home-two-doors-css]')) return;
     const link = document.createElement('link');
     link.rel = 'stylesheet';
     link.href = BW_HOME_TWO_DOORS_CSS_URL;
     link.dataset.bwHomeTwoDoorsCss = 'true';
     document.head.appendChild(link);
+  }
+
+  _hasPrerenderedMarkup() {
+    if (this.dataset.bwPrerender !== 'ready-screen-v1') return false;
+    const page = this.firstElementChild;
+    if (!page?.matches('.bw-home-two-doors#bw-home-two-doors')
+      || this.querySelectorAll('h1').length !== 1
+      || !page.querySelector('h1#bw-home-two-doors-title')
+      || !page.querySelector('.bw-home-two-doors__door--live img.bw-home-two-doors__background[src][width][height]')
+      || !page.querySelector('[data-bw-live-dates]')
+      || !page.querySelector('.bw-home-two-doors__review-carousel')
+      || !page.querySelector('[data-bw-review-controls]')
+      || !page.querySelector('[data-bw-review-viewport]')
+      || !page.querySelector('[data-bw-review-count]')
+      || !page.querySelector('[data-bw-review-prev]')
+      || !page.querySelector('[data-bw-review-next]')
+      || !page.querySelector('[data-bw-review-toggle]')
+      || !page.querySelector('.bw-home-two-doors__credits summary')) return false;
+    const booking = page.querySelector('a[data-bw-cta-id="book_live_tour"]');
+    if (booking?.href !== BW_HOME_TWO_DOORS_BOOKING_URL) return false;
+    const players = [...page.querySelectorAll('[data-bw-audio-player]')];
+    return players.length === BW_HOME_TWO_DOORS_WALKS.length + 1 && players.every(player =>
+      ['audio[data-bw-audio-src]', '[data-bw-audio-play] .bw-home-two-doors__sr-only',
+        '[data-bw-audio-seek]', '[data-bw-audio-time]', '[data-bw-audio-status]',
+        '.bw-home-two-doors__sample-icon'].every(selector => player.querySelector(selector)));
   }
 
   _render() {

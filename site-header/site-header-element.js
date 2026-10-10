@@ -115,8 +115,23 @@ function bwHeaderScheduleReconcile() {
 class BWHeaderElement extends HTMLElement {
   connectedCallback() {
     if (this._connected) return;
+    const prerenderPrefix = 'bw-header-ready-screen';
+    const adopt = !this._prerenderChecked && this._hasPrerenderedMarkup(prerenderPrefix);
+    if (!adopt && !this._prerenderChecked && this.dataset.bwPrerender === 'ready-screen-v1'
+      && !this._prerenderParsed && document.readyState === 'loading') {
+      if (!this._prerenderWaiting) {
+        this._prerenderWaiting = true;
+        document.addEventListener('DOMContentLoaded', () => {
+          this._prerenderParsed = true;
+          this._prerenderWaiting = false;
+          if (this.isConnected) this.connectedCallback();
+        }, { once: true });
+      }
+      return;
+    }
     this._connected = true;
-    this._instanceId = `bw-header-instance-${++BW_HEADER_INSTANCE_SEQUENCE}`;
+    this._prerenderChecked = true;
+    this._instanceId = adopt ? prerenderPrefix : this._instanceId || `bw-header-instance-${++BW_HEADER_INSTANCE_SEQUENCE}`;
     this._mobileMenuId = `${this._instanceId}-mobile-menu`;
     this._tourMenuId = `${this._instanceId}-tour-menu`;
     this._productsMenuId = `${this._instanceId}-products-menu`;
@@ -125,7 +140,8 @@ class BWHeaderElement extends HTMLElement {
     this._hacksMenuId = `${this._instanceId}-hacks-menu`;
     this.dataset.bwNavigation = "20260917";
     this.dataset.bwHeaderBuild = BW_HEADER_BUILD;
-    this._render();
+    if (!adopt) this._render();
+    this._needsRuntimeRender = false;
     BW_HEADER_INSTANCES.add(this);
     this._visibilityChangeHandler = bwHeaderScheduleReconcile;
     window.addEventListener('resize', this._visibilityChangeHandler, { passive: true });
@@ -142,6 +158,27 @@ class BWHeaderElement extends HTMLElement {
       }
     }
     bwHeaderScheduleReconcile();
+  }
+
+  _hasPrerenderedMarkup(prefix) {
+    if (this.dataset.bwPrerender !== 'ready-screen-v1'
+      || !this.querySelector('style')
+      || !this.querySelector('.bw-header-wrap > .bw-header')
+      || !this.querySelector('.bw-header-logo img[src]')
+      || !this.querySelector('.bw-header-progress-bar')
+      || !this.querySelector('.bw-header-mobile-close')) return false;
+    const controls = [
+      ['.bw-header-hamburger', 'mobile-menu', '.bw-header-mobile'],
+      ['.bw-header-dropdown-trigger', 'tour-menu', '.bw-header-submenu'],
+      ['.bw-header-dropdown-trigger', 'products-menu', '.bw-header-submenu'],
+      ['.bw-header-dropdown-trigger', 'blog-menu', '.bw-header-submenu'],
+    ];
+    return controls.every(([trigger, suffix, menu]) => {
+      const id = `${prefix}-${suffix}`;
+      return this.querySelector(`${trigger}[aria-controls="${id}"][aria-expanded="false"]`)
+        && this.querySelector(`${menu}[id="${id}"]`)
+        && document.querySelectorAll(`[id="${id}"]`).length === 1;
+    });
   }
 
   disconnectedCallback() {
