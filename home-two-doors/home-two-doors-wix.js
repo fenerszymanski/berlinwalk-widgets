@@ -15,20 +15,33 @@
     #c1dmp .bw-two-doors-layout > #comp-mpbojue4 { order:2!important; position:relative!important; inset:auto!important; width:100%!important; margin:0!important; }
   `;
   document.head.appendChild(style);
-  const css = document.createElement('link');
-  css.rel = 'stylesheet';
-  css.href = new URL('home-two-doors-live.css', base).href;
-  css.dataset.bwHomeTwoDoorsCss = 'true';
-  let cssReady = false;
-  css.onload = () => { cssReady = true; reconcile(); };
-  document.head.appendChild(css);
-  const script = document.createElement('script');
-  script.src = new URL('home-two-doors-element.js?release=startup-20261006', base).href;
-  script.onload = () => reconcile();
-  document.head.appendChild(script);
+  // The HEAD embed starts CSS and the element in parallel with this adapter.
+  // Reuse those nodes even when either resource finished before we executed.
+  // Older embeds still work through the same stylesheet/element fallback.
+  let css = document.head.querySelector('link[rel="stylesheet"][data-bw-home-two-doors-css]');
+  if (!css) {
+    css = document.createElement('link');
+    css.rel = 'stylesheet';
+    css.href = new URL('home-two-doors-live.css', base).href;
+    css.dataset.bwHomeTwoDoorsCss = 'true';
+  }
+  let cssReady = !!css.sheet;
+  css.addEventListener('load', () => { cssReady = true; reconcile(); }, { once: true });
+  if (!css.isConnected) document.head.appendChild(css);
+  let script = document.head.querySelector('script[data-bw-home-two-doors-script]');
+  if (!script && !customElements.get('bw-home-two-doors')) {
+    script = document.createElement('script');
+    script.src = new URL('home-two-doors-element.js?release=first-screen-20261010', base).href;
+    script.dataset.bwHomeTwoDoorsScript = 'true';
+  }
+  if (script) {
+    script.addEventListener('load', reconcile, { once: true });
+    if (!script.isConnected) document.head.appendChild(script);
+  }
   let mounted = null;
   let layout = null;
   let component = null;
+  let earlyOfferRefreshed = false;
   function setClass(node, name, active) {
     if (node && node.classList.contains(name) !== active) node.classList.toggle(name, active);
   }
@@ -75,6 +88,13 @@
     setClass(main.parentElement, 'bw-two-doors-layout', true);
     mounted = main;
     layout = main.parentElement;
+    // An early mount can paint before the offer's DOMContentLoaded pass.
+    // Use the canonical runtime synchronously; never duplicate its price/dates.
+    if (!earlyOfferRefreshed && document.readyState === 'loading'
+      && typeof window.BWTourOffer?.refresh === 'function') {
+      earlyOfferRefreshed = true;
+      window.BWTourOffer.refresh();
+    }
   }
   let scheduled = false;
   new MutationObserver(() => {

@@ -1,3 +1,6 @@
+(() => {
+if (customElements.get('bw-site-header')) return;
+
 const BW_HEADER_SCRIPT_URL = (document.currentScript && document.currentScript.src) || 'https://fenerszymanski.github.io/berlinwalk-widgets/site-header/site-header-element.js';
 // Walk of Berlin wordmark (A15a, live 2 October 2026). The old berlinwalk-wordmark-*
 // files stay in assets/ untouched. The "formerly berlinwalk.com" line is HTML text in
@@ -1313,3 +1316,4 @@ class BWHeaderElement extends HTMLElement {
 if (!customElements.get('bw-site-header')) {
   customElements.define('bw-site-header', BWHeaderElement);
 }
+})();
