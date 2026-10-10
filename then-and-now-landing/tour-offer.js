@@ -1,8 +1,11 @@
 /* Berlin Then and Now: the dated offer display. Checkout prices are enforced separately in Wix. */
 (() => {
   'use strict';
-  const VERSION = '20261010-scoped1';
-  if (window.BWTourOffer && window.BWTourOffer.version === VERSION) { window.BWTourOffer.refresh(); return; }
+  const VERSION = '20261010-scoped2';
+  if (window.BWTourOffer && window.BWTourOffer.version === VERSION) {
+    if (document.readyState !== 'loading') window.BWTourOffer.refresh();
+    return;
+  }
   const START = Date.parse('2026-10-07T22:00:00Z');
   const END = Date.parse('2026-11-07T23:00:00Z');
   const active = (now = Date.now()) => now >= START && now < END;
@@ -18,6 +21,7 @@
   const replaced = new Set();
   const schemas = new Map();
   let scheduled = false;
+  let started = false;
   let campaignActive;
   let boundaryTimer;
   const observer = new MutationObserver(changes);
@@ -169,7 +173,7 @@
     updateSchema(root);
   }
   function enqueue(node) {
-    if (!node?.isConnected) return;
+    if (!started || !node?.isConnected) return;
     // Text mutations need their small parent, including a JSON-LD script or
     // a re-rendered checkout hint. Never promote a mutation to the whole page.
     if (node.nodeType === 3) node = node.parentNode;
@@ -191,6 +195,7 @@
     }
   }
   function reconnect() {
+    if (!started || !active()) return;
     for (const root of roots) {
       if (root !== document && !root.host.isConnected) { roots.delete(root); continue; }
       observer.observe(root, { childList: true, subtree: true, characterData: true });
@@ -222,28 +227,57 @@
       else scheduleBoundary(); // Browser timeout maximum is about 24.8 days.
     }, Math.min(next - now, 2147483647));
   }
+  function restore(root) {
+    const within = node => {
+      if (!root) return true;
+      for (let target = node; target; target = target.getRootNode().host) {
+        if (root.contains(target)) return true;
+      }
+      return false;
+    };
+    for (const span of replaced) {
+      if (!within(span)) continue;
+      if (span.isConnected) span.replaceWith(document.createTextNode(span.dataset.regularPrice));
+      replaced.delete(span);
+    }
+    for (const [script, value] of schemas) {
+      if (!within(script)) continue;
+      if (script.isConnected && script.textContent === value.rendered) script.textContent = value.original;
+      schemas.delete(script);
+    }
+  }
+  // Paint an already-connected component before DOMContentLoaded without
+  // observing the still-parsing Wix document or copying campaign logic.
+  function render(root) {
+    if (!root?.isConnected || root.ownerDocument !== document || ![1, 11].includes(root.nodeType)
+      || root === document.documentElement || root === document.body) return false;
+    if (started) changes(observer.takeRecords());
+    observer.disconnect();
+    try {
+      if (active()) visit(root);
+      else restore(root);
+    } finally { reconnect(); }
+    return true;
+  }
   function refresh() {
+    started = true;
     observer.disconnect();
     pending.clear();
     campaignActive = active();
-    if (!campaignActive) {
-      for (const span of replaced) if (span.isConnected) span.replaceWith(document.createTextNode(span.dataset.regularPrice));
-      replaced.clear();
-      for (const [script, value] of schemas) {
-        if (script.isConnected && script.textContent === value.rendered) script.textContent = value.original;
-      }
-      schemas.clear();
-    } else if (document.body) {
+    if (!campaignActive) restore();
+    else if (document.body) {
       try { visit(document); } finally { reconnect(); }
     }
     scheduleBoundary();
   }
-  window.BWTourOffer = Object.freeze({ version: VERSION, active, price, refresh });
-  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', refresh, { once: true });
-  else refresh();
+  window.BWTourOffer = Object.freeze({ version: VERSION, active, price, refresh, render });
+  // The deferred body copy can start us after parsing but before this event.
+  const start = () => { if (!started) refresh(); };
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start, { once: true });
+  else start();
   // DOM insertion handles SPA renders. Waking a suspended page only checks the
   // campaign boundary; it does not walk the document again on every focus.
-  const checkBoundary = () => { if (active() !== campaignActive) refresh(); };
+  const checkBoundary = () => { if (started && active() !== campaignActive) refresh(); };
   document.addEventListener('visibilitychange', checkBoundary);
   window.addEventListener('pageshow', checkBoundary);
 })();

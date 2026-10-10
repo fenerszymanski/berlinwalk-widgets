@@ -22,7 +22,7 @@
   if (!css) {
     css = document.createElement('link');
     css.rel = 'stylesheet';
-    css.href = new URL('home-two-doors-live.css', base).href;
+    css.href = new URL('home-two-doors-live.css?release=first-screen-20261010b', base).href;
     css.dataset.bwHomeTwoDoorsCss = 'true';
   }
   let cssReady = !!css.sheet;
@@ -89,11 +89,11 @@
     mounted = main;
     layout = main.parentElement;
     // An early mount can paint before the offer's DOMContentLoaded pass.
-    // Use the canonical runtime synchronously; never duplicate its price/dates.
+    // Render only this component; the global observer waits for document parsing.
     if (!earlyOfferRefreshed && document.readyState === 'loading'
-      && typeof window.BWTourOffer?.refresh === 'function') {
+      && typeof window.BWTourOffer?.render === 'function') {
       earlyOfferRefreshed = true;
-      window.BWTourOffer.refresh();
+      window.BWTourOffer.render(component);
     }
   }
   let scheduled = false;

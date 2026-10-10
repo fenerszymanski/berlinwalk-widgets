@@ -29,6 +29,15 @@
   src: url("assets/fonts/SpaceGrotesk-Variable-latin.woff2") format("woff2"), url("../home-products/assets/fonts/SpaceGrotesk-Variable.ttf") format("truetype");
 }
 
+/* Match the temporary sans fallback to the loaded face's text width. The hero
+   paragraph at 15px is 930.945px in Space Grotesk and 842.505px in Arial;
+   110.5% keeps its mobile line count stable while the WOFF2 is loading. */
+@font-face {
+  font-family: "BW Two Doors Space Grotesk Fallback";
+  src: local("Arial"), local("Liberation Sans");
+  size-adjust: 110.5%;
+}
+
 bw-home-two-doors {
   background: #FAFAF5;
   display: block;
@@ -82,7 +91,7 @@ bw-home-two-doors .bw-home-two-doors .bw-home-two-doors__review--dark .bw-home-t
   --bw-ink-2: #4A4F47;
   --bw-line: rgba(18, 61, 24, 0.14);
   --bw-display: "BW Two Doors Fraunces", "BW Two Doors Fraunces Fallback G", "BW Two Doors Fraunces Fallback T", Georgia, serif;
-  --bw-sans: "BW Two Doors Space Grotesk", Arial, sans-serif;
+  --bw-sans: "BW Two Doors Space Grotesk", "BW Two Doors Space Grotesk Fallback", Arial, sans-serif;
   --bw-mono: ui-monospace, SFMono-Regular, Menlo, monospace;
   --bw-wrap: 1240px;
   --bw-gutter: 32px;
