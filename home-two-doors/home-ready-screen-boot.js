@@ -36,14 +36,14 @@
       && layout?.isConnected && layout.classList.contains(layoutClass)) return;
     reconcile();
   }
-  async function start() {
+  function start() {
     try {
-      if (typeof DecompressionStream !== 'function' || typeof window.BWTourOffer?.render !== 'function') throw new Error('Ready screen prerequisites unavailable');
+      if (typeof window.BWHomeReadyCodec?.gunzipSync !== 'function' || typeof window.BWTourOffer?.render !== 'function') throw new Error('Ready screen prerequisites unavailable');
       const chunks = window.__bwHomeReadyPayload;
       if (!Array.isArray(chunks) || chunks.some(chunk => typeof chunk !== 'string')) throw new Error('Incomplete ready screen');
       const binary = atob(chunks.join(''));
       const bytes = Uint8Array.from(binary, char => char.charCodeAt(0));
-      const payload = JSON.parse(await new Response(new Blob([bytes]).stream().pipeThrough(new DecompressionStream('gzip'))).text());
+      const payload = JSON.parse(new TextDecoder().decode(window.BWHomeReadyCodec.gunzipSync(bytes)));
       if (payload.version !== state.version || typeof payload.html !== 'string' || typeof payload.css !== 'string') throw new Error('Invalid ready screen version');
       const template = document.createElement('template');
       template.innerHTML = payload.html;
