@@ -1,9 +1,26 @@
 {
-  "updatedAt": "2026-10-09T08:46:02.202Z",
+  "updatedAt": "2026-10-10T08:36:13.192Z",
   "source": "Wix Blog API",
-  "totalPosts": 425,
+  "totalPosts": 426,
   "bookingUrl": "https://www.walkofberlin.com/book-berlin-walking-tour/berlin-then-and-now",
   "allPosts": [
+    {
+      "title": "Indoor Playgrounds in Berlin: What a Rainy Afternoon Really Costs",
+      "slug": "indoor-playgrounds-in-berlin",
+      "path": "/post/indoor-playgrounds-in-berlin",
+      "url": "https://www.berlinwalk.com/post/indoor-playgrounds-in-berlin",
+      "excerpt": "Adults pay too, school holidays cost weekend money and the time you walk in decides the bill. What a wet afternoon costs a family at Berlin's four big indoor playgrounds and two children's museums, with a board that prices your own visit.",
+      "category": "Living in Berlin",
+      "categorySlug": "living-in-berlin",
+      "topic": "living-in-berlin",
+      "topicLabel": "Living in Berlin",
+      "readTime": "7 min read",
+      "publishedDate": "2026-10-10T08:34:27.776Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_9f9fbf3e32594dc4a343a9cd9b0f87f5~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/labyrinth-hall.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_9f9fbf3e32594dc4a343a9cd9b0f87f5~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/labyrinth-hall.jpg",
+      "alt": "The open exhibition hall of the Labyrinth Kindermuseum in Wedding, with steel roof beams, a felt yurt, small play houses and children moving between the stations",
+      "relatedToolSlug": "berlin-indoor-play-bill"
+    },
     {
       "title": "Potsdam in Winter: Which Palaces Are Open and Which Close",
       "slug": "potsdam-in-winter",
