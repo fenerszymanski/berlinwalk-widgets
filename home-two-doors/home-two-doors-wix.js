@@ -18,14 +18,14 @@
   // The HEAD embed starts CSS and the element in parallel with this adapter.
   // Reuse those nodes even when either resource finished before we executed.
   // Older embeds still work through the same stylesheet/element fallback.
-  let css = document.head.querySelector('link[rel="stylesheet"][data-bw-home-two-doors-css]');
+  let css = document.querySelector('link[rel="stylesheet"][data-bw-home-two-doors-css],style[data-bw-home-two-doors-css]');
   if (!css) {
     css = document.createElement('link');
     css.rel = 'stylesheet';
     css.href = new URL('home-two-doors-live.css?release=first-screen-20261010b', base).href;
     css.dataset.bwHomeTwoDoorsCss = 'true';
   }
-  let cssReady = !!css.sheet;
+  let cssReady = css.localName === 'style' || !!css.sheet;
   css.addEventListener('load', () => { cssReady = true; reconcile(); }, { once: true });
   if (!css.isConnected) document.head.appendChild(css);
   let script = document.head.querySelector('script[data-bw-home-two-doors-script]');
