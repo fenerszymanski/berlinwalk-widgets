@@ -388,6 +388,7 @@ class BWHeaderElement extends HTMLElement {
       btn.classList.toggle('bw-header-hamburger-open', open);
       btn.setAttribute('aria-expanded', String(open));
       overlay.setAttribute('aria-hidden', String(!open));
+      overlay.toggleAttribute('inert', !open);
       if (!open) mobileSections.forEach((section) => { section.open = false; });
       if (open) {
         if (BW_HEADER_SCROLL_LOCK_OWNER && BW_HEADER_SCROLL_LOCK_OWNER !== this) {
@@ -1295,7 +1296,7 @@ class BWHeaderElement extends HTMLElement {
           </div>
         </header>
 
-        <div id="${this._mobileMenuId}" class="bw-header-mobile" data-bw-navigation="20260917" aria-hidden="true" aria-label="Mobile menu">
+        <div id="${this._mobileMenuId}" class="bw-header-mobile" data-bw-navigation="20260917" aria-hidden="true" aria-label="Mobile menu" inert>
           <div class="bw-header-mobile-inner">
             <div class="bw-header-mobile-head">
               <img src="${BW_HEADER_LOGO_ON_GREEN_URL}" alt="Walk of Berlin" width="900" height="142">
