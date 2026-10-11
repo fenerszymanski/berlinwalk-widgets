@@ -1,0 +1,89 @@
+{
+  "version": 1,
+  "slug": "photography-museums-in-berlin",
+  "key": "photography-museums-in-berlin",
+  "config": {
+    "title": "Photography Museums in Berlin - FAQ",
+    "subtitle": "Opening hours, prices and the best order for Fotografiska, C/O Berlin, the Museum für Fotografie and Camera Work.",
+    "items": [
+      {
+        "q": "What are the best photography museums in Berlin?",
+        "a": "**Fotografiska** in the old Tacheles building in Mitte, **C/O Berlin** in the Amerika Haus and the **Museum für Fotografie** with the Helmut Newton Foundation, both next to Zoologischer Garten station. The **Camera Work** gallery on Kantstraße is a free fourth stop."
+      },
+      {
+        "q": "Which photography museum in Berlin is open late?",
+        "a": "**Fotografiska**, open every day until 23:00 with last entry at 22:00. C/O Berlin closes at 20:00, and the Museum für Fotografie at 19:00, or 20:00 on Thursdays."
+      },
+      {
+        "q": "Which Berlin photography museums are open on Monday?",
+        "a": "**Fotografiska** and **C/O Berlin**. The Museum für Fotografie and Camera Work are closed on Mondays."
+      },
+      {
+        "q": "How much do photography museums in Berlin cost?",
+        "a": "Fotografiska and C/O Berlin charge **15 euros**, the Museum für Fotografie **12 euros**, and Camera Work is free. C/O Berlin is free up to and including age 18 and the Museum für Fotografie under 18. Prices checked on 11 October 2026."
+      },
+      {
+        "q": "Is the Helmut Newton Foundation open in November?",
+        "a": "Until 15 November. The Museum für Fotografie, which houses the foundation, is **closed from 16 November to 2 December 2026** for building work, and new Newton shows open in early December."
+      },
+      {
+        "q": "Can I combine C/O Berlin and the Museum für Fotografie?",
+        "a": "Yes. They are a **4-minute walk** apart near Zoologischer Garten, and a same-day ticket from one takes **2 euros off** the full ticket at the other. The Museumspass Berlin covers the Museum für Fotografie but not C/O Berlin or Fotografiska."
+      }
+    ]
+  },
+  "schema": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What are the best photography museums in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Fotografiska in the old Tacheles building in Mitte, C/O Berlin in the Amerika Haus and the Museum für Fotografie with the Helmut Newton Foundation, both next to Zoologischer Garten station. The Camera Work gallery on Kantstraße is a free fourth stop."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Which photography museum in Berlin is open late?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Fotografiska, open every day until 23:00 with last entry at 22:00. C/O Berlin closes at 20:00, and the Museum für Fotografie at 19:00, or 20:00 on Thursdays."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Which Berlin photography museums are open on Monday?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Fotografiska and C/O Berlin. The Museum für Fotografie and Camera Work are closed on Mondays."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How much do photography museums in Berlin cost?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Fotografiska and C/O Berlin charge 15 euros, the Museum für Fotografie 12 euros, and Camera Work is free. C/O Berlin is free up to and including age 18 and the Museum für Fotografie under 18. Prices checked on 11 October 2026."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is the Helmut Newton Foundation open in November?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Until 15 November. The Museum für Fotografie, which houses the foundation, is closed from 16 November to 2 December 2026 for building work, and new Newton shows open in early December."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I combine C/O Berlin and the Museum für Fotografie?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. They are a 4-minute walk apart near Zoologischer Garten, and a same-day ticket from one takes 2 euros off the full ticket at the other. The Museumspass Berlin covers the Museum für Fotografie but not C/O Berlin or Fotografiska."
+        }
+      }
+    ]
+  }
+}

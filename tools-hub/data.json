@@ -10826,6 +10826,36 @@
       "iconStatus": "live-wix-media",
       "image": "https://static.wixstatic.com/media/5a08a3_edab598c7eca4611a46619c56e564a53~mv2.png",
       "cmsItemId": "9683166d-9b38-4b77-b90b-692bbb70229c"
+    },
+    {
+      "slug": "berlin-photo-museum-clock",
+      "title": "Berlin Photo Museum Clock",
+      "lead": "Which of Berlin's photography venues is open when you are free, and what it costs you. Pick a day, the time you can walk in, your ticket and the dates: Fotografiska, C/O Berlin, the Museum für Fotografie and the Camera Work gallery on a real map, with time left before closing and what is on show. Checked on 11 October 2026.",
+      "category": "Discovery",
+      "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/berlin-photo-museum-clock/",
+      "embedHeight": 1700,
+      "hubCategory": "CultureLandmarks",
+      "type": "Map",
+      "priority": 3,
+      "tags": [
+        "photography",
+        "museums",
+        "exhibitions",
+        "opening hours",
+        "prices"
+      ],
+      "aliases": [
+        "photography museums in berlin",
+        "photography museum berlin",
+        "fotografiska berlin",
+        "c/o berlin",
+        "museum fur fotografie berlin",
+        "helmut newton foundation",
+        "berlin photo exhibitions"
+      ],
+      "iconStatus": "live-wix-media",
+      "image": "https://static.wixstatic.com/media/5a08a3_fb3a3ba578c648e8b8203ea7ab4e81c7~mv2.png",
+      "cmsItemId": "786894fb-001a-4b7d-9a47-9a5ea80131f4"
     }
   ],
   "hubCategories": [

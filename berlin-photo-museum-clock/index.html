@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Berlin Photo Museum Clock: Which Photography Museum Is Open When You Are Free</title>
+<meta name="description" content="Pick a day, a time and a ticket type. A real map of Berlin's four photography venues shows which are open, how long you have and what you pay.">
+<link rel="stylesheet" href="../css/brand.css">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #FFFFFF; color: #202420; padding: 12px; }
+  .pm { border-radius: 18px; overflow: hidden; background: #f7f6f1; border: 1px solid #dcd9cb; }
+  .pm-head { padding: 16px 16px 13px; background: #16241a; color: #fff; }
+  .pm-eyebrow { font-size: 11px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: #FFE600; }
+  .pm-head h1 { font-size: 19px; line-height: 1.25; font-weight: 800; margin-top: 4px; }
+  .pm-head p { font-size: 12.5px; line-height: 1.5; color: #d6dfd4; margin-top: 5px; }
+  .pm-controls { padding: 14px 16px 4px; display: grid; gap: 12px; }
+  .pm-lab { display: block; font-size: 11px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; color: #565a4e; margin-bottom: 6px; }
+  .pm-days { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 4px; border: 0; }
+  .pm-days legend { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+  .pm-day { position: relative; }
+  .pm-day input { position: absolute; opacity: 0; inset: 0; width: 100%; height: 100%; cursor: pointer; margin: 0; }
+  .pm-day span { display: block; text-align: center; font-size: 12.5px; font-weight: 800; padding: 9px 0; border-radius: 10px; background: #fff; border: 1.5px solid #cfcbb8; color: #2a2e27; }
+  .pm-day input:checked + span { background: #FFE600; border-color: #d8c400; color: #123D18; }
+  .pm-day input:focus-visible + span { outline: 2px solid #c62828; outline-offset: 2px; }
+  .pm-selects { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+  .pm-select { font-family: inherit; width: 100%; font-size: 14px; font-weight: 700; padding: 8px 8px; border: 1.5px solid #cfcbb8; border-radius: 10px; background: #fff; color: #202420; min-width: 0; }
+  .pm-select:focus-visible { outline: 2px solid #c62828; outline-offset: 2px; }
+  .pm-verdict { margin: 10px 16px 0; padding: 12px 14px; border-radius: 14px; background: #1B5E20; color: #fff; }
+  .pm-verdict b { color: #FFE600; }
+  .pm-verdict .v-main { font-size: 15px; font-weight: 800; line-height: 1.35; }
+  .pm-verdict .v-sub { font-size: 12.5px; line-height: 1.5; color: #e2eedf; margin-top: 4px; }
+  .pm-map { padding: 10px 10px 0; }
+  .pm-map svg { display: block; width: 100%; max-width: 660px; margin: 0 auto; height: auto; background: #eceadf; border-radius: 14px; }
+  .m-line { fill: none; stroke: #8d8a78; stroke-width: 5; stroke-linecap: round; stroke-linejoin: round; }
+  .m-line-in { fill: none; stroke: #f7f6f1; stroke-width: 1.6; stroke-dasharray: 5 6; }
+  .m-stop { fill: #fff; stroke: #5d5a4b; stroke-width: 2; }
+  .m-slabel { font-size: 15px; font-weight: 700; fill: #3f3d34; }
+  .m-lead { stroke: #5d5a4b; stroke-width: 1.5; }
+  .m-dot { stroke: #fff; stroke-width: 1.5; }
+  .m-dot.is-open { fill: #1B5E20; }
+  .m-dot.is-closed { fill: #8d8a78; }
+  .m-walk { stroke: #1B5E20; stroke-width: 2; stroke-dasharray: 3 4; fill: none; }
+  .m-pin { stroke: #fff; stroke-width: 3; }
+  .m-pin.is-open { fill: #1B5E20; }
+  .m-pin.is-closed { fill: #a7a493; }
+  .m-num { font-size: 15px; font-weight: 800; fill: #fff; text-anchor: middle; dominant-baseline: central; pointer-events: none; }
+  .m-ring { fill: none; stroke: #FFE600; stroke-width: 5; }
+  .m-area { font-size: 14px; font-weight: 800; letter-spacing: .08em; fill: #7d7a68; text-transform: uppercase; }
+  .m-note { font-size: 14px; font-weight: 700; fill: #1B5E20; }
+  .pm-rows { padding: 12px 16px 6px; display: grid; gap: 10px; }
+  .pm-row { background: #fff; border: 1px solid #e0ddcf; border-radius: 14px; padding: 11px 12px 10px; }
+  .pm-row.is-closed { background: #f1f0ea; }
+  .r-top { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; }
+  .r-name { font-size: 14.5px; font-weight: 800; color: #202420; display: flex; align-items: center; gap: 7px; }
+  .r-dot { width: 22px; height: 22px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 800; color: #fff; background: #1B5E20; flex: 0 0 auto; }
+  .pm-row.is-closed .r-dot { background: #a7a493; }
+  .r-price { font-size: 15px; font-weight: 800; color: #1B5E20; white-space: nowrap; }
+  .pm-row.is-closed .r-price { color: #8b8977; }
+  .r-where { font-size: 11.5px; color: #66695c; margin-top: 2px; line-height: 1.4; }
+  .r-bar { margin-top: 7px; }
+  .r-bar svg { display: block; width: 100%; max-width: 460px; height: auto; }
+  .b-track { fill: #ecebe3; }
+  .b-open { fill: #C5E1A5; }
+  .b-left { fill: #7CB342; }
+  .b-now { stroke: #c62828; stroke-width: 2.5; }
+  .b-tick { font-size: 10px; fill: #7a7c6e; text-anchor: middle; }
+  .r-status { font-size: 12.5px; font-weight: 700; color: #1B5E20; margin-top: 4px; line-height: 1.4; }
+  .pm-row.is-closed .r-status { color: #7a3a2e; }
+  .r-shows { font-size: 12px; color: #3d4037; margin-top: 5px; line-height: 1.45; }
+  .r-shows a { color: #1B5E20; font-weight: 700; }
+  .pm-foot { padding: 4px 16px 14px; font-size: 11px; line-height: 1.5; color: #6b6d61; }
+  @media (max-width: 420px) {
+    .pm-selects { grid-template-columns: 1fr 1fr; }
+    .pm-selects .pm-sel-period { grid-column: 1 / -1; }
+    .pm-day span { font-size: 11.5px; padding: 8px 0; }
+  }
+</style>
+</head>
+<body>
+<div class="pm" id="pm">
+  <div class="pm-head">
+    <div class="pm-eyebrow">Berlin photography, checked on 11 October 2026</div>
+    <h1>Which photography museum is open when you are free?</h1>
+    <p>Four venues, two corners of the city. Pick your day, the time you can walk in and your ticket, and the map shows what is open, how long you get and what you pay.</p>
+  </div>
+
+  <div class="pm-controls">
+    <fieldset class="pm-days" id="pm-days">
+      <legend>Day</legend>
+    </fieldset>
+    <div class="pm-selects">
+      <label><span class="pm-lab">Walk in at</span><select class="pm-select" id="pm-hour"></select></label>
+      <label><span class="pm-lab">Ticket</span><select class="pm-select" id="pm-ticket">
+        <option value="adult">Adult</option>
+        <option value="student">Student, 19+</option>
+        <option value="teen">Age 13 to 17</option>
+        <option value="child">Child up to 12</option>
+      </select></label>
+      <label class="pm-sel-period"><span class="pm-lab">Dates</span><select class="pm-select" id="pm-period">
+        <option value="p1">Until 15 November</option>
+        <option value="p2">16 November to 2 December</option>
+        <option value="p3">From 3 December</option>
+      </select></label>
+    </div>
+  </div>
+
+  <div class="pm-verdict" id="pm-verdict" aria-live="polite"></div>
+
+  <div class="pm-map">
+    <svg id="pm-map" viewBox="0 0 600 300" role="img" aria-label="Map of central Berlin from Savignyplatz to Alexanderplatz with the S-Bahn line and four photography venues"></svg>
+  </div>
+
+  <div class="pm-rows" id="pm-rows"></div>
+
+  <div class="pm-foot">Hours and prices from each venue's own website and the state museums' ticket shop, checked on 11 October 2026. Holiday hours can differ. Fotografiska is cash-free. The Museum für Fotografie and C/O Berlin take 2 € off each other's full ticket on the same day.</div>
+</div>
+
+<script>
+(function () {
+  var DAYS = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+  var DAY_NAMES = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+  var TICKET_NAMES = { adult: 'an adult', student: 'a student', teen: 'a teenager', child: 'a child' };
+
+  var VENUES = [
+    {
+      id: 'fotografiska', n: 1, name: 'Fotografiska', where: 'Oranienburger Straße 54, Mitte. S Oranienburger Straße, 4 minutes on foot',
+      lat: 52.52567, lon: 13.38912,
+      hours: function () { return [10, 23]; },
+      lastEntry: 22,
+      price: { adult: 15, student: 10, teen: 10, child: 0 },
+      priceNote: { child: 'free with an adult' },
+      url: 'https://berlin.fotografiska.com/en',
+      shows: {
+        p1: 'Lauren Greenfield, Social Studies (to 12 Jan 2027); Thomas Billhardt (to 7 Feb 2027); Lee Shulman, No Place Like Home (to 1 Nov); Roger Ballen (from 6 Nov)',
+        p2: 'Lauren Greenfield, Social Studies; Thomas Billhardt; Roger Ballen',
+        p3: 'Lauren Greenfield, Social Studies (to 12 Jan 2027); Thomas Billhardt (to 7 Feb 2027); Roger Ballen'
+      }
+    },
+    {
+      id: 'co', n: 2, name: 'C/O Berlin', where: 'Amerika Haus, Hardenbergstraße 22-24, Charlottenburg. S+U Zoologischer Garten, 3 minutes',
+      lat: 52.50657, lon: 13.33061,
+      hours: function () { return [11, 20]; },
+      price: { adult: 15, student: 8, teen: 0, child: 0 },
+      url: 'https://co-berlin.org/en',
+      shows: {
+        p1: 'Carrie Mae Weems, The Heart of the Matter (to 3 Feb 2027); Stelios Kallinikou and Susanne Kriemann (to 20 Jan 2027). Free English tour Sat and Sun 15:30',
+        p2: 'Carrie Mae Weems, The Heart of the Matter; Stelios Kallinikou and Susanne Kriemann. Free English tour Sat and Sun 15:30',
+        p3: 'Carrie Mae Weems, The Heart of the Matter (to 3 Feb 2027); Stelios Kallinikou and Susanne Kriemann (to 20 Jan 2027)'
+      }
+    },
+    {
+      id: 'mff', n: 3, name: 'Museum für Fotografie', where: 'Helmut Newton Foundation, Jebensstraße 2, behind Zoologischer Garten station',
+      lat: 52.50816, lon: 13.33209,
+      hours: function (day, period) {
+        if (period === 'p2') return null;
+        if (day === 0) return null;
+        if (day === 3) return [11, 20];
+        return [11, 19];
+      },
+      closedWhy: function (day, period) { return period === 'p2' ? 'Closed for building work from 16 November to 2 December' : 'Closed on Mondays'; },
+      price: { adult: 12, student: 6, teen: 0, child: 0 },
+      url: 'https://newton-foundation.org/en/',
+      shows: {
+        p1: 'Helmut Newton, Rooms / Stages and the One-off Album (to 15 Nov)',
+        p2: 'Closed between shows',
+        p3: 'Helmut Newton’s early books: White Women, Sleepless Nights, Big Nudes (from early December)'
+      }
+    },
+    {
+      id: 'cw', n: 4, name: 'Camera Work', where: 'Gallery, Kantstraße 149, Charlottenburg. S Savignyplatz, 3 minutes',
+      lat: 52.50551, lon: 13.32467,
+      hours: function (day) { return day >= 1 && day <= 5 ? [11, 18] : null; },
+      closedWhy: function () { return 'Closed on Sundays and Mondays'; },
+      price: { adult: 0, student: 0, teen: 0, child: 0 },
+      url: 'https://camerawork.de/en/',
+      shows: {
+        p1: 'Russell James, It’s About Time (to 14 Nov)',
+        p2: 'Next show not announced yet: check the gallery site',
+        p3: 'Next show not announced yet: check the gallery site'
+      }
+    }
+  ];
+
+  var STATIONS = [
+    { name: 'Savignyplatz', lat: 52.50522, lon: 13.319002, label: true, dy: 22 },
+    { name: 'Zoologischer Garten', lat: 52.506919, lon: 13.332711, label: true, dy: 24, dx: 6 },
+    { name: 'Tiergarten', lat: 52.513957, lon: 13.336244 },
+    { name: 'Bellevue', lat: 52.519953, lon: 13.347102 },
+    { name: 'Hauptbahnhof', lat: 52.525607, lon: 13.369072, label: true, dy: -14 },
+    { name: 'Friedrichstraße', lat: 52.520304, lon: 13.387257, label: true, dy: 24 },
+    { name: 'Hackescher Markt', lat: 52.522605, lon: 13.402359, label: true, dy: 24, dx: -6 },
+    { name: 'Alexanderplatz', lat: 52.521508, lon: 13.411267, label: true, dy: -14, dx: 8 }
+  ];
+
+  var BOUNDS = { west: 13.313, east: 13.4185, south: 52.4995, north: 52.5305 };
+  var W = 600, H = 300, PAD = 18;
+  var KX = Math.cos(52.515 * Math.PI / 180);
+  function project(lat, lon) {
+    var spanX = (BOUNDS.east - BOUNDS.west) * KX;
+    var spanY = (BOUNDS.north - BOUNDS.south);
+    var scale = Math.min((W - 2 * PAD) / spanX, (H - 2 * PAD) / spanY);
+    var x = PAD + (lon - BOUNDS.west) * KX * scale;
+    var y = H - PAD - (lat - BOUNDS.south) * scale;
+    return [Math.round(x * 10) / 10, Math.round(y * 10) / 10];
+  }
+
+  var state = { day: 1, hour: 15, ticket: 'adult', period: 'p1' };
+  var today = new Date();
+  var jsDay = today.getDay();
+  state.day = jsDay === 0 ? 6 : jsDay - 1;
+
+  var daysEl = document.getElementById('pm-days');
+  DAYS.forEach(function (d, i) {
+    var label = document.createElement('label');
+    label.className = 'pm-day';
+    label.innerHTML = '<input type="radio" name="pm-day" value="' + i + '"' + (i === state.day ? ' checked' : '') + ' aria-label="' + DAY_NAMES[i] + '"><span>' + d + '</span>';
+    daysEl.appendChild(label);
+  });
+  var hourEl = document.getElementById('pm-hour');
+  for (var h = 10; h <= 22; h++) {
+    var opt = document.createElement('option');
+    opt.value = String(h);
+    opt.textContent = (h < 10 ? '0' : '') + h + ':00';
+    if (h === state.hour) opt.selected = true;
+    hourEl.appendChild(opt);
+  }
+
+  function fmt(h) { return (h < 10 ? '0' : '') + h + ':00'; }
+  function euro(v) { return v === 0 ? 'Free' : v + ' €'; }
+
+  function status(v) {
+    var span = v.hours(state.day, state.period);
+    if (!span) return { open: false, span: null, why: v.closedWhy ? v.closedWhy(state.day, state.period) : 'Closed' };
+    var close = span[1];
+    var entryLimit = v.lastEntry || close;
+    if (state.hour < span[0]) return { open: false, span: span, why: 'Opens at ' + fmt(span[0]) + ', ' + (span[0] - state.hour) + ' h after you arrive', later: true };
+    if (state.hour >= entryLimit) return { open: false, span: span, why: 'Too late: ' + (v.lastEntry ? 'last entry ' + fmt(v.lastEntry) : 'closes at ' + fmt(close)) };
+    var left = close - state.hour;
+    return { open: true, span: span, left: left, why: 'Open until ' + fmt(close) + (v.lastEntry ? ' (last entry ' + fmt(v.lastEntry) + ')' : '') + ': you get ' + left + (left === 1 ? ' hour' : ' hours') };
+  }
+
+  // Badge positions are hand-set callouts; the small dots and leader lines sit
+  // on the real projected coordinates of each address.
+  var BADGE = { fotografiska: [392, 28], co: [140, 272], mff: [182, 196], cw: [66, 200] };
+  var LABELS = {
+    'Savignyplatz': [8, 258, 'start'],
+    'Zoologischer Garten': [136, 242, 'start'],
+    'Hauptbahnhof': [309, 44, 'middle'],
+    'Friedrichstraße': [412, 128, 'end'],
+    'Hackescher Markt': [590, 62, 'end'],
+    'Alexanderplatz': [592, 122, 'end']
+  };
+  function drawMap(statuses) {
+    var svg = document.getElementById('pm-map');
+    var pts = STATIONS.map(function (s) { return project(s.lat, s.lon); });
+    var d = pts.map(function (p, i) { return (i ? 'L' : 'M') + p[0] + ' ' + p[1]; }).join(' ');
+    var out = '';
+    out += '<text class="m-area" x="14" y="292">City West</text>';
+    out += '<text class="m-area" x="586" y="160" text-anchor="end">Mitte</text>';
+    out += '<path class="m-line" d="' + d + '"/><path class="m-line-in" d="' + d + '"/>';
+    out += '<text class="m-note" x="182" y="160">S-Bahn, 9 min</text>';
+    STATIONS.forEach(function (s, i) {
+      var p = pts[i];
+      out += '<circle class="m-stop" cx="' + p[0] + '" cy="' + p[1] + '" r="5"/>';
+      var l = LABELS[s.name];
+      if (l) out += '<text class="m-slabel" text-anchor="' + l[2] + '" x="' + l[0] + '" y="' + l[1] + '">' + s.name + '</text>';
+    });
+    var fot = project(VENUES[0].lat, VENUES[0].lon);
+    var hack = pts[6];
+    out += '<path class="m-walk" d="M' + fot[0] + ' ' + fot[1] + ' Q' + ((fot[0] + hack[0]) / 2) + ' ' + (fot[1] - 6) + ' ' + hack[0] + ' ' + hack[1] + '"/>';
+    out += '<text class="m-note" x="430" y="44">13 min walk</text>';
+    var best = bestPick(statuses);
+    VENUES.forEach(function (v, i) {
+      var p = project(v.lat, v.lon);
+      var st = statuses[i];
+      var bx = BADGE[v.id][0], by = BADGE[v.id][1];
+      out += '<line class="m-lead" x1="' + p[0] + '" y1="' + p[1] + '" x2="' + bx + '" y2="' + by + '"/>';
+      out += '<circle class="m-dot ' + (st.open ? 'is-open' : 'is-closed') + '" cx="' + p[0] + '" cy="' + p[1] + '" r="4"/>';
+      if (best && best.v.id === v.id) out += '<circle class="m-ring" cx="' + bx + '" cy="' + by + '" r="18"/>';
+      out += '<circle class="m-pin ' + (st.open ? 'is-open' : 'is-closed') + '" cx="' + bx + '" cy="' + by + '" r="13"><title>' + v.name + '</title></circle>';
+      out += '<text class="m-num" x="' + bx + '" y="' + by + '">' + v.n + '</text>';
+    });
+    svg.innerHTML = out;
+  }
+
+  // My order when more than one venue has time: C/O Berlin for the strongest
+  // programme and free weekend tours, then the Museum für Fotografie next door,
+  // then Fotografiska, then the free gallery as an add-on.
+  var RANK = ['co', 'mff', 'fotografiska', 'cw'];
+  function bestPick(statuses) {
+    var open = VENUES.map(function (v, i) { return { v: v, s: statuses[i] }; }).filter(function (o) { return o.s.open; });
+    var roomy = open.filter(function (o) { return o.s.left >= 2; });
+    var pool = roomy.length ? roomy : open;
+    if (!pool.length) return null;
+    var pick = pool[0];
+    pool.forEach(function (o) { if (RANK.indexOf(o.v.id) < RANK.indexOf(pick.v.id)) pick = o; });
+    return pick;
+  }
+
+  function barSvg(st) {
+    var x0 = 22, x1 = 318, from = 10, to = 23;
+    function hx(h) { return x0 + (h - from) / (to - from) * (x1 - x0); }
+    var out = '<svg viewBox="0 0 340 30" aria-hidden="true"><rect class="b-track" x="' + x0 + '" y="4" width="' + (x1 - x0) + '" height="10" rx="5"/>';
+    if (st.span) {
+      out += '<rect class="b-open" x="' + hx(st.span[0]) + '" y="4" width="' + (hx(st.span[1]) - hx(st.span[0])) + '" height="10" rx="5"/>';
+      if (st.open) out += '<rect class="b-left" x="' + hx(state.hour) + '" y="4" width="' + (hx(st.span[1]) - hx(state.hour)) + '" height="10" rx="5"/>';
+    }
+    out += '<line class="b-now" x1="' + hx(state.hour) + '" x2="' + hx(state.hour) + '" y1="0" y2="18"/>';
+    [10, 13, 16, 19, 22].forEach(function (t) { out += '<text class="b-tick" x="' + hx(t) + '" y="28">' + fmt(t) + '</text>'; });
+    return out + '</svg>';
+  }
+
+  function render() {
+    var statuses = VENUES.map(status);
+    drawMap(statuses);
+    var rows = document.getElementById('pm-rows');
+    rows.innerHTML = VENUES.map(function (v, i) {
+      var st = statuses[i];
+      var price = v.price[state.ticket];
+      var priceText = euro(price);
+      if (price === 0 && v.priceNote && v.priceNote[state.ticket]) priceText = 'Free, with an adult';
+      return '<div class="pm-row' + (st.open ? '' : ' is-closed') + '">' +
+        '<div class="r-top"><div class="r-name"><span class="r-dot">' + v.n + '</span>' + v.name + '</div><div class="r-price">' + priceText + '</div></div>' +
+        '<div class="r-where">' + v.where + '</div>' +
+        '<div class="r-bar">' + barSvg(st) + '</div>' +
+        '<div class="r-status">' + st.why + '</div>' +
+        '<div class="r-shows">On show: ' + v.shows[state.period] + '. <a href="' + v.url + '" target="_blank" rel="noopener">Venue site</a></div>' +
+        '</div>';
+    }).join('');
+
+    var openCount = statuses.filter(function (s) { return s.open; }).length;
+    var best = bestPick(statuses);
+    var main, sub;
+    var when = DAY_NAMES[state.day] + ' at ' + fmt(state.hour);
+    if (!best) {
+      var later = VENUES.map(function (v, i) { return { v: v, s: statuses[i] }; }).filter(function (o) { return o.s.later; });
+      main = 'Nothing worth walking into on ' + when + '.';
+      sub = later.length ? 'Come back at ' + fmt(later[0].s.span[0]) + ' for ' + later[0].v.name + ', or move your visit earlier.' : 'Fotografiska stays open until 23:00 every day, so an earlier evening still works there.';
+    } else {
+      main = openCount + ' of 4 open on ' + when + '. My pick: <b>' + best.v.name + '</b>, ' + best.s.left + (best.s.left === 1 ? ' hour' : ' hours') + ' before closing, ' + euro(best.v.price[state.ticket]).toLowerCase() + ' for ' + TICKET_NAMES[state.ticket] + '.';
+      var co = statuses[1], mff = statuses[2];
+      if (co.open && mff.open && co.left >= 3 && mff.left >= 3) {
+        sub = 'You have time for two: C/O Berlin and the Museum für Fotografie are a 4-minute walk apart, and the second full ticket is 2 € cheaper.';
+      } else if (best.v.id === 'fotografiska') {
+        sub = state.hour < 17
+          ? 'Fotografiska opens earliest, at 10:00. C/O Berlin and the Museum für Fotografie open at 11:00, a 9-minute S-Bahn ride away at Zoologischer Garten.'
+          : state.day === 1 && state.hour >= 18
+          ? 'Tuesday evening is the cheap slot: two online Fotografiska tickets from 18:00 cost the price of one. Last entry is 22:00.'
+          : 'Fotografiska is the evening answer: open until 23:00 every day, last entry 22:00. On Tuesdays two online tickets from 18:00 cost the price of one.';
+      } else if (best.s.left < 2) {
+        sub = 'That is a short visit. Under two hours I would pick one floor and leave the rest for another day.';
+      } else {
+        sub = 'Plan about 90 minutes for one venue. City West and Mitte are 9 minutes apart on the S-Bahn between Zoologischer Garten and Friedrichstraße.';
+      }
+    }
+    document.getElementById('pm-verdict').innerHTML = '<div class="v-main">' + main + '</div><div class="v-sub">' + sub + '</div>';
+  }
+
+  daysEl.addEventListener('change', function (e) { if (e.target.name === 'pm-day') { state.day = Number(e.target.value); render(); } });
+  hourEl.addEventListener('change', function () { state.hour = Number(hourEl.value); render(); });
+  document.getElementById('pm-ticket').addEventListener('change', function (e) { state.ticket = e.target.value; render(); });
+  document.getElementById('pm-period').addEventListener('change', function (e) { state.period = e.target.value; render(); });
+  render();
+})();
+</script>
+<script src="../js/brand.js"></script>
+</body>
+</html>
