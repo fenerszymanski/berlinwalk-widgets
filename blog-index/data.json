@@ -1,9 +1,9 @@
 {
-  "updatedAt": "2026-10-11T02:06:30.711Z",
+  "updatedAt": "2026-10-11T08:30:45.120Z",
   "source": "Wix Blog API",
   "popularSource": "Wix Blog metrics.views lifetime sort",
-  "totalPosts": 426,
-  "toolsTotal": 356,
+  "totalPosts": 427,
+  "toolsTotal": 357,
   "bookingUrl": "https://www.walkofberlin.com/book-berlin-walking-tour/berlin-then-and-now",
   "navTopics": [
     {
@@ -1802,6 +1802,23 @@
   ],
   "latest": [
     {
+      "title": "Photography Museums in Berlin: Which One Fits Your Day",
+      "slug": "photography-museums-in-berlin",
+      "path": "/post/photography-museums-in-berlin",
+      "url": "https://www.berlinwalk.com/post/photography-museums-in-berlin",
+      "excerpt": "Fotografiska stays open until 23:00, C/O Berlin is free for under-19s, the Newton museum shuts on Mondays and from 16 November. Which of Berlin's four photography venues fits your free hours, with a clock that checks your day.",
+      "category": "Tourist Tips",
+      "categorySlug": "tourist-tips",
+      "topic": "free-budget",
+      "topicLabel": "Free & Budget",
+      "readTime": "6 min read",
+      "publishedDate": "2026-10-11T08:29:42.549Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_b9f03a0c52da4c388e00dbcaaa759351~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-museum-fuer-fotografie.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_b9f03a0c52da4c388e00dbcaaa759351~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-museum-fuer-fotografie.jpg",
+      "alt": "The sandstone Museum für Fotografie with its gable inscription and the words Museum für Fotografie, seen across the railway tracks at Zoologischer Garten station under a blue sky",
+      "relatedToolSlug": "berlin-photo-museum-clock"
+    },
+    {
       "title": "Indoor Playgrounds in Berlin: What a Rainy Afternoon Really Costs",
       "slug": "indoor-playgrounds-in-berlin",
       "path": "/post/indoor-playgrounds-in-berlin",
@@ -1987,26 +2004,26 @@
       "thumb": "https://static.wixstatic.com/media/5a08a3_5bcc80c146344dfcb3097fef8f07c476~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-muggelsee-ladder-winter-night.jpg",
       "alt": "The DLRG lifeguard tower at Friedrichshagen on a frozen Müggelsee on a starry winter night, with ice floes and a yellow swimming ladder in the foreground",
       "relatedToolSlug": "berlin-winter-swim-lake-board"
-    },
-    {
-      "title": "Berlin Zoo Annual Pass: Which Card Pays Off for Your Household",
-      "slug": "berlin-zoo-annual-pass",
-      "path": "/post/berlin-zoo-annual-pass",
-      "url": "https://www.berlinwalk.com/post/berlin-zoo-annual-pass",
-      "excerpt": "Zoo, Aquarium and Tierpark Berlin sell four annual cards, family versions of each and a cheaper subscription with a two-year catch. Whether one pays off depends on how your household really uses the three places. Here is what each card costs, when it overtakes day tickets, and what changes with the new card from 2 November.",
-      "category": "Living in Berlin",
-      "categorySlug": "living-in-berlin",
-      "topic": "living-in-berlin",
-      "topicLabel": "Living in Berlin",
-      "readTime": "7 min read",
-      "publishedDate": "2026-09-28T09:02:36.883Z",
-      "image": "https://static.wixstatic.com/media/5a08a3_b5d80d25e7a64875a2e1ceb3e354e5f2~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-elefantentor-blue-hour.jpg",
-      "thumb": "https://static.wixstatic.com/media/5a08a3_b5d80d25e7a64875a2e1ceb3e354e5f2~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-elefantentor-blue-hour.jpg",
-      "alt": "The Elefantentor of Zoo Berlin at blue hour, the red and gold pagoda roof lit above two stone elephants on Budapester Straße",
-      "relatedToolSlug": "berlin-zoo-annual-pass-planner"
     }
   ],
   "allPosts": [
+    {
+      "title": "Photography Museums in Berlin: Which One Fits Your Day",
+      "slug": "photography-museums-in-berlin",
+      "path": "/post/photography-museums-in-berlin",
+      "url": "https://www.berlinwalk.com/post/photography-museums-in-berlin",
+      "excerpt": "Fotografiska stays open until 23:00, C/O Berlin is free for under-19s, the Newton museum shuts on Mondays and from 16 November. Which of Berlin's four photography venues fits your free hours, with a clock that checks your day.",
+      "category": "Tourist Tips",
+      "categorySlug": "tourist-tips",
+      "topic": "free-budget",
+      "topicLabel": "Free & Budget",
+      "readTime": "6 min read",
+      "publishedDate": "2026-10-11T08:29:42.549Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_b9f03a0c52da4c388e00dbcaaa759351~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-museum-fuer-fotografie.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_b9f03a0c52da4c388e00dbcaaa759351~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-museum-fuer-fotografie.jpg",
+      "alt": "The sandstone Museum für Fotografie with its gable inscription and the words Museum für Fotografie, seen across the railway tracks at Zoologischer Garten station under a blue sky",
+      "relatedToolSlug": "berlin-photo-museum-clock"
+    },
     {
       "title": "Indoor Playgrounds in Berlin: What a Rainy Afternoon Really Costs",
       "slug": "indoor-playgrounds-in-berlin",
