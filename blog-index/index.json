@@ -1,9 +1,9 @@
 {
-  "updatedAt": "2026-10-12T02:02:00.608Z",
+  "updatedAt": "2026-10-12T08:32:10.551Z",
   "source": "Wix Blog API",
   "popularSource": "Wix Blog metrics.views lifetime sort",
-  "totalPosts": 427,
-  "toolsTotal": 357,
+  "totalPosts": 428,
+  "toolsTotal": 358,
   "bookingUrl": "https://www.walkofberlin.com/book-berlin-walking-tour/berlin-then-and-now",
   "navTopics": [
     {
@@ -1802,6 +1802,23 @@
   ],
   "latest": [
     {
+      "title": "Repair Café Berlin: Where to Take It Before You Throw It Out",
+      "slug": "repair-cafe-berlin",
+      "path": "/post/repair-cafe-berlin",
+      "url": "https://www.berlinwalk.com/post/repair-cafe-berlin",
+      "excerpt": "Berlin's volunteer repair cafés meet on fixed rhythms like the first Sunday or the third Monday, and four want your name first. Where each one is, what it fixes, and why the 200-euro ReparaturBONUS is still closed.",
+      "category": "Living in Berlin",
+      "categorySlug": "living-in-berlin",
+      "topic": "living-in-berlin",
+      "topicLabel": "Living in Berlin",
+      "readTime": "6 min read",
+      "publishedDate": "2026-10-12T08:30:42.598Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_f65de559894948e78c3a8518b08107db~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-repair-cafe-soldering.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_f65de559894948e78c3a8518b08107db~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-repair-cafe-soldering.jpg",
+      "alt": "A repair café volunteer and a visitor holding an opened kitchen appliance together over a wooden workbench, with a soldering station and a power strip on the table",
+      "relatedToolSlug": "berlin-repair-cafe-calendar"
+    },
+    {
       "title": "Photography Museums in Berlin: Which One Fits Your Day",
       "slug": "photography-museums-in-berlin",
       "path": "/post/photography-museums-in-berlin",
@@ -1987,23 +2004,6 @@
       "thumb": "https://static.wixstatic.com/media/5a08a3_339ada94c77d4a68b2a5cb33c4cd6a94~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-small-group-museum-island.jpg",
       "alt": "A small walking tour group of five guests standing with their guide on the Friedrichsbrücke in Berlin, with the Alte Nationalgalerie and the Museum Island colonnade behind them",
       "relatedToolSlug": "berlin-tour-group-size-viewer"
-    },
-    {
-      "title": "Winter Swimming in Berlin: Where It Is Legal and How Cold the Lakes Get",
-      "slug": "winter-swimming-in-berlin",
-      "path": "/post/winter-swimming-in-berlin",
-      "url": "https://www.berlinwalk.com/post/winter-swimming-in-berlin",
-      "excerpt": "Berlin lidos close in September, but swimming stays legal all year in the right lakes. Here is where you can get in between October and March, how fast each lake cooled last winter by the city gauges, the groups and public ice swims, and how to start without getting hurt.",
-      "category": "Living in Berlin",
-      "categorySlug": "living-in-berlin",
-      "topic": "living-in-berlin",
-      "topicLabel": "Living in Berlin",
-      "readTime": "7 min read",
-      "publishedDate": "2026-09-29T08:44:19.424Z",
-      "image": "https://static.wixstatic.com/media/5a08a3_5bcc80c146344dfcb3097fef8f07c476~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-muggelsee-ladder-winter-night.jpg",
-      "thumb": "https://static.wixstatic.com/media/5a08a3_5bcc80c146344dfcb3097fef8f07c476~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-muggelsee-ladder-winter-night.jpg",
-      "alt": "The DLRG lifeguard tower at Friedrichshagen on a frozen Müggelsee on a starry winter night, with ice floes and a yellow swimming ladder in the foreground",
-      "relatedToolSlug": "berlin-winter-swim-lake-board"
     }
   ]
 }

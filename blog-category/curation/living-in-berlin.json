@@ -390,6 +390,12 @@
       "figure": "23 or 50 &euro;",
       "line": "for the same wet Saturday afternoon, two adults and two small children, depending on which hall you pick.",
       "tool": "berlin-indoor-play-bill"
+    },
+    "repair-cafe-berlin": {
+      "shelf": "geld",
+      "figure": "18 tables",
+      "line": "meet free across the city, most once or twice a month, and the 200 &euro; repair bonus has been closed since June 2025.",
+      "tool": "berlin-repair-cafe-calendar"
     }
   }
 }
