@@ -4,9 +4,10 @@
  * Its date chips read live availability for the paid tour's Wix service and
  * stay hidden while that service has no bookable dates (booking not open yet).
  * The Date Check card requests the dated Berlin Unlocked emails directly in
- * the article, after the compact tour card and a short stretch of editorial
- * copy. Both cards are light DOM, page-local, and owned by this
- * one idempotent injector.
+ * the article, right after the intro (since 12 Oct 2026; before that it came
+ * after the compact tour card). A dismissible Walk of Berlin Weekly bar slides
+ * in from the bottom once a reader is a third of the way down. All surfaces
+ * are light DOM, page-local, and owned by this one idempotent injector.
  */
 (function () {
   'use strict';
@@ -164,7 +165,43 @@
     return typeof container.contains === 'function' && container.contains(node);
   }
 
+  // Moved up on 12 Oct 2026 (Yusuf: the list is not growing). After the 2nd
+  // tour-card anchor the card sat at about a third of the page, where few
+  // readers ever arrive. It now follows the second real prose paragraph of the
+  // intro ("Updated:" stamps and the "On this page" label are skipped). To
+  // avoid a visible jump it takes the first such paragraph that is still below
+  // the fold when it mounts. Short posts keep the old position.
+  var DATE_CHECK_MIN_PROSE = 80;
+
+  function belowFold(node) {
+    try {
+      if (!node || typeof node.getBoundingClientRect !== 'function') return true;
+      var rect = node.getBoundingClientRect();
+      var viewport = window.innerHeight || (document.documentElement && document.documentElement.clientHeight) || 0;
+      return !viewport || rect.bottom > viewport;
+    } catch (err) {
+      return true;
+    }
+  }
+
+  function findEarlyDateCheckPoint(body) {
+    var blocks = dateCheckBlocks(body);
+    var prose = [];
+    for (var i = 0; i < blocks.length; i++) {
+      if ((blocks[i].tagName || '').toUpperCase() !== 'P') continue;
+      if (cleanText(blocks[i].textContent).length < DATE_CHECK_MIN_PROSE) continue;
+      prose.push(i);
+    }
+    if (prose.length < 4) return null;
+    for (var j = 1; j < prose.length - 1; j++) {
+      if (belowFold(blocks[prose[j]])) return insertionTarget(blocks[prose[j]], body);
+    }
+    return null;
+  }
+
   function findDateCheckInsertionPoint(body, bookingPoint) {
+    var early = findEarlyDateCheckPoint(body);
+    if (early) return early;
     if (!bookingPoint || !bookingPoint.after) return null;
     var blocks = dateCheckBlocks(body);
     var bookingAnchor = bookingPoint.after;
@@ -852,10 +889,201 @@
     if (observer) observer.disconnect();
   }
 
+  // Walk of Berlin Weekly bar (12 Oct 2026; Yusuf's goal: at least 20 new
+  // emails a week). Fixed to the viewport, so it never shifts the article.
+  // Same asset, consent text and payload as the category-page form in
+  // blog-category/blog-category-element.js: the server stores the identical
+  // consent snapshot and the reader still confirms by email (double opt-in).
+  var LETTER_API = DATE_CHECK_API;
+  var LETTER_ASSET_ID = 'berlin-weekly-letter';
+  var LETTER_ASSET_VERSION = '2026-09-v1';
+  var LETTER_CONSENT_VERSION = 'berlin-weekly-letter-v2-2026-10-02';
+  var LETTER_CONSENT_TEXT = 'Send me Walk of Berlin Weekly, my Monday letter: one email a week about what is actually changing in Berlin, plus occasional Walk of Berlin emails. I can unsubscribe from any email with one click.';
+  var LETTER_BAR_ID = 'bw-letter-bar';
+  var LETTER_BAR_STYLE_ID = 'bw-letter-bar-style';
+  var LETTER_DISMISS_KEY = 'bwLetterBarDismissedUntil';
+  var LETTER_JOINED_KEY = 'bwLetterBarJoined';
+  var LETTER_DISMISS_MS = 14 * 24 * 60 * 60 * 1000;
+  var LETTER_SHOW_DEPTH = 0.33;
+  var letterBarStarted = false;
+
+  function storageGet(key) {
+    try { return window.localStorage.getItem(key); } catch (err) { return null; }
+  }
+
+  function storageSet(key, value) {
+    try { window.localStorage.setItem(key, String(value)); } catch (err) {}
+  }
+
+  function letterBarSuppressed(now) {
+    if (storageGet(LETTER_JOINED_KEY)) return true;
+    return Number(storageGet(LETTER_DISMISS_KEY) || 0) > now;
+  }
+
+  function scrollDepth() {
+    var doc = document.documentElement || {};
+    var max = Math.max((doc.scrollHeight || 0) - (window.innerHeight || 0), 1);
+    return (window.pageYOffset || doc.scrollTop || 0) / max;
+  }
+
+  function letterBarStyles() {
+    if (document.getElementById(LETTER_BAR_STYLE_ID)) return;
+    var style = document.createElement('style');
+    style.id = LETTER_BAR_STYLE_ID;
+    style.textContent = [
+      '#bw-letter-bar{position:fixed;left:12px;right:12px;bottom:12px;z-index:9990;max-width:520px;margin:0 auto;box-sizing:border-box;background:#fff;border:2px solid #1B5E20;border-radius:14px;box-shadow:0 10px 30px rgba(0,0,0,.18);padding:14px 16px 12px;font-family:Montserrat,Arial,sans-serif;color:#212121;transform:translateY(130%);transition:transform .35s ease}',
+      '#bw-letter-bar.bw-lb-open{transform:translateY(0)}',
+      '@media (prefers-reduced-motion:reduce){#bw-letter-bar{transition:none}}',
+      '#bw-letter-bar *{box-sizing:border-box}',
+      '#bw-letter-bar .bw-lb-k{margin:0 30px 2px 0;font-size:12px;letter-spacing:.08em;text-transform:uppercase;font-weight:800;color:#1B5E20}',
+      '#bw-letter-bar .bw-lb-t{margin:0 30px 10px 0;font-size:14px;line-height:1.4;color:#212121}',
+      '#bw-letter-bar .bw-lb-row{display:flex;gap:8px}',
+      '#bw-letter-bar .bw-lb-row input{flex:1;min-width:0;font-family:inherit;font-size:16px;padding:10px 12px;border:1px solid #9aa79a;border-radius:10px;background:#fff;color:#212121}',
+      '#bw-letter-bar .bw-lb-row button,#bw-letter-bar .bw-lb-row button:hover,#bw-letter-bar .bw-lb-row button:focus{font-family:inherit;font-weight:800;font-size:14px;padding:10px 14px;border:0;border-radius:999px;background:#FFE600;color:#123D18;cursor:pointer;white-space:nowrap}',
+      '#bw-letter-bar .bw-lb-row button[disabled]{opacity:.6;cursor:default}',
+      '#bw-letter-bar .bw-lb-cs{display:flex;gap:8px;align-items:flex-start;margin-top:8px;font-size:11.5px;line-height:1.4;color:#4a554a}',
+      '#bw-letter-bar .bw-lb-cs input{margin-top:2px;flex:0 0 auto}',
+      '#bw-letter-bar .bw-lb-cs a{color:#1B5E20}',
+      '#bw-letter-bar .bw-lb-hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}',
+      '#bw-letter-bar .bw-lb-msg{margin:6px 0 0;font-size:12.5px;color:#1B5E20}',
+      '#bw-letter-bar .bw-lb-msg.bw-lb-err{color:#b3261e}',
+      '#bw-letter-bar .bw-lb-close{position:absolute;top:6px;right:8px;width:32px;height:32px;padding:0;border:0;background:transparent;font-size:22px;line-height:1;color:#4a554a;cursor:pointer}'
+    ].join('');
+    document.head.appendChild(style);
+  }
+
+  function buildLetterBar() {
+    var bar = document.createElement('div');
+    bar.id = LETTER_BAR_ID;
+    bar.setAttribute('data-bw-letter-bar', '');
+    bar.setAttribute('role', 'region');
+    bar.setAttribute('aria-label', 'Walk of Berlin Weekly');
+    bar.innerHTML =
+      '<button type="button" class="bw-lb-close" aria-label="Close">&times;</button>' +
+      '<p class="bw-lb-k">Walk of Berlin Weekly</p>' +
+      '<p class="bw-lb-t">My Monday letter about what is actually changing in Berlin. One email a week.</p>' +
+      '<form novalidate>' +
+      '<div class="bw-lb-row"><input type="email" name="email" autocomplete="email" required placeholder="you@example.com" aria-label="Your email">' +
+      '<button type="submit">Send it to me</button></div>' +
+      '<label class="bw-lb-cs"><input type="checkbox" name="consent" required><span>' + escapeHtml(LETTER_CONSENT_TEXT) +
+      ' Read the <a href="/privacy-policy" target="_blank" rel="noopener">Privacy Policy</a>.</span></label>' +
+      '<label class="bw-lb-hp" aria-hidden="true">Leave this empty<input type="text" name="website" tabindex="-1" autocomplete="off"></label>' +
+      '<p class="bw-lb-msg" role="status" aria-live="polite"></p>' +
+      '</form>';
+    return bar;
+  }
+
+  function closeLetterBar(bar, remember) {
+    if (remember) storageSet(LETTER_DISMISS_KEY, Date.now() + LETTER_DISMISS_MS);
+    bar.classList.remove('bw-lb-open');
+    window.setTimeout(function () {
+      if (bar.parentNode) bar.parentNode.removeChild(bar);
+    }, 400);
+  }
+
+  function bindLetterBar(bar) {
+    var form = bar.querySelector('form');
+    var msg = bar.querySelector('.bw-lb-msg');
+    var button = bar.querySelector('button[type="submit"]');
+    var startedAt = new Date().toISOString();
+    bar.querySelector('.bw-lb-close').addEventListener('click', function () {
+      closeLetterBar(bar, true);
+    });
+    form.addEventListener('submit', function (event) {
+      event.preventDefault();
+      var email = String(form.email.value || '').trim().toLowerCase();
+      if (!email || email.indexOf('@') < 1) {
+        msg.className = 'bw-lb-msg bw-lb-err';
+        msg.textContent = 'That email does not look right. Check it and try again.';
+        return;
+      }
+      if (!form.consent.checked) {
+        msg.className = 'bw-lb-msg bw-lb-err';
+        msg.textContent = 'Tick the box so I am allowed to email you.';
+        return;
+      }
+      button.disabled = true;
+      msg.className = 'bw-lb-msg';
+      msg.textContent = 'Sending.';
+      fetch(LETTER_API + '?action=submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          email: email,
+          consent: true,
+          consentVersion: LETTER_CONSENT_VERSION,
+          assetId: LETTER_ASSET_ID,
+          assetVersion: LETTER_ASSET_VERSION,
+          sourceSlug: currentSlug(),
+          sourceUrl: window.location.href,
+          placement: 'post_letter_bar',
+          variant: 'letter_bar',
+          analyticsConsentAtSubmit: false,
+          screenWidth: Number(window.innerWidth || 0),
+          screenHeight: Number(window.innerHeight || 0),
+          website: String(form.website.value || ''),
+          startedAt: startedAt,
+          submittedAt: new Date().toISOString()
+        })
+      }).then(function (r) {
+        if (!r.ok) throw new Error('submit ' + r.status);
+        return r.json();
+      }).then(function () {
+        // The API answers the same way whatever it decides, so this only
+        // reports that the request was taken. The confirmation email is what
+        // actually subscribes the reader.
+        storageSet(LETTER_JOINED_KEY, Date.now());
+        form.innerHTML = '<p class="bw-lb-t" style="margin:0"><strong>Check your inbox.</strong> Click the link in my email to confirm, and the next letter reaches you on Monday morning.</p>';
+        window.setTimeout(function () { closeLetterBar(bar, false); }, 9000);
+      }).catch(function () {
+        button.disabled = false;
+        msg.className = 'bw-lb-msg bw-lb-err';
+        msg.textContent = 'That did not go through. Try again in a moment.';
+      });
+    });
+  }
+
+  function showLetterBar() {
+    if (document.getElementById(LETTER_BAR_ID) || !document.body) return;
+    letterBarStyles();
+    var bar = buildLetterBar();
+    document.body.appendChild(bar);
+    bindLetterBar(bar);
+    var raf = window.requestAnimationFrame || function (fn) { return window.setTimeout(fn, 16); };
+    raf(function () { raf(function () { bar.classList.add('bw-lb-open'); }); });
+  }
+
+  function initLetterBar() {
+    if (letterBarStarted || !isSurfacePath()) return;
+    if (/[?&]bwLetterBar=0(?:&|$)/.test(location.search)) return;
+    if (letterBarSuppressed(Date.now())) return;
+    letterBarStarted = true;
+    var shown = false;
+    var ticking = false;
+    function check() {
+      ticking = false;
+      if (shown) return;
+      var active = document.activeElement;
+      // Never interrupt a reader who is filling in the Date Check card.
+      if (active && active.closest && active.closest('[' + DATE_CHECK_MARKER + ']')) return;
+      if (scrollDepth() < LETTER_SHOW_DEPTH) return;
+      shown = true;
+      window.removeEventListener('scroll', onScroll);
+      showLetterBar();
+    }
+    function onScroll() {
+      if (ticking) return;
+      ticking = true;
+      (window.requestAnimationFrame || function (fn) { return window.setTimeout(fn, 16); })(check);
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+  }
+
   function boot() {
     retries = 0;
     scheduleInject(0);
     startObserver();
+    initLetterBar();
   }
 
   if (window.BW_BLOG_INJECTOR_TEST_HOOKS === true) {
@@ -869,7 +1097,10 @@
       findContentColumn: findContentColumn,
       syncSurfaceGutters: syncSurfaceGutters,
       findDateCheckInsertionPoint: findDateCheckInsertionPoint,
-      findBookingInsertionPoint: findBookingInsertionPoint
+      findBookingInsertionPoint: findBookingInsertionPoint,
+      letterBarSuppressed: letterBarSuppressed,
+      buildLetterBar: buildLetterBar,
+      letterConsentText: LETTER_CONSENT_TEXT
     };
     return;
   }
