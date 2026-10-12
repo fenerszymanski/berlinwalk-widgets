@@ -1,0 +1,332 @@
+/* Read-along player and transcript for a Walk of Berlin podcast episode.
+   Brand: Fraunces for headings, Space Grotesk for reading copy, IBM Plex Mono for times.
+   Yellow surfaces carry dark green text (never white on yellow). */
+
+:root {
+  --bw-green: #1B5E20;
+  --bw-green-deep: #123D18;
+  --bw-yellow: #FFE600;
+  --bw-cream: #FAFAF5;
+  --bw-ink: #212121;
+  --bw-muted: #5E655B;
+  --bw-line: #DCE8C8;
+  --bw-highlight: rgba(255, 230, 0, 0.42);
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: var(--bw-cream);
+  color: var(--bw-ink);
+  font-family: "Space Grotesk", system-ui, -apple-system, "Segoe UI", sans-serif;
+  -webkit-text-size-adjust: 100%;
+}
+
+.ra {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 16px;
+}
+
+/* Player bar */
+.ra-player {
+  padding: 14px 16px 14px;
+  background: #fff;
+  border: 1px solid var(--bw-line);
+  border-radius: 14px;
+}
+.ra-top { display: flex; align-items: center; gap: 14px; }
+.ra-art {
+  flex: 0 0 72px;
+  width: 72px;
+  height: 72px;
+  border-radius: 10px;
+  object-fit: cover;
+  background: var(--bw-green);
+}
+.ra-ep { min-width: 0; }
+.ra-show {
+  margin: 0 0 4px;
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--bw-green);
+}
+.ra-title {
+  margin: 0;
+  font-family: Fraunces, Georgia, serif;
+  font-weight: 600;
+  font-size: 22px;
+  line-height: 1.2;
+  color: var(--bw-ink);
+}
+
+.ra-controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 14px;
+}
+.ra-play {
+  flex: 0 0 48px;
+  width: 48px;
+  height: 48px;
+  display: grid;
+  place-items: center;
+  border: 0;
+  border-radius: 50%;
+  background: var(--bw-green);
+  color: #fff;
+  cursor: pointer;
+}
+.ra-play svg { width: 22px; height: 22px; fill: currentColor; display: block; }
+.ra-play [hidden] { display: none; }
+.ra-play:focus-visible,
+.ra-speed:focus-visible,
+.ra-progress:focus-visible,
+.ra-links a:focus-visible { outline: 3px solid var(--bw-green); outline-offset: 2px; }
+.ra-play:disabled,
+.ra-speed:disabled { opacity: 0.45; cursor: default; }
+.ra-time {
+  flex: 1;
+  margin: 0;
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 15px;
+  color: var(--bw-ink);
+  white-space: nowrap;
+}
+.ra-sep { color: var(--bw-muted); }
+.ra-speed {
+  flex: 0 0 auto;
+  min-width: 60px;
+  min-height: 44px;
+  padding: 8px 12px;
+  border: 1px solid var(--bw-line);
+  border-radius: 999px;
+  background: #fff;
+  color: var(--bw-green);
+  font: 600 15px "IBM Plex Mono", ui-monospace, monospace;
+  cursor: pointer;
+}
+.ra-speed:hover { border-color: var(--bw-green); }
+
+.ra-progress {
+  position: relative;
+  height: 28px;
+  margin-top: 10px;
+  cursor: pointer;
+  touch-action: none;
+  user-select: none;
+  border-radius: 8px;
+}
+.ra-progress[aria-disabled="true"] { cursor: default; opacity: 0.5; }
+.ra-track {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  height: 6px;
+  margin-top: -3px;
+  background: var(--bw-line);
+  border-radius: 3px;
+  overflow: hidden;
+}
+.ra-fill { height: 100%; width: 0; background: var(--bw-green); }
+.ra-knob {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 18px;
+  height: 18px;
+  margin: -9px 0 0 -9px;
+  border-radius: 50%;
+  background: var(--bw-yellow);
+  border: 2px solid var(--bw-green-deep);
+  box-sizing: border-box;
+}
+
+.ra-note {
+  margin: 10px 0 0;
+  padding: 10px 12px;
+  border-left: 3px solid var(--bw-green);
+  background: #F2F8E8;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--bw-ink);
+}
+.ra-note[hidden] { display: none; }
+
+.ra-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 18px;
+  margin-top: 8px;
+  font-size: 14px;
+}
+.ra-links a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 40px;
+  color: var(--bw-green);
+  font-weight: 700;
+}
+
+/* Chapter chips: a single scrolling row. */
+.ra-chapters {
+  position: relative;
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding: 16px 0 14px;
+  scrollbar-width: none;
+}
+.ra-chapters::-webkit-scrollbar { display: none; }
+.ra-chip {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 40px;
+  padding: 8px 14px;
+  border: 1px solid var(--bw-line);
+  border-radius: 999px;
+  background: #fff;
+  color: var(--bw-ink);
+  font: 500 15px/1.2 "Space Grotesk", system-ui, sans-serif;
+  cursor: pointer;
+}
+.ra-chip:hover { border-color: var(--bw-green); }
+.ra-chip:focus-visible { outline: 3px solid var(--bw-green); outline-offset: 2px; }
+.ra-chip-time {
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--bw-green);
+}
+.ra-chip[aria-current="true"] {
+  background: var(--bw-yellow);
+  border-color: var(--bw-yellow);
+  color: var(--bw-green-deep);
+}
+.ra-chip[aria-current="true"] .ra-chip-time { color: var(--bw-green-deep); }
+
+/* Transcript panel: its own scroll. 70 % of the viewport, but never more than the
+   space left under the player and chips (about 560 px), so a fixed-height iframe
+   fits without scrolling inside. At least 420 px. */
+.ra-panel {
+  position: relative;
+  min-height: 420px;
+  max-height: max(420px, min(70vh, calc(100vh - 560px)));
+  overflow-y: auto;
+  padding: 20px 22px 6px;
+  background: #fff;
+  border: 1px solid var(--bw-line);
+  border-radius: 12px;
+  overscroll-behavior: contain;
+}
+.ra-panel:focus-visible { outline: 3px solid var(--bw-green); outline-offset: 2px; }
+
+.ra-text > noscript { display: block; font-size: 16px; line-height: 1.6; }
+
+.ra-chapter { margin: 0; }
+.ra-chapter h3 {
+  margin: 28px 0 10px;
+  font-family: Fraunces, Georgia, serif;
+  font-weight: 600;
+  font-size: 22px;
+  line-height: 1.25;
+  color: var(--bw-green);
+}
+.ra-chapter:first-child h3 { margin-top: 0; }
+.ra-ch-time {
+  display: inline-block;
+  margin-right: 8px;
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--bw-muted);
+  vertical-align: 3px;
+}
+
+.ra-para {
+  margin: 0 0 14px;
+  font-size: 18px;
+  line-height: 1.6;
+  color: var(--bw-ink);
+}
+
+/* Break (mid-roll and outro spot) reads as a distinct, smaller block. */
+.ra-break {
+  margin: 22px 0 8px;
+  padding-top: 10px;
+  border-top: 1px dashed var(--bw-line);
+}
+.ra-break-label {
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--bw-green);
+}
+.ra-para--spot { font-size: 15px; line-height: 1.55; }
+
+/* Phrases. Spoken: normal. Current: bold with a soft yellow highlight. Upcoming: muted. */
+.ra-phrase {
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+  border-radius: 3px;
+  transition: background-color 0.35s ease, color 0.35s ease;
+  cursor: pointer;
+}
+.ra-phrase.is-upcoming { color: #6A7067; }
+.ra-phrase.is-current {
+  font-weight: 700;
+  background-color: var(--bw-highlight);
+  color: var(--bw-ink);
+}
+.ra-phrase:focus-visible { outline: 2px solid var(--bw-green); outline-offset: 2px; }
+
+/* Static view (audio unavailable): plain readable text, no seek. */
+.ra--static .ra-phrase { cursor: default; }
+
+.ra-back {
+  position: sticky;
+  bottom: 10px;
+  display: block;
+  margin: 12px auto 10px;
+  padding: 10px 18px;
+  border: 0;
+  border-radius: 999px;
+  background: var(--bw-yellow);
+  color: var(--bw-green-deep);
+  font: 700 14px/1 "Space Grotesk", system-ui, sans-serif;
+  box-shadow: 0 2px 10px rgba(18, 61, 24, 0.18);
+  cursor: pointer;
+}
+.ra-back[hidden] { display: none; }
+.ra-back:focus-visible { outline: 3px solid var(--bw-green); outline-offset: 2px; }
+
+.ra-foot {
+  margin: 14px 0 4px;
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 13px;
+  color: var(--bw-muted);
+}
+.ra-foot a { color: var(--bw-green); }
+
+@media (max-width: 480px) {
+  .ra { padding: 12px 16px; }
+  .ra-title { font-size: 20px; }
+  .ra-art { flex-basis: 60px; width: 60px; height: 60px; }
+  .ra-panel { padding: 16px 16px 6px; }
+  .ra-chapter h3 { font-size: 20px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ra-phrase { transition: none; }
+}

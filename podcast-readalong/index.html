@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Read along | Walk of Berlin</title>
+  <meta name="description" content="Listen to the episode and follow the transcript as it is read.">
+  <link rel="icon" href="data:,">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600&family=Space+Grotesk:wght@400;500;700&family=IBM+Plex+Mono:wght@500;600&display=swap">
+  <link rel="stylesheet" href="css/readalong.css">
+</head>
+<body>
+  <main class="ra" id="ra">
+    <section class="ra-player" aria-label="Episode player">
+      <div class="ra-top">
+        <img class="ra-art" id="ra-art" alt="" width="72" height="72">
+        <div class="ra-ep">
+          <p class="ra-show" id="ra-show">Where It Happened &middot; Walk of Berlin</p>
+          <h1 class="ra-title" id="ra-title">Loading the episode</h1>
+        </div>
+      </div>
+      <div class="ra-controls">
+        <button type="button" class="ra-play" id="ra-play" aria-label="Play" disabled>
+          <svg class="ra-icon-play" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l10.5-6.5z"/></svg>
+          <svg class="ra-icon-pause" viewBox="0 0 24 24" aria-hidden="true" hidden><path d="M7 5h3.6v14H7zM13.4 5H17v14h-3.6z"/></svg>
+        </button>
+        <p class="ra-time" aria-live="off"><span id="ra-now">0:00</span><span class="ra-sep"> / </span><span id="ra-total">--:--</span></p>
+        <button type="button" class="ra-speed" id="ra-speed" aria-label="Playback speed 1x" disabled>1&times;</button>
+      </div>
+      <div class="ra-progress" id="ra-progress" role="slider" tabindex="0"
+           aria-label="Seek" aria-valuemin="0" aria-valuemax="0" aria-valuenow="0" aria-valuetext="0:00">
+        <div class="ra-track"><div class="ra-fill" id="ra-fill"></div></div>
+        <div class="ra-knob" id="ra-knob"></div>
+      </div>
+      <p class="ra-note" id="ra-note" hidden></p>
+      <nav class="ra-links" aria-label="Listen elsewhere">
+        <a id="ra-spotify" href="https://open.spotify.com/show/4hd8BvMRs7dwdogXr3mzzG" target="_blank" rel="noopener">Follow on Spotify</a>
+        <a id="ra-rss" href="https://anchor.fm/s/1186f4668/podcast/rss" target="_blank" rel="noopener">RSS</a>
+      </nav>
+    </section>
+
+    <nav class="ra-chapters" id="ra-chapters" aria-label="Chapters"></nav>
+
+    <section class="ra-panel" id="ra-panel" role="region" aria-label="Transcript" tabindex="0">
+      <div class="ra-text" id="ra-text">
+        <noscript>Turn on JavaScript to follow the text while you listen. The episode plays in the player above.</noscript>
+      </div>
+      <button type="button" class="ra-back" id="ra-back" hidden>Back to the voice</button>
+    </section>
+
+    <footer class="ra-foot">
+      <a href="https://walkofberlin.com" target="_blank" rel="noopener">walkofberlin.com</a>
+    </footer>
+    <audio id="ra-audio" preload="metadata"></audio>
+  </main>
+  <script src="js/readalong.js"></script>
+</body>
+</html>
