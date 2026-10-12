@@ -6,7 +6,9 @@
  * The Date Check card requests the dated Berlin Unlocked emails directly in
  * the article, right after the intro (since 12 Oct 2026; before that it came
  * after the compact tour card). A dismissible Walk of Berlin Weekly bar slides
- * in from the bottom once a reader is a third of the way down. All surfaces
+ * in from the bottom once a reader is a third of the way down. On the Berlin
+ * Wall and Cold War posts an East or West card links to the 1989 street
+ * check landing page in mid-article (since 12 Oct 2026). All surfaces
  * are light DOM, page-local, and owned by this one idempotent injector.
  */
 (function () {
@@ -30,6 +32,22 @@
   var DIRECT_CONSENT_TEXT = 'By clicking “Email my Berlin dates”, you agree to receive Berlin Unlocked, emails timed to your trip, and occasional Berlin tips and offers from Walk of Berlin by email. You can unsubscribe at any time.';
   var BOOKING_MARKER = 'data-bw-blog-booking';
   var DATE_CHECK_MARKER = 'data-bw-date-check-card';
+  var EAST_WEST_MARKER = 'data-bw-eastwest-card';
+  var EAST_WEST_STYLE_ID = 'bw-eastwest-card-style';
+  var EAST_WEST_URL = 'https://www.walkofberlin.com/east-or-west';
+  var EAST_WEST_IMAGE = 'https://fenerszymanski.github.io/berlinwalk-widgets/east-west-lp/img/brandenburg-gate-wall-1989.jpg';
+  // Posts about the Wall, the division and East or West Berlin (Yusuf, 12 Oct 2026:
+  // "Duvar yazılarına kartı ekle"). Only these slugs get the card.
+  var EAST_WEST_SLUGS = [
+    'where-was-the-berlin-wall-interactive-map', 'how-berlin-was-divided-a-simple-guide-to-east-vs-west',
+    'the-berlin-wall-where-it-stood-and-what-s-left-in-2026', 'berlin-wall-map-overlay-where-you-are-standing',
+    'berlin-wall-in-mitte-city-centre', 'berlin-wall-trail', 'berlin-wall-memorial-bernauer-strasse',
+    'east-side-gallery-berlin-guide', 'exploring-checkpoint-charlie-a-historical-journey-through-cold-war-berlin-s-iconic-border-crossing',
+    'cold-war-berlin-in-5-key-locations-you-can-still-visit', 'potsdamer-platz-berlin', 'traenenpalast-berlin',
+    'karl-marx-allee-berlin', 'the-ampelmann-how-a-traffic-light-became-berlin-s-most-beloved-symbol',
+    'is-the-ddr-museum-worth-it', 'stasi-museum-berlin', 'hohenschonhausen-memorial-berlin', 'teufelsberg-berlin',
+    'berlin-s-lost-neighborhood-what-the-gdr-demolished-to-build-a-socialist-utopia'
+  ];
   var BOOKING_STYLE_ID = 'bw-blog-booking-inject-style';
   var DATE_CHECK_STYLE_ID = 'bw-date-check-blog-card-style';
   // Card A/B ended by owner decision on 2026-09-10.  'form', the shipped
@@ -87,7 +105,7 @@
 
   function hasSurfaceAncestor(el) {
     if (!el || !el.closest) return false;
-    if (el.closest('[' + BOOKING_MARKER + '],[' + DATE_CHECK_MARKER + '],[data-bw-leadform],[data-bw-tourcta],[data-bw-blog-mobile-guide],[data-bw-blog-mobile-nav],[data-bw-blog-tool-prompt],[data-bw-blog-journey],[data-bw-blog-share-bar]')) return true;
+    if (el.closest('[' + BOOKING_MARKER + '],[' + DATE_CHECK_MARKER + '],[' + EAST_WEST_MARKER + '],[data-bw-leadform],[data-bw-tourcta],[data-bw-blog-mobile-guide],[data-bw-blog-mobile-nav],[data-bw-blog-tool-prompt],[data-bw-blog-journey],[data-bw-blog-share-bar]')) return true;
     var container = el.closest('figure,li');
     return Boolean(container && container !== el);
   }
@@ -827,6 +845,86 @@
     return true;
   }
 
+  function eastWestSlug(slug) {
+    return EAST_WEST_SLUGS.indexOf(String(slug || '')) !== -1;
+  }
+
+  // Mid-article: just before the first H2 that starts at or after 40% of the
+  // article blocks, so the card sits between two sections. Posts without such a
+  // heading take the prose paragraph nearest the middle.
+  function findEastWestPoint(body) {
+    var blocks = dateCheckBlocks(body);
+    if (blocks.length < 6) return null;
+    var start = Math.floor(blocks.length * 0.4);
+    for (var i = Math.max(start, 1); i < blocks.length; i++) {
+      if ((blocks[i].tagName || '').toUpperCase() === 'H2') return insertionTarget(blocks[i - 1], body);
+    }
+    for (var j = Math.floor(blocks.length / 2); j < blocks.length - 1; j++) {
+      if ((blocks[j].tagName || '').toUpperCase() === 'P' && cleanText(blocks[j].textContent).length >= DATE_CHECK_MIN_PROSE) return insertionTarget(blocks[j], body);
+    }
+    return null;
+  }
+
+  function eastWestHref(slug) {
+    return EAST_WEST_URL + '?utm_source=blog&utm_medium=card&utm_campaign=east_west_lp&utm_content=' + encodeURIComponent(slug || 'blog-post');
+  }
+
+  function ensureEastWestStyles() {
+    if (document.getElementById(EAST_WEST_STYLE_ID)) return;
+    var style = document.createElement('style');
+    style.id = EAST_WEST_STYLE_ID;
+    var c = 'html body .bw-ew-card[' + EAST_WEST_MARKER + ']';
+    style.textContent = [
+      c + '{display:grid!important;grid-template-columns:34% minmax(0,66%)!important;width:100%;margin:30px 0!important;border-radius:20px!important;overflow:hidden!important;background:#1B5E20!important;color:#fff!important;box-shadow:0 16px 36px -26px rgba(18,61,24,.58)!important;font-family:Montserrat,Arial,sans-serif!important}',
+      c + ' *{box-sizing:border-box}',
+      c + ' .bw-ew-card__visual{position:relative!important;min-height:220px!important;margin:0!important;overflow:hidden!important;background:#0B351A!important}',
+      c + ' .bw-ew-card__visual img{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;max-width:none!important;margin:0!important;object-fit:cover!important;object-position:56% 50%!important}',
+      c + ' .bw-ew-card__body{display:flex!important;flex-direction:column!important;justify-content:center!important;gap:10px!important;padding:26px 28px!important;min-width:0!important}',
+      c + ' .bw-ew-card__eyebrow{margin:0!important;padding:0!important;font:700 11px/1.35 Montserrat,Arial,sans-serif!important;letter-spacing:.14em!important;text-transform:uppercase!important;color:#FFE600!important}',
+      c + ' .bw-ew-card__title{margin:0!important;padding:0!important;font:900 22px/1.25 Montserrat,Arial,sans-serif!important;letter-spacing:0!important;color:#fff!important}',
+      c + ' .bw-ew-card__copy{margin:0!important;padding:0!important;font:400 15px/1.6 Montserrat,Arial,sans-serif!important;color:#E3EEDD!important}',
+      c + ' a.bw-ew-card__cta{display:inline-flex!important;align-items:center!important;gap:10px!important;align-self:flex-start!important;margin:6px 0 0!important;padding:13px 20px!important;border-radius:10px!important;background:#FFE600!important;color:#123D18!important;font:800 16px/1.2 Montserrat,Arial,sans-serif!important;text-decoration:none!important}',
+      c + ' a.bw-ew-card__cta:hover,' + c + ' a.bw-ew-card__cta:focus,' + c + ' a.bw-ew-card__cta:visited{color:#123D18!important;text-decoration:none!important}',
+      c + ' a.bw-ew-card__cta:focus-visible{outline:3px solid #fff!important;outline-offset:3px!important}',
+      '@media(max-width:600px){' + c + '{grid-template-columns:1fr!important;border-radius:16px!important;margin:24px 0!important}' + c + ' .bw-ew-card__visual{min-height:170px!important}' + c + ' .bw-ew-card__body{padding:20px!important}' + c + ' .bw-ew-card__title{font-size:20px!important}}'
+    ].join('');
+    document.head.appendChild(style);
+  }
+
+  function buildEastWestCard(slug) {
+    ensureEastWestStyles();
+    var card = document.createElement('aside');
+    card.setAttribute(EAST_WEST_MARKER, '1');
+    card.className = 'bw-ew-card';
+    card.setAttribute('aria-label', 'Check whether your street was in East or West Berlin');
+    card.innerHTML = [
+      '<div class="bw-ew-card__visual"><img src="' + EAST_WEST_IMAGE + '" alt="The Berlin Wall at the Brandenburg Gate in 1989, lit at night" loading="lazy" decoding="async"></div>',
+      '<div class="bw-ew-card__body">',
+      '<div class="bw-ew-card__eyebrow">Berlin, 1989</div>',
+      '<div class="bw-ew-card__title">Was your street in East or West Berlin?</div>',
+      '<div class="bw-ew-card__copy">Type any Berlin address. You see which side of the Wall it was on, how far the Wall ran from it and the nearest checkpoint.</div>',
+      '<a class="bw-ew-card__cta" href="' + escapeAttr(eastWestHref(slug)) + '">Check your street <span aria-hidden="true">→</span></a>',
+      '</div>'
+    ].join('');
+    card.querySelector('a').addEventListener('click', function () {
+      if (!analyticsAllowed()) return;
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({ event: 'bw_east_west_card_click', placement: 'blog_mid_article', source_slug: slug || currentSlug() });
+    });
+    return card;
+  }
+
+  function injectEastWestCard(body) {
+    var slug = currentSlug();
+    if (!eastWestSlug(slug)) return;
+    var existing = removeDuplicateSurfaces(EAST_WEST_MARKER);
+    if (existing) return;
+    var point = findEastWestPoint(body);
+    if (!point) return;
+    var card = buildEastWestCard(slug);
+    if (insertAfter(point, card)) syncSurfaceGutters(card, body, true);
+  }
+
   function injectSurfaces() {
     if (!ENABLED || !isSurfacePath()) return false;
     var body = findPostBody();
@@ -850,6 +948,7 @@
     }
     if (booking) syncSurfaceGutters(booking, body, false);
     if (dateCard) syncSurfaceGutters(dateCard, body, true);
+    try { injectEastWestCard(body); } catch (err) { /* never block the other surfaces */ }
     if (booking && dateCard) {
       retries = 0;
       return true;
@@ -880,7 +979,7 @@
   }
 
   function removeSurfaces() {
-    [BOOKING_MARKER, DATE_CHECK_MARKER].forEach(function (marker) {
+    [BOOKING_MARKER, DATE_CHECK_MARKER, EAST_WEST_MARKER].forEach(function (marker) {
       queryAll('[' + marker + ']').forEach(function (node) {
         if (node._bwDateCheckMeasurement) node._bwDateCheckMeasurement.dispose();
         if (node.parentNode) node.parentNode.removeChild(node);
@@ -1100,7 +1199,11 @@
       findBookingInsertionPoint: findBookingInsertionPoint,
       letterBarSuppressed: letterBarSuppressed,
       buildLetterBar: buildLetterBar,
-      letterConsentText: LETTER_CONSENT_TEXT
+      letterConsentText: LETTER_CONSENT_TEXT,
+      eastWestSlug: eastWestSlug,
+      eastWestHref: eastWestHref,
+      findEastWestPoint: findEastWestPoint,
+      buildEastWestCard: buildEastWestCard
     };
     return;
   }
