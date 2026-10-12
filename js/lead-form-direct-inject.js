@@ -8,7 +8,9 @@
  * after the compact tour card). A dismissible Walk of Berlin Weekly bar slides
  * in from the bottom once a reader is a third of the way down. On the Berlin
  * Wall and Cold War posts an East or West card links to the 1989 street
- * check landing page in mid-article (since 12 Oct 2026). All surfaces
+ * check landing page in mid-article (since 12 Oct 2026). Every inline
+ * surface is placed once per page view and then stays put (see placeSurface).
+ * All surfaces
  * are light DOM, page-local, and owned by this one idempotent injector.
  */
 (function () {
@@ -18,6 +20,11 @@
   var PREVIEW_ENABLED = window.BW_ENABLE_BLOG_BOOKING === true || /[?&]bwBlogBooking=1(?:&|$)/.test(location.search);
   var ENABLED = !DISABLED && (location.pathname.indexOf('/post/') === 0 || PREVIEW_ENABLED);
   if (!ENABLED) return;
+  // One running copy per page: a second copy would fight the first over the same cards.
+  if (window.BW_BLOG_INJECTOR_TEST_HOOKS !== true) {
+    if (window.__bwBlogSurfacesActive) return;
+    window.__bwBlogSurfacesActive = true;
+  }
 
   // Berlin Then and Now (Wix Bookings service 145cb27e). The old service
   // 448872c2 must never feed this card again.
@@ -165,6 +172,17 @@
     return target.parentNode ? { parent: target.parentNode, after: target } : null;
   }
 
+  // insertionTarget plus the content block it follows, so a placement can be
+  // found again by that block's text after Wix re-renders the article.
+  function pointAt(block, body, kind) {
+    var point = insertionTarget(block, body);
+    if (point) {
+      point.block = block;
+      point.kind = kind || 'fixed';
+    }
+    return point;
+  }
+
   function dateCheckBlocks(body) {
     if (!body || !body.querySelectorAll) return [];
     var nodes = body.querySelectorAll('h2,h3,p,blockquote');
@@ -212,7 +230,7 @@
     }
     if (prose.length < 4) return null;
     for (var j = 1; j < prose.length - 1; j++) {
-      if (belowFold(blocks[prose[j]])) return insertionTarget(blocks[prose[j]], body);
+      if (belowFold(blocks[prose[j]])) return pointAt(blocks[prose[j]], body, 'early');
     }
     return null;
   }
@@ -231,7 +249,7 @@
     var laterIndex = anchorIndex + 3;
     if (laterIndex >= blocks.length) laterIndex = blocks.length - 1;
     if (laterIndex <= anchorIndex) return null;
-    return insertionTarget(blocks[laterIndex], body);
+    return pointAt(blocks[laterIndex], body, 'fallback');
   }
 
   function bookingBlocks(body) {
@@ -265,14 +283,14 @@
     for (var j = anchorIndex + 1; j < nextHeading; j++) {
       if ((blocks[j].tagName || '').toUpperCase() === 'P' && cleanText(blocks[j].textContent) &&
           !(blocks[j].closest && blocks[j].closest('figure,li,blockquote'))) {
-        return insertionTarget(blocks[j], body);
+        return pointAt(blocks[j], body, 'fixed');
       }
     }
     if (!headings.length) {
       var fallbackIndex = blocks.length >= 4 ? Math.min(3, Math.floor(blocks.length / 2)) : blocks.length - 1;
-      return insertionTarget(blocks[fallbackIndex], body);
+      return pointAt(blocks[fallbackIndex], body, 'fixed');
     }
-    return insertionTarget(blocks[anchorIndex], body);
+    return pointAt(blocks[anchorIndex], body, 'fixed');
   }
 
   function dateKey(value) {
@@ -779,12 +797,6 @@
     return true;
   }
 
-  function ensureSurfacePosition(point, node) {
-    if (!point || !point.parent || !point.after || !node) return false;
-    if (point.after.nextSibling === node && node.parentNode === point.parent) return true;
-    return insertAfter(point, node);
-  }
-
   function findContentColumn(body) {
     if (!body || !body.querySelectorAll || !body.getBoundingClientRect) return null;
     var bodyRect = body.getBoundingClientRect();
@@ -857,10 +869,10 @@
     if (blocks.length < 6) return null;
     var start = Math.floor(blocks.length * 0.4);
     for (var i = Math.max(start, 1); i < blocks.length; i++) {
-      if ((blocks[i].tagName || '').toUpperCase() === 'H2') return insertionTarget(blocks[i - 1], body);
+      if ((blocks[i].tagName || '').toUpperCase() === 'H2') return pointAt(blocks[i - 1], body, 'fixed');
     }
     for (var j = Math.floor(blocks.length / 2); j < blocks.length - 1; j++) {
-      if ((blocks[j].tagName || '').toUpperCase() === 'P' && cleanText(blocks[j].textContent).length >= DATE_CHECK_MIN_PROSE) return insertionTarget(blocks[j], body);
+      if ((blocks[j].tagName || '').toUpperCase() === 'P' && cleanText(blocks[j].textContent).length >= DATE_CHECK_MIN_PROSE) return pointAt(blocks[j], body, 'fixed');
     }
     return null;
   }
@@ -914,38 +926,141 @@
     return card;
   }
 
+  // ---- Placement: once per page view, then left alone -----------------------
+  // Until 12 Oct 2026 every DOM change re-ran the placement. The Date Check
+  // position depends on the fold, so while a reader scrolled the card walked
+  // down the article (five moves on one post), and when Wix re-rendered the
+  // article the card was rebuilt and lost the dates the reader had typed.
+  // Now each surface remembers where it went: the node it follows and that
+  // block's text. An intact surface is never moved. A surface that Wix
+  // detached goes back after the same block, as the same DOM node.
+  var placed = {};
+
+  function resetPlacement() {
+    placed = {};
+  }
+
+  function blockFingerprint(node) {
+    return node ? cleanText(node.textContent).slice(0, 80) : '';
+  }
+
+  function isOwnSurface(el) {
+    return !!(el && el.nodeType === 1 && el.hasAttribute &&
+      (el.hasAttribute(BOOKING_MARKER) || el.hasAttribute(DATE_CHECK_MARKER) || el.hasAttribute(EAST_WEST_MARKER)));
+  }
+
+  function isAttached(node) {
+    var root = document.documentElement;
+    return !!(node && root && typeof root.contains === 'function' && root.contains(node));
+  }
+
+  // True when node comes right after anchor, with only other inline surfaces
+  // or blank text in between.
+  function surfaceFollows(anchor, node) {
+    if (!anchor || !node || !anchor.parentNode || anchor.parentNode !== node.parentNode) return false;
+    var sibling = anchor.nextSibling;
+    while (sibling && sibling !== node) {
+      if (sibling.nodeType === 1 && !isOwnSurface(sibling)) return false;
+      if (sibling.nodeType === 3 && cleanText(sibling.textContent)) return false;
+      sibling = sibling.nextSibling;
+    }
+    return sibling === node;
+  }
+
+  function hasFocusInside(node) {
+    var active = document.activeElement;
+    return !!(node && active && active !== document.body && typeof node.contains === 'function' && node.contains(active));
+  }
+
+  function findBlockByFingerprint(body, fingerprint) {
+    if (!fingerprint || !body || !body.querySelectorAll) return null;
+    var nodes = body.querySelectorAll('h2,h3,p,blockquote');
+    for (var i = 0; i < nodes.length; i++) {
+      if (hasSurfaceAncestor(nodes[i])) continue;
+      if (blockFingerprint(nodes[i]) === fingerprint) return nodes[i];
+    }
+    return null;
+  }
+
+  // options: existing (a surface already in the DOM), build(), find() -> point,
+  // upgrade(record) -> point or null (a one-time move of a card that is still
+  // out of sight). Returns the placed node, or null when nothing could be placed.
+  function placeSurface(key, body, options) {
+    var rec = placed[key];
+    if (rec && rec.node && isAttached(rec.node)) {
+      if (rec.anchor && isAttached(rec.anchor) && surfaceFollows(rec.anchor, rec.node)) {
+        // The only move an intact surface can make: one upgrade out of a fallback spot.
+        var better = options.upgrade && rec.kind === 'fallback' && !hasFocusInside(rec.node) ? options.upgrade(rec) : null;
+        if (!better || !better.parent || !better.after) return rec.node;
+        insertAfter(better, rec.node);
+        placed[key] = { node: rec.node, anchor: better.after, fingerprint: blockFingerprint(better.block), kind: 'early' };
+        return rec.node;
+      }
+      // Never move a card the reader is typing into.
+      if (hasFocusInside(rec.node)) return rec.node;
+    }
+    var point = null;
+    if (rec && rec.anchor && isAttached(rec.anchor) && body.contains(rec.anchor)) {
+      point = { parent: rec.anchor.parentNode, after: rec.anchor, block: null, kind: rec.kind };
+    } else if (rec && rec.fingerprint) {
+      var block = findBlockByFingerprint(body, rec.fingerprint);
+      if (block) point = pointAt(block, body, rec.kind);
+    }
+    if (!point) point = options.find();
+    if (!point || !point.parent || !point.after) return null;
+    var node = rec && rec.node ? rec.node : null;
+    if (options.existing && options.existing !== node && isAttached(options.existing)) node = options.existing;
+    if (!node) node = options.build();
+    if (!node) return null;
+    if (!surfaceFollows(point.after, node)) insertAfter(point, node);
+    placed[key] = {
+      node: node,
+      anchor: point.after,
+      fingerprint: point.block ? blockFingerprint(point.block) : (rec && rec.fingerprint) || '',
+      kind: point.kind || (rec && rec.kind) || 'fixed'
+    };
+    return node;
+  }
+
   function injectEastWestCard(body) {
     var slug = currentSlug();
-    if (!eastWestSlug(slug)) return;
-    var existing = removeDuplicateSurfaces(EAST_WEST_MARKER);
-    if (existing) return;
-    var point = findEastWestPoint(body);
-    if (!point) return;
-    var card = buildEastWestCard(slug);
-    if (insertAfter(point, card)) syncSurfaceGutters(card, body, true);
+    if (!eastWestSlug(slug)) return null;
+    var card = placeSurface('eastwest', body, {
+      existing: removeDuplicateSurfaces(EAST_WEST_MARKER),
+      build: function () { return buildEastWestCard(slug); },
+      find: function () { return findEastWestPoint(body); }
+    });
+    if (card) syncSurfaceGutters(card, body, true);
+    return card;
   }
 
   function injectSurfaces() {
     if (!ENABLED || !isSurfacePath()) return false;
     var body = findPostBody();
     if (!body) return false;
-    var booking = removeDuplicateSurfaces(BOOKING_MARKER);
-    var dateCard = removeDuplicateSurfaces(DATE_CHECK_MARKER);
     var bookingPoint = findBookingInsertionPoint(body);
-    if (!booking) {
-      if (bookingPoint) booking = buildBookingCard();
-      if (booking && !insertAfter(bookingPoint, booking)) booking = null;
-    } else if (!ensureSurfacePosition(bookingPoint, booking)) {
-      booking = null;
-    }
-    var datePoint = findDateCheckInsertionPoint(body, bookingPoint);
-    if (!datePoint && booking && booking.parentNode) datePoint = { parent: booking.parentNode, after: booking };
-    if (!dateCard) {
-      if (datePoint) dateCard = buildDateCheckCard(currentSlug());
-      if (dateCard && !insertAfter(datePoint, dateCard)) dateCard = null;
-    } else if (!ensureSurfacePosition(datePoint, dateCard)) {
-      dateCard = null;
-    }
+    var booking = placeSurface('booking', body, {
+      existing: removeDuplicateSurfaces(BOOKING_MARKER),
+      build: buildBookingCard,
+      find: function () { return bookingPoint; }
+    });
+    var dateCard = placeSurface('date', body, {
+      existing: removeDuplicateSurfaces(DATE_CHECK_MARKER),
+      build: function () { return buildDateCheckCard(currentSlug()); },
+      find: function () {
+        var point = findDateCheckInsertionPoint(body, bookingPoint);
+        if (point) return point;
+        return booking && booking.parentNode ? { parent: booking.parentNode, after: booking, block: null, kind: 'fallback' } : null;
+      },
+      // A card that had to take the fallback spot moves up to the intro once,
+      // only while it is still entirely below the fold and has never been seen.
+      upgrade: function (rec) {
+        if (rec.kind !== 'fallback') return null;
+        if (rec.node.getAttribute('data-bw-date-check-seen') === '1') return null;
+        if (rec.node.getBoundingClientRect().top <= (window.innerHeight || 0)) return null;
+        return findEarlyDateCheckPoint(body);
+      }
+    });
     if (booking) syncSurfaceGutters(booking, body, false);
     if (dateCard) syncSurfaceGutters(dateCard, body, true);
     try { injectEastWestCard(body); } catch (err) { /* never block the other surfaces */ }
@@ -968,12 +1083,35 @@
     }, Number(delay) || 0);
   }
 
+  // Changes inside a surface (status text, chips, the letter bar) and the
+  // injector's own insertions need no new placement pass. A surface that Wix
+  // removed does, so records with removedNodes always count.
+  function ownMutation(record) {
+    var target = record && record.target;
+    if (target && target.nodeType === 1 && typeof target.closest === 'function' &&
+        target.closest('[' + BOOKING_MARKER + '],[' + DATE_CHECK_MARKER + '],[' + EAST_WEST_MARKER + '],#' + LETTER_BAR_ID)) return true;
+    if (!record || (record.removedNodes && record.removedNodes.length)) return false;
+    var added = record.addedNodes || [];
+    if (!added.length) return false;
+    for (var i = 0; i < added.length; i++) {
+      var node = added[i];
+      if (node.nodeType === 3 && !cleanText(node.textContent)) continue;
+      if (!isOwnSurface(node) && !(node.id && node.id === LETTER_BAR_ID)) return false;
+    }
+    return true;
+  }
+
   function startObserver() {
     if (observer) observer.disconnect();
     if (typeof window.MutationObserver !== 'function' || !document.body) return;
-    observer = new window.MutationObserver(function () {
+    observer = new window.MutationObserver(function (records) {
       if (!isSurfacePath()) return;
-      scheduleInject(80);
+      for (var i = 0; i < records.length; i++) {
+        if (!ownMutation(records[i])) {
+          scheduleInject(80);
+          return;
+        }
+      }
     });
     observer.observe(document.body, { childList: true, subtree: true });
   }
@@ -986,6 +1124,7 @@
       });
     });
     if (observer) observer.disconnect();
+    resetPlacement();
   }
 
   // Walk of Berlin Weekly bar (12 Oct 2026; Yusuf's goal: at least 20 new
@@ -1203,7 +1342,12 @@
       eastWestSlug: eastWestSlug,
       eastWestHref: eastWestHref,
       findEastWestPoint: findEastWestPoint,
-      buildEastWestCard: buildEastWestCard
+      buildEastWestCard: buildEastWestCard,
+      surfaceFollows: surfaceFollows,
+      ownMutation: ownMutation,
+      placeSurface: placeSurface,
+      resetPlacement: resetPlacement,
+      blockFingerprint: blockFingerprint
     };
     return;
   }
@@ -1220,7 +1364,12 @@
     removeSurfaces();
     if (isSurfacePath() && !DISABLED) boot();
   }, 300);
+  // Only a width change can need new gutters; the mobile URL bar changes the height only.
+  var lastWidth = window.innerWidth || 0;
   window.addEventListener('resize', function () {
+    var width = window.innerWidth || 0;
+    if (width === lastWidth) return;
+    lastWidth = width;
     if (isSurfacePath() && !DISABLED) scheduleInject(80);
   });
 })();
