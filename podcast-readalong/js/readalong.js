@@ -274,8 +274,9 @@
 
   function setPlayingUI(playing) {
     playBtn.setAttribute('aria-label', playing ? 'Pause' : 'Play');
-    playBtn.querySelector('.ra-icon-play').hidden = playing;
-    playBtn.querySelector('.ra-icon-pause').hidden = !playing;
+    // SVG elements have no .hidden property; toggle the attribute itself.
+    playBtn.querySelector('.ra-icon-play').toggleAttribute('hidden', playing);
+    playBtn.querySelector('.ra-icon-pause').toggleAttribute('hidden', !playing);
   }
 
   function playNow() {
