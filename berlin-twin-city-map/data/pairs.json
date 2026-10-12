@@ -1,5 +1,5 @@
 {
-  "note": "Berlin institutions that exist twice because the city was split. Coordinates geocoded from OpenStreetMap Nominatim on 28 August 2026. Sector polygons derived from the repo's east-west-1989 dataset.",
+  "note": "Berlin institutions that exist twice because the city was split. Coordinates geocoded from OpenStreetMap Nominatim on 28 August 2026. Sector polygons simplified from the repo's east-west-1989 dataset (Geoportal Berlin ALKIS Ortsteile + Wall 1989, dl-de/zero-2-0) by _build/build_sectors.py on 12 October 2026.",
   "pairs": [
     {
       "id": "towers",
