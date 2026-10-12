@@ -12693,6 +12693,36 @@
       "hasVisualLayer": true,
       "flatChipCard": false,
       "pageErrors": []
+    },
+    "berlin-seven-day-board": {
+      "slug": "berlin-seven-day-board",
+      "addedAt": "2026-10-13",
+      "measuredBy": "rendered",
+      "signals": {
+        "svgShapeNodes": 105,
+        "svgCount": 1,
+        "canvas": 0,
+        "contentImages": 0,
+        "mapLibrary": false,
+        "range": 0,
+        "dateInput": 1,
+        "radio": 0,
+        "checkbox": 0,
+        "select": 0,
+        "textInput": 0,
+        "buttons": 3,
+        "ariaPressed": 10,
+        "tables": 0,
+        "details": 0,
+        "textLength": 2375
+      },
+      "inputModel": "date",
+      "stateProgression": "accumulate",
+      "outputModel": "plotted-position",
+      "visualGrammar": "plotted-geometry",
+      "hasVisualLayer": true,
+      "flatChipCard": false,
+      "pageErrors": []
     }
   }
 }

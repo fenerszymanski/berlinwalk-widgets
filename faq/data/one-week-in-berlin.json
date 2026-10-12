@@ -1,0 +1,101 @@
+{
+  "version": 1,
+  "slug": "one-week-in-berlin",
+  "key": "one-week-in-berlin",
+  "config": {
+    "title": "One Week in Berlin - FAQ",
+    "subtitle": "Which weekday each part of a 7-day Berlin plan needs: Monday closures, Sunday shops, the Wednesday concert, the dome dates and the day trips.",
+    "items": [
+      {
+        "q": "Is one week in Berlin too long?",
+        "a": "No. Seven days give you the centre, Museum Island, the Wall, City West, a Sunday at the **Mauerpark** and one or two day trips without rushing. The catch is that some sights close on set weekdays, so the order of the days matters more than the number."
+      },
+      {
+        "q": "What is closed in Berlin on Mondays?",
+        "a": "Every museum on **Museum Island**, the **Gemäldegalerie**, the **Neue Nationalgalerie**, **Sanssouci Palace** in Potsdam and **Charlottenburg Palace**. The outdoor Berlin Wall Memorial on Bernauer Straße, the Sachsenhausen memorial and the Reichstag dome are open."
+      },
+      {
+        "q": "Which day is best for Museum Island?",
+        "a": "**Thursday**, because the Bode-Museum stays open until 20:00. Any day from Tuesday to Sunday works; Monday never does. Pick two museums, for example the **Neues Museum** and the **Alte Nationalgalerie**, both open 10:00 to 18:00."
+      },
+      {
+        "q": "When is the free lunch concert at the Berlin Philharmonie?",
+        "a": "Every **Wednesday at 13:00** from September to June. Entry is free with a chip handed out at the door, first come, first served, so arrive around 12:15."
+      },
+      {
+        "q": "Can I visit the Reichstag dome in October 2026?",
+        "a": "Yes, except from **19 to 30 October 2026**, when the Bundestag closes the dome for cleaning; the roof terrace stays open. Registration in advance with ID is required, and the last entry is at 21:45."
+      },
+      {
+        "q": "What are the best day trips for a week in Berlin?",
+        "a": "**Potsdam** for the palaces of Sanssouci, which open Tuesday to Sunday, and the **Sachsenhausen** memorial in Oranienburg, which is free and open every day, 08:30 to 16:30 from 27 October. Keep the two trips on separate days with a day in the centre between them."
+      },
+      {
+        "q": "Where should I spend Sunday in Berlin?",
+        "a": "At the **Mauerpark flea market** in Prenzlauer Berg, open 10:00 to 18:00. Shops are closed on Sundays, so keep Kurfürstendamm and KaDeWe for a weekday. The Berliner Dom opens at 12:00 on Sundays because of the morning service."
+      }
+    ]
+  },
+  "schema": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Is one week in Berlin too long?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. Seven days give you the centre, Museum Island, the Wall, City West, a Sunday at the Mauerpark and one or two day trips without rushing. The catch is that some sights close on set weekdays, so the order of the days matters more than the number."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is closed in Berlin on Mondays?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Every museum on Museum Island, the Gemäldegalerie, the Neue Nationalgalerie, Sanssouci Palace in Potsdam and Charlottenburg Palace. The outdoor Berlin Wall Memorial on Bernauer Straße, the Sachsenhausen memorial and the Reichstag dome are open."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Which day is best for Museum Island?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Thursday, because the Bode-Museum stays open until 20:00. Any day from Tuesday to Sunday works; Monday never does. Pick two museums, for example the Neues Museum and the Alte Nationalgalerie, both open 10:00 to 18:00."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "When is the free lunch concert at the Berlin Philharmonie?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Every Wednesday at 13:00 from September to June. Entry is free with a chip handed out at the door, first come, first served, so arrive around 12:15."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I visit the Reichstag dome in October 2026?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, except from 19 to 30 October 2026, when the Bundestag closes the dome for cleaning; the roof terrace stays open. Registration in advance with ID is required, and the last entry is at 21:45."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What are the best day trips for a week in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Potsdam for the palaces of Sanssouci, which open Tuesday to Sunday, and the Sachsenhausen memorial in Oranienburg, which is free and open every day, 08:30 to 16:30 from 27 October. Keep the two trips on separate days with a day in the centre between them."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Where should I spend Sunday in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "At the Mauerpark flea market in Prenzlauer Berg, open 10:00 to 18:00. Shops are closed on Sundays, so keep Kurfürstendamm and KaDeWe for a weekday. The Berliner Dom opens at 12:00 on Sundays because of the morning service."
+        }
+      }
+    ]
+  }
+}

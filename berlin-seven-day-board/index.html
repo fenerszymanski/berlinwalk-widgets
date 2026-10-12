@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Berlin Seven-Day Board: A Week in Berlin Planned From Your Arrival Date</title>
+<meta name="description" content="Enter your arrival date. The board lays out seven Berlin days around Monday museum closures, Sunday shop closures, the Wednesday lunch concert, palace days and the Reichstag dome dates, with sunset for every day.">
+<link rel="stylesheet" href="../css/brand.css">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #FFFFFF; color: #1f2420; padding: 12px; }
+  .wk { border-radius: 18px; overflow: hidden; background: #f6f5ef; border: 1px solid #d9d6c6; }
+  .wk-head { padding: 16px 16px 14px; background: #173a1c; color: #fff; }
+  .wk-eyebrow { font-size: 11px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: #FFE600; }
+  .wk-head h1 { font-size: 19px; line-height: 1.25; font-weight: 800; margin-top: 4px; }
+  .wk-head p { font-size: 12.5px; line-height: 1.5; color: #d5e2d2; margin-top: 5px; }
+  .wk-controls { padding: 14px 16px 6px; display: grid; gap: 12px; grid-template-columns: minmax(0, 1fr); }
+  .wk-lab { display: block; font-size: 11px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; color: #545a4c; margin-bottom: 6px; }
+  .wk-date { font-family: inherit; font-size: 15px; font-weight: 700; padding: 9px 10px; border: 1.5px solid #c9c5b1; border-radius: 10px; background: #fff; color: #1f2420; width: 100%; max-width: 260px; }
+  .wk-date:focus-visible, .wk-chip:focus-visible, .wk-row:focus-visible { outline: 2px solid #c62828; outline-offset: 2px; }
+  .wk-chips { display: flex; flex-wrap: wrap; gap: 6px; }
+  .wk-chip { font-family: inherit; font-size: 13px; font-weight: 700; padding: 8px 12px; border-radius: 999px; border: 1.5px solid #c9c5b1; background: #fff; color: #2a2f27; cursor: pointer; }
+  .wk-chip[aria-pressed="true"] { background: #FFE600; border-color: #d4c000; color: #123D18; }
+  .wk-verdict { margin: 8px 16px 0; padding: 12px 14px; border-radius: 14px; background: #1B5E20; color: #fff; }
+  .wk-verdict b { color: #FFE600; }
+  .wk-verdict .v-main { font-size: 14.5px; font-weight: 800; line-height: 1.4; }
+  .wk-verdict .v-sub { font-size: 12.5px; line-height: 1.5; color: #e1eedd; margin-top: 4px; }
+  .wk-board { padding: 12px 10px 4px; }
+  .wk-board svg { display: block; width: 100%; max-width: 680px; margin: 0 auto; height: auto; }
+  .wk-row { cursor: pointer; }
+  .wk-row:hover .r-bg { fill: #ecebe1; }
+  .r-bg { fill: #f6f5ef; }
+  .r-sel .r-bg { fill: #fff8b8; }
+  .t-day { font-weight: 800; fill: #1f2420; }
+  .t-date { font-weight: 600; fill: #5b6152; }
+  .t-blk { font-weight: 800; fill: #fff; }
+  .t-blk-sub { font-weight: 600; fill: #f1f6ee; }
+  .t-eve { font-weight: 700; fill: #1f2420; }
+  .t-pin { font-weight: 800; fill: #b71c1c; }
+  .t-sun { font-weight: 700; fill: #4d5346; }
+  .t-axis { font-size: 13px; font-weight: 700; fill: #6b7062; letter-spacing: .04em; }
+  .wk-legend { display: flex; flex-wrap: wrap; gap: 6px 12px; padding: 4px 16px 0; font-size: 11.5px; color: #4d5346; }
+  .wk-legend span { display: inline-flex; align-items: center; gap: 5px; }
+  .wk-legend i { width: 12px; height: 12px; border-radius: 3px; display: inline-block; }
+  .wk-detail { margin: 12px 16px 16px; padding: 14px; background: #fff; border: 1px solid #dcd9c9; border-radius: 14px; }
+  .wk-detail h2 { font-size: 16px; font-weight: 800; line-height: 1.3; color: #173a1c; }
+  .wk-detail .d-when { font-size: 12px; font-weight: 700; color: #6b7062; text-transform: uppercase; letter-spacing: .05em; }
+  .wk-detail p { font-size: 13.5px; line-height: 1.55; margin-top: 7px; }
+  .wk-detail ul { margin: 8px 0 0 18px; font-size: 13px; line-height: 1.5; }
+  .wk-detail li { margin-top: 3px; }
+  .wk-detail .d-why { margin-top: 10px; padding: 9px 11px; border-radius: 10px; background: #eef5e9; font-size: 12.5px; line-height: 1.5; color: #23402a; }
+  .wk-note { padding: 0 16px 14px; font-size: 11.5px; line-height: 1.5; color: #5b6152; }
+  @media (max-width: 560px) { .wk-note { display: none; } .wk-head p { font-size: 12px; } }
+  .wk-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+</style>
+</head>
+<body>
+<div class="wk" id="wk">
+  <div class="wk-head">
+    <div class="wk-eyebrow">One week in Berlin</div>
+    <h1>Your seven days, arranged around the days Berlin shuts</h1>
+    <p>Enter the day you land. Museum Island closes on Mondays, shops close on Sundays, the free Philharmonie concert is a Wednesday, and Sanssouci Palace in Potsdam skips Mondays. The board puts each day where it works.</p>
+  </div>
+  <div class="wk-controls">
+    <div>
+      <label class="wk-lab" for="wk-date">Arrival date (day 1)</label>
+      <input class="wk-date" type="date" id="wk-date">
+    </div>
+    <div>
+      <span class="wk-lab" id="wk-trips-lab">Day trips in your week</span>
+      <div class="wk-chips" role="group" aria-labelledby="wk-trips-lab">
+        <button type="button" class="wk-chip" data-trip="potsdam" aria-pressed="true">Potsdam palaces</button>
+        <button type="button" class="wk-chip" data-trip="sachsenhausen" aria-pressed="false">Sachsenhausen memorial</button>
+        <button type="button" class="wk-chip" data-trip="charlottenburg" aria-pressed="false">Charlottenburg Palace</button>
+      </div>
+    </div>
+  </div>
+  <div class="wk-verdict" id="wk-verdict" aria-live="polite"></div>
+  <div class="wk-board" id="wk-board"></div>
+  <div class="wk-legend" id="wk-legend"></div>
+  <div class="wk-detail" id="wk-detail" aria-live="polite"></div>
+  <p class="wk-note">Opening days checked on 13 October 2026 on the official pages of the State Museums, the Prussian Palaces Foundation, the Bundestag, the Berlin Wall Foundation, the Sachsenhausen Memorial and the Berliner Philharmoniker. Sunset is calculated for central Berlin. Holiday weeks around 24 December to 1 January have their own hours, so check each venue then.</p>
+</div>
+<script>
+(function () {
+  var DAY_NAMES = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+  var DAY_SHORT = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+  var MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+  var MIN_DATE = '2026-10-13';
+  var MAX_DATE = '2027-09-24';
+
+  // Berlin public holidays in range: shops shut, venues on holiday hours.
+  var HOLIDAYS = {
+    '2026-12-25': 'Christmas Day', '2026-12-26': 'Boxing Day', '2027-01-01': 'New Year',
+    '2027-03-08': 'Women’s Day (Berlin holiday)', '2027-03-26': 'Good Friday', '2027-03-29': 'Easter Monday',
+    '2027-05-01': 'Labour Day', '2027-05-06': 'Ascension Day', '2027-05-17': 'Whit Monday', '2027-10-03': 'Unity Day'
+  };
+  // Dates where museums and palaces run holiday hours or shut.
+  var SHUT_DAYS = { '2026-12-24': 1, '2026-12-25': 1, '2026-12-31': 1, '2027-01-01': 1 };
+  // Reichstag dome: closed for cleaning 19 to 30 October 2026, all day on 24 December, from 16:00 on 31 December.
+  function domeClosed(iso) {
+    return (iso >= '2026-10-19' && iso <= '2026-10-30') || iso === '2026-12-24' || iso === '2026-12-31';
+  }
+
+  var ACT = {
+    arrive: { short: 'Arrival day', name: 'Arrive: Alexanderplatz', sub: 'TV Tower, Nikolaiviertel, Spree', color: '#5f6b5a', area: 'Mitte',
+      text: 'Keep day one small. Drop the bags, walk from Alexanderplatz past the Rotes Rathaus into the Nikolaiviertel and down to the Spree. If you still have energy, the TV Tower view at dusk shows you the whole week in one look.',
+      evening: 'Dinner in the Nikolaiviertel' },
+    tour: { short: 'Old centre walk', name: 'Old centre walk', sub: 'Berlin Then and Now, 12:30', color: '#1B5E20', area: 'Mitte',
+      text: 'My walk starts at 12:30 at the World Clock on Alexanderplatz and ends at Hackescher Markt, about 2.5 hours, 11 stops covering 16 places, with an archive photo at every stop. It runs on selected days, so check the booking page for your date and swap this day with another if needed.',
+      evening: 'Hackesche Höfe and dinner near Hackescher Markt' },
+    island: { short: 'Museum Island', name: 'Museum Island', sub: 'Neues Museum and one more', color: '#7a4f1d', area: 'Mitte',
+      text: 'Pick two museums, not five. The Neues Museum (Nefertiti) and the Alte Nationalgalerie are open 10:00 to 18:00, the Altes and Bode Museum until 17:00 on weekdays. The Pergamon Museum stays closed for renovation; the Pergamon Panorama next door is open.',
+      evening: 'Spree walk to Monbijou Park' },
+    wall: { short: 'Berlin Wall day', name: 'Berlin Wall day', sub: 'Bernauer Str. to East Side', color: '#37474f', area: 'Mitte / Friedrichshain',
+      text: 'Start at the Berlin Wall Memorial on Bernauer Straße, where the outdoor grounds are open every day from 08:00 to 22:00 and the visitor centre Tuesday to Sunday 10:00 to 18:00. In the afternoon take the S-Bahn to Warschauer Straße for the East Side Gallery and the Oberbaum Bridge.',
+      evening: 'Dinner around Boxhagener Platz' },
+    potsdam: { short: 'Potsdam trip', name: 'Day trip: Potsdam', sub: 'Sanssouci Park and palaces', color: '#6a1b9a', area: 'Potsdam', trip: true,
+      text: 'Regional train or S7 to Potsdam. Sanssouci Palace opens Tuesday to Sunday, never on Mondays, with timed tickets. Go early and walk the park in daylight; in winter the palace closes at 16:30.',
+      evening: 'Back in Berlin, an early night' },
+    sachsenhausen: { short: 'Sachsenhausen', name: 'Day trip: Sachsenhausen', sub: 'Memorial in Oranienburg', color: '#4e342e', area: 'Oranienburg', trip: true,
+      text: 'S1 to Oranienburg, then a 20-minute walk or a bus. Entry is free. The outdoor site and exhibitions open 08:30 to 18:00 in summer and 08:30 to 16:30 from 27 October to 30 March. It is a heavy day; plan nothing big after it.',
+      evening: 'A quiet dinner, nothing planned' },
+    charlottenburg: { short: 'Charlottenburg', name: 'Charlottenburg Palace', sub: 'Palace, garden, Spree west', color: '#ad1457', area: 'Charlottenburg', trip: true,
+      text: 'The palace opens Tuesday to Sunday, closed on Mondays, 10:00 to 17:30 from April to October and to 16:30 in November and December. Walk the baroque garden to the Belvedere, then take the bus back towards Zoo.',
+      evening: 'Dinner on Kantstraße' },
+    west: { short: 'City West', name: 'Kulturforum + City West', sub: 'Gemäldegalerie, Ku’damm', color: '#00695c', area: 'Tiergarten / City West',
+      text: 'Morning at the Kulturforum: the Gemäldegalerie or the Neue Nationalgalerie (Thursday until 20:00). Then walk through Tiergarten or ride to Zoo for the Memorial Church, Kurfürstendamm and KaDeWe. This is the shopping day, so it never lands on a Sunday or a holiday.',
+      evening: 'Ku’damm and the Memorial Church lit up' },
+    sunday: { short: 'Mauerpark Sunday', name: 'Sunday: Mauerpark', sub: 'Flea market, Prenzlauer Berg', color: '#c62828', area: 'Prenzlauer Berg',
+      text: 'Sunday is the one day for the Mauerpark flea market, 10:00 to 18:00. Shops are shut across the city, so this is the right day for a market, a long breakfast around Kollwitzplatz and the streets in between.',
+      evening: 'Dinner on Kastanienallee' },
+    kreuzberg: { short: 'Kreuzberg canal', name: 'Kreuzberg + Neukölln', sub: 'Landwehr Canal, Maybachufer', color: '#ef6c00', area: 'Kreuzberg / Neukölln',
+      text: 'Walk the Landwehr Canal from Kottbusser Tor to the Maybachufer. On Tuesdays and Fridays the market there runs 11:00 to 18:30, which is the best version of this day. Finish on Tempelhofer Feld if the weather holds.',
+      evening: 'Dinner on Oranienstraße' }
+  };
+
+  var DOME_EVENING = 'Reichstag dome after dark (book ahead)';
+
+  function pad(n) { return (n < 10 ? '0' : '') + n; }
+  function isoOf(d) { return d.getFullYear() + '-' + pad(d.getMonth() + 1) + '-' + pad(d.getDate()); }
+  function parseIso(s) { var p = s.split('-'); return new Date(Number(p[0]), Number(p[1]) - 1, Number(p[2]), 12); }
+  function addDays(d, n) { var x = new Date(d.getTime()); x.setDate(x.getDate() + n); return x; }
+
+  // Sunrise and sunset for central Berlin (52.52 N, 13.405 E), NOAA approximation.
+  function sunTimes(d) {
+    var lat = 52.52, lng = 13.405, rad = Math.PI / 180;
+    var start = Date.UTC(d.getFullYear(), 0, 0);
+    var doy = Math.floor((Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()) - start) / 86400000);
+    var g = 2 * Math.PI / 365 * (doy - 1);
+    var eq = 229.18 * (0.000075 + 0.001868 * Math.cos(g) - 0.032077 * Math.sin(g) - 0.014615 * Math.cos(2 * g) - 0.040849 * Math.sin(2 * g));
+    var decl = 0.006918 - 0.399912 * Math.cos(g) + 0.070257 * Math.sin(g) - 0.006758 * Math.cos(2 * g) + 0.000907 * Math.sin(2 * g) - 0.002697 * Math.cos(3 * g) + 0.00148 * Math.sin(3 * g);
+    var ha = Math.acos(Math.cos(90.833 * rad) / (Math.cos(lat * rad) * Math.cos(decl)) - Math.tan(lat * rad) * Math.tan(decl)) / rad;
+    var riseUtc = 720 - 4 * (lng + ha) - eq;
+    var setUtc = 720 - 4 * (lng - ha) - eq;
+    var base = Date.UTC(d.getFullYear(), d.getMonth(), d.getDate());
+    function fmt(min) {
+      return new Date(base + min * 60000).toLocaleTimeString('en-GB', { timeZone: 'Europe/Berlin', hour: '2-digit', minute: '2-digit' });
+    }
+    return { rise: fmt(riseUtc), set: fmt(setUtc) };
+  }
+  function toMin(hhmm) { var p = hhmm.split(':'); return Number(p[0]) * 60 + Number(p[1]); }
+
+  function dayInfo(d) {
+    var iso = isoOf(d), w = d.getDay(), m = d.getMonth() + 1;
+    return {
+      date: d, iso: iso, w: w, month: m,
+      holiday: HOLIDAYS[iso] || '',
+      shut: !!SHUT_DAYS[iso],
+      shopsShut: w === 0 || !!HOLIDAYS[iso],
+      lunchConcert: w === 3 && !(m === 7 || m === 8) && !SHUT_DAYS[iso],
+      dome: !domeClosed(iso),
+      sun: sunTimes(d)
+    };
+  }
+
+  // Score one activity on one day. Hard misses return null.
+  function fit(key, day, slot) {
+    var s = 0, w = day.w;
+    if (key === 'island') { if (w === 1 || day.shut) return null; if (w === 4) s += 3; }
+    if (key === 'potsdam') { if (w === 1 || day.shut || day.iso === '2026-12-26') return null; if (w >= 2 && w <= 5) s += 2; }
+    if (key === 'charlottenburg') { if (w === 1 || day.shut || day.iso === '2026-12-26') return null; if (w >= 2 && w <= 5) s += 1; }
+    if (key === 'sachsenhausen') { if (day.shut) return null; if (w === 1) s += 4; }
+    if (key === 'west') { if (w === 1 || day.shopsShut || day.shut) return null; if (day.lunchConcert) s += 5; if (w === 4) s += 1; }
+    if (key === 'sunday') { if (w !== 0) return null; s += 6; }
+    if (key === 'kreuzberg') { if (w === 2 || w === 5) s += 4; if (day.shopsShut) s -= 1; }
+    if (key === 'wall') { if (w === 1) s += 3; }
+    if (key === 'tour') { if (day.shut) return null; s += Math.max(0, 4 - slot); }
+    if (day.holiday && key !== 'sunday') s -= 1;
+    return s;
+  }
+
+  function permute(list) {
+    if (list.length <= 1) return [list.slice()];
+    var out = [];
+    for (var i = 0; i < list.length; i++) {
+      var rest = list.slice(0, i).concat(list.slice(i + 1));
+      var sub = permute(rest);
+      for (var j = 0; j < sub.length; j++) out.push([list[i]].concat(sub[j]));
+    }
+    return out;
+  }
+
+  var trips = new Set(['potsdam']);
+  var state = { arrival: null, selected: 0 };
+
+  function candidates(days) {
+    var hasSunday = days.slice(1).some(function (d) { return d.w === 0; });
+    var pool = [
+      { k: 'tour', p: 10 }, { k: 'island', p: 9 }, { k: 'wall', p: 8 },
+      { k: 'sunday', p: hasSunday ? 7.5 : -1 },
+      { k: 'potsdam', p: trips.has('potsdam') ? 7 : -1 },
+      { k: 'sachsenhausen', p: trips.has('sachsenhausen') ? 6.5 : -1 },
+      { k: 'west', p: 6 }, { k: 'charlottenburg', p: trips.has('charlottenburg') ? 5.5 : -1 },
+      { k: 'kreuzberg', p: 5 }
+    ].filter(function (c) { return c.p > 0; });
+    pool.sort(function (a, b) { return b.p - a.p; });
+    return pool.slice(0, 6).map(function (c) { return c.k; });
+  }
+
+  function plan(days) {
+    var keys = candidates(days);
+    var best = null, bestScore = -Infinity;
+    permute(keys).forEach(function (order) {
+      var score = 0, misses = 0;
+      for (var i = 0; i < order.length; i++) {
+        var f = fit(order[i], days[i + 1], i);
+        if (f === null) { misses++; score -= 100; } else { score += f; }
+      }
+      // Two day trips back to back are tiring: keep them apart.
+      for (var j = 1; j < order.length; j++) {
+        if (ACT[order[j]].trip && ACT[order[j - 1]].trip) score -= 3;
+      }
+      if (score > bestScore) { bestScore = score; best = { order: order, misses: misses }; }
+    });
+    var slots = [{ key: 'arrive', miss: false }];
+    best.order.forEach(function (k, i) {
+      var miss = fit(k, days[i + 1], i) === null;
+      // A block with no open day this week gives way to the canal walk, which needs no opening hours.
+      if (miss && best.order.indexOf('kreuzberg') < 0 && !slots.some(function (s) { return s.key === 'kreuzberg'; })) {
+        slots.push({ key: 'kreuzberg', miss: false, swapped: k });
+      } else {
+        slots.push({ key: k, miss: miss });
+      }
+    });
+    best.misses = slots.filter(function (s) { return s.miss; }).length;
+    // One evening for the Reichstag dome: prefer the City West or Wall day, never a closure date.
+    var domeAt = -1, order = ['west', 'wall', 'island', 'tour', 'kreuzberg', 'charlottenburg'];
+    for (var o = 0; o < order.length && domeAt < 0; o++) {
+      for (var n = 1; n < slots.length; n++) {
+        if (slots[n].key === order[o] && days[n].dome) { domeAt = n; break; }
+      }
+    }
+    slots.forEach(function (s, i) { s.evening = i === domeAt ? DOME_EVENING : ACT[s.key].evening; s.dome = i === domeAt; });
+    return { slots: slots, misses: best.misses, domeAt: domeAt };
+  }
+
+  function el(tag, attrs, text) {
+    var n = document.createElementNS('http://www.w3.org/2000/svg', tag);
+    for (var k in attrs) n.setAttribute(k, attrs[k]);
+    if (text != null) n.textContent = text;
+    return n;
+  }
+
+  var PIN_SHORT = { 'Free concert 13:00': 'Free concert', 'Dome closed': 'Dome shut', 'Holiday: shops shut': 'Holiday', 'Holiday hours': 'Holiday hrs' };
+  function pinsFor(day, slot) {
+    var pins = [];
+    if (day.shut) pins.push('Holiday hours');
+    else if (day.holiday) pins.push('Holiday: shops shut');
+    else if (day.w === 0) pins.push('Shops shut');
+    if (day.w === 1) pins.push('Museums shut');
+    if (day.lunchConcert) pins.push('Free concert 13:00');
+    if (!day.dome) pins.push('Dome closed');
+    return pins.slice(0, 2);
+  }
+
+  var lastDays = null, lastPlan = null;
+
+  function wrapWords(text, max, lines) {
+    var out = [''], words = text.split(' ');
+    words.forEach(function (wd) {
+      var cur = out[out.length - 1];
+      if ((cur + ' ' + wd).trim().length <= max) out[out.length - 1] = (cur + ' ' + wd).trim();
+      else out.push(wd);
+    });
+    if (out.length > lines) { out = out.slice(0, lines); out[lines - 1] = out[lines - 1].slice(0, max - 1) + '\u2026'; }
+    return out;
+  }
+
+  function drawBoard(days, p, compact) {
+    // Compact layout for phones: fewer columns, bigger type in viewBox units.
+    var L = compact
+      ? { W: 420, rowH: 92, dayX: 2, blkX: 86, blkW: 214, eveX: 306, eveW: 114, titleMax: 18, subMax: 25, eveMax: 12, eveLines: 4, fDay: 17, fDate: 14, fPin: 10.5, fBlk: 17, fSub: 13, fEve: 13, fSun: 12 }
+      : { W: 680, rowH: 92, dayX: 10, blkX: 236, blkW: 270, eveX: 516, eveW: 158, titleMax: 26, subMax: 32, eveMax: 16, eveLines: 3, fDay: 21, fDate: 16, fPin: 12.5, fBlk: 18, fSub: 14, fEve: 15, fSun: 13 };
+    var W = L.W, rowH = L.rowH, top = 34;
+    var H = top + rowH * 7 + 8;
+    var svg = el('svg', { viewBox: '0 0 ' + W + ' ' + H, role: 'group', 'aria-label': 'Seven-day plan board' });
+    svg.appendChild(el('text', { x: L.dayX, y: 22, 'class': 't-axis' }, 'DAY'));
+    if (!compact) svg.appendChild(el('text', { x: 132, y: 22, 'class': 't-axis' }, 'DAYLIGHT'));
+    svg.appendChild(el('text', { x: L.blkX, y: 22, 'class': 't-axis' }, compact ? 'THE DAY \u00b7 DAYLIGHT' : 'THE DAY'));
+    svg.appendChild(el('text', { x: L.eveX, y: 22, 'class': 't-axis' }, 'EVENING'));
+    days.forEach(function (day, i) {
+      var y = top + i * rowH, slot = p.slots[i], a = ACT[slot.key];
+      var g = el('g', { 'class': 'wk-row' + (i === state.selected ? ' r-sel' : ''), tabindex: '0', role: 'button',
+        'aria-label': 'Day ' + (i + 1) + ', ' + DAY_NAMES[day.w] + ' ' + day.date.getDate() + ' ' + MONTHS[day.date.getMonth()] + ': ' + a.name + '. Evening: ' + slot.evening,
+        'aria-pressed': i === state.selected ? 'true' : 'false', 'data-i': String(i) });
+      g.appendChild(el('rect', { x: 0, y: y + 2, width: W, height: rowH - 6, rx: 12, 'class': 'r-bg' }));
+      g.appendChild(el('text', { x: L.dayX + 4, y: y + 30, 'class': 't-day', 'font-size': L.fDay }, 'D' + (i + 1) + ' ' + DAY_SHORT[day.w]));
+      g.appendChild(el('text', { x: L.dayX + 4, y: y + 51, 'class': 't-date', 'font-size': L.fDate }, day.date.getDate() + ' ' + MONTHS[day.date.getMonth()]));
+      var pins = pinsFor(day, slot);
+      pins.forEach(function (txt, j) {
+        g.appendChild(el('text', { x: L.dayX + 4, y: y + 70 + j * 15, 'class': 't-pin', 'font-size': L.fPin }, compact ? (PIN_SHORT[txt] || txt) : txt));
+      });
+      // Daylight strip: 06:00 to 22:00 track, lit between sunrise and sunset.
+      var t0 = 360, t1 = 1320, tx, tw, ty;
+      if (compact) { tx = L.blkX + 10; tw = 96; ty = y + rowH - 32; }
+      else { tx = 132; tw = 90; ty = y + 24; }
+      var rs = Math.max(t0, toMin(day.sun.rise)), st = Math.min(t1, toMin(day.sun.set));
+      var bh = rowH - 18;
+      g.appendChild(el('rect', { x: L.blkX, y: y + 8, width: L.blkW, height: bh, rx: 12, fill: slot.miss ? '#9e9e9e' : a.color }));
+      g.appendChild(el('text', { x: L.blkX + 10, y: y + 32, 'class': 't-blk', 'font-size': L.fBlk }, wrapWords(compact ? a.short : a.name, L.titleMax, 1)[0]));
+      g.appendChild(el('text', { x: L.blkX + 10, y: y + 53, 'class': 't-blk-sub', 'font-size': L.fSub }, slot.miss ? 'No open day left: swap it' : wrapWords(a.sub, L.subMax, 1)[0]));
+      g.appendChild(el('rect', { x: tx, y: ty, width: tw, height: 12, rx: 6, fill: '#26303b' }));
+      g.appendChild(el('rect', { x: tx + (rs - t0) / (t1 - t0) * tw, y: ty, width: Math.max(2, (st - rs) / (t1 - t0) * tw), height: 12, rx: 6, fill: '#ffd54f' }));
+      g.appendChild(el('line', { x1: tx + (720 - t0) / (t1 - t0) * tw, x2: tx + (720 - t0) / (t1 - t0) * tw, y1: ty - 3, y2: ty + 15, stroke: '#ffffff', 'stroke-width': 1.5 }));
+      if (compact) g.appendChild(el('text', { x: tx + tw + 8, y: ty + 11, 'class': 't-blk-sub', 'font-size': L.fSun }, 'dark ' + day.sun.set));
+      else g.appendChild(el('text', { x: tx, y: y + 58, 'class': 't-sun', 'font-size': L.fSun }, 'Dark ' + day.sun.set));
+      // Evening block.
+      g.appendChild(el('rect', { x: L.eveX, y: y + 8, width: L.eveW, height: bh, rx: 12, fill: slot.dome ? '#FFE600' : '#e3e1d4' }));
+      wrapWords(slot.evening, L.eveMax, L.eveLines).forEach(function (ln, j) {
+        g.appendChild(el('text', { x: L.eveX + 9, y: y + 28 + j * 17, 'class': 't-eve', 'font-size': L.fEve, fill: slot.dome ? '#123D18' : '#1f2420' }, ln));
+      });
+      svg.appendChild(g);
+    });
+    return svg;
+  }
+
+  function render() {
+    var start = parseIso(state.arrival);
+    var days = [];
+    for (var i = 0; i < 7; i++) days.push(dayInfo(addDays(start, i)));
+    var p = plan(days);
+    lastDays = days; lastPlan = p;
+    var board = document.getElementById('wk-board');
+    board.textContent = '';
+    board.appendChild(drawBoard(days, p, board.clientWidth < 560));
+    board.querySelectorAll('.wk-row').forEach(function (g) {
+      g.addEventListener('click', function () { state.selected = Number(g.getAttribute('data-i')); render(); });
+      g.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); state.selected = Number(g.getAttribute('data-i')); render(); var f = board.querySelector('[data-i="' + state.selected + '"]'); if (f) f.focus(); }
+      });
+    });
+    // Legend: colours used this week.
+    var seen = {};
+    var legend = document.getElementById('wk-legend');
+    legend.textContent = '';
+    p.slots.forEach(function (s) {
+      if (seen[s.key]) return; seen[s.key] = 1;
+      var span = document.createElement('span');
+      var dot = document.createElement('i'); dot.style.background = ACT[s.key].color;
+      span.appendChild(dot); span.appendChild(document.createTextNode(ACT[s.key].name));
+      legend.appendChild(span);
+    });
+    // Verdict.
+    var mondays = days.filter(function (d) { return d.w === 1; });
+    var wed = days.filter(function (d) { return d.lunchConcert; });
+    var domeShut = days.filter(function (d) { return !d.dome; }).length;
+    var main = 'Arriving on a ' + DAY_NAMES[days[0].w] + ': ';
+    if (mondays.length && mondays[0] !== days[0]) {
+      var mi = days.indexOf(mondays[0]);
+      main += 'your Monday is day ' + (mi + 1) + ', so it goes to <b>' + ACT[p.slots[mi].key].name + '</b>, not Museum Island.';
+    } else {
+      main += 'no Monday falls inside the full days, so every museum day is open.';
+    }
+    var sub = [];
+    if (wed.length) {
+      var wi = days.indexOf(wed[0]);
+      if (p.slots[wi].key === 'west') sub.push('Day ' + (wi + 1) + ' is a Wednesday: the free lunch concert at the Philharmonie starts at 13:00, so City West sits there.');
+    }
+    if (domeShut && p.domeAt < 0) sub.push('The Reichstag dome is closed on every evening of this week; the roof terrace stays open.');
+    else if (domeShut) sub.push('The Reichstag dome is closed on ' + domeShut + (domeShut === 1 ? ' day' : ' days') + ' this week, so the dome evening sits on day ' + (p.domeAt + 1) + '.');
+    if (days.some(function (d) { return d.shut; })) sub.push('This week touches the Christmas and New Year closures: check each venue’s holiday hours.');
+    if (p.misses) sub.push('One block has no good day this week and is greyed out: swap it or drop a day trip.');
+    if (!sub.length) sub.push('Sunset on day 1 is at ' + days[0].sun.set + ', on day 7 at ' + days[6].sun.set + '. Put the outdoor days where the yellow bar is longest.');
+    document.getElementById('wk-verdict').innerHTML = '<div class="v-main">' + main + '</div><div class="v-sub">' + sub.join(' ') + '</div>';
+    drawDetail();
+  }
+
+  function drawDetail() {
+    var i = state.selected, day = lastDays[i], slot = lastPlan.slots[i], a = ACT[slot.key];
+    var why = [];
+    if (day.w === 1) why.push('Monday: Museum Island, the Gemäldegalerie, Sanssouci and Charlottenburg Palace are all shut.');
+    if (day.shopsShut) why.push(day.holiday ? day.holiday + ': shops are shut, like on a Sunday.' : 'Sunday: shops are shut, markets and parks are not.');
+    if (day.lunchConcert) why.push('Wednesday from September to June: free lunch concert at the Philharmonie, 13:00, chips at the door from about 12:15.');
+    if (day.w === 4) why.push('Thursday: the Bode-Museum and the Neue Nationalgalerie stay open until 20:00.');
+    if ((day.w === 2 || day.w === 5)) why.push('Tuesday or Friday: the Maybachufer market is on, 11:00 to 18:30.');
+    if (!day.dome) why.push('The Reichstag dome is closed on this date; the roof terrace stays open.');
+    if (slot.dome) why.push('Reichstag dome: free, registration in advance with ID, last admission 21:45.');
+    if (day.shut) why.push('Holiday hours: several venues shut or close early on this date.');
+    if (slot.miss) why.push('Nothing in this week fits this block well. Swap it with another day or drop a day trip.');
+    var html = '<div class="d-when">Day ' + (i + 1) + ' · ' + DAY_NAMES[day.w] + ' ' + day.date.getDate() + ' ' + MONTHS[day.date.getMonth()] + ' · daylight ' + day.sun.rise + ' to ' + day.sun.set + '</div>' +
+      '<h2>' + a.name + '</h2><p>' + a.text + '</p>' +
+      '<ul><li><strong>Area:</strong> ' + a.area + '</li><li><strong>Evening:</strong> ' + slot.evening + '</li></ul>';
+    if (why.length) html += '<div class="d-why">' + why.join(' ') + '</div>';
+    document.getElementById('wk-detail').innerHTML = html;
+  }
+
+  function nextSaturday() {
+    var now = new Date(); now.setHours(12, 0, 0, 0);
+    var d = addDays(now, ((6 - now.getDay()) + 7) % 7 || 7);
+    var iso = isoOf(d);
+    if (iso < MIN_DATE) iso = MIN_DATE;
+    if (iso > MAX_DATE) iso = MAX_DATE;
+    return iso;
+  }
+
+  var dateEl = document.getElementById('wk-date');
+  dateEl.min = MIN_DATE; dateEl.max = MAX_DATE;
+  state.arrival = nextSaturday();
+  dateEl.value = state.arrival;
+  dateEl.addEventListener('change', function () {
+    var v = dateEl.value;
+    if (!v) return;
+    if (v < MIN_DATE) v = MIN_DATE;
+    if (v > MAX_DATE) v = MAX_DATE;
+    dateEl.value = v; state.arrival = v; state.selected = 0; render();
+  });
+  document.querySelectorAll('.wk-chip').forEach(function (b) {
+    b.addEventListener('click', function () {
+      var k = b.getAttribute('data-trip');
+      if (trips.has(k)) trips.delete(k); else trips.add(k);
+      b.setAttribute('aria-pressed', trips.has(k) ? 'true' : 'false');
+      render();
+    });
+  });
+  var lastCompact = null;
+  window.addEventListener('resize', function () {
+    var c = document.getElementById('wk-board').clientWidth < 560;
+    if (c !== lastCompact) { lastCompact = c; render(); }
+  });
+  render();
+  lastCompact = document.getElementById('wk-board').clientWidth < 560;
+})();
+</script>
+<script src="../js/brand.js"></script>
+</body>
+</html>
