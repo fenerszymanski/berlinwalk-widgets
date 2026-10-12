@@ -2,11 +2,101 @@
  * Loaded by the Wix embed loader on /east-or-west (see lp/wix-embed-east-or-west.html).
  * Renders in a shadow root. Runtime URLs resolve from this script's own folder:
  * ../east-west-1989/data/ for the tool geography, img/ for the photo and wordmark.
- * Leaflet and Turf load from cdnjs with the tool's SRI hashes. The lead POST runs from this page,
+ * Leaflet loads from cdnjs with the tool's SRI hash. Geometry is local code (no Turf). The lead POST runs from this page,
  * not from an iframe, because the endpoint checks Origin.
  */
 (function () {
   'use strict';
+
+  // GEO-BEGIN
+  // Geometry without Turf. Wix freezes some globals, which breaks Turf 6.5.0 at load.
+  // Distances: haversine on the sphere (radius 6371008.8 m), the same formula as Turf's distance.
+  // Line distances: the foot of the perpendicular is found in a local plane centred on the query point, and the
+  // distance is the great-circle distance to that foot.
+  // Point in polygon: even-odd ray casting over outer ring and holes.
+  var BWGEO = (function () {
+    var R = 6371008.8;
+    var RAD = Math.PI / 180;
+    function haversine(a, b) {
+      var dLat = (b[1] - a[1]) * RAD;
+      var dLng = (b[0] - a[0]) * RAD;
+      var h = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+        Math.cos(a[1] * RAD) * Math.cos(b[1] * RAD) * Math.sin(dLng / 2) * Math.sin(dLng / 2);
+      return 2 * R * Math.atan2(Math.sqrt(h), Math.sqrt(1 - h));
+    }
+    function ringContains(ring, pt) {
+      var x = pt[0], y = pt[1], inside = false;
+      for (var i = 0, j = ring.length - 1; i < ring.length; j = i++) {
+        var xi = ring[i][0], yi = ring[i][1], xj = ring[j][0], yj = ring[j][1];
+        if ((yi > y) !== (yj > y) && x < (xj - xi) * (y - yi) / (yj - yi) + xi) inside = !inside;
+      }
+      return inside;
+    }
+    function polygonContains(rings, pt) {
+      var inside = false;
+      for (var i = 0; i < rings.length; i++) {
+        if (ringContains(rings[i], pt)) inside = !inside;
+      }
+      return inside;
+    }
+    function pointInGeometry(pt, geom) {
+      if (geom.type === 'Polygon') return polygonContains(geom.coordinates, pt);
+      if (geom.type === 'MultiPolygon') {
+        for (var i = 0; i < geom.coordinates.length; i++) {
+          if (polygonContains(geom.coordinates[i], pt)) return true;
+        }
+      }
+      return false;
+    }
+    function pointInFeature(pt, feat) {
+      return pointInGeometry(pt, feat.geometry || feat);
+    }
+    // Local tangent-plane projection centred on the query point p, so error stays tiny at any distance.
+    function makeProjector(p) {
+      var kx = RAD * R * Math.cos(p[1] * RAD), ky = RAD * R;
+      return {
+        fwd: function (q) { return [(q[0] - p[0]) * kx, (q[1] - p[1]) * ky]; },
+        inv: function (Q) { return [p[0] + Q[0] / kx, p[1] + Q[1] / ky]; }
+      };
+    }
+    // Nearest point on the segment a-b to p. The foot parameter comes from the local plane; the
+    // distance is the great-circle distance to that foot point, so it stays exact at any range.
+    function segmentNearest(p, a, b, proj) {
+      var A = proj.fwd(a), B = proj.fwd(b);
+      var abx = B[0] - A[0], aby = B[1] - A[1];
+      var len2 = abx * abx + aby * aby;
+      var t = len2 === 0 ? 0 : (-A[0] * abx - A[1] * aby) / len2;
+      t = Math.max(0, Math.min(1, t));
+      var q = [a[0] + t * (b[0] - a[0]), a[1] + t * (b[1] - a[1])];
+      return { dist: haversine(p, q), point: q };
+    }
+    // lines: array of coordinate arrays (LineStrings). Returns the nearest point on any of them.
+    function nearestOnLines(p, lines) {
+      var proj = makeProjector(p);
+      var best = { dist: Infinity, point: null };
+      for (var i = 0; i < lines.length; i++) {
+        var line = lines[i];
+        if (line.length === 1) {
+          var d1 = haversine(p, line[0]);
+          if (d1 < best.dist) best = { dist: d1, point: line[0] };
+          continue;
+        }
+        for (var k = 0; k < line.length - 1; k++) {
+          var s = segmentNearest(p, line[k], line[k + 1], proj);
+          if (s.dist < best.dist) best = s;
+        }
+      }
+      return best;
+    }
+    return {
+      haversine: haversine,
+      pointInGeometry: pointInGeometry,
+      pointInFeature: pointInFeature,
+      nearestOnLines: nearestOnLines
+    };
+  })();
+  // GEO-END
+
   var SELF = document.currentScript || Array.prototype.slice.call(document.getElementsByTagName('script'))
     .filter(function (s) { return /east-west-lp\.js(\?|$)/.test(s.src); }).pop();
   var BASE = new URL('./', SELF.src).href;
@@ -85,14 +175,14 @@ function boot(ROOT) {
       var feat = feats[i].type === 'Feature'
         ? feats[i]
         : { type: 'Feature', geometry: feats[i], properties: {} };
-      if (turf.booleanPointInPolygon(pt, feat)) return true;
+      if (BWGEO.pointInFeature(pt, feat)) return true;
     }
     return false;
   }
   function nearest(pt, list) {
     var best = null, bestDist = Infinity;
     for (var i = 0; i < list.length; i++) {
-      var d = turf.distance(pt, turf.point([list[i].lng, list[i].lat]), { units: 'meters' });
+      var d = BWGEO.haversine(pt, [list[i].lng, list[i].lat]);
       if (d < bestDist) { bestDist = d; best = list[i]; }
     }
     return { landmark: best, distance: bestDist };
@@ -101,16 +191,11 @@ function boot(ROOT) {
     var w = geo.wall;
     var geom = w.type === 'FeatureCollection' ? w.features[0].geometry : (w.geometry || w);
     var lines = geom.type === 'MultiLineString' ? geom.coordinates : [geom.coordinates];
-    var best = Infinity;
-    for (var i = 0; i < lines.length; i++) {
-      var d = turf.pointToLineDistance(pt, turf.lineString(lines[i]), { units: 'meters' });
-      if (d < best) best = d;
-    }
-    return best;
+    return BWGEO.nearestOnLines(pt, lines).dist;
   }
 
   function analyze(lat, lng) {
-    var pt = turf.point([lng, lat]);
+    var pt = [lng, lat];
     var wallDist = distanceToWall(pt);
     var onWall = wallDist <= 25;
     var inStrip = pointIn(pt, geo.strip);
@@ -258,8 +343,6 @@ function boot(ROOT) {
     formStartedAt = new Date().toISOString();
   }
 
-  var TURF_SRC = 'https://cdnjs.cloudflare.com/ajax/libs/Turf.js/6.5.0/turf.min.js';
-  var TURF_SRI = 'sha384-82q0nm29xZzIo5BMtDYnh2/NxeO6FoaK1S/0nF84w3cEsqbBfun3JdMyDVYWfVY5';
   var LEAFLET_CSS = 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css';
   var LEAFLET_JS = 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js';
   var LEAFLET_SRI = 'sha384-NElt3Op+9NBMCYaef5HxeJmU4Xeard/Lku8ek6hoPTvYkQPh3zLIrJP7KiRocsxO';
@@ -279,10 +362,10 @@ function boot(ROOT) {
     });
   }
 
-  // Turf and the geography files. Loaded on the first lookup, not on page load.
+  // The geography files. Loaded on the first lookup, not on page load.
   function ensureEngine() {
     if (!engine) {
-      engine = loadScript(TURF_SRC, TURF_SRI).then(function () {
+      engine = Promise.resolve().then(function () {
         var names = ['west-berlin', 'east-berlin', 'death-strip', 'wall-line'];
         var reqs = names.map(function (n) {
           return fetch(DATA_BASE + n + '.geojson').then(function (r) {
@@ -331,16 +414,12 @@ function boot(ROOT) {
 
   // The point on the 1989 Wall line closest to the matched address.
   function nearestWallPoint(lat, lng) {
-    var pt = turf.point([lng, lat]);
+    var pt = [lng, lat];
     var w = geo.wall;
     var geom = w.type === 'FeatureCollection' ? w.features[0].geometry : (w.geometry || w);
     var lines = geom.type === 'MultiLineString' ? geom.coordinates : [geom.coordinates];
-    var best = null, bestD = Infinity;
-    for (var i = 0; i < lines.length; i++) {
-      var np = turf.nearestPointOnLine(turf.lineString(lines[i]), pt, { units: 'meters' });
-      if (np.properties.dist < bestD) { bestD = np.properties.dist; best = np.geometry.coordinates; }
-    }
-    return { lat: best[1], lng: best[0] };
+    var near = BWGEO.nearestOnLines(pt, lines);
+    return { lat: near.point[1], lng: near.point[0] };
   }
 
   el.addr.addEventListener('focus', function () { once('tool_started', {}); });
@@ -470,8 +549,9 @@ function boot(ROOT) {
     if (!host) {
       host = document.createElement('div');
       host.id = 'bw-ew-lp';
-      var footer = document.getElementById('SITE_FOOTER');
-      if (footer && footer.parentNode) footer.parentNode.insertBefore(host, footer);
+      // Outside the Wix container, which the loader hides on this page. The LP must not sit inside it.
+      var container = document.getElementById('SITE_CONTAINER');
+      if (container && container.parentNode) container.parentNode.insertBefore(host, container.nextSibling);
       else document.body.appendChild(host);
     }
     host.style.display = 'block';
