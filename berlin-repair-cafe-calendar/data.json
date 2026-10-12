@@ -1,0 +1,434 @@
+{
+ "checked": "2026-10-12",
+ "note": "Recurring rules as each repair cafe publishes them on its own page or on reparatur-initiativen.de, read on 12 October 2026. dow: 0 Sunday to 6 Saturday. nth: weeks of the month, -1 = last. Volunteer groups skip dates; check the source link before you carry a heavy machine across town.",
+ "cafes": [
+  {
+   "id": "kreuzberg",
+   "name": "Repair Café Kreuzberg",
+   "area": "Kreuzberg",
+   "addr": "Urbanstraße 21, Nachbarschaftshaus Urbanstraße",
+   "lat": 52.49297,
+   "lon": 13.40759,
+   "rule": {
+    "nth": [
+     1
+    ],
+    "dow": 0
+   },
+   "start": "12:00",
+   "end": "15:00",
+   "items": [
+    "elec",
+    "text",
+    "wood",
+    "bike"
+   ],
+   "book": "drop",
+   "note": "Clothes, chairs, toasters and bikes on the first Sunday.",
+   "src": "https://www.reparatur-initiativen.de/repair-cafe-kreuzberg"
+  },
+  {
+   "id": "schoeneberg",
+   "name": "BUND Repair Café Schöneberg",
+   "area": "Schöneberg",
+   "addr": "Crellestraße 35, entrance through the BUND shop",
+   "lat": 52.48851,
+   "lon": 13.36167,
+   "rule": {
+    "nth": [
+     3
+    ],
+    "dow": 1,
+    "skipMonths": [
+     12
+    ]
+   },
+   "start": "17:00",
+   "end": "20:00",
+   "items": [
+    "elec",
+    "wood",
+    "bike"
+   ],
+   "book": "form",
+   "note": "Register online, and only for the next date. No session in December.",
+   "src": "https://www.repaircafe-schoeneberg.de/"
+  },
+  {
+   "id": "steglitz",
+   "name": "MEKKI Repair Café Steglitz",
+   "area": "Steglitz",
+   "addr": "Albrechtstraße 81a, Markus-Gemeindehaus, first floor",
+   "lat": 52.4495,
+   "lon": 13.33846,
+   "rule": {
+    "nth": [
+     4
+    ],
+    "dow": 4
+   },
+   "start": "17:00",
+   "end": "20:00",
+   "items": [
+    "elec",
+    "wood"
+   ],
+   "book": "form",
+   "note": "Registration only. Clean the vacuum before you bring it.",
+   "src": "https://www.mekki-steglitz.de/repair-cafe/"
+  },
+  {
+   "id": "brunnenviertel",
+   "name": "Repair Café Brunnenviertel",
+   "area": "Gesundbrunnen",
+   "addr": "Demminer Straße 28, Olof-Palme-Zentrum",
+   "lat": 52.54194,
+   "lon": 13.39602,
+   "rule": {
+    "nth": [
+     4
+    ],
+    "dow": 1
+   },
+   "start": "17:00",
+   "end": "20:00",
+   "items": [
+    "elec",
+    "text",
+    "wood"
+   ],
+   "book": "drop",
+   "note": "Appliances, toys, wooden furniture and clothing.",
+   "src": "https://www.reparatur-initiativen.de/repair-cafe-brunnenviertel"
+  },
+  {
+   "id": "klausener",
+   "name": "Repair Café Klausenerplatz",
+   "area": "Charlottenburg",
+   "addr": "Sophie-Charlotten-Straße 30a, courtyard, raised ground floor",
+   "lat": 52.51559,
+   "lon": 13.2873,
+   "rule": {
+    "nth": [
+     1,
+     3
+    ],
+    "dow": 4
+   },
+   "start": "17:00",
+   "end": "19:00",
+   "items": [
+    "elec"
+   ],
+   "book": "drop",
+   "note": "Moved into the courtyard building at number 30a.",
+   "src": "https://www.reparatur-initiativen.de/repair-cafe-klausenerplatz-kiez"
+  },
+  {
+   "id": "adlershof",
+   "name": "Repaircafé Adlershof",
+   "area": "Adlershof",
+   "addr": "Dörpfeldstraße 54-56, Kiezklub Alte Schule",
+   "lat": 52.43886,
+   "lon": 13.54986,
+   "rule": {
+    "nth": [
+     1,
+     3
+    ],
+    "dow": 1
+   },
+   "start": "16:30",
+   "end": "18:30",
+   "items": [
+    "elec"
+   ],
+   "book": "drop",
+   "note": "Household appliances, electronics and toys.",
+   "src": "https://www.reparatur-initiativen.de/repaircafe-berlin-adlershof"
+  },
+  {
+   "id": "schoeneweide",
+   "name": "Repair Café Schöneweide",
+   "area": "Oberschöneweide",
+   "addr": "Reinbeckstraße 10, Industriesalon Schöneweide",
+   "lat": 52.46047,
+   "lon": 13.51851,
+   "rule": {
+    "nth": [
+     1,
+     2
+    ],
+    "dow": 3
+   },
+   "start": "17:00",
+   "end": "20:00",
+   "items": [
+    "elec",
+    "wood",
+    "bike"
+   ],
+   "book": "drop",
+   "note": "No registration. Bring your own tools if you have them.",
+   "src": "https://www.industriesalon.de/angebote/repair-cafe/"
+  },
+  {
+   "id": "hellersdorf",
+   "name": "Helle Bürgerwerkstatt",
+   "area": "Hellersdorf",
+   "addr": "Alte Hellersdorfer Straße 77, SOS-Familienzentrum",
+   "lat": 52.54041,
+   "lon": 13.59151,
+   "rule": {
+    "weekly": [
+     2,
+     3,
+     5
+    ]
+   },
+   "start": "13:00",
+   "end": "17:30",
+   "items": [
+    "elec",
+    "wood"
+   ],
+   "book": "drop",
+   "note": "An open workshop three afternoons a week.",
+   "src": "https://www.reparatur-initiativen.de/helle-buergerwerkstatt"
+  },
+  {
+   "id": "kreisler",
+   "name": "Kreisler",
+   "area": "Gropiusstadt",
+   "addr": "Joachim-Gottschalk-Weg 21, Wutzkycenter",
+   "lat": 52.4231,
+   "lon": 13.47574,
+   "rule": {
+    "weekly": [
+     3,
+     4,
+     5
+    ]
+   },
+   "start": "14:00",
+   "end": "19:00",
+   "extra": {
+    "weekly": [
+     6
+    ],
+    "start": "11:00",
+    "end": "16:00"
+   },
+   "items": [
+    "elec",
+    "wood"
+   ],
+   "book": "drop",
+   "note": "Open Wednesday to Friday afternoons and Saturday late morning.",
+   "src": "https://www.reparatur-initiativen.de/kreisler"
+  },
+  {
+   "id": "friedrichshain",
+   "name": "Repair Café Friedrichshain",
+   "area": "Friedrichshain",
+   "addr": "Straßmannstraße 17, KommRum",
+   "lat": 52.52189,
+   "lon": 13.44932,
+   "rule": {
+    "weekly": [
+     5
+    ]
+   },
+   "start": "15:45",
+   "end": "18:45",
+   "items": [
+    "elec"
+   ],
+   "book": "slot",
+   "note": "Book a slot online. Electrics only: bikes, clothes and sewing machines go elsewhere.",
+   "src": "https://repaircafefriedrichshain.simplybook.it/"
+  },
+  {
+   "id": "wertstatt",
+   "name": "wertstatt Reparatur-Café",
+   "area": "Märkisches Viertel",
+   "addr": "Senftenberger Ring 54, Ribbeck-Haus",
+   "lat": 52.60522,
+   "lon": 13.35221,
+   "rule": {
+    "nth": [
+     1,
+     3
+    ],
+    "dow": 6
+   },
+   "start": "11:00",
+   "end": "14:00",
+   "items": [
+    "elec",
+    "text",
+    "bike"
+   ],
+   "book": "drop",
+   "note": "Phones, sewing machines, prams and bikes on Saturday mornings.",
+   "src": "https://www.wertstatt-reparaturcafe.de"
+  },
+  {
+   "id": "wedding",
+   "name": "Repair Café Wedding",
+   "area": "Wedding",
+   "addr": "Sprengelstraße 15, rear courtyard left",
+   "lat": 52.54196,
+   "lon": 13.35483,
+   "rule": {
+    "dates": [
+     "2026-11-07"
+    ]
+   },
+   "start": "13:30",
+   "end": "17:30",
+   "items": [
+    "elec",
+    "text"
+   ],
+   "book": "drop",
+   "note": "Publishes single dates. The next one listed is Saturday 7 November.",
+   "src": "https://repaircafe-wedding.de/"
+  },
+  {
+   "id": "glasbox",
+   "name": "Repair Café Wedding at the GLASBOX",
+   "area": "Wedding",
+   "addr": "Luxemburger Straße 10, BHT, Haus Bauwesen, room E00",
+   "lat": 52.54397,
+   "lon": 13.35374,
+   "rule": {
+    "dates": [
+     "2026-11-21"
+    ]
+   },
+   "start": "14:00",
+   "end": "18:00",
+   "items": [
+    "elec",
+    "text"
+   ],
+   "book": "drop",
+   "note": "The Wedding team's session at the Berliner Hochschule für Technik.",
+   "src": "https://repaircafe-wedding.de/"
+  },
+  {
+   "id": "mariendorf",
+   "name": "Reparatur-Café Mariendorf",
+   "area": "Mariendorf",
+   "addr": "Dirschelweg 1, courtyard workshop",
+   "lat": 52.44477,
+   "lon": 13.39956,
+   "rule": {
+    "nth": [
+     1,
+     3
+    ],
+    "dow": 4
+   },
+   "start": "16:00",
+   "end": "20:00",
+   "items": [
+    "elec",
+    "text"
+   ],
+   "book": "slot",
+   "note": "Book online through pretix. A separate Näh-Café for clothes meets in the same courtyard workshop.",
+   "src": "https://www.reparatur-initiativen.de/reparaturcafe-mariendorf"
+  },
+  {
+   "id": "spandau-neustadt",
+   "name": "Repair Café Spandau Neustadt",
+   "area": "Spandau",
+   "addr": "Schönwalder Straße 23, Paul-Schneider-Haus",
+   "lat": 52.54691,
+   "lon": 13.20283,
+   "rule": {
+    "nth": [
+     -1
+    ],
+    "dow": 1
+   },
+   "start": "17:30",
+   "end": "20:00",
+   "items": [
+    "elec"
+   ],
+   "book": "drop",
+   "note": "Last Monday of the month, no registration.",
+   "src": "https://www.berlin.de/klimawerkstatt-spandau/handlungsfelder/konsum/artikel.1438565.php"
+  },
+  {
+   "id": "wilhelmstadt",
+   "name": "Repair Café Wilhelmstadt",
+   "area": "Spandau",
+   "addr": "Adamstraße 39, Stadtteilladen Wilhelmstadt",
+   "lat": 52.5209,
+   "lon": 13.1942,
+   "rule": {
+    "nth": [
+     2
+    ],
+    "dow": 4
+   },
+   "start": "17:30",
+   "end": "20:00",
+   "items": [
+    "elec"
+   ],
+   "book": "drop",
+   "note": "Second Thursday, no registration.",
+   "src": "https://www.berlin.de/klimawerkstatt-spandau/handlungsfelder/konsum/artikel.1438565.php"
+  },
+  {
+   "id": "kladow",
+   "name": "Repair Café Kladow",
+   "area": "Kladow",
+   "addr": "Kladower Damm 387, Kladower Forum",
+   "lat": 52.45372,
+   "lon": 13.14368,
+   "rule": {
+    "nth": [
+     3
+    ],
+    "dow": 2
+   },
+   "start": "17:30",
+   "end": "20:00",
+   "items": [
+    "elec"
+   ],
+   "book": "drop",
+   "note": "Third Tuesday, no registration.",
+   "src": "https://www.berlin.de/klimawerkstatt-spandau/handlungsfelder/konsum/artikel.1438565.php"
+  },
+  {
+   "id": "kungerkiez",
+   "name": "Elektro-Repair Café KungerKiez",
+   "area": "Alt-Treptow",
+   "addr": "Karl-Kunger-Straße 15, Galerie KungerKiez",
+   "lat": 52.4909,
+   "lon": 13.44752,
+   "rule": {
+    "nth": [
+     2,
+     4
+    ],
+    "dow": 2
+   },
+   "start": "16:00",
+   "end": "19:00",
+   "items": [
+    "elec"
+   ],
+   "book": "drop",
+   "note": "Tools are there; spare parts you bring yourself.",
+   "src": "https://kungerkiez.de/veranstaltungen-im-kiez/category/nachhaltigkeit-umwelt.html"
+  }
+ ]
+}

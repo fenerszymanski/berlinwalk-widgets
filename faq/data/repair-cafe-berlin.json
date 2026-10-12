@@ -1,0 +1,89 @@
+{
+  "version": 1,
+  "slug": "repair-cafe-berlin",
+  "key": "repair-cafe-berlin",
+  "config": {
+    "title": "Repair Café Berlin - FAQ",
+    "subtitle": "Where Berlin's repair cafés meet, which ones need a booking, and where the ReparaturBONUS stands.",
+    "items": [
+      {
+        "q": "Are repair cafés in Berlin free?",
+        "a": "Yes. Volunteers give their time for free and help you repair the item yourself. A **donation** for tools and small parts is welcome, and if a spare part is needed you usually buy it yourself."
+      },
+      {
+        "q": "Which repair café in Berlin is open on Sunday?",
+        "a": "**Repair Café Kreuzberg** at the Nachbarschaftshaus Urbanstraße, on the **first Sunday of the month** from 12:00 to 15:00. The next one is on 1 November 2026."
+      },
+      {
+        "q": "Do I need to book a repair café in Berlin?",
+        "a": "Most tables are drop-in. **BUND Repair Café Schöneberg** and **MEKKI Repair Café Steglitz** ask you to register online for the next date, and **Repair Café Friedrichshain** and **Reparatur-Café Mariendorf** work with booked time slots."
+      },
+      {
+        "q": "Where can I get clothes or a bike repaired at a repair café in Berlin?",
+        "a": "Clothes are taken in **Kreuzberg**, **Brunnenviertel**, at the **wertstatt** in the Märkisches Viertel and at both **Repair Café Wedding** sessions. Bikes are taken in **Kreuzberg**, **Schöneberg**, at the **Industriesalon Schöneweide** and at the wertstatt."
+      },
+      {
+        "q": "Can I still apply for the Berlin ReparaturBONUS?",
+        "a": "Not on 12 October 2026. Applications closed on **25 June 2025** when the money ran out. The 2026/2027 budget sets aside **1.25 million euros a year** for a repair bonus, and the IBB Business Team says it will announce a new round on its ReparaturBONUS page."
+      },
+      {
+        "q": "How much did the Berlin repair bonus pay?",
+        "a": "In the last round, **50 percent of a repair shop bill, up to 200 euros**, for bills of at least 75 euros paid without cash. For a repair café job it paid the **spare part in full, up to 200 euros**, if the part cost at least 25 euros and the café signed a Laufzettel. Repairs made before the rules took effect did not count."
+      }
+    ]
+  },
+  "schema": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Are repair cafés in Berlin free?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. Volunteers give their time for free and help you repair the item yourself. A donation for tools and small parts is welcome, and if a spare part is needed you usually buy it yourself."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Which repair café in Berlin is open on Sunday?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Repair Café Kreuzberg at the Nachbarschaftshaus Urbanstraße, on the first Sunday of the month from 12:00 to 15:00. The next one is on 1 November 2026."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Do I need to book a repair café in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Most tables are drop-in. BUND Repair Café Schöneberg and MEKKI Repair Café Steglitz ask you to register online for the next date, and Repair Café Friedrichshain and Reparatur-Café Mariendorf work with booked time slots."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Where can I get clothes or a bike repaired at a repair café in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Clothes are taken in Kreuzberg, Brunnenviertel, at the wertstatt in the Märkisches Viertel and at both Repair Café Wedding sessions. Bikes are taken in Kreuzberg, Schöneberg, at the Industriesalon Schöneweide and at the wertstatt."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I still apply for the Berlin ReparaturBONUS?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Not on 12 October 2026. Applications closed on 25 June 2025 when the money ran out. The 2026/2027 budget sets aside 1.25 million euros a year for a repair bonus, and the IBB Business Team says it will announce a new round on its ReparaturBONUS page."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How much did the Berlin repair bonus pay?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "In the last round, 50 percent of a repair shop bill, up to 200 euros, for bills of at least 75 euros paid without cash. For a repair café job it paid the spare part in full, up to 200 euros, if the part cost at least 25 euros and the café signed a Laufzettel. Repairs made before the rules took effect did not count."
+        }
+      }
+    ]
+  }
+}

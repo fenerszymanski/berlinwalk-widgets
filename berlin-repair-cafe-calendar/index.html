@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Berlin Repair Café Calendar</title>
+<link rel="stylesheet" href="../css/brand.css">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #FFFFFF; color: #1f2a1c; padding: 12px; }
+  .rc { border: 1px solid #d9e4cf; border-radius: 16px; background: #fbfaf3; overflow: hidden; }
+  .rc-head { padding: 16px 16px 12px; background: #1B5E20; color: #f3f8ec; }
+  .rc-head h1 { font-size: 19px; line-height: 1.25; color: #FFE600; }
+  .rc-head p { font-size: 13px; line-height: 1.5; color: #d4e6c8; margin-top: 5px; }
+  .rc-steps { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0; border-bottom: 1px solid #d9e4cf; background: #f1f5e9; }
+  .rc-steps span { font-size: 11px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; padding: 8px 10px; color: #5e6f55; border-bottom: 3px solid transparent; }
+  .rc-steps span.is-now { color: #1B5E20; border-bottom-color: #1B5E20; background: #fbfaf3; }
+  .rc-steps span.is-done { color: #33452d; }
+  .rc-ctrl { padding: 14px 16px 6px; display: grid; gap: 12px; }
+  .rc-label { font-size: 12px; font-weight: 700; color: #33452d; margin-bottom: 6px; display: block; }
+  .rc-items { display: flex; flex-wrap: wrap; gap: 8px; }
+  .rc-items button { font: inherit; font-size: 13px; font-weight: 600; padding: 9px 13px; border-radius: 999px; border: 1.5px solid #9fb894; background: #ffffff; color: #1f2a1c; cursor: pointer; min-height: 40px; }
+  .rc-items button[aria-pressed="true"] { background: #FFE600; border-color: #1B5E20; color: #123D18; }
+  .rc-items button:focus-visible, .rc-date input:focus-visible { outline: 3px solid #1B5E20; outline-offset: 2px; }
+  .rc-date { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+  .rc-date input { font: inherit; font-size: 14px; padding: 8px 10px; border-radius: 10px; border: 1.5px solid #9fb894; background: #fff; color: #1f2a1c; min-height: 40px; }
+  .rc-date .rc-dayname { font-size: 13px; font-weight: 700; color: #1B5E20; }
+  .rc-verdict { margin: 4px 16px 0; padding: 11px 13px; border-radius: 12px; background: #e9f3df; font-size: 13.5px; line-height: 1.5; color: #1f2a1c; }
+  .rc-verdict b { color: #123D18; }
+  .rc-board { display: grid; grid-template-columns: 1fr; gap: 12px; padding: 12px 16px 16px; }
+  @media (min-width: 760px) { .rc-board { grid-template-columns: 1.05fr 1fr; align-items: start; } }
+  .rc-map { border-radius: 12px; background: #eef3e6; border: 1px solid #d9e4cf; position: relative; }
+  .rc-map svg { display: block; width: 100%; height: auto; }
+  .rc-map .dist { fill: #ffffff; stroke: #b9cbaa; stroke-width: 1.4; }
+  .rc-map .dist-label { font-size: 22px; fill: #8fa384; font-weight: 600; pointer-events: none; }
+  .rc-pin { cursor: pointer; }
+  .rc-pin circle.dot { stroke: #123D18; stroke-width: 2; }
+  .rc-pin text { font-size: 24px; font-weight: 800; pointer-events: none; }
+  .rc-pin.is-pick circle.halo { fill: none; stroke: #1B5E20; stroke-width: 6; }
+  .rc-legend { display: flex; flex-wrap: wrap; gap: 10px 14px; padding: 8px 10px 10px; font-size: 11.5px; color: #33452d; }
+  .rc-legend i { display: inline-block; width: 11px; height: 11px; border-radius: 50%; margin-right: 5px; vertical-align: -1px; border: 1.5px solid #123D18; }
+  .rc-cal { border-radius: 12px; border: 1px solid #d9e4cf; background: #ffffff; padding: 10px 10px 6px; }
+  .rc-cal h2 { font-size: 13px; color: #1B5E20; margin-bottom: 2px; }
+  .rc-cal .rc-sub { font-size: 11.5px; color: #5e6f55; margin-bottom: 8px; }
+  .rc-row { display: grid; grid-template-columns: 1fr; gap: 3px; padding: 6px 4px; border-radius: 8px; cursor: pointer; }
+  .rc-row:hover, .rc-row.is-pick { background: #f1f5e9; }
+  .rc-row .nm { font-size: 12.5px; font-weight: 700; color: #1f2a1c; display: flex; justify-content: space-between; gap: 8px; }
+  .rc-row .nm em { font-style: normal; font-weight: 600; color: #5e6f55; font-size: 11.5px; white-space: nowrap; }
+  .rc-row svg { width: 100%; height: 16px; display: block; }
+  .rc-axis { display: block; width: 100%; height: 18px; }
+  .rc-empty { font-size: 13px; color: #5e6f55; padding: 10px 4px; }
+  .rc-card { margin: 0 16px 16px; border-radius: 12px; border: 1.5px solid #1B5E20; background: #ffffff; padding: 12px 14px; }
+  .rc-card h3 { font-size: 15px; color: #123D18; }
+  .rc-card .meta { font-size: 12.5px; color: #33452d; margin-top: 3px; line-height: 1.5; }
+  .rc-card .next { margin-top: 8px; font-size: 13.5px; line-height: 1.5; }
+  .rc-card .next b { background: #FFE600; color: #123D18; padding: 1px 6px; border-radius: 6px; }
+  .rc-card .tags { margin-top: 8px; display: flex; flex-wrap: wrap; gap: 6px; }
+  .rc-card .tags span { font-size: 11.5px; font-weight: 700; padding: 3px 8px; border-radius: 999px; background: #e9f3df; color: #1B5E20; }
+  .rc-card .tags span.book { background: #fff4b8; color: #123D18; }
+  .rc-card .note { margin-top: 8px; font-size: 12.5px; color: #33452d; line-height: 1.5; }
+  .rc-card a { color: #1B5E20; font-weight: 700; font-size: 12.5px; display: inline-block; margin-top: 8px; }
+  .rc-foot { font-size: 11px; color: #5e6f55; padding: 0 16px 14px; line-height: 1.5; }
+</style>
+</head>
+<body>
+<div class="rc" id="rc">
+  <div class="rc-head">
+    <h1>Berlin Repair Café Calendar</h1>
+    <p>Eighteen volunteer repair tables, each on its own rhythm. Say what is broken and which day you are free, and the map shows who meets that day and who meets next.</p>
+  </div>
+  <div class="rc-steps" aria-hidden="true">
+    <span id="st0">1 What broke</span><span id="st1">2 Your day</span><span id="st2">3 Where to go</span>
+  </div>
+  <div class="rc-ctrl">
+    <div>
+      <span class="rc-label" id="itemLabel">What is broken?</span>
+      <div class="rc-items" role="group" aria-labelledby="itemLabel" id="items"></div>
+    </div>
+    <div>
+      <label class="rc-label" for="day">Which day are you free?</label>
+      <div class="rc-date"><input type="date" id="day"><span class="rc-dayname" id="dayName"></span></div>
+    </div>
+  </div>
+  <div class="rc-verdict" id="verdict" aria-live="polite"></div>
+  <div class="rc-board">
+    <div class="rc-map">
+      <svg id="map" viewBox="0 0 913 748" role="img" aria-label="Map of Berlin's twelve districts with the repair cafés plotted at their addresses"></svg>
+      <div class="rc-legend">
+        <span><i style="background:#FFE600"></i>Meets on your day</span>
+        <span><i style="background:#7CB342"></i>Meets within 4 weeks (number = days to wait)</span>
+        <span><i style="background:#e3e8dc;border-color:#9aa893"></i>Not for this item, or later</span>
+      </div>
+    </div>
+    <div class="rc-cal">
+      <h2>The next four weeks</h2>
+      <div class="rc-sub" id="calSub"></div>
+      <svg class="rc-axis" id="axis" viewBox="0 0 280 18" preserveAspectRatio="none" aria-hidden="true"></svg>
+      <div id="rows"></div>
+    </div>
+  </div>
+  <div class="rc-card" id="card" aria-live="polite"></div>
+  <p class="rc-foot">Dates follow each café's published rhythm, checked on 12 October 2026. Volunteer groups skip dates, especially in school holidays and December, so open the café's own page the day before you go.</p>
+</div>
+<script>
+(function () {
+  var NS = 'http://www.w3.org/2000/svg';
+  var DISTRICTS = [{"n":"Mitte","d":"M406.8,239.9L393.8,242.8L391.9,255.1L383.3,255.3L376.5,260.6L374.8,253.9L368.8,255.5L368.3,252.4L353.9,252.3L337.6,246.7L330.4,252.9L323.6,251.3L300.4,261.6L289.4,281.3L311.6,282.5L324.4,297.6L326.8,304.7L302.8,310.4L305,318.7L311.1,317.6L305.4,322.3L309.9,342.8L315.9,335.1L323.8,336.7L327.8,350L336.3,357.4L328.8,360.8L333.5,363.3L328.1,366.9L334.4,369.9L335.4,376.3L349,380.5L381.3,392.1L392.6,371.6L421.8,371.3L423.2,368.5L441.9,380.3L459.7,376.7L462.7,370.2L453.7,362.1L462.4,342.3L443.5,328.3L430.4,323.6L434.2,313.2L429.2,300.3L425.6,300.5L421.4,276.7L418.6,277.1L417.9,254.1L406.8,239.9Z"},{"n":"Friedrichshain-Kreuzberg","d":"M516.4,387.9L528.2,356.6L523.4,346.9L520.6,343.4L497.8,342.2L493.6,327.7L486.8,330.8L480.2,320.6L475.4,325.6L454.9,327.5L449.6,332.7L462.4,342.3L453.7,362.1L462.7,370.2L459.7,376.7L441.9,380.3L423.1,368.5L421.8,371.3L392.6,371.6L388.6,382.1L380.4,395L379.8,404L390.9,407.6L387.7,422L384.3,422.5L415.1,420.7L415.1,424.4L431.5,427.3L433.6,413.8L455.4,418.8L457.3,415.6L450.5,398.4L476.1,412.2L483.8,401.5L496.1,394.6L522.9,409L529.4,417.9L533,416.3L535.3,420.1L545.8,417L516.4,387.9Z"},{"n":"Pankow","d":"M568.1,61.1L545.9,46.9L538.6,36.7L542.7,11.5L525.4,20.6L530.6,1.1L527.6,4.6L525.2,2.2L512.3,19.6L503.6,15.5L491.7,29.5L507.4,40.8L522.5,43.1L523,48.4L503.8,61.7L489.3,57.5L478.2,59.1L476.8,68L469,70.1L467.2,85.4L460.3,85.1L455.9,89.6L439.5,71.9L433.6,73.7L420.1,61.3L415.4,63L408.3,84.8L398.2,87.6L399.6,90.2L390.1,98.2L390.9,105.3L378,111L390.8,144.4L383,169.2L369.5,187.4L351.8,190L406.6,235.2L413.9,246.7L424.1,296.4L434.2,313.2L430.4,323.6L449.6,332.7L454.9,327.5L475.4,325.6L480.2,320.6L486.8,330.8L493.6,327.7L497.8,342.2L520.6,343.4L499,326.7L516,312.5L512.8,308.1L517.5,299.7L513.7,282.8L530.8,284.1L530.4,280.2L539.6,273.3L550.9,276.9L551.9,273.2L551,264.2L536.3,246.7L541.6,236.1L530.6,228.5L530.9,209.7L542.7,190.7L565.4,175.9L557.1,156.8L553.9,156.9L556.3,144.5L565.8,123.9L566.3,111.1L582.6,102.7L589.6,68.5L586,68.8L584.5,64.3L575.8,67.7L568.1,61.1Z"},{"n":"Charlottenburg-Wilmersdorf","d":"M338,410.1L340.2,390.5L337.5,387.7L343.5,378.4L335.1,376.1L334.4,369.9L328.1,366.9L333.5,363.3L328.8,360.8L336.3,357.4L327.8,350L322.3,335.6L314.8,335.7L310,343L305.4,322.3L311.1,317.6L305,318.7L302.8,310.4L326.8,304.7L311.6,282.5L247.1,280.1L249.8,303.3L263.2,314L261.4,322.7L245.4,325.2L225.7,329.4L215.1,326.6L216.2,335.5L206,331.5L181.6,331.3L178,343.1L180.2,359.1L172.9,368.9L167.7,368.8L165,382.8L138,394.6L133.6,412.9L138.5,427.6L134.5,436.4L135.8,451.5L147.2,452.6L150.4,458.3L156.9,454.4L167.4,456.8L194.5,453.9L231.6,463.3L272.5,454.4L301.8,462.4L314.4,462.2L315,439L337.6,437.6L338,410.1Z"},{"n":"Spandau","d":"M172.1,368.2L180.2,359.1L178,343.1L181.6,331.3L206,331.5L216.2,335.5L215.1,326.6L225.7,329.4L253,325.4L261.4,322.7L263.2,313.9L249.8,303.3L247.1,280.1L223.6,277.6L190.1,249.6L186,228L177.4,218.6L172.4,203.7L175.4,195.8L161.7,193.8L160.9,197.7L116.1,178.4L103.7,170.7L93.6,173.3L82.8,186.3L64.7,195.9L55.5,196.1L54.2,205.4L60.3,213.2L83.5,204.9L88.8,227.2L78.3,255.2L78.4,272.2L65.5,272.7L57.6,265.3L42.9,321L39.8,351.5L74.8,345.6L109.5,368.8L54.7,433.8L40.2,439.4L39.6,448.3L30.6,465.2L33.4,483.4L28.9,498.4L47.6,522.7L82,514.4L100.6,494.5L112.3,486.3L121.2,486.7L131.9,472L133.7,463.2L134.5,436.4L138.5,427.6L133.6,412.9L138,394.6L165,382.8L166.7,370.4L172.1,368.2Z"},{"n":"Steglitz-Zehlendorf","d":"M345.6,584.2L345.3,579L373.1,563L384.4,546L363.4,487.4L353.9,484.8L339.9,463.1L336.5,461.3L325.5,468.1L315.8,462.3L301.8,462.4L272.5,454.4L231.6,463.3L194.5,453.9L167.4,456.8L156.9,454.4L150.4,458.3L147.2,452.6L135.8,451.5L131.9,472L121.2,486.7L112.3,486.3L100.6,494.5L82,514.4L49,520.4L32.6,538.9L33.6,545.8L22.5,557.3L15.3,554.3L10.6,561.8L0.5,566.9L3.8,584.8L12.7,589.5L14.9,586.4L13.4,580.7L17.4,579.9L17.6,587L24.3,589.2L25.9,581.1L29.3,581.7L32.3,587.2L24.9,591.1L49.9,617.3L61.7,611.7L67.9,615.1L63.9,616.4L69.1,619.2L57.2,631.4L58.5,628.4L53.3,628.9L52.5,633.4L58.7,638.6L62.3,635.3L57.4,631.7L72.9,616.8L96.1,623.7L109.5,622.7L113.5,620L112.7,615.2L94.6,618.4L96.7,604L148.1,576L164.8,573.3L185.8,563.7L214.1,563.5L219.3,599.3L230.5,596.2L242.6,600.9L252.4,599.8L283,574.4L281.8,578.3L303.7,612.3L345.6,584.2Z"},{"n":"Tempelhof-Schöneberg","d":"M406.1,640L407.2,659.3L450,663.1L460.1,641.8L447.8,594.7L449.5,587.1L436.4,580.7L426.3,582.2L422.2,570.5L429.4,566.1L430.3,562.2L426.4,561.3L445.7,494.8L451.6,484.8L458.9,485L450.8,479.1L454.4,476.8L452.1,464.8L445.7,465.7L441.1,436.3L431.9,437.4L431.5,427.3L415.1,424.4L415.1,420.7L384.3,422.5L387.7,422L390.9,407.6L379.8,404L381.6,391.7L371.7,389.7L343.3,378.6L337.5,387.7L340.2,390.5L337.6,437.6L315,439L314.4,462.2L325.5,468.1L336.9,461.5L353.8,480.4L353.9,484.8L363.4,487.4L384.4,546L373.1,563L345.3,579L345.7,593.3L384.9,624.1L382.7,635.9L405.7,635.6L406.1,640Z"},{"n":"Neukölln","d":"M494.9,420.7L450.9,398.4L457.3,415.6L455,419.4L433.3,414.1L431.8,437.3L441.1,436.3L445.7,465.7L452.1,464.8L454.4,476.8L450.8,479.1L458.9,485L451.6,484.8L445.7,494.8L426.4,561.3L430.3,562.2L429.4,566.1L422.2,570.5L426.3,582.2L437.3,580.9L449.4,587.8L487.8,572.4L503.5,564.9L515.1,566L531,619.3L580.1,606.4L591,580.3L583.5,560.4L586.2,551.6L568.1,546.1L507.8,497.1L500.1,479.4L524.5,480.4L529.2,466.6L517.3,447.8L518.5,440.3L501.7,420.6L498.9,424L494.9,420.7Z"},{"n":"Treptow-Köpenick","d":"M658.6,440L641.6,448.3L612.4,444.5L600.1,460.1L587.7,444L569,444.7L561,427.7L550.5,426.5L545.9,417L535.3,420.1L533,416.3L529.4,417.9L526,411.4L508.8,399.4L493.3,394.8L476.6,411.5L483.1,416.9L486.2,413.6L498.9,424L501.8,420.7L518.5,440.3L517.3,447.8L529.2,466.6L524.5,480.4L500.1,479.8L512.5,502.4L568.1,546.1L586.2,551.6L583.5,560.4L591,580.3L580.1,606.4L598.6,616.3L610.5,608.9L606.5,634.7L645.4,636.6L684,624L687.6,639.6L702.6,656.5L701.8,668.7L732.6,651.6L739,662.9L751.8,660.1L751,674.9L757.4,676.3L757.9,683.3L746,699.4L743.8,731.5L752,743.2L759.6,746.8L764,744.2L763.3,737.3L768.9,727.5L790.4,684.5L805.3,677.5L818.9,682.9L829.4,664.3L830,660.1L825.7,660.2L827.9,651.3L813.1,648L811.6,642.8L816.9,642.3L827.1,628.5L829.7,629.9L851,611L860.4,614.2L871.9,610.2L877.4,597.1L882.4,594.1L869.9,573.9L880.5,551.3L885.4,551.2L883.8,538.5L869.7,535.2L860.4,528.2L872.1,535.6L887.6,537.5L889.2,526.2L897.9,518.6L905.8,518.3L903.3,529.2L910.8,530.4L912.1,526.6L904.4,525.4L906,508.2L896.2,502.7L868.9,498L851.1,471.2L831.2,459.5L828.2,459.4L836.6,478L836.6,487.4L827.2,488.1L823.3,468.4L806.1,464.2L785.1,446.1L777.3,446.6L759.4,436.2L752.5,435.1L728.3,447.4L724.8,463.4L722.6,454.5L705.4,453.3L705.3,449.2L697.9,449.3L675.4,431L666.4,431.2L658.6,440Z"},{"n":"Marzahn-Hellersdorf","d":"M732.5,407L734.2,404.6L726.5,401.9L737.7,365.6L751,348.6L773.2,331.8L771.1,323.2L728.8,322.5L727.6,304.9L739.9,305.9L744.6,295.8L675.5,279.1L677.3,267.4L671.4,239.4L668.9,232L664,231.9L660,225.9L651.7,227.6L650.2,224.4L613.2,244.5L592.8,266.9L602.1,302.3L581.3,310.6L583.5,358.4L604.5,359.1L609,362.4L606.1,376.9L626.4,421.3L623.3,433.9L628.9,447.3L648.7,447.3L658.6,441.1L660.2,434.6L675.4,431L709.3,454.5L716.3,444.9L712.3,443.1L714.1,431.7L732.5,407Z"},{"n":"Lichtenberg","d":"M583.8,358.5L581.3,310.6L602.1,302.3L592.8,266.9L614.2,243.2L645.7,229.6L650.2,224.4L640.5,209.5L622.3,194.9L595.9,185.2L569.4,185.5L565.4,175.9L543.4,190.1L536.2,203.2L531.9,204.5L530.6,228.5L541.6,236.1L536.2,243L541.6,253.9L551.8,265.8L550.9,276.9L539.6,273.3L530.4,280.2L530.8,284.1L514.2,282.3L517.5,299.7L512.8,308.1L516,312.5L499,326.7L503.7,332.8L517.1,338.6L528.2,356.6L515.8,390L521.9,391.4L546.8,415.2L550.5,426.5L561,427.7L569,444.7L587.7,444L600.1,460.1L612.4,444.5L629.7,447.5L623.3,433.9L626.4,421.3L606.1,376.9L609,362.4L604.5,359.1L583.8,358.5Z"},{"n":"Reinickendorf","d":"M389.6,153.6L390,138.8L378.3,111.9L365.5,117.3L337.1,118L305,105.7L290.9,107.9L301.3,101.7L295.2,85.7L299.8,70.9L287.9,49.7L301,41.1L297,36.2L264,33.7L262.8,51.4L267.2,51.7L265.4,77.1L236,78.1L239.5,100.3L238.9,108.7L179.6,105.4L174.5,123.5L161.1,147.9L154,153.6L162.9,170.3L177.4,184.9L172.4,203.7L177.4,218.6L186,228L189.9,249.3L225.3,278.4L289.4,281.3L300.4,261.6L323.6,251.3L330.4,252.9L337.6,246.7L353.9,252.3L368.3,252.4L368.8,255.5L374.8,253.9L375.6,260.7L383.3,255.3L391.9,255.1L393.8,242.8L406.5,240.4L407,235.6L351.8,190L369.5,187.4L389.6,153.6Z"}];
+  var DATA = {"checked":"2026-10-12","note":"Recurring rules as each repair cafe publishes them on its own page or on reparatur-initiativen.de, read on 12 October 2026. dow: 0 Sunday to 6 Saturday. nth: weeks of the month, -1 = last. Volunteer groups skip dates; check the source link before you carry a heavy machine across town.","cafes":[{"id":"kreuzberg","name":"Repair Café Kreuzberg","area":"Kreuzberg","addr":"Urbanstraße 21, Nachbarschaftshaus Urbanstraße","lat":52.49297,"lon":13.40759,"rule":{"nth":[1],"dow":0},"start":"12:00","end":"15:00","items":["elec","text","wood","bike"],"book":"drop","note":"Clothes, chairs, toasters and bikes on the first Sunday.","src":"https://www.reparatur-initiativen.de/repair-cafe-kreuzberg"},{"id":"schoeneberg","name":"BUND Repair Café Schöneberg","area":"Schöneberg","addr":"Crellestraße 35, entrance through the BUND shop","lat":52.48851,"lon":13.36167,"rule":{"nth":[3],"dow":1,"skipMonths":[12]},"start":"17:00","end":"20:00","items":["elec","wood","bike"],"book":"form","note":"Register online, and only for the next date. No session in December.","src":"https://www.repaircafe-schoeneberg.de/"},{"id":"steglitz","name":"MEKKI Repair Café Steglitz","area":"Steglitz","addr":"Albrechtstraße 81a, Markus-Gemeindehaus, first floor","lat":52.4495,"lon":13.33846,"rule":{"nth":[4],"dow":4},"start":"17:00","end":"20:00","items":["elec","wood"],"book":"form","note":"Registration only. Clean the vacuum before you bring it.","src":"https://www.mekki-steglitz.de/repair-cafe/"},{"id":"brunnenviertel","name":"Repair Café Brunnenviertel","area":"Gesundbrunnen","addr":"Demminer Straße 28, Olof-Palme-Zentrum","lat":52.54194,"lon":13.39602,"rule":{"nth":[4],"dow":1},"start":"17:00","end":"20:00","items":["elec","text","wood"],"book":"drop","note":"Appliances, toys, wooden furniture and clothing.","src":"https://www.reparatur-initiativen.de/repair-cafe-brunnenviertel"},{"id":"klausener","name":"Repair Café Klausenerplatz","area":"Charlottenburg","addr":"Sophie-Charlotten-Straße 30a, courtyard, raised ground floor","lat":52.51559,"lon":13.2873,"rule":{"nth":[1,3],"dow":4},"start":"17:00","end":"19:00","items":["elec"],"book":"drop","note":"Moved into the courtyard building at number 30a.","src":"https://www.reparatur-initiativen.de/repair-cafe-klausenerplatz-kiez"},{"id":"adlershof","name":"Repaircafé Adlershof","area":"Adlershof","addr":"Dörpfeldstraße 54-56, Kiezklub Alte Schule","lat":52.43886,"lon":13.54986,"rule":{"nth":[1,3],"dow":1},"start":"16:30","end":"18:30","items":["elec"],"book":"drop","note":"Household appliances, electronics and toys.","src":"https://www.reparatur-initiativen.de/repaircafe-berlin-adlershof"},{"id":"schoeneweide","name":"Repair Café Schöneweide","area":"Oberschöneweide","addr":"Reinbeckstraße 10, Industriesalon Schöneweide","lat":52.46047,"lon":13.51851,"rule":{"nth":[1,2],"dow":3},"start":"17:00","end":"20:00","items":["elec","wood","bike"],"book":"drop","note":"No registration. Bring your own tools if you have them.","src":"https://www.industriesalon.de/angebote/repair-cafe/"},{"id":"hellersdorf","name":"Helle Bürgerwerkstatt","area":"Hellersdorf","addr":"Alte Hellersdorfer Straße 77, SOS-Familienzentrum","lat":52.54041,"lon":13.59151,"rule":{"weekly":[2,3,5]},"start":"13:00","end":"17:30","items":["elec","wood"],"book":"drop","note":"An open workshop three afternoons a week.","src":"https://www.reparatur-initiativen.de/helle-buergerwerkstatt"},{"id":"kreisler","name":"Kreisler","area":"Gropiusstadt","addr":"Joachim-Gottschalk-Weg 21, Wutzkycenter","lat":52.4231,"lon":13.47574,"rule":{"weekly":[3,4,5]},"start":"14:00","end":"19:00","extra":{"weekly":[6],"start":"11:00","end":"16:00"},"items":["elec","wood"],"book":"drop","note":"Open Wednesday to Friday afternoons and Saturday late morning.","src":"https://www.reparatur-initiativen.de/kreisler"},{"id":"friedrichshain","name":"Repair Café Friedrichshain","area":"Friedrichshain","addr":"Straßmannstraße 17, KommRum","lat":52.52189,"lon":13.44932,"rule":{"weekly":[5]},"start":"15:45","end":"18:45","items":["elec"],"book":"slot","note":"Book a slot online. Electrics only: bikes, clothes and sewing machines go elsewhere.","src":"https://repaircafefriedrichshain.simplybook.it/"},{"id":"wertstatt","name":"wertstatt Reparatur-Café","area":"Märkisches Viertel","addr":"Senftenberger Ring 54, Ribbeck-Haus","lat":52.60522,"lon":13.35221,"rule":{"nth":[1,3],"dow":6},"start":"11:00","end":"14:00","items":["elec","text","bike"],"book":"drop","note":"Phones, sewing machines, prams and bikes on Saturday mornings.","src":"https://www.wertstatt-reparaturcafe.de"},{"id":"wedding","name":"Repair Café Wedding","area":"Wedding","addr":"Sprengelstraße 15, rear courtyard left","lat":52.54196,"lon":13.35483,"rule":{"dates":["2026-11-07"]},"start":"13:30","end":"17:30","items":["elec","text"],"book":"drop","note":"Publishes single dates. The next one listed is Saturday 7 November.","src":"https://repaircafe-wedding.de/"},{"id":"glasbox","name":"Repair Café Wedding at the GLASBOX","area":"Wedding","addr":"Luxemburger Straße 10, BHT, Haus Bauwesen, room E00","lat":52.54397,"lon":13.35374,"rule":{"dates":["2026-11-21"]},"start":"14:00","end":"18:00","items":["elec","text"],"book":"drop","note":"The Wedding team's session at the Berliner Hochschule für Technik.","src":"https://repaircafe-wedding.de/"},{"id":"mariendorf","name":"Reparatur-Café Mariendorf","area":"Mariendorf","addr":"Dirschelweg 1, courtyard workshop","lat":52.44477,"lon":13.39956,"rule":{"nth":[1,3],"dow":4},"start":"16:00","end":"20:00","items":["elec","text"],"book":"slot","note":"Book online through pretix. A separate Näh-Café for clothes meets in the same courtyard workshop.","src":"https://www.reparatur-initiativen.de/reparaturcafe-mariendorf"},{"id":"spandau-neustadt","name":"Repair Café Spandau Neustadt","area":"Spandau","addr":"Schönwalder Straße 23, Paul-Schneider-Haus","lat":52.54691,"lon":13.20283,"rule":{"nth":[-1],"dow":1},"start":"17:30","end":"20:00","items":["elec"],"book":"drop","note":"Last Monday of the month, no registration.","src":"https://www.berlin.de/klimawerkstatt-spandau/handlungsfelder/konsum/artikel.1438565.php"},{"id":"wilhelmstadt","name":"Repair Café Wilhelmstadt","area":"Spandau","addr":"Adamstraße 39, Stadtteilladen Wilhelmstadt","lat":52.5209,"lon":13.1942,"rule":{"nth":[2],"dow":4},"start":"17:30","end":"20:00","items":["elec"],"book":"drop","note":"Second Thursday, no registration.","src":"https://www.berlin.de/klimawerkstatt-spandau/handlungsfelder/konsum/artikel.1438565.php"},{"id":"kladow","name":"Repair Café Kladow","area":"Kladow","addr":"Kladower Damm 387, Kladower Forum","lat":52.45372,"lon":13.14368,"rule":{"nth":[3],"dow":2},"start":"17:30","end":"20:00","items":["elec"],"book":"drop","note":"Third Tuesday, no registration.","src":"https://www.berlin.de/klimawerkstatt-spandau/handlungsfelder/konsum/artikel.1438565.php"},{"id":"kungerkiez","name":"Elektro-Repair Café KungerKiez","area":"Alt-Treptow","addr":"Karl-Kunger-Straße 15, Galerie KungerKiez","lat":52.4909,"lon":13.44752,"rule":{"nth":[2,4],"dow":2},"start":"16:00","end":"19:00","items":["elec"],"book":"drop","note":"Tools are there; spare parts you bring yourself.","src":"https://kungerkiez.de/veranstaltungen-im-kiez/category/nachhaltigkeit-umwelt.html"}]};
+  var KX = 1355.346, KY = 2211.4, LON0 = 13.088, LAT0 = 52.676;
+  function px(lon) { return (lon - LON0) * KX; }
+  function py(lat) { return (LAT0 - lat) * KY; }
+  var ITEMS = [
+    { id: 'elec', label: 'Electrics' },
+    { id: 'text', label: 'Clothes' },
+    { id: 'bike', label: 'Bike' },
+    { id: 'wood', label: 'Wood and furniture' }
+  ];
+  var BOOK = { drop: 'Drop in', form: 'Register online first', slot: 'Book a time slot' };
+  var DAYS = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+  var MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+  var SPAN = 28;
+  var currentStep = 0;
+  var item = 'elec';
+  var picked = null;
+  var dayInput = document.getElementById('day');
+
+  function el(name, attrs, parent) {
+    var n = document.createElementNS(NS, name);
+    for (var k in attrs) n.setAttribute(k, attrs[k]);
+    if (parent) parent.appendChild(n);
+    return n;
+  }
+  function iso(d) { return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0'); }
+  function parseDay(v) { var p = v.split('-'); return new Date(+p[0], +p[1] - 1, +p[2], 12); }
+  function addDays(d, n) { return new Date(d.getFullYear(), d.getMonth(), d.getDate() + n, 12); }
+  function nice(d) { return DAYS[d.getDay()] + ' ' + d.getDate() + ' ' + MONTHS[d.getMonth()]; }
+
+  /* Does this café meet on date d? Rules come from each café's own published rhythm. */
+  function meets(c, d) {
+    var r = c.rule, dow = d.getDay(), m = d.getMonth() + 1, day = d.getDate();
+    if (r.dates) return r.dates.indexOf(iso(d)) !== -1;
+    if (r.skipMonths && r.skipMonths.indexOf(m) !== -1) return false;
+    if (r.weekly) return r.weekly.indexOf(dow) !== -1 || !!(c.extra && c.extra.weekly.indexOf(dow) !== -1);
+    if (dow !== r.dow) return false;
+    var week = Math.ceil(day / 7);
+    var lastWeek = day + 7 > new Date(d.getFullYear(), m, 0).getDate();
+    return r.nth.indexOf(week) !== -1 || (r.nth.indexOf(-1) !== -1 && lastWeek);
+  }
+  function hours(c, d) {
+    if (c.extra && c.extra.weekly.indexOf(d.getDay()) !== -1) return c.extra.start + ' to ' + c.extra.end;
+    return c.start + ' to ' + c.end;
+  }
+  function nextFrom(c, start) {
+    for (var i = 0; i < 120; i++) { var d = addDays(start, i); if (meets(c, d)) return { d: d, wait: i }; }
+    return null;
+  }
+
+  function buildItems() {
+    var box = document.getElementById('items');
+    ITEMS.forEach(function (it) {
+      var b = document.createElement('button');
+      b.type = 'button'; b.textContent = it.label; b.setAttribute('data-item', it.id);
+      b.setAttribute('aria-pressed', it.id === item ? 'true' : 'false');
+      b.addEventListener('click', function () {
+        item = it.id; currentStep = Math.max(currentStep, 1);
+        Array.prototype.forEach.call(box.children, function (x) { x.setAttribute('aria-pressed', x.getAttribute('data-item') === item ? 'true' : 'false'); });
+        render();
+      });
+      box.appendChild(b);
+    });
+  }
+
+  function buildMap() {
+    var svg = document.getElementById('map');
+    DISTRICTS.forEach(function (dd) { el('path', { d: dd.d, 'class': 'dist' }, svg); });
+    var labels = { 'Spandau': [40, 300], 'Reinickendorf': [250, 70], 'Pankow': [520, 70], 'Marzahn': [790, 250], 'Köpenick': [700, 640], 'Steglitz-Zehlendorf': [150, 660] };
+    Object.keys(labels).forEach(function (k) { var t = el('text', { x: labels[k][0], y: labels[k][1], 'class': 'dist-label' }, svg); t.textContent = k; });
+    el('g', { id: 'pins' }, svg);
+  }
+
+  function setSteps() {
+    for (var i = 0; i < 3; i++) {
+      var s = document.getElementById('st' + i);
+      s.className = i === currentStep ? 'is-now' : (i < currentStep ? 'is-done' : '');
+    }
+  }
+
+  function render() {
+    var start = parseDay(dayInput.value);
+    document.getElementById('dayName').textContent = DAYS[start.getDay()];
+    var rows = DATA.cafes.map(function (c) {
+      var fits = c.items.indexOf(item) !== -1;
+      var nx = nextFrom(c, start);
+      return { c: c, fits: fits, nx: nx, today: !!(nx && nx.wait === 0), soon: !!(nx && nx.wait < SPAN) };
+    });
+    var todays = rows.filter(function (r) { return r.fits && r.today; });
+    var soon = rows.filter(function (r) { return r.fits && r.soon; }).sort(function (a, b) { return a.nx.wait - b.nx.wait; });
+    if (!picked || !rows.some(function (r) { return r.c.id === picked && r.fits; })) picked = soon.length ? soon[0].c.id : null;
+
+    var label = ITEMS.filter(function (i) { return i.id === item; })[0].label.toLowerCase();
+    var v = document.getElementById('verdict');
+    if (todays.length) {
+      v.innerHTML = '<b>' + todays.length + (todays.length === 1 ? ' table meets' : ' tables meet') + '</b> on ' + nice(start) + ' for ' + label + ': ' + todays.map(function (r) { return r.c.name + ' (' + hours(r.c, start) + ')'; }).join(', ') + '.';
+    } else if (soon.length) {
+      v.innerHTML = 'Nobody takes ' + label + ' on ' + nice(start) + '. <b>The next table is ' + soon[0].c.name + '</b>, ' + nice(soon[0].nx.d) + ', ' + hours(soon[0].c, soon[0].nx.d) + '.';
+    } else {
+      v.innerHTML = 'No table for ' + label + ' in the four weeks from ' + nice(start) + '. Try another day or item.';
+    }
+
+    var g = document.getElementById('pins');
+    while (g.firstChild) g.firstChild.parentNode.removeChild(g.firstChild);
+    rows.slice().sort(function (a, b) { return (a.fits && a.soon ? 1 : 0) - (b.fits && b.soon ? 1 : 0); }).forEach(function (r) {
+      var x = px(r.c.lon), y = py(r.c.lat);
+      var on = r.fits && r.today, near = r.fits && r.soon && !r.today;
+      var p = el('g', { 'class': 'rc-pin' + (r.c.id === picked ? ' is-pick' : ''), tabindex: r.fits ? '0' : '-1', role: 'button', 'aria-label': r.c.name }, g);
+      if (r.c.id === picked) el('circle', { cx: x, cy: y, r: 33, 'class': 'halo' }, p);
+      el('circle', { cx: x, cy: y, r: on ? 25 : (near ? 22 : 11), 'class': 'dot', fill: on ? '#FFE600' : (near ? '#7CB342' : '#e3e8dc'), stroke: on || near ? '#123D18' : '#9aa893' }, p);
+      if (near) { var t = el('text', { x: x, y: y + 5, 'text-anchor': 'middle', fill: '#123D18' }, p); t.setAttribute('y', y + 8); t.textContent = r.nx.wait; }
+      if (on) { var t2 = el('text', { x: x, y: y + 5, 'text-anchor': 'middle', fill: '#123D18' }, p); t2.setAttribute('y', y + 8); t2.textContent = '✓'; }
+      if (r.fits) {
+        p.addEventListener('click', function () { picked = r.c.id; currentStep = 2; render(); });
+        p.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); picked = r.c.id; currentStep = 2; render(); } });
+      }
+    });
+
+    var axis = document.getElementById('axis');
+    while (axis.firstChild) axis.firstChild.parentNode.removeChild(axis.firstChild);
+    var cw = 280 / SPAN;
+    for (var i = 0; i < SPAN; i += 7) {
+      var d0 = addDays(start, i);
+      var tx = el('text', { x: i * cw + 1, y: 13, 'font-size': 9, fill: '#5e6f55', 'font-weight': 700 }, axis);
+      tx.textContent = d0.getDate() + ' ' + MONTHS[d0.getMonth()].slice(0, 3);
+    }
+    document.getElementById('calSub').textContent = 'From ' + nice(start) + '. One dot per session, the first column is your day.';
+    var box = document.getElementById('rows');
+    box.innerHTML = '';
+    if (!soon.length) { var e = document.createElement('div'); e.className = 'rc-empty'; e.textContent = 'No sessions for this item in these four weeks.'; box.appendChild(e); }
+    soon.forEach(function (r) {
+      var row = document.createElement('div');
+      row.className = 'rc-row' + (r.c.id === picked ? ' is-pick' : '');
+      row.setAttribute('role', 'button'); row.tabIndex = 0;
+      var nm = document.createElement('div'); nm.className = 'nm';
+      nm.innerHTML = '<span>' + r.c.name + '</span><em>' + r.c.area + '</em>';
+      row.appendChild(nm);
+      var s = el('svg', { viewBox: '0 0 280 16', preserveAspectRatio: 'none', 'aria-hidden': 'true' });
+      el('rect', { x: 0, y: 7, width: 280, height: 2, fill: '#e3e8dc' }, s);
+      el('rect', { x: 0, y: 0, width: cw, height: 16, fill: '#fff4b8' }, s);
+      for (var k = 0; k < SPAN; k++) {
+        var dk = addDays(start, k);
+        if (meets(r.c, dk)) el('rect', { x: k * cw + 1.5, y: 2, width: cw - 3, height: 12, rx: 3, fill: k === 0 ? '#1B5E20' : '#7CB342' }, s);
+      }
+      row.appendChild(s);
+      row.addEventListener('click', function () { picked = r.c.id; currentStep = 2; render(); });
+      row.addEventListener('keydown', function (e2) { if (e2.key === 'Enter' || e2.key === ' ') { e2.preventDefault(); picked = r.c.id; currentStep = 2; render(); } });
+      box.appendChild(row);
+    });
+
+    var card = document.getElementById('card');
+    var pr = rows.filter(function (r) { return r.c.id === picked; })[0];
+    if (!pr) { card.style.display = 'none'; }
+    else {
+      card.style.display = '';
+      var c = pr.c, nx = pr.nx;
+      var tags = c.items.map(function (i) { return '<span>' + ITEMS.filter(function (x) { return x.id === i; })[0].label + '</span>'; }).join('') + '<span class="book">' + BOOK[c.book] + '</span>';
+      card.innerHTML = '<h3>' + c.name + '</h3><div class="meta">' + c.addr + ', ' + c.area + '</div>'
+        + '<div class="next">' + (nx ? (nx.wait === 0 ? 'Meets on your day: ' : 'Next session: ') + '<b>' + nice(nx.d) + ', ' + hours(c, nx.d) + '</b>' + (nx.wait > 0 ? ' (in ' + nx.wait + (nx.wait === 1 ? ' day)' : ' days)') : '') : 'No date published yet.') + '</div>'
+        + '<div class="tags">' + tags + '</div><div class="note">' + c.note + '</div>'
+        + '<a href="' + c.src + '" target="_blank" rel="noopener">Check this café’s own page</a>';
+    }
+    setSteps();
+  }
+
+  var today = new Date();
+  var floor = new Date(2026, 9, 12, 12);
+  dayInput.value = iso(today < floor ? floor : today);
+  dayInput.min = '2026-10-12';
+  dayInput.addEventListener('change', function () { if (!dayInput.value) return; currentStep = Math.max(currentStep, 2); render(); });
+  buildItems();
+  buildMap();
+  render();
+})();
+</script>
+<script src="../js/brand.js"></script>
+</body>
+</html>
