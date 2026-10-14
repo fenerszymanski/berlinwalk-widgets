@@ -31,6 +31,7 @@
     if (positionedBody && document.body.style.getPropertyValue('position') === 'relative') {
       if (bodyPosition) document.body.style.setProperty('position', bodyPosition, bodyPriority); else document.body.style.removeProperty('position');
     }
+    if (host && host.querySelector('[data-bw-fast-secondary-source]')) host.querySelector('[data-bw-fast-secondary-source]').remove();
     if (host && host.shadowRoot) { host.shadowRoot.textContent = ''; host.shadowRoot.appendChild(document.createElement('slot')); host.removeAttribute('aria-owns'); }
   }
   function valid(value) {
@@ -121,6 +122,11 @@
       host.setAttribute('data-bw-fast-tool', slug); host.setAttribute('aria-owns', portal.id);
       if (resizeObserver) resizeObserver.disconnect();
       if (typeof ResizeObserver === 'function') { resizeObserver = new ResizeObserver(schedule); resizeObserver.observe(spacer); }
+    }
+    if (configuredUrl && !host.querySelector('[data-bw-fast-secondary-source]')) {
+      var sourceLink = document.createElement('a'); sourceLink.href = url; sourceLink.setAttribute('data-bw-fast-secondary-source', '1'); sourceLink.setAttribute('aria-hidden', 'true');
+      // Unslotted light DOM stays hidden, but the shell sees a real source and keeps this optional section open.
+      host.appendChild(sourceLink);
     }
     deferNative(); schedule();
   }
