@@ -421,14 +421,18 @@ html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozmt2at[data-bw-shell-v2-toc-
 html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozmt2at .comp-mozmt2at-container {
   align-items: stretch !important;
   box-sizing: border-box !important;
-  display: block !important;
+  column-gap: 70px !important;
+  display: grid !important;
+  grid-template-columns: 210px minmax(0, 700px) !important;
   height: auto !important;
-  justify-content: initial !important;
+  justify-content: center !important;
   margin: 0 auto !important;
   max-width: 1060px !important;
   min-height: 0 !important;
   padding: 0 !important;
+  position: relative !important;
   width: 100% !important;
+  z-index: 3 !important;
 }
 
 /* When the CMS supplies both an intro and article headings, the single TOC
@@ -458,12 +462,6 @@ html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozmt2at[data-bw-shell-v2-toc-
   grid-row: 1 !important;
 }
 
-html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozmt2at[data-bw-shell-v2-toc-host="1"] #comp-mozmtefi {
-  grid-column: 2 !important;
-  grid-row: 1 !important;
-  margin: 0 !important;
-}
-
 html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozmt2at #comp-mozmtefi {
   background: transparent !important;
   border: 0 !important;
@@ -471,9 +469,11 @@ html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozmt2at #comp-mozmtefi {
   border-radius: 0 !important;
   box-shadow: none !important;
   box-sizing: border-box !important;
+  grid-column: 2 !important;
+  grid-row: 1 !important;
   height: auto !important;
   inset: auto !important;
-  margin: 0 auto !important;
+  margin: 0 !important;
   max-width: 700px !important;
   min-height: 0 !important;
   padding: 0 !important;
@@ -1598,10 +1598,11 @@ html.bw-tools-detail.bw-tools-shell-v2 body .bw-tour-cta-row .bw-tour-cta-link:f
   }
 
   html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozmt2at #comp-mozmtefi {
+    order: 1 !important;
     padding: 0 !important;
   }
 
-  html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozmt2at[data-bw-shell-v2-toc-host="1"] .comp-mozmt2at-container {
+  html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozmt2at .comp-mozmt2at-container {
     display: flex !important;
     flex-direction: column !important;
     gap: 0 !important;
@@ -1609,14 +1610,10 @@ html.bw-tools-detail.bw-tools-shell-v2 body .bw-tour-cta-row .bw-tour-cta-link:f
     z-index: auto !important;
   }
 
-  html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozmt2at[data-bw-shell-v2-toc-host="1"] #comp-mozmtefi {
-    order: 2 !important;
-  }
-
-  html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozmt2at[data-bw-shell-v2-toc-host="1"] .bw-tools-shell-v2-toc {
-    margin: 0 0 42px !important;
+  html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozmt2at .bw-tools-shell-v2-toc {
+    margin: 18px 0 24px !important;
     max-width: none !important;
-    order: 1 !important;
+    order: 2 !important;
     position: static !important;
     width: 100% !important;
   }

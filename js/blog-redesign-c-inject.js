@@ -202,16 +202,40 @@
     var old = document.querySelector('.bw-c-cover');
     var image = meta('og:image') || post && post.image;
     var source = image ? safeUrl(image) : '';
+    if (!source || !heroNode) {
+      if (old) old.remove();
+      return;
+    }
+
+    var isW = source.indexOf('5a08a3_eadb1c41a6db') !== -1;
+    var w12 = isW ? source.replace('/w_1672,h_941,al_c/', '/w_1200,h_675,al_c,q_85,enc_auto/') : '';
+    var ss = w12 ? escapeHtml(w12) + ' 1200w, ' + escapeHtml(source) + ' 1672w' : '';
+    var sz = ss ? '100vw' : '';
+
     // Re-creating the cover on every hydration render re-decodes the LCP image
     // and feeds this script's own mutation observer. Keep a correct one.
     if (old && old.isConnected && heroNode && old.previousElementSibling === heroNode) {
       var currentImage = old.querySelector('img');
-      if (currentImage && source && currentImage.getAttribute('src') === source) return;
+      if (currentImage && currentImage.getAttribute('src') === source) {
+        if (ss && !currentImage.getAttribute('srcset')) {
+          currentImage.setAttribute('srcset', ss);
+          currentImage.setAttribute('sizes', sz);
+        }
+        return;
+      }
     }
     if (old) old.remove();
-    if (!image || !heroNode) return;
-    var alt = meta('og:image:alt') || post && post.alt || ''; var node = document.createElement('figure'); node.className = 'bw-c-cover'; node.setAttribute(MARK, 'cover');
-    node.innerHTML = '<img src="' + escapeHtml(safeUrl(image)) + '" alt="' + escapeHtml(alt) + '" fetchpriority="high">' + (alt ? '<figcaption class="bw-c-cover-caption">' + escapeHtml(alt) + '</figcaption>' : ''); heroNode.after(node); if (!heroNode.closest('.bw-c-stage')) { balanceBleed(heroNode); balanceBleed(node); }
+
+    var alt = meta('og:image:alt') || post && post.alt || '';
+    var node = document.createElement('figure');
+    node.className = 'bw-c-cover';
+    node.setAttribute(MARK, 'cover');
+    node.innerHTML = '<img src="' + escapeHtml(source) + '"' + (ss ? ' srcset="' + ss + '" sizes="' + sz + '"' : '') + ' alt="' + escapeHtml(alt) + '" fetchpriority="high">' + (alt ? '<figcaption class="bw-c-cover-caption">' + escapeHtml(alt) + '</figcaption>' : '');
+    heroNode.after(node);
+    if (!heroNode.closest('.bw-c-stage')) {
+      balanceBleed(heroNode);
+      balanceBleed(node);
+    }
   }
 
   function lockAdviceTypography(p) {
