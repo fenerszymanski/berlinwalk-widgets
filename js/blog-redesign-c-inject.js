@@ -636,6 +636,9 @@
     // which held the old layout on screen for 571ms in live measurement.
     state.observer = new MutationObserver(function () {
       if (state.wallPhoto && slug() !== 'where-was-the-berlin-wall-interactive-map') releaseWallPhoto();
+      if (slug() === 'where-was-the-berlin-wall-interactive-map' && state.wallPhoto && (!document.querySelector('.bw-c-hero') || !state.wallPhotoSlot || !state.wallPhotoSlot.isConnected || !state.wallPhoto.isConnected)) {
+        render(); return;
+      }
       if (Date.now() >= state.until) return;
       if (!state.rendering && !document.querySelector('.bw-c-hero')) render();
       schedule(120);
