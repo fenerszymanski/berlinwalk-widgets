@@ -113,7 +113,14 @@
     padding:10px 16px; display:flex; align-items:center; gap:8px;
     border-bottom:3px solid #e6cf00;
   }
+  .btm__hood{flex-wrap:wrap;}
   .btm__hood small{font-weight:700; opacity:.75; font-size:11px;}
+  .btm__changeLang{font-size:11px; font-weight:700; font-family:inherit; margin-left:auto; min-height:36px; padding:6px 10px; border:1px solid var(--green-d); border-radius:8px; background:transparent; color:var(--green-d); cursor:pointer;}
+  .btm__languageScope{font-size:11px; line-height:1.5; color:#40513f; margin:10px 16px 0;}
+  .btm__lang[aria-pressed="true"]{border-color:var(--yellow); background:#1c2c20;}
+  .btm__lang{min-width:0; flex-wrap:wrap;}
+  .btm__row{flex-wrap:wrap;}
+  .btm__row .btm__btn{min-width:100px;}
   .btm__screenwrap{padding:16px;}
   .btm__screen{
     background:#0f1a12; border:6px solid #2a2a2a; border-radius:12px;
@@ -154,7 +161,6 @@
     font-size:13px; font-weight:700; display:flex; align-items:center; gap:8px; transition:border-color .15s,background .15s;
   }
   .btm__lang:hover{border-color:var(--lime);}
-  .btm__lang[data-primary]{border-color:var(--yellow); background:#1c2c20;}
   .btm__lang small{display:block; font-weight:600; font-size:10.5px; color:#9fb7a6;}
 
   .btm__tickets{display:flex; flex-direction:column; gap:8px; margin-top:2px; overflow:auto;}
@@ -455,82 +461,82 @@
     <button type="button" class="btm__back" data-to-menu>← Modes</button>
     <div class="btm__grid">
       <!-- MACHINE -->
-      <div class="btm__machine">
-        <div class="btm__hood">🎫 Fahrscheine · Tickets <small>public transport</small></div>
+      <div class="btm__machine" lang="en">
+        <div class="btm__hood">🎫 <span data-machine-text="ticketsLabel">Tickets</span> <small data-machine-text="transport">public transport</small><button type="button" class="btm__changeLang" data-go="language" data-machine-text="changeLanguage">Change language</button></div>
+        <p class="btm__languageScope" data-machine-text="scope">Your choice changes the machine screens. The guide beside the machine and Challenge stay in English.</p>
         <div class="btm__screenwrap">
           <div class="btm__screen" id="btmScreen">
 
             <div class="btm__step is-on" data-step="start">
-              <p class="btm__scr-eyebrow">BVG / VBB Ticket Machine</p>
+              <p class="btm__scr-eyebrow" data-machine-text="startEyebrow">BVG / VBB Ticket Machine</p>
               <div class="btm__center">
-                <p class="btm__scr-h">Touch the screen to begin</p>
-                <p class="btm__scr-p">The screen is idle until you tap it. On the real machine it usually shows a rolling advert, not a menu.</p>
-                <button class="btm__touch" data-go="language">Touch to start</button>
+                <p class="btm__scr-h" data-machine-text="startTitle">Touch the screen to begin</p>
+                <p class="btm__scr-p" data-machine-text="startHelp">Tap to wake the screen. A real machine may show an advert while idle.</p>
+                <button class="btm__touch" data-go="language" data-machine-text="start">Touch to start</button>
               </div>
             </div>
 
             <div class="btm__step" data-step="language">
-              <p class="btm__scr-eyebrow">Step 1 · Choose language</p>
-              <p class="btm__scr-h">Sprache · Language</p>
+              <p class="btm__scr-eyebrow" data-machine-text="languageStep">Step 1 · Choose language</p>
+              <p class="btm__scr-h" data-machine-text="languageTitle">Choose the machine language</p>
               <div class="btm__langs">
-                <button class="btm__lang" data-primary data-go="tickets">🇬🇧 English <small>continue in English</small></button>
-                <button class="btm__lang" data-go="tickets">🇩🇪 Deutsch <small>German</small></button>
-                <button class="btm__lang" data-go="tickets">🇫🇷 Français</button>
-                <button class="btm__lang" data-go="tickets">🇹🇷 Türkçe</button>
-                <button class="btm__lang" data-go="tickets">🇪🇸 Español</button>
+                <button class="btm__lang" data-language="en" lang="en" aria-pressed="true">🇬🇧 English</button>
+                <button class="btm__lang" data-language="de" lang="de" aria-pressed="false">🇩🇪 Deutsch</button>
+                <button class="btm__lang" data-language="fr" lang="fr" aria-pressed="false">🇫🇷 Français</button>
+                <button class="btm__lang" data-language="tr" lang="tr" aria-pressed="false">🇹🇷 Türkçe</button>
+                <button class="btm__lang" data-language="es" lang="es" aria-pressed="false">🇪🇸 Español</button>
               </div>
-              <div class="btm__note">Real machines offer <b>German, English, French, Turkish and Spanish</b>. This simulator continues in English whichever flag you press.</div>
             </div>
 
             <div class="btm__step" data-step="tickets">
-              <p class="btm__scr-eyebrow">Step 2 · Choose your ticket</p>
+              <p class="btm__scr-eyebrow" data-machine-text="ticketsStep">Step 2 · Choose your ticket</p>
               <div class="btm__tickets" id="btmTickets"></div>
             </div>
 
             <div class="btm__step" data-step="confirm">
-              <p class="btm__scr-eyebrow">Step 3 · Confirm</p>
+              <p class="btm__scr-eyebrow" data-machine-text="confirmStep">Step 3 · Confirm</p>
               <p class="btm__scr-h" id="cfName">—</p>
               <div class="btm__pricebig" id="cfPrice">—</div>
               <p class="btm__meta" id="cfMeta">—</p>
               <div class="btm__row">
-                <button class="btm__btn btm__btn--ghost" data-go="tickets">Back</button>
-                <button class="btm__btn btm__btn--go" data-go="payment">Pay</button>
+                <button class="btm__btn btm__btn--ghost" data-go="tickets" data-machine-text="back">Back</button>
+                <button class="btm__btn btm__btn--go" data-go="payment" data-machine-text="pay">Pay</button>
               </div>
             </div>
 
             <div class="btm__step" data-step="payment">
-              <p class="btm__scr-eyebrow">Step 4 · Payment</p>
-              <p class="btm__scr-h">How do you want to pay?</p>
+              <p class="btm__scr-eyebrow" data-machine-text="paymentStep">Step 4 · Payment</p>
+              <p class="btm__scr-h" data-machine-text="paymentTitle">How do you want to pay?</p>
               <div class="btm__pays">
-                <button class="btm__pay" data-pay="coins" aria-pressed="false"><span class="ic">🪙</span>Cash / coins</button>
-                <button class="btm__pay" data-pay="card" aria-pressed="false"><span class="ic">💳</span>Card / phone</button>
+                <button class="btm__pay" data-pay="coins" aria-pressed="false"><span class="ic">🪙</span><span data-machine-text="cash">Cash / coins</span></button>
+                <button class="btm__pay" data-pay="card" aria-pressed="false"><span class="ic">💳</span><span data-machine-text="card">Card / phone</span></button>
               </div>
-              <div class="btm__note" id="payNote">Machines take coins from 5 cents to 2 euros and notes up to 20 euros, plus girocard, Visa, Mastercard, and usually Apple or Google Pay.</div>
+              <div class="btm__note" id="payNote">Practise choosing cash or card. This simulator takes no payment and does not issue a travel ticket.</div>
               <div class="btm__row">
-                <button class="btm__btn btm__btn--ghost" data-go="confirm">Back</button>
-                <button class="btm__btn btm__btn--go" data-go="done" id="payDone">Print ticket</button>
+                <button class="btm__btn btm__btn--ghost" data-go="confirm" data-machine-text="back">Back</button>
+                <button class="btm__btn btm__btn--go" data-go="done" id="payDone" data-machine-text="print">Print ticket</button>
               </div>
             </div>
 
             <div class="btm__step" data-step="done">
-              <p class="btm__scr-eyebrow">Done · One last thing</p>
+              <p class="btm__scr-eyebrow" data-machine-text="doneStep">Done · One last thing</p>
               <div class="btm__stamp" id="btmStamp">
                 <span class="ticketline" id="doneTicket">EINZELFAHRAUSWEIS AB</span>
-                <span class="btm__stampmark">BERLIN<br>VALIDATED</span>
+                <span class="btm__stampmark">BERLIN<br><span data-machine-text="validated">VALIDATED</span></span>
               </div>
               <p class="btm__scr-h" id="doneH">Validate before you board</p>
-              <p class="btm__scr-p" id="doneP">A paper ticket from the machine is not valid until you stamp it. Push it into the small yellow or red box on the platform (it says <b>Bitte hier entwerten / Please validate here</b>) before you step on the train.</p>
+              <p class="btm__scr-p" id="doneP">If your paper ticket is not already validated, stamp it before boarding. Look for the small yellow or red validator on the platform marked “Bitte hier entwerten”.</p>
               <div class="btm__row">
                 <button class="btm__btn btm__btn--go" id="btmStampBtn" data-stamp>Stamp it</button>
-                <button class="btm__btn btm__btn--ghost" data-go="start">Start over</button>
+                <button class="btm__btn btm__btn--ghost" data-go="start" data-machine-text="restart">Start over</button>
               </div>
             </div>
 
           </div>
         </div>
         <div class="btm__slots">
-          <div class="btm__slot"><span class="ic">🪙</span><span><b>Coin &amp; note slot</b>5c–2€ coins, 5/10/20€ notes. Change is limited.</span></div>
-          <div class="btm__slot"><span class="ic">💳</span><span><b>Card reader</b>Insert or tap; PIN for most cards.</span></div>
+          <div class="btm__slot"><span class="ic">🪙</span><span><b data-machine-text="cashSlot">Coin &amp; note slot</b><span data-machine-text="cashSlotHelp">5c–2€ coins, 5/10/20€ notes. Change is limited.</span></span></div>
+          <div class="btm__slot"><span class="ic">💳</span><span><b data-machine-text="cardSlot">Card reader</b><span data-machine-text="cardSlotHelp">Insert or tap; enter your PIN if asked.</span></span></div>
         </div>
       </div>
 
@@ -704,6 +710,7 @@
 </div>
 
 <script src="data/fares.js"></script>
+<script src="data/practice-i18n.js"></script>
 <script src="../js/tool-event-bridge.js"></script>
 <script>
 (function(){
@@ -736,64 +743,106 @@
   var views = {};
   root.querySelectorAll('.btm__view').forEach(function(el){ views[el.getAttribute('data-view')] = el; });
   var mode = 'menu';
+  var interfaceReady = false;
+  function focusScreen(container){
+    if(!interfaceReady || !container) return;
+    var heading = container.querySelector('h2, h3, .btm__scr-eyebrow, .btm__scr-h, .btm__menuLead') || container;
+    heading.setAttribute('tabindex', '-1');
+    try { heading.focus({ preventScroll:true }); } catch(e) { heading.focus(); }
+    heading.scrollIntoView({ block:'nearest', inline:'nearest', behavior:'auto' });
+  }
   function showView(name){
     mode = name;
     Object.keys(views).forEach(function(k){ views[k].classList.toggle('is-on', k===name); });
+    focusScreen(name==='practice' ? views[name].querySelector('.btm__step.is-on') : views[name]);
   }
 
   /* =========================================================
      PRACTICE  (the original machine flow, prices from DATA)
      ========================================================= */
+  var machine = root.querySelector('.btm__machine');
+  var LANGUAGES = window.BTM_PRACTICE_I18N;
+  var machineLanguage = 'en';
+  var practiceCurrent = null;
+  var practicePayment = null;
   var steps = {};
   root.querySelectorAll('.btm__step').forEach(function(el){ steps[el.getAttribute('data-step')] = el; });
+  var listEl = document.getElementById('btmTickets');
+  var stampBox = document.getElementById('btmStamp');
+  function machineCopy(){ return LANGUAGES[machineLanguage]; }
+  function setMachineLanguage(code){
+    if(!LANGUAGES || !LANGUAGES[code]) return;
+    machineLanguage = code;
+    machine.setAttribute('lang', code);
+    machine.querySelectorAll('[data-machine-text]').forEach(function(el){
+      el.textContent = machineCopy()[el.getAttribute('data-machine-text')];
+    });
+    machine.querySelectorAll('[data-language]').forEach(function(el){
+      el.setAttribute('aria-pressed', el.getAttribute('data-language')===code ? 'true' : 'false');
+    });
+    buildTickets();
+    if(practiceCurrent) renderConfirm();
+    renderPayment();
+    renderStamp();
+  }
   function showStep(name){
     Object.keys(steps).forEach(function(k){ steps[k].classList.toggle('is-on', k===name); });
     if(name==='tickets') buildTickets();
+    if(name==='start'){
+      practiceCurrent = null;
+      practicePayment = null;
+      renderPayment();
+      resetStamp();
+    }
+    if(mode==='practice') focusScreen(steps[name]);
   }
-  var listEl = document.getElementById('btmTickets');
   function buildTickets(){
-    if(listEl.childElementCount) return;
+    listEl.textContent = '';
     DATA.PRACTICE_ORDER.forEach(function(key){
       var t = TICKETS[key];
+      var copy = machineCopy().tickets[key];
       var b = document.createElement('button');
+      b.type = 'button';
       b.className = 'btm__ticket';
       b.setAttribute('data-ticket', key);
-      b.innerHTML = '<span class="tk-l"><b>'+t.name+'</b><span>Pick this for '+t.pick+'.</span></span>'+
-                    '<span class="tk-price">'+t.price+'&nbsp;€</span>';
+      var details = document.createElement('span'); details.className = 'tk-l';
+      var title = document.createElement('b'); title.textContent = copy.name;
+      var description = document.createElement('span'); description.textContent = copy.pick;
+      details.appendChild(title); details.appendChild(description);
+      var price = document.createElement('span'); price.className = 'tk-price'; price.textContent = t.price + ' €';
+      b.appendChild(details); b.appendChild(price);
       listEl.appendChild(b);
     });
   }
-  var practiceCurrent = null;
-  function openConfirm(key){
-    practiceCurrent = key; var t = TICKETS[key];
-    document.getElementById('cfName').textContent = t.name;
-    document.getElementById('cfPrice').innerHTML = t.price + '&nbsp;€';
-    document.getElementById('cfMeta').innerHTML = t.summary;
+  function renderConfirm(){
+    var t = TICKETS[practiceCurrent];
+    var copy = machineCopy().tickets[practiceCurrent];
+    document.getElementById('cfName').textContent = copy.name;
+    document.getElementById('cfPrice').textContent = t.price + ' €';
+    document.getElementById('cfMeta').textContent = copy.summary.replace('{reduced}', t.reduced);
+    // Keep the actual German paper-ticket code as a useful real-machine cue.
     document.getElementById('doneTicket').textContent = t.code;
+  }
+  function openConfirm(key){
+    practiceCurrent = key;
+    practicePayment = null;
+    renderConfirm(); renderPayment(); resetStamp();
     showStep('confirm');
   }
-  function selectPay(kind){
-    root.querySelectorAll('.btm__pay').forEach(function(b){ b.setAttribute('aria-pressed', b.getAttribute('data-pay')===kind ? 'true':'false'); });
-    var note = document.getElementById('payNote');
-    if(kind==='coins'){
-      note.innerHTML = '<b>Cash:</b> coins from 5 cents to 2 euros and notes of 5, 10 or 20 euros. The machine holds <b>limited change</b>, so do not feed a 20 euro note for a 2.80 ticket. Feed money after you confirm the ticket.';
-    } else {
-      note.innerHTML = '<b>Card / phone:</b> girocard, Visa, Mastercard, Maestro and usually Apple or Google Pay. Insert or tap and enter your <b>PIN</b> when asked. Cleanest option if you do not have coins.';
-    }
+  function renderPayment(){
+    machine.querySelectorAll('.btm__pay').forEach(function(b){ b.setAttribute('aria-pressed', b.getAttribute('data-pay')===practicePayment ? 'true':'false'); });
+    document.getElementById('payNote').textContent = machineCopy()[practicePayment==='coins' ? 'cashHelp' : practicePayment==='card' ? 'cardHelp' : 'paymentHelp'];
   }
-  var stampBox = document.getElementById('btmStamp');
-  function resetStamp(){
-    stampBox.classList.remove('is-stamped');
-    document.getElementById('doneH').textContent='Validate before you board';
-    document.getElementById('btmStampBtn').textContent='Stamp it';
-    document.getElementById('btmStampBtn').style.display='';
+  function selectPay(kind){ practicePayment = kind; renderPayment(); }
+  function renderStamp(){
+    var stamped = stampBox.classList.contains('is-stamped');
+    document.getElementById('doneH').textContent = machineCopy()[stamped ? 'stampedTitle' : 'validateTitle'];
+    document.getElementById('doneP').textContent = machineCopy()[stamped ? 'stampedHelp' : 'validateHelp'];
+    document.getElementById('btmStampBtn').textContent = machineCopy().stamp;
+    document.getElementById('btmStampBtn').style.display = stamped ? 'none' : '';
   }
-  function doStamp(btn){
-    stampBox.classList.add('is-stamped');
-    document.getElementById('doneH').textContent='Validated. Now you can board.';
-    document.getElementById('doneP').innerHTML='That stamp prints the date, time, and station. Your ticket is now running. On the real platform the box is on a pole or wall near the stairs, not inside the train.';
-    btn.style.display='none';
-  }
+  function resetStamp(){ stampBox.classList.remove('is-stamped'); renderStamp(); }
+  function doStamp(){ stampBox.classList.add('is-stamped'); renderStamp(); }
   var picks = { airport:null, distance:null };
   function pickOpt(opt){
     var group = opt.closest('.btm__opts').getAttribute('data-group');
@@ -1078,6 +1127,8 @@
     if(e.target.closest('[data-source-link]')){ emit('cta_click','',{}); return; }
 
     // practice interactions
+    var language = e.target.closest('[data-language]');
+    if(language){ setMachineLanguage(language.getAttribute('data-language')); showStep('tickets'); return; }
     var go = e.target.closest('[data-go]');
     if(go){ showStep(go.getAttribute('data-go')); if(go.getAttribute('data-go')==='done'){ resetStamp(); } return; }
     var tk = e.target.closest('[data-ticket]');
@@ -1099,9 +1150,12 @@
     });
   }
 
+  // Initialise the complete machine language before displaying any practice screen.
+  setMachineLanguage('en');
   // start on the menu
   showStep('start');
   showView('menu');
+  interfaceReady = true;
 })();
 </script>
 </body>
