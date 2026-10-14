@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Berlin Swim Badge Timeline: When Each Swimming Door Opens for Your Child</title>
+<meta name="description" content="Enter your child's birth date. The timeline shows when a Berliner Bäder Seepferdchen course becomes possible, when a club waitlist place could come, which school year is swimming year, and when the free holiday intensive courses open.">
+<link rel="stylesheet" href="../css/brand.css">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #FFFFFF; color: #1d2a2a; padding: 12px; }
+  .sw { border-radius: 18px; overflow: hidden; background: #f2f7f7; border: 1px solid #cfdede; }
+  .sw-head { padding: 16px 16px 14px; background: #0f3d3e; color: #fff; }
+  .sw-eyebrow { font-size: 11px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: #FFE600; }
+  .sw-head h1 { font-size: 19px; line-height: 1.25; font-weight: 800; margin-top: 4px; }
+  .sw-head p { font-size: 12.5px; line-height: 1.5; color: #cfe3e2; margin-top: 5px; }
+  .sw-controls { padding: 14px 16px 4px; display: flex; flex-wrap: wrap; gap: 12px 18px; align-items: flex-end; }
+  .sw-lab { display: block; font-size: 11px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; color: #476060; margin-bottom: 6px; }
+  .sw-in { font-family: inherit; font-size: 15px; font-weight: 700; padding: 9px 10px; border: 1.5px solid #b9cccc; border-radius: 10px; background: #fff; color: #1d2a2a; min-width: 180px; }
+  .sw-in:focus-visible, .sw-step:focus-visible, .sw-nav:focus-visible { outline: 2px solid #c62828; outline-offset: 2px; }
+  .sw-verdict { margin: 10px 16px 0; padding: 12px 14px; border-radius: 14px; background: #1B5E20; color: #fff; }
+  .sw-verdict b { color: #FFE600; }
+  .sw-verdict .v-main { font-size: 14.5px; font-weight: 800; line-height: 1.4; }
+  .sw-verdict .v-sub { font-size: 12.5px; line-height: 1.5; color: #e1eedd; margin-top: 4px; }
+  .sw-board { padding: 12px 8px 2px; }
+  .sw-board svg { display: block; width: 100%; max-width: 700px; margin: 0 auto; height: auto; }
+  .lane-bg { fill: #ffffff; }
+  .lane-on .lane-bg { fill: #fff8b8; }
+  .t-lane { font-size: 12.5px; font-weight: 800; fill: #183535; }
+  .t-lane-sub { font-size: 10.5px; font-weight: 600; fill: #587070; }
+  .t-axis { font-size: 11px; font-weight: 700; fill: #587070; }
+  .t-age { font-size: 11px; font-weight: 800; fill: #0f3d3e; }
+  .t-bar { font-size: 10.5px; font-weight: 800; fill: #ffffff; }
+  .t-bar-dark { font-size: 10.5px; font-weight: 800; fill: #123D18; }
+  .t-now { font-size: 10.5px; font-weight: 800; fill: #c62828; }
+  .sw-legend { padding: 4px 16px 0; font-size: 11.5px; line-height: 1.45; color: #476060; }
+  .sw-steps { display: flex; flex-wrap: wrap; gap: 6px; padding: 10px 16px 0; }
+  .sw-step { font-family: inherit; font-size: 12.5px; font-weight: 700; padding: 7px 11px; border-radius: 999px; border: 1.5px solid #b9cccc; background: #fff; color: #23393a; cursor: pointer; }
+  .sw-step.is-on { background: #FFE600; border-color: #d4c000; color: #123D18; }
+  .sw-detail { margin: 10px 16px 14px; padding: 14px; background: #fff; border: 1px solid #cfdede; border-radius: 14px; }
+  .sw-detail .d-when { font-size: 12px; font-weight: 800; color: #0f6e70; text-transform: uppercase; letter-spacing: .05em; }
+  .sw-detail h2 { font-size: 16px; font-weight: 800; line-height: 1.3; color: #0f3d3e; margin-top: 3px; }
+  .sw-detail p { font-size: 13.5px; line-height: 1.55; margin-top: 7px; }
+  .sw-detail ul { margin: 8px 0 0 18px; font-size: 13px; line-height: 1.5; }
+  .sw-detail li { margin-top: 3px; }
+  .sw-detail .d-move { margin-top: 10px; padding: 9px 11px; border-radius: 10px; background: #e6f2f1; font-size: 12.5px; line-height: 1.5; color: #173c3c; }
+  .sw-navrow { display: flex; justify-content: space-between; gap: 8px; margin-top: 12px; }
+  .sw-nav { font-family: inherit; font-size: 13px; font-weight: 800; padding: 8px 14px; border-radius: 10px; border: 0; background: #0f3d3e; color: #fff; cursor: pointer; }
+  .sw-nav[disabled] { background: #c9d6d6; color: #5f7272; cursor: default; }
+  .sw-note { padding: 0 16px 14px; font-size: 11.5px; line-height: 1.5; color: #587070; }
+  @media (max-width: 560px) { .t-axis, .t-age, .t-bar, .t-bar-dark, .t-now { font-size: 11px; } .t-lane { font-size: 12.5px; } }
+  .sw-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+</style>
+</head>
+<body>
+<div class="sw" id="sw">
+  <div class="sw-head">
+    <div class="sw-eyebrow">Swimming lessons for kids in Berlin</div>
+    <h1>When does each swimming door open for your child?</h1>
+    <p>Enter the birth date. The timeline places the Berliner Bäder course age, a club waitlist joined today, the school swimming year and the free holiday courses on one line.</p>
+  </div>
+
+  <div class="sw-controls">
+    <div>
+      <label class="sw-lab" for="sw-birth">Child's birth date</label>
+      <input class="sw-in" type="date" id="sw-birth" value="2021-06-01" min="2012-01-01" max="2026-10-14">
+    </div>
+    <div>
+      <label class="sw-lab" for="sw-badge">Badge so far</label>
+      <select class="sw-in" id="sw-badge">
+        <option value="none">No badge yet</option>
+        <option value="seahorse">Seepferdchen</option>
+        <option value="bronze">Bronze</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="sw-verdict" id="sw-verdict" aria-live="polite"></div>
+
+  <div class="sw-board" id="sw-board"></div>
+
+  <p class="sw-legend">Yellow mark: next Berliner Bäder course sale (late November 2026). Dark green blocks on the holiday line: free course windows your child can use. Grey blocks: windows before Year 4.</p>
+
+  <div class="sw-steps" id="sw-steps" role="tablist" aria-label="Steps on the swimming ladder"></div>
+
+  <div class="sw-detail" id="sw-detail" aria-live="polite"></div>
+
+  <p class="sw-note">Checked on 14 October 2026. Berliner Bäder prices are the child rate (5 to 14) including entry. Club waits differ by club and district; 2 to 3 years is the figure the DLRG gave for Friedrichshain-Kreuzberg in May 2026. Holiday course windows after the autumn break 2027 are not published yet, so later years show only the rule.</p>
+</div>
+
+<script>
+(function () {
+  var TODAY = Date.UTC(2026, 9, 14);
+  var DAY = 86400000;
+  // Free holiday intensive courses run in these Berlin breaks (Ferienordnung 2026/27 and 2027/28).
+  var HOLIDAY_COURSES = [
+    { from: Date.UTC(2026, 9, 19), to: Date.UTC(2026, 9, 31), label: 'Autumn 2026' },
+    { from: Date.UTC(2027, 2, 22), to: Date.UTC(2027, 3, 2), label: 'Easter 2027' },
+    { from: Date.UTC(2027, 6, 1), to: Date.UTC(2027, 7, 14), label: 'Summer 2027' },
+    { from: Date.UTC(2027, 9, 11), to: Date.UTC(2027, 9, 23), label: 'Autumn 2027' }
+  ];
+  var KNOWN_UNTIL = Date.UTC(2027, 9, 23);
+  var PASS_END = Date.UTC(2027, 3, 2);
+  var SALE = { from: Date.UTC(2026, 10, 20), to: Date.UTC(2026, 10, 30) };
+
+  var MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+  function fmt(t) { var d = new Date(t); return d.getUTCDate() + ' ' + MONTHS[d.getUTCMonth()] + ' ' + d.getUTCFullYear(); }
+  function fmtMonth(t) { var d = new Date(t); return MONTHS[d.getUTCMonth()] + ' ' + d.getUTCFullYear(); }
+  function addYears(t, n) { var d = new Date(t); return Date.UTC(d.getUTCFullYear() + n, d.getUTCMonth(), d.getUTCDate()); }
+  function esc(s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
+
+  var birthEl = document.getElementById('sw-birth');
+  var badgeEl = document.getElementById('sw-badge');
+  var stageIndex = 0;
+
+  function model() {
+    var parts = (birthEl.value || '2021-06-01').split('-').map(Number);
+    var birth = Date.UTC(parts[0], parts[1] - 1, parts[2]);
+    if (!(birth > Date.UTC(2011, 11, 31)) || birth > TODAY) birth = Date.UTC(2021, 5, 1);
+    var b = new Date(birth);
+    // Berlin school entry: children born 1 Oct to 30 Sep start school together on 1 August.
+    var startYear = (b.getUTCMonth() <= 8) ? b.getUTCFullYear() + 6 : b.getUTCFullYear() + 7;
+    var schoolStart = Date.UTC(startYear, 7, 1);
+    var m = {
+      birth: birth,
+      age2: addYears(birth, 2),
+      age5: addYears(birth, 5),
+      age6: addYears(birth, 6),
+      schoolStart: schoolStart,
+      year3From: Date.UTC(startYear + 2, 7, 1),
+      year3To: Date.UTC(startYear + 3, 6, 31),
+      year4From: Date.UTC(startYear + 3, 7, 1),
+      year10To: Date.UTC(startYear + 10, 6, 31),
+      waitFrom: addYears(TODAY, 2),
+      waitTo: addYears(TODAY, 3),
+      badge: badgeEl.value
+    };
+    m.start = Date.UTC(2026, 6, 1);
+    m.end = Math.max(Date.UTC(startYear + 4, 6, 31), addYears(TODAY, 3) + 120 * DAY);
+    m.ageNow = (TODAY - birth) / (365.25 * DAY);
+    return m;
+  }
+
+  var LANES = [
+    { key: 'age', name: 'Age', sub: 'birthdays' },
+    { key: 'bbb', name: 'Berliner Bäder', sub: 'group courses' },
+    { key: 'club', name: 'Club waitlist', sub: 'joined today' },
+    { key: 'school', name: 'School', sub: 'Year 3 = swimming' },
+    { key: 'holiday', name: 'Free holiday', sub: 'courses, Year 4+' },
+    { key: 'pass', name: 'Holiday pass', sub: 'free swims, EUR 9' }
+  ];
+
+  var STAGES = [
+    { key: 'water', lane: 'bbb', label: '1 Water time' },
+    { key: 'seahorse', lane: 'bbb', label: '2 Seepferdchen' },
+    { key: 'club', lane: 'club', label: '3 Club place' },
+    { key: 'school', lane: 'school', label: '4 School swimming' },
+    { key: 'bronze', lane: 'holiday', label: '5 Bronze' }
+  ];
+
+  function draw(m) {
+    var narrow = (document.getElementById('sw-board').clientWidth || 700) < 560;
+    var W = narrow ? 380 : 700, LEFT = narrow ? 10 : 128, RIGHT = narrow ? 10 : 12, TOP = 30, LANE_H = narrow ? 54 : 44, GAP = 6;
+    var LABEL = narrow ? 18 : 0;
+    var H = TOP + LANES.length * (LANE_H + GAP) + 10;
+    var span = m.end - m.start;
+    function x(t) { return LEFT + (Math.max(m.start, Math.min(m.end, t)) - m.start) / span * (W - LEFT - RIGHT); }
+    var activeLane = STAGES[stageIndex].lane;
+    var out = [];
+    out.push('<svg viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="Swimming timeline for a child born ' + fmt(m.birth) + '">');
+    // Year grid
+    var y0 = new Date(m.start).getUTCFullYear();
+    var y1 = new Date(m.end).getUTCFullYear();
+    for (var y = y0 + 1; y <= y1; y++) {
+      var gx = x(Date.UTC(y, 0, 1));
+      out.push('<line x1="' + gx + '" y1="' + (TOP - 8) + '" x2="' + gx + '" y2="' + (H - 6) + '" stroke="#d6e2e2" stroke-width="1"/>');
+      out.push('<text class="t-axis" x="' + (gx + 3) + '" y="' + (TOP - 12) + '">' + y + '</text>');
+    }
+    LANES.forEach(function (lane, i) {
+      var ly = TOP + i * (LANE_H + GAP);
+      var mid = ly + LANE_H / 2;
+      out.push('<g class="lane' + (lane.key === activeLane ? ' lane-on' : '') + '">');
+      out.push('<rect class="lane-bg" x="4" y="' + ly + '" width="' + (W - 8) + '" height="' + LANE_H + '" rx="9"/>');
+      if (narrow) {
+        out.push('<text class="t-lane" x="12" y="' + (ly + 14) + '">' + lane.name + ' <tspan class="t-lane-sub">' + lane.sub + '</tspan></text>');
+        mid = ly + LABEL + (LANE_H - LABEL) / 2;
+      } else {
+        out.push('<text class="t-lane" x="12" y="' + (mid - 2) + '">' + lane.name + '</text>');
+        out.push('<text class="t-lane-sub" x="12" y="' + (mid + 12) + '">' + lane.sub + '</text>');
+      }
+      var by = ly + LABEL + (narrow ? 4 : 9), bh = LANE_H - LABEL - (narrow ? 8 : 18);
+      if (lane.key === 'age') {
+        for (var a = 0; a <= 18; a++) {
+          var bd = addYears(m.birth, a);
+          if (bd < m.start || bd > m.end) continue;
+          var ax = x(bd);
+          out.push('<circle cx="' + ax + '" cy="' + mid + '" r="11" fill="' + (a === 5 ? '#FFE600' : '#0f3d3e') + '"/>');
+          out.push('<text class="' + (a === 5 ? 't-bar-dark' : 't-bar') + '" x="' + ax + '" y="' + (mid + 4) + '" text-anchor="middle">' + a + '</text>');
+        }
+      }
+      if (lane.key === 'bbb') {
+        var tFrom = Math.max(m.start, m.age2), tTo = Math.min(m.age5, m.end);
+        if (tTo > tFrom) {
+          out.push('<rect x="' + x(tFrom) + '" y="' + by + '" width="' + Math.max(2, x(tTo) - x(tFrom)) + '" height="' + bh + '" rx="6" fill="#8fc7c3"/>');
+          if (x(tTo) - x(tFrom) > 70) out.push('<text class="t-bar-dark" x="' + (x(tFrom) + 6) + '" y="' + (mid + 4) + '">parent and child</text>');
+        }
+        var cFrom = Math.max(m.start, m.age5);
+        if (m.end > cFrom) {
+          out.push('<rect x="' + x(cFrom) + '" y="' + by + '" width="' + Math.max(2, x(m.end) - x(cFrom)) + '" height="' + bh + '" rx="6" fill="#0f6e70"/>');
+          var lx = Math.max(x(cFrom) + 6, cFrom <= SALE.to ? x(SALE.to) + 8 : 0);
+          if (x(m.end) - lx > 90) out.push('<text class="t-bar" x="' + lx + '" y="' + (mid + 4) + '">courses from age 5</text>');
+        }
+        out.push('<rect x="' + (x(SALE.from) - 2) + '" y="' + (by - 3) + '" width="' + Math.max(6, x(SALE.to) - x(SALE.from) + 4) + '" height="' + (bh + 6) + '" rx="3" fill="#FFE600" stroke="#123D18" stroke-width="1.2"/>');
+      }
+      if (lane.key === 'club') {
+        out.push('<line x1="' + x(TODAY) + '" y1="' + mid + '" x2="' + x(m.waitFrom) + '" y2="' + mid + '" stroke="#7b9393" stroke-width="3" stroke-dasharray="5 4"/>');
+        out.push('<rect x="' + x(m.waitFrom) + '" y="' + by + '" width="' + Math.max(2, x(m.waitTo) - x(m.waitFrom)) + '" height="' + bh + '" rx="6" fill="#e0a43a"/>');
+        if (x(m.waitTo) - x(m.waitFrom) > 70) out.push('<text class="t-bar-dark" x="' + (x(m.waitFrom) + 6) + '" y="' + (mid + 4) + '">place likely</text>');
+      }
+      if (lane.key === 'school') {
+        for (var k = 1; k <= 6; k++) {
+          var sFrom = Date.UTC(new Date(m.schoolStart).getUTCFullYear() + k - 1, 7, 1);
+          var sTo = Date.UTC(new Date(m.schoolStart).getUTCFullYear() + k, 6, 31);
+          if (sTo < m.start || sFrom > m.end) continue;
+          var isSwim = k === 3;
+          var sx = x(sFrom), sw = Math.max(2, x(sTo) - x(sFrom) - 2);
+          out.push('<rect x="' + sx + '" y="' + by + '" width="' + sw + '" height="' + bh + '" rx="6" fill="' + (isSwim ? '#1B5E20' : '#c5e1a5') + '"/>');
+          if (sw > 22) out.push('<text class="' + (isSwim ? 't-bar' : 't-bar-dark') + '" x="' + (sx + 5) + '" y="' + (mid + 4) + '">' + (isSwim && sw > 70 ? 'Year 3 swim' : 'Y' + k) + '</text>');
+        }
+      }
+      if (lane.key === 'holiday') {
+        var rFrom = Math.max(m.start, m.year4From), rTo = Math.min(m.end, m.year10To);
+        if (rTo > rFrom) {
+          out.push('<rect x="' + x(rFrom) + '" y="' + (by + 6) + '" width="' + Math.max(2, x(rTo) - x(rFrom)) + '" height="' + (bh - 12) + '" rx="4" fill="#d9ecd0"/>');
+        }
+        HOLIDAY_COURSES.forEach(function (h) {
+          var open = h.to >= m.year4From && h.from <= m.year10To;
+          out.push('<rect x="' + x(h.from) + '" y="' + by + '" width="' + Math.max(5, x(h.to) - x(h.from)) + '" height="' + bh + '" rx="3" fill="' + (open ? '#1B5E20' : '#b9cccc') + '"/>');
+        });
+      }
+      if (lane.key === 'pass') {
+        out.push('<rect x="' + x(m.start) + '" y="' + (by + 6) + '" width="' + Math.max(2, x(PASS_END) - x(m.start)) + '" height="' + (bh - 12) + '" rx="4" fill="#FFE600"/>');
+        out.push('<text class="t-bar-dark" x="' + (x(m.start) + 6) + '" y="' + (mid + 4) + '">to Easter 2027</text>');
+      }
+      out.push('</g>');
+    });
+    var nx = x(TODAY);
+    out.push('<line x1="' + nx + '" y1="' + (TOP - 4) + '" x2="' + nx + '" y2="' + (H - 6) + '" stroke="#c62828" stroke-width="2"/>');
+    out.push('<text class="t-now" x="' + (nx + 4) + '" y="' + (TOP + 3) + '">today</text>');
+    out.push('</svg>');
+    document.getElementById('sw-board').innerHTML = out.join('');
+  }
+
+  function nextHolidayCourse(m) {
+    var from = Math.max(TODAY, m.year4From);
+    for (var i = 0; i < HOLIDAY_COURSES.length; i++) {
+      if (HOLIDAY_COURSES[i].to >= from) return HOLIDAY_COURSES[i];
+    }
+    return null;
+  }
+
+  function verdict(m) {
+    var v = document.getElementById('sw-verdict');
+    var age = Math.floor(m.ageNow);
+    var main, sub;
+    if (m.badge === 'bronze') {
+      main = 'Bronze is the line Berlin schools aim for. <b>Your child is past it.</b>';
+      sub = 'The next Berliner Bäder step is the Silver course (10 lessons, from age 6). The holiday courses are only for children without Bronze.';
+    } else if (m.ageNow < 5) {
+      main = 'Berliner Bäder group courses open at age 5: <b>' + fmt(m.age5) + '</b>.';
+      sub = 'A club waitlist joined today could offer a place around ' + fmtMonth(m.waitFrom) + ' to ' + fmtMonth(m.waitTo) + ', when your child is about ' + Math.floor((m.waitFrom - m.birth) / (365.25 * DAY)) + ' to ' + Math.floor((m.waitTo - m.birth) / (365.25 * DAY)) + '.';
+    } else if (TODAY < m.year4From) {
+      main = 'Old enough for a Seepferdchen course now. <b>Next sale: late November 2026</b> for the January term.';
+      sub = 'School swimming comes in Year 3: ' + fmtMonth(m.year3From) + ' to ' + fmtMonth(m.year3To) + '. The free holiday courses only open from Year 4, in ' + fmtMonth(m.year4From) + '.';
+    } else {
+      var h = nextHolidayCourse(m);
+      main = 'Year 4 or above without Bronze: <b>the free holiday courses are open to your child.</b>';
+      sub = h ? 'Next window: ' + h.label + ' (' + fmt(h.from) + ' to ' + fmt(h.to) + '). Registration opens on schwimmkurse-sportjugend.de, announced about 4 to 6 weeks before the break.' : 'Watch schwimmkurse-sportjugend.de about 4 to 6 weeks before each Easter, summer and autumn break.';
+    }
+    v.innerHTML = '<div class="v-main">' + main + '</div><div class="v-sub">' + esc(sub) + '</div>';
+    if (age < 0) v.innerHTML = '';
+  }
+
+  function stageHtml(m) {
+    var s = STAGES[stageIndex].key;
+    var when, title, body, list, move;
+    if (s === 'water') {
+      when = m.ageNow < 5 ? 'From ' + fmt(Math.max(m.age2, TODAY)) + ' to ' + fmt(m.age5) : 'Done by age 5';
+      title = 'Water time before the first course';
+      body = 'Berliner Bäder runs parent-and-child courses for ages 2 to 3 and 3 to 4: 10 sessions of 30 minutes, once a week, EUR 10.50 a session with one adult included. The goal is water confidence, not a badge.';
+      list = ['Ages 2 to 3 and 3 to 4, one adult in the water', 'EUR 105 for the 10 sessions', 'Free holiday swims with the EUR 9 Super-Ferien-Pass work as practice too'];
+      move = 'If a course feels too early, go to the same pool twice a month. A child who already jumps in and blows bubbles gets more out of the Seepferdchen course.';
+    } else if (s === 'seahorse') {
+      when = m.ageNow < 5 ? 'Possible from ' + fmt(m.age5) : 'Possible now. Next sale: late November 2026';
+      title = 'Seepferdchen course at Berliner Bäder';
+      body = 'The basic course is 20 lessons of 45 minutes, usually twice a week, from age 5, in German only. The child price is EUR 10.50 a lesson including entry, so EUR 210. There are no waitlists: each term is sold online, and the January 2027 courses go on sale at the end of November 2026, with the plan online in early November.';
+      list = ['Jump in from the edge and swim 25 metres', 'Bring up an object from shoulder-deep water', 'Know the pool rules', 'If the badge does not come, a 10-lesson follow-on course (EUR 105) continues'];
+      move = 'Put early November in your calendar to read the plan, and the end of November to book. There is no waitlist, so a place goes to whoever books first.';
+    } else if (s === 'club') {
+      when = 'Joined today: a place around ' + fmtMonth(m.waitFrom) + ' to ' + fmtMonth(m.waitTo);
+      title = 'A club or DLRG place';
+      body = 'Clubs and the DLRG teach cheaply, but they keep waitlists. In May 2026 the DLRG in Friedrichshain-Kreuzberg had about 370 children waiting and said a place can take two to three years.';
+      list = ['Your child would be about ' + Math.floor((m.waitFrom - m.birth) / (365.25 * DAY)) + ' to ' + Math.floor((m.waitTo - m.birth) / (365.25 * DAY)) + ' when it comes', 'Lists differ by club and pool: ask how long yours is', 'A club place does not stop you booking a Berliner Bäder course meanwhile'];
+      move = 'Sign up for a list around the third birthday. If the place comes after the Seepferdchen, use it for Bronze.';
+    } else if (s === 'school') {
+      when = 'Year 3: ' + fmtMonth(m.year3From) + ' to ' + fmtMonth(m.year3To);
+      title = 'School swimming in Year 3';
+      body = 'Every Berlin primary school child has swimming lessons in Year 3. The school standard follows the Bronze badge, usually with one lesson a week in groups of around 15, so a child who starts at zero rarely gets there in one year.';
+      list = ['School start: ' + fmtMonth(m.schoolStart) + ' (born 1 October to 30 September start together)', 'Bronze: 15 minutes and at least 200 metres, a 2-metre dive, a jump from the block or 1-metre board', 'A Seepferdchen before Year 3 makes the school year count'];
+      move = 'Aim for the Seepferdchen before ' + fmtMonth(m.year3From) + '. Then school swimming is practice, not the first time in deep water.';
+    } else {
+      var h = nextHolidayCourse(m);
+      when = m.badge === 'bronze' ? 'Bronze done: Silver is next' : TODAY < m.year4From ? 'Free courses from Year 4: ' + fmtMonth(m.year4From) : (h ? 'Next free window: ' + h.label : 'Every Easter, summer and autumn break');
+      title = 'Bronze: free holiday course or paid course';
+      body = 'Children in Year 4 to 10 who still have no Seepferdchen or Bronze after school swimming get free intensive courses in the Easter, summer and autumn breaks: about a week, 45 minutes a day, in groups of up to 10, at eight pools in autumn 2026. Before Year 4 the paid route is the Berliner Bäder Bronze course: 10 lessons for EUR 105.';
+      list = ['Register at schwimmkurse-sportjugend.de, announced about 4 to 6 weeks before the break', 'In 2025 the holiday courses ended with 1,723 Seepferdchen and 2,214 Bronze badges', 'Pools include Kombibad Seestraße, Schwimmhalle Fischerinsel and Kombibad Gropiusstadt'];
+      move = 'If Year 3 ends without Bronze, do not wait for summer to fix it. Watch the site from early March for the Easter round.';
+    }
+    var html = '<div class="d-when">' + esc(when) + '</div><h2>' + esc(title) + '</h2><p>' + esc(body) + '</p><ul>' + list.map(function (li) { return '<li>' + esc(li) + '</li>'; }).join('') + '</ul><div class="d-move"><b>My move:</b> ' + esc(move) + '</div>';
+    html += '<div class="sw-navrow"><button class="sw-nav" type="button" id="sw-prev"' + (stageIndex === 0 ? ' disabled' : '') + '>Back</button><button class="sw-nav" type="button" id="sw-next"' + (stageIndex === STAGES.length - 1 ? ' disabled' : '') + '>Next step</button></div>';
+    var d = document.getElementById('sw-detail');
+    d.innerHTML = html;
+    document.getElementById('sw-prev').onclick = function () { goTo(stageIndex - 1); };
+    document.getElementById('sw-next').onclick = function () { goTo(stageIndex + 1); };
+  }
+
+  function steps() {
+    var wrap = document.getElementById('sw-steps');
+    wrap.innerHTML = STAGES.map(function (st, i) {
+      return '<button type="button" role="tab" class="sw-step' + (i === stageIndex ? ' is-on' : '') + '" aria-selected="' + (i === stageIndex) + '" data-i="' + i + '">' + st.label + '</button>';
+    }).join('');
+    [].forEach.call(wrap.querySelectorAll('.sw-step'), function (b) {
+      b.onclick = function () { goTo(Number(b.getAttribute('data-i'))); };
+    });
+  }
+
+  function suggestedStage(m) {
+    if (m.badge === 'bronze') return 4;
+    if (m.badge === 'seahorse') return TODAY < m.year3From ? 3 : 4;
+    if (m.ageNow < 4) return 0;
+    if (TODAY >= m.year4From) return 4;
+    return 1;
+  }
+
+  function goTo(i) {
+    stageIndex = Math.max(0, Math.min(STAGES.length - 1, i));
+    render(false);
+  }
+
+  function render(resetStage) {
+    var m = model();
+    if (resetStage) stageIndex = suggestedStage(m);
+    verdict(m);
+    draw(m);
+    steps();
+    stageHtml(m);
+  }
+
+  birthEl.addEventListener('change', function () { render(true); });
+  birthEl.addEventListener('input', function () { if (birthEl.value) render(true); });
+  badgeEl.addEventListener('change', function () { render(true); });
+  var lastNarrow = null;
+  window.addEventListener('resize', function () { var n = (document.getElementById('sw-board').clientWidth || 700) < 560; if (n !== lastNarrow) { lastNarrow = n; render(false); } });
+  render(true);
+})();
+</script>
+<script src="../js/brand.js"></script>
+</body>
+</html>
