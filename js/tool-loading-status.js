@@ -1,6 +1,6 @@
 if (/^\/tools\/[^/]+\/?$/.test(location.pathname) && new URLSearchParams(location.search).has('bwFastTool')) {
   var fastScript = document.createElement('script');
-  fastScript.src = 'https://fenerszymanski.github.io/berlinwalk-widgets/js/tool-fast-inline.js?v=pilot1';
+  fastScript.src = 'https://fenerszymanski.github.io/berlinwalk-widgets/js/tool-fast-inline.js?v=pilot2';
   fastScript.async = true; document.head.appendChild(fastScript);
 } else {
 /* A slow Wix hydration must not look like a missing tool. This notice owns
