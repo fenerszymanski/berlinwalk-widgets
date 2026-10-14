@@ -622,7 +622,7 @@
         // Reconnect before yielding: Wix can insert the replacement article
         // before the next animation frame. Our own writes happened detached.
         state.observer.takeRecords();
-        if (state.observer && Date.now() < state.until) state.observer.observe(document.documentElement, { childList: true, subtree: true });
+        if (state.observer && (Date.now() < state.until || (slug() === 'where-was-the-berlin-wall-interactive-map' && state.wallPhoto))) state.observer.observe(document.documentElement, { childList: true, subtree: true });
       }
     }
   }
