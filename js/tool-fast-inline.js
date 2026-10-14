@@ -10,7 +10,7 @@
   if (previous && previous.slug === slug) return;
   if (previous) previous.stop();
   var url = '', host = null, spacer = null, portal = null, frame = null, observer, resizeObserver, queued = false, stopped = false;
-  var height = 1200, frameLoadCount = 0;
+  var height = 1200, frameLoadCount = 0, positionedBody = false, bodyPosition = '', bodyPriority = '';
   var tracked = ['berlin-ticket-machine-simulator', 'berlin-address-time-machine', 'berlin-hotel-location-checker', 'berlin-dates-check', 'berlin-doner-price-index'];
   window.BW_FAST_INLINE = { slug: slug, stop: stop };
   function stop() {
@@ -23,6 +23,9 @@
     document.removeEventListener('scroll', schedule, true);
     if (document.fonts) document.fonts.removeEventListener('loadingdone', schedule);
     if (portal) portal.remove();
+    if (positionedBody && document.body.style.getPropertyValue('position') === 'relative') {
+      if (bodyPosition) document.body.style.setProperty('position', bodyPosition, bodyPriority); else document.body.style.removeProperty('position');
+    }
     if (host && host.shadowRoot) { host.shadowRoot.textContent = ''; host.shadowRoot.appendChild(document.createElement('slot')); host.removeAttribute('aria-owns'); }
   }
   function valid(value) {
@@ -55,7 +58,10 @@
     var total = height + entry.getBoundingClientRect().height;
     if (Math.abs(spacer.getBoundingClientRect().height - total) > 1) spacer.style.height = Math.ceil(total) + 'px';
     var r = spacer.getBoundingClientRect();
-    portal.style.left = r.left + 'px'; portal.style.top = r.top + 'px'; portal.style.width = r.width + 'px';
+    var bodyRect = document.body.getBoundingClientRect();
+    portal.style.left = (r.left - bodyRect.left + document.body.scrollLeft - document.body.clientLeft) + 'px';
+    portal.style.top = (r.top - bodyRect.top + document.body.scrollTop - document.body.clientTop) + 'px';
+    portal.style.width = r.width + 'px';
     portal.style.visibility = r.width > 0 ? 'visible' : 'hidden';
     if (r.width > 0 && tracked.indexOf(slug) !== -1) {
       frame.setAttribute('data-bw-tool-frame', '1'); frame.setAttribute('data-bw-tool-slug', slug);
@@ -77,8 +83,12 @@
     url = url || warmupUrl();
     if (!url) return;
     if (!portal) {
+      if (getComputedStyle(document.body).position === 'static') {
+        bodyPosition = document.body.style.getPropertyValue('position'); bodyPriority = document.body.style.getPropertyPriority('position');
+        document.body.style.setProperty('position', 'relative'); positionedBody = true;
+      }
       portal = document.createElement('div'); portal.id = 'bw-fast-inline-surface'; portal.setAttribute('role', 'group'); portal.setAttribute('aria-label', 'Interactive Berlin tool');
-      portal.style.cssText = 'position:fixed;z-index:5;left:0;top:0;width:100%;visibility:hidden;background:#fff;box-sizing:border-box';
+      portal.style.cssText = 'position:absolute;z-index:5;left:0;top:0;width:100%;visibility:hidden;background:#fff;box-sizing:border-box';
       var entry = document.createElement('div'); entry.className = 'entry'; entry.textContent = 'START HERE';
       entry.style.cssText = 'box-sizing:border-box;padding:13px 16px 22px;color:#123D18;background:#f8f9f3;font:700 11px/1.4 Arial,sans-serif;letter-spacing:.07em'; portal.appendChild(entry);
       frame = document.createElement('iframe'); frame.title = 'Berlin tool'; frame.name = 'bw-fast-tool'; frame.loading = 'eager'; frame.setAttribute('allow', 'fullscreen; geolocation *'); frame.setAttribute('scrolling', 'no');
