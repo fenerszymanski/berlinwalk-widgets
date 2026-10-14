@@ -10,7 +10,7 @@
   if (previous && previous.slug === slug) return;
   if (previous) previous.stop();
   var url = '', host = null, spacer = null, portal = null, frame = null, observer, resizeObserver, queued = false, stopped = false;
-  var height = 1200, frameLoadCount = 0, positionedBody = false, bodyPosition = '', bodyPriority = '';
+  var height = 1200, frameLoadCount = 0, positionedBody = false, bodyPosition = '', bodyPriority = '', scrollStyle;
   var tracked = ['berlin-ticket-machine-simulator', 'berlin-address-time-machine', 'berlin-hotel-location-checker', 'berlin-dates-check', 'berlin-doner-price-index'];
   window.BW_FAST_INLINE = { slug: slug, stop: stop };
   function stop() {
@@ -23,6 +23,8 @@
     document.removeEventListener('scroll', schedule, true);
     if (document.fonts) document.fonts.removeEventListener('loadingdone', schedule);
     if (portal) portal.remove();
+    if (scrollStyle) scrollStyle.remove();
+    document.documentElement.removeAttribute('data-bw-fast-document');
     if (positionedBody && document.body.style.getPropertyValue('position') === 'relative') {
       if (bodyPosition) document.body.style.setProperty('position', bodyPosition, bodyPriority); else document.body.style.removeProperty('position');
     }
@@ -83,6 +85,10 @@
     url = url || warmupUrl();
     if (!url) return;
     if (!portal) {
+      document.documentElement.setAttribute('data-bw-fast-document', '1');
+      scrollStyle = document.createElement('style'); scrollStyle.id = 'bw-fast-document-scroll';
+      scrollStyle.textContent = 'html[data-bw-fast-document="1"]{overflow-y:auto!important}html[data-bw-fast-document="1"].bw-tools-detail.bw-tools-shell-v2 body{height:auto!important;overflow-y:visible!important;overflow-x:clip!important}';
+      document.head.appendChild(scrollStyle);
       if (getComputedStyle(document.body).position === 'static') {
         bodyPosition = document.body.style.getPropertyValue('position'); bodyPriority = document.body.style.getPropertyPriority('position');
         document.body.style.setProperty('position', 'relative'); positionedBody = true;
@@ -128,5 +134,6 @@
       .then(function (r) { if (!r.ok) throw Error('Missing links'); return r.json(); })
       .then(function (links) { url = url || valid(links[slug]); mount(); }).catch(function () {});
   }
-  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', fallback, { once: true }); else fallback();
+  fallback();
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', mount, { once: true });
 })();
