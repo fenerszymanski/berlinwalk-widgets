@@ -171,8 +171,16 @@
   }
 
   function hero(title, post, body) {
-    var old = document.querySelector('.bw-c-hero');
+    var isWallPost = slug() === 'where-was-the-berlin-wall-interactive-map';
+    var old = document.querySelector('.bw-c-hero') || (isWallPost && state.wallHero);
+    if (isWallPost && old) state.wallHero = old;
     if (old) {
+      if (isWallPost && !old.contains(title)) {
+        var nativeHeader = title.closest('header') || title.parentElement;
+        var titleSlot = old.querySelector('[data-bw-c-title-slot]');
+        if (titleSlot) titleSlot.replaceChildren(title);
+        if (nativeHeader) nativeHeader.setAttribute('data-bw-redesign-native-header', '1');
+      }
       var existingEyebrow = old.querySelector('.bw-c-eyebrow');
       if (existingEyebrow && post) existingEyebrow.innerHTML = '<a href="/blog/categories/' + escapeHtml(post.categorySlug || '') + '">' + escapeHtml(post.category || 'Berlin guide') + '</a>' + (post.readTime ? ' · ' + escapeHtml(post.readTime) : '');
       highlightHeroTitle(old.querySelector('h1'), post);
@@ -182,7 +190,7 @@
     var header = title.closest('header') || title.parentElement;
     if (!header || !header.parentElement) return null;
     var category = post && post.category || 'Berlin guide'; var read = post && post.readTime || ((text(header.textContent).match(/\b\d+\s+min\s+read\b/i) || [])[0] || '');
-    var wrapper = document.createElement('section'); wrapper.className = 'bw-c-hero'; wrapper.setAttribute(MARK, 'hero');
+    var wrapper = document.createElement('section'); if (isWallPost) state.wallHero = wrapper; wrapper.className = 'bw-c-hero'; wrapper.setAttribute(MARK, 'hero');
     wrapper.innerHTML = '<div class="bw-c-hero-inner"><p class="bw-c-eyebrow"><a href="/blog/categories/' + escapeHtml(post && post.categorySlug || '') + '">' + escapeHtml(category) + '</a>' + (read ? ' · ' + escapeHtml(read) : '') + '</p><div data-bw-c-title-slot></div>' + (meta('og:description') ? '<p class="bw-c-dek">' + escapeHtml(meta('og:description')) + '</p>' : '') + '<div class="bw-c-byline"><img alt="Yusuf Ucuz" src="' + PORTRAIT_URL + '"><span>BY YUSUF UCUZ · BERLIN WALKING TOUR GUIDE</span></div></div>';
     var stage = stageFor(body);
     if (stage) stage.appendChild(wrapper);
@@ -199,7 +207,9 @@
   }
 
   function cover(heroNode, post) {
-    var old = document.querySelector('.bw-c-cover');
+    var isWallPost = slug() === 'where-was-the-berlin-wall-interactive-map';
+    var old = document.querySelector('.bw-c-cover') || (isWallPost && state.wallCover);
+    if (isWallPost && old) state.wallCover = old;
     var image = meta('og:image') || post && post.image;
     var source = image ? safeUrl(image) : '';
     if (!source || !heroNode) {
@@ -215,6 +225,7 @@
 
     // Re-creating the cover on every hydration render re-decodes the LCP image
     // and feeds this script's own mutation observer. Keep a correct one.
+    if (isWallPost && old && heroNode && old.previousElementSibling !== heroNode) heroNode.after(old);
     if (old && old.isConnected && heroNode && old.previousElementSibling === heroNode) {
       var currentImage = old.querySelector('img');
       if (currentImage && currentImage.getAttribute('src') === source) {
@@ -229,6 +240,7 @@
 
     var alt = meta('og:image:alt') || post && post.alt || '';
     var node = document.createElement('figure');
+    if (isWallPost) state.wallCover = node;
     node.className = 'bw-c-cover';
     node.setAttribute(MARK, 'cover');
     node.innerHTML = '<img src="' + escapeHtml(source) + '"' + (ss ? ' srcset="' + ss + '" sizes="' + sz + '"' : '') + ' alt="' + escapeHtml(alt) + '" fetchpriority="high">' + (alt ? '<figcaption class="bw-c-cover-caption">' + escapeHtml(alt) + '</figcaption>' : '');
