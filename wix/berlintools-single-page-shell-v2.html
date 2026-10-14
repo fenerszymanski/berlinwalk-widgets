@@ -1,130 +1,124 @@
-<!-- BerlinTools Single Page Shell V2 Wix HEAD embed template.
-     The updater replaces __COMMIT_SHA__ with a pinned widgets-repo commit. -->
+<style id="bw-safety-mobile-critical">@media(max-width:899px){html:has([property="og:url"][content$="/tools/berlin-safety"]){--bw-shell-green:#1B5E20;--bw-shell-green-dark:#102414;--bw-shell-green-ink:#123D18;--bw-shell-yellow:#FFE600;--bw-shell-light:#C5E1A5;--bw-shell-cream:#FAFAF5;--bw-shell-paper:#FFFEF8;--bw-shell-ink:#212121;--bw-shell-line:#DCE3D5;& #comp-mozc935g3{box-sizing:border-box!important;height:auto!important;min-height:0!important;overflow:visible!important;position:relative!important;transform:none!important}& #comp-mozc935g3{--bw-shell-band-height:clamp(320px, 52vw, 560px);background:var(--bw-shell-cream)!important;border-bottom:0!important;color:#FFFFFF!important;isolation:isolate!important;margin:0!important;padding:0 24px 66px!important}& #bgLayers_comp-mozc935g3 > [data-testid="colorUnderlay"]{background:transparent!important}& #comp-mozc935g3::before{background-color:var(--bw-shell-green-dark)!important;content:''!important;height:var(--bw-shell-band-height)!important;inset:0 0 auto!important;position:absolute!important;z-index:0!important}& #comp-mozc935g3 .comp-mozc935g3-container{align-items:start!important;box-sizing:border-box!important;column-gap:clamp(28px, 5vw, 76px)!important;display:grid!important;grid-template-areas:'meta summary' 'heading summary' 'lead summary' 'secondary summary' 'widget widget'!important;grid-template-columns:minmax(0, 1.14fr) minmax(230px, .86fr)!important;grid-template-rows:auto auto auto auto auto!important;height:auto!important;justify-content:stretch!important;margin:0 auto!important;max-width:1120px!important;min-height:0!important;overflow:visible!important;padding:52px 0 0!important;position:relative!important;row-gap:0!important;width:100%!important;z-index:1!important}& #comp-mozc935g3 #comp-mozch2i3,& #comp-mozc935g3 #comp-mozck6is,& #comp-mozc935g3 #comp-mozcllqt,& #comp-mozc935g3 #comp-mozco5et,& #comp-mozc935g3 [data-bw-shell-v2-hero-meta]{align-self:start!important;box-sizing:border-box!important;height:auto!important;inset:auto!important;justify-self:stretch!important;margin:0!important;max-width:none!important;min-height:0!important;min-width:0!important;position:relative!important;transform:none!important;width:auto!important}& #comp-mozc935g3 #comp-mozch2i3,& #comp-mozc935g3 #comp-mozck6is,& #comp-mozc935g3 #comp-mozcllqt,& #comp-mozc935g3 #comp-mozco5et{display:block!important}& #comp-mozc935g3 [data-bw-shell-v2-hero-meta]{align-items:center!important;display:flex!important;flex-wrap:wrap!important;gap:10px 14px!important;grid-area:meta!important;min-height:28px!important;padding:0 0 18px!important}& #comp-mozc935g3 .bw-tools-shell-v2-breadcrumb{color:var(--bw-shell-light)!important;font:700 11px/1.2 'IBM Plex Mono', monospace!important;letter-spacing:.1em!important}& #comp-mozc935g3 .bw-tools-shell-v2-breadcrumb:hover,& #comp-mozc935g3 .bw-tools-shell-v2-breadcrumb:focus-visible{color:var(--bw-shell-yellow)!important}& #comp-mozc935g3 .bw-tools-shell-v2-type{background:transparent!important;border:1px solid rgba(197, 225, 165, .72)!important;border-radius:999px!important;color:#FFFFFF!important;font:600 10px/1 'IBM Plex Mono', monospace!important;letter-spacing:.08em!important;padding:7px 10px!important}& #comp-mozc935g3 #comp-mozch2i3{grid-area:heading!important;padding:0 0 16px!important;text-align:left!important}& #comp-mozc935g3 #comp-mozch2i3 h1,& #comp-mozc935g3 #comp-mozch2i3 h2,& #comp-mozc935g3 #comp-mozch2i3 h3,& #comp-mozc935g3 #comp-mozch2i3 span{color:#FFFFFF!important;font-family:Fraunces, Merriweather, Georgia, serif!important;font-size:clamp(44px, 6.2vw, 82px)!important;font-weight:500!important;letter-spacing:-.045em!important;line-height:.94!important;margin:0!important;max-width:720px!important;overflow-wrap:anywhere!important;text-align:left!important;white-space:normal!important}& #comp-mozc935g3 #comp-mozch2i3 .bw-tools-shell-v2-title-accent{color:var(--bw-shell-yellow)!important;font-style:italic!important;font-weight:500!important}& #comp-mozc935g3 #comp-mozck6is{grid-area:lead!important;max-width:680px!important;padding:0 0 14px!important;text-align:left!important}& #comp-mozc935g3 #comp-mozck6is p,& #comp-mozc935g3 #comp-mozck6is span{color:rgba(255, 255, 255, .84)!important;font-family:Fraunces, Merriweather, Georgia, serif!important;font-size:clamp(18px, 2vw, 24px)!important;font-style:italic!important;font-weight:500!important;letter-spacing:-.01em!important;line-height:1.25!important;margin:0!important;text-align:left!important}& #comp-mozc935g3 #comp-mozcllqt{grid-area:secondary!important;max-width:680px!important;padding:0 0 8px!important;text-align:left!important}& #comp-mozc935g3 #comp-mozcllqt p,& #comp-mozc935g3 #comp-mozcllqt span{color:rgba(255, 255, 255, .68)!important;font:500 13px/1.45 Montserrat, Arial, sans-serif!important;margin:0!important;text-align:left!important}& #comp-mozc935g3 #comp-mozco5et{background:var(--bw-shell-paper)!important;border:1px solid rgba(16, 36, 20, .18)!important;border-top:7px solid var(--bw-shell-yellow)!important;border-radius:4px!important;color:var(--bw-shell-ink)!important;grid-area:widget!important;margin:26px 0 0!important;overflow:visible!important;padding:0!important;z-index:2!important}& #comp-mozc935g3 #comp-mozco5et iframe{background:var(--bw-shell-paper)!important;border:0!important;display:block!important;max-width:100%!important;width:100%!important}@media (max-width: 899px){& #comp-mozc935g3{--bw-shell-band-height:clamp(280px, 108vw, 500px);padding:0 16px 38px!important}& #comp-mozc935g3 .comp-mozc935g3-container{column-gap:0!important;grid-template-areas:'meta' 'heading' 'lead' 'widget' 'secondary'!important;grid-template-columns:minmax(0, 1fr)!important;padding-top:28px!important}& #comp-mozc935g3 [data-bw-shell-v2-hero-meta]{padding-bottom:14px!important}& #comp-mozc935g3 #comp-mozch2i3 h1,& #comp-mozc935g3 #comp-mozch2i3 h2,& #comp-mozc935g3 #comp-mozch2i3 h3,& #comp-mozc935g3 #comp-mozch2i3 span{font-size:clamp(42px, 13vw, 62px)!important;line-height:.96!important}& #comp-mozc935g3 #comp-mozck6is p,& #comp-mozc935g3 #comp-mozck6is span{font-size:19px!important;line-height:1.28!important}& #comp-mozc935g3 #comp-mozco5et{margin:18px 0 0!important}& #comp-mozc935g3 #comp-mozcllqt{background:var(--bw-shell-cream)!important;border-top:1px solid var(--bw-shell-line)!important;color:var(--bw-shell-green-ink)!important;margin:22px 0 0!important;padding:16px 0 2px!important}& #comp-mozc935g3 #comp-mozcllqt p,& #comp-mozc935g3 #comp-mozcllqt span{color:var(--bw-shell-green-ink)!important;font:500 13px/1.55 Montserrat, Arial, sans-serif!important}}@media (max-width: 460px){& #comp-mozc935g3 #comp-mozch2i3 h1,& #comp-mozc935g3 #comp-mozch2i3 h2,& #comp-mozc935g3 #comp-mozch2i3 h3,& #comp-mozc935g3 #comp-mozch2i3 span{font-size:clamp(38px, 12vw, 52px)!important}& #comp-mozc935g3 #comp-mozco5et{margin-top:14px!important}}& #comp-mozc935g3 .comp-mozc935g3-container.comp-mozc935g3-container{grid-template-rows:minmax(40px,auto) auto auto minmax(693px,auto) auto!important;}}}html:has([property="og:url"][content$="/tools/berlin-safety"]){& #bgLayers_comp-mozmt2at,& #bgLayers_comp-mozmt2at *{pointer-events:none!important;}& [data-bw-shell-v2-toc]{pointer-events:auto!important;}}</style>
 <style id="berlintools-shell-v2-lower-layout-guard">
-  @media (min-width:900px) {
-    html[data-bw-tools-slug="berlin-safety"].bw-tools-detail.bw-tools-shell-v2 body #comp-mozmt2at {padding-top:32px!important;padding-bottom:0!important;}
-    html[data-bw-tools-slug="berlin-safety"].bw-tools-detail.bw-tools-shell-v2 body #comp-mozmt2at .comp-mozmt2at-container {
-      justify-content:center!important;display:grid!important;grid-template-columns:210px minmax(0,700px)!important;column-gap:70px!important;max-width:1060px!important;position:relative!important;z-index:3!important;margin:0 auto!important;
-    }
-    html[data-bw-tools-slug="berlin-safety"].bw-tools-detail.bw-tools-shell-v2 body #comp-mozmt2at #comp-mozmtefi {
-      grid-column:2!important;grid-row:1!important;margin:0!important;
-    }
-  }
-  html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozn18up {padding-top:34px!important;}
-  html.bw-tools-detail.bw-tools-shell-v2 body .bw-tools-shell-v2-local-note {margin-bottom:8px!important;}
-  html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozn18up .comp-mozn18up-container {
-    align-items:stretch!important;box-sizing:border-box!important;display:flex!important;flex-direction:column!important;height:auto!important;margin:0 auto!important;max-width:960px!important;min-height:0!important;padding:0!important;width:min(100%,960px)!important;
-  }
-  html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozn18up #comp-mozn27df {
-    box-sizing:border-box!important;height:auto!important;inset:auto!important;margin:0!important;max-width:960px!important;min-height:0!important;min-width:0!important;position:relative!important;transform:none!important;width:100%!important;
-  }
-  html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozp1zlv .comp-mozp1zlv-container {
-    align-items:stretch!important;box-sizing:border-box!important;column-gap:20px!important;display:grid!important;grid-auto-rows:auto!important;grid-template-areas:'title title' 'first second'!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;grid-template-rows:max-content minmax(168px,max-content)!important;margin:0 auto!important;max-width:960px!important;min-height:0!important;padding:0!important;row-gap:16px!important;width:min(100%,960px)!important;
-  }
-  html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozp1zlv #comp-mozpfm6g {
-    grid-area:title!important;height:auto!important;margin:0 0 4px!important;min-height:0!important;text-align:center!important;width:100%!important;
-  }
-  html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozp1zlv #comp-mozp2aft,
-  html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozp1zlv #comp-mozp3f25 {
-    align-self:stretch!important;height:auto!important;justify-self:stretch!important;margin:0!important;min-height:168px!important;width:100%!important;
-  }
-  html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozp1zlv #comp-mozp2aft {grid-area:first!important;}
-  html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozp1zlv #comp-mozp3f25 {grid-area:second!important;}
-  @media (max-width:699px) {
-    html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozn18up .comp-mozn18up-container,
-    html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozp1zlv .comp-mozp1zlv-container {max-width:100%!important;width:100%!important;}
-    html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozp1zlv .comp-mozp1zlv-container {grid-template-areas:'title' 'first' 'second'!important;grid-template-columns:minmax(0,1fr)!important;grid-template-rows:max-content minmax(168px,max-content) minmax(168px,max-content)!important;}
-  }
-  @media (max-width:899px) {
-    html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozn18up {padding-top:28px!important;}
-  }
+@media (min-width:900px) {
+html[data-bw-tools-slug="berlin-safety"].bw-tools-detail.bw-tools-shell-v2 body #comp-mozmt2at {padding-top:32px!important;padding-bottom:0!important;}
+html[data-bw-tools-slug="berlin-safety"].bw-tools-detail.bw-tools-shell-v2 body #comp-mozmt2at .comp-mozmt2at-container {
+justify-content:center!important;display:grid!important;grid-template-columns:210px minmax(0,700px)!important;column-gap:70px!important;max-width:1060px!important;position:relative!important;z-index:3!important;margin:0 auto!important;
+}
+html[data-bw-tools-slug="berlin-safety"].bw-tools-detail.bw-tools-shell-v2 body #comp-mozmt2at #comp-mozmtefi {
+grid-column:2!important;grid-row:1!important;margin:0!important;
+}
+}
+
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozn18up {padding-top:34px!important;}
+html.bw-tools-detail.bw-tools-shell-v2 body .bw-tools-shell-v2-local-note {margin-bottom:8px!important;}
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozn18up .comp-mozn18up-container {
+align-items:stretch!important;box-sizing:border-box!important;display:flex!important;flex-direction:column!important;height:auto!important;margin:0 auto!important;max-width:960px!important;min-height:0!important;padding:0!important;width:min(100%,960px)!important;
+}
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozn18up #comp-mozn27df {
+box-sizing:border-box!important;height:auto!important;inset:auto!important;margin:0!important;max-width:960px!important;min-height:0!important;min-width:0!important;position:relative!important;transform:none!important;width:100%!important;
+}
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozp1zlv .comp-mozp1zlv-container {
+align-items:stretch!important;box-sizing:border-box!important;column-gap:20px!important;display:grid!important;grid-auto-rows:auto!important;grid-template-areas:'title title' 'first second'!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;grid-template-rows:max-content minmax(168px,max-content)!important;margin:0 auto!important;max-width:960px!important;min-height:0!important;padding:0!important;row-gap:16px!important;width:min(100%,960px)!important;
+}
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozp1zlv #comp-mozpfm6g {
+grid-area:title!important;height:auto!important;margin:0 0 4px!important;min-height:0!important;text-align:center!important;width:100%!important;
+}
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozp1zlv #comp-mozp2aft,
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozp1zlv #comp-mozp3f25 {
+align-self:stretch!important;height:auto!important;justify-self:stretch!important;margin:0!important;min-height:168px!important;width:100%!important;
+}
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozp1zlv #comp-mozp2aft {grid-area:first!important;}
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozp1zlv #comp-mozp3f25 {grid-area:second!important;}
+@media (max-width:699px) {
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozn18up .comp-mozn18up-container,
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozp1zlv .comp-mozp1zlv-container {max-width:100%!important;width:100%!important;}
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozp1zlv .comp-mozp1zlv-container {grid-template-areas:'title' 'first' 'second'!important;grid-template-columns:minmax(0,1fr)!important;grid-template-rows:max-content minmax(168px,max-content) minmax(168px,max-content)!important;}
+}
+@media (max-width:899px) {
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozn18up {padding-top:28px!important;}
+}
 </style>
 <script>
-  (function () {
-    var path = String(window.location.pathname || '').toLowerCase().replace(/\/{2,}/g, '/');
-    if (!/^\/tools\/[^/]+\/?$/.test(path)) return;
-    // Native component selectors can now use the final shell before its JS
-    // downloads. Do not hide the page while Wix hydrates.
-    var slug = decodeURIComponent(path.split('/')[2]);
-    var html = document.documentElement;
-    if (slug === 'berlin-safety' && window.matchMedia && window.matchMedia('(min-width:900px)').matches) {
-      html.classList.add('bw-tools-detail', 'bw-tools-shell-v2');
-      html.setAttribute('data-bw-tools-slug', 'berlin-safety');
-    }
-    if (slug === 'whats-open-in-berlin-today') {
-      // Opt-in diagnostic only, not authentication. No cookie/storage or random
-      // visitor assignment. Exact query prevents links retaining unrelated flags.
-      window.BW_IS_OPEN_TODAY_TEST = function () {
-        try {
-          return window.location.origin === 'https://www.berlinwalk.com'
-            && /^\/tools\/whats-open-in-berlin-today\/?$/.test(window.location.pathname)
-            && window.location.search === '?bwStartupTest=open-today-20260909'
-            && Date.now() < Date.UTC(2026, 8, 11);
-        } catch (_) { return false; }
-      };
-      // Shared by the shell, native related-card icons, and the tour bridge.
-      // No fetch interception: all unrelated requests and consent code stay intact.
-      if (window.BW_IS_OPEN_TODAY_TEST()) {
-      window.BW_GET_OPEN_TODAY_CATALOG = window.BW_GET_OPEN_TODAY_CATALOG || (function () {
-        var pending = null;
-        function valid(data) {
-          if (!window.BW_IS_OPEN_TODAY_TEST()) throw new Error('Test no longer active');
-          if (!data || !Array.isArray(data.tools) || data.tools.filter(function (tool) { return tool.slug === 'whats-open-in-berlin-today'; }).length !== 1) throw new Error('Open Today catalog unavailable');
-          return data;
-        }
-        function request(file) {
-          if (!window.BW_IS_OPEN_TODAY_TEST()) return Promise.reject(new Error('Test not active'));
-          return fetch('https://fenerszymanski.github.io/berlinwalk-widgets/tools-hub/' + file, {credentials:'omit', cache:'no-cache'})
-            .then(function (response) { if (!response.ok) throw new Error('Catalog HTTP error'); return response.json(); }).then(valid);
-        }
-        return function () {
-          if (!window.BW_IS_OPEN_TODAY_TEST()) return Promise.reject(new Error('Outside Open Today test'));
-          if (!pending) pending = request('open-today.json').catch(function () { return request('data.json'); }).catch(function (error) { pending = null; throw error; });
-          return pending;
-        };
-      })();
-      }
-      html.classList.add('bw-tools-detail', 'bw-tools-shell-v2');
-      html.setAttribute('data-bw-tools-slug', slug);
-      html.setAttribute('data-bw-host-repair', 'pilot');
-      html.classList.add('bw-host-repair-pilot');
-      window.addEventListener('message', function (event) {
-        var data = event.data;
-        if (event.origin !== 'https://fenerszymanski.github.io' || !data || data.type !== 'bw-resize' || typeof data.height !== 'number' || !isFinite(data.height) || data.height <= 0 || data.height > 30000) return;
-        var frame = document.querySelector('#comp-mozco5et iframe');
-        if (frame && frame.contentWindow === event.source) frame.setAttribute('data-bw-shell-sized', '1');
-      });
-    }
-    var commit = '__COMMIT_SHA__';
-    var base = 'https://cdn.jsdelivr.net/gh/fenerszymanski/berlinwalk-widgets@' + commit + '/';
-    var cssHref = base + 'css/berlintools-single-page-shell-v2.css?commit=' + commit;
-    var jsSrc = base + 'js/berlintools-single-page-shell-v2.js?commit=' + commit;
-    var eventBridgeSrc = base + 'js/tool-event-bridge-host.js?commit=' + commit;
+(function () {
+var path = String(window.location.pathname || '').toLowerCase().replace(/\/{2,}/g, '/');
+if (!/^\/tools\/[^/]+\/?$/.test(path)) return;
+var slug = decodeURIComponent(path.split('/')[2]);
+var html = document.documentElement;
+if (slug === 'berlin-safety' && window.matchMedia && window.matchMedia('(min-width:900px)').matches) {
+html.classList.add('bw-tools-detail', 'bw-tools-shell-v2');
+html.setAttribute('data-bw-tools-slug', 'berlin-safety');
+}
 
-    if (!document.querySelector('link[data-bw-shell-v2-css]')) {
-      var link = document.createElement('link');
-      link.rel = 'stylesheet';
-      // A dynamically inserted stylesheet is otherwise not render-blocking.
-      if (slug === 'whats-open-in-berlin-today') link.setAttribute('blocking', 'render');
-      link.href = cssHref;
-      link.setAttribute('data-bw-shell-v2-css', commit);
-      document.head.appendChild(link);
-    }
+if (slug === 'whats-open-in-berlin-today') {
+window.BW_IS_OPEN_TODAY_TEST = function () {
+try {
+return (window.location.origin === 'https://www.walkofberlin.com' || window.location.origin === 'https://www.berlinwalk.com')
+&& /^\/tools\/whats-open-in-berlin-today\/?$/.test(window.location.pathname)
+;
+} catch (_) { return false; }
+};
+if (window.BW_IS_OPEN_TODAY_TEST()) {
+window.BW_GET_OPEN_TODAY_CATALOG = window.BW_GET_OPEN_TODAY_CATALOG || (function () {
+var pending = null;
+function valid(data) {
+if (!window.BW_IS_OPEN_TODAY_TEST()) throw new Error('Test no longer active');
+if (!data || !Array.isArray(data.tools) || data.tools.filter(function (tool) { return tool.slug === 'whats-open-in-berlin-today'; }).length !== 1) throw new Error('Open Today catalog unavailable');
+return data;
+}
+function request(file) {
+if (!window.BW_IS_OPEN_TODAY_TEST()) return Promise.reject(new Error('Test not active'));
+return fetch('https://fenerszymanski.github.io/berlinwalk-widgets/tools-hub/' + file, {credentials:'omit', cache:'no-cache'})
+.then(function (response) { if (!response.ok) throw new Error('Catalog HTTP error'); return response.json(); }).then(valid);
+}
+return function () {
+if (!window.BW_IS_OPEN_TODAY_TEST()) return Promise.reject(new Error('Outside Open Today test'));
+if (!pending) pending = request('open-today.json').catch(function () { return request('data.json'); }).catch(function (error) { pending = null; throw error; });
+return pending;
+};
+})();
+}
+html.classList.add('bw-tools-detail', 'bw-tools-shell-v2');
+html.setAttribute('data-bw-tools-slug', slug);
+html.setAttribute('data-bw-host-repair', 'pilot');
+html.classList.add('bw-host-repair-pilot');
+window.addEventListener('message', function (event) {
+var data = event.data;
+if (event.origin !== 'https://fenerszymanski.github.io' || !data || data.type !== 'bw-resize' || typeof data.height !== 'number' || !isFinite(data.height) || data.height <= 0 || data.height > 30000) return;
+var frame = document.querySelector('#comp-mozco5et iframe');
+if (frame && frame.contentWindow === event.source) frame.setAttribute('data-bw-shell-sized', '1');
+});
+}
+var commit = '__COMMIT_SHA__';
+var base = 'https://cdn.jsdelivr.net/gh/fenerszymanski/berlinwalk-widgets@' + commit + '/';
+var cssHref = base + 'css/berlintools-single-page-shell-v2.css?commit=' + commit;
+var testCommit = '7f042f8ccc9ce8f5c221327ca1ded932d4454970';
+var jsSrc = 'https://fenerszymanski.github.io/berlinwalk-widgets/js/berlintools-single-page-shell-v2.js?commit=' + testCommit;
+var eventBridgeSrc = base + 'js/tool-event-bridge-host.js?commit=' + commit;
 
-    if (!document.querySelector('script[data-bw-shell-v2-js]')) {
-      var script = document.createElement('script');
-      script.src = jsSrc;
-      script.async = false;
-      script.setAttribute('data-bw-shell-v2-js', commit);
-      document.head.appendChild(script);
-    }
+if (!document.querySelector('link[data-bw-shell-v2-css]')) {
+var link = document.createElement('link');
+link.rel = 'stylesheet';
+link.setAttribute('blocking', 'render');
+link.href = cssHref;
+link.setAttribute('data-bw-shell-v2-css', commit);
+document.head.appendChild(link);
+}
 
-    if (!document.querySelector('script[data-bw-tool-event-host]')) {
-      var eventBridge = document.createElement('script');
-      eventBridge.src = eventBridgeSrc;
-      eventBridge.async = false;
-      eventBridge.setAttribute('data-bw-tool-event-host', commit);
-      document.head.appendChild(eventBridge);
-    }
-  })();
+if (!document.querySelector('script[data-bw-shell-v2-js]')) {
+var script = document.createElement('script');
+script.src = jsSrc;
+script.async = false;
+script.setAttribute('data-bw-shell-v2-js', testCommit);
+document.head.appendChild(script);
+}
+
+if (!document.querySelector('script[data-bw-tool-event-host]')) {
+var eventBridge = document.createElement('script');
+eventBridge.src = eventBridgeSrc;
+eventBridge.async = false;
+eventBridge.setAttribute('data-bw-tool-event-host', commit);
+document.head.appendChild(eventBridge);
+}
+})();
 </script>
