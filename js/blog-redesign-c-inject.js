@@ -202,6 +202,7 @@
   // outside that disposable root, with an equal-height slot in the article.
   function releaseWallPhoto() {
     if (state.wallPhotoObserver) state.wallPhotoObserver.disconnect();
+    if (state.wallPhotoHero && state.wallPhotoHero.getAttribute('aria-owns') === 'bw-wall-persistent-cover') state.wallPhotoHero.removeAttribute('aria-owns');
     if (state.wallPhoto) state.wallPhoto.remove();
     if (state.wallPhotoSlot) state.wallPhotoSlot.remove();
     state.wallPhoto = state.wallPhotoSlot = state.wallPhotoStage = null;
@@ -226,6 +227,8 @@
       state.wallPhotoSlot = slot;
     }
     state.wallPhoto = photo;
+    photo.id = 'bw-wall-persistent-cover';
+    heroNode.setAttribute('role', 'group'); heroNode.setAttribute('aria-owns', photo.id); state.wallPhotoHero = heroNode;
     if (photo.parentElement !== document.body) document.body.appendChild(photo);
     photo.style.setProperty('position', 'absolute', 'important'); photo.style.setProperty('margin', '0', 'important');
     photo.style.setProperty('z-index', '1', 'important');
