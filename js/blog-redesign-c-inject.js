@@ -229,6 +229,7 @@
     if (photo.parentElement !== document.body) document.body.appendChild(photo);
     photo.style.setProperty('position', 'absolute', 'important'); photo.style.setProperty('margin', '0', 'important');
     photo.style.setProperty('z-index', '1', 'important');
+    photo.style.setProperty('transform', 'none', 'important');
     var stage = heroNode.parentElement;
     if (state.wallPhotoStage !== stage) {
       if (state.wallPhotoObserver) state.wallPhotoObserver.disconnect();
