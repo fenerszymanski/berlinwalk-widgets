@@ -3,15 +3,18 @@
 (function () {
   'use strict';
   var path = window.location.pathname.match(/^\/tools\/([^/]+)\/?$/);
-  if (!path || window.BW_TOOL_LOADING_STATUS) return;
-  window.BW_TOOL_LOADING_STATUS = true;
+  if (!path) return;
   var slug = decodeURIComponent(path[1]);
-  var ready = false, notice = null, direct = '', frame = null;
+  var previous = window.BW_TOOL_LOADING_STATUS;
+  if (previous && previous.slug === slug) return;
+  if (previous && previous.stop) previous.stop();
+  var ready = false, notice = null, direct = '', frame = null, delay;
+  window.BW_TOOL_LOADING_STATUS = { slug: slug, stop: finish };
   var host = 'https://fenerszymanski.github.io';
   function validUrl(value) {
     try { var u = new URL(value); return u.origin === host && u.pathname.indexOf('/berlinwalk-widgets/') === 0 && u.searchParams.get('surface') === 'tool-page' ? u.href : ''; } catch (_) { return ''; }
   }
-  function finish() { ready = true; if (notice) { notice.remove(); notice = null; } if (observer) observer.disconnect(); }
+  function finish() { ready = true; window.clearTimeout(delay); window.removeEventListener('message', onResize); if (notice) { notice.remove(); notice = null; } if (observer) observer.disconnect(); }
   function sync() {
     var next = document.querySelector('#comp-mozco5et iframe');
     if (!next) return;
@@ -38,21 +41,22 @@
       notice.appendChild(link);
     }
   }
-  window.addEventListener('message', function (event) {
+  function onResize(event) {
     var current = document.querySelector('#comp-mozco5et iframe');
     if (event.origin !== host || !current || current.contentWindow !== event.source) return;
     var d = event.data;
     if (!d || typeof d !== 'object') return;
     var height = d.height || d.payload && d.payload.height;
     if (['bw-resize', 'resize', 'setHeight'].indexOf(d.type) !== -1 && typeof height === 'number' && isFinite(height) && height > 0 && height <= 30000) finish();
-  });
+  }
+  window.addEventListener('message', onResize);
   var observer;
   function start() {
     if (ready) return;
     sync();
     observer = new MutationObserver(sync);
     observer.observe(document.body, { childList: true, subtree: true, attributes: true, attributeFilter: ['src'] });
-    window.setTimeout(show, 6000);
+    delay = window.setTimeout(show, 6000);
   }
   fetch('https://fenerszymanski.github.io/berlinwalk-widgets/tools-hub/tool-loading-links.json?v=20261014', { credentials: 'omit' })
     .then(function (r) { if (!r.ok) throw new Error('Unavailable'); return r.json(); })
