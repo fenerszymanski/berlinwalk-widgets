@@ -1,6 +1,6 @@
 if (/^\/tools\/[^/]+\/?$/.test(location.pathname) && (window.BW_FAST_TOOLS_ENABLED || new URLSearchParams(location.search).get('bwFastTool') === '1') && new URLSearchParams(location.search).get('bwFastTool') !== '0') {
   var fastScript = document.createElement('script');
-  fastScript.src = 'https://fenerszymanski.github.io/berlinwalk-widgets/js/tool-fast-inline.js?v=release1';
+  fastScript.src = 'https://fenerszymanski.github.io/berlinwalk-widgets/js/tool-fast-inline.js' + new URL(document.currentScript.src).search;
   fastScript.async = true; document.head.appendChild(fastScript);
 } else {
   if (window.BW_FAST_INLINE) window.BW_FAST_INLINE.stop();
