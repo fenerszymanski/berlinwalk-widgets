@@ -87,7 +87,7 @@
     if (!portal) {
       document.documentElement.setAttribute('data-bw-fast-document', '1');
       scrollStyle = document.createElement('style'); scrollStyle.id = 'bw-fast-document-scroll';
-      scrollStyle.textContent = 'html[data-bw-fast-document="1"]{overflow-y:auto!important}html[data-bw-fast-document="1"].bw-tools-detail.bw-tools-shell-v2 body{height:auto!important;overflow-y:visible!important;overflow-x:clip!important}';
+      scrollStyle.textContent = 'html[data-bw-fast-document="1"]{overflow-y:auto!important}html[data-bw-fast-document="1"]:has(body[style*="overflow: hidden"]){overflow-y:hidden!important}html[data-bw-fast-document="1"].bw-tools-detail.bw-tools-shell-v2 body{height:auto!important}html[data-bw-fast-document="1"].bw-tools-detail.bw-tools-shell-v2 body:not([style*="overflow: hidden"]){overflow-y:visible!important;overflow-x:clip!important}';
       document.head.appendChild(scrollStyle);
       if (getComputedStyle(document.body).position === 'static') {
         bodyPosition = document.body.style.getPropertyValue('position'); bodyPriority = document.body.style.getPropertyPriority('position');
@@ -97,10 +97,16 @@
       portal.style.cssText = 'position:absolute;z-index:5;left:0;top:0;width:100%;visibility:hidden;background:#fff;box-sizing:border-box';
       var entry = document.createElement('div'); entry.className = 'entry'; entry.textContent = 'START HERE';
       entry.style.cssText = 'box-sizing:border-box;padding:13px 16px 22px;color:#123D18;background:#f8f9f3;font:700 11px/1.4 Arial,sans-serif;letter-spacing:.07em'; portal.appendChild(entry);
+      var before = document.createElement('span'); before.tabIndex = 0; before.textContent = 'Previous page content';
+      before.style.cssText = 'position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)';
+      before.addEventListener('focus', function () { var target = document.querySelector('[data-bw-shell-v2-breadcrumb]'); if (target) target.focus(); }); portal.appendChild(before);
       frame = document.createElement('iframe'); frame.title = 'Berlin tool'; frame.name = 'bw-fast-tool'; frame.loading = 'eager'; frame.setAttribute('allow', 'fullscreen; geolocation *'); frame.setAttribute('scrolling', 'no');
       frame.style.cssText = 'display:block;width:100%;height:1200px;border:0;background:#fff'; frame.setAttribute('data-bw-fast-tool-frame', slug);
       frame.addEventListener('load', function () { frameLoadCount++; portal.setAttribute('data-bw-fast-load-count', frameLoadCount); portal.setAttribute('data-bw-fast-loaded-ms', Math.round(performance.now())); });
-      frame.src = url; portal.appendChild(frame); document.body.appendChild(portal); portal.setAttribute('data-bw-fast-request-ms', Math.round(performance.now()));
+      frame.src = url; portal.appendChild(frame);
+      var after = document.createElement('span'); after.tabIndex = 0; after.textContent = 'Continue reading'; after.style.cssText = before.style.cssText;
+      after.addEventListener('focus', function () { var target = document.querySelector('#comp-mozmt2at a,#comp-mozn18up a,#comp-mozmgdoo a,#comp-mozp1zlv a'); if (target) target.focus(); }); portal.appendChild(after);
+      document.body.appendChild(portal); portal.setAttribute('data-bw-fast-request-ms', Math.round(performance.now()));
     }
     var current = document.getElementById('comp-mozco5et');
     if (!current) return;
@@ -108,7 +114,7 @@
       host = current;
       var shadow = host.shadowRoot || host.attachShadow({ mode: 'open' });
       shadow.textContent = '';
-      spacer = document.createElement('div'); spacer.setAttribute('aria-hidden', 'true'); spacer.style.cssText = 'display:block;width:100%;height:1251px'; shadow.appendChild(spacer);
+      spacer = document.createElement('div'); spacer.tabIndex = 0; spacer.setAttribute('aria-label', 'Use the tool controls'); spacer.addEventListener('focus', function () { frame.focus(); }); spacer.style.cssText = 'display:block;width:100%;height:1251px'; shadow.appendChild(spacer);
       host.setAttribute('data-bw-fast-tool', slug); host.setAttribute('aria-owns', portal.id);
       if (resizeObserver) resizeObserver.disconnect();
       if (typeof ResizeObserver === 'function') { resizeObserver = new ResizeObserver(schedule); resizeObserver.observe(spacer); }
