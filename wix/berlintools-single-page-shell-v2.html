@@ -1,6 +1,15 @@
 <!-- BerlinTools Single Page Shell V2 Wix HEAD embed template.
      The updater replaces __COMMIT_SHA__ with a pinned widgets-repo commit. -->
 <style id="berlintools-shell-v2-lower-layout-guard">
+  @media (min-width:900px) {
+    html[data-bw-tools-slug="berlin-safety"].bw-tools-detail.bw-tools-shell-v2 body #comp-mozmt2at {padding-top:32px!important;padding-bottom:0!important;}
+    html[data-bw-tools-slug="berlin-safety"].bw-tools-detail.bw-tools-shell-v2 body #comp-mozmt2at .comp-mozmt2at-container {
+      justify-content:center!important;display:grid!important;grid-template-columns:210px minmax(0,700px)!important;column-gap:70px!important;max-width:1060px!important;position:relative!important;z-index:3!important;margin:0 auto!important;
+    }
+    html[data-bw-tools-slug="berlin-safety"].bw-tools-detail.bw-tools-shell-v2 body #comp-mozmt2at #comp-mozmtefi {
+      grid-column:2!important;grid-row:1!important;margin:0!important;
+    }
+  }
   html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozn18up {padding-top:34px!important;}
   html.bw-tools-detail.bw-tools-shell-v2 body .bw-tools-shell-v2-local-note {margin-bottom:8px!important;}
   html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozn18up .comp-mozn18up-container {
@@ -38,6 +47,10 @@
     // downloads. Do not hide the page while Wix hydrates.
     var slug = decodeURIComponent(path.split('/')[2]);
     var html = document.documentElement;
+    if (slug === 'berlin-safety' && window.matchMedia && window.matchMedia('(min-width:900px)').matches) {
+      html.classList.add('bw-tools-detail', 'bw-tools-shell-v2');
+      html.setAttribute('data-bw-tools-slug', 'berlin-safety');
+    }
     if (slug === 'whats-open-in-berlin-today') {
       // Opt-in diagnostic only, not authentication. No cookie/storage or random
       // visitor assignment. Exact query prevents links retaining unrelated flags.
