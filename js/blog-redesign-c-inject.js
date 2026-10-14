@@ -209,7 +209,8 @@
 
     var isW = source.indexOf('5a08a3_eadb1c41a6db') !== -1;
     var w12 = isW ? source.replace('/w_1672,h_941,al_c/', '/w_1200,h_675,al_c,q_85,enc_auto/') : '';
-    var ss = w12 ? escapeHtml(w12) + ' 1200w, ' + escapeHtml(source) + ' 1672w' : '';
+    var w8 = isW && slug() === 'where-was-the-berlin-wall-interactive-map' ? source.replace('/w_1672,h_941,al_c/', '/w_800,h_450,al_c,q_85,enc_auto/') : '';
+    var ss = w12 ? (w8 ? escapeHtml(w8) + ' 800w, ' : '') + escapeHtml(w12) + ' 1200w, ' + escapeHtml(source) + ' 1672w' : '';
     var sz = ss ? '100vw' : '';
 
     // Re-creating the cover on every hydration render re-decodes the LCP image
