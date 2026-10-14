@@ -171,16 +171,8 @@
   }
 
   function hero(title, post, body) {
-    var isWallPost = slug() === 'where-was-the-berlin-wall-interactive-map';
-    var old = document.querySelector('.bw-c-hero') || (isWallPost && state.wallHero);
-    if (isWallPost && old) state.wallHero = old;
+    var old = document.querySelector('.bw-c-hero');
     if (old) {
-      if (isWallPost && !old.contains(title)) {
-        var nativeHeader = title.closest('header') || title.parentElement;
-        var titleSlot = old.querySelector('[data-bw-c-title-slot]');
-        if (titleSlot) titleSlot.replaceChildren(title);
-        if (nativeHeader) nativeHeader.setAttribute('data-bw-redesign-native-header', '1');
-      }
       var existingEyebrow = old.querySelector('.bw-c-eyebrow');
       if (existingEyebrow && post) existingEyebrow.innerHTML = '<a href="/blog/categories/' + escapeHtml(post.categorySlug || '') + '">' + escapeHtml(post.category || 'Berlin guide') + '</a>' + (post.readTime ? ' · ' + escapeHtml(post.readTime) : '');
       highlightHeroTitle(old.querySelector('h1'), post);
@@ -190,7 +182,7 @@
     var header = title.closest('header') || title.parentElement;
     if (!header || !header.parentElement) return null;
     var category = post && post.category || 'Berlin guide'; var read = post && post.readTime || ((text(header.textContent).match(/\b\d+\s+min\s+read\b/i) || [])[0] || '');
-    var wrapper = document.createElement('section'); if (isWallPost) state.wallHero = wrapper; wrapper.className = 'bw-c-hero'; wrapper.setAttribute(MARK, 'hero');
+    var wrapper = document.createElement('section'); wrapper.className = 'bw-c-hero'; wrapper.setAttribute(MARK, 'hero');
     wrapper.innerHTML = '<div class="bw-c-hero-inner"><p class="bw-c-eyebrow"><a href="/blog/categories/' + escapeHtml(post && post.categorySlug || '') + '">' + escapeHtml(category) + '</a>' + (read ? ' · ' + escapeHtml(read) : '') + '</p><div data-bw-c-title-slot></div>' + (meta('og:description') ? '<p class="bw-c-dek">' + escapeHtml(meta('og:description')) + '</p>' : '') + '<div class="bw-c-byline"><img alt="Yusuf Ucuz" src="' + PORTRAIT_URL + '"><span>BY YUSUF UCUZ · BERLIN WALKING TOUR GUIDE</span></div></div>';
     var stage = stageFor(body);
     if (stage) stage.appendChild(wrapper);
@@ -206,10 +198,50 @@
     wrapper.querySelector('[data-bw-c-title-slot]').appendChild(title); highlightHeroTitle(title, post); header.setAttribute('data-bw-redesign-native-header', '1'); if (!stage) balanceBleed(wrapper); return wrapper;
   }
 
+  // Wix replaces main_MF during hydration. Keep only this article's photo
+  // outside that disposable root, with an equal-height slot in the article.
+  function releaseWallPhoto() {
+    if (state.wallPhotoObserver) state.wallPhotoObserver.disconnect();
+    if (state.wallPhoto) state.wallPhoto.remove();
+    if (state.wallPhotoSlot) state.wallPhotoSlot.remove();
+    state.wallPhoto = state.wallPhotoSlot = state.wallPhotoStage = null;
+  }
+  function positionWallPhoto() {
+    if (slug() !== 'where-was-the-berlin-wall-interactive-map') { releaseWallPhoto(); return; }
+    var photo = state.wallPhoto, slot = state.wallPhotoSlot;
+    if (!photo || !slot || !slot.isConnected) return;
+    var height = photo.getBoundingClientRect().height;
+    if (slot.style.height !== height + 'px') slot.style.height = height + 'px';
+    var rect = slot.getBoundingClientRect();
+    [['top', rect.top + scrollY + 'px'], ['left', rect.left + scrollX + 'px'], ['width', rect.width + 'px']].forEach(function (pair) {
+      if (photo.style.getPropertyValue(pair[0]) !== pair[1]) photo.style.setProperty(pair[0], pair[1], 'important');
+    });
+  }
+  function persistWallPhoto(photo, heroNode) {
+    var slot = state.wallPhotoSlot;
+    if (!slot || !slot.isConnected || slot.previousElementSibling !== heroNode) {
+      if (slot) slot.remove();
+      slot = document.createElement('div'); slot.className = 'bw-c-wall-cover-space'; slot.setAttribute(MARK, 'cover-space');
+      slot.setAttribute('aria-hidden', 'true'); slot.style.height = photo.getBoundingClientRect().height + 'px'; heroNode.after(slot);
+      state.wallPhotoSlot = slot;
+    }
+    state.wallPhoto = photo;
+    if (photo.parentElement !== document.body) document.body.appendChild(photo);
+    photo.style.setProperty('position', 'absolute', 'important'); photo.style.setProperty('margin', '0', 'important');
+    photo.style.setProperty('z-index', '1', 'important');
+    var stage = heroNode.parentElement;
+    if (state.wallPhotoStage !== stage) {
+      if (state.wallPhotoObserver) state.wallPhotoObserver.disconnect();
+      state.wallPhotoObserver = new ResizeObserver(positionWallPhoto); state.wallPhotoObserver.observe(stage); state.wallPhotoStage = stage;
+    }
+    if (!state.wallPhotoListeners) {
+      state.wallPhotoListeners = true; addEventListener('resize', positionWallPhoto, {passive:true}); addEventListener('popstate', positionWallPhoto);
+    }
+    positionWallPhoto(); requestAnimationFrame(positionWallPhoto);
+  }
+
   function cover(heroNode, post) {
-    var isWallPost = slug() === 'where-was-the-berlin-wall-interactive-map';
-    var old = document.querySelector('.bw-c-cover') || (isWallPost && state.wallCover);
-    if (isWallPost && old) state.wallCover = old;
+    var old = document.querySelector('.bw-c-cover');
     var image = meta('og:image') || post && post.image;
     var source = image ? safeUrl(image) : '';
     if (!source || !heroNode) {
@@ -225,7 +257,11 @@
 
     // Re-creating the cover on every hydration render re-decodes the LCP image
     // and feeds this script's own mutation observer. Keep a correct one.
-    if (isWallPost && old && heroNode && old.previousElementSibling !== heroNode) heroNode.after(old);
+    var wallPhoto = slug() === 'where-was-the-berlin-wall-interactive-map';
+    if (wallPhoto && old && old.isConnected && old.querySelector('img')?.getAttribute('src') === source) {
+      var existingImage = old.querySelector('img'); if (ss && existingImage.getAttribute('srcset') !== ss) { existingImage.setAttribute('srcset', ss); existingImage.setAttribute('sizes', sz); }
+      persistWallPhoto(old, heroNode); return;
+    }
     if (old && old.isConnected && heroNode && old.previousElementSibling === heroNode) {
       var currentImage = old.querySelector('img');
       if (currentImage && currentImage.getAttribute('src') === source) {
@@ -240,11 +276,11 @@
 
     var alt = meta('og:image:alt') || post && post.alt || '';
     var node = document.createElement('figure');
-    if (isWallPost) state.wallCover = node;
     node.className = 'bw-c-cover';
     node.setAttribute(MARK, 'cover');
     node.innerHTML = '<img src="' + escapeHtml(source) + '"' + (ss ? ' srcset="' + ss + '" sizes="' + sz + '"' : '') + ' alt="' + escapeHtml(alt) + '" fetchpriority="high">' + (alt ? '<figcaption class="bw-c-cover-caption">' + escapeHtml(alt) + '</figcaption>' : '');
     heroNode.after(node);
+    if (wallPhoto) persistWallPhoto(node, heroNode);
     if (!heroNode.closest('.bw-c-stage')) {
       balanceBleed(heroNode);
       balanceBleed(node);
@@ -598,6 +634,7 @@
     // alone is not enough: every mutation in the burst resets the 120ms timer,
     // which held the old layout on screen for 571ms in live measurement.
     state.observer = new MutationObserver(function () {
+      if (state.wallPhoto && slug() !== 'where-was-the-berlin-wall-interactive-map') releaseWallPhoto();
       if (Date.now() >= state.until) return;
       if (!state.rendering && !document.querySelector('.bw-c-hero')) render();
       schedule(120);
