@@ -119,6 +119,7 @@
       var shadow = host.shadowRoot || host.attachShadow({ mode: 'open' });
       shadow.textContent = '';
       spacer = document.createElement('div'); spacer.tabIndex = 0; spacer.setAttribute('aria-label', 'Use the tool controls'); spacer.addEventListener('focus', function () { frame.focus(); }); spacer.style.cssText = 'display:block;width:100%;height:1251px'; shadow.appendChild(spacer);
+      var hostStyle = document.createElement('style'); hostStyle.textContent = ':host{height:auto!important;min-height:0!important;max-height:none!important}'; shadow.appendChild(hostStyle);
       host.setAttribute('data-bw-fast-tool', slug); host.setAttribute('aria-owns', portal.id);
       if (resizeObserver) resizeObserver.disconnect();
       if (typeof ResizeObserver === 'function') { resizeObserver = new ResizeObserver(schedule); resizeObserver.observe(spacer); }
