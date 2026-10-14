@@ -198,6 +198,52 @@
     wrapper.querySelector('[data-bw-c-title-slot]').appendChild(title); highlightHeroTitle(title, post); header.setAttribute('data-bw-redesign-native-header', '1'); if (!stage) balanceBleed(wrapper); return wrapper;
   }
 
+  // Wix replaces main_MF during hydration. Keep only this article's photo
+  // outside that disposable root, with an equal-height slot in the article.
+  function releaseWallPhoto() {
+    if (state.wallPhotoObserver) state.wallPhotoObserver.disconnect();
+    if (state.wallPhotoHero && state.wallPhotoHero.getAttribute('aria-owns') === 'bw-wall-persistent-cover') state.wallPhotoHero.removeAttribute('aria-owns');
+    if (state.wallPhoto) state.wallPhoto.remove();
+    if (state.wallPhotoSlot) state.wallPhotoSlot.remove();
+    state.wallPhoto = state.wallPhotoSlot = state.wallPhotoStage = null;
+  }
+  function positionWallPhoto() {
+    if (slug() !== 'where-was-the-berlin-wall-interactive-map') { releaseWallPhoto(); return; }
+    var photo = state.wallPhoto, slot = state.wallPhotoSlot;
+    if (!photo || !slot || !slot.isConnected) return;
+    var height = photo.getBoundingClientRect().height;
+    if (slot.style.height !== height + 'px') slot.style.height = height + 'px';
+    var rect = slot.getBoundingClientRect();
+    [['top', rect.top + scrollY + 'px'], ['left', rect.left + scrollX + 'px'], ['width', rect.width + 'px']].forEach(function (pair) {
+      if (photo.style.getPropertyValue(pair[0]) !== pair[1]) photo.style.setProperty(pair[0], pair[1], 'important');
+    });
+  }
+  function persistWallPhoto(photo, heroNode) {
+    var slot = state.wallPhotoSlot;
+    if (!slot || !slot.isConnected || slot.previousElementSibling !== heroNode) {
+      if (slot) slot.remove();
+      slot = document.createElement('div'); slot.className = 'bw-c-wall-cover-space'; slot.setAttribute(MARK, 'cover-space');
+      slot.setAttribute('aria-hidden', 'true'); slot.style.height = photo.getBoundingClientRect().height + 'px'; heroNode.after(slot);
+      state.wallPhotoSlot = slot;
+    }
+    state.wallPhoto = photo;
+    photo.id = 'bw-wall-persistent-cover';
+    heroNode.setAttribute('role', 'group'); heroNode.setAttribute('aria-owns', photo.id); state.wallPhotoHero = heroNode;
+    if (photo.parentElement !== document.body) document.body.appendChild(photo);
+    photo.style.setProperty('position', 'absolute', 'important'); photo.style.setProperty('margin', '0', 'important');
+    photo.style.setProperty('z-index', '1', 'important');
+    photo.style.setProperty('transform', 'none', 'important');
+    var stage = heroNode.parentElement;
+    if (state.wallPhotoStage !== stage) {
+      if (state.wallPhotoObserver) state.wallPhotoObserver.disconnect();
+      state.wallPhotoObserver = new ResizeObserver(positionWallPhoto); state.wallPhotoObserver.observe(stage); state.wallPhotoStage = stage;
+    }
+    if (!state.wallPhotoListeners) {
+      state.wallPhotoListeners = true; addEventListener('resize', positionWallPhoto, {passive:true}); addEventListener('popstate', positionWallPhoto);
+    }
+    positionWallPhoto(); requestAnimationFrame(positionWallPhoto);
+  }
+
   function cover(heroNode, post) {
     var old = document.querySelector('.bw-c-cover');
     var image = meta('og:image') || post && post.image;
@@ -209,11 +255,17 @@
 
     var isW = source.indexOf('5a08a3_eadb1c41a6db') !== -1;
     var w12 = isW ? source.replace('/w_1672,h_941,al_c/', '/w_1200,h_675,al_c,q_85,enc_auto/') : '';
-    var ss = w12 ? escapeHtml(w12) + ' 1200w, ' + escapeHtml(source) + ' 1672w' : '';
+    var w8 = isW && slug() === 'where-was-the-berlin-wall-interactive-map' ? source.replace('/w_1672,h_941,al_c/', '/w_800,h_450,al_c,q_85,enc_auto/') : '';
+    var ss = w12 ? (w8 ? escapeHtml(w8) + ' 800w, ' : '') + escapeHtml(w12) + ' 1200w, ' + escapeHtml(source) + ' 1672w' : '';
     var sz = ss ? '100vw' : '';
 
     // Re-creating the cover on every hydration render re-decodes the LCP image
     // and feeds this script's own mutation observer. Keep a correct one.
+    var wallPhoto = slug() === 'where-was-the-berlin-wall-interactive-map';
+    if (wallPhoto && old && old.isConnected && old.querySelector('img')?.getAttribute('src') === source) {
+      var existingImage = old.querySelector('img'); if (ss && existingImage.getAttribute('srcset') !== ss) { existingImage.setAttribute('srcset', ss); existingImage.setAttribute('sizes', sz); }
+      persistWallPhoto(old, heroNode); return;
+    }
     if (old && old.isConnected && heroNode && old.previousElementSibling === heroNode) {
       var currentImage = old.querySelector('img');
       if (currentImage && currentImage.getAttribute('src') === source) {
@@ -232,6 +284,7 @@
     node.setAttribute(MARK, 'cover');
     node.innerHTML = '<img src="' + escapeHtml(source) + '"' + (ss ? ' srcset="' + ss + '" sizes="' + sz + '"' : '') + ' alt="' + escapeHtml(alt) + '" fetchpriority="high">' + (alt ? '<figcaption class="bw-c-cover-caption">' + escapeHtml(alt) + '</figcaption>' : '');
     heroNode.after(node);
+    if (wallPhoto) persistWallPhoto(node, heroNode);
     if (!heroNode.closest('.bw-c-stage')) {
       balanceBleed(heroNode);
       balanceBleed(node);
@@ -569,7 +622,7 @@
         // Reconnect before yielding: Wix can insert the replacement article
         // before the next animation frame. Our own writes happened detached.
         state.observer.takeRecords();
-        if (state.observer && Date.now() < state.until) state.observer.observe(document.documentElement, { childList: true, subtree: true });
+        if (state.observer && (Date.now() < state.until || (slug() === 'where-was-the-berlin-wall-interactive-map' && state.wallPhoto))) state.observer.observe(document.documentElement, { childList: true, subtree: true });
       }
     }
   }
@@ -585,6 +638,10 @@
     // alone is not enough: every mutation in the burst resets the 120ms timer,
     // which held the old layout on screen for 571ms in live measurement.
     state.observer = new MutationObserver(function () {
+      if (state.wallPhoto && slug() !== 'where-was-the-berlin-wall-interactive-map') releaseWallPhoto();
+      if (slug() === 'where-was-the-berlin-wall-interactive-map' && state.wallPhoto && (!document.querySelector('.bw-c-hero') || !state.wallPhotoSlot || !state.wallPhotoSlot.isConnected || !state.wallPhoto.isConnected)) {
+        render(); return;
+      }
       if (Date.now() >= state.until) return;
       if (!state.rendering && !document.querySelector('.bw-c-hero')) render();
       schedule(120);
