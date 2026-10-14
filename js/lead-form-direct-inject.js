@@ -77,6 +77,31 @@
   var observer = null;
   var lastPath = location.pathname;
   var retries = 0;
+  // Current Wix category membership, refreshed 14 Oct 2026. Covers secondary
+  // category assignments and posts newer than the public archive as well.
+  var RESIDENT_MARKER = 'data-bw-resident-letter';
+  var residentSlugs = ["apple-picking-near-berlin","autumn-leaves-in-berlin","balcony-solar-berlin","berlin-bathing-season","berlin-bridge-days-2027","berlin-bulky-waste","berlin-election-2026","berlin-flat-notice-period","berlin-heating-season","berlin-hiking-trails","berlin-housing-cooperative","berlin-monthly-ticket","berlin-nebenkostenabrechnung","berlin-parking-zones","berlin-public-libraries","berlin-rent-increase","berlin-rental-deposit","berlin-school-registration","berlin-snow-clearing-rules","berlin-water-hardness","berlin-zoo-annual-pass","bike-lights-in-berlin","bike-theft-in-berlin","blood-donation-berlin","bouldering-in-berlin","buergeramt-berlin","cargo-bike-berlin","church-tax-berlin","cranes-near-berlin","dentist-in-berlin","doctor-appointment-berlin","dog-parks-in-berlin","electricity-provider-berlin","elterngeld-berlin","flu-shot-in-berlin","german-citizenship-berlin","german-courses-in-berlin","halteverbotszone-berlin","health-insurance-in-berlin","herbstferien-berlin","home-insurance-in-berlin","home-internet-berlin","ice-skating-in-berlin","indoor-playgrounds-in-berlin","kaeltehilfe-berlin","kindergeld-berlin","kita-place-berlin","kleingarten-berlin","mieterverein-berlin","milieuschutz-berlin","missed-parcel-in-berlin","mould-in-berlin-flats","mushroom-picking-berlin","pumpkin-patch-berlin","repair-cafe-berlin","rundfunkbeitrag-berlin","second-home-tax-berlin","sick-leave-in-berlin","stargazing-in-berlin","swimming-lessons-for-kids-in-berlin","tax-return-in-berlin","thermal-baths-near-berlin","urban-sports-club-vs-gym-berlin","vet-in-berlin","wbs-berlin","winter-swimming-in-berlin","winter-tyres-berlin","wohngeld-berlin"];
+  var residentArchiveRequested = false;
+  function isResidentPost() {
+    if (residentSlugs.indexOf(currentSlug()) !== -1) return true;
+    return !!document.querySelector('.bw-c-eyebrow a[href$="/living-in-berlin"],article [data-hook="category-link"][href$="/living-in-berlin"]');
+  }
+  function refreshResidentTopics() {
+    if (residentArchiveRequested) return;
+    residentArchiveRequested = true;
+    // Reuse the redesign's identical cached archive URL; no new API/consent.
+    fetch('https://fenerszymanski.github.io/berlinwalk-widgets/blog-index/archive.json?v=blog-redesign-c-20260823', {cache:'force-cache'})
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (data) {
+        if (!data || !Array.isArray(data.allPosts)) return;
+        var wasResident = isResidentPost();
+        data.allPosts.forEach(function (post) {
+          if (post.categorySlug === 'living-in-berlin' && residentSlugs.indexOf(post.slug) === -1) residentSlugs.push(post.slug);
+        });
+        if (!wasResident && isResidentPost()) scheduleInject(0);
+      }).catch(function () { /* verified category members remain covered offline */ });
+  }
+
 
   function isSurfacePath() {
     return location.pathname.indexOf('/post/') === 0 || PREVIEW_ENABLED;
@@ -112,7 +137,7 @@
 
   function hasSurfaceAncestor(el) {
     if (!el || !el.closest) return false;
-    if (el.closest('[' + BOOKING_MARKER + '],[' + DATE_CHECK_MARKER + '],[' + EAST_WEST_MARKER + '],[data-bw-leadform],[data-bw-tourcta],[data-bw-blog-mobile-guide],[data-bw-blog-mobile-nav],[data-bw-blog-tool-prompt],[data-bw-blog-journey],[data-bw-blog-share-bar]')) return true;
+    if (el.closest('[' + BOOKING_MARKER + '],[' + DATE_CHECK_MARKER + '],[' + EAST_WEST_MARKER + '],[' + RESIDENT_MARKER + '],[data-bw-leadform],[data-bw-tourcta],[data-bw-blog-mobile-guide],[data-bw-blog-mobile-nav],[data-bw-blog-tool-prompt],[data-bw-blog-journey],[data-bw-blog-share-bar]')) return true;
     var container = el.closest('figure,li');
     return Boolean(container && container !== el);
   }
@@ -1034,10 +1059,56 @@
     return card;
   }
 
+
+  function residentLetterPoint(body) {
+    var blocks = articleBlocks(body);
+    for (var i = 0; i < blocks.length; i++) {
+      if ((blocks[i].tagName || '').toUpperCase() === 'P' && cleanText(blocks[i].textContent).length >= 80) {
+        return pointAt(blocks[i], body, 'resident-intro');
+      }
+    }
+    return null;
+  }
+  function injectResidentLetter(body) {
+    document.documentElement.setAttribute('data-bw-resident-post', currentSlug());
+    [BOOKING_MARKER, DATE_CHECK_MARKER, EAST_WEST_MARKER].forEach(function (marker) {
+      queryAll('[' + marker + ']').forEach(function (node) {
+        if (node._bwDateCheckMeasurement) node._bwDateCheckMeasurement.dispose();
+        if (node.parentNode) node.parentNode.removeChild(node);
+      });
+    });
+    var existing = document.getElementById(LETTER_BAR_ID);
+    if (storageGet(LETTER_JOINED_KEY) && !existing) return true;
+    if (existing && !existing.hasAttribute(RESIDENT_MARKER)) {
+      // Reuse a popup's form if a reader navigates here while typing.
+      existing.setAttribute(RESIDENT_MARKER, '1');
+      existing.classList.add('bw-letter-inline', 'bw-lb-open');
+      var close = existing.querySelector('.bw-lb-close');
+      if (close) close.remove();
+    }
+    var card = placeSurface('resident-letter', body, {
+      existing: existing || removeDuplicateSurfaces(RESIDENT_MARKER),
+      build: function () {
+        letterBarStyles();
+        var node = buildLetterBar();
+        node.setAttribute(RESIDENT_MARKER, '1');
+        node.classList.add('bw-letter-inline', 'bw-lb-open');
+        node.querySelector('.bw-lb-close').remove();
+        bindLetterBar(node);
+        return node;
+      },
+      find: function () { return residentLetterPoint(body); }
+    });
+    if (card) syncSurfaceGutters(card, body, true);
+    return !!card;
+  }
+
   function injectSurfaces() {
     if (!ENABLED || !isSurfacePath()) return false;
     var body = findPostBody();
     if (!body) return false;
+    if (isResidentPost()) return injectResidentLetter(body);
+    document.documentElement.removeAttribute('data-bw-resident-post');
     var bookingPoint = findBookingInsertionPoint(body);
     var booking = placeSurface('booking', body, {
       existing: removeDuplicateSurfaces(BOOKING_MARKER),
@@ -1089,7 +1160,7 @@
   function ownMutation(record) {
     var target = record && record.target;
     if (target && target.nodeType === 1 && typeof target.closest === 'function' &&
-        target.closest('[' + BOOKING_MARKER + '],[' + DATE_CHECK_MARKER + '],[' + EAST_WEST_MARKER + '],#' + LETTER_BAR_ID)) return true;
+        target.closest('[' + BOOKING_MARKER + '],[' + DATE_CHECK_MARKER + '],[' + EAST_WEST_MARKER + '],[' + RESIDENT_MARKER + '],#' + LETTER_BAR_ID)) return true;
     if (!record || (record.removedNodes && record.removedNodes.length)) return false;
     var added = record.addedNodes || [];
     if (!added.length) return false;
@@ -1117,7 +1188,7 @@
   }
 
   function removeSurfaces() {
-    [BOOKING_MARKER, DATE_CHECK_MARKER, EAST_WEST_MARKER].forEach(function (marker) {
+    [BOOKING_MARKER, DATE_CHECK_MARKER, EAST_WEST_MARKER, RESIDENT_MARKER].forEach(function (marker) {
       queryAll('[' + marker + ']').forEach(function (node) {
         if (node._bwDateCheckMeasurement) node._bwDateCheckMeasurement.dispose();
         if (node.parentNode) node.parentNode.removeChild(node);
@@ -1185,7 +1256,11 @@
       '#bw-letter-bar .bw-lb-hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}',
       '#bw-letter-bar .bw-lb-msg{margin:6px 0 0;font-size:12.5px;color:#1B5E20}',
       '#bw-letter-bar .bw-lb-msg.bw-lb-err{color:#b3261e}',
-      '#bw-letter-bar .bw-lb-close{position:absolute;top:6px;right:8px;width:32px;height:32px;padding:0;border:0;background:transparent;font-size:22px;line-height:1;color:#4a554a;cursor:pointer}'
+      '#bw-letter-bar .bw-lb-close{position:absolute;top:6px;right:8px;width:32px;height:32px;padding:0;border:0;background:transparent;font-size:22px;line-height:1;color:#4a554a;cursor:pointer}',
+      '#bw-letter-bar.bw-letter-inline{position:relative;left:auto;right:auto;bottom:auto;width:100%;max-width:none;margin:24px 0;transform:none;transition:none;z-index:auto;box-shadow:none;padding:20px}',
+      '#bw-letter-bar.bw-letter-inline .bw-lb-k{margin:0 0 7px!important;font:800 12px/1.4 Montserrat,Arial,sans-serif!important;color:#1B5E20!important}',
+      '#bw-letter-bar.bw-letter-inline .bw-lb-t{margin:0 0 14px!important;font:500 16px/1.5 Montserrat,Arial,sans-serif!important;color:#212121!important}',
+      '#bw-letter-bar.bw-letter-inline .bw-lb-msg{margin:8px 0 0!important;font:500 13px/1.4 Montserrat,Arial,sans-serif!important}'
     ].join('');
     document.head.appendChild(style);
   }
@@ -1224,9 +1299,8 @@
     var msg = bar.querySelector('.bw-lb-msg');
     var button = bar.querySelector('button[type="submit"]');
     var startedAt = new Date().toISOString();
-    bar.querySelector('.bw-lb-close').addEventListener('click', function () {
-      closeLetterBar(bar, true);
-    });
+    var closeButton = bar.querySelector('.bw-lb-close');
+    if (closeButton) closeButton.addEventListener('click', function () { closeLetterBar(bar, true); });
     form.addEventListener('submit', function (event) {
       event.preventDefault();
       var email = String(form.email.value || '').trim().toLowerCase();
@@ -1272,7 +1346,7 @@
         // actually subscribes the reader.
         storageSet(LETTER_JOINED_KEY, Date.now());
         form.innerHTML = '<p class="bw-lb-t" style="margin:0"><strong>Check your inbox.</strong> Click the link in my email to confirm, and the next letter reaches you on Monday morning.</p>';
-        window.setTimeout(function () { closeLetterBar(bar, false); }, 9000);
+        if (!bar.hasAttribute(RESIDENT_MARKER)) window.setTimeout(function () { closeLetterBar(bar, false); }, 9000);
       }).catch(function () {
         button.disabled = false;
         msg.className = 'bw-lb-msg bw-lb-err';
@@ -1282,6 +1356,7 @@
   }
 
   function showLetterBar() {
+    if (isResidentPost()) return;
     if (document.getElementById(LETTER_BAR_ID) || !document.body) return;
     letterBarStyles();
     var bar = buildLetterBar();
@@ -1292,6 +1367,7 @@
   }
 
   function initLetterBar() {
+    if (isResidentPost()) return;
     if (letterBarStarted || !isSurfacePath()) return;
     if (/[?&]bwLetterBar=0(?:&|$)/.test(location.search)) return;
     if (letterBarSuppressed(Date.now())) return;
@@ -1318,6 +1394,7 @@
   }
 
   function boot() {
+    refreshResidentTopics();
     retries = 0;
     scheduleInject(0);
     startObserver();
