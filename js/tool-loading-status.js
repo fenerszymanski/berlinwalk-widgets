@@ -61,5 +61,10 @@
   fetch('https://fenerszymanski.github.io/berlinwalk-widgets/tools-hub/tool-loading-links.json?v=20261014', { credentials: 'omit' })
     .then(function (r) { if (!r.ok) throw new Error('Unavailable'); return r.json(); })
     .then(function (links) { direct = direct || validUrl(links[slug]); if (notice) show(); }).catch(function () {});
-  if (document.body) start(); else document.addEventListener('DOMContentLoaded', start, { once: true });
+  if (document.body) start(); else {
+    var bodyObserver = new MutationObserver(function () {
+      if (document.body) { bodyObserver.disconnect(); start(); }
+    });
+    bodyObserver.observe(document.documentElement, { childList: true });
+  }
 })();
