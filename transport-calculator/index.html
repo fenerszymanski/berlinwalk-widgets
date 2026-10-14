@@ -492,7 +492,6 @@
         font-size: 22px;
       }
 
-      #bw-ticket-calculator .bw-choice-row,
       #bw-ticket-calculator .bw-coverage-grid,
       #bw-ticket-calculator .bw-note-grid,
       #bw-ticket-calculator .bw-ticket {
@@ -683,7 +682,7 @@
           <a class="bw-link" href="https://www.vbb.de/en/tickets/" target="_blank" rel="noopener">VBB ticket overview</a>
           <a class="bw-link" href="https://sbahn.berlin/tickets/alle-tickets/alle-tickets-preise/" target="_blank" rel="noopener">S-Bahn price table</a>
           <a class="bw-link" href="https://www.berlin-welcomecard.de/en" target="_blank" rel="noopener">WelcomeCard official</a>
-          <a class="bw-link secondary" href="https://www.berlinwalk.com/tools/welcomecard-calculator" target="_blank" rel="noopener">WelcomeCard calculator</a>
+          <a class="bw-link secondary" href="https://walkofberlin.com/tools/welcomecard-calculator" target="_blank" rel="noopener">WelcomeCard calculator</a>
         </div>
       </section>
     </div>
@@ -859,11 +858,20 @@
         var bikeAddOn = s.bikes * s.days * p.bike24;
         var options = [];
 
-        if (totalPeople === 0 || allTrips === 0) {
+        if (totalPeople === 0) {
+          return [{
+            name: 'No travellers selected',
+            cost: 0,
+            detail: 'Set at least one adult or child to calculate ticket options.',
+            caveat: false
+          }];
+        }
+
+        if (allTrips === 0) {
           return [{
             name: 'No paid public transport needed',
-            cost: bikeAddOn,
-            detail: s.bikes ? 'Only bicycle 24-hour add-ons are selected.' : 'Set at least one traveller and one ride if you need a ticket.',
+            cost: 0,
+            detail: s.bikes ? 'Rides are set to 0. Transit bicycle tickets are only required when taking bikes onto trains or buses.' : 'Rides are set to 0. Add rides if you plan to use transit.',
             caveat: false
           }];
         }

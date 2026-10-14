@@ -570,6 +570,9 @@
         grid-template-columns: repeat(2, minmax(0, 1fr));
       }
       #bw-budget-calc .bw-euro-main { font-size: 46px; }
+      #bw-budget-calc .bw-segments.four {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
       #bw-budget-calc .bw-bar-row {
         grid-template-columns: 96px minmax(0, 1fr) 52px;
         gap: 8px;
@@ -647,7 +650,7 @@
 
           <div class="bw-field">
             <div class="bw-label">Accommodation</div>
-            <div class="bw-segments" data-group="stay">
+            <div class="bw-segments four" data-group="stay">
               <button type="button" class="bw-choice" data-value="none">No hotel</button>
               <button type="button" class="bw-choice" data-value="hostel">Hostel</button>
               <button type="button" class="bw-choice active" data-value="hotel3">3-star</button>
@@ -905,7 +908,7 @@
       }
 
       function tierFor(daily) {
-        if (daily < 80) return { label: 'Lean Berlin day', text: 'This is possible, but it depends on cheap accommodation, free sights, and limited restaurant spending.' };
+        if (Math.round(daily) <= 80) return { label: 'Lean Berlin day', text: 'This is possible, but it depends on cheap accommodation, free sights, and limited restaurant spending.' };
         if (daily < 150) return { label: 'Balanced tourist day', text: 'This is a realistic range for most visitors who want comfort without overspending.' };
         if (daily < 260) return { label: 'Comfortable Berlin day', text: 'This budget gives room for central lodging, restaurants, paid sights, and a relaxed pace.' };
         return { label: 'Premium Berlin day', text: 'Accommodation and restaurants are doing most of the work here. You can cut the total quickly by changing either one.' };
@@ -965,7 +968,9 @@
       }
 
       function syncControls() {
-        els.days.value = state.days;
+        if (document.activeElement !== els.days) {
+          els.days.value = state.days;
+        }
         els.daysLabel.textContent = state.days + (state.days === 1 ? ' day' : ' days');
         els.sights.value = state.sights;
         els.sightsLabel.textContent = state.sights === 1 ? '1 sight' : state.sights + ' sights';
@@ -1044,7 +1049,23 @@
       });
 
       els.days.addEventListener('input', function () {
-        state.days = els.days.value;
+        var raw = els.days.value.trim();
+        if (raw === '') {
+          state.days = 1;
+        } else {
+          var parsed = parseInt(raw, 10);
+          if (!isNaN(parsed)) {
+            state.days = clamp(parsed, 1, 14);
+          }
+        }
+        state.preset = 'custom';
+        update();
+      });
+
+      els.days.addEventListener('blur', function () {
+        var parsed = parseInt(els.days.value, 10);
+        state.days = clamp(isNaN(parsed) ? 1 : parsed, 1, 14);
+        els.days.value = state.days;
         state.preset = 'custom';
         update();
       });

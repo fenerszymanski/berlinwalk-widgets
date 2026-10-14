@@ -459,6 +459,26 @@
       text-transform: uppercase;
     }
 
+    #bw-toilet-map .leaflet-popup-close-button {
+      color: #FFFFFF !important;
+      font-size: 18px !important;
+      width: 32px !important;
+      height: 32px !important;
+      line-height: 32px !important;
+      text-align: center;
+      top: 6px !important;
+      right: 6px !important;
+      border-radius: 50%;
+      background: rgba(0, 0, 0, 0.22);
+      transition: background 0.15s ease;
+    }
+
+    #bw-toilet-map .leaflet-popup-close-button:hover,
+    #bw-toilet-map .leaflet-popup-close-button:focus {
+      background: rgba(0, 0, 0, 0.45);
+      color: #FFFFFF !important;
+    }
+
     #bw-toilet-map .bw-popup-route {
       background: var(--bw-yellow);
       border-radius: 8px;
@@ -470,6 +490,20 @@
       margin-top: 9px;
       padding: 9px 11px;
       text-decoration: none;
+      transition: background 0.15s ease, color 0.15s ease;
+    }
+
+    #bw-toilet-map .bw-popup-route:hover {
+      background: #FFEF33;
+      color: #123D18;
+    }
+
+    #bw-toilet-map .bw-popup-route:focus,
+    #bw-toilet-map .bw-popup-route:focus-visible {
+      background: #FFEF33;
+      color: #123D18;
+      outline: 2px solid #123D18;
+      outline-offset: 2px;
     }
 
     #bw-toilet-map .bw-user-marker {
@@ -594,7 +628,8 @@
         activeFilter: 'all',
         query: '',
         userLocation: null,
-        activeId: null
+        activeId: null,
+        loaded: false
       };
 
       var mapEl = document.getElementById('bw-toilet-map-canvas');
@@ -610,8 +645,7 @@
       var map = L.map(mapEl, {
         center: BERLIN_CENTER,
         zoom: 12,
-        scrollWheelZoom: false,
-        tap: true
+        scrollWheelZoom: false
       });
 
       L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -800,7 +834,11 @@
         listEl.innerHTML = '';
 
         if (!topItems.length) {
-          listEl.innerHTML = '<p class="bw-empty">No toilets match these filters. Try clearing the search or switching back to all toilets.</p>';
+          if (state.loaded && !state.all.length) {
+            listEl.innerHTML = '<p class="bw-empty">No toilet facilities are currently returned by Berlin Open Data.</p>';
+          } else {
+            listEl.innerHTML = '<p class="bw-empty">No toilets match these filters. Try clearing the search or switching back to all toilets.</p>';
+          }
           return;
         }
 
@@ -856,7 +894,7 @@
         var total = state.all.length;
         var prefix = state.userLocation && state.filtered[0] ? '<strong>' + formatDistance(state.filtered[0].distance) + '</strong> to the nearest match. ' : '';
         statusEl.innerHTML = prefix + '<strong>' + filtered + '</strong> shown from <strong>' + total + '</strong> official facilities.';
-        liveEl.textContent = total ? total + ' facilities loaded' : 'Loading live data';
+        liveEl.textContent = state.loaded ? total + ' facilities loaded' : 'Loading live data';
       }
 
       function applyFilters() {
@@ -1015,6 +1053,7 @@
             return response.json();
           })
           .then(function (geojson) {
+            state.loaded = true;
             state.all = (geojson.features || [])
               .map(toiletFromFeature)
               .filter(function (toilet) {
@@ -1026,9 +1065,11 @@
             setTimeout(function () { map.invalidateSize(); }, 200);
           })
           .catch(function () {
+            state.loaded = false;
             loadingEl.textContent = 'Could not load the live toilet map. Please try again in a moment.';
             liveEl.textContent = 'Data unavailable';
             statusEl.textContent = 'Berlin Open Data did not respond.';
+            listEl.innerHTML = '<p class="bw-empty">Could not load toilet locations. Please check your connection and reload the page.</p>';
           });
       }
 
