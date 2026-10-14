@@ -104,7 +104,7 @@
       var before = document.createElement('span'); before.tabIndex = 0; before.textContent = 'Previous page content';
       before.style.cssText = 'position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)';
       before.addEventListener('focus', function () { var target = document.querySelector('[data-bw-shell-v2-breadcrumb]'); if (target) target.focus(); }); portal.appendChild(before);
-      frame = document.createElement('iframe'); frame.title = 'Berlin tool'; frame.name = configuredUrl ? 'bw-fast-secondary' : 'bw-fast-tool'; frame.loading = 'eager'; frame.setAttribute('allow', 'fullscreen; geolocation *'); frame.setAttribute('scrolling', 'no');
+      frame = document.createElement('iframe'); frame.title = 'Berlin tool'; frame.name = configuredUrl ? 'bw-fast-secondary' : 'bw-fast-tool'; frame.loading = 'eager'; frame.setAttribute('allow', configuredUrl ? 'fullscreen' : 'fullscreen; geolocation *'); frame.setAttribute('scrolling', 'no');
       frame.style.cssText = 'display:block;width:100%;height:1200px;border:0;background:#fff'; frame.setAttribute('data-bw-fast-tool-frame', slug);
       frame.addEventListener('load', function () { frameLoadCount++; portal.setAttribute('data-bw-fast-load-count', frameLoadCount); portal.setAttribute('data-bw-fast-loaded-ms', Math.round(performance.now())); });
       frame.src = url; portal.appendChild(frame);
