@@ -1,9 +1,9 @@
 {
-  "updatedAt": "2026-10-13T02:00:51.380Z",
+  "updatedAt": "2026-10-14T07:49:28.756Z",
   "source": "Wix Blog API",
   "popularSource": "Wix Blog metrics.views lifetime sort",
-  "totalPosts": 430,
-  "toolsTotal": 359,
+  "totalPosts": 431,
+  "toolsTotal": 360,
   "bookingUrl": "https://www.walkofberlin.com/book-berlin-walking-tour/berlin-then-and-now",
   "navTopics": [
     {
@@ -1802,6 +1802,23 @@
   ],
   "latest": [
     {
+      "title": "Swimming Lessons for Kids in Berlin: When Each Door Opens",
+      "slug": "swimming-lessons-for-kids-in-berlin",
+      "path": "/post/swimming-lessons-for-kids-in-berlin",
+      "url": "https://www.berlinwalk.com/post/swimming-lessons-for-kids-in-berlin",
+      "excerpt": "The Berliner Bäder sell Seepferdchen courses with no waitlist, and the January 2027 courses go on sale at the end of November. Club places can take two to three years, school swimming comes in Year 3, and free holiday courses open from Year 4. Here is which door opens when for your child.",
+      "category": "Living in Berlin",
+      "categorySlug": "living-in-berlin",
+      "topic": "living-in-berlin",
+      "topicLabel": "Living in Berlin",
+      "readTime": "7 min read",
+      "publishedDate": "2026-10-14T07:47:20.267Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_cb715d93e9324f52ade61be4546543bf~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-schoeneberg-teaching-pool.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_cb715d93e9324f52ade61be4546543bf~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-schoeneberg-teaching-pool.jpg",
+      "alt": "The swimmer pool of the Stadtbad Schöneberg with lane ropes, and the shallow teaching pool with its wide steps in the foreground, under tall windows",
+      "relatedToolSlug": "berlin-swim-badge-timeline"
+    },
+    {
       "title": "One Week in Berlin: A 7-Day Plan Built Around Your Arrival Day",
       "slug": "one-week-in-berlin",
       "path": "/post/one-week-in-berlin",
@@ -1987,23 +2004,6 @@
       "thumb": "https://static.wixstatic.com/media/5a08a3_8d382146dd8247728d6bc08053961101~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-breitenbachplatz-snow-night.jpg",
       "alt": "A snowy street at Breitenbachplatz in Berlin at night, with falling snow lit by the street lamps and the elevated motorway bridge in the background",
       "relatedToolSlug": "berlin-cold-night-help-map"
-    },
-    {
-      "title": "Herbstferien Berlin: How Working Parents Cover the Two Weeks",
-      "slug": "herbstferien-berlin",
-      "path": "/post/herbstferien-berlin",
-      "url": "https://www.berlinwalk.com/post/herbstferien-berlin",
-      "excerpt": "Berlin’s autumn school holidays run from 19 to 31 October, which leaves working parents ten days to cover. The Hort covers 7:30 to 16:00 for free in grades 1 to 3, but rarely the whole working day. Here is where the hours go missing, what is free in the two weeks, and a planner for your own fortnight.",
-      "category": "Living in Berlin",
-      "categorySlug": "living-in-berlin",
-      "topic": "living-in-berlin",
-      "topicLabel": "Living in Berlin",
-      "readTime": "6 min read",
-      "publishedDate": "2026-10-02T08:45:11.874Z",
-      "image": "https://static.wixstatic.com/media/5a08a3_2ad875f8cb3d47539fcf30e87b18e83d~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-treptower-park-autumn-alley.jpg",
-      "thumb": "https://static.wixstatic.com/media/5a08a3_2ad875f8cb3d47539fcf30e87b18e83d~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-treptower-park-autumn-alley.jpg",
-      "alt": "A long autumn alley of tall poplars in Treptower Park, Berlin, with a grass path running straight between the two rows of trees",
-      "relatedToolSlug": "berlin-herbstferien-cover-planner"
     }
   ]
 }
