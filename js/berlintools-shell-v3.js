@@ -57,12 +57,18 @@
         cur = k;
         return;
       }
-      if (cur) k.setAttribute('data-bw-v3-open', cur.getAttribute('aria-expanded') === 'true' ? '1' : '0');
+      if (!cur) return;
+      // Write only on a real change: re-setting the same value restyled every notes paragraph on each pass.
+      var open = cur.getAttribute('aria-expanded') === 'true' ? '1' : '0';
+      if (k.getAttribute('data-bw-v3-open') !== open) k.setAttribute('data-bw-v3-open', open);
     });
   }
   function toggle(h) {
-    h.setAttribute('aria-expanded', h.getAttribute('aria-expanded') === 'true' ? 'false' : 'true');
     var v = byId(NOTES);
+    // A click before the first sync (or after Wix re-rendered the viewer) marks the headings first.
+    if (v && !h.hasAttribute('data-bw-v3-acc')) sync(v);
+    if (!h.hasAttribute('data-bw-v3-acc')) return;
+    h.setAttribute('aria-expanded', h.getAttribute('aria-expanded') === 'true' ? 'false' : 'true');
     if (v) sync(v);
   }
   function listen() {
@@ -72,7 +78,7 @@
     host.setAttribute('data-bw-v3-listen', '');
     host.addEventListener('click', function (e) {
       var h = e.target.closest && e.target.closest('#comp-mozn27df :is(h2, h3)');
-      if (h && h.hasAttribute('data-bw-v3-acc')) toggle(h);
+      if (h) toggle(h);
     });
     host.addEventListener('keydown', function (e) {
       var h = e.target;
@@ -88,12 +94,23 @@
     if (v) sync(v);
     listen();
   }
-  // Wix renders the cards and the notes viewer after load and may re-render them. Apply the idempotent steps
-  // every 250 ms for 15 s after load, then stop. Bounded, no observer.
-  function start() {
-    var n = 0;
-    (function tick() { apply(); if (++n < 60) setTimeout(tick, 250); })();
+  // Wix replaces the whole <main> about 4 s after load (measured 15 Oct 2026), which drops the heading marks, the icons
+  // and the delegated click listener. Apply the idempotent steps when the DOM is ready and at load, and re-apply (at most
+  // once per frame) when nodes are added anywhere in <body>, for 15 s after load; then the observer stops. sync() writes
+  // only real changes and attribute writes are not observed, so it cannot feed itself. Until 15 Oct 2026 this polled every
+  // 250 ms for 15 s, rewriting the state of every notes paragraph each time; Yusuf saw the right-rail notes blink.
+  var queued = false;
+  function schedule() { if (queued) return; queued = true; requestAnimationFrame(function () { queued = false; apply(); }); }
+  function observe() {
+    if (typeof MutationObserver !== 'function' || !document.body) return;
+    var mo = new MutationObserver(schedule);
+    mo.observe(document.body, { childList: true, subtree: true });
+    var stop = function () { setTimeout(function () { mo.disconnect(); }, 15000); };
+    if (document.readyState === 'complete') stop();
+    else window.addEventListener('load', stop, { once: true });
   }
-  if (document.readyState === 'complete') start();
-  else window.addEventListener('load', start, { once: true });
+  function ready() { apply(); observe(); }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', ready, { once: true });
+  else ready();
+  if (document.readyState !== 'complete') window.addEventListener('load', apply, { once: true });
 })();
