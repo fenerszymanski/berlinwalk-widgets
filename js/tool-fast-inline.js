@@ -16,11 +16,20 @@
   function boot(slotId, surfaceId, configuredUrl) {
   var url = valid(configuredUrl), host = null, spacer = null, portal = null, frame = null, observer, resizeObserver, queued = false, stopped = false;
   var height = 1200, frameLoadCount = 0, positionedBody = false, bodyPosition = '', bodyPriority = '', scrollStyle;
+  // Spacer height: growth applies at once; a shrink waits for the frame's load event and then until the widget
+  // height has held for 700 ms, so the early bw-resize (122 px before the real 1287 px on berlin-3-day-itinerary)
+  // never collapses and regrows the page. While the visitor works inside the tool (focus in the frame), shrinks
+  // apply at once as before.
+  var applied = 1251, shrinkTarget = 0, shrinkDue = 0, shrinkTimer = 0;
+  // Known short widgets start near their real height instead of 1200 px: [narrow viewport < 768 px, wide].
+  var hint = configuredUrl ? null : {"berlin-weather-by-month":[500,380]}[slug];
+  if (hint) { height = hint[innerWidth < 768 ? 0 : 1]; applied = height + 51; }
   var tracked = ['berlin-ticket-machine-simulator', 'berlin-address-time-machine', 'berlin-hotel-location-checker', 'berlin-dates-check', 'berlin-doner-price-index'];
   function stop() {
     stopped = true;
     if (observer) observer.disconnect();
     if (resizeObserver) resizeObserver.disconnect();
+    clearTimeout(shrinkTimer);
     window.removeEventListener('message', receive);
     window.removeEventListener('resize', schedule);
     document.removeEventListener('scroll', schedule, true);
@@ -61,8 +70,17 @@
     queued = false;
     if (stopped || !portal || !spacer || !spacer.isConnected) return;
     var entry = portal.querySelector('.entry');
-    var total = height + entry.getBoundingClientRect().height;
-    if (Math.abs(spacer.getBoundingClientRect().height - total) > 1) spacer.style.height = Math.ceil(total) + 'px';
+    var total = Math.ceil(height + entry.getBoundingClientRect().height);
+    if (total < applied - 1 && shrinkDue !== total && document.activeElement !== frame) {
+      if (frameLoadCount && shrinkTarget !== total) {
+        shrinkTarget = total; clearTimeout(shrinkTimer);
+        shrinkTimer = setTimeout(function () { shrinkTimer = 0; shrinkDue = shrinkTarget; schedule(); }, 700);
+      }
+    } else {
+      clearTimeout(shrinkTimer); shrinkTimer = shrinkTarget = shrinkDue = 0;
+      if (Math.abs(applied - total) > 1) applied = total;
+    }
+    if (Math.abs(spacer.getBoundingClientRect().height - applied) > 1) spacer.style.height = applied + 'px';
     var r = spacer.getBoundingClientRect();
     var bodyRect = document.body.getBoundingClientRect();
     portal.style.left = (r.left - bodyRect.left + document.body.scrollLeft - document.body.clientLeft) + 'px';
@@ -105,8 +123,8 @@
       before.style.cssText = 'position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)';
       before.addEventListener('focus', function () { var target = document.querySelector('[data-bw-shell-v2-breadcrumb]'); if (target) target.focus(); }); portal.appendChild(before);
       frame = document.createElement('iframe'); frame.title = 'Berlin tool'; frame.name = configuredUrl ? 'bw-fast-secondary' : 'bw-fast-tool'; frame.loading = 'eager'; frame.setAttribute('allow', configuredUrl ? 'fullscreen' : 'fullscreen; geolocation *'); frame.setAttribute('scrolling', 'no');
-      frame.style.cssText = 'display:block;width:100%;height:1200px;border:0;background:#fff'; frame.setAttribute('data-bw-fast-tool-frame', slug);
-      frame.addEventListener('load', function () { frameLoadCount++; portal.setAttribute('data-bw-fast-load-count', frameLoadCount); portal.setAttribute('data-bw-fast-loaded-ms', Math.round(performance.now())); });
+      frame.style.cssText = 'display:block;width:100%;height:' + height + 'px;border:0;background:#fff'; frame.setAttribute('data-bw-fast-tool-frame', slug);
+      frame.addEventListener('load', function () { frameLoadCount++; portal.setAttribute('data-bw-fast-load-count', frameLoadCount); portal.setAttribute('data-bw-fast-loaded-ms', Math.round(performance.now())); schedule(); });
       frame.src = url; portal.appendChild(frame);
       var after = document.createElement('span'); after.tabIndex = 0; after.textContent = 'Continue reading'; after.style.cssText = before.style.cssText;
       after.addEventListener('focus', function () { var target = document.querySelector('#comp-mozmt2at a,#comp-mozn18up a,#comp-mozmgdoo a,#comp-mozp1zlv a'); if (target) target.focus(); }); portal.appendChild(after);
@@ -118,7 +136,7 @@
       host = current;
       var shadow = host.shadowRoot || host.attachShadow({ mode: 'open' });
       shadow.textContent = '';
-      spacer = document.createElement('div'); spacer.tabIndex = 0; spacer.setAttribute('aria-label', 'Use the tool controls'); spacer.addEventListener('focus', function () { frame.focus(); }); spacer.style.cssText = 'display:block;width:100%;height:1251px'; shadow.appendChild(spacer);
+      spacer = document.createElement('div'); spacer.tabIndex = 0; spacer.setAttribute('aria-label', 'Use the tool controls'); spacer.addEventListener('focus', function () { frame.focus(); }); spacer.style.cssText = 'display:block;width:100%;height:' + applied + 'px'; shadow.appendChild(spacer);
       var hostStyle = document.createElement('style'); hostStyle.textContent = ':host{height:auto!important;min-height:0!important;max-height:none!important}'; shadow.appendChild(hostStyle);
       host.setAttribute('data-bw-fast-tool', slug); host.setAttribute('aria-owns', portal.id);
       if (resizeObserver) resizeObserver.disconnect();
