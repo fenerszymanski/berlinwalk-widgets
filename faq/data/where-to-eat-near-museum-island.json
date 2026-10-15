@@ -1,0 +1,89 @@
+{
+  "version": 1,
+  "slug": "where-to-eat-near-museum-island",
+  "key": "where-to-eat-near-museum-island",
+  "config": {
+    "title": "Where to Eat Near Museum Island - FAQ",
+    "subtitle": "Cafés on the island, the Monday and Tuesday closures, and the restaurants a short walk from each museum exit.",
+    "items": [
+      {
+        "q": "Are there restaurants on Museum Island?",
+        "a": "Only inside the buildings. Every museum has a small café, and **Cu29** in the James-Simon-Galerie is a café and restaurant with a terrace above the Kupfergraben, open Tuesday to Sunday from 10:00 to 18:00. You can walk into the James-Simon-Galerie without a museum ticket."
+      },
+      {
+        "q": "Where can I eat near Museum Island on a Monday?",
+        "a": "The island museums and their cafés are closed on Mondays. Walk five minutes south to the **Humboldt Forum**: the **Lebenswelten Bistro** on the ground floor is open every day and free to enter, and the rooftop **Restaurant Baret** opens from 11:00."
+      },
+      {
+        "q": "What is closed on Tuesdays?",
+        "a": "The Humboldt Forum exhibitions and **Restaurant Baret** on its roof. The island museums, Cu29 and the museum cafés are open, and the Lebenswelten Bistro stays open too."
+      },
+      {
+        "q": "Where is the closest sit-down lunch to the Bode-Museum?",
+        "a": "**Deponie Nr. 3** in the S-Bahn arches on Georgenstraße, about five minutes on foot across the Kupfergraben. It serves Berlin food daily from 10:00 and takes German debit cards or cash, not credit cards. Hackescher Markt is about ten minutes away through Monbijou Park."
+      },
+      {
+        "q": "Can I leave Museum Island for lunch and come back?",
+        "a": "Yes. The **Museum Island day ticket (EUR 24)** covers every open museum on the island for that day, so you can eat off the island and visit a second museum afterwards."
+      },
+      {
+        "q": "Which riverside restaurant is near Museum Island?",
+        "a": "**Brauhaus Georgbräu** at Spreeufer 4 in the Nikolaiviertel, opposite the Humboldt Forum. It brews its own beer, opens daily from 12:00 and has a beer garden on the Spree. Plan at least an hour."
+      }
+    ]
+  },
+  "schema": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Are there restaurants on Museum Island?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Only inside the buildings. Every museum has a small café, and Cu29 in the James-Simon-Galerie is a café and restaurant with a terrace above the Kupfergraben, open Tuesday to Sunday from 10:00 to 18:00. You can walk into the James-Simon-Galerie without a museum ticket."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Where can I eat near Museum Island on a Monday?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The island museums and their cafés are closed on Mondays. Walk five minutes south to the Humboldt Forum: the Lebenswelten Bistro on the ground floor is open every day and free to enter, and the rooftop Restaurant Baret opens from 11:00."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is closed on Tuesdays?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The Humboldt Forum exhibitions and Restaurant Baret on its roof. The island museums, Cu29 and the museum cafés are open, and the Lebenswelten Bistro stays open too."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Where is the closest sit-down lunch to the Bode-Museum?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Deponie Nr. 3 in the S-Bahn arches on Georgenstraße, about five minutes on foot across the Kupfergraben. It serves Berlin food daily from 10:00 and takes German debit cards or cash, not credit cards. Hackescher Markt is about ten minutes away through Monbijou Park."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I leave Museum Island for lunch and come back?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. The Museum Island day ticket (EUR 24) covers every open museum on the island for that day, so you can eat off the island and visit a second museum afterwards."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Which riverside restaurant is near Museum Island?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Brauhaus Georgbräu at Spreeufer 4 in the Nikolaiviertel, opposite the Humboldt Forum. It brews its own beer, opens daily from 12:00 and has a beer garden on the Spree. Plan at least an hour."
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Museum Island Lunch Map</title>
+<meta name="description" content="Leaving a museum on Museum Island hungry? Pick your exit, the day and how long your break is, and the map shows which cafés and restaurants are open, how far they are on foot, and which one fits.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=Merriweather:wght@700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/brand.css">
+<style>
+  :root{
+    --green:#1B5E20; --green-dark:#123D18; --lime:#7CB342; --light:#C5E1A5;
+    --yellow:#FFE600; --ink:#212121; --muted:#55624f; --paper:#FBFAF4;
+    --water:#BFD9EA; --water-line:#8DB8D6; --rail:#9a8f7a; --grey:#B9BDB4;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0}
+  body{font-family:'Montserrat',system-ui,sans-serif;color:var(--ink);background:transparent}
+  .ml{max-width:980px;margin:0 auto;padding:14px 12px 18px;background:var(--paper);border-radius:18px;border:1px solid #E4E8DA}
+  .ml-head h2{font-family:'Merriweather',Georgia,serif;font-size:22px;line-height:1.25;margin:2px 0 6px;color:var(--green-dark)}
+  .ml-head p{margin:0 0 12px;font-size:14px;line-height:1.5;color:var(--muted)}
+  .ml-steps{display:flex;gap:6px;margin:0 0 10px;flex-wrap:wrap}
+  .ml-tab{flex:1 1 0;min-width:96px;border:1px solid #D5DCC9;background:#fff;border-radius:12px;padding:8px 10px;text-align:left;cursor:pointer;font:inherit;color:var(--ink)}
+  .ml-tab small{display:block;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:700}
+  .ml-tab span{display:block;font-size:13px;font-weight:700;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .ml-tab.is-on{border-color:var(--green);box-shadow:inset 0 0 0 1px var(--green);background:#F1F7EA}
+  .ml-panel{background:#fff;border:1px solid #E1E6D6;border-radius:14px;padding:12px;margin-bottom:12px}
+  .ml-panel legend{font-weight:800;font-size:15px;color:var(--green-dark);padding:0;margin-bottom:8px}
+  .ml-panel fieldset{border:0;margin:0;padding:0}
+  .ml-opts{display:flex;flex-wrap:wrap;gap:8px}
+  .ml-opt{position:relative}
+  .ml-opt input{position:absolute;opacity:0;width:1px;height:1px}
+  .ml-opt label{display:block;border:1.5px solid #CFD8C2;border-radius:999px;padding:8px 13px;font-size:13.5px;font-weight:600;cursor:pointer;background:#fff;color:var(--ink)}
+  .ml-opt input:checked + label{background:var(--yellow);border-color:#E0C800;color:var(--green-dark)}
+  .ml-opt input:focus-visible + label{outline:3px solid var(--lime);outline-offset:2px}
+  .ml-hint{font-size:12.5px;color:var(--muted);margin:8px 0 0;line-height:1.45}
+  .ml-body{display:grid;grid-template-columns:1.25fr 1fr;gap:12px;align-items:start}
+  .ml-map{background:#EEF1E6;border:1px solid #DDE3D2;border-radius:14px;overflow:hidden;position:relative}
+  .ml-map svg{display:block;width:100%;height:auto}
+  .ml-legend{display:flex;flex-wrap:wrap;gap:10px;font-size:11.5px;color:var(--muted);padding:8px 10px;border-top:1px solid #DDE3D2;background:#F7F9F2}
+  .ml-legend i{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:5px;vertical-align:-1px}
+  .ml-verdict{background:var(--green-dark);color:#fff;border-radius:14px;padding:14px;margin-bottom:10px}
+  .ml-verdict small{display:block;color:var(--yellow);font-weight:800;font-size:11px;letter-spacing:.08em;text-transform:uppercase}
+  .ml-verdict strong{display:block;font-size:19px;margin:4px 0 6px;font-family:'Merriweather',Georgia,serif}
+  .ml-verdict p{margin:0;font-size:13.5px;line-height:1.5;color:#E8F2DF}
+  .ml-list{list-style:none;margin:0;padding:0;display:grid;gap:7px}
+  .ml-item{border:1px solid #E1E6D6;background:#fff;border-radius:12px;padding:9px 11px;display:grid;grid-template-columns:44px 1fr;gap:10px;align-items:start}
+  .ml-item .min{font-weight:800;font-size:16px;color:var(--green);text-align:center;line-height:1.1}
+  .ml-item .min em{display:block;font-style:normal;font-size:10px;color:var(--muted);font-weight:600}
+  .ml-item b{font-size:14px}
+  .ml-item .area{font-size:11.5px;color:var(--muted)}
+  .ml-item p{margin:3px 0 0;font-size:12.5px;line-height:1.45}
+  .ml-item .tag{display:inline-block;font-size:10.5px;font-weight:700;border-radius:999px;padding:2px 7px;margin-top:4px}
+  .tag-fit{background:#E3F1D3;color:var(--green-dark)}
+  .tag-far{background:#FFF6B3;color:#5a4a00}
+  .tag-shut{background:#ECECEA;color:#555}
+  .ml-item.is-shut{opacity:.62}
+  .ml-foot{font-size:11.5px;color:var(--muted);margin:10px 2px 0;line-height:1.45}
+  @media (max-width:720px){
+    .ml-body{grid-template-columns:1fr}
+    .ml-head h2{font-size:19px}
+    .ml-tab{min-width:0;padding:7px 8px}
+    .ml-tab span{font-size:12px}
+  }
+</style>
+</head>
+<body>
+<div class="ml" id="ml">
+  <div class="ml-head">
+    <h2>Museum Island Lunch Map</h2>
+    <p>Three quick answers: which door you walk out of, which day it is, and how long you want to stop. The map shows what is open around the island and how long the walk is.</p>
+  </div>
+  <div class="ml-steps" role="tablist" aria-label="Steps">
+    <button class="ml-tab" type="button" data-step="0" role="tab"><small>1 Exit</small><span id="tab0">Pick your museum</span></button>
+    <button class="ml-tab" type="button" data-step="1" role="tab"><small>2 Day</small><span id="tab1">Pick the day</span></button>
+    <button class="ml-tab" type="button" data-step="2" role="tab"><small>3 Break</small><span id="tab2">Pick your break</span></button>
+  </div>
+  <div class="ml-panel" id="panel"></div>
+  <div class="ml-body">
+    <div class="ml-map">
+      <svg id="map" viewBox="0 0 600 470" role="img" aria-label="Map of Museum Island with cafés and restaurants around it"></svg>
+      <div class="ml-legend">
+        <span><i style="background:#2E7D32"></i>fits your break</span>
+        <span><i style="background:#FFE600;border:1px solid #C9B400"></i>open, needs more time</span>
+        <span><i style="background:#B9BDB4"></i>not open at 12:30</span>
+        <span><i style="background:#212121"></i>your exit</span>
+      </div>
+    </div>
+    <div>
+      <div class="ml-verdict" id="verdict"></div>
+      <ul class="ml-list" id="list"></ul>
+    </div>
+  </div>
+  <p class="ml-foot" id="foot">Walking minutes are my estimates at an easy museum-day pace, door to door. Hours checked on 15 October 2026; holidays can differ. Map data &copy; OpenStreetMap contributors.</p>
+</div>
+<script>
+(function(){
+  var DAYS=['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'];
+  var BREAKS=[
+    {id:45,label:'45 min',text:'coffee and something quick'},
+    {id:75,label:'75 min',text:'a proper sit-down lunch'},
+    {id:120,label:'2 hours',text:'a long lunch before one more museum'}
+  ];
+  var state={exit:'jsg',day:null,brk:75};
+  var currentStep=0;
+  var DATA=null, GEO=null;
+  var today=(new Date().getDay()+6)%7;
+  state.day=today;
+
+  function haversine(a,b){
+    var R=6371000,toR=Math.PI/180;
+    var dLat=(b.lat-a.lat)*toR,dLon=(b.lon-a.lon)*toR;
+    var s=Math.sin(dLat/2)*Math.sin(dLat/2)+Math.cos(a.lat*toR)*Math.cos(b.lat*toR)*Math.sin(dLon/2)*Math.sin(dLon/2);
+    return 2*R*Math.asin(Math.sqrt(s));
+  }
+  // Streets and bridges add roughly a third to the straight line; 70 m a minute is a tired museum pace.
+  function walkMin(a,b){ return Math.max(1,Math.round(haversine(a,b)*1.35/70)); }
+
+  var bbox=null, W=600, H=470;
+  function proj(lat,lon){
+    var x=(lon-bbox[1])/(bbox[3]-bbox[1])*W;
+    var y=(bbox[2]-lat)/(bbox[2]-bbox[0])*H;
+    return [x,y];
+  }
+  function pathOf(line){
+    return line.map(function(p,i){var q=proj(p[0],p[1]);return (i?'L':'M')+q[0].toFixed(1)+' '+q[1].toFixed(1);}).join(' ');
+  }
+  function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
+  function fmt(h){ if(h==null) return 'late'; var hh=Math.floor(h), mm=Math.round((h-hh)*60); return (hh===24?'00':String(hh).padStart(2,'0'))+':'+String(mm).padStart(2,'0'); }
+
+  function exitObj(){ return DATA.exits.filter(function(e){return e.id===state.exit;})[0]; }
+
+  function evaluate(){
+    var ex=exitObj();
+    return DATA.places.map(function(p){
+      var hours=p.hours[state.day];
+      var loc=p.id==='museumcafe'?ex:p;
+      var available=p.id!=='museumcafe'||ex.smb;
+      var walk=p.id==='museumcafe'?0:walkMin(ex,loc);
+      // Lunch is assumed around 12:30; a place must already be open then.
+      var open=available&&!!hours&&hours[0]<=12.5&&(hours[1]==null||hours[1]>=14);
+      var total=walk*2+p.eat;
+      var fits=open&&total<=state.brk;
+      return {p:p,loc:loc,walk:walk,total:total,open:open,fits:fits,available:available,hours:hours};
+    }).filter(function(r){return r.available;});
+  }
+
+  function pick(rows){
+    var fit=rows.filter(function(r){return r.fits;});
+    if(!fit.length) return null;
+    if(state.brk<=45){ fit.sort(function(a,b){return a.total-b.total;}); return fit[0]; }
+    var sit=fit.filter(function(r){return r.p.kind==='sit';});
+    var pool=sit.length?sit:fit;
+    if(state.brk>=120){ pool.sort(function(a,b){return b.p.eat-a.p.eat||a.walk-b.walk;}); return pool[0]; }
+    pool.sort(function(a,b){return a.walk-b.walk;});
+    return pool[0];
+  }
+
+  function renderPanel(){
+    var panel=document.getElementById('panel'),html='';
+    if(currentStep===0){
+      html='<fieldset><legend>Which door are you walking out of?</legend><div class="ml-opts">'+
+        DATA.exits.map(function(e){return opt('exit',e.id,e.label,state.exit===e.id);}).join('')+
+        '</div><p class="ml-hint">The Pergamonmuseum is closed for renovation until 2027, so it is not on the list.</p></fieldset>';
+    } else if(currentStep===1){
+      html='<fieldset><legend>Which day is it?</legend><div class="ml-opts">'+
+        DAYS.map(function(d,i){return opt('day',i,d.slice(0,3)+(i===today?' (today)':''),state.day===i);}).join('')+
+        '</div><p class="ml-hint">Mondays shut the island museums and their cafés. Tuesdays shut the Humboldt Forum exhibitions and its rooftop.</p></fieldset>';
+    } else {
+      html='<fieldset><legend>How long do you want to stop?</legend><div class="ml-opts">'+
+        BREAKS.map(function(b){return opt('brk',b.id,b.label+', '+b.text,state.brk===b.id);}).join('')+
+        '</div><p class="ml-hint">The time counts the walk there, the walk back and the meal.</p></fieldset>';
+    }
+    panel.innerHTML=html;
+    panel.querySelectorAll('input').forEach(function(inp){
+      inp.addEventListener('click',function(){
+        var v=inp.value;
+        state[inp.name]=inp.name==='exit'?v:Number(v);
+        if(currentStep<2){ currentStep++; }
+        render();
+      });
+    });
+    document.querySelectorAll('.ml-tab').forEach(function(t){
+      var on=Number(t.getAttribute('data-step'))===currentStep;
+      t.classList.toggle('is-on',on); t.setAttribute('aria-selected',on?'true':'false');
+    });
+    document.getElementById('tab0').textContent=exitObj().short;
+    document.getElementById('tab1').textContent=DAYS[state.day];
+    document.getElementById('tab2').textContent=BREAKS.filter(function(b){return b.id===state.brk;})[0].label;
+  }
+  function opt(name,val,label,checked){
+    var id='o-'+name+'-'+val;
+    return '<div class="ml-opt"><input type="radio" name="'+name+'" id="'+id+'" value="'+val+'"'+(checked?' checked':'')+'><label for="'+id+'">'+esc(label)+'</label></div>';
+  }
+
+  function renderMap(rows,best){
+    var svg=document.getElementById('map'),ex=exitObj(),out=[];
+    out.push('<rect x="0" y="0" width="'+W+'" height="'+H+'" fill="#EEF1E6"/>');
+    out.push('<path d="'+GEO.waterAreas.map(function(r){return pathOf(r)+' Z';}).join(' ')+'" fill="#BFD9EA" fill-rule="evenodd" stroke="#9EC3DD" stroke-width="1"/>');
+    GEO.rail.forEach(function(l){out.push('<path d="'+pathOf(l)+'" fill="none" stroke="#a89c86" stroke-width="1.3" stroke-dasharray="4 4"/>');});
+    var lab=[['Spree',52.5193,13.4012],['Kupfergraben',52.5178,13.3918],['S-Bahn viaduct',52.5232,13.3880]];
+    lab.forEach(function(t){var q=proj(t[1],t[2]);out.push('<text x="'+q[0]+'" y="'+q[1]+'" font-size="11" fill="#5f7f95" font-style="italic" font-family="Montserrat">'+t[0]+'</text>');});
+    var e=proj(ex.lat,ex.lon);
+    rows.forEach(function(r){
+      if(r.p.id==='museumcafe'||!r.fits) return;
+      var q=proj(r.loc.lat,r.loc.lon);
+      out.push('<line x1="'+e[0].toFixed(1)+'" y1="'+e[1].toFixed(1)+'" x2="'+q[0].toFixed(1)+'" y2="'+q[1].toFixed(1)+'" stroke="#2E7D32" stroke-width="'+(best&&best.p.id===r.p.id?3:1.4)+'" stroke-opacity=".7" stroke-dasharray="'+(best&&best.p.id===r.p.id?'0':'4 3')+'"/>');
+    });
+    DATA.exits.forEach(function(x){
+      var q=proj(x.lat,x.lon),me=x.id===ex.id;
+      out.push('<rect x="'+(q[0]-5)+'" y="'+(q[1]-5)+'" width="10" height="10" rx="2" fill="'+(me?'#212121':'#fff')+'" stroke="#212121" stroke-width="1.5"/>');
+    });
+    rows.forEach(function(r){
+      if(r.p.id==='museumcafe') return;
+      var q=proj(r.loc.lat,r.loc.lon),isBest=best&&best.p.id===r.p.id;
+      var fill=r.fits?'#2E7D32':(r.open?'#FFE600':'#B9BDB4'),stroke=r.fits?'#123D18':(r.open?'#C9B400':'#8d918a');
+      out.push('<circle cx="'+q[0].toFixed(1)+'" cy="'+q[1].toFixed(1)+'" r="'+(isBest?11:7.5)+'" fill="'+fill+'" stroke="'+stroke+'" stroke-width="2"/>');
+      if(!r.open) out.push('<path d="M'+(q[0]-4)+' '+(q[1]-4)+' L'+(q[0]+4)+' '+(q[1]+4)+' M'+(q[0]+4)+' '+(q[1]-4)+' L'+(q[0]-4)+' '+(q[1]+4)+'" stroke="#555" stroke-width="1.6"/>');
+      var right=r.p.labelSide?r.p.labelSide==='right':q[0]<W-130, dy=r.p.labelDy||0;
+      out.push('<text x="'+(q[0]+(right?13:-13))+'" y="'+(q[1]+4+dy)+'" text-anchor="'+(right?'start':'end')+'" font-size="'+(isBest?13:11.5)+'" font-weight="'+(isBest?800:600)+'" fill="'+(r.open?'#123D18':'#6b6f68')+'" font-family="Montserrat" paint-order="stroke" stroke="#EEF1E6" stroke-width="3">'+esc(r.p.name)+'</text>');
+    });
+    var eq=proj(ex.lat,ex.lon);
+    out.push('<text x="'+eq[0]+'" y="'+(eq[1]-11)+'" text-anchor="middle" font-size="11" font-weight="800" fill="#212121" font-family="Montserrat" paint-order="stroke" stroke="#EEF1E6" stroke-width="3">You: '+esc(ex.short)+'</text>');
+    svg.innerHTML=out.join('');
+  }
+
+  function renderList(rows,best){
+    var v=document.getElementById('verdict'),l=document.getElementById('list');
+    var brk=BREAKS.filter(function(b){return b.id===state.brk;})[0];
+    if(best){
+      var walkTxt=best.walk?best.walk+(best.walk===1?' minute':' minutes')+' on foot each way':'no walk at all';
+      v.innerHTML='<small>My pick for '+esc(DAYS[state.day])+', '+esc(brk.label)+'</small><strong>'+esc(best.p.name)+'</strong><p>'+esc(best.p.area)+', '+walkTxt+'. '+esc(best.p.line)+'</p>';
+    } else {
+      v.innerHTML='<small>'+esc(DAYS[state.day])+', '+esc(brk.label)+'</small><strong>Nothing fits that break</strong><p>Everything open is too far for '+esc(brk.label)+' from here. Take a longer break, or eat before you go in.</p>';
+    }
+    rows.sort(function(a,b){return (b.fits-a.fits)||(b.open-a.open)||(a.walk-b.walk);});
+    l.innerHTML=rows.map(function(r){
+      var shutTxt=r.hours?('opens '+fmt(r.hours[0])+', after the lunch slot'):('shut on '+esc(DAYS[state.day])+'s');
+      var tag=r.fits?'<span class="tag tag-fit">fits '+r.total+' min round trip</span>':(r.open?'<span class="tag tag-far">open, needs about '+r.total+' min</span>':'<span class="tag tag-shut">'+shutTxt+'</span>');
+      var hrs=r.hours?(fmt(r.hours[0])+(r.hours[1]==null?' onwards':' to '+fmt(r.hours[1]))):'closed';
+      return '<li class="ml-item'+(r.open?'':' is-shut')+'"><div class="min">'+(r.walk||'0')+'<em>min walk</em></div><div><b>'+esc(r.p.name)+'</b> <span class="area">'+esc(r.p.area)+' &middot; '+hrs+'</span><p>'+esc(r.p.line)+'</p>'+tag+'</div></li>';
+    }).join('');
+  }
+
+  function render(){
+    renderPanel();
+    var rows=evaluate(),best=pick(rows);
+    renderMap(rows,best);
+    renderList(rows,best);
+  }
+
+  document.querySelectorAll('.ml-tab').forEach(function(t){
+    t.addEventListener('click',function(){ currentStep=Number(t.getAttribute('data-step')); render(); });
+  });
+
+  Promise.all([fetch('places.json').then(function(r){return r.json();}),fetch('geo.json').then(function(r){return r.json();})]).then(function(res){
+    DATA=res[0]; GEO=res[1]; bbox=[52.5135,13.3840,52.5275,13.4133];
+    render();
+  });
+})();
+</script>
+<script src="../js/brand.js"></script>
+</body>
+</html>

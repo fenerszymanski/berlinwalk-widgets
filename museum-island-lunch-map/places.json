@@ -1,0 +1,436 @@
+{
+  "checked": "2026-10-15",
+  "note": "Hours from each venue's own page or the Staatliche Museen / Humboldt Forum pages, checked 15 October 2026. Days: 0 = Monday ... 6 = Sunday. close null = no fixed closing time published, open well past lunch.",
+  "exits": [
+    {
+      "id": "jsg",
+      "label": "Neues Museum / James-Simon-Galerie",
+      "short": "James-Simon-Galerie",
+      "lat": 52.51991,
+      "lon": 13.39701,
+      "smb": true
+    },
+    {
+      "id": "altes",
+      "label": "Altes Museum / Lustgarten",
+      "short": "Altes Museum",
+      "lat": 52.51946,
+      "lon": 13.39879,
+      "smb": true
+    },
+    {
+      "id": "alteng",
+      "label": "Alte Nationalgalerie",
+      "short": "Alte Nationalgalerie",
+      "lat": 52.52086,
+      "lon": 13.39827,
+      "smb": true
+    },
+    {
+      "id": "bode",
+      "label": "Bode-Museum (Monbijou Bridge)",
+      "short": "Bode-Museum",
+      "lat": 52.52234,
+      "lon": 13.39408,
+      "smb": true
+    },
+    {
+      "id": "humboldt",
+      "label": "Humboldt Forum",
+      "short": "Humboldt Forum",
+      "lat": 52.51703,
+      "lon": 13.40123,
+      "smb": false
+    }
+  ],
+  "places": [
+    {
+      "id": "museumcafe",
+      "name": "The café in your museum",
+      "area": "Inside the building",
+      "kind": "quick",
+      "eat": 20,
+      "hours": [
+        null,
+        [
+          10,
+          18
+        ],
+        [
+          10,
+          18
+        ],
+        [
+          10,
+          18
+        ],
+        [
+          10,
+          18
+        ],
+        [
+          10,
+          18
+        ],
+        [
+          10,
+          18
+        ]
+      ],
+      "line": "Every museum on the island has a small café. It keeps the museum's hours, so it is dark on Mondays like the galleries."
+    },
+    {
+      "id": "cu29",
+      "name": "Cu29",
+      "area": "James-Simon-Galerie terrace",
+      "kind": "sit",
+      "eat": 35,
+      "lat": 52.51991,
+      "lon": 13.39701,
+      "hours": [
+        null,
+        [
+          10,
+          18
+        ],
+        [
+          10,
+          18
+        ],
+        [
+          10,
+          18
+        ],
+        [
+          10,
+          18
+        ],
+        [
+          10,
+          18
+        ],
+        [
+          10,
+          18
+        ]
+      ],
+      "line": "Café and restaurant in the island's entrance building, with a terrace over the Kupfergraben. You can walk in without a museum ticket."
+    },
+    {
+      "id": "lebenswelten",
+      "name": "Lebenswelten Bistro",
+      "area": "Humboldt Forum, ground floor",
+      "kind": "quick",
+      "eat": 25,
+      "lat": 52.51722,
+      "lon": 13.4015,
+      "hours": [
+        [
+          10,
+          17
+        ],
+        [
+          10,
+          17
+        ],
+        [
+          10,
+          19
+        ],
+        [
+          10,
+          19
+        ],
+        [
+          10,
+          19
+        ],
+        [
+          10,
+          19
+        ],
+        [
+          10,
+          19
+        ]
+      ],
+      "line": "Vegetarian and vegan bistro between the Schlüter courtyard and the passage. Free to enter, and open on Mondays when the island museums are shut.",
+      "labelSide": "right",
+      "labelDy": -10
+    },
+    {
+      "id": "forumcafe",
+      "name": "Forum Café",
+      "area": "Humboldt Forum, first floor",
+      "kind": "quick",
+      "eat": 20,
+      "lat": 52.51712,
+      "lon": 13.401,
+      "hours": [
+        null,
+        null,
+        null,
+        [
+          12,
+          17
+        ],
+        [
+          12,
+          17
+        ],
+        [
+          12,
+          17
+        ],
+        [
+          12,
+          17
+        ]
+      ],
+      "line": "Coffee and cake on the first floor of the stair hall. Thursday to Sunday only.",
+      "labelSide": "left",
+      "labelDy": -2
+    },
+    {
+      "id": "baret",
+      "name": "Restaurant Baret",
+      "area": "Humboldt Forum roof terrace",
+      "kind": "sit",
+      "eat": 75,
+      "lat": 52.5169,
+      "lon": 13.4016,
+      "hours": [
+        [
+          11,
+          24
+        ],
+        null,
+        [
+          11,
+          24
+        ],
+        [
+          11,
+          24
+        ],
+        [
+          11,
+          24
+        ],
+        [
+          11,
+          24
+        ],
+        [
+          11,
+          24
+        ]
+      ],
+      "line": "Rooftop restaurant with a view over the centre of Berlin. The lift needs a Humboldt Forum ticket or a table booking, and it is shut on Tuesdays.",
+      "labelSide": "right",
+      "labelDy": 15
+    },
+    {
+      "id": "deponie",
+      "name": "Deponie Nr. 3",
+      "area": "Georgenstraße, S-Bahn arches",
+      "kind": "sit",
+      "eat": 50,
+      "lat": 52.52045,
+      "lon": 13.3925,
+      "hours": [
+        [
+          10,
+          null
+        ],
+        [
+          10,
+          null
+        ],
+        [
+          10,
+          null
+        ],
+        [
+          10,
+          null
+        ],
+        [
+          10,
+          null
+        ],
+        [
+          10,
+          null
+        ],
+        [
+          10,
+          null
+        ]
+      ],
+      "line": "Old Berlin pub food in a railway arch across the Kupfergraben. Bring a German debit card or cash: credit cards are not accepted."
+    },
+    {
+      "id": "georgbraeu",
+      "name": "Brauhaus Georgbräu",
+      "area": "Nikolaiviertel, Spreeufer",
+      "kind": "sit",
+      "eat": 55,
+      "lat": 52.51645,
+      "lon": 13.40543,
+      "hours": [
+        [
+          12,
+          null
+        ],
+        [
+          12,
+          null
+        ],
+        [
+          12,
+          null
+        ],
+        [
+          12,
+          null
+        ],
+        [
+          12,
+          null
+        ],
+        [
+          12,
+          null
+        ],
+        [
+          12,
+          null
+        ]
+      ],
+      "line": "House-brewed beer and Berlin classics on the Spree bank, opposite the Humboldt Forum. The riverside beer garden is the reason to go.",
+      "labelSide": "right",
+      "labelDy": 6
+    },
+    {
+      "id": "weihenstephaner",
+      "name": "Weihenstephaner",
+      "area": "Hackescher Markt",
+      "kind": "sit",
+      "eat": 55,
+      "lat": 52.52297,
+      "lon": 13.40171,
+      "hours": [
+        [
+          12,
+          23.5
+        ],
+        [
+          12,
+          23.5
+        ],
+        [
+          12,
+          23.5
+        ],
+        [
+          12,
+          23.5
+        ],
+        [
+          12,
+          23.5
+        ],
+        [
+          12,
+          23.5
+        ],
+        [
+          12,
+          23.5
+        ]
+      ],
+      "line": "Bavarian beer hall on Neue Promenade, with a cellar and a courtyard. Hot food until 23:00 every day."
+    },
+    {
+      "id": "lemke",
+      "name": "Das Lemke",
+      "area": "Hackescher Markt, S-Bahn arch 143",
+      "kind": "sit",
+      "eat": 55,
+      "lat": 52.52327,
+      "lon": 13.40466,
+      "hours": [
+        [
+          12,
+          23.5
+        ],
+        [
+          12,
+          23.5
+        ],
+        [
+          12,
+          23.5
+        ],
+        [
+          12,
+          23.5
+        ],
+        [
+          12,
+          23.5
+        ],
+        [
+          12,
+          23.5
+        ],
+        [
+          13,
+          22
+        ]
+      ],
+      "line": "Berlin brewery in the railway arches, German food and a quiet courtyard garden. Sunday it opens at 13:00."
+    },
+    {
+      "id": "vuong",
+      "name": "Monsieur Vuong",
+      "area": "Alte Schönhauser Straße",
+      "kind": "quick",
+      "eat": 35,
+      "lat": 52.52662,
+      "lon": 13.4079,
+      "hours": [
+        [
+          12,
+          22
+        ],
+        [
+          12,
+          22
+        ],
+        [
+          12,
+          22
+        ],
+        [
+          12,
+          22
+        ],
+        [
+          12,
+          22.5
+        ],
+        [
+          12,
+          22.5
+        ],
+        [
+          12,
+          22
+        ]
+      ],
+      "line": "Fast, bright Vietnamese noodle place past Hackescher Markt. The furthest stop on this map, so pair it with leaving the island."
+    }
+  ]
+}
