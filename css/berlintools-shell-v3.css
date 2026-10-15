@@ -42,9 +42,11 @@ html.bw-shell-v3 body #comp-mozn18up#comp-mozn18up #comp-mozn27df#comp-mozn27df 
 html.bw-shell-v3 body #comp-mozn18up#comp-mozn18up #comp-mozn27df#comp-mozn27df :is(div,section,figure,blockquote,ul,ol,li){background:none!important;background-image:none!important;border:0!important;box-shadow:none!important;border-radius:0!important}
 html.bw-shell-v3 body #comp-mozn18up#comp-mozn18up #comp-mozn27df#comp-mozn27df :is(p,li,p *,li *){font-family:var(--sa)!important;font-size:15.5px!important;line-height:1.6!important;color:var(--ik)!important;text-align:left!important}
 html.bw-shell-v3 body #comp-mozn18up#comp-mozn18up #comp-mozn27df#comp-mozn27df p{margin:14px 0 14px 34px!important;padding:0!important}
-html.bw-shell-v3 body #comp-mozn18up#comp-mozn18up #comp-mozn27df#comp-mozn27df :is(ul,ol){margin:14px 0 14px 34px!important;padding:0!important}
-html.bw-shell-v3 body #comp-mozn18up#comp-mozn18up #comp-mozn27df#comp-mozn27df li{list-style:none!important;position:relative!important;margin:0 0 6px!important;padding:0 0 0 18px!important}
-html.bw-shell-v3 body #comp-mozn18up#comp-mozn18up #comp-mozn27df#comp-mozn27df li::before{content:""!important;position:absolute!important;left:0!important;top:.62em!important;width:6px!important;height:6px!important;border-radius:50%!important;background:var(--gr)!important;background-image:none!important;border:0!important;box-shadow:none!important}
+/* Lists: another stylesheet makes notes lists a 2-column grid and Ricos adds margin-inline-start on each li; one column, aligned with the paragraphs. Display stays untouched so the accordion hide rules keep working. */
+html.bw-shell-v3 body #comp-mozn18up#comp-mozn18up #comp-mozn27df#comp-mozn27df :is(ul,ol){grid-template-columns:minmax(0,1fr)!important;column-count:1!important;column-gap:0!important;row-gap:0!important;gap:0!important;margin:4px 0 14px 34px!important;padding:0!important;width:auto!important}
+html.bw-shell-v3 body #comp-mozn18up#comp-mozn18up #comp-mozn27df#comp-mozn27df li{list-style:none!important;position:relative!important;margin:0 0 8px!important;margin-inline-start:0!important;padding:0 0 0 16px!important;width:auto!important}
+html.bw-shell-v3 body #comp-mozn18up#comp-mozn18up #comp-mozn27df#comp-mozn27df li p{margin:0!important;padding:0!important}
+html.bw-shell-v3 body #comp-mozn18up#comp-mozn18up #comp-mozn27df#comp-mozn27df li::before{content:""!important;position:absolute!important;left:0!important;top:calc(.8em - 3px)!important;width:6px!important;height:6px!important;border-radius:50%!important;background:var(--gr)!important;background-image:none!important;border:0!important;box-shadow:none!important}
 html.bw-shell-v3 body #comp-mozn18up#comp-mozn18up #comp-mozn27df#comp-mozn27df li::after{content:none!important}
 html.bw-shell-v3 #comp-moznh5yl#comp-moznh5yl{display:block!important;background:var(--wh)!important;height:auto!important;min-height:0!important;padding:0!important;margin:16px 12px 0!important;border-radius:8px!important;box-shadow:var(--sh)!important;overflow:hidden!important;width:auto!important;float:none!important}
 html.bw-shell-v3 #comp-moznh5yl#comp-moznh5yl#comp-moznh5yl>[class*="-container"]{width:100%!important;max-width:none!important;margin:0!important;padding:0!important;height:auto!important}
@@ -83,7 +85,8 @@ html.bw-shell-v3 #comp-mozc935g3#comp-mozc935g3#comp-mozc935g3>[class*="-contain
 html.bw-shell-v3 body #comp-mozc935g3#comp-mozc935g3 #comp-mozch2i3#comp-mozch2i3 h1{font-size:50px!important;line-height:1.02!important;letter-spacing:-.025em!important}
 html.bw-shell-v3 body #comp-mozc935g3#comp-mozc935g3 #comp-mozck6is#comp-mozck6is,html.bw-shell-v3 body #comp-mozc935g3#comp-mozc935g3 #comp-mozck6is#comp-mozck6is :is(p,span){font-size:18px!important}
 html.bw-shell-v3 #comp-mozco5et#comp-mozco5et{min-height:674px!important}
-html.bw-shell-v3 #comp-mozmt2at#comp-mozmt2at{background:var(--wh)!important;border:1px solid var(--ha)!important;border-bottom:0!important;border-radius:8px 8px 0 0!important;padding:0!important}
+html.bw-shell-v3 #comp-mozmt2at#comp-mozmt2at{background:var(--wh)!important;border:1px solid var(--ha)!important;border-bottom:0!important;border-radius:8px 8px 0 0!important;padding:20px 0 0!important}
+html.bw-shell-v3 #comp-mozmt2at#comp-mozmt2at::before{margin:0 20px 14px!important}
 html.bw-shell-v3 #comp-mozmt2at#comp-mozmt2at#comp-mozmt2at>[class*="-container"]{padding:0 20px 14px!important}
 html.bw-shell-v3 #comp-mozn18up#comp-mozn18up{background:var(--wh)!important;border:1px solid var(--ha)!important;border-top:0!important;border-radius:0 0 8px 8px!important;padding:0!important}
 html.bw-shell-v3 #comp-mozn18up#comp-mozn18up#comp-mozn18up>[class*="-container"]{padding:0 20px 6px!important}
