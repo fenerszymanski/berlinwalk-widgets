@@ -1,12 +1,12 @@
-/* Shell V3 pilot for /tools/berlin-safety (round 2). Adds the root class (also set by the head embed, idempotent),
-   one reserved icon per related card, and the notes accordion state. Layout and first paint come from CSS: the
+/* BerlinTools Shell V3 (layout A) for /tools/<slug>. The head embed decides which slugs get V3: it puts html.bw-shell-v3
+   on allow-listed slugs and loads this file only then, so this script runs only when that class is already there.
+   It adds one reserved icon per related card and the notes accordion state. Layout and first paint come from CSS: the
    accordion's first-paint state and the empty sections are CSS rules, so this script only sets attributes that CSS
    already matches (no layout change). It writes no text nodes and fetches nothing (fonts are in <head>). */
 (function () {
   'use strict';
-  if (!/^\/tools\/berlin-safety\/?$/i.test(location.pathname)) return;
   var root = document.documentElement;
-  root.classList.add('bw-shell-v3');
+  if (!/^\/tools\/[^\/]+\/?$/i.test(location.pathname) || !root.classList.contains('bw-shell-v3')) return;
 
   var ICON = 'https://fenerszymanski.github.io/berlinwalk-widgets/tools-hub/icons-clean/';
   var CARDS = ['comp-mozp2aft', 'comp-mozp3f25'];
@@ -25,6 +25,8 @@
       wrap.setAttribute('aria-hidden', 'true');
       var img = document.createElement('img');
       img.width = 44; img.height = 44; img.alt = ''; img.loading = 'lazy'; img.decoding = 'async';
+      // A slug without a clean icon keeps the empty cream tile instead of a broken image.
+      img.onerror = function () { img.remove(); };
       img.src = ICON + decodeURIComponent(m[1]).toLowerCase() + '.webp';
       wrap.appendChild(img);
       card.insertBefore(wrap, card.firstChild);
