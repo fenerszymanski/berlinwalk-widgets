@@ -1,9 +1,26 @@
 {
-  "updatedAt": "2026-10-15T03:24:24.342Z",
+  "updatedAt": "2026-10-15T08:04:32.798Z",
   "source": "Wix Blog API",
-  "totalPosts": 431,
+  "totalPosts": 432,
   "bookingUrl": "https://www.walkofberlin.com/book-berlin-walking-tour/berlin-then-and-now",
   "allPosts": [
+    {
+      "title": "Where to Eat Near Museum Island: Lunch by Exit and Day",
+      "slug": "where-to-eat-near-museum-island",
+      "path": "/post/where-to-eat-near-museum-island",
+      "url": "https://www.berlinwalk.com/post/where-to-eat-near-museum-island",
+      "excerpt": "Museum Island has five museums and almost no restaurants. Every museum café shuts on Mondays, the Humboldt Forum rooftop shuts on Tuesdays, and Hackescher Markt is closer to the Bode-Museum than the Humboldt Forum is. Here is where to eat by the door you leave, the day and the time you have.",
+      "category": "Tourist Tips",
+      "categorySlug": "tourist-tips",
+      "topic": "route-stories",
+      "topicLabel": "Tour Route Stories",
+      "readTime": "6 min read",
+      "publishedDate": "2026-10-15T08:03:00.928Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_67bb6978155344a7b874c7154919dc0e~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-bode-museum-blue-hour.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_67bb6978155344a7b874c7154919dc0e~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-bode-museum-blue-hour.jpg",
+      "alt": "The domed Bode-Museum at the tip of Museum Island at blue hour, lit up and reflected in the Spree, with the Monbijou Bridge and the TV Tower behind it",
+      "relatedToolSlug": "museum-island-lunch-map"
+    },
     {
       "title": "Swimming Lessons for Kids in Berlin: When Each Door Opens",
       "slug": "swimming-lessons-for-kids-in-berlin",
