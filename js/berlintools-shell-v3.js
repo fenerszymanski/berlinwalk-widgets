@@ -71,11 +71,12 @@
     h.setAttribute('aria-expanded', h.getAttribute('aria-expanded') === 'true' ? 'false' : 'true');
     if (v) sync(v);
   }
+  var listening = false;
   function listen() {
-    // Delegated on the stable page section, so a Wix re-render of the viewer keeps working. Attached once.
-    var host = document.querySelector('main[id^="PAGE_SECTIONS"]') || document.body;
-    if (host.hasAttribute('data-bw-v3-listen')) return;
-    host.setAttribute('data-bw-v3-listen', '');
+    // Delegated on document, which Wix never replaces (it swaps the whole <main> after load). Attached once.
+    if (listening) return;
+    listening = true;
+    var host = document;
     host.addEventListener('click', function (e) {
       var h = e.target.closest && e.target.closest('#comp-mozn27df :is(h2, h3)');
       if (h) toggle(h);
@@ -95,19 +96,27 @@
     listen();
   }
   // Wix replaces the whole <main> about 4 s after load (measured 15 Oct 2026), which drops the heading marks, the icons
-  // and the delegated click listener. Apply the idempotent steps when the DOM is ready and at load, and re-apply (at most
-  // once per frame) when nodes are added anywhere in <body>, for 15 s after load; then the observer stops. sync() writes
+  // and the delegated click listener. Apply the idempotent steps when the DOM is ready and at load, and re-apply (coalesced,
+  // 40 ms) when nodes are added anywhere in <body>, for 15 s after load; then the observer stops. sync() writes
   // only real changes and attribute writes are not observed, so it cannot feed itself. Until 15 Oct 2026 this polled every
   // 250 ms for 15 s, rewriting the state of every notes paragraph each time; Yusuf saw the right-rail notes blink.
   var queued = false;
-  function schedule() { if (queued) return; queued = true; requestAnimationFrame(function () { queued = false; apply(); }); }
+  // setTimeout, not requestAnimationFrame: rAF does not run in a background tab, timers do (throttled).
+  function schedule() { if (queued) return; queued = true; setTimeout(function () { queued = false; apply(); }, 40); }
   function observe() {
     if (typeof MutationObserver !== 'function' || !document.body) return;
     var mo = new MutationObserver(schedule);
     mo.observe(document.body, { childList: true, subtree: true });
-    var stop = function () { setTimeout(function () { mo.disconnect(); }, 15000); };
-    if (document.readyState === 'complete') stop();
-    else window.addEventListener('load', stop, { once: true });
+    // Stop 15 s after the page is both loaded and visible (a background tab hydrates late).
+    var armed = false;
+    function arm() {
+      if (armed || document.readyState !== 'complete' || document.visibilityState === 'hidden') return;
+      armed = true;
+      setTimeout(function () { mo.disconnect(); document.removeEventListener('visibilitychange', arm); }, 15000);
+    }
+    window.addEventListener('load', arm, { once: true });
+    document.addEventListener('visibilitychange', arm);
+    arm();
   }
   function ready() { apply(); observe(); }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', ready, { once: true });
