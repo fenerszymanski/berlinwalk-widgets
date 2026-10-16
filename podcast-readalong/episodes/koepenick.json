@@ -1,0 +1,2875 @@
+{
+  "id": "E02-hauptmann-von-koepenick",
+  "slug": "koepenick",
+  "title": "The Captain of Köpenick",
+  "episodeUri": "",
+  "audioUrl": "https://anchor.fm/s/1186f4668/podcast/play/127342658/https%3A%2F%2Fd3ctxlq1ktw2nl.cloudfront.net%2Fstaging%2F2026-9-12%2F9a5743ee-9769-b5de-8258-929e698900a7.mp3",
+  "audioBytes": 21008055,
+  "cover": "img/cover-360.jpg",
+  "show": {
+    "title": "Where It Happened",
+    "artist": "Walk of Berlin",
+    "spotifyUrl": "https://open.spotify.com/show/4hd8BvMRs7dwdogXr3mzzG",
+    "rssUrl": "https://anchor.fm/s/1186f4668/podcast/rss"
+  },
+  "duration": 1294.45,
+  "chapters": [
+    {
+      "title": "The man with no papers",
+      "t": 0
+    },
+    {
+      "title": "The captain's day",
+      "t": 263
+    },
+    {
+      "title": "Ten days of freedom",
+      "t": 470
+    },
+    {
+      "title": "The pardon and the fame",
+      "t": 679
+    },
+    {
+      "title": "The afterlife",
+      "t": 870
+    }
+  ],
+  "phrases": [
+    {
+      "t0": 0.3,
+      "t1": 3.26,
+      "text": "At four in the afternoon on 16 October 1906,",
+      "kind": "story",
+      "para": 0,
+      "part": "p01"
+    },
+    {
+      "t0": 3.34,
+      "t1": 7.82,
+      "text": "the town of Köpenick was already in an uproar.",
+      "kind": "story",
+      "para": 0,
+      "part": "p01"
+    },
+    {
+      "t0": 8.3,
+      "t1": 12.22,
+      "text": "An extra sheet, the Cöpenicker Dampfboot Extrablatt,",
+      "kind": "story",
+      "para": 0,
+      "part": "p01"
+    },
+    {
+      "t0": 12.3,
+      "t1": 15.18,
+      "text": "put it in one line: since four o'clock,",
+      "kind": "story",
+      "para": 0,
+      "part": "p01"
+    },
+    {
+      "t0": 15.26,
+      "t1": 18.3,
+      "text": "the town had been in the greatest agitation.",
+      "kind": "story",
+      "para": 0,
+      "part": "p01"
+    },
+    {
+      "t0": 18.62,
+      "t1": 23.26,
+      "text": "The Berliner Zeitung quoted that line in September 2026,",
+      "kind": "story",
+      "para": 0,
+      "part": "p01"
+    },
+    {
+      "t0": 23.3,
+      "t1": 25.58,
+      "text": "and it reported that hundreds of people had",
+      "kind": "story",
+      "para": 0,
+      "part": "p01"
+    },
+    {
+      "t0": 25.66,
+      "t1": 27.5,
+      "text": "gathered in front of the town hall.",
+      "kind": "story",
+      "para": 0,
+      "part": "p01"
+    },
+    {
+      "t0": 28.06,
+      "t1": 30.78,
+      "text": "Inside, the mayor was under arrest.",
+      "kind": "story",
+      "para": 0,
+      "part": "p01"
+    },
+    {
+      "t0": 31.42,
+      "t1": 34.14,
+      "text": "The man giving the orders was a shoemaker with",
+      "kind": "story",
+      "para": 0,
+      "part": "p01"
+    },
+    {
+      "t0": 34.22,
+      "t1": 36.62,
+      "text": "no right to give any orders at all,",
+      "kind": "story",
+      "para": 0,
+      "part": "p01"
+    },
+    {
+      "t0": 36.7,
+      "t1": 39.02,
+      "text": "and he was wearing a captain's uniform.",
+      "kind": "story",
+      "para": 0,
+      "part": "p01"
+    },
+    {
+      "t0": 39.66,
+      "t1": 41.74,
+      "text": "Picture the crowd outside the building.",
+      "kind": "story",
+      "para": 0,
+      "part": "p01"
+    },
+    {
+      "t0": 42.22,
+      "t1": 46.14,
+      "text": "To understand how a shoemaker came to command a town hall,",
+      "kind": "story",
+      "para": 0,
+      "part": "p01"
+    },
+    {
+      "t0": 46.18,
+      "t1": 48.46,
+      "text": "you have to go back to a prison cell,",
+      "kind": "story",
+      "para": 0,
+      "part": "p01"
+    },
+    {
+      "t0": 48.54,
+      "t1": 50.38,
+      "text": "long before that afternoon.",
+      "kind": "story",
+      "para": 0,
+      "part": "p01"
+    },
+    {
+      "t0": 50.95,
+      "t1": 53.03,
+      "text": "The man was Wilhelm Voigt.",
+      "kind": "story",
+      "para": 1,
+      "part": "p02"
+    },
+    {
+      "t0": 53.51,
+      "t1": 57.83,
+      "text": "He was born on 13 February 1849 in Tilsit,",
+      "kind": "story",
+      "para": 1,
+      "part": "p02"
+    },
+    {
+      "t0": 57.87,
+      "t1": 60.63,
+      "text": "in East Prussia, the son of a shoemaker,",
+      "kind": "story",
+      "para": 1,
+      "part": "p02"
+    },
+    {
+      "t0": 60.75,
+      "t1": 65.19,
+      "text": "and he learned the trade young. He also learned prison young.",
+      "kind": "story",
+      "para": 1,
+      "part": "p02"
+    },
+    {
+      "t0": 65.43,
+      "t1": 68.71,
+      "text": "At fourteen he got his first short jail term,",
+      "kind": "story",
+      "para": 1,
+      "part": "p02"
+    },
+    {
+      "t0": 68.79,
+      "t1": 71.83,
+      "text": "and the decades that followed brought more convictions,",
+      "kind": "story",
+      "para": 1,
+      "part": "p02"
+    },
+    {
+      "t0": 71.91,
+      "t1": 73.75,
+      "text": "for theft and for forgery.",
+      "kind": "story",
+      "para": 1,
+      "part": "p02"
+    },
+    {
+      "t0": 74.39,
+      "t1": 77.99,
+      "text": "The heaviest sentence followed an attempt in 1890,",
+      "kind": "story",
+      "para": 1,
+      "part": "p02"
+    },
+    {
+      "t0": 78.07,
+      "t1": 80.23,
+      "text": "when he and a former cellmate tried to",
+      "kind": "story",
+      "para": 1,
+      "part": "p02"
+    },
+    {
+      "t0": 80.35,
+      "t1": 83.27,
+      "text": "break into the court cash office at Wongrowitz,",
+      "kind": "story",
+      "para": 1,
+      "part": "p02"
+    },
+    {
+      "t0": 83.35,
+      "t1": 85.11,
+      "text": "a town in what is now Poland.",
+      "kind": "story",
+      "para": 1,
+      "part": "p02"
+    },
+    {
+      "t0": 85.67,
+      "t1": 90.15,
+      "text": "The court in Gnesen handed him fifteen more years in a penitentiary,",
+      "kind": "story",
+      "para": 1,
+      "part": "p02"
+    },
+    {
+      "t0": 90.19,
+      "t1": 95.99,
+      "text": "a Zuchthaus, and the Deutsche Biographie dates that sentence to 1891.",
+      "kind": "story",
+      "para": 1,
+      "part": "p02"
+    },
+    {
+      "t0": 96.07,
+      "t1": 98.87,
+      "text": "He was in his early forties when it began.",
+      "kind": "story",
+      "para": 1,
+      "part": "p02"
+    },
+    {
+      "t0": 98.91,
+      "t1": 102.87,
+      "text": "He would not walk free again until early 1906,",
+      "kind": "story",
+      "para": 1,
+      "part": "p02"
+    },
+    {
+      "t0": 102.91,
+      "t1": 105.35,
+      "text": "and when he did, he had a long record,",
+      "kind": "story",
+      "para": 1,
+      "part": "p02"
+    },
+    {
+      "t0": 105.43,
+      "t1": 108.15,
+      "text": "a trade, and almost nothing else.",
+      "kind": "story",
+      "para": 1,
+      "part": "p02"
+    },
+    {
+      "t0": 108.71,
+      "t1": 111.35,
+      "text": "Early in 1906 he walked out of the",
+      "kind": "story",
+      "para": 2,
+      "part": "p03"
+    },
+    {
+      "t0": 111.43,
+      "t1": 113.99,
+      "text": "penitentiary and tried to start again.",
+      "kind": "story",
+      "para": 2,
+      "part": "p03"
+    },
+    {
+      "t0": 114.47,
+      "t1": 117.27,
+      "text": "He found work as a shoemaker in Wismar,",
+      "kind": "story",
+      "para": 2,
+      "part": "p03"
+    },
+    {
+      "t0": 117.31,
+      "t1": 119.47,
+      "text": "a Baltic port in Mecklenburg.",
+      "kind": "story",
+      "para": 2,
+      "part": "p03"
+    },
+    {
+      "t0": 119.75,
+      "t1": 122.75,
+      "text": "Within a few weeks, the Deutsche Biographie says,",
+      "kind": "story",
+      "para": 2,
+      "part": "p03"
+    },
+    {
+      "t0": 122.95,
+      "t1": 127.51,
+      "text": "the police expelled him from Mecklenburg. He went on to Berlin,",
+      "kind": "story",
+      "para": 2,
+      "part": "p03"
+    },
+    {
+      "t0": 127.59,
+      "t1": 130.35,
+      "text": "where the authorities were not going to make it easy.",
+      "kind": "story",
+      "para": 2,
+      "part": "p03"
+    },
+    {
+      "t0": 130.63,
+      "t1": 133.27,
+      "text": "A legal history article on the case cites a",
+      "kind": "story",
+      "para": 2,
+      "part": "p03"
+    },
+    {
+      "t0": 133.35,
+      "t1": 137.79,
+      "text": "freedom-of-movement law of 1867 as the relevant law.",
+      "kind": "story",
+      "para": 2,
+      "part": "p03"
+    },
+    {
+      "t0": 138.07,
+      "t1": 140.47,
+      "text": "It says he was repeatedly refused the",
+      "kind": "story",
+      "para": 2,
+      "part": "p03"
+    },
+    {
+      "t0": 140.55,
+      "t1": 143.35,
+      "text": "right to settle and take regular work,",
+      "kind": "story",
+      "para": 2,
+      "part": "p03"
+    },
+    {
+      "t0": 143.39,
+      "t1": 147.51,
+      "text": "and that he was finally expelled from Berlin and the surrounding towns.",
+      "kind": "story",
+      "para": 2,
+      "part": "p03"
+    },
+    {
+      "t0": 148.07,
+      "t1": 153.11,
+      "text": "German Wikipedia places him in Rixdorf and later in Friedrichshain,",
+      "kind": "story",
+      "para": 2,
+      "part": "p03"
+    },
+    {
+      "t0": 153.19,
+      "t1": 158.23,
+      "text": "living there without registering, which made every day he stayed unlawful.",
+      "kind": "story",
+      "para": 2,
+      "part": "p03"
+    },
+    {
+      "t0": 158.78,
+      "t1": 160.892,
+      "text": "Here is the trap, in plain terms.",
+      "kind": "story",
+      "para": 3,
+      "part": "p04"
+    },
+    {
+      "t0": 160.988,
+      "t1": 164.94,
+      "text": "Without a residence permit he could not take a regular job.",
+      "kind": "story",
+      "para": 3,
+      "part": "p04"
+    },
+    {
+      "t0": 165.073,
+      "t1": 168.58,
+      "text": "Without papers he could not get the one document",
+      "kind": "story",
+      "para": 3,
+      "part": "p04"
+    },
+    {
+      "t0": 168.65,
+      "t1": 171.58,
+      "text": "that would let him start again, a passport.",
+      "kind": "story",
+      "para": 3,
+      "part": "p04"
+    },
+    {
+      "t0": 171.66,
+      "t1": 177.02,
+      "text": "German Wikipedia notes that passports were issued by a district office in",
+      "kind": "story",
+      "para": 3,
+      "part": "p04"
+    },
+    {
+      "t0": 177.1,
+      "t1": 180.22,
+      "text": "Berlin, not by the town hall in Köpenick.",
+      "kind": "story",
+      "para": 3,
+      "part": "p04"
+    },
+    {
+      "t0": 180.46,
+      "t1": 183.82,
+      "text": "It also reports that Voigt claimed he had meant only to keep",
+      "kind": "story",
+      "para": 3,
+      "part": "p04"
+    },
+    {
+      "t0": 183.86,
+      "t1": 187.02,
+      "text": "the money and had really wanted a foreign passport,",
+      "kind": "story",
+      "para": 3,
+      "part": "p04"
+    },
+    {
+      "t0": 187.1,
+      "t1": 190.7,
+      "text": "and that the court called that claim entirely implausible.",
+      "kind": "story",
+      "para": 3,
+      "part": "p04"
+    },
+    {
+      "t0": 191.34,
+      "t1": 194.82,
+      "text": "Historians have argued about what drove him ever since.",
+      "kind": "story",
+      "para": 3,
+      "part": "p04"
+    },
+    {
+      "t0": 195.02,
+      "t1": 199.26,
+      "text": "A legal history article doubted that hardship was the whole motive,",
+      "kind": "story",
+      "para": 3,
+      "part": "p04"
+    },
+    {
+      "t0": 199.34,
+      "t1": 203.82,
+      "text": "and pointed to the town's cash and municipal bonds. Either way,",
+      "kind": "story",
+      "para": 3,
+      "part": "p04"
+    },
+    {
+      "t0": 203.9,
+      "t1": 207.82,
+      "text": "the man who walked into Köpenick that October had no papers,",
+      "kind": "story",
+      "para": 3,
+      "part": "p04"
+    },
+    {
+      "t0": 207.9,
+      "t1": 211.9,
+      "text": "no work and no legal address. He was free,",
+      "kind": "story",
+      "para": 3,
+      "part": "p04"
+    },
+    {
+      "t0": 212.02,
+      "t1": 215.82,
+      "text": "but only in the narrow sense that no cell was holding him.",
+      "kind": "story",
+      "para": 3,
+      "part": "p04"
+    },
+    {
+      "t0": 216.38,
+      "t1": 221.14,
+      "text": "On 8 October 1906 he began to build the disguise.",
+      "kind": "story",
+      "para": 4,
+      "part": "p05"
+    },
+    {
+      "t0": 221.42,
+      "t1": 225.66,
+      "text": "The Deutsche Biographie dates his first purchases to that day:",
+      "kind": "story",
+      "para": 4,
+      "part": "p05"
+    },
+    {
+      "t0": 225.74,
+      "t1": 229.34,
+      "text": "pieces of a captain's uniform, bought from dealers.",
+      "kind": "story",
+      "para": 4,
+      "part": "p05"
+    },
+    {
+      "t0": 229.38,
+      "t1": 231.82,
+      "text": "The Berlin museum exhibition says one of the",
+      "kind": "story",
+      "para": 4,
+      "part": "p05"
+    },
+    {
+      "t0": 231.94,
+      "t1": 235.02,
+      "text": "dealers sold secondhand military clothing.",
+      "kind": "story",
+      "para": 4,
+      "part": "p05"
+    },
+    {
+      "t0": 235.1,
+      "t1": 239.9,
+      "text": "The coat that came together was pieced together from parts, not tailored.",
+      "kind": "story",
+      "para": 4,
+      "part": "p05"
+    },
+    {
+      "t0": 239.98,
+      "t1": 243.18,
+      "text": "He also changed his face. The beard went,",
+      "kind": "story",
+      "para": 4,
+      "part": "p05"
+    },
+    {
+      "t0": 243.22,
+      "t1": 247.66,
+      "text": "and a white moustache took its place, according to the Deutsche Biographie.",
+      "kind": "story",
+      "para": 4,
+      "part": "p05"
+    },
+    {
+      "t0": 247.74,
+      "t1": 250.38,
+      "text": "A coat and a moustache do not make a captain on",
+      "kind": "story",
+      "para": 4,
+      "part": "p05"
+    },
+    {
+      "t0": 250.46,
+      "t1": 254.22,
+      "text": "their own, but they are enough to earn a second look.",
+      "kind": "story",
+      "para": 4,
+      "part": "p05"
+    },
+    {
+      "t0": 254.3,
+      "t1": 256.78,
+      "text": "What he still lacked was men.",
+      "kind": "story",
+      "para": 4,
+      "part": "p05"
+    },
+    {
+      "t0": 256.82,
+      "t1": 260.46,
+      "text": "A captain without soldiers is only a man in a costume,",
+      "kind": "story",
+      "para": 4,
+      "part": "p05"
+    },
+    {
+      "t0": 260.62,
+      "t1": 262.78,
+      "text": "so he set about finding some.",
+      "kind": "story",
+      "para": 4,
+      "part": "p05"
+    },
+    {
+      "t0": 263.35,
+      "t1": 265.99,
+      "text": "On 16 October, at midday,",
+      "kind": "story",
+      "para": 5,
+      "part": "p06"
+    },
+    {
+      "t0": 266.03,
+      "t1": 268.79,
+      "text": "he was near the military bath at Plötzensee,",
+      "kind": "story",
+      "para": 5,
+      "part": "p06"
+    },
+    {
+      "t0": 268.87,
+      "t1": 272.71,
+      "text": "where a squad of guard fusiliers was changing its guard.",
+      "kind": "story",
+      "para": 5,
+      "part": "p06"
+    },
+    {
+      "t0": 272.79,
+      "t1": 275.99,
+      "text": "German Wikipedia says he stopped the patrol,",
+      "kind": "story",
+      "para": 5,
+      "part": "p06"
+    },
+    {
+      "t0": 276.19,
+      "t1": 278.79,
+      "text": "placed ten or eleven men under his command,",
+      "kind": "story",
+      "para": 5,
+      "part": "p06"
+    },
+    {
+      "t0": 278.87,
+      "t1": 282.31,
+      "text": "and had a second group called in from a shooting range.",
+      "kind": "story",
+      "para": 5,
+      "part": "p06"
+    },
+    {
+      "t0": 282.39,
+      "t1": 285.51,
+      "text": "He told the men he was acting on the highest order,",
+      "kind": "story",
+      "para": 5,
+      "part": "p06"
+    },
+    {
+      "t0": 285.63,
+      "t1": 290.47,
+      "text": "and German Wikipedia says the order he cited did not exist.",
+      "kind": "story",
+      "para": 5,
+      "part": "p06"
+    },
+    {
+      "t0": 290.55,
+      "t1": 292.11,
+      "text": "The men followed him.",
+      "kind": "story",
+      "para": 5,
+      "part": "p06"
+    },
+    {
+      "t0": 292.55,
+      "t1": 297.67,
+      "text": "A local extra sheet quoted by the Berliner Zeitung in 2026 counted",
+      "kind": "story",
+      "para": 5,
+      "part": "p06"
+    },
+    {
+      "t0": 297.87,
+      "t1": 301.19,
+      "text": "twenty soldiers in the group that reached Köpenick station,",
+      "kind": "story",
+      "para": 5,
+      "part": "p06"
+    },
+    {
+      "t0": 301.27,
+      "t1": 303.67,
+      "text": "so the sources do not agree on the number.",
+      "kind": "story",
+      "para": 5,
+      "part": "p06"
+    },
+    {
+      "t0": 304.39,
+      "t1": 306.47,
+      "text": "What they agree on is that the men followed",
+      "kind": "story",
+      "para": 5,
+      "part": "p06"
+    },
+    {
+      "t0": 306.55,
+      "t1": 309.51,
+      "text": "a captain who had no authority at all.",
+      "kind": "story",
+      "para": 5,
+      "part": "p06"
+    },
+    {
+      "t0": 310.06,
+      "t1": 313.5,
+      "text": "They boarded a suburban train. Once in Köpenick,",
+      "kind": "story",
+      "para": 6,
+      "part": "p07"
+    },
+    {
+      "t0": 313.58,
+      "t1": 315.98,
+      "text": "he gave each soldier a mark and had them",
+      "kind": "story",
+      "para": 6,
+      "part": "p07"
+    },
+    {
+      "t0": 316.06,
+      "t1": 319.9,
+      "text": "lunch at the station. German Wikipedia reports that,",
+      "kind": "story",
+      "para": 6,
+      "part": "p07"
+    },
+    {
+      "t0": 319.98,
+      "t1": 323.98,
+      "text": "and a second local account agrees on the lunch and the mark.",
+      "kind": "story",
+      "para": 6,
+      "part": "p07"
+    },
+    {
+      "t0": 324.54,
+      "t1": 328.86,
+      "text": "Köpenick station is still there, and it is still a working stop.",
+      "kind": "story",
+      "para": 6,
+      "part": "p07"
+    },
+    {
+      "t0": 329.34,
+      "t1": 333.5,
+      "text": "The S3 runs through it on the line between Erkner and Spandau,",
+      "kind": "story",
+      "para": 6,
+      "part": "p07"
+    },
+    {
+      "t0": 333.54,
+      "t1": 337.18,
+      "text": "and the station fronts Bahnhofstraße and Elcknerplatz.",
+      "kind": "story",
+      "para": 6,
+      "part": "p07"
+    },
+    {
+      "t0": 337.82,
+      "t1": 343.1,
+      "text": "It opened on 23 October 1842, and its facilities were rebuilt",
+      "kind": "story",
+      "para": 6,
+      "part": "p07"
+    },
+    {
+      "t0": 343.18,
+      "t1": 347.5,
+      "text": "between 1899 and 1902 for the increasing traffic.",
+      "kind": "story",
+      "para": 6,
+      "part": "p07"
+    },
+    {
+      "t0": 348.22,
+      "t1": 352.22,
+      "text": "Since March 2023 it has been in a long rebuild,",
+      "kind": "story",
+      "para": 6,
+      "part": "p07"
+    },
+    {
+      "t0": 352.3,
+      "t1": 357.42,
+      "text": "expected to run into 2027, so check the access before you go.",
+      "kind": "story",
+      "para": 6,
+      "part": "p07"
+    },
+    {
+      "t0": 357.96,
+      "t1": 361.48,
+      "text": "From the station the group went on by train and on foot",
+      "kind": "story",
+      "para": 7,
+      "part": "p08"
+    },
+    {
+      "t0": 361.56,
+      "t1": 364.24,
+      "text": "to the town hall, and sealed it off.",
+      "kind": "story",
+      "para": 7,
+      "part": "p08"
+    },
+    {
+      "t0": 364.6,
+      "t1": 370.2,
+      "text": "German Wikipedia names two officials the captain had arrested: Georg Langerhans,",
+      "kind": "story",
+      "para": 7,
+      "part": "p08"
+    },
+    {
+      "t0": 370.24,
+      "t1": 374.44,
+      "text": "the mayor, and Rosenkranz, a senior city clerk.",
+      "kind": "story",
+      "para": 7,
+      "part": "p08"
+    },
+    {
+      "t0": 374.76,
+      "t1": 377.4,
+      "text": "A legal history article also says he sent",
+      "kind": "story",
+      "para": 7,
+      "part": "p08"
+    },
+    {
+      "t0": 377.44,
+      "t1": 379.88,
+      "text": "the local police chief home to bathe.",
+      "kind": "story",
+      "para": 7,
+      "part": "p08"
+    },
+    {
+      "t0": 380.52,
+      "t1": 384.28,
+      "text": "That detail makes the afternoon sound like a farce, and it is",
+      "kind": "story",
+      "para": 7,
+      "part": "p08"
+    },
+    {
+      "t0": 384.32,
+      "t1": 387.8,
+      "text": "one of the few small details the sources give at all.",
+      "kind": "story",
+      "para": 7,
+      "part": "p08"
+    },
+    {
+      "t0": 388.12,
+      "t1": 391.24,
+      "text": "The sources give few clock times for the afternoon,",
+      "kind": "story",
+      "para": 7,
+      "part": "p08"
+    },
+    {
+      "t0": 391.32,
+      "t1": 394.76,
+      "text": "so the day has to be told in stages, by place.",
+      "kind": "story",
+      "para": 7,
+      "part": "p08"
+    },
+    {
+      "t0": 395.24,
+      "t1": 397.72,
+      "text": "The first stage is the building itself,",
+      "kind": "story",
+      "para": 7,
+      "part": "p08"
+    },
+    {
+      "t0": 397.76,
+      "t1": 401.4,
+      "text": "and the arrests that made the captain's control of it complete.",
+      "kind": "story",
+      "para": 7,
+      "part": "p08"
+    },
+    {
+      "t0": 401.95,
+      "t1": 403.47,
+      "text": "Then came the money.",
+      "kind": "story",
+      "para": 8,
+      "part": "p09"
+    },
+    {
+      "t0": 404.03,
+      "t1": 406.19,
+      "text": "The plaque on the wall of the town hall,",
+      "kind": "story",
+      "para": 8,
+      "part": "p09"
+    },
+    {
+      "t0": 406.23,
+      "t1": 408.91,
+      "text": "to the right of the entrance, names the target.",
+      "kind": "story",
+      "para": 8,
+      "part": "p09"
+    },
+    {
+      "t0": 409.39,
+      "t1": 414.95,
+      "text": "In translation it reads: on the afternoon of 16 October 1906, the",
+      "kind": "story",
+      "para": 8,
+      "part": "p09"
+    },
+    {
+      "t0": 414.99,
+      "t1": 420.63,
+      "text": "shoemaker Wilhelm Voigt seized the town treasury as the Hauptmann von Köpenick.",
+      "kind": "story",
+      "para": 8,
+      "part": "p09"
+    },
+    {
+      "t0": 420.99,
+      "t1": 423.63,
+      "text": "The cash was handed over against a receipt,",
+      "kind": "story",
+      "para": 8,
+      "part": "p09"
+    },
+    {
+      "t0": 423.75,
+      "t1": 428.19,
+      "text": "and German Wikipedia says the receipt was signed with an invented name,",
+      "kind": "story",
+      "para": 8,
+      "part": "p09"
+    },
+    {
+      "t0": 428.27,
+      "t1": 432.43,
+      "text": "von Malzahn. The Deutsche Biographie gives that same name",
+      "kind": "story",
+      "para": 8,
+      "part": "p09"
+    },
+    {
+      "t0": 432.47,
+      "t1": 434.63,
+      "text": "as the one he used when he set out.",
+      "kind": "story",
+      "para": 8,
+      "part": "p09"
+    },
+    {
+      "t0": 434.91,
+      "t1": 439.31,
+      "text": "The sums differ between sources, so this episode leaves the figure out.",
+      "kind": "story",
+      "para": 8,
+      "part": "p09"
+    },
+    {
+      "t0": 439.95,
+      "t1": 444.11,
+      "text": "The officials did what the uniform asked, one step after another.",
+      "kind": "story",
+      "para": 8,
+      "part": "p09"
+    },
+    {
+      "t0": 444.75,
+      "t1": 446.83,
+      "text": "How long could a captain who did not",
+      "kind": "story",
+      "para": 8,
+      "part": "p09"
+    },
+    {
+      "t0": 446.91,
+      "t1": 449.55,
+      "text": "exist keep a town hall in order?",
+      "kind": "story",
+      "para": 8,
+      "part": "p09"
+    },
+    {
+      "t0": 450.72,
+      "t1": 454.48,
+      "text": "Quick break. I'm Yusuf, and this is Walk of Berlin.",
+      "kind": "spot",
+      "para": 9,
+      "part": "[[SPOT-A]]"
+    },
+    {
+      "t0": 454.88,
+      "t1": 456.8,
+      "text": "If you enjoy stories like this one,",
+      "kind": "spot",
+      "para": 9,
+      "part": "[[SPOT-A]]"
+    },
+    {
+      "t0": 456.88,
+      "t1": 458.24,
+      "text": "come and walk one with me.",
+      "kind": "spot",
+      "para": 9,
+      "part": "[[SPOT-A]]"
+    },
+    {
+      "t0": 458.48,
+      "t1": 460.52,
+      "text": "My walk, Berlin Then and Now,",
+      "kind": "spot",
+      "para": 9,
+      "part": "[[SPOT-A]]"
+    },
+    {
+      "t0": 460.64,
+      "t1": 464.24,
+      "text": "goes from the World Clock on Alexanderplatz to Hackescher Markt,",
+      "kind": "spot",
+      "para": 9,
+      "part": "[[SPOT-A]]"
+    },
+    {
+      "t0": 464.32,
+      "t1": 466.72,
+      "text": "with an archive photo at every stop.",
+      "kind": "spot",
+      "para": 9,
+      "part": "[[SPOT-A]]"
+    },
+    {
+      "t0": 466.76,
+      "t1": 469.36,
+      "text": "You'll find it at walk of berlin dot com.",
+      "kind": "spot",
+      "para": 9,
+      "part": "[[SPOT-A]]",
+      "display": "You'll find it at walkofberlin.com."
+    },
+    {
+      "t0": 470.52,
+      "t1": 473.64,
+      "text": "The captain did not keep the officials in the building.",
+      "kind": "story",
+      "para": 10,
+      "part": "p10"
+    },
+    {
+      "t0": 473.72,
+      "t1": 476.413,
+      "text": "He had the mayor and the treasurer taken away,",
+      "kind": "story",
+      "para": 10,
+      "part": "p10"
+    },
+    {
+      "t0": 476.467,
+      "t1": 480.8,
+      "text": "by rented cab and under guard, to the Neue Wache in Berlin,",
+      "kind": "story",
+      "para": 10,
+      "part": "p10"
+    },
+    {
+      "t0": 480.84,
+      "t1": 484.76,
+      "text": "after they gave their parole that they would not try to escape.",
+      "kind": "story",
+      "para": 10,
+      "part": "p10"
+    },
+    {
+      "t0": 484.84,
+      "t1": 487.88,
+      "text": "The Neue Wache, at Unter den Linden 4,",
+      "kind": "story",
+      "para": 10,
+      "part": "p10"
+    },
+    {
+      "t0": 487.96,
+      "t1": 493.32,
+      "text": "was built by Karl Friedrich Schinkel between 1816 and 1818 as a",
+      "kind": "story",
+      "para": 10,
+      "part": "p10"
+    },
+    {
+      "t0": 493.48,
+      "t1": 496.68,
+      "text": "guardhouse for the royal palace across the street.",
+      "kind": "story",
+      "para": 10,
+      "part": "p10"
+    },
+    {
+      "t0": 496.84,
+      "t1": 501.4,
+      "text": "Since 1993 it has been the central memorial of the Federal Republic",
+      "kind": "story",
+      "para": 10,
+      "part": "p10"
+    },
+    {
+      "t0": 501.48,
+      "t1": 505.4,
+      "text": "of Germany for the victims of war and tyranny.",
+      "kind": "story",
+      "para": 10,
+      "part": "p10"
+    },
+    {
+      "t0": 505.48,
+      "t1": 509.72,
+      "text": "A guardhouse that once received two officials from a small town",
+      "kind": "story",
+      "para": 10,
+      "part": "p10"
+    },
+    {
+      "t0": 509.88,
+      "t1": 513.36,
+      "text": "now commemorates the victims of war and tyranny,",
+      "kind": "story",
+      "para": 10,
+      "part": "p10"
+    },
+    {
+      "t0": 513.4,
+      "t1": 516.2,
+      "text": "and it is a sobering place to stand when you think",
+      "kind": "story",
+      "para": 10,
+      "part": "p10"
+    },
+    {
+      "t0": 516.28,
+      "t1": 520.52,
+      "text": "about how a costume was once treated as a real order.",
+      "kind": "story",
+      "para": 10,
+      "part": "p10"
+    },
+    {
+      "t0": 521.07,
+      "t1": 524.15,
+      "text": "The captain then went back to Berlin by train.",
+      "kind": "story",
+      "para": 11,
+      "part": "p11"
+    },
+    {
+      "t0": 524.43,
+      "t1": 527.15,
+      "text": "German Wikipedia says he had a light beer",
+      "kind": "story",
+      "para": 11,
+      "part": "p11"
+    },
+    {
+      "t0": 527.23,
+      "t1": 531.07,
+      "text": "at a station restaurant on the way, bought civilian clothes,",
+      "kind": "story",
+      "para": 11,
+      "part": "p11"
+    },
+    {
+      "t0": 531.15,
+      "t1": 534.15,
+      "text": "and left his sabre at a station in Rixdorf.",
+      "kind": "story",
+      "para": 11,
+      "part": "p11"
+    },
+    {
+      "t0": 534.43,
+      "t1": 537.39,
+      "text": "It also says he got rid of most of the uniform on",
+      "kind": "story",
+      "para": 11,
+      "part": "p11"
+    },
+    {
+      "t0": 537.43,
+      "t1": 540.59,
+      "text": "the Tempelhofer Feld, the old airfield in Berlin.",
+      "kind": "story",
+      "para": 11,
+      "part": "p11"
+    },
+    {
+      "t0": 541.23,
+      "t1": 544.11,
+      "text": "Flights from the airport ended in 2008.",
+      "kind": "story",
+      "para": 11,
+      "part": "p11"
+    },
+    {
+      "t0": 544.59,
+      "t1": 547.95,
+      "text": "The costume had been assembled in about eight days, from the",
+      "kind": "story",
+      "para": 11,
+      "part": "p11"
+    },
+    {
+      "t0": 548.07,
+      "t1": 552.19,
+      "text": "first purchases on 8 October to the afternoon of the 16th.",
+      "kind": "story",
+      "para": 11,
+      "part": "p11"
+    },
+    {
+      "t0": 552.51,
+      "t1": 556.67,
+      "text": "Since 8 May 2010 the field has been a public park,",
+      "kind": "story",
+      "para": 11,
+      "part": "p11"
+    },
+    {
+      "t0": 556.71,
+      "t1": 560.51,
+      "text": "with a six-kilometre route for cycling, skating and jogging,",
+      "kind": "story",
+      "para": 11,
+      "part": "p11"
+    },
+    {
+      "t0": 560.59,
+      "t1": 562.75,
+      "text": "grill areas, and a dog meadow.",
+      "kind": "story",
+      "para": 11,
+      "part": "p11"
+    },
+    {
+      "t0": 563.31,
+      "t1": 565.95,
+      "text": "For ten days the captain was free.",
+      "kind": "story",
+      "para": 12,
+      "part": "p12"
+    },
+    {
+      "t0": 566.19,
+      "t1": 567.95,
+      "text": "He had the money from the treasury,",
+      "kind": "story",
+      "para": 12,
+      "part": "p12"
+    },
+    {
+      "t0": 568.03,
+      "t1": 571.55,
+      "text": "a white moustache and a set of civilian clothes.",
+      "kind": "story",
+      "para": 12,
+      "part": "p12"
+    },
+    {
+      "t0": 571.87,
+      "t1": 574.07,
+      "text": "The authorities did have a warrant.",
+      "kind": "story",
+      "para": 12,
+      "part": "p12"
+    },
+    {
+      "t0": 574.35,
+      "t1": 577.79,
+      "text": "German Wikipedia and the Deutsche Biographie both give",
+      "kind": "story",
+      "para": 12,
+      "part": "p12"
+    },
+    {
+      "t0": 577.87,
+      "t1": 581.07,
+      "text": "a reward of 3,000 marks for his capture,",
+      "kind": "story",
+      "para": 12,
+      "part": "p12"
+    },
+    {
+      "t0": 581.15,
+      "t1": 583.31,
+      "text": "and the Deutsche Biographie says the warrant was",
+      "kind": "story",
+      "para": 12,
+      "part": "p12"
+    },
+    {
+      "t0": 583.39,
+      "t1": 586.27,
+      "text": "issued on the very day of the takeover.",
+      "kind": "story",
+      "para": 12,
+      "part": "p12"
+    },
+    {
+      "t0": 586.47,
+      "t1": 590.43,
+      "text": "Picture his position: a free man with a reward on his head,",
+      "kind": "story",
+      "para": 12,
+      "part": "p12"
+    },
+    {
+      "t0": 590.51,
+      "t1": 594.91,
+      "text": "a town treasury behind him, and still no papers.",
+      "kind": "story",
+      "para": 12,
+      "part": "p12"
+    },
+    {
+      "t0": 594.99,
+      "t1": 598.35,
+      "text": "The next part of the story turns on a former cellmate,",
+      "kind": "story",
+      "para": 12,
+      "part": "p12"
+    },
+    {
+      "t0": 598.43,
+      "t1": 601.39,
+      "text": "who had a reason to talk: the reward.",
+      "kind": "story",
+      "para": 12,
+      "part": "p12"
+    },
+    {
+      "t0": 601.94,
+      "t1": 605.46,
+      "text": "Ten days after the town hall, German Wikipedia says,",
+      "kind": "story",
+      "para": 13,
+      "part": "p13"
+    },
+    {
+      "t0": 605.94,
+      "t1": 611.14,
+      "text": "police arrested him at breakfast. The same article names the tip-off:",
+      "kind": "story",
+      "para": 13,
+      "part": "p13"
+    },
+    {
+      "t0": 611.22,
+      "t1": 614.42,
+      "text": "his former cellmate Kallenberg informed the police,",
+      "kind": "story",
+      "para": 13,
+      "part": "p13"
+    },
+    {
+      "t0": 614.46,
+      "t1": 618.62,
+      "text": "in the expectation of the high reward of 3,000 marks.",
+      "kind": "story",
+      "para": 13,
+      "part": "p13"
+    },
+    {
+      "t0": 618.9,
+      "t1": 623.62,
+      "text": "The Deutsche Biographie also records that a former cellmate denounced him.",
+      "kind": "story",
+      "para": 13,
+      "part": "p13"
+    },
+    {
+      "t0": 624.18,
+      "t1": 627.06,
+      "text": "The man who had been the captain was caught not by a",
+      "kind": "story",
+      "para": 13,
+      "part": "p13"
+    },
+    {
+      "t0": 627.14,
+      "t1": 631.3,
+      "text": "clever trap, but by the oldest kind of tip, the one from",
+      "kind": "story",
+      "para": 13,
+      "part": "p13"
+    },
+    {
+      "t0": 631.38,
+      "t1": 634.66,
+      "text": "someone who knew him well enough to betray him for money.",
+      "kind": "story",
+      "para": 13,
+      "part": "p13"
+    },
+    {
+      "t0": 635.3,
+      "t1": 638.42,
+      "text": "Nothing about the arrest needed a uniform at all.",
+      "kind": "story",
+      "para": 13,
+      "part": "p13"
+    },
+    {
+      "t0": 638.98,
+      "t1": 643.54,
+      "text": "The case went to the Landgericht II in Berlin, the regional court.",
+      "kind": "story",
+      "para": 14,
+      "part": "p14"
+    },
+    {
+      "t0": 643.86,
+      "t1": 647.38,
+      "text": "On 1 December 1906 the court found him",
+      "kind": "story",
+      "para": 14,
+      "part": "p14"
+    },
+    {
+      "t0": 647.42,
+      "t1": 650.74,
+      "text": "guilty of wearing a uniform without authority,",
+      "kind": "story",
+      "para": 14,
+      "part": "p14"
+    },
+    {
+      "t0": 650.82,
+      "t1": 656.5,
+      "text": "of unlawful deprivation of liberty, of fraud and of serious forgery.",
+      "kind": "story",
+      "para": 14,
+      "part": "p14"
+    },
+    {
+      "t0": 656.82,
+      "t1": 660.5,
+      "text": "The sentence was four years in prison, a figure that a legal",
+      "kind": "story",
+      "para": 14,
+      "part": "p14"
+    },
+    {
+      "t0": 660.58,
+      "t1": 664.18,
+      "text": "history article and the Deutsche Biographie both give.",
+      "kind": "story",
+      "para": 14,
+      "part": "p14"
+    },
+    {
+      "t0": 664.5,
+      "t1": 668.62,
+      "text": "The soldiers were a separate matter, handled by military justice.",
+      "kind": "story",
+      "para": 14,
+      "part": "p14"
+    },
+    {
+      "t0": 668.9,
+      "t1": 672.34,
+      "text": "A legal history article says the press expected a result in",
+      "kind": "story",
+      "para": 14,
+      "part": "p14"
+    },
+    {
+      "t0": 672.5,
+      "t1": 675.38,
+      "text": "their favour. It does not record the outcome,",
+      "kind": "story",
+      "para": 14,
+      "part": "p14"
+    },
+    {
+      "t0": 675.46,
+      "t1": 678.9,
+      "text": "so this episode says nothing more about the soldiers.",
+      "kind": "story",
+      "para": 14,
+      "part": "p14"
+    },
+    {
+      "t0": 679.47,
+      "t1": 682.59,
+      "text": "The city did not see the affair the way the court did.",
+      "kind": "story",
+      "para": 15,
+      "part": "p15"
+    },
+    {
+      "t0": 683.07,
+      "t1": 687.39,
+      "text": "The Deutsche Biographie says the public welcomed it as an attack on",
+      "kind": "story",
+      "para": 15,
+      "part": "p15"
+    },
+    {
+      "t0": 687.47,
+      "t1": 693.31,
+      "text": "Prussian militarism, and that public sympathy later pushed the authorities toward mercy.",
+      "kind": "story",
+      "para": 15,
+      "part": "p15"
+    },
+    {
+      "t0": 694.03,
+      "t1": 696.19,
+      "text": "Think about what the story exposed.",
+      "kind": "story",
+      "para": 15,
+      "part": "p15"
+    },
+    {
+      "t0": 696.59,
+      "t1": 700.59,
+      "text": "A squad of soldiers had followed a captain who did not exist.",
+      "kind": "story",
+      "para": 15,
+      "part": "p15"
+    },
+    {
+      "t0": 701.07,
+      "t1": 704.27,
+      "text": "A mayor had gone under guard after giving his word.",
+      "kind": "story",
+      "para": 15,
+      "part": "p15"
+    },
+    {
+      "t0": 704.75,
+      "t1": 707.55,
+      "text": "A treasury had handed over its cash against",
+      "kind": "story",
+      "para": 15,
+      "part": "p15"
+    },
+    {
+      "t0": 707.63,
+      "t1": 710.03,
+      "text": "a receipt signed with a made-up name.",
+      "kind": "story",
+      "para": 15,
+      "part": "p15"
+    },
+    {
+      "t0": 710.67,
+      "t1": 714.51,
+      "text": "Every one of those people had done what a uniform asked,",
+      "kind": "story",
+      "para": 15,
+      "part": "p15"
+    },
+    {
+      "t0": 714.55,
+      "t1": 716.83,
+      "text": "and the joke was on the uniform,",
+      "kind": "story",
+      "para": 15,
+      "part": "p15"
+    },
+    {
+      "t0": 716.99,
+      "t1": 719.79,
+      "text": "and on the rules that made people bow to it.",
+      "kind": "story",
+      "para": 15,
+      "part": "p15"
+    },
+    {
+      "t0": 720.35,
+      "t1": 724.99,
+      "text": "After almost two years in Tegel prison, the Kaiser pardoned him.",
+      "kind": "story",
+      "para": 16,
+      "part": "p16"
+    },
+    {
+      "t0": 725.63,
+      "t1": 731.23,
+      "text": "German Wikipedia says he was released early, on 16 August 1908.",
+      "kind": "story",
+      "para": 16,
+      "part": "p16"
+    },
+    {
+      "t0": 731.31,
+      "t1": 736.27,
+      "text": "The Deutsche Biographie says the pardon came under pressure from public opinion,",
+      "kind": "story",
+      "para": 16,
+      "part": "p16"
+    },
+    {
+      "t0": 736.35,
+      "t1": 740.67,
+      "text": "and a Berlin tourism site and a Berlin history calendar both say",
+      "kind": "story",
+      "para": 16,
+      "part": "p16"
+    },
+    {
+      "t0": 740.75,
+      "t1": 744.59,
+      "text": "the Kaiser pardoned him early, after almost two years.",
+      "kind": "story",
+      "para": 16,
+      "part": "p16"
+    },
+    {
+      "t0": 744.91,
+      "t1": 747.07,
+      "text": "Sources differ on the exact day,",
+      "kind": "story",
+      "para": 16,
+      "part": "p16"
+    },
+    {
+      "t0": 747.15,
+      "t1": 750.99,
+      "text": "so this episode says only August 1908.",
+      "kind": "story",
+      "para": 16,
+      "part": "p16"
+    },
+    {
+      "t0": 751.07,
+      "t1": 755.47,
+      "text": "The pardon ended the sentence, but it did not end his fame,",
+      "kind": "story",
+      "para": 16,
+      "part": "p16"
+    },
+    {
+      "t0": 755.55,
+      "t1": 759.15,
+      "text": "and the fame was the one thing he could still sell.",
+      "kind": "story",
+      "para": 16,
+      "part": "p16"
+    },
+    {
+      "t0": 759.72,
+      "t1": 761.96,
+      "text": "What did the Kaiser himself think of it?",
+      "kind": "story",
+      "para": 17,
+      "part": "p17"
+    },
+    {
+      "t0": 762.44,
+      "t1": 767.56,
+      "text": "The Berlin tourism site visitBerlin says he was highly amused,",
+      "kind": "story",
+      "para": 17,
+      "part": "p17"
+    },
+    {
+      "t0": 767.64,
+      "t1": 772.04,
+      "text": "and a Berlin history calendar, at deutschlandmuseum.de,",
+      "kind": "story",
+      "para": 17,
+      "part": "p17"
+    },
+    {
+      "t0": 772.28,
+      "t1": 777.6,
+      "text": "says he found the affair very amusing. Both are secondary accounts.",
+      "kind": "story",
+      "para": 17,
+      "part": "p17"
+    },
+    {
+      "t0": 777.8,
+      "t1": 781.88,
+      "text": "This episode did not find a primary document with his own words,",
+      "kind": "story",
+      "para": 17,
+      "part": "p17"
+    },
+    {
+      "t0": 781.96,
+      "t1": 785.04,
+      "text": "so the reaction is reported, not proven.",
+      "kind": "story",
+      "para": 17,
+      "part": "p17"
+    },
+    {
+      "t0": 785.32,
+      "t1": 787.96,
+      "text": "What the record does show is the pardon,",
+      "kind": "story",
+      "para": 17,
+      "part": "p17"
+    },
+    {
+      "t0": 788.08,
+      "t1": 791.8,
+      "text": "which came after almost two years of a four-year sentence.",
+      "kind": "story",
+      "para": 17,
+      "part": "p17"
+    },
+    {
+      "t0": 792.28,
+      "t1": 795.32,
+      "text": "The Kaiser's amusement and the court's sentence sat",
+      "kind": "story",
+      "para": 17,
+      "part": "p17"
+    },
+    {
+      "t0": 795.48,
+      "t1": 797.96,
+      "text": "side by side in the same story,",
+      "kind": "story",
+      "para": 17,
+      "part": "p17"
+    },
+    {
+      "t0": 798.04,
+      "t1": 800.76,
+      "text": "and the story did not end in a cell.",
+      "kind": "story",
+      "para": 17,
+      "part": "p17"
+    },
+    {
+      "t0": 801.3,
+      "t1": 803.7,
+      "text": "Voigt did not let the story rest.",
+      "kind": "story",
+      "para": 18,
+      "part": "p18"
+    },
+    {
+      "t0": 804.1,
+      "t1": 807.38,
+      "text": "After his release he performed as the captain in halls,",
+      "kind": "story",
+      "para": 18,
+      "part": "p18"
+    },
+    {
+      "t0": 807.46,
+      "t1": 811.58,
+      "text": "at fairs and in circus tents, according to German Wikipedia.",
+      "kind": "story",
+      "para": 18,
+      "part": "p18"
+    },
+    {
+      "t0": 811.86,
+      "t1": 815.94,
+      "text": "The Deutsche Biographie says he sold postcards with his own portrait on",
+      "kind": "story",
+      "para": 18,
+      "part": "p18"
+    },
+    {
+      "t0": 816.02,
+      "t1": 819.5,
+      "text": "them and recorded his story on a gramophone disc.",
+      "kind": "story",
+      "para": 18,
+      "part": "p18"
+    },
+    {
+      "t0": 819.78,
+      "t1": 822.66,
+      "text": "The Berlin museum exhibition in the town hall calls",
+      "kind": "story",
+      "para": 18,
+      "part": "p18"
+    },
+    {
+      "t0": 822.74,
+      "t1": 825.46,
+      "text": "him a real media star of his time.",
+      "kind": "story",
+      "para": 18,
+      "part": "p18"
+    },
+    {
+      "t0": 825.86,
+      "t1": 827.62,
+      "text": "A wax figure of him was displayed",
+      "kind": "story",
+      "para": 18,
+      "part": "p18"
+    },
+    {
+      "t0": 827.7,
+      "t1": 830.66,
+      "text": "in a Berlin waxworks from August 1908.",
+      "kind": "story",
+      "para": 18,
+      "part": "p18"
+    },
+    {
+      "t0": 831.22,
+      "t1": 837.06,
+      "text": "In 1909 he published his autobiography, Wie ich Hauptmann von Köpenick wurde,",
+      "kind": "story",
+      "para": 18,
+      "part": "p18"
+    },
+    {
+      "t0": 837.14,
+      "t1": 840.74,
+      "text": "which means How I Became the Hauptmann von Köpenick.",
+      "kind": "story",
+      "para": 18,
+      "part": "p18"
+    },
+    {
+      "t0": 841.06,
+      "t1": 843.7,
+      "text": "He had found the one thing that paid,",
+      "kind": "story",
+      "para": 18,
+      "part": "p18"
+    },
+    {
+      "t0": 843.74,
+      "t1": 845.1,
+      "text": "and it was the story.",
+      "kind": "story",
+      "para": 18,
+      "part": "p18"
+    },
+    {
+      "t0": 845.38,
+      "t1": 848.9,
+      "text": "But a legend pays only while people want to hear it,",
+      "kind": "story",
+      "para": 18,
+      "part": "p18"
+    },
+    {
+      "t0": 848.94,
+      "t1": 851.94,
+      "text": "and the question was how long that would last.",
+      "kind": "story",
+      "para": 18,
+      "part": "p18"
+    },
+    {
+      "t0": 853.1,
+      "t1": 856.62,
+      "text": "Yusuf again, one more thing before the story goes on.",
+      "kind": "spot",
+      "para": 19,
+      "part": "[[SPOT-B]]"
+    },
+    {
+      "t0": 856.86,
+      "t1": 858.7,
+      "text": "If you can't join me in person,",
+      "kind": "spot",
+      "para": 19,
+      "part": "[[SPOT-B]]"
+    },
+    {
+      "t0": 858.82,
+      "t1": 861.26,
+      "text": "my audio walks take you along the Berlin Wall at",
+      "kind": "spot",
+      "para": 19,
+      "part": "[[SPOT-B]]"
+    },
+    {
+      "t0": 861.34,
+      "t1": 864.54,
+      "text": "Bernauer Straße and through the medieval old town,",
+      "kind": "spot",
+      "para": 19,
+      "part": "[[SPOT-B]]"
+    },
+    {
+      "t0": 864.62,
+      "t1": 866.78,
+      "text": "at your own pace, on your phone.",
+      "kind": "spot",
+      "para": 19,
+      "part": "[[SPOT-B]]"
+    },
+    {
+      "t0": 866.82,
+      "t1": 869.02,
+      "text": "They're at walk of berlin dot com.",
+      "kind": "spot",
+      "para": 19,
+      "part": "[[SPOT-B]]",
+      "display": "They're at walkofberlin.com."
+    },
+    {
+      "t0": 870.18,
+      "t1": 873.46,
+      "text": "The story turned into literature through a play.",
+      "kind": "story",
+      "para": 20,
+      "part": "p19"
+    },
+    {
+      "t0": 873.62,
+      "t1": 876.66,
+      "text": "Carl Zuckmayer's Der Hauptmann von Köpenick,",
+      "kind": "story",
+      "para": 20,
+      "part": "p19"
+    },
+    {
+      "t0": 876.74,
+      "t1": 880.82,
+      "text": "which he subtitled a German fairy tale in three acts,",
+      "kind": "story",
+      "para": 20,
+      "part": "p19"
+    },
+    {
+      "t0": 881.02,
+      "t1": 886.1,
+      "text": "opened at the Deutsches Theater in Berlin on 5 March 1931.",
+      "kind": "story",
+      "para": 20,
+      "part": "p19"
+    },
+    {
+      "t0": 886.14,
+      "t1": 890.18,
+      "text": "Heinz Hilpert directed, and Werner Krauß played the captain.",
+      "kind": "story",
+      "para": 20,
+      "part": "p19"
+    },
+    {
+      "t0": 890.5,
+      "t1": 893.3,
+      "text": "The play changed the history on purpose.",
+      "kind": "story",
+      "para": 20,
+      "part": "p19"
+    },
+    {
+      "t0": 893.7,
+      "t1": 898.34,
+      "text": "In Zuckmayer's version the captain's motive is the passport he cannot get,",
+      "kind": "story",
+      "para": 20,
+      "part": "p19"
+    },
+    {
+      "t0": 898.42,
+      "t1": 900.7,
+      "text": "and in the end he gives himself up.",
+      "kind": "story",
+      "para": 20,
+      "part": "p19"
+    },
+    {
+      "t0": 900.98,
+      "t1": 905.34,
+      "text": "The real arrest came at breakfast, after a former cellmate's tip.",
+      "kind": "story",
+      "para": 20,
+      "part": "p19"
+    },
+    {
+      "t0": 905.7,
+      "t1": 907.54,
+      "text": "The plaque on the town hall says that",
+      "kind": "story",
+      "para": 20,
+      "part": "p19"
+    },
+    {
+      "t0": 907.62,
+      "t1": 910.18,
+      "text": "the play made him a literary figure.",
+      "kind": "story",
+      "para": 20,
+      "part": "p19"
+    },
+    {
+      "t0": 910.75,
+      "t1": 913.15,
+      "text": "The play carried him onto the screen.",
+      "kind": "story",
+      "para": 21,
+      "part": "p20"
+    },
+    {
+      "t0": 913.79,
+      "t1": 918.51,
+      "text": "German Wikipedia lists a 1931 film by Richard Oswald,",
+      "kind": "story",
+      "para": 21,
+      "part": "p20"
+    },
+    {
+      "t0": 918.63,
+      "t1": 920.99,
+      "text": "made the same year as the stage premiere,",
+      "kind": "story",
+      "para": 21,
+      "part": "p20"
+    },
+    {
+      "t0": 921.11,
+      "t1": 923.79,
+      "text": "with Max Adalbert in the title role,",
+      "kind": "story",
+      "para": 21,
+      "part": "p20"
+    },
+    {
+      "t0": 923.87,
+      "t1": 928.27,
+      "text": "and a 1997 version by Frank Beyer with Harald Juhnke.",
+      "kind": "story",
+      "para": 21,
+      "part": "p20"
+    },
+    {
+      "t0": 928.91,
+      "t1": 933.87,
+      "text": "Helmut Käutner's 1956 film with Heinz Rühmann is the one many people",
+      "kind": "story",
+      "para": 21,
+      "part": "p20"
+    },
+    {
+      "t0": 933.95,
+      "t1": 938.19,
+      "text": "know best, and German Wikipedia lists it alongside the others.",
+      "kind": "story",
+      "para": 21,
+      "part": "p20"
+    },
+    {
+      "t0": 938.83,
+      "t1": 941.39,
+      "text": "Each new version took the captain out of the",
+      "kind": "story",
+      "para": 21,
+      "part": "p20"
+    },
+    {
+      "t0": 941.47,
+      "t1": 945.07,
+      "text": "1906 day and put him into a new costume,",
+      "kind": "story",
+      "para": 21,
+      "part": "p20"
+    },
+    {
+      "t0": 945.15,
+      "t1": 948.19,
+      "text": "and each one made the joke more familiar to people who",
+      "kind": "story",
+      "para": 21,
+      "part": "p20"
+    },
+    {
+      "t0": 948.27,
+      "t1": 950.91,
+      "text": "had never stood in that town hall at all.",
+      "kind": "story",
+      "para": 21,
+      "part": "p20"
+    },
+    {
+      "t0": 951.48,
+      "t1": 954.04,
+      "text": "By now the name had become a word.",
+      "kind": "story",
+      "para": 22,
+      "part": "p21"
+    },
+    {
+      "t0": 954.52,
+      "t1": 957.08,
+      "text": "Germans call a con that wins obedience by",
+      "kind": "story",
+      "para": 22,
+      "part": "p21"
+    },
+    {
+      "t0": 957.24,
+      "t1": 960.76,
+      "text": "faking an official role a Köpenickiade,",
+      "kind": "story",
+      "para": 22,
+      "part": "p21"
+    },
+    {
+      "t0": 960.84,
+      "t1": 963.8,
+      "text": "and the plaque on the town hall uses that word too.",
+      "kind": "story",
+      "para": 22,
+      "part": "p21"
+    },
+    {
+      "t0": 964.52,
+      "t1": 967.64,
+      "text": "So the captain had left Köpenick, the court,",
+      "kind": "story",
+      "para": 22,
+      "part": "p21"
+    },
+    {
+      "t0": 967.68,
+      "t1": 970.52,
+      "text": "the prison and the stage behind him.",
+      "kind": "story",
+      "para": 22,
+      "part": "p21"
+    },
+    {
+      "t0": 970.84,
+      "t1": 974.76,
+      "text": "What remained was the man himself, who had been a convict,",
+      "kind": "story",
+      "para": 22,
+      "part": "p21"
+    },
+    {
+      "t0": 974.84,
+      "t1": 977.08,
+      "text": "then a joke, then a performer,",
+      "kind": "story",
+      "para": 22,
+      "part": "p21"
+    },
+    {
+      "t0": 977.16,
+      "t1": 981.08,
+      "text": "and every stage of that life turned on the same uniform.",
+      "kind": "story",
+      "para": 22,
+      "part": "p21"
+    },
+    {
+      "t0": 981.96,
+      "t1": 984.36,
+      "text": "The next part is about where he went,",
+      "kind": "story",
+      "para": 22,
+      "part": "p21"
+    },
+    {
+      "t0": 984.44,
+      "t1": 988.76,
+      "text": "what he did after the fame, and how his later years ended.",
+      "kind": "story",
+      "para": 22,
+      "part": "p21"
+    },
+    {
+      "t0": 989.08,
+      "t1": 993.24,
+      "text": "The Berlin museum's own exhibition title sums up the arc:",
+      "kind": "story",
+      "para": 22,
+      "part": "p21"
+    },
+    {
+      "t0": 993.32,
+      "t1": 998.04,
+      "text": "Vom Sträfling zur Legende, from convict to legend.",
+      "kind": "story",
+      "para": 22,
+      "part": "p21"
+    },
+    {
+      "t0": 998.6,
+      "t1": 1001.32,
+      "text": "He settled in Luxembourg in 1910.",
+      "kind": "story",
+      "para": 23,
+      "part": "p22"
+    },
+    {
+      "t0": 1001.8,
+      "t1": 1005.72,
+      "text": "The Deutsche Biographie says he became a Luxembourg citizen and",
+      "kind": "story",
+      "para": 23,
+      "part": "p22"
+    },
+    {
+      "t0": 1005.8,
+      "t1": 1008.52,
+      "text": "lived in Luxembourg City from that year on.",
+      "kind": "story",
+      "para": 23,
+      "part": "p22"
+    },
+    {
+      "t0": 1009.0,
+      "t1": 1013.32,
+      "text": "German Wikipedia describes a residence permit dated 1 May 1910,",
+      "kind": "story",
+      "para": 23,
+      "part": "p22"
+    },
+    {
+      "t0": 1013.4,
+      "t1": 1017.32,
+      "text": "work as a waiter and as a shoemaker,",
+      "kind": "story",
+      "para": 23,
+      "part": "p22"
+    },
+    {
+      "t0": 1017.4,
+      "t1": 1019.64,
+      "text": "and a house he bought in 1912.",
+      "kind": "story",
+      "para": 23,
+      "part": "p22"
+    },
+    {
+      "t0": 1020.28,
+      "t1": 1024.68,
+      "text": "The Berlin museum exhibition says he died impoverished in Luxembourg.",
+      "kind": "story",
+      "para": 23,
+      "part": "p22"
+    },
+    {
+      "t0": 1025.16,
+      "t1": 1028.76,
+      "text": "The Deutsche Biographie gives a different picture of those years,",
+      "kind": "story",
+      "para": 23,
+      "part": "p22"
+    },
+    {
+      "t0": 1028.8,
+      "t1": 1031.8,
+      "text": "saying he had reached a certain prosperity there.",
+      "kind": "story",
+      "para": 23,
+      "part": "p22"
+    },
+    {
+      "t0": 1032.04,
+      "t1": 1034.04,
+      "text": "The legend had paid him for a while,",
+      "kind": "story",
+      "para": 23,
+      "part": "p22"
+    },
+    {
+      "t0": 1034.12,
+      "t1": 1035.64,
+      "text": "at fairs and in print.",
+      "kind": "story",
+      "para": 23,
+      "part": "p22"
+    },
+    {
+      "t0": 1036.12,
+      "t1": 1039.32,
+      "text": "His grave, his plaque and the exhibition are",
+      "kind": "story",
+      "para": 23,
+      "part": "p22"
+    },
+    {
+      "t0": 1039.4,
+      "t1": 1042.04,
+      "text": "now the places where his story is kept.",
+      "kind": "story",
+      "para": 23,
+      "part": "p22"
+    },
+    {
+      "t0": 1042.59,
+      "t1": 1048.67,
+      "text": "He died on 3 January 1922 in Luxembourg City, aged 72.",
+      "kind": "story",
+      "para": 24,
+      "part": "p23"
+    },
+    {
+      "t0": 1049.31,
+      "t1": 1053.23,
+      "text": "The plaque on the Köpenick town hall gives the same two dates,",
+      "kind": "story",
+      "para": 24,
+      "part": "p23"
+    },
+    {
+      "t0": 1053.31,
+      "t1": 1058.99,
+      "text": "13 February 1849 and 3 January 1922.",
+      "kind": "story",
+      "para": 24,
+      "part": "p23"
+    },
+    {
+      "t0": 1059.07,
+      "t1": 1062.63,
+      "text": "He is buried at the Liebfrauenfriedhof in Luxembourg.",
+      "kind": "story",
+      "para": 24,
+      "part": "p23"
+    },
+    {
+      "t0": 1063.15,
+      "t1": 1067.83,
+      "text": "German Wikipedia says the grave stone reads HAUPTMANN VON KOEPENICK,",
+      "kind": "story",
+      "para": 24,
+      "part": "p23"
+    },
+    {
+      "t0": 1067.95,
+      "t1": 1071.47,
+      "text": "and that it gives the wrong birth year, 1850.",
+      "kind": "story",
+      "para": 24,
+      "part": "p23"
+    },
+    {
+      "t0": 1071.55,
+      "t1": 1076.35,
+      "text": "The plaque and the Deutsche Biographie both say 1849.",
+      "kind": "story",
+      "para": 24,
+      "part": "p23"
+    },
+    {
+      "t0": 1076.43,
+      "t1": 1080.99,
+      "text": "The same article says a circus bought the grave in 1961, and",
+      "kind": "story",
+      "para": 24,
+      "part": "p23"
+    },
+    {
+      "t0": 1081.07,
+      "t1": 1085.51,
+      "text": "that the city of Luxembourg took over its care in the 1970s.",
+      "kind": "story",
+      "para": 24,
+      "part": "p23"
+    },
+    {
+      "t0": 1085.63,
+      "t1": 1089.39,
+      "text": "So the grave has a circus and a city in its history,",
+      "kind": "story",
+      "para": 24,
+      "part": "p23"
+    },
+    {
+      "t0": 1089.63,
+      "t1": 1091.79,
+      "text": "and it was the city that took responsibility",
+      "kind": "story",
+      "para": 24,
+      "part": "p23"
+    },
+    {
+      "t0": 1091.95,
+      "t1": 1092.99,
+      "text": "for it in the end.",
+      "kind": "story",
+      "para": 24,
+      "part": "p23"
+    },
+    {
+      "t0": 1093.55,
+      "t1": 1096.19,
+      "text": "So why does Germany still laugh at him?",
+      "kind": "story",
+      "para": 25,
+      "part": "p24"
+    },
+    {
+      "t0": 1096.67,
+      "t1": 1100.51,
+      "text": "Because the trick works on the thing a crowd will defer to,",
+      "kind": "story",
+      "para": 25,
+      "part": "p24"
+    },
+    {
+      "t0": 1100.59,
+      "t1": 1102.39,
+      "text": "which is a uniform.",
+      "kind": "story",
+      "para": 25,
+      "part": "p24"
+    },
+    {
+      "t0": 1102.67,
+      "t1": 1106.27,
+      "text": "A squad of soldiers obeyed a captain who did not exist.",
+      "kind": "story",
+      "para": 25,
+      "part": "p24"
+    },
+    {
+      "t0": 1106.67,
+      "t1": 1109.95,
+      "text": "A mayor gave his word and rode off under guard.",
+      "kind": "story",
+      "para": 25,
+      "part": "p24"
+    },
+    {
+      "t0": 1110.43,
+      "t1": 1114.03,
+      "text": "A treasury handed over its cash against a receipt.",
+      "kind": "story",
+      "para": 25,
+      "part": "p24"
+    },
+    {
+      "t0": 1114.35,
+      "t1": 1116.39,
+      "text": "The laugh has a serious side.",
+      "kind": "story",
+      "para": 25,
+      "part": "p24"
+    },
+    {
+      "t0": 1116.59,
+      "t1": 1119.79,
+      "text": "It keeps in view a lesson the story teaches:",
+      "kind": "story",
+      "para": 25,
+      "part": "p24"
+    },
+    {
+      "t0": 1119.87,
+      "t1": 1124.27,
+      "text": "a uniform can make ordinary people obey without asking questions.",
+      "kind": "story",
+      "para": 25,
+      "part": "p24"
+    },
+    {
+      "t0": 1124.83,
+      "t1": 1129.07,
+      "text": "In 2018 the Tagesspiegel reported that the CDU wanted",
+      "kind": "story",
+      "para": 25,
+      "part": "p24"
+    },
+    {
+      "t0": 1129.15,
+      "t1": 1132.87,
+      "text": "the captain placed on UNESCO's cultural heritage list.",
+      "kind": "story",
+      "para": 25,
+      "part": "p24"
+    },
+    {
+      "t0": 1133.15,
+      "t1": 1137.87,
+      "text": "The Berlin Senate declined. Its reason, as the paper reported it,",
+      "kind": "story",
+      "para": 25,
+      "part": "p24"
+    },
+    {
+      "t0": 1137.95,
+      "t1": 1142.19,
+      "text": "was that the impostor was not suitable as a point of identification.",
+      "kind": "story",
+      "para": 25,
+      "part": "p24"
+    },
+    {
+      "t0": 1142.74,
+      "t1": 1149.06,
+      "text": "This year is the 120th anniversary, on 16 October 2026.",
+      "kind": "story",
+      "para": 26,
+      "part": "p25"
+    },
+    {
+      "t0": 1149.38,
+      "t1": 1153.62,
+      "text": "The Treptow-Köpenick district's programme runs across three days.",
+      "kind": "story",
+      "para": 26,
+      "part": "p25"
+    },
+    {
+      "t0": 1153.86,
+      "t1": 1159.38,
+      "text": "On the 16th, the Hauptmanngarde performs in the Rathaushof at 16:00,",
+      "kind": "story",
+      "para": 26,
+      "part": "p25"
+    },
+    {
+      "t0": 1159.46,
+      "t1": 1163.14,
+      "text": "with free entry and donations for the association requested.",
+      "kind": "story",
+      "para": 26,
+      "part": "p25"
+    },
+    {
+      "t0": 1163.78,
+      "t1": 1166.98,
+      "text": "At 17:00 an exhibition on the history and",
+      "kind": "story",
+      "para": 26,
+      "part": "p25"
+    },
+    {
+      "t0": 1167.06,
+      "t1": 1169.06,
+      "text": "building of the town hall opens.",
+      "kind": "story",
+      "para": 26,
+      "part": "p25"
+    },
+    {
+      "t0": 1169.62,
+      "t1": 1174.66,
+      "text": "At 17:45 the 1931 film is screened in the waiting room",
+      "kind": "story",
+      "para": 26,
+      "part": "p25"
+    },
+    {
+      "t0": 1174.7,
+      "t1": 1177.62,
+      "text": "of the Bürgeramt, introduced by a film scholar.",
+      "kind": "story",
+      "para": 26,
+      "part": "p25"
+    },
+    {
+      "t0": 1178.18,
+      "t1": 1182.98,
+      "text": "At 19:30 the musical plays at the Altstadttheater Köpenick.",
+      "kind": "story",
+      "para": 26,
+      "part": "p25"
+    },
+    {
+      "t0": 1183.3,
+      "t1": 1187.78,
+      "text": "On the 17th the Hauptmanngarde performs again at 11:00,",
+      "kind": "story",
+      "para": 26,
+      "part": "p25"
+    },
+    {
+      "t0": 1187.82,
+      "t1": 1189.86,
+      "text": "and the musical is the final event of",
+      "kind": "story",
+      "para": 26,
+      "part": "p25"
+    },
+    {
+      "t0": 1189.9,
+      "t1": 1192.82,
+      "text": "the programme on the 18th at 18:00.",
+      "kind": "story",
+      "para": 26,
+      "part": "p25"
+    },
+    {
+      "t0": 1193.46,
+      "t1": 1197.7,
+      "text": "A Berliner Zeitung piece from September says, in translation,",
+      "kind": "story",
+      "para": 26,
+      "part": "p25"
+    },
+    {
+      "t0": 1197.78,
+      "t1": 1202.18,
+      "text": "that the big anniversary party \"literally falls into the water\",",
+      "kind": "story",
+      "para": 26,
+      "part": "p25"
+    },
+    {
+      "t0": 1202.26,
+      "t1": 1204.58,
+      "text": "so check the programme before you go.",
+      "kind": "story",
+      "para": 26,
+      "part": "p25"
+    },
+    {
+      "t0": 1205.15,
+      "t1": 1209.87,
+      "text": "If you want to stand where it happened, go to Alt-Köpenick 21,",
+      "kind": "story",
+      "para": 27,
+      "part": "p26"
+    },
+    {
+      "t0": 1209.91,
+      "t1": 1212.63,
+      "text": "the address of the town hall in the old town.",
+      "kind": "story",
+      "para": 27,
+      "part": "p26"
+    },
+    {
+      "t0": 1212.91,
+      "t1": 1216.43,
+      "text": "The permanent exhibition, titled The Captain of Köpenick:",
+      "kind": "story",
+      "para": 27,
+      "part": "p26"
+    },
+    {
+      "t0": 1216.51,
+      "t1": 1221.39,
+      "text": "From Convict to Legend, is run by the Treptow-Köpenick district museum",
+      "kind": "story",
+      "para": 27,
+      "part": "p26"
+    },
+    {
+      "t0": 1221.71,
+      "t1": 1224.27,
+      "text": "and sits in the town hall's ticket office,",
+      "kind": "story",
+      "para": 27,
+      "part": "p26"
+    },
+    {
+      "t0": 1224.39,
+      "t1": 1228.63,
+      "text": "which the exhibition listing calls the historic site of the events.",
+      "kind": "story",
+      "para": 27,
+      "part": "p26"
+    },
+    {
+      "t0": 1228.99,
+      "t1": 1231.71,
+      "text": "It asks why Voigt turned to crime,",
+      "kind": "story",
+      "para": 27,
+      "part": "p26"
+    },
+    {
+      "t0": 1231.79,
+      "t1": 1235.11,
+      "text": "and why he was not given a second chance after prison.",
+      "kind": "story",
+      "para": 27,
+      "part": "p26"
+    },
+    {
+      "t0": 1235.39,
+      "t1": 1237.63,
+      "text": "The museum lists its hours as daily",
+      "kind": "story",
+      "para": 27,
+      "part": "p26"
+    },
+    {
+      "t0": 1237.79,
+      "t1": 1239.87,
+      "text": "from nine until eight in the evening.",
+      "kind": "story",
+      "para": 27,
+      "part": "p26"
+    },
+    {
+      "t0": 1240.35,
+      "t1": 1243.71,
+      "text": "Check those hours before you go, because they can change.",
+      "kind": "story",
+      "para": 27,
+      "part": "p26"
+    },
+    {
+      "t0": 1244.36,
+      "t1": 1246.6,
+      "text": "Then find the plaque on the wall to the",
+      "kind": "story",
+      "para": 28,
+      "part": "p27"
+    },
+    {
+      "t0": 1246.68,
+      "t1": 1250.12,
+      "text": "right of the main entrance. Read it slowly.",
+      "kind": "story",
+      "para": 28,
+      "part": "p27"
+    },
+    {
+      "t0": 1250.2,
+      "t1": 1254.2,
+      "text": "It gives the shoemaker's dates, names the treasury he seized,",
+      "kind": "story",
+      "para": 28,
+      "part": "p27"
+    },
+    {
+      "t0": 1254.28,
+      "t1": 1258.36,
+      "text": "and says the act went into history as a Köpenickiade.",
+      "kind": "story",
+      "para": 28,
+      "part": "p27"
+    },
+    {
+      "t0": 1258.44,
+      "t1": 1262.28,
+      "text": "In front of the building stands the statue by Spartak Babajan,",
+      "kind": "story",
+      "para": 28,
+      "part": "p27"
+    },
+    {
+      "t0": 1262.36,
+      "t1": 1265.8,
+      "text": "in place since 1996. The statue,",
+      "kind": "story",
+      "para": 28,
+      "part": "p27"
+    },
+    {
+      "t0": 1265.84,
+      "t1": 1269.72,
+      "text": "the plaque and the exhibition all belong to the same building,",
+      "kind": "story",
+      "para": 28,
+      "part": "p27"
+    },
+    {
+      "t0": 1269.8,
+      "t1": 1271.8,
+      "text": "which makes the Rathaus a good place to",
+      "kind": "story",
+      "para": 28,
+      "part": "p27"
+    },
+    {
+      "t0": 1271.92,
+      "t1": 1274.52,
+      "text": "see most of the story in one visit.",
+      "kind": "story",
+      "para": 28,
+      "part": "p27"
+    },
+    {
+      "t0": 1274.6,
+      "t1": 1278.52,
+      "text": "Look at the statue, then at the plaque, then at the doorway.",
+      "kind": "story",
+      "para": 28,
+      "part": "p27"
+    },
+    {
+      "t0": 1278.68,
+      "t1": 1280.6,
+      "text": "Stand there for a minute before you go.",
+      "kind": "story",
+      "para": 28,
+      "part": "p27"
+    },
+    {
+      "t0": 1281.76,
+      "t1": 1283.24,
+      "text": "That's this week's story.",
+      "kind": "spot",
+      "para": 29,
+      "part": "[[SPOT-C]]"
+    },
+    {
+      "t0": 1283.44,
+      "t1": 1286.56,
+      "text": "I'm Yusuf, and if you want to stand where it happened,",
+      "kind": "spot",
+      "para": 29,
+      "part": "[[SPOT-C]]"
+    },
+    {
+      "t0": 1286.64,
+      "t1": 1290.44,
+      "text": "my walks and audio walks are at walk of berlin dot com.",
+      "kind": "spot",
+      "para": 29,
+      "part": "[[SPOT-C]]",
+      "display": "my walks and audio walks are at walkofberlin.com."
+    },
+    {
+      "t0": 1290.72,
+      "t1": 1292.96,
+      "text": "Next week, another Berlin story.",
+      "kind": "spot",
+      "para": 29,
+      "part": "[[SPOT-C]]"
+    }
+  ]
+}
