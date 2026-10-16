@@ -624,7 +624,7 @@
     <div class="kk-result-actions">
       <button type="button" class="kk-replay-btn" id="kk-replay-btn">Play again</button>
       <p class="kk-tour-link">My walking tour starts at Alexanderplatz and shows you where Berlin's old city stood, with an archive photo at every stop.<br>
-        <a href="https://www.walkofberlin.com/book-berlin-walking-tour/berlin-then-and-now" target="_blank" rel="noopener">Book the Walking Tour</a>
+        <a href="https://walkofberlin.com/book-berlin-walking-tour/berlin-then-and-now" target="_blank" rel="noopener">Book the Walking Tour</a>
       </p>
     </div>
   </section>
@@ -1050,6 +1050,12 @@
     })
     .catch(function (err) {
       console.error('Failed to load KitKat game data:', err);
+      if (els.nightList) {
+        els.nightList.innerHTML = '<div style="padding:16px;background:rgba(255,255,255,0.1);border-radius:8px;color:#fff;text-align:center;">' +
+          '<p style="margin:0 0 10px;font-weight:700;">Could not load door test data.</p>' +
+          '<button type="button" class="kk-replay-btn" style="padding:8px 16px;background:#FFE600;color:#1B5E20;border:none;border-radius:6px;font-weight:800;cursor:pointer;" onclick="location.reload()">Reload game</button>' +
+        '</div>';
+      }
     });
 })();
 </script>
