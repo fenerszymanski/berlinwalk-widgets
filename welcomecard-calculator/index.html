@@ -506,7 +506,9 @@
           var price = parseFloat(el.getAttribute('data-price'));
           var discount = parseFloat(el.getAttribute('data-discount') || '0');
           attractionTotal += price;
-          attractionDiscount += price * (discount / 100);
+          // Tickets are charged in cents; round each discounted ticket before comparing totals.
+          var discountedPrice = Math.round(price * (1 - discount / 100) * 100) / 100;
+          attractionDiscount += price - discountedPrice;
           attractionData.push({ id: id, price: price, discount: discount });
         });
 

@@ -282,7 +282,9 @@
         targets.push(wixShell, wixShell.parentElement, this.closest('section'));
       }
 
-      const targetHeight = `${Math.min(Math.max(height, 760), 6200)}px`;
+      // The eight cards exceed 6200px on phones. Keep the Wix section as tall
+      // as its content so the footer starts after the last card.
+      const targetHeight = `${Math.max(height, 760)}px`;
       targets.filter(Boolean).forEach((target) => {
         target.style.setProperty('height', targetHeight, 'important');
         target.style.setProperty('min-height', targetHeight, 'important');
