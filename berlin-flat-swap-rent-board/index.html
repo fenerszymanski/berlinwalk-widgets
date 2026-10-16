@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Berlin Flat Swap Rent Board: What the Next Flat Costs by the Route You Take</title>
+<link rel="stylesheet" href="../css/brand.css">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #FFFFFF; color: #22261f; padding: 12px; }
+  .sw { border-radius: 18px; overflow: hidden; border: 1px solid #dfe5d8; background: #fbfcf8; }
+  .sw-top { padding: 16px 16px 14px; background: #fffbe0; border-bottom: 3px solid #FFE600; }
+  .sw-kick { font-size: 11px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: #1B5E20; }
+  .sw-top h1 { font-size: 19px; line-height: 1.25; font-weight: 800; margin-top: 4px; color: #1a1d17; }
+  .sw-top p { font-size: 12.5px; line-height: 1.5; color: #45493c; margin-top: 6px; }
+  .sw-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0; border-bottom: 1px solid #e3e8dc; }
+  .sw-col { padding: 14px 16px 12px; }
+  .sw-col + .sw-col { border-left: 1px solid #e3e8dc; }
+  .sw-col h2 { font-size: 12px; font-weight: 800; letter-spacing: .07em; text-transform: uppercase; color: #1B5E20; margin-bottom: 8px; }
+  .sw-own { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 10px; }
+  .sw-own button { font-family: inherit; font-size: 12px; font-weight: 700; padding: 7px 10px; border-radius: 999px; border: 1.5px solid #c9d1bf; background: #fff; color: #2c3027; cursor: pointer; }
+  .sw-own button[aria-pressed="true"] { background: #1B5E20; border-color: #1B5E20; color: #fff; }
+  .sw-field { margin-top: 8px; }
+  .sw-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .sw-field label { display: block; font-size: 11.5px; font-weight: 700; color: #4e5246; margin-bottom: 4px; }
+  .sw-field input { width: 100%; min-width: 0; font-family: inherit; font-size: 17px; font-weight: 800; color: #1a1d17; padding: 8px 10px; border: 1.5px solid #c9d1bf; border-radius: 10px; background: #fff; font-variant-numeric: tabular-nums; }
+  .sw-hint { font-size: 11px; color: #6a6e60; line-height: 1.45; margin-top: 8px; }
+  .sw-area { padding: 12px 16px 4px; display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+  .sw-area span { font-size: 11px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; color: #4e5246; }
+  .sw-board { padding: 6px 8px 0; }
+  .sw-board svg { display: block; width: 100%; height: auto; }
+  .sw-strip { padding: 4px 8px 4px; }
+  .sw-strip svg { display: block; width: 100%; height: auto; }
+  .t-route { font-size: 12.5px; font-weight: 800; fill: #1a1d17; }
+  .t-rule { font-size: 10.5px; fill: #5d6154; }
+  .t-eur { font-size: 15px; font-weight: 800; fill: #1B5E20; }
+  .t-eur.is-off { fill: #9a9d90; font-size: 11.5px; font-weight: 700; }
+  .t-delta { font-size: 10.5px; font-weight: 700; fill: #5d6154; }
+  .t-now { font-size: 10.5px; font-weight: 800; fill: #b23a1e; }
+  .t-axis { font-size: 10px; fill: #7a7e70; }
+  .sw-verdict { margin: 10px 16px 0; padding: 12px 14px; border-radius: 14px; background: #1B5E20; color: #fff; font-size: 13.5px; line-height: 1.5; }
+  .sw-verdict b { color: #FFE600; }
+  .sw-notes { padding: 12px 16px 16px; display: grid; gap: 8px; }
+  .sw-notes p { font-size: 12px; line-height: 1.5; color: #3f4337; }
+  .sw-notes b { color: #1a1d17; }
+  .sw-foot { padding: 10px 16px 14px; font-size: 10.5px; color: #6a6e60; line-height: 1.45; border-top: 1px solid #e3e8dc; }
+  button:focus-visible, input:focus-visible { outline: 2px solid #c62828; outline-offset: 2px; }
+  @media (max-width: 560px) {
+    .sw-grid { grid-template-columns: 1fr; }
+    .sw-col + .sw-col { border-left: 0; border-top: 1px solid #e3e8dc; }
+    .sw-top h1 { font-size: 17px; }
+  }
+</style>
+</head>
+<body>
+<div class="sw" id="sw">
+  <div class="sw-top">
+    <div class="sw-kick">Flat swap in Berlin</div>
+    <h1>What the next flat costs, by the route you take to it</h1>
+    <p>Set your flat and the one you want. The board prices the same flat four ways: a swap on the state-owned portal, the downsizing offer from your own company, a private swap or new lease, and a fresh search on the open market.</p>
+  </div>
+
+  <div class="sw-grid">
+    <div class="sw-col">
+      <h2>Your flat now</h2>
+      <div class="sw-own" role="group" aria-label="Who is your landlord">
+        <button type="button" data-own="mine" data-v="lwu" aria-pressed="true">State-owned</button>
+        <button type="button" data-own="mine" data-v="private" aria-pressed="false">Private or other</button>
+      </div>
+      <div class="sw-pair">
+        <div class="sw-field">
+          <label for="mySize">Size in m²</label>
+          <input type="number" id="mySize" min="15" max="250" step="1" value="70" inputmode="numeric">
+        </div>
+        <div class="sw-field">
+          <label for="myRent">Net cold rent, € a month</label>
+          <input type="number" id="myRent" min="100" max="6000" step="1" value="497" inputmode="numeric">
+        </div>
+      </div>
+      <div class="sw-hint" id="myRate">€7.10 per m². Net cold (Nettokaltmiete) is the first rent line in your contract, before heating and service charges.</div>
+    </div>
+    <div class="sw-col">
+      <h2>The flat you want</h2>
+      <div class="sw-own" role="group" aria-label="Who owns the flat you want">
+        <button type="button" data-own="target" data-v="lwu" aria-pressed="true">State-owned</button>
+        <button type="button" data-own="target" data-v="private" aria-pressed="false">Private or other</button>
+      </div>
+      <div class="sw-pair">
+        <div class="sw-field">
+          <label for="tSize">Size in m²</label>
+          <input type="number" id="tSize" min="15" max="250" step="1" value="50" inputmode="numeric">
+        </div>
+        <div class="sw-field">
+          <label for="tRent">Its tenant pays, € a month</label>
+          <input type="number" id="tRent" min="100" max="6000" step="1" value="355" inputmode="numeric">
+        </div>
+      </div>
+      <div class="sw-hint" id="tRate">€7.10 per m². Ask the other tenant; if you do not know it yet, €7.10 per m² is the 2025 average in existing state-owned and co-op flats.</div>
+    </div>
+  </div>
+
+  <div class="sw-area" role="group" aria-label="Where the flat is">
+    <span>Market rent for</span>
+    <div class="sw-own" style="margin:0">
+      <button type="button" data-area="inner" aria-pressed="false">Inner city</button>
+      <button type="button" data-area="city" aria-pressed="true">All Berlin</button>
+      <button type="button" data-area="outer" aria-pressed="false">Outer districts</button>
+    </div>
+  </div>
+
+  <div class="sw-board"><svg id="bars" viewBox="0 0 640 330" role="img" aria-label="Monthly net cold rent for the flat you want, by route"></svg></div>
+  <div class="sw-strip"><svg id="strip" viewBox="0 0 640 92" role="img" aria-label="The same routes as euros per square metre"></svg></div>
+  <div class="sw-verdict" id="verdict" aria-live="polite"></div>
+  <div class="sw-notes" id="notes"></div>
+  <div class="sw-foot">Figures are net cold rent, before heating and service charges. Checked on 16 October 2026: Berliner Mietspiegel 2026 median €7.71/m² (valid since 28 May 2026), IBB Housing Market Report 2025 asking rents (median €15.78/m², inner city €19.22, outer districts €13.01), BBU 2025 average existing rent €7.10/m². The rent cap line uses the city median; your own flat's comparative rent can sit above or below it.</div>
+</div>
+
+<script>
+(function () {
+  var MS = 7.71;            // Mietspiegel 2026 median, EUR/m2
+  var CAP = MS * 1.1;       // Mietpreisbremse ceiling at the median
+  var ASK = { inner: 19.22, city: 15.78, outer: 13.01 };
+  var AREA_LABEL = { inner: 'inner-city', city: 'Berlin-wide', outer: 'outer-district' };
+  var state = { mine: 'lwu', target: 'lwu', area: 'city' };
+  var $ = function (id) { return document.getElementById(id); };
+  var mySize = $('mySize'), myRent = $('myRent'), tSize = $('tSize'), tRent = $('tRent');
+  function num(i, lo, hi, d) { var n = parseFloat(i.value); if (!isFinite(n)) return d; return Math.min(Math.max(n, lo), hi); }
+  var NS = 'http://www.w3.org/2000/svg';
+
+  function eur(n) { return '€' + Math.round(n).toLocaleString('en-GB'); }
+  function eur2(n) { return '€' + n.toFixed(2); }
+  function el(name, attrs, text) {
+    var e = document.createElementNS(NS, name);
+    for (var k in attrs) e.setAttribute(k, attrs[k]);
+    if (text != null) e.textContent = text;
+    return e;
+  }
+
+  function routes(v) {
+    var both = state.mine === 'lwu' && state.target === 'lwu';
+    var smaller = v.my - v.t >= 10;
+    var prevHigher = v.tr > CAP;
+    return [
+      { key: 'portal', name: 'Swap on the state-owned portal', rule: both ? 'Both net cold rents stay as they are' : 'Only if both flats belong to a state-owned company',
+        rate: v.tr, open: both },
+      { key: 'shrink', name: 'Downsizing offer from your own company', rule: state.mine !== 'lwu' ? 'Only for tenants of the seven state-owned companies' : (smaller ? 'A vacant flat from your company at the Mietspiegel rent' : 'Needs a flat at least 10 m² and one room smaller'),
+        rate: MS, open: state.mine === 'lwu' && smaller },
+      { key: 'private', name: 'Private swap or new lease', rule: prevHigher ? 'The landlord may keep the previous rent if it was higher' : 'New lease, capped at the Mietspiegel plus 10%',
+        rate: Math.max(CAP, v.tr), open: true },
+      { key: 'market', name: 'Fresh search on the open market', rule: 'Median ' + AREA_LABEL[state.area] + ' asking rent in 2025 listings',
+        rate: ASK[state.area], open: true }
+    ];
+  }
+
+  function drawBars(v, rs) {
+    var svg = $('bars');
+    while (svg.firstChild) svg.removeChild(svg.firstChild);
+    var W = Math.max(300, Math.round(svg.parentNode.clientWidth || 640)), narrow = W < 520;
+    var left = 8, right = W - 8, top = 18, rowH = narrow ? 86 : 72;
+    var now = v.my * v.mr;
+    var max = Math.max(now, v.t * ASK.inner, v.t * Math.max(CAP, v.tr)) * 1.08;
+    var x = function (val) { return left + (right - left) * val / max; };
+    // grid
+    var step = max > 2400 ? 500 : (max > 1200 ? 250 : (narrow && max > 600 ? 200 : 100));
+    for (var g = 0; g <= max; g += step) {
+      svg.appendChild(el('line', { x1: x(g), y1: top - 6, x2: x(g), y2: top + rowH * 4 - 6, stroke: '#e6ebe0', 'stroke-width': 1 }));
+      svg.appendChild(el('text', { x: x(g), y: top + rowH * 4 + 8, 'class': 't-axis', 'text-anchor': 'middle' }, '€' + g));
+    }
+    rs.forEach(function (r, i) {
+      var y = top + i * rowH;
+      var month = v.t * r.rate;
+      svg.appendChild(el('text', { x: left, y: y + 12, 'class': 't-route' }, r.name));
+      svg.appendChild(el('text', { x: left, y: y + 27, 'class': 't-rule' }, r.rule));
+      svg.appendChild(el('rect', { x: left, y: y + 35, width: right - left, height: 20, rx: 6, fill: '#eef2e9' }));
+      if (r.open) {
+        var w = Math.max(4, x(month) - left);
+        svg.appendChild(el('rect', { x: left, y: y + 35, width: w, height: 20, rx: 6, fill: r.key === 'market' ? '#8aa682' : (r.key === 'portal' ? '#1B5E20' : '#3f7d3a') }));
+        var label = eur(month) + ' a month';
+        var inside = w > 150;
+        svg.appendChild(el('text', { x: inside ? left + w - 8 : left + w + 8, y: y + 50, 'class': 't-eur', 'text-anchor': inside ? 'end' : 'start', fill: inside ? '#ffffff' : '#1B5E20', style: inside ? 'fill:#ffffff' : '' }, label));
+        var d = month - now;
+        var dtxt = (d >= 0 ? '+' : '−') + eur(Math.abs(d)) + ' vs now · ' + eur2(r.rate) + '/m²';
+        svg.appendChild(el('text', { x: narrow ? left : right, y: narrow ? y + 72 : y + 12, 'class': 't-delta', 'text-anchor': narrow ? 'start' : 'end' }, dtxt));
+      } else {
+        svg.appendChild(el('text', { x: left + 10, y: y + 49, 'class': 't-eur is-off' }, 'Not open to you'));
+      }
+    });
+    var xn = x(now);
+    svg.appendChild(el('line', { x1: xn, y1: top + 30, x2: xn, y2: top + rowH * 4 - 8, stroke: '#b23a1e', 'stroke-width': 2, 'stroke-dasharray': '5 4' }));
+    svg.appendChild(el('text', { x: Math.min(Math.max(xn, 60), right - 60), y: top + rowH * 4 + 22, 'class': 't-now', 'text-anchor': 'middle' }, 'You pay now: ' + eur(now)));
+    svg.setAttribute('viewBox', '0 0 ' + W + ' ' + (top + rowH * 4 + 30));
+    svg.setAttribute('height', top + rowH * 4 + 30);
+  }
+
+  function drawStrip(v, rs) {
+    var svg = $('strip');
+    while (svg.firstChild) svg.removeChild(svg.firstChild);
+    var W = Math.max(300, Math.round(svg.parentNode.clientWidth || 640));
+    var left = 16, right = W - 16, y = 46, lo = 4, hi = 22;
+    svg.setAttribute('viewBox', '0 0 ' + W + ' 92');
+    var x = function (r) { return left + (right - left) * (Math.min(Math.max(r, lo), hi) - lo) / (hi - lo); };
+    svg.appendChild(el('text', { x: left, y: 14, 'class': 't-rule', style: 'font-weight:700' }, 'Euros per m², net cold'));
+    svg.appendChild(el('line', { x1: left, y1: y, x2: right, y2: y, stroke: '#c9d1bf', 'stroke-width': 2 }));
+    for (var t = lo; t <= hi; t += (W < 520 ? 4 : 2)) {
+      svg.appendChild(el('line', { x1: x(t), y1: y - 4, x2: x(t), y2: y + 4, stroke: '#c9d1bf', 'stroke-width': 1 }));
+      svg.appendChild(el('text', { x: x(t), y: y + 18, 'class': 't-axis', 'text-anchor': 'middle' }, '€' + t));
+    }
+    svg.appendChild(el('rect', { x: x(MS), y: y - 9, width: Math.max(2, x(CAP) - x(MS)), height: 18, fill: '#FFE600', opacity: 0.55, rx: 3 }));
+    svg.appendChild(el('text', { x: x(MS), y: y + 34, 'class': 't-axis', 'text-anchor': 'start' }, 'Mietspiegel to rent cap'));
+    var marks = [{ r: v.mr, c: '#b23a1e', lab: 'you' }];
+    rs.forEach(function (r) { if (r.open) marks.push({ r: r.rate, c: r.key === 'market' ? '#8aa682' : '#1B5E20', lab: '' }); });
+    marks.forEach(function (m) {
+      svg.appendChild(el('circle', { cx: x(m.r), cy: y, r: m.lab ? 7 : 6, fill: m.c, stroke: '#fff', 'stroke-width': 2 }));
+      if (m.lab) svg.appendChild(el('text', { x: x(m.r), y: y - 12, 'class': 't-now', 'text-anchor': 'middle' }, m.lab));
+    });
+  }
+
+  function render() {
+    var my = num(mySize, 15, 250, 70), t = num(tSize, 15, 250, 50);
+    var v = { my: my, mr: num(myRent, 100, 6000, 497) / my, t: t, tr: num(tRent, 100, 6000, 355) / t };
+    $('myRate').innerHTML = '<b>' + eur2(v.mr) + ' per m².</b> Net cold (Nettokaltmiete) is the first rent line in your contract, before heating and service charges.';
+    $('tRate').innerHTML = '<b>' + eur2(v.tr) + ' per m².</b> Ask the other tenant; if you do not know it yet, €7.10 per m² is the 2025 average in existing state-owned and co-op flats.';
+    var rs = routes(v);
+    drawBars(v, rs);
+    drawStrip(v, rs);
+    var open = rs.filter(function (r) { return r.open; }).sort(function (a, b) { return a.rate - b.rate; });
+    var best = open[0], mkt = rs[3];
+    var yr = (mkt.rate - best.rate) * v.t * 12;
+    var txt;
+    if (best.key === 'market') {
+      txt = 'For this flat the open market is not the expensive route, because its tenant already pays more than the market median. <b>Ask the landlord what a new lease would cost</b> before you agree to anything.';
+    } else {
+      txt = 'Cheapest route for this flat: <b>' + best.name.toLowerCase() + '</b>, at ' + eur(best.rate * v.t) + ' a month. Against a fresh search that is <b>' + eur(yr) + ' a year</b> you keep.';
+      if (best.key === 'private') txt += ' That only holds if the landlord agrees to the swap and keeps to the rent cap.';
+    }
+    $('verdict').innerHTML = txt;
+
+    var n = [];
+    if (state.mine === 'lwu' && state.target === 'lwu') n.push('<b>Both moves happen on the same day.</b> The two households organise their own moves, and each company checks the swap before new contracts are signed.');
+    if (state.mine === 'lwu' && state.target === 'private') n.push('<b>Your state-owned flat does not travel with you.</b> The portal only matches tenants of degewo, GESOBAU, Gewobag, HOWOGE, STADT UND LAND, WBM and berlinovo; with a private landlord the swap is a new lease.');
+    if (state.mine === 'private') n.push('<b>A private landlord does not have to agree.</b> There is no right to swap in German tenancy law, so the swap only happens if both landlords sign new leases.');
+    if (v.tr > CAP) n.push('<b>Their rent is above the cap line.</b> In a new lease the landlord may keep the previous tenant\'s rent, so a private swap does not bring it down.');
+    if (state.mine === 'lwu' && v.my - v.t >= 10) n.push('<b>Shrinking by 10 m² or more?</b> The downsizing offer gives up to three flats from your own company within twelve months, so you do not need a swap partner at all.');
+    n.push('<b>Never pay for a swap.</b> A flat is not yours to sell; a swap ad that asks for money up front is the moment to walk away.');
+    $('notes').innerHTML = n.map(function (p) { return '<p>' + p + '</p>'; }).join('');
+  }
+
+  Array.prototype.forEach.call(document.querySelectorAll('[data-own]'), function (b) {
+    b.addEventListener('click', function () {
+      state[b.getAttribute('data-own')] = b.getAttribute('data-v');
+      Array.prototype.forEach.call(document.querySelectorAll('[data-own="' + b.getAttribute('data-own') + '"]'), function (o) { o.setAttribute('aria-pressed', o === b ? 'true' : 'false'); });
+      render();
+    });
+  });
+  Array.prototype.forEach.call(document.querySelectorAll('[data-area]'), function (b) {
+    b.addEventListener('click', function () {
+      state.area = b.getAttribute('data-area');
+      Array.prototype.forEach.call(document.querySelectorAll('[data-area]'), function (o) { o.setAttribute('aria-pressed', o === b ? 'true' : 'false'); });
+      render();
+    });
+  });
+  [mySize, myRent, tSize, tRent].forEach(function (i) { i.addEventListener('input', render); });
+  var lastW = 0;
+  window.addEventListener('resize', function () { var w = $('bars').parentNode.clientWidth; if (Math.abs(w - lastW) > 8) { lastW = w; render(); } });
+  render();
+  lastW = $('bars').parentNode.clientWidth;
+})();
+</script>
+<script src="../js/brand.js"></script>
+</body>
+</html>

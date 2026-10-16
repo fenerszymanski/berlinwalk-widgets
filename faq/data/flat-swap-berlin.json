@@ -1,0 +1,101 @@
+{
+  "version": 1,
+  "slug": "flat-swap-berlin",
+  "key": "flat-swap-berlin",
+  "config": {
+    "title": "Flat Swap in Berlin - FAQ",
+    "subtitle": "How a Wohnungstausch works in Berlin, and what it does to your rent with a state-owned or a private landlord.",
+    "items": [
+      {
+        "q": "Can I swap my flat in Berlin?",
+        "a": "Only if both landlords agree. German tenancy law gives tenants **no right to swap**. The exception is the seven state-owned housing companies: their tenants can swap with each other through the official portal on inberlinwohnen.de."
+      },
+      {
+        "q": "Does the rent change when I swap a flat in Berlin?",
+        "a": "On the state-owned swap portal, **no: both net cold rents stay unchanged**, so you take over the other tenant's rent. In a private swap the incoming tenant signs a new lease, and the landlord may set a new rent within the Mietpreisbremse."
+      },
+      {
+        "q": "Who can use the Berlin Wohnungstausch portal?",
+        "a": "Main tenants of degewo, GESOBAU, Gewobag, HOWOGE, STADT UND LAND, WBM and berlinovo whose lease is **not already terminated** and who have an **email address on file** with their company. You can swap across all seven companies."
+      },
+      {
+        "q": "How many flat swaps actually happen in Berlin?",
+        "a": "Few. In 2024 the state-owned swap route produced **327 new leases**, 309 of them started on the portal, against roughly 370,000 state-owned flats. Internal moves within one company produced 716 new leases that year."
+      },
+      {
+        "q": "What is the Wohnungswechsel downsizing offer?",
+        "a": "Since **1 September 2025** a main tenant of a state-owned company who wants a flat **at least one room and 10 m² smaller** gets up to three offers from their own company within twelve months. The new flat is let at the **local comparative rent without a new-letting surcharge**, and the move is timed so you do not pay two rents."
+      },
+      {
+        "q": "How high can the rent be after a private flat swap?",
+        "a": "The Mietpreisbremse, extended in Berlin until **31 December 2029**, caps a new lease at **10 percent above the local comparative rent**. A landlord may keep a higher previous rent, and flats first let after 1 October 2014 or after a comprehensive modernisation are outside the cap."
+      },
+      {
+        "q": "Should I pay someone to swap flats with me?",
+        "a": "No. A flat is not the outgoing tenant's to sell. A swap ad that asks for money up front is the moment to walk away."
+      }
+    ]
+  },
+  "schema": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Can I swap my flat in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Only if both landlords agree. German tenancy law gives tenants no right to swap. The exception is the seven state-owned housing companies: their tenants can swap with each other through the official portal on inberlinwohnen.de."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Does the rent change when I swap a flat in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "On the state-owned swap portal, no: both net cold rents stay unchanged, so you take over the other tenant's rent. In a private swap the incoming tenant signs a new lease, and the landlord may set a new rent within the Mietpreisbremse."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Who can use the Berlin Wohnungstausch portal?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Main tenants of degewo, GESOBAU, Gewobag, HOWOGE, STADT UND LAND, WBM and berlinovo whose lease is not already terminated and who have an email address on file with their company. You can swap across all seven companies."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How many flat swaps actually happen in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Few. In 2024 the state-owned swap route produced 327 new leases, 309 of them started on the portal, against roughly 370,000 state-owned flats. Internal moves within one company produced 716 new leases that year."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the Wohnungswechsel downsizing offer?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Since 1 September 2025 a main tenant of a state-owned company who wants a flat at least one room and 10 m² smaller gets up to three offers from their own company within twelve months. The new flat is let at the local comparative rent without a new-letting surcharge, and the move is timed so you do not pay two rents."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How high can the rent be after a private flat swap?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The Mietpreisbremse, extended in Berlin until 31 December 2029, caps a new lease at 10 percent above the local comparative rent. A landlord may keep a higher previous rent, and flats first let after 1 October 2014 or after a comprehensive modernisation are outside the cap."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Should I pay someone to swap flats with me?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. A flat is not the outgoing tenant's to sell. A swap ad that asks for money up front is the moment to walk away."
+        }
+      }
+    ]
+  }
+}
