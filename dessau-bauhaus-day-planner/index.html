@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dessau Bauhaus Day Planner: Your Day Trip from Berlin on One Timeline</title>
+<link rel="stylesheet" href="../css/brand.css">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #FFFFFF; color: #20241d; padding: 12px; }
+  .dp { border-radius: 18px; overflow: hidden; border: 1px solid #dde3d5; background: #fcfdf9; }
+  .dp-top { padding: 16px 16px 14px; background: #1B5E20; color: #fff; }
+  .dp-kick { font-size: 11px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: #FFE600; }
+  .dp-top h1 { font-size: 19px; line-height: 1.25; font-weight: 800; margin-top: 4px; }
+  .dp-top p { font-size: 12.5px; line-height: 1.5; color: #e3eedd; margin-top: 6px; }
+  .dp-cal { padding: 14px 16px 6px; border-bottom: 1px solid #e3e8dc; }
+  .dp-lab { display: block; font-size: 11px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; color: #1B5E20; margin-bottom: 6px; }
+  .dp-calwrap { display: grid; grid-template-columns: 26px minmax(0, 1fr); gap: 4px; max-width: 650px; }
+  .dp-wd { display: grid; grid-template-rows: 14px repeat(7, 1fr); align-self: stretch; gap: 2px; font-size: 9px; font-weight: 700; color: #6a6e60; }
+  .dp-wd span { display: flex; align-items: center; }
+  .dp-grid { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr); grid-template-rows: 14px repeat(7, auto); gap: 2px; max-width: 620px; min-width: 0; }
+  .dp-mon { font-size: 9px; font-weight: 800; color: #1B5E20; white-space: nowrap; overflow: visible; }
+  .dp-cell { width: 100%; aspect-ratio: 1 / 1; min-height: 12px; border: 0; border-radius: 3px; cursor: pointer; padding: 0; font-family: inherit; font-size: 8px; font-weight: 800; color: transparent; }
+  .dp-cell.s3 { background: #1B5E20; }
+  .dp-cell.s2 { background: #9cc47e; }
+  .dp-cell.s0 { background: repeating-linear-gradient(45deg, #f3ddd5, #f3ddd5 3px, #e6b9aa 3px, #e6b9aa 5px); }
+  .dp-cell.en { box-shadow: inset 0 0 0 2.5px #FFE600; }
+  .dp-cell.past { background: #eef0ea; cursor: default; }
+  .dp-cell[aria-pressed="true"] { outline: 2.5px solid #c62828; outline-offset: 1px; }
+  .dp-key { display: flex; flex-wrap: wrap; gap: 4px 12px; margin-top: 8px; font-size: 10.5px; color: #4b5043; }
+  .dp-key i { display: inline-block; width: 11px; height: 11px; border-radius: 3px; vertical-align: -1px; margin-right: 4px; }
+  .dp-picked { margin-top: 8px; font-size: 14px; font-weight: 800; color: #1a1d17; }
+  .dp-picked small { font-weight: 600; color: #565b4e; font-size: 12px; }
+  .dp-trains { padding: 10px 16px 4px; }
+  .dp-tlist { display: flex; flex-wrap: wrap; gap: 6px; }
+  .dp-tlist button { font-family: inherit; font-size: 12px; font-weight: 700; padding: 7px 10px; border-radius: 10px; border: 1.5px solid #c6cfbb; background: #fff; color: #2c3027; cursor: pointer; font-variant-numeric: tabular-nums; }
+  .dp-tlist button[aria-pressed="true"] { background: #1B5E20; border-color: #1B5E20; color: #fff; }
+  .dp-tvia { font-size: 11.5px; color: #565b4e; margin-top: 6px; }
+  .dp-stops { display: flex; flex-wrap: wrap; gap: 6px; padding: 10px 16px 4px; align-items: center; }
+  .dp-stops span.dp-lab { margin: 0 4px 0 0; }
+  .dp-stops button { font-family: inherit; font-size: 12px; font-weight: 700; padding: 7px 11px; border-radius: 999px; border: 1.5px solid #c6cfbb; background: #fff; color: #2c3027; cursor: pointer; }
+  .dp-stops button[aria-pressed="true"] { background: #FFE600; border-color: #d9c400; color: #123D18; }
+  .dp-chart { padding: 6px 8px 0; }
+  .dp-chart svg { display: block; width: 100%; height: auto; }
+  .t-row { font-size: 11px; font-weight: 800; fill: #1a1d17; }
+  .t-sub { font-size: 9.5px; fill: #6a6e60; }
+  .t-axis { font-size: 9.5px; fill: #7a7e70; }
+  .t-in { font-size: 9.5px; font-weight: 800; fill: #123D18; }
+  .t-inw { font-size: 9.5px; font-weight: 800; fill: #ffffff; }
+  .t-closed { font-size: 10px; font-weight: 800; fill: #9c3a24; }
+  .t-tour { font-size: 9px; font-weight: 800; fill: #123D18; }
+  .dp-verdict { margin: 10px 16px 0; padding: 12px 14px; border-radius: 14px; background: #fffbe0; border: 1.5px solid #FFE600; color: #1a1d17; font-size: 13.5px; line-height: 1.5; }
+  .dp-verdict b { color: #1B5E20; }
+  .dp-verdict.is-bad { background: #fdf0ec; border-color: #e7b3a4; }
+  .dp-notes { padding: 12px 16px 14px; display: grid; gap: 7px; }
+  .dp-notes p { font-size: 12px; line-height: 1.5; color: #3f4337; }
+  .dp-notes b { color: #1a1d17; }
+  .dp-foot { padding: 10px 16px 14px; font-size: 10.5px; color: #6a6e60; line-height: 1.45; border-top: 1px solid #e3e8dc; }
+  button:focus-visible, input:focus-visible { outline: 2px solid #c62828; outline-offset: 2px; }
+  @media (max-width: 560px) {
+    .dp-top h1 { font-size: 17px; }
+    .dp-calwrap { grid-template-columns: 20px 1fr; }
+  }
+</style>
+</head>
+<body>
+<div class="dp" id="dp">
+  <div class="dp-top">
+    <div class="dp-kick">Dessau day trip from Berlin</div>
+    <h1>Your Bauhaus day in Dessau, on one timeline</h1>
+    <p>Pick the date and the train out of Berlin. The planner checks which Bauhaus sites are open that day, walks you from the station to each one, places the guided tours and finds your train home.</p>
+  </div>
+  <div class="dp-cal">
+    <span class="dp-lab">Which day: every date until the end of February</span>
+    <div class="dp-calwrap">
+      <div class="dp-wd" aria-hidden="true"><span></span><span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span><span>Sun</span></div>
+      <div class="dp-grid" id="dp-grid" role="group" aria-label="Trip date"></div>
+    </div>
+    <div class="dp-key"><span><i style="background:#1B5E20"></i>All three sites open</span><span><i style="background:#9cc47e"></i>Museum shut, two open</span><span><i style="background:repeating-linear-gradient(45deg,#f3ddd5,#f3ddd5 3px,#e6b9aa 3px,#e6b9aa 5px)"></i>All closed</span><span><i style="background:#1B5E20;box-shadow:inset 0 0 0 2.5px #FFE600"></i>English tours</span></div>
+    <div class="dp-picked" id="dp-day"></div>
+  </div>
+  <div class="dp-trains">
+    <span class="dp-lab">Train from Berlin Hauptbahnhof</span>
+    <div class="dp-tlist" id="dp-tlist" role="group" aria-label="Train from Berlin Hauptbahnhof"></div>
+    <div class="dp-tvia" id="dp-train"></div>
+  </div>
+  <div class="dp-stops" role="group" aria-label="What to see">
+    <span class="dp-lab">See</span>
+    <button type="button" data-stop="building" aria-pressed="true">Bauhaus Building</button>
+    <button type="button" data-stop="masters" aria-pressed="true">Masters' Houses</button>
+    <button type="button" data-stop="museum" aria-pressed="true">Bauhaus Museum</button>
+    <button type="button" data-stop="tour" aria-pressed="true">Join a tour</button>
+  </div>
+  <div class="dp-chart"><svg id="dp-svg" viewBox="0 0 660 284" role="img" aria-label="Timeline of the day in Dessau"></svg></div>
+  <div class="dp-verdict" id="dp-verdict" aria-live="polite"></div>
+  <div class="dp-notes" id="dp-notes"></div>
+  <div class="dp-foot">Opening hours, tours and prices from the Bauhaus Dessau Foundation; trains from the VBB journey planner, both checked on 17 October 2026. Visit lengths are my own planning times. Check your train on the day, and the new timetable after 13 December.</div>
+</div>
+<script>
+(function () {
+  // Trains read in the VBB journey planner on 17 October 2026.
+  // Works period: RE7 Bad Belzig-Dessau replaced by buses 19 Sep-20 Nov 2026, so RE3 to Lutherstadt Wittenberg + RB51.
+  var REGIMES = {
+    works: {
+      label: 'RE3 to Lutherstadt Wittenberg, then RB51',
+      out: [['06:40','08:49'],['07:32','09:49'],['08:40','10:49'],['09:31','11:49'],['10:40','12:49'],['11:31','13:49']],
+      back: [['14:10','16:19','RB51 + RE3'],['15:05','17:50','RE7 bus via Bad Belzig'],['16:10','18:20','RB51 + RE3'],['17:05','19:53','RE7 bus via Bad Belzig'],['18:10','20:20','RB51 + RE3'],['19:05','21:52','RE7 bus via Bad Belzig'],['20:10','22:19','RB51 + RE3']]
+    },
+    re7: {
+      label: 'S-Bahn to Charlottenburg, then RE7 direct',
+      out: [['07:09','08:53'],['08:09','09:53'],['09:09','10:53'],['10:09','11:53'],['11:09','12:53'],['12:07','13:53']],
+      back: [['14:05','15:55','RE7 + S-Bahn'],['15:05','16:50','RE7 + S-Bahn'],['16:05','17:50','RE7 + S-Bahn'],['17:05','18:55','RE7 + S-Bahn'],['18:05','19:55','RE7 + S-Bahn'],['19:05','20:55','RE7 + S-Bahn'],['20:05','21:55','RE7 + S-Bahn']]
+    },
+    later: {
+      label: 'RE3 to Lutherstadt Wittenberg, then RB51 (check the new timetable)',
+      out: [['06:40','08:49'],['07:32','09:49'],['08:40','10:49'],['09:31','11:49'],['10:40','12:49'],['11:31','13:49']],
+      back: [['14:10','16:19','RB51 + RE3'],['16:10','18:20','RB51 + RE3'],['18:10','20:20','RB51 + RE3'],['20:10','22:19','RB51 + RE3']]
+    }
+  };
+  var WALK = { hbfBuilding: 8, buildingMasters: 10, mastersHbf: 16, hbfMuseum: 11, mastersMuseum: 27, buildingMuseum: 19, museumHbf: 11 };
+  var STAY = { building: 75, buildingTour: 30, masters: 60, museum: 90, lunch: 40 };
+  var CLOSED_DATES = ['2026-12-24','2026-12-25','2026-12-26','2026-12-31','2027-01-01'];
+  var DAYS = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+  var MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+
+  var state = { building: true, masters: true, museum: true, tour: true };
+  var sel = { iso: null, train: 1 };
+  var FIRST = '2026-10-17', LAST = '2027-02-28';
+
+  function toMin(s) { var p = s.split(':'); return +p[0] * 60 + +p[1]; }
+  function toStr(m) { m = Math.round(m); var h = Math.floor(m / 60), mm = m % 60; return (h < 10 ? '0' : '') + h + ':' + (mm < 10 ? '0' : '') + mm; }
+  function parseDate(v) { var p = v.split('-'); return new Date(Date.UTC(+p[0], +p[1] - 1, +p[2])); }
+  function isoOf(d) { return d.toISOString().slice(0, 10); }
+
+  function regimeFor(iso) {
+    if (iso <= '2026-11-20') return 'works';
+    if (iso <= '2026-12-12') return 're7';
+    return 'later';
+  }
+
+  function siteHours(d, iso) {
+    var month = d.getUTCMonth() + 1, wd = d.getUTCDay();
+    var peak = month >= 3 && month <= 10;
+    var holiday = CLOSED_DATES.indexOf(iso) !== -1;
+    var res = {
+      peak: peak,
+      building: { open: 600, close: 1020, closed: false },
+      masters: { open: 600, close: 1020, closed: false },
+      museum: { open: 600, close: peak ? 1080 : 1020, closed: false }
+    };
+    if (wd === 1) { res.museum.closed = 'closed on Mondays'; if (!peak) { res.building.closed = 'closed on Mondays in winter'; res.masters.closed = 'closed on Mondays in winter'; } }
+    if (holiday) { res.building.closed = res.masters.closed = res.museum.closed = 'closed for the holidays'; }
+    // Public tours (Bauhaus Dessau Foundation, guided tours page).
+    var tours = { building: [], masters: [], museum: [] };
+    var dailyGerman = peak || wd !== 1;
+    if (dailyGerman && !holiday) {
+      tours.building.push({ t: 660, lang: 'DE' });
+      tours.masters.push({ t: 750, lang: 'DE' });
+    }
+    if (!holiday && (wd === 3 || wd === 5 || wd === 6)) tours.museum.push({ t: 870, lang: 'DE' });
+    if (peak && wd === 5 && !holiday) {
+      tours.building.push({ t: 720, lang: 'EN' });
+      tours.masters.push({ t: 810, lang: 'EN' });
+      tours.museum.push({ t: 930, lang: 'EN' });
+    }
+    res.tours = tours;
+    return res;
+  }
+
+  // English first when it is within the wait you would accept, else the next German tour.
+  function pickTour(list, from, closeAt, maxWait) {
+    var ok = list.filter(function (x) { return x.t >= from && x.t - from <= maxWait && x.t + 60 <= closeAt; });
+    return ok.filter(function (x) { return x.lang === 'EN'; })[0] || ok[0] || null;
+  }
+
+  function plan(iso, idx) {
+    var d = parseDate(iso);
+    var reg = REGIMES[regimeFor(iso)];
+    var hours = siteHours(d, iso);
+    var train = reg.out[Math.min(idx, reg.out.length - 1)];
+    var t = toMin(train[1]);
+    var blocks = [], seen = [], skipped = [], tourUsed = [];
+    var where = 'hbf';
+    function walk(mins, to) { blocks.push({ kind: 'walk', a: t, b: t + mins }); t += mins; where = to; }
+
+    if (state.building) {
+      var hb = hours.building;
+      if (hb.closed) skipped.push(['Bauhaus Building', hb.closed]);
+      else {
+        walk(WALK.hbfBuilding, 'building');
+        var start = Math.max(t, hb.open);
+        if (start > t) blocks.push({ kind: 'wait', a: t, b: start });
+        var end = start + STAY.building;
+        var tour = state.tour ? pickTour(hours.tours.building, start, hb.close, 125) : null;
+        if (tour) { end = Math.max(end, tour.t + 60); tourUsed.push(['Bauhaus Building', tour]); }
+        if (end > hb.close) end = hb.close;
+        if (end - start >= 30) { blocks.push({ kind: 'building', a: start, b: end, tour: tour }); seen.push('Bauhaus Building'); t = end; }
+        else skipped.push(['Bauhaus Building', 'reached too close to 17:00']);
+        if (t >= 690 && t <= 840) { blocks.push({ kind: 'lunch', a: t, b: t + STAY.lunch }); t += STAY.lunch; }
+      }
+    }
+    if (state.masters) {
+      var hm = hours.masters;
+      if (hm.closed) skipped.push(["Masters' Houses", hm.closed]);
+      else {
+        walk(where === 'building' ? WALK.buildingMasters : WALK.hbfBuilding + WALK.buildingMasters, 'masters');
+        var ms = Math.max(t, hm.open);
+        if (ms > t) blocks.push({ kind: 'wait', a: t, b: ms });
+        var me = ms + STAY.masters;
+        var mt = state.tour ? pickTour(hours.tours.masters, ms, hm.close, 45) : null;
+        if (mt) { me = Math.max(me, mt.t + 60); tourUsed.push(["Masters' Houses", mt]); }
+        if (me > hm.close) me = hm.close;
+        if (me - ms >= 30) { blocks.push({ kind: 'masters', a: ms, b: me, tour: mt }); seen.push("Masters' Houses"); t = me; }
+        else { skipped.push(["Masters' Houses", 'reached too close to 17:00']); }
+      }
+    }
+    if (state.museum) {
+      var hu = hours.museum;
+      if (hu.closed) skipped.push(['Bauhaus Museum', hu.closed]);
+      else {
+        var w = where === 'masters' ? WALK.mastersMuseum : where === 'building' ? WALK.buildingMuseum : WALK.hbfMuseum;
+        var us = Math.max(t + w, hu.open);
+        var ue = Math.min(us + STAY.museum, hu.close);
+        if (ue - us >= 45) {
+          walk(w, 'museum');
+          if (us > t) blocks.push({ kind: 'wait', a: t, b: us });
+          blocks.push({ kind: 'museum', a: us, b: ue }); seen.push('Bauhaus Museum'); t = ue;
+        } else skipped.push(['Bauhaus Museum', 'reached with less than 45 minutes before closing']);
+      }
+    }
+    var back = where === 'masters' ? WALK.mastersHbf : where === 'building' ? WALK.hbfBuilding : where === 'museum' ? WALK.museumHbf : 0;
+    if (back) walk(back, 'hbf');
+    var ready = t;
+    var after = reg.back.filter(function (r) { return toMin(r[0]) >= ready; });
+    // The replacement bus via Bad Belzig is the fallback: plan on the train, offer the bus only when it leaves first.
+    var home = after.filter(function (r) { return r[2].indexOf('bus') === -1; })[0] || after[0] || null;
+    var alt = home && home[2].indexOf('bus') === -1 ? (after.filter(function (r) { return r[2].indexOf('bus') !== -1 && toMin(r[0]) < toMin(home[0]); })[0] || null) : null;
+    if (home) blocks.push({ kind: 'wait', a: ready, b: toMin(home[0]) });
+    return { d: d, reg: reg, hours: hours, train: train, blocks: blocks, seen: seen, skipped: skipped, tourUsed: tourUsed, home: home, alt: alt };
+  }
+
+  var X0 = 112, X1 = 648, T0 = 480, T1 = 1350, NARROW = false;
+  function x(m) { return X0 + (Math.max(T0, Math.min(T1, m)) - T0) / (T1 - T0) * (X1 - X0); }
+  function el(name, attrs, text) {
+    var n = document.createElementNS('http://www.w3.org/2000/svg', name);
+    for (var k in attrs) n.setAttribute(k, attrs[k]);
+    if (text != null) n.textContent = text;
+    return n;
+  }
+
+  function draw(p) {
+    var svg = document.getElementById('dp-svg');
+    while (svg.firstChild) svg.removeChild(svg.firstChild);
+    // Draw at the real width so the type stays readable on a phone.
+    var VW = Math.max(320, Math.min(660, (svg.parentNode.clientWidth || 660) - 16));
+    NARROW = VW < 520; X0 = NARROW ? 70 : 112; X1 = VW - 12;
+    svg.setAttribute('viewBox', '0 0 ' + VW + ' 284');
+    var defs = el('defs', {});
+    var pat = el('pattern', { id: 'hatch', width: 6, height: 6, patternUnits: 'userSpaceOnUse', patternTransform: 'rotate(45)' });
+    pat.appendChild(el('rect', { width: 6, height: 6, fill: '#f6e6e0' }));
+    pat.appendChild(el('line', { x1: 0, y1: 0, x2: 0, y2: 6, stroke: '#e2b4a6', 'stroke-width': 2 }));
+    defs.appendChild(pat); svg.appendChild(defs);
+    for (var h = 8; h <= 22; h += NARROW ? 4 : 2) {
+      svg.appendChild(el('line', { x1: x(h * 60), y1: 18, x2: x(h * 60), y2: 250, stroke: '#e6eadf', 'stroke-width': 1 }));
+      svg.appendChild(el('text', { x: x(h * 60), y: 279, 'text-anchor': 'middle', class: 't-axis' }, (h < 10 ? '0' : '') + h + ':00'));
+    }
+    var rows = [
+      { key: 'building', name: 'Bauhaus Building', short: 'Building', sub: 'west of the station', subShort: 'west side', y: 30 },
+      { key: 'masters', name: "Masters' Houses", short: "Masters'", sub: 'Ebertallee', subShort: 'Ebertallee', y: 76 },
+      { key: 'museum', name: 'Bauhaus Museum', short: 'Museum', sub: 'east of the station', subShort: 'east side', y: 122 }
+    ];
+    rows.forEach(function (r) {
+      var hrs = p.hours[r.key];
+      svg.appendChild(el('text', { x: 6, y: r.y + 13, class: 't-row' }, NARROW ? r.short : r.name));
+      svg.appendChild(el('text', { x: 6, y: r.y + 26, class: 't-sub' }, NARROW ? r.subShort : r.sub));
+      if (hrs.closed) {
+        svg.appendChild(el('rect', { x: x(hrs.open), y: r.y + 2, width: x(hrs.close) - x(hrs.open), height: 26, rx: 6, fill: 'url(#hatch)' }));
+        svg.appendChild(el('text', { x: (x(hrs.open) + x(hrs.close)) / 2, y: r.y + 19, 'text-anchor': 'middle', class: 't-closed' }, hrs.closed.charAt(0).toUpperCase() + hrs.closed.slice(1)));
+      } else {
+        svg.appendChild(el('rect', { x: x(hrs.open), y: r.y + 2, width: x(hrs.close) - x(hrs.open), height: 26, rx: 6, fill: '#e3efd9' }));
+        svg.appendChild(el('text', { x: x(hrs.close) - 4, y: r.y + 12, 'text-anchor': 'end', class: 't-sub' }, (NARROW ? '' : 'open ') + toStr(hrs.open) + (NARROW ? '-' : ' to ') + toStr(hrs.close)));
+        var tl = (p.hours.tours[r.key] || []).slice().sort(function (a, b) { return a.t - b.t; });
+        tl.forEach(function (tr, i) {
+          var cx = x(tr.t);
+          var crowded = tl[i + 1] && tl[i + 1].t - tr.t < 100;
+          svg.appendChild(el('path', { d: 'M' + cx + ' ' + (r.y + 31) + ' l5 6 l-5 6 l-5 -6 z', fill: tr.lang === 'EN' ? '#FFE600' : '#ffffff', stroke: '#123D18', 'stroke-width': 1.2 }));
+          svg.appendChild(el('text', { x: crowded ? cx - 8 : cx + 8, y: r.y + 41, 'text-anchor': crowded ? 'end' : 'start', class: 't-tour' }, toStr(tr.t) + ' ' + tr.lang));
+        });
+      }
+    });
+    // Your day row.
+    var yD = 176;
+    svg.appendChild(el('text', { x: 6, y: yD + 13, class: 't-row' }, 'Your day'));
+    svg.appendChild(el('text', { x: 6, y: yD + 26, class: 't-sub' }, 'walks in grey'));
+    var colors = { building: '#1B5E20', masters: '#7CB342', museum: '#2f6f8f', lunch: '#FFE600', walk: '#b9bfb0', wait: '#eef1ea' };
+    var labels = { building: 'Building', masters: 'Masters', museum: 'Museum', lunch: 'Lunch' }, short = { building: 'B', masters: 'M', museum: 'Mu', lunch: 'L' };
+    p.blocks.forEach(function (b) {
+      if (b.b <= b.a) return;
+      var rect = el('rect', { x: x(b.a), y: yD + (b.kind === 'walk' || b.kind === 'wait' ? 10 : 2), width: Math.max(1.5, x(b.b) - x(b.a)), height: b.kind === 'walk' || b.kind === 'wait' ? 10 : 26, rx: 4, fill: colors[b.kind] });
+      svg.appendChild(rect);
+      if (labels[b.kind] && x(b.b) - x(b.a) > labels[b.kind].length * 6.2 + 6) svg.appendChild(el('text', { x: (x(b.a) + x(b.b)) / 2, y: yD + 19, 'text-anchor': 'middle', class: b.kind === 'lunch' ? 't-in' : 't-inw' }, labels[b.kind]));
+      else if (short[b.kind] && x(b.b) - x(b.a) > 14) svg.appendChild(el('text', { x: (x(b.a) + x(b.b)) / 2, y: yD + 19, 'text-anchor': 'middle', class: b.kind === 'lunch' ? 't-in' : 't-inw' }, short[b.kind]));
+    });
+    // Trains row.
+    var yT = 220;
+    svg.appendChild(el('text', { x: 6, y: yT + 13, class: 't-row' }, 'Trains'));
+    svg.appendChild(el('text', { x: 6, y: yT + 26, class: 't-sub' }, 'arrive / home'));
+    var arr = toMin(p.train[1]);
+    svg.appendChild(el('rect', { x: x(toMin(p.train[0])), y: yT + 8, width: x(arr) - x(toMin(p.train[0])), height: 14, rx: 7, fill: '#123D18' }));
+    svg.appendChild(el('text', { x: x(arr) + 4, y: yT + 19, class: 't-tour' }, 'in ' + p.train[1]));
+    p.reg.back.forEach(function (r) {
+      var on = p.home && r[0] === p.home[0];
+      svg.appendChild(el('line', { x1: x(toMin(r[0])), y1: yT + 4, x2: x(toMin(r[0])), y2: yT + 26, stroke: on ? '#c62828' : '#9aa08f', 'stroke-width': on ? 3 : 1.5 }));
+    });
+    if (p.home) {
+      var hx = x(toMin(p.home[0])), late = hx > X1 - 120;
+      svg.appendChild(el('text', { x: late ? hx - 5 : hx + 5, y: yT + 36, 'text-anchor': late ? 'end' : 'start', class: 't-tour' }, p.home[0] + ' home, Berlin ' + p.home[1]));
+    }
+  }
+
+  function dayStatus(iso) {
+    var h = siteHours(parseDate(iso), iso);
+    var open = ['building', 'masters', 'museum'].filter(function (k) { return !h[k].closed; }).length;
+    return { open: open, en: h.peak && parseDate(iso).getUTCDay() === 5 && open === 3 };
+  }
+
+  function buildCalendar() {
+    var grid = document.getElementById('dp-grid');
+    var start = parseDate(FIRST), end = parseDate(LAST);
+    var first = new Date(start.getTime() - ((start.getUTCDay() + 6) % 7) * 864e5);
+    var html = '', lastMonth = -1;
+    var now = new Date(), todayIso = isoOf(new Date(Date.UTC(now.getFullYear(), now.getMonth(), now.getDate())));
+    for (var wk = first; wk <= end; wk = new Date(wk.getTime() + 7 * 864e5)) {
+      var mon = new Date(wk.getTime() + 6 * 864e5).getUTCMonth();
+      html += '<span class="dp-mon">' + (mon !== lastMonth ? MONTHS[mon].slice(0, 3) : '') + '</span>';
+      lastMonth = mon;
+      for (var i = 0; i < 7; i++) {
+        var d = new Date(wk.getTime() + i * 864e5), iso = isoOf(d);
+        if (d < start || d > end || iso < todayIso) { html += '<button type="button" class="dp-cell past" disabled aria-hidden="true" tabindex="-1"></button>'; continue; }
+        var st = dayStatus(iso);
+        html += '<button type="button" class="dp-cell s' + (st.open === 3 ? 3 : st.open ? 2 : 0) + (st.en ? ' en' : '') + '" data-iso="' + iso + '" aria-pressed="false" aria-label="' + DAYS[d.getUTCDay()] + ' ' + d.getUTCDate() + ' ' + MONTHS[d.getUTCMonth()] + ': ' + (st.open ? st.open + ' of 3 sites open' : 'all closed') + (st.en ? ', English tours' : '') + '">' + d.getUTCDate() + '</button>';
+      }
+    }
+    grid.innerHTML = html;
+    Array.prototype.forEach.call(grid.querySelectorAll('.dp-cell[data-iso]'), function (b) {
+      b.addEventListener('click', function () { sel.iso = b.getAttribute('data-iso'); render(); });
+    });
+  }
+
+  function render() {
+    var iso = sel.iso;
+    var d = parseDate(iso);
+    var reg = REGIMES[regimeFor(iso)];
+    if (sel.train > reg.out.length - 1) sel.train = reg.out.length - 1;
+    var idx = sel.train;
+    var p = plan(iso, idx);
+    Array.prototype.forEach.call(document.querySelectorAll('.dp-cell[data-iso]'), function (b) { b.setAttribute('aria-pressed', b.getAttribute('data-iso') === iso ? 'true' : 'false'); });
+    var st = dayStatus(iso);
+    document.getElementById('dp-day').innerHTML = DAYS[d.getUTCDay()] + ', ' + d.getUTCDate() + ' ' + MONTHS[d.getUTCMonth()] + ' <small>' + (p.hours.peak ? 'summer hours' : 'winter hours') + ', ' + (st.open ? st.open + ' of 3 Bauhaus sites open' : 'everything closed') + '</small>';
+    var tl = document.getElementById('dp-tlist');
+    tl.innerHTML = reg.out.map(function (o, i) { return '<button type="button" data-i="' + i + '" aria-pressed="' + (i === idx ? 'true' : 'false') + '">' + o[0] + ' &rarr; ' + o[1] + '</button>'; }).join('');
+    Array.prototype.forEach.call(tl.querySelectorAll('button'), function (b) { b.addEventListener('click', function () { sel.train = +b.getAttribute('data-i'); render(); }); });
+    document.getElementById('dp-train').textContent = 'Berlin Hbf ' + p.train[0] + ', Dessau ' + p.train[1] + ': ' + reg.label + '.';
+    draw(p);
+    var v = document.getElementById('dp-verdict');
+    var picked = ['building', 'masters', 'museum'].filter(function (k) { return state[k]; }).length;
+    if (!picked) { v.className = 'dp-verdict is-bad'; v.innerHTML = 'Pick at least one Bauhaus site to plan the day.'; }
+    else if (!p.seen.length) { v.className = 'dp-verdict is-bad'; v.innerHTML = CLOSED_DATES.indexOf(iso) !== -1 ? '<b>The Bauhaus sites are closed for the holidays on this date.</b> Pick another day.' : '<b>Nothing you picked is open on this day.</b> Move the trip to a Tuesday to Friday.'; }
+    else {
+      v.className = 'dp-verdict' + (p.skipped.length ? ' is-bad' : '');
+      var s = 'You reach Dessau at <b>' + p.train[1] + '</b> and see <b>' + p.seen.join(', ') + '</b>.';
+      if (p.home) s += ' Catch the <b>' + p.home[0] + '</b> (' + p.home[2] + ') and you are at Berlin Hauptbahnhof at <b>' + p.home[1] + '</b>.';
+      else s += ' <b>The last train I list has gone</b>, so start earlier.';
+      if (p.alt) s += ' Ready earlier? The ' + p.alt[0] + ' replacement bus via Bad Belzig reaches Berlin at ' + p.alt[1] + ', a slower ride.';
+      if (p.skipped.length) s += ' Missed: ' + p.skipped.map(function (k) { return k[0] + ' (' + k[1] + ')'; }).join(', ') + '.';
+      v.innerHTML = s;
+    }
+    var notes = [];
+    var wd = d.getUTCDay();
+    if (p.tourUsed.length) notes.push('<b>Tours on your plan:</b> ' + p.tourUsed.map(function (k) { return k[0] + ' ' + toStr(k[1].t) + (k[1].lang === 'EN' ? ' in English' : ' in German'); }).join(', ') + '. Tours cost from 7 euros on top of an admission ticket.');
+    if (p.hours.peak && wd !== 5) notes.push('<b>English tours run only on Fridays</b> from March to October. On other days the public tours are in German.');
+    if (!p.hours.peak) notes.push('<b>Winter season:</b> no public tours in English, and every site closes at 17:00.');
+    if (wd >= 1 && wd <= 5 && toMin(p.train[0]) < 540) notes.push('<b>Quer-durchs-Land-Ticket:</b> on weekdays it is only valid from 09:00, so this train needs a Deutschlandticket or a normal ticket.');
+    if (state.museum && p.seen.indexOf('Bauhaus Museum') !== -1) notes.push('<b>Book the museum slot online:</b> the permanent exhibition sells tickets with a time slot.');
+    if (state.masters && p.seen.indexOf("Masters' Houses") !== -1) notes.push("<b>No lockers at the Masters' Houses:</b> leave bags in the basement of the Bauhaus Building first.");
+    if (p.seen.length === 3) notes.push('<b>All three?</b> The all-in-one ticket at 29 euros covers them for three days; separately it is 14 + 10 + 10 euros.');
+    document.getElementById('dp-notes').innerHTML = notes.map(function (n) { return '<p>' + n + '</p>'; }).join('');
+  }
+
+  // Default: the next Friday on or after today, inside the window this data covers.
+  (function () {
+    var now = new Date();
+    var today = new Date(Date.UTC(now.getFullYear(), now.getMonth(), now.getDate()));
+    var start = today < parseDate(FIRST) || today > parseDate(LAST) ? parseDate(FIRST) : today;
+    var pick = start;
+    while (pick.getUTCDay() !== 5 && pick < parseDate(LAST)) pick = new Date(pick.getTime() + 864e5);
+    sel.iso = isoOf(pick > parseDate(LAST) ? start : pick);
+  })();
+  buildCalendar();
+  var lastW = 0;
+  window.addEventListener('resize', function () { var w = document.getElementById('dp-svg').parentNode.clientWidth; if (Math.abs(w - lastW) > 8) { lastW = w; render(); } });
+  Array.prototype.forEach.call(document.querySelectorAll('.dp-stops button'), function (b) {
+    b.addEventListener('click', function () {
+      var k = b.getAttribute('data-stop');
+      state[k] = !state[k];
+      b.setAttribute('aria-pressed', state[k] ? 'true' : 'false');
+      render();
+    });
+  });
+  render();
+})();
+</script>
+<script src="../js/brand.js"></script>
+</body>
+</html>
