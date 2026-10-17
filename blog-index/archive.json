@@ -1,9 +1,26 @@
 {
-  "updatedAt": "2026-10-16T07:32:34.479Z",
+  "updatedAt": "2026-10-17T07:36:46.202Z",
   "source": "Wix Blog API",
-  "totalPosts": 434,
+  "totalPosts": 435,
   "bookingUrl": "https://www.walkofberlin.com/book-berlin-walking-tour/berlin-then-and-now",
   "allPosts": [
+    {
+      "title": "Dessau Day Trip from Berlin: The Bauhaus, the Trains and the Monday Trap",
+      "slug": "dessau-day-trip-from-berlin",
+      "path": "/post/dessau-day-trip-from-berlin",
+      "url": "https://www.berlinwalk.com/post/dessau-day-trip-from-berlin",
+      "excerpt": "Dessau has the Bauhaus Building, the Masters' Houses and the Bauhaus Museum within about 2 km of the station, but the weekday, the season and a rail closure decide how much of it you see. Here is the day that works.",
+      "category": "Tourist Tips",
+      "categorySlug": "tourist-tips",
+      "topic": "when-to-visit",
+      "topicLabel": "Month-by-Month Berlin",
+      "readTime": "7 min read",
+      "publishedDate": "2026-10-17T07:34:54.478Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_edc2a51026b54dd494b5a0b931a2b129~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-bauhaus-workshop-wing.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_edc2a51026b54dd494b5a0b931a2b129~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-bauhaus-workshop-wing.jpg",
+      "alt": "The workshop wing of the Bauhaus Building in Dessau, a four-storey glass curtain wall above a white base, against a deep blue sky with a lawn in front",
+      "relatedToolSlug": "dessau-bauhaus-day-planner"
+    },
     {
       "title": "Flat Swap in Berlin: When Trading Flats Keeps Your Rent",
       "slug": "flat-swap-berlin",
