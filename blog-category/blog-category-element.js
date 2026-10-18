@@ -354,6 +354,120 @@
     );
   }
 
+  // BW-LETTER-MEASURE:START
+  // Consent-gated first-party view measurement for the Walk of Berlin Weekly
+  // signup (18 Oct 2026). The same block ships in js/lead-form-direct-inject.js
+  // (post_letter_bar) and blog-category/blog-category-element.js (category_footer);
+  // tests/letter-measure-contract.test.mjs keeps the two copies identical.
+  // Without analytics consent nothing is sent and no email is ever part of an
+  // event. gate_view = surface rendered, gate_seen = at least half of it on
+  // screen for 1 s, form_start = first focus/input. One of each per page path
+  // and placement, so a Wix remount of the same surface does not count twice.
+  var bwLetterMeasure = (function () {
+    var ENDPOINT = 'https://app.berlinwalk.com/api/download-lead?action=event';
+    var VERSION = 'letter-measure-v1-2026-10-18';
+    var CONSENT_EVENTS = ['consentPolicyChanged', 'consentPolicyInitialized', 'ucConsentEvent', 'bwConsentPolicyChanged'];
+    var measured = {};
+    function policy() {
+      try {
+        var manager = window.consentPolicyManager;
+        var current = manager && typeof manager.getCurrentConsentPolicy === 'function' ? manager.getCurrentConsentPolicy() : null;
+        if (!current || typeof current !== 'object') return {};
+        if (current.defaultPolicy === true) {
+          var config = window.wixTagManager && typeof window.wixTagManager.getConfig === 'function' ? window.wixTagManager.getConfig() : null;
+          if (!config || config.gdprEnforcedGeo !== false) return {};
+        }
+        return current.policy && typeof current.policy === 'object' ? current.policy : current;
+      } catch (error) { return {}; }
+    }
+    function granted(kind) {
+      var p = policy();
+      var value = p[kind] !== undefined ? p[kind] : p[kind === 'analytics' ? 'anl' : 'adv'];
+      return value === true || value === 1 || value === '1' || value === 'true';
+    }
+    function eventId() {
+      if (!window.crypto || typeof window.crypto.getRandomValues !== 'function') return '';
+      var bytes = new Uint8Array(16);
+      window.crypto.getRandomValues(bytes);
+      var hex = '';
+      for (var i = 0; i < bytes.length; i++) hex += (bytes[i] < 16 ? '0' : '') + bytes[i].toString(16);
+      return 'wlm_' + hex;
+    }
+    return function (card, form, placement) {
+      if (!card || !form || !/^[a-z0-9_-]{1,60}$/.test(placement)) return function () {};
+      var pagePath = /^\/[A-Za-z0-9/_-]*$/.test(location.pathname) && location.pathname.length <= 300 ? location.pathname : '/';
+      var key = pagePath + '|' + placement;
+      if (!measured[key]) measured[key] = { sent: {}, started: false };
+      var state = measured[key];
+      var visible = false, timer = null, disposed = false, observer = null, wasConnected = false;
+      function send(stage) {
+        if (disposed || !card.isConnected || state.sent[stage] || !granted('analytics') || typeof window.fetch !== 'function') return;
+        var id = eventId();
+        if (!id) return;
+        state.sent[stage] = true;
+        var body = {
+          eventId: id, eventName: 'bw_lead_asset_' + stage, assetId: 'berlin-weekly-letter',
+          analyticsConsent: true, advertisingConsent: granted('advertising'),
+          sourceSlug: pagePath.split('/').filter(Boolean).pop() || 'home', pagePath: pagePath, placement: placement,
+          variant: placement, experiment: VERSION, controlType: stage,
+          screenWidth: Math.max(0, Math.min(10000, Number(window.innerWidth) || 0)),
+          qa: /(?:^|[?&])bw_qa=1(?:&|$)/.test(location.search.slice(1))
+        };
+        try {
+          window.fetch(ENDPOINT, { method: 'POST', credentials: 'omit', keepalive: true, headers: { 'content-type': 'application/json' }, body: JSON.stringify(body) })
+            .then(function (response) { if (!response || !response.ok) state.sent[stage] = false; })
+            .catch(function () { state.sent[stage] = false; });
+        } catch (error) { state.sent[stage] = false; }
+      }
+      function refresh() {
+        if (disposed) return;
+        if (card.isConnected) wasConnected = true;
+        else { if (wasConnected) dispose(); return; }
+        if (timer !== null) { clearTimeout(timer); timer = null; }
+        if (!granted('analytics')) return;
+        send('gate_view');
+        if (state.started) send('form_start');
+        if (visible && document.visibilityState !== 'hidden' && !state.sent.gate_seen) {
+          timer = setTimeout(function () { timer = null; if (visible && document.visibilityState !== 'hidden') send('gate_seen'); }, 1000);
+        }
+      }
+      function start() { state.started = true; refresh(); }
+      function dispose() {
+        disposed = true;
+        if (timer !== null) clearTimeout(timer);
+        if (observer) observer.disconnect();
+        for (var i = 0; i < CONSENT_EVENTS.length; i++) {
+          window.removeEventListener(CONSENT_EVENTS[i], refresh);
+          document.removeEventListener(CONSENT_EVENTS[i], refresh);
+        }
+        document.removeEventListener('visibilitychange', refresh);
+      }
+      form.addEventListener('focusin', start, { once: true });
+      form.addEventListener('input', start, { once: true });
+      for (var i = 0; i < CONSENT_EVENTS.length; i++) {
+        window.addEventListener(CONSENT_EVENTS[i], refresh);
+        document.addEventListener(CONSENT_EVENTS[i], refresh);
+      }
+      document.addEventListener('visibilitychange', refresh);
+      if (typeof window.IntersectionObserver === 'function') {
+        observer = new window.IntersectionObserver(function (entries) {
+          for (var j = 0; j < entries.length; j++) visible = entries[j].isIntersecting === true && entries[j].intersectionRatio >= 0.5;
+          refresh();
+        }, { threshold: [0, 0.5] });
+        observer.observe(card);
+      }
+      // The surface can be bound a moment before it is placed in the page.
+      var attempts = 0;
+      (function attach() {
+        if (disposed) return;
+        if (card.isConnected || attempts++ > 40) { refresh(); return; }
+        setTimeout(attach, 250);
+      })();
+      return dispose;
+    };
+  })();
+  // BW-LETTER-MEASURE:END
+
   function bindLetter(host, d) {
     var wrap = host.querySelector('[data-bw-letter]');
     if (!wrap) return;
@@ -361,6 +475,7 @@
     var msg = wrap.querySelector('[data-bw-msg]');
     var button = wrap.querySelector('button');
     var startedAt = new Date().toISOString();
+    bwLetterMeasure(wrap, form, 'category_footer');
     form.addEventListener('submit', function (event) {
       event.preventDefault();
       var email = String(form.email.value || '').trim().toLowerCase();
