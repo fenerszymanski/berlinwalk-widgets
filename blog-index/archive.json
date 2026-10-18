@@ -1,9 +1,26 @@
 {
-  "updatedAt": "2026-10-17T07:36:46.202Z",
+  "updatedAt": "2026-10-18T07:29:23.221Z",
   "source": "Wix Blog API",
-  "totalPosts": 435,
+  "totalPosts": 436,
   "bookingUrl": "https://www.walkofberlin.com/book-berlin-walking-tour/berlin-then-and-now",
   "allPosts": [
+    {
+      "title": "E-Waste in Berlin: Which Door Takes It for Free",
+      "slug": "e-waste-in-berlin",
+      "path": "/post/e-waste-in-berlin",
+      "url": "https://www.berlinwalk.com/post/e-waste-in-berlin",
+      "excerpt": "Most of the drawer can leave on the way to buy bread. Small devices up to 25 cm go back to big supermarkets with nothing to buy, vapes go back to any shop that sells them since July 2026, and the BSR yards take everything else for free.",
+      "category": "Living in Berlin",
+      "categorySlug": "living-in-berlin",
+      "topic": "living-in-berlin",
+      "topicLabel": "Living in Berlin",
+      "readTime": "7 min read",
+      "publishedDate": "2026-10-18T07:27:01.217Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_f169523bb07c40ac87c7e31a28ae8b75~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-heiligensee-recycling-yard.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_f169523bb07c40ac87c7e31a28ae8b75~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-heiligensee-recycling-yard.jpg",
+      "alt": "The entrance of the BSR recycling yard at Am Dachsbau in Heiligensee, with a barrier, parked cars and orange skips under trees and a blue summer sky",
+      "relatedToolSlug": "berlin-e-waste-drop-map"
+    },
     {
       "title": "Dessau Day Trip from Berlin: The Bauhaus, the Trains and the Monday Trap",
       "slug": "dessau-day-trip-from-berlin",
