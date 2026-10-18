@@ -47,6 +47,12 @@
       "bannerImage": "assets/category-banners/discovery-planning-oil-banner-2400x600.webp",
       "bannerFallbackImage": "assets/category-banners/discovery-planning-oil-banner-2400x600.jpg",
       "bannerAlt": "Travelers looking at a Berlin map on Museum Island with the TV Tower in the distance"
+    },
+    {
+      "key": "Planning",
+      "label": "Planning & Everyday Berlin",
+      "icon": "📋",
+      "blurb": "Berlin trip dates, camera kit, appointments, work, heating and moving."
     }
   ],
   "tools": [

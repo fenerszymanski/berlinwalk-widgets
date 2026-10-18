@@ -84,8 +84,20 @@ class BWWidgetsHubElement extends HTMLElement {
   }
 
   _renderShell() {
+    // Wix caps these two native /widgets hosts at 99,999px. Let the gallery's
+    // real content set their height so the last mobile cards precede the footer.
+    const nativeGalleryHeight = /^\/widgets\/?$/.test(window.location.pathname) ? `
+        #PAGE_SECTIONSbmge5 #comp-mp9s515e,
+        #PAGE_SECTIONSbmge5 #comp-mp9s5n32,
+        #PAGE_SECTIONSbmge5 #comp-mp9s5n32 > bw-widgets-hub {
+          height: auto !important;
+          min-height: 0 !important;
+          max-height: none !important;
+        }
+    ` : '';
     this.innerHTML = `
       <style>
+        ${nativeGalleryHeight}
         bw-widgets-hub {
           display: block;
           width: 100%;
