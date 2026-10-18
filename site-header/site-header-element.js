@@ -11,7 +11,7 @@ const BW_HEADER_MONO_URL = new URL('../brand/fonts/editorial-v2/IBMPlexMono-Semi
 const BW_HEADER_MENU_FONT_URL = new URL('../home-two-doors/assets/fonts/Fraunces-Variable-latin.woff2', BW_HEADER_SCRIPT_URL).href;
 // Berlin Then and Now (service 145cb27e). The legacy booking path stays
 // reachable for guests who booked before 30 September, but nothing links to it.
-const BW_HEADER_BUILD = 'site-header-tour-hub-20261010-r2';
+const BW_HEADER_BUILD = 'site-header-mobile-marker-20261019';
 const BW_HEADER_BOOKING_URL = 'https://www.walkofberlin.com/book-berlin-walking-tour/berlin-then-and-now';
 const BW_HEADER_TOUR_FACTS = ['about 2.5 hours', 'max 10 people', '€25']
   .map((fact) => `<span class="bw-header-fact">${fact}</span>`)
@@ -1212,39 +1212,10 @@ class BWHeaderElement extends HTMLElement {
           font-size: 18px;
           padding: 12px 0 12px 18px;
         }
-        .bw-header-mobile-section-label.bw-header-mobile-tour-label {
-          align-items: center;
-          display: flex;
-          gap: 8px;
-          list-style: none;
-          min-height: 52px;
-          padding: 0;
-        }
-        .bw-header-mobile-tour-label::-webkit-details-marker { display: none; }
-        .bw-header-mobile-tour-label .bw-header-mobile-section-link {
-          flex: 1;
-          min-width: 0;
-          padding: 14px 0;
-        }
-        .bw-header-mobile-tour-caret {
-          align-items: center;
-          color: var(--yellow);
-          display: inline-flex;
-          flex: 0 0 44px;
-          justify-content: center;
-          min-height: 44px;
-          transition: transform 160ms ease;
-        }
-        .bw-header-mobile-section[open] .bw-header-mobile-tour-caret {
-          transform: rotate(180deg);
-        }
         .bw-header-mobile-nav a:focus-visible,
         .bw-header-mobile-section-label:focus-visible {
           outline: 2px solid var(--yellow);
           outline-offset: -2px;
-        }
-        @media (prefers-reduced-motion: reduce) {
-          .bw-header-mobile-tour-caret { transition: none; }
         }
 
         .bw-header-mobile-cta {
@@ -1427,7 +1398,7 @@ class BWHeaderElement extends HTMLElement {
 
             <nav class="bw-header-mobile-nav" aria-label="Mobile primary">
               <details class="bw-header-mobile-section">
-                <summary class="bw-header-mobile-section-label bw-header-mobile-tour-label" aria-label="Berlin Walking Tours categories"><a class="bw-header-mobile-section-link" href="${BW_HEADER_LINKS.allTours}">Berlin Walking Tours</a><span class="bw-header-mobile-tour-caret" aria-hidden="true">⌄</span></summary>
+                <summary class="bw-header-mobile-section-label bw-header-mobile-tour-label" aria-label="Berlin Walking Tours categories"><a class="bw-header-mobile-section-link" href="${BW_HEADER_LINKS.allTours}">Berlin Walking Tours</a></summary>
                 <a href="${BW_HEADER_LINKS.guidedTours}">Guided Walking Tours</a>
                 <a href="${BW_HEADER_LINKS.audioTours}">Self-Guided Audio Walks</a>
                 <a href="${BW_HEADER_LINKS.virtualTourCategory}">Virtual Tours</a>
