@@ -29,7 +29,7 @@
   .deck{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:12px 13px 14px;margin:0 0 12px}
   .modes{display:flex;flex-wrap:wrap;gap:5px;margin:0 0 14px}
   .md{appearance:none;border:2px solid var(--line);background:#fff;border-radius:10px;padding:6px 10px;text-align:left;
-      font-family:inherit;color:var(--green-dark);cursor:pointer;transition:.13s;line-height:1.2}
+      font-family:inherit;color:var(--green-dark);cursor:pointer;transition:.13s;line-height:1.2;min-height:44px}
   .md:hover{border-color:var(--lime)}
   .md:focus-visible{outline:3px solid var(--lime);outline-offset:2px}
   .md[aria-pressed="true"]{border-color:var(--green);background:var(--green);color:#fff}
@@ -41,7 +41,7 @@
   .slidehead{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:6px}
   .read{font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:24px;font-weight:700;color:var(--green-dark);line-height:1}
   .state{font-size:12px;font-weight:800;letter-spacing:.05em;text-transform:uppercase}
-  input[type=range]{width:100%;margin:9px 0 2px;-webkit-appearance:none;appearance:none;background:transparent;height:28px;cursor:pointer}
+  input[type=range]{width:100%;margin:9px 0 2px;-webkit-appearance:none;appearance:none;background:transparent;height:44px;cursor:pointer}
   input[type=range]:focus-visible{outline:3px solid var(--lime);outline-offset:2px;border-radius:8px}
   input[type=range]::-webkit-slider-runnable-track{height:8px;border-radius:6px;background:var(--light)}
   input[type=range]::-moz-range-track{height:8px;border-radius:6px;background:var(--light)}
@@ -50,13 +50,18 @@
   input[type=range]::-moz-range-thumb{width:24px;height:24px;border-radius:50%;background:var(--yellow);border:3px solid var(--green-dark)}
   .ticks{display:flex;justify-content:space-between;font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:10px;color:var(--muted)}
   .hidden{display:none}
+  .loadstate{padding:12px;border:1px solid var(--line);border-radius:12px;background:var(--panel);margin:0 0 12px;font-size:13px}
+  .loadstate p{margin:0 0 8px}
+  .loadstate p:last-child{margin-bottom:0}
+  [hidden]{display:none!important}
+  button:disabled,input:disabled{cursor:wait;opacity:.55}
 
   .stage{border:2px solid var(--green-dark);border-radius:14px;overflow:hidden;background:#EFF1E7;margin:0 0 10px}
   canvas{display:block;width:100%;height:auto}
 
   .addbar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:0 0 14px}
   .add{appearance:none;border:2px solid var(--green-dark);background:var(--yellow);color:var(--green-dark);border-radius:11px;
-       padding:9px 16px;font-family:inherit;font-size:13.5px;font-weight:800;cursor:pointer;transition:.13s}
+       padding:9px 16px;font-family:inherit;font-size:13.5px;font-weight:800;cursor:pointer;transition:.13s;min-height:44px}
   .add:hover{background:#ffef5c}
   .add:focus-visible{outline:3px solid var(--lime);outline-offset:2px}
   .addnote{font-size:12px;color:var(--muted)}
@@ -79,7 +84,7 @@
   .cname{display:block;font-size:12.5px;font-weight:800;color:var(--green-dark);overflow-wrap:anywhere}
   .cmeta{display:block;font-size:11px;color:var(--muted);margin-top:1px}
   .camt{flex:0 0 auto;font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:14.5px;font-weight:700;color:var(--green-dark)}
-  .drop{appearance:none;flex:0 0 auto;border:2px solid var(--line);background:#fff;border-radius:9px;width:30px;height:30px;
+  .drop{appearance:none;flex:0 0 auto;border:2px solid var(--line);background:#fff;border-radius:9px;width:44px;height:44px;
         font-family:inherit;font-size:15px;font-weight:800;line-height:1;color:var(--muted);cursor:pointer}
   .drop:hover{border-color:#E63946;color:#E63946}
   .drop:focus-visible{outline:3px solid var(--lime);outline-offset:2px}
@@ -95,6 +100,11 @@
   <h1>Berlin Delay Payback Board</h1>
   <p class="lede">A late train out of Berlin pays 25 percent at 60 minutes and 50 percent at 120, and a late U-Bahn pays nothing at all in money. Underneath both sits a four euro floor that quietly cancels most small claims. Set the journey, drag the delay, then add each bad trip and watch where the running total lands against that floor.</p>
 
+  <div class="loadstate" id="loadstate" role="status" aria-live="polite">
+    <p id="loadmessage">Loading the payout rules…</p>
+    <button type="button" class="add" id="retrybtn" hidden>Try again</button>
+  </div>
+
   <div class="deck">
     <span class="lbl" id="modelbl">What you were travelling on</span>
     <div class="modes" id="modes" role="group" aria-labelledby="modelbl"></div>
@@ -106,7 +116,7 @@
           <span class="read" id="fareread">29.90 EUR</span>
         </div>
       </div>
-      <input type="range" id="fare" min="2" max="200" step="0.1" value="29.9" aria-label="Fare paid for the single journey in euros" />
+      <input type="range" id="fare" min="2" max="200" step="0.1" value="29.9" aria-label="Fare paid for the single journey in euros" disabled />
       <div class="ticks"><span>2</span><span>50</span><span>100</span><span>150</span><span>200</span></div>
     </div>
 
@@ -118,17 +128,17 @@
         </div>
         <span class="state" id="delaystate"></span>
       </div>
-      <input type="range" id="delay" min="0" max="240" step="5" value="70" aria-label="Delay at the destination station in minutes" />
+      <input type="range" id="delay" min="0" max="240" step="5" value="70" aria-label="Delay at the destination station in minutes" disabled />
       <div class="ticks"><span>0</span><span>60</span><span>120</span><span>180</span><span>240</span></div>
     </div>
   </div>
 
-  <div class="stage">
+  <div class="stage" id="stage" hidden>
     <canvas id="board" width="1400" height="900" role="img" aria-label="Two charts: the payout curve against delay in minutes for the selected ticket, and the running total of every journey added so far measured against the four euro payout floor"></canvas>
   </div>
 
   <div class="addbar">
-    <button type="button" class="add" id="addbtn">Add this journey</button>
+    <button type="button" class="add" id="addbtn" disabled>Add this journey</button>
     <span class="addnote" id="addnote"></span>
   </div>
 
@@ -153,6 +163,10 @@
   var verdictEl = document.getElementById('verdict');
   var srcEl = document.getElementById('src');
   var cv = document.getElementById('board');
+  var stageEl = document.getElementById('stage');
+  var loadState = document.getElementById('loadstate');
+  var loadMessage = document.getElementById('loadmessage');
+  var retryBtn = document.getElementById('retrybtn');
 
   var DATA = null;
   var K = 1; // canvas type scale, so a 360px phone is not drawn at desktop sizes
@@ -450,6 +464,7 @@
   }
 
   function render() {
+    if (!DATA) return;
     renderControls();
     renderCases();
     renderVerdict();
@@ -489,6 +504,7 @@
     render();
   });
   addBtn.addEventListener('click', function () {
+    if (!DATA) return;
     var c = currentCase();
     c.id = ++seq;
     cases.push(c);
@@ -499,14 +515,53 @@
   var rt = null;
   window.addEventListener('resize', function () { clearTimeout(rt); rt = setTimeout(render, 140); });
 
-  fetch('data.json').then(function (r) { return r.json(); }).then(function (j) {
-    DATA = j;
-    buildModes();
-    render();
-  }).catch(function () {
-    casesEl.innerHTML = '<p class="empty">The rule data could not load right now. Reload the page and it should come back.</p>';
-    if (window.bwResize) window.bwResize();
-  });
+  function validData(j) {
+    if (!j || !Number.isFinite(j.payoutFloorEur) || j.payoutFloorEur < 0 || !Array.isArray(j.modes) || !j.modes.length || !Array.isArray(j.sources)) return false;
+    return j.modes.every(function (m) {
+      return m && typeof m.id === 'string' && typeof m.label === 'string' && typeof m.sub === 'string' && typeof m.note === 'string'
+        && ['percentage', 'flat', 'ticket'].indexOf(m.kind) !== -1 && Array.isArray(m.steps) && m.steps.every(function (s) {
+          return s && Number.isFinite(s.fromMin) && Number.isFinite(m.kind === 'percentage' ? s.share : s.amount);
+        });
+    }) && j.sources.every(function (s) { return s && typeof s.url === 'string' && typeof s.label === 'string'; });
+  }
+  function setReady(ready) {
+    fareEl.disabled = !ready;
+    delayEl.disabled = !ready;
+    addBtn.disabled = !ready;
+    Array.prototype.forEach.call(modesEl.querySelectorAll('button'), function (button) { button.disabled = !ready; });
+    stageEl.hidden = !ready;
+  }
+  function loadData() {
+    DATA = null;
+    setReady(false);
+    loadState.hidden = false;
+    retryBtn.hidden = true;
+    loadMessage.textContent = 'Loading the payout rules…';
+    var controller = new AbortController();
+    var timeout = setTimeout(function () { controller.abort(); }, 12000);
+    fetch('data.json', { signal: controller.signal }).then(function (r) {
+      if (!r.ok) throw new Error('Rule data unavailable');
+      return r.json();
+    }).then(function (j) {
+      clearTimeout(timeout);
+      if (!validData(j)) throw new Error('Invalid rule data');
+      DATA = j;
+      buildModes();
+      setReady(true);
+      loadState.hidden = true;
+      render();
+    }).catch(function () {
+      clearTimeout(timeout);
+      DATA = null;
+      setReady(false);
+      loadState.hidden = false;
+      loadMessage.textContent = 'The payout rules could not load. Check your connection, then try again.';
+      retryBtn.hidden = false;
+      if (window.bwResize) window.bwResize();
+    });
+  }
+  retryBtn.addEventListener('click', loadData);
+  loadData();
 })();
 </script>
 <script src="../js/brand.js"></script>
