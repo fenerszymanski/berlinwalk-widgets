@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Berlin E-Waste Drop Map: Which Door Takes It for Free</title>
+<link rel="stylesheet" href="../css/brand.css">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #FFFFFF; color: #20241d; padding: 12px; }
+  .ew { border-radius: 18px; overflow: hidden; border: 1px solid #dde3d5; background: #fbfcf8; }
+  .ew-top { padding: 16px 16px 12px; background: #1B5E20; color: #fff; }
+  .ew-kick { font-size: 11px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: #FFE600; }
+  .ew-top h1 { font-size: 19px; line-height: 1.25; font-weight: 800; margin-top: 4px; }
+  .ew-top p { font-size: 12.5px; line-height: 1.5; color: #e4efe0; margin-top: 6px; }
+  .ew-steps { display: grid; grid-template-columns: repeat(3, 1fr); border-bottom: 1px solid #e1e7d9; background: #fff; }
+  .ew-steps button { font-family: inherit; border: 0; background: #fff; padding: 10px 8px; font-size: 11.5px; font-weight: 700; color: #6b7062; cursor: pointer; border-bottom: 3px solid transparent; text-align: left; line-height: 1.3; }
+  .ew-steps button span { display: block; font-size: 10px; letter-spacing: .08em; text-transform: uppercase; color: #9a9e90; }
+  .ew-steps button.is-on { color: #1a1d17; border-bottom-color: #FFE600; }
+  .ew-steps button.is-on span { color: #1B5E20; }
+  .ew-steps button:disabled { cursor: default; opacity: .55; }
+  .ew-pane { padding: 14px 16px 16px; }
+  .ew-pane[hidden] { display: none; }
+  .ew-pane h2 { font-size: 13px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; color: #1B5E20; margin-bottom: 10px; }
+  .ew-items { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 8px; }
+  .ew-items button { font-family: inherit; text-align: left; padding: 10px 12px; border-radius: 12px; border: 1.5px solid #cfd7c5; background: #fff; color: #23271f; font-size: 13px; font-weight: 700; cursor: pointer; line-height: 1.3; }
+  .ew-items button small { display: block; font-size: 11px; font-weight: 600; color: #6b7062; margin-top: 3px; }
+  .ew-items button[aria-current="true"] { border-color: #1B5E20; background: #eef6ea; box-shadow: inset 0 0 0 1px #1B5E20; }
+  .ew-ruler svg { display: block; width: 100%; height: auto; margin: 4px 0 12px; }
+  .ew-check { list-style: none; display: grid; gap: 8px; }
+  .ew-check li { position: relative; padding: 10px 12px 10px 38px; background: #fff; border: 1px solid #e1e7d9; border-radius: 12px; font-size: 13px; line-height: 1.5; color: #2f332a; }
+  .ew-check li::before { content: attr(data-n); position: absolute; left: 10px; top: 9px; width: 20px; height: 20px; border-radius: 50%; background: #FFE600; color: #123D18; font-size: 11px; font-weight: 800; display: grid; place-items: center; }
+  .ew-line { margin-top: 12px; padding: 12px 14px; border-radius: 14px; background: #fffbe0; border: 1px solid #f0e38a; font-size: 13.5px; line-height: 1.5; color: #23271f; }
+  .ew-line b { color: #123D18; }
+  .ew-next { margin-top: 12px; font-family: inherit; font-size: 13.5px; font-weight: 800; padding: 11px 16px; border-radius: 999px; border: 0; background: #FFE600; color: #123D18; cursor: pointer; }
+  .ew-next:hover { background: #f5dc00; color: #123D18; }
+  .ew-split { display: grid; grid-template-columns: 1.1fr 1fr; gap: 14px; align-items: start; }
+  .ew-map { background: #fff; border: 1px solid #e1e7d9; border-radius: 14px; padding: 6px; }
+  .ew-map svg { display: block; width: 100%; height: auto; }
+  .ew-legend { display: flex; flex-wrap: wrap; gap: 10px; padding: 6px 6px 2px; font-size: 11px; color: #4f5347; }
+  .ew-legend i { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 4px; vertical-align: -1px; }
+  .ew-doors { list-style: none; display: grid; gap: 8px; }
+  .ew-doors li { padding: 10px 12px; border-radius: 12px; background: #fff; border: 1px solid #e1e7d9; }
+  .ew-doors li:first-child { border-color: #1B5E20; background: #eef6ea; }
+  .ew-doors .d-name { font-size: 13.5px; font-weight: 800; color: #1a1d17; }
+  .ew-doors .d-rank { display: inline-block; min-width: 20px; height: 20px; border-radius: 50%; background: #1B5E20; color: #fff; font-size: 11px; font-weight: 800; text-align: center; line-height: 20px; margin-right: 6px; }
+  .ew-doors .d-where { font-size: 11.5px; font-weight: 600; color: #5e6256; margin-top: 2px; }
+  .ew-doors .d-rule { font-size: 12.5px; line-height: 1.5; color: #33372e; margin-top: 4px; }
+  .ew-yard { margin-top: 10px; font-size: 12px; line-height: 1.5; color: #3f4337; min-height: 36px; }
+  .ew-yard b { color: #1a1d17; }
+  .ew-foot { padding: 10px 16px 14px; font-size: 10.5px; color: #6b7062; line-height: 1.45; border-top: 1px solid #e1e7d9; }
+  .t-yard { font-size: 9px; font-weight: 700; fill: #33372e; }
+  button:focus-visible { outline: 2px solid #c62828; outline-offset: 2px; }
+  .ew-map circle.y-hit { cursor: pointer; }
+  @media (max-width: 640px) {
+    .ew-split { grid-template-columns: 1fr; }
+    .ew-top h1 { font-size: 17px; }
+    .ew-items { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+<div class="ew">
+  <div class="ew-top">
+    <div class="ew-kick">E-waste in Berlin</div>
+    <h1>The thing in your hand, and the nearest door that takes it for free</h1>
+    <p>Pick one device from the drawer. The tool walks you through what to do before it leaves the flat, then which door takes it at no cost, and which of the 14 recycling yards fits it on the map.</p>
+  </div>
+  <div class="ew-steps" role="tablist" aria-label="Steps">
+    <button type="button" role="tab" id="tab1" data-step="1" class="is-on" aria-selected="true"><span>Step 1</span>Pick the thing</button>
+    <button type="button" role="tab" id="tab2" data-step="2" aria-selected="false" disabled><span>Step 2</span>Before it leaves</button>
+    <button type="button" role="tab" id="tab3" data-step="3" aria-selected="false" disabled><span>Step 3</span>The free door</button>
+  </div>
+
+  <section class="ew-pane" id="pane1" role="tabpanel" aria-labelledby="tab1">
+    <h2>What are you holding?</h2>
+    <div class="ew-items" id="items"></div>
+  </section>
+
+  <section class="ew-pane" id="pane2" role="tabpanel" aria-labelledby="tab2" hidden>
+    <h2 id="p2title">Before it leaves the flat</h2>
+    <div class="ew-ruler" id="ruler" aria-hidden="true"></div>
+    <ol class="ew-check" id="prep"></ol>
+    <div class="ew-line" id="line"></div>
+    <button type="button" class="ew-next" id="toDoors">Show me the free door</button>
+  </section>
+
+  <section class="ew-pane" id="pane3" role="tabpanel" aria-labelledby="tab3" hidden>
+    <h2 id="p3title">The free door</h2>
+    <div class="ew-split">
+      <div>
+        <ol class="ew-doors" id="doors"></ol>
+      </div>
+      <div>
+        <div class="ew-map" id="map"></div>
+        <div class="ew-legend" id="legend"></div>
+        <div class="ew-yard" id="yardInfo">Tap a yard on the map for its address.</div>
+      </div>
+    </div>
+  </section>
+
+  <div class="ew-foot" id="foot"></div>
+</div>
+<script>
+(function () {
+  var DATA = null;
+  var currentStep = 1;
+  var picked = null;
+  var el = function (id) { return document.getElementById(id); };
+  var esc = function (s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); };
+
+  function goStep(n) {
+    if (n > 1 && !picked) return;
+    currentStep = n;
+    [1, 2, 3].forEach(function (i) {
+      var tab = el('tab' + i);
+      tab.classList.toggle('is-on', i === n);
+      tab.setAttribute('aria-selected', i === n ? 'true' : 'false');
+      tab.disabled = i > 1 && !picked;
+      el('pane' + i).hidden = i !== n;
+    });
+    if (window.BerlinWalkResize) window.BerlinWalkResize();
+  }
+
+  function renderItems() {
+    el('items').innerHTML = DATA.items.map(function (it) {
+      var size = it.id === 'aa' ? 'battery' : (it.cm <= DATA.limitCm ? 'about ' + it.cm + ' cm' : 'about ' + it.cm + ' cm, over the line');
+      return '<button type="button" data-item="' + it.id + '" aria-current="false">' + esc(it.label) + '<small>' + size + '</small></button>';
+    }).join('');
+    el('items').querySelectorAll('button').forEach(function (b) {
+      b.addEventListener('click', function () { pick(b.getAttribute('data-item')); });
+    });
+  }
+
+  function ruler(it) {
+    var W = 560, H = 74, max = 60, x0 = 16, x1 = W - 16;
+    var sx = function (cm) { return x0 + Math.min(cm, max) / max * (x1 - x0); };
+    var s = '<svg viewBox="0 0 ' + W + ' ' + H + '" role="img">';
+    s += '<rect x="' + x0 + '" y="30" width="' + (x1 - x0) + '" height="14" rx="3" fill="#f3f6ee" stroke="#cfd7c5"/>';
+    for (var c = 0; c <= max; c += 5) {
+      var x = sx(c);
+      s += '<line x1="' + x + '" y1="30" x2="' + x + '" y2="' + (c % 10 ? 36 : 40) + '" stroke="#9aa08e"/>';
+      if (c % 10 === 0) s += '<text x="' + x + '" y="58" text-anchor="middle" font-size="10" fill="#6b7062">' + c + (c === max ? '+' : '') + '</text>';
+    }
+    var lx = sx(DATA.limitCm);
+    s += '<rect x="' + x0 + '" y="30" width="' + (lx - x0) + '" height="14" rx="3" fill="#C5E1A5" opacity=".7"/>';
+    s += '<line x1="' + lx + '" y1="20" x2="' + lx + '" y2="50" stroke="#1B5E20" stroke-width="2"/>';
+    s += '<text x="' + lx + '" y="15" text-anchor="middle" font-size="10" font-weight="700" fill="#1B5E20">25 cm: shop box limit</text>';
+    if (it.id !== 'aa') {
+      var ix = sx(it.cm);
+      s += '<circle cx="' + ix + '" cy="37" r="7" fill="' + (it.cm <= DATA.limitCm ? '#1B5E20' : '#c0392b') + '" stroke="#fff" stroke-width="2"/>';
+      s += '<text x="' + Math.min(Math.max(ix, 60), W - 60) + '" y="72" text-anchor="middle" font-size="10.5" font-weight="700" fill="#20241d">' + esc(it.label) + ': ' + (it.cm > max ? it.cm + ' cm' : 'about ' + it.cm + ' cm') + '</text>';
+    } else {
+      s += '<text x="' + (W / 2) + '" y="72" text-anchor="middle" font-size="10.5" font-weight="700" fill="#20241d">Batteries follow their own rule: any shop that sells them</text>';
+    }
+    return s + '</svg>';
+  }
+
+  function project(lon, lat) {
+    var W = 420, H = 330, lonMin = 13.07, lonMax = 13.78, latMin = 52.33, latMax = 52.68;
+    var k = Math.cos(52.5 * Math.PI / 180);
+    var scale = Math.min((W - 16) / ((lonMax - lonMin) * k), (H - 16) / (latMax - latMin));
+    var w = (lonMax - lonMin) * k * scale, h = (latMax - latMin) * scale;
+    return [(W - w) / 2 + (lon - lonMin) * k * scale, (H - h) / 2 + (latMax - lat) * scale];
+  }
+
+  function yardState(y, it) {
+    if (y.closedUntil) return 'closed';
+    if (it.map === 'none') return 'idle';
+    if (it.map === 'used') return y.used ? 'on' : 'idle';
+    return 'on';
+  }
+
+  function renderMap(it) {
+    var W = 420, H = 330;
+    var s = '<svg viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="Map of Berlin with the BSR recycling yards">';
+    DATA.outlines.forEach(function (d) {
+      d.rings.forEach(function (ring) {
+        var pts = ring.map(function (p) { var q = project(p[0], p[1]); return q[0].toFixed(1) + ',' + q[1].toFixed(1); }).join(' ');
+        s += '<polygon points="' + pts + '" fill="#f1f5ec" stroke="#c3ccb8" stroke-width="0.8"/>';
+      });
+    });
+    var colors = { on: '#1B5E20', idle: '#b9bfae', closed: '#c0392b' };
+    DATA.yards.forEach(function (y) {
+      var q = project(y.lon, y.lat), st = yardState(y, it);
+      s += '<circle class="y-hit" data-yard="' + y.id + '" cx="' + q[0].toFixed(1) + '" cy="' + q[1].toFixed(1) + '" r="' + (st === 'on' ? 7 : 5.5) + '" fill="' + colors[st] + '" stroke="#fff" stroke-width="2"><title>' + esc(y.name) + '</title></circle>';
+      if (st === 'on' && y.hazardous) s += '<circle cx="' + q[0].toFixed(1) + '" cy="' + q[1].toFixed(1) + '" r="10.5" fill="none" stroke="#FFE600" stroke-width="2"/>';
+    });
+    s += '</svg>';
+    el('map').innerHTML = s;
+    el('map').querySelectorAll('circle.y-hit').forEach(function (c) {
+      c.addEventListener('click', function () { showYard(c.getAttribute('data-yard'), it); });
+    });
+    var legend = '<span><i style="background:#1B5E20"></i>Takes it</span>';
+    if (it.map !== 'all') legend += '<span><i style="background:#b9bfae"></i>' + (it.map === 'used' ? 'No used-goods desk' : 'Not needed for this') + '</span>';
+    legend += '<span><i style="background:#c0392b"></i>Closed to 14 Nov</span><span><i style="background:#fff;border:2px solid #FFE600"></i>Also hazardous waste</span>';
+    el('legend').innerHTML = legend;
+    var open = DATA.yards.filter(function (y) { return yardState(y, it) === 'on'; }).length;
+    el('yardInfo').innerHTML = it.map === 'none'
+      ? 'You do not need a yard for this one. ' + open + ' yards would take it, but the door at the top of the list is closer.'
+      : '<b>' + open + ' yards</b> take this today. Tap a dot for the address.';
+  }
+
+  function showYard(id, it) {
+    var y = DATA.yards.filter(function (v) { return v.id === id; })[0];
+    if (!y) return;
+    var bits = [];
+    if (y.used) bits[bits.length] = 'used-goods desk';
+    if (y.hazardous) bits[bits.length] = 'hazardous waste';
+    el('yardInfo').innerHTML = '<b>' + esc(y.name) + '</b>, ' + esc(y.area) + (bits.length ? '. Also: ' + bits.join(', ') : '') + '.' + (y.note ? ' ' + esc(y.note) : '');
+  }
+
+  function pick(id) {
+    picked = DATA.items.filter(function (it) { return it.id === id; })[0];
+    el('items').querySelectorAll('button').forEach(function (b) { b.setAttribute('aria-current', b.getAttribute('data-item') === id ? 'true' : 'false'); });
+    el('p2title').textContent = picked.label + ': before it leaves the flat';
+    el('ruler').innerHTML = ruler(picked);
+    el('prep').innerHTML = picked.prep.map(function (p, i) { return '<li data-n="' + (i + 1) + '">' + esc(p) + '</li>'; }).join('');
+    el('line').innerHTML = '<b>My read:</b> ' + esc(picked.line);
+    el('p3title').textContent = picked.label + ': the free door';
+    el('doors').innerHTML = picked.doors.map(function (k, i) {
+      var d = DATA.doors[k];
+      return '<li><div class="d-name"><span class="d-rank">' + (i + 1) + '</span>' + esc(d.name) + '</div><div class="d-where">' + esc(d.where) + '</div><div class="d-rule">' + esc(d.rule) + '</div></li>';
+    }).join('');
+    renderMap(picked);
+    goStep(2);
+  }
+
+  [1, 2, 3].forEach(function (i) { el('tab' + i).addEventListener('click', function () { goStep(i); }); });
+  el('toDoors').addEventListener('click', function () { goStep(3); });
+
+  fetch('data.json').then(function (r) { return r.json(); }).then(function (d) {
+    DATA = d;
+    renderItems();
+    renderMap({ map: 'all' });
+    el('foot').textContent = 'Rules checked on ' + d.checkedOn + ': BSR recycling yards and acceptance terms, the ElektroG take-back rules, the battery take-back law and the e-cigarette rule in force since 1 July 2026. ' + d.outlineSource + '. Yard locations from the BSR yard list.';
+    goStep(1);
+  });
+})();
+</script>
+<script src="../js/brand.js"></script>
+</body>
+</html>

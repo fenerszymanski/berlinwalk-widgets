@@ -1,0 +1,113 @@
+{
+  "version": 1,
+  "slug": "e-waste-in-berlin",
+  "key": "e-waste-in-berlin",
+  "config": {
+    "title": "E-Waste in Berlin - FAQ",
+    "subtitle": "Where old phones, cables, vapes, batteries and appliances go in Berlin, and which doors take them for free.",
+    "items": [
+      {
+        "q": "Where can I dispose of electronics for free in Berlin?",
+        "a": "At any of the **14 BSR recycling yards**, which take every electrical device from a Berlin household at no cost. Small devices up to **25 cm** can also go to big supermarkets, drugstores and electronics stores with no purchase."
+      },
+      {
+        "q": "Do supermarkets in Berlin take back old electronics?",
+        "a": "Yes, if the store has at least **800 m² of sales floor** and sells electrical devices during the year. It must take up to **three small devices per type**, none longer than 25 cm on any side, free and without a purchase. Look for the box near the entrance or the bottle return."
+      },
+      {
+        "q": "Where do I put an old vape in Berlin?",
+        "a": "Back into any shop that sells vapes. Since **1 July 2026** every seller of e-cigarettes and heated tobacco devices, including Spätis, kiosks and petrol stations, must take used ones back free, any brand, with nothing to buy. Never put one in the yellow or grey bin."
+      },
+      {
+        "q": "How do I dispose of batteries in Berlin?",
+        "a": "Drop them in the collection box of **any shop that sells batteries**, whatever the brand. Recycling yards take them too. Tape the poles of lithium and rechargeable cells first, because loose cells start fires in bins and trucks."
+      },
+      {
+        "q": "Is the BSR recycling yard free for electrical devices?",
+        "a": "Yes. Electrical devices from **Berlin households** are free with no quantity cap for normal household amounts. If you live outside Berlin the yard can ask for proof that the waste comes from Berlin."
+      },
+      {
+        "q": "How do I get rid of an old fridge or washing machine in Berlin?",
+        "a": "The easiest door is the shop selling you the new one: a store with **400 m² of electricals** must take the old one back free when you buy a like-for-like device, and collection is free if they deliver. Otherwise use a yard, a **BSR Kieztag**, or add it to a booked bulky collection."
+      },
+      {
+        "q": "Can old light bulbs go in the household waste?",
+        "a": "Only old **filament and halogen bulbs**. LED and energy-saving bulbs are electrical devices: take them to a collection box or a recycling yard, and wrap energy-saving bulbs so they do not break."
+      },
+      {
+        "q": "Do I have to delete my data before recycling a phone or laptop?",
+        "a": "Yes. Clearing personal data is **your responsibility**, not the recycler's. Sign out of your accounts, switch off the device lock, reset it and take out the SIM and memory card before it leaves the flat."
+      }
+    ]
+  },
+  "schema": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Where can I dispose of electronics for free in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "At any of the 14 BSR recycling yards, which take every electrical device from a Berlin household at no cost. Small devices up to 25 cm can also go to big supermarkets, drugstores and electronics stores with no purchase."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Do supermarkets in Berlin take back old electronics?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, if the store has at least 800 m² of sales floor and sells electrical devices during the year. It must take up to three small devices per type, none longer than 25 cm on any side, free and without a purchase. Look for the box near the entrance or the bottle return."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Where do I put an old vape in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Back into any shop that sells vapes. Since 1 July 2026 every seller of e-cigarettes and heated tobacco devices, including Spätis, kiosks and petrol stations, must take used ones back free, any brand, with nothing to buy. Never put one in the yellow or grey bin."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do I dispose of batteries in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Drop them in the collection box of any shop that sells batteries, whatever the brand. Recycling yards take them too. Tape the poles of lithium and rechargeable cells first, because loose cells start fires in bins and trucks."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is the BSR recycling yard free for electrical devices?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. Electrical devices from Berlin households are free with no quantity cap for normal household amounts. If you live outside Berlin the yard can ask for proof that the waste comes from Berlin."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do I get rid of an old fridge or washing machine in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The easiest door is the shop selling you the new one: a store with 400 m² of electricals must take the old one back free when you buy a like-for-like device, and collection is free if they deliver. Otherwise use a yard, a BSR Kieztag, or add it to a booked bulky collection."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can old light bulbs go in the household waste?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Only old filament and halogen bulbs. LED and energy-saving bulbs are electrical devices: take them to a collection box or a recycling yard, and wrap energy-saving bulbs so they do not break."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Do I have to delete my data before recycling a phone or laptop?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. Clearing personal data is your responsibility, not the recycler's. Sign out of your accounts, switch off the device lock, reset it and take out the SIM and memory card before it leaves the flat."
+        }
+      }
+    ]
+  }
+}

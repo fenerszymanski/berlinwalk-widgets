@@ -11030,6 +11030,36 @@
       ],
       "iconStatus": "live-wix-media",
       "image": "https://static.wixstatic.com/media/5a08a3_ab69c557cb8c4628a6e1453148873716~mv2.png"
+    },
+    {
+      "slug": "berlin-e-waste-drop-map",
+      "title": "Berlin E-Waste Drop Map",
+      "lead": "Which door takes your old electronics in Berlin for free. Pick a phone, vape, battery, laptop or fridge: the tool shows what to do before it leaves the flat, the free doors in the order to try them, and which of the 14 BSR recycling yards take it. Checked on 18 October 2026.",
+      "category": "Maps",
+      "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/berlin-e-waste-drop-map/",
+      "embedHeight": 1300,
+      "hubCategory": "Essentials",
+      "type": "Map",
+      "priority": 3,
+      "tags": [
+        "e-waste",
+        "recycling",
+        "batteries",
+        "vapes",
+        "bsr"
+      ],
+      "aliases": [
+        "e-waste in berlin",
+        "electronic waste berlin",
+        "elektroschrott berlin",
+        "where to dispose electronics berlin",
+        "bsr recyclinghof elektro",
+        "vape disposal berlin",
+        "battery disposal berlin"
+      ],
+      "iconStatus": "live-wix-media",
+      "image": "https://static.wixstatic.com/media/5a08a3_d569c0651f9b4040ba12f36ddd3d595f~mv2.png",
+      "cmsItemId": "6236d395-5465-4f6c-b40f-8c8480b5730e"
     }
   ],
   "hubCategories": [
