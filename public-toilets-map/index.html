@@ -678,14 +678,26 @@
         return normalize(value) === 'ja' || normalize(value) === 'yes';
       }
 
+      function parseNumericFee(rawFee) {
+        if (rawFee === null || rawFee === undefined) return null;
+        if (typeof rawFee === 'number') {
+          return Number.isFinite(rawFee) && rawFee >= 0 ? rawFee : null;
+        }
+        var trimmed = String(rawFee).trim().replace(',', '.');
+        if (!trimmed) return null;
+        var parsed = Number(trimmed);
+        return Number.isFinite(parsed) && parsed >= 0 ? parsed : null;
+      }
+
       function isFree(toilet) {
-        return Number(toilet.fee) === 0;
+        return parseNumericFee(toilet && toilet.fee) === 0;
       }
 
       function formatFee(toilet) {
-        if (toilet.fee === null || toilet.fee === undefined || toilet.fee === '') return 'Unknown';
-        if (Number(toilet.fee) === 0) return 'Free';
-        return Number(toilet.fee).toLocaleString('en-US', {
+        var parsed = parseNumericFee(toilet && toilet.fee);
+        if (parsed === null) return 'Unknown';
+        if (parsed === 0) return 'Free';
+        return parsed.toLocaleString('en-US', {
           style: 'currency',
           currency: 'EUR',
           minimumFractionDigits: 2
