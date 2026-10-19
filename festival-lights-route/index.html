@@ -271,11 +271,19 @@
       #bw-fol-route .bw-body { padding: 14px; }
       #bw-fol-route .bw-filter { font-size: 11px; padding: 7px 11px; }
       #bw-fol-route .bw-map { height: 380px; min-height: 360px; }
-      #bw-fol-route .leaflet-popup-content { width: 220px !important; }
+      #bw-fol-route .leaflet-popup-content { width: 206px !important; }
       #bw-fol-route .bw-statbar { grid-template-columns: 1fr 1fr 1fr; }
       #bw-fol-route .bw-stat { padding: 9px 8px; }
       #bw-fol-route .bw-stat b { font-size: 14px; }
       #bw-fol-route .bw-stat span { font-size: 9px; }
+    }
+    @media (max-width: 310px) {
+      #bw-fol-route .bw-body { padding: 11px; }
+      #bw-fol-route .leaflet-popup-content { width: 176px !important; }
+      #bw-fol-route .bw-popup-head { padding: 9px 26px 9px 11px; }
+      #bw-fol-route .bw-popup-name { font-size: 13px; }
+      #bw-fol-route .bw-popup-body { padding: 10px 11px; }
+      #bw-fol-route .bw-popup-note { font-size: 11px; }
     }
   </style>
 
@@ -287,7 +295,7 @@
       <h2 class="bw-title">Core walk first. Outer locations later.</h2>
     </div>
     <div class="bw-body">
-      <p class="bw-note"><strong>Selected stops from the 37-location 2026 programme.</strong> This map groups the central walk and four extensions; it is not the full festival map. Konzerthaus skips October 11; the park at Rathaus Lichtenberg is October 9 only. Indoor Dom shows require separate tickets.</p>
+      <p class="bw-note"><strong>2026 route archive (9–18 October 2026, 7–11 pm).</strong> The 2026 Festival of Lights has ended; this map preserves the 2026 central walking route and four extensions from the 37-location programme for route reference. In the 2026 edition, Konzerthaus skipped October 11, the park at Rathaus Lichtenberg ran October 9 only, and indoor Dom shows required separate tickets.</p>
       <div class="bw-filters" aria-label="Filter Festival of Lights locations">
         <button class="bw-filter active" type="button" data-filter="all">Show all</button>
         <button class="bw-filter" type="button" data-filter="core">Core walk</button>
@@ -587,9 +595,11 @@
       var map = L.map(mapEl, {
         center: [52.515, 13.391],
         zoom: 13,
+        zoomControl: false,
         scrollWheelZoom: false,
         tap: true
       });
+      L.control.zoom({ position: 'bottomright' }).addTo(map);
 
       L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
@@ -630,7 +640,13 @@
 
       var markers = locations.map(function (loc) {
         var marker = L.marker([loc.lat, loc.lng], { icon: createMarkerIcon(loc) })
-          .bindPopup(popup(loc), { closeButton: true, maxWidth: 278, className: 'bw-popup-wrapper' });
+          .bindPopup(popup(loc), {
+            closeButton: true,
+            maxWidth: 278,
+            autoPanPaddingTopLeft: [14, 14],
+            autoPanPaddingBottomRight: [52, 28],
+            className: 'bw-popup-wrapper'
+          });
         marker.addTo(map);
         marker._cats = loc.cats;
         return marker;
