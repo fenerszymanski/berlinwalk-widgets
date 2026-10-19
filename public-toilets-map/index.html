@@ -560,6 +560,9 @@
         width: 220px !important;
       }
     }
+    #bw-toilet-map .leaflet-popup-content { max-width: calc(100vw - 50px); overflow-wrap: anywhere; }
+    #bw-toilet-map .bw-retry { margin: 10px 0; padding: 10px 16px; border: 1px solid #123D18; border-radius: 8px; background: #FFE600; color: #123D18; font-family: inherit; font-size: 14px; font-weight: 700; cursor: pointer; }
+    #bw-toilet-map .bw-retry[hidden] { display: none !important; }
   </style>
 
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
@@ -610,6 +613,7 @@
         <span id="bw-toilet-status">Preparing the map...</span>
         <span>Source: <a class="bw-source" href="https://daten.berlin.de/datensaetze/offentliche-toiletten-wfs-ad2c0c24" target="_blank" rel="noopener">Berlin Open Data WFS</a></span>
       </div>
+      <button class="bw-retry" id="bw-toilet-retry" type="button" hidden>Try again</button>
     </div>
   </div>
 
@@ -637,16 +641,20 @@
       var listEl = document.getElementById('bw-toilet-list');
       var statusEl = document.getElementById('bw-toilet-status');
       var liveEl = document.getElementById('bw-toilet-live');
+      var retryButton = document.getElementById('bw-toilet-retry');
+      var loadingData = false;
       var locateButton = document.getElementById('bw-toilet-locate');
       var searchInput = document.getElementById('bw-toilet-search');
       var panelTitle = document.getElementById('bw-toilet-panel-title');
       var panelSub = document.getElementById('bw-toilet-panel-sub');
 
       var map = L.map(mapEl, {
+        zoomControl: false,
         center: BERLIN_CENTER,
         zoom: 12,
         scrollWheelZoom: false
       });
+      L.control.zoom({ position: 'bottomright' }).addTo(map);
 
       L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
@@ -807,7 +815,7 @@
 
       function addMarker(toilet) {
         var marker = L.circleMarker([toilet.lat, toilet.lng], markerStyle(toilet));
-        marker.bindPopup(popupHtml(toilet), { closeButton: true, maxWidth: 280 });
+        marker.bindPopup(popupHtml(toilet), { closeButton: true, maxWidth: 280, autoPanPaddingTopLeft: [8, 8], autoPanPaddingBottomRight: [8, 82], maxHeight: Math.max(160, mapEl.clientHeight - 108) });
         marker.on('click', function () {
           selectToilet(toilet.id, true);
         });
@@ -910,6 +918,7 @@
       }
 
       function applyFilters() {
+        if (!state.loaded) return;
         state.filtered = sortToilets(state.all.filter(passesFilter));
         redrawMarkers();
         renderList();
@@ -932,7 +941,7 @@
         marker.setPopupContent(popupHtml(selected));
         marker.setStyle(markerStyle(selected));
         if (openPopup) {
-          map.setView([selected.lat, selected.lng], Math.max(map.getZoom(), 15), { animate: true });
+          map.setView([selected.lat, selected.lng], Math.max(map.getZoom(), 15), { animate: false });
           marker.openPopup();
         }
         renderList();
@@ -1059,12 +1068,23 @@
       }
 
       function loadData() {
-        fetch(DATA_URL)
+        if (loadingData) return;
+        loadingData = true;
+        retryButton.hidden = true;
+        loadingEl.style.display = '';
+        loadingEl.textContent = 'Loading Berlin public toilets...';
+        liveEl.textContent = 'Loading live data';
+        statusEl.textContent = 'Waiting for Berlin Open Data...';
+        var controller = new AbortController();
+        var deadline = setTimeout(function () { controller.abort(); }, 12000);
+        fetch(DATA_URL, { signal: controller.signal })
           .then(function (response) {
             if (!response.ok) throw new Error('Berlin Open Data request failed');
             return response.json();
           })
           .then(function (geojson) {
+            clearTimeout(deadline);
+            loadingData = false;
             state.loaded = true;
             state.all = (geojson.features || [])
               .map(toiletFromFeature)
@@ -1077,14 +1097,18 @@
             setTimeout(function () { map.invalidateSize(); }, 200);
           })
           .catch(function () {
+            clearTimeout(deadline);
+            loadingData = false;
             state.loaded = false;
             loadingEl.textContent = 'Could not load the live toilet map. Please try again in a moment.';
             liveEl.textContent = 'Data unavailable';
             statusEl.textContent = 'Berlin Open Data did not respond.';
             listEl.innerHTML = '<p class="bw-empty">Could not load toilet locations. Please check your connection and reload the page.</p>';
+            retryButton.hidden = false;
           });
       }
 
+      retryButton.addEventListener('click', loadData);
       locateButton.addEventListener('click', locateUser);
 
       searchInput.addEventListener('input', function () {

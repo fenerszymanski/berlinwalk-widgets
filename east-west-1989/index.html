@@ -282,6 +282,7 @@
     #bw-eastwest1989 .leaflet-popup-content-wrapper { border-radius: 8px; }
     #bw-eastwest1989 .leaflet-popup-content { font-family: inherit; font-size: 12px; line-height: 1.5; margin: 10px 12px; }
     #bw-eastwest1989 .leaflet-popup-content b { color: var(--bw-text); }
+    #bw-eastwest1989 .leaflet-popup-content { max-width: calc(100vw - 78px); overflow-wrap: anywhere; }
   </style>
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
@@ -337,6 +338,7 @@
 
     var berlinBounds = L.latLngBounds([[52.30, 12.95], [52.72, 13.80]]);
     var map = L.map(mapEl, {
+        zoomControl: false,
       center: [52.520, 13.405],
       zoom: 11,
       minZoom: 10,
@@ -345,6 +347,7 @@
       maxBoundsViscosity: 0.7,
       scrollWheelZoom: false
     });
+      L.control.zoom({ position: 'bottomright' }).addTo(map);
     map.once('click', function () { map.scrollWheelZoom.enable(); });
 
     L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -401,7 +404,7 @@
         L.circleMarker([c.lat, c.lng], {
           radius: 5, fillColor: '#1B5E20', fillOpacity: 1,
           color: '#FFFFFF', weight: 2
-        }).bindPopup('<b>' + esc(c.name) + '</b><br>' + esc(c.note)).addTo(map);
+        }).bindPopup('<b>' + esc(c.name) + '</b><br>' + esc(c.note), { autoPanPaddingTopLeft: [8, 8], autoPanPaddingBottomRight: [8, 82], maxHeight: Math.max(160, mapEl.clientHeight - 108) }).addTo(map);
       });
 
       // Watchtower triangle icons
@@ -412,7 +415,7 @@
           iconSize: [12, 12], iconAnchor: [6, 6], popupAnchor: [0, -8]
         });
         L.marker([w.lat, w.lng], { icon: icon })
-          .bindPopup('<b>' + esc(w.name) + '</b><br>' + esc(w.note)).addTo(map);
+          .bindPopup('<b>' + esc(w.name) + '</b><br>' + esc(w.note), { autoPanPaddingTopLeft: [8, 8], autoPanPaddingBottomRight: [8, 82], maxHeight: Math.max(160, mapEl.clientHeight - 108) }).addTo(map);
       });
 
       map.on('click', function (e) {

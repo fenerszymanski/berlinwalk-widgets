@@ -224,6 +224,7 @@
       #bw-neighborhood-map .bw-popup-name { font-size: 14px; }
       #bw-neighborhood-map .bw-popup-body { font-size: 12px; }
     }
+    #bw-neighborhood-map .leaflet-popup-content { max-width: calc(100vw - 50px); overflow-wrap: anywhere; }
   </style>
 
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
@@ -343,11 +344,13 @@
       var mapEl = document.getElementById('bw-safety-map-canvas');
 
       var map = L.map(mapEl, {
+        zoomControl: false,
         center: [52.513, 13.405],
         zoom: 11,
         scrollWheelZoom: false,
         tap: true
       });
+      L.control.zoom({ position: 'bottomright' }).addTo(map);
 
       L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
@@ -386,7 +389,10 @@
           icon: createMarkerIcon(loc.level)
         }).bindPopup(createPopup(loc), {
           closeButton: true,
-          maxWidth: 260
+          maxWidth: 260,
+          autoPanPaddingTopLeft: [8, 8],
+          autoPanPaddingBottomRight: [8, 82],
+          maxHeight: Math.max(160, mapEl.clientHeight - 108)
         }).addTo(map);
       });
 

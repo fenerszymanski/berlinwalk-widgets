@@ -293,6 +293,7 @@
       #bw-shopping-areas .bw-popup-name { font-size: 14px; }
       #bw-shopping-areas .bw-popup-row { font-size: 11.5px; }
     }
+    #bw-shopping-areas .leaflet-popup-content { max-width: calc(100vw - 50px); overflow-wrap: anywhere; }
   </style>
 
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
@@ -507,11 +508,13 @@
       var filterBtns = root.querySelectorAll('.bw-filter');
 
       var map = L.map(mapEl, {
+        zoomControl: false,
         center: [52.515, 13.402],
         zoom: 12,
         scrollWheelZoom: false,
         tap: true
       });
+      L.control.zoom({ position: 'bottomright' }).addTo(map);
 
       L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
@@ -553,6 +556,9 @@
         }).bindPopup(createPopup(loc), {
           closeButton: true,
           maxWidth: 270,
+          autoPanPaddingTopLeft: [8, 8],
+          autoPanPaddingBottomRight: [8, 82],
+          maxHeight: Math.max(160, mapEl.clientHeight - 108),
           className: 'bw-popup-wrapper'
         });
         marker.addTo(map);
