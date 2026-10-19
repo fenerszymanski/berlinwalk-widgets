@@ -2,7 +2,7 @@ const SCRIPT_URL = document.currentScript && document.currentScript.src ? docume
 const BASE_URL = SCRIPT_URL 
   ? new URL('../', SCRIPT_URL).toString() 
   : 'https://fenerszymanski.github.io/berlinwalk-widgets/';
-const ASSET_BUILD = 'bouncer-r1-r3-v20260825';
+const ASSET_BUILD = 'bouncer-r1-r3-v20261019-timeout';
 const GAMES_PREVIEW_BUILD = 'games-preview-rail-cta-contrast-20261019';
 const BOUNCER_CONTEXT_MESSAGE = 'bw-berghain-bouncer-context';
 const BOUNCER_READY_MESSAGE = 'bw-berghain-bouncer-ready';

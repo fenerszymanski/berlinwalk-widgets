@@ -1556,7 +1556,10 @@
       resContainer.style.display = 'flex';
       
       let endingKey = 'fail';
-      if (score < Number(gameData.shameThreshold ?? -100)) {
+      const isTimeoutRun = runCompletionReason === 'timeout';
+      if (isTimeoutRun) {
+        endingKey = score < Number(gameData.shameThreshold ?? -100) ? 'shame' : 'fail';
+      } else if (score < Number(gameData.shameThreshold ?? -100)) {
         endingKey = 'shame';
       } else if (score < gameData.threshold) {
         endingKey = 'fail';
@@ -1573,7 +1576,14 @@
       const personaIndex = personaPool.length
         ? hashSeed(`${activeChallengeId}:${runIndex}:${score}:${stepCount}`) % personaPool.length
         : 0;
-      currentResultPersona = personaPool[personaIndex] || null;
+      currentResultPersona = isTimeoutRun
+        ? {
+            id: 'frozen-at-door',
+            title: endingKey === 'shame' ? 'Raus hier.' : 'Heute leider nicht.',
+            reason: 'You hesitated at the door while the 10-second clock ran out.',
+            scoreLine: 'Timed out at the door'
+          }
+        : (personaPool[personaIndex] || null);
       
       // Handle ending music / audio
       if (bgmAudio) bgmAudio.pause();
