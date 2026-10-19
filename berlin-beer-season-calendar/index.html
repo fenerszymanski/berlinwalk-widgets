@@ -220,28 +220,8 @@
       </details>
     </div>
     <p class="foot">Dates checked 20 July 2026 against the <a href="https://www.berlin.de/events/" target="_blank" rel="noopener noreferrer">Berlin events calendar</a> and the named organizers. Programmes, tickets and opening hours can change, so confirm the exact event before travelling.</p>
-    <div class="creditsbar">
-      <button class="creditsTrigger" id="creditsOpen" type="button" aria-expanded="false" aria-controls="imageCredits" aria-haspopup="dialog">Image credits</button>
-    </div>
   </section>
 
-  <div class="creditsLayer" id="imageCredits" hidden>
-    <section class="creditsDialog" role="dialog" aria-modal="true" aria-labelledby="creditsTitle" tabindex="-1">
-      <div class="creditsTop">
-        <div>
-          <h3 id="creditsTitle">Article image credits</h3>
-          <p class="creditsIntro">Source, creator, licence and edit details for the five photographs used in the article.</p>
-        </div>
-        <button class="creditsClose" id="creditsClose" type="button" aria-label="Close image credits">&times;</button>
-      </div>
-      <ol class="creditsList">
-        <li><a href="https://commons.wikimedia.org/wiki/File%3APratergarten_Berlin_Kastanienallee.JPG" target="_blank" rel="noopener noreferrer">Pratergarten Berlin Kastanienallee.JPG</a>, Superbass, <a href="https://creativecommons.org/licenses/by-sa/3.0" target="_blank" rel="noopener noreferrer">CC BY-SA 3.0</a>.<span class="change">Changes: resized to a 1600px long edge and compressed as JPEG; no crop.</span></li>
-        <li><a href="https://commons.wikimedia.org/wiki/File%3AM%C3%BCnchen%2C_Oktoberfest_2019%2C_%C3%9Cberf%C3%BCllung%2C_1.jpeg" target="_blank" rel="noopener noreferrer">München, Oktoberfest 2019, Überfüllung, 1.jpeg</a>, Renardo la vulpo, <a href="https://creativecommons.org/licenses/by-sa/4.0" target="_blank" rel="noopener noreferrer">CC BY-SA 4.0</a>.<span class="change">Changes: resized to a 1600px long edge and compressed as JPEG; no crop.</span></li>
-        <li><a href="https://commons.wikimedia.org/wiki/File%3ABiermeile-karl-marx-allee_2017_06.jpg" target="_blank" rel="noopener noreferrer">Biermeile-karl-marx-allee 2017 06.jpg</a>, Dtuk, <a href="https://creativecommons.org/licenses/by-sa/3.0" target="_blank" rel="noopener noreferrer">CC BY-SA 3.0</a>.<span class="change">Changes: resized to a 1600px long edge and compressed as JPEG; no crop.</span></li>
-        <li><a href="https://commons.wikimedia.org/wiki/File%3ABiermeile2017start_17.jpg" target="_blank" rel="noopener noreferrer">Biermeile2017start 17.jpg</a>, Dtuk, <a href="https://creativecommons.org/licenses/by-sa/3.0" target="_blank" rel="noopener noreferrer">CC BY-SA 3.0</a>.<span class="change">Changes: resized to a 1600px long edge and compressed as JPEG; no crop.</span></li>
-      </ol>
-    </section>
-  </div>
 </main>
 
 <script>
@@ -372,8 +352,9 @@
   }
 
   function normalizeRange(){
-    var arrive = d(fromEl.value || '2026-09-26');
-    var depart = d(toEl.value || '2026-10-01');
+    if(!fromEl.value || !toEl.value || !fromEl.validity.valid || !toEl.validity.valid) return null;
+    var arrive = d(fromEl.value);
+    var depart = d(toEl.value);
     if(depart <= arrive){
       depart = plusDays(arrive,1);
       toEl.value = iso(depart);
@@ -387,6 +368,17 @@
 
   function render(){
     var range = normalizeRange();
+    if(!range){
+      lastRange = null;
+      tripEl.style.display = 'none';
+      document.getElementById('mark').textContent = '📅';
+      document.getElementById('vtitle').textContent = 'Choose both Berlin dates';
+      document.getElementById('vsub').textContent = 'Enter a valid arrival and departure date to see which listed events overlap your stay.';
+      hitsEl.innerHTML = '';
+      if(window.__bwRequestEmbedResize) window.__bwRequestEmbedResize();
+      return;
+    }
+    tripEl.style.display = '';
     var arrive = range.arrive;
     var depart = range.depart;
     lastRange = range;
@@ -468,43 +460,7 @@
     });
   }
 
-  var creditsOpen = document.getElementById('creditsOpen');
-  var creditsLayer = document.getElementById('imageCredits');
-  var creditsDialog = creditsLayer.querySelector('.creditsDialog');
-  var creditsClose = document.getElementById('creditsClose');
-  var previousFocus = null;
 
-  function setCredits(open){
-    if(open){
-      previousFocus = document.activeElement;
-      creditsLayer.hidden = false;
-      creditsOpen.setAttribute('aria-expanded','true');
-      creditsDialog.focus();
-    }else{
-      creditsLayer.hidden = true;
-      creditsOpen.setAttribute('aria-expanded','false');
-      if(previousFocus && typeof previousFocus.focus === 'function') previousFocus.focus();
-    }
-  }
-
-  creditsOpen.addEventListener('click',function(){ setCredits(true); });
-  creditsClose.addEventListener('click',function(){ setCredits(false); });
-  creditsLayer.addEventListener('click',function(event){ if(event.target === creditsLayer) setCredits(false); });
-  document.addEventListener('keydown',function(event){
-    if(creditsLayer.hidden) return;
-    if(event.key === 'Escape'){
-      event.preventDefault();
-      setCredits(false);
-      return;
-    }
-    if(event.key !== 'Tab') return;
-    var focusable = Array.prototype.slice.call(creditsDialog.querySelectorAll('button,a[href]'));
-    if(!focusable.length) return;
-    var first = focusable[0];
-    var last = focusable[focusable.length-1];
-    if(event.shiftKey && document.activeElement === first){ event.preventDefault(); last.focus(); }
-    else if(!event.shiftKey && document.activeElement === last){ event.preventDefault(); first.focus(); }
-  });
 })();
 </script>
 <script src="../js/brand.js"></script>

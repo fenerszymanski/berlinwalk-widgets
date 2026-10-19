@@ -199,18 +199,19 @@
 
   function readState() {
     var pass = $('bb-pass').value;
+    var valid = !!($('bb-born').value && $('bb-reg').value && $('bb-born').validity.valid && $('bb-reg').validity.valid);
     var born = parseDate($('bb-born').value, new Date('1992-04-15T12:00:00+02:00'));
     var reg = parseDate($('bb-reg').value, new Date('2019-10-01T12:00:00+02:00'));
     var oldEnough = born < BORN_BEFORE;
     var longEnough = reg <= REGISTERED_BY;
-    var agh = pass === 'de' && oldEnough && longEnough;
-    var bvv = (pass === 'de' || pass === 'eu') && oldEnough && longEnough;
+    var agh = valid && pass === 'de' && oldEnough && longEnough;
+    var bvv = valid && (pass === 'de' || pass === 'eu') && oldEnough && longEnough;
     var why = '';
     if (!oldEnough) why = 'born after 20 September 2010, so under 16 on election day';
     else if (!longEnough) why = 'main home in Berlin only after 20 June 2026, so short of the three months';
     else if (pass === 'other') why = 'a passport from outside the EU, and only citizenship changes that';
     else if (pass === 'eu') why = 'an EU passport reaches the district assembly but not the state parliament';
-    return { pass: pass, agh: agh, bvv: bvv, why: why, plan: $('bb-plan').value, now: new Date() };
+    return { pass: pass, valid: valid, agh: agh, bvv: bvv, why: why, plan: $('bb-plan').value, now: new Date() };
   }
 
   function xFor(t) {
@@ -320,6 +321,19 @@
 
   function render() {
     var s = readState();
+    if (!s.valid) {
+      $('bb-svg').style.display = 'none';
+      $('bb-big').childNodes[0].nodeValue = 'Enter both dates';
+      $('bb-sub').textContent = 'A valid date of birth and Berlin registration date are needed before this board can calculate an answer.';
+      $('bb-v1').textContent = 'not calculated';
+      $('bb-v2').textContent = 'not calculated';
+      $('bb-v3').textContent = 'complete your dates';
+      $('bb-move').textContent = 'Fill in both date fields in step 1. No ballot result is calculated from missing dates.';
+      $('bb-read').textContent = 'Complete your dates in step 1 to draw your board.';
+      if (window.__bwRequestEmbedResize) window.__bwRequestEmbedResize();
+      return;
+    }
+    $('bb-svg').style.display = '';
     var mine = draw(s);
     var sheets = (s.agh ? 1 : 0) + (s.bvv ? 1 : 0);
     var votes = (s.agh ? 2 : 0) + (s.bvv ? 1 : 0);
@@ -370,6 +384,7 @@
   }
 
   function showStep(n) {
+    if (n > 1 && !readState().valid) n = 1;
     currentStep = n;
     for (var i = 1; i <= 3; i++) {
       $('bb-panel-' + i).hidden = i !== n;
