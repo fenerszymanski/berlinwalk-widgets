@@ -170,11 +170,16 @@
     title.innerHTML = escapeHtml(value.slice(0, start)) + '<em class="bw-c-hero-highlight">' + escapeHtml(value.slice(start, end)) + '</em>' + escapeHtml(value.slice(end));
   }
 
+  function categoryHref(post) {
+    var slug = post && post.categorySlug;
+    return slug && slug !== 'guide' ? '/blog/categories/' + encodeURIComponent(slug) : '/blog';
+  }
+
   function hero(title, post, body) {
     var old = document.querySelector('.bw-c-hero');
     if (old) {
       var existingEyebrow = old.querySelector('.bw-c-eyebrow');
-      if (existingEyebrow && post) existingEyebrow.innerHTML = '<a href="/blog/categories/' + escapeHtml(post.categorySlug || '') + '">' + escapeHtml(post.category || 'Berlin guide') + '</a>' + (post.readTime ? ' · ' + escapeHtml(post.readTime) : '');
+      if (existingEyebrow && post) existingEyebrow.innerHTML = '<a href="' + escapeHtml(categoryHref(post)) + '">' + escapeHtml(post.category || 'Berlin guide') + '</a>' + (post.readTime ? ' · ' + escapeHtml(post.readTime) : '');
       highlightHeroTitle(old.querySelector('h1'), post);
       var currentStage = stageFor(body); if (currentStage && old.parentElement !== currentStage) currentStage.appendChild(old);
       return old;
@@ -183,7 +188,7 @@
     if (!header || !header.parentElement) return null;
     var category = post && post.category || 'Berlin guide'; var read = post && post.readTime || ((text(header.textContent).match(/\b\d+\s+min\s+read\b/i) || [])[0] || '');
     var wrapper = document.createElement('section'); wrapper.className = 'bw-c-hero'; wrapper.setAttribute(MARK, 'hero');
-    wrapper.innerHTML = '<div class="bw-c-hero-inner"><p class="bw-c-eyebrow"><a href="/blog/categories/' + escapeHtml(post && post.categorySlug || '') + '">' + escapeHtml(category) + '</a>' + (read ? ' · ' + escapeHtml(read) : '') + '</p><div data-bw-c-title-slot></div>' + (meta('og:description') ? '<p class="bw-c-dek">' + escapeHtml(meta('og:description')) + '</p>' : '') + '<div class="bw-c-byline"><img alt="Yusuf Ucuz" src="' + PORTRAIT_URL + '"><span>BY YUSUF UCUZ · BERLIN WALKING TOUR GUIDE</span></div></div>';
+    wrapper.innerHTML = '<div class="bw-c-hero-inner"><p class="bw-c-eyebrow"><a href="' + escapeHtml(categoryHref(post)) + '">' + escapeHtml(category) + '</a>' + (read ? ' · ' + escapeHtml(read) : '') + '</p><div data-bw-c-title-slot></div>' + (meta('og:description') ? '<p class="bw-c-dek">' + escapeHtml(meta('og:description')) + '</p>' : '') + '<div class="bw-c-byline"><img alt="Yusuf Ucuz" src="' + PORTRAIT_URL + '"><span>BY YUSUF UCUZ · BERLIN WALKING TOUR GUIDE</span></div></div>';
     var stage = stageFor(body);
     if (stage) stage.appendChild(wrapper);
     else if (body && body.parentElement) body.parentElement.insertBefore(wrapper, body);
