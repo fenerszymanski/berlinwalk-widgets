@@ -310,6 +310,7 @@
       #bw-christmas-markets-map .bw-popup-name { font-size: 13px; }
       #bw-christmas-markets-map .bw-popup-row { font-size: 11px; }
     }
+    #bw-christmas-markets-map .leaflet-popup-content { max-width: calc(100vw - 50px); overflow-wrap: anywhere; }
   </style>
 
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
@@ -562,11 +563,13 @@
       var countEl = document.getElementById('bw-count-num');
       
       var map = L.map(mapEl, {
+        zoomControl: false,
         center: [52.510, 13.385],
         zoom: 11,
         scrollWheelZoom: false,
         tap: true
       });
+      L.control.zoom({ position: 'bottomright' }).addTo(map);
 
       L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
@@ -615,6 +618,9 @@
         }).bindPopup(createPopup(loc), {
           closeButton: true,
           maxWidth: 280,
+          autoPanPaddingTopLeft: [8, 8],
+          autoPanPaddingBottomRight: [8, 82],
+          maxHeight: Math.max(160, mapEl.clientHeight - 108),
           className: 'bw-popup-wrapper'
         });
         marker.addTo(map);
