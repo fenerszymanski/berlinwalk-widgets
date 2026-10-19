@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-19T01:05:44.347Z",
+  "updatedAt": "2026-10-19T05:12:24.575Z",
   "source": "Wix Blog API",
   "popularSource": "Wix Blog metrics.views lifetime sort",
   "totalPosts": 436,
@@ -49,21 +49,21 @@
   ],
   "hero": {
     "lead": {
-      "title": "One Week in Berlin: A 7-Day Plan Built Around Your Arrival Day",
-      "slug": "one-week-in-berlin",
-      "path": "/post/one-week-in-berlin",
-      "url": "https://www.berlinwalk.com/post/one-week-in-berlin",
-      "excerpt": "Put your seven Berlin days on the calendar from the day you arrive. Compare museum opening days, Sunday shopping and timed visits before choosing when to go.",
+      "title": "Where to Eat Near Museum Island: Lunch by Exit and Day",
+      "slug": "where-to-eat-near-museum-island",
+      "path": "/post/where-to-eat-near-museum-island",
+      "url": "https://www.berlinwalk.com/post/where-to-eat-near-museum-island",
+      "excerpt": "Museum Island has five museums and almost no restaurants. Every museum café shuts on Mondays, the Humboldt Forum rooftop shuts on Tuesdays, and Hackescher Markt is closer to the Bode-Museum than the Humboldt Forum is. Here is where to eat by the door you leave, the day and the time you have.",
       "category": "Tourist Tips",
       "categorySlug": "tourist-tips",
-      "topic": "first-day",
-      "topicLabel": "First Day in Berlin",
-      "readTime": "7 min read",
-      "publishedDate": "2026-10-12T22:36:30.582Z",
-      "image": "https://static.wixstatic.com/media/5a08a3_088223afde70466bba6427ba83b46baa~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-museum-island-spree-morning.jpg",
-      "thumb": "https://static.wixstatic.com/media/5a08a3_088223afde70466bba6427ba83b46baa~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-museum-island-spree-morning.jpg",
-      "alt": "The green copper dome of the Berliner Dom behind the long stone colonnade on the Spree bank of Museum Island in soft morning light",
-      "relatedToolSlug": "berlin-seven-day-board"
+      "topic": "route-stories",
+      "topicLabel": "Tour Route Stories",
+      "readTime": "6 min read",
+      "publishedDate": "2026-10-15T08:03:00.928Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_67bb6978155344a7b874c7154919dc0e~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-bode-museum-blue-hour.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_67bb6978155344a7b874c7154919dc0e~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-bode-museum-blue-hour.jpg",
+      "alt": "The domed Bode-Museum at the tip of Museum Island at blue hour, lit up and reflected in the Spree, with the Monbijou Bridge and the TV Tower behind it",
+      "relatedToolSlug": "museum-island-lunch-map"
     },
     "secondary": [
       {
@@ -101,6 +101,23 @@
         "relatedToolSlug": "berlin-photo-museum-clock"
       },
       {
+        "title": "One Week in Berlin: A 7-Day Plan Built Around Your Arrival Day",
+        "slug": "one-week-in-berlin",
+        "path": "/post/one-week-in-berlin",
+        "url": "https://www.berlinwalk.com/post/one-week-in-berlin",
+        "excerpt": "Put your seven Berlin days on the calendar from the day you arrive. Compare museum opening days, Sunday shopping and timed visits before choosing when to go.",
+        "category": "Tourist Tips",
+        "categorySlug": "tourist-tips",
+        "topic": "first-day",
+        "topicLabel": "First Day in Berlin",
+        "readTime": "7 min read",
+        "publishedDate": "2026-10-12T22:36:30.582Z",
+        "image": "https://static.wixstatic.com/media/5a08a3_088223afde70466bba6427ba83b46baa~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-museum-island-spree-morning.jpg",
+        "thumb": "https://static.wixstatic.com/media/5a08a3_088223afde70466bba6427ba83b46baa~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-museum-island-spree-morning.jpg",
+        "alt": "The green copper dome of the Berliner Dom behind the long stone colonnade on the Spree bank of Museum Island in soft morning light",
+        "relatedToolSlug": "berlin-seven-day-board"
+      },
+      {
         "title": "Free vs Paid Walking Tour in Berlin: What a Small Group Really Changes",
         "slug": "free-vs-paid-walking-tour-berlin",
         "path": "/post/free-vs-paid-walking-tour-berlin",
@@ -116,23 +133,6 @@
         "thumb": "https://static.wixstatic.com/media/5a08a3_339ada94c77d4a68b2a5cb33c4cd6a94~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-small-group-museum-island.jpg",
         "alt": "A small walking tour group of five guests standing with their guide on the Friedrichsbrücke in Berlin, with the Alte Nationalgalerie and the Museum Island colonnade behind them",
         "relatedToolSlug": "berlin-tour-group-size-viewer"
-      },
-      {
-        "title": "Berlin Museums Closed for Renovation: What Is Shut and What to See Instead",
-        "slug": "berlin-museums-closed-for-renovation",
-        "path": "/post/berlin-museums-closed-for-renovation",
-        "url": "https://www.berlinwalk.com/post/berlin-museums-closed-for-renovation",
-        "excerpt": "The Pergamonmuseum has been shut since October 2023, Museum Berggruen since 2022, and the Zeughaus is a building site with no announced reopening. Here is what is actually closed in Berlin right now, which reopening dates you can trust, why the Ishtar Gate is on a far longer clock than the 2027 headlines suggest, and what is genuinely worth doing instead this week.",
-        "category": "Tourist Tips",
-        "categorySlug": "tourist-tips",
-        "topic": "history-myths",
-        "topicLabel": "Berlin History & Myths",
-        "readTime": "7 min read",
-        "publishedDate": "2026-09-08T19:49:35.137Z",
-        "image": "https://static.wixstatic.com/media/5a08a3_f6f2fbb5b5534bf39049cba1c30e60e6~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-ishtar-gate-pergamonmuseum.jpg",
-        "thumb": "https://static.wixstatic.com/media/5a08a3_f6f2fbb5b5534bf39049cba1c30e60e6~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-ishtar-gate-pergamonmuseum.jpg",
-        "alt": "The Ishtar Gate reconstructed inside the Pergamonmuseum, a blue glazed brick gateway with rows of golden animals",
-        "relatedToolSlug": "berlin-museum-closure-timeline"
       },
       {
         "title": "Berlin Public Transport for Tourists: Tickets, Zones, Prices and Validation",
