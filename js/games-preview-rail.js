@@ -104,6 +104,7 @@
         --gp-bg: rgba(255, 255, 255, 0.82);
         --gp-card: #FFFFFF;
         --gp-ink: #073B16;
+        --gp-cta-ink: #073B16;
         --gp-muted: #53615B;
         --gp-line: rgba(27, 94, 32, 0.18);
         --gp-yellow: #FFE600;
@@ -122,6 +123,7 @@
         --gp-bg: #111111;
         --gp-card: #181818;
         --gp-ink: #FFFFFF;
+        --gp-cta-ink: #102414;
         --gp-muted: #B9C0B8;
         --gp-line: rgba(230, 255, 0, 0.26);
         --gp-yellow: #E6FF00;
@@ -132,6 +134,7 @@
       .bw-games-preview-rail[data-theme="district"] {
         --gp-card: rgba(251, 251, 246, 0.96);
         --gp-ink: #FFFFFF;
+        --gp-cta-ink: #073B16;
         --gp-muted: rgba(255, 255, 255, 0.72);
         --gp-line: rgba(255, 255, 255, 0.20);
         --gp-yellow: #FFE600;
@@ -180,12 +183,13 @@
         margin: 0;
       }
 
-      .bw-games-preview-head a {
+      .bw-games-preview-head a,
+      .bw-games-preview-head a:is(:link, :visited, :hover, :focus, :focus-visible, :active) {
         align-items: center;
         background: var(--gp-yellow);
-        border: 2px solid var(--gp-ink);
+        border: 2px solid var(--gp-cta-ink, #073B16);
         border-radius: 8px;
-        color: var(--gp-ink);
+        color: var(--gp-cta-ink, #073B16) !important;
         display: inline-flex;
         flex: 0 0 auto;
         font-size: 13px;
@@ -193,6 +197,11 @@
         min-height: 42px;
         padding: 10px 14px;
         text-decoration: none;
+      }
+
+      .bw-games-preview-head a:focus-visible {
+        outline: 3px solid var(--gp-ink);
+        outline-offset: 3px;
       }
 
       .bw-games-preview-grid {

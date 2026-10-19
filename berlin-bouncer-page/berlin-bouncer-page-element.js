@@ -3,7 +3,7 @@ const BASE_URL = SCRIPT_URL
   ? new URL('../', SCRIPT_URL).toString() 
   : 'https://fenerszymanski.github.io/berlinwalk-widgets/';
 const ASSET_BUILD = 'bouncer-r1-r3-v20260825';
-const GAMES_PREVIEW_BUILD = 'games-preview-rail-hero-preview-20260708a';
+const GAMES_PREVIEW_BUILD = 'games-preview-rail-cta-contrast-20261019';
 const BOUNCER_CONTEXT_MESSAGE = 'bw-berghain-bouncer-context';
 const BOUNCER_READY_MESSAGE = 'bw-berghain-bouncer-ready';
 const BOUNCER_VISIBLE_MESSAGE = 'bw-berghain-bouncer-visible';
@@ -401,6 +401,13 @@ class BwBerlinBouncerPage extends HTMLElement {
         .bw-bouncer-games-preview {
           grid-area: more;
           min-width: 0;
+        }
+
+        .bw-bouncer-games-preview .bw-games-preview-head a,
+        .bw-bouncer-games-preview .bw-games-preview-head a:is(:link, :visited, :hover, :focus, :focus-visible, :active) {
+          background: var(--bw-neon, #E6FF00);
+          border-color: #102414;
+          color: #102414 !important;
         }
         
         .bw-bouncer-tour-cta h3 {
