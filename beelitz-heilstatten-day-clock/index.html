@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Beelitz-Heilstätten Day Clock: What Is Open on Your Date</title>
+<link rel="stylesheet" href="../css/brand.css">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #FFFFFF; color: #1f231c; padding: 12px; }
+  .bh { border-radius: 18px; overflow: hidden; border: 1px solid #d9e0d1; background: #fbfcf8; }
+  .bh-head { padding: 16px 16px 14px; background: #123D18; color: #fff; }
+  .bh-kick { font-size: 11px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: #FFE600; }
+  .bh-head h1 { font-size: 19px; line-height: 1.25; font-weight: 800; margin-top: 4px; }
+  .bh-head p { font-size: 12.5px; line-height: 1.5; color: #dfeadb; margin-top: 6px; max-width: 640px; }
+  .bh-sec { padding: 14px 16px 4px; }
+  .bh-label { font-size: 11px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: #1B5E20; margin-bottom: 8px; display: flex; justify-content: space-between; gap: 8px; flex-wrap: wrap; }
+  .bh-label span { color: #5d6255; letter-spacing: .02em; text-transform: none; font-weight: 600; }
+  .bh-strip { background: #fff; border: 1px solid #e1e7d9; border-radius: 14px; padding: 8px 6px 4px; }
+  .bh-strip svg { display: block; width: 100%; height: auto; touch-action: pan-y; }
+  .bh-strip rect.d-hit { cursor: pointer; }
+  .bh-pick { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin: 12px 0 2px; font-size: 12.5px; font-weight: 700; color: #22261e; }
+  .bh-pick input { font-family: inherit; font-size: 14px; font-weight: 700; padding: 7px 10px; border-radius: 10px; border: 1.5px solid #1B5E20; color: #123D18; background: #fff; }
+  .bh-legend { display: flex; flex-wrap: wrap; gap: 6px 14px; font-size: 11px; color: #4b5044; padding: 6px 4px 2px; }
+  .bh-legend i { display: inline-block; width: 12px; height: 10px; border-radius: 2px; margin-right: 5px; vertical-align: -1px; }
+  .bh-date { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; margin: 8px 0 2px; }
+  .bh-date b { font-size: 20px; font-weight: 800; color: #123D18; }
+  .bh-badge { font-size: 11px; font-weight: 800; padding: 4px 9px; border-radius: 999px; background: #FFE600; color: #123D18; }
+  .bh-badge.is-closed { background: #ececec; color: #3b3b3b; }
+  .bh-badge.is-eve { background: #123D18; color: #FFE600; }
+  .bh-badge.is-unsure { background: #fff3cd; color: #5b4500; }
+  .bh-nav { display: flex; gap: 6px; margin-left: auto; }
+  .bh-nav button { font-family: inherit; border: 1.5px solid #cfd7c5; background: #fff; border-radius: 999px; padding: 6px 12px; font-size: 12px; font-weight: 700; color: #22261e; cursor: pointer; }
+  .bh-day { background: #fff; border: 1px solid #e1e7d9; border-radius: 14px; padding: 6px; margin-top: 8px; }
+  .bh-day svg { display: block; width: 100%; height: auto; }
+  .bh-party { display: flex; flex-wrap: wrap; gap: 6px; }
+  .bh-party button { font-family: inherit; border: 1.5px solid #cfd7c5; background: #fff; border-radius: 999px; padding: 7px 12px; font-size: 12.5px; font-weight: 700; color: #22261e; cursor: pointer; }
+  .bh-party button[aria-pressed="true"] { border-color: #1B5E20; background: #eef6ea; box-shadow: inset 0 0 0 1px #1B5E20; }
+  .bh-plan { margin: 12px 0 4px; display: grid; grid-template-columns: 1.2fr 1fr; gap: 12px; }
+  .bh-card { background: #fff; border: 1px solid #e1e7d9; border-radius: 14px; padding: 12px 14px; }
+  .bh-card h2 { font-size: 12px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; color: #1B5E20; margin-bottom: 8px; }
+  .bh-card p, .bh-card li { font-size: 13px; line-height: 1.55; color: #2c3027; }
+  .bh-card ul { list-style: none; display: grid; gap: 7px; }
+  .bh-card li { padding-left: 14px; position: relative; }
+  .bh-card li::before { content: ''; position: absolute; left: 0; top: 8px; width: 7px; height: 7px; border-radius: 50%; background: #7CB342; }
+  .bh-card li.no { color: #8a8e83; }
+  .bh-card li.no::before { background: #cfcfcf; }
+  .bh-card .bh-move { font-size: 13px; line-height: 1.55; margin-top: 10px; padding: 10px 12px; border-radius: 12px; background: #fffbe0; border: 1px solid #f0e38a; color: #22261e; }
+  .bh-card .bh-move b { color: #123D18; }
+  .bh-price { font-size: 13px; line-height: 1.55; color: #2c3027; margin-top: 8px; }
+  .bh-foot { padding: 10px 16px 14px; font-size: 10.5px; color: #656a5d; line-height: 1.45; border-top: 1px solid #e1e7d9; margin-top: 10px; }
+  .t-ax { font-size: 9px; fill: #6b7062; }
+  .t-ax-b { font-size: 9.5px; fill: #33372e; font-weight: 700; }
+  .t-lab { font-size: 10px; font-weight: 700; fill: #22261e; }
+  button:focus-visible, input:focus-visible { outline: 2px solid #c62828; outline-offset: 2px; }
+  @media (max-width: 640px) {
+    .bh-plan { grid-template-columns: 1fr; }
+    .bh-head h1 { font-size: 17px; }
+    .bh-nav { margin-left: 0; }
+  }
+</style>
+</head>
+<body>
+<div class="bh">
+  <div class="bh-head">
+    <div class="bh-kick">Beelitz-Heilstätten from Berlin</div>
+    <h1>Pick your date. See what is open, when it gets dark, and which train gets you there.</h1>
+    <p>The treetop walk over the old sanatorium changes its hours almost every week this winter, shuts for whole stretches in November and January, and turns into an evening light trail from 27 November. Pick your day on the strip or in the date field.</p>
+  </div>
+
+  <section class="bh-sec">
+    <div class="bh-label">The season, day by day <span id="stripNote">bar height = hours open, 9:00 at the top</span></div>
+    <div class="bh-strip">
+      <svg id="strip" viewBox="0 0 680 150" role="img" aria-label="Opening window of the Beelitz-Heilstätten treetop park for every day from 19 October 2026 to 28 February 2027"></svg>
+      <div class="bh-legend">
+        <span><i style="background:#7CB342"></i>Day opening</span>
+        <span><i style="background:#123D18"></i>Evening light trail</span>
+        <span><i style="background:#dedede"></i>Closed</span>
+        <span><i style="background:repeating-linear-gradient(45deg,#f2c94c 0 3px,#fff 3px 6px)"></i>Not yet confirmed</span>
+        <span><i style="background:#c9d3e6"></i>After dark</span>
+      </div>
+    </div>
+    <label class="bh-pick" for="range">Your visit date <input id="range" type="date" min="2026-10-19" max="2027-02-28" value="2026-10-19"></label>
+    <div class="bh-date">
+      <b id="dateLabel">Monday 19 October</b>
+      <span class="bh-badge" id="badge">Open 10:00 to 18:00</span>
+      <div class="bh-nav">
+        <button type="button" id="prev" aria-label="Previous day">&larr; Day</button>
+        <button type="button" id="next" aria-label="Next day">Day &rarr;</button>
+      </div>
+    </div>
+    <div class="bh-day">
+      <svg id="dayline" viewBox="0 0 680 128" role="img" aria-label="Timeline of the chosen day"></svg>
+    </div>
+  </section>
+
+  <section class="bh-sec">
+    <div class="bh-label">Who is coming</div>
+    <div class="bh-party" id="party">
+      <button type="button" data-p="adults" aria-pressed="true">Adults only</button>
+      <button type="button" data-p="teen" aria-pressed="false">With a child 12 to 17</button>
+      <button type="button" data-p="kid" aria-pressed="false">With a child 7 to 11</button>
+      <button type="button" data-p="small" aria-pressed="false">With a child under 7</button>
+    </div>
+    <div class="bh-plan">
+      <div class="bh-card">
+        <h2>Your day</h2>
+        <p id="planText"></p>
+        <div class="bh-move" id="move"></div>
+      </div>
+      <div class="bh-card">
+        <h2>Inside the buildings</h2>
+        <ul id="tours"></ul>
+        <p class="bh-price" id="price"></p>
+      </div>
+    </div>
+  </section>
+  <div class="bh-foot" id="foot"></div>
+</div>
+<script>
+(function () {
+  var DATA = null;
+  var DAY_MS = 86400000;
+  var START = Date.UTC(2026, 9, 19);
+  var state = { i: 0, party: 'adults' };
+  var WD = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+  var MO = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+  var el = function (id) { return document.getElementById(id); };
+  var NS = 'http://www.w3.org/2000/svg';
+
+  function iso(t) { return new Date(t).toISOString().slice(0, 10); }
+  function hm(s) { var p = s.split(':'); return +p[0] + (+p[1]) / 60; }
+  function fmtH(h) { var m = Math.round(h * 60); var hh = Math.floor(m / 60), mm = m % 60; return (hh < 10 ? '0' : '') + hh + ':' + (mm < 10 ? '0' : '') + mm; }
+  function euro(n) { return '€' + (n % 1 ? n.toFixed(2) : String(n)); }
+  function node(tag, attrs, text) { var n = document.createElementNS(NS, tag); for (var k in attrs) n.setAttribute(k, attrs[k]); if (text != null) n.textContent = text; return n; }
+
+  // Local clock time in Europe/Berlin: CEST until 25 October 2026, then CET.
+  function utcOffset(t) { return t < Date.UTC(2026, 9, 25, 1) ? 2 : 1; }
+
+  // Sunset and civil dusk from the standard solar equations, for the site coordinates.
+  function sun(t) {
+    var lat = DATA.site.lat, lon = DATA.site.lon, rad = Math.PI / 180;
+    var d = new Date(t), y = d.getUTCFullYear();
+    var n = Math.floor((t - Date.UTC(y, 0, 0)) / DAY_MS);
+    var g = 2 * Math.PI / 365 * (n - 1);
+    var eq = 229.18 * (0.000075 + 0.001868 * Math.cos(g) - 0.032077 * Math.sin(g) - 0.014615 * Math.cos(2 * g) - 0.040849 * Math.sin(2 * g));
+    var dec = 0.006918 - 0.399912 * Math.cos(g) + 0.070257 * Math.sin(g) - 0.006758 * Math.cos(2 * g) + 0.000907 * Math.sin(2 * g) - 0.002697 * Math.cos(3 * g) + 0.00148 * Math.sin(3 * g);
+    function set(zen) {
+      var ha = Math.acos(Math.cos(zen * rad) / (Math.cos(lat * rad) * Math.cos(dec)) - Math.tan(lat * rad) * Math.tan(dec)) / rad;
+      return (720 - 4 * (lon - ha) - eq) / 60 + utcOffset(t);
+    }
+    return { set: set(90.833), dusk: set(96) };
+  }
+
+  function dayInfo(t) {
+    var key = iso(t), wd = new Date(t).getUTCDay();
+    if (DATA.closedDays[key]) return { kind: 'closed', note: DATA.closedDays[key] };
+    for (var r = 0; r < DATA.rules.length; r++) {
+      var R = DATA.rules[r];
+      if (key < R.from || key > R.to) continue;
+      if (R.kind === 'evening-week') {
+        if (wd === 1) return { kind: 'closed', note: 'Closed on Mondays in December' };
+        var late = (wd === 5 || wd === 6);
+        return { kind: 'evening', open: 16, lastEntry: late ? hm('21:40') : hm('20:20'), close: late ? hm('23:30') : 22 };
+      }
+      if (R.kind === 'weekend-day') {
+        if (wd !== 0 && wd !== 6) return { kind: 'closed', note: 'Weekends only in February outside the holidays' };
+        return { kind: 'day', open: 10, close: 16, lastEntry: 15, tariff: R.tariff };
+      }
+      if (R.kind === 'day') return { kind: 'day', open: hm(R.open), close: hm(R.close), lastEntry: hm(R.close) - 1, tariff: R.tariff, note: R.note };
+      if (R.kind === 'evening') return { kind: 'evening', open: hm(R.open), lastEntry: hm(R.lastEntry), close: hm(R.close), note: R.note };
+      return { kind: R.kind, note: R.note };
+    }
+    return { kind: 'closed', note: 'No opening listed' };
+  }
+
+  var Y0 = 9, Y1 = 24;
+  function boxW(svg) { var w = Math.round(svg.parentNode.clientWidth - 12); return Math.max(340, Math.min(680, w || 680)); }
+  function drawStrip() {
+    var svg = el('strip'); svg.innerHTML = '';
+    var W = boxW(svg), H = W < 500 ? 170 : 150; svg.setAttribute('viewBox', '0 0 ' + W + ' ' + H);
+    var n = 133, x0 = 26, w = (W - x0 - 4) / n, top = 8, h = H - 32;
+    var yOf = function (hh) { return top + (hh - Y0) / (Y1 - Y0) * h; };
+    [9, 12, 16, 20, 24].forEach(function (hh) {
+      svg.appendChild(node('line', { x1: x0, x2: W - 4, y1: yOf(hh), y2: yOf(hh), stroke: '#eef1ea', 'stroke-width': 1 }));
+      svg.appendChild(node('text', { x: 2, y: yOf(hh) + 3, class: 't-ax' }, (hh === 24 ? '24' : hh) + 'h'));
+    });
+    var duskPts = [];
+    for (var i = 0; i < n; i++) {
+      var t = START + i * DAY_MS, info = dayInfo(t), x = x0 + i * w;
+      var dd = new Date(t);
+      if (dd.getUTCDate() === 1 || i === 0) {
+        svg.appendChild(node('line', { x1: x, x2: x, y1: top, y2: top + h + 4, stroke: '#cfd7c5', 'stroke-width': 0.8 }));
+        svg.appendChild(node('text', { x: x + 2, y: top + h + 14, class: 't-ax-b' }, MO[dd.getUTCMonth()].slice(0, 3)));
+      }
+      var s = sun(t);
+      duskPts.push([x + w / 2, yOf(s.set)]);
+      if (info.kind === 'closed') {
+        svg.appendChild(node('rect', { x: x + 0.3, y: yOf(10), width: Math.max(w - 0.6, 0.8), height: yOf(16) - yOf(10), fill: '#e6e6e6' }));
+      } else if (info.kind === 'unsure') {
+        svg.appendChild(node('rect', { x: x + 0.3, y: yOf(16), width: Math.max(w - 0.6, 0.8), height: yOf(22) - yOf(16), fill: '#f2c94c', opacity: 0.55 }));
+      } else {
+        svg.appendChild(node('rect', { x: x + 0.3, y: yOf(info.open), width: Math.max(w - 0.6, 0.8), height: yOf(info.close) - yOf(info.open), fill: info.kind === 'evening' ? '#123D18' : '#7CB342' }));
+      }
+      var hit = node('rect', { x: x, y: top, width: w, height: h, fill: 'transparent', class: 'd-hit', 'data-i': i });
+      svg.appendChild(hit);
+    }
+    var d = 'M' + duskPts.map(function (p) { return p[0].toFixed(1) + ' ' + p[1].toFixed(1); }).join(' L');
+    svg.appendChild(node('path', { d: d, fill: 'none', stroke: '#E63946', 'stroke-width': 1.4, 'stroke-dasharray': '3 2' }));
+    svg.appendChild(node('text', { x: x0 + 3, y: yOf(sun(START).set) + 12, class: 't-ax', fill: '#E63946', style: 'fill:#E63946' }, 'sunset'));
+    var cur = node('rect', { id: 'cursor', x: x0, y: top - 4, width: Math.max(w, 2.5), height: h + 8, fill: 'none', stroke: '#c62828', 'stroke-width': 1.6, rx: 1 });
+    svg.appendChild(cur);
+    svg.addEventListener('click', function (e) { var r = e.target.closest && e.target.closest('.d-hit'); if (r) setDay(+r.getAttribute('data-i')); });
+    svg._geo = { x0: x0, w: w };
+  }
+
+  function drawDay(t, info) {
+    var svg = el('dayline'); svg.innerHTML = '';
+    var W = boxW(svg); svg.setAttribute('viewBox', '0 0 ' + W + ' 128');
+    var x0 = 30, x1 = W - 10, H0 = 8, H1 = 24, step = W < 500 ? 4 : 2;
+    var xOf = function (hh) { return x0 + (hh - H0) / (H1 - H0) * (x1 - x0); };
+    var s = sun(t);
+    svg.appendChild(node('rect', { x: xOf(Math.min(s.set, H1)), y: 26, width: x1 - xOf(s.set), height: 52, fill: '#c9d3e6', opacity: 0.55 }));
+    svg.appendChild(node('rect', { x: xOf(s.dusk), y: 26, width: x1 - xOf(s.dusk), height: 52, fill: '#8e9cbb', opacity: 0.35 }));
+    for (var hh = H0; hh <= H1; hh += step) {
+      svg.appendChild(node('line', { x1: xOf(hh), x2: xOf(hh), y1: 24, y2: 80, stroke: '#eceee8', 'stroke-width': 1 }));
+      svg.appendChild(node('text', { x: xOf(hh), y: 92, class: 't-ax', 'text-anchor': 'middle' }, fmtH(hh)));
+    }
+    if (info.kind === 'day' || info.kind === 'evening') {
+      var col = info.kind === 'evening' ? '#123D18' : '#7CB342';
+      svg.appendChild(node('rect', { x: xOf(info.open), y: 36, width: xOf(info.close) - xOf(info.open), height: 30, rx: 6, fill: col }));
+      svg.appendChild(node('line', { x1: xOf(info.lastEntry), x2: xOf(info.lastEntry), y1: 30, y2: 72, stroke: '#FFE600', 'stroke-width': 3 }));
+      svg.appendChild(node('text', { x: xOf(info.open) + 6, y: 55, class: 't-lab', fill: '#fff', style: 'fill:#fff' }, (W < 500 ? '' : (info.kind === 'evening' ? 'Light trail ' : 'Park ')) + fmtH(info.open) + '-' + fmtH(info.close)));
+      svg.appendChild(node('text', { x: xOf(info.lastEntry), y: 22, class: 't-lab', 'text-anchor': 'middle' }, 'last entry ' + fmtH(info.lastEntry)));
+    } else {
+      svg.appendChild(node('text', { x: (x0 + x1) / 2, y: 56, class: 't-lab', 'text-anchor': 'middle' }, info.kind === 'unsure' ? 'Evening extension possible, not confirmed' : 'Closed on this day'));
+    }
+    svg.appendChild(node('line', { x1: xOf(s.set), x2: xOf(s.set), y1: 26, y2: 80, stroke: '#E63946', 'stroke-width': 1.5, 'stroke-dasharray': '3 2' }));
+    svg.appendChild(node('text', { x: xOf(s.set) + 4, y: 76, class: 't-ax', fill: '#E63946', style: 'fill:#E63946' }, 'sunset ' + fmtH(s.set)));
+    var tr = trains(t);
+    if (tr) {
+      tr.arr.forEach(function (a) { var x = xOf(a); svg.appendChild(node('path', { d: 'M' + x + ' 100 l-4 7 h8 z', fill: '#1B5E20' })); });
+      tr.dep.forEach(function (a) { var x = xOf(a); svg.appendChild(node('path', { d: 'M' + x + ' 124 l-4 -7 h8 z', fill: '#E63946' })); });
+      svg.appendChild(node('text', { x: 2, y: 108, class: 't-ax' }, 'in'));
+      svg.appendChild(node('text', { x: 2, y: 124, class: 't-ax' }, 'out'));
+    } else {
+      svg.appendChild(node('text', { x: (x0 + x1) / 2, y: 114, class: 't-ax', 'text-anchor': 'middle' }, 'Train times from 13 December are not published yet: check the VBB app'));
+    }
+  }
+
+  function trains(t) {
+    if (iso(t) > DATA.trainVerifiedUntil) return null;
+    var wd = new Date(t).getUTCDay(), we = (wd === 0 || wd === 6);
+    var arr = [], dep = [];
+    for (var h = 8; h <= 23; h++) {
+      (we ? [58] : [31, 58]).forEach(function (m) { if (h + m / 60 <= 22) arr.push(h + m / 60); });
+      (we ? [0] : [0, 20]).forEach(function (m) { if (h >= 10 && h + m / 60 <= 23) dep.push(h + m / 60); });
+    }
+    return { arr: arr, dep: dep, we: we };
+  }
+
+  function pickTrain(t, info) {
+    var tr = trains(t); if (!tr || (info.kind !== 'day' && info.kind !== 'evening')) return null;
+    var want = info.kind === 'evening' ? 15.9 : info.open - 0.1;
+    var a = tr.arr.filter(function (x) { return x >= want; })[0];
+    var early = null, late = null;
+    if (info.kind === 'evening') { late = tr.dep.filter(function (x) { return x >= 18.6; })[0]; }
+    else {
+      var before = tr.dep.filter(function (x) { return x <= info.close - 0.1; });
+      early = before.length ? before[before.length - 1] : null;
+      late = tr.dep.filter(function (x) { return x >= info.close + 0.1; })[0];
+    }
+    return { arr: a, early: early, late: late, we: tr.we };
+  }
+
+  function render() {
+    var t = START + state.i * DAY_MS, dd = new Date(t), info = dayInfo(t), s = sun(t);
+    el('range').value = iso(START + state.i * DAY_MS);
+    el('dateLabel').textContent = WD[dd.getUTCDay()] + ' ' + dd.getUTCDate() + ' ' + MO[dd.getUTCMonth()] + ' ' + dd.getUTCFullYear();
+    var b = el('badge'); b.className = 'bh-badge';
+    if (info.kind === 'day') b.textContent = 'Day park ' + fmtH(info.open) + ' to ' + fmtH(info.close);
+    else if (info.kind === 'evening') { b.textContent = 'Light trail from ' + fmtH(info.open) + ', last entry ' + fmtH(info.lastEntry); b.className += ' is-eve'; }
+    else if (info.kind === 'unsure') { b.textContent = 'Not confirmed yet'; b.className += ' is-unsure'; }
+    else { b.textContent = 'Closed'; b.className += ' is-closed'; }
+    var g = el('strip')._geo; var c = document.getElementById('cursor');
+    if (g && c) c.setAttribute('x', g.x0 + state.i * g.w - 1);
+    drawDay(t, info);
+
+    var p = state.party, text = '', move = '';
+    var tr = pickTrain(t, info);
+    var trainLine = '';
+    if (tr && tr.arr != null) {
+      trainLine = ' Take the RE7: it reaches Beelitz-Heilstätten at ' + fmtH(tr.arr) + ' (S-Bahn from Hauptbahnhof about 50 minutes earlier, change at ' + (tr.arr % 1 > 0.9 ? 'Charlottenburg' : 'Wannsee') + '), and the gate is a five-minute walk.';
+      if (info.kind === 'evening') trainLine += tr.late != null ? ' After a 17:00 slot, a train back leaves at ' + fmtH(tr.late) + '.' : '';
+      else trainLine += ' Trains back: ' + (tr.early != null ? 'the ' + fmtH(tr.early) + ' before closing' : '') + (tr.early != null && tr.late != null ? ', or ' : '') + (tr.late != null ? 'the ' + fmtH(tr.late) + ' after it' : '') + '.';
+    } else if (info.kind === 'day' || info.kind === 'evening') {
+      trainLine = ' The new timetable starts on 13 December, so check the RE7 to Beelitz-Heilstätten in the VBB app the week before.';
+    }
+    if (info.kind === 'day') {
+      var hours = info.lastEntry - info.open;
+      var darkGap = info.close - s.set;
+      text = 'The treetop walk and the grounds are open ' + fmtH(info.open) + ' to ' + fmtH(info.close) + ', last entry ' + fmtH(info.lastEntry) + '. Sunset is ' + fmtH(s.set) + (darkGap > 0.2 ? ', so the last hour is in the dark.' : '.') + trainLine;
+      if (info.close <= 16) move = '<b>My move:</b> be on the path by 11:00. With a 16:00 close you have about four usable hours, and a building tour takes one of them.';
+      else if (info.tariff === 'event') move = '<b>My move:</b> go late on this one. The park is lit after dark until ' + fmtH(info.close) + ', so arrive around 15:00, walk the path at sunset and stay for the lights.';
+      else move = '<b>My move:</b> arrive before noon, do the path first while the light is good, then a building tour after lunch.';
+      if (info.note) text += ' ' + info.note + '.';
+    } else if (info.kind === 'evening') {
+      text = 'There is no daytime visit on this day: from 16:00 the site runs ZEITREISE, a light and sound trail of about 90 minutes through the park, some buildings and up onto the treetop walk, with timed entry slots and last entry at ' + fmtH(info.lastEntry) + '. It is already dark: sunset is ' + fmtH(s.set) + '.' + trainLine;
+      move = '<b>My move:</b> book a slot online before you go, it is cheaper than at the door and slots are limited. A 17:00 or 18:00 slot gets you back in Berlin by about 21:00.';
+      if (info.note) text += ' ' + info.note + '.';
+    } else if (info.kind === 'unsure') {
+      text = 'The operator lists 5 to 10 January as a possible extension of the evening trail, not a promise. ' + (info.note ? info.note + '.' : '');
+      move = '<b>My move:</b> pick 1 to 3 January, or wait for the operator to confirm this week before you plan around it.';
+    } else {
+      text = (info.note || 'Closed') + '. The fenced ruins outside the park cannot be entered, so a trip today only gets you a walk along the road and the station.';
+      var k = state.i, alt = null;
+      for (var j = 1; j < 30; j++) { var a1 = dayInfo(START + (k + j) * DAY_MS); if (k + j <= 132 && (a1.kind === 'day' || a1.kind === 'evening')) { alt = k + j; break; } }
+      move = alt != null ? '<b>My move:</b> the next open day is ' + (function (tt) { var x = new Date(tt); return WD[x.getUTCDay()] + ' ' + x.getUTCDate() + ' ' + MO[x.getUTCMonth()]; })(START + alt * DAY_MS) + '.' : '<b>My move:</b> wait for the spring season.';
+    }
+    el('planText').textContent = text;
+    el('move').innerHTML = move;
+
+    var minAge = p === 'small' ? 0 : p === 'kid' ? 7 : p === 'teen' ? 12 : 99;
+    var ul = el('tours'); ul.innerHTML = '';
+    var daytime = info.kind === 'day';
+    DATA.tours.forEach(function (T) {
+      var li = document.createElement('li');
+      var ok = daytime && (minAge >= T.minAge);
+      li.className = ok ? '' : 'no';
+      var why = !daytime ? 'daytime tours only' : (minAge < T.minAge ? 'from age ' + T.minAge : euro(T.price) + ', ' + T.min + ' min');
+      li.textContent = T.name + ': ' + T.inside + ' (' + why + ')';
+      ul.appendChild(li);
+    });
+    var price = '';
+    if (info.kind === 'day') {
+      var P = DATA.prices[info.tariff];
+      price = P.label + ': adults ' + euro(P.adult) + (p === 'adults' ? '' : ', ages 7 to 17 ' + euro(P.child) + (p === 'small' ? ', under 7 free' : '')) + (p !== 'adults' ? '. Family ticket ' + euro(P.family) + '.' : '.') + (info.tariff === 'standard' ? ' From 15:00 the evening tariff is ' + euro(13.5) + ' for adults, at the cash desk only.' : '') + ' Tours cost extra and need the park ticket. Public tours are in German; English only as a private booking.';
+    } else if (info.kind === 'evening') {
+      var Z = DATA.prices.zeitreise;
+      price = 'ZEITREISE: adults ' + euro(Z.adult) + ' online or ' + euro(Z.adultDoor) + ' at the door' + (p === 'adults' ? '.' : ', ages 7 to 17 ' + euro(Z.child) + ' online, family ' + euro(Z.family) + '.');
+    } else price = 'No tickets on sale for this day.';
+    el('price').textContent = price;
+  }
+
+  function setDay(i) { state.i = Math.max(0, Math.min(132, i)); render(); }
+
+  function fromInput(e) { var v = e.target.value; if (!/^\d{4}-\d{2}-\d{2}$/.test(v)) return; var p = v.split('-'); setDay(Math.round((Date.UTC(+p[0], +p[1] - 1, +p[2]) - START) / DAY_MS)); }
+  el('range').addEventListener('change', fromInput);
+  el('range').addEventListener('input', fromInput);
+  el('prev').addEventListener('click', function () { setDay(state.i - 1); });
+  el('next').addEventListener('click', function () { setDay(state.i + 1); });
+  Array.prototype.forEach.call(document.querySelectorAll('#party button'), function (btn) {
+    btn.addEventListener('click', function () {
+      state.party = btn.getAttribute('data-p');
+      Array.prototype.forEach.call(document.querySelectorAll('#party button'), function (x) { x.setAttribute('aria-pressed', x === btn ? 'true' : 'false'); });
+      render();
+    });
+  });
+
+  fetch('data.json').then(function (r) { return r.json(); }).then(function (d) {
+    DATA = d;
+    var today = Date.UTC(new Date().getFullYear(), new Date().getMonth(), new Date().getDate());
+    state.i = Math.max(0, Math.min(132, Math.round((today - START) / DAY_MS)));
+    drawStrip();
+    render();
+    var lastW = window.innerWidth;
+    window.addEventListener('resize', function () { if (Math.abs(window.innerWidth - lastW) < 20) return; lastW = window.innerWidth; drawStrip(); render(); });
+    el('foot').textContent = 'Opening days, hours and prices checked on ' + d.checkedOn + ' against the Baum & Zeit site (opening hours, prices, tours and the ZEITREISE event page). Train times from the VBB journey planner for dates up to 12 December 2026, while the Stadtbahn works send the RE7 from Charlottenburg. Sunset is calculated for the site. Hours can change at short notice for weather or events.';
+  });
+})();
+</script>
+<script src="../js/brand.js"></script>
+</body>
+</html>

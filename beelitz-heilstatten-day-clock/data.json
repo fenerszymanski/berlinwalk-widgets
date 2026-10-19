@@ -1,0 +1,50 @@
+{
+  "checkedOn": "19 October 2026",
+  "season": { "from": "2026-10-19", "to": "2027-02-28" },
+  "trainVerifiedUntil": "2026-12-12",
+  "site": { "lat": 52.2683, "lon": 12.9152 },
+  "rules": [
+    { "from": "2026-10-19", "to": "2026-10-29", "kind": "day", "open": "10:00", "close": "18:00", "tariff": "standard" },
+    { "from": "2026-10-30", "to": "2026-10-31", "kind": "day", "open": "10:00", "close": "20:00", "tariff": "event", "note": "Dia de los Muertos weekend: the park is lit after dark" },
+    { "from": "2026-11-01", "to": "2026-11-01", "kind": "day", "open": "10:00", "close": "18:00", "tariff": "event", "note": "Last day of the Dia de los Muertos weekend" },
+    { "from": "2026-11-02", "to": "2026-11-15", "kind": "day", "open": "10:00", "close": "16:00", "tariff": "winter" },
+    { "from": "2026-11-16", "to": "2026-11-20", "kind": "closed", "note": "Closed while the winter programme is set up" },
+    { "from": "2026-11-21", "to": "2026-11-22", "kind": "day", "open": "10:00", "close": "16:00", "tariff": "winter" },
+    { "from": "2026-11-23", "to": "2026-11-26", "kind": "closed", "note": "Closed before the ZEITREISE light trail opens" },
+    { "from": "2026-11-27", "to": "2026-11-28", "kind": "evening", "open": "16:00", "lastEntry": "21:40", "close": "23:30" },
+    { "from": "2026-11-29", "to": "2026-11-29", "kind": "evening", "open": "16:00", "lastEntry": "20:20", "close": "22:00" },
+    { "from": "2026-12-01", "to": "2026-12-22", "kind": "evening-week" },
+    { "from": "2026-12-23", "to": "2026-12-30", "kind": "evening", "open": "16:00", "lastEntry": "21:40", "close": "23:30", "note": "Brandenburg school holidays: open every evening" },
+    { "from": "2027-01-01", "to": "2027-01-02", "kind": "evening", "open": "16:00", "lastEntry": "21:40", "close": "23:30" },
+    { "from": "2027-01-03", "to": "2027-01-03", "kind": "evening", "open": "16:00", "lastEntry": "20:20", "close": "22:00" },
+    { "from": "2027-01-04", "to": "2027-01-10", "kind": "unsure", "note": "An extension of the evening trail is possible but not guaranteed" },
+    { "from": "2027-01-11", "to": "2027-01-29", "kind": "closed", "note": "Winter break" },
+    { "from": "2027-01-30", "to": "2027-01-31", "kind": "day", "open": "10:00", "close": "16:00", "tariff": "winter" },
+    { "from": "2027-02-01", "to": "2027-02-07", "kind": "day", "open": "10:00", "close": "16:00", "tariff": "winter", "note": "Brandenburg winter holidays: open daily" },
+    { "from": "2027-02-08", "to": "2027-02-28", "kind": "weekend-day", "open": "10:00", "close": "16:00", "tariff": "winter" }
+  ],
+  "closedDays": { "2026-11-30": "Closed (Monday)", "2026-12-24": "Closed (Christmas Eve)", "2026-12-25": "Closed (Christmas Day)", "2026-12-31": "Closed (New Year's Eve)" },
+  "prices": {
+    "standard": { "label": "Day ticket", "adult": 17, "child": 12, "reduced": 15, "family": 42 },
+    "event": { "label": "Day ticket (event day, no discount tariffs)", "adult": 17, "child": 12, "reduced": 15, "family": 42 },
+    "winter": { "label": "Winter tariff", "adult": 13.5, "child": 10, "reduced": 12, "family": 35 },
+    "zeitreise": { "label": "ZEITREISE light trail, timed slot", "adult": 19, "adultDoor": 23, "child": 5, "childDoor": 8, "family": 42, "familyDoor": 49.5 }
+  },
+  "tours": [
+    { "name": "Fascination Alpenhaus", "min": 60, "price": 12.5, "minAge": 7, "inside": "the women's ward with its big halls and Soviet-era traces" },
+    { "name": "Through the old surgery", "min": 60, "price": 12.5, "minAge": 12, "inside": "the 1930 surgery building: patient rooms, operating wing, a bath hall" },
+    { "name": "Surgery in full", "min": 90, "price": 17, "minAge": 12, "inside": "the surgery over two floors, with the X-ray rooms and the flower balcony" },
+    { "name": "Beelitz underworld: tunnels and technology", "min": 60, "price": 15, "minAge": 12, "inside": "the supply tunnels and the potato cellar under the site" },
+    { "name": "History walk with a look inside", "min": 60, "price": 10, "childPrice": 6, "minAge": 0, "inside": "the grounds on foot plus a short look into one building, step-free" }
+  ],
+  "trains": {
+    "outWeekend": [ { "arr": "09:58", "via": "S9 from Hauptbahnhof 09:09, RE7 from Charlottenburg 09:24" } ],
+    "pattern": "Weekends: one RE7 an hour, leaving Charlottenburg at :24 and reaching Beelitz-Heilstätten at :58. Weekdays add a second train via Wannsee arriving at :31. Back: RE7 every hour at :00, weekdays also at :20, the last one at 23:00.",
+    "arrWeekend": [":58"],
+    "arrWeekday": [":31", ":58"],
+    "depWeekend": [":00"],
+    "depWeekday": [":00", ":20"],
+    "firstArr": 8,
+    "lastDep": 23
+  }
+}
