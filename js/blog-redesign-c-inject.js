@@ -513,7 +513,14 @@
     var rail = document.createElement('aside'); rail.className = 'bw-c-rail'; rail.setAttribute(MARK, 'rail'); rail.setAttribute('data-bw-toc-signature', signature);
     rail.innerHTML = '<span class="bw-c-rail-progress" aria-hidden="true"><i></i></span><p class="bw-c-rail-title">ON THIS PAGE</p><nav class="bw-c-rail-list">' + links + '</nav><div class="bw-c-rail-tour"><span class="bw-c-rail-label">EXPLORE BERLIN</span><strong>Walk at your pace or with me.</strong><a class="bw-c-rail-choice bw-c-rail-choice-audio" href="' + AUDIO_TOURS_URL + '"><span>AUDIO TOURS<small>Listen as you walk</small></span><span aria-hidden="true">↗</span></a><a class="bw-c-rail-choice bw-c-rail-choice-walk" href="' + BOOKING_URL + '"><span>BERLIN THEN AND NOW<small>With me · about 2.5 hours · €25</small></span><span aria-hidden="true">↗</span></a></div>' + (tool ? '<a class="bw-c-rail-tool" href="/tools/' + escapeHtml(tool.slug) + '"><span class="bw-c-rail-label">ARTICLE TOOL</span><strong>' + escapeHtml(tool.title) + '</strong><small>Open the tool →</small></a>' : '') + '<a class="bw-c-rail-all" href="/blog">← ALL GUIDES</a>';
     page.insertBefore(rail, page.firstChild);
-    rail.addEventListener('click', function (event) { var link = event.target.closest('a[href^="#"]'); if (!link) return; event.preventDefault(); var target = document.getElementById(link.getAttribute('href').slice(1)); if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' }); });
+    function followSection(event) {
+      var link = event.target.closest('a[href^="#"]'); if (!link) return;
+      var target = document.getElementById(link.getAttribute('href').slice(1)); if (!target) return;
+      event.preventDefault();
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+    rail.addEventListener('click', followSection);
+    mobile.addEventListener('click', followSection);
     function position() {
       var active = items[0];
       items.forEach(function (item) { if (item.node.getBoundingClientRect().top < 155) active = item; });
@@ -577,6 +584,33 @@
       return b.score - a.score || b.published - a.published;
     }).slice(0, 3).map(function (entry) { return entry.candidate; });
   }
+  async function copyArticleLink(button, container) {
+    var url = location.href.split('#')[0];
+    button.disabled = true;
+    try {
+      if (!navigator.clipboard || !navigator.clipboard.writeText) throw new Error('Clipboard unavailable');
+      await navigator.clipboard.writeText(url);
+      button.textContent = 'Copied';
+      button.removeAttribute('aria-label');
+      setTimeout(function () { button.textContent = 'Copy link'; }, 1200);
+    } catch (_) {
+      var field = container.querySelector('[data-bw-c-link-field]');
+      if (!field) {
+        field = document.createElement('input');
+        field.type = 'text'; field.readOnly = true;
+        field.setAttribute('data-bw-c-link-field', '1');
+        field.setAttribute('aria-label', 'Page link, select and copy');
+        field.style.cssText = 'box-sizing:border-box;flex-basis:100%;width:100%;min-width:0;max-width:100%;padding:10px;border:1px solid #DDE4D6;border-radius:8px;color:#123D18;background:#fff;font:12px/1.5 sans-serif;';
+        container.appendChild(field);
+      }
+      field.value = url; field.focus(); field.select();
+      button.textContent = 'Select link';
+      button.setAttribute('aria-label', 'Select and copy the page link');
+    } finally {
+      button.disabled = false;
+    }
+  }
+
   function endModule(body, post) {
     var old = document.querySelector('[data-bw-redesign-end]');
     var faqFrame = Array.prototype.find.call(document.querySelectorAll('iframe[src*="/faq/"]'), function (candidate) { return candidate.isConnected; });
@@ -603,7 +637,7 @@
     var shareUrl = encodeURIComponent(location.href.split('#')[0]), title = encodeURIComponent(document.title);
     var bandSub = 'ABOUT 2.5 HOURS · 11 STOPS, 16 PLACES · MAX 10 · €25' + '.<br> STARTS AT THE WORLD CLOCK · ENDS AT HACKESCHER MARKT';
     node.innerHTML = '<div class="bw-c-tourband"><div class="bw-c-tourband-inner"><figure class="bw-c-tourband-photo"><img src="' + TOUR_BAND_IMAGE + '" alt="Yusuf guiding in front of Berlin’s Rotes Rathaus" loading="lazy" decoding="async"></figure><div class="bw-c-tourband-copy"><p class="bw-c-end-kicker">BERLIN THEN AND NOW · AN ARCHIVE PHOTO AT EVERY STOP</p><h2>Walk the Berlin that disappeared, with me.</h2><p class="bw-c-tourband-sub">' + bandSub + '</p><div class="bw-c-tourband-div"></div><a class="bw-c-book" href="' + BOOKING_URL + '">See dates and book</a></div></div></div><div class="bw-c-bottom">' + (cards ? '<p class="bw-c-section-label">RELATED GUIDES</p><div class="bw-c-related">' + cards + '</div>' : '') + (faqHost ? '<p class="bw-c-section-label">QUESTIONS PEOPLE ACTUALLY ASK</p><div class="bw-c-faq-slot"></div>' : '') + '<div class="bw-c-share"><span class="bw-c-share-label">SHARE THIS GUIDE</span><a target="_blank" rel="noopener" href="https://wa.me/?text=' + shareUrl + '">WhatsApp</a><a target="_blank" rel="noopener" href="https://www.facebook.com/sharer/sharer.php?u=' + shareUrl + '">Facebook</a><a target="_blank" rel="noopener" href="https://twitter.com/intent/tweet?url=' + shareUrl + '&text=' + title + '">X</a><button type="button" data-bw-c-copy>Copy link</button></div></div>';
-    node.addEventListener('click', function (event) { if (!event.target.matches('[data-bw-c-copy]')) return; navigator.clipboard && navigator.clipboard.writeText ? navigator.clipboard.writeText(location.href.split('#')[0]) : null; event.target.textContent = 'Copied'; setTimeout(function () { event.target.textContent = 'Copy link'; }, 1200); }); var pageNode = body.closest('.bw-c-page'); (pageNode || body).after(node); fitStage(node);
+    node.addEventListener('click', function (event) { if (!event.target.matches('[data-bw-c-copy]')) return; copyArticleLink(event.target, event.target.closest('.bw-c-share')); }); var pageNode = body.closest('.bw-c-page'); (pageNode || body).after(node); fitStage(node);
     var faqSlot = node.querySelector('.bw-c-faq-slot');
     if (faqSlot && faqHost) faqSlot.appendChild(faqFragment);
     unlockEndHeights(node);
