@@ -88,7 +88,7 @@
   function loadData() {
     if (state.dataPromise) return state.dataPromise;
     state.dataPromise = Promise.all([
-      fetch(ARCHIVE_URL, { cache: 'force-cache' }).then(function (r) { return r.ok ? r.json() : null; }),
+      fetch(ARCHIVE_URL, { cache: 'no-cache' }).then(function (r) { return r.ok ? r.json() : null; }),
       fetch(TOOLS_URL, { cache: 'force-cache' }).then(function (r) { return r.ok ? r.json() : null; }),
       fetch(HERO_HIGHLIGHTS_URL, { cache: 'force-cache' }).then(function (r) { return r.ok ? r.json() : null; })
     ]).then(function (result) {
