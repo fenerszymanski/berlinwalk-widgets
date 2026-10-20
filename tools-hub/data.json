@@ -11096,6 +11096,36 @@
       "iconStatus": "live-wix-media",
       "image": "https://static.wixstatic.com/media/5a08a3_ba21c90bbebc40528ed1bce080b79db2~mv2.png",
       "cmsItemId": "8451cd4e-ab62-4771-a0e2-af31e7ef3032"
+    },
+    {
+      "slug": "berlin-rail-change-board",
+      "title": "Berlin Rail Change Board",
+      "lead": "What the timetable change on 13 December 2026 does to your line, and what your VBB ticket costs from 1 January 2027. Pick a line to see every closure, cut and new train to the end of 2027 on one timeline, then check how much your ticket rises. Checked on 20 October 2026.",
+      "category": "Maps",
+      "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/berlin-rail-change-board/",
+      "embedHeight": 1500,
+      "hubCategory": "Transport",
+      "type": "Guide",
+      "priority": 3,
+      "tags": [
+        "timetable",
+        "s-bahn",
+        "regional trains",
+        "fares",
+        "vbb"
+      ],
+      "aliases": [
+        "berlin timetable change",
+        "fahrplanwechsel berlin",
+        "vbb fahrplanwechsel 2026",
+        "vbb fare increase 2027",
+        "deutschlandticket price 2027",
+        "stadtbahn regional trains",
+        "s1 s5 rush hour"
+      ],
+      "iconStatus": "live-wix-media",
+      "image": "https://static.wixstatic.com/media/5a08a3_b5458ff1b71f4d7ea318afe23d17df33~mv2.png",
+      "cmsItemId": "fadbfb0a-46c2-4e3d-b476-1bed76512a9b"
     }
   ],
   "hubCategories": [

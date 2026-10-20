@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Berlin Rail Change Board: Your Line from 13 December</title>
+<link rel="stylesheet" href="../css/brand.css">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #FFFFFF; color: #1d211b; padding: 12px; }
+  .rc { border-radius: 18px; overflow: hidden; border: 1px solid #d6ddcf; background: #fafbf7; }
+  .rc-head { padding: 16px 16px 14px; background: #123D18; color: #fff; }
+  .rc-kick { font-size: 11px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: #FFE600; }
+  .rc-head h1 { font-size: 19px; line-height: 1.25; font-weight: 800; margin-top: 4px; }
+  .rc-head p { font-size: 12.5px; line-height: 1.5; color: #dce8d8; margin-top: 6px; max-width: 660px; }
+  .rc-sec { padding: 14px 16px 6px; }
+  .rc-label { font-size: 11px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: #1B5E20; margin-bottom: 8px; }
+  .rc-lines { display: flex; flex-wrap: wrap; gap: 6px; border: 0; }
+  .rc-lines legend { position: absolute; left: -9999px; }
+  .rc-lines label { position: relative; cursor: pointer; }
+  .rc-lines input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+  .rc-lines span { display: inline-block; min-width: 46px; text-align: center; font-size: 12.5px; font-weight: 800; padding: 7px 10px; border-radius: 999px; border: 1.5px solid #b9c7b1; background: #fff; color: #123D18; }
+  .rc-lines input:checked + span { background: #FFE600; border-color: #123D18; color: #123D18; }
+  .rc-lines input:focus-visible + span { outline: 3px solid #7CB342; outline-offset: 2px; }
+  .rc-board { margin-top: 12px; background: #fff; border: 1px solid #e0e6d8; border-radius: 14px; padding: 6px 4px 4px; }
+  .rc-board svg, #rcFareBoard { display: block; width: 100%; touch-action: pan-y; }
+  .rc-board .row-hit { cursor: pointer; }
+  .rc-legend { display: flex; flex-wrap: wrap; gap: 6px 14px; font-size: 11px; color: #474c41; padding: 8px 4px 2px; }
+  .rc-legend i { display: inline-block; width: 12px; height: 10px; border-radius: 2px; margin-right: 5px; vertical-align: -1px; }
+  .rc-detail { margin-top: 12px; background: #fff; border: 1px solid #e0e6d8; border-radius: 14px; padding: 12px 14px; }
+  .rc-detail h2 { font-size: 17px; font-weight: 800; color: #123D18; display: flex; gap: 8px; align-items: baseline; flex-wrap: wrap; }
+  .rc-detail h2 small { font-size: 12px; font-weight: 600; color: #5a6052; }
+  .rc-detail ol { list-style: none; margin-top: 10px; display: grid; gap: 8px; }
+  .rc-detail li { display: grid; grid-template-columns: 112px 1fr; gap: 10px; align-items: start; font-size: 13px; line-height: 1.5; color: #23271f; padding: 8px 0 0; border-top: 1px dashed #dfe5d7; }
+  .rc-detail li:first-child { border-top: 0; padding-top: 0; }
+  .rc-when { font-size: 11.5px; font-weight: 800; color: #123D18; }
+  .rc-when em { display: inline-block; font-style: normal; margin-top: 4px; font-size: 10.5px; padding: 2px 8px; border-radius: 999px; }
+  .st-cut em { background: #fde3e5; color: #8f1d27; }
+  .st-thin em { background: #fff4b8; color: #4d4300; }
+  .st-better em { background: #dcefd0; color: #1B5E20; }
+  .st-same em { background: #eceeea; color: #3f443a; }
+  .rc-now { outline: 2px solid #FFE600; outline-offset: 4px; border-radius: 6px; }
+  .rc-fares { display: grid; gap: 10px; }
+  .rc-pick { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 10px; font-size: 12.5px; font-weight: 700; }
+  .rc-pick select { font-family: inherit; font-size: 14px; font-weight: 700; padding: 7px 10px; border-radius: 10px; border: 1.5px solid #1B5E20; color: #123D18; background: #fff; max-width: 100%; }
+  .rc-out { background: #123D18; color: #fff; border-radius: 14px; padding: 12px 14px; font-size: 13px; line-height: 1.55; }
+  .rc-out b { color: #FFE600; font-size: 18px; }
+  .rc-out .rc-tip { margin-top: 6px; color: #dce8d8; font-size: 12.5px; }
+  .rc-note { font-size: 11px; color: #5a6052; line-height: 1.5; padding: 4px 16px 14px; }
+  @media (max-width: 520px) {
+    .rc-detail li { grid-template-columns: 1fr; gap: 4px; }
+    .rc-head h1 { font-size: 17px; }
+  }
+</style>
+</head>
+<body>
+<div class="rc" id="rc">
+  <div class="rc-head">
+    <div class="rc-kick">Berlin trains · timetable change 13 December 2026</div>
+    <h1>What happens to your line, and when</h1>
+    <p>Every change from now to the end of 2027 on one board, from the VBB timetable announced on 8 October. Pick your line, then check what your ticket costs from 1 January.</p>
+  </div>
+
+  <div class="rc-sec">
+    <div class="rc-label">1 · Your line</div>
+    <fieldset class="rc-lines" id="rcLines"><legend>Choose a line</legend></fieldset>
+    <div class="rc-board">
+      <svg id="rcBoard" role="img" aria-label="Timeline of Berlin rail changes from October 2026 to December 2027"></svg>
+      <div class="rc-legend" id="rcLegend"></div>
+    </div>
+    <div class="rc-detail" id="rcDetail" aria-live="polite"></div>
+  </div>
+
+  <div class="rc-sec">
+    <div class="rc-label">2 · Your ticket from 1 January 2027</div>
+    <div class="rc-fares">
+      <svg id="rcFareBoard" role="img" aria-label="How much each VBB ticket price rises on 1 January 2027"></svg>
+      <label class="rc-pick">The ticket I use most
+        <select id="rcFare"></select>
+      </label>
+      <div class="rc-out" id="rcFareOut" aria-live="polite"></div>
+    </div>
+  </div>
+  <p class="rc-note" id="rcNote"></p>
+</div>
+
+<script>
+(function () {
+  var COLORS = { cut: '#E63946', thin: '#F2C200', better: '#2E7D32', same: '#C9CFC3' };
+  var DAY = 86400000;
+  var data, picked = 'S5', pickedFare = 'dticket';
+  var board = document.getElementById('rcBoard');
+  var NS = 'http://www.w3.org/2000/svg';
+
+  function t(s) { return Date.parse(s + 'T12:00:00Z'); }
+  function el(name, attrs, parent, text) {
+    var n = document.createElementNS(NS, name);
+    for (var k in attrs) n.setAttribute(k, attrs[k]);
+    if (text != null) n.textContent = text;
+    if (parent) parent.appendChild(n);
+    return n;
+  }
+  function fmt(s) {
+    var d = new Date(t(s));
+    return d.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric', timeZone: 'UTC' });
+  }
+  function euro(v) { return v.toFixed(2) + ' euros'; }
+  function todayIso() {
+    return new Date().toLocaleDateString('en-CA', { timeZone: 'Europe/Berlin' });
+  }
+
+  function drawBoard() {
+    var W = Math.max(300, board.clientWidth || 640);
+    var narrow = W < 520;
+    var labelW = narrow ? 46 : 64, padR = 10, top = 42, rowH = narrow ? 24 : 26;
+    var H = top + data.lines.length * rowH + 8;
+    board.setAttribute('viewBox', '0 0 ' + W + ' ' + H);
+    board.setAttribute('height', H);
+    board.textContent = '';
+    var t0 = t(data.range.start), t1 = t(data.range.end);
+    function x(s) { return labelW + (t(s) - t0) / (t1 - t0) * (W - labelW - padR); }
+
+    // month grid
+    var d = new Date(t0), i = 0;
+    while (d.getTime() <= t1) {
+      var iso = d.toISOString().slice(0, 10), px = x(iso);
+      el('line', { x1: px, x2: px, y1: top - 6, y2: H - 6, stroke: '#eef1ea', 'stroke-width': 1 }, board);
+      if (i % (narrow ? 3 : 2) === 0) {
+        var lab = d.toLocaleDateString('en-GB', { month: 'short', timeZone: 'UTC' }) + (d.getUTCMonth() === 0 || i === 0 ? ' ' + String(d.getUTCFullYear()).slice(2) : '');
+        el('text', { x: px + 2, y: top - 10, 'font-size': 10, fill: '#6a7062' }, board, lab);
+      }
+      d.setUTCMonth(d.getUTCMonth() + 1); i++;
+    }
+    // rows
+    data.lines.forEach(function (line, r) {
+      var y = top + r * rowH;
+      var on = line.id === picked;
+      if (on) el('rect', { x: 0, y: y, width: W, height: rowH, fill: '#FFF6A8', rx: 6 }, board);
+      el('text', { x: 6, y: y + rowH / 2 + 4, 'font-size': narrow ? 11 : 12, 'font-weight': 800, fill: '#123D18' }, board, line.id);
+      line.segs.forEach(function (s) {
+        var a = x(s.from), b = x(s.to) + 1;
+        el('rect', { x: a, y: y + 6, width: Math.max(2, b - a - 1), height: rowH - 12, rx: 3, fill: COLORS[s.state], opacity: on ? 1 : 0.78 }, board);
+      });
+      var hit = el('rect', { x: 0, y: y, width: W, height: rowH, fill: 'transparent', 'class': 'row-hit' }, board);
+      hit.addEventListener('click', function () { choose(line.id, true); });
+    });
+    // date marks
+    data.marks.forEach(function (m) {
+      var px = x(m.date);
+      el('line', { x1: px, x2: px, y1: top - 4, y2: H - 4, stroke: '#123D18', 'stroke-width': 1.2, 'stroke-dasharray': '3 3' }, board);
+    });
+    var now = todayIso();
+    if (now >= data.range.start && now <= data.range.end) {
+      var nx = x(now);
+      el('line', { x1: nx, x2: nx, y1: top - 4, y2: H - 4, stroke: '#7CB342', 'stroke-width': 2 }, board);
+      el('text', { x: nx + 3, y: H - 1, 'font-size': 9.5, 'font-weight': 700, fill: '#2E7D32' }, board, 'today');
+    }
+    var m0 = data.marks[0];
+    el('text', { x: x(m0.date) + 3, y: 12, 'font-size': 9.5, 'font-weight': 800, fill: '#123D18' }, board, narrow ? '13 Dec' : '13 Dec: new timetable');
+  }
+
+  function drawDetail() {
+    var line = data.lines.filter(function (l) { return l.id === picked; })[0];
+    var now = todayIso();
+    var html = '<h2>' + line.id + ' <small>' + line.route + '</small></h2><ol>';
+    line.segs.forEach(function (s) {
+      var live = now >= s.from && now <= s.to;
+      html += '<li class="st-' + s.state + '"><div class="rc-when' + (live ? ' rc-now' : '') + '">' +
+        (s.from <= data.range.start ? 'Now' : 'From ' + fmt(s.from)) +
+        (s.to >= data.range.end ? '' : ' to ' + fmt(s.to)) +
+        '<br><em>' + data.states[s.state] + '</em></div><div>' + s.text + '</div></li>';
+    });
+    document.getElementById('rcDetail').innerHTML = html + '</ol>';
+  }
+
+  function choose(id, fromBoard) {
+    picked = id;
+    var box = document.querySelector('#rcLines input[value="' + id + '"]');
+    if (box && fromBoard) box.checked = true;
+    drawBoard();
+    drawDetail();
+  }
+
+  function drawFares() {
+    var svg = document.getElementById('rcFareBoard');
+    var W = Math.max(300, svg.clientWidth || 640), narrow = W < 520;
+    var labelW = narrow ? 128 : 190, rowH = 22, top = 8;
+    var rows = data.fares;
+    var H = top + rows.length * rowH + 22;
+    svg.setAttribute('viewBox', '0 0 ' + W + ' ' + H);
+    svg.setAttribute('height', H);
+    svg.textContent = '';
+    // each ticket on one axis: how much its price rises on 1 January, in percent
+    var maxPct = 8;
+    function x(v) { return labelW + v / maxPct * (W - labelW - 54); }
+    [0, 2, 4, 6, 8].forEach(function (v) {
+      el('line', { x1: x(v), x2: x(v), y1: top, y2: H - 18, stroke: '#eef1ea' }, svg);
+      el('text', { x: x(v) - 6, y: H - 5, 'font-size': 9.5, fill: '#6a7062' }, svg, '+' + v + '%');
+    });
+    rows.forEach(function (f, r) {
+      var y = top + r * rowH + rowH / 2, on = f.id === pickedFare;
+      var pct = (f.new - f.old) / f.old * 100;
+      if (on) el('rect', { x: 0, y: y - rowH / 2, width: W, height: rowH, fill: '#FFF6A8', rx: 5 }, svg);
+      el('text', { x: 4, y: y + 4, 'font-size': narrow ? 10 : 11, 'font-weight': on ? 800 : 600, fill: '#22261e' }, svg, narrow && f.short ? f.short : f.name);
+      el('rect', { x: x(0), y: y - 4, width: Math.max(2, x(pct) - x(0)), height: 8, rx: 4, fill: pct > 0 ? '#E63946' : '#2E7D32', opacity: on ? 1 : 0.8 }, svg);
+      el('text', { x: x(pct) + 6, y: y + 4, 'font-size': 10, 'font-weight': 700, fill: '#22261e' }, svg, pct > 0 ? '+' + pct.toFixed(1) + '%' : 'same');
+      var hit = el('rect', { x: 0, y: y - rowH / 2, width: W, height: rowH, fill: 'transparent', 'class': 'row-hit' }, svg);
+      hit.style.cursor = 'pointer';
+      hit.addEventListener('click', function () { pickedFare = f.id; document.getElementById('rcFare').value = f.id; drawFares(); drawFareOut(); });
+    });
+  }
+
+  function drawFareOut() {
+    var f = data.fares.filter(function (x) { return x.id === pickedFare; })[0];
+    var diff = f.new - f.old, pct = f.old ? diff / f.old * 100 : 0;
+    var out = '';
+    if (diff === 0) {
+      out = f.name + ' stays at <b>' + euro(f.new) + '</b> from 1 January 2027.';
+    } else {
+      out = f.name + ': <b>' + euro(f.new) + '</b> from 1 January 2027, up from ' + euro(f.old) + ' (+' + diff.toFixed(2) + ', +' + pct.toFixed(1) + ' percent).';
+    }
+    var tip = '';
+    if (f.per === 'month' && diff > 0) tip = 'That is ' + (diff * 12).toFixed(2) + ' euros more over a year. Compare it with the Deutschlandticket at 66.80 before the January charge.';
+    else if (f.per === 'card' || f.per === 'trip') tip = diff > 0 ? 'Bought before 1 January at the old price, these tickets stay valid until 30 June 2027. Buy what you need for the first half of the year in December.' : 'No reason to stock up: the price does not change.';
+    else if (f.per === 'day') tip = 'A day ticket is used on the day you buy it, so there is nothing to gain by buying early.';
+    if (f.id === 'dticket') tip = 'Still the cheapest way to ride all of Berlin every day: the Umweltkarte AB subscription will cost 84.30 euros.';
+    document.getElementById('rcFareOut').innerHTML = out + (tip ? '<div class="rc-tip">' + tip + '</div>' : '');
+  }
+
+  fetch('data.json').then(function (r) { return r.json(); }).then(function (d) {
+    data = d;
+    var lines = document.getElementById('rcLines');
+    d.lines.forEach(function (l) {
+      var lab = document.createElement('label');
+      lab.innerHTML = '<input type="radio" name="line" value="' + l.id + '"' + (l.id === picked ? ' checked' : '') + '><span>' + l.id + '</span>';
+      lab.querySelector('input').addEventListener('change', function () { choose(l.id, false); });
+      lines.appendChild(lab);
+    });
+    var leg = document.getElementById('rcLegend');
+    leg.innerHTML = Object.keys(d.states).map(function (k) { return '<span><i style="background:' + COLORS[k] + '"></i>' + d.states[k] + '</span>'; }).join('') +
+      '<span><i style="background:#fff;border:1px dashed #123D18"></i>13 Dec, 1 Jan, 30 Jun</span>';
+    var sel = document.getElementById('rcFare');
+    sel.innerHTML = d.fares.map(function (f) { return '<option value="' + f.id + '"' + (f.id === pickedFare ? ' selected' : '') + '>' + f.name + '</option>'; }).join('');
+    sel.addEventListener('change', function () { pickedFare = sel.value; drawFares(); drawFareOut(); });
+    document.getElementById('rcNote').textContent = 'Sources: VBB timetable release of 8 October 2026 and VBB price list of 24 September 2026 (prices await formal approval). Dates marked expected are VBB forecasts. Journey planners show trains after 12 December only once the new timetable is loaded. Checked on 20 October 2026.';
+    drawBoard(); drawDetail(); drawFares(); drawFareOut();
+    var timer;
+    window.addEventListener('resize', function () { clearTimeout(timer); timer = setTimeout(function () { drawBoard(); drawFares(); }, 120); });
+  });
+})();
+</script>
+<script src="../js/brand.js"></script>
+</body>
+</html>

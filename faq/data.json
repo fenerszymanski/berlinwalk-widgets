@@ -13763,5 +13763,39 @@
         "a": "No. Dogs are not allowed in the park, on the treetop walk or on the tours."
       }
     ]
+  },
+  "berlin-timetable-change": {
+    "title": "Berlin Timetable Change - FAQ",
+    "subtitle": "What changes on Berlin trains on 13 December 2026, and what tickets cost from 1 January 2027.",
+    "items": [
+      {
+        "q": "When is the Berlin timetable change?",
+        "a": "On **Sunday 13 December 2026**. The new VBB fares follow on **1 January 2027**, so the two changes come three weeks apart."
+      },
+      {
+        "q": "Do regional trains run on the Stadtbahn again?",
+        "a": "Yes. The works between Charlottenburg and Ostbahnhof end on **12 December 2026**, and from the 13th the **RE1 and RE7** cross the centre again. The RB23 is the exception: it runs only between Golm and Potsdam-Griebnitzsee throughout 2027."
+      },
+      {
+        "q": "Which lines get more trains in December?",
+        "a": "The **RE3** runs hourly every day from Stralsund to Lutherstadt Wittenberg, the **RE5** runs hourly along its whole line with the last Berlin to Neustrelitz trains until 23:00 every day, and the new **RE9** runs between Angermünde and Berlin Hbf."
+      },
+      {
+        "q": "What changes on the S1 and S5?",
+        "a": "From 13 December the rush hour drops from a train every 5 minutes to a **5, 5, 10 minute pattern** on the S1 between Zehlendorf and Potsdamer Platz and on the S5 between Mahlsdorf and Warschauer Straße."
+      },
+      {
+        "q": "Why does the RE4 stop at Wustermark?",
+        "a": "The Lehrter Bahn towards Rathenow and Stendal is being rebuilt until December 2027. The RE4 runs only between Wustermark and Falkenberg (Elster) until about **July 2027**, then to Nennhausen, and Berlin-Spandau station also closes for the works from **16 October 2027**."
+      },
+      {
+        "q": "How much does a Berlin ticket cost from January 2027?",
+        "a": "The **AB single stays at 4.00 euros**. The 4-trip card AB rises to 13.20 euros, the 24-hour ticket AB to 11.50, the VBB-Umweltkarte AB to 117.20 for one month or **84.30 a month** on a subscription, and the Deutschlandticket to **66.80 euros**."
+      },
+      {
+        "q": "Can I still use tickets bought at the old price?",
+        "a": "Yes. Single tickets and 4-trip cards bought before 1 January 2027 at the old price stay valid until **30 June 2027**, or you can hand them in for a refund. Tickets with a printed date keep their printed validity."
+      }
+    ]
   }
 }

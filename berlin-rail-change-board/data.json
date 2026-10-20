@@ -1,0 +1,353 @@
+{
+  "checked": "2026-10-20",
+  "range": {
+    "start": "2026-10-01",
+    "end": "2027-12-31"
+  },
+  "marks": [
+    {
+      "date": "2026-12-13",
+      "label": "13 Dec timetable"
+    },
+    {
+      "date": "2027-01-01",
+      "label": "1 Jan fares"
+    },
+    {
+      "date": "2027-06-30",
+      "label": "30 Jun old tickets end"
+    }
+  ],
+  "states": {
+    "cut": "Cut, shortened or diverted",
+    "thin": "Fewer trains",
+    "better": "Better or new",
+    "same": "As now"
+  },
+  "lines": [
+    {
+      "id": "RE1",
+      "route": "Magdeburg · Potsdam · Berlin · Frankfurt (Oder)",
+      "segs": [
+        {
+          "from": "2026-10-01",
+          "to": "2026-12-12",
+          "state": "cut",
+          "text": "No regional trains across the Stadtbahn since 14 June: the RE1 turns at Charlottenburg and Ostbahnhof. Cross the centre on the S3, S5, S7 or S9."
+        },
+        {
+          "from": "2026-12-13",
+          "to": "2027-06-30",
+          "state": "better",
+          "text": "Through Zoo, Hauptbahnhof, Friedrichstraße and Alexanderplatz again. Longer trains (up to 800 seats) stop at Hangelsberg, Berkenbrück, Jacobsdorf and Pillgram, and an hourly rush-hour train runs direct to Eisenhüttenstadt."
+        },
+        {
+          "from": "2027-07-01",
+          "to": "2027-12-31",
+          "state": "better",
+          "text": "Expected from July 2027: the extra rush-hour trains from Frankfurt (Oder) that now end at Erkner run on into Berlin, three trains an hour."
+        }
+      ]
+    },
+    {
+      "id": "RE7",
+      "route": "Dessau · Wannsee · Berlin · Senftenberg",
+      "segs": [
+        {
+          "from": "2026-10-01",
+          "to": "2026-12-12",
+          "state": "cut",
+          "text": "Starts and ends at Charlottenburg while the Stadtbahn is closed to regional trains."
+        },
+        {
+          "from": "2026-12-13",
+          "to": "2027-12-31",
+          "state": "better",
+          "text": "Back across the Stadtbahn. The extra rush-hour trains that ended at Wannsee now run on to the Stadtbahn morning and afternoon."
+        }
+      ]
+    },
+    {
+      "id": "RB23",
+      "route": "Golm · Potsdam · Griebnitzsee · Berlin",
+      "segs": [
+        {
+          "from": "2026-10-01",
+          "to": "2026-12-12",
+          "state": "cut",
+          "text": "No RB23 between Golm and Ostbahnhof; the diverted RB21 covers Golm and Potsdam."
+        },
+        {
+          "from": "2026-12-13",
+          "to": "2027-12-31",
+          "state": "cut",
+          "text": "Only Golm to Potsdam-Griebnitzsee for the whole of 2027. For Berlin, change to the S7 at Griebnitzsee."
+        }
+      ]
+    },
+    {
+      "id": "RE3",
+      "route": "Stralsund · Angermünde · Berlin · Wittenberg",
+      "segs": [
+        {
+          "from": "2026-10-01",
+          "to": "2026-12-12",
+          "state": "same",
+          "text": "Current timetable."
+        },
+        {
+          "from": "2026-12-13",
+          "to": "2027-12-31",
+          "state": "better",
+          "text": "Hourly every day along the whole line. Schwedt now by the hourly RB61 with a change at Angermünde. The new trains come in the second half of 2027; older double-deck coaches run until then."
+        }
+      ]
+    },
+    {
+      "id": "RE5",
+      "route": "Rostock / Stralsund · Neustrelitz · Berlin · Ludwigsfelde",
+      "segs": [
+        {
+          "from": "2026-10-01",
+          "to": "2026-12-12",
+          "state": "same",
+          "text": "Current timetable."
+        },
+        {
+          "from": "2026-12-13",
+          "to": "2027-12-31",
+          "state": "better",
+          "text": "Hourly along the whole line, trains between Berlin and Neustrelitz until 23:00 every day, and hourly on to Ludwigsfelde on weekdays during the day."
+        }
+      ]
+    },
+    {
+      "id": "RE9",
+      "route": "Angermünde · Berlin Hbf",
+      "segs": [
+        {
+          "from": "2026-12-13",
+          "to": "2027-12-31",
+          "state": "better",
+          "text": "New line. It takes over the extra rush-hour trains the RE3 ran between Angermünde and Berlin. Szczecin comes later, once that line is upgraded."
+        }
+      ]
+    },
+    {
+      "id": "RE4",
+      "route": "Stendal · Rathenow · Berlin · Falkenberg (Elster)",
+      "segs": [
+        {
+          "from": "2026-10-02",
+          "to": "2026-12-12",
+          "state": "cut",
+          "text": "No trains between Spandau and Stendal while the Lehrter Bahn is rebuilt."
+        },
+        {
+          "from": "2026-12-13",
+          "to": "2027-06-30",
+          "state": "cut",
+          "text": "Hourly, but only Wustermark to Falkenberg (Elster). Rathenow and Stendal stay cut off."
+        },
+        {
+          "from": "2027-07-01",
+          "to": "2027-10-15",
+          "state": "cut",
+          "text": "Expected from July 2027: extended to Nennhausen."
+        },
+        {
+          "from": "2027-10-16",
+          "to": "2027-12-31",
+          "state": "cut",
+          "text": "Last phase of the Lehrter Bahn works: Berlin-Spandau station is closed as well from 16 October 2027. Replacement plan not published yet."
+        }
+      ]
+    },
+    {
+      "id": "RE2",
+      "route": "Nauen · Berlin · Cottbus",
+      "segs": [
+        {
+          "from": "2026-10-01",
+          "to": "2026-12-12",
+          "state": "cut",
+          "text": "Diverted around the closed Stadtbahn via Gesundbrunnen and Ostkreuz."
+        },
+        {
+          "from": "2026-12-13",
+          "to": "2027-12-31",
+          "state": "cut",
+          "text": "Nauen to Lübbenau only, with a new hourly stop at Bestensee. Replacement buses via Vetschau to Cottbus; the RE20 from BER covers Cottbus by train via Calau."
+        }
+      ]
+    },
+    {
+      "id": "RB10",
+      "route": "Nauen · Berlin · Zossen",
+      "segs": [
+        {
+          "from": "2026-10-02",
+          "to": "2027-02-28",
+          "state": "cut",
+          "text": "Runs Nauen to Rangsdorf; Zossen station is being rebuilt."
+        },
+        {
+          "from": "2027-03-01",
+          "to": "2027-12-31",
+          "state": "better",
+          "text": "Expected from March 2027: the Rangsdorf trains run on to Zossen again."
+        }
+      ]
+    },
+    {
+      "id": "RB24",
+      "route": "Eberswalde · Ostkreuz · BER · Wünsdorf",
+      "segs": [
+        {
+          "from": "2026-10-01",
+          "to": "2027-02-28",
+          "state": "cut",
+          "text": "Does not reach Wünsdorf-Waldstadt while Zossen station is rebuilt; runs with borrowed trains from 13 December."
+        },
+        {
+          "from": "2027-03-01",
+          "to": "2027-12-31",
+          "state": "better",
+          "text": "Expected from March 2027: back to Wünsdorf-Waldstadt, with three rush-hour trains an hour between Zossen, Rangsdorf and Berlin together with the RE8 and RB10."
+        }
+      ]
+    },
+    {
+      "id": "S1",
+      "route": "Zehlendorf · Potsdamer Platz · Nordbahnhof",
+      "segs": [
+        {
+          "from": "2026-10-01",
+          "to": "2026-12-12",
+          "state": "same",
+          "text": "Every 5 minutes in the rush hour between Zehlendorf and Potsdamer Platz."
+        },
+        {
+          "from": "2026-12-13",
+          "to": "2027-12-31",
+          "state": "thin",
+          "text": "Rush hour between Zehlendorf and Potsdamer Platz drops to 5, 5, 10 minutes. The remaining extra train runs on to Nordbahnhof."
+        }
+      ]
+    },
+    {
+      "id": "S5",
+      "route": "Mahlsdorf · Ostkreuz · Warschauer Straße",
+      "segs": [
+        {
+          "from": "2026-10-01",
+          "to": "2026-12-12",
+          "state": "same",
+          "text": "Every 5 minutes in the rush hour between Mahlsdorf and Warschauer Straße."
+        },
+        {
+          "from": "2026-12-13",
+          "to": "2027-12-31",
+          "state": "thin",
+          "text": "Rush hour between Mahlsdorf and Warschauer Straße drops to 5, 5, 10 minutes."
+        }
+      ]
+    },
+    {
+      "id": "ICE",
+      "route": "Berlin · Hannover (long distance)",
+      "segs": [
+        {
+          "from": "2026-10-02",
+          "to": "2027-12-31",
+          "state": "cut",
+          "text": "The direct line is rebuilt until December 2027. Long-distance trains take a detour via Braunschweig and Magdeburg, up to about 80 minutes longer. Check your exact train."
+        }
+      ]
+    }
+  ],
+  "fares": [
+    {
+      "id": "ab-single",
+      "name": "Single AB",
+      "old": 4.0,
+      "new": 4.0,
+      "per": "trip"
+    },
+    {
+      "id": "ab-4trip",
+      "name": "4-trip card AB",
+      "old": 12.4,
+      "new": 13.2,
+      "per": "card"
+    },
+    {
+      "id": "abc-single",
+      "name": "Single ABC",
+      "old": 5.0,
+      "new": 5.2,
+      "per": "trip"
+    },
+    {
+      "id": "short",
+      "name": "Short trip",
+      "old": 2.8,
+      "new": 2.9,
+      "per": "trip"
+    },
+    {
+      "id": "ab-24h",
+      "name": "24-hour ticket AB",
+      "old": 11.2,
+      "new": 11.5,
+      "per": "day",
+      "short": "24-hour AB"
+    },
+    {
+      "id": "uk-ab-month",
+      "name": "Umweltkarte AB, one month",
+      "old": 113.0,
+      "new": 117.2,
+      "per": "month",
+      "short": "Umweltkarte AB month"
+    },
+    {
+      "id": "uk-ab-abo",
+      "name": "Umweltkarte AB, subscription",
+      "old": 81.3,
+      "new": 84.3,
+      "per": "month",
+      "short": "Umweltkarte AB abo"
+    },
+    {
+      "id": "uk-abc-abo",
+      "name": "Umweltkarte ABC, subscription",
+      "old": 103.3,
+      "new": 107.1,
+      "per": "month",
+      "short": "Umweltkarte ABC abo"
+    },
+    {
+      "id": "dticket",
+      "name": "Deutschlandticket",
+      "old": 63.0,
+      "new": 66.8,
+      "per": "month",
+      "short": "Deutschlandticket"
+    },
+    {
+      "id": "bike-ab",
+      "name": "Bike single AB",
+      "old": 2.7,
+      "new": 2.8,
+      "per": "trip"
+    },
+    {
+      "id": "ticket-s",
+      "name": "Berlin-Ticket S",
+      "old": 27.5,
+      "new": 27.5,
+      "per": "month"
+    }
+  ]
+}
