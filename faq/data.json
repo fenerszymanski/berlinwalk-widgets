@@ -13797,5 +13797,39 @@
         "a": "Yes. Single tickets and 4-trip cards bought before 1 January 2027 at the old price stay valid until **30 June 2027**, or you can hand them in for a refund. Tickets with a printed date keep their printed validity."
       }
     ]
+  },
+  "early-flight-from-ber": {
+    "title": "Early Flight from BER - FAQ",
+    "subtitle": "Trains, night buses and taxis to BER before dawn, checked against the VBB timetable.",
+    "items": [
+      {
+        "q": "What is the first train to BER Airport?",
+        "a": "On a weekday morning the **FEX leaves Berlin Hauptbahnhof at 03:06** and arrives at 03:29. The first weekday **S9 leaves Alexanderplatz at 03:26** and arrives at 04:06. On Saturday and Sunday mornings the S9 runs through the night."
+      },
+      {
+        "q": "Do trains run to BER all night?",
+        "a": "Partly. The **FEX** runs on a thin night pattern, and on **Friday and Saturday nights** the S-Bahn and U-Bahn run all night. On other nights, **night buses** fill the gap: the **N7** via Hermannplatz and Rudow, the **N60** from Alexanderplatz and, on weekdays, the **N7X** from Zoologischer Garten."
+      },
+      {
+        "q": "When should I leave Berlin for a 6:00 flight from BER?",
+        "a": "Aim to be in **Terminal 1 around 4:00**, two hours before a simple Schengen flight with hand luggage. From Hauptbahnhof that is the **03:36 FEX**; from Alexanderplatz the **03:26 S9** gets you there at 04:06 on a weekday. Allow more time with a checked bag or a non-Schengen flight."
+      },
+      {
+        "q": "How do I get to BER early from Kreuzberg or Neukölln?",
+        "a": "On a weekday, **no trip without a bus reaches the airport before about 4:40**. For an earlier arrival, take the **N8 to Hermannplatz and the N7** to the airport, about 45 minutes, or night buses to a FEX station. With a large suitcase or before a 6:30 flight, a taxi is the calmer choice."
+      },
+      {
+        "q": "How much is a taxi to BER at night?",
+        "a": "Berlin taxis use the same meter day and night. **berlin.de** gives about **58 euros from Alexanderplatz** and **63 euros from Zoo**, and the ride takes about 45 minutes at that hour. Book it the evening before."
+      },
+      {
+        "q": "Which ticket do I need for the train to BER?",
+        "a": "BER is in **fare zone C**, so you need a **Berlin ABC ticket**: **5.00 euros**, rising to **5.20 euros on 1 January 2027**. Buy it the night before so you are not at a ticket machine at 3:20."
+      },
+      {
+        "q": "Can I book a time at security at BER?",
+        "a": "Yes. **BER Runway** lets you reserve a free 15-minute slot at security from seven days before your flight. BER recommends a slot about **two hours before departure**, and the BER Runway entrance opens at 4:00."
+      }
+    ]
   }
 }

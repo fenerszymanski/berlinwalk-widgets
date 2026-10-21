@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BER Dawn Departure Map: When to Leave for an Early Flight</title>
+<link rel="stylesheet" href="../css/brand.css">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #FFFFFF; color: #1d211b; padding: 12px; }
+  .dd { border-radius: 18px; overflow: hidden; background: #0f1a24; color: #eef2ea; border: 1px solid #1f2f3c; }
+  .dd-head { padding: 16px 16px 12px; background: linear-gradient(180deg, #0b141c 0%, #13222e 100%); }
+  .dd-kick { font-size: 11px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: #FFE600; }
+  .dd-head h1 { font-size: 19px; line-height: 1.25; font-weight: 800; margin-top: 4px; color: #fff; }
+  .dd-head p { font-size: 12.5px; line-height: 1.5; color: #b9c6cf; margin-top: 6px; max-width: 680px; }
+  .dd-ctrl { display: grid; grid-template-columns: 1.4fr 1fr; gap: 12px 16px; padding: 4px 16px 12px; }
+  .dd-box { background: #16242f; border: 1px solid #243746; border-radius: 14px; padding: 10px 12px; }
+  .dd-lab { font-size: 10.5px; font-weight: 800; letter-spacing: .09em; text-transform: uppercase; color: #9fb3c0; }
+  .dd-flight { display: flex; align-items: baseline; gap: 10px; margin-top: 2px; }
+  .dd-flight output { font-size: 30px; font-weight: 800; color: #FFE600; font-variant-numeric: tabular-nums; }
+  .dd-flight span { font-size: 12px; color: #b9c6cf; }
+  input[type=range] { width: 100%; margin-top: 6px; accent-color: #FFE600; height: 28px; cursor: pointer; }
+  .dd-ticks { display: flex; justify-content: space-between; font-size: 10px; color: #7f93a0; font-variant-numeric: tabular-nums; }
+  .dd-seg { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; border: 0; }
+  .dd-seg legend { position: absolute; left: -9999px; }
+  .dd-seg label { position: relative; cursor: pointer; }
+  .dd-seg input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+  .dd-seg span { display: inline-block; font-size: 12px; font-weight: 700; padding: 6px 10px; border-radius: 10px; border: 1.5px solid #34495a; color: #dfe7ec; background: #0f1a24; }
+  .dd-seg input:checked + span { background: #FFE600; border-color: #FFE600; color: #14200f; }
+  .dd-seg input:focus-visible + span { outline: 3px solid #7CB342; outline-offset: 2px; }
+  .dd-by { margin-top: 10px; font-size: 13px; color: #dfe7ec; }
+  .dd-by b { color: #FFE600; font-size: 15px; font-variant-numeric: tabular-nums; }
+  .dd-mapwrap { position: relative; margin: 0 16px; background: #0b141c; border: 1px solid #243746; border-radius: 14px; overflow: hidden; }
+  #ddMap { display: block; width: 100%; max-width: 760px; height: auto; margin: 0 auto; touch-action: pan-y; }
+  #ddMap .city { fill: #172734; stroke: #2f4657; stroke-width: 1; }
+  #ddMap .ghost { fill: none; stroke: #5b7486; stroke-width: 1.1; stroke-opacity: .35; stroke-linecap: round; stroke-linejoin: round; }
+  #ddMap .pick { fill: none; stroke: #FFE600; stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
+  #ddMap .pick.walk { stroke-dasharray: 3 4; stroke-width: 2; }
+  #ddMap .dot { cursor: pointer; stroke: #0b141c; stroke-width: 2; }
+  #ddMap .dot.sel { stroke: #FFE600; stroke-width: 3; }
+  #ddMap .tag { font-weight: 800; fill: #fff; paint-order: stroke; stroke: #0b141c; stroke-width: 3px; pointer-events: none; font-variant-numeric: tabular-nums; }
+  #ddMap .tag.sm { font-weight: 600; fill: #b9c6cf; }
+  #ddMap .ber { fill: #FFE600; stroke: #0b141c; stroke-width: 2; }
+  #ddMap .berl { font-weight: 800; fill: #FFE600; paint-order: stroke; stroke: #0b141c; stroke-width: 3px; }
+  .dd-legend { display: flex; flex-wrap: wrap; gap: 6px 14px; font-size: 11px; color: #b9c6cf; padding: 10px 16px 0; }
+  .dd-legend i { display: inline-block; width: 11px; height: 11px; border-radius: 50%; margin-right: 5px; vertical-align: -1px; border: 1.5px solid #0b141c; }
+  .dd-detail { margin: 12px 16px 0; background: #16242f; border: 1px solid #243746; border-radius: 14px; padding: 12px 14px; }
+  .dd-detail h2 { font-size: 17px; font-weight: 800; color: #fff; display: flex; flex-wrap: wrap; gap: 4px 10px; align-items: baseline; }
+  .dd-detail h2 small { font-size: 12px; font-weight: 600; color: #9fb3c0; }
+  .dd-verdict { margin-top: 6px; font-size: 13.5px; line-height: 1.5; color: #e6ece2; }
+  .dd-verdict b { color: #FFE600; }
+  #ddStrip { display: block; width: 100%; height: auto; margin-top: 10px; touch-action: pan-y; }
+  #ddStrip .bar { cursor: pointer; }
+  .dd-legs { list-style: none; margin-top: 10px; display: grid; gap: 6px; }
+  .dd-legs li { display: grid; grid-template-columns: 92px 1fr; gap: 10px; font-size: 12.5px; line-height: 1.45; color: #dfe7ec; border-top: 1px dashed #2f4657; padding-top: 6px; }
+  .dd-legs li:first-child { border-top: 0; padding-top: 0; }
+  .dd-legs .t { font-weight: 800; color: #fff; font-variant-numeric: tabular-nums; }
+  .ln { display: inline-block; font-size: 11px; font-weight: 800; padding: 1px 7px; border-radius: 6px; margin-right: 6px; color: #fff; }
+  .ln.suburban { background: #2E7D32; } .ln.regional, .ln.express { background: #B71C1C; } .ln.subway { background: #1565C0; } .ln.bus { background: #8E24AA; } .ln.tram { background: #C62828; } .ln.walk { background: #455A64; }
+  .dd-foot { font-size: 11px; line-height: 1.5; color: #8ea2b0; padding: 12px 16px 16px; }
+  @media (max-width: 640px) {
+    .dd-ctrl { grid-template-columns: 1fr; }
+    .dd-head h1 { font-size: 17px; }
+    .dd-flight output { font-size: 26px; }
+    .dd-legs li { grid-template-columns: 78px 1fr; }
+  }
+</style>
+</head>
+<body>
+<div class="dd" id="dd">
+  <div class="dd-head">
+    <div class="dd-kick">Early flight from BER</div>
+    <h1>BER Dawn Departure Map</h1>
+    <p>Set your flight time. Every dot is a central station near where visitors sleep, coloured by what actually runs before dawn, and labelled with the latest time you can leave it. Tap a dot to see the whole night timetable from there.</p>
+  </div>
+  <div class="dd-ctrl">
+    <div class="dd-box">
+      <div class="dd-lab">Flight departs</div>
+      <div class="dd-flight"><output id="ddOut">06:30</output><span id="ddOutNote"></span></div>
+      <input type="range" id="ddRange" min="330" max="540" step="5" value="390" aria-label="Flight departure time">
+      <div class="dd-ticks"><span>05:30</span><span>07:15</span><span>09:00</span></div>
+    </div>
+    <div class="dd-box">
+      <fieldset class="dd-seg" id="ddDay"><legend>Which morning</legend>
+        <div class="dd-lab" style="width:100%">Which morning</div>
+        <label><input type="radio" name="day" value="wed" checked><span>Mon to Fri</span></label>
+        <label><input type="radio" name="day" value="sat"><span>Sat or Sun</span></label>
+      </fieldset>
+      <fieldset class="dd-seg" id="ddBuf" style="margin-top:8px"><legend>Time at the airport</legend>
+        <div class="dd-lab" style="width:100%">Time at the airport before take-off</div>
+        <label><input type="radio" name="buf" value="120" checked><span>2 h, hand luggage</span></label>
+        <label><input type="radio" name="buf" value="150"><span>2.5 h, bag or non-Schengen</span></label>
+        <label><input type="radio" name="buf" value="180"><span>3 h, long-haul</span></label>
+      </fieldset>
+      <div class="dd-by">Be at BER Airport by <b id="ddBy">04:30</b></div>
+    </div>
+  </div>
+  <div class="dd-mapwrap"><svg id="ddMap" viewBox="0 0 640 560" role="img" aria-label="Map of Berlin with stations coloured by the latest public transport connection to BER Airport"></svg></div>
+  <div class="dd-legend">
+    <span><i style="background:#43A047"></i>One train, no change</span>
+    <span><i style="background:#C0CA33"></i>Trains with a change</span>
+    <span><i style="background:#FB8C00"></i>Needs a night bus</span>
+    <span><i style="background:#E53935"></i>Nothing gets you there in time</span>
+  </div>
+  <div class="dd-detail" id="ddDetail" aria-live="polite"></div>
+  <div class="dd-foot" id="ddFoot"></div>
+</div>
+<script>
+(function () {
+  var DATA = null, sel = 'Alexanderplatz';
+  var COL = { direct: '#43A047', change: '#C0CA33', bus: '#FB8C00', none: '#E53935' };
+  var NS = 'http://www.w3.org/2000/svg';
+  var $ = function (id) { return document.getElementById(id); };
+  function m(t) { var p = t.split(':'); return (+p[0]) * 60 + (+p[1]); }
+  function f(n) { n = ((n % 1440) + 1440) % 1440; var h = Math.floor(n / 60), mm = n % 60; return (h < 10 ? '0' : '') + h + ':' + (mm < 10 ? '0' : '') + mm; }
+  function el(tag, attrs, parent) { var e = document.createElementNS(NS, tag); for (var k in attrs) e.setAttribute(k, attrs[k]); if (parent) parent.appendChild(e); return e; }
+  function val(name) { var r = document.querySelector('input[name=' + name + ']:checked'); return r ? r.value : null; }
+  function kind(j) { if (!j) return 'none'; if (j.nb) return 'bus'; return j.ch === 0 ? 'direct' : 'change'; }
+  function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
+
+  // projection: equirectangular with cos(lat) correction, fitted to the central districts; BER sits off-map
+  var LAT0 = 52.51, KX = Math.cos(LAT0 * Math.PI / 180);
+  var B = { minLon: 13.295, maxLon: 13.488, minLat: 52.457, maxLat: 52.558 };
+  var W = 640, H = 560, S = 1, ox = 0, oy = 0;
+  function fit(w) {
+    W = Math.max(300, Math.min(760, Math.round(w)));
+    H = Math.round(W * (B.maxLat - B.minLat) / ((B.maxLon - B.minLon) * KX));
+    S = W / ((B.maxLon - B.minLon) * KX); ox = 0; oy = 0;
+  }
+  function px(lat, lon) { return [ox + (lon - B.minLon) * KX * S, oy + (B.maxLat - lat) * S]; }
+  function pathD(pts) { return pts.map(function (p, i) { var q = px(p[0], p[1]); return (i ? 'L' : 'M') + q[0].toFixed(1) + ' ' + q[1].toFixed(1); }).join(''); }
+
+  function pickJourney(o, day, target) {
+    var js = o.days[day] || [], best = null;
+    for (var i = 0; i < js.length; i++) {
+      var j = js[i];
+      if (m(j.a) > target) continue;
+      if (!best || m(j.d) > m(best.d) || (m(j.d) === m(best.d) && j.ch < best.ch)) best = j;
+    }
+    return best;
+  }
+
+  function state() {
+    var flight = +$('ddRange').value, buf = +val('buf'), day = val('day');
+    return { flight: flight, buf: buf, day: day, target: flight - buf };
+  }
+
+  function drawMap() {
+    var s = state(), svg = $('ddMap');
+    fit(svg.parentNode.clientWidth || 640);
+    svg.setAttribute('viewBox', '0 0 ' + W + ' ' + H);
+    svg.innerHTML = '';
+    var fs = W < 480 ? 11 : 12;
+    DATA.outline.forEach(function (r) { el('path', { d: pathD(r) + 'Z', 'class': 'city' }, svg); });
+    var gG = el('g', {}, svg), gP = el('g', {}, svg), gD = el('g', {}, svg);
+    DATA.origins.forEach(function (o) {
+      var j = pickJourney(o, s.day, s.target);
+      if (j) j.legs.forEach(function (l) { el('path', { d: pathD(DATA.paths[l.k]), 'class': 'ghost' }, gG); });
+    });
+    var so = DATA.origins.filter(function (o) { return o.id === sel; })[0];
+    var sj = so && pickJourney(so, s.day, s.target);
+    if (sj) sj.legs.forEach(function (l) { el('path', { d: pathD(DATA.paths[l.k]), 'class': 'pick' + (l.w ? ' walk' : '') }, gP); });
+    // BER sits south-east of the frame: mark where the line to it leaves the map
+    var c = [W / 2, H / 2], b = px(DATA.ber.lat, DATA.ber.lon), dx = b[0] - c[0], dy = b[1] - c[1];
+    var t = Math.min((W - 14 - c[0]) / dx, (H - 14 - c[1]) / dy), e = [c[0] + dx * t, c[1] + dy * t];
+    var ang = Math.atan2(dy, dx) * 180 / Math.PI;
+    el('path', { d: 'M-9 -7 L9 0 L-9 7 Z', transform: 'translate(' + e[0].toFixed(1) + ' ' + e[1].toFixed(1) + ') rotate(' + ang.toFixed(1) + ')', 'class': 'ber' }, gD);
+    var bl = el('text', { x: e[0] - 14, y: e[1] - 12, 'class': 'berl', 'text-anchor': 'end', 'font-size': fs }, gD); bl.textContent = 'to BER Airport';
+    var boxes = [[e[0] - 14 - 170, e[1] - 26, 170, 18]];
+    function hit(r) { for (var i = 0; i < boxes.length; i++) { var q = boxes[i]; if (r[0] < q[0] + q[2] && r[0] + r[2] > q[0] && r[1] < q[1] + q[3] && r[1] + r[3] > q[1]) return true; } return r[0] < 2 || r[0] + r[2] > W - 2 || r[1] < 2 || r[1] + r[3] > H - 2; }
+    var pts = DATA.origins.map(function (o) { return { o: o, p: px(o.lat, o.lon), j: pickJourney(o, s.day, s.target) }; });
+    pts.forEach(function (q) { boxes.push([q.p[0] - 9, q.p[1] - 9, 18, 18]); });
+    // selected first so its label always gets the best spot
+    pts.sort(function (a, b) { return (b.o.id === sel) - (a.o.id === sel); });
+    pts.forEach(function (q) {
+      var o = q.o, p = q.p, j = q.j, k = kind(j);
+      var cc = el('circle', { cx: p[0], cy: p[1], r: o.id === sel ? 9 : 7, fill: COL[k], 'class': 'dot' + (o.id === sel ? ' sel' : ''), tabindex: 0, role: 'button', 'aria-label': o.name + ': ' + (j ? 'leave ' + j.d : 'no connection in time') }, gD);
+      cc.addEventListener('click', function () { sel = o.id; render(); });
+      cc.addEventListener('keydown', function (ev) { if (ev.key === 'Enter' || ev.key === ' ') { ev.preventDefault(); sel = o.id; render(); } });
+      var tm = j ? j.d : '--:--', nm = o.name;
+      var wT = tm.length * fs * 0.62, wN = nm.length * (fs - 1.5) * 0.56, wB = Math.max(wT, wN), hB = fs * 2 + 2;
+      var cand = [[p[0] + 11, p[1] - fs + 2, 'start'], [p[0] - 11 - wB, p[1] - fs + 2, 'end'], [p[0] - wB / 2, p[1] - 12 - hB, 'middle'], [p[0] - wB / 2, p[1] + 12, 'middle']];
+      var pick = null, two = true;
+      for (var i = 0; i < cand.length && !pick; i++) { var r = [cand[i][0], cand[i][1], wB, hB]; if (!hit(r)) pick = cand[i]; }
+      if (!pick) { two = false; var cand1 = [[p[0] + 11, p[1] - fs / 2 - 2, 'start'], [p[0] - 11 - wT, p[1] - fs / 2 - 2, 'end'], [p[0] - wT / 2, p[1] - 12 - fs, 'middle'], [p[0] - wT / 2, p[1] + 11, 'middle']];
+        for (var i2 = 0; i2 < cand1.length && !pick; i2++) { var r2 = [cand1[i2][0], cand1[i2][1], wT, fs + 2]; if (!hit(r2)) pick = cand1[i2]; } }
+      if (!pick) return;
+      var w0 = two ? wB : wT, x = pick[2] === 'start' ? pick[0] : pick[2] === 'end' ? pick[0] + w0 : pick[0] + w0 / 2;
+      boxes.push([pick[0], pick[1], w0, two ? hB : fs + 2]);
+      var t1 = el('text', { x: x, y: pick[1] + fs, 'class': 'tag', 'text-anchor': pick[2], 'font-size': fs }, gD); t1.textContent = tm;
+      if (two) { var t2 = el('text', { x: x, y: pick[1] + fs * 2, 'class': 'tag sm', 'text-anchor': pick[2], 'font-size': fs - 1.5 }, gD); t2.textContent = nm; }
+    });
+  }
+
+  function drawDetail() {
+    var s = state(), o = DATA.origins.filter(function (x) { return x.id === sel; })[0];
+    var js = o.days[s.day] || [], j = pickJourney(o, s.day, s.target), k = kind(j);
+    var lines = j ? j.legs.filter(function (l) { return !l.w; }).map(function (l) { return l.ln; }).join(' + ') : '';
+    var v;
+    if (!j) v = 'Nothing that leaves here after 02:00 reaches BER by <b>' + f(s.target) + '</b>. At that hour, book a taxi the evening before.';
+    else if (k === 'direct') v = 'Leave at <b>' + j.d + '</b>, one ' + esc(lines) + ' straight to the terminal, in at ' + j.a + '. This is the easy version of an early flight.';
+    else if (k === 'change') v = 'Leave at <b>' + j.d + '</b> and change once' + (j.ch > 1 ? ' or more' : '') + ' (' + esc(lines) + '), in at ' + j.a + '. Fine with a backpack; with a big suitcase, check the change is on the same platform.';
+    else v = 'Leave at <b>' + j.d + '</b>, but it means a night bus (' + esc(lines) + '), in at ' + j.a + '. If you have heavy bags, children, or one connection with no slack, a taxi from the centre is about 58 to 63 euros and takes the doubt away.';
+    if (j && k !== 'direct') {
+      var alt = null;
+      js.forEach(function (x) { if (!x.nb && x.ch === 0 && m(x.a) <= s.target && (!alt || m(x.d) > m(alt.d))) alt = x; });
+      if (alt) v += ' No-change option: the ' + esc(alt.legs.filter(function (l) { return !l.w; })[0].ln) + ' at ' + alt.d + ', in at ' + alt.a + '.';
+    }
+    var h = '<h2>' + esc(o.name) + ' <small>' + esc(o.area) + ' · ' + (s.day === 'wed' ? 'Mon to Fri morning' : 'Sat or Sun morning') + '</small></h2><p class="dd-verdict">' + v + '</p>';
+    h += '<svg id="ddStrip" viewBox="0 0 600 120" style="height:120px" role="img" aria-label="Every connection from ' + esc(o.name) + ' to BER between 02:00 and 07:30"></svg>';
+    if (j) {
+      h += '<ol class="dd-legs">';
+      j.legs.forEach(function (l) {
+        var p = l.w ? 'walk' : l.p;
+        h += '<li><span class="t">' + l.d + ' to ' + l.a + '</span><span><span class="ln ' + p + '">' + (l.w ? 'walk' : esc(l.ln)) + '</span>' + esc(l.f) + ' to ' + esc(l.t) + '</span></li>';
+      });
+      h += '</ol>';
+    }
+    $('ddDetail').innerHTML = h;
+    drawStrip(js, j, s);
+  }
+
+  function drawStrip(js, chosen, s) {
+    var svg = $('ddStrip'), SW = Math.max(300, svg.parentNode.clientWidth - 28), x0 = 46, x1 = SW - 12, t0 = 120, t1 = 450;
+    svg.setAttribute('viewBox', '0 0 ' + SW + ' 120');
+    function X(t) { return x0 + (Math.min(Math.max(t, t0), t1) - t0) / (t1 - t0) * (x1 - x0); }
+    for (var t = 120; t <= 450; t += 30) {
+      el('line', { x1: X(t), x2: X(t), y1: 8, y2: 96, stroke: '#2a3e4d', 'stroke-width': 1 }, svg);
+      if (t % 60 === 0) { var tl = el('text', { x: X(t), y: 112, 'text-anchor': 'middle', fill: '#8ea2b0', 'font-size': 10 }, svg); tl.textContent = f(t); }
+    }
+    var lab = el('text', { x: 0, y: 30, fill: '#8ea2b0', 'font-size': 9.5 }, svg); lab.textContent = 'leave';
+    var lab2 = el('text', { x: 0, y: 78, fill: '#8ea2b0', 'font-size': 9.5 }, svg); lab2.textContent = 'arrive';
+    var n = js.length;
+    js.forEach(function (j, i) {
+      var y = 14 + (n > 1 ? i * (70 / (n - 1)) : 35), d = m(j.d), a = m(j.a), on = chosen && j.d === chosen.d && j.a === chosen.a;
+      var late = a > s.target;
+      el('line', { x1: X(d), x2: X(a), y1: y, y2: y, stroke: on ? '#FFE600' : (late ? '#3d4f5c' : COL[kind(j)]), 'stroke-width': on ? 4 : 2.2, 'stroke-linecap': 'round', 'class': 'bar' }, svg);
+    });
+    el('line', { x1: X(s.target), x2: X(s.target), y1: 4, y2: 100, stroke: '#FFE600', 'stroke-width': 1.5, 'stroke-dasharray': '4 3' }, svg);
+    var tt = el('text', { x: Math.min(X(s.target) + 4, SW - 100), y: 10, fill: '#FFE600', 'font-size': 10, 'font-weight': 800 }, svg); tt.textContent = 'be at BER ' + f(s.target);
+  }
+
+  function render() {
+    var s = state();
+    $('ddOut').textContent = f(s.flight);
+    $('ddOutNote').textContent = s.flight < 330 ? 'one of the first departures' : '';
+    $('ddBy').textContent = f(s.target);
+    drawMap(); drawDetail();
+  }
+
+  fetch('data.json').then(function (r) { return r.json(); }).then(function (d) {
+    DATA = d;
+    $('ddFoot').textContent = 'Planned times from the VBB timetable for a typical weekday (Wed 28 Oct 2026) and a weekend morning (Sat 31 Oct 2026), checked on 21 October 2026. Night works can change a route at short notice, so check the BVG or VBB app the evening before you fly. Taxi estimate: berlin.de, about 58 euros from Alexanderplatz and 63 euros from Zoo.';
+    render();
+    $('ddRange').addEventListener('input', render);
+    var rt; window.addEventListener('resize', function () { clearTimeout(rt); rt = setTimeout(render, 150); });
+    Array.prototype.forEach.call(document.querySelectorAll('input[type=radio]'), function (r) { r.addEventListener('change', render); });
+  });
+})();
+</script>
+<script src="../js/brand.js"></script>
+</body>
+</html>
