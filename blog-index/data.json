@@ -1,9 +1,9 @@
 {
-  "updatedAt": "2026-10-21T00:59:55.127Z",
+  "updatedAt": "2026-10-21T12:57:13.356Z",
   "source": "Wix Blog API",
   "popularSource": "Wix Blog metrics.views lifetime sort",
-  "totalPosts": 438,
-  "toolsTotal": 366,
+  "totalPosts": 439,
+  "toolsTotal": 367,
   "bookingUrl": "https://www.walkofberlin.com/book-berlin-walking-tour/berlin-then-and-now",
   "navTopics": [
     {
@@ -1802,6 +1802,23 @@
   ],
   "latest": [
     {
+      "title": "Early Flight from BER: The Last Train, Night Bus or Taxi From Where You Sleep",
+      "slug": "early-flight-from-ber",
+      "path": "/post/early-flight-from-ber",
+      "url": "https://www.berlinwalk.com/post/early-flight-from-ber",
+      "excerpt": "A 6:00 flight from BER means leaving Berlin around 3:30, when the network is at its thinnest. Which train or night bus runs from where you sleep, why the night of the week matters, and when a taxi is the better plan.",
+      "category": "Tourist Tips",
+      "categorySlug": "tourist-tips",
+      "topic": "practical",
+      "topicLabel": "Practical Berlin",
+      "readTime": "7 min read",
+      "publishedDate": "2026-10-21T12:55:31.975Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_9179a2cab7954fe9a66ee215c020a896~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-ber-terminal-night.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_9179a2cab7954fe9a66ee215c020a896~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-ber-terminal-night.jpg",
+      "alt": "BER Airport's Terminal 1 lit up at night behind a wide lawn, with the car park buildings on both sides",
+      "relatedToolSlug": "ber-dawn-departure-map"
+    },
+    {
       "title": "Berlin Timetable Change: What Moves on 13 December and What Costs More on 1 January",
       "slug": "berlin-timetable-change",
       "path": "/post/berlin-timetable-change",
@@ -1987,26 +2004,26 @@
       "thumb": "https://static.wixstatic.com/media/5a08a3_f65de559894948e78c3a8518b08107db~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-repair-cafe-soldering.jpg",
       "alt": "A repair café volunteer and a visitor holding an opened kitchen appliance together over a wooden workbench, with a soldering station and a power strip on the table",
       "relatedToolSlug": "berlin-repair-cafe-calendar"
-    },
-    {
-      "title": "Photography Museums in Berlin: Which One Fits Your Day",
-      "slug": "photography-museums-in-berlin",
-      "path": "/post/photography-museums-in-berlin",
-      "url": "https://www.berlinwalk.com/post/photography-museums-in-berlin",
-      "excerpt": "Fotografiska stays open until 23:00, C/O Berlin is free for under-19s, the Newton museum shuts on Mondays and from 16 November. Which of Berlin's four photography venues fits your free hours, with a clock that checks your day.",
-      "category": "Tourist Tips",
-      "categorySlug": "tourist-tips",
-      "topic": "free-budget",
-      "topicLabel": "Free & Budget",
-      "readTime": "6 min read",
-      "publishedDate": "2026-10-11T08:29:42.549Z",
-      "image": "https://static.wixstatic.com/media/5a08a3_b9f03a0c52da4c388e00dbcaaa759351~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-museum-fuer-fotografie.jpg",
-      "thumb": "https://static.wixstatic.com/media/5a08a3_b9f03a0c52da4c388e00dbcaaa759351~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-museum-fuer-fotografie.jpg",
-      "alt": "The sandstone Museum für Fotografie with its gable inscription and the words Museum für Fotografie, seen across the railway tracks at Zoologischer Garten station under a blue sky",
-      "relatedToolSlug": "berlin-photo-museum-clock"
     }
   ],
   "allPosts": [
+    {
+      "title": "Early Flight from BER: The Last Train, Night Bus or Taxi From Where You Sleep",
+      "slug": "early-flight-from-ber",
+      "path": "/post/early-flight-from-ber",
+      "url": "https://www.berlinwalk.com/post/early-flight-from-ber",
+      "excerpt": "A 6:00 flight from BER means leaving Berlin around 3:30, when the network is at its thinnest. Which train or night bus runs from where you sleep, why the night of the week matters, and when a taxi is the better plan.",
+      "category": "Tourist Tips",
+      "categorySlug": "tourist-tips",
+      "topic": "practical",
+      "topicLabel": "Practical Berlin",
+      "readTime": "7 min read",
+      "publishedDate": "2026-10-21T12:55:31.975Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_9179a2cab7954fe9a66ee215c020a896~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-ber-terminal-night.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_9179a2cab7954fe9a66ee215c020a896~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-ber-terminal-night.jpg",
+      "alt": "BER Airport's Terminal 1 lit up at night behind a wide lawn, with the car park buildings on both sides",
+      "relatedToolSlug": "ber-dawn-departure-map"
+    },
     {
       "title": "Berlin Timetable Change: What Moves on 13 December and What Costs More on 1 January",
       "slug": "berlin-timetable-change",
