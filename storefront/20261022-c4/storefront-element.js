@@ -258,7 +258,7 @@
       const focus=this.shadowRoot.activeElement,inside=focus&&area.contains(focus)?focus:null,action=inside?.dataset.action,index=inside?.dataset.index;
       area.innerHTML=this.quoteArea();
       if(action)area.querySelector(`[data-action="${action}"]${index!==undefined?`[data-index="${index}"]`:''}`)?.focus({preventScroll:true});
-      const status=this.shadowRoot.querySelector('[data-quote-status]');if(status)status.textContent=this.lastReason||'Delivery confirmed. You can continue to checkout.';
+      const status=this.shadowRoot.querySelector('[data-quote-status]');if(status)status.textContent=this.lastReason||(this.digitalOnly()?'Tax checked. You can continue to checkout.':'Delivery confirmed. You can continue to checkout.');
       this.onCartViewport();this.queueAutoQuote();
     }
     // Country change: adapt the postal field in place (label, example, keyboard) instead of re-rendering, so browser autofill of country + postal code is never lost.
