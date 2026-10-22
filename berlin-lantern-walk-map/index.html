@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Berlin Lantern Walk Map: Public St. Martin Walks by Evening</title>
+<link rel="stylesheet" href="../css/brand.css">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #FFFFFF; color: #1c2119; padding: 12px; }
+  .lw { border-radius: 18px; overflow: hidden; background: #10180f; color: #f3f1e6; border: 1px solid #253322; }
+  .lw-head { padding: 18px 18px 14px; background: radial-gradient(120% 140% at 85% 0%, #2f4a20 0%, #142012 55%, #10180f 100%); }
+  .lw-kick { font-size: 11px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; color: #FFE600; }
+  .lw-head h1 { font-size: 20px; line-height: 1.25; font-weight: 800; margin-top: 5px; color: #fff; }
+  .lw-head p { font-size: 12.5px; line-height: 1.55; color: #cfd8c4; margin-top: 7px; max-width: 640px; }
+  .lw-nights { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; padding: 12px 14px 4px; }
+  .lw-nights button { font-family: inherit; border: 1.5px solid #3a4a33; background: #182316; color: #b9c4ae; border-radius: 12px; padding: 8px 4px 7px; cursor: pointer; text-align: center; line-height: 1.15; }
+  .lw-nights button b { display: block; font-size: 15px; font-weight: 800; color: #e9eadf; }
+  .lw-nights button span { display: block; font-size: 10px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; }
+  .lw-nights button i { display: block; font-style: normal; font-size: 10.5px; font-weight: 700; margin-top: 3px; color: #8f9b85; }
+  .lw-nights button[aria-pressed="true"] { background: #FFE600; border-color: #FFE600; color: #123D18; }
+  .lw-nights button[aria-pressed="true"] b, .lw-nights button[aria-pressed="true"] i { color: #123D18; }
+  .lw-opts { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 16px; padding: 8px 16px 10px; font-size: 12px; color: #c8d1bd; }
+  .lw-opts label { display: inline-flex; align-items: center; gap: 7px; cursor: pointer; }
+  .lw-opts input { width: 16px; height: 16px; accent-color: #FFE600; }
+  .lw-count { margin-left: auto; font-weight: 700; color: #FFE600; }
+  .lw-body { display: grid; grid-template-columns: 1.25fr 1fr; gap: 12px; padding: 4px 14px 14px; align-items: start; }
+  .lw-map { background: #0b120a; border: 1px solid #253322; border-radius: 14px; padding: 4px; position: relative; }
+  .lw-map svg { display: block; width: 100%; height: auto; }
+  .lw-map .w-hit { cursor: pointer; }
+  .lw-legend { display: flex; flex-wrap: wrap; gap: 12px; padding: 6px 8px 4px; font-size: 10.5px; color: #aeb8a3; }
+  .lw-legend em { display: inline-block; width: 11px; height: 11px; border-radius: 50%; margin-right: 5px; vertical-align: -1px; }
+  .lw-card { background: #182316; border: 1px solid #2c3b27; border-radius: 14px; padding: 14px; min-height: 220px; }
+  .lw-card .c-when { font-size: 11px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: #FFE600; }
+  .lw-card .c-when.is-usual { color: #C5E1A5; }
+  .lw-card h2 { font-size: 16px; line-height: 1.3; color: #fff; margin-top: 4px; }
+  .lw-card .c-row { font-size: 12.5px; line-height: 1.5; color: #d6ddcc; margin-top: 8px; }
+  .lw-card .c-row b { color: #fff; }
+  .lw-card .c-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+  .lw-card .c-tags span { font-size: 11px; font-weight: 700; padding: 4px 9px; border-radius: 999px; background: #243321; color: #dfe7d4; border: 1px solid #34472e; }
+  .lw-card a { color: #FFE600; font-weight: 700; font-size: 12px; }
+  .lw-card .c-hint { font-size: 12.5px; line-height: 1.55; color: #b9c4ae; }
+  .lw-list { list-style: none; margin-top: 10px; display: grid; gap: 6px; max-height: 260px; overflow-y: auto; }
+  .lw-list button { width: 100%; font-family: inherit; text-align: left; border: 1px solid #2c3b27; background: #121b11; color: #dfe7d4; border-radius: 10px; padding: 8px 10px; font-size: 12px; cursor: pointer; line-height: 1.35; }
+  .lw-list button b { color: #FFE600; margin-right: 6px; }
+  .lw-list button.is-usual b { color: #C5E1A5; }
+  .lw-list button[aria-current="true"] { border-color: #FFE600; background: #1f2d1b; }
+  .lw-dusk { margin: 0 14px 14px; background: #0b120a; border: 1px solid #253322; border-radius: 14px; padding: 10px 10px 6px; }
+  .lw-dusk h3 { font-size: 11px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: #C5E1A5; padding: 0 4px 4px; }
+  .lw-dusk svg { display: block; width: 100%; height: auto; }
+  .lw-foot { padding: 0 16px 14px; font-size: 10.5px; line-height: 1.5; color: #8f9b85; }
+  button:focus-visible, input:focus-visible { outline: 2px solid #FFE600; outline-offset: 2px; }
+  @media (max-width: 640px) {
+    .lw-body { grid-template-columns: 1fr; }
+    .lw-head h1 { font-size: 17px; }
+    .lw-count { margin-left: 0; width: 100%; }
+  }
+</style>
+</head>
+<body>
+<div class="lw">
+  <div class="lw-head">
+    <div class="lw-kick">St. Martin in Berlin</div>
+    <h1>Public lantern walks in November, by evening and by Kiez</h1>
+    <p id="lead">Pick the evenings you can do. Yellow lanterns have a confirmed date for November 2026; pale rings are walks that ran before and have not announced this year's date yet. Tap a lantern for the meeting point.</p>
+  </div>
+  <div class="lw-nights" id="nights" aria-label="Evenings"></div>
+  <div class="lw-opts">
+    <label><input type="checkbox" id="usual" checked> Show walks that ran before (2026 date not out yet)</label>
+    <span class="lw-count" id="count"></span>
+  </div>
+  <div class="lw-body">
+    <div>
+      <div class="lw-map" id="map"></div>
+      <div class="lw-legend"><span><em style="background:#FFE600;box-shadow:0 0 6px #FFE600"></em>Confirmed this year</span><span><em style="border:2px dashed #C5E1A5"></em>Ran before, date to come</span><span><em style="background:#3a4a33"></em>Other evening</span></div>
+    </div>
+    <div class="lw-card" id="card">
+      <div class="c-hint" id="hint"></div>
+      <ul class="lw-list" id="list"></ul>
+    </div>
+  </div>
+  <div class="lw-dusk">
+    <h3 id="duskTitle">Start times against the dark</h3>
+    <div id="dusk"></div>
+  </div>
+  <div class="lw-foot" id="foot"></div>
+</div>
+<script>
+(function () {
+  var DATA = null, picked = {}, showUsual = true, current = null;
+  var el = function (id) { return document.getElementById(id); };
+  var esc = function (s) { return String(s == null ? '' : s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); };
+  var DOW = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+  var MON = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+  function d(iso) { var p = iso.split('-'); return new Date(Date.UTC(+p[0], +p[1] - 1, +p[2])); }
+  function dayLabel(iso) { var x = d(iso); return DOW[x.getUTCDay()] + ' ' + x.getUTCDate() + ' ' + MON[x.getUTCMonth()]; }
+  function mins(t) { var p = t.split(':'); return +p[0] * 60 + +p[1]; }
+  function startOf(w) { return w.start || w.serviceStart || w.walkStart || ''; }
+  function yearLabel(iso) { return dayLabel(iso) + ' ' + iso.slice(0, 4); }
+
+  function visible(w) {
+    if (w.status === 'confirmed-2026') return !!picked[w.date];
+    return showUsual;
+  }
+
+  function renderNights() {
+    el('nights').innerHTML = DATA.evenings.map(function (iso) {
+      var n = DATA.walks.filter(function (w) { return w.status === 'confirmed-2026' && w.date === iso; }).length;
+      var x = d(iso);
+      return '<button type="button" data-iso="' + iso + '" aria-pressed="' + (picked[iso] ? 'true' : 'false') + '"><span>' + DOW[x.getUTCDay()] + '</span><b>' + x.getUTCDate() + ' Nov</b><i>' + n + (n === 1 ? ' walk' : ' walks') + '</i></button>';
+    }).join('');
+    el('nights').querySelectorAll('button').forEach(function (b) {
+      b.addEventListener('click', function () {
+        var iso = b.getAttribute('data-iso');
+        picked[iso] = !picked[iso];
+        b.setAttribute('aria-pressed', picked[iso] ? 'true' : 'false');
+        update();
+      });
+    });
+  }
+
+  function project(lon, lat) {
+    var W = 440, H = 340, lonMin = 13.07, lonMax = 13.78, latMin = 52.33, latMax = 52.68;
+    var k = Math.cos(52.5 * Math.PI / 180);
+    var scale = Math.min((W - 16) / ((lonMax - lonMin) * k), (H - 16) / (latMax - latMin));
+    var w = (lonMax - lonMin) * k * scale, h = (latMax - latMin) * scale;
+    return [(W - w) / 2 + (lon - lonMin) * k * scale, (H - h) / 2 + (latMax - lat) * scale];
+  }
+
+  function renderMap() {
+    var s = '<svg viewBox="0 0 440 340" role="img" aria-label="Map of Berlin districts with lantern walk meeting points">';
+    s += '<defs><radialGradient id="glow"><stop offset="0" stop-color="#FFE600" stop-opacity=".85"/><stop offset="1" stop-color="#FFE600" stop-opacity="0"/></radialGradient></defs>';
+    DATA.outlines.forEach(function (o) {
+      o.rings.forEach(function (ring) {
+        var pts = ring.map(function (p) { var q = project(p[0], p[1]); return q[0].toFixed(1) + ',' + q[1].toFixed(1); }).join(' ');
+        s += '<polygon points="' + pts + '" fill="#162214" stroke="#34452e" stroke-width="0.8"/>';
+      });
+    });
+    var order = DATA.walks.slice().sort(function (a, b) { return (visible(a) ? 1 : 0) - (visible(b) ? 1 : 0); });
+    order.forEach(function (w) {
+      var q = project(w.lon, w.lat), x = q[0].toFixed(1), y = q[1].toFixed(1), on = visible(w), sel = current && current.id === w.id;
+      if (w.status === 'confirmed-2026') {
+        if (on) s += '<circle cx="' + x + '" cy="' + y + '" r="' + (sel ? 17 : 13) + '" fill="url(#glow)"/>';
+        s += '<circle class="w-hit" data-id="' + w.id + '" cx="' + x + '" cy="' + y + '" r="' + (sel ? 7.5 : 6) + '" fill="' + (on ? '#FFE600' : '#3a4a33') + '" stroke="' + (sel ? '#fff' : '#10180f') + '" stroke-width="' + (sel ? 2.5 : 1.5) + '"><title>' + esc(w.name) + '</title></circle>';
+      } else if (on) {
+        s += '<circle class="w-hit" data-id="' + w.id + '" cx="' + x + '" cy="' + y + '" r="' + (sel ? 7.5 : 6) + '" fill="#10180f" stroke="' + (sel ? '#fff' : '#C5E1A5') + '" stroke-width="2" stroke-dasharray="3 2"><title>' + esc(w.name) + '</title></circle>';
+      }
+    });
+    s += '</svg>';
+    el('map').innerHTML = s;
+    el('map').querySelectorAll('.w-hit').forEach(function (c) {
+      c.addEventListener('click', function () { show(c.getAttribute('data-id')); });
+    });
+  }
+
+  function walkLine(w) {
+    var when = w.status === 'confirmed-2026' ? dayLabel(w.date) + (startOf(w) ? ', ' + startOf(w) : ', time to come') : 'Last held ' + yearLabel(w.lastKnownDate) + ', ' + startOf(w);
+    return when + ' · ' + w.district;
+  }
+
+  function renderList() {
+    var vis = DATA.walks.filter(visible).sort(function (a, b) {
+      var ka = (a.status === 'confirmed-2026' ? '0' + a.date : '1' + a.lastKnownDate) + startOf(a);
+      var kb = (b.status === 'confirmed-2026' ? '0' + b.date : '1' + b.lastKnownDate) + startOf(b);
+      return ka < kb ? -1 : ka > kb ? 1 : 0;
+    });
+    var conf = vis.filter(function (w) { return w.status === 'confirmed-2026'; }).length;
+    el('count').textContent = conf + ' confirmed' + (showUsual ? ' + ' + (vis.length - conf) + ' that ran before' : '') + ' on the map';
+    if (!current) {
+      el('hint').innerHTML = vis.length ? 'Tap a lantern on the map, or a walk below.' : 'Pick at least one evening above.';
+    }
+    el('list').innerHTML = vis.map(function (w) {
+      return '<li><button type="button" data-id="' + w.id + '" class="' + (w.status === 'confirmed-2026' ? '' : 'is-usual') + '" aria-current="' + (current && current.id === w.id ? 'true' : 'false') + '"><b>' + (w.status === 'confirmed-2026' ? (startOf(w) || 'tbc') : 'was ' + startOf(w)) + '</b>' + esc(w.name) + '<br><small>' + esc(walkLine(w)) + '</small></button></li>';
+    }).join('');
+    el('list').querySelectorAll('button').forEach(function (b) {
+      b.addEventListener('click', function () { show(b.getAttribute('data-id')); });
+    });
+  }
+
+  function show(id) {
+    current = DATA.walks.filter(function (w) { return w.id === id; })[0] || null;
+    if (!current) return;
+    var w = current, conf = w.status === 'confirmed-2026';
+    var h = '<div class="c-when' + (conf ? '' : ' is-usual') + '">' + (conf ? 'Confirmed: ' + dayLabel(w.date) : 'Last held ' + yearLabel(w.lastKnownDate) + ', this year\'s date not out yet') + '</div>';
+    h += '<h2>' + esc(w.name) + '</h2>';
+    var times = [];
+    if (w.serviceStart) times.push('service ' + w.serviceStart);
+    if (w.walkStart) times.push('walk ' + w.walkStart);
+    if (!times.length && startOf(w)) times.push(startOf(w));
+    h += '<div class="c-row"><b>' + (conf ? 'Starts' : 'Started') + ':</b> ' + esc(w.timeNote || times.join(', then ')) + '</div>';
+    h += '<div class="c-row"><b>Meet:</b> ' + esc(w.meetingPoint) + (w.endPoint ? '<br><b>Ends:</b> ' + esc(w.endPoint) : '') + '</div>';
+    h += '<div class="c-row"><b>Kiez:</b> ' + esc(w.district) + (w.nearestStation ? '<br><b>Getting there:</b> ' + esc(w.nearestStation) : '') + '</div>';
+    if (w.organiser) h += '<div class="c-row"><b>Run by:</b> ' + esc(w.organiser) + '</div>';
+    if (w.extras && w.extras.length) h += '<div class="c-tags">' + w.extras.map(function (x) { return '<span>' + esc(x) + '</span>'; }).join('') + '</div>';
+    if (w.note) h += '<div class="c-row">' + esc(w.note) + '</div>';
+    h += '<div class="c-row"><a href="' + esc(w.sourceUrl) + '" target="_blank" rel="noopener">' + (conf ? 'Organiser\'s announcement' : 'Last listing') + ' ↗</a></div>';
+    el('hint').innerHTML = h;
+    renderMap(); renderList(); renderDusk();
+    if (window.__bwRequestEmbedResize) window.__bwRequestEmbedResize();
+  }
+
+  function renderDusk() {
+    var on = DATA.evenings.filter(function (iso) { return picked[iso]; });
+    var rows = on.length ? on : [DATA.evenings[1]];
+    var W = Math.max(330, Math.min(640, el('dusk').clientWidth || 640)), L = W < 480 ? 80 : 78, R = 12, T = 22, rowH = 30, H = T + rows.length * rowH + 22;
+    var t0 = 15 * 60 + 30, t1 = 19 * 60;
+    var sx = function (m) { return L + (m - t0) / (t1 - t0) * (W - L - R); };
+    var s = '<svg viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="Walk start times compared with sunset and darkness">';
+    s += '<defs><linearGradient id="sky" x1="0" x2="1"><stop offset="0" stop-color="#4a6a8a"/><stop offset=".35" stop-color="#2b3c55"/><stop offset=".6" stop-color="#151d2c"/><stop offset="1" stop-color="#0b0f17"/></linearGradient></defs>';
+    var step = W < 480 ? 60 : 30;
+    for (var m = 16 * 60; m <= t1; m += step) {
+      var x = sx(m);
+      s += '<line x1="' + x + '" y1="' + (T - 4) + '" x2="' + x + '" y2="' + (H - 18) + '" stroke="#24301f" stroke-width="1"/>';
+      s += '<text x="' + x + '" y="' + (H - 5) + '" text-anchor="middle" font-size="10" fill="#8f9b85">' + Math.floor(m / 60) + ':' + (m % 60 ? '30' : '00') + '</text>';
+    }
+    rows.forEach(function (iso, i) {
+      var y = T + i * rowH, sun = DATA.sunset[iso];
+      s += '<rect x="' + L + '" y="' + (y + 4) + '" width="' + (W - L - R) + '" height="' + (rowH - 10) + '" rx="6" fill="url(#sky)" opacity=".9"/>';
+      s += '<text x="' + (L - 8) + '" y="' + (y + rowH / 2 + 3) + '" text-anchor="end" font-size="' + (W < 480 ? 10.5 : 11) + '" font-weight="700" fill="' + (on.length ? '#e9eadf' : '#8f9b85') + '">' + dayLabel(iso) + '</text>';
+      if (sun) {
+        var sxp = sx(mins(sun.sunset)), dx = sx(mins(sun.dusk));
+        s += '<line x1="' + sxp + '" y1="' + (y + 2) + '" x2="' + sxp + '" y2="' + (y + rowH - 4) + '" stroke="#ffb347" stroke-width="2"/>';
+        s += '<line x1="' + dx + '" y1="' + (y + 2) + '" x2="' + dx + '" y2="' + (y + rowH - 4) + '" stroke="#8fa7c8" stroke-width="1.5" stroke-dasharray="3 2"/>';
+        if (i === 0) {
+          s += '<text x="' + sxp + '" y="' + (T - 8) + '" text-anchor="middle" font-size="9.5" font-weight="700" fill="#ffb347">sunset ' + sun.sunset + '</text>';
+          s += '<text x="' + (dx + 4) + '" y="' + (T - 8) + '" text-anchor="start" font-size="9.5" font-weight="700" fill="#8fa7c8">dark ' + sun.dusk + '</text>';
+        }
+      }
+      var seen = {};
+      DATA.walks.forEach(function (w) {
+        if (w.status !== 'confirmed-2026' || w.date !== iso || !on.length || !startOf(w)) return;
+        var k = startOf(w), nth = seen[k] = (seen[k] || 0) + 1;
+        var cx = sx(mins(k)) + (nth - 1) * 9, sel = current && current.id === w.id;
+        s += '<circle class="w-hit" data-id="' + w.id + '" cx="' + cx.toFixed(1) + '" cy="' + (y + rowH / 2 - 1) + '" r="' + (sel ? 7 : 5.5) + '" fill="#FFE600" stroke="' + (sel ? '#fff' : '#10180f') + '" stroke-width="1.5"><title>' + esc(w.name + ', ' + startOf(w)) + '</title></circle>';
+      });
+    });
+    s += '</svg>';
+    el('dusk').innerHTML = s;
+    el('dusk').querySelectorAll('.w-hit').forEach(function (c) {
+      c.addEventListener('click', function () { show(c.getAttribute('data-id')); });
+    });
+    el('duskTitle').textContent = on.length ? 'Start times against the dark' : 'Pick an evening to see its walks against sunset';
+  }
+
+  function update() {
+    if (current && !visible(current)) current = null;
+    if (!current) el('hint').innerHTML = '';
+    renderMap(); renderList(); renderDusk();
+    if (window.__bwRequestEmbedResize) window.__bwRequestEmbedResize();
+  }
+
+  var rw = 0;
+  window.addEventListener('resize', function () { if (DATA && Math.abs((el('dusk').clientWidth || 0) - rw) > 20) { rw = el('dusk').clientWidth; renderDusk(); } });
+
+  el('usual').addEventListener('change', function () { showUsual = el('usual').checked; update(); });
+
+  fetch('data.json').then(function (r) { return r.json(); }).then(function (dta) {
+    DATA = dta;
+    DATA.evenings.forEach(function (iso) { picked[iso] = DATA.defaultEvenings.indexOf(iso) !== -1; });
+    renderNights();
+    update();
+    el('foot').textContent = 'Checked on ' + dta.checkedOn + ' against each organiser\'s own page or a district news announcement. Parishes and farms post dates late, so a pale ring can still turn yellow before November. Sunset and darkness (civil twilight) for Berlin. ' + dta.outlineSource + '.';
+  });
+})();
+</script>
+<script src="../js/brand.js"></script>
+</body>
+</html>

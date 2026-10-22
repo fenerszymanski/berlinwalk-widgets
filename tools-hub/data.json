@@ -11155,6 +11155,35 @@
       "iconStatus": "live-wix-media",
       "image": "https://static.wixstatic.com/media/5a08a3_e4c1b827ad86419b896816147d263629~mv2.png",
       "cmsItemId": "0f2b4987-4717-4e3f-9b4b-02173a866f74"
+    },
+    {
+      "slug": "berlin-lantern-walk-map",
+      "title": "Berlin Lantern Walk Map",
+      "lead": "Every public St. Martin lantern walk in Berlin I could confirm for November 2026, on a map by evening, with meeting points, start times against sunset, and the walks that ran before but have not announced this year's date. Checked on 22 October 2026.",
+      "category": "Maps",
+      "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/berlin-lantern-walk-map/",
+      "embedHeight": 1500,
+      "hubCategory": "EventsSports",
+      "type": "Map",
+      "priority": 3,
+      "tags": [
+        "st martin",
+        "lantern walk",
+        "laternenumzug",
+        "kids",
+        "november"
+      ],
+      "aliases": [
+        "lantern walks in berlin",
+        "laternenumzug berlin",
+        "st martin berlin",
+        "martinsumzug berlin",
+        "st martin's day lantern walk berlin",
+        "lantern parade berlin november"
+      ],
+      "iconStatus": "live-wix-media",
+      "image": "https://static.wixstatic.com/media/5a08a3_c615105421c842d4ba92223a792c0fa7~mv2.png",
+      "cmsItemId": "bbdfc4e9-62a2-4b5d-8991-e7cd998aef4a"
     }
   ],
   "hubCategories": [
