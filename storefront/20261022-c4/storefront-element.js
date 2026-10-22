@@ -14,6 +14,22 @@
   const textMoney = value => value?.formattedAmount || (typeof value?.amount === 'string' ? value.amount : 'Not confirmed');
   const nativeImage = value => {if(typeof value!=='string')return '#';const match=/^wix:image:\/\/v1\/([^/#?]+)(?:\/|#|\?|$)/.exec(value);if(match&&/^[a-zA-Z0-9_.~%-]+$/.test(match[1]))return 'https://static.wixstatic.com/media/'+match[1];return url(value);};
   const json = value => {try{return JSON.parse(value || 'null');}catch{return null;}};
+  // Native-widget guard release. The site-wide head snippet (wix/head-native-guard.html) hides the original Wix Stores widgets from first paint; this class lets them show again. Called only on fallback paths (render failed, native-fallback, fatal load error, bridge timeout), never when the shop renders normally.
+  const releaseNative = () => {try{document.documentElement.classList.add('bw-shop-native');}catch{}};
+  // Neutral shimmer block used by the loading skeleton wherever a price, button or line of text will be.
+  const sk = cls => `<span class="sk-block ${cls}"></span>`;
+  // Loading skeleton only: product page slug (the keys of PRODUCT_SLUGS in the page code) -> native product id, so the bundled poster of the product being opened can be drawn before the bridge answers. An unknown slug just gets a neutral skeleton.
+  const SKELETON_PRODUCTS = Object.fromEntries(Object.entries({
+    'osman-kalın-s-treehouse-berlin-art-print-berlin-reels-collection':'08a254a1-9cdb-4cb0-9c0c-098409bcf230',
+    'ghost-stations-berlin-art-print-berlin-reels-collection':'6722fada-c4d9-4ac0-ab8a-6e2c6e911823',
+    'berlin-tram-map-and-wall-art-print-berlin-reels-collection':'7c2f473b-ecbd-4a19-9d1f-18a12fa56652',
+    'berlin-uhr-art-print-berlin-reels-collection':'1e5af6a4-4628-4f6a-adfb-744e2fc2049e',
+    'berlin-tv-tower-poster-mitte-fernsehturm-art-print-30-x-40-cm':'3a236fae-16fe-495e-8031-0e799c1bbf38',
+    'café-achteck-berlin-poster-green-architecture-art-print-30-x-40-cm':'065e316b-6066-4e5b-9e98-ade7ec33e696',
+    'berlin-world-clock-poster-alexanderplatz-art-print-30-x-40-cm':'1f9ad3cb-74f8-48ac-ac53-f41e71a09610',
+    'bierpinsel-berlin-poster-steglitz-architecture-art-print-30-x-40-cm':'2156be29-7e90-4ebc-8b1b-c76633ff09e6',
+    'wasserturm-berlin-poster-prenzlauer-berg-art-print-30-x-40-cm':'62001c29-9901-4616-ab03-002fbd7a2910'
+  }).map(([slug,id])=>[slug.normalize('NFC'),id]));
   const resources = Promise.all([
     import(asset('catalog-layer.js')), import(asset('editorial-helpers.js')),
     ...['data/categories.json','data/presentation.json','data/native-bindings.json','data/external-products.json'].map(path => fetch(asset(path)).then(response => {if (!response.ok) throw Error('CATALOGUE_METADATA_UNAVAILABLE');return response.json();}))
@@ -46,8 +62,9 @@
       this.shadowRoot.addEventListener('submit', event => {event.preventDefault();if(event.target.matches('[data-address-form]'))this.getQuote(true);});
       this.onCartViewport=()=>{cancelAnimationFrame(this.cartBarFrame);this.cartBarFrame=requestAnimationFrame(()=>this.syncMobileCheckout());};
     }
-    connectedCallback() {this.context=json(this.getAttribute('shop-context'))||{};window.addEventListener('scroll',this.onCartViewport,{passive:true});window.addEventListener('resize',this.onCartViewport,{passive:true});this.load();}
-    disconnectedCallback() {clearTimeout(this.quoteTimer);this.sizeObserver?.disconnect();cancelAnimationFrame(this.sizeFrame);cancelAnimationFrame(this.cartBarFrame);window.removeEventListener('scroll',this.onCartViewport);window.removeEventListener('resize',this.onCartViewport);for(const pending of this.pending.values()){clearTimeout(pending.timer);pending.reject(Error('BRIDGE_DISCONNECTED'));}this.pending.clear();}
+    // The stylesheet request starts now, in parallel with the data files, so the skeleton can be drawn as soon as the data arrives. The watchdog is the last resort when the page-code bridge never answers: it falls back to the original store before the guard's own 12 s failsafe would show both at once.
+    connectedCallback() {this.context=json(this.getAttribute('shop-context'))||{};window.addEventListener('scroll',this.onCartViewport,{passive:true});window.addEventListener('resize',this.onCartViewport,{passive:true});this.ensureLink();clearTimeout(this.watchdog);this.watchdog=setTimeout(()=>{if(!this.revealed&&!this.hidden)this.fail('BRIDGE_TIMEOUT');},Math.max(1500,10500-(globalThis.performance?.now?.()||0)));this.load();}
+    disconnectedCallback() {clearTimeout(this.watchdog);clearTimeout(this.quoteTimer);this.sizeObserver?.disconnect();cancelAnimationFrame(this.sizeFrame);cancelAnimationFrame(this.cartBarFrame);window.removeEventListener('scroll',this.onCartViewport);window.removeEventListener('resize',this.onCartViewport);for(const pending of this.pending.values()){clearTimeout(pending.timer);pending.reject(Error('BRIDGE_DISCONNECTED'));}this.pending.clear();}
     attributeChangedCallback(name, oldValue, value) {
       if(oldValue===value)return;
       if(name==='shop-context') {const next=json(value)||{};if(next.path!==this.context.path){this.quantity=1;this.wall=false;this.readySent=false;this.revealed=false;this.quote=null;this.quoteRevision++;}this.context=next;this.applyContextCategory();this.render();this.signalReady();}
@@ -58,7 +75,7 @@
     async load() {
       try {const [layer,editorial,definitions,presentation,bindings,external]=await resources;
         Object.assign(this,{layer,editorial,definitions,presentation,bindings,external});
-        if(this.catalogue)this.buildModel();await this.start();
+        if(this.catalogue)this.buildModel();if(!this.model)this.render();await this.start();
       }catch(error){this.fail(error.message);}
     }
     async start() {
@@ -82,8 +99,8 @@
       if(Number.isFinite(response.delivery)){if(response.delivery<=this.delivery)return;this.delivery=response.delivery;}
       if(response.event==='render-state') {
         for(const [id,pending] of this.pending)if(pending.op==='native-fallback'){clearTimeout(pending.timer);pending.resolve(response);this.pending.delete(id);}
-        if(response.ok&&response.nativeCollapsed){this.hidden=false;this.revealed=true;this.render();}
-        else {this.revealed=false;this.hidden=true;this.style.height='0px';this.sizeObserver?.disconnect();if(!response.fallback)this.dispatchEvent(new CustomEvent('shop-render-failed',{detail:{channel:CHANNEL},bubbles:true,composed:true}));}
+        if(response.ok&&response.nativeCollapsed){clearTimeout(this.watchdog);this.hidden=false;this.revealed=true;this.render();}
+        else {releaseNative();this.revealed=false;this.hidden=true;this.appliedHeight=0;this.style.height='0px';this.sizeObserver?.disconnect();if(!response.fallback)this.dispatchEvent(new CustomEvent('shop-render-failed',{detail:{channel:CHANNEL},bubbles:true,composed:true}));}
         return;
       }
       if(response.context)this.context=response.context;
@@ -130,7 +147,7 @@
       if(this.context.mode==='product'&&!this.model.products.some(p=>p.wixProductId===this.context.productId))return;
       this.readySent=true;this.dispatchEvent(new CustomEvent('shop-render-ready',{detail:{channel:CHANNEL},bubbles:true,composed:true}));
     }
-    fail(message) {this.error=message||'SHOP_UNAVAILABLE';this.revealed=false;this.hidden=true;this.style.height='0px';this.sizeObserver?.disconnect();this.render();this.dispatchEvent(new CustomEvent('shop-render-failed',{detail:{channel:CHANNEL},bubbles:true,composed:true}));}
+    fail(message) {releaseNative();clearTimeout(this.watchdog);this.error=message||'SHOP_UNAVAILABLE';this.revealed=false;this.hidden=true;this.appliedHeight=0;this.style.height='0px';this.sizeObserver?.disconnect();this.render();this.dispatchEvent(new CustomEvent('shop-render-failed',{detail:{channel:CHANNEL},bubbles:true,composed:true}));}
     image(product) {if(product.image)return asset('assets/'+product.image);const native=product.source==='external'?'#':nativeImage(product.nativeImageUrl);return native&&native!=='#'?native:'';}
     tile(product) {
       const source=this.image(product);
@@ -228,13 +245,88 @@
       const form=this.cart.hasShippableItems===null?'<p>Delivery requirements have not been confirmed. Continue in the original cart.</p><button class="outline" data-action="native-fallback">Open original cart</button>':this.addressForm();
       return `<section class="wrap cart-page cart-mode"><h1>Your cart <span class="meta">(${this.cart.count} ${this.cart.count===1?'item':'items'})</span></h1><div class="cart-layout"><div>${this.lines()}<details class="promo"><summary>Promo code</summary><div class="details-body">You can enter a promo code in checkout.</div></details></div><aside class="order-summary"><h2>Order summary</h2><div class="summary-row"><span>Subtotal</span><strong>${esc(textMoney(this.cart.subtotal))}</strong></div>${form}<p class="sr-only" role="status" aria-live="polite" data-quote-status></p><div class="quote-area">${this.quoteArea()}</div></aside></div></section>`;
     }
+    // ---- Loading skeleton ----
+    // Drawn from the element's own static files only (stylesheet, data/*.json, assets/*), so it appears as soon as they are loaded and before the page-code bridge answers. It shows the shop bar, headings, names, places and bundled poster images, never a price, stock state, link or working button. It uses the same classes and container widths as the real surface and is removed in the same render that reveals the real surface (render-state, native widget collapsed), so the layout hardly moves.
+    ensureLink() {let link=this.shadowRoot.querySelector('link[rel=stylesheet]');if(!link){link=document.createElement('link');link.rel='stylesheet';link.href=asset('storefront.css');this.shadowRoot.prepend(link);}return link;}
+    watchSize(content) {
+      this.sizeObserver?.disconnect();if(!content)return;
+      this.sizeObserver=new ResizeObserver(()=>{cancelAnimationFrame(this.sizeFrame);this.sizeFrame=requestAnimationFrame(()=>{const height=Math.ceil(content.getBoundingClientRect().height);if(height>0&&Math.abs(height-(this.appliedHeight||0))>1){this.appliedHeight=height;this.style.height=height+'px';}this.onCartViewport();});});
+      this.sizeObserver.observe(content);
+    }
+    // Page mode before the bridge has sent shop-context: the same routes the page code recognises (/category/..., /product-page/<slug>, /cart-page), read from the address only for this drawing.
+    skeletonRoute() {
+      const context=this.context||{};
+      if(['shop','product','cart'].includes(context.mode))return {mode:context.mode,productId:context.productId||null,categorySlug:context.categorySlug||null};
+      let parts=[];try{parts=location.pathname.split('/').filter(Boolean).map(part=>{try{return decodeURIComponent(part).normalize('NFC');}catch{return part;}});}catch{}
+      let marker=-1;parts.forEach((part,index)=>{if(['product-page','cart-page','category'].includes(part))marker=index;});
+      const route=marker>=0?parts[marker]:'',slug=marker>=0?parts[marker+1]||null:null;
+      if(route==='cart-page')return {mode:'cart',productId:null,categorySlug:null};
+      if(route==='product-page')return {mode:'product',productId:SKELETON_PRODUCTS[slug]||null,categorySlug:null};
+      return {mode:'shop',productId:null,categorySlug:route==='category'?slug:null};
+    }
+    // The shared catalogue layer groups and orders the shelves. Its commercial fields are placeholders that only satisfy its validation; nothing from them is ever drawn.
+    skeletonCatalog() {
+      if(this.skeletonModel)return this.skeletonModel;
+      const rows=this.presentation.filter(item=>item.wixProductId).map(item=>{const binding=this.bindings.find(entry=>entry.wixProductId===item.wixProductId);return {id:item.wixProductId,name:item.name,productType:binding?.nativeProductType,collectionIds:binding?.nativeCategoryIds||[],visible:true,stock:{inStock:true},priceData:{price:0,currency:'EUR'},productPageUrl:'https://www.walkofberlin.com/',description:'',media:{mainMedia:{image:{url:''}}},productOptions:[]};});
+      const products=[...this.layer.adaptWixProducts(rows,this.presentation),...this.layer.adaptExternalProducts(this.external)];
+      products.sort((a,b)=>this.presentation.findIndex(item=>item.id===a.id)-this.presentation.findIndex(item=>item.id===b.id));
+      return this.skeletonModel=this.layer.createCatalogModel(products,this.definitions);
+    }
+    skeletonBar(model,current) {return `<aside class="shopbar"><div class="wrap shopbar-inner"><span class="shopbar-home">Shop</span><nav class="tabs">${model.tabs.map(tab=>`<a ${current===tab.id?'aria-current="page"':''}>${esc(tab.label)}</a>`).join('')}</nav><span class="cart-link">Cart ${sk('sk-count')}</span></div></aside>`;}
+    skeletonCard(product,feature=false) {
+      const source=this.image(product);
+      return `<article class="${feature?'feature':'card'}"><div class="tile ${product.imageFit==='cover'?'cover':''} ${product.visualOverlay?'audio-device-card':''}">${source?`<img class="tile-photo" src="${esc(source)}" alt="" decoding="async">`:''}</div><div class="${feature?'feature-copy':'card-copy'}"><span class="type">${esc(product.typeLine)}</span><span class="product-name">${esc(product.name)}</span>${feature?`<p>${esc(product.description)}</p>`:''}<span class="place">${esc(product.place)}</span><div class="card-bottom"><span class="price">${sk('sk-price')}</span>${sk('sk-button')}</div></div></article>`;
+    }
+    skeletonShop(route,model) {
+      const category=['berlin-landmark-posters','berlin-reels-collection'].includes(route.categorySlug)?'print':'all';
+      const filter=route.categorySlug==='berlin-landmark-posters'?'landmarks':route.categorySlug==='berlin-reels-collection'?'stories':'all';
+      const selected=category==='all'?null:model.getCategoryView(category,filter);
+      return `${this.skeletonBar(model,selected?category:'all')}<section class="wrap intro"><h1>Shop</h1><p class="lead">Prints of Berlin places, and audio walks to explore them on foot.</p>${selected?.filters.length?`<nav class="chips"><a>${esc(selected.allFilterLabel)}</a>${selected.filters.map(item=>`<a ${item.id===filter?'aria-current="page"':''}>${esc(item.label)}</a>`).join('')}</nav>`:''}</section>${(selected?[selected]:model.sections).map(section=>`<section class="wrap shelf"><div class="section-head"><div class="section-title"><h2>${esc(section.title)}</h2><span class="meta">${esc(section.description)}</span></div>${section.moreCategoryId?`<span class="sk-more">${sk('')}</span>`:''}</div><div class="${section.layout==='feature'?'feature-grid':'grid'}${selected?' category-grid':''}">${section.products.map(product=>this.skeletonCard({...product,imageFit:product.imageFit||section.imageFit},section.layout==='feature')).join('')}</div></section>`).join('')}<section class="wrap visual-credit-wrap">${sk('sk-credit')}</section>`;
+    }
+    skeletonProduct(route,model) {
+      const item=route.productId?this.presentation.find(entry=>entry.wixProductId===route.productId):null;
+      const photo=item?.image?`<img src="${esc(asset('assets/'+item.image))}" alt="" decoding="async">`:'';
+      return `${this.skeletonBar(model,'all')}<div class="wrap"><nav class="breadcrumb"><span>Shop</span> / ${item?esc(item.name):sk('sk-crumb')}</nav><section class="product-layout"><div class="product-title">${item?`<h1>${esc(item.name)}</h1><span class="place">${esc(item.place)}</span>`:`<h1>${sk('sk-title')}</h1>`}<span class="price sk-price-line">${sk('sk-price')}</span></div><div class="gallery"><div class="gallery-stage">${photo}</div><div class="thumbnails"><span class="thumb">${photo}</span></div></div><div class="buy-box"><p class="spec">${item?esc(item.typeLine):sk('sk-crumb')}</p><div class="buy-row">${sk('sk-qty')}${sk('sk-primary')}</div><div class="delivery">${sk('sk-line sk-w100')}${sk('sk-line sk-w60')}</div></div></section><div class="product-info"><section class="story"><h2>The story behind this print</h2>${sk('sk-line sk-w100')}${sk('sk-line sk-w100')}${sk('sk-line sk-w100')}${sk('sk-line sk-w60')}</section></div></div>`;
+    }
+    skeletonCart(model) {
+      const line=`<article class="cart-line"><div class="line-image"></div><div class="line-main"><h3>${sk('sk-line sk-w60 sk-heading')}</h3>${sk('sk-line sk-w40')}<div class="line-bottom">${sk('sk-qty')}<span class="price">${sk('sk-price')}</span></div></div></article>`;
+      return `${this.skeletonBar(model,'all')}<section class="wrap cart-page"><h1>Your cart</h1><div class="cart-layout"><div><section class="cart-group">${line}${line}</section></div><aside class="order-summary"><h2>${sk('sk-heading')}</h2><div class="summary-row">${sk('sk-label')}${sk('sk-amount')}</div><p class="destination-label">${sk('sk-label')}</p><div class="address-grid">${sk('sk-field')}${sk('sk-field')}</div><div class="checkout-area">${sk('sk-reason')}${sk('sk-primary')}${sk('sk-note')}<span class="sk-link-row">${sk('sk-label')}</span></div></aside></div></section>`;
+    }
+    showWhenStyled(box) {
+      const link=this.ensureLink(),reveal=()=>{if(box.isConnected&&box.hidden)box.hidden=false;};
+      if(link.sheet)reveal();else{link.addEventListener('load',reveal,{once:true});link.addEventListener('error',reveal,{once:true});}
+    }
+    // Returns true when a skeleton is in place. Needs the static data; the box stays hidden until the stylesheet is applied, so unstyled markup is never visible.
+    renderSkeleton() {
+      if(!this.layer||!this.presentation)return false;
+      let box=this.shadowRoot.querySelector('.skeleton');
+      try {
+        const route=this.skeletonRoute(),key=[route.mode,route.productId||'',route.categorySlug||''].join('|');
+        if(box&&box.dataset.key===key)return true;
+        const model=this.skeletonCatalog();
+        const body=route.mode==='cart'?this.skeletonCart(model):route.mode==='product'?this.skeletonProduct(route,model):this.skeletonShop(route,model);
+        if(!box){this.ensureLink();box=document.createElement('div');box.className='skeleton';box.setAttribute('aria-busy','true');box.hidden=true;this.shadowRoot.append(box);}
+        box.dataset.key=key;box.innerHTML=`<p class="sr-only">Loading the shop</p><div aria-hidden="true">${body}</div>`;
+      }catch{box?.remove();return false;}
+      this.showWhenStyled(box);this.watchSize(box);return true;
+    }
     render() {
-      if(!this.layer||!this.model){this.shadowRoot.innerHTML=`<link rel="stylesheet" href="${esc(asset('storefront.css'))}"><div class="bridge-loading" role="status">Loading the shop…</div>`;return;}
+      const skeleton=!this.revealed&&!this.hidden?this.renderSkeleton():false;
+      if(!this.layer||!this.model){
+        if(!skeleton){if(this.layer)this.shadowRoot.innerHTML=`<link rel="stylesheet" href="${esc(asset('storefront.css'))}"><div class="bridge-loading" role="status">Loading the shop…</div>`;else this.ensureLink();}
+        return;
+      }
       const open=this.shadowRoot.querySelector('dialog')?.open;
       const focus=this.shadowRoot.activeElement;
       const focusAction=focus?.dataset.action,focusLine=focus?.dataset.line;
-      this.shadowRoot.innerHTML=`<link rel="stylesheet" href="${esc(asset('storefront.css'))}"><div class="surface" ${this.revealed?'':'hidden'}>${this.shopbar()}${this.error?`<div class="native-error" role="alert">${esc(this.errorMessage())} <button class="text-button" data-action="refresh">Refresh cart</button></div>`:''}${this.context.mode==='product'?this.product():this.context.mode==='cart'?this.cartPage():this.shop()}<p class="sr-only" role="status" aria-live="polite">${esc(this.notice)}</p><dialog class="drawer" aria-label="Shopping cart"><div class="drawer-heading"><h2>Cart (${this.cart?this.cart.count:'—'})</h2><button class="icon-button" data-action="close-drawer" aria-label="Close cart">✕</button></div>${this.notice?`<p class="notice">${esc(this.notice)}</p>`:''}${this.cart?this.lines():''}<div class="drawer-subtotal summary-row"><span>Subtotal</span><strong>${esc(textMoney(this.cart?.subtotal))}</strong></div><p class="delivery">Delivery and tax are confirmed after your destination is entered.</p><div class="drawer-actions"><a class="primary" href="https://walkofberlin.com/cart-page">View cart</a><button class="text-button" data-action="close-drawer">Continue shopping</button></div></dialog></div>`;
-      const content=this.shadowRoot.querySelector('.surface');this.sizeObserver?.disconnect();if(content){this.sizeObserver=new ResizeObserver(()=>{cancelAnimationFrame(this.sizeFrame);this.sizeFrame=requestAnimationFrame(()=>{const height=Math.ceil(content.getBoundingClientRect().height);if(height>0&&Math.abs(height-(this.appliedHeight||0))>1){this.appliedHeight=height;this.style.height=height+'px';}this.onCartViewport();});});this.sizeObserver.observe(content);}
+      const keep=this.revealed||this.hidden?null:this.shadowRoot.querySelector('.skeleton');
+      // The <link> node stays in the shadow root across renders. Removing and re-inserting it drops the stylesheet for a frame (":host" display included), which showed as a one-frame layout jump when the real surface replaced the skeleton.
+      const sheet=this.ensureLink(),surface=document.createElement('template');
+      surface.innerHTML=`<div class="surface" ${this.revealed?'':'hidden'}>${this.shopbar()}${this.error?`<div class="native-error" role="alert">${esc(this.errorMessage())} <button class="text-button" data-action="refresh">Refresh cart</button></div>`:''}${this.context.mode==='product'?this.product():this.context.mode==='cart'?this.cartPage():this.shop()}<p class="sr-only" role="status" aria-live="polite">${esc(this.notice)}</p><dialog class="drawer" aria-label="Shopping cart"><div class="drawer-heading"><h2>Cart (${this.cart?this.cart.count:'—'})</h2><button class="icon-button" data-action="close-drawer" aria-label="Close cart">✕</button></div>${this.notice?`<p class="notice">${esc(this.notice)}</p>`:''}${this.cart?this.lines():''}<div class="drawer-subtotal summary-row"><span>Subtotal</span><strong>${esc(textMoney(this.cart?.subtotal))}</strong></div><p class="delivery">Delivery and tax are confirmed after your destination is entered.</p><div class="drawer-actions"><a class="primary" href="https://walkofberlin.com/cart-page">View cart</a><button class="text-button" data-action="close-drawer">Continue shopping</button></div></dialog></div>`;
+      for(const node of [...this.shadowRoot.childNodes])if(node!==sheet&&node!==keep)node.remove();
+      sheet.after(surface.content);
+      if(keep&&keep.hidden)this.showWhenStyled(keep);
+      this.watchSize(this.shadowRoot.querySelector(keep?'.skeleton':'.surface')||this.shadowRoot.querySelector('.surface'));
       const dialog=this.shadowRoot.querySelector('dialog');
       dialog.addEventListener('close',()=>{this.shadowRoot.querySelector(`[data-action="add"][data-product="${this.lastAddedId||''}"]`)?.focus({preventScroll:true});});
       if(open&&this.revealed)dialog.showModal();
@@ -295,7 +387,7 @@
       if(action==='product-minus'||action==='product-plus'){this.quantity=Math.max(1,Math.min(99,this.quantity+(action==='product-plus'?1:-1)));this.render();return;}
       if(action==='shipping'){const choice=this.quote?.choices?.[Number(button.dataset.index)],same=!!choice&&!!this.selection&&choice.carrierId===this.selection.carrierId&&choice.code===this.selection.code;if(choice&&!same&&!this.busy&&!this.quoting&&!this.uncertain){this.choiceList={signature:this.cart.signature,choices:this.quote.choices};this.selection={carrierId:choice.carrierId,code:choice.code};this.quote=null;this.quoteError='';this.failedKey='';await this.getQuote(true);}return;}
       if(action==='retry-quote'){if(!this.busy&&!this.quoting&&!this.uncertain){this.quoteError='';this.failedKey='';await this.getQuote(true);}return;}
-      if(action==='native-fallback'){this.request('native-fallback').catch(()=>{});return;}
+      if(action==='native-fallback'){releaseNative();this.request('native-fallback').catch(()=>{});return;}
       if(this.busy)return;
       if(this.uncertain&&action!=='refresh'){this.error='UPDATE_NOT_CONFIRMED';this.render();return;}
       this.busy=true;this.error='';this.render();

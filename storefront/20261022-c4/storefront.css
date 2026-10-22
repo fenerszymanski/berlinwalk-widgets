@@ -24,3 +24,39 @@
   .cart-mode.mobile-cart-checkout .checkout-reason{font-size:12px}
   .cart-mode.mobile-cart-checkout input,.cart-mode.mobile-cart-checkout select,.cart-mode.mobile-cart-checkout [type=submit],.cart-mode.mobile-cart-checkout .quote-choices{scroll-margin-bottom:calc(var(--mobile-checkout-height,180px) + 20px)}
 }
+
+/* A hidden host really disappears (the :host display rule above would otherwise beat the browser's [hidden] rule). */
+:host([hidden]){display:none}
+
+/* Bottom gap before the site footer, every mode (shop, product, cart, empty cart): 56 px desktop, 40 px phone. */
+.surface,.skeleton{padding-bottom:56px}
+@media(max-width:740px){.surface,.skeleton{padding-bottom:40px}}
+
+/* Loading skeleton: same classes and container widths as the real surface, neutral blocks where a price, button or text line will be. */
+.skeleton{display:block}
+.skeleton a,.skeleton .tile{pointer-events:none;cursor:default}
+.sk-block{display:inline-block;position:relative;overflow:hidden;vertical-align:middle;background:#E8E8E0;border-radius:6px}
+.sk-block:after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,transparent,#ffffff99,transparent);transform:translateX(-100%);animation:sk-shimmer 1.6s ease-in-out infinite}
+@keyframes sk-shimmer{to{transform:translateX(100%)}}
+@media(prefers-reduced-motion:reduce){.sk-block:after{animation:none;content:none}}
+.sk-count{width:20px;height:16px}
+.sk-more{display:flex;align-items:center;min-height:44px;flex-shrink:0}.sk-more .sk-block{width:96px;height:16px}
+.sk-price{width:64px;height:.85em}
+.sk-button{width:118px;min-height:44px;border-radius:30px}
+.sk-credit{display:block;width:196px;height:44px;border-radius:24px}
+.sk-crumb{width:120px;height:14px}
+.sk-title{display:block;width:78%;height:40px}
+.sk-price-line .sk-price{width:96px}
+.sk-qty{width:132px;height:54px;border-radius:32px;flex-shrink:0}
+.sk-primary{display:block;min-height:54px;border-radius:40px}
+.buy-row>.sk-primary{flex:1}
+.order-summary .sk-primary{margin-top:20px}
+.sk-line{display:block;width:100%;height:14px;margin:0 0 14px}
+.sk-w60{width:60%}.sk-w40{width:40%}
+.sk-heading{height:22px}
+h2>.sk-heading{width:55%}
+.sk-label{width:96px;height:14px}.sk-amount{width:56px;height:14px}.sk-field{display:block;height:64px;border-radius:4px}
+.checkout-area .sk-block{display:block;width:100%;margin:0}.checkout-area .sk-reason{height:17px}.checkout-area .sk-note{height:14px;width:70%;margin:2px auto}.sk-link-row{display:flex;align-items:center;justify-content:center;min-height:44px}.sk-link-row .sk-block{width:120px}
+.cart-line .sk-qty{width:110px;height:46px}
+.skeleton .story .sk-line{height:16px}
+@media(max-width:740px){.card .sk-button{width:100%}}
