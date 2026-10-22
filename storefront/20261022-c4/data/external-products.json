@@ -7,7 +7,7 @@
       "@context": "https://schema.org",
       "@type": "Product",
       "name": "Berlin Audio Trio Bundle",
-      "description": "One purchase opens Berlin Wall, Hidden Berlin and Medieval Berlin for the buyer, with 45 audio chapters, MP3 downloads and PDF route guides.",
+      "description": "One purchase opens Berlin Wall, Hidden Berlin and Medieval Berlin for the buyer, with 45 audio chapters, MP3 downloads and route guides.",
       "image": [
         "https://app.berlinwalk.com/assets/audio-conversion-v2/bernauer-1400.webp",
         "https://app.berlinwalk.com/assets/audio-conversion-v2/anhalter-1400.webp",
@@ -34,7 +34,7 @@
       "typeLine": "AUDIO WALKS \u00b7 3 ROUTES",
       "wixProductId": null,
       "externalSourceKey": "berlin-audio-trio-bundle",
-      "description": "Three self-guided walks: 45 audio chapters, MP3 downloads and PDF route guides. Listen on your phone as you walk.",
+      "description": "Three self-guided walks: 45 audio chapters, MP3 downloads and route guides. Listen on your phone as you walk.",
       "visualOverlay": "audio-phone-headphones-v1.png",
       "imageFit": "cover"
     }
