@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "allLabel": "All",
+  "defaultCategoryId": "all",
+  "categories": [
+    {
+      "id": "print",
+      "label": "Prints",
+      "order": 10,
+      "match": {
+        "nativeCategoryIds": [
+          "03bc9fd6-f411-ed15-290b-2acf44bb430d",
+          "3a0f16e1-49e5-42e1-a0bd-a79d1949e091"
+        ]
+      },
+      "description": "30 × 40 cm · printed to order by Gelato · shipped",
+      "allFilterLabel": "All prints",
+      "filters": [
+        {
+          "id": "landmarks",
+          "label": "Landmarks",
+          "match": {
+            "nativeCategoryIds": [
+              "03bc9fd6-f411-ed15-290b-2acf44bb430d"
+            ]
+          }
+        },
+        {
+          "id": "stories",
+          "label": "Berlin Stories",
+          "match": {
+            "nativeCategoryIds": [
+              "3a0f16e1-49e5-42e1-a0bd-a79d1949e091"
+            ]
+          }
+        }
+      ],
+      "shelf": {
+        "previewLimit": 4,
+        "featureBelowCount": 3,
+        "moreLabel": "All {count} prints",
+        "imageFit": "contain"
+      },
+      "detailLabel": "Print details"
+    },
+    {
+      "id": "audio",
+      "label": "Audio walks",
+      "order": 20,
+      "match": {
+        "externalSourceKeys": [
+          "berlin-audio-trio-bundle"
+        ]
+      },
+      "description": "Plays on your phone · own page and checkout",
+      "filters": [],
+      "shelf": {
+        "previewLimit": 4,
+        "featureBelowCount": 3,
+        "moreLabel": "All audio walks",
+        "imageFit": "cover"
+      },
+      "actionLabel": "SEE THE WALKS →"
+    }
+  ],
+  "fulfilments": [
+    {
+      "id": "shipped",
+      "match": {
+        "sources": [
+          "wix"
+        ],
+        "nativeProductTypes": [
+          "physical"
+        ]
+      },
+      "requiresDeliveryAddress": true,
+      "cartEligible": true,
+      "groupLabel": "Shipped to you",
+      "groupDescription": "Delivery applies to physical items",
+      "detailLabel": "Product details",
+      "actionLabel": "ADD TO CART"
+    },
+    {
+      "id": "download",
+      "match": {
+        "sources": [
+          "wix"
+        ],
+        "nativeProductTypes": [
+          "digital"
+        ]
+      },
+      "requiresDeliveryAddress": false,
+      "cartEligible": true,
+      "groupLabel": "Download",
+      "groupDescription": "Link after payment",
+      "detailLabel": "File details",
+      "actionLabel": "ADD TO CART"
+    },
+    {
+      "id": "external",
+      "match": {
+        "sources": [
+          "external"
+        ]
+      },
+      "requiresDeliveryAddress": false,
+      "cartEligible": false,
+      "groupLabel": null,
+      "groupDescription": "Own page and checkout",
+      "detailLabel": "Product details",
+      "actionLabel": "VIEW PRODUCT →"
+    }
+  ]
+}

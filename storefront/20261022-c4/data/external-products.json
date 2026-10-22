@@ -1,0 +1,42 @@
+[
+  {
+    "sourceKey": "berlin-audio-trio-bundle",
+    "verified": true,
+    "sourceUrl": "https://walkofberlin.com/products/berlin-audio-trio-bundle",
+    "productSchema": {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": "Berlin Audio Trio Bundle",
+      "description": "One purchase opens Berlin Wall, Hidden Berlin and Medieval Berlin for the buyer, with 45 audio chapters, MP3 downloads and PDF route guides.",
+      "image": [
+        "https://app.berlinwalk.com/assets/audio-conversion-v2/bernauer-1400.webp",
+        "https://app.berlinwalk.com/assets/audio-conversion-v2/anhalter-1400.webp",
+        "https://app.berlinwalk.com/assets/audio-conversion-v2/marienkirche-1400.webp"
+      ],
+      "brand": {
+        "@type": "Brand",
+        "name": "Walk of Berlin"
+      },
+      "offers": {
+        "@type": "Offer",
+        "price": "24.90",
+        "priceCurrency": "EUR",
+        "availability": "https://schema.org/InStock",
+        "url": "https://www.walkofberlin.com/products/berlin-audio-trio-bundle"
+      }
+    },
+    "presentation": {
+      "id": "trio",
+      "name": "Berlin Audio Trio",
+      "place": "Berlin Wall \u00b7 Hidden Berlin \u00b7 Medieval Berlin",
+      "image": "audio-trio.jpg",
+      "alt": "Anhalter Bahnhof portico, a stop on the Hidden Berlin audio walk",
+      "typeLine": "AUDIO WALKS \u00b7 3 ROUTES",
+      "wixProductId": null,
+      "externalSourceKey": "berlin-audio-trio-bundle",
+      "description": "Three self-guided walks: 45 audio chapters, MP3 downloads and PDF route guides. Listen on your phone as you walk.",
+      "visualOverlay": "audio-phone-headphones-v1.png",
+      "imageFit": "cover"
+    }
+  }
+]
