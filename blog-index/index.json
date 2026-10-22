@@ -1,9 +1,9 @@
 {
-  "updatedAt": "2026-10-21T12:57:13.356Z",
+  "updatedAt": "2026-10-22T08:54:39.793Z",
   "source": "Wix Blog API",
   "popularSource": "Wix Blog metrics.views lifetime sort",
-  "totalPosts": 439,
-  "toolsTotal": 367,
+  "totalPosts": 440,
+  "toolsTotal": 368,
   "bookingUrl": "https://www.walkofberlin.com/book-berlin-walking-tour/berlin-then-and-now",
   "navTopics": [
     {
@@ -1802,6 +1802,23 @@
   ],
   "latest": [
     {
+      "title": "Lantern Walks in Berlin: Where and When to Join St. Martin This November",
+      "slug": "lantern-walks-in-berlin",
+      "path": "/post/lantern-walks-in-berlin",
+      "url": "https://www.berlinwalk.com/post/lantern-walks-in-berlin",
+      "excerpt": "Berlin's St. Martin lantern walks run from 11 to 14 November this year. Which public walks have a confirmed date, where they meet, what time they start against sunset, and how to find the small one in your own Kiez.",
+      "category": "Living in Berlin",
+      "categorySlug": "living-in-berlin",
+      "topic": "living-in-berlin",
+      "topicLabel": "Living in Berlin",
+      "readTime": "7 min read",
+      "publishedDate": "2026-10-22T08:53:06.219Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_8c756910d7d84bc48fa7c74824e334dd~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-martinsfeuer-lantern-ring.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_8c756910d7d84bc48fa7c74824e334dd~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-martinsfeuer-lantern-ring.jpg",
+      "alt": "Children holding glowing paper lanterns in a wide ring around a St. Martin bonfire on a dark schoolyard",
+      "relatedToolSlug": "berlin-lantern-walk-map"
+    },
+    {
       "title": "Early Flight from BER: The Last Train, Night Bus or Taxi From Where You Sleep",
       "slug": "early-flight-from-ber",
       "path": "/post/early-flight-from-ber",
@@ -1987,23 +2004,6 @@
       "thumb": "https://static.wixstatic.com/media/5a08a3_00d7de5001374180a09ddafe932dab79~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-nordbahnhof-mezzanine.jpg",
       "alt": "The empty tiled mezzanine of Nordbahnhof S-Bahn station in Berlin",
       "relatedToolSlug": ""
-    },
-    {
-      "title": "Repair Café Berlin: Where to Take It Before You Throw It Out",
-      "slug": "repair-cafe-berlin",
-      "path": "/post/repair-cafe-berlin",
-      "url": "https://www.berlinwalk.com/post/repair-cafe-berlin",
-      "excerpt": "Berlin's volunteer repair cafés meet on fixed rhythms like the first Sunday or the third Monday, and four want your name first. Where each one is, what it fixes, and why the 200-euro ReparaturBONUS is still closed.",
-      "category": "Living in Berlin",
-      "categorySlug": "living-in-berlin",
-      "topic": "living-in-berlin",
-      "topicLabel": "Living in Berlin",
-      "readTime": "6 min read",
-      "publishedDate": "2026-10-12T08:30:42.598Z",
-      "image": "https://static.wixstatic.com/media/5a08a3_f65de559894948e78c3a8518b08107db~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-repair-cafe-soldering.jpg",
-      "thumb": "https://static.wixstatic.com/media/5a08a3_f65de559894948e78c3a8518b08107db~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-repair-cafe-soldering.jpg",
-      "alt": "A repair café volunteer and a visitor holding an opened kitchen appliance together over a wooden workbench, with a soldering station and a power strip on the table",
-      "relatedToolSlug": "berlin-repair-cafe-calendar"
     }
   ]
 }

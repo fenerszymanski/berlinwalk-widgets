@@ -1,9 +1,26 @@
 {
-  "updatedAt": "2026-10-21T12:57:13.356Z",
+  "updatedAt": "2026-10-22T08:54:39.793Z",
   "source": "Wix Blog API",
-  "totalPosts": 439,
+  "totalPosts": 440,
   "bookingUrl": "https://www.walkofberlin.com/book-berlin-walking-tour/berlin-then-and-now",
   "allPosts": [
+    {
+      "title": "Lantern Walks in Berlin: Where and When to Join St. Martin This November",
+      "slug": "lantern-walks-in-berlin",
+      "path": "/post/lantern-walks-in-berlin",
+      "url": "https://www.berlinwalk.com/post/lantern-walks-in-berlin",
+      "excerpt": "Berlin's St. Martin lantern walks run from 11 to 14 November this year. Which public walks have a confirmed date, where they meet, what time they start against sunset, and how to find the small one in your own Kiez.",
+      "category": "Living in Berlin",
+      "categorySlug": "living-in-berlin",
+      "topic": "living-in-berlin",
+      "topicLabel": "Living in Berlin",
+      "readTime": "7 min read",
+      "publishedDate": "2026-10-22T08:53:06.219Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_8c756910d7d84bc48fa7c74824e334dd~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-martinsfeuer-lantern-ring.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_8c756910d7d84bc48fa7c74824e334dd~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-martinsfeuer-lantern-ring.jpg",
+      "alt": "Children holding glowing paper lanterns in a wide ring around a St. Martin bonfire on a dark schoolyard",
+      "relatedToolSlug": "berlin-lantern-walk-map"
+    },
     {
       "title": "Early Flight from BER: The Last Train, Night Bus or Taxi From Where You Sleep",
       "slug": "early-flight-from-ber",
