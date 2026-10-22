@@ -14,7 +14,7 @@
   const textMoney = value => value?.formattedAmount || (typeof value?.amount === 'string' ? value.amount : 'Not confirmed');
   const nativeImage = value => {if(typeof value!=='string')return '#';const match=/^wix:image:\/\/v1\/([^/#?]+)(?:\/|#|\?|$)/.exec(value);if(match&&/^[a-zA-Z0-9_.~%-]+$/.test(match[1]))return 'https://static.wixstatic.com/media/'+match[1];return url(value);};
   const json = value => {try{return JSON.parse(value || 'null');}catch{return null;}};
-  // Native-widget guard release. The site-wide head snippet (wix/head-native-guard.html) hides the original Wix Stores widgets from first paint; this class lets them show again. Called only on fallback paths (render failed, native-fallback, fatal load error, bridge timeout), never when the shop renders normally.
+  // Native-widget guard release. The site-wide head snippet (wix/head-native-guard.html) hides the original Wix Stores widgets from first paint; this class lets them show again. Called only on terminal fallback paths: the bridge reports the native store restored or not collapsible, the visitor opens the original cart, the bridge times out, or the element's own files fail to load. A transient fail() alone does not release it.
   const releaseNative = () => {try{document.documentElement.classList.add('bw-shop-native');}catch{}};
   // Neutral shimmer block used by the loading skeleton wherever a price, button or line of text will be.
   const sk = cls => `<span class="sk-block ${cls}"></span>`;
@@ -63,7 +63,7 @@
       this.onCartViewport=()=>{cancelAnimationFrame(this.cartBarFrame);this.cartBarFrame=requestAnimationFrame(()=>this.syncMobileCheckout());};
     }
     // The stylesheet request starts now, in parallel with the data files, so the skeleton can be drawn as soon as the data arrives. The watchdog is the last resort when the page-code bridge never answers: it falls back to the original store before the guard's own 12 s failsafe would show both at once.
-    connectedCallback() {this.context=json(this.getAttribute('shop-context'))||{};window.addEventListener('scroll',this.onCartViewport,{passive:true});window.addEventListener('resize',this.onCartViewport,{passive:true});this.ensureLink();clearTimeout(this.watchdog);this.watchdog=setTimeout(()=>{if(!this.revealed&&!this.hidden)this.fail('BRIDGE_TIMEOUT');},Math.max(1500,10500-(globalThis.performance?.now?.()||0)));this.load();}
+    connectedCallback() {this.context=json(this.getAttribute('shop-context'))||{};window.addEventListener('scroll',this.onCartViewport,{passive:true});window.addEventListener('resize',this.onCartViewport,{passive:true});this.ensureLink();clearTimeout(this.watchdog);this.watchdog=setTimeout(()=>{if(!this.revealed&&!this.hidden){releaseNative();this.fail('BRIDGE_TIMEOUT');}},Math.max(1500,10500-(globalThis.performance?.now?.()||0)));this.load();}
     disconnectedCallback() {clearTimeout(this.watchdog);clearTimeout(this.quoteTimer);this.sizeObserver?.disconnect();cancelAnimationFrame(this.sizeFrame);cancelAnimationFrame(this.cartBarFrame);window.removeEventListener('scroll',this.onCartViewport);window.removeEventListener('resize',this.onCartViewport);for(const pending of this.pending.values()){clearTimeout(pending.timer);pending.reject(Error('BRIDGE_DISCONNECTED'));}this.pending.clear();}
     attributeChangedCallback(name, oldValue, value) {
       if(oldValue===value)return;
@@ -76,7 +76,7 @@
       try {const [layer,editorial,definitions,presentation,bindings,external]=await resources;
         Object.assign(this,{layer,editorial,definitions,presentation,bindings,external});
         if(this.catalogue)this.buildModel();if(!this.model)this.render();await this.start();
-      }catch(error){this.fail(error.message);}
+      }catch(error){if(!this.layer)releaseNative();this.fail(error.message);}
     }
     async start() {
       if(!this.layer||this.started||this.getAttribute('shop-bridge-ready')!==CHANNEL)return;
@@ -147,7 +147,7 @@
       if(this.context.mode==='product'&&!this.model.products.some(p=>p.wixProductId===this.context.productId))return;
       this.readySent=true;this.dispatchEvent(new CustomEvent('shop-render-ready',{detail:{channel:CHANNEL},bubbles:true,composed:true}));
     }
-    fail(message) {releaseNative();clearTimeout(this.watchdog);this.error=message||'SHOP_UNAVAILABLE';this.revealed=false;this.hidden=true;this.appliedHeight=0;this.style.height='0px';this.sizeObserver?.disconnect();this.render();this.dispatchEvent(new CustomEvent('shop-render-failed',{detail:{channel:CHANNEL},bubbles:true,composed:true}));}
+    fail(message) {clearTimeout(this.watchdog);this.error=message||'SHOP_UNAVAILABLE';this.revealed=false;this.hidden=true;this.appliedHeight=0;this.style.height='0px';this.sizeObserver?.disconnect();this.render();this.dispatchEvent(new CustomEvent('shop-render-failed',{detail:{channel:CHANNEL},bubbles:true,composed:true}));}
     image(product) {if(product.image)return asset('assets/'+product.image);const native=product.source==='external'?'#':nativeImage(product.nativeImageUrl);return native&&native!=='#'?native:'';}
     tile(product) {
       const source=this.image(product);
