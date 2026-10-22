@@ -63,7 +63,7 @@
       this.onCartViewport=()=>{cancelAnimationFrame(this.cartBarFrame);this.cartBarFrame=requestAnimationFrame(()=>this.syncMobileCheckout());};
     }
     // The stylesheet request starts now, in parallel with the data files, so the skeleton can be drawn as soon as the data arrives. The watchdog is the last resort when the page-code bridge never answers: it falls back to the original store before the guard's own 12 s failsafe would show both at once.
-    connectedCallback() {this.context=json(this.getAttribute('shop-context'))||{};window.addEventListener('scroll',this.onCartViewport,{passive:true});window.addEventListener('resize',this.onCartViewport,{passive:true});this.ensureLink();clearTimeout(this.watchdog);this.watchdog=setTimeout(()=>{if(!this.revealed&&!this.hidden){releaseNative();this.fail('BRIDGE_TIMEOUT');}},Math.max(1500,10500-(globalThis.performance?.now?.()||0)));this.load();}
+    connectedCallback() {this.context=json(this.getAttribute('shop-context'))||{};if(!this.revealed&&!this.hidden){this.style.display='block';this.style.minHeight='100vh';}window.addEventListener('scroll',this.onCartViewport,{passive:true});window.addEventListener('resize',this.onCartViewport,{passive:true});this.ensureLink();clearTimeout(this.watchdog);this.watchdog=setTimeout(()=>{if(!this.revealed&&!this.hidden){releaseNative();this.fail('BRIDGE_TIMEOUT');}},Math.max(1500,10500-(globalThis.performance?.now?.()||0)));this.load();}
     disconnectedCallback() {clearTimeout(this.watchdog);clearTimeout(this.quoteTimer);this.sizeObserver?.disconnect();cancelAnimationFrame(this.sizeFrame);cancelAnimationFrame(this.cartBarFrame);window.removeEventListener('scroll',this.onCartViewport);window.removeEventListener('resize',this.onCartViewport);for(const pending of this.pending.values()){clearTimeout(pending.timer);pending.reject(Error('BRIDGE_DISCONNECTED'));}this.pending.clear();}
     attributeChangedCallback(name, oldValue, value) {
       if(oldValue===value)return;
@@ -99,8 +99,8 @@
       if(Number.isFinite(response.delivery)){if(response.delivery<=this.delivery)return;this.delivery=response.delivery;}
       if(response.event==='render-state') {
         for(const [id,pending] of this.pending)if(pending.op==='native-fallback'){clearTimeout(pending.timer);pending.resolve(response);this.pending.delete(id);}
-        if(response.ok&&response.nativeCollapsed){clearTimeout(this.watchdog);this.hidden=false;this.revealed=true;this.render();}
-        else {releaseNative();this.revealed=false;this.hidden=true;this.appliedHeight=0;this.style.height='0px';this.sizeObserver?.disconnect();if(!response.fallback)this.dispatchEvent(new CustomEvent('shop-render-failed',{detail:{channel:CHANNEL},bubbles:true,composed:true}));}
+        if(response.ok&&response.nativeCollapsed){clearTimeout(this.watchdog);this.hidden=false;this.revealed=true;this.style.minHeight='';this.style.display='';this.render();}
+        else {releaseNative();this.revealed=false;this.hidden=true;this.style.minHeight='';this.style.display='';this.appliedHeight=0;this.style.height='0px';this.sizeObserver?.disconnect();if(!response.fallback)this.dispatchEvent(new CustomEvent('shop-render-failed',{detail:{channel:CHANNEL},bubbles:true,composed:true}));}
         return;
       }
       if(response.context)this.context=response.context;
@@ -147,7 +147,7 @@
       if(this.context.mode==='product'&&!this.model.products.some(p=>p.wixProductId===this.context.productId))return;
       this.readySent=true;this.dispatchEvent(new CustomEvent('shop-render-ready',{detail:{channel:CHANNEL},bubbles:true,composed:true}));
     }
-    fail(message) {clearTimeout(this.watchdog);this.error=message||'SHOP_UNAVAILABLE';this.revealed=false;this.hidden=true;this.appliedHeight=0;this.style.height='0px';this.sizeObserver?.disconnect();this.render();this.dispatchEvent(new CustomEvent('shop-render-failed',{detail:{channel:CHANNEL},bubbles:true,composed:true}));}
+    fail(message) {clearTimeout(this.watchdog);this.error=message||'SHOP_UNAVAILABLE';this.revealed=false;this.hidden=true;this.style.minHeight='';this.style.display='';this.appliedHeight=0;this.style.height='0px';this.sizeObserver?.disconnect();this.render();this.dispatchEvent(new CustomEvent('shop-render-failed',{detail:{channel:CHANNEL},bubbles:true,composed:true}));}
     image(product) {if(product.image)return asset('assets/'+product.image);const native=product.source==='external'?'#':nativeImage(product.nativeImageUrl);return native&&native!=='#'?native:'';}
     tile(product) {
       const source=this.image(product);
@@ -293,7 +293,7 @@
       return `${this.skeletonBar(model,'all')}<section class="wrap cart-page"><h1>Your cart</h1><div class="cart-layout"><div><section class="cart-group">${line}${line}</section></div><aside class="order-summary"><h2>${sk('sk-heading')}</h2><div class="summary-row">${sk('sk-label')}${sk('sk-amount')}</div><p class="destination-label">${sk('sk-label')}</p><div class="address-grid">${sk('sk-field')}${sk('sk-field')}</div><div class="checkout-area">${sk('sk-reason')}${sk('sk-primary')}${sk('sk-note')}<span class="sk-link-row">${sk('sk-label')}</span></div></aside></div></section>`;
     }
     showWhenStyled(box) {
-      const link=this.ensureLink(),reveal=()=>{if(box.isConnected&&box.hidden)box.hidden=false;};
+      const link=this.ensureLink(),reveal=()=>{if(box.isConnected&&box.hidden)box.hidden=false;this.style.minHeight='';this.style.display='';};
       if(link.sheet)reveal();else{link.addEventListener('load',reveal,{once:true});link.addEventListener('error',reveal,{once:true});}
     }
     // Returns true when a skeleton is in place. Needs the static data; the box stays hidden until the stylesheet is applied, so unstyled markup is never visible.
