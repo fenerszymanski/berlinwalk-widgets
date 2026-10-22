@@ -44,6 +44,72 @@
       "detailLabel": "Print details"
     },
     {
+      "id": "digital",
+      "label": "Digital downloads",
+      "order": 15,
+      "match": {
+        "nativeCategoryIds": [
+          "02d24409-01f2-4b00-b24d-d762d74a4fb6"
+        ]
+      },
+      "description": "Printable files · instant download · nothing shipped",
+      "allFilterLabel": "All downloads",
+      "filters": [
+        {
+          "id": "dl-landmarks",
+          "label": "Landmarks",
+          "match": {
+            "presentationGroups": [
+              "landmarks"
+            ]
+          }
+        },
+        {
+          "id": "dl-districts",
+          "label": "Districts",
+          "match": {
+            "presentationGroups": [
+              "districts"
+            ]
+          }
+        },
+        {
+          "id": "dl-sets",
+          "label": "Sets",
+          "match": {
+            "presentationGroups": [
+              "sets"
+            ]
+          }
+        },
+        {
+          "id": "dl-stories",
+          "label": "Berlin Stories",
+          "match": {
+            "presentationGroups": [
+              "stories"
+            ]
+          }
+        },
+        {
+          "id": "dl-calendars",
+          "label": "Calendar",
+          "match": {
+            "presentationGroups": [
+              "calendars"
+            ]
+          }
+        }
+      ],
+      "shelf": {
+        "previewLimit": 4,
+        "featureBelowCount": 3,
+        "moreLabel": "All {count} downloads",
+        "imageFit": "contain"
+      },
+      "detailLabel": "File details"
+    },
+    {
       "id": "audio",
       "label": "Audio walks",
       "order": 20,

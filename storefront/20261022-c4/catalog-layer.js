@@ -31,6 +31,7 @@ function match(product, rule = {}) {
   if (rule.nativeProductTypes) checks.push(rule.nativeProductTypes.includes(product.nativeProductType));
   if (rule.nativeCategoryIds) checks.push(intersects(list(rule.nativeCategoryIds), list(product.nativeCategoryIds)));
   if (rule.externalSourceKeys) checks.push(rule.externalSourceKeys.includes(product.externalSourceKey));
+  if (rule.presentationGroups) checks.push(list(rule.presentationGroups).includes(product.group));
   if (rule.productKeys) checks.push(rule.productKeys.includes(keyOf(product)));
   return checks.length > 0 && checks.every(Boolean);
 }
