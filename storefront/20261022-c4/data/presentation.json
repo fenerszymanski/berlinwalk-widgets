@@ -1,468 +1,477 @@
 [
- {
-  "id": "wc",
-  "name": "World Clock",
-  "place": "Alexanderplatz · Mitte",
-  "image": "world-clock.jpg",
-  "alt": "World Clock illustrated poster, shown in full",
-  "typeLine": "PRINT · 30 × 40 CM",
-  "wixProductId": "1f9ad3cb-74f8-48ac-ac53-f41e71a09610"
- },
- {
-  "id": "bu",
-  "name": "Berlin-Uhr",
-  "place": "Europa-Center · City West",
-  "image": "berlin-uhr.jpg",
-  "alt": "Berlin-Uhr illustrated poster, shown in full",
-  "typeLine": "PRINT · 30 × 40 CM",
-  "wixProductId": "1e5af6a4-4628-4f6a-adfb-744e2fc2049e"
- },
- {
-  "id": "wt",
-  "name": "Wasserturm",
-  "place": "Prenzlauer Berg",
-  "image": "wasserturm.jpg",
-  "alt": "Wasserturm illustrated poster, shown in full",
-  "typeLine": "PRINT · 30 × 40 CM",
-  "wixProductId": "62001c29-9901-4616-ab03-002fbd7a2910"
- },
- {
-  "id": "gs",
-  "name": "Ghost Stations",
-  "place": "Under divided Berlin",
-  "image": "ghost-stations.jpg",
-  "alt": "Ghost Stations illustrated poster, shown in full",
-  "typeLine": "PRINT · 30 × 40 CM",
-  "wixProductId": "6722fada-c4d9-4ac0-ab8a-6e2c6e911823"
- },
- {
-  "id": "tv",
-  "name": "TV Tower",
-  "place": "Alexanderplatz · Mitte",
-  "image": "tv-tower.jpg",
-  "alt": "TV Tower illustrated poster, shown in full",
-  "typeLine": "PRINT · 30 × 40 CM",
-  "wixProductId": "3a236fae-16fe-495e-8031-0e799c1bbf38"
- },
- {
-  "id": "tm",
-  "name": "Tram Map and the Wall",
-  "place": "Citywide · 1989 and 2026",
-  "image": "tram-map.jpg",
-  "alt": "Tram Map and the Wall illustrated poster, shown in full",
-  "typeLine": "PRINT · 30 × 40 CM",
-  "wixProductId": "7c2f473b-ecbd-4a19-9d1f-18a12fa56652"
- },
- {
-  "id": "bp",
-  "name": "Bierpinsel",
-  "place": "Steglitz",
-  "image": "bierpinsel.jpg",
-  "alt": "Bierpinsel illustrated poster, shown in full",
-  "typeLine": "PRINT · 30 × 40 CM",
-  "wixProductId": "2156be29-7e90-4ebc-8b1b-c76633ff09e6"
- },
- {
-  "id": "ok",
-  "name": "Osman Kalın’s Treehouse",
-  "place": "Bethaniendamm · Kreuzberg",
-  "image": "osman-kalin.jpg",
-  "alt": "Osman Kalın’s Treehouse illustrated poster, shown in full",
-  "typeLine": "PRINT · 30 × 40 CM",
-  "wixProductId": "08a254a1-9cdb-4cb0-9c0c-098409bcf230"
- },
- {
-  "id": "ca",
-  "name": "Café Achteck",
-  "place": "Green pavilions across Berlin",
-  "image": "cafe-achteck.jpg",
-  "alt": "Café Achteck illustrated poster, shown in full",
-  "typeLine": "PRINT · 30 × 40 CM",
-  "wixProductId": "065e316b-6066-4e5b-9e98-ade7ec33e696"
- },
- {
-  "id": "pr-friedrichshain-kreuzberg",
-  "name": "Friedrichshain-Kreuzberg",
-  "place": "Oberbaum Bridge",
-  "image": "pr-friedrichshain-kreuzberg.jpg",
-  "alt": "Friedrichshain-Kreuzberg district poster, Oberbaum Bridge, shown in full",
-  "typeLine": "PRINT · 30 × 40 CM",
-  "wixProductId": "3f54173e-df8a-4de3-ba9b-5e2fb29bc3eb"
- },
- {
-  "id": "pr-pankow",
-  "name": "Pankow",
-  "place": "Water Tower",
-  "image": "pr-pankow.jpg",
-  "alt": "Pankow district poster, Water Tower, shown in full",
-  "typeLine": "PRINT · 30 × 40 CM",
-  "wixProductId": "0354f523-ff49-4b73-b5b9-01c1215a1b20"
- },
- {
-  "id": "pr-charlottenburg-wilmersdorf",
-  "name": "Charlottenburg-Wilmersdorf",
-  "place": "Memorial Church",
-  "image": "pr-charlottenburg-wilmersdorf.jpg",
-  "alt": "Charlottenburg-Wilmersdorf district poster, Memorial Church, shown in full",
-  "typeLine": "PRINT · 30 × 40 CM",
-  "wixProductId": "a7ea3f8a-db73-4560-bb54-fdb67e46fbbc"
- },
- {
-  "id": "pr-spandau",
-  "name": "Spandau",
-  "place": "Juliusturm",
-  "image": "pr-spandau.jpg",
-  "alt": "Spandau district poster, Juliusturm, shown in full",
-  "typeLine": "PRINT · 30 × 40 CM",
-  "wixProductId": "48fd50dd-1a5c-4867-b289-620980283cbc"
- },
- {
-  "id": "pr-steglitz-zehlendorf",
-  "name": "Steglitz-Zehlendorf",
-  "place": "Bierpinsel",
-  "image": "pr-steglitz-zehlendorf.jpg",
-  "alt": "Steglitz-Zehlendorf district poster, Bierpinsel, shown in full",
-  "typeLine": "PRINT · 30 × 40 CM",
-  "wixProductId": "39f091f3-a907-4634-8249-096a097cfbeb"
- },
- {
-  "id": "pr-tempelhof-schoeneberg",
-  "name": "Tempelhof-Schöneberg",
-  "place": "Airlift Memorial",
-  "image": "pr-tempelhof-schoeneberg.jpg",
-  "alt": "Tempelhof-Schöneberg district poster, Airlift Memorial, shown in full",
-  "typeLine": "PRINT · 30 × 40 CM",
-  "wixProductId": "08c22a8d-bc0a-4fb6-a57b-b37c59785e98"
- },
- {
-  "id": "pr-neukoelln",
-  "name": "Neukölln",
-  "place": "Town Hall",
-  "image": "pr-neukoelln.jpg",
-  "alt": "Neukölln district poster, Town Hall, shown in full",
-  "typeLine": "PRINT · 30 × 40 CM",
-  "wixProductId": "79862e25-1921-4e8f-9ae8-1334ae133a7e"
- },
- {
-  "id": "pr-treptow-koepenick",
-  "name": "Treptow-Köpenick",
-  "place": "Köpenick Town Hall",
-  "image": "pr-treptow-koepenick.jpg",
-  "alt": "Treptow-Köpenick district poster, Köpenick Town Hall, shown in full",
-  "typeLine": "PRINT · 30 × 40 CM",
-  "wixProductId": "d035e581-eaaf-4ee1-a16a-4c76c106029b"
- },
- {
-  "id": "pr-marzahn-hellersdorf",
-  "name": "Marzahn-Hellersdorf",
-  "place": "Windmill",
-  "image": "pr-marzahn-hellersdorf.jpg",
-  "alt": "Marzahn-Hellersdorf district poster, Windmill, shown in full",
-  "typeLine": "PRINT · 30 × 40 CM",
-  "wixProductId": "ed3108d5-120e-4145-b998-d4277ebc9ca9"
- },
- {
-  "id": "pr-lichtenberg",
-  "name": "Lichtenberg",
-  "place": "Friedrichsfelde Palace",
-  "image": "pr-lichtenberg.jpg",
-  "alt": "Lichtenberg district poster, Friedrichsfelde Palace, shown in full",
-  "typeLine": "PRINT · 30 × 40 CM",
-  "wixProductId": "a9fd57b3-ea60-4f4a-a8bf-07e6dc7e774f"
- },
- {
-  "id": "pr-reinickendorf",
-  "name": "Reinickendorf",
-  "place": "Borsigtor",
-  "image": "pr-reinickendorf.jpg",
-  "alt": "Reinickendorf district poster, Borsigtor, shown in full",
-  "typeLine": "PRINT · 30 × 40 CM",
-  "wixProductId": "f00ec7b9-f51d-4602-9a14-250fae7bd563"
- },
- {
-  "id": "pr-berlin-2027-wall-calendar",
-  "name": "Berlin 2027 Wall Calendar",
-  "place": "12 districts · A3",
-  "image": "pr-berlin-2027-wall-calendar.jpg",
-  "alt": "Berlin 2027 wall calendar, A3, cover with district illustrations",
-  "typeLine": "WALL CALENDAR · A3",
-  "wixProductId": "54584152-d3f1-4197-86e0-1c4c99ba5ccf"
- },
- {
-  "id": "trio",
-  "name": "Berlin Audio Trio",
-  "place": "Berlin Wall · Hidden Berlin · Medieval Berlin",
-  "image": "audio-trio.jpg",
-  "alt": "Anhalter Bahnhof portico, a stop on the Hidden Berlin audio walk",
-  "typeLine": "AUDIO WALKS · 3 ROUTES",
-  "wixProductId": null,
-  "externalSourceKey": "berlin-audio-trio-bundle",
-  "description": "Three self-guided walks: 45 audio chapters, MP3 downloads and route guides. Listen on your phone as you walk.",
-  "visualOverlay": "audio-phone-headphones-v1.png",
-  "imageFit": "cover"
- },
- {
-  "id": "dl-world-clock",
-  "name": "World Clock Printable Poster",
-  "place": "Alexanderplatz · Mitte",
-  "image": "dl-world-clock.jpg",
-  "alt": "World Clock Printable Poster, preview of the artwork",
-  "typeLine": "DIGITAL DOWNLOAD · 5 PRINT RATIOS",
-  "wixProductId": "c5596e7b-07e7-94ab-9961-df5f5dac3113",
-  "kind": "digital",
-  "group": "landmarks"
- },
- {
-  "id": "dl-bierpinsel",
-  "name": "Bierpinsel Printable Poster",
-  "place": "Steglitz",
-  "image": "dl-bierpinsel.jpg",
-  "alt": "Bierpinsel Printable Poster, preview of the artwork",
-  "typeLine": "DIGITAL DOWNLOAD · 5 PRINT RATIOS",
-  "wixProductId": "d5850545-47f0-e05d-066c-5da5667fe4a9",
-  "kind": "digital",
-  "group": "landmarks"
- },
- {
-  "id": "dl-cafe-achteck",
-  "name": "Café Achteck Printable Poster",
-  "place": "Green pavilions across Berlin",
-  "image": "dl-cafe-achteck.jpg",
-  "alt": "Café Achteck Printable Poster, preview of the artwork",
-  "typeLine": "DIGITAL DOWNLOAD · 5 PRINT RATIOS",
-  "wixProductId": "5de23d66-1570-9111-f62c-a5854b79ca5d",
-  "kind": "digital",
-  "group": "landmarks"
- },
- {
-  "id": "dl-wasserturm",
-  "name": "Wasserturm Printable Poster",
-  "place": "Prenzlauer Berg",
-  "image": "dl-wasserturm.jpg",
-  "alt": "Wasserturm Printable Poster, preview of the artwork",
-  "typeLine": "DIGITAL DOWNLOAD · 5 PRINT RATIOS",
-  "wixProductId": "ae3fda47-c3aa-ad64-2134-0307dc0510e4",
-  "kind": "digital",
-  "group": "landmarks"
- },
- {
-  "id": "dl-tv-tower",
-  "name": "TV Tower Printable Poster",
-  "place": "Alexanderplatz · Mitte",
-  "image": "dl-tv-tower.jpg",
-  "alt": "TV Tower Printable Poster, preview of the artwork",
-  "typeLine": "DIGITAL DOWNLOAD · 5 PRINT RATIOS",
-  "wixProductId": "2bddb91c-7218-f0fa-279e-22b097b48407",
-  "kind": "digital",
-  "group": "landmarks"
- },
- {
-  "id": "dl-all-12-berlin-districts-set",
-  "name": "All 12 Berlin Districts Printable Set",
-  "place": "12 district posters",
-  "image": "dl-all-12-berlin-districts-set.jpg",
-  "alt": "All 12 Berlin Districts Printable Set, preview of the artwork",
-  "typeLine": "DIGITAL DOWNLOAD · 12 POSTERS · 5 RATIOS",
-  "wixProductId": "5ad8b924-c473-24a7-e68b-8b8a3e395b80",
-  "kind": "digital",
-  "group": "sets"
- },
- {
-  "id": "dl-berlin-landmarks-set-of-5",
-  "name": "Berlin Landmarks Printable Set of 5",
-  "place": "5 landmark posters",
-  "image": "dl-berlin-landmarks-set-of-5.jpg",
-  "alt": "Berlin Landmarks Printable Set of 5, preview of the artwork",
-  "typeLine": "DIGITAL DOWNLOAD · 5 POSTERS · 5 RATIOS",
-  "wixProductId": "8566a144-d13c-ab44-f73b-0aba7fedbfd5",
-  "kind": "digital",
-  "group": "sets"
- },
- {
-  "id": "dl-berlin-icons-set-of-3",
-  "name": "Berlin Icons Printable Set of 3",
-  "place": "World Clock · TV Tower · Oberbaum Bridge",
-  "image": "dl-berlin-icons-set-of-3.jpg",
-  "alt": "Berlin Icons Printable Set of 3, preview of the artwork",
-  "typeLine": "DIGITAL DOWNLOAD · 3 POSTERS · 5 RATIOS",
-  "wixProductId": "69fabc6e-f2fb-e0e9-67dc-cef78cffc44d",
-  "kind": "digital",
-  "group": "sets"
- },
- {
-  "id": "dl-friedrichshain-kreuzberg",
-  "name": "Friedrichshain-Kreuzberg Printable Poster",
-  "place": "Oberbaum Bridge",
-  "image": "dl-friedrichshain-kreuzberg.jpg",
-  "alt": "Friedrichshain-Kreuzberg Printable Poster, preview of the artwork",
-  "typeLine": "DIGITAL DOWNLOAD · 5 PRINT RATIOS",
-  "wixProductId": "587ee282-0b93-22f6-69fc-bf34d46f23aa",
-  "kind": "digital",
-  "group": "districts"
- },
- {
-  "id": "dl-pankow",
-  "name": "Pankow Printable Poster",
-  "place": "Water Tower",
-  "image": "dl-pankow.jpg",
-  "alt": "Pankow Printable Poster, preview of the artwork",
-  "typeLine": "DIGITAL DOWNLOAD · 5 PRINT RATIOS",
-  "wixProductId": "9b072e24-aaca-bb16-ce3b-7d60f8bcf1a6",
-  "kind": "digital",
-  "group": "districts"
- },
- {
-  "id": "dl-charlottenburg-wilmersdorf",
-  "name": "Charlottenburg-Wilmersdorf Printable Poster",
-  "place": "Memorial Church",
-  "image": "dl-charlottenburg-wilmersdorf.jpg",
-  "alt": "Charlottenburg-Wilmersdorf Printable Poster, preview of the artwork",
-  "typeLine": "DIGITAL DOWNLOAD · 5 PRINT RATIOS",
-  "wixProductId": "37fafd04-bf6d-4175-7f07-ec0b47bb46b3",
-  "kind": "digital",
-  "group": "districts"
- },
- {
-  "id": "dl-spandau",
-  "name": "Spandau Printable Poster",
-  "place": "Juliusturm",
-  "image": "dl-spandau.jpg",
-  "alt": "Spandau Printable Poster, preview of the artwork",
-  "typeLine": "DIGITAL DOWNLOAD · 5 PRINT RATIOS",
-  "wixProductId": "b965e7a4-fc1f-8ab3-d680-7d6e15de1f5f",
-  "kind": "digital",
-  "group": "districts"
- },
- {
-  "id": "dl-steglitz-zehlendorf",
-  "name": "Steglitz-Zehlendorf Printable Poster",
-  "place": "Bierpinsel",
-  "image": "dl-steglitz-zehlendorf.jpg",
-  "alt": "Steglitz-Zehlendorf Printable Poster, preview of the artwork",
-  "typeLine": "DIGITAL DOWNLOAD · 5 PRINT RATIOS",
-  "wixProductId": "84e7492d-e5c4-6637-4ce0-2b76e3ef005d",
-  "kind": "digital",
-  "group": "districts"
- },
- {
-  "id": "dl-tempelhof-schoeneberg",
-  "name": "Tempelhof-Schöneberg Printable Poster",
-  "place": "Airlift Memorial",
-  "image": "dl-tempelhof-schoeneberg.jpg",
-  "alt": "Tempelhof-Schöneberg Printable Poster, preview of the artwork",
-  "typeLine": "DIGITAL DOWNLOAD · 5 PRINT RATIOS",
-  "wixProductId": "a22bddc7-3731-1482-aad9-4d85995522ac",
-  "kind": "digital",
-  "group": "districts"
- },
- {
-  "id": "dl-neukoelln",
-  "name": "Neukölln Printable Poster",
-  "place": "Town Hall",
-  "image": "dl-neukoelln.jpg",
-  "alt": "Neukölln Printable Poster, preview of the artwork",
-  "typeLine": "DIGITAL DOWNLOAD · 5 PRINT RATIOS",
-  "wixProductId": "004badf9-5cbb-d2e3-fa42-1a6a9ce6c654",
-  "kind": "digital",
-  "group": "districts"
- },
- {
-  "id": "dl-treptow-koepenick",
-  "name": "Treptow-Köpenick Printable Poster",
-  "place": "Köpenick Town Hall",
-  "image": "dl-treptow-koepenick.jpg",
-  "alt": "Treptow-Köpenick Printable Poster, preview of the artwork",
-  "typeLine": "DIGITAL DOWNLOAD · 5 PRINT RATIOS",
-  "wixProductId": "cece05f1-8b5b-ce12-3d60-5e6b963225b4",
-  "kind": "digital",
-  "group": "districts"
- },
- {
-  "id": "dl-marzahn-hellersdorf",
-  "name": "Marzahn-Hellersdorf Printable Poster",
-  "place": "Windmill",
-  "image": "dl-marzahn-hellersdorf.jpg",
-  "alt": "Marzahn-Hellersdorf Printable Poster, preview of the artwork",
-  "typeLine": "DIGITAL DOWNLOAD · 5 PRINT RATIOS",
-  "wixProductId": "1c6745e0-dfef-af13-3791-8bb8313ee15e",
-  "kind": "digital",
-  "group": "districts"
- },
- {
-  "id": "dl-lichtenberg",
-  "name": "Lichtenberg Printable Poster",
-  "place": "Friedrichsfelde Palace",
-  "image": "dl-lichtenberg.jpg",
-  "alt": "Lichtenberg Printable Poster, preview of the artwork",
-  "typeLine": "DIGITAL DOWNLOAD · 5 PRINT RATIOS",
-  "wixProductId": "7a64328a-e189-7411-190e-99f3ce8fa9b9",
-  "kind": "digital",
-  "group": "districts"
- },
- {
-  "id": "dl-reinickendorf",
-  "name": "Reinickendorf Printable Poster",
-  "place": "Borsigtor",
-  "image": "dl-reinickendorf.jpg",
-  "alt": "Reinickendorf Printable Poster, preview of the artwork",
-  "typeLine": "DIGITAL DOWNLOAD · 5 PRINT RATIOS",
-  "wixProductId": "bfcbcb8b-3075-2ba8-76b2-7b8c5ff0bd76",
-  "kind": "digital",
-  "group": "districts"
- },
- {
-  "id": "dl-berlin-uhr",
-  "name": "Berlin-Uhr Printable",
-  "place": "Europa-Center · City West",
-  "image": "dl-berlin-uhr.jpg",
-  "alt": "Berlin-Uhr Printable, preview of the artwork",
-  "typeLine": "DIGITAL DOWNLOAD · 5 PRINT RATIOS",
-  "wixProductId": "bf9a00ff-c6b4-a8a8-d263-93645924a2bc",
-  "kind": "digital",
-  "group": "stories"
- },
- {
-  "id": "dl-berlin-tram-map",
-  "name": "Berlin Tram Map Printable",
-  "place": "Citywide · 1989 and 2026",
-  "image": "dl-berlin-tram-map.jpg",
-  "alt": "Berlin Tram Map Printable, preview of the artwork",
-  "typeLine": "DIGITAL DOWNLOAD · 5 PRINT RATIOS",
-  "wixProductId": "e4e7e498-0734-f0c8-16c2-f1664489fb11",
-  "kind": "digital",
-  "group": "stories"
- },
- {
-  "id": "dl-ghost-stations",
-  "name": "Ghost Stations Printable",
-  "place": "Under divided Berlin",
-  "image": "dl-ghost-stations.jpg",
-  "alt": "Ghost Stations Printable, preview of the artwork",
-  "typeLine": "DIGITAL DOWNLOAD · 5 PRINT RATIOS",
-  "wixProductId": "ee69ccf1-f5ac-288b-bdab-f25ecdec8674",
-  "kind": "digital",
-  "group": "stories"
- },
- {
-  "id": "dl-osman-kalin-treehouse",
-  "name": "Osman Kalın’s Treehouse Printable",
-  "place": "Bethaniendamm · Kreuzberg",
-  "image": "dl-osman-kalin-treehouse.jpg",
-  "alt": "Osman Kalın’s Treehouse Printable, preview of the artwork",
-  "typeLine": "DIGITAL DOWNLOAD · 5 PRINT RATIOS",
-  "wixProductId": "2149e001-c835-73b9-1bfd-c087d48c625e",
-  "kind": "digital",
-  "group": "stories"
- },
- {
-  "id": "dl-berlin-2027-printable-calendar",
-  "name": "Berlin 2027 Printable Calendar",
-  "place": "12 districts · 12 months",
-  "image": "dl-berlin-2027-calendar.jpg",
-  "alt": "Berlin 2027 Printable Calendar, preview of the artwork",
-  "typeLine": "DIGITAL DOWNLOAD · PDF · A4, A3, US LETTER",
-  "wixProductId": "8022f602-c244-954d-7744-b56ce8a9a71d",
-  "kind": "digital",
-  "group": "calendars"
- }
+  {
+    "id": "wc",
+    "name": "World Clock",
+    "place": "Alexanderplatz · Mitte",
+    "image": "world-clock.jpg",
+    "alt": "World Clock illustrated poster, shown in full",
+    "typeLine": "PRINT · 30 × 40 CM",
+    "wixProductId": "1f9ad3cb-74f8-48ac-ac53-f41e71a09610"
+  },
+  {
+    "id": "bu",
+    "name": "Berlin-Uhr",
+    "place": "Europa-Center · City West",
+    "image": "berlin-uhr.jpg",
+    "alt": "Berlin-Uhr illustrated poster, shown in full",
+    "typeLine": "PRINT · 30 × 40 CM",
+    "wixProductId": "1e5af6a4-4628-4f6a-adfb-744e2fc2049e"
+  },
+  {
+    "id": "wt",
+    "name": "Wasserturm",
+    "place": "Prenzlauer Berg",
+    "image": "wasserturm.jpg",
+    "alt": "Wasserturm illustrated poster, shown in full",
+    "typeLine": "PRINT · 30 × 40 CM",
+    "wixProductId": "62001c29-9901-4616-ab03-002fbd7a2910"
+  },
+  {
+    "id": "gs",
+    "name": "Ghost Stations",
+    "place": "Under divided Berlin",
+    "image": "ghost-stations.jpg",
+    "alt": "Ghost Stations illustrated poster, shown in full",
+    "typeLine": "PRINT · 30 × 40 CM",
+    "wixProductId": "6722fada-c4d9-4ac0-ab8a-6e2c6e911823"
+  },
+  {
+    "id": "tv",
+    "name": "TV Tower",
+    "place": "Alexanderplatz · Mitte",
+    "image": "tv-tower.jpg",
+    "alt": "TV Tower illustrated poster, shown in full",
+    "typeLine": "PRINT · 30 × 40 CM",
+    "wixProductId": "3a236fae-16fe-495e-8031-0e799c1bbf38"
+  },
+  {
+    "id": "tm",
+    "name": "Tram Map and the Wall",
+    "place": "Citywide · 1989 and 2026",
+    "image": "tram-map.jpg",
+    "alt": "Tram Map and the Wall illustrated poster, shown in full",
+    "typeLine": "PRINT · 30 × 40 CM",
+    "wixProductId": "7c2f473b-ecbd-4a19-9d1f-18a12fa56652"
+  },
+  {
+    "id": "bp",
+    "name": "Bierpinsel",
+    "place": "Steglitz",
+    "image": "bierpinsel.jpg",
+    "alt": "Bierpinsel illustrated poster, shown in full",
+    "typeLine": "PRINT · 30 × 40 CM",
+    "wixProductId": "2156be29-7e90-4ebc-8b1b-c76633ff09e6"
+  },
+  {
+    "id": "ok",
+    "name": "Osman Kalın’s Treehouse",
+    "place": "Bethaniendamm · Kreuzberg",
+    "image": "osman-kalin.jpg",
+    "alt": "Osman Kalın’s Treehouse illustrated poster, shown in full",
+    "typeLine": "PRINT · 30 × 40 CM",
+    "wixProductId": "08a254a1-9cdb-4cb0-9c0c-098409bcf230"
+  },
+  {
+    "id": "ca",
+    "name": "Café Achteck",
+    "place": "Green pavilions across Berlin",
+    "image": "cafe-achteck.jpg",
+    "alt": "Café Achteck illustrated poster, shown in full",
+    "typeLine": "PRINT · 30 × 40 CM",
+    "wixProductId": "065e316b-6066-4e5b-9e98-ade7ec33e696"
+  },
+  {
+    "id": "pr-friedrichshain-kreuzberg",
+    "name": "Friedrichshain-Kreuzberg",
+    "place": "Oberbaum Bridge",
+    "image": "pr-friedrichshain-kreuzberg.jpg",
+    "alt": "Friedrichshain-Kreuzberg district poster, Oberbaum Bridge, shown in full",
+    "typeLine": "PRINT · 30 × 40 CM",
+    "wixProductId": "3f54173e-df8a-4de3-ba9b-5e2fb29bc3eb"
+  },
+  {
+    "id": "pr-pankow",
+    "name": "Pankow",
+    "place": "Water Tower",
+    "image": "pr-pankow.jpg",
+    "alt": "Pankow district poster, Water Tower, shown in full",
+    "typeLine": "PRINT · 30 × 40 CM",
+    "wixProductId": "0354f523-ff49-4b73-b5b9-01c1215a1b20"
+  },
+  {
+    "id": "pr-charlottenburg-wilmersdorf",
+    "name": "Charlottenburg-Wilmersdorf",
+    "place": "Memorial Church",
+    "image": "pr-charlottenburg-wilmersdorf.jpg",
+    "alt": "Charlottenburg-Wilmersdorf district poster, Memorial Church, shown in full",
+    "typeLine": "PRINT · 30 × 40 CM",
+    "wixProductId": "a7ea3f8a-db73-4560-bb54-fdb67e46fbbc"
+  },
+  {
+    "id": "pr-spandau",
+    "name": "Spandau",
+    "place": "Juliusturm",
+    "image": "pr-spandau.jpg",
+    "alt": "Spandau district poster, Juliusturm, shown in full",
+    "typeLine": "PRINT · 30 × 40 CM",
+    "wixProductId": "48fd50dd-1a5c-4867-b289-620980283cbc"
+  },
+  {
+    "id": "pr-steglitz-zehlendorf",
+    "name": "Steglitz-Zehlendorf",
+    "place": "Bierpinsel",
+    "image": "pr-steglitz-zehlendorf.jpg",
+    "alt": "Steglitz-Zehlendorf district poster, Bierpinsel, shown in full",
+    "typeLine": "PRINT · 30 × 40 CM",
+    "wixProductId": "39f091f3-a907-4634-8249-096a097cfbeb"
+  },
+  {
+    "id": "pr-tempelhof-schoeneberg",
+    "name": "Tempelhof-Schöneberg",
+    "place": "Airlift Memorial",
+    "image": "pr-tempelhof-schoeneberg.jpg",
+    "alt": "Tempelhof-Schöneberg district poster, Airlift Memorial, shown in full",
+    "typeLine": "PRINT · 30 × 40 CM",
+    "wixProductId": "08c22a8d-bc0a-4fb6-a57b-b37c59785e98"
+  },
+  {
+    "id": "pr-neukoelln",
+    "name": "Neukölln",
+    "place": "Town Hall",
+    "image": "pr-neukoelln.jpg",
+    "alt": "Neukölln district poster, Town Hall, shown in full",
+    "typeLine": "PRINT · 30 × 40 CM",
+    "wixProductId": "79862e25-1921-4e8f-9ae8-1334ae133a7e"
+  },
+  {
+    "id": "pr-treptow-koepenick",
+    "name": "Treptow-Köpenick",
+    "place": "Köpenick Town Hall",
+    "image": "pr-treptow-koepenick.jpg",
+    "alt": "Treptow-Köpenick district poster, Köpenick Town Hall, shown in full",
+    "typeLine": "PRINT · 30 × 40 CM",
+    "wixProductId": "d035e581-eaaf-4ee1-a16a-4c76c106029b"
+  },
+  {
+    "id": "pr-marzahn-hellersdorf",
+    "name": "Marzahn-Hellersdorf",
+    "place": "Windmill",
+    "image": "pr-marzahn-hellersdorf.jpg",
+    "alt": "Marzahn-Hellersdorf district poster, Windmill, shown in full",
+    "typeLine": "PRINT · 30 × 40 CM",
+    "wixProductId": "ed3108d5-120e-4145-b998-d4277ebc9ca9"
+  },
+  {
+    "id": "pr-lichtenberg",
+    "name": "Lichtenberg",
+    "place": "Friedrichsfelde Palace",
+    "image": "pr-lichtenberg.jpg",
+    "alt": "Lichtenberg district poster, Friedrichsfelde Palace, shown in full",
+    "typeLine": "PRINT · 30 × 40 CM",
+    "wixProductId": "a9fd57b3-ea60-4f4a-a8bf-07e6dc7e774f"
+  },
+  {
+    "id": "pr-reinickendorf",
+    "name": "Reinickendorf",
+    "place": "Borsigtor",
+    "image": "pr-reinickendorf.jpg",
+    "alt": "Reinickendorf district poster, Borsigtor, shown in full",
+    "typeLine": "PRINT · 30 × 40 CM",
+    "wixProductId": "f00ec7b9-f51d-4602-9a14-250fae7bd563"
+  },
+  {
+    "id": "pr-berlin-2027-wall-calendar",
+    "name": "Berlin 2027 Wall Calendar",
+    "place": "12 districts · A3",
+    "image": "pr-berlin-2027-wall-calendar.jpg",
+    "alt": "Berlin 2027 wall calendar, A3, cover with district illustrations",
+    "typeLine": "WALL CALENDAR · A3",
+    "wixProductId": "54584152-d3f1-4197-86e0-1c4c99ba5ccf"
+  },
+  {
+    "id": "trio",
+    "name": "Berlin Audio Trio",
+    "place": "Berlin Wall · Hidden Berlin · Medieval Berlin",
+    "image": "audio-trio.jpg",
+    "alt": "Anhalter Bahnhof portico, a stop on the Hidden Berlin audio walk",
+    "typeLine": "AUDIO WALKS · 3 ROUTES",
+    "wixProductId": null,
+    "externalSourceKey": "berlin-audio-trio-bundle",
+    "description": "Three self-guided walks: 45 audio chapters, MP3 downloads and route guides. Listen on your phone as you walk.",
+    "visualOverlay": "audio-phone-headphones-v1.png",
+    "imageFit": "cover"
+  },
+  {
+    "id": "dl-world-clock",
+    "name": "World Clock Printable Poster",
+    "place": "Alexanderplatz · Mitte",
+    "image": "dl-world-clock.jpg",
+    "alt": "World Clock Printable Poster, preview of the artwork",
+    "typeLine": "DIGITAL DOWNLOAD · 5 PRINT RATIOS",
+    "wixProductId": "c5596e7b-07e7-94ab-9961-df5f5dac3113",
+    "kind": "digital",
+    "group": "landmarks"
+  },
+  {
+    "id": "dl-bierpinsel",
+    "name": "Bierpinsel Printable Poster",
+    "place": "Steglitz",
+    "image": "dl-bierpinsel.jpg",
+    "alt": "Bierpinsel Printable Poster, preview of the artwork",
+    "typeLine": "DIGITAL DOWNLOAD · 5 PRINT RATIOS",
+    "wixProductId": "d5850545-47f0-e05d-066c-5da5667fe4a9",
+    "kind": "digital",
+    "group": "landmarks"
+  },
+  {
+    "id": "dl-cafe-achteck",
+    "name": "Café Achteck Printable Poster",
+    "place": "Green pavilions across Berlin",
+    "image": "dl-cafe-achteck.jpg",
+    "alt": "Café Achteck Printable Poster, preview of the artwork",
+    "typeLine": "DIGITAL DOWNLOAD · 5 PRINT RATIOS",
+    "wixProductId": "5de23d66-1570-9111-f62c-a5854b79ca5d",
+    "kind": "digital",
+    "group": "landmarks"
+  },
+  {
+    "id": "dl-wasserturm",
+    "name": "Wasserturm Printable Poster",
+    "place": "Prenzlauer Berg",
+    "image": "dl-wasserturm.jpg",
+    "alt": "Wasserturm Printable Poster, preview of the artwork",
+    "typeLine": "DIGITAL DOWNLOAD · 5 PRINT RATIOS",
+    "wixProductId": "ae3fda47-c3aa-ad64-2134-0307dc0510e4",
+    "kind": "digital",
+    "group": "landmarks"
+  },
+  {
+    "id": "dl-tv-tower",
+    "name": "TV Tower Printable Poster",
+    "place": "Alexanderplatz · Mitte",
+    "image": "dl-tv-tower.jpg",
+    "alt": "TV Tower Printable Poster, preview of the artwork",
+    "typeLine": "DIGITAL DOWNLOAD · 5 PRINT RATIOS",
+    "wixProductId": "2bddb91c-7218-f0fa-279e-22b097b48407",
+    "kind": "digital",
+    "group": "landmarks"
+  },
+  {
+    "id": "dl-all-12-berlin-districts-set",
+    "name": "All 12 Berlin Districts Printable Set",
+    "place": "12 district posters",
+    "image": "dl-all-12-berlin-districts-set.jpg",
+    "alt": "All 12 Berlin Districts Printable Set, preview of the artwork",
+    "typeLine": "DIGITAL DOWNLOAD · 12 POSTERS · 5 RATIOS",
+    "wixProductId": "5ad8b924-c473-24a7-e68b-8b8a3e395b80",
+    "kind": "digital",
+    "group": "sets"
+  },
+  {
+    "id": "dl-berlin-landmarks-set-of-5",
+    "name": "Berlin Landmarks Printable Set of 5",
+    "place": "5 landmark posters",
+    "image": "dl-berlin-landmarks-set-of-5.jpg",
+    "alt": "Berlin Landmarks Printable Set of 5, preview of the artwork",
+    "typeLine": "DIGITAL DOWNLOAD · 5 POSTERS · 5 RATIOS",
+    "wixProductId": "8566a144-d13c-ab44-f73b-0aba7fedbfd5",
+    "kind": "digital",
+    "group": "sets"
+  },
+  {
+    "id": "dl-berlin-icons-set-of-3",
+    "name": "Berlin Icons Printable Set of 3",
+    "place": "World Clock · TV Tower · Oberbaum Bridge",
+    "image": "dl-berlin-icons-set-of-3.jpg",
+    "alt": "Berlin Icons Printable Set of 3, preview of the artwork",
+    "typeLine": "DIGITAL DOWNLOAD · 3 POSTERS · 5 RATIOS",
+    "wixProductId": "69fabc6e-f2fb-e0e9-67dc-cef78cffc44d",
+    "kind": "digital",
+    "group": "sets"
+  },
+  {
+    "id": "dl-friedrichshain-kreuzberg",
+    "name": "Friedrichshain-Kreuzberg Printable Poster",
+    "place": "Oberbaum Bridge",
+    "image": "dl-friedrichshain-kreuzberg.jpg",
+    "alt": "Friedrichshain-Kreuzberg Printable Poster, preview of the artwork",
+    "typeLine": "DIGITAL DOWNLOAD · 5 PRINT RATIOS",
+    "wixProductId": "587ee282-0b93-22f6-69fc-bf34d46f23aa",
+    "kind": "digital",
+    "group": "districts"
+  },
+  {
+    "id": "dl-pankow",
+    "name": "Pankow Printable Poster",
+    "place": "Water Tower",
+    "image": "dl-pankow.jpg",
+    "alt": "Pankow Printable Poster, preview of the artwork",
+    "typeLine": "DIGITAL DOWNLOAD · 5 PRINT RATIOS",
+    "wixProductId": "9b072e24-aaca-bb16-ce3b-7d60f8bcf1a6",
+    "kind": "digital",
+    "group": "districts"
+  },
+  {
+    "id": "dl-charlottenburg-wilmersdorf",
+    "name": "Charlottenburg-Wilmersdorf Printable Poster",
+    "place": "Memorial Church",
+    "image": "dl-charlottenburg-wilmersdorf.jpg",
+    "alt": "Charlottenburg-Wilmersdorf Printable Poster, preview of the artwork",
+    "typeLine": "DIGITAL DOWNLOAD · 5 PRINT RATIOS",
+    "wixProductId": "37fafd04-bf6d-4175-7f07-ec0b47bb46b3",
+    "kind": "digital",
+    "group": "districts"
+  },
+  {
+    "id": "dl-spandau",
+    "name": "Spandau Printable Poster",
+    "place": "Juliusturm",
+    "image": "dl-spandau.jpg",
+    "alt": "Spandau Printable Poster, preview of the artwork",
+    "typeLine": "DIGITAL DOWNLOAD · 5 PRINT RATIOS",
+    "wixProductId": "b965e7a4-fc1f-8ab3-d680-7d6e15de1f5f",
+    "kind": "digital",
+    "group": "districts"
+  },
+  {
+    "id": "dl-steglitz-zehlendorf",
+    "name": "Steglitz-Zehlendorf Printable Poster",
+    "place": "Bierpinsel",
+    "image": "dl-steglitz-zehlendorf.jpg",
+    "alt": "Steglitz-Zehlendorf Printable Poster, preview of the artwork",
+    "typeLine": "DIGITAL DOWNLOAD · 5 PRINT RATIOS",
+    "wixProductId": "84e7492d-e5c4-6637-4ce0-2b76e3ef005d",
+    "kind": "digital",
+    "group": "districts"
+  },
+  {
+    "id": "dl-tempelhof-schoeneberg",
+    "name": "Tempelhof-Schöneberg Printable Poster",
+    "place": "Airlift Memorial",
+    "image": "dl-tempelhof-schoeneberg.jpg",
+    "alt": "Tempelhof-Schöneberg Printable Poster, preview of the artwork",
+    "typeLine": "DIGITAL DOWNLOAD · 5 PRINT RATIOS",
+    "wixProductId": "a22bddc7-3731-1482-aad9-4d85995522ac",
+    "kind": "digital",
+    "group": "districts"
+  },
+  {
+    "id": "dl-neukoelln",
+    "name": "Neukölln Printable Poster",
+    "place": "Town Hall",
+    "image": "dl-neukoelln.jpg",
+    "alt": "Neukölln Printable Poster, preview of the artwork",
+    "typeLine": "DIGITAL DOWNLOAD · 5 PRINT RATIOS",
+    "wixProductId": "004badf9-5cbb-d2e3-fa42-1a6a9ce6c654",
+    "kind": "digital",
+    "group": "districts"
+  },
+  {
+    "id": "dl-treptow-koepenick",
+    "name": "Treptow-Köpenick Printable Poster",
+    "place": "Köpenick Town Hall",
+    "image": "dl-treptow-koepenick.jpg",
+    "alt": "Treptow-Köpenick Printable Poster, preview of the artwork",
+    "typeLine": "DIGITAL DOWNLOAD · 5 PRINT RATIOS",
+    "wixProductId": "cece05f1-8b5b-ce12-3d60-5e6b963225b4",
+    "kind": "digital",
+    "group": "districts"
+  },
+  {
+    "id": "dl-marzahn-hellersdorf",
+    "name": "Marzahn-Hellersdorf Printable Poster",
+    "place": "Windmill",
+    "image": "dl-marzahn-hellersdorf.jpg",
+    "alt": "Marzahn-Hellersdorf Printable Poster, preview of the artwork",
+    "typeLine": "DIGITAL DOWNLOAD · 5 PRINT RATIOS",
+    "wixProductId": "1c6745e0-dfef-af13-3791-8bb8313ee15e",
+    "kind": "digital",
+    "group": "districts"
+  },
+  {
+    "id": "dl-lichtenberg",
+    "name": "Lichtenberg Printable Poster",
+    "place": "Friedrichsfelde Palace",
+    "image": "dl-lichtenberg.jpg",
+    "alt": "Lichtenberg Printable Poster, preview of the artwork",
+    "typeLine": "DIGITAL DOWNLOAD · 5 PRINT RATIOS",
+    "wixProductId": "7a64328a-e189-7411-190e-99f3ce8fa9b9",
+    "kind": "digital",
+    "group": "districts"
+  },
+  {
+    "id": "dl-reinickendorf",
+    "name": "Reinickendorf Printable Poster",
+    "place": "Borsigtor",
+    "image": "dl-reinickendorf.jpg",
+    "alt": "Reinickendorf Printable Poster, preview of the artwork",
+    "typeLine": "DIGITAL DOWNLOAD · 5 PRINT RATIOS",
+    "wixProductId": "bfcbcb8b-3075-2ba8-76b2-7b8c5ff0bd76",
+    "kind": "digital",
+    "group": "districts"
+  },
+  {
+    "id": "dl-berlin-uhr",
+    "name": "Berlin-Uhr Printable",
+    "place": "Europa-Center · City West",
+    "image": "dl-berlin-uhr.jpg",
+    "alt": "Berlin-Uhr Printable, preview of the artwork",
+    "typeLine": "DIGITAL DOWNLOAD · 5 PRINT RATIOS",
+    "wixProductId": "bf9a00ff-c6b4-a8a8-d263-93645924a2bc",
+    "kind": "digital",
+    "group": "stories"
+  },
+  {
+    "id": "dl-berlin-tram-map",
+    "name": "Berlin Tram Map Printable",
+    "place": "Citywide · 1989 and 2026",
+    "image": "dl-berlin-tram-map.jpg",
+    "alt": "Berlin Tram Map Printable, preview of the artwork",
+    "typeLine": "DIGITAL DOWNLOAD · 5 PRINT RATIOS",
+    "wixProductId": "e4e7e498-0734-f0c8-16c2-f1664489fb11",
+    "kind": "digital",
+    "group": "stories"
+  },
+  {
+    "id": "dl-ghost-stations",
+    "name": "Ghost Stations Printable",
+    "place": "Under divided Berlin",
+    "image": "dl-ghost-stations.jpg",
+    "alt": "Ghost Stations Printable, preview of the artwork",
+    "typeLine": "DIGITAL DOWNLOAD · 5 PRINT RATIOS",
+    "wixProductId": "ee69ccf1-f5ac-288b-bdab-f25ecdec8674",
+    "kind": "digital",
+    "group": "stories"
+  },
+  {
+    "id": "dl-osman-kalin-treehouse",
+    "name": "Osman Kalın’s Treehouse Printable",
+    "place": "Bethaniendamm · Kreuzberg",
+    "image": "dl-osman-kalin-treehouse.jpg",
+    "alt": "Osman Kalın’s Treehouse Printable, preview of the artwork",
+    "typeLine": "DIGITAL DOWNLOAD · 5 PRINT RATIOS",
+    "wixProductId": "2149e001-c835-73b9-1bfd-c087d48c625e",
+    "kind": "digital",
+    "group": "stories"
+  },
+  {
+    "id": "dl-berlin-2027-printable-calendar",
+    "name": "Berlin 2027 Printable Calendar",
+    "place": "12 districts · 12 months",
+    "image": "dl-berlin-2027-calendar.jpg",
+    "alt": "Berlin 2027 Printable Calendar, preview of the artwork",
+    "typeLine": "DIGITAL DOWNLOAD · PDF · A4, A3, US LETTER",
+    "wixProductId": "8022f602-c244-954d-7744-b56ce8a9a71d",
+    "kind": "digital",
+    "group": "calendars"
+  },
+  {
+    "id": "ys",
+    "name": "Your Berlin Street in 1928",
+    "place": "Your own address · c. 1928 and today",
+    "image": "ys-sample.jpg",
+    "alt": "Example personalised aerial print: a Berlin square in 1928 and today",
+    "typeLine": "PERSONALISED PRINT · 30 × 40 CM",
+    "wixProductId": "8aaf5412-7f21-42c7-acfb-85dd8417d68c"
+  }
 ]

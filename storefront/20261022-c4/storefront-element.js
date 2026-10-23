@@ -67,7 +67,7 @@
     'tv-tower-printable-poster':'2bddb91c-7218-f0fa-279e-22b097b48407'
   }).map(([slug,id])=>[slug.normalize('NFC'),id]));
   const resources = Promise.all([
-    import(asset('catalog-layer.js')), import(asset('editorial-helpers.js')),
+    import(asset('catalog-layer.js')), import(asset('editorial-helpers.js')), import(asset('street-configurator.js')),
     ...['data/categories.json','data/presentation.json','data/native-bindings.json','data/external-products.json'].map(path => fetch(asset(path)).then(response => {if (!response.ok) throw Error('CATALOGUE_METADATA_UNAVAILABLE');return response.json();}))
   ]);
   function safeHtml(html) {
@@ -114,8 +114,8 @@
       if(name==='shop-bridge-ready')this.start();
     }
     async load() {
-      try {const [layer,editorial,definitions,presentation,bindings,external]=await resources;
-        Object.assign(this,{layer,editorial,definitions,presentation,bindings,external});
+      try {const [layer,editorial,ysMod,definitions,presentation,bindings,external]=await resources;
+        Object.assign(this,{layer,editorial,ysMod,definitions,presentation,bindings,external});
         if(this.catalogue)this.buildModel();if(!this.model)this.render();await this.start();
       }catch(error){if(!this.layer)releaseNative();this.fail(error.message);}
     }
@@ -163,7 +163,7 @@
       try {
         const rows=this.catalogue.products.map(row=>{
           const binding=this.bindings.find(item=>item.wixProductId===row.productId);
-          return {id:row.productId,name:row.name,productType:binding?.nativeProductType,collectionIds:row.collectionIds?.length?row.collectionIds:binding?.nativeCategoryIds,
+          return {id:row.productId,name:row.name,productType:binding?.nativeProductType,collectionIds:binding?.forceNativeCategoryIds?binding.nativeCategoryIds:row.collectionIds?.length?row.collectionIds:binding?.nativeCategoryIds,
             visible:true,stock:{inStock:row.inStock},priceData:{price:row.price,discountedPrice:row.discountedPrice,currency:row.currency},productPageUrl:url(row.productPageUrl),
             description:row.description,additionalInfoSections:row.additionalInfoSections,
             media:{mainMedia:{image:{url:row.mainMedia}}},productOptions:row.requiresOptions||row.directAddAllowed!==true?[{name:'Native options'}]:[]};
@@ -212,9 +212,20 @@
     product() {
       const product=this.model.products.find(p=>p.wixProductId===this.context.productId);if(!product)return '';
       const native=this.catalogue.products.find(p=>p.productId===product.wixProductId);
+      if(this.ysMod&&product.wixProductId===this.ysMod.YS_PRODUCT_ID)return this.ysProduct(product,native);
       const view=product.id==='bu'?this.view:'poster',wall=view==='wall',video=view==='video',digital=isDigital(product);
       const originalDescription=native?.description||product.description;
       return `<div class="wrap"><nav class="breadcrumb" aria-label="Breadcrumb"><a href="https://walkofberlin.com/category/all-products">Store</a> / ${esc(product.name)}</nav><section class="product-layout"><div class="product-title"><h1>${esc(product.name)}</h1><span class="place">${esc(product.place)}</span><span class="price">${esc(product.priceLabel)}</span></div><div class="gallery"><div class="gallery-stage">${video?this.roomVideo():`<img class="${wall?'wall':''}" src="${esc(wall?asset('assets/berlin-uhr-wall.jpg'):this.image(product))}" alt="${esc(wall?'Styling example. Frame not included.':product.alt)}">${wall?'<p class="gallery-caption">Styling example · Frame not included</p>':''}`}</div><div class="thumbnails"><button class="thumb" data-action="poster" aria-label="${digital?'Show the preview':'Show the poster'}" aria-pressed="${view==='poster'}"><img src="${esc(asset('assets/'+product.image))}" alt=""></button>${product.id==='bu'?`<button class="thumb play" data-action="video" aria-label="Play the room video" aria-pressed="${video}"><img src="${esc(asset('assets/berlin-uhr-room-thumb.jpg'))}" alt=""><span class="play-badge" aria-hidden="true"></span></button><button class="thumb" data-action="wall" aria-label="Show it on a wall" aria-pressed="${wall}"><img src="${esc(asset('assets/berlin-uhr-wall.jpg'))}" alt=""></button>`:''}</div></div><div class="buy-box"><p class="spec">${esc(product.typeLine)}</p><div class="buy-row ${digital?'no-qty':''}">${digital?'':this.quantityControl(this.quantity,'',true)}${product.action==='add'?`<button class="primary" data-action="add" data-product="${product.wixProductId}" data-quantity="${digital?1:this.quantity}" ${this.busy||this.uncertain?'disabled':''}>Add to cart</button>`:this.action(product)}</div><p class="delivery">${digital?esc(product.deliveryNote||DIGITAL_NOTE):'Printed to order by Gelato. Delivery estimates are shown at checkout.'+(/CALENDAR/.test(product.typeLine||'')?'':' Frame not included.')}</p></div></section><div class="product-info"><section class="story"><h2>${digital?'About this download':'The story behind this print'}</h2><div>${safeHtml(originalDescription)}</div></section>${product.id==='bu'?this.editorial.clockBox()+this.editorial.locationCard(product):''}<section class="disclosures">${(product.nativeAdditionalInfo||[]).map(info=>`<details><summary>${esc(info.title)}</summary><div class="details-body">${safeHtml(info.description)}</div></details>`).join('')}<details><summary>${digital?'Download &amp; returns':'Delivery &amp; returns'}</summary><div class="details-body"><p>${digital?esc(product.deliveryDetails||DIGITAL_DETAILS):'Printed to order by Gelato. Delivery estimates and the current delivery and return terms are shown in checkout.'}</p></div></details></section></div><section class="more"><h2>More from the shop</h2><div class="grid category-grid">${[...this.related(product),...this.model.products.filter(p=>p.action==='external').slice(0,1)].map(p=>this.card(p)).join('')}</div></section></div>${this.credits()}`;
+    }
+    // "Your Berlin Street in 1928": personalised aerial print. The configurator lives in street-configurator.js; state survives re-renders in this.ys.
+    ysProduct(product,native) {
+      const story=native?.description||product.description;
+      return `<div class="wrap"><nav class="breadcrumb" aria-label="Breadcrumb"><a href="https://walkofberlin.com/category/all-products">Store</a> / ${esc(product.name)}</nav><section class="product-layout ys-layout" data-ys-host><div class="product-title"><h1>${esc(product.name)}</h1><span class="place">${esc(product.place)}</span><span class="price">${esc(product.priceLabel)}</span></div><div class="gallery ys-gallery" data-ys-slot="visual"></div><div class="buy-box ys-buy"><p class="spec">${esc(product.typeLine)}</p><div data-ys-slot="form"></div><p class="ys-why" data-ys-why role="status"></p><div class="buy-row no-qty"><button class="primary" data-action="ys-add" data-ys-add disabled>Add to cart</button></div><p class="delivery">Made to order from your address and printed for you, usually in about 5 to 7 working days. Frame not included.</p></div></section><div class="product-info"><section class="story"><h2>The story behind this print</h2><div>${safeHtml(story)}</div></section></div></div>`;
+    }
+    mountYs() {
+      const host=this.shadowRoot.querySelector('[data-ys-host]');if(!host||!this.ysMod)return;
+      this.ys=this.ys||{};this.ysApi=this.ysApi||{sample:asset('assets/ys-sample.jpg'),busy:()=>this.busy||this.uncertain};
+      this.ysMod.mountConfigurator(host,this.ys,this.ysApi);
     }
     // "More from the shop": same group first, then same kind (digital or print), then the rest; the original order is kept inside each rank.
     related(product) {
@@ -222,7 +233,7 @@
       return this.model.products.map((item,index)=>({item,index})).filter(({item})=>item.id!==product.id&&item.fulfilment.cartEligible).sort((a,b)=>rank(a.item)-rank(b.item)||a.index-b.index).slice(0,2).map(({item})=>item);
     }
     lines() {
-      return [['Shipped to you',this.cart.lines.filter(line=>line.shippable===true)],['Download',this.cart.lines.filter(line=>line.shippable===false)],['Delivery type to confirm',this.cart.lines.filter(line=>line.shippable===null)]].filter(([,lines])=>lines.length).map(([label,lines])=>`<section class="cart-group"><h2>${label}</h2>${lines.map(line=>{const product=this.model.products.find(p=>p.wixProductId===line.productId);return `<article class="cart-line"><div class="line-image">${product?`<img src="${esc(this.image(product))}" alt="${esc(product.name)}">`:''}</div><div class="line-main"><h3>${esc(product?.name||line.name)}</h3><span class="meta">${esc(product?.typeLine||line.itemType||'')}</span><div class="line-bottom"><div class="line-controls">${line.editable?this.quantityControl(line.quantity,line.lineItemId):`<span>Quantity: ${line.quantity}</span>`}${line.editable?`<button class="text-button" data-action="remove" data-line="${esc(line.lineItemId)}" ${this.busy||this.uncertain?'disabled':''}>Remove</button>`:''}</div><strong class="price">${line.lineTotal?esc(textMoney(line.lineTotal)):`${esc(textMoney(line.unitPrice))} each`}</strong></div>${!line.editable?'<p class="meta">Manage this item in the original cart.</p>':''}</div></article>`;}).join('')}</section>`).join('');
+      return [['Shipped to you',this.cart.lines.filter(line=>line.shippable===true)],['Download',this.cart.lines.filter(line=>line.shippable===false)],['Delivery type to confirm',this.cart.lines.filter(line=>line.shippable===null)]].filter(([,lines])=>lines.length).map(([label,lines])=>`<section class="cart-group"><h2>${label}</h2>${lines.map(line=>{const product=this.model.products.find(p=>p.wixProductId===line.productId);return `<article class="cart-line"><div class="line-image">${product?`<img src="${esc(this.image(product))}" alt="${esc(product.name)}">`:''}</div><div class="line-main"><h3>${esc(product?.name||line.name)}</h3><span class="meta">${esc(product?.typeLine||line.itemType||'')}</span>${(line.customText||[]).map(item=>`<p class="meta line-custom"><strong>${esc(item.title)}:</strong> ${esc(item.value)}</p>`).join('')}<div class="line-bottom"><div class="line-controls">${line.editable?this.quantityControl(line.quantity,line.lineItemId):`<span>Quantity: ${line.quantity}</span>`}${line.editable?`<button class="text-button" data-action="remove" data-line="${esc(line.lineItemId)}" ${this.busy||this.uncertain?'disabled':''}>Remove</button>`:''}</div><strong class="price">${line.lineTotal?esc(textMoney(line.lineTotal)):`${esc(textMoney(line.unitPrice))} each`}</strong></div>${!line.editable?'<p class="meta">Manage this item in the original cart.</p>':''}</div></article>`;}).join('')}</section>`).join('');
     }
     // ---- Cart: address, automatic quote, delivery choice (Yusuf: fewer steps before checkout) ----
     quoteTimer=0;quoting=false;quoteError='';failedKey='';choiceList=null;lastReason='';
@@ -384,7 +395,7 @@
       dialog.addEventListener('close',()=>{this.shadowRoot.querySelector(`[data-action="add"][data-product="${this.lastAddedId||''}"]`)?.focus({preventScroll:true});});
       if(open&&this.revealed)dialog.showModal();
       if(focusAction)this.shadowRoot.querySelector(`[data-action="${focusAction}"]${focusLine?`[data-line="${CSS.escape(focusLine)}"]`:''}`)?.focus({preventScroll:true});
-      this.onCartViewport();this.queueAutoQuote();
+      this.mountYs();this.onCartViewport();this.queueAutoQuote();
     }
     syncMobileCheckout() {
       const cart=this.shadowRoot.querySelector('.cart-mode'),bar=cart?.querySelector('.checkout-area');
@@ -446,6 +457,7 @@
       this.busy=true;this.error='';this.render();
       try {
         if(action==='refresh')await this.request('get');
+        if(action==='ys-add'){if(!this.ysMod.readyToAdd(this.ys))throw Error('YS_NOT_READY');await this.request('add',{productId:this.ysMod.YS_PRODUCT_ID,quantity:1,customTextFields:this.ysMod.buildCustomText(this.ys)});this.lastAddedId=this.ysMod.YS_PRODUCT_ID;this.notice='Added to your cart';this.render();const dialog=this.shadowRoot.querySelector('dialog');if(this.revealed){dialog.showModal();dialog.querySelector('[data-action="close-drawer"]').focus();}}
         if(action==='add'){await this.request('add',{productId:button.dataset.product,quantity:Number(button.dataset.quantity)||1});this.lastAddedId=button.dataset.product;this.notice='Added to your cart';this.render();const dialog=this.shadowRoot.querySelector('dialog');if(this.revealed){dialog.showModal();dialog.querySelector('[data-action="close-drawer"]').focus();}}
         if(action==='minus'||action==='plus'){const line=this.cart?.lines.find(line=>line.lineItemId===button.dataset.line);if(line)await this.request('update',{lineItemId:line.lineItemId,quantity:line.quantity+(action==='plus'?1:-1)});}
         if(action==='remove')await this.request('remove',{lineItemId:button.dataset.line});
