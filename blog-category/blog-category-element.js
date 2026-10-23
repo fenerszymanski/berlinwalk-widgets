@@ -354,6 +354,76 @@
     );
   }
 
+  // BW-EMAIL-TYPO:START
+  // Suggests a fix for a mistyped email domain (yahoo.dea -> yahoo.de) before
+  // a lead form sends. A typo means the confirmation email bounces and the lead
+  // is lost (16 Oct 2026). The first submit with a likely typo stops and shows
+  // the suggestion; submitting the same address again sends it as typed.
+  // The same block ships in js/lead-form-direct-inject.js,
+  // blog-category/blog-category-element.js, berlin-dates-check/index.html and
+  // arrival-card/arrival-card-element.js; tests/email-typo-suggest.test.mjs
+  // keeps the copies identical.
+  var bwEmailTypo = (function () {
+    var DOMAINS = ['gmail.com', 'googlemail.com', 'yahoo.com', 'yahoo.de', 'yahoo.co.uk', 'yahoo.fr', 'yahoo.it',
+      'yahoo.es', 'yahoo.ca', 'ymail.com', 'rocketmail.com', 'hotmail.com', 'hotmail.de', 'hotmail.co.uk',
+      'hotmail.fr', 'hotmail.it', 'outlook.com', 'outlook.de', 'outlook.fr', 'live.com', 'live.de', 'live.co.uk',
+      'msn.com', 'icloud.com', 'me.com', 'mac.com', 'aol.com', 'gmx.de', 'gmx.net', 'gmx.com', 'gmx.at', 'gmx.ch',
+      'web.de', 't-online.de', 'freenet.de', 'posteo.de', 'mailbox.org', 'proton.me', 'protonmail.com', 'pm.me',
+      'duck.com', 'fastmail.com', 'mail.com', 'bluewin.ch', 'orange.fr', 'free.fr', 'libero.it', 'btinternet.com',
+      'sky.com', 'comcast.net', 'verizon.net', 'att.net', 'sbcglobal.net'];
+    // Optimal string alignment distance: one typed letter too many, too few,
+    // wrong or two swapped letters each count as one edit.
+    function distance(a, b) {
+      var rows = [], i, j;
+      for (i = 0; i <= a.length; i++) { rows[i] = [i]; }
+      for (j = 0; j <= b.length; j++) { rows[0][j] = j; }
+      for (i = 1; i <= a.length; i++) {
+        for (j = 1; j <= b.length; j++) {
+          var cost = a.charAt(i - 1) === b.charAt(j - 1) ? 0 : 1;
+          rows[i][j] = Math.min(rows[i - 1][j] + 1, rows[i][j - 1] + 1, rows[i - 1][j - 1] + cost);
+          if (i > 1 && j > 1 && a.charAt(i - 1) === b.charAt(j - 2) && a.charAt(i - 2) === b.charAt(j - 1)) {
+            rows[i][j] = Math.min(rows[i][j], rows[i - 2][j - 2] + 1);
+          }
+        }
+      }
+      return rows[a.length][b.length];
+    }
+    function suggest(email) {
+      var at = email.lastIndexOf('@');
+      if (at < 1) return '';
+      var domain = email.slice(at + 1);
+      if (!domain || DOMAINS.indexOf(domain) !== -1) return '';
+      var best = '', bestScore = 3;
+      for (var k = 0; k < DOMAINS.length; k++) {
+        var score = distance(domain, DOMAINS[k]);
+        if (score <= (DOMAINS[k].length < 9 ? 1 : 2) && score < bestScore) { best = DOMAINS[k]; bestScore = score; }
+      }
+      return best ? email.slice(0, at + 1) + best : '';
+    }
+    function check(input, slot) {
+      var email = String(input.value || '').trim().toLowerCase();
+      var fixed = suggest(email);
+      if (!fixed || input.getAttribute('data-bw-typo-kept') === email) return false;
+      input.setAttribute('data-bw-typo-kept', email);
+      slot.textContent = 'Did you mean ';
+      var use = document.createElement('button');
+      use.type = 'button';
+      use.textContent = fixed;
+      use.setAttribute('style', 'display:inline;width:auto;height:auto;min-height:0;min-width:0;background:none;border:0;border-radius:0;box-shadow:none;padding:0;margin:0;font:inherit;font-weight:700;letter-spacing:inherit;text-transform:none;color:inherit;text-decoration:underline;cursor:pointer');
+      use.addEventListener('click', function () {
+        input.value = fixed;
+        slot.textContent = 'Fixed. Send it again.';
+        input.focus();
+      });
+      slot.appendChild(use);
+      slot.appendChild(document.createTextNode('? To keep ' + email + ', send again.'));
+      return true;
+    }
+    check.suggest = suggest;
+    return check;
+  })();
+  // BW-EMAIL-TYPO:END
+
   // BW-LETTER-MEASURE:START
   // Consent-gated first-party view measurement for the Walk of Berlin Weekly
   // signup (18 Oct 2026). The same block ships in js/lead-form-direct-inject.js
@@ -489,6 +559,7 @@
         msg.textContent = 'Tick the box so I am allowed to email you.';
         return;
       }
+      if (bwEmailTypo(form.email, msg)) { msg.className = 'msg'; return; }
       button.disabled = true;
       msg.className = 'msg';
       msg.textContent = 'Sending.';
