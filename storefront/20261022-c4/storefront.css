@@ -66,29 +66,37 @@ h2>.sk-heading{width:55%}
 .gallery-stage>video.room{width:100%;height:100%;object-fit:cover;display:block;background:var(--tile)}.thumb.play{position:relative}.play-badge{position:absolute;inset:0;margin:auto;width:26px;height:26px;border-radius:50%;background:#fafaf5e6;box-shadow:0 1px 4px #123d1833}.play-badge:after{content:'';position:absolute;left:10px;top:7px;border-style:solid;border-width:6px 0 6px 10px;border-color:transparent transparent transparent var(--green)}
 
 /* ---- Your Berlin Street in 1928 configurator (23 Oct 2026) ---- */
-/* Personalised poster preview (23 Oct 2026): the sheet is the print, on make_print.py's 1800 x 2400 grid; --u = 1/1800 of the sheet width. */
+/* Personalised poster preview, layout "A6 white" (24 Oct 2026): the sheet is the print on make_print.py's 1800 x 2400 grid; --u = 1/1800 of the sheet width (container query unit, so --u is only used on the sheet's children). */
 .ys-visual{display:grid;gap:10px}
-.ys-stage{aspect-ratio:5/6;background:var(--tile);display:flex;align-items:center;justify-content:center}
-.ys-sheet{position:relative;width:79.2%;aspect-ratio:3/4;background:#FAFAF5;box-shadow:0 1px 1px #123d1814,0 10px 28px #123d1826;container-type:inline-size;--u:calc(100cqw / 1800);overflow:hidden}
-.ys-sample img{width:100%;height:100%;object-fit:cover}
-.ys-hero{position:absolute;left:calc(var(--u)*110);top:calc(var(--u)*110);width:calc(var(--u)*1580);height:calc(var(--u)*1380);overflow:hidden;background:#e4e0d6;cursor:crosshair;touch-action:manipulation}
-.ys-hero>img,.ys-inset>img{width:100%;height:100%;object-fit:fill;display:block}
-.ys-hero>img{filter:grayscale(1) sepia(.32) contrast(1.18) brightness(1.02)}
+/* A white sheet has to read as a poster on the page: a deeper wall behind it and a soft two-layer shadow under it. */
+.ys-stage{aspect-ratio:5/6;background:linear-gradient(180deg,#ECEAE3,#DFDDD4);display:flex;align-items:center;justify-content:center}
+.ys-sheet{position:relative;width:79.2%;aspect-ratio:3/4;background:#fff;box-shadow:0 1px 2px #123d1826,0 3px 6px #123d1814,0 18px 34px -6px #123d1840;container-type:inline-size;--u:calc(100cqw / 1800);overflow:hidden}
+.ys-sheet[hidden]{display:none}
+.ys-sample img{width:100%;height:100%;object-fit:cover;display:block}
+/* Two photos of 1400 x 746 units at x = 200 (1928 at y = 200, today at y = 1046). Keyline: a 1-unit white gap, then 2 units of rgb(152,152,150); drawn as shadow spreads so it stays 2 units wide at any size. */
+.ys-photo{position:absolute;left:calc(var(--u)*200);width:calc(var(--u)*1400);height:calc(var(--u)*746);background:#e4e0d6;cursor:crosshair;touch-action:manipulation;box-shadow:0 0 0 calc(var(--u)*1) #fff,0 0 0 calc(var(--u)*3) rgb(152,152,150)}
+.ys-photo-1928{top:calc(var(--u)*200)}
+.ys-photo-today{top:calc(var(--u)*1046)}
+.ys-photo>img{width:100%;height:100%;object-fit:fill;display:block}
+.ys-photo-1928>img{filter:grayscale(1) sepia(.32) contrast(1.18) brightness(1.02)}
+/* The print grades today's photo (make_print.py grade_today: colour pulled to 72% of its saturation, black and white mapped onto sepia paper tones); this chain reproduces it to about 0.7 of 255 (RMS) on nine places. */
+.ys-photo-today>img{filter:saturate(.86) contrast(.82) sepia(.22)}
 .ys-ring{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
-.ys-year{position:absolute;left:0;top:0;width:calc(var(--u)*170);height:calc(var(--u)*76);padding-left:calc(var(--u)*28);background:#FAFAF5;color:#1B5E20;font:600 calc(var(--u)*44)/calc(var(--u)*76) 'Space Grotesk',sans-serif;pointer-events:none}
 .ys-status{position:absolute;inset:auto 8px 8px 8px;background:rgba(250,250,245,.94);color:var(--green);font-size:13px;line-height:1.35;padding:6px 10px;border-radius:8px;pointer-events:none}
 .ys-status[hidden]{display:none}
-.ys-words{position:absolute;left:calc(var(--u)*110);top:calc(var(--u)*1560);width:calc(var(--u)*1060);color:#1B5E20;white-space:nowrap}
-.ys-ptitle{font:400 calc(var(--u)*var(--fs,118))/1 'DM Serif Display',serif;height:calc(var(--u)*150);overflow:hidden}
-.ys-parea{font:400 calc(var(--u)*44)/1 'Space Grotesk',sans-serif;height:calc(var(--u)*86)}
-.ys-rule{display:block;width:calc(var(--u)*110);height:calc(var(--u)*8);background:#FFE600;margin-bottom:calc(var(--u)*46)}
-.ys-pline{font:500 calc(var(--u)*46)/1 'Space Grotesk',sans-serif;color:#212121;height:calc(var(--u)*80);overflow:hidden;text-overflow:ellipsis}
-.ys-pcap{font:400 calc(var(--u)*36)/1 'Space Grotesk',sans-serif;color:#6E6E69}
-.ys-inset{position:absolute;left:calc(var(--u)*1210);top:calc(var(--u)*1560);width:calc(var(--u)*480);height:calc(var(--u)*480);overflow:hidden;background:#e4e0d6}
-.ys-today{position:absolute;left:calc(var(--u)*1210);top:calc(var(--u)*2060);font:600 calc(var(--u)*36)/1 'Space Grotesk',sans-serif;color:#1B5E20}
-.ys-pcredit,.ys-pbrand{position:absolute;bottom:calc(var(--u)*114);font:400 calc(var(--u)*26)/1 'Space Grotesk',sans-serif;color:#6E6E69;white-space:nowrap}
-.ys-pcredit{left:calc(var(--u)*110)}
-.ys-pbrand{right:calc(var(--u)*110);font-size:calc(var(--u)*30);font-weight:600;color:#1B5E20}
+/* The words are SVG text on the same grid (viewBox 1800 x 2400), so every baseline sits where make_print.py puts it. Like the generator: no kerning, no ligatures. */
+.ys-type{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.ys-type text{text-anchor:middle;font-kerning:none;font-variant-ligatures:none;text-rendering:geometricPrecision}
+.ys-cap{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:28px;fill:#1B5E20}
+.ys-cap-1928{letter-spacing:8px}
+.ys-cap-today{letter-spacing:10px}
+.ys-ptitle{font-family:'DM Serif Display',serif;font-weight:400;font-size:calc(var(--fs,118)*1px);fill:#1B5E20}
+/* Area and fallback line: the generator draws them with Space Grotesk's default instance, which is wght 300 (fvar default), not 400. --ys-light is the one number to change if the print ever moves to 400. */
+.ys-parea,.ys-pline.ys-fallback{font-family:'Space Grotesk',sans-serif;font-weight:var(--ys-light,300)}
+.ys-parea{font-size:40px;fill:#1B5E20}
+.ys-pcoords{font-family:'IBM Plex Mono',monospace;font-weight:400;font-size:30px;fill:#6E6E69}
+.ys-pline{font-family:'Space Grotesk',sans-serif;font-weight:500;font-size:42px;fill:#212121}
+.ys-pline.ys-fallback{font-size:34px;fill:#6E6E69}
 .ys-caption{margin:0;font-family:var(--mono);font-size:12px;line-height:1.5;color:var(--muted)}
 .ys-form{display:grid;gap:12px;margin-bottom:6px}
 .ys-form label,.ys-label{display:grid;gap:6px;font-size:14px;font-weight:600;color:var(--green)}
@@ -105,7 +113,7 @@ h2>.sk-heading{width:55%}
 .ys-pick-go{font-size:26px;line-height:1;color:var(--green);padding-left:4px}
 .ys-results li:first-child button{border-color:var(--leaf);background:#f4f7ee}
 .ys-results button:hover,.ys-results button:focus-visible{border-color:var(--green);background:#eef3e6}
-.ys-note,.ys-attr,.ys-hint,.ys-credit,.ys-why{margin:0;font-size:13px;line-height:1.45;color:var(--muted)}
+.ys-note,.ys-attr,.ys-hint,.ys-why{margin:0;font-size:13px;line-height:1.45;color:var(--muted)}
 .ys-note:empty{display:none}
 .ys-note.ys-choose{color:var(--green);font-weight:600;font-size:14px}
 .ys-fields{display:grid;gap:12px}

@@ -1,6 +1,7 @@
 // "Your Berlin Street in 1928" configurator (store product only). Geometry is identical to
-// content/products/your-street-1928/SPEC.md and generator/make_print.py (utm33).
-// Pure browser code: Photon geocoding with Nominatim as fallback (Berlin only), two WMS GetMap <img> previews, tap-to-move ring.
+// content/products/your-street-1928/SPEC.md and generator/make_print.py, layout "A6 white" (utm33).
+// Pure browser code: Photon geocoding with Nominatim as fallback (Berlin only), two WMS GetMap <img> previews (1928 above, today below,
+// the same ground at the same scale), tap-to-move ring.
 export const YS_PRODUCT_ID = '8aaf5412-7f21-42c7-acfb-85dd8417d68c';
 export const YS_FIELDS = Object.freeze({
   address: 'Address or place in Berlin',
@@ -8,8 +9,14 @@ export const YS_FIELDS = Object.freeze({
 });
 // Wix allows two custom text fields per product here, so map point, title, area and the personal line share the second one.
 export const YS_LIMITS = Object.freeze({address: 80, details: 200, title: 24, area: 30, line: 40});
-const HERO_W = 368, HERO_H = 321.4, INSET = 130, RING = 26;
-const HERO_PX = [736, 643], INSET_PX = 400;
+// Layout "A6 white" (24 Oct 2026) on make_print.py's 1800 x 2400 design grid: two photos of 1400 x 746 units at x = 200 (y = 200 and 1046, placed in storefront.css),
+// both showing the identical ground box, 368 m wide and 196.09 m tall (3.8043 units per metre), centred on the buyer's point. Ring: 26 m outer radius, stroke inside it.
+const GRID = {w: 1800, h: 2400}, PHOTO = {w: 1400, h: 746};
+const GROUND_W = 368, GROUND_H = GROUND_W * PHOTO.h / PHOTO.w, RING = 26, RING_STROKE = 8;
+const SCREEN_PX = [960, 512];   // WMS pixels per photo on screen, the 1400 : 746 shape (the print asks for 2756 x 1468)
+// Text block, baselines on the design grid, everything centred on x = 900. The two captions are letter-spaced (8 and 10 units); the generator centres the
+// letters without the trailing space, SVG text-anchor includes it, so x moves right by half the spacing.
+const TX = {cx: 900, cap1928: 990, capToday: 1836, title: 2011, area: 2083, coords: 2137, line: 2199, track1928: 8, trackToday: 10};
 const WMS_1928 = 'https://gdi.berlin.de/services/wms/luftbild_1928_04', LAYER_1928 = 'c_luftbilder_1928_04_raster';
 const WMS_TODAY = 'https://gdi.berlin.de/services/wms/truedop_2026', LAYER_TODAY = 'truedop_2026';
 const BERLIN = {west: 13.0884, east: 13.7612, north: 52.6755, south: 52.3383};
@@ -41,13 +48,18 @@ export function wmsUrl(base, layer, cx, cy, w, h, pw, ph) {
   const bbox = [cx - w / 2, cy - h / 2, cx + w / 2, cy + h / 2].map(v => v.toFixed(2)).join(',');
   return `${base}?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=${layer}&STYLES=&CRS=EPSG%3A25833&BBOX=${bbox}&WIDTH=${pw}&HEIGHT=${ph}&FORMAT=image%2Fpng`;
 }
-export const heroUrl = (lat, lon) => { const [x, y] = utm33(lat, lon); return wmsUrl(WMS_1928, LAYER_1928, x, y, HERO_W, HERO_H, HERO_PX[0], HERO_PX[1]); };
-export const insetUrl = (lat, lon) => { const [x, y] = utm33(lat, lon); return wmsUrl(WMS_TODAY, LAYER_TODAY, x, y, INSET, INSET, INSET_PX, INSET_PX); };
-// Pixel offset inside the displayed hero (fractions 0..1, origin top-left) to a new lat/lon.
+// Both photos ask for the same BBOX and the same pixel size: only the layer differs.
+export const url1928 = (lat, lon) => { const [x, y] = utm33(lat, lon); return wmsUrl(WMS_1928, LAYER_1928, x, y, GROUND_W, GROUND_H, SCREEN_PX[0], SCREEN_PX[1]); };
+export const urlToday = (lat, lon) => { const [x, y] = utm33(lat, lon); return wmsUrl(WMS_TODAY, LAYER_TODAY, x, y, GROUND_W, GROUND_H, SCREEN_PX[0], SCREEN_PX[1]); };
+// Pixel offset inside either displayed photo (fractions 0..1, origin top-left) to a new lat/lon. Both photos show the same ground box, so the maths is the same.
 export function movePoint(lat, lon, fx, fy) {
   const [cx, cy] = utm33(lat, lon);
-  return fromUtm33(cx + (fx - 0.5) * HERO_W, cy + (0.5 - fy) * HERO_H, [lat, lon]).map(v => Math.round(v * 1e5) / 1e5);
+  return fromUtm33(cx + (fx - 0.5) * GROUND_W, cy + (0.5 - fy) * GROUND_H, [lat, lon]).map(v => Math.round(v * 1e5) / 1e5);
 }
+// The line under the area on the print: the point to four decimals, like make_print.py. The cart carries the point to five decimals and the
+// generator rounds that value, so round to five first (52.509849996 -> 52.50985 -> 52.5099 on the print, not 52.5098).
+const r5 = v => Number(Number(v).toFixed(5));
+export const coordsText = (lat, lon) => (Number.isFinite(lat) && Number.isFinite(lon) ? `${r5(lat).toFixed(4)}° N, ${r5(lon).toFixed(4)}° E` : '');
 export const inBerlin = (lat, lon) => lat >= BERLIN.south && lat <= BERLIN.north && lon >= BERLIN.west && lon <= BERLIN.east;
 // No control characters, no field separators; collapsed spaces.
 export const clean = (value, max) => String(value ?? '').normalize('NFC').replace(/[\u0000-\u001f\u007f<>]/g, ' ').replace(/\/\/|\|/g, ' ').replace(/\s+/g, ' ').trim().slice(0, max);
@@ -98,10 +110,13 @@ export function readyToAdd(state) {
 }
 
 const esc = value => String(value ?? '').replace(/[&<>"']/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'}[c]));
-const RING_SVG = (vw, vh, r, stroke) => `<svg class="ys-ring" viewBox="0 0 ${vw} ${vh}" preserveAspectRatio="none" aria-hidden="true"><circle cx="${vw / 2}" cy="${vh / 2}" r="${r}" fill="none" stroke="#FFE600" stroke-width="${stroke}"/></svg>`;
-// The preview is the print itself: a 30 x 40 cm sheet laid out on make_print.py's 1800 x 2400 design grid (CSS unit --u = 1/1800 of the sheet width).
-// Title size follows the generator: 118 (96 above 16 letters), shrunk until it fits the 1060-unit column left of the inset.
+// One ring per photo, centred, in the photo's own 1400 x 746 units: 26 m outer radius = 98.91 units, the 8-unit stroke inside it (circle r = 94.91).
+const RING_SVG = `<svg class="ys-ring" viewBox="0 0 ${PHOTO.w} ${PHOTO.h}" aria-hidden="true"><circle cx="${PHOTO.w / 2}" cy="${PHOTO.h / 2}" r="${(RING * PHOTO.w / GROUND_W - RING_STROKE / 2).toFixed(2)}" fill="none" stroke="#FFE600" stroke-width="${RING_STROKE}"/></svg>`;
+// The preview is the print itself: a 30 x 40 cm sheet laid out on make_print.py's 1800 x 2400 design grid (CSS unit --u = 1/1800 of the sheet width; the words are SVG text on the same grid).
+// Title size follows the generator: 118 (96 above 16 letters), shrunk by 4 until it fits the 1400-unit width of the photos (never below 48).
 export const titleSize = title => (String(title || '').length <= 16 ? 118 : 96);
+const CAPTION_LIVE = 'Your poster, 30 x 40 cm: 1928 above, today below, same ground and scale. Tap either photo to move the ring onto your building.';
+const CAPTION_EXAMPLE = 'Example poster, 30 x 40 cm. Search for your own address to see your street.';
 
 // `host` holds two slots ([data-ys-slot="visual"], [data-ys-slot="form"]) and the add button ([data-ys-add]). Rebuilt from `state` whenever the storefront re-renders. `api.add(customText)` returns a promise; `api.busy()` says whether the cart is locked.
 export function mountConfigurator(host, state, api) {
@@ -110,74 +125,81 @@ export function mountConfigurator(host, state, api) {
   visual.innerHTML = `<div class="ys-visual">
       <div class="ys-stage">
         <div class="ys-sheet" data-ys="sheet" ${state.lat ? '' : 'hidden'}>
-          <div class="ys-hero" data-ys="hero">
+          <div class="ys-photo ys-photo-1928" data-ys="photo-1928">
             <img class="ys-1928" alt="Aerial photograph of your spot in 1928, with a yellow ring on your building" decoding="async">
-            ${RING_SVG(HERO_W, HERO_H, RING, 2.1)}
-            <span class="ys-year" aria-hidden="true">1928</span>
+            ${RING_SVG}
             <span class="ys-status" data-ys="status" role="status"></span>
           </div>
-          <div class="ys-words">
-            <div class="ys-ptitle" data-ys="ptitle"></div>
-            <div class="ys-parea" data-ys="parea"></div>
-            <span class="ys-rule" aria-hidden="true"></span>
-            <div class="ys-pline" data-ys="pline"></div>
-            <div class="ys-pcap">The same spot from above, 1928 and today.</div>
+          <div class="ys-photo ys-photo-today" data-ys="photo-today">
+            <img class="ys-todayimg" alt="Aerial photograph of the same spot today, same ground and scale, with a yellow ring" decoding="async">
+            ${RING_SVG}
+            <span class="ys-status" data-ys="status-today" role="status" hidden></span>
           </div>
-          <div class="ys-inset" data-ys="inset">
-            <img alt="Aerial photograph of the same spot today, with a yellow ring" decoding="async">
-            ${RING_SVG(INSET, INSET, RING, 1.6)}
-          </div>
-          <span class="ys-today">Today</span>
-          <span class="ys-pcredit">Aerial photographs: Geoportal Berlin, dl-de/zero-2.0</span>
-          <span class="ys-pbrand">Walk of Berlin</span>
+          <svg class="ys-type" viewBox="0 0 ${GRID.w} ${GRID.h}" role="group" aria-label="Text on the print">
+            <text class="ys-cap ys-cap-1928" x="${TX.cx + TX.track1928 / 2}" y="${TX.cap1928}">1928</text>
+            <text class="ys-cap ys-cap-today" x="${TX.cx + TX.trackToday / 2}" y="${TX.capToday}">TODAY</text>
+            <text class="ys-ptitle" data-ys="ptitle" x="${TX.cx}" y="${TX.title}"></text>
+            <text class="ys-parea" data-ys="parea" x="${TX.cx}" y="${TX.area}"></text>
+            <text class="ys-pcoords" data-ys="pcoords" x="${TX.cx}" y="${TX.coords}"></text>
+            <text class="ys-pline" data-ys="pline" x="${TX.cx}" y="${TX.line}"></text>
+          </svg>
         </div>
-        <div class="ys-sheet ys-sample" data-ys="example" ${state.lat ? 'hidden' : ''}><img src="${esc(api.sample)}" alt="Example print of a Berlin square in 1928 and today"></div>
+        <div class="ys-sheet ys-sample" data-ys="example" ${state.lat ? 'hidden' : ''}><img src="${esc(api.sample)}" alt="Example print: Potsdamer Platz in 1928 and today"></div>
       </div>
-      <p class="ys-caption" data-ys="caption">${state.lat ? 'Your poster, 30 x 40 cm. Tap the 1928 photo to move the ring onto your building.' : 'Example poster, 30 x 40 cm. Search for your own address to see your street.'}</p>
+      <p class="ys-caption" data-ys="caption">${state.lat ? CAPTION_LIVE : CAPTION_EXAMPLE}</p>
     </div>`;
   formSlot.innerHTML = `<div class="ys-form">
       <label class="ys-label" for="ys-q">Your address or a place in Berlin</label>
-      <div class="ys-search"><input id="ys-q" data-ys="q" type="search" autocomplete="off" enterkeyhint="search" maxlength="${L.address}" placeholder="e.g. Chamissoplatz" value="${esc(state.query || '')}"><button type="button" class="outline" data-ys="go">Search</button></div>
+      <div class="ys-search"><input id="ys-q" data-ys="q" type="search" autocomplete="off" enterkeyhint="search" maxlength="${L.address}" placeholder="e.g. Potsdamer Platz" value="${esc(state.query || '')}"><button type="button" class="outline" data-ys="go">Search</button></div>
       <p class="ys-note" data-ys="searchnote" role="status"></p>
       <ul class="ys-results" data-ys="results" role="listbox" aria-label="Matching places" hidden></ul>
-      <p class="ys-attr">Search by <a href="https://photon.komoot.io" target="_blank" rel="noopener noreferrer">Photon</a> and <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer">© OpenStreetMap contributors</a>. Berlin only.</p>
+      <p class="ys-attr">Search by <a href="https://photon.komoot.io" target="_blank" rel="noopener noreferrer">Photon</a> and <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer">© OpenStreetMap contributors</a>. Berlin only. Aerial photographs: Geoportal Berlin, dl-de/zero-2.0.</p>
       <div class="ys-fields" data-ys="fields" ${state.lat ? '' : 'hidden'}>
         <div class="ys-row"><label>Title on the print<input data-ys="title" maxlength="${L.title}" autocapitalize="characters" value="${esc(state.title || '')}"></label><label>Area line<input data-ys="area" maxlength="${L.area}" value="${esc(state.area || '')}"></label></div>
         <label>Your line on the print (optional)<input data-ys="line" maxlength="${L.line}" placeholder="e.g. Lena &amp; Jonas · here since 2021" value="${esc(state.line || '')}"></label>
-        <p class="ys-hint">The house number is never printed. Tap the 1928 photo to move the ring onto your building.</p>
+        <p class="ys-hint">The house number is never printed. Tap either photo to move the ring onto your building.</p>
         <label class="ys-check"><input type="checkbox" data-ys="seen" ${state.seen ? 'checked' : ''}><span>I can see the 1928 aerial photo at my spot. A blank white picture means there is no 1928 photo there (far eastern edge of Berlin).</span></label>
       </div>
-      <p class="ys-credit">Aerial photographs: Geoportal Berlin, dl-de/zero-2.0.</p>
     </div>`;
   const $ = name => host.querySelector(`[data-ys="${name}"]`);
-  const heroImg = $('hero').querySelector('img'), insetImg = $('inset').querySelector('img');
-  const ptitle = $('ptitle'), parea = $('parea'), pline = $('pline');
-  // Poster words follow the inputs; the title shrinks in 4-unit steps until it fits its column.
+  const img1928 = $('photo-1928').querySelector('img'), imgToday = $('photo-today').querySelector('img');
+  const ptitle = $('ptitle'), parea = $('parea'), pcoords = $('pcoords'), pline = $('pline');
+  // Poster words follow the inputs (title, area, coordinates of the current point, personal line or the grey fallback); the title shrinks in 4-unit steps until it fits 1400 units.
   function paintWords() {
     ptitle.textContent = clean(state.title, L.title).toUpperCase(); parea.textContent = clean(state.area, L.area);
-    pline.textContent = clean(state.line, L.line); pline.hidden = !pline.textContent;
+    pcoords.textContent = coordsText(Number(state.lat), Number(state.lon));
+    const line = clean(state.line, L.line);
+    pline.textContent = line || 'Same ground, same scale.'; pline.classList.toggle('ys-fallback', !line);
     let size = titleSize(ptitle.textContent);
     ptitle.style.setProperty('--fs', size);
-    while (size > 48 && ptitle.scrollWidth > ptitle.clientWidth + 1) { size -= 4; ptitle.style.setProperty('--fs', size); }
+    const width = () => { try { return ptitle.getComputedTextLength(); } catch { return 0; } };   // 0 while the sheet is not rendered
+    while (size > 48 && width() > PHOTO.w) { size -= 4; ptitle.style.setProperty('--fs', size); }
   }
-  document.fonts?.ready?.then(() => { if (host.isConnected) paintWords(); });
-  const status = $('status'), results = $('results'), note = $('searchnote'), input = $('q');
+  // The sheet's fonts (DM Serif Display, Space Grotesk, IBM Plex Mono) are only fetched when first needed; once they are in, the title is fitted again (a fallback font measures differently).
+  let fontsReady = null;
+  const ensureFonts = () => {
+    if (!fontsReady) fontsReady = (document.fonts?.load ? Promise.all([["400 118px 'DM Serif Display'", 'POTSDAMER PLATZ'], ["600 28px 'Space Grotesk'", '1928 TODAY'], ["300 40px 'Space Grotesk'", 'Berlin'], ["500 42px 'Space Grotesk'", 'Berlin'], ["400 30px 'IBM Plex Mono'", '52.5098° N, 13.3756° E']]
+      .map(([face, text]) => document.fonts.load(face, text))).catch(() => []) : Promise.resolve([])).then(() => { if (host.isConnected && state.lat) paintWords(); });
+    return fontsReady;
+  };
+  const status = $('status'), statusToday = $('status-today'), results = $('results'), note = $('searchnote'), input = $('q');
   const setStatus = text => { status.textContent = text; status.hidden = !text; };
+  const setStatusToday = text => { statusToday.textContent = text; statusToday.hidden = !text; };
   const refreshButton = () => { const b = host.getRootNode().querySelector?.('[data-ys-add]'); if (b) b.disabled = !readyToAdd(state) || api.busy(); const why = host.getRootNode().querySelector?.('[data-ys-why]'); if (why) why.textContent = readyToAdd(state) ? '' : (!state.lat ? (results.hidden ? 'Search for your address to continue.' : 'Tap one of the places under the search box.') : (!state.seen ? 'Confirm that you can see the 1928 photo to continue.' : 'Fill in the title and area lines to continue.')); };
   api.refresh = refreshButton;
 
   function showPoint(fresh) {
     if (!state.lat) return;
     $('sheet').hidden = false; $('example').hidden = true; $('fields').hidden = false;
-    $('caption').textContent = 'Your poster, 30 x 40 cm. Tap the 1928 photo to move the ring onto your building.';
-    paintWords();
-    setStatus('Loading the 1928 photo…');
+    $('caption').textContent = CAPTION_LIVE;
+    paintWords(); ensureFonts();
+    setStatus('Loading the 1928 photo…'); setStatusToday('');
     const mine = state.token = (state.token || 0) + 1;
-    heroImg.onload = () => { if (state.token === mine) setStatus(''); };
-    heroImg.onerror = () => { if (state.token === mine) setStatus('The aerial photo service did not answer. Try again in a moment.'); };
-    insetImg.onerror = () => {};
-    heroImg.src = heroUrl(state.lat, state.lon);
-    insetImg.src = insetUrl(state.lat, state.lon);
+    img1928.onload = () => { if (state.token === mine) setStatus(''); };
+    img1928.onerror = () => { if (state.token === mine) setStatus('The aerial photo service did not answer. Try again in a moment.'); };
+    imgToday.onerror = () => { if (state.token === mine) setStatusToday('Today’s photo did not load. Try again in a moment.'); };
+    img1928.src = url1928(state.lat, state.lon);
+    imgToday.src = urlToday(state.lat, state.lon);
     if (fresh) state.seen = false, host.querySelector('[data-ys="seen"]').checked = false;
     refreshButton();
   }
@@ -231,14 +253,16 @@ export function mountConfigurator(host, state, api) {
     const box = $('sheet').getBoundingClientRect();
     if (box.bottom < 90 || box.top > innerHeight - 90) $('sheet').scrollIntoView({behavior: 'smooth', block: 'start'});
   });
-  // ---- Tap the 1928 photo: pixel offset -> metres -> new point ----
-  $('hero').addEventListener('click', event => {
-    if (!state.lat) return;
-    const box = heroImg.getBoundingClientRect(); if (!box.width || !box.height) return;
-    const [lat, lon] = movePoint(state.lat, state.lon, (event.clientX - box.left) / box.width, (event.clientY - box.top) / box.height);
-    if (!inBerlin(lat, lon)) return;
-    state.lat = lat; state.lon = lon; showPoint(false);
-  });
+  // ---- Tap either photo: pixel offset -> metres -> new point (both show the same ground box, so the maths is the same) ----
+  for (const [name, img] of [['photo-1928', img1928], ['photo-today', imgToday]]) {
+    $(name).addEventListener('click', event => {
+      if (!state.lat) return;
+      const box = img.getBoundingClientRect(); if (!box.width || !box.height) return;
+      const [lat, lon] = movePoint(state.lat, state.lon, (event.clientX - box.left) / box.width, (event.clientY - box.top) / box.height);
+      if (!inBerlin(lat, lon)) return;
+      state.lat = lat; state.lon = lon; showPoint(false);
+    });
+  }
   for (const name of ['title', 'area', 'line']) {
     host.querySelector(`[data-ys="${name}"]`).addEventListener('input', event => { state[name] = event.target.value; paintWords(); refreshButton(); });
   }
