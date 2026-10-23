@@ -81,25 +81,42 @@ export function readyToAdd(state) {
 }
 
 const esc = value => String(value ?? '').replace(/[&<>"']/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'}[c]));
-const RING_SVG = (vw, vh, r, stroke) => `<svg class="ys-ring" viewBox="0 0 ${vw} ${vh}" preserveAspectRatio="none" aria-hidden="true"><circle cx="${vw / 2}" cy="${vh / 2}" r="${r}" fill="none" stroke="rgba(18,61,24,.55)" stroke-width="${stroke + 1.6}"/><circle cx="${vw / 2}" cy="${vh / 2}" r="${r}" fill="none" stroke="#FFE600" stroke-width="${stroke}"/></svg>`;
+const RING_SVG = (vw, vh, r, stroke) => `<svg class="ys-ring" viewBox="0 0 ${vw} ${vh}" preserveAspectRatio="none" aria-hidden="true"><circle cx="${vw / 2}" cy="${vh / 2}" r="${r}" fill="none" stroke="#FFE600" stroke-width="${stroke}"/></svg>`;
+// The preview is the print itself: a 30 x 40 cm sheet laid out on make_print.py's 1800 x 2400 design grid (CSS unit --u = 1/1800 of the sheet width).
+// Title size follows the generator: 118 (96 above 16 letters), shrunk until it fits the 1060-unit column left of the inset.
+export const titleSize = title => (String(title || '').length <= 16 ? 118 : 96);
 
 // `host` holds two slots ([data-ys-slot="visual"], [data-ys-slot="form"]) and the add button ([data-ys-add]). Rebuilt from `state` whenever the storefront re-renders. `api.add(customText)` returns a promise; `api.busy()` says whether the cart is locked.
 export function mountConfigurator(host, state, api) {
   const L = YS_LIMITS;
   const visual = host.querySelector('[data-ys-slot="visual"]'), formSlot = host.querySelector('[data-ys-slot="form"]');
   visual.innerHTML = `<div class="ys-visual">
-      <div class="ys-hero" data-ys="hero" ${state.lat ? '' : 'hidden'}>
-        <img class="ys-1928" alt="Aerial photograph of your spot in 1928, with a yellow ring on your building" decoding="async">
-        ${RING_SVG(HERO_W, HERO_H, RING, 3)}
-        <span class="ys-badge">c. 1928 · tap to move the ring</span>
-        <span class="ys-status" data-ys="status" role="status"></span>
+      <div class="ys-stage">
+        <div class="ys-sheet" data-ys="sheet" ${state.lat ? '' : 'hidden'}>
+          <div class="ys-hero" data-ys="hero">
+            <img class="ys-1928" alt="Aerial photograph of your spot in 1928, with a yellow ring on your building" decoding="async">
+            ${RING_SVG(HERO_W, HERO_H, RING, 2.1)}
+            <span class="ys-year" aria-hidden="true">1928</span>
+            <span class="ys-status" data-ys="status" role="status"></span>
+          </div>
+          <div class="ys-words">
+            <div class="ys-ptitle" data-ys="ptitle"></div>
+            <div class="ys-parea" data-ys="parea"></div>
+            <span class="ys-rule" aria-hidden="true"></span>
+            <div class="ys-pline" data-ys="pline"></div>
+            <div class="ys-pcap">The same spot from above, 1928 and today.</div>
+          </div>
+          <div class="ys-inset" data-ys="inset">
+            <img alt="Aerial photograph of the same spot today, with a yellow ring" decoding="async">
+            ${RING_SVG(INSET, INSET, RING, 1.6)}
+          </div>
+          <span class="ys-today">Today</span>
+          <span class="ys-pcredit">Aerial photographs: Geoportal Berlin, dl-de/zero-2.0</span>
+          <span class="ys-pbrand">Walk of Berlin</span>
+        </div>
+        <div class="ys-sheet ys-sample" data-ys="example" ${state.lat ? 'hidden' : ''}><img src="${esc(api.sample)}" alt="Example print of a Berlin square in 1928 and today"></div>
       </div>
-      <div class="ys-inset" data-ys="inset" ${state.lat ? '' : 'hidden'}>
-        <img alt="Aerial photograph of the same spot today, with a yellow ring" decoding="async">
-        ${RING_SVG(INSET, INSET, RING, 2.4)}
-        <span class="ys-badge">Today</span>
-      </div>
-      <div class="ys-example" data-ys="example" ${state.lat ? 'hidden' : ''}><img src="${esc(api.sample)}" alt="Example print of a Berlin square in 1928 and today"><p>Example print. Search for your own address to see your street.</p></div>
+      <p class="ys-caption" data-ys="caption">${state.lat ? 'Your poster, 30 x 40 cm. Tap the 1928 photo to move the ring onto your building.' : 'Example poster, 30 x 40 cm. Search for your own address to see your street.'}</p>
     </div>`;
   formSlot.innerHTML = `<div class="ys-form">
       <label class="ys-label" for="ys-q">Your address or a place in Berlin</label>
@@ -117,6 +134,16 @@ export function mountConfigurator(host, state, api) {
     </div>`;
   const $ = name => host.querySelector(`[data-ys="${name}"]`);
   const heroImg = $('hero').querySelector('img'), insetImg = $('inset').querySelector('img');
+  const ptitle = $('ptitle'), parea = $('parea'), pline = $('pline');
+  // Poster words follow the inputs; the title shrinks in 4-unit steps until it fits its column.
+  function paintWords() {
+    ptitle.textContent = clean(state.title, L.title).toUpperCase(); parea.textContent = clean(state.area, L.area);
+    pline.textContent = clean(state.line, L.line); pline.hidden = !pline.textContent;
+    let size = titleSize(ptitle.textContent);
+    ptitle.style.setProperty('--fs', size);
+    while (size > 48 && ptitle.scrollWidth > ptitle.clientWidth + 1) { size -= 4; ptitle.style.setProperty('--fs', size); }
+  }
+  document.fonts?.ready?.then(() => { if (host.isConnected) paintWords(); });
   const status = $('status'), results = $('results'), note = $('searchnote'), input = $('q');
   const setStatus = text => { status.textContent = text; status.hidden = !text; };
   const refreshButton = () => { const b = host.getRootNode().querySelector?.('[data-ys-add]'); if (b) b.disabled = !readyToAdd(state) || api.busy(); const why = host.getRootNode().querySelector?.('[data-ys-why]'); if (why) why.textContent = readyToAdd(state) ? '' : (!state.lat ? 'Search for your address to continue.' : (!state.seen ? 'Confirm that you can see the 1928 photo to continue.' : 'Fill in the title and area lines to continue.')); };
@@ -124,7 +151,9 @@ export function mountConfigurator(host, state, api) {
 
   function showPoint(fresh) {
     if (!state.lat) return;
-    $('hero').hidden = false; $('inset').hidden = false; $('example').hidden = true; $('fields').hidden = false;
+    $('sheet').hidden = false; $('example').hidden = true; $('fields').hidden = false;
+    $('caption').textContent = 'Your poster, 30 x 40 cm. Tap the 1928 photo to move the ring onto your building.';
+    paintWords();
     setStatus('Loading the 1928 photo…');
     const mine = state.token = (state.token || 0) + 1;
     heroImg.onload = () => { if (state.token === mine) setStatus(''); };
@@ -179,7 +208,7 @@ export function mountConfigurator(host, state, api) {
     state.lat = lat; state.lon = lon; showPoint(false);
   });
   for (const name of ['title', 'area', 'line']) {
-    host.querySelector(`[data-ys="${name}"]`).addEventListener('input', event => { state[name] = event.target.value; refreshButton(); });
+    host.querySelector(`[data-ys="${name}"]`).addEventListener('input', event => { state[name] = event.target.value; paintWords(); refreshButton(); });
   }
   host.querySelector('[data-ys="seen"]').addEventListener('change', event => { state.seen = event.target.checked; refreshButton(); });
   if (state.lat) showPoint(false);
