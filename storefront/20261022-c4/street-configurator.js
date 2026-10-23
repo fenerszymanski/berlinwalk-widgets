@@ -1,6 +1,6 @@
 // "Your Berlin Street in 1928" configurator (store product only). Geometry is identical to
 // content/products/your-street-1928/SPEC.md and generator/make_print.py (utm33).
-// Pure browser code: Nominatim geocoding (Berlin only), two WMS GetMap <img> previews, tap-to-move ring.
+// Pure browser code: Photon geocoding with Nominatim as fallback (Berlin only), two WMS GetMap <img> previews, tap-to-move ring.
 export const YS_PRODUCT_ID = '8aaf5412-7f21-42c7-acfb-85dd8417d68c';
 export const YS_FIELDS = Object.freeze({
   address: 'Address or place in Berlin',
@@ -14,6 +14,8 @@ const WMS_1928 = 'https://gdi.berlin.de/services/wms/luftbild_1928_04', LAYER_19
 const WMS_TODAY = 'https://gdi.berlin.de/services/wms/truedop_2026', LAYER_TODAY = 'truedop_2026';
 const BERLIN = {west: 13.0884, east: 13.7612, north: 52.6755, south: 52.3383};
 const NOMINATIM = 'https://nominatim.openstreetmap.org/search';
+// Photon (komoot, OpenStreetMap data) forgives typos ("fisherinsel") and is built for search-as-you-type; Nominatim is not.
+const PHOTON = 'https://photon.komoot.io/api/';
 
 export function utm33(lat, lon) {
   const a = 6378137.0, f = 1 / 298.257222101, e2 = f * (2 - f), k0 = 0.9996, lon0 = 15 * Math.PI / 180;
@@ -58,6 +60,21 @@ export function areaFrom(result) {
   const area = clean(a.suburb || a.city_district || a.borough || a.neighbourhood || '', 40);
   const line = area ? `${area}, Berlin` : 'Berlin';
   return line.length <= YS_LIMITS.area ? line : (area.slice(0, YS_LIMITS.area - 8).trim() + ', Berlin').slice(0, YS_LIMITS.area);
+}
+// Photon feature -> the Nominatim-like row the helpers above read. A street result names the road; a square, park or district keeps its name.
+export function fromPhoton(feature) {
+  const p = feature?.properties || {}, [lon, lat] = feature?.geometry?.coordinates || [];
+  const isStreet = p.osm_key === 'highway' || p.type === 'street';
+  const road = p.street || (isStreet ? p.name : '');
+  return {lat: Number(lat), lon: Number(lon), name: p.name || '', city: p.city || '',
+    address: {road, house_number: p.housenumber || '', postcode: p.postcode || '', suburb: p.district || (p.type === 'district' ? p.name : ''), square: road ? '' : (p.name || '')}};
+}
+// Two lines for a suggestion: the place itself, then where it is.
+export function placeLines(result) {
+  const a = result?.address || {}, street = [a.road, a.house_number].filter(Boolean).join(' ');
+  const main = clean(result?.name && result.name !== a.road ? result.name : (street || result?.name || result?.display_name), 70);
+  const sub = clean([main === clean(street, 70) ? '' : street, a.postcode, a.suburb || a.city_district, 'Berlin'].filter(Boolean).join(', '), 90);
+  return [main, sub];
 }
 export function addressLabel(result) {
   const a = result?.address || {};
@@ -121,9 +138,9 @@ export function mountConfigurator(host, state, api) {
   formSlot.innerHTML = `<div class="ys-form">
       <label class="ys-label" for="ys-q">Your address or a place in Berlin</label>
       <div class="ys-search"><input id="ys-q" data-ys="q" type="search" autocomplete="off" enterkeyhint="search" maxlength="${L.address}" placeholder="e.g. Chamissoplatz" value="${esc(state.query || '')}"><button type="button" class="outline" data-ys="go">Search</button></div>
-      <ul class="ys-results" data-ys="results" role="listbox" aria-label="Matching places" hidden></ul>
       <p class="ys-note" data-ys="searchnote" role="status"></p>
-      <p class="ys-attr">Search by <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer">© OpenStreetMap contributors</a>. Berlin only.</p>
+      <ul class="ys-results" data-ys="results" role="listbox" aria-label="Matching places" hidden></ul>
+      <p class="ys-attr">Search by <a href="https://photon.komoot.io" target="_blank" rel="noopener noreferrer">Photon</a> and <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer">© OpenStreetMap contributors</a>. Berlin only.</p>
       <div class="ys-fields" data-ys="fields" ${state.lat ? '' : 'hidden'}>
         <div class="ys-row"><label>Title on the print<input data-ys="title" maxlength="${L.title}" autocapitalize="characters" value="${esc(state.title || '')}"></label><label>Area line<input data-ys="area" maxlength="${L.area}" value="${esc(state.area || '')}"></label></div>
         <label>Your line on the print (optional)<input data-ys="line" maxlength="${L.line}" placeholder="e.g. Lena &amp; Jonas · here since 2021" value="${esc(state.line || '')}"></label>
@@ -146,7 +163,7 @@ export function mountConfigurator(host, state, api) {
   document.fonts?.ready?.then(() => { if (host.isConnected) paintWords(); });
   const status = $('status'), results = $('results'), note = $('searchnote'), input = $('q');
   const setStatus = text => { status.textContent = text; status.hidden = !text; };
-  const refreshButton = () => { const b = host.getRootNode().querySelector?.('[data-ys-add]'); if (b) b.disabled = !readyToAdd(state) || api.busy(); const why = host.getRootNode().querySelector?.('[data-ys-why]'); if (why) why.textContent = readyToAdd(state) ? '' : (!state.lat ? 'Search for your address to continue.' : (!state.seen ? 'Confirm that you can see the 1928 photo to continue.' : 'Fill in the title and area lines to continue.')); };
+  const refreshButton = () => { const b = host.getRootNode().querySelector?.('[data-ys-add]'); if (b) b.disabled = !readyToAdd(state) || api.busy(); const why = host.getRootNode().querySelector?.('[data-ys-why]'); if (why) why.textContent = readyToAdd(state) ? '' : (!state.lat ? (results.hidden ? 'Search for your address to continue.' : 'Tap one of the places under the search box.') : (!state.seen ? 'Confirm that you can see the 1928 photo to continue.' : 'Fill in the title and area lines to continue.')); };
   api.refresh = refreshButton;
 
   function showPoint(fresh) {
@@ -164,31 +181,44 @@ export function mountConfigurator(host, state, api) {
     if (fresh) state.seen = false, host.querySelector('[data-ys="seen"]').checked = false;
     refreshButton();
   }
-  // ---- Nominatim: Berlin viewbox, bounded, Germany only. Browsers cannot set a User-Agent, so the contact address goes in the email parameter. Max one request per second, debounced. ----
+  // ---- Search: Photon first (typo-tolerant, Berlin bbox), Nominatim when Photon fails or finds nothing (max one request per second, contact email). ----
   let timer = 0, controller = null;
   const spacing = 1100;
-  async function search(q) {
-    q = clean(q, 80);
-    if (q.length < 3) { results.hidden = true; note.textContent = q ? 'Keep typing (at least 3 letters).' : ''; return; }
+  const PIN = '<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 0 0-7-7zm0 9.6A2.6 2.6 0 1 1 12 6.4a2.6 2.6 0 0 1 0 5.2z"/></svg>';
+  async function photon(q, signal) {
+    const url = `${PHOTON}?q=${encodeURIComponent(q)}&limit=10&lang=de&bbox=${BERLIN.west},${BERLIN.south},${BERLIN.east},${BERLIN.north}`;
+    const response = await fetch(url, {signal, headers: {Accept: 'application/json'}});
+    if (!response.ok) throw new Error('HTTP ' + response.status);
+    return ((await response.json()).features || []).map(fromPhoton).filter(r => r.city === 'Berlin');
+  }
+  async function nominatim(q, signal) {
     const wait = Math.max(0, (api.lastSearchAt || 0) + spacing - Date.now());
     if (wait) await new Promise(r => setTimeout(r, wait));
-    if (clean(input.value, 80) !== q) return;
-    controller?.abort(); controller = new AbortController();
-    api.lastSearchAt = Date.now(); note.textContent = 'Searching…';
-    try {
-      const url = `${NOMINATIM}?format=jsonv2&addressdetails=1&limit=5&countrycodes=de&bounded=1&viewbox=${BERLIN.west},${BERLIN.north},${BERLIN.east},${BERLIN.south}&q=${encodeURIComponent(q + ', Berlin')}&email=info@berlinwalk.com`;
-      const response = await fetch(url, {signal: controller.signal, headers: {Accept: 'application/json'}});
-      if (!response.ok) throw new Error('HTTP ' + response.status);
-      const rows = (await response.json()).filter(r => inBerlin(Number(r.lat), Number(r.lon)));
-      state.results = rows;
-      results.innerHTML = rows.map((r, i) => `<li role="option"><button type="button" data-ys-pick="${i}">${esc(clean(r.display_name, 110))}</button></li>`).join('');
-      results.hidden = rows.length === 0;
-      note.textContent = rows.length ? 'Choose your place:' : 'Nothing found in Berlin. Try the street name with a house number.';
-    } catch (error) {
-      if (error.name !== 'AbortError') note.textContent = 'The address search did not answer. Try again in a moment.';
-    }
+    api.lastSearchAt = Date.now();
+    const url = `${NOMINATIM}?format=jsonv2&addressdetails=1&limit=5&countrycodes=de&bounded=1&viewbox=${BERLIN.west},${BERLIN.north},${BERLIN.east},${BERLIN.south}&q=${encodeURIComponent(q + ', Berlin')}&email=info@berlinwalk.com`;
+    const response = await fetch(url, {signal, headers: {Accept: 'application/json'}});
+    if (!response.ok) throw new Error('HTTP ' + response.status);
+    return (await response.json()).map(r => ({...r, lat: Number(r.lat), lon: Number(r.lon)}));
   }
-  const schedule = () => { clearTimeout(timer); timer = setTimeout(() => search(input.value), 900); };
+  async function search(q) {
+    q = clean(q, 80);
+    if (q.length < 3) { results.hidden = true; note.textContent = q ? 'Keep typing (at least 3 letters).' : ''; note.classList.remove('ys-choose'); refreshButton(); return; }
+    controller?.abort(); controller = new AbortController(); const {signal} = controller;
+    note.textContent = 'Searching…'; note.classList.remove('ys-choose');
+    let rows = [];
+    try { rows = await photon(q, signal); } catch (error) { if (error.name === 'AbortError') return; }
+    try { if (!rows.length && clean(input.value, 80) === q) rows = await nominatim(q, signal); } catch (error) { if (error.name === 'AbortError') return; if (!rows.length) { note.textContent = 'The address search did not answer. Try again in a moment.'; return; } }
+    if (clean(input.value, 80) !== q) return;
+    const seen = new Set();
+    rows = rows.filter(r => inBerlin(r.lat, r.lon)).filter(r => { const key = [placeLines(r)[0], r.address?.suburb || r.address?.city_district || ''].join('|').toLowerCase(); return !seen.has(key) && seen.add(key); }).slice(0, 5);
+    state.results = rows;
+    results.innerHTML = rows.map((r, i) => { const [main, sub] = placeLines(r); return `<li role="option"><button type="button" class="ys-pick" data-ys-pick="${i}">${PIN}<span class="ys-pick-text"><strong>${esc(main)}</strong><small>${esc(sub)}</small></span><span class="ys-pick-go" aria-hidden="true">›</span></button></li>`; }).join('');
+    results.hidden = rows.length === 0;
+    note.textContent = rows.length ? 'Tap your place to put it on the poster:' : 'Nothing found in Berlin. Check the spelling, or try the street name with a house number.';
+    note.classList.toggle('ys-choose', rows.length > 0);
+    refreshButton();
+  }
+  const schedule = () => { clearTimeout(timer); timer = setTimeout(() => search(input.value), 450); };
   input.addEventListener('input', () => { state.query = input.value; schedule(); });
   input.addEventListener('keydown', event => { if (event.key === 'Enter') { event.preventDefault(); clearTimeout(timer); search(input.value); } });
   $('go').addEventListener('click', () => { clearTimeout(timer); search(input.value); });
@@ -197,7 +227,9 @@ export function mountConfigurator(host, state, api) {
     const r = state.results?.[Number(pick.dataset.ysPick)]; if (!r) return;
     Object.assign(state, {lat: Math.round(Number(r.lat) * 1e5) / 1e5, lon: Math.round(Number(r.lon) * 1e5) / 1e5, address: addressLabel(r), title: titleFrom(r), area: areaFrom(r), query: input.value});
     host.querySelector('[data-ys="title"]').value = state.title; host.querySelector('[data-ys="area"]').value = state.area;
-    results.hidden = true; note.textContent = ''; showPoint(true);
+    results.hidden = true; note.textContent = ''; note.classList.remove('ys-choose'); showPoint(true);
+    const box = $('sheet').getBoundingClientRect();
+    if (box.bottom < 90 || box.top > innerHeight - 90) $('sheet').scrollIntoView({behavior: 'smooth', block: 'start'});
   });
   // ---- Tap the 1928 photo: pixel offset -> metres -> new point ----
   $('hero').addEventListener('click', event => {
