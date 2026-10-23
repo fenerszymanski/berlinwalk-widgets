@@ -99,3 +99,26 @@ h2>.sk-heading{width:55%}
 .cart-line .line-custom{display:block;margin:4px 0 0;word-break:break-word}
 @media(max-width:740px){.ys-row{grid-template-columns:1fr}.ys-inset{width:min(52%,230px)}}
 .ys-form input[data-ys=title]{text-transform:uppercase}
+
+/* Legal surfaces (23 Oct 2026): checkout acknowledgement, line notices, withdrawal button, EU legal guarantee notice. */
+.legal-box{margin:0 0 10px;text-align:left}
+.legal-ack{margin:0 0 4px;font-size:13px;line-height:1.45;color:var(--ink)}
+.legal-links{display:flex;flex-wrap:wrap;gap:4px 16px;margin:0;font-size:13px}
+.legal-links a{display:inline-flex;align-items:center;min-height:32px}
+.withdraw-row{margin:14px 0 0}
+.withdraw-link{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:8px 16px;border:1.5px solid var(--green);border-radius:999px;background:transparent;color:var(--green);font-size:14px;font-weight:600;text-decoration:none;text-align:center}
+.withdraw-link:hover{background:var(--panel);color:var(--green)}
+.buy-box .legal-links{margin-top:12px}
+.line-legal{margin:8px 0 0;padding:8px 10px;background:var(--panel);border-radius:8px;font-size:12px;line-height:1.45;color:var(--ink)}
+.line-legal strong{display:block;color:var(--green);font-size:12px}
+.line-legal p{margin:4px 0 0}
+.eu-guarantee{margin:18px 0 0}
+.eu-guarantee h2{font:500 18px var(--serif);margin:0 0 8px;color:var(--green)}
+.eu-guarantee img{display:block;width:100%;max-width:440px;height:auto;border:1px solid var(--line);background:#fff}
+.eu-guarantee p{margin:6px 0 0;font-size:12px}
+@media(max-width:740px){
+  .cart-mode.mobile-cart-checkout .legal-ack{font-size:11px;line-height:1.35}
+  .cart-mode.mobile-cart-checkout .legal-links{font-size:12px}
+  .cart-mode.mobile-cart-checkout .legal-links a{min-height:28px}
+  .withdraw-link{width:100%}
+}
