@@ -11,7 +11,7 @@ const BW_HEADER_MONO_URL = new URL('../brand/fonts/editorial-v2/IBMPlexMono-Semi
 const BW_HEADER_MENU_FONT_URL = new URL('../home-two-doors/assets/fonts/Fraunces-Variable-latin.woff2', BW_HEADER_SCRIPT_URL).href;
 // Berlin Then and Now (service 145cb27e). The legacy booking path stays
 // reachable for guests who booked before 30 September, but nothing links to it.
-const BW_HEADER_BUILD = 'site-header-mobile-marker-20261019';
+const BW_HEADER_BUILD = 'site-header-shop-20261023';
 const BW_HEADER_BOOKING_URL = 'https://www.walkofberlin.com/book-berlin-walking-tour/berlin-then-and-now';
 const BW_HEADER_TOUR_FACTS = ['about 2.5 hours', 'max 10 people', '€25']
   .map((fact) => `<span class="bw-header-fact">${fact}</span>`)
@@ -34,6 +34,12 @@ const BW_HEADER_LINKS = {
   audioTours: 'https://www.walkofberlin.com/audio-tours',
   virtualTours: 'https://www.walkofberlin.com/virtual-walking-tours',
   weeklyLetter: 'https://www.walkofberlin.com/weekly',
+  shop: 'https://www.walkofberlin.com/category/all-products',
+  shopCalendar: 'https://www.walkofberlin.com/category/wall-calendars',
+  shopDistricts: 'https://www.walkofberlin.com/category/berlin-districts-prints',
+  shopLandmarks: 'https://www.walkofberlin.com/category/berlin-landmark-posters',
+  shopReels: 'https://www.walkofberlin.com/category/berlin-reels-collection',
+  shopPrintables: 'https://www.walkofberlin.com/category/digital-downloads',
   photoMissions: 'https://www.walkofberlin.com/products/hidden-berlin-photo-missions',
   games: 'https://www.walkofberlin.com/games',
   timeDetective: 'https://www.walkofberlin.com/games/berlin-time-detective',
@@ -191,6 +197,7 @@ class BWHeaderElement extends HTMLElement {
     this._productsMenuId = `${this._instanceId}-products-menu`;
     this._gamesMenuId = `${this._instanceId}-games-menu`;
     this._blogMenuId = `${this._instanceId}-blog-menu`;
+    this._shopMenuId = `${this._instanceId}-shop-menu`;
     this._hacksMenuId = `${this._instanceId}-hacks-menu`;
     this.dataset.bwNavigation = "20260917";
     this.dataset.bwHeaderBuild = BW_HEADER_BUILD;
@@ -226,6 +233,7 @@ class BWHeaderElement extends HTMLElement {
       ['.bw-header-dropdown-trigger', 'tour-menu', '.bw-header-submenu'],
       ['.bw-header-dropdown-trigger', 'products-menu', '.bw-header-submenu'],
       ['.bw-header-dropdown-trigger', 'blog-menu', '.bw-header-submenu'],
+      ['.bw-header-dropdown-trigger', 'shop-menu', '.bw-header-submenu'],
     ];
     return controls.every(([trigger, suffix, menu]) => {
       const id = `${prefix}-${suffix}`;
@@ -967,6 +975,10 @@ class BWHeaderElement extends HTMLElement {
           .bw-header-nav .bw-header-tour-link { padding-right: 2px; }
           .bw-header-cta .bw-header-book { padding-left: 14px; padding-right: 14px; letter-spacing: .6px; font-size: 12px; }
         }
+        @media (min-width: 981px) and (max-width: 1070px) {
+          .bw-header-nav a, .bw-header-dropdown-trigger { padding-left: 5px; padding-right: 5px; font-size: 15px; white-space: nowrap; }
+          .bw-header-cta .bw-header-book { padding-left: 12px; padding-right: 12px; letter-spacing: .3px; }
+        }
         .bw-header-book {
           align-items: center;
           background: var(--yellow);
@@ -1372,6 +1384,19 @@ class BWHeaderElement extends HTMLElement {
                   </ul>
                 </li>
                 <li><a href="${BW_HEADER_LINKS.weeklyLetter}">Weekly letter</a></li>
+                <li class="bw-header-dropdown">
+                  <button class="bw-header-dropdown-trigger" type="button" aria-expanded="false" aria-controls="${this._shopMenuId}">
+                    Store <span class="bw-header-caret" aria-hidden="true">⌄</span>
+                  </button>
+                  <ul id="${this._shopMenuId}" class="bw-header-submenu">
+                    <li><a href="${BW_HEADER_LINKS.shop}">All products</a></li>
+                    <li><a href="${BW_HEADER_LINKS.shopCalendar}">2027 Wall Calendar</a></li>
+                    <li><a href="${BW_HEADER_LINKS.shopDistricts}">Berlin Districts</a></li>
+                    <li><a href="${BW_HEADER_LINKS.shopLandmarks}">Berlin Landmarks</a></li>
+                    <li><a href="${BW_HEADER_LINKS.shopReels}">Berlin Reels Collection</a></li>
+                    <li><a href="${BW_HEADER_LINKS.shopPrintables}">Printables</a></li>
+                  </ul>
+                </li>
               </ul>
             </nav>
 
@@ -1426,6 +1451,15 @@ class BWHeaderElement extends HTMLElement {
                 <a href="${BW_HEADER_LINKS.blogBeforeAfter}">Before &amp; After</a>
               </details>
               <a href="${BW_HEADER_LINKS.weeklyLetter}">Weekly letter</a>
+              <details class="bw-header-mobile-section">
+                <summary class="bw-header-mobile-section-label">Store</summary>
+                <a href="${BW_HEADER_LINKS.shop}">All products</a>
+                <a href="${BW_HEADER_LINKS.shopCalendar}">2027 Wall Calendar</a>
+                <a href="${BW_HEADER_LINKS.shopDistricts}">Berlin Districts</a>
+                <a href="${BW_HEADER_LINKS.shopLandmarks}">Berlin Landmarks</a>
+                <a href="${BW_HEADER_LINKS.shopReels}">Berlin Reels Collection</a>
+                <a href="${BW_HEADER_LINKS.shopPrintables}">Printables</a>
+              </details>
             </nav>
 
             <div class="bw-header-mobile-cta">

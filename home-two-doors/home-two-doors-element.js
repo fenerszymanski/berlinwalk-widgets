@@ -149,6 +149,50 @@ const BW_HOME_TWO_DOORS_MORE_PRODUCTS = [
   },
 ];
 
+const BW_HOME_TWO_DOORS_SHOP_URL = 'https://www.walkofberlin.com/category/all-products';
+const BW_HOME_TWO_DOORS_SHOP_PRODUCTS = [
+  {
+    label: 'FOR YOUR WALL',
+    title: 'Berlin 2027 Wall Calendar',
+    price: '€29.90',
+    imageUrl: 'https://static.wixstatic.com/media/5a08a3_de1802442ecc44c8afac5a2b5fbaeef9~mv2.jpg/v1/fit/w_640,h_480,q_85/file.jpg',
+    alt: 'Berlin 2027 A3 wall calendar open at January, with the TV Tower above the month grid',
+    text: 'One Berlin district for every month, with Berlin holidays and school holidays. Order by 15 December for Christmas.',
+    href: 'https://www.walkofberlin.com/product-page/berlin-2027-wall-calendar-a3',
+    cta: 'See the calendar',
+  },
+  {
+    label: 'BERLIN DISTRICTS',
+    title: 'One poster for each Bezirk',
+    price: '€29.90 each',
+    imageUrl: 'https://static.wixstatic.com/media/5a08a3_23f9eb0a33794b8aaf7474e5a99f0b1c~mv2.jpg/v1/fit/w_480,h_480,q_85/file.jpg',
+    alt: 'Friedrichshain-Kreuzberg poster with the Oberbaum Bridge',
+    text: 'One landmark for each Berlin district, from the Oberbaum Bridge to the Juliusturm in Spandau.',
+    href: 'https://www.walkofberlin.com/category/berlin-districts-prints',
+    cta: 'See the districts',
+  },
+  {
+    label: 'FROM MY REELS',
+    title: 'Berlin Reels Collection',
+    price: '€29.90 each',
+    imageUrl: 'https://static.wixstatic.com/media/5a08a3_dce47cd203284827a81e36a3328e0942~mv2.jpg/v1/fit/w_480,h_480,q_85/file.jpg',
+    alt: 'Ghost Stations poster: an empty platform as a yellow train passes',
+    text: 'Four stories from my reels as posters: ghost stations, the Berlin-Uhr, the tram map and a treehouse at the Wall.',
+    href: 'https://www.walkofberlin.com/category/berlin-reels-collection',
+    cta: 'See the collection',
+  },
+  {
+    label: 'PRINT AT HOME',
+    title: 'Printables',
+    price: 'From €6.90',
+    imageUrl: 'https://static.wixstatic.com/media/5a08a3_e1ee5add72f44c8abc4f19f4a76035f5~mv2.jpg/v1/fit/w_640,h_480,q_85/file.jpg',
+    alt: 'All twelve Berlin district posters arranged in a grid of frames',
+    text: 'The same artwork as instant downloads, ready to print in your own size.',
+    href: 'https://www.walkofberlin.com/category/digital-downloads',
+    cta: 'See the printables',
+  },
+];
+
 function bwHomeTwoDoorsFormatTime(seconds) {
   const safeSeconds = Number.isFinite(seconds) && seconds >= 0 ? Math.round(seconds) : 0;
   const minutes = Math.floor(safeSeconds / 60);
@@ -345,6 +389,16 @@ class BWHomeTwoDoorsElement extends HTMLElement {
         <span>${product.text}</span>
         <span class="bw-home-two-doors__more-price">${product.price}</span>
         <span class="bw-home-two-doors__more-cta">${product.cta || (product.label === 'TOOLS' ? 'Explore free tools' : 'Explore this product')} →</span>
+      </a>`).join('');
+
+    const shopCards = BW_HOME_TWO_DOORS_SHOP_PRODUCTS.map((product) => `
+      <a class="bw-home-two-doors__more-card bw-home-two-doors__shop-card" href="${product.href}" data-bw-cta-id="shop_${product.title.toLowerCase().replace(/[^a-z0-9]+/g, '_')}" data-bw-cta-placement="shop">
+        <img class="bw-home-two-doors__more-thumb" src="${product.imageUrl}" alt="${product.alt}" loading="lazy" width="640" height="480">
+        <span class="bw-home-two-doors__eyebrow">${product.label}</span>
+        <b>${product.title}</b>
+        <span>${product.text}</span>
+        <span class="bw-home-two-doors__more-price">${product.price}</span>
+        <span class="bw-home-two-doors__more-cta">${product.cta} →</span>
       </a>`).join('');
 
     const faqItems = BW_HOME_TWO_DOORS_FAQ.map((item) => `
@@ -627,6 +681,20 @@ class BWHomeTwoDoorsElement extends HTMLElement {
               <p class="bw-home-two-doors__lead">Pick the one that answers the question you have today.</p>
             </div>
             <div class="bw-home-two-doors__more">${moreCards}</div>
+          </div>
+        </section>
+
+        <section class="bw-home-two-doors__section" id="shop" data-bw-home-card="shop" data-bw-card-type="shop" data-bw-placement="shop">
+          <div class="bw-home-two-doors__wrap">
+            <div class="bw-home-two-doors__section-head">
+              <div>
+                <span class="bw-home-two-doors__eyebrow"><span class="bw-home-two-doors__dot"></span>Store</span>
+                <h2>Take Berlin home.</h2>
+              </div>
+              <p class="bw-home-two-doors__lead">Posters, a 2027 wall calendar and printables from the places I walk and the stories I tell. Prints are made to order. <a class="bw-home-two-doors__link" href="${BW_HOME_TWO_DOORS_SHOP_URL}" data-bw-cta-id="shop_all" data-bw-cta-placement="shop">Visit the store</a></p>
+            </div>
+            <div class="bw-home-two-doors__more bw-home-two-doors__shop">${shopCards}</div>
+            <p class="bw-home-two-doors__shop-note">Free shipping to Germany, the EU, the UK and the US.</p>
           </div>
         </section>
 

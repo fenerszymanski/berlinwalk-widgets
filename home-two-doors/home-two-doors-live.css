@@ -2195,3 +2195,17 @@ bw-home-two-doors .bw-home-two-doors .bw-home-two-doors__review--dark .bw-home-t
   .bw-home-two-doors .bw-home-two-doors__more-card--wide > :nth-child(5) { grid-row: 5; margin-top: 4px; padding-top: 14px; }
   .bw-home-two-doors .bw-home-two-doors__more-card--wide > :nth-child(6) { grid-row: 6; }
 }
+
+/* Store row (23 Oct 2026): posters are square, so show the whole print on cream instead of cropping. */
+.bw-home-two-doors .bw-home-two-doors__shop-card .bw-home-two-doors__more-thumb {
+  aspect-ratio: 4 / 3;
+  object-fit: contain;
+  background: var(--bw-cream-2);
+}
+
+.bw-home-two-doors .bw-home-two-doors__shop-note {
+  color: var(--bw-ink-2);
+  font-family: var(--bw-mono);
+  font-size: 12px;
+  margin-top: 16px;
+}
