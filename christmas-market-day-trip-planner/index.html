@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Christmas Market Day Trip Planner: Which Market Near Berlin Fits Your Day</title>
+<link rel="stylesheet" href="../css/brand.css">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #FFFFFF; color: #1c2119; padding: 12px; }
+  .xp { border-radius: 18px; overflow: hidden; background: #fbf8ee; border: 1px solid #e3dcc4; }
+  .xp-head { padding: 18px 18px 14px; background: #1B5E20; color: #fff; }
+  .xp-kick { font-size: 11px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; color: #FFE600; }
+  .xp-head h1 { font-size: 20px; line-height: 1.25; font-weight: 800; margin-top: 5px; }
+  .xp-head p { font-size: 12.5px; line-height: 1.55; color: #dcebd0; margin-top: 7px; max-width: 660px; }
+  .xp-controls { display: flex; flex-wrap: wrap; gap: 10px 18px; align-items: flex-end; padding: 14px 16px 6px; }
+  .xp-controls label { display: grid; gap: 5px; font-size: 11px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: #3c4a34; }
+  .xp-controls input, .xp-controls select { font-family: inherit; font-size: 15px; font-weight: 700; color: #123D18; background: #fff; border: 1.5px solid #b9c7a6; border-radius: 10px; padding: 8px 10px; min-width: 170px; }
+  .xp-day { font-size: 13px; font-weight: 700; color: #123D18; padding-bottom: 9px; }
+  .xp-body { display: grid; grid-template-columns: 1fr 1.1fr; gap: 12px; padding: 8px 14px 14px; align-items: start; }
+  .xp-map { background: #f2eedd; border: 1px solid #e0d8bd; border-radius: 14px; padding: 6px; }
+  .xp-map canvas { display: block; width: 100%; height: auto; cursor: pointer; }
+  .xp-legend { display: flex; flex-wrap: wrap; gap: 12px; padding: 6px 6px 2px; font-size: 10.5px; color: #55604c; }
+  .xp-legend em { display: inline-block; width: 11px; height: 11px; border-radius: 50%; margin-right: 5px; vertical-align: -1px; }
+  .xp-panel { background: #fff; border: 1px solid #e3dcc4; border-radius: 14px; padding: 12px; }
+  .xp-panel h2 { font-size: 13px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; color: #1B5E20; margin-bottom: 8px; }
+  .xp-list { list-style: none; display: grid; gap: 6px; }
+  .xp-list button { width: 100%; font-family: inherit; text-align: left; border: 1px solid #e3dcc4; background: #fbf8ee; color: #1c2119; border-radius: 11px; padding: 9px 10px; cursor: pointer; display: grid; grid-template-columns: 1fr auto; gap: 2px 10px; align-items: center; }
+  .xp-list button:hover { border-color: #1B5E20; }
+  .xp-list .n { font-size: 13px; font-weight: 800; color: #123D18; line-height: 1.3; }
+  .xp-list .t { font-size: 11.5px; color: #55604c; line-height: 1.35; }
+  .xp-list .h { grid-row: 1 / span 2; grid-column: 2; font-size: 15px; font-weight: 800; color: #123D18; background: #FFE600; border-radius: 9px; padding: 6px 9px; text-align: center; min-width: 64px; }
+  .xp-list .h small { display: block; font-size: 9.5px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; }
+  .xp-list .is-shut button { background: #f4f3ef; border-style: dashed; }
+  .xp-list .is-shut .n { color: #6b7066; }
+  .xp-list .is-shut .h { background: #e7e6df; color: #55604c; }
+  .xp-sub { font-size: 11px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: #8a8f80; margin: 12px 0 6px; }
+  .xp-plan[hidden], .xp-board[hidden] { display: none; }
+  .xp-back { font-family: inherit; font-size: 12px; font-weight: 800; color: #1B5E20; background: none; border: 0; cursor: pointer; padding: 0 0 8px; }
+  .xp-plan h3 { font-size: 17px; line-height: 1.3; color: #123D18; }
+  .xp-plan .where { font-size: 12px; color: #55604c; margin-top: 3px; }
+  .xp-plan canvas { display: block; width: 100%; height: auto; margin-top: 10px; }
+  .xp-facts { list-style: none; margin-top: 10px; display: grid; gap: 7px; }
+  .xp-facts li { font-size: 12.5px; line-height: 1.5; color: #2b3326; padding-left: 14px; position: relative; }
+  .xp-facts li::before { content: ''; position: absolute; left: 0; top: 7px; width: 7px; height: 7px; border-radius: 50%; background: #7CB342; }
+  .xp-facts li.warn::before { background: #FFE600; box-shadow: 0 0 0 1.5px #123D18; }
+  .xp-plan a { color: #1B5E20; font-weight: 800; font-size: 12px; }
+  .xp-foot { padding: 0 16px 14px; font-size: 10.5px; line-height: 1.5; color: #6b7066; }
+  button:focus-visible, input:focus-visible, select:focus-visible { outline: 2px solid #1B5E20; outline-offset: 2px; }
+  @media (max-width: 700px) {
+    .xp-body { grid-template-columns: 1fr; }
+    .xp-head h1 { font-size: 17px; }
+    .xp-controls input, .xp-controls select { min-width: 0; width: 100%; }
+    .xp-controls label { flex: 1 1 140px; }
+  }
+</style>
+</head>
+<body>
+<div class="xp">
+  <div class="xp-head">
+    <div class="xp-kick">Walk of Berlin &bull; Advent day trips</div>
+    <h1>Christmas market day trips from Berlin: which one fits your day</h1>
+    <p>Pick the day you are free and when you want to be back at Berlin Hauptbahnhof. The board ranks the markets outside Berlin by how many hours you really get at the stalls, after the train there and back. Tap one for the day plan.</p>
+  </div>
+  <div class="xp-controls">
+    <label for="day">Your free day
+      <input type="date" id="day" min="2026-11-23" max="2026-12-27" value="2026-12-05">
+    </label>
+    <label for="back">Back at Berlin Hbf by
+      <select id="back">
+        <option value="20">20:00 (with kids)</option>
+        <option value="22">22:00</option>
+        <option value="23.5" selected>23:30</option>
+      </select>
+    </label>
+    <div class="xp-day" id="dayname" aria-live="polite"></div>
+  </div>
+  <div class="xp-body">
+    <div class="xp-map">
+      <canvas id="map" width="520" height="460" aria-label="Map of the market towns around Berlin with train times"></canvas>
+      <div class="xp-legend">
+        <span><em style="background:#FFE600;border:1.5px solid #123D18"></em>Open on your day</span>
+        <span><em style="background:#d9d7cf"></em>Shut on your day</span>
+        <span><em style="background:#1B5E20"></em>Berlin Hbf</span>
+      </div>
+    </div>
+    <div class="xp-panel">
+      <div class="xp-board" id="board">
+        <h2>Hours at the market</h2>
+        <ul class="xp-list" id="open"></ul>
+        <div class="xp-sub" id="shutlabel">Not open on this day</div>
+        <ul class="xp-list" id="shut"></ul>
+      </div>
+      <div class="xp-plan" id="plan" hidden>
+        <button class="xp-back" id="backbtn" type="button">&larr; All markets</button>
+        <h3 id="p-name"></h3>
+        <div class="where" id="p-where"></div>
+        <canvas id="line" width="520" height="150" aria-label="Timeline of the day trip"></canvas>
+        <ul class="xp-facts" id="p-facts"></ul>
+      </div>
+    </div>
+  </div>
+  <div class="xp-foot">Dates and hours from each organiser's own page, checked on 23 October 2026. Train times are the fastest direct or one-change trains from Berlin Hauptbahnhof in the timetable for Saturday 5 December 2026; the plan assumes you leave Berlin Hbf at 10:00 and adds the walk or tram from the station to the market. Check your exact train on the day.</div>
+</div>
+
+<script>
+(function () {
+  var M = [
+    { id: 'potsdam', name: 'Potsdamer Weihnachtszauber', town: 'Potsdam', lat: 52.4009, lon: 13.0591, train: 32, local: 15,
+      how: 'S7 or RE1 to Potsdam Hbf, then tram to Luisenplatz or a 15-minute walk', ticket: 'Berlin ABC ticket or Deutschlandticket',
+      days: { from: '2026-11-23', to: '2026-12-27', shut: ['2026-12-24'] },
+      hours: function (d) { var k = d.toISOString().slice(0, 10); if (k === '2026-12-25' || k === '2026-12-26') return [11, 18]; var w = d.getUTCDay(); return (w === 5 || w === 6) ? [11, 22] : [11, 21]; },
+      note: 'Brandenburger Strasse from Luisenplatz to Bassinplatz, with a big wheel and an ice rink. Free entry.',
+      src: 'https://www.berlin.de/tourismus/brandenburg/veranstaltungen/7769364-3479097-weihanchtsmarkt-blauer-lichterglanz.html' },
+    { id: 'babelsberg', name: 'Bohemian Christmas market, Weberplatz', town: 'Potsdam-Babelsberg', lat: 52.3911, lon: 13.0937, train: 33, local: 6,
+      how: 'S7 to S Babelsberg, then 300 metres on foot', ticket: 'Berlin ABC ticket or Deutschlandticket',
+      days: { list: ['2026-11-27', '2026-11-28', '2026-11-29', '2026-12-04', '2026-12-05', '2026-12-06'] },
+      hours: function (d) { var w = d.getUTCDay(); return w === 5 ? [17, 22] : (w === 6 ? [11, 22] : [11, 18]); },
+      note: 'Only the first two Advent weekends, between the 18th-century weavers\' houses. Friday is the late Glühwein night.',
+      src: 'https://babelsberg-potsdam.de/' },
+    { id: 'polish', name: 'Polish Christmas market, Kutschstallhof', town: 'Potsdam', lat: 52.3957, lon: 13.0566, train: 32, local: 12,
+      how: 'S7 or RE1 to Potsdam Hbf, then 12 minutes on foot over the Lange Brücke', ticket: 'Berlin ABC ticket or Deutschlandticket',
+      days: { list: ['2026-12-04', '2026-12-05', '2026-12-06'] },
+      hours: function (d) { var w = d.getUTCDay(); return w === 5 ? [16, 20] : (w === 6 ? [11, 20] : [11, 19]); },
+      note: 'One weekend only. Polish crafts and food in the old royal coach yard by the Neuer Markt.',
+      src: 'https://www.berlin.de/tourismus/brandenburg/veranstaltungen/7794483-3479097-polnischer-weihnachtsmarkt.html' },
+    { id: 'sinterklaas', name: 'Sinterklaas market, Dutch Quarter', town: 'Potsdam', lat: 52.4027, lon: 13.0603, train: 32, local: 15,
+      how: 'S7 or RE1 to Potsdam Hbf, then tram to Nauener Tor', ticket: 'Berlin ABC ticket or Deutschlandticket',
+      days: { list: ['2026-12-12', '2026-12-13'] },
+      hours: function (d) { return d.getUTCDay() === 6 ? [11, 20] : [11, 19]; },
+      note: 'One weekend only. Sinterklaas arrives by the harbour on Saturday and rides into the red-brick Dutch Quarter.',
+      src: 'https://www.berlin.de/tourismus/brandenburg/veranstaltungen/5972327-3479097-sinterklaasfest-in-potsdam.html' },
+    { id: 'luebbenau', name: 'Spreewaldweihnacht', town: 'Lübbenau', lat: 51.8668, lon: 13.9708, train: 69, local: 15,
+      how: 'Direct regional train to Lübbenau (Spreewald), then 15 minutes on foot to the Großer Spreewaldhafen', ticket: 'Deutschlandticket or Brandenburg-Berlin-Ticket',
+      days: { list: ['2026-11-28', '2026-11-29', '2026-12-05', '2026-12-06'] },
+      hours: function () { return [11, 18]; },
+      note: 'Two markets joined by a winter punt ride, harbour to the Lehde open-air museum. The punt and museum need a timed ticket.',
+      warn: 'Timed tickets went on sale on 1 September and the popular slots sell out. Unsold places are released on 1 November.',
+      src: 'https://www.spreewaldweihnacht.de/' },
+    { id: 'cottbus', name: 'Market of the 1000 Stars', town: 'Cottbus', lat: 51.7607, lon: 14.3326, train: 94, local: 10,
+      how: 'Regional train to Cottbus Hbf, then tram to Altmarkt', ticket: 'Deutschlandticket or Brandenburg-Berlin-Ticket',
+      days: { from: '2026-11-23', to: '2026-12-23' },
+      hours: function () { return [11, 19]; },
+      note: 'Altmarkt to Spremberger Strasse under a 14-metre tree with more than 1000 Herrnhut stars. Stalls 11:00 to 19:00, food and drink until 21:00.',
+      src: 'https://www.berlin.de/tourismus/brandenburg/veranstaltungen/7800078-3479097-weihnachtsmarkt-der-tausend-sterne-in-co.html' },
+    { id: 'leipzig', name: 'Leipzig Christmas market', town: 'Leipzig', lat: 51.3402, lon: 12.3747, train: 75, local: 8,
+      how: 'Direct ICE to Leipzig Hbf, then 8 minutes on foot to the Markt', ticket: 'Long-distance ticket (the regional route takes about 3 hours)',
+      days: { from: '2026-11-24', to: '2026-12-23' },
+      hours: function (d) { var k = d.toISOString().slice(0, 10); if (k === '2026-11-24') return [14, 21]; if (k === '2026-12-22' || k === '2026-12-23') return [11, 20]; var w = d.getUTCDay(); return (w === 5 || w === 6) ? [11, 22] : [11, 21]; },
+      note: 'About 300 stalls in the old town, from the Markt in front of the Old Town Hall to the Finnish village on Augustusplatz.',
+      src: 'https://www.leipzig.de/kultur-und-freizeit/einkaufen-und-ausgehen/maerkte/leipziger-weihnachtsmarkt' },
+    { id: 'dresden', name: 'Striezelmarkt', town: 'Dresden', lat: 51.0503, lon: 13.7383, train: 132, local: 12,
+      how: 'Direct EC or RJ to Dresden Hbf, then 12 minutes on foot up Prager Strasse to the Altmarkt', ticket: 'Long-distance ticket (the regional route takes almost 4 hours)',
+      days: { from: '2026-11-25', to: '2026-12-24' },
+      hours: function (d) { var k = d.toISOString().slice(0, 10); if (k === '2026-11-25') return [16, 21]; if (k === '2026-12-24') return [10, 14]; return [10, 21]; },
+      note: 'The 592nd Striezelmarkt on the Altmarkt, with more than 200 traders and a walk-in Christmas pyramid. The Stollen festival is on Saturday 5 December.',
+      src: 'https://striezelmarkt.dresden.de/en/' },
+    { id: 'quedlinburg', name: 'Advent in the Courtyards', town: 'Quedlinburg', lat: 51.7896, lon: 11.1413, train: 162, local: 10,
+      how: 'ICE or IC to Magdeburg, then the regional train to Quedlinburg, one change', ticket: 'Long-distance ticket to Magdeburg plus the regional leg',
+      days: { list: ['2026-11-28', '2026-11-29', '2026-12-05', '2026-12-06', '2026-12-12', '2026-12-13'] },
+      hours: function () { return [11, 19]; },
+      note: 'About 20 private half-timbered courtyards open their gates, only on the first three Advent weekends.',
+      src: 'https://adventsstadt.quedlinburg-info.de/advent-in-den-hoefen' }
+  ];
+  var BERLIN = { lat: 52.5251, lon: 13.3694 };
+  var LAYOUT = {
+    'Potsdam': { pillAt: [-34, 20], lx: -15, ly: -6 },
+    'Lübbenau': { pill: 0.36, lx: -14, ly: 4 },
+    'Cottbus': { pillAt: [6, -24], lx: -20, ly: 26 },
+    'Leipzig': { pill: 0.55, lx: 15, ly: 4 },
+    'Dresden': { pill: 0.8, lx: 15, ly: 4 },
+    'Quedlinburg': { pill: 0.55, lx: 15, ly: 4 }
+  };
+  var LEAVE = 10;
+  var WEEK = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+  var MON = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+  var stageIndex = 0;
+  var chosen = null;
+  var ranked = [];
+  var hitAreas = [];
+
+  function el(id) { return document.getElementById(id); }
+  function iso(d) { return d.toISOString().slice(0, 10); }
+  function parseDay(v) { var p = v.split('-'); return new Date(Date.UTC(+p[0], +p[1] - 1, +p[2])); }
+  function isOpen(m, d) {
+    var k = iso(d);
+    if (m.days.list) return m.days.list.indexOf(k) !== -1;
+    if (k < m.days.from || k > m.days.to) return false;
+    return !(m.days.shut && m.days.shut.indexOf(k) !== -1);
+  }
+  function hm(x) { var h = Math.floor(x + 1e-6), mm = Math.round((x - h) * 60); if (mm === 60) { h += 1; mm = 0; } return (h < 10 ? '0' : '') + h + ':' + (mm < 10 ? '0' : '') + mm; }
+  function dur(mins) { var h = Math.floor(mins / 60), mm = mins % 60; return h ? h + 'h' + (mm ? (mm < 10 ? '0' : '') + mm : '') : mm + ' min'; }
+  function plan(m, d, back) {
+    var leg = (m.train + m.local) / 60;
+    var arrive = LEAVE + leg;
+    var hrs = m.hours(d);
+    var leaveBy = back - leg - 0.25;
+    var start = Math.max(arrive, hrs[0]);
+    var end = Math.min(leaveBy, hrs[1]);
+    var stay = Math.max(0, end - start);
+    return { leg: leg, arrive: arrive, hrs: hrs, start: start, end: end, stay: stay };
+  }
+
+  function render() {
+    var d = parseDay(el('day').value || '2026-12-05');
+    var back = parseFloat(el('back').value);
+    el('dayname').textContent = WEEK[d.getUTCDay()] + ' ' + d.getUTCDate() + ' ' + MON[d.getUTCMonth()];
+    var open = [], shut = [];
+    M.forEach(function (m) {
+      if (isOpen(m, d)) open.push({ m: m, p: plan(m, d, back) });
+      else shut.push({ m: m });
+    });
+    open.sort(function (a, b) { return (b.p.stay - a.p.stay) || (a.m.train - b.m.train); });
+    shut.sort(function (a, b) { return a.m.train - b.m.train; });
+    ranked = open;
+    var ol = el('open'); ol.innerHTML = '';
+    if (!open.length) ol.innerHTML = '<li class="t" style="font-size:12.5px;color:#55604c">None of these markets opens on this day. Try a Saturday in late November or early December.</li>';
+    open.forEach(function (r) {
+      var li = document.createElement('li');
+      var tight = r.p.stay < 1.5;
+      li.innerHTML = '<button type="button"><span class="n">' + r.m.name + '</span><span class="h">' + (r.p.stay > 0 ? r.p.stay.toFixed(1).replace('.0', '') + ' h' : 'none') + '<small>' + (tight ? 'too short' : 'at stalls') + '</small></span><span class="t">' + r.m.town + ' &middot; ' + dur(r.m.train) + ' by train &middot; open ' + hm(r.p.hrs[0]) + '&ndash;' + hm(r.p.hrs[1]) + '</span></button>';
+      li.querySelector('button').addEventListener('click', function () { openPlan(r.m); });
+      ol.appendChild(li);
+    });
+    var sl = el('shut'); sl.innerHTML = '';
+    el('shutlabel').style.display = shut.length ? '' : 'none';
+    shut.forEach(function (r) {
+      var li = document.createElement('li'); li.className = 'is-shut';
+      li.innerHTML = '<button type="button"><span class="n">' + r.m.name + '</span><span class="h">shut</span><span class="t">' + r.m.town + ' &middot; ' + nextOpen(r.m, d) + '</span></button>';
+      li.querySelector('button').addEventListener('click', function () { openPlan(r.m); });
+      sl.appendChild(li);
+    });
+    drawMap(d);
+    if (stageIndex === 1 && chosen) fillPlan(chosen, d, back);
+  }
+
+  function nextOpen(m, d) {
+    for (var i = 1; i <= 40; i++) {
+      var n = new Date(d.getTime() + i * 864e5);
+      if (isOpen(m, n)) return 'next open ' + WEEK[n.getUTCDay()].slice(0, 3) + ' ' + n.getUTCDate() + ' ' + MON[n.getUTCMonth()].slice(0, 3);
+    }
+    return 'season over';
+  }
+
+  function project(lat, lon, w, h) {
+    var minLon = 10.85, maxLon = 14.6, minLat = 50.92, maxLat = 52.62;
+    var k = Math.cos(51.8 * Math.PI / 180);
+    var sx = (w - 40) / ((maxLon - minLon) * k), sy = (h - 40) / (maxLat - minLat);
+    var s = Math.min(sx, sy);
+    var ox = (w - (maxLon - minLon) * k * s) / 2, oy = (h - (maxLat - minLat) * s) / 2;
+    return { x: ox + (lon - minLon) * k * s, y: oy + (maxLat - lat) * s };
+  }
+
+  function sizeCanvas(c, ratio) {
+    var cssW = c.clientWidth || c.parentNode.clientWidth || 480;
+    var dpr = window.devicePixelRatio || 1;
+    c.width = Math.round(cssW * dpr); c.height = Math.round(cssW * ratio * dpr);
+    var ctx = c.getContext('2d'); ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    return { ctx: ctx, w: cssW, h: cssW * ratio };
+  }
+
+  function drawMap(d) {
+    var c = el('map');
+    var s = sizeCanvas(c, 0.88), ctx = s.ctx, w = s.w, h = s.h;
+    ctx.clearRect(0, 0, w, h);
+    ctx.fillStyle = '#f2eedd'; ctx.fillRect(0, 0, w, h);
+    var B = project(BERLIN.lat, BERLIN.lon, w, h);
+    var towns = {};
+    M.forEach(function (m) {
+      var key = m.town.indexOf('Potsdam') === 0 ? 'Potsdam' : m.town;
+      if (!towns[key]) towns[key] = { name: key, lat: m.lat, lon: m.lon, train: m.train, items: [] };
+      towns[key].items.push(m);
+      towns[key].train = Math.min(towns[key].train, m.train);
+    });
+    hitAreas = [];
+    var keys = Object.keys(towns);
+    var st = keys.map(function (k) {
+      var t = towns[k], P = project(t.lat, t.lon, w, h);
+      var openHere = t.items.filter(function (m) { return isOpen(m, d); });
+      return { t: t, P: P, openHere: openHere, on: openHere.length > 0, picked: chosen && t.items.indexOf(chosen) !== -1, L: LAYOUT[t.name] || { pill: 0.6, lx: 15, ly: 4 } };
+    });
+    st.forEach(function (o) {
+      ctx.beginPath(); ctx.moveTo(B.x, B.y); ctx.lineTo(o.P.x, o.P.y);
+      ctx.strokeStyle = o.on ? '#1B5E20' : '#c9c6bb'; ctx.lineWidth = o.on ? 2.5 : 1.5; ctx.setLineDash(o.on ? [] : [4, 4]); ctx.stroke(); ctx.setLineDash([]);
+    });
+    st.forEach(function (o) {
+      var P = o.P, r = o.picked ? 13 : 10;
+      ctx.beginPath(); ctx.arc(P.x, P.y, r, 0, Math.PI * 2);
+      ctx.fillStyle = o.on ? '#FFE600' : '#d9d7cf'; ctx.fill();
+      ctx.lineWidth = o.picked ? 3 : 1.5; ctx.strokeStyle = o.on ? '#123D18' : '#a9a69b'; ctx.stroke();
+      if (o.t.items.length > 1) { ctx.fillStyle = '#123D18'; ctx.font = '800 11px Montserrat, sans-serif'; ctx.textAlign = 'center'; ctx.fillText(String(o.openHere.length), P.x, P.y + 4); ctx.textAlign = 'left'; }
+      hitAreas.push({ x: P.x, y: P.y, items: o.t.items });
+    });
+    st.forEach(function (o) {
+      var P = o.P, L = o.L, on = o.on, t = o.t;
+      var mid = L.pillAt ? { x: P.x + L.pillAt[0], y: P.y + L.pillAt[1] } : { x: B.x + (P.x - B.x) * L.pill, y: B.y + (P.y - B.y) * L.pill };
+      ctx.font = '800 11px Montserrat, sans-serif';
+      var lbl = dur(t.train);
+      var tw = ctx.measureText(lbl).width;
+      ctx.fillStyle = on ? '#1B5E20' : '#bdbab0'; roundRect(ctx, mid.x - tw / 2 - 5, mid.y - 9, tw + 10, 17, 8); ctx.fill();
+      ctx.fillStyle = on ? '#fff' : '#fbf8ee'; ctx.fillText(lbl, mid.x - tw / 2, mid.y + 4);
+      ctx.font = '800 12px Montserrat, sans-serif';
+      var nameW = ctx.measureText(t.name).width;
+      var lx = L.lx < 0 ? P.x + L.lx - nameW : P.x + L.lx, ly = P.y + L.ly;
+      if (lx + nameW > w - 4) lx = w - 4 - nameW;
+      if (lx < 4) lx = 4;
+      ctx.lineJoin = 'round'; ctx.lineWidth = 4; ctx.strokeStyle = '#f2eedd'; ctx.strokeText(t.name, lx, ly);
+      ctx.fillStyle = on ? '#123D18' : '#8a8f80'; ctx.fillText(t.name, lx, ly);
+    });
+    ctx.beginPath(); ctx.arc(B.x, B.y, 8, 0, Math.PI * 2); ctx.fillStyle = '#1B5E20'; ctx.fill();
+    ctx.lineWidth = 2; ctx.strokeStyle = '#fff'; ctx.stroke();
+    ctx.font = '800 12px Montserrat, sans-serif'; ctx.fillStyle = '#1B5E20'; ctx.fillText('Berlin Hbf', B.x + 12, B.y - 8);
+  }
+
+  function roundRect(ctx, x, y, w, h, r) {
+    ctx.beginPath(); ctx.moveTo(x + r, y); ctx.lineTo(x + w - r, y); ctx.quadraticCurveTo(x + w, y, x + w, y + r);
+    ctx.lineTo(x + w, y + h - r); ctx.quadraticCurveTo(x + w, y + h, x + w - r, y + h); ctx.lineTo(x + r, y + h);
+    ctx.quadraticCurveTo(x, y + h, x, y + h - r); ctx.lineTo(x, y + r); ctx.quadraticCurveTo(x, y, x + r, y); ctx.closePath();
+  }
+
+  function openPlan(m) {
+    chosen = m; stageIndex = 1;
+    el('board').hidden = true; el('plan').hidden = false;
+    render();
+    el('backbtn').focus();
+  }
+
+  function closePlan() {
+    stageIndex = 0; chosen = null;
+    el('plan').hidden = true; el('board').hidden = false;
+    render();
+  }
+
+  function fillPlan(m, d, back) {
+    el('p-name').textContent = m.name;
+    el('p-where').textContent = m.town + ' · ' + m.how;
+    var open = isOpen(m, d);
+    var p = plan(m, d, back);
+    drawLine(m, d, p, open, back);
+    var f = [];
+    if (!open) f.push({ t: 'Not open on ' + WEEK[d.getUTCDay()] + ' ' + d.getUTCDate() + ' ' + MON[d.getUTCMonth()] + '. ' + nextOpen(m, d).replace('next open', 'Next open:') + '.', w: true });
+    else if (p.stay < 1.5) f.push({ t: 'Only ' + p.stay.toFixed(1).replace('.0', '') + ' hours at the stalls with this return time. Leave earlier, come back later, or pick a market closer to Berlin.', w: true });
+    else f.push({ t: 'Leave Berlin Hbf 10:00, at the market from ' + hm(p.start) + ', leave it by ' + hm(p.end) + ': ' + p.stay.toFixed(1).replace('.0', '') + ' hours at the stalls.' });
+    f.push({ t: 'Train: about ' + dur(m.train) + ' each way, plus ' + m.local + ' minutes from the station. Ticket: ' + m.ticket + '.' });
+    if (m.warn) f.push({ t: m.warn, w: true });
+    f.push({ t: m.note });
+    var ul = el('p-facts'); ul.innerHTML = '';
+    f.forEach(function (x) { var li = document.createElement('li'); if (x.w) li.className = 'warn'; li.textContent = x.t; ul.appendChild(li); });
+    var li = document.createElement('li'); li.innerHTML = '<a href="' + m.src + '" target="_blank" rel="noopener">Organiser page for dates and hours</a>'; ul.appendChild(li);
+  }
+
+  function drawLine(m, d, p, open, back) {
+    var c = el('line');
+    var s = sizeCanvas(c, 0.3), ctx = s.ctx, w = s.w, h = s.h;
+    ctx.clearRect(0, 0, w, h);
+    var t0 = 9, t1 = 24, pad = 8;
+    function X(t) { return pad + (t - t0) / (t1 - t0) * (w - pad * 2); }
+    ctx.font = '700 10px Montserrat, sans-serif'; ctx.fillStyle = '#8a8f80'; ctx.strokeStyle = '#ece6d2'; ctx.lineWidth = 1;
+    for (var t = 10; t <= 24; t += 2) { ctx.beginPath(); ctx.moveTo(X(t), 14); ctx.lineTo(X(t), h - 6); ctx.stroke(); ctx.fillText((t === 24 ? '00' : t) + ':00', X(t) - 14, 10); }
+    var yOpen = h * 0.3, yTrip = h * 0.62, bh = h * 0.2;
+    ctx.fillStyle = open ? 'rgba(124,179,66,.25)' : 'rgba(170,170,160,.25)';
+    roundRect(ctx, X(p.hrs[0]), yOpen, X(p.hrs[1]) - X(p.hrs[0]), bh, 6); ctx.fill();
+    ctx.fillStyle = '#1B5E20'; ctx.font = '700 10px Montserrat, sans-serif'; ctx.fillText(open ? 'Market open' : 'Market shut that day', X(p.hrs[0]) + 5, yOpen + bh * 0.68);
+    ctx.fillStyle = '#1B5E20'; roundRect(ctx, X(LEAVE), yTrip, X(p.arrive) - X(LEAVE), bh, 6); ctx.fill();
+    var retStart = back - p.leg;
+    roundRect(ctx, X(retStart), yTrip, X(back) - X(retStart), bh, 6); ctx.fill();
+    if (open && p.stay > 0) { ctx.fillStyle = '#FFE600'; roundRect(ctx, X(p.start), yTrip, X(p.end) - X(p.start), bh, 6); ctx.fill(); ctx.strokeStyle = '#123D18'; ctx.lineWidth = 1.5; ctx.stroke(); }
+    ctx.fillStyle = '#123D18'; ctx.font = '700 10px Montserrat, sans-serif';
+    ctx.fillText('train', X(LEAVE) + 3, yTrip + bh + 12);
+    ctx.fillText('back by ' + hm(back), Math.min(X(retStart), w - 70), yTrip + bh + 12);
+  }
+
+  el('day').addEventListener('change', render);
+  el('day').addEventListener('input', render);
+  el('back').addEventListener('change', render);
+  el('backbtn').addEventListener('click', closePlan);
+  el('map').addEventListener('click', function (e) {
+    var r = el('map').getBoundingClientRect(), x = e.clientX - r.left, y = e.clientY - r.top, best = null, bd = 26;
+    hitAreas.forEach(function (a) { var dd = Math.hypot(a.x - x, a.y - y); if (dd < bd) { bd = dd; best = a; } });
+    if (!best) return;
+    var d = parseDay(el('day').value || '2026-12-05');
+    var pick = best.items.filter(function (m) { return isOpen(m, d); })[0] || best.items[0];
+    openPlan(pick);
+  });
+  var rw = 0;
+  window.addEventListener('resize', function () { var cw = el('map').clientWidth; if (Math.abs(cw - rw) > 20) { rw = cw; render(); } });
+  render();
+  rw = el('map').clientWidth;
+})();
+</script>
+<script src="../js/brand.js"></script>
+</body>
+</html>
