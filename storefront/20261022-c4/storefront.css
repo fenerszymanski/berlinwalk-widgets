@@ -112,8 +112,10 @@ h2>.sk-heading{width:55%}
 .line-legal{margin:8px 0 0;padding:8px 10px;background:var(--panel);border-radius:8px;font-size:12px;line-height:1.45;color:var(--ink)}
 .line-legal strong{display:block;color:var(--green);font-size:12px}
 .line-legal p{margin:4px 0 0}
-.eu-guarantee{margin:18px 0 0}
-.eu-guarantee h2{font:500 18px var(--serif);margin:0 0 8px;color:var(--green)}
+.eu-guarantee{margin:14px 0 0}
+.eu-guarantee h3{font:500 16px var(--serif);margin:0 0 8px;color:var(--green)}
+.guarantee-line{margin:10px 0 0;font-size:13px}
+.guarantee-line .link{background:none;border:0;padding:0;font:inherit;color:inherit;text-decoration:underline;text-underline-offset:3px;cursor:pointer}
 .eu-guarantee img{display:block;width:100%;max-width:440px;height:auto;border:1px solid var(--line);background:#fff}
 .eu-guarantee p{margin:6px 0 0;font-size:12px}
 @media(max-width:740px){
