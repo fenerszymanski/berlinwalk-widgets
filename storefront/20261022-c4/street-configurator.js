@@ -63,9 +63,25 @@ export const coordsText = (lat, lon) => (Number.isFinite(lat) && Number.isFinite
 export const inBerlin = (lat, lon) => lat >= BERLIN.south && lat <= BERLIN.north && lon >= BERLIN.west && lon <= BERLIN.east;
 // No control characters, no field separators; collapsed spaces.
 export const clean = (value, max) => String(value ?? '').normalize('NFC').replace(/[\u0000-\u001f\u007f<>]/g, ' ').replace(/\/\/|\|/g, ' ').replace(/\s+/g, ' ').trim().slice(0, max);
+// Which name goes on the poster. A street or an address gives the street. A named landmark the buyer picked (station, square,
+// park, church, memorial, attraction) keeps its own name when it fits the title, else the street it is on: the "Bernauer Straße"
+// U-Bahn station sits on Brunnenstraße, "Alexanderplatz" station on Dircksenstraße. A shop, cafe or office gives its street
+// (picking "Humana" at Oranienstraße 25 must not print HUMANA). Too long with no street: cut at a word boundary.
+const LANDMARK_KEYS = new Set(['railway', 'public_transport', 'tourism', 'historic', 'leisure', 'place', 'natural', 'waterway', 'bridge', 'landuse']);
+const LANDMARK_AMENITIES = new Set(['place_of_worship', 'townhall', 'theatre', 'arts_centre', 'library', 'university', 'college', 'school', 'hospital', 'fountain', 'bus_station', 'ferry_terminal', 'planetarium']);
+const fitTitle = text => {
+  const u = String(text || '').toUpperCase().trim();
+  if (u.length <= YS_LIMITS.title) return u;
+  const cut = u.slice(0, YS_LIMITS.title + 1).lastIndexOf(' ');
+  return (cut >= 12 ? u.slice(0, cut) : u.slice(0, YS_LIMITS.title)).trim();
+};
 export function titleFrom(result) {
   const a = result?.address || {};
-  return clean(a.road || a.pedestrian || a.footway || a.square || result?.name || '', 80).toUpperCase().slice(0, YS_LIMITS.title).trim();
+  const street = clean(a.road || a.pedestrian || a.footway || '', 80), name = clean(result?.name || '', 80);
+  const [key, value] = result?.osm || [result?.category, result?.type];          // Photon rows carry osm, Nominatim rows category/type
+  const landmark = Boolean(name) && name !== street && key !== 'highway' && (LANDMARK_KEYS.has(key) || (key === 'amenity' && LANDMARK_AMENITIES.has(value)));
+  if (landmark && name.toUpperCase().length <= YS_LIMITS.title) return name.toUpperCase();
+  return fitTitle(street || clean(a.square || '', 80) || name);
 }
 export function areaFrom(result) {
   const a = result?.address || {};
@@ -77,8 +93,8 @@ export function areaFrom(result) {
 export function fromPhoton(feature) {
   const p = feature?.properties || {}, [lon, lat] = feature?.geometry?.coordinates || [];
   const isStreet = p.osm_key === 'highway' || p.type === 'street';
-  const road = p.street || (isStreet ? p.name : '');
-  return {lat: Number(lat), lon: Number(lon), name: p.name || '', city: p.city || '',
+  const road = isStreet ? (p.name || p.street || '') : (p.street || '');
+  return {lat: Number(lat), lon: Number(lon), name: p.name || '', city: p.city || '', osm: [p.osm_key || '', p.osm_value || ''],
     address: {road, house_number: p.housenumber || '', postcode: p.postcode || '', suburb: p.district || (p.type === 'district' ? p.name : ''), square: road ? '' : (p.name || '')}};
 }
 // Two lines for a suggestion: the place itself, then where it is.
