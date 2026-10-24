@@ -425,6 +425,12 @@
       "figure": "16:19",
       "line": "is sunset on 11 November, so most lantern walks in Berlin set off between 16:00 and 17:30.",
       "tool": "berlin-lantern-walk-map"
+    },
+    "out-of-hours-doctor-berlin": {
+      "shelf": "geld",
+      "figure": "30 hours",
+      "line": "a week is all the on-call practices open, so from Monday to Thursday evening the door is 116117.",
+      "tool": "berlin-on-call-practice-map"
     }
   }
 }
