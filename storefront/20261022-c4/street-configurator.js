@@ -132,6 +132,21 @@ export function buildCustomText(state, search) {
     [YS_FIELDS.details]: parts.join(' // ').slice(0, YS_LIMITS.details),
   };
 }
+// Size x paper variants (Yusuf, 24 Oct 2026). Prices mirror the Wix variants (output/store-variants-20261024/variants.json);
+// Wix charges its own variant price at checkout, these only label the choice.
+export const YS_SIZES = Object.freeze(['30 x 40 cm', '45 x 60 cm']);
+export const YS_PAPERS = Object.freeze([
+  {name: 'Premium Matte', note: '200 g matte paper, smooth and white. My pick.', price: [39.90, 54.90]},
+  {name: 'Classic Matte', note: '170 g matte paper, a little lighter.', price: [34.90, 49.90]},
+  {name: 'Museum-Quality Matte', note: '250 g archival paper, warm off-white.', price: [49.90, 69.90]},
+  {name: 'Premium Semi-Gloss', note: '200 g paper with a soft sheen.', price: [39.90, 54.90]},
+  {name: 'Classic Semi-Gloss', note: '170 g paper with a soft sheen, a little lighter.', price: [34.90, 49.90]},
+]);
+export const ysSize = state => (YS_SIZES.includes(state.size) ? state.size : YS_SIZES[0]);
+export const ysPaper = state => YS_PAPERS.find(p => p.name === state.paper) || YS_PAPERS[0];
+export const ysPrice = state => ysPaper(state).price[YS_SIZES.indexOf(ysSize(state))];
+export const ysChoices = state => ({Size: ysSize(state), Paper: ysPaper(state).name});
+export const euro = n => `€${n.toFixed(2)}`;
 export function readyToAdd(state) {
   return Number.isFinite(state.lat) && Number.isFinite(state.lon) && inBerlin(state.lat, state.lon) && clean(state.address, 80).length > 0 &&
     clean(state.title, 24).length > 0 && clean(state.area, 30).length > 0 && state.seen === true;
@@ -143,8 +158,8 @@ const RING_SVG = `<svg class="ys-ring" viewBox="0 0 ${PHOTO.w} ${PHOTO.h}" aria-
 // The preview is the print itself: a 30 x 40 cm sheet laid out on make_print.py's 1800 x 2400 design grid (CSS unit --u = 1/1800 of the sheet width; the words are SVG text on the same grid).
 // Title size follows the generator: 118 (96 above 16 letters), shrunk by 4 until it fits the 1400-unit width of the photos (never below 48).
 export const titleSize = title => (String(title || '').length <= 16 ? 118 : 96);
-const CAPTION_LIVE = 'Your poster, 30 x 40 cm: 1928 above, today below, same ground and scale. Tap either photo to move the ring onto your building.';
-const CAPTION_EXAMPLE = 'Example poster, 30 x 40 cm. Search for your own address to see your street.';
+const CAPTION_LIVE = 'Your poster, SIZE: 1928 above, today below, same ground and scale. Tap either photo to move the ring onto your building.';
+const CAPTION_EXAMPLE = 'Example poster, SIZE. Search for your own address to see your street.';
 
 // `host` holds two slots ([data-ys-slot="visual"], [data-ys-slot="form"]) and the add button ([data-ys-add]). Rebuilt from `state` whenever the storefront re-renders. `api.add(customText)` returns a promise; `api.busy()` says whether the cart is locked.
 export function mountConfigurator(host, state, api) {
@@ -176,7 +191,7 @@ export function mountConfigurator(host, state, api) {
         </div>
         <div class="ys-sheet ys-sample" data-ys="example" ${state.lat ? 'hidden' : ''}><img src="${esc(api.sample)}" alt="Example print: Potsdamer Platz in 1928 and today"></div>
       </div>
-      <p class="ys-caption" data-ys="caption">${state.lat ? CAPTION_LIVE : CAPTION_EXAMPLE}</p>
+      <p class="ys-caption" data-ys="caption">${(state.lat ? CAPTION_LIVE : CAPTION_EXAMPLE).replace('SIZE', ysSize(state))}</p>
     </div>`;
   formSlot.innerHTML = `<div class="ys-form">
       <label class="ys-label" for="ys-q">Your address or a place in Berlin</label>
@@ -190,8 +205,29 @@ export function mountConfigurator(host, state, api) {
         <p class="ys-hint">The house number is never printed. Tap either photo to move the ring onto your building.</p>
         <label class="ys-check"><input type="checkbox" data-ys="seen" ${state.seen ? 'checked' : ''}><span>I can see the 1928 aerial photo at my spot. A blank white picture means there is no 1928 photo there (far eastern edge of Berlin).</span></label>
       </div>
+      <div class="ys-variant" data-ys="variant">
+        <span class="ys-label" id="ys-size-l">Size</span>
+        <div class="ys-sizes" role="radiogroup" aria-labelledby="ys-size-l">${YS_SIZES.map(z => `<button type="button" role="radio" class="ys-size" data-ys-size="${esc(z)}" aria-checked="${z === ysSize(state)}">${esc(z)}<small data-ys-sizeprice="${esc(z)}"></small></button>`).join('')}</div>
+        <label class="ys-label" for="ys-paper">Paper</label>
+        <select id="ys-paper" data-ys="paper">${YS_PAPERS.map(p => `<option value="${esc(p.name)}" ${p.name === ysPaper(state).name ? 'selected' : ''}>${esc(p.name)}</option>`).join('')}</select>
+        <p class="ys-hint" data-ys="papernote"></p>
+      </div>
     </div>`;
   const $ = name => host.querySelector(`[data-ys="${name}"]`);
+  // Size and paper: the price, caption and button follow the choice; Wix still charges its own variant price.
+  function paintVariant() {
+    const i = YS_SIZES.indexOf(ysSize(state)), paper = ysPaper(state);
+    host.querySelectorAll('[data-ys-size]').forEach(b => b.setAttribute('aria-checked', String(b.dataset.ysSize === ysSize(state))));
+    host.querySelectorAll('[data-ys-sizeprice]').forEach(el => { el.textContent = euro(paper.price[YS_SIZES.indexOf(el.dataset.ysSizeprice)]); });
+    $('papernote').textContent = paper.note;
+    const price = host.querySelector('.product-title .price'); if (price) price.textContent = euro(paper.price[i]);
+    const spec = host.querySelector('.ys-buy .spec'); if (spec) spec.textContent = `Personalised print · ${ysSize(state)} · ${paper.name}`;
+    const add = host.querySelector('[data-ys-add]'); if (add) add.textContent = `Add to cart · ${euro(paper.price[i])}`;
+    $('caption').textContent = (state.lat ? CAPTION_LIVE : CAPTION_EXAMPLE).replace('SIZE', ysSize(state));
+  }
+  host.querySelectorAll('[data-ys-size]').forEach(b => b.addEventListener('click', () => { state.size = b.dataset.ysSize; paintVariant(); }));
+  $('paper').addEventListener('change', e => { state.paper = e.target.value; paintVariant(); });
+  queueMicrotask(paintVariant);
   const img1928 = $('photo-1928').querySelector('img'), imgToday = $('photo-today').querySelector('img');
   const ptitle = $('ptitle'), parea = $('parea'), pcoords = $('pcoords'), pline = $('pline');
   // Poster words follow the inputs (title, area, coordinates of the current point, personal line or the grey fallback); the title shrinks in 4-unit steps until it fits 1400 units.
@@ -221,7 +257,7 @@ export function mountConfigurator(host, state, api) {
   function showPoint(fresh) {
     if (!state.lat) return;
     $('sheet').hidden = false; $('example').hidden = true; $('fields').hidden = false;
-    $('caption').textContent = CAPTION_LIVE;
+    $('caption').textContent = CAPTION_LIVE.replace('SIZE', ysSize(state));
     paintWords(); ensureFonts();
     setStatus('Loading the 1928 photo…'); setStatusToday('');
     const mine = state.token = (state.token || 0) + 1;

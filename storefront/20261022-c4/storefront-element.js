@@ -190,7 +190,7 @@
         const products=[...this.layer.adaptWixProducts(rows,this.presentation),...this.layer.adaptExternalProducts(this.external)];
         products.sort((a,b)=>this.presentation.findIndex(item=>item.id===a.id)-this.presentation.findIndex(item=>item.id===b.id));
         this.model=this.layer.createCatalogModel(products,this.definitions);
-        for(const product of this.model.products){const native=this.catalogue.products.find(row=>row.productId===product.wixProductId);product.priceLabel=native?.formattedDiscountedPrice||native?.formattedPrice||money(native?native.currency:product.currency,native?(native.discountedPrice??native.price):this.external.find(item=>item.sourceKey===product.externalSourceKey)?.productSchema?.offers?.price);}
+        for(const product of this.model.products){const native=this.catalogue.products.find(row=>row.productId===product.wixProductId);product.priceLabel=native?.formattedDiscountedPrice||native?.formattedPrice||money(native?native.currency:product.currency,native?(native.discountedPrice??native.price):this.external.find(item=>item.sourceKey===product.externalSourceKey)?.productSchema?.offers?.price);if(product.wixProductId==='8aaf5412-7f21-42c7-acfb-85dd8417d68c'&&native?.price)product.priceLabel='From '+product.priceLabel;}
         this.applyContextCategory();this.render();this.signalReady();
       }catch(error){this.fail(error.message);}
     }
@@ -493,7 +493,7 @@
       this.busy=true;this.error='';this.render();
       try {
         if(action==='refresh')await this.request('get');
-        if(action==='ys-add'){if(!this.ysMod.readyToAdd(this.ys))throw Error('YS_NOT_READY');await this.request('add',{productId:this.ysMod.YS_PRODUCT_ID,quantity:1,customTextFields:this.ysMod.buildCustomText(this.ys)});this.lastAddedId=this.ysMod.YS_PRODUCT_ID;this.measure('added',this.model.products.find(p=>p.wixProductId===this.ysMod.YS_PRODUCT_ID),1);this.notice='Added to your cart';this.render();const dialog=this.shadowRoot.querySelector('dialog');if(this.revealed){dialog.showModal();dialog.querySelector('[data-action="close-drawer"]').focus();}}
+        if(action==='ys-add'){if(!this.ysMod.readyToAdd(this.ys))throw Error('YS_NOT_READY');await this.request('add',{productId:this.ysMod.YS_PRODUCT_ID,quantity:1,customTextFields:this.ysMod.buildCustomText(this.ys),choices:this.ysMod.ysChoices(this.ys)});this.lastAddedId=this.ysMod.YS_PRODUCT_ID;this.measure('added',this.model.products.find(p=>p.wixProductId===this.ysMod.YS_PRODUCT_ID),1);this.notice='Added to your cart';this.render();const dialog=this.shadowRoot.querySelector('dialog');if(this.revealed){dialog.showModal();dialog.querySelector('[data-action="close-drawer"]').focus();}}
         if(action==='add'){await this.request('add',{productId:button.dataset.product,quantity:Number(button.dataset.quantity)||1});this.lastAddedId=button.dataset.product;this.measure('added',this.model.products.find(p=>p.wixProductId===button.dataset.product),Number(button.dataset.quantity)||1);this.notice='Added to your cart';this.render();const dialog=this.shadowRoot.querySelector('dialog');if(this.revealed){dialog.showModal();dialog.querySelector('[data-action="close-drawer"]').focus();}}
         if(action==='minus'||action==='plus'){const line=this.cart?.lines.find(line=>line.lineItemId===button.dataset.line);if(line)await this.request('update',{lineItemId:line.lineItemId,quantity:line.quantity+(action==='plus'?1:-1)});}
         if(action==='remove')await this.request('remove',{lineItemId:button.dataset.line});
