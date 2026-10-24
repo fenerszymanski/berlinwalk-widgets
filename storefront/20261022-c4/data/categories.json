@@ -13,22 +13,12 @@
           "3a0f16e1-49e5-42e1-a0bd-a79d1949e091",
           "a0685930-a374-4dc8-9ac6-48f92b535aa4",
           "c16f5345-c212-45a9-b965-d205f111d10c",
-          "bw-personalised-print",
-          "33ca6348-faae-4671-98d9-0221539b7cf2"
+          "bw-personalised-print"
         ]
       },
       "description": "Printed to order by Gelato · shipped",
       "allFilterLabel": "All prints",
       "filters": [
-        {
-          "id": "everyday",
-          "label": "Berlin Everyday",
-          "match": {
-            "presentationGroups": [
-              "everyday"
-            ]
-          }
-        },
         {
           "id": "landmarks",
           "label": "Landmarks",
@@ -86,15 +76,6 @@
       "description": "Printable files · instant download · nothing shipped",
       "allFilterLabel": "All downloads",
       "filters": [
-        {
-          "id": "dl-everyday",
-          "label": "Berlin Everyday",
-          "match": {
-            "presentationGroups": [
-              "everyday"
-            ]
-          }
-        },
         {
           "id": "dl-landmarks",
           "label": "Landmarks",
