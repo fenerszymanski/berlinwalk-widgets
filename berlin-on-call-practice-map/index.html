@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Berlin On-Call Practice Map: Which KV Practice Is Open at Your Hour</title>
+<link rel="stylesheet" href="../css/brand.css">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #FFFFFF; color: #1d2a1c; padding: 12px; }
+  .oc { border: 1px solid #d9e3cf; border-radius: 20px; background: #fbfaf4; overflow: hidden; }
+  .oc-top { padding: 18px 18px 6px; display: flex; flex-wrap: wrap; gap: 12px 18px; align-items: flex-end; justify-content: space-between; }
+  .oc-top h1 { font-size: 20px; line-height: 1.25; font-weight: 800; color: #123D18; max-width: 560px; }
+  .oc-top p { font-size: 12.5px; line-height: 1.55; color: #4c5a48; margin-top: 6px; max-width: 600px; }
+  .oc-kick { font-size: 11px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; color: #7CB342; }
+  .oc-seg { display: inline-flex; background: #eef2e6; border-radius: 999px; padding: 3px; gap: 2px; }
+  .oc-seg button { font-family: inherit; border: 0; background: transparent; color: #3c4a38; font-size: 12px; font-weight: 700; padding: 7px 14px; border-radius: 999px; cursor: pointer; }
+  .oc-seg button[aria-pressed="true"] { background: #1B5E20; color: #fff; }
+  .oc-week { margin: 10px 14px 0; background: #fff; border: 1px solid #e1e8d8; border-radius: 16px; padding: 12px 12px 10px; }
+  .oc-week-head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 6px; }
+  .oc-when { font-size: 15px; font-weight: 800; color: #123D18; }
+  .oc-when small { font-size: 11.5px; font-weight: 600; color: #6a7865; margin-left: 6px; }
+  .oc-now { font-family: inherit; font-size: 11.5px; font-weight: 800; border: 1.5px solid #FFE600; background: #FFE600; color: #123D18; border-radius: 999px; padding: 5px 12px; cursor: pointer; }
+  .oc-band svg { display: block; width: 100%; height: auto; }
+  .oc-band .oc-cell { cursor: pointer; }
+  .oc-band svg:focus-visible { outline: 2px solid #1B5E20; outline-offset: 3px; border-radius: 6px; }
+  .oc-opts { display: flex; flex-wrap: wrap; gap: 8px 16px; font-size: 11.5px; color: #4c5a48; margin-top: 4px; align-items: center; }
+  .oc-opts label { display: inline-flex; align-items: center; gap: 6px; cursor: pointer; }
+  .oc-opts input { width: 15px; height: 15px; accent-color: #1B5E20; }
+  .oc-opts #plz { width: 74px; font-family: inherit; font-size: 13px; font-weight: 700; padding: 5px 8px; border-radius: 8px; border: 1px solid #c9d6bd; background: #fff; color: #123D18; letter-spacing: .04em; }
+  #plzmsg { font-size: 11px; color: #6a7865; }
+  .oc-opts select { font-family: inherit; font-size: 12px; padding: 5px 8px; border-radius: 8px; border: 1px solid #c9d6bd; background: #fff; color: #1d2a1c; }
+  .oc-body { display: grid; grid-template-columns: 1.2fr 1fr; gap: 12px; padding: 12px 14px 14px; align-items: start; }
+  .oc-map { background: #fff; border: 1px solid #e1e8d8; border-radius: 16px; padding: 6px; }
+  .oc-map svg { display: block; width: 100%; height: auto; cursor: crosshair; }
+  .oc-legend { display: flex; flex-wrap: wrap; gap: 10px 14px; padding: 4px 8px 2px; font-size: 10.5px; color: #5e6c59; }
+  .oc-legend i { display: inline-block; width: 11px; height: 11px; border-radius: 50%; margin-right: 5px; vertical-align: -1px; }
+  .oc-card { background: #fff; border: 1px solid #e1e8d8; border-left: 5px solid #1B5E20; border-radius: 16px; padding: 14px 14px 12px; }
+  .oc-card.is-closed { border-left-color: #E63946; }
+  .oc-verdict { font-size: 11px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: #1B5E20; }
+  .oc-card.is-closed .oc-verdict { color: #b4232f; }
+  .oc-card h2 { font-size: 17px; line-height: 1.3; color: #123D18; margin-top: 4px; }
+  .oc-card p { font-size: 12.5px; line-height: 1.55; color: #33402f; margin-top: 7px; }
+  .oc-card p b { color: #123D18; }
+  .oc-call { display: inline-block; margin-top: 10px; font-size: 13px; font-weight: 800; background: #FFE600; color: #123D18; padding: 7px 14px; border-radius: 999px; text-decoration: none; }
+  .oc-list { list-style: none; margin-top: 10px; display: grid; gap: 5px; }
+  .oc-list li { font-size: 11.5px; line-height: 1.4; color: #4c5a48; display: flex; justify-content: space-between; gap: 8px; border-top: 1px dashed #e1e8d8; padding-top: 5px; }
+  .oc-list li b { color: #123D18; font-weight: 700; }
+  .oc-list li span:last-child { white-space: nowrap; }
+  .oc-list li.is-off { color: #9aa595; }
+  .oc-list li.is-off b { color: #9aa595; }
+  .oc-112 { margin: 0 14px 12px; font-size: 12px; line-height: 1.5; color: #7a1c24; background: #fdeeee; border: 1px solid #f4c9cc; border-radius: 12px; padding: 9px 12px; }
+  .oc-foot { padding: 0 16px 14px; font-size: 10.5px; line-height: 1.5; color: #7d8a78; }
+  button:focus-visible, input:focus-visible, select:focus-visible { outline: 2px solid #1B5E20; outline-offset: 2px; }
+  @media (max-width: 660px) {
+    .oc-body { grid-template-columns: 1fr; }
+    .oc-top h1 { font-size: 17px; }
+  }
+</style>
+</head>
+<body>
+<div class="oc" id="oc">
+  <div class="oc-top">
+    <div>
+      <div class="oc-kick">On-call doctor in Berlin</div>
+      <h1>Which on-call practice is open at your hour?</h1>
+      <p>Tap the hour you feel ill on the week grid. The eleven KV practices open only on Friday afternoon, weekends and public holidays; at every other hour your door is 116117.</p>
+    </div>
+    <div class="oc-seg" role="group" aria-label="Who is ill">
+      <button type="button" data-who="adults" aria-pressed="true">Adult</button>
+      <button type="button" data-who="kids" aria-pressed="false">Child</button>
+    </div>
+  </div>
+  <div class="oc-week">
+    <div class="oc-week-head">
+      <div class="oc-when" id="when"></div>
+      <button type="button" class="oc-now" id="now">Jump to now</button>
+    </div>
+    <div class="oc-band" id="band"></div>
+    <div class="oc-opts">
+      <label><input type="checkbox" id="holiday"> Treat this day as a public holiday</label>
+      <label>Season <select id="season"><option value="winter">1 Oct to 31 Mar (until 21:00)</option><option value="summer">1 Apr to 30 Sep (until 20:00)</option></select></label>
+      <label>My postcode <input id="plz" type="text" inputmode="numeric" maxlength="5" placeholder="10178" autocomplete="postal-code" aria-label="Berlin postcode"></label><span id="plzmsg"></span>
+    </div>
+  </div>
+  <div class="oc-body">
+    <div class="oc-map">
+      <div id="map"></div>
+      <div class="oc-legend">
+        <span><i style="background:#1B5E20"></i>Open at this hour</span>
+        <span><i style="background:#cfd8c6"></i>Closed</span>
+        <span><i style="background:#FFE600;border:2px solid #123D18"></i>You (tap the map to move)</span>
+      </div>
+    </div>
+    <div class="oc-card" id="card" aria-live="polite"></div>
+  </div>
+  <div class="oc-112"><b>Call 112, not 116117,</b> for chest pain, trouble breathing, signs of a stroke, heavy bleeding or someone who will not wake up.</div>
+  <div class="oc-foot" id="foot"></div>
+</div>
+<script src="../js/brand.js"></script>
+<script>
+(function () {
+  var DAY = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+  var SHORT = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+  var DATA = null, who = 'adults', home = null, T = 111;
+  function setT(t, keepFocus) { T = t; update(); if (keepFocus) { var g = el('band').querySelector('svg'); if (g) g.focus(); } }
+  function el(id) { return document.getElementById(id); }
+  function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
+  function pad(n) { return (n < 10 ? '0' : '') + n; }
+
+  function hours() { return DATA.hours[el('season').value]; }
+  // Opening window for one practice on a given weekday (0 = Monday), or null.
+  function windowFor(p, day, holiday) {
+    var h = hours();
+    if (holiday || day >= 5) return h.weekend;
+    if (day === 4) return p.closedFriday ? null : h.fri;
+    return null;
+  }
+  function isOpen(p, day, hour, holiday) {
+    var w = windowFor(p, day, holiday);
+    return !!w && hour >= w[0] && hour < w[1];
+  }
+  function km(a, b) {
+    var R = 6371, toR = Math.PI / 180;
+    var dLat = (b.lat - a.lat) * toR, dLon = (b.lon - a.lon) * toR;
+    var x = Math.sin(dLat / 2) * Math.sin(dLat / 2) + Math.cos(a.lat * toR) * Math.cos(b.lat * toR) * Math.sin(dLon / 2) * Math.sin(dLon / 2);
+    return 2 * R * Math.asin(Math.sqrt(x));
+  }
+  function nextOpening(day, hour) {
+    // Walk forward hour by hour through the next seven days (no holiday assumed).
+    var pool = DATA.practices.filter(function (p) { return p.who === who; });
+    for (var k = 1; k <= 168; k++) {
+      var t = day * 24 + hour + k, d = Math.floor(t / 24) % 7, hh = t % 24;
+      if (pool.some(function (p) { return isOpen(p, d, hh, false); })) {
+        return SHORT[d] + ' ' + pad(hh) + ':00';
+      }
+    }
+    return null;
+  }
+
+  var W = 440, H = 330;
+  var B = { lonMin: 13.07, lonMax: 13.78, latMin: 52.33, latMax: 52.68 };
+  var K = Math.cos(52.5 * Math.PI / 180);
+  var S = Math.min((W - 16) / ((B.lonMax - B.lonMin) * K), (H - 16) / (B.latMax - B.latMin));
+  var OX = (W - (B.lonMax - B.lonMin) * K * S) / 2, OY = (H - (B.latMax - B.latMin) * S) / 2;
+  function project(lon, lat) { return [OX + (lon - B.lonMin) * K * S, OY + (B.latMax - lat) * S]; }
+  function unproject(x, y) { return { lon: B.lonMin + (x - OX) / (K * S), lat: B.latMax - (y - OY) / S }; }
+
+  function renderBand(day, hour, holiday) {
+    // A real week: seven rows of 24 hours, each cell shaded by how many practices are open.
+    var bw = 520, left = 34, top = 16, ch = 19, cw = (bw - left - 4) / 24, bh = top + 7 * ch + 22;
+    var s = '<svg viewBox="0 0 ' + bw + ' ' + bh + '" role="grid" tabindex="0" aria-label="Week grid of on-call practice hours. Use the arrow keys to move the hour.">';
+    var pool = DATA.practices.filter(function (p) { return p.who === who; });
+    for (var hh = 0; hh < 24; hh += 3) s += '<text x="' + (left + hh * cw + 2).toFixed(1) + '" y="11" font-size="9" fill="#7d8a78">' + pad(hh) + '</text>';
+    for (var d = 0; d < 7; d++) {
+      var y = top + d * ch;
+      s += '<text x="0" y="' + (y + 13) + '" font-size="10" font-weight="700" fill="' + (d === day ? '#123D18' : '#7d8a78') + '">' + SHORT[d] + '</text>';
+      for (hh = 0; hh < 24; hh++) {
+        var n = pool.filter(function (p) { return isOpen(p, d, hh, holiday && d === day); }).length;
+        var fill = n === 0 ? '#eef1ea' : (n === pool.length ? '#1B5E20' : '#7CB342');
+        s += '<rect class="oc-cell" data-t="' + (d * 24 + hh) + '" x="' + (left + hh * cw + 0.6).toFixed(1) + '" y="' + (y + 1) + '" width="' + (cw - 1.2).toFixed(1) + '" height="' + (ch - 2) + '" rx="2" fill="' + fill + '"><title>' + DAY[d] + ' ' + pad(hh) + ':00</title></rect>';
+      }
+    }
+    s += '<rect x="' + (left + hour * cw - 0.6).toFixed(1) + '" y="' + (top + day * ch - 0.5) + '" width="' + (cw + 1.2).toFixed(1) + '" height="' + (ch + 1) + '" rx="3" fill="none" stroke="#123D18" stroke-width="2.4" pointer-events="none"/>';
+    s += '<circle cx="' + (left + (hour + 0.5) * cw).toFixed(1) + '" cy="' + (top + day * ch + ch / 2) + '" r="3.2" fill="#FFE600" stroke="#123D18" stroke-width="1.2" pointer-events="none"/>';
+    s += '<text x="' + left + '" y="' + (bh - 4) + '" font-size="9.5" fill="#7d8a78">Dark green: all open. Light green: all but one. Grey: none, call 116117.</text>';
+    s += '</svg>';
+    el('band').innerHTML = s;
+    var svg = el('band').querySelector('svg');
+    svg.querySelectorAll('.oc-cell').forEach(function (c) {
+      c.addEventListener('click', function () { setT(Number(c.getAttribute('data-t'))); });
+    });
+    svg.addEventListener('keydown', function (ev) {
+      var step = { ArrowRight: 1, ArrowLeft: -1, ArrowDown: 24, ArrowUp: -24 }[ev.key];
+      if (!step) return;
+      ev.preventDefault();
+      setT((T + step + 168) % 168, true);
+    });
+  }
+
+  function renderMap(openIds, best) {
+    var s = '<svg viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="Map of Berlin with the KV on-call practices">';
+    DATA.outlines.forEach(function (o) {
+      o.rings.forEach(function (ring) {
+        var pts = ring.map(function (p) { var q = project(p[0], p[1]); return q[0].toFixed(1) + ',' + q[1].toFixed(1); }).join(' ');
+        s += '<polygon points="' + pts + '" fill="#f2f5ec" stroke="#cdd8c2" stroke-width="0.8"/>';
+      });
+    });
+    var hq = project(home.lon, home.lat);
+    if (best) {
+      var bq = project(best.lon, best.lat);
+      s += '<line x1="' + hq[0].toFixed(1) + '" y1="' + hq[1].toFixed(1) + '" x2="' + bq[0].toFixed(1) + '" y2="' + bq[1].toFixed(1) + '" stroke="#1B5E20" stroke-width="2" stroke-dasharray="5 4"/>';
+    }
+    var seen = {};
+    DATA.practices.filter(function (p) { return p.who === who; }).forEach(function (p) {
+      var q = project(p.lon, p.lat), on = openIds[p.id], sel = best && best.id === p.id;
+      var key = p.lat + ',' + p.lon; seen[key] = true;
+      if (on) s += '<circle cx="' + q[0].toFixed(1) + '" cy="' + q[1].toFixed(1) + '" r="' + (sel ? 15 : 11) + '" fill="#7CB342" fill-opacity=".25"/>';
+      s += '<rect x="' + (q[0] - 7).toFixed(1) + '" y="' + (q[1] - 7).toFixed(1) + '" width="14" height="14" rx="3" fill="' + (on ? '#1B5E20' : '#cfd8c6') + '" stroke="' + (sel ? '#FFE600' : '#fff') + '" stroke-width="' + (sel ? 3 : 1.5) + '"><title>' + esc(p.name) + '</title></rect>';
+      s += '<path d="M' + (q[0] - 3.5).toFixed(1) + ' ' + q[1].toFixed(1) + 'h7M' + q[0].toFixed(1) + ' ' + (q[1] - 3.5).toFixed(1) + 'v7" stroke="#fff" stroke-width="2"/>';
+    });
+    s += '<circle cx="' + hq[0].toFixed(1) + '" cy="' + hq[1].toFixed(1) + '" r="7" fill="#FFE600" stroke="#123D18" stroke-width="2.5"/>';
+    s += '</svg>';
+    el('map').innerHTML = s;
+    var svg = el('map').querySelector('svg');
+    svg.addEventListener('click', function (ev) {
+      var r = svg.getBoundingClientRect();
+      var x = (ev.clientX - r.left) * W / r.width, y = (ev.clientY - r.top) * H / r.height;
+      var pt = unproject(x, y);
+      home = { name: 'the point you tapped', lat: pt.lat, lon: pt.lon };
+      el('plz').value = ''; el('plzmsg').textContent = '';
+      update();
+    });
+  }
+
+  function update() {
+    var t = T, day = Math.floor(t / 24), hour = t % 24, holiday = el('holiday').checked;
+    el('when').innerHTML = DAY[day] + ' ' + pad(hour) + ':00<small>' + (holiday ? 'public holiday' : (day >= 5 ? 'weekend' : 'working day')) + '</small>';
+    renderBand(day, hour, holiday);
+    var pool = DATA.practices.filter(function (p) { return p.who === who; });
+    var openIds = {}, open = [];
+    pool.forEach(function (p) { if (isOpen(p, day, hour, holiday)) { openIds[p.id] = true; open.push(p); } });
+    var ranked = pool.map(function (p) { return { p: p, d: km(home, p) }; }).sort(function (a, b) { return a.d - b.d; });
+    var best = null;
+    ranked.some(function (r) { if (openIds[r.p.id]) { best = r.p; return true; } return false; });
+    renderMap(openIds, best);
+    var card = el('card'), html = '';
+    if (best) {
+      var w = windowFor(best, day, holiday), dist = km(home, best);
+      card.className = 'oc-card';
+      html += '<div class="oc-verdict">' + open.length + ' of ' + pool.length + ' ' + (who === 'kids' ? 'children’s' : 'adult') + ' practices open</div>';
+      html += '<h2>' + esc(best.name) + '</h2>';
+      html += '<p><b>' + esc(best.door) + '</b><br>' + esc(best.addr) + '</p>';
+      html += '<p>Open until <b>' + pad(w[1]) + ':00</b> today. About <b>' + dist.toFixed(1) + ' km</b> from ' + esc(home.name) + ' in a straight line. ' + esc(best.stop) + '.</p>';
+      html += '<p>Bring your health insurance card. If the trip is too much, 116117 can send a doctor to you instead.</p>';
+    } else {
+      card.className = 'oc-card is-closed';
+      var nx = nextOpening(day, hour);
+      html += '<div class="oc-verdict">No practice open at this hour</div>';
+      html += '<h2>Call 116117</h2>';
+      html += '<p>From ' + DAY[day] + ' ' + pad(hour) + ':00 the KV practices are shut. <b>116117</b> answers day and night: trained staff on the phone, a doctor\u2019s advice if you need it, and a <b>home visit</b> if you are too ill to travel.</p>';
+      if (nx) html += '<p>Next ' + (who === 'kids' ? 'children’s ' : '') + 'practice opens <b>' + nx + '</b>.</p>';
+      html += '<a class="oc-call" href="tel:116117">Call 116117</a>';
+    }
+    html += '<ul class="oc-list">' + ranked.map(function (r) {
+      return '<li class="' + (openIds[r.p.id] ? '' : 'is-off') + '"><span><b>' + esc(r.p.name) + '</b> · ' + esc(r.p.district) + '</span><span>' + r.d.toFixed(1) + ' km</span></li>';
+    }).join('') + '</ul>';
+    card.innerHTML = html;
+  }
+
+  function berlinNow() {
+    var parts = new Intl.DateTimeFormat('en-GB', { timeZone: 'Europe/Berlin', weekday: 'short', hour: '2-digit', hour12: false, month: 'numeric' }).formatToParts(new Date());
+    var get = function (t) { var f = parts.find(function (x) { return x.type === t; }); return f ? f.value : ''; };
+    var day = SHORT.indexOf(get('weekday')), hour = Number(get('hour')) % 24, month = Number(get('month'));
+    return { t: Math.max(0, day) * 24 + hour, winter: month >= 10 || month <= 3 };
+  }
+
+  fetch('data.json', { cache: 'no-cache' }).then(function (r) { return r.json(); }).then(function (d) {
+    DATA = d;
+    var now = berlinNow();
+    el('season').value = now.winter ? 'winter' : 'summer';
+    home = { name: 'Alexanderplatz', lat: 52.5219, lon: 13.4132 };
+    el('foot').textContent = 'Hours and addresses from ' + d.source + ', checked on ' + d.checkedOn + '. ' + d.outlineSource + '. ' + d.postcodeSource + '. Distances are straight lines; the KV list can change, so 116117 has the last word.';
+    document.querySelectorAll('.oc-seg button').forEach(function (b) {
+      b.addEventListener('click', function () {
+        who = b.getAttribute('data-who');
+        document.querySelectorAll('.oc-seg button').forEach(function (x) { x.setAttribute('aria-pressed', x === b ? 'true' : 'false'); });
+        update();
+      });
+    });
+    el('holiday').addEventListener('change', update);
+    el('season').addEventListener('change', update);
+    el('plz').addEventListener('input', function () {
+      var v = el('plz').value.replace(/\D/g, '').slice(0, 5), c = DATA.postcodes[v];
+      el('plz').value = v;
+      if (v.length < 5) { el('plzmsg').textContent = ''; return; }
+      if (!c) { el('plzmsg').textContent = 'Not a Berlin postcode I know. Tap the map instead.'; return; }
+      el('plzmsg').textContent = '';
+      home = { name: 'the centre of ' + v, lat: c[0], lon: c[1] };
+      update();
+    });
+    el('now').addEventListener('click', function () { setT(berlinNow().t); });
+    update();
+  });
+})();
+</script>
+</body>
+</html>

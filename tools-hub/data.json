@@ -11213,6 +11213,37 @@
       "iconStatus": "live-wix-media",
       "image": "https://static.wixstatic.com/media/5a08a3_866b991c7cea4e5a950d4f3c8df833b2~mv2.png",
       "cmsItemId": "3164e12a-7278-4b00-88fb-e96c745f16cf"
+    },
+    {
+      "slug": "berlin-on-call-practice-map",
+      "title": "Berlin On-Call Practice Map",
+      "lead": "The eleven KV Berlin on-call practices on a map and a week grid: which one is open at your hour, for adults or children, how far it is from your postcode, and when the only door is 116117. Checked on 24 October 2026.",
+      "category": "Maps",
+      "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/berlin-on-call-practice-map/",
+      "embedHeight": 1500,
+      "hubCategory": "Essentials",
+      "type": "Map",
+      "priority": 3,
+      "tags": [
+        "doctor",
+        "116117",
+        "on-call practice",
+        "notdienstpraxis",
+        "weekend doctor",
+        "kids"
+      ],
+      "aliases": [
+        "out of hours doctor berlin",
+        "out-of-hours doctor in berlin",
+        "kv notdienstpraxis berlin",
+        "emergency doctor berlin weekend",
+        "on-call doctor berlin",
+        "bereitschaftsdienst berlin",
+        "children's emergency doctor berlin"
+      ],
+      "iconStatus": "live-wix-media",
+      "image": "https://static.wixstatic.com/media/5a08a3_7c46a11a31b04d00b32e245f16acccad~mv2.png",
+      "cmsItemId": "9de3671e-0399-4f5f-a0bd-c88ac8dc6855"
     }
   ],
   "hubCategories": [
