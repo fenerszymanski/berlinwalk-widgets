@@ -6,6 +6,13 @@
   var flag = new URLSearchParams(location.search).get('bwFastTool');
   if (!match || flag === '0' || !(window.BW_FAST_TOOLS_ENABLED || flag === '1')) return;
   var slug = decodeURIComponent(match[1]);
+  if (slug === 'berlin-ticket-machine-simulator' && !document.getElementById('bw-ticket-partner-analytics')) {
+    var partnerAnalytics = document.createElement('script');
+    partnerAnalytics.id = 'bw-ticket-partner-analytics';
+    partnerAnalytics.src = 'https://fenerszymanski.github.io/berlinwalk-widgets/js/ticket-partner-analytics.js?v=20261024a';
+    partnerAnalytics.async = true;
+    document.head.appendChild(partnerAnalytics);
+  }
   var previous = window.BW_FAST_INLINE;
   if (previous && previous.slug === slug) return;
   if (previous) previous.stop();

@@ -392,27 +392,54 @@
     .btm__scoreBadge{width:116px; height:116px;}
     .btm__scoreBadge .num{font-size:32px;}
   }
+  /* Partner arrival flow: starting the tool comes before optional zone notes. */
+  .btm__hero{min-height:0;margin-bottom:12px;border-radius:18px;}
+  .btm__heroCopy{min-height:0;max-width:none;padding:22px;}
+  .btm__hero .btm__title{font-size:clamp(24px,4vw,34px);max-width:none;}
+  .btm__hero .btm__sub{font-size:13px;max-width:none;}
+  .btm__hero .btm__modes{margin-top:16px;}
+  .btm__zoneGuide{border:1px solid var(--line);border-radius:12px;background:var(--cream);padding:12px;}
+  .btm__zoneGuide summary{cursor:pointer;font-weight:700;font-size:13px;color:var(--green-d);}
+  .btm__zoneGuide[open] .btm__menuTop{margin-top:14px;}
+  .btm__zoneGuide .btm__zone{margin:0;}
+  @media(max-width:519px){
+    .btm__heroCopy{padding:16px;}
+    .btm__hero .btm__title{font-size:25px;}
+    .btm__hero .btm__modes{gap:8px;margin-top:12px;}
+    .btm__mode{padding:12px;gap:4px;}
+    .btm__mode .mode-k{display:none;}
+    .btm__mode .mode-h{font-size:16px;}
+    .btm__mode .mode-p{font-size:12px;}
+  }
 </style>
 </head>
 <body>
 <div class="btm" id="btm">
+  <section class="btm__view is-on" data-view="menu" aria-label="Choose a mode">
   <header class="btm__hero">
     <img src="./assets/ticket-machine-hero.jpg" alt="A traveller using a yellow ticket machine on a Berlin train platform" width="1400" height="788">
     <div class="btm__heroCopy">
-      <p class="btm__eyebrow">BerlinWalk • Berlin Tickets</p>
-      <h2 class="btm__title">Berlin Ticket Machine Simulator</h2>
-      <p class="btm__sub">Learn the machine before the platform gets busy. <b>Practice</b> the touchscreen step by step, or take the <b>Challenge</b> with real visitor situations.</p>
-    </div>
-    <div class="btm__journey" aria-label="The three decisions this tool practises">
-      <div class="btm__journeyItem"><span class="btm__journeyNo">01</span><span><b>Read the zone</b><span>AB, ABC, airport or Potsdam</span></span></div>
-      <div class="btm__journeyItem"><span class="btm__journeyNo">02</span><span><b>Choose the ticket</b><span>Single, 24-hour or group</span></span></div>
-      <div class="btm__journeyItem"><span class="btm__journeyNo">03</span><span><b>Finish the journey</b><span>Pay, collect and validate</span></span></div>
+      <p class="btm__eyebrow">BerlinTools by Walk of Berlin</p>
+      <h2 class="btm__title">Try your first Berlin ticket</h2>
+      <p class="btm__sub">Rehearse the machine, or check what you know. No real ticket purchase.</p>
+      <div class="btm__modes">
+        <button type="button" class="btm__mode btm__mode--practice" data-mode="practice">
+          <span class="mode-k">Learn</span>
+          <span class="mode-h">🎫 Practice</span>
+          <span class="mode-p">Choose a language and ticket, try payment, then validate your paper ticket.</span>
+          <span class="btm__modeGo">Start practising →</span>
+        </button>
+        <button type="button" class="btm__mode btm__mode--challenge" data-mode="challenge">
+          <span class="mode-k">Test yourself</span>
+          <span class="mode-h">🏆 Challenge</span>
+          <span class="mode-p">Five visitor situations: choose the ticket and zone, then see your score.</span>
+          <span class="btm__modeGo">Take the challenge →</span>
+        </button>
+      </div>
     </div>
   </header>
-
-  <!-- ============ MODE SELECT ============ -->
-  <section class="btm__view is-on" data-view="menu" aria-label="Choose a mode">
-    <div class="btm__menu">
+  <details class="btm__zoneGuide">
+    <summary>Which zones does my journey need?</summary>
       <div class="btm__menuTop">
         <div>
           <p class="btm__menuLead">Berlin's biggest ticket trap is not the machine, it is the <b>zones</b>. The city is A and B; the ring of Zone&nbsp;C around it holds <b>BER airport</b> and <b>Potsdam</b>. Get the zone right and the rest is easy.</p>
@@ -435,25 +462,11 @@
             <circle class="zoneDot" cx="66" cy="150" r="5"/>
             <text class="zoneName" x="66" y="168" text-anchor="middle">Potsdam</text>
           </svg>
-          <figcaption>Zones A · B · C. Anything touching Zone C (airport, Potsdam) needs an <b>ABC</b> ticket.</figcaption>
+          <figcaption>Zones A · B · C. For journeys between central Berlin (Zone A) and BER or Potsdam (Zone C), choose <b>ABC</b>. <b>BC</b> can cover journeys between B and C that do not pass through A.</figcaption>
         </figure>
       </div>
 
-      <div class="btm__modes">
-        <button type="button" class="btm__mode btm__mode--practice" data-mode="practice">
-          <span class="mode-k">Learn</span>
-          <span class="mode-h">🎫 Practice</span>
-          <span class="mode-p">Walk through the real machine step by step: language, ticket, price, payment, and the stamp that saves you a 60 euro fine.</span>
-          <span class="btm__modeGo">Start practising →</span>
-        </button>
-        <button type="button" class="btm__mode btm__mode--challenge" data-mode="challenge">
-          <span class="mode-k">Test yourself</span>
-          <span class="mode-h">🏆 Challenge</span>
-          <span class="mode-p">Five real Berlin situations. Pick the right ticket and zone, get instant feedback, and see your score. Airport, city, Potsdam, a full day and a group.</span>
-          <span class="btm__modeGo">Take the challenge →</span>
-        </button>
-      </div>
-    </div>
+  </details>
   </section>
 
   <!-- ============ PRACTICE ============ -->
@@ -546,7 +559,7 @@
           <h3>Not sure which ticket?</h3>
           <p>Answer two quick questions and I will point you at the right fare, then you can try it in the machine.</p>
 
-          <div class="btm__q">1 · Are you travelling to or from BER airport (or Potsdam)?</div>
+          <div class="btm__q">1 · Are you travelling between central Berlin and BER airport (or Potsdam)?</div>
           <div class="btm__opts" data-group="airport">
             <button class="btm__opt" data-val="yes" aria-pressed="false">Yes, Zone C</button>
             <button class="btm__opt" data-val="no" aria-pressed="false">No, city only</button>
@@ -569,7 +582,7 @@
           <h3>Quick facts for tourists</h3>
           <ul class="btm__facts">
             <li><span class="ic">🟡</span><span><b>U-Bahn platforms</b> have BVG machines; <b>S-Bahn platforms</b> have red DB machines. Both sell the same AB/ABC tickets that work on every U-Bahn, S-Bahn, tram, and bus.</span></li>
-            <li><span class="ic">✈️</span><span><b>BER airport and Potsdam are in Zone C</b>, so buy an <b>ABC</b> ticket for either.</span></li>
+            <li><span class="ic">✈️</span><span><b>BER airport and Potsdam are in Zone C.</b> From central Berlin (A), buy <b>ABC</b>. A journey confined to B and C can use <b>BC</b>.</span></li>
             <li><span class="ic">🖐️</span><span>Touch the dark screen to wake it, then choose English.</span></li>
             <li><span class="ic">🟨</span><span>Paper tickets must be <b>stamped before boarding</b>. Riding without a valid ticket is a <b>60&nbsp;euro</b> fine.</span></li>
           </ul>
@@ -623,7 +636,7 @@
               <circle class="zoneDot" cx="66" cy="150" r="5"/>
               <text class="zoneName" x="66" y="168" text-anchor="middle">Potsdam</text>
             </svg>
-            <figcaption>Keep the rings in mind: Zone C is the ABC line.</figcaption>
+            <figcaption>Central Berlin (A) to BER or Potsdam (C): ABC. B–C journeys that avoid A can use BC.</figcaption>
           </figure>
         </div>
       </div>
@@ -721,7 +734,7 @@
   var TICKETS = DATA.TICKETS;
   var SCENARIOS = DATA.SCENARIOS;
   var TOOL_SLUG = 'berlin-ticket-machine-simulator';
-  var CANONICAL_URL = 'https://www.berlinwalk.com/tools/' + TOOL_SLUG;
+  var CANONICAL_URL = 'https://walkofberlin.com/tools/' + TOOL_SLUG;
 
   /* ---- measurement bridge (no-op unless embedded on an allowed origin) ---- */
   var Events = (typeof window !== 'undefined' && window.BWToolEvents) ? window.BWToolEvents : null;
@@ -743,6 +756,10 @@
   var views = {};
   root.querySelectorAll('.btm__view').forEach(function(el){ views[el.getAttribute('data-view')] = el; });
   var mode = 'menu';
+  var practiceStartedMs = 0, practiceFinished = false;
+  function beginPractice(){
+    showView('practice'); showStep('start'); resetStamp();
+  }
   var interfaceReady = false;
   function focusScreen(container){
     if(!interfaceReady || !container) return;
@@ -789,6 +806,7 @@
     Object.keys(steps).forEach(function(k){ steps[k].classList.toggle('is-on', k===name); });
     if(name==='tickets') buildTickets();
     if(name==='start'){
+      if(mode==='practice'){ practiceStartedMs=Date.now(); practiceFinished=false; emit('start','practice_selected',{}); }
       practiceCurrent = null;
       practicePayment = null;
       renderPayment();
@@ -842,7 +860,13 @@
     document.getElementById('btmStampBtn').style.display = stamped ? 'none' : '';
   }
   function resetStamp(){ stampBox.classList.remove('is-stamped'); renderStamp(); }
-  function doStamp(){ stampBox.classList.add('is-stamped'); renderStamp(); }
+  function doStamp(){
+    stampBox.classList.add('is-stamped'); renderStamp();
+    if(!practiceFinished && practiceStartedMs && practiceCurrent && practicePayment){
+      practiceFinished = true;
+      emit('complete', 'practice_selected', { durationMs: Math.min(600000, Date.now()-practiceStartedMs), success: true });
+    }
+  }
   var picks = { airport:null, distance:null };
   function pickOpt(opt){
     var group = opt.closest('.btm__opts').getAttribute('data-group');
@@ -858,8 +882,8 @@
     var rec;
     if(picks.airport==='yes'){
       rec = picks.distance==='allday'
-        ? { n:'24-hour ticket ABC · '+TICKETS.day_abc.price+' €', w:'You need Zone C for BER or Potsdam, and for a full day of rides the 24-hour ticket beats singles. It runs 24 hours from the moment you validate it.' }
-        : { n:'Single ticket ABC · '+TICKETS.single_abc.price+' €', w:'Any trip touching Zone C (BER airport or Potsdam) needs ABC. One ABC single covers the ride in and is valid 120 minutes with changes.' };
+        ? { n:'24-hour ticket ABC · '+TICKETS.day_abc.price+' €', w:'From central Berlin to BER or Potsdam you need ABC. For three or more full-fare single journeys, the 24-hour ticket is cheaper. It runs 24 hours from the moment you validate it.' }
+        : { n:'Single ticket ABC · '+TICKETS.single_abc.price+' €', w:'From central Berlin (Zone A) to BER airport or Potsdam (Zone C), choose ABC. One ABC single covers the ride in and is valid 120 minutes with changes.' };
     } else if(picks.distance==='short'){
       rec = { n:'Short-trip ticket · '+TICKETS.kurz.price+' €', w:'Three U-/S-Bahn stops or six bus/tram stops. The cheapest fare, but only if you truly stay within that limit, otherwise buy the AB single.' };
     } else if(picks.distance==='allday'){
@@ -1043,7 +1067,7 @@
     if(out) out.hidden = true;
     document.getElementById('btmShareMsg').textContent = '';
 
-    emit('complete', '', { resultCount: ch.correctCount, durationMs: ch.elapsedMs, success: (ch.correctCount === SCENARIOS.length) });
+    emit('complete', 'challenge_selected', { resultCount: ch.correctCount, durationMs: ch.elapsedMs, success: (ch.correctCount === SCENARIOS.length) });
   }
   function abandonIfMidRun(){
     if(ch && ch.started && !ch.finished){
@@ -1094,7 +1118,7 @@
     var modeBtn = e.target.closest('[data-mode]');
     if(modeBtn){
       var m = modeBtn.getAttribute('data-mode');
-      if(m==='practice'){ emit('action','practice_selected',{}); showStep('start'); resetStamp(); showView('practice'); }
+      if(m==='practice'){ beginPractice(); }
       else { emit('action','challenge_selected',{}); showChStage('intro'); showView('challenge'); }
       return;
     }
@@ -1121,7 +1145,7 @@
     }
     if(e.target.closest('[data-share]')){ doShare(); return; }
     if(e.target.closest('[data-try-practice]')){
-      showStep('start'); resetStamp(); showView('practice');
+      beginPractice();
       return;
     }
     if(e.target.closest('[data-source-link]')){ emit('cta_click','',{}); return; }
