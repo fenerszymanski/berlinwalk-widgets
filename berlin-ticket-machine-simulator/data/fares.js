@@ -60,7 +60,7 @@
       price: '5.00', reduced: '3.50',
       pick: 'a single trip to or from BER airport or Potsdam',
       validity: '120 minutes, one direction, changes allowed, no round trip',
-      summary: 'Same as the single AB but it adds <b>Zone C</b>, which you need for <b>BER airport</b> and <b>Potsdam</b>. Valid 120 minutes, one direction. Reduced (child 6-14) <b>3.50&nbsp;euro</b>.',
+      summary: 'Same as the single AB but it adds <b>Zone C</b>, which you need when travelling from <b>central Berlin (Zone A)</b> to <b>BER airport</b> or <b>Potsdam</b>. Valid 120 minutes, one direction. Reduced (child 6-14) <b>3.50&nbsp;euro</b>.',
     },
     day_ab: {
       key: 'day_ab', name: '24-hour ticket AB', german: '24-Stunden-Karte AB',
@@ -123,11 +123,11 @@
       correct: 'single_abc',
       options: [
         { key: 'single_ab', reason: 'AB stops at the city limit. BER sits in Zone C, so an AB ticket is not valid for the airport run and can earn you the 60 euro fine.' },
-        { key: 'single_abc', reason: 'Correct. BER Airport is in Zone C, so any airport trip needs an ABC ticket. One ride into the city in one direction is a single, valid 120 minutes with changes.' },
+        { key: 'single_abc', reason: 'Correct. BER Airport is in Zone C and Alexanderplatz is in Zone A, so this journey needs an ABC ticket. One ride into the city in one direction is a single, valid 120 minutes with changes.' },
         { key: 'day_ab', reason: 'Wrong zone (no Zone C), and for one straight ride to your hotel a whole 24-hour ticket is more than you need.' },
         { key: 'kurz', reason: 'A short-trip ticket is only 3 rail stops. The airport run is far longer and crosses into Zone C, so this is invalid.' },
       ],
-      why: 'BER is Zone C, so from the city you need ABC. A single covers one direction for 120 minutes.',
+      why: 'BER is Zone C and Alexanderplatz is Zone A, so this journey needs ABC. A single covers one direction for 120 minutes.',
       nextMove: 'On the machine: touch the screen, choose English, pick the single ticket, select zone ABC, pay by card or coins, then stamp the paper ticket in the red or yellow validator before you board the S-Bahn, FEX or regional train.',
     },
     {
@@ -154,10 +154,10 @@
       options: [
         { key: 'single_abc', reason: 'One ABC single only covers one direction. You would have to buy again for local Potsdam trips and for the ride home, so it is not the day-trip answer.' },
         { key: 'day_ab', reason: 'Right idea, wrong zone. AB stops at the Berlin border and does not reach Potsdam, which is Zone C.' },
-        { key: 'day_abc', reason: 'Correct. Potsdam is in Zone C, so you need ABC, and because you ride out, around and back, a 24-hour ABC ticket (valid 24 hours from validation) is simpler and cheaper than buying single after single.' },
+        { key: 'day_abc', reason: 'Correct. Mitte is in Zone A and Potsdam is in Zone C, so this journey needs ABC, and because you ride out, around and back, a 24-hour ABC ticket (valid 24 hours from validation) is simpler and cheaper than buying single after single.' },
         { key: 'single_ab', reason: 'Neither the zone nor the shape fits: no Zone C, and one single cannot cover a full day of Potsdam rides.' },
       ],
-      why: 'Potsdam is Zone C, so ABC. Many rides across the day make the 24-hour ABC ticket the simple, cheap choice. (If you only went straight there and back with no local rides, two ABC singles at 10.00 euro would edge it.)',
+      why: 'Mitte is Zone A and Potsdam is Zone C, so this journey needs ABC. Many rides across the day make the 24-hour ABC ticket the simple, cheap choice. (If you only went straight there and back with no local rides, two ABC singles at 10.00 euro would edge it.)',
       nextMove: 'On the machine: 24-hour ticket, zone ABC, pay, then stamp it once before your first ride. It then covers every ride for 24 hours.',
     },
     {

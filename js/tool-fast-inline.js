@@ -55,7 +55,7 @@
       var u = new URL(value);
       if (u.origin !== 'https://fenerszymanski.github.io' || !u.pathname.startsWith('/berlinwalk-widgets/')) return '';
       // Wix warmup HTML can retain a previous CMS URL after a release.
-      if (slug === 'berlin-ticket-machine-simulator' && u.pathname.replace(/\/$/, '') === '/berlinwalk-widgets/berlin-ticket-machine-simulator') u.searchParams.set('release', '20261024-arrival-pilot');
+      if (slug === 'berlin-ticket-machine-simulator' && u.pathname.replace(/\/$/, '') === '/berlinwalk-widgets/berlin-ticket-machine-simulator') u.searchParams.set('release', '20261024-arrival-pilot2');
       u.searchParams.set('surface', 'tool-page'); return u.href;
     } catch (_) { return ''; }
   }
