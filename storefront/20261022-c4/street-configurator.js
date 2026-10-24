@@ -13,7 +13,8 @@ export const YS_LIMITS = Object.freeze({address: 80, details: 200, title: 24, ar
 // both showing the identical ground box, 368 m wide and 196.09 m tall (3.8043 units per metre), centred on the buyer's point. Ring: 26 m outer radius, stroke inside it.
 const GRID = {w: 1800, h: 2400}, PHOTO = {w: 1400, h: 746};
 const GROUND_W = 368, GROUND_H = GROUND_W * PHOTO.h / PHOTO.w, RING = 26, RING_STROKE = 8;
-const SCREEN_PX = [960, 512];   // WMS pixels per photo on screen, the 1400 : 746 shape (the print asks for 2756 x 1468)
+const SCREEN_PX = [720, 384];   // WMS pixels per photo on screen, the 1400 : 746 shape (the print asks for 2756 x 1468). 720 since 24 Oct 2026
+                                 // (Yusuf: protect the preview): sharp on a phone, about 80 dpi if a screenshot is printed at 30 x 40 cm
 // Text block, baselines on the design grid, everything centred on x = 900. The two captions are letter-spaced (8 and 10 units); the generator centres the
 // letters without the trailing space, SVG text-anchor includes it, so x moves right by half the spacing.
 const TX = {cx: 900, cap1928: 990, capToday: 1836, title: 2011, area: 2083, coords: 2137, line: 2199, track1928: 8, trackToday: 10};
@@ -155,11 +156,13 @@ export function mountConfigurator(host, state, api) {
           <div class="ys-photo ys-photo-1928" data-ys="photo-1928">
             <img class="ys-1928" alt="Aerial photograph of your spot in 1928, with a yellow ring on your building" decoding="async">
             ${RING_SVG}
+            <span class="ys-wm" aria-hidden="true"></span>
             <span class="ys-status" data-ys="status" role="status"></span>
           </div>
           <div class="ys-photo ys-photo-today" data-ys="photo-today">
             <img class="ys-todayimg" alt="Aerial photograph of the same spot today, same ground and scale, with a yellow ring" decoding="async">
             ${RING_SVG}
+            <span class="ys-wm" aria-hidden="true"></span>
             <span class="ys-status" data-ys="status-today" role="status" hidden></span>
           </div>
           <svg class="ys-type" viewBox="0 0 ${GRID.w} ${GRID.h}" role="group" aria-label="Text on the print">
