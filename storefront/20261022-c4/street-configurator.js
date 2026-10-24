@@ -340,4 +340,24 @@ export function mountConfigurator(host, state, api) {
   host.querySelector('[data-ys="seen"]').addEventListener('change', event => { state.seen = event.target.checked; if (state.seen) api.track?.('seen'); refreshButton(); });
   if (state.lat) showPoint(false);
   refreshButton();
+  // After a handed-over address the poster scrolls into view once; the storefront may re-render (and remount) meanwhile, so retry on the live node.
+  function scrollSheetSoon() {
+    [500, 1500, 3000].forEach(t => setTimeout(() => {
+      if (!api.scrollSheet || Date.now() - api.scrollSheet > 8000) return;
+      const sheet = host.isConnected ? $('sheet') : null;
+      if (sheet && !sheet.hidden) { sheet.scrollIntoView({block: 'start'}); if (Math.abs(sheet.getBoundingClientRect().top) < 120) api.scrollSheet = 0; }
+    }, t));
+  }
+  if (api.scrollSheet && state.lat) scrollSheetSoon();
+  // Address typed into the homepage banner (Yusuf, 25 Oct 2026): it arrives in sessionStorage (never in the URL, so it does not
+  // reach analytics or the pixel), is used once, and runs the normal search; the first Berlin result goes straight onto the poster.
+  if (!state.lat && !api.handoffDone) {
+    api.handoffDone = true;
+    let handed = '';
+    try { const raw = JSON.parse(sessionStorage.getItem('bwYsStreet') || 'null'); sessionStorage.removeItem('bwYsStreet'); if (raw && Date.now() - raw.at < 10 * 60 * 1000) handed = clean(raw.q, 80); } catch (e) {}
+    if (handed.length >= 3) {
+      input.value = handed; state.query = handed;
+      search(handed).then(() => { if (state.results?.length && !state.lat) { results.querySelector('[data-ys-pick="0"]')?.click(); api.scrollSheet = Date.now(); scrollSheetSoon(); } });
+    }
+  }
 }
