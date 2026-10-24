@@ -23,7 +23,7 @@
     return 'other';
   }
   function consent(win){
-    try{var value=win.consentPolicyManager.getCurrentConsentPolicy();return (value.policy || value).analytics===true;}catch(_){return false;}
+    try{var value=win.consentPolicyManager.getCurrentConsentPolicy();return value.defaultPolicy!==true && (value.policy || value).analytics===true;}catch(_){return false;}
   }
   function stage(data){
     if(data.eventName==='start') return data.actionName==='practice_selected' ? 'practice_start' : data.actionName==='scenario_started' ? 'challenge_start' : '';
