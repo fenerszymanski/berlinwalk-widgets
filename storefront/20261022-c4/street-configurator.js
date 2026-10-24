@@ -205,7 +205,7 @@ export function mountConfigurator(host, state, api) {
         <p class="ys-hint">The house number is never printed. Tap either photo to move the ring onto your building.</p>
         <label class="ys-check"><input type="checkbox" data-ys="seen" ${state.seen ? 'checked' : ''}><span>I can see the 1928 aerial photo at my spot. A blank white picture means there is no 1928 photo there (far eastern edge of Berlin).</span></label>
       </div>
-      <div class="ys-variant" data-ys="variant">
+      <div class="ys-variant" data-ys="variant" ${api.variants ? '' : 'hidden'}>
         <span class="ys-label" id="ys-size-l">Size</span>
         <div class="ys-sizes" role="radiogroup" aria-labelledby="ys-size-l">${YS_SIZES.map(z => `<button type="button" role="radio" class="ys-size" data-ys-size="${esc(z)}" aria-checked="${z === ysSize(state)}">${esc(z)}<small data-ys-sizeprice="${esc(z)}"></small></button>`).join('')}</div>
         <label class="ys-label" for="ys-paper">Paper</label>
@@ -216,6 +216,7 @@ export function mountConfigurator(host, state, api) {
   const $ = name => host.querySelector(`[data-ys="${name}"]`);
   // Size and paper: the price, caption and button follow the choice; Wix still charges its own variant price.
   function paintVariant() {
+    if (!api.variants) return;   // the picker shows only once the Wix product has its size x paper variants
     const i = YS_SIZES.indexOf(ysSize(state)), paper = ysPaper(state);
     host.querySelectorAll('[data-ys-size]').forEach(b => b.setAttribute('aria-checked', String(b.dataset.ysSize === ysSize(state))));
     host.querySelectorAll('[data-ys-sizeprice]').forEach(el => { el.textContent = euro(paper.price[YS_SIZES.indexOf(el.dataset.ysSizeprice)]); });

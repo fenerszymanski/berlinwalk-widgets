@@ -190,7 +190,7 @@
         const products=[...this.layer.adaptWixProducts(rows,this.presentation),...this.layer.adaptExternalProducts(this.external)];
         products.sort((a,b)=>this.presentation.findIndex(item=>item.id===a.id)-this.presentation.findIndex(item=>item.id===b.id));
         this.model=this.layer.createCatalogModel(products,this.definitions);
-        for(const product of this.model.products){const native=this.catalogue.products.find(row=>row.productId===product.wixProductId);product.priceLabel=native?.formattedDiscountedPrice||native?.formattedPrice||money(native?native.currency:product.currency,native?(native.discountedPrice??native.price):this.external.find(item=>item.sourceKey===product.externalSourceKey)?.productSchema?.offers?.price);if(product.wixProductId==='8aaf5412-7f21-42c7-acfb-85dd8417d68c'&&native?.price)product.priceLabel='From '+product.priceLabel;}
+        for(const product of this.model.products){const native=this.catalogue.products.find(row=>row.productId===product.wixProductId);product.priceLabel=native?.formattedDiscountedPrice||native?.formattedPrice||money(native?native.currency:product.currency,native?(native.discountedPrice??native.price):this.external.find(item=>item.sourceKey===product.externalSourceKey)?.productSchema?.offers?.price);if(product.wixProductId==='8aaf5412-7f21-42c7-acfb-85dd8417d68c'&&native?.requiresOptions)product.priceLabel='From '+product.priceLabel;}
         this.applyContextCategory();this.render();this.signalReady();
       }catch(error){this.fail(error.message);}
     }
@@ -252,6 +252,7 @@
     mountYs() {
       const host=this.shadowRoot.querySelector('[data-ys-host]');if(!host||!this.ysMod)return;
       this.ys=this.ys||{};this.ysApi=this.ysApi||{sample:asset('assets/ys-sample.jpg'),busy:()=>this.busy||this.uncertain,track:step=>{try{this.funnel?.ysStep(step);}catch(e){}}};
+      this.ysApi.variants=!!this.catalogue?.products?.find(row=>row.productId===this.ysMod.YS_PRODUCT_ID)?.requiresOptions;
       this.ysMod.mountConfigurator(host,this.ys,this.ysApi);
     }
     // "More from the shop": same group first, then same kind (digital or print), then the rest; the original order is kept inside each rank.
