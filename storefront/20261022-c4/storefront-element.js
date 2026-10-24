@@ -31,6 +31,30 @@
   const sk = cls => `<span class="sk-block ${cls}"></span>`;
   // Loading skeleton only: product page slug (the keys of PRODUCT_SLUGS in the page code) -> native product id, so the bundled poster of the product being opened can be drawn before the bridge answers. An unknown slug just gets a neutral skeleton.
   const SKELETON_PRODUCTS = Object.fromEntries(Object.entries({
+    "tempelhof-berlin-art-print": "ed545698-4cbc-41dc-8f0d-5fb0a335d70d",
+    "tempelhof-printable-berlin-poster": "ae584657-fa80-a31f-894f-ee2f90096027",
+    "berlin-in-pink-berlin-art-print": "4935fe7a-a33e-42c9-a315-4cb5644395a2",
+    "berlin-in-pink-printable-berlin-poster": "ed6f94a6-b06d-b045-92b8-35b4e59c9771",
+    "through-the-courtyard-berlin-art-print": "777b70f1-3d7f-4286-a73a-25f5858721c1",
+    "through-the-courtyard-printable-berlin-poster": "2fa81547-3fe5-2e27-f159-1832e962fcfe",
+    "späti-berlin-art-print": "01eb3a93-8d93-41dd-a786-7d730bb2f976",
+    "späti-printable-berlin-poster": "1a6f46e4-abbf-d60e-35ca-e8bae2802879",
+    "schönhauser-allee-berlin-art-print": "69d12671-9896-46eb-acc8-8f398a1938c3",
+    "schönhauser-allee-printable-berlin-poster": "73a6b49e-0435-da63-feb5-ad09d92e86b0",
+    "berlin-up-close-berlin-art-print": "3040bf5b-72d6-41b1-923b-c82dbdfabbc1",
+    "berlin-up-close-printable-berlin-poster": "d00ef91a-2015-2bad-a728-4f719c80d8df",
+    "a-window-in-berlin-berlin-art-print": "3decd6d0-aafd-4aa1-bcf0-5a30453c63b3",
+    "a-window-in-berlin-printable-berlin-poster": "bea51a7c-c3f3-fcd5-907b-4223d65e936b",
+    "marzahn-berlin-art-print": "21ad834a-4a86-4135-a43f-fc940896fe0a",
+    "marzahn-printable-berlin-poster": "bab5589e-cc13-57b0-921f-c192c7ebd2c5",
+    "teufelsberg-berlin-art-print": "65587cf3-a81d-441a-84ab-f140888fd431",
+    "teufelsberg-printable-berlin-poster": "42bac8cd-a8a9-bdf9-c858-1edbd30ace60",
+    "currywurst-berlin-art-print": "eb528417-cda2-4e2d-a46e-00ddd582213e",
+    "currywurst-printable-berlin-poster": "249031ee-b803-44ab-cce0-2402d42d5eaa",
+    "mauerpark-berlin-art-print": "db5d95e1-c762-4da9-81e4-40e8e8b2a3d4",
+    "mauerpark-printable-berlin-poster": "d302f343-cf9f-233f-58fe-f2ef4fb3d9d0",
+    "grunewald-berlin-art-print": "788fa678-c3ce-494e-b7a5-6e923a5d4637",
+    "grunewald-printable-berlin-poster": "a2ea2403-34ae-052b-4320-287b1b19db8c",
     'friedrichshain-kreuzberg-art-print':'3f54173e-df8a-4de3-ba9b-5e2fb29bc3eb',
     'pankow-art-print':'0354f523-ff49-4b73-b5b9-01c1215a1b20',
     'charlottenburg-wilmersdorf-art-print':'a7ea3f8a-db73-4560-bb54-fdb67e46fbbc',
@@ -190,7 +214,7 @@
         const products=[...this.layer.adaptWixProducts(rows,this.presentation),...this.layer.adaptExternalProducts(this.external)];
         products.sort((a,b)=>this.presentation.findIndex(item=>item.id===a.id)-this.presentation.findIndex(item=>item.id===b.id));
         this.model=this.layer.createCatalogModel(products,this.definitions);
-        for(const product of this.model.products){const native=this.catalogue.products.find(row=>row.productId===product.wixProductId);product.priceLabel=native?.formattedDiscountedPrice||native?.formattedPrice||money(native?native.currency:product.currency,native?(native.discountedPrice??native.price):this.external.find(item=>item.sourceKey===product.externalSourceKey)?.productSchema?.offers?.price);if(product.wixProductId==='8aaf5412-7f21-42c7-acfb-85dd8417d68c'&&native?.requiresOptions)product.priceLabel='From '+product.priceLabel;}
+        for(const product of this.model.products){const native=this.catalogue.products.find(row=>row.productId===product.wixProductId);product.priceLabel=native?.formattedDiscountedPrice||native?.formattedPrice||money(native?native.currency:product.currency,native?(native.discountedPrice??native.price):this.external.find(item=>item.sourceKey===product.externalSourceKey)?.productSchema?.offers?.price);if((product.wixProductId==='8aaf5412-7f21-42c7-acfb-85dd8417d68c'||native?.posterOptions)&&native?.requiresOptions)product.priceLabel='From '+product.priceLabel;}
         this.applyContextCategory();this.render();this.signalReady();
       }catch(error){this.fail(error.message);}
     }
@@ -208,7 +232,7 @@
       if(this.context.mode==='product'&&!this.model.products.some(p=>p.wixProductId===this.context.productId))return;
       this.readySent=true;this.dispatchEvent(new CustomEvent('shop-render-ready',{detail:{channel:CHANNEL},bubbles:true,composed:true}));
     }
-    fail(message) {clearTimeout(this.watchdog);this.error=message||'SHOP_UNAVAILABLE';this.revealed=false;this.hidden=true;this.style.minHeight='';this.style.display='';this.appliedHeight=0;this.style.height='0px';this.sizeObserver?.disconnect();this.render();this.dispatchEvent(new CustomEvent('shop-render-failed',{detail:{channel:CHANNEL},bubbles:true,composed:true}));}
+    fail(message) {this.setAttribute('data-storefront-error',message||'SHOP_UNAVAILABLE');clearTimeout(this.watchdog);this.error=message||'SHOP_UNAVAILABLE';this.revealed=false;this.hidden=true;this.style.minHeight='';this.style.display='';this.appliedHeight=0;this.style.height='0px';this.sizeObserver?.disconnect();this.render();this.dispatchEvent(new CustomEvent('shop-render-failed',{detail:{channel:CHANNEL},bubbles:true,composed:true}));}
     image(product) {if(product.image)return asset('assets/'+product.image);const native=product.source==='external'?'#':nativeImage(product.nativeImageUrl);return native&&native!=='#'?native:'';}
     tile(product) {
       const source=this.image(product);
@@ -234,13 +258,55 @@
       const slug=roomSlug(product),still=window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
       return `<video class="room" src="${esc(asset('assets/room/'+slug+'.mp4'))}" poster="${esc(asset('assets/room/'+slug+'-poster.jpg'))}" ${still?'controls':'autoplay loop'} muted playsinline preload="metadata" aria-label="${esc(ROOM_VIDEOS[slug])} in a living room. Styling example, frame not included."></video>`;
     }
+
+    posterPack(product,native) {
+      if(!native?.posterOptions||!native.requiresOptions)return null;
+      const rows=(native.variants||[]).filter(row=>row.visible===true&&row.choices&&Number.isFinite(row.price));
+      const keys=['Size','Paper'].filter(key=>rows.some(row=>Object.hasOwn(row.choices,key)));
+      this.posterChoices=this.posterChoices||{};
+      let choices=this.posterChoices[product.wixProductId];
+      if(!choices){
+        const first=rows.find(row=>row.inStock&&/30\s*x\s*40/i.test(row.choices.Size||'')&&(!row.choices.Paper||row.choices.Paper==='Premium Matte'))||rows.find(row=>row.inStock)||rows[0];
+        choices=first?{...first.choices}:{};
+        this.posterChoices[product.wixProductId]=choices;
+      }
+      const selected=rows.find(row=>keys.every(key=>row.choices[key]===choices[key]));
+      return {rows,keys,choices,selected,canAdd:!!selected&&selected.inStock===true};
+    }
+    posterOptions(product,pack) {
+      if(!pack)return '';
+      return `<div class="poster-options">${pack.keys.map(key=>{
+        const values=[...new Set(pack.rows.map(row=>row.choices[key]))];
+        return `<label>${esc(key)}<select data-poster-option="${esc(key)}" data-poster-product="${esc(product.wixProductId)}" ${this.busy?'disabled':''}>${values.map(value=>{
+          const available=pack.rows.some(row=>row.inStock&&row.choices[key]===value&&(key==='Size'||pack.keys.filter(other=>other!==key).every(other=>row.choices[other]===pack.choices[other])));
+          return `<option value="${esc(value)}" ${pack.choices[key]===value?'selected':''} ${available?'':'disabled'}>${esc(value)}</option>`;
+        }).join('')}</select></label>`;
+      }).join('')}</div>`;
+    }
+    changePosterOption(field) {
+      const product=this.model.products.find(p=>p.wixProductId===field.dataset.posterProduct);
+      const native=this.catalogue.products.find(p=>p.productId===field.dataset.posterProduct);
+      if(!product)return;
+      const pack=this.posterPack(product,native),key=field.dataset.posterOption;
+      if(!pack||!pack.keys.includes(key))return;
+      const next={...pack.choices,[key]:field.value};
+      const exact=pack.rows.find(row=>row.inStock&&pack.keys.every(k=>row.choices[k]===next[k]));
+      const fallback=pack.rows.find(row=>row.inStock&&row.choices[key]===field.value);
+      if(!exact&&!fallback)return;
+      this.posterChoices[product.wixProductId]={...(exact||fallback).choices};
+      this.render();
+      this.shadowRoot.querySelector(`[data-poster-option="${key}"]`)?.focus({preventScroll:true});
+    }
+
     product() {
       const product=this.model.products.find(p=>p.wixProductId===this.context.productId);if(!product)return '';
       const native=this.catalogue.products.find(p=>p.productId===product.wixProductId);
       if(this.ysMod&&product.wixProductId===this.ysMod.YS_PRODUCT_ID)return this.ysProduct(product,native);
+      const pack=this.posterPack(product,native);
+      const lifestyle=product.roomImage&&this.view==='room';
       const room=roomSlug(product),view=room&&(this.view!=='wall'||product.id==='bu')?this.view:'poster',wall=view==='wall',video=view==='video',digital=isDigital(product);
       const originalDescription=native?.description||product.description;
-      return `<div class="wrap"><nav class="breadcrumb" aria-label="Breadcrumb"><a href="https://walkofberlin.com/category/all-products">Store</a> / ${esc(product.name)}</nav><section class="product-layout"><div class="product-title"><h1>${esc(product.name)}</h1><span class="place">${esc(product.place)}</span><span class="price">${esc(product.priceLabel)}</span></div><div class="gallery"><div class="gallery-stage">${video?this.roomVideo(product):`<img class="${wall?'wall':''}" src="${esc(wall?asset('assets/berlin-uhr-wall.jpg'):this.image(product))}" alt="${esc(wall?'Styling example. Frame not included.':product.alt)}">${wall?'<p class="gallery-caption">Styling example · Frame not included</p>':''}`}</div><div class="thumbnails"><button class="thumb" data-action="poster" aria-label="${digital?'Show the preview':'Show the poster'}" aria-pressed="${view==='poster'}"><img src="${esc(asset('assets/'+product.image))}" alt=""></button>${room?`<button class="thumb play" data-action="video" aria-label="Play the room video" aria-pressed="${video}"><img src="${esc(asset('assets/room/'+room+'-thumb.jpg'))}" alt=""><span class="play-badge" aria-hidden="true"></span></button>`:''}${product.id==='bu'?`<button class="thumb" data-action="wall" aria-label="Show it on a wall" aria-pressed="${wall}"><img src="${esc(asset('assets/berlin-uhr-wall.jpg'))}" alt=""></button>`:''}</div></div><div class="buy-box"><p class="spec">${esc(product.typeLine)}</p><div class="buy-row ${digital?'no-qty':''}">${digital?'':this.quantityControl(this.quantity,'',true)}${product.action==='add'?`<button class="primary" data-action="add" data-product="${product.wixProductId}" data-quantity="${digital?1:this.quantity}" ${this.busy||this.uncertain?'disabled':''}>Add to cart</button>`:this.action(product)}</div><p class="delivery">${digital?esc(product.deliveryNote||DIGITAL_NOTE):'Printed to order by Gelato. Delivery estimates are shown at checkout.'+(/CALENDAR/.test(product.typeLine||'')?'':' Frame not included.')}</p></div></section><div class="product-info"><section class="story ${STORY_REELS[room]?'has-reel':''}"><h2>${digital?'About this download':'The story behind this print'}</h2>${this.storyReel(room)}<div>${safeHtml(originalDescription)}</div></section>${product.id==='bu'?this.editorial.clockBox()+this.editorial.locationCard(product):''}<section class="disclosures">${(product.nativeAdditionalInfo||[]).map(info=>`<details><summary>${esc(info.title)}</summary><div class="details-body">${safeHtml(info.description)}</div></details>`).join('')}<details class="delivery-returns"><summary>${digital?'Download &amp; returns':'Delivery &amp; returns'}</summary><div class="details-body"><p>${digital?esc(product.deliveryDetails||DIGITAL_DETAILS):'Printed to order by Gelato. Delivery estimates are shown in checkout; the Store Terms and the Withdrawal notices are linked on this page.'}</p>${digital?'':this.guaranteeNotice()}</div></details><details><summary>Image credits</summary><div class="details-body">${this.creditText()}</div></details></section></div><section class="more"><h2>More from the shop</h2><div class="grid category-grid">${[...this.related(product),...this.model.products.filter(p=>p.action==='external').slice(0,1)].map(p=>this.card(p)).join('')}</div></section><section class="legal-foot">${digital?'':'<p class="guarantee-line">Damaged or misprinted? You’re covered by EU consumer law. <button type="button" class="link" data-action="show-guarantee">See the official notice</button></p>'}${this.legalLinks()}${this.withdrawButton()}</section></div>`;
+      return `<div class="wrap"><nav class="breadcrumb" aria-label="Breadcrumb"><a href="https://walkofberlin.com/category/all-products">Store</a> / ${esc(product.name)}</nav><section class="product-layout"><div class="product-title"><h1>${esc(product.name)}</h1><span class="place">${esc(product.place)}</span><span class="price">${esc(pack?.selected?(pack.selected.formattedPrice||money(product.currency,pack.selected.price)):product.priceLabel)}</span></div><div class="gallery"><div class="gallery-stage">${video?this.roomVideo(product):`<img class="${wall?'wall':''}" src="${esc(lifestyle?asset('assets/'+product.roomImage):wall?asset('assets/berlin-uhr-wall.jpg'):this.image(product))}" alt="${esc(lifestyle||wall?'AI room visualization. Frame, furniture and decor not included.':product.alt)}">${lifestyle||wall?'<p class="gallery-caption">AI room visualization · Frame and decor not included</p>':''}`}</div><div class="thumbnails"><button class="thumb" data-action="poster" aria-label="${digital?'Show the preview':'Show the poster'}" aria-pressed="${view==='poster'&&!lifestyle}"><img src="${esc(this.image(product))}" alt=""></button>${product.roomImage?`<button class="thumb" data-action="room" aria-label="Show it in a room" aria-pressed="${!!lifestyle}"><img src="${esc(asset('assets/'+product.roomImage))}" alt=""></button>`:''}${room?`<button class="thumb play" data-action="video" aria-label="Play the room video" aria-pressed="${video}"><img src="${esc(asset('assets/room/'+room+'-thumb.jpg'))}" alt=""><span class="play-badge" aria-hidden="true"></span></button>`:''}${product.id==='bu'?`<button class="thumb" data-action="wall" aria-label="Show it on a wall" aria-pressed="${wall}"><img src="${esc(asset('assets/berlin-uhr-wall.jpg'))}" alt=""></button>`:''}</div></div><div class="buy-box"><p class="spec">${esc(product.typeLine)}</p>${this.posterOptions(product,pack)}<div class="buy-row ${digital?'no-qty':''}">${digital?'':this.quantityControl(this.quantity,'',true)}${pack?`<button class="primary" data-action="poster-add" data-product="${product.wixProductId}" ${!pack.canAdd||this.busy||this.uncertain?'disabled':''}>Add to cart</button>`:product.action==='add'?`<button class="primary" data-action="add" data-product="${product.wixProductId}" data-quantity="${digital?1:this.quantity}" ${this.busy||this.uncertain?'disabled':''}>Add to cart</button>`:this.action(product)}</div><p class="delivery">${digital?esc(product.deliveryNote||DIGITAL_NOTE):product.group==='everyday'?'Printed to order by Gelato. Shipping within Germany is included. Frame not included.':'Printed to order by Gelato. Delivery estimates are shown at checkout.'+(/CALENDAR/.test(product.typeLine||'')?'':' Frame not included.')}</p></div></section><div class="product-info"><section class="story ${STORY_REELS[room]?'has-reel':''}"><h2>${digital?'About this download':'The story behind this print'}</h2>${this.storyReel(room)}<div>${safeHtml(originalDescription)}</div></section>${product.id==='bu'?this.editorial.clockBox()+this.editorial.locationCard(product):''}<section class="disclosures">${(product.nativeAdditionalInfo||[]).map(info=>`<details><summary>${esc(info.title)}</summary><div class="details-body">${safeHtml(info.description)}</div></details>`).join('')}<details class="delivery-returns"><summary>${digital?'Download &amp; returns':'Delivery &amp; returns'}</summary><div class="details-body"><p>${digital?esc(product.deliveryDetails||DIGITAL_DETAILS):'Printed to order by Gelato. Delivery estimates are shown in checkout; the Store Terms and the Withdrawal notices are linked on this page.'}</p>${digital?'':this.guaranteeNotice()}</div></details><details><summary>Image credits</summary><div class="details-body">${product.group==='everyday'?'<p>The artwork was created with AI assistance and enlarged using Adobe Firefly. Room images are AI visualizations; frames, furniture and decor are not included.</p>':this.creditText()}</div></details></section></div><section class="more"><h2>More from the shop</h2><div class="grid category-grid">${[...this.related(product),...this.model.products.filter(p=>p.action==='external').slice(0,1)].map(p=>this.card(p)).join('')}</div></section><section class="legal-foot">${digital?'':'<p class="guarantee-line">Damaged or misprinted? You’re covered by EU consumer law. <button type="button" class="link" data-action="show-guarantee">See the official notice</button></p>'}${this.legalLinks()}${this.withdrawButton()}</section></div>`;
     }
     // "Your Berlin Street in 1928": personalised aerial print. The configurator lives in street-configurator.js; state survives re-renders in this.ys.
     ysProduct(product,native) {
@@ -336,7 +402,7 @@
     withdrawButton() {return `<p class="withdraw-row"><a class="outline withdraw-link" data-withdraw href="${LEGAL.withdraw}" target="_blank" rel="noopener">Withdraw from contract (Vertrag widerrufen)</a></p>`;}
     guaranteeNotice() {return `<section class="eu-guarantee" aria-labelledby="eu-guarantee-title"><h3 id="eu-guarantee-title">EU legal guarantee notice</h3><a href="${esc(asset(LEGAL.guaranteeImage))}" target="_blank" rel="noopener"><img src="${esc(asset(LEGAL.guaranteeImage))}" alt="${esc(GUARANTEE_ALT)}" width="884" height="1200" loading="lazy"></a><p class="meta">Official notice under Regulation (EU) 2025/1960, Annex I. <a href="${LEGAL.guaranteeInfo}" target="_blank" rel="noopener">More about legal guarantees</a></p></section>`;}
     lineNotice(line) {
-      if(line.productId===YS_ID||(line.customText||[]).length)return `<div class="line-legal" data-line-legal="personalised"><strong>Personalised physical product</strong>${NOTICE_PERSONALISED.map(t=>`<p>${esc(t)}</p>`).join('')}</div>`;
+      if(line.productId===YS_ID||(line.customText||[]).some(field=>!['Size','Paper'].includes(field.title)))return `<div class="line-legal" data-line-legal="personalised"><strong>Personalised physical product</strong>${NOTICE_PERSONALISED.map(t=>`<p>${esc(t)}</p>`).join('')}</div>`;
       if(line.shippable===false)return `<div class="line-legal" data-line-legal="digital"><strong>Printable digital product</strong><p>${esc(NOTICE_DIGITAL)}</p></div>`;
       return '';
     }
@@ -448,7 +514,7 @@
     // Any address edit clears the visible quote, total and delivery choice at once and bumps quoteRevision, so a late quote response for the old address is discarded in receive().
     input(event) {const field=event.target;if(!field.closest?.('[data-address-form]')||!field.name)return;this.destination[field.name]=field.value;this.selection=null;this.quote=null;this.quoteError='';this.failedKey='';this.choiceList=null;this.quoteRevision++;this.refreshCartUi();}
     // A committed edit (blur, Enter, "Done" on a phone keyboard) skips the remaining debounce.
-    change(event) {const field=event.target;if(!field.closest?.('[data-address-form]'))return;if(field.matches('[name="country"]'))this.input(event);this.queueAutoQuote(true);}
+    change(event) {const field=event.target;if(field.matches?.('[data-poster-option]')){this.changePosterOption(field);return;}if(!field.closest?.('[data-address-form]'))return;if(field.matches('[name="country"]'))this.input(event);this.queueAutoQuote(true);}
     // Automatic (debounced) or manual (Enter, Try again, Check delivery) quote. One request in flight at a time. A single delivery method is selected automatically with the same request path as a click, so the next quote is READY.
     async getQuote(manual=false) {
       if(!this.cart||this.context.mode!=='cart'||this.busy||this.quoting||this.uncertain||!this.destinationReady())return;
@@ -484,7 +550,7 @@
       const button=event.target.closest('[data-action]');if(!button)return;
       const action=button.dataset.action;
       if(action==='close-drawer'){this.shadowRoot.querySelector('dialog').close();return;}
-      if(action==='show-guarantee'){const d=this.shadowRoot.querySelector('details.delivery-returns');if(d){d.open=true;d.querySelector('.eu-guarantee')?.scrollIntoView({behavior:'smooth',block:'start'});}return;}if(action==='poster'||action==='wall'||action==='video'){this.view=action;this.render();if(action==='video')this.shadowRoot.querySelector('video.room')?.play?.().catch(()=>{});return;}
+      if(action==='show-guarantee'){const d=this.shadowRoot.querySelector('details.delivery-returns');if(d){d.open=true;d.querySelector('.eu-guarantee')?.scrollIntoView({behavior:'smooth',block:'start'});}return;}if(action==='poster'||action==='room'||action==='wall'||action==='video'){this.view=action;this.render();if(action==='video')this.shadowRoot.querySelector('video.room')?.play?.().catch(()=>{});return;}
       if(action==='product-minus'||action==='product-plus'){this.quantity=Math.max(1,Math.min(99,this.quantity+(action==='product-plus'?1:-1)));this.render();return;}
       if(action==='shipping'){const choice=this.quote?.choices?.[Number(button.dataset.index)],same=!!choice&&!!this.selection&&choice.carrierId===this.selection.carrierId&&choice.code===this.selection.code;if(choice&&!same&&!this.busy&&!this.quoting&&!this.uncertain){this.choiceList={signature:this.cart.signature,choices:this.quote.choices};this.selection={carrierId:choice.carrierId,code:choice.code};this.quote=null;this.quoteError='';this.failedKey='';await this.getQuote(true);}return;}
       if(action==='retry-quote'){if(!this.busy&&!this.quoting&&!this.uncertain){this.quoteError='';this.failedKey='';await this.getQuote(true);}return;}
@@ -495,6 +561,16 @@
       try {
         if(action==='refresh')await this.request('get');
         if(action==='ys-add'){if(!this.ysMod.readyToAdd(this.ys))throw Error('YS_NOT_READY');await this.request('add',{productId:this.ysMod.YS_PRODUCT_ID,quantity:1,customTextFields:this.ysMod.buildCustomText(this.ys),choices:this.ysMod.ysChoices(this.ys)});this.lastAddedId=this.ysMod.YS_PRODUCT_ID;this.measure('added',this.model.products.find(p=>p.wixProductId===this.ysMod.YS_PRODUCT_ID),1);this.notice='Added to your cart';this.render();const dialog=this.shadowRoot.querySelector('dialog');if(this.revealed){dialog.showModal();dialog.querySelector('[data-action="close-drawer"]').focus();}}
+
+        if(action==='poster-add'){
+          const product=this.model.products.find(p=>p.wixProductId===button.dataset.product);
+          const native=this.catalogue.products.find(p=>p.productId===button.dataset.product);
+          const pack=this.posterPack(product,native);
+          if(!pack?.canAdd)throw Error('CART_ITEMS_UNAVAILABLE');
+          await this.request('add',{productId:product.wixProductId,quantity:this.quantity,choices:{...pack.choices}});
+          this.lastAddedId=product.wixProductId;this.measure('added',product,this.quantity);this.notice='Added to your cart';this.render();
+          const dialog=this.shadowRoot.querySelector('dialog');if(this.revealed){dialog.showModal();dialog.querySelector('[data-action="close-drawer"]').focus();}
+        }
         if(action==='add'){await this.request('add',{productId:button.dataset.product,quantity:Number(button.dataset.quantity)||1});this.lastAddedId=button.dataset.product;this.measure('added',this.model.products.find(p=>p.wixProductId===button.dataset.product),Number(button.dataset.quantity)||1);this.notice='Added to your cart';this.render();const dialog=this.shadowRoot.querySelector('dialog');if(this.revealed){dialog.showModal();dialog.querySelector('[data-action="close-drawer"]').focus();}}
         if(action==='minus'||action==='plus'){const line=this.cart?.lines.find(line=>line.lineItemId===button.dataset.line);if(line)await this.request('update',{lineItemId:line.lineItemId,quantity:line.quantity+(action==='plus'?1:-1)});}
         if(action==='remove')await this.request('remove',{lineItemId:button.dataset.line});
