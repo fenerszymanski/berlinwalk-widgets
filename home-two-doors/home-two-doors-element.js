@@ -9,10 +9,10 @@ const BW_HOME_TWO_DOORS_CSS_URL = new URL('./home-two-doors-live.css', BW_HOME_T
 const BW_HOME_TWO_DOORS_BOOKING_URL = 'https://www.walkofberlin.com/book-berlin-walking-tour/berlin-then-and-now';
 const BW_HOME_TWO_DOORS_TOUR_SERVICE_ID = '145cb27e-c5bd-456d-bfbd-a09d4d6f5f9d';
 const BW_HOME_TWO_DOORS_AVAILABILITY_URL = `https://berlinwalk-content-app.vercel.app/api/booking-calendar-availability?days=120&guests=1&serviceId=${BW_HOME_TWO_DOORS_TOUR_SERVICE_ID}`;
-const BW_HOME_TWO_DOORS_AUDIO_HUB_URL = 'https://www.berlinwalk.com/audio-tours';
+const BW_HOME_TWO_DOORS_AUDIO_HUB_URL = 'https://www.walkofberlin.com/audio-tours';
 const BW_HOME_TWO_DOORS_REVIEWS_URL = 'https://www.walkofberlin.com/reviews';
 const BW_HOME_TWO_DOORS_CONTACT_URL = 'https://www.walkofberlin.com/contact';
-const BW_HOME_TWO_DOORS_TRIO_URL = 'https://www.berlinwalk.com/products/berlin-audio-trio-bundle';
+const BW_HOME_TWO_DOORS_TRIO_URL = 'https://www.walkofberlin.com/products/berlin-audio-trio-bundle';
 const BW_HOME_TWO_DOORS_REVIEWS_API = 'https://www.berlinwalk.com/_functions/listReviews?limit=100';
 
 // Same eight questions as the homepage FAQPage JSON-LD (Wix SEO tags on c1dmp)
@@ -63,7 +63,7 @@ const BW_HOME_TWO_DOORS_WALKS = [
     sampleDuration: 45,
     sampleLabel: 'Berlin Wall · 45-second sample',
     sampleSrc: 'https://app.berlinwalk.com/assets/death-strip-audio-route/preview/chapel-v2-45.m4a',
-    href: 'https://www.berlinwalk.com/products/death-strip-audio-route',
+    href: 'https://www.walkofberlin.com/products/death-strip-audio-route',
     image: 'card-berlin-wall.webp',
     alt: 'A section of the Berlin Wall beside a Berlin street',
   },
@@ -77,7 +77,7 @@ const BW_HOME_TWO_DOORS_WALKS = [
     sampleDuration: 42,
     sampleLabel: 'Hidden Berlin · 42-second sample',
     sampleSrc: 'https://app.berlinwalk.com/assets/hidden-berlin-audio-route/preview/anhalter-v2-42.m4a',
-    href: 'https://www.berlinwalk.com/products/hidden-berlin-audio-route',
+    href: 'https://www.walkofberlin.com/products/hidden-berlin-audio-route',
     image: 'card-hidden-berlin.webp',
     alt: 'The surviving entrance hall of Anhalter Bahnhof in Berlin',
   },
@@ -91,7 +91,7 @@ const BW_HOME_TWO_DOORS_WALKS = [
     sampleDuration: 45,
     sampleLabel: 'Medieval Berlin · 45-second sample',
     sampleSrc: 'https://app.berlinwalk.com/assets/medieval-berlin-audio-tour/preview/01-alexanderplatz-v2-proof-45.m4a',
-    href: 'https://www.berlinwalk.com/products/medieval-berlin-audio-tour',
+    href: 'https://www.walkofberlin.com/products/medieval-berlin-audio-tour',
     image: 'card-medieval-berlin.webp',
     alt: 'St. Mary’s Church with the Berlin TV Tower behind it',
   },
@@ -105,7 +105,7 @@ const BW_HOME_TWO_DOORS_MORE_PRODUCTS = [
     image: 'more-trip-planner.webp',
     alt: 'Illustrated view of Berlin Cathedral and the River Spree',
     text: 'Build a realistic day around your dates, hotel area and pace.',
-    href: 'https://www.berlinwalk.com/berlin-trip-planner',
+    href: 'https://www.walkofberlin.com/berlin-trip-planner',
   },
   {
     label: 'ARRIVE',
@@ -114,7 +114,7 @@ const BW_HOME_TWO_DOORS_MORE_PRODUCTS = [
     image: 'more-first-day.webp',
     alt: 'Platforms and signs inside Berlin Hauptbahnhof',
     text: 'Know what to do between landing, check-in and your first Berlin evening.',
-    href: 'https://www.berlinwalk.com/products/berlin-first-day-rescue-plan',
+    href: 'https://www.walkofberlin.com/products/berlin-first-day-rescue-plan',
   },
   {
     label: 'LOOK CLOSER',
@@ -123,7 +123,7 @@ const BW_HOME_TWO_DOORS_MORE_PRODUCTS = [
     image: 'more-photo-missions.webp',
     alt: 'The surviving portico of Anhalter Bahnhof',
     text: 'Small prompts for noticing places such as Anhalter Bahnhof differently.',
-    href: 'https://www.berlinwalk.com/products/hidden-berlin-photo-missions',
+    href: 'https://www.walkofberlin.com/products/hidden-berlin-photo-missions',
   },
   {
     label: 'TOOLS',
@@ -132,7 +132,7 @@ const BW_HOME_TWO_DOORS_MORE_PRODUCTS = [
     image: 'more-tools.webp',
     alt: 'Map and phone for planning a walk through Berlin',
     text: 'Practical calculators and decision helpers for a day in the city.',
-    href: 'https://www.berlinwalk.com/berlin-tools',
+    href: 'https://www.walkofberlin.com/berlin-tools',
   },
   {
     label: 'STAY IN',
