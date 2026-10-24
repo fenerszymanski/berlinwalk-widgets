@@ -38,7 +38,13 @@
     var code=partnerCode(win.location.search,doc.referrer),seen=new Set(),visitSent=false;
     var qa=win.location.origin.indexOf('http:')===0 || new URLSearchParams(win.location.search).get('wob_ticket_qa')==='1';
     function onPage(){return /^\/tools\/berlin-ticket-machine-simulator\/?$/.test(win.location.pathname);}
-    function diagnostic(value){if(qa && doc.documentElement && doc.documentElement.setAttribute)doc.documentElement.setAttribute('data-bw-ticket-pilot-qa',value);}
+    function diagnostic(value){
+      if(!qa || !doc.documentElement || !doc.documentElement.setAttribute)return;
+      doc.documentElement.setAttribute('data-bw-ticket-pilot-qa',value);
+      var layer=win.dataLayer || [],config=0,initialised=0;
+      for(var i=0;i<layer.length;i++){if(layer[i] && layer[i][0]==='config' && layer[i][1]==='G-4HWBTM07N2')config++;if(layer[i] && layer[i][0]==='js')initialised++;}
+      doc.documentElement.setAttribute('data-bw-ticket-pilot-qa-runtime',JSON.stringify({googleTagLoaded:!!win.google_tag_manager,googleTagConfigured:!!(win.google_tag_manager && win.google_tag_manager['G-4HWBTM07N2']),layerLength:layer.length,configCommands:config,initialisationCommands:initialised,wixChannel:!!(win.promoteAnalyticsChannels && win.promoteAnalyticsChannels.some(function(c){return c.name==='googleAnalyticsConsentMode';}))}));
+    }
     function send(suffix){
       if(!onPage()) return false;
       if(!consent(win)){diagnostic('blocked_consent');return false;}
