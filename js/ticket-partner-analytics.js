@@ -38,13 +38,16 @@
     var code=partnerCode(win.location.search,doc.referrer),seen=new Set(),visitSent=false;
     var qa=win.location.origin.indexOf('http:')===0 || new URLSearchParams(win.location.search).get('wob_ticket_qa')==='1';
     function onPage(){return /^\/tools\/berlin-ticket-machine-simulator\/?$/.test(win.location.pathname);}
+    function diagnostic(value){if(qa && doc.documentElement && doc.documentElement.setAttribute)doc.documentElement.setAttribute('data-bw-ticket-pilot-qa',value);}
     function send(suffix){
-      if(!onPage() || !consent(win)) return false;
-      if(typeof win.gtag!=='function' && !(win.dataLayer && typeof win.dataLayer.push==='function')) return false;
+      if(!onPage()) return false;
+      if(!consent(win)){diagnostic('blocked_consent');return false;}
+      if(typeof win.gtag!=='function' && !(win.dataLayer && typeof win.dataLayer.push==='function')){diagnostic('waiting_tracker');return false;}
       var name=(qa?'bw_tkt_qa_':'bw_tkt_')+code+'_'+suffix;
-      var payload={send_to:'G-4HWBTM07N2',page_location:'https://www.walkofberlin.com/tools/'+SLUG,page_referrer:'',debug_mode:qa};
+      var payload={send_to:'G-4HWBTM07N2',page_location:'https://www.walkofberlin.com/tools/'+SLUG,page_referrer:''};
       if(typeof win.gtag==='function') win.gtag('event',name,payload);
       else win.dataLayer.push((function(){return arguments;})('event',name,payload));
+      diagnostic('queued:'+name);
       return true;
     }
     function visit(){if(!visitSent && doc.visibilityState!=='hidden' && send('visit')) visitSent=true;}
