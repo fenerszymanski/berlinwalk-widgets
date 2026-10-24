@@ -155,4 +155,4 @@ h2>.sk-heading{width:55%}
 .story-reel{margin:4px 0 20px;max-width:300px}.story-reel video{display:block;width:100%;aspect-ratio:9/16;height:auto;border-radius:6px;background:#102b20}.story-reel figcaption{margin-top:8px;font-size:12px;line-height:1.5;color:var(--muted,#6b6b6b)}.story-reel figcaption a{color:inherit}
 @media(min-width:900px){.story.has-reel{display:grid;grid-template-columns:300px minmax(0,1fr);column-gap:36px;align-items:start}.story.has-reel>h2{grid-column:1/-1}.story.has-reel .story-reel{margin:0}}
 
-@media(max-width:740px){.ys-sheet{width:86%}.ys-stage{aspect-ratio:auto;padding:18px 0}}
+@media(max-width:740px){.ys-sheet{width:86%}.ys-stage{aspect-ratio:auto;padding:18px 0}.ys-caption{padding:0 7%}}

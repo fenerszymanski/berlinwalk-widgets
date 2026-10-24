@@ -222,8 +222,10 @@ export function mountConfigurator(host, state, api) {
     paintWords(); ensureFonts();
     setStatus('Loading the 1928 photo…'); setStatusToday('');
     const mine = state.token = (state.token || 0) + 1;
-    img1928.onload = () => { if (state.token === mine) setStatus(''); };
-    img1928.onerror = () => { if (state.token === mine) setStatus('The aerial photo service did not answer. Try again in a moment.'); };
+    let loaded = 0; const both = () => { if (state.token === mine && ++loaded === 2) api.track?.('preview'); };   // funnel: both photos on screen
+    img1928.onload = () => { if (state.token === mine) setStatus(''); both(); };
+    imgToday.onload = both;
+    img1928.onerror = () => { if (state.token === mine) { setStatus('The aerial photo service did not answer. Try again in a moment.'); api.track?.('photoerror'); } };
     imgToday.onerror = () => { if (state.token === mine) setStatusToday('Today’s photo did not load. Try again in a moment.'); };
     img1928.src = url1928(state.lat, state.lon);
     imgToday.src = urlToday(state.lat, state.lon);
@@ -252,6 +254,7 @@ export function mountConfigurator(host, state, api) {
   async function search(q) {
     q = clean(q, 80);
     if (q.length < 3) { results.hidden = true; note.textContent = q ? 'Keep typing (at least 3 letters).' : ''; note.classList.remove('ys-choose'); refreshButton(); return; }
+    api.track?.('search');
     controller?.abort(); controller = new AbortController(); const {signal} = controller;
     note.textContent = 'Searching…'; note.classList.remove('ys-choose');
     let rows = [];
@@ -264,6 +267,7 @@ export function mountConfigurator(host, state, api) {
     results.innerHTML = rows.map((r, i) => { const [main, sub] = placeLines(r); return `<li role="option"><button type="button" class="ys-pick" data-ys-pick="${i}">${PIN}<span class="ys-pick-text"><strong>${esc(main)}</strong><small>${esc(sub)}</small></span><span class="ys-pick-go" aria-hidden="true">›</span></button></li>`; }).join('');
     results.hidden = rows.length === 0;
     note.textContent = rows.length ? 'Tap your place to put it on the poster:' : 'Nothing found in Berlin. Check the spelling, or try the street name with a house number.';
+    if (!rows.length) api.track?.('noresult');
     note.classList.toggle('ys-choose', rows.length > 0);
     refreshButton();
   }
@@ -276,7 +280,7 @@ export function mountConfigurator(host, state, api) {
     const r = state.results?.[Number(pick.dataset.ysPick)]; if (!r) return;
     Object.assign(state, {lat: Math.round(Number(r.lat) * 1e5) / 1e5, lon: Math.round(Number(r.lon) * 1e5) / 1e5, address: addressLabel(r), title: titleFrom(r), area: areaFrom(r), query: input.value});
     host.querySelector('[data-ys="title"]').value = state.title; host.querySelector('[data-ys="area"]').value = state.area;
-    results.hidden = true; note.textContent = ''; note.classList.remove('ys-choose'); showPoint(true);
+    results.hidden = true; note.textContent = ''; note.classList.remove('ys-choose'); showPoint(true); api.track?.('pick');
     const box = $('sheet').getBoundingClientRect();
     if (box.bottom < 90 || box.top > innerHeight - 90) $('sheet').scrollIntoView({behavior: 'smooth', block: 'start'});
   });
@@ -293,7 +297,7 @@ export function mountConfigurator(host, state, api) {
   for (const name of ['title', 'area', 'line']) {
     host.querySelector(`[data-ys="${name}"]`).addEventListener('input', event => { state[name] = event.target.value; paintWords(); refreshButton(); });
   }
-  host.querySelector('[data-ys="seen"]').addEventListener('change', event => { state.seen = event.target.checked; refreshButton(); });
+  host.querySelector('[data-ys="seen"]').addEventListener('change', event => { state.seen = event.target.checked; if (state.seen) api.track?.('seen'); refreshButton(); });
   if (state.lat) showPoint(false);
   refreshButton();
 }

@@ -79,7 +79,8 @@
   }).map(([slug,id])=>[slug.normalize('NFC'),id]));
   const resources = Promise.all([
     import(asset('catalog-layer.js')), import(asset('editorial-helpers.js')), import(asset('street-configurator.js')),
-    ...['data/categories.json','data/presentation.json','data/native-bindings.json','data/external-products.json'].map(path => fetch(asset(path)).then(response => {if (!response.ok) throw Error('CATALOGUE_METADATA_UNAVAILABLE');return response.json();}))
+    ...['data/categories.json','data/presentation.json','data/native-bindings.json','data/external-products.json'].map(path => fetch(asset(path)).then(response => {if (!response.ok) throw Error('CATALOGUE_METADATA_UNAVAILABLE');return response.json();})),
+    import(asset('funnel.js')).catch(() => null)   // measurement must never block the shop
   ]);
   function safeHtml(html) {
     // Native rich text can preserve escaped quote delimiters and escaped block separators.
@@ -132,8 +133,8 @@
       if(name==='shop-bridge-ready')this.start();
     }
     async load() {
-      try {const [layer,editorial,ysMod,definitions,presentation,bindings,external]=await resources;
-        Object.assign(this,{layer,editorial,ysMod,definitions,presentation,bindings,external});
+      try {const [layer,editorial,ysMod,definitions,presentation,bindings,external,funnel]=await resources;
+        Object.assign(this,{layer,editorial,ysMod,definitions,presentation,bindings,external,funnel});
         if(this.catalogue)this.buildModel();if(!this.model)this.render();await this.start();
       }catch(error){if(!this.layer)releaseNative();this.fail(error.message);}
     }
@@ -246,9 +247,11 @@
       const story=native?.description||product.description;
       return `<div class="wrap"><nav class="breadcrumb" aria-label="Breadcrumb"><a href="https://walkofberlin.com/category/all-products">Store</a> / ${esc(product.name)}</nav><section class="product-layout ys-layout" data-ys-host><div class="product-title"><h1>${esc(product.name)}</h1><span class="place">${esc(product.place)}</span><span class="price">${esc(product.priceLabel)}</span></div><div class="gallery ys-gallery" data-ys-slot="visual"></div><div class="buy-box ys-buy"><p class="spec">${esc(product.typeLine)}</p><div data-ys-slot="form"></div><p class="ys-why" data-ys-why role="status"></p><div class="buy-row no-qty"><button class="primary" data-action="ys-add" data-ys-add disabled>Add to cart</button></div><p class="delivery">Made to order from your address and printed for you, usually in about 5 to 7 working days. Frame not included. Delivery: Germany only, free.</p><div class="line-legal" data-line-legal="personalised"><strong>Personalised physical product</strong>${NOTICE_PERSONALISED.map(t=>`<p>${esc(t)}</p>`).join('')}</div><p class="guarantee-line">At least two years of EU legal guarantee. <button type="button" class="link" data-action="show-guarantee">See the official notice</button></p>${this.legalLinks()}${this.withdrawButton()}</div></section><div class="product-info"><section class="story"><h2>The story behind this print</h2><div>${safeHtml(story)}</div></section><section class="disclosures"><details class="delivery-returns"><summary>Delivery &amp; returns</summary><div class="details-body"><p>Made to order from your address and printed for you. Delivery to Germany only, free. The Store Terms and the Withdrawal notices are linked on this page.</p>${this.guaranteeNotice()}</div></details></section></div></div>`;
     }
+    // Funnel measurement (funnel.js); a failure there never touches the shop.
+    measure(name,...args){try{this.funnel?.[name]?.(...args);}catch(e){}}
     mountYs() {
       const host=this.shadowRoot.querySelector('[data-ys-host]');if(!host||!this.ysMod)return;
-      this.ys=this.ys||{};this.ysApi=this.ysApi||{sample:asset('assets/ys-sample.jpg'),busy:()=>this.busy||this.uncertain};
+      this.ys=this.ys||{};this.ysApi=this.ysApi||{sample:asset('assets/ys-sample.jpg'),busy:()=>this.busy||this.uncertain,track:step=>{try{this.funnel?.ysStep(step);}catch(e){}}};
       this.ysMod.mountConfigurator(host,this.ys,this.ysApi);
     }
     // "More from the shop": same group first, then same kind (digital or print), then the rest; the original order is kept inside each rank.
@@ -490,11 +493,11 @@
       this.busy=true;this.error='';this.render();
       try {
         if(action==='refresh')await this.request('get');
-        if(action==='ys-add'){if(!this.ysMod.readyToAdd(this.ys))throw Error('YS_NOT_READY');await this.request('add',{productId:this.ysMod.YS_PRODUCT_ID,quantity:1,customTextFields:this.ysMod.buildCustomText(this.ys)});this.lastAddedId=this.ysMod.YS_PRODUCT_ID;this.notice='Added to your cart';this.render();const dialog=this.shadowRoot.querySelector('dialog');if(this.revealed){dialog.showModal();dialog.querySelector('[data-action="close-drawer"]').focus();}}
-        if(action==='add'){await this.request('add',{productId:button.dataset.product,quantity:Number(button.dataset.quantity)||1});this.lastAddedId=button.dataset.product;this.notice='Added to your cart';this.render();const dialog=this.shadowRoot.querySelector('dialog');if(this.revealed){dialog.showModal();dialog.querySelector('[data-action="close-drawer"]').focus();}}
+        if(action==='ys-add'){if(!this.ysMod.readyToAdd(this.ys))throw Error('YS_NOT_READY');await this.request('add',{productId:this.ysMod.YS_PRODUCT_ID,quantity:1,customTextFields:this.ysMod.buildCustomText(this.ys)});this.lastAddedId=this.ysMod.YS_PRODUCT_ID;this.measure('added',this.model.products.find(p=>p.wixProductId===this.ysMod.YS_PRODUCT_ID),1);this.notice='Added to your cart';this.render();const dialog=this.shadowRoot.querySelector('dialog');if(this.revealed){dialog.showModal();dialog.querySelector('[data-action="close-drawer"]').focus();}}
+        if(action==='add'){await this.request('add',{productId:button.dataset.product,quantity:Number(button.dataset.quantity)||1});this.lastAddedId=button.dataset.product;this.measure('added',this.model.products.find(p=>p.wixProductId===button.dataset.product),Number(button.dataset.quantity)||1);this.notice='Added to your cart';this.render();const dialog=this.shadowRoot.querySelector('dialog');if(this.revealed){dialog.showModal();dialog.querySelector('[data-action="close-drawer"]').focus();}}
         if(action==='minus'||action==='plus'){const line=this.cart?.lines.find(line=>line.lineItemId===button.dataset.line);if(line)await this.request('update',{lineItemId:line.lineItemId,quantity:line.quantity+(action==='plus'?1:-1)});}
         if(action==='remove')await this.request('remove',{lineItemId:button.dataset.line});
-        if(action==='checkout'&&this.quote?.state==='READY')await this.request('checkout',{quoteInput:this.quoteInput()});
+        if(action==='checkout'&&this.quote?.state==='READY'){this.measure('checkout',this.cart);await this.request('checkout',{quoteInput:this.quoteInput()});}
       }catch(error){this.error=error.message;}finally{this.busy=false;this.render();}
     }
   }
