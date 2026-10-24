@@ -110,10 +110,21 @@ export function addressLabel(result) {
   return clean([street, a.postcode, 'Berlin'].filter(Boolean).join(', '), YS_LIMITS.address) || clean(result?.display_name, YS_LIMITS.address);
 }
 // The two values the cart line carries. Exact keys = the product's custom text field titles.
-export function buildCustomText(state) {
+// Ad reference for the order (24 Oct 2026, Meta test bw_ys_oct2026 and the walkofberlin.com/1928 short link): read from this page's
+// own address at add time, nothing is stored on the device. "Ref:" sits before "Line:", so make_print.py's parser is unchanged (the
+// title/area stop at the first "//", the line runs to the end), and it is trimmed or left out so the line is never cut.
+export function adRef(search = (typeof location !== 'undefined' ? location.search : '')) {
+  const q = new URLSearchParams(search || '');
+  const tidy = v => String(v || '').toLowerCase().replace(/[^a-z0-9_.-]+/g, '').slice(0, 32);
+  const src = tidy(q.get('utm_source')), content = tidy(q.get('utm_content'));
+  return src ? (content ? `${src}/${content}` : src) : '';
+}
+export function buildCustomText(state, search) {
   const title = clean(state.title, YS_LIMITS.title).toUpperCase(), area = clean(state.area, YS_LIMITS.area), line = clean(state.line, YS_LIMITS.line);
   const [lat, lon] = [Number(state.lat), Number(state.lon)];
   const parts = [`Map point ${lat.toFixed(5)}, ${lon.toFixed(5)}`, `Title: ${title} | Area: ${area}`];
+  const ref = adRef(search), room = YS_LIMITS.details - [...parts, ...(line ? [`Line: ${line}`] : [])].join(' // ').length - ' // Ref: '.length;
+  if (ref && room >= 6) parts.push(`Ref: ${ref.slice(0, room)}`);
   if (line) parts.push(`Line: ${line}`);
   return {
     [YS_FIELDS.address]: clean(state.address, YS_LIMITS.address),
