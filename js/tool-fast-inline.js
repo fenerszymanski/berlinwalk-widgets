@@ -6,10 +6,22 @@
   var flag = new URLSearchParams(location.search).get('bwFastTool');
   if (!match || flag === '0' || !(window.BW_FAST_TOOLS_ENABLED || flag === '1')) return;
   var slug = decodeURIComponent(match[1]);
+  // Ticket privacy gate starts before the iframe or any analytics module loads.
+  if (slug === 'berlin-ticket-machine-simulator' && !window.__bwTicketPrivacyGate) {
+    window.__bwTicketPrivacyGate = true;
+    window.addEventListener('message', function (event) {
+      var data = event.data;
+      if (event.origin !== 'https://fenerszymanski.github.io' || !data || data.type !== 'bw-tool-event' || data.toolSlug !== 'berlin-ticket-machine-simulator') return;
+      var allowed = false;
+      try { allowed = typeof window.BW_TICKET_PARTNER_CONSENT === 'function' && window.BW_TICKET_PARTNER_CONSENT(); } catch (_) {}
+      if (!allowed) event.stopImmediatePropagation();
+    }, true);
+  }
+  // End ticket privacy gate.
   if (slug === 'berlin-ticket-machine-simulator' && !document.getElementById('bw-ticket-partner-analytics')) {
     var partnerAnalytics = document.createElement('script');
     partnerAnalytics.id = 'bw-ticket-partner-analytics';
-    partnerAnalytics.src = 'https://fenerszymanski.github.io/berlinwalk-widgets/js/ticket-partner-analytics.js?v=20261024g';
+    partnerAnalytics.src = 'https://fenerszymanski.github.io/berlinwalk-widgets/js/ticket-partner-analytics.js?v=20261024h';
     partnerAnalytics.async = true;
     document.head.appendChild(partnerAnalytics);
   }

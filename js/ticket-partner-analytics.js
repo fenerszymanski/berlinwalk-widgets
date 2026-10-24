@@ -40,6 +40,7 @@
     var qa=win.location.origin.indexOf('http:')===0 || new URLSearchParams(win.location.search).get('wob_ticket_qa')==='1';
     function onPage(){return /^\/tools\/berlin-ticket-machine-simulator\/?$/.test(win.location.pathname);}
     var providerReady=false,providerAllowed=false,providerPending=false,providerRevision=0;
+    win.BW_TICKET_PARTNER_CONSENT=function(){return onPage() && providerAllowed && consent(win);};
     function refreshProvider(force){
       if(force){providerRevision++;providerAllowed=false;providerReady=false;providerPending=false;}
       if(providerPending || providerReady || !win.__ucCmp || typeof win.__ucCmp.getConsentDetails!=='function')return;
