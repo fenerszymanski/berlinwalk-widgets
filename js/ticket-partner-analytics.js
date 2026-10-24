@@ -25,6 +25,7 @@
   function consent(win){
     try{var manager=win.consentPolicyManager;if(!manager || manager.initRan!==true)return false;var value=manager.getCurrentConsentPolicy();return value.defaultPolicy===false && (value.policy || value).analytics===true;}catch(_){return false;}
   }
+  function providerAccepted(details){return !!(details && details.consent && details.consent.type==='EXPLICIT' && details.categories && details.categories.wixcategory3 && details.categories.wixcategory3.state==='ALL_ACCEPTED');}
   function stage(data){
     if(data.eventName==='start') return data.actionName==='practice_selected' ? 'practice_start' : data.actionName==='scenario_started' ? 'challenge_start' : '';
     if(data.eventName==='complete') return data.actionName==='practice_selected' ? 'practice_complete' : data.actionName==='challenge_selected' ? 'challenge_complete' : '';
@@ -38,16 +39,25 @@
     var code=partnerCode(win.location.search,doc.referrer),seen=new Set(),visitSent=false;
     var qa=win.location.origin.indexOf('http:')===0 || new URLSearchParams(win.location.search).get('wob_ticket_qa')==='1';
     function onPage(){return /^\/tools\/berlin-ticket-machine-simulator\/?$/.test(win.location.pathname);}
+    var providerReady=false,providerAllowed=false,providerPending=false,providerRevision=0;
+    function refreshProvider(force){
+      if(force){providerRevision++;providerAllowed=false;providerReady=false;providerPending=false;}
+      if(providerPending || providerReady || !win.__ucCmp || typeof win.__ucCmp.getConsentDetails!=='function')return;
+      providerPending=true;var revision=++providerRevision;
+      Promise.resolve().then(function(){return win.__ucCmp.getConsentDetails();}).then(function(details){
+        if(revision!==providerRevision)return;providerPending=false;providerReady=!!(details && details.consent && details.categories);providerAllowed=providerAccepted(details);visit();
+      }).catch(function(){if(revision===providerRevision){providerPending=false;providerAllowed=false;}});
+    }
     function diagnostic(value){
       if(!qa || !doc.documentElement || !doc.documentElement.setAttribute)return;
       doc.documentElement.setAttribute('data-bw-ticket-pilot-qa',value);
       var layer=win.dataLayer || [],config=0,initialised=0;
       for(var i=0;i<layer.length;i++){if(layer[i] && layer[i][0]==='config' && layer[i][1]==='G-4HWBTM07N2')config++;if(layer[i] && layer[i][0]==='js')initialised++;}
-      doc.documentElement.setAttribute('data-bw-ticket-pilot-qa-runtime',JSON.stringify({googleTagLoaded:!!win.google_tag_manager,googleTagConfigured:!!(win.google_tag_manager && win.google_tag_manager['G-4HWBTM07N2']),layerLength:layer.length,configCommands:config,initialisationCommands:initialised,wixChannel:!!(win.promoteAnalyticsChannels && win.promoteAnalyticsChannels.some(function(c){return c.name==='googleAnalyticsConsentMode';}))}));
+      doc.documentElement.setAttribute('data-bw-ticket-pilot-qa-runtime',JSON.stringify({providerReady:providerReady,providerAllowed:providerAllowed,googleTagLoaded:!!win.google_tag_manager,googleTagConfigured:!!(win.google_tag_manager && win.google_tag_manager['G-4HWBTM07N2']),layerLength:layer.length,configCommands:config,initialisationCommands:initialised,wixChannel:!!(win.promoteAnalyticsChannels && win.promoteAnalyticsChannels.some(function(c){return c.name==='googleAnalyticsConsentMode';}))}));
     }
     function send(suffix){
       if(!onPage()) return false;
-      if(!consent(win)){diagnostic('blocked_consent');return false;}
+      if(!providerAllowed || !consent(win)){diagnostic('blocked_consent');return false;}
       if(typeof win.gtag!=='function' && !(win.dataLayer && typeof win.dataLayer.push==='function')){diagnostic('waiting_tracker');return false;}
       var name=(qa?'bw_tkt_qa_':'bw_tkt_')+code+'_'+suffix;
       var payload={send_to:'G-4HWBTM07N2',page_location:'https://www.walkofberlin.com/tools/'+SLUG,page_referrer:''};
@@ -58,7 +68,7 @@
     }
     function visit(){if(!visitSent && doc.visibilityState!=='hidden' && send('visit')) visitSent=true;}
     function message(event){
-      if(!onPage() || !consent(win)) return;
+      if(!onPage() || !providerAllowed || !consent(win)) return;
       var d=event.data,childOrigin=event.origin;
       var allowedOrigin=childOrigin==='https://fenerszymanski.github.io' || (qa && /^http:\/\/(127\.0\.0\.1|localhost):\d+$/.test(childOrigin));
       if(!allowedOrigin || !d || d.type!=='bw-tool-event' || d.v!=='20260830a' || d.toolSlug!==SLUG || !/^bwte_[0-9a-f]{32}$/.test(d.eventId || '')) return;
@@ -70,11 +80,14 @@
       if(send(suffix)){seen.add(d.eventId);if(seen.size>500)seen.delete(seen.values().next().value);}
     }
     win.addEventListener('message',message);
+    win.addEventListener('UC_UI_INITIALIZED',function(){refreshProvider(true);});
+    win.addEventListener('UC_CONSENT',function(){refreshProvider(true);});
+    refreshProvider(false);
     doc.addEventListener('consentPolicyInitialized',visit);doc.addEventListener('consentPolicyChanged',visit);doc.addEventListener('visibilitychange',visit);
     // Wix/gtag can initialise after the early tool loader. Bounded retry only;
     // each check still needs consent, and never replays pre-consent actions.
-    var tries=0,timer=win.setInterval(function(){visit();if(visitSent || ++tries>=60)win.clearInterval(timer);},1000);
+    var tries=0,timer=win.setInterval(function(){refreshProvider(false);visit();if(visitSent || ++tries>=60)win.clearInterval(timer);},1000);
     visit();
   }
-  return {install:install,partnerCode:partnerCode,stage:stage,PARTNERS:PARTNERS};
+  return {install:install,partnerCode:partnerCode,providerAccepted:providerAccepted,stage:stage,PARTNERS:PARTNERS};
 });

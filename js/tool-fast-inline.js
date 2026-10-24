@@ -9,7 +9,7 @@
   if (slug === 'berlin-ticket-machine-simulator' && !document.getElementById('bw-ticket-partner-analytics')) {
     var partnerAnalytics = document.createElement('script');
     partnerAnalytics.id = 'bw-ticket-partner-analytics';
-    partnerAnalytics.src = 'https://fenerszymanski.github.io/berlinwalk-widgets/js/ticket-partner-analytics.js?v=20261024f';
+    partnerAnalytics.src = 'https://fenerszymanski.github.io/berlinwalk-widgets/js/ticket-partner-analytics.js?v=20261024g';
     partnerAnalytics.async = true;
     document.head.appendChild(partnerAnalytics);
   }
