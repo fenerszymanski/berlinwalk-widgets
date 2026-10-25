@@ -1,7 +1,7 @@
 const BW_BLOG_HOME_DATA_URL = (() => {
   const script = document.currentScript;
   const base = script && script.src ? script.src : window.location.href;
-  return new URL('./data.json?v=20261023-early-ber-lead', base).href;
+  return new URL('./data.json?v=20261025-checkpoint-lead', base).href;
 })();
 const BW_BLOG_HOME_FALLBACK = {
   "featured": {
