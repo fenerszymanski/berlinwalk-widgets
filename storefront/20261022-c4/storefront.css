@@ -140,6 +140,7 @@ h2>.sk-heading{width:55%}
 .ys-confirm-row{display:flex;flex-wrap:wrap;align-items:center;gap:10px 18px}
 .ys-confirm-row>.primary{flex:1 1 220px}
 .ys-confirm-no{color:#632d1b}
+@media(min-width:741px){.ys-quick{display:none}}
 @media(max-width:740px){.ys-quick{padding:0 7%}.ys-quick-sep{display:none}.ys-quick-spec .ys-link{display:block;margin:4px auto 0}}
 .cart-line .line-custom{display:block;margin:4px 0 0;word-break:break-word}
 @media(max-width:740px){.ys-row{grid-template-columns:1fr}}
