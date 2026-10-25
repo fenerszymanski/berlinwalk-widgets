@@ -147,10 +147,13 @@ export const ysPaper = state => YS_PAPERS.find(p => p.name === state.paper) || Y
 export const ysPrice = state => ysPaper(state).price[YS_SIZES.indexOf(ysSize(state))];
 export const ysChoices = state => ({Size: ysSize(state), Paper: ysPaper(state).name});
 export const euro = n => `€${n.toFixed(2)}`;
-export function readyToAdd(state) {
+// Everything the print needs except the buyer's "yes, I see the 1928 photo": the add buttons are live from here on (25 Oct 2026).
+export function readyToCheck(state) {
   return Number.isFinite(state.lat) && Number.isFinite(state.lon) && inBerlin(state.lat, state.lon) && clean(state.address, 80).length > 0 &&
-    clean(state.title, 24).length > 0 && clean(state.area, 30).length > 0 && state.seen === true;
+    clean(state.title, 24).length > 0 && clean(state.area, 30).length > 0;
 }
+// The cart request itself still needs that yes, given once per spot in the confirm panel the add buttons open.
+export const readyToAdd = state => readyToCheck(state) && state.seen === true;
 
 const esc = value => String(value ?? '').replace(/[&<>"']/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'}[c]));
 // One ring per photo, centred, in the photo's own 1400 x 746 units: 26 m outer radius = 98.91 units, the 8-unit stroke inside it (circle r = 94.91).
@@ -160,6 +163,14 @@ const RING_SVG = `<svg class="ys-ring" viewBox="0 0 ${PHOTO.w} ${PHOTO.h}" aria-
 export const titleSize = title => (String(title || '').length <= 16 ? 118 : 96);
 const CAPTION_LIVE = 'Your poster, SIZE: 1928 above, today below, same ground and scale. Tap either photo to move the ring onto your building.';
 const CAPTION_EXAMPLE = 'Example poster, SIZE. Search for your own address to see your street.';
+// Yusuf, 25 Oct 2026: 174 of the first 178 previews stopped at the old "I can see the 1928 photo" checkbox, which kept the add button grey two
+// screens below the poster. Now an add button sits right under the poster and both add buttons are live; tapping one asks the same question
+// once, in place, and "Yes" adds to the cart. `where` is "quick" (under the poster) or "form" (the buy box).
+const confirmHtml = where => `<div class="ys-confirm" data-ys-confirm="${where}" role="group" aria-label="Check the 1928 photo" hidden>
+      <p><strong>One check before I print it:</strong> can you see the 1928 aerial photo in the top picture? If it is blank white, there is no 1928 photo for that spot (far eastern edge of Berlin).</p>
+      <div class="ys-confirm-row"><button type="button" class="primary" data-ys-yes>Yes, add to cart</button><button type="button" class="ys-link" data-ys-no>It is blank</button></div>
+      <p class="ys-confirm-no" data-ys-noinfo hidden>The 1928 survey did not reach that spot, so I cannot print it. Try a place nearby, or tap the photo to move the ring.</p>
+    </div>`;
 
 // `host` holds two slots ([data-ys-slot="visual"], [data-ys-slot="form"]) and the add button ([data-ys-add]). Rebuilt from `state` whenever the storefront re-renders. `api.add(customText)` returns a promise; `api.busy()` says whether the cart is locked.
 export function mountConfigurator(host, state, api) {
@@ -192,6 +203,11 @@ export function mountConfigurator(host, state, api) {
         <div class="ys-sheet ys-sample" data-ys="example" ${state.lat ? 'hidden' : ''}><img src="${esc(api.sample)}" alt="Example print: Potsdamer Platz in 1928 and today"></div>
       </div>
       <p class="ys-caption" data-ys="caption">${(state.lat ? CAPTION_LIVE : CAPTION_EXAMPLE).replace('SIZE', ysSize(state))}</p>
+      <div class="ys-quick" data-ys="quick" ${state.lat ? '' : 'hidden'}>
+        <button type="button" class="primary" data-ys-quickadd>Add to cart</button>
+        <p class="ys-quick-spec"><span data-ys="quickspec">Personalised print</span><span class="ys-quick-sep"> · </span><button type="button" class="ys-link" data-ys-jump>Change size, paper or text</button></p>
+        ${confirmHtml('quick')}
+      </div>
     </div>`;
   formSlot.innerHTML = `<div class="ys-form">
       <label class="ys-label" for="ys-q">Your address or a place in Berlin</label>
@@ -203,7 +219,6 @@ export function mountConfigurator(host, state, api) {
         <div class="ys-row"><label>Title on the print<input data-ys="title" maxlength="${L.title}" autocapitalize="characters" value="${esc(state.title || '')}"></label><label>Area line<input data-ys="area" maxlength="${L.area}" value="${esc(state.area || '')}"></label></div>
         <label>Your line on the print (optional)<input data-ys="line" maxlength="${L.line}" placeholder="e.g. Lena &amp; Jonas · here since 2021" value="${esc(state.line || '')}"></label>
         <p class="ys-hint">The house number is never printed. Tap either photo to move the ring onto your building.</p>
-        <label class="ys-check"><input type="checkbox" data-ys="seen" ${state.seen ? 'checked' : ''}><span>I can see the 1928 aerial photo at my spot. A blank white picture means there is no 1928 photo there (far eastern edge of Berlin).</span></label>
       </div>
       <div class="ys-variant" data-ys="variant" ${api.variants ? '' : 'hidden'}>
         <span class="ys-label" id="ys-size-l">Size</span>
@@ -212,6 +227,7 @@ export function mountConfigurator(host, state, api) {
         <select id="ys-paper" data-ys="paper">${YS_PAPERS.map(p => `<option value="${esc(p.name)}" ${p.name === ysPaper(state).name ? 'selected' : ''}>${esc(p.name)}</option>`).join('')}</select>
         <p class="ys-hint" data-ys="papernote"></p>
       </div>
+      ${confirmHtml('form')}
     </div>`;
   const $ = name => host.querySelector(`[data-ys="${name}"]`);
   // Size and paper: the price, caption and button follow the choice; Wix still charges its own variant price.
@@ -224,6 +240,9 @@ export function mountConfigurator(host, state, api) {
     const price = host.querySelector('.product-title .price'); if (price) price.textContent = euro(paper.price[i]);
     const spec = host.querySelector('.ys-buy .spec'); if (spec) spec.textContent = `Personalised print · ${ysSize(state)} · ${paper.name}`;
     const add = host.querySelector('[data-ys-add]'); if (add) add.textContent = `Add to cart · ${euro(paper.price[i])}`;
+    host.querySelector('[data-ys-quickadd]').textContent = `Add to cart · ${euro(paper.price[i])}`;
+    $('quickspec').textContent = `${ysSize(state)} · ${paper.name}`;
+    host.querySelectorAll('[data-ys-yes]').forEach(b => { b.textContent = `Yes, add to cart · ${euro(paper.price[i])}`; });
     $('caption').textContent = (state.lat ? CAPTION_LIVE : CAPTION_EXAMPLE).replace('SIZE', ysSize(state));
   }
   host.querySelectorAll('[data-ys-size]').forEach(b => b.addEventListener('click', () => { state.size = b.dataset.ysSize; paintVariant(); }));
@@ -252,7 +271,16 @@ export function mountConfigurator(host, state, api) {
   const status = $('status'), statusToday = $('status-today'), results = $('results'), note = $('searchnote'), input = $('q');
   const setStatus = text => { status.textContent = text; status.hidden = !text; };
   const setStatusToday = text => { statusToday.textContent = text; statusToday.hidden = !text; };
-  const refreshButton = () => { const b = host.getRootNode().querySelector?.('[data-ys-add]'); if (b) b.disabled = !readyToAdd(state) || api.busy(); const why = host.getRootNode().querySelector?.('[data-ys-why]'); if (why) why.textContent = readyToAdd(state) ? '' : (!state.lat ? (results.hidden ? 'Search for your address to continue.' : 'Tap one of the places under the search box.') : (!state.seen ? 'Confirm that you can see the 1928 photo to continue.' : 'Fill in the title and area lines to continue.')); };
+  // The confirm panel shows under the button that opened it (state.confirming = "quick" | "form"); it survives storefront re-renders.
+  const paintConfirm = () => { host.querySelectorAll('[data-ys-confirm]').forEach(p => { p.hidden = !state.lat || state.seen === true || state.confirming !== p.dataset.ysConfirm; if (p.hidden) p.querySelector('[data-ys-noinfo]').hidden = true; }); };
+  const refreshButton = () => {
+    const ready = readyToCheck(state), off = !ready || api.busy();
+    const b = host.getRootNode().querySelector?.('[data-ys-add]'); if (b) b.disabled = off;
+    host.querySelector('[data-ys-quickadd]').disabled = off; $('quick').hidden = !state.lat;
+    host.querySelectorAll('[data-ys-yes]').forEach(y => { y.disabled = off; });
+    const why = host.getRootNode().querySelector?.('[data-ys-why]'); if (why) why.textContent = ready ? '' : (!state.lat ? (results.hidden ? 'Search for your address to continue.' : 'Tap one of the places under the search box.') : 'Fill in the title and area lines to continue.');
+    paintConfirm();
+  };
   api.refresh = refreshButton;
 
   function showPoint(fresh) {
@@ -269,7 +297,7 @@ export function mountConfigurator(host, state, api) {
     imgToday.onerror = () => { if (state.token === mine) setStatusToday('Today’s photo did not load. Try again in a moment.'); };
     img1928.src = url1928(state.lat, state.lon);
     imgToday.src = urlToday(state.lat, state.lon);
-    if (fresh) state.seen = false, host.querySelector('[data-ys="seen"]').checked = false;
+    if (fresh) state.seen = false, state.confirming = null;   // a new spot may be outside the 1928 survey: ask again
     refreshButton();
   }
   // ---- Search: Photon first (typo-tolerant, Berlin bbox), Nominatim when Photon fails or finds nothing (max one request per second, contact email). ----
@@ -337,7 +365,24 @@ export function mountConfigurator(host, state, api) {
   for (const name of ['title', 'area', 'line']) {
     host.querySelector(`[data-ys="${name}"]`).addEventListener('input', event => { state[name] = event.target.value; paintWords(); refreshButton(); });
   }
-  host.querySelector('[data-ys="seen"]').addEventListener('change', event => { state.seen = event.target.checked; if (state.seen) api.track?.('seen'); refreshButton(); });
+  // Add buttons: before the 1928 yes they open the confirm panel instead of the cart (the click stops here, so the storefront's handler on the
+  // shadow root never sees it); after it the buy-box button adds as before and the button under the poster presses it.
+  // Funnel: addtap = an add button tapped with a printable spot, seen = "Yes" in the panel, blank = "It is blank", add = the cart took it (storefront).
+  const realAdd = () => host.getRootNode().querySelector?.('[data-ys-add]');
+  host.addEventListener('click', event => {
+    const t = event.target.closest?.('[data-ys-quickadd], [data-ys-add], [data-ys-yes], [data-ys-no], [data-ys-jump]'); if (!t) return;
+    if (t.matches('[data-ys-jump]')) { $('fields').scrollIntoView({behavior: 'smooth', block: 'start'}); return; }
+    if (t.matches('[data-ys-no]')) { t.closest('[data-ys-confirm]').querySelector('[data-ys-noinfo]').hidden = false; api.track?.('blank'); return; }
+    if (t.matches('[data-ys-yes]')) { if (!readyToCheck(state) || api.busy()) return; state.seen = true; state.confirming = null; api.track?.('seen'); refreshButton(); realAdd()?.click(); return; }
+    if (!readyToCheck(state)) return;
+    api.track?.('addtap');
+    if (state.seen === true) { if (t.matches('[data-ys-quickadd]')) realAdd()?.click(); return; }
+    event.stopPropagation();
+    state.confirming = t.matches('[data-ys-quickadd]') ? 'quick' : 'form'; paintConfirm();
+    const panel = host.querySelector(`[data-ys-confirm="${state.confirming}"]`);
+    if (panel.getBoundingClientRect().bottom > innerHeight - 16) panel.scrollIntoView({behavior: 'smooth', block: 'nearest'});
+    panel.querySelector('[data-ys-yes]').focus({preventScroll: true});
+  });
   if (state.lat) showPoint(false);
   refreshButton();
   // After a handed-over address the poster scrolls into view once; the storefront may re-render (and remount) meanwhile, so retry on the live node.
