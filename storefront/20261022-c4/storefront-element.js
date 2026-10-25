@@ -141,6 +141,15 @@
       super();this.attachShadow({mode:'open'});this.pending = new Map();this.cart = null;this.catalogue = null;this.model = null;
       this.context = {};this.category = 'all';this.filter = 'all';this.quantity = 1;this.view = 'poster';this.busy = false;
       this.quote = null;this.destination = {};this.selection = null;this.error = '';this.notice = '';this.revealed = false;this.readySent = false;this.delivery = -1;this.quoteRevision=0;
+      // Retired Everyday embed rev8 can remain in cached Wix documents after
+      // enabled:false. Only its exact native-fallback request is obsolete;
+      // ordinary failures and the visitor's original-store action still work.
+      this.addEventListener('shop-cart-request',event=>{
+        const request=event.detail;
+        if(request?.channel===CHANNEL&&request.op==='native-fallback'&&/^everyday-native-\d+$/.test(request.id||'')){
+          event.stopImmediatePropagation();event.stopPropagation();
+        }
+      },true);
       this.shadowRoot.addEventListener('click', event => this.click(event));
       this.shadowRoot.addEventListener('input', event => this.input(event));
       this.shadowRoot.addEventListener('change', event => this.change(event));
