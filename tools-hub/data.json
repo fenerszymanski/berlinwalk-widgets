@@ -11244,6 +11244,41 @@
       "iconStatus": "live-wix-media",
       "image": "https://static.wixstatic.com/media/5a08a3_7c46a11a31b04d00b32e245f16acccad~mv2.png",
       "cmsItemId": "9de3671e-0399-4f5f-a0bd-c88ac8dc6855"
+    },
+    {
+      "slug": "berlin-christmas-opening-chart",
+      "title": "Berlin Christmas Opening Chart",
+      "lead": "What is open in Berlin from 24 to 27 December 2026: the Christmas markets, Museum Island, the Reichstag dome, the TV Tower, the shops, the station supermarkets and the trains on one chart. Pick a day, tap a time. Checked on 25 October 2026.",
+      "category": "Discovery",
+      "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/berlin-christmas-opening-chart/",
+      "embedHeight": 1700,
+      "hubCategory": "Essentials",
+      "type": "Planner",
+      "priority": 3,
+      "seasonal": true,
+      "seasonStart": "2026-11-01",
+      "seasonEnd": "2026-12-28",
+      "seasonLabel": "Christmas",
+      "tags": [
+        "christmas",
+        "christmas eve",
+        "opening hours",
+        "what is open",
+        "museums",
+        "christmas markets",
+        "shops"
+      ],
+      "aliases": [
+        "what is open in berlin on christmas",
+        "christmas in berlin",
+        "berlin christmas eve open",
+        "berlin christmas day opening hours",
+        "berlin boxing day open",
+        "are shops open on christmas eve berlin"
+      ],
+      "iconStatus": "live-wix-media",
+      "image": "https://static.wixstatic.com/media/5a08a3_677aa8aa3d3d4671b6cd0bd80c9cfbbd~mv2.png",
+      "cmsItemId": "da72ae52-402e-4e73-b914-88ddb5cdee9d"
     }
   ],
   "hubCategories": [

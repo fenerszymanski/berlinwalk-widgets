@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Berlin Christmas Opening Chart: What Is Open from 24 to 27 December</title>
+<link rel="stylesheet" href="../css/brand.css">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #FFFFFF; color: #1c2119; padding: 12px; }
+  .cc { border-radius: 18px; overflow: hidden; background: #fbfaf4; border: 1px solid #e2dcc6; }
+  .cc-head { padding: 18px 18px 14px; background: #123D18; color: #fff; }
+  .cc-kick { font-size: 11px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; color: #FFE600; }
+  .cc-head h1 { font-size: 20px; line-height: 1.25; font-weight: 800; margin-top: 5px; }
+  .cc-head p { font-size: 12.5px; line-height: 1.55; color: #d6e6cc; margin-top: 7px; max-width: 680px; }
+  .cc-days { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; padding: 14px 14px 4px; }
+  .cc-days input { position: absolute; opacity: 0; pointer-events: none; }
+  .cc-days label { display: block; text-align: center; border: 1.5px solid #c9d3b6; background: #fff; border-radius: 12px; padding: 8px 4px; cursor: pointer; }
+  .cc-days label b { display: block; font-size: 15px; font-weight: 800; color: #123D18; }
+  .cc-days label span { display: block; font-size: 10.5px; font-weight: 700; color: #5b6652; letter-spacing: .03em; margin-top: 1px; }
+  .cc-days input:checked + label { background: #FFE600; border-color: #123D18; }
+  .cc-days input:checked + label b, .cc-days input:checked + label span { color: #123D18; }
+  .cc-days input:focus-visible + label { outline: 2px solid #1B5E20; outline-offset: 2px; }
+  .cc-dayline { padding: 8px 16px 0; font-size: 12.5px; line-height: 1.5; color: #2b3326; }
+  .cc-dayline strong { color: #123D18; }
+  .cc-chart { margin: 10px 12px 0; background: #fff; border: 1px solid #e2dcc6; border-radius: 14px; padding: 6px 6px 2px; }
+  .cc-chart canvas { display: block; width: 100%; height: auto; cursor: crosshair; touch-action: pan-y; }
+  .cc-legend { display: flex; flex-wrap: wrap; gap: 6px 14px; padding: 6px 6px 6px; font-size: 10.5px; color: #4b5444; }
+  .cc-legend i { display: inline-block; width: 16px; height: 9px; border-radius: 3px; margin-right: 5px; vertical-align: -1px; }
+  .cc-strip { margin: 10px 12px 0; background: #f2f0e4; border: 1px solid #e2dcc6; border-radius: 14px; padding: 8px 10px 6px; }
+  .cc-strip h2, .cc-panel h2 { font-size: 11px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: #1B5E20; }
+  .cc-strip svg { display: block; width: 100%; height: 70px; margin-top: 4px; }
+  .cc-strip svg rect { cursor: pointer; }
+  .cc-nudge { display: flex; gap: 8px; align-items: center; padding: 10px 14px 0; }
+  .cc-nudge button { font-family: inherit; font-size: 13px; font-weight: 800; color: #123D18; background: #fff; border: 1.5px solid #c9d3b6; border-radius: 10px; padding: 6px 12px; cursor: pointer; }
+  .cc-nudge button:hover { border-color: #123D18; }
+  .cc-nudge .clock { font-size: 15px; font-weight: 800; color: #123D18; background: #FFE600; border-radius: 9px; padding: 5px 10px; }
+  .cc-nudge .hint { font-size: 11px; color: #5b6652; }
+  .cc-panel { margin: 10px 12px 12px; display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .cc-col { background: #fff; border: 1px solid #e2dcc6; border-radius: 14px; padding: 10px 12px; }
+  .cc-col ul { list-style: none; margin-top: 7px; display: grid; gap: 7px; }
+  .cc-col li { font-size: 12.5px; line-height: 1.45; color: #2b3326; border-left: 3px solid #1B5E20; padding-left: 8px; }
+  .cc-col li b { color: #123D18; }
+  .cc-col li small { display: block; font-size: 11px; color: #5b6652; }
+  .cc-col li.q { border-left-color: #a8a497; }
+  .cc-col li.off { border-left-color: #d8d4c6; color: #646b5d; }
+  .cc-empty { font-size: 12px; color: #646b5d; margin-top: 7px; }
+  .cc-foot { padding: 0 16px 14px; font-size: 10.5px; line-height: 1.5; color: #5b6652; }
+  button:focus-visible { outline: 2px solid #1B5E20; outline-offset: 2px; }
+  @media (max-width: 640px) {
+    .cc-head h1 { font-size: 17px; }
+    .cc-panel { grid-template-columns: 1fr; }
+    .cc-days label b { font-size: 14px; }
+  }
+</style>
+</head>
+<body>
+<div class="cc">
+  <div class="cc-head">
+    <div class="cc-kick">Walk of Berlin &bull; Christmas 2026</div>
+    <h1>What is open in Berlin from 24 to 27 December</h1>
+    <p>Pick a day. The chart shows the opening hours of the markets, sights, museums, shops and trains a visitor actually plans around. Tap the chart or the strip below it to set a time and see what is open at that hour.</p>
+  </div>
+  <div class="cc-days" role="radiogroup" aria-label="Day">
+    <input type="radio" name="day" id="d24" value="d24" checked><label for="d24"><b>Thu 24</b><span>Christmas Eve</span></label>
+    <input type="radio" name="day" id="d25" value="d25"><label for="d25"><b>Fri 25</b><span>Christmas Day</span></label>
+    <input type="radio" name="day" id="d26" value="d26"><label for="d26"><b>Sat 26</b><span>Boxing Day</span></label>
+    <input type="radio" name="day" id="d27" value="d27"><label for="d27"><b>Sun 27</b><span>Sunday</span></label>
+  </div>
+  <div class="cc-dayline" id="dayline" aria-live="polite"></div>
+  <div class="cc-chart">
+    <canvas id="chart" width="700" height="560" aria-label="Opening hours chart for the selected day"></canvas>
+    <div class="cc-legend">
+      <span><i style="background:#1B5E20"></i>Hours published for this date</span>
+      <span><i style="background:#7CB342"></i>Usual hours, no holiday change announced</span>
+      <span><i style="background:repeating-linear-gradient(135deg,#9CCC65 0 3px,#e6f0d6 3px 6px)"></i>Last year's holiday pattern</span>
+      <span><i style="background:repeating-linear-gradient(135deg,#bdb9ab 0 3px,#f1efe7 3px 6px)"></i>Not published yet</span>
+    </div>
+  </div>
+  <div class="cc-nudge">
+    <button type="button" id="back" aria-label="One hour earlier">&larr; 1 h</button>
+    <span class="clock" id="clock">15:00</span>
+    <button type="button" id="fwd" aria-label="One hour later">1 h &rarr;</button>
+    <span class="hint">or tap the chart</span>
+  </div>
+  <div class="cc-strip">
+    <h2 id="striptitle">Places on this chart open, hour by hour</h2>
+    <svg id="strip" viewBox="0 0 700 70" preserveAspectRatio="none" role="img" aria-label="How many places on the chart are open at each hour"></svg>
+  </div>
+  <div class="cc-panel">
+    <div class="cc-col"><h2 id="opentitle">Open at 15:00</h2><ul id="openlist"></ul></div>
+    <div class="cc-col"><h2>Closed or not confirmed</h2><ul id="shutlist"></ul></div>
+  </div>
+  <div class="cc-foot">Hours from each place's own page or berlin.de, checked on 25 October 2026. Rows marked as last year's pattern use what the operator announced for Christmas 2025; BVG and S-Bahn Berlin usually publish the holiday timetable in December. Holiday hours can still change, so check the one place your day depends on before you go.</div>
+</div>
+
+<script>
+(function () {
+  var DAYS = {
+    d24: { name: 'Thursday 24 December', line: '<strong>Christmas Eve is a normal working day until the shops shut at 14:00.</strong> Most markets and every state museum are closed; the evening belongs to church and family.' },
+    d25: { name: 'Friday 25 December', line: '<strong>A public holiday.</strong> Shops are shut, the state museums open with Sunday hours, and four big markets are back.' },
+    d26: { name: 'Saturday 26 December', line: '<strong>The second public holiday.</strong> Same pattern as the 25th, with the same museum and market pattern.' },
+    d27: { name: 'Sunday 27 December', line: '<strong>An ordinary Berlin Sunday:</strong> shops still shut, so this is the fourth day in a row without normal shopping. Charlottenburg market closes for the season tonight.' }
+  };
+  var GROUPS = ['Christmas markets', 'Sights', 'Museums', 'Shops and food', 'Trains'];
+  // hours: [open, close] in decimal hours; a close above 24 runs past midnight.
+  var ROWS = [
+    { g: 0, n: 'Gendarmenmarkt', s: 'WeihnachtsZauber, 2 euro entry',
+      d24: ['set', 11, 18], d25: ['set', 11, 23], d26: ['set', 11, 23], d27: ['set', 11, 22],
+      note: 'The only big market open on the 24th, until 18:00. The free weekday lunch window does not apply on 24, 25 and 26 December.' },
+    { g: 0, n: 'Rotes Rathaus', s: 'Neptunbrunnen, ice rink',
+      d24: ['shut'], d25: ['set', 12, 22], d26: ['set', 11, 22], d27: ['set', 11, 22],
+      note: 'Closed on Christmas Eve, open daily again from the 25th until 3 January 2027.' },
+    { g: 0, n: 'Humboldt Forum', m: 'Humboldt Forum', s: 'Wintermarkt, free',
+      d24: ['shut'], d25: ['set', 11, 22], d26: ['set', 11, 22], d27: ['set', 11, 22],
+      note: 'Schlossplatz and the Schlüterhof courtyard, closed only on 24 December.' },
+    { g: 0, n: 'Schloss Charlottenburg', m: 'Charlottenburg', s: 'palace forecourt, free',
+      d24: ['shut'], d25: ['set', 12, 22], d26: ['set', 12, 22], d27: ['set', 12, 22],
+      note: 'Closed on the 24th; the 27th is its last evening of the season.' },
+    { g: 1, n: 'Reichstag dome', s: 'free, register ahead',
+      d24: ['shut'], d25: ['set', 8, 24], d26: ['set', 8, 24], d27: ['set', 8, 24],
+      note: 'Closed all day on 24 December. Last entry 21:45; you need a booked slot.' },
+    { g: 1, n: 'TV Tower', s: 'observation deck',
+      d24: ['unclear'], d25: ['usual', 9, 23], d26: ['usual', 9, 23], d27: ['usual', 9, 23],
+      note: 'The tower lists 09:00 to 23:00 with no Christmas change; a ticket partner shows a short day on the 24th. Check before you book that day.' },
+    { g: 1, n: 'Berliner Dom', s: 'cathedral',
+      d24: ['unclear'], d25: ['unclear'], d26: ['unclear'], d27: ['usual', 12, 17],
+      note: 'Holiday services, not sightseeing. On 24 December 2025 it held five services (14:00, 16:00, 18:00, 22:00, midnight). The 2026 plan is not out yet.' },
+    { g: 1, n: 'Zoo Berlin', s: 'Hardenbergplatz',
+      d24: ['set', 9, 14], d25: ['set', 9, 16.5], d26: ['set', 9, 16.5], d27: ['set', 9, 16.5],
+      note: 'Open every day of the year; on the 24th it shuts at 14:00. Last entry an hour before closing.' },
+    { g: 2, n: 'Museum Island', s: 'Neues, Altes, Bode, Alte Nationalgalerie',
+      d24: ['shut'], d25: ['set', 10, 18], d26: ['set', 10, 18], d27: ['set', 10, 18],
+      note: 'All state museums are closed on 24 December and open with Sunday hours on the 25th and 26th. The Pergamonmuseum stays closed for building work.' },
+    { g: 2, n: 'DDR Museum', s: 'opposite the Dom',
+      d24: ['set', 9, 16], d25: ['set', 9, 21], d26: ['set', 9, 21], d27: ['set', 9, 21],
+      note: 'One of the few museums open on Christmas Eve, until 16:00.' },
+    { g: 2, n: 'Jewish Museum', s: 'Lindenstraße, Kreuzberg',
+      d24: ['shut'], d25: ['usual', 10, 18], d26: ['usual', 10, 18], d27: ['usual', 10, 18],
+      note: 'Lists 24 December as a closing day and no other Christmas change. Closed on Mondays.' },
+    { g: 3, n: 'Shops and malls', s: 'every normal shop',
+      d24: ['set', 9, 14], d25: ['shut'], d26: ['shut'], d27: ['shut'],
+      note: 'Berlin law makes every shop close at 14:00 on 24 December. Then nothing normal opens again until Monday 28 December.' },
+    { g: 3, n: 'Rewe, Hauptbahnhof', m: 'Rewe, Hbf', s: 'lower level',
+      d24: ['unclear'], d25: ['last', 8, 22], d26: ['last', 8, 22], d27: ['unclear'],
+      note: 'Station shops may open on holidays. In 2025 this one ran 08:00 to 22:00 on both holidays.' },
+    { g: 3, n: 'Rewe, Ostbahnhof', m: 'Rewe, Ostbf', s: 'Friedrichshain',
+      d24: ['unclear'], d25: ['last', 6, 22], d26: ['last', 6, 22], d27: ['usual', 6, 24],
+      note: 'In 2025 it ran 06:00 to 22:00 on both holidays; on Sundays it usually opens 06:00 to midnight.' },
+    { g: 4, n: 'U-Bahn', s: 'BVG',
+      d24: ['last', 4.5, 26, 1], d25: ['last', 4.5, 26, 1], d26: ['last', 4.5, 26, 1], d27: ['last', 4.5, 26, 1],
+      note: 'In 2025 the BVG ran a Saturday timetable on the 24th, Sunday timetables on the holidays, and every line except U4 all night from 23/24 to 27/28 December.' },
+    { g: 4, n: 'S-Bahn', s: 'S-Bahn Berlin',
+      d24: ['last', 4.5, 26, 1], d25: ['last', 4.5, 26, 1], d26: ['usual', 4.5, 26, 1], d27: ['usual', 4.5, 25],
+      note: 'In the last holiday plans it ran a Saturday timetable on the 24th until about 17:00, then every 20 minutes, all night into the 25th and 26th. The night into Sunday 27th is a normal weekend night.' }
+  ];
+  var START = 6, END = 26;
+  var COL = { set: '#1B5E20', usual: '#7CB342' };
+  var el = function (id) { return document.getElementById(id); };
+  var day = 'd24', hour = 15;
+
+  function hm(h) { var x = ((h % 24) + 24) % 24, hh = Math.floor(x), mm = Math.round((x - hh) * 60); return (hh < 10 ? '0' : '') + hh + ':' + (mm < 10 ? '0' : '') + mm; }
+  function isOpen(r, d, h) { var v = r[d]; if (!v || v[0] === 'shut' || v[0] === 'unclear') return false; return h >= v[1] && h < v[2]; }
+  function stripe(ctx, x, y, w, h, a, b) {
+    ctx.save(); ctx.beginPath(); ctx.rect(x, y, w, h); ctx.clip();
+    ctx.fillStyle = b; ctx.fillRect(x, y, w, h); ctx.strokeStyle = a; ctx.lineWidth = 3;
+    for (var i = -h; i < w + h; i += 7) { ctx.beginPath(); ctx.moveTo(x + i, y + h); ctx.lineTo(x + i + h, y); ctx.stroke(); }
+    ctx.restore();
+  }
+
+  var layout = null;
+  function drawChart() {
+    var cv = el('chart'), cssW = Math.max(300, cv.clientWidth || 700), dpr = window.devicePixelRatio || 1;
+    var narrow = cssW < 520, labelW = narrow ? 112 : 168, rowH = narrow ? 25 : 27, headH = 26, groupH = 20;
+    var hgt = headH + ROWS.length * rowH + GROUPS.length * groupH + 8;
+    cv.width = Math.round(cssW * dpr); cv.height = Math.round(hgt * dpr); cv.style.height = hgt + 'px';
+    var ctx = cv.getContext('2d'); ctx.setTransform(dpr, 0, 0, dpr, 0, 0); ctx.clearRect(0, 0, cssW, hgt);
+    var x0 = labelW, x1 = cssW - 8, X = function (h) { return x0 + (Math.min(Math.max(h, START), END) - START) / (END - START) * (x1 - x0); };
+    ctx.font = '700 10px Montserrat, Arial, sans-serif'; ctx.textBaseline = 'middle';
+    var stepH = cssW < 400 ? 6 : (narrow ? 4 : 2);
+    for (var h = START; h <= END; h += stepH) {
+      ctx.strokeStyle = '#ece8da'; ctx.lineWidth = 1; ctx.beginPath(); ctx.moveTo(X(h) + .5, headH - 4); ctx.lineTo(X(h) + .5, hgt - 4); ctx.stroke();
+      ctx.fillStyle = '#6b7262'; ctx.textAlign = h === END ? 'right' : (h === START ? 'left' : 'center'); ctx.fillText(hm(h), X(h), 11);
+    }
+    var y = headH, rowsY = [];
+    GROUPS.forEach(function (gname, gi) {
+      ctx.fillStyle = '#1B5E20'; ctx.textAlign = 'left'; ctx.font = '800 10px Montserrat, Arial, sans-serif';
+      ctx.fillText(gname.toUpperCase(), 6, y + groupH / 2 + 1); y += groupH;
+      ROWS.forEach(function (r, ri) {
+        if (r.g !== gi) return;
+        var v = r[day], st = v[0], mid = y + rowH / 2, bh = rowH - 9;
+        ctx.fillStyle = (ri % 2) ? '#fbfaf4' : '#ffffff'; ctx.fillRect(0, y, cssW, rowH);
+        ctx.fillStyle = st === 'shut' ? '#8b8f84' : '#1c2119'; ctx.font = '700 ' + (narrow ? 11 : 12) + 'px Montserrat, Arial, sans-serif'; ctx.textAlign = 'left';
+        ctx.fillText(narrow && r.m ? r.m : r.n, 6, mid);
+        if (st === 'shut') {
+          ctx.fillStyle = '#9c9a90'; ctx.font = '700 10.5px Montserrat, Arial, sans-serif'; ctx.fillText('Closed all day', x0 + 6, mid);
+        } else if (st === 'unclear') {
+          stripe(ctx, x0, mid - bh / 2, x1 - x0, bh, '#cfcbbd', '#f4f2ea');
+          ctx.fillStyle = '#5b5f55'; ctx.font = '700 10.5px Montserrat, Arial, sans-serif'; ctx.fillText('Hours not published yet', x0 + 8, mid);
+        } else {
+          var a = X(v[1]), b = X(v[2]);
+          if (st === 'last') stripe(ctx, a, mid - bh / 2, b - a, bh, '#9CCC65', '#e6f0d6');
+          else { ctx.fillStyle = COL[st]; ctx.fillRect(a, mid - bh / 2, b - a, bh); }
+          var lab = v[3] ? 'runs all night' : hm(v[1]) + ' to ' + hm(v[2]);
+          ctx.font = '800 10px Montserrat, Arial, sans-serif';
+          var tw = ctx.measureText(lab).width;
+          if (b - a > tw + 10) { ctx.fillStyle = st === 'set' ? '#ffffff' : '#123D18'; ctx.textAlign = 'center'; ctx.fillText(lab, (a + b) / 2, mid + .5); }
+        }
+        rowsY[ri] = mid; y += rowH;
+      });
+    });
+    var cx = X(hour);
+    ctx.strokeStyle = '#123D18'; ctx.lineWidth = 2; ctx.beginPath(); ctx.moveTo(cx, headH - 2); ctx.lineTo(cx, hgt - 4); ctx.stroke();
+    ctx.fillStyle = '#FFE600'; ctx.strokeStyle = '#123D18'; ctx.lineWidth = 1.5;
+    ctx.beginPath(); ctx.arc(cx, headH - 4, 5, 0, Math.PI * 2); ctx.fill(); ctx.stroke();
+    layout = { x0: x0, x1: x1 };
+  }
+
+  function drawStrip() {
+    var svg = el('strip'), ns = 'http://www.w3.org/2000/svg', W = 700, H = 70, n = END - START, bw = W / n;
+    svg.innerHTML = '';
+    var max = ROWS.length;
+    for (var i = 0; i < n; i++) {
+      var h = START + i + 0.5, c = ROWS.filter(function (r) { return isOpen(r, day, h); }).length;
+      var bh = Math.max(2, (c / max) * (H - 16)), rect = document.createElementNS(ns, 'rect');
+      rect.setAttribute('x', (i * bw + 2).toFixed(1)); rect.setAttribute('y', (H - 12 - bh).toFixed(1));
+      rect.setAttribute('width', (bw - 4).toFixed(1)); rect.setAttribute('height', bh.toFixed(1)); rect.setAttribute('rx', '2');
+      rect.setAttribute('fill', Math.floor(hour) === START + i ? '#FFE600' : '#7CB342');
+      rect.setAttribute('stroke', Math.floor(hour) === START + i ? '#123D18' : 'none');
+      rect.setAttribute('data-h', String(START + i));
+      var t = document.createElementNS(ns, 'title'); t.textContent = hm(START + i) + ': ' + c + ' of ' + max + ' open'; rect.appendChild(t);
+      svg.appendChild(rect);
+      if (i % 4 === 0) {
+        var lab = document.createElementNS(ns, 'text');
+        lab.setAttribute('x', (i * bw + 2).toFixed(1)); lab.setAttribute('y', String(H - 1)); lab.setAttribute('font-size', '9'); lab.setAttribute('fill', '#6b7262');
+        lab.textContent = hm(START + i); svg.appendChild(lab);
+      }
+    }
+  }
+
+  function closesNote(r) { var v = r[day]; return (v[3] ? 'all night' : 'until ' + hm(v[2])) + (v[0] === 'last' ? ' (last year’s hours)' : ''); }
+  function drawLists() {
+    var open = ROWS.filter(function (r) { return isOpen(r, day, hour); });
+    var shut = ROWS.filter(function (r) { return !isOpen(r, day, hour); });
+    el('opentitle').textContent = 'Open at ' + hm(hour);
+    el('openlist').innerHTML = open.length ? open.map(function (r) {
+      return '<li><b>' + r.n + '</b> ' + closesNote(r) + '<small>' + r.note + '</small></li>';
+    }).join('') : '';
+    if (!open.length) el('openlist').innerHTML = '<li class="off">Nothing on this chart is open at this hour.</li>';
+    el('shutlist').innerHTML = shut.map(function (r) {
+      var v = r[day], why;
+      if (v[0] === 'shut') why = 'closed all day';
+      else if (v[0] === 'unclear') why = 'hours not published yet';
+      else if (hour < v[1]) why = 'opens at ' + hm(v[1]);
+      else why = 'closed at ' + hm(v[2]);
+      return '<li class="' + (v[0] === 'unclear' ? 'q' : 'off') + '"><b>' + r.n + '</b> ' + why + '<small>' + r.note + '</small></li>';
+    }).join('');
+  }
+
+  function render() {
+    el('dayline').innerHTML = DAYS[day].line;
+    el('clock').textContent = hm(hour);
+    el('striptitle').textContent = 'Places on this chart open, hour by hour, ' + DAYS[day].name;
+    drawChart(); drawStrip(); drawLists();
+  }
+  function setHour(h) { hour = Math.min(END - 1, Math.max(START, Math.round(h))); render(); }
+
+  document.querySelectorAll('input[name=day]').forEach(function (inp) {
+    inp.addEventListener('change', function () { if (inp.checked) { day = inp.value; render(); } });
+  });
+  el('back').addEventListener('click', function () { setHour(hour - 1); });
+  el('fwd').addEventListener('click', function () { setHour(hour + 1); });
+  el('chart').addEventListener('click', function (e) {
+    if (!layout) return;
+    var r = el('chart').getBoundingClientRect(), x = e.clientX - r.left;
+    if (x < layout.x0) return;
+    setHour(START + (x - layout.x0) / (layout.x1 - layout.x0) * (END - START));
+  });
+  el('strip').addEventListener('click', function (e) { var h = e.target && e.target.getAttribute && e.target.getAttribute('data-h'); if (h) setHour(Number(h)); });
+  var rw = 0;
+  window.addEventListener('resize', function () { var cw = el('chart').clientWidth; if (Math.abs(cw - rw) > 20) { rw = cw; drawChart(); } });
+  render();
+  rw = el('chart').clientWidth;
+})();
+</script>
+<script src="../js/brand.js"></script>
+</body>
+</html>
