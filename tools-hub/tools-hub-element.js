@@ -909,7 +909,7 @@ class BWToolsHubElement extends HTMLElement {
               <h2 id="bw-embed-tools-title">Have a travel site or hotel website?</h2>
               <p>Embed these Berlin planning tools for free, with auto-height snippets built for WordPress, Squarespace, Wix, hotel sites, and travel blogs.</p>
             </div>
-            <a href="https://www.berlinwalk.com/widgets" class="bw-btn-secondary">Embed these tools</a>
+            <a href="https://www.walkofberlin.com/widgets" class="bw-btn-secondary">Embed these tools</a>
           </section>
         </main>
 
@@ -1105,7 +1105,7 @@ class BWToolsHubElement extends HTMLElement {
 
     const href = typeof tool.href === 'string' && tool.href.trim()
       ? this._escapeAttribute(tool.href.trim())
-      : `https://www.berlinwalk.com/tools/${this._escapeAttribute(tool.slug || '')}`;
+      : `https://www.walkofberlin.com/tools/${this._escapeAttribute(tool.slug || '')}`;
     const image = typeof tool.image === 'string' && tool.image.trim() ? tool.image.trim() : BW_TOOLS_HUB_DEFAULT_IMAGE;
     const imageAttributes = this._toolIconImageAttributes(image);
     const label = this._escapeHtml(config.label || 'Featured Tool');
@@ -1221,7 +1221,7 @@ class BWToolsHubElement extends HTMLElement {
       ? `<span class="bw-season-label">${this._escapeHtml(tool.seasonLabel)}</span>`
       : '';
     return `
-      <a class="bw-tool-card" href="${typeof tool.href === 'string' && tool.href.trim() ? this._escapeAttribute(tool.href.trim()) : `https://www.berlinwalk.com/tools/${this._escapeAttribute(tool.slug || '')}`}">
+      <a class="bw-tool-card" href="${typeof tool.href === 'string' && tool.href.trim() ? this._escapeAttribute(tool.href.trim()) : `https://www.walkofberlin.com/tools/${this._escapeAttribute(tool.slug || '')}`}">
         <div class="bw-tool-card-head">
           ${this._renderToolIcon(tool)}
           <div class="bw-tool-title-wrap">
