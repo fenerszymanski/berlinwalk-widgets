@@ -163,7 +163,7 @@ const RING_SVG = `<svg class="ys-ring" viewBox="0 0 ${PHOTO.w} ${PHOTO.h}" aria-
 export const titleSize = title => (String(title || '').length <= 16 ? 118 : 96);
 const CAPTION_LIVE = 'Your poster, SIZE: 1928 above, today below, same ground and scale. Tap either photo to move the ring onto your building.';
 const CAPTION_EXAMPLE = 'Example poster, SIZE. Search for your own address to see your street.';
-// Yusuf, 25 Oct 2026: 174 of the first 178 previews stopped at the old "I can see the 1928 photo" checkbox, which kept the add button grey two
+// Yusuf, 25 Oct 2026: only 4 of the first 174 previews got past the old "I can see the 1928 photo" checkbox, which kept the add button grey two
 // screens below the poster. Now an add button sits right under the poster and both add buttons are live; tapping one asks the same question
 // once, in place, and "Yes" adds to the cart. `where` is "quick" (under the poster) or "form" (the buy box).
 const confirmHtml = where => `<div class="ys-confirm" data-ys-confirm="${where}" role="group" aria-label="Check the 1928 photo" hidden>
