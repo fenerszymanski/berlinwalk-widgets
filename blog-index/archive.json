@@ -1,9 +1,26 @@
 {
-  "updatedAt": "2026-10-24T08:44:32.966Z",
+  "updatedAt": "2026-10-25T09:38:29.234Z",
   "source": "Wix Blog API",
-  "totalPosts": 443,
+  "totalPosts": 444,
   "bookingUrl": "https://www.walkofberlin.com/book-berlin-walking-tour/berlin-then-and-now",
   "allPosts": [
+    {
+      "title": "Christmas in Berlin: What Is Open on 24, 25 and 26 December",
+      "slug": "christmas-in-berlin-what-is-open",
+      "path": "/post/christmas-in-berlin-what-is-open",
+      "url": "https://www.berlinwalk.com/post/christmas-in-berlin-what-is-open",
+      "excerpt": "Every shop in Berlin closes at 14:00 on Christmas Eve and stays shut until Monday 28 December. Which markets open on the 24th, which come back on the 25th, the museum hours on both holidays, and how the trains run.",
+      "category": "Tourist Tips",
+      "categorySlug": "tourist-tips",
+      "topic": "practical",
+      "topicLabel": "Practical Berlin",
+      "readTime": "7 min read",
+      "publishedDate": "2026-10-25T09:35:40.775Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_84e870aa83c842e3b36932d48ca23d17~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-gendarmenmarkt-christmas-market-dusk.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_84e870aa83c842e3b36932d48ca23d17~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-gendarmenmarkt-christmas-market-dusk.jpg",
+      "alt": "The lit Christmas tree and the domed tower of the cathedral on Gendarmenmarkt against a violet evening sky",
+      "relatedToolSlug": "berlin-christmas-opening-chart"
+    },
     {
       "title": "Out-of-Hours Doctor in Berlin: Which On-Call Practice Opens When Yours Is Shut",
       "slug": "out-of-hours-doctor-berlin",
