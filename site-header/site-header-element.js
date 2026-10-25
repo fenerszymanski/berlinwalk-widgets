@@ -11,7 +11,7 @@ const BW_HEADER_MONO_URL = new URL('../brand/fonts/editorial-v2/IBMPlexMono-Semi
 const BW_HEADER_MENU_FONT_URL = new URL('../home-two-doors/assets/fonts/Fraunces-Variable-latin.woff2', BW_HEADER_SCRIPT_URL).href;
 // Berlin Then and Now (service 145cb27e). The legacy booking path stays
 // reachable for guests who booked before 30 September, but nothing links to it.
-const BW_HEADER_BUILD = 'site-header-shop-20261023';
+const BW_HEADER_BUILD = 'store-navigation-20261025';
 const BW_HEADER_BOOKING_URL = 'https://www.walkofberlin.com/book-berlin-walking-tour/berlin-then-and-now';
 const BW_HEADER_TOUR_FACTS = ['about 2.5 hours', 'max 10 people', '€25']
   .map((fact) => `<span class="bw-header-fact">${fact}</span>`)
@@ -68,6 +68,36 @@ const BW_HEADER_LINKS = {
   ticketCalculator: 'https://www.walkofberlin.com/tools/transport-ticket-calculator',
   luggageStorage: 'https://www.walkofberlin.com/tools/berlin-luggage-storage'
 };
+
+// BEGIN GENERATED STORE NAVIGATION
+const BW_HEADER_STORE_LINKS = [
+  {
+    "label": "All products",
+    "href": "https://walkofberlin.com/category/all-products?tab=all"
+  },
+  {
+    "label": "Art prints",
+    "href": "https://walkofberlin.com/category/all-products?tab=print"
+  },
+  {
+    "label": "Printable downloads",
+    "href": "https://walkofberlin.com/category/digital-downloads?tab=digital"
+  },
+  {
+    "label": "Personalised prints",
+    "href": "https://walkofberlin.com/product-page/your-berlin-street-in-1928-personalised-aerial-print-30-x-40-cm"
+  },
+  {
+    "label": "2027 Wall Calendar",
+    "href": "https://walkofberlin.com/product-page/berlin-2027-wall-calendar-a3"
+  },
+  {
+    "label": "Audio walks",
+    "href": "https://walkofberlin.com/audio-tours"
+  }
+];
+const BW_HEADER_STORE_HOME = "https://walkofberlin.com/category/all-products?tab=all";
+// END GENERATED STORE NAVIGATION
 
 const BW_HEADER_INSTANCES = new Set();
 let BW_HEADER_ACTIVE_INSTANCE = null;
@@ -530,7 +560,7 @@ class BWHeaderElement extends HTMLElement {
       this._dropdownMenus.push(menu);
 
       const positionMenu = () => {
-        const rect = (wrap.classList.contains('bw-header-tours-dropdown') ? wrap : trigger).getBoundingClientRect();
+        const rect = (wrap.matches('.bw-header-tours-dropdown,.bw-header-store-dropdown') ? wrap : trigger).getBoundingClientRect();
         const menuRect = menu.getBoundingClientRect();
         const cx = rect.left + rect.width / 2;
         const viewportW = window.innerWidth || document.documentElement.clientWidth;
@@ -1384,18 +1414,12 @@ class BWHeaderElement extends HTMLElement {
                   </ul>
                 </li>
                 <li><a href="${BW_HEADER_LINKS.weeklyLetter}">Weekly letter</a></li>
-                <li class="bw-header-dropdown">
-                  <button class="bw-header-dropdown-trigger" type="button" aria-expanded="false" aria-controls="${this._shopMenuId}">
-                    Store <span class="bw-header-caret" aria-hidden="true">⌄</span>
-                  </button>
-                  <ul id="${this._shopMenuId}" class="bw-header-submenu">
-                    <li><a href="${BW_HEADER_LINKS.shop}">All products</a></li>
-                    <li><a href="${BW_HEADER_LINKS.shopCalendar}">2027 Wall Calendar</a></li>
-                    <li><a href="${BW_HEADER_LINKS.shopDistricts}">Berlin Districts</a></li>
-                    <li><a href="${BW_HEADER_LINKS.shopLandmarks}">Berlin Landmarks</a></li>
-                    <li><a href="${BW_HEADER_LINKS.shopReels}">Berlin Reels Collection</a></li>
-                    <li><a href="${BW_HEADER_LINKS.shopPrintables}">Printables</a></li>
-                  </ul>
+                <li class="bw-header-dropdown bw-header-store-dropdown">
+                  <div class="bw-header-tour-heading">
+                    <a class="bw-header-tour-link" href="${BW_HEADER_STORE_HOME}">Store</a>
+                    <button class="bw-header-dropdown-trigger" type="button" aria-label="Show Store categories" aria-expanded="false" aria-controls="${this._shopMenuId}"><span class="bw-header-caret" aria-hidden="true">⌄</span></button>
+                  </div>
+                  <ul id="${this._shopMenuId}" class="bw-header-submenu">${BW_HEADER_STORE_LINKS.map(item=>`<li><a href="${item.href}">${item.label}</a></li>`).join('')}</ul>
                 </li>
               </ul>
             </nav>
@@ -1452,13 +1476,8 @@ class BWHeaderElement extends HTMLElement {
               </details>
               <a href="${BW_HEADER_LINKS.weeklyLetter}">Weekly letter</a>
               <details class="bw-header-mobile-section">
-                <summary class="bw-header-mobile-section-label">Store</summary>
-                <a href="${BW_HEADER_LINKS.shop}">All products</a>
-                <a href="${BW_HEADER_LINKS.shopCalendar}">2027 Wall Calendar</a>
-                <a href="${BW_HEADER_LINKS.shopDistricts}">Berlin Districts</a>
-                <a href="${BW_HEADER_LINKS.shopLandmarks}">Berlin Landmarks</a>
-                <a href="${BW_HEADER_LINKS.shopReels}">Berlin Reels Collection</a>
-                <a href="${BW_HEADER_LINKS.shopPrintables}">Printables</a>
+                <summary class="bw-header-mobile-section-label" aria-label="Store categories"><a class="bw-header-mobile-section-link" href="${BW_HEADER_STORE_HOME}">Store</a></summary>
+                ${BW_HEADER_STORE_LINKS.map(item=>`<a href="${item.href}">${item.label}</a>`).join('')}
               </details>
             </nav>
 

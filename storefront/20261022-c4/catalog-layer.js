@@ -131,12 +131,13 @@ export function createCatalogModel(products, definitions) {
   }
   const enabled = [...definitions.categories].sort((a, b) => a.order - b.order).filter(category => active.some(product => product.categoryIds.includes(category.id)));
   function categoryView(categoryId, filterId = 'all', {preview = false} = {}) {
-    const category = enabled.find(item => item.id === categoryId);
+    const category = definitions.categories.find(item => item.id === categoryId);
     if (!category) return null;
     const categoryProducts = active.filter(product => product.categoryIds.includes(categoryId));
-    const filters = list(category.filters).filter(filter => categoryProducts.some(product => match(product, filter.match)));
+    const filters = list(category.filters).map(filter => ({...filter,count:categoryProducts.filter(product=>match(product,filter.match)).length}));
     const filter = filters.find(item => item.id === filterId);
-    const selected = filter ? categoryProducts.filter(product => match(product, filter.match)) : categoryProducts;
+    let selected = filter ? categoryProducts.filter(product => match(product, filter.match)) : categoryProducts;
+    if(preview && category.shelf.featuredProductIds?.length){const priority=category.shelf.featuredProductIds;selected=[...selected].sort((a,b)=>{const rank=p=>priority.includes(p.id)?priority.indexOf(p.id):priority.length;return rank(a)-rank(b);});}
     const limit = preview ? category.shelf.previewLimit : selected.length;
     return {
       id: category.id,
@@ -150,6 +151,9 @@ export function createCatalogModel(products, definitions) {
       filters,
       selectedFilterId: filter?.id || 'all',
       moreCategoryId: preview && selected.length > limit ? category.id : null,
+      featureDescription: category.shelf.featureDescription || null,
+      browseHref: category.browseHref || null,
+      browseLabel: category.browseLabel || null,
       moreLabel: (category.shelf.moreLabel || 'View all').replace('{count}', String(selected.length))
     };
   }
@@ -157,10 +161,10 @@ export function createCatalogModel(products, definitions) {
     products: active,
     categories: enabled,
     tabs: [{id: 'all', label: definitions.allLabel || 'All'}, ...enabled.map(({id, label}) => ({id, label}))],
-    sections: enabled.map(category => categoryView(category.id, 'all', {preview: true})),
+    sections: [...enabled].sort((a,b)=>(a.shelf.order??a.order)-(b.shelf.order??b.order)).map(category => categoryView(category.id, 'all', {preview: true})),
     diagnostics,
     getCategoryView: categoryView,
-    normaliseCategoryId: id => id === 'all' || enabled.some(category => category.id === id) ? id : 'all',
+    normaliseCategoryId: id => id === 'all' || definitions.categories.some(category => category.id === id) ? id : 'all',
     getProduct: id => active.find(product => product.id === id) || null,
     getCartGroups: lines => definitions.fulfilments.filter(group => group.cartEligible).map(fulfilment => ({
       ...fulfilment,

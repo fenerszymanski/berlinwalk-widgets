@@ -1,23 +1,21 @@
 {
   "schemaVersion": 1,
-  "allLabel": "All",
+  "allLabel": "All products",
   "defaultCategoryId": "all",
   "categories": [
     {
       "id": "print",
-      "label": "Prints",
+      "label": "Art prints",
       "order": 10,
       "match": {
         "nativeCategoryIds": [
           "03bc9fd6-f411-ed15-290b-2acf44bb430d",
           "3a0f16e1-49e5-42e1-a0bd-a79d1949e091",
           "a0685930-a374-4dc8-9ac6-48f92b535aa4",
-          "c16f5345-c212-45a9-b965-d205f111d10c",
-          "bw-personalised-print",
           "33ca6348-faae-4671-98d9-0221539b7cf2"
         ]
       },
-      "description": "Printed to order by Gelato · shipped",
+      "description": "Physical prints · choose paper and size · printed to order",
       "allFilterLabel": "All prints",
       "filters": [
         {
@@ -55,35 +53,33 @@
               "a0685930-a374-4dc8-9ac6-48f92b535aa4"
             ]
           }
-        },
-        {
-          "id": "calendars",
-          "label": "Calendar",
-          "match": {
-            "nativeCategoryIds": [
-              "c16f5345-c212-45a9-b965-d205f111d10c"
-            ]
-          }
         }
       ],
       "shelf": {
         "previewLimit": 4,
         "featureBelowCount": 3,
         "moreLabel": "All {count} prints",
-        "imageFit": "contain"
+        "imageFit": "contain",
+        "featuredProductIds": [
+          "ed-print-01-tempelhof",
+          "wc",
+          "ed-print-02-pink",
+          "pr-friedrichshain-kreuzberg"
+        ],
+        "order": 10
       },
       "detailLabel": "Print details"
     },
     {
       "id": "digital",
-      "label": "Digital downloads",
+      "label": "Printable downloads",
       "order": 15,
       "match": {
         "nativeCategoryIds": [
           "02d24409-01f2-4b00-b24d-d762d74a4fb6"
         ]
       },
-      "description": "Printable files · instant download · nothing shipped",
+      "description": "Downloadable print files · print them yourself · nothing shipped",
       "allFilterLabel": "All downloads",
       "filters": [
         {
@@ -145,28 +141,80 @@
         "previewLimit": 4,
         "featureBelowCount": 3,
         "moreLabel": "All {count} downloads",
-        "imageFit": "contain"
+        "imageFit": "contain",
+        "featuredProductIds": [
+          "ed-digital-02-pink",
+          "dl-world-clock",
+          "ed-digital-01-tempelhof",
+          "dl-berlin-2027-printable-calendar"
+        ],
+        "order": 20
       },
       "detailLabel": "File details"
     },
     {
       "id": "audio",
       "label": "Audio walks",
-      "order": 20,
+      "order": 30,
       "match": {
         "externalSourceKeys": [
           "berlin-audio-trio-bundle"
         ]
       },
-      "description": "Plays on your phone · own page and checkout",
+      "description": "Single audio walks and a three-walk bundle",
       "filters": [],
       "shelf": {
         "previewLimit": 4,
         "featureBelowCount": 3,
         "moreLabel": "All audio walks",
-        "imageFit": "cover"
+        "imageFit": "cover",
+        "order": 30
       },
-      "actionLabel": "SEE THE WALKS →"
+      "actionLabel": "SEE THE WALKS →",
+      "browseHref": "https://walkofberlin.com/audio-tours",
+      "browseLabel": "Browse all audio walks"
+    },
+    {
+      "id": "personalised",
+      "label": "Personalised prints",
+      "order": 20,
+      "match": {
+        "nativeCategoryIds": [
+          "bw-personalised-print"
+        ]
+      },
+      "description": "Your Berlin address in 1928 and today · printed for you · Germany delivery only",
+      "filters": [],
+      "shelf": {
+        "previewLimit": 1,
+        "featureBelowCount": 3,
+        "moreLabel": "Personalised prints",
+        "imageFit": "contain",
+        "order": 5,
+        "featureDescription": "Find your Berlin street in aerial photographs from 1928 and today. Choose your address and personalise a print. Made to order, with delivery within Germany."
+      },
+      "detailLabel": "Print details"
+    },
+    {
+      "id": "calendar",
+      "label": "2027 Wall Calendar",
+      "order": 25,
+      "match": {
+        "nativeCategoryIds": [
+          "c16f5345-c212-45a9-b965-d205f111d10c"
+        ]
+      },
+      "description": "Physical A3 wall calendar · 12 Berlin districts · printed to order",
+      "filters": [],
+      "shelf": {
+        "previewLimit": 1,
+        "featureBelowCount": 3,
+        "moreLabel": "2027 Wall Calendar",
+        "imageFit": "contain",
+        "order": 15,
+        "featureDescription": "One illustrated Berlin district for every month of 2027, with Berlin public holidays and school holidays. A physical A3 wall calendar, printed to order."
+      },
+      "detailLabel": "Calendar details"
     }
   ],
   "fulfilments": [

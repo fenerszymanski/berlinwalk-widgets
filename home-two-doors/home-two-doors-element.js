@@ -149,49 +149,47 @@ const BW_HOME_TWO_DOORS_MORE_PRODUCTS = [
   },
 ];
 
-const BW_HOME_TWO_DOORS_SHOP_URL = 'https://www.walkofberlin.com/category/all-products';
+// BEGIN GENERATED STORE CARDS
+const BW_HOME_TWO_DOORS_SHOP_URL = "https://walkofberlin.com/category/all-products?tab=all";
 const BW_HOME_TWO_DOORS_SHOP_PRODUCTS = [
   {
-    label: 'FOR YOUR WALL',
-    title: 'Berlin 2027 Wall Calendar',
-    price: '€29.90',
-    imageUrl: 'https://static.wixstatic.com/media/5a08a3_de1802442ecc44c8afac5a2b5fbaeef9~mv2.jpg/v1/fit/w_640,h_480,q_85/file.jpg',
-    alt: 'Berlin 2027 A3 wall calendar open at January, with the TV Tower above the month grid',
-    text: 'One Berlin district for every month, with Berlin holidays and school holidays. Order by 15 December for Christmas.',
-    href: 'https://www.walkofberlin.com/product-page/berlin-2027-wall-calendar-a3',
-    cta: 'See the calendar',
+    "label": "PRINTED & SHIPPED",
+    "title": "Art prints",
+    "imageUrl": "https://static.wixstatic.com/media/5a08a3_23f9eb0a33794b8aaf7474e5a99f0b1c~mv2.jpg/v1/fit/w_480,h_480,q_85/file.jpg",
+    "alt": "Friedrichshain-Kreuzberg art print showing the Oberbaum Bridge",
+    "text": "Berlin landmarks, district illustrations and stories from my reels, printed to order. Choose the paper and size on the product page.",
+    "href": "https://walkofberlin.com/category/all-products?tab=print",
+    "cta": "Browse art prints"
   },
   {
-    label: 'BERLIN DISTRICTS',
-    title: 'One poster for each Bezirk',
-    price: '€29.90 each',
-    imageUrl: 'https://static.wixstatic.com/media/5a08a3_23f9eb0a33794b8aaf7474e5a99f0b1c~mv2.jpg/v1/fit/w_480,h_480,q_85/file.jpg',
-    alt: 'Friedrichshain-Kreuzberg poster with the Oberbaum Bridge',
-    text: 'One landmark for each Berlin district, from the Oberbaum Bridge to the Juliusturm in Spandau.',
-    href: 'https://www.walkofberlin.com/category/berlin-districts-prints',
-    cta: 'See the districts',
+    "label": "12 EVERYDAY SCENES",
+    "title": "Berlin Everyday",
+    "imageUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/everyday-01-tempelhof.jpg",
+    "alt": "Tempelhof art print showing the former airport runway",
+    "text": "Tempelhof’s runway, the Späti after dark and Marzahn’s buildings. Choose from 12 Berlin scenes as a paper print.",
+    "href": "https://walkofberlin.com/category/all-products?tab=print&collection=everyday",
+    "cta": "See Berlin Everyday"
   },
   {
-    label: 'FROM MY REELS',
-    title: 'Berlin Reels Collection',
-    price: '€29.90 each',
-    imageUrl: 'https://static.wixstatic.com/media/5a08a3_dce47cd203284827a81e36a3328e0942~mv2.jpg/v1/fit/w_480,h_480,q_85/file.jpg',
-    alt: 'Ghost Stations poster: an empty platform as a yellow train passes',
-    text: 'Four stories from my reels as posters: ghost stations, the Berlin-Uhr, the tram map and a treehouse at the Wall.',
-    href: 'https://www.walkofberlin.com/category/berlin-reels-collection',
-    cta: 'See the collection',
+    "label": "FOR YOUR WALL",
+    "title": "Berlin 2027 Wall Calendar",
+    "imageUrl": "https://static.wixstatic.com/media/5a08a3_de1802442ecc44c8afac5a2b5fbaeef9~mv2.jpg/v1/fit/w_640,h_480,q_85/file.jpg",
+    "alt": "Berlin 2027 A3 wall calendar open at January, with the TV Tower above the month grid",
+    "text": "One Berlin district for every month, with Berlin public holidays and school holidays. Check the product page for price and delivery dates.",
+    "href": "https://walkofberlin.com/product-page/berlin-2027-wall-calendar-a3",
+    "cta": "See the calendar"
   },
   {
-    label: 'PRINT AT HOME',
-    title: 'Printables',
-    price: 'From €6.90',
-    imageUrl: 'https://static.wixstatic.com/media/5a08a3_e1ee5add72f44c8abc4f19f4a76035f5~mv2.jpg/v1/fit/w_640,h_480,q_85/file.jpg',
-    alt: 'All twelve Berlin district posters arranged in a grid of frames',
-    text: 'The same artwork as instant downloads, ready to print in your own size.',
-    href: 'https://www.walkofberlin.com/category/digital-downloads',
-    cta: 'See the printables',
-  },
+    "label": "PRINT AT HOME",
+    "title": "Printable downloads",
+    "imageUrl": "https://static.wixstatic.com/media/5a08a3_e1ee5add72f44c8abc4f19f4a76035f5~mv2.jpg/v1/fit/w_640,h_480,q_85/file.jpg",
+    "alt": "Twelve Berlin district illustrations arranged in a grid of frames",
+    "text": "Berlin artwork and a 2027 calendar as downloadable files. Print them yourself; no physical item is shipped.",
+    "href": "https://walkofberlin.com/category/digital-downloads?tab=digital",
+    "cta": "Browse printable downloads"
+  }
 ];
+// END GENERATED STORE CARDS
 
 function bwHomeTwoDoorsFormatTime(seconds) {
   const safeSeconds = Number.isFinite(seconds) && seconds >= 0 ? Math.round(seconds) : 0;
@@ -397,7 +395,6 @@ class BWHomeTwoDoorsElement extends HTMLElement {
         <span class="bw-home-two-doors__eyebrow">${product.label}</span>
         <b>${product.title}</b>
         <span>${product.text}</span>
-        <span class="bw-home-two-doors__more-price">${product.price}</span>
         <span class="bw-home-two-doors__more-cta">${product.cta} →</span>
       </a>`).join('');
 
@@ -691,10 +688,10 @@ class BWHomeTwoDoorsElement extends HTMLElement {
                 <span class="bw-home-two-doors__eyebrow"><span class="bw-home-two-doors__dot"></span>Store</span>
                 <h2>Take Berlin home.</h2>
               </div>
-              <p class="bw-home-two-doors__lead">Posters, a 2027 wall calendar and printables from the places I walk and the stories I tell. Prints are made to order. <a class="bw-home-two-doors__link" href="${BW_HOME_TWO_DOORS_SHOP_URL}" data-bw-cta-id="shop_all" data-bw-cta-placement="shop">Visit the store</a></p>
+              <p class="bw-home-two-doors__lead">Berlin art prints, printable files and a 2027 wall calendar. Choose a product to see its current price, paper, size and delivery options. <a class="bw-home-two-doors__link" href="${BW_HOME_TWO_DOORS_SHOP_URL}" data-bw-cta-id="shop_all" data-bw-cta-placement="shop">Visit the store</a></p>
             </div>
             <div class="bw-home-two-doors__more bw-home-two-doors__shop">${shopCards}</div>
-            <p class="bw-home-two-doors__shop-note">Free shipping to Germany, the EU, the UK and the US.</p>
+            <p class="bw-home-two-doors__shop-note">Delivery regions and estimates are shown on each product page. Printable downloads are files; nothing is shipped.</p>
           </div>
         </section>
 
@@ -712,6 +709,7 @@ class BWHomeTwoDoorsElement extends HTMLElement {
             <details class="bw-home-two-doors__credits">
               <summary>Photo credits</summary>
               <ul>
+                <li>Store illustrations: artwork developed with AI assistance and refined for Walk of Berlin. Product images show the artwork; frames in mockups are not included.</li>
                 <li>Anhalter Bahnhof portico: <a href="https://commons.wikimedia.org/wiki/File:Berlin_Anhalter_Bahnhof_-_01.jpg" rel="noopener" target="_blank">Carlos Delgado, Wikimedia Commons</a>, <a href="https://creativecommons.org/licenses/by-sa/4.0/" rel="noopener license" target="_blank">CC BY-SA 4.0</a>, cropped.</li>
                 <li>St. Mary’s Church and the TV Tower: <a href="https://commons.wikimedia.org/wiki/File:Berlin_Marienkirche_Exterior_0326_02.jpg" rel="noopener" target="_blank">Dosseman, Wikimedia Commons</a>, <a href="https://creativecommons.org/licenses/by-sa/4.0/" rel="noopener license" target="_blank">CC BY-SA 4.0</a>, cropped.</li>
                 <li>Flea market at Nollendorfplatz, 1983: <a href="https://commons.wikimedia.org/wiki/File:Berlin_Flohmarkt_U-_Nollendorfplatz_1983.jpg" rel="noopener" target="_blank">Hrz29vv, Wikimedia Commons</a>, <a href="https://creativecommons.org/licenses/by-sa/3.0/" rel="noopener license" target="_blank">CC BY-SA 3.0</a>, resized, no crop.</li>

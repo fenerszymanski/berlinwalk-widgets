@@ -5,7 +5,7 @@
   const base = new URL('.', script.src);
   const CHANNEL = 'wob:shop-cart:v1';
   const esc = value => String(value ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-  const asset = value => new URL(value, base).href;
+  const asset = value => {const target=new URL(value,base);if(/\.(?:js|css|json)$/.test(target.pathname))target.searchParams.set('v','store-nav-20261025');return target.href;};
   // Chrome and Safari ignore @font-face inside shadow DOM, so the three faces are registered once on the document with absolute URLs from the element's own base.
   try {if(!document.getElementById('bw-storefront-fonts')){const style=document.createElement('style');style.id='bw-storefront-fonts';style.textContent=[['Fraunces','Fraunces-Variable.ttf','100 900'],['Space Grotesk','SpaceGrotesk-Variable.ttf','300 700'],['IBM Plex Mono','IBMPlexMono-Regular.ttf','400 600'],['DM Serif Display','DMSerifDisplay-Regular.ttf','400']].map(([family,file,weight])=>`@font-face{font-family:'${family}';src:url("${asset('fonts/'+file)}") format("truetype");font-weight:${weight};font-display:swap}`).join('\n');(document.head||document.documentElement).appendChild(style);}}catch{}
   // One price format everywhere: euro sign, two decimals, dot separator ("€24.90"). Native Wix formatted prices are used first; this covers every fallback.
@@ -104,7 +104,8 @@
   const resources = Promise.all([
     import(asset('catalog-layer.js')), import(asset('editorial-helpers.js')), import(asset('street-configurator.js')),
     ...['data/categories.json','data/presentation.json','data/native-bindings.json','data/external-products.json'].map(path => fetch(asset(path)).then(response => {if (!response.ok) throw Error('CATALOGUE_METADATA_UNAVAILABLE');return response.json();})),
-    import(asset('funnel.js')).catch(() => null)   // measurement must never block the shop
+    import(asset('funnel.js')).catch(() => null),   // measurement must never block the shop
+    import(new URL('../../js/store-navigation.js?v=store-nav-20261025',base).href)
   ]);
   function safeHtml(html) {
     // Native rich text can preserve escaped quote delimiters and escaped block separators.
@@ -144,11 +145,14 @@
       this.shadowRoot.addEventListener('input', event => this.input(event));
       this.shadowRoot.addEventListener('change', event => this.change(event));
       this.shadowRoot.addEventListener('submit', event => {event.preventDefault();if(event.target.matches('[data-address-form]'))this.getQuote(true);});
+      this.onCreditOutside=event=>{const d=this.shadowRoot.querySelector('.store-visual-credits');if(d?.open&&!event.composedPath().includes(d))d.open=false;};
+      this.shadowRoot.addEventListener('keydown',event=>{const d=this.shadowRoot.querySelector('.store-visual-credits');if(event.key==='Escape'&&d?.open){d.open=false;d.querySelector('summary')?.focus();event.stopPropagation();}});
+      this.onStoreNavigation=()=>{if(this.context.mode==='shop'){this.applyContextCategory();this.render();}};
       this.onCartViewport=()=>{cancelAnimationFrame(this.cartBarFrame);this.cartBarFrame=requestAnimationFrame(()=>this.syncMobileCheckout());};
     }
     // The stylesheet request starts now, in parallel with the data files, so the skeleton can be drawn as soon as the data arrives. The watchdog is the last resort when the page-code bridge never answers: it falls back to the original store before the guard's own 12 s failsafe would show both at once.
-    connectedCallback() {this.context=json(this.getAttribute('shop-context'))||{};if(!this.revealed&&!this.hidden){this.style.display='block';this.style.minHeight='100vh';}window.addEventListener('scroll',this.onCartViewport,{passive:true});window.addEventListener('resize',this.onCartViewport,{passive:true});this.ensureLink();clearTimeout(this.watchdog);this.watchdog=setTimeout(()=>{if(!this.revealed&&!this.hidden){releaseNative();this.fail('BRIDGE_TIMEOUT');}},Math.max(1500,10500-(globalThis.performance?.now?.()||0)));this.load();}
-    disconnectedCallback() {clearTimeout(this.watchdog);clearTimeout(this.quoteTimer);this.sizeObserver?.disconnect();cancelAnimationFrame(this.sizeFrame);cancelAnimationFrame(this.cartBarFrame);window.removeEventListener('scroll',this.onCartViewport);window.removeEventListener('resize',this.onCartViewport);for(const pending of this.pending.values()){clearTimeout(pending.timer);pending.reject(Error('BRIDGE_DISCONNECTED'));}this.pending.clear();}
+    connectedCallback() {window.addEventListener('pointerdown',this.onCreditOutside);window.addEventListener('popstate',this.onStoreNavigation);this.context=json(this.getAttribute('shop-context'))||{};if(!this.revealed&&!this.hidden){this.style.display='block';this.style.minHeight='100vh';}window.addEventListener('scroll',this.onCartViewport,{passive:true});window.addEventListener('resize',this.onCartViewport,{passive:true});this.ensureLink();clearTimeout(this.watchdog);this.watchdog=setTimeout(()=>{if(!this.revealed&&!this.hidden){releaseNative();this.fail('BRIDGE_TIMEOUT');}},Math.max(1500,10500-(globalThis.performance?.now?.()||0)));this.load();}
+    disconnectedCallback() {window.removeEventListener('pointerdown',this.onCreditOutside);window.removeEventListener('popstate',this.onStoreNavigation);clearTimeout(this.watchdog);clearTimeout(this.quoteTimer);this.sizeObserver?.disconnect();cancelAnimationFrame(this.sizeFrame);cancelAnimationFrame(this.cartBarFrame);window.removeEventListener('scroll',this.onCartViewport);window.removeEventListener('resize',this.onCartViewport);for(const pending of this.pending.values()){clearTimeout(pending.timer);pending.reject(Error('BRIDGE_DISCONNECTED'));}this.pending.clear();}
     attributeChangedCallback(name, oldValue, value) {
       if(oldValue===value)return;
       if(name==='shop-context') {const next=json(value)||{};if(next.path!==this.context.path){this.quantity=1;this.view='poster';this.readySent=false;this.revealed=false;this.quote=null;this.quoteRevision++;}this.context=next;this.applyContextCategory();this.render();this.signalReady();}
@@ -157,8 +161,8 @@
       if(name==='shop-bridge-ready')this.start();
     }
     async load() {
-      try {const [layer,editorial,ysMod,definitions,presentation,bindings,external,funnel]=await resources;
-        Object.assign(this,{layer,editorial,ysMod,definitions,presentation,bindings,external,funnel});
+      try {const [layer,editorial,ysMod,definitions,presentation,bindings,external,funnel,navigation]=await resources;
+        Object.assign(this,{layer,editorial,ysMod,definitions,presentation,bindings,external,funnel,navigation});
         if(this.catalogue)this.buildModel();if(!this.model)this.render();await this.start();
       }catch(error){if(!this.layer)releaseNative();this.fail(error.message);}
     }
@@ -219,11 +223,24 @@
       }catch(error){this.fail(error.message);}
     }
     applyContextCategory() {
-      if(!this.model)return;
-      if(this.context.categorySlug==='berlin-landmark-posters'){this.category='print';this.filter='landmarks';}
-      else if(this.context.categorySlug==='berlin-reels-collection'){this.category='print';this.filter='stories';}
-      else if(this.context.categorySlug==='digital-downloads'){this.category='digital';this.filter='all';}
-      else this.category=this.model.normaliseCategoryId(this.category);
+      if(!this.model||!this.navigation||this.context.mode!=='shop')return;
+      const route=this.navigation.resolveStoreRoute({categorySlug:this.context.categorySlug||'all-products',search:location.search});
+      this.routeError=!route.ok;
+      if(route.ok){this.category=route.category;this.filter=route.filter;}
+    }
+    storeHref(category='all',filter='all') {return this.navigation.storeHref(category,filter);}
+    navigateStore(category,filter,event) {
+      if(event.button>0||event.metaKey||event.ctrlKey||event.shiftKey||event.altKey||this.context.mode!=='shop')return;
+      event.preventDefault();
+      const target=new URL(location.href);
+      target.searchParams.set('tab',category);
+      if(filter==='all')target.searchParams.delete('collection');else target.searchParams.set('collection',filter);
+      if(target.href!==location.href)history.pushState({...history.state},'',target.href);
+      this.applyContextCategory();
+      const selected=this.model.getCategoryView(category,filter);
+      this.notice=selected?`${selected.title}: ${selected.totalCount} available.`:'All products';
+      this.render();
+      this.shadowRoot.querySelector(filter==='all'?`[data-category="${category}"]`:`[data-filter="${filter}"]`)?.focus({preventScroll:true});
     }
     signalReady() {
       if(this.readySent||!this.model||!['shop','product','cart'].includes(this.context.mode))return;
@@ -240,14 +257,23 @@
     }
     action(product) {return product.action==='add'?`<button class="outline" data-action="add" data-product="${product.wixProductId}" ${this.busy||this.uncertain?'disabled':''}>Add to cart</button>`:`<a class="outline" href="${esc(url(product.productUrl))}">${esc(product.actionLabel)}</a>`;}
     card(product,feature=false) {return `<article class="${feature?'feature':'card'}" data-product="${product.id}">${this.tile(product)}<div class="${feature?'feature-copy':'card-copy'}"><span class="type">${esc(product.typeLine)}</span><a class="product-name" href="${esc(url(product.productUrl))}">${esc(product.name)}</a>${feature?`<p>${esc(product.description)}</p>`:''}<span class="place">${esc(product.place)}</span><div class="card-bottom"><span class="price">${esc(product.priceLabel)}</span>${this.action(product)}</div></div></article>`;}
-    shopbar() {return `<aside class="shopbar"><div class="wrap shopbar-inner"><a class="shopbar-home" href="https://walkofberlin.com/category/all-products">${STORE_LOGO}</a><nav class="tabs" aria-label="Store categories">${this.model.tabs.map(tab=>`<a href="https://walkofberlin.com/category/all-products" data-category="${tab.id}" ${this.category===tab.id?'aria-current="page"':''}>${esc(tab.label)}</a>`).join('')}</nav><a class="cart-link" href="https://walkofberlin.com/cart-page">Cart (${this.cart?this.cart.count:'—'})</a></div></aside>`;}
+    shopbar() {return `<aside class="shopbar"><div class="wrap shopbar-inner"><a class="shopbar-home" href="${esc(this.storeHref())}">${STORE_LOGO}</a><nav class="tabs" aria-label="Store categories">${this.model.tabs.map(tab=>`<a href="${esc(tab.id==='audio'?this.navigation.STORE_AUDIO_HUB:this.storeHref(tab.id))}" data-category="${tab.id}" ${this.context.mode==='shop'&&this.category===tab.id?'aria-current="page"':''}>${esc(tab.label)}</a>`).join('')}</nav><a class="cart-link" href="https://walkofberlin.com/cart-page">Cart (${this.cart?this.cart.count:'—'})</a></div></aside>`;}
     creditText() {return `<p>Audio walk card: photograph of Anhalter Bahnhof by Carlos Delgado / Wikimedia Commons, <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener noreferrer">CC BY-SA 4.0</a>, cropped and resized (<a href="https://commons.wikimedia.org/wiki/File:Berlin_Anhalter_Bahnhof_-_01.jpg" target="_blank" rel="noopener noreferrer">original</a>). The phone and headphones are an AI-generated illustration layered over it, not a screenshot of the audio player.</p>`;}
     // shop pages: a quiet footnote under the grid; product pages: a disclosure next to Delivery & returns
-    credits() {return `<section class="wrap visual-credit-note">${this.creditText()}</section>`;}
-    lead() {return 'Prints of Berlin places, printable downloads, and audio walks to explore them on foot.';}
+    credits() {
+      const all=this.category==='all';
+      const illustrated=all||['print','digital','calendar'].includes(this.category);
+      const aerial=all||this.category==='personalised';
+      const audio=all||this.category==='audio';
+      return `<section class="wrap visual-credit-note"><details class="store-visual-credits"><summary>Image credits</summary><div class="store-credit-body">${illustrated?'<p>Poster illustrations created with AI assistance and refined for Walk of Berlin. Frames shown in mockups are not included.</p>':''}${aerial?'<p>1928 aerial photographs: Geoportal Berlin, <a href="https://www.govdata.de/dl-de/zero-2-0" target="_blank" rel="noopener">Datenlizenz Deutschland Zero 2.0</a>. Sample print pairs archive and present-day aerial views of the same Berlin location.</p>':''}${audio?this.creditText():''}</div></details></section>`;
+    }
+    lead() {return 'Berlin art prints, printable downloads and audio walks.';}
     shop() {
+      if(this.routeError)return `<section class="wrap intro"><h1 class="lead">This collection is not available.</h1><p><a href="${esc(this.storeHref())}">Browse all products</a></p></section>`;
       const selected=this.category==='all'?null:this.model.getCategoryView(this.category,this.filter);
-      return `<section class="wrap intro"><h1 class="lead">${esc(this.lead())}</h1>${selected?.filters.length?`<nav class="chips" aria-label="Series"><a href="#" data-filter="all">${esc(selected.allFilterLabel)}</a>${selected.filters.map(filter=>`<a href="#" data-filter="${filter.id}" ${filter.id===this.filter?'aria-current="page"':''}>${esc(filter.label)}</a>`).join('')}</nav>`:''}</section>${(selected?[selected]:this.model.sections).map(section=>`<section class="wrap shelf"><div class="section-head"><div class="section-title"><h2>${esc(section.title)}</h2><span class="meta">${esc(section.description)}</span></div>${section.moreCategoryId?`<a href="#" data-category="${section.moreCategoryId}">${esc(section.moreLabel)} →</a>`:''}</div><div class="${section.layout==='feature'?'feature-grid':'grid'}${selected?' category-grid':''}">${section.products.map(product=>this.card({...product,imageFit:product.imageFit||section.imageFit},section.layout==='feature')).join('')}</div></section>`).join('')}${this.credits()}`;
+      const filter=selected?.filters.find(item=>item.id===this.filter);
+      const title=filter?`${filter.label} ${this.category==='digital'?'printable downloads':'art prints'}`:selected?.title||this.lead();
+      return `<section class="wrap intro"><h1 class="lead">${esc(title)}</h1>${selected?.filters.length?`<nav class="chips" aria-label="Collections"><a href="${esc(this.storeHref(this.category))}" data-filter="all" ${this.filter==='all'?'aria-current="page"':''}>${esc(selected.allFilterLabel)}</a>${selected.filters.map(item=>`<a href="${esc(this.storeHref(this.category,item.id))}" data-filter="${item.id}" ${item.id===this.filter?'aria-current="page"':''}>${esc(item.label)} <span class="collection-count">(${item.count})</span></a>`).join('')}</nav>`:''}</section>${(selected?[selected]:this.model.sections).map(section=>`<section class="wrap shelf"><div class="section-head"><div class="section-title"><h2>${esc(selected?`${section.totalCount} available`:section.title)}</h2><span class="meta">${esc(section.description)}</span></div>${section.browseHref?`<a href="${esc(section.browseHref)}">${esc(section.browseLabel)} →</a>`:section.moreCategoryId?`<a href="${esc(this.storeHref(section.moreCategoryId))}" data-category="${section.moreCategoryId}">${esc(section.moreLabel)} →</a>`:''}</div>${section.products.length?`<div class="${section.layout==='feature'?'feature-grid':'grid'}${selected?' category-grid':''}">${section.products.map(product=>this.card({...product,description:section.featureDescription||product.description,imageFit:product.imageFit||section.imageFit},section.layout==='feature')).join('')}</div>`:'<p>No items are available in this collection right now.</p>'}${selected&&this.category==='print'&&filter&&this.model.getCategoryView('digital','dl-'+this.filter)?.totalCount?`<p class="format-alternative">Prefer to print it yourself? <a href="${esc(this.storeHref('digital','dl-'+this.filter))}">See ${esc(filter.label)} printable downloads →</a></p>`:''}</section>`).join('')}${this.credits()}`;
     }
     quantityControl(value,id='',product=false) {return `<div class="qty"><button data-action="${product?'product-minus':'minus'}" data-line="${esc(id)}" aria-label="Decrease quantity" ${value<=1||this.busy||this.uncertain?'disabled':''}>−</button><output>${value}</output><button data-action="${product?'product-plus':'plus'}" data-line="${esc(id)}" aria-label="Increase quantity" ${value>=99||this.busy||this.uncertain?'disabled':''}>+</button></div>`;}
     storyReel(slug) {
@@ -445,8 +471,8 @@
       return `<article class="${feature?'feature':'card'}"><div class="tile ${product.imageFit==='cover'?'cover':''} ${product.visualOverlay?'audio-device-card':''}">${source?`<img class="tile-photo" src="${esc(source)}" alt="" decoding="async">`:''}</div><div class="${feature?'feature-copy':'card-copy'}"><span class="type">${esc(product.typeLine)}</span><span class="product-name">${esc(product.name)}</span>${feature?`<p>${esc(product.description)}</p>`:''}<span class="place">${esc(product.place)}</span><div class="card-bottom"><span class="price">${sk('sk-price')}</span>${sk('sk-button')}</div></div></article>`;
     }
     skeletonShop(route,model) {
-      const category=['berlin-landmark-posters','berlin-reels-collection'].includes(route.categorySlug)?'print':'all';
-      const filter=route.categorySlug==='berlin-landmark-posters'?'landmarks':route.categorySlug==='berlin-reels-collection'?'stories':'all';
+      const resolved=this.navigation.resolveStoreRoute({categorySlug:route.categorySlug||'all-products',search:location.search});
+      const category=resolved.ok?resolved.category:'all',filter=resolved.ok?resolved.filter:'all';
       const selected=category==='all'?null:model.getCategoryView(category,filter);
       return `${this.skeletonBar(model,selected?category:'all')}<section class="wrap intro"><h1 class="lead">${esc(this.lead())}</h1>${selected?.filters.length?`<nav class="chips"><a>${esc(selected.allFilterLabel)}</a>${selected.filters.map(item=>`<a ${item.id===filter?'aria-current="page"':''}>${esc(item.label)}</a>`).join('')}</nav>`:''}</section>${(selected?[selected]:model.sections).map(section=>`<section class="wrap shelf"><div class="section-head"><div class="section-title"><h2>${esc(section.title)}</h2><span class="meta">${esc(section.description)}</span></div>${section.moreCategoryId?`<a>${esc(section.moreLabel)} →</a>`:''}</div><div class="${section.layout==='feature'?'feature-grid':'grid'}${selected?' category-grid':''}">${section.products.map(product=>this.skeletonCard({...product,imageFit:product.imageFit||section.imageFit},section.layout==='feature')).join('')}</div></section>`).join('')}<section class="wrap visual-credit-wrap">${sk('sk-credit')}</section>`;
     }
@@ -492,6 +518,7 @@
       surface.innerHTML=`<div class="surface" ${this.revealed?'':'hidden'}>${this.shopbar()}${this.error?`<div class="native-error" role="alert">${esc(this.errorMessage())} <button class="text-button" data-action="refresh">Refresh cart</button></div>`:''}${this.context.mode==='product'?this.product():this.context.mode==='cart'?this.cartPage():this.shop()}<p class="sr-only" role="status" aria-live="polite">${esc(this.notice)}</p><dialog class="drawer" aria-label="Shopping cart"><div class="drawer-heading"><h2>Cart (${this.cart?this.cart.count:'—'})</h2><button class="icon-button" data-action="close-drawer" aria-label="Close cart">✕</button></div>${this.notice?`<p class="notice">${esc(this.notice)}</p>`:''}${this.cart?this.lines():''}<div class="drawer-subtotal summary-row"><span>Subtotal</span><strong>${esc(textMoney(this.cart?.subtotal))}</strong></div><p class="delivery">${this.digitalOnly()?'Nothing is shipped. Tax is confirmed after your billing country is entered.':'Delivery and tax are confirmed after your destination is entered.'}</p><div class="drawer-actions"><a class="primary" href="https://walkofberlin.com/cart-page">View cart</a><button class="text-button" data-action="close-drawer">Continue shopping</button></div></dialog></div>`;
       for(const node of [...this.shadowRoot.childNodes])if(node!==sheet&&node!==keep)node.remove();
       sheet.after(surface.content);
+      const storeTabs=this.shadowRoot.querySelector('.shopbar .tabs'),activeTab=storeTabs?.querySelector('[aria-current]');if(activeTab&&storeTabs.scrollWidth>storeTabs.clientWidth)storeTabs.scrollLeft=Math.max(0,activeTab.offsetLeft-8);
       if(keep&&keep.hidden)this.showWhenStyled(keep);
       this.watchSize(this.shadowRoot.querySelector(keep?'.skeleton':'.surface')||this.shadowRoot.querySelector('.surface'));
       const dialog=this.shadowRoot.querySelector('dialog');
@@ -545,8 +572,8 @@
     }
     async click(event) {
       const category=event.target.closest('[data-category]'),filter=event.target.closest('[data-filter]');
-      if(category){event.preventDefault();if(this.context.mode!=='shop'){location.assign('https://walkofberlin.com/category/all-products');return;}this.category=this.model.normaliseCategoryId(category.dataset.category);this.filter='all';this.render();return;}
-      if(filter){event.preventDefault();this.filter=filter.dataset.filter;this.render();return;}
+      if(category){if(category.dataset.category!=='audio')this.navigateStore(category.dataset.category,'all',event);return;}
+      if(filter){this.navigateStore(this.category,filter.dataset.filter,event);return;}
       const button=event.target.closest('[data-action]');if(!button)return;
       const action=button.dataset.action;
       if(action==='close-drawer'){this.shadowRoot.querySelector('dialog').close();return;}
