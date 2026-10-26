@@ -214,3 +214,6 @@ h2>.sk-heading{width:55%}
 .ys-faq .details-body p{margin:8px 0 0}
 .ys-contact{margin:14px 0 0}
 .ys-contact a{color:var(--leaf);font-weight:600}
+
+/* Keep the complete Berolina room video visible inside the shared gallery. */
+.gallery-stage>video.room.contain{object-fit:contain}

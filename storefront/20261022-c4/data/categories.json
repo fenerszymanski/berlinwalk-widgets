@@ -61,6 +61,7 @@
         "moreLabel": "All {count} prints",
         "imageFit": "contain",
         "featuredProductIds": [
+          "pr-berolina-modernist",
           "ed-print-01-tempelhof",
           "wc",
           "ed-print-02-pink",
@@ -143,6 +144,7 @@
         "moreLabel": "All {count} downloads",
         "imageFit": "contain",
         "featuredProductIds": [
+          "dl-berolina-modernist",
           "ed-digital-02-pink",
           "dl-world-clock",
           "ed-digital-01-tempelhof",
@@ -183,7 +185,7 @@
           "bw-personalised-print"
         ]
       },
-      "description": "Your Berlin address in 1928 and today · printed for you · Germany delivery only",
+      "description": "Made to order · free delivery to Germany, the EU, the UK and the US",
       "filters": [],
       "shelf": {
         "previewLimit": 1,
@@ -191,7 +193,7 @@
         "moreLabel": "Personalised prints",
         "imageFit": "contain",
         "order": 5,
-        "featureDescription": "Find your Berlin street in aerial photographs from 1928 and today. Choose your address and personalise a print. Made to order, with delivery within Germany."
+        "featureDescription": "Your Berlin address in the 1928 aerial photographs, made into a print. Free delivery to Germany, the EU, the UK and the US."
       },
       "detailLabel": "Print details"
     },

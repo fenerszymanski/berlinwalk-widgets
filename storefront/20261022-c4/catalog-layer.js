@@ -4,6 +4,33 @@ const first = (...values) => values.find(value => value !== undefined && value !
 const list = value => Array.isArray(value) ? value : [];
 const intersects = (a, b) => a.some(value => b.includes(value));
 const cleanText = value => String(value ?? '').replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim();
+// Cards carry a short introduction. Full native descriptions belong on the product page.
+export function cardSummary(value, maxLength = 240) {
+  const html = String(value ?? '').replace(/<(script|style)\b[^>]*>[\s\S]*?<\/\1>/gi, '').replace(/<!--[\s\S]*?-->/g, '');
+  const paragraph = Array.from(html.matchAll(/<p\b[^>]*>([\s\S]*?)<\/p>/gi)).find(entry => cleanText(entry[1]).replace(/&nbsp;|&#160;/gi,'').trim());
+  let text = cleanText(paragraph ? paragraph[1] : html.split(/<br\s*\/?>|<\/(?:div|section)>|\n\s*\n/i)[0]);
+  const entities = {amp:'&',nbsp:' ',lt:'<',gt:'>',quot:'"',apos:"'",ndash:'–',mdash:'—',rsquo:'’',lsquo:'‘',ldquo:'“',rdquo:'”'};
+  text = text.replace(/&(#x[0-9a-f]+|#\d+|[a-z]+);/gi, (match, key) => {
+    if(key[0] !== '#')return entities[key.toLowerCase()] ?? match;
+    const code = key[1].toLowerCase() === 'x' ? parseInt(key.slice(2),16) : Number(key.slice(1));
+    return Number.isInteger(code) && code >= 0 && code <= 0x10ffff ? String.fromCodePoint(code) : match;
+  }).replace(/\s+/g, ' ').replace(/\s+([,.;:!?])/g,'$1').trim();
+  // Plain-text legacy descriptions may have lost paragraph boundaries already.
+  text = text.split(/\b(?:PRODUCT DETAILS|PRINTING AND DELIVERY|PRINTING & DELIVERY|ABOUT THE ARTWORK|FILE DETAILS|WHAT YOU(?:’|')LL RECEIVE)\b/i)[0].trim();
+  if(!text)return '';
+  const sentences = globalThis.Intl?.Segmenter
+    ? Array.from(new Intl.Segmenter('en',{granularity:'sentence'}).segment(text), entry => entry.segment)
+    : text.match(/.+?(?:[.!?](?=\s|$)|$)/g) || [text];
+  let summary = '';
+  for(const sentence of sentences.slice(0,2)) {
+    const next = [summary,sentence.trim()].filter(Boolean).join(' ');
+    if(next.length > maxLength)break;
+    summary = next;
+  }
+  if(summary)return summary;
+  const prefix = text.slice(0,maxLength-1), boundary = prefix.search(/\s+\S*$/);
+  return boundary > 0 ? prefix.slice(0,boundary).replace(/[\s,;:–—-]+$/,'') + '…' : '';
+}
 const https = value => { try {const url = new URL(value); return url.protocol === 'https:' ? url.href : null;} catch {return null;} };
 const majorToCents = value => {
   if (value === '' || value === null || value === undefined) return null;
@@ -69,6 +96,7 @@ export function adaptWixProducts(nativeProducts, presentation = []) {
       productUrl,
       nativeImageUrl: first(native.media?.mainMedia?.image?.url, native.media?.[0]?.fullUrl),
       description: item.description || cleanText(native.description),
+      cardSummary: cardSummary(item.cardSummary || item.description || native.description),
       nativeAdditionalInfo: first(native.additionalInfoSections, native.additionalInfo, []),
       options: first(native.productOptions, native.options, []),
       requiresOptions: list(first(native.productOptions, native.options, [])).length > 0
@@ -100,6 +128,7 @@ export function adaptExternalProducts(entries) {
       productUrl: https(first(offer.url, schema.url, entry.sourceUrl)),
       nativeImageUrl: first(list(schema.image)[0], typeof schema.image === 'string' ? schema.image : null),
       description: item.description || schema.description || '',
+      cardSummary: cardSummary(item.cardSummary || item.description || schema.description),
       options: [],
       requiresOptions: false
     };

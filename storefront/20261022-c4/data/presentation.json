@@ -6,7 +6,8 @@
     "image": "world-clock.jpg",
     "alt": "World Clock illustrated poster, shown in full",
     "typeLine": "PRINT · UNFRAMED",
-    "wixProductId": "1f9ad3cb-74f8-48ac-ac53-f41e71a09610"
+    "wixProductId": "1f9ad3cb-74f8-48ac-ac53-f41e71a09610",
+    "cardSummary": "The World Clock at Alexanderplatz is illustrated in deep green, cream and yellow."
   },
   {
     "id": "bu",
@@ -756,9 +757,34 @@
     "place": "Alexanderplatz · Mitte",
     "image": "berolina-modernist.jpg",
     "alt": "Berolina with her city-wall crown, outstretched hand and Berlin bear shield against a red circle and black geometric forms, shown in full.",
-    "typeLine": "PRINT · UNFRAMED",
+    "typeLine": "PREMIUM MATTE · 200 GSM · UNFRAMED",
     "wixProductId": "52d20d32-021d-4024-875c-440d29784322",
     "group": "stories",
-    "visualCreditsHtml": "<p>AI-generated artistic interpretation created for Walk of Berlin, enlarged using Adobe Firefly.</p><p>Statue reference: Berolina at Alexanderplatz, circa 1900. Photographer unknown; Wikimedia Commons marks the photograph as public domain. Statue by Emil Hundrieser. The photograph was used as a reference for the pose and identifying details; this print is an artistic interpretation.</p><p><a href=\"https://commons.wikimedia.org/wiki/File:Berlin_Alexanderplatz_Berolina.jpg\" target=\"_blank\">Original reference photograph</a> · <a href=\"https://creativecommons.org/publicdomain/mark/1.0/\" target=\"_blank\">Public Domain Mark</a></p>"
+    "visualCreditsHtml": "<p>AI-generated artistic interpretation created for Walk of Berlin, enlarged using Adobe Firefly.</p><p>Statue reference: Berolina at Alexanderplatz, circa 1900. Photographer unknown; Wikimedia Commons marks the photograph as public domain. Statue by Emil Hundrieser. The photograph was used as a reference for the pose and identifying details; this print is an artistic interpretation.</p><p><a href=\"https://commons.wikimedia.org/wiki/File:Berlin_Alexanderplatz_Berolina.jpg\" target=\"_blank\">Original reference photograph</a> · <a href=\"https://creativecommons.org/publicdomain/mark/1.0/\" target=\"_blank\">Public Domain Mark</a></p><p>Room images and video are 3D styling visualizations made in Blender using <a href=\"https://polyhaven.com\" target=\"_blank\">Poly Haven</a> models and textures, <a href=\"https://creativecommons.org/publicdomain/zero/1.0/\" target=\"_blank\">CC0</a>. They show the 30 x 40 cm version; frames, furniture and decor are not included.</p>",
+    "roomImage": "berolina-modernist-room.jpg",
+    "roomVideoFit": "contain",
+    "roomCaption": "3D styling example · 30 × 40 cm · Frame and decor not included",
+    "roomAlt": "3D styling visualization of the 30 x 40 cm Berolina Modernist print. Frame, furniture and decor are not included.",
+    "sizeImages": {
+      "50x70 cm": "berolina-modernist-50x70.jpg"
+    },
+    "alternativeProductId": "aa39bafc-c9da-f732-1416-5d7d00cdf215"
+  },
+  {
+    "id": "dl-berolina-modernist",
+    "name": "Berolina Modernist Printable Poster",
+    "place": "Alexanderplatz · Mitte",
+    "image": "berolina-modernist.jpg",
+    "roomImage": "berolina-modernist-room.jpg",
+    "alt": "Berolina with her city-wall crown, outstretched hand and Berlin bear shield against a red circle and black geometric forms, shown in full.",
+    "typeLine": "DIGITAL DOWNLOAD · 5 PRINT RATIOS",
+    "wixProductId": "aa39bafc-c9da-f732-1416-5d7d00cdf215",
+    "kind": "digital",
+    "group": "stories",
+    "roomVideoFit": "contain",
+    "roomCaption": "3D styling example · 30 × 40 cm · Frame and decor not included",
+    "roomAlt": "3D styling visualization of the 30 x 40 cm Berolina Modernist print. Frame, furniture and decor are not included.",
+    "alternativeProductId": "52d20d32-021d-4024-875c-440d29784322",
+    "visualCreditsHtml": "<p>AI-generated artistic interpretation created for Walk of Berlin, enlarged using Adobe Firefly.</p><p>Statue reference: Berolina at Alexanderplatz, circa 1900. Photographer unknown; Wikimedia Commons marks the photograph as public domain. Statue by Emil Hundrieser. The photograph was used as a reference for the pose and identifying details; this print is an artistic interpretation.</p><p><a href=\"https://commons.wikimedia.org/wiki/File:Berlin_Alexanderplatz_Berolina.jpg\" target=\"_blank\">Original reference photograph</a> · <a href=\"https://creativecommons.org/publicdomain/mark/1.0/\" target=\"_blank\">Public Domain Mark</a></p><p>Room images and video are 3D styling visualizations made in Blender using <a href=\"https://polyhaven.com\" target=\"_blank\">Poly Haven</a> models and textures, <a href=\"https://creativecommons.org/publicdomain/zero/1.0/\" target=\"_blank\">CC0</a>. They show the 30 x 40 cm version; frames, furniture and decor are not included.</p>"
   }
 ]

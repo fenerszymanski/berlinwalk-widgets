@@ -240,7 +240,7 @@ export function mountConfigurator(host, state, api) {
       </div>
       <div class="ys-format" data-ys="format" ${api.digital ? '' : 'hidden'}>
         <span class="ys-label" id="ys-format-l">Format</span>
-        <div class="ys-sizes" role="radiogroup" aria-labelledby="ys-format-l"><button type="button" role="radio" class="ys-size" data-ys-format="poster" aria-checked="${!ysDigital(state)}">Printed poster<small>From €34.90 · free delivery</small></button><button type="button" role="radio" class="ys-size" data-ys-format="digital" aria-checked="${ysDigital(state)}">Digital file<small>${euro(YS_DIGITAL_PRICE)} · print it yourself, anywhere</small></button></div>
+        <div class="ys-sizes" role="radiogroup" aria-labelledby="ys-format-l"><button type="button" role="radio" class="ys-size" data-ys-format="poster" aria-checked="${!ysDigital(state)}">Printed poster<small>From €34.90 · free delivery</small></button><button type="button" role="radio" class="ys-size" data-ys-format="digital" aria-checked="${ysDigital(state)}">Digital file<small>${Number.isFinite(api.digitalPrice)?euro(api.digitalPrice):'Currently unavailable'} · print it yourself, anywhere</small></button></div>
       </div>
       <div class="ys-variant" data-ys="variant" ${api.variants && !ysDigital(state) ? '' : 'hidden'}>
         <span class="ys-label" id="ys-size-l">Size</span>
@@ -261,7 +261,8 @@ export function mountConfigurator(host, state, api) {
     (host.getRootNode().querySelectorAll ? host.getRootNode() : host).querySelectorAll('[data-ys-legal]').forEach(el => { el.hidden = el.dataset.ysLegal !== (ysDigital(state) ? 'digital' : 'poster'); });
     host.querySelector('[data-ys-jump]').textContent = ysDigital(state) ? 'Change format or text' : 'Change size, paper or text';
     if (ysDigital(state)) {
-      const label = euro(YS_DIGITAL_PRICE);
+      if(!Number.isFinite(api.digitalPrice))return;
+      const label = euro(api.digitalPrice);
       const price = host.querySelector('.product-title .price'); if (price) price.textContent = label;
       const spec = host.querySelector('.ys-buy .spec'); if (spec) spec.textContent = DIGITAL_SPEC;
       const add = host.querySelector('[data-ys-add]'); if (add) add.textContent = `Add to cart · ${label}`;
