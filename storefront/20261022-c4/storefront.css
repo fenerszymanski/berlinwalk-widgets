@@ -194,3 +194,22 @@ h2>.sk-heading{width:55%}
 .shopbar .tabs{position:relative}.store-visual-credits{position:relative;width:max-content;max-width:100%;font-size:12px}.store-visual-credits>summary{cursor:pointer;padding:9px 13px;border:1px solid var(--line);border-radius:20px;min-height:38px}.store-credit-body{position:absolute;bottom:calc(100% + 8px);left:0;width:min(720px,calc(100vw - 64px));max-height:280px;overflow:auto;background:var(--cream);color:var(--green);padding:18px;border:1px solid var(--line);border-radius:8px;box-shadow:0 8px 24px #123d1820;z-index:5}.store-credit-body p+p{margin-top:12px}
 @media(min-width:741px){.feature-grid:has(>.feature:only-child){grid-template-columns:minmax(0,1fr)}.feature-grid>.feature:only-child{grid-template-columns:minmax(180px,.7fr) minmax(0,1.3fr)}.feature-grid>.feature:only-child .tile{max-height:400px}.feature-grid>.feature:only-child .tile-photo{height:100%;object-fit:contain}}
 @media(max-width:740px){.shopbar-inner{flex-wrap:wrap;gap:0 14px;padding-top:7px}.shopbar .cart-link{margin-left:auto}.shopbar .tabs{order:3;flex-basis:100%;gap:20px}.shopbar .tabs a{min-height:48px}.store-credit-body{width:calc(100vw - 32px)}}
+
+/* 1928 trust blocks (26 Oct 2026) */
+.ys-promise{margin:12px 0 6px;font-weight:600;color:var(--leaf)}
+.ys-pay{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:12px 0 0;font-size:.85rem;color:var(--muted)}
+.ys-cards{display:inline-flex;flex-wrap:wrap;gap:6px}
+.ys-card{display:inline-flex;align-items:center;justify-content:center;height:24px;min-width:38px;padding:0 6px;border:1px solid var(--line,#d8d8d0);border-radius:5px;background:#fff}
+.ys-card svg{width:26px;height:18px;fill:#3a3a36}
+.ys-card-more{font-size:.75rem;color:var(--muted)}
+.ys-maker{display:flex;gap:12px;align-items:center;margin:16px 0 0;padding:12px;border:1px solid var(--line,#d8d8d0);border-radius:12px;background:#fff}
+.ys-maker img{width:56px;height:56px;border-radius:50%;object-fit:cover;flex:0 0 auto}
+.ys-maker p{margin:0;font-size:.9rem;line-height:1.45}
+.ys-maker a{color:var(--leaf);font-weight:600}
+.ys-faq{margin:28px 0 0}
+.ys-faq details{border-top:1px solid var(--line,#d8d8d0);padding:10px 0}
+.ys-faq details:last-of-type{border-bottom:1px solid var(--line,#d8d8d0)}
+.ys-faq summary{cursor:pointer;font-weight:600}
+.ys-faq .details-body p{margin:8px 0 0}
+.ys-contact{margin:14px 0 0}
+.ys-contact a{color:var(--leaf);font-weight:600}

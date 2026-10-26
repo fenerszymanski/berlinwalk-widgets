@@ -103,6 +103,7 @@ const BERLIN_DISTRICT_TRAFFIC_AUTHORITY_EMAILS = [
 ];
 const ALLOWED_EMAILS = new Set([
   'info@berlinwalk.com',
+  'info@walkofberlin.com',   // the guest-facing contact address (CLAUDE.md, 30 Sep 2026); shown on the 1928 page since 26 Oct 2026
   'you@example.com',
   ...BERLIN_DISTRICT_TRAFFIC_AUTHORITY_EMAILS,
 ]);
