@@ -5,7 +5,7 @@
   const base = new URL('.', script.src);
   const CHANNEL = 'wob:shop-cart:v1';
   const esc = value => String(value ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-  const asset = value => {const target=new URL(value,base);if(/\.(?:js|css|json)$/.test(target.pathname))target.searchParams.set('v','ys-cross-20261026');return target.href;};
+  const asset = value => {const target=new URL(value,base);if(/\.(?:js|css|json)$/.test(target.pathname))target.searchParams.set('v','ed-room-20261026');return target.href;};
   // Chrome and Safari ignore @font-face inside shadow DOM, so the three faces are registered once on the document with absolute URLs from the element's own base.
   try {if(!document.getElementById('bw-storefront-fonts')){const style=document.createElement('style');style.id='bw-storefront-fonts';style.textContent=[['Fraunces','Fraunces-Variable.ttf','100 900'],['Space Grotesk','SpaceGrotesk-Variable.ttf','300 700'],['IBM Plex Mono','IBMPlexMono-Regular.ttf','400 600'],['DM Serif Display','DMSerifDisplay-Regular.ttf','400']].map(([family,file,weight])=>`@font-face{font-family:'${family}';src:url("${asset('fonts/'+file)}") format("truetype");font-weight:${weight};font-display:swap}`).join('\n');(document.head||document.documentElement).appendChild(style);}}catch{}
   // One price format everywhere: euro sign, two decimals, dot separator ("€24.90"). Native Wix formatted prices are used first; this covers every fallback.
@@ -18,7 +18,7 @@
   const releaseNative = () => {try{document.documentElement.classList.add('bw-shop-native');}catch{}};
   // Neutral shimmer block used by the loading skeleton wherever a price, button or line of text will be.
   // room videos: product id (print and its printable twin) -> asset slug; value = how the video is described
-  const ROOM_VIDEOS = {'berlin-uhr':'The Berlin-Uhr print','ghost-stations':'The Ghost Stations print','world-clock':'The World Clock print','wasserturm':'The Wasserturm print','tv-tower':'The TV Tower print','tram-map':'The Tram Map and the Wall print','bierpinsel':'The Bierpinsel print','osman-kalin':'The Osman Kalın’s Treehouse print','cafe-achteck':'The Café Achteck print','friedrichshain-kreuzberg':'The Friedrichshain-Kreuzberg print','pankow':'The Pankow print','charlottenburg-wilmersdorf':'The Charlottenburg-Wilmersdorf print','spandau':'The Spandau print','steglitz-zehlendorf':'The Steglitz-Zehlendorf print','tempelhof-schoeneberg':'The Tempelhof-Schöneberg print','neukoelln':'The Neukölln print','treptow-koepenick':'The Treptow-Köpenick print','marzahn-hellersdorf':'The Marzahn-Hellersdorf print','lichtenberg':'The Lichtenberg print','reinickendorf':'The Reinickendorf print'};
+  const ROOM_VIDEOS = {'berlin-uhr':'The Berlin-Uhr print','ghost-stations':'The Ghost Stations print','world-clock':'The World Clock print','wasserturm':'The Wasserturm print','tv-tower':'The TV Tower print','tram-map':'The Tram Map and the Wall print','bierpinsel':'The Bierpinsel print','osman-kalin':'The Osman Kalın’s Treehouse print','cafe-achteck':'The Café Achteck print','friedrichshain-kreuzberg':'The Friedrichshain-Kreuzberg print','pankow':'The Pankow print','charlottenburg-wilmersdorf':'The Charlottenburg-Wilmersdorf print','spandau':'The Spandau print','steglitz-zehlendorf':'The Steglitz-Zehlendorf print','tempelhof-schoeneberg':'The Tempelhof-Schöneberg print','neukoelln':'The Neukölln print','treptow-koepenick':'The Treptow-Köpenick print','marzahn-hellersdorf':'The Marzahn-Hellersdorf print','lichtenberg':'The Lichtenberg print','reinickendorf':'The Reinickendorf print','ed-01-tempelhof':'The Tempelhof print','ed-02-pink':'The Berlin in Pink print','ed-03-courtyard':'The Through the Courtyard print','ed-04-spaeti':'The Späti print','ed-05-schoenhauser':'The Schönhauser Allee print','ed-06-up-close':'The Berlin, Up Close print','ed-07-window':'The "A Window in Berlin" print','ed-08-marzahn':'The Marzahn print','ed-09-teufelsberg':'The Teufelsberg print','ed-10-currywurst':'The Currywurst print','ed-11-mauerpark':'The Mauerpark print','ed-12-grunewald':'The Grunewald print'};
   const ROOM_IDS = {bu:'berlin-uhr',gs:'ghost-stations',wc:'world-clock',wt:'wasserturm',tv:'tv-tower',tm:'tram-map',bp:'bierpinsel',ok:'osman-kalin',ca:'cafe-achteck','dl-berlin-tram-map':'tram-map','dl-osman-kalin-treehouse':'osman-kalin'};
   // story reels: the Walk of Berlin reel a print came from, cut before the tour CTA (slug -> file, credits record, length)
   const STORY_REELS = {
@@ -27,7 +27,7 @@
     'osman-kalin':{file:'osman-kalin-reel',credits:'osman-kalin-treehouse',length:'0:49',label:'East Berlin, west of the Wall',ai:'The voice is AI-generated.'},
     'tram-map':{file:'tram-map-reel',credits:'west-berlin-tram',length:'0:36',label:"Berlin's tram map still shows the Wall",ai:'The voice is AI-generated.'},
     'world-clock':{file:'world-clock-reel',credits:'world-clock',length:'1:09',label:"East Berlin's clock showed New York time",ai:'The cover picture is AI-made and the voice is AI-generated.'}};
-  const roomSlug = product => {const id=String(product?.id||''),slug=ROOM_IDS[id]||id.replace(/^(pr|dl)-/,'');return ROOM_VIDEOS[slug]&&/^(pr-|dl-|bu$|gs$|wc$|wt$|tv$|tm$|bp$|ok$|ca$)/.test(id)?slug:'';};
+  const roomSlug = product => {const id=String(product?.id||''),slug=ROOM_IDS[id]||id.replace(/^(pr|dl)-/,'').replace(/^ed-(print|digital)-/,'ed-');return ROOM_VIDEOS[slug]&&/^(pr-|dl-|ed-print-|ed-digital-|bu$|gs$|wc$|wt$|tv$|tm$|bp$|ok$|ca$)/.test(id)?slug:'';};
   const sk = cls => `<span class="sk-block ${cls}"></span>`;
   // Loading skeleton only: product page slug (the keys of PRODUCT_SLUGS in the page code) -> native product id, so the bundled poster of the product being opened can be drawn before the bridge answers. An unknown slug just gets a neutral skeleton.
   const SKELETON_PRODUCTS = Object.fromEntries(Object.entries({
@@ -105,7 +105,7 @@
     import(asset('catalog-layer.js')), import(asset('editorial-helpers.js')), import(asset('street-configurator.js')),
     ...['data/categories.json','data/presentation.json','data/native-bindings.json','data/external-products.json'].map(path => fetch(asset(path)).then(response => {if (!response.ok) throw Error('CATALOGUE_METADATA_UNAVAILABLE');return response.json();})),
     import(asset('funnel.js')).catch(() => null),   // measurement must never block the shop
-    import(new URL('../../js/store-navigation.js?v=ys-cross-20261026',base).href)
+    import(new URL('../../js/store-navigation.js?v=ed-room-20261026',base).href)
   ]);
   function safeHtml(html) {
     // Native rich text can preserve escaped quote delimiters and escaped block separators.
