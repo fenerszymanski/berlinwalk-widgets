@@ -13,6 +13,7 @@ const W = typeof window !== 'undefined' ? window : {};
 const ENDPOINT = 'https://app.berlinwalk.com/api/traffic-count';
 const HOSTS = ['www.walkofberlin.com', 'www.berlinwalk.com'];
 export const YS_ID = '8aaf5412-7f21-42c7-acfb-85dd8417d68c';
+export const YS_DIGITAL_ID = '9b6fbecf-32e4-27dc-f3e6-9c887fe7f495';   // its digital file (26 Oct 2026); add counts land on the 1928 page path
 export const YS_PATH = '/product-page/your-berlin-street-in-1928-personalised-aerial-print-30-x-40-cm';
 const STORE_PATH = '/category/all-products';
 const PIXEL_STEPS = {search: 'YSSearch', pick: 'YSPick', preview: 'YSPreview', seen: 'YSSeen'};
@@ -76,5 +77,6 @@ export function added(product, quantity = 1) {
 export function checkout(cart) {
   const lines = cart?.lines || [];
   count('checkout', STORE_PATH);
-  if (lines.some(line => line.productId === YS_ID)) count('checkout', YS_PATH);
+  if (lines.some(line => line.productId === YS_ID || line.productId === YS_DIGITAL_ID)) count('checkout', YS_PATH);
+  if (lines.some(line => line.productId === YS_DIGITAL_ID)) count('checkout-digital', YS_PATH);
 }

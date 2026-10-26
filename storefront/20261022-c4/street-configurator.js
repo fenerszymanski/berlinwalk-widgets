@@ -147,6 +147,16 @@ export const ysPaper = state => YS_PAPERS.find(p => p.name === state.paper) || Y
 export const ysPrice = state => ysPaper(state).price[YS_SIZES.indexOf(ysSize(state))];
 export const ysChoices = state => ({Size: ysSize(state), Paper: ysPaper(state).name});
 export const euro = n => `€${n.toFixed(2)}`;
+// Digital file (Yusuf, 26 Oct 2026: a cheap print-it-yourself version next to the poster). A separate Wix digital product with the same two
+// map fields; the file is made with make_print.py --digital and sent by email. Offered only when the shop catalogue carries that product.
+export const YS_DIGITAL_ID = '9b6fbecf-32e4-27dc-f3e6-9c887fe7f495';
+export const YS_DIGITAL_PRICE = 14.90;
+export const ysDigital = state => state.format === 'digital';
+export const ysProductId = state => (ysDigital(state) ? YS_DIGITAL_ID : YS_PRODUCT_ID);
+const DIGITAL_SPEC = 'Digital file · JPG + PDF · 45 x 60 cm at 300 ppi';
+const DIGITAL_DELIVERY = 'Made from your spot and sent by email within 24 hours: a JPG and a PDF, 45 x 60 cm at 300 ppi (3:4, prints at 30 x 40 cm too). Nothing is shipped, so it works anywhere.';
+const POSTER_DELIVERY = 'Made to order from your address and printed for you, usually in about 5 to 7 working days. Frame not included. Delivery: Germany only, free.';
+const captionFor = (state, live) => (ysDigital(state) ? (live ? CAPTION_LIVE.replace('Your poster, SIZE', 'Your digital file') : 'Example file. Search for your own address to see your street.') : (live ? CAPTION_LIVE : CAPTION_EXAMPLE).replace('SIZE', ysSize(state)));
 // Everything the print needs except the buyer's "yes, I see the 1928 photo": the add buttons are live from here on (25 Oct 2026).
 export function readyToCheck(state) {
   return Number.isFinite(state.lat) && Number.isFinite(state.lon) && inBerlin(state.lat, state.lon) && clean(state.address, 80).length > 0 &&
@@ -202,7 +212,7 @@ export function mountConfigurator(host, state, api) {
         </div>
         <div class="ys-sheet ys-sample" data-ys="example" ${state.lat ? 'hidden' : ''}><img src="${esc(api.sample)}" alt="Example print: Potsdamer Platz in 1928 and today"></div>
       </div>
-      <p class="ys-caption" data-ys="caption">${(state.lat ? CAPTION_LIVE : CAPTION_EXAMPLE).replace('SIZE', ysSize(state))}</p>
+      <p class="ys-caption" data-ys="caption">${captionFor(state, !!state.lat)}</p>
       <div class="ys-quick" data-ys="quick" ${state.lat ? '' : 'hidden'}>
         <button type="button" class="primary" data-ys-quickadd>Add to cart</button>
         <p class="ys-quick-spec"><span data-ys="quickspec">Personalised print</span><span class="ys-quick-sep"> · </span><button type="button" class="ys-link" data-ys-jump>Change size, paper or text</button></p>
@@ -220,7 +230,11 @@ export function mountConfigurator(host, state, api) {
         <label>Your line on the print (optional)<input data-ys="line" maxlength="${L.line}" placeholder="e.g. Lena &amp; Jonas · here since 2021" value="${esc(state.line || '')}"></label>
         <p class="ys-hint">The house number is never printed. Tap either photo to move the ring onto your building.</p>
       </div>
-      <div class="ys-variant" data-ys="variant" ${api.variants ? '' : 'hidden'}>
+      <div class="ys-format" data-ys="format" ${api.digital ? '' : 'hidden'}>
+        <span class="ys-label" id="ys-format-l">Format</span>
+        <div class="ys-sizes" role="radiogroup" aria-labelledby="ys-format-l"><button type="button" role="radio" class="ys-size" data-ys-format="poster" aria-checked="${!ysDigital(state)}">Printed poster<small>From €34.90 · delivered in Germany</small></button><button type="button" role="radio" class="ys-size" data-ys-format="digital" aria-checked="${ysDigital(state)}">Digital file<small>${euro(YS_DIGITAL_PRICE)} · print it yourself, anywhere</small></button></div>
+      </div>
+      <div class="ys-variant" data-ys="variant" ${api.variants && !ysDigital(state) ? '' : 'hidden'}>
         <span class="ys-label" id="ys-size-l">Size</span>
         <div class="ys-sizes" role="radiogroup" aria-labelledby="ys-size-l">${YS_SIZES.map(z => `<button type="button" role="radio" class="ys-size" data-ys-size="${esc(z)}" aria-checked="${z === ysSize(state)}">${esc(z)}<small data-ys-sizeprice="${esc(z)}"></small></button>`).join('')}</div>
         <label class="ys-label" for="ys-paper">Paper</label>
@@ -232,7 +246,24 @@ export function mountConfigurator(host, state, api) {
   const $ = name => host.querySelector(`[data-ys="${name}"]`);
   // Size and paper: the price, caption and button follow the choice; Wix still charges its own variant price.
   function paintVariant() {
-    if (!api.variants) return;   // the picker shows only once the Wix product has its size x paper variants
+    if (!api.digital && ysDigital(state)) state.format = 'poster';   // the digital product is not in the catalogue: poster only
+    host.querySelectorAll('[data-ys-format]').forEach(b => b.setAttribute('aria-checked', String((b.dataset.ysFormat === 'digital') === ysDigital(state))));
+    $('variant').hidden = !api.variants || ysDigital(state);
+    const delivery = host.querySelector('.ys-buy .delivery'); if (delivery) delivery.textContent = ysDigital(state) ? DIGITAL_DELIVERY : POSTER_DELIVERY;
+    (host.getRootNode().querySelectorAll ? host.getRootNode() : host).querySelectorAll('[data-ys-legal]').forEach(el => { el.hidden = el.dataset.ysLegal !== (ysDigital(state) ? 'digital' : 'poster'); });
+    host.querySelector('[data-ys-jump]').textContent = ysDigital(state) ? 'Change format or text' : 'Change size, paper or text';
+    if (ysDigital(state)) {
+      const label = euro(YS_DIGITAL_PRICE);
+      const price = host.querySelector('.product-title .price'); if (price) price.textContent = label;
+      const spec = host.querySelector('.ys-buy .spec'); if (spec) spec.textContent = DIGITAL_SPEC;
+      const add = host.querySelector('[data-ys-add]'); if (add) add.textContent = `Add to cart · ${label}`;
+      host.querySelector('[data-ys-quickadd]').textContent = `Add to cart · ${label}`;
+      $('quickspec').textContent = 'Digital file · JPG + PDF';
+      host.querySelectorAll('[data-ys-yes]').forEach(b => { b.textContent = `Yes, add to cart · ${label}`; });
+      $('caption').textContent = captionFor(state, !!state.lat);
+      return;
+    }
+    if (!api.variants) { $('caption').textContent = captionFor(state, !!state.lat); return; }   // the picker shows only once the Wix product has its size x paper variants
     const i = YS_SIZES.indexOf(ysSize(state)), paper = ysPaper(state);
     host.querySelectorAll('[data-ys-size]').forEach(b => b.setAttribute('aria-checked', String(b.dataset.ysSize === ysSize(state))));
     host.querySelectorAll('[data-ys-sizeprice]').forEach(el => { el.textContent = euro(paper.price[YS_SIZES.indexOf(el.dataset.ysSizeprice)]); });
@@ -243,9 +274,10 @@ export function mountConfigurator(host, state, api) {
     host.querySelector('[data-ys-quickadd]').textContent = `Add to cart · ${euro(paper.price[i])}`;
     $('quickspec').textContent = `${ysSize(state)} · ${paper.name}`;
     host.querySelectorAll('[data-ys-yes]').forEach(b => { b.textContent = `Yes, add to cart · ${euro(paper.price[i])}`; });
-    $('caption').textContent = (state.lat ? CAPTION_LIVE : CAPTION_EXAMPLE).replace('SIZE', ysSize(state));
+    $('caption').textContent = captionFor(state, !!state.lat);
   }
   host.querySelectorAll('[data-ys-size]').forEach(b => b.addEventListener('click', () => { state.size = b.dataset.ysSize; paintVariant(); }));
+  host.querySelectorAll('[data-ys-format]').forEach(b => b.addEventListener('click', () => { const was = ysDigital(state); state.format = b.dataset.ysFormat; if (ysDigital(state) && !was) api.track?.('digital'); paintVariant(); }));
   $('paper').addEventListener('change', e => { state.paper = e.target.value; paintVariant(); });
   queueMicrotask(paintVariant);
   const img1928 = $('photo-1928').querySelector('img'), imgToday = $('photo-today').querySelector('img');
@@ -286,7 +318,7 @@ export function mountConfigurator(host, state, api) {
   function showPoint(fresh) {
     if (!state.lat) return;
     $('sheet').hidden = false; $('example').hidden = true; $('fields').hidden = false;
-    $('caption').textContent = CAPTION_LIVE.replace('SIZE', ysSize(state));
+    $('caption').textContent = captionFor(state, true);
     paintWords(); ensureFonts();
     setStatus('Loading the 1928 photo…'); setStatusToday('');
     const mine = state.token = (state.token || 0) + 1;
