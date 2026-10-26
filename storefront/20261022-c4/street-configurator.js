@@ -157,7 +157,7 @@ export const ysDigital = state => state.format === 'digital';
 export const ysProductId = state => (ysDigital(state) ? YS_DIGITAL_ID : YS_PRODUCT_ID);
 const DIGITAL_SPEC = 'Digital file · JPG + PDF · 45 x 60 cm at 300 ppi';
 const DIGITAL_DELIVERY = 'Made from your spot and sent by email within 24 hours: a JPG and a PDF, 45 x 60 cm at 300 ppi (3:4, prints at 30 x 40 cm too). Nothing is shipped, so it works anywhere.';
-const POSTER_DELIVERY = 'Made to order from your address and printed for you, usually in about 5 to 7 working days. Frame not included. Delivery: Germany only, free.';
+const POSTER_DELIVERY = 'Made to order from your address and printed for you, usually in about 5 to 7 working days in Germany. Frame not included. Free delivery to Germany, the EU, the UK and the US.';
 const captionFor = (state, live) => (ysDigital(state) ? (live ? CAPTION_LIVE.replace('Your poster, SIZE', 'Your digital file') : 'Example file. Search for your own address to see your street.') : (live ? CAPTION_LIVE : CAPTION_EXAMPLE).replace('SIZE', ysSize(state)));
 // Everything the print needs except the buyer's "yes, I see the 1928 photo": the add buttons are live from here on (25 Oct 2026).
 export function readyToCheck(state) {
@@ -241,7 +241,7 @@ export function mountConfigurator(host, state, api) {
       </div>
       <div class="ys-format" data-ys="format" ${api.digital ? '' : 'hidden'}>
         <span class="ys-label" id="ys-format-l">Format</span>
-        <div class="ys-sizes" role="radiogroup" aria-labelledby="ys-format-l"><button type="button" role="radio" class="ys-size" data-ys-format="poster" aria-checked="${!ysDigital(state)}">Printed poster<small>From €34.90 · delivered in Germany</small></button><button type="button" role="radio" class="ys-size" data-ys-format="digital" aria-checked="${ysDigital(state)}">Digital file<small>${euro(YS_DIGITAL_PRICE)} · print it yourself, anywhere</small></button></div>
+        <div class="ys-sizes" role="radiogroup" aria-labelledby="ys-format-l"><button type="button" role="radio" class="ys-size" data-ys-format="poster" aria-checked="${!ysDigital(state)}">Printed poster<small>From €34.90 · free delivery</small></button><button type="button" role="radio" class="ys-size" data-ys-format="digital" aria-checked="${ysDigital(state)}">Digital file<small>${euro(YS_DIGITAL_PRICE)} · print it yourself, anywhere</small></button></div>
       </div>
       <div class="ys-variant" data-ys="variant" ${api.variants && !ysDigital(state) ? '' : 'hidden'}>
         <span class="ys-label" id="ys-size-l">Size</span>
