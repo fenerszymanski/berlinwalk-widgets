@@ -5,7 +5,7 @@
   const base = new URL('.', script.src);
   const CHANNEL = 'wob:shop-cart:v1';
   const esc = value => String(value ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-  const asset = value => {const target=new URL(value,base);if(/\.(?:js|css|json)$/.test(target.pathname))target.searchParams.set('v','ys-cheap-20261026');return target.href;};
+  const asset = value => {const target=new URL(value,base);if(/\.(?:js|css|json)$/.test(target.pathname))target.searchParams.set('v','ys-cross-20261026');return target.href;};
   // Chrome and Safari ignore @font-face inside shadow DOM, so the three faces are registered once on the document with absolute URLs from the element's own base.
   try {if(!document.getElementById('bw-storefront-fonts')){const style=document.createElement('style');style.id='bw-storefront-fonts';style.textContent=[['Fraunces','Fraunces-Variable.ttf','100 900'],['Space Grotesk','SpaceGrotesk-Variable.ttf','300 700'],['IBM Plex Mono','IBMPlexMono-Regular.ttf','400 600'],['DM Serif Display','DMSerifDisplay-Regular.ttf','400']].map(([family,file,weight])=>`@font-face{font-family:'${family}';src:url("${asset('fonts/'+file)}") format("truetype");font-weight:${weight};font-display:swap}`).join('\n');(document.head||document.documentElement).appendChild(style);}}catch{}
   // One price format everywhere: euro sign, two decimals, dot separator ("€24.90"). Native Wix formatted prices are used first; this covers every fallback.
@@ -105,7 +105,7 @@
     import(asset('catalog-layer.js')), import(asset('editorial-helpers.js')), import(asset('street-configurator.js')),
     ...['data/categories.json','data/presentation.json','data/native-bindings.json','data/external-products.json'].map(path => fetch(asset(path)).then(response => {if (!response.ok) throw Error('CATALOGUE_METADATA_UNAVAILABLE');return response.json();})),
     import(asset('funnel.js')).catch(() => null),   // measurement must never block the shop
-    import(new URL('../../js/store-navigation.js?v=ys-cheap-20261026',base).href)
+    import(new URL('../../js/store-navigation.js?v=ys-cross-20261026',base).href)
   ]);
   function safeHtml(html) {
     // Native rich text can preserve escaped quote delimiters and escaped block separators.

@@ -168,12 +168,19 @@ export function readyToCheck(state) {
 export const readyToAdd = state => readyToCheck(state) && state.seen === true;
 
 const esc = value => String(value ?? '').replace(/[&<>"']/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'}[c]));
-// One ring per photo, centred, in the photo's own 1400 x 746 units: 26 m outer radius = 98.91 units, the 8-unit stroke inside it (circle r = 94.91).
-const RING_SVG = `<svg class="ys-ring" viewBox="0 0 ${PHOTO.w} ${PHOTO.h}" aria-hidden="true"><circle cx="${PHOTO.w / 2}" cy="${PHOTO.h / 2}" r="${(RING * PHOTO.w / GROUND_W - RING_STROKE / 2).toFixed(2)}" fill="none" stroke="#FFE600" stroke-width="${RING_STROKE}"/></svg>`;
+// One marker per photo, centred, in the photo's own 1400 x 746 units: the survey cross of make_print.ring() (26 Oct 2026, Yusuf picked it
+// over the yellow ring). Arms from 0.35 to 0.75 of the 26 m radius (98.91 units), cream 2.4 units on a dark 4.4-unit hairline, open centre.
+const CROSS_SVG = (() => {
+  const r = RING * PHOTO.w / GROUND_W, g = r * 0.35, L = r * 0.75, x = PHOTO.w / 2, y = PHOTO.h / 2;
+  const arms = [[x - L, y, x - g, y], [x + g, y, x + L, y], [x, y - L, x, y - g], [x, y + g, x, y + L]].map(a => a.map(v => v.toFixed(2)));
+  const draw = (stroke, w) => arms.map(([x1, y1, x2, y2]) => `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="${stroke}" stroke-width="${w}"/>`).join('');
+  return `<svg class="ys-ring" viewBox="0 0 ${PHOTO.w} ${PHOTO.h}" aria-hidden="true">${draw('#141414', 4.4)}${draw('#FAF7EE', 2.4)}</svg>`;
+})();
+const RING_SVG = CROSS_SVG;
 // The preview is the print itself: a 30 x 40 cm sheet laid out on make_print.py's 1800 x 2400 design grid (CSS unit --u = 1/1800 of the sheet width; the words are SVG text on the same grid).
 // Title size follows the generator: 118 (96 above 16 letters), shrunk by 4 until it fits the 1400-unit width of the photos (never below 48).
 export const titleSize = title => (String(title || '').length <= 16 ? 118 : 96);
-const CAPTION_LIVE = 'Your poster, SIZE: 1928 above, today below, same ground and scale. Tap either photo to move the ring onto your building.';
+const CAPTION_LIVE = 'Your poster, SIZE: 1928 above, today below, same ground and scale. Tap either photo to move the cross onto your building.';
 const CAPTION_EXAMPLE = 'Example poster, SIZE. Search for your own address to see your street.';
 // Yusuf, 25 Oct 2026: only 4 of the first 174 previews got past the old "I can see the 1928 photo" checkbox, which kept the add button grey two
 // screens below the poster. Now an add button sits right under the poster and both add buttons are live; tapping one asks the same question
@@ -181,7 +188,7 @@ const CAPTION_EXAMPLE = 'Example poster, SIZE. Search for your own address to se
 const confirmHtml = where => `<div class="ys-confirm" data-ys-confirm="${where}" role="group" aria-label="Check the 1928 photo" hidden>
       <p><strong>One check before I print it:</strong> can you see the 1928 aerial photo in the top picture? If it is blank white, there is no 1928 photo for that spot (far eastern edge of Berlin).</p>
       <div class="ys-confirm-row"><button type="button" class="primary" data-ys-yes>Yes, add to cart</button><button type="button" class="ys-link" data-ys-no>It is blank</button></div>
-      <p class="ys-confirm-no" data-ys-noinfo hidden>The 1928 survey did not reach that spot, so I cannot print it. Try a place nearby, or tap the photo to move the ring.</p>
+      <p class="ys-confirm-no" data-ys-noinfo hidden>The 1928 survey did not reach that spot, so I cannot print it. Try a place nearby, or tap the photo to move the cross.</p>
     </div>`;
 
 // `host` holds two slots ([data-ys-slot="visual"], [data-ys-slot="form"]) and the add button ([data-ys-add]). Rebuilt from `state` whenever the storefront re-renders. `api.add(customText)` returns a promise; `api.busy()` says whether the cart is locked.
@@ -192,13 +199,13 @@ export function mountConfigurator(host, state, api) {
       <div class="ys-stage">
         <div class="ys-sheet" data-ys="sheet" ${state.lat ? '' : 'hidden'}>
           <div class="ys-photo ys-photo-1928" data-ys="photo-1928">
-            <img class="ys-1928" alt="Aerial photograph of your spot in 1928, with a yellow ring on your building" decoding="async">
+            <img class="ys-1928" alt="Aerial photograph of your spot in 1928, with a cross on your building" decoding="async">
             ${RING_SVG}
             <span class="ys-wm" aria-hidden="true"></span>
             <span class="ys-status" data-ys="status" role="status"></span>
           </div>
           <div class="ys-photo ys-photo-today" data-ys="photo-today">
-            <img class="ys-todayimg" alt="Aerial photograph of the same spot today, same ground and scale, with a yellow ring" decoding="async">
+            <img class="ys-todayimg" alt="Aerial photograph of the same spot today, same ground and scale, with a cross on the same spot" decoding="async">
             ${RING_SVG}
             <span class="ys-wm" aria-hidden="true"></span>
             <span class="ys-status" data-ys="status-today" role="status" hidden></span>
@@ -230,7 +237,7 @@ export function mountConfigurator(host, state, api) {
       <div class="ys-fields" data-ys="fields" ${state.lat ? '' : 'hidden'}>
         <div class="ys-row"><label>Title on the print<input data-ys="title" maxlength="${L.title}" autocapitalize="characters" value="${esc(state.title || '')}"></label><label>Area line<input data-ys="area" maxlength="${L.area}" value="${esc(state.area || '')}"></label></div>
         <label>Your line on the print (optional)<input data-ys="line" maxlength="${L.line}" placeholder="e.g. Lena &amp; Jonas · here since 2021" value="${esc(state.line || '')}"></label>
-        <p class="ys-hint">The house number is never printed. Tap either photo to move the ring onto your building.</p>
+        <p class="ys-hint">The house number is never printed. Tap either photo to move the cross onto your building.</p>
       </div>
       <div class="ys-format" data-ys="format" ${api.digital ? '' : 'hidden'}>
         <span class="ys-label" id="ys-format-l">Format</span>
