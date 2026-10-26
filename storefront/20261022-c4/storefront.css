@@ -82,6 +82,8 @@ h2>.sk-heading{width:55%}
 /* The print grades today's photo (make_print.py grade_today: colour pulled to 72% of its saturation, black and white mapped onto sepia paper tones); this chain reproduces it to about 0.7 of 255 (RMS) on nine places. */
 .ys-photo-today>img{filter:saturate(.86) contrast(.82) sepia(.22)}
 .ys-ring{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+/* The survey cross (26 Oct 2026): the print's 2.4-unit line is under 1 px on a phone-sized sheet, so on screen the strokes hold a minimum pixel width. */
+.ys-ring line{vector-effect:non-scaling-stroke}.ys-ring line[stroke="#141414"]{stroke-width:max(2.6px, calc(4.4 * var(--u, 1px)))}.ys-ring line[stroke="#FAF7EE"]{stroke-width:max(1.3px, calc(2.4 * var(--u, 1px)))}
 /* Preview watermark (24 Oct 2026, Yusuf: protect the preview against screenshots). On screen only: the print has none. */
 .ys-wm{position:absolute;inset:0;pointer-events:none;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='150'%3E%3Cg transform='rotate(-22 150 75)' font-family='Arial,Helvetica,sans-serif' font-size='15' font-weight='700' letter-spacing='2' text-anchor='middle'%3E%3Ctext x='150' y='80' fill='%23000' fill-opacity='.28' transform='translate(1 1)'%3EPREVIEW %C2%B7 walkofberlin.com%3C/text%3E%3Ctext x='150' y='80' fill='%23fff' fill-opacity='.55'%3EPREVIEW %C2%B7 walkofberlin.com%3C/text%3E%3C/g%3E%3C/svg%3E") 0 0/calc(var(--u)*430) auto repeat}
 .ys-status{position:absolute;inset:auto 8px 8px 8px;background:rgba(250,250,245,.94);color:var(--green);font-size:13px;line-height:1.35;padding:6px 10px;border-radius:8px;pointer-events:none}
