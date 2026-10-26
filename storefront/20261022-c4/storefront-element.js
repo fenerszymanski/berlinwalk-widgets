@@ -439,6 +439,7 @@
     withdrawButton() {return `<p class="withdraw-row"><a class="outline withdraw-link" data-withdraw href="${LEGAL.withdraw}" target="_blank" rel="noopener">Withdraw from contract (Vertrag widerrufen)</a></p>`;}
     guaranteeNotice() {return `<section class="eu-guarantee" aria-labelledby="eu-guarantee-title"><h3 id="eu-guarantee-title">EU legal guarantee notice</h3><a href="${esc(asset(LEGAL.guaranteeImage))}" target="_blank" rel="noopener"><img src="${esc(asset(LEGAL.guaranteeImage))}" alt="${esc(GUARANTEE_ALT)}" width="884" height="1200" loading="lazy"></a><p class="meta">Official notice under Regulation (EU) 2025/1960, Annex I. <a href="${LEGAL.guaranteeInfo}" target="_blank" rel="noopener">More about legal guarantees</a></p></section>`;}
     lineNotice(line) {
+      if(line.productId==='9b6fbecf-32e4-27dc-f3e6-9c887fe7f495')return `<div class="line-legal" data-line-legal="digital"><strong>Personalised digital file</strong><p>${esc(NOTICE_YS_DIGITAL)}</p></div>`;
       if(line.productId===YS_ID||(line.customText||[]).some(field=>!['Size','Paper'].includes(field.title)))return `<div class="line-legal" data-line-legal="personalised"><strong>Personalised physical product</strong>${NOTICE_PERSONALISED.map(t=>`<p>${esc(t)}</p>`).join('')}</div>`;
       if(line.shippable===false)return `<div class="line-legal" data-line-legal="digital"><strong>Printable digital product</strong><p>${esc(NOTICE_DIGITAL)}</p></div>`;
       return '';
