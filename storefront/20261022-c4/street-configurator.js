@@ -157,7 +157,7 @@ export const ysDigital = state => state.format === 'digital';
 export const ysProductId = state => (ysDigital(state) ? YS_DIGITAL_ID : YS_PRODUCT_ID);
 const DIGITAL_SPEC = 'Digital file · JPG + PDF · 45 x 60 cm at 300 ppi';
 const DIGITAL_DELIVERY = 'Made from your spot and sent by email within 24 hours: a JPG and a PDF, 45 x 60 cm at 300 ppi (3:4, prints at 30 x 40 cm too). Nothing is shipped, so it works anywhere.';
-const POSTER_DELIVERY = 'Made to order from your address and printed for you, usually in about 5 to 7 working days in Germany. Frame not included. Free delivery to Germany, the EU, the UK and the US.';
+const POSTER_DELIVERY = 'Made to order from your address and printed for you. Free delivery to Germany, the EU, the UK and the US: usually 3 to 5 working days in Germany and 4 to 9 elsewhere. Checkout shows the time for your country. Frame not included.';
 const captionFor = (state, live) => (ysDigital(state) ? (live ? CAPTION_LIVE.replace('Your poster, SIZE', 'Your digital file') : 'Example file. Search for your own address to see your street.') : (live ? CAPTION_LIVE : CAPTION_EXAMPLE).replace('SIZE', ysSize(state)));
 // Everything the print needs except the buyer's "yes, I see the 1928 photo": the add buttons are live from here on (25 Oct 2026).
 export function readyToCheck(state) {
