@@ -143,7 +143,9 @@ export const YS_PAPERS = Object.freeze([
   {name: 'Classic Semi-Gloss', note: '170 g paper with a soft sheen, a little lighter.', price: [34.90, 49.90]},
 ]);
 export const ysSize = state => (YS_SIZES.includes(state.size) ? state.size : YS_SIZES[0]);
-export const ysPaper = state => YS_PAPERS.find(p => p.name === state.paper) || YS_PAPERS[0];
+// The page opens on the cheapest poster, 30 x 40 Classic Matte (Yusuf, 26 Oct 2026: "default printed seçili ürün bence en ucuz olanı olmalı").
+const YS_DEFAULT_PAPER = 'Classic Matte';
+export const ysPaper = state => YS_PAPERS.find(p => p.name === state.paper) || YS_PAPERS.find(p => p.name === YS_DEFAULT_PAPER);
 export const ysPrice = state => ysPaper(state).price[YS_SIZES.indexOf(ysSize(state))];
 export const ysChoices = state => ({Size: ysSize(state), Paper: ysPaper(state).name});
 export const euro = n => `€${n.toFixed(2)}`;
