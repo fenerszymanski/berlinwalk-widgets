@@ -206,6 +206,7 @@ h2>.sk-heading{width:55%}
 .ys-maker img{width:56px;height:56px;border-radius:50%;object-fit:cover;flex:0 0 auto}
 .ys-maker p{margin:0;font-size:.9rem;line-height:1.45}
 .ys-maker a{color:var(--leaf);font-weight:600}
+.disclosures .ys-attr{margin:16px 0 0;font-size:12px}
 .ys-faq{margin:28px 0 0}
 .ys-faq details{border-top:1px solid var(--line,#d8d8d0);padding:10px 0}
 .ys-faq details:last-of-type{border-bottom:1px solid var(--line,#d8d8d0)}
