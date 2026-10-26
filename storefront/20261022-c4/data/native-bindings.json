@@ -558,5 +558,13 @@
       "02d24409-01f2-4b00-b24d-d762d74a4fb6"
     ],
     "forceNativeCategoryIds": true
+  },
+  {
+    "wixProductId": "52d20d32-021d-4024-875c-440d29784322",
+    "nativeProductType": "physical",
+    "nativeCategoryIds": [
+      "3a0f16e1-49e5-42e1-a0bd-a79d1949e091"
+    ],
+    "forceNativeCategoryIds": true
   }
 ]
