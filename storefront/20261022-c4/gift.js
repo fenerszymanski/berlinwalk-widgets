@@ -4,7 +4,7 @@
 
 // ONE SWITCH. true: the entry only shows when the page address has ?gift=1 (or #gift), until the Store Terms addition is published.
 // false: the entry is on for everybody (still hidden whenever the catalogue read does not carry the gift products).
-export const GIFT_REQUIRES_URL_FLAG = true;
+export const GIFT_REQUIRES_URL_FLAG = false;   // opened for everybody 27 Oct 2026 after the redeem test and Store Terms 7a (Yusuf: "sonra herkese aç")
 
 export const GIFT_IDS = Object.freeze({poster: '63dbf359-73aa-4053-049d-f07048f1bc3d', digital: 'f06ca073-474d-887d-9e7a-9d110c5ebb31'});
 export const GIFT_KINDS = Object.freeze(['poster', 'digital']);
