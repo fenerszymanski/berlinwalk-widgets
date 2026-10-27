@@ -44,11 +44,10 @@ export function giftHtml(offers, state = {}) {
   const prices = offers.map(offer => `${esc(offer.info.giftLabel || offer.kind)} ${esc(offer.priceLabel)}`).join(' · ');
   const choices = offers.map(offer => `<button type="button" role="radio" class="ys-size ys-gift-choice" data-action="gift-pick" data-gift-kind="${esc(offer.kind)}" aria-checked="${offer === picked}">${esc(offer.info.giftLabel)}<small>${esc(offer.priceLabel)} · ${esc(offer.info.giftCovers)}</small></button>`).join('');
   return `<div class="ys-gift" data-ys-gift>
-    <button type="button" class="ys-gift-toggle" data-action="gift-toggle" aria-expanded="${!!state.open}" aria-controls="ys-gift-panel">${GIFT_ICON}<span class="ys-gift-head"><strong>Give it as a gift</strong><small>${prices}</small></span>${CHEVRON}</button>
+    <button type="button" class="ys-gift-toggle" data-action="gift-toggle" aria-expanded="${!!state.open}" aria-controls="ys-gift-panel">${GIFT_ICON}<span class="ys-gift-head"><strong>No address? Give a voucher.</strong><small>${prices}</small></span>${CHEVRON}</button>
     <div class="ys-gift-panel" id="ys-gift-panel" data-ys-gift-panel ${state.open ? '' : 'hidden'}>
-      <p class="ys-gift-lead">Don't know their street yet? Give a voucher and let them choose it.</p>
       <div class="ys-sizes ys-gift-choices" role="radiogroup" aria-label="Choose a gift">${choices}</div>
-      <p class="ys-gift-how">You don't need their address. You get a code and a card to print or send, by email within the hour. They pick their street and use the code at checkout. Valid for three years.</p>
+      <p class="ys-gift-how">Code and printable card by email within the hour. Valid three years.</p>
       <button type="button" class="primary ys-gift-add" data-action="gift-add" data-gift-kind="${esc(picked.kind)}" ${state.redirecting ? 'disabled' : ''}>${state.redirecting ? 'Added. Opening your cart…' : 'Add gift to cart'}</button>
     </div>
   </div>`;

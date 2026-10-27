@@ -295,3 +295,20 @@ details.legal-foot>summary:after{top:50%;margin-top:-14px}
 .ys-gift-choice small{line-height:1.35}
 .ys-gift-add{width:100%}
 @media(min-width:520px){.ys-gift-choices{grid-template-columns:1fr 1fr}}
+/* Lean layout (27 Oct 2026, Yusuf: the product pages looked unbalanced and carried too much text). The story, questions and details now sit in the
+   buy column under the buy box, and from 900 px the picture column is sticky, so it stays in view while that column scrolls and no column is left empty.
+   The picture is sized so the whole sticky block (stage, caption, thumbnails) fits one screen: stage height is 1.2 x its width. */
+.product-layout>.product-info{grid-column:1/-1;margin-top:42px;max-width:790px}
+@media(min-width:900px){
+  .product-layout{grid-template-rows:auto auto 1fr}
+  .product-layout .gallery{grid-row:1/4;position:sticky;top:20px;align-self:start;z-index:1;width:min(100%,calc((100vh - 190px) / 1.2))}
+  .product-layout>.product-info{grid-column:2;grid-row:3;margin-top:26px;max-width:none}
+  .product-layout .story.has-reel{display:block}
+  .product-layout .story.has-reel .story-reel{margin:4px 0 20px}
+  .ys-layout{grid-template-rows:auto auto auto 1fr}
+  .ys-layout .gallery{grid-row:1/5;width:min(100%,calc((100vh - 175px) / 1.2))}
+  .ys-layout>.product-info{grid-row:4}
+}
+@media(max-width:740px){.product-layout>.product-info{order:4;width:100%;margin-top:26px}}
+.ys-gift-toggle[aria-expanded="true"] .ys-gift-head small{display:none}
+.ys-legalline .link{min-height:0;display:inline}

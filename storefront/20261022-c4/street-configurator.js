@@ -156,9 +156,9 @@ export const YS_DIGITAL_PRICE = 14.90;
 export const ysDigital = state => state.format === 'digital';
 export const ysProductId = state => (ysDigital(state) ? YS_DIGITAL_ID : YS_PRODUCT_ID);
 const DIGITAL_SPEC = 'Digital file · JPG + PDF · 45 x 60 cm at 300 ppi';
-const DIGITAL_DELIVERY = 'Made from your spot and sent by email within 24 hours: a JPG and a PDF, 45 x 60 cm at 300 ppi (3:4, prints at 30 x 40 cm too). Nothing is shipped, so it works anywhere.';
-const POSTER_DELIVERY = 'Made to order from your address and printed for you. Free delivery to Germany, the EU, the UK and the US: usually 3 to 5 working days in Germany and 4 to 9 elsewhere. Checkout shows the time for your country. Frame not included.';
-const captionFor = (state, live) => (ysDigital(state) ? (live ? CAPTION_LIVE.replace('Your poster, SIZE', 'Your digital file') : 'Example file. Search for your own address to see your street.') : (live ? CAPTION_LIVE : CAPTION_EXAMPLE).replace('SIZE', ysSize(state)));
+const DIGITAL_DELIVERY = 'Prints cleanly at 30 x 40 cm too. Nothing is shipped, so it works anywhere.';
+const POSTER_DELIVERY = 'Arrives in 3 to 5 working days in Germany, 4 to 9 elsewhere. Frame not included.';
+const captionFor = (state, live) => (ysDigital(state) ? (live ? CAPTION_LIVE.replace('Your poster, SIZE', 'Your digital file') : 'Example file. Search an address to see your street.') : (live ? CAPTION_LIVE : CAPTION_EXAMPLE).replace('SIZE', ysSize(state)));
 // Everything the print needs except the buyer's "yes, I see the 1928 photo": the add buttons are live from here on (25 Oct 2026).
 export function readyToCheck(state) {
   return Number.isFinite(state.lat) && Number.isFinite(state.lon) && inBerlin(state.lat, state.lon) && clean(state.address, 80).length > 0 &&
@@ -180,8 +180,8 @@ const RING_SVG = CROSS_SVG;
 // The preview is the print itself: a 30 x 40 cm sheet laid out on make_print.py's 1800 x 2400 design grid (CSS unit --u = 1/1800 of the sheet width; the words are SVG text on the same grid).
 // Title size follows the generator: 118 (96 above 16 letters), shrunk by 4 until it fits the 1400-unit width of the photos (never below 48).
 export const titleSize = title => (String(title || '').length <= 16 ? 118 : 96);
-const CAPTION_LIVE = 'Your poster, SIZE: 1928 above, today below, same ground and scale. Tap either photo to move the cross onto your building.';
-const CAPTION_EXAMPLE = 'Example poster, SIZE. Search for your own address to see your street.';
+const CAPTION_LIVE = 'Your poster, SIZE: 1928 above, today below, same ground and scale. Tap either photo to move the cross.';
+const CAPTION_EXAMPLE = 'Example poster, SIZE. Search an address to see your street.';
 // Trust strip next to the add buttons (Yusuf, 27 Oct 2026). True statements only: the poster ships free to DE, EU, UK and US; Gelato prints it in
 // Czechia or Poland, so "Printed in Europe" and never "Germany"; a misprinted or damaged poster is reprinted free (YS_FAQ says the same); checkout
 // takes cards only today, so no other payment brand is named or shown. The card marks themselves sit in the buy box (storefront-element.js).
@@ -261,7 +261,7 @@ export function mountConfigurator(host, state, api) {
       <div class="ys-fields" data-ys="fields" ${state.lat ? '' : 'hidden'}>
         <div class="ys-row"><label>Title on the print<input data-ys="title" maxlength="${L.title}" autocapitalize="characters" value="${esc(state.title || '')}"></label><label>Area line<input data-ys="area" maxlength="${L.area}" value="${esc(state.area || '')}"></label></div>
         <label>Your line on the print (optional)<input data-ys="line" maxlength="${L.line}" placeholder="e.g. Lena &amp; Jonas · here since 2021" value="${esc(state.line || '')}"></label>
-        <p class="ys-hint">The house number is never printed. Tap either photo to move the cross onto your building.</p>
+        <p class="ys-hint">The house number is never printed.</p>
       </div>
       <details class="ys-options" data-ys="options" ${state.optionsOpen ? 'open' : ''} ${api.variants || api.digital ? '' : 'hidden'}>
         <summary><span class="ys-options-t">Size, paper, format</span><span class="ys-options-v" data-ys="optsummary"></span></summary>

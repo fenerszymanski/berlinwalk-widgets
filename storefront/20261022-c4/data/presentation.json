@@ -491,7 +491,9 @@
     "image": "ys-sample.jpg",
     "alt": "Example personalised aerial print: a Berlin square in 1928 and today",
     "typeLine": "PERSONALISED PRINT · 30 × 40 OR 45 × 60 CM",
-    "wixProductId": "8aaf5412-7f21-42c7-acfb-85dd8417d68c"
+    "wixProductId": "8aaf5412-7f21-42c7-acfb-85dd8417d68c",
+    "storyHtml": "<p>Type your address and see your street from above in 1928, the way a survey plane photographed it, with the same spot today below it. Most Berlin Altbau blocks were already standing, so you can often find your own courtyard. If your house is newer, you see what stood there before it.</p><p>The print carries your street, district, map coordinates and an optional line of your own.</p>",
+    "storyHtmlDigital": "<p>The digital version of my print: your own Berlin spot in the 1928 aerial photograph, with the same spot today below it, at the same scale, and your title, area line and coordinates.</p>"
   },
   {
     "id": "ed-print-01-tempelhof",
@@ -814,7 +816,7 @@
     "typeLine": "POSTER GIFT · COVERS A 30 × 40 CM POSTER",
     "wixProductId": "63dbf359-73aa-4053-049d-f07048f1bc3d",
     "giftLabel": "Poster gift",
-    "giftCovers": "covers a 30 x 40 cm poster, delivery included",
+    "giftCovers": "one poster, delivery included",
     "giftNote": "Code and printable card by email within the hour"
   },
   {
@@ -826,7 +828,7 @@
     "typeLine": "DIGITAL GIFT · COVERS THE PRINTABLE FILE",
     "wixProductId": "f06ca073-474d-887d-9e7a-9d110c5ebb31",
     "giftLabel": "Digital gift",
-    "giftCovers": "covers the printable file",
+    "giftCovers": "the printable file",
     "giftNote": "Code and printable card by email within the hour"
   }
 ]
