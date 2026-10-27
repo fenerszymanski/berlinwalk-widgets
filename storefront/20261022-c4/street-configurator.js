@@ -120,6 +120,55 @@ export function adRef(search = (typeof location !== 'undefined' ? location.searc
   const src = tidy(q.get('utm_source')), content = tidy(q.get('utm_content'));
   return src ? (content ? `${src}/${content}` : src) : '';
 }
+// Spot restored from the "send this preview to my inbox" email (27 Oct 2026). The mail links to the product page with #p=<token>: an opaque
+// 32-character random token in the URL FRAGMENT, which is never sent in an HTTP request or a Referer header. The spot itself never appears in
+// a URL (this page runs the Meta pixel and analytics, which record page URLs). The token is read from location.hash, removed from the address
+// at once (path and query stay), then exchanged for the saved context by one GET to the content app. A ?p= in the query is accepted as a
+// fallback and removed the same way. An unknown or expired token just opens the page as usual.
+export const PREVIEW_TOKEN = /^[A-Za-z0-9_-]{32}$/;
+// Pure: {token, search, hash} where search/hash are the query and fragment WITHOUT the token. `changed` says whether the address needs rewriting.
+export function splitPreviewToken(hash = (typeof location !== 'undefined' ? location.hash : ''), search = (typeof location !== 'undefined' ? location.search : '')) {
+  const h = new URLSearchParams(String(hash || '').replace(/^#/, '')), q = new URLSearchParams(search || '');
+  const fromHash = h.get('p') || '', fromQuery = q.get('p') || '';
+  const token = PREVIEW_TOKEN.test(fromHash) ? fromHash : (PREVIEW_TOKEN.test(fromQuery) ? fromQuery : '');
+  const changed = h.has('p') || q.has('p');
+  h.delete('p'); q.delete('p');
+  const hs = h.toString(), qs = q.toString();
+  return {token, changed, search: qs ? `?${qs}` : '', hash: hs ? `#${hs}` : ''};
+}
+// Reads the token and rewrites the address (replaceState: no new history entry, no reload) before anything else happens.
+export function takePreviewToken() {
+  const found = splitPreviewToken();
+  if (found.changed) { try { history.replaceState(history.state, '', location.pathname + found.search + found.hash); } catch (e) { /* address stays; the token is still used once */ } }
+  return found.token;
+}
+export const CONTEXT_ENDPOINT = 'https://app.berlinwalk.com/api/download-lead?action=previewContext&p=';
+// The server answers {lat, lon, title, area, format, size}; it is checked again here before it touches the page.
+export function spotFromPreview(preview) {
+  const lat = Math.round(Number(preview?.lat) * 1e5) / 1e5, lon = Math.round(Number(preview?.lon) * 1e5) / 1e5;
+  if (!inBerlin(lat, lon)) return null;
+  const title = clean(preview?.title, YS_LIMITS.title).toUpperCase();
+  if (!title) return null;
+  const area = clean(preview?.area, YS_LIMITS.area);
+  return {lat, lon, title, area, address: clean([title, area].filter(Boolean).join(', '), YS_LIMITS.address),
+    format: preview?.format === 'digital' ? 'digital' : 'poster', size: ({'30x40': YS_SIZES[0], '45x60': YS_SIZES[1]})[preview?.size] || ''};
+}
+// What the preview-mail endpoint takes as `preview` (the server rounds and re-validates it; a house number is stripped there too).
+export const mailPreview = state => ({lat: Number(state.lat), lon: Number(state.lon), title: clean(state.title, YS_LIMITS.title).toUpperCase(), area: clean(state.area, YS_LIMITS.area),
+  format: ysDigital(state) ? 'digital' : 'poster', size: ysDigital(state) ? '' : ysSize(state)});
+export const MAIL_ENDPOINT = 'https://app.berlinwalk.com/api/download-lead?action=previewSubmit';
+export const MAIL_ASSET = {assetId: 'street-1928-preview', consentVersion: 'street-1928-preview-letter-v1-2026-10-27', consentMethod: 'optional_unticked_checkbox_with_doi'};
+// Shown next to the unticked box. Must stay word for word the registry's consentText (lead-asset-registry.js), which is what gets stored.
+export const MAIL_CONSENT = 'Also send me a few emails about my street print, and Walk of Berlin Weekly, the Monday letter about Berlin. I can unsubscribe from any email with one click. Read the';
+export const mailMessage = (status, marketing) => {
+  if (status === 200) return marketing === 'pending' ? 'Sent. Two emails are on their way: your preview, and one asking you to confirm the extra emails.'
+    : marketing === 'already_confirmed' ? 'Sent. You already confirmed my emails, so nothing more to do. Check your inbox in a minute.'
+    : marketing === 'failed' ? 'Your preview is on its way. I could not start the extra emails just now, so tick the box and send again later if you still want them.'
+    : 'Sent. Check your inbox in a minute (and the spam folder).';
+  if (status === 400) return 'That did not work. Check the email address and that a spot is picked, then try again.';
+  if (status === 429) return 'Too many tries from here. Please wait a few minutes and try again.';
+  return 'I could not send it just now. Please try again in a minute, or write to info@walkofberlin.com.';
+};
 export function buildCustomText(state, search) {
   const title = clean(state.title, YS_LIMITS.title).toUpperCase(), area = clean(state.area, YS_LIMITS.area), line = clean(state.line, YS_LIMITS.line);
   const [lat, lon] = [Number(state.lat), Number(state.lon)];
@@ -248,6 +297,18 @@ export function mountConfigurator(host, state, api) {
         ${confirmHtml('quick')}
         ${trustHtml(true, 'ys-trust-compact')}
       </div>
+      <form class="ys-mail" data-ys="mail" novalidate ${state.lat ? '' : 'hidden'}>
+        <p class="ys-mail-t"><strong>Not ready yet?</strong> Send this preview to your inbox and come back to it later.</p>
+        <div class="ys-mail-row">
+          <label class="ys-mail-l" for="ys-mail-email">Your email</label>
+          <input id="ys-mail-email" data-ys="mailemail" type="email" inputmode="email" autocomplete="email" autocapitalize="none" maxlength="120" placeholder="you@example.com" required>
+          <button type="submit" class="outline" data-ys="mailgo">Send it to me</button>
+        </div>
+        <input class="ys-hp" data-ys="mailhp" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <label class="ys-mail-check"><input type="checkbox" data-ys="mailconsent"><span>${esc(MAIL_CONSENT)} <a href="https://walkofberlin.com/privacy-policy" target="_blank" rel="noopener">Privacy Policy</a>.</span></label>
+        <p class="ys-mail-fine">Leave the box unticked and I send this one email and nothing else.</p>
+        <p class="ys-mail-status" data-ys="mailstatus" role="status" aria-live="polite"></p>
+      </form>
     </div>`;
   // Address search first (own slot, top of the page on a phone and top of the right column on desktop). The suggestions list floats over the
   // content below the box, so it never pushes the poster down while it fills in.
@@ -366,6 +427,9 @@ export function mountConfigurator(host, state, api) {
   function showPoint(fresh) {
     if (!state.lat) return;
     $('sheet').hidden = false; $('example').hidden = true; $('fields').hidden = false;
+    $('mail').hidden = false;
+    if (!api.mailboxSeen) { api.mailboxSeen = true; api.track?.('mailbox'); }   // funnel: the preview exists and the mail box is on screen
+    if (fresh) paintMail('');
     $('caption').textContent = captionFor(state, true);
     paintWords(); ensureFonts();
     setStatus('Loading the 1928 photo…'); setStatusToday('');
@@ -462,6 +526,51 @@ export function mountConfigurator(host, state, api) {
     if (panel.getBoundingClientRect().bottom > innerHeight - 16) panel.scrollIntoView({behavior: 'smooth', block: 'nearest'});
     panel.querySelector('[data-ys-yes]').focus({preventScroll: true});
   });
+  // ---- Send this preview to my inbox: success and error states under the poster ----
+  function paintMail(kind, text = '') {
+    const status = $('mailstatus'); status.textContent = text; status.dataset.kind = kind || '';
+    $('mailgo').disabled = kind === 'busy'; $('mailgo').textContent = kind === 'busy' ? 'Sending…' : (kind === 'ok' ? 'Send again' : 'Send it to me');
+  }
+  const mailForm = $('mail');
+  mailForm.addEventListener('focusin', () => { if (!state.mailStartedAt || Date.now() - Date.parse(state.mailStartedAt) > 12 * 3600e3) state.mailStartedAt = new Date().toISOString(); });
+  mailForm.addEventListener('submit', async event => {
+    event.preventDefault();
+    if (!readyToCheck(state) || $('mailgo').disabled) return;
+    const email = $('mailemail').value.trim();
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) { paintMail('error', 'Please enter a valid email address.'); $('mailemail').focus(); return; }
+    paintMail('busy', 'Sending…');
+    const consent = $('mailconsent').checked, q = new URLSearchParams(location.search), preview = mailPreview(state);
+    const startedAt = state.mailStartedAt || new Date(Date.now() - 5000).toISOString();
+    try {
+      const response = await fetch(MAIL_ENDPOINT, {method: 'POST', mode: 'cors', credentials: 'omit', headers: {'content-type': 'application/json'}, body: JSON.stringify({
+        ...(consent ? MAIL_ASSET : {assetId: MAIL_ASSET.assetId}), email, consent, preview,
+        pagePath: location.pathname, utm: {source: q.get('utm_source') || '', medium: q.get('utm_medium') || '', campaign: q.get('utm_campaign') || '', content: q.get('utm_content') || '', term: q.get('utm_term') || ''},
+        website: host.querySelector('[data-ys="mailhp"]').value, startedAt, submittedAt: new Date().toISOString(),
+        idempotencyKey: `ys-${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 10)}`})});
+      const body = await response.json().catch(() => ({}));
+      if (response.ok) { paintMail('ok', mailMessage(200, body.marketing)); api.track?.('mailsend'); if (consent && body.marketing === 'pending') api.track?.('mailconsent'); }
+      else paintMail('error', mailMessage(response.status));
+    } catch (e) { paintMail('error', mailMessage(0)); }
+  });
+  // ---- Spot from the emailed link: ?p=<token> -> saved context -> the usual preview ----
+  // Once per page load. A banner hand-over must not replace the spot the visitor came back for, so it is switched off while a token is present.
+  async function restoreFromToken(token) {
+    const quiet = () => { api.track?.('restorefail'); if (host.isConnected && !state.lat) setNote('I could not reopen your saved preview. The link may be older than 30 days, so search your address to start again.'); };
+    try {
+      const response = await fetch(CONTEXT_ENDPOINT + token, {method: 'GET', mode: 'cors', credentials: 'omit', cache: 'no-store', referrerPolicy: 'no-referrer'});
+      if (!response.ok) return quiet();
+      const spot = spotFromPreview((await response.json()).preview);
+      if (!spot) return quiet();
+      if (state.lat) return;                                   // the visitor already picked a spot while this was loading
+      Object.assign(state, {lat: spot.lat, lon: spot.lon, title: spot.title, area: spot.area, address: spot.address, query: spot.title, format: spot.format, size: spot.size || state.size});
+      api.track?.('restored');
+      if (!host.isConnected) return;                           // the storefront re-rendered meanwhile: the new mount builds from state
+      $('title').value = state.title; $('area').value = state.area; input.value = state.query;
+      paintVariant(); showPoint(true); refreshButton();
+    } catch (e) { quiet(); }
+  }
+  const emailedToken = !state.lat && !api.restoreDone ? takePreviewToken() : '';
+  if (emailedToken) { api.restoreDone = true; api.handoffDone = true; restoreFromToken(emailedToken); }
   if (state.lat) showPoint(false);
   refreshButton();
   // After a handed-over address the poster scrolls into view once; the storefront may re-render (and remount) meanwhile, so retry on the live node.

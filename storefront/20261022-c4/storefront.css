@@ -131,6 +131,21 @@ h2>.sk-heading{width:55%}
 .ys-variant select{width:100%;padding:10px 12px;border:1px solid var(--line,#d8d8d0);border-radius:10px;font:inherit;background:#fff;color:var(--ink)}
 .ys-why{min-height:1.45em;margin:8px 0}
 .ys-buy .buy-row{margin-top:4px}
+.ys-mail{display:grid;gap:10px;margin-top:14px;padding:14px 16px;border:1px solid var(--line);border-radius:12px;background:#fff;font-size:14px;line-height:1.45;color:var(--ink);text-align:left}
+.ys-mail[hidden]{display:none}
+.ys-mail p{margin:0}
+.ys-mail-row{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px}
+.ys-mail-l{grid-column:1/-1;font-size:13px;font-weight:600}
+.ys-mail input[type=email]{min-height:48px;min-width:0;width:100%;padding:8px 12px;font:inherit;font-size:16px;color:var(--ink);background:var(--cream);border:1px solid #b8bdae;border-radius:4px}
+.ys-mail .outline{min-height:48px;font-size:13px}
+.ys-mail-check{display:grid;grid-template-columns:auto minmax(0,1fr);gap:10px;align-items:start;font-size:13px;color:var(--muted);cursor:pointer}
+.ys-mail-check input{width:20px;height:20px;margin:1px 0 0;accent-color:var(--leaf)}
+.ys-mail-fine{font-size:13px;color:var(--muted)}
+.ys-mail-status{min-height:20px;font-size:14px;font-weight:600}
+.ys-mail-status[data-kind=ok]{color:var(--leaf)}
+.ys-mail-status[data-kind=error]{color:#632d1b}
+.ys-hp{position:absolute;left:-9999px;width:1px;height:1px;opacity:0;pointer-events:none}
+@media(max-width:740px){.ys-mail-row{grid-template-columns:1fr}.ys-mail .outline{width:100%}}
 .ys-quick{display:grid;gap:8px}
 .ys-quick[hidden]{display:none}
 .ys-quick>.primary{width:100%}
