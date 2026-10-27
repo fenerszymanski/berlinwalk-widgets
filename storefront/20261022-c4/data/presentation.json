@@ -804,5 +804,29 @@
     "roomAlt": "3D styling visualization of the 30 x 40 cm Berolina Modernist print. Frame, furniture and decor are not included.",
     "alternativeProductId": "52d20d32-021d-4024-875c-440d29784322",
     "visualCreditsHtml": "<p>AI-generated artistic interpretation created for Walk of Berlin, enlarged using Adobe Firefly.</p><p>Statue reference: Berolina at Alexanderplatz, circa 1900. Photographer unknown; Wikimedia Commons marks the photograph as public domain. Statue by Emil Hundrieser. The photograph was used as a reference for the pose and identifying details; this print is an artistic interpretation.</p><p><a href=\"https://commons.wikimedia.org/wiki/File:Berlin_Alexanderplatz_Berolina.jpg\" target=\"_blank\">Original reference photograph</a> · <a href=\"https://creativecommons.org/publicdomain/mark/1.0/\" target=\"_blank\">Public Domain Mark</a></p><p>Room images and video are 3D styling visualizations made in Blender using <a href=\"https://polyhaven.com\" target=\"_blank\">Poly Haven</a> models and textures, <a href=\"https://creativecommons.org/publicdomain/zero/1.0/\" target=\"_blank\">CC0</a>. They show the 30 x 40 cm version; frames, furniture and decor are not included.</p>"
+  },
+  {
+    "id": "gift-ys-poster",
+    "name": "Gift voucher: Your Berlin Street in 1928",
+    "place": "Poster gift",
+    "image": "gift-poster-thumb.jpg",
+    "alt": "Gift card: a street of your choice, in 1928",
+    "typeLine": "POSTER GIFT · COVERS A 30 × 40 CM POSTER",
+    "wixProductId": "63dbf359-73aa-4053-049d-f07048f1bc3d",
+    "giftLabel": "Poster gift",
+    "giftCovers": "covers a 30 x 40 cm poster, delivery included",
+    "giftNote": "Code and printable card by email within the hour"
+  },
+  {
+    "id": "gift-ys-digital",
+    "name": "Gift voucher: Your Berlin Street in 1928",
+    "place": "Digital gift",
+    "image": "gift-digital-thumb.jpg",
+    "alt": "Gift card: a street of your choice, in 1928",
+    "typeLine": "DIGITAL GIFT · COVERS THE PRINTABLE FILE",
+    "wixProductId": "f06ca073-474d-887d-9e7a-9d110c5ebb31",
+    "giftLabel": "Digital gift",
+    "giftCovers": "covers the printable file",
+    "giftNote": "Code and printable card by email within the hour"
   }
 ]

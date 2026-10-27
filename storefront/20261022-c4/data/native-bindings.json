@@ -574,5 +574,21 @@
       "02d24409-01f2-4b00-b24d-d762d74a4fb6"
     ],
     "forceNativeCategoryIds": true
+  },
+  {
+    "wixProductId": "63dbf359-73aa-4053-049d-f07048f1bc3d",
+    "nativeProductType": "digital",
+    "nativeCategoryIds": [
+      "bw-gift-voucher"
+    ],
+    "forceNativeCategoryIds": true
+  },
+  {
+    "wixProductId": "f06ca073-474d-887d-9e7a-9d110c5ebb31",
+    "nativeProductType": "digital",
+    "nativeCategoryIds": [
+      "bw-gift-voucher"
+    ],
+    "forceNativeCategoryIds": true
   }
 ]

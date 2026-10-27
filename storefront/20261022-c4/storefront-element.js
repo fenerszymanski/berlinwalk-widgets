@@ -5,7 +5,7 @@
   const base = new URL('.', script.src);
   const CHANNEL = 'wob:shop-cart:v1';
   const esc = value => String(value ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-  const asset = value => {const target=new URL(value,base);if(/\.(?:js|css|json)$/.test(target.pathname))target.searchParams.set('v','ys-intent-20261027');return target.href;};
+  const asset = value => {const target=new URL(value,base);if(/\.(?:js|css|json)$/.test(target.pathname))target.searchParams.set('v','ys-gift-20261027');return target.href;};
   // Chrome and Safari ignore @font-face inside shadow DOM, so the three faces are registered once on the document with absolute URLs from the element's own base.
   try {if(!document.getElementById('bw-storefront-fonts')){const style=document.createElement('style');style.id='bw-storefront-fonts';style.textContent=[['Fraunces','Fraunces-Variable.ttf','100 900'],['Space Grotesk','SpaceGrotesk-Variable.ttf','300 700'],['IBM Plex Mono','IBMPlexMono-Regular.ttf','400 600'],['DM Serif Display','DMSerifDisplay-Regular.ttf','400']].map(([family,file,weight])=>`@font-face{font-family:'${family}';src:url("${asset('fonts/'+file)}") format("truetype");font-weight:${weight};font-display:swap}`).join('\n')+`
 /* Metric-matched stand-ins (27 Oct 2026): while a font file is still downloading, Safari shows the fallback; these two are scaled to the real fonts' widths (measured on the 600-weight headline: Fraunces is about 10% narrower than Georgia Bold, Space Grotesk about 8% wider than Arial) so the headline and the body text hardly change size when the real font arrives. */
@@ -116,7 +116,8 @@
     import(asset('catalog-layer.js')), import(asset('editorial-helpers.js')), import(asset('street-configurator.js')),
     ...['data/categories.json','data/presentation.json','data/native-bindings.json','data/external-products.json'].map(path => fetch(asset(path)).then(response => {if (!response.ok) throw Error('CATALOGUE_METADATA_UNAVAILABLE');return response.json();})),
     import(asset('funnel.js')).catch(() => null),   // measurement must never block the shop
-    import(new URL('../../js/store-navigation.js?v=ys-intent-20261027',base).href)
+    import(new URL('../../js/store-navigation.js?v=ys-gift-20261027',base).href),
+    import(asset('gift.js')).catch(() => null)   // gift vouchers must never block the shop
   ]);
   function safeHtml(html) {
     // Native rich text can preserve escaped quote delimiters and escaped block separators.
@@ -156,6 +157,7 @@
   // The one sentence beside the buy button (27 Oct 2026). The full notices stay in the "Withdrawal notice, terms and legal information" section at the foot of the page; the link opens it.
   const YS_LEGALLINE = {poster:'Made for you from your address, so there are no change-of-mind returns; a faulty print is replaced free.',digital:'Digital file: you keep the 14-day withdrawal right.'};
   const NOTICE_YS_DIGITAL = 'Digital file made from your spot: a JPG and a PDF, sent by email within 24 hours of payment. Nothing is shipped. You can keep the files for your permitted personal use. You retain the 14-day consumer withdrawal right.';
+  const NOTICE_GIFT = 'No physical product is shipped. Your code and a printable card arrive by email, normally within the hour and no later than 24 hours after payment. You retain the 14-day consumer withdrawal right while the code is unused.';
   const NOTICE_DIGITAL = 'Digital download: no physical product will be shipped. Your download link is supplied after payment and is valid for 30 days. You can keep the downloaded files for your permitted personal use. You retain the 14-day consumer withdrawal right even if you download or use the files immediately.';
   const GUARANTEE_ALT = 'EU legal guarantee notice. Minimum two-year legal guarantee protection for goods sold in the European Union. Consumers can claim their rights under the legal guarantee of conformity, for example if goods do not match the description or do not function as intended. Sellers are liable for any lack of conformity which existed when the goods were delivered and which becomes apparent within the legal guarantee period, and must offer free repair or free replacement and, in some cases, a price reduction or full reimbursement. Some countries have a longer legal guarantee period. For more information, see europa.eu/youreurope/guarantees. What to do if you receive non-conforming goods: contact the seller as soon as possible to report the issue and provide proof of purchase.';
   const YS_ID = '8aaf5412-7f21-42c7-acfb-85dd8417d68c';
@@ -196,8 +198,8 @@
       if(name==='shop-bridge-ready')this.start();
     }
     async load() {
-      try {const [layer,editorial,ysMod,definitions,presentation,bindings,external,funnel,navigation]=await resources;
-        Object.assign(this,{layer,editorial,ysMod,definitions,presentation,bindings,external,funnel,navigation});
+      try {const [layer,editorial,ysMod,definitions,presentation,bindings,external,funnel,navigation,gift]=await resources;
+        Object.assign(this,{layer,editorial,ysMod,definitions,presentation,bindings,external,funnel,navigation,gift});
         if(this.catalogue)this.buildModel();if(!this.model)this.render();await this.start();
       }catch(error){if(!this.layer&&!this.isConfiguredDigitalRoute())releaseNative();this.fail(error.message);}
     }
@@ -260,7 +262,7 @@
     buildModel() {
       if(!this.layer||!Array.isArray(this.catalogue?.products))return;
       try {
-        const rows=this.catalogue.products.filter(row=>!PRODUCT_VIEW_ALIASES[row.productId]).map(row=>this.nativeProductRow(row));
+        const rows=this.catalogue.products.filter(row=>!PRODUCT_VIEW_ALIASES[row.productId]&&!this.gift?.isGiftId(row.productId)).map(row=>this.nativeProductRow(row));
         const products=[...this.layer.adaptWixProducts(rows,this.presentation),...this.layer.adaptExternalProducts(this.external)];
         products.sort((a,b)=>this.presentation.findIndex(item=>item.id===a.id)-this.presentation.findIndex(item=>item.id===b.id));
         this.model=this.layer.createCatalogModel(products,this.definitions);
@@ -314,6 +316,27 @@
       const native=this.catalogue?.products?.find(row=>row.productId===this.ysMod?.YS_DIGITAL_ID);
       const price=native?.discountedPrice??native?.price;
       return native&&native.inStock===true&&Number.isFinite(price)&&price>=0?{native,price}:null;
+    }
+    // ---- Gift vouchers for the 1928 print (gift.js; 27 Oct 2026). Two ordinary Wix digital products, added through the same bridge "add" as any product. ----
+    // Offers = the gifts the catalogue read really carries (a hidden or sold-out product is absent, so no entry and no button). The cart always uses them, the entry also needs the URL gate.
+    giftOffersAll() {return this.gift&&this.presentation&&this.catalogue?this.gift.giftOffers(this.catalogue,this.presentation,money):[];}
+    giftEntry() {
+      if(!this.gift||this.context.mode!=='product'||!this.gift.giftGateOpen())return '';
+      return this.gift.giftHtml(this.giftOffersAll(),{open:this.giftOpen,kind:this.giftKind,redirecting:this.cartRedirect==='gift'});
+    }
+    // Toggle and choice only touch the DOM (and remember the state for the next render), so focus and scroll stay where they are.
+    giftClick(action,button) {
+      const root=this.shadowRoot.querySelector('[data-ys-gift]');if(!root)return;
+      if(action==='gift-toggle'){
+        this.giftOpen=!this.giftOpen;
+        root.querySelector('[data-action="gift-toggle"]').setAttribute('aria-expanded',String(!!this.giftOpen));
+        const panel=root.querySelector('[data-ys-gift-panel]');panel.hidden=!this.giftOpen;
+        if(this.giftOpen)try{panel.scrollIntoView({block:'nearest',behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'});}catch{}
+        return;
+      }
+      this.giftKind=button.dataset.giftKind;
+      root.querySelectorAll('[role="radio"][data-gift-kind]').forEach(radio=>radio.setAttribute('aria-checked',String(radio.dataset.giftKind===this.giftKind)));
+      const add=root.querySelector('[data-action="gift-add"]');if(add)add.dataset.giftKind=this.giftKind;
     }
     signalReady() {
       if(this.readySent||!this.model||!['shop','product','cart'].includes(this.context.mode))return;
@@ -425,16 +448,16 @@
       const digital=this.ys?this.ysMod.ysDigital(this.ys):this.productAlias()?.format==='digital',digitalNative=this.ysDigitalNative();
       const selectedPrice=digital&&digitalNative?(digitalNative.native.formattedDiscountedPrice||digitalNative.native.formattedPrice||money(digitalNative.native.currency,digitalNative.price)):product.priceLabel;
       const digitalStory=digitalNative?.native.description||'<p>Made from your spot and sent by email within 24 hours. Nothing is shipped.</p>';
-      return `<div class="wrap ys-wrap"><nav class="breadcrumb" aria-label="Breadcrumb"><a href="https://walkofberlin.com/category/all-products">Store</a> / ${esc(product.name)}</nav><section class="product-layout ys-layout" data-ys-host><div class="product-title"><h1>${esc(product.name)}</h1><span class="place">${esc(product.place)}</span><span class="price">${esc(selectedPrice)}</span></div><div class="ys-search-slot" data-ys-slot="search"></div><div class="gallery ys-gallery" data-ys-slot="visual"></div><div class="buy-box ys-buy"><p class="spec">${esc(product.typeLine)}</p><div data-ys-slot="form"></div><p class="ys-why" data-ys-why role="status"></p><div class="buy-row no-qty"><button class="primary" data-action="ys-add" data-ys-add disabled>Add to cart</button></div>${this.ysMod.trustHtml?.()||''}<div class="ys-pay"><span>Secure checkout, pay by card</span>${cardChips()}</div><p class="delivery">Made to order from your address and printed for you. Free delivery to Germany, the EU, the UK and the US: usually 3 to 5 working days in Germany and 4 to 9 elsewhere. Checkout shows the time for your country. Frame not included.</p><p class="ys-legalline" data-ys-legal="poster">${YS_LEGALLINE.poster} <button type="button" class="link" data-action="show-legal">Withdrawal notice and terms</button></p><p class="ys-legalline" data-ys-legal="digital" hidden>${YS_LEGALLINE.digital} <button type="button" class="link" data-action="show-legal">Withdrawal notice and terms</button></p><div class="ys-maker"><img src="${esc(asset('assets/yusuf-maker.jpg'))}" alt="Yusuf, the guide behind Walk of Berlin, at the Humboldt Forum" width="56" height="56" loading="lazy"><p>Made by me, Yusuf. I guide Berlin Then and Now walks and make these prints from Berlin's own aerial photographs. <a href="https://walkofberlin.com/reviews" target="_blank" rel="noopener">Read what my guests say</a></p></div></div></section><div class="product-info"><section class="story" data-ys-legal="poster" ${digital?'hidden':''}><h2>The story behind this print</h2><div>${safeHtml(story)}</div></section><section class="story" data-ys-legal="digital" ${digital?'':'hidden'}><h2>About this digital file</h2><div>${safeHtml(digitalStory)}</div></section><section class="ys-faq"><h2>Questions</h2>${YS_FAQ.map(([q,a])=>`<details><summary>${esc(q)}</summary><div class="details-body"><p>${esc(a)}</p></div></details>`).join('')}<p class="ys-contact">Something else? Write to <a href="mailto:info@walkofberlin.com">info@walkofberlin.com</a>. I reply within a day.</p></section><section class="disclosures"><details class="delivery-returns"><summary>Delivery &amp; returns</summary><div class="details-body"><p>Printed poster: made to order from your address and printed for you. Free delivery to Germany (usually 3 to 5 working days), most of the EU, the United Kingdom and the United States (4 to 7), and Bulgaria, Estonia, Finland, Greece, Ireland, Latvia, Lithuania, Portugal and Romania (6 to 9).</p><p>Digital file: made from your spot and sent by email within 24 hours, nothing is shipped.</p><p>The Store Terms and the Withdrawal notices are linked on this page.</p>${this.guaranteeNotice()}</div></details><p class="ys-attr">Address search by <a href="https://photon.komoot.io" target="_blank" rel="noopener noreferrer">Photon</a> and <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer">© OpenStreetMap contributors</a>. Aerial photographs: Geoportal Berlin, dl-de/zero-2.0.</p></section></div><details class="legal-foot" data-ys-legalfoot><summary>Withdrawal notice, terms and legal information</summary><div class="legal-foot-body"><div class="line-legal" data-line-legal="personalised" data-ys-legal="poster"><strong>Personalised physical product</strong>${NOTICE_PERSONALISED.map(t=>`<p>${esc(t)}</p>`).join('')}</div><div class="line-legal" data-line-legal="digital" data-ys-legal="digital" hidden><strong>Personalised digital file</strong><p>${esc(NOTICE_YS_DIGITAL)}</p></div><p class="guarantee-line">Damaged or misprinted? You’re covered by EU consumer law. <button type="button" class="link" data-action="show-guarantee">See the official notice</button></p>${this.legalLinks()}${this.withdrawButton()}</div></details></div>`;
+      return `<div class="wrap ys-wrap"><nav class="breadcrumb" aria-label="Breadcrumb"><a href="https://walkofberlin.com/category/all-products">Store</a> / ${esc(product.name)}</nav><section class="product-layout ys-layout" data-ys-host><div class="product-title"><h1>${esc(product.name)}</h1><span class="place">${esc(product.place)}</span><span class="price">${esc(selectedPrice)}</span></div><div class="ys-search-slot" data-ys-slot="search"></div><div class="gallery ys-gallery" data-ys-slot="visual"></div><div class="buy-box ys-buy"><p class="spec">${esc(product.typeLine)}</p><div data-ys-slot="form"></div><p class="ys-why" data-ys-why role="status"></p><div class="buy-row no-qty"><button class="primary" data-action="ys-add" data-ys-add disabled>Add to cart</button></div>${this.ysMod.trustHtml?.()||''}${this.giftEntry()}<div class="ys-pay"><span>Secure checkout, pay by card</span>${cardChips()}</div><p class="delivery">Made to order from your address and printed for you. Free delivery to Germany, the EU, the UK and the US: usually 3 to 5 working days in Germany and 4 to 9 elsewhere. Checkout shows the time for your country. Frame not included.</p><p class="ys-legalline" data-ys-legal="poster">${YS_LEGALLINE.poster} <button type="button" class="link" data-action="show-legal">Withdrawal notice and terms</button></p><p class="ys-legalline" data-ys-legal="digital" hidden>${YS_LEGALLINE.digital} <button type="button" class="link" data-action="show-legal">Withdrawal notice and terms</button></p><div class="ys-maker"><img src="${esc(asset('assets/yusuf-maker.jpg'))}" alt="Yusuf, the guide behind Walk of Berlin, at the Humboldt Forum" width="56" height="56" loading="lazy"><p>Made by me, Yusuf. I guide Berlin Then and Now walks and make these prints from Berlin's own aerial photographs. <a href="https://walkofberlin.com/reviews" target="_blank" rel="noopener">Read what my guests say</a></p></div></div></section><div class="product-info"><section class="story" data-ys-legal="poster" ${digital?'hidden':''}><h2>The story behind this print</h2><div>${safeHtml(story)}</div></section><section class="story" data-ys-legal="digital" ${digital?'':'hidden'}><h2>About this digital file</h2><div>${safeHtml(digitalStory)}</div></section><section class="ys-faq"><h2>Questions</h2>${YS_FAQ.map(([q,a])=>`<details><summary>${esc(q)}</summary><div class="details-body"><p>${esc(a)}</p></div></details>`).join('')}<p class="ys-contact">Something else? Write to <a href="mailto:info@walkofberlin.com">info@walkofberlin.com</a>. I reply within a day.</p></section><section class="disclosures"><details class="delivery-returns"><summary>Delivery &amp; returns</summary><div class="details-body"><p>Printed poster: made to order from your address and printed for you. Free delivery to Germany (usually 3 to 5 working days), most of the EU, the United Kingdom and the United States (4 to 7), and Bulgaria, Estonia, Finland, Greece, Ireland, Latvia, Lithuania, Portugal and Romania (6 to 9).</p><p>Digital file: made from your spot and sent by email within 24 hours, nothing is shipped.</p><p>The Store Terms and the Withdrawal notices are linked on this page.</p>${this.guaranteeNotice()}</div></details><p class="ys-attr">Address search by <a href="https://photon.komoot.io" target="_blank" rel="noopener noreferrer">Photon</a> and <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer">© OpenStreetMap contributors</a>. Aerial photographs: Geoportal Berlin, dl-de/zero-2.0.</p></section></div><details class="legal-foot" data-ys-legalfoot><summary>Withdrawal notice, terms and legal information</summary><div class="legal-foot-body"><div class="line-legal" data-line-legal="personalised" data-ys-legal="poster"><strong>Personalised physical product</strong>${NOTICE_PERSONALISED.map(t=>`<p>${esc(t)}</p>`).join('')}</div><div class="line-legal" data-line-legal="digital" data-ys-legal="digital" hidden><strong>Personalised digital file</strong><p>${esc(NOTICE_YS_DIGITAL)}</p></div><p class="guarantee-line">Damaged or misprinted? You’re covered by EU consumer law. <button type="button" class="link" data-action="show-guarantee">See the official notice</button></p>${this.legalLinks()}${this.withdrawButton()}</div></details></div>`;
     }
     // After "Yes, add to cart" on the 1928 page the customer goes straight to the cart page (27 Oct 2026, Yusuf: the side cart and the cart page asked for the same step twice).
     // The cart page is where the delivery country and postal code are entered and the quote is made, which the native checkout call needs (the bridge refuses a checkout
     // without a READY quote), so there is no safe shortcut past it. The funnel count for the add has already fired. If the add result is uncertain, or the page does not
     // navigate within 4 s, the side cart opens as before.
-    afterYsAdd() {
+    afterYsAdd(gift=false) {
       const openDrawer=()=>{const dialog=this.shadowRoot.querySelector('dialog');if(this.revealed&&dialog&&!dialog.open){dialog.showModal();dialog.querySelector('[data-action="close-drawer"]')?.focus();}};
       if(!this.revealed||this.uncertain||this.error){openDrawer();return;}
-      this.cartRedirect=true;this.mountYs();
+      this.cartRedirect=gift?'gift':true;if(gift)this.render();else this.mountYs();
       clearTimeout(this.cartRedirectTimer);
       this.cartRedirectTimer=setTimeout(()=>{try{location.assign('https://walkofberlin.com/cart-page');}catch(e){}},300);
       setTimeout(()=>{if(!this.isConnected||!this.cartRedirect)return;this.cartRedirect=false;this.render();openDrawer();},4500);
@@ -447,7 +470,7 @@
       this.ysApi.variants=!!this.catalogue?.products?.find(row=>row.productId===this.ysMod.YS_PRODUCT_ID)?.requiresOptions;
       const digital=this.ysDigitalNative();this.ysApi.digital=!!digital;this.ysApi.digitalPrice=digital?.price??null;
       this.ysMod.mountConfigurator(host,this.ys,this.ysApi);
-      if(this.cartRedirect)queueMicrotask(()=>{host.querySelectorAll('[data-ys-add],[data-ys-quickadd]').forEach(b=>{b.textContent='Added. Opening your cart…';b.disabled=true;});});
+      if(this.cartRedirect===true)queueMicrotask(()=>{host.querySelectorAll('[data-ys-add],[data-ys-quickadd]').forEach(b=>{b.textContent='Added. Opening your cart…';b.disabled=true;});});
     }
     // "More from the shop": same group first, then same kind (digital or print), then the rest; the original order is kept inside each rank.
     related(product) {
@@ -468,7 +491,9 @@
       return (address?row('Your address',address.value):'')+row('On the print',`${place} · ${coords}`)+(m[5]?.trim()?row('Your line',m[5].trim()):'')+fields.filter(f=>f!==details&&f!==address).map(raw).join('');
     }
     lines() {
-      return [['Shipped to you',this.cart.lines.filter(line=>line.shippable===true)],['Download',this.cart.lines.filter(line=>line.shippable===false)],['Delivery type to confirm',this.cart.lines.filter(line=>line.shippable===null)]].filter(([,lines])=>lines.length).map(([label,lines])=>`<section class="cart-group"><h2>${label}</h2>${lines.map(line=>{const product=this.model.products.find(p=>p.wixProductId===line.productId);return `<article class="cart-line"><div class="line-image">${product?`<img src="${esc(this.image(product))}" alt="${esc(product.name)}">`:''}</div><div class="line-main"><h3>${esc(product?.name||line.name)}</h3><span class="meta">${esc(product?.typeLine||line.itemType||'')}</span>${this.lineCustom(line)}${this.lineNotice(line)}<div class="line-bottom"><div class="line-controls">${line.editable?this.quantityControl(line.quantity,line.lineItemId):`<span>Quantity: ${line.quantity}</span>`}${line.editable?`<button class="text-button" data-action="remove" data-line="${esc(line.lineItemId)}" ${this.busy||this.uncertain?'disabled':''}>Remove</button>`:''}</div><strong class="price">${line.lineTotal?esc(textMoney(line.lineTotal)):`${esc(textMoney(line.unitPrice))} each`}</strong></div>${!line.editable?'<p class="meta">Manage this item in the original cart.</p>':''}</div></article>`;}).join('')}</section>`).join('');
+      // Gift vouchers (gift.js) form their own group, whatever Wix says about shipping: nothing is shipped, the code comes by email.
+      const isGift=line=>!!this.gift?.isGiftId(line.productId),rest=this.cart.lines.filter(line=>!isGift(line)),offers=this.giftOffersAll();
+      return [['Shipped to you',rest.filter(line=>line.shippable===true)],['Download',rest.filter(line=>line.shippable===false)],['Sent by email',this.cart.lines.filter(isGift)],['Delivery type to confirm',rest.filter(line=>line.shippable===null)]].filter(([,lines])=>lines.length).map(([label,lines])=>`<section class="cart-group"><h2>${label}</h2>${lines.map(line=>{const product=this.model.products.find(p=>p.wixProductId===line.productId),gift=isGift(line)?this.gift.giftLineInfo(line,offers,this.presentation,asset,nativeImage):null;return `<article class="cart-line"><div class="line-image">${gift?(gift.image?`<img src="${esc(gift.image)}" alt="Gift card">`:''):product?`<img src="${esc(this.image(product))}" alt="${esc(product.name)}">`:''}</div><div class="line-main"><h3>${esc(gift?gift.name:product?.name||line.name)}</h3><span class="meta">${esc(gift?gift.typeLine:product?.typeLine||line.itemType||'')}</span>${gift?`<p class="meta line-custom">${esc(gift.note)}</p>`:this.lineCustom(line)}${this.lineNotice(line)}<div class="line-bottom"><div class="line-controls">${line.editable?this.quantityControl(line.quantity,line.lineItemId):`<span>Quantity: ${line.quantity}</span>`}${line.editable?`<button class="text-button" data-action="remove" data-line="${esc(line.lineItemId)}" ${this.busy||this.uncertain?'disabled':''}>Remove</button>`:''}</div><strong class="price">${line.lineTotal?esc(textMoney(line.lineTotal)):`${esc(textMoney(line.unitPrice))} each`}</strong></div>${!line.editable?'<p class="meta">Manage this item in the original cart.</p>':''}</div></article>`;}).join('')}</section>`).join('');
     }
     // ---- Cart: address, automatic quote, delivery choice (Yusuf: fewer steps before checkout) ----
     quoteTimer=0;quoting=false;quoteError='';failedKey='';choiceList=null;lastReason='';
@@ -543,6 +568,7 @@
     withdrawButton() {return `<p class="withdraw-row"><a class="outline withdraw-link" data-withdraw href="${LEGAL.withdraw}" target="_blank" rel="noopener">Withdraw from contract (Vertrag widerrufen)</a></p>`;}
     guaranteeNotice() {return `<section class="eu-guarantee" aria-labelledby="eu-guarantee-title"><h3 id="eu-guarantee-title">EU legal guarantee notice</h3><a href="${esc(asset(LEGAL.guaranteeImage))}" target="_blank" rel="noopener"><img src="${esc(asset(LEGAL.guaranteeImage))}" alt="${esc(GUARANTEE_ALT)}" width="884" height="1200" loading="lazy"></a><p class="meta">Official notice under Regulation (EU) 2025/1960, Annex I. <a href="${LEGAL.guaranteeInfo}" target="_blank" rel="noopener">More about legal guarantees</a></p></section>`;}
     lineNotice(line) {
+      if(this.gift?.isGiftId(line.productId))return `<div class="line-legal" data-line-legal="gift"><strong>Digital gift voucher</strong><p>${esc(NOTICE_GIFT)}</p></div>`;
       if(line.productId==='9b6fbecf-32e4-27dc-f3e6-9c887fe7f495')return `<div class="line-legal" data-line-legal="digital"><strong>Personalised digital file</strong><p>${esc(NOTICE_YS_DIGITAL)}</p></div>`;
       if(line.productId===YS_ID||(line.customText||[]).some(field=>!['Size','Paper'].includes(field.title)))return `<div class="line-legal" data-line-legal="personalised"><strong>Personalised physical product</strong>${NOTICE_PERSONALISED.map(t=>`<p>${esc(t)}</p>`).join('')}</div>`;
       if(line.shippable===false)return `<div class="line-legal" data-line-legal="digital"><strong>Printable digital product</strong><p>${esc(NOTICE_DIGITAL)}</p></div>`;
@@ -694,6 +720,7 @@
       const button=event.target.closest('[data-action]');if(!button)return;
       const action=button.dataset.action;
       if(action==='close-drawer'){this.shadowRoot.querySelector('dialog').close();return;}
+      if(action==='gift-toggle'||action==='gift-pick'){this.giftClick(action,button);return;}
       if(action==='show-legal'){const d=this.shadowRoot.querySelector('details[data-ys-legalfoot]');if(d){d.open=true;d.scrollIntoView({behavior:'smooth',block:'start'});}return;}
       if(action==='show-guarantee'){const d=this.shadowRoot.querySelector('details.delivery-returns');if(d){d.open=true;d.querySelector('.eu-guarantee')?.scrollIntoView({behavior:'smooth',block:'start'});}return;}if(action==='poster'||action==='room'||action==='wall'||action==='video'||/^g\d+$/.test(action)){this.view=action;this.render();if(action==='video')this.shadowRoot.querySelector('video.room')?.play?.().catch(()=>{});return;}
       if(action==='product-minus'||action==='product-plus'){this.quantity=Math.max(1,Math.min(99,this.quantity+(action==='product-plus'?1:-1)));this.render();return;}
@@ -706,6 +733,7 @@
       this.busy=true;this.error='';this.render();
       try {
         if(action==='refresh')await this.request('get');
+        if(action==='gift-add'){const offer=this.gift?.giftGateOpen()?this.giftOffersAll().find(item=>item.kind===button.dataset.giftKind):null;if(!offer)throw Error('CART_ITEMS_UNAVAILABLE');await this.request('add',{productId:offer.id,quantity:1});this.lastAddedId=offer.id;this.notice='Added to your cart';this.render();this.afterYsAdd(true);}
         if(action==='ys-add'){if(!this.ysMod.readyToAdd(this.ys))throw Error('YS_NOT_READY');const digital=!!this.ysApi?.digital&&this.ysMod.ysDigital?.(this.ys),id=digital?this.ysMod.YS_DIGITAL_ID:this.ysMod.YS_PRODUCT_ID;await this.request('add',digital?{productId:id,quantity:1,customTextFields:this.ysMod.buildCustomText(this.ys)}:{productId:id,quantity:1,customTextFields:this.ysMod.buildCustomText(this.ys),choices:this.ysMod.ysChoices(this.ys)});this.lastAddedId=id;const ysp=this.model.products.find(p=>p.wixProductId===this.ysMod.YS_PRODUCT_ID);this.measure('added',digital?{...ysp,wixProductId:id,name:'Your Berlin Street in 1928, Digital File',priceCents:Math.round(this.ysApi.digitalPrice*100),currency:'EUR'}:ysp,1);this.notice='Added to your cart';this.render();this.afterYsAdd();}
 
         if(action==='poster-add'){

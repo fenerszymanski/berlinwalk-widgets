@@ -277,3 +277,21 @@ details.legal-foot>summary:after{top:50%;margin-top:-14px}
   .ys-caption{min-height:4.5em}
   .ys-stage{padding:14px 0}
 }
+/* Gift voucher row on the 1928 page (gift.js, 27 Oct 2026): a quiet link-style row under the trust strip; the panel opens in place. */
+.ys-gift{margin:14px 0 0;border-top:1px solid var(--line)}
+.ys-gift-toggle{display:flex;align-items:center;gap:10px;width:100%;min-height:52px;padding:8px 0;background:none;border:0;border-radius:8px;text-align:left;color:var(--green)}
+.ys-gift-toggle svg{flex:0 0 22px;width:22px;height:22px;fill:none;stroke:var(--leaf);stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.ys-gift-toggle>svg:last-child{flex-basis:20px;width:20px;height:20px;transition:transform .15s}
+.ys-gift-toggle[aria-expanded="true"]>svg:last-child{transform:rotate(180deg)}
+.ys-gift-head{flex:1;min-width:0;display:grid;gap:1px}
+.ys-gift-head strong{font-size:14px;font-weight:600;text-decoration:underline;text-underline-offset:3px}
+.ys-gift-head small{font-size:12px;line-height:1.35;color:var(--muted)}
+.ys-gift-panel{display:grid;gap:12px;padding:12px;margin:0 0 4px;border:1.5px solid var(--line);border-radius:12px;background:#fff}
+.ys-gift-panel[hidden]{display:none}
+.ys-gift-panel p{margin:0;font-size:14px;line-height:1.45}
+.ys-gift-lead{font-weight:600;color:var(--green)}
+.ys-gift-how{font-size:13px;color:var(--ink)}
+.ys-gift-choices{grid-template-columns:1fr}
+.ys-gift-choice small{line-height:1.35}
+.ys-gift-add{width:100%}
+@media(min-width:520px){.ys-gift-choices{grid-template-columns:1fr 1fr}}
