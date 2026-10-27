@@ -182,6 +182,26 @@ const RING_SVG = CROSS_SVG;
 export const titleSize = title => (String(title || '').length <= 16 ? 118 : 96);
 const CAPTION_LIVE = 'Your poster, SIZE: 1928 above, today below, same ground and scale. Tap either photo to move the cross onto your building.';
 const CAPTION_EXAMPLE = 'Example poster, SIZE. Search for your own address to see your street.';
+// Trust strip next to the add buttons (Yusuf, 27 Oct 2026). True statements only: the poster ships free to DE, EU, UK and US; Gelato prints it in
+// Czechia or Poland, so "Printed in Europe" and never "Germany"; a misprinted or damaged poster is reprinted free (YS_FAQ says the same); checkout
+// takes cards only today, so no other payment brand is named or shown. The card marks themselves sit in the buy box (storefront-element.js).
+const TRUST_ICON = {
+  truck: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 6h11v9H2zM13 9h4l3 3v3h-7zM6 18.5a1.5 1.5 0 1 0 0-.01M17 18.5a1.5 1.5 0 1 0 0-.01"/></svg>',
+  pin: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s6-5.6 6-11a6 6 0 0 0-12 0c0 5.4 6 11 6 11zM12 12.2a2.2 2.2 0 1 0 0-.01"/></svg>',
+  redo: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12a8 8 0 1 0 3-6.2M4 4v4.5h4.5"/></svg>',
+  lock: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 11h12v9H6zM8.5 11V8a3.5 3.5 0 0 1 7 0v3"/></svg>',
+  mail: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h18v12H3zM3 7l9 6 9-6"/></svg>',
+  file: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h8l4 4v14H6zM14 3v4h4"/></svg>',
+};
+const TRUST = {
+  poster: [['truck', 'Free delivery to Germany, the EU, the UK and the US'], ['pin', 'Printed in Europe'], ['redo', 'Misprinted or damaged? Reprinted free']],
+  digital: [['mail', 'Sent by email within 24 hours'], ['file', 'JPG and PDF, 45 x 60 cm at 300 ppi'], ['redo', 'Something wrong with the file? I fix it']],
+};
+const trustItems = kind => TRUST[kind].map(([icon, text]) => `<li>${TRUST_ICON[icon]}<span>${text}</span></li>`).join('');
+// `secure` adds the "Secure checkout" item (the compact copy under the poster has no card marks next to it).
+export const trustHtml = (secure = false, cls = '') => ['poster', 'digital'].map(kind => `<ul class="ys-trust ${cls}" data-ys-legal="${kind}" ${kind === 'digital' ? 'hidden' : ''} aria-label="Why you can buy with confidence">${trustItems(kind)}${secure ? `<li>${TRUST_ICON.lock}<span>Secure checkout</span></li>` : ''}</ul>`).join('');
+// The line under the search box reads as a hint until a search runs (it keeps one line of height, so nothing below it moves).
+const SEARCH_HINT = 'Type an address or a place in Berlin, then tap it.';
 // Yusuf, 25 Oct 2026: only 4 of the first 174 previews got past the old "I can see the 1928 photo" checkbox, which kept the add button grey two
 // screens below the poster. Now an add button sits right under the poster and both add buttons are live; tapping one asks the same question
 // once, in place, and "Yes" adds to the cart. `where` is "quick" (under the poster) or "form" (the buy box).
@@ -226,35 +246,50 @@ export function mountConfigurator(host, state, api) {
         <button type="button" class="primary" data-ys-quickadd>Add to cart</button>
         <p class="ys-quick-spec"><span data-ys="quickspec">Personalised print</span><span class="ys-quick-sep"> · </span><button type="button" class="ys-link" data-ys-jump>Change size, paper or text</button></p>
         ${confirmHtml('quick')}
+        ${trustHtml(true, 'ys-trust-compact')}
       </div>
     </div>`;
-  formSlot.innerHTML = `<div class="ys-form">
-      <label class="ys-label" for="ys-q">Your address or a place in Berlin</label>
+  // Address search first (own slot, top of the page on a phone and top of the right column on desktop). The suggestions list floats over the
+  // content below the box, so it never pushes the poster down while it fills in.
+  const searchHtml = `<div class="ys-form ys-searchform">
+      <label class="ys-label ys-find" for="ys-q">Find your street in 1928</label>
       <div class="ys-search"><input id="ys-q" data-ys="q" type="search" autocomplete="off" enterkeyhint="search" maxlength="${L.address}" placeholder="e.g. Potsdamer Platz" value="${esc(state.query || '')}"><button type="button" class="outline" data-ys="go">Search</button></div>
-      <p class="ys-note" data-ys="searchnote" role="status"></p>
-      <ul class="ys-results" data-ys="results" role="listbox" aria-label="Matching places" hidden></ul>
+      <p class="ys-note ys-note-hint" data-ys="searchnote" role="status">${SEARCH_HINT}</p>
+      <div class="ys-resultswrap"><ul class="ys-results" data-ys="results" role="listbox" aria-label="Matching places" hidden></ul></div>
+    </div>`;
+  const optionsHtml = `<div class="ys-form ys-optform">
       <div class="ys-fields" data-ys="fields" ${state.lat ? '' : 'hidden'}>
         <div class="ys-row"><label>Title on the print<input data-ys="title" maxlength="${L.title}" autocapitalize="characters" value="${esc(state.title || '')}"></label><label>Area line<input data-ys="area" maxlength="${L.area}" value="${esc(state.area || '')}"></label></div>
         <label>Your line on the print (optional)<input data-ys="line" maxlength="${L.line}" placeholder="e.g. Lena &amp; Jonas · here since 2021" value="${esc(state.line || '')}"></label>
         <p class="ys-hint">The house number is never printed. Tap either photo to move the cross onto your building.</p>
       </div>
-      <div class="ys-format" data-ys="format" ${api.digital ? '' : 'hidden'}>
-        <span class="ys-label" id="ys-format-l">Format</span>
-        <div class="ys-sizes" role="radiogroup" aria-labelledby="ys-format-l"><button type="button" role="radio" class="ys-size" data-ys-format="poster" aria-checked="${!ysDigital(state)}">Printed poster<small>From €34.90 · free delivery</small></button><button type="button" role="radio" class="ys-size" data-ys-format="digital" aria-checked="${ysDigital(state)}">Digital file<small>${Number.isFinite(api.digitalPrice)?euro(api.digitalPrice):'Currently unavailable'} · print it yourself, anywhere</small></button></div>
-      </div>
-      <div class="ys-variant" data-ys="variant" ${api.variants && !ysDigital(state) ? '' : 'hidden'}>
-        <span class="ys-label" id="ys-size-l">Size</span>
-        <div class="ys-sizes" role="radiogroup" aria-labelledby="ys-size-l">${YS_SIZES.map(z => `<button type="button" role="radio" class="ys-size" data-ys-size="${esc(z)}" aria-checked="${z === ysSize(state)}">${esc(z)}<small data-ys-sizeprice="${esc(z)}"></small></button>`).join('')}</div>
-        <label class="ys-label" for="ys-paper">Paper</label>
-        <select id="ys-paper" data-ys="paper">${YS_PAPERS.map(p => `<option value="${esc(p.name)}" ${p.name === ysPaper(state).name ? 'selected' : ''}>${esc(p.name)}</option>`).join('')}</select>
-        <p class="ys-hint" data-ys="papernote"></p>
-      </div>
+      <details class="ys-options" data-ys="options" ${state.optionsOpen ? 'open' : ''} ${api.variants || api.digital ? '' : 'hidden'}>
+        <summary><span class="ys-options-t">Size, paper, format</span><span class="ys-options-v" data-ys="optsummary"></span></summary>
+        <div class="ys-options-body">
+          <div class="ys-format" data-ys="format" ${api.digital ? '' : 'hidden'}>
+            <span class="ys-label" id="ys-format-l">Format</span>
+            <div class="ys-sizes" role="radiogroup" aria-labelledby="ys-format-l"><button type="button" role="radio" class="ys-size" data-ys-format="poster" aria-checked="${!ysDigital(state)}">Printed poster<small>From €34.90 · free delivery</small></button><button type="button" role="radio" class="ys-size" data-ys-format="digital" aria-checked="${ysDigital(state)}">Digital file<small>${Number.isFinite(api.digitalPrice)?euro(api.digitalPrice):'Currently unavailable'} · print it yourself, anywhere</small></button></div>
+          </div>
+          <div class="ys-variant" data-ys="variant" ${api.variants && !ysDigital(state) ? '' : 'hidden'}>
+            <span class="ys-label" id="ys-size-l">Size</span>
+            <div class="ys-sizes" role="radiogroup" aria-labelledby="ys-size-l">${YS_SIZES.map(z => `<button type="button" role="radio" class="ys-size" data-ys-size="${esc(z)}" aria-checked="${z === ysSize(state)}">${esc(z)}<small data-ys-sizeprice="${esc(z)}"></small></button>`).join('')}</div>
+            <label class="ys-label" for="ys-paper">Paper</label>
+            <select id="ys-paper" data-ys="paper">${YS_PAPERS.map(p => `<option value="${esc(p.name)}" ${p.name === ysPaper(state).name ? 'selected' : ''}>${esc(p.name)}</option>`).join('')}</select>
+            <p class="ys-hint" data-ys="papernote"></p>
+          </div>
+        </div>
+      </details>
       ${confirmHtml('form')}
     </div>`;
+  const searchSlot = host.querySelector('[data-ys-slot="search"]');
+  if (searchSlot) { searchSlot.innerHTML = searchHtml; formSlot.innerHTML = optionsHtml; } else formSlot.innerHTML = searchHtml + optionsHtml;
   const $ = name => host.querySelector(`[data-ys="${name}"]`);
   // Size and paper: the price, caption and button follow the choice; Wix still charges its own variant price.
+  const optSummary = text => { $('optsummary').textContent = text; };
+  $('options').addEventListener('toggle', () => { state.optionsOpen = $('options').open; });
   function paintVariant() {
     if (!api.digital && ysDigital(state)) state.format = 'poster';   // the digital product is not in the catalogue: poster only
+    $('options').hidden = !api.variants && !api.digital;
     host.querySelectorAll('[data-ys-format]').forEach(b => b.setAttribute('aria-checked', String((b.dataset.ysFormat === 'digital') === ysDigital(state))));
     $('variant').hidden = !api.variants || ysDigital(state);
     const delivery = host.querySelector('.ys-buy .delivery'); if (delivery) delivery.textContent = ysDigital(state) ? DIGITAL_DELIVERY : POSTER_DELIVERY;
@@ -263,6 +298,7 @@ export function mountConfigurator(host, state, api) {
     if (ysDigital(state)) {
       if(!Number.isFinite(api.digitalPrice))return;
       const label = euro(api.digitalPrice);
+      optSummary(`Digital file · ${label}`);
       const price = host.querySelector('.product-title .price'); if (price) price.textContent = label;
       const spec = host.querySelector('.ys-buy .spec'); if (spec) spec.textContent = DIGITAL_SPEC;
       const add = host.querySelector('[data-ys-add]'); if (add) add.textContent = `Add to cart · ${label}`;
@@ -272,11 +308,12 @@ export function mountConfigurator(host, state, api) {
       $('caption').textContent = captionFor(state, !!state.lat);
       return;
     }
-    if (!api.variants) { $('caption').textContent = captionFor(state, !!state.lat); return; }   // the picker shows only once the Wix product has its size x paper variants
+    if (!api.variants) { optSummary('Printed poster'); $('caption').textContent = captionFor(state, !!state.lat); return; }   // the picker shows only once the Wix product has its size x paper variants
     const i = YS_SIZES.indexOf(ysSize(state)), paper = ysPaper(state);
     host.querySelectorAll('[data-ys-size]').forEach(b => b.setAttribute('aria-checked', String(b.dataset.ysSize === ysSize(state))));
     host.querySelectorAll('[data-ys-sizeprice]').forEach(el => { el.textContent = euro(paper.price[YS_SIZES.indexOf(el.dataset.ysSizeprice)]); });
     $('papernote').textContent = paper.note;
+    optSummary(`${ysSize(state)} · ${paper.name} · ${euro(paper.price[i])}`);
     const price = host.querySelector('.product-title .price'); if (price) price.textContent = euro(paper.price[i]);
     const spec = host.querySelector('.ys-buy .spec'); if (spec) spec.textContent = `Personalised print · ${ysSize(state)} · ${paper.name}`;
     const add = host.querySelector('[data-ys-add]'); if (add) add.textContent = `Add to cart · ${euro(paper.price[i])}`;
@@ -310,6 +347,8 @@ export function mountConfigurator(host, state, api) {
     return fontsReady;
   };
   const status = $('status'), statusToday = $('status-today'), results = $('results'), note = $('searchnote'), input = $('q');
+  // The note line always holds a line of text (hint, "Searching…", "Tap your place…", an error), so its height never changes.
+  const setNote = (text, choose = false) => { note.textContent = text || SEARCH_HINT; note.classList.toggle('ys-choose', !!text && choose); note.classList.toggle('ys-note-hint', !text); };
   const setStatus = text => { status.textContent = text; status.hidden = !text; };
   const setStatusToday = text => { statusToday.textContent = text; statusToday.hidden = !text; };
   // The confirm panel shows under the button that opened it (state.confirming = "quick" | "form"); it survives storefront re-renders.
@@ -362,22 +401,21 @@ export function mountConfigurator(host, state, api) {
   }
   async function search(q) {
     q = clean(q, 80);
-    if (q.length < 3) { results.hidden = true; note.textContent = q ? 'Keep typing (at least 3 letters).' : ''; note.classList.remove('ys-choose'); refreshButton(); return; }
+    if (q.length < 3) { results.hidden = true; setNote(q ? 'Keep typing (at least 3 letters).' : ''); refreshButton(); return; }
     api.track?.('search');
     controller?.abort(); controller = new AbortController(); const {signal} = controller;
-    note.textContent = 'Searching…'; note.classList.remove('ys-choose');
+    setNote('Searching…');
     let rows = [];
     try { rows = await photon(q, signal); } catch (error) { if (error.name === 'AbortError') return; }
-    try { if (!rows.length && clean(input.value, 80) === q) rows = await nominatim(q, signal); } catch (error) { if (error.name === 'AbortError') return; if (!rows.length) { note.textContent = 'The address search did not answer. Try again in a moment.'; return; } }
+    try { if (!rows.length && clean(input.value, 80) === q) rows = await nominatim(q, signal); } catch (error) { if (error.name === 'AbortError') return; if (!rows.length) { setNote('The address search did not answer. Try again in a moment.'); return; } }
     if (clean(input.value, 80) !== q) return;
     const seen = new Set();
     rows = rows.filter(r => inBerlin(r.lat, r.lon)).filter(r => { const key = [placeLines(r)[0], r.address?.suburb || r.address?.city_district || ''].join('|').toLowerCase(); return !seen.has(key) && seen.add(key); }).slice(0, 5);
     state.results = rows;
     results.innerHTML = rows.map((r, i) => { const [main, sub] = placeLines(r); return `<li role="option"><button type="button" class="ys-pick" data-ys-pick="${i}">${PIN}<span class="ys-pick-text"><strong>${esc(main)}</strong><small>${esc(sub)}</small></span><span class="ys-pick-go" aria-hidden="true">›</span></button></li>`; }).join('');
     results.hidden = rows.length === 0;
-    note.textContent = rows.length ? 'Tap your place to put it on the poster:' : 'Nothing found in Berlin. Check the spelling, or try the street name with a house number.';
+    setNote(rows.length ? 'Tap your place to put it on the poster:' : 'Nothing found in Berlin. Check the spelling, or try the street name with a house number.', rows.length > 0);
     if (!rows.length) api.track?.('noresult');
-    note.classList.toggle('ys-choose', rows.length > 0);
     refreshButton();
   }
   const schedule = () => { clearTimeout(timer); timer = setTimeout(() => search(input.value), 450); };
@@ -389,7 +427,7 @@ export function mountConfigurator(host, state, api) {
     const r = state.results?.[Number(pick.dataset.ysPick)]; if (!r) return;
     Object.assign(state, {lat: Math.round(Number(r.lat) * 1e5) / 1e5, lon: Math.round(Number(r.lon) * 1e5) / 1e5, address: addressLabel(r), title: titleFrom(r), area: areaFrom(r), query: input.value});
     host.querySelector('[data-ys="title"]').value = state.title; host.querySelector('[data-ys="area"]').value = state.area;
-    results.hidden = true; note.textContent = ''; note.classList.remove('ys-choose'); showPoint(true); api.track?.('pick');
+    results.hidden = true; setNote(''); showPoint(true); api.track?.('pick');
     const box = $('sheet').getBoundingClientRect();
     if (box.bottom < 90 || box.top > innerHeight - 90) $('sheet').scrollIntoView({behavior: 'smooth', block: 'start'});
   });
@@ -412,7 +450,7 @@ export function mountConfigurator(host, state, api) {
   const realAdd = () => host.getRootNode().querySelector?.('[data-ys-add]');
   host.addEventListener('click', event => {
     const t = event.target.closest?.('[data-ys-quickadd], [data-ys-add], [data-ys-yes], [data-ys-no], [data-ys-jump]'); if (!t) return;
-    if (t.matches('[data-ys-jump]')) { $('fields').scrollIntoView({behavior: 'smooth', block: 'start'}); return; }
+    if (t.matches('[data-ys-jump]')) { if (!$('options').hidden) { $('options').open = true; state.optionsOpen = true; } $('fields').scrollIntoView({behavior: 'smooth', block: 'start'}); return; }
     if (t.matches('[data-ys-no]')) { t.closest('[data-ys-confirm]').querySelector('[data-ys-noinfo]').hidden = false; api.track?.('blank'); return; }
     if (t.matches('[data-ys-yes]')) { if (!readyToCheck(state) || api.busy()) return; state.seen = true; state.confirming = null; api.track?.('seen'); refreshButton(); realAdd()?.click(); return; }
     if (!readyToCheck(state)) return;
@@ -431,7 +469,11 @@ export function mountConfigurator(host, state, api) {
     [500, 1500, 3000].forEach(t => setTimeout(() => {
       if (!api.scrollSheet || Date.now() - api.scrollSheet > 8000) return;
       const sheet = host.isConnected ? $('sheet') : null;
-      if (sheet && !sheet.hidden) { sheet.scrollIntoView({block: 'start'}); if (Math.abs(sheet.getBoundingClientRect().top) < 120) api.scrollSheet = 0; }
+      if (!sheet || sheet.hidden) return;
+      const top = sheet.getBoundingClientRect().top;
+      // The search box now sits right above the poster, so a poster that is already in the upper part of the screen stays where it is (no jump).
+      if (top >= 0 && top < innerHeight * 0.55) { api.scrollSheet = 0; return; }
+      sheet.scrollIntoView({block: 'start'}); if (Math.abs(sheet.getBoundingClientRect().top) < 120) api.scrollSheet = 0;
     }, t));
   }
   if (api.scrollSheet && state.lat) scrollSheetSoon();
