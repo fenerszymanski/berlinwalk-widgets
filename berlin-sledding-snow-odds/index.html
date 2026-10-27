@@ -37,10 +37,15 @@
   input:focus-visible { outline: 2px solid #1B5E20; outline-offset: 2px; }
   @media (max-width: 640px) {
     .so-head h1 { font-size: 17px; }
-    .so-stats { grid-template-columns: 1fr; }
-    .so-stat { display: flex; align-items: baseline; gap: 10px; }
-    .so-stat b { font-size: 20px; min-width: 52px; }
-    .so-stat span { margin-top: 0; }
+    .so-head { padding: 14px 14px 12px; }
+    .so-head p { font-size: 12px; line-height: 1.45; }
+    .so-stats { gap: 6px; margin: 8px 8px 0; }
+    .so-stat { padding: 8px 8px; }
+    .so-stat b { font-size: 18px; }
+    .so-stat span { font-size: 10px; line-height: 1.3; }
+    .so-ctl, .so-chart, .so-read, .so-verdict { margin-left: 8px; margin-right: 8px; }
+    .so-ctl { padding: 10px 12px; }
+    .so-foot { padding: 8px 12px 12px; }
   }
 </style>
 </head>
