@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Berlin Sledding Snow Odds: How Many Weekends Had Enough Snow</title>
+<link rel="stylesheet" href="../css/brand.css">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #FFFFFF; color: #1c2119; padding: 12px; }
+  .so { border-radius: 18px; overflow: hidden; background: #f6f9fb; border: 1px solid #cfdde8; }
+  .so-head { padding: 18px 18px 14px; background: #123D18; color: #fff; }
+  .so-kick { font-size: 11px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; color: #FFE600; }
+  .so-head h1 { font-size: 20px; line-height: 1.25; font-weight: 800; margin-top: 5px; }
+  .so-head p { font-size: 12.5px; line-height: 1.55; color: #d6e6cc; margin-top: 7px; max-width: 680px; }
+  .so-ctl { margin: 12px 12px 0; background: #fff; border: 1px solid #cfdde8; border-radius: 14px; padding: 12px 14px; }
+  .so-row { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; flex-wrap: wrap; }
+  .so-row label { font-size: 12.5px; font-weight: 800; color: #123D18; }
+  .so-val { font-size: 22px; font-weight: 800; color: #123D18; background: #FFE600; border-radius: 9px; padding: 2px 10px; }
+  .so-ctl input[type=range] { width: 100%; margin: 12px 0 2px; accent-color: #1B5E20; height: 28px; }
+  .so-ticks { display: flex; justify-content: space-between; font-size: 10.5px; color: #4b5a66; }
+  .so-feel { font-size: 12.5px; line-height: 1.5; color: #2b3326; margin-top: 8px; }
+  .so-wk { display: flex; align-items: center; gap: 8px; margin-top: 10px; font-size: 12.5px; font-weight: 700; color: #123D18; cursor: pointer; }
+  .so-wk input { width: 18px; height: 18px; accent-color: #1B5E20; }
+  .so-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin: 10px 12px 0; }
+  .so-stat { background: #fff; border: 1px solid #cfdde8; border-radius: 12px; padding: 9px 10px; }
+  .so-stat b { display: block; font-size: 22px; line-height: 1.1; font-weight: 800; color: #123D18; }
+  .so-stat span { display: block; font-size: 11px; line-height: 1.35; color: #4b5a66; margin-top: 3px; }
+  .so-chart { margin: 10px 12px 0; background: #fff; border: 1px solid #cfdde8; border-radius: 14px; padding: 6px 6px 4px; }
+  .so-chart canvas { display: block; width: 100%; height: auto; cursor: pointer; touch-action: pan-y; }
+  .so-legend { display: flex; flex-wrap: wrap; gap: 6px 14px; padding: 6px 6px 4px; font-size: 10.5px; color: #4b5a66; }
+  .so-legend i { display: inline-block; width: 14px; height: 9px; border-radius: 2px; margin-right: 5px; vertical-align: -1px; }
+  .so-read { margin: 10px 12px 0; background: #fff; border: 1px solid #cfdde8; border-left: 4px solid #1B5E20; border-radius: 12px; padding: 10px 12px; font-size: 12.5px; line-height: 1.5; color: #2b3326; min-height: 58px; }
+  .so-read strong { color: #123D18; }
+  .so-verdict { margin: 10px 12px 0; background: #FFE600; color: #123D18; border-radius: 12px; padding: 10px 12px; font-size: 13px; line-height: 1.5; font-weight: 700; }
+  .so-foot { padding: 10px 16px 14px; font-size: 10.5px; line-height: 1.5; color: #4b5a66; }
+  input:focus-visible { outline: 2px solid #1B5E20; outline-offset: 2px; }
+  @media (max-width: 640px) {
+    .so-head h1 { font-size: 17px; }
+    .so-stats { grid-template-columns: 1fr; }
+    .so-stat { display: flex; align-items: baseline; gap: 10px; }
+    .so-stat b { font-size: 20px; min-width: 52px; }
+    .so-stat span { margin-top: 0; }
+  }
+</style>
+</head>
+<body>
+<div class="so">
+  <div class="so-head">
+    <div class="so-kick">Walk of Berlin &bull; Sledding</div>
+    <h1>How often is there enough snow to sled in Berlin?</h1>
+    <p>Every row is one winter from 1995/96 to 2025/26, 1 November to 31 March, measured at the Dahlem weather station. Set how much snow you need. Dark blue marks a weekend day that clears it.</p>
+  </div>
+  <div class="so-ctl">
+    <div class="so-row"><label for="depth">Snow on the ground I need</label><span class="so-val" id="depthval">5 cm</span></div>
+    <input type="range" id="depth" min="1" max="20" step="1" value="5" aria-describedby="feel">
+    <div class="so-ticks" aria-hidden="true"><span>1 cm</span><span>5</span><span>10</span><span>15</span><span>20 cm</span></div>
+    <div class="so-feel" id="feel" aria-live="polite"></div>
+  </div>
+  <div class="so-stats" aria-live="polite">
+    <div class="so-stat"><b id="s1">-</b><span id="s1t"></span></div>
+    <div class="so-stat"><b id="s2">-</b><span id="s2t"></span></div>
+    <div class="so-stat"><b id="s3">-</b><span id="s3t"></span></div>
+  </div>
+  <div class="so-chart">
+    <canvas id="chart" role="img" aria-label="Heat map of snow cover for 31 Berlin winters. Each row is a winter, each column a day from 1 November to 31 March."></canvas>
+    <div class="so-legend">
+      <span><i style="background:#1f5f9e"></i>weekend day with enough snow</span>
+      <span><i style="background:#b6d2e8"></i>weekday with enough snow</span>
+      <span><i style="background:#efe9d2"></i>weekend, not enough</span>
+      <span><i style="background:#f5f4ee;border:1px solid #e1ddcb"></i>weekday, not enough</span>
+    </div>
+  </div>
+  <div class="so-read" id="read" aria-live="polite"></div>
+  <div class="so-verdict" id="verdict" aria-live="polite"></div>
+  <div class="so-foot">Source: Deutscher Wetterdienst, open climate data, daily snow depth at Berlin-Dahlem (FU), 51 m above sea level. Weekends are Saturdays and Sundays; public holidays are not counted separately. Sixteen days in the 2024/25 winter have no reading and stay blank. Snow lies longer in the cold north and east edges of the city than in Dahlem, and shorter in the middle of it. Tap a row to read that winter. Data checked on 27 October 2026.</div>
+</div>
+<script>
+(function () {
+  'use strict';
+  var DATA = [["1995/96", "0002000000000000000976630000000000001:776222222221000003333333333222211000000000000000000000000243333224:88800003987630000000001000111000000000000000025"], ["1996/97", "000000000000000000000000000137300000000000000000000000000004433222222222431111110000000000000000000000000000000000000000-0000000000000000001000000000000"], ["1997/98", "000000000000000000000000000000000000000000000000000000000000000000000000000000000000432121100054200000000000000000000000-0000000000000000000000000000000"], ["1998/99", "000000000000000000033322111000000036<;9999500000000000000000000000000000155000000000000001111000000034432111?A<640000100-0000000000000000000000000000000"], ["1999/00", "00000000000000000000241100000000000000000000000001000000321000000000000000000000044666600000000000000000000000000000000000000000000000000100000000000000"], ["2000/01", "0000000000000000000000000000000000000000000000000000008:>;;;;;8754000000000000000002000000000435;000000000000000026>;888-7655;84000000000000200000<63000"], ["2001/02", "000000000000000000000000000000000000000000000000001788@:8<86786555530000341112110000000000000000000000000000000200747000-0000000000000000000000000000000"], ["2002/03", "000000000000000000000000000000000000000000000000000022100000320022354444472000000000000000002231432444433322222222222110-0000002000000000000000000000000"], ["2003/04", "00000000000000000000000000000000000000000000000000000000000000000003000000000000432222454399000000000064300000000000310000000001000000000000000000000000"], ["2004/05", "0000000000000000001002000000000000000000000000001322200000000000000000000000000000004875;99300000000000006998877656:<;<=->C@@??>=;:999774000000000000000"], ["2005/06", "0000000000000000000000000433331000000000000000000000000086;A>:9986555555433333:;>:99999999999999<<A65===<;:7432100000000-1322268767<@DB>=:88754432000000"], ["2006/07", "000000000000000000000000000000000000000000000000000000000000000000000000000000000000000550000000001452220000000000000000-0000000000000000000005000000000"], ["2007/08", "00000000000000000000000010000000000000000000000000000000000000664433200000000000000000000000000000000000000000000000000000000000000000000000000000000000"], ["2008/09", "00000000000000000000046443000000010000000300000000000000000000122@>;::98888866553333220000001100000000133339@>=A=A965200-0000000000000000000000000000000"], ["2009/10", "000000000000000000000000000000000000000000000002336653300001@BCCB@@@@AHIGFEDDCFCCCCCBBBBHJLLNOSRPPPPPOPTVUUUUSPOMMLIIEB=-6000000000000042000000000000000"], ["2010/11", "00000000000000000000000000100008<9:998?AC:89EFFJHLMLKFOPQ[XUTPLLLLLIEC@?><7400000010200100000000000000000000000000000000-0000000000000000000000000000000"], ["2011/12", "00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000111113223333454554320000000000000000000000000000000000000000000"], ["2012/13", "000000000000000000000000000000000301422;=>=<:754000021000000000000000000011232111276555576000002000176546544205455396300-000000000598887666<?CBA@?>>==?>"], ["2013/14", "000000000000000000000000000000000000120000000000000000000000000000000000000000000044344498877643210000000000000000000000-0000000000000000000000000000000"], ["2014/15", "0000000000000000000000000000000000000000000000000000000000;8600000000000000000000000000000365448765320000000000000000000-0000000000000000000000000000000"], ["2015/16", "00000000000000000000002000000000000000000000000000000000000000000045833210011665444430000000000000000000000000000000000000000000000000000000000000000000"], ["2016/17", "000000000000000000000000000000000000000000000000000000000000000001113333633476555422222222244443100000000000000000000000-0000000000000000000000000000000"], ["2017/18", "000000000000000000000000000000000000000160000000000000000000000000000000000020100000000000000000000000000000000000000000-0000001000000000000000000000000"], ["2018/19", "000000000?00000000000000000000000000000000000000000000000000000000000000000000100000001000000000000000000000000000000000-0000000000000000000000000000000"], ["2019/20", "00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"], ["2020/21", "0000000000000000000000000000000000000000000000000000000000000000420000001030000000000000009765200438@@=<;;;?;30000000000-0000000000000000001000000000000"], ["2021/22", "000000000000000000000000000000000010000421000000000000000000000000001000000000001400000000000000000000000000000000000000-0000000000000000000000000000000"], ["2022/23", "000000000000000000032100000000000000020000000000000000000000000000000000000000000000000000000000000000000000000000000100-0000001010400000000000000000000"], ["2023/24", "00000000000000000000000000043765666633200000000000002100000000000000000000004444444000000000000000000000000000000000000000000000000000000000000000000000"], ["2024/25", "000000000000000000000000000000000000000000000000000000000000000011100055442200000000000000000000000000002>87777763000000-00????????????????0000000000000"], ["2025/26", "0000000000000000000000010000000000000000000000000000000000000001;9887877773000000000000000011002222222100000132210000000-0000000000000000000000000000000"]];
+  var COLS = 152, ROW = 11, TOP = 18, LEFT = 46, RIGHT = 34;
+  function el(id) { return document.getElementById(id); }
+  var cv = el('chart'), ctx = cv.getContext('2d');
+  var W = DATA.map(function (d, i) {
+    var y = Number(d[0].slice(0, 4)), leap = ((y + 1) % 4 === 0), vals = [], wk = [];
+    for (var c = 0; c < COLS; c++) {
+      var ch = d[1].charAt(c), v;
+      if (ch === '-') { vals.push(null); wk.push(false); continue; }
+      v = ch === '?' ? null : ch.charCodeAt(0) - 48;
+      var off = (!leap && c > 120) ? c - 1 : c;
+      var dow = new Date(Date.UTC(y, 10, 1 + off)).getUTCDay();
+      vals.push(v); wk.push(dow === 0 || dow === 6);
+    }
+    return { name: d[0], vals: vals, wk: wk };
+  });
+  var depth = 5, sel = -1, cw = 0;
+  var FEEL = {1: 'A dusting. Fine for a photo, no use on a slope.', 4: 'A thin layer. The grass shows through on the steep part.', 5: 'My floor for a thin run on a short, steep slope.', 10: 'A proper sledding day on most hills.', 15: 'Deep and fast. This is the winter people still talk about.', 20: 'Once in a generation in this city.'};
+  function feel(d) {
+    var k = [20, 15, 10, 5, 4, 1].filter(function (x) { return d >= x; })[0] || 1;
+    return d + ' cm: ' + FEEL[k];
+  }
+  function count(w, th, onlyWk) {
+    var n = 0;
+    for (var c = 0; c < COLS; c++) if (w.vals[c] !== null && w.vals[c] >= th && (!onlyWk || w.wk[c])) n++;
+    return n;
+  }
+  function wkCount(w) { return count(w, depth, true); }
+  function deepest(w) { var m = 0; w.vals.forEach(function (v) { if (v !== null && v > m) m = v; }); return m; }
+  function med(a) { var s = a.slice().sort(function (x, y) { return x - y; }); return s[Math.floor(s.length / 2)]; }
+  function stats() {
+    var wks = W.map(wkCount);
+    var withAny = wks.filter(function (n) { return n > 0; }).length;
+    var withTwo = wks.filter(function (n) { return n >= 2; }).length;
+    var best = 0; wks.forEach(function (n, i) { if (n > wks[best]) best = i; });
+    return { wks: wks, any: withAny, two: withTwo, best: best, med: med(wks) };
+  }
+  function layoutW() { return Math.max(300, el('chart').parentNode.clientWidth - 12); }
+  function draw() {
+    var S = stats(), w = layoutW(), cell = (w - LEFT - RIGHT) / COLS, h = TOP + W.length * ROW + 6, dpr = window.devicePixelRatio || 1;
+    cv.width = Math.round(w * dpr); cv.height = Math.round(h * dpr);
+    cv.style.width = w + 'px'; cv.style.height = h + 'px';
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0); ctx.clearRect(0, 0, w, h);
+    ctx.font = '600 10px Montserrat, sans-serif'; ctx.textBaseline = 'middle';
+    var months = [['Nov', 0], ['Dec', 30], ['Jan', 61], ['Feb', 92], ['Mar', 121]];
+    ctx.fillStyle = '#4b5a66'; ctx.textAlign = 'left';
+    months.forEach(function (m) { ctx.fillText(m[0], LEFT + m[1] * cell, 8); });
+    W.forEach(function (row, r) {
+      var y = TOP + r * ROW;
+      if (r === sel) { ctx.fillStyle = '#fff6b3'; ctx.fillRect(0, y - 1, w, ROW); }
+      ctx.fillStyle = r === sel ? '#123D18' : '#4b5a66'; ctx.textAlign = 'left';
+      ctx.fillText(row.name.slice(2), 4, y + ROW / 2);
+      for (var c = 0; c < COLS; c++) {
+        var v = row.vals[c];
+        if (DATA[r][1].charAt(c) === '-') continue;
+        var on = v !== null && v >= depth, wk = row.wk[c];
+        if (on) ctx.fillStyle = wk ? '#1f5f9e' : '#b6d2e8';
+        else ctx.fillStyle = v === null ? '#fff' : (wk ? '#efe9d2' : '#f5f4ee');
+        ctx.fillRect(LEFT + c * cell, y, Math.max(1, cell - 0.4), ROW - 1);
+      }
+      ctx.textAlign = 'right'; ctx.fillStyle = S.wks[r] ? '#123D18' : '#9aa49a'; ctx.font = (S.wks[r] ? '800' : '600') + ' 10px Montserrat, sans-serif';
+      ctx.fillText(String(S.wks[r]), w - 6, y + ROW / 2);
+      ctx.font = '600 10px Montserrat, sans-serif';
+    });
+    ctx.fillStyle = '#4b5a66'; ctx.textAlign = 'right'; ctx.fillText('wkd', w - 4, 8);
+  }
+  function render() {
+    var S = stats(), n = W.length;
+    el('depthval').textContent = depth + ' cm';
+    el('feel').textContent = feel(depth);
+    el('s1').textContent = S.any + ' of ' + n;
+    el('s1t').textContent = 'winters with at least one weekend day at ' + depth + ' cm or more';
+    el('s2').textContent = S.med;
+    el('s2t').textContent = 'weekend days in the typical winter (the median)';
+    el('s3').textContent = S.wks[S.best];
+    el('s3t').textContent = 'in the best winter, ' + W[S.best].name;
+    el('verdict').textContent = verdict(S);
+    readRow(sel);
+    draw();
+  }
+  function verdict(S) {
+    if (depth <= 3) return depth + ' cm is a dusting, not a sledding day. Slide the bar to 5 cm or more to see what counts.';
+    if (S.any <= 3) return 'At ' + depth + ' cm, a weekend day is a freak. Do not plan a Saturday around it.';
+    if (S.med === 0) return 'At ' + depth + ' cm the typical Berlin winter gives you no weekend day at all. Go the first morning the snow is down, because it will not wait.';
+    if (S.med === 1) return 'At ' + depth + ' cm the typical winter gives you one weekend day. When it comes, drop the plan and go.';
+    return 'At ' + depth + ' cm the typical winter gives you ' + S.med + ' weekend days, so you can afford to pick your hill.';
+  }
+  function readRow(r) {
+    if (r < 0) {
+      var S = stats();
+      el('read').innerHTML = '<strong>Tap a winter</strong> to read it. At ' + depth + ' cm, ' + (W.length - S.any) + ' of ' + W.length + ' winters had no weekend day that cleared it' + '. The number at the right of each row is its count of weekend days.';
+      return;
+    }
+    var w = W[r], a = count(w, depth, false), b = count(w, depth, true);
+    el('read').innerHTML = '<strong>' + w.name + ':</strong> ' + a + ' day' + (a === 1 ? '' : 's') + ' with ' + depth + ' cm or more, ' + b + ' of them on a weekend. Deepest cover that winter: <strong>' + deepest(w) + ' cm</strong>.';
+  }
+  function pick(e) {
+    var rect = cv.getBoundingClientRect(), y = e.clientY - rect.top, r = Math.floor((y - TOP) / ROW);
+    sel = (r >= 0 && r < W.length) ? (r === sel ? -1 : r) : -1;
+    render();
+  }
+  el('depth').addEventListener('input', function () { depth = Number(this.value); render(); });
+  cv.addEventListener('click', pick);
+  var lw = 0;
+  window.addEventListener('resize', function () { var x = layoutW(); if (Math.abs(x - lw) > 20) { lw = x; draw(); } });
+  render(); lw = layoutW();
+})();
+</script>
+<script src="../js/brand.js"></script>
+</body>
+</html>

@@ -11279,6 +11279,41 @@
       "iconStatus": "live-wix-media",
       "image": "https://static.wixstatic.com/media/5a08a3_677aa8aa3d3d4671b6cd0bd80c9cfbbd~mv2.png",
       "cmsItemId": "da72ae52-402e-4e73-b914-88ddb5cdee9d"
+    },
+    {
+      "slug": "berlin-sledding-snow-odds",
+      "title": "Berlin Sledding Snow Odds",
+      "lead": "How often there is enough snow to sled in Berlin: 31 winters of daily snow depth from the Dahlem weather station, one row per winter. Set how many centimetres you need and see how many weekend days cleared it. Data from the Deutscher Wetterdienst, checked on 27 October 2026.",
+      "category": "Weather",
+      "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/berlin-sledding-snow-odds/",
+      "embedHeight": 1250,
+      "hubCategory": "WeatherOutdoor",
+      "type": "Planner",
+      "priority": 3,
+      "seasonal": true,
+      "seasonStart": "2026-11-15",
+      "seasonEnd": "2027-03-15",
+      "seasonLabel": "Snow",
+      "tags": [
+        "sledding",
+        "snow",
+        "winter",
+        "weekend",
+        "sledge",
+        "tobogganing",
+        "living in berlin"
+      ],
+      "aliases": [
+        "sledding in berlin",
+        "sledging berlin",
+        "how often does it snow in berlin",
+        "rodeln berlin",
+        "berlin snow depth",
+        "tobogganing berlin"
+      ],
+      "iconStatus": "live-wix-media",
+      "image": "https://static.wixstatic.com/media/5a08a3_21291d4f39fc40118eff88009e12a46c~mv2.png",
+      "cmsItemId": "60125696-96e3-4e63-8168-b6587ba2999c"
     }
   ],
   "hubCategories": [
