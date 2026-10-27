@@ -1,9 +1,9 @@
 {
-  "updatedAt": "2026-10-27T03:08:33.285Z",
+  "updatedAt": "2026-10-27T10:16:41.397Z",
   "source": "Wix Blog API",
   "popularSource": "Wix Blog metrics.views lifetime sort",
-  "totalPosts": 444,
-  "toolsTotal": 371,
+  "totalPosts": 445,
+  "toolsTotal": 372,
   "bookingUrl": "https://www.walkofberlin.com/book-berlin-walking-tour/berlin-then-and-now",
   "navTopics": [
     {
@@ -1802,6 +1802,23 @@
   ],
   "latest": [
     {
+      "title": "Sledding in Berlin: Which Hill, and How Often There Is Enough Snow",
+      "slug": "sledding-in-berlin",
+      "path": "/post/sledding-in-berlin",
+      "url": "https://www.berlinwalk.com/post/sledding-in-berlin",
+      "excerpt": "Only 9 of 31 Berlin winters had a weekend day with 10 cm of snow, and the typical winter had none. What that means for sledding in Berlin, and which hill to pick when the snow does come.",
+      "category": "Living in Berlin",
+      "categorySlug": "living-in-berlin",
+      "topic": "living-in-berlin",
+      "topicLabel": "Living in Berlin",
+      "readTime": "6 min read",
+      "publishedDate": "2026-10-27T10:14:05.461Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_90c51a7b10b0469d913fc846fe83beb7~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-teufelsberg-toboggan-run-snow.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_90c51a7b10b0469d913fc846fe83beb7~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-teufelsberg-toboggan-run-snow.jpg",
+      "alt": "Sledders walking up the long toboggan run on Teufelsberg after light snow, with the old listening station rising behind the trees",
+      "relatedToolSlug": "berlin-sledding-snow-odds"
+    },
+    {
       "title": "Christmas in Berlin: What Is Open on 24, 25 and 26 December",
       "slug": "christmas-in-berlin-what-is-open",
       "path": "/post/christmas-in-berlin-what-is-open",
@@ -1987,23 +2004,6 @@
       "thumb": "https://static.wixstatic.com/media/5a08a3_f6848bfe02ed430fb053c8e18bf5d5b4~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-schlangenbader-strasse.jpg",
       "alt": "The terraced housing over the A104 motorway on Schlangenbader Straße in Wilmersdorf, a long stepped block with balconies and planted terraces above the trees",
       "relatedToolSlug": "berlin-flat-swap-rent-board"
-    },
-    {
-      "title": "The Captain of Köpenick: Where It Happened, Episode 2",
-      "slug": "where-it-happened-koepenick",
-      "path": "/post/where-it-happened-koepenick",
-      "url": "https://www.berlinwalk.com/post/where-it-happened-koepenick",
-      "excerpt": "Episode 2 of Where It Happened, my weekly Berlin story podcast: a shoemaker in a secondhand captain's uniform, the Köpenick town hall, and why Germany still laughs at the story.",
-      "category": "Where It Happened",
-      "categorySlug": "where-it-happened",
-      "topic": "practical",
-      "topicLabel": "Practical Berlin",
-      "readTime": "13 min read",
-      "publishedDate": "2026-10-16T05:35:17.930Z",
-      "image": "https://static.wixstatic.com/media/5a08a3_c5d6c4d8787c42a2809b5106657e46f6~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-koepenick-rathaus-1600.jpg",
-      "thumb": "https://static.wixstatic.com/media/5a08a3_c5d6c4d8787c42a2809b5106657e46f6~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-koepenick-rathaus-1600.jpg",
-      "alt": "Rathaus Köpenick with its brick tower over the summer square",
-      "relatedToolSlug": ""
     }
   ]
 }

@@ -431,6 +431,12 @@
       "figure": "30 hours",
       "line": "a week is all the on-call practices open, so from Monday to Thursday evening the door is 116117.",
       "tool": "berlin-on-call-practice-map"
+    },
+    "sledding-in-berlin": {
+      "shelf": "draussen",
+      "figure": "9 of 31",
+      "line": "winters had a Saturday or Sunday with 10 cm of snow on the ground, and the typical winter had none.",
+      "tool": "berlin-sledding-snow-odds"
     }
   }
 }

@@ -1,5 +1,5 @@
 {
- "updatedAt": "2026-10-25T09:38:29.766Z",
+ "updatedAt": "2026-10-27T10:16:41.919Z",
  "source": "Wix Blog API + blog-category/categories.json",
  "slug": "living-in-berlin",
  "categoryId": "00af1018-ef7b-465a-93b6-916187609da4",
@@ -8,28 +8,28 @@
  "shelfMode": "curated",
  "shelfLegend": "By the part of life it hits",
  "shelfLegendSub": "Four shelves, because that is how the questions actually arrive",
- "totalPosts": 73,
- "toolCount": 73,
+ "totalPosts": 74,
+ "toolCount": 74,
  "lead": {
-  "title": "Out-of-Hours Doctor in Berlin: Which On-Call Practice Opens When Yours Is Shut",
-  "slug": "out-of-hours-doctor-berlin",
-  "path": "/post/out-of-hours-doctor-berlin",
-  "excerpt": "Berlin's on-call practices do not open on a weekday evening. The eleven KV practices, their winter hours until 21:00, which ones treat children, and why from Monday to Thursday the number to call is 116117.",
+  "title": "Sledding in Berlin: Which Hill, and How Often There Is Enough Snow",
+  "slug": "sledding-in-berlin",
+  "path": "/post/sledding-in-berlin",
+  "excerpt": "Only 9 of 31 Berlin winters had a weekend day with 10 cm of snow, and the typical winter had none. What that means for sledding in Berlin, and which hill to pick when the snow does come.",
   "minutes": 6,
   "readTime": "6 min read",
-  "publishedDate": "2026-10-24T08:42:52.127Z",
-  "alt": "The lit emergency department entrance of a Berlin hospital at night, with the sign Emergency Zentrale Notaufnahme above the doors",
-  "lead": "https://static.wixstatic.com/media/5a08a3_0bf8b903d225414ba66823ac7e8fb7c1~mv2.jpg/v1/fill/w_1400,h_620,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
-  "thumb": "https://static.wixstatic.com/media/5a08a3_0bf8b903d225414ba66823ac7e8fb7c1~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
-  "square": "https://static.wixstatic.com/media/5a08a3_0bf8b903d225414ba66823ac7e8fb7c1~mv2.jpg/v1/fill/w_184,h_184,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
-  "shelf": "geld",
+  "publishedDate": "2026-10-27T10:14:05.461Z",
+  "alt": "Sledders walking up the long toboggan run on Teufelsberg after light snow, with the old listening station rising behind the trees",
+  "lead": "https://static.wixstatic.com/media/5a08a3_90c51a7b10b0469d913fc846fe83beb7~mv2.jpg/v1/fill/w_1400,h_620,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+  "thumb": "https://static.wixstatic.com/media/5a08a3_90c51a7b10b0469d913fc846fe83beb7~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+  "square": "https://static.wixstatic.com/media/5a08a3_90c51a7b10b0469d913fc846fe83beb7~mv2.jpg/v1/fill/w_184,h_184,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+  "shelf": "draussen",
   "topic": "living-in-berlin",
-  "figure": "30 hours",
-  "line": "a week is all the on-call practices open, so from Monday to Thursday evening the door is 116117.",
+  "figure": "9 of 31",
+  "line": "winters had a Saturday or Sunday with 10 cm of snow on the ground, and the typical winter had none.",
   "term": "",
   "gloss": "",
   "termCta": "",
-  "tool": "berlin-on-call-practice-map"
+  "tool": "berlin-sledding-snow-odds"
  },
  "glossary": [
   {
@@ -680,6 +680,17 @@
    "title": "Draussen",
    "lead": "Weekends, water and forest inside the ticket",
    "posts": [
+    {
+     "title": "Sledding in Berlin: Which Hill, and How Often There Is Enough Snow",
+     "slug": "sledding-in-berlin",
+     "path": "/post/sledding-in-berlin",
+     "minutes": 6,
+     "alt": "Sledders walking up the long toboggan run on Teufelsberg after light snow, with the old listening station rising behind the trees",
+     "thumb": "https://static.wixstatic.com/media/5a08a3_90c51a7b10b0469d913fc846fe83beb7~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+     "line": "winters had a Saturday or Sunday with 10 cm of snow on the ground, and the typical winter had none.",
+     "figure": "9 of 31",
+     "tool": "berlin-sledding-snow-odds"
+    },
     {
      "title": "Lantern Walks in Berlin: Where and When to Join St. Martin This November",
      "slug": "lantern-walks-in-berlin",
