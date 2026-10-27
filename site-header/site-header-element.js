@@ -11,7 +11,7 @@ const BW_HEADER_MONO_URL = new URL('../brand/fonts/editorial-v2/IBMPlexMono-Semi
 const BW_HEADER_MENU_FONT_URL = new URL('../home-two-doors/assets/fonts/Fraunces-Variable-latin.woff2', BW_HEADER_SCRIPT_URL).href;
 // Berlin Then and Now (service 145cb27e). The legacy booking path stays
 // reachable for guests who booked before 30 September, but nothing links to it.
-const BW_HEADER_BUILD = 'store-navigation-20261025';
+const BW_HEADER_BUILD = 'store-navigation-responsive-20261027';
 const BW_HEADER_BOOKING_URL = 'https://www.walkofberlin.com/book-berlin-walking-tour/berlin-then-and-now';
 const BW_HEADER_TOUR_FACTS = ['about 2.5 hours', 'max 10 people', '€25']
   .map((fact) => `<span class="bw-header-fact">${fact}</span>`)
@@ -827,6 +827,15 @@ class BWHeaderElement extends HTMLElement {
           padding: 0;
         }
 
+        .bw-header-nav-list > li {
+          flex: 0 0 auto;
+        }
+
+        .bw-header-nav-list > li > a,
+        .bw-header-nav-list > li > .bw-header-dropdown-trigger {
+          white-space: nowrap;
+        }
+
         .bw-header-nav a,
         .bw-header-dropdown-trigger {
           background: none;
@@ -998,7 +1007,7 @@ class BWHeaderElement extends HTMLElement {
         }
 
         .bw-header-mobile-book { display: none; }
-        @media (min-width: 981px) and (max-width: 1190px) {
+        @media (min-width: 981px) and (max-width: 1279px) {
           .bw-header-main { gap: 10px; padding-left: 16px; padding-right: 16px; }
           .bw-header-logo img { height: 28px; }
           .bw-header-nav a, .bw-header-dropdown-trigger { padding-left: 7px; padding-right: 7px; font-size: 16px; letter-spacing: 0; }
