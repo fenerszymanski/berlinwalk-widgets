@@ -4,7 +4,7 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Berlin Ghost Stations Map: 1961 vs Today</title>
-<meta name="description" content="Flip the same Berlin tunnel map between 1961 and today. See which 15 stations were sealed while West Berlin trains rolled through without stopping, and what stands there now." />
+<meta name="description" content="Flip the same Berlin tunnel map between 1961 and today. See 15 closed underground stations plus Bornholmer Straße above ground: 16 closed stations in all, and what stands there now." />
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231B5E20'/%3E%3Ccircle cx='32' cy='32' r='13' fill='none' stroke='%23FFE600' stroke-width='6'/%3E%3C/svg%3E" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -46,6 +46,7 @@
   .map{padding:20px 22px 6px;transition:background .5s}
   .map[data-era="then"]{background:#101a12}
   .map[data-era="now"]{background:#fff}
+  .mapnote{margin:0;padding:10px 22px;color:var(--stone);font-size:11px;line-height:1.55}
 
   .lineblock{margin:0 0 22px}
   .lhead{display:flex;align-items:center;gap:9px;margin:0 0 12px;flex-wrap:wrap}
@@ -136,7 +137,7 @@
   .lg i.open{background:#fff;border-color:var(--green)}
   .lg i.shut{background:#efefef;border-color:#b9b9b9}
 
-  /* ---------- image credits ---------- */
+  /* ---------- historical sources ---------- */
   .creditsbar{padding:0 22px 16px;display:flex;justify-content:flex-end}
   .creditsTrigger{display:inline-flex;align-items:center;gap:7px;border:1px solid #cddbc3;border-radius:999px;
     background:#fff;color:var(--green-deep);font:700 11px/1 Montserrat,system-ui,sans-serif;padding:8px 11px;cursor:pointer}
@@ -223,7 +224,7 @@
   <div class="card">
     <div class="head">
       <p class="eyebrow">Berlin Ghost Stations</p>
-      <h2>The same tunnels, two completely different cities</h2>
+      <h2>The same routes, two very different cities</h2>
       <p>For 28 years West Berlin trains rolled straight through stations that were sealed, dimly lit and guarded. Flip the switch and watch the same map change. Tap any station to see what happened there and what is there now.</p>
     </div>
 
@@ -236,31 +237,29 @@
     </div>
 
     <div class="map" id="map" data-era="then"></div>
+    <p class="mapnote">Schematic, not to scale. Read each line north to south, from left to right. Bornholmer Straße is above ground, north of the tunnel. Friedrichstraße appears on two lines but is one interchange.</p>
 
     <div class="detail" id="detail"></div>
 
     <div class="legend" id="legend"></div>
 
     <div class="creditsbar">
-      <button class="creditsTrigger" id="creditsOpen" type="button" aria-expanded="false" aria-controls="imageCredits">Image credits</button>
+      <button class="creditsTrigger" id="creditsOpen" type="button" aria-expanded="false" aria-controls="historicalSources">Historical sources</button>
     </div>
 
-    <div class="creditsLayer" id="imageCredits" hidden>
-      <section class="creditsDialog" role="dialog" aria-modal="true" aria-labelledby="creditsTitle" tabindex="-1">
+    <div class="creditsLayer" id="historicalSources" hidden>
+      <section class="creditsDialog" role="dialog" aria-modal="true" aria-labelledby="sourcesTitle" tabindex="-1">
         <div class="creditsTop">
           <div>
-            <h3 id="creditsTitle">Article image credits</h3>
-            <p class="creditsIntro">Source and licence details for the photographs used in the article.</p>
+            <h3 id="sourcesTitle">Historical sources</h3>
+            <p class="creditsIntro">Historical data references for this schematic: station closures, reopening dates and the Bornholmer Straße border crossing.</p>
           </div>
-          <button class="creditsClose" id="creditsClose" type="button" aria-label="Close image credits">&times;</button>
+          <button class="creditsClose" id="creditsClose" type="button" aria-label="Close historical sources">&times;</button>
         </div>
         <ul class="creditsList">
-          <li>Nordbahnhof mezzanine by Platte, <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener noreferrer">CC BY-SA 4.0</a>, via <a href="https://commons.wikimedia.org/wiki/File:Clp_20240701_6870_Bf_Berlin_Nordbahnhof_Zwischengeschoss.jpg" target="_blank" rel="noopener noreferrer">Wikimedia Commons</a>.</li>
-          <li>Tränenpalast in 1990 by Lothar Weber, <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener noreferrer">CC BY-SA 4.0</a>, via <a href="https://commons.wikimedia.org/wiki/File:1990-04-21_Berlin-Mitte_Bahnhof_Berlin-Friedrichstra%C3%9Fe_Tr%C3%A4nenpalast_(Ostberlin)_a.jpg" target="_blank" rel="noopener noreferrer">Wikimedia Commons</a>.</li>
-          <li>Potsdamer Platz S-Bahn entrance by Dabbelju, <a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank" rel="noopener noreferrer">CC BY-SA 3.0</a>, via <a href="https://commons.wikimedia.org/wiki/File:Bahnhof_Berlin_Potsdamer_Platz_S-Bahn_Entrance_Old.jpg" target="_blank" rel="noopener noreferrer">Wikimedia Commons</a>.</li>
-          <li>Berlin Wall Memorial at Bernauer Straße by Ad Meskens, <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener noreferrer">CC BY-SA 4.0</a>, via <a href="https://commons.wikimedia.org/wiki/File:Berlin_Wall_Memorial_at_Bernauer_Stra%C3%9Fe_01.jpg" target="_blank" rel="noopener noreferrer">Wikimedia Commons</a>.</li>
-          <li>Bornholmer Straße in 1984 by Gerd Danigel, ddr-fotograf.de, <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener noreferrer">CC BY-SA 4.0</a>, via <a href="https://commons.wikimedia.org/wiki/File:Bornholmerstra%C3%9Fe_Grenz%C3%BCbergang_1984.jpg" target="_blank" rel="noopener noreferrer">Wikimedia Commons</a>.</li>
-          <li>Alexanderplatz U8 platform by Geoprofi Lars, <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener noreferrer">CC BY-SA 4.0</a>, via <a href="https://commons.wikimedia.org/wiki/File:2022-07-15_U-Bahnhof_Alexanderplatz_10.jpg" target="_blank" rel="noopener noreferrer">Wikimedia Commons</a>.</li>
+          <li><a href="https://www.bundesarchiv.de/assets/bundesarchiv/de/Publikationen/BFi_47_Boeger_GUeSt_barrierefrei_reduziert.pdf" target="_blank" rel="noopener noreferrer">Bundesarchiv: 1961 closure order, pp. 25–28</a>. The order lists the closed U-Bahn and S-Bahn stations, including Heinrich-Heine-Straße and above-ground Bornholmer Straße.</li>
+          <li><a href="https://sbahn.berlin/aktuelles/artikel/unterm-getuemmel-direkt-ins-zentrum/" target="_blank" rel="noopener noreferrer">S-Bahn Berlin: north–south tunnel chronology</a>. The operator dates the reopening of Potsdamer Platz to 1 March 1992.</li>
+          <li><a href="https://www.orte-der-einheit.de/bornholmer-strasse/" target="_blank" rel="noopener noreferrer">Haus der Geschichte: Bornholmer Straße</a>. Selective departures around 21:20 and the general opening around 23:30 on 9 November 1989 are separate stages.</li>
         </ul>
       </section>
     </div>
@@ -278,7 +277,7 @@
       westLeft:'Wedding', westRight:'Kreuzberg',
       stops:[
         {n:'Schwartzkopff&shy;straße', kind:'ghost',
-         then:'Sealed on 13 August 1961. Trains slowed through the platform without opening a door, because the tunnel geometry forced them to, not out of respect.',
+         then:'Sealed on 13 August 1961. West Berlin trains passed the guarded platform at reduced speed without stopping.',
          now:'An ordinary U6 stop again, a few minutes north of the Naturkundemuseum. Nothing dramatic to see at platform level.'},
         {n:'Natur&shy;kunde&shy;museum', kind:'ghost',
          then:'One of the sealed U6 platforms in the East Berlin sector, guarded and closed to passengers on both sides.',
@@ -287,21 +286,21 @@
          then:'Sealed. Above it, the street had been cut off from the West Berlin part of the same line.',
          now:'A normal working station at the top of Friedrichstraße, a short walk from the Oranienburger Straße nightlife strip.'},
         {n:'Friedrich&shy;straße', kind:'border',
-         then:'The exception. This was the one station inside East Berlin where Western passengers could get out, and only to change trains inside a sealed transfer area. The border control building next door is the Tränenpalast, the Palace of Tears.',
+         then:'The exception. Passengers could change between western U-Bahn and S-Bahn services in a separate transfer area without border checks. Entering East Berlin from the station required border controls. The Tränenpalast next door was the departure hall.',
          now:'A busy interchange and one of the few places where the divided-city story is still told on site, at the Tränenpalast museum right outside.'},
         {n:'Französische Straße', kind:'ghost', closed:true,
          then:'Sealed with the rest of the U6 stops in the East Berlin sector.',
          now:'Closed again, but for an ordinary reason. It shut permanently on 3 December 2020 when the new Unter den Linden station opened one day later as the U5/U6 interchange.'},
         {n:'Stadtmitte', kind:'ghost',
-         then:'The last sealed U6 platform before the line crossed back into West Berlin at Kochstraße.',
+         then:'The U6 platform was closed, while the U2 platform remained in use by East Berlin passengers. The passage between them was blocked. U6 trains continued south towards West Berlin at Kochstraße.',
          now:'A working interchange with the U2, a few minutes from Gendarmenmarkt and Checkpoint Charlie.'}
       ]
     },
     {
       id:'u8', label:'U8', color:'#224F86',
       name:'U8 through the northern districts',
-      noteThen:'Five sealed platforms in a row',
-      noteNow:'All five back in service',
+      noteThen:'Six sealed U8 platforms',
+      noteNow:'All six back in service',
       westLeft:'Wedding', westRight:'Kreuzberg',
       stops:[
         {n:'Bernauer Straße', kind:'ghost',
@@ -318,16 +317,22 @@
          now:'Part of the biggest interchange in the city, and the square where my walking tour starts.'},
         {n:'Jannowitz&shy;brücke', kind:'ghost',
          then:'Sealed. Then, on 11 November 1989, two days after the Wall opened, it became the first ghost station to take passengers again.',
-         now:'A normal stop by the Spree with a good view of the river from the bridge above.'}
+         now:'A normal stop by the Spree with a good view of the river from the bridge above.'},
+        {n:'Heinrich-Heine-Straße', kind:'ghost',
+         then:'Closed to passengers from 13 August 1961. U8 trains passed through this last sealed station before returning to West Berlin at Moritzplatz.',
+         now:'A working U8 station again. It reopened on 1 July 1990, together with the remaining closed U6 and U8 platforms.'}
       ]
     },
     {
       id:'sbahn', label:'S-Bahn', color:'#00713B',
-      name:'North–south S-Bahn tunnel',
-      noteThen:'Four sealed platforms plus one above ground',
-      noteNow:'All open, one is now a museum',
+      name:'North–south S-Bahn and Bornholmer Straße',
+      noteThen:'Four underground plus one above ground',
+      noteNow:'All five working; exhibition at Nordbahnhof',
       westLeft:'north', westRight:'south',
       stops:[
+        {n:'Bornholmer Straße', kind:'ghost',
+         then:'An above-ground station north of the tunnel, closed on 13 August 1961. It is additional to the 15 closed underground stations.',
+         now:'A working S-Bahn station beneath the Bösebrücke. At the border crossing on 9 November 1989, selective departures began around 21:20; the general opening followed around 23:30.'},
         {n:'Nord&shy;bahnhof', kind:'ghost',
          then:'Sealed, with barbed wire fitted to stop anyone reaching the track bed from the East Berlin side.',
          now:'The one ghost station that explains itself. A free permanent exhibition sits on the mezzanine level, and the Berlin Wall Memorial is directly above.'},
@@ -335,23 +340,20 @@
          then:'Sealed. The New Synagogue stands a short walk from the entrance that nobody could use.',
          now:'A working stop in the middle of the Scheunenviertel, useful for the New Synagogue and the surrounding streets.'},
         {n:'Friedrich&shy;straße', kind:'border',
-         then:'The same border station as on the U6, and the only stop in the tunnel where a Western passenger legally set foot in East Berlin.',
+         then:'The same interchange shown on the U6 line. Passengers could transfer between western services without border checks in a separate area. Border controls applied when entering East Berlin.',
          now:'A major interchange. The Tränenpalast outside is free to enter and worth twenty minutes.'},
         {n:'Branden&shy;burger Tor', kind:'ghost',
          then:'Sealed, directly under the death strip. The gate above it stood in no man’s land, unreachable from either side.',
          now:'The stop everyone uses for the Brandenburg Gate. The platform is ordinary. What is above it is not.'},
         {n:'Potsdamer Platz', kind:'ghost',
          then:'Sealed. The square above was flattened and empty for decades, one of the strangest voids in any European capital.',
-         now:'The last ghost station to come back, on 3 March 1992, after the whole tunnel was rebuilt. Everything above ground is newer than the station.'},
-        {n:'Bornholmer Straße', kind:'ghost',
-         then:'The only ghost station above ground rather than in a tunnel, closed on 13 August 1961 with everything else.',
-         now:'The Bösebrücke above it is where it ended. On the evening of 9 November 1989 the guards here were the first to open a crossing and let people through.'}
+         now:'The last ghost station to reopen, on 1 March 1992, after renovation of the north–south S-Bahn tunnel. The station is in normal service today.'} 
       ]
     }
   ];
 
   var era = 'then';
-  var sel = { line:2, stop:0 };
+  var sel = { line:2, stop:1 };
   var mapEl = document.getElementById('map');
   var detailEl = document.getElementById('detail');
   var legendEl = document.getElementById('legend');
@@ -406,7 +408,7 @@
   function buildLegend(){
     legendEl.innerHTML = era === 'then'
       ? '<span class="lg"><i class="ghost"></i>Sealed, trains passed through</span>'
-        + '<span class="lg"><i class="border"></i>Border station, one legal stop</span>'
+        + '<span class="lg"><i class="border"></i>One border interchange (shown twice)</span>'
         + '<span class="lg"><i class="open"></i>West Berlin platform</span>'
       : '<span class="lg"><i class="open"></i>Open and in normal service</span>'
         + '<span class="lg"><i class="shut"></i>Closed again since 2020</span>';
@@ -418,8 +420,8 @@
     document.getElementById('btnNow').setAttribute('aria-pressed', era === 'now' ? 'true' : 'false');
 
     tallyEl.innerHTML = era === 'then'
-      ? '<span>13 August 1961 onwards</span>15 stations sealed &middot; 1 border station'
-      : '<span>Berlin in 2026</span>14 back in service &middot; 1 closed again';
+      ? '<span>13 August 1961 onwards</span>16 closed stations &middot; 15 underground + 1 above ground'
+      : '<span>Berlin in 2026</span>15 in service &middot; 1 closed again';
 
     mapEl.querySelectorAll('.lnote').forEach(function(el){
       el.textContent = era === 'then' ? el.dataset.noteThen : el.dataset.noteNow;
@@ -438,7 +440,7 @@
       ? '<span class="pill" style="background:#8a7a00">Border station</span>'
       : '<span class="pill" style="background:'
         + (era === 'then' ? '#7d3b41' : (s.closed ? '#7a7a7a' : '#2e7d32')) + '">'
-        + (era === 'then' ? 'Sealed 1961–1989' : (s.closed ? 'Closed since 2020' : 'Open today')) + '</span>';
+        + (era === 'then' ? 'Closed from 1961' : (s.closed ? 'Closed since 2020' : 'Open today')) + '</span>';
 
     detailEl.innerHTML =
       '<div class="dtop"><div>'
@@ -481,7 +483,7 @@
   document.getElementById('btnNow').addEventListener('click', function(){ era = 'now'; render(); });
 
   var creditsOpen = document.getElementById('creditsOpen');
-  var creditsLayer = document.getElementById('imageCredits');
+  var creditsLayer = document.getElementById('historicalSources');
   var creditsDialog = creditsLayer.querySelector('.creditsDialog');
   var creditsClose = document.getElementById('creditsClose');
   var lastCreditsFocus = null;
