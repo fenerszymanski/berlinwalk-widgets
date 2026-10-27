@@ -217,3 +217,5 @@ h2>.sk-heading{width:55%}
 
 /* Keep the complete Berolina room video visible inside the shared gallery. */
 .gallery-stage>video.room.contain{object-fit:contain}
+.gallery-stage>img.extra{max-width:94%;max-height:94%;box-shadow:none}
+.thumbnails{flex-wrap:wrap}
