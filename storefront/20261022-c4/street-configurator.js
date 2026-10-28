@@ -223,7 +223,9 @@ export function buildCustomText(state, search) {
   const title = clean(state.title, YS_LIMITS.title).toUpperCase(), area = clean(state.area, YS_LIMITS.area), line = clean(state.line, YS_LIMITS.line);
   const [lat, lon] = [Number(state.lat), Number(state.lon)];
   const parts = [`Map point ${lat.toFixed(5)}, ${lon.toFixed(5)}`, `Title: ${title} | Area: ${area}`];
-  const ref = adRef(search), room = YS_LIMITS.details - [...parts, ...(line ? [`Line: ${line}`] : [])].join(' // ').length - ' // Ref: '.length;
+  // Consented journey id first (funnel.js sets it only with analytics consent), then the ad reference.
+  const journeyRef = typeof window !== 'undefined' && /^[a-z0-9]{6,16}$/.test(window.__bwStoreJourneyRef || '') ? `j${window.__bwStoreJourneyRef}` : '';
+  const ref = [journeyRef, adRef(search)].filter(Boolean).join('~'), room = YS_LIMITS.details - [...parts, ...(line ? [`Line: ${line}`] : [])].join(' // ').length - ' // Ref: '.length;
   if (ref && room >= 6) parts.push(`Ref: ${ref.slice(0, room)}`);
   if (line) parts.push(`Line: ${line}`);
   return {
@@ -300,7 +302,7 @@ const trustItems = kind => TRUST[kind].map(([icon, text]) => `<li>${TRUST_ICON[i
 // `secure` adds the "Secure checkout" item (the compact copy under the poster has no card marks next to it).
 export const trustHtml = (secure = false, cls = '') => ['poster', 'digital'].map(kind => `<ul class="ys-trust ${cls}" data-ys-legal="${kind}" ${kind === 'digital' ? 'hidden' : ''} aria-label="Why you can buy with confidence">${trustItems(kind)}${secure ? `<li>${TRUST_ICON.lock}<span>Secure checkout</span></li>` : ''}</ul>`).join('');
 // The line under the search box reads as a hint until a search runs (it keeps one line of height, so nothing below it moves).
-const SEARCH_HINT = 'Type an address or a place in Berlin, then tap it.';
+const SEARCH_HINT = 'Search your address to see the print I can make for you, then tap it.';
 // Yusuf, 25 Oct 2026: only 4 of the first 174 previews got past the old "I can see the 1928 photo" checkbox, which kept the add button grey two
 // screens below the poster. Now an add button sits right under the poster and both add buttons are live; tapping one asks the same question
 // once, in place, and "Yes" adds to the cart. `where` is "quick" (under the poster) or "form" (the buy box).

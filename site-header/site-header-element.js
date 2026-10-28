@@ -11,7 +11,7 @@ const BW_HEADER_MONO_URL = new URL('../brand/fonts/editorial-v2/IBMPlexMono-Semi
 const BW_HEADER_MENU_FONT_URL = new URL('../home-two-doors/assets/fonts/Fraunces-Variable-latin.woff2', BW_HEADER_SCRIPT_URL).href;
 // Berlin Then and Now (service 145cb27e). The legacy booking path stays
 // reachable for guests who booked before 30 September, but nothing links to it.
-const BW_HEADER_BUILD = 'store-navigation-responsive-20261027';
+const BW_HEADER_BUILD = 'store-mode-20261029';
 const BW_HEADER_BOOKING_URL = 'https://www.walkofberlin.com/book-berlin-walking-tour/berlin-then-and-now';
 const BW_HEADER_TOUR_FACTS = ['about 2.5 hours', 'max 10 people', '€25']
   .map((fact) => `<span class="bw-header-fact">${fact}</span>`)
@@ -234,6 +234,7 @@ class BWHeaderElement extends HTMLElement {
     if (!adopt) this._render();
     this._needsRuntimeRender = false;
     BW_HEADER_INSTANCES.add(this);
+    if (typeof bwHeaderStoreMode === 'function') bwHeaderStoreMode();
     this._visibilityChangeHandler = bwHeaderScheduleReconcile;
     window.addEventListener('resize', this._visibilityChangeHandler, { passive: true });
     if ('ResizeObserver' in window) {
@@ -1501,8 +1502,37 @@ class BWHeaderElement extends HTMLElement {
   }
 }
 
+// Store mode (Yusuf, 29 Oct 2026: the store pages are set apart from the tour without a different menu or footer). On store routes the
+// tour band, the tour line in the mobile menu and the yellow book buttons are hidden; the menu itself (Tours included) stays the same.
+// Works on prerendered and rendered markup alike, and follows Wix's in-site navigation.
+const BW_HEADER_STORE_ROUTE = /^\/(?:category|product-page|cart-page|thank-you-page|store|shop)(?:\/|$)/;
+function bwHeaderStoreMode() {
+  const store = BW_HEADER_STORE_ROUTE.test(location.pathname);
+  if (store && !document.getElementById('bw-header-store-mode-css')) {
+    const style = document.createElement('style');
+    style.id = 'bw-header-store-mode-css';
+    // On <html>, because the mobile menu is moved out of the element; the doubled attribute outranks the header's own !important rules
+    // for the mobile book button (.bw-header-cta a.bw-header-mobile-book:is(...)).
+    const m = 'html[data-bw-store-mode][data-bw-store-mode]';
+    style.textContent = [`${m} .bw-header-top`, `${m} [data-bw-header-tour-line]`, `${m} a.bw-header-book`, `${m} .bw-header-cta a.bw-header-book`, `${m} .bw-header-cta a.bw-header-mobile-book`, `${m} .bw-header-cta a.bw-header-mobile-book:is(:hover, :focus, :active, :visited)`].join(',') + '{display:none!important}';
+    document.head.appendChild(style);
+  }
+  document.documentElement.toggleAttribute('data-bw-store-mode', store);
+  document.querySelectorAll('bw-site-header').forEach((header) => header.toggleAttribute('data-bw-store-mode', store));
+}
+let bwHeaderStorePath = '';
+function bwHeaderStoreModeWatch() {
+  if (location.pathname === bwHeaderStorePath) return;
+  bwHeaderStorePath = location.pathname;
+  bwHeaderStoreMode();
+  bwHeaderScheduleReconcile();
+}
+
 if (!customElements.get('bw-site-header')) {
   customElements.define('bw-site-header', BWHeaderElement);
 }
+bwHeaderStoreModeWatch();
+window.addEventListener('popstate', bwHeaderStoreModeWatch);
+setInterval(bwHeaderStoreModeWatch, 500);
 bwHeaderScrollToVirtualTours();
 })();

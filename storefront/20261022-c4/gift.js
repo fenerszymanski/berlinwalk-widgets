@@ -47,7 +47,7 @@ export function giftHtml(offers, state = {}) {
     <button type="button" class="ys-gift-toggle" data-action="gift-toggle" aria-expanded="${!!state.open}" aria-controls="ys-gift-panel">${GIFT_ICON}<span class="ys-gift-head"><strong>No address? Give a voucher.</strong><small>${prices}</small></span>${CHEVRON}</button>
     <div class="ys-gift-panel" id="ys-gift-panel" data-ys-gift-panel ${state.open ? '' : 'hidden'}>
       <div class="ys-sizes ys-gift-choices" role="radiogroup" aria-label="Choose a gift">${choices}</div>
-      <p class="ys-gift-how">A bigger size or another paper: the recipient pays only the difference at checkout. Code and printable card by email, normally within the hour and no later than 24 hours. Valid three years.</p>
+      <p class="ys-gift-how">A bigger size or another paper: the recipient pays only the difference at checkout. Code and printable card by email, normally within the hour and no later than 24 hours. Valid until 31 December of the third year after purchase.</p>
       <button type="button" class="primary ys-gift-add" data-action="gift-add" data-gift-kind="${esc(picked.kind)}" ${state.redirecting ? 'disabled' : ''}>${state.redirecting ? 'Added. Opening your cart…' : 'Add gift to cart'}</button>
     </div>
   </div>`;

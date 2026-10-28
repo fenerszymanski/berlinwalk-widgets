@@ -180,6 +180,9 @@ h2>.sk-heading{width:55%}
 .line-legal{margin:8px 0 0;padding:8px 10px;background:var(--panel);border-radius:8px;font-size:12px;line-height:1.45;color:var(--ink)}
 .line-legal strong{display:block;color:var(--green);font-size:12px}
 .line-legal p{margin:4px 0 0}
+.line-legal-more{margin:4px 0 0}
+.line-legal-more>summary{cursor:pointer;color:var(--green);font-weight:600;font-size:12px}
+.ys-lead{flex:0 0 100%;margin:8px 0 0;font-size:16px;line-height:1.4;color:var(--ink)}
 .eu-guarantee{margin:14px 0 0}
 .eu-guarantee h3{font:500 16px var(--serif);margin:0 0 8px;color:var(--green)}
 .guarantee-line{margin:10px 0 0;font-size:13px}
