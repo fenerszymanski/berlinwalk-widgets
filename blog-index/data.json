@@ -1,9 +1,9 @@
 {
-  "updatedAt": "2026-10-28T03:07:18.455Z",
+  "updatedAt": "2026-10-28T10:09:37.095Z",
   "source": "Wix Blog API",
   "popularSource": "Wix Blog metrics.views lifetime sort",
-  "totalPosts": 445,
-  "toolsTotal": 372,
+  "totalPosts": 446,
+  "toolsTotal": 373,
   "bookingUrl": "https://www.walkofberlin.com/book-berlin-walking-tour/berlin-then-and-now",
   "navTopics": [
     {
@@ -1802,6 +1802,23 @@
   ],
   "latest": [
     {
+      "title": "Queer History in Berlin: A Walk From Bebelplatz to Nollendorfplatz",
+      "slug": "queer-history-in-berlin",
+      "path": "/post/queer-history-in-berlin",
+      "url": "https://www.berlinwalk.com/post/queer-history-in-berlin",
+      "excerpt": "Seven stops, about 6.7 km: from Bebelplatz and the Tiergarten memorial to Magnus-Hirschfeld-Ufer, the Schwules Museum, the pink triangle at Nollendorfplatz and the old Eldorado corner. The order, the day and what is closed when.",
+      "category": "Tourist Tips",
+      "categorySlug": "tourist-tips",
+      "topic": "history-myths",
+      "topicLabel": "Berlin History & Myths",
+      "readTime": "6 min read",
+      "publishedDate": "2026-10-28T10:07:38.734Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_dea8d65757664d67b634d2509c54fc47~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-calla-lilies-magnus-hirschfeld-ufer.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_dea8d65757664d67b634d2509c54fc47~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-calla-lilies-magnus-hirschfeld-ufer.jpg",
+      "alt": "Six tall rainbow-coloured calla lily sculptures on the riverside path of Magnus-Hirschfeld-Ufer in autumn, with trees behind and two grey information steles",
+      "relatedToolSlug": "queer-history-walk-map"
+    },
+    {
       "title": "Sledding in Berlin: Which Hill, and How Often There Is Enough Snow",
       "slug": "sledding-in-berlin",
       "path": "/post/sledding-in-berlin",
@@ -1987,26 +2004,26 @@
       "thumb": "https://static.wixstatic.com/media/5a08a3_edc2a51026b54dd494b5a0b931a2b129~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-bauhaus-workshop-wing.jpg",
       "alt": "The workshop wing of the Bauhaus Building in Dessau, a four-storey glass curtain wall above a white base, against a deep blue sky with a lawn in front",
       "relatedToolSlug": "dessau-bauhaus-day-planner"
-    },
-    {
-      "title": "Flat Swap in Berlin: When Trading Flats Keeps Your Rent",
-      "slug": "flat-swap-berlin",
-      "path": "/post/flat-swap-berlin",
-      "url": "https://www.berlinwalk.com/post/flat-swap-berlin",
-      "excerpt": "With the seven state-owned housing companies, a flat swap keeps both net cold rents exactly as they are. With a private landlord it is a new lease, and the rent can jump. Here is how the swap portal, the 2025 downsizing offer and a private swap compare.",
-      "category": "Living in Berlin",
-      "categorySlug": "living-in-berlin",
-      "topic": "living-in-berlin",
-      "topicLabel": "Living in Berlin",
-      "readTime": "6 min read",
-      "publishedDate": "2026-10-16T07:30:14.711Z",
-      "image": "https://static.wixstatic.com/media/5a08a3_f6848bfe02ed430fb053c8e18bf5d5b4~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-schlangenbader-strasse.jpg",
-      "thumb": "https://static.wixstatic.com/media/5a08a3_f6848bfe02ed430fb053c8e18bf5d5b4~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-schlangenbader-strasse.jpg",
-      "alt": "The terraced housing over the A104 motorway on Schlangenbader Straße in Wilmersdorf, a long stepped block with balconies and planted terraces above the trees",
-      "relatedToolSlug": "berlin-flat-swap-rent-board"
     }
   ],
   "allPosts": [
+    {
+      "title": "Queer History in Berlin: A Walk From Bebelplatz to Nollendorfplatz",
+      "slug": "queer-history-in-berlin",
+      "path": "/post/queer-history-in-berlin",
+      "url": "https://www.berlinwalk.com/post/queer-history-in-berlin",
+      "excerpt": "Seven stops, about 6.7 km: from Bebelplatz and the Tiergarten memorial to Magnus-Hirschfeld-Ufer, the Schwules Museum, the pink triangle at Nollendorfplatz and the old Eldorado corner. The order, the day and what is closed when.",
+      "category": "Tourist Tips",
+      "categorySlug": "tourist-tips",
+      "topic": "history-myths",
+      "topicLabel": "Berlin History & Myths",
+      "readTime": "6 min read",
+      "publishedDate": "2026-10-28T10:07:38.734Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_dea8d65757664d67b634d2509c54fc47~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-calla-lilies-magnus-hirschfeld-ufer.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_dea8d65757664d67b634d2509c54fc47~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-calla-lilies-magnus-hirschfeld-ufer.jpg",
+      "alt": "Six tall rainbow-coloured calla lily sculptures on the riverside path of Magnus-Hirschfeld-Ufer in autumn, with trees behind and two grey information steles",
+      "relatedToolSlug": "queer-history-walk-map"
+    },
     {
       "title": "Sledding in Berlin: Which Hill, and How Often There Is Enough Snow",
       "slug": "sledding-in-berlin",
