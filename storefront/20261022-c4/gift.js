@@ -47,7 +47,7 @@ export function giftHtml(offers, state = {}) {
     <button type="button" class="ys-gift-toggle" data-action="gift-toggle" aria-expanded="${!!state.open}" aria-controls="ys-gift-panel">${GIFT_ICON}<span class="ys-gift-head"><strong>No address? Give a voucher.</strong><small>${prices}</small></span>${CHEVRON}</button>
     <div class="ys-gift-panel" id="ys-gift-panel" data-ys-gift-panel ${state.open ? '' : 'hidden'}>
       <div class="ys-sizes ys-gift-choices" role="radiogroup" aria-label="Choose a gift">${choices}</div>
-      <p class="ys-gift-how">Code and printable card by email within the hour. Valid three years.</p>
+      <p class="ys-gift-how">A bigger size or another paper: the recipient pays only the difference at checkout. Code and printable card by email, normally within the hour and no later than 24 hours. Valid three years.</p>
       <button type="button" class="primary ys-gift-add" data-action="gift-add" data-gift-kind="${esc(picked.kind)}" ${state.redirecting ? 'disabled' : ''}>${state.redirecting ? 'Added. Opening your cart…' : 'Add gift to cart'}</button>
     </div>
   </div>`;
@@ -60,6 +60,6 @@ export function giftLineInfo(line, offers, presentation, assetUrl, wixImage) {
   const info = (Array.isArray(presentation) ? presentation : []).find(item => item.wixProductId === GIFT_IDS[kind]) || {};
   const offer = (offers || []).find(item => item.kind === kind);
   const remote = wixImage ? wixImage(offer?.row?.mainMedia) : '';
-  return {kind, name: info.name || 'Gift voucher: Your Berlin Street in 1928', typeLine: info.typeLine || '', note: info.giftNote || 'Code and printable card by email within the hour',
+  return {kind, name: info.name || 'Gift voucher: Your Berlin Street in 1928', typeLine: info.typeLine || '', note: info.giftNote || 'Code and printable card by email, normally within the hour',
     image: remote && remote !== '#' ? remote : info.image ? assetUrl('assets/' + info.image) : ''};
 }

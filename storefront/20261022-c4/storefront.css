@@ -261,6 +261,8 @@ h2>.sk-heading{width:55%}
 .ys-options-body{display:grid;gap:14px;padding:4px 14px 14px}
 .ys-options-body .ys-variant{margin-top:0}
 .ys-options-body .ys-format .ys-sizes{margin-top:6px}
+.ys-format-top[hidden]{display:none}
+.ys-format-top .ys-sizes{margin-top:6px}
 /* Trust strip beside the add button, and the one legal sentence under it. */
 .ys-trust{list-style:none;margin:12px 0 0;padding:0;display:grid;gap:7px}
 .ys-trust[hidden]{display:none}

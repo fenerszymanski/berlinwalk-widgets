@@ -191,7 +191,8 @@ export function takePreviewToken() {
   return found.token;
 }
 export const CONTEXT_ENDPOINT = 'https://app.berlinwalk.com/api/download-lead?action=previewContext&p=';
-// The server answers {lat, lon, title, area, format, size}; it is checked again here before it touches the page.
+// The server answers {lat, lon, title, area, format, size, paper}; it is checked again here before it touches the page. The personal line is never
+// stored or emailed (semantic review 28 Oct 2026), so the email no longer promises the print "exactly as you left it".
 export function spotFromPreview(preview) {
   const lat = Math.round(Number(preview?.lat) * 1e5) / 1e5, lon = Math.round(Number(preview?.lon) * 1e5) / 1e5;
   if (!inBerlin(lat, lon)) return null;
@@ -199,11 +200,12 @@ export function spotFromPreview(preview) {
   if (!title) return null;
   const area = clean(preview?.area, YS_LIMITS.area);
   return {lat, lon, title, area, address: clean([title, area].filter(Boolean).join(', '), YS_LIMITS.address),
-    format: preview?.format === 'digital' ? 'digital' : 'poster', size: ({'30x40': YS_SIZES[0], '45x60': YS_SIZES[1]})[preview?.size] || ''};
+    format: preview?.format === 'digital' ? 'digital' : 'poster', size: ({'30x40': YS_SIZES[0], '45x60': YS_SIZES[1]})[preview?.size] || '',
+    paper: preview?.format !== 'digital' && YS_PAPERS.some(p => p.name === preview?.paper) ? preview.paper : ''};
 }
 // What the preview-mail endpoint takes as `preview` (the server rounds and re-validates it; a house number is stripped there too).
 export const mailPreview = state => ({lat: Number(state.lat), lon: Number(state.lon), title: clean(state.title, YS_LIMITS.title).toUpperCase(), area: clean(state.area, YS_LIMITS.area),
-  format: ysDigital(state) ? 'digital' : 'poster', size: ysDigital(state) ? '' : ysSize(state)});
+  format: ysDigital(state) ? 'digital' : 'poster', size: ysDigital(state) ? '' : ysSize(state), paper: ysDigital(state) ? '' : ysPaper(state).name});
 export const MAIL_ENDPOINT = 'https://app.berlinwalk.com/api/download-lead?action=previewSubmit';
 export const MAIL_ASSET = {assetId: 'street-1928-preview', consentVersion: 'street-1928-preview-letter-v1-2026-10-27', consentMethod: 'optional_unticked_checkbox_with_doi'};
 // Shown next to the unticked box. Must stay word for word the registry's consentText (lead-asset-registry.js), which is what gets stored.
@@ -303,7 +305,7 @@ const SEARCH_HINT = 'Type an address or a place in Berlin, then tap it.';
 // screens below the poster. Now an add button sits right under the poster and both add buttons are live; tapping one asks the same question
 // once, in place, and "Yes" adds to the cart. `where` is "quick" (under the poster) or "form" (the buy box).
 const confirmHtml = where => `<div class="ys-confirm" data-ys-confirm="${where}" role="group" aria-label="Check the 1928 photo" hidden>
-      <p><strong>One check before I print it:</strong> can you see the 1928 aerial photo in the top picture? If it is blank white, there is no 1928 photo for that spot (far eastern edge of Berlin).</p>
+      <p><strong>Quick check before it goes in your cart:</strong> can you see the 1928 aerial photo in the top picture? Nothing is ordered yet. If it is blank white, the 1928 survey did not reach that spot (far eastern edge of Berlin).</p>
       <div class="ys-confirm-row"><button type="button" class="primary" data-ys-yes>Yes, add to cart</button><button type="button" class="ys-link" data-ys-no>It is blank</button></div>
       <p class="ys-confirm-no" data-ys-noinfo hidden>The 1928 survey did not reach that spot, so I cannot print it. Try a place nearby, or tap the photo to move the cross.</p>
     </div>`;
@@ -372,13 +374,13 @@ export function mountConfigurator(host, state, api) {
         <label>Your line on the print (optional)<input data-ys="line" maxlength="${L.line}" placeholder="e.g. Lena &amp; Jonas · here since 2021" value="${esc(state.line || '')}"></label>
         <p class="ys-hint">The house number is never printed.</p>
       </div>
-      <details class="ys-options" data-ys="options" ${state.optionsOpen ? 'open' : ''} ${api.variants || api.digital ? '' : 'hidden'}>
-        <summary><span class="ys-options-t">Size, paper, format</span><span class="ys-options-v" data-ys="optsummary"></span></summary>
+      <div class="ys-format ys-format-top" data-ys="format" ${api.digital ? '' : 'hidden'}>
+        <span class="ys-label" id="ys-format-l">What you get</span>
+        <div class="ys-sizes" role="radiogroup" aria-labelledby="ys-format-l"><button type="button" role="radio" class="ys-size" data-ys-format="poster" aria-checked="${!ysDigital(state)}">Printed poster<small>From €34.90 · printed and posted to you, free delivery</small></button><button type="button" role="radio" class="ys-size" data-ys-format="digital" aria-checked="${ysDigital(state)}">Digital file<small>${Number.isFinite(api.digitalPrice)?euro(api.digitalPrice):'Currently unavailable'} · JPG + PDF by email, print it yourself</small></button></div>
+      </div>
+      <details class="ys-options" data-ys="options" ${state.optionsOpen ? 'open' : ''} ${api.variants && !ysDigital(state) ? '' : 'hidden'}>
+        <summary><span class="ys-options-t">Size and paper</span><span class="ys-options-v" data-ys="optsummary"></span></summary>
         <div class="ys-options-body">
-          <div class="ys-format" data-ys="format" ${api.digital ? '' : 'hidden'}>
-            <span class="ys-label" id="ys-format-l">Format</span>
-            <div class="ys-sizes" role="radiogroup" aria-labelledby="ys-format-l"><button type="button" role="radio" class="ys-size" data-ys-format="poster" aria-checked="${!ysDigital(state)}">Printed poster<small>From €34.90 · free delivery</small></button><button type="button" role="radio" class="ys-size" data-ys-format="digital" aria-checked="${ysDigital(state)}">Digital file<small>${Number.isFinite(api.digitalPrice)?euro(api.digitalPrice):'Currently unavailable'} · print it yourself, anywhere</small></button></div>
-          </div>
           <div class="ys-variant" data-ys="variant" ${api.variants && !ysDigital(state) ? '' : 'hidden'}>
             <span class="ys-label" id="ys-size-l">Size</span>
             <div class="ys-sizes" role="radiogroup" aria-labelledby="ys-size-l">${YS_SIZES.map(z => `<button type="button" role="radio" class="ys-size" data-ys-size="${esc(z)}" aria-checked="${z === ysSize(state)}">${esc(z)}<small data-ys-sizeprice="${esc(z)}"></small></button>`).join('')}</div>
@@ -398,7 +400,7 @@ export function mountConfigurator(host, state, api) {
   $('options').addEventListener('toggle', () => { state.optionsOpen = $('options').open; });
   function paintVariant() {
     if (!api.digital && ysDigital(state)) state.format = 'poster';   // the digital product is not in the catalogue: poster only
-    $('options').hidden = !api.variants && !api.digital;
+    $('options').hidden = !api.variants || ysDigital(state);   // only the poster has sizes and papers; the format choice sits above the box
     host.querySelectorAll('[data-ys-format]').forEach(b => b.setAttribute('aria-checked', String((b.dataset.ysFormat === 'digital') === ysDigital(state))));
     $('variant').hidden = !api.variants || ysDigital(state);
     const delivery = host.querySelector('.ys-buy .delivery'); if (delivery) delivery.textContent = ysDigital(state) ? DIGITAL_DELIVERY : POSTER_DELIVERY;
@@ -613,10 +615,10 @@ export function mountConfigurator(host, state, api) {
       const spot = spotFromPreview((await response.json()).preview);
       if (!spot) return quiet();
       if (state.lat) return;                                   // the visitor already picked a spot while this was loading
-      Object.assign(state, {lat: spot.lat, lon: spot.lon, title: spot.title, area: spot.area, address: spot.address, query: spot.title, format: spot.format, size: spot.size || state.size});
+      Object.assign(state, {lat: spot.lat, lon: spot.lon, title: spot.title, area: spot.area, address: spot.address, query: spot.title, format: spot.format, size: spot.size || state.size, paper: spot.paper || state.paper});
       api.track?.('restored');
       if (!host.isConnected) return;                           // the storefront re-rendered meanwhile: the new mount builds from state
-      $('title').value = state.title; $('area').value = state.area; input.value = state.query;
+      $('title').value = state.title; $('area').value = state.area; input.value = state.query; $('paper').value = ysPaper(state).name;
       paintVariant(); showPoint(true); refreshButton();
     } catch (e) { quiet(); }
   }
