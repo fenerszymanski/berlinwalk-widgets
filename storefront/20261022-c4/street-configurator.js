@@ -25,6 +25,54 @@ const NOMINATIM = 'https://nominatim.openstreetmap.org/search';
 // Photon (komoot, OpenStreetMap data) forgives typos ("fisherinsel") and is built for search-as-you-type; Nominatim is not.
 const PHOTON = 'https://photon.komoot.io/api/';
 
+// One retry per photo/point, with fresh image nodes so late events from a cancelled
+// request cannot complete the next request. Only fixed, aggregate step names leave
+// the browser: no address, coordinates, URL, visitor ID or raw error text.
+export function loadAerialPhoto({slot, url, layer, valid = () => true, track = () => {}, status = () => {}, loaded = () => {},
+  timeoutMs = 15000, retryMs = 1000, later = setTimeout, clear = clearTimeout, online = () => globalThis.navigator?.onLine !== false}) {
+  if (!['archive', 'today'].includes(layer)) throw new Error('Unknown aerial layer');
+  let cancelled = false, attempt = 0, timer, image;
+  const active = () => !cancelled && valid();
+  const emit = step => { try { track(step); } catch {} }; // measurement never blocks the preview
+  const label = layer === 'archive' ? '1928' : 'current';
+  const stopImage = () => { if (image) { image.onload = image.onerror = null; image.removeAttribute('src'); } };
+  function start() {
+    if (!active()) return;
+    attempt += 1;
+    const previous = slot.querySelector('img');
+    image = previous.cloneNode(false); image.removeAttribute('src');
+    previous.replaceWith(image);
+    const thisImage = image;
+    let settled = false;
+    function finish(reason) {
+      if (settled || !active()) return;
+      settled = true; clear(timer); thisImage.onload = thisImage.onerror = null;
+      if (!reason) {
+        status(''); if (attempt === 2) emit(`photo${layer}recovered`);
+        loaded(); return;
+      }
+      if (attempt === 1) emit(layer === 'archive' ? 'photoerror' : 'photoerrortoday');
+      emit(`photo${layer}${online() ? reason : 'offline'}`);
+      stopImage();
+      if (attempt === 1) {
+        status(`Retrying the ${label} photo…`);
+        timer = later(start, retryMs);
+      } else {
+        emit(`photo${layer}failed`);
+        status(`The ${label} photo could not load after two attempts. Search for the place again to retry.`);
+      }
+    }
+    thisImage.onload = () => finish('');
+    // An image error does not expose an HTTP status or distinguish network from decode errors.
+    thisImage.onerror = () => finish('loaderror');
+    timer = later(() => finish('timeout'), timeoutMs);
+    status(attempt === 1 ? `Loading the ${label} photo…` : `Retrying the ${label} photo…`);
+    thisImage.src = url;
+  }
+  start();
+  return () => { cancelled = true; clear(timer); stopImage(); };
+}
+
 export function utm33(lat, lon) {
   const a = 6378137.0, f = 1 / 298.257222101, e2 = f * (2 - f), k0 = 0.9996, lon0 = 15 * Math.PI / 180;
   const la = lat * Math.PI / 180, lo = lon * Math.PI / 180;
@@ -387,7 +435,7 @@ export function mountConfigurator(host, state, api) {
   host.querySelectorAll('[data-ys-format]').forEach(b => b.addEventListener('click', () => { const was = ysDigital(state); state.format = b.dataset.ysFormat; if (ysDigital(state) && !was) api.track?.('digital'); paintVariant(); }));
   $('paper').addEventListener('change', e => { state.paper = e.target.value; paintVariant(); });
   queueMicrotask(paintVariant);
-  const img1928 = $('photo-1928').querySelector('img'), imgToday = $('photo-today').querySelector('img');
+  api.cancelPhotos?.();
   const ptitle = $('ptitle'), parea = $('parea'), pcoords = $('pcoords'), pline = $('pline');
   // Poster words follow the inputs (title, area, coordinates of the current point, personal line or the grey fallback); the title shrinks in 4-unit steps until it fits 1400 units.
   function paintWords() {
@@ -432,15 +480,18 @@ export function mountConfigurator(host, state, api) {
     if (fresh) paintMail('');
     $('caption').textContent = captionFor(state, true);
     paintWords(); ensureFonts();
-    setStatus('Loading the 1928 photo…'); setStatusToday('');
+    api.cancelPhotos?.();
     const mine = state.token = (state.token || 0) + 1;
-    let loaded = 0; const both = () => { if (state.token === mine && ++loaded === 2) api.track?.('preview'); };   // funnel: both photos on screen
-    img1928.onload = () => { if (state.token === mine) setStatus(''); both(); };
-    imgToday.onload = both;
-    img1928.onerror = () => { if (state.token === mine) { setStatus('The aerial photo service did not answer. Try again in a moment.'); api.track?.('photoerror'); } };
-    imgToday.onerror = () => { if (state.token === mine) setStatusToday('Today’s photo did not load. Try again in a moment.'); };
-    img1928.src = url1928(state.lat, state.lon);
-    imgToday.src = urlToday(state.lat, state.lon);
+    const valid = () => state.token === mine && host.isConnected;
+    const loaded = new Set();
+    const both = layer => { if (valid()) { loaded.add(layer); if (loaded.size === 2) api.track?.('preview'); } };
+    const cancel = ['archive', 'today'].map(layer => loadAerialPhoto({
+      slot: $(layer === 'archive' ? 'photo-1928' : 'photo-today'),
+      url: layer === 'archive' ? url1928(state.lat, state.lon) : urlToday(state.lat, state.lon),
+      layer, valid, track: step => api.track?.(step), status: layer === 'archive' ? setStatus : setStatusToday,
+      loaded: () => both(layer),
+    }));
+    api.cancelPhotos = () => cancel.forEach(stop => stop());
     if (fresh) state.seen = false, state.confirming = null;   // a new spot may be outside the 1928 survey: ask again
     refreshButton();
   }
@@ -496,10 +547,10 @@ export function mountConfigurator(host, state, api) {
     if (box.bottom < 90 || box.top > innerHeight - 90) $('sheet').scrollIntoView({behavior: 'smooth', block: 'start'});
   });
   // ---- Tap either photo: pixel offset -> metres -> new point (both show the same ground box, so the maths is the same) ----
-  for (const [name, img] of [['photo-1928', img1928], ['photo-today', imgToday]]) {
+  for (const name of ['photo-1928', 'photo-today']) {
     $(name).addEventListener('click', event => {
       if (!state.lat) return;
-      const box = img.getBoundingClientRect(); if (!box.width || !box.height) return;
+      const box = $(name).querySelector('img').getBoundingClientRect(); if (!box.width || !box.height) return;
       const [lat, lon] = movePoint(state.lat, state.lon, (event.clientX - box.left) / box.width, (event.clientY - box.top) / box.height);
       if (!inBerlin(lat, lon)) return;
       state.lat = lat; state.lon = lon; showPoint(false);
