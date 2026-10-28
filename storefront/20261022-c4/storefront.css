@@ -327,3 +327,6 @@ details.legal-foot>summary:after{top:50%;margin-top:-14px}
 @media(max-width:740px){.product-layout>.product-info{order:4;width:100%;margin-top:26px}}
 .ys-gift-toggle[aria-expanded="true"] .ys-gift-head small{display:none}
 .ys-legalline .link{min-height:0;display:inline}
+
+/* Exact source-credit URLs: scoped to new source disclosures. */
+.disclosures details.source-credits .details-body{overflow-wrap:anywhere;word-break:normal}

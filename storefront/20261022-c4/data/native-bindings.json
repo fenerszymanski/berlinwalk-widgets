@@ -590,5 +590,21 @@
       "bw-gift-voucher"
     ],
     "forceNativeCategoryIds": true
+  },
+  {
+    "wixProductId": "8e2956c5-74e6-440e-b4c3-6cf0a3df23f2",
+    "nativeProductType": "physical",
+    "nativeCategoryIds": [
+      "03bc9fd6-f411-ed15-290b-2acf44bb430d",
+      "00000000-000000-000000-000000000001"
+    ]
+  },
+  {
+    "wixProductId": "cc2e2464-61a1-b1e7-3f70-8cad2bdefa9e",
+    "nativeProductType": "digital",
+    "nativeCategoryIds": [
+      "02d24409-01f2-4b00-b24d-d762d74a4fb6",
+      "00000000-000000-000000-000000000001"
+    ]
   }
 ]

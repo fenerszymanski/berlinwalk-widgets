@@ -830,5 +830,68 @@
     "giftLabel": "Digital gift",
     "giftCovers": "the printable file",
     "giftNote": "Code and printable card by email within the hour"
+  },
+  {
+    "id": "pr-siegessaeule",
+    "name": "Siegessäule",
+    "place": "Tiergarten · Mitte",
+    "image": "https://static.wixstatic.com/media/5a08a3_8e14623aec3f42bba8a43ac44a624b48~mv2.jpg",
+    "alt": "A close upward view of Berlin’s Victory Column, with blue sky, golden statue and colonnade.",
+    "typeLine": "PRINT · UNFRAMED",
+    "wixProductId": "8e2956c5-74e6-440e-b4c3-6cf0a3df23f2",
+    "group": "landmarks",
+    "roomImage": "https://static.wixstatic.com/media/5a08a3_bcff64f8054f408d9547fc3ae74cc2cc~mv2.jpg",
+    "roomVideoFit": "contain",
+    "roomCaption": "50 × 70 cm visualisation · Print supplied unframed · Frame and decor not included",
+    "roomAlt": "Siegessäule poster shown edge to edge at 50 × 70 cm in an AI-generated room visualisation.",
+    "roomVideoUrl": "https://video.wixstatic.com/video/5a08a3_eb476cc8cba3434e86db98ad36b63554/file",
+    "roomVideoPosterUrl": "https://static.wixstatic.com/media/5a08a3_f3583fd65bc64e2e974e996f8fd5ac3f~mv2.png",
+    "roomVideoThumbnailUrl": "https://static.wixstatic.com/media/5a08a3_f3583fd65bc64e2e974e996f8fd5ac3f~mv2.png",
+    "sizeImages": {
+      "30x40 cm": "https://static.wixstatic.com/media/5a08a3_8e14623aec3f42bba8a43ac44a624b48~mv2.jpg",
+      "50x70 cm": "https://static.wixstatic.com/media/5a08a3_f1d139f037b340afb1a80df8cb4cc2ee~mv2.jpg"
+    },
+    "gallery": [
+      {
+        "image": "https://static.wixstatic.com/media/5a08a3_f1d139f037b340afb1a80df8cb4cc2ee~mv2.jpg",
+        "alt": "Siegessäule · 50 × 70 cm composition, edge to edge with no added white bands."
+      }
+    ],
+    "alternativeProductId": "cc2e2464-61a1-b1e7-3f70-8cad2bdefa9e",
+    "visualCreditsWrap": true,
+    "visualCreditsHtml": "<p>Image credits and AI process</p><p>I selected this close upward view of the Siegessäule and directed the architectural corrections while keeping its angle and gouache style. The artwork was generated and edited with OpenAI ImageGen, then enhanced with Adobe Firefly Upscaler. It is an artistic interpretation, not a measured architectural drawing.</p><p>Photographic inputs used in the artistic adaptation:</p><p>BugWarp — &quot;Berlin Victory Column - BugWarp 01.jpg&quot; (12 August 2024), CC0 1.0 Universal Public Domain Dedication; overall column and gallery reference.<br><a href=\"https://commons.wikimedia.org/wiki/File:Berlin_Victory_Column_-_BugWarp_01.jpg\" target=\"_blank\" rel=\"noopener noreferrer\">https://commons.wikimedia.org/wiki/File:Berlin_Victory_Column_-_BugWarp_01.jpg</a><br><a href=\"https://creativecommons.org/publicdomain/zero/1.0/\" target=\"_blank\" rel=\"noopener noreferrer\">https://creativecommons.org/publicdomain/zero/1.0/</a></p><p>Gerd Eichmann — &quot;Berlin-Siegessaeule-24-Engel-2022-gje.jpg&quot; (20 April 2022), Creative Commons Attribution 4.0 International (CC BY 4.0); statue-detail input inherited by the selected image and later revisions. This inherited use is treated as an adaptation for attribution purposes.<br><a href=\"https://commons.wikimedia.org/wiki/File:Berlin-Siegessaeule-24-Engel-2022-gje.jpg\" target=\"_blank\" rel=\"noopener noreferrer\">https://commons.wikimedia.org/wiki/File:Berlin-Siegessaeule-24-Engel-2022-gje.jpg</a><br><a href=\"https://creativecommons.org/licenses/by/4.0/\" target=\"_blank\" rel=\"noopener noreferrer\">https://creativecommons.org/licenses/by/4.0/</a></p><p>Changes include a new illustrated viewpoint, colour, lighting and gouache-like texture, correction of the top drum, AI detail enhancement and a uniform horizontal crop for the 50 x 70 cm version. The 30 x 40 cm composition is retained. These are actual generator references; the source photographs are not the item being sold. Neither photographer endorses this artwork. Source licences and their permitted rights remain in effect; the CC BY source is supplied without warranties under its licence.</p>",
+    "cardSummary": "Berlin’s Siegessäule rises above the colonnade in this close, upward view. Cobalt blue, warm stone and gold give the Victory Column a strong contrast."
+  },
+  {
+    "id": "dl-siegessaeule",
+    "name": "Siegessäule",
+    "place": "Tiergarten · Mitte",
+    "image": "https://static.wixstatic.com/media/5a08a3_8e14623aec3f42bba8a43ac44a624b48~mv2.jpg",
+    "alt": "A close upward view of Berlin’s Victory Column, with blue sky, golden statue and colonnade.",
+    "typeLine": "DIGITAL DOWNLOAD · 30 × 40 + 50 × 70 CM",
+    "wixProductId": "cc2e2464-61a1-b1e7-3f70-8cad2bdefa9e",
+    "group": "landmarks",
+    "roomImage": "https://static.wixstatic.com/media/5a08a3_bcff64f8054f408d9547fc3ae74cc2cc~mv2.jpg",
+    "roomVideoFit": "contain",
+    "roomCaption": "50 × 70 cm visualisation · Printable files only · Frame and decor not included",
+    "roomAlt": "Siegessäule poster shown edge to edge at 50 × 70 cm in an AI-generated room visualisation.",
+    "roomVideoUrl": "https://video.wixstatic.com/video/5a08a3_eb476cc8cba3434e86db98ad36b63554/file",
+    "roomVideoPosterUrl": "https://static.wixstatic.com/media/5a08a3_f3583fd65bc64e2e974e996f8fd5ac3f~mv2.png",
+    "roomVideoThumbnailUrl": "https://static.wixstatic.com/media/5a08a3_f3583fd65bc64e2e974e996f8fd5ac3f~mv2.png",
+    "sizeImages": {
+      "30x40 cm": "https://static.wixstatic.com/media/5a08a3_8e14623aec3f42bba8a43ac44a624b48~mv2.jpg",
+      "50x70 cm": "https://static.wixstatic.com/media/5a08a3_f1d139f037b340afb1a80df8cb4cc2ee~mv2.jpg"
+    },
+    "gallery": [
+      {
+        "image": "https://static.wixstatic.com/media/5a08a3_f1d139f037b340afb1a80df8cb4cc2ee~mv2.jpg",
+        "alt": "Siegessäule · 50 × 70 cm composition, edge to edge with no added white bands."
+      }
+    ],
+    "alternativeProductId": "8e2956c5-74e6-440e-b4c3-6cf0a3df23f2",
+    "visualCreditsWrap": true,
+    "visualCreditsHtml": "<p>Image credits and AI process</p><p>I selected this close upward view of the Siegessäule and directed the architectural corrections while keeping its angle and gouache style. The artwork was generated and edited with OpenAI ImageGen, then enhanced with Adobe Firefly Upscaler. It is an artistic interpretation, not a measured architectural drawing.</p><p>Photographic inputs used in the artistic adaptation:</p><p>BugWarp — &quot;Berlin Victory Column - BugWarp 01.jpg&quot; (12 August 2024), CC0 1.0 Universal Public Domain Dedication; overall column and gallery reference.<br><a href=\"https://commons.wikimedia.org/wiki/File:Berlin_Victory_Column_-_BugWarp_01.jpg\" target=\"_blank\" rel=\"noopener noreferrer\">https://commons.wikimedia.org/wiki/File:Berlin_Victory_Column_-_BugWarp_01.jpg</a><br><a href=\"https://creativecommons.org/publicdomain/zero/1.0/\" target=\"_blank\" rel=\"noopener noreferrer\">https://creativecommons.org/publicdomain/zero/1.0/</a></p><p>Gerd Eichmann — &quot;Berlin-Siegessaeule-24-Engel-2022-gje.jpg&quot; (20 April 2022), Creative Commons Attribution 4.0 International (CC BY 4.0); statue-detail input inherited by the selected image and later revisions. This inherited use is treated as an adaptation for attribution purposes.<br><a href=\"https://commons.wikimedia.org/wiki/File:Berlin-Siegessaeule-24-Engel-2022-gje.jpg\" target=\"_blank\" rel=\"noopener noreferrer\">https://commons.wikimedia.org/wiki/File:Berlin-Siegessaeule-24-Engel-2022-gje.jpg</a><br><a href=\"https://creativecommons.org/licenses/by/4.0/\" target=\"_blank\" rel=\"noopener noreferrer\">https://creativecommons.org/licenses/by/4.0/</a></p><p>Changes include a new illustrated viewpoint, colour, lighting and gouache-like texture, correction of the top drum, AI detail enhancement and a uniform horizontal crop for the 50 x 70 cm version. The 30 x 40 cm composition is retained. These are actual generator references; the source photographs are not the item being sold. Neither photographer endorses this artwork. Source licences and their permitted rights remain in effect; the CC BY source is supplied without warranties under its licence.</p>",
+    "cardSummary": "Berlin’s Siegessäule rises above the colonnade in this close, upward view. Cobalt blue, warm stone and gold give the Victory Column a strong contrast.",
+    "kind": "digital"
   }
 ]
