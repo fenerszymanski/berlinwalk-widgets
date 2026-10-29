@@ -2321,7 +2321,7 @@ class BWBlogIndexElement extends HTMLElement {
           <div class="bw-ci-rail-tour">
             <div class="bw-ci-rt-label">BERLIN THEN AND NOW</div>
             <div class="bw-ci-rt-title">See the centre with me in about 2.5 hours</div>
-            <div class="bw-ci-rt-line">12:30 ON SELECTED DAYS<br>MAX 10 PEOPLE · €25</div>
+            <div class="bw-ci-rt-line">12:30 ON SELECTED DAYS<br>MAX 10 PEOPLE · €15</div>
             <a class="bw-ci-rt-cta" href="${this._escapeAttribute(this._data.bookingUrl || BW_BLOG_INDEX_BOOKING_URL)}" target="_top">Reserve a spot</a>
           </div>
           ${tool ? `
@@ -2522,7 +2522,7 @@ class BWBlogIndexElement extends HTMLElement {
   }
 
   _renderTourBandC() {
-    const sub = 'ABOUT 2.5 HOURS · 11 STOPS, 16 PLACES · MAX 10 · €25<br>STARTS AT THE WORLD CLOCK · ENDS AT HACKESCHER MARKT';
+    const sub = 'ABOUT 2.5 HOURS · 11 STOPS, 16 PLACES · MAX 10 · €15<br>STARTS AT THE WORLD CLOCK · ENDS AT HACKESCHER MARKT';
     return `
       <section class="bw-ci-tourband">
         <div class="bw-ci-tourband-inner">

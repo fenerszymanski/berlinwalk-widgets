@@ -491,7 +491,7 @@ class BWHeroHomeElement extends HTMLElement {
 
             <div class="bw-hero-proof" aria-label="Tour highlights">
               <div class="bw-hero-proof-item">
-                <strong>€25</strong>
+                <strong>€15</strong>
                 <span>Per person</span>
               </div>
               <div class="bw-hero-proof-item">

@@ -13,7 +13,7 @@ const BW_HEADER_MENU_FONT_URL = new URL('../home-two-doors/assets/fonts/Fraunces
 // reachable for guests who booked before 30 September, but nothing links to it.
 const BW_HEADER_BUILD = 'store-isolate-20261029';
 const BW_HEADER_BOOKING_URL = 'https://www.walkofberlin.com/book-berlin-walking-tour/berlin-then-and-now';
-const BW_HEADER_TOUR_FACTS = ['about 2.5 hours', 'max 10 people', '€25']
+const BW_HEADER_TOUR_FACTS = ['about 2.5 hours', 'max 10 people', '€15']
   .map((fact) => `<span class="bw-header-fact">${fact}</span>`)
   .join(' · ');
 const BW_HEADER_LINKS = {

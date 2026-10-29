@@ -1,19 +1,20 @@
-/* Berlin Then and Now: the dated offer display. Checkout prices are enforced separately in Wix. */
+/* Berlin Then and Now: EUR 15 on every date (B17, Yusuf, 26 Oct 2026). Checkout prices are enforced separately in Wix. */
 (() => {
   'use strict';
-  const VERSION = '20261010-scoped2';
+  const VERSION = '20261026-eur15';
   if (window.BWTourOffer && window.BWTourOffer.version === VERSION) {
     if (document.readyState !== 'loading') window.BWTourOffer.refresh();
     return;
   }
-  const START = Date.parse('2026-10-07T22:00:00Z');
-  const END = Date.parse('2026-11-07T23:00:00Z');
-  const active = (now = Date.now()) => now >= START && now < END;
-  const price = (day, now = Date.now()) => active(now) && (!day || day >= '2026-10-08' && day <= '2026-11-07') ? 20 : 25;
+  // The old pages still print the former EUR 25; every tour mention now shows EUR 15, no end date.
+  const active = () => true;
+  const price = () => 15;
   const scopes = 'bw-home-two-doors,bw-route-story,bw-meeting-point,bw-then-now-landing,bw-the-guide,.bw-footer-note,.bw-home-booking-facts,.bw-blog-booking-facts,.bw-c-rail-choice-walk,.bw-c-tourband-sub,.bw-ci-rt-line,.bw-exit-copy,.bw-tools-shell-v2-tour-facts,#bw-ca05-strip,[data-bw-tour-offer-scope]';
   const excluded = 'bw-tour-checkout,[data-bw-offer-price],script,style,textarea,input,select,code,pre,del';
   const context = /Berlin Then and Now|2[.,]5\s*h(?:ours?)?|11 stops|archive photo|World Clock|max(?:imum)?\s*10|walking tour with me/i;
   const token = /(?:€\s*25|EUR\s+25)(?:[.,]00)?(?!\d|[.,]\d)/g;
+  // Same pattern without the global flag: a cheap first test before any ancestor work.
+  const hasToken = /(?:€\s*25|EUR\s+25)(?:[.,]00)?(?!\d|[.,]\d)/;
   const roots = new Set([document]);
   const pending = new Set();
   const definitions = new Map();
@@ -29,6 +30,13 @@
   function matching(root, selector) {
     return [...(root.nodeType === 1 && root.matches(selector) ? [root] : []),
       ...(root.querySelectorAll ? root.querySelectorAll(selector) : [])];
+  }
+  // textContent.length < limit without building the whole string of a large container.
+  function shortText(element, limit) {
+    let length = 0;
+    const walker = document.createTreeWalker(element, NodeFilter.SHOW_TEXT);
+    while (walker.nextNode()) { length += walker.currentNode.nodeValue.length; if (length >= limit) return false; }
+    return true;
   }
   function styleOnce(element, value) {
     if (!styleValues.has(value)) {
@@ -76,17 +84,9 @@
       span.dataset.bwOfferPrice = '';
       span.dataset.regularPrice = m[0];
       span.style.cssText = 'display:inline;white-space:normal';
-      const amount = document.createElement('span');
-      amount.style.cssText = 'white-space:nowrap';
-      const old = document.createElement('del'); old.textContent = '€25';
-      old.style.cssText = 'font-size:.82em;opacity:.65;font-weight:500';
-      const current = document.createElement('strong'); current.textContent = '€20';
-      current.style.cssText = 'font-weight:800;color:inherit';
-      amount.append(old, document.createTextNode(' '), current);
-      const label = document.createElement('small');
-      label.textContent = ' · Limited-time offer';
-      label.style.cssText = 'display:inline;font-family:inherit;font-size:12px;font-weight:600;line-height:inherit;white-space:nowrap;text-transform:none;letter-spacing:0;margin:0;color:inherit';
-      span.append(amount, label); fragment.append(span); replaced.add(span);
+      span.style.cssText = 'display:inline;white-space:nowrap';
+      span.textContent = '€15';
+      fragment.append(span); replaced.add(span);
       at = m.index + m[0].length;
     }
     fragment.append(document.createTextNode(text.slice(at)));
@@ -95,13 +95,7 @@
   function tidy(root) {
     // Price replacements inherit the surrounding line; never introduce block rows in fact bars or chips.
     for (const span of matching(root, '[data-bw-offer-price]')) {
-      styleOnce(span, 'display:inline;white-space:normal');
-      const label = span.querySelector('small');
-      if (label) {
-        if (label.textContent !== ' · Limited-time offer') label.textContent = ' · Limited-time offer';
-        const compact = !!span.closest('#bw-ca05-strip li,.bw-home-booking-facts li,.bw-blog-booking-facts li,.bw-home-two-doors__chip,.bw-home-two-doors__facts');
-        styleOnce(label, 'display:' + (compact ? 'none' : 'inline') + ';font-family:inherit;font-size:12px;font-weight:600;line-height:inherit;white-space:nowrap;text-transform:none;letter-spacing:0;margin:0;color:inherit');
-      }
+      styleOnce(span, 'display:inline;white-space:nowrap');
       replaced.add(span);
     }
     // The published Wix frontend still emits the old date detail on every guest/date render.
@@ -125,7 +119,7 @@
         if (Array.isArray(value)) { value.forEach(x => walk(x, tour)); return; }
         tour = tour || /Then and Now/i.test(value.name || '') || /then-and-now/.test(value.url || value['@id'] || '');
         if (tour && value['@type'] === 'Offer' && Number(value.price) === 25 && value.priceCurrency === 'EUR') {
-          value.price = 20; value.priceValidUntil = '2026-11-07'; changed = true;
+          value.price = 15; delete value.priceValidUntil; changed = true;
         }
         Object.values(value).forEach(x => walk(x, tour));
       };
@@ -162,7 +156,7 @@
     const nodes = [];
     const inspect = node => {
       if (node.nodeType === 1) discover(node);
-      else if (node.nodeType === 3 && inTour(node, inherited)) nodes.push(node);
+      else if (node.nodeType === 3 && hasToken.test(node.nodeValue) && inTour(node, inherited)) nodes.push(node);
     };
     inspect(root);
     const walker = document.createTreeWalker(root, NodeFilter.SHOW_ELEMENT | NodeFilter.SHOW_TEXT);
@@ -189,7 +183,7 @@
         // price sibling. Restrict that contextual rescan to a small container.
         const target = record.target;
         if (target.nodeType === 1 && !/^(BODY|HTML|MAIN)$/.test(target.tagName) &&
-            (target.textContent || '').length < 700) enqueue(target);
+            shortText(target, 700)) enqueue(target);
         else for (const node of record.addedNodes) enqueue(node);
       }
     }
@@ -221,11 +215,8 @@
   }
   function scheduleBoundary() {
     clearTimeout(boundaryTimer);
-    const now = Date.now(), next = now < START ? START : now < END ? END : null;
-    if (next !== null) boundaryTimer = setTimeout(() => {
-      if (active() !== campaignActive) refresh();
-      else scheduleBoundary(); // Browser timeout maximum is about 24.8 days.
-    }, Math.min(next - now, 2147483647));
+    const next = null; // No campaign boundary: EUR 15 has no end date.
+    if (next !== null) boundaryTimer = setTimeout(refresh, 0);
   }
   function restore(root) {
     const within = node => {
@@ -281,3 +272,6 @@
   document.addEventListener('visibilitychange', checkBoundary);
   window.addEventListener('pageshow', checkBoundary);
 })();
+
+// Included gifts runtime; its selectors never alter other tours or prices.
+(() => { import('https://app.berlinwalk.com/tour-gifts/booking-runtime.mjs?v=20261008-gifts1').catch(() => {}); })();

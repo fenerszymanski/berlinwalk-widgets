@@ -118,7 +118,7 @@
         const fallback = document.createElement('div');
         fallback.style.cssText = 'padding:32px;color:#123d18;background:#fafaf5;font:16px/1.6 Arial,sans-serif';
         const text = document.createElement('p');
-        text.textContent = 'Berlin Then and Now · about 2.5 hours · maximum 10 guests · €25';
+        text.textContent = 'Berlin Then and Now · about 2.5 hours · maximum 10 guests · €15';
         const link = document.createElement('a');
         link.textContent = 'See dates and book';
         link.href = 'https://walkofberlin.com/book-berlin-walking-tour/berlin-then-and-now';

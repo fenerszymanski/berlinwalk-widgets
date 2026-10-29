@@ -12,7 +12,7 @@
       },
       {
         "q": "How much does a paid walking tour in Berlin cost?",
-        "a": "Standard public tours from the established operators cost **about €20 to €28 per adult** for two to three and a half hours. Tours with a stated cap of 8 to 15 people range from about €21 to €130 per person. My own walk, Berlin Then and Now, costs €25 per person."
+        "a": "Standard public tours from the established operators cost **about €20 to €28 per adult** for two to three and a half hours. Tours with a stated cap of 8 to 15 people range from about €21 to €130 per person. My own walk, Berlin Then and Now, costs €15 per person."
       },
       {
         "q": "How big are walking tour groups in Berlin?",
@@ -24,7 +24,7 @@
       },
       {
         "q": "What do I get on Berlin Then and Now?",
-        "a": "A walk of about 2.5 hours and about 3 km from the World Clock on Alexanderplatz to Hackescher Markt, with **11 stops covering 16 places and an archive photo of the same place at every stop.** It starts at 12:30 on selected days, costs €25 per person and takes no more than 10 people."
+        "a": "A walk of about 2.5 hours and about 3 km from the World Clock on Alexanderplatz to Hackescher Markt, with **11 stops covering 16 places and an archive photo of the same place at every stop.** It starts at 12:30 on selected days, costs €15 per person and takes no more than 10 people."
       },
       {
         "q": "What happens if I am the only person booked on Berlin Then and Now?",
@@ -53,7 +53,7 @@
         "name": "How much does a paid walking tour in Berlin cost?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Standard public tours from the established operators cost about €20 to €28 per adult for two to three and a half hours. Tours with a stated cap of 8 to 15 people range from about €21 to €130 per person. My own walk, Berlin Then and Now, costs €25 per person."
+          "text": "Standard public tours from the established operators cost about €20 to €28 per adult for two to three and a half hours. Tours with a stated cap of 8 to 15 people range from about €21 to €130 per person. My own walk, Berlin Then and Now, costs €15 per person."
         }
       },
       {
@@ -77,7 +77,7 @@
         "name": "What do I get on Berlin Then and Now?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "A walk of about 2.5 hours and about 3 km from the World Clock on Alexanderplatz to Hackescher Markt, with 11 stops covering 16 places and an archive photo of the same place at every stop. It starts at 12:30 on selected days, costs €25 per person and takes no more than 10 people."
+          "text": "A walk of about 2.5 hours and about 3 km from the World Clock on Alexanderplatz to Hackescher Markt, with 11 stops covering 16 places and an archive photo of the same place at every stop. It starts at 12:30 on selected days, costs €15 per person and takes no more than 10 people."
         }
       },
       {

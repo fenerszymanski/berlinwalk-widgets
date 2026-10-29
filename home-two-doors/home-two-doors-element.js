@@ -28,7 +28,7 @@ const BW_HOME_TWO_DOORS_FAQ = [
   },
   {
     q: 'How much does it cost?',
-    a: '€25 per person, paid when you book. That is the same price on every site that sells it.',
+    a: '€15 per person, paid when you book. That is the same price on every site that sells it.',
   },
   {
     q: 'How big is the group, and does my date run?',
@@ -418,14 +418,14 @@ class BWHomeTwoDoorsElement extends HTMLElement {
             <span class="bw-home-two-doors__eyebrow bw-home-two-doors__eyebrow--dark">BERLIN THEN AND NOW</span>
             <h2>Walk <em>with me.</em></h2>
             <p>Berlin's old city did not survive. I walk you through where it stood and hold up an archive photo of the same place at every stop.</p>
-            <p class="bw-home-two-doors__door-facts">About 2.5 hours · 11 stops, 16 places · max 10 · €25</p>
+            <p class="bw-home-two-doors__door-facts">About 2.5 hours · 11 stops, 16 places · max 10 · €15</p>
             <div class="bw-home-two-doors__door-actions">
               <a class="bw-home-two-doors__btn bw-home-two-doors__btn--yellow" href="${BW_HOME_TWO_DOORS_BOOKING_URL}" data-bw-cta-id="book_live_tour" data-bw-cta-placement="hero-live">See dates and book</a>
               <a class="bw-home-two-doors__link bw-home-two-doors__link--light" href="#live-route" data-bw-cta-id="learn_live_route" data-bw-cta-placement="hero-live">Route &amp; meeting point</a>
             </div>
             <div class="bw-home-two-doors__door-meta">
               <span class="bw-home-two-doors__chip">About 2.5 hours · 11 stops, 16 places</span>
-              <span class="bw-home-two-doors__chip">Max 10 · €25</span>
+              <span class="bw-home-two-doors__chip">Max 10 · €15</span>
             </div>
           </article>
 
@@ -534,7 +534,7 @@ class BWHomeTwoDoorsElement extends HTMLElement {
               </div>
               <div class="bw-home-two-doors__compare-row">
                 <div>PRICE</div>
-                <div><b>€25 per person.</b><br>Paid when you book. No more than 10 people, and a walk needs at least 2 guests.</div>
+                <div><b>€15 per person.</b><br>Paid when you book. No more than 10 people, and a walk needs at least 2 guests.</div>
                 <div><b>€9.90 per walk.</b><br>Berlin Wall + Hidden Berlin + Medieval Berlin: €24.90 as a trio.</div>
               </div>
               <div class="bw-home-two-doors__compare-row">
@@ -551,7 +551,7 @@ class BWHomeTwoDoorsElement extends HTMLElement {
                 <dl>
                   <div><dt>When</dt><dd>12:30 start · about 2.5 hours</dd></div>
                   <div><dt>Where</dt><dd>Meet me at the World Clock</dd></div>
-                  <div><dt>Price</dt><dd>€25 per person · max 10 people</dd></div>
+                  <div><dt>Price</dt><dd>€15 per person · max 10 people</dd></div>
                 </dl>
                 <a href="${BW_HOME_TWO_DOORS_BOOKING_URL}" data-bw-cta-id="book_compare_mobile" data-bw-cta-placement="compare">See dates and book →</a>
               </article>
@@ -611,7 +611,7 @@ class BWHomeTwoDoorsElement extends HTMLElement {
                 <div><b>11</b><span>stops, 16 places</span></div>
                 <div><b>~2.5h</b><span>on foot</span></div>
                 <div><b>~3km</b><span>route length</span></div>
-                <div><b>€25</b><span>per person</span></div>
+                <div><b>€15</b><span>per person</span></div>
               </div>
               <div class="bw-home-two-doors__live-actions">
                 <a class="bw-home-two-doors__btn bw-home-two-doors__btn--green" href="${BW_HOME_TWO_DOORS_BOOKING_URL}" data-bw-cta-id="book_route" data-bw-cta-placement="live-route">See dates and book</a>

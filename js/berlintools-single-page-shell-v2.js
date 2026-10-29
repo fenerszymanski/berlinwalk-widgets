@@ -683,7 +683,7 @@
     eyebrow: 'Berlin Then and Now',
     heading: 'Walk the Berlin that disappeared, with me',
     body: 'Berlin\'s old city did not survive. I walk you through where it stood and hold up an archive photo of the same place at every stop.',
-    facts: 'About 2.5 hours · 11 stops, 16 places · max 10 · €25',
+    facts: 'About 2.5 hours · 11 stops, 16 places · max 10 · €15',
     cta: 'See dates and book',
     href: 'https://www.walkofberlin.com/book-berlin-walking-tour/berlin-then-and-now',
     railTitle: 'Walk the Berlin that disappeared',

@@ -384,7 +384,7 @@ class BWBookHeroElement extends HTMLElement {
                 <p class="bw-book-hero-lead">Berlin's old city did not survive. I walk you through where it stood and hold up an archive photo of the same place at every stop.</p>
 
                 <div class="bw-book-meta" aria-label="Tour key facts">
-                  <span class="bw-book-meta-chip">€25 per person</span>
+                  <span class="bw-book-meta-chip">€15 per person</span>
                   <span class="bw-book-meta-chip">About 2.5 hours</span>
                   <span class="bw-book-meta-chip">Max 10 people</span>
                   <span class="bw-book-meta-chip">English</span>
@@ -405,7 +405,7 @@ class BWBookHeroElement extends HTMLElement {
                 <h2>At a glance</h2>
                 <dl>
                   <div data-bw-book-next-walk-row hidden><dt>Next walk</dt><dd data-bw-book-next-walk>Loading...</dd></div>
-                  <div><dt>Price</dt><dd>€25 per person</dd></div>
+                  <div><dt>Price</dt><dd>€15 per person</dd></div>
                   <div><dt>Duration</dt><dd>About 2.5 hours, about 3 km</dd></div>
                   <div><dt>Start</dt><dd>12:30, World Clock, Alexanderplatz</dd></div>
                   <div><dt>Ends at</dt><dd>Hackescher Markt</dd></div>
@@ -815,7 +815,7 @@ class BWBookDetailsElement extends HTMLElement {
           <div class="bw-book-inner">
             <aside class="bw-book-explainer" aria-labelledby="bw-book-price-title">
               <span class="bw-book-eyebrow">Price and cancellation</span>
-              <h2 id="bw-book-price-title">€25 per person, paid when you book.</h2>
+              <h2 id="bw-book-price-title">€15 per person, paid when you book.</h2>
               <p>That is the same price on every site that sells it. The group is never bigger than 10, and a walk needs at least 2 guests. If you are the only guest two hours before the start, I cancel the walk, refund you in full and give you one of my audio walks for free.</p>
               <p>Cancel up to 24 hours before the start and you get a full refund, or move to another date if there is space. Later than that, or if you do not come, I cannot refund. If I have to cancel, for weather or anything else, you get your money back in full.</p>
             </aside>
@@ -839,7 +839,7 @@ class BWBookDetailsElement extends HTMLElement {
               </details>
               <details>
                 <summary>How much does it cost?</summary>
-                <p>€25 per person, paid when you book. That is the same price on every site that sells it.</p>
+                <p>€15 per person, paid when you book. That is the same price on every site that sells it.</p>
               </details>
               <details>
                 <summary>How big is the group, and does my date run?</summary>

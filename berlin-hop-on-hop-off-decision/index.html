@@ -158,15 +158,15 @@
         </div>
         <div class="barrow" id="row-walk">
           <div class="bartop">
-            <div class="n">Walking tour with me + walk <span id="tag-walk"></span><small id="sub-walk">Berlin Then and Now, €25 a person, then explore on foot</small></div>
-            <div class="money" id="money-walk">€50</div>
+            <div class="n">Walking tour with me + walk <span id="tag-walk"></span><small id="sub-walk">Berlin Then and Now, €15 a person, then explore on foot</small></div>
+            <div class="money" id="money-walk">€30</div>
           </div>
           <div class="track"><div class="fill walk" id="fill-walk"></div></div>
         </div>
       </div>
 
       <p class="foot" id="foot"></p>
-      <p class="disc">Typical 2026 figures. Hop-on hop-off is shown as a mid-range price across Berlin's main operators (roughly €30–€45 per adult for 24 hours); exact fares, child prices and multi-day passes vary by operator. Bus 100/200 is a normal BVG bus covered by any valid ticket, so its cost is just the €11.20 AB day ticket. The walking-tour line is my Berlin Then and Now walk at €25 a person, booked once for the trip.</p>
+      <p class="disc">Typical 2026 figures. Hop-on hop-off is shown as a mid-range price across Berlin's main operators (roughly €30–€45 per adult for 24 hours); exact fares, child prices and multi-day passes vary by operator. Bus 100/200 is a normal BVG bus covered by any valid ticket, so its cost is just the €11.20 AB day ticket. The walking-tour line is my Berlin Then and Now walk at €15 a person, booked once for the trip.</p>
     </div>
   </div>
 </div>
@@ -184,13 +184,13 @@
 
   function euro(n){ return '€' + (Math.round(n*100)/100).toFixed(n % 1 === 0 ? 0 : 2); }
 
-  function tourPrice(){var now=Date.now();return now>=Date.parse('2026-10-07T22:00:00Z')&&now<Date.parse('2026-11-07T23:00:00Z')?20:25;}
+  function tourPrice(){return 15;}
 
   function costs(){
     var d = state.days, a = state.adults, c = state.children;
     var bus = a*HOHO_ADULT[d] + c*HOHO_CHILD[d];
     var hundred = d * (a*DAY_ADULT + c*DAY_CHILD);
-    // One Berlin Then and Now walk (EUR 25 a person, children included) for the whole trip;
+    // One Berlin Then and Now walk (EUR 15 a person, children included) for the whole trip;
     // the rest of the centre is on foot.
     var walk = tourPrice() * (a + c);
     return { bus:bus, hundred:hundred, walk:walk };

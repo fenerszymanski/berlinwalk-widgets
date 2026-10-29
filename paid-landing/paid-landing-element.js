@@ -28,8 +28,8 @@
     {
       icon: 'coins',
       q: 'How much does it cost?',
-      short: '€25 per person, paid when you book.',
-      a: '€25 per person, paid when you book. That is the same price on every site that sells it.',
+      short: '€15 per person, paid when you book.',
+      a: '€15 per person, paid when you book. That is the same price on every site that sells it.',
     },
     {
       icon: 'flag',
@@ -806,7 +806,7 @@
               </li>
               <li class="feature">
                 <img src="${icon('coins')}" alt="">
-                <span><strong>€25</strong><small>per person</small></span>
+                <span><strong>€15</strong><small>per person</small></span>
               </li>
             </ul>
 
@@ -814,7 +814,7 @@
               <button class="button button--yellow hero-cta" type="button" data-scroll-target="booking" data-track-pick-date>
                 See dates <img src="${icon('arrow-right')}" alt="">
               </button>
-              <p class="price-note">€25 per person, paid when you book. Full refund if you cancel at least 24 hours before the start.</p>
+              <p class="price-note">€15 per person, paid when you book. Full refund if you cancel at least 24 hours before the start.</p>
             </div>
           </section>
 
@@ -868,7 +868,7 @@
               <dl class="walk-facts">
                 <div><dt>Start</dt><dd>12:30 at the World Clock, Alexanderplatz</dd></div>
                 <div><dt>Finish</dt><dd>Hackescher Markt, about 2.5 hours and 3 km later</dd></div>
-                <div><dt>Price</dt><dd>€25 per person, paid when you book</dd></div>
+                <div><dt>Price</dt><dd>€15 per person, paid when you book</dd></div>
                 <div><dt>Group</dt><dd>No more than 10 people. A walk needs at least 2 guests. If you are the only guest two hours before the start, I cancel the walk, refund you in full and give you one of my audio walks for free.</dd></div>
                 <div><dt>Changes</dt><dd>Cancel up to 24 hours before the start for a full refund, or move to another date if there is space. Later than that, or if you do not come, I cannot refund.</dd></div>
               </dl>

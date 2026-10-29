@@ -126,7 +126,7 @@
           </header>
 
           <section class="bw-gsl-intro" aria-labelledby="bw-gsl-title">
-            <p class="bw-gsl-eyebrow">Berlin Then and Now · €25 per person</p>
+            <p class="bw-gsl-eyebrow">Berlin Then and Now · €15 per person</p>
             <h1 id="bw-gsl-title">${headline}</h1>
             <p class="bw-gsl-lead">Walk Berlin's historic centre with Yusuf, starting at the World Clock.</p>
             <div class="bw-gsl-proof" aria-label="Tour trust signals">
@@ -183,7 +183,7 @@
             <h2>Three quick answers</h2>
             <details open>
               <summary>What does it cost?</summary>
-              <p>€25 per person. You can cancel or change the date for free up to 24 hours before the start.</p>
+              <p>€15 per person. You can cancel or change the date for free up to 24 hours before the start.</p>
             </details>
             <details>
               <summary>Where do we meet?</summary>
@@ -252,7 +252,7 @@
             </button>
           `).join('')}
         </div>
-        <p class="bw-gsl-reassurance">€25 per person. Free cancellation up to 24 hours before the start.</p>
+        <p class="bw-gsl-reassurance">€15 per person. Free cancellation up to 24 hours before the start.</p>
         <a class="bw-gsl-cta" href="${this._escape(this._bookingHref(selected))}" target="_top" data-continue>
           Book your spot
         </a>
