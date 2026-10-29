@@ -54,7 +54,7 @@
   const CSS = `
 @font-face{font-family:'BWTP Fraunces';src:url('${ROOT}home-two-doors/assets/fonts/Fraunces-Variable-latin.woff2') format('woff2');font-weight:100 900;font-display:swap}
 @font-face{font-family:'BWTP Grotesk';src:url('${ROOT}home-two-doors/assets/fonts/SpaceGrotesk-Variable-latin.woff2') format('woff2');font-weight:300 700;font-display:swap}
-${TAG}{display:block;width:100%;min-width:0}
+${TAG}{display:block;width:100%;min-width:0;height:auto!important;min-height:0!important}
 .bwtp{--cream:#FAFAF5;--ink:#2B3128;--green:#123D18;--leaf:#1B5E20;--muted:#5A6455;--tile:#EFEFEA;--line:#E2E2DA;--panel:#F1F1EA;--yellow:#FFE600;--serif:'BWTP Fraunces',Fraunces,Georgia,serif;background:var(--cream);color:var(--ink);font:400 16px/1.55 'BWTP Grotesk','Space Grotesk',system-ui,sans-serif;-webkit-font-smoothing:antialiased;padding-bottom:72px}
 .bwtp *{box-sizing:border-box}
 .bwtp a{color:var(--green);text-underline-offset:4px}.bwtp a:hover{color:var(--leaf)}
@@ -188,12 +188,32 @@ ${TAG}{display:block;width:100%;min-width:0}
       this._impression();
       document.addEventListener('consentPolicyChanged', this._impression);
       document.addEventListener('consentPolicyInitialized', this._impression);
+      this._fit();
+    }
+
+    // Wix keeps the editor's fixed heights on the boxes around the element (4000 and 4500 px on desktop), which left a
+    // tall empty band above the footer. Let every box up to the page grid follow the content; restore them on leave.
+    _fit() {
+      this._fitted = [];
+      const set = (el, prop, value) => {
+        this._fitted.push([el, prop, el.style.getPropertyValue(prop), el.style.getPropertyPriority(prop)]);
+        el.style.setProperty(prop, value, 'important');
+      };
+      for (let n = this.parentElement; n && n.id !== 'SITE_PAGES' && n !== document.body; n = n.parentElement) {
+        const cs = getComputedStyle(n);
+        if (parseFloat(cs.minHeight) > 0) set(n, 'min-height', '0');
+        if (/^\d/.test(n.style.height || '') || parseFloat(cs.height) > this.offsetHeight + 40) set(n, 'height', 'auto');
+        const rows = cs.gridTemplateRows;
+        if (rows && rows !== 'none' && /\d{4,}(\.\d+)?px/.test(rows)) set(n, 'grid-template-rows', rows.replace(/\d{4,}(\.\d+)?px/g, 'auto'));
+      }
     }
 
     disconnectedCallback() {
       document.removeEventListener('consentPolicyChanged', this._impression);
       document.removeEventListener('consentPolicyInitialized', this._impression);
       if (this._io) this._io.disconnect();
+      (this._fitted || []).reverse().forEach(([el, prop, value, prio]) => { if (value) el.style.setProperty(prop, value, prio); else el.style.removeProperty(prop); });
+      this._fitted = [];
       this._ready = false;
     }
 
