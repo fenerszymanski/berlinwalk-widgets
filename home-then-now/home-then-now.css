@@ -103,7 +103,6 @@ bw-home-then-now .bwh-start {
   flex-direction: column;
   gap: 16px;
 }
-bw-home-then-now .bwh-credits-band { padding-block: 0 32px; }
 
 bw-home-then-now .bwh-eyebrow {
   font-family: var(--bwh-mono);
@@ -472,10 +471,6 @@ bw-home-then-now .bwh-tool__name { font-family: var(--bwh-serif); font-size: 19p
 bw-home-then-now .bwh-tool__line { font-size: 13px; line-height: 1.35; }
 
 /* image credits (closed by default) */
-bw-home-then-now .bwh-credits { font-size: 13px; line-height: 1.5; color: var(--bwh-muted); }
-bw-home-then-now .bwh-credits summary { cursor: pointer; color: var(--bwh-green); text-decoration: underline; }
-bw-home-then-now .bwh-credits__list { margin: 10px 0 0; padding-left: 18px; display: flex; flex-direction: column; gap: 6px; }
-bw-home-then-now .bwh-credits__list a { color: var(--bwh-green); }
 
 /* swipe motion: one nudge per row, arrow loop, progress fill (scroll-driven where supported) */
 @media (prefers-reduced-motion: no-preference) {
@@ -657,7 +652,6 @@ bw-home-then-now .bwh-credits__list a { color: var(--bwh-green); }
   bw-home-then-now .bwh-tool__name { font-size: 24px; }
   bw-home-then-now .bwh-tool__line { font-size: 14px; }
   bw-home-then-now .bwh-tool__kind { font-size: 12px; }
-  bw-home-then-now .bwh-credits-band { padding-block: 0 48px; }
 }
 
 @media (min-width: 1100px) and (prefers-reduced-motion: no-preference) {

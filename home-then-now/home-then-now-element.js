@@ -645,25 +645,19 @@
     </section>`;
   }
 
-  function bwhCredits(d) {
+  // Image credits live in the site footer (Yusuf, 29 Oct 2026): the header script puts an "Image credits" item into the
+  // footer's bottom row on "/" and fills it from window.__bwHomeCreditsHtml.
+  function bwhCreditsHtml(d) {
     const list = Array.isArray(d.credits) ? d.credits : [];
-    if (!list.length) return '';
-    const items = list.map((c) => {
+    return list.map((c) => {
       const text = [c.what, c.creator, c.source, c.licence].filter(Boolean).map(bwhEsc).join('. ');
       const url = bwhExternal(c.url);
-      return `<li>${text}${url ? ` <a href="${bwhEsc(url)}" target="_blank" rel="noopener">Source</a>` : ''}</li>`;
+      return `<p>${text}.${url ? ` <a href="${bwhEsc(url)}" target="_blank" rel="noopener">Source</a>` : ''}</p>`;
     }).join('');
-    return `
-    <section class="bwh-band bwh-credits-band" aria-label="Image credits">
-      <details class="bwh-credits">
-        <summary>Image credits</summary>
-        <ul class="bwh-credits__list">${items}</ul>
-      </details>
-    </section>`;
   }
 
   function bwhMarkup(d) {
-    return [bwhHero(d), bwhReels(d), bwhPosters(d), bwhShop(d), bwhWalk(d), bwhStart(d), bwhCredits(d)].join('\n');
+    return [bwhHero(d), bwhReels(d), bwhPosters(d), bwhShop(d), bwhWalk(d), bwhStart(d)].join('\n');
   }
 
   // ---- element ----------------------------------------------------------------------------
@@ -683,10 +677,12 @@
         });
         this._bwhBind();
       }
+      window.__bwHomeCreditsHtml = bwhCreditsHtml(DATA);
       this._bwhWatch();
     }
 
     disconnectedCallback() {
+      if (!this.isConnected && location.pathname !== '/') window.__bwHomeCreditsHtml = '';
       this._bwhStop();
     }
 

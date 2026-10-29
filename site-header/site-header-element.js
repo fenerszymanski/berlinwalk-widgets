@@ -11,7 +11,7 @@ const BW_HEADER_MONO_URL = new URL('../brand/fonts/editorial-v2/IBMPlexMono-Semi
 const BW_HEADER_MENU_FONT_URL = new URL('../home-two-doors/assets/fonts/Fraunces-Variable-latin.woff2', BW_HEADER_SCRIPT_URL).href;
 // Berlin Then and Now (service 145cb27e). The legacy booking path stays
 // reachable for guests who booked before 30 September, but nothing links to it.
-const BW_HEADER_BUILD = 'store-isolate-20261029';
+const BW_HEADER_BUILD = 'home-mode-20261029';
 const BW_HEADER_BOOKING_URL = 'https://www.walkofberlin.com/book-berlin-walking-tour/berlin-then-and-now';
 const BW_HEADER_TOUR_FACTS = ['about 2.5 hours', 'max 10 people', '€15']
   .map((fact) => `<span class="bw-header-fact">${fact}</span>`)
@@ -97,6 +97,16 @@ const BW_HEADER_STORE_LINKS = [
   }
 ];
 const BW_HEADER_STORE_HOME = "https://walkofberlin.com/category/all-products?tab=all";
+// Homepage menu (Yusuf, 29 Oct 2026: the approved "Berlin, then and now" mockup). Shown only on "/" in home mode.
+const BW_HEADER_HOME_LINKS = [
+  { label: 'Posters', href: 'https://www.walkofberlin.com/category/all-products?tab=print' },
+  { label: 'Your street in 1928', href: 'https://www.walkofberlin.com/product-page/your-berlin-street-in-1928-personalised-aerial-print-30-x-40-cm' },
+  { label: 'Audio walks', href: 'https://www.walkofberlin.com/audio-tours' },
+  { label: 'Guides', href: 'https://www.walkofberlin.com/category/all-products?tab=guides' },
+  { label: 'Blog', href: 'https://www.walkofberlin.com/blog' },
+  { label: 'Free tools', href: 'https://www.walkofberlin.com/berlin-tools' },
+  { label: 'Walk with me', href: 'https://www.walkofberlin.com/book-berlin-walking-tour/berlin-then-and-now' },
+];
 // END GENERATED STORE NAVIGATION
 
 const BW_HEADER_INSTANCES = new Set();
@@ -1008,6 +1018,7 @@ class BWHeaderElement extends HTMLElement {
         }
 
         .bw-header-mobile-book { display: none; }
+        .bw-header-nav-list[data-bw-home-nav], .bw-header-home-store { display: none; }
         @media (min-width: 981px) and (max-width: 1279px) {
           .bw-header-main { gap: 10px; padding-left: 16px; padding-right: 16px; }
           .bw-header-logo img { height: 28px; }
@@ -1432,9 +1443,11 @@ class BWHeaderElement extends HTMLElement {
                   <ul id="${this._shopMenuId}" class="bw-header-submenu">${BW_HEADER_STORE_LINKS.map(item=>`<li><a href="${item.href}">${item.label}</a></li>`).join('')}</ul>
                 </li>
               </ul>
+              <ul class="bw-header-nav-list" data-bw-home-nav>${BW_HEADER_HOME_LINKS.map(item=>`<li><a href="${item.href}">${item.label}</a></li>`).join('')}</ul>
             </nav>
 
             <div class="bw-header-cta">
+              <a class="bw-header-home-store" href="${BW_HEADER_STORE_HOME}">Store</a>
               <a class="bw-header-mobile-book" href="${BW_HEADER_BOOKING_URL}">Book</a>
               <a class="bw-header-book" href="${BW_HEADER_BOOKING_URL}">See dates and book</a>
               <button class="bw-header-hamburger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="${this._mobileMenuId}">
@@ -1510,16 +1523,21 @@ class BWHeaderElement extends HTMLElement {
 const BW_HEADER_STORE_ROUTE = /^\/(?:category|product-page|cart-page|thank-you-page|store|shop)(?:\/|$)/;
 function bwHeaderStoreMode() {
   const store = BW_HEADER_STORE_ROUTE.test(location.pathname);
-  if (store && !document.getElementById('bw-header-store-mode-css')) {
+  const home = location.pathname === '/';
+  if (!document.getElementById('bw-header-store-mode-css')) {
     const style = document.createElement('style');
     style.id = 'bw-header-store-mode-css';
     // On <html>, because the mobile menu is moved out of the element; the doubled attribute outranks the header's own !important rules
     // for the mobile book button (.bw-header-cta a.bw-header-mobile-book:is(...)).
     const m = 'html[data-bw-store-mode][data-bw-store-mode]';
     const f = `${m} #bw-site-footer-restore`;
+    const h = 'html[data-bw-home-mode][data-bw-home-mode]';
+    const fc = ':is(html[data-bw-store-mode][data-bw-store-mode],html[data-bw-home-mode][data-bw-home-mode]) #bw-site-footer-restore';
     style.textContent = [`${m} .bw-header-top`, `${m} [data-bw-header-tour-line]`, `${m} a.bw-header-book`, `${m} .bw-header-cta a.bw-header-book`, `${m} .bw-header-cta a.bw-header-mobile-book`, `${m} .bw-header-cta a.bw-header-mobile-book:is(:hover, :focus, :active, :visited)`,
       `${m} .bw-header-nav`, `${m} .bw-header-hamburger`, `${m} .bw-header-mobile`,
-      `${f} .bw-footer-col`, `${f} .bw-footer-note-grid`, `${f} .bw-footer-cta`, `${f} .bw-footer-brand > p`].join(',') + '{display:none!important}' + [
+      `${f} .bw-footer-col`, `${f} .bw-footer-note-grid`, `${f} .bw-footer-cta`, `${f} .bw-footer-brand > p`,
+      `${h} .bw-header-top`, `${h} [data-bw-header-tour-line]`, `${h} a.bw-header-book`, `${h} .bw-header-cta a.bw-header-book`, `${h} .bw-header-cta a.bw-header-mobile-book`, `${h} .bw-header-cta a.bw-header-mobile-book:is(:hover, :focus, :active, :visited)`,
+      `${h} .bw-header-nav-list:not([data-bw-home-nav])`].join(',') + '{display:none!important}' + [
       // Wix sizes the header box for the tour band; let it shrink to the logo row.
       `${m} header[id] [class*="-container"]{grid-template-rows:minmax(0,auto)!important}`,
       `${m} header[id] bw-site-header,${m} header[id] [id$="_r_comp-mpcjk2pf"],${m} header[id] [id$="_r_comp-mpcks8xv"]{min-height:0!important;height:auto!important}`,
@@ -1530,25 +1548,39 @@ function bwHeaderStoreMode() {
       `${f} .bw-social-follow{display:flex;flex-direction:row!important;flex:0 1 auto;flex-wrap:wrap;gap:8px 20px;margin:0!important;max-width:100%}`,
       `${f} .bw-social-follow a{white-space:nowrap}`,
       `${f} .bw-footer-inner{padding-top:32px!important;padding-bottom:24px!important}`,
-      `${f} .bw-footer-bottom-links{position:relative}`,
-      `${f} [data-bw-store-credits]{display:inline-flex}`,
-      `${f} [data-bw-store-credits]>summary{cursor:pointer;list-style:none;color:rgba(250,250,245,.78);font-size:14px;font-weight:800;line-height:1.35}`,
-      `${f} [data-bw-store-credits]>summary::-webkit-details-marker{display:none}`,
-      `${f} [data-bw-store-credits]>div{position:absolute;right:0;bottom:calc(100% + 10px);width:min(560px,calc(100vw - 36px));max-height:260px;overflow:auto;background:#FAFAF5;color:#102414;padding:16px;border-radius:8px;box-shadow:0 8px 24px rgba(0,0,0,.3);z-index:5;font:400 13px/1.55 Georgia,serif;text-align:left}`,
-      `${f} [data-bw-store-credits]>div p{color:inherit;font:inherit;margin:0;max-width:none}`,
-      `${f} [data-bw-store-credits]>div p+p{margin-top:10px}`,
-      `${f} [data-bw-store-credits]>div a{color:inherit;display:inline;font:inherit;text-decoration:underline}`].join('');
+      `${fc} .bw-footer-bottom-links{position:relative}`,
+      `${fc} [data-bw-store-credits]{display:inline-flex}`,
+      `${fc} [data-bw-store-credits]>summary{cursor:pointer;list-style:none;color:rgba(250,250,245,.78);font-size:14px;font-weight:800;line-height:1.35}`,
+      `${fc} [data-bw-store-credits]>summary::-webkit-details-marker{display:none}`,
+      `${fc} [data-bw-store-credits]>div{position:absolute;right:0;bottom:calc(100% + 10px);width:min(560px,calc(100vw - 36px));max-height:260px;overflow:auto;background:#FAFAF5;color:#102414;padding:16px;border-radius:8px;box-shadow:0 8px 24px rgba(0,0,0,.3);z-index:5;font:400 13px/1.55 Georgia,serif;text-align:left}`,
+      `${fc} [data-bw-store-credits]>div p{color:inherit;font:inherit;margin:0;max-width:none}`,
+      `${fc} [data-bw-store-credits]>div p+p{margin-top:10px}`,
+      `${fc} [data-bw-store-credits]>div a{color:inherit;display:inline;font:inherit;text-decoration:underline}`,
+      // Home mode (Yusuf, 29 Oct 2026): the homepage gets the mockup menu and a green Store pill instead of the tour band,
+      // the tour menu and the yellow book buttons. The hamburger and the full mobile menu stay.
+      `${h} .bw-header-nav-list[data-bw-home-nav]{display:flex!important}`,
+      `${h} .bw-header-home-store{display:inline-flex!important;align-items:center;justify-content:center;min-height:44px;padding:12px 24px;border-radius:999px;background:#123D18;color:#FAFAF5!important;font-size:13px;font-weight:800;letter-spacing:1px;line-height:1;text-transform:uppercase;text-decoration:none}`,
+      `${h} .bw-header-home-store:is(:hover,:focus-visible){background:#1B5E20}`,
+      `@media (max-width:980px){${h} .bw-header-home-store{background:none;color:#123D18!important;padding:12px 8px;font-size:15px;letter-spacing:0;text-transform:none;font-weight:700}}`,
+      `${h} header[id] [class*="-container"]{grid-template-rows:minmax(0,auto)!important}`,
+      `${h} header[id] bw-site-header,${h} header[id] [id$="_r_comp-mpcjk2pf"],${h} header[id] [id$="_r_comp-mpcks8xv"]{min-height:0!important;height:auto!important}`,
+].join('');
     document.head.appendChild(style);
   }
   document.documentElement.toggleAttribute('data-bw-store-mode', store);
-  document.querySelectorAll('bw-site-header').forEach((header) => header.toggleAttribute('data-bw-store-mode', store));
+  document.documentElement.toggleAttribute('data-bw-home-mode', home);
+  document.querySelectorAll('bw-site-header').forEach((header) => {
+    header.toggleAttribute('data-bw-store-mode', store);
+    header.toggleAttribute('data-bw-home-mode', home);
+  });
 }
 // The footer is drawn by the separate footer-restore embed and may mount late or re-render, so the store items are re-checked every tick.
 function bwHeaderStoreFooter() {
   const links = document.querySelector('#bw-site-footer-restore .bw-footer-bottom-links');
   if (!links) return;
   const store = BW_HEADER_STORE_ROUTE.test(location.pathname);
-  const credits = store ? String(window.__bwStoreCreditsHtml || '') : '';
+  const home = location.pathname === '/';
+  const credits = String((store ? window.__bwStoreCreditsHtml : home ? window.__bwHomeCreditsHtml : '') || '');
   let contact = links.querySelector('[data-bw-store-contact]');
   if (store && !contact) links.insertAdjacentHTML('afterbegin', '<a href="/contact" data-bw-store-contact>Contact</a>');
   if (!store && contact) contact.remove();
