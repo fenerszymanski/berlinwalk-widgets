@@ -113,7 +113,11 @@
     } else if (!mounted) return;
     if (scheduled) return;
     scheduled = true;
-    requestAnimationFrame(() => { scheduled = false; reconcile(); });
+    // rAF alone stalls in hidden or throttled views (some in-app browsers);
+    // the timer makes sure a Wix re-render never leaves the page unmounted.
+    const run = () => { if (!scheduled) return; scheduled = false; reconcile(); };
+    requestAnimationFrame(run);
+    setTimeout(run, 150);
   }).observe(document.documentElement, { childList:true, subtree:true });
   window.addEventListener('popstate', reconcile);
   window.addEventListener('bw-home-ready', reconcile);
