@@ -11,7 +11,7 @@ const BW_HEADER_MONO_URL = new URL('../brand/fonts/editorial-v2/IBMPlexMono-Semi
 const BW_HEADER_MENU_FONT_URL = new URL('../home-two-doors/assets/fonts/Fraunces-Variable-latin.woff2', BW_HEADER_SCRIPT_URL).href;
 // Berlin Then and Now (service 145cb27e). The legacy booking path stays
 // reachable for guests who booked before 30 September, but nothing links to it.
-const BW_HEADER_BUILD = 'store-mode-20261029';
+const BW_HEADER_BUILD = 'store-isolate-20261029';
 const BW_HEADER_BOOKING_URL = 'https://www.walkofberlin.com/book-berlin-walking-tour/berlin-then-and-now';
 const BW_HEADER_TOUR_FACTS = ['about 2.5 hours', 'max 10 people', '€25']
   .map((fact) => `<span class="bw-header-fact">${fact}</span>`)
@@ -1502,9 +1502,11 @@ class BWHeaderElement extends HTMLElement {
   }
 }
 
-// Store mode (Yusuf, 29 Oct 2026: the store pages are set apart from the tour without a different menu or footer). On store routes the
-// tour band, the tour line in the mobile menu and the yellow book buttons are hidden; the menu itself (Tours included) stays the same.
-// Works on prerendered and rendered markup alike, and follows Wix's in-site navigation.
+// Store mode (Yusuf, 29 Oct 2026). On store routes the header keeps only the logo: the tour band, the site menu, the hamburger and the
+// yellow book buttons are hidden, so the store's own bar is the menu, and Wix's header box collapses to fit (no empty band left behind).
+// The footer drops the tour copy, the four link columns and the tour facts, and its bottom row gains Contact and a small "Image credits"
+// item that the storefront fills (window.__bwStoreCreditsHtml). Works on prerendered and rendered markup alike, and follows Wix's
+// in-site navigation.
 const BW_HEADER_STORE_ROUTE = /^\/(?:category|product-page|cart-page|thank-you-page|store|shop)(?:\/|$)/;
 function bwHeaderStoreMode() {
   const store = BW_HEADER_STORE_ROUTE.test(location.pathname);
@@ -1514,14 +1516,56 @@ function bwHeaderStoreMode() {
     // On <html>, because the mobile menu is moved out of the element; the doubled attribute outranks the header's own !important rules
     // for the mobile book button (.bw-header-cta a.bw-header-mobile-book:is(...)).
     const m = 'html[data-bw-store-mode][data-bw-store-mode]';
-    style.textContent = [`${m} .bw-header-top`, `${m} [data-bw-header-tour-line]`, `${m} a.bw-header-book`, `${m} .bw-header-cta a.bw-header-book`, `${m} .bw-header-cta a.bw-header-mobile-book`, `${m} .bw-header-cta a.bw-header-mobile-book:is(:hover, :focus, :active, :visited)`].join(',') + '{display:none!important}';
+    const f = `${m} #bw-site-footer-restore`;
+    style.textContent = [`${m} .bw-header-top`, `${m} [data-bw-header-tour-line]`, `${m} a.bw-header-book`, `${m} .bw-header-cta a.bw-header-book`, `${m} .bw-header-cta a.bw-header-mobile-book`, `${m} .bw-header-cta a.bw-header-mobile-book:is(:hover, :focus, :active, :visited)`,
+      `${m} .bw-header-nav`, `${m} .bw-header-hamburger`, `${m} .bw-header-mobile`,
+      `${f} .bw-footer-col`, `${f} .bw-footer-note-grid`, `${f} .bw-footer-cta`, `${f} .bw-footer-brand > p`].join(',') + '{display:none!important}' + [
+      // Wix sizes the header box for the tour band; let it shrink to the logo row.
+      `${m} header[id] [class*="-container"]{grid-template-rows:minmax(0,auto)!important}`,
+      `${m} header[id] bw-site-header,${m} header[id] [id$="_r_comp-mpcjk2pf"],${m} header[id] [id$="_r_comp-mpcks8xv"]{min-height:0!important;height:auto!important}`,
+      `${m} .bw-header-main{padding-top:16px!important;padding-bottom:16px!important;min-height:0!important}`,
+      `${f} .bw-footer-main{display:block!important}`,
+      `${f} .bw-footer-brand{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px 32px}`,
+      `${f} .bw-logo-link{margin:0!important}`,
+      `${f} .bw-social-follow{display:flex;flex-wrap:wrap;gap:8px 20px}`,
+      `${f} .bw-footer-inner{padding-top:32px!important;padding-bottom:24px!important}`,
+      `${f} .bw-footer-bottom-links{position:relative}`,
+      `${f} [data-bw-store-credits]{display:inline-flex}`,
+      `${f} [data-bw-store-credits]>summary{cursor:pointer;list-style:none;color:rgba(250,250,245,.78);font-size:14px;font-weight:800;line-height:1.35}`,
+      `${f} [data-bw-store-credits]>summary::-webkit-details-marker{display:none}`,
+      `${f} [data-bw-store-credits]>div{position:absolute;right:0;bottom:calc(100% + 10px);width:min(560px,calc(100vw - 36px));max-height:260px;overflow:auto;background:#FAFAF5;color:#102414;padding:16px;border-radius:8px;box-shadow:0 8px 24px rgba(0,0,0,.3);z-index:5;font:400 13px/1.55 Georgia,serif;text-align:left}`,
+      `${f} [data-bw-store-credits]>div p{color:inherit;font:inherit;margin:0;max-width:none}`,
+      `${f} [data-bw-store-credits]>div p+p{margin-top:10px}`,
+      `${f} [data-bw-store-credits]>div a{color:inherit;display:inline;font:inherit;text-decoration:underline}`].join('');
     document.head.appendChild(style);
   }
   document.documentElement.toggleAttribute('data-bw-store-mode', store);
   document.querySelectorAll('bw-site-header').forEach((header) => header.toggleAttribute('data-bw-store-mode', store));
 }
+// The footer is drawn by the separate footer-restore embed and may mount late or re-render, so the store items are re-checked every tick.
+function bwHeaderStoreFooter() {
+  const links = document.querySelector('#bw-site-footer-restore .bw-footer-bottom-links');
+  if (!links) return;
+  const store = BW_HEADER_STORE_ROUTE.test(location.pathname);
+  const credits = store ? String(window.__bwStoreCreditsHtml || '') : '';
+  let contact = links.querySelector('[data-bw-store-contact]');
+  if (store && !contact) links.insertAdjacentHTML('afterbegin', '<a href="/contact" data-bw-store-contact>Contact</a>');
+  if (!store && contact) contact.remove();
+  let details = links.querySelector('[data-bw-store-credits]');
+  if (!credits) { if (details) details.remove(); return; }
+  if (!details) {
+    links.insertAdjacentHTML('beforeend', '<details data-bw-store-credits><summary>Image credits</summary><div></div></details>');
+    details = links.querySelector('[data-bw-store-credits]');
+  }
+  if (details.bwHtml !== credits) { details.lastElementChild.innerHTML = credits; details.bwHtml = credits; }
+}
+document.addEventListener('pointerdown', (event) => {
+  const details = document.querySelector('[data-bw-store-credits][open]');
+  if (details && !details.contains(event.target)) details.open = false;
+});
 let bwHeaderStorePath = '';
 function bwHeaderStoreModeWatch() {
+  bwHeaderStoreFooter();
   if (location.pathname === bwHeaderStorePath) return;
   bwHeaderStorePath = location.pathname;
   bwHeaderStoreMode();
