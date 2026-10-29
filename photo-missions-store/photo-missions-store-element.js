@@ -58,7 +58,7 @@
   const CSS = `
 @font-face{font-family:'BWTP Fraunces';src:url('${ROOT}home-two-doors/assets/fonts/Fraunces-Variable-latin.woff2') format('woff2');font-weight:100 900;font-display:swap}
 @font-face{font-family:'BWTP Grotesk';src:url('${ROOT}home-two-doors/assets/fonts/SpaceGrotesk-Variable-latin.woff2') format('woff2');font-weight:300 700;font-display:swap}
-${TAG}{display:block;width:100%;max-width:100%;min-width:0;pointer-events:auto}
+${TAG}{display:block;width:100%;max-width:100%;min-width:0;height:auto!important;min-height:0!important;pointer-events:auto}
 .bwpm{--cream:#FAFAF5;--ink:#2B3128;--green:#123D18;--leaf:#1B5E20;--muted:#5A6455;--tile:#EFEFEA;--line:#E2E2DA;--panel:#F1F1EA;--yellow:#FFE600;--serif:'BWTP Fraunces',Fraunces,Georgia,serif;background:var(--cream);color:var(--ink);font:400 16px/1.55 'BWTP Grotesk','Space Grotesk',system-ui,sans-serif;-webkit-font-smoothing:antialiased;padding-bottom:72px}
 .bwpm *{box-sizing:border-box}
 .bwpm a{color:var(--green);text-underline-offset:4px}.bwpm a:hover{color:var(--leaf)}
@@ -202,7 +202,8 @@ ${TAG}{display:block;width:100%;max-width:100%;min-width:0;pointer-events:auto}
       window.__bwStoreCreditsHtml = CREDITS;
       this.render();
       this._bind();
-      track('photo_missions_landing_view', { location: 'store_page' });
+      // Wix can re-attach the page once while hydrating; count one view per page load.
+      if (!window.__bwpmViewSent) { window.__bwpmViewSent = true; track('photo_missions_landing_view', { location: 'store_page' }); }
       if (new URLSearchParams(location.search).get('checkout') === 'cancelled') this._status('Checkout was cancelled. Nothing was charged; you can try again.', true);
     }
 
