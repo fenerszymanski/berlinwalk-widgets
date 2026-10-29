@@ -687,7 +687,7 @@
     cta: 'See dates and book',
     href: 'https://www.walkofberlin.com/book-berlin-walking-tour/berlin-then-and-now',
     railTitle: 'Walk the Berlin that disappeared',
-    railCopy: 'About 2.5 hours from the World Clock, with an archive photo at every stop. Max 10 people, €25.',
+    railCopy: 'About 2.5 hours from the World Clock, with an archive photo at every stop. Max 10 people, €15.',
     railCta: 'See dates and book'
   };
   var TOUR_AVAILABILITY_URL = 'https://berlinwalk-content-app.vercel.app/api/booking-calendar-availability?days=60&serviceId=145cb27e-c5bd-456d-bfbd-a09d4d6f5f9d';
