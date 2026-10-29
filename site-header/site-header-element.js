@@ -11,7 +11,7 @@ const BW_HEADER_MONO_URL = new URL('../brand/fonts/editorial-v2/IBMPlexMono-Semi
 const BW_HEADER_MENU_FONT_URL = new URL('../home-two-doors/assets/fonts/Fraunces-Variable-latin.woff2', BW_HEADER_SCRIPT_URL).href;
 // Berlin Then and Now (service 145cb27e). The legacy booking path stays
 // reachable for guests who booked before 30 September, but nothing links to it.
-const BW_HEADER_BUILD = 'planner-store-20261029';
+const BW_HEADER_BUILD = 'photo-missions-store-20261029';
 const BW_HEADER_BOOKING_URL = 'https://www.walkofberlin.com/book-berlin-walking-tour/berlin-then-and-now';
 const BW_HEADER_TOUR_FACTS = ['about 2.5 hours', 'max 10 people', '€15']
   .map((fact) => `<span class="bw-header-fact">${fact}</span>`)
@@ -1520,8 +1520,9 @@ class BWHeaderElement extends HTMLElement {
 // The footer drops the tour copy, the four link columns and the tour facts, and its bottom row gains Contact and a small "Image credits"
 // item that the storefront fills (window.__bwStoreCreditsHtml). Works on prerendered and rendered markup alike, and follows Wix's
 // in-site navigation.
-// /berlin-trip-planner is a store product page since 29 Oct 2026 (trip-planner-store element).
-const BW_HEADER_STORE_ROUTE = /^\/(?:category|product-page|cart-page|thank-you-page|store|shop|berlin-trip-planner)(?:\/|$)/;
+// /berlin-trip-planner and the Photo Missions page are store product pages since 29 Oct 2026 (trip-planner-store,
+// photo-missions-store elements).
+const BW_HEADER_STORE_ROUTE = /^\/(?:category|product-page|cart-page|thank-you-page|store|shop|berlin-trip-planner|products\/hidden-berlin-photo-missions)(?:\/|$)/;
 function bwHeaderStoreMode() {
   const store = BW_HEADER_STORE_ROUTE.test(location.pathname);
   const home = location.pathname === '/';
