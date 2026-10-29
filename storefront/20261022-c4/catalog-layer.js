@@ -169,7 +169,7 @@ export function createCatalogModel(products, definitions) {
     const filters = list(category.filters).map(filter => ({...filter,count:categoryProducts.filter(product=>match(product,filter.match)).length}));
     const filter = filters.find(item => item.id === filterId);
     let selected = filter ? categoryProducts.filter(product => match(product, filter.match)) : categoryProducts;
-    if(preview && category.shelf.featuredProductIds?.length){const priority=category.shelf.featuredProductIds;selected=[...selected].sort((a,b)=>{const rank=p=>priority.includes(p.id)?priority.indexOf(p.id):priority.length;return rank(a)-rank(b);});}
+    if((preview || category.shelf.featuredFirstAlways) && category.shelf.featuredProductIds?.length){const priority=category.shelf.featuredProductIds;selected=[...selected].sort((a,b)=>{const rank=p=>priority.includes(p.id)?priority.indexOf(p.id):priority.length;return rank(a)-rank(b);});}
     const limit = preview ? category.shelf.previewLimit : selected.length;
     return {
       id: category.id,

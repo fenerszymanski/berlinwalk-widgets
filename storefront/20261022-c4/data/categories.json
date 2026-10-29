@@ -131,7 +131,8 @@
         "order": 30,
         "featuredProductIds": [
           "trio"
-        ]
+        ],
+        "featuredFirstAlways": true
       },
       "actionLabel": "SEE DETAILS →",
       "browseHref": "https://walkofberlin.com/audio-tours",
