@@ -665,3 +665,15 @@ bw-home-then-now .bwh-tool__line { font-size: 13px; line-height: 1.35; }
 @media (max-width: 1099px) { bw-home-then-now .bwh-wide { display: none; } }
 @media (min-width: 1100px) { bw-home-then-now .bwh-narrow { display: none; } }
 @media (min-width: 761px) { bw-home-then-now .bwh-panel[hidden] { display: flex; } }
+
+/* In-page reel player */
+bw-home-then-now .bwh-player { width: 100%; height: 100%; max-width: none; max-height: none; margin: 0; padding: 0; border: 0; background: transparent; color: var(--bwh-cream); overflow: hidden; }
+bw-home-then-now .bwh-player::backdrop { background: rgba(8, 18, 10, 0.97); }
+bw-home-then-now .bwh-player__box { position: relative; box-sizing: border-box; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; padding: 56px 16px max(16px, env(safe-area-inset-bottom)); }
+bw-home-then-now .bwh-player__video { display: block; height: min(calc(100dvh - 190px), calc((100vw - 32px) * 16 / 9)); width: auto; max-width: 100%; aspect-ratio: 9 / 16; border-radius: 12px; background: #000; object-fit: contain; }
+bw-home-then-now .bwh-player__close { position: absolute; top: max(8px, env(safe-area-inset-top)); right: 8px; width: 44px; height: 44px; border: 0; border-radius: 999px; background: rgba(250, 250, 245, 0.14); color: var(--bwh-cream); font-size: 28px; line-height: 1; cursor: pointer; }
+bw-home-then-now .bwh-player__close:hover, bw-home-then-now .bwh-player__close:focus-visible { background: rgba(250, 250, 245, 0.26); }
+bw-home-then-now .bwh-player__title { margin: 0; max-width: 520px; text-align: center; font-size: 16px; font-weight: 600; line-height: 1.3; }
+bw-home-then-now .bwh-player__actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
+bw-home-then-now .bwh-player__product { display: inline-flex; align-items: center; min-height: 44px; padding: 0 18px; border-radius: 999px; background: var(--bwh-yellow); color: var(--bwh-dark); font-size: 15px; font-weight: 700; text-decoration: none; }
+bw-home-then-now .bwh-player__next { min-height: 44px; padding: 0 18px; border: 1.5px solid rgba(250, 250, 245, 0.6); border-radius: 999px; background: transparent; color: var(--bwh-cream); font: inherit; font-size: 15px; font-weight: 600; cursor: pointer; }

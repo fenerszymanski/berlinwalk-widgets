@@ -27,7 +27,8 @@
         "href": "https://www.instagram.com/reel/DdyQTekMrQu/",
         "img": "assets/reel-world-clock.webp",
         "productLabel": "World Clock poster · from €26.90",
-        "productHref": "https://www.walkofberlin.com/product-page/berlin-world-clock-poster-alexanderplatz-art-print-30-x-40-cm"
+        "productHref": "https://www.walkofberlin.com/product-page/berlin-world-clock-poster-alexanderplatz-art-print-30-x-40-cm",
+        "video": "video/reel-world-clock.mp4"
       },
       {
         "title": "The clock almost nobody could read",
@@ -35,7 +36,8 @@
         "href": "https://www.instagram.com/reel/Dd5kfKwk-P8/",
         "img": "assets/reel-berlin-uhr.webp",
         "productLabel": "Berlin-Uhr poster · from €26.90",
-        "productHref": "https://www.walkofberlin.com/product-page/berlin-uhr-art-print-berlin-reels-collection"
+        "productHref": "https://www.walkofberlin.com/product-page/berlin-uhr-art-print-berlin-reels-collection",
+        "video": "video/reel-berlin-uhr.mp4"
       },
       {
         "title": "No train stopped here for 28 years",
@@ -43,7 +45,8 @@
         "href": "https://www.instagram.com/reel/DcsncQ7shNh/",
         "img": "assets/reel-ghost-stations.webp",
         "productLabel": "Ghost Stations file · €6.90",
-        "productHref": "https://www.walkofberlin.com/product-page/ghost-stations-printable"
+        "productHref": "https://www.walkofberlin.com/product-page/ghost-stations-printable",
+        "video": "video/reel-ghost-stations.mp4"
       },
       {
         "title": "Berlin’s tram map still shows the Wall",
@@ -51,7 +54,8 @@
         "href": "https://www.instagram.com/reel/DdQapWighJ-/",
         "img": "assets/reel-tram-map.webp",
         "productLabel": "Tram Map file · €6.90",
-        "productHref": "https://www.walkofberlin.com/product-page/berlin-tram-map-printable"
+        "productHref": "https://www.walkofberlin.com/product-page/berlin-tram-map-printable",
+        "video": "video/reel-tram-map.mp4"
       },
       {
         "title": "East Berlin, west of the Wall",
@@ -59,7 +63,8 @@
         "href": "https://www.instagram.com/reel/Dc_i3LtgRlR/",
         "img": "assets/reel-osman-kalin.webp",
         "productLabel": "Treehouse file · €6.90",
-        "productHref": "https://www.walkofberlin.com/product-page/osman-kal%C4%B1n-s-treehouse-printable"
+        "productHref": "https://www.walkofberlin.com/product-page/osman-kal%C4%B1n-s-treehouse-printable",
+        "video": "video/reel-osman-kalin.mp4"
       }
     ],
     "posters": [
@@ -464,7 +469,7 @@
     const product = bwhHref(r.productHref);
     return `
         <article class="bwh-reel bwh-lift">
-          <a class="bwh-reel__link" href="${bwhEsc(href)}"${bwhTargetFor(href)} aria-label="Play the reel: ${bwhEsc(r.title)}" data-bwh-section="reels" data-bwh-item="${bwhEsc(r.title)}" data-bwh-position="${i + 1}">
+          <a class="bwh-reel__link" href="${bwhEsc(href)}"${bwhTargetFor(href)} aria-label="Play the reel: ${bwhEsc(r.title)}" data-bwh-reel="${i}" data-bwh-section="reels" data-bwh-item="${bwhEsc(r.title)}" data-bwh-position="${i + 1}">
             <img src="${bwhEsc(bwhSrc(r.img))}" alt="" width="448" height="720" loading="lazy" decoding="async">
             <span class="bwh-len">${BWH_PLAY}${bwhEsc(r.len)}</span>
           </a>
@@ -487,6 +492,17 @@
       </div>
       <div class="bwh-row bwh-row--reels" data-bwh-row="reels">${d.reels.map(bwhReel).join('')}</div>
       <div class="bwh-bar bwh-narrow" aria-hidden="true"><span class="bwh-bar__fill"></span></div>
+      <dialog class="bwh-player" aria-label="Reel player">
+        <div class="bwh-player__box">
+          <button class="bwh-player__close" type="button" aria-label="Close the reel">×</button>
+          <video class="bwh-player__video" playsinline controls preload="none"></video>
+          <p class="bwh-player__title"></p>
+          <div class="bwh-player__actions">
+            <a class="bwh-player__product" href="#" data-bwh-section="reel-player"></a>
+            <button class="bwh-player__next" type="button">Next reel →</button>
+          </div>
+        </div>
+      </dialog>
     </section>`;
   }
 
@@ -693,6 +709,19 @@
           this._bwhSelectTab(tab.dataset.bwhTab, true, false);
           return;
         }
+        const reel = event.target.closest ? event.target.closest('a[data-bwh-reel]') : null;
+        if (reel && this.contains(reel) && typeof HTMLDialogElement === 'function'
+          && !(event.metaKey || event.ctrlKey || event.shiftKey || event.altKey)) {
+          event.preventDefault();
+          this._bwhOpenReel(Number(reel.dataset.bwhReel), reel);
+          return;
+        }
+        if (event.target.closest && event.target.closest('.bwh-player__close')) { this._bwhCloseReel(); return; }
+        if (event.target.closest && event.target.closest('.bwh-player__next')) {
+          this._bwhOpenReel((this._bwhReelIndex + 1) % DATA.reels.length, null);
+          return;
+        }
+        if (event.target.classList && (event.target.classList.contains('bwh-player') || event.target.classList.contains('bwh-player__box'))) { this._bwhCloseReel(); return; }
         const link = event.target.closest ? event.target.closest('a[data-bwh-section]') : null;
         if (!link || !this.contains(link)) return;
         bwhTrack('bw_home_tn_click', {
@@ -777,6 +806,70 @@
     _bwhStop() {
       if (this._bwhObserver) this._bwhObserver.disconnect();
       this._bwhObserver = null;
+      this._bwhCloseReel();
+    }
+
+    // In-page reel player (Yusuf, 29 Oct 2026: visitors stay on the site instead of going to Instagram). One <dialog> in the
+    // reels section, opened modal so it sits in the top layer above Wix's containers. The video only loads on open.
+    _bwhOpenReel(index, opener) {
+      const dialog = this.querySelector('.bwh-player');
+      const reel = DATA.reels[index];
+      if (!dialog || !reel || !reel.video) return;
+      const video = dialog.querySelector('video');
+      if (opener) this._bwhReelOpener = opener;
+      this._bwhReelIndex = index;
+      this._bwhReelMarks = new Set();
+      video.src = bwhSrc(reel.video);
+      video.poster = bwhSrc(reel.img);
+      dialog.querySelector('.bwh-player__title').textContent = reel.title;
+      const product = dialog.querySelector('.bwh-player__product');
+      product.href = bwhHref(reel.productHref);
+      product.textContent = `${reel.productLabel} →`;
+      product.dataset.bwhItem = reel.productLabel;
+      product.dataset.bwhPosition = String(index + 1);
+      if (!dialog.open) {
+        dialog.showModal();
+        this._bwhOverflow = document.documentElement.style.overflow;
+        document.documentElement.style.overflow = 'hidden';
+        if (!dialog.bwhBound) {
+          dialog.bwhBound = true;
+          dialog.addEventListener('close', () => this._bwhCloseReel());
+          video.addEventListener('timeupdate', () => {
+            if (!video.duration) return;
+            const pct = Math.floor((video.currentTime / video.duration) * 4) * 25;
+            if (pct > 0 && !this._bwhReelMarks.has(pct)) {
+              this._bwhReelMarks.add(pct);
+              bwhTrack('bw_home_tn_reel_progress', { item: DATA.reels[this._bwhReelIndex].title, pct });
+            }
+          });
+          video.addEventListener('ended', () => {
+            if (!this._bwhReelMarks.has(100)) bwhTrack('bw_home_tn_reel_progress', { item: DATA.reels[this._bwhReelIndex].title, pct: 100 });
+            this._bwhReelMarks.add(100);
+          });
+        }
+      }
+      const played = video.play();
+      if (played && typeof played.catch === 'function') played.catch(() => {});
+      bwhTrack('bw_home_tn_reel_play', { item: reel.title, position: index + 1 });
+    }
+
+    _bwhCloseReel() {
+      const dialog = this.querySelector('.bwh-player');
+      if (!dialog) return;
+      const video = dialog.querySelector('video');
+      if (video && video.getAttribute('src')) {
+        video.pause();
+        video.removeAttribute('src');
+        video.load();
+      }
+      if (dialog.open) dialog.close();
+      if (this._bwhOverflow !== undefined) {
+        document.documentElement.style.overflow = this._bwhOverflow;
+        this._bwhOverflow = undefined;
+        const opener = this._bwhReelOpener;
+        this._bwhReelOpener = null;
+        if (opener && opener.isConnected) opener.focus({ preventScroll: true });
+      }
     }
 
     _bwhDepth(row) {
