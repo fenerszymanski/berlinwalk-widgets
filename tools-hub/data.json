@@ -11346,6 +11346,38 @@
       "iconStatus": "live-wix-media",
       "image": "https://static.wixstatic.com/media/5a08a3_262692b263a6468b8b25d1d2fefc610a~mv2.png",
       "cmsItemId": "11a88398-8fbc-45db-8114-9e52a2fb40ed"
+    },
+    {
+      "slug": "berlin-blackout-emergency-map",
+      "title": "Berlin Blackout Emergency Map",
+      "lead": "Type your postcode and see your nearest Katastrophenschutz-Leuchtturm on the official Berlin list: which ones are ready to open, which are still planned, how far you would walk, and what the five days of the January 2026 power cut asked of people at home. Checked on 29 October 2026.",
+      "category": "Maps",
+      "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/berlin-blackout-emergency-map/",
+      "embedHeight": 1400,
+      "hubCategory": "Essentials",
+      "type": "Map",
+      "priority": 3,
+      "tags": [
+        "power cut",
+        "blackout",
+        "stromausfall",
+        "kat-leuchtturm",
+        "emergency",
+        "winter"
+      ],
+      "aliases": [
+        "power outage berlin",
+        "power cut in berlin",
+        "blackout berlin",
+        "stromausfall berlin",
+        "katastrophenschutz leuchtturm berlin",
+        "kat leuchtturm berlin",
+        "emergency point berlin",
+        "berlin emergency kit"
+      ],
+      "iconStatus": "live-wix-media",
+      "image": "https://static.wixstatic.com/media/5a08a3_5287a8ab7d324a26abe62dd3e2b6bef8~mv2.png",
+      "cmsItemId": "3ae8dfd7-fdb7-4d1e-9f46-2545860aeb25"
     }
   ],
   "hubCategories": [

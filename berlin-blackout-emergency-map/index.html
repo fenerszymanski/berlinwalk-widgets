@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Berlin Blackout Map: Your Nearest Emergency Point and the Five Days of January 2026</title>
+<link rel="stylesheet" href="../css/brand.css">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #FFFFFF; color: #17241a; padding: 12px; }
+  .bo { border-radius: 18px; overflow: hidden; background: #10170f; color: #e9eee4; border: 1px solid #22301f; }
+  .bo-head { padding: 18px 18px 12px; }
+  .bo-kick { font-size: 11px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; color: #FFE600; }
+  .bo-head h1 { font-size: 20px; line-height: 1.25; font-weight: 800; margin-top: 5px; color: #ffffff; }
+  .bo-head p { font-size: 12.5px; line-height: 1.55; color: #b9c4b1; margin-top: 7px; max-width: 700px; }
+  .bo-find { display: flex; flex-wrap: wrap; gap: 8px 10px; align-items: center; padding: 4px 18px 12px; }
+  .bo-find label { font-size: 12px; font-weight: 800; color: #ffffff; }
+  .bo-find input { font-family: inherit; font-size: 16px; font-weight: 800; letter-spacing: .08em; width: 7.2em; padding: 8px 10px; border-radius: 10px; border: 2px solid #FFE600; background: #ffffff; color: #123D18; }
+  .bo-find button.go { font-family: inherit; font-size: 13px; font-weight: 800; padding: 9px 14px; border-radius: 999px; border: 0; background: #FFE600; color: #123D18; cursor: pointer; }
+  .bo-find .ex { display: flex; flex-wrap: wrap; gap: 6px; }
+  .bo-find .ex button { font-family: inherit; font-size: 11.5px; font-weight: 700; padding: 6px 10px; border-radius: 999px; border: 1px solid #4b5c45; background: transparent; color: #dfe7d8; cursor: pointer; }
+  .bo-find .ex button:hover { border-color: #FFE600; }
+  #msg { width: 100%; font-size: 12px; color: #ffb3b9; min-height: 0; }
+  .bo-body { display: grid; grid-template-columns: 1.15fr 1fr; gap: 12px; padding: 0 12px 10px; align-items: start; }
+  .bo-map { background: #0b100a; border: 1px solid #22301f; border-radius: 14px; padding: 6px; }
+  .bo-map svg { display: block; width: 100%; height: auto; }
+  .bo-legend { display: flex; flex-wrap: wrap; gap: 6px 12px; font-size: 10.5px; color: #aab6a2; padding: 6px 6px 2px; }
+  .bo-legend span { display: inline-flex; align-items: center; gap: 5px; }
+  .bo-legend i { display: inline-block; width: 11px; height: 11px; border-radius: 50%; }
+  .bo-side { display: grid; gap: 10px; }
+  .bo-card { background: #182316; border: 1px solid #2b3a27; border-radius: 14px; padding: 12px; }
+  .bo-card h3 { font-size: 10.5px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: #9fb196; margin-bottom: 8px; }
+  .bo-near { list-style: none; display: grid; gap: 8px; }
+  .bo-near li { display: grid; grid-template-columns: 1fr auto; gap: 8px; font-size: 12px; line-height: 1.4; color: #dfe7d8; }
+  .bo-near b { color: #ffffff; display: block; }
+  .bo-near em { font-style: normal; font-weight: 800; color: #FFE600; white-space: nowrap; text-align: right; }
+  .bo-near small { color: #9fb196; }
+  .bo-note { font-size: 12px; line-height: 1.5; color: #dfe7d8; margin-top: 8px; padding: 8px 10px; border-radius: 10px; background: #2a2a10; border-left: 3px solid #FFE600; }
+  .bo-note b { color: #FFE600; }
+  .bo-empty { font-size: 12.5px; line-height: 1.55; color: #b9c4b1; }
+  .bo-clock { margin: 4px 12px 12px; background: #182316; border: 1px solid #2b3a27; border-radius: 14px; padding: 12px; }
+  .bo-clock h3 { font-size: 10.5px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: #9fb196; }
+  .bo-track { display: grid; grid-template-columns: repeat(6, 1fr); gap: 4px; margin: 10px 0 8px; }
+  .bo-track button { font-family: inherit; font-size: 10.5px; font-weight: 800; line-height: 1.25; padding: 7px 4px; border-radius: 9px; border: 1px solid #3a4b35; background: #10170f; color: #b9c4b1; cursor: pointer; }
+  .bo-track button.done { background: #24331f; color: #dfe7d8; }
+  .bo-track button.on { background: #FFE600; color: #123D18; border-color: #FFE600; }
+  .bo-stage { display: grid; grid-template-columns: 1.2fr 1fr; gap: 12px; }
+  .bo-stage h4 { font-size: 15px; line-height: 1.3; color: #ffffff; }
+  .bo-stage .when { font-size: 11px; font-weight: 800; color: #FFE600; letter-spacing: .06em; text-transform: uppercase; }
+  .bo-stage ul { list-style: none; margin-top: 8px; display: grid; gap: 6px; }
+  .bo-stage li { font-size: 12.5px; line-height: 1.5; color: #dfe7d8; padding-left: 10px; border-left: 3px solid #4b5c45; }
+  .bo-stage li.move { border-left-color: #FFE600; }
+  .bo-stage li.move b { color: #FFE600; }
+  .bo-kit { display: grid; gap: 6px; align-content: start; }
+  .bo-kit p { font-size: 11.5px; color: #9fb196; line-height: 1.45; }
+  .bo-kit label { display: flex; gap: 8px; align-items: flex-start; font-size: 12px; line-height: 1.35; color: #dfe7d8; cursor: pointer; padding: 6px 8px; border-radius: 9px; background: #10170f; border: 1px solid #2b3a27; }
+  .bo-kit label.need { border-color: #FFE600; }
+  .bo-kit input { margin-top: 2px; accent-color: #FFE600; }
+  .bo-score { display: flex; align-items: baseline; gap: 8px; margin-top: 4px; }
+  .bo-score b { font-size: 26px; color: #FFE600; line-height: 1; }
+  .bo-score span { font-size: 11.5px; color: #dfe7d8; line-height: 1.35; }
+  .bo-nav { display: flex; justify-content: space-between; gap: 8px; margin-top: 10px; }
+  .bo-nav button { font-family: inherit; font-size: 12.5px; font-weight: 800; border-radius: 999px; padding: 8px 14px; cursor: pointer; border: 1.5px solid #FFE600; background: #FFE600; color: #123D18; }
+  .bo-nav button.prev { background: transparent; color: #FFE600; }
+  .bo-nav button:disabled { opacity: .35; cursor: default; }
+  .bo-foot { padding: 0 18px 14px; font-size: 10.5px; line-height: 1.5; color: #8d9a86; }
+  @media (max-width: 720px) {
+    .bo-body, .bo-stage { grid-template-columns: 1fr; }
+    .bo-track { grid-template-columns: repeat(3, 1fr); }
+    .bo-head h1 { font-size: 18px; }
+  }
+</style>
+</head>
+<body>
+<div class="bo">
+  <div class="bo-head">
+    <div class="bo-kick">Berlin power cut planner</div>
+    <h1>Where do you go when your Kiez goes dark?</h1>
+    <p>Type your postcode. The map shows every emergency point on the official Berlin list, which ones are actually ready to open, and how long the walk is when the trams, lifts and phones may not help you. Then step through the five days of January 2026 and tick what you already have at home.</p>
+  </div>
+  <div class="bo-find">
+    <label for="plz">Your postcode</label>
+    <input id="plz" type="text" inputmode="numeric" maxlength="5" autocomplete="postal-code" placeholder="10115" aria-describedby="msg">
+    <button class="go" id="go" type="button">Show my nearest points</button>
+    <div class="ex" aria-label="Example postcodes">
+      <button type="button" data-plz="14163">14163 Zehlendorf</button>
+      <button type="button" data-plz="12489">12489 Adlershof</button>
+      <button type="button" data-plz="10999">10999 Kreuzberg</button>
+      <button type="button" data-plz="13407">13407 Reinickendorf</button>
+    </div>
+    <div id="msg" role="status" aria-live="polite"></div>
+  </div>
+  <div class="bo-body">
+    <div class="bo-map">
+      <div id="map"></div>
+      <div class="bo-legend">
+        <span><i style="background:#FFE600"></i>Lighthouse, ready when a crisis is declared</span>
+        <span><i style="background:transparent;border:2px solid #8d9a86"></i>Lighthouse, still being planned</span>
+        <span><i style="background:#7CB342;width:8px;height:8px"></i>Information point</span>
+      </div>
+    </div>
+    <div class="bo-side">
+      <div class="bo-card">
+        <h3 id="nearTitle">Your nearest ready points</h3>
+        <div id="near"><p class="bo-empty">Enter a Berlin postcode to see the three closest emergency points that are listed as ready, with the walking time.</p></div>
+      </div>
+      <div class="bo-card">
+        <h3>The whole list, checked <span id="checked"></span></h3>
+        <div id="totals" class="bo-empty"></div>
+      </div>
+    </div>
+  </div>
+  <div class="bo-clock">
+    <h3>How January 2026 unfolded, step by step</h3>
+    <div class="bo-track" id="track" role="tablist" aria-label="Stages of the January 2026 power cut"></div>
+    <div class="bo-stage">
+      <div id="stage" aria-live="polite"></div>
+      <div class="bo-kit">
+        <p>Tick what you have at home today. Yellow frames are what this stage of January asked of people.</p>
+        <div id="kit"></div>
+        <div class="bo-score"><b id="score">0/0</b><span id="scoreTxt">needs covered up to this point</span></div>
+      </div>
+    </div>
+    <div class="bo-nav">
+      <button class="prev" id="prev" type="button">Previous</button>
+      <button id="next" type="button">Next stage</button>
+    </div>
+  </div>
+  <p class="bo-foot">Emergency points: Berlin Senate list of Katastrophenschutz-Leuchttürme and Informationspunkte (status and addresses as published, 73 entries, 69 with a map position). The timeline: Steglitz-Zehlendorf district review of the January 2026 power cut, June 2026. Walking time is the straight line plus a third, at 4.5 km/h. District outlines: ODIS Berlin. Postcode centres: OpenStreetMap contributors (ODbL).</p>
+</div>
+<script src="../js/brand.js"></script>
+<script>
+(function () {
+  var DATA = null, home = null, homePlz = '', currentStep = 0;
+  var have = new Set();
+  function el(id) { return document.getElementById(id); }
+  function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
+
+  var KIT = [
+    { id: 'torch', t: 'A torch or headlamp with spare batteries' },
+    { id: 'radio', t: 'A battery or crank radio' },
+    { id: 'paper', t: 'Your nearest emergency point written on paper' },
+    { id: 'cash', t: 'Cash in small notes' },
+    { id: 'bank', t: 'A charged power bank' },
+    { id: 'warm', t: 'Sleeping bag, wool layers, a hat for indoors' },
+    { id: 'food', t: 'Food for several days that needs no cooking' },
+    { id: 'meds', t: 'A week of your regular medicines' },
+    { id: 'plan', t: 'A friend outside your district who can take you in' }
+  ];
+
+  // Each stage is taken from the Steglitz-Zehlendorf review of 3 to 9 January 2026.
+  var STAGES = [
+    { tab: 'Sat 05:44', when: 'Saturday 3 January, 05:44', h: 'The lights go out across four Ortsteile',
+      facts: ['A fire on a cable bridge over the Teltowkanal cuts the power to Nikolassee, Zehlendorf, Wannsee and Lichterfelde: more than 100,000 people in a frost.',
+              'Lifts, street lights, traffic lights and electric heating controls stop with it. So do landlines, mobile phones and the internet inside the dark area.'],
+      move: 'Turn on the radio, not the phone. Note the time and keep the fridge shut.',
+      needs: ['torch', 'radio'] },
+    { tab: 'Sat 15:30', when: 'Saturday, 15:30', h: 'It will last days, not hours',
+      facts: ['The first word was power back by the late evening. Only at about 15:30 did the district learn that most streets would stay dark until Thursday afternoon.',
+              'The lighthouse in Rathaus Zehlendorf is switched on and an emergency shelter opens there and at the Cole Sports Center.'],
+      move: 'Walk to your nearest ready point while it is light, and know the address before you need it.',
+      needs: ['paper', 'cash'] },
+    { tab: 'Sun to Mon', when: 'Sunday 4 to Monday 5 January', h: 'The flats get cold',
+      facts: ['About 12,000 homes on district heating lose their heat, because the pumps need electricity. Gas flat heaters (Etagenheizung) and other heating with electric controls stop too.',
+              'Water keeps running: the Beelitzhof waterworks has its own emergency power. A district phone line opens on Sunday at 08:00; paper flyers go out on Monday.'],
+      move: 'Close off one room, layer up, and decide early whether to sleep somewhere warm.',
+      needs: ['warm', 'food', 'plan'] },
+    { tab: 'Mon about 48 h', when: 'About 48 hours in', h: 'Emergency calls come back',
+      facts: ['Telekom sets up mobile masts at the edge of the dark area. After about 48 hours, emergency calls work again, where the coverage reaches.',
+              'Doctors’ practices and pharmacies inside the area have no backup power. With the dark zone at most 3 km wide, people who could walk or drive shopped and filled prescriptions outside it.'],
+      move: 'Charge the phone where the power is on and buy what you need just outside the dark area.',
+      needs: ['bank', 'meds'] },
+    { tab: 'Wed 14:15', when: 'Wednesday 7 January, 14:15', h: 'Power is back, mostly',
+      facts: ['Stromnetz Berlin reports the supply restored, still with some partial outages.',
+              'The damage shows next: frozen and burst pipes, broken circulation pumps, lifts and fire alarm panels that do not restart.'],
+      move: 'Check your radiators and pipes before you leave for work, and report damage to the landlord the same day.',
+      needs: [] },
+    { tab: 'Fri 12:00', when: 'Friday 9 January, 12:00', h: 'The lighthouse closes',
+      facts: ['The lighthouse and the shelter in Rathaus Zehlendorf close, six days after the fire. The other shelters were used to about 10 to 15 percent.',
+              'The review’s lesson for the district: plan more shelters with backup power and heat, and prepare people better for looking after themselves.'],
+      move: 'Use the quiet weeks after a cut to pack the kit you missed.',
+      needs: [] }
+  ];
+
+  var W = 440, H = 330;
+  var B = { lonMin: 13.07, lonMax: 13.78, latMin: 52.33, latMax: 52.68 };
+  var K = Math.cos(52.5 * Math.PI / 180);
+  var S = Math.min((W - 16) / ((B.lonMax - B.lonMin) * K), (H - 16) / (B.latMax - B.latMin));
+  var OX = (W - (B.lonMax - B.lonMin) * K * S) / 2, OY = (H - (B.latMax - B.latMin) * S) / 2;
+  function project(lon, lat) { return [OX + (lon - B.lonMin) * K * S, OY + (B.latMax - lat) * S]; }
+  function km(a, b) {
+    var R = 6371, r = Math.PI / 180, dLat = (b.lat - a.lat) * r, dLon = (b.lon - a.lon) * r;
+    var x = Math.sin(dLat / 2) * Math.sin(dLat / 2) + Math.cos(a.lat * r) * Math.cos(b.lat * r) * Math.sin(dLon / 2) * Math.sin(dLon / 2);
+    return 2 * R * Math.asin(Math.sqrt(x));
+  }
+  function walkMin(d) { return Math.round(d * 1.33 / 4.5 * 60); }
+  function fmtWalk(m) { return m < 60 ? m + ' min' : Math.floor(m / 60) + ' h ' + (m % 60 < 10 ? '0' : '') + (m % 60) + ' min'; }
+
+  function ranked() {
+    return DATA.points.map(function (p) { return { p: p, d: km(home, p) }; })
+      .sort(function (a, b) { return a.d - b.d; });
+  }
+
+  function renderMap() {
+    var s = '<svg viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="Map of Berlin with the emergency points on the official list">';
+    DATA.outlines.forEach(function (o) {
+      o.rings.forEach(function (ring) {
+        var pts = ring.map(function (p) { var q = project(p[0], p[1]); return q[0].toFixed(1) + ',' + q[1].toFixed(1); }).join(' ');
+        s += '<polygon points="' + pts + '" fill="#141d12" stroke="#2f3f2a" stroke-width="0.8"/>';
+      });
+    });
+    var top = [];
+    if (home) {
+      var r = ranked(), hq = project(home.lon, home.lat);
+      top = r.filter(function (x) { return x.p.r; }).slice(0, 3);
+      // Rings at 2 and 4 km walking radius around home.
+      [2, 4].forEach(function (rad) {
+        var rr = rad / 111 * S;
+        s += '<circle cx="' + hq[0].toFixed(1) + '" cy="' + hq[1].toFixed(1) + '" r="' + rr.toFixed(1) + '" fill="none" stroke="#FFE600" stroke-opacity=".35" stroke-dasharray="3 4"/>';
+        s += '<text x="' + hq[0].toFixed(1) + '" y="' + (hq[1] + rr + 9).toFixed(1) + '" text-anchor="middle" font-size="8" fill="#FFE600" fill-opacity=".7">' + rad + ' km</text>';
+      });
+      top.forEach(function (x, i) {
+        var q = project(x.p.lon, x.p.lat);
+        s += '<line x1="' + hq[0].toFixed(1) + '" y1="' + hq[1].toFixed(1) + '" x2="' + q[0].toFixed(1) + '" y2="' + q[1].toFixed(1) + '" stroke="#FFE600" stroke-width="' + (i ? 1.2 : 2.2) + '" stroke-opacity="' + (i ? .55 : 1) + '"/>';
+      });
+    }
+    DATA.points.forEach(function (p) {
+      var q = project(p.lon, p.lat), t = '<title>' + esc(p.n + ', ' + p.a + (p.r ? '' : ' (planned)')) + '</title>';
+      if (p.k === 'I') s += '<circle cx="' + q[0].toFixed(1) + '" cy="' + q[1].toFixed(1) + '" r="2.6" fill="#7CB342">' + t + '</circle>';
+      else if (p.r) s += '<circle cx="' + q[0].toFixed(1) + '" cy="' + q[1].toFixed(1) + '" r="5" fill="#FFE600" stroke="#10170f" stroke-width="1.5">' + t + '</circle>';
+      else s += '<circle cx="' + q[0].toFixed(1) + '" cy="' + q[1].toFixed(1) + '" r="4.2" fill="none" stroke="#8d9a86" stroke-width="1.6">' + t + '</circle>';
+    });
+    if (home) {
+      var h = project(home.lon, home.lat);
+      s += '<circle cx="' + h[0].toFixed(1) + '" cy="' + h[1].toFixed(1) + '" r="6.5" fill="#ffffff" stroke="#E63946" stroke-width="3"/>';
+      s += '<text x="' + (h[0] + 9).toFixed(1) + '" y="' + (h[1] - 8).toFixed(1) + '" font-size="10" font-weight="800" fill="#ffffff">' + esc(homePlz) + '</text>';
+    }
+    s += '</svg>';
+    el('map').innerHTML = s;
+  }
+
+  function renderNear() {
+    if (!home) return;
+    var r = ranked(), ready = r.filter(function (x) { return x.p.r; }).slice(0, 3);
+    var planned = r.filter(function (x) { return !x.p.r; })[0];
+    var h = '<ul class="bo-near">';
+    ready.forEach(function (x) {
+      h += '<li><div><b>' + esc(x.p.n) + '</b>' + esc(x.p.a) + '<br><small>' + (x.p.k === 'I' ? 'Information point' : 'Lighthouse') + ', ' + esc(x.p.d) + ', ' + esc(x.p.s) + '</small></div><em>' + x.d.toFixed(1) + ' km<br>' + fmtWalk(walkMin(x.d)) + '</em></li>';
+    });
+    h += '</ul>';
+    var nearest = ready[0];
+    if (planned && planned.d < nearest.d) {
+      h += '<div class="bo-note"><b>Closer, but not ready yet:</b> ' + esc(planned.p.n) + ', ' + esc(planned.p.a) + ' (' + planned.d.toFixed(1) + ' km) is on the list as still being planned. A planned point can still open on the day, as Rathaus Zehlendorf did in January 2026, but the list does not promise it.</div>';
+    }
+    if (walkMin(nearest.d) > 45) {
+      h += '<div class="bo-note"><b>Long walk:</b> your nearest ready point is about ' + fmtWalk(walkMin(nearest.d)) + ' away on foot. In a real cut the district also opens other places, so keep a battery radio on for the address that day.</div>';
+    }
+    el('nearTitle').textContent = 'Nearest ready points to ' + homePlz;
+    el('near').innerHTML = h;
+  }
+
+  function renderTotals() {
+    var t = DATA.listTotals;
+    el('checked').textContent = DATA.checkedOn;
+    el('totals').innerHTML = '<b style="color:#FFE600">' + t.lighthouseReady + '</b> of ' + (t.lighthouseReady + t.lighthousePlanned) +
+      ' lighthouses are listed as ready to open in an emergency, plus ' + t.infoPointReady + ' information points, all of those in Reinickendorf. ' +
+      'Friedrichshain-Kreuzberg, Neukölln, Pankow and Steglitz-Zehlendorf have no ready lighthouse on the list yet.';
+  }
+
+  function neededUpTo(step) {
+    var need = [];
+    for (var i = 0; i <= step; i++) STAGES[i].needs.forEach(function (n) { if (need.indexOf(n) < 0) need.push(n); });
+    return need;
+  }
+
+  function renderKit() {
+    var need = neededUpTo(currentStep), cur = STAGES[currentStep].needs;
+    el('kit').innerHTML = KIT.map(function (k) {
+      return '<label class="' + (cur.indexOf(k.id) >= 0 ? 'need' : '') + '"><input type="checkbox" data-k="' + k.id + '"' + (have.has(k.id) ? ' checked' : '') + '> ' + esc(k.t) + '</label>';
+    }).join('');
+    el('kit').querySelectorAll('input').forEach(function (c) {
+      c.addEventListener('change', function () {
+        var k = c.getAttribute('data-k');
+        if (c.checked) have.add(k); else have.delete(k);
+        renderScore();
+      });
+    });
+    renderScore();
+  }
+
+  function renderScore() {
+    var need = neededUpTo(currentStep);
+    var total = need.reduce(function (sum, k) { return sum + (have.has(k) ? 1 : 0); }, 0);
+    el('score').textContent = total + '/' + need.length;
+    el('scoreTxt').textContent = need.length ? 'needs covered up to ' + STAGES[currentStep].tab : 'nothing asked yet';
+  }
+
+  function renderStage() {
+    var st = STAGES[currentStep];
+    var h = '<div class="when">' + esc(st.when) + '</div><h4>' + esc(st.h) + '</h4><ul>';
+    st.facts.forEach(function (f) { h += '<li>' + esc(f) + '</li>'; });
+    h += '<li class="move"><b>My move:</b> ' + esc(st.move) + '</li></ul>';
+    el('stage').innerHTML = h;
+    el('track').innerHTML = STAGES.map(function (s, i) {
+      return '<button type="button" role="tab" aria-selected="' + (i === currentStep) + '" class="' + (i === currentStep ? 'on' : (i < currentStep ? 'done' : '')) + '" data-i="' + i + '">' + esc(s.tab) + '</button>';
+    }).join('');
+    el('track').querySelectorAll('button').forEach(function (b) {
+      b.addEventListener('click', function () { go(Number(b.getAttribute('data-i'))); });
+    });
+    el('prev').disabled = currentStep === 0;
+    el('next').disabled = currentStep === STAGES.length - 1;
+    renderKit();
+  }
+
+  function go(i) { currentStep = Math.max(0, Math.min(STAGES.length - 1, i)); renderStage(); }
+
+  function locate(plz) {
+    plz = String(plz || '').replace(/\D/g, '').slice(0, 5);
+    el('plz').value = plz;
+    var c = DATA.postcodes[plz];
+    if (!c) {
+      el('msg').textContent = plz.length === 5 ? 'I do not have ' + plz + ' as a Berlin postcode. Try the one on your letterbox, from 10115 to 14199.' : 'Five digits, please, for example 10115.';
+      return;
+    }
+    el('msg').textContent = '';
+    home = { lat: c[0], lon: c[1] }; homePlz = plz;
+    renderMap(); renderNear();
+  }
+
+  el('go').addEventListener('click', function () { locate(el('plz').value); });
+  el('plz').addEventListener('keydown', function (e) { if (e.key === 'Enter') locate(el('plz').value); });
+  document.querySelectorAll('.ex button').forEach(function (b) {
+    b.addEventListener('click', function () { locate(b.getAttribute('data-plz')); });
+  });
+  el('prev').addEventListener('click', function () { go(currentStep - 1); });
+  el('next').addEventListener('click', function () { go(currentStep + 1); });
+
+  fetch('data.json').then(function (r) { return r.json(); }).then(function (d) {
+    DATA = d; renderMap(); renderTotals(); renderStage();
+  });
+})();
+</script>
+</body>
+</html>
