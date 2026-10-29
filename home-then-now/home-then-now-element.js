@@ -465,11 +465,10 @@
   }
 
   function bwhReel(r, i) {
-    const href = bwhHref(r.href);
     const product = bwhHref(r.productHref);
     return `
         <article class="bwh-reel bwh-lift">
-          <a class="bwh-reel__link" href="${bwhEsc(href)}"${bwhTargetFor(href)} aria-label="Play the reel: ${bwhEsc(r.title)}" data-bwh-reel="${i}" data-bwh-section="reels" data-bwh-item="${bwhEsc(r.title)}" data-bwh-position="${i + 1}">
+          <a class="bwh-reel__link" href="#bwh-reels" role="button" aria-label="Play the reel: ${bwhEsc(r.title)}" data-bwh-reel="${i}" data-bwh-section="reels" data-bwh-item="${bwhEsc(r.title)}" data-bwh-position="${i + 1}">
             <img src="${bwhEsc(bwhSrc(r.img))}" alt="" width="448" height="720" loading="lazy" decoding="async">
             <span class="bwh-len">${BWH_PLAY}${bwhEsc(r.len)}</span>
           </a>
@@ -710,8 +709,7 @@
           return;
         }
         const reel = event.target.closest ? event.target.closest('a[data-bwh-reel]') : null;
-        if (reel && this.contains(reel) && typeof HTMLDialogElement === 'function'
-          && !(event.metaKey || event.ctrlKey || event.shiftKey || event.altKey)) {
+        if (reel && this.contains(reel)) {
           event.preventDefault();
           this._bwhOpenReel(Number(reel.dataset.bwhReel), reel);
           return;
