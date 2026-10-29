@@ -1582,7 +1582,8 @@ function bwHeaderStoreFooter() {
   const home = location.pathname === '/';
   const credits = String((store ? window.__bwStoreCreditsHtml : home ? window.__bwHomeCreditsHtml : '') || '');
   let contact = links.querySelector('[data-bw-store-contact]');
-  if (store && !contact) links.insertAdjacentHTML('afterbegin', '<a href="/contact" data-bw-store-contact>Contact</a>');
+  // The strategy footer (29 Oct 2026) already carries Contact; add the store's own only to an older footer without one.
+  if (store && !contact && !links.querySelector('a[href="/contact"]')) links.insertAdjacentHTML('afterbegin', '<a href="/contact" data-bw-store-contact>Contact</a>');
   if (!store && contact) contact.remove();
   let details = links.querySelector('[data-bw-store-credits]');
   if (!credits) { if (details) details.remove(); return; }
