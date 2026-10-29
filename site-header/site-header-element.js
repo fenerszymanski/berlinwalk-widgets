@@ -76,12 +76,8 @@ const BW_HEADER_STORE_LINKS = [
     "href": "https://walkofberlin.com/category/all-products?tab=all"
   },
   {
-    "label": "Art prints",
+    "label": "Posters",
     "href": "https://walkofberlin.com/category/all-products?tab=print"
-  },
-  {
-    "label": "Printable downloads",
-    "href": "https://walkofberlin.com/category/digital-downloads?tab=digital"
   },
   {
     "label": "Personalised prints",
@@ -93,7 +89,11 @@ const BW_HEADER_STORE_LINKS = [
   },
   {
     "label": "Audio walks",
-    "href": "https://walkofberlin.com/audio-tours"
+    "href": "https://walkofberlin.com/category/all-products?tab=audio"
+  },
+  {
+    "label": "Guides",
+    "href": "https://walkofberlin.com/category/all-products?tab=guides"
   }
 ];
 const BW_HEADER_STORE_HOME = "https://walkofberlin.com/category/all-products?tab=all";

@@ -5,18 +5,19 @@
   "categories": [
     {
       "id": "print",
-      "label": "Art prints",
+      "label": "Posters",
       "order": 10,
       "match": {
         "nativeCategoryIds": [
           "03bc9fd6-f411-ed15-290b-2acf44bb430d",
           "3a0f16e1-49e5-42e1-a0bd-a79d1949e091",
           "a0685930-a374-4dc8-9ac6-48f92b535aa4",
-          "33ca6348-faae-4671-98d9-0221539b7cf2"
+          "33ca6348-faae-4671-98d9-0221539b7cf2",
+          "02d24409-01f2-4b00-b24d-d762d74a4fb6"
         ]
       },
-      "description": "Physical prints · choose paper and size · printed to order",
-      "allFilterLabel": "All prints",
+      "description": "Each artwork as a printed poster or a file you print yourself",
+      "allFilterLabel": "All posters",
       "filters": [
         {
           "id": "everyday",
@@ -31,8 +32,17 @@
           "id": "landmarks",
           "label": "Landmarks",
           "match": {
-            "nativeCategoryIds": [
-              "03bc9fd6-f411-ed15-290b-2acf44bb430d"
+            "any": [
+              {
+                "nativeCategoryIds": [
+                  "03bc9fd6-f411-ed15-290b-2acf44bb430d"
+                ]
+              },
+              {
+                "presentationGroups": [
+                  "landmarks"
+                ]
+              }
             ]
           }
         },
@@ -40,8 +50,17 @@
           "id": "stories",
           "label": "Berlin Stories",
           "match": {
-            "nativeCategoryIds": [
-              "3a0f16e1-49e5-42e1-a0bd-a79d1949e091"
+            "any": [
+              {
+                "nativeCategoryIds": [
+                  "3a0f16e1-49e5-42e1-a0bd-a79d1949e091"
+                ]
+              },
+              {
+                "presentationGroups": [
+                  "stories"
+                ]
+              }
             ]
           }
         },
@@ -49,8 +68,26 @@
           "id": "districts",
           "label": "Districts",
           "match": {
-            "nativeCategoryIds": [
-              "a0685930-a374-4dc8-9ac6-48f92b535aa4"
+            "any": [
+              {
+                "nativeCategoryIds": [
+                  "a0685930-a374-4dc8-9ac6-48f92b535aa4"
+                ]
+              },
+              {
+                "presentationGroups": [
+                  "districts"
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "id": "sets",
+          "label": "Printable sets",
+          "match": {
+            "presentationGroups": [
+              "sets"
             ]
           }
         }
@@ -58,7 +95,7 @@
       "shelf": {
         "previewLimit": 4,
         "featureBelowCount": 3,
-        "moreLabel": "All {count} prints",
+        "moreLabel": "All {count} posters",
         "imageFit": "contain",
         "featuredProductIds": [
           "pr-berolina-modernist",
@@ -69,90 +106,8 @@
         ],
         "order": 10
       },
-      "detailLabel": "Print details"
-    },
-    {
-      "id": "digital",
-      "label": "Printable downloads",
-      "order": 15,
-      "match": {
-        "nativeCategoryIds": [
-          "02d24409-01f2-4b00-b24d-d762d74a4fb6"
-        ]
-      },
-      "description": "Downloadable print files · print them yourself · nothing shipped",
-      "allFilterLabel": "All downloads",
-      "filters": [
-        {
-          "id": "dl-everyday",
-          "label": "Berlin Everyday",
-          "match": {
-            "presentationGroups": [
-              "everyday"
-            ]
-          }
-        },
-        {
-          "id": "dl-landmarks",
-          "label": "Landmarks",
-          "match": {
-            "presentationGroups": [
-              "landmarks"
-            ]
-          }
-        },
-        {
-          "id": "dl-districts",
-          "label": "Districts",
-          "match": {
-            "presentationGroups": [
-              "districts"
-            ]
-          }
-        },
-        {
-          "id": "dl-sets",
-          "label": "Sets",
-          "match": {
-            "presentationGroups": [
-              "sets"
-            ]
-          }
-        },
-        {
-          "id": "dl-stories",
-          "label": "Berlin Stories",
-          "match": {
-            "presentationGroups": [
-              "stories"
-            ]
-          }
-        },
-        {
-          "id": "dl-calendars",
-          "label": "Calendar",
-          "match": {
-            "presentationGroups": [
-              "calendars"
-            ]
-          }
-        }
-      ],
-      "shelf": {
-        "previewLimit": 4,
-        "featureBelowCount": 3,
-        "moreLabel": "All {count} downloads",
-        "imageFit": "contain",
-        "featuredProductIds": [
-          "dl-berolina-modernist",
-          "ed-digital-02-pink",
-          "dl-world-clock",
-          "ed-digital-01-tempelhof",
-          "dl-berlin-2027-printable-calendar"
-        ],
-        "order": 20
-      },
-      "detailLabel": "File details"
+      "detailLabel": "Print details",
+      "mergeTwins": true
     },
     {
       "id": "audio",
@@ -160,19 +115,25 @@
       "order": 30,
       "match": {
         "externalSourceKeys": [
-          "berlin-audio-trio-bundle"
+          "berlin-audio-trio-bundle",
+          "death-strip-audio-route",
+          "hidden-berlin-audio-route",
+          "medieval-berlin-audio-tour"
         ]
       },
-      "description": "Single audio walks and a three-walk bundle",
+      "description": "Three self-guided walks, one at a time or as a bundle",
       "filters": [],
       "shelf": {
         "previewLimit": 4,
         "featureBelowCount": 3,
         "moreLabel": "All audio walks",
         "imageFit": "cover",
-        "order": 30
+        "order": 30,
+        "featuredProductIds": [
+          "trio"
+        ]
       },
-      "actionLabel": "SEE THE WALKS →",
+      "actionLabel": "SEE DETAILS →",
       "browseHref": "https://walkofberlin.com/audio-tours",
       "browseLabel": "Browse all audio walks"
     },
@@ -217,6 +178,30 @@
         "featureDescription": "One illustrated Berlin district for every month of 2027, with Berlin public holidays and school holidays. A physical A3 wall calendar, printed to order."
       },
       "detailLabel": "Calendar details"
+    },
+    {
+      "id": "guides",
+      "label": "Guides",
+      "order": 35,
+      "match": {
+        "externalSourceKeys": [
+          "berlin-first-day-rescue-plan",
+          "berlin-landmarks-guide",
+          "hidden-berlin-photo-missions",
+          "berlin-wall-virtual-tour",
+          "berlin-night-in"
+        ]
+      },
+      "description": "Digital guides, a virtual tour and an evening at home",
+      "filters": [],
+      "shelf": {
+        "previewLimit": 5,
+        "featureBelowCount": 3,
+        "moreLabel": "All guides",
+        "imageFit": "cover",
+        "order": 35
+      },
+      "actionLabel": "SEE DETAILS →"
     }
   ],
   "fulfilments": [

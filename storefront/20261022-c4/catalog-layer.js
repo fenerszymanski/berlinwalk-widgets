@@ -54,6 +54,7 @@ export function validateDefinitions(definitions) {
 
 function match(product, rule = {}) {
   const checks = [];
+  if (rule.any) checks.push(list(rule.any).some(item => match(product, item)));
   if (rule.sources) checks.push(rule.sources.includes(product.source));
   if (rule.nativeProductTypes) checks.push(rule.nativeProductTypes.includes(product.nativeProductType));
   if (rule.nativeCategoryIds) checks.push(intersects(list(rule.nativeCategoryIds), list(product.nativeCategoryIds)));
@@ -156,13 +157,15 @@ export function createCatalogModel(products, definitions) {
     active.push({...product, categoryIds: categories.map(item => item.id), fulfilmentId: fulfilment.id, fulfilment,
       action: fulfilment.cartEligible ? product.requiresOptions ? 'choose-options' : 'add' : 'external',
       actionLabel: product.requiresOptions ? 'Choose options' : categories[0].actionLabel || fulfilment.actionLabel,
-      detailLabel: categories[0].detailLabel || fulfilment.detailLabel});
+      detailLabel: (product.nativeProductType === 'digital' && fulfilment.detailLabel) || categories[0].detailLabel || fulfilment.detailLabel});
   }
+  const twinOf = product => product.alternativeProductId ? active.find(item => item.wixProductId === product.alternativeProductId) || null : null;
   const enabled = [...definitions.categories].sort((a, b) => a.order - b.order).filter(category => active.some(product => product.categoryIds.includes(category.id)));
   function categoryView(categoryId, filterId = 'all', {preview = false} = {}) {
     const category = definitions.categories.find(item => item.id === categoryId);
     if (!category) return null;
-    const categoryProducts = active.filter(product => product.categoryIds.includes(categoryId));
+    // A merged category (posters) shows each artwork once: a file whose printed twin is on sale is reached from the print's page.
+    const categoryProducts = active.filter(product => product.categoryIds.includes(categoryId) && !(category.mergeTwins && product.nativeProductType === 'digital' && twinOf(product)));
     const filters = list(category.filters).map(filter => ({...filter,count:categoryProducts.filter(product=>match(product,filter.match)).length}));
     const filter = filters.find(item => item.id === filterId);
     let selected = filter ? categoryProducts.filter(product => match(product, filter.match)) : categoryProducts;
@@ -195,6 +198,7 @@ export function createCatalogModel(products, definitions) {
     getCategoryView: categoryView,
     normaliseCategoryId: id => id === 'all' || definitions.categories.some(category => category.id === id) ? id : 'all',
     getProduct: id => active.find(product => product.id === id) || null,
+    getTwin: twinOf,
     getCartGroups: lines => definitions.fulfilments.filter(group => group.cartEligible).map(fulfilment => ({
       ...fulfilment,
       products: list(lines).filter(line => line.fulfilmentId === fulfilment.id)

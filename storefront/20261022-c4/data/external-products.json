@@ -28,14 +28,294 @@
     "presentation": {
       "id": "trio",
       "name": "Berlin Audio Trio",
-      "place": "Berlin Wall \u00b7 Hidden Berlin \u00b7 Medieval Berlin",
+      "place": "Berlin Wall · Hidden Berlin · Medieval Berlin",
       "image": "audio-trio.jpg",
       "alt": "Anhalter Bahnhof portico, a stop on the Hidden Berlin audio walk",
-      "typeLine": "AUDIO WALKS \u00b7 3 ROUTES",
+      "typeLine": "AUDIO WALKS · 3 ROUTES",
       "wixProductId": null,
       "externalSourceKey": "berlin-audio-trio-bundle",
       "description": "Three self-guided walks: 45 audio chapters, MP3 downloads and route guides. Listen on your phone as you walk.",
       "visualOverlay": "audio-phone-headphones-v1.png",
+      "imageFit": "cover"
+    }
+  },
+  {
+    "sourceKey": "death-strip-audio-route",
+    "verified": true,
+    "sourceUrl": "https://walkofberlin.com/products/death-strip-audio-route",
+    "productSchema": {
+      "@type": "Product",
+      "name": "Berlin Wall Audio Walk",
+      "description": "Follow the Berlin Wall from Nordbahnhof to Mauerpark. Ten outdoor stops, English audio, MP3s and a PDF route guide. Listen to a sample, then buy for €9.90.",
+      "image": "https://app.berlinwalk.com/assets/wall-lp-v1/bernauer-2024.jpg",
+      "brand": {
+        "@type": "Brand",
+        "name": "Walk of Berlin"
+      },
+      "offers": {
+        "@type": "Offer",
+        "price": "9.90",
+        "priceCurrency": "EUR",
+        "availability": "https://schema.org/InStock",
+        "url": "https://www.walkofberlin.com/products/death-strip-audio-route"
+      },
+      "@context": "https://schema.org"
+    },
+    "presentation": {
+      "id": "au-wall",
+      "name": "Berlin Wall Audio Walk",
+      "place": "Bernauer Straße · Mitte",
+      "typeLine": "AUDIO WALK · SELF-GUIDED",
+      "alt": "Bernauer Straße at the corner of Ackerstraße, 2024",
+      "image": "https://app.berlinwalk.com/assets/wall-lp-v1/bernauer-2024.jpg",
+      "wixProductId": null,
+      "externalSourceKey": "death-strip-audio-route",
+      "description": "Follow the Berlin Wall from Nordbahnhof to Mauerpark. Ten outdoor stops, English audio, MP3s and a PDF route guide. Listen to a sample, then buy for €9.90.",
+      "imageFit": "cover"
+    }
+  },
+  {
+    "sourceKey": "hidden-berlin-audio-route",
+    "verified": true,
+    "sourceUrl": "https://walkofberlin.com/products/hidden-berlin-audio-route",
+    "productSchema": {
+      "@type": "Product",
+      "name": "Hidden Berlin Audio Tour: Two History Walks",
+      "description": "Explore vanished stations, border stories and a relocated hotel hall on two Berlin walks. 14 English audio chapters, MP3s and a PDF guide. €9.90.",
+      "image": "https://app.berlinwalk.com/assets/hidden-berlin-audio-route/photos/generated/hidden-berlin-premium-hero-v1.jpg",
+      "brand": {
+        "@type": "Brand",
+        "name": "BerlinWalk"
+      },
+      "offers": {
+        "@type": "Offer",
+        "price": "9.90",
+        "priceCurrency": "EUR",
+        "availability": "https://schema.org/InStock",
+        "url": "https://www.walkofberlin.com/products/hidden-berlin-audio-route"
+      },
+      "@context": "https://schema.org"
+    },
+    "presentation": {
+      "id": "au-hidden",
+      "name": "Hidden Berlin Audio Walk",
+      "place": "Anhalter Bahnhof to Alexanderplatz",
+      "typeLine": "AUDIO WALK · SELF-GUIDED",
+      "alt": "Railway arches lit at night along a cobbled Berlin street, an AI-generated image",
+      "image": "https://app.berlinwalk.com/assets/hidden-berlin-audio-route/photos/generated/hidden-berlin-premium-hero-v1.jpg",
+      "wixProductId": null,
+      "externalSourceKey": "hidden-berlin-audio-route",
+      "description": "Explore vanished stations, border stories and a relocated hotel hall on two Berlin walks. 14 English audio chapters, MP3s and a PDF guide. €9.90.",
+      "imageFit": "cover"
+    }
+  },
+  {
+    "sourceKey": "medieval-berlin-audio-tour",
+    "verified": true,
+    "sourceUrl": "https://walkofberlin.com/products/medieval-berlin-audio-tour",
+    "productSchema": {
+      "@type": "Product",
+      "name": "Medieval Berlin Audio Tour: Nikolaiviertel",
+      "description": "Explore old Berlin from Alexanderplatz through Nikolaiviertel to Museum Island. 17 English audio chapters, MP3 downloads and a map-linked route card. €9.90.",
+      "image": "https://app.berlinwalk.com/assets/medieval-berlin-audio-tour/photos/marienkirche-tv-tower.jpg",
+      "brand": {
+        "@type": "Brand",
+        "name": "BerlinWalk"
+      },
+      "offers": {
+        "@type": "Offer",
+        "price": "9.90",
+        "priceCurrency": "EUR",
+        "availability": "https://schema.org/InStock",
+        "url": "https://www.walkofberlin.com/products/medieval-berlin-audio-tour"
+      },
+      "@context": "https://schema.org"
+    },
+    "presentation": {
+      "id": "au-medieval",
+      "name": "Medieval Berlin Audio Walk",
+      "place": "Nikolaiviertel · Mitte",
+      "typeLine": "AUDIO WALK · SELF-GUIDED",
+      "alt": "Marienkirche with the TV Tower behind it",
+      "image": "https://app.berlinwalk.com/assets/medieval-berlin-audio-tour/photos/marienkirche-tv-tower.jpg",
+      "wixProductId": null,
+      "externalSourceKey": "medieval-berlin-audio-tour",
+      "description": "Explore old Berlin from Alexanderplatz through Nikolaiviertel to Museum Island. 17 English audio chapters, MP3 downloads and a map-linked route card. €9.90.",
+      "imageFit": "cover"
+    }
+  },
+  {
+    "sourceKey": "berlin-first-day-rescue-plan",
+    "verified": true,
+    "sourceUrl": "https://walkofberlin.com/products/berlin-first-day-rescue-plan",
+    "productSchema": {
+      "@type": "Product",
+      "name": "Berlin First-Day Rescue Plan",
+      "description": "Get a EUR 4.99 Berlin arrival plan for your first hour: transport, bags, food, one easy stop and backup, built for your stay, group and landing time.",
+      "image": "https://app.berlinwalk.com/assets/first-day-rescue/social/first-day-rescue-og-1200x630.png",
+      "brand": {
+        "@type": "Brand",
+        "name": "Walk of Berlin"
+      },
+      "offers": {
+        "@type": "Offer",
+        "price": "4.99",
+        "priceCurrency": "EUR",
+        "availability": "https://schema.org/InStock",
+        "url": "https://www.walkofberlin.com/products/berlin-first-day-rescue-plan"
+      },
+      "@context": "https://schema.org"
+    },
+    "presentation": {
+      "id": "gd-rescue",
+      "name": "Berlin First-Day Rescue Plan",
+      "place": "Your first hours in Berlin",
+      "typeLine": "DIGITAL PLAN · PDF",
+      "alt": "Berlin First-Day Rescue Plan cover card",
+      "image": "guide-rescue.jpg",
+      "wixProductId": null,
+      "externalSourceKey": "berlin-first-day-rescue-plan",
+      "description": "Get a EUR 4.99 Berlin arrival plan for your first hour: transport, bags, food, one easy stop and backup, built for your stay, group and landing time.",
+      "imageFit": "cover"
+    }
+  },
+  {
+    "sourceKey": "berlin-landmarks-guide",
+    "verified": true,
+    "sourceUrl": "https://walkofberlin.com/products/berlin-landmarks-guide",
+    "productSchema": {
+      "@type": "Product",
+      "name": "Berlin’s Must-See Landmarks: 15-Page Digital Guide",
+      "description": "Twelve Berlin landmarks, one page each: real visit times, the right entrance and station, what to book ahead, and what you can skip. A 15-page PDF by a Berlin walking guide.",
+      "image": "https://app.berlinwalk.com/products/berlin-landmarks-guide/assets/museum-island-tv-tower.jpg",
+      "brand": {
+        "@type": "Brand",
+        "name": "Walk of Berlin"
+      },
+      "offers": {
+        "@type": "Offer",
+        "price": "2.99",
+        "priceCurrency": "EUR",
+        "availability": "https://schema.org/InStock",
+        "url": "https://www.walkofberlin.com/products/berlin-landmarks-guide"
+      },
+      "@context": "https://schema.org"
+    },
+    "presentation": {
+      "id": "gd-landmarks",
+      "name": "Berlin Landmarks Guide",
+      "place": "15 must-see places",
+      "typeLine": "DIGITAL GUIDE · 15 PAGES",
+      "alt": "Berlin Landmarks Guide cover card",
+      "image": "guide-landmarks.jpg",
+      "wixProductId": null,
+      "externalSourceKey": "berlin-landmarks-guide",
+      "description": "Twelve Berlin landmarks, one page each: real visit times, the right entrance and station, what to book ahead, and what you can skip. A 15-page PDF by a Berlin walking guide.",
+      "imageFit": "cover"
+    }
+  },
+  {
+    "sourceKey": "hidden-berlin-photo-missions",
+    "verified": true,
+    "sourceUrl": "https://walkofberlin.com/products/hidden-berlin-photo-missions",
+    "productSchema": {
+      "@type": "Product",
+      "name": "Hidden Berlin Photo Missions",
+      "description": "A 10-stop self-guided photo hunt through Berlin's secret center, from Anhalter Bahnhof to Alexanderplatz. Instant PDF by Berlin guide Yusuf. €3.99.",
+      "image": "https://app.berlinwalk.com/assets/photo-missions/social/hidden-berlin-photo-missions-og-1200x630.png",
+      "brand": {
+        "@type": "Brand",
+        "name": "Walk of Berlin"
+      },
+      "offers": {
+        "@type": "Offer",
+        "price": "3.99",
+        "priceCurrency": "EUR",
+        "availability": "https://schema.org/InStock",
+        "url": "https://www.walkofberlin.com/products/hidden-berlin-photo-missions"
+      },
+      "@context": "https://schema.org"
+    },
+    "presentation": {
+      "id": "gd-photo",
+      "name": "Hidden Berlin Photo Missions",
+      "place": "Photo walks across the city",
+      "typeLine": "DIGITAL GUIDE",
+      "alt": "Hidden Berlin Photo Missions cover card",
+      "image": "guide-photo-missions.jpg",
+      "wixProductId": null,
+      "externalSourceKey": "hidden-berlin-photo-missions",
+      "description": "A 10-stop self-guided photo hunt through Berlin's secret center, from Anhalter Bahnhof to Alexanderplatz. Instant PDF by Berlin guide Yusuf. €3.99.",
+      "imageFit": "cover"
+    }
+  },
+  {
+    "sourceKey": "berlin-wall-virtual-tour",
+    "verified": true,
+    "sourceUrl": "https://walkofberlin.com/products/berlin-wall-virtual-tour",
+    "productSchema": {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": "Berlin Wall Virtual Walking Tour",
+      "description": "Explore the Berlin Wall from home with dated photographs, a 1989 map, narration and English captions.",
+      "image": "https://app.berlinwalk.com/assets/wall-lp-v1/chapel-2015.jpg",
+      "brand": {
+        "@type": "Brand",
+        "name": "Walk of Berlin"
+      },
+      "offers": {
+        "@type": "Offer",
+        "price": "9.90",
+        "priceCurrency": "EUR",
+        "availability": "https://schema.org/InStock",
+        "url": "https://www.walkofberlin.com/products/berlin-wall-virtual-tour"
+      }
+    },
+    "presentation": {
+      "id": "gd-wall-virtual",
+      "name": "Berlin Wall Virtual Tour",
+      "place": "Watch from home",
+      "typeLine": "VIRTUAL TOUR · VIDEO",
+      "alt": "Berlin Wall Virtual Tour cover card",
+      "image": "guide-wall-virtual.jpg",
+      "wixProductId": null,
+      "externalSourceKey": "berlin-wall-virtual-tour",
+      "description": "Explore the Berlin Wall from home with dated photographs, a 1989 map, narration and English captions.",
+      "imageFit": "cover"
+    }
+  },
+  {
+    "sourceKey": "berlin-night-in",
+    "verified": true,
+    "sourceUrl": "https://walkofberlin.com/products/berlin-night-in",
+    "productSchema": {
+      "@type": "Product",
+      "name": "Berlin Night In, Episode 1: The Train That Disappeared",
+      "description": "A Berlin history episode you play at home: real archive photos of one railway line, narrated, with the full text on screen. First chapter free, then €6.90.",
+      "image": "https://static.wixstatic.com/media/5a08a3_fa4feb17801d4f8bb184b1e924138724~mv2.png",
+      "brand": {
+        "@type": "Brand",
+        "name": "BerlinWalk"
+      },
+      "offers": {
+        "@type": "Offer",
+        "price": "6.90",
+        "priceCurrency": "EUR",
+        "availability": "https://schema.org/InStock",
+        "url": "https://www.walkofberlin.com/products/berlin-night-in"
+      },
+      "@context": "https://schema.org"
+    },
+    "presentation": {
+      "id": "gd-night-in",
+      "name": "Berlin Night In",
+      "place": "Episode 1 · The Train That Disappeared",
+      "typeLine": "EVENING AT HOME",
+      "alt": "Berlin Night In cover card",
+      "image": "guide-night-in.jpg",
+      "wixProductId": null,
+      "externalSourceKey": "berlin-night-in",
+      "description": "A Berlin history episode you play at home: real archive photos of one railway line, narrated, with the full text on screen. First chapter free, then €6.90.",
       "imageFit": "cover"
     }
   }

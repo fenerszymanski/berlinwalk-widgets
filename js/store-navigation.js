@@ -4,8 +4,11 @@ export const STORE_HOME = 'https://walkofberlin.com/category/all-products';
 export const STORE_PERSONALISED_PRODUCT = 'https://walkofberlin.com/product-page/your-berlin-street-in-1928-personalised-aerial-print-30-x-40-cm';
 export const STORE_CALENDAR_PRODUCT = 'https://walkofberlin.com/product-page/berlin-2027-wall-calendar-a3';
 export const STORE_AUDIO_HUB = 'https://walkofberlin.com/audio-tours';
-export const STORE_LABELS = Object.freeze({all:'All products',print:'Art prints',digital:'Printable downloads',personalised:'Personalised prints',calendar:'2027 Wall Calendar',audio:'Audio walks'});
-const FILTERS = {all:['all'],print:['all','everyday','landmarks','stories','districts'],digital:['all','dl-everyday','dl-landmarks','dl-stories','dl-districts','dl-sets','dl-calendars'],personalised:['all'],calendar:['all'],audio:['all']};
+export const STORE_LABELS = Object.freeze({all:'All products',print:'Posters',personalised:'Personalised prints',calendar:'2027 Wall Calendar',audio:'Audio walks',guides:'Guides'});
+const FILTERS = {all:['all'],print:['all','everyday','landmarks','stories','districts','sets'],personalised:['all'],calendar:['all'],audio:['all'],guides:['all']};
+// Printed posters and their printable files share one category since 29 Oct 2026 (Yusuf: "bir potada eritebiliriz"). Old digital links
+// (menu, homepage, ads, bookmarks) land on the matching poster collection.
+const DIGITAL_ALIAS = {'all':['print','all'],'dl-everyday':['print','everyday'],'dl-landmarks':['print','landmarks'],'dl-stories':['print','stories'],'dl-districts':['print','districts'],'dl-sets':['print','sets'],'dl-calendars':['calendar','all']};
 const LEGACY_ROUTES = {
   'all-products':['all','all'],
   'berlin-landmark-posters':['print','landmarks'],
@@ -13,11 +16,12 @@ const LEGACY_ROUTES = {
   'berlin-districts-prints':['print','districts'],
   'berlin-everyday-posters':['print','everyday'],
   'wall-calendars':['calendar','all'],
-  'digital-downloads':['digital','all']
+  'digital-downloads':['print','all']
 };
 export function storeHref(category='all', filter='all') {
+  if (category==='digital' && DIGITAL_ALIAS[filter]) [category,filter]=DIGITAL_ALIAS[filter];
   if (!FILTERS[category]?.includes(filter)) throw new TypeError('Unknown Store category or collection');
-  const target = new URL(category==='digital' ? 'https://walkofberlin.com/category/digital-downloads' : STORE_HOME);
+  const target = new URL(STORE_HOME);
   // Explicit All also keeps retired menu-injection scripts from matching this
   // link as an unversioned collection entry while their embed is being retired.
   target.searchParams.set('tab',category);
@@ -28,18 +32,19 @@ export function resolveStoreRoute({categorySlug='all-products', search=''}={}) {
   const query=new URLSearchParams(search);
   const mapped=LEGACY_ROUTES[categorySlug||'all-products'];
   if (!mapped) return {ok:false,reason:'unknown-category'};
-  const category=query.get('tab')||mapped[0];
-  const filter=query.get('collection')||(query.has('tab')?'all':mapped[1]);
+  let category=query.get('tab')||mapped[0];
+  let filter=query.get('collection')||(query.has('tab')?'all':mapped[1]);
+  if (category==='digital') { if (!DIGITAL_ALIAS[filter]) return {ok:false,reason:'unknown-collection'}; [category,filter]=DIGITAL_ALIAS[filter]; }
   if (!FILTERS[category]?.includes(filter)) return {ok:false,reason:'unknown-collection'};
   return {ok:true,category,filter};
 }
 export const STORE_MENU = Object.freeze([
   {label:STORE_LABELS.all,href:storeHref()},
   {label:STORE_LABELS.print,href:storeHref('print')},
-  {label:STORE_LABELS.digital,href:storeHref('digital')},
   {label:STORE_LABELS.personalised,href:STORE_PERSONALISED_PRODUCT},
   {label:STORE_LABELS.calendar,href:STORE_CALENDAR_PRODUCT},
-  {label:STORE_LABELS.audio,href:STORE_AUDIO_HUB}
+  {label:STORE_LABELS.audio,href:storeHref('audio')},
+  {label:STORE_LABELS.guides,href:storeHref('guides')}
 ]);
 export const STORE_HOME_CARDS = Object.freeze([
   {label:'PRINTED & SHIPPED',title:'Art prints',imageUrl:'https://static.wixstatic.com/media/5a08a3_23f9eb0a33794b8aaf7474e5a99f0b1c~mv2.jpg/v1/fit/w_480,h_480,q_85/file.jpg',alt:'Friedrichshain-Kreuzberg art print showing the Oberbaum Bridge',text:'Berlin landmarks, district illustrations and stories from my reels, printed to order. Choose the paper and size on the product page.',href:storeHref('print'),cta:'Browse art prints'},
