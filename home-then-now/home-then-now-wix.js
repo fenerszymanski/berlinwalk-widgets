@@ -11,7 +11,7 @@
     #c1dmp .bw-home-then-now-layout > #comp-kbgakxea { position:relative!important; inset:auto!important; order:0!important; flex:none!important; width:100%!important; margin:0!important; }
     #c1dmp .bw-home-then-now-layout > #PAGE_SECTIONSc1dmp { display:block!important; order:1!important; width:100%!important; min-height:0!important; height:auto!important; margin:0!important; padding:0!important; }
     #PAGE_SECTIONSc1dmp.bw-home-then-now-mounted > :not(bw-home-then-now) { display:none!important; }
-    #PAGE_SECTIONSc1dmp.bw-home-then-now-mounted > bw-home-then-now { display:block!important; width:100%!important; }
+    #PAGE_SECTIONSc1dmp.bw-home-then-now-mounted > bw-home-then-now { display:block!important; width:100%!important; pointer-events:auto!important; }
     #c1dmp .bw-home-then-now-layout > #comp-mpbojue4 { order:2!important; position:relative!important; inset:auto!important; width:100%!important; margin:0!important; }
   `;
   document.head.appendChild(style);
