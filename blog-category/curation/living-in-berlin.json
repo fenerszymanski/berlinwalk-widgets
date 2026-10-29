@@ -437,6 +437,12 @@
       "figure": "9 of 31",
       "line": "winters had a Saturday or Sunday with 10 cm of snow on the ground, and the typical winter had none.",
       "tool": "berlin-sledding-snow-odds"
+    },
+    "power-cut-in-berlin": {
+      "shelf": "wohnung",
+      "figure": "25 of 56",
+      "line": "emergency lighthouses are listed as ready to open, and four districts have none marked ready.",
+      "tool": "berlin-blackout-emergency-map"
     }
   }
 }

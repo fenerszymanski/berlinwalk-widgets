@@ -1,5 +1,5 @@
 {
- "updatedAt": "2026-10-28T10:09:51.842Z",
+ "updatedAt": "2026-10-29T09:48:43.098Z",
  "source": "Wix Blog API + blog-category/categories.json",
  "slug": "living-in-berlin",
  "categoryId": "00af1018-ef7b-465a-93b6-916187609da4",
@@ -8,28 +8,28 @@
  "shelfMode": "curated",
  "shelfLegend": "By the part of life it hits",
  "shelfLegendSub": "Four shelves, because that is how the questions actually arrive",
- "totalPosts": 74,
- "toolCount": 74,
+ "totalPosts": 75,
+ "toolCount": 75,
  "lead": {
-  "title": "Sledding in Berlin: Which Hill, and How Often There Is Enough Snow",
-  "slug": "sledding-in-berlin",
-  "path": "/post/sledding-in-berlin",
-  "excerpt": "Only 9 of 31 Berlin winters had a weekend day with 10 cm of snow, and the typical winter had none. What that means for sledding in Berlin, and which hill to pick when the snow does come.",
+  "title": "Power Cut in Berlin: Where to Go When Your Kiez Goes Dark",
+  "slug": "power-cut-in-berlin",
+  "path": "/post/power-cut-in-berlin",
+  "excerpt": "In January 2026 the power went out in Zehlendorf, Wannsee, Nikolassee and Lichterfelde for almost five days, and the phones went with it. What a Katastrophenschutz-Leuchtturm is, why only 25 of Berlin's 56 are ready, and how to find yours by postcode.",
   "minutes": 6,
   "readTime": "6 min read",
-  "publishedDate": "2026-10-27T10:14:05.461Z",
-  "alt": "Sledders walking up the long toboggan run on Teufelsberg after light snow, with the old listening station rising behind the trees",
-  "lead": "https://static.wixstatic.com/media/5a08a3_90c51a7b10b0469d913fc846fe83beb7~mv2.jpg/v1/fill/w_1400,h_620,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
-  "thumb": "https://static.wixstatic.com/media/5a08a3_90c51a7b10b0469d913fc846fe83beb7~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
-  "square": "https://static.wixstatic.com/media/5a08a3_90c51a7b10b0469d913fc846fe83beb7~mv2.jpg/v1/fill/w_184,h_184,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
-  "shelf": "draussen",
+  "publishedDate": "2026-10-29T09:45:33.753Z",
+  "alt": "Travellers walking through the unlit pedestrian underpass at S-Bahnhof Wannsee during the January 2026 power cut, lit only by a few work lamps",
+  "lead": "https://static.wixstatic.com/media/5a08a3_4c227f2ef8c34bf0bcd52b0656aa4d47~mv2.jpg/v1/fill/w_1400,h_620,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+  "thumb": "https://static.wixstatic.com/media/5a08a3_4c227f2ef8c34bf0bcd52b0656aa4d47~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+  "square": "https://static.wixstatic.com/media/5a08a3_4c227f2ef8c34bf0bcd52b0656aa4d47~mv2.jpg/v1/fill/w_184,h_184,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+  "shelf": "wohnung",
   "topic": "living-in-berlin",
-  "figure": "9 of 31",
-  "line": "winters had a Saturday or Sunday with 10 cm of snow on the ground, and the typical winter had none.",
+  "figure": "25 of 56",
+  "line": "emergency lighthouses are listed as ready to open, and four districts have none marked ready.",
   "term": "",
   "gloss": "",
   "termCta": "",
-  "tool": "berlin-sledding-snow-odds"
+  "tool": "berlin-blackout-emergency-map"
  },
  "glossary": [
   {
@@ -160,6 +160,17 @@
    "title": "Wohnung & Nebenkosten",
    "lead": "The flat, and what it costs to keep",
    "posts": [
+    {
+     "title": "Power Cut in Berlin: Where to Go When Your Kiez Goes Dark",
+     "slug": "power-cut-in-berlin",
+     "path": "/post/power-cut-in-berlin",
+     "minutes": 6,
+     "alt": "Travellers walking through the unlit pedestrian underpass at S-Bahnhof Wannsee during the January 2026 power cut, lit only by a few work lamps",
+     "thumb": "https://static.wixstatic.com/media/5a08a3_4c227f2ef8c34bf0bcd52b0656aa4d47~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+     "line": "emergency lighthouses are listed as ready to open, and four districts have none marked ready.",
+     "figure": "25 of 56",
+     "tool": "berlin-blackout-emergency-map"
+    },
     {
      "title": "E-Waste in Berlin: Which Door Takes It for Free",
      "slug": "e-waste-in-berlin",

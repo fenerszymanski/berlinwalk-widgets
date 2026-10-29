@@ -1,9 +1,26 @@
 {
-  "updatedAt": "2026-10-28T10:09:37.095Z",
+  "updatedAt": "2026-10-29T09:48:37.351Z",
   "source": "Wix Blog API",
-  "totalPosts": 446,
+  "totalPosts": 447,
   "bookingUrl": "https://www.walkofberlin.com/book-berlin-walking-tour/berlin-then-and-now",
   "allPosts": [
+    {
+      "title": "Power Cut in Berlin: Where to Go When Your Kiez Goes Dark",
+      "slug": "power-cut-in-berlin",
+      "path": "/post/power-cut-in-berlin",
+      "url": "https://www.berlinwalk.com/post/power-cut-in-berlin",
+      "excerpt": "In January 2026 the power went out in Zehlendorf, Wannsee, Nikolassee and Lichterfelde for almost five days, and the phones went with it. What a Katastrophenschutz-Leuchtturm is, why only 25 of Berlin's 56 are ready, and how to find yours by postcode.",
+      "category": "Living in Berlin",
+      "categorySlug": "living-in-berlin",
+      "topic": "living-in-berlin",
+      "topicLabel": "Living in Berlin",
+      "readTime": "6 min read",
+      "publishedDate": "2026-10-29T09:45:33.753Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_4c227f2ef8c34bf0bcd52b0656aa4d47~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/underpass.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_4c227f2ef8c34bf0bcd52b0656aa4d47~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/underpass.jpg",
+      "alt": "Travellers walking through the unlit pedestrian underpass at S-Bahnhof Wannsee during the January 2026 power cut, lit only by a few work lamps",
+      "relatedToolSlug": "berlin-blackout-emergency-map"
+    },
     {
       "title": "Queer History in Berlin: A Walk From Bebelplatz to Nollendorfplatz",
       "slug": "queer-history-in-berlin",
