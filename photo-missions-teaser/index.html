@@ -349,7 +349,7 @@
     <article class="card">
       <div class="card-photo">
         <span class="card-tag">Mission 1 of 10</span>
-        <img src="https://app.berlinwalk.com/assets/photo-missions/samples/sample-card-1.png" alt="Hidden Berlin Photo Missions, mission 1: the surviving Anhalter Bahnhof portal" loading="lazy" width="1100" height="755">
+        <img src="../photo-missions-store/assets/sample-card-1.webp" alt="Hidden Berlin Photo Missions, mission 1: the surviving Anhalter Bahnhof portal" loading="lazy" width="1100" height="755">
       </div>
       <div class="card-body">
         <h2>The station that lost everything but one door.</h2>
@@ -399,7 +399,7 @@
 
     <div class="cta-block">
       <p class="cta-line">Get all 10 missions for <span class="price">&euro;3.99</span>.</p>
-      <a class="cta-btn" href="https://www.berlinwalk.com/products/hidden-berlin-photo-missions?utm_source=embed&amp;utm_medium=widget&amp;utm_campaign=photo-missions-teaser&amp;utm_content=mission1-cta" target="_top" rel="noopener" data-cta-link>Get the PDF &rarr;</a>
+      <a class="cta-btn" href="https://walkofberlin.com/products/hidden-berlin-photo-missions?utm_source=embed&amp;utm_medium=widget&amp;utm_campaign=photo-missions-teaser&amp;utm_content=mission1-cta" target="_top" rel="noopener" data-cta-link>Get the PDF &rarr;</a>
       <p class="cta-note">Instant download. Works on your phone or printed.</p>
     </div>
   </main>
@@ -421,6 +421,13 @@
         label.textContent = 'Tip revealed';
         btn.disabled = true;
       });
+      // On the store page itself the button scrolls the parent page to its buy box instead of reloading it.
+      if (/(^|[?&])surface=store-page(&|$)/.test(location.search) && window.parent !== window) {
+        document.querySelector('[data-cta-link]').addEventListener('click', function (event) {
+          event.preventDefault();
+          window.parent.postMessage({ type: 'bw-photo-missions-buy' }, 'https://www.walkofberlin.com');
+        });
+      }
     })();
   </script>
 </body>

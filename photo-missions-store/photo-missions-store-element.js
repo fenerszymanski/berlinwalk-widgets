@@ -211,6 +211,7 @@ ${TAG}{display:block;width:100%;max-width:100%;min-width:0;height:auto!important
 
     disconnectedCallback() {
       if (this._io) this._io.disconnect();
+      window.removeEventListener('message', this._onMessage);
       if (window.__bwStoreCreditsHtml === CREDITS) window.__bwStoreCreditsHtml = '';
       this._ready = false;
     }
@@ -328,6 +329,12 @@ ${TAG}{display:block;width:100%;max-width:100%;min-width:0;height:auto!important
           submit.textContent = idle;
         });
       });
+      // The teaser's "Get the PDF" button asks for the buy box (photo-missions-teaser, surface=store-page).
+      this._onMessage = (event) => {
+        if (!/^https:\/\/fenerszymanski\.github\.io$/.test(event.origin) || !event.data || event.data.type !== 'bw-photo-missions-buy') return;
+        this.querySelector('[data-bwpm-jump]').click();
+      };
+      window.addEventListener('message', this._onMessage);
       const buy = this.querySelector('[data-bwpm-submit]');
       const bar = this.querySelector('[data-bwpm-sticky]');
       if ('IntersectionObserver' in window && buy && bar) {
