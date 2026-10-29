@@ -318,5 +318,111 @@
       "description": "A Berlin history episode you play at home: real archive photos of one railway line, narrated, with the full text on screen. First chapter free, then €6.90.",
       "imageFit": "cover"
     }
+  },
+  {
+    "sourceKey": "third-reich-berlin-audio-tour",
+    "verified": true,
+    "sourceUrl": "https://walkofberlin.com/products/third-reich-berlin-audio-tour",
+    "productSchema": {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": "Third Reich Berlin Audio Tour",
+      "description": "A respectful self-guided walk from the Reichstag to Topography of Terror. 10 places, 12 English audio chapters (39:25), MP3s and a PDF route guide. €9.90.",
+      "image": "https://app.berlinwalk.com/assets/third-reich-berlin-audio-tour/photos/topography-site-wall.jpg",
+      "brand": {
+        "@type": "Brand",
+        "name": "Walk of Berlin"
+      },
+      "offers": {
+        "@type": "Offer",
+        "price": "9.90",
+        "priceCurrency": "EUR",
+        "availability": "https://schema.org/InStock",
+        "url": "https://www.walkofberlin.com/products/third-reich-berlin-audio-tour"
+      }
+    },
+    "presentation": {
+      "id": "au-third-reich",
+      "name": "Third Reich Berlin Audio Walk",
+      "place": "Reichstag to Topography of Terror",
+      "typeLine": "AUDIO WALK · SELF-GUIDED",
+      "alt": "Topography of Terror site with the remaining Berlin Wall section",
+      "image": "https://app.berlinwalk.com/assets/third-reich-berlin-audio-tour/photos/topography-site-wall.jpg",
+      "imageFit": "cover",
+      "wixProductId": null,
+      "externalSourceKey": "third-reich-berlin-audio-tour",
+      "description": "A respectful self-guided walk from the Reichstag to Topography of Terror. 10 places, 12 English audio chapters (39:25), MP3s and a PDF route guide. €9.90."
+    }
+  },
+  {
+    "sourceKey": "medieval-berlin-virtual-tour",
+    "verified": true,
+    "sourceUrl": "https://walkofberlin.com/products/medieval-berlin-virtual-tour",
+    "productSchema": {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": "Medieval Berlin Virtual Walking Tour",
+      "description": "Watch Medieval Berlin from home. Nine chapters, 27 minutes of English narration, dated photographs, maps and captions.",
+      "image": "guide-medieval-virtual.jpg",
+      "brand": {
+        "@type": "Brand",
+        "name": "Walk of Berlin"
+      },
+      "offers": {
+        "@type": "Offer",
+        "price": "9.90",
+        "priceCurrency": "EUR",
+        "availability": "https://schema.org/InStock",
+        "url": "https://www.walkofberlin.com/products/medieval-berlin-virtual-tour"
+      }
+    },
+    "presentation": {
+      "id": "gd-medieval-virtual",
+      "name": "Medieval Berlin Virtual Tour",
+      "place": "Watch from home",
+      "typeLine": "VIRTUAL TOUR · VIDEO",
+      "alt": "Medieval Berlin Virtual Tour cover card",
+      "image": "guide-medieval-virtual.jpg",
+      "imageFit": "cover",
+      "wixProductId": null,
+      "externalSourceKey": "medieval-berlin-virtual-tour",
+      "description": "Watch Medieval Berlin from home. Nine chapters, 27 minutes of English narration, dated photographs, maps and captions."
+    }
+  },
+  {
+    "sourceKey": "berlin-trip-planner",
+    "verified": true,
+    "sourceUrl": "https://walkofberlin.com/berlin-trip-planner",
+    "productSchema": {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": "Berlin Trip Planner",
+      "description": "A day-by-day Berlin plan for 1 to 7 days, built around your dates. Web and PDF itinerary.",
+      "image": "guide-trip-planner.jpg",
+      "brand": {
+        "@type": "Brand",
+        "name": "Walk of Berlin"
+      },
+      "offers": {
+        "@type": "Offer",
+        "price": "7.99",
+        "priceCurrency": "EUR",
+        "availability": "https://schema.org/InStock",
+        "url": "https://www.walkofberlin.com/berlin-trip-planner"
+      }
+    },
+    "presentation": {
+      "id": "gd-trip-planner",
+      "name": "Berlin Trip Planner",
+      "place": "1 to 7 days",
+      "typeLine": "TRIP PLAN · WEB AND PDF",
+      "alt": "Berlin Trip Planner cover card",
+      "image": "guide-trip-planner.jpg",
+      "imageFit": "cover",
+      "priceFrom": true,
+      "wixProductId": null,
+      "externalSourceKey": "berlin-trip-planner",
+      "description": "A day-by-day Berlin plan for 1 to 7 days, built around your dates. Web and PDF itinerary."
+    }
   }
 ]

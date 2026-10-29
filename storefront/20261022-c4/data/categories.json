@@ -118,10 +118,11 @@
           "berlin-audio-trio-bundle",
           "death-strip-audio-route",
           "hidden-berlin-audio-route",
-          "medieval-berlin-audio-tour"
+          "medieval-berlin-audio-tour",
+          "third-reich-berlin-audio-tour"
         ]
       },
-      "description": "Three self-guided walks, one at a time or as a bundle",
+      "description": "Four self-guided walks, one at a time, or three as a bundle",
       "filters": [],
       "shelf": {
         "previewLimit": 4,
@@ -186,21 +187,27 @@
       "order": 35,
       "match": {
         "externalSourceKeys": [
+          "berlin-trip-planner",
           "berlin-first-day-rescue-plan",
           "berlin-landmarks-guide",
           "hidden-berlin-photo-missions",
           "berlin-wall-virtual-tour",
-          "berlin-night-in"
+          "berlin-night-in",
+          "medieval-berlin-virtual-tour"
         ]
       },
-      "description": "Digital guides, a virtual tour and an evening at home",
+      "description": "A trip plan, digital guides, virtual tours and an evening at home",
       "filters": [],
       "shelf": {
-        "previewLimit": 5,
+        "previewLimit": 7,
         "featureBelowCount": 3,
         "moreLabel": "All guides",
         "imageFit": "cover",
-        "order": 35
+        "order": 35,
+        "featuredProductIds": [
+          "gd-trip-planner"
+        ],
+        "featuredFirstAlways": true
       },
       "actionLabel": "SEE DETAILS →"
     }
