@@ -204,7 +204,8 @@ ${TAG}{display:block;width:100%;min-width:0;height:auto!important;min-height:0!i
         if (parseFloat(cs.minHeight) > 0) set(n, 'min-height', '0');
         if (/^\d/.test(n.style.height || '') || parseFloat(cs.height) > this.offsetHeight + 40) set(n, 'height', 'auto');
         const rows = cs.gridTemplateRows;
-        if (rows && rows !== 'none' && /\d{4,}(\.\d+)?px/.test(rows)) set(n, 'grid-template-rows', rows.replace(/\d{4,}(\.\d+)?px/g, 'auto'));
+        // Keep only the first track (the header offset); the computed footer track can still be settling here.
+        if (rows && rows !== 'none' && /\d{4,}(\.\d+)?px/.test(rows)) set(n, 'grid-template-rows', rows.split(' ').map((t, i, a) => (i === 0 && a.length > 1 ? t : 'auto')).join(' '));
       }
     }
 
