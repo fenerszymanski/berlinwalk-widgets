@@ -5,7 +5,7 @@
   const base = new URL('.', script.src);
   const CHANNEL = 'wob:shop-cart:v1';
   const esc = value => String(value ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-  const asset = value => {const target=new URL(value,base);if(/\.(?:js|css|json)$/.test(target.pathname))target.searchParams.set('v','christmas2-20261030');return target.href;};
+  const asset = value => {const target=new URL(value,base);if(/\.(?:js|css|json)$/.test(target.pathname))target.searchParams.set('v','christmas3-20261030');return target.href;};
   // Chrome and Safari ignore @font-face inside shadow DOM, so the three faces are registered once on the document with absolute URLs from the element's own base.
   try {if(!document.getElementById('bw-storefront-fonts')){const style=document.createElement('style');style.id='bw-storefront-fonts';style.textContent=[['Fraunces','Fraunces-Variable.ttf','100 900'],['Space Grotesk','SpaceGrotesk-Variable.ttf','300 700'],['IBM Plex Mono','IBMPlexMono-Regular.ttf','400 600'],['DM Serif Display','DMSerifDisplay-Regular.ttf','400']].map(([family,file,weight])=>`@font-face{font-family:'${family}';src:url("${asset('fonts/'+file)}") format("truetype");font-weight:${weight};font-display:swap}`).join('\n')+`
 /* Metric-matched stand-ins (27 Oct 2026): while a font file is still downloading, Safari shows the fallback; these two are scaled to the real fonts' widths (measured on the 600-weight headline: Fraunces is about 10% narrower than Georgia Bold, Space Grotesk about 8% wider than Arial) so the headline and the body text hardly change size when the real font arrives. */
@@ -147,7 +147,7 @@
     import(asset('catalog-layer.js')), import(asset('editorial-helpers.js')), import(asset('street-configurator.js')),
     ...['data/categories.json','data/presentation.json','data/native-bindings.json','data/external-products.json'].map(path => fetch(path==='data/presentation.json'?new URL('data/presentation.json?v=gallery-'+Date.now(),base).href:asset(path),path==='data/presentation.json'?{cache:'no-store'}:undefined)/* gallery-fresh-v1 */.then(response => {if (!response.ok) throw Error('CATALOGUE_METADATA_UNAVAILABLE');return response.json();})),
     import(asset('funnel.js')).catch(() => null),   // measurement must never block the shop
-    import(new URL('../../js/store-navigation.js?v=christmas2-20261030',base).href),
+    import(new URL('../../js/store-navigation.js?v=christmas3-20261030',base).href),
     import(asset('gift.js')).catch(() => null)   // gift vouchers must never block the shop
   ]);
   // German layer for the press launch, only with ?lang=de; a failure leaves the English page (30 Oct 2026).
@@ -432,6 +432,7 @@
       return '';
     }
     lead() {return 'Berlin posters, personalised prints, audio walks and guides.';}
+    shopTitle(selected,filter) {return filter?(filter.id==='sets'?filter.label:`${filter.label} posters`):selected?.title||this.lead();}
     landingView() {
       const page=this.landing,view=page.category?this.model.getCategoryView(page.category,'all'):null;
       const products=page.productIds?page.productIds.map(id=>this.model.products.find(product=>product.wixProductId===id)).filter(Boolean):view?.products||[];
@@ -444,7 +445,7 @@
       if(this.landing)return this.landingView();
       const selected=this.category==='all'?null:this.model.getCategoryView(this.category,this.filter);
       const filter=selected?.filters.find(item=>item.id===this.filter);
-      const title=filter?(filter.id==='sets'?filter.label:`${filter.label} posters`):selected?.title||this.lead();
+      const title=this.shopTitle(selected,filter);
       return `<section class="wrap intro"><h1 class="lead">${esc(title)}</h1>${!selected?`<p class="gift-entry"><a href="https://walkofberlin.com/category/berlin-christmas-gifts">Looking for a Christmas gift? Start here.</a></p>`:''}${selected?.filters.length?`<nav class="chips" aria-label="Collections"><a href="${esc(this.storeHref(this.category))}" data-filter="all" ${this.filter==='all'?'aria-current="page"':''}>${esc(selected.allFilterLabel)}</a>${selected.filters.map(item=>`<a href="${esc(this.storeHref(this.category,item.id))}" data-filter="${item.id}" ${item.id===this.filter?'aria-current="page"':''}>${esc(item.label)} <span class="collection-count">(${item.count})</span></a>`).join('')}</nav>`:''}</section>${(selected?[selected]:this.model.sections).map(section=>`<section class="wrap shelf"><div class="section-head"><div class="section-title"><h2>${esc(selected?`${section.totalCount} available`:section.title)}</h2><span class="meta">${esc(section.description)}</span></div>${section.browseHref?`<a href="${esc(section.browseHref)}">${esc(section.browseLabel)} →</a>`:section.moreCategoryId?`<a href="${esc(this.storeHref(section.moreCategoryId))}" data-category="${section.moreCategoryId}">${esc(section.moreLabel)} →</a>`:''}</div>${section.products.length?`<div class="${section.layout==='feature'?'feature-grid':'grid'}${selected?' category-grid':''}">${section.products.map(product=>this.card({...product,cardSummary:this.layer.cardSummary(section.featureDescription||product.cardSummary||product.description),imageFit:product.imageFit||section.imageFit},section.layout==='feature')).join('')}</div>`:'<p>No items are available in this collection right now.</p>'}</section>`).join('')}${this.credits()}`;
     }
     quantityControl(value,id='',product=false) {return `<div class="qty"><button data-action="${product?'product-minus':'minus'}" data-line="${esc(id)}" aria-label="Decrease quantity" ${value<=1||this.busy||this.uncertain?'disabled':''}>−</button><output>${value}</output><button data-action="${product?'product-plus':'plus'}" data-line="${esc(id)}" aria-label="Increase quantity" ${value>=99||this.busy||this.uncertain?'disabled':''}>+</button></div>`;}
@@ -725,8 +726,18 @@
     skeletonShop(route,model) {
       const resolved=this.navigation.resolveStoreRoute({categorySlug:route.categorySlug||'all-products',search:location.search});
       const category=resolved.ok?resolved.category:'all',filter=resolved.ok?resolved.filter:'all';
+      // A landing page draws its own heading and cards here too; the normal Store skeleton showed for over a second first (Yusuf, 30 Oct 2026).
+      const query=new URLSearchParams(location.search),landing=!query.has('tab')&&!query.has('collection')?this.navigation.STORE_LANDINGS?.[route.categorySlug]:null;
+      if(landing)return this.skeletonLanding(landing,model,category);
       const selected=category==='all'?null:model.getCategoryView(category,filter);
-      return `${this.skeletonBar(model,selected?category:'all')}<section class="wrap intro"><h1 class="lead">${esc(this.lead())}</h1>${selected?.filters.length?`<nav class="chips"><a>${esc(selected.allFilterLabel)}</a>${selected.filters.map(item=>`<a ${item.id===filter?'aria-current="page"':''}>${esc(item.label)}</a>`).join('')}</nav>`:''}</section>${(selected?[selected]:model.sections).map(section=>`<section class="wrap shelf"><div class="section-head"><div class="section-title"><h2>${esc(section.title)}</h2><span class="meta">${esc(section.description)}</span></div>${section.moreCategoryId?`<a>${esc(section.moreLabel)} →</a>`:''}</div><div class="${section.layout==='feature'?'feature-grid':'grid'}${selected?' category-grid':''}">${section.products.map(product=>this.skeletonCard({...product,imageFit:product.imageFit||section.imageFit},section.layout==='feature')).join('')}</div></section>`).join('')}`;
+      return `${this.skeletonBar(model,selected?category:'all')}<section class="wrap intro"><h1 class="lead">${esc(this.shopTitle(selected,selected?.filters.find(item=>item.id===filter)))}</h1>${selected?.filters.length?`<nav class="chips"><a>${esc(selected.allFilterLabel)}</a>${selected.filters.map(item=>`<a ${item.id===filter?'aria-current="page"':''}>${esc(item.label)}</a>`).join('')}</nav>`:''}</section>${(selected?[selected]:model.sections).map(section=>`<section class="wrap shelf"><div class="section-head"><div class="section-title"><h2>${esc(section.title)}</h2><span class="meta">${esc(section.description)}</span></div>${section.moreCategoryId?`<a>${esc(section.moreLabel)} →</a>`:''}</div><div class="${section.layout==='feature'?'feature-grid':'grid'}${selected?' category-grid':''}">${section.products.map(product=>this.skeletonCard({...product,imageFit:product.imageFit||section.imageFit},section.layout==='feature')).join('')}</div></section>`).join('')}`;
+    }
+    skeletonLanding(page,model,category) {
+      const view=page.category?model.getCategoryView(page.category,'all'):null;
+      const products=page.productIds?page.productIds.map(id=>model.products.find(product=>product.wixProductId===id)).filter(Boolean):view?.products||[];
+      const cards=products.map(product=>this.skeletonCard({...product,imageFit:product.imageFit||view?.imageFit||'contain'}));
+      if(page.voucher)cards.splice(page.voucher.after,0,`<article class="card gift-card"><div class="tile cover"><img class="tile-photo" src="${esc(asset('assets/gift-voucher-card.jpg'))}" alt="" decoding="async"></div><div class="card-copy"><span class="type">GIFT VOUCHER</span><span class="product-name">${esc(page.voucher.title)}</span><p class="gift-card-text">${esc(page.voucher.text)}</p><div class="gift-card-buttons">${sk('sk-button')}${sk('sk-button')}</div></div></article>`);
+      return `${this.skeletonBar(model,category==='all'?'all':category)}<section class="wrap intro"><h1 class="lead">${esc(page.title)}</h1><p>${esc(page.text)}</p></section><section class="wrap shelf"><div class="grid category-grid">${cards.join('')}</div></section>`;
     }
     skeletonProduct(route,model) {
       const item=route.productId?this.presentation.find(entry=>entry.wixProductId===route.productId):null,digital=item?.kind==='digital';
