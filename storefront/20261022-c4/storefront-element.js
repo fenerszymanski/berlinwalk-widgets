@@ -5,7 +5,7 @@
   const base = new URL('.', script.src);
   const CHANNEL = 'wob:shop-cart:v1';
   const esc = value => String(value ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-  const asset = value => {const target=new URL(value,base);if(/\.(?:js|css|json)$/.test(target.pathname))target.searchParams.set('v','christmas-20261030');return target.href;};
+  const asset = value => {const target=new URL(value,base);if(/\.(?:js|css|json)$/.test(target.pathname))target.searchParams.set('v','christmas2-20261030');return target.href;};
   // Chrome and Safari ignore @font-face inside shadow DOM, so the three faces are registered once on the document with absolute URLs from the element's own base.
   try {if(!document.getElementById('bw-storefront-fonts')){const style=document.createElement('style');style.id='bw-storefront-fonts';style.textContent=[['Fraunces','Fraunces-Variable.ttf','100 900'],['Space Grotesk','SpaceGrotesk-Variable.ttf','300 700'],['IBM Plex Mono','IBMPlexMono-Regular.ttf','400 600'],['DM Serif Display','DMSerifDisplay-Regular.ttf','400']].map(([family,file,weight])=>`@font-face{font-family:'${family}';src:url("${asset('fonts/'+file)}") format("truetype");font-weight:${weight};font-display:swap}`).join('\n')+`
 /* Metric-matched stand-ins (27 Oct 2026): while a font file is still downloading, Safari shows the fallback; these two are scaled to the real fonts' widths (measured on the 600-weight headline: Fraunces is about 10% narrower than Georgia Bold, Space Grotesk about 8% wider than Arial) so the headline and the body text hardly change size when the real font arrives. */
@@ -147,7 +147,7 @@
     import(asset('catalog-layer.js')), import(asset('editorial-helpers.js')), import(asset('street-configurator.js')),
     ...['data/categories.json','data/presentation.json','data/native-bindings.json','data/external-products.json'].map(path => fetch(path==='data/presentation.json'?new URL('data/presentation.json?v=gallery-'+Date.now(),base).href:asset(path),path==='data/presentation.json'?{cache:'no-store'}:undefined)/* gallery-fresh-v1 */.then(response => {if (!response.ok) throw Error('CATALOGUE_METADATA_UNAVAILABLE');return response.json();})),
     import(asset('funnel.js')).catch(() => null),   // measurement must never block the shop
-    import(new URL('../../js/store-navigation.js?v=christmas-20261030',base).href),
+    import(new URL('../../js/store-navigation.js?v=christmas2-20261030',base).href),
     import(asset('gift.js')).catch(() => null)   // gift vouchers must never block the shop
   ]);
   // German layer for the press launch, only with ?lang=de; a failure leaves the English page (30 Oct 2026).
@@ -428,7 +428,7 @@
       const audio=all||this.category==='audio';
       // Store isolation (Yusuf, 29 Oct 2026): the credits leave the page for a small "Image credits" item in the store footer, which the
       // site header's store mode draws from this global.
-      window.__bwStoreCreditsHtml=`${illustrated?'<p>Poster illustrations created with AI assistance and refined for Walk of Berlin. Frames shown in mockups are not included.</p>':''}${aerial?'<p>1928 aerial photographs: Geoportal Berlin, <a href="https://www.govdata.de/dl-de/zero-2-0" target="_blank" rel="noopener">Datenlizenz Deutschland Zero 2.0</a>. Sample print pairs archive and present-day aerial views of the same Berlin location.</p>':''}${audio?this.creditText():''}`;
+      window.__bwStoreCreditsHtml=`${illustrated?'<p>Poster illustrations created with AI assistance and refined for Walk of Berlin. Frames shown in mockups are not included. The voucher picture on the gift pages is an AI-generated scene with a real 1928 aerial photograph placed on the card.</p>':''}${aerial?'<p>1928 aerial photographs: Geoportal Berlin, <a href="https://www.govdata.de/dl-de/zero-2-0" target="_blank" rel="noopener">Datenlizenz Deutschland Zero 2.0</a>. Sample print pairs archive and present-day aerial views of the same Berlin location.</p>':''}${audio?this.creditText():''}`;
       return '';
     }
     lead() {return 'Berlin posters, personalised prints, audio walks and guides.';}
