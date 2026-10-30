@@ -147,7 +147,7 @@
     import(asset('catalog-layer.js')), import(asset('editorial-helpers.js')), import(asset('street-configurator.js')),
     ...['data/categories.json','data/presentation.json','data/native-bindings.json','data/external-products.json'].map(path => fetch(path==='data/presentation.json'?new URL('data/presentation.json?v=gallery-'+Date.now(),base).href:asset(path),path==='data/presentation.json'?{cache:'no-store'}:undefined)/* gallery-fresh-v1 */.then(response => {if (!response.ok) throw Error('CATALOGUE_METADATA_UNAVAILABLE');return response.json();})),
     import(asset('funnel.js')).catch(() => null),   // measurement must never block the shop
-    import(new URL('../../js/store-navigation.js?v=ys-merge3-20261029',base).href),
+    import(new URL('../../js/store-navigation.js?v=de-landings-20261030',base).href),
     import(asset('gift.js')).catch(() => null)   // gift vouchers must never block the shop
   ]);
   // German layer for the press launch, only with ?lang=de; a failure leaves the English page (30 Oct 2026).
@@ -331,6 +331,8 @@
       const route=this.navigation.resolveStoreRoute({categorySlug:this.context.categorySlug||'all-products',search:location.search});
       this.routeError=!route.ok;
       if(route.ok){this.category=route.category;this.filter=route.filter;}
+      const query=new URLSearchParams(location.search);
+      this.landing=!query.has('tab')&&!query.has('collection')?this.navigation.STORE_LANDINGS?.[this.context.categorySlug]||null:null;
     }
     storeHref(category='all',filter='all') {return this.navigation.storeHref(category,filter);}
     navigateStore(category,filter,event) {
@@ -430,8 +432,14 @@
       return '';
     }
     lead() {return 'Berlin posters, personalised prints, audio walks and guides.';}
+    landingView() {
+      const page=this.landing,view=page.category?this.model.getCategoryView(page.category,'all'):null;
+      const products=page.productIds?page.productIds.map(id=>this.model.products.find(product=>product.wixProductId===id)).filter(Boolean):view?.products||[];
+      return `<section class="wrap intro" lang="de"><h1 class="lead">${esc(page.title)}</h1><p>${esc(page.text)}</p></section><section class="wrap shelf"><div class="grid category-grid">${products.map(product=>this.card({...product,cardSummary:this.layer.cardSummary(product.cardSummary||product.description),imageFit:product.imageFit||view?.imageFit||'contain'})).join('')}</div></section>`;
+    }
     shop() {
       if(this.routeError)return `<section class="wrap intro"><h1 class="lead">This collection is not available.</h1><p><a href="${esc(this.storeHref())}">Browse all products</a></p></section>`;
+      if(this.landing)return this.landingView();
       const selected=this.category==='all'?null:this.model.getCategoryView(this.category,this.filter);
       const filter=selected?.filters.find(item=>item.id===this.filter);
       const title=filter?(filter.id==='sets'?filter.label:`${filter.label} posters`):selected?.title||this.lead();

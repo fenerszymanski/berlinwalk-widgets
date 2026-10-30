@@ -16,8 +16,18 @@ const LEGACY_ROUTES = {
   'berlin-districts-prints':['print','districts'],
   'berlin-everyday-posters':['print','everyday'],
   'wall-calendars':['calendar','all'],
-  'digital-downloads':['print','all']
+  'digital-downloads':['print','all'],
+  'berlin-poster':['print','all'],
+  'berlin-geschenke':['all','all'],
+  'berlin-kalender-2027':['calendar','all']
 };
+// German landing pages (Yusuf, 30 Oct 2026): native Wix categories that Google can read. The Store draws them with their own
+// heading and products, and only without ?tab= or ?collection=, so a tab click on one of them is the normal Store.
+export const STORE_LANDINGS = Object.freeze({
+  'berlin-poster':{title:'Berlin Poster',text:'Das sind meine Berlin Poster: Wahrzeichen wie Fernsehturm und Weltzeituhr, die Berliner Bezirke und kleine Alltagsszenen wie der Späti an der Ecke. Jedes Poster wird auf Bestellung gedruckt. Die Produktseiten sind auf Englisch.',category:'print'},
+  'berlin-geschenke':{title:'Berlin Geschenke',text:'Geschenke für Menschen, die in Berlin leben oder die Stadt lieben: die eigene Straße im Luftbild von 1928, auch als Datei oder Gutschein, der Wandkalender 2027 und Poster von Orten, die jeder kennt. Die Produktseiten sind auf Englisch.',productIds:["8aaf5412-7f21-42c7-acfb-85dd8417d68c", "54584152-d3f1-4197-86e0-1c4c99ba5ccf", "3a236fae-16fe-495e-8031-0e799c1bbf38", "1f9ad3cb-74f8-48ac-ac53-f41e71a09610", "01eb3a93-8d93-41dd-a786-7d730bb2f976", "eb528417-cda2-4e2d-a46e-00ddd582213e", "1e5af6a4-4628-4f6a-adfb-744e2fc2049e", "7c2f473b-ecbd-4a19-9d1f-18a12fa56652", "536eecf0-3fb8-4bfd-9a68-9996860f6ea3", "8e2956c5-74e6-440e-b4c3-6cf0a3df23f2"]},
+  'berlin-kalender-2027':{title:'Berlin Kalender 2027',text:'Mein Berlin Kalender 2027 zeigt für jeden Monat einen Bezirk, vom Fernsehturm in Mitte bis zum Borsigtor in Reinickendorf. Es gibt ihn gedruckt in A3 oder als Datei zum Selberdrucken. Die Produktseiten sind auf Englisch.',productIds:["54584152-d3f1-4197-86e0-1c4c99ba5ccf", "8022f602-c244-954d-7744-b56ce8a9a71d"]}
+});
 export function storeHref(category='all', filter='all') {
   if (category==='digital' && DIGITAL_ALIAS[filter]) [category,filter]=DIGITAL_ALIAS[filter];
   if (!FILTERS[category]?.includes(filter)) throw new TypeError('Unknown Store category or collection');
