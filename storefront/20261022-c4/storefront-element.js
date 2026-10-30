@@ -150,6 +150,8 @@
     import(new URL('../../js/store-navigation.js?v=ys-merge3-20261029',base).href),
     import(asset('gift.js')).catch(() => null)   // gift vouchers must never block the shop
   ]);
+  // German layer for the press launch, only with ?lang=de; a failure leaves the English page (30 Oct 2026).
+  if(new URLSearchParams(location.search).get('lang')==='de')import(asset('ys-de.js')).catch(()=>{});
   function safeHtml(html) {
     // Native rich text can preserve escaped quote delimiters and escaped block separators.
     // Normalize only tag attribute delimiters and separators between tags, then sanitize.
