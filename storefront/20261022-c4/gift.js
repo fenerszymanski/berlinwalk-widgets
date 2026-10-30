@@ -53,6 +53,14 @@ export function giftHtml(offers, state = {}) {
   </div>`;
 }
 
+// A voucher card for the gift landing pages (30 Oct 2026): same look as a product card, one add button per gift. copy comes from STORE_LANDINGS, so it follows the page language.
+export function giftCardHtml(offers, copy, {assetUrl, printUrl, redirecting = false} = {}) {
+  if (!offers?.length || !copy) return '';
+  const first = offers.find(offer => offer.kind === 'poster') || offers[0];
+  const buttons = offers.map(offer => `<button type="button" class="outline" data-action="gift-add" data-gift-kind="${esc(offer.kind)}" ${redirecting ? 'disabled' : ''}>${esc(offer.kind === 'poster' ? copy.print : copy.file)} · ${esc(offer.priceLabel)}</button>`).join('');
+  return `<article class="card gift-card" data-gift-card><a class="tile cover" href="${esc(printUrl)}"><img class="tile-photo" src="${esc(assetUrl('assets/' + first.info.image))}" alt="${esc(first.info.alt)}" loading="lazy"></a><div class="card-copy"><span class="type">GIFT VOUCHER</span><a class="product-name" href="${esc(printUrl)}">${esc(copy.title)}</a><p class="gift-card-text">${esc(copy.text)}</p><div class="gift-card-buttons">${buttons}</div><a class="gift-card-more" href="${esc(printUrl)}">${esc(copy.more)}</a></div></article>`;
+}
+
 // Cart line for a gift: friendly title, a type line from the presentation entry, thumbnail (the Wix main image if the catalogue read has one, else the local card picture).
 export function giftLineInfo(line, offers, presentation, assetUrl, wixImage) {
   const kind = giftKindOf(line?.productId);

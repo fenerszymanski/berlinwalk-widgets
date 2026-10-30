@@ -342,3 +342,5 @@ details.legal-foot>summary:after{top:50%;margin-top:-14px}
 @media(max-width:420px){.format-switch{gap:8px}.format-option{padding:10px 11px;font-size:12px}.format-option strong{font-size:14px}.format-option[aria-current]{padding:9px 10px}}
 
 .intro>p{max-width:680px;margin:-12px 0 24px;color:var(--muted,inherit);line-height:1.55}
+.gift-card .card-copy{display:flex;flex-direction:column;gap:8px}.gift-card-text{margin:0;font-size:14px;line-height:1.45}.gift-card-buttons{display:flex;flex-wrap:wrap;gap:8px;margin-top:auto}.gift-card-buttons .outline{flex:1 1 auto;white-space:nowrap}.gift-card-more{font-size:13px;text-decoration:underline}
+.intro>p.gift-entry{margin:-12px 0 20px}.gift-entry a{text-decoration:underline}
