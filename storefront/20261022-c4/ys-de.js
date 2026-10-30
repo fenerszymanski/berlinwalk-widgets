@@ -109,14 +109,21 @@ function sweep(root) {
     }
   });
 }
+// Wix can replace the element while the page settles, so the watch rebinds to whichever shadow root is current.
 function start() {
   if (!decodeURIComponent(location.pathname).startsWith(PRODUCT_PATH)) return;
-  const host = document.querySelector('bw-storefront');
-  if (!host?.shadowRoot) { setTimeout(start, 200); return; }
-  host.lang = 'de';
   document.title = 'Deine Berliner Straße um 1928 | Walk of Berlin';
-  const run = () => sweep(host.shadowRoot);   // translated text matches nothing, so its own mutations end here
-  new MutationObserver(run).observe(host.shadowRoot, { subtree: true, childList: true, characterData: true });
-  run();
+  let bound = null;
+  const bind = () => {
+    const host = document.querySelector('bw-storefront');
+    if (!host?.shadowRoot || host.shadowRoot === bound) return;
+    bound = host.shadowRoot;
+    host.lang = 'de';
+    const root = bound;
+    new MutationObserver(() => sweep(root)).observe(root, { subtree: true, childList: true, characterData: true });
+    sweep(root);
+  };
+  bind();
+  setInterval(bind, 300);
 }
 start();
