@@ -1,9 +1,9 @@
 {
-  "updatedAt": "2026-10-30T03:06:45.218Z",
+  "updatedAt": "2026-10-30T09:46:07.437Z",
   "source": "Wix Blog API",
   "popularSource": "Wix Blog metrics.views lifetime sort",
-  "totalPosts": 447,
-  "toolsTotal": 374,
+  "totalPosts": 449,
+  "toolsTotal": 375,
   "bookingUrl": "https://www.walkofberlin.com/book-berlin-walking-tour/berlin-then-and-now",
   "navTopics": [
     {
@@ -1802,6 +1802,40 @@
   ],
   "latest": [
     {
+      "title": "What to Wear in Berlin in Winter: Dress for Wind, Wet and Ice",
+      "slug": "what-to-wear-in-berlin-in-winter",
+      "path": "/post/what-to-wear-in-berlin-in-winter",
+      "url": "https://www.berlinwalk.com/post/what-to-wear-in-berlin-in-winter",
+      "excerpt": "I went through ten winters of hourly weather at Tempelhof. A Berlin winter is a damp, windy 0 to 5°C with a few hard spells, so here is the coat, the boots and the layers I would pack, plus a grid that sets them by week and hour.",
+      "category": "Tourist Tips",
+      "categorySlug": "tourist-tips",
+      "topic": "practical",
+      "topicLabel": "Practical Berlin",
+      "readTime": "6 min read",
+      "publishedDate": "2026-10-30T09:44:16.860Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_c802ea2e01b34f70a9c1af0a6c62edb9~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/worldclock.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_c802ea2e01b34f70a9c1af0a6c62edb9~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/worldclock.jpg",
+      "alt": "The World Clock on Alexanderplatz at blue hour on 5 February 2026, with snow on the ground, a yellow tram and the TV Tower behind",
+      "relatedToolSlug": "berlin-winter-feels-like-grid"
+    },
+    {
+      "title": "Fed From the Air: Where It Happened, Episode 4",
+      "slug": "where-it-happened-airlift",
+      "path": "/post/where-it-happened-airlift",
+      "url": "https://www.berlinwalk.com/post/where-it-happened-airlift",
+      "excerpt": "Episode 4 of Where It Happened: how the 1948 Berlin airlift fed a blockaded city from the air, and where to stand at Tempelhof today.",
+      "category": "Where It Happened",
+      "categorySlug": "where-it-happened",
+      "topic": "practical",
+      "topicLabel": "Practical Berlin",
+      "readTime": "14 min read",
+      "publishedDate": "2026-10-30T07:10:41.372Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_664cb55b957940bdb4470ad4b7805e9c~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-airlift-c47-tempelhof-1948-1600.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_664cb55b957940bdb4470ad4b7805e9c~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-airlift-c47-tempelhof-1948-1600.jpg",
+      "alt": "C-47 transport planes lined up on the Tempelhof apron during the 1948 airlift",
+      "relatedToolSlug": ""
+    },
+    {
       "title": "Power Cut in Berlin: Where to Go When Your Kiez Goes Dark",
       "slug": "power-cut-in-berlin",
       "path": "/post/power-cut-in-berlin",
@@ -1970,40 +2004,6 @@
       "thumb": "https://static.wixstatic.com/media/5a08a3_4054c92492334c149fd6e00ba363bbb1~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-stadtbahn-viaduct-tv-tower.jpg",
       "alt": "An S-Bahn train streaks along the yellow-brick Stadtbahn viaduct at dusk, with the TV Tower lit up behind it",
       "relatedToolSlug": "berlin-rail-change-board"
-    },
-    {
-      "title": "Beelitz-Heilstätten from Berlin: Which Day, Which Ticket, What You Can Enter",
-      "slug": "beelitz-heilstatten-day-trip-from-berlin",
-      "path": "/post/beelitz-heilstatten-day-trip-from-berlin",
-      "url": "https://www.berlinwalk.com/post/beelitz-heilstatten-day-trip-from-berlin",
-      "excerpt": "The treetop walk over the ruined sanatorium changes its hours almost every week until February. Here is what is open on your date, which train gets you there while the RE7 starts at Charlottenburg, and how to get inside the buildings legally.",
-      "category": "Tourist Tips",
-      "categorySlug": "tourist-tips",
-      "topic": "first-day",
-      "topicLabel": "First Day in Berlin",
-      "readTime": "8 min read",
-      "publishedDate": "2026-10-19T07:31:26.607Z",
-      "image": "https://static.wixstatic.com/media/5a08a3_42ef5c6c123748fc90795d05dc7e5e1a~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-treetop-path-autumn.jpg",
-      "thumb": "https://static.wixstatic.com/media/5a08a3_42ef5c6c123748fc90795d05dc7e5e1a~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-treetop-path-autumn.jpg",
-      "alt": "The treetop walk at Beelitz-Heilstätten curving through yellow, orange and green autumn treetops, with people walking along it and the forest stretching to the horizon",
-      "relatedToolSlug": "beelitz-heilstatten-day-clock"
-    },
-    {
-      "title": "E-Waste in Berlin: Which Door Takes It for Free",
-      "slug": "e-waste-in-berlin",
-      "path": "/post/e-waste-in-berlin",
-      "url": "https://www.berlinwalk.com/post/e-waste-in-berlin",
-      "excerpt": "Most of the drawer can leave on the way to buy bread. Small devices up to 25 cm go back to big supermarkets with nothing to buy, vapes go back to any shop that sells them since July 2026, and the BSR yards take everything else for free.",
-      "category": "Living in Berlin",
-      "categorySlug": "living-in-berlin",
-      "topic": "living-in-berlin",
-      "topicLabel": "Living in Berlin",
-      "readTime": "7 min read",
-      "publishedDate": "2026-10-18T07:27:01.217Z",
-      "image": "https://static.wixstatic.com/media/5a08a3_f169523bb07c40ac87c7e31a28ae8b75~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-heiligensee-recycling-yard.jpg",
-      "thumb": "https://static.wixstatic.com/media/5a08a3_f169523bb07c40ac87c7e31a28ae8b75~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-heiligensee-recycling-yard.jpg",
-      "alt": "The entrance of the BSR recycling yard at Am Dachsbau in Heiligensee, with a barrier, parked cars and orange skips under trees and a blue summer sky",
-      "relatedToolSlug": "berlin-e-waste-drop-map"
     }
   ]
 }
