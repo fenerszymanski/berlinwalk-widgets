@@ -52,6 +52,7 @@ const TEXT = new Map(Object.entries({
   'The story behind this print': 'Die Geschichte dahinter', 'About this digital file': 'Über diese digitale Datei',
   'Type your address and see your street from above in 1928, the way a survey plane photographed it, with the same spot today below it. Most Berlin Altbau blocks were already standing, so you can often find your own courtyard. If your house is newer, you see what stood there before it.': 'Gib deine Adresse ein und sieh deine Straße um 1928 von oben, so wie sie ein Vermessungsflugzeug fotografiert hat, und darunter dieselbe Stelle heute. Die meisten Berliner Altbauten standen schon, oft findest du sogar deinen eigenen Hinterhof. Ist dein Haus jünger, siehst du, was vorher dort stand.',
   'The print carries your street, district, map coordinates and an optional line of your own.': 'Auf dem Druck stehen Straße, Bezirk, Koordinaten und auf Wunsch eine eigene Zeile.',
+  'The digital version of my print: your own Berlin spot in the 1928 aerial photograph, with the same spot today below it, at the same scale, and your title, area line and coordinates.': 'Die digitale Version meines Drucks: deine Berliner Stelle im Luftbild um 1928, darunter dieselbe Stelle heute im gleichen Maßstab, dazu Titel, Bezirkszeile und Koordinaten.',
   'Questions': 'Fragen', 'Something else? Write to': 'Noch etwas? Schreib an', '. I reply within a day.': '. Ich antworte innerhalb eines Tages.',
   'Which paper should I pick?': 'Welches Papier soll ich nehmen?',
   'Classic Matte (170 g) is the lightest and cheapest, Premium Matte (200 g) is smoother and whiter, Museum-Quality Matte (250 g) is archival and warm off-white. The semi-gloss papers have a soft sheen. For an old photograph I like matte best.': 'Classic Matte (170 g) ist am leichtesten und günstigsten, Premium Matte (200 g) glatter und weißer, Museum-Quality Matte (250 g) archivfest und warm-weiß. Die Semi-Gloss-Papiere glänzen leicht. Für ein altes Foto mag ich matt am liebsten.',
@@ -86,6 +87,7 @@ const ATTRS = new Map(Object.entries({
   'Aerial photograph of your spot in 1928, with a cross on your building': 'Luftbild deiner Stelle um 1928, mit einem Kreuz auf deinem Gebäude',
   'Aerial photograph of the same spot today, same ground and scale, with a cross on the same spot': 'Luftbild derselben Stelle heute, gleicher Ausschnitt und Maßstab, mit einem Kreuz an derselben Stelle',
   'Withdrawal notice and terms': 'Widerruf und Bedingungen',
+  'e.g. Lena & Jonas · here since 2021': 'z. B. Lena & Jonas · hier seit 2021',
 }));
 const translate = value => {
   const key = value.replace(/\s+/g, ' ').trim();
