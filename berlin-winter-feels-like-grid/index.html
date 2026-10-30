@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Berlin Winter Feels-Like Grid: How Cold It Feels by Week and Hour</title>
+<link rel="stylesheet" href="../css/brand.css">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #FFFFFF; color: #16211b; padding: 12px; }
+  .fg { border: 1px solid #d5dde0; border-radius: 16px; background: #f5f8f9; overflow: hidden; }
+  .fg-head { padding: 18px 18px 10px; }
+  .fg-kick { font-size: 11px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: #1B5E20; }
+  .fg-head h1 { font-size: 21px; line-height: 1.25; font-weight: 800; margin-top: 4px; }
+  .fg-head p { font-size: 13px; line-height: 1.55; color: #3e4c45; margin-top: 6px; max-width: 720px; }
+  .fg-chart { padding: 0 12px; touch-action: pan-y; }
+  #grid { display: block; width: 100%; cursor: crosshair; user-select: none; -webkit-user-select: none; }
+  #grid text { font-family: inherit; }
+  .fg-legend { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 10px; padding: 8px 14px 4px; font-size: 11px; color: #3e4c45; }
+  .fg-legend .bar { display: inline-flex; border-radius: 4px; overflow: hidden; }
+  .fg-legend .bar i { display: block; width: 22px; height: 11px; }
+  .fg-legend .dk { display: inline-block; width: 16px; height: 11px; background: #18283a; opacity: .55; border-radius: 2px; vertical-align: -1px; margin-right: 3px; }
+  .fg-steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; padding: 10px 12px 0; }
+  .fg-steps button { font-family: inherit; font-size: 11.5px; font-weight: 700; padding: 8px 6px; border-radius: 10px; border: 1px solid #c6d1d4; background: #ffffff; color: #3e4c45; cursor: pointer; min-height: 40px; }
+  .fg-steps button.on { background: #1B5E20; border-color: #1B5E20; color: #ffffff; }
+  .fg-panel { margin: 8px 12px 0; padding: 12px; background: #ffffff; border: 1px solid #d5dde0; border-radius: 12px; }
+  .fg-panel h2 { font-size: 14px; font-weight: 800; }
+  .fg-panel p { font-size: 12.5px; line-height: 1.5; color: #3e4c45; margin-top: 3px; }
+  .fg-when { display: flex; flex-wrap: wrap; gap: 8px 12px; margin-top: 8px; }
+  .fg-when label { font-size: 12px; font-weight: 700; display: flex; flex-direction: column; gap: 3px; flex: 1 1 130px; }
+  .fg-when select { font-family: inherit; font-size: 14px; padding: 8px; border-radius: 8px; border: 1px solid #b9c6ca; background: #fff; color: #16211b; min-height: 42px; width: 100%; }
+  .fg-opts { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 8px; }
+  .fg-opts button { font-family: inherit; font-size: 13px; font-weight: 700; padding: 9px 12px; border-radius: 999px; border: 1px solid #b9c6ca; background: #ffffff; color: #16211b; cursor: pointer; min-height: 42px; }
+  .fg-opts button.on { background: #FFE600; border-color: #FFE600; color: #111811; }
+  .fg-nav { display: flex; justify-content: space-between; gap: 8px; margin-top: 10px; }
+  .fg-nav button { font-family: inherit; font-size: 12.5px; font-weight: 800; padding: 9px 14px; border-radius: 999px; border: 1px solid #1B5E20; background: #ffffff; color: #1B5E20; cursor: pointer; min-height: 42px; }
+  .fg-nav button:disabled { opacity: .35; cursor: default; }
+  .fg-out { margin: 10px 12px 12px; padding: 14px; background: #10202c; color: #eef3f5; border-radius: 12px; }
+  .fg-out .ctx { font-size: 11.5px; font-weight: 700; letter-spacing: .04em; color: #FFE600; }
+  .fg-out h2 { font-size: 18px; line-height: 1.3; font-weight: 800; margin-top: 4px; color: #ffffff; }
+  #scale { display: block; width: 100%; margin-top: 8px; }
+  #scale text { font-family: inherit; }
+  .fg-layers { display: grid; gap: 6px; margin-top: 8px; list-style: none; }
+  .fg-layers li { display: grid; grid-template-columns: 62px 1fr; gap: 8px; font-size: 13px; line-height: 1.4; }
+  .fg-layers b { font-size: 10.5px; letter-spacing: .06em; text-transform: uppercase; color: #a9c1cc; padding-top: 2px; }
+  .fg-note { font-size: 12.5px; line-height: 1.5; color: #d5e0e5; margin-top: 10px; padding-top: 9px; border-top: 1px solid #2f4453; }
+  .fg-src { font-size: 11px; line-height: 1.5; color: #55645d; padding: 0 16px 14px; }
+  button:focus-visible, select:focus-visible { outline: 3px solid #1B5E20; outline-offset: 2px; }
+  @media (max-width: 480px) {
+    body { padding: 6px; }
+    .fg-head h1 { font-size: 18px; }
+    .fg-chart { padding: 0 6px; }
+    .fg-steps, .fg-panel, .fg-out { margin-left: 0; margin-right: 0; }
+    .fg-panel, .fg-out { margin-left: 8px; margin-right: 8px; }
+    .fg-steps { padding-left: 8px; padding-right: 8px; }
+  }
+</style>
+</head>
+<body>
+<div class="fg">
+  <div class="fg-head">
+    <div class="fg-kick">Berlin winter, hour by hour</div>
+    <h1>How cold Berlin really feels, by week and by hour</h1>
+    <p>Each square is one hour of one week from November to March, coloured by how cold it usually feels with the wind. The dark shade is the time the sun is down. Tap the hour you will be outside.</p>
+  </div>
+  <div class="fg-chart"><svg id="grid" role="img" aria-label="Grid of typical feels-like temperature by week and hour in a Berlin winter"></svg></div>
+  <div class="fg-legend"><span>Feels like</span><span class="bar" id="legend"></span><span id="legendTxt"></span><span><i class="dk"></i>sun down</span></div>
+  <div class="fg-steps" id="steps"></div>
+  <div class="fg-panel" id="panel"></div>
+  <div class="fg-out" aria-live="polite">
+    <div class="ctx" id="ctx"></div>
+    <h2 id="verdict"></h2>
+    <svg id="scale" role="img" aria-label="Typical and hard-day feels-like temperature on a scale"></svg>
+    <ul class="fg-layers" id="layers"></ul>
+    <p class="fg-note" id="note"></p>
+  </div>
+  <p class="fg-src" id="src"></p>
+</div>
+<script src="../js/brand.js"></script>
+<script>
+(function () {
+  var DATA, wk = 0, hr = 12, dur = 2.5, act = 'walk', currentStep = 0;
+  var STAGES = [{ id: 'when', label: '1. When' }, { id: 'long', label: '2. How long' }, { id: 'doing', label: '3. Doing what' }];
+  var DUR = [[1, '1 hour'], [2.5, '2.5 hours'], [5, '5 hours'], [8, 'All day']];
+  var ACT = [
+    ['walk', 'Walking most of it', 'walking keeps you warm', 3],
+    ['mixed', 'Walking and stopping', 'walking with stops at sights', 0],
+    ['stand', 'Standing still', 'standing at a market or in a queue', -4]
+  ];
+  var STOPS = [[-6, '#1d3f7a'], [-3, '#2f6db0'], [0, '#6fb1d6'], [3, '#c3e0ea'], [6, '#f3edc8'], [9, '#f7cf7a'], [99, '#f0a64e']];
+  function el(id) { return document.getElementById(id); }
+  function colour(v) { for (var i = 0; i < STOPS.length; i++) if (v < STOPS[i][0]) return STOPS[i][1]; return STOPS[STOPS.length - 1][1]; }
+  function hh(v) { var h = Math.floor(v), m = Math.round((v - h) * 60); if (m === 60) { h++; m = 0; } return (h < 10 ? '0' : '') + h + ':' + (m < 10 ? '0' : '') + m; }
+  function deg(v) { var r = Math.round(v); return (r < 0 ? '−' + Math.abs(r) : r) + '°C'; }
+  function cell(w, h) { return DATA.grid[w][DATA.hours.indexOf(h)]; }
+
+  var L = 34, T = 22, cw, ch = 19, W;
+  function drawGrid() {
+    var svg = el('grid');
+    W = Math.max(300, svg.parentNode.clientWidth - 2);
+    cw = (W - L - 2) / DATA.cols.length;
+    var H = T + ch * DATA.hours.length + 4, s = '';
+    svg.setAttribute('viewBox', '0 0 ' + W + ' ' + H);
+    svg.setAttribute('height', H);
+    DATA.cols.forEach(function (c, i) {
+      DATA.hours.forEach(function (h, j) {
+        s += '<rect x="' + (L + i * cw).toFixed(1) + '" y="' + (T + j * ch) + '" width="' + (cw + .4).toFixed(1) + '" height="' + (ch + .4) + '" fill="' + colour(DATA.grid[i][j][1]) + '"/>';
+      });
+    });
+    var y0 = T, y = function (v) { return T + (v - DATA.hours[0]) * ch; }, x = function (i) { return L + (i + .5) * cw; };
+    var bottom = T + ch * DATA.hours.length, right = L + cw * DATA.cols.length;
+    var ss = 'M' + L + ' ' + bottom, sr = 'M' + L + ' ' + y0;
+    DATA.cols.forEach(function (c, i) { ss += 'L' + x(i).toFixed(1) + ' ' + y(c.ss).toFixed(1); sr += 'L' + x(i).toFixed(1) + ' ' + y(c.sr).toFixed(1); });
+    s += '<path d="' + ss + 'L' + right + ' ' + bottom + 'Z" fill="#18283a" opacity=".5"/>';
+    s += '<path d="' + sr + 'L' + right + ' ' + y0 + 'Z" fill="#18283a" opacity=".5"/>';
+    var mStarts = { 'Nov': 0, 'Dec': 4.3, 'Jan': 8.7, 'Feb': 13.1, 'Mar': 17.1 };
+    Object.keys(mStarts).forEach(function (m) { s += '<text x="' + (L + mStarts[m] * cw + 2).toFixed(1) + '" y="14" font-size="11.5" font-weight="700" fill="#3e4c45">' + m + '</text>'; });
+    DATA.hours.forEach(function (h, j) { if (h % 3 === 0) s += '<text x="' + (L - 5) + '" y="' + (T + j * ch + 14) + '" font-size="11" text-anchor="end" fill="#3e4c45">' + h + ':00</text>'; });
+    var last = DATA.hours[DATA.hours.length - 1] + 1;
+    var bh = Math.min(dur, last - hr);
+    s += '<rect x="' + (L + wk * cw - 1).toFixed(1) + '" y="' + (y(hr) - 1) + '" width="' + (cw + 2).toFixed(1) + '" height="' + (bh * ch + 2) + '" fill="none" stroke="#111811" stroke-width="3"/>';
+    s += '<rect x="' + (L + wk * cw + 1).toFixed(1) + '" y="' + (y(hr) + 1) + '" width="' + (cw - 2).toFixed(1) + '" height="' + (bh * ch - 2) + '" fill="none" stroke="#FFE600" stroke-width="1.5"/>';
+    svg.innerHTML = s;
+  }
+
+  function pick(evt) {
+    var r = el('grid').getBoundingClientRect(), sx = W / r.width;
+    var px = (evt.clientX - r.left) * sx - L, py = (evt.clientY - r.top) * sx - T;
+    if (px < 0 || py < 0) return;
+    wk = Math.max(0, Math.min(DATA.cols.length - 1, Math.floor(px / cw)));
+    hr = DATA.hours[Math.max(0, Math.min(DATA.hours.length - 1, Math.floor(py / ch)))];
+    render();
+  }
+
+  function advise() {
+    var hs = [], h;
+    for (h = hr; h < hr + Math.ceil(dur) && h <= DATA.hours[DATA.hours.length - 1]; h++) hs.push(cell(wk, h));
+    var typ = Math.min.apply(null, hs.map(function (c) { return c[1]; }));
+    var hard = Math.min.apply(null, hs.map(function (c) { return c[2]; }));
+    var a = ACT.filter(function (x) { return x[0] === act; })[0];
+    var longMod = dur >= 8 ? -2 : dur >= 5 ? -2 : dur >= 2.5 ? -1 : 0;
+    var s = typ + a[3] + longMod, c = hard + a[3] + longMod;
+    return { typ: typ, hard: hard, s: s, c: c, a: a };
+  }
+
+  function layers(r) {
+    var out = [];
+    var s = r.s, c = r.c;
+    out.push(['Top', s < 1 ? 'Thermal or merino base layer, then a jumper. Add a thin fleece if you run cold.' : s < 8 ? 'Long-sleeved top and a jumper you can open or take off.' : 'Long-sleeved top, with a thin jumper in the bag.']);
+    out.push(['Coat', s < 4 ? 'Insulated coat with a hood, windproof and water-resistant, long enough to cover your hips.' : s < 10 ? 'Windproof, water-resistant jacket with a hood.' : 'Light waterproof jacket.']);
+    out.push(['Legs', c < -6 ? 'Thermal leggings under your trousers. Skip jeans alone.' : s < 3 ? 'Thick trousers. Jeans get cold and stay wet, so bring leggings for under them.' : 'Normal trousers that dry fast.']);
+    out.push(['Feet', c < 0 ? 'Waterproof boots with a real tread and warm socks. Pavements here are not always salted, so ice can stay for days.' : 'Waterproof shoes with grip and socks that reach above the ankle.']);
+    var extra = [];
+    if (s < 6) extra.push('hat');
+    if (s < 5) extra.push('gloves that work a phone');
+    if (s < 7) extra.push('scarf');
+    extra.push('small umbrella or hood for rain');
+    out.push(['Extras', extra.join(', ').replace(/^./, function (m) { return m.toUpperCase(); }) + '.']);
+    return out;
+  }
+
+  function verdict(r) {
+    if (r.s < -5) return 'Proper cold. Dress for the whole time outside, and plan a warm stop.';
+    if (r.s < 0) return 'Cold enough to bite. Hat and gloves stay on.';
+    if (r.s < 5) return 'Raw and damp more than freezing. Wind is the thing to stop.';
+    if (r.s < 10) return 'Cool. A good jacket does most of the work.';
+    return 'Mild for winter. Keep a waterproof handy.';
+  }
+
+  function drawScale(r) {
+    var svg = el('scale'), w = Math.max(260, svg.parentNode.clientWidth - 28), h = 58, min = -16, max = 14;
+    var x = function (v) { return 8 + (Math.max(min, Math.min(max, v)) - min) / (max - min) * (w - 16); };
+    var s = '';
+    for (var v = min; v < max; v += 1) s += '<rect x="' + x(v).toFixed(1) + '" y="24" width="' + ((w - 16) / (max - min) + .5).toFixed(1) + '" height="10" fill="' + colour(v) + '"/>';
+    [-12, -6, 0, 6, 12].forEach(function (t) { s += '<text x="' + x(t).toFixed(1) + '" y="50" font-size="10.5" text-anchor="middle" fill="#a9c1cc">' + deg(t) + '</text>'; });
+    var a = x(r.typ), b = x(r.hard);
+    s += '<path d="M' + a.toFixed(1) + ' 36l-5 8h10z" fill="#FFE600" transform="translate(0 -2)"/>';
+    s += '<line x1="' + b.toFixed(1) + '" x2="' + b.toFixed(1) + '" y1="20" y2="38" stroke="#ffffff" stroke-width="2.5"/>';
+    var aA = a > w - 90 ? 'end' : 'start', bA = b < 90 ? 'start' : 'end';
+    s += '<text x="' + b.toFixed(1) + '" y="13" font-size="11" font-weight="700" text-anchor="' + bA + '" fill="#ffffff">Hard day ' + deg(r.hard) + '</text>';
+    if (a - b > 96 || aA === 'start') s += '<text x="' + (a + (aA === 'start' ? 4 : 0)).toFixed(1) + '" y="13" font-size="11" font-weight="700" text-anchor="' + aA + '" fill="#FFE600">Usual ' + deg(r.typ) + '</text>';
+    svg.setAttribute('viewBox', '0 0 ' + w + ' ' + h);
+    svg.setAttribute('height', h);
+    svg.innerHTML = s;
+  }
+
+  function renderPanel() {
+    var p = el('panel'), st = STAGES[currentStep].id, html = '';
+    if (st === 'when') {
+      html = '<h2>When will you be out?</h2><p>Tap the grid, or choose here.</p><div class="fg-when"><label>Week<select id="wkSel">' +
+        DATA.cols.map(function (c, i) { return '<option value="' + i + '"' + (i === wk ? ' selected' : '') + '>' + c.start + ' to ' + c.end + '</option>'; }).join('') +
+        '</select></label><label>Starting at<select id="hrSel">' +
+        DATA.hours.map(function (h) { return '<option value="' + h + '"' + (h === hr ? ' selected' : '') + '>' + hh(h) + '</option>'; }).join('') + '</select></label></div>';
+    } else if (st === 'long') {
+      html = '<h2>How long outside in one go?</h2><p>A coat that is fine for 40 minutes is a different story after 2.5 hours.</p><div class="fg-opts">' +
+        DUR.map(function (d) { return '<button type="button" data-d="' + d[0] + '" class="' + (d[0] === dur ? 'on' : '') + '" aria-pressed="' + (d[0] === dur) + '">' + d[1] + '</button>'; }).join('') + '</div>';
+    } else {
+      html = '<h2>What will you be doing?</h2><p>Standing still costs you far more warmth than the thermometer shows.</p><div class="fg-opts">' +
+        ACT.map(function (a) { return '<button type="button" data-a="' + a[0] + '" class="' + (a[0] === act ? 'on' : '') + '" aria-pressed="' + (a[0] === act) + '">' + a[1] + '</button>'; }).join('') + '</div>';
+    }
+    html += '<div class="fg-nav"><button type="button" id="prev"' + (currentStep === 0 ? ' disabled' : '') + '>Back</button><button type="button" id="next"' + (currentStep === STAGES.length - 1 ? ' disabled' : '') + '>Next</button></div>';
+    p.innerHTML = html;
+    if (st === 'when') {
+      el('wkSel').addEventListener('change', function () { wk = +this.value; render(); });
+      el('hrSel').addEventListener('change', function () { hr = +this.value; render(); });
+    }
+    p.querySelectorAll('[data-d]').forEach(function (b) { b.addEventListener('click', function () { dur = +b.getAttribute('data-d'); render(); }); });
+    p.querySelectorAll('[data-a]').forEach(function (b) { b.addEventListener('click', function () { act = b.getAttribute('data-a'); render(); }); });
+    el('prev').addEventListener('click', function () { go(currentStep - 1); });
+    el('next').addEventListener('click', function () { go(currentStep + 1); });
+  }
+
+  function go(i) { currentStep = Math.max(0, Math.min(STAGES.length - 1, i)); render(); }
+
+  function render() {
+    drawGrid();
+    el('steps').innerHTML = STAGES.map(function (s, i) { return '<button type="button" data-s="' + i + '" class="' + (i === currentStep ? 'on' : '') + '">' + s.label + '</button>'; }).join('');
+    el('steps').querySelectorAll('button').forEach(function (b) { b.addEventListener('click', function () { go(+b.getAttribute('data-s')); }); });
+    renderPanel();
+    var r = advise(), c = DATA.cols[wk], end = hr + dur;
+    el('ctx').textContent = c.start + ' to ' + c.end + ', from ' + hh(hr) + ', ' + DUR.filter(function (d) { return d[0] === dur; })[0][1].toLowerCase() + ', ' + r.a[2];
+    el('verdict').textContent = verdict(r);
+    drawScale(r);
+    el('layers').innerHTML = layers(r).map(function (l) { return '<li><b>' + l[0] + '</b><span>' + l[1] + '</span></li>'; }).join('');
+    var dark = hr >= c.ss ? 'The sun is already down at this hour.' : hr < c.sr ? 'It is still dark when you start: sunrise is about ' + hh(c.sr) + '.' : end > c.ss ? 'Sunset is about ' + hh(c.ss) + ', so you finish in the dark.' : 'Daylight lasts until about ' + hh(c.ss) + '.';
+    el('note').textContent = dark + ' Rain or snow of 1 mm or more falls on about 3 winter days in 10, so keep the outer layer waterproof whatever the number says.';
+    if (window.__bwRequestEmbedResize) window.__bwRequestEmbedResize();
+  }
+
+  var dragging = false, g = el('grid');
+  g.addEventListener('pointerdown', function (e) { dragging = true; pick(e); });
+  g.addEventListener('pointermove', function (e) { if (dragging && e.pointerType === 'mouse') pick(e); });
+  window.addEventListener('pointerup', function () { dragging = false; });
+  var rt;
+  window.addEventListener('resize', function () { clearTimeout(rt); rt = setTimeout(function () { if (DATA) render(); }, 120); });
+
+  fetch('data.json').then(function (r) { return r.json(); }).then(function (d) {
+    DATA = d;
+    var now = new Date(), start = new Date(now.getMonth() >= 10 ? now.getFullYear() : now.getFullYear() - 1, 10, 1);
+    var w = Math.floor((now - start) / 6048e5);
+    wk = w >= 0 && w < DATA.cols.length ? w : 6;
+    el('legend').innerHTML = STOPS.map(function (s) { return '<i style="background:' + s[1] + '"></i>'; }).join('');
+    el('legendTxt').textContent = 'below −6°C to above 9°C';
+    el('src').textContent = 'Median and coldest-tenth values from ' + DATA.method.hours.toLocaleString('en-GB') + ' hourly readings at ' + DATA.method.station + ', ' + DATA.method.winters + '. Feels-like is the standard wind chill index, with sunshine left out. The walking and standing adjustment is my own rule of thumb. A typical pattern, never a forecast. Checked on 30 October 2026.';
+    render();
+  });
+})();
+</script>
+</body>
+</html>
