@@ -452,7 +452,10 @@
       this.posterChoices=this.posterChoices||{};
       let choices=this.posterChoices[product.wixProductId];
       if(!choices){
-        const first=rows.find(row=>row.inStock&&/30\s*x\s*40/i.test(row.choices.Size||'')&&(!row.choices.Paper||row.choices.Paper==='Premium Matte'))||rows.find(row=>row.inStock)||rows[0];
+        // A Google listing links with ?paper= so the page opens on the paper and price the listing showed (30 Oct 2026).
+        const wanted=new URLSearchParams(location.search).get('paper');
+        const linked=wanted&&rows.find(row=>row.inStock&&/30\s*x\s*40/i.test(row.choices.Size||'')&&row.choices.Paper===wanted);
+        const first=linked||rows.find(row=>row.inStock&&/30\s*x\s*40/i.test(row.choices.Size||'')&&(!row.choices.Paper||row.choices.Paper==='Premium Matte'))||rows.find(row=>row.inStock)||rows[0];
         choices=first?{...first.choices}:{};
         this.posterChoices[product.wixProductId]=choices;
       }
