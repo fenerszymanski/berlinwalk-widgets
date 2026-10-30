@@ -1,0 +1,3003 @@
+{
+  "id": "E05-berlin-airlift",
+  "slug": "airlift",
+  "title": "Fed From the Air",
+  "episodeUri": "",
+  "audioUrl": "https://anchor.fm/s/1186f4668/podcast/play/127343576/https%3A%2F%2Fd3ctxlq1ktw2nl.cloudfront.net%2Fstaging%2F2026-9-12%2Fd3f2afd5-eba5-8314-479a-c1e2fae3b002.mp3",
+  "audioBytes": 22601700,
+  "cover": "img/cover-360.jpg",
+  "show": {
+    "title": "Where It Happened",
+    "artist": "Walk of Berlin",
+    "spotifyUrl": "https://open.spotify.com/show/4hd8BvMRs7dwdogXr3mzzG",
+    "rssUrl": "https://anchor.fm/s/1186f4668/podcast/rss"
+  },
+  "duration": 1394.05,
+  "chapters": [
+    {
+      "title": "The blockade",
+      "t": 0
+    },
+    {
+      "title": "Three airfields",
+      "t": 264
+    },
+    {
+      "title": "Candy from the sky",
+      "t": 512
+    },
+    {
+      "title": "Record day",
+      "t": 717
+    },
+    {
+      "title": "The monument",
+      "t": 960
+    }
+  ],
+  "phrases": [
+    {
+      "t0": 0.3,
+      "t1": 4.94,
+      "text": "Start on 26 June 1948, at Tempelhof,",
+      "kind": "story",
+      "para": 0,
+      "part": "p01"
+    },
+    {
+      "t0": 4.98,
+      "t1": 7.74,
+      "text": "the big airfield in the American sector of Berlin.",
+      "kind": "story",
+      "para": 0,
+      "part": "p01"
+    },
+    {
+      "t0": 8.3,
+      "t1": 11.42,
+      "text": "The first American transport planes were getting ready to bring",
+      "kind": "story",
+      "para": 0,
+      "part": "p01"
+    },
+    {
+      "t0": 11.58,
+      "t1": 13.58,
+      "text": "food into a city that had been cut",
+      "kind": "story",
+      "para": 0,
+      "part": "p01"
+    },
+    {
+      "t0": 13.66,
+      "t1": 16.66,
+      "text": "off by land and water for two days.",
+      "kind": "story",
+      "para": 0,
+      "part": "p01"
+    },
+    {
+      "t0": 16.94,
+      "t1": 20.54,
+      "text": "West Berlin then held just under two million people,",
+      "kind": "story",
+      "para": 0,
+      "part": "p01"
+    },
+    {
+      "t0": 20.74,
+      "t1": 26.7,
+      "text": "according to the Friedrich-Ebert-Stiftung (the Tempelhof airport's page says 2.1 million),",
+      "kind": "story",
+      "para": 0,
+      "part": "p01"
+    },
+    {
+      "t0": 26.78,
+      "t1": 30.06,
+      "text": "and most of them depended on goods that had until then come",
+      "kind": "story",
+      "para": 0,
+      "part": "p01"
+    },
+    {
+      "t0": 30.14,
+      "t1": 34.38,
+      "text": "in by rail, road and water. Picture the airfield,",
+      "kind": "story",
+      "para": 0,
+      "part": "p01"
+    },
+    {
+      "t0": 34.42,
+      "t1": 37.9,
+      "text": "and the planes that would soon arrive there in a steady stream.",
+      "kind": "story",
+      "para": 0,
+      "part": "p01"
+    },
+    {
+      "t0": 38.54,
+      "t1": 40.86,
+      "text": "Nobody on the ground could yet know how",
+      "kind": "story",
+      "para": 0,
+      "part": "p01"
+    },
+    {
+      "t0": 40.94,
+      "t1": 43.74,
+      "text": "long those planes would have to keep flying.",
+      "kind": "story",
+      "para": 0,
+      "part": "p01"
+    },
+    {
+      "t0": 44.06,
+      "t1": 47.34,
+      "text": "To see how a city came to depend on the sky,",
+      "kind": "story",
+      "para": 0,
+      "part": "p01"
+    },
+    {
+      "t0": 47.42,
+      "t1": 50.54,
+      "text": "you have to go back about one week, to a decision about",
+      "kind": "story",
+      "para": 0,
+      "part": "p01"
+    },
+    {
+      "t0": 50.7,
+      "t1": 53.74,
+      "text": "money that had nothing to do with food at all.",
+      "kind": "story",
+      "para": 0,
+      "part": "p01"
+    },
+    {
+      "t0": 54.29,
+      "t1": 59.13,
+      "text": "The trigger was money. On 20 June 1948 the",
+      "kind": "story",
+      "para": 1,
+      "part": "p02"
+    },
+    {
+      "t0": 59.17,
+      "t1": 62.93,
+      "text": "Western occupation zones carried out a currency reform,",
+      "kind": "story",
+      "para": 1,
+      "part": "p02"
+    },
+    {
+      "t0": 63.01,
+      "t1": 66.33,
+      "text": "and the new money was meant to reach West Berlin as well.",
+      "kind": "story",
+      "para": 1,
+      "part": "p02"
+    },
+    {
+      "t0": 66.61,
+      "t1": 69.17,
+      "text": "The Soviet Union used that as the occasion",
+      "kind": "story",
+      "para": 1,
+      "part": "p02"
+    },
+    {
+      "t0": 69.25,
+      "t1": 72.45,
+      "text": "to separate West Berlin from the Western zones,",
+      "kind": "story",
+      "para": 1,
+      "part": "p02"
+    },
+    {
+      "t0": 72.53,
+      "t1": 76.77,
+      "text": "according to the Bundeszentrale für politische Bildung, the bpb.",
+      "kind": "story",
+      "para": 1,
+      "part": "p02"
+    },
+    {
+      "t0": 77.33,
+      "t1": 79.97,
+      "text": "Three days later, on 23 June,",
+      "kind": "story",
+      "para": 1,
+      "part": "p02"
+    },
+    {
+      "t0": 80.05,
+      "t1": 84.45,
+      "text": "the Soviet occupation zone carried out its own currency reform, and the",
+      "kind": "story",
+      "para": 1,
+      "part": "p02"
+    },
+    {
+      "t0": 84.53,
+      "t1": 88.65,
+      "text": "Soviet side tried to extend that reform across the whole city.",
+      "kind": "story",
+      "para": 1,
+      "part": "p02"
+    },
+    {
+      "t0": 88.93,
+      "t1": 91.81,
+      "text": "The bpb's chronicle says the attempt failed",
+      "kind": "story",
+      "para": 1,
+      "part": "p02"
+    },
+    {
+      "t0": 91.97,
+      "t1": 94.73,
+      "text": "against the resistance of the Western powers.",
+      "kind": "story",
+      "para": 1,
+      "part": "p02"
+    },
+    {
+      "t0": 95.01,
+      "t1": 98.05,
+      "text": "On 25 June they introduced the new Deutsche",
+      "kind": "story",
+      "para": 1,
+      "part": "p02"
+    },
+    {
+      "t0": 98.13,
+      "t1": 100.65,
+      "text": "Mark in the Western sectors of Berlin.",
+      "kind": "story",
+      "para": 1,
+      "part": "p02"
+    },
+    {
+      "t0": 100.93,
+      "t1": 104.85,
+      "text": "By then the city had two currencies in use, and the quarrel",
+      "kind": "story",
+      "para": 1,
+      "part": "p02"
+    },
+    {
+      "t0": 104.97,
+      "t1": 108.53,
+      "text": "over money had become a quarrel over the city itself.",
+      "kind": "story",
+      "para": 1,
+      "part": "p02"
+    },
+    {
+      "t0": 109.1,
+      "t1": 115.1,
+      "text": "On 24 June 1948 Soviet troops closed all access routes to West",
+      "kind": "story",
+      "para": 2,
+      "part": "p03"
+    },
+    {
+      "t0": 115.18,
+      "t1": 119.46,
+      "text": "Berlin, according to the bpb's lexicon entry on the blockade.",
+      "kind": "story",
+      "para": 2,
+      "part": "p03"
+    },
+    {
+      "t0": 119.74,
+      "t1": 123.26,
+      "text": "The Deutsches Historisches Museum says the Soviet occupation",
+      "kind": "story",
+      "para": 2,
+      "part": "p03"
+    },
+    {
+      "t0": 123.34,
+      "t1": 127.42,
+      "text": "authority blocked all routes through its zone, and that gas and",
+      "kind": "story",
+      "para": 2,
+      "part": "p03"
+    },
+    {
+      "t0": 127.66,
+      "t1": 131.74,
+      "text": "electricity deliveries to the Western sectors were drastically cut.",
+      "kind": "story",
+      "para": 2,
+      "part": "p03"
+    },
+    {
+      "t0": 132.06,
+      "t1": 138.06,
+      "text": "The bpb chronicle describes essential passenger and freight transport as interrupted.",
+      "kind": "story",
+      "para": 2,
+      "part": "p03"
+    },
+    {
+      "t0": 138.62,
+      "t1": 144.14,
+      "text": "It puts the official reasons in quotation marks: alleged technical difficulties,",
+      "kind": "story",
+      "para": 2,
+      "part": "p03"
+    },
+    {
+      "t0": 144.3,
+      "t1": 148.42,
+      "text": "and a coal shortage that halted power and coal deliveries.",
+      "kind": "story",
+      "para": 2,
+      "part": "p03"
+    },
+    {
+      "t0": 148.7,
+      "t1": 152.14,
+      "text": "The bpb itself calls those reasons alleged.",
+      "kind": "story",
+      "para": 2,
+      "part": "p03"
+    },
+    {
+      "t0": 152.7,
+      "t1": 156.22,
+      "text": "Read the official explanation next to the closing of the routes,",
+      "kind": "story",
+      "para": 2,
+      "part": "p03"
+    },
+    {
+      "t0": 156.26,
+      "t1": 159.02,
+      "text": "and the gap between them is hard to miss.",
+      "kind": "story",
+      "para": 2,
+      "part": "p03"
+    },
+    {
+      "t0": 159.57,
+      "t1": 163.17,
+      "text": "Three sources describe the closing of the land and water routes",
+      "kind": "story",
+      "para": 3,
+      "part": "p04"
+    },
+    {
+      "t0": 163.29,
+      "t1": 167.17,
+      "text": "in slightly different words, and together they give the picture.",
+      "kind": "story",
+      "para": 3,
+      "part": "p04"
+    },
+    {
+      "t0": 167.81,
+      "t1": 173.01,
+      "text": "Berlin.de says rail and road links to West Berlin were cut.",
+      "kind": "story",
+      "para": 3,
+      "part": "p04"
+    },
+    {
+      "t0": 173.65,
+      "t1": 179.69,
+      "text": "The Friedrich-Ebert-Stiftung says the Soviet Union blocked the land and water routes.",
+      "kind": "story",
+      "para": 3,
+      "part": "p04"
+    },
+    {
+      "t0": 179.97,
+      "t1": 184.05,
+      "text": "The taz, in its feature on the seventieth anniversary of the airlift,",
+      "kind": "story",
+      "para": 3,
+      "part": "p04"
+    },
+    {
+      "t0": 184.13,
+      "t1": 188.13,
+      "text": "says the Soviets had blocked the land and water routes to Berlin,",
+      "kind": "story",
+      "para": 3,
+      "part": "p04"
+    },
+    {
+      "t0": 188.21,
+      "t1": 192.29,
+      "text": "and that the Allies then supplied the city over three air corridors.",
+      "kind": "story",
+      "para": 3,
+      "part": "p04"
+    },
+    {
+      "t0": 193.01,
+      "t1": 197.97,
+      "text": "Roads, railways and waterways: each was part of how a city of",
+      "kind": "story",
+      "para": 3,
+      "part": "p04"
+    },
+    {
+      "t0": 198.13,
+      "t1": 201.97,
+      "text": "about two million got its food, coal and medicine.",
+      "kind": "story",
+      "para": 3,
+      "part": "p04"
+    },
+    {
+      "t0": 202.37,
+      "t1": 205.61,
+      "text": "The DHM also gives the intention behind it.",
+      "kind": "story",
+      "para": 3,
+      "part": "p04"
+    },
+    {
+      "t0": 205.89,
+      "t1": 209.81,
+      "text": "According to the museum, the blockade was meant to force the Western",
+      "kind": "story",
+      "para": 3,
+      "part": "p04"
+    },
+    {
+      "t0": 209.89,
+      "t1": 213.49,
+      "text": "powers to leave the three Western sectors of Berlin.",
+      "kind": "story",
+      "para": 3,
+      "part": "p04"
+    },
+    {
+      "t0": 214.06,
+      "t1": 216.22,
+      "text": "The answer to the blockade was a decision",
+      "kind": "story",
+      "para": 4,
+      "part": "p05"
+    },
+    {
+      "t0": 216.3,
+      "t1": 218.54,
+      "text": "to supply the city by air.",
+      "kind": "story",
+      "para": 4,
+      "part": "p05"
+    },
+    {
+      "t0": 218.86,
+      "t1": 221.66,
+      "text": "According to the Deutsches Historisches Museum,",
+      "kind": "story",
+      "para": 4,
+      "part": "p05"
+    },
+    {
+      "t0": 221.74,
+      "t1": 225.74,
+      "text": "it came on the initiative of the American military governor, Lucius D.",
+      "kind": "story",
+      "para": 4,
+      "part": "p05"
+    },
+    {
+      "t0": 225.82,
+      "t1": 229.42,
+      "text": "Clay. The bpb says Clay ordered the airlift",
+      "kind": "story",
+      "para": 4,
+      "part": "p05"
+    },
+    {
+      "t0": 229.5,
+      "t1": 231.86,
+      "text": "set up in reaction to the blockade.",
+      "kind": "story",
+      "para": 4,
+      "part": "p05"
+    },
+    {
+      "t0": 232.14,
+      "t1": 234.86,
+      "text": "Neither source gives the day he made the decision,",
+      "kind": "story",
+      "para": 4,
+      "part": "p05"
+    },
+    {
+      "t0": 234.98,
+      "t1": 237.1,
+      "text": "so this episode does not give one.",
+      "kind": "story",
+      "para": 4,
+      "part": "p05"
+    },
+    {
+      "t0": 237.42,
+      "t1": 242.38,
+      "text": "The berlin.de page and the bpb agree on the kind of cargo.",
+      "kind": "story",
+      "para": 4,
+      "part": "p05"
+    },
+    {
+      "t0": 242.86,
+      "t1": 247.74,
+      "text": "Berlin.de lists food, medicine, coal and raw materials.",
+      "kind": "story",
+      "para": 4,
+      "part": "p05"
+    },
+    {
+      "t0": 248.14,
+      "t1": 251.18,
+      "text": "The bpb says that for almost a year,",
+      "kind": "story",
+      "para": 4,
+      "part": "p05"
+    },
+    {
+      "t0": 251.34,
+      "t1": 255.02,
+      "text": "all vital goods arrived by plane, above all food,",
+      "kind": "story",
+      "para": 4,
+      "part": "p05"
+    },
+    {
+      "t0": 255.18,
+      "t1": 258.86,
+      "text": "building materials and fuel. Hold that list in your head.",
+      "kind": "story",
+      "para": 4,
+      "part": "p05"
+    },
+    {
+      "t0": 259.26,
+      "t1": 263.74,
+      "text": "It describes a city's whole supply, not a few emergency crates.",
+      "kind": "story",
+      "para": 4,
+      "part": "p05"
+    },
+    {
+      "t0": 264.29,
+      "t1": 267.97,
+      "text": "Now go to the square. The Platz der Luftbrücke,",
+      "kind": "story",
+      "para": 5,
+      "part": "p06"
+    },
+    {
+      "t0": 268.05,
+      "t1": 272.85,
+      "text": "the Airlift Square, lies in front of the old Tempelhof airport building.",
+      "kind": "story",
+      "para": 5,
+      "part": "p06"
+    },
+    {
+      "t0": 273.33,
+      "t1": 278.13,
+      "text": "The first thing you see is the Luftbrückendenkmal, the airlift monument,",
+      "kind": "story",
+      "para": 5,
+      "part": "p06"
+    },
+    {
+      "t0": 278.21,
+      "t1": 282.13,
+      "text": "a reinforced concrete sculpture about 20 metres high,",
+      "kind": "story",
+      "para": 5,
+      "part": "p06"
+    },
+    {
+      "t0": 282.21,
+      "t1": 284.85,
+      "text": "in the form of a stylised bridge pillar.",
+      "kind": "story",
+      "para": 5,
+      "part": "p06"
+    },
+    {
+      "t0": 285.17,
+      "t1": 288.13,
+      "text": "Berliners have long called it the Hungerharke,",
+      "kind": "story",
+      "para": 5,
+      "part": "p06"
+    },
+    {
+      "t0": 288.21,
+      "t1": 292.53,
+      "text": "the hunger rake, a nickname that berlin.de records.",
+      "kind": "story",
+      "para": 5,
+      "part": "p06"
+    },
+    {
+      "t0": 293.17,
+      "t1": 295.65,
+      "text": "The monument stands in a garden lawn that is",
+      "kind": "story",
+      "para": 5,
+      "part": "p06"
+    },
+    {
+      "t0": 295.73,
+      "t1": 298.05,
+      "text": "listed as a monument in its own right,",
+      "kind": "story",
+      "para": 5,
+      "part": "p06"
+    },
+    {
+      "t0": 298.13,
+      "t1": 300.93,
+      "text": "between the airport building and Tempelhofer Damm.",
+      "kind": "story",
+      "para": 5,
+      "part": "p06"
+    },
+    {
+      "t0": 301.41,
+      "t1": 305.65,
+      "text": "The square has been under reconstruction since March 2026,",
+      "kind": "story",
+      "para": 5,
+      "part": "p06"
+    },
+    {
+      "t0": 305.73,
+      "t1": 309.25,
+      "text": "so check on the spot what is open before you walk over.",
+      "kind": "story",
+      "para": 5,
+      "part": "p06"
+    },
+    {
+      "t0": 309.82,
+      "t1": 312.7,
+      "text": "Tempelhof was the main airport of the airlift.",
+      "kind": "story",
+      "para": 6,
+      "part": "p07"
+    },
+    {
+      "t0": 312.78,
+      "t1": 316.7,
+      "text": "The Tempelhof airport's history page says so directly,",
+      "kind": "story",
+      "para": 6,
+      "part": "p07"
+    },
+    {
+      "t0": 316.78,
+      "t1": 319.54,
+      "text": "and places the field in the American sector.",
+      "kind": "story",
+      "para": 6,
+      "part": "p07"
+    },
+    {
+      "t0": 319.82,
+      "t1": 324.7,
+      "text": "Visit Berlin, the city's tourism portal, puts it in plainer words:",
+      "kind": "story",
+      "para": 6,
+      "part": "p07"
+    },
+    {
+      "t0": 324.78,
+      "t1": 327.58,
+      "text": "the planes landed on the Tempelhof airfield,",
+      "kind": "story",
+      "para": 6,
+      "part": "p07"
+    },
+    {
+      "t0": 327.62,
+      "t1": 331.54,
+      "text": "and the operation is known as the Luftbrücke, the air bridge.",
+      "kind": "story",
+      "para": 6,
+      "part": "p07"
+    },
+    {
+      "t0": 331.82,
+      "t1": 335.66,
+      "text": "The berlin.de page says that up to a thousand take-offs",
+      "kind": "story",
+      "para": 6,
+      "part": "p07"
+    },
+    {
+      "t0": 335.74,
+      "t1": 338.98,
+      "text": "and landings took place at Tempelhof every day.",
+      "kind": "story",
+      "para": 6,
+      "part": "p07"
+    },
+    {
+      "t0": 339.26,
+      "t1": 340.46,
+      "text": "Hold on to that figure.",
+      "kind": "story",
+      "para": 6,
+      "part": "p07"
+    },
+    {
+      "t0": 340.86,
+      "t1": 344.94,
+      "text": "It describes one airfield, and it is the reason the square",
+      "kind": "story",
+      "para": 6,
+      "part": "p07"
+    },
+    {
+      "t0": 345.1,
+      "t1": 347.74,
+      "text": "still feels like the centre of the story.",
+      "kind": "story",
+      "para": 6,
+      "part": "p07"
+    },
+    {
+      "t0": 348.3,
+      "t1": 351.1,
+      "text": "Gatow was the second big airfield.",
+      "kind": "story",
+      "para": 7,
+      "part": "p08"
+    },
+    {
+      "t0": 351.18,
+      "t1": 356.22,
+      "text": "It had been built in 1935 and 1936 to train pilots and",
+      "kind": "story",
+      "para": 7,
+      "part": "p08"
+    },
+    {
+      "t0": 356.3,
+      "t1": 359.82,
+      "text": "officers for the Luftwaffe, the German air force.",
+      "kind": "story",
+      "para": 7,
+      "part": "p08"
+    },
+    {
+      "t0": 359.9,
+      "t1": 365.26,
+      "text": "The German air force remained there until 26 April 1945, and",
+      "kind": "story",
+      "para": 7,
+      "part": "p08"
+    },
+    {
+      "t0": 365.3,
+      "t1": 370.62,
+      "text": "the Royal Air Force took the airfield over on 2 July 1945.",
+      "kind": "story",
+      "para": 7,
+      "part": "p08"
+    },
+    {
+      "t0": 370.86,
+      "t1": 374.78,
+      "text": "According to the Landesdenkmalamt, Berlin's monument office,",
+      "kind": "story",
+      "para": 7,
+      "part": "p08"
+    },
+    {
+      "t0": 374.86,
+      "t1": 378.22,
+      "text": "Gatow played an outstanding role in the blockade,",
+      "kind": "story",
+      "para": 7,
+      "part": "p08"
+    },
+    {
+      "t0": 378.3,
+      "t1": 381.02,
+      "text": "and only Tempelhof was more important.",
+      "kind": "story",
+      "para": 7,
+      "part": "p08"
+    },
+    {
+      "t0": 381.34,
+      "t1": 384.86,
+      "text": "The same page gives a figure that is hard to forget:",
+      "kind": "story",
+      "para": 7,
+      "part": "p08"
+    },
+    {
+      "t0": 385.06,
+      "t1": 389.58,
+      "text": "about 92,000 tonnes were flown in during the blockade.",
+      "kind": "story",
+      "para": 7,
+      "part": "p08"
+    },
+    {
+      "t0": 390.22,
+      "t1": 393.58,
+      "text": "Fuel was among that cargo, and once it had landed,",
+      "kind": "story",
+      "para": 7,
+      "part": "p08"
+    },
+    {
+      "t0": 393.66,
+      "t1": 395.02,
+      "text": "it had a second journey.",
+      "kind": "story",
+      "para": 7,
+      "part": "p08"
+    },
+    {
+      "t0": 395.5,
+      "t1": 398.94,
+      "text": "A pipeline pumped it from the airfield to the British sailing",
+      "kind": "story",
+      "para": 7,
+      "part": "p08"
+    },
+    {
+      "t0": 399.02,
+      "t1": 401.98,
+      "text": "club on the Havel, where tankers took it on.",
+      "kind": "story",
+      "para": 7,
+      "part": "p08"
+    },
+    {
+      "t0": 402.53,
+      "t1": 407.49,
+      "text": "The base changed hands again. The Bundeswehr, the German armed forces,",
+      "kind": "story",
+      "para": 8,
+      "part": "p09"
+    },
+    {
+      "t0": 407.61,
+      "t1": 412.37,
+      "text": "took over in September 1994, and the Luftwaffe museum,",
+      "kind": "story",
+      "para": 8,
+      "part": "p09"
+    },
+    {
+      "t0": 412.49,
+      "t1": 415.81,
+      "text": "now called the Military History Museum of the Bundeswehr,",
+      "kind": "story",
+      "para": 8,
+      "part": "p09"
+    },
+    {
+      "t0": 415.89,
+      "t1": 420.77,
+      "text": "has occupied the tower and the adjoining hangars since 1995.",
+      "kind": "story",
+      "para": 8,
+      "part": "p09"
+    },
+    {
+      "t0": 420.85,
+      "t1": 422.73,
+      "text": "So the place you visit today is a",
+      "kind": "story",
+      "para": 8,
+      "part": "p09"
+    },
+    {
+      "t0": 422.77,
+      "t1": 425.37,
+      "text": "museum on an old airfield.",
+      "kind": "story",
+      "para": 8,
+      "part": "p09"
+    },
+    {
+      "t0": 425.65,
+      "t1": 428.29,
+      "text": "Look at the tower from outside before you go in.",
+      "kind": "story",
+      "para": 8,
+      "part": "p09"
+    },
+    {
+      "t0": 428.69,
+      "t1": 430.61,
+      "text": "The museum keeps its own hours,",
+      "kind": "story",
+      "para": 8,
+      "part": "p09"
+    },
+    {
+      "t0": 430.69,
+      "t1": 433.73,
+      "text": "so check them before you travel, because they can change.",
+      "kind": "story",
+      "para": 8,
+      "part": "p09"
+    },
+    {
+      "t0": 434.29,
+      "t1": 435.81,
+      "text": "The tower and the hangars are the",
+      "kind": "story",
+      "para": 8,
+      "part": "p09"
+    },
+    {
+      "t0": 435.93,
+      "t1": 439.57,
+      "text": "buildings the museum has used since 1995.",
+      "kind": "story",
+      "para": 8,
+      "part": "p09"
+    },
+    {
+      "t0": 439.65,
+      "t1": 442.61,
+      "text": "The monument office files Gatow under its list of",
+      "kind": "story",
+      "para": 8,
+      "part": "p09"
+    },
+    {
+      "t0": 442.73,
+      "t1": 446.05,
+      "text": "Allied sites in Berlin, under the British heading.",
+      "kind": "story",
+      "para": 8,
+      "part": "p09"
+    },
+    {
+      "t0": 446.59,
+      "t1": 449.79,
+      "text": "The third airfield was built in the middle of the crisis.",
+      "kind": "story",
+      "para": 9,
+      "part": "p10"
+    },
+    {
+      "t0": 450.27,
+      "t1": 453.15,
+      "text": "Slightly more than a month after the blockade began,",
+      "kind": "story",
+      "para": 9,
+      "part": "p10"
+    },
+    {
+      "t0": 453.23,
+      "t1": 457.47,
+      "text": "the French occupation forces agreed to a new airport in their sector,",
+      "kind": "story",
+      "para": 9,
+      "part": "p10"
+    },
+    {
+      "t0": 457.71,
+      "t1": 459.95,
+      "text": "according to the Berlin Airport's history page.",
+      "kind": "story",
+      "para": 9,
+      "part": "p10"
+    },
+    {
+      "t0": 460.59,
+      "t1": 463.87,
+      "text": "The same page says the airport was built in a record time",
+      "kind": "story",
+      "para": 9,
+      "part": "p10"
+    },
+    {
+      "t0": 463.95,
+      "t1": 467.71,
+      "text": "of only 90 days, on a former military training site.",
+      "kind": "story",
+      "para": 9,
+      "part": "p10"
+    },
+    {
+      "t0": 468.35,
+      "t1": 472.71,
+      "text": "The first aircraft landed there on 5 November 1948.",
+      "kind": "story",
+      "para": 9,
+      "part": "p10"
+    },
+    {
+      "t0": 473.07,
+      "t1": 476.59,
+      "text": "The Tempelhof airport's history page gives the opening as 1 December",
+      "kind": "story",
+      "para": 9,
+      "part": "p10"
+    },
+    {
+      "t0": 476.75,
+      "t1": 482.11,
+      "text": "1948 and ranks Tegel third among the airports of the airlift,",
+      "kind": "story",
+      "para": 9,
+      "part": "p10"
+    },
+    {
+      "t0": 482.27,
+      "t1": 484.35,
+      "text": "after Tempelhof and Gatow.",
+      "kind": "story",
+      "para": 9,
+      "part": "p10"
+    },
+    {
+      "t0": 484.75,
+      "t1": 488.43,
+      "text": "Could three airfields carry a city of about two million?",
+      "kind": "story",
+      "para": 9,
+      "part": "p10"
+    },
+    {
+      "t0": 488.99,
+      "t1": 491.79,
+      "text": "The answer depends on which count you trust.",
+      "kind": "story",
+      "para": 9,
+      "part": "p10"
+    },
+    {
+      "t0": 492.96,
+      "t1": 496.72,
+      "text": "Quick break. I'm Yusuf, and this is Walk of Berlin.",
+      "kind": "spot",
+      "para": 10,
+      "part": "[[SPOT-A]]"
+    },
+    {
+      "t0": 497.12,
+      "t1": 499.04,
+      "text": "If you enjoy stories like this one,",
+      "kind": "spot",
+      "para": 10,
+      "part": "[[SPOT-A]]"
+    },
+    {
+      "t0": 499.12,
+      "t1": 500.48,
+      "text": "come and walk one with me.",
+      "kind": "spot",
+      "para": 10,
+      "part": "[[SPOT-A]]"
+    },
+    {
+      "t0": 500.72,
+      "t1": 502.76,
+      "text": "My walk, Berlin Then and Now,",
+      "kind": "spot",
+      "para": 10,
+      "part": "[[SPOT-A]]"
+    },
+    {
+      "t0": 502.88,
+      "t1": 506.48,
+      "text": "goes from the World Clock on Alexanderplatz to Hackescher Markt,",
+      "kind": "spot",
+      "para": 10,
+      "part": "[[SPOT-A]]"
+    },
+    {
+      "t0": 506.56,
+      "t1": 508.96,
+      "text": "with an archive photo at every stop.",
+      "kind": "spot",
+      "para": 10,
+      "part": "[[SPOT-A]]"
+    },
+    {
+      "t0": 509.0,
+      "t1": 511.6,
+      "text": "You'll find it at walk of berlin dot com.",
+      "kind": "spot",
+      "para": 10,
+      "part": "[[SPOT-A]]",
+      "display": "You'll find it at walkofberlin.com."
+    },
+    {
+      "t0": 512.76,
+      "t1": 517.0,
+      "text": "Now the sweets, and the story of one pilot.",
+      "kind": "story",
+      "para": 11,
+      "part": "p11"
+    },
+    {
+      "t0": 517.48,
+      "t1": 520.84,
+      "text": "Gail Halvorsen was an American pilot on the airlift.",
+      "kind": "story",
+      "para": 11,
+      "part": "p11"
+    },
+    {
+      "t0": 521.4,
+      "t1": 525.72,
+      "text": "The Berlin tourism portal tells his story in a few short steps.",
+      "kind": "story",
+      "para": 11,
+      "part": "p11"
+    },
+    {
+      "t0": 526.28,
+      "t1": 530.6,
+      "text": "According to Visit Berlin, children came running up to him one day,",
+      "kind": "story",
+      "para": 11,
+      "part": "p11"
+    },
+    {
+      "t0": 530.64,
+      "t1": 532.28,
+      "text": "and he gave them the two sticks of",
+      "kind": "story",
+      "para": 11,
+      "part": "p11"
+    },
+    {
+      "t0": 532.44,
+      "t1": 534.04,
+      "text": "gum he had in his pockets.",
+      "kind": "story",
+      "para": 11,
+      "part": "p11"
+    },
+    {
+      "t0": 534.68,
+      "t1": 536.36,
+      "text": "There were not enough to go round,",
+      "kind": "story",
+      "para": 11,
+      "part": "p11"
+    },
+    {
+      "t0": 536.48,
+      "t1": 539.0,
+      "text": "so he promised to drop chocolate and gum from",
+      "kind": "story",
+      "para": 11,
+      "part": "p11"
+    },
+    {
+      "t0": 539.12,
+      "t1": 541.32,
+      "text": "his plane the next time he flew over.",
+      "kind": "story",
+      "para": 11,
+      "part": "p11"
+    },
+    {
+      "t0": 542.12,
+      "t1": 544.6,
+      "text": "That is the whole of the first scene.",
+      "kind": "story",
+      "para": 11,
+      "part": "p11"
+    },
+    {
+      "t0": 544.92,
+      "t1": 549.88,
+      "text": "A United States law, Public Law 117-134,",
+      "kind": "story",
+      "para": 11,
+      "part": "p11"
+    },
+    {
+      "t0": 549.92,
+      "t1": 553.88,
+      "text": "tells the same story in its findings: two sticks of gum,",
+      "kind": "story",
+      "para": 11,
+      "part": "p11"
+    },
+    {
+      "t0": 553.92,
+      "t1": 556.92,
+      "text": "and a promise to drop more candy from his plane.",
+      "kind": "story",
+      "para": 11,
+      "part": "p11"
+    },
+    {
+      "t0": 557.48,
+      "t1": 559.16,
+      "text": "The promise had to be kept,",
+      "kind": "story",
+      "para": 12,
+      "part": "p12"
+    },
+    {
+      "t0": 559.48,
+      "t1": 561.96,
+      "text": "and the method is part of the story.",
+      "kind": "story",
+      "para": 12,
+      "part": "p12"
+    },
+    {
+      "t0": 562.28,
+      "t1": 565.4,
+      "text": "The Air Force Reserve's account says he combined his candy",
+      "kind": "story",
+      "para": 12,
+      "part": "p12"
+    },
+    {
+      "t0": 565.48,
+      "t1": 568.52,
+      "text": "rations with those of his co-pilot and engineer,",
+      "kind": "story",
+      "para": 12,
+      "part": "p12"
+    },
+    {
+      "t0": 568.56,
+      "t1": 571.48,
+      "text": "and made parachutes out of handkerchiefs and string.",
+      "kind": "story",
+      "para": 12,
+      "part": "p12"
+    },
+    {
+      "t0": 571.96,
+      "t1": 576.04,
+      "text": "An Air Force news article on his death says he attached handkerchief",
+      "kind": "story",
+      "para": 12,
+      "part": "p12"
+    },
+    {
+      "t0": 576.12,
+      "t1": 580.08,
+      "text": "parachutes to chocolate bars and dropped them from his aircraft.",
+      "kind": "story",
+      "para": 12,
+      "part": "p12"
+    },
+    {
+      "t0": 580.44,
+      "t1": 582.68,
+      "text": "A handkerchief is an ordinary thing,",
+      "kind": "story",
+      "para": 12,
+      "part": "p12"
+    },
+    {
+      "t0": 582.76,
+      "t1": 585.08,
+      "text": "which is why the detail is easy to picture.",
+      "kind": "story",
+      "para": 12,
+      "part": "p12"
+    },
+    {
+      "t0": 585.72,
+      "t1": 588.52,
+      "text": "Think about what it meant for a child on the ground to",
+      "kind": "story",
+      "para": 12,
+      "part": "p12"
+    },
+    {
+      "t0": 588.6,
+      "t1": 591.84,
+      "text": "watch a small parcel come down from an aircraft.",
+      "kind": "story",
+      "para": 12,
+      "part": "p12"
+    },
+    {
+      "t0": 592.12,
+      "t1": 594.2,
+      "text": "It started with one pilot,",
+      "kind": "story",
+      "para": 12,
+      "part": "p12"
+    },
+    {
+      "t0": 594.28,
+      "t1": 597.56,
+      "text": "one promise and a few sweets from his crewmates.",
+      "kind": "story",
+      "para": 12,
+      "part": "p12"
+    },
+    {
+      "t0": 598.13,
+      "t1": 601.93,
+      "text": "The children also needed to know which plane was his.",
+      "kind": "story",
+      "para": 13,
+      "part": "p13"
+    },
+    {
+      "t0": 602.21,
+      "t1": 603.97,
+      "text": "On the approach to Tempelhof,",
+      "kind": "story",
+      "para": 13,
+      "part": "p13"
+    },
+    {
+      "t0": 604.09,
+      "t1": 607.97,
+      "text": "Halvorsen rocked the wings of his aircraft from side to side,",
+      "kind": "story",
+      "para": 13,
+      "part": "p13"
+    },
+    {
+      "t0": 608.05,
+      "t1": 610.25,
+      "text": "so that they could pick it out from the others.",
+      "kind": "story",
+      "para": 13,
+      "part": "p13"
+    },
+    {
+      "t0": 610.53,
+      "t1": 615.73,
+      "text": "The children gave him a nickname: Onkel Wackelflügel, Uncle Wiggly Wings.",
+      "kind": "story",
+      "para": 13,
+      "part": "p13"
+    },
+    {
+      "t0": 616.29,
+      "t1": 620.05,
+      "text": "Visit Berlin describes the wing-rocking on the landing approach as",
+      "kind": "story",
+      "para": 13,
+      "part": "p13"
+    },
+    {
+      "t0": 620.13,
+      "t1": 622.77,
+      "text": "the origin of the name, and an Air Force",
+      "kind": "story",
+      "para": 13,
+      "part": "p13"
+    },
+    {
+      "t0": 623.01,
+      "t1": 626.37,
+      "text": "article gives the same wing-rocking and the same nickname.",
+      "kind": "story",
+      "para": 13,
+      "part": "p13"
+    },
+    {
+      "t0": 626.85,
+      "t1": 629.81,
+      "text": "The same law lists other names the children used,",
+      "kind": "story",
+      "para": 13,
+      "part": "p13"
+    },
+    {
+      "t0": 630.09,
+      "t1": 633.73,
+      "text": "including The Chocolate Flier and The Gum Drop Kid.",
+      "kind": "story",
+      "para": 13,
+      "part": "p13"
+    },
+    {
+      "t0": 634.28,
+      "t1": 637.72,
+      "text": "The airlift also left physical objects in Berlin,",
+      "kind": "story",
+      "para": 14,
+      "part": "p14"
+    },
+    {
+      "t0": 637.84,
+      "t1": 639.84,
+      "text": "and one of them you can walk around.",
+      "kind": "story",
+      "para": 14,
+      "part": "p14"
+    },
+    {
+      "t0": 640.12,
+      "t1": 642.76,
+      "text": "The Allied Museum has a Hastings,",
+      "kind": "story",
+      "para": 14,
+      "part": "p14"
+    },
+    {
+      "t0": 642.84,
+      "t1": 647.64,
+      "text": "the British transport aircraft with the registration TG 503.",
+      "kind": "story",
+      "para": 14,
+      "part": "p14"
+    },
+    {
+      "t0": 648.28,
+      "t1": 652.04,
+      "text": "The museum says the aircraft came to it in 1997,",
+      "kind": "story",
+      "para": 14,
+      "part": "p14"
+    },
+    {
+      "t0": 652.08,
+      "t1": 655.32,
+      "text": "when the British government and the Royal Air Force donated it,",
+      "kind": "story",
+      "para": 14,
+      "part": "p14"
+    },
+    {
+      "t0": 655.4,
+      "t1": 658.84,
+      "text": "and that it recalls the British contribution to the airlift.",
+      "kind": "story",
+      "para": 14,
+      "part": "p14"
+    },
+    {
+      "t0": 659.16,
+      "t1": 661.4,
+      "text": "The Hastings was not ready for service when",
+      "kind": "story",
+      "para": 14,
+      "part": "p14"
+    },
+    {
+      "t0": 661.48,
+      "t1": 665.4,
+      "text": "the airlift began on 26 June 1948.",
+      "kind": "story",
+      "para": 14,
+      "part": "p14"
+    },
+    {
+      "t0": 665.48,
+      "t1": 671.08,
+      "text": "Its first cargo flights, mainly carrying coal, came in November 1948.",
+      "kind": "story",
+      "para": 14,
+      "part": "p14"
+    },
+    {
+      "t0": 671.72,
+      "t1": 674.6,
+      "text": "Coal is less romantic than chocolate,",
+      "kind": "story",
+      "para": 14,
+      "part": "p14"
+    },
+    {
+      "t0": 674.68,
+      "t1": 677.24,
+      "text": "and the story of the airlift needs both.",
+      "kind": "story",
+      "para": 14,
+      "part": "p14"
+    },
+    {
+      "t0": 677.8,
+      "t1": 681.72,
+      "text": "Inside the Allied Museum, the Berlin Airlift is part of a new",
+      "kind": "story",
+      "para": 15,
+      "part": "p15"
+    },
+    {
+      "t0": 681.8,
+      "t1": 686.6,
+      "text": "section on the years from 1945 to 1949.",
+      "kind": "story",
+      "para": 15,
+      "part": "p15"
+    },
+    {
+      "t0": 686.68,
+      "t1": 691.96,
+      "text": "The museum says over 100 photographs, documents and objects tell the",
+      "kind": "story",
+      "para": 15,
+      "part": "p15"
+    },
+    {
+      "t0": 692.04,
+      "t1": 695.32,
+      "text": "story of Berlin and Germany in those years,",
+      "kind": "story",
+      "para": 15,
+      "part": "p15"
+    },
+    {
+      "t0": 695.4,
+      "t1": 697.0,
+      "text": "and the airlift is among them.",
+      "kind": "story",
+      "para": 15,
+      "part": "p15"
+    },
+    {
+      "t0": 697.88,
+      "t1": 701.96,
+      "text": "Outside, among the large objects, is the Hastings itself.",
+      "kind": "story",
+      "para": 15,
+      "part": "p15"
+    },
+    {
+      "t0": 702.6,
+      "t1": 708.68,
+      "text": "The Deutsches Historisches Museum says Berliners called the airlift planes Rosinenbomber,",
+      "kind": "story",
+      "para": 15,
+      "part": "p15"
+    },
+    {
+      "t0": 708.76,
+      "t1": 713.48,
+      "text": "raisin bombers. Stand by the aircraft outside, and then try to",
+      "kind": "story",
+      "para": 15,
+      "part": "p15"
+    },
+    {
+      "t0": 713.68,
+      "t1": 716.92,
+      "text": "picture the sweets falling from an aircraft like it.",
+      "kind": "story",
+      "para": 15,
+      "part": "p15"
+    },
+    {
+      "t0": 717.48,
+      "t1": 722.2,
+      "text": "By the spring of 1949 the airlift had a record day,",
+      "kind": "story",
+      "para": 16,
+      "part": "p16"
+    },
+    {
+      "t0": 722.24,
+      "t1": 725.88,
+      "text": "and the Tempelhof airport's history page gives it a name:",
+      "kind": "story",
+      "para": 16,
+      "part": "p16"
+    },
+    {
+      "t0": 725.92,
+      "t1": 730.44,
+      "text": "the Easter Parade. It dates the record to 16 April 1949,",
+      "kind": "story",
+      "para": 16,
+      "part": "p16"
+    },
+    {
+      "t0": 730.52,
+      "t1": 734.68,
+      "text": "and the Allied Museum gives the same date.",
+      "kind": "story",
+      "para": 16,
+      "part": "p16"
+    },
+    {
+      "t0": 735.0,
+      "t1": 738.12,
+      "text": "Within 24 hours, the airport's page says,",
+      "kind": "story",
+      "para": 16,
+      "part": "p16"
+    },
+    {
+      "t0": 738.52,
+      "t1": 746.08,
+      "text": "12,940 tons of freight came in on 1,398 flights.",
+      "kind": "story",
+      "para": 16,
+      "part": "p16"
+    },
+    {
+      "t0": 746.44,
+      "t1": 749.72,
+      "text": "Easter Sunday that year fell on 17 April,",
+      "kind": "story",
+      "para": 16,
+      "part": "p16"
+    },
+    {
+      "t0": 749.8,
+      "t1": 753.12,
+      "text": "so the record was set on the Saturday before the holiday.",
+      "kind": "story",
+      "para": 16,
+      "part": "p16"
+    },
+    {
+      "t0": 753.48,
+      "t1": 756.24,
+      "text": "A record day is also a test.",
+      "kind": "story",
+      "para": 16,
+      "part": "p16"
+    },
+    {
+      "t0": 756.52,
+      "t1": 760.44,
+      "text": "This one came less than four weeks before the blockade was lifted,",
+      "kind": "story",
+      "para": 16,
+      "part": "p16"
+    },
+    {
+      "t0": 760.48,
+      "t1": 763.96,
+      "text": "and it showed what the airlift could do at full stretch.",
+      "kind": "story",
+      "para": 16,
+      "part": "p16"
+    },
+    {
+      "t0": 764.52,
+      "t1": 768.2,
+      "text": "Now the totals, which is where the sources part company.",
+      "kind": "story",
+      "para": 17,
+      "part": "p17"
+    },
+    {
+      "t0": 768.68,
+      "t1": 774.6,
+      "text": "The Tempelhof airport's history page says that between 26 June 1948 and",
+      "kind": "story",
+      "para": 17,
+      "part": "p17"
+    },
+    {
+      "t0": 774.88,
+      "t1": 780.76,
+      "text": "6 October 1949 there were almost 278,000 flights,",
+      "kind": "story",
+      "para": 17,
+      "part": "p17"
+    },
+    {
+      "t0": 780.84,
+      "t1": 783.96,
+      "text": "carrying more than 2.3 million tons.",
+      "kind": "story",
+      "para": 17,
+      "part": "p17"
+    },
+    {
+      "t0": 784.6,
+      "t1": 791.8,
+      "text": "The taz gives 277,560 flights and about 2.1 million tonnes,",
+      "kind": "story",
+      "para": 17,
+      "part": "p17"
+    },
+    {
+      "t0": 791.88,
+      "t1": 797.24,
+      "text": "counted up to September 1949. The Deutsches Historisches Museum says",
+      "kind": "story",
+      "para": 17,
+      "part": "p17"
+    },
+    {
+      "t0": 797.32,
+      "t1": 802.44,
+      "text": "almost 200,000 flights brought around 1.5 million tonnes,",
+      "kind": "story",
+      "para": 17,
+      "part": "p17"
+    },
+    {
+      "t0": 802.52,
+      "t1": 805.32,
+      "text": "and it does not say which period it counts.",
+      "kind": "story",
+      "para": 17,
+      "part": "p17"
+    },
+    {
+      "t0": 805.64,
+      "t1": 808.2,
+      "text": "The gap is too large to be a rounding error.",
+      "kind": "story",
+      "para": 17,
+      "part": "p17"
+    },
+    {
+      "t0": 808.68,
+      "t1": 810.44,
+      "text": "This episode gives a range,",
+      "kind": "story",
+      "para": 17,
+      "part": "p17"
+    },
+    {
+      "t0": 810.56,
+      "t1": 812.92,
+      "text": "and it names the source for each figure.",
+      "kind": "story",
+      "para": 17,
+      "part": "p17"
+    },
+    {
+      "t0": 813.48,
+      "t1": 817.88,
+      "text": "Whatever the total, the rhythm is what the numbers help you picture.",
+      "kind": "story",
+      "para": 18,
+      "part": "p18"
+    },
+    {
+      "t0": 817.96,
+      "t1": 820.36,
+      "text": "The record-day figures are the most vivid,",
+      "kind": "story",
+      "para": 18,
+      "part": "p18"
+    },
+    {
+      "t0": 820.48,
+      "t1": 824.36,
+      "text": "so be precise about which source each one belongs to.",
+      "kind": "story",
+      "para": 18,
+      "part": "p18"
+    },
+    {
+      "t0": 824.44,
+      "t1": 828.6,
+      "text": "The DHM says that every two to three minutes a transport plane",
+      "kind": "story",
+      "para": 18,
+      "part": "p18"
+    },
+    {
+      "t0": 828.68,
+      "t1": 832.04,
+      "text": "landed at one of the three West Berlin airports.",
+      "kind": "story",
+      "para": 18,
+      "part": "p18"
+    },
+    {
+      "t0": 832.08,
+      "t1": 836.92,
+      "text": "The Tempelhof airport's page gives one landing about every 63 seconds on",
+      "kind": "story",
+      "para": 18,
+      "part": "p18"
+    },
+    {
+      "t0": 836.96,
+      "t1": 841.0,
+      "text": "the record day, and the Allied Museum says 62.",
+      "kind": "story",
+      "para": 18,
+      "part": "p18"
+    },
+    {
+      "t0": 841.08,
+      "t1": 845.32,
+      "text": "All three figures are attributed, and none is the one true number.",
+      "kind": "story",
+      "para": 18,
+      "part": "p18"
+    },
+    {
+      "t0": 845.96,
+      "t1": 849.72,
+      "text": "Picture the Tempelhof apron at that pace, with one plane coming",
+      "kind": "story",
+      "para": 18,
+      "part": "p18"
+    },
+    {
+      "t0": 849.8,
+      "t1": 853.88,
+      "text": "in roughly every minute and the next already on the approach.",
+      "kind": "story",
+      "para": 18,
+      "part": "p18"
+    },
+    {
+      "t0": 854.43,
+      "t1": 856.71,
+      "text": "Compare that with the first day.",
+      "kind": "story",
+      "para": 19,
+      "part": "p19"
+    },
+    {
+      "t0": 856.99,
+      "t1": 860.27,
+      "text": "On the first day, the Berlin newspaper Telegraf,",
+      "kind": "story",
+      "para": 19,
+      "part": "p19"
+    },
+    {
+      "t0": 860.39,
+      "t1": 863.23,
+      "text": "which had links to the SPD, reported,",
+      "kind": "story",
+      "para": 19,
+      "part": "p19"
+    },
+    {
+      "t0": 863.35,
+      "t1": 868.35,
+      "text": "as the Friedrich-Ebert-Stiftung's archive records, that an American transport plane",
+      "kind": "story",
+      "para": 19,
+      "part": "p19"
+    },
+    {
+      "t0": 868.43,
+      "t1": 871.79,
+      "text": "landed with food and supplies every eight minutes.",
+      "kind": "story",
+      "para": 19,
+      "part": "p19"
+    },
+    {
+      "t0": 872.43,
+      "t1": 877.55,
+      "text": "The Telegraf figure and the Tempelhof airport's figure measure different things,",
+      "kind": "story",
+      "para": 19,
+      "part": "p19"
+    },
+    {
+      "t0": 877.63,
+      "t1": 881.07,
+      "text": "one on the first day and one on a record day,",
+      "kind": "story",
+      "para": 19,
+      "part": "p19"
+    },
+    {
+      "t0": 881.15,
+      "t1": 884.11,
+      "text": "so they are not a simple before and after table.",
+      "kind": "story",
+      "para": 19,
+      "part": "p19"
+    },
+    {
+      "t0": 884.75,
+      "t1": 887.55,
+      "text": "They do show how far the operation had grown",
+      "kind": "story",
+      "para": 19,
+      "part": "p19"
+    },
+    {
+      "t0": 887.67,
+      "t1": 891.07,
+      "text": "in under a year. Read that sentence slowly.",
+      "kind": "story",
+      "para": 19,
+      "part": "p19"
+    },
+    {
+      "t0": 891.55,
+      "t1": 894.59,
+      "text": "It is a newspaper's view of the first day,",
+      "kind": "story",
+      "para": 19,
+      "part": "p19"
+    },
+    {
+      "t0": 894.67,
+      "t1": 898.59,
+      "text": "not an official record, and the pace it describes is far",
+      "kind": "story",
+      "para": 19,
+      "part": "p19"
+    },
+    {
+      "t0": 898.75,
+      "t1": 900.99,
+      "text": "slower than the one that came at Easter.",
+      "kind": "story",
+      "para": 19,
+      "part": "p19"
+    },
+    {
+      "t0": 901.56,
+      "t1": 904.44,
+      "text": "The city's leaders knew what was at stake.",
+      "kind": "story",
+      "para": 20,
+      "part": "p20"
+    },
+    {
+      "t0": 904.68,
+      "t1": 909.32,
+      "text": "The district's page for the monument quotes Ernst Reuter from his 1948",
+      "kind": "story",
+      "para": 20,
+      "part": "p20"
+    },
+    {
+      "t0": 909.4,
+      "t1": 913.08,
+      "text": "appeal before the Reichstag: \"Look at this city,",
+      "kind": "story",
+      "para": 20,
+      "part": "p20"
+    },
+    {
+      "t0": 913.16,
+      "t1": 917.32,
+      "text": "and recognise that you must not abandon this city and this people,",
+      "kind": "story",
+      "para": 20,
+      "part": "p20"
+    },
+    {
+      "t0": 917.64,
+      "t1": 920.6,
+      "text": "and that you cannot.\" In German, roughly.",
+      "kind": "story",
+      "para": 20,
+      "part": "p20"
+    },
+    {
+      "t0": 921.24,
+      "t1": 924.68,
+      "text": "The sentence is short, and it carries the whole argument.",
+      "kind": "story",
+      "para": 20,
+      "part": "p20"
+    },
+    {
+      "t0": 925.16,
+      "t1": 927.8,
+      "text": "The quotation comes from the district's page,",
+      "kind": "story",
+      "para": 20,
+      "part": "p20"
+    },
+    {
+      "t0": 927.88,
+      "t1": 931.76,
+      "text": "and this episode gives it in English, translated from the German.",
+      "kind": "story",
+      "para": 20,
+      "part": "p20"
+    },
+    {
+      "t0": 932.12,
+      "t1": 935.96,
+      "text": "Reuter was asking people to hold on to Berlin, and the",
+      "kind": "story",
+      "para": 20,
+      "part": "p20"
+    },
+    {
+      "t0": 936.04,
+      "t1": 939.52,
+      "text": "airlift was the means by which the city was kept fed.",
+      "kind": "story",
+      "para": 20,
+      "part": "p20"
+    },
+    {
+      "t0": 939.88,
+      "t1": 942.28,
+      "text": "Who paid for those long days?",
+      "kind": "story",
+      "para": 20,
+      "part": "p20"
+    },
+    {
+      "t0": 943.43,
+      "t1": 946.95,
+      "text": "Yusuf again, one more thing before the story goes on.",
+      "kind": "spot",
+      "para": 21,
+      "part": "[[SPOT-B]]"
+    },
+    {
+      "t0": 947.19,
+      "t1": 949.03,
+      "text": "If you can't join me in person,",
+      "kind": "spot",
+      "para": 21,
+      "part": "[[SPOT-B]]"
+    },
+    {
+      "t0": 949.15,
+      "t1": 951.59,
+      "text": "my audio walks take you along the Berlin Wall at",
+      "kind": "spot",
+      "para": 21,
+      "part": "[[SPOT-B]]"
+    },
+    {
+      "t0": 951.67,
+      "t1": 954.87,
+      "text": "Bernauer Straße and through the medieval old town,",
+      "kind": "spot",
+      "para": 21,
+      "part": "[[SPOT-B]]"
+    },
+    {
+      "t0": 954.95,
+      "t1": 957.11,
+      "text": "at your own pace, on your phone.",
+      "kind": "spot",
+      "para": 21,
+      "part": "[[SPOT-B]]"
+    },
+    {
+      "t0": 957.15,
+      "t1": 959.35,
+      "text": "They're at walk of berlin dot com.",
+      "kind": "spot",
+      "para": 21,
+      "part": "[[SPOT-B]]",
+      "display": "They're at walkofberlin.com."
+    },
+    {
+      "t0": 960.51,
+      "t1": 963.39,
+      "text": "The memorial answers that question with a number.",
+      "kind": "story",
+      "para": 22,
+      "part": "p21"
+    },
+    {
+      "t0": 963.95,
+      "t1": 970.11,
+      "text": "The berlin.de page for the monument says that 39 British, 33 Americans",
+      "kind": "story",
+      "para": 22,
+      "part": "p21"
+    },
+    {
+      "t0": 970.43,
+      "t1": 975.31,
+      "text": "and 5 German workers lost their lives in this demanding operation.",
+      "kind": "story",
+      "para": 22,
+      "part": "p21"
+    },
+    {
+      "t0": 975.63,
+      "t1": 979.63,
+      "text": "That makes 77 people, in the memorial's own count.",
+      "kind": "story",
+      "para": 22,
+      "part": "p21"
+    },
+    {
+      "t0": 979.95,
+      "t1": 983.23,
+      "text": "The number is the memorial's own, and it is one of the",
+      "kind": "story",
+      "para": 22,
+      "part": "p21"
+    },
+    {
+      "t0": 983.31,
+      "t1": 987.51,
+      "text": "few figures in this episode that comes from the monument's own page.",
+      "kind": "story",
+      "para": 22,
+      "part": "p21"
+    },
+    {
+      "t0": 987.79,
+      "t1": 991.63,
+      "text": "The five German workers matter, because they were not pilots,",
+      "kind": "story",
+      "para": 22,
+      "part": "p21"
+    },
+    {
+      "t0": 991.67,
+      "t1": 993.95,
+      "text": "and the count does not leave them out.",
+      "kind": "story",
+      "para": 22,
+      "part": "p21"
+    },
+    {
+      "t0": 994.27,
+      "t1": 998.03,
+      "text": "A bronze band at the base of the monument commemorates the victims.",
+      "kind": "story",
+      "para": 22,
+      "part": "p21"
+    },
+    {
+      "t0": 998.43,
+      "t1": 1001.07,
+      "text": "The page does not quote the band's wording,",
+      "kind": "story",
+      "para": 22,
+      "part": "p21"
+    },
+    {
+      "t0": 1001.15,
+      "t1": 1003.79,
+      "text": "so this episode does not quote it either.",
+      "kind": "story",
+      "para": 22,
+      "part": "p21"
+    },
+    {
+      "t0": 1004.35,
+      "t1": 1008.75,
+      "text": "Other sources count differently, and the differences are worth hearing.",
+      "kind": "story",
+      "para": 23,
+      "part": "p22"
+    },
+    {
+      "t0": 1009.23,
+      "t1": 1014.43,
+      "text": "The Tempelhof airport's history page says that 77 people had been involved",
+      "kind": "story",
+      "para": 23,
+      "part": "p22"
+    },
+    {
+      "t0": 1014.47,
+      "t1": 1016.99,
+      "text": "in accidents by the end of the airlift:",
+      "kind": "story",
+      "para": 23,
+      "part": "p22"
+    },
+    {
+      "t0": 1017.07,
+      "t1": 1021.31,
+      "text": "41 British, 31 Americans and 5 Berliners.",
+      "kind": "story",
+      "para": 23,
+      "part": "p22"
+    },
+    {
+      "t0": 1022.03,
+      "t1": 1024.99,
+      "text": "It does not say how many of those were killed,",
+      "kind": "story",
+      "para": 23,
+      "part": "p22"
+    },
+    {
+      "t0": 1025.07,
+      "t1": 1028.71,
+      "text": "so it cannot be set against the memorial's count of deaths.",
+      "kind": "story",
+      "para": 23,
+      "part": "p22"
+    },
+    {
+      "t0": 1029.15,
+      "t1": 1033.03,
+      "text": "On the district's own page, the historian Andreas Etges,",
+      "kind": "story",
+      "para": 23,
+      "part": "p22"
+    },
+    {
+      "t0": 1033.07,
+      "t1": 1037.79,
+      "text": "of Munich University, counts 78 people who lost their lives.",
+      "kind": "story",
+      "para": 23,
+      "part": "p22"
+    },
+    {
+      "t0": 1038.43,
+      "t1": 1042.67,
+      "text": "This episode uses the memorial's own figures, 39,",
+      "kind": "story",
+      "para": 23,
+      "part": "p22"
+    },
+    {
+      "t0": 1042.71,
+      "t1": 1048.43,
+      "text": "33 and 5, and it treats the other totals as attributed alternatives.",
+      "kind": "story",
+      "para": 23,
+      "part": "p22"
+    },
+    {
+      "t0": 1048.99,
+      "t1": 1051.07,
+      "text": "According to the district's page,",
+      "kind": "story",
+      "para": 24,
+      "part": "p23"
+    },
+    {
+      "t0": 1051.11,
+      "t1": 1053.79,
+      "text": "the memorial was unveiled on 10 July 1951,",
+      "kind": "story",
+      "para": 24,
+      "part": "p23"
+    },
+    {
+      "t0": 1053.87,
+      "t1": 1059.55,
+      "text": "in front of the old airport, two years after the blockade ended.",
+      "kind": "story",
+      "para": 24,
+      "part": "p23"
+    },
+    {
+      "t0": 1060.19,
+      "t1": 1064.11,
+      "text": "The district's page says tens of thousands of Berliners came",
+      "kind": "story",
+      "para": 24,
+      "part": "p23"
+    },
+    {
+      "t0": 1064.15,
+      "t1": 1067.95,
+      "text": "to the unveiling. The architect was Eduard Ludwig,",
+      "kind": "story",
+      "para": 24,
+      "part": "p23"
+    },
+    {
+      "t0": 1068.03,
+      "t1": 1072.03,
+      "text": "and he designed the 20-metre-high reinforced concrete sculpture",
+      "kind": "story",
+      "para": 24,
+      "part": "p23"
+    },
+    {
+      "t0": 1072.43,
+      "t1": 1074.83,
+      "text": "in the form of a stylised bridge pillar.",
+      "kind": "story",
+      "para": 24,
+      "part": "p23"
+    },
+    {
+      "t0": 1075.55,
+      "t1": 1077.95,
+      "text": "Stand where the unveiling crowd stood,",
+      "kind": "story",
+      "para": 24,
+      "part": "p23"
+    },
+    {
+      "t0": 1078.03,
+      "t1": 1080.71,
+      "text": "and you have the scale of the thing in front of you.",
+      "kind": "story",
+      "para": 24,
+      "part": "p23"
+    },
+    {
+      "t0": 1080.99,
+      "t1": 1084.43,
+      "text": "The monument is not a statue of a man or a plane.",
+      "kind": "story",
+      "para": 24,
+      "part": "p23"
+    },
+    {
+      "t0": 1084.75,
+      "t1": 1088.43,
+      "text": "It is a structure. The district's page marks 10",
+      "kind": "story",
+      "para": 24,
+      "part": "p23"
+    },
+    {
+      "t0": 1088.51,
+      "t1": 1093.63,
+      "text": "July 2026 as the 75th anniversary of the unveiling,",
+      "kind": "story",
+      "para": 24,
+      "part": "p23"
+    },
+    {
+      "t0": 1093.71,
+      "t1": 1097.47,
+      "text": "so the monument has stood for three quarters of a century.",
+      "kind": "story",
+      "para": 24,
+      "part": "p23"
+    },
+    {
+      "t0": 1098.02,
+      "t1": 1102.1,
+      "text": "Its three vertical ribs stand for the three air corridors,",
+      "kind": "story",
+      "para": 25,
+      "part": "p24"
+    },
+    {
+      "t0": 1102.3,
+      "t1": 1104.74,
+      "text": "according to the berlin.de page,",
+      "kind": "story",
+      "para": 25,
+      "part": "p24"
+    },
+    {
+      "t0": 1104.82,
+      "t1": 1108.5,
+      "text": "which reduces three routes to three upright ribs.",
+      "kind": "story",
+      "para": 25,
+      "part": "p24"
+    },
+    {
+      "t0": 1108.82,
+      "t1": 1111.86,
+      "text": "Those corridors ran north towards Hamburg,",
+      "kind": "story",
+      "para": 25,
+      "part": "p24"
+    },
+    {
+      "t0": 1111.94,
+      "t1": 1116.26,
+      "text": "south towards Frankfurt am Main, and west towards Hanover.",
+      "kind": "story",
+      "para": 25,
+      "part": "p24"
+    },
+    {
+      "t0": 1116.38,
+      "t1": 1118.82,
+      "text": "They were the way round the blockade.",
+      "kind": "story",
+      "para": 25,
+      "part": "p24"
+    },
+    {
+      "t0": 1118.9,
+      "t1": 1122.26,
+      "text": "The roads and railways into West Berlin had been closed,",
+      "kind": "story",
+      "para": 25,
+      "part": "p24"
+    },
+    {
+      "t0": 1122.3,
+      "t1": 1125.94,
+      "text": "and the corridors were the routes the planes used instead.",
+      "kind": "story",
+      "para": 25,
+      "part": "p24"
+    },
+    {
+      "t0": 1126.1,
+      "t1": 1128.82,
+      "text": "All three routes ended in the same city,",
+      "kind": "story",
+      "para": 25,
+      "part": "p24"
+    },
+    {
+      "t0": 1128.86,
+      "t1": 1131.46,
+      "text": "and the three ribs are the reminder of that,",
+      "kind": "story",
+      "para": 25,
+      "part": "p24"
+    },
+    {
+      "t0": 1131.54,
+      "t1": 1134.74,
+      "text": "set in a square that once received the planes.",
+      "kind": "story",
+      "para": 25,
+      "part": "p24"
+    },
+    {
+      "t0": 1135.3,
+      "t1": 1138.18,
+      "text": "At the unveiling, Ernst Reuter spoke,",
+      "kind": "story",
+      "para": 26,
+      "part": "p25"
+    },
+    {
+      "t0": 1138.26,
+      "t1": 1141.34,
+      "text": "and the district's page quotes him from that speech.",
+      "kind": "story",
+      "para": 26,
+      "part": "p25"
+    },
+    {
+      "t0": 1141.62,
+      "t1": 1145.78,
+      "text": "He said that the three arms symbolise the help of the American,",
+      "kind": "story",
+      "para": 26,
+      "part": "p25"
+    },
+    {
+      "t0": 1146.02,
+      "t1": 1147.7,
+      "text": "British and French nations.",
+      "kind": "story",
+      "para": 26,
+      "part": "p25"
+    },
+    {
+      "t0": 1148.34,
+      "t1": 1152.1,
+      "text": "He also described the arch as turning towards the West,",
+      "kind": "story",
+      "para": 26,
+      "part": "p25"
+    },
+    {
+      "t0": 1152.18,
+      "t1": 1156.58,
+      "text": "and he said, in German: \"Zu diesem Westen gehören wir,",
+      "kind": "story",
+      "para": 26,
+      "part": "p25"
+    },
+    {
+      "t0": 1156.66,
+      "t1": 1158.9,
+      "text": "mit ihm wollen wir verbunden sein.\"",
+      "kind": "story",
+      "para": 26,
+      "part": "p25"
+    },
+    {
+      "t0": 1159.46,
+      "t1": 1162.98,
+      "text": "In English, roughly: we belong to this West,",
+      "kind": "story",
+      "para": 26,
+      "part": "p25"
+    },
+    {
+      "t0": 1163.06,
+      "t1": 1164.82,
+      "text": "and we want to be connected with it.",
+      "kind": "story",
+      "para": 26,
+      "part": "p25"
+    },
+    {
+      "t0": 1165.78,
+      "t1": 1169.7,
+      "text": "That sentence was spoken in 1951,",
+      "kind": "story",
+      "para": 26,
+      "part": "p25"
+    },
+    {
+      "t0": 1169.78,
+      "t1": 1173.78,
+      "text": "in a city that was already divided between East and West.",
+      "kind": "story",
+      "para": 26,
+      "part": "p25"
+    },
+    {
+      "t0": 1174.32,
+      "t1": 1178.32,
+      "text": "The blockade ended on 12 May 1949.",
+      "kind": "story",
+      "para": 27,
+      "part": "p26"
+    },
+    {
+      "t0": 1178.36,
+      "t1": 1182.88,
+      "text": "The berlin.de page gives that date as the end of the blockade,",
+      "kind": "story",
+      "para": 27,
+      "part": "p26"
+    },
+    {
+      "t0": 1183.0,
+      "t1": 1185.68,
+      "text": "and so do the bpb and the taz.",
+      "kind": "story",
+      "para": 27,
+      "part": "p26"
+    },
+    {
+      "t0": 1186.32,
+      "t1": 1192.56,
+      "text": "The taz adds that the airlift officially ended on 30 September 1949.",
+      "kind": "story",
+      "para": 27,
+      "part": "p26"
+    },
+    {
+      "t0": 1192.6,
+      "t1": 1198.72,
+      "text": "The Tempelhof airport's history page runs its totals to 6 October 1949.",
+      "kind": "story",
+      "para": 27,
+      "part": "p26"
+    },
+    {
+      "t0": 1198.92,
+      "t1": 1202.64,
+      "text": "According to that page, the flights were used to fill the warehouses",
+      "kind": "story",
+      "para": 27,
+      "part": "p26"
+    },
+    {
+      "t0": 1202.8,
+      "t1": 1205.6,
+      "text": "in case the access routes were closed again.",
+      "kind": "story",
+      "para": 27,
+      "part": "p26"
+    },
+    {
+      "t0": 1205.72,
+      "t1": 1209.36,
+      "text": "So the sources agree that the blockade was lifted in May,",
+      "kind": "story",
+      "para": 27,
+      "part": "p26"
+    },
+    {
+      "t0": 1209.48,
+      "t1": 1213.04,
+      "text": "and they differ on the last flight by a few days.",
+      "kind": "story",
+      "para": 27,
+      "part": "p26"
+    },
+    {
+      "t0": 1213.08,
+      "t1": 1214.96,
+      "text": "The airlift carried on for more than",
+      "kind": "story",
+      "para": 27,
+      "part": "p26"
+    },
+    {
+      "t0": 1215.04,
+      "t1": 1217.68,
+      "text": "four months after the blockade was lifted.",
+      "kind": "story",
+      "para": 27,
+      "part": "p26"
+    },
+    {
+      "t0": 1218.23,
+      "t1": 1221.67,
+      "text": "The Western powers did not leave after the blockade.",
+      "kind": "story",
+      "para": 28,
+      "part": "p27"
+    },
+    {
+      "t0": 1221.99,
+      "t1": 1226.07,
+      "text": "The Allied Museum says its exhibition traces the history of the Western",
+      "kind": "story",
+      "para": 28,
+      "part": "p27"
+    },
+    {
+      "t0": 1226.15,
+      "t1": 1232.23,
+      "text": "powers in Berlin from 1945 to the Allies' withdrawal in 1994,",
+      "kind": "story",
+      "para": 28,
+      "part": "p27"
+    },
+    {
+      "t0": 1232.31,
+      "t1": 1235.71,
+      "text": "so the airlift is only one chapter of that story.",
+      "kind": "story",
+      "para": 28,
+      "part": "p27"
+    },
+    {
+      "t0": 1236.07,
+      "t1": 1239.43,
+      "text": "For a visitor, that means the airlift is a starting point",
+      "kind": "story",
+      "para": 28,
+      "part": "p27"
+    },
+    {
+      "t0": 1239.51,
+      "t1": 1242.47,
+      "text": "for the Western presence in the city, not the end of it.",
+      "kind": "story",
+      "para": 28,
+      "part": "p27"
+    },
+    {
+      "t0": 1243.11,
+      "t1": 1246.07,
+      "text": "In other words, the city stayed divided,",
+      "kind": "story",
+      "para": 28,
+      "part": "p27"
+    },
+    {
+      "t0": 1246.15,
+      "t1": 1248.55,
+      "text": "and the airlift did not change the political",
+      "kind": "story",
+      "para": 28,
+      "part": "p27"
+    },
+    {
+      "t0": 1248.63,
+      "t1": 1251.19,
+      "text": "map that the blockade had tried to change.",
+      "kind": "story",
+      "para": 28,
+      "part": "p27"
+    },
+    {
+      "t0": 1251.83,
+      "t1": 1254.07,
+      "text": "What the airlift changed was the way the",
+      "kind": "story",
+      "para": 28,
+      "part": "p27"
+    },
+    {
+      "t0": 1254.23,
+      "t1": 1256.55,
+      "text": "city was fed for almost a year.",
+      "kind": "story",
+      "para": 28,
+      "part": "p27"
+    },
+    {
+      "t0": 1257.1,
+      "t1": 1262.38,
+      "text": "Tempelhof itself closed to flights in 2008, according to Visit Berlin.",
+      "kind": "story",
+      "para": 29,
+      "part": "p28"
+    },
+    {
+      "t0": 1262.94,
+      "t1": 1266.94,
+      "text": "The former airfield is now a large open space for Berliners,",
+      "kind": "story",
+      "para": 29,
+      "part": "p28"
+    },
+    {
+      "t0": 1267.06,
+      "t1": 1269.1,
+      "text": "as Visit Berlin describes it,",
+      "kind": "story",
+      "para": 29,
+      "part": "p28"
+    },
+    {
+      "t0": 1269.18,
+      "t1": 1272.54,
+      "text": "and the old airport building is still there, next to the square.",
+      "kind": "story",
+      "para": 29,
+      "part": "p28"
+    },
+    {
+      "t0": 1273.18,
+      "t1": 1276.78,
+      "text": "The U6 station is named Platz der Luftbrücke,",
+      "kind": "story",
+      "para": 29,
+      "part": "p28"
+    },
+    {
+      "t0": 1276.9,
+      "t1": 1280.1,
+      "text": "so the name is on the map before you reach the monument.",
+      "kind": "story",
+      "para": 29,
+      "part": "p28"
+    },
+    {
+      "t0": 1280.38,
+      "t1": 1284.26,
+      "text": "The monument stands in front of the airport where the planes landed.",
+      "kind": "story",
+      "para": 29,
+      "part": "p28"
+    },
+    {
+      "t0": 1284.54,
+      "t1": 1288.22,
+      "text": "The airlift and the field belong to the same story:",
+      "kind": "story",
+      "para": 29,
+      "part": "p28"
+    },
+    {
+      "t0": 1288.46,
+      "t1": 1290.06,
+      "text": "planes landing on the field,",
+      "kind": "story",
+      "para": 29,
+      "part": "p28"
+    },
+    {
+      "t0": 1290.1,
+      "t1": 1294.14,
+      "text": "and the operation known as the Luftbrücke, the air bridge.",
+      "kind": "story",
+      "para": 29,
+      "part": "p28"
+    },
+    {
+      "t0": 1294.69,
+      "t1": 1296.29,
+      "text": "The square is changing.",
+      "kind": "story",
+      "para": 30,
+      "part": "p29"
+    },
+    {
+      "t0": 1296.85,
+      "t1": 1301.17,
+      "text": "The redesign of Platz der Luftbrücke by Grün Berlin has been under",
+      "kind": "story",
+      "para": 30,
+      "part": "p29"
+    },
+    {
+      "t0": 1301.25,
+      "t1": 1306.29,
+      "text": "way since 20 March 2026, starting with the west side,",
+      "kind": "story",
+      "para": 30,
+      "part": "p29"
+    },
+    {
+      "t0": 1306.37,
+      "t1": 1309.61,
+      "text": "and that section is due in early 2028.",
+      "kind": "story",
+      "para": 30,
+      "part": "p29"
+    },
+    {
+      "t0": 1309.97,
+      "t1": 1313.17,
+      "text": "The garden section with the monument is the next phase.",
+      "kind": "story",
+      "para": 30,
+      "part": "p29"
+    },
+    {
+      "t0": 1313.81,
+      "t1": 1317.97,
+      "text": "No source says whether the monument lawn is fenced during the works,",
+      "kind": "story",
+      "para": 30,
+      "part": "p29"
+    },
+    {
+      "t0": 1318.09,
+      "t1": 1320.61,
+      "text": "so check on the spot before you walk over.",
+      "kind": "story",
+      "para": 30,
+      "part": "p29"
+    },
+    {
+      "t0": 1321.17,
+      "t1": 1323.93,
+      "text": "If the lawn cannot be reached, stand at the edge of",
+      "kind": "story",
+      "para": 30,
+      "part": "p29"
+    },
+    {
+      "t0": 1323.97,
+      "t1": 1326.29,
+      "text": "the square and look at the monument from there.",
+      "kind": "story",
+      "para": 30,
+      "part": "p29"
+    },
+    {
+      "t0": 1327.01,
+      "t1": 1331.89,
+      "text": "A May 2026 report on the project lists an Ehrenhof,",
+      "kind": "story",
+      "para": 30,
+      "part": "p29"
+    },
+    {
+      "t0": 1331.93,
+      "t1": 1336.13,
+      "text": "a courtyard of honour, as a further phase after the monument.",
+      "kind": "story",
+      "para": 30,
+      "part": "p29"
+    },
+    {
+      "t0": 1336.7,
+      "t1": 1341.5,
+      "text": "So, the close. Stand at the edge of Platz der Luftbrücke,",
+      "kind": "story",
+      "para": 31,
+      "part": "p30"
+    },
+    {
+      "t0": 1341.58,
+      "t1": 1345.1,
+      "text": "facing the monument, with the old airport building behind it.",
+      "kind": "story",
+      "para": 31,
+      "part": "p30"
+    },
+    {
+      "t0": 1345.74,
+      "t1": 1347.42,
+      "text": "Count the three ribs,",
+      "kind": "story",
+      "para": 31,
+      "part": "p30"
+    },
+    {
+      "t0": 1347.5,
+      "t1": 1351.5,
+      "text": "and find the bronze band at the base that commemorates the victims.",
+      "kind": "story",
+      "para": 31,
+      "part": "p30"
+    },
+    {
+      "t0": 1352.22,
+      "t1": 1355.02,
+      "text": "Think of the arch turning towards the West,",
+      "kind": "story",
+      "para": 31,
+      "part": "p30"
+    },
+    {
+      "t0": 1355.1,
+      "t1": 1360.46,
+      "text": "as Reuter described it in 1951. The square is under reconstruction,",
+      "kind": "story",
+      "para": 31,
+      "part": "p30"
+    },
+    {
+      "t0": 1360.54,
+      "t1": 1363.5,
+      "text": "so the close view may have to be from the edge,",
+      "kind": "story",
+      "para": 31,
+      "part": "p30"
+    },
+    {
+      "t0": 1363.58,
+      "t1": 1364.86,
+      "text": "and that is enough.",
+      "kind": "story",
+      "para": 31,
+      "part": "p30"
+    },
+    {
+      "t0": 1365.26,
+      "t1": 1368.7,
+      "text": "Then look past the monument to the old terminal,",
+      "kind": "story",
+      "para": 31,
+      "part": "p30"
+    },
+    {
+      "t0": 1368.78,
+      "t1": 1372.38,
+      "text": "and remember that for almost a year the planes came in from",
+      "kind": "story",
+      "para": 31,
+      "part": "p30"
+    },
+    {
+      "t0": 1372.46,
+      "t1": 1376.62,
+      "text": "three air corridors, and that, by the memorial's count,",
+      "kind": "story",
+      "para": 31,
+      "part": "p30"
+    },
+    {
+      "t0": 1376.7,
+      "t1": 1380.22,
+      "text": "77 people lost their lives in the operation.",
+      "kind": "story",
+      "para": 31,
+      "part": "p30"
+    },
+    {
+      "t0": 1381.36,
+      "t1": 1382.84,
+      "text": "That's this week's story.",
+      "kind": "spot",
+      "para": 32,
+      "part": "[[SPOT-C]]"
+    },
+    {
+      "t0": 1383.04,
+      "t1": 1386.16,
+      "text": "I'm Yusuf, and if you want to stand where it happened,",
+      "kind": "spot",
+      "para": 32,
+      "part": "[[SPOT-C]]"
+    },
+    {
+      "t0": 1386.24,
+      "t1": 1390.04,
+      "text": "my walks and audio walks are at walk of berlin dot com.",
+      "kind": "spot",
+      "para": 32,
+      "part": "[[SPOT-C]]",
+      "display": "my walks and audio walks are at walkofberlin.com."
+    },
+    {
+      "t0": 1390.32,
+      "t1": 1392.56,
+      "text": "Next week, another Berlin story.",
+      "kind": "spot",
+      "para": 32,
+      "part": "[[SPOT-C]]"
+    }
+  ]
+}
