@@ -1,9 +1,9 @@
 {
-  "updatedAt": "2026-10-31T02:59:47.780Z",
+  "updatedAt": "2026-10-31T09:41:01.820Z",
   "source": "Wix Blog API",
   "popularSource": "Wix Blog metrics.views lifetime sort",
-  "totalPosts": 449,
-  "toolsTotal": 375,
+  "totalPosts": 450,
+  "toolsTotal": 376,
   "bookingUrl": "https://www.walkofberlin.com/book-berlin-walking-tour/berlin-then-and-now",
   "navTopics": [
     {
@@ -1802,6 +1802,23 @@
   ],
   "latest": [
     {
+      "title": "Parcel Customs in Berlin: What You Pay and How to Get It Out",
+      "slug": "parcel-customs-berlin",
+      "path": "/post/parcel-customs-berlin",
+      "url": "https://www.berlinwalk.com/post/parcel-customs-berlin",
+      "excerpt": "A parcel from outside the EU costs more from 1 November. Here is what you pay at each value, how the €45 gift limit works, and the four ways to get a parcel out of the Zollamt before it goes back.",
+      "category": "Living in Berlin",
+      "categorySlug": "living-in-berlin",
+      "topic": "living-in-berlin",
+      "topicLabel": "Living in Berlin",
+      "readTime": "7 min read",
+      "publishedDate": "2026-10-31T09:39:04.410Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_ce47fc0846bf47768db5f40ccc2db81c~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/dhlvan.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_ce47fc0846bf47768db5f40ccc2db81c~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/dhlvan.jpg",
+      "alt": "A yellow DHL delivery van parked on Roelckestraße in Berlin on a winter day, with snow along the kerb",
+      "relatedToolSlug": "berlin-parcel-customs-line"
+    },
+    {
       "title": "What to Wear in Berlin in Winter: Dress for Wind, Wet and Ice",
       "slug": "what-to-wear-in-berlin-in-winter",
       "path": "/post/what-to-wear-in-berlin-in-winter",
@@ -1987,26 +2004,26 @@
       "thumb": "https://static.wixstatic.com/media/5a08a3_9179a2cab7954fe9a66ee215c020a896~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-ber-terminal-night.jpg",
       "alt": "BER Airport's Terminal 1 lit up at night behind a wide lawn, with the car park buildings on both sides",
       "relatedToolSlug": "ber-dawn-departure-map"
-    },
+    }
+  ],
+  "allPosts": [
     {
-      "title": "Berlin Timetable Change: What Moves on 13 December and What Costs More on 1 January",
-      "slug": "berlin-timetable-change",
-      "path": "/post/berlin-timetable-change",
-      "url": "https://www.berlinwalk.com/post/berlin-timetable-change",
-      "excerpt": "On 13 December regional trains return to the Stadtbahn, the RE3 and RE5 go hourly and the S1 and S5 lose trains in the rush hour. Three weeks later the VBB fares rise. Here is what changes on your line, from which date, and which tickets to buy before January.",
+      "title": "Parcel Customs in Berlin: What You Pay and How to Get It Out",
+      "slug": "parcel-customs-berlin",
+      "path": "/post/parcel-customs-berlin",
+      "url": "https://www.berlinwalk.com/post/parcel-customs-berlin",
+      "excerpt": "A parcel from outside the EU costs more from 1 November. Here is what you pay at each value, how the €45 gift limit works, and the four ways to get a parcel out of the Zollamt before it goes back.",
       "category": "Living in Berlin",
       "categorySlug": "living-in-berlin",
       "topic": "living-in-berlin",
       "topicLabel": "Living in Berlin",
-      "readTime": "6 min read",
-      "publishedDate": "2026-10-20T07:30:51.195Z",
-      "image": "https://static.wixstatic.com/media/5a08a3_4054c92492334c149fd6e00ba363bbb1~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-stadtbahn-viaduct-tv-tower.jpg",
-      "thumb": "https://static.wixstatic.com/media/5a08a3_4054c92492334c149fd6e00ba363bbb1~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-stadtbahn-viaduct-tv-tower.jpg",
-      "alt": "An S-Bahn train streaks along the yellow-brick Stadtbahn viaduct at dusk, with the TV Tower lit up behind it",
-      "relatedToolSlug": "berlin-rail-change-board"
-    }
-  ],
-  "allPosts": [
+      "readTime": "7 min read",
+      "publishedDate": "2026-10-31T09:39:04.410Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_ce47fc0846bf47768db5f40ccc2db81c~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/dhlvan.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_ce47fc0846bf47768db5f40ccc2db81c~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/dhlvan.jpg",
+      "alt": "A yellow DHL delivery van parked on Roelckestraße in Berlin on a winter day, with snow along the kerb",
+      "relatedToolSlug": "berlin-parcel-customs-line"
+    },
     {
       "title": "What to Wear in Berlin in Winter: Dress for Wind, Wet and Ice",
       "slug": "what-to-wear-in-berlin-in-winter",

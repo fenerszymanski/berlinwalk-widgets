@@ -443,6 +443,12 @@
       "figure": "25 of 56",
       "line": "emergency lighthouses are listed as ready to open, and four districts have none marked ready.",
       "tool": "berlin-blackout-emergency-map"
+    },
+    "parcel-customs-berlin": {
+      "shelf": "geld",
+      "figure": "&euro;45",
+      "line": "is the limit for a gift parcel from outside the EU, and online orders now pay &euro;3 duty plus a &euro;2 fee on each kind of goods.",
+      "tool": "berlin-parcel-customs-line"
     }
   }
 }
