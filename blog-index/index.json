@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-30T09:46:07.437Z",
+  "updatedAt": "2026-10-31T02:59:47.780Z",
   "source": "Wix Blog API",
   "popularSource": "Wix Blog metrics.views lifetime sort",
   "totalPosts": 449,
@@ -298,23 +298,6 @@
       "relatedToolSlug": "berlin-public-toilets"
     },
     {
-      "title": "Berlin Airport to Alexanderplatz: The Easy Way",
-      "slug": "how-to-get-from-berlin-airport-to-alexanderplatz-the-easy-way",
-      "path": "/post/how-to-get-from-berlin-airport-to-alexanderplatz-the-easy-way",
-      "url": "https://www.berlinwalk.com/post/how-to-get-from-berlin-airport-to-alexanderplatz-the-easy-way",
-      "excerpt": "Take the direct S9 from BER to Alexanderplatz, or the FEX with a city-centre transfer. Compare routes, ABC tickets and late-night options.",
-      "category": "Tourist Tips",
-      "categorySlug": "tourist-tips",
-      "topic": "first-day",
-      "topicLabel": "First Day in Berlin",
-      "readTime": "7 min read",
-      "publishedDate": "2026-03-03T12:12:58.270Z",
-      "image": "https://static.wixstatic.com/media/nsplsh_a03121bf8b20473fb5d65a66bb71db09~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/a%20red%20and%20yellow%20train%20traveling%20past%20a%20tall%20building.jpg",
-      "thumb": "https://static.wixstatic.com/media/nsplsh_a03121bf8b20473fb5d65a66bb71db09~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/a%20red%20and%20yellow%20train%20traveling%20past%20a%20tall%20building.jpg",
-      "alt": "A red-and-yellow S-Bahn train passing buildings in Berlin.",
-      "relatedToolSlug": "berlin-landmarks-map"
-    },
-    {
       "title": "5 Best Döner Kebab Spots in Berlin You Need to Try",
       "slug": "5-best-döner-kebab-spots-in-berlin-you-need-to-try-in-2026",
       "path": "/post/5-best-döner-kebab-spots-in-berlin-you-need-to-try-in-2026",
@@ -330,6 +313,23 @@
       "thumb": "https://static.wixstatic.com/media/5a08a3_f6946ba54fe44a2ba5ca74e810732917~mv2.jpeg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/DonerBerlin.jpeg",
       "alt": "Berlin döner kebab in flatbread with grilled vegetables, chicken meat, fresh salad and garlic sauce",
       "relatedToolSlug": "berlin-doner-order-builder"
+    },
+    {
+      "title": "Berlin Airport to Alexanderplatz: The Easy Way",
+      "slug": "how-to-get-from-berlin-airport-to-alexanderplatz-the-easy-way",
+      "path": "/post/how-to-get-from-berlin-airport-to-alexanderplatz-the-easy-way",
+      "url": "https://www.berlinwalk.com/post/how-to-get-from-berlin-airport-to-alexanderplatz-the-easy-way",
+      "excerpt": "Take the direct S9 from BER to Alexanderplatz, or the FEX with a city-centre transfer. Compare routes, ABC tickets and late-night options.",
+      "category": "Tourist Tips",
+      "categorySlug": "tourist-tips",
+      "topic": "first-day",
+      "topicLabel": "First Day in Berlin",
+      "readTime": "7 min read",
+      "publishedDate": "2026-03-03T12:12:58.270Z",
+      "image": "https://static.wixstatic.com/media/nsplsh_a03121bf8b20473fb5d65a66bb71db09~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/a%20red%20and%20yellow%20train%20traveling%20past%20a%20tall%20building.jpg",
+      "thumb": "https://static.wixstatic.com/media/nsplsh_a03121bf8b20473fb5d65a66bb71db09~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/a%20red%20and%20yellow%20train%20traveling%20past%20a%20tall%20building.jpg",
+      "alt": "A red-and-yellow S-Bahn train passing buildings in Berlin.",
+      "relatedToolSlug": "berlin-landmarks-map"
     }
   ],
   "shelves": [
@@ -1298,9 +1298,9 @@
           "topicLabel": "Food & Nightlife",
           "readTime": "6 min read",
           "publishedDate": "2026-05-19T11:30:33.610Z",
-          "image": "https://static.wixstatic.com/media/5a08a3_3100730ad66147ec8e530dbeafa27903~mv2.png/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlinwalk-currywurst-cover.png",
-          "thumb": "https://static.wixstatic.com/media/5a08a3_3100730ad66147ec8e530dbeafa27903~mv2.png/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlinwalk-currywurst-cover.png",
-          "alt": "Currywurst with fries on a Berlin street-food table for the BerlinWalk best currywurst guide.",
+          "image": "https://static.wixstatic.com/media/5a08a3_cdfbd70690f7435aa20021f889df412b~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/walkofberlin-currywurst-og.jpg",
+          "thumb": "https://static.wixstatic.com/media/5a08a3_cdfbd70690f7435aa20021f889df412b~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/walkofberlin-currywurst-og.jpg",
+          "alt": "Currywurst with fries on a Berlin street-food table for my best currywurst guide.",
           "relatedToolSlug": "berlin-currywurst-finder"
         },
         {
