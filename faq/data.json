@@ -14087,5 +14087,39 @@
         "a": "Around 21 December the sun rises at about **08:15** and sets at about **15:54**. Plan your outdoor time for the middle of the day and keep museums and dinner for later."
       }
     ]
+  },
+  "parcel-customs-berlin": {
+    "title": "Parcel Customs in Berlin - FAQ",
+    "subtitle": "Charges, gifts and the Zollamt, checked on 31 October 2026.",
+    "items": [
+      {
+        "q": "How much customs do I pay on a parcel from outside the EU?",
+        "a": "On an online order up to €150 you pay **€3 duty per kind of goods**, from 1 November 2026 a **€2 handling fee per kind of goods**, and import VAT of 19% or 7%. Above €150 normal duty applies, about 12% on clothes, plus the fee and VAT. The carrier usually adds its own fee, which is €7.50 at Deutsche Post."
+      },
+      {
+        "q": "Is a gift from family in another country free of customs?",
+        "a": "Up to **€45 per parcel**, yes, if it goes from one private person to another, you pay nothing for it, and it is for your own use. From €45 to €700 a flat 17.5% covers duty and tax."
+      },
+      {
+        "q": "How long does the Zollamt keep my parcel?",
+        "a": "**9 days for parcels and 7 for letters**, which include small packets up to 2 kg. The time counts from the day Deutsche Post hands it to customs, so it can start before your notice arrives. After that it goes back to the sender."
+      },
+      {
+        "q": "Do I have to go to the Zollamt in person?",
+        "a": "Not always. You can email the office on your notice and ask for **Postabfertigung von zu Hause**, or declare goods up to €150 online with the customs portal's IPK form. You can also go in person or refuse the parcel."
+      },
+      {
+        "q": "Where is the customs office in Berlin for parcels?",
+        "a": "Your notice names the office. Berlin's two inland offices are **Zollamt Marzahn** at Hellersdorfer Weg 35 and **Zollamt Dreilinden** at Potsdamer Chaussee 62. Marzahn opens until 18:00 on Thursdays."
+      },
+      {
+        "q": "What should I bring to the Zollamt?",
+        "a": "The Deutsche Post notice, printed proof of the price with postage such as the invoice or a PayPal receipt, and your ID. For an online order over €150 you also need an Internet-Zollanmeldung."
+      },
+      {
+        "q": "Is a text saying I owe customs fees real?",
+        "a": "Treat it as fake. German customs says it never sends tax notices or payment demands by phone, email, SMS, social media or messenger. Check the tracking number on the carrier's own site."
+      }
+    ]
   }
 }

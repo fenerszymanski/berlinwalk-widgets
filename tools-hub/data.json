@@ -11408,6 +11408,36 @@
       ],
       "iconStatus": "live-wix-media",
       "image": "https://static.wixstatic.com/media/5a08a3_9fcbce950303422fa0502d7467836bd7~mv2.png"
+    },
+    {
+      "slug": "berlin-parcel-customs-line",
+      "title": "Parcel Customs Cost Line",
+      "lead": "Type what a parcel from outside the EU is worth and see what it adds to your bill in Berlin: the €3 duty, the €2 handling fee from 1 November 2026, VAT and the carrier fee. Works for online orders and gifts. Checked on 31 October 2026.",
+      "category": "Money",
+      "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/berlin-parcel-customs-line/",
+      "embedHeight": 1180,
+      "hubCategory": "MoneyShopping",
+      "type": "Calculator",
+      "priority": 3,
+      "tags": [
+        "customs",
+        "parcel",
+        "zoll",
+        "gift",
+        "import vat",
+        "post"
+      ],
+      "aliases": [
+        "parcel customs berlin",
+        "parcel stuck at customs germany",
+        "zollamt berlin parcel",
+        "customs fee parcel germany",
+        "gift parcel customs 45 euro",
+        "eu handling fee 2 euro parcel",
+        "3 euro customs duty parcel"
+      ],
+      "iconStatus": "live-wix-media",
+      "image": "https://static.wixstatic.com/media/5a08a3_304761b50313442eb8720a5b779b60c0~mv2.png"
     }
   ],
   "hubCategories": [
