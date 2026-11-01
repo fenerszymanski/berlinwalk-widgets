@@ -5,14 +5,14 @@
   const base = new URL('.', script.src);
   const CHANNEL = 'wob:shop-cart:v1';
   const esc = value => String(value ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-  const asset = value => {const target=new URL(value,base);if(/\.(?:js|css|json)$/.test(target.pathname))target.searchParams.set('v','gift-week-20261101-p15-lcp-v1');return target.href;};
+  const asset = value => {const target=new URL(value,base);if(/\.(?:js|css|json)$/.test(target.pathname))target.searchParams.set('v','gift-week-20261101-p15-lcp-v2');return target.href;};
   // Chrome and Safari ignore @font-face inside shadow DOM, so the three faces are registered once on the document with absolute URLs from the element's own base.
   try {if(!document.getElementById('bw-storefront-fonts')){const style=document.createElement('style');style.id='bw-storefront-fonts';style.textContent=[['Fraunces','Fraunces-Variable.woff2','100 900'],['Space Grotesk','SpaceGrotesk-Variable.woff2','300 700'],['IBM Plex Mono','IBMPlexMono-Regular.woff2','400 600'],['DM Serif Display','DMSerifDisplay-Regular.woff2','400']].map(([family,file,weight])=>`@font-face{font-family:'${family}';src:url("${asset('fonts/'+file)}") format("woff2");font-weight:${weight};font-display:swap}`).join('\n')+`
 /* Metric-matched stand-ins (27 Oct 2026): while a font file is still downloading, Safari shows the fallback; these two are scaled to the real fonts' widths (measured on the 600-weight headline: Fraunces is about 10% narrower than Georgia Bold, Space Grotesk about 8% wider than Arial) so the headline and the body text hardly change size when the real font arrives. */
 @font-face{font-family:'Fraunces Fallback';src:local('Georgia Bold'),local('Georgia-Bold'),local('Georgia');font-weight:100 900;size-adjust:90%}
 @font-face{font-family:'Space Grotesk Fallback';src:local('Arial'),local('Helvetica');size-adjust:108%}`;(document.head||document.documentElement).appendChild(style);
     // Start the two fonts above the fold now instead of when the first line of text is laid out inside the shadow root.
-    for(const file of ['Fraunces-Variable.woff2','SpaceGrotesk-Variable.woff2']){const link=document.createElement('link');link.rel='preload';link.as='font';link.type='font/woff2';link.crossOrigin='anonymous';link.href=asset('fonts/'+file);document.head.appendChild(link);}}}catch{}
+    for(const file of ['Fraunces-Variable.woff2','SpaceGrotesk-Variable.woff2']){if([...document.querySelectorAll('link[rel="preload"][as="font"]')].some(link=>link.href===asset('fonts/'+file)))continue;const link=document.createElement('link');link.rel='preload';link.as='font';link.type='font/woff2';link.crossOrigin='anonymous';link.href=asset('fonts/'+file);document.head.appendChild(link);}}}catch{}
   // One price format everywhere: euro sign, two decimals, dot separator ("€24.90"). Native Wix formatted prices are used first; this covers every fallback.
   const money = (currency, major) => {const number=Number(major);if(major===''||major===null||major===undefined||!Number.isFinite(number))return '';const code=String(currency||'').toUpperCase();return ({EUR:'€',USD:'$',GBP:'£'}[code]||(code?code+' ':''))+number.toFixed(2);};
   const url = value => {if(typeof value!=='string'||!value.trim())return '#';try {const u = new URL(value, 'https://www.walkofberlin.com');return u.protocol === 'https:' ? u.href : '#';} catch {return '#';}};
@@ -151,7 +151,7 @@
     import(asset('catalog-layer.js')), import(asset('editorial-helpers.js')), import(asset('street-configurator.js')),
     ...['data/categories.json','data/presentation.json','data/native-bindings.json','data/external-products.json'].map(path => fetch(path==='data/presentation.json'?new URL('data/presentation.json?v=gallery-'+Date.now(),base).href:asset(path),path==='data/presentation.json'?{cache:'no-store'}:undefined)/* gallery-fresh-v1 */.then(response => {if (!response.ok) throw Error('CATALOGUE_METADATA_UNAVAILABLE');return response.json();})),
     import(asset('funnel.js')).then(m=>{import(asset('campaign-session.js')).catch(()=>{});return m;}).catch(() => null),   // measurement must never block the shop
-    import(new URL('../../js/store-navigation.js?v=gift-week-20261101-p15-lcp-v1',base).href),
+    import(new URL('../../js/store-navigation.js?v=gift-week-20261101-p15-lcp-v2',base).href),
     import(asset('gift.js')).catch(()=>null),
     import(asset('gift-week.js')),
     fetch(asset('data/gift-week-202611.json'),{cache:'no-store'}).then(r=>r.ok?r.json():null).catch(()=>null)
@@ -605,7 +605,7 @@
     measure(name,...args){try{this.funnel?.[name]?.(...args);}catch(e){}}
     mountYs() {
       const host=this.shadowRoot.querySelector('[data-ys-host]');if(!host||!this.ysMod)return;
-      this.ys=this.ys||{};if(this.ysEntryProductId!==this.context.productId){this.ysEntryProductId=this.context.productId;this.ys.format=this.productAlias()?.format||'poster';}this.ysApi=this.ysApi||{sample:asset('assets/ys-sample.jpg'),busy:()=>this.busy||this.uncertain,track:step=>{try{this.funnel?.ysStep(step);}catch(e){}}};
+      this.ys=this.ys||{};if(this.ysEntryProductId!==this.context.productId){this.ysEntryProductId=this.context.productId;this.ys.format=this.productAlias()?.format||'poster';}this.ysApi=this.ysApi||{sample:this.productMedia('ys-sample.jpg'),busy:()=>this.busy||this.uncertain,track:step=>{try{this.funnel?.ysStep(step);}catch(e){}}};
       this.ysApi.variants=!!this.catalogue?.products?.find(row=>row.productId===this.ysMod.YS_PRODUCT_ID)?.requiresOptions;
       const digital=this.ysDigitalNative();this.ysApi.digital=!!digital;this.ysApi.digitalPrice=digital?.price??null;
       this.ysApi.variantPrice=state=>{const ref=this.campaign?.reference(this.campaignConfig,this.ysMod.YS_PRODUCT_ID,this.ysMod.ysChoices(state));const base=Number.isFinite(ref)?ref:this.ysMod.ysPrice(state);return this.campaignNativeOn(this.ysMod.YS_PRODUCT_ID)?this.campaign.saleCents(Math.round(base*100))/100:this.ysMod.ysPrice(state);};
