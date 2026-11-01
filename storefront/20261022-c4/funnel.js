@@ -25,6 +25,7 @@ const PIXEL_STEPS = {search: 'YSSearch', pick: 'YSPick', preview: 'YSPreview', s
 const JOURNEY_ENDPOINT = 'https://app.berlinwalk.com/api/track-paid-event';
 const JOURNEY_STEPS = {search: 'bw_store_ys_search', pick: 'bw_store_ys_pick', preview: 'bw_store_ys_preview', addtap: 'bw_store_ys_add_tap', seen: 'bw_store_ys_seen', mailsend: 'bw_store_ys_mail_send'};
 const done = new Set();
+let successfulAddSequence=0;
 const log = W.__bwStoreFunnel = W.__bwStoreFunnel || {counted: [], pixel: [], skipped: []};
 
 function skipReason() {
@@ -111,7 +112,7 @@ export function added(product, quantity = 1) {
   count('add', pathOf(product));
   W.WobCampaignFunnel?.emit('cart','add_to_cart');
   journey('bw_store_add', pathOf(product), {productId: product.wixProductId, quantity});
-  pixel('track', 'AddToCart', {content_ids: [product.wixProductId], content_type: 'product', content_name: product.name, value: money(product.priceCents) * quantity, currency: product.currency || 'EUR'}, product.wixProductId);
+  pixel('track', 'AddToCart', {content_ids: [product.wixProductId], content_type: 'product', content_name: product.name, value: money(product.priceCents) * quantity, currency: product.currency || 'EUR'}, product.wixProductId+':'+(++successfulAddSequence));
 }
 // Consent-free count only: Wix's checkout page sends InitiateCheckout to the pixel itself.
 export function checkout(cart) {
