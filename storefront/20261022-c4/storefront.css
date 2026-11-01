@@ -351,3 +351,5 @@ details.legal-foot>summary:after{top:50%;margin-top:-14px}
 
 /* P12: real sample photographs stay below the configurator and do not load as LCP. */
 .p12-real-print{margin:32px 0}.p12-real-print>p{max-width:65ch}.p12-real-photos{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px}.p12-real-photos figure{margin:0;min-width:0}.p12-real-photos img{display:block;width:100%;height:auto;max-height:600px;object-fit:contain;background:#f0eee7;border-radius:4px}@media(max-width:600px){.p12-real-photos{gap:10px}.p12-real-photos img{max-height:320px}}
+
+.p12-buy-jump{display:none}@media(max-width:700px){.p12-buy-jump{display:inline-flex;width:max-content;max-width:100%;margin-top:12px;min-height:44px}}
