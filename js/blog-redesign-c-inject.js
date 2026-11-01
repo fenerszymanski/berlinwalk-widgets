@@ -617,6 +617,17 @@
     var faqHost = faqFrame && (faqFrame.closest('[data-hook="html-component"]') || faqFrame.parentElement);
     var anchor = body.closest('.bw-c-page') || body;
     var currentSlot = old && old.querySelector('.bw-c-faq-slot');
+    // The mobile document mounts an iframe only when it nears the viewport, so
+    // a FAQ that has not loaded yet has no frame to find. Keep the host the slot
+    // already owns, and otherwise find the empty host by its embed id.
+    if (!faqHost && currentSlot) faqHost = currentSlot.querySelector('[data-hook="html-component"]');
+    if (!faqHost) {
+      var faqEmbed = Array.prototype.find.call(body.querySelectorAll('[id^="viewer-"]'), function (candidate) {
+        return /^viewer-(?:embed[_-]|emb_)?faq/i.test(candidate.id) && candidate.querySelector('[data-hook="html-component"]');
+      });
+      faqHost = faqEmbed && faqEmbed.querySelector('[data-hook="html-component"]');
+    }
+    var faqWrap = faqHost && faqHost.closest('[id^="viewer-"]');
     // Moving an iframe in the DOM reloads it. This module used to be torn down
     // and rebuilt on every hydration render, which reloaded the FAQ iframe
     // roughly a hundred times in the first 31s and left its height swinging
@@ -628,6 +639,8 @@
     }
     var faqFragment = document.createDocumentFragment();
     if (faqHost) faqFragment.appendChild(faqHost);
+    // The empty embed left behind keeps its reserved height otherwise.
+    if (faqWrap) faqWrap.style.setProperty('display', 'none', 'important');
     Array.prototype.forEach.call(body.querySelectorAll('[id^="viewer-faq_"]'), function (placeholder) {
       if (!placeholder.querySelector('iframe[src*="/faq/"]')) placeholder.remove();
     });
