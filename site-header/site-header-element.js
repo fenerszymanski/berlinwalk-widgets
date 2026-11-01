@@ -84,6 +84,10 @@ const BW_HEADER_STORE_LINKS = [
     "href": "https://walkofberlin.com/product-page/your-berlin-street-in-1928-personalised-aerial-print-30-x-40-cm"
   },
   {
+    "label": "Personal newspapers",
+    "href": "https://walkofberlin.com/category/all-products?tab=newspapers"
+  },
+  {
     "label": "2027 Wall Calendar",
     "href": "https://walkofberlin.com/product-page/berlin-2027-wall-calendar-a3"
   },
@@ -97,6 +101,8 @@ const BW_HEADER_STORE_LINKS = [
   }
 ];
 const BW_HEADER_STORE_HOME = "https://walkofberlin.com/category/all-products?tab=all";
+// END GENERATED STORE NAVIGATION
+
 // Homepage menu (Yusuf, 29 Oct 2026: the approved "Berlin, then and now" mockup). Shown only on "/" in home mode.
 const BW_HEADER_HOME_LINKS = [
   { label: 'Posters', href: 'https://www.walkofberlin.com/category/all-products?tab=print' },
@@ -107,7 +113,6 @@ const BW_HEADER_HOME_LINKS = [
   { label: 'Free tools', href: 'https://www.walkofberlin.com/berlin-tools' },
   { label: 'Walk with me', href: 'https://www.walkofberlin.com/book-berlin-walking-tour/berlin-then-and-now' },
 ];
-// END GENERATED STORE NAVIGATION
 
 const BW_HEADER_INSTANCES = new Set();
 let BW_HEADER_ACTIVE_INSTANCE = null;

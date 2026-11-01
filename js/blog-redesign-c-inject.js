@@ -659,6 +659,8 @@
   function paint() {
     document.documentElement.setAttribute('data-bw-redesign', '1'); injectStyle(); var body = findBody(), title = findTitle(); if (!body || !title) return;
     markBody(body); var post = postMeta(), heroNode = hero(title, post, body); cover(heroNode, post); var items = headings(body); toc(items, body, post, toolFor(post)); fitInlineSurfaces(body); keepQuickSummaryInBody(); retagFaq(); hideNativeShare(); endModule(body, post);
+    // Change the commercial band only, preserving the FAQ iframe and related guides.
+    if (window.BWGiftWeek202611) window.BWGiftWeek202611.scan();
   }
   // Every write below is a mutation, and the hydration observer watches the whole
   // document. Without this pause the script answers its own edits and re-runs

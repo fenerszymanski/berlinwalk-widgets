@@ -86,6 +86,7 @@
     var title = bridgeTitle(cachedSlots);
     if (!title) return;
     Array.prototype.forEach.call(document.querySelectorAll(BRIDGE_SELECTOR), function (bridge) {
+      if (bridge.hasAttribute('data-bw-gw-surface')) return;
       var heading = bridge.querySelector('.bw-tool-bridge-main h2, h2');
       if (!heading || heading.textContent === title) return;
       heading.textContent = title;

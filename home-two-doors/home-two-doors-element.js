@@ -185,7 +185,7 @@ const BW_HOME_TWO_DOORS_SHOP_PRODUCTS = [
     "imageUrl": "https://static.wixstatic.com/media/5a08a3_e1ee5add72f44c8abc4f19f4a76035f5~mv2.jpg/v1/fit/w_640,h_480,q_85/file.jpg",
     "alt": "Twelve Berlin district illustrations arranged in a grid of frames",
     "text": "Berlin artwork and a 2027 calendar as downloadable files. Print them yourself; no physical item is shipped.",
-    "href": "https://walkofberlin.com/category/digital-downloads?tab=digital",
+    "href": "https://walkofberlin.com/category/all-products?tab=print",
     "cta": "Browse printable downloads"
   }
 ];

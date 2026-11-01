@@ -1284,6 +1284,9 @@
       '<label class="bw-lb-hp" aria-hidden="true">Leave this empty<input type="text" name="website" tabindex="-1" autocomplete="off"></label>' +
       '<p class="bw-lb-msg" role="status" aria-live="polite"></p>' +
       '</form>';
+    // Keep the outer node and placeSurface anchor intact. The seasonal runtime
+    // retains the original form/listeners and restores them at its hard expiry.
+    if (window.BWGiftWeek202611) window.BWGiftWeek202611.decorate(bar, 'bar');
     return bar;
   }
 
