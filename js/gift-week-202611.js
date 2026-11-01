@@ -37,7 +37,7 @@
   function productFor(path) {
     path = String(path || location.pathname).toLowerCase();
     if (/wall|cold-war|east-or-west|divided|checkpoint/.test(path)) return { title: 'A Berlin street, seen from 1928', text: 'Choose an address and see it in the aerial photographs from 1928. I offer it as a print, a digital file or a gift voucher.', path: '/product-page/your-berlin-street-in-1928-personalised-aerial-print-30-x-40-cm', cta: 'Choose a street' };
-    if (/christmas|gift|birthday|wedding/.test(path)) return { title: 'A newspaper made for one person', text: 'A birthday or wedding date becomes eight pages of real news, weather and personal letters. Open the sample before choosing your edition.', path: '/newspaper', cta: 'See the personal newspaper' };
+    if (/christmas|gift|birthday|wedding/.test(path)) return { title: 'A newspaper made for one person', text: 'A birthday or wedding date becomes eight pages of real news, weather and personal letters. Open the sample before choosing your edition.', path: 'https://editions.walkofberlin.com/birthday', cta: 'See the personal newspaper' };
     if (/walk|museum|history|medieval|old-town|reich|landmark/.test(path)) return { title: 'Berlin history, at your own pace', text: 'My audio walks follow the Berlin Wall, Hidden Berlin and Medieval Berlin. Choose one route or the three-walk bundle.', path: '/audio-tours', cta: 'Explore the audio walks' };
     if (/tempelhof|späti|spaeti|district|neukölln|neukolln|fernsehturm|tv-tower|ubahn|u-bahn|transport|train/.test(path)) return { title: 'Berlin places for your wall', text: 'The Späti, Tempelhof and Berlin’s districts appear in my poster collection. Choose a print or a file to print yourself.', path: '/category/all-products?tab=print', cta: 'Browse the posters' };
     return { title: 'Berlin gifts, from prints to personal newspapers', text: 'I have put my personal newspapers, 1928 street prints, audio walks and posters together. Choose a gift for someone who lives in Berlin or misses it.', path: '/gifts', cta: 'Explore Berlin gifts' };
@@ -47,7 +47,7 @@
   }
   function pair(source, surface) {
     return '<div class="bw-gw-pair">' +
-      '<article class="bw-gw-card"><p class="bw-gw-kicker">MADE FOR ONE PERSON</p><h3>Personal newspapers</h3><p>A birthday or wedding date, told through real news, weather and letters. I make each eight-page edition for one person.</p>' + link(source, surface + '_newspaper', '/newspaper', 'See the personal newspaper') + '</article>' +
+      '<article class="bw-gw-card"><p class="bw-gw-kicker">MADE FOR ONE PERSON</p><h3>Personal newspapers</h3><p>A birthday or wedding date, told through real news, weather and letters. I make each eight-page edition for one person.</p>' + link(source, surface + '_newspaper', 'https://editions.walkofberlin.com/birthday', 'See the personal newspaper') + '</article>' +
       '<article class="bw-gw-card"><p class="bw-gw-kicker">' + esc(phase() === 'discount' ? 'GIFT WEEK' : 'BERLIN GIFTS') + '</p><h3>' + esc(message()) + '</h3><p>1928 street prints, audio walks, posters and personal newspapers.' + (phase() === 'discount' ? ' The calendar, Trip Planner, walking tour, Night In and small guides are outside the discount.' : ' Choose something for someone who lives in Berlin or misses it.') + '</p>' + link(source, surface + '_gifts', '/gifts', 'Explore Berlin gifts') + '</article></div>';
   }
   function content(kind) {
