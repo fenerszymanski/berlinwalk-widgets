@@ -5,7 +5,7 @@
   const base = new URL('.', script.src);
   const CHANNEL = 'wob:shop-cart:v1';
   const esc = value => String(value ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-  const asset = value => {const target=new URL(value,base);if(/\.(?:js|css|json)$/.test(target.pathname))target.searchParams.set('v','gift-week-20261101-v2');return target.href;};
+  const asset = value => {const target=new URL(value,base);if(/\.(?:js|css|json)$/.test(target.pathname))target.searchParams.set('v','gift-week-20261101-v3');return target.href;};
   // Chrome and Safari ignore @font-face inside shadow DOM, so the three faces are registered once on the document with absolute URLs from the element's own base.
   try {if(!document.getElementById('bw-storefront-fonts')){const style=document.createElement('style');style.id='bw-storefront-fonts';style.textContent=[['Fraunces','Fraunces-Variable.ttf','100 900'],['Space Grotesk','SpaceGrotesk-Variable.ttf','300 700'],['IBM Plex Mono','IBMPlexMono-Regular.ttf','400 600'],['DM Serif Display','DMSerifDisplay-Regular.ttf','400']].map(([family,file,weight])=>`@font-face{font-family:'${family}';src:url("${asset('fonts/'+file)}") format("truetype");font-weight:${weight};font-display:swap}`).join('\n')+`
 /* Metric-matched stand-ins (27 Oct 2026): while a font file is still downloading, Safari shows the fallback; these two are scaled to the real fonts' widths (measured on the 600-weight headline: Fraunces is about 10% narrower than Georgia Bold, Space Grotesk about 8% wider than Arial) so the headline and the body text hardly change size when the real font arrives. */
@@ -147,7 +147,7 @@
     import(asset('catalog-layer.js')), import(asset('editorial-helpers.js')), import(asset('street-configurator.js')),
     ...['data/categories.json','data/presentation.json','data/native-bindings.json','data/external-products.json'].map(path => fetch(path==='data/presentation.json'?new URL('data/presentation.json?v=gallery-'+Date.now(),base).href:asset(path),path==='data/presentation.json'?{cache:'no-store'}:undefined)/* gallery-fresh-v1 */.then(response => {if (!response.ok) throw Error('CATALOGUE_METADATA_UNAVAILABLE');return response.json();})),
     import(asset('funnel.js')).catch(() => null),   // measurement must never block the shop
-    import(new URL('../../js/store-navigation.js?v=gift-week-20261101-v2',base).href),
+    import(new URL('../../js/store-navigation.js?v=gift-week-20261101-v3',base).href),
     import(asset('gift.js')).catch(()=>null),
     import(asset('gift-week.js')),
     fetch(asset('data/gift-week-202611.json'),{cache:'no-store'}).then(r=>r.ok?r.json():null).catch(()=>null)
@@ -421,7 +421,7 @@
     campaignPrice(product,amount,choices) {
       const c=this.campaign,ref=c?.entry(this.campaignConfig,product),enabled=!!(ref&&(product.source==='wix'?this.campaignNativeOn(product.wixProductId):c.active(this.campaignConfig,c.systemOf(product))));
       const regular=choices?c?.reference(this.campaignConfig,product.wixProductId,choices):ref?.price;
-      if(ref&&Date.now()>=Date.parse(this.campaignConfig.end)){const original=choices?ref.variants?.find(v=>Object.keys(v.choices).every(k=>v.choices[k]===choices[k]))?.price:ref.price;if(Number.isFinite(original))amount=original;}
+      if(ref&&Date.now()>=Date.parse(this.campaignConfig.end)){const original=choices?ref.variants?.find(v=>Object.keys(v.choices).every(k=>v.choices[k]===choices[k]))?.price:ref.originalPrice??ref.price;if(Number.isFinite(original))amount=original;}
       if(amount===undefined)amount=product.priceCents/100;
       return c?c.priceHtml({amount,regular,lowest30:choices?regular:ref?.lowest30,currency:product.currency,de:this.campaignGerman(),enabled,from:!choices&&((product.requiresOptions&&product.source==='wix')||product.priceFrom)}):esc(product.priceLabel);
     }
@@ -588,7 +588,7 @@
       this.ys=this.ys||{};if(this.ysEntryProductId!==this.context.productId){this.ysEntryProductId=this.context.productId;this.ys.format=this.productAlias()?.format||'poster';}this.ysApi=this.ysApi||{sample:asset('assets/ys-sample.jpg'),busy:()=>this.busy||this.uncertain,track:step=>{try{this.funnel?.ysStep(step);}catch(e){}}};
       this.ysApi.variants=!!this.catalogue?.products?.find(row=>row.productId===this.ysMod.YS_PRODUCT_ID)?.requiresOptions;
       const digital=this.ysDigitalNative();this.ysApi.digital=!!digital;this.ysApi.digitalPrice=digital?.price??null;
-      this.ysApi.variantPrice=state=>{const ref=this.campaign?.reference(this.campaignConfig,this.ysMod.YS_PRODUCT_ID,this.ysMod.ysChoices(state));const base=Number.isFinite(ref)?ref:this.ysMod.ysPrice(state);return this.campaignNativeOn(this.ysMod.YS_PRODUCT_ID)?this.campaign.saleCents(Math.round(base*100))/100:base;};
+      this.ysApi.variantPrice=state=>{const ref=this.campaign?.reference(this.campaignConfig,this.ysMod.YS_PRODUCT_ID,this.ysMod.ysChoices(state));const base=Number.isFinite(ref)?ref:this.ysMod.ysPrice(state);return this.campaignNativeOn(this.ysMod.YS_PRODUCT_ID)?this.campaign.saleCents(Math.round(base*100))/100:this.ysMod.ysPrice(state);};
       this.ysApi.priceHtml=(amount,state)=>{const isDigital=this.ysMod.ysDigital(state),id=isDigital?this.ysMod.YS_DIGITAL_ID:this.ysMod.YS_PRODUCT_ID;return this.campaignPrice({...this.model.products.find(p=>p.wixProductId===this.ysMod.YS_PRODUCT_ID),wixProductId:id},amount,isDigital?null:this.ysMod.ysChoices(state));};
       this.ysMod.mountConfigurator(host,this.ys,this.ysApi);
       if(this.cartRedirect===true)queueMicrotask(()=>{host.querySelectorAll('[data-ys-add],[data-ys-quickadd]').forEach(b=>{b.textContent='Added. Opening your cart…';b.disabled=true;});});
