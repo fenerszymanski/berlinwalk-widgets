@@ -1,12 +1,12 @@
 {
   "schemaVersion": 1,
   "id": "product-exit-popup-202611",
-  "revision": "p12-v1",
+  "revision": "p12-v2",
   "enabled": false,
   "campaignId": "gift-week-202611",
   "start": "2026-11-01T20:00:00+01:00",
   "end": "2026-11-08T23:59:00+01:00",
-  "module": "https://fenerszymanski.github.io/berlinwalk-widgets/js/product-exit-popup.js?v=p12-v1",
+  "module": "https://fenerszymanski.github.io/berlinwalk-widgets/js/product-exit-popup.js?v=p12-v2",
   "pages": {
     "/product-page/gleisdreieck-berlin-art-print": {
       "group": "poster",
