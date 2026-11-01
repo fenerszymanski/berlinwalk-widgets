@@ -662,97 +662,115 @@
       "group": "newspaper",
       "system": "newspaper",
       "lang": "en",
-      "action": "sample"
+      "action": "sample",
+      "image": "https://editions.walkofberlin.com/img/birthday/p2.jpg"
     },
     "editions:/big-day": {
       "group": "newspaper",
       "system": "newspaper",
       "lang": "en",
-      "action": "sample"
+      "action": "sample",
+      "image": "https://editions.walkofberlin.com/img/big-day/p2.jpg"
     },
     "editions:/first-day": {
       "group": "newspaper",
       "system": "newspaper",
       "lang": "en",
-      "action": "sample"
+      "action": "sample",
+      "image": "https://editions.walkofberlin.com/img/first-day/p2.jpg"
     },
     "editions:/last-day": {
       "group": "newspaper",
       "system": "newspaper",
       "lang": "en",
-      "action": "sample"
+      "action": "sample",
+      "image": "https://editions.walkofberlin.com/img/last-day/p2.jpg"
     },
     "editions:/geburtstag": {
       "group": "newspaper",
       "system": "newspaper",
       "lang": "de",
-      "action": "sample"
+      "action": "sample",
+      "image": "https://editions.walkofberlin.com/img/geburtstag/p2.jpg"
     },
     "editions:/hochzeit": {
       "group": "newspaper",
       "system": "newspaper",
       "lang": "de",
-      "action": "sample"
+      "action": "sample",
+      "image": "https://editions.walkofberlin.com/img/hochzeit/p2.jpg"
     },
     "/products/berlin-audio-trio-bundle": {
       "group": "trio",
       "system": "audio",
-      "action": "sample"
+      "action": "sample",
+      "image": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/audio-trio.jpg"
     },
     "/products/death-strip-audio-route": {
       "group": "audio",
       "system": "audio",
-      "action": "sample"
+      "action": "sample",
+      "image": "https://app.berlinwalk.com/assets/wall-lp-v1/bernauer-2024.jpg"
     },
     "/products/hidden-berlin-audio-route": {
       "group": "audio",
       "system": "audio",
-      "action": "sample"
+      "action": "sample",
+      "image": "https://app.berlinwalk.com/assets/hidden-berlin-audio-route/photos/generated/hidden-berlin-premium-hero-v1.jpg"
     },
     "/products/medieval-berlin-audio-tour": {
       "group": "audio",
       "system": "audio",
-      "action": "sample"
+      "action": "sample",
+      "image": "https://app.berlinwalk.com/assets/medieval-berlin-audio-tour/photos/marienkirche-tv-tower.jpg"
     },
     "/products/third-reich-berlin-audio-tour": {
       "group": "audio",
       "system": "audio",
-      "action": "sample"
+      "action": "sample",
+      "image": "https://app.berlinwalk.com/assets/third-reich-berlin-audio-tour/photos/topography-site-wall.jpg"
     },
     "/products/berlin-wall-virtual-tour": {
       "group": "virtual",
       "system": "audio",
-      "action": "sample"
+      "action": "sample",
+      "image": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/guide-wall-virtual.jpg"
     },
     "/products/medieval-berlin-virtual-tour": {
       "group": "virtual",
       "system": "audio",
-      "action": "sample"
+      "action": "sample",
+      "image": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/guide-medieval-virtual.jpg"
     },
     "/products/berlin-night-in": {
       "group": "night",
       "system": null,
-      "action": "details"
+      "action": "details",
+      "image": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/guide-night-in.jpg"
     },
     "/products/berlin-first-day-rescue-plan": {
       "group": "guide",
       "system": null,
-      "action": "details"
+      "action": "details",
+      "image": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/guide-rescue.jpg"
     },
     "/products/berlin-landmarks-guide": {
       "group": "guide",
       "system": null,
-      "action": "details"
+      "action": "details",
+      "image": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/guide-landmarks.jpg"
     },
     "/products/hidden-berlin-photo-missions": {
       "group": "guide",
       "system": null,
-      "action": "details"
+      "action": "details",
+      "image": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/guide-photo-missions.jpg"
     },
     "/berlin-trip-planner": {
       "group": "planner",
       "system": null,
-      "action": "details"
+      "action": "details",
+      "image": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/guide-trip-planner.jpg"
     },
     "/berlin-then-and-now": {
       "group": "tour",
