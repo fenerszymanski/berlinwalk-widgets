@@ -7,12 +7,23 @@
   const esc = value => String(value ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   const asset = value => {const target=new URL(value,base);if(/\.(?:js|css|json)$/.test(target.pathname))target.searchParams.set('v','gift-week-20261101-p17-v1');return target.href;};
   // Chrome and Safari ignore @font-face inside shadow DOM, so the three faces are registered once on the document with absolute URLs from the element's own base.
+  // Gift landing trials showed no LCP gain. Preserve their prior resource and font order.
+  const legacyGiftPresentation = () => /^\/(?:category\/(?:berlin-christmas-gifts|berlin-geschenke)|gifts|geschenke)\/?$/.test(location.pathname);
+  if(legacyGiftPresentation()){
+  try {if(!document.getElementById('bw-storefront-fonts')){const style=document.createElement('style');style.id='bw-storefront-fonts';style.textContent=[['Fraunces','Fraunces-Variable.ttf','100 900'],['Space Grotesk','SpaceGrotesk-Variable.ttf','300 700'],['IBM Plex Mono','IBMPlexMono-Regular.ttf','400 600'],['DM Serif Display','DMSerifDisplay-Regular.ttf','400']].map(([family,file,weight])=>`@font-face{font-family:'${family}';src:url("${asset('fonts/'+file)}") format("truetype");font-weight:${weight};font-display:swap}`).join('\n')+`
+/* Metric-matched stand-ins (27 Oct 2026): while a font file is still downloading, Safari shows the fallback; these two are scaled to the real fonts' widths (measured on the 600-weight headline: Fraunces is about 10% narrower than Georgia Bold, Space Grotesk about 8% wider than Arial) so the headline and the body text hardly change size when the real font arrives. */
+@font-face{font-family:'Fraunces Fallback';src:local('Georgia Bold'),local('Georgia-Bold'),local('Georgia');font-weight:100 900;size-adjust:90%}
+@font-face{font-family:'Space Grotesk Fallback';src:local('Arial'),local('Helvetica');size-adjust:108%}`;(document.head||document.documentElement).appendChild(style);
+    // Start the two fonts above the fold now instead of when the first line of text is laid out inside the shadow root.
+    for(const file of ['Fraunces-Variable.ttf','SpaceGrotesk-Variable.ttf']){const link=document.createElement('link');link.rel='preload';link.as='font';link.type='font/ttf';link.crossOrigin='anonymous';link.href=asset('fonts/'+file);document.head.appendChild(link);}}}catch{}
+  }else{
   try {if(!document.getElementById('bw-storefront-fonts')){const style=document.createElement('style');style.id='bw-storefront-fonts';style.textContent=[['Fraunces','Fraunces-Variable.woff2','100 900'],['Space Grotesk','SpaceGrotesk-Variable.woff2','300 700'],['IBM Plex Mono','IBMPlexMono-Regular.woff2','400 600'],['DM Serif Display','DMSerifDisplay-Regular.woff2','400']].map(([family,file,weight])=>`@font-face{font-family:'${family}';src:url("${asset('fonts/'+file)}") format("woff2");font-weight:${weight};font-display:swap}`).join('\n')+`
 /* Metric-matched stand-ins (27 Oct 2026): while a font file is still downloading, Safari shows the fallback; these two are scaled to the real fonts' widths (measured on the 600-weight headline: Fraunces is about 10% narrower than Georgia Bold, Space Grotesk about 8% wider than Arial) so the headline and the body text hardly change size when the real font arrives. */
 @font-face{font-family:'Fraunces Fallback';src:local('Georgia Bold'),local('Georgia-Bold'),local('Georgia');font-weight:100 900;size-adjust:90%}
 @font-face{font-family:'Space Grotesk Fallback';src:local('Arial'),local('Helvetica');size-adjust:108%}`;(document.head||document.documentElement).appendChild(style);
     // Start the two fonts above the fold now instead of when the first line of text is laid out inside the shadow root.
     for(const file of ['Fraunces-Variable.woff2','SpaceGrotesk-Variable.woff2']){if([...document.querySelectorAll('link[rel="preload"][as="font"]')].some(link=>link.href===asset('fonts/'+file)))continue;const link=document.createElement('link');link.rel='preload';link.as='font';link.type='font/woff2';link.crossOrigin='anonymous';link.href=asset('fonts/'+file);document.head.appendChild(link);}}}catch{}
+  }
   // One price format everywhere: euro sign, two decimals, dot separator ("€24.90"). Native Wix formatted prices are used first; this covers every fallback.
   const money = (currency, major) => {const number=Number(major);if(major===''||major===null||major===undefined||!Number.isFinite(number))return '';const code=String(currency||'').toUpperCase();return ({EUR:'€',USD:'$',GBP:'£'}[code]||(code?code+' ':''))+number.toFixed(2);};
   const url = value => {if(typeof value!=='string'||!value.trim())return '#';try {const u = new URL(value, 'https://www.walkofberlin.com');return u.protocol === 'https:' ? u.href : '#';} catch {return '#';}};
@@ -413,10 +424,15 @@
       this.readySent=true;this.dispatchEvent(new CustomEvent('shop-render-ready',{detail:{channel:CHANNEL},bubbles:true,composed:true}));
     }
     fail(message) {if(this.isConfiguredDigitalRoute()){this.showConfiguredFailure(message);return;}this.setAttribute('data-storefront-error',message||'SHOP_UNAVAILABLE');clearTimeout(this.watchdog);this.error=message||'SHOP_UNAVAILABLE';this.revealed=false;this.hidden=true;this.style.minHeight='';this.style.display='';this.appliedHeight=0;this.style.height='0px';this.sizeObserver?.disconnect();this.render();this.dispatchEvent(new CustomEvent('shop-render-failed',{detail:{channel:CHANNEL},bubbles:true,composed:true}));}
-    productMedia(value) {const source=/^https:\/\//.test(value||'')?url(value):asset('assets/'+value),info=mediaInfo(source);return info?asset('assets/'+(info.versions.find(r=>r[0]>=750)||info.versions.at(-1))[1]):source;}
-    thumbnailMedia(value) {return THUMB_MEDIA[value]?asset('assets/'+THUMB_MEDIA[value]):this.productMedia(value);}
+    productMedia(value) {const source=/^https:\/\//.test(value||'')?url(value):asset('assets/'+value),info=legacyGiftPresentation()?null:mediaInfo(source);return info?asset('assets/'+(info.versions.find(r=>r[0]>=750)||info.versions.at(-1))[1]):source;}
+    thumbnailMedia(value) {if(legacyGiftPresentation())return this.productMedia(value);return THUMB_MEDIA[value]?asset('assets/'+THUMB_MEDIA[value]):this.productMedia(value);}
     image(product) {if(product.image)return this.productMedia(product.image);const native=product.source==='external'?'#':nativeImage(product.nativeImageUrl);return native&&native!=='#'?native:'';}
     tile(product) {
+      if(legacyGiftPresentation()){
+      const source=this.image(product);
+      return `<a class="tile ${product.imageFit==='cover'?'cover':''} ${product.visualOverlay?'audio-device-card':''}" href="${esc(url(product.productUrl))}"><img class="tile-photo" src="${esc(source)}" alt="${esc(product.alt||product.name)}" loading="lazy">${product.visualOverlay?`<img class="audio-device-overlay" src="${esc(asset('assets/'+product.visualOverlay))}" alt="Illustrative phone and headphones" loading="lazy">`:''}</a>`;
+    
+      }
       const source=this.image(product);
       return `<a class="tile ${product.imageFit==='cover'?'cover':''} ${product.visualOverlay?'audio-device-card':''}" href="${esc(url(product.productUrl))}"><img class="tile-photo" src="${esc(source)}" alt="${esc(product.alt||product.name)}"${imageAttrs(source,'card',['np-birthday','np-big-day'].includes(product.id))}>${product.visualOverlay?`<img class="audio-device-overlay" src="${esc(this.thumbnailMedia(product.visualOverlay))}" alt="Illustrative phone and headphones" loading="lazy">`:''}</a>`;
     }
@@ -762,6 +778,11 @@
     }
     skeletonBar(model,current) {return `<aside class="shopbar"><div class="wrap shopbar-inner"><span class="shopbar-home">${STORE_LOGO}</span><nav class="tabs">${model.tabs.map(tab=>`<a ${current===tab.id?'aria-current="page"':''}>${esc(tab.label)}</a>`).join('')}</nav><span class="cart-link">Cart ${sk('sk-count')}</span></div></aside>`;}
     skeletonCard(product,feature=false,eager=false) {
+      if(legacyGiftPresentation()){
+      const source=this.image(product);
+      return `<article class="${feature?'feature':'card'}"><div class="tile ${product.imageFit==='cover'?'cover':''} ${product.visualOverlay?'audio-device-card':''}">${source?`<img class="tile-photo" src="${esc(source)}" alt="" decoding="async">`:''}</div><div class="${feature?'feature-copy':'card-copy'}"><span class="type">${esc(this.cardType(product,this.skeletonModel))}</span><span class="product-name">${esc(product.name)}</span>${feature?`<p>${esc(this.layer.cardSummary(product.cardSummary||product.description))}</p>`:''}<span class="place">${esc(product.place)}</span><div class="card-bottom"><span class="price">${sk('sk-price')}</span>${sk('sk-button')}</div></div></article>`;
+    
+      }
       const source=this.image(product);
       return `<article class="${feature?'feature':'card'}"><div class="tile ${product.imageFit==='cover'?'cover':''} ${product.visualOverlay?'audio-device-card':''}">${source?`<img class="tile-photo" src="${esc(source)}" alt=""${imageAttrs(source,'card',eager)}>`:''}</div><div class="${feature?'feature-copy':'card-copy'}"><span class="type">${esc(this.cardType(product,this.skeletonModel))}</span><span class="product-name">${esc(product.name)}</span>${feature?`<p>${esc(this.layer.cardSummary(product.cardSummary||product.description))}</p>`:''}<span class="place">${esc(product.place)}</span><div class="card-bottom"><span class="price">${sk('sk-price')}</span>${sk('sk-button')}</div></div></article>`;
     }
@@ -777,7 +798,7 @@
     skeletonLanding(page,model,category) {
       const view=page.category?model.getCategoryView(page.category,'all'):null;
       const products=(page.productIds?page.productIds.map(id=>model.products.find(product=>product.wixProductId===id||product.id===id)).filter(Boolean):view?.products||[]).map(product=>{const item={...product,...page.cards?.[product.id]};const target=new URL(item.productUrl);target.searchParams.set('utm_source','store');target.searchParams.set('utm_campaign','gift-week-202611');target.searchParams.set('utm_content','store-gifts-'+(page.lang||'de'));item.productUrl=target.href;return item;});
-      const cards=products.map((product,index)=>this.skeletonCard({...product,imageFit:product.imageFit||view?.imageFit||'contain'},false,index<2));
+      const cards=products.map(product=>this.skeletonCard({...product,imageFit:product.imageFit||view?.imageFit||'contain'}));
       if(page.voucher)cards.splice(page.voucher.after,0,`<article class="card gift-card"><div class="tile cover"><img class="tile-photo" src="${esc(asset('assets/gift-voucher-card.jpg'))}" alt="" decoding="async"></div><div class="card-copy"><span class="type">GIFT VOUCHER</span><span class="product-name">${esc(page.voucher.title)}</span><p class="gift-card-text">${esc(page.voucher.text)}</p><div class="gift-card-buttons">${sk('sk-button')}${sk('sk-button')}</div></div></article>`);
       return `${this.skeletonBar(model,category==='all'?'all':category)}<section class="wrap intro"><h1 class="lead">${esc(page.title)}</h1><p>${esc(page.text)}</p></section><section class="wrap shelf"><div class="grid category-grid">${cards.join('')}</div></section>`;
     }
