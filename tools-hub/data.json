@@ -11438,6 +11438,36 @@
       ],
       "iconStatus": "live-wix-media",
       "image": "https://static.wixstatic.com/media/5a08a3_304761b50313442eb8720a5b779b60c0~mv2.png"
+    },
+    {
+      "slug": "berlin-clock-reader",
+      "title": "Berlin Clock Reader",
+      "lead": "See the Berlin clock on Berlin time, drag through the day or tap a lamp to watch the sum change, then test yourself with the answer hidden. Each row counts 5 hours, 1 hour, 5 minutes or 1 minute.",
+      "category": "Discovery",
+      "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/berlin-clock-reader/",
+      "embedHeight": 1000,
+      "hubCategory": "CultureLandmarks",
+      "type": "Guide",
+      "priority": 3,
+      "tags": [
+        "clock",
+        "mengenlehreuhr",
+        "berlin-uhr",
+        "europa-center",
+        "city west",
+        "landmark"
+      ],
+      "aliases": [
+        "berlin clock",
+        "how to read the berlin clock",
+        "mengenlehreuhr",
+        "berlin uhr",
+        "set theory clock berlin",
+        "berlin clock simulator",
+        "europa center clock"
+      ],
+      "iconStatus": "live-wix-media",
+      "image": "https://static.wixstatic.com/media/5a08a3_de7f739bb6aa4bc0b86a367cfa2f9577~mv2.png"
     }
   ],
   "hubCategories": [

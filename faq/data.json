@@ -14121,5 +14121,39 @@
         "a": "Treat it as fake. German customs says it never sends tax notices or payment demands by phone, email, SMS, social media or messenger. Check the tracking number on the carrier's own site."
       }
     ]
+  },
+  "berlin-clock-mengenlehreuhr": {
+    "title": "Berlin Clock - FAQ",
+    "subtitle": "Reading it, finding it and the story behind it.",
+    "items": [
+      {
+        "q": "How do you read the Berlin clock?",
+        "a": "Add up the lit lamps from the top down. Row 1 lamps are **5 hours**, row 2 lamps **1 hour**, row 3 lamps **5 minutes** and row 4 lamps **1 minute**. The round lamp on top only blinks and does not count."
+      },
+      {
+        "q": "Where is the Berlin clock?",
+        "a": "At **Budapester Straße 45**, on the Budapester Straße side of the Europa-Center in City West. It is about six minutes on foot from S+U Zoologischer Garten, U Kurfürstendamm or U Wittenbergplatz."
+      },
+      {
+        "q": "What does Mengenlehreuhr mean?",
+        "a": "**Set theory clock.** The name comes from the Mengenlehre taught in West German schools in the 1970s. The display is really a base-five number system."
+      },
+      {
+        "q": "Does the Berlin clock cost anything to see?",
+        "a": "No. It stands on the street, so you can see it for free at any time. It is easiest to read after dark, when the lamps stand out."
+      },
+      {
+        "q": "Is the Berlin clock still working?",
+        "a": "The latest local report I found, from June 2025, says it is still running and looked after by the Europa-Center. It was rebuilt in 2007, and only the side facing Budapester Straße is lit."
+      },
+      {
+        "q": "Why is it not on the Kurfürstendamm any more?",
+        "a": "The clock stood at the corner of Uhlandstraße from 1975 to 1995. After its inventor Dieter Binninger died in 1991, neither the city nor the district wanted to pay to run it. Business people at the Europa-Center moved it there in 1996."
+      },
+      {
+        "q": "Is the Berlin clock worth a special trip?",
+        "a": "I would not cross the city just for it. It takes two minutes, so make it a stop between Bahnhof Zoo and KaDeWe or on a walk along the Ku'damm."
+      }
+    ]
   }
 }

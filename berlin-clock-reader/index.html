@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Berlin Clock Reader: Learn the Mengenlehreuhr on a Working Model</title>
+<link rel="stylesheet" href="../css/brand.css">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #FFFFFF; color: #f5efe2; padding: 12px; }
+  .bc { background: #16130f; border-radius: 8px; overflow: hidden; }
+  .bc-head { padding: 18px 18px 6px; }
+  .bc-head h1 { font-size: 21px; line-height: 1.22; font-weight: 800; color: #fff; }
+  .bc-head p { font-size: 13.5px; line-height: 1.55; color: #cfc6b3; margin-top: 5px; max-width: 680px; }
+  .bc-modes { display: flex; flex-wrap: wrap; gap: 6px; padding: 10px 18px 0; }
+  .bc-modes button, .bc-jump button, .bc-test button { font-family: inherit; font-weight: 700; font-size: 13px; min-height: 42px; padding: 9px 13px; border-radius: 4px; border: 1px solid #6c6353; background: #26211a; color: #f5efe2; cursor: pointer; }
+  .bc-modes button[aria-pressed="true"] { background: #FFE600; border-color: #FFE600; color: #16130f; }
+  .bc-stage { display: grid; grid-template-columns: minmax(0, 300px) minmax(0, 1fr); gap: 18px; padding: 14px 18px 4px; align-items: start; }
+  #clock { display: block; width: 100%; max-width: 300px; margin: 0 auto; }
+  #clock .lamp { cursor: pointer; }
+  .bc-side { min-width: 0; }
+  .bc-big { font-size: 56px; line-height: 1; font-weight: 800; color: #fff; font-variant-numeric: tabular-nums; letter-spacing: -.01em; }
+  .bc-big.hide { color: #6c6353; }
+  .bc-note { font-size: 13px; line-height: 1.45; color: #FFE600; min-height: 38px; margin-top: 6px; }
+  .bc-ledger { list-style: none; margin-top: 8px; border-top: 1px solid #3a3429; }
+  .bc-ledger li { display: grid; grid-template-columns: 1fr auto; gap: 10px; align-items: baseline; font-size: 14px; line-height: 1.35; padding: 8px 0; border-bottom: 1px solid #3a3429; color: #e6dfcf; }
+  .bc-ledger li b { font-weight: 800; color: #fff; white-space: nowrap; font-variant-numeric: tabular-nums; }
+  .bc-ledger li small { display: block; font-size: 12px; color: #a99f8c; }
+  .bc-ledger li.sum { color: #fff; font-weight: 800; }
+  .bc-ledger li.sum b { color: #FFE600; }
+  .bc-scrub { padding: 6px 18px 2px; }
+  .bc-scrub label { display: block; font-size: 12px; font-weight: 800; letter-spacing: .05em; text-transform: uppercase; color: #cfc6b3; margin-bottom: 4px; }
+  #t { width: 100%; height: 34px; accent-color: #FFE600; cursor: pointer; }
+  .bc-ticks { display: flex; justify-content: space-between; font-size: 11px; color: #a99f8c; font-variant-numeric: tabular-nums; }
+  .bc-jump { display: flex; flex-wrap: wrap; gap: 6px; padding: 8px 18px 4px; }
+  .bc-test { margin: 10px 18px 0; padding: 12px; background: #26211a; border-radius: 4px; }
+  .bc-test[hidden] { display: none; }
+  .bc-test label { font-size: 13px; font-weight: 800; color: #fff; display: block; margin-bottom: 6px; }
+  .bc-fields { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; }
+  .bc-fields input { font-family: inherit; font-size: 22px; font-weight: 800; width: 76px; min-height: 46px; text-align: center; border: 2px solid #f5efe2; border-radius: 4px; background: #16130f; color: #fff; }
+  .bc-fields span { font-size: 22px; font-weight: 800; }
+  .bc-test .go { background: #FFE600; border-color: #FFE600; color: #16130f; }
+  .bc-res { font-size: 13.5px; line-height: 1.5; color: #f5efe2; margin-top: 8px; min-height: 20px; }
+  .bc-score { font-size: 12.5px; color: #cfc6b3; margin-top: 4px; }
+  .bc-src { font-size: 11.5px; line-height: 1.5; color: #a99f8c; padding: 10px 18px 16px; }
+  button:focus-visible, input:focus-visible, .lamp:focus-visible { outline: 3px solid #C5E1A5; outline-offset: 2px; }
+  @media (max-width: 620px) {
+    body { padding: 6px; }
+    .bc-head { padding: 14px 14px 4px; }
+    .bc-head h1 { font-size: 19px; }
+    .bc-modes, .bc-scrub, .bc-jump { padding-left: 14px; padding-right: 14px; }
+    .bc-stage { grid-template-columns: 1fr; padding: 12px 14px 2px; gap: 10px; }
+    #clock { max-width: 250px; }
+    .bc-big { font-size: 46px; text-align: center; }
+    .bc-note { text-align: center; min-height: 36px; }
+    .bc-test { margin: 8px 14px 0; }
+    .bc-src { padding: 8px 14px 14px; }
+  }
+</style>
+</head>
+<body>
+<div class="bc">
+  <div class="bc-head">
+    <h1>Berlin Clock Reader</h1>
+    <p>This is the Berlin clock running on Berlin time. Drag the time, or tap a lamp, and watch how the lamps add up. Then try reading it with the answer hidden.</p>
+  </div>
+  <div class="bc-modes" role="group" aria-label="Mode">
+    <button type="button" id="mLive" aria-pressed="true">Now in Berlin</button>
+    <button type="button" id="mTest" aria-pressed="false">Read it yourself</button>
+  </div>
+  <div class="bc-stage">
+    <svg id="clock" viewBox="0 0 300 420" role="img" aria-label="Berlin clock lamps"></svg>
+    <div class="bc-side">
+      <div class="bc-big" id="big" aria-live="polite">00:00</div>
+      <p class="bc-note" id="note"></p>
+      <ul class="bc-ledger" id="ledger"></ul>
+    </div>
+  </div>
+  <div class="bc-scrub" id="scrub">
+    <label for="t">Drag through the day</label>
+    <input type="range" id="t" min="0" max="1439" step="1" value="0">
+    <div class="bc-ticks"><span>00:00</span><span>06:00</span><span>12:00</span><span>18:00</span><span>23:59</span></div>
+  </div>
+  <div class="bc-jump" id="jump" role="group" aria-label="Jump to a time">
+    <button type="button" data-t="855">14:15 quarter past</button>
+    <button type="button" data-t="870">14:30 half past</button>
+    <button type="button" data-t="885">14:45 quarter to</button>
+  </div>
+  <div class="bc-test" id="test" hidden>
+    <label for="hh">What time does the clock show?</label>
+    <div class="bc-fields">
+      <input type="number" id="hh" min="0" max="23" inputmode="numeric" aria-label="Hours">
+      <span>:</span>
+      <input type="number" id="mm" min="0" max="59" inputmode="numeric" aria-label="Minutes">
+      <button type="button" class="go" id="check">Check</button>
+      <button type="button" id="next">Next time</button>
+    </div>
+    <p class="bc-res" id="res" aria-live="polite"></p>
+    <p class="bc-score" id="score">0 read, 0 tries</p>
+  </div>
+  <p class="bc-src">Reading rule: top lamp blinks every two seconds; rows from the top count 5 hours, 1 hour, 5 minutes and 1 minute. A model for practice, drawn from that rule. The real clock stands on Budapester Straße.</p>
+</div>
+<script src="../js/brand.js"></script>
+<script>
+(function () {
+  var ON = { r: '#ff3b2f', y: '#FFD400' }, OFF = { r: '#3c1a16', y: '#3a3112' };
+  var NS = 'http://www.w3.org/2000/svg';
+  var svg = document.getElementById('clock');
+  var rows = [
+    { n: 4, unit: 5, kind: 'h', y: 96, h: 56, label: 'Row 1', each: 'each lamp 5 hours' },
+    { n: 4, unit: 1, kind: 'h', y: 160, h: 56, label: 'Row 2', each: 'each lamp 1 hour' },
+    { n: 11, unit: 5, kind: 'm', y: 224, h: 56, label: 'Row 3', each: 'each lamp 5 minutes' },
+    { n: 4, unit: 1, kind: 'm', y: 288, h: 56, label: 'Row 4', each: 'each lamp 1 minute' }
+  ];
+  var lamps = [], blink, state = { h: 0, m: 0 }, live = true, testing = false, answer = null, solved = false, read = 0, tries = 0, timer = null;
+
+  function el(name, attrs, parent) {
+    var e = document.createElementNS(NS, name);
+    for (var k in attrs) e.setAttribute(k, attrs[k]);
+    (parent || svg).appendChild(e);
+    return e;
+  }
+  el('rect', { x: 142, y: 344, width: 16, height: 76, fill: '#3a3429' });
+  el('rect', { x: 10, y: 86, width: 280, height: 268, rx: 6, fill: '#26211a', stroke: '#6c6353' });
+  blink = el('circle', { cx: 150, cy: 44, r: 34, fill: OFF.y, stroke: '#6c6353', 'stroke-width': 3 });
+  rows.forEach(function (row, r) {
+    lamps[r] = [];
+    var gap = 6, x0 = 20, w = (260 - gap * (row.n - 1)) / row.n;
+    for (var i = 0; i < row.n; i++) {
+      var tone = r === 3 ? 'y' : r < 2 ? 'r' : ((i + 1) % 3 === 0 ? 'r' : 'y');
+      var lamp = el('rect', { x: x0 + i * (w + gap), y: row.y, width: w, height: row.h, rx: 3, fill: OFF[tone], 'class': 'lamp', tabindex: '0', role: 'button', 'aria-label': row.label + ', lamp ' + (i + 1) });
+      lamp.__tone = tone;
+      (function (r, i) {
+        lamp.addEventListener('click', function () { tap(r, i); });
+        lamp.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); tap(r, i); } });
+      })(r, i);
+      lamps[r].push(lamp);
+    }
+  });
+
+  function counts(h, m) { return [Math.floor(h / 5), h % 5, Math.floor(m / 5), m % 5]; }
+  function pad(x) { return (x < 10 ? '0' : '') + x; }
+  function berlinNow() {
+    var parts = new Intl.DateTimeFormat('en-GB', { timeZone: 'Europe/Berlin', hour: '2-digit', minute: '2-digit', second: '2-digit', hourCycle: 'h23' }).formatToParts(new Date());
+    var o = {};
+    parts.forEach(function (p) { o[p.type] = parseInt(p.value, 10); });
+    return o;
+  }
+  function paint(h, m) {
+    var c = counts(h, m);
+    rows.forEach(function (row, r) {
+      lamps[r].forEach(function (lamp, i) { lamp.setAttribute('fill', (i < c[r] ? ON : OFF)[lamp.__tone]); });
+    });
+  }
+  function ledger(h, m) {
+    var c = counts(h, m), html = '';
+    rows.forEach(function (row, r) {
+      html += '<li><span>' + row.label + '<small>' + row.each + '</small></span><b>' + c[r] + ' × ' + row.unit + ' = ' + (c[r] * row.unit) + '</b></li>';
+    });
+    html += '<li class="sum"><span>Hours + minutes</span><b>' + (c[0] * 5 + c[1]) + ' h ' + (c[2] * 5 + c[3]) + ' min</b></li>';
+    document.getElementById('ledger').innerHTML = html;
+  }
+  function hint(h, m) {
+    var c = counts(h, m)[2], fives = c * 5;
+    if (m === 0) return 'Row 3 is dark: it is exactly on the hour.';
+    if (c === 3) return 'Three lamps in row 3, the last one red: quarter past.';
+    if (c === 6) return 'Six lamps in row 3, the last one red: half past.';
+    if (c === 9) return 'Nine lamps in row 3, the last one red: quarter to.';
+    if (!c) return 'Row 3 is dark, so only row 4 counts the minutes.';
+    if (c < 3) return c + (c === 1 ? ' lamp' : ' lamps') + ' in row 3 make ' + fives + ' minutes. No red lamp yet, so it is before quarter past.';
+    var red = Math.floor(c / 3) * 15;
+    return 'The last red lamp in row 3 marks ' + red + ' minutes. ' + (c % 3) + (c % 3 === 1 ? ' more lamp makes ' : ' more lamps make ') + fives + '.';
+  }
+  function show() {
+    paint(state.h, state.m);
+    document.getElementById('t').value = state.h * 60 + state.m;
+    var big = document.getElementById('big');
+    if (testing && !solved) {
+      big.textContent = '??:??'; big.classList.add('hide');
+      document.getElementById('note').textContent = 'Add the red rows for the hours, then the bottom rows for the minutes.';
+      document.getElementById('ledger').innerHTML = '';
+    } else {
+      big.textContent = pad(state.h) + ':' + pad(state.m); big.classList.remove('hide');
+      document.getElementById('note').textContent = hint(state.h, state.m);
+      ledger(state.h, state.m);
+    }
+    if (window.__bwRequestEmbedResize) window.__bwRequestEmbedResize();
+  }
+  function stopLive() { live = false; document.getElementById('mLive').setAttribute('aria-pressed', 'false'); }
+  function tick() {
+    var n = berlinNow();
+    blink.setAttribute('fill', n.second % 2 ? ON.y : OFF.y);
+    if (live && (n.hour !== state.h || n.minute !== state.m)) { state.h = n.hour; state.m = n.minute; show(); }
+  }
+  function tap(r, i) {
+    if (testing) return;
+    stopLive();
+    var c = counts(state.h, state.m);
+    c[r] = c[r] === i + 1 ? i : i + 1;
+    var h = c[0] * 5 + c[1], m = c[2] * 5 + c[3];
+    var capped = h > 23;
+    if (capped) h = 23;
+    state.h = h; state.m = m;
+    show();
+    if (capped) document.getElementById('note').textContent = 'All eight red lamps would make 24. The clock stops at 23.';
+  }
+  function setMode(test) {
+    testing = test;
+    document.getElementById('mTest').setAttribute('aria-pressed', test ? 'true' : 'false');
+    document.getElementById('test').hidden = !test;
+    document.getElementById('scrub').hidden = test;
+    document.getElementById('jump').hidden = test;
+    document.getElementById('scrub').style.display = test ? 'none' : '';
+    document.getElementById('jump').style.display = test ? 'none' : '';
+    if (test) { live = false; document.getElementById('mLive').setAttribute('aria-pressed', 'false'); newQuestion(); }
+    else { live = true; document.getElementById('mLive').setAttribute('aria-pressed', 'true'); var n = berlinNow(); state.h = n.hour; state.m = n.minute; show(); }
+  }
+  function newQuestion() {
+    answer = { h: Math.floor(Math.random() * 24), m: Math.floor(Math.random() * 60) };
+    state.h = answer.h; state.m = answer.m; solved = false;
+    document.getElementById('hh').value = ''; document.getElementById('mm').value = '';
+    document.getElementById('res').textContent = '';
+    show();
+  }
+  function check() {
+    if (solved) return;
+    var hv = document.getElementById('hh').value, mv = document.getElementById('mm').value, res = document.getElementById('res');
+    if (hv === '' || mv === '') { res.textContent = 'Enter both the hours and the minutes.'; return; }
+    var h = parseInt(hv, 10), m = parseInt(mv, 10);
+    tries += 1;
+    if (h === answer.h && m === answer.m) {
+      read += 1; solved = true; res.textContent = 'Right. That is the Berlin clock read.';
+      show();
+    } else {
+      var c = counts(answer.h, answer.m), msg;
+      if (h !== answer.h) msg = 'The hours are off. Row 1 has ' + c[0] + ' lit, so start at ' + c[0] * 5 + ', then add row 2.';
+      else msg = 'The hours are right. Row 3 has ' + c[2] + ' lit, so start at ' + c[2] * 5 + ' minutes, then add row 4.';
+      res.textContent = msg;
+    }
+    var total = [read, tries];
+    document.getElementById('score').textContent = total[0] + ' read, ' + total[1] + (total[1] === 1 ? ' try' : ' tries');
+    if (window.__bwRequestEmbedResize) window.__bwRequestEmbedResize();
+  }
+  document.getElementById('t').addEventListener('input', function (e) {
+    stopLive();
+    var v = parseInt(e.target.value, 10);
+    state.h = Math.floor(v / 60); state.m = v % 60;
+    show();
+  });
+  document.getElementById('mLive').addEventListener('click', function () { setMode(false); });
+  document.getElementById('mTest').addEventListener('click', function () { setMode(true); });
+  document.getElementById('check').addEventListener('click', check);
+  document.getElementById('next').addEventListener('click', newQuestion);
+  ['hh', 'mm'].forEach(function (id) {
+    document.getElementById(id).addEventListener('keydown', function (e) { if (e.key === 'Enter') check(); });
+  });
+  document.querySelectorAll('#jump button').forEach(function (b) {
+    b.addEventListener('click', function () {
+      stopLive();
+      var v = parseInt(b.getAttribute('data-t'), 10);
+      state.h = Math.floor(v / 60); state.m = v % 60;
+      show();
+    });
+  });
+  var n = berlinNow();
+  state.h = n.hour; state.m = n.minute;
+  show(); tick();
+  timer = setInterval(tick, 1000);
+})();
+</script>
+</body>
+</html>
