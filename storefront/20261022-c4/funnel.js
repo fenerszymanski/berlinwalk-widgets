@@ -102,12 +102,14 @@ const money = cents => Math.round(Number(cents) || 0) / 100;
 // Steps of the personalised print's designer: search, pick, preview (both photos loaded), seen (checkbox), noresult, photoerror.
 export function ysStep(step) {
   count(step, YS_PATH);
+  if(['search','preview'].includes(step))W.WobCampaignFunnel?.emit('interest',step==='search'?'street_search':'street_preview');
   if (JOURNEY_STEPS[step]) journey(JOURNEY_STEPS[step], YS_PATH, {productId: YS_ID});
   if (PIXEL_STEPS[step]) pixel('trackCustom', PIXEL_STEPS[step], {content_ids: [YS_ID], content_type: 'product'}, step);
 }
 export function added(product, quantity = 1) {
   if (!product?.wixProductId) return;
   count('add', pathOf(product));
+  W.WobCampaignFunnel?.emit('cart','add_to_cart');
   journey('bw_store_add', pathOf(product), {productId: product.wixProductId, quantity});
   pixel('track', 'AddToCart', {content_ids: [product.wixProductId], content_type: 'product', content_name: product.name, value: money(product.priceCents) * quantity, currency: product.currency || 'EUR'}, product.wixProductId);
 }
@@ -115,6 +117,7 @@ export function added(product, quantity = 1) {
 export function checkout(cart) {
   const lines = cart?.lines || [];
   count('checkout', STORE_PATH);
+  W.WobCampaignFunnel?.emit('checkout','begin_checkout');
   journey('bw_store_checkout', STORE_PATH, {productIds: lines.map(line => line.productId).slice(0, 10), items: lines.length});
   if (lines.some(line => line.productId === YS_ID || line.productId === YS_DIGITAL_ID)) count('checkout', YS_PATH);
   if (lines.some(line => line.productId === YS_DIGITAL_ID)) count('checkout-digital', YS_PATH);
