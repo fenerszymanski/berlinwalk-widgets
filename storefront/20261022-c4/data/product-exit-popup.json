@@ -1,0 +1,974 @@
+{
+  "schemaVersion": 1,
+  "id": "product-exit-popup-202611",
+  "revision": "p12-v1",
+  "enabled": false,
+  "campaignId": "gift-week-202611",
+  "start": "2026-11-01T20:00:00+01:00",
+  "end": "2026-11-08T23:59:00+01:00",
+  "module": "https://fenerszymanski.github.io/berlinwalk-widgets/js/product-exit-popup.js?v=p12-v1",
+  "pages": {
+    "/product-page/gleisdreieck-berlin-art-print": {
+      "group": "poster",
+      "system": "wix",
+      "productId": "5d4474b8-8ad7-40a4-8005-7a73579adb75",
+      "image": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/https://static.wixstatic.com/media/5a08a3_cd849f9fe3b348af930ae348eb9bdc50~mv2.jpg",
+      "action": "details"
+    },
+    "/product-page/kottbusser-tor-berlin-art-print": {
+      "group": "poster",
+      "system": "wix",
+      "productId": "cd3b2f77-7311-4ba2-ba3e-ca5f80fb2665",
+      "image": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/https://static.wixstatic.com/media/5a08a3_23388617a6ed4ee9a6dd45aa96dfe47d~mv2.jpg",
+      "action": "details"
+    },
+    "/product-page/mehringplatz-berlin-art-print": {
+      "group": "poster",
+      "system": "wix",
+      "productId": "b16be611-bff7-4fce-93b7-2eb2345a9020",
+      "image": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/https://static.wixstatic.com/media/5a08a3_d43c2b983308436b8d2b6b54ef1d692b~mv2.png",
+      "action": "details"
+    },
+    "/product-page/berlin-street-lights-berlin-art-print": {
+      "group": "poster",
+      "system": "wix",
+      "productId": "1aa77312-f6c7-4d6e-b309-ef65dc8fcb75",
+      "image": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/https://static.wixstatic.com/media/5a08a3_3306760c6d374fa6b082ff0e45c12d29~mv2.jpg",
+      "action": "details"
+    },
+    "/product-page/two-berlin-u-bahn-profiles-berlin-art-print": {
+      "group": "poster",
+      "system": "wix",
+      "productId": "075fc392-c6af-4497-bf2e-9e911809ed99",
+      "image": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/https://static.wixstatic.com/media/5a08a3_76fb30cd2ddc491d9ba1806c004421e2~mv2.png",
+      "action": "details"
+    },
+    "/product-page/berlin-bear-berlin-art-print": {
+      "group": "poster",
+      "system": "wix",
+      "productId": "536eecf0-3fb8-4bfd-9a68-9996860f6ea3",
+      "image": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/https://static.wixstatic.com/media/5a08a3_cb599029e19c489daa889a701c90a8e3~mv2.jpg",
+      "action": "details"
+    },
+    "/product-page/strausberger-platz-berlin-art-print": {
+      "group": "poster",
+      "system": "wix",
+      "productId": "d96734fa-ec60-4e0a-9f38-c59ae8459f0a",
+      "image": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/https://static.wixstatic.com/media/5a08a3_7b743140ec804893918add7370eee90d~mv2.jpg",
+      "action": "details"
+    },
+    "/product-page/steinstuecken-berlin-art-print": {
+      "group": "poster",
+      "system": "wix",
+      "productId": "3432e54a-14f5-4d57-97dc-12889399cbb5",
+      "image": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/https://static.wixstatic.com/media/5a08a3_8b149147e8444194b976b35abc6fc334~mv2.png",
+      "action": "details"
+    },
+    "/product-page/berlin-bear-printable-berlin-poster": {
+      "group": "printable",
+      "system": "wix",
+      "productId": "8ec98cfc-353c-dfd7-7865-cb42ca31fb30",
+      "image": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/https://static.wixstatic.com/media/5a08a3_cb599029e19c489daa889a701c90a8e3~mv2.jpg",
+      "action": "details"
+    },
+    "/product-page/two-berlin-u-bahn-profiles-printable-berlin-poster": {
+      "group": "printable",
+      "system": "wix",
+      "productId": "77a8ba1c-92d2-088b-5048-44dc60a240f5",
+      "image": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/https://static.wixstatic.com/media/5a08a3_76fb30cd2ddc491d9ba1806c004421e2~mv2.png",
+      "action": "details"
+    },
+    "/product-page/berlin-street-lights-printable-berlin-poster": {
+      "group": "printable",
+      "system": "wix",
+      "productId": "b4759f68-7121-8cec-9bd9-88676849c41c",
+      "image": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/https://static.wixstatic.com/media/5a08a3_3306760c6d374fa6b082ff0e45c12d29~mv2.jpg",
+      "action": "details"
+    },
+    "/product-page/steinstuecken-printable-berlin-poster": {
+      "group": "printable",
+      "system": "wix",
+      "productId": "4507fae6-3d8b-6a79-7ab0-b3b010908cc0",
+      "image": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/https://static.wixstatic.com/media/5a08a3_8b149147e8444194b976b35abc6fc334~mv2.png",
+      "action": "details"
+    },
+    "/product-page/gleisdreieck-printable-berlin-poster": {
+      "group": "printable",
+      "system": "wix",
+      "productId": "e9aa01fa-cda4-549a-9bbf-5399e571f380",
+      "image": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/https://static.wixstatic.com/media/5a08a3_cd849f9fe3b348af930ae348eb9bdc50~mv2.jpg",
+      "action": "details"
+    },
+    "/product-page/strausberger-platz-printable-berlin-poster": {
+      "group": "printable",
+      "system": "wix",
+      "productId": "c86baec7-48ed-32d1-d8b0-a8d46c27bcc0",
+      "image": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/https://static.wixstatic.com/media/5a08a3_7b743140ec804893918add7370eee90d~mv2.jpg",
+      "action": "details"
+    },
+    "/product-page/mehringplatz-printable-berlin-poster": {
+      "group": "printable",
+      "system": "wix",
+      "productId": "f604804a-247f-b64e-bd1c-2c6839e06254",
+      "image": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/https://static.wixstatic.com/media/5a08a3_d43c2b983308436b8d2b6b54ef1d692b~mv2.png",
+      "action": "details"
+    },
+    "/product-page/kottbusser-tor-printable-berlin-poster": {
+      "group": "printable",
+      "system": "wix",
+      "productId": "d49e53dc-69f9-c5f3-ab11-999827699ecc",
+      "image": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/https://static.wixstatic.com/media/5a08a3_23388617a6ed4ee9a6dd45aa96dfe47d~mv2.jpg",
+      "action": "details"
+    },
+    "/product-page/siegessaeule-berlin-art-print": {
+      "group": "poster",
+      "system": "wix",
+      "productId": "8e2956c5-74e6-440e-b4c3-6cf0a3df23f2",
+      "image": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/https://static.wixstatic.com/media/5a08a3_8e14623aec3f42bba8a43ac44a624b48~mv2.jpg",
+      "action": "details"
+    },
+    "/product-page/siegessaeule-printable-berlin-poster": {
+      "group": "printable",
+      "system": "wix",
+      "productId": "cc2e2464-61a1-b1e7-3f70-8cad2bdefa9e",
+      "image": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/https://static.wixstatic.com/media/5a08a3_8e14623aec3f42bba8a43ac44a624b48~mv2.jpg",
+      "action": "details"
+    },
+    "/product-page/gift-your-berlin-street-in-1928-digital-gift": {
+      "group": "voucher",
+      "system": "wix",
+      "productId": "f06ca073-474d-887d-9e7a-9d110c5ebb31",
+      "image": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/gift-digital-thumb.jpg",
+      "action": "voucher"
+    },
+    "/product-page/gift-your-berlin-street-in-1928-poster-gift": {
+      "group": "voucher",
+      "system": "wix",
+      "productId": "63dbf359-73aa-4053-049d-f07048f1bc3d",
+      "image": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/gift-poster-thumb.jpg",
+      "action": "voucher"
+    },
+    "/product-page/berolina-modernist-printable-berlin-poster": {
+      "group": "printable",
+      "system": "wix",
+      "productId": "aa39bafc-c9da-f732-1416-5d7d00cdf215",
+      "image": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/berolina-modernist.jpg",
+      "action": "details"
+    },
+    "/product-page/berolina-modernist-berlin-art-print": {
+      "group": "poster",
+      "system": "wix",
+      "productId": "52d20d32-021d-4024-875c-440d29784322",
+      "image": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/berolina-modernist.jpg",
+      "action": "details"
+    },
+    "/product-page/your-berlin-street-in-1928-digital-file": {
+      "group": "street",
+      "system": "wix",
+      "productId": "9b6fbecf-32e4-27dc-f3e6-9c887fe7f495",
+      "action": "street"
+    },
+    "/product-page/grunewald-berlin-art-print": {
+      "group": "poster",
+      "system": "wix",
+      "productId": "788fa678-c3ce-494e-b7a5-6e923a5d4637",
+      "image": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/everyday-12-grunewald.jpg",
+      "action": "details"
+    },
+    "/product-page/mauerpark-berlin-art-print": {
+      "group": "poster",
+      "system": "wix",
+      "productId": "db5d95e1-c762-4da9-81e4-40e8e8b2a3d4",
+      "image": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/everyday-11-mauerpark.jpg",
+      "action": "details"
+    },
+    "/product-page/currywurst-berlin-art-print": {
+      "group": "poster",
+      "system": "wix",
+      "productId": "eb528417-cda2-4e2d-a46e-00ddd582213e",
+      "image": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/everyday-10-currywurst.jpg",
+      "action": "details"
+    },
+    "/product-page/teufelsberg-berlin-art-print": {
+      "group": "poster",
+      "system": "wix",
+      "productId": "65587cf3-a81d-441a-84ab-f140888fd431",
+      "image": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/everyday-09-teufelsberg.jpg",
+      "action": "details"
+    },
+    "/product-page/marzahn-berlin-art-print": {
+      "group": "poster",
+      "system": "wix",
+      "productId": "21ad834a-4a86-4135-a43f-fc940896fe0a",
+      "image": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/everyday-08-marzahn.jpg",
+      "action": "details"
+    },
+    "/product-page/a-window-in-berlin-berlin-art-print": {
+      "group": "poster",
+      "system": "wix",
+      "productId": "3decd6d0-aafd-4aa1-bcf0-5a30453c63b3",
+      "image": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/everyday-07-window.jpg",
+      "action": "details"
+    },
+    "/product-page/berlin-up-close-berlin-art-print": {
+      "group": "poster",
+      "system": "wix",
+      "productId": "3040bf5b-72d6-41b1-923b-c82dbdfabbc1",
+      "image": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/everyday-06-up-close.jpg",
+      "action": "details"
+    },
+    "/product-page/schönhauser-allee-berlin-art-print": {
+      "group": "poster",
+      "system": "wix",
+      "productId": "69d12671-9896-46eb-acc8-8f398a1938c3",
+      "image": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/everyday-05-schoenhauser.jpg",
+      "action": "details"
+    },
+    "/product-page/späti-berlin-art-print": {
+      "group": "poster",
+      "system": "wix",
+      "productId": "01eb3a93-8d93-41dd-a786-7d730bb2f976",
+      "image": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/everyday-04-spaeti.jpg",
+      "action": "details"
+    },
+    "/product-page/through-the-courtyard-berlin-art-print": {
+      "group": "poster",
+      "system": "wix",
+      "productId": "777b70f1-3d7f-4286-a73a-25f5858721c1",
+      "image": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/everyday-03-courtyard.jpg",
+      "action": "details"
+    },
+    "/product-page/berlin-in-pink-berlin-art-print": {
+      "group": "poster",
+      "system": "wix",
+      "productId": "4935fe7a-a33e-42c9-a315-4cb5644395a2",
+      "image": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/everyday-02-pink.jpg",
+      "action": "details"
+    },
+    "/product-page/tempelhof-berlin-art-print": {
+      "group": "poster",
+      "system": "wix",
+      "productId": "ed545698-4cbc-41dc-8f0d-5fb0a335d70d",
+      "image": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/everyday-01-tempelhof.jpg",
+      "action": "details"
+    },
+    "/product-page/grunewald-printable-berlin-poster": {
+      "group": "printable",
+      "system": "wix",
+      "productId": "a2ea2403-34ae-052b-4320-287b1b19db8c",
+      "image": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/everyday-12-grunewald.jpg",
+      "action": "details"
+    },
+    "/product-page/mauerpark-printable-berlin-poster": {
+      "group": "printable",
+      "system": "wix",
+      "productId": "d302f343-cf9f-233f-58fe-f2ef4fb3d9d0",
+      "image": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/everyday-11-mauerpark.jpg",
+      "action": "details"
+    },
+    "/product-page/currywurst-printable-berlin-poster": {
+      "group": "printable",
+      "system": "wix",
+      "productId": "249031ee-b803-44ab-cce0-2402d42d5eaa",
+      "image": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/everyday-10-currywurst.jpg",
+      "action": "details"
+    },
+    "/product-page/teufelsberg-printable-berlin-poster": {
+      "group": "printable",
+      "system": "wix",
+      "productId": "42bac8cd-a8a9-bdf9-c858-1edbd30ace60",
+      "image": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/everyday-09-teufelsberg.jpg",
+      "action": "details"
+    },
+    "/product-page/marzahn-printable-berlin-poster": {
+      "group": "printable",
+      "system": "wix",
+      "productId": "bab5589e-cc13-57b0-921f-c192c7ebd2c5",
+      "image": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/everyday-08-marzahn.jpg",
+      "action": "details"
+    },
+    "/product-page/a-window-in-berlin-printable-berlin-poster": {
+      "group": "printable",
+      "system": "wix",
+      "productId": "bea51a7c-c3f3-fcd5-907b-4223d65e936b",
+      "image": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/everyday-07-window.jpg",
+      "action": "details"
+    },
+    "/product-page/berlin-up-close-printable-berlin-poster": {
+      "group": "printable",
+      "system": "wix",
+      "productId": "d00ef91a-2015-2bad-a728-4f719c80d8df",
+      "image": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/everyday-06-up-close.jpg",
+      "action": "details"
+    },
+    "/product-page/schönhauser-allee-printable-berlin-poster": {
+      "group": "printable",
+      "system": "wix",
+      "productId": "73a6b49e-0435-da63-feb5-ad09d92e86b0",
+      "image": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/everyday-05-schoenhauser.jpg",
+      "action": "details"
+    },
+    "/product-page/späti-printable-berlin-poster": {
+      "group": "printable",
+      "system": "wix",
+      "productId": "1a6f46e4-abbf-d60e-35ca-e8bae2802879",
+      "image": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/everyday-04-spaeti.jpg",
+      "action": "details"
+    },
+    "/product-page/through-the-courtyard-printable-berlin-poster": {
+      "group": "printable",
+      "system": "wix",
+      "productId": "2fa81547-3fe5-2e27-f159-1832e962fcfe",
+      "image": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/everyday-03-courtyard.jpg",
+      "action": "details"
+    },
+    "/product-page/berlin-in-pink-printable-berlin-poster": {
+      "group": "printable",
+      "system": "wix",
+      "productId": "ed6f94a6-b06d-b045-92b8-35b4e59c9771",
+      "image": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/everyday-02-pink.jpg",
+      "action": "details"
+    },
+    "/product-page/tempelhof-printable-berlin-poster": {
+      "group": "printable",
+      "system": "wix",
+      "productId": "ae584657-fa80-a31f-894f-ee2f90096027",
+      "image": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/everyday-01-tempelhof.jpg",
+      "action": "details"
+    },
+    "/product-page/your-berlin-street-in-1928-personalised-aerial-print-30-x-40-cm": {
+      "group": "street",
+      "system": "wix",
+      "productId": "8aaf5412-7f21-42c7-acfb-85dd8417d68c",
+      "image": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/ys-sample.jpg",
+      "action": "street"
+    },
+    "/product-page/berlin-2027-wall-calendar-a3": {
+      "group": "calendar",
+      "system": null,
+      "productId": "54584152-d3f1-4197-86e0-1c4c99ba5ccf",
+      "image": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/pr-berlin-2027-wall-calendar.jpg",
+      "action": "details"
+    },
+    "/product-page/reinickendorf-art-print": {
+      "group": "poster",
+      "system": "wix",
+      "productId": "f00ec7b9-f51d-4602-9a14-250fae7bd563",
+      "image": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/pr-reinickendorf.jpg",
+      "action": "details"
+    },
+    "/product-page/lichtenberg-art-print": {
+      "group": "poster",
+      "system": "wix",
+      "productId": "a9fd57b3-ea60-4f4a-a8bf-07e6dc7e774f",
+      "image": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/pr-lichtenberg.jpg",
+      "action": "details"
+    },
+    "/product-page/marzahn-hellersdorf-art-print": {
+      "group": "poster",
+      "system": "wix",
+      "productId": "ed3108d5-120e-4145-b998-d4277ebc9ca9",
+      "image": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/pr-marzahn-hellersdorf.jpg",
+      "action": "details"
+    },
+    "/product-page/treptow-koepenick-art-print": {
+      "group": "poster",
+      "system": "wix",
+      "productId": "d035e581-eaaf-4ee1-a16a-4c76c106029b",
+      "image": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/pr-treptow-koepenick.jpg",
+      "action": "details"
+    },
+    "/product-page/neukoelln-art-print": {
+      "group": "poster",
+      "system": "wix",
+      "productId": "79862e25-1921-4e8f-9ae8-1334ae133a7e",
+      "image": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/pr-neukoelln.jpg",
+      "action": "details"
+    },
+    "/product-page/tempelhof-schoeneberg-art-print": {
+      "group": "poster",
+      "system": "wix",
+      "productId": "08c22a8d-bc0a-4fb6-a57b-b37c59785e98",
+      "image": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/pr-tempelhof-schoeneberg.jpg",
+      "action": "details"
+    },
+    "/product-page/steglitz-zehlendorf-art-print": {
+      "group": "poster",
+      "system": "wix",
+      "productId": "39f091f3-a907-4634-8249-096a097cfbeb",
+      "image": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/pr-steglitz-zehlendorf.jpg",
+      "action": "details"
+    },
+    "/product-page/spandau-art-print": {
+      "group": "poster",
+      "system": "wix",
+      "productId": "48fd50dd-1a5c-4867-b289-620980283cbc",
+      "image": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/pr-spandau.jpg",
+      "action": "details"
+    },
+    "/product-page/charlottenburg-wilmersdorf-art-print": {
+      "group": "poster",
+      "system": "wix",
+      "productId": "a7ea3f8a-db73-4560-bb54-fdb67e46fbbc",
+      "image": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/pr-charlottenburg-wilmersdorf.jpg",
+      "action": "details"
+    },
+    "/product-page/friedrichshain-kreuzberg-art-print": {
+      "group": "poster",
+      "system": "wix",
+      "productId": "3f54173e-df8a-4de3-ba9b-5e2fb29bc3eb",
+      "image": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/pr-friedrichshain-kreuzberg.jpg",
+      "action": "details"
+    },
+    "/product-page/pankow-art-print": {
+      "group": "poster",
+      "system": "wix",
+      "productId": "0354f523-ff49-4b73-b5b9-01c1215a1b20",
+      "image": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/pr-pankow.jpg",
+      "action": "details"
+    },
+    "/product-page/berlin-2027-printable-calendar": {
+      "group": "digital_calendar",
+      "system": null,
+      "productId": "8022f602-c244-954d-7744-b56ce8a9a71d",
+      "image": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/dl-berlin-2027-calendar.jpg",
+      "action": "details"
+    },
+    "/product-page/osman-kalın-s-treehouse-printable": {
+      "group": "printable",
+      "system": "wix",
+      "productId": "2149e001-c835-73b9-1bfd-c087d48c625e",
+      "image": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/dl-osman-kalin-treehouse.jpg",
+      "action": "details"
+    },
+    "/product-page/ghost-stations-printable": {
+      "group": "printable",
+      "system": "wix",
+      "productId": "ee69ccf1-f5ac-288b-bdab-f25ecdec8674",
+      "image": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/dl-ghost-stations.jpg",
+      "action": "details"
+    },
+    "/product-page/berlin-tram-map-printable": {
+      "group": "printable",
+      "system": "wix",
+      "productId": "e4e7e498-0734-f0c8-16c2-f1664489fb11",
+      "image": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/dl-berlin-tram-map.jpg",
+      "action": "details"
+    },
+    "/product-page/berlin-uhr-printable": {
+      "group": "printable",
+      "system": "wix",
+      "productId": "bf9a00ff-c6b4-a8a8-d263-93645924a2bc",
+      "image": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/dl-berlin-uhr.jpg",
+      "action": "details"
+    },
+    "/product-page/berlin-icons-printable-set-of-3": {
+      "group": "set",
+      "system": "wix",
+      "productId": "69fabc6e-f2fb-e0e9-67dc-cef78cffc44d",
+      "image": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/dl-berlin-icons-set-of-3.jpg",
+      "action": "details"
+    },
+    "/product-page/berlin-landmarks-printable-set-of-5": {
+      "group": "set",
+      "system": "wix",
+      "productId": "8566a144-d13c-ab44-f73b-0aba7fedbfd5",
+      "image": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/dl-berlin-landmarks-set-of-5.jpg",
+      "action": "details"
+    },
+    "/product-page/all-12-berlin-districts-printable-set": {
+      "group": "set",
+      "system": "wix",
+      "productId": "5ad8b924-c473-24a7-e68b-8b8a3e395b80",
+      "image": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/dl-all-12-berlin-districts-set.jpg",
+      "action": "details"
+    },
+    "/product-page/reinickendorf-printable-poster": {
+      "group": "printable",
+      "system": "wix",
+      "productId": "bfcbcb8b-3075-2ba8-76b2-7b8c5ff0bd76",
+      "image": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/dl-reinickendorf.jpg",
+      "action": "details"
+    },
+    "/product-page/lichtenberg-printable-poster": {
+      "group": "printable",
+      "system": "wix",
+      "productId": "7a64328a-e189-7411-190e-99f3ce8fa9b9",
+      "image": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/dl-lichtenberg.jpg",
+      "action": "details"
+    },
+    "/product-page/marzahn-hellersdorf-printable-poster": {
+      "group": "printable",
+      "system": "wix",
+      "productId": "1c6745e0-dfef-af13-3791-8bb8313ee15e",
+      "image": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/dl-marzahn-hellersdorf.jpg",
+      "action": "details"
+    },
+    "/product-page/treptow-köpenick-printable-poster": {
+      "group": "printable",
+      "system": "wix",
+      "productId": "cece05f1-8b5b-ce12-3d60-5e6b963225b4",
+      "image": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/dl-treptow-koepenick.jpg",
+      "action": "details"
+    },
+    "/product-page/neukölln-printable-poster": {
+      "group": "printable",
+      "system": "wix",
+      "productId": "004badf9-5cbb-d2e3-fa42-1a6a9ce6c654",
+      "image": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/dl-neukoelln.jpg",
+      "action": "details"
+    },
+    "/product-page/tempelhof-schöneberg-printable-poster": {
+      "group": "printable",
+      "system": "wix",
+      "productId": "a22bddc7-3731-1482-aad9-4d85995522ac",
+      "image": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/dl-tempelhof-schoeneberg.jpg",
+      "action": "details"
+    },
+    "/product-page/steglitz-zehlendorf-printable-poster": {
+      "group": "printable",
+      "system": "wix",
+      "productId": "84e7492d-e5c4-6637-4ce0-2b76e3ef005d",
+      "image": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/dl-steglitz-zehlendorf.jpg",
+      "action": "details"
+    },
+    "/product-page/spandau-printable-poster": {
+      "group": "printable",
+      "system": "wix",
+      "productId": "b965e7a4-fc1f-8ab3-d680-7d6e15de1f5f",
+      "image": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/dl-spandau.jpg",
+      "action": "details"
+    },
+    "/product-page/charlottenburg-wilmersdorf-printable-poster": {
+      "group": "printable",
+      "system": "wix",
+      "productId": "37fafd04-bf6d-4175-7f07-ec0b47bb46b3",
+      "image": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/dl-charlottenburg-wilmersdorf.jpg",
+      "action": "details"
+    },
+    "/product-page/pankow-printable-poster": {
+      "group": "printable",
+      "system": "wix",
+      "productId": "9b072e24-aaca-bb16-ce3b-7d60f8bcf1a6",
+      "image": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/dl-pankow.jpg",
+      "action": "details"
+    },
+    "/product-page/friedrichshain-kreuzberg-printable-poster": {
+      "group": "printable",
+      "system": "wix",
+      "productId": "587ee282-0b93-22f6-69fc-bf34d46f23aa",
+      "image": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/dl-friedrichshain-kreuzberg.jpg",
+      "action": "details"
+    },
+    "/product-page/wasserturm-printable-poster": {
+      "group": "printable",
+      "system": "wix",
+      "productId": "ae3fda47-c3aa-ad64-2134-0307dc0510e4",
+      "image": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/dl-wasserturm.jpg",
+      "action": "details"
+    },
+    "/product-page/café-achteck-printable-poster": {
+      "group": "printable",
+      "system": "wix",
+      "productId": "5de23d66-1570-9111-f62c-a5854b79ca5d",
+      "image": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/dl-cafe-achteck.jpg",
+      "action": "details"
+    },
+    "/product-page/bierpinsel-printable-poster": {
+      "group": "printable",
+      "system": "wix",
+      "productId": "d5850545-47f0-e05d-066c-5da5667fe4a9",
+      "image": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/dl-bierpinsel.jpg",
+      "action": "details"
+    },
+    "/product-page/world-clock-printable-poster": {
+      "group": "printable",
+      "system": "wix",
+      "productId": "c5596e7b-07e7-94ab-9961-df5f5dac3113",
+      "image": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/dl-world-clock.jpg",
+      "action": "details"
+    },
+    "/product-page/tv-tower-printable-poster": {
+      "group": "printable",
+      "system": "wix",
+      "productId": "2bddb91c-7218-f0fa-279e-22b097b48407",
+      "image": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/dl-tv-tower.jpg",
+      "action": "details"
+    },
+    "/product-page/osman-kalın-s-treehouse-berlin-art-print-berlin-reels-collection": {
+      "group": "poster",
+      "system": "wix",
+      "productId": "08a254a1-9cdb-4cb0-9c0c-098409bcf230",
+      "image": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/osman-kalin.jpg",
+      "action": "details"
+    },
+    "/product-page/ghost-stations-berlin-art-print-berlin-reels-collection": {
+      "group": "poster",
+      "system": "wix",
+      "productId": "6722fada-c4d9-4ac0-ab8a-6e2c6e911823",
+      "image": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/ghost-stations.jpg",
+      "action": "details"
+    },
+    "/product-page/berlin-tram-map-and-wall-art-print-berlin-reels-collection": {
+      "group": "poster",
+      "system": "wix",
+      "productId": "7c2f473b-ecbd-4a19-9d1f-18a12fa56652",
+      "image": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/tram-map.jpg",
+      "action": "details"
+    },
+    "/product-page/berlin-uhr-art-print-berlin-reels-collection": {
+      "group": "poster",
+      "system": "wix",
+      "productId": "1e5af6a4-4628-4f6a-adfb-744e2fc2049e",
+      "image": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/berlin-uhr.jpg",
+      "action": "details"
+    },
+    "/product-page/berlin-tv-tower-poster-mitte-fernsehturm-art-print-30-x-40-cm": {
+      "group": "poster",
+      "system": "wix",
+      "productId": "3a236fae-16fe-495e-8031-0e799c1bbf38",
+      "image": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/tv-tower.jpg",
+      "action": "details"
+    },
+    "/product-page/café-achteck-berlin-poster-green-architecture-art-print-30-x-40-cm": {
+      "group": "poster",
+      "system": "wix",
+      "productId": "065e316b-6066-4e5b-9e98-ade7ec33e696",
+      "image": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/cafe-achteck.jpg",
+      "action": "details"
+    },
+    "/product-page/berlin-world-clock-poster-alexanderplatz-art-print-30-x-40-cm": {
+      "group": "poster",
+      "system": "wix",
+      "productId": "1f9ad3cb-74f8-48ac-ac53-f41e71a09610",
+      "image": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/world-clock.jpg",
+      "action": "details"
+    },
+    "/product-page/bierpinsel-berlin-poster-steglitz-architecture-art-print-30-x-40-cm": {
+      "group": "poster",
+      "system": "wix",
+      "productId": "2156be29-7e90-4ebc-8b1b-c76633ff09e6",
+      "image": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/bierpinsel.jpg",
+      "action": "details"
+    },
+    "/product-page/wasserturm-berlin-poster-prenzlauer-berg-art-print-30-x-40-cm": {
+      "group": "poster",
+      "system": "wix",
+      "productId": "62001c29-9901-4616-ab03-002fbd7a2910",
+      "image": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/wasserturm.jpg",
+      "action": "details"
+    },
+    "editions:/birthday": {
+      "group": "newspaper",
+      "system": "newspaper",
+      "lang": "en",
+      "action": "sample"
+    },
+    "editions:/big-day": {
+      "group": "newspaper",
+      "system": "newspaper",
+      "lang": "en",
+      "action": "sample"
+    },
+    "editions:/first-day": {
+      "group": "newspaper",
+      "system": "newspaper",
+      "lang": "en",
+      "action": "sample"
+    },
+    "editions:/last-day": {
+      "group": "newspaper",
+      "system": "newspaper",
+      "lang": "en",
+      "action": "sample"
+    },
+    "editions:/geburtstag": {
+      "group": "newspaper",
+      "system": "newspaper",
+      "lang": "de",
+      "action": "sample"
+    },
+    "editions:/hochzeit": {
+      "group": "newspaper",
+      "system": "newspaper",
+      "lang": "de",
+      "action": "sample"
+    },
+    "/products/berlin-audio-trio-bundle": {
+      "group": "trio",
+      "system": "audio",
+      "action": "sample"
+    },
+    "/products/death-strip-audio-route": {
+      "group": "audio",
+      "system": "audio",
+      "action": "sample"
+    },
+    "/products/hidden-berlin-audio-route": {
+      "group": "audio",
+      "system": "audio",
+      "action": "sample"
+    },
+    "/products/medieval-berlin-audio-tour": {
+      "group": "audio",
+      "system": "audio",
+      "action": "sample"
+    },
+    "/products/third-reich-berlin-audio-tour": {
+      "group": "audio",
+      "system": "audio",
+      "action": "sample"
+    },
+    "/products/berlin-wall-virtual-tour": {
+      "group": "virtual",
+      "system": "audio",
+      "action": "sample"
+    },
+    "/products/medieval-berlin-virtual-tour": {
+      "group": "virtual",
+      "system": "audio",
+      "action": "sample"
+    },
+    "/products/berlin-night-in": {
+      "group": "night",
+      "system": null,
+      "action": "details"
+    },
+    "/products/berlin-first-day-rescue-plan": {
+      "group": "guide",
+      "system": null,
+      "action": "details"
+    },
+    "/products/berlin-landmarks-guide": {
+      "group": "guide",
+      "system": null,
+      "action": "details"
+    },
+    "/products/hidden-berlin-photo-missions": {
+      "group": "guide",
+      "system": null,
+      "action": "details"
+    },
+    "/berlin-trip-planner": {
+      "group": "planner",
+      "system": null,
+      "action": "details"
+    },
+    "/berlin-then-and-now": {
+      "group": "tour",
+      "system": null,
+      "action": "details"
+    },
+    "/book-berlin-walking-tour/berlin-then-and-now": {
+      "group": "tour",
+      "system": null,
+      "action": "details"
+    },
+    "/category/berlin-christmas-gifts": {
+      "group": "gifts",
+      "system": null,
+      "lang": "en",
+      "action": "gifts"
+    },
+    "/category/berlin-geschenke": {
+      "group": "gifts",
+      "system": null,
+      "lang": "de",
+      "action": "gifts"
+    }
+  },
+  "copy": {
+    "newspaper": {
+      "en": [
+        "See every page before it prints",
+        "I send you the complete proof. If you do not approve it, I refund your purchase.",
+        "See the sample"
+      ],
+      "de": [
+        "Sieh jede Seite vor dem Druck",
+        "Du bekommst die vollständige Vorschau. Gibst du sie nicht zum Druck frei, erstatte ich dir den Kaufbetrag.",
+        "Musterausgabe ansehen"
+      ]
+    },
+    "street": {
+      "en": [
+        "Find your street first",
+        "Search your Berlin address and preview the 1928 photograph before you choose a print or file.",
+        "Preview my street"
+      ],
+      "de": [
+        "Finde zuerst deine Straße",
+        "Suche deine Berliner Adresse und sieh dir das Luftbild von 1928 an, bevor du ein Poster oder eine Datei wählst.",
+        "Meine Straße ansehen"
+      ]
+    },
+    "voucher": {
+      "en": [
+        "Let them choose the street",
+        "The recipient chooses their Berlin address when they redeem the voucher.",
+        "See how the voucher works"
+      ],
+      "de": [
+        "Lass sie die Straße wählen",
+        "Die beschenkte Person wählt ihre Berliner Adresse beim Einlösen des Gutscheins.",
+        "So funktioniert der Gutschein"
+      ]
+    },
+    "poster": {
+      "en": [
+        "Check the print details",
+        "Choose the size and paper that suit your wall. Check delivery before you order. The frame is not included.",
+        "See sizes and delivery"
+      ],
+      "de": [
+        "Prüfe die Druckdetails",
+        "Wähle Format und Papier für deine Wand. Prüfe die Lieferung vor der Bestellung. Der Rahmen ist nicht enthalten.",
+        "Format und Lieferung ansehen"
+      ]
+    },
+    "printable": {
+      "en": [
+        "Print it in your own time",
+        "This is a printable download. Check the included files and sizes before you choose. Nothing is shipped.",
+        "See the files and sizes"
+      ],
+      "de": [
+        "Drucke es, wann du möchtest",
+        "Du bekommst einen Download zum Ausdrucken. Prüfe die enthaltenen Dateien und Formate. Es wird nichts versendet.",
+        "Dateien und Formate ansehen"
+      ]
+    },
+    "set": {
+      "en": [
+        "See what is in the set",
+        "Check the included designs, printable files and sizes before you choose. Nothing is shipped.",
+        "See the set details"
+      ],
+      "de": [
+        "Sieh dir das Set an",
+        "Prüfe die enthaltenen Motive, Druckdateien und Formate, bevor du dich entscheidest. Es wird nichts versendet.",
+        "Set-Details ansehen"
+      ]
+    },
+    "calendar": {
+      "en": [
+        "Make room for a year of Berlin",
+        "Check the calendar format and the monthly artwork before you choose.",
+        "See the calendar details"
+      ],
+      "de": [
+        "Ein Jahr Berlin für deine Wand",
+        "Prüfe das Kalenderformat und die Monatsmotive, bevor du dich entscheidest.",
+        "Kalenderdetails ansehen"
+      ]
+    },
+    "digital_calendar": {
+      "en": [
+        "A calendar to print yourself",
+        "Check the printable format and the monthly artwork. This is a download, so nothing is shipped.",
+        "See the calendar details"
+      ],
+      "de": [
+        "Ein Kalender zum Selbstausdrucken",
+        "Prüfe das Druckformat und die Monatsmotive. Du bekommst einen Download, es wird nichts versendet.",
+        "Kalenderdetails ansehen"
+      ]
+    },
+    "trio": {
+      "en": [
+        "Hear the stories first",
+        "Listen on your phone. I have included samples so you can hear the walks before you choose all three.",
+        "Hear a sample"
+      ],
+      "de": [
+        "Hör zuerst in die Geschichten hinein",
+        "Du hörst die Spaziergänge auf deinem Handy. Mit den Hörproben kannst du die englischen Audios vor dem Kauf kennenlernen.",
+        "Hörprobe öffnen"
+      ]
+    },
+    "audio": {
+      "en": [
+        "Hear a chapter before you go",
+        "The audio walk works on your phone. Try the free chapter before you choose.",
+        "Hear the free chapter"
+      ],
+      "de": [
+        "Hör ein Kapitel vor deinem Spaziergang",
+        "Der Audio-Spaziergang läuft auf deinem Handy. Hör dir das kostenlose englische Kapitel vor dem Kauf an.",
+        "Kostenloses Kapitel anhören"
+      ]
+    },
+    "virtual": {
+      "en": [
+        "Take a look before you choose",
+        "Explore Berlin from home. Watch the preview to see how the virtual tour works.",
+        "Watch the preview"
+      ],
+      "de": [
+        "Schau vor dem Kauf hinein",
+        "Erkunde Berlin von zu Hause. Sieh dir die Vorschau an und entdecke, wie die virtuelle Tour funktioniert.",
+        "Vorschau ansehen"
+      ]
+    },
+    "night": {
+      "en": [
+        "See what your evening includes",
+        "A Berlin evening at home. Check what is included and how access works before you choose.",
+        "See what is included"
+      ],
+      "de": [
+        "Das steckt in deinem Berlin-Abend",
+        "Ein Berlin-Abend für zu Hause. Prüfe vor dem Kauf, was enthalten ist und wie der Zugang funktioniert.",
+        "Inhalte ansehen"
+      ]
+    },
+    "planner": {
+      "en": [
+        "See how I plan your Berlin days",
+        "Check how the Trip Planner works and what you receive before you start.",
+        "See how it works"
+      ],
+      "de": [
+        "So plane ich deine Berlin-Tage",
+        "Sieh dir an, wie der Trip Planner funktioniert und was du bekommst, bevor du startest.",
+        "So funktioniert es"
+      ]
+    },
+    "tour": {
+      "en": [
+        "Check the walk before you book",
+        "Meet me at Alexanderplatz. See the route and available dates before you choose your walk.",
+        "See the route and dates"
+      ],
+      "de": [
+        "Prüfe die Tour vor deiner Buchung",
+        "Triff mich am Alexanderplatz. Sieh dir die Route und die verfügbaren Termine an, bevor du deine Tour wählst.",
+        "Route und Termine ansehen"
+      ]
+    },
+    "guide": {
+      "en": [
+        "Look inside before you choose",
+        "Check what the guide includes and how you receive it.",
+        "See the guide details"
+      ],
+      "de": [
+        "Schau vor dem Kauf hinein",
+        "Prüfe, was der Guide enthält und wie du ihn bekommst.",
+        "Guide-Details ansehen"
+      ]
+    },
+    "gifts": {
+      "en": [
+        "Find a Berlin gift that fits",
+        "Compare personalised newspapers, prints and listening gifts in my gift selection.",
+        "Explore the gift selection"
+      ],
+      "de": [
+        "Finde dein Berlin-Geschenk",
+        "Vergleiche persönliche Zeitungen, Poster und Audio-Geschenke in meiner Auswahl.",
+        "Geschenkauswahl ansehen"
+      ]
+    }
+  }
+}
