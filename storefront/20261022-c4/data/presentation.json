@@ -535,7 +535,17 @@
     "typeLine": "PERSONALISED PRINT · 30 × 40 OR 45 × 60 CM",
     "wixProductId": "8aaf5412-7f21-42c7-acfb-85dd8417d68c",
     "storyHtml": "<p>Type your address and see your street from above in 1928, the way a survey plane photographed it, with the same spot today below it. Most Berlin Altbau blocks were already standing, so you can often find your own courtyard. If your house is newer, you see what stood there before it.</p><p>The print carries your street, district, map coordinates and an optional line of your own.</p>",
-    "storyHtmlDigital": "<p>The digital version of my print: your own Berlin spot in the 1928 aerial photograph, with the same spot today below it, at the same scale, and your title, area line and coordinates.</p>"
+    "storyHtmlDigital": "<p>The digital version of my print: your own Berlin spot in the 1928 aerial photograph, with the same spot today below it, at the same scale, and your title, area line and coordinates.</p>",
+    "gallery": [
+      {
+        "image": "gallery-3b4d1c15733d5667df3235f3.jpg",
+        "alt": "Real photograph by Yusuf of the Marzahner Promenade sample print. Your address will be different. Frame not included."
+      },
+      {
+        "image": "gallery-e0778d865a4bd846c6367f4f.jpg",
+        "alt": "Real photograph by Yusuf of the Marzahner Promenade sample print. Your address will be different. Frame not included."
+      }
+    ]
   },
   {
     "id": "ed-print-01-tempelhof",
@@ -971,7 +981,17 @@
     "wixProductId": "63dbf359-73aa-4053-049d-f07048f1bc3d",
     "giftLabel": "Poster gift",
     "giftCovers": "a 30 × 40 cm Classic Matte poster, delivery included",
-    "giftNote": "Code and printable card by email, normally within the hour"
+    "giftNote": "Code and printable card by email, normally within the hour",
+    "gallery": [
+      {
+        "image": "gallery-3b4d1c15733d5667df3235f3.jpg",
+        "alt": "Real photograph by Yusuf of the Marzahner Promenade sample print. Your address will be different. Frame not included."
+      },
+      {
+        "image": "gallery-e0778d865a4bd846c6367f4f.jpg",
+        "alt": "Real photograph by Yusuf of the Marzahner Promenade sample print. Your address will be different. Frame not included."
+      }
+    ]
   },
   {
     "id": "gift-ys-digital",
