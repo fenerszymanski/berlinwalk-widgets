@@ -93,6 +93,7 @@
     }
     if (rec.phase === current && rec.kind === kind && rec.path === location.pathname) return;
     rec.phase = current; rec.kind = kind; rec.path = location.pathname;
+    node.setAttribute('data-bw-gw-surface', kind);
     rec.promo.innerHTML = content(kind);
     var close = rec.promo.querySelector('.bw-gw-close');
     if (close) close.addEventListener('click', function () { node.classList.remove('bw-lb-open'); });
