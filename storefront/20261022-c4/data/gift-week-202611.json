@@ -5,9 +5,9 @@
   "end": "2026-11-08T23:59:00+01:00",
   "percent": 20,
   "systems": {
-    "wix": false,
-    "audio": false,
-    "newspaper": false
+    "wix": true,
+    "audio": true,
+    "newspaper": true
   },
   "products": {
     "5d4474b8-8ad7-40a4-8005-7a73579adb75": {
