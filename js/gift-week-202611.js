@@ -12,12 +12,11 @@
   var observer;
   var lastPhase;
   var ASSETS = 'https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/gift-week-';
-  var FRAME_NOTE = 'Styling example. Frame not included.';
   var IMAGES = {
     newspaper: { file: 'newspaper', alt: 'A sample of The First Day, a personal newspaper, on a wooden table beside gift wrap', note: 'Sample edition with invented people.', focus: '50% 30%' },
-    street: { file: '1928', alt: 'A 1928 street print in a wooden frame on a dark green wall', note: FRAME_NOTE, focus: '50% 40%' },
-    gifts: { file: 'gifts', alt: 'A 1928 street print leaning on a shelf beside gift wrap', note: FRAME_NOTE, focus: '50% 50%' },
-    poster: { file: 'poster', alt: 'The Späti poster in a wooden frame on a light wall', note: FRAME_NOTE, focus: '50% 35%' },
+    street: { file: '1928', alt: 'A 1928 street print in a wooden frame on a dark green wall', note: '', focus: '50% 45%' },
+    gifts: { file: 'gifts', alt: 'A 1928 street print leaning on a shelf beside gift wrap', note: '', focus: '50% 58%' },
+    poster: { file: 'poster', alt: 'The Späti poster in a wooden frame on a light wall', note: '', focus: '50% 35%' },
     audio: { file: 'audio', alt: 'The ruined front of Anhalter Bahnhof in Berlin under a blue sky', note: '', focus: '50% 40%' }
   };
 
@@ -126,13 +125,13 @@
       '.bw-gw-promo p:not(.bw-gw-kicker){font:400 15px/1.55 Montserrat,Arial,sans-serif!important;color:#212121!important;margin:0 0 18px!important}',
       '.bw-gw-promo a.bw-gw-button,.bw-gw-promo a.bw-gw-button:is(:hover,:focus,:active,:visited){display:inline-flex!important;align-items:center;justify-content:center;padding:12px 18px!important;min-height:44px;max-width:100%;border:0!important;border-radius:999px;background:#FFE600!important;color:#123D18!important;font:700 13px/1.35 Montserrat,Arial,sans-serif!important;text-decoration:none!important;white-space:normal;text-align:center;overflow-wrap:anywhere}',
       '.bw-gw-promo a:focus-visible,.bw-gw-close:focus-visible{outline:3px solid #1B5E20;outline-offset:4px}',
-      '.bw-gw-promo figure.bw-gw-media{margin:0!important;padding:0!important;width:100%!important;max-width:none!important}',
+      '.bw-gw-promo figure.bw-gw-media{margin:0 0 14px!important;padding:0!important;width:100%!important;max-width:none!important}',
       '.bw-gw-promo .bw-gw-media img{display:block!important;width:100%!important;max-width:none!important;height:auto!important;aspect-ratio:16/10;object-fit:cover;border-radius:6px!important;margin:0!important;background:#efece4}',
       '.bw-gw-promo .bw-gw-media figcaption{font:400 11px/1.35 Montserrat,Arial,sans-serif!important;color:#54605a!important;margin:6px 0 0!important;padding:0!important;text-align:left!important}',
       '.bw-gw-split{display:grid;grid-template-columns:minmax(0,210px) minmax(0,1fr);gap:22px;align-items:center}.bw-gw-split .bw-gw-media img{aspect-ratio:4/5}',
       '.bw-gw-closing{grid-template-columns:minmax(0,260px) minmax(0,1fr);gap:28px;max-width:1040px;margin:0 auto}',
-      '.bw-gw-pair .bw-gw-media{margin-bottom:16px!important}',
-      '[data-bw-gw-surface="rail"] .bw-gw-media{margin-bottom:12px!important}[data-bw-gw-surface="rail"] .bw-gw-media img{aspect-ratio:4/5}',
+      '[data-bw-gw-surface="rail"] .bw-gw-media img{aspect-ratio:4/5}',
+      '@media(min-width:601px){.bw-gw-promo .bw-gw-split figure.bw-gw-media{margin:0!important}}',
       '.bw-gw-pair{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;width:100%}',
       '.bw-gw-pair .bw-gw-card{display:flex;flex-direction:column;align-items:flex-start}.bw-gw-pair .bw-gw-button{margin-top:auto}',
       '.bw-gw-actions{display:flex;align-items:center;flex-wrap:wrap;gap:18px}.bw-gw-promo .bw-gw-text{color:#123D18!important;font:600 13px/1.4 Montserrat,Arial,sans-serif!important}',
@@ -143,7 +142,7 @@
       '.bw-gw-bar{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:3px 12px;align-items:center}.bw-gw-bar .bw-gw-kicker{grid-column:1!important;margin:0!important}.bw-gw-bar strong{grid-column:1;font:600 16px/1.3 Georgia,serif}.bw-gw-bar .bw-gw-button{grid-column:2;grid-row:1 / 3}',
       '.bw-gw-close{position:absolute;right:7px;top:6px;border:0;background:transparent;font:24px/1 Arial;color:#123D18;width:28px;height:32px;cursor:pointer}',
       '.bw-letter-inline .bw-gw-close{display:none}',
-      '@media(max-width:600px){.bw-gw-split,.bw-gw-closing{display:block}.bw-gw-split .bw-gw-media{margin-bottom:14px!important}.bw-gw-split .bw-gw-media img{aspect-ratio:16/10}.bw-gw-pair{grid-template-columns:1fr}.bw-gw-card{padding:20px}.bw-gw-bar strong{font-size:15px}.bw-gw-bar .bw-gw-button{font-size:12px!important;padding:10px 12px!important}[data-bw-gw-surface="closing"],[data-bw-gw-surface="category"],[data-bw-gw-surface="tool"]{padding:16px!important}}'
+      '@media(max-width:600px){.bw-gw-split,.bw-gw-closing{display:block}.bw-gw-split .bw-gw-media img{aspect-ratio:16/10}.bw-gw-pair{grid-template-columns:1fr}.bw-gw-card{padding:20px}.bw-gw-bar strong{font-size:15px}.bw-gw-bar .bw-gw-button{font-size:12px!important;padding:10px 12px!important}[data-bw-gw-surface="closing"],[data-bw-gw-surface="category"],[data-bw-gw-surface="tool"]{padding:16px!important}}'
     ].join('');
     document.head.appendChild(node);
   }
