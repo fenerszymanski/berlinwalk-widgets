@@ -5,7 +5,7 @@
   const base = new URL('.', script.src);
   const CHANNEL = 'wob:shop-cart:v1';
   const esc = value => String(value ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-  const asset = value => {const target=new URL(value,base);if(/\.(?:js|css|json)$/.test(target.pathname))target.searchParams.set('v','christmas4-20261030');return target.href;};
+  const asset = value => {const target=new URL(value,base);if(/\.(?:js|css|json)$/.test(target.pathname))target.searchParams.set('v','newspapers-20261101');return target.href;};
   // Chrome and Safari ignore @font-face inside shadow DOM, so the three faces are registered once on the document with absolute URLs from the element's own base.
   try {if(!document.getElementById('bw-storefront-fonts')){const style=document.createElement('style');style.id='bw-storefront-fonts';style.textContent=[['Fraunces','Fraunces-Variable.ttf','100 900'],['Space Grotesk','SpaceGrotesk-Variable.ttf','300 700'],['IBM Plex Mono','IBMPlexMono-Regular.ttf','400 600'],['DM Serif Display','DMSerifDisplay-Regular.ttf','400']].map(([family,file,weight])=>`@font-face{font-family:'${family}';src:url("${asset('fonts/'+file)}") format("truetype");font-weight:${weight};font-display:swap}`).join('\n')+`
 /* Metric-matched stand-ins (27 Oct 2026): while a font file is still downloading, Safari shows the fallback; these two are scaled to the real fonts' widths (measured on the 600-weight headline: Fraunces is about 10% narrower than Georgia Bold, Space Grotesk about 8% wider than Arial) so the headline and the body text hardly change size when the real font arrives. */
@@ -147,7 +147,7 @@
     import(asset('catalog-layer.js')), import(asset('editorial-helpers.js')), import(asset('street-configurator.js')),
     ...['data/categories.json','data/presentation.json','data/native-bindings.json','data/external-products.json'].map(path => fetch(path==='data/presentation.json'?new URL('data/presentation.json?v=gallery-'+Date.now(),base).href:asset(path),path==='data/presentation.json'?{cache:'no-store'}:undefined)/* gallery-fresh-v1 */.then(response => {if (!response.ok) throw Error('CATALOGUE_METADATA_UNAVAILABLE');return response.json();})),
     import(asset('funnel.js')).catch(() => null),   // measurement must never block the shop
-    import(new URL('../../js/store-navigation.js?v=christmas4-20261030',base).href),
+    import(new URL('../../js/store-navigation.js?v=newspapers-20261101',base).href),
     import(asset('gift.js')).catch(() => null)   // gift vouchers must never block the shop
   ]);
   // German layer for the press launch, only with ?lang=de; a failure leaves the English page (30 Oct 2026).
@@ -427,16 +427,17 @@
       const illustrated=all||['print','calendar'].includes(this.category);
       const aerial=all||this.category==='personalised';
       const audio=all||this.category==='audio';
+      const newspapers=all||this.category==='newspapers';
       // Store isolation (Yusuf, 29 Oct 2026): the credits leave the page for a small "Image credits" item in the store footer, which the
       // site header's store mode draws from this global.
-      window.__bwStoreCreditsHtml=`${illustrated?'<p>Poster illustrations created with AI assistance and refined for Walk of Berlin. Frames shown in mockups are not included. The voucher picture on the gift pages is an AI-generated scene with a real 1928 aerial photograph placed on the card.</p>':''}${aerial?'<p>1928 aerial photographs: Geoportal Berlin, <a href="https://www.govdata.de/dl-de/zero-2-0" target="_blank" rel="noopener">Datenlizenz Deutschland Zero 2.0</a>. Sample print pairs archive and present-day aerial views of the same Berlin location.</p>':''}${audio?this.creditText():''}`;
+      window.__bwStoreCreditsHtml=`${newspapers?'<p>Newspaper samples: the people are invented, the news, weather and maps are real. Engravings created with AI, not drawn by hand.</p>':''}${illustrated?'<p>Poster illustrations created with AI assistance and refined for Walk of Berlin. Frames shown in mockups are not included. The voucher picture on the gift pages is an AI-generated scene with a real 1928 aerial photograph placed on the card.</p>':''}${aerial?'<p>1928 aerial photographs: Geoportal Berlin, <a href="https://www.govdata.de/dl-de/zero-2-0" target="_blank" rel="noopener">Datenlizenz Deutschland Zero 2.0</a>. Sample print pairs archive and present-day aerial views of the same Berlin location.</p>':''}${audio?this.creditText():''}`;
       return '';
     }
-    lead() {return 'Berlin posters, personalised prints, audio walks and guides.';}
+    lead() {return 'Berlin posters, personalised prints, personal newspapers, audio walks and guides.';}
     shopTitle(selected,filter) {return filter?(filter.id==='sets'?filter.label:`${filter.label} posters`):selected?.title||this.lead();}
     landingView() {
       const page=this.landing,view=page.category?this.model.getCategoryView(page.category,'all'):null;
-      const products=page.productIds?page.productIds.map(id=>this.model.products.find(product=>product.wixProductId===id)).filter(Boolean):view?.products||[];
+      const products=(page.productIds?page.productIds.map(id=>this.model.products.find(product=>product.wixProductId===id||product.id===id)).filter(Boolean):view?.products||[]).map(product=>({...product,...page.cards?.[product.id]}));
       const cards=products.map(product=>this.card({...product,cardSummary:this.layer.cardSummary(product.cardSummary||product.description),imageFit:product.imageFit||view?.imageFit||'contain'}));
       if(page.voucher)cards.splice(page.voucher.after,0,this.gift?.giftCardHtml?.(this.giftOffersAll(),page.voucher,{assetUrl:asset,printUrl:url(this.navigation.STORE_PERSONALISED_PRODUCT),redirecting:this.cartRedirect==='gift'})||'');
       return `<section class="wrap intro" lang="${esc(page.lang||'de')}"><h1 class="lead">${esc(page.title)}</h1><p>${esc(page.text)}</p></section><section class="wrap shelf"><div class="grid category-grid">${cards.join('')}</div></section>`;
@@ -735,7 +736,7 @@
     }
     skeletonLanding(page,model,category) {
       const view=page.category?model.getCategoryView(page.category,'all'):null;
-      const products=page.productIds?page.productIds.map(id=>model.products.find(product=>product.wixProductId===id)).filter(Boolean):view?.products||[];
+      const products=(page.productIds?page.productIds.map(id=>model.products.find(product=>product.wixProductId===id||product.id===id)).filter(Boolean):view?.products||[]).map(product=>({...product,...page.cards?.[product.id]}));
       const cards=products.map(product=>this.skeletonCard({...product,imageFit:product.imageFit||view?.imageFit||'contain'}));
       if(page.voucher)cards.splice(page.voucher.after,0,`<article class="card gift-card"><div class="tile cover"><img class="tile-photo" src="${esc(asset('assets/gift-voucher-card.jpg'))}" alt="" decoding="async"></div><div class="card-copy"><span class="type">GIFT VOUCHER</span><span class="product-name">${esc(page.voucher.title)}</span><p class="gift-card-text">${esc(page.voucher.text)}</p><div class="gift-card-buttons">${sk('sk-button')}${sk('sk-button')}</div></div></article>`);
       return `${this.skeletonBar(model,category==='all'?'all':category)}<section class="wrap intro"><h1 class="lead">${esc(page.title)}</h1><p>${esc(page.text)}</p></section><section class="wrap shelf"><div class="grid category-grid">${cards.join('')}</div></section>`;

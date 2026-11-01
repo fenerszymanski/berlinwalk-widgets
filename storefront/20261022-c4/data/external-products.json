@@ -424,5 +424,153 @@
       "externalSourceKey": "berlin-trip-planner",
       "description": "A day-by-day Berlin plan for 1 to 7 days, built around your dates. Web and PDF itinerary."
     }
+  },
+  {
+    "sourceKey": "newspaper-birthday",
+    "verified": true,
+    "sourceUrl": "https://editions.walkofberlin.com/birthday",
+    "productSchema": {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": "The First Day, Birthday Edition",
+      "description": "Eight printed pages about the day someone was born in Berlin: the real news, the real weather and the family’s own stories. An edition of one.",
+      "image": [
+        "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/np-birthday.jpg"
+      ],
+      "brand": {
+        "@type": "Brand",
+        "name": "Walk of Berlin"
+      },
+      "offers": {
+        "@type": "Offer",
+        "price": "59.90",
+        "priceCurrency": "EUR",
+        "availability": "https://schema.org/InStock",
+        "url": "https://editions.walkofberlin.com/birthday?utm_source=store&utm_medium=internal&utm_campaign=newspaper"
+      }
+    },
+    "presentation": {
+      "id": "np-birthday",
+      "name": "The First Day, Birthday Edition",
+      "place": "Their birthday",
+      "typeLine": "PERSONAL NEWSPAPER · 8 PAGES",
+      "alt": "Front page of a sample birthday newspaper",
+      "image": "np-birthday.jpg",
+      "imageFit": "contain",
+      "wixProductId": null,
+      "externalSourceKey": "newspaper-birthday",
+      "description": "Eight printed pages about the day someone was born in Berlin: the real news, the real weather and the family’s own stories. An edition of one."
+    }
+  },
+  {
+    "sourceKey": "newspaper-big-day",
+    "verified": true,
+    "sourceUrl": "https://editions.walkofberlin.com/big-day",
+    "productSchema": {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": "The Big Day",
+      "description": "Eight printed pages about a Berlin wedding day: what the city was doing, the weather, the day on a real map and letters from the guests. An edition of one.",
+      "image": [
+        "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/np-big-day.jpg"
+      ],
+      "brand": {
+        "@type": "Brand",
+        "name": "Walk of Berlin"
+      },
+      "offers": {
+        "@type": "Offer",
+        "price": "59.90",
+        "priceCurrency": "EUR",
+        "availability": "https://schema.org/InStock",
+        "url": "https://editions.walkofberlin.com/big-day?utm_source=store&utm_medium=internal&utm_campaign=newspaper"
+      }
+    },
+    "presentation": {
+      "id": "np-big-day",
+      "name": "The Big Day",
+      "place": "Their wedding",
+      "typeLine": "PERSONAL NEWSPAPER · 8 PAGES",
+      "alt": "Front page of a sample wedding newspaper",
+      "image": "np-big-day.jpg",
+      "imageFit": "contain",
+      "wixProductId": null,
+      "externalSourceKey": "newspaper-big-day",
+      "description": "Eight printed pages about a Berlin wedding day: what the city was doing, the weather, the day on a real map and letters from the guests. An edition of one."
+    }
+  },
+  {
+    "sourceKey": "newspaper-first-day",
+    "verified": true,
+    "sourceUrl": "https://editions.walkofberlin.com/first-day",
+    "productSchema": {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": "The First Day",
+      "description": "Eight printed pages about the day someone moved to Berlin: the news, the weather, their way across town and letters from friends. An edition of one.",
+      "image": [
+        "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/np-first-day.jpg"
+      ],
+      "brand": {
+        "@type": "Brand",
+        "name": "Walk of Berlin"
+      },
+      "offers": {
+        "@type": "Offer",
+        "price": "59.90",
+        "priceCurrency": "EUR",
+        "availability": "https://schema.org/InStock",
+        "url": "https://editions.walkofberlin.com/first-day?utm_source=store&utm_medium=internal&utm_campaign=newspaper"
+      }
+    },
+    "presentation": {
+      "id": "np-first-day",
+      "name": "The First Day",
+      "place": "The day they came to Berlin",
+      "typeLine": "PERSONAL NEWSPAPER · 8 PAGES",
+      "alt": "Front page of a sample newspaper about moving to Berlin",
+      "image": "np-first-day.jpg",
+      "imageFit": "contain",
+      "wixProductId": null,
+      "externalSourceKey": "newspaper-first-day",
+      "description": "Eight printed pages about the day someone moved to Berlin: the news, the weather, their way across town and letters from friends. An edition of one."
+    }
+  },
+  {
+    "sourceKey": "newspaper-last-day",
+    "verified": true,
+    "sourceUrl": "https://editions.walkofberlin.com/last-day",
+    "productSchema": {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": "The Last Day",
+      "description": "Eight printed pages for someone leaving Berlin: the years they stayed, their places on a real map and letters from everyone who will miss them. An edition of one.",
+      "image": [
+        "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/np-last-day.jpg"
+      ],
+      "brand": {
+        "@type": "Brand",
+        "name": "Walk of Berlin"
+      },
+      "offers": {
+        "@type": "Offer",
+        "price": "59.90",
+        "priceCurrency": "EUR",
+        "availability": "https://schema.org/InStock",
+        "url": "https://editions.walkofberlin.com/last-day?utm_source=store&utm_medium=internal&utm_campaign=newspaper"
+      }
+    },
+    "presentation": {
+      "id": "np-last-day",
+      "name": "The Last Day",
+      "place": "For someone leaving Berlin",
+      "typeLine": "PERSONAL NEWSPAPER · 8 PAGES",
+      "alt": "Front page of a sample farewell newspaper",
+      "image": "np-last-day.jpg",
+      "imageFit": "contain",
+      "wixProductId": null,
+      "externalSourceKey": "newspaper-last-day",
+      "description": "Eight printed pages for someone leaving Berlin: the years they stayed, their places on a real map and letters from everyone who will miss them. An edition of one."
+    }
   }
 ]
