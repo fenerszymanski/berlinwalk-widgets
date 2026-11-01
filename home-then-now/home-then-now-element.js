@@ -14,9 +14,9 @@
       "imgToday": "assets/hero-today.webp",
       "w": 1200,
       "h": 750,
-      "alt1928": "Potsdamer Platz from above in 1928",
-      "altToday": "Potsdamer Platz from above today",
-      "caption": "Potsdamer Platz from above, 1928 and today",
+      "alt1928": "The Reichstag from above around 1928, with a round square and the Victory Column to the west of it",
+      "altToday": "The Reichstag from above today, with its glass dome, Bundestag buildings along the Spree and an open lawn to the west",
+      "caption": "The Reichstag from above, 1928 and today",
       "streetHref": "https://www.walkofberlin.com/product-page/your-berlin-street-in-1928-personalised-aerial-print-30-x-40-cm",
       "postersHref": "#bwh-posters"
     },
@@ -224,7 +224,7 @@
     "toolsAllHref": "https://www.walkofberlin.com/berlin-tools",
     "credits": [
       {
-        "what": "Potsdamer Platz from above, about 1928 and 2026",
+        "what": "The Reichstag from above, about 1928 and 2026",
         "creator": "Hansa Luftbild (1928) and Geoportal Berlin (2026)",
         "source": "Cropped",
         "licence": "Datenlizenz Deutschland Zero 2.0",
