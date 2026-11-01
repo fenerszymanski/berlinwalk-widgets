@@ -64,6 +64,10 @@
     while (rec.original.firstChild) node.insertBefore(rec.original.firstChild, rec.original);
     rec.original.remove();
     if (rec.label === null) node.removeAttribute('aria-label'); else node.setAttribute('aria-label', rec.label);
+    ['aria-labelledby', 'aria-describedby'].forEach(function (name) {
+      var value = rec.references[name];
+      if (value === null) node.removeAttribute(name); else node.setAttribute(name, value);
+    });
     node.removeAttribute('data-bw-gw-surface');
     records.delete(node);
   }
@@ -80,11 +84,12 @@
       while (node.firstChild) original.appendChild(node.firstChild);
       var promo = document.createElement('div');
       promo.className = 'bw-gw-promo';
-      rec = { original: original, promo: promo, phase: '', kind: '', path: '', label: node.getAttribute('aria-label') };
+      rec = { original: original, promo: promo, phase: '', kind: '', path: '', label: node.getAttribute('aria-label'), references: { 'aria-labelledby': node.getAttribute('aria-labelledby'), 'aria-describedby': node.getAttribute('aria-describedby') } };
       records.set(node, rec);
       node.appendChild(original); node.appendChild(promo);
       node.setAttribute('data-bw-gw-surface', kind);
       node.setAttribute('aria-label', 'Walk of Berlin gifts');
+      node.removeAttribute('aria-labelledby'); node.removeAttribute('aria-describedby');
     }
     if (rec.phase === current && rec.kind === kind && rec.path === location.pathname) return;
     rec.phase = current; rec.kind = kind; rec.path = location.pathname;
