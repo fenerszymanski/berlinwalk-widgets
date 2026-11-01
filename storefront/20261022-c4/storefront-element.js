@@ -542,8 +542,12 @@
       const originalDescription=german?'<p>'+esc(german.cardSummary)+'</p>':native?.description||product.description;
       const berolina=product.wixProductId==='52d20d32-021d-4024-875c-440d29784322';
       const parts=splitStory(originalDescription);
-      const productionFaq=parts.sections.find(section=>/^How is it made\?$/i.test(section.title));
-      const reelDisclosure=STORY_REELS[room]?.ai;
+      if(german){
+        const sourceFaq=splitStory(native?.description||product.description).sections.find(section=>/^How is it made\?$/i.test(section.title));
+        if(sourceFaq)parts.sections.push({title:'Wie entsteht das Motiv?',html:/poster itself is based on/.test(sourceFaq.html)?'<p>Die Raumbilder sind mit KI erstellte Visualisierungen. Das Poster beruht auf Geodaten oder Vektorgrafiken.</p>':'<p>Ich nutze KI-gestützte Werkzeuge für das Motiv und überarbeite die Komposition und das Drucklayout.</p>'});
+      }
+      const productionFaq=parts.sections.find(section=>/^(?:How is it made\?|Wie entsteht das Motiv\?)$/i.test(section.title));
+      const reelDisclosure=STORY_REELS[room]?.ai?(german?'Die Stimme im Video ist KI-generiert.':STORY_REELS[room].ai):'';
       if(reelDisclosure){
         if(productionFaq)productionFaq.html=productionFaq.html.replace(/<\/p>\s*$/, ' '+esc(reelDisclosure)+'</p>');
         else parts.sections.push({title:'How is it made?',html:'<p>'+esc(reelDisclosure)+'</p>'});
