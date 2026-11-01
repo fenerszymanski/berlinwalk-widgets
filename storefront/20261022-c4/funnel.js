@@ -111,6 +111,7 @@ export function added(product, quantity = 1) {
   if (!product?.wixProductId) return;
   count('add', pathOf(product));
   W.WobCampaignFunnel?.emit('cart','add_to_cart');
+  campaignGaEvent('add_to_cart',{currency:product.currency||'EUR',value:money(product.priceCents)*quantity,items:[{item_id:product.wixProductId,item_name:product.name,price:money(product.priceCents),quantity}]});
   journey('bw_store_add', pathOf(product), {productId: product.wixProductId, quantity});
   pixel('track', 'AddToCart', {content_ids: [product.wixProductId], content_type: 'product', content_name: product.name, value: money(product.priceCents) * quantity, currency: product.currency || 'EUR'}, product.wixProductId+':'+(++successfulAddSequence));
 }
@@ -122,4 +123,11 @@ export function checkout(cart) {
   journey('bw_store_checkout', STORE_PATH, {productIds: lines.map(line => line.productId).slice(0, 10), items: lines.length});
   if (lines.some(line => line.productId === YS_ID || line.productId === YS_DIGITAL_ID)) count('checkout', YS_PATH);
   if (lines.some(line => line.productId === YS_DIGITAL_ID)) count('checkout-digital', YS_PATH);
+}
+
+function campaignGaEvent(name,data){
+ if(navigator.globalPrivacyControl)return;var policy;try{policy=window.consentPolicyManager.getCurrentConsentPolicy().policy;}catch{return;}if(policy.analytics!==true)return;
+ window.dataLayer=window.dataLayer||[];window.gtag=window.gtag||function(){window.dataLayer.push(arguments);};
+ if(!window.__wobCommerceGAConfigured){window.__wobCommerceGAConfigured=true;window.gtag('consent','update',{analytics_storage:'granted',ad_storage:policy.advertising===true?'granted':'denied'});window.gtag('js',new Date());window.gtag('config','G-4HWBTM07N2',{send_page_view:false,cookie_domain:'walkofberlin.com'});if(!document.querySelector('script[src*="googletagmanager.com/gtag/"]')){var tag=document.createElement('script');tag.async=true;tag.src='https://www.googletagmanager.com/gtag/js?id=G-4HWBTM07N2';document.head.append(tag);}}
+ window.gtag('event',name,Object.assign({send_to:'G-4HWBTM07N2',transport_type:'beacon'},data));
 }
