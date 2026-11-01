@@ -423,7 +423,7 @@
     action(product) {return product.action==='add'?`<button class="outline" data-action="add" data-product="${product.wixProductId}" ${this.busy||this.uncertain?'disabled':''}>${this.campaignGerman()?'In den Warenkorb':'Add to cart'}</button>`:`<a class="outline" href="${esc(url(product.productUrl))}">${esc(product.actionLabel)}</a>`;}
     cardType(product,model) {return model.getTwin(product)?this.campaignGerman()?`${/calendar/i.test(product.name)?'KALENDER':'POSTER'} · GEDRUCKT ODER ALS DATEI`:`${/calendar/i.test(product.name)?'CALENDAR':'POSTER'} · PRINTED OR AS A FILE`:product.typeLine;}
     campaignGerman() {return this.landing?.lang==='de'||new URLSearchParams(location.search).get('lang')==='de';}
-    campaignNativeOn(id) {const row=this.catalogue?.products?.find(p=>p.productId===id),c=this.campaignConfig;return !!(c?.products?.[id]&&Date.now()>=Date.parse(c.start)&&Date.now()<Date.parse(c.end)&&row&&Math.round(row.discountedPrice*100)===Math.round(row.price*80)&&row.discountedPrice<row.price);}
+    campaignNativeOn(id) {const row=this.catalogue?.products?.find(p=>p.productId===id),c=this.campaignConfig;return !!(c?.products?.[id]&&Date.now()>=Date.parse(c.start)&&Date.now()<Date.parse(c.end)&&row&&Math.round(row.discountedPrice*100)===Math.round(c.products[id].sale*100)&&Math.round(row.price*100)===Math.round(c.products[id].sale*100));}
     campaignPrice(product,amount,choices) {
       const c=this.campaign,ref=c?.entry(this.campaignConfig,product),enabled=!!(ref&&(product.source==='wix'?this.campaignNativeOn(product.wixProductId):c.active(this.campaignConfig,c.systemOf(product))));
       const regular=choices?c?.reference(this.campaignConfig,product.wixProductId,choices):ref?.price;

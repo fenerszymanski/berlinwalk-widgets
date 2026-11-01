@@ -3,7 +3,7 @@ export const CONFIG_URL='https://fenerszymanski.github.io/berlinwalk-widgets/sto
 export function active(config,system,now=Date.now()) {return config?.id==='gift-week-202611'&&config?.systems?.[system]===true&&now>=Date.parse(config.start)&&now<Date.parse(config.end);}
 export function systemOf(product){return product.source==='wix'?'wix':product.externalSourceKey?.startsWith('newspaper-')?'newspaper':'audio';}
 export function entry(config,product){return product.source==='wix'?config?.products?.[product.wixProductId]:config?.external?.[product.externalSourceKey];}
-export function saleCents(cents){return Math.round(cents*80/100);}
+export function saleCents(cents){return Math.floor(cents*80/1000)*10;}
 export function reference(config,id,choices){const row=config?.products?.[id];if(!row)return null;return choices?(()=>{const v=row.variants?.find(v=>Object.keys(v.choices).every(k=>v.choices[k]===choices[k]));return v?.lowest30??v?.price??null;})():row.lowest30;}
 const esc=value=>String(value??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 export function money(amount,currency='EUR',de=false){return new Intl.NumberFormat(de?'de-DE':'en-IE',{style:'currency',currency}).format(amount);}
