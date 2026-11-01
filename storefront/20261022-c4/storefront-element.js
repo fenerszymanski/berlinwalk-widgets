@@ -595,10 +595,10 @@
     }
     // "Your Berlin Street in 1928": personalised aerial print. The configurator lives in street-configurator.js; state survives re-renders in this.ys.
     realPrintPhotos(product,digital=false) {
-      const photos=(product.gallery||[]).filter(g=>/^Real photograph by Yusuf/.test(g.alt||''));
+      const photos=(product.gallery||[]).filter(g=>/^(?:Real photograph by Yusuf|Styling example)/.test(g.alt||''));
       if(!photos.length)return '';
       const de=this.campaignGerman();
-      return `<section class="p12-real-print" data-ys-legal="poster" ${digital?'hidden':''}><h2>${de?'Der Druck, von mir fotografiert':'The print, photographed by me'}</h2><p>${de?'Mein Muster der Marzahner Promenade. Dein Poster zeigt deine gewählte Adresse. Der Rahmen ist nicht enthalten.':'My Marzahner Promenade sample. Your print shows the address you choose. The frame is not included.'}</p><div class="p12-real-photos">${photos.map(g=>`<figure><img src="${esc(this.productMedia(g.image))}" alt="${esc(g.alt)}" width="450" height="600" loading="lazy" decoding="async"></figure>`).join('')}</div></section>`;
+      return `<section class="p12-real-print" data-ys-legal="poster" ${digital?'hidden':''}><h2>${de?'Dein Druck zu Hause':'Your print at home'}</h2><p>${de?'Gezeigt mit meinem Muster der Marzahner Promenade. Dein Druck zeigt deine gewählte Adresse. Rahmen nicht enthalten.':'Shown with my Marzahner Promenade sample. Your print shows the address you choose. Frame not included.'}</p><div class="p12-real-photos">${photos.map(g=>`<figure><img src="${esc(this.productMedia(g.image))}" alt="${esc(g.alt)}" width="450" height="600" loading="lazy" decoding="async"><figcaption>${/^Real/.test(g.alt)?(de?'Echter Druck, von mir fotografiert':'Real print, photographed by me'):(de?'Stylingbeispiel':'Styling example')}</figcaption></figure>`).join('')}</div></section>`;
     }
     ysProduct(product,native) {
       const story=product.storyHtml||native?.description||product.description;
