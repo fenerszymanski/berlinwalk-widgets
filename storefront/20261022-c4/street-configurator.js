@@ -315,6 +315,8 @@ const confirmHtml = where => `<div class="ys-confirm" data-ys-confirm="${where}"
 // `host` holds two slots ([data-ys-slot="visual"], [data-ys-slot="form"]) and the add button ([data-ys-add]). Rebuilt from `state` whenever the storefront re-renders. `api.add(customText)` returns a promise; `api.busy()` says whether the cart is locked.
 export function mountConfigurator(host, state, api) {
   const L = YS_LIMITS;
+  const currentPrice=state=>api.variantPrice?api.variantPrice(state):ysPrice(state);
+  const showPrice=(el,amount)=>{if(el)el.innerHTML=api.priceHtml?api.priceHtml(amount,state):euro(amount);};
   const visual = host.querySelector('[data-ys-slot="visual"]'), formSlot = host.querySelector('[data-ys-slot="form"]');
   visual.innerHTML = `<div class="ys-visual">
       <div class="ys-stage">
@@ -378,7 +380,7 @@ export function mountConfigurator(host, state, api) {
       </div>
       <div class="ys-format ys-format-top" data-ys="format" ${api.digital ? '' : 'hidden'}>
         <span class="ys-label" id="ys-format-l">What you get</span>
-        <div class="ys-sizes" role="radiogroup" aria-labelledby="ys-format-l"><button type="button" role="radio" class="ys-size" data-ys-format="poster" aria-checked="${!ysDigital(state)}">Printed poster<small>From €34.90 · printed and posted to you, free delivery</small></button><button type="button" role="radio" class="ys-size" data-ys-format="digital" aria-checked="${ysDigital(state)}">Digital file<small>${Number.isFinite(api.digitalPrice)?euro(api.digitalPrice):'Currently unavailable'} · JPG + PDF by email, print it yourself</small></button></div>
+        <div class="ys-sizes" role="radiogroup" aria-labelledby="ys-format-l"><button type="button" role="radio" class="ys-size" data-ys-format="poster" aria-checked="${!ysDigital(state)}">Printed poster<small>From ${euro(currentPrice({...state,size:YS_SIZES[0],paper:'Classic Matte'}))} · printed and posted to you, free delivery</small></button><button type="button" role="radio" class="ys-size" data-ys-format="digital" aria-checked="${ysDigital(state)}">Digital file<small>${Number.isFinite(api.digitalPrice)?euro(api.digitalPrice):'Currently unavailable'} · JPG + PDF by email, print it yourself</small></button></div>
       </div>
       <details class="ys-options" data-ys="options" ${state.optionsOpen ? 'open' : ''} ${api.variants && !ysDigital(state) ? '' : 'hidden'}>
         <summary><span class="ys-options-t">Size and paper</span><span class="ys-options-v" data-ys="optsummary"></span></summary>
@@ -412,7 +414,7 @@ export function mountConfigurator(host, state, api) {
       if(!Number.isFinite(api.digitalPrice))return;
       const label = euro(api.digitalPrice);
       optSummary(`Digital file · ${label}`);
-      const price = host.querySelector('.product-title .price'); if (price) price.textContent = label;
+      const price = host.querySelector('.product-title .price'); showPrice(price,api.digitalPrice);
       const spec = host.querySelector('.ys-buy .spec'); if (spec) spec.textContent = DIGITAL_SPEC;
       const add = host.querySelector('[data-ys-add]'); if (add) add.textContent = `Add to cart · ${label}`;
       host.querySelector('[data-ys-quickadd]').textContent = `Add to cart · ${label}`;
@@ -424,15 +426,15 @@ export function mountConfigurator(host, state, api) {
     if (!api.variants) { optSummary('Printed poster'); $('caption').textContent = captionFor(state, !!state.lat); return; }   // the picker shows only once the Wix product has its size x paper variants
     const i = YS_SIZES.indexOf(ysSize(state)), paper = ysPaper(state);
     host.querySelectorAll('[data-ys-size]').forEach(b => b.setAttribute('aria-checked', String(b.dataset.ysSize === ysSize(state))));
-    host.querySelectorAll('[data-ys-sizeprice]').forEach(el => { el.textContent = euro(paper.price[YS_SIZES.indexOf(el.dataset.ysSizeprice)]); });
+    host.querySelectorAll('[data-ys-sizeprice]').forEach(el => { el.textContent = euro(currentPrice({...state,size:el.dataset.ysSizeprice})); });
     $('papernote').textContent = paper.note;
-    optSummary(`${ysSize(state)} · ${paper.name} · ${euro(paper.price[i])}`);
-    const price = host.querySelector('.product-title .price'); if (price) price.textContent = euro(paper.price[i]);
+    optSummary(`${ysSize(state)} · ${paper.name} · ${euro(currentPrice(state))}`);
+    const price = host.querySelector('.product-title .price'); showPrice(price,currentPrice(state));
     const spec = host.querySelector('.ys-buy .spec'); if (spec) spec.textContent = `Personalised print · ${ysSize(state)} · ${paper.name}`;
-    const add = host.querySelector('[data-ys-add]'); if (add) add.textContent = `Add to cart · ${euro(paper.price[i])}`;
-    host.querySelector('[data-ys-quickadd]').textContent = `Add to cart · ${euro(paper.price[i])}`;
+    const add = host.querySelector('[data-ys-add]'); if (add) add.textContent = `Add to cart · ${euro(currentPrice(state))}`;
+    host.querySelector('[data-ys-quickadd]').textContent = `Add to cart · ${euro(currentPrice(state))}`;
     $('quickspec').textContent = `${ysSize(state)} · ${paper.name}`;
-    host.querySelectorAll('[data-ys-yes]').forEach(b => { b.textContent = `Yes, add to cart · ${euro(paper.price[i])}`; });
+    host.querySelectorAll('[data-ys-yes]').forEach(b => { b.textContent = `Yes, add to cart · ${euro(currentPrice(state))}`; });
     $('caption').textContent = captionFor(state, !!state.lat);
   }
   host.querySelectorAll('[data-ys-size]').forEach(b => b.addEventListener('click', () => { state.size = b.dataset.ysSize; paintVariant(); }));

@@ -37,6 +37,14 @@
       "description": "Three self-guided walks: 45 audio chapters, MP3 downloads and route guides. Listen on your phone as you walk.",
       "visualOverlay": "audio-phone-headphones-v1.png",
       "imageFit": "cover"
+    },
+    "campaign": {
+      "id": "gift-week-202611",
+      "start": "2026-11-01T20:00:00+01:00",
+      "end": "2026-11-08T23:59:00+01:00",
+      "regularPrice": 24.9,
+      "salePrice": 19.92,
+      "lowest30": 24.9
     }
   },
   {
@@ -72,6 +80,14 @@
       "externalSourceKey": "death-strip-audio-route",
       "description": "Follow the Berlin Wall from Nordbahnhof to Mauerpark. Ten outdoor stops, English audio, MP3s and a PDF route guide. Listen to a sample, then buy for €9.90.",
       "imageFit": "cover"
+    },
+    "campaign": {
+      "id": "gift-week-202611",
+      "start": "2026-11-01T20:00:00+01:00",
+      "end": "2026-11-08T23:59:00+01:00",
+      "regularPrice": 9.9,
+      "salePrice": 7.92,
+      "lowest30": 9.9
     }
   },
   {
@@ -107,6 +123,14 @@
       "externalSourceKey": "hidden-berlin-audio-route",
       "description": "Explore vanished stations, border stories and a relocated hotel hall on two Berlin walks. 14 English audio chapters, MP3s and a PDF guide. €9.90.",
       "imageFit": "cover"
+    },
+    "campaign": {
+      "id": "gift-week-202611",
+      "start": "2026-11-01T20:00:00+01:00",
+      "end": "2026-11-08T23:59:00+01:00",
+      "regularPrice": 9.9,
+      "salePrice": 7.92,
+      "lowest30": 9.9
     }
   },
   {
@@ -142,6 +166,14 @@
       "externalSourceKey": "medieval-berlin-audio-tour",
       "description": "Explore old Berlin from Alexanderplatz through Nikolaiviertel to Museum Island. 17 English audio chapters, MP3 downloads and a map-linked route card. €9.90.",
       "imageFit": "cover"
+    },
+    "campaign": {
+      "id": "gift-week-202611",
+      "start": "2026-11-01T20:00:00+01:00",
+      "end": "2026-11-08T23:59:00+01:00",
+      "regularPrice": 9.9,
+      "salePrice": 7.92,
+      "lowest30": 9.9
     }
   },
   {
@@ -282,6 +314,14 @@
       "externalSourceKey": "berlin-wall-virtual-tour",
       "description": "Explore the Berlin Wall from home with dated photographs, a 1989 map, narration and English captions.",
       "imageFit": "cover"
+    },
+    "campaign": {
+      "id": "gift-week-202611",
+      "start": "2026-11-01T20:00:00+01:00",
+      "end": "2026-11-08T23:59:00+01:00",
+      "regularPrice": 9.9,
+      "salePrice": 7.92,
+      "lowest30": 9.9
     }
   },
   {
@@ -352,6 +392,14 @@
       "wixProductId": null,
       "externalSourceKey": "third-reich-berlin-audio-tour",
       "description": "A respectful self-guided walk from the Reichstag to Topography of Terror. 10 places, 12 English audio chapters (39:25), MP3s and a PDF route guide. €9.90."
+    },
+    "campaign": {
+      "id": "gift-week-202611",
+      "start": "2026-11-01T20:00:00+01:00",
+      "end": "2026-11-08T23:59:00+01:00",
+      "regularPrice": 9.9,
+      "salePrice": 7.92,
+      "lowest30": 9.9
     }
   },
   {
@@ -387,6 +435,14 @@
       "wixProductId": null,
       "externalSourceKey": "medieval-berlin-virtual-tour",
       "description": "Watch Medieval Berlin from home. Nine chapters, 27 minutes of English narration, dated photographs, maps and captions."
+    },
+    "campaign": {
+      "id": "gift-week-202611",
+      "start": "2026-11-01T20:00:00+01:00",
+      "end": "2026-11-08T23:59:00+01:00",
+      "regularPrice": 9.9,
+      "salePrice": 7.92,
+      "lowest30": 9.9
     }
   },
   {
@@ -460,6 +516,14 @@
       "wixProductId": null,
       "externalSourceKey": "newspaper-birthday",
       "description": "Eight printed pages about the day someone was born in Berlin: the real news, the real weather and the family’s own stories. An edition of one."
+    },
+    "campaign": {
+      "id": "gift-week-202611",
+      "start": "2026-11-01T20:00:00+01:00",
+      "end": "2026-11-08T23:59:00+01:00",
+      "regularPrice": 59.9,
+      "salePrice": 47.92,
+      "lowest30": 59.9
     }
   },
   {
@@ -497,6 +561,14 @@
       "wixProductId": null,
       "externalSourceKey": "newspaper-big-day",
       "description": "Eight printed pages about a Berlin wedding day: what the city was doing, the weather, the day on a real map and letters from the guests. An edition of one."
+    },
+    "campaign": {
+      "id": "gift-week-202611",
+      "start": "2026-11-01T20:00:00+01:00",
+      "end": "2026-11-08T23:59:00+01:00",
+      "regularPrice": 59.9,
+      "salePrice": 47.92,
+      "lowest30": 59.9
     }
   },
   {
@@ -534,6 +606,14 @@
       "wixProductId": null,
       "externalSourceKey": "newspaper-first-day",
       "description": "Eight printed pages about the day someone moved to Berlin: the news, the weather, their way across town and letters from friends. An edition of one."
+    },
+    "campaign": {
+      "id": "gift-week-202611",
+      "start": "2026-11-01T20:00:00+01:00",
+      "end": "2026-11-08T23:59:00+01:00",
+      "regularPrice": 59.9,
+      "salePrice": 47.92,
+      "lowest30": 59.9
     }
   },
   {
@@ -571,6 +651,14 @@
       "wixProductId": null,
       "externalSourceKey": "newspaper-last-day",
       "description": "Eight printed pages for someone leaving Berlin: the years they stayed, their places on a real map and letters from everyone who will miss them. An edition of one."
+    },
+    "campaign": {
+      "id": "gift-week-202611",
+      "start": "2026-11-01T20:00:00+01:00",
+      "end": "2026-11-08T23:59:00+01:00",
+      "regularPrice": 59.9,
+      "salePrice": 47.92,
+      "lowest30": 59.9
     }
   }
 ]

@@ -42,7 +42,7 @@ export function giftHtml(offers, state = {}) {
   if (!offers?.length) return '';
   const picked = offers.find(offer => offer.kind === state.kind) || offers[0];
   const prices = offers.map(offer => `${esc(offer.info.giftLabel || offer.kind)} ${esc(offer.priceLabel)}`).join(' · ');
-  const choices = offers.map(offer => `<button type="button" role="radio" class="ys-size ys-gift-choice" data-action="gift-pick" data-gift-kind="${esc(offer.kind)}" aria-checked="${offer === picked}">${esc(offer.info.giftLabel)}<small>${esc(offer.priceLabel)} · ${esc(offer.info.giftCovers)}</small></button>`).join('');
+  const choices = offers.map(offer => `<button type="button" role="radio" class="ys-size ys-gift-choice" data-action="gift-pick" data-gift-kind="${esc(offer.kind)}" aria-checked="${offer === picked}">${esc(offer.info.giftLabel)}<small>${offer.campaignHtml||esc(offer.priceLabel)} · ${esc(offer.info.giftCovers)}</small></button>`).join('');
   return `<div class="ys-gift" data-ys-gift>
     <button type="button" class="ys-gift-toggle" data-action="gift-toggle" aria-expanded="${!!state.open}" aria-controls="ys-gift-panel">${GIFT_ICON}<span class="ys-gift-head"><strong>No address? Give a voucher.</strong><small>${prices}</small></span>${CHEVRON}</button>
     <div class="ys-gift-panel" id="ys-gift-panel" data-ys-gift-panel ${state.open ? '' : 'hidden'}>
@@ -58,7 +58,7 @@ export function giftCardHtml(offers, copy, {assetUrl, printUrl, redirecting = fa
   if (!offers?.length || !copy) return '';
   const first = offers.find(offer => offer.kind === 'poster') || offers[0];
   const buttons = offers.map(offer => `<button type="button" class="outline" data-action="gift-add" data-gift-kind="${esc(offer.kind)}" ${redirecting ? 'disabled' : ''}>${esc(offer.kind === 'poster' ? copy.print : copy.file)} · ${esc(offer.priceLabel)}</button>`).join('');
-  return `<article class="card gift-card" data-gift-card><a class="tile cover" href="${esc(printUrl)}"><img class="tile-photo" src="${esc(assetUrl('assets/gift-voucher-card.jpg'))}" alt="${esc(first.info.alt)}" loading="lazy"></a><div class="card-copy"><span class="type">GIFT VOUCHER</span><a class="product-name" href="${esc(printUrl)}">${esc(copy.title)}</a><p class="gift-card-text">${esc(copy.text)}</p><div class="gift-card-buttons">${buttons}</div><a class="gift-card-more" href="${esc(printUrl)}">${esc(copy.more)}</a></div></article>`;
+  return `<article class="card gift-card" data-gift-card><a class="tile cover" href="${esc(printUrl)}"><img class="tile-photo" src="${esc(assetUrl('assets/gift-voucher-card.jpg'))}" alt="${esc(first.info.alt)}" loading="lazy"></a><div class="card-copy"><span class="type">GIFT VOUCHER</span><a class="product-name" href="${esc(printUrl)}">${esc(copy.title)}</a><p class="gift-card-text">${esc(copy.text)}</p><div class="gift-card-prices">${offers.map(o=>`<div>${esc(o.kind==='poster'?copy.print:copy.file)} · ${o.campaignHtml||esc(o.priceLabel)}</div>`).join('')}</div><div class="gift-card-buttons">${buttons}</div><a class="gift-card-more" href="${esc(printUrl)}">${esc(copy.more)}</a></div></article>`;
 }
 
 // Cart line for a gift: friendly title, a type line from the presentation entry, thumbnail (the Wix main image if the catalogue read has one, else the local card picture).
