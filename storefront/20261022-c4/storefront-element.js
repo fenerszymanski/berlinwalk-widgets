@@ -5,7 +5,7 @@
   const base = new URL('.', script.src);
   const CHANNEL = 'wob:shop-cart:v1';
   const esc = value => String(value ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-  const asset = value => {const target=new URL(value,base);if(/\.(?:js|css|json)$/.test(target.pathname))target.searchParams.set('v','gift-week-20261101-p17-v2');return target.href;};
+  const asset = value => {const target=new URL(value,base);if(/\.(?:js|css|json)$/.test(target.pathname))target.searchParams.set('v','price-first-20261102-p19');return target.href;};
   // Chrome and Safari ignore @font-face inside shadow DOM, so the three faces are registered once on the document with absolute URLs from the element's own base.
   // Gift landing trials showed no LCP gain. Preserve their prior resource and font order.
   const legacyGiftPresentation = () => /^\/(?:category\/(?:berlin-christmas-gifts|berlin-geschenke)|gifts|geschenke)\/?$/.test(location.pathname);
@@ -166,7 +166,8 @@
     import(new URL('../../js/store-navigation.js?v=gift-week-20261101-p17-v2',base).href),
     import(asset('gift.js')).catch(()=>null),
     import(asset('gift-week.js')),
-    fetch(asset('data/gift-week-202611.json'),{cache:'no-store'}).then(r=>r.ok?r.json():null).catch(()=>null)
+    fetch(asset('data/gift-week-202611.json'),{cache:'no-store',signal:AbortSignal.timeout(5000)}).then(r=>r.ok?r.json():null).catch(()=>null),
+    fetch(asset('data/price-snapshot-202611.json'),{signal:AbortSignal.timeout(2500)}).then(r=>r.ok?r.json():null).catch(()=>null)
   ]);
   // German layer for the press launch, only with ?lang=de; a failure leaves the English page (30 Oct 2026).
   if(new URLSearchParams(location.search).get('lang')==='de')import(asset('ys-de.js')).catch(()=>{});
@@ -260,21 +261,21 @@
       this.onStoreNavigation=()=>{if(this.context.mode==='shop'){this.applyContextCategory();this.render();}};
       this.onCartViewport=()=>{cancelAnimationFrame(this.cartBarFrame);this.cartBarFrame=requestAnimationFrame(()=>this.syncMobileCheckout());};
     }
-    // The stylesheet request starts now, in parallel with the data files, so the skeleton can be drawn as soon as the data arrives. The watchdog is the last resort when the page-code bridge never answers: it falls back to the original store before the guard's own 12 s failsafe would show both at once.
-    connectedCallback() {window.addEventListener('pointerdown',this.onCreditOutside);window.addEventListener('popstate',this.onStoreNavigation);this.context=json(this.getAttribute('shop-context'))||{};this.syncConfiguredGuard();if(!this.revealed&&!this.hidden){this.style.display='block';this.style.minHeight='100vh';}window.addEventListener('scroll',this.onCartViewport,{passive:true});window.addEventListener('resize',this.onCartViewport,{passive:true});this.ensureLink();clearTimeout(this.watchdog);this.watchdog=setTimeout(()=>{if(!this.revealed&&!this.hidden){if(!this.isConfiguredDigitalRoute())releaseNative();this.fail('BRIDGE_TIMEOUT');}},Math.max(1500,10500-(globalThis.performance?.now?.()||0)));this.load();}
+    // The stylesheet and data load in parallel. Product/category previews get a bounded 20 s bridge window measured from connection. Cart timing retains its existing behavior; terminal errors still restore the native store.
+    connectedCallback() {window.addEventListener('pointerdown',this.onCreditOutside);window.addEventListener('popstate',this.onStoreNavigation);this.context=json(this.getAttribute('shop-context'))||{};this.syncConfiguredGuard();if(!this.revealed&&!this.hidden){this.style.display='block';this.style.minHeight='100vh';}window.addEventListener('scroll',this.onCartViewport,{passive:true});window.addEventListener('resize',this.onCartViewport,{passive:true});this.ensureLink();clearTimeout(this.watchdog);this.watchdog=setTimeout(()=>{if(!this.revealed&&!this.hidden){if(!this.isConfiguredDigitalRoute())releaseNative();this.fail('BRIDGE_TIMEOUT');}},/^\/(category|product-page)\//.test(location.pathname)?20000:Math.max(1500,10500-(globalThis.performance?.now?.()||0)));this.load();}
     disconnectedCallback() {clearInterval(this.campaignTimer);clearInterval(this.campaignRefresh);window.removeEventListener('pointerdown',this.onCreditOutside);window.removeEventListener('popstate',this.onStoreNavigation);clearTimeout(this.watchdog);clearTimeout(this.quoteTimer);this.sizeObserver?.disconnect();cancelAnimationFrame(this.sizeFrame);cancelAnimationFrame(this.cartBarFrame);window.removeEventListener('scroll',this.onCartViewport);window.removeEventListener('resize',this.onCartViewport);for(const pending of this.pending.values()){clearTimeout(pending.timer);pending.reject(Error('BRIDGE_DISCONNECTED'));}this.pending.clear();}
     attributeChangedCallback(name, oldValue, value) {
       if(oldValue===value)return;
-      if(name==='shop-context') {const next=json(value)||{};if(next.path!==this.context.path){this.quantity=1;this.view='poster';this.readySent=false;this.revealed=false;this.quote=null;this.quoteRevision++;this.ysEntryProductId='';this.configuredFailure=false;}this.context=next;this.syncConfiguredGuard();this.applyContextCategory();this.render();this.signalReady();}
+      if(name==='shop-context') {const next=json(value)||{};if(next.path!==this.context.path){this.quantity=1;this.view='poster';this.readySent=false;this.revealed=false;this.quote=null;this.quoteRevision++;this.ysEntryProductId='';this.configuredFailure=false;this.previewPriceHeights=new Map();}this.context=next;this.syncConfiguredGuard();this.applyContextCategory();this.render();this.signalReady();}
       if(name==='shop-catalogue') {this.catalogue=json(value);this.buildModel();}
       if(name==='shop-cart-response')this.receive(json(value));
       if(name==='shop-bridge-ready')this.start();
     }
     async load() {
-      try {const [layer,editorial,ysMod,definitions,presentation,bindings,external,funnel,navigation,gift,campaign,campaignConfig]=await resources;
-        Object.assign(this,{layer,editorial,ysMod,definitions,presentation,bindings,external,funnel,navigation,gift,campaign,campaignConfig});
-        this.campaignWasActive=['wix','audio','newspaper'].some(system=>this.campaign?.active(this.campaignConfig,system));this.campaignTimer=setInterval(()=>{this.campaign?.tick(this.shadowRoot);const next=this.campaign?.active(this.campaignConfig,'wix')||this.campaign?.active(this.campaignConfig,'audio')||this.campaign?.active(this.campaignConfig,'newspaper');if(this.campaignWasActive&&!next){this.buildModel();this.request('catalog').catch(()=>{});}this.campaignWasActive=next;},1000);
-        this.campaignRefresh=setInterval(async()=>{if(!this.isConnected||this.busy||this.uncertain)return;try{const response=await fetch(asset('data/gift-week-202611.json'),{cache:'no-store',signal:AbortSignal.timeout(5000)});if(!response.ok)return;const next=await response.json();if(!this.isConnected||next.id!=='gift-week-202611'||Date.parse(next.end)!==Date.parse('2026-11-08T23:59:00+01:00'))return;if(JSON.stringify(next.systems)!==JSON.stringify(this.campaignConfig?.systems)){this.campaignConfig=next;await this.request('catalog');}}catch{}},15000);
+      try {const [layer,editorial,ysMod,definitions,presentation,bindings,external,funnel,navigation,gift,campaign,campaignConfig,priceSnapshot]=await resources;
+        Object.assign(this,{layer,editorial,ysMod,definitions,presentation,bindings,external,funnel,navigation,gift,campaign,campaignConfig,priceSnapshot});
+        this.campaignWasActive=['wix','audio','newspaper'].some(system=>this.campaign?.active(this.campaignConfig,system));this.campaignTimer=setInterval(()=>{this.campaign?.tick(this.shadowRoot);if(!this.catalogue&&this.snapshotWasUsable!==this.snapshotUsable()){this.snapshotWasUsable=this.snapshotUsable();this.skeletonModel=null;this.render();}const next=this.campaign?.active(this.campaignConfig,'wix')||this.campaign?.active(this.campaignConfig,'audio')||this.campaign?.active(this.campaignConfig,'newspaper');if(this.campaignWasActive&&!next){this.buildModel();this.request('catalog').catch(()=>{});}this.campaignWasActive=next;},1000);
+        this.campaignRefresh=setInterval(async()=>{if(!this.isConnected||this.busy||this.uncertain)return;try{const response=await fetch(asset('data/gift-week-202611.json'),{cache:'no-store',signal:AbortSignal.timeout(5000)});if(!response.ok)throw Error('CONFIG_UNAVAILABLE');const next=await response.json();if(!this.isConnected||next.id!=='gift-week-202611'||Date.parse(next.end)!==Date.parse('2026-11-08T23:59:00+01:00'))throw Error('CONFIG_INVALID');if(JSON.stringify(next.systems)!==JSON.stringify(this.campaignConfig?.systems)){this.campaignConfig=next;this.skeletonModel=null;this.render();await this.request('catalog');}}catch{if(!this.catalogue){this.priceSnapshot=null;this.skeletonModel=null;this.render();}}},15000);
         if(this.catalogue)this.buildModel();if(!this.model)this.render();await this.start();
       }catch(error){if(!this.layer&&!this.isConfiguredDigitalRoute())releaseNative();this.fail(error.message);}
     }
@@ -438,8 +439,8 @@
     }
     action(product) {return product.action==='add'?`<button class="outline" data-action="add" data-product="${product.wixProductId}" ${this.busy||this.uncertain?'disabled':''}>${this.campaignGerman()?'In den Warenkorb':'Add to cart'}</button>`:`<a class="outline" href="${esc(url(product.productUrl))}">${esc(product.actionLabel)}</a>`;}
     cardType(product,model) {return model.getTwin(product)?this.campaignGerman()?`${/calendar/i.test(product.name)?'KALENDER':'POSTER'} · GEDRUCKT ODER ALS DATEI`:`${/calendar/i.test(product.name)?'CALENDAR':'POSTER'} · PRINTED OR AS A FILE`:product.typeLine;}
-    campaignGerman() {return this.landing?.lang==='de'||new URLSearchParams(location.search).get('lang')==='de';}
-    campaignNativeOn(id) {const row=this.catalogue?.products?.find(p=>p.productId===id),c=this.campaignConfig;return !!(c?.products?.[id]&&Date.now()>=Date.parse(c.start)&&Date.now()<Date.parse(c.end)&&row&&Math.round(row.discountedPrice*100)===Math.round(c.products[id].sale*100)&&Math.round(row.price*100)===Math.round(c.products[id].sale*100));}
+    campaignGerman() {return this.landing?.lang==='de'||this.navigation?.STORE_LANDINGS?.[this.skeletonRoute().categorySlug]?.lang==='de'||new URLSearchParams(location.search).get('lang')==='de';}
+    campaignNativeOn(id) {const row=(this.catalogue?.products||(!this.catalogue&&this.snapshotUsable()?this.priceSnapshot.products:[]))?.find(p=>p.productId===id),c=this.campaignConfig;return !!(c?.products?.[id]&&Date.now()>=Date.parse(c.start)&&Date.now()<Date.parse(c.end)&&row&&Math.round(row.discountedPrice*100)===Math.round(c.products[id].sale*100)&&Math.round(row.price*100)===Math.round(c.products[id].sale*100));}
     campaignPrice(product,amount,choices) {
       const c=this.campaign,ref=c?.entry(this.campaignConfig,product),enabled=!!(ref&&(product.source==='wix'?this.campaignNativeOn(product.wixProductId):c.active(this.campaignConfig,c.systemOf(product))));
       const regular=choices?c?.reference(this.campaignConfig,product.wixProductId,choices):ref?.price;
@@ -769,7 +770,28 @@
       return {mode:'shop',productId:null,categorySlug:route==='category'?slug:null};
     }
     // The shared catalogue layer groups and orders the shelves. Its commercial fields are placeholders that only satisfy its validation; nothing from them is ever drawn.
+    snapshotUsable() {
+      const s=this.priceSnapshot,c=this.campaignConfig,now=Date.now();
+      if(!s||!c||s.schema!==1||s.campaign!=='gift-week-202611'||s.referenceRevision!==c?.referenceRevision||s.start!==c.start||s.end!==c.end||c.end!=='2026-11-08T23:59:00+01:00'||!this.campaign?.active(c,'wix')||!Array.isArray(s.products)||now<Date.parse(s.generatedAt)||!Number.isFinite(Date.parse(s.generatedAt)))return false;
+      if(this.snapshotValidatedConfig===c&&this.snapshotValidatedData===s)return this.snapshotValidation;
+      this.snapshotValidatedConfig=c;this.snapshotValidatedData=s;
+      return this.snapshotValidation=Object.entries(c.products||{}).length===91&&Object.entries(c.products).every(([id,ref])=>{const p=s.products.find(p=>p.productId===id);return p&&p.visible===true&&p.currency==='EUR'&&Math.round(p.price*100)===Math.round(ref.sale*100)&&Math.round(p.discountedPrice*100)===Math.round(ref.sale*100)&&(ref.variants||[]).every(v=>p.variants?.some(n=>Object.keys(v.choices).every(k=>n.choices[k]===v.choices[k])&&Math.round(n.price*100)===Math.round(v.sale*100)));});
+    }
+    previewModel() {
+      if(this.catalogue)return this.model;
+      if(!this.snapshotUsable())return null;
+      const rows=this.priceSnapshot.products.filter(p=>p.visible&&!PRODUCT_VIEW_ALIASES[p.productId]&&!this.gift?.isGiftId(p.productId)).map(row=>this.nativeProductRow(row));
+      const products=[...this.layer.adaptWixProducts(rows,this.presentation),...this.layer.adaptExternalProducts(this.external)];
+      products.sort((a,b)=>this.presentation.findIndex(item=>item.id===a.id)-this.presentation.findIndex(item=>item.id===b.id));
+      for(const p of products){const ref=this.campaign.entry(this.campaignConfig,p);if(p.source==='external'&&ref&&this.campaign.active(this.campaignConfig,this.campaign.systemOf(p)))p.priceCents=this.campaign.saleCents(Math.round(ref.price*100));}
+      return this.layer.createCatalogModel(products,this.definitions);
+    }
+    loadingAction(product,primary=false) {
+      const de=this.campaignGerman(),label=product?.requiresOptions?(de?'Optionen':'Options'):(de?'In den Warenkorb':'Add to cart');
+      return `<button type="button" class="${primary?'primary':'outline'}" data-action="preview-wait" aria-disabled="true" aria-busy="true">${esc(label)} · ${de?'Lädt':'Loading'}</button><span class="sr-only" role="status" data-preview-notice></span>`;
+    }
     skeletonCatalog() {
+      const preview=this.previewModel();if(preview)return this.skeletonModel=preview;
       if(this.skeletonModel)return this.skeletonModel;
       const rows=this.presentation.filter(item=>item.wixProductId).map(item=>{const binding=this.bindings.find(entry=>entry.wixProductId===item.wixProductId);return {id:item.wixProductId,name:item.name,productType:binding?.nativeProductType,collectionIds:binding?.nativeCategoryIds||[],visible:true,stock:{inStock:true},priceData:{price:0,currency:'EUR'},productPageUrl:'https://www.walkofberlin.com/',description:'',media:{mainMedia:{image:{url:''}}},productOptions:[]};});
       const products=[...this.layer.adaptWixProducts(rows,this.presentation),...this.layer.adaptExternalProducts(this.external)];
@@ -778,6 +800,8 @@
     }
     skeletonBar(model,current) {return `<aside class="shopbar"><div class="wrap shopbar-inner"><span class="shopbar-home">${STORE_LOGO}</span><nav class="tabs">${model.tabs.map(tab=>`<a ${current===tab.id?'aria-current="page"':''}>${esc(tab.label)}</a>`).join('')}</nav><span class="cart-link">Cart ${sk('sk-count')}</span></div></aside>`;}
     skeletonCard(product,feature=false,eager=false) {
+      if(this.catalogue||this.snapshotUsable())return `<article class="${feature?'feature':'card'}" data-product="${product.id}">${this.tile(product)}<div class="${feature?'feature-copy':'card-copy'}"><span class="type">${esc(this.cardType(product,this.skeletonModel))}</span><a class="product-name" href="${esc(url(product.productUrl))}">${esc(product.name)}</a>${feature?`<p>${esc(this.layer.cardSummary(product.cardSummary||product.description))}</p>`:''}<span class="place">${esc(product.place)}</span><div class="card-bottom"><span class="price">${this.campaignPrice(product)}</span>${this.loadingAction(product)}</div></div></article>`;
+
       if(legacyGiftPresentation()){
       const source=this.image(product);
       return `<article class="${feature?'feature':'card'}"><div class="tile ${product.imageFit==='cover'?'cover':''} ${product.visualOverlay?'audio-device-card':''}">${source?`<img class="tile-photo" src="${esc(source)}" alt="" decoding="async">`:''}</div><div class="${feature?'feature-copy':'card-copy'}"><span class="type">${esc(this.cardType(product,this.skeletonModel))}</span><span class="product-name">${esc(product.name)}</span>${feature?`<p>${esc(this.layer.cardSummary(product.cardSummary||product.description))}</p>`:''}<span class="place">${esc(product.place)}</span><div class="card-bottom"><span class="price">${sk('sk-price')}</span>${sk('sk-button')}</div></div></article>`;
@@ -799,20 +823,25 @@
       const view=page.category?model.getCategoryView(page.category,'all'):null;
       const products=(page.productIds?page.productIds.map(id=>model.products.find(product=>product.wixProductId===id||product.id===id)).filter(Boolean):view?.products||[]).map(product=>{const item={...product,...page.cards?.[product.id]};const target=new URL(item.productUrl);target.searchParams.set('utm_source','store');target.searchParams.set('utm_campaign','gift-week-202611');target.searchParams.set('utm_content','store-gifts-'+(page.lang||'de'));item.productUrl=target.href;return item;});
       const cards=products.map(product=>this.skeletonCard({...product,imageFit:product.imageFit||view?.imageFit||'contain'}));
-      if(page.voucher)cards.splice(page.voucher.after,0,`<article class="card gift-card"><div class="tile cover"><img class="tile-photo" src="${esc(asset('assets/gift-voucher-card.jpg'))}" alt="" decoding="async"></div><div class="card-copy"><span class="type">GIFT VOUCHER</span><span class="product-name">${esc(page.voucher.title)}</span><p class="gift-card-text">${esc(page.voucher.text)}</p><div class="gift-card-buttons">${sk('sk-button')}${sk('sk-button')}</div></div></article>`);
+      if(page.voucher){
+        const rows=this.catalogue?.products||(this.snapshotUsable()?this.priceSnapshot.products:null);
+        const offers=rows?this.gift?.giftOffers({products:rows},this.presentation,money).map(o=>({...o,campaignHtml:this.campaignPrice({source:'wix',wixProductId:o.id,currency:o.row.currency,priceCents:Math.round(o.price*100)},o.price)})):[];
+        const card=offers?.length?this.gift.giftCardHtml(offers,page.voucher,{assetUrl:asset,printUrl:url(this.navigation.STORE_PERSONALISED_PRODUCT)}).replace(/data-action="gift-add"/g,'data-action="preview-wait" aria-disabled="true" aria-busy="true"'):'';
+        if(card)cards.splice(page.voucher.after,0,card);else if(page.voucher)cards.splice(page.voucher.after,0,this.gift?.giftCardHtml?.(this.giftOffersAll(),page.voucher,{assetUrl:asset,printUrl:url(this.navigation.STORE_PERSONALISED_PRODUCT),redirecting:this.cartRedirect==='gift'})||'');
+      }
       return `${this.skeletonBar(model,category==='all'?'all':category)}<section class="wrap intro"><h1 class="lead">${esc(page.title)}</h1><p>${esc(page.text)}</p></section><section class="wrap shelf"><div class="grid category-grid">${cards.join('')}</div></section>`;
     }
     skeletonProduct(route,model) {
-      const item=route.productId?this.presentation.find(entry=>entry.wixProductId===route.productId):null,digital=item?.kind==='digital';
+      const item=route.productId?this.presentation.find(entry=>entry.wixProductId===route.productId):null,digital=item?.kind==='digital',priced=model.products.find(p=>p.wixProductId===route.productId),hasPrice=!!priced&&(!!this.catalogue||this.snapshotUsable());
       const source=item?.image?this.productMedia(item.image):'',photo=source?`<img src="${esc(source)}" alt=""${imageAttrs(source,'product',true)}>`:'';
-      return `${this.skeletonBar(model,'all')}<div class="wrap"><nav class="breadcrumb"><span>Store</span> / ${item?esc(item.name):sk('sk-crumb')}</nav><section class="product-layout"><div class="product-title">${item?`<h1>${esc(item.name)}</h1><span class="place">${esc(item.place)}</span>`:`<h1>${sk('sk-title')}</h1>`}<span class="price sk-price-line">${sk('sk-price')}</span></div><div class="gallery"><div class="gallery-stage">${photo}</div><div class="thumbnails"><span class="thumb">${photo}</span></div></div><div class="buy-box"><p class="spec">${item?esc(item.typeLine):sk('sk-crumb')}</p><div class="buy-row ${digital?'no-qty':''}">${digital?'':sk('sk-qty')}${sk('sk-primary')}</div><div class="delivery">${sk('sk-line sk-w100')}${sk('sk-line sk-w60')}</div></div></section><div class="product-info"><section class="story"><h2>${digital?'About this download':'The story behind this print'}</h2>${sk('sk-line sk-w100')}${sk('sk-line sk-w100')}${sk('sk-line sk-w100')}${sk('sk-line sk-w60')}</section></div></div>`;
+      return `${this.skeletonBar(model,'all')}<div class="wrap"><nav class="breadcrumb"><span>Store</span> / ${item?esc(item.name):sk('sk-crumb')}</nav><section class="product-layout"><div class="product-title">${item?`<h1>${esc(item.name)}</h1><span class="place">${esc(item.place)}</span>`:`<h1>${sk('sk-title')}</h1>`}<span class="price sk-price-line">${hasPrice?this.campaignPrice(priced):sk('sk-price')}</span></div><div class="gallery"><div class="gallery-stage">${photo}</div><div class="thumbnails"><span class="thumb">${photo}</span></div></div><div class="buy-box"><p class="spec">${item?esc(item.typeLine):sk('sk-crumb')}</p><div class="buy-row ${digital?'no-qty':''}">${digital?'':sk('sk-qty')}${hasPrice?this.loadingAction(priced,true):sk('sk-primary')}</div><div class="delivery">${sk('sk-line sk-w100')}${sk('sk-line sk-w60')}</div></div></section><div class="product-info"><section class="story"><h2>${digital?'About this download':'The story behind this print'}</h2>${sk('sk-line sk-w100')}${sk('sk-line sk-w100')}${sk('sk-line sk-w100')}${sk('sk-line sk-w60')}</section></div></div>`;
     }
     skeletonCart(model) {
       const line=`<article class="cart-line"><div class="line-image"></div><div class="line-main"><h3>${sk('sk-line sk-w60 sk-heading')}</h3>${sk('sk-line sk-w40')}<div class="line-bottom">${sk('sk-qty')}<span class="price">${sk('sk-price')}</span></div></div></article>`;
       return `${this.skeletonBar(model,'all')}<section class="wrap cart-page"><h1>Your cart</h1><div class="cart-layout"><div><section class="cart-group">${line}${line}</section></div><aside class="order-summary"><h2>${sk('sk-heading')}</h2><div class="summary-row">${sk('sk-label')}${sk('sk-amount')}</div><p class="destination-label">${sk('sk-label')}</p><div class="address-grid">${sk('sk-field')}${sk('sk-field')}</div><div class="checkout-area">${sk('sk-reason')}${sk('sk-primary')}${sk('sk-note')}<span class="sk-link-row">${sk('sk-label')}</span></div></aside></div></section>`;
     }
     showWhenStyled(box) {
-      const link=this.ensureLink(),reveal=()=>{if(box.isConnected&&box.hidden)box.hidden=false;this.style.minHeight='';this.style.display='';};
+      const link=this.ensureLink(),reveal=()=>{if(box.isConnected&&box.hidden)box.hidden=false;if(this.skeletonRoute().mode!=='cart')document.documentElement.classList.add('bw-shop-preview-p19');this.style.minHeight='';this.style.display='';};
       if(link.sheet)reveal();else{link.addEventListener('load',reveal,{once:true});link.addEventListener('error',reveal,{once:true});}
     }
     // Returns true when a skeleton is in place. Needs the static data; the box stays hidden until the stylesheet is applied, so unstyled markup is never visible.
@@ -820,17 +849,19 @@
       if(!this.layer||!this.presentation)return false;
       let box=this.shadowRoot.querySelector('.skeleton');
       try {
-        const route=this.skeletonRoute(),key=[route.mode,route.productId||'',route.categorySlug||''].join('|');
+        const route=this.skeletonRoute(),key=[route.mode,route.productId||'',route.categorySlug||'',this.catalogue?'live':this.snapshotUsable()?'snapshot':'loading',this.campaignGerman()].join('|');
         if(box&&box.dataset.key===key)return true;
         const model=this.skeletonCatalog();
-        const body=this.campaignBanner()+(route.mode==='cart'?this.skeletonCart(model):route.mode==='product'?this.skeletonProduct(route,model):this.skeletonShop(route,model));
+        const body=(route.mode==='cart'?this.skeletonCart(model):route.mode==='product'?this.skeletonProduct(route,model):this.skeletonShop(route,model)).replace('</aside>','</aside>'+this.campaignBanner());
         if(!box){this.ensureLink();box=document.createElement('div');box.className='skeleton';box.setAttribute('aria-busy','true');box.hidden=true;this.shadowRoot.append(box);}
-        box.dataset.key=key;box.innerHTML=`<p class="sr-only">Loading the store</p><div aria-hidden="true">${body}</div>`;
+        box.dataset.key=key;box.innerHTML=`<p class="sr-only" role="status">Loading the store</p><div>${body}</div>`;
       }catch{box?.remove();return false;}
       this.showWhenStyled(box);this.watchSize(box);return true;
     }
     render() {
       if(this.configuredFailure&&this.isConfiguredDigitalRoute()){this.renderConfiguredFailure();return;}
+      this.previewPriceHeights=this.previewPriceHeights||new Map();
+      for(const card of this.shadowRoot.querySelectorAll('.skeleton article[data-product]')){const height=card.querySelector('.price')?.getBoundingClientRect().height;if(height>0)this.previewPriceHeights.set(card.dataset.product,Math.max(height,this.previewPriceHeights.get(card.dataset.product)||0));}
       const skeleton=!this.revealed&&!this.hidden?this.renderSkeleton():false;
       if(!this.layer||!this.model){
         if(!skeleton){if(this.layer)this.shadowRoot.innerHTML=`<link rel="stylesheet" href="${esc(asset('storefront.css'))}"><div class="bridge-loading" role="status">Loading the store…</div>`;else this.ensureLink();}
@@ -840,10 +871,15 @@
       const focus=this.shadowRoot.activeElement;
       const focusAction=focus?.dataset.action,focusLine=focus?.dataset.line;
       const keep=this.revealed||this.hidden?null:this.shadowRoot.querySelector('.skeleton');
+      // A newer live value can remove a sale disclosure. Keep its measured space so the next row stays put.
+      this.previewPriceHeights=this.previewPriceHeights||new Map();
+      if(keep)for(const card of keep.querySelectorAll('article[data-product]')){const price=card.querySelector('.price'),height=price?.getBoundingClientRect().height;if(height>0)this.previewPriceHeights.set(card.dataset.product,Math.max(height,this.previewPriceHeights.get(card.dataset.product)||0));}
+
       // The <link> node stays in the shadow root across renders. Removing and re-inserting it drops the stylesheet for a frame (":host" display included), which showed as a one-frame layout jump when the real surface replaced the skeleton.
       const sheet=this.ensureLink(),surface=document.createElement('template');
       surface.innerHTML=`<div class="surface" ${this.revealed?'':'hidden'}>${this.shopbar()}${this.campaignBanner()}${this.error?`<div class="native-error" role="alert">${esc(this.errorMessage())} <button class="text-button" data-action="refresh">Refresh cart</button></div>`:''}${this.context.mode==='product'?this.product():this.context.mode==='cart'?this.cartPage():this.shop()}<p class="sr-only" role="status" aria-live="polite">${esc(this.notice)}</p><dialog class="drawer" aria-label="Shopping cart"><div class="drawer-heading"><h2>Cart (${this.cart?this.cart.count:'—'})</h2><button class="icon-button" data-action="close-drawer" aria-label="Close cart">✕</button></div>${this.notice?`<p class="notice">${esc(this.notice)}</p>`:''}${this.cart?this.lines():''}<div class="drawer-subtotal summary-row"><span>Subtotal</span><strong>${esc(textMoney(this.cart?.subtotal))}</strong></div><p class="delivery">${this.digitalOnly()?'Nothing is shipped. Tax is confirmed after your billing country is entered.':'Delivery and tax are confirmed after your destination is entered.'}</p><div class="drawer-actions"><a class="primary" href="https://walkofberlin.com/cart-page">View cart</a><button class="text-button" data-action="close-drawer">Continue shopping</button></div></dialog></div>`;
       for(const node of [...this.shadowRoot.childNodes])if(node!==sheet&&node!==keep)node.remove();
+      for(const card of surface.content.querySelectorAll('article[data-product]')){const h=this.previewPriceHeights.get(card.dataset.product),price=card.querySelector('.price');if(h&&price)price.style.minHeight=h+'px';}
       sheet.after(surface.content);this.campaign?.tick(this.shadowRoot);
       const storeTabs=this.shadowRoot.querySelector('.shopbar .tabs'),activeTab=storeTabs?.querySelector('[aria-current]');if(activeTab&&storeTabs.scrollWidth>storeTabs.clientWidth)storeTabs.scrollLeft=Math.max(0,activeTab.offsetLeft-8);
       if(keep&&keep.hidden)this.showWhenStyled(keep);
@@ -898,6 +934,9 @@
       }finally{this.quoting=false;this.updateQuoteArea();}
     }
     async click(event) {
+      const waiting=event.target.closest?.('[data-action="preview-wait"]');
+      if(waiting){event.preventDefault();let note=waiting.parentElement.querySelector('[data-preview-notice]');if(!note){note=document.createElement('span');note.dataset.previewNotice='';note.className='sr-only';note.setAttribute('role','status');waiting.after(note);}note.textContent=this.campaignGerman()?'Der Shop wird geladen. Bitte wähle erneut, sobald er bereit ist.':'The store is loading. Please choose again when it is ready.';return;}
+
       const menu=event.target.closest('[data-menu-filter]');
       if(menu){this.navigateStore(menu.dataset.menuCategory,menu.dataset.menuFilter,event);return;}
       const category=event.target.closest('[data-category]'),filter=event.target.closest('[data-filter]');
