@@ -935,7 +935,7 @@
     }
     async click(event) {
       const waiting=event.target.closest?.('[data-action="preview-wait"]');
-      if(waiting){event.preventDefault();let note=waiting.parentElement.querySelector('[data-preview-notice]');if(!note){note=document.createElement('span');note.dataset.previewNotice='';note.className='sr-only';note.setAttribute('role','status');waiting.after(note);}note.textContent=this.campaignGerman()?'Der Shop wird geladen. Bitte wähle erneut, sobald er bereit ist.':'The store is loading. Please choose again when it is ready.';return;}
+      if(waiting){event.preventDefault();let note=waiting.parentElement.querySelector('[data-preview-notice]');if(!note){note=document.createElement('span');note.dataset.previewNotice='';note.className='sr-only';note.setAttribute('role','status');waiting.after(note);}note.className='preview-notice';note.textContent=this.campaignGerman()?'Der Shop wird geladen. Bitte wähle erneut, sobald er bereit ist.':'The store is loading. Please choose again when it is ready.';return;}
 
       const menu=event.target.closest('[data-menu-filter]');
       if(menu){this.navigateStore(menu.dataset.menuCategory,menu.dataset.menuFilter,event);return;}
