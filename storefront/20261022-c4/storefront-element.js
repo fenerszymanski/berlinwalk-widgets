@@ -942,7 +942,7 @@
     }
     async click(event) {
       const waiting=event.target.closest?.('[data-action="preview-wait"]');
-      if(waiting){event.preventDefault();let note=waiting.parentElement.querySelector('[data-preview-notice]');if(!note){note=document.createElement('span');note.dataset.previewNotice='';note.className='sr-only';note.setAttribute('role','status');waiting.after(note);}note.className='preview-notice';note.textContent=this.campaignGerman()?'Der Shop wird geladen. Bitte wähle erneut, sobald er bereit ist.':'The store is loading. Please choose again when it is ready.';return;}
+      if(waiting){event.preventDefault();let note=waiting.parentElement.querySelector('[data-preview-notice]');if(!note){note=document.createElement('span');note.dataset.previewNotice='';note.className='sr-only';note.setAttribute('role','status');waiting.after(note);}note.className='preview-notice';note.style.cssText='position:fixed;bottom:16px;left:16px;right:16px;z-index:200;max-width:420px;padding:12px 16px;border:1px solid #123d18;border-radius:6px;background:#fafaf5;color:#123d18;font:14px/1.5 system-ui;box-shadow:0 4px 20px #123d1820';note.textContent=this.campaignGerman()?'Der Shop wird geladen. Bitte wähle erneut, sobald er bereit ist.':'The store is loading. Please choose again when it is ready.';return;}
 
       const menu=event.target.closest('[data-menu-filter]');
       if(menu){this.navigateStore(menu.dataset.menuCategory,menu.dataset.menuFilter,event);return;}
