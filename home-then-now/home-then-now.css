@@ -302,6 +302,10 @@ bw-home-then-now .bwh-reel__product {
   line-height: 1.3;
   text-decoration: none;
 }
+@media (max-width: 1099px) {
+  bw-home-then-now .bwh-reel__product[data-bwh-gift-price][data-bwh-position="2"] { font-size: 12px; line-height: 14px; }
+  bw-home-then-now .bwh-reel__product[data-bwh-gift-price][data-bwh-position="3"] { font-size: 12px; }
+}
 
 /* posters */
 bw-home-then-now .bwh-poster {

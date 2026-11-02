@@ -28,7 +28,8 @@
         "img": "assets/reel-world-clock.webp",
         "productLabel": "World Clock poster · from €26.90",
         "productHref": "https://www.walkofberlin.com/product-page/berlin-world-clock-poster-alexanderplatz-art-print-30-x-40-cm",
-        "video": "video/reel-world-clock.mp4"
+        "video": "video/reel-world-clock.mp4",
+        "giftProductLabel": "World Clock poster · Gift Week from €21.50"
       },
       {
         "title": "The clock almost nobody could read",
@@ -37,7 +38,8 @@
         "img": "assets/reel-berlin-uhr.webp",
         "productLabel": "Berlin-Uhr poster · from €26.90",
         "productHref": "https://www.walkofberlin.com/product-page/berlin-uhr-art-print-berlin-reels-collection",
-        "video": "video/reel-berlin-uhr.mp4"
+        "video": "video/reel-berlin-uhr.mp4",
+        "giftProductLabel": "Berlin-Uhr poster · Gift Week from €21.50"
       },
       {
         "title": "No train stopped here for 28 years",
@@ -46,7 +48,8 @@
         "img": "assets/reel-ghost-stations.webp",
         "productLabel": "Ghost Stations file · €6.90",
         "productHref": "https://www.walkofberlin.com/product-page/ghost-stations-printable",
-        "video": "video/reel-ghost-stations.mp4"
+        "video": "video/reel-ghost-stations.mp4",
+        "giftProductLabel": "Ghost Stations file · Gift Week €5.50"
       },
       {
         "title": "Berlin’s tram map still shows the Wall",
@@ -55,7 +58,8 @@
         "img": "assets/reel-tram-map.webp",
         "productLabel": "Tram Map file · €6.90",
         "productHref": "https://www.walkofberlin.com/product-page/berlin-tram-map-printable",
-        "video": "video/reel-tram-map.mp4"
+        "video": "video/reel-tram-map.mp4",
+        "giftProductLabel": "Tram Map file · Gift Week €5.50"
       },
       {
         "title": "East Berlin, west of the Wall",
@@ -64,7 +68,8 @@
         "img": "assets/reel-osman-kalin.webp",
         "productLabel": "Treehouse file · €6.90",
         "productHref": "https://www.walkofberlin.com/product-page/osman-kal%C4%B1n-s-treehouse-printable",
-        "video": "video/reel-osman-kalin.mp4"
+        "video": "video/reel-osman-kalin.mp4",
+        "giftProductLabel": "Treehouse file · Gift Week €5.50"
       }
     ],
     "posters": [
@@ -73,42 +78,48 @@
         "href": "https://www.walkofberlin.com/product-page/kottbusser-tor-berlin-art-print",
         "img": "assets/poster-kottbusser-tor.webp",
         "alt": "Kottbusser Tor poster in a room",
-        "price": "from €26.90"
+        "price": "from €26.90",
+        "giftPrice": "Gift Week from €21.50"
       },
       {
         "name": "Berolina",
         "href": "https://www.walkofberlin.com/product-page/berolina-modernist-berlin-art-print",
         "img": "assets/poster-berolina.webp",
         "alt": "Berolina poster in a room",
-        "price": "from €29.90"
+        "price": "from €29.90",
+        "giftPrice": "Gift Week from €23.90"
       },
       {
         "name": "Siegessäule",
         "href": "https://www.walkofberlin.com/product-page/siegessaeule-berlin-art-print",
         "img": "assets/poster-siegessaeule.webp",
         "alt": "Siegessäule poster in a room",
-        "price": "from €26.90"
+        "price": "from €26.90",
+        "giftPrice": "Gift Week from €21.50"
       },
       {
         "name": "Berlin in Pink",
         "href": "https://www.walkofberlin.com/product-page/berlin-in-pink-berlin-art-print",
         "img": "assets/poster-berlin-in-pink.webp",
         "alt": "Berlin in Pink poster in a room",
-        "price": "from €26.90"
+        "price": "from €26.90",
+        "giftPrice": "Gift Week from €21.50"
       },
       {
         "name": "Gleisdreieck",
         "href": "https://www.walkofberlin.com/product-page/gleisdreieck-berlin-art-print",
         "img": "assets/poster-gleisdreieck.webp",
         "alt": "Gleisdreieck poster in a room",
-        "price": "from €26.90"
+        "price": "from €26.90",
+        "giftPrice": "Gift Week from €21.50"
       },
       {
         "name": "Two U-Bahn Profiles",
         "href": "https://www.walkofberlin.com/product-page/two-berlin-u-bahn-profiles-berlin-art-print",
         "img": "assets/poster-u-bahn-two-sizes.webp",
         "alt": "Two U-Bahn Profiles poster in a room",
-        "price": "from €26.90"
+        "price": "from €26.90",
+        "giftPrice": "Gift Week from €21.50"
       }
     ],
     "postersCount": 45,
@@ -442,6 +453,9 @@
     return (50 + r * Math.cos(a)).toFixed(2) + '% ' + (50 + r * Math.sin(a)).toFixed(2) + '%';
   }).join(',') + ')';
   function bwhGiftActive(now = Date.now()) { return now >= BWH_GW_START && now < BWH_GW_END; }
+  // The store prices were read for each linked product at release time.
+  function bwhReelLabel(reel, active = bwhGiftActive()) { return active ? reel.giftProductLabel : reel.productLabel; }
+  function bwhPosterPrice(poster, active = bwhGiftActive()) { return active ? poster.giftPrice : poster.price; }
   function bwhGiftTime() {
     const m = Math.max(0, Math.floor((BWH_GW_END - Date.now()) / 60000));
     const pad = n => String(n).padStart(2, '0');
@@ -519,7 +533,7 @@
             <span class="bwh-len">${BWH_PLAY}${bwhEsc(r.len)}</span>
           </a>
           <span class="bwh-reel__title">${bwhEsc(r.title)}</span>
-          <a class="bwh-reel__product" href="${bwhEsc(product)}" data-bwh-section="reels" data-bwh-item="${bwhEsc(r.productLabel)}" data-bwh-position="${i + 1}"><span>${bwhEsc(r.productLabel)}</span><span aria-hidden="true">→</span></a>
+          <a class="bwh-reel__product" href="${bwhEsc(product)}" data-bwh-section="reels" data-bwh-item="${bwhEsc(r.productLabel)}" data-bwh-position="${i + 1}"${bwhGiftActive() ? ' data-bwh-gift-price' : ''}><span>${bwhEsc(bwhReelLabel(r))}</span><span aria-hidden="true">→</span></a>
         </article>`;
   }
 
@@ -556,7 +570,7 @@
         <a class="bwh-poster bwh-lift" href="${bwhEsc(bwhHref(p.href))}" data-bwh-section="posters" data-bwh-item="${bwhEsc(p.name)}" data-bwh-position="${i + 1}">
           <img src="${bwhEsc(bwhSrc(p.img))}" alt="${bwhEsc(p.alt)}" width="460" height="575" loading="lazy" decoding="async">
           <span class="bwh-poster__name">${bwhEsc(p.name)}</span>
-          <span class="bwh-poster__price">${bwhEsc(p.price)}</span>
+          <span class="bwh-poster__price">${bwhEsc(bwhPosterPrice(p))}</span>
         </a>`;
   }
 
@@ -774,6 +788,7 @@
         hero.outerHTML = active ? bwhGiftHero(DATA) : bwhHero(DATA);
         if (restoreFocus) this.querySelector('#bwh-top a')?.focus({preventScroll:true});
       }
+      this._bwhGiftPrices(active);
       if (active) {
         const time = bwhGiftTime();
         this.querySelectorAll('[data-bwh-gw]').forEach(tile => {
@@ -784,6 +799,24 @@
       const boundary = [BWH_GW_START, BWH_GW_END].find(t => t > now);
       // No timer after expiry. Reconnection/pageshow still recheck the clock.
       if (boundary) this._bwhGiftTimer = setTimeout(() => this._bwhGiftTick(), Math.min(30000, boundary - now));
+    }
+
+    _bwhGiftPrices(active) {
+      this.querySelectorAll('.bwh-reel__product').forEach((link, i) => {
+        const text = bwhReelLabel(DATA.reels[i], active);
+        link.toggleAttribute('data-bwh-gift-price', active);
+        if (link.firstElementChild.textContent !== text) link.firstElementChild.textContent = text;
+      });
+      this.querySelectorAll('.bwh-poster__price').forEach((label, i) => {
+        const text = bwhPosterPrice(DATA.posters[i], active);
+        if (label.textContent !== text) label.textContent = text;
+      });
+      const dialog = this.querySelector('.bwh-player');
+      if (dialog && DATA.reels[this._bwhReelIndex]) {
+        const label = dialog.querySelector('.bwh-player__product');
+        const text = `${bwhReelLabel(DATA.reels[this._bwhReelIndex], active)} →`;
+        if (label.textContent !== text) label.textContent = text;
+      }
     }
 
     _bwhBind() {
@@ -907,7 +940,7 @@
       dialog.querySelector('.bwh-player__title').textContent = reel.title;
       const product = dialog.querySelector('.bwh-player__product');
       product.href = bwhHref(reel.productHref);
-      product.textContent = `${reel.productLabel} →`;
+      product.textContent = `${bwhReelLabel(reel)} →`;
       product.dataset.bwhItem = reel.productLabel;
       product.dataset.bwhPosition = String(index + 1);
       if (!dialog.open) {
