@@ -433,6 +433,52 @@
 
   // ---- markup -----------------------------------------------------------------------------
 
+  // P23 uses the same exact boundaries / 30 s cap as P4. Choose before innerHTML,
+  // never render both H1s or fetch the original hero images during the sale.
+  const BWH_GW_START = Date.parse('2026-11-01T19:00:00Z');
+  const BWH_GW_END = Date.parse('2026-11-08T22:59:00Z');
+  const BWH_GW_BURST = 'polygon(' + Array.from({length:56}, (_, i) => {
+    const a = Math.PI * i / 28, r = i % 2 ? 44.5 : 50;
+    return (50 + r * Math.cos(a)).toFixed(2) + '% ' + (50 + r * Math.sin(a)).toFixed(2) + '%';
+  }).join(',') + ')';
+  function bwhGiftActive(now = Date.now()) { return now >= BWH_GW_START && now < BWH_GW_END; }
+  function bwhGiftTime() {
+    const m = Math.max(0, Math.floor((BWH_GW_END - Date.now()) / 60000));
+    const pad = n => String(n).padStart(2, '0');
+    return {d:pad(Math.floor(m / 1440)), h:pad(Math.floor(m % 1440 / 60)), m:pad(m % 60)};
+  }
+  function bwhGiftHero(d) {
+    const time = bwhGiftTime();
+    return `<section id="bwh-top" class="bwh-gw" aria-labelledby="bwh-title" data-bwh-campaign="gift-week-202611">
+ <div class="bwh-gw__rays" aria-hidden="true"></div><div class="bwh-gw__grain" aria-hidden="true"></div>
+ <div class="bwh-gw__inner">
+  <div class="bwh-gw__copy">
+   <p class="bwh-gw__kicker"><span class="bwh-gw__pill">Gift Week</span><span class="bwh-gw__ends">Ends Sunday 8 Nov, 23:59</span></p>
+   <h1 class="bwh-gw__h1" id="bwh-title">Berlin gifts, <span>20% off.</span></h1>
+   <p class="bwh-gw__lead">A newspaper about their day, their street in 1928, an audio walk or a poster. For someone who loves this city.</p>
+   <div class="bwh-gw__count" role="timer" aria-live="off" aria-label="Offer ends Sunday 8 November, 23:59 Berlin time">
+    <div class="bwh-gw__unit" aria-hidden="true"><div class="bwh-gw__tile" data-bwh-gw="d">${time.d}</div><span class="bwh-gw__lbl">DAYS</span></div>
+    <div class="bwh-gw__colon" aria-hidden="true">:</div>
+    <div class="bwh-gw__unit" aria-hidden="true"><div class="bwh-gw__tile" data-bwh-gw="h">${time.h}</div><span class="bwh-gw__lbl">HRS</span></div>
+    <div class="bwh-gw__colon" aria-hidden="true">:</div>
+    <div class="bwh-gw__unit" aria-hidden="true"><div class="bwh-gw__tile" data-bwh-gw="m">${time.m}</div><span class="bwh-gw__lbl">MIN</span></div>
+   </div>
+   <div class="bwh-gw__ctas">
+    <a class="bwh-gw__btn bwh-gw__btn--yellow" href="https://www.walkofberlin.com/category/berlin-christmas-gifts" data-bwh-section="hero" data-bwh-item="gift-week-shop">Shop the gifts <span class="bwh-gw__arrow" aria-hidden="true">&rarr;</span></a>
+    <a class="bwh-gw__btn bwh-gw__btn--ghost" href="${bwhEsc(bwhHref(d.hero.streetHref))}" data-bwh-section="hero" data-bwh-item="gift-week-1928">Find your street in 1928</a>
+   </div>
+  </div>
+  <div class="bwh-gw__visual">
+   <figure class="bwh-gw__card bwh-gw__card--left"><img src="${bwhEsc(bwhSrc('assets/gw-big-day.webp'))}" loading="eager" width="560" height="792" alt="Sample front page of The Big Day, a personalised wedding newspaper"></figure>
+   <figure class="bwh-gw__card bwh-gw__card--right"><img src="${bwhEsc(bwhSrc('assets/gw-print-1928.webp'))}" loading="eager" width="560" height="742" alt="Potsdamer Platz street print: the same place from above in 1928 and today"></figure>
+   <figure class="bwh-gw__card bwh-gw__card--front"><img src="${bwhEsc(bwhSrc('assets/gw-first-day.webp'))}" loading="eager" fetchpriority="high" width="640" height="906" alt="Sample front page of The First Day, a personalised birthday newspaper"></figure>
+   <div class="bwh-gw__badge" aria-hidden="true"><div class="bwh-gw__burst" style="clip-path:${BWH_GW_BURST}"></div><div class="bwh-gw__ring"></div><div class="bwh-gw__btext"><b>&minus;20%</b><small>BERLIN GIFTS</small></div></div>
+   <p class="bwh-gw__note">Sample editions. People invented.</p>
+  </div>
+ </div>
+</section>`;
+  }
+
   function bwhHero(d) {
     const h = d.hero;
     const w = Number(h.w) || 1200;
@@ -672,7 +718,7 @@
   }
 
   function bwhMarkup(d) {
-    return [bwhHero(d), bwhReels(d), bwhPosters(d), bwhShop(d), bwhWalk(d), bwhStart(d)].join('\n');
+    return [bwhGiftActive() ? bwhGiftHero(d) : bwhHero(d), bwhReels(d), bwhPosters(d), bwhShop(d), bwhWalk(d), bwhStart(d)].join('\n');
   }
 
   // ---- element ----------------------------------------------------------------------------
@@ -693,12 +739,51 @@
         this._bwhBind();
       }
       window.__bwHomeCreditsHtml = bwhCreditsHtml(DATA);
+      this._bwhGiftStart();
       this._bwhWatch();
     }
 
     disconnectedCallback() {
       if (!this.isConnected && location.pathname !== '/') window.__bwHomeCreditsHtml = '';
+      this._bwhGiftStop();
       this._bwhStop();
+    }
+
+    _bwhGiftStart() {
+      this._bwhGiftStop();
+      this._bwhGiftWake = () => this._bwhGiftTick();
+      document.addEventListener('visibilitychange', this._bwhGiftWake);
+      window.addEventListener('pageshow', this._bwhGiftWake);
+      this._bwhGiftTick();
+    }
+
+    _bwhGiftStop() {
+      clearTimeout(this._bwhGiftTimer);
+      document.removeEventListener('visibilitychange', this._bwhGiftWake);
+      window.removeEventListener('pageshow', this._bwhGiftWake);
+    }
+
+    _bwhGiftTick() {
+      clearTimeout(this._bwhGiftTimer);
+      if (!this.isConnected) return;
+      const now = Date.now(), active = bwhGiftActive(now);
+      const hero = this.querySelector('#bwh-top');
+      if (hero && hero.classList.contains('bwh-gw') !== active) {
+        const restoreFocus = hero.contains(document.activeElement);
+        // Only the first band changes. Preserve every other node and listener.
+        hero.outerHTML = active ? bwhGiftHero(DATA) : bwhHero(DATA);
+        if (restoreFocus) this.querySelector('#bwh-top a')?.focus({preventScroll:true});
+      }
+      if (active) {
+        const time = bwhGiftTime();
+        this.querySelectorAll('[data-bwh-gw]').forEach(tile => {
+          const value = time[tile.dataset.bwhGw];
+          if (tile.textContent !== value) tile.textContent = value;
+        });
+      }
+      const boundary = [BWH_GW_START, BWH_GW_END].find(t => t > now);
+      // No timer after expiry. Reconnection/pageshow still recheck the clock.
+      if (boundary) this._bwhGiftTimer = setTimeout(() => this._bwhGiftTick(), Math.min(30000, boundary - now));
     }
 
     _bwhBind() {
