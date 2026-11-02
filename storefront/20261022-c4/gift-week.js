@@ -12,8 +12,22 @@ export function priceHtml({amount,regular,lowest30=regular,currency='EUR',de=fal
  if(!enabled||!Number.isFinite(regular)||Math.round(amount*100)>=Math.round(regular*100))return esc(prefix+formatted);
  return `<span class="gw-prices"><del>${esc(prefix+money(regular,currency,de))}</del> <strong>${esc(prefix+formatted)}</strong> <span class="gw-badge">−20%</span><small>${de?'Niedrigster Preis der letzten 30 Tage:':'Lowest price in the last 30 days:'} ${esc(money(lowest30,currency,de))}</small></span>`;
 }
-export function countdownHtml(config,de=false,now=Date.now()){
- if(!['wix','audio','newspaper'].some(s=>active(config,s,now)))return '';
- return `<aside class="gw-countdown" aria-label="${de?'Aktionsende':'Offer ends'}"><strong>${de?'Geschenkewoche · 20% auf ausgewählte Produkte':'Gift Week · 20% off selected products'}</strong><span>${de?'Bis 8. November, 23:59 Uhr (Berlin)':'Until 8 November, 23:59 Berlin'} · <time data-gw-end="${esc(config.end)}"></time></span><small>${de?'Kalender, Trip Planner, Stadtführung, Night In und kleine Reiseführer sind ausgenommen.':'Calendars, Trip Planner, the walking tour, Night In and small guides are excluded.'}</small></aside>`;
+const COUNTDOWN_END=Date.parse('2026-11-08T22:59:00Z');
+export function countdownText(de=false,now=Date.now()) {
+ const remaining=COUNTDOWN_END-now;if(remaining<=0)return '';
+ const hours=Math.floor(remaining/3600000),minutes=Math.floor(remaining/60000)%60,pad=n=>String(n).padStart(2,'0');
+ return (de?'Endet in ':'Ends in ')+(remaining>86400000?`${Math.floor(hours/24)} ${de?'T':'d'} ${pad(hours%24)} ${de?'Std':'h'}`:`${pad(hours)} ${de?'Std':'h'} ${pad(minutes)} min`);
 }
-export function tick(root,now=Date.now()) {for(const el of root.querySelectorAll('[data-gw-end]')){const seconds=Math.max(0,Math.ceil((Date.parse(el.dataset.gwEnd)-now)/1000));const d=Math.floor(seconds/86400),h=Math.floor(seconds/3600)%24,m=Math.floor(seconds/60)%60,s=seconds%60;el.textContent=`${d}d ${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;}}
+const countdownTicks=new WeakMap();
+export function countdownHtml(config,de=false,now=Date.now()){
+ if(now>=COUNTDOWN_END||!['wix','audio','newspaper'].some(s=>active(config,s,now)))return '';
+ const label=de?'Endet So. 8. Nov., 23:59 Uhr Berlin':'Ends Sun 8 Nov, 23:59 Berlin';
+ return `<aside class="gw-countdown" aria-label="${de?'Aktionsende':'Offer ends'}"><strong>${de?'Geschenkewoche · 20% auf ausgewählte Produkte':'Gift Week · 20% off selected products'}</strong><span><time data-gw-end="2026-11-08T22:59:00Z" data-gw-lang="${de?'de':'en'}" datetime="2026-11-08T23:59:00+01:00" role="img" aria-live="off" aria-label="${label}" style="display:inline-block;min-width:20ch;min-height:1.5em;font-variant-numeric:tabular-nums;white-space:nowrap"><b aria-hidden="true" style="font:inherit">${countdownText(de,now)}</b></time></span><small>${de?'Kalender, Trip Planner, Stadtführung, Night In und kleine Reiseführer sind ausgenommen.':'Calendars, Trip Planner, the walking tour, Night In and small guides are excluded.'}</small></aside>`;
+}
+export function tick(root,now=Date.now()) {
+ for(const el of root.querySelectorAll('[data-gw-end]')){
+  if(now>=COUNTDOWN_END){el.hidden=true;el.style.display='none';continue;}
+  const previous=countdownTicks.get(el);if(previous!==undefined&&now>=previous&&now-previous<30000)continue;
+  countdownTicks.set(el,now);const text=el.querySelector('[aria-hidden="true"]');if(text)text.textContent=countdownText(el.dataset.gwLang==='de',now);
+ }
+}
