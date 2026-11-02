@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Berlin Boar Year: What the Wild Boar Are Doing on Your Date, and Your Move</title>
+<meta name="description" content="Pick a date and a time: see where Berlin's wild boar are in their year, how dark it is, whether the NABU wildlife line is open, then run a three-step drill for what to do.">
+<link rel="stylesheet" href="../css/brand.css">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #FFFFFF; color: #1d2a1e; padding: 12px; }
+  .by { background: #f3efe4; border: 1px solid #d9d2bf; border-radius: 8px; overflow: hidden; }
+  .by-head { padding: 18px 18px 8px; background: #1B5E20; color: #fff; }
+  .by-head h1 { font-size: 21px; line-height: 1.22; font-weight: 800; }
+  .by-head p { font-size: 13.5px; line-height: 1.55; color: #dcecd3; margin-top: 5px; max-width: 680px; }
+  .by-when { display: flex; flex-wrap: wrap; gap: 10px 16px; align-items: end; padding: 14px 18px 4px; }
+  .by-when label { display: block; font-size: 11.5px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; color: #4a5a48; margin-bottom: 4px; }
+  .by-when input { font-family: inherit; font-size: 16px; font-weight: 700; min-height: 44px; padding: 8px 10px; border: 2px solid #1d2a1e; border-radius: 4px; background: #fff; color: #1d2a1e; }
+  .by-when button { font-family: inherit; font-size: 13px; font-weight: 700; min-height: 44px; padding: 8px 12px; border: 1px solid #1d2a1e; border-radius: 4px; background: transparent; color: #1d2a1e; cursor: pointer; }
+  .by-stage { display: grid; grid-template-columns: minmax(0, 320px) minmax(0, 1fr); gap: 18px; padding: 12px 18px 6px; align-items: start; }
+  .by-dial { width: 100%; max-width: 320px; margin: 0 auto; }
+  #dial { display: block; width: 100%; height: auto; aspect-ratio: 1 / 1; }
+  .by-key { display: flex; flex-wrap: wrap; gap: 6px 12px; font-size: 11.5px; color: #4a5a48; margin-top: 6px; justify-content: center; }
+  .by-key i { display: inline-block; width: 11px; height: 11px; border-radius: 2px; margin-right: 5px; vertical-align: -1px; }
+  .by-read { min-width: 0; }
+  .by-phase { font-size: 12px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; color: #1B5E20; }
+  .by-title { font-size: 22px; line-height: 1.25; font-weight: 800; margin-top: 4px; color: #1d2a1e; }
+  .by-lines { list-style: none; margin-top: 10px; border-top: 1px solid #d9d2bf; }
+  .by-lines li { font-size: 14px; line-height: 1.45; padding: 8px 0; border-bottom: 1px solid #d9d2bf; }
+  .by-lines li b { font-weight: 800; }
+  .by-line-open { color: #1B5E20; }
+  .by-line-shut { color: #8a3b12; }
+  .by-drill { margin: 12px 18px 0; background: #fff; border: 1px solid #d9d2bf; border-radius: 6px; padding: 14px; }
+  .by-steps { display: flex; gap: 6px; margin-bottom: 10px; }
+  .by-steps span { flex: 1; height: 5px; border-radius: 3px; background: #d9d2bf; }
+  .by-steps span.on { background: #1B5E20; }
+  .by-q { font-size: 16px; font-weight: 800; line-height: 1.3; }
+  .by-opts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; margin-top: 10px; }
+  .by-opts button { font-family: inherit; text-align: left; font-size: 14px; font-weight: 700; line-height: 1.3; min-height: 50px; padding: 10px 12px; border: 1px solid #b9b19c; border-radius: 4px; background: #f8f6ef; color: #1d2a1e; cursor: pointer; }
+  .by-opts button small { display: block; font-weight: 500; font-size: 12px; color: #5d6b5a; margin-top: 2px; }
+  .by-opts button:hover { border-color: #1B5E20; }
+  .by-move { display: none; }
+  .by-move.show { display: block; }
+  .by-move h3 { font-size: 13px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; color: #1B5E20; }
+  .by-move .big { font-size: 19px; line-height: 1.3; font-weight: 800; margin-top: 4px; }
+  .by-move ol { margin: 10px 0 0 20px; }
+  .by-move ol li { font-size: 14px; line-height: 1.5; margin-bottom: 6px; }
+  .by-move .season { margin-top: 10px; padding: 10px 12px; background: #FFE600; color: #1d2a1e; border-radius: 4px; font-size: 13.5px; line-height: 1.45; font-weight: 600; }
+  .by-move .call { margin-top: 8px; font-size: 13.5px; line-height: 1.5; }
+  .by-again { margin-top: 12px; font-family: inherit; font-size: 13px; font-weight: 700; min-height: 42px; padding: 8px 12px; border: 1px solid #1d2a1e; border-radius: 4px; background: transparent; color: #1d2a1e; cursor: pointer; }
+  .by-src { font-size: 11.5px; line-height: 1.5; color: #5d6b5a; padding: 12px 18px 16px; }
+  button:focus-visible, input:focus-visible { outline: 3px solid #1B5E20; outline-offset: 2px; }
+  @media (max-width: 620px) {
+    body { padding: 6px; }
+    .by-head { padding: 14px 14px 6px; }
+    .by-head h1 { font-size: 19px; }
+    .by-when { padding: 12px 14px 2px; }
+    .by-stage { grid-template-columns: 1fr; padding: 10px 14px 4px; gap: 10px; }
+    .by-dial { max-width: 270px; }
+    .by-title { font-size: 19px; }
+    .by-drill { margin: 10px 14px 0; padding: 12px; }
+    .by-opts { grid-template-columns: 1fr; }
+    .by-src { padding: 10px 14px 14px; }
+  }
+</style>
+</head>
+<body>
+<div class="by">
+  <div class="by-head">
+    <h1>Berlin boar year: what the wild boar are doing on your date</h1>
+    <p>Pick a day and a time. The dial shows where Berlin's boar are in their year and how dark it is, then a three-step drill gives you the move for where you actually are.</p>
+  </div>
+
+  <div class="by-when">
+    <div><label for="d">Date</label><input type="date" id="d"></div>
+    <div><label for="tm">Time</label><input type="time" id="tm" step="900"></div>
+    <button type="button" id="now">Right now</button>
+  </div>
+
+  <div class="by-stage">
+    <div class="by-dial">
+      <canvas id="dial" width="320" height="320" role="img" aria-label="Year dial of the wild boar calendar with a 24-hour ring of daylight and darkness in Berlin"></canvas>
+      <div class="by-key">
+        <span><i style="background:#8a3b12"></i>Mating peak</span>
+        <span><i style="background:#d9a46b"></i>Mating season</span>
+        <span><i style="background:#7fae6a"></i>Striped young about</span>
+        <span><i style="background:#1d2a1e"></i>Dark in Berlin</span>
+      </div>
+    </div>
+    <div class="by-read" aria-live="polite">
+      <div class="by-phase" id="phase"></div>
+      <div class="by-title" id="title"></div>
+      <ul class="by-lines" id="lines"></ul>
+    </div>
+  </div>
+
+  <div class="by-drill">
+    <div class="by-steps" aria-hidden="true"><span id="s0"></span><span id="s1"></span><span id="s2"></span></div>
+    <div id="ask">
+      <div class="by-q" id="q"></div>
+      <div class="by-opts" id="opts"></div>
+    </div>
+    <div class="by-move" id="move" aria-live="polite">
+      <h3>Your move</h3>
+      <div class="big" id="moveBig"></div>
+      <ol id="moveList"></ol>
+      <div class="season" id="moveSeason"></div>
+      <div class="call" id="moveCall"></div>
+      <button type="button" class="by-again" id="again">Run the drill again</button>
+    </div>
+  </div>
+
+  <div class="by-src">Sources: Berlin Senate Department for the Environment (wild boar and wildlife accident pages), NABU Berlin flyer "Wildschweine in Berlin", Treptow-Köpenick district FAQ on wild animals, Berlin Senate page on African swine fever. Mating season late October to March with its peak November to January and a four-month pregnancy are from NABU; the spring birth window and the striped-young months are worked out from those figures, so treat the edges as approximate. NABU wildlife line hours checked on 2 November 2026. Daylight is calculated for central Berlin; civil dusk is when the sun is 6 degrees below the horizon.</div>
+</div>
+
+<script src="../js/brand.js"></script>
+<script>
+(function () {
+  'use strict';
+  var TZ = 'Europe/Berlin';
+  var LAT = 52.52, LON = 13.40;
+  var MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+
+  /* day-of-year bands, 1-based day numbers in a non-leap year */
+  var BANDS = {
+    matingPeak: [[305, 365], [1, 31]],     /* Nov - Jan */
+    mating: [[298, 365], [1, 90]],         /* late Oct - Mar */
+    striped: [[60, 273]]                   /* Mar - Sep, worked out */
+  };
+
+  function inBands(doy, list) {
+    for (var i = 0; i < list.length; i++) { if (doy >= list[i][0] && doy <= list[i][1]) return true; }
+    return false;
+  }
+  function dayOfYear(y, m, d) {
+    var start = Date.UTC(y, 0, 1), here = Date.UTC(y, m - 1, d);
+    return Math.floor((here - start) / 86400000) + 1;
+  }
+  function rad(x) { return x * Math.PI / 180; }
+  function deg(x) { return x * 180 / Math.PI; }
+  function norm(x, m) { x = x % m; return x < 0 ? x + m : x; }
+
+  /* sun event in UTC hours (NOAA sunrise equation), null if none */
+  function sunEvent(doy, rising, zenith) {
+    var lngHour = LON / 15;
+    var t = doy + ((rising ? 6 : 18) - lngHour) / 24;
+    var M = 0.9856 * t - 3.289;
+    var L = norm(M + 1.916 * Math.sin(rad(M)) + 0.020 * Math.sin(rad(2 * M)) + 282.634, 360);
+    var RA = norm(deg(Math.atan(0.91764 * Math.tan(rad(L)))), 360);
+    RA = (RA + (Math.floor(L / 90) * 90 - Math.floor(RA / 90) * 90)) / 15;
+    var sinDec = 0.39782 * Math.sin(rad(L));
+    var cosDec = Math.cos(Math.asin(sinDec));
+    var cosH = (Math.cos(rad(zenith)) - sinDec * Math.sin(rad(LAT))) / (cosDec * Math.cos(rad(LAT)));
+    if (cosH > 1 || cosH < -1) return null;
+    var H = rising ? 360 - deg(Math.acos(cosH)) : deg(Math.acos(cosH));
+    var T = H / 15 + RA - 0.06571 * t - 6.622;
+    return norm(T - lngHour, 24);
+  }
+  /* convert a UTC hour on a date to Berlin local hour (handles CET/CEST) */
+  function berlinOffset(y, m, d) {
+    var probe = new Date(Date.UTC(y, m - 1, d, 12));
+    var parts = new Intl.DateTimeFormat('en-GB', { timeZone: TZ, hour: '2-digit', hour12: false }).formatToParts(probe);
+    var h = 12;
+    parts.forEach(function (p) { if (p.type === 'hour') h = parseInt(p.value, 10); });
+    return h - 12;
+  }
+  function fmt(h) {
+    if (h === null) return '--:--';
+    h = norm(h, 24);
+    var hh = Math.floor(h), mm = Math.round((h - hh) * 60);
+    if (mm === 60) { hh = (hh + 1) % 24; mm = 0; }
+    return (hh < 10 ? '0' : '') + hh + ':' + (mm < 10 ? '0' : '') + mm;
+  }
+  function berlinNow() {
+    var parts = new Intl.DateTimeFormat('en-GB', { timeZone: TZ, year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', hour12: false }).formatToParts(new Date());
+    var o = {};
+    parts.forEach(function (p) { o[p.type] = p.value; });
+    return { y: +o.year, m: +o.month, d: +o.day, h: +o.hour % 24, min: +o.minute };
+  }
+
+  /* NABU Berlin wildlife line, hours as published on berlin.de, checked 2 Nov 2026 */
+  function nabuHours(month, weekday) {
+    var winter = month >= 10 || month <= 3;
+    if (weekday === 0 || weekday === 6) return null;
+    if (weekday >= 1 && weekday <= 3) return winter ? [10, 13] : [10, 15];
+    if (weekday === 4) return winter ? [12, 15] : [12, 17];
+    return [10, 13];
+  }
+
+  var state = { y: 2026, m: 11, d: 2, h: 20, min: 0 };
+  var info = {};
+
+  function compute() {
+    var doy = dayOfYear(state.y, state.m, state.d);
+    var off = berlinOffset(state.y, state.m, state.d);
+    var rise = sunEvent(doy, true, 90.833), set = sunEvent(doy, false, 90.833);
+    var dawn = sunEvent(doy, true, 96), dusk = sunEvent(doy, false, 96);
+    info = {
+      doy: doy,
+      rise: rise === null ? null : rise + off,
+      set: set === null ? null : set + off,
+      dawn: dawn === null ? null : dawn + off,
+      dusk: dusk === null ? null : dusk + off,
+      t: state.h + state.min / 60,
+      peak: inBands(doy, BANDS.matingPeak),
+      mating: inBands(doy, BANDS.mating),
+      striped: inBands(doy, BANDS.striped),
+      weekday: new Date(Date.UTC(state.y, state.m - 1, state.d)).getUTCDay()
+    };
+    var t = info.t;
+    if (t >= info.set && t < info.dusk) info.light = 'dusk';
+    else if (t >= info.dawn && t < info.rise) info.light = 'dawn';
+    else if (t >= info.rise && t < info.set) info.light = 'day';
+    else info.light = 'dark';
+  }
+
+  function drawArc(ctx, cx, cy, r, w, a0, a1, color) {
+    ctx.beginPath();
+    ctx.strokeStyle = color;
+    ctx.lineWidth = w;
+    ctx.lineCap = 'butt';
+    ctx.arc(cx, cy, r, a0, a1);
+    ctx.stroke();
+  }
+  function doyAngle(doy) { return -Math.PI / 2 + (doy - 1) / 365 * Math.PI * 2; }
+  function hourAngle(h) { return -Math.PI / 2 + h / 24 * Math.PI * 2; }
+
+  function draw() {
+    var cv = document.getElementById('dial');
+    var css = cv.clientWidth || 300;
+    var dpr = window.devicePixelRatio || 1;
+    cv.width = Math.round(css * dpr); cv.height = Math.round(css * dpr);
+    var ctx = cv.getContext('2d');
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    var S = css, cx = S / 2, cy = S / 2;
+    ctx.clearRect(0, 0, S, S);
+
+    var rYear = S * 0.40, wYear = S * 0.072;
+    var rStripe = S * 0.32, wStripe = S * 0.04;
+    var rDay = S * 0.23, wDay = S * 0.09;
+
+    /* year ring base */
+    drawArc(ctx, cx, cy, rYear, wYear, 0, Math.PI * 2, '#e6dfcc');
+    BANDS.mating.forEach(function (b) { drawArc(ctx, cx, cy, rYear, wYear, doyAngle(b[0]), doyAngle(b[1] + 1), '#d9a46b'); });
+    BANDS.matingPeak.forEach(function (b) { drawArc(ctx, cx, cy, rYear, wYear, doyAngle(b[0]), doyAngle(b[1] + 1), '#8a3b12'); });
+    drawArc(ctx, cx, cy, rStripe, wStripe, 0, Math.PI * 2, '#ece6d6');
+    BANDS.striped.forEach(function (b) { drawArc(ctx, cx, cy, rStripe, wStripe, doyAngle(b[0]), doyAngle(b[1] + 1), '#7fae6a'); });
+
+    /* month ticks and labels */
+    var starts = [1, 32, 60, 91, 121, 152, 182, 213, 244, 274, 305, 335];
+    ctx.font = '700 ' + Math.round(S * 0.034) + 'px Montserrat, sans-serif';
+    ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+    for (var i = 0; i < 12; i++) {
+      var a = doyAngle(starts[i]);
+      ctx.beginPath(); ctx.strokeStyle = '#f3efe4'; ctx.lineWidth = 2;
+      ctx.moveTo(cx + Math.cos(a) * (rYear - wYear / 2), cy + Math.sin(a) * (rYear - wYear / 2));
+      ctx.lineTo(cx + Math.cos(a) * (rYear + wYear / 2), cy + Math.sin(a) * (rYear + wYear / 2));
+      ctx.stroke();
+      var mid = doyAngle(starts[i] + 15);
+      ctx.fillStyle = '#4a5a48';
+      ctx.fillText(MONTHS[i], cx + Math.cos(mid) * (S * 0.468), cy + Math.sin(mid) * (S * 0.468));
+    }
+
+    /* 24 h ring: day, dusk/dawn, dark */
+    drawArc(ctx, cx, cy, rDay, wDay, 0, Math.PI * 2, '#1d2a1e');
+    if (info.dawn !== null && info.dusk !== null) {
+      drawArc(ctx, cx, cy, rDay, wDay, hourAngle(info.dawn), hourAngle(info.dusk), '#7a8f74');
+    }
+    if (info.rise !== null && info.set !== null) {
+      drawArc(ctx, cx, cy, rDay, wDay, hourAngle(info.rise), hourAngle(info.set), '#FFE600');
+    }
+    ctx.font = '700 ' + Math.round(S * 0.032) + 'px Montserrat, sans-serif';
+    [0, 6, 12, 18].forEach(function (h) {
+      var a = hourAngle(h);
+      ctx.fillStyle = '#4a5a48';
+      ctx.fillText(String(h), cx + Math.cos(a) * (rDay - wDay / 2 - S * 0.04), cy + Math.sin(a) * (rDay - wDay / 2 - S * 0.04));
+    });
+
+    /* date needle across the year rings */
+    var ad = doyAngle(info.doy);
+    ctx.beginPath(); ctx.strokeStyle = '#1d2a1e'; ctx.lineWidth = 3; ctx.lineCap = 'round';
+    ctx.moveTo(cx + Math.cos(ad) * (rStripe - wStripe), cy + Math.sin(ad) * (rStripe - wStripe));
+    ctx.lineTo(cx + Math.cos(ad) * (rYear + wYear / 2 + 2), cy + Math.sin(ad) * (rYear + wYear / 2 + 2));
+    ctx.stroke();
+    ctx.beginPath(); ctx.fillStyle = '#1d2a1e';
+    ctx.arc(cx + Math.cos(ad) * (rYear + wYear / 2 + 4), cy + Math.sin(ad) * (rYear + wYear / 2 + 4), 4.5, 0, Math.PI * 2);
+    ctx.fill();
+
+    /* time hand on the 24 h ring */
+    var at = hourAngle(info.t);
+    ctx.beginPath(); ctx.strokeStyle = '#8a3b12'; ctx.lineWidth = 3;
+    ctx.moveTo(cx, cy);
+    ctx.lineTo(cx + Math.cos(at) * (rDay + wDay / 2), cy + Math.sin(at) * (rDay + wDay / 2));
+    ctx.stroke();
+    ctx.beginPath(); ctx.fillStyle = '#8a3b12'; ctx.arc(cx, cy, 5, 0, Math.PI * 2); ctx.fill();
+  }
+
+  function phaseText() {
+    if (info.peak) return { p: 'Mating peak', t: 'The rut is on: lone males join the family groups' };
+    if (info.mating && info.doy <= 90) return { p: 'Late mating season, first births', t: 'Sows start leaving the group to give birth' };
+    if (info.mating) return { p: 'Mating season starts', t: 'Acorns down, groups on the move' };
+    if (info.striped && info.doy <= 152) return { p: 'Birth season', t: 'Striped young: any group may have piglets in it' };
+    if (info.striped) return { p: 'Young growing up', t: 'Groups of sows and half-grown young' };
+    return { p: 'Autumn', t: 'Groups feeding hard before winter' };
+  }
+
+  function lightText() {
+    var map = {
+      day: 'Daylight. City boar that are disturbed by day shift to dusk and night, so a daytime meeting is less likely but happens, mostly near cover.',
+      dusk: 'Dusk. This is when city boar start moving. Keep the dog close.',
+      dawn: 'Dawn. Groups head back into cover now. Paths at the forest edge are busy with them.',
+      dark: 'Dark. This is the main boar time in the city. Gardens, verges and forest roads are where you meet them.'
+    };
+    return map[info.light];
+  }
+
+  function nabuText() {
+    var hrs = nabuHours(state.m, info.weekday);
+    var dayName = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'][info.weekday];
+    if (!hrs) return { open: false, txt: 'NABU wildlife line: closed on ' + dayName + 's. Danger or an animal inside a building: 110.' };
+    var open = info.t >= hrs[0] && info.t < hrs[1];
+    var span = fmt(hrs[0]) + ' to ' + fmt(hrs[1]);
+    return { open: open, txt: 'NABU wildlife line 030 54712891: ' + (open ? 'open now' : 'closed at this time') + ', ' + dayName + ' ' + span + '. Danger: 110.' };
+  }
+
+  function showRead() {
+    var ph = phaseText();
+    document.getElementById('phase').textContent = ph.p;
+    document.getElementById('title').textContent = ph.t;
+    var n = nabuText();
+    var lines = [
+      '<li><b>Sun</b> up ' + fmt(info.rise) + ', down ' + fmt(info.set) + ', fully dark by ' + fmt(info.dusk) + '.</li>',
+      '<li><b>At ' + fmt(info.t) + ':</b> ' + lightText() + '</li>',
+      '<li class="' + (n.open ? 'by-line-open' : 'by-line-shut') + '"><b>Advice line.</b> ' + n.txt + '</li>'
+    ];
+    document.getElementById('lines').innerHTML = lines.join('');
+  }
+
+  /* three-step drill */
+  var STEPS = [
+    { q: 'Where are you?', key: 'where', opts: [
+      ['forest', 'On a forest path', 'Grunewald, Tegel, Spandau, Köpenick'],
+      ['street', 'Park, street or estate', 'Cemetery, verge, playground'],
+      ['garden', 'In my own garden', 'Or the allotment'],
+      ['road', 'Driving a forest road', 'Avus, Havelchaussee, Adlergestell']
+    ]},
+    { q: 'What is in front of you?', key: 'what', opts: [
+      ['one', 'One boar', 'Rooting or crossing'],
+      ['group', 'A group', 'Several animals together'],
+      ['sow', 'A sow with striped young', 'Small striped piglets'],
+      ['corner', 'A boar with no way out', 'In a fence corner, yard or building']
+    ]},
+    { q: 'Is there a dog with you?', key: 'dog', opts: [
+      ['none', 'No dog', ''],
+      ['lead', 'Dog on the lead', ''],
+      ['loose', 'Dog off the lead', 'Already sniffing the air']
+    ]}
+  ];
+  var ROAD = { q: 'What happened?', key: 'what', opts: [
+    ['ahead', 'Boar on or by the road', 'Still driving'],
+    ['hit', 'I hit one', 'Car stopped']
+  ]};
+  var currentStep = 0;
+  var picks = {};
+
+  function stepDef() {
+    if (currentStep === 1 && picks.where === 'road') return ROAD;
+    return STEPS[currentStep];
+  }
+  function needsDog() { return picks.where !== 'road' && picks.where !== 'garden'; }
+
+  function renderStep() {
+    for (var i = 0; i < 3; i++) document.getElementById('s' + i).className = i <= currentStep ? 'on' : '';
+    var def = stepDef();
+    document.getElementById('q').textContent = def.q;
+    var box = document.getElementById('opts');
+    box.innerHTML = '';
+    def.opts.forEach(function (o) {
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.innerHTML = o[1] + (o[2] ? '<small>' + o[2] + '</small>' : '');
+      b.addEventListener('click', function () { choose(def.key, o[0]); });
+      box.appendChild(b);
+    });
+  }
+
+  function choose(key, val) {
+    picks[key] = val;
+    if (currentStep === 0) { currentStep = 1; renderStep(); return; }
+    if (currentStep === 1 && needsDog()) { currentStep = 2; renderStep(); return; }
+    currentStep = 3;
+    showMove();
+  }
+
+  function move() {
+    var w = picks.where, x = picks.what, dog = picks.dog;
+    var big, list = [];
+    if (w === 'road') {
+      if (x === 'hit') {
+        big = 'Secure the scene, then call the police on 110.';
+        list = ['Hazard lights on, warning triangle out, stay off the carriageway.',
+          'If it is safe, pull the animal to the edge of the road. Never load it into your car: that counts as poaching.',
+          'If it ran off injured, mark the spot with sticks and do not follow it. A hunter will search with a dog.',
+          'Leave blood and hair on the car until the police have seen it. Damage from a boar collision is covered by both partial (Teilkasko) and full (Vollkasko) car insurance.'];
+      } else {
+        big = 'Brake and wait: boar move in groups, so where one crosses, more may follow.';
+        list = ['Slow down hard but stay in your lane rather than swerving into trees or traffic.',
+                    'Wait until the whole group is off the road before you drive on.',
+          'Berlin counts more than 200 boar killed on its roads every year, so the warning signs on forest roads are real.'];
+      }
+      return { big: big, list: list };
+    }
+    if (w === 'garden') {
+      big = x === 'corner' ? 'Open a way out and step back inside.' : 'Do not chase them. Go in, let them leave, then fix the cause.';
+      list = [x === 'corner' ? 'Open the gate or gap they came through and keep away from it. A boar with no exit is the one that charges.' : 'Make noise from a safe distance, a door or a window, not from the lawn.',
+        'Tomorrow: a solid fence at least 1.50 m high, dug about 40 cm into the ground and bent outwards at the bottom, so the boar stands on it.',
+        'Compost inside the fence, bins shut and only out on collection day, no garden waste dumped at the forest edge.',
+        'Do not feed them, and tell the neighbour who does: feeding wild animals is banned in Berlin, with fines of up to 5,000 euros.'];
+      if (x === 'corner') list = list.concat(['If the animal is inside a building or someone is at risk, call 110.']);
+      return { big: big, list: list };
+    }
+    if (x === 'corner') big = 'Back off and leave it an exit. Do not stand in its way out.';
+    else if (x === 'sow') big = 'Turn round and go back the way you came, slowly, with a wide gap.';
+    else if (x === 'group') big = 'Stop, stay calm, and let the group move first.';
+    else big = 'Stay calm and walk past slowly with a good gap, or back away.';
+    list = ['Slow movements and distance. Boar see movement well but not much else; they hear and smell you long before.',
+      x === 'sow' ? 'Never walk between a sow and her young. She only attacks when she thinks they are threatened, and that is exactly how it looks to her.' : 'Always leave the animals a way to retreat. Do not walk them into a fence, a wall or a dead end.',
+      'Do not feed, photograph from close up or follow them for a better look.'];
+    if (dog === 'loose') list = ['Call the dog back now and put it on the lead before you do anything else. Dogs chase boar and then become the hunted; sows with young treat dogs as a threat.'].concat(list);
+    else if (dog === 'lead') list = list.concat(['Keep the lead short and the dog behind you. Dogs notice boar long before you do.']);
+    return { big: big, list: list };
+  }
+
+  function showMove() {
+    for (var i = 0; i < 3; i++) document.getElementById('s' + i).className = 'on';
+    document.getElementById('ask').style.display = 'none';
+    var r = move();
+    document.getElementById('moveBig').textContent = r.big;
+    document.getElementById('moveList').innerHTML = r.list.map(function (s) { return '<li>' + s + '</li>'; }).join('');
+    var season;
+    if (picks.where === 'road') season = info.light === 'day' ? 'In daylight the risk is lower, but forest roads at dusk and after dark are where most collisions happen.' : 'It is ' + info.light + ' at ' + fmt(info.t) + ': the hours when boar cross roads. Expect a second and third animal.';
+    else if (info.striped) season = 'On ' + state.d + ' ' + MONTHS[state.m - 1] + ' striped young are likely about. Treat any group as if it has piglets in it, even if you only see big animals.';
+    else if (info.peak) season = 'On ' + state.d + ' ' + MONTHS[state.m - 1] + ' it is the mating peak: males that live alone most of the year join the groups, so a group can be bigger than it looks.';
+    else season = 'On ' + state.d + ' ' + MONTHS[state.m - 1] + ' groups are feeding hard. They come back to any place where they found food once.';
+    document.getElementById('moveSeason').textContent = season;
+    var n = nabuText();
+    var call = picks.where === 'road' ? 'Police: 110. ' : '';
+    call += 'Found a dead boar? Keep yourself and the dog away and report it: the forestry office (Forstamt) in the forest, the district office (Bezirksamt) outside it. ';
+    call += n.txt;
+    document.getElementById('moveCall').textContent = call;
+    document.getElementById('move').className = 'by-move show';
+    if (window.BerlinWalk && window.BerlinWalk.resize) window.BerlinWalk.resize();
+  }
+
+  function restart() {
+    currentStep = 0; picks = {};
+    document.getElementById('move').className = 'by-move';
+    document.getElementById('ask').style.display = '';
+    renderStep();
+  }
+
+  function pad(n) { return (n < 10 ? '0' : '') + n; }
+  function setInputs() {
+    document.getElementById('d').value = state.y + '-' + pad(state.m) + '-' + pad(state.d);
+    document.getElementById('tm').value = pad(state.h) + ':' + pad(state.min);
+  }
+  function update() {
+    compute(); draw(); showRead();
+    if (currentStep === 3) showMove();
+  }
+  function readInputs() {
+    var dv = document.getElementById('d').value, tv = document.getElementById('tm').value;
+    if (/^\d{4}-\d{2}-\d{2}$/.test(dv)) {
+      var p = dv.split('-');
+      state.y = +p[0]; state.m = +p[1]; state.d = +p[2];
+    }
+    if (/^\d{2}:\d{2}/.test(tv)) { state.h = +tv.slice(0, 2); state.min = +tv.slice(3, 5); }
+    update();
+  }
+  function goNow() {
+    var n = berlinNow();
+    state.y = n.y; state.m = n.m; state.d = n.d; state.h = n.h; state.min = n.min - (n.min % 15);
+    setInputs(); update();
+  }
+
+  document.getElementById('d').addEventListener('change', readInputs);
+  document.getElementById('d').addEventListener('input', readInputs);
+  document.getElementById('tm').addEventListener('change', readInputs);
+  document.getElementById('tm').addEventListener('input', readInputs);
+  document.getElementById('now').addEventListener('click', goNow);
+  document.getElementById('again').addEventListener('click', restart);
+  window.addEventListener('resize', function () { draw(); });
+
+  goNow();
+  renderStep();
+})();
+</script>
+</body>
+</html>
