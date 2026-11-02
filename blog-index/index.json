@@ -1,9 +1,9 @@
 {
-  "updatedAt": "2026-11-01T09:51:24.506Z",
+  "updatedAt": "2026-11-02T09:51:34.638Z",
   "source": "Wix Blog API",
   "popularSource": "Wix Blog metrics.views lifetime sort",
-  "totalPosts": 451,
-  "toolsTotal": 377,
+  "totalPosts": 452,
+  "toolsTotal": 378,
   "bookingUrl": "https://www.walkofberlin.com/book-berlin-walking-tour/berlin-then-and-now",
   "navTopics": [
     {
@@ -1802,6 +1802,23 @@
   ],
   "latest": [
     {
+      "title": "Wild Boar in Berlin: What to Do When You Meet One, and How to Keep Them Out",
+      "slug": "wild-boar-in-berlin",
+      "path": "/post/wild-boar-in-berlin",
+      "url": "https://www.berlinwalk.com/post/wild-boar-in-berlin",
+      "excerpt": "A boar walked into a Köpenick shopping centre in March 2026. Here is how to handle a meeting on the path, keep your dog and garden safe, and who to call in Berlin.",
+      "category": "Living in Berlin",
+      "categorySlug": "living-in-berlin",
+      "topic": "living-in-berlin",
+      "topicLabel": "Living in Berlin",
+      "readTime": "7 min read",
+      "publishedDate": "2026-11-02T09:49:40.819Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_6ee4a549d4394c439930d0331995d3b1~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_6ee4a549d4394c439930d0331995d3b1~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover.jpg",
+      "alt": "A group of wild boar, grown animals and young, grazing on the lawn between blocks of flats and a fenced bin shelter in Hakenfelde, Spandau",
+      "relatedToolSlug": "berlin-boar-year"
+    },
+    {
       "title": "The Berlin Clock: How to Read the Lamp Clock by the Europa-Center",
       "slug": "berlin-clock-mengenlehreuhr",
       "path": "/post/berlin-clock-mengenlehreuhr",
@@ -1987,23 +2004,6 @@
       "thumb": "https://static.wixstatic.com/media/5a08a3_47ade808d91b44d296d2b8229688196d~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-checkpoint-tanks-1961-1600.jpg",
       "alt": "US Army and Soviet tanks face each other at Checkpoint Charlie in 1961",
       "relatedToolSlug": ""
-    },
-    {
-      "title": "Lantern Walks in Berlin: Where and When to Join St. Martin This November",
-      "slug": "lantern-walks-in-berlin",
-      "path": "/post/lantern-walks-in-berlin",
-      "url": "https://www.berlinwalk.com/post/lantern-walks-in-berlin",
-      "excerpt": "Berlin's St. Martin lantern walks run from 11 to 14 November this year. Which public walks have a confirmed date, where they meet, what time they start against sunset, and how to find the small one in your own Kiez.",
-      "category": "Living in Berlin",
-      "categorySlug": "living-in-berlin",
-      "topic": "living-in-berlin",
-      "topicLabel": "Living in Berlin",
-      "readTime": "7 min read",
-      "publishedDate": "2026-10-22T08:53:06.219Z",
-      "image": "https://static.wixstatic.com/media/5a08a3_8c756910d7d84bc48fa7c74824e334dd~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-martinsfeuer-lantern-ring.jpg",
-      "thumb": "https://static.wixstatic.com/media/5a08a3_8c756910d7d84bc48fa7c74824e334dd~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-martinsfeuer-lantern-ring.jpg",
-      "alt": "Children holding glowing paper lanterns in a wide ring around a St. Martin bonfire on a dark schoolyard",
-      "relatedToolSlug": "berlin-lantern-walk-map"
     }
   ]
 }
