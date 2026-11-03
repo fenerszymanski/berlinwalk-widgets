@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Berlin Bear Hunt: The Bears Worth Finding, in Walking Order From Where You Are</title>
+<link rel="stylesheet" href="../css/brand.css">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #FFFFFF; color: #1d1a16; padding: 12px; }
+  .bh { border-radius: 18px; overflow: hidden; background: #f6f1e7; border: 1px solid #e2d8c4; }
+  .bh-head { padding: 18px 18px 10px; background: #1B5E20; color: #ffffff; }
+  .bh-kick { font-size: 11px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; color: #FFE600; }
+  .bh-head h1 { font-size: 20px; line-height: 1.25; font-weight: 800; margin-top: 5px; }
+  .bh-head p { font-size: 12.5px; line-height: 1.55; color: #dcebd7; margin-top: 7px; max-width: 720px; }
+  .bh-pick { display: flex; flex-wrap: wrap; gap: 10px 16px; align-items: end; padding: 12px 18px; background: #1B5E20; border-top: 1px solid #2d7432; }
+  .bh-pick label { display: grid; gap: 5px; font-size: 11px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; color: #C5E1A5; }
+  .bh-pick select { font-family: inherit; font-size: 14px; font-weight: 700; padding: 8px 10px; border-radius: 10px; border: 2px solid #FFE600; background: #ffffff; color: #123D18; min-width: 230px; }
+  .bh-body { display: grid; grid-template-columns: 1.15fr 1fr; gap: 12px; padding: 12px; align-items: start; }
+  .bh-map { background: #fffdf8; border: 1px solid #e2d8c4; border-radius: 14px; padding: 6px; position: relative; }
+  .bh-map canvas { display: block; width: 100%; height: auto; border-radius: 10px; }
+  .bh-legend { display: flex; flex-wrap: wrap; gap: 6px 12px; font-size: 10.5px; color: #5d5446; padding: 6px 6px 2px; }
+  .bh-legend span { display: inline-flex; align-items: center; gap: 5px; }
+  .bh-legend i { display: inline-block; width: 11px; height: 11px; border-radius: 50%; }
+  .bh-side { display: grid; gap: 10px; }
+  .bh-card { background: #ffffff; border: 1px solid #e2d8c4; border-radius: 14px; padding: 14px; }
+  .bh-card .no { font-size: 11px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: #7a6a4f; }
+  .bh-card h2 { font-size: 17px; line-height: 1.3; color: #1B5E20; margin-top: 4px; }
+  .bh-card .where { font-size: 12px; color: #5d5446; margin-top: 3px; }
+  .bh-card p { font-size: 13px; line-height: 1.55; color: #2b261f; margin-top: 8px; }
+  .bh-card .move { margin-top: 10px; padding: 8px 10px; border-radius: 10px; background: #fff7b8; border-left: 4px solid #1B5E20; font-size: 12.5px; line-height: 1.5; color: #123D18; }
+  .bh-card .move b { color: #123D18; }
+  .bh-card .access { display: inline-block; margin-top: 8px; font-size: 11px; font-weight: 800; padding: 4px 9px; border-radius: 999px; background: #e7f2df; color: #1B5E20; }
+  .bh-card .access.paid { background: #fde3e5; color: #8c1d26; }
+  .bh-walk { display: flex; gap: 14px; align-items: baseline; margin-top: 10px; font-size: 12px; color: #5d5446; }
+  .bh-walk b { font-size: 22px; color: #1B5E20; line-height: 1; }
+  .bh-nav { display: flex; justify-content: space-between; gap: 8px; margin-top: 12px; }
+  .bh-nav button { font-family: inherit; font-size: 12.5px; font-weight: 800; border-radius: 999px; padding: 9px 15px; cursor: pointer; border: 2px solid #1B5E20; background: #FFE600; color: #123D18; }
+  .bh-nav button.prev { background: transparent; color: #1B5E20; }
+  .bh-nav button:disabled { opacity: .35; cursor: default; }
+  .bh-order { list-style: none; display: grid; gap: 6px; counter-reset: o; }
+  .bh-order li { display: grid; grid-template-columns: 22px 1fr auto; gap: 8px; align-items: center; font-size: 12px; line-height: 1.35; color: #2b261f; cursor: pointer; padding: 5px 6px; border-radius: 8px; }
+  .bh-order li:hover { background: #f6f1e7; }
+  .bh-order li.on { background: #fff7b8; }
+  .bh-order li .n { width: 22px; height: 22px; border-radius: 50%; background: #1B5E20; color: #ffffff; font-weight: 800; font-size: 11px; display: grid; place-items: center; }
+  .bh-order li.far .n { background: #9b8f7a; }
+  .bh-order li em { font-style: normal; font-weight: 800; color: #1B5E20; white-space: nowrap; }
+  .bh-order h3, .bh-far h3 { font-size: 10.5px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: #7a6a4f; margin-bottom: 8px; }
+  .bh-far { font-size: 12px; line-height: 1.5; color: #2b261f; }
+  .bh-far p + p { margin-top: 6px; }
+  .bh-foot { padding: 0 18px 14px; font-size: 10.5px; line-height: 1.5; color: #7a6a4f; }
+  @media (max-width: 720px) {
+    .bh-body { grid-template-columns: 1fr; }
+    .bh-head h1 { font-size: 18px; }
+    .bh-pick select { min-width: 0; width: 100%; }
+    .bh-pick label { width: 100%; }
+  }
+</style>
+</head>
+<body>
+<div class="bh">
+  <div class="bh-head">
+    <div class="bh-kick">Berlin bear hunt</div>
+    <h1>Which bears can you reach from where you are standing?</h1>
+    <p>Berlin puts its bear on street signs, fountains and bollards, but only a handful are worth a detour. Pick where you start and how long you have. The map puts the bears in walking order, nearest first, and the card tells you what you are looking at and the one thing to do there.</p>
+  </div>
+  <div class="bh-pick">
+    <label>I start at
+      <select id="start" aria-label="Starting point">
+        <option value="alex">World Clock, Alexanderplatz</option>
+        <option value="hacke">Hackescher Markt station</option>
+        <option value="lust">Lustgarten, Museum Island</option>
+        <option value="gate">Brandenburg Gate</option>
+        <option value="fried">Friedrichstraße station</option>
+      </select>
+    </label>
+    <label>I have
+      <select id="time" aria-label="Time available">
+        <option value="45">About 45 minutes</option>
+        <option value="90" selected>About 90 minutes</option>
+        <option value="180">Half a day</option>
+      </select>
+    </label>
+  </div>
+  <div class="bh-body">
+    <div class="bh-map">
+      <canvas id="map" width="720" height="560" role="img" aria-label="Map of central Berlin with the river Spree, the starting point and the bear stops numbered in walking order"></canvas>
+      <div class="bh-legend">
+        <span><i style="background:#1B5E20"></i>Bear on your walk</span>
+        <span><i style="background:#9b8f7a"></i>Too far for the time you picked</span>
+        <span><i style="background:#FFE600;border:2px solid #123D18"></i>Your start</span>
+        <span><i style="background:#8ec3e6"></i>Spree and canals</span>
+      </div>
+    </div>
+    <div class="bh-side">
+      <div class="bh-card" id="card" aria-live="polite"></div>
+      <div class="bh-card"><ol class="bh-order" id="order"></ol></div>
+    </div>
+  </div>
+  <div class="bh-foot">Walking times are straight-line distance times 1.3 at 4.5 km/h, so treat them as a guide. Opening details checked on 3 November 2026. The A115 bear at Dreilinden stands on the motorway and is not on this map.</div>
+</div>
+
+<script src="data.js"></script>
+<script>
+(function () {
+  // Coordinates of the real places (WGS84). The map is drawn from these numbers.
+  var STARTS = {
+    alex:  { name: 'World Clock, Alexanderplatz', lat: 52.52114, lon: 13.41335 },
+    hacke: { name: 'Hackescher Markt station', lat: 52.52262, lon: 13.40226 },
+    lust:  { name: 'Lustgarten, Museum Island', lat: 52.51860, lon: 13.39950 },
+    gate:  { name: 'Brandenburg Gate', lat: 52.51627, lon: 13.37770 },
+    fried: { name: 'Friedrichstraße station', lat: 52.52030, lon: 13.38700 }
+  };
+  var BEARS = window.BH_BEARS || [];
+
+  // Rough course of the Spree through the centre, from the Oberbaumbrücke to the Moabit bend.
+  var SPREE = [[52.5019,13.4457],[52.5065,13.4352],[52.5105,13.4245],[52.5125,13.4170],[52.5150,13.4100],[52.5178,13.4055],[52.5205,13.4025],[52.5222,13.3970],[52.5212,13.3880],[52.5195,13.3790],[52.5190,13.3720],[52.5220,13.3650],[52.5205,13.3550],[52.5175,13.3450],[52.5210,13.3360],[52.5240,13.3280]];
+  var KUPFER = [[52.5205,13.4025],[52.5175,13.3995],[52.5145,13.4020],[52.5125,13.4085],[52.5125,13.4170]];
+  var LANDMARKS = [
+    { t: 'TV Tower', lat: 52.52081, lon: 13.40941 },
+    { t: 'Tiergarten', lat: 52.5145, lon: 13.3500 },
+    { t: 'Museum Island', lat: 52.5215, lon: 13.3970 },
+    { t: 'Potsdamer Platz', lat: 52.5096, lon: 13.3760 },
+    { t: 'Hauptbahnhof', lat: 52.5251, lon: 13.3694 }
+  ];
+
+  var canvas = document.getElementById('map');
+  var ctx = canvas.getContext('2d');
+  var startSel = document.getElementById('start');
+  var timeSel = document.getElementById('time');
+  var cardEl = document.getElementById('card');
+  var orderEl = document.getElementById('order');
+  var plan = [];
+  var currentStep = 0;
+
+  function km(a, b) {
+    var R = 6371, dLat = (b.lat - a.lat) * Math.PI / 180, dLon = (b.lon - a.lon) * Math.PI / 180;
+    var s = Math.sin(dLat / 2) * Math.sin(dLat / 2) + Math.cos(a.lat * Math.PI / 180) * Math.cos(b.lat * Math.PI / 180) * Math.sin(dLon / 2) * Math.sin(dLon / 2);
+    return 2 * R * Math.asin(Math.sqrt(s));
+  }
+  function walkMin(a, b) { return Math.max(1, Math.round(km(a, b) * 1.3 / 4.5 * 60)); }
+
+  function buildPlan() {
+    var start = STARTS[startSel.value];
+    var budget = Number(timeSel.value);
+    var left = BEARS.slice();
+    var here = start, used = 0, route = [];
+    // Nearest bear first, then the nearest from there. A bear that does not fit
+    // the time left is passed over for the next nearest one that does.
+    while (left.length) {
+      left.sort(function (x, y) { return km(here, x) - km(here, y); });
+      var pick = -1, leg = 0;
+      for (var i = 0; i < left.length; i++) {
+        var l = walkMin(here, left[i]);
+        if (used + l + left[i].stay <= budget) { pick = i; leg = l; break; }
+      }
+      if (pick < 0) break;
+      var next = left[pick];
+      used += leg + next.stay;
+      route = route.concat([{ bear: next, leg: leg, clock: used }]);
+      here = next;
+      left = left.slice(0, pick).concat(left.slice(pick + 1));
+    }
+    var outside = left.slice().sort(function (x, y) { return km(start, x) - km(start, y); });
+    return { start: start, route: route, outside: outside, budget: budget };
+  }
+
+  var W = canvas.width, H = canvas.height, box;
+  function frame(p) {
+    var pts = [p.start].concat(p.route.map(function (r) { return r.bear; }));
+    if (pts.length < 3) pts = pts.concat(p.outside.slice(0, 3));
+    var la = pts.map(function (q) { return q.lat; }), lo = pts.map(function (q) { return q.lon; });
+    var minLa = Math.min.apply(null, la), maxLa = Math.max.apply(null, la);
+    var minLo = Math.min.apply(null, lo), maxLo = Math.max.apply(null, lo);
+    var kx = Math.cos(52.515 * Math.PI / 180);
+    var spanX = Math.max((maxLo - minLo) * kx, 0.012), spanY = Math.max(maxLa - minLa, 0.009);
+    var scale = Math.min((W - 160) / spanX, (H - 150) / spanY);
+    var cx = (minLo + maxLo) / 2, cy = (minLa + maxLa) / 2;
+    box = { kx: kx, scale: scale, cx: cx, cy: cy };
+  }
+  function xy(q) {
+    return [W / 2 + (q.lon - box.cx) * box.kx * box.scale, H / 2 - (q.lat - box.cy) * box.scale];
+  }
+  function line(path, color, width) {
+    ctx.beginPath();
+    path.forEach(function (c, i) { var p = xy({ lat: c[0], lon: c[1] }); if (i) ctx.lineTo(p[0], p[1]); else ctx.moveTo(p[0], p[1]); });
+    ctx.strokeStyle = color; ctx.lineWidth = width; ctx.lineCap = 'round'; ctx.lineJoin = 'round'; ctx.stroke();
+  }
+  function dot(q, r, fill, stroke) {
+    var p = xy(q); ctx.beginPath(); ctx.arc(p[0], p[1], r, 0, Math.PI * 2);
+    ctx.fillStyle = fill; ctx.fill(); if (stroke) { ctx.lineWidth = 3; ctx.strokeStyle = stroke; ctx.stroke(); }
+    return p;
+  }
+  function draw(p) {
+    frame(p);
+    ctx.clearRect(0, 0, W, H);
+    ctx.fillStyle = '#fffdf8'; ctx.fillRect(0, 0, W, H);
+    // a light 500 m grid gives the reader a sense of distance
+    ctx.strokeStyle = '#efe7d6'; ctx.lineWidth = 1;
+    var step = 0.5 / 111.2 * box.scale;
+    for (var gx = (W / 2) % step; gx < W; gx += step) { ctx.beginPath(); ctx.moveTo(gx, 0); ctx.lineTo(gx, H); ctx.stroke(); }
+    for (var gy = (H / 2) % step; gy < H; gy += step) { ctx.beginPath(); ctx.moveTo(0, gy); ctx.lineTo(W, gy); ctx.stroke(); }
+    line(SPREE, '#8ec3e6', 9); line(KUPFER, '#b6d9ee', 5);
+    ctx.font = '600 19px Montserrat, sans-serif'; ctx.fillStyle = '#9b8f7a'; ctx.textAlign = 'center';
+    LANDMARKS.forEach(function (m) { var q = xy(m); if (q[0] > 30 && q[0] < W - 30 && q[1] > 20 && q[1] < H - 10) ctx.fillText(m.t, q[0], q[1]); });
+    // route
+    var path = [p.start].concat(p.route.map(function (r) { return r.bear; }));
+    ctx.setLineDash([7, 6]); ctx.beginPath();
+    path.forEach(function (q, i) { var a = xy(q); if (i) ctx.lineTo(a[0], a[1]); else ctx.moveTo(a[0], a[1]); });
+    ctx.strokeStyle = '#1B5E20'; ctx.lineWidth = 3; ctx.stroke(); ctx.setLineDash([]);
+    p.outside.forEach(function (b) { var q = xy(b); if (q[0] > -10 && q[0] < W + 10 && q[1] > -10 && q[1] < H + 10) dot(b, 12, '#9b8f7a', '#ffffff'); });
+    var s = dot(p.start, 16, '#FFE600', '#123D18');
+    p.route.forEach(function (r, i) {
+      var on = i === currentStep;
+      var q = dot(r.bear, on ? 22 : 17, on ? '#FFE600' : '#1B5E20', on ? '#123D18' : '#ffffff');
+      ctx.fillStyle = on ? '#123D18' : '#ffffff'; ctx.font = '800 18px Montserrat, sans-serif'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+      ctx.fillText(String(i + 1), q[0], q[1] + 1);
+      ctx.textBaseline = 'alphabetic';
+      if (on) {
+        ctx.font = '800 21px Montserrat, sans-serif'; ctx.fillStyle = '#123D18';
+        var tx = Math.min(Math.max(q[0], 110), W - 110);
+        ctx.fillText(r.bear.short, tx, q[1] - 32 < 22 ? q[1] + 44 : q[1] - 32);
+      }
+    });
+    ctx.font = '700 18px Montserrat, sans-serif'; ctx.fillStyle = '#123D18'; ctx.textAlign = 'center';
+    ctx.fillText('Start', s[0], s[1] + 38);
+    // scale bar
+    ctx.strokeStyle = '#5d5446'; ctx.lineWidth = 2; ctx.beginPath(); ctx.moveTo(16, H - 18); ctx.lineTo(16 + step, H - 18); ctx.stroke();
+    ctx.font = '600 16px Montserrat, sans-serif'; ctx.fillStyle = '#5d5446'; ctx.textAlign = 'left'; ctx.fillText('500 m', 16, H - 26);
+  }
+
+  function esc(t) { return String(t).replace(/&/g, '&amp;').replace(/</g, '&lt;'); }
+
+  function render() {
+    var p = plan;
+    if (!p.route.length) {
+      cardEl.innerHTML = '<div class="no">No bear in reach</div><h2>Give yourself more time</h2><p>From ' + esc(p.start.name) + ' the nearest bear is ' + (p.outside[0] ? esc(p.outside[0].name) + ', about ' + walkMin(p.start, p.outside[0]) + ' minutes on foot' : 'too far') + '. Pick a longer slot above.</p>';
+    } else {
+      var r = p.route[currentStep], b = r.bear;
+      cardEl.innerHTML = '<div class="no">Bear ' + (currentStep + 1) + ' of ' + p.route.length + '</div>' +
+        '<h2>' + esc(b.name) + '</h2><div class="where">' + esc(b.where) + '</div>' +
+        '<p>' + esc(b.what) + '</p>' +
+        '<span class="access' + (b.paid ? ' paid' : '') + '">' + esc(b.access) + '</span>' +
+        '<div class="move"><b>My move:</b> ' + esc(b.move) + '</div>' +
+        '<div class="bh-walk"><span><b>' + r.leg + '</b> min walk to here</span><span><b>' + r.clock + '</b> of ' + p.budget + ' min used</span></div>' +
+        '<div class="bh-nav"><button class="prev" type="button" id="prev"' + (currentStep === 0 ? ' disabled' : '') + '>Back</button>' +
+        '<button type="button" id="next"' + (currentStep >= p.route.length - 1 ? ' disabled' : '') + '>Next bear</button></div>';
+      document.getElementById('prev').onclick = function () { go(currentStep - 1); };
+      document.getElementById('next').onclick = function () { go(currentStep + 1); };
+    }
+    var html = '<h3>Your bears, in walking order</h3>';
+    html += p.route.map(function (r, i) {
+      return '<li data-i="' + i + '" class="' + (i === currentStep ? 'on' : '') + '"><span class="n">' + (i + 1) + '</span><span>' + esc(r.bear.name) + '</span><em>' + r.leg + ' min</em></li>';
+    }).join('');
+    if (p.outside.length) {
+      html += '<h3 style="margin-top:10px">Not in this slot</h3>';
+      html += p.outside.map(function (b) {
+        return '<li class="far"><span class="n">&middot;</span><span>' + esc(b.name) + '</span><em>' + (walkMin(p.start, b) > 75 ? 'S-Bahn trip' : walkMin(p.start, b) + ' min away') + '</em></li>';
+      }).join('');
+    }
+    orderEl.innerHTML = html;
+    Array.prototype.forEach.call(orderEl.querySelectorAll('li[data-i]'), function (li) {
+      li.onclick = function () { go(Number(li.getAttribute('data-i'))); };
+    });
+    draw(p);
+  }
+  function go(i) {
+    if (i < 0 || i >= plan.route.length) return;
+    currentStep = i;
+    render();
+  }
+  function rebuild() { plan = buildPlan(); currentStep = 0; render(); }
+  startSel.onchange = rebuild; timeSel.onchange = rebuild;
+  rebuild();
+})();
+</script>
+<script src="../js/brand.js"></script>
+</body>
+</html>
