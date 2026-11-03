@@ -27,6 +27,25 @@
   // One price format everywhere: euro sign, two decimals, dot separator ("€24.90"). Native Wix formatted prices are used first; this covers every fallback.
   const money = (currency, major) => {const number=Number(major);if(major===''||major===null||major===undefined||!Number.isFinite(number))return '';const code=String(currency||'').toUpperCase();return ({EUR:'€',USD:'$',GBP:'£'}[code]||(code?code+' ':''))+number.toFixed(2);};
   const url = value => {if(typeof value!=='string'||!value.trim())return '#';try {const u = new URL(value, 'https://www.walkofberlin.com');return u.protocol === 'https:' ? u.href : '#';} catch {return '#';}};
+  // P29-EDITION-LINKS:BEGIN
+  const EDITION_UTMS = ['utm_source','utm_medium','utm_campaign','utm_content'];
+  const EDITION_SOURCES = new Set(['newsletter','instagram','facebook','whatsapp','short_link','store','meta','google','blog','tool']);
+  function editionHref(value, search=location.search) {
+    const href=url(value); if(!href.startsWith('https://editions.walkofberlin.com/'))return href;
+    const target=new URL(href);
+    const incoming=new URLSearchParams(search); if(!EDITION_SOURCES.has(incoming.get('utm_source')))return href;
+    for(const key of EDITION_UTMS){target.searchParams.delete(key);if(incoming.has(key))target.searchParams.set(key,Array.from(incoming.get(key)).slice(0,120).join(''));}
+    return target.href;
+  }
+  // Preserve the rendered four fields after the existing campaign click listener runs;
+  // its consented tracking and any other query parameters remain untouched.
+  const editionClicks=new WeakMap();
+  window.addEventListener('click',event=>{
+    const path=event.composedPath();if(!path.some(node=>node?.tagName==='BW-STOREFRONT'))return;
+    const anchor=path.find(node=>node?.tagName==='A'&&node.href?.startsWith('https://editions.walkofberlin.com/'));
+    if(anchor)editionClicks.set(event,{anchor,href:anchor.href});
+  },true);
+  // P29-EDITION-LINKS:END
   const textMoney = value => value?.formattedAmount || (typeof value?.amount === 'string' ? value.amount : 'Not confirmed');
   const nativeImage = value => {if(typeof value!=='string')return '#';const match=/^wix:image:\/\/v1\/([^/#?]+)(?:\/|#|\?|$)/.exec(value);if(match&&/^[a-zA-Z0-9_.~%-]+$/.test(match[1]))return 'https://static.wixstatic.com/media/'+match[1];return url(value);};
   const json = value => {try{return JSON.parse(value || 'null');}catch{return null;}};
@@ -251,6 +270,14 @@
           event.stopImmediatePropagation();event.stopPropagation();
         }
       },true);
+      this.shadowRoot.addEventListener('click',event=>{
+        const saved=editionClicks.get(event);if(!saved)return;
+        const target=new URL(saved.anchor.href),original=new URL(saved.href);
+        if(target.origin!==original.origin||target.pathname!==original.pathname)return;
+        if(EDITION_UTMS.every(key=>JSON.stringify(target.searchParams.getAll(key))===JSON.stringify(original.searchParams.getAll(key))))return;
+        for(const key of EDITION_UTMS){target.searchParams.delete(key);for(const value of original.searchParams.getAll(key))target.searchParams.append(key,value);}
+        if(target.href!==saved.anchor.href)saved.anchor.href=target.href;
+      },true);
       this.shadowRoot.addEventListener('click', event => this.click(event));
       this.shadowRoot.addEventListener('input', event => this.input(event));
       this.shadowRoot.addEventListener('change', event => this.change(event));
@@ -431,13 +458,13 @@
     tile(product) {
       if(legacyGiftPresentation()){
       const source=this.image(product);
-      return `<a class="tile ${product.imageFit==='cover'?'cover':''} ${product.visualOverlay?'audio-device-card':''}" href="${esc(url(product.productUrl))}"><img class="tile-photo" src="${esc(source)}" alt="${esc(product.alt||product.name)}" loading="lazy">${product.visualOverlay?`<img class="audio-device-overlay" src="${esc(asset('assets/'+product.visualOverlay))}" alt="Illustrative phone and headphones" loading="lazy">`:''}</a>`;
+      return `<a class="tile ${product.imageFit==='cover'?'cover':''} ${product.visualOverlay?'audio-device-card':''}" href="${esc(editionHref(product.productUrl))}"><img class="tile-photo" src="${esc(source)}" alt="${esc(product.alt||product.name)}" loading="lazy">${product.visualOverlay?`<img class="audio-device-overlay" src="${esc(asset('assets/'+product.visualOverlay))}" alt="Illustrative phone and headphones" loading="lazy">`:''}</a>`;
     
       }
       const source=this.image(product);
-      return `<a class="tile ${product.imageFit==='cover'?'cover':''} ${product.visualOverlay?'audio-device-card':''}" href="${esc(url(product.productUrl))}"><img class="tile-photo" src="${esc(source)}" alt="${esc(product.alt||product.name)}"${imageAttrs(source,'card',['np-birthday','np-big-day'].includes(product.id))}>${product.visualOverlay?`<img class="audio-device-overlay" src="${esc(this.thumbnailMedia(product.visualOverlay))}" alt="Illustrative phone and headphones" loading="lazy">`:''}</a>`;
+      return `<a class="tile ${product.imageFit==='cover'?'cover':''} ${product.visualOverlay?'audio-device-card':''}" href="${esc(editionHref(product.productUrl))}"><img class="tile-photo" src="${esc(source)}" alt="${esc(product.alt||product.name)}"${imageAttrs(source,'card',['np-birthday','np-big-day'].includes(product.id))}>${product.visualOverlay?`<img class="audio-device-overlay" src="${esc(this.thumbnailMedia(product.visualOverlay))}" alt="Illustrative phone and headphones" loading="lazy">`:''}</a>`;
     }
-    action(product) {return product.action==='add'?`<button class="outline" data-action="add" data-product="${product.wixProductId}" ${this.busy||this.uncertain?'disabled':''}>${this.campaignGerman()?'In den Warenkorb':'Add to cart'}</button>`:`<a class="outline" href="${esc(url(product.productUrl))}">${esc(product.actionLabel)}</a>`;}
+    action(product) {return product.action==='add'?`<button class="outline" data-action="add" data-product="${product.wixProductId}" ${this.busy||this.uncertain?'disabled':''}>${this.campaignGerman()?'In den Warenkorb':'Add to cart'}</button>`:`<a class="outline" href="${esc(editionHref(product.productUrl))}">${esc(product.actionLabel)}</a>`;}
     cardType(product,model) {return model.getTwin(product)?this.campaignGerman()?`${/calendar/i.test(product.name)?'KALENDER':'POSTER'} · GEDRUCKT ODER ALS DATEI`:`${/calendar/i.test(product.name)?'CALENDAR':'POSTER'} · PRINTED OR AS A FILE`:product.typeLine;}
     campaignGerman() {return this.landing?.lang==='de'||this.navigation?.STORE_LANDINGS?.[this.skeletonRoute().categorySlug]?.lang==='de'||new URLSearchParams(location.search).get('lang')==='de';}
     campaignNativeOn(id) {const row=(this.catalogue?.products||(!this.catalogue&&this.snapshotUsable()?this.priceSnapshot.products:[]))?.find(p=>p.productId===id),c=this.campaignConfig;return !!(c?.products?.[id]&&Date.now()>=Date.parse(c.start)&&Date.now()<Date.parse(c.end)&&row&&Math.round(row.discountedPrice*100)===Math.round(c.products[id].sale*100)&&Math.round(row.price*100)===Math.round(c.products[id].sale*100));}
@@ -449,7 +476,7 @@
       return c?c.priceHtml({amount,regular,lowest30:choices?regular:ref?.lowest30,currency:product.currency,de:this.campaignGerman(),enabled,from:!choices&&((product.requiresOptions&&product.source==='wix')||product.priceFrom)}):esc(product.priceLabel);
     }
     campaignBanner() {const c=this.campaignConfig;if(!c)return '';const effective={...c,systems:{...c.systems,wix:this.catalogue?this.catalogue.products?.some(p=>this.campaignNativeOn(p.productId))||false:c.systems.wix}};return this.campaign?.countdownHtml(effective,this.campaignGerman())||'';}
-    card(product,feature=false) {return `<article class="${feature?'feature':'card'}" data-product="${product.id}">${this.tile(product)}<div class="${feature?'feature-copy':'card-copy'}"><span class="type">${esc(this.cardType(product,this.model))}</span><a class="product-name" href="${esc(url(product.productUrl))}">${esc(product.name)}</a>${feature?`<p>${esc(this.layer.cardSummary(product.cardSummary||product.description))}</p>`:''}<span class="place">${esc(product.place)}</span><div class="card-bottom"><span class="price">${this.campaignPrice(product)}</span>${this.action(product)}</div></div></article>`;}
+    card(product,feature=false) {return `<article class="${feature?'feature':'card'}" data-product="${product.id}">${this.tile(product)}<div class="${feature?'feature-copy':'card-copy'}"><span class="type">${esc(this.cardType(product,this.model))}</span><a class="product-name" href="${esc(editionHref(product.productUrl))}">${esc(product.name)}</a>${feature?`<p>${esc(this.layer.cardSummary(product.cardSummary||product.description))}</p>`:''}<span class="place">${esc(product.place)}</span><div class="card-bottom"><span class="price">${this.campaignPrice(product)}</span>${this.action(product)}</div></div></article>`;}
     // Desktop dropdown under a store tab: its collections (Yusuf, 29 Oct 2026). Phones keep the chips on the category page.
     tabMenu(categoryId) {
       if(categoryId==='all')return '';
@@ -546,7 +573,7 @@
       const twin=this.model.getTwin(product);
       if(!twin)return '';
       const print=isDigital(product)?twin:product,file=isDigital(product)?product:twin;
-      const option=(item,label,note)=>item===product?`<span class="format-option" aria-current="true"><strong>${label}</strong><span>${esc(note)}</span><span class="format-price">${this.campaignPrice(item)}</span></span>`:`<a class="format-option" href="${esc(url(item.productUrl))}"><strong>${label}</strong><span>${esc(note)}</span><span class="format-price">${this.campaignPrice(item)}</span></a>`;
+      const option=(item,label,note)=>item===product?`<span class="format-option" aria-current="true"><strong>${label}</strong><span>${esc(note)}</span><span class="format-price">${this.campaignPrice(item)}</span></span>`:`<a class="format-option" href="${esc(editionHref(item.productUrl))}"><strong>${label}</strong><span>${esc(note)}</span><span class="format-price">${this.campaignPrice(item)}</span></a>`;
       return `<div class="format-switch" role="group" aria-label="Format">${option(print,'Printed poster','Printed to order and shipped')}${option(file,'Digital file','Download it and print it yourself')}</div>`;
     }
     product() {
@@ -800,7 +827,7 @@
     }
     skeletonBar(model,current) {return `<aside class="shopbar"><div class="wrap shopbar-inner"><span class="shopbar-home">${STORE_LOGO}</span><nav class="tabs">${model.tabs.map(tab=>`<a ${current===tab.id?'aria-current="page"':''}>${esc(tab.label)}</a>`).join('')}</nav><span class="cart-link">Cart ${sk('sk-count')}</span></div></aside>`;}
     skeletonCard(product,feature=false,eager=false) {
-      if(this.catalogue||this.snapshotUsable())return `<article class="${feature?'feature':'card'}" data-product="${product.id}">${this.tile(product)}<div class="${feature?'feature-copy':'card-copy'}"><span class="type">${esc(this.cardType(product,this.skeletonModel))}</span><a class="product-name" href="${esc(url(product.productUrl))}">${esc(product.name)}</a>${feature?`<p>${esc(this.layer.cardSummary(product.cardSummary||product.description))}</p>`:''}<span class="place">${esc(product.place)}</span><div class="card-bottom"><span class="price">${this.campaignPrice(product)}</span>${this.loadingAction(product)}</div></div></article>`;
+      if(this.catalogue||this.snapshotUsable())return `<article class="${feature?'feature':'card'}" data-product="${product.id}">${this.tile(product)}<div class="${feature?'feature-copy':'card-copy'}"><span class="type">${esc(this.cardType(product,this.skeletonModel))}</span><a class="product-name" href="${esc(editionHref(product.productUrl))}">${esc(product.name)}</a>${feature?`<p>${esc(this.layer.cardSummary(product.cardSummary||product.description))}</p>`:''}<span class="place">${esc(product.place)}</span><div class="card-bottom"><span class="price">${this.campaignPrice(product)}</span>${this.loadingAction(product)}</div></div></article>`;
 
       if(legacyGiftPresentation()){
       const source=this.image(product);
