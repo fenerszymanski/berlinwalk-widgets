@@ -68,7 +68,32 @@ const TEXT = new Map(Object.entries({
 }));
 TEXT.set('The poster ships free to Germany, the other EU countries, the UK and the US: usually 3 to 5 working days to Germany, 4 to 7 to most of the EU, the UK and the US, and 6 to 9 to Bulgaria, Estonia, Finland, Greece, Ireland, Latvia, Lithuania, Portugal and Romania. Checkout shows the time for your country. The digital file comes by email within 24 hours, anywhere.', 'Das Poster wird kostenlos nach Deutschland, in die übrige EU, nach UK und in die USA geschickt: meist 3 bis 5 Werktage nach Deutschland, 4 bis 7 in die meisten EU-Länder, nach UK und in die USA, 6 bis 9 nach Bulgarien, Estland, Finnland, Griechenland, Irland, Lettland, Litauen, Portugal und Rumänien. An der Kasse siehst du die Zeit für dein Land. Die digitale Datei kommt überallhin innerhalb von 24 Stunden per E-Mail.');
 TEXT.set('Printed poster: made to order from your address and printed for you. Free delivery to Germany (usually 3 to 5 working days), most of the EU, the United Kingdom and the United States (4 to 7), and Bulgaria, Estonia, Finland, Greece, Ireland, Latvia, Lithuania, Portugal and Romania (6 to 9).', 'Gedrucktes Poster: wird nach deiner Adresse für dich angefertigt. Kostenloser Versand nach Deutschland (meist 3 bis 5 Werktage), in die meisten EU-Länder, nach UK und in die USA (4 bis 7) sowie nach Bulgarien, Estland, Finnland, Griechenland, Irland, Lettland, Litauen, Portugal und Rumänien (6 bis 9).');
+// Standard poster copy (5 Nov 2026). Berolina keeps its existing page unchanged.
+const POSTER_TEXT = new Map(Object.entries({
+  'Printed to order by Gelato': 'Auf Bestellung von Gelato gedruckt',
+  '14-day right of withdrawal for consumers': '14-tägiges Widerrufsrecht für Verbraucher',
+  'Made by me, Yusuf.': 'Von mir gestaltet, Yusuf.',
+  '170 g matte paper.': 'Mattes Papier, 170 g.',
+  '200 g matte paper.': 'Mattes Papier, 200 g.',
+  '250 g matte paper.': 'Mattes Papier, 250 g.',
+  '170 g paper with a soft sheen.': 'Papier mit leichtem Glanz, 170 g.',
+  '200 g paper with a soft sheen.': 'Papier mit leichtem Glanz, 200 g.',
+  'What sizes and paper are available?': 'Welche Größen und Papiere gibt es?',
+  'No, this is an unframed poster. Frames, furniture and decor in room visualisations are not included.': 'Nein, das Poster kommt ohne Rahmen. Rahmen, Möbel und Dekoration in den Raumvisualisierungen sind nicht enthalten.',
+  'Can I return it? What if it is faulty?': 'Kann ich es zurückgeben? Was ist bei einem Mangel?',
+  'As a consumer, you have a 14-day right of withdrawal. You pay the return postage for a change of mind.': 'Als Verbraucher hast du ein 14-tägiges Widerrufsrecht. Die Rücksendekosten bei einem Widerruf trägst du.',
+  'If your print arrives faulty, damaged or different from your order, write to': 'Kommt dein Druck fehlerhaft oder beschädigt an oder entspricht er nicht deiner Bestellung, schreibe an',
+  '. Your statutory rights apply. See the': '. Deine gesetzlichen Rechte gelten. Alle Einzelheiten stehen in den',
+  'and': 'und',
+  'for the full details.': '.',
+  'The poster ships free to Germany, the other EU countries, the UK and the US: usually 3 to 5 working days to Germany, 4 to 7 to most of the EU, the UK and the US, and 6 to 9 to Bulgaria, Estonia, Finland, Greece, Ireland, Latvia, Lithuania, Portugal and Romania. Checkout shows the time for your country.': 'Das Poster wird kostenlos nach Deutschland, in die anderen EU-Länder, nach UK und in die USA versandt: meist 3 bis 5 Werktage nach Deutschland, 4 bis 7 in die meisten EU-Länder, nach UK und in die USA sowie 6 bis 9 nach Bulgarien, Estland, Finnland, Griechenland, Irland, Lettland, Litauen, Portugal und Rumänien. Im Checkout siehst du die Zeit für dein Land.',
+  'The poster ships free to Germany, the other EU countries, the UK and the US: usually 3 to 5 working days to Germany, 4 to 7 to most of the EU, the UK and the US, and 6 to 9 to Bulgaria, Estonia, Finland, Greece, Ireland, Latvia, Lithuania, Portugal and Romania. Checkout shows the time for your country. Frame not included.': 'Das Poster wird kostenlos nach Deutschland, in die anderen EU-Länder, nach UK und in die USA versandt: meist 3 bis 5 Werktage nach Deutschland, 4 bis 7 in die meisten EU-Länder, nach UK und in die USA sowie 6 bis 9 nach Bulgarien, Estland, Finnland, Griechenland, Irland, Lettland, Litauen, Portugal und Rumänien. Im Checkout siehst du die Zeit für dein Land. Ohne Rahmen.'
+}));
 const PATTERNS = [
+  [/^Available sizes: (.+)\.$/, 'Verfügbare Größen: $1.'],
+  [/^Paper: (.+)\.$/, 'Papier: $1.'],
+  [/^Available papers: (.+)\. Choose a size in the menu to see its available papers\.$/, 'Verfügbare Papiere: $1. Wähle im Menü eine Größe, um die dafür verfügbaren Papiere zu sehen.'],
+  [/^Unframed · (.+)$/, 'Ohne Rahmen · $1'],
   [/^Cart \((\d+)\)$/, 'Warenkorb ($1)'], [/^Add to cart · (.+)$/, 'In den Warenkorb · $1'], [/^Yes, add to cart · (.+)$/, 'Ja, in den Warenkorb · $1'],
   [/^Example poster, (.+)\. Search an address to see your street\.$/, 'Beispielposter, $1. Suche eine Adresse, um deine Straße zu sehen.'],
   [/^Example file\. Search an address to see your street\.$/, 'Beispieldatei. Suche eine Adresse, um deine Straße zu sehen.'],
@@ -95,6 +120,7 @@ const translate = value => {
   const key = value.replace(/\s+/g, ' ').trim();
   if (!key) return null;
   if (TEXT.has(key)) return value.replace(value.trim(), TEXT.get(key));
+  if (!decodeURIComponent(location.pathname).startsWith(PRODUCT_PATH) && POSTER_TEXT.has(key)) return value.replace(value.trim(), POSTER_TEXT.get(key));
   for (const [pattern, to] of PATTERNS) if (pattern.test(key)) return value.replace(value.trim(), key.replace(pattern, to));
   return null;
 };
@@ -115,12 +141,14 @@ function sweep(root) {
 }
 // Wix can replace the element while the page settles, so the watch rebinds to whichever shadow root is current.
 function start() {
-  if (!decodeURIComponent(location.pathname).startsWith(PRODUCT_PATH)) return;
-  document.title = 'Deine Berliner Straße um 1928 | Walk of Berlin';
+  const ysPage = decodeURIComponent(location.pathname).startsWith(PRODUCT_PATH);
+  if (!ysPage && !decodeURIComponent(location.pathname).startsWith('/product-page/')) return;
+  if (ysPage) document.title = 'Deine Berliner Straße um 1928 | Walk of Berlin';
   let bound = null;
   const bind = () => {
     const host = document.querySelector('bw-storefront');
     if (!host?.shadowRoot || host.shadowRoot === bound) return;
+    if (!ysPage && !host.shadowRoot.querySelector('.poster-faq')) return;
     bound = host.shadowRoot;
     host.lang = 'de';
     const root = bound;
