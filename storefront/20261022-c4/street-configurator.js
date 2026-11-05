@@ -1,3 +1,28 @@
+// Palette file is byte-identical to generator/print-options.json; no independent CSS colour approximation.
+export const PRINT_OPTIONS = await fetch(new URL('./print-options.json', import.meta.url)).then(r => {if(!r.ok)throw Error('PRINT_OPTIONS_UNAVAILABLE');return r.json();});
+export const ysLayout = state => Object.hasOwn(PRINT_OPTIONS.layouts,state.layout) ? state.layout : 'then-now';
+export const ysColour = state => Object.hasOwn(PRINT_OPTIONS.themes,state.colour) ? state.colour : 'sepia';
+export const optionNames = state => ({layout:PRINT_OPTIONS.layouts[ysLayout(state)], colour:PRINT_OPTIONS.themes[ysColour(state)].name});
+export function parsePrintDetails(value) {
+  const point=/Map point\s*(-?[0-9.]+)\s*,\s*(-?[0-9.]+)/.exec(value || '');
+  const fields=Object.fromEntries([...String(value||'').matchAll(/(?:^|\/\/|\|)\s*(Title|Area|Line|Ref|Layout|Colour):\s*(.*?)(?=\s*(?:\/\/|\|)|$)/gi)].map(m=>[m[1].toLowerCase(),m[2].trim()]));
+  return point && fields.title && fields.area ? {...fields,lat:Number(point[1]),lon:Number(point[2])} : null;
+}
+// Same Pillow L conversion, 1% autocontrast LUT and three-stop palette as the print.
+export function gradePixels(source, theme, archive) {
+  const out=new Uint8ClampedArray(source.length), grey=new Uint8Array(source.length/4), hist=new Uint32Array(256);
+  if(archive) {
+    for(let i=0;i<grey.length;i++){const p=i*4;grey[i]=(19595*source[p]+38470*source[p+1]+7471*source[p+2]+32768)>>16;hist[grey[i]]++;}
+    let lo=0,hi=255,cut=Math.floor(grey.length/100),n=cut;
+    while(lo<255 && n>=hist[lo])n-=hist[lo++];n=cut;
+    while(hi>0 && n>=hist[hi])n-=hist[hi--];
+    const lut=Array.from({length:256},(_,g)=>hi<=lo?g:Math.max(0,Math.min(255,Math.floor((g-lo)*255/(hi-lo)))));
+    for(let i=0;i<grey.length;i++){const v=lut[grey[i]],p=i*4;for(let c=0;c<3;c++)out[p+c]=v<127?theme.black[c]+Math.floor(v*(theme.mid[c]-theme.black[c])/127):theme.mid[c]+Math.floor((v-127)*(theme.white[c]-theme.mid[c])/128);out[p+3]=255;}
+  } else {
+    for(let p=0;p<source.length;p+=4){const lum=.299*source[p]+.587*source[p+1]+.114*source[p+2];for(let c=0;c<3;c++){const v=lum+(source[p+c]-lum)*theme.sat;out[p+c]=Math.floor(theme.lo[c]+(theme.hi[c]-theme.lo[c])*v/255+.5);}out[p+3]=255;}
+  }
+  return out;
+}
 // "Your Berlin Street in 1928" configurator (store product only). Geometry is identical to
 // content/products/your-street-1928/SPEC.md and generator/make_print.py, layout "A6 white" (utm33).
 // Pure browser code: Photon geocoding with Nominatim as fallback (Berlin only), two WMS GetMap <img> previews (1928 above, today below,
@@ -67,6 +92,7 @@ export function loadAerialPhoto({slot, url, layer, valid = () => true, track = (
     thisImage.onerror = () => finish('loaderror');
     timer = later(() => finish('timeout'), timeoutMs);
     status(attempt === 1 ? `Loading the ${label} photo…` : `Retrying the ${label} photo…`);
+    thisImage.crossOrigin = 'anonymous';
     thisImage.src = url;
   }
   start();
@@ -98,12 +124,12 @@ export function wmsUrl(base, layer, cx, cy, w, h, pw, ph) {
   return `${base}?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=${layer}&STYLES=&CRS=EPSG%3A25833&BBOX=${bbox}&WIDTH=${pw}&HEIGHT=${ph}&FORMAT=image%2Fpng`;
 }
 // Both photos ask for the same BBOX and the same pixel size: only the layer differs.
-export const url1928 = (lat, lon) => { const [x, y] = utm33(lat, lon); return wmsUrl(WMS_1928, LAYER_1928, x, y, GROUND_W, GROUND_H, SCREEN_PX[0], SCREEN_PX[1]); };
+export const url1928 = (lat, lon, only = false) => { const [x, y] = utm33(lat, lon); return wmsUrl(WMS_1928, LAYER_1928, x, y, GROUND_W, only ? GROUND_W * 1592 / 1400 : GROUND_H, SCREEN_PX[0], only ? Math.round(SCREEN_PX[0]*1592/1400) : SCREEN_PX[1]); };
 export const urlToday = (lat, lon) => { const [x, y] = utm33(lat, lon); return wmsUrl(WMS_TODAY, LAYER_TODAY, x, y, GROUND_W, GROUND_H, SCREEN_PX[0], SCREEN_PX[1]); };
 // Pixel offset inside either displayed photo (fractions 0..1, origin top-left) to a new lat/lon. Both photos show the same ground box, so the maths is the same.
-export function movePoint(lat, lon, fx, fy) {
+export function movePoint(lat, lon, fx, fy, only = false) {
   const [cx, cy] = utm33(lat, lon);
-  return fromUtm33(cx + (fx - 0.5) * GROUND_W, cy + (0.5 - fy) * GROUND_H, [lat, lon]).map(v => Math.round(v * 1e5) / 1e5);
+  return fromUtm33(cx + (fx - 0.5) * GROUND_W, cy + (0.5 - fy) * (only ? GROUND_W * 1592 / 1400 : GROUND_H), [lat, lon]).map(v => Math.round(v * 1e5) / 1e5);
 }
 // The line under the area on the print: the point to four decimals, like make_print.py. The cart carries the point to five decimals and the
 // generator rounds that value, so round to five first (52.509849996 -> 52.50985 -> 52.5099 on the print, not 52.5098).
@@ -201,10 +227,10 @@ export function spotFromPreview(preview) {
   const area = clean(preview?.area, YS_LIMITS.area);
   return {lat, lon, title, area, address: clean([title, area].filter(Boolean).join(', '), YS_LIMITS.address),
     format: preview?.format === 'digital' ? 'digital' : 'poster', size: ({'30x40': YS_SIZES[0], '45x60': YS_SIZES[1]})[preview?.size] || '',
-    paper: preview?.format !== 'digital' && YS_PAPERS.some(p => p.name === preview?.paper) ? preview.paper : ''};
+    paper: preview?.format !== 'digital' && YS_PAPERS.some(p => p.name === preview?.paper) ? preview.paper : '', layout:ysLayout(preview||{}),colour:ysColour(preview||{})};
 }
 // What the preview-mail endpoint takes as `preview` (the server rounds and re-validates it; a house number is stripped there too).
-export const mailPreview = state => ({lat: Number(state.lat), lon: Number(state.lon), title: clean(state.title, YS_LIMITS.title).toUpperCase(), area: clean(state.area, YS_LIMITS.area),
+export const mailPreview = state => ({lat: Number(state.lat), lon: Number(state.lon), title: clean(state.title, YS_LIMITS.title).toUpperCase(), area: clean(state.area, YS_LIMITS.area),layout:ysLayout(state),colour:ysColour(state),
   format: ysDigital(state) ? 'digital' : 'poster', size: ysDigital(state) ? '' : ysSize(state), paper: ysDigital(state) ? '' : ysPaper(state).name});
 export const MAIL_ENDPOINT = 'https://app.berlinwalk.com/api/download-lead?action=previewSubmit';
 export const MAIL_ASSET = {assetId: 'street-1928-preview', consentVersion: 'street-1928-preview-letter-v1-2026-10-27', consentMethod: 'optional_unticked_checkbox_with_doi'};
@@ -222,16 +248,15 @@ export const mailMessage = (status, marketing) => {
 export function buildCustomText(state, search) {
   const title = clean(state.title, YS_LIMITS.title).toUpperCase(), area = clean(state.area, YS_LIMITS.area), line = clean(state.line, YS_LIMITS.line);
   const [lat, lon] = [Number(state.lat), Number(state.lon)];
-  const parts = [`Map point ${lat.toFixed(5)}, ${lon.toFixed(5)}`, `Title: ${title} | Area: ${area}`];
-  // Consented journey id first (funnel.js sets it only with analytics consent), then the ad reference.
+  // Compact delimiters preserve all printable text within Wix's actual 200-character limit.
+  const parts = [`Map point ${lat.toFixed(5)},${lon.toFixed(5)}`, `Title:${title}|Area:${area}`, ...(line ? [`Line:${line}`] : []), `Layout:${ysLayout(state)}`, `Colour:${ysColour(state)}`];
   const journeyRef = typeof window !== 'undefined' && /^[a-z0-9]{6,16}$/.test(window.__bwStoreJourneyRef || '') ? `j${window.__bwStoreJourneyRef}` : '';
-  const ref = [journeyRef, adRef(search)].filter(Boolean).join('~'), room = YS_LIMITS.details - [...parts, ...(line ? [`Line: ${line}`] : [])].join(' // ').length - ' // Ref: '.length;
-  if (ref && room >= 6) parts.push(`Ref: ${ref.slice(0, room)}`);
-  if (line) parts.push(`Line: ${line}`);
-  return {
-    [YS_FIELDS.address]: clean(state.address, YS_LIMITS.address),
-    [YS_FIELDS.details]: parts.join(' // ').slice(0, YS_LIMITS.details),
-  };
+  const ref = [journeyRef, adRef(search)].filter(Boolean).join('~');
+  const room = YS_LIMITS.details - parts.join('//').length - '//Ref:'.length;
+  if (ref && room >= 6) parts.push(`Ref:${ref.slice(0,room)}`);
+  const details=parts.join('//');
+  if(details.length>YS_LIMITS.details)throw Error('PRINT_DETAILS_TOO_LONG');
+  return {[YS_FIELDS.address]:clean(state.address,YS_LIMITS.address),[YS_FIELDS.details]:details};
 }
 // Size x paper variants (Yusuf, 24 Oct 2026). Prices mirror the Wix variants (output/store-variants-20261024/variants.json);
 // Wix charges its own variant price at checkout, these only label the choice.
@@ -259,7 +284,7 @@ export const ysProductId = state => (ysDigital(state) ? YS_DIGITAL_ID : YS_PRODU
 const DIGITAL_SPEC = 'Digital file · JPG + PDF · 45 x 60 cm at 300 ppi';
 const DIGITAL_DELIVERY = 'Prints cleanly at 30 x 40 cm too. Nothing is shipped, so it works anywhere.';
 const POSTER_DELIVERY = 'Arrives in 3 to 5 working days in Germany, 4 to 9 elsewhere. Frame not included.';
-const captionFor = (state, live) => (ysDigital(state) ? (live ? CAPTION_LIVE.replace('Your poster, SIZE', 'Your digital file') : 'Example file. Search an address to see your street.') : (live ? CAPTION_LIVE : CAPTION_EXAMPLE).replace('SIZE', ysSize(state)));
+const captionFor = (state, live) => live && ysLayout(state)==='1928-only' ? 'Your street in 1928. One large aerial photograph, with your building marked.' : (ysDigital(state) ? (live ? CAPTION_LIVE.replace('Your poster, SIZE', 'Your digital file') : 'Example file. Search an address to see your street.') : (live ? CAPTION_LIVE : CAPTION_EXAMPLE).replace('SIZE', ysSize(state)));
 // Everything the print needs except the buyer's "yes, I see the 1928 photo": the add buttons are live from here on (25 Oct 2026).
 export function readyToCheck(state) {
   return Number.isFinite(state.lat) && Number.isFinite(state.lon) && inBerlin(state.lat, state.lon) && clean(state.address, 80).length > 0 &&
@@ -382,6 +407,8 @@ export function mountConfigurator(host, state, api) {
         <span class="ys-label" id="ys-format-l">What you get</span>
         <div class="ys-sizes" role="radiogroup" aria-labelledby="ys-format-l"><button type="button" role="radio" class="ys-size" data-ys-format="poster" aria-checked="${!ysDigital(state)}">Printed poster<small>From ${euro(currentPrice({...state,size:YS_SIZES[0],paper:'Classic Matte'}))} · printed and posted to you, free delivery</small></button><button type="button" role="radio" class="ys-size" data-ys-format="digital" aria-checked="${ysDigital(state)}">Digital file<small>${Number.isFinite(api.digitalPrice)?euro(api.digitalPrice):'Currently unavailable'} · JPG + PDF by email, print it yourself</small></button></div>
       </div>
+      <div class="ys-choice-row" role="group" aria-label="Layout"><span class="ys-label">Layout</span><div class="ys-layouts" role="radiogroup" aria-label="Layout">${Object.entries(PRINT_OPTIONS.layouts).map(([key,name])=>`<button type="button" role="radio" data-ys-layout="${key}" aria-checked="${key===ysLayout(state)}"><img class="ys-layout-thumb" src="${new URL(`./assets/options/sepia-${key}.jpg`,import.meta.url).href}" alt="">${name}</button>`).join('')}</div></div>
+      <div class="ys-choice-row" role="group" aria-label="Colour"><span class="ys-label">Colour <small data-ys="colourname">${optionNames(state).colour}</small></span><div class="ys-swatches" role="radiogroup" aria-label="Colour">${Object.entries(PRINT_OPTIONS.themes).map(([key,t])=>`<button type="button" role="radio" data-ys-colour="${key}" title="${esc(t.name)}" aria-label="${esc(t.name)}" aria-checked="${key===ysColour(state)}" style="--swatch:rgb(${t.mid.join(',')});--paper:rgb(${t.bg.join(',')})"><span aria-hidden="true"></span></button>`).join('')}</div></div>
       <details class="ys-options" data-ys="options" ${state.optionsOpen ? 'open' : ''} ${api.variants && !ysDigital(state) ? '' : 'hidden'}>
         <summary><span class="ys-options-t">Size and paper</span><span class="ys-options-v" data-ys="optsummary"></span></summary>
         <div class="ys-options-body">
@@ -445,7 +472,7 @@ export function mountConfigurator(host, state, api) {
   const ptitle = $('ptitle'), parea = $('parea'), pcoords = $('pcoords'), pline = $('pline');
   // Poster words follow the inputs (title, area, coordinates of the current point, personal line or the grey fallback); the title shrinks in 4-unit steps until it fits 1400 units.
   function paintWords() {
-    ptitle.textContent = clean(state.title, L.title).toUpperCase(); parea.textContent = clean(state.area, L.area);
+    ptitle.textContent = clean(state.title, L.title).toUpperCase().replaceAll("ẞ","SS"); parea.textContent = clean(state.area, L.area);
     pcoords.textContent = coordsText(Number(state.lat), Number(state.lon));
     const line = clean(state.line, L.line);
     pline.textContent = line || 'Same ground, same scale.'; pline.classList.toggle('ys-fallback', !line);
@@ -454,6 +481,35 @@ export function mountConfigurator(host, state, api) {
     const width = () => { try { return ptitle.getComputedTextLength(); } catch { return 0; } };   // 0 while the sheet is not rendered
     while (size > 48 && width() > PHOTO.w) { size -= 4; ptitle.style.setProperty('--fs', size); }
   }
+  const rawPhotos=new Map();
+  function paintPhoto(layer) {
+    const data=rawPhotos.get(layer);if(!data)return;
+    const slot=$(layer==='archive'?'photo-1928':'photo-today');
+    let canvas=slot.querySelector('canvas');if(!canvas){canvas=document.createElement('canvas');canvas.setAttribute('aria-hidden','true');slot.querySelector('img').after(canvas);}
+    canvas.width=data.width;canvas.height=data.height;
+    canvas.getContext('2d').putImageData(new ImageData(gradePixels(data.data,PRINT_OPTIONS.themes[ysColour(state)],layer==='archive'),data.width,data.height),0,0);
+  }
+  function capturePhoto(layer) {
+    const img=$(layer==='archive'?'photo-1928':'photo-today').querySelector('img'),c=document.createElement('canvas');
+    c.width=img.naturalWidth;c.height=img.naturalHeight;const ctx=c.getContext('2d');ctx.drawImage(img,0,0);rawPhotos.set(layer,ctx.getImageData(0,0,c.width,c.height));paintPhoto(layer);
+  }
+  function paintOptions() {
+    const only=ysLayout(state)==='1928-only',t=PRINT_OPTIONS.themes[ysColour(state)],sheet=$('sheet');
+    sheet.dataset.layout=ysLayout(state);sheet.dataset.colour=ysColour(state);
+    for(const key of ['bg','main','ink','grey','key'])sheet.style.setProperty('--print-'+key,`rgb(${t[key].join(',')})`);
+    host.querySelectorAll('[data-ys-layout]').forEach(b=>b.setAttribute('aria-checked',String(b.dataset.ysLayout===ysLayout(state))));
+    host.querySelectorAll('[data-ys-colour]').forEach(b=>b.setAttribute('aria-checked',String(b.dataset.ysColour===ysColour(state))));
+    $('colourname').textContent=optionNames(state).colour;
+    const cap=host.querySelector('.ys-cap-1928');cap.setAttribute('y',only?TX.capToday:TX.cap1928);
+    $('photo-today').hidden=only;host.querySelector('.ys-cap-today').style.display=only?'none':'';
+    const cross=$('photo-1928').querySelector('.ys-ring');cross.setAttribute('viewBox',only?'0 -423 1400 1592':'0 0 1400 746');
+    for(const layer of rawPhotos.keys())paintPhoto(layer);
+    $('caption').textContent=captionFor(state,!!state.lat);
+    if(!state.lat)$('example').querySelector('img').src=ysColour(state)==='sepia'&&ysLayout(state)==='then-now'?api.sample:new URL(`./assets/options/${ysColour(state)}-${ysLayout(state)}.jpg`,import.meta.url).href;
+  }
+  host.querySelectorAll('[data-ys-layout]').forEach(b=>b.addEventListener('click',()=>{if(state.layout===b.dataset.ysLayout)return;state.layout=b.dataset.ysLayout;state.seen=false;state.confirming=null;api.track?.('layout-'+state.layout);paintOptions();if(state.lat)showPoint(true);}));
+  host.querySelectorAll('[data-ys-colour]').forEach(b=>b.addEventListener('click',()=>{if(state.colour===b.dataset.ysColour)return;state.colour=b.dataset.ysColour;api.track?.('colour-'+state.colour);paintOptions();}));
+  queueMicrotask(paintOptions);
   // The sheet's fonts (DM Serif Display, Space Grotesk, IBM Plex Mono) are only fetched when first needed; once they are in, the title is fitted again (a fallback font measures differently).
   let fontsReady = null;
   const ensureFonts = () => {
@@ -490,10 +546,12 @@ export function mountConfigurator(host, state, api) {
     const mine = state.token = (state.token || 0) + 1;
     const valid = () => state.token === mine && host.isConnected;
     const loaded = new Set();
-    const both = layer => { if (valid()) { loaded.add(layer); if (loaded.size === 2) api.track?.('preview'); } };
-    const cancel = ['archive', 'today'].map(layer => loadAerialPhoto({
+    const layers=ysLayout(state)==='1928-only'?['archive']:['archive','today'];
+    rawPhotos.clear();host.querySelectorAll('.ys-photo canvas').forEach(c=>c.remove());paintOptions();
+    const both = layer => { if (valid()) { capturePhoto(layer);loaded.add(layer); if (loaded.size === layers.length) api.track?.('preview'); } };
+    const cancel = layers.map(layer => loadAerialPhoto({
       slot: $(layer === 'archive' ? 'photo-1928' : 'photo-today'),
-      url: layer === 'archive' ? url1928(state.lat, state.lon) : urlToday(state.lat, state.lon),
+      url: layer === 'archive' ? url1928(state.lat, state.lon, ysLayout(state)==='1928-only') : urlToday(state.lat, state.lon),
       layer, valid, track: step => api.track?.(step), status: layer === 'archive' ? setStatus : setStatusToday,
       loaded: () => both(layer),
     }));
@@ -557,7 +615,7 @@ export function mountConfigurator(host, state, api) {
     $(name).addEventListener('click', event => {
       if (!state.lat) return;
       const box = $(name).querySelector('img').getBoundingClientRect(); if (!box.width || !box.height) return;
-      const [lat, lon] = movePoint(state.lat, state.lon, (event.clientX - box.left) / box.width, (event.clientY - box.top) / box.height);
+      const [lat, lon] = movePoint(state.lat, state.lon, (event.clientX - box.left) / box.width, (event.clientY - box.top) / box.height, name==='photo-1928' && ysLayout(state)==='1928-only');
       if (!inBerlin(lat, lon)) return;
       state.lat = lat; state.lon = lon; showPoint(false);
     });
@@ -619,7 +677,7 @@ export function mountConfigurator(host, state, api) {
       const spot = spotFromPreview((await response.json()).preview);
       if (!spot) return quiet();
       if (state.lat) return;                                   // the visitor already picked a spot while this was loading
-      Object.assign(state, {lat: spot.lat, lon: spot.lon, title: spot.title, area: spot.area, address: spot.address, query: spot.title, format: spot.format, size: spot.size || state.size, paper: spot.paper || state.paper});
+      Object.assign(state, {lat: spot.lat, lon: spot.lon, title: spot.title, area: spot.area, address: spot.address, query: spot.title, format: spot.format, layout:spot.layout,colour:spot.colour,size: spot.size || state.size, paper: spot.paper || state.paper});
       api.track?.('restored');
       if (!host.isConnected) return;                           // the storefront re-rendered meanwhile: the new mount builds from state
       $('title').value = state.title; $('area').value = state.area; input.value = state.query; $('paper').value = ysPaper(state).name;
