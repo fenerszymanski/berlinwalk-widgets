@@ -495,7 +495,7 @@
       const illustrated=all||['print','calendar'].includes(this.category);
       const aerial=all||this.category==='personalised';
       const audio=all||this.category==='audio';
-      const newspapers=all||this.category==='newspapers';
+      const newspapers=all||['newspapers','personalised'].includes(this.category);
       // Store isolation (Yusuf, 29 Oct 2026): the credits leave the page for a small "Image credits" item in the store footer, which the
       // site header's store mode draws from this global.
       window.__bwStoreCreditsHtml=`${newspapers?'<p>Newspaper samples: the people are invented, the news, weather and maps are real.</p>':''}${illustrated?'<p>Poster illustrations created for Walk of Berlin. Frames shown in mockups are not included. The voucher picture on the gift pages is a visualisation with a real 1928 aerial photograph placed on the card.</p>':''}${aerial?'<p>1928 aerial photographs: Geoportal Berlin, <a href="https://www.govdata.de/dl-de/zero-2-0" target="_blank" rel="noopener">Datenlizenz Deutschland Zero 2.0</a>. Sample print pairs archive and present-day aerial views of the same Berlin location.</p>':''}${audio?this.creditText():''}`;

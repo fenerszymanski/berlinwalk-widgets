@@ -3,7 +3,7 @@
 // Legal notices stay in their reviewed English wording; only their heading says so.
 const PRODUCT_PATH = '/product-page/your-berlin-street-in-1928-personalised-aerial-print-30-x-40-cm';
 const TEXT = new Map(Object.entries({
-  'All products': 'Alle Produkte', 'Posters': 'Poster', 'All posters': 'Alle Poster', 'Personalised prints': 'Personalisierte Drucke',
+  'All products': 'Alle Produkte', 'Posters': 'Poster', 'All posters': 'Alle Poster', 'Personalised prints': 'Personalisierte Drucke', 'Personalised': 'Personalisiert',
   '2027 Wall Calendar': 'Wandkalender 2027', 'Audio walks': 'Audio-Spaziergänge', 'Guides': 'Reiseführer', 'Store': 'Shop', 'Cart': 'Warenkorb',
   'Your Berlin Street in 1928': 'Deine Berliner Straße um 1928', '/ Your Berlin Street in 1928': '/ Deine Berliner Straße um 1928',
   'Your own address · c. 1928 and today': 'Deine Adresse · um 1928 und heute',

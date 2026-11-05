@@ -177,13 +177,14 @@ export function createCatalogModel(products, definitions) {
       description: category.description || '',
       totalCount: selected.length,
       products: selected.slice(0, limit),
-      layout: selected.length < category.shelf.featureBelowCount ? 'feature' : 'grid',
+      // featurePreview (5 Nov 2026): the All products shelf keeps its single feature card when the tab itself holds more (Personalised: 1928 + newspapers).
+      layout: ((preview && category.shelf.featurePreview) ? Math.min(selected.length, limit) : selected.length) < category.shelf.featureBelowCount ? 'feature' : 'grid',
       imageFit: category.shelf.imageFit || 'contain',
       allFilterLabel: category.allFilterLabel || `All ${category.label.toLowerCase()}`,
       filters,
       selectedFilterId: filter?.id || 'all',
       moreCategoryId: preview && selected.length > limit ? category.id : null,
-      featureDescription: category.shelf.featureDescription || null,
+      featureDescription: (((preview && category.shelf.featurePreview) ? Math.min(selected.length, limit) : selected.length) < category.shelf.featureBelowCount && category.shelf.featureDescription) || null,
       browseHref: category.browseHref || null,
       browseLabel: category.browseLabel || null,
       moreLabel: (category.shelf.moreLabel || 'View all').replace('{count}', String(selected.length))
