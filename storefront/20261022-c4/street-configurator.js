@@ -194,6 +194,26 @@ export function adRef(search = (typeof location !== 'undefined' ? location.searc
   const src = tidy(q.get('utm_source')), content = tidy(q.get('utm_content'));
   return src ? (content ? `${src}/${content}` : src) : '';
 }
+// Where the buyer came from (Yusuf, 5 Nov 2026, after order #10162 could not be traced: "Evet, ekle"). One coarse label, read once when this
+// module first loads, from the landing address's query and the browser referrer (Wix's in-site navigation keeps the first referrer). Only a
+// platform name or a referring site's host goes into the order, never a full URL, path or click id; nothing is stored on the device.
+const SOURCE_HOSTS = [[/(^|\.)instagram\.com$/, 'instagram'], [/(^|\.)(facebook\.com|fb\.com|fb\.me)$/, 'facebook'], [/(^|\.)threads\.(net|com)$/, 'threads'],
+  [/(^|\.)google\.[a-z.]+$/, 'google'], [/(^|\.)bing\.com$/, 'bing'], [/(^|\.)duckduckgo\.com$/, 'duckduckgo'], [/(^|\.)ecosia\.org$/, 'ecosia'],
+  [/(^|\.)(t\.co|x\.com|twitter\.com)$/, 'x'], [/(^|\.)(youtube\.com|youtu\.be)$/, 'youtube'], [/(^|\.)tiktok\.com$/, 'tiktok'],
+  [/(^|\.)(linkedin\.com|lnkd\.in)$/, 'linkedin'], [/(^|\.)reddit\.com$/, 'reddit'], [/(^|\.)pinterest\.[a-z.]+$/, 'pinterest'],
+  [/(^|\.)(chatgpt\.com|openai\.com)$/, 'chatgpt'], [/(^|\.)perplexity\.ai$/, 'perplexity'],
+  [/(^|\.)(walkofberlin\.com|walksofberlin\.com|berlinwalk\.com)$/, 'site']];
+export function sourceLabel(search = '', referrer = '') {
+  const q = new URLSearchParams(search || ''), tidy = v => String(v || '').toLowerCase().replace(/[^a-z0-9_.-]+/g, '').slice(0, 24);
+  let host = ''; try { host = new URL(referrer).hostname.toLowerCase().replace(/^www\./, ''); } catch (e) { host = ''; }
+  const known = SOURCE_HOSTS.find(([re]) => re.test(host))?.[1] || '';
+  if (q.get('utm_source')) return tidy(q.get('utm_source'));
+  if (q.has('gclid') || q.has('gbraid') || q.has('wbraid')) return 'google-ads';
+  if (q.has('fbclid')) return known === 'instagram' || known === 'facebook' ? known : 'meta';
+  if (known) return known;
+  return host ? tidy(host) : 'direct';
+}
+const LANDING_SOURCE = typeof location !== 'undefined' ? sourceLabel(location.search, typeof document !== 'undefined' ? document.referrer : '') : '';
 // Spot restored from the "send this preview to my inbox" email (27 Oct 2026). The mail links to the product page with #p=<token>: an opaque
 // 32-character random token in the URL FRAGMENT, which is never sent in an HTTP request or a Referer header. The spot itself never appears in
 // a URL (this page runs the Meta pixel and analytics, which record page URLs). The token is read from location.hash, removed from the address
@@ -251,7 +271,7 @@ export function buildCustomText(state, search) {
   // Compact delimiters preserve all printable text within Wix's actual 200-character limit.
   const parts = [`Map point ${lat.toFixed(5)},${lon.toFixed(5)}`, `Title:${title}|Area:${area}`, ...(line ? [`Line:${line}`] : []), `Layout:${ysLayout(state)}`, `Colour:${ysColour(state)}`];
   const journeyRef = typeof window !== 'undefined' && /^[a-z0-9]{6,16}$/.test(window.__bwStoreJourneyRef || '') ? `j${window.__bwStoreJourneyRef}` : '';
-  const ref = [journeyRef, adRef(search)].filter(Boolean).join('~');
+  const ref = [LANDING_SOURCE && `src.${LANDING_SOURCE}`, journeyRef, adRef(search)].filter(Boolean).join('~');   // source first, so a short room keeps it
   const room = YS_LIMITS.details - parts.join('//').length - '//Ref:'.length;
   if (ref && room >= 6) parts.push(`Ref:${ref.slice(0,room)}`);
   const details=parts.join('//');
