@@ -678,7 +678,7 @@
       const {lat,lon}=parsed,coords=this.ysMod.coordsText(lat,lon),names=this.ysMod.optionNames(parsed);
       const row=(label,value)=>`<p class="meta line-custom"><strong>${label}:</strong> ${esc(value)}</p>`;
       const place=[parsed.title,parsed.area].filter(Boolean).join(' · ');
-      return (address?row('Your address',address.value):'')+row('On the print',`${place} · ${coords}`)+row('Layout',names.layout)+row('Colour',names.colour)+(parsed.line?row('Your line',parsed.line):'')+fields.filter(f=>f!==details&&f!==address).map(raw).join('');
+      return (address?row('Your address',address.value):'')+row('On the print',`${place} · ${coords}`)+row('Layout',names.layout)+row('Colour',names.colour)+(parsed.line?row('Your words',parsed.line):'')+fields.filter(f=>f!==details&&f!==address).map(raw).join('');
     }
     lines() {
       // Gift vouchers (gift.js) form their own group, whatever Wix says about shipping: nothing is shipped, the code comes by email.

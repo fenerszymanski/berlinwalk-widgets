@@ -284,7 +284,7 @@ export const ysProductId = state => (ysDigital(state) ? YS_DIGITAL_ID : YS_PRODU
 const DIGITAL_SPEC = 'Digital file · JPG + PDF · 45 x 60 cm at 300 ppi';
 const DIGITAL_DELIVERY = 'Prints cleanly at 30 x 40 cm too. Nothing is shipped, so it works anywhere.';
 const POSTER_DELIVERY = 'Arrives in 3 to 5 working days in Germany, 4 to 9 elsewhere. Frame not included.';
-const captionFor = (state, live) => live && ysLayout(state)==='1928-only' ? 'Your street in 1928. One large aerial photograph, with your building marked.' : (ysDigital(state) ? (live ? CAPTION_LIVE.replace('Your poster, SIZE', 'Your digital file') : 'Example file. Search an address to see your street.') : (live ? CAPTION_LIVE : CAPTION_EXAMPLE).replace('SIZE', ysSize(state)));
+const captionFor = (state, live) => live && ysLayout(state)==='1928-only' ? 'Your street in 1928. One large aerial photograph, with your building marked.' : (ysDigital(state) ? (live ? CAPTION_LIVE.replace('Your poster, SIZE', 'Your digital file') : 'Example file. Search an address to see your street, then add your own words.') : (live ? CAPTION_LIVE : CAPTION_EXAMPLE).replace('SIZE', ysSize(state)));
 // Everything the print needs except the buyer's "yes, I see the 1928 photo": the add buttons are live from here on (25 Oct 2026).
 export function readyToCheck(state) {
   return Number.isFinite(state.lat) && Number.isFinite(state.lon) && inBerlin(state.lat, state.lon) && clean(state.address, 80).length > 0 &&
@@ -307,7 +307,7 @@ const RING_SVG = CROSS_SVG;
 // Title size follows the generator: 118 (96 above 16 letters), shrunk by 4 until it fits the 1400-unit width of the photos (never below 48).
 export const titleSize = title => (String(title || '').length <= 16 ? 118 : 96);
 const CAPTION_LIVE = 'Your poster, SIZE: 1928 above, today below, same ground and scale. Tap either photo to move the cross.';
-const CAPTION_EXAMPLE = 'Example poster, SIZE. Search an address to see your street.';
+const CAPTION_EXAMPLE = 'Example poster, SIZE. Search an address to see your street, then add your own words.';
 // Trust strip next to the add buttons (Yusuf, 27 Oct 2026). True statements only: the poster ships free to DE, EU, UK and US; Gelato prints it in
 // Czechia or Poland, so "Printed in Europe" and never "Germany"; a misprinted or damaged poster is reprinted free (YS_FAQ says the same); checkout
 // takes cards only today, so no other payment brand is named or shown. The card marks themselves sit in the buy box (storefront-element.js).
@@ -366,8 +366,9 @@ export function mountConfigurator(host, state, api) {
             <text class="ys-pcoords" data-ys="pcoords" x="${TX.cx}" y="${TX.coords}"></text>
             <text class="ys-pline" data-ys="pline" x="${TX.cx}" y="${TX.line}"></text>
           </svg>
+          <button type="button" class="ys-words-tag" data-ys="wordstag" hidden><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M11.3 1.9a1.5 1.5 0 0 1 2.1 0l.7.7a1.5 1.5 0 0 1 0 2.1L5.6 13.2 2 14l.8-3.6z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg><span>Your words</span></button>
         </div>
-        <div class="ys-sheet ys-sample" data-ys="example" ${state.lat ? 'hidden' : ''}><img src="${esc(api.sample)}" alt="Example print: Potsdamer Platz in 1928 and today"></div>
+        <div class="ys-sheet ys-sample" data-ys="example" ${state.lat ? 'hidden' : ''}><img src="${esc(api.sample)}" alt="Example print: Potsdamer Platz in 1928 and today"><span class="ys-words-tag" aria-hidden="true"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M11.3 1.9a1.5 1.5 0 0 1 2.1 0l.7.7a1.5 1.5 0 0 1 0 2.1L5.6 13.2 2 14l.8-3.6z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg><span>Your words</span></span></div>
       </div>
       <p class="ys-caption" data-ys="caption">${captionFor(state, !!state.lat)}</p>
       <div class="ys-quick" data-ys="quick" ${state.lat ? '' : 'hidden'}>
@@ -400,7 +401,7 @@ export function mountConfigurator(host, state, api) {
   const optionsHtml = `<div class="ys-form ys-optform">
       <div class="ys-fields" data-ys="fields" ${state.lat ? '' : 'hidden'}>
         <div class="ys-row"><label>Title on the print<input data-ys="title" maxlength="${L.title}" autocapitalize="characters" value="${esc(state.title || '')}"></label><label>Area line<input data-ys="area" maxlength="${L.area}" value="${esc(state.area || '')}"></label></div>
-        <label>Your line on the print (optional)<input data-ys="line" maxlength="${L.line}" placeholder="e.g. Lena &amp; Jonas · here since 2021" value="${esc(state.line || '')}"></label>
+        <label>Your words on the print (optional)<input data-ys="line" maxlength="${L.line}" placeholder="e.g. Lena &amp; Jonas · here since 2021" value="${esc(state.line || '')}"></label>
         <p class="ys-hint">The house number is never printed.</p>
       </div>
       <div class="ys-format ys-format-top" data-ys="format" ${api.digital ? '' : 'hidden'}>
@@ -476,6 +477,7 @@ export function mountConfigurator(host, state, api) {
     pcoords.textContent = coordsText(Number(state.lat), Number(state.lon));
     const line = clean(state.line, L.line);
     pline.textContent = line || 'Same ground, same scale.'; pline.classList.toggle('ys-fallback', !line);
+    $('wordstag').hidden = !!line;   // the yellow "Your words" tag points at the empty line until the buyer writes one (5 Nov 2026, Yusuf)
     let size = titleSize(ptitle.textContent);
     ptitle.style.setProperty('--fs', size);
     const width = () => { try { return ptitle.getComputedTextLength(); } catch { return 0; } };   // 0 while the sheet is not rendered
@@ -620,6 +622,7 @@ export function mountConfigurator(host, state, api) {
       state.lat = lat; state.lon = lon; showPoint(false);
     });
   }
+  $('wordstag').addEventListener('click', () => { const input = $('line'); input.scrollIntoView({behavior: 'smooth', block: 'center'}); input.focus({preventScroll: true}); });
   for (const name of ['title', 'area', 'line']) {
     host.querySelector(`[data-ys="${name}"]`).addEventListener('input', event => { state[name] = event.target.value; paintWords(); refreshButton(); });
   }

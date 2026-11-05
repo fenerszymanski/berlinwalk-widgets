@@ -372,3 +372,13 @@ details.legal-foot>summary:after{top:50%;margin-top:-14px}
 
 .ys-layout-thumb{width:25px;height:34px;object-fit:cover;padding:0}
 .ys-sheet[data-colour] .ys-photo{box-shadow:0 0 0 calc(var(--u)*1) var(--print-bg),0 0 0 calc(var(--u)*3) var(--print-key)}
+
+/* "Your words" tag (5 Nov 2026, Yusuf: buyers did not see that the last line is theirs). Sits right of the personal line (baseline 2199 of 2400),
+   on the example poster and on the live preview until a line is written; on the live preview it focuses the text field. */
+.ys-words-tag{position:absolute;left:65%;top:91.1%;transform:translateY(-50%);display:inline-flex;align-items:center;gap:4px;margin:0;padding:3px 9px 3px 7px;border:0;border-radius:999px;background:var(--yellow);color:var(--green);font:600 12px/1.2 'Space Grotesk','Space Grotesk Fallback',sans-serif;letter-spacing:.01em;white-space:nowrap;box-shadow:0 1px 3px #123d1833;pointer-events:none}
+.ys-words-tag::before{content:'';position:absolute;left:-5px;top:50%;transform:translateY(-50%);border:5px solid transparent;border-left:0;border-right-color:var(--yellow)}
+.ys-words-tag svg{width:11px;height:11px;flex:none}
+button.ys-words-tag{cursor:pointer;pointer-events:auto;min-height:0}button.ys-words-tag::after{content:'';position:absolute;inset:-12px -8px}
+button.ys-words-tag:focus-visible{outline:2px solid var(--green);outline-offset:2px}
+.ys-words-tag[hidden]{display:none}
+@media(max-width:420px){.ys-words-tag{left:64%;font-size:11px;padding:2px 7px 2px 6px}.ys-words-tag svg{width:10px;height:10px}}
