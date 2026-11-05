@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-03T10:14:53.103Z",
+  "updatedAt": "2026-11-05T03:02:06.867Z",
   "source": "Wix Blog API",
   "popularSource": "Wix Blog metrics.views lifetime sort",
   "totalPosts": 453,
@@ -49,23 +49,40 @@
   ],
   "hero": {
     "lead": {
-      "title": "The Berlin Clock: How to Read the Lamp Clock by the Europa-Center",
-      "slug": "berlin-clock-mengenlehreuhr",
-      "path": "/post/berlin-clock-mengenlehreuhr",
-      "url": "https://www.berlinwalk.com/post/berlin-clock-mengenlehreuhr",
-      "excerpt": "Four rows of lamps, no numbers and no hands. Here is how to read the Berlin clock in about a minute, where to find it, and why its inventor ended up rebuilding the light bulb.",
+      "title": "The Berlin Bear: Why the City Has One, and Where to See the Bears Worth Finding",
+      "slug": "berlin-bear",
+      "path": "/post/berlin-bear",
+      "url": "https://www.berlinwalk.com/post/berlin-bear",
+      "excerpt": "The bear is on every flag and souvenir in Berlin, but few visitors know why. Here is how a pun put it on the coat of arms, and the handful of bears worth a detour on a short trip.",
       "category": "Tourist Tips",
       "categorySlug": "tourist-tips",
       "topic": "practical",
       "topicLabel": "Practical Berlin",
-      "readTime": "5 min read",
-      "publishedDate": "2026-11-01T09:49:54.538Z",
-      "image": "https://static.wixstatic.com/media/5a08a3_9ea2828d3cd6412d82eae920089e53a1~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover.jpg",
-      "thumb": "https://static.wixstatic.com/media/5a08a3_9ea2828d3cd6412d82eae920089e53a1~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover.jpg",
-      "alt": "The Berlin clock with its rows of red and yellow lamps on a pole against the blue glass and panels of the Europa-Center",
-      "relatedToolSlug": "berlin-clock-reader"
+      "readTime": "6 min read",
+      "publishedDate": "2026-11-03T10:12:31.084Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_b34dff03a04149ca94cab2ab1f4e9025~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_b34dff03a04149ca94cab2ab1f4e9025~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover.jpg",
+      "alt": "A white cast-iron Lustgarten street sign topped by the Berlin bear on a shield under a crown, the Berliner Dom behind it in golden light",
+      "relatedToolSlug": "berlin-bear-hunt"
     },
     "secondary": [
+      {
+        "title": "The Berlin Clock: How to Read the Lamp Clock by the Europa-Center",
+        "slug": "berlin-clock-mengenlehreuhr",
+        "path": "/post/berlin-clock-mengenlehreuhr",
+        "url": "https://www.berlinwalk.com/post/berlin-clock-mengenlehreuhr",
+        "excerpt": "Four rows of lamps, no numbers and no hands. Here is how to read the Berlin clock in about a minute, where to find it, and why its inventor ended up rebuilding the light bulb.",
+        "category": "Tourist Tips",
+        "categorySlug": "tourist-tips",
+        "topic": "practical",
+        "topicLabel": "Practical Berlin",
+        "readTime": "5 min read",
+        "publishedDate": "2026-11-01T09:49:54.538Z",
+        "image": "https://static.wixstatic.com/media/5a08a3_9ea2828d3cd6412d82eae920089e53a1~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover.jpg",
+        "thumb": "https://static.wixstatic.com/media/5a08a3_9ea2828d3cd6412d82eae920089e53a1~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover.jpg",
+        "alt": "The Berlin clock with its rows of red and yellow lamps on a pole against the blue glass and panels of the Europa-Center",
+        "relatedToolSlug": "berlin-clock-reader"
+      },
       {
         "title": "What to Wear in Berlin in Winter: Dress for Wind, Wet and Ice",
         "slug": "what-to-wear-in-berlin-in-winter",
@@ -82,23 +99,6 @@
         "thumb": "https://static.wixstatic.com/media/5a08a3_c802ea2e01b34f70a9c1af0a6c62edb9~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/worldclock.jpg",
         "alt": "The World Clock on Alexanderplatz at blue hour on 5 February 2026, with snow on the ground, a yellow tram and the TV Tower behind",
         "relatedToolSlug": "berlin-winter-feels-like-grid"
-      },
-      {
-        "title": "Early Flight from BER: The Last Train, Night Bus or Taxi From Where You Sleep",
-        "slug": "early-flight-from-ber",
-        "path": "/post/early-flight-from-ber",
-        "url": "https://www.berlinwalk.com/post/early-flight-from-ber",
-        "excerpt": "A 6:00 flight from BER means leaving Berlin around 3:30, when the network is at its thinnest. Which train or night bus runs from where you sleep, why the night of the week matters, and when a taxi is the better plan.",
-        "category": "Tourist Tips",
-        "categorySlug": "tourist-tips",
-        "topic": "practical",
-        "topicLabel": "Practical Berlin",
-        "readTime": "7 min read",
-        "publishedDate": "2026-10-21T12:55:31.975Z",
-        "image": "https://static.wixstatic.com/media/5a08a3_9179a2cab7954fe9a66ee215c020a896~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-ber-terminal-night.jpg",
-        "thumb": "https://static.wixstatic.com/media/5a08a3_9179a2cab7954fe9a66ee215c020a896~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-ber-terminal-night.jpg",
-        "alt": "BER Airport's Terminal 1 lit up at night behind a wide lawn, with the car park buildings on both sides",
-        "relatedToolSlug": "ber-dawn-departure-map"
       },
       {
         "title": "Where to Eat Near Museum Island: Lunch by Exit and Day",
