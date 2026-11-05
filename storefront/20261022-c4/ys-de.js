@@ -46,6 +46,7 @@ const TEXT = new Map(Object.entries({
   'A bigger size or another paper: the recipient pays only the difference at checkout. Code and printable card by email, normally within the hour and no later than 24 hours. Valid until 31 December of the third year after purchase.': 'Größeres Format oder anderes Papier: Die beschenkte Person zahlt nur die Differenz. Code und druckbare Karte kommen per E-Mail, meist innerhalb einer Stunde, spätestens nach 24 Stunden. Gültig bis zum 31. Dezember des dritten Jahres nach dem Kauf.',
   'Secure card checkout': 'Sichere Kartenzahlung', '+ more cards': '+ weitere Karten',
   'Arrives in 3 to 5 working days in Germany, 4 to 9 elsewhere. Frame not included.': 'Kommt in Deutschland in 3 bis 5 Werktagen, anderswo in 4 bis 9. Ohne Rahmen.',
+  'Free delivery to Germany, the EU, the UK and the US. Usually 3 to 5 working days in Germany, 4 to 9 elsewhere. Frame not included.': 'Kostenloser Versand nach Deutschland, in die EU, nach UK und in die USA. Meist 3 bis 5 Werktage in Deutschland, anderswo 4 bis 9. Ohne Rahmen.',
   'Made for you, so no returns for a change of mind. Faulty prints replaced free.': 'Für dich angefertigt, daher kein Widerruf. Fehlerhafte Drucke werden kostenlos ersetzt.',
   'Digital file: you keep the 14-day withdrawal right.': 'Digitale Datei: Du behältst das 14-tägige Widerrufsrecht.', 'Terms': 'Bedingungen',
   "Made by me, Yusuf, from Berlin's own aerial photos.": 'Von mir, Yusuf, aus Berlins eigenen Luftbildern gemacht.', 'What my guests say': 'Was meine Gäste sagen',
