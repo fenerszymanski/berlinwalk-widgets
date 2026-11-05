@@ -56,6 +56,7 @@
   // Neutral shimmer block used by the loading skeleton wherever a price, button or line of text will be.
   // room videos: product id (print and its printable twin) -> asset slug; value = how the video is described
   const ROOM_VIDEOS = {
+  "berliner-mauer-cyclist": "The Berliner Mauer print",
   "kottbusser-tor": "Kottbusser Tor",
   "mehringplatz": "Mehringplatz",
   "strausberger-platz": "Strausberger Platz",
@@ -79,6 +80,8 @@
   const sk = cls => `<span class="sk-block ${cls}"></span>`;
   // Loading skeleton only: product page slug (the keys of PRODUCT_SLUGS in the page code) -> native product id, so the bundled poster of the product being opened can be drawn before the bridge answers. An unknown slug just gets a neutral skeleton.
   const SKELETON_PRODUCTS = Object.fromEntries(Object.entries({
+  "berliner-mauer-berlin-art-print":"9afb7ce0-2065-497d-8443-19d1147d687e",
+  "berliner-mauer-printable-berlin-poster":"52c127de-fc06-b40f-3f5e-e33305924ae6",
   "kottbusser-tor-berlin-art-print": "cd3b2f77-7311-4ba2-ba3e-ca5f80fb2665",
   "kottbusser-tor-printable-berlin-poster": "d49e53dc-69f9-c5f3-ab11-999827699ecc",
   "mehringplatz-berlin-art-print": "b16be611-bff7-4fce-93b7-2eb2345a9020",
