@@ -1598,22 +1598,25 @@
     "typeLine": "PREMIUM MATTE · 200 GSM · UNFRAMED",
     "wixProductId": "9afb7ce0-2065-497d-8443-19d1147d687e",
     "group": "stories",
-    "roomImage": "berliner-mauer-room-final-1989.jpg",
+    "roomImage": "berliner-mauer-room-photo-cream.jpg",
     "roomVideoFit": "contain",
-    "roomCaption": "3D styling example · 50 × 70 cm · Frame and decor not included",
-    "roomAlt": "3D styling visualization of the full 50 × 70 cm Berliner Mauer print. Frame and decor are not included.",
+    "roomCaption": "Styling example · 50 × 70 cm · Frame and decor not included",
+    "roomAlt": "AI-generated interior styling image of the Berliner Mauer print in an oak frame. Frame and decor are not included.",
     "alternativeProductId": "52c127de-fc06-b40f-3f5e-e33305924ae6",
-    "visualCreditsHtml": "<p>Artwork supplied by Yusuf and created with ChatGPT. An imagined Berlin street scene, not an archival photograph or a documented street view. Enlarged using Adobe Firefly; the small ground-plaque date was corrected to 1961 to 1989.</p><p>Room images and video are 3D styling visualizations made with the existing Blender room scene and <a href=\"https://polyhaven.com\" target=\"_blank\" rel=\"noopener\">Poly Haven</a> models and textures (<a href=\"https://creativecommons.org/publicdomain/zero/1.0/\" target=\"_blank\" rel=\"noopener\">CC0</a>). They show the 50 × 70 cm layout. Frame, furniture and decor are not included.</p>",
+    "visualCreditsHtml": "<p>Artwork supplied by Yusuf and created with ChatGPT. An imagined Berlin street scene, not an archival photograph or a documented street view. Enlarged using Adobe Firefly; the small ground-plaque date was corrected to 1961 to 1989. Matching cream paper at the sides was extended with ChatGPT ImageGen; the original central artwork was retained.</p><p>The room still is an AI-generated interior styling image made with ChatGPT ImageGen. The room video is a 3D styling visualization made with the existing Blender scene and <a href=\"https://polyhaven.com\" target=\"_blank\" rel=\"noopener\">Poly Haven</a> models and textures (<a href=\"https://creativecommons.org/publicdomain/zero/1.0/\" target=\"_blank\" rel=\"noopener\">CC0</a>). Both illustrate the 50 × 70 cm print. Frame, furniture and decor are not included.</p>",
     "sizeImages": {
-      "30x40 cm": "berliner-mauer-30x40-1989.jpg",
-      "50x70 cm": "berliner-mauer-50x70-1989.jpg"
+      "30x40 cm": "berliner-mauer-30x40-cream.jpg",
+      "50x70 cm": "berliner-mauer-50x70-cream.jpg"
     },
     "gallery": [
       {
         "image": "berliner-mauer-fullart-1989.jpg",
         "alt": "The complete Berliner Mauer illustration and title, without cropping."
       }
-    ]
+    ],
+    "roomVideoUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/room/berliner-mauer-cyclist-cream.mp4",
+    "roomVideoPosterUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/room/berliner-mauer-cyclist-cream-poster.jpg",
+    "roomVideoThumbnailUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/room/berliner-mauer-cyclist-cream-thumb.jpg"
   },
   {
     "id": "dl-berliner-mauer-cyclist",
@@ -1625,23 +1628,26 @@
     "wixProductId": "52c127de-fc06-b40f-3f5e-e33305924ae6",
     "kind": "digital",
     "deliveryNote": "Digital download · 2 JPEG print files and a printing guide. No physical item.",
-    "deliveryDetails": "Your download includes 30 × 40 cm and 50 × 70 cm sRGB JPEG files and a printing guide. Both layouts have narrow white side margins. No physical poster, frame or decor is included.",
+    "deliveryDetails": "Your download includes 30 × 40 cm and 50 × 70 cm sRGB JPEG files and a printing guide. The warm cream paper background continues to the print edges. No physical poster, frame or decor is included.",
     "group": "stories",
-    "roomImage": "berliner-mauer-room-final-1989.jpg",
+    "roomImage": "berliner-mauer-room-photo-cream.jpg",
     "roomVideoFit": "contain",
-    "roomCaption": "3D styling example · 50 × 70 cm · Frame and decor not included",
-    "roomAlt": "3D styling visualization of the full 50 × 70 cm Berliner Mauer print. Frame and decor are not included.",
+    "roomCaption": "Styling example · 50 × 70 cm · Frame and decor not included",
+    "roomAlt": "AI-generated interior styling image of the Berliner Mauer print in an oak frame. Frame and decor are not included.",
     "alternativeProductId": "9afb7ce0-2065-497d-8443-19d1147d687e",
-    "visualCreditsHtml": "<p>Artwork supplied by Yusuf and created with ChatGPT. An imagined Berlin street scene, not an archival photograph or a documented street view. Enlarged using Adobe Firefly; the small ground-plaque date was corrected to 1961 to 1989.</p><p>Room images and video are 3D styling visualizations made with the existing Blender room scene and <a href=\"https://polyhaven.com\" target=\"_blank\" rel=\"noopener\">Poly Haven</a> models and textures (<a href=\"https://creativecommons.org/publicdomain/zero/1.0/\" target=\"_blank\" rel=\"noopener\">CC0</a>). They show the 50 × 70 cm layout. Frame, furniture and decor are not included.</p>",
+    "visualCreditsHtml": "<p>Artwork supplied by Yusuf and created with ChatGPT. An imagined Berlin street scene, not an archival photograph or a documented street view. Enlarged using Adobe Firefly; the small ground-plaque date was corrected to 1961 to 1989. Matching cream paper at the sides was extended with ChatGPT ImageGen; the original central artwork was retained.</p><p>The room still is an AI-generated interior styling image made with ChatGPT ImageGen. The room video is a 3D styling visualization made with the existing Blender scene and <a href=\"https://polyhaven.com\" target=\"_blank\" rel=\"noopener\">Poly Haven</a> models and textures (<a href=\"https://creativecommons.org/publicdomain/zero/1.0/\" target=\"_blank\" rel=\"noopener\">CC0</a>). Both illustrate the 50 × 70 cm print. Frame, furniture and decor are not included.</p>",
     "sizeImages": {
-      "30x40 cm": "berliner-mauer-30x40-1989.jpg",
-      "50x70 cm": "berliner-mauer-50x70-1989.jpg"
+      "30x40 cm": "berliner-mauer-30x40-cream.jpg",
+      "50x70 cm": "berliner-mauer-50x70-cream.jpg"
     },
     "gallery": [
       {
         "image": "berliner-mauer-fullart-1989.jpg",
         "alt": "The complete Berliner Mauer illustration and title, without cropping."
       }
-    ]
+    ],
+    "roomVideoUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/room/berliner-mauer-cyclist-cream.mp4",
+    "roomVideoPosterUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/room/berliner-mauer-cyclist-cream-poster.jpg",
+    "roomVideoThumbnailUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/room/berliner-mauer-cyclist-cream-thumb.jpg"
   }
 ]
