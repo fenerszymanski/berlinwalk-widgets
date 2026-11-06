@@ -396,10 +396,10 @@
             <div class="bw-attr-name">Spree River boat tour</div>
             <div class="bw-attr-price">€22</div>
           </div>
-          <div class="bw-attraction" data-id="madame" data-price="29" data-discount="25">
+          <div class="bw-attraction" data-id="madame" data-price="29.50" data-discount="25">
             <div class="bw-checkbox"><svg viewBox="0 0 16 16"><polyline points="3,8 7,12 13,4" fill="none" stroke="#FFE600" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
             <div class="bw-attr-name">Madame Tussauds</div>
-            <div class="bw-attr-price">€29</div>
+            <div class="bw-attr-price">€29.50 at desk</div>
           </div>
           <div class="bw-attraction" data-id="aquadom" data-price="20" data-discount="25" data-unavailable="true" aria-disabled="true">
             <div class="bw-checkbox"><svg viewBox="0 0 16 16"><polyline points="3,8 7,12 13,4" fill="none" stroke="#FFE600" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
@@ -420,7 +420,7 @@
         </div>
       </div>
 
-      <p class="bw-toggle-sub">Estimated savings only: the TV Tower uses a ticket-desk starting price, with the 25% discount available on site, not online. Recheck the current price for your visit. DDR Museum discounts are also redeemed at its ticket desk. SEA LIFE Berlin closed on 13 December 2024 and is excluded.</p>
+      <p class="bw-toggle-sub">Estimated savings only: the TV Tower uses a ticket-desk starting price, with the 25% discount available on site, not online. Recheck the current price for your visit. DDR Museum discounts are also redeemed at its ticket desk. Madame Tussauds uses its €29.50 ticket-desk price; online offers may cost less. SEA LIFE Berlin closed on 13 December 2024 and is excluded.</p>
 
       <div class="bw-result" id="bw-result">
         <div class="bw-verdict-kicker" id="bw-verdict-kicker">YOUR VERDICT</div>
@@ -442,7 +442,7 @@
         museumIsland: { 3: 62 },
         basic: { 3: 10, 6: 15 },
         dayPass: 11.20,
-        museumPass3Day: 36
+        museumPass3Day: 32
       };
 
       var state = {
@@ -534,7 +534,7 @@
         if (days === 3 && hasMuseumIsland) {
           // Museum Pass covers Museum Island + 30 other museums
           var mpAttractions = attractionTotal - 24; // MI is included, but others not
-          scenarioD = 36 + mpAttractions + transportCost;
+          scenarioD = PRICES.museumPass3Day + mpAttractions + transportCost;
         }
 
         return {

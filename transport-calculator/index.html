@@ -650,7 +650,7 @@
           <h3 id="bwResultTitle">Best value for this trip</h3>
         </div>
         <div class="bw-result-list" id="bwResults"></div>
-        <p class="bw-source">Prices are local widget constants checked against official BVG, VBB and S-Bahn Berlin pages in June 2026. Recheck inside the ticket app before buying.</p>
+        <p class="bw-source">Calculations use 2026 fares. VBB fares change on 1 January 2027, so recheck your travel dates in the ticket app before buying.</p>
       </section>
 
       <section class="bw-coverage">
@@ -746,7 +746,7 @@
             2: { AB: 28.50, ABC: 34.50 },
             3: { AB: 39.50, ABC: 45.50 },
             4: { AB: 49.50, ABC: 56.50 },
-            5: { AB: 53.50, ABC: 59.90 },
+            5: { AB: 53.50, ABC: 59.50 },
             6: { AB: 58.50, ABC: 63.50 }
           }
         },
@@ -934,7 +934,7 @@
           options.push({
             name: 'Deutschland-Ticket',
             cost: (s.adults * 63) + reducedBest + bikeAddOn,
-            detail: 'Cheaper only if a monthly subscription and cancellation timing are OK. Not valid on ICE, IC or EC trains.',
+            detail: '€63 per adult per calendar month in 2026; €66.80 from 1 January 2027. Check the subscription and cancellation timing. Not valid on ICE, IC or EC trains.',
             caveat: true
           });
         }
