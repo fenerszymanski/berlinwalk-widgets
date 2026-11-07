@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-05T03:02:06.867Z",
+  "updatedAt": "2026-11-07T03:04:34.091Z",
   "source": "Wix Blog API",
   "popularSource": "Wix Blog metrics.views lifetime sort",
   "totalPosts": 453,
@@ -49,23 +49,40 @@
   ],
   "hero": {
     "lead": {
-      "title": "The Berlin Bear: Why the City Has One, and Where to See the Bears Worth Finding",
-      "slug": "berlin-bear",
-      "path": "/post/berlin-bear",
-      "url": "https://www.berlinwalk.com/post/berlin-bear",
-      "excerpt": "The bear is on every flag and souvenir in Berlin, but few visitors know why. Here is how a pun put it on the coat of arms, and the handful of bears worth a detour on a short trip.",
+      "title": "What to Wear in Berlin in Winter: Dress for Wind, Wet and Ice",
+      "slug": "what-to-wear-in-berlin-in-winter",
+      "path": "/post/what-to-wear-in-berlin-in-winter",
+      "url": "https://www.berlinwalk.com/post/what-to-wear-in-berlin-in-winter",
+      "excerpt": "I went through ten winters of hourly weather at Tempelhof. A Berlin winter is a damp, windy 0 to 5°C with a few hard spells, so here is the coat, the boots and the layers I would pack, plus a grid that sets them by week and hour.",
       "category": "Tourist Tips",
       "categorySlug": "tourist-tips",
       "topic": "practical",
       "topicLabel": "Practical Berlin",
       "readTime": "6 min read",
-      "publishedDate": "2026-11-03T10:12:31.084Z",
-      "image": "https://static.wixstatic.com/media/5a08a3_b34dff03a04149ca94cab2ab1f4e9025~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover.jpg",
-      "thumb": "https://static.wixstatic.com/media/5a08a3_b34dff03a04149ca94cab2ab1f4e9025~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover.jpg",
-      "alt": "A white cast-iron Lustgarten street sign topped by the Berlin bear on a shield under a crown, the Berliner Dom behind it in golden light",
-      "relatedToolSlug": "berlin-bear-hunt"
+      "publishedDate": "2026-10-30T09:44:16.860Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_c802ea2e01b34f70a9c1af0a6c62edb9~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/worldclock.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_c802ea2e01b34f70a9c1af0a6c62edb9~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/worldclock.jpg",
+      "alt": "The World Clock on Alexanderplatz at blue hour on 5 February 2026, with snow on the ground, a yellow tram and the TV Tower behind",
+      "relatedToolSlug": "berlin-winter-feels-like-grid"
     },
     "secondary": [
+      {
+        "title": "The Berlin Bear: Why the City Has One, and Where to See the Bears Worth Finding",
+        "slug": "berlin-bear",
+        "path": "/post/berlin-bear",
+        "url": "https://www.berlinwalk.com/post/berlin-bear",
+        "excerpt": "The bear is on every flag and souvenir in Berlin, but few visitors know why. Here is how a pun put it on the coat of arms, and the handful of bears worth a detour on a short trip.",
+        "category": "Tourist Tips",
+        "categorySlug": "tourist-tips",
+        "topic": "practical",
+        "topicLabel": "Practical Berlin",
+        "readTime": "6 min read",
+        "publishedDate": "2026-11-03T10:12:31.084Z",
+        "image": "https://static.wixstatic.com/media/5a08a3_b34dff03a04149ca94cab2ab1f4e9025~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover.jpg",
+        "thumb": "https://static.wixstatic.com/media/5a08a3_b34dff03a04149ca94cab2ab1f4e9025~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover.jpg",
+        "alt": "A white cast-iron Lustgarten street sign topped by the Berlin bear on a shield under a crown, the Berliner Dom behind it in golden light",
+        "relatedToolSlug": "berlin-bear-hunt"
+      },
       {
         "title": "The Berlin Clock: How to Read the Lamp Clock by the Europa-Center",
         "slug": "berlin-clock-mengenlehreuhr",
@@ -82,23 +99,6 @@
         "thumb": "https://static.wixstatic.com/media/5a08a3_9ea2828d3cd6412d82eae920089e53a1~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover.jpg",
         "alt": "The Berlin clock with its rows of red and yellow lamps on a pole against the blue glass and panels of the Europa-Center",
         "relatedToolSlug": "berlin-clock-reader"
-      },
-      {
-        "title": "What to Wear in Berlin in Winter: Dress for Wind, Wet and Ice",
-        "slug": "what-to-wear-in-berlin-in-winter",
-        "path": "/post/what-to-wear-in-berlin-in-winter",
-        "url": "https://www.berlinwalk.com/post/what-to-wear-in-berlin-in-winter",
-        "excerpt": "I went through ten winters of hourly weather at Tempelhof. A Berlin winter is a damp, windy 0 to 5°C with a few hard spells, so here is the coat, the boots and the layers I would pack, plus a grid that sets them by week and hour.",
-        "category": "Tourist Tips",
-        "categorySlug": "tourist-tips",
-        "topic": "practical",
-        "topicLabel": "Practical Berlin",
-        "readTime": "6 min read",
-        "publishedDate": "2026-10-30T09:44:16.860Z",
-        "image": "https://static.wixstatic.com/media/5a08a3_c802ea2e01b34f70a9c1af0a6c62edb9~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/worldclock.jpg",
-        "thumb": "https://static.wixstatic.com/media/5a08a3_c802ea2e01b34f70a9c1af0a6c62edb9~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/worldclock.jpg",
-        "alt": "The World Clock on Alexanderplatz at blue hour on 5 February 2026, with snow on the ground, a yellow tram and the TV Tower behind",
-        "relatedToolSlug": "berlin-winter-feels-like-grid"
       },
       {
         "title": "Where to Eat Near Museum Island: Lunch by Exit and Day",
