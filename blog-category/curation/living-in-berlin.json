@@ -455,6 +455,12 @@
       "figure": "5,000 &euro;",
       "line": "is the top fine for feeding wild boar, and a fence 1.50 m high and 40 cm deep is what keeps them out of the garden.",
       "tool": "berlin-boar-year"
+    },
+    "berlin-address-books": {
+      "shelf": "wohnung",
+      "figure": "1799 to 1943",
+      "line": "is how far the Berlin address books reach, house by house, and many years list every tenant under your street number.",
+      "tool": "berlin-house-history-finder"
     }
   }
 }

@@ -1,9 +1,9 @@
 {
-  "updatedAt": "2026-11-07T03:04:34.091Z",
+  "updatedAt": "2026-11-08T10:29:18.602Z",
   "source": "Wix Blog API",
   "popularSource": "Wix Blog metrics.views lifetime sort",
-  "totalPosts": 453,
-  "toolsTotal": 379,
+  "totalPosts": 454,
+  "toolsTotal": 380,
   "bookingUrl": "https://www.walkofberlin.com/book-berlin-walking-tour/berlin-then-and-now",
   "navTopics": [
     {
@@ -1802,6 +1802,23 @@
   ],
   "latest": [
     {
+      "title": "Berlin Address Books: How to Find Out Who Lived in Your Building",
+      "slug": "berlin-address-books",
+      "path": "/post/berlin-address-books",
+      "url": "https://www.berlinwalk.com/post/berlin-address-books",
+      "excerpt": "Who lived in your flat in 1910? In Berlin you can usually find out, much of it free online. Here is the order I would search in, from the old address books to the building file.",
+      "category": "Living in Berlin",
+      "categorySlug": "living-in-berlin",
+      "topic": "living-in-berlin",
+      "topicLabel": "Living in Berlin",
+      "readTime": "6 min read",
+      "publishedDate": "2026-11-08T10:26:54.105Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_b4a52551ebb14c7eae1cab8b533e5031~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_b4a52551ebb14c7eae1cab8b533e5031~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover.jpg",
+      "alt": "A row of restored late-19th-century Berlin apartment houses with ornamented stucco facades in pastel green and pink under a blue sky",
+      "relatedToolSlug": ""
+    },
+    {
       "title": "The Berlin Bear: Why the City Has One, and Where to See the Bears Worth Finding",
       "slug": "berlin-bear",
       "path": "/post/berlin-bear",
@@ -1987,26 +2004,26 @@
       "thumb": "https://static.wixstatic.com/media/5a08a3_0bf8b903d225414ba66823ac7e8fb7c1~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-emergency-entrance-night.jpg",
       "alt": "The lit emergency department entrance of a Berlin hospital at night, with the sign Emergency Zentrale Notaufnahme above the doors",
       "relatedToolSlug": "berlin-on-call-practice-map"
-    },
-    {
-      "title": "Christmas Markets Near Berlin: Which Day Trip Is Worth the Train",
-      "slug": "christmas-markets-near-berlin",
-      "path": "/post/christmas-markets-near-berlin",
-      "url": "https://www.berlinwalk.com/post/christmas-markets-near-berlin",
-      "excerpt": "Potsdam is 32 minutes away, Leipzig 1 hour 15 and Dresden two hours, and four of the best markets only open on Advent weekends. Which Christmas market day trip from Berlin fits your day, with the 2026 dates, the trains and the last way home.",
-      "category": "Tourist Tips",
-      "categorySlug": "tourist-tips",
-      "topic": "when-to-visit",
-      "topicLabel": "Month-by-Month Berlin",
-      "readTime": "6 min read",
-      "publishedDate": "2026-10-23T08:42:54.699Z",
-      "image": "https://static.wixstatic.com/media/5a08a3_c07e788342fa44b3997b7a338adabc2c~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-dresden-striezelmarkt-night.jpg",
-      "thumb": "https://static.wixstatic.com/media/5a08a3_c07e788342fa44b3997b7a338adabc2c~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-dresden-striezelmarkt-night.jpg",
-      "alt": "The entrance arch of the Dresden Striezelmarkt lit up at night, with a tall Christmas tree and the Altmarkt buildings behind it",
-      "relatedToolSlug": "christmas-market-day-trip-planner"
     }
   ],
   "allPosts": [
+    {
+      "title": "Berlin Address Books: How to Find Out Who Lived in Your Building",
+      "slug": "berlin-address-books",
+      "path": "/post/berlin-address-books",
+      "url": "https://www.berlinwalk.com/post/berlin-address-books",
+      "excerpt": "Who lived in your flat in 1910? In Berlin you can usually find out, much of it free online. Here is the order I would search in, from the old address books to the building file.",
+      "category": "Living in Berlin",
+      "categorySlug": "living-in-berlin",
+      "topic": "living-in-berlin",
+      "topicLabel": "Living in Berlin",
+      "readTime": "6 min read",
+      "publishedDate": "2026-11-08T10:26:54.105Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_b4a52551ebb14c7eae1cab8b533e5031~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_b4a52551ebb14c7eae1cab8b533e5031~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover.jpg",
+      "alt": "A row of restored late-19th-century Berlin apartment houses with ornamented stucco facades in pastel green and pink under a blue sky",
+      "relatedToolSlug": ""
+    },
     {
       "title": "The Berlin Bear: Why the City Has One, and Where to See the Bears Worth Finding",
       "slug": "berlin-bear",
