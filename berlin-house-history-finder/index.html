@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Berlin House History Finder: Which Record Covers the Year You Want</title>
+<link rel="stylesheet" href="../css/brand.css">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #FFFFFF; color: #1f1c17; padding: 12px; }
+  .hh { border-radius: 16px; overflow: hidden; border: 1px solid #d9d2c3; background: #fbfaf6; }
+  .hh-top { padding: 18px 18px 14px; background: #fbfaf6; border-bottom: 1px solid #e6dfd0; }
+  .hh-kick { display: inline-block; font-size: 10.5px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; color: #1B5E20; background: #C5E1A5; padding: 3px 8px; border-radius: 4px; }
+  .hh-top h1 { font-family: 'Merriweather', Georgia, serif; font-size: 21px; line-height: 1.3; color: #1f1c17; margin-top: 9px; }
+  .hh-top p { font-size: 13px; line-height: 1.6; color: #4a443a; margin-top: 7px; max-width: 760px; }
+  .hh-year { display: grid; grid-template-columns: auto 1fr; gap: 6px 16px; align-items: center; padding: 14px 18px 4px; }
+  .hh-year .big { font-family: 'Merriweather', Georgia, serif; font-size: 42px; font-weight: 700; color: #1B5E20; line-height: 1; min-width: 112px; }
+  .hh-year .cap { font-size: 12px; color: #5a5347; line-height: 1.45; }
+  .hh-type { grid-column: 1 / -1; display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-top: 4px; }
+  .hh-type label, .hh-type span { font-size: 11px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; color: #6b6353; }
+  .hh-type span { text-transform: none; letter-spacing: 0; font-weight: 600; }
+  .hh-type input { font-family: inherit; font-size: 17px; font-weight: 800; width: 96px; padding: 7px 10px; border: 2px solid #1B5E20; border-radius: 10px; color: #123D18; background: #ffffff; }
+  .hh-type .step { font-family: inherit; font-size: 13px; font-weight: 800; padding: 7px 11px; border-radius: 10px; border: 2px solid #1B5E20; background: #FFE600; color: #123D18; cursor: pointer; }
+  .hh-opts { display: flex; flex-wrap: wrap; gap: 10px 18px; padding: 4px 18px 12px; }
+  .hh-seg { display: inline-flex; border: 2px solid #1B5E20; border-radius: 999px; overflow: hidden; }
+  .hh-seg button { font-family: inherit; font-size: 12px; font-weight: 800; padding: 7px 12px; border: 0; background: #ffffff; color: #1B5E20; cursor: pointer; }
+  .hh-seg button[aria-pressed=true] { background: #FFE600; color: #123D18; }
+  .hh-seg-l { font-size: 10.5px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: #6b6353; display: block; margin-bottom: 5px; }
+  .hh-chart { padding: 0 12px 6px; }
+  .hh-chart canvas { display: block; width: 100%; height: auto; background: #ffffff; border: 1px solid #e6dfd0; border-radius: 12px; cursor: crosshair; touch-action: pan-y; }
+  .hh-note { margin: 6px 18px 0; padding: 10px 12px; border-radius: 10px; background: #f1ede3; font-size: 12.5px; line-height: 1.55; color: #3a352c; }
+  .hh-note b { color: #1B5E20; }
+  .hh-list { list-style: none; padding: 12px; display: grid; gap: 10px; }
+  .hh-item { background: #ffffff; border: 1px solid #e6dfd0; border-left: 6px solid var(--c); border-radius: 12px; padding: 13px 14px; }
+  .hh-item.off { opacity: .55; }
+  .hh-item .rank { font-size: 10.5px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: #6b6353; }
+  .hh-item h2 { font-size: 15.5px; line-height: 1.35; color: #1f1c17; margin-top: 3px; }
+  .hh-item p { font-size: 12.8px; line-height: 1.55; color: #3a352c; margin-top: 6px; }
+  .hh-item .where { color: #5a5347; font-size: 12px; }
+  .hh-item .tag { display: inline-block; margin-top: 8px; font-size: 11px; font-weight: 800; padding: 3px 9px; border-radius: 999px; background: #e7f2df; color: #1B5E20; }
+  .hh-item .tag.cost { background: #fbe8d9; color: #7a3412; }
+  .hh-item .move { margin-top: 9px; padding: 8px 10px; border-radius: 8px; background: #fff7b8; color: #123D18; font-size: 12.5px; line-height: 1.5; }
+  .hh-foot { padding: 0 18px 14px; font-size: 10.5px; line-height: 1.5; color: #6b6353; }
+  @media (max-width: 640px) {
+    .hh-top h1 { font-size: 18px; }
+    .hh-year .big { font-size: 34px; min-width: 90px; }
+  }
+</style>
+</head>
+<body>
+<div class="hh">
+  <div class="hh-top">
+    <span class="hh-kick">House history finder</span>
+    <h1>Pick a year. See which record still knows who lived in your building.</h1>
+    <p>Berlin kept good lists of its tenants until 1943, then the trail breaks, and after the Wall the lists stop being public. Type the year you care about, or tap it on the chart. The chart shows which records cover it, and the cards below put them in the order I would try them.</p>
+  </div>
+  <div class="hh-year">
+    <div class="big" id="yr">1928</div>
+    <div class="cap" id="yrcap"></div>
+    <div class="hh-type"><label for="slider">Type a year</label><button type="button" class="step" data-d="-10" aria-label="Ten years earlier">&minus;10</button><input type="number" id="slider" min="1799" max="2026" value="1928" step="1" inputmode="numeric"><button type="button" class="step" data-d="10" aria-label="Ten years later">+10</button><span>or tap the chart</span></div>
+  </div>
+  <div class="hh-opts">
+    <div><span class="hh-seg-l">The building</span>
+      <div class="hh-seg" id="segStand" role="group" aria-label="Building status">
+        <button type="button" data-v="stand" aria-pressed="true">Still standing</button>
+        <button type="button" data-v="gone" aria-pressed="false">Gone or replaced</button>
+      </div>
+    </div>
+    <div><span class="hh-seg-l">I am the</span>
+      <div class="hh-seg" id="segRole" role="group" aria-label="Your role">
+        <button type="button" data-v="tenant" aria-pressed="true">Tenant</button>
+        <button type="button" data-v="owner" aria-pressed="false">Owner</button>
+      </div>
+    </div>
+  </div>
+  <div class="hh-chart"><canvas id="chart" role="img" aria-label="Timeline of Berlin house history records, 1799 to 2026"></canvas></div>
+  <div class="hh-note" id="note"></div>
+  <ol class="hh-list" id="list"></ol>
+  <div class="hh-foot">Sources: Zentral- und Landesbibliothek Berlin, Landesarchiv Berlin, Service Berlin (Bauaktenarchiv fees), Geoportal Berlin, Koordinierungsstelle Stolpersteine Berlin. Checked on 8 November 2026.</div>
+</div>
+<script src="data.js"></script>
+<script>
+(function () {
+  var D = window.HOUSE_HISTORY, MIN = D.minYear, MAX = D.maxYear;
+  var state = { year: 1928, stand: 'stand', role: 'tenant' };
+  var slider = document.getElementById('slider');
+
+  function lanes() {
+    return D.lanes.filter(function (l) {
+      if (l.id === 'lab') return state.stand === 'gone';
+      if (l.id === 'files') return state.stand === 'stand';
+      return true;
+    });
+  }
+  function covers(l, y) {
+    var s = (l.spans || []).some(function (sp) { return y >= sp[0] && y <= sp[1]; });
+    if (s) return true;
+    return (l.points || []).some(function (p) { return Math.abs(p - y) <= 0; });
+  }
+  function nearestAerial(y) {
+    var a = D.lanes.filter(function (l) { return l.id === 'aerial'; })[0];
+    var c = a.points.concat(a.partial || []);
+    for (var x = 2004; x <= 2026; x++) c = c.concat([x]);
+    var best = c[0];
+    c.forEach(function (p) { if (Math.abs(p - y) < Math.abs(best - y)) best = p; });
+    return best;
+  }
+  function score(l, y) {
+    var on = covers(l, y), base = { books: 90, westbook: 60, phone: 55, aerial: 50, files: 70, lab: 72, stones: 80 }[l.id] || 40;
+    if (l.id === 'aerial') { var d = Math.abs(nearestAerial(y) - y); return d === 0 ? 85 : Math.max(20, 75 - d * 4); }
+    if (l.id === 'files' || l.id === 'lab') return on ? base : 30;
+    if (l.id === 'books' && y < 1822 && on) base = 75;
+    return on ? base : 0;
+  }
+
+  var cv = document.getElementById('chart'), ctx = cv.getContext('2d');
+  var geo = { left: 0, right: 0 };
+  function X(y) { return geo.left + (y - MIN) / (MAX - MIN) * (geo.right - geo.left); }
+  function size() {
+    var w = cv.clientWidth || cv.parentNode.clientWidth || 800, dpr = window.devicePixelRatio || 1;
+    var h = 62 + lanes().length * 34 + 30;
+    cv.width = Math.round(w * dpr); cv.height = Math.round(h * dpr); cv.style.height = h + 'px';
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    return { w: w, h: h };
+  }
+  function txt(s, x, y, font, color, align) { ctx.font = font + ' Montserrat, sans-serif'; ctx.fillStyle = color; ctx.textAlign = align || 'left'; ctx.fillText(s, x, y); }
+  function draw() {
+    var s = size(), w = s.w, h = s.h, L = lanes(), narrow = w < 520;
+    ctx.font = '800 ' + (narrow ? '10px' : '11.5px') + ' Montserrat, sans-serif'; geo.left = 14 + Math.max.apply(null, L.map(function (l) { return ctx.measureText(l.label).width; })) + 10; geo.right = w - 14;
+    ctx.clearRect(0, 0, w, h);
+    [[1933, 1945, '#f3e6e6'], [1944, 1953, '#ece9e2'], [1961, 1989, '#e9eef4']].forEach(function (e) { ctx.fillStyle = e[2]; ctx.fillRect(X(e[0]), 30, X(e[1]) - X(e[0]), h - 56); });
+    [1800, 1850, 1900, 1950, 2000].forEach(function (t) {
+      ctx.strokeStyle = '#e6dfd0'; ctx.beginPath(); ctx.moveTo(X(t), 30); ctx.lineTo(X(t), h - 26); ctx.stroke();
+      txt(String(t), X(t), h - 10, '600 10.5px', '#6b6353', 'center');
+    });
+    if (!narrow) { txt('NAZI ERA', X(1933) + 3, 42, '700 9.5px', '#8a8170'); txt('WALL', X(1961) + 3, 42, '700 9.5px', '#8a8170'); }
+    L.forEach(function (l, i) {
+      var y0 = 62 + i * 34, on = covers(l, state.year) || (l.id === 'aerial' && nearestAerial(state.year) === state.year);
+      txt(l.label, geo.left - 8, y0 + 4, (on ? '800 ' : '600 ') + (narrow ? '10px' : '11.5px'), on ? '#1f1c17' : '#7d7566', 'right');
+      (l.spans || []).forEach(function (sp) {
+        var t = sp[2] === 'thin' ? 6 : 12; ctx.globalAlpha = sp[2] === 'thin' ? 0.45 : 0.9; ctx.fillStyle = l.color;
+        ctx.fillRect(X(sp[0]), y0 - t / 2, Math.max(2, X(sp[1] + 1) - X(sp[0])), t);
+      });
+      ctx.globalAlpha = 1;
+      (l.points || []).forEach(function (p) { ctx.fillStyle = l.color; ctx.beginPath(); ctx.arc(X(p + 0.5), y0, 5.5, 0, Math.PI * 2); ctx.fill(); });
+      (l.partial || []).forEach(function (p) { ctx.fillStyle = '#ffffff'; ctx.strokeStyle = l.color; ctx.lineWidth = 1.6; ctx.beginPath(); ctx.arc(X(p + 0.5), y0, 4, 0, Math.PI * 2); ctx.fill(); ctx.stroke(); ctx.lineWidth = 1; });
+    });
+    var mx = X(state.year + 0.5);
+    ctx.strokeStyle = '#1B5E20'; ctx.lineWidth = 2; ctx.beginPath(); ctx.moveTo(mx, 28); ctx.lineTo(mx, h - 26); ctx.stroke(); ctx.lineWidth = 1;
+    ctx.fillStyle = '#FFE600'; ctx.fillRect(mx - 20, 6, 40, 18); ctx.strokeStyle = '#1B5E20'; ctx.strokeRect(mx - 20, 6, 40, 18);
+    txt(String(state.year), mx, 19, '800 11px', '#123D18', 'center');
+  }
+
+  function caption(y) {
+    if (y < 1822) return 'Early Berlin. Address books exist only for some years, and most houses on the edge of today\'s city were fields or village plots.';
+    if (y <= 1943) return 'The golden era for this search: one address book a year, many with a street section listing every tenant.';
+    if (y <= 1953) return 'The gap. The last address book is 1943, the first phone books are 1954 and 1955. War damage and rebuilding live in the building files.';
+    if (y <= 1991) return 'Divided city. Phone books exist for both halves, and West Berlin printed a city directory in some years until 1970.';
+    return 'Today. There is no public list of who lives where. Registration data is private, so the building itself is your record.';
+  }
+  function noteFor(y) {
+    var a = nearestAerial(y), d = Math.abs(a - y);
+    var part = (D.lanes.filter(function (l) { return l.id === 'aerial'; })[0].partial || []).indexOf(a) >= 0 ? ' It may cover only part of the city.' : '';
+    var aer = (d === 0 ? 'There is an aerial photograph from exactly <b>' + a + '</b>.' : 'The closest aerial photograph is <b>' + a + '</b>, ' + d + ' year' + (d === 1 ? '' : 's') + ' away.') + part;
+    var acc = state.stand === 'gone' ? 'Because the building is gone, its file has usually gone to the <b>Landesarchiv</b>, not the district office.'
+      : (state.role === 'tenant' ? 'As a tenant you can only see the building file with the <b>owner\'s written authority</b>, a recent land register extract and a cost declaration.'
+        : 'As the owner you bring a <b>land register extract</b> no older than six weeks and your ID.');
+    return aer + ' ' + acc;
+  }
+  function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
+  function render() {
+    document.getElementById('yr').textContent = state.year;
+    document.getElementById('yrcap').textContent = caption(state.year);
+    document.getElementById('note').innerHTML = noteFor(state.year);
+    var ranked = lanes().map(function (l) { return { l: l, s: score(l, state.year) }; }).sort(function (a, b) { return b.s - a.s; });
+    var n = 0;
+    document.getElementById('list').innerHTML = ranked.map(function (r) {
+      var l = r.l, live = r.s > 0, label = live ? ('Try ' + (++n === 1 ? 'first' : n === 2 ? 'second' : n === 3 ? 'third' : 'next')) : 'Does not cover ' + state.year;
+      var cost = /EUR/.test(l.access);
+      return '<li class="hh-item' + (live ? '' : ' off') + '" style="--c:' + l.color + '"><div class="rank">' + label + '</div><h2>' + esc(l.title) + '</h2><p>' + esc(l.finds) + '</p><p class="where">' + esc(l.where) + '</p><span class="tag' + (cost ? ' cost' : '') + '">' + esc(l.access) + '</span>' + (live ? '<div class="move">' + esc(l.move) + '</div>' : '') + '</li>';
+    }).join('');
+    draw();
+    if (window.__bwRequestEmbedResize) window.__bwRequestEmbedResize();
+  }
+  function setYear(v) { v = Math.round(+v); if (!isFinite(v)) return; state.year = Math.max(MIN, Math.min(MAX, v)); render(); }
+  slider.addEventListener('input', function () { var v = +slider.value; if (v >= MIN && v <= MAX) setYear(v); });
+  slider.addEventListener('change', function () { setYear(slider.value); slider.value = state.year; });
+  [].forEach.call(document.querySelectorAll('.hh-type .step'), function (b) {
+    b.addEventListener('click', function () { setYear(state.year + (+b.getAttribute('data-d'))); slider.value = state.year; });
+  });
+  function seg(id, key) {
+    var g = document.getElementById(id);
+    g.addEventListener('click', function (e) {
+      var b = e.target.closest('button'); if (!b) return;
+      state[key] = b.getAttribute('data-v');
+      [].forEach.call(g.querySelectorAll('button'), function (x) { x.setAttribute('aria-pressed', x === b ? 'true' : 'false'); });
+      render();
+    });
+  }
+  seg('segStand', 'stand'); seg('segRole', 'role');
+  function pick(ev) {
+    var r = cv.getBoundingClientRect(), x = (ev.touches ? ev.touches[0].clientX : ev.clientX) - r.left;
+    if (x < geo.left) return;
+    var y = Math.round(MIN + (x - geo.left) / (geo.right - geo.left) * (MAX - MIN));
+    setYear(y); slider.value = state.year;
+  }
+  cv.addEventListener('click', pick);
+  window.addEventListener('resize', draw);
+  render();
+})();
+</script>
+<script src="../js/brand.js"></script>
+</body>
+</html>

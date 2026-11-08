@@ -1,0 +1,46 @@
+{
+  "products": {
+    "poster": "86b55ab4-f8d4-4720-9763-5ee20f5cc0ac",
+    "digital": "64a55858-b960-02d7-53b5-7f6761c19957"
+  },
+  "fields": {
+    "first": "Homes 1 (set by the map)",
+    "second": "Homes 2 (set by the map)"
+  },
+  "limits": {
+    "title": 24,
+    "area": 30,
+    "line": 20,
+    "heading": 32,
+    "ref": 24
+  },
+  "geometry": {
+    "width": 1800,
+    "height": 2400,
+    "mat": 200,
+    "photoWidth": 680,
+    "rightX": 920,
+    "headingY": 2130,
+    "2": {
+      "ground": 300,
+      "photoHeight": 636,
+      "rows": [
+        180,
+        1120
+      ],
+      "headingY": 2160
+    },
+    "3": {
+      "ground": 240,
+      "photoHeight": 360,
+      "rows": [
+        180,
+        830,
+        1480
+      ],
+      "headingY": 2220
+    },
+    "captionTitle": 105,
+    "captionLine": 157
+  }
+}

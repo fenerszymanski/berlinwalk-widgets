@@ -6,11 +6,11 @@ const TEXT = new Map(Object.entries({
   'All products': 'Alle Produkte', 'Posters': 'Poster', 'All posters': 'Alle Poster', 'Personalised prints': 'Personalisierte Drucke', 'Personalised': 'Personalisiert',
   '2027 Wall Calendar': 'Wandkalender 2027', 'Audio walks': 'Audio-Spaziergänge', 'Guides': 'Reiseführer', 'Store': 'Shop', 'Cart': 'Warenkorb',
   'Your Berlin Street in 1928': 'Deine Berliner Straße um 1928', '/ Your Berlin Street in 1928': '/ Deine Berliner Straße um 1928',
-  'Your own address · c. 1928 and today': 'Deine Adresse · um 1928 und heute',
+  "Your home · c. 1928 and today": "Dein Zuhause · um 1928 und heute",
   'PERSONALISED PRINT · 30 × 40 OR 45 × 60 CM': 'PERSONALISIERTER DRUCK · 30 × 40 ODER 45 × 60 CM',
-  'A personalised print of your Berlin street.': 'Gib deine Adresse ein und sieh deine Straße kostenlos aus der Luft, um 1928 und heute. Als Poster bestellen kannst du sie, musst du aber nicht.',
-  'Find your street in 1928': 'Finde deine Straße um 1928', 'Search': 'Suchen',
-  'Search your address to see the print I can make for you, then tap it.': 'Suche deine Adresse und tippe sie an. Die Vorschau ist kostenlos.',
+  "The home you live in now, or one you left years ago, seen from above in 1928 and today.": "Gib die Adresse deines Zuhauses ein, heute oder von früher, und sieh es kostenlos von oben, um 1928 und heute. Als Poster bestellen kannst du es, musst du aber nicht.",
+  "Find your home in 1928": "Finde dein Zuhause um 1928", 'Search': 'Suchen',
+  "Type the address of a home, yours now or one from years ago, then tap it. The preview is free.": "Gib die Adresse eines Zuhauses ein, heute oder von früher, und tippe sie an. Die Vorschau ist kostenlos.",
   'Tap your place to put it on the poster:': 'Tippe auf deinen Ort, um ihn aufs Poster zu setzen:', 'Tap your place…': 'Tippe auf deinen Ort…',
   'Matching places': 'Passende Orte', 'Keep typing (at least 3 letters).': 'Schreib weiter (mindestens 3 Buchstaben).',
   'Nothing found in Berlin. Check the spelling, or try the street name with a house number.': 'In Berlin nichts gefunden. Prüfe die Schreibweise oder versuche es mit Straße und Hausnummer.',
@@ -40,7 +40,7 @@ const TEXT = new Map(Object.entries({
   'Your preview is on its way. I could not start the extra emails just now, so tick the box and send again later if you still want them.': 'Deine Vorschau ist unterwegs. Die weiteren E-Mails konnte ich gerade nicht starten. Wenn du sie willst, sende später noch einmal mit Häkchen.',
   'I could not reopen your saved preview. The link may be older than 30 days, so search your address to start again.': 'Ich konnte deine Vorschau nicht wieder öffnen. Der Link ist vielleicht älter als 30 Tage. Suche deine Adresse einfach neu.',
   'What you get': 'Was du bekommst', 'Printed poster': 'Gedrucktes Poster', 'Digital file': 'Digitale Datei', 'Digital file · JPG + PDF': 'Digitale Datei · JPG + PDF', 'Digital file · JPG + PDF · 45 x 60 cm at 300 ppi': 'Digitale Datei · JPG + PDF · 45 x 60 cm mit 300 ppi',
-  'Size and paper': 'Größe und Papier', 'Size': 'Größe', 'Paper': 'Papier', 'Text on the print': 'Text auf dem Druck', 'Title on the print': 'Titel auf dem Druck', 'Area line': 'Bezirkszeile', 'Your line on the print (optional)': 'Deine Zeile auf dem Druck (optional)', 'Your words on the print (optional)': 'Deine Worte auf dem Druck (optional)', 'Your words': 'Deine Worte', 'The house number is never printed.': 'Die Hausnummer wird nie gedruckt.',
+  'Size and paper': 'Größe und Papier', 'Size': 'Größe', 'Paper': 'Papier', 'Colour': 'Farbe', '1928 & today': '1928 und heute', 'Blue': 'Blau', 'Dark': 'Dunkel', 'Layout': 'Anordnung', 'Then & now': 'Damals und heute', '1928 only': 'Nur 1928', 'Sepia': 'Sepia', 'Black & white': 'Schwarzweiß', 'Cream': 'Creme', 'Blueprint': 'Blaupause', 'Charcoal': 'Anthrazit', 'Text on the print': 'Text auf dem Druck', 'Title on the print': 'Titel auf dem Druck', 'Area line': 'Bezirkszeile', 'Your line on the print (optional)': 'Deine Zeile auf dem Druck (optional)', 'Your words on the print (optional)': 'Deine Worte auf dem Druck (optional)', 'Your words': 'Deine Worte', 'The house number is never printed.': 'Die Hausnummer wird nie gedruckt.',
   'Your digital file': 'Deine digitale Datei', 'Prints cleanly at 30 x 40 cm too. Nothing is shipped, so it works anywhere.': 'Lässt sich auch sauber in 30 x 40 cm drucken. Es wird nichts verschickt, das funktioniert also überall.',
   'No address? Give a voucher.': 'Keine Adresse? Verschenke einen Gutschein.', 'Poster gift': 'Poster-Gutschein', 'Digital gift': 'Datei-Gutschein', 'Add gift to cart': 'Gutschein in den Warenkorb', 'Added. Opening your cart…': 'Hinzugefügt. Warenkorb wird geöffnet…', 'Choose a gift': 'Wähle einen Gutschein',
   'A bigger size or another paper: the recipient pays only the difference at checkout. Code and printable card by email, normally within the hour and no later than 24 hours. Valid until 31 December of the third year after purchase.': 'Größeres Format oder anderes Papier: Die beschenkte Person zahlt nur die Differenz. Code und druckbare Karte kommen per E-Mail, meist innerhalb einer Stunde, spätestens nach 24 Stunden. Gültig bis zum 31. Dezember des dritten Jahres nach dem Kauf.',
@@ -51,9 +51,9 @@ const TEXT = new Map(Object.entries({
   'Digital file: you keep the 14-day withdrawal right.': 'Digitale Datei: Du behältst das 14-tägige Widerrufsrecht.', 'Terms': 'Bedingungen',
   "Made by me, Yusuf, from Berlin's own aerial photos.": 'Von mir, Yusuf, aus Berlins eigenen Luftbildern gemacht.', 'What my guests say': 'Was meine Gäste sagen',
   'The story behind this print': 'Die Geschichte dahinter', 'About this digital file': 'Über diese digitale Datei',
-  'Type your address and see your street from above in 1928, the way a survey plane photographed it, with the same spot today below it. Most Berlin Altbau blocks were already standing, so you can often find your own courtyard. If your house is newer, you see what stood there before it.': 'Gib deine Adresse ein und sieh deine Straße um 1928 von oben, so wie sie ein Vermessungsflugzeug fotografiert hat, und darunter dieselbe Stelle heute. Die meisten Berliner Altbauten standen schon, oft findest du sogar deinen eigenen Hinterhof. Ist dein Haus jünger, siehst du, was vorher dort stand.',
-  'The print carries your street, district, map coordinates and an optional line of your own.': 'Auf dem Druck stehen Straße, Bezirk, Koordinaten und auf Wunsch eine eigene Zeile.',
-  'The digital version of my print: your own Berlin spot in the 1928 aerial photograph, with the same spot today below it, at the same scale, and your title, area line and coordinates.': 'Die digitale Version meines Drucks: deine Berliner Stelle im Luftbild um 1928, darunter dieselbe Stelle heute im gleichen Maßstab, dazu Titel, Bezirkszeile und Koordinaten.',
+  "Type the address of your home, now or from years ago, and see it from above in 1928, the way a survey plane photographed it, with the same spot today below it. Most Berlin Altbau blocks were already standing, so you can often find your own courtyard. If your house is newer, you see what stood there before it.": "Gib die Adresse deines Zuhauses ein, heute oder von früher, und sieh es um 1928 von oben, so wie es ein Vermessungsflugzeug fotografiert hat, und darunter dieselbe Stelle heute. Die meisten Berliner Altbauten standen schon, oft findest du sogar deinen eigenen Hinterhof. Ist dein Haus jünger, siehst du, was vorher dort stand.",
+  "The print carries your street, district and map coordinates, plus your own words if you like, for example \"Home since 2014\" or \"Where I grew up · 1979–1991\".": "Auf dem Druck stehen Straße, Bezirk und Koordinaten, auf Wunsch auch deine eigenen Worte, zum Beispiel „Zuhause seit 2014“ oder „Hier bin ich aufgewachsen · 1979–1991“.",
+  "The digital version of my print: your Berlin home in the 1928 aerial photograph, with the same spot today below it, at the same scale, and your title, area line and coordinates.": "Die digitale Version meines Drucks: dein Berliner Zuhause im Luftbild um 1928, darunter dieselbe Stelle heute im gleichen Maßstab, dazu Titel, Bezirkszeile und Koordinaten.",
   'Questions': 'Fragen', 'Something else? Write to': 'Noch etwas? Schreib an', '. I reply within a day.': '. Ich antworte innerhalb eines Tages.',
   'Which paper should I pick?': 'Welches Papier soll ich nehmen?',
   'Classic Matte (170 g) is the lightest and cheapest, Premium Matte (200 g) is smoother and whiter, Museum-Quality Matte (250 g) is archival and warm off-white. The semi-gloss papers have a soft sheen. For an old photograph I like matte best.': 'Classic Matte (170 g) ist am leichtesten und günstigsten, Premium Matte (200 g) glatter und weißer, Museum-Quality Matte (250 g) archivfest und warm-weiß. Die Semi-Gloss-Papiere glänzen leicht. Für ein altes Foto mag ich matt am liebsten.',
@@ -96,10 +96,10 @@ const PATTERNS = [
   [/^Available papers: (.+)\. Choose a size in the menu to see its available papers\.$/, 'Verfügbare Papiere: $1. Wähle im Menü eine Größe, um die dafür verfügbaren Papiere zu sehen.'],
   [/^Unframed · (.+)$/, 'Ohne Rahmen · $1'],
   [/^Cart \((\d+)\)$/, 'Warenkorb ($1)'], [/^Add to cart · (.+)$/, 'In den Warenkorb · $1'], [/^Yes, add to cart · (.+)$/, 'Ja, in den Warenkorb · $1'],
-  [/^Example poster, (.+)\. Search an address to see your street\.$/, 'Beispielposter, $1. Suche eine Adresse, um deine Straße zu sehen.'],
-  [/^Example file\. Search an address to see your street\.$/, 'Beispieldatei. Suche eine Adresse, um deine Straße zu sehen.'],
-  [/^Example poster, (.+)\. Search an address to see your street, then add your own words\.$/, 'Beispielposter, $1. Suche eine Adresse, um deine Straße zu sehen, und schreib deine eigenen Worte dazu.'],
-  [/^Example file\. Search an address to see your street, then add your own words\.$/, 'Beispieldatei. Suche eine Adresse, um deine Straße zu sehen, und schreib deine eigenen Worte dazu.'],
+  [/^Example poster, (.+)\. Search an address to see your home\.$/, 'Beispielposter, $1. Suche eine Adresse, um dein Zuhause zu sehen.'],
+  [/^Example file\. Search an address to see your home\.$/, 'Beispieldatei. Suche eine Adresse, um dein Zuhause zu sehen.'],
+  [/^Example poster, (.+)\. Search an address to see your home, then add your own words\.$/, 'Beispielposter, $1. Suche eine Adresse, um dein Zuhause zu sehen, und schreib deine eigenen Worte dazu.'],
+  [/^Example file\. Search an address to see your home, then add your own words\.$/, 'Beispieldatei. Suche eine Adresse, um dein Zuhause zu sehen, und schreib deine eigenen Worte dazu.'],
   [/^Your poster, ([^:]+): 1928 above, today below, same ground and scale\. Tap either photo to move the cross\.$/, 'Dein Poster, $1: oben um 1928, unten heute, gleicher Ausschnitt und Maßstab. Tippe auf ein Foto, um das Kreuz zu verschieben.'],
   [/^Your poster, (.+)$/, 'Dein Poster, $1'], [/^Personalised print · (.+)$/, 'Personalisierter Druck · $1'],
   [/^From (€[\d.,]+) · printed and posted to you, free delivery$/, 'Ab $1 · gedruckt und kostenlos zu dir geschickt'],
@@ -110,22 +110,84 @@ const PATTERNS = [
   [/^From (€[\d.,]+)$/, 'Ab $1'],
 ];
 const ATTRS = new Map(Object.entries({
-  'e.g. Potsdamer Platz': 'z. B. Potsdamer Platz', 'you@example.com': 'E-Mail-Adresse', 'Address or place in Berlin': 'Adresse oder Ort in Berlin',
-  'Why you can buy with confidence': 'Darauf kannst du dich verlassen', 'Example print: Potsdamer Platz in 1928 and today': 'Beispieldruck: Potsdamer Platz um 1928 und heute',
-  'Aerial photograph of your spot in 1928, with a cross on your building': 'Luftbild deiner Stelle um 1928, mit einem Kreuz auf deinem Gebäude',
+  'e.g. Chamissoplatz': 'z. B. Chamissoplatz', 'you@example.com': 'E-Mail-Adresse', 'Address or place in Berlin': 'Adresse oder Ort in Berlin',
+  'Why you can buy with confidence': 'Darauf kannst du dich verlassen', 'Example print: Chamissoplatz in 1928 and today': 'Beispieldruck: Chamissoplatz um 1928 und heute',
+  "Aerial photograph of your home in 1928, with a cross on your building": "Luftbild deines Zuhauses um 1928, mit einem Kreuz auf deinem Gebäude",
   'Aerial photograph of the same spot today, same ground and scale, with a cross on the same spot': 'Luftbild derselben Stelle heute, gleicher Ausschnitt und Maßstab, mit einem Kreuz an derselben Stelle',
   'Withdrawal notice and terms': 'Widerruf und Bedingungen',
-  'e.g. Lena & Jonas · here since 2021': 'z. B. Lena & Jonas · hier seit 2021',
+  'Home since 2014': 'Zuhause seit 2014',
 }));
+TEXT.set("How many homes?","Wie viele Adressen?");
+ATTRS.set("How many homes?","Wie viele Adressen?");
+TEXT.set("One home","1 Adresse");
+ATTRS.set("One home","1 Adresse");
+TEXT.set("2 homes","2 Adressen");
+ATTRS.set("2 homes","2 Adressen");
+TEXT.set("3 homes","3 Adressen");
+ATTRS.set("3 homes","3 Adressen");
+TEXT.set("Put the homes of your Berlin life on one print: your first flat, the one you live in now, your parents' house. Each one in 1928 and today.","Alle Adressen deines Berliner Lebens auf einem Druck: die erste Wohnung, die heutige, das Haus deiner Eltern. Jede um 1928 und heute.");
+ATTRS.set("Put the homes of your Berlin life on one print: your first flat, the one you live in now, your parents' house. Each one in 1928 and today.","Alle Adressen deines Berliner Lebens auf einem Druck: die erste Wohnung, die heutige, das Haus deiner Eltern. Jede um 1928 und heute.");
+TEXT.set("Home 1","Adresse 1");
+ATTRS.set("Home 1","Adresse 1");
+TEXT.set("Home 2","Adresse 2");
+ATTRS.set("Home 2","Adresse 2");
+TEXT.set("Home 3","Adresse 3");
+ATTRS.set("Home 3","Adresse 3");
+TEXT.set("Years or words for this home (optional)","Jahre oder Worte zu dieser Adresse (optional)");
+ATTRS.set("Years or words for this home (optional)","Jahre oder Worte zu dieser Adresse (optional)");
+TEXT.set("2009–2014","2009–2014");
+ATTRS.set("2009–2014","2009–2014");
+TEXT.set("Heading on the print","Überschrift auf dem Druck");
+ATTRS.set("Heading on the print","Überschrift auf dem Druck");
+TEXT.set("OUR BERLIN HOMES","UNSERE BERLINER ADRESSEN");
+ATTRS.set("OUR BERLIN HOMES","UNSERE BERLINER ADRESSEN");
+TEXT.set("or MY BERLIN HOMES, or a family name","oder MEINE BERLINER ADRESSEN, oder ein Familienname");
+ATTRS.set("or MY BERLIN HOMES, or a family name","oder MEINE BERLINER ADRESSEN, oder ein Familienname");
+TEXT.set("Add the next home to continue.","Füge die nächste Adresse hinzu, um weiterzumachen.");
+ATTRS.set("Add the next home to continue.","Füge die nächste Adresse hinzu, um weiterzumachen.");
+TEXT.set("A gift idea: the homes of your parents' Berlin years.","Geschenkidee: die Berliner Adressen deiner Eltern.");
+ATTRS.set("A gift idea: the homes of your parents' Berlin years.","Geschenkidee: die Berliner Adressen deiner Eltern.");
+TEXT.set("Can I put more than one home on the print?","Kann ich mehrere Adressen auf einen Druck bringen?");
+ATTRS.set("Can I put more than one home on the print?","Kann ich mehrere Adressen auf einen Druck bringen?");
+TEXT.set("Yes, two or three. Each home gets its 1928 photo and today's photo at the same scale, with its street, district and your own words. The heading at the bottom is yours too.","Ja, zwei oder drei. Jede Adresse bekommt ihr Foto von 1928 und das von heute im gleichen Maßstab, mit Straße, Bezirk und deinen Worten. Die Überschrift unten bestimmst du auch.");
+ATTRS.set("Yes, two or three. Each home gets its 1928 photo and today's photo at the same scale, with its street, district and your own words. The heading at the bottom is yours too.","Ja, zwei oder drei. Jede Adresse bekommt ihr Foto von 1928 und das von heute im gleichen Maßstab, mit Straße, Bezirk und deinen Worten. Die Überschrift unten bestimmst du auch.");
+TEXT.set("Home since 2014","Zuhause seit 2014");
+ATTRS.set("Home since 2014","Zuhause seit 2014");
+TEXT.set("e.g. Chamissoplatz","z. B. Chamissoplatz");
+ATTRS.set("e.g. Chamissoplatz","z. B. Chamissoplatz");
+TEXT.set("Homes","Adressen");
+ATTRS.set("Homes","Adressen");
+TEXT.set("Your Berlin home as a JPG and PDF. Nothing is shipped.","Dein Berliner Zuhause als JPG und PDF. Kein Versand.");
+ATTRS.set("Your Berlin home as a JPG and PDF. Nothing is shipped.","Dein Berliner Zuhause als JPG und PDF. Kein Versand.");
+TEXT.set("Each home in 1928 and today. Tap either photo to move the cross.","Jede Adresse um 1928 und heute. Tippe auf ein Foto, um das Kreuz zu verschieben.");
+ATTRS.set("Each home in 1928 and today. Tap either photo to move the cross.","Jede Adresse um 1928 und heute. Tippe auf ein Foto, um das Kreuz zu verschieben.");
+TEXT.set("There is no 1928 aerial photo for this spot","Für diese Stelle gibt es kein Luftbild von 1928");
+ATTRS.set("There is no 1928 aerial photo for this spot","Für diese Stelle gibt es kein Luftbild von 1928");
+TEXT.set("Checking the aerial photos…","Die Luftbilder werden geprüft…");
+ATTRS.set("Checking the aerial photos…","Die Luftbilder werden geprüft…");
+TEXT.set("Check the text and character limits.","Prüfe die Texte und Zeichenlimits.");
+ATTRS.set("Check the text and character limits.","Prüfe die Texte und Zeichenlimits.");
+TEXT.set("The aerial photo could not load. Search for the place again to retry.","Das Luftbild konnte nicht geladen werden. Suche den Ort erneut.");
+ATTRS.set("The aerial photo could not load. Search for the place again to retry.","Das Luftbild konnte nicht geladen werden. Suche den Ort erneut.");
+for (const [en,de] of [['1928 & today','1928 und heute'],['Blue','Blau'],['Dark','Dunkel'],['Colour','Farbe'],['Then & now','Damals und heute'],['1928 only','Nur 1928'],['Black & white','Schwarzweiß'],['Cream','Creme'],['Blueprint','Blaupause'],['Charcoal','Anthrazit']]) ATTRS.set(en,de);
+TEXT.set('Your Berlin Homes in 1928','Deine Berliner Adressen um 1928');
+TEXT.set('Each home in 1928 and today. Click either photo to move the cross.','Jede Adresse um 1928 und heute. Klicke auf ein Foto, um das Kreuz zu verschieben.');
+PATTERNS.unshift(
+  [/^Your poster, ([^:]+): 1928 above, today below, same ground and scale\. Click either photo to move the cross\.$/, 'Dein Poster, $1: oben um 1928, unten heute, gleicher Ausschnitt und Maßstab. Klicke auf ein Foto, um das Kreuz zu verschieben.'],
+  [/^Your digital file: 1928 above, today below, same ground and scale\. (Click|Tap) either photo to move the cross\.$/, (_, verb) => 'Deine digitale Datei: oben um 1928, unten heute, gleicher Ausschnitt und Maßstab. '+(verb==='Click'?'Klicke':'Tippe')+' auf ein Foto, um das Kreuz zu verschieben.']
+);
+// Yalnız görünen metin; form değerleri, varyantlar ve sepet kaydı değişmez.
+const germanMoney = text => text.replace(/€(\d+(?:[.,]\d{2})?)/g, (_, number) => number.replace('.', ',')+' €');
 const translate = value => {
   const key = value.replace(/\s+/g, ' ').trim();
   if (!key) return null;
-  if (TEXT.has(key)) return value.replace(value.trim(), TEXT.get(key));
+  if (TEXT.has(key)) return value.replace(value.trim(), germanMoney(TEXT.get(key)));
   if (!decodeURIComponent(location.pathname).startsWith(PRODUCT_PATH) && POSTER_TEXT.has(key)) return value.replace(value.trim(), POSTER_TEXT.get(key));
-  for (const [pattern, to] of PATTERNS) if (pattern.test(key)) return value.replace(value.trim(), key.replace(pattern, to));
-  return null;
+  for (const [pattern, to] of PATTERNS) if (pattern.test(key)) return value.replace(value.trim(), germanMoney(key.replace(pattern, to)));
+  const formatted=germanMoney(value);
+  return formatted!==value?formatted:null;
 };
-const skip = node => ['STYLE', 'SCRIPT', 'TEXTAREA', 'OPTION'].includes(node.parentElement?.tagName);
+const skip = node => ['STYLE', 'SCRIPT', 'TEXTAREA', 'OPTION'].includes(node.parentElement?.tagName) || !!node.parentElement?.closest('.homes-type');
 function sweep(root) {
   const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
   for (let node = walker.nextNode(); node; node = walker.nextNode()) {

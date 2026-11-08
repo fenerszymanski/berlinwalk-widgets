@@ -11531,6 +11531,37 @@
       ],
       "iconStatus": "live-wix-media",
       "image": "https://static.wixstatic.com/media/5a08a3_c9fef3ac3b2e44e8b62dcc61923bd604~mv2.png"
+    },
+    {
+      "slug": "berlin-house-history-finder",
+      "title": "Berlin House History Finder",
+      "lead": "Type a year and see which Berlin records still know who lived in your building: address books, phone books, aerial photos, building files and Stolpersteine, in the order to try them.",
+      "category": "Discovery",
+      "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/berlin-house-history-finder/",
+      "embedHeight": 1900,
+      "hubCategory": "CultureLandmarks",
+      "type": "Guide",
+      "priority": 3,
+      "tags": [
+        "berlin address books",
+        "house history",
+        "altbau",
+        "bauakte",
+        "aerial photos 1928",
+        "stolpersteine",
+        "living in berlin"
+      ],
+      "aliases": [
+        "who lived in my house berlin",
+        "berliner adressbuch",
+        "berlin address book online",
+        "how old is my building berlin",
+        "bauakte einsehen berlin",
+        "berlin building history",
+        "berlin aerial photo 1928"
+      ],
+      "iconStatus": "live-wix-media",
+      "image": "https://static.wixstatic.com/media/5a08a3_41d14d65e58f473b9166ef8786d312a4~mv2.png"
     }
   ],
   "hubCategories": [

@@ -1,3 +1,6 @@
+import {HOMES_CONFIG,encodeHomes,decodeHomes} from './homes-encoding.js';
+import {mountHomes,countChoice,isHomes,homesReady} from './homes-configurator.js';
+export {HOMES_CONFIG,decodeHomes};
 // Palette file is byte-identical to generator/print-options.json; no independent CSS colour approximation.
 export const PRINT_OPTIONS = await fetch(new URL('./print-options.json', import.meta.url)).then(r => {if(!r.ok)throw Error('PRINT_OPTIONS_UNAVAILABLE');return r.json();});
 export const ysLayout = state => Object.hasOwn(PRINT_OPTIONS.layouts,state.layout) ? state.layout : 'then-now';
@@ -266,10 +269,12 @@ export const mailMessage = (status, marketing) => {
   return 'I could not send it just now. Please try again in a minute, or write to info@walkofberlin.com.';
 };
 export function buildCustomText(state, search) {
+  if(isHomes(state))return encodeHomes({homes:state.homes.slice(0,Number(state.homesCount)),heading:state.heading,colour:ysColour(state),lang:new URLSearchParams(search??location.search).get('lang')==='de'?'de':'en',ref:adRef(search).slice(0,24)});
   const title = clean(state.title, YS_LIMITS.title).toUpperCase(), area = clean(state.area, YS_LIMITS.area), line = clean(state.line, YS_LIMITS.line);
   const [lat, lon] = [Number(state.lat), Number(state.lon)];
   // Compact delimiters preserve all printable text within Wix's actual 200-character limit.
   const parts = [`Map point ${lat.toFixed(5)},${lon.toFixed(5)}`, `Title:${title}|Area:${area}`, ...(line ? [`Line:${line}`] : []), `Layout:${ysLayout(state)}`, `Colour:${ysColour(state)}`];
+  if(new URLSearchParams(search??(typeof location!=='undefined'?location.search:'')).get('lang')==='de')parts.push('Lang:de');
   const journeyRef = typeof window !== 'undefined' && /^[a-z0-9]{6,16}$/.test(window.__bwStoreJourneyRef || '') ? `j${window.__bwStoreJourneyRef}` : '';
   const ref = [LANDING_SOURCE && `src.${LANDING_SOURCE}`, journeyRef, adRef(search)].filter(Boolean).join('~');   // source first, so a short room keeps it
   const room = YS_LIMITS.details - parts.join('//').length - '//Ref:'.length;
@@ -292,7 +297,7 @@ export const ysSize = state => (YS_SIZES.includes(state.size) ? state.size : YS_
 // The page opens on the cheapest poster, 30 x 40 Classic Matte (Yusuf, 26 Oct 2026: "default printed seçili ürün bence en ucuz olanı olmalı").
 const YS_DEFAULT_PAPER = 'Classic Matte';
 export const ysPaper = state => YS_PAPERS.find(p => p.name === state.paper) || YS_PAPERS.find(p => p.name === YS_DEFAULT_PAPER);
-export const ysPrice = state => ysPaper(state).price[YS_SIZES.indexOf(ysSize(state))];
+export const ysPrice = state => ysPaper(state).price[YS_SIZES.indexOf(ysSize(state))] + (isHomes(state)?20:0);
 export const ysChoices = state => ({Size: ysSize(state), Paper: ysPaper(state).name});
 export const euro = n => `€${n.toFixed(2)}`;
 // Digital file (Yusuf, 26 Oct 2026: a cheap print-it-yourself version next to the poster). A separate Wix digital product with the same two
@@ -300,18 +305,19 @@ export const euro = n => `€${n.toFixed(2)}`;
 export const YS_DIGITAL_ID = '9b6fbecf-32e4-27dc-f3e6-9c887fe7f495';
 export const YS_DIGITAL_PRICE = 14.90;
 export const ysDigital = state => state.format === 'digital';
-export const ysProductId = state => (ysDigital(state) ? YS_DIGITAL_ID : YS_PRODUCT_ID);
+export const ysProductId = state => isHomes(state) ? HOMES_CONFIG.products[ysDigital(state)?"digital":"poster"] : (ysDigital(state) ? YS_DIGITAL_ID : YS_PRODUCT_ID);
 const DIGITAL_SPEC = 'Digital file · JPG + PDF · 45 x 60 cm at 300 ppi';
 const DIGITAL_DELIVERY = 'Prints cleanly at 30 x 40 cm too. Nothing is shipped, so it works anywhere.';
 const POSTER_DELIVERY = 'Arrives in 3 to 5 working days in Germany, 4 to 9 elsewhere. Frame not included.';
-const captionFor = (state, live) => live && ysLayout(state)==='1928-only' ? 'Your street in 1928. One large aerial photograph, with your building marked.' : (ysDigital(state) ? (live ? CAPTION_LIVE.replace('Your poster, SIZE', 'Your digital file') : 'Example file. Search an address to see your street, then add your own words.') : (live ? CAPTION_LIVE : CAPTION_EXAMPLE).replace('SIZE', ysSize(state)));
+const captionFor = (state, live) => live && ysLayout(state)==='1928-only' ? 'Your home in 1928. One large aerial photograph, with your building marked.' : (ysDigital(state) ? (live ? CAPTION_LIVE.replace('Your poster, SIZE', 'Your digital file') : 'Example file. Search an address to see your home, then add your own words.') : (live ? CAPTION_LIVE : CAPTION_EXAMPLE).replace('SIZE', ysSize(state)));
 // Everything the print needs except the buyer's "yes, I see the 1928 photo": the add buttons are live from here on (25 Oct 2026).
 export function readyToCheck(state) {
+  if(isHomes(state))return homesReady(state);
   return Number.isFinite(state.lat) && Number.isFinite(state.lon) && inBerlin(state.lat, state.lon) && clean(state.address, 80).length > 0 &&
     clean(state.title, 24).length > 0 && clean(state.area, 30).length > 0;
 }
 // The cart request itself still needs that yes, given once per spot in the confirm panel the add buttons open.
-export const readyToAdd = state => readyToCheck(state) && state.seen === true;
+export const readyToAdd = state => isHomes(state) ? homesReady(state) : readyToCheck(state) && state.seen === true;
 
 const esc = value => String(value ?? '').replace(/[&<>"']/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'}[c]));
 // One marker per photo, centred, in the photo's own 1400 x 746 units: the survey cross of make_print.ring() (26 Oct 2026, Yusuf picked it
@@ -326,8 +332,8 @@ const RING_SVG = CROSS_SVG;
 // The preview is the print itself: a 30 x 40 cm sheet laid out on make_print.py's 1800 x 2400 design grid (CSS unit --u = 1/1800 of the sheet width; the words are SVG text on the same grid).
 // Title size follows the generator: 118 (96 above 16 letters), shrunk by 4 until it fits the 1400-unit width of the photos (never below 48).
 export const titleSize = title => (String(title || '').length <= 16 ? 118 : 96);
-const CAPTION_LIVE = 'Your poster, SIZE: 1928 above, today below, same ground and scale. Tap either photo to move the cross.';
-const CAPTION_EXAMPLE = 'Example poster, SIZE. Search an address to see your street, then add your own words.';
+const CAPTION_LIVE = `Your poster, SIZE: 1928 above, today below, same ground and scale. ${globalThis.matchMedia?.('(pointer: fine)')?.matches?'Click':'Tap'} either photo to move the cross.`;
+const CAPTION_EXAMPLE = 'Example poster, SIZE. Search an address to see your home, then add your own words.';
 // Trust strip next to the add buttons (Yusuf, 27 Oct 2026). True statements only: the poster ships free to DE, EU, UK and US; Gelato prints it in
 // Czechia or Poland, so "Printed in Europe" and never "Germany"; a misprinted or damaged poster is reprinted free (YS_FAQ says the same); checkout
 // takes cards only today, so no other payment brand is named or shown. The card marks themselves sit in the buy box (storefront-element.js).
@@ -347,7 +353,7 @@ const trustItems = kind => TRUST[kind].map(([icon, text]) => `<li>${TRUST_ICON[i
 // `secure` adds the "Secure checkout" item (the compact copy under the poster has no card marks next to it).
 export const trustHtml = (secure = false, cls = '') => ['poster', 'digital'].map(kind => `<ul class="ys-trust ${cls}" data-ys-legal="${kind}" ${kind === 'digital' ? 'hidden' : ''} aria-label="Why you can buy with confidence">${trustItems(kind)}${secure ? `<li>${TRUST_ICON.lock}<span>Secure checkout</span></li>` : ''}</ul>`).join('');
 // The line under the search box reads as a hint until a search runs (it keeps one line of height, so nothing below it moves).
-const SEARCH_HINT = 'Search your address to see the print I can make for you, then tap it.';
+const SEARCH_HINT = 'Type the address of a home, yours now or one from years ago, then tap it. The preview is free.';
 // Yusuf, 25 Oct 2026: only 4 of the first 174 previews got past the old "I can see the 1928 photo" checkbox, which kept the add button grey two
 // screens below the poster. Now an add button sits right under the poster and both add buttons are live; tapping one asks the same question
 // once, in place, and "Yes" adds to the cart. `where` is "quick" (under the poster) or "form" (the buy box).
@@ -359,6 +365,8 @@ const confirmHtml = where => `<div class="ys-confirm" data-ys-confirm="${where}"
 
 // `host` holds two slots ([data-ys-slot="visual"], [data-ys-slot="form"]) and the add button ([data-ys-add]). Rebuilt from `state` whenever the storefront re-renders. `api.add(customText)` returns a promise; `api.busy()` says whether the cart is locked.
 export function mountConfigurator(host, state, api) {
+  api.homesCleanup?.();
+  if(isHomes(state))return mountHomes(host,state,api,{PRINT_OPTIONS,gradePixels,utm33,fromUtm33,wmsUrl,inBerlin,fromPhoton,addressLabel,titleFrom,areaFrom,YS_SIZES,YS_PAPERS,ysSize,ysPaper,ysPrice});
   const L = YS_LIMITS;
   const currentPrice=state=>api.variantPrice?api.variantPrice(state):ysPrice(state);
   const showPrice=(el,amount)=>{if(el)el.innerHTML=api.priceHtml?api.priceHtml(amount,state):euro(amount);};
@@ -367,7 +375,7 @@ export function mountConfigurator(host, state, api) {
       <div class="ys-stage">
         <div class="ys-sheet" data-ys="sheet" ${state.lat ? '' : 'hidden'}>
           <div class="ys-photo ys-photo-1928" data-ys="photo-1928">
-            <img class="ys-1928" alt="Aerial photograph of your spot in 1928, with a cross on your building" decoding="async">
+            <img class="ys-1928" alt="Aerial photograph of your home in 1928, with a cross on your building" decoding="async">
             ${RING_SVG}
             <span class="ys-wm" aria-hidden="true"></span>
             <span class="ys-status" data-ys="status" role="status"></span>
@@ -380,7 +388,7 @@ export function mountConfigurator(host, state, api) {
           </div>
           <svg class="ys-type" viewBox="0 0 ${GRID.w} ${GRID.h}" role="group" aria-label="Text on the print">
             <text class="ys-cap ys-cap-1928" x="${TX.cx + TX.track1928 / 2}" y="${TX.cap1928}">1928</text>
-            <text class="ys-cap ys-cap-today" x="${TX.cx + TX.trackToday / 2}" y="${TX.capToday}">TODAY</text>
+            <text class="ys-cap ys-cap-today" x="${TX.cx + TX.trackToday / 2}" y="${TX.capToday}">${new URLSearchParams(location.search).get('lang')==='de'?'HEUTE':'TODAY'}</text>
             <text class="ys-ptitle" data-ys="ptitle" x="${TX.cx}" y="${TX.title}"></text>
             <text class="ys-parea" data-ys="parea" x="${TX.cx}" y="${TX.area}"></text>
             <text class="ys-pcoords" data-ys="pcoords" x="${TX.cx}" y="${TX.coords}"></text>
@@ -388,7 +396,7 @@ export function mountConfigurator(host, state, api) {
           </svg>
           <button type="button" class="ys-words-tag" data-ys="wordstag" hidden><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M11.3 1.9a1.5 1.5 0 0 1 2.1 0l.7.7a1.5 1.5 0 0 1 0 2.1L5.6 13.2 2 14l.8-3.6z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg><span>Your words</span></button>
         </div>
-        <div class="ys-sheet ys-sample" data-ys="example" ${state.lat ? 'hidden' : ''}><img src="${esc(api.sample)}" alt="Example print: Potsdamer Platz in 1928 and today"><span class="ys-words-tag" aria-hidden="true"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M11.3 1.9a1.5 1.5 0 0 1 2.1 0l.7.7a1.5 1.5 0 0 1 0 2.1L5.6 13.2 2 14l.8-3.6z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg><span>Your words</span></span></div>
+        <div class="ys-sheet ys-sample" data-ys="example" ${state.lat ? 'hidden' : ''}><img src="${esc(api.sample)}" alt="Example print: Chamissoplatz in 1928 and today"><span class="ys-words-tag" aria-hidden="true"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M11.3 1.9a1.5 1.5 0 0 1 2.1 0l.7.7a1.5 1.5 0 0 1 0 2.1L5.6 13.2 2 14l.8-3.6z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg><span>Home since 2014</span></span></div>
       </div>
       <p class="ys-caption" data-ys="caption">${captionFor(state, !!state.lat)}</p>
       <div class="ys-quick" data-ys="quick" ${state.lat ? '' : 'hidden'}>
@@ -413,22 +421,22 @@ export function mountConfigurator(host, state, api) {
   // Address search first (own slot, top of the page on a phone and top of the right column on desktop). The suggestions list floats over the
   // content below the box, so it never pushes the poster down while it fills in.
   const searchHtml = `<div class="ys-form ys-searchform">
-      <label class="ys-label ys-find" for="ys-q">Find your street in 1928</label>
-      <div class="ys-search"><input id="ys-q" data-ys="q" type="search" autocomplete="off" enterkeyhint="search" maxlength="${L.address}" placeholder="e.g. Potsdamer Platz" value="${esc(state.query || '')}"><button type="button" class="outline" data-ys="go">Search</button></div>
+      <label class="ys-label ys-find" for="ys-q">Find your home in 1928</label>
+      <div class="ys-search"><input id="ys-q" data-ys="q" type="search" autocomplete="off" enterkeyhint="search" maxlength="${L.address}" placeholder="e.g. Chamissoplatz" value="${esc(state.query || '')}"><button type="button" class="outline" data-ys="go">Search</button></div>
       <p class="ys-note ys-note-hint" data-ys="searchnote" role="status">${SEARCH_HINT}</p>
       <div class="ys-resultswrap"><ul class="ys-results" data-ys="results" role="listbox" aria-label="Matching places" hidden></ul></div>
     </div>`;
   const optionsHtml = `<div class="ys-form ys-optform">
       <div class="ys-fields" data-ys="fields" ${state.lat ? '' : 'hidden'}>
         <div class="ys-row"><label>Title on the print<input data-ys="title" maxlength="${L.title}" autocapitalize="characters" value="${esc(state.title || '')}"></label><label>Area line<input data-ys="area" maxlength="${L.area}" value="${esc(state.area || '')}"></label></div>
-        <label>Your words on the print (optional)<input data-ys="line" maxlength="${L.line}" placeholder="e.g. Lena &amp; Jonas · here since 2021" value="${esc(state.line || '')}"></label>
+        <label>Your words on the print (optional)<input data-ys="line" maxlength="${L.line}" placeholder="Home since 2014" value="${esc(state.line || '')}"></label>
         <p class="ys-hint">The house number is never printed.</p>
       </div>
       <div class="ys-format ys-format-top" data-ys="format" ${api.digital ? '' : 'hidden'}>
         <span class="ys-label" id="ys-format-l">What you get</span>
         <div class="ys-sizes" role="radiogroup" aria-labelledby="ys-format-l"><button type="button" role="radio" class="ys-size" data-ys-format="poster" aria-checked="${!ysDigital(state)}">Printed poster<small>From ${euro(currentPrice({...state,size:YS_SIZES[0],paper:'Classic Matte'}))} · printed and posted to you, free delivery</small></button><button type="button" role="radio" class="ys-size" data-ys-format="digital" aria-checked="${ysDigital(state)}">Digital file<small>${Number.isFinite(api.digitalPrice)?euro(api.digitalPrice):'Currently unavailable'} · JPG + PDF by email, print it yourself</small></button></div>
       </div>
-      <div class="ys-choice-row" role="group" aria-label="Layout"><span class="ys-label">Layout</span><div class="ys-layouts" role="radiogroup" aria-label="Layout">${Object.entries(PRINT_OPTIONS.layouts).map(([key,name])=>`<button type="button" role="radio" data-ys-layout="${key}" aria-checked="${key===ysLayout(state)}"><img class="ys-layout-thumb" src="${new URL(`./assets/options/sepia-${key}.jpg`,import.meta.url).href}" alt="">${name}</button>`).join('')}</div></div>
+      <div class="ys-choice-row" role="group" aria-label="Layout"><span class="ys-label">Layout</span><div class="ys-layouts" role="radiogroup" aria-label="Layout">${Object.entries(PRINT_OPTIONS.layouts).map(([key,name])=>`<button type="button" role="radio" data-ys-layout="${key}" aria-checked="${key===ysLayout(state)}"><img class="ys-layout-thumb" src="${new URL(`./assets/options/sepia-${key}${new URLSearchParams(location.search).get('lang')==='de'?'-de':''}.jpg`,import.meta.url).href}" alt="">${name}</button>`).join('')}</div></div>
       <div class="ys-choice-row" role="group" aria-label="Colour"><span class="ys-label">Colour <small data-ys="colourname">${optionNames(state).colour}</small></span><div class="ys-swatches" role="radiogroup" aria-label="Colour">${Object.entries(PRINT_OPTIONS.themes).map(([key,t])=>`<button type="button" role="radio" data-ys-colour="${key}" title="${esc(t.name)}" aria-label="${esc(t.name)}" aria-checked="${key===ysColour(state)}" style="--swatch:rgb(${t.mid.join(',')});--paper:rgb(${t.bg.join(',')})"><span aria-hidden="true"></span></button>`).join('')}</div></div>
       <details class="ys-options" data-ys="options" ${state.optionsOpen ? 'open' : ''} ${api.variants && !ysDigital(state) ? '' : 'hidden'}>
         <summary><span class="ys-options-t">Size and paper</span><span class="ys-options-v" data-ys="optsummary"></span></summary>
@@ -527,7 +535,7 @@ export function mountConfigurator(host, state, api) {
     const cross=$('photo-1928').querySelector('.ys-ring');cross.setAttribute('viewBox',only?'0 -423 1400 1592':'0 0 1400 746');
     for(const layer of rawPhotos.keys())paintPhoto(layer);
     $('caption').textContent=captionFor(state,!!state.lat);
-    if(!state.lat)$('example').querySelector('img').src=ysColour(state)==='sepia'&&ysLayout(state)==='then-now'?api.sample:new URL(`./assets/options/${ysColour(state)}-${ysLayout(state)}.jpg`,import.meta.url).href;
+    if(!state.lat)$('example').querySelector('img').src=ysColour(state)==='sepia'&&ysLayout(state)==='then-now'?api.sample:new URL(`./assets/options/${ysColour(state)}-${ysLayout(state)}${new URLSearchParams(location.search).get('lang')==='de'?'-de':''}.jpg`,import.meta.url).href;
   }
   host.querySelectorAll('[data-ys-layout]').forEach(b=>b.addEventListener('click',()=>{if(state.layout===b.dataset.ysLayout)return;state.layout=b.dataset.ysLayout;state.seen=false;state.confirming=null;api.track?.('layout-'+state.layout);paintOptions();if(state.lat)showPoint(true);}));
   host.querySelectorAll('[data-ys-colour]').forEach(b=>b.addEventListener('click',()=>{if(state.colour===b.dataset.ysColour)return;state.colour=b.dataset.ysColour;api.track?.('colour-'+state.colour);paintOptions();}));
@@ -735,4 +743,6 @@ export function mountConfigurator(host, state, api) {
       search(handed).then(() => { if (state.results?.length && !state.lat) { results.querySelector('[data-ys-pick="0"]')?.click(); api.scrollSheet = Date.now(); scrollSheetSoon(); } });
     }
   }
+  countChoice(host,state,api,()=>mountConfigurator(host,state,api));
+
 }

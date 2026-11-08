@@ -383,3 +383,14 @@ button.ys-words-tag{cursor:pointer;pointer-events:auto;min-height:0}button.ys-wo
 button.ys-words-tag:focus-visible{outline:2px solid var(--green);outline-offset:2px}
 .ys-words-tag[hidden]{display:none}
 @media(max-width:420px){.ys-words-tag{left:64%;font-size:11px;padding:2px 7px 2px 6px}.ys-words-tag svg{width:10px;height:10px}}
+/* Yalnız özel önizleme: bir, iki veya üç ev. */
+.homes-count{border:0;padding:0;margin:0 0 18px;min-width:0}.homes-count legend{font-weight:650;margin-bottom:8px}.homes-count [role=radiogroup]{display:flex;gap:8px}.homes-count button{flex:1;padding:10px 6px;white-space:normal}.homes-count [aria-checked=true]{background:#ffe600;color:#123d18;border-color:#123d18}.homes-count p{font-size:14px;line-height:1.5;margin:12px 0 0}.homes-gift{color:#426345}.homes-tabs{display:flex;gap:6px;margin:0 0 14px}.homes-tabs button{flex:1;min-height:44px;border:1px solid #b4bcae;border-radius:9px;background:#fff;color:#123d18;padding:9px 4px;font:600 14px 'Space Grotesk',sans-serif}.homes-tabs [aria-selected=true]{background:#123d18;color:white}.homes-sheet{position:relative;width:100%;aspect-ratio:3/4;background:white;box-shadow:0 8px 24px #123d1820}.homes-photo{position:absolute;border:1px solid #989896;padding:0;border-radius:0;background:#eeece5;cursor:crosshair;overflow:hidden;min-height:0}.homes-photo canvas,.homes-photo svg{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}.homes-photo span{position:relative;font:12px 'Space Grotesk',sans-serif;color:#426345}.homes-type{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}.homes-form{display:grid;gap:14px}.homes-form label{display:grid;gap:6px}.homes-form small{font:12px 'Space Grotesk',sans-serif;color:#536456;text-align:right}.homes-home-fields{display:grid;gap:14px}.homes-form input:invalid{border-color:#a33424}.homes-coverage{color:#8b271d;font-size:14px;min-height:1.5em}.homes-form [data-home=variants]{display:grid;gap:12px}.homes-form [hidden]{display:none!important}.homes-tabs button:focus-visible,.homes-count button:focus-visible,.homes-photo:focus-visible{outline:3px solid #123d18;outline-offset:3px}
+@media(max-width:740px){.homes-count p{font-size:13px}.homes-tabs{margin-top:10px}.homes-count [role=radiogroup]{gap:5px}}
+
+/* Çok evde de tüm poster ve alt yazı ekrana sığar; mevcut sabit sütun davranışı korunur. */
+@media(min-width:900px){.ys-layout .gallery:has(.homes-sheet){width:min(100%,calc((100vh - 175px) * .75))}}
+
+/* Düzeltme 3: kişisel satırın altında, posterin boş alt kenarında. */
+.ys-words-tag{left:auto;right:8px;top:auto;bottom:2%;transform:none;max-width:calc(100% - 16px);white-space:normal}
+.ys-words-tag::before{left:14px;top:-5px;transform:none;border:5px solid transparent;border-top:0;border-bottom-color:var(--yellow)}
+.ys-words-tag span{min-width:0;overflow-wrap:anywhere}

@@ -14219,5 +14219,39 @@
         "a": "Not quite. The Golden and Silver Bears are small versions of the **Berliner Bär by Renée Sintenis**, a young bear with a raised paw. A large bronze of the same bear stands on the A115 motorway at Dreilinden."
       }
     ]
+  },
+  "berlin-address-books": {
+    "title": "Berlin Address Books - FAQ",
+    "subtitle": "How to find out who lived in your Berlin building, and which record covers which year.",
+    "items": [
+      {
+        "q": "Where can I see the old Berlin address books online?",
+        "a": "The **Zentral- und Landesbibliothek Berlin** has digitised them in its Digitale Landesbibliothek, free and without an account. They cover **1799 to 1943**, with one volume a year from 1822."
+      },
+      {
+        "q": "How do I find who lived in my house?",
+        "a": "Use the **street section**, not the name index. In many years the book lists every street and house number, and under each house the owner, the property manager and the registered tenants with their jobs. Then step back ten years at a time."
+      },
+      {
+        "q": "Why can't I find anything after 1943?",
+        "a": "The last address book is the **1943** edition. After the war the next useful lists are the telephone books: **West Berlin 1954 to 1991, East Berlin 1955 to 1989**. West Berlin also printed a city directory in some years from 1957."
+      },
+      {
+        "q": "Can a tenant see the building file (Bauakte)?",
+        "a": "Only with the **owner's written authority**, which should also allow photos or copies, plus a recent land register extract and a cost declaration. Owners, people they authorise and property managers have the required legitimate interest. Ask your Hausverwaltung first."
+      },
+      {
+        "q": "What does it cost to see a Bauakte in Berlin?",
+        "a": "According to Service Berlin, the minimum fee is **EUR 36**, with about **EUR 25 per file**. Book an appointment with your district's building authority before you go."
+      },
+      {
+        "q": "My building was replaced. Where are its old files?",
+        "a": "Usually at the **Landesarchiv Berlin**, which holds about 120,000 building files, mostly of demolished buildings. Its digitised card index is sorted by street and house number, under the street name valid at the time."
+      },
+      {
+        "q": "Where can I see my street from the air in 1928?",
+        "a": "On **Geoportal Berlin**, which publishes the 1928 aerial survey at 1:4,000 under an open licence, along with later flights. Compare it with today's photo of the same block."
+      }
+    ]
   }
 }
