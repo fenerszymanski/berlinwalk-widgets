@@ -819,7 +819,7 @@
     }
     lineNotice(line) {
       if(this.gift?.isGiftId(line.productId))return `<div class="line-legal" data-line-legal="gift"><strong>Digital gift voucher</strong><p>${esc(NOTICE_GIFT)}</p></div>`;
-      if(line.productId==='9b6fbecf-32e4-27dc-f3e6-9c887fe7f495')return `<div class="line-legal" data-line-legal="digital"><strong>Personalised digital file</strong><p>${esc(NOTICE_YS_DIGITAL)}</p></div>`;
+      if(['9b6fbecf-32e4-27dc-f3e6-9c887fe7f495','64a55858-b960-02d7-53b5-7f6761c19957'].includes(line.productId))return `<div class="line-legal" data-line-legal="digital"><strong>Personalised digital file</strong><p>${esc(NOTICE_YS_DIGITAL)}</p></div>`;
       if(line.productId===YS_ID||(line.customText||[]).some(field=>!['Size','Paper'].includes(field.title)))return `<div class="line-legal" data-line-legal="personalised"><strong>Personalised physical product</strong><p>${esc(NOTICE_PERSONALISED_SHORT)}</p><details class="line-legal-more"><summary>Details</summary>${NOTICE_PERSONALISED.map(t=>`<p>${esc(t)}</p>`).join('')}</details></div>`;
       const reuse=line.shippable===false?this.artworkReuseLicence(line.productId):'';
       if(reuse)return `<div class="line-legal" data-line-legal="digital" data-artwork-reuse-licence="CC-BY-SA-4.0"><strong>Printable digital product</strong><p>${esc(NOTICE_DIGITAL_CC_BY_SA)}</p>${reuse}</div>`;
