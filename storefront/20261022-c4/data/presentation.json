@@ -1773,5 +1773,52 @@
         "alt": "The complete Leipziger Platz artwork and title, without cropping."
       }
     ]
+  },
+  {
+    "id": "pr-hackescher-markt-curve",
+    "name": "Hackescher Markt",
+    "place": "Mitte · The curve",
+    "image": "hackescher-markt-curve-fullart.jpg",
+    "alt": "A red and cream S-Bahn train on the curved brick viaduct at Hackescher Markt seen from above, with a pale blue line beneath the arches. Hackescher Markt Berlin appears below.",
+    "typeLine": "PREMIUM MATTE · 200 GSM · UNFRAMED",
+    "wixProductId": "8a4fc4d9-76f1-4cd1-a4cd-ea6d20190157",
+    "group": "landmarks",
+    "alternativeProductId": "17ea71bb-b94f-137b-8e18-ecb741a08d3c",
+    "visualCreditsHtml": "<p>Artwork made for Walk of Berlin from my own concept image, created with the built-in ImageGen tool in OpenAI Codex. Enlarged for print with Adobe Firefly Upscaler, then retouched locally: small stray marks removed and the two-line title reset in Space Grotesk. It is a stylised illustration, not a measured map or an architectural drawing. The arches, tracks and surrounding blocks are simplified, and the pale blue line stands for the filled former moat, not open water.</p><p>Facts: the station and the line towards Alexanderplatz were built on the filled bed of the former fortress moat, from my own research for Walk of Berlin, based on the monument record for S-Bahnhof Hackescher Markt in the Berlin Denkmaldatenbank (Landesdenkmalamt Berlin) and period railway engineering reports of 1884 and 1885. The street name Am Zwirngraben was checked in November 2026. The curve of the line was compared with <a href=\"https://www.openstreetmap.org/copyright\" target=\"_blank\" rel=\"noopener\">OpenStreetMap</a> data (© OpenStreetMap contributors, ODbL).</p><p>Lettering: Space Grotesk by Florian Karsten, <a href=\"https://openfontlicense.org\" target=\"_blank\" rel=\"noopener\">SIL Open Font License 1.1</a>.</p>",
+    "sizeImages": {
+      "30x40 cm": "hackescher-markt-curve-30x40.jpg",
+      "50x70 cm": "hackescher-markt-curve-50x70.jpg"
+    },
+    "gallery": [
+      {
+        "image": "hackescher-markt-curve-fullart.jpg",
+        "alt": "The complete Hackescher Markt artwork and title, without cropping."
+      }
+    ]
+  },
+  {
+    "id": "dl-hackescher-markt-curve",
+    "name": "Hackescher Markt Printable Poster",
+    "place": "Mitte · The curve",
+    "image": "hackescher-markt-curve-fullart.jpg",
+    "alt": "A red and cream S-Bahn train on the curved brick viaduct at Hackescher Markt seen from above, with a pale blue line beneath the arches. Hackescher Markt Berlin appears below.",
+    "typeLine": "DIGITAL DOWNLOAD · 30 × 40 & 50 × 70 CM",
+    "wixProductId": "17ea71bb-b94f-137b-8e18-ecb741a08d3c",
+    "kind": "digital",
+    "deliveryNote": "Digital download · 2 JPEG print files and a printing guide. No physical item.",
+    "deliveryDetails": "Your download includes 30 × 40 cm and 50 × 70 cm sRGB JPEG files at 300 dpi and a printing guide. The 50 × 70 cm file places the artwork on a light paper mount (25 mm at the sides, 50 mm at the top and bottom). No physical poster, frame or decor is included.",
+    "group": "landmarks",
+    "alternativeProductId": "8a4fc4d9-76f1-4cd1-a4cd-ea6d20190157",
+    "visualCreditsHtml": "<p>Artwork made for Walk of Berlin from my own concept image, created with the built-in ImageGen tool in OpenAI Codex. Enlarged for print with Adobe Firefly Upscaler, then retouched locally: small stray marks removed and the two-line title reset in Space Grotesk. It is a stylised illustration, not a measured map or an architectural drawing. The arches, tracks and surrounding blocks are simplified, and the pale blue line stands for the filled former moat, not open water.</p><p>Facts: the station and the line towards Alexanderplatz were built on the filled bed of the former fortress moat, from my own research for Walk of Berlin, based on the monument record for S-Bahnhof Hackescher Markt in the Berlin Denkmaldatenbank (Landesdenkmalamt Berlin) and period railway engineering reports of 1884 and 1885. The street name Am Zwirngraben was checked in November 2026. The curve of the line was compared with <a href=\"https://www.openstreetmap.org/copyright\" target=\"_blank\" rel=\"noopener\">OpenStreetMap</a> data (© OpenStreetMap contributors, ODbL).</p><p>Lettering: Space Grotesk by Florian Karsten, <a href=\"https://openfontlicense.org\" target=\"_blank\" rel=\"noopener\">SIL Open Font License 1.1</a>.</p>",
+    "sizeImages": {
+      "30x40 cm": "hackescher-markt-curve-30x40.jpg",
+      "50x70 cm": "hackescher-markt-curve-50x70.jpg"
+    },
+    "gallery": [
+      {
+        "image": "hackescher-markt-curve-fullart.jpg",
+        "alt": "The complete Hackescher Markt artwork and title, without cropping."
+      }
+    ]
   }
 ]
