@@ -107,6 +107,11 @@ export function ysStep(step) {
   if (JOURNEY_STEPS[step]) journey(JOURNEY_STEPS[step], YS_PATH, {productId: YS_ID});
   if (PIXEL_STEPS[step]) pixel('trackCustom', PIXEL_STEPS[step], {content_ids: [YS_ID], content_type: 'product'}, step);
 }
+// "+ Add another address" under the 1928 lines in the cart page or side cart (9 Nov 2026): lane 1 only, a path under the 1928 page like its other
+// steps, once per page load. No journey or pixel event: the backend journey allowlist and the pixel have no such event.
+export function ysAddAnother() {
+  count('add-another', YS_PATH);
+}
 export function added(product, quantity = 1) {
   if (!product?.wixProductId) return;
   count('add', pathOf(product));

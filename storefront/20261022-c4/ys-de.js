@@ -176,23 +176,158 @@ PATTERNS.unshift(
   [/^Your poster, ([^:]+): 1928 above, today below, same ground and scale\. Click either photo to move the cross\.$/, 'Dein Poster, $1: oben um 1928, unten heute, gleicher Ausschnitt und Maßstab. Klicke auf ein Foto, um das Kreuz zu verschieben.'],
   [/^Your digital file: 1928 above, today below, same ground and scale\. (Click|Tap) either photo to move the cross\.$/, (_, verb) => 'Deine digitale Datei: oben um 1928, unten heute, gleicher Ausschnitt und Maßstab. '+(verb==='Click'?'Klicke':'Tippe')+' auf ein Foto, um das Kreuz zu verschieben.']
 );
+// 1928 multi-buy (9 Nov 2026).
+for (const [en, de] of [
+  ['More homes, less each', 'Mehr Adressen, weniger pro Druck'], ['2 prints', '2 Drucke'], ['3 prints', '3 Drucke'], ['4 or more', 'ab 4'],
+  ['5% off', '5 % Rabatt'], ['10% off', '10 % Rabatt'], ['15% off', '15 % Rabatt'],
+  ['Mix posters and digital files. The discount comes off automatically.', 'Poster und digitale Dateien lassen sich mischen. Der Rabatt wird automatisch abgezogen.'],
+  ['Add one more address and save 5% on both.', 'Noch eine Adresse dazu, und du sparst 5 % auf beide.'],
+  ['You save 5% now. Add a third and save 10%.', 'Du sparst jetzt 5 %. Mit einer dritten Adresse sind es 10 %.'],
+  ['You save 10% now. A fourth makes it 15%.', 'Du sparst jetzt 10 %. Mit einer vierten sind es 15 %.'],
+  ['You save 15% on all of them.', 'Du sparst 15 % auf alle.'],
+]) TEXT.set(en, de);
+PATTERNS.unshift(
+  [/^In your cart: 1 print$/, 'Im Warenkorb: 1 Druck'],
+  [/^In your cart: (\d+) prints$/, 'Im Warenkorb: $1 Drucke'],
+  [/^In your cart: (.+)$/, 'Im Warenkorb: $1']
+);
+// Cart page and side cart (9 Nov 2026): every string the 1928 flow touches. The legal acknowledgement and the full notices under Details stay in
+// their reviewed English wording; the withdraw button is already bilingual.
+const CART_TEXT = {
+ "+ Add another address": "+ Weitere Adresse hinzufügen",
+ "Want them on one print?": "Lieber alle auf einem Druck?",
+ "Homes print": "Mit 2 oder 3 Adressen",
+ "puts 2 or 3 addresses together.": "landen sie zusammen auf einem Druck.",
+ "Your cart": "Dein Warenkorb",
+ "Shipped to you": "Wird verschickt",
+ "Sent by email": "Per E-Mail",
+ "Delivery type to confirm": "Lieferart noch offen",
+ "Your Berlin Street in 1928, Digital File": "Deine Berliner Straße um 1928, digitale Datei",
+ "Your Berlin Homes in 1928": "Deine Berliner Adressen um 1928",
+ "Your address:": "Deine Adresse:",
+ "On the print:": "Auf dem Druck:",
+ "Colour:": "Farbe:",
+ "Your words:": "Deine Worte:",
+ "Print details need checking.": "Die Druckdaten müssen geprüft werden.",
+ "Remove": "Entfernen",
+ "Manage this item in the original cart.": "Diesen Artikel verwaltest du im ursprünglichen Warenkorb.",
+ "Personalised physical product": "Personalisiertes Produkt",
+ "Personalised digital file": "Personalisierte digitale Datei",
+ "Digital gift voucher": "Digitaler Geschenkgutschein",
+ "Printable digital product": "Digitales Produkt zum Ausdrucken",
+ "Made for you, so the 14-day withdrawal right does not apply. Faulty prints are covered.": "Für dich angefertigt, daher gilt das 14-tägige Widerrufsrecht nicht. Bei fehlerhaften Drucken bleiben deine Rechte bestehen.",
+ "Details": "Details (auf Englisch)",
+ "Promo code": "Gutscheincode",
+ "You can enter a promo code in checkout.": "Einen Gutscheincode gibst du an der Kasse ein.",
+ "Order summary": "Bestellübersicht",
+ "Subtotal": "Zwischensumme",
+ "Discount": "Rabatt",
+ "Delivery": "Versand",
+ "Tax": "Steuer",
+ "Included tax": "Enthaltene Steuer",
+ "Estimated total": "Voraussichtliche Summe",
+ "Delivery destination": "Lieferziel",
+ "Billing destination for tax": "Rechnungsland für die Steuer",
+ "Country": "Land",
+ "Choose a country": "Land wählen",
+ "Germany": "Deutschland",
+ "Austria": "Österreich",
+ "France": "Frankreich",
+ "Netherlands": "Niederlande",
+ "United Kingdom": "Vereinigtes Königreich",
+ "United States": "USA",
+ "Another destination": "Anderes Ziel",
+ "Postal code": "Postleitzahl",
+ "Postcode": "Postleitzahl",
+ "ZIP code": "ZIP-Code",
+ "For another destination,": "Für ein anderes Ziel",
+ "continue in the original cart": "mach im ursprünglichen Warenkorb weiter",
+ "to check the available delivery options.": "und prüfe dort die Versandoptionen.",
+ "Refresh your cart to continue.": "Lade deinen Warenkorb neu, um fortzufahren.",
+ "Open the original cart to continue.": "Öffne den ursprünglichen Warenkorb, um fortzufahren.",
+ "Continue in the original cart for this destination.": "Für dieses Ziel geht es im ursprünglichen Warenkorb weiter.",
+ "Add your country and postal code to continue.": "Gib Land und Postleitzahl ein, um fortzufahren.",
+ "Enter your full postal code to continue.": "Gib die vollständige Postleitzahl ein, um fortzufahren.",
+ "Add your postal code to continue.": "Gib deine Postleitzahl ein, um fortzufahren.",
+ "Check your postal code to continue.": "Prüfe deine Postleitzahl, um fortzufahren.",
+ "Delivery could not be checked.": "Der Versand konnte nicht geprüft werden.",
+ "Checking tax…": "Steuer wird geprüft…",
+ "Checking delivery…": "Versand wird geprüft…",
+ "Updating your cart…": "Dein Warenkorb wird aktualisiert…",
+ "No delivery method for this address.": "Für diese Adresse gibt es keine Versandart.",
+ "Choose a delivery method to continue.": "Wähle eine Versandart, um fortzufahren.",
+ "Check delivery to continue.": "Prüfe den Versand, um fortzufahren.",
+ "Check your postal code and try again.": "Prüfe deine Postleitzahl und versuche es noch einmal.",
+ "The shop is temporarily unavailable.": "Der Shop ist gerade nicht erreichbar.",
+ "Your cart changed. Check delivery again.": "Dein Warenkorb hat sich geändert. Prüfe den Versand noch einmal.",
+ "Tax could not be checked for this country.": "Die Steuer für dieses Land konnte nicht geprüft werden.",
+ "Delivery could not be checked for this address.": "Der Versand an diese Adresse konnte nicht geprüft werden.",
+ "Delivery method": "Versandart",
+ "Try again": "Noch einmal versuchen",
+ "Open the original cart": "Ursprünglichen Warenkorb öffnen",
+ "Open original cart": "Ursprünglichen Warenkorb öffnen",
+ "No delivery method was returned for this address. Check the postal code or open the original cart.": "Für diese Adresse kam keine Versandart zurück. Prüfe die Postleitzahl oder öffne den ursprünglichen Warenkorb.",
+ "Check tax": "Steuer prüfen",
+ "Check delivery": "Versand prüfen",
+ "Continue to checkout": "Weiter zur Kasse",
+ "Final tax is confirmed in checkout.": "Die endgültige Steuer wird an der Kasse bestätigt.",
+ "Final delivery and tax are confirmed in checkout.": "Versand und Steuer werden an der Kasse bestätigt.",
+ "The checkout page is in English.": "Die Kasse selbst ist auf Englisch.",
+ "Continue shopping": "Weiter einkaufen",
+ "Tax checked. You can continue to checkout.": "Steuer geprüft. Du kannst zur Kasse gehen.",
+ "Delivery confirmed. You can continue to checkout.": "Versand bestätigt. Du kannst zur Kasse gehen.",
+ "Store Terms": "Shop-Bedingungen (auf Englisch)",
+ "Withdrawal notices and model form": "Widerrufshinweise und Muster-Widerrufsformular (auf Englisch)",
+ "Your cart is empty.": "Dein Warenkorb ist leer.",
+ "Explore Berlin prints, or listen to a city walk.": "Entdecke Berlin-Drucke oder hör dir einen Stadtspaziergang an.",
+ "Browse the shop": "Zum Shop",
+ "Your cart could not be read.": "Dein Warenkorb konnte nicht gelesen werden.",
+ "The original cart remains available.": "Der ursprüngliche Warenkorb bleibt erreichbar.",
+ "Delivery requirements have not been confirmed. Continue in the original cart.": "Die Versandangaben sind noch nicht bestätigt. Mach im ursprünglichen Warenkorb weiter.",
+ "Refresh cart": "Warenkorb neu laden",
+ "View cart": "Warenkorb ansehen",
+ "Added to your cart": "Im Warenkorb",
+ "Nothing is shipped. Tax is confirmed after your billing country is entered.": "Es wird nichts verschickt. Die Steuer wird bestätigt, sobald du dein Rechnungsland eingibst.",
+ "Delivery and tax are confirmed after your destination is entered.": "Versand und Steuer werden bestätigt, sobald du dein Lieferziel eingibst."
+};
+for (const [en, de] of Object.entries(CART_TEXT)) TEXT.set(en, de);
+for (const [en, de] of [['Close cart', 'Warenkorb schließen'], ['Shopping cart', 'Warenkorb'], ['Decrease quantity', 'Menge verringern'], ['Increase quantity', 'Menge erhöhen'], ['Delivery method', 'Versandart']]) ATTRS.set(en, de);
+for (const [en, de] of [
+  ['Layout:', 'Anordnung:'], ['PHYSICAL', 'DRUCK'], ['DIGITAL', 'DIGITAL'],
+  ['Digital file made from your spot: a JPG and a PDF, sent by email within 24 hours of payment. Nothing is shipped. You can keep the files for your permitted personal use. You retain the 14-day consumer withdrawal right.',
+   'Digitale Datei von deinem Ort: ein JPG und ein PDF, per E-Mail innerhalb von 24 Stunden nach der Zahlung. Es wird nichts verschickt. Du darfst die Dateien für deinen erlaubten persönlichen Gebrauch behalten. Dein 14-tägiges Widerrufsrecht als Verbraucher bleibt bestehen.'],
+  ['Withdraw from contract (Vertrag widerrufen)', 'Vertrag widerrufen (Withdraw from contract)'],
+  ['Multi-print saving', 'Mengenrabatt'], ["Can't be combined with other codes.", 'Nicht mit anderen Codes kombinierbar.'],
+  ['Your code is used instead of the multi-print saving.', 'Dein Code gilt statt des Mengenrabatts.'],
+  ["Saving with more prints can't be combined with other codes.", 'Der Rabatt für mehrere Drucke lässt sich nicht mit anderen Codes kombinieren.'],
+  ['A code you enter there replaces the multi-print saving.', 'Ein Code, den du dort eingibst, ersetzt den Mengenrabatt.'],
+]) TEXT.set(en, de);
+PATTERNS.unshift(
+  [/^\((\d+) items?\)$/, '($1 Artikel)'],
+  [/^Cart \((\d+|—)\)$/, 'Warenkorb ($1)'],
+  [/^Quantity: (\d+)$/, 'Menge: $1'],
+  [/^(€\d+(?:[.,]\d{2})?) each$/, '$1 pro Stück']
+);
 // Yalnız görünen metin; form değerleri, varyantlar ve sepet kaydı değişmez.
 const germanMoney = text => text.replace(/€(\d+(?:[.,]\d{2})?)/g, (_, number) => number.replace('.', ',')+' €');
-const translate = value => {
+// Short cart words that could also appear elsewhere on a product page: translated only on the cart page and in the side cart.
+const CART_ONLY = new Set(['Details', 'Delivery', 'Tax', 'Subtotal', 'Remove', 'Discount', 'Country']);
+const translate = (value, node) => {
   const key = value.replace(/\s+/g, ' ').trim();
   if (!key) return null;
+  if (CART_ONLY.has(key) && !decodeURIComponent(location.pathname).startsWith('/cart-page') && !node?.parentElement?.closest('dialog')) return null;
   if (TEXT.has(key)) return value.replace(value.trim(), germanMoney(TEXT.get(key)));
-  if (!decodeURIComponent(location.pathname).startsWith(PRODUCT_PATH) && POSTER_TEXT.has(key)) return value.replace(value.trim(), POSTER_TEXT.get(key));
+  if (!decodeURIComponent(location.pathname).startsWith(PRODUCT_PATH) && !decodeURIComponent(location.pathname).startsWith('/cart-page') && POSTER_TEXT.has(key)) return value.replace(value.trim(), POSTER_TEXT.get(key));
   for (const [pattern, to] of PATTERNS) if (pattern.test(key)) return value.replace(value.trim(), germanMoney(key.replace(pattern, to)));
   const formatted=germanMoney(value);
   return formatted!==value?formatted:null;
 };
-const skip = node => ['STYLE', 'SCRIPT', 'TEXTAREA', 'OPTION'].includes(node.parentElement?.tagName) || !!node.parentElement?.closest('.homes-type');
+const skip = node => ['STYLE', 'SCRIPT', 'TEXTAREA'].includes(node.parentElement?.tagName) || (node.parentElement?.tagName === 'OPTION' && !node.parentElement.closest('[data-address-form]')) || !!node.parentElement?.closest('.homes-type,.bw-raw');
 function sweep(root) {
   const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
   for (let node = walker.nextNode(); node; node = walker.nextNode()) {
     if (skip(node)) continue;
-    const next = translate(node.nodeValue);
+    const next = translate(node.nodeValue, node);
     if (next && next !== node.nodeValue) node.nodeValue = next;
   }
   root.querySelectorAll('[placeholder],[aria-label],[alt],[title]').forEach(element => {
@@ -204,14 +339,15 @@ function sweep(root) {
 }
 // Wix can replace the element while the page settles, so the watch rebinds to whichever shadow root is current.
 function start() {
-  const ysPage = decodeURIComponent(location.pathname).startsWith(PRODUCT_PATH);
-  if (!ysPage && !decodeURIComponent(location.pathname).startsWith('/product-page/')) return;
+  const ysPage = decodeURIComponent(location.pathname).startsWith(PRODUCT_PATH), cartPage = decodeURIComponent(location.pathname).startsWith('/cart-page');
+  if (!ysPage && !cartPage && !decodeURIComponent(location.pathname).startsWith('/product-page/')) return;
   if (ysPage) document.title = 'Deine Berliner Straße um 1928 | Walk of Berlin';
+  if (cartPage) document.title = 'Warenkorb | Walk of Berlin';
   let bound = null;
   const bind = () => {
     const host = document.querySelector('bw-storefront');
     if (!host?.shadowRoot || host.shadowRoot === bound) return;
-    if (!ysPage && !host.shadowRoot.querySelector('.poster-faq')) return;
+    if (!ysPage && !cartPage && !host.shadowRoot.querySelector('.poster-faq')) return;
     bound = host.shadowRoot;
     host.lang = 'de';
     const root = bound;
