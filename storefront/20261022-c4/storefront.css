@@ -394,3 +394,9 @@ button.ys-words-tag:focus-visible{outline:2px solid var(--green);outline-offset:
 .ys-words-tag{left:auto;right:8px;top:auto;bottom:2%;transform:none;max-width:calc(100% - 16px);white-space:normal}
 .ys-words-tag::before{left:14px;top:-5px;transform:none;border:5px solid transparent;border-top:0;border-bottom-color:var(--yellow)}
 .ys-words-tag span{min-width:0;overflow-wrap:anywhere}
+
+/* Select boxes (9 Nov 2026): one height in a row, own chevron 14px from the right edge, labels top-aligned so a note under one box never stretches its neighbour. */
+.poster-options{align-items:start}
+.poster-options label{align-content:start}
+.poster-options select,.ys-variant select,.destination-select,.address-grid select{-webkit-appearance:none;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.5l5 5 5-5' fill='none' stroke='%23123d18' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;background-size:12px 8px;padding-right:40px;text-overflow:ellipsis;cursor:pointer}
+.poster-options select{height:48px;min-height:48px;padding-top:0;padding-bottom:0;line-height:1.3}
