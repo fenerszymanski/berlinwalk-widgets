@@ -1,15 +1,25 @@
 {
   "featured": {
-    "title": "What to Wear in Berlin in Winter: Dress for Wind, Wet and Ice",
-    "url": "https://walkofberlin.com/post/what-to-wear-in-berlin-in-winter",
+    "title": "One Week in Berlin: A 7-Day Plan Built Around Your Arrival Day",
     "category": "Tourist Tips",
-    "readTime": "6 min read",
-    "summary": "Choose layers for wind, wet weather and time outdoors in Berlin. Use the week-and-hour grid before you pack your coat and shoes.",
-    "image": "https://static.wixstatic.com/media/5a08a3_c802ea2e01b34f70a9c1af0a6c62edb9~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/worldclock.jpg",
-    "alt": "The World Clock on Alexanderplatz at blue hour on 5 February 2026, with snow on the ground, a yellow tram and the TV Tower behind",
-    "label": "Pack for a Berlin winter day"
+    "readTime": "7 min read",
+    "image": "https://static.wixstatic.com/media/5a08a3_088223afde70466bba6427ba83b46baa~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-museum-island-spree-morning.jpg",
+    "alt": "The green copper dome of the Berliner Dom behind the long stone colonnade on the Spree bank of Museum Island in soft morning light",
+    "url": "https://www.walkofberlin.com/post/one-week-in-berlin",
+    "summary": "Put your seven Berlin days on the calendar from the day you arrive. Compare museum opening days, Sunday shopping and timed visits before choosing when to go.",
+    "label": "Plan seven days from your arrival date"
   },
   "miniPosts": [
+    {
+      "title": "What to Wear in Berlin in Winter: Dress for Wind, Wet and Ice",
+      "url": "https://walkofberlin.com/post/what-to-wear-in-berlin-in-winter",
+      "category": "Tourist Tips",
+      "readTime": "6 min read",
+      "summary": "Choose layers for wind, wet weather and time outdoors in Berlin. Use the week-and-hour grid before you pack your coat and shoes.",
+      "image": "https://static.wixstatic.com/media/5a08a3_c802ea2e01b34f70a9c1af0a6c62edb9~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/worldclock.jpg",
+      "alt": "The World Clock on Alexanderplatz at blue hour on 5 February 2026, with snow on the ground, a yellow tram and the TV Tower behind",
+      "label": "Pack for a Berlin winter day"
+    },
     {
       "title": "The Berlin Bear: Why the City Has One, and Where to See the Bears Worth Finding",
       "category": "Tourist Tips",
@@ -19,16 +29,6 @@
       "url": "https://www.walkofberlin.com/post/berlin-bear",
       "summary": "Find the crowned bear at Lustgarten, the Bärenbrunnen on Werderscher Markt and the former bear pit in Köllnischer Park.",
       "label": "Find the Berlin bears worth a stop"
-    },
-    {
-      "title": "The Berlin Clock: How to Read the Lamp Clock by the Europa-Center",
-      "url": "https://walkofberlin.com/post/berlin-clock-mengenlehreuhr",
-      "category": "Tourist Tips",
-      "readTime": "5 min read",
-      "summary": "Read the Berlin-Uhr’s red and yellow lamp rows, then find the clock on the Budapester Straße side of the Europa-Center.",
-      "image": "https://static.wixstatic.com/media/5a08a3_9ea2828d3cd6412d82eae920089e53a1~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover.jpg",
-      "alt": "The Berlin clock with its rows of red and yellow lamps on a pole against the blue glass and panels of the Europa-Center",
-      "label": "Learn to read the Berlin Clock"
     },
     {
       "title": "Early Flight from BER: The Last Train, Night Bus or Taxi From Where You Sleep",
@@ -69,13 +69,13 @@
       "alt": "Restroom sign with male and female symbols on a brick wall, pointing right. Green trees and glass buildings in the background."
     },
     {
-      "title": "Berlin Rent Increase: Which of the Four Limits Actually Stops the Letter",
-      "url": "https://www.berlinwalk.com/post/berlin-rent-increase",
+      "title": "Berlin Address Books: How to Find Out Who Lived in Your Building",
       "category": "Living in Berlin",
-      "readTime": "8 min read",
-      "summary": "The Berliner Mietspiegel 2026 put the median net cold rent at 7.71 euro per square metre, and the rent letters built on it are landing now. Four separate limits decide whether yours holds up, and for most Berlin tenants the famous 15 per cent is not the one doing the work.",
-      "image": "https://static.wixstatic.com/media/5a08a3_7123a9cf01154bfa8808b77d3fc83749~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-hermannstrasse-neukoelln.jpg",
-      "alt": "A Gruenderzeit apartment building on Hermannstrasse in Berlin-Neukoelln, with red brick and stucco ornament above the ground floor windows and blue sky reflected in the panes"
+      "readTime": "6 min read",
+      "image": "https://static.wixstatic.com/media/5a08a3_b4a52551ebb14c7eae1cab8b533e5031~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover.jpg",
+      "alt": "A row of restored late-19th-century Berlin apartment houses with ornamented stucco facades in pastel green and pink under a blue sky",
+      "url": "https://www.walkofberlin.com/post/berlin-address-books",
+      "summary": "Look up a Berlin street in the historic address books, then check which archive holds the building file."
     }
   ]
 }

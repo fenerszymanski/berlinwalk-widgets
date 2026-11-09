@@ -1,7 +1,7 @@
 const BW_BLOG_HOME_DATA_URL = (() => {
   const script = document.currentScript;
   const base = script && script.src ? script.src : window.location.href;
-  return new URL('./data.json?v=20261107-winter-packing-lead', base).href;
+  return new URL('./data.json?v=20261109-seven-day-plan-lead', base).href;
 })();
 const BW_BLOG_HOME_FALLBACK = {
   "featured": {
