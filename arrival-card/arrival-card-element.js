@@ -10,8 +10,12 @@
   // rendered, seen = at least half of it on screen for 1 s, start = first
   // focus/input in the form. One of each per page path and placement, so a Wix
   // remount of the same card does not count twice.
+  // Since 9 Nov 2026 (v2) view also needs a real layout box: the Gift Week
+  // campaign hid the card with display:none!important from 1 Nov 20:00, and
+  // v1 still counted ~120 hidden renders a day as views while seen fell to 0.
+  // A hidden card sends nothing; if it is shown later, view goes out then.
   const EVENT_ENDPOINT = 'https://app.berlinwalk.com/api/download-lead?action=event';
-  const MEASURE_VERSION = 'arrival-card-measure-v1-2026-10-08';
+  const MEASURE_VERSION = 'arrival-card-measure-v2-2026-11-09';
   const CONSENT_EVENTS = ['consentPolicyChanged', 'consentPolicyInitialized', 'ucConsentEvent', 'bwConsentPolicyChanged'];
   const measured = new Map();
   function consentPolicy() {
@@ -63,11 +67,21 @@
           .catch(() => { state.sent[stage] = false; });
       } catch (error) { state.sent[stage] = false; }
     }
+    // True only when the card has a layout box: an ancestor with display:none
+    // (a campaign hide, a page style) or a zero-size wrapper makes it false.
+    function shown() {
+      try {
+        if (typeof card.checkVisibility === 'function') return card.checkVisibility() === true;
+        const rect = card.getBoundingClientRect();
+        return rect.width > 0 && rect.height > 0;
+      } catch (error) { return false; }
+    }
     function refresh() {
       if (disposed) return;
       if (!card.isConnected) return;
       if (timer !== null) { clearTimeout(timer); timer = null; }
       if (!consentGranted('analytics')) return;
+      if (!shown()) return;
       send('gate_view');
       if (state.started) send('form_start');
       if (visible && document.visibilityState !== 'hidden' && !state.sent.gate_seen) {
