@@ -84,6 +84,7 @@
   "berliner-mauer-cyclist": "The Berliner Mauer print",
   "berlin-market-halls": "The Markthallen print",
   "leipziger-platz-octagon": "The Leipziger Platz print",
+  "hackescher-markt-curve": "The Hackescher Markt print",
   "kottbusser-tor": "Kottbusser Tor",
   "mehringplatz": "Mehringplatz",
   "strausberger-platz": "Strausberger Platz",

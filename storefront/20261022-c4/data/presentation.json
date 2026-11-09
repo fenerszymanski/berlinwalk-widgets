@@ -1798,7 +1798,7 @@
     "wixProductId": "8a4fc4d9-76f1-4cd1-a4cd-ea6d20190157",
     "group": "landmarks",
     "alternativeProductId": "17ea71bb-b94f-137b-8e18-ecb741a08d3c",
-    "visualCreditsHtml": "<p>Artwork made for Walk of Berlin from my own concept image, created with the built-in ImageGen tool in OpenAI Codex. Enlarged for print with Adobe Firefly Upscaler, then retouched locally: small stray marks removed and the two-line title reset in Space Grotesk. It is a stylised illustration, not a measured map or an architectural drawing. The arches, tracks and surrounding blocks are simplified, and the pale blue line stands for the filled former moat, not open water.</p><p>Facts: the station and the line towards Alexanderplatz were built on the filled bed of the former fortress moat, from my own research for Walk of Berlin, based on the monument record for S-Bahnhof Hackescher Markt in the Berlin Denkmaldatenbank (Landesdenkmalamt Berlin) and period railway engineering reports of 1884 and 1885. The street name Am Zwirngraben was checked in November 2026. The curve of the line was compared with <a href=\"https://www.openstreetmap.org/copyright\" target=\"_blank\" rel=\"noopener\">OpenStreetMap</a> data (© OpenStreetMap contributors, ODbL).</p><p>Lettering: Space Grotesk by Florian Karsten, <a href=\"https://openfontlicense.org\" target=\"_blank\" rel=\"noopener\">SIL Open Font License 1.1</a>.</p>",
+    "visualCreditsHtml": "<p>Artwork made for Walk of Berlin from my own concept image, created with the built-in ImageGen tool in OpenAI Codex. Enlarged for print with Adobe Firefly Upscaler, then retouched locally: small stray marks removed and the two-line title reset in Space Grotesk. It is a stylised illustration, not a measured map or an architectural drawing. The arches, tracks and surrounding blocks are simplified, and the pale blue line stands for the filled former moat, not open water.</p><p>Facts: the station and the line towards Alexanderplatz were built on the filled bed of the former fortress moat, from my own research for Walk of Berlin, based on the monument record for S-Bahnhof Hackescher Markt in the Berlin Denkmaldatenbank (Landesdenkmalamt Berlin) and period railway engineering reports of 1884 and 1885. The street name Am Zwirngraben was checked in November 2026. The curve of the line was compared with <a href=\"https://www.openstreetmap.org/copyright\" target=\"_blank\" rel=\"noopener\">OpenStreetMap</a> data (© OpenStreetMap contributors, ODbL).</p><p>Lettering: Space Grotesk by Florian Karsten, <a href=\"https://openfontlicense.org\" target=\"_blank\" rel=\"noopener\">SIL Open Font License 1.1</a>.</p><p>The room image and the room video are 3D styling visualisations rendered in Blender with <a href=\"https://polyhaven.com\" target=\"_blank\" rel=\"noopener\">Poly Haven</a> models and textures (<a href=\"https://creativecommons.org/publicdomain/zero/1.0/\" target=\"_blank\" rel=\"noopener\">CC0</a>). Both show the 30 x 40 cm print in an oak frame. Frame, furniture and decor are not included.</p>",
     "sizeImages": {
       "30x40 cm": "hackescher-markt-curve-30x40.jpg",
       "50x70 cm": "hackescher-markt-curve-50x70.jpg"
@@ -1808,7 +1808,14 @@
         "image": "hackescher-markt-curve-fullart.jpg",
         "alt": "The complete Hackescher Markt artwork and title, without cropping."
       }
-    ]
+    ],
+    "roomImage": "hackescher-markt-curve-room-photo.jpg",
+    "roomVideoFit": "contain",
+    "roomCaption": "Styling example · 30 × 40 cm · Frame and decor not included",
+    "roomAlt": "The Hackescher Markt print at 30 × 40 cm in an oak frame on a living-room wall. Frame and decor are not included.",
+    "roomVideoUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/room/hackescher-markt-curve.mp4",
+    "roomVideoPosterUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/room/hackescher-markt-curve-poster.jpg",
+    "roomVideoThumbnailUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/room/hackescher-markt-curve-thumb.jpg"
   },
   {
     "id": "dl-hackescher-markt-curve",
@@ -1823,7 +1830,7 @@
     "deliveryDetails": "Your download includes 30 × 40 cm and 50 × 70 cm sRGB JPEG files at 300 dpi and a printing guide. The 50 × 70 cm file places the artwork on a light paper mount (25 mm at the sides, 50 mm at the top and bottom). No physical poster, frame or decor is included.",
     "group": "landmarks",
     "alternativeProductId": "8a4fc4d9-76f1-4cd1-a4cd-ea6d20190157",
-    "visualCreditsHtml": "<p>Artwork made for Walk of Berlin from my own concept image, created with the built-in ImageGen tool in OpenAI Codex. Enlarged for print with Adobe Firefly Upscaler, then retouched locally: small stray marks removed and the two-line title reset in Space Grotesk. It is a stylised illustration, not a measured map or an architectural drawing. The arches, tracks and surrounding blocks are simplified, and the pale blue line stands for the filled former moat, not open water.</p><p>Facts: the station and the line towards Alexanderplatz were built on the filled bed of the former fortress moat, from my own research for Walk of Berlin, based on the monument record for S-Bahnhof Hackescher Markt in the Berlin Denkmaldatenbank (Landesdenkmalamt Berlin) and period railway engineering reports of 1884 and 1885. The street name Am Zwirngraben was checked in November 2026. The curve of the line was compared with <a href=\"https://www.openstreetmap.org/copyright\" target=\"_blank\" rel=\"noopener\">OpenStreetMap</a> data (© OpenStreetMap contributors, ODbL).</p><p>Lettering: Space Grotesk by Florian Karsten, <a href=\"https://openfontlicense.org\" target=\"_blank\" rel=\"noopener\">SIL Open Font License 1.1</a>.</p>",
+    "visualCreditsHtml": "<p>Artwork made for Walk of Berlin from my own concept image, created with the built-in ImageGen tool in OpenAI Codex. Enlarged for print with Adobe Firefly Upscaler, then retouched locally: small stray marks removed and the two-line title reset in Space Grotesk. It is a stylised illustration, not a measured map or an architectural drawing. The arches, tracks and surrounding blocks are simplified, and the pale blue line stands for the filled former moat, not open water.</p><p>Facts: the station and the line towards Alexanderplatz were built on the filled bed of the former fortress moat, from my own research for Walk of Berlin, based on the monument record for S-Bahnhof Hackescher Markt in the Berlin Denkmaldatenbank (Landesdenkmalamt Berlin) and period railway engineering reports of 1884 and 1885. The street name Am Zwirngraben was checked in November 2026. The curve of the line was compared with <a href=\"https://www.openstreetmap.org/copyright\" target=\"_blank\" rel=\"noopener\">OpenStreetMap</a> data (© OpenStreetMap contributors, ODbL).</p><p>Lettering: Space Grotesk by Florian Karsten, <a href=\"https://openfontlicense.org\" target=\"_blank\" rel=\"noopener\">SIL Open Font License 1.1</a>.</p><p>The room image and the room video are 3D styling visualisations rendered in Blender with <a href=\"https://polyhaven.com\" target=\"_blank\" rel=\"noopener\">Poly Haven</a> models and textures (<a href=\"https://creativecommons.org/publicdomain/zero/1.0/\" target=\"_blank\" rel=\"noopener\">CC0</a>). Both show the 30 x 40 cm print in an oak frame. Frame, furniture and decor are not included.</p>",
     "sizeImages": {
       "30x40 cm": "hackescher-markt-curve-30x40.jpg",
       "50x70 cm": "hackescher-markt-curve-50x70.jpg"
@@ -1833,6 +1840,13 @@
         "image": "hackescher-markt-curve-fullart.jpg",
         "alt": "The complete Hackescher Markt artwork and title, without cropping."
       }
-    ]
+    ],
+    "roomImage": "hackescher-markt-curve-room-photo.jpg",
+    "roomVideoFit": "contain",
+    "roomCaption": "Styling example · 30 × 40 cm · Printable files only · Frame and decor not included",
+    "roomAlt": "The Hackescher Markt print at 30 × 40 cm in an oak frame on a living-room wall. Frame and decor are not included.",
+    "roomVideoUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/room/hackescher-markt-curve.mp4",
+    "roomVideoPosterUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/room/hackescher-markt-curve-poster.jpg",
+    "roomVideoThumbnailUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/room/hackescher-markt-curve-thumb.jpg"
   }
 ]
