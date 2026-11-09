@@ -83,6 +83,7 @@
   const ROOM_VIDEOS = {
   "berliner-mauer-cyclist": "The Berliner Mauer print",
   "berlin-market-halls": "The Markthallen print",
+  "leipziger-platz-octagon": "The Leipziger Platz print",
   "kottbusser-tor": "Kottbusser Tor",
   "mehringplatz": "Mehringplatz",
   "strausberger-platz": "Strausberger Platz",
