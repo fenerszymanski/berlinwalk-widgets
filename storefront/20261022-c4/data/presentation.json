@@ -1720,5 +1720,52 @@
         "alt": "The complete Markthallen artwork with all fourteen halls and the title, without cropping."
       }
     ]
+  },
+  {
+    "id": "pr-leipziger-platz-octagon",
+    "name": "Leipziger Platz",
+    "place": "Mitte · The octagon",
+    "image": "leipziger-platz-fullart.jpg",
+    "alt": "Leipziger Platz from above as an octagon in dark petrol, ochre, rust red and sand, with three cranes on the lawns. Leipziger Platz Berlin appears below.",
+    "typeLine": "PREMIUM MATTE · 200 GSM · UNFRAMED",
+    "wixProductId": "b35df559-a0f9-407c-859a-ca2a4176b6df",
+    "group": "landmarks",
+    "alternativeProductId": "fe9bbb4c-5c9d-7984-787e-ce02a29adeb4",
+    "visualCreditsHtml": "<p>Artwork made for Walk of Berlin from my own concept sketch, then rebuilt as a clean vector print master with the same layout, colours and texture. The concept sketch was made with the built-in ImageGen tool in OpenAI Codex; the print master was drawn as vector geometry by script and contains no third-party images. It is a stylised illustration, not a measured map, and it does not show the course of the Berlin Wall.</p><p>Shape check: the octagon of the square and the two openings of its ring (east and west) were checked against official cadastral data, Geoportal Berlin / Senatsverwaltung für Stadtentwicklung, Bauen und Wohnen, ALKIS Berlin, under <a href=\"https://www.govdata.de/dl-de/zero-2-0\" target=\"_blank\" rel=\"noopener\">Datenlizenz Deutschland – Zero – Version 2.0</a>. The era layers (the older block line, the 1945 ruins, the building site after 1990) are symbolic; their pieces are not placed to scale.</p><p>Lettering: Space Grotesk by Florian Karsten, <a href=\"https://openfontlicense.org\" target=\"_blank\" rel=\"noopener\">SIL Open Font License 1.1</a>.</p>",
+    "sizeImages": {
+      "30x40 cm": "leipziger-platz-30x40.jpg",
+      "50x70 cm": "leipziger-platz-50x70.jpg"
+    },
+    "gallery": [
+      {
+        "image": "leipziger-platz-fullart.jpg",
+        "alt": "The complete Leipziger Platz artwork and title, without cropping."
+      }
+    ]
+  },
+  {
+    "id": "dl-leipziger-platz-octagon",
+    "name": "Leipziger Platz Printable Poster",
+    "place": "Mitte · The octagon",
+    "image": "leipziger-platz-fullart.jpg",
+    "alt": "Leipziger Platz from above as an octagon in dark petrol, ochre, rust red and sand, with three cranes on the lawns. Leipziger Platz Berlin appears below.",
+    "typeLine": "DIGITAL DOWNLOAD · 30 × 40 & 50 × 70 CM",
+    "wixProductId": "fe9bbb4c-5c9d-7984-787e-ce02a29adeb4",
+    "kind": "digital",
+    "deliveryNote": "Digital download · 2 JPEG print files and a printing guide. No physical item.",
+    "deliveryDetails": "Your download includes 30 × 40 cm and 50 × 70 cm sRGB JPEG files at 300 dpi and a printing guide. The 50 × 70 cm file is composed for that size. No physical poster, frame or decor is included.",
+    "group": "landmarks",
+    "alternativeProductId": "b35df559-a0f9-407c-859a-ca2a4176b6df",
+    "visualCreditsHtml": "<p>Artwork made for Walk of Berlin from my own concept sketch, then rebuilt as a clean vector print master with the same layout, colours and texture. The concept sketch was made with the built-in ImageGen tool in OpenAI Codex; the print master was drawn as vector geometry by script and contains no third-party images. It is a stylised illustration, not a measured map, and it does not show the course of the Berlin Wall.</p><p>Shape check: the octagon of the square and the two openings of its ring (east and west) were checked against official cadastral data, Geoportal Berlin / Senatsverwaltung für Stadtentwicklung, Bauen und Wohnen, ALKIS Berlin, under <a href=\"https://www.govdata.de/dl-de/zero-2-0\" target=\"_blank\" rel=\"noopener\">Datenlizenz Deutschland – Zero – Version 2.0</a>. The era layers (the older block line, the 1945 ruins, the building site after 1990) are symbolic; their pieces are not placed to scale.</p><p>Lettering: Space Grotesk by Florian Karsten, <a href=\"https://openfontlicense.org\" target=\"_blank\" rel=\"noopener\">SIL Open Font License 1.1</a>.</p>",
+    "sizeImages": {
+      "30x40 cm": "leipziger-platz-30x40.jpg",
+      "50x70 cm": "leipziger-platz-50x70.jpg"
+    },
+    "gallery": [
+      {
+        "image": "leipziger-platz-fullart.jpg",
+        "alt": "The complete Leipziger Platz artwork and title, without cropping."
+      }
+    ]
   }
 ]
