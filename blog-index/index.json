@@ -1,9 +1,9 @@
 {
-  "updatedAt": "2026-11-09T03:09:11.912Z",
+  "updatedAt": "2026-11-09T12:09:38.275Z",
   "source": "Wix Blog API",
   "popularSource": "Wix Blog metrics.views lifetime sort",
-  "totalPosts": 454,
-  "toolsTotal": 380,
+  "totalPosts": 455,
+  "toolsTotal": 381,
   "bookingUrl": "https://www.walkofberlin.com/book-berlin-walking-tour/berlin-then-and-now",
   "navTopics": [
     {
@@ -1594,7 +1594,7 @@
           "categorySlug": "tourist-tips",
           "topic": "when-to-visit",
           "topicLabel": "Month-by-Month Berlin",
-          "readTime": "7 min read",
+          "readTime": "8 min read",
           "publishedDate": "2026-05-31T20:09:44.273Z",
           "image": "https://static.wixstatic.com/media/5a08a3_bf186ed4dbf14a3eaa2b08ec82747805~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-hero-foggy-berlin-street.jpg",
           "thumb": "https://static.wixstatic.com/media/5a08a3_bf186ed4dbf14a3eaa2b08ec82747805~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-hero-foggy-berlin-street.jpg",
@@ -1802,6 +1802,23 @@
   ],
   "latest": [
     {
+      "title": "Where to See the Berlin TV Tower: Free Views Beyond Mitte",
+      "slug": "where-to-see-the-berlin-tv-tower",
+      "path": "/post/where-to-see-the-berlin-tv-tower",
+      "url": "https://www.berlinwalk.com/post/where-to-see-the-berlin-tv-tower",
+      "excerpt": "The TV Tower keeps showing up at the end of Berlin streets. These free viewpoints outside Mitte line it up with an avenue, a river or a hill, and each needs its own hour.",
+      "category": "Tourist Tips",
+      "categorySlug": "tourist-tips",
+      "topic": "free-budget",
+      "topicLabel": "Free & Budget",
+      "readTime": "8 min read",
+      "publishedDate": "2026-11-09T12:07:13.524Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_ab8fcb7342f2463a89dabe27e7ef19d3~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_ab8fcb7342f2463a89dabe27e7ef19d3~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover.jpg",
+      "alt": "Karl-Marx-Allee running straight west between GDR apartment blocks and old street lamps, with the Berlin TV Tower standing at the end of the road under evening clouds",
+      "relatedToolSlug": "tv-tower-sightline-map"
+    },
+    {
       "title": "Berlin Address Books: How to Find Out Who Lived in Your Building",
       "slug": "berlin-address-books",
       "path": "/post/berlin-address-books",
@@ -1987,23 +2004,6 @@
       "thumb": "https://static.wixstatic.com/media/5a08a3_84e870aa83c842e3b36932d48ca23d17~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-gendarmenmarkt-christmas-market-dusk.jpg",
       "alt": "The lit Christmas tree and the domed tower of the cathedral on Gendarmenmarkt against a violet evening sky",
       "relatedToolSlug": "berlin-christmas-opening-chart"
-    },
-    {
-      "title": "Out-of-Hours Doctor in Berlin: Which On-Call Practice Opens When Yours Is Shut",
-      "slug": "out-of-hours-doctor-berlin",
-      "path": "/post/out-of-hours-doctor-berlin",
-      "url": "https://www.berlinwalk.com/post/out-of-hours-doctor-berlin",
-      "excerpt": "Berlin's on-call practices do not open on a weekday evening. The eleven KV practices, their winter hours until 21:00, which ones treat children, and why from Monday to Thursday the number to call is 116117.",
-      "category": "Living in Berlin",
-      "categorySlug": "living-in-berlin",
-      "topic": "living-in-berlin",
-      "topicLabel": "Living in Berlin",
-      "readTime": "6 min read",
-      "publishedDate": "2026-10-24T08:42:52.127Z",
-      "image": "https://static.wixstatic.com/media/5a08a3_0bf8b903d225414ba66823ac7e8fb7c1~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-emergency-entrance-night.jpg",
-      "thumb": "https://static.wixstatic.com/media/5a08a3_0bf8b903d225414ba66823ac7e8fb7c1~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-emergency-entrance-night.jpg",
-      "alt": "The lit emergency department entrance of a Berlin hospital at night, with the sign Emergency Zentrale Notaufnahme above the doors",
-      "relatedToolSlug": "berlin-on-call-practice-map"
     }
   ]
 }

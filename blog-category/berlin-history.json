@@ -1,5 +1,5 @@
 {
- "updatedAt": "2026-11-08T10:29:29.133Z",
+ "updatedAt": "2026-11-09T12:09:47.998Z",
  "source": "Wix Blog API + blog-category/categories.json",
  "slug": "berlin-history",
  "categoryId": "5f58da11-347d-43f0-b3c3-2cb1cdeb7a79",
@@ -9,7 +9,7 @@
  "shelfLegend": "Where the story is standing",
  "shelfLegendSub": "Grouped by the kind of ground it covers",
  "totalPosts": 61,
- "toolCount": 55,
+ "toolCount": 56,
  "lead": {
   "title": "Berlin Address Books: How to Find Out Who Lived in Your Building",
   "slug": "berlin-address-books",
@@ -29,7 +29,7 @@
   "term": "",
   "gloss": "",
   "termCta": "",
-  "tool": ""
+  "tool": "berlin-house-history-finder"
  },
  "glossary": [],
  "shelves": [
@@ -656,7 +656,8 @@
      "minutes": 6,
      "alt": "A row of restored late-19th-century Berlin apartment houses with ornamented stucco facades in pastel green and pink under a blue sky",
      "thumb": "https://static.wixstatic.com/media/5a08a3_b4a52551ebb14c7eae1cab8b533e5031~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
-     "line": "Who lived in your flat in 1910? In Berlin you can usually find out, much of it free online."
+     "line": "Who lived in your flat in 1910? In Berlin you can usually find out, much of it free online.",
+     "tool": "berlin-house-history-finder"
     },
     {
      "title": "What to Eat in Berlin: 12 Must-Try Local Foods",
