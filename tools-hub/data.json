@@ -11562,6 +11562,37 @@
       ],
       "iconStatus": "live-wix-media",
       "image": "https://static.wixstatic.com/media/5a08a3_41d14d65e58f473b9166ef8786d312a4~mv2.png"
+    },
+    {
+      "slug": "tv-tower-sightline-map",
+      "title": "TV Tower Sightline Map",
+      "lead": "Pick a date and a time and see which free views of the Berlin TV Tower outside Mitte are lit from the front, which are backlit, and how big the tower looks from each one.",
+      "category": "Maps",
+      "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/tv-tower-sightline-map/",
+      "embedHeight": 2700,
+      "hubCategory": "CultureLandmarks",
+      "type": "Map",
+      "priority": 3,
+      "tags": [
+        "tv tower",
+        "fernsehturm",
+        "berlin views",
+        "photo spots",
+        "sunset",
+        "karl-marx-allee",
+        "tempelhofer feld"
+      ],
+      "aliases": [
+        "where to see the berlin tv tower",
+        "best view of the tv tower",
+        "fernsehturm photo spot",
+        "tv tower sunset berlin",
+        "berlin skyline view free",
+        "molecule man tv tower photo",
+        "tv tower from karl marx allee"
+      ],
+      "iconStatus": "live-wix-media",
+      "image": "https://static.wixstatic.com/media/5a08a3_abbf76ef400f444681d9cc4b4238a387~mv2.png"
     }
   ],
   "hubCategories": [

@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TV Tower Sightline Map: Where and When the Berlin TV Tower Looks Best</title>
+<link rel="stylesheet" href="../css/brand.css">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { overflow-x: hidden; }
+  body { font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #FFFFFF; color: #1f1c17; padding: 12px; }
+  .ts { border-radius: 16px; overflow: hidden; border: 1px solid #d9d2c3; background: #fbf8ef; }
+  .ts-head { padding: 18px 18px 12px; }
+  .ts-kick { display: inline-block; font-size: 10.5px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; color: #123D18; background: #FFE600; padding: 3px 8px; border-radius: 4px; }
+  .ts-head h1 { font-family: 'Merriweather', Georgia, serif; font-size: 21px; line-height: 1.3; margin-top: 9px; }
+  .ts-head p { font-size: 13px; line-height: 1.6; color: #4a443a; margin-top: 7px; max-width: 780px; }
+
+  .ts-clock { margin: 0 12px; padding: 12px 14px 10px; background: #ffffff; border: 1px solid #e6dfd0; border-radius: 12px; }
+  .ts-clock-top { display: flex; flex-wrap: wrap; align-items: flex-end; gap: 10px 18px; }
+  .ts-time { font-family: 'Merriweather', Georgia, serif; font-size: 34px; font-weight: 700; color: #1B5E20; line-height: 1; min-width: 104px; }
+  .ts-sun { font-size: 12px; line-height: 1.45; color: #4a443a; flex: 1 1 220px; }
+  .ts-sun b { color: #1f1c17; }
+  .ts-date label { display: block; font-size: 10.5px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: #6b6353; margin-bottom: 4px; }
+  .ts-date input { font-family: inherit; font-size: 14px; font-weight: 700; padding: 6px 8px; border: 2px solid #1B5E20; border-radius: 10px; color: #123D18; background: #fff; max-width: 170px; }
+  .ts-track { margin-top: 10px; position: relative; border-radius: 10px; outline: none; }
+  .ts-track:focus-visible { box-shadow: 0 0 0 3px #FFE600, 0 0 0 5px #1B5E20; }
+  .ts-track svg { display: block; width: 100%; height: 78px; touch-action: pan-y; cursor: ew-resize; }
+  .ts-jump { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+  .ts-jump button { font-family: inherit; font-size: 11.5px; font-weight: 800; padding: 6px 10px; border-radius: 999px; border: 1.5px solid #1B5E20; background: #fff; color: #1B5E20; cursor: pointer; }
+  .ts-jump button:hover, .ts-jump button:focus-visible { background: #FFE600; color: #123D18; outline: none; }
+  .ts-hint { font-size: 11px; color: #6b6353; margin-top: 6px; }
+
+  .ts-main { display: grid; grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr); gap: 12px; padding: 12px; }
+  .ts-mapbox { min-width: 0; display: flex; flex-direction: column; }
+  #map { height: 320px; flex: 1 0 auto; min-height: 320px; max-height: 760px; border-radius: 12px; border: 1px solid #e6dfd0; background: #e9e4d6; z-index: 0; }
+  .ts-legend { flex: 0 0 auto; display: flex; flex-wrap: wrap; gap: 6px 12px; margin-top: 8px; font-size: 11px; color: #3a352c; }
+  .ts-legend span { display: inline-flex; align-items: center; gap: 5px; }
+  .ts-legend i { display: inline-block; width: 22px; height: 0; border-top: 4px solid; border-radius: 2px; }
+  .ts-side { min-width: 0; display: flex; flex-direction: column; gap: 12px; }
+  .ts-side .ts-card { flex: 1 0 auto; }
+  .ts-mapbox .ts-phone { margin-top: 12px; flex: 0 0 auto; }
+  .ts-phone { background: #ffffff; border: 1px solid #e6dfd0; border-radius: 12px; padding: 12px; display: grid; grid-template-columns: 132px minmax(0, 1fr); gap: 12px; align-items: start; }
+  .ts-phone svg { width: 132px; height: auto; display: block; }
+  .ts-phone h2, .ts-card h2 { font-size: 10.5px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: #6b6353; }
+  .ts-phone .big { font-family: 'Merriweather', Georgia, serif; font-size: 26px; font-weight: 700; color: #1B5E20; margin-top: 4px; line-height: 1.1; }
+  .ts-phone p { font-size: 12px; line-height: 1.5; color: #3a352c; margin-top: 6px; }
+  .ts-zoom { display: inline-flex; margin-top: 8px; border: 2px solid #1B5E20; border-radius: 999px; overflow: hidden; }
+  .ts-zoom button { font-family: inherit; font-size: 12px; font-weight: 800; padding: 5px 9px; border: 0; background: #fff; color: #1B5E20; cursor: pointer; }
+  .ts-zoom button[aria-pressed=true] { background: #FFE600; color: #123D18; }
+  .ts-zoom button:focus-visible { outline: 2px solid #123D18; outline-offset: -3px; }
+  .ts-card { background: #ffffff; border: 1px solid #e6dfd0; border-radius: 12px; padding: 13px 14px; }
+  .ts-card h3 { font-size: 16px; line-height: 1.35; margin-top: 4px; }
+  .ts-light { display: inline-block; margin-top: 8px; font-size: 11.5px; font-weight: 800; padding: 4px 10px; border-radius: 999px; }
+  .ts-nums { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px; margin-top: 10px; }
+  .ts-nums div { background: #f4f0e4; border-radius: 8px; padding: 7px 8px; }
+  .ts-nums b { display: block; font-size: 15px; color: #123D18; }
+  .ts-nums small { font-size: 10px; font-weight: 700; color: #6b6353; text-transform: uppercase; letter-spacing: .05em; }
+  .ts-card dl { margin-top: 10px; display: grid; gap: 7px; }
+  .ts-card dt { font-size: 10px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: #6b6353; }
+  .ts-card dd { font-size: 12.6px; line-height: 1.5; color: #2f2a22; }
+  .ts-card .now { margin-top: 10px; padding: 8px 10px; border-radius: 8px; background: #fff7b8; color: #123D18; font-size: 12.5px; line-height: 1.5; }
+  .ts-card .chk { margin-top: 8px; font-size: 10.5px; color: #6b6353; }
+
+  .ts-rail { list-style: none; display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 8px; padding: 0 12px 12px; }
+  .ts-rail button { width: 100%; text-align: left; font-family: inherit; cursor: pointer; background: #ffffff; border: 1.5px solid #e0d8c6; border-radius: 10px; padding: 8px 10px; display: grid; grid-template-columns: 1fr auto; gap: 2px 8px; align-items: center; color: #1f1c17; }
+  .ts-rail button[aria-pressed=true] { border-color: #1B5E20; box-shadow: inset 0 0 0 1px #1B5E20; background: #fffbe0; }
+  .ts-rail button:focus-visible { outline: 3px solid #FFE600; outline-offset: 1px; }
+  .ts-rail .n { font-size: 12.5px; font-weight: 800; }
+  .ts-rail .d { font-size: 11px; color: #6b6353; }
+  .ts-rail .b { grid-row: 1 / span 2; grid-column: 2; font-size: 10.5px; font-weight: 800; padding: 3px 7px; border-radius: 999px; white-space: nowrap; }
+  .ts-foot { padding: 0 18px 14px; font-size: 10.5px; line-height: 1.55; color: #6b6353; }
+
+  .lt-front { background: #1B5E20; color: #ffffff; }
+  .lt-side { background: #FFE600; color: #123D18; }
+  .lt-back { background: #2a2622; color: #ffffff; }
+  .lt-blue { background: #2f4f8f; color: #ffffff; }
+  .lt-night { background: #d9d3c4; color: #2a2622; }
+
+  .leaflet-container { font-family: 'Montserrat', sans-serif; }
+  .ts-pin { background: #FFE600; border: 2px solid #123D18; border-radius: 50%; }
+
+  @media (max-width: 760px) {
+    .ts-main { grid-template-columns: minmax(0, 1fr); }
+    #map { height: 330px; flex: 0 0 auto; min-height: 330px; max-height: none; }
+  }
+  @media (max-width: 420px) {
+    body { padding: 6px; }
+    .ts-head { padding: 14px 14px 10px; }
+    .ts-head h1 { font-size: 18px; }
+    .ts-time { font-size: 28px; min-width: 88px; }
+    .ts-phone { grid-template-columns: 108px minmax(0, 1fr); }
+    .ts-phone svg { width: 108px; }
+    .ts-rail { grid-template-columns: minmax(0, 1fr); }
+  }
+</style>
+</head>
+<body>
+<div class="ts">
+  <div class="ts-head">
+    <span class="ts-kick">TV Tower sightlines</span>
+    <h1>Pick a view and an hour. See how the tower will look from there.</h1>
+    <p>Each line on the map runs from a free spot outside Mitte to the TV Tower. Drag the sun across the day and the lines change colour: green means the sun is behind you and lights the tower, black means you look into the sun and get a silhouette. The phone frame shows how big the tower really comes out from the spot you pick.</p>
+  </div>
+
+  <div class="ts-clock">
+    <div class="ts-clock-top">
+      <div class="ts-time" id="tLabel">16:00</div>
+      <div class="ts-sun" id="sunLine"></div>
+      <div class="ts-date"><label for="day">Day</label><input type="date" id="day" min="2026-01-01" max="2028-12-31"></div>
+    </div>
+    <div class="ts-track" id="track" role="slider" tabindex="0" aria-label="Time of day in Berlin" aria-valuemin="0" aria-valuemax="1439" aria-valuenow="960">
+      <svg id="trackSvg" aria-hidden="true"></svg>
+    </div>
+    <div class="ts-jump" id="jump">
+      <button type="button" data-j="rise">Sunrise</button>
+      <button type="button" data-j="noon">Highest sun</button>
+      <button type="button" data-j="gold">Hour before sunset</button>
+      <button type="button" data-j="set">Sunset</button>
+      <button type="button" data-j="blue">Blue hour</button>
+    </div>
+    <div class="ts-hint">Drag along the sun curve, or focus it and use the arrow keys (10 minutes; Page Up and Page Down for an hour).</div>
+  </div>
+
+  <div class="ts-main">
+    <div class="ts-mapbox">
+      <div id="map" role="region" aria-label="Map of TV Tower viewpoints with sightlines"></div>
+      <div class="ts-legend">
+        <span><i style="border-color:#1B5E20"></i>Front-lit</span>
+        <span><i style="border-color:#E0B800"></i>Side-lit</span>
+        <span><i style="border-color:#2a2622"></i>Backlit, silhouette</span>
+        <span><i style="border-color:#2f4f8f"></i>Blue hour</span>
+        <span><i style="border-color:#9a9384"></i>Dark, tower lit up</span>
+        <span><i style="border-color:#7a3412;border-top-style:dashed"></i>Paid entry</span>
+      </div>
+      <div class="ts-phone">
+        <svg id="phone" viewBox="0 0 150 230" role="img" aria-label="Phone frame preview"></svg>
+        <div>
+          <h2>In your phone</h2>
+          <div class="big" id="phBig">20%</div>
+          <p id="phTxt"></p>
+          <div class="ts-zoom" role="group" aria-label="Camera zoom">
+            <button type="button" data-z="1" aria-pressed="true">1x</button>
+            <button type="button" data-z="2" aria-pressed="false">2x</button>
+            <button type="button" data-z="3" aria-pressed="false">3x</button>
+            <button type="button" data-z="5" aria-pressed="false">5x</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="ts-side">
+      <div class="ts-card" id="card" aria-live="polite"></div>
+    </div>
+  </div>
+
+  <ul class="ts-rail" id="rail" aria-label="Viewpoints"></ul>
+
+  <div class="ts-foot">How this works: distance and bearing are calculated from OpenStreetMap coordinates to the tower base; apparent height is atan(368 m / distance) and ignores hills and eye height. Sun position uses the NOAA approximation for Berlin, accurate to about two minutes. The phone frame assumes a level phone in portrait with a 26 mm equivalent main camera. Teufelsberg prices and hours and Tempelhofer Feld gate times are from the official sites. Checked on 9 November 2026.</div>
+</div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+<script src="data.js"></script>
+<script>
+(function () {
+  var D = window.TV_SIGHTLINES, T = D.tower, VP = D.viewpoints;
+  var RAD = Math.PI / 180, DEG = 180 / Math.PI;
+  var LIGHT = {
+    front: { label: 'Front-lit', line: '#1B5E20', cls: 'lt-front' },
+    side: { label: 'Side-lit', line: '#E0B800', cls: 'lt-side' },
+    back: { label: 'Backlit', line: '#2a2622', cls: 'lt-back' },
+    blue: { label: 'Blue hour', line: '#2f4f8f', cls: 'lt-blue' },
+    night: { label: 'Dark', line: '#9a9384', cls: 'lt-night' }
+  };
+  var COMPASS = ['N', 'NNE', 'NE', 'ENE', 'E', 'ESE', 'SE', 'SSE', 'S', 'SSW', 'SW', 'WSW', 'W', 'WNW', 'NW', 'NNW'];
+  function compass(a) { return COMPASS[Math.round(((a % 360) + 360) % 360 / 22.5) % 16]; }
+  function pad(n) { return (n < 10 ? '0' : '') + n; }
+  function hm(m) { m = Math.round(m); m = ((m % 1440) + 1440) % 1440; return pad(Math.floor(m / 60)) + ':' + pad(m % 60); }
+
+  /* geometry */
+  function haversine(a, b, c, d) {
+    var R = 6371008.8, p1 = a * RAD, p2 = c * RAD, dp = (c - a) * RAD, dl = (d - b) * RAD;
+    var h = Math.sin(dp / 2) * Math.sin(dp / 2) + Math.cos(p1) * Math.cos(p2) * Math.sin(dl / 2) * Math.sin(dl / 2);
+    return 2 * R * Math.asin(Math.sqrt(h));
+  }
+  function bearing(a, b, c, d) {
+    var p1 = a * RAD, p2 = c * RAD, dl = (d - b) * RAD;
+    var y = Math.sin(dl) * Math.cos(p2), x = Math.cos(p1) * Math.sin(p2) - Math.sin(p1) * Math.cos(p2) * Math.cos(dl);
+    return (Math.atan2(y, x) * DEG + 360) % 360;
+  }
+  function offsetPoint(lat, lon, brg, dist) {
+    var R = 6371008.8, d = dist / R, p1 = lat * RAD, l1 = lon * RAD, t = brg * RAD;
+    var p2 = Math.asin(Math.sin(p1) * Math.cos(d) + Math.cos(p1) * Math.sin(d) * Math.cos(t));
+    var l2 = l1 + Math.atan2(Math.sin(t) * Math.sin(d) * Math.cos(p1), Math.cos(d) - Math.sin(p1) * Math.sin(p2));
+    return [p2 * DEG, l2 * DEG];
+  }
+  VP.forEach(function (v) {
+    v.dist = haversine(v.lat, v.lon, T.lat, T.lon);
+    v.brg = bearing(v.lat, v.lon, T.lat, T.lon);
+    v.app = Math.atan(T.height / v.dist) * DEG;
+  });
+
+  /* sun position, NOAA approximation */
+  function sun(ms, lat, lon) {
+    var jd = ms / 864e5 + 2440587.5, t = (jd - 2451545) / 36525;
+    var L0 = (280.46646 + t * (36000.76983 + t * 0.0003032)) % 360;
+    var M = 357.52911 + t * (35999.05029 - 0.0001537 * t);
+    var e = 0.016708634 - t * (0.000042037 + 0.0000001267 * t);
+    var Mr = M * RAD;
+    var C = Math.sin(Mr) * (1.914602 - t * (0.004817 + 0.000014 * t)) + Math.sin(2 * Mr) * (0.019993 - 0.000101 * t) + Math.sin(3 * Mr) * 0.000289;
+    var om = (125.04 - 1934.136 * t) * RAD;
+    var lam = (L0 + C - 0.00569 - 0.00478 * Math.sin(om)) * RAD;
+    var eps0 = 23 + (26 + (21.448 - t * (46.815 + t * (0.00059 - t * 0.001813))) / 60) / 60;
+    var eps = (eps0 + 0.00256 * Math.cos(om)) * RAD;
+    var dec = Math.asin(Math.sin(eps) * Math.sin(lam));
+    var y = Math.pow(Math.tan(eps / 2), 2), L0r = L0 * RAD;
+    var eot = 4 * DEG * (y * Math.sin(2 * L0r) - 2 * e * Math.sin(Mr) + 4 * e * y * Math.sin(Mr) * Math.cos(2 * L0r) - 0.5 * y * y * Math.sin(4 * L0r) - 1.25 * e * e * Math.sin(2 * Mr));
+    var mins = ((ms % 864e5) + 864e5) % 864e5 / 6e4;
+    var tst = ((mins + eot + 4 * lon) % 1440 + 1440) % 1440;
+    var ha = (tst / 4 - 180) * RAD, la = lat * RAD;
+    var cz = Math.sin(la) * Math.sin(dec) + Math.cos(la) * Math.cos(dec) * Math.cos(ha);
+    var zen = Math.acos(Math.max(-1, Math.min(1, cz)));
+    var az = (Math.atan2(Math.sin(ha), Math.cos(ha) * Math.sin(la) - Math.tan(dec) * Math.cos(la)) * DEG + 180) % 360;
+    return { alt: 90 - zen * DEG, az: az };
+  }
+  /* Berlin local time to UTC: CET, CEST from the last Sunday of March to the last Sunday of October (01:00 UTC) */
+  function lastSunday(y, m) { var d = new Date(Date.UTC(y, m + 1, 0)); return Date.UTC(y, m, d.getUTCDate() - d.getUTCDay(), 1); }
+  function berlinMs(ymd, mins) {
+    var base = Date.UTC(ymd[0], ymd[1] - 1, ymd[2]) + mins * 6e4;
+    var guess = base - 36e5, s = lastSunday(ymd[0], 2), e = lastSunday(ymd[0], 9);
+    var dst = guess >= s && guess < e;
+    return base - (dst ? 72e5 : 36e5);
+  }
+
+  var state = { ymd: null, min: 960, sel: VP[0].id, zoom: 1, day: null };
+
+  function todayBerlin() {
+    try {
+      var p = new Intl.DateTimeFormat('en-CA', { timeZone: 'Europe/Berlin', year: 'numeric', month: '2-digit', day: '2-digit' }).format(new Date());
+      var m = p.match(/(\d{4})-(\d{2})-(\d{2})/); if (m) return [+m[1], +m[2], +m[3]];
+    } catch (err) { /* fall through */ }
+    var n = new Date(); return [n.getFullYear(), n.getMonth() + 1, n.getDate()];
+  }
+
+  function computeDay() {
+    var alts = [], rise = null, set = null, noon = 0, best = -99, b2 = null, prev = null;
+    for (var m = 0; m < 1440; m += 1) {
+      var s = sun(berlinMs(state.ymd, m), 52.5200, 13.4050);
+      if (m % 5 === 0) alts[m / 5] = s.alt;
+      if (s.alt > best) { best = s.alt; noon = m; }
+      if (prev !== null) {
+        if (prev < -0.833 && s.alt >= -0.833 && rise === null) rise = m;
+        if (prev >= -0.833 && s.alt < -0.833) set = m - 1;
+        if (prev >= -6 && s.alt < -6 && b2 === null && set !== null) b2 = m;
+      }
+      prev = s.alt;
+    }
+    state.day = { alts: alts, rise: rise, set: set, noon: noon, noonAlt: best, blueEnd: b2 };
+  }
+
+  function lightFor(v, s) {
+    if (s.alt < -6) return 'night';
+    if (s.alt < -0.833) return 'blue';
+    var d = Math.abs(((s.az - v.brg) % 360 + 540) % 360 - 180);
+    if (d <= 40) return 'back';
+    if (d >= 110) return 'front';
+    return 'side';
+  }
+  function sideOf(v, s) {
+    var d = ((s.az - v.brg) % 360 + 540) % 360 - 180;
+    return { deg: Math.abs(d), dir: d < 0 ? 'left' : 'right' };
+  }
+
+  /* map */
+  var map = L.map('map', { scrollWheelZoom: false, zoomSnap: 0.25, attributionControl: true });
+  L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 18,
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a> contributors'
+  }).addTo(map);
+  var allBounds = L.latLngBounds([[T.lat, T.lon]].concat(VP.map(function (v) { return [v.lat, v.lon]; })));
+  var lastFit = { b: allBounds, o: { padding: [18, 18] } };
+  function fitTo(b, o) { lastFit = { b: b, o: o }; map.fitBounds(b, o); }
+  fitTo(allBounds, { padding: [18, 18] });
+  var lines = {}, dots = {};
+  VP.forEach(function (v) {
+    lines[v.id] = L.polyline([[v.lat, v.lon], [T.lat, T.lon]], { weight: 4, opacity: 0.9, dashArray: v.cost === 'paid' ? '7 6' : null, interactive: true }).addTo(map);
+    dots[v.id] = L.circleMarker([v.lat, v.lon], { radius: 7, weight: 2.5, color: '#123D18', fillColor: '#ffffff', fillOpacity: 1 }).addTo(map);
+    dots[v.id].bindTooltip(v.short, { direction: 'top', offset: [0, -6] });
+    [lines[v.id], dots[v.id]].forEach(function (layer) { layer.on('click', function () { select(v.id, true); }); });
+  });
+  var sunRay = L.polyline([[T.lat, T.lon], [T.lat, T.lon]], { color: '#C9A400', weight: 3, dashArray: '2 7', lineCap: 'round', interactive: false }).addTo(map);
+  var sunDot = L.circleMarker([T.lat, T.lon], { radius: 6, weight: 2, color: '#123D18', fillColor: '#FFE600', fillOpacity: 1, interactive: false }).addTo(map);
+  var towerIcon = L.divIcon({ className: 'ts-pin', iconSize: [16, 16] });
+  L.marker([T.lat, T.lon], { icon: towerIcon, keyboard: false, title: 'TV Tower' }).addTo(map).bindTooltip('TV Tower', { permanent: false, direction: 'top' });
+
+  /* sun track */
+  var track = document.getElementById('track'), tsvg = document.getElementById('trackSvg');
+  var NS = 'http://www.w3.org/2000/svg';
+  function el(tag, attrs, parent) { var n = document.createElementNS(NS, tag); for (var k in attrs) n.setAttribute(k, attrs[k]); if (parent) parent.appendChild(n); return n; }
+  var trackGeo = { w: 600, h: 78, padL: 8, padR: 8 };
+  function tx(m) { return trackGeo.padL + m / 1440 * (trackGeo.w - trackGeo.padL - trackGeo.padR); }
+  function ty(alt) { var top = 8, bot = 56, a = Math.max(-18, Math.min(64, alt)); return bot - (a + 18) / 82 * (bot - top); }
+  function drawTrack() {
+    var w = Math.max(240, Math.round(track.clientWidth || 600)); trackGeo.w = w;
+    tsvg.setAttribute('viewBox', '0 0 ' + w + ' ' + trackGeo.h);
+    tsvg.textContent = '';
+    var dd = state.day, hz = ty(0);
+    el('rect', { x: tx(0), y: 6, width: tx(1440) - tx(0), height: 52, rx: 8, fill: '#26324d' }, tsvg);
+    if (dd.rise !== null && dd.set !== null) {
+      el('rect', { x: tx(dd.set), y: 6, width: Math.max(0, tx(dd.blueEnd || dd.set + 40) - tx(dd.set)), height: 52, fill: '#3d5a99' }, tsvg);
+      el('rect', { x: tx(dd.rise), y: 6, width: tx(dd.set) - tx(dd.rise), height: 52, fill: '#f6efd6' }, tsvg);
+    }
+    el('line', { x1: tx(0), x2: tx(1440), y1: hz, y2: hz, stroke: '#9a9384', 'stroke-width': 1, 'stroke-dasharray': '3 3' }, tsvg);
+    var d = '';
+    dd.alts.forEach(function (a, i) { d += (i ? 'L' : 'M') + tx(i * 5).toFixed(1) + ' ' + ty(a).toFixed(1); });
+    el('path', { d: d, fill: 'none', stroke: '#C9A400', 'stroke-width': 2.5 }, tsvg);
+    for (var h = 0; h <= 24; h += 3) {
+      var x = tx(h * 60);
+      el('line', { x1: x, x2: x, y1: 58, y2: 62, stroke: '#6b6353' }, tsvg);
+      var t = el('text', { x: Math.min(w - 14, Math.max(12, x)), y: 74, 'text-anchor': 'middle', 'font-size': 10, 'font-weight': 700, fill: '#6b6353', 'font-family': 'Montserrat, sans-serif' }, tsvg);
+      t.textContent = pad(h % 24);
+    }
+    var cx = tx(state.min), s = sun(berlinMs(state.ymd, state.min), 52.52, 13.405);
+    el('line', { x1: cx, x2: cx, y1: 4, y2: 60, stroke: '#123D18', 'stroke-width': 2 }, tsvg);
+    el('circle', { cx: cx, cy: ty(s.alt), r: 8, fill: '#FFE600', stroke: '#123D18', 'stroke-width': 2.5 }, tsvg);
+  }
+  function minFromEvent(ev) {
+    var r = tsvg.getBoundingClientRect(), x = (ev.clientX - r.left) / r.width * trackGeo.w;
+    return Math.max(0, Math.min(1439, Math.round((x - trackGeo.padL) / (trackGeo.w - trackGeo.padL - trackGeo.padR) * 1440)));
+  }
+  var dragging = false;
+  tsvg.addEventListener('pointerdown', function (ev) { dragging = true; try { tsvg.setPointerCapture(ev.pointerId); } catch (err) {} setMin(minFromEvent(ev)); track.focus({ preventScroll: true }); });
+  tsvg.addEventListener('pointermove', function (ev) { if (dragging) setMin(minFromEvent(ev)); });
+  tsvg.addEventListener('pointerup', function () { dragging = false; });
+  tsvg.addEventListener('pointercancel', function () { dragging = false; });
+  track.addEventListener('keydown', function (ev) {
+    var k = ev.key, m = state.min;
+    if (k === 'ArrowRight' || k === 'ArrowUp') m += 10;
+    else if (k === 'ArrowLeft' || k === 'ArrowDown') m -= 10;
+    else if (k === 'PageUp') m += 60;
+    else if (k === 'PageDown') m -= 60;
+    else if (k === 'Home') m = state.day.rise !== null ? state.day.rise : 0;
+    else if (k === 'End') m = state.day.set !== null ? state.day.set : 1439;
+    else return;
+    ev.preventDefault(); setMin(Math.max(0, Math.min(1439, m)));
+  });
+  document.getElementById('jump').addEventListener('click', function (ev) {
+    var b = ev.target.closest('button'); if (!b) return;
+    var dd = state.day, j = b.getAttribute('data-j');
+    if (j === 'rise' && dd.rise !== null) setMin(dd.rise);
+    if (j === 'noon') setMin(dd.noon);
+    if (j === 'gold' && dd.set !== null) setMin(dd.set - 60);
+    if (j === 'set' && dd.set !== null) setMin(dd.set);
+    if (j === 'blue' && dd.set !== null) setMin(dd.set + Math.round(((dd.blueEnd || dd.set + 40) - dd.set) / 2));
+  });
+
+  /* phone frame */
+  var phone = document.getElementById('phone');
+  function towerPath(x0, y0, k) {
+    /* metres to px; half-widths of a simplified tower profile */
+    function P(hw, h) { return [(x0 + hw * k).toFixed(2), (y0 - h * k).toFixed(2)]; }
+    var r = [[16, 0], [11, 120], [5, 196], [5, 250], [2.4, 252], [1.4, 368]];
+    var d = 'M' + P(-16, 0).join(' ');
+    r.forEach(function (p) { d += 'L' + P(p[0], p[1]).join(' '); });
+    for (var i = r.length - 1; i >= 0; i--) d += 'L' + P(-r[i][0], r[i][1]).join(' ');
+    return d + 'Z';
+  }
+  function drawPhone(v, s, lt) {
+    phone.textContent = '';
+    var W = 150, H = 230, fx = 14, fy = 14, fw = 122, fh = 162; /* 3:4 photo area */
+    el('rect', { x: 2, y: 2, width: W - 4, height: H - 4, rx: 18, fill: '#1f1c17' }, phone);
+    var sky = { front: ['#8fb6dc', '#d9e8f2'], side: ['#9fbfdc', '#f3e3c0'], back: ['#f6b25a', '#fde7a8'], blue: ['#1e3366', '#4f6fb0'], night: ['#0d1220', '#1c2540'] }[lt];
+    var gid = 'g' + lt;
+    var defs = el('defs', {}, phone), g = el('linearGradient', { id: gid, x1: 0, y1: 0, x2: 0, y2: 1 }, defs);
+    el('stop', { offset: '0', 'stop-color': sky[0] }, g); el('stop', { offset: '1', 'stop-color': sky[1] }, g);
+    var clip = el('clipPath', { id: 'pc' }, defs); el('rect', { x: fx, y: fy, width: fw, height: fh, rx: 4 }, clip);
+    var grp = el('g', { 'clip-path': 'url(#pc)' }, phone);
+    el('rect', { x: fx, y: fy, width: fw, height: fh, fill: 'url(#' + gid + ')' }, grp);
+    var f = 26 * state.zoom, halfV = Math.atan(18 / f), halfH = Math.atan(13.5 / f);
+    var hzY = fy + fh / 2, pxPerTan = (fh / 2) / Math.tan(halfV);
+    var off = ((s.az - v.brg) % 360 + 540) % 360 - 180;
+    if (s.alt > -2 && Math.abs(off) < halfH * DEG + 6) {
+      var sx = fx + fw / 2 + Math.tan(off * RAD) * pxPerTan, sy = hzY - Math.tan(Math.max(-2, s.alt) * RAD) * pxPerTan;
+      el('circle', { cx: sx, cy: sy, r: 9, fill: '#fff6c2', opacity: 0.95 }, grp);
+    }
+    var k = (T.height / v.dist) * pxPerTan / T.height;
+    var fill = { front: '#e9e3d3', side: '#bdb6a6', back: '#191714', blue: '#2b3550', night: '#232838' }[lt];
+    el('path', { d: towerPath(fx + fw / 2, hzY, k), fill: fill, stroke: lt === 'front' || lt === 'side' ? '#5b564c' : 'none', 'stroke-width': 0.5 }, grp);
+    el('circle', { cx: fx + fw / 2, cy: hzY - 212 * k, r: Math.max(0.8, 16 * k), fill: lt === 'night' || lt === 'blue' ? '#e8edf7' : (lt === 'back' ? '#191714' : '#f4f4f4'), stroke: lt === 'back' ? 'none' : '#6b6353', 'stroke-width': 0.5 }, grp);
+    el('rect', { x: fx, y: hzY, width: fw, height: fh / 2, fill: lt === 'night' || lt === 'blue' ? '#141a2c' : '#5d6b4f', opacity: 0.92 }, grp);
+    el('line', { x1: fx, x2: fx + fw, y1: hzY, y2: hzY, stroke: '#ffffff', 'stroke-width': 0.6, opacity: 0.6 }, grp);
+    el('circle', { cx: W / 2, cy: H - 26, r: 10, fill: 'none', stroke: '#6b6353', 'stroke-width': 2 }, phone);
+    var share = Math.tan(v.app * RAD) * pxPerTan / fh;
+    return { share: share, clipped: v.app > halfV * DEG };
+  }
+
+  /* render */
+  var rail = document.getElementById('rail');
+  rail.innerHTML = VP.map(function (v) {
+    return '<li><button type="button" data-id="' + v.id + '" aria-pressed="false"><span class="n">' + v.short + '</span>' +
+      '<span class="b" data-b="' + v.id + '"></span><span class="d">' + (v.dist / 1000).toFixed(1) + ' km, looking ' + compass(v.brg) + (v.cost === 'paid' ? ', paid' : ', free') + '</span></button></li>';
+  }).join('');
+  rail.addEventListener('click', function (ev) { var b = ev.target.closest('button'); if (b) select(b.getAttribute('data-id'), true); });
+  [].forEach.call(document.querySelectorAll('.ts-zoom button'), function (b) {
+    b.addEventListener('click', function () {
+      state.zoom = +b.getAttribute('data-z');
+      [].forEach.call(document.querySelectorAll('.ts-zoom button'), function (x) { x.setAttribute('aria-pressed', x === b ? 'true' : 'false'); });
+      render();
+    });
+  });
+
+  function select(id, fit) {
+    state.sel = id; render();
+    if (fit) {
+      var v = VP.filter(function (x) { return x.id === id; })[0];
+      fitTo(L.latLngBounds([[v.lat, v.lon], [T.lat, T.lon]]), { padding: [40, 40], maxZoom: 15 });
+    }
+  }
+  function setMin(m) { state.min = m; render(); }
+
+  function render() {
+    var ms = berlinMs(state.ymd, state.min), s = sun(ms, 52.52, 13.405), dd = state.day;
+    document.getElementById('tLabel').textContent = hm(state.min);
+    var sunTxt = s.alt > -0.833 ? 'Sun in the <b>' + compass(s.az) + '</b> (' + Math.round(s.az) + '°), <b>' + Math.max(0, s.alt).toFixed(0) + '°</b> above the horizon.'
+      : (s.alt > -6 ? 'Sun just below the horizon: <b>blue hour</b>.' : 'Sun down: the tower is <b>lit up</b>.');
+    document.getElementById('sunLine').innerHTML = sunTxt + '<br>This day: sunrise ' + (dd.rise !== null ? hm(dd.rise) : 'none') + ', sunset ' + (dd.set !== null ? hm(dd.set) : 'none') + ', highest ' + dd.noonAlt.toFixed(0) + '° at ' + hm(dd.noon) + '.';
+    track.setAttribute('aria-valuenow', state.min);
+    var v = VP.filter(function (x) { return x.id === state.sel; })[0];
+    var ltSel = lightFor(v, s);
+    track.setAttribute('aria-valuetext', hm(state.min) + ', ' + LIGHT[ltSel].label + ' from ' + v.short);
+    drawTrack();
+
+    VP.forEach(function (x) {
+      var lt = lightFor(x, s), on = x.id === state.sel;
+      lines[x.id].setStyle({ color: LIGHT[lt].line, weight: on ? 7 : 4, opacity: on ? 1 : 0.8 });
+      dots[x.id].setStyle({ fillColor: on ? '#FFE600' : '#ffffff', radius: on ? 9 : 7 });
+      if (on) { lines[x.id].bringToFront(); dots[x.id].bringToFront(); }
+      var b = rail.querySelector('[data-b="' + x.id + '"]');
+      b.className = 'b ' + LIGHT[lt].cls; b.textContent = LIGHT[lt].label;
+      rail.querySelector('[data-id="' + x.id + '"]').setAttribute('aria-pressed', on ? 'true' : 'false');
+    });
+    if (s.alt > -0.833) {
+      var end = offsetPoint(v.lat, v.lon, s.az, Math.max(700, v.dist * 0.45));
+      sunRay.setLatLngs([[v.lat, v.lon], end]); sunDot.setLatLng(end); sunDot.setStyle({ opacity: 1, fillOpacity: 1 }); sunRay.setStyle({ opacity: 1 });
+    } else { sunRay.setStyle({ opacity: 0 }); sunDot.setStyle({ opacity: 0, fillOpacity: 0 }); }
+
+    var ph = drawPhone(v, s, ltSel);
+    document.getElementById('phBig').textContent = ph.clipped ? 'Top cut off' : Math.max(1, Math.round(ph.share * 100)) + '% of the frame';
+    var thumbs = v.app / 2;
+    document.getElementById('phTxt').textContent = 'Phone held level in portrait at ' + state.zoom + 'x. The tower looks ' + v.app.toFixed(1) + '° tall, about ' +
+      (thumbs >= 1.5 ? Math.round(thumbs) + ' thumb widths' : thumbs >= 0.75 ? 'one thumb width' : 'half a thumb width or less') + ' at arm’s length.' + (ph.clipped ? ' Tilt the phone up or zoom out.' : '');
+    document.getElementById('phone').setAttribute('aria-label', 'Phone frame: the tower from ' + v.short + ' at ' + state.zoom + 'x, ' + LIGHT[ltSel].label.toLowerCase());
+
+    var sd = sideOf(v, s), lt = LIGHT[ltSel];
+    var nowTxt = {
+      front: 'At ' + hm(state.min) + ' the sun is behind you (' + Math.round(sd.deg) + '° from your line of sight), so the tower is lit from the front.',
+      side: 'At ' + hm(state.min) + ' the sun is ' + Math.round(sd.deg) + '° to your ' + sd.dir + ', so the tower is lit from the side and shows its shape.',
+      back: 'At ' + hm(state.min) + ' you look almost into the sun (' + Math.round(sd.deg) + '° off), so the tower turns into a dark silhouette against a bright sky.',
+      blue: 'At ' + hm(state.min) + ' the sun is just below the horizon: soft blue light and the first lights on the sphere.',
+      night: 'At ' + hm(state.min) + ' it is dark. The sphere is lit, so you still see the tower, but the street is the brighter part of the picture.'
+    }[ltSel];
+    var feet = v.cost === 'paid' ? '<span class="ts-light" style="background:#fbe8d9;color:#7a3412;margin-left:6px">Paid entry</span>' : '<span class="ts-light" style="background:#e7f2df;color:#1B5E20;margin-left:6px">Free</span>';
+    document.getElementById('card').innerHTML =
+      '<h2>' + v.district + '</h2><h3>' + v.name + '</h3>' +
+      '<span class="ts-light ' + lt.cls + '">' + lt.label + ' at ' + hm(state.min) + '</span>' + feet +
+      '<div class="ts-nums"><div><small>Distance</small><b>' + (v.dist / 1000).toFixed(1) + ' km</b></div>' +
+      '<div><small>Look</small><b>' + compass(v.brg) + ' ' + Math.round(v.brg) + '°</b></div>' +
+      '<div><small>Looks</small><b>' + v.app.toFixed(1) + '° tall</b></div></div>' +
+      '<div class="now">' + nowTxt + '</div>' +
+      '<dl><dt>What lines up</dt><dd>' + v.what + '</dd>' +
+      '<dt>Best light in November</dt><dd>' + v.best + '</dd>' +
+      '<dt>Nearest station</dt><dd>' + v.station + '</dd>' +
+      '<dt>Cost and hours</dt><dd>' + v.hours + '</dd>' +
+      '<dt>Watch out</dt><dd>' + v.caveat + '</dd></dl>' +
+      '<div class="chk">Sightline checked on ' + D.checked + '.</div>';
+  }
+
+  var dayIn = document.getElementById('day');
+  function setDay(ymd) {
+    state.ymd = ymd; computeDay();
+    dayIn.value = ymd[0] + '-' + pad(ymd[1]) + '-' + pad(ymd[2]);
+  }
+  dayIn.addEventListener('change', function () {
+    var m = (dayIn.value || '').match(/(\d{4})-(\d{2})-(\d{2})/); if (!m) return;
+    state.ymd = [+m[1], +m[2], +m[3]]; computeDay(); render();
+  });
+
+  setDay(todayBerlin());
+  state.min = state.day.set !== null ? state.day.set - 40 : 960;
+  render();
+  /* Leaflet measures its box once; re-measure whenever the box changes (grid settling, fonts, iframe resize) */
+  var mapEl = document.getElementById('map'), lastSize = '';
+  function remeasure() {
+    var r = mapEl.getBoundingClientRect(), key = Math.round(r.width) + 'x' + Math.round(r.height);
+    if (key === lastSize || r.width < 1 || r.height < 1) return;
+    lastSize = key; map.invalidateSize({ pan: false }); map.fitBounds(lastFit.b, lastFit.o);
+  }
+  if (window.ResizeObserver) new ResizeObserver(function () { window.requestAnimationFrame(remeasure); }).observe(mapEl);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(remeasure);
+  window.addEventListener('load', remeasure);
+  window.addEventListener('resize', function () { remeasure(); render(); });
+})();
+</script>
+<script src="../js/brand.js"></script>
+</body>
+</html>
