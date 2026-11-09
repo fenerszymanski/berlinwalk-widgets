@@ -82,6 +82,7 @@
   // room videos: product id (print and its printable twin) -> asset slug; value = how the video is described
   const ROOM_VIDEOS = {
   "berliner-mauer-cyclist": "The Berliner Mauer print",
+  "berlin-market-halls": "The Markthallen print",
   "kottbusser-tor": "Kottbusser Tor",
   "mehringplatz": "Mehringplatz",
   "strausberger-platz": "Strausberger Platz",

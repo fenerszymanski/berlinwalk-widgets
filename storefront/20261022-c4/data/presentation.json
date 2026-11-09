@@ -1680,7 +1680,7 @@
     "roomCaption": "Styling example · 50 × 70 cm · Print supplied unframed · Furniture and decor not included",
     "roomAlt": "The Markthallen print shown unframed at 50 × 70 cm on a plastered wall in a living room. Furniture and decor are not included.",
     "alternativeProductId": "3e0f81ad-9709-da47-cfd4-c543bedf2ff7",
-    "visualCreditsHtml": "<p>Artwork made for Walk of Berlin from my own concept sketch, then rebuilt as a clean vector print master: same layout, colours and building style. The concept sketch was made with the built-in ImageGen tool in OpenAI Codex; the print master was traced and tidied by script and contains no third-party images. The building icons are stylised and do not show exact facades.</p><p>Facts: the count of fourteen numbered municipal market halls (I to XIV) and the four that still sell food (VI, IX, X, XI, checked 1 November 2026) come from my own research for Walk of Berlin, based on the Verwaltungs-Berichte des Magistrats zu Berlin, Berlin und seine Bauten (1896), the Berlin Denkmaldatenbank, berlin.de and the halls' own websites. Other counts (13 or 15) exist; I follow the fourteen numbered halls. No map or geodata is used.</p><p>Lettering: Space Grotesk by Florian Karsten, <a href=\"https://openfontlicense.org\" target=\"_blank\" rel=\"noopener\">SIL Open Font License 1.1</a>.</p><p>The room image is a 3D styling visualisation rendered in Blender with <a href=\"https://polyhaven.com\" target=\"_blank\" rel=\"noopener\">Poly Haven</a> models and textures (<a href=\"https://creativecommons.org/publicdomain/zero/1.0/\" target=\"_blank\" rel=\"noopener\">CC0</a>). It shows the 50 x 70 cm print unframed on a wall. Furniture and decor are not included.</p>",
+    "visualCreditsHtml": "<p>Artwork made for Walk of Berlin from my own concept sketch, then rebuilt as a clean vector print master: same layout, colours and building style. The concept sketch was made with the built-in ImageGen tool in OpenAI Codex; the print master was traced and tidied by script and contains no third-party images. The building icons are stylised and do not show exact facades.</p><p>Facts: the count of fourteen numbered municipal market halls (I to XIV) and the four that still sell food (VI, IX, X, XI, checked 1 November 2026) come from my own research for Walk of Berlin, based on the Verwaltungs-Berichte des Magistrats zu Berlin, Berlin und seine Bauten (1896), the Berlin Denkmaldatenbank, berlin.de and the halls' own websites. Other counts (13 or 15) exist; I follow the fourteen numbered halls. No map or geodata is used.</p><p>Lettering: Space Grotesk by Florian Karsten, <a href=\"https://openfontlicense.org\" target=\"_blank\" rel=\"noopener\">SIL Open Font License 1.1</a>.</p><p>The room image and the room video are 3D styling visualisations rendered in Blender with <a href=\"https://polyhaven.com\" target=\"_blank\" rel=\"noopener\">Poly Haven</a> models and textures (<a href=\"https://creativecommons.org/publicdomain/zero/1.0/\" target=\"_blank\" rel=\"noopener\">CC0</a>). Both show the 50 x 70 cm print unframed on a wall. Furniture and decor are not included.</p>",
     "sizeImages": {
       "30x40 cm": "berlin-market-halls-30x40.jpg",
       "50x70 cm": "berlin-market-halls-50x70.jpg"
@@ -1690,7 +1690,10 @@
         "image": "berlin-market-halls-fullart.jpg",
         "alt": "The complete Markthallen artwork with all fourteen halls and the title, without cropping."
       }
-    ]
+    ],
+    "roomVideoUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/room/berlin-market-halls.mp4",
+    "roomVideoPosterUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/room/berlin-market-halls-poster.jpg",
+    "roomVideoThumbnailUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/room/berlin-market-halls-thumb.jpg"
   },
   {
     "id": "dl-berlin-market-halls",
@@ -1709,7 +1712,7 @@
     "roomCaption": "Styling example · 50 × 70 cm · Printable files only · Furniture and decor not included",
     "roomAlt": "The Markthallen print shown unframed at 50 × 70 cm on a plastered wall in a living room. Furniture and decor are not included.",
     "alternativeProductId": "f43b6ad7-a7ee-4df6-bedb-591d934c6f96",
-    "visualCreditsHtml": "<p>Artwork made for Walk of Berlin from my own concept sketch, then rebuilt as a clean vector print master: same layout, colours and building style. The concept sketch was made with the built-in ImageGen tool in OpenAI Codex; the print master was traced and tidied by script and contains no third-party images. The building icons are stylised and do not show exact facades.</p><p>Facts: the count of fourteen numbered municipal market halls (I to XIV) and the four that still sell food (VI, IX, X, XI, checked 1 November 2026) come from my own research for Walk of Berlin, based on the Verwaltungs-Berichte des Magistrats zu Berlin, Berlin und seine Bauten (1896), the Berlin Denkmaldatenbank, berlin.de and the halls' own websites. Other counts (13 or 15) exist; I follow the fourteen numbered halls. No map or geodata is used.</p><p>Lettering: Space Grotesk by Florian Karsten, <a href=\"https://openfontlicense.org\" target=\"_blank\" rel=\"noopener\">SIL Open Font License 1.1</a>.</p><p>The room image is a 3D styling visualisation rendered in Blender with <a href=\"https://polyhaven.com\" target=\"_blank\" rel=\"noopener\">Poly Haven</a> models and textures (<a href=\"https://creativecommons.org/publicdomain/zero/1.0/\" target=\"_blank\" rel=\"noopener\">CC0</a>). It shows the 50 x 70 cm print unframed on a wall. Furniture and decor are not included.</p>",
+    "visualCreditsHtml": "<p>Artwork made for Walk of Berlin from my own concept sketch, then rebuilt as a clean vector print master: same layout, colours and building style. The concept sketch was made with the built-in ImageGen tool in OpenAI Codex; the print master was traced and tidied by script and contains no third-party images. The building icons are stylised and do not show exact facades.</p><p>Facts: the count of fourteen numbered municipal market halls (I to XIV) and the four that still sell food (VI, IX, X, XI, checked 1 November 2026) come from my own research for Walk of Berlin, based on the Verwaltungs-Berichte des Magistrats zu Berlin, Berlin und seine Bauten (1896), the Berlin Denkmaldatenbank, berlin.de and the halls' own websites. Other counts (13 or 15) exist; I follow the fourteen numbered halls. No map or geodata is used.</p><p>Lettering: Space Grotesk by Florian Karsten, <a href=\"https://openfontlicense.org\" target=\"_blank\" rel=\"noopener\">SIL Open Font License 1.1</a>.</p><p>The room image and the room video are 3D styling visualisations rendered in Blender with <a href=\"https://polyhaven.com\" target=\"_blank\" rel=\"noopener\">Poly Haven</a> models and textures (<a href=\"https://creativecommons.org/publicdomain/zero/1.0/\" target=\"_blank\" rel=\"noopener\">CC0</a>). Both show the 50 x 70 cm print unframed on a wall. Furniture and decor are not included.</p>",
     "sizeImages": {
       "30x40 cm": "berlin-market-halls-30x40.jpg",
       "50x70 cm": "berlin-market-halls-50x70.jpg"
@@ -1719,7 +1722,10 @@
         "image": "berlin-market-halls-fullart.jpg",
         "alt": "The complete Markthallen artwork with all fourteen halls and the title, without cropping."
       }
-    ]
+    ],
+    "roomVideoUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/room/berlin-market-halls.mp4",
+    "roomVideoPosterUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/room/berlin-market-halls-poster.jpg",
+    "roomVideoThumbnailUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/room/berlin-market-halls-thumb.jpg"
   },
   {
     "id": "pr-leipziger-platz-octagon",
