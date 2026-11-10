@@ -42,7 +42,7 @@ function skipReason() {
 }
 const pathOf = product => {
   try { const p = new URL(product?.productUrl || '', 'https://www.walkofberlin.com').pathname.replace(/\/+$/, '').toLowerCase(); if (p.startsWith('/product-page/')) return p; } catch (e) { /* fall through */ }
-  const here = String(W.location?.pathname || '').replace(/\/+$/, '').toLowerCase();
+  const here = String(W.location?.pathname || '').replace(/^\/de(?=\/|$)/, '').replace(/\/+$/, '').toLowerCase();
   return here.startsWith('/product-page/') ? here : STORE_PATH;
 };
 export function count(step, base) {

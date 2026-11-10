@@ -1,6 +1,8 @@
-// German layer for the 1928 page (30 Oct 2026, press launch). Loaded only with ?lang=de. It rewrites visible text inside the
+// German layer for the 1928 page (30 Oct 2026, press launch). Loaded with ?lang=de (a /de/ page gets it too). It rewrites visible text inside the
 // storefront's shadow root and never touches cart, price or order logic, so a miss simply leaves that string in English.
 // Legal notices stay in their reviewed English wording; only their heading says so.
+// Wix's German pages live under /de/ (only while German is visible); the path checks below read the page path without it.
+const pagePath = () => decodeURIComponent(location.pathname).replace(/^\/de(?=\/|$)/, '');
 const PRODUCT_PATH = '/product-page/your-berlin-street-in-1928-personalised-aerial-print-30-x-40-cm';
 const TEXT = new Map(Object.entries({
   'All products': 'Alle Produkte', 'Posters': 'Poster', 'All posters': 'Alle Poster', 'Personalised prints': 'Personalisierte Drucke', 'Personalised': 'Personalisiert',
@@ -330,9 +332,9 @@ const CART_ONLY = new Set(['Details', 'Delivery', 'Tax', 'Subtotal', 'Remove', '
 const translate = (value, node) => {
   const key = value.replace(/\s+/g, ' ').trim();
   if (!key) return null;
-  if (CART_ONLY.has(key) && !decodeURIComponent(location.pathname).startsWith('/cart-page') && !node?.parentElement?.closest('dialog')) return null;
+  if (CART_ONLY.has(key) && !pagePath().startsWith('/cart-page') && !node?.parentElement?.closest('dialog')) return null;
   if (TEXT.has(key)) return value.replace(value.trim(), germanMoney(TEXT.get(key)));
-  if (!decodeURIComponent(location.pathname).startsWith(PRODUCT_PATH) && !decodeURIComponent(location.pathname).startsWith('/cart-page') && POSTER_TEXT.has(key)) return value.replace(value.trim(), POSTER_TEXT.get(key));
+  if (!pagePath().startsWith(PRODUCT_PATH) && !pagePath().startsWith('/cart-page') && POSTER_TEXT.has(key)) return value.replace(value.trim(), POSTER_TEXT.get(key));
   for (const [pattern, to] of PATTERNS) if (pattern.test(key)) return value.replace(value.trim(), germanMoney(key.replace(pattern, to)));
   const formatted=germanMoney(value);
   return formatted!==value?formatted:null;
@@ -354,8 +356,8 @@ function sweep(root) {
 }
 // Wix can replace the element while the page settles, so the watch rebinds to whichever shadow root is current.
 function start() {
-  const ysPage = decodeURIComponent(location.pathname).startsWith(PRODUCT_PATH), cartPage = decodeURIComponent(location.pathname).startsWith('/cart-page');
-  if (!ysPage && !cartPage && !decodeURIComponent(location.pathname).startsWith('/product-page/')) return;
+  const ysPage = pagePath().startsWith(PRODUCT_PATH), cartPage = pagePath().startsWith('/cart-page');
+  if (!ysPage && !cartPage && !pagePath().startsWith('/product-page/')) return;
   if (ysPage) document.title = 'Deine Berliner Straße um 1928 | Walk of Berlin';
   if (cartPage) document.title = 'Warenkorb | Walk of Berlin';
   let bound = null;
