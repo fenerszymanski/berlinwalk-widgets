@@ -1,9 +1,9 @@
 {
-  "updatedAt": "2026-11-10T03:04:58.485Z",
+  "updatedAt": "2026-11-10T10:14:30.900Z",
   "source": "Wix Blog API",
   "popularSource": "Wix Blog metrics.views lifetime sort",
-  "totalPosts": 455,
-  "toolsTotal": 381,
+  "totalPosts": 456,
+  "toolsTotal": 382,
   "bookingUrl": "https://www.walkofberlin.com/book-berlin-walking-tour/berlin-then-and-now",
   "navTopics": [
     {
@@ -1802,6 +1802,23 @@
   ],
   "latest": [
     {
+      "title": "Gas Lamps in Berlin: Does Your Street Still Burn Gas?",
+      "slug": "gas-lamps-in-berlin",
+      "path": "/post/gas-lamps-in-berlin",
+      "url": "https://www.berlinwalk.com/post/gas-lamps-in-berlin",
+      "excerpt": "Berlin still has more than 16,000 gas street lamps, almost all in the former West, and only about 3,300 are meant to stay. Type your street to see where yours stand.",
+      "category": "Living in Berlin",
+      "categorySlug": "living-in-berlin",
+      "topic": "living-in-berlin",
+      "topicLabel": "Living in Berlin",
+      "readTime": "6 min read",
+      "publishedDate": "2026-11-10T10:11:57.248Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_a0b0477e057344bf92735258eb7765ba~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_a0b0477e057344bf92735258eb7765ba~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover.jpg",
+      "alt": "Berlin at night photographed from the International Space Station, the western half glowing white and green and the eastern half orange, with the dark Tiergarten near the centre",
+      "relatedToolSlug": "berlin-gas-lamp-map"
+    },
+    {
       "title": "Where to See the Berlin TV Tower: Free Views Beyond Mitte",
       "slug": "where-to-see-the-berlin-tv-tower",
       "path": "/post/where-to-see-the-berlin-tv-tower",
@@ -1987,23 +2004,6 @@
       "thumb": "https://static.wixstatic.com/media/5a08a3_90c51a7b10b0469d913fc846fe83beb7~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-teufelsberg-toboggan-run-snow.jpg",
       "alt": "Sledders walking up the long toboggan run on Teufelsberg after light snow, with the old listening station rising behind the trees",
       "relatedToolSlug": "berlin-sledding-snow-odds"
-    },
-    {
-      "title": "Christmas in Berlin: What Is Open on 24, 25 and 26 December",
-      "slug": "christmas-in-berlin-what-is-open",
-      "path": "/post/christmas-in-berlin-what-is-open",
-      "url": "https://www.berlinwalk.com/post/christmas-in-berlin-what-is-open",
-      "excerpt": "Every shop in Berlin closes at 14:00 on Christmas Eve and stays shut until Monday 28 December. Which markets open on the 24th, which come back on the 25th, the museum hours on both holidays, and how the trains run.",
-      "category": "Tourist Tips",
-      "categorySlug": "tourist-tips",
-      "topic": "practical",
-      "topicLabel": "Practical Berlin",
-      "readTime": "7 min read",
-      "publishedDate": "2026-10-25T09:35:40.775Z",
-      "image": "https://static.wixstatic.com/media/5a08a3_84e870aa83c842e3b36932d48ca23d17~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-gendarmenmarkt-christmas-market-dusk.jpg",
-      "thumb": "https://static.wixstatic.com/media/5a08a3_84e870aa83c842e3b36932d48ca23d17~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-gendarmenmarkt-christmas-market-dusk.jpg",
-      "alt": "The lit Christmas tree and the domed tower of the cathedral on Gendarmenmarkt against a violet evening sky",
-      "relatedToolSlug": "berlin-christmas-opening-chart"
     }
   ]
 }
