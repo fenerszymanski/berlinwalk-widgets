@@ -28,7 +28,7 @@ export function giftOffers(catalogue, presentation, formatMoney) {
     const row = rows.find(item => item.productId === GIFT_IDS[kind]), info = meta.find(item => item.wixProductId === GIFT_IDS[kind] && item.enabled !== false);
     const price = row?.discountedPrice ?? row?.price;
     if (!row || !info || row.inStock !== true || row.visible === false || !Number.isFinite(price) || price < 0) return null;
-    const label = row.formattedDiscountedPrice || row.formattedPrice || formatMoney(row.currency, price);
+    const label = formatMoney(row.currency, price); // own format, never Wix's regional text (10 Nov 2026)
     if (!label) return null;
     return {kind, id: row.productId, price, priceLabel: label, row, info};
   }).filter(Boolean);
