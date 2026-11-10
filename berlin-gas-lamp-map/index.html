@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Berlin Gas Lamp Map: Does Your Street Still Burn Gas?</title>
+<link rel="stylesheet" href="../css/brand.css">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { overflow-x: hidden; }
+  body { font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #FFFFFF; color: #1f1c17; padding: 12px; }
+  .gl { border-radius: 16px; overflow: hidden; border: 1px solid #2c2a22; background: #15140f; color: #f3efe2; }
+  .gl-head { padding: 18px 18px 10px; }
+  .gl-kick { display: inline-block; font-size: 10.5px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; color: #123D18; background: #FFE600; padding: 3px 8px; border-radius: 4px; }
+  .gl-head h1 { font-family: 'Merriweather', Georgia, serif; font-size: 21px; line-height: 1.3; margin-top: 9px; color: #fff8d6; }
+  .gl-head p { font-size: 13px; line-height: 1.6; color: #cfc8b4; margin-top: 7px; max-width: 780px; }
+
+  .gl-search { margin: 4px 12px 0; position: relative; }
+  .gl-search label { display: block; font-size: 10.5px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: #e8dfb8; margin-bottom: 5px; }
+  .gl-search input { width: 100%; font-family: inherit; font-size: 16px; font-weight: 600; padding: 11px 12px; border: 2px solid #FFE600; border-radius: 12px; background: #fffdf3; color: #1f1c17; }
+  .gl-search input:focus { outline: 3px solid #C5E1A5; outline-offset: 1px; }
+  .gl-list { list-style: none; position: absolute; left: 0; right: 0; top: 100%; margin-top: 4px; background: #fffdf3; color: #1f1c17; border: 1px solid #d9d2c3; border-radius: 12px; max-height: 260px; overflow-y: auto; z-index: 1000; box-shadow: 0 10px 24px rgba(0,0,0,.35); }
+  .gl-list[hidden] { display: none; }
+  .gl-list li { padding: 9px 12px; font-size: 14px; cursor: pointer; display: flex; justify-content: space-between; gap: 10px; }
+  .gl-list li small { color: #6b6353; font-size: 12px; white-space: nowrap; }
+  .gl-list li[aria-selected=true], .gl-list li:hover { background: #FFE600; color: #123D18; }
+  .gl-list li.none { cursor: default; background: transparent; color: #4a443a; font-size: 13px; line-height: 1.5; }
+  .gl-try { display: flex; flex-wrap: wrap; gap: 6px; margin: 9px 12px 0; align-items: center; font-size: 11.5px; color: #cfc8b4; }
+  .gl-try button { font-family: inherit; font-size: 11.5px; font-weight: 700; padding: 5px 10px; border-radius: 999px; border: 1.5px solid #6d6650; background: transparent; color: #f3efe2; cursor: pointer; }
+  .gl-try button:hover, .gl-try button:focus-visible { border-color: #FFE600; color: #FFE600; outline: none; }
+
+  .gl-main { display: grid; grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr); gap: 12px; padding: 12px; }
+  .gl-mapbox { min-width: 0; }
+  #map { height: 460px; border-radius: 12px; border: 1px solid #3a372c; background: #1d1c16; z-index: 0; }
+  .gl-legend { display: flex; flex-wrap: wrap; gap: 6px 14px; margin-top: 8px; font-size: 11px; color: #d9d2bd; }
+  .gl-legend span { display: inline-flex; align-items: center; gap: 6px; }
+  .gl-legend i { display: inline-block; width: 11px; height: 11px; border-radius: 50%; }
+  .gl-legend i.area { width: 18px; height: 10px; border-radius: 2px; border: 2px dashed #9CCC65; background: rgba(156,204,101,.12); }
+  .gl-side { min-width: 0; display: flex; flex-direction: column; gap: 12px; }
+  .gl-card { background: #fffdf3; color: #1f1c17; border-radius: 12px; padding: 14px; }
+  .gl-card h2 { font-size: 10.5px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: #6b6353; }
+  .gl-card h3 { font-family: 'Merriweather', Georgia, serif; font-size: 18px; line-height: 1.3; margin-top: 5px; }
+  .gl-big { font-family: 'Merriweather', Georgia, serif; font-size: 34px; font-weight: 700; color: #1B5E20; line-height: 1; margin-top: 8px; }
+  .gl-big small { font-family: 'Montserrat', sans-serif; font-size: 13px; font-weight: 700; color: #4a443a; }
+  .gl-verdict { margin-top: 10px; font-size: 12.5px; line-height: 1.55; padding: 9px 11px; border-radius: 10px; }
+  .gl-verdict.kept { background: #E8F5E9; border-left: 4px solid #1B5E20; }
+  .gl-verdict.open { background: #FFF6BF; border-left: 4px solid #C9A400; }
+  .gl-verdict.mixed { background: #f1ede1; border-left: 4px solid #6b6353; }
+  .gl-verdict b { color: #123D18; }
+  .gl-bars { margin-top: 10px; display: grid; gap: 5px; }
+  .gl-bar { display: grid; grid-template-columns: 118px minmax(0, 1fr) 40px; gap: 8px; align-items: center; font-size: 11.5px; }
+  .gl-bar .tr { height: 9px; background: #ece6d6; border-radius: 99px; overflow: hidden; }
+  .gl-bar .tr span { display: block; height: 100%; background: #1B5E20; border-radius: 99px; }
+  .gl-bar b { text-align: right; font-size: 12px; }
+  .gl-note { margin-top: 10px; font-size: 11.5px; line-height: 1.5; color: #4a443a; }
+  .gl-reset { margin-top: 10px; font-family: inherit; font-size: 12px; font-weight: 800; padding: 7px 12px; border-radius: 999px; border: 2px solid #1B5E20; background: #fff; color: #1B5E20; cursor: pointer; }
+  .gl-reset:hover, .gl-reset:focus-visible { background: #FFE600; color: #123D18; outline: none; }
+  .gl-reset[hidden] { display: none; }
+
+  .gl-districts { margin: 0 12px 12px; background: #1f1e17; border: 1px solid #3a372c; border-radius: 12px; padding: 14px; }
+  .gl-districts h2 { font-size: 10.5px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: #e8dfb8; }
+  .gl-districts p { font-size: 12px; color: #cfc8b4; margin-top: 5px; line-height: 1.5; }
+  .gl-dlist { margin-top: 10px; display: grid; gap: 6px; }
+  .gl-drow { display: grid; grid-template-columns: 170px minmax(0, 1fr) 54px; gap: 10px; align-items: center; font-size: 12px; background: none; border: 0; color: #f3efe2; font-family: inherit; text-align: left; padding: 3px 4px; border-radius: 8px; cursor: pointer; }
+  .gl-drow:hover, .gl-drow:focus-visible, .gl-drow[aria-pressed=true] { background: #2c2a20; outline: none; }
+  .gl-drow[aria-pressed=true] .nm { color: #FFE600; }
+  .gl-drow .tr { height: 12px; background: #2c2a20; border-radius: 99px; overflow: hidden; display: flex; }
+  .gl-drow .tr .k { background: #9CCC65; }
+  .gl-drow .tr .o { background: #FFE600; }
+  .gl-drow b { text-align: right; }
+  .gl-drow.zero { cursor: default; opacity: .85; }
+  .gl-foot { padding: 0 16px 16px; font-size: 11px; line-height: 1.55; color: #a9a28d; }
+  .gl-foot a { color: #FFE600; }
+  .gl-tiles { filter: invert(1) hue-rotate(180deg) grayscale(.55) brightness(.78) contrast(.92); }
+  .gl-side { align-self: start; }
+  .leaflet-container { font-family: 'Montserrat', sans-serif; background: #1d1c16; }
+  .leaflet-tooltip { font-size: 12px; }
+  @media (max-width: 760px) {
+    .gl-main { grid-template-columns: 1fr; }
+    #map { height: 380px; }
+    .gl-drow { grid-template-columns: 112px minmax(0, 1fr) 46px; font-size: 11.5px; }
+    .gl-head h1 { font-size: 19px; }
+  }
+</style>
+</head>
+<body>
+<div class="gl" id="app">
+  <div class="gl-head">
+    <span class="gl-kick">Gas lamp map</span>
+    <h1>Does your street still burn gas?</h1>
+    <p>Every gas street lamp in Berlin's official lighting register, on one map. Type a street to see how many gas lamps it has, which kind, whether they are burning, and whether the street sits inside one of the areas where the city has decided to keep gas light.</p>
+  </div>
+
+  <div class="gl-search">
+    <label for="q">Search a street</label>
+    <input id="q" type="text" autocomplete="off" spellcheck="false" placeholder="Start typing, e.g. Sophie-Charlotten-Straße" role="combobox" aria-expanded="false" aria-controls="list" aria-autocomplete="list">
+    <ul class="gl-list" id="list" role="listbox" hidden></ul>
+  </div>
+  <div class="gl-try" id="try"><span>Or try:</span></div>
+
+  <div class="gl-main">
+    <div class="gl-mapbox">
+      <div id="map" role="region" aria-label="Map of gas street lamps in Berlin"></div>
+      <div class="gl-legend">
+        <span><i style="background:#9CCC65"></i>Gas lamp in a protected area</span>
+        <span><i style="background:#FFE600"></i>Gas lamp, no protection</span>
+        <span><i style="background:#8a8370"></i>Switched off or removed</span>
+        <span><i class="area"></i>Area where gas stays</span>
+      </div>
+    </div>
+    <div class="gl-side">
+      <div class="gl-card" id="card" aria-live="polite"></div>
+    </div>
+  </div>
+
+  <div class="gl-districts">
+    <h2>Gas lamps by district</h2>
+    <p>Green is the part inside protected areas, yellow the rest. Tap a district to zoom to it.</p>
+    <div class="gl-dlist" id="dlist"></div>
+  </div>
+
+  <div class="gl-foot" id="foot"></div>
+</div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+<script src="data.js"></script>
+<script>
+(function () {
+  var D = window.GAS_DATA, A = D.lamps, N = A.length / 6;
+  var TYPES = D.types, STATUS = D.status, AREAS = D.areas, STREETS = D.streets;
+  var DISTRICTS = ['Steglitz-Zehlendorf', 'Charlottenburg-Wilmersdorf', 'Reinickendorf', 'Tempelhof-Schöneberg', 'Friedrichshain-Kreuzberg', 'Mitte', 'Marzahn-Hellersdorf', 'Spandau', 'Treptow-Köpenick', 'Neukölln', 'Pankow', 'Lichtenberg'];
+  function lat(i) { return 52.3 + A[i * 6] / 1e5; }
+  function lng(i) { return 13.0 + A[i * 6 + 1] / 1e5; }
+  function typ(i) { return A[i * 6 + 2]; }
+  function st(i) { return A[i * 6 + 3]; }
+  function sid(i) { return A[i * 6 + 4]; }
+  function area(i) { return A[i * 6 + 5]; }
+  function burning(i) { return st(i) <= 1; }
+  function fmt(n) { return n.toLocaleString('en-GB'); }
+  function norm(s) { return s.toLowerCase().replace(/ß/g, 'ss').replace(/ä/g, 'a').replace(/ö/g, 'o').replace(/ü/g, 'u').replace(/str\.?(\s|$)/g, 'strasse$1').replace(/[^a-z0-9]/g, ''); }
+  function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
+
+  /* per street and per district index */
+  var byStreet = STREETS.map(function () { return []; });
+  var dist = {}; DISTRICTS.forEach(function (d) { dist[d] = { kept: 0, open: 0, all: [] }; });
+  var tot = { all: N, burn: 0, kept: 0 };
+  for (var i = 0; i < N; i++) {
+    byStreet[sid(i)].push(i);
+    var dn = STREETS[sid(i)][2]; if (!dist[dn]) dist[dn] = { kept: 0, open: 0, all: [] };
+    dist[dn].all.push(i); if (area(i) >= 0) dist[dn].kept++; else dist[dn].open++;
+    if (burning(i)) tot.burn++; if (area(i) >= 0) tot.kept++;
+  }
+  var streetKeys = STREETS.map(function (s) { return norm(s[0]); });
+
+  /* map */
+  var map = L.map('map', { scrollWheelZoom: false, zoomSnap: 0.25, preferCanvas: true, attributionControl: true });
+  L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 19, className: 'gl-tiles',
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a>'
+  }).addTo(map);
+  var cityBounds = L.latLngBounds([[52.36, 13.12], [52.66, 13.70]]);
+  var lastFit = { b: cityBounds, o: { padding: [10, 10] } };
+  function fitTo(b, o) { lastFit = { b: b, o: o || { padding: [24, 24], maxZoom: 17 } }; map.fitBounds(lastFit.b, lastFit.o); }
+  fitTo(cityBounds, { padding: [10, 10] });
+
+  D.outlines.forEach(function (o) {
+    L.polygon(o[1], { color: '#9CCC65', weight: 1.6, dashArray: '5 4', fillColor: '#9CCC65', fillOpacity: 0.1, interactive: true })
+      .bindTooltip(AREAS[o[0]], { sticky: true }).addTo(map);
+  });
+  var renderer = L.canvas({ padding: 0.3 });
+  function colour(i) { return !burning(i) ? '#8a8370' : (area(i) >= 0 ? '#9CCC65' : '#FFE600'); }
+  var dots = new Array(N);
+  for (var j = 0; j < N; j++) {
+    dots[j] = L.circleMarker([lat(j), lng(j)], { renderer: renderer, radius: 2, weight: 0, fillColor: colour(j), fillOpacity: 0.85, interactive: false }).addTo(map);
+  }
+  function setRadius() {
+    var z = map.getZoom(), r = z < 12 ? 1.6 : z < 14 ? 2.6 : z < 16 ? 4 : 6;
+    for (var k = 0; k < N; k++) if (!hi[k]) dots[k].setRadius(r);
+    hiLayer.eachLayer(function (l) { l.setRadius(r + 2.5); });
+  }
+  var hi = {}, hiLayer = L.layerGroup().addTo(map);
+  map.on('zoomend', setRadius);
+
+  /* tap on map: nearest lamp picks its street */
+  map.on('click', function (e) {
+    var best = -1, bd = Infinity, la = e.latlng.lat, lo = e.latlng.lng, c = Math.cos(la * Math.PI / 180);
+    for (var k = 0; k < N; k++) { var dy = lat(k) - la, dx = (lng(k) - lo) * c, dd = dy * dy + dx * dx; if (dd < bd) { bd = dd; best = k; } }
+    var metres = Math.sqrt(bd) * 111320;
+    if (best >= 0 && metres < 400) pickStreet(sid(best), false);
+    else showNone(Math.round(metres / 10) * 10);
+  });
+
+  /* card */
+  var card = document.getElementById('card');
+  function overview() {
+    card.innerHTML = '<h2>All of Berlin</h2><h3>' + fmt(N) + ' gas lamps in the register</h3>' +
+      '<div class="gl-big">' + fmt(tot.burn) + ' <small>burning</small></div>' +
+      '<div class="gl-verdict mixed"><b>' + fmt(tot.kept) + '</b> stand inside the ' + AREAS.length + ' areas where the city decided to keep gas light. The other <b>' + fmt(N - tot.kept) + '</b> have no such promise.</div>' +
+      bars(Array.from({ length: N }, function (_, k) { return k; })) +
+      '<p class="gl-note">Search a street above, tap a dot on the map, or pick a district below.</p>';
+  }
+  function bars(list) {
+    var c = [0, 0, 0, 0]; list.forEach(function (k) { c[typ(k)]++; });
+    var max = Math.max.apply(null, c) || 1, out = '<div class="gl-bars">';
+    [0, 1, 2, 3].forEach(function (t) { if (!c[t]) return; out += '<div class="gl-bar"><span>' + TYPES[t] + '</span><span class="tr"><span style="width:' + (c[t] / max * 100).toFixed(1) + '%"></span></span><b>' + fmt(c[t]) + '</b></div>'; });
+    return out + '</div>';
+  }
+  function verdict(list) {
+    var areasHere = {}, inside = 0;
+    list.forEach(function (k) { if (area(k) >= 0) { inside++; areasHere[AREAS[area(k)]] = 1; } });
+    var names = Object.keys(areasHere), rows = 0; list.forEach(function (k) { if (typ(k) === 2) rows++; });
+    if (inside === list.length) return '<div class="gl-verdict kept">All of them stand inside the protected area <b>' + esc(names.join(', ')) + '</b>. Here the city decided in 2012 and 2013 to keep post-top, hanging and model lamps on gas.' + (rows ? ' Row lights are the exception: most of them are switched to electric even inside the areas.' : '') + '</div>';
+    if (!inside) return '<div class="gl-verdict open">None of them stands inside a protected area. Outside those areas there is no decision that the lamps stay on gas.</div>';
+    return '<div class="gl-verdict mixed"><b>' + inside + '</b> of them stand inside <b>' + esc(names.join(', ')) + '</b>, where gas light is meant to stay. The other ' + (list.length - inside) + ' have no such promise.</div>';
+  }
+  function statusLine(list) {
+    var s = [0, 0, 0, 0, 0]; list.forEach(function (k) { s[st(k)]++; });
+    var parts = []; s.forEach(function (n, x) { if (n) parts.push(fmt(n) + ' ' + STATUS[x]); });
+    return parts.join(', ');
+  }
+  function highlight(list) {
+    hiLayer.clearLayers(); hi = {};
+    var z = map.getZoom(), r = z < 12 ? 1.6 : z < 14 ? 2.6 : z < 16 ? 4 : 6;
+    list.forEach(function (k) {
+      hi[k] = 1;
+      L.circleMarker([lat(k), lng(k)], { renderer: renderer, radius: r + 2.5, weight: 2, color: '#ffffff', fillColor: colour(k), fillOpacity: 1, interactive: false }).addTo(hiLayer);
+    });
+  }
+  var resetBtn;
+  function pickStreet(s, fromSearch) {
+    var list = byStreet[s], S = STREETS[s];
+    highlight(list);
+    var b = L.latLngBounds(list.map(function (k) { return [lat(k), lng(k)]; }));
+    fitTo(b.pad(0.25), { padding: [30, 30], maxZoom: 17 });
+    var burn = list.filter(burning).length;
+    card.innerHTML = '<h2>' + esc(S[1]) + ', ' + esc(S[2]) + '</h2><h3>' + esc(S[0]) + '</h3>' +
+      '<div class="gl-big">' + fmt(list.length) + ' <small>gas lamp' + (list.length === 1 ? '' : 's') + ' in the register</small></div>' +
+      '<p class="gl-note">' + statusLine(list) + '.</p>' + verdict(list) + bars(list) +
+      (burn < list.length ? '<p class="gl-note">Switched off can mean a fault, a building site or a lamp waiting for work.</p>' : '') +
+      '<button class="gl-reset" type="button" id="reset">Back to all of Berlin</button>';
+    document.getElementById('reset').onclick = resetAll;
+    q.value = S[0]; setDistrict(null);
+    if (!fromSearch) closeList();
+  }
+  function showNone(m) {
+    hiLayer.clearLayers(); hi = {};
+    card.innerHTML = '<h2>No gas here</h2><h3>No gas lamp within 400 metres of that spot</h3><p class="gl-note">The nearest one is about ' + fmt(m) + ' metres away. Most of the eastern districts switched to electric light long ago, so large parts of the map are dark on purpose.</p><button class="gl-reset" type="button" id="reset">Back to all of Berlin</button>';
+    document.getElementById('reset').onclick = resetAll;
+  }
+  function resetAll() { hiLayer.clearLayers(); hi = {}; q.value = ''; setDistrict(null); fitTo(cityBounds, { padding: [10, 10] }); overview(); setRadius(); }
+
+  /* search */
+  var q = document.getElementById('q'), listEl = document.getElementById('list'), active = -1, results = [];
+  function closeList() { listEl.hidden = true; q.setAttribute('aria-expanded', 'false'); active = -1; }
+  function search() {
+    var v = norm(q.value); results = [];
+    if (v.length < 2) { closeList(); return; }
+    for (var s = 0; s < STREETS.length && results.length < 40; s++) { var key = streetKeys[s]; if (key.indexOf(v) === 0) results.push(s); }
+    for (s = 0; s < STREETS.length && results.length < 40; s++) { if (streetKeys[s].indexOf(v) > 0 && results.indexOf(s) < 0) results.push(s); }
+    listEl.innerHTML = '';
+    if (!results.length) {
+      listEl.innerHTML = '<li class="none" role="option" aria-disabled="true">No gas lamp on a street of that name in the register. If you live there, your street is lit by electric lamps.</li>';
+    } else {
+      results.slice(0, 12).forEach(function (s, x) {
+        var li = document.createElement('li'); li.setAttribute('role', 'option'); li.id = 'opt' + x;
+        li.innerHTML = '<span>' + esc(STREETS[s][0]) + '</span><small>' + esc(STREETS[s][1]) + ' · ' + byStreet[s].length + '</small>';
+        li.addEventListener('mousedown', function (ev) { ev.preventDefault(); pickStreet(s, false); });
+        listEl.appendChild(li);
+      });
+    }
+    listEl.hidden = false; q.setAttribute('aria-expanded', 'true'); active = -1;
+  }
+  q.addEventListener('input', search);
+  q.addEventListener('keydown', function (e) {
+    var items = listEl.querySelectorAll('li[role=option]:not(.none)');
+    if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
+      if (!items.length) return; e.preventDefault();
+      active = (active + (e.key === 'ArrowDown' ? 1 : -1) + items.length) % items.length;
+      items.forEach(function (it, x) { it.setAttribute('aria-selected', x === active ? 'true' : 'false'); });
+      q.setAttribute('aria-activedescendant', items[active].id);
+    } else if (e.key === 'Enter') {
+      if (items.length) { e.preventDefault(); pickStreet(results[Math.max(active, 0)], false); }
+    } else if (e.key === 'Escape') closeList();
+  });
+  q.addEventListener('blur', function () { setTimeout(closeList, 120); });
+
+  /* try buttons: the three streets with most gas lamps in different districts */
+  var tryEl = document.getElementById('try'), seen = {}, picks = [];
+  STREETS.map(function (s, x) { return x; }).sort(function (a, b) { return byStreet[b].length - byStreet[a].length; }).forEach(function (x) {
+    if (picks.length < 3 && !seen[STREETS[x][2]]) { seen[STREETS[x][2]] = 1; picks.push(x); }
+  });
+  picks.forEach(function (x) { var b = document.createElement('button'); b.type = 'button'; b.textContent = STREETS[x][0]; b.onclick = function () { pickStreet(x, false); }; tryEl.appendChild(b); });
+
+  /* districts */
+  var dlist = document.getElementById('dlist'), dmax = 0, dbtn = {};
+  DISTRICTS.forEach(function (d) { dmax = Math.max(dmax, dist[d].all.length); });
+  DISTRICTS.forEach(function (d) {
+    var o = dist[d], n = o.all.length, b = document.createElement('button');
+    b.type = 'button'; b.className = 'gl-drow' + (n ? '' : ' zero'); b.setAttribute('aria-pressed', 'false');
+    b.innerHTML = '<span class="nm">' + d + '</span><span class="tr"><span class="k" style="width:' + (o.kept / dmax * 100).toFixed(2) + '%"></span><span class="o" style="width:' + (o.open / dmax * 100).toFixed(2) + '%"></span></span><b>' + fmt(n) + '</b>';
+    if (n) b.onclick = function () { pickDistrict(d); }; else b.disabled = true;
+    dbtn[d] = b; dlist.appendChild(b);
+  });
+  function setDistrict(d) { Object.keys(dbtn).forEach(function (k) { dbtn[k].setAttribute('aria-pressed', k === d ? 'true' : 'false'); }); }
+  function pickDistrict(d) {
+    var o = dist[d], list = o.all;
+    hiLayer.clearLayers(); hi = {}; q.value = ''; setDistrict(d);
+    fitTo(L.latLngBounds(list.map(function (k) { return [lat(k), lng(k)]; })), { padding: [20, 20], maxZoom: 15 });
+    var counts = {}; list.forEach(function (k) { var nm = STREETS[sid(k)][1]; counts[nm] = (counts[nm] || 0) + 1; });
+    var top = Object.keys(counts).sort(function (a, b) { return counts[b] - counts[a]; }).slice(0, 3);
+    card.innerHTML = '<h2>District</h2><h3>' + d + '</h3><div class="gl-big">' + fmt(list.length) + ' <small>gas lamps</small></div>' +
+      '<div class="gl-verdict mixed"><b>' + fmt(o.kept) + '</b> inside protected areas, <b>' + fmt(o.open) + '</b> outside.</div>' +
+      '<p class="gl-note">Most of them in ' + top.map(function (t) { return esc(t) + ' (' + fmt(counts[t]) + ')'; }).join(', ') + '.</p>' + bars(list) +
+      '<button class="gl-reset" type="button" id="reset">Back to all of Berlin</button>';
+    document.getElementById('reset').onclick = resetAll;
+  }
+
+  document.getElementById('foot').innerHTML = 'Source: Berlin Senate Department for Mobility, Transport, Climate Protection and the Environment, public lighting register and the gas lighting preservation areas, published on the Berlin Geoportal under Datenlizenz Deutschland Zero 2.0. A lamp counts as inside an area when its position falls within the official outline. Pankow and Lichtenberg have no gas lamp in the register. Checked on 10 November 2026.';
+
+  overview(); setRadius();
+
+  /* Leaflet measures its box once; re-measure when the box changes */
+  var mapEl = document.getElementById('map'), lastSize = '';
+  function remeasure() {
+    var r = mapEl.getBoundingClientRect(), key = Math.round(r.width) + 'x' + Math.round(r.height);
+    if (key === lastSize || r.width < 1 || r.height < 1) return;
+    lastSize = key; map.invalidateSize({ pan: false }); map.fitBounds(lastFit.b, lastFit.o);
+  }
+  if (window.ResizeObserver) new ResizeObserver(function () { window.requestAnimationFrame(remeasure); }).observe(mapEl);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(remeasure);
+  window.addEventListener('load', remeasure);
+})();
+</script>
+<script src="../js/brand.js"></script>
+</body>
+</html>
