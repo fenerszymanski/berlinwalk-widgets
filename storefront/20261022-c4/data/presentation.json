@@ -1848,5 +1848,66 @@
     "roomVideoUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/room/hackescher-markt-curve.mp4",
     "roomVideoPosterUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/room/hackescher-markt-curve-poster.jpg",
     "roomVideoThumbnailUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/room/hackescher-markt-curve-thumb.jpg"
+  },
+  {
+    "id": "pr-lietzensee-the-cut",
+    "name": "Lietzensee",
+    "place": "Charlottenburg · The cut",
+    "image": "lietzensee-fullart.jpg",
+    "alt": "Textured paper-collage artwork of cobalt-blue Lietzensee crossed by a burnt-orange road, with a turquoise water connection on warm cream. Lietzensee Berlin appears below.",
+    "typeLine": "PREMIUM MATTE · 200 GSM · UNFRAMED",
+    "wixProductId": "3060a10e-6c2a-48f0-87c4-70707de56ca9",
+    "group": "stories",
+    "alternativeProductId": "9f319031-42a7-5411-ea5b-7b95d9b2250f",
+    "visualCreditsHtml": "<p>Artwork created for Walk of Berlin with the built-in ImageGen tool in OpenAI Codex. Based on my Lietzensee history reel and a Geoportal Berlin aerial image of March 2026, used as a geographical reference. This is a stylised paper-collage illustration, not an aerial photograph or a measured map. The pale-blue shadow is an artistic addition, not a verified former shoreline.</p><p>Historical reference: Landesdenkmalamt Berlin, Lietzenseebrücke, monument record 09096361, and Bezirksamt Charlottenburg-Wilmersdorf, Lietzenseepark, checked in November 2026.</p><p>Room image and video are 3D styling visualisations using the existing Walk of Berlin room scene and Poly Haven CC0 assets. Frame, furniture and decor are not included.</p>",
+    "sizeImages": {
+      "30x40 cm": "lietzensee-30x40.jpg",
+      "50x70 cm": "lietzensee-50x70.jpg"
+    },
+    "gallery": [
+      {
+        "image": "lietzensee-fullart.jpg",
+        "alt": "The complete selected Lietzensee artwork and title, without cropping."
+      }
+    ],
+    "roomImage": "lietzensee-room-photo.jpg",
+    "roomVideoFit": "contain",
+    "roomCaption": "Styling example · 30 × 40 cm · Frame and decor not included",
+    "roomAlt": "The Lietzensee print at 30 × 40 cm in an oak frame on a living-room wall. Frame and decor are not included.",
+    "roomVideoUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/room/lietzensee-the-cut.mp4",
+    "roomVideoPosterUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/room/lietzensee-the-cut-poster.jpg",
+    "roomVideoThumbnailUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/room/lietzensee-the-cut-thumb.jpg"
+  },
+  {
+    "id": "dl-lietzensee-the-cut",
+    "name": "Lietzensee Printable Poster",
+    "place": "Charlottenburg · The cut",
+    "image": "lietzensee-fullart.jpg",
+    "alt": "Textured paper-collage artwork of cobalt-blue Lietzensee crossed by a burnt-orange road, with a turquoise water connection on warm cream. Lietzensee Berlin appears below.",
+    "typeLine": "DIGITAL DOWNLOAD · 30 × 40 & 50 × 70 CM",
+    "wixProductId": "9f319031-42a7-5411-ea5b-7b95d9b2250f",
+    "kind": "digital",
+    "deliveryNote": "Digital download · 2 JPEG print files and a printing guide. No physical item.",
+    "deliveryDetails": "Your download includes 30 × 40 cm and 50 × 70 cm sRGB JPEG files at 300 dpi and a printing guide. The 50 × 70 cm file places the artwork on a light paper mount (25 mm at the sides, 50 mm at the top and bottom). No physical poster, frame or decor is included.",
+    "group": "stories",
+    "alternativeProductId": "3060a10e-6c2a-48f0-87c4-70707de56ca9",
+    "visualCreditsHtml": "<p>Artwork created for Walk of Berlin with the built-in ImageGen tool in OpenAI Codex. Based on my Lietzensee history reel and a Geoportal Berlin aerial image of March 2026, used as a geographical reference. This is a stylised paper-collage illustration, not an aerial photograph or a measured map. The pale-blue shadow is an artistic addition, not a verified former shoreline.</p><p>Historical reference: Landesdenkmalamt Berlin, Lietzenseebrücke, monument record 09096361, and Bezirksamt Charlottenburg-Wilmersdorf, Lietzenseepark, checked in November 2026.</p><p>Room image and video are 3D styling visualisations using the existing Walk of Berlin room scene and Poly Haven CC0 assets. Frame, furniture and decor are not included.</p>",
+    "sizeImages": {
+      "30x40 cm": "lietzensee-30x40.jpg",
+      "50x70 cm": "lietzensee-50x70.jpg"
+    },
+    "gallery": [
+      {
+        "image": "lietzensee-fullart.jpg",
+        "alt": "The complete selected Lietzensee artwork and title, without cropping."
+      }
+    ],
+    "roomImage": "lietzensee-room-photo.jpg",
+    "roomVideoFit": "contain",
+    "roomCaption": "Styling example · 30 × 40 cm · Printable files only · Frame and decor not included",
+    "roomAlt": "The Lietzensee print at 30 × 40 cm in an oak frame on a living-room wall. Frame and decor are not included.",
+    "roomVideoUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/room/lietzensee-the-cut.mp4",
+    "roomVideoPosterUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/room/lietzensee-the-cut-poster.jpg",
+    "roomVideoThumbnailUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/room/lietzensee-the-cut-thumb.jpg"
   }
 ]

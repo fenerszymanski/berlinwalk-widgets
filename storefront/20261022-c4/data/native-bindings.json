@@ -802,5 +802,20 @@
       "02d24409-01f2-4b00-b24d-d762d74a4fb6",
       "00000000-000000-000000-000000000001"
     ]
+  },
+  {
+    "wixProductId": "3060a10e-6c2a-48f0-87c4-70707de56ca9",
+    "nativeProductType": "physical",
+    "nativeCategoryIds": [
+      "112ecd5c-9ba8-41c7-b311-5901b9407526",
+      "3a0f16e1-49e5-42e1-a0bd-a79d1949e091"
+    ]
+  },
+  {
+    "wixProductId": "9f319031-42a7-5411-ea5b-7b95d9b2250f",
+    "nativeProductType": "digital",
+    "nativeCategoryIds": [
+      "02d24409-01f2-4b00-b24d-d762d74a4fb6"
+    ]
   }
 ]
