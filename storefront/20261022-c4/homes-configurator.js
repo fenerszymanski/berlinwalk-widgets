@@ -81,7 +81,8 @@ export function mountHomes(host,state,api,H) {
       if(!H.inBerlin(lat,lon))return;h.lat=Number(lat.toFixed(5));h.lon=Number(lon.toFixed(5));load(i);refresh();
     }));refresh();
   }
-  async function photo(url){const img=new Image();img.crossOrigin='anonymous';await new Promise((resolve,reject)=>{const t=setTimeout(()=>reject(Error('FOTO_ZAMAN_ASIMI')),18000);img.onload=()=>{clearTimeout(t);resolve()};img.onerror=()=>{clearTimeout(t);reject(Error('FOTO_OKUNAMADI'))};img.src=url});const c=document.createElement('canvas');c.width=img.naturalWidth;c.height=img.naturalHeight;const ctx=c.getContext('2d');ctx.drawImage(img,0,0);return ctx.getImageData(0,0,c.width,c.height)}
+  // Geoportal, then my copy of the layers, then Geoportal once more (aerial-source.js, 10 Nov 2026).
+  async function photo(url){const img=H.loadAerialImage?await H.loadAerialImage(url,{timeoutMs:12000,retryTimeoutMs:18000,track:step=>api.track?.(step)}):await new Promise((resolve,reject)=>{const i=new Image();i.crossOrigin='anonymous';const t=setTimeout(()=>reject(Error('FOTO_ZAMAN_ASIMI')),18000);i.onload=()=>{clearTimeout(t);resolve(i)};i.onerror=()=>{clearTimeout(t);reject(Error('FOTO_OKUNAMADI'))};i.src=url});const c=document.createElement('canvas');c.width=img.naturalWidth;c.height=img.naturalHeight;const ctx=c.getContext('2d');ctx.drawImage(img,0,0);return ctx.getImageData(0,0,c.width,c.height)}
   async function load(i){
     const h=state.homes[i],token=(h.token||0)+1;h.token=token;h.photoKey=photoKey(h);h.rawPhotos=[];h.coverage='loading';h.todayLoaded=false;cache.delete(i+'-0');cache.delete(i+'-1');draw();
     const [x,y]=H.utm33(h.lat,h.lon),ph=g.photoHeight,wm=g.ground,hm=wm*ph/680;

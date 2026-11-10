@@ -1,5 +1,6 @@
 import {HOMES_CONFIG,encodeHomes,decodeHomes} from './homes-encoding.js';
 import {mountHomes,countChoice,isHomes,homesReady} from './homes-configurator.js';
+import {loadAerialPhoto,loadAerialImage} from './aerial-source.js';
 export {HOMES_CONFIG,decodeHomes};
 // Palette file is byte-identical to generator/print-options.json; no independent CSS colour approximation.
 export const PRINT_OPTIONS = await fetch(new URL('./print-options.json', import.meta.url)).then(r => {if(!r.ok)throw Error('PRINT_OPTIONS_UNAVAILABLE');return r.json();});
@@ -53,54 +54,9 @@ const NOMINATIM = 'https://nominatim.openstreetmap.org/search';
 // Photon (komoot, OpenStreetMap data) forgives typos ("fisherinsel") and is built for search-as-you-type; Nominatim is not.
 const PHOTON = 'https://photon.komoot.io/api/';
 
-// One retry per photo/point, with fresh image nodes so late events from a cancelled
-// request cannot complete the next request. Only fixed, aggregate step names leave
-// the browser: no address, coordinates, URL, visitor ID or raw error text.
-export function loadAerialPhoto({slot, url, layer, valid = () => true, track = () => {}, status = () => {}, loaded = () => {},
-  timeoutMs = 15000, retryMs = 1000, later = setTimeout, clear = clearTimeout, online = () => globalThis.navigator?.onLine !== false}) {
-  if (!['archive', 'today'].includes(layer)) throw new Error('Unknown aerial layer');
-  let cancelled = false, attempt = 0, timer, image;
-  const active = () => !cancelled && valid();
-  const emit = step => { try { track(step); } catch {} }; // measurement never blocks the preview
-  const label = layer === 'archive' ? '1928' : 'current';
-  const stopImage = () => { if (image) { image.onload = image.onerror = null; image.removeAttribute('src'); } };
-  function start() {
-    if (!active()) return;
-    attempt += 1;
-    const previous = slot.querySelector('img');
-    image = previous.cloneNode(false); image.removeAttribute('src');
-    previous.replaceWith(image);
-    const thisImage = image;
-    let settled = false;
-    function finish(reason) {
-      if (settled || !active()) return;
-      settled = true; clear(timer); thisImage.onload = thisImage.onerror = null;
-      if (!reason) {
-        status(''); if (attempt === 2) emit(`photo${layer}recovered`);
-        loaded(); return;
-      }
-      if (attempt === 1) emit(layer === 'archive' ? 'photoerror' : 'photoerrortoday');
-      emit(`photo${layer}${online() ? reason : 'offline'}`);
-      stopImage();
-      if (attempt === 1) {
-        status(`Retrying the ${label} photo…`);
-        timer = later(start, retryMs);
-      } else {
-        emit(`photo${layer}failed`);
-        status(`The ${label} photo could not load after two attempts. Search for the place again to retry.`);
-      }
-    }
-    thisImage.onload = () => finish('');
-    // An image error does not expose an HTTP status or distinguish network from decode errors.
-    thisImage.onerror = () => finish('loaderror');
-    timer = later(() => finish('timeout'), timeoutMs);
-    status(attempt === 1 ? `Loading the ${label} photo…` : `Retrying the ${label} photo…`);
-    thisImage.crossOrigin = 'anonymous';
-    thisImage.src = url;
-  }
-  start();
-  return () => { cancelled = true; clear(timer); stopImage(); };
-}
+// Photo loading lives in aerial-source.js since 10 Nov 2026: Geoportal first, then my own copy of the two layers, then
+// slow retries with a plain message (bilingual through ys-de.js). Same arguments and the same first steps as before.
+export {loadAerialPhoto};
 
 export function utm33(lat, lon) {
   const a = 6378137.0, f = 1 / 298.257222101, e2 = f * (2 - f), k0 = 0.9996, lon0 = 15 * Math.PI / 180;
@@ -366,7 +322,7 @@ const confirmHtml = where => `<div class="ys-confirm" data-ys-confirm="${where}"
 // `host` holds two slots ([data-ys-slot="visual"], [data-ys-slot="form"]) and the add button ([data-ys-add]). Rebuilt from `state` whenever the storefront re-renders. `api.add(customText)` returns a promise; `api.busy()` says whether the cart is locked.
 export function mountConfigurator(host, state, api) {
   api.homesCleanup?.();
-  if(isHomes(state))return mountHomes(host,state,api,{PRINT_OPTIONS,gradePixels,utm33,fromUtm33,wmsUrl,inBerlin,fromPhoton,addressLabel,titleFrom,areaFrom,YS_SIZES,YS_PAPERS,ysSize,ysPaper,ysPrice});
+  if(isHomes(state))return mountHomes(host,state,api,{PRINT_OPTIONS,gradePixels,utm33,fromUtm33,wmsUrl,loadAerialImage,inBerlin,fromPhoton,addressLabel,titleFrom,areaFrom,YS_SIZES,YS_PAPERS,ysSize,ysPaper,ysPrice});
   const L = YS_LIMITS;
   const currentPrice=state=>api.variantPrice?api.variantPrice(state):ysPrice(state);
   const showPrice=(el,amount)=>{if(el)el.innerHTML=api.priceHtml?api.priceHtml(amount,state):euro(amount);};

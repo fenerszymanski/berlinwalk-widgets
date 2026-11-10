@@ -168,6 +168,21 @@ ATTRS.set("Checking the aerial photos…","Die Luftbilder werden geprüft…");
 TEXT.set("Check the text and character limits.","Prüfe die Texte und Zeichenlimits.");
 ATTRS.set("Check the text and character limits.","Prüfe die Texte und Zeichenlimits.");
 TEXT.set("The aerial photo could not load. Search for the place again to retry.","Das Luftbild konnte nicht geladen werden. Suche den Ort erneut.");
+// Photo status lines (aerial-source.js, 10 Nov 2026). The loading and retry lines had no German before.
+for (const [en, de] of [
+  ['Loading the 1928 photo…', 'Das Foto von 1928 wird geladen…'],
+  ['Loading the current photo…', 'Das heutige Foto wird geladen…'],
+  ['Retrying the 1928 photo…', 'Das Foto von 1928 wird erneut geladen…'],
+  ['Retrying the current photo…', 'Das heutige Foto wird erneut geladen…'],
+  ["The 1928 photo is not coming through: Berlin's aerial photo service is down right now. I keep trying here. You can also send this spot to your inbox and look again later.",
+    'Das Foto von 1928 kommt gerade nicht an: Der Luftbild-Dienst der Stadt Berlin ist im Moment gestört. Ich versuche es hier weiter. Du kannst dir diese Stelle auch per E-Mail schicken und später noch einmal ansehen.'],
+  ["The current photo is not coming through: Berlin's aerial photo service is down right now. I keep trying here. You can also send this spot to your inbox and look again later.",
+    'Das heutige Foto kommt gerade nicht an: Der Luftbild-Dienst der Stadt Berlin ist im Moment gestört. Ich versuche es hier weiter. Du kannst dir diese Stelle auch per E-Mail schicken und später noch einmal ansehen.'],
+  ["The 1928 photo could not load: Berlin's aerial photo service is still down. Search for the place again later, or send this spot to your inbox.",
+    'Das Foto von 1928 konnte nicht geladen werden: Der Luftbild-Dienst der Stadt Berlin ist noch gestört. Suche den Ort später noch einmal oder schick dir diese Stelle per E-Mail.'],
+  ["The current photo could not load: Berlin's aerial photo service is still down. Search for the place again later, or send this spot to your inbox.",
+    'Das heutige Foto konnte nicht geladen werden: Der Luftbild-Dienst der Stadt Berlin ist noch gestört. Suche den Ort später noch einmal oder schick dir diese Stelle per E-Mail.'],
+]) TEXT.set(en, de);
 ATTRS.set("The aerial photo could not load. Search for the place again to retry.","Das Luftbild konnte nicht geladen werden. Suche den Ort erneut.");
 for (const [en,de] of [['1928 & today','1928 und heute'],['Blue','Blau'],['Dark','Dunkel'],['Colour','Farbe'],['Then & now','Damals und heute'],['1928 only','Nur 1928'],['Black & white','Schwarzweiß'],['Cream','Creme'],['Blueprint','Blaupause'],['Charcoal','Anthrazit']]) ATTRS.set(en,de);
 TEXT.set('Your Berlin Homes in 1928','Deine Berliner Adressen um 1928');
