@@ -59,7 +59,7 @@ const TEXT = new Map(Object.entries({
   'Questions': 'Fragen', 'Something else? Write to': 'Noch etwas? Schreib an', '. I reply within a day.': '. Ich antworte innerhalb eines Tages.',
   'Which paper should I pick?': 'Welches Papier soll ich nehmen?',
   'Classic Matte (170 g) is the lightest and cheapest, Premium Matte (200 g) is smoother and whiter, Museum-Quality Matte (250 g) is archival and warm off-white. The semi-gloss papers have a soft sheen. For an old photograph I like matte best.': 'Classic Matte (170 g) ist am leichtesten und günstigsten, Premium Matte (200 g) glatter und weißer, Museum-Quality Matte (250 g) archivfest und warm-weiß. Die Semi-Gloss-Papiere glänzen leicht. Für ein altes Foto mag ich matt am liebsten.',
-  'Is a frame included?': 'Ist ein Rahmen dabei?', 'No, the poster is unframed. 30 x 40 cm is a standard frame size, so a ready-made frame fits.': 'Nein, das Poster kommt ohne Rahmen. 30 x 40 cm ist ein Standardformat, ein fertiger Rahmen passt.',
+  'Is a frame included?': 'Ist ein Rahmen dabei?',
   'What if the 1928 photo is blank at my spot?': 'Was, wenn das Foto von 1928 an meiner Stelle leer ist?', "The 1928 survey did not cover every corner of today's Berlin. The preview shows exactly what I print: if the top photo is blank, pick a place nearby.": 'Die Befliegung von 1928 deckte nicht jede Ecke des heutigen Berlins ab. Die Vorschau zeigt genau, was ich drucke. Ist das obere Foto leer, wähle einen Ort in der Nähe.',
   'Can I change the text after I order?': 'Kann ich den Text nach der Bestellung ändern?', 'Yes, until it goes to print. Write to me with your order number and the new text.': 'Ja, bis es in den Druck geht. Schreib mir deine Bestellnummer und den neuen Text.',
   'Where do you deliver, and how long does it take?': 'Wohin lieferst du, und wie lange dauert es?', 'Can I return it?': 'Kann ich es zurückgeben?',
@@ -339,6 +339,48 @@ for (const [en, de] of [
   ['Download & returns', 'Download und Rückgabe'], ['Image credits', 'Bildnachweise'], ['Visual credits and sources', 'Bildnachweise und Quellen'],
   ['More from the shop', 'Mehr aus dem Shop'], ['SEE DETAILS →', 'DETAILS ANSEHEN →'], ['Not confirmed', 'Noch nicht bestätigt'],
 ]) if (!TEXT.has(en)) TEXT.set(en, de);
+// 11 Kasım 2026: yeni biçimlerin bütün görünür metin ve etiketleri.
+const MOUNTED_TEXT = {
+  "200 g matte paper, smooth and white. My pick.": "Mattes Papier, 200 g, glatt und weiß. Meine Wahl.",
+  "Poster": "Poster",
+  "Framed": "Gerahmt",
+  "Canvas": "Leinwand",
+  "Frame": "Rahmen",
+  "Black": "Schwarz",
+  "White": "Weiß",
+  "Natural wood": "Naturholz",
+  "Fine Art": "Fine Art",
+  "Framed print": "Gerahmter Druck",
+  "Canvas print": "Leinwanddruck",
+  "Size, frame and paper": "Größe, Rahmen und Papier",
+  "Change options or text": "Optionen oder Text ändern",
+  "Wooden frame with acrylic glass. Hanging kit included.": "Holzrahmen mit Acrylglas. Aufhänger inklusive.",
+  "Fine Art paper, printed with 12 inks for deeper tones.": "Fine-Art-Papier, mit 12 Farben gedruckt, für tiefere Töne.",
+  "On canvas, stretched over a 2 cm wooden frame. Ready to hang.": "Auf Leinwand, über einen 2 cm Holzrahmen gespannt. Fertig zum Aufhängen.",
+  "Free delivery. Germany 5 to 8 working days, most of the EU and the UK 6 to 12, US 8 to 14. Exact days at checkout.": "Kostenloser Versand. Deutschland 5 bis 8 Werktage, fast die ganze EU und UK 6 bis 12, USA 8 bis 14. Genaue Tage an der Kasse.",
+  "For Christmas: order framed or canvas by 8 December (Germany), 4 December (most of the EU, UK) or 1 December (US).": "Für Weihnachten: gerahmt oder auf Leinwand bis 8. Dezember (Deutschland), 4. Dezember (fast die ganze EU, UK) oder 1. Dezember (USA) bestellen.",
+  "Framed and canvas prints do not count.": "Gerahmte Drucke und Leinwände zählen nicht mit.",
+  "Framed and canvas prints do not count towards the multi-print saving.": "Gerahmte Drucke und Leinwände zählen nicht für den Mengenrabatt.",
+  "Posters and digital files only. Framed and canvas prints do not count.": "Nur Poster und digitale Dateien. Gerahmte Drucke und Leinwände zählen nicht mit.",
+  "Illustrated preview. Your print shows the address you choose.": "Gezeichnete Vorschau. Dein Druck zeigt die Adresse, die du auswählst.",
+  "Illustrated framed print": "Gezeichnete Vorschau eines gerahmten Drucks",
+  "Illustrated wooden frame corner": "Gezeichnete Vorschau der Holzrahmenecke",
+  "Illustrated canvas front": "Gezeichnete Vorschau der Leinwand von vorn",
+  "Illustrated canvas with a 2 cm edge": "Gezeichnete Vorschau der Leinwand mit 2 cm Kante",
+  "Illustrated framed print: Chamissoplatz in 1928 and today": "Gezeichnete Vorschau: Chamissoplatz um 1928 und heute im Rahmen",
+  "Illustrated canvas print: Chamissoplatz in 1928 and today": "Gezeichnete Vorschau: Chamissoplatz um 1928 und heute auf Leinwand",
+  "Your Berlin Street in 1928, Framed print": "Deine Berliner Straße um 1928, gerahmt",
+  "Your Berlin Street in 1928, Canvas print": "Deine Berliner Straße um 1928 auf Leinwand",
+  "One Berlin address, seen from above in 1928 and today.": "Eine Berliner Adresse, um 1928 und heute von oben gesehen.",
+  "Black frame": "Schwarzer Rahmen",
+  "White frame": "Weißer Rahmen",
+  "Natural wood frame": "Naturholzrahmen",
+  "Premium Matte paper": "Premium-Matte-Papier",
+  "Fine Art paper": "Fine-Art-Papier",
+  "The Poster option is unframed. Framed includes a wooden frame with acrylic glass and a hanging kit. Canvas is stretched over a 2 cm wooden frame and ready to hang.": "Die Option Poster kommt ohne Rahmen. Gerahmt enthält einen Holzrahmen mit Acrylglas und Aufhänger. Die Leinwand ist über einen 2 cm Holzrahmen gespannt und fertig zum Aufhängen."
+};
+for(const [en,de] of Object.entries(MOUNTED_TEXT)){TEXT.set(en,de);ATTRS.set(en,de);}
+PATTERNS.unshift([/^(?:Framed print|Canvas print|30 x 40 cm|45 x 60 cm) · .*(?:frame|paper|€|cm).*$/, value=>value.split(' · ').map(part=>TEXT.get(part)||part).join(' · ')]);
 // Yalnız görünen metin; form değerleri, varyantlar ve sepet kaydı değişmez.
 const germanMoney = text => text.replace(/€(\d+(?:[.,]\d{2})?)/g, (_, number) => number.replace('.', ',')+' €');
 // Short cart words that could also appear elsewhere on a product page: translated only on the cart page and in the side cart.

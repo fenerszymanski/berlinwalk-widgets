@@ -1955,4 +1955,27 @@
       }
     ]
   }
+,
+{
+    "id": "ys-framed",
+    "name": "Your Berlin Street in 1928, Framed print",
+    "place": "Your home · c. 1928 and today",
+    "image": "framed-20261111/framed-black.webp",
+    "alt": "Illustrated framed print: Chamissoplatz in 1928 and today",
+    "typeLine": "Framed print",
+    "wixProductId": "33c1b670-fadc-4bcf-a1a5-82cc14b668ea",
+    "group": "ys1928-mounted",
+    "cardSummary": "One Berlin address, seen from above in 1928 and today."
+  },
+{
+    "id": "ys-canvas",
+    "name": "Your Berlin Street in 1928, Canvas print",
+    "place": "Your home · c. 1928 and today",
+    "image": "framed-20261111/canvas-front.webp",
+    "alt": "Illustrated canvas print: Chamissoplatz in 1928 and today",
+    "typeLine": "Canvas print",
+    "wixProductId": "6cf293bb-ae66-4cc0-a028-e6c08a15b325",
+    "group": "ys1928-mounted",
+    "cardSummary": "One Berlin address, seen from above in 1928 and today."
+  }
 ]

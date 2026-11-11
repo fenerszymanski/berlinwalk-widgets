@@ -1,5 +1,5 @@
 import {HOMES_CONFIG,encodeHomes,decodeHomes} from './homes-encoding.js';
-import {mountHomes,countChoice,isHomes,homesReady} from './homes-configurator.js';
+import {mountHomes,countChoice,isHomes,homesReady} from './homes-configurator.js?v=ys-framed-20261111';
 import {loadAerialPhoto,loadAerialImage} from './aerial-source.js';
 export {HOMES_CONFIG,decodeHomes};
 // Palette file is byte-identical to generator/print-options.json; no independent CSS colour approximation.
@@ -249,21 +249,36 @@ export const YS_PAPERS = Object.freeze([
   {name: 'Premium Semi-Gloss', note: '200 g paper with a soft sheen.', price: [39.90, 54.90]},
   {name: 'Classic Semi-Gloss', note: '170 g paper with a soft sheen, a little lighter.', price: [34.90, 49.90]},
 ]);
-export const ysSize = state => (YS_SIZES.includes(state.size) ? state.size : YS_SIZES[0]);
+export const YS_FRAMED_ID = '33c1b670-fadc-4bcf-a1a5-82cc14b668ea';
+export const YS_CANVAS_ID = '6cf293bb-ae66-4cc0-a028-e6c08a15b325';
+export const YS_FRAMES = Object.freeze(['Black', 'White', 'Natural wood']);
+export const ysMounted = state => !isHomes(state) && ['framed','canvas'].includes(state.format);
+export const ysFrame = state => YS_FRAMES.includes(state.frame) ? state.frame : 'Black';
+export const YS_FRAMED_PAPERS = Object.freeze([
+  {name:'Premium Matte',note:'200 g matte paper, smooth and white. My pick.'},
+  {name:'Fine Art',note:'Fine Art paper, printed with 12 inks for deeper tones.'}
+]);
+const sizeKey = state => ysMounted(state) ? state.format+'Size' : 'size';
+export const ysSize = state => (YS_SIZES.includes(state[sizeKey(state)]) ? state[sizeKey(state)] : YS_SIZES[0]);
 // The page opens on the cheapest poster, 30 x 40 Classic Matte (Yusuf, 26 Oct 2026: "default printed seçili ürün bence en ucuz olanı olmalı").
 const YS_DEFAULT_PAPER = 'Classic Matte';
-export const ysPaper = state => YS_PAPERS.find(p => p.name === state.paper) || YS_PAPERS.find(p => p.name === YS_DEFAULT_PAPER);
+export const ysPaper = state => ysMounted(state) && state.format==='framed' ? YS_FRAMED_PAPERS.find(p=>p.name===state.framedPaper)||YS_FRAMED_PAPERS[0] : YS_PAPERS.find(p => p.name === state.paper) || YS_PAPERS.find(p => p.name === YS_DEFAULT_PAPER);
 export const ysPrice = state => ysPaper(state).price[YS_SIZES.indexOf(ysSize(state))] + (isHomes(state)?20:0);
-export const ysChoices = state => ({Size: ysSize(state), Paper: ysPaper(state).name});
+export const ysChoices = state => ysMounted(state) ? state.format==='canvas' ? {Size:ysSize(state)} : {Size:ysSize(state),Frame:ysFrame(state),Paper:ysPaper(state).name} : ({Size: ysSize(state), Paper: ysPaper(state).name});
 export const euro = n => `€${n.toFixed(2)}`;
 // Digital file (Yusuf, 26 Oct 2026: a cheap print-it-yourself version next to the poster). A separate Wix digital product with the same two
 // map fields; the file is made with make_print.py --digital and sent by email. Offered only when the shop catalogue carries that product.
 export const YS_DIGITAL_ID = '9b6fbecf-32e4-27dc-f3e6-9c887fe7f495';
 export const YS_DIGITAL_PRICE = 14.90;
 export const ysDigital = state => state.format === 'digital';
-export const ysProductId = state => isHomes(state) ? HOMES_CONFIG.products[ysDigital(state)?"digital":"poster"] : (ysDigital(state) ? YS_DIGITAL_ID : YS_PRODUCT_ID);
+export const ysProductId = state => isHomes(state) ? HOMES_CONFIG.products[ysDigital(state)?"digital":"poster"] : (ysDigital(state) ? YS_DIGITAL_ID : ysMounted(state) ? (state.format==='framed'?YS_FRAMED_ID:YS_CANVAS_ID) : YS_PRODUCT_ID);
 const DIGITAL_SPEC = 'Digital file · JPG + PDF · 45 x 60 cm at 300 ppi';
 const DIGITAL_DELIVERY = 'Prints cleanly at 30 x 40 cm too. Nothing is shipped, so it works anywhere.';
+export const MOUNTED_DELIVERY = 'Free delivery. Germany 5 to 8 working days, most of the EU and the UK 6 to 12, US 8 to 14. Exact days at checkout.';
+export const MOUNTED_CHRISTMAS = 'For Christmas: order framed or canvas by 8 December (Germany), 4 December (most of the EU, UK) or 1 December (US).';
+export const mountedChristmasOpen = (now=Date.now()) => now < Date.parse('2026-12-09T00:00:00+01:00');
+export const FRAMED_SPEC = 'Wooden frame with acrylic glass. Hanging kit included.';
+export const CANVAS_SPEC = 'On canvas, stretched over a 2 cm wooden frame. Ready to hang.';
 const POSTER_DELIVERY = 'Arrives in 3 to 5 working days in Germany, 4 to 9 elsewhere. Frame not included.';
 const captionFor = (state, live) => live && ysLayout(state)==='1928-only' ? 'Your home in 1928. One large aerial photograph, with your building marked.' : (ysDigital(state) ? (live ? CAPTION_LIVE.replace('Your poster, SIZE', 'Your digital file') : 'Example file. Search an address to see your home, then add your own words.') : (live ? CAPTION_LIVE : CAPTION_EXAMPLE).replace('SIZE', ysSize(state)));
 // Everything the print needs except the buyer's "yes, I see the 1928 photo": the add buttons are live from here on (25 Oct 2026).
@@ -322,6 +337,7 @@ const confirmHtml = where => `<div class="ys-confirm" data-ys-confirm="${where}"
 // `host` holds two slots ([data-ys-slot="visual"], [data-ys-slot="form"]) and the add button ([data-ys-add]). Rebuilt from `state` whenever the storefront re-renders. `api.add(customText)` returns a promise; `api.busy()` says whether the cart is locked.
 export function mountConfigurator(host, state, api) {
   api.homesCleanup?.();
+  if(isHomes(state)&&['framed','canvas'].includes(state.format))state.format='poster';
   if(isHomes(state))return mountHomes(host,state,api,{PRINT_OPTIONS,gradePixels,utm33,fromUtm33,wmsUrl,loadAerialImage,inBerlin,fromPhoton,addressLabel,titleFrom,areaFrom,YS_SIZES,YS_PAPERS,ysSize,ysPaper,ysPrice});
   const L = YS_LIMITS;
   const currentPrice=state=>api.variantPrice?api.variantPrice(state):ysPrice(state);
@@ -354,6 +370,7 @@ export function mountConfigurator(host, state, api) {
         </div>
         <div class="ys-sheet ys-sample" data-ys="example" ${state.lat ? 'hidden' : ''}><img src="${esc(api.sample)}" alt="Example print: Chamissoplatz in 1928 and today"><span class="ys-words-tag" aria-hidden="true"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M11.3 1.9a1.5 1.5 0 0 1 2.1 0l.7.7a1.5 1.5 0 0 1 0 2.1L5.6 13.2 2 14l.8-3.6z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg><span>Home since 2014</span></span></div>
       </div>
+      <div class="ys-mockups" data-ys-mockups hidden><p>Illustrated preview. Your print shows the address you choose.</p><div data-ys-picture="framed"><img data-ys-frame-image alt="Illustrated framed print" width="1200" height="1200" loading="lazy"><img src="${new URL('./assets/framed-20261111/framed-corner.webp',import.meta.url).href}" alt="Illustrated wooden frame corner" width="1200" height="1200" loading="lazy"></div><div data-ys-picture="canvas"><img src="${new URL('./assets/framed-20261111/canvas-front.webp',import.meta.url).href}" alt="Illustrated canvas front" width="1200" height="1200" loading="lazy"><img src="${new URL('./assets/framed-20261111/canvas-angle.webp',import.meta.url).href}" alt="Illustrated canvas with a 2 cm edge" width="1200" height="1200" loading="lazy"></div></div>
       <p class="ys-caption" data-ys="caption">${captionFor(state, !!state.lat)}</p>
       <div class="ys-quick" data-ys="quick" ${state.lat ? '' : 'hidden'}>
         <button type="button" class="primary" data-ys-quickadd>Add to cart</button>
@@ -388,9 +405,9 @@ export function mountConfigurator(host, state, api) {
         <label>Your words on the print (optional)<input data-ys="line" maxlength="${L.line}" placeholder="Home since 2014" value="${esc(state.line || '')}"></label>
         <p class="ys-hint">The house number is never printed.</p>
       </div>
-      <div class="ys-format ys-format-top" data-ys="format" ${api.digital ? '' : 'hidden'}>
+      <div class="ys-format ys-format-top" data-ys="format" ${api.digital||api.framed||api.canvas ? '' : 'hidden'}>
         <span class="ys-label" id="ys-format-l">What you get</span>
-        <div class="ys-sizes" role="radiogroup" aria-labelledby="ys-format-l"><button type="button" role="radio" class="ys-size" data-ys-format="poster" aria-checked="${!ysDigital(state)}">Printed poster<small>From ${euro(currentPrice({...state,size:YS_SIZES[0],paper:'Classic Matte'}))} · printed and posted to you, free delivery</small></button><button type="button" role="radio" class="ys-size" data-ys-format="digital" aria-checked="${ysDigital(state)}">Digital file<small>${Number.isFinite(api.digitalPrice)?euro(api.digitalPrice):'Currently unavailable'} · JPG + PDF by email, print it yourself</small></button></div>
+        <div class="ys-sizes ys-formats" role="radiogroup" aria-labelledby="ys-format-l">${[['poster','Poster',true],['framed','Framed',api.framed],['canvas','Canvas',api.canvas],['digital','Digital file',api.digital]].filter(([, ,available])=>available).map(([key,label])=>`<button type="button" role="radio" class="ys-size" data-ys-format="${key}" aria-checked="${(state.format||'poster')===key}"><span>${label}</span></button>`).join('')}</div>
       </div>
       <div class="ys-choice-row" role="group" aria-label="Layout"><span class="ys-label">Layout</span><div class="ys-layouts" role="radiogroup" aria-label="Layout">${Object.entries(PRINT_OPTIONS.layouts).map(([key,name])=>`<button type="button" role="radio" data-ys-layout="${key}" aria-checked="${key===ysLayout(state)}"><img class="ys-layout-thumb" src="${new URL(`./assets/options/sepia-${key}${new URLSearchParams(location.search).get('lang')==='de'?'-de':''}.jpg`,import.meta.url).href}" alt="">${name}</button>`).join('')}</div></div>
       <div class="ys-choice-row" role="group" aria-label="Colour"><span class="ys-label">Colour <small data-ys="colourname">${optionNames(state).colour}</small></span><div class="ys-swatches" role="radiogroup" aria-label="Colour">${Object.entries(PRINT_OPTIONS.themes).map(([key,t])=>`<button type="button" role="radio" data-ys-colour="${key}" title="${esc(t.name)}" aria-label="${esc(t.name)}" aria-checked="${key===ysColour(state)}" style="--swatch:rgb(${t.mid.join(',')});--paper:rgb(${t.bg.join(',')})"><span aria-hidden="true"></span></button>`).join('')}</div></div>
@@ -400,7 +417,8 @@ export function mountConfigurator(host, state, api) {
           <div class="ys-variant" data-ys="variant" ${api.variants && !ysDigital(state) ? '' : 'hidden'}>
             <span class="ys-label" id="ys-size-l">Size</span>
             <div class="ys-sizes" role="radiogroup" aria-labelledby="ys-size-l">${YS_SIZES.map(z => `<button type="button" role="radio" class="ys-size" data-ys-size="${esc(z)}" aria-checked="${z === ysSize(state)}">${esc(z)}<small data-ys-sizeprice="${esc(z)}"></small></button>`).join('')}</div>
-            <label class="ys-label" for="ys-paper">Paper</label>
+            <div data-ys="framechoices" hidden><span class="ys-label" id="ys-frame-l">Frame</span><div class="ys-frames" role="radiogroup" aria-labelledby="ys-frame-l">${YS_FRAMES.map((name,i)=>`<button type="button" role="radio" class="ys-frame" data-ys-frame="${name}" aria-checked="${ysFrame(state)===name}"><span class="ys-frame-dot" style="--frame-colour:${['#242522','#efeee9','#be9869'][i]}" aria-hidden="true"></span><span>${name}</span></button>`).join('')}</div></div>
+            <label class="ys-label" for="ys-paper" data-ys="paperlabel">Paper</label>
             <select id="ys-paper" data-ys="paper">${YS_PAPERS.map(p => `<option value="${esc(p.name)}" ${p.name === ysPaper(state).name ? 'selected' : ''}>${esc(p.name)}</option>`).join('')}</select>
             <p class="ys-hint" data-ys="papernote"></p>
           </div>
@@ -415,13 +433,36 @@ export function mountConfigurator(host, state, api) {
   const optSummary = text => { $('optsummary').textContent = text; };
   $('options').addEventListener('toggle', () => { state.optionsOpen = $('options').open; });
   function paintVariant() {
-    if (!api.digital && ysDigital(state)) state.format = 'poster';   // the digital product is not in the catalogue: poster only
-    $('options').hidden = !api.variants || ysDigital(state);   // only the poster has sizes and papers; the format choice sits above the box
-    host.querySelectorAll('[data-ys-format]').forEach(b => b.setAttribute('aria-checked', String((b.dataset.ysFormat === 'digital') === ysDigital(state))));
-    $('variant').hidden = !api.variants || ysDigital(state);
-    const delivery = host.querySelector('.ys-buy .delivery'); if (delivery) delivery.textContent = ysDigital(state) ? DIGITAL_DELIVERY : POSTER_DELIVERY;
-    (host.getRootNode().querySelectorAll ? host.getRootNode() : host).querySelectorAll('[data-ys-legal]').forEach(el => { el.hidden = el.dataset.ysLegal !== (ysDigital(state) ? 'digital' : 'poster'); });
-    host.querySelector('[data-ys-jump]').textContent = ysDigital(state) ? 'Change format or text' : 'Change size, paper or text';
+    if ((!api.digital && ysDigital(state)) || (ysMounted(state) && !api[state.format])) state.format = 'poster';
+    const mounted=ysMounted(state),canvas=mounted&&state.format==='canvas',framed=mounted&&!canvas;
+    const kind=mounted?'poster':ysDigital(state)?'digital':'poster';
+    const stage=host.querySelector('.ys-stage');stage.dataset.format=mounted?state.format:'poster';stage.dataset.frame=ysFrame(state);
+    stage.style.setProperty('--frame-ratio',String(12/(ysSize(state)===YS_SIZES[1]?450:300)));
+    const papers=framed?YS_FRAMED_PAPERS:YS_PAPERS;
+    if($('paper').dataset.kind!==(framed?'framed':'poster')){$('paper').innerHTML=papers.map(p=>`<option value="${esc(p.name)}">${esc(p.name)}</option>`).join('');$('paper').dataset.kind=framed?'framed':'poster';}
+    $('paper').value=ysPaper(state).name;$('paper').hidden=canvas;$('paperlabel').hidden=canvas;$('papernote').hidden=canvas;$('framechoices').hidden=!framed;
+    host.querySelector('.ys-options-t').textContent=canvas?'Size':framed?'Size, frame and paper':'Size and paper';
+    if(mounted){$('options').open=true;state.optionsOpen=true;}
+    host.querySelectorAll('[data-ys-frame]').forEach(b=>b.setAttribute('aria-checked',String(b.dataset.ysFrame===ysFrame(state))));
+    host.querySelectorAll('[data-ys-poster-only]').forEach(el=>el.hidden=mounted||ysDigital(state));
+    const multi=host.querySelector('[data-ys-multi]');if(multi)multi.hidden=mounted;
+    $('mail').hidden=mounted||!state.lat;
+    const gift=host.querySelector('[data-ys-gift]');if(gift)gift.hidden=mounted;
+    const root=host.getRootNode();
+    root.querySelectorAll('[data-ys-mounted-spec]').forEach(el=>{el.hidden=!mounted;el.textContent=framed?FRAMED_SPEC:CANVAS_SPEC;});
+    root.querySelectorAll('[data-ys-mounted-christmas]').forEach(el=>{el.hidden=!mounted||!mountedChristmasOpen();});
+    root.querySelectorAll('[data-ys-mounted-delivery]').forEach(el=>el.hidden=!mounted);
+    root.querySelectorAll('[data-ys-mounted-saving]').forEach(el=>el.hidden=!mounted);
+    root.querySelectorAll('[data-ys-shipping]').forEach(el=>{el.hidden=mounted||ysDigital(state);});
+    const shots=host.querySelector('[data-ys-mockups]');if(shots){shots.hidden=!mounted;shots.querySelectorAll('[data-ys-picture]').forEach(el=>el.hidden=el.dataset.ysPicture!==(framed?'framed':'canvas'));}
+    const frameImage=host.querySelector('[data-ys-frame-image]');if(frameImage){const key={'Black':'black','White':'white','Natural wood':'natural-wood'}[ysFrame(state)];frameImage.src=new URL('./assets/framed-20261111/framed-'+key+'.webp',import.meta.url).href;}
+       // the digital product is not in the catalogue: poster only
+    $('options').hidden = (!api.variants&&!mounted) || ysDigital(state);   // only the poster has sizes and papers; the format choice sits above the box
+    host.querySelectorAll('[data-ys-format]').forEach(b => b.setAttribute('aria-checked', String(b.dataset.ysFormat === (state.format||'poster'))));
+    $('variant').hidden = (!api.variants&&!mounted) || ysDigital(state);
+    const delivery = host.querySelector('.ys-buy .delivery'); if (delivery) delivery.textContent = mounted ? MOUNTED_DELIVERY : ysDigital(state) ? DIGITAL_DELIVERY : POSTER_DELIVERY;
+    (host.getRootNode().querySelectorAll ? host.getRootNode() : host).querySelectorAll('[data-ys-legal]').forEach(el => { el.hidden = el.dataset.ysLegal !== kind || (mounted&&el.hasAttribute('data-ys-poster-only'));  });
+    host.querySelector('[data-ys-jump]').textContent = ysDigital(state) ? 'Change format or text' : mounted ? 'Change options or text' : 'Change size, paper or text';
     if (ysDigital(state)) {
       if(!Number.isFinite(api.digitalPrice))return;
       const label = euro(api.digitalPrice);
@@ -433,6 +474,20 @@ export function mountConfigurator(host, state, api) {
       $('quickspec').textContent = 'Digital file · JPG + PDF';
       host.querySelectorAll('[data-ys-yes]').forEach(b => { b.textContent = `Yes, add to cart · ${label}`; });
       $('caption').textContent = captionFor(state, !!state.lat);
+      return;
+    }
+    if(mounted){
+      const amount=currentPrice(state),label=Number.isFinite(amount)?euro(amount):'Currently unavailable';
+      const parts=[state.format==='framed'?'Framed print':'Canvas print',ysSize(state),...(framed?[ysFrame(state)+' frame',ysPaper(state).name+' paper']:[])];
+      host.querySelectorAll('[data-ys-size]').forEach(b=>b.setAttribute('aria-checked',String(b.dataset.ysSize===ysSize(state))));
+      host.querySelectorAll('[data-ys-sizeprice]').forEach(el=>{const price=currentPrice({...state,[sizeKey(state)]:el.dataset.ysSizeprice});el.textContent=Number.isFinite(price)?euro(price):'Currently unavailable';});
+      $('papernote').textContent=ysPaper(state).note;
+      optSummary(parts.slice(1).join(' · ')+' · '+label);
+      const price=host.querySelector('.product-title .price');if(Number.isFinite(amount))showPrice(price,amount);else if(price)price.textContent=label;
+      host.querySelector('.ys-buy .spec').textContent=parts.join(' · ');
+      host.querySelectorAll('[data-ys-add],[data-ys-quickadd]').forEach(b=>b.textContent='Add to cart · '+label);
+      host.querySelectorAll('[data-ys-yes]').forEach(b=>b.textContent='Yes, add to cart · '+label);
+      $('quickspec').textContent=parts.join(' · ');$('caption').textContent=captionFor(state,!!state.lat);refreshButton();
       return;
     }
     if (!api.variants) { optSummary('Printed poster'); $('caption').textContent = captionFor(state, !!state.lat); return; }   // the picker shows only once the Wix product has its size x paper variants
@@ -449,9 +504,10 @@ export function mountConfigurator(host, state, api) {
     host.querySelectorAll('[data-ys-yes]').forEach(b => { b.textContent = `Yes, add to cart · ${euro(currentPrice(state))}`; });
     $('caption').textContent = captionFor(state, !!state.lat);
   }
-  host.querySelectorAll('[data-ys-size]').forEach(b => b.addEventListener('click', () => { state.size = b.dataset.ysSize; paintVariant(); }));
-  host.querySelectorAll('[data-ys-format]').forEach(b => b.addEventListener('click', () => { const was = ysDigital(state); state.format = b.dataset.ysFormat; if (ysDigital(state) && !was) api.track?.('digital'); paintVariant(); }));
-  $('paper').addEventListener('change', e => { state.paper = e.target.value; paintVariant(); });
+  host.querySelectorAll('[data-ys-size]').forEach(b => b.addEventListener('click', () => { state[sizeKey(state)] = b.dataset.ysSize; paintVariant(); }));
+  host.querySelectorAll('[data-ys-format]').forEach(b => b.addEventListener('click', () => { const was=state.format||'poster';state.format=b.dataset.ysFormat;if(state.format!==was&&['digital','framed','canvas'].includes(state.format))api.track?.(state.format); paintVariant(); }));
+  $('paper').addEventListener('change', e => { state[ysMounted(state)?'framedPaper':'paper'] = e.target.value; paintVariant(); });
+  host.querySelectorAll('[data-ys-frame]').forEach(b=>b.addEventListener('click',()=>{state.frame=b.dataset.ysFrame;paintVariant();}));
   queueMicrotask(paintVariant);
   api.cancelPhotos?.();
   const ptitle = $('ptitle'), parea = $('parea'), pcoords = $('pcoords'), pline = $('pline');
@@ -511,7 +567,7 @@ export function mountConfigurator(host, state, api) {
   // The confirm panel shows under the button that opened it (state.confirming = "quick" | "form"); it survives storefront re-renders.
   const paintConfirm = () => { host.querySelectorAll('[data-ys-confirm]').forEach(p => { p.hidden = !state.lat || state.seen === true || state.confirming !== p.dataset.ysConfirm; if (p.hidden) p.querySelector('[data-ys-noinfo]').hidden = true; }); };
   const refreshButton = () => {
-    const ready = readyToCheck(state), off = !ready || api.busy();
+    const ready = readyToCheck(state), off = !ready || api.busy() || (ysMounted(state)&&!Number.isFinite(currentPrice(state)));
     const b = host.getRootNode().querySelector?.('[data-ys-add]'); if (b) b.disabled = off;
     host.querySelector('[data-ys-quickadd]').disabled = off; $('quick').hidden = !state.lat;
     host.querySelectorAll('[data-ys-yes]').forEach(y => { y.disabled = off; });
@@ -523,7 +579,7 @@ export function mountConfigurator(host, state, api) {
   function showPoint(fresh) {
     if (!state.lat) return;
     $('sheet').hidden = false; $('example').hidden = true; $('fields').hidden = false;
-    $('mail').hidden = false;
+    $('mail').hidden = ysMounted(state);
     if (!api.mailboxSeen) { api.mailboxSeen = true; api.track?.('mailbox'); }   // funnel: the preview exists and the mail box is on screen
     if (fresh) paintMail('');
     $('caption').textContent = captionFor(state, true);

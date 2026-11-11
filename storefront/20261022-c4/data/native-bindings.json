@@ -832,4 +832,19 @@
       "02d24409-01f2-4b00-b24d-d762d74a4fb6"
     ]
   }
+,
+{
+  "wixProductId": "33c1b670-fadc-4bcf-a1a5-82cc14b668ea",
+  "nativeProductType": "physical",
+  "nativeCategoryIds": [
+    "00000000-000000-000000-000000000001"
+  ]
+},
+{
+  "wixProductId": "6cf293bb-ae66-4cc0-a028-e6c08a15b325",
+  "nativeProductType": "physical",
+  "nativeCategoryIds": [
+    "00000000-000000-000000-000000000001"
+  ]
+}
 ]

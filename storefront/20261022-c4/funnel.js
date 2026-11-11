@@ -18,6 +18,7 @@ const W = typeof window !== 'undefined' ? window : {};
 const ENDPOINT = 'https://app.berlinwalk.com/api/traffic-count';
 const HOSTS = ['www.walkofberlin.com', 'www.berlinwalk.com'];
 export const YS_ID = '8aaf5412-7f21-42c7-acfb-85dd8417d68c';
+export const YS_MOUNTED_IDS = ['33c1b670-fadc-4bcf-a1a5-82cc14b668ea','6cf293bb-ae66-4cc0-a028-e6c08a15b325'];
 export const YS_DIGITAL_ID = '9b6fbecf-32e4-27dc-f3e6-9c887fe7f495';   // its digital file (26 Oct 2026); add counts land on the 1928 page path
 export const YS_PATH = '/product-page/your-berlin-street-in-1928-personalised-aerial-print-30-x-40-cm';
 const STORE_PATH = '/category/all-products';
@@ -126,7 +127,7 @@ export function checkout(cart) {
   count('checkout', STORE_PATH);
   W.WobCampaignFunnel?.emit('checkout','begin_checkout');
   journey('bw_store_checkout', STORE_PATH, {productIds: lines.map(line => line.productId).slice(0, 10), items: lines.length});
-  if (lines.some(line => line.productId === YS_ID || line.productId === YS_DIGITAL_ID)) count('checkout', YS_PATH);
+  if (lines.some(line => line.productId === YS_ID || line.productId === YS_DIGITAL_ID || YS_MOUNTED_IDS.includes(line.productId))) count('checkout', YS_PATH);
   if (lines.some(line => line.productId === YS_DIGITAL_ID)) count('checkout-digital', YS_PATH);
 }
 

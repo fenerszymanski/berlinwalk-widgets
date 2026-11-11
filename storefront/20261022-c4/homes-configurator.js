@@ -12,7 +12,7 @@ export function countChoice(host,state,api,remount) {
   slot.insertAdjacentHTML('afterbegin',`<fieldset class="homes-count"><legend>How many homes?</legend><div role="radiogroup" aria-label="How many homes?">${[1,2,3].map(n=>`<button class="outline" type="button" role="radio" data-home-count="${n}" aria-checked="${Number(state.homesCount||1)===n}">${n===1?'One home':n+' homes'}</button>`).join('')}</div>${isHomes(state)?'<p>Put the homes of your Berlin life on one print: your first flat, the one you live in now, your parents\' house. Each one in 1928 and today.</p><p class="homes-gift">A gift idea: the homes of your parents\' Berlin years.</p>':''}</fieldset>`);
   slot.querySelectorAll('[data-home-count]').forEach(b=>b.addEventListener('click',()=>{
     const n=Number(b.dataset.homeCount);if(n===Number(state.homesCount||1))return;
-    api.cancelPhotos?.();api.homesCleanup?.();state.homesCount=n;
+    api.cancelPhotos?.();api.homesCleanup?.();state.homesCount=n;if(n>1&&['framed','canvas'].includes(state.format))state.format='poster';
     state.homes=state.homes||[];while(state.homes.length<n)state.homes.push({});
     state.activeHome=Math.min(state.activeHome||0,n-1);
     if(!state.heading)state.heading=new URLSearchParams(location.search).get('lang')==='de'?'UNSERE BERLINER ADRESSEN':'OUR BERLIN HOMES';
