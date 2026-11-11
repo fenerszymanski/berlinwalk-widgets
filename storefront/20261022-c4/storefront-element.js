@@ -5,7 +5,7 @@
   const base = new URL('.', script.src);
   const CHANNEL = 'wob:shop-cart:v1';
   const esc = value => String(value ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-  const asset = value => {if(value==='gift-week.js'&&/^[a-f0-9]{40}$/.test(window.__WOB_GIFT_WEEK_P22_REF||''))return 'https://cdn.jsdelivr.net/gh/fenerszymanski/berlinwalk-widgets@'+window.__WOB_GIFT_WEEK_P22_REF+'/storefront/20261022-c4/gift-week.js';const target=new URL(value,base);if(/\.(?:js|css|json)$/.test(target.pathname))target.searchParams.set('v','onesize-20261111');return target.href;};
+  const asset = value => {if(value==='gift-week.js'&&/^[a-f0-9]{40}$/.test(window.__WOB_GIFT_WEEK_P22_REF||''))return 'https://cdn.jsdelivr.net/gh/fenerszymanski/berlinwalk-widgets@'+window.__WOB_GIFT_WEEK_P22_REF+'/storefront/20261022-c4/gift-week.js';const target=new URL(value,base);if(/\.(?:js|css|json)$/.test(target.pathname))target.searchParams.set('v','de-live-20261111');return target.href;};
   // Chrome and Safari ignore @font-face inside shadow DOM, so the three faces are registered once on the document with absolute URLs from the element's own base.
   // Gift landing trials showed no LCP gain. Preserve their prior resource and font order.
   const legacyGiftPresentation = () => /^(?:\/de)?\/(?:category\/(?:berlin-christmas-gifts|berlin-geschenke)|gifts|geschenke)\/?$/.test(location.pathname);
@@ -69,7 +69,8 @@
   // goes to /de/cart-page gets the German checkout (tested 10 Nov: /de/cart-page > Checkout = /de/checkout, all German). Wix serves /de/
   // only while the German language is VISIBLE (404 while hidden), so DE_CHECKOUT stays false until German goes live; then set it true and
   // bump the asset version. A visitor already on a /de/ page can only be there while German is visible, so /de/ pages use it anyway.
-  const DE_CHECKOUT = false;
+  // 11 Nov 2026 (Yusuf "tamam bitirelim"): German is VISIBLE, the -de legal pages, German checkout policies and the German order email are live.
+  const DE_CHECKOUT = true;
   const dePath = () => {try{return /^\/de(?:\/|$)/.test(location.pathname);}catch(e){return false;}};
   const deCart = german => !!german&&(DE_CHECKOUT||dePath());
   const cartPageUrl = german => deCart(german)?'https://walkofberlin.com/de/cart-page':'https://walkofberlin.com/cart-page'+(german?'?lang=de':'');
@@ -932,7 +933,7 @@
       if(this.legalGerman())return `<div class="legal-box bw-raw" lang="de" data-legal-lang="de"><p class="legal-ack">${esc(ACK_DE)}</p><p class="legal-links"><a href="${LEGAL_DE.terms}" target="_blank" rel="noopener">AGB</a><a href="${LEGAL_DE.withdrawalNotice}" target="_blank" rel="noopener">Widerrufsbelehrungen und Muster-Widerrufsformular</a></p></div>`;
       return `<div class="legal-box" data-legal-lang="en"><p class="legal-ack">${esc(ACK)}</p>${this.legalLinks()}</div>`;
     }
-    legalLinks() {return `<p class="legal-links"><a href="${LEGAL.terms}" target="_blank" rel="noopener">Store Terms</a><a href="${LEGAL.withdrawalNotice}" target="_blank" rel="noopener">Withdrawal notices and model form</a></p>`;}
+    legalLinks() {if(this.legalGerman())return `<p class="legal-links bw-raw" lang="de"><a href="${LEGAL_DE.terms}" target="_blank" rel="noopener">AGB</a><a href="${LEGAL_DE.withdrawalNotice}" target="_blank" rel="noopener">Widerrufsbelehrungen und Muster-Widerrufsformular</a></p>`;return `<p class="legal-links"><a href="${LEGAL.terms}" target="_blank" rel="noopener">Store Terms</a><a href="${LEGAL.withdrawalNotice}" target="_blank" rel="noopener">Withdrawal notices and model form</a></p>`;}
     withdrawButton() {return `<p class="withdraw-row"><a class="outline withdraw-link" data-withdraw href="${LEGAL.withdraw}" target="_blank" rel="noopener">Withdraw from contract (Vertrag widerrufen)</a></p>`;}
     guaranteeNotice() {return `<section class="eu-guarantee" aria-labelledby="eu-guarantee-title"><h3 id="eu-guarantee-title">EU legal guarantee notice</h3><a href="${esc(asset(LEGAL.guaranteeImage))}" target="_blank" rel="noopener"><img src="${esc(asset(LEGAL.guaranteeImage))}" alt="${esc(GUARANTEE_ALT)}" width="884" height="1200" loading="lazy"></a><p class="meta">Official notice under Regulation (EU) 2025/1960, Annex I. <a href="${LEGAL.guaranteeInfo}" target="_blank" rel="noopener">More about legal guarantees</a></p></section>`;}
     // The native ID comes from trusted catalogue metadata, never the title, URL or cart line.
