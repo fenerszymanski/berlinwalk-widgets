@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Berlin Market Hall Clock: Which Old Hall Is Open When You Are Free</title>
+<link rel="stylesheet" href="../css/brand.css">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { overflow-x: hidden; }
+  body { font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #FFFFFF; color: #24211b; padding: 12px; }
+  .mh { border-radius: 16px; overflow: hidden; border: 1px solid #d8cdb4; background: #f6efdf; }
+  .mh-head { padding: 18px 18px 6px; }
+  .mh-kick { display: inline-block; font-size: 10.5px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; color: #123D18; background: #FFE600; padding: 3px 8px; border-radius: 4px; }
+  .mh-head h1 { font-family: 'Merriweather', Georgia, serif; font-size: 21px; line-height: 1.3; margin-top: 9px; color: #1B5E20; }
+  .mh-head p { font-size: 13px; line-height: 1.6; color: #4d463a; margin-top: 7px; max-width: 760px; }
+
+  .mh-ctrl { margin: 10px 12px 0; background: #fffdf6; border: 1px solid #e3d8c0; border-radius: 14px; padding: 12px 14px 10px; }
+  .mh-days { display: flex; gap: 6px; flex-wrap: wrap; }
+  .mh-days button { font-family: inherit; font-size: 13px; font-weight: 800; min-width: 46px; padding: 8px 10px; border-radius: 10px; border: 2px solid #c9bc9f; background: #fff; color: #3b352b; cursor: pointer; }
+  .mh-days button[aria-pressed=true] { background: #1B5E20; border-color: #1B5E20; color: #fff; }
+  .mh-days button:focus-visible { outline: 3px solid #FFE600; outline-offset: 1px; }
+  .mh-time { display: flex; flex-wrap: wrap; gap: 10px 18px; align-items: flex-end; }
+  .mh-clock { font-family: 'Merriweather', Georgia, serif; font-size: 26px; font-weight: 700; color: #1B5E20; }
+  .mh-time label { display: block; font-size: 10.5px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: #6b604c; margin-bottom: 4px; }
+  input[type=date] { font-family: inherit; font-size: 16px; font-weight: 700; padding: 9px 11px; border: 2px solid #1B5E20; border-radius: 10px; background: #fff; color: #1f1c17; max-width: 100%; }
+  input[type=date]:focus-visible { outline: 3px solid #FFE600; outline-offset: 1px; }
+  .mh-slotlabel { font-size: 10.5px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: #6b604c; margin: 12px 0 5px; }
+  .mh-hol { margin-top: 8px; font-size: 12px; font-weight: 700; color: #8a2b2b; }
+  .mh-now { margin-top: 8px; font-family: inherit; font-size: 12px; font-weight: 800; padding: 6px 12px; border-radius: 999px; border: 2px solid #1B5E20; background: #fff; color: #1B5E20; cursor: pointer; }
+  .mh-now:hover, .mh-now:focus-visible { background: #FFE600; color: #123D18; outline: none; }
+
+  .mh-strip { margin: 12px 12px 0; background: #fffdf6; border: 1px solid #e3d8c0; border-radius: 14px; padding: 12px 12px 8px; }
+  .mh-strip h2, .mh-map h2 { font-size: 10.5px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: #6b604c; margin: 0 2px 8px; }
+  .mh-strip svg { display: block; width: 100%; height: auto; }
+  .mh-legend { display: flex; flex-wrap: wrap; gap: 6px 14px; font-size: 11px; color: #4d463a; margin: 6px 2px 0; }
+  .mh-legend span { display: inline-flex; align-items: center; gap: 6px; }
+  .mh-legend i { display: inline-block; width: 16px; height: 9px; border-radius: 3px; }
+
+  .mh-cards { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; margin: 12px; }
+  .mh-card { background: #fff; border: 2px solid #e3d8c0; border-radius: 14px; padding: 12px 13px; text-align: left; }
+  .mh-card:focus-visible { outline: 3px solid #FFE600; outline-offset: 1px; }
+  .mh-card.sel { border-color: #1B5E20; box-shadow: 0 0 0 2px #C5E1A5; }
+  .mh-card .num { font-size: 10.5px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: #8a5a2b; }
+  .mh-card h3 { font-family: 'Merriweather', Georgia, serif; font-size: 16px; line-height: 1.3; margin-top: 3px; color: #1f1c17; }
+  .mh-card .where { font-size: 11.5px; color: #6b604c; margin-top: 2px; }
+  .mh-state { display: inline-block; margin-top: 8px; font-size: 11.5px; font-weight: 800; padding: 3px 9px; border-radius: 999px; }
+  .s-best { background: #1B5E20; color: #fff; }
+  .s-open { background: #E8F5E9; color: #123D18; border: 1px solid #9CCC65; }
+  .s-doors { background: #FFF6BF; color: #4a3b00; border: 1px solid #e0c64c; }
+  .s-shut { background: #efe9dc; color: #5a5243; border: 1px solid #d3c8b0; }
+  .mh-card p { font-size: 12.5px; line-height: 1.5; margin-top: 7px; color: #3b352b; }
+  .mh-pick { margin: 0 12px; padding: 11px 14px; border-radius: 12px; background: #123D18; color: #f6efdf; font-size: 13px; line-height: 1.55; }
+  .mh-pick b { color: #FFE600; }
+  .mh-crawl { margin: 10px 12px 0; padding: 10px 14px; border-radius: 12px; background: #fffdf6; border: 1.5px dashed #8a2b2b; font-size: 12.5px; line-height: 1.55; color: #2f2a22; }
+  .mh-crawl b { color: #8a2b2b; }
+  .mh-cbtn { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 9px; }
+  .mh-cbtn button { font-family: inherit; font-size: 11.5px; font-weight: 800; padding: 6px 10px; border-radius: 999px; border: 2px solid #1B5E20; background: #fff; color: #1B5E20; cursor: pointer; }
+  .mh-cbtn button[aria-pressed=true] { background: #1B5E20; color: #fff; }
+  .mh-cbtn button:focus-visible { outline: 3px solid #FFE600; outline-offset: 1px; }
+
+  .mh-map { margin: 12px; background: #fffdf6; border: 1px solid #e3d8c0; border-radius: 14px; padding: 12px; }
+  .mh-map p.lead { font-size: 12px; line-height: 1.55; color: #4d463a; margin: -2px 2px 8px; }
+  #map { height: 380px; border-radius: 10px; border: 1px solid #d8cdb4; z-index: 0; }
+  .mh-tiles { filter: sepia(.35) saturate(.7) brightness(1.02); }
+  .leaflet-container { font-family: 'Montserrat', sans-serif; }
+  .mh-fate { margin-top: 10px; font-size: 12.5px; line-height: 1.55; color: #2f2a22; background: #fff; border-left: 4px solid #8a5a2b; border-radius: 8px; padding: 9px 11px; min-height: 44px; }
+  .mh-fate b { color: #1B5E20; }
+  .mh-foot { padding: 4px 16px 16px; font-size: 11px; line-height: 1.55; color: #6b604c; }
+  .mh-foot a { color: #1B5E20; font-weight: 700; }
+  .mh-mk { width: 26px; height: 26px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 9.5px; font-weight: 800; font-family: 'Montserrat', sans-serif; box-shadow: 0 1px 4px rgba(0,0,0,.35); }
+  .mk-live { background: #1B5E20; color: #fff; border: 2px solid #FFE600; }
+  .mk-shut { background: #6b604c; color: #fff; border: 2px solid #fff; }
+  .mk-lost { background: #fffdf6; color: #8a5a2b; border: 2px dashed #8a5a2b; }
+
+  @media (max-width: 640px) {
+    body { padding: 6px; }
+    .mh-head h1 { font-size: 18px; }
+    .mh-cards { grid-template-columns: minmax(0, 1fr); }
+    .mh-clock { font-size: 22px; }
+    .mh-days button { min-width: 40px; padding: 7px 8px; font-size: 12.5px; }
+    #map { height: 320px; }
+  }
+</style>
+</head>
+<body>
+<div class="mh" id="app">
+  <div class="mh-head">
+    <span class="mh-kick">Berlin Tool</span>
+    <h1>Market Hall Clock: which old hall is worth it at the time you are free</h1>
+    <p>Berlin built fourteen covered market halls between 1886 and 1892. Four still sell food. Pick the day you are in Berlin and a time to see which of them is open, what is actually happening inside, and where the other ten stood.</p>
+  </div>
+
+  <div class="mh-ctrl">
+    <div class="mh-time">
+      <div>
+        <label for="date">Day of your visit</label>
+        <input type="date" id="date" min="2026-11-01" max="2027-12-31">
+      </div>
+      <div class="mh-clock" id="clock" aria-live="polite">Sat 12:00</div>
+    </div>
+    <div class="mh-slotlabel" id="slotLabel">Time of day</div>
+    <div class="mh-days" id="slots" role="group" aria-labelledby="slotLabel"></div>
+    <button type="button" class="mh-now" id="now">Use Berlin time now</button>
+  </div>
+
+  <div class="mh-strip">
+    <h2 id="stripTitle">The day in the four halls</h2>
+    <div id="strip"></div>
+    <div class="mh-legend">
+      <span><i style="background:#d7ccb2"></i>Doors open</span>
+      <span><i style="background:#1B5E20"></i>Market stalls trading</span>
+      <span><i style="background:#FFE600;border:1px solid #c9a400"></i>Evening food event</span>
+    </div>
+  </div>
+
+  <div class="mh-cards" id="cards"></div>
+  <div class="mh-pick" id="pick" aria-live="polite"></div>
+  <div class="mh-crawl" id="crawl" aria-live="polite"></div>
+
+  <div class="mh-map">
+    <h2>Where all fourteen stood</h2>
+    <p class="lead">Green numerals are the four halls that still sell food. Dashed rings are the ten that are gone or became something else. Tap any numeral.</p>
+    <div id="map" role="region" aria-label="Map of Berlin's fourteen historic market halls"></div>
+    <div class="mh-fate" id="fate">Tap a numeral on the map to read what happened to that hall.</div>
+  </div>
+
+  <div class="mh-foot" id="foot"></div>
+</div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+<script>
+(function () {
+  // Hours checked on 11 November 2026 against each hall's own site and berlin.de. Minutes from midnight.
+  var CHECKED = '11 November 2026';
+  function h(x) { var p = x.split(':'); return (+p[0]) * 60 + (+(p[1] || 0)); }
+  var DAYS = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+  var LIVE = [
+    { n: 'IX', short: 'Neun', name: 'Markthalle Neun', where: 'Eisenbahnstraße 42/43, Kreuzberg · U1 Görlitzer Bahnhof',
+      doors: { 0: ['8:00', '20:00'], 1: ['8:00', '20:00'], 2: ['8:00', '20:00'], 3: ['8:00', '22:00'], 4: ['8:00', '20:00'], 5: ['8:00', '20:00'] },
+      market: { 0: ['12:00', '18:00', 'Small Market'], 1: ['12:00', '18:00', 'Small Market'], 2: ['12:00', '18:00', 'Small Market'], 3: ['12:00', '18:00', 'Small Market'], 4: ['12:00', '18:00', 'Big Market'], 5: ['10:00', '18:00', 'Big Market'] },
+      event: { 3: ['17:00', '22:00', 'Street Food Thursday'] },
+      doorsNote: 'Butcher, bakery and cafés are open, the stalls are not.',
+      shutNote: 'Closed on Sundays, apart from a few special markets in its calendar.' },
+    { n: 'X', short: 'Arminius', name: 'Arminiusmarkthalle', where: 'Arminiusstraße 2-4, Moabit · U9 Turmstraße',
+      doors: { 0: ['8:00', '22:00'], 1: ['8:00', '22:00'], 2: ['8:00', '22:00'], 3: ['8:00', '22:00'], 4: ['8:00', '22:00'], 5: ['8:00', '22:00'] },
+      market: { 0: ['10:00', '20:00', 'Food stalls'], 1: ['10:00', '20:00', 'Food stalls'], 2: ['10:00', '20:00', 'Food stalls'], 3: ['10:00', '20:00', 'Food stalls'], 4: ['10:00', '20:00', 'Food stalls'], 5: ['10:00', '18:00', 'Food stalls'] },
+      event: { 0: ['12:00', '22:00', 'Kitchens and bars'], 1: ['12:00', '22:00', 'Kitchens and bars'], 2: ['12:00', '22:00', 'Kitchens and bars'], 3: ['12:00', '22:00', 'Kitchens and bars'], 4: ['12:00', '22:00', 'Kitchens and bars'], 5: ['12:00', '22:00', 'Kitchens and bars'] },
+      doorsNote: 'The hall is open but most counters have not started yet.',
+      shutNote: 'Closed on Sundays and public holidays.' },
+    { n: 'XI', short: 'Marheineke', name: 'Marheineke Markthalle', where: 'Marheinekeplatz 15, Kreuzberg · U7 Gneisenaustraße',
+      doors: { 0: ['9:00', '20:00'], 1: ['9:00', '20:00'], 2: ['9:00', '20:00'], 3: ['9:00', '20:00'], 4: ['9:00', '20:00'], 5: ['9:00', '18:00'] },
+      market: { 0: ['9:00', '20:00', 'Stalls'], 1: ['9:00', '20:00', 'Stalls'], 2: ['9:00', '20:00', 'Stalls'], 3: ['9:00', '20:00', 'Stalls'], 4: ['9:00', '20:00', 'Stalls'], 5: ['9:00', '18:00', 'Stalls'] },
+      event: {},
+      doorsNote: '', shutNote: 'Closed on Sundays.' },
+    { n: 'VI', short: 'Ackerhalle', name: 'Ackerhalle', where: 'Ackerstraße 23-26, Mitte · U8 Rosenthaler Platz',
+      doors: { 0: ['7:00', '23:00'], 1: ['7:00', '23:00'], 2: ['7:00', '23:00'], 3: ['7:00', '23:00'], 4: ['7:00', '23:00'], 5: ['7:00', '23:00'] },
+      market: {}, event: {},
+      doorsNote: 'A supermarket under the original 1888 roof: come for the building, not for stalls.',
+      shutNote: 'Closed on Sundays.' }
+  ];
+  var LAT = { IX: [52.50243, 13.43111], X: [52.52798, 13.33860], XI: [52.48924, 13.39489], VI: [52.53233, 13.39691] };
+  var ALL = [
+    { n: 'I', name: 'Central Market Hall', y: '1886', ll: [52.52238, 13.40750], fate: 'The big hall beside Alexanderplatz station, with its own rail siding off the Stadtbahn. Badly bombed in 1944 and later cleared. What survives is the widened Stadtbahn viaduct that once fed it.' },
+    { n: 'II', name: 'Lindenhalle', y: '1886', ll: [52.50285, 13.39320], fate: 'Destroyed at the end of the war, rebuilt in its old form in 1962 to 1965 and used as the flower wholesale market until 2010. Today it is the Jewish Museum\'s academy.' },
+    { n: 'III', name: 'Zimmerhalle', y: '1886', ll: [52.50765, 13.38800], fate: 'Closed as a market in 1910 and turned into a concert hall. In 1942 it was used to hold Jews arrested in the Fabrikaktion. Destroyed in the war; the front building stands, with a memorial plaque.' },
+    { n: 'IV', name: 'Dorotheenstraße', y: '1886', ll: [52.51890, 13.38510], fate: 'Closed in 1913 and sold to the Reichspost. The front building survives and is now part of the Federal Press Office.' },
+    { n: 'V', name: 'Magdeburger Platz', y: '1887', ll: [52.50254, 13.36017], fate: 'Damaged in the Second World War; the ruin was removed in 1956.' },
+    { n: 'VI', name: 'Ackerhalle', y: '1888', ll: LAT.VI, live: true, fate: 'The only hall whose outside is still in its original state. A supermarket trades inside.' },
+    { n: 'VII', name: 'Dresdener Straße', y: '1888', ll: [52.50400, 13.41523], fate: 'The hall was wrecked in the war and its ruin cleared in 1959. Both front houses survive; the one on Legiendamm holds a restaurant called Zur kleinen Markthalle.' },
+    { n: 'VIII', name: 'Andreasstraße', y: '1888', ll: [52.51399, 13.42990], fate: 'Damaged at the end of the war; the remains were cleared by 1966.' },
+    { n: 'IX', name: 'Markthalle Neun', y: '1891', ll: LAT.IX, live: true, fate: 'Opened on 1 October 1891. Nearly lost to a supermarket buyer in the 2000s; neighbours pushed for a sale on concept instead of price, and the Markthalle Neun group took it over in 2011.' },
+    { n: 'X', name: 'Arminiusmarkthalle', y: '1891', ll: LAT.X, live: true, fate: 'Opened in December 1891 and in use, without a real break, ever since. The only one-storey hall of the fourteen.' },
+    { n: 'XI', name: 'Marheineke', y: '1892', ll: LAT.XI, live: true, fate: 'Opened in March 1892, used as a soup kitchen in the First World War, heavily damaged in the Second and rebuilt in the 1950s. The building you enter is mostly post-war.' },
+    { n: 'XII', name: 'Badstraße', y: '1892', ll: [52.55066, 13.38546], fate: 'So few traders came that the city closed it in 1898, six years after it opened.' },
+    { n: 'XIII', name: 'Wörther Straße', y: '1892', ll: [52.53647, 13.41340], fate: 'Closed in 1910, destroyed in the war. Sports fields, a school and a nursery stand on the site.' },
+    { n: 'XIV', name: 'Dalldorfer Straße', y: '1892', ll: [52.54155, 13.37055], fate: 'East of Weddingplatz. It drops out of the address books after 1925.' }
+  ];
+
+  // Berlin public holidays: every hall is closed.
+  var HOL = { '2026-12-25': 'Christmas Day', '2026-12-26': 'Second Day of Christmas', '2027-01-01': 'New Year\'s Day', '2027-03-08': 'International Women\'s Day (a Berlin holiday)', '2027-03-26': 'Good Friday', '2027-03-29': 'Easter Monday', '2027-05-01': 'Labour Day', '2027-05-06': 'Ascension Day', '2027-05-17': 'Whit Monday', '2027-10-03': 'German Unity Day', '2027-12-25': 'Christmas Day', '2027-12-26': 'Second Day of Christmas' };
+  var SLOTS = [['Early', 510], ['Late morning', 660], ['Lunch', 780], ['Afternoon', 960], ['Evening', 1110], ['Late', 1260]];
+  var day = 5, t = 780, sel = 'IX', iso = '', hol = '', crawl = new Set(), crawlLine = null;
+  var slotBox = document.getElementById('slots'), dateIn = document.getElementById('date'), clock = document.getElementById('clock');
+  function pad(x) { return (x < 10 ? '0' : '') + x; }
+  function fmt(m) { return pad(Math.floor(m / 60)) + ':' + pad(m % 60); }
+  function within(r, m) { return r && m >= h(r[0]) && m < h(r[1]); }
+
+  function stateOf(hall, d, m) {
+    if (hol) return { k: 'shut', label: 'Closed: ' + hol, text: 'Public holiday in Berlin. All four halls stay shut, as do most shops.' };
+    var ev = hall.event[d], mk = hall.market[d], dr = hall.doors[d];
+    if (within(ev, m) && hall.n === 'IX') return { k: 'best', label: ev[2] + ' until ' + ev[1], text: 'The hall turns into a street food night. Come hungry, expect a queue at the popular stands after 19:00.' };
+    if (within(mk, m) && within(ev, m)) return { k: 'best', label: 'Stalls and kitchens open', text: 'The food counters and the kitchens are both running: the best hour to eat and shop in one go.' };
+    if (within(mk, m)) return { k: 'open', label: mk[2] + ' until ' + mk[1], text: hall.n === 'IX' && d === 5 ? 'Saturday is the big market: the most traders of the week and the busiest aisles.' : hall.n === 'IX' && d === 4 ? 'Friday brings the big market from noon.' : 'Stalls are trading. Good for a look round and lunch at a counter.' };
+    if (within(ev, m)) return { k: 'open', label: ev[2] + ' until ' + ev[1], text: 'The food shops have closed, but the kitchens and bars keep going into the evening.' };
+    if (within(dr, m)) return { k: 'doors', label: 'Doors open until ' + dr[1], text: hall.doorsNote || 'Open, but quieter than at the main market hours.' };
+    var next = '';
+    for (var k = 0; k < 7 && !next; k++) {
+      var dd = (d + k) % 7, r = hall.doors[dd];
+      if (!r) continue;
+      if (k === 0 && m >= h(r[0])) continue;
+      next = (k === 0 ? 'today' : k === 1 ? 'tomorrow' : DAYS[dd]) + ' at ' + r[0];
+    }
+    return { k: 'shut', label: 'Closed', text: (d === 6 ? hall.shutNote : 'Closed at this hour.') + (next ? ' Opens ' + next + '.' : '') };
+  }
+
+  function drawStrip() {
+    var box = document.getElementById('strip'), W = Math.max(320, Math.min(900, Math.round(box.clientWidth || 720))), top = 20, rowH = 40, x0 = W < 520 ? 92 : 118, x1 = W - 10, H = top + LIVE.length * rowH + 8;
+    function X(m) { return x0 + (m - 420) / (1380 - 420) * (x1 - x0); }
+    var s = '<svg viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="Opening hours of the four market halls on ' + DAYS[day] + '">';
+    for (var hr = 7; hr <= 23; hr += (W < 520 ? 4 : 2)) { var gx = X(hr * 60); s += '<line x1="' + gx + '" y1="' + (top - 4) + '" x2="' + gx + '" y2="' + (H - 6) + '" stroke="#e7dcc4" stroke-width="1"/><text x="' + gx + '" y="12" font-size="11" text-anchor="middle" fill="#7a6f5a" font-family="Montserrat,sans-serif">' + pad(hr) + '</text>'; }
+    LIVE.forEach(function (hall, i) {
+      var y = top + i * rowH + 6, dr = hol ? null : hall.doors[day], mk = hol ? null : hall.market[day], ev = hol ? null : hall.event[day];
+      s += '<text x="4" y="' + (y + 13) + '" font-size="12.5" font-weight="800" fill="' + (hall.n === sel ? '#1B5E20' : '#3b352b') + '" font-family="Montserrat,sans-serif">' + hall.n + ' ' + hall.short + '</text>';
+      s += '<rect x="' + x0 + '" y="' + y + '" width="' + (x1 - x0) + '" height="22" rx="5" fill="#f1eadb"/>';
+      if (!dr) s += '<text x="' + ((x0 + x1) / 2) + '" y="' + (y + 15) + '" font-size="11.5" text-anchor="middle" fill="#7a6f5a" font-family="Montserrat,sans-serif">Closed all day</text>';
+      if (dr) s += '<rect x="' + X(h(dr[0])) + '" y="' + y + '" width="' + (X(h(dr[1])) - X(h(dr[0]))) + '" height="22" rx="5" fill="#d7ccb2"/>';
+      if (mk) s += '<rect x="' + X(h(mk[0])) + '" y="' + (y + 4) + '" width="' + (X(h(mk[1])) - X(h(mk[0]))) + '" height="14" rx="4" fill="#1B5E20"/>';
+      if (ev) s += '<rect x="' + X(h(ev[0])) + '" y="' + (y + (mk ? 15 : 4)) + '" width="' + (X(h(ev[1])) - X(h(ev[0]))) + '" height="' + (mk ? 7 : 14) + '" rx="3" fill="#FFE600" stroke="#c9a400" stroke-width="1"/>';
+    });
+    var nx = X(t);
+    s += '<line x1="' + nx + '" y1="' + (top - 6) + '" x2="' + nx + '" y2="' + (H - 4) + '" stroke="#8a2b2b" stroke-width="2.5"/><circle cx="' + nx + '" cy="' + (top - 6) + '" r="4.5" fill="#8a2b2b"/>';
+    s += '</svg>';
+    document.getElementById('strip').innerHTML = s;
+    document.getElementById('stripTitle').textContent = (hol ? hol + ': ' : '') + 'The four halls on a ' + ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'][day];
+  }
+
+  // A hall crawl: visit the chosen halls in the order that keeps each one open, 75 minutes inside, 35 minutes between.
+  function drawCrawl() {
+    var box = document.getElementById('crawl'), picked = LIVE.filter(function (x) { return crawl.has(x.n); });
+    if (crawlLine) { map.removeLayer(crawlLine); crawlLine = null; }
+    if (!picked.length) { box.innerHTML = '<b>Plan a hall crawl:</b> tap <i>Add to my day</i> on two or three halls and I will put them in an order that works from ' + fmt(t) + '.'; return; }
+    var left = picked.slice(), clockM = t, steps = [], total = 0;
+    while (left.length) {
+      left.sort(function (a, b) { var ea = hol ? 9999 : (a.event[day] && a.n === 'IX' ? h(a.event[day][1]) : (a.doors[day] ? h(a.doors[day][1]) : 9999)); var eb = hol ? 9999 : (b.event[day] && b.n === 'IX' ? h(b.event[day][1]) : (b.doors[day] ? h(b.doors[day][1]) : 9999)); return ea - eb; });
+      var next = left.shift(), st = stateOf(next, day, clockM);
+      steps.push({ hall: next, at: clockM, st: st });
+      clockM += 75; total += 75;
+      if (left.length) { clockM += 35; total += 35; }
+    }
+    crawlLine = L.polyline(steps.map(function (x) { return LAT[x.hall.n]; }), { color: '#8a2b2b', weight: 3, dashArray: '6 6' }).addTo(map);
+    box.innerHTML = '<b>Your hall crawl:</b> ' + steps.map(function (x, i) { return (i + 1) + '. ' + x.hall.name + ' at ' + fmt(x.at) + ' (' + (x.st.k === 'shut' ? 'closed then' : x.st.k === 'doors' ? 'doors only' : 'trading') + ')'; }).join(' · ') + '. About ' + Math.floor(total / 60) + ' h ' + pad(total % 60) + ' min in total, finishing around ' + fmt(clockM) + '.';
+  }
+
+  function render() {
+    clock.textContent = DAYS[day] + ' ' + fmt(t);
+    Array.prototype.forEach.call(slotBox.children, function (b, i) { b.setAttribute('aria-pressed', SLOTS[i][1] === t ? 'true' : 'false'); });
+    drawStrip();
+    var states = LIVE.map(function (hall) { return stateOf(hall, day, t); });
+    document.getElementById('cards').innerHTML = LIVE.map(function (hall, i) {
+      var st = states[i];
+      var on = crawl.has(hall.n);
+      return '<div class="mh-card' + (hall.n === sel ? ' sel' : '') + '"><div class="num">Hall ' + hall.n + '</div><h3>' + hall.name + '</h3><div class="where">' + hall.where + '</div><span class="mh-state s-' + st.k + '">' + st.label + '</span><p>' + st.text + '</p><div class="mh-cbtn"><button type="button" class="mh-show" data-n="' + hall.n + '">Show history</button><button type="button" class="mh-add" data-n="' + hall.n + '" aria-pressed="' + (on ? 'true' : 'false') + '">' + (on ? 'In my day' : 'Add to my day') + '</button></div></div>';
+    }).join('');
+    Array.prototype.forEach.call(document.querySelectorAll('.mh-show'), function (c) { c.addEventListener('click', function () { choose(c.getAttribute('data-n'), true); }); });
+    Array.prototype.forEach.call(document.querySelectorAll('.mh-add'), function (c) { c.addEventListener('click', function () { var k = c.getAttribute('data-n'); if (crawl.has(k)) crawl.delete(k); else crawl.add(k); render(); }); });
+    drawCrawl();
+    var order = { best: 0, open: 1, doors: 2, shut: 3 }, best = null;
+    LIVE.forEach(function (hall, i) { if (hall.n === 'VI') return; if (!best || order[states[i].k] < order[best.s.k]) best = { hall: hall, s: states[i] }; });
+    var pick = document.getElementById('pick');
+    if (hol) pick.innerHTML = '<b>My call:</b> ' + hol + ' is a public holiday, so every hall is closed. Pick a working day that is not a holiday.';
+    else if (!best || best.s.k === 'shut') pick.innerHTML = '<b>My call:</b> nothing worth the trip at this hour. ' + (day === 6 ? 'All four halls close on Sundays, so do the Mauerpark flea market or a weekly market instead and come back on a weekday.' : 'Try lunch or the afternoon: that is when all three working halls have their stalls open.');
+    else if (best.s.k === 'doors') pick.innerHTML = '<b>My call:</b> too early or too late for stalls. ' + best.hall.name + ' is open, but you will mostly see shutters. Aim for noon to 18:00.';
+    else pick.innerHTML = '<b>My call:</b> go to ' + best.hall.name + '. ' + best.s.label + '. ' + (day === 3 && t >= 1020 && best.hall.n === 'IX' ? 'This is the one evening a week the old hall is at its fullest.' : day === 5 && best.hall.n === 'IX' ? 'Saturday morning is the big market, so arrive before noon if you want room to look.' : 'Pair it with ' + (best.hall.n === 'XI' ? 'a walk down Bergmannstraße' : best.hall.n === 'X' ? 'a look at the brick front on Jonasstraße' : 'the streets round Görlitzer Park') + '.');
+    markers.forEach(function (mk) { mk.setIcon(icon(mk.hall)); });
+  }
+
+  function icon(hall) {
+    var cls = 'mk-lost';
+    if (hall.live) { var lh = LIVE.filter(function (x) { return x.n === hall.n; })[0]; cls = stateOf(lh, day, t).k === 'shut' ? 'mk-shut' : 'mk-live'; }
+    return L.divIcon({ className: '', html: '<div class="mh-mk ' + cls + '"' + (hall.n === sel ? ' style="transform:scale(1.25)"' : '') + '>' + hall.n + '</div>', iconSize: [26, 26], iconAnchor: [13, 13] });
+  }
+  function choose(n, fromCard) {
+    sel = n;
+    var hall = ALL.filter(function (x) { return x.n === n; })[0];
+    document.getElementById('fate').innerHTML = '<b>Hall ' + hall.n + ', ' + hall.name + ' (opened ' + hall.y + ').</b> ' + hall.fate;
+    if (fromCard) map.panTo(hall.ll);
+    render();
+  }
+
+  function setDate(v) {
+    iso = v; var p = v.split('-'), dt = new Date(Date.UTC(+p[0], +p[1] - 1, +p[2]));
+    day = (dt.getUTCDay() + 6) % 7; hol = HOL[v] || '';
+    if (dateIn.value !== v) dateIn.value = v;
+  }
+  SLOTS.forEach(function (sl) {
+    var b = document.createElement('button'); b.type = 'button'; b.textContent = sl[0] + ' ' + fmt(sl[1]); b.setAttribute('aria-pressed', 'false');
+    b.addEventListener('click', function () { t = sl[1]; render(); }); slotBox.appendChild(b);
+  });
+  dateIn.addEventListener('change', function () { if (/^\d{4}-\d{2}-\d{2}$/.test(dateIn.value)) { setDate(dateIn.value); render(); } });
+  function berlinNow() {
+    var parts = new Intl.DateTimeFormat('en-CA', { timeZone: 'Europe/Berlin', year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', hour12: false }).formatToParts(new Date()), o = {};
+    parts.forEach(function (p) { o[p.type] = p.value; });
+    return { iso: o.year + '-' + o.month + '-' + o.day, m: (+o.hour % 24) * 60 + (+o.minute) };
+  }
+  document.getElementById('now').addEventListener('click', function () {
+    var n = berlinNow(); setDate(n.iso); t = Math.min(1380, Math.max(420, n.m)); render();
+  });
+  (function () { var n = berlinNow(); setDate(n.iso); var best = SLOTS[0][1]; SLOTS.forEach(function (sl) { if (Math.abs(sl[1] - n.m) < Math.abs(best - n.m)) best = sl[1]; }); t = best; })();
+
+  var mapEl = document.getElementById('map');
+  var map = L.map(mapEl, { scrollWheelZoom: false, zoomSnap: 0.25 });
+  L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 18, className: 'mh-tiles', attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors' }).addTo(map);
+  var bounds = L.latLngBounds(ALL.map(function (x) { return x.ll; }));
+  map.fitBounds(bounds, { padding: [24, 24] });
+  var markers = ALL.map(function (hall) {
+    var mk = L.marker(hall.ll, { icon: icon(hall), keyboard: true, title: 'Hall ' + hall.n + ', ' + hall.name });
+    mk.hall = hall; mk.on('click', function () { choose(hall.n, false); }); mk.addTo(map); return mk;
+  });
+  document.getElementById('foot').innerHTML = 'Hours checked on ' + CHECKED + ' with <a href="https://markthalleneun.de/en/" target="_blank" rel="noopener">Markthalle Neun</a>, <a href="https://arminiusmarkthalle.com/" target="_blank" rel="noopener">Arminiusmarkthalle</a>, <a href="https://www.meine-markthalle.de/" target="_blank" rel="noopener">Marheineke Markthalle</a> and <a href="https://www.berlin.de/en/attractions-and-sights/3561526-3104052-market-hall-vi-ackerhalle.en.html" target="_blank" rel="noopener">berlin.de</a>. Single counters keep their own hours, and every hall closes on Sundays and Berlin public holidays except for a few special markets. Hall locations from the 1896 city plans.';
+
+  var lastSize = '';
+  function remeasure() { var r = mapEl.getBoundingClientRect(), key = Math.round(r.width) + 'x' + Math.round(r.height); if (key === lastSize || r.width < 1) return; lastSize = key; map.invalidateSize({ pan: false }); map.fitBounds(bounds, { padding: [24, 24] }); }
+  if (window.ResizeObserver) new ResizeObserver(function () { window.requestAnimationFrame(remeasure); }).observe(mapEl);
+  var lastStripW = 0; if (window.ResizeObserver) new ResizeObserver(function () { var w = Math.round(document.getElementById('strip').clientWidth); if (Math.abs(w - lastStripW) > 4) { lastStripW = w; drawStrip(); } }).observe(document.getElementById('strip'));
+  window.addEventListener('load', remeasure);
+  choose('IX', false);
+})();
+</script>
+<script src="../js/brand.js"></script>
+</body>
+</html>

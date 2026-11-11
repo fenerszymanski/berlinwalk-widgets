@@ -11623,6 +11623,37 @@
       ],
       "iconStatus": "live-wix-media",
       "image": "https://static.wixstatic.com/media/5a08a3_c91917a15bdd440788cb3cd775b3428a~mv2.png"
+    },
+    {
+      "slug": "berlin-market-hall-clock",
+      "title": "Berlin Market Hall Clock",
+      "lead": "Pick the day you are in Berlin and a time, and see which of the four old market halls that still sell food is open, what is happening inside, and where all fourteen halls of the 1880s stood. Add two or three to plan one afternoon.",
+      "category": "Maps",
+      "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/berlin-market-hall-clock/",
+      "embedHeight": 2000,
+      "hubCategory": "FoodNightlife",
+      "type": "Planner",
+      "priority": 3,
+      "tags": [
+        "market halls",
+        "markthalle neun",
+        "arminiusmarkthalle",
+        "marheineke",
+        "street food thursday",
+        "kreuzberg",
+        "moabit",
+        "food"
+      ],
+      "aliases": [
+        "berlin market halls",
+        "markthalle berlin opening hours",
+        "is markthalle neun open on sunday",
+        "street food thursday berlin",
+        "arminiusmarkthalle opening hours",
+        "indoor food market berlin"
+      ],
+      "iconStatus": "live-wix-media",
+      "image": "https://static.wixstatic.com/media/5a08a3_8737a60d7ac64c56bb47e3ba91582af0~mv2.png"
     }
   ],
   "hubCategories": [
