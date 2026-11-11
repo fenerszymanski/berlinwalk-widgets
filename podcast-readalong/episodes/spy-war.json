@@ -1,0 +1,2899 @@
+{
+  "id": "E03-berlin-spy-war",
+  "slug": "spy-war",
+  "title": "Listening Under the Line",
+  "episodeUri": "",
+  "audioUrl": "https://anchor.fm/s/1186f4668/podcast/play/127343714/https%3A%2F%2Fd3ctxlq1ktw2nl.cloudfront.net%2Fstaging%2F2026-9-12%2Fa2f35726-6fb1-d5ae-af28-b5c9ea3146d4.mp3",
+  "audioBytes": 21928167,
+  "cover": "img/cover-360.jpg",
+  "show": {
+    "title": "Where It Happened",
+    "artist": "Walk of Berlin",
+    "spotifyUrl": "https://open.spotify.com/show/4hd8BvMRs7dwdogXr3mzzG",
+    "rssUrl": "https://anchor.fm/s/1186f4668/podcast/rss"
+  },
+  "duration": 1314.66,
+  "chapters": [
+    {
+      "title": "Digging the tunnel",
+      "t": 0
+    },
+    {
+      "title": "George Blake and the discovery",
+      "t": 404
+    },
+    {
+      "title": "Where to see the tunnel",
+      "t": 655
+    },
+    {
+      "title": "The bridge and the 1962 swap",
+      "t": 849
+    },
+    {
+      "title": "Later swaps and today",
+      "t": 1017
+    }
+  ],
+  "phrases": [
+    {
+      "t0": 0.3,
+      "t1": 5.02,
+      "text": "On the morning of 10 February 1962, two men reached the",
+      "kind": "story",
+      "para": 0,
+      "part": "p01"
+    },
+    {
+      "t0": 5.14,
+      "t1": 8.62,
+      "text": "middle of a bridge in Berlin at the same moment.",
+      "kind": "story",
+      "para": 0,
+      "part": "p01"
+    },
+    {
+      "t0": 8.66,
+      "t1": 13.74,
+      "text": "The Deutsches Spionagemuseum records the time as 8:52.",
+      "kind": "story",
+      "para": 0,
+      "part": "p01"
+    },
+    {
+      "t0": 13.82,
+      "t1": 16.38,
+      "text": "One was Francis Gary Powers,",
+      "kind": "story",
+      "para": 0,
+      "part": "p01"
+    },
+    {
+      "t0": 16.42,
+      "t1": 20.94,
+      "text": "the American pilot whose U-2 spy plane the Soviets had shot down.",
+      "kind": "story",
+      "para": 0,
+      "part": "p01"
+    },
+    {
+      "t0": 21.26,
+      "t1": 23.34,
+      "text": "The other was Rudolf Abel,",
+      "kind": "story",
+      "para": 0,
+      "part": "p01"
+    },
+    {
+      "t0": 23.42,
+      "t1": 26.5,
+      "text": "a Soviet agent held in the United States.",
+      "kind": "story",
+      "para": 0,
+      "part": "p01"
+    },
+    {
+      "t0": 26.94,
+      "t1": 30.46,
+      "text": "Both crossed a white line across the middle of the bridge.",
+      "kind": "story",
+      "para": 0,
+      "part": "p01"
+    },
+    {
+      "t0": 30.78,
+      "t1": 34.66,
+      "text": "One went into the West. The other went into the East.",
+      "kind": "story",
+      "para": 0,
+      "part": "p01"
+    },
+    {
+      "t0": 35.02,
+      "t1": 36.7,
+      "text": "Hold that moment in mind.",
+      "kind": "story",
+      "para": 0,
+      "part": "p01"
+    },
+    {
+      "t0": 37.5,
+      "t1": 39.54,
+      "text": "The story of how the two men came to",
+      "kind": "story",
+      "para": 0,
+      "part": "p01"
+    },
+    {
+      "t0": 39.58,
+      "t1": 43.9,
+      "text": "be traded there starts underground, in the American sector,",
+      "kind": "story",
+      "para": 0,
+      "part": "p01"
+    },
+    {
+      "t0": 43.98,
+      "t1": 46.7,
+      "text": "with a fear that two governments shared.",
+      "kind": "story",
+      "para": 0,
+      "part": "p01"
+    },
+    {
+      "t0": 47.27,
+      "t1": 50.71,
+      "text": "Today two metal bands mark the old border,",
+      "kind": "story",
+      "para": 1,
+      "part": "p02"
+    },
+    {
+      "t0": 50.79,
+      "t1": 54.95,
+      "text": "one on each footpath at mid-span, and you can stand on them.",
+      "kind": "story",
+      "para": 1,
+      "part": "p02"
+    },
+    {
+      "t0": 55.27,
+      "t1": 56.71,
+      "text": "You will hear when they were set in",
+      "kind": "story",
+      "para": 1,
+      "part": "p02"
+    },
+    {
+      "t0": 56.79,
+      "t1": 58.47,
+      "text": "place at the end of this story.",
+      "kind": "story",
+      "para": 1,
+      "part": "p02"
+    },
+    {
+      "t0": 58.95,
+      "t1": 61.27,
+      "text": "But the bridge is only the last act.",
+      "kind": "story",
+      "para": 1,
+      "part": "p02"
+    },
+    {
+      "t0": 61.75,
+      "t1": 64.39,
+      "text": "The exchange was possible because of a tunnel",
+      "kind": "story",
+      "para": 1,
+      "part": "p02"
+    },
+    {
+      "t0": 64.55,
+      "t1": 67.91,
+      "text": "that Western intelligence services built in secret,",
+      "kind": "story",
+      "para": 1,
+      "part": "p02"
+    },
+    {
+      "t0": 67.99,
+      "t1": 70.71,
+      "text": "years before the bridge saw its first swap.",
+      "kind": "story",
+      "para": 1,
+      "part": "p02"
+    },
+    {
+      "t0": 71.19,
+      "t1": 74.23,
+      "text": "From 1945 to 1990,",
+      "kind": "story",
+      "para": 1,
+      "part": "p02"
+    },
+    {
+      "t0": 74.47,
+      "t1": 78.95,
+      "text": "Berlin was split into four sectors run by the wartime Allies,",
+      "kind": "story",
+      "para": 1,
+      "part": "p02"
+    },
+    {
+      "t0": 79.03,
+      "t1": 82.47,
+      "text": "and the tunnel ran from the American sector into the Soviet",
+      "kind": "story",
+      "para": 1,
+      "part": "p02"
+    },
+    {
+      "t0": 82.55,
+      "t1": 85.95,
+      "text": "one without anyone on the surface seeing the work.",
+      "kind": "story",
+      "para": 1,
+      "part": "p02"
+    },
+    {
+      "t0": 86.23,
+      "t1": 89.91,
+      "text": "Picture a city where each side was listening to the other,",
+      "kind": "story",
+      "para": 1,
+      "part": "p02"
+    },
+    {
+      "t0": 89.99,
+      "t1": 92.75,
+      "text": "and where neither side could say so out loud.",
+      "kind": "story",
+      "para": 1,
+      "part": "p02"
+    },
+    {
+      "t0": 93.03,
+      "t1": 96.47,
+      "text": "To understand why the swaps happened on a bridge at all,",
+      "kind": "story",
+      "para": 1,
+      "part": "p02"
+    },
+    {
+      "t0": 96.55,
+      "t1": 98.47,
+      "text": "you have to start with the fear that",
+      "kind": "story",
+      "para": 1,
+      "part": "p02"
+    },
+    {
+      "t0": 98.63,
+      "t1": 101.03,
+      "text": "sent the Americans and the British digging.",
+      "kind": "story",
+      "para": 1,
+      "part": "p02"
+    },
+    {
+      "t0": 101.58,
+      "t1": 104.54,
+      "text": "The Americans and the British wanted early warning",
+      "kind": "story",
+      "para": 2,
+      "part": "p03"
+    },
+    {
+      "t0": 104.58,
+      "t1": 107.02,
+      "text": "of a Soviet nuclear first strike.",
+      "kind": "story",
+      "para": 2,
+      "part": "p03"
+    },
+    {
+      "t0": 107.58,
+      "t1": 112.86,
+      "text": "The Bundesarchiv, the German federal archive, gives this as the motive:",
+      "kind": "story",
+      "para": 2,
+      "part": "p03"
+    },
+    {
+      "t0": 112.94,
+      "t1": 116.54,
+      "text": "a chance to hear the other side before it moved.",
+      "kind": "story",
+      "para": 2,
+      "part": "p03"
+    },
+    {
+      "t0": 116.86,
+      "t1": 120.94,
+      "text": "It dates the decision to December 1953.",
+      "kind": "story",
+      "para": 2,
+      "part": "p03"
+    },
+    {
+      "t0": 121.02,
+      "t1": 124.46,
+      "text": "The CIA and Britain's Secret Intelligence Service,",
+      "kind": "story",
+      "para": 2,
+      "part": "p03"
+    },
+    {
+      "t0": 124.54,
+      "t1": 128.78,
+      "text": "known as SIS or MI6, ran the project together.",
+      "kind": "story",
+      "para": 2,
+      "part": "p03"
+    },
+    {
+      "t0": 129.34,
+      "t1": 134.9,
+      "text": "The Americans called it Operation Gold, and the British called it Stopwatch.",
+      "kind": "story",
+      "para": 2,
+      "part": "p03"
+    },
+    {
+      "t0": 135.26,
+      "t1": 138.38,
+      "text": "The CIA's own history says Allen Dulles,",
+      "kind": "story",
+      "para": 2,
+      "part": "p03"
+    },
+    {
+      "t0": 138.5,
+      "t1": 143.18,
+      "text": "its director, approved the tunneling in January 1954.",
+      "kind": "story",
+      "para": 2,
+      "part": "p03"
+    },
+    {
+      "t0": 143.5,
+      "t1": 145.1,
+      "text": "The British built the tunnel,",
+      "kind": "story",
+      "para": 2,
+      "part": "p03"
+    },
+    {
+      "t0": 145.14,
+      "t1": 148.46,
+      "text": "and the Americans paid for it, the Bundesarchiv says.",
+      "kind": "story",
+      "para": 2,
+      "part": "p03"
+    },
+    {
+      "t0": 149.01,
+      "t1": 153.73,
+      "text": "The Bundesarchiv says a similar operation had already been run in Vienna,",
+      "kind": "story",
+      "para": 3,
+      "part": "p04"
+    },
+    {
+      "t0": 153.93,
+      "t1": 159.25,
+      "text": "using several small tunnels. Berlin's version was one long tunnel.",
+      "kind": "story",
+      "para": 3,
+      "part": "p04"
+    },
+    {
+      "t0": 159.57,
+      "t1": 163.97,
+      "text": "The digging began in Rudow, in the American sector of West Berlin.",
+      "kind": "story",
+      "para": 3,
+      "part": "p04"
+    },
+    {
+      "t0": 164.29,
+      "t1": 167.65,
+      "text": "The CIA says the construction was covered by a United",
+      "kind": "story",
+      "para": 3,
+      "part": "p04"
+    },
+    {
+      "t0": 167.73,
+      "t1": 170.77,
+      "text": "States Air Force radar site and a warehouse.",
+      "kind": "story",
+      "para": 3,
+      "part": "p04"
+    },
+    {
+      "t0": 171.33,
+      "t1": 174.53,
+      "text": "The Bundesarchiv reproduces a photograph of a sign",
+      "kind": "story",
+      "para": 3,
+      "part": "p04"
+    },
+    {
+      "t0": 174.61,
+      "t1": 176.85,
+      "text": "that refers to the American sector.",
+      "kind": "story",
+      "para": 3,
+      "part": "p04"
+    },
+    {
+      "t0": 177.17,
+      "t1": 180.61,
+      "text": "From above ground, the cover was all anyone could see.",
+      "kind": "story",
+      "para": 3,
+      "part": "p04"
+    },
+    {
+      "t0": 181.17,
+      "t1": 185.17,
+      "text": "Below it, a tunnel ran about 450 meters,",
+      "kind": "story",
+      "para": 3,
+      "part": "p04"
+    },
+    {
+      "t0": 185.25,
+      "t1": 189.97,
+      "text": "which is 1,476 feet, toward the Soviet sector.",
+      "kind": "story",
+      "para": 3,
+      "part": "p04"
+    },
+    {
+      "t0": 190.53,
+      "t1": 194.93,
+      "text": "The CIA gives the length as 1,476 feet,",
+      "kind": "story",
+      "para": 3,
+      "part": "p04"
+    },
+    {
+      "t0": 194.97,
+      "t1": 198.45,
+      "text": "and the Allied Museum gives about 450 meters.",
+      "kind": "story",
+      "para": 3,
+      "part": "p04"
+    },
+    {
+      "t0": 199.09,
+      "t1": 200.53,
+      "text": "It is one of the few numbers in",
+      "kind": "story",
+      "para": 3,
+      "part": "p04"
+    },
+    {
+      "t0": 200.61,
+      "t1": 202.77,
+      "text": "this story that the sources agree on,",
+      "kind": "story",
+      "para": 3,
+      "part": "p04"
+    },
+    {
+      "t0": 202.85,
+      "t1": 205.49,
+      "text": "so hold on to it as you picture the ground.",
+      "kind": "story",
+      "para": 3,
+      "part": "p04"
+    },
+    {
+      "t0": 206.14,
+      "t1": 210.38,
+      "text": "The Allied Museum says the tunnel ran from Neukölln and Rudow in",
+      "kind": "story",
+      "para": 4,
+      "part": "p05"
+    },
+    {
+      "t0": 210.42,
+      "t1": 215.18,
+      "text": "the American sector to Treptow and Altglienicke in the Soviet sector.",
+      "kind": "story",
+      "para": 4,
+      "part": "p05"
+    },
+    {
+      "t0": 215.5,
+      "t1": 218.14,
+      "text": "The target was the telephone lines linking the",
+      "kind": "story",
+      "para": 4,
+      "part": "p05"
+    },
+    {
+      "t0": 218.22,
+      "t1": 222.7,
+      "text": "Soviet military headquarters with Moscow. The Berlin district's own",
+      "kind": "story",
+      "para": 4,
+      "part": "p05"
+    },
+    {
+      "t0": 222.78,
+      "t1": 227.34,
+      "text": "page on Altglienicke says the cables ran under Altglienicke,",
+      "kind": "story",
+      "para": 4,
+      "part": "p05"
+    },
+    {
+      "t0": 227.46,
+      "t1": 230.94,
+      "text": "and that the tunnel was driven as far as the Schönefelder Chaussee.",
+      "kind": "story",
+      "para": 4,
+      "part": "p05"
+    },
+    {
+      "t0": 231.66,
+      "t1": 233.42,
+      "text": "The dates of the digging differ.",
+      "kind": "story",
+      "para": 4,
+      "part": "p05"
+    },
+    {
+      "t0": 233.82,
+      "t1": 238.38,
+      "text": "The Bundesarchiv puts the start in the autumn of 1954.",
+      "kind": "story",
+      "para": 4,
+      "part": "p05"
+    },
+    {
+      "t0": 238.46,
+      "t1": 241.5,
+      "text": "The CIA's legacy history says work began in",
+      "kind": "story",
+      "para": 4,
+      "part": "p05"
+    },
+    {
+      "t0": 241.66,
+      "t1": 244.78,
+      "text": "February 1954 and took about a year.",
+      "kind": "story",
+      "para": 4,
+      "part": "p05"
+    },
+    {
+      "t0": 245.34,
+      "t1": 249.5,
+      "text": "It also says the route was judged hidden from visual surveillance,",
+      "kind": "story",
+      "para": 4,
+      "part": "p05"
+    },
+    {
+      "t0": 249.58,
+      "t1": 252.86,
+      "text": "so nobody watching from the street could see the work.",
+      "kind": "story",
+      "para": 4,
+      "part": "p05"
+    },
+    {
+      "t0": 253.42,
+      "t1": 258.46,
+      "text": "In May 1955 the tunnel and its listening station were finished.",
+      "kind": "story",
+      "para": 5,
+      "part": "p06"
+    },
+    {
+      "t0": 258.78,
+      "t1": 261.9,
+      "text": "British technicians tapped the Soviet cables,",
+      "kind": "story",
+      "para": 5,
+      "part": "p06"
+    },
+    {
+      "t0": 261.94,
+      "t1": 264.94,
+      "text": "the lines that carried the military's own calls.",
+      "kind": "story",
+      "para": 5,
+      "part": "p06"
+    },
+    {
+      "t0": 265.26,
+      "t1": 269.02,
+      "text": "The Bundesarchiv says they did it without being noticed.",
+      "kind": "story",
+      "para": 5,
+      "part": "p06"
+    },
+    {
+      "t0": 269.34,
+      "t1": 274.3,
+      "text": "The CIA gives 11 May 1955 as the start of collection.",
+      "kind": "story",
+      "para": 5,
+      "part": "p06"
+    },
+    {
+      "t0": 274.78,
+      "t1": 279.02,
+      "text": "The recording ran for eleven months, which the Allied Museum gives as",
+      "kind": "story",
+      "para": 5,
+      "part": "p06"
+    },
+    {
+      "t0": 279.06,
+      "t1": 281.66,
+      "text": "the life of the tunnel before its discovery.",
+      "kind": "story",
+      "para": 5,
+      "part": "p06"
+    },
+    {
+      "t0": 282.22,
+      "t1": 284.38,
+      "text": "For that year, the listeners heard what the",
+      "kind": "story",
+      "para": 5,
+      "part": "p06"
+    },
+    {
+      "t0": 284.46,
+      "t1": 287.9,
+      "text": "Soviet military said on its own telephone lines,",
+      "kind": "story",
+      "para": 5,
+      "part": "p06"
+    },
+    {
+      "t0": 287.94,
+      "t1": 292.46,
+      "text": "and the recordings went onto magnetic tape, reel after reel.",
+      "kind": "story",
+      "para": 5,
+      "part": "p06"
+    },
+    {
+      "t0": 293.02,
+      "t1": 298.06,
+      "text": "The sources agree on one number: 50,000 reels of tape,",
+      "kind": "story",
+      "para": 6,
+      "part": "p07"
+    },
+    {
+      "t0": 298.26,
+      "t1": 301.1,
+      "text": "according to the CIA and the Bundesarchiv.",
+      "kind": "story",
+      "para": 6,
+      "part": "p07"
+    },
+    {
+      "t0": 301.42,
+      "t1": 305.42,
+      "text": "They do not agree on what that came to in conversations.",
+      "kind": "story",
+      "para": 6,
+      "part": "p07"
+    },
+    {
+      "t0": 305.5,
+      "t1": 314.94,
+      "text": "The CIA counts 443,000 fully transcribed conversations and 1,750 intelligence reports,",
+      "kind": "story",
+      "para": 6,
+      "part": "p07"
+    },
+    {
+      "t0": 315.02,
+      "t1": 319.02,
+      "text": "and it gives 40,000 hours of telephone conversations.",
+      "kind": "story",
+      "para": 6,
+      "part": "p07"
+    },
+    {
+      "t0": 319.66,
+      "t1": 324.22,
+      "text": "The Allied Museum gives some 440,000 telephone calls,",
+      "kind": "story",
+      "para": 6,
+      "part": "p07"
+    },
+    {
+      "t0": 324.26,
+      "t1": 328.14,
+      "text": "and the Bundesarchiv counts 380,000 recordings.",
+      "kind": "story",
+      "para": 6,
+      "part": "p07"
+    },
+    {
+      "t0": 328.78,
+      "t1": 330.7,
+      "text": "Some of the material was political,",
+      "kind": "story",
+      "para": 6,
+      "part": "p07"
+    },
+    {
+      "t0": 330.94,
+      "t1": 334.7,
+      "text": "including talk about the 20th Party Congress of the Soviet Union,",
+      "kind": "story",
+      "para": 6,
+      "part": "p07"
+    },
+    {
+      "t0": 334.82,
+      "t1": 340.46,
+      "text": "held in February 1956. Each figure comes from one source's count,",
+      "kind": "story",
+      "para": 6,
+      "part": "p07"
+    },
+    {
+      "t0": 340.54,
+      "t1": 343.98,
+      "text": "so treat them as estimates rather than a final tally.",
+      "kind": "story",
+      "para": 6,
+      "part": "p07"
+    },
+    {
+      "t0": 344.54,
+      "t1": 347.98,
+      "text": "Eleven months of tape, and the people who had planned it",
+      "kind": "story",
+      "para": 7,
+      "part": "p08"
+    },
+    {
+      "t0": 348.14,
+      "t1": 351.5,
+      "text": "did not know their secret was already known.",
+      "kind": "story",
+      "para": 7,
+      "part": "p08"
+    },
+    {
+      "t0": 351.82,
+      "t1": 357.5,
+      "text": "The Allied Museum calls the discovery spectacular, after eleven months of tapping.",
+      "kind": "story",
+      "para": 7,
+      "part": "p08"
+    },
+    {
+      "t0": 357.98,
+      "t1": 362.54,
+      "text": "Its special exhibition ran from 27 April to 31 December 2006,",
+      "kind": "story",
+      "para": 7,
+      "part": "p08"
+    },
+    {
+      "t0": 362.62,
+      "t1": 366.86,
+      "text": "and visitors could see, and even enter,",
+      "kind": "story",
+      "para": 7,
+      "part": "p08"
+    },
+    {
+      "t0": 366.94,
+      "t1": 369.9,
+      "text": "sections of the original tunnel, the museum says.",
+      "kind": "story",
+      "para": 7,
+      "part": "p08"
+    },
+    {
+      "t0": 370.46,
+      "t1": 373.74,
+      "text": "That story had ended in April 1956.",
+      "kind": "story",
+      "para": 7,
+      "part": "p08"
+    },
+    {
+      "t0": 374.22,
+      "t1": 377.18,
+      "text": "But somebody on the other side already knew about",
+      "kind": "story",
+      "para": 7,
+      "part": "p08"
+    },
+    {
+      "t0": 377.22,
+      "t1": 379.66,
+      "text": "the plan while it was still being prepared.",
+      "kind": "story",
+      "para": 7,
+      "part": "p08"
+    },
+    {
+      "t0": 380.14,
+      "t1": 383.58,
+      "text": "Who was that, and how long had Moscow known?",
+      "kind": "story",
+      "para": 7,
+      "part": "p08"
+    },
+    {
+      "t0": 384.74,
+      "t1": 388.5,
+      "text": "Quick break. I'm Yusuf, and this is Walk of Berlin.",
+      "kind": "spot",
+      "para": 8,
+      "part": "[[SPOT-A]]"
+    },
+    {
+      "t0": 388.9,
+      "t1": 390.82,
+      "text": "If you enjoy stories like this one,",
+      "kind": "spot",
+      "para": 8,
+      "part": "[[SPOT-A]]"
+    },
+    {
+      "t0": 390.9,
+      "t1": 392.26,
+      "text": "come and walk one with me.",
+      "kind": "spot",
+      "para": 8,
+      "part": "[[SPOT-A]]"
+    },
+    {
+      "t0": 392.5,
+      "t1": 394.54,
+      "text": "My walk, Berlin Then and Now,",
+      "kind": "spot",
+      "para": 8,
+      "part": "[[SPOT-A]]"
+    },
+    {
+      "t0": 394.66,
+      "t1": 398.26,
+      "text": "goes from the World Clock on Alexanderplatz to Hackescher Markt,",
+      "kind": "spot",
+      "para": 8,
+      "part": "[[SPOT-A]]"
+    },
+    {
+      "t0": 398.34,
+      "t1": 400.74,
+      "text": "with an archive photo at every stop.",
+      "kind": "spot",
+      "para": 8,
+      "part": "[[SPOT-A]]"
+    },
+    {
+      "t0": 400.78,
+      "t1": 403.38,
+      "text": "You'll find it at walk of berlin dot com.",
+      "kind": "spot",
+      "para": 8,
+      "part": "[[SPOT-A]]",
+      "display": "You'll find it at walkofberlin.com."
+    },
+    {
+      "t0": 404.54,
+      "t1": 406.78,
+      "text": "The answer is George Blake,",
+      "kind": "story",
+      "para": 9,
+      "part": "p09"
+    },
+    {
+      "t0": 406.86,
+      "t1": 411.02,
+      "text": "a British intelligence officer who was also a Soviet spy.",
+      "kind": "story",
+      "para": 9,
+      "part": "p09"
+    },
+    {
+      "t0": 411.34,
+      "t1": 414.38,
+      "text": "The CIA's account says he told the KGB about",
+      "kind": "story",
+      "para": 9,
+      "part": "p09"
+    },
+    {
+      "t0": 414.42,
+      "t1": 417.1,
+      "text": "the operation while it was still being planned.",
+      "kind": "story",
+      "para": 9,
+      "part": "p09"
+    },
+    {
+      "t0": 417.66,
+      "t1": 422.54,
+      "text": "The Allied Museum says the betrayal came before the operation even began,",
+      "kind": "story",
+      "para": 9,
+      "part": "p09"
+    },
+    {
+      "t0": 422.66,
+      "t1": 425.22,
+      "text": "which made it particularly explosive.",
+      "kind": "story",
+      "para": 9,
+      "part": "p09"
+    },
+    {
+      "t0": 425.58,
+      "t1": 428.46,
+      "text": "Both sources agree on the core fact:",
+      "kind": "story",
+      "para": 9,
+      "part": "p09"
+    },
+    {
+      "t0": 428.5,
+      "t1": 430.38,
+      "text": "by the time the tunnel was built,",
+      "kind": "story",
+      "para": 9,
+      "part": "p09"
+    },
+    {
+      "t0": 430.42,
+      "t1": 433.18,
+      "text": "the KGB already knew it was coming.",
+      "kind": "story",
+      "para": 9,
+      "part": "p09"
+    },
+    {
+      "t0": 433.66,
+      "t1": 436.18,
+      "text": "The people who dug it did not know that.",
+      "kind": "story",
+      "para": 9,
+      "part": "p09"
+    },
+    {
+      "t0": 436.46,
+      "t1": 439.5,
+      "text": "They believed they were building a secret in the ground,",
+      "kind": "story",
+      "para": 9,
+      "part": "p09"
+    },
+    {
+      "t0": 439.58,
+      "t1": 442.06,
+      "text": "and Moscow already had the plan.",
+      "kind": "story",
+      "para": 9,
+      "part": "p09"
+    },
+    {
+      "t0": 442.62,
+      "t1": 447.02,
+      "text": "The CIA's legacy history says the KGB had been aware of",
+      "kind": "story",
+      "para": 10,
+      "part": "p10"
+    },
+    {
+      "t0": 447.1,
+      "t1": 449.9,
+      "text": "the project from its start, and that it let the",
+      "kind": "story",
+      "para": 10,
+      "part": "p10"
+    },
+    {
+      "t0": 450.18,
+      "t1": 454.38,
+      "text": "operation run until April 1956 to protect Blake.",
+      "kind": "story",
+      "para": 10,
+      "part": "p10"
+    },
+    {
+      "t0": 454.86,
+      "t1": 457.34,
+      "text": "The Bundesarchiv reads it in a similar way.",
+      "kind": "story",
+      "para": 10,
+      "part": "p10"
+    },
+    {
+      "t0": 457.82,
+      "t1": 460.7,
+      "text": "In its account, the Soviets did not interfere,",
+      "kind": "story",
+      "para": 10,
+      "part": "p10"
+    },
+    {
+      "t0": 461.02,
+      "t1": 462.78,
+      "text": "because they wanted to protect one of their",
+      "kind": "story",
+      "para": 10,
+      "part": "p10"
+    },
+    {
+      "t0": 462.86,
+      "t1": 465.34,
+      "text": "most important agents in the Cold War.",
+      "kind": "story",
+      "para": 10,
+      "part": "p10"
+    },
+    {
+      "t0": 465.98,
+      "t1": 468.62,
+      "text": "The article gives that as its own reading,",
+      "kind": "story",
+      "para": 10,
+      "part": "p10"
+    },
+    {
+      "t0": 468.7,
+      "t1": 470.46,
+      "text": "not as a documented order.",
+      "kind": "story",
+      "para": 10,
+      "part": "p10"
+    },
+    {
+      "t0": 471.02,
+      "t1": 475.1,
+      "text": "For almost a year, the listeners believed their secret was safe,",
+      "kind": "story",
+      "para": 10,
+      "part": "p10"
+    },
+    {
+      "t0": 475.22,
+      "t1": 478.54,
+      "text": "while Moscow kept quiet and let the tapes run.",
+      "kind": "story",
+      "para": 10,
+      "part": "p10"
+    },
+    {
+      "t0": 479.09,
+      "t1": 482.53,
+      "text": "The discovery came in April 1956,",
+      "kind": "story",
+      "para": 11,
+      "part": "p11"
+    },
+    {
+      "t0": 482.57,
+      "t1": 484.69,
+      "text": "and the Soviet side made it public.",
+      "kind": "story",
+      "para": 11,
+      "part": "p11"
+    },
+    {
+      "t0": 485.33,
+      "t1": 489.09,
+      "text": "The Allied Museum says units of the Soviet army stationed",
+      "kind": "story",
+      "para": 11,
+      "part": "p11"
+    },
+    {
+      "t0": 489.17,
+      "t1": 492.13,
+      "text": "in East Germany found the tunnel that month,",
+      "kind": "story",
+      "para": 11,
+      "part": "p11"
+    },
+    {
+      "t0": 492.29,
+      "t1": 494.13,
+      "text": "after it had run for some time.",
+      "kind": "story",
+      "para": 11,
+      "part": "p11"
+    },
+    {
+      "t0": 494.77,
+      "t1": 498.45,
+      "text": "The Bundesarchiv dates the dig to 22 April,",
+      "kind": "story",
+      "para": 11,
+      "part": "p11"
+    },
+    {
+      "t0": 498.57,
+      "t1": 501.73,
+      "text": "when Soviet and East German crews broke open the",
+      "kind": "story",
+      "para": 11,
+      "part": "p11"
+    },
+    {
+      "t0": 501.81,
+      "t1": 505.57,
+      "text": "Schönefelder Chaussee in Altglienicke, where the tunnel ended.",
+      "kind": "story",
+      "para": 11,
+      "part": "p11"
+    },
+    {
+      "t0": 506.21,
+      "t1": 509.65,
+      "text": "The Group of Soviet Forces in Germany ordered the work,",
+      "kind": "story",
+      "para": 11,
+      "part": "p11"
+    },
+    {
+      "t0": 509.73,
+      "t1": 514.81,
+      "text": "and the Kasernierte Volkspolizei, an East German police force, carried it out.",
+      "kind": "story",
+      "para": 11,
+      "part": "p11"
+    },
+    {
+      "t0": 515.17,
+      "t1": 518.45,
+      "text": "The CIA gives 22 April as the Berlin",
+      "kind": "story",
+      "para": 11,
+      "part": "p11"
+    },
+    {
+      "t0": 518.53,
+      "t1": 521.89,
+      "text": "date and 21 April as the US date.",
+      "kind": "story",
+      "para": 11,
+      "part": "p11"
+    },
+    {
+      "t0": 522.45,
+      "t1": 526.85,
+      "text": "It places the digging at a muddy municipal cemetery in Altglienicke,",
+      "kind": "story",
+      "para": 11,
+      "part": "p11"
+    },
+    {
+      "t0": 526.93,
+      "t1": 530.45,
+      "text": "so the sources disagree on where the ground was opened.",
+      "kind": "story",
+      "para": 11,
+      "part": "p11"
+    },
+    {
+      "t0": 531.1,
+      "t1": 535.86,
+      "text": "The official explanation was a repair job on faulty underground cables.",
+      "kind": "story",
+      "para": 12,
+      "part": "p12"
+    },
+    {
+      "t0": 536.14,
+      "t1": 540.06,
+      "text": "The CIA's story says the Soviets accidentally discovered",
+      "kind": "story",
+      "para": 12,
+      "part": "p12"
+    },
+    {
+      "t0": 540.1,
+      "t1": 543.46,
+      "text": "the tunnel while supposedly repairing those cables.",
+      "kind": "story",
+      "para": 12,
+      "part": "p12"
+    },
+    {
+      "t0": 543.74,
+      "t1": 546.3,
+      "text": "The Bundesarchiv adds two details.",
+      "kind": "story",
+      "para": 12,
+      "part": "p12"
+    },
+    {
+      "t0": 546.54,
+      "t1": 550.78,
+      "text": "On 23 April, the Soviet military commandant, Kozjuba,",
+      "kind": "story",
+      "para": 12,
+      "part": "p12"
+    },
+    {
+      "t0": 550.86,
+      "t1": 554.06,
+      "text": "announced the discovery at an international press conference.",
+      "kind": "story",
+      "para": 12,
+      "part": "p12"
+    },
+    {
+      "t0": 554.54,
+      "t1": 560.38,
+      "text": "On 25 April, Erich Mielke, then first deputy minister for state security,",
+      "kind": "story",
+      "para": 12,
+      "part": "p12"
+    },
+    {
+      "t0": 560.46,
+      "t1": 563.58,
+      "text": "sent a photo album of the tunnel to Walter Ulbricht,",
+      "kind": "story",
+      "para": 12,
+      "part": "p12"
+    },
+    {
+      "t0": 563.66,
+      "t1": 565.06,
+      "text": "the East German leader.",
+      "kind": "story",
+      "para": 12,
+      "part": "p12"
+    },
+    {
+      "t0": 565.34,
+      "t1": 569.98,
+      "text": "The Bundesarchiv credits its photographs to the Stasi records archive.",
+      "kind": "story",
+      "para": 12,
+      "part": "p12"
+    },
+    {
+      "t0": 570.54,
+      "t1": 573.82,
+      "text": "The archive also notes that East German propaganda",
+      "kind": "story",
+      "para": 13,
+      "part": "p13"
+    },
+    {
+      "t0": 573.98,
+      "t1": 577.02,
+      "text": "called the builders American gangsters.",
+      "kind": "story",
+      "para": 13,
+      "part": "p13"
+    },
+    {
+      "t0": 577.34,
+      "t1": 583.54,
+      "text": "In an East German exhibition from 1957 to 1961, the Bundesarchiv says,",
+      "kind": "story",
+      "para": 13,
+      "part": "p13"
+    },
+    {
+      "t0": 583.74,
+      "t1": 586.5,
+      "text": "a genuine piece of the tunnel was shown.",
+      "kind": "story",
+      "para": 13,
+      "part": "p13"
+    },
+    {
+      "t0": 586.78,
+      "t1": 591.02,
+      "text": "It reads the staged discovery as a show of strength by Khrushchev.",
+      "kind": "story",
+      "para": 13,
+      "part": "p13"
+    },
+    {
+      "t0": 591.66,
+      "t1": 593.98,
+      "text": "Those are readings, not facts,",
+      "kind": "story",
+      "para": 13,
+      "part": "p13"
+    },
+    {
+      "t0": 594.02,
+      "t1": 596.06,
+      "text": "and they show how the day was used.",
+      "kind": "story",
+      "para": 13,
+      "part": "p13"
+    },
+    {
+      "t0": 596.62,
+      "t1": 600.86,
+      "text": "The tunnel's first public story was written in East Berlin, and it",
+      "kind": "story",
+      "para": 13,
+      "part": "p13"
+    },
+    {
+      "t0": 600.94,
+      "t1": 604.3,
+      "text": "was not the story the listeners in the West had planned.",
+      "kind": "story",
+      "para": 13,
+      "part": "p13"
+    },
+    {
+      "t0": 604.62,
+      "t1": 607.42,
+      "text": "Blake was in Berlin in 1956,",
+      "kind": "story",
+      "para": 13,
+      "part": "p13"
+    },
+    {
+      "t0": 607.5,
+      "t1": 610.06,
+      "text": "on a new assignment, the same archive says.",
+      "kind": "story",
+      "para": 13,
+      "part": "p13"
+    },
+    {
+      "t0": 610.7,
+      "t1": 613.26,
+      "text": "Britain arrested him after his exposure,",
+      "kind": "story",
+      "para": 13,
+      "part": "p13"
+    },
+    {
+      "t0": 613.3,
+      "t1": 616.06,
+      "text": "and he later fled to socialist states.",
+      "kind": "story",
+      "para": 13,
+      "part": "p13"
+    },
+    {
+      "t0": 616.62,
+      "t1": 620.7,
+      "text": "In 1980 Blake spoke at a panel event at the Edgar André",
+      "kind": "story",
+      "para": 14,
+      "part": "p14"
+    },
+    {
+      "t0": 620.78,
+      "t1": 625.5,
+      "text": "school, an East German intelligence school, according to the Bundesarchiv.",
+      "kind": "story",
+      "para": 14,
+      "part": "p14"
+    },
+    {
+      "t0": 625.82,
+      "t1": 628.54,
+      "text": "He praised the Soviet cover story:",
+      "kind": "story",
+      "para": 14,
+      "part": "p14"
+    },
+    {
+      "t0": 628.58,
+      "t1": 633.42,
+      "text": "the Soviets had made a false technical explanation for the discovery believable,",
+      "kind": "story",
+      "para": 14,
+      "part": "p14"
+    },
+    {
+      "t0": 633.5,
+      "t1": 635.98,
+      "text": "and so protected his identity.",
+      "kind": "story",
+      "para": 14,
+      "part": "p14"
+    },
+    {
+      "t0": 636.46,
+      "t1": 640.7,
+      "text": "You can still see one original piece of the tunnel in Altglienicke,",
+      "kind": "story",
+      "para": 14,
+      "part": "p14"
+    },
+    {
+      "t0": 640.78,
+      "t1": 643.18,
+      "text": "in the water tower on Schirnerstraße.",
+      "kind": "story",
+      "para": 14,
+      "part": "p14"
+    },
+    {
+      "t0": 643.5,
+      "t1": 647.1,
+      "text": "The Berlin district's page says the museum there opens on the",
+      "kind": "story",
+      "para": 14,
+      "part": "p14"
+    },
+    {
+      "t0": 647.18,
+      "t1": 651.26,
+      "text": "last Sunday of each month, from 14:00 to 17:00.",
+      "kind": "story",
+      "para": 14,
+      "part": "p14"
+    },
+    {
+      "t0": 651.82,
+      "t1": 655.34,
+      "text": "Check that before you go, because opening times change.",
+      "kind": "story",
+      "para": 14,
+      "part": "p14"
+    },
+    {
+      "t0": 655.91,
+      "t1": 658.71,
+      "text": "Then walk out to the Schönefelder Chaussee,",
+      "kind": "story",
+      "para": 15,
+      "part": "p15"
+    },
+    {
+      "t0": 658.79,
+      "t1": 662.95,
+      "text": "the road in Altglienicke where the crews dug in 1956.",
+      "kind": "story",
+      "para": 15,
+      "part": "p15"
+    },
+    {
+      "t0": 663.27,
+      "t1": 666.79,
+      "text": "The sources behind this episode name no plaque there,",
+      "kind": "story",
+      "para": 15,
+      "part": "p15"
+    },
+    {
+      "t0": 666.87,
+      "t1": 669.59,
+      "text": "so the road itself is the place to stand.",
+      "kind": "story",
+      "para": 15,
+      "part": "p15"
+    },
+    {
+      "t0": 670.23,
+      "t1": 672.47,
+      "text": "Look at the stretch where the crews dug,",
+      "kind": "story",
+      "para": 15,
+      "part": "p15"
+    },
+    {
+      "t0": 672.55,
+      "t1": 677.03,
+      "text": "and picture the cables under it, carrying the Soviet military's calls.",
+      "kind": "story",
+      "para": 15,
+      "part": "p15"
+    },
+    {
+      "t0": 677.67,
+      "t1": 680.79,
+      "text": "The crews officially said they were repairing a line,",
+      "kind": "story",
+      "para": 15,
+      "part": "p15"
+    },
+    {
+      "t0": 680.83,
+      "t1": 684.15,
+      "text": "and the Bundesarchiv says they worked for the Soviet forces.",
+      "kind": "story",
+      "para": 15,
+      "part": "p15"
+    },
+    {
+      "t0": 684.71,
+      "t1": 687.67,
+      "text": "That line had been tapped for almost a year.",
+      "kind": "story",
+      "para": 15,
+      "part": "p15"
+    },
+    {
+      "t0": 687.99,
+      "t1": 691.03,
+      "text": "The tunnel that tapped it began in West Berlin,",
+      "kind": "story",
+      "para": 15,
+      "part": "p15"
+    },
+    {
+      "t0": 691.19,
+      "t1": 695.43,
+      "text": "about 450 meters away. Stand there long enough and you",
+      "kind": "story",
+      "para": 15,
+      "part": "p15"
+    },
+    {
+      "t0": 695.51,
+      "t1": 698.23,
+      "text": "will see how close the two sides were.",
+      "kind": "story",
+      "para": 15,
+      "part": "p15"
+    },
+    {
+      "t0": 698.77,
+      "t1": 704.13,
+      "text": "The other place is in Dahlem, at Clayallee 135.",
+      "kind": "story",
+      "para": 16,
+      "part": "p16"
+    },
+    {
+      "t0": 704.17,
+      "t1": 708.13,
+      "text": "The Allied Museum occupies the former Outpost cinema,",
+      "kind": "story",
+      "para": 16,
+      "part": "p16"
+    },
+    {
+      "t0": 708.17,
+      "t1": 711.57,
+      "text": "a building that is a designated historic landmark.",
+      "kind": "story",
+      "para": 16,
+      "part": "p16"
+    },
+    {
+      "t0": 711.89,
+      "t1": 716.45,
+      "text": "From 1945 to 1994 the American army ran its",
+      "kind": "story",
+      "para": 16,
+      "part": "p16"
+    },
+    {
+      "t0": 716.53,
+      "t1": 719.73,
+      "text": "Berlin headquarters from a complex on this road,",
+      "kind": "story",
+      "para": 16,
+      "part": "p16"
+    },
+    {
+      "t0": 719.81,
+      "t1": 722.93,
+      "text": "and the road is named after General Lucius D.",
+      "kind": "story",
+      "para": 16,
+      "part": "p16"
+    },
+    {
+      "t0": 723.01,
+      "t1": 727.41,
+      "text": "Clay. The American flag came down there for the last time on",
+      "kind": "story",
+      "para": 16,
+      "part": "p16"
+    },
+    {
+      "t0": 727.49,
+      "t1": 732.61,
+      "text": "15 September 1994, according to the Berlin heritage office.",
+      "kind": "story",
+      "para": 16,
+      "part": "p16"
+    },
+    {
+      "t0": 732.93,
+      "t1": 735.09,
+      "text": "After the division of Germany ended,",
+      "kind": "story",
+      "para": 16,
+      "part": "p16"
+    },
+    {
+      "t0": 735.17,
+      "t1": 738.13,
+      "text": "the barracks grounds were cleared by the US forces.",
+      "kind": "story",
+      "para": 16,
+      "part": "p16"
+    },
+    {
+      "t0": 738.61,
+      "t1": 740.61,
+      "text": "Picture that flag coming down.",
+      "kind": "story",
+      "para": 16,
+      "part": "p16"
+    },
+    {
+      "t0": 741.41,
+      "t1": 746.77,
+      "text": "Truman Plaza, the garrison's shopping center, lay past the headquarters on Clayallee.",
+      "kind": "story",
+      "para": 16,
+      "part": "p16"
+    },
+    {
+      "t0": 747.41,
+      "t1": 750.37,
+      "text": "The museum's listing gives opening hours of Tuesday",
+      "kind": "story",
+      "para": 16,
+      "part": "p16"
+    },
+    {
+      "t0": 750.41,
+      "t1": 753.41,
+      "text": "to Sunday, 10:00 to 18:00.",
+      "kind": "story",
+      "para": 16,
+      "part": "p16"
+    },
+    {
+      "t0": 753.97,
+      "t1": 756.05,
+      "text": "The Allied Museum says it has owned a",
+      "kind": "story",
+      "para": 17,
+      "part": "p17"
+    },
+    {
+      "t0": 756.21,
+      "t1": 759.65,
+      "text": "restored segment of the tunnel since 1997,",
+      "kind": "story",
+      "para": 17,
+      "part": "p17"
+    },
+    {
+      "t0": 759.77,
+      "t1": 763.41,
+      "text": "and that the segment is on display in its permanent exhibition.",
+      "kind": "story",
+      "para": 17,
+      "part": "p17"
+    },
+    {
+      "t0": 763.73,
+      "t1": 767.97,
+      "text": "Berlin's museum portal describes the museum as documenting the Western",
+      "kind": "story",
+      "para": 17,
+      "part": "p17"
+    },
+    {
+      "t0": 768.13,
+      "t1": 772.61,
+      "text": "powers' role in Berlin from 1945 to 1994.",
+      "kind": "story",
+      "para": 17,
+      "part": "p17"
+    },
+    {
+      "t0": 773.25,
+      "t1": 775.41,
+      "text": "The building is the next thing to check.",
+      "kind": "story",
+      "para": 17,
+      "part": "p17"
+    },
+    {
+      "t0": 775.65,
+      "t1": 777.97,
+      "text": "The portal says the Outpost Theatre is",
+      "kind": "story",
+      "para": 17,
+      "part": "p17"
+    },
+    {
+      "t0": 778.05,
+      "t1": 781.49,
+      "text": "closed for urgent maintenance until further notice,",
+      "kind": "story",
+      "para": 17,
+      "part": "p17"
+    },
+    {
+      "t0": 781.61,
+      "t1": 785.57,
+      "text": "and that its highlight objects are shown in the Nicholson library, where",
+      "kind": "story",
+      "para": 17,
+      "part": "p17"
+    },
+    {
+      "t0": 785.61,
+      "t1": 790.53,
+      "text": "the portal also lists the Berlin spy tunnel among the museum's highlights.",
+      "kind": "story",
+      "para": 17,
+      "part": "p17"
+    },
+    {
+      "t0": 791.09,
+      "t1": 794.29,
+      "text": "So ask at the desk which room holds the tunnel piece",
+      "kind": "story",
+      "para": 18,
+      "part": "p18"
+    },
+    {
+      "t0": 794.37,
+      "t1": 797.25,
+      "text": "this year. Take your time in that room,",
+      "kind": "story",
+      "para": 18,
+      "part": "p18"
+    },
+    {
+      "t0": 797.41,
+      "t1": 799.49,
+      "text": "because the tunnel is one of the few objects",
+      "kind": "story",
+      "para": 18,
+      "part": "p18"
+    },
+    {
+      "t0": 799.57,
+      "t1": 802.69,
+      "text": "in this story you can actually stand beside.",
+      "kind": "story",
+      "para": 18,
+      "part": "p18"
+    },
+    {
+      "t0": 803.01,
+      "t1": 806.05,
+      "text": "A tunnel can tell you what the other side is saying,",
+      "kind": "story",
+      "para": 18,
+      "part": "p18"
+    },
+    {
+      "t0": 806.09,
+      "t1": 809.01,
+      "text": "but it cannot bring a person back across a line.",
+      "kind": "story",
+      "para": 18,
+      "part": "p18"
+    },
+    {
+      "t0": 809.49,
+      "t1": 812.37,
+      "text": "For that, the two sides needed a place where they could",
+      "kind": "story",
+      "para": 18,
+      "part": "p18"
+    },
+    {
+      "t0": 812.45,
+      "t1": 815.49,
+      "text": "stand face to face, with the border between them.",
+      "kind": "story",
+      "para": 18,
+      "part": "p18"
+    },
+    {
+      "t0": 816.05,
+      "t1": 819.01,
+      "text": "A bridge already stood in the right place,",
+      "kind": "story",
+      "para": 18,
+      "part": "p18"
+    },
+    {
+      "t0": 819.09,
+      "t1": 820.45,
+      "text": "and it is the one that brings you",
+      "kind": "story",
+      "para": 18,
+      "part": "p18"
+    },
+    {
+      "t0": 820.53,
+      "t1": 824.05,
+      "text": "back to the morning of 10 February 1962.",
+      "kind": "story",
+      "para": 18,
+      "part": "p18"
+    },
+    {
+      "t0": 824.77,
+      "t1": 828.29,
+      "text": "What would the two sides actually hand over, and how could",
+      "kind": "story",
+      "para": 18,
+      "part": "p18"
+    },
+    {
+      "t0": 828.37,
+      "t1": 831.17,
+      "text": "either of them know the other would keep its word?",
+      "kind": "story",
+      "para": 18,
+      "part": "p18"
+    },
+    {
+      "t0": 832.33,
+      "t1": 835.85,
+      "text": "Yusuf again, one more thing before the story goes on.",
+      "kind": "spot",
+      "para": 19,
+      "part": "[[SPOT-B]]"
+    },
+    {
+      "t0": 836.09,
+      "t1": 837.93,
+      "text": "If you can't join me in person,",
+      "kind": "spot",
+      "para": 19,
+      "part": "[[SPOT-B]]"
+    },
+    {
+      "t0": 838.05,
+      "t1": 840.49,
+      "text": "my audio walks take you along the Berlin Wall at",
+      "kind": "spot",
+      "para": 19,
+      "part": "[[SPOT-B]]"
+    },
+    {
+      "t0": 840.57,
+      "t1": 843.77,
+      "text": "Bernauer Straße and through the medieval old town,",
+      "kind": "spot",
+      "para": 19,
+      "part": "[[SPOT-B]]"
+    },
+    {
+      "t0": 843.85,
+      "t1": 846.01,
+      "text": "at your own pace, on your phone.",
+      "kind": "spot",
+      "para": 19,
+      "part": "[[SPOT-B]]"
+    },
+    {
+      "t0": 846.05,
+      "t1": 848.25,
+      "text": "They're at walk of berlin dot com.",
+      "kind": "spot",
+      "para": 19,
+      "part": "[[SPOT-B]]",
+      "display": "They're at walkofberlin.com."
+    },
+    {
+      "t0": 849.42,
+      "t1": 850.66,
+      "text": "Back to the bridge.",
+      "kind": "story",
+      "para": 20,
+      "part": "p19"
+    },
+    {
+      "t0": 850.94,
+      "t1": 853.66,
+      "text": "It stood there long before the Cold War,",
+      "kind": "story",
+      "para": 20,
+      "part": "p19"
+    },
+    {
+      "t0": 853.7,
+      "t1": 855.26,
+      "text": "and it still stands today.",
+      "kind": "story",
+      "para": 20,
+      "part": "p19"
+    },
+    {
+      "t0": 855.82,
+      "t1": 861.74,
+      "text": "The Glienicke Bridge is a steel bridge, built in 1906 and 1907.",
+      "kind": "story",
+      "para": 20,
+      "part": "p19"
+    },
+    {
+      "t0": 861.82,
+      "t1": 866.94,
+      "text": "It runs between Wannsee, in West Berlin, and Potsdam, in the GDR.",
+      "kind": "story",
+      "para": 20,
+      "part": "p19"
+    },
+    {
+      "t0": 867.26,
+      "t1": 872.62,
+      "text": "After the war it was rebuilt between 1947 and 1949,",
+      "kind": "story",
+      "para": 20,
+      "part": "p19"
+    },
+    {
+      "t0": 872.7,
+      "t1": 875.1,
+      "text": "and the Berlin heritage office says it was then",
+      "kind": "story",
+      "para": 20,
+      "part": "p19"
+    },
+    {
+      "t0": 875.18,
+      "t1": 879.06,
+      "text": "called the Brücke der Einheit, the Unity Bridge.",
+      "kind": "story",
+      "para": 20,
+      "part": "p19"
+    },
+    {
+      "t0": 879.34,
+      "t1": 882.78,
+      "text": "Be careful with the sides, because they are easy to reverse.",
+      "kind": "story",
+      "para": 20,
+      "part": "p19"
+    },
+    {
+      "t0": 883.26,
+      "t1": 885.82,
+      "text": "The east end of the bridge was West Berlin,",
+      "kind": "story",
+      "para": 20,
+      "part": "p19"
+    },
+    {
+      "t0": 885.86,
+      "t1": 887.1,
+      "text": "on the Wannsee side.",
+      "kind": "story",
+      "para": 20,
+      "part": "p19"
+    },
+    {
+      "t0": 887.58,
+      "t1": 890.3,
+      "text": "The west end was Potsdam, in the GDR.",
+      "kind": "story",
+      "para": 20,
+      "part": "p19"
+    },
+    {
+      "t0": 890.86,
+      "t1": 894.22,
+      "text": "The border ran through the exact middle of the span.",
+      "kind": "story",
+      "para": 20,
+      "part": "p19"
+    },
+    {
+      "t0": 894.76,
+      "t1": 899.56,
+      "text": "From May 1952, only vehicles of the Allied military missions",
+      "kind": "story",
+      "para": 21,
+      "part": "p20"
+    },
+    {
+      "t0": 899.64,
+      "t1": 902.52,
+      "text": "could cross the bridge, according to the Bundesarchiv.",
+      "kind": "story",
+      "para": 21,
+      "part": "p20"
+    },
+    {
+      "t0": 903.16,
+      "t1": 908.6,
+      "text": "After the Wall went up on 13 August 1961, the Czechoslovak,",
+      "kind": "story",
+      "para": 21,
+      "part": "p20"
+    },
+    {
+      "t0": 908.72,
+      "t1": 913.32,
+      "text": "Polish and Yugoslav military missions in West Berlin could cross as well,",
+      "kind": "story",
+      "para": 21,
+      "part": "p20"
+    },
+    {
+      "t0": 913.44,
+      "t1": 915.4,
+      "text": "and so could other diplomats.",
+      "kind": "story",
+      "para": 21,
+      "part": "p20"
+    },
+    {
+      "t0": 915.72,
+      "t1": 920.2,
+      "text": "On the Potsdam approach you can still see monumental colonnades,",
+      "kind": "story",
+      "para": 21,
+      "part": "p20"
+    },
+    {
+      "t0": 920.28,
+      "t1": 922.68,
+      "text": "which line the road on both sides.",
+      "kind": "story",
+      "para": 21,
+      "part": "p20"
+    },
+    {
+      "t0": 923.0,
+      "t1": 927.16,
+      "text": "For nearly a decade, the bridge was reserved for official vehicles.",
+      "kind": "story",
+      "para": 21,
+      "part": "p20"
+    },
+    {
+      "t0": 927.4,
+      "t1": 931.96,
+      "text": "A 1985 letter in the Bundesarchiv file asks for a decision",
+      "kind": "story",
+      "para": 21,
+      "part": "p20"
+    },
+    {
+      "t0": 932.04,
+      "t1": 934.72,
+      "text": "to open a border crossing point at the bridge.",
+      "kind": "story",
+      "para": 21,
+      "part": "p20"
+    },
+    {
+      "t0": 935.0,
+      "t1": 938.2,
+      "text": "The archive page does not say whether it opened.",
+      "kind": "story",
+      "para": 21,
+      "part": "p20"
+    },
+    {
+      "t0": 938.75,
+      "t1": 942.67,
+      "text": "Powers had flown a U-2 high over the Soviet Union,",
+      "kind": "story",
+      "para": 22,
+      "part": "p21"
+    },
+    {
+      "t0": 942.71,
+      "t1": 946.11,
+      "text": "and the Soviets shot the plane down over their own territory.",
+      "kind": "story",
+      "para": 22,
+      "part": "p21"
+    },
+    {
+      "t0": 946.59,
+      "t1": 950.03,
+      "text": "Abel was the Soviet agent in American hands.",
+      "kind": "story",
+      "para": 22,
+      "part": "p21"
+    },
+    {
+      "t0": 950.27,
+      "t1": 952.91,
+      "text": "Each side wanted its own man back,",
+      "kind": "story",
+      "para": 22,
+      "part": "p21"
+    },
+    {
+      "t0": 952.95,
+      "t1": 955.43,
+      "text": "and the exchange was set for the bridge.",
+      "kind": "story",
+      "para": 22,
+      "part": "p21"
+    },
+    {
+      "t0": 955.79,
+      "t1": 959.47,
+      "text": "The Spionagemuseum says the two men crossed the white line at",
+      "kind": "story",
+      "para": 22,
+      "part": "p21"
+    },
+    {
+      "t0": 959.55,
+      "t1": 963.63,
+      "text": "mid-bridge at 8:52 a.m., at the same moment,",
+      "kind": "story",
+      "para": 22,
+      "part": "p21"
+    },
+    {
+      "t0": 963.75,
+      "t1": 965.79,
+      "text": "and passed each other without a greeting.",
+      "kind": "story",
+      "para": 22,
+      "part": "p21"
+    },
+    {
+      "t0": 966.35,
+      "t1": 971.63,
+      "text": "The New York Times reported the same time, 8:52 a.m. in Berlin.",
+      "kind": "story",
+      "para": 22,
+      "part": "p21"
+    },
+    {
+      "t0": 971.95,
+      "t1": 975.79,
+      "text": "Before the swap, each side checked identity with a witness,",
+      "kind": "story",
+      "para": 22,
+      "part": "p21"
+    },
+    {
+      "t0": 975.87,
+      "t1": 979.87,
+      "text": "an old comrade for Abel and a former schoolmate for Powers.",
+      "kind": "story",
+      "para": 22,
+      "part": "p21"
+    },
+    {
+      "t0": 980.44,
+      "t1": 983.4,
+      "text": "The public learned of the exchange only after both",
+      "kind": "story",
+      "para": 23,
+      "part": "p22"
+    },
+    {
+      "t0": 983.48,
+      "t1": 986.08,
+      "text": "men were on their way, the museum says.",
+      "kind": "story",
+      "para": 23,
+      "part": "p22"
+    },
+    {
+      "t0": 986.36,
+      "t1": 992.12,
+      "text": "The museum also places the American student Frederic Pryor first. Pryor,",
+      "kind": "story",
+      "para": 23,
+      "part": "p22"
+    },
+    {
+      "t0": 992.2,
+      "t1": 997.4,
+      "text": "arrested in 1961 on charges of aiding an escape and of espionage,",
+      "kind": "story",
+      "para": 23,
+      "part": "p22"
+    },
+    {
+      "t0": 997.52,
+      "t1": 1001.36,
+      "text": "was freed at Checkpoint Charlie before the bridge swap began.",
+      "kind": "story",
+      "para": 23,
+      "part": "p22"
+    },
+    {
+      "t0": 1001.64,
+      "t1": 1005.72,
+      "text": "The New York Times, reporting the swap, said Pryor was released at",
+      "kind": "story",
+      "para": 23,
+      "part": "p22"
+    },
+    {
+      "t0": 1005.8,
+      "t1": 1010.52,
+      "text": "the Friedrichstrasse checkpoint just before the two men were exchanged.",
+      "kind": "story",
+      "para": 23,
+      "part": "p22"
+    },
+    {
+      "t0": 1010.84,
+      "t1": 1014.36,
+      "text": "The lawyer Wolfgang Vogel acted as intermediary,",
+      "kind": "story",
+      "para": 23,
+      "part": "p22"
+    },
+    {
+      "t0": 1014.48,
+      "t1": 1017.24,
+      "text": "and he appears again in the later exchanges.",
+      "kind": "story",
+      "para": 23,
+      "part": "p22"
+    },
+    {
+      "t0": 1017.8,
+      "t1": 1023.24,
+      "text": "Twenty-three years after the first swap, on 11 June 1985,",
+      "kind": "story",
+      "para": 24,
+      "part": "p23"
+    },
+    {
+      "t0": 1023.32,
+      "t1": 1026.52,
+      "text": "the bridge carried a much bigger exchange.",
+      "kind": "story",
+      "para": 24,
+      "part": "p23"
+    },
+    {
+      "t0": 1026.56,
+      "t1": 1030.76,
+      "text": "The Bundeszentrale für politische Bildung says 23 people",
+      "kind": "story",
+      "para": 24,
+      "part": "p23"
+    },
+    {
+      "t0": 1030.84,
+      "t1": 1033.32,
+      "text": "held in the East went to the West,",
+      "kind": "story",
+      "para": 24,
+      "part": "p23"
+    },
+    {
+      "t0": 1033.4,
+      "t1": 1037.0,
+      "text": "in return for four Eastern bloc spies.",
+      "kind": "story",
+      "para": 24,
+      "part": "p23"
+    },
+    {
+      "t0": 1037.08,
+      "t1": 1042.84,
+      "text": "The four were Marian Zacharski of Poland, Penyu Kostadinov of Bulgaria,",
+      "kind": "story",
+      "para": 24,
+      "part": "p23"
+    },
+    {
+      "t0": 1042.92,
+      "t1": 1047.48,
+      "text": "and two East Germans, Alfred Zehe and Alice Michelson.",
+      "kind": "story",
+      "para": 24,
+      "part": "p23"
+    },
+    {
+      "t0": 1047.88,
+      "t1": 1052.68,
+      "text": "The Spionagemuseum says the exchange began around midday and took about",
+      "kind": "story",
+      "para": 24,
+      "part": "p23"
+    },
+    {
+      "t0": 1052.76,
+      "t1": 1056.84,
+      "text": "an hour, with the Western agents arriving by bus from Potsdam.",
+      "kind": "story",
+      "para": 24,
+      "part": "p23"
+    },
+    {
+      "t0": 1057.48,
+      "t1": 1062.84,
+      "text": "Counts differ by source. The museum gives 25 Western agents,",
+      "kind": "story",
+      "para": 24,
+      "part": "p23"
+    },
+    {
+      "t0": 1062.92,
+      "t1": 1067.48,
+      "text": "and a 1985 news report describes 25 freed,",
+      "kind": "story",
+      "para": 24,
+      "part": "p23"
+    },
+    {
+      "t0": 1067.64,
+      "t1": 1070.04,
+      "text": "23 of whom crossed to the West.",
+      "kind": "story",
+      "para": 24,
+      "part": "p23"
+    },
+    {
+      "t0": 1070.59,
+      "t1": 1074.99,
+      "text": "The last exchange came on 11 February 1986.",
+      "kind": "story",
+      "para": 25,
+      "part": "p24"
+    },
+    {
+      "t0": 1075.31,
+      "t1": 1080.67,
+      "text": "The dissident Anatoly Shcharansky crossed first, and he crossed alone.",
+      "kind": "story",
+      "para": 25,
+      "part": "p24"
+    },
+    {
+      "t0": 1081.31,
+      "t1": 1084.59,
+      "text": "The Spionagemuseum says that showed the Americans did",
+      "kind": "story",
+      "para": 25,
+      "part": "p24"
+    },
+    {
+      "t0": 1084.75,
+      "t1": 1086.35,
+      "text": "not regard him as an agent.",
+      "kind": "story",
+      "para": 25,
+      "part": "p24"
+    },
+    {
+      "t0": 1086.91,
+      "t1": 1089.23,
+      "text": "It also says he was given trousers that",
+      "kind": "story",
+      "para": 25,
+      "part": "p24"
+    },
+    {
+      "t0": 1089.31,
+      "t1": 1091.55,
+      "text": "were too big and had no belt.",
+      "kind": "story",
+      "para": 25,
+      "part": "p24"
+    },
+    {
+      "t0": 1092.19,
+      "t1": 1095.79,
+      "text": "The museum names the Kocher couple among those exchanged,",
+      "kind": "story",
+      "para": 25,
+      "part": "p24"
+    },
+    {
+      "t0": 1095.91,
+      "t1": 1099.23,
+      "text": "described as KGB agents who lived in the",
+      "kind": "story",
+      "para": 25,
+      "part": "p24"
+    },
+    {
+      "t0": 1099.31,
+      "t1": 1102.67,
+      "text": "United States and spied on the CIA.",
+      "kind": "story",
+      "para": 25,
+      "part": "p24"
+    },
+    {
+      "t0": 1103.15,
+      "t1": 1105.71,
+      "text": "A telegram from the US embassy in Bonn,",
+      "kind": "story",
+      "para": 25,
+      "part": "p24"
+    },
+    {
+      "t0": 1105.91,
+      "t1": 1110.99,
+      "text": "dated 11 February 1986, describes how Shcharansky 'crossed the",
+      "kind": "story",
+      "para": 25,
+      "part": "p24"
+    },
+    {
+      "t0": 1111.07,
+      "t1": 1114.59,
+      "text": "Glienicker Bridge in West Berlin into the free world.'",
+      "kind": "story",
+      "para": 25,
+      "part": "p24"
+    },
+    {
+      "t0": 1115.31,
+      "t1": 1118.11,
+      "text": "Three exchanges took place on this bridge in all,",
+      "kind": "story",
+      "para": 25,
+      "part": "p24"
+    },
+    {
+      "t0": 1118.19,
+      "t1": 1122.59,
+      "text": "in 1962, 1985 and 1986.",
+      "kind": "story",
+      "para": 25,
+      "part": "p24"
+    },
+    {
+      "t0": 1123.15,
+      "t1": 1126.35,
+      "text": "The bridge was open to everyone again from 10 November 1989,",
+      "kind": "story",
+      "para": 26,
+      "part": "p25"
+    },
+    {
+      "t0": 1126.43,
+      "t1": 1129.79,
+      "text": "the Berlin heritage office says.",
+      "kind": "story",
+      "para": 26,
+      "part": "p25"
+    },
+    {
+      "t0": 1130.03,
+      "t1": 1134.19,
+      "text": "Potsdam's city website says it reopened right after the Wall fell.",
+      "kind": "story",
+      "para": 26,
+      "part": "p25"
+    },
+    {
+      "t0": 1134.83,
+      "t1": 1136.11,
+      "text": "On 13 August 2012,",
+      "kind": "story",
+      "para": 26,
+      "part": "p25"
+    },
+    {
+      "t0": 1136.19,
+      "t1": 1141.23,
+      "text": "two steel bands were unveiled and set into the footpaths,",
+      "kind": "story",
+      "para": 26,
+      "part": "p25"
+    },
+    {
+      "t0": 1141.31,
+      "t1": 1143.47,
+      "text": "one on each side, at mid-span.",
+      "kind": "story",
+      "para": 26,
+      "part": "p25"
+    },
+    {
+      "t0": 1143.87,
+      "t1": 1147.87,
+      "text": "Each is 1.90 meters long and carries the words",
+      "kind": "story",
+      "para": 26,
+      "part": "p25"
+    },
+    {
+      "t0": 1148.27,
+      "t1": 1154.43,
+      "text": "Deutsche Teilung bis 1989, German division until 1989.",
+      "kind": "story",
+      "para": 26,
+      "part": "p25"
+    },
+    {
+      "t0": 1154.47,
+      "t1": 1157.83,
+      "text": "A white line had marked the border during the Cold War.",
+      "kind": "story",
+      "para": 26,
+      "part": "p25"
+    },
+    {
+      "t0": 1158.11,
+      "t1": 1162.99,
+      "text": "The artist Bob Bahra designed the bands, each eight centimeters wide,",
+      "kind": "story",
+      "para": 26,
+      "part": "p25"
+    },
+    {
+      "t0": 1163.07,
+      "t1": 1166.19,
+      "text": "and they now mark the old border line permanently.",
+      "kind": "story",
+      "para": 26,
+      "part": "p25"
+    },
+    {
+      "t0": 1166.75,
+      "t1": 1170.51,
+      "text": "Steven Spielberg's 2015 film, Bridge of Spies,",
+      "kind": "story",
+      "para": 27,
+      "part": "p26"
+    },
+    {
+      "t0": 1170.67,
+      "t1": 1173.71,
+      "text": "tells the story of the 1962 swap,",
+      "kind": "story",
+      "para": 27,
+      "part": "p26"
+    },
+    {
+      "t0": 1173.79,
+      "t1": 1177.39,
+      "text": "and it follows the lawyer James Donovan, who negotiates it.",
+      "kind": "story",
+      "para": 27,
+      "part": "p26"
+    },
+    {
+      "t0": 1177.95,
+      "t1": 1181.23,
+      "text": "Berlin's city website says the bridge became known by the",
+      "kind": "story",
+      "para": 27,
+      "part": "p26"
+    },
+    {
+      "t0": 1181.35,
+      "t1": 1184.11,
+      "text": "same name because of the Cold War exchanges.",
+      "kind": "story",
+      "para": 27,
+      "part": "p26"
+    },
+    {
+      "t0": 1184.67,
+      "t1": 1189.07,
+      "text": "The Berlin heritage office files the bridge under the UNESCO World Heritage",
+      "kind": "story",
+      "para": 27,
+      "part": "p26"
+    },
+    {
+      "t0": 1189.15,
+      "t1": 1192.43,
+      "text": "site Palaces and Parks of Potsdam and Berlin.",
+      "kind": "story",
+      "para": 27,
+      "part": "p26"
+    },
+    {
+      "t0": 1192.99,
+      "t1": 1195.31,
+      "text": "Before you go, check the footpaths,",
+      "kind": "story",
+      "para": 27,
+      "part": "p26"
+    },
+    {
+      "t0": 1195.47,
+      "t1": 1197.95,
+      "text": "because roadworks on the bridge can close them.",
+      "kind": "story",
+      "para": 27,
+      "part": "p26"
+    },
+    {
+      "t0": 1198.43,
+      "t1": 1201.63,
+      "text": "If one is blocked, come back another day and keep to",
+      "kind": "story",
+      "para": 27,
+      "part": "p26"
+    },
+    {
+      "t0": 1201.67,
+      "t1": 1204.59,
+      "text": "the footpath when you do come, not the lane.",
+      "kind": "story",
+      "para": 27,
+      "part": "p26"
+    },
+    {
+      "t0": 1205.15,
+      "t1": 1208.27,
+      "text": "So the tunnel and the bridge are one story.",
+      "kind": "story",
+      "para": 28,
+      "part": "p27"
+    },
+    {
+      "t0": 1208.75,
+      "t1": 1212.75,
+      "text": "A tunnel from Rudow heard the Soviet side talk for about eleven",
+      "kind": "story",
+      "para": 28,
+      "part": "p27"
+    },
+    {
+      "t0": 1212.83,
+      "t1": 1216.75,
+      "text": "months, and a bridge between Wannsee and Potsdam later",
+      "kind": "story",
+      "para": 28,
+      "part": "p27"
+    },
+    {
+      "t0": 1216.79,
+      "t1": 1219.83,
+      "text": "gave back the people each side had caught.",
+      "kind": "story",
+      "para": 28,
+      "part": "p27"
+    },
+    {
+      "t0": 1220.19,
+      "t1": 1224.27,
+      "text": "Both were built on the same fact: the city was divided,",
+      "kind": "story",
+      "para": 28,
+      "part": "p27"
+    },
+    {
+      "t0": 1224.35,
+      "t1": 1227.35,
+      "text": "and each side wanted what the other held.",
+      "kind": "story",
+      "para": 28,
+      "part": "p27"
+    },
+    {
+      "t0": 1227.79,
+      "t1": 1229.63,
+      "text": "Today the tunnel can be seen in",
+      "kind": "story",
+      "para": 28,
+      "part": "p27"
+    },
+    {
+      "t0": 1229.71,
+      "t1": 1231.79,
+      "text": "two places you can stand next to.",
+      "kind": "story",
+      "para": 28,
+      "part": "p27"
+    },
+    {
+      "t0": 1232.43,
+      "t1": 1236.67,
+      "text": "One is an original piece in the water tower museum in Altglienicke.",
+      "kind": "story",
+      "para": 28,
+      "part": "p27"
+    },
+    {
+      "t0": 1237.15,
+      "t1": 1239.39,
+      "text": "The other is a restored segment that the",
+      "kind": "story",
+      "para": 28,
+      "part": "p27"
+    },
+    {
+      "t0": 1239.47,
+      "t1": 1242.75,
+      "text": "Allied Museum says is on display in Dahlem,",
+      "kind": "story",
+      "para": 28,
+      "part": "p27"
+    },
+    {
+      "t0": 1242.83,
+      "t1": 1244.91,
+      "text": "if the exhibition is open when you go.",
+      "kind": "story",
+      "para": 28,
+      "part": "p27"
+    },
+    {
+      "t0": 1245.63,
+      "t1": 1247.55,
+      "text": "The digging began in Rudow,",
+      "kind": "story",
+      "para": 28,
+      "part": "p27"
+    },
+    {
+      "t0": 1247.59,
+      "t1": 1250.75,
+      "text": "and the sources here point to no monument there,",
+      "kind": "story",
+      "para": 28,
+      "part": "p27"
+    },
+    {
+      "t0": 1250.83,
+      "t1": 1253.23,
+      "text": "so go for the street and the picture.",
+      "kind": "story",
+      "para": 28,
+      "part": "p27"
+    },
+    {
+      "t0": 1253.79,
+      "t1": 1256.99,
+      "text": "If you have only one afternoon, start at the bridge,",
+      "kind": "story",
+      "para": 28,
+      "part": "p27"
+    },
+    {
+      "t0": 1257.07,
+      "t1": 1260.83,
+      "text": "and check the museum's opening status before you go to Dahlem.",
+      "kind": "story",
+      "para": 28,
+      "part": "p27"
+    },
+    {
+      "t0": 1261.39,
+      "t1": 1264.35,
+      "text": "The last place to stand is the bridge itself.",
+      "kind": "story",
+      "para": 29,
+      "part": "p28"
+    },
+    {
+      "t0": 1264.83,
+      "t1": 1269.15,
+      "text": "Take bus 316 from S Wannsee to its last stop,",
+      "kind": "story",
+      "para": 29,
+      "part": "p28"
+    },
+    {
+      "t0": 1269.23,
+      "t1": 1272.27,
+      "text": "Glienicker Brücke, on the Potsdam end of the bridge.",
+      "kind": "story",
+      "para": 29,
+      "part": "p28"
+    },
+    {
+      "t0": 1272.51,
+      "t1": 1275.71,
+      "text": "The bus crosses the whole span before it stops.",
+      "kind": "story",
+      "para": 29,
+      "part": "p28"
+    },
+    {
+      "t0": 1275.95,
+      "t1": 1278.59,
+      "text": "Walk back toward mid-span until you reach the",
+      "kind": "story",
+      "para": 29,
+      "part": "p28"
+    },
+    {
+      "t0": 1278.67,
+      "t1": 1280.59,
+      "text": "metal band across the footpath.",
+      "kind": "story",
+      "para": 29,
+      "part": "p28"
+    },
+    {
+      "t0": 1280.99,
+      "t1": 1286.03,
+      "text": "Read the words on it first: Deutsche Teilung bis 1989.",
+      "kind": "story",
+      "para": 29,
+      "part": "p28"
+    },
+    {
+      "t0": 1286.19,
+      "t1": 1290.39,
+      "text": "Then stand beside it and look along the bridge in both directions.",
+      "kind": "story",
+      "para": 29,
+      "part": "p28"
+    },
+    {
+      "t0": 1290.59,
+      "t1": 1292.67,
+      "text": "The footpaths run on both sides,",
+      "kind": "story",
+      "para": 29,
+      "part": "p28"
+    },
+    {
+      "t0": 1292.75,
+      "t1": 1294.83,
+      "text": "so you can walk the whole span.",
+      "kind": "story",
+      "para": 29,
+      "part": "p28"
+    },
+    {
+      "t0": 1295.07,
+      "t1": 1297.15,
+      "text": "The answer to the question at the end of the last",
+      "kind": "story",
+      "para": 29,
+      "part": "p28"
+    },
+    {
+      "t0": 1297.23,
+      "t1": 1300.83,
+      "text": "chapter is simple: people, one at a time.",
+      "kind": "story",
+      "para": 29,
+      "part": "p28"
+    },
+    {
+      "t0": 1301.98,
+      "t1": 1303.46,
+      "text": "That's this week's story.",
+      "kind": "spot",
+      "para": 30,
+      "part": "[[SPOT-C]]"
+    },
+    {
+      "t0": 1303.66,
+      "t1": 1306.78,
+      "text": "I'm Yusuf, and if you want to stand where it happened,",
+      "kind": "spot",
+      "para": 30,
+      "part": "[[SPOT-C]]"
+    },
+    {
+      "t0": 1306.86,
+      "t1": 1310.66,
+      "text": "my walks and audio walks are at walk of berlin dot com.",
+      "kind": "spot",
+      "para": 30,
+      "part": "[[SPOT-C]]",
+      "display": "my walks and audio walks are at walkofberlin.com."
+    },
+    {
+      "t0": 1310.94,
+      "t1": 1313.18,
+      "text": "Next week, another Berlin story.",
+      "kind": "spot",
+      "para": 30,
+      "part": "[[SPOT-C]]"
+    }
+  ]
+}
