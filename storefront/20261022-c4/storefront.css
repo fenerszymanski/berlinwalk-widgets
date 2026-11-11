@@ -442,3 +442,9 @@ button.ys-words-tag:focus-visible{outline:2px solid var(--green);outline-offset:
 .ys-mounted-spec{font-size:14px;line-height:1.5}
 [data-ys-mockups][hidden],[data-ys-picture][hidden],[data-ys-framechoices][hidden],[data-ys="framechoices"][hidden],[data-ys-multi][hidden],[data-ys-mounted-saving][hidden],[data-ys-mounted-spec][hidden],[data-ys-mounted-delivery][hidden],[data-ys-mounted-christmas][hidden],[data-ys-poster-only][hidden]{display:none!important}
 .ys-formats .ys-size{min-width:0;text-align:center}
+/* Shop bar fit (11 Nov 2026): where the tabs do not fit beside the logo, language switch and cart, they get their own row;
+   where even that row is too narrow they scroll sideways like on a phone (the dropdowns then stay closed). German tabs are longer. */
+@media(min-width:741px) and (max-width:1279px){.shopbar-inner{flex-wrap:wrap;gap:0 24px;padding-top:6px}.shopbar .lang-switch{margin-left:auto}.shopbar .tabs{order:3;flex-basis:100%}.shopbar .tabs a{min-height:50px}}
+@media(min-width:1280px){:host([lang=de]) .shopbar-inner{flex-wrap:wrap;gap:0 24px;padding-top:6px}:host([lang=de]) .shopbar .lang-switch{margin-left:auto}:host([lang=de]) .shopbar .tabs{order:3;flex-basis:100%}:host([lang=de]) .shopbar .tabs a{min-height:50px}}
+@media(min-width:741px) and (max-width:899px){.shopbar .tabs{overflow-x:auto}.shopbar .tab-menu{display:none!important}}
+@media(min-width:900px) and (max-width:1019px){:host([lang=de]) .shopbar .tabs{overflow-x:auto}:host([lang=de]) .shopbar .tab-menu{display:none!important}}
