@@ -422,3 +422,6 @@ button.ys-words-tag:focus-visible{outline:2px solid var(--green);outline-offset:
 .ys-more-homes a{color:var(--leaf);font-weight:600}
 .drawer .ys-more{margin:0 0 18px;padding:12px}
 .summary-row.ys-saving strong{color:var(--leaf)}
+
+.lang-switch{display:flex;align-items:center;flex-shrink:0;font:500 12px/1 var(--mono);letter-spacing:.06em}.lang-switch a{display:flex;align-items:center;justify-content:center;min-width:36px;min-height:44px;padding:0 6px;text-decoration:none;color:var(--muted)}.lang-switch a+a{border-left:1px solid var(--line)}.lang-switch a[aria-current]{color:var(--green);font-weight:700;box-shadow:inset 0 -2px var(--green)}.lang-switch a:hover{color:var(--green)}
+@media(max-width:740px){.shopbar .lang-switch{margin-left:auto}.shopbar .lang-switch+.cart-link{margin-left:0}}
