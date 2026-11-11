@@ -326,6 +326,19 @@ PATTERNS.unshift(
   [/^Quantity: (\d+)$/, 'Menge: $1'],
   [/^(€\d+(?:[.,]\d{2})?) each$/, '$1 pro Stück']
 );
+// Shop words on the other product pages (digital printables, audio walks), German pages only (11 Nov 2026). Product stories stay as written.
+for (const [en, de] of [
+  ['Berlin Everyday', 'Berliner Alltag'], ['Landmarks', 'Wahrzeichen'], ['Berlin Stories', 'Berliner Geschichten'], ['Districts', 'Bezirke'],
+  ['Printable sets', 'Sets zum Ausdrucken'], ['Personal newspapers', 'Persönliche Zeitungen'],
+  ['Printed to order and shipped', 'Auf Bestellung gedruckt und verschickt'], ['Download it and print it yourself', 'Herunterladen und selbst ausdrucken'],
+  ['DIGITAL DOWNLOAD · 30 × 40 CM', 'DIGITALER DOWNLOAD · 30 × 40 CM'],
+  ['Digital download · 1 JPEG print file and a printing guide. No physical item.', 'Digitaler Download · 1 JPEG-Druckdatei und eine Druckanleitung. Kein physischer Artikel.'],
+  ['About this download', 'Über diesen Download'], ['File formats and printing', 'Dateiformate und Druck'], ['Personal use licence', 'Lizenz für den privaten Gebrauch'],
+  ['You may print this artwork for personal use. Do not resell, share or redistribute the files.', 'Du darfst dieses Motiv für den privaten Gebrauch ausdrucken. Die Dateien dürfen nicht weiterverkauft, geteilt oder weitergegeben werden.'],
+  ['No physical item, frame or decor is supplied. Personal use only; do not resell or redistribute the files.', 'Es wird kein physischer Artikel, kein Rahmen und keine Deko geliefert. Nur für den privaten Gebrauch; die Dateien dürfen nicht weiterverkauft oder weitergegeben werden.'],
+  ['Download & returns', 'Download und Rückgabe'], ['Image credits', 'Bildnachweise'], ['Visual credits and sources', 'Bildnachweise und Quellen'],
+  ['More from the shop', 'Mehr aus dem Shop'], ['SEE DETAILS →', 'DETAILS ANSEHEN →'], ['Not confirmed', 'Noch nicht bestätigt'],
+]) if (!TEXT.has(en)) TEXT.set(en, de);
 // Yalnız görünen metin; form değerleri, varyantlar ve sepet kaydı değişmez.
 const germanMoney = text => text.replace(/€(\d+(?:[.,]\d{2})?)/g, (_, number) => number.replace('.', ',')+' €');
 // Short cart words that could also appear elsewhere on a product page: translated only on the cart page and in the side cart.
@@ -358,6 +371,8 @@ function sweep(root) {
 // Wix can replace the element while the page settles, so the watch rebinds to whichever shadow root is current.
 function start() {
   const ysPage = pagePath().startsWith(PRODUCT_PATH), cartPage = pagePath().startsWith('/cart-page');
+  // Wix's German product pages (/de/...) get the shop's own words in German on every product, not only posters (11 Nov 2026).
+  const dePage = /^\/de(?:\/|$)/.test(decodeURIComponent(location.pathname));
   if (!ysPage && !cartPage && !pagePath().startsWith('/product-page/')) return;
   if (ysPage) document.title = 'Deine Berliner Straße um 1928 | Walk of Berlin';
   if (cartPage) document.title = 'Warenkorb | Walk of Berlin';
@@ -365,7 +380,7 @@ function start() {
   const bind = () => {
     const host = document.querySelector('bw-storefront');
     if (!host?.shadowRoot || host.shadowRoot === bound) return;
-    if (!ysPage && !cartPage && !host.shadowRoot.querySelector('.poster-faq')) return;
+    if (!ysPage && !cartPage && !dePage && !host.shadowRoot.querySelector('.poster-faq')) return;
     bound = host.shadowRoot;
     host.lang = 'de';
     const root = bound;
