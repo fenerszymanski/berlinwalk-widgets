@@ -33,6 +33,14 @@ const BW_THANK_YOU_CALENDAR = {
 
 class BWThankYouElement extends HTMLElement {
   connectedCallback() {
+    // Store orders land on the same Wix thank-you page as paid tour bookings. The storefront marks this tab when its
+    // "Continue to checkout" is pressed (sessionStorage "bwStoreCheckout"), so a store buyer gets a store thank-you, not the tour one.
+    const storeOrder = this._storeOrder();
+    if (storeOrder) {
+      document.body.classList.add('bw-thank-you-store-active');
+      this._renderStore(storeOrder);
+      return;
+    }
     document.body.classList.add('bw-thank-you-page-active');
     this._render();
     this._setupInteractionTracking();
@@ -44,11 +52,66 @@ class BWThankYouElement extends HTMLElement {
 
   disconnectedCallback() {
     document.body.classList.remove('bw-thank-you-page-active');
+    document.body.classList.remove('bw-thank-you-store-active');
     if (this._bookingObserver) this._bookingObserver.disconnect();
     if (this._hideTimers) this._hideTimers.forEach((timer) => window.clearTimeout(timer));
     if (this._countdownTimer) window.clearInterval(this._countdownTimer);
     if (this._forecastAbortController) this._forecastAbortController.abort();
     if (this._trackClickHandler) this.removeEventListener('click', this._trackClickHandler);
+  }
+
+  _storeOrder() {
+    try {
+      if (!/^\/(?:de\/)?thank-you-page\//.test(window.location.pathname)) return null;
+      const mark = JSON.parse(window.sessionStorage.getItem('bwStoreCheckout') || 'null');
+      if (!mark || !(Date.now() - Number(mark.at) < 3 * 3600 * 1000)) return null;
+      // One mark serves one order page: a later checkout in this tab (a tour booking) without a fresh mark gets the tour page.
+      if (mark.path && mark.path !== window.location.pathname) return null;
+      if (!mark.path) window.sessionStorage.setItem('bwStoreCheckout', JSON.stringify({ ...mark, path: window.location.pathname }));
+      return { de: mark.lang === 'de' || /^\/de\//.test(window.location.pathname), digital: !!mark.digital };
+    } catch (error) {
+      return null;
+    }
+  }
+
+  _renderStore(order) {
+    const t = order.de ? {
+      kicker: 'Bestellung bestätigt', title: 'Danke für deine Bestellung.',
+      mail: 'Deine Bestellbestätigung kommt per E-Mail, mit den Bestelldetails, meinen AGB und der Widerrufsbelehrung.',
+      digital: 'Digitale Dateien: Der Download-Link kommt in einer eigenen E-Mail, meist innerhalb weniger Minuten. Personalisierte digitale Dateien kommen innerhalb von 24 Stunden per E-Mail.',
+      print: 'Drucke werden auf Bestellung gedruckt. Die Lieferzeit steht in deiner Bestätigung.',
+      help: 'Fragen? Schreib an', reply: 'Ich antworte innerhalb eines Tages.', back: 'Zurück zum Shop', store: 'https://walkofberlin.com/de/category/all-products'
+    } : {
+      kicker: 'Order confirmed', title: 'Thank you for your order.',
+      mail: 'Your order confirmation is on its way by email, with your order details, my Store Terms and the withdrawal notice.',
+      digital: 'Digital files: the download link comes in a separate email, usually within a few minutes. Personalised digital files arrive by email within 24 hours.',
+      print: 'Prints are made to order. The delivery estimate is in your confirmation.',
+      help: 'Questions? Write to', reply: 'I reply within a day.', back: 'Back to the store', store: 'https://walkofberlin.com/category/all-products'
+    };
+    this.innerHTML = `
+      <style>
+        body.bw-thank-you-store-active #bw-sticky-cta,
+        body.bw-thank-you-store-active #bw-desktop-cta { display: none !important; }
+        bw-thank-you { display: block; width: 100%; }
+        .bw-ty-store { background: #FAFAF5; color: #212121; font-family: Montserrat, Arial, sans-serif; padding: 56px 16px 64px; }
+        .bw-ty-store * { box-sizing: border-box; }
+        .bw-ty-store-inner { margin: 0 auto; max-width: 680px; border-top: 6px solid #1B5E20; background: #fff; padding: 32px 28px; }
+        .bw-ty-store-kicker { color: #1B5E20; font-size: 13px; font-weight: 800; letter-spacing: .08em; margin: 0 0 12px; text-transform: uppercase; }
+        .bw-ty-store h1 { font-family: Merriweather, Georgia, serif; font-size: clamp(26px, 5vw, 36px); line-height: 1.2; margin: 0 0 18px; }
+        .bw-ty-store p { font-size: 16px; line-height: 1.6; margin: 0 0 14px; overflow-wrap: break-word; }
+        .bw-ty-store a { color: #1B5E20; font-weight: 700; }
+        .bw-ty-store-back { display: inline-block; margin-top: 10px; background: #1B5E20; color: #fff !important; padding: 12px 20px; text-decoration: none; border-radius: 999px; }
+      </style>
+      <section class="bw-ty-store" lang="${order.de ? 'de' : 'en'}" aria-labelledby="bw-ty-store-title" data-bw-ty-store>
+        <div class="bw-ty-store-inner">
+          <p class="bw-ty-store-kicker">${t.kicker}</p>
+          <h1 id="bw-ty-store-title">${t.title}</h1>
+          <p>${t.mail}</p>
+          <p>${order.digital ? t.digital : t.print}</p>
+          <p>${t.help} <a href="mailto:info@walkofberlin.com">info@walkofberlin.com</a>. ${t.reply}</p>
+          <a class="bw-ty-store-back" href="${t.store}">${t.back}</a>
+        </div>
+      </section>`;
   }
 
   _render() {

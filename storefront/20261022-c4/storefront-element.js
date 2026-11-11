@@ -1199,7 +1199,7 @@
         if(action==='add'){await this.request('add',{productId:button.dataset.product,quantity:Number(button.dataset.quantity)||1});this.lastAddedId=button.dataset.product;this.measure('added',this.model.products.find(p=>p.wixProductId===button.dataset.product),Number(button.dataset.quantity)||1);this.notice='Added to your cart';this.render();const dialog=this.shadowRoot.querySelector('dialog');if(this.revealed){dialog.showModal();dialog.querySelector('[data-action="close-drawer"]').focus();}}
         if(action==='minus'||action==='plus'){const line=this.cart?.lines.find(line=>line.lineItemId===button.dataset.line);if(line)await this.request('update',{lineItemId:line.lineItemId,quantity:line.quantity+(action==='plus'?1:-1)});}
         if(action==='remove')await this.request('remove',{lineItemId:button.dataset.line});
-        if(action==='checkout'&&this.quote?.state==='READY'){this.measure('checkout',this.cart);await this.request('checkout',{quoteInput:this.quoteInput()});}
+        if(action==='checkout'&&this.quote?.state==='READY'){this.measure('checkout',this.cart);try{sessionStorage.setItem('bwStoreCheckout',JSON.stringify({at:Date.now(),lang:deCart(this.cartGerman())?'de':'en',digital:this.digitalOnly()}));}catch(e){}await this.request('checkout',{quoteInput:this.quoteInput()});}
       }catch(error){this.error=error.message;}finally{this.busy=false;this.render();}
     }
   }
