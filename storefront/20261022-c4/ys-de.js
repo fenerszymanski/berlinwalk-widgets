@@ -321,8 +321,10 @@ for (const [en, de] of [
   ['A code you enter there replaces the multi-print saving.', 'Ein Code, den du dort eingibst, ersetzt den Mengenrabatt.'],
 ]) TEXT.set(en, de);
 PATTERNS.unshift(
+  [/^(.+ · \d+ ?x ?\d+ cm) · Unframed$/, '$1 · Ohne Rahmen'],
   [/^All (\d+) personalised gifts →$/, 'Alle $1 personalisierten Geschenke →'],
   [/^All (\d+) posters →$/, 'Alle $1 Poster →'],
+  [/^(\d+) available$/, '$1 verfügbar'],
   [/^AUDIO WALKS · (\d+) PRODUCTS$/, 'AUDIO-SPAZIERGÄNGE · $1 PRODUKTE · ENGLISCH'],
   [/^\((\d+) items?\)$/, '($1 Artikel)'],
   [/^Cart \((\d+|—)\)$/, 'Warenkorb ($1)'],
@@ -408,6 +410,7 @@ for (const [en, de] of [
   ['DIGITAL GUIDE', 'DIGITALER GUIDE · ENGLISCH'], ['Photo walks across the city', 'Foto-Spaziergänge durch die Stadt'],
   ['VIRTUAL TOUR · VIDEO', 'VIRTUELLE TOUR · VIDEO · ENGLISCH'], ['Watch from home', 'Von zu Hause ansehen'],
   ['EVENING AT HOME', 'ABEND ZU HAUSE · ENGLISCH'],
+  ['WALL CALENDAR · A3', 'WANDKALENDER · A3'], ['Unframed', 'Ohne Rahmen'], ['1 available', '1 verfügbar'],
 ]) if (!TEXT.has(en)) TEXT.set(en, de);
 // Yalnız görünen metin; form değerleri, varyantlar ve sepet kaydı değişmez.
 const germanMoney = text => text.replace(/€(\d+(?:[.,]\d{2})?)/g, (_, number) => number.replace('.', ',')+' €');
@@ -424,6 +427,21 @@ const translate = (value, node) => {
   return formatted!==value?formatted:null;
 };
 const skip = node => ['STYLE', 'SCRIPT', 'TEXTAREA'].includes(node.parentElement?.tagName) || (node.parentElement?.tagName === 'OPTION' && !node.parentElement.closest('[data-address-form]')) || !!node.parentElement?.closest('.homes-type,.bw-raw');
+// On Wix's German pages every store link stays German: /category/..., /product-page/... and /cart-page get the /de prefix (11 Nov 2026).
+const DE_PAGE = /^\/de(?:\/|$)/.test(decodeURIComponent(location.pathname));
+const STORE_LINK = /^\/(?:category|product-page|cart-page|store)(?:\/|$)/;
+function deLinks(root) {
+  if (!DE_PAGE) return;
+  root.querySelectorAll('a[href]').forEach(a => {
+    if (a.closest('.lang-switch')) return;
+    try {
+      const u = new URL(a.getAttribute('href'), location.href);
+      if (!/(^|\.)walkofberlin\.com$/.test(u.hostname) || !STORE_LINK.test(u.pathname)) return;
+      u.hostname = 'www.walkofberlin.com'; u.pathname = '/de' + u.pathname; u.searchParams.delete('lang');
+      if (a.getAttribute('href') !== u.href) a.setAttribute('href', u.href);
+    } catch (e) {}
+  });
+}
 function sweep(root) {
   const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
   for (let node = walker.nextNode(); node; node = walker.nextNode()) {
@@ -437,6 +455,7 @@ function sweep(root) {
       if (next) element.setAttribute(name, next);
     }
   });
+  deLinks(root);
 }
 // The rest of the shop's English text (product stories, notes, image descriptions) lives in data/de-store.json, built from a crawl
 // of every German store page (11 Nov 2026). Names, credits and links are not in it and stay as written.
