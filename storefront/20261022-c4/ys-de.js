@@ -438,6 +438,12 @@ function sweep(root) {
     }
   });
 }
+// The rest of the shop's English text (product stories, notes, image descriptions) lives in data/de-store.json, built from a crawl
+// of every German store page (11 Nov 2026). Names, credits and links are not in it and stay as written.
+let storeDe = null;
+const loadStoreDe = () => storeDe || (storeDe = fetch(new URL('data/de-store.json' + new URL(import.meta.url).search, import.meta.url))
+  .then(r => r.ok ? r.json() : {}).then(map => { for (const [k, v] of Object.entries(map || {})) { if (!v) continue; const attr = k.match(/^@(?:aria-label|alt|placeholder|title): ([\s\S]*)$/); if (attr) { if (!ATTRS.has(attr[1])) ATTRS.set(attr[1], v); } else if (!TEXT.has(k)) TEXT.set(k, v); } })
+  .catch(() => {}));
 // Wix can replace the element while the page settles, so the watch rebinds to whichever shadow root is current.
 function start() {
   const ysPage = pagePath().startsWith(PRODUCT_PATH), cartPage = pagePath().startsWith('/cart-page');
@@ -456,6 +462,7 @@ function start() {
     const root = bound;
     new MutationObserver(() => sweep(root)).observe(root, { subtree: true, childList: true, characterData: true });
     sweep(root);
+    loadStoreDe().then(() => sweep(root));
   };
   bind();
   setInterval(bind, 300);
