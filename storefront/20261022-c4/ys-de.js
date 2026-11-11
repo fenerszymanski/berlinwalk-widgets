@@ -321,6 +321,9 @@ for (const [en, de] of [
   ['A code you enter there replaces the multi-print saving.', 'Ein Code, den du dort eingibst, ersetzt den Mengenrabatt.'],
 ]) TEXT.set(en, de);
 PATTERNS.unshift(
+  [/^All (\d+) personalised gifts →$/, 'Alle $1 personalisierten Geschenke →'],
+  [/^All (\d+) posters →$/, 'Alle $1 Poster →'],
+  [/^AUDIO WALKS · (\d+) PRODUCTS$/, 'AUDIO-SPAZIERGÄNGE · $1 PRODUKTE · ENGLISCH'],
   [/^\((\d+) items?\)$/, '($1 Artikel)'],
   [/^Cart \((\d+|—)\)$/, 'Warenkorb ($1)'],
   [/^Quantity: (\d+)$/, 'Menge: $1'],
@@ -381,6 +384,31 @@ const MOUNTED_TEXT = {
 };
 for(const [en,de] of Object.entries(MOUNTED_TEXT)){TEXT.set(en,de);ATTRS.set(en,de);}
 PATTERNS.unshift([/^(?:Framed print|Canvas print|30 x 40 cm|45 x 60 cm) · .*(?:frame|paper|€|cm).*$/, value=>value.split(' · ').map(part=>TEXT.get(part)||part).join(' · ')]);
+// German shop home and category pages (/de/..., 11 Nov 2026): shop words and short card lines. Product names stay; products in English say so.
+for (const [en, de] of [
+  ['Berlin posters, personalised prints, personal newspapers, audio walks and guides.', 'Berlin-Poster, personalisierte Drucke, persönliche Zeitungen, Audio-Spaziergänge und Reiseführer.'],
+  ['Looking for a Christmas gift? Start here.', 'Suchst du ein Weihnachtsgeschenk? Fang hier an.'],
+  ['Made to order · free delivery to Germany, the EU, the UK and the US', 'Auf Bestellung gefertigt · kostenloser Versand nach Deutschland, in die EU, nach UK und in die USA'],
+  ['Your Berlin address in the 1928 aerial photographs, made into a print. Free delivery to Germany, the EU, the UK and the US.', 'Deine Berliner Adresse auf den Luftbildern von 1928, als Druck. Kostenloser Versand nach Deutschland, in die EU, nach UK und in die USA.'],
+  ['Choose options', 'Optionen wählen'],
+  ['Eight printed pages about one day in one person’s life · free delivery to Germany, the EU, the UK and the US', 'Acht gedruckte Seiten über einen Tag im Leben eines Menschen · kostenloser Versand nach Deutschland, in die EU, nach UK und in die USA'],
+  ['PERSONAL NEWSPAPER · 8 PAGES', 'PERSÖNLICHE ZEITUNG · 8 SEITEN'], ['MAKE THEIR EDITION →', 'AUSGABE GESTALTEN →'],
+  ['Their birthday', 'Zum Geburtstag'], ['Their wedding', 'Zur Hochzeit'], ['The day they came to Berlin', 'Der Tag, an dem sie nach Berlin kamen'], ['For someone leaving Berlin', 'Für alle, die Berlin verlassen'],
+  ['Each artwork as a printed poster or a file you print yourself', 'Jedes Motiv als gedrucktes Poster oder als Datei zum Selbstdrucken'],
+  ['Open spaces', 'Freiflächen'], ['Urban details', 'Stadtdetails'],
+  ['Physical A3 wall calendar · 12 Berlin districts · printed to order', 'Gedruckter A3-Wandkalender · 12 Berliner Bezirke · auf Bestellung gedruckt'],
+  ['Berlin 2027 Wall Calendar', 'Berlin Wandkalender 2027'], ['12 districts · A3', '12 Bezirke · A3'],
+  ['Four self-guided walks, one at a time, or three as a bundle', 'Vier Spaziergänge auf eigene Faust (auf Englisch), einzeln oder drei im Paket'],
+  ['Browse all audio walks →', 'Alle Audio-Spaziergänge ansehen →'],
+  ['AUDIO WALK · SELF-GUIDED', 'AUDIO-SPAZIERGANG · ENGLISCH'],
+  ['A trip plan, digital guides, virtual tours and an evening at home', 'Ein Reiseplan, digitale Guides, virtuelle Touren und ein Abend zu Hause (auf Englisch)'],
+  ['TRIP PLAN · WEB AND PDF', 'REISEPLAN · WEB UND PDF · ENGLISCH'], ['1 to 7 days', '1 bis 7 Tage'],
+  ['DIGITAL PLAN · PDF', 'DIGITALER PLAN · PDF · ENGLISCH'], ['Your first hours in Berlin', 'Deine ersten Stunden in Berlin'],
+  ['DIGITAL GUIDE · 15 PAGES', 'DIGITALER GUIDE · 15 SEITEN · ENGLISCH'], ['15 must-see places', '15 Orte, die du sehen solltest'],
+  ['DIGITAL GUIDE', 'DIGITALER GUIDE · ENGLISCH'], ['Photo walks across the city', 'Foto-Spaziergänge durch die Stadt'],
+  ['VIRTUAL TOUR · VIDEO', 'VIRTUELLE TOUR · VIDEO · ENGLISCH'], ['Watch from home', 'Von zu Hause ansehen'],
+  ['EVENING AT HOME', 'ABEND ZU HAUSE · ENGLISCH'],
+]) if (!TEXT.has(en)) TEXT.set(en, de);
 // Yalnız görünen metin; form değerleri, varyantlar ve sepet kaydı değişmez.
 const germanMoney = text => text.replace(/€(\d+(?:[.,]\d{2})?)/g, (_, number) => number.replace('.', ',')+' €');
 // Short cart words that could also appear elsewhere on a product page: translated only on the cart page and in the side cart.
@@ -415,7 +443,7 @@ function start() {
   const ysPage = pagePath().startsWith(PRODUCT_PATH), cartPage = pagePath().startsWith('/cart-page');
   // Wix's German product pages (/de/...) get the shop's own words in German on every product, not only posters (11 Nov 2026).
   const dePage = /^\/de(?:\/|$)/.test(decodeURIComponent(location.pathname));
-  if (!ysPage && !cartPage && !pagePath().startsWith('/product-page/')) return;
+  if (!ysPage && !cartPage && !dePage && !pagePath().startsWith('/product-page/')) return;
   if (ysPage) document.title = 'Deine Berliner Straße um 1928 | Walk of Berlin';
   if (cartPage) document.title = 'Warenkorb | Walk of Berlin';
   let bound = null;
