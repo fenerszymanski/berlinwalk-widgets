@@ -5,7 +5,7 @@
   const base = new URL('.', script.src);
   const CHANNEL = 'wob:shop-cart:v1';
   const esc = value => String(value ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-  const asset = value => {if(value==='gift-week.js'&&/^[a-f0-9]{40}$/.test(window.__WOB_GIFT_WEEK_P22_REF||''))return 'https://cdn.jsdelivr.net/gh/fenerszymanski/berlinwalk-widgets@'+window.__WOB_GIFT_WEEK_P22_REF+'/storefront/20261022-c4/gift-week.js';const target=new URL(value,base);if(/\.(?:js|css|json)$/.test(target.pathname))target.searchParams.set('v','de-ui-20261111');return target.href;};
+  const asset = value => {if(value==='gift-week.js'&&/^[a-f0-9]{40}$/.test(window.__WOB_GIFT_WEEK_P22_REF||''))return 'https://cdn.jsdelivr.net/gh/fenerszymanski/berlinwalk-widgets@'+window.__WOB_GIFT_WEEK_P22_REF+'/storefront/20261022-c4/gift-week.js';const target=new URL(value,base);if(/\.(?:js|css|json)$/.test(target.pathname))target.searchParams.set('v','de-wd-20261111');return target.href;};
   // Chrome and Safari ignore @font-face inside shadow DOM, so the three faces are registered once on the document with absolute URLs from the element's own base.
   // Gift landing trials showed no LCP gain. Preserve their prior resource and font order.
   const legacyGiftPresentation = () => /^(?:\/de)?\/(?:category\/(?:berlin-christmas-gifts|berlin-geschenke)|gifts|geschenke)\/?$/.test(location.pathname);
@@ -290,7 +290,7 @@
   // Die Widerrufsbelehrung habe ich gelesen." and cannot be edited, so the cart carries the correct German acknowledgement. Only a buyer who goes on
   // to the German Wix checkout (deCart) sees it, with links to the German AGB and Widerrufsbelehrungen; everyone else keeps the reviewed English
   // wording. Before DE_CHECKOUT goes true, both -de pages must be live (on 11 Nov they were not yet published).
-  const LEGAL_DE = {terms:'https://app.berlinwalk.com/store-terms-de',withdrawalNotice:'https://app.berlinwalk.com/store-withdrawal-de'};
+  const LEGAL_DE = {terms:'https://app.berlinwalk.com/store-terms-de',withdrawalNotice:'https://app.berlinwalk.com/store-withdrawal-de',withdraw:'https://app.berlinwalk.com/withdraw-de'};
   const ACK_DE = 'Ich bin mit den Allgemeinen Geschäftsbedingungen (AGB) für den Shop einverstanden. Die Widerrufsbelehrungen und das Muster-Widerrufsformular habe ich erhalten.';
   const NOTICE_DE = {
     personalisedTitle:'Personalisiertes Produkt',
@@ -934,7 +934,7 @@
       return `<div class="legal-box" data-legal-lang="en"><p class="legal-ack">${esc(ACK)}</p>${this.legalLinks()}</div>`;
     }
     legalLinks() {if(this.legalGerman())return `<p class="legal-links bw-raw" lang="de"><a href="${LEGAL_DE.terms}" target="_blank" rel="noopener">AGB</a><a href="${LEGAL_DE.withdrawalNotice}" target="_blank" rel="noopener">Widerrufsbelehrungen und Muster-Widerrufsformular</a></p>`;return `<p class="legal-links"><a href="${LEGAL.terms}" target="_blank" rel="noopener">Store Terms</a><a href="${LEGAL.withdrawalNotice}" target="_blank" rel="noopener">Withdrawal notices and model form</a></p>`;}
-    withdrawButton() {return `<p class="withdraw-row"><a class="outline withdraw-link" data-withdraw href="${LEGAL.withdraw}" target="_blank" rel="noopener">Withdraw from contract (Vertrag widerrufen)</a></p>`;}
+    withdrawButton() {if(this.legalGerman())return `<p class="withdraw-row bw-raw" lang="de"><a class="outline withdraw-link" data-withdraw href="${LEGAL_DE.withdraw}" target="_blank" rel="noopener">Vertrag widerrufen</a></p>`;return `<p class="withdraw-row"><a class="outline withdraw-link" data-withdraw href="${LEGAL.withdraw}" target="_blank" rel="noopener">Withdraw from contract (Vertrag widerrufen)</a></p>`;}
     guaranteeNotice() {return `<section class="eu-guarantee" aria-labelledby="eu-guarantee-title"><h3 id="eu-guarantee-title">EU legal guarantee notice</h3><a href="${esc(asset(LEGAL.guaranteeImage))}" target="_blank" rel="noopener"><img src="${esc(asset(LEGAL.guaranteeImage))}" alt="${esc(GUARANTEE_ALT)}" width="884" height="1200" loading="lazy"></a><p class="meta">Official notice under Regulation (EU) 2025/1960, Annex I. <a href="${LEGAL.guaranteeInfo}" target="_blank" rel="noopener">More about legal guarantees</a></p></section>`;}
     // The native ID comes from trusted catalogue metadata, never the title, URL or cart line.
     artworkReuseLicence(productId) {
