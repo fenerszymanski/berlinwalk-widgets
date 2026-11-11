@@ -209,7 +209,8 @@ PATTERNS.unshift(
   [/^In your cart: (.+)$/, 'Im Warenkorb: $1']
 );
 // Cart page and side cart (9 Nov 2026): every string the 1928 flow touches. The legal acknowledgement and the full notices under Details stay in
-// their reviewed English wording; the withdraw button is already bilingual.
+// their reviewed English wording; the withdraw button is already bilingual. A buyer headed to the German checkout gets German legal text written
+// by storefront-element.js itself (legalBox, lineNotice; marked bw-raw, so it is skipped here).
 const CART_TEXT = {
  "+ Add another address": "+ Weitere Adresse hinzufügen",
  "Want them on one print?": "Lieber alle auf einem Druck?",

@@ -5,7 +5,7 @@
   const base = new URL('.', script.src);
   const CHANNEL = 'wob:shop-cart:v1';
   const esc = value => String(value ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-  const asset = value => {if(value==='gift-week.js'&&/^[a-f0-9]{40}$/.test(window.__WOB_GIFT_WEEK_P22_REF||''))return 'https://cdn.jsdelivr.net/gh/fenerszymanski/berlinwalk-widgets@'+window.__WOB_GIFT_WEEK_P22_REF+'/storefront/20261022-c4/gift-week.js';const target=new URL(value,base);if(/\.(?:js|css|json)$/.test(target.pathname))target.searchParams.set('v','de-path-20261110');return target.href;};
+  const asset = value => {if(value==='gift-week.js'&&/^[a-f0-9]{40}$/.test(window.__WOB_GIFT_WEEK_P22_REF||''))return 'https://cdn.jsdelivr.net/gh/fenerszymanski/berlinwalk-widgets@'+window.__WOB_GIFT_WEEK_P22_REF+'/storefront/20261022-c4/gift-week.js';const target=new URL(value,base);if(/\.(?:js|css|json)$/.test(target.pathname))target.searchParams.set('v','de-legal-20261111');return target.href;};
   // Chrome and Safari ignore @font-face inside shadow DOM, so the three faces are registered once on the document with absolute URLs from the element's own base.
   // Gift landing trials showed no LCP gain. Preserve their prior resource and font order.
   const legacyGiftPresentation = () => /^(?:\/de)?\/(?:category\/(?:berlin-christmas-gifts|berlin-geschenke)|gifts|geschenke)\/?$/.test(location.pathname);
@@ -285,6 +285,23 @@
   // Legal copy (Yusuf, 23 Oct 2026: "bunlarla ilerleyelim"). Texts from content/products/your-street-1928/SHOP_CHECKOUT_AND_EMAIL_COPY_DRAFT_EN.md section 1. The two documents and the withdrawal function are served by app.berlinwalk.com.
   const LEGAL = {terms:'https://app.berlinwalk.com/store-terms',withdrawalNotice:'https://app.berlinwalk.com/store-withdrawal',withdraw:'https://app.berlinwalk.com/withdraw',guaranteeImage:'assets/eu-legal-guarantee-notice-en.jpg',guaranteeInfo:'https://europa.eu/youreurope/guarantees'};
   const ACK = 'I agree to the Store Terms and Conditions. I have been given the Withdrawal notices and model withdrawal form.';
+  // German legal box (11 Nov 2026, Yusuf "Evet, çevir"). Wix's own German policy checkbox reads "Ich habe die Allgemeinen Geschäftsbedingungen (AGB).
+  // Die Widerrufsbelehrung habe ich gelesen." and cannot be edited, so the cart carries the correct German acknowledgement. Only a buyer who goes on
+  // to the German Wix checkout (deCart) sees it, with links to the German AGB and Widerrufsbelehrungen; everyone else keeps the reviewed English
+  // wording. Before DE_CHECKOUT goes true, both -de pages must be live (on 11 Nov they were not yet published).
+  const LEGAL_DE = {terms:'https://app.berlinwalk.com/store-terms-de',withdrawalNotice:'https://app.berlinwalk.com/store-withdrawal-de'};
+  const ACK_DE = 'Ich bin mit den Allgemeinen Geschäftsbedingungen (AGB) für den Shop einverstanden. Die Widerrufsbelehrungen und das Muster-Widerrufsformular habe ich erhalten.';
+  const NOTICE_DE = {
+    personalisedTitle:'Personalisiertes Produkt',
+    personalisedShort:'Für dich angefertigt, daher gilt das 14-tägige Widerrufsrecht nicht. Bei fehlerhaften Drucken bleiben deine Rechte bestehen.',
+    personalised:['Dieser Druck wird mit dem Kartenpunkt und dem Text hergestellt, die du gewählt hast. Für dieses personalisierte Produkt besteht kein gesetzliches Widerrufsrecht. Deine gesetzlichen Rechte, wenn der Druck mangelhaft ist oder nicht deiner Bestellung entspricht, bleiben unberührt.','Bitte prüfe vor dem Bezahlen den Kartenpunkt, den Titel, die Bezirkszeile und deine persönliche Zeile in deiner Bestellung.'],
+    ysDigitalTitle:'Personalisierte digitale Datei',
+    ysDigital:'Digitale Datei von deinem Ort: ein JPG und ein PDF, per E-Mail innerhalb von 24 Stunden nach der Zahlung. Es wird nichts verschickt. Du darfst die Dateien für deinen erlaubten persönlichen Gebrauch behalten. Dein 14-tägiges Widerrufsrecht als Verbraucher bleibt bestehen.',
+    giftTitle:'Digitaler Geschenkgutschein',
+    gift:'Es wird kein physisches Produkt verschickt. Code und druckbare Karte kommen per E-Mail, meist innerhalb einer Stunde, spätestens 24 Stunden nach der Zahlung. Solange der Code nicht eingelöst ist, behältst du dein 14-tägiges Widerrufsrecht als Verbraucher.',
+    digitalTitle:'Digitales Produkt zum Ausdrucken',
+    digital:'Digitaler Download: Es wird kein physisches Produkt verschickt. Den Download-Link bekommst du nach der Zahlung, er ist 30 Tage gültig. Die heruntergeladenen Dateien darfst du für den erlaubten privaten Gebrauch behalten. Dein 14-tägiges Widerrufsrecht als Verbraucher bleibt bestehen, auch wenn du die Dateien sofort herunterlädst oder nutzt.',
+  };
   // Cart line (Yusuf, 29 Oct 2026): the one fact a buyer must see stays visible, the full notice opens under Details. The withdraw button stays as it is.
   const NOTICE_PERSONALISED_SHORT = 'Made for you, so the 14-day withdrawal right does not apply. Faulty prints are covered.';
   const NOTICE_PERSONALISED = ['This physical print is made using your selected map point and text. The statutory right of withdrawal does not apply to this personalised physical product. Your statutory rights if the print is faulty or does not match your order remain unaffected.','Please check the map point, title, area and personal line shown in your order before paying.'];
@@ -882,7 +899,7 @@
       const note=this.quoteError?`<p class="shipping-note">${esc(this.quoteErrorMessage())}</p><div class="quote-actions"><button class="outline" type="button" data-action="retry-quote">Try again</button><button class="text-button" type="button" data-action="native-fallback">Open the original cart</button></div>`
         :quote?.state==='NO_SHIPPING_AVAILABLE'?'<p class="shipping-note">No delivery method was returned for this address. Check the postal code or open the original cart.</p><div class="quote-actions"><button class="text-button" type="button" data-action="native-fallback">Open the original cart</button></div>'
         :idle?`<div class="quote-actions"><button class="outline" type="button" data-action="retry-quote">${this.digitalOnly()?'Check tax':'Check delivery'}</button></div>`:'';
-      return `${list}${totals}${note}<div class="checkout-area">${reason?`<p class="checkout-reason" id="checkout-reason">${esc(reason)}</p>`:''}<div class="legal-box"><p class="legal-ack">${esc(ACK)}</p>${this.legalLinks()}</div><button class="primary" data-action="checkout" ${reason?'aria-describedby="checkout-reason"':''} ${!ready||this.busy||this.quoting||this.uncertain?'disabled':''}>Continue to checkout</button><p class="checkout-note">${this.digitalOnly()?'Final tax is confirmed in checkout.':'Final delivery and tax are confirmed in checkout.'}</p>${this.cartGerman()&&!deCart(true)?'<p class="checkout-note">The checkout page is in English.</p>':''}<a href="https://walkofberlin.com/category/all-products">Continue shopping</a></div>`;
+      return `${list}${totals}${note}<div class="checkout-area">${reason?`<p class="checkout-reason" id="checkout-reason">${esc(reason)}</p>`:''}${this.legalBox()}<button class="primary" data-action="checkout" ${reason?'aria-describedby="checkout-reason"':''} ${!ready||this.busy||this.quoting||this.uncertain?'disabled':''}>Continue to checkout</button><p class="checkout-note">${this.digitalOnly()?'Final tax is confirmed in checkout.':'Final delivery and tax are confirmed in checkout.'}</p>${this.cartGerman()&&!deCart(true)?'<p class="checkout-note">The checkout page is in English.</p>':''}<a href="https://walkofberlin.com/category/all-products">Continue shopping</a></div>`;
     }
     shownSubtotal() {const q=this.quote&&this.quote.signature===this.cart?.signature&&this.quote.state==='READY'?this.quote:null;return (q&&quoteSaving(q,this.cart?.subtotal)?.subtotal)||this.cart?.subtotal;}
     updateQuoteArea() {
@@ -909,6 +926,12 @@
       return `<form data-address-form novalidate><p class="destination-label">${this.cart.hasShippableItems?'Delivery destination':'Billing destination for tax'}</p><div class="address-grid"><label>Country<select name="country" required><option value="">Choose a country</option>${DESTINATIONS.map(item=>`<option value="${item.code}" ${this.destination.country===item.code?'selected':''}>${item.label}</option>`).join('')}<option value="OTHER" ${other?'selected':''}>Another destination</option></select></label><label ${other?'hidden':''}><span data-postal-label>${esc(info?.postal||'Postal code')}</span><input name="postalCode" value="${esc(this.destination.postalCode||'')}" inputmode="${info?.mode||'text'}" autocomplete="postal-code" autocapitalize="${info?.mode==='text'?'characters':'off'}" enterkeyhint="done" maxlength="12" placeholder="${esc(info?.example||'')}"></label></div><p data-other-note ${other?'':'hidden'}>For another destination, <button class="text-button" data-action="native-fallback" type="button">continue in the original cart</button> to check the available delivery options.</p></form>`;
     }
     // ---- Legal surfaces ----
+    // Cart only: German acknowledgement and links for a buyer headed to the German checkout. bw-raw keeps ys-de.js from rewriting it.
+    legalGerman() {return deCart(this.cartGerman());}
+    legalBox() {
+      if(this.legalGerman())return `<div class="legal-box bw-raw" lang="de" data-legal-lang="de"><p class="legal-ack">${esc(ACK_DE)}</p><p class="legal-links"><a href="${LEGAL_DE.terms}" target="_blank" rel="noopener">AGB</a><a href="${LEGAL_DE.withdrawalNotice}" target="_blank" rel="noopener">Widerrufsbelehrungen und Muster-Widerrufsformular</a></p></div>`;
+      return `<div class="legal-box" data-legal-lang="en"><p class="legal-ack">${esc(ACK)}</p>${this.legalLinks()}</div>`;
+    }
     legalLinks() {return `<p class="legal-links"><a href="${LEGAL.terms}" target="_blank" rel="noopener">Store Terms</a><a href="${LEGAL.withdrawalNotice}" target="_blank" rel="noopener">Withdrawal notices and model form</a></p>`;}
     withdrawButton() {return `<p class="withdraw-row"><a class="outline withdraw-link" data-withdraw href="${LEGAL.withdraw}" target="_blank" rel="noopener">Withdraw from contract (Vertrag widerrufen)</a></p>`;}
     guaranteeNotice() {return `<section class="eu-guarantee" aria-labelledby="eu-guarantee-title"><h3 id="eu-guarantee-title">EU legal guarantee notice</h3><a href="${esc(asset(LEGAL.guaranteeImage))}" target="_blank" rel="noopener"><img src="${esc(asset(LEGAL.guaranteeImage))}" alt="${esc(GUARANTEE_ALT)}" width="884" height="1200" loading="lazy"></a><p class="meta">Official notice under Regulation (EU) 2025/1960, Annex I. <a href="${LEGAL.guaranteeInfo}" target="_blank" rel="noopener">More about legal guarantees</a></p></section>`;}
@@ -921,6 +944,14 @@
       return rows.length===1&&family.length===1&&rows[0]===family[0]&&rows[0].enabled!==false&&rows[0].kind==='digital'&&rows[0].artworkReuseLicence==='kottbusser-tor-cc-by-sa-4.0-v3'&&bindings.length===1&&bindings[0].nativeProductType==='digital'?KOTTI_ARTWORK_REUSE:'';
     }
     lineNotice(line) {
+      if(this.legalGerman()){
+        const box=(kind,title,body,more='')=>`<div class="line-legal bw-raw" lang="de" data-line-legal="${kind}"><strong>${esc(title)}</strong><p>${esc(body)}</p>${more}</div>`;
+        if(this.gift?.isGiftId(line.productId))return box('gift',NOTICE_DE.giftTitle,NOTICE_DE.gift);
+        if(['9b6fbecf-32e4-27dc-f3e6-9c887fe7f495','64a55858-b960-02d7-53b5-7f6761c19957'].includes(line.productId))return box('digital',NOTICE_DE.ysDigitalTitle,NOTICE_DE.ysDigital);
+        if(line.productId===YS_ID||(line.customText||[]).some(field=>!['Size','Paper'].includes(field.title)))return box('personalised',NOTICE_DE.personalisedTitle,NOTICE_DE.personalisedShort,`<details class="line-legal-more"><summary>Details</summary>${NOTICE_DE.personalised.map(t=>`<p>${esc(t)}</p>`).join('')}</details>`);
+        // The Kottbusser Tor licence notice stays in its reviewed English wording.
+        if(line.shippable===false&&!this.artworkReuseLicence(line.productId))return box('digital',NOTICE_DE.digitalTitle,NOTICE_DE.digital);
+      }
       if(this.gift?.isGiftId(line.productId))return `<div class="line-legal" data-line-legal="gift"><strong>Digital gift voucher</strong><p>${esc(NOTICE_GIFT)}</p></div>`;
       if(['9b6fbecf-32e4-27dc-f3e6-9c887fe7f495','64a55858-b960-02d7-53b5-7f6761c19957'].includes(line.productId))return `<div class="line-legal" data-line-legal="digital"><strong>Personalised digital file</strong><p>${esc(NOTICE_YS_DIGITAL)}</p></div>`;
       if(line.productId===YS_ID||(line.customText||[]).some(field=>!['Size','Paper'].includes(field.title)))return `<div class="line-legal" data-line-legal="personalised"><strong>Personalised physical product</strong><p>${esc(NOTICE_PERSONALISED_SHORT)}</p><details class="line-legal-more"><summary>Details</summary>${NOTICE_PERSONALISED.map(t=>`<p>${esc(t)}</p>`).join('')}</details></div>`;
