@@ -184,14 +184,14 @@
   ]
  },
  "fillers": {
-  "note": "Hand-picked well-known places for months without a buyer place; month n uses list[n-1] (January always holds the buyer's first place, so list[0] is only a reserve). Spares, in order, replace a filler within minDistanceM of a buyer place. Each passed the 1928 coverage check and a look check on 12 Nov 2026 (rejected for seams, scratches or burned-in marks: tempelhofer-feld, treptower-park, savignyplatz; alexanderplatz moved 100 m north to keep a burned-in survey cross out of the frame). fillers/INDEX.json.",
+  "note": "Hand-picked well-known places for months without a buyer place; month n uses list[n-1] (January always holds the buyer's first place, so list[0] is only a reserve). Spares, in order, replace a filler within minDistanceM of a buyer place. The empty page preview shows list[0] (12 Nov: brandenburger-tor; schloss-charlottenburg dropped after a seam was seen). Each passed the 1928 coverage check and a look check on 12 Nov 2026 (rejected for seams, scratches or burned-in marks: tempelhofer-feld, treptower-park, savignyplatz; alexanderplatz moved 100 m north to keep a burned-in survey cross out of the frame). fillers/INDEX.json.",
   "list": [
    {
-    "key": "schloss-charlottenburg",
-    "title": "Schloss Charlottenburg",
-    "area": "Charlottenburg",
-    "lat": 52.5207,
-    "lon": 13.2957
+    "key": "brandenburger-tor",
+    "title": "Brandenburger Tor",
+    "area": "Mitte",
+    "lat": 52.51628,
+    "lon": 13.3777
    },
    {
     "key": "kollwitzplatz",
@@ -208,11 +208,11 @@
     "lon": 13.41321
    },
    {
-    "key": "brandenburger-tor",
-    "title": "Brandenburger Tor",
+    "key": "hackescher-markt",
+    "title": "Hackescher Markt",
     "area": "Mitte",
-    "lat": 52.51628,
-    "lon": 13.3777
+    "lat": 52.5227,
+    "lon": 13.402
    },
    {
     "key": "viktoriapark",
@@ -272,13 +272,6 @@
    }
   ],
   "spares": [
-   {
-    "key": "hackescher-markt",
-    "title": "Hackescher Markt",
-    "area": "Mitte",
-    "lat": 52.5227,
-    "lon": 13.402
-   },
    {
     "key": "volkspark-friedrichshain",
     "title": "Volkspark Friedrichshain",
