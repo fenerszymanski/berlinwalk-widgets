@@ -2033,5 +2033,28 @@
     "wixProductId": "d35601ed-3b43-4269-afb9-32e7c3b1e128",
     "group": "personalised-calendar",
     "cardSummary": "A wall calendar of your Berlin places, from above in 1928 and today."
+  },
+  {
+    "id": "dl-berlin-twelve-districts",
+    "name": "Berlin Twelve Districts Printable Map Poster",
+    "place": "Citywide · Twelve districts",
+    "image": "berlin-twelve-districts-fullart.jpg",
+    "alt": "Map of Berlin's twelve districts in warm, close tones on a cream background, with the rivers, canals and lakes in deep blue. The footer reads Berlin, 891 km².",
+    "typeLine": "DIGITAL DOWNLOAD · 30 × 40 CM",
+    "wixProductId": "aec7c580-f556-adcd-f1e6-e49fa1e05026",
+    "kind": "digital",
+    "deliveryNote": "Digital download · 1 JPEG print file and a printing guide. No physical item.",
+    "deliveryDetails": "Your download includes one 3:4 sRGB JPEG at 300 dpi for 30 × 40 cm and a printing guide. The same file prints without cropping at 45 × 60 cm and 60 × 80 cm. No physical poster, frame or decor is included.",
+    "group": "stories",
+    "visualCreditsHtml": "<p>Map data: ALKIS Berlin Bezirke (Geoportal Berlin) and Gewässerverzeichnis, Gewässer Flächen (Senatsverwaltung für Mobilität, Verkehr, Klimaschutz und Umwelt Berlin), both under the <a href=\"https://www.govdata.de/dl-de/zero-2-0\" target=\"_blank\">Datenlizenz Deutschland Zero 2.0</a>. Area: Amt für Statistik Berlin-Brandenburg, 2025. No endorsement is implied.</p>",
+    "sizeImages": {
+      "30x40 cm": "berlin-twelve-districts-30x40.jpg"
+    },
+    "gallery": [
+      {
+        "image": "berlin-twelve-districts-30x40.jpg",
+        "alt": "Complete artwork at 30 x 40 cm."
+      }
+    ]
   }
 ]
