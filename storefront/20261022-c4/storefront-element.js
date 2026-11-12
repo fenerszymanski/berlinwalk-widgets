@@ -7,7 +7,7 @@
   const CALENDAR_PRODUCT_ID='d35601ed-3b43-4269-afb9-32e7c3b1e128';
   const CALENDAR_LISTED=false;   // Yusuf 12 Nov 2026: page by direct link only, no card in any list until he says so
   const esc = value => String(value ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-  const asset = value => {if(value==='gift-week.js'&&/^[a-f0-9]{40}$/.test(window.__WOB_GIFT_WEEK_P22_REF||''))return 'https://cdn.jsdelivr.net/gh/fenerszymanski/berlinwalk-widgets@'+window.__WOB_GIFT_WEEK_P22_REF+'/storefront/20261022-c4/gift-week.js';const target=new URL(value,base);if(/\.(?:js|css|json)$/.test(target.pathname))target.searchParams.set('v','ys-price-20261112');return target.href;};
+  const asset = value => {if(value==='gift-week.js'&&/^[a-f0-9]{40}$/.test(window.__WOB_GIFT_WEEK_P22_REF||''))return 'https://cdn.jsdelivr.net/gh/fenerszymanski/berlinwalk-widgets@'+window.__WOB_GIFT_WEEK_P22_REF+'/storefront/20261022-c4/gift-week.js';const target=new URL(value,base);if(/\.(?:js|css|json)$/.test(target.pathname))target.searchParams.set('v','ys-price-20261112b');return target.href;};
   // Chrome and Safari ignore @font-face inside shadow DOM, so the three faces are registered once on the document with absolute URLs from the element's own base.
   // Gift landing trials showed no LCP gain. Preserve their prior resource and font order.
   const legacyGiftPresentation = () => /^(?:\/de)?\/(?:category\/(?:berlin-christmas-gifts|berlin-geschenke)|gifts|geschenke)\/?$/.test(location.pathname);
@@ -571,7 +571,7 @@
     campaignPrice(product,amount,choices) {
       const c=this.campaign,ref=c?.entry(this.campaignConfig,product),enabled=!!(ref&&(product.source==='wix'?this.campaignNativeOn(product.wixProductId):c.active(this.campaignConfig,c.systemOf(product))));
       const regular=choices?c?.reference(this.campaignConfig,product.wixProductId,choices):ref?.price;
-      if(ref&&Date.now()>=Date.parse(this.campaignConfig.end)){const original=choices?ref.variants?.find(v=>Object.keys(v.choices).every(k=>v.choices[k]===choices[k]))?.price:ref.originalPrice??ref.price;if(Number.isFinite(original))amount=original;}
+      if(ref&&Date.now()>=Date.parse(this.campaignConfig.end)&&Date.now()<Date.parse(this.campaignConfig.end)+7200000){/* only while Wix may still hold the sale price after the end (12 Nov 2026: unlimited, it kept showing 34,90 after the 1928 price fell to 29,90) */const original=choices?ref.variants?.find(v=>Object.keys(v.choices).every(k=>v.choices[k]===choices[k]))?.price:ref.originalPrice??ref.price;if(Number.isFinite(original))amount=original;}
       if(amount===undefined)amount=product.priceCents/100;
       return c?c.priceHtml({amount,regular,lowest30:choices?regular:ref?.lowest30,currency:product.currency,de:this.campaignGerman(),enabled,from:!choices&&((product.requiresOptions&&product.source==='wix')||product.priceFrom)}):esc(product.priceLabel);
     }
