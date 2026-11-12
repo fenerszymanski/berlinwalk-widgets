@@ -449,7 +449,7 @@
     buildModel() {
       if(!this.layer||!Array.isArray(this.catalogue?.products))return;
       try {
-        const rows=this.catalogue.products.filter(row=>(row.productId!==CALENDAR_PRODUCT_ID||(CALENDAR_LISTED&&row.visible!==false))&&(!PRODUCT_VIEW_ALIASES[row.productId]||['framed','canvas'].includes(PRODUCT_VIEW_ALIASES[row.productId].format))&&!this.gift?.isGiftId(row.productId)).map(row=>this.nativeProductRow(row));
+        const rows=this.catalogue.products.filter(row=>(row.productId!==CALENDAR_PRODUCT_ID||(row.visible!==false&&(CALENDAR_LISTED||this.context?.productId===CALENDAR_PRODUCT_ID||/dein-berlin-2027-personalised-wall-calendar/.test(location.pathname))))&&(!PRODUCT_VIEW_ALIASES[row.productId]||['framed','canvas'].includes(PRODUCT_VIEW_ALIASES[row.productId].format))&&!this.gift?.isGiftId(row.productId)).map(row=>this.nativeProductRow(row));
         const products=[...this.layer.adaptWixProducts(rows,this.presentation),...this.layer.adaptExternalProducts(this.external)];
         products.sort((a,b)=>this.presentation.findIndex(item=>item.id===a.id)-this.presentation.findIndex(item=>item.id===b.id));
         for(const product of products){const c=this.campaign,ref=c?.entry(this.campaignConfig,product);if(product.source==='external'&&ref&&c.active(this.campaignConfig,c.systemOf(product))){product.priceCents=c.saleCents(Math.round(ref.price*100));}if(ref&&(product.source==='wix'?this.campaignNativeOn(product.wixProductId):c.active(this.campaignConfig,c.systemOf(product)))){const target=new URL(product.productUrl);target.searchParams.set('utm_source','store');target.searchParams.set('utm_campaign','gift-week-202611');target.searchParams.set('utm_content','store-card-'+product.id);product.productUrl=target.href;}}
