@@ -14347,5 +14347,35 @@
         "a": "From the outside, the **Ackerhalle** in Mitte: it is the only hall whose exterior is still in its original 1888 state. Inside it is a supermarket. For the old atmosphere with stalls, the **Arminiusmarkthalle** in Moabit has kept its iron frame and has been in use since 1891."
       }
     ]
+  },
+  "berlin-districts": {
+    "title": "Berlin Districts - FAQ",
+    "subtitle": "Which Bezirk you live in, what it runs, and which errands skip it.",
+    "items": [
+      {
+        "q": "How many districts does Berlin have?",
+        "a": "Berlin has **12 districts** (Bezirke) since 1 January 2001. They were formed from **23** older districts and are divided into **97 Ortsteile**, the localities most people name when they say where they live."
+      },
+      {
+        "q": "Which Berlin districts were merged in 2001?",
+        "a": "Nine of today's districts are mergers: Mitte (with Tiergarten and Wedding), Friedrichshain-Kreuzberg, Pankow (with Prenzlauer Berg and Weißensee), Charlottenburg-Wilmersdorf, Steglitz-Zehlendorf, Tempelhof-Schöneberg, Treptow-Köpenick, Marzahn-Hellersdorf and Lichtenberg (with Hohenschönhausen). **Spandau, Neukölln and Reinickendorf** kept their borders."
+      },
+      {
+        "q": "Do I have to register at the Bürgeramt of my own district?",
+        "a": "No. You can register your address at **any Bürgeramt in Berlin**, and the same goes for ID cards and passports. If your district has no free appointments, search the whole city."
+      },
+      {
+        "q": "Is the Ausländerbehörde run by my district?",
+        "a": "No. Residence permits are handled by the **Landesamt für Einwanderung**, one state office for all of Berlin, whichever district you live in."
+      },
+      {
+        "q": "Who do I call about noise or a car blocking my driveway?",
+        "a": "The **Ordnungsamt of the district where it happens**, which is not always your own. Most districts take reports online through Ordnungsamt-Online."
+      },
+      {
+        "q": "Can EU citizens vote in Berlin district elections?",
+        "a": "Yes. EU citizens registered in Berlin can vote for the **Bezirksverordnetenversammlung**, the district assembly, which is elected on the same day as the Berlin parliament. Voting for the Abgeordnetenhaus itself needs German citizenship."
+      }
+    ]
   }
 }

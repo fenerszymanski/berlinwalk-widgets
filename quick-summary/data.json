@@ -5963,5 +5963,20 @@
       "**Doors open is not the same as stalls open:** most stalls trade from late morning to 18:00 or 20:00.",
       "**Pick your day and time in the tool** to see which hall is worth the trip and line up two of them."
     ]
+  },
+  "berlin-districts": {
+    "title": "Berlin Districts - Quick Summary",
+    "icon": "🏛️",
+    "kicker": "WALK OF BERLIN • LIVING IN BERLIN",
+    "items": [
+      "**Berlin has 12 districts (Bezirke)** since 1 January 2001, formed from 23 older ones.",
+      "**Spandau, Neukölln and Reinickendorf** kept their borders; the rest were merged in pairs or threes.",
+      "**The old names live on as Ortsteile.** Wedding, Prenzlauer Berg and Kreuzberg are localities inside a bigger district.",
+      "**Your Bezirk runs the services close to home:** Bürgeramt, Jugendamt, Ordnungsamt, Schulamt, Standesamt, libraries.",
+      "**Any Bürgeramt in Berlin** can register your address or renew your ID, not only the ones in your district.",
+      "**Residence permits, car registration and taxes** are state offices, not district ones.",
+      "**Noise, trees and broken benches** go to the district where the problem is, not where you live.",
+      "**Find your Ortsteil in the tool** to see your district, its pre-2001 name, and who handles your errand."
+    ]
   }
 }
