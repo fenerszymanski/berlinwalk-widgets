@@ -5,6 +5,7 @@
   const base = new URL('.', script.src);
   const CHANNEL = 'wob:shop-cart:v1';
   const CALENDAR_PRODUCT_ID='d35601ed-3b43-4269-afb9-32e7c3b1e128';
+  const CALENDAR_LISTED=false;   // Yusuf 12 Nov 2026: page by direct link only, no card in any list until he says so
   const esc = value => String(value ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   const asset = value => {if(value==='gift-week.js'&&/^[a-f0-9]{40}$/.test(window.__WOB_GIFT_WEEK_P22_REF||''))return 'https://cdn.jsdelivr.net/gh/fenerszymanski/berlinwalk-widgets@'+window.__WOB_GIFT_WEEK_P22_REF+'/storefront/20261022-c4/gift-week.js';const target=new URL(value,base);if(/\.(?:js|css|json)$/.test(target.pathname))target.searchParams.set('v','ys-cal-20261112');return target.href;};
   // Chrome and Safari ignore @font-face inside shadow DOM, so the three faces are registered once on the document with absolute URLs from the element's own base.
@@ -448,7 +449,7 @@
     buildModel() {
       if(!this.layer||!Array.isArray(this.catalogue?.products))return;
       try {
-        const rows=this.catalogue.products.filter(row=>(row.productId!==CALENDAR_PRODUCT_ID||row.visible!==false)&&(!PRODUCT_VIEW_ALIASES[row.productId]||['framed','canvas'].includes(PRODUCT_VIEW_ALIASES[row.productId].format))&&!this.gift?.isGiftId(row.productId)).map(row=>this.nativeProductRow(row));
+        const rows=this.catalogue.products.filter(row=>(row.productId!==CALENDAR_PRODUCT_ID||(CALENDAR_LISTED&&row.visible!==false))&&(!PRODUCT_VIEW_ALIASES[row.productId]||['framed','canvas'].includes(PRODUCT_VIEW_ALIASES[row.productId].format))&&!this.gift?.isGiftId(row.productId)).map(row=>this.nativeProductRow(row));
         const products=[...this.layer.adaptWixProducts(rows,this.presentation),...this.layer.adaptExternalProducts(this.external)];
         products.sort((a,b)=>this.presentation.findIndex(item=>item.id===a.id)-this.presentation.findIndex(item=>item.id===b.id));
         for(const product of products){const c=this.campaign,ref=c?.entry(this.campaignConfig,product);if(product.source==='external'&&ref&&c.active(this.campaignConfig,c.systemOf(product))){product.priceCents=c.saleCents(Math.round(ref.price*100));}if(ref&&(product.source==='wix'?this.campaignNativeOn(product.wixProductId):c.active(this.campaignConfig,c.systemOf(product)))){const target=new URL(product.productUrl);target.searchParams.set('utm_source','store');target.searchParams.set('utm_campaign','gift-week-202611');target.searchParams.set('utm_content','store-card-'+product.id);product.productUrl=target.href;}}
