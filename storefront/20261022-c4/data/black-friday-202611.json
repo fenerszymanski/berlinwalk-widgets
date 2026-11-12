@@ -1,0 +1,167 @@
+{
+  "schema": 1,
+  "id": "black-friday-202611",
+  "start": "2026-11-27T00:00:00+01:00",
+  "end": "2026-12-01T00:00:00+01:00",
+  "systems": {
+    "wix": true
+  },
+  "products": {
+    "8aaf5412-7f21-42c7-acfb-85dd8417d68c": {
+      "name": "Your Berlin Street in 1928, Personalised Aerial Print",
+      "manageVariants": true,
+      "variants": [
+        {
+          "choices": {
+            "Size": "30 x 40 cm",
+            "Paper": "Premium Matte"
+          },
+          "price": 34.9,
+          "sale": 29.9,
+          "reference": 31.9
+        },
+        {
+          "choices": {
+            "Size": "30 x 40 cm",
+            "Paper": "Classic Matte"
+          },
+          "price": 29.9,
+          "sale": 24.9,
+          "reference": 27.9
+        },
+        {
+          "choices": {
+            "Size": "30 x 40 cm",
+            "Paper": "Premium Semi-Gloss"
+          },
+          "price": 34.9,
+          "sale": 29.9,
+          "reference": 31.9
+        },
+        {
+          "choices": {
+            "Size": "30 x 40 cm",
+            "Paper": "Classic Semi-Gloss"
+          },
+          "price": 29.9,
+          "sale": 24.9,
+          "reference": 27.9
+        },
+        {
+          "choices": {
+            "Size": "45 x 60 cm",
+            "Paper": "Premium Matte"
+          },
+          "price": 47.9,
+          "sale": 39.9,
+          "reference": 43.9
+        },
+        {
+          "choices": {
+            "Size": "45 x 60 cm",
+            "Paper": "Classic Matte"
+          },
+          "price": 44.9,
+          "sale": 37.9,
+          "reference": 39.9
+        },
+        {
+          "choices": {
+            "Size": "45 x 60 cm",
+            "Paper": "Premium Semi-Gloss"
+          },
+          "price": 47.9,
+          "sale": 39.9,
+          "reference": 43.9
+        },
+        {
+          "choices": {
+            "Size": "45 x 60 cm",
+            "Paper": "Classic Semi-Gloss"
+          },
+          "price": 44.9,
+          "sale": 37.9,
+          "reference": 39.9
+        }
+      ]
+    },
+    "33c1b670-fadc-4bcf-a1a5-82cc14b668ea": {
+      "name": "Your Berlin Street in 1928, Framed Print",
+      "manageVariants": true,
+      "variants": [
+        {
+          "choices": {
+            "Size": "30 x 40 cm",
+            "Frame": "Black",
+            "Paper": "Premium Matte"
+          },
+          "price": 69.9,
+          "sale": 59.9,
+          "reference": 69.9
+        },
+        {
+          "choices": {
+            "Size": "30 x 40 cm",
+            "Frame": "Black",
+            "Paper": "Fine Art"
+          },
+          "price": 99.9,
+          "sale": 89.9,
+          "reference": 99.9
+        },
+        {
+          "choices": {
+            "Size": "30 x 40 cm",
+            "Frame": "White",
+            "Paper": "Premium Matte"
+          },
+          "price": 69.9,
+          "sale": 59.9,
+          "reference": 69.9
+        },
+        {
+          "choices": {
+            "Size": "30 x 40 cm",
+            "Frame": "White",
+            "Paper": "Fine Art"
+          },
+          "price": 99.9,
+          "sale": 89.9,
+          "reference": 99.9
+        },
+        {
+          "choices": {
+            "Size": "30 x 40 cm",
+            "Frame": "Natural wood",
+            "Paper": "Premium Matte"
+          },
+          "price": 69.9,
+          "sale": 59.9,
+          "reference": 69.9
+        },
+        {
+          "choices": {
+            "Size": "30 x 40 cm",
+            "Frame": "Natural wood",
+            "Paper": "Fine Art"
+          },
+          "price": 99.9,
+          "sale": 89.9,
+          "reference": 99.9
+        }
+      ]
+    },
+    "d35601ed-3b43-4269-afb9-32e7c3b1e128": {
+      "name": "Dein Berlin 2027, Personalised Wall Calendar",
+      "manageVariants": false,
+      "variants": [
+        {
+          "choices": {},
+          "price": 39.9,
+          "sale": 34.9,
+          "reference": 39.9
+        }
+      ]
+    }
+  }
+}

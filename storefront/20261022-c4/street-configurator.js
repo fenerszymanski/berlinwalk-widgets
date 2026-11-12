@@ -454,7 +454,7 @@ export function mountConfigurator(host, state, api) {
     root.querySelectorAll('[data-ys-mounted-spec]').forEach(el=>{el.hidden=!mounted;el.textContent=framed?FRAMED_SPEC:CANVAS_SPEC;});
     root.querySelectorAll('[data-ys-mounted-christmas]').forEach(el=>{el.hidden=!mounted||!mountedChristmasOpen();});
     root.querySelectorAll('[data-ys-mounted-delivery]').forEach(el=>el.hidden=!mounted);
-    root.querySelectorAll('[data-ys-mounted-saving]').forEach(el=>el.hidden=!mounted);
+    root.querySelectorAll('[data-ys-mounted-saving]').forEach(el=>el.hidden=!mounted||api.multiPaused===true);
     root.querySelectorAll('[data-ys-shipping]').forEach(el=>{el.hidden=mounted||ysDigital(state);});
     const shots=host.querySelector('[data-ys-mockups]');if(shots){shots.hidden=!mounted;shots.querySelectorAll('[data-ys-picture]').forEach(el=>el.hidden=el.dataset.ysPicture!==(framed?'framed':'canvas'));}
     const frameImage=host.querySelector('[data-ys-frame-image]');if(frameImage){const key={'Black':'black','White':'white','Natural wood':'natural-wood'}[ysFrame(state)];frameImage.src=new URL('./assets/framed-20261111/framed-'+key+'.webp',import.meta.url).href;}

@@ -7,7 +7,7 @@
   const CALENDAR_PRODUCT_ID='d35601ed-3b43-4269-afb9-32e7c3b1e128';
   const CALENDAR_LISTED=false;   // Yusuf 12 Nov 2026: page by direct link only, no card in any list until he says so
   const esc = value => String(value ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-  const asset = value => {if(value==='gift-week.js'&&/^[a-f0-9]{40}$/.test(window.__WOB_GIFT_WEEK_P22_REF||''))return 'https://cdn.jsdelivr.net/gh/fenerszymanski/berlinwalk-widgets@'+window.__WOB_GIFT_WEEK_P22_REF+'/storefront/20261022-c4/gift-week.js';const target=new URL(value,base);if(/\.(?:js|css|json)$/.test(target.pathname))target.searchParams.set('v','ys-price-20261112c');return target.href;};
+  const asset = value => {if(value==='gift-week.js'&&/^[a-f0-9]{40}$/.test(window.__WOB_GIFT_WEEK_P22_REF||''))return 'https://cdn.jsdelivr.net/gh/fenerszymanski/berlinwalk-widgets@'+window.__WOB_GIFT_WEEK_P22_REF+'/storefront/20261022-c4/gift-week.js';const target=new URL(value,base);if(/\.(?:js|css|json)$/.test(target.pathname))target.searchParams.set('v','ys-prices-bf-20261112d');return target.href;};
   // Chrome and Safari ignore @font-face inside shadow DOM, so the three faces are registered once on the document with absolute URLs from the element's own base.
   // Gift landing trials showed no LCP gain. Preserve their prior resource and font order.
   const legacyGiftPresentation = () => /^(?:\/de)?\/(?:category\/(?:berlin-christmas-gifts|berlin-geschenke)|gifts|geschenke)\/?$/.test(location.pathname);
@@ -234,7 +234,9 @@
     import(new URL('../../js/store-navigation.js?v=gift-week-20261101-p17-v2',base).href),
     import(asset('gift.js')).catch(()=>null),
     import(asset('gift-week.js')),
+    import(asset('black-friday.js')),
     fetch(asset('data/gift-week-202611.json'),{cache:'no-store',signal:AbortSignal.timeout(5000)}).then(r=>r.ok?r.json():null).catch(()=>null),
+    fetch(asset('data/black-friday-202611.json'),{cache:'no-store',signal:AbortSignal.timeout(5000)}).then(r=>r.ok?r.json():null).catch(()=>null),
     fetch(asset('data/price-snapshot-202611.json'),{signal:AbortSignal.timeout(2500)}).then(r=>r.ok?r.json():null).catch(()=>null),
     (/(?:dein-berlin-2027|cart-page)/.test(location.pathname)?import(asset('calendar-configurator.js')).catch(()=>null):Promise.resolve(null))
   ]);
@@ -383,10 +385,10 @@
       if(name==='shop-bridge-ready')this.start();
     }
     async load() {
-      try {const [layer,editorial,ysMod,definitions,presentation,bindings,external,funnel,navigation,gift,campaign,campaignConfig,priceSnapshot,calendarMod]=await resources;
-        Object.assign(this,{layer,editorial,ysMod,definitions,presentation,bindings,external,funnel,navigation,gift,campaign,campaignConfig,priceSnapshot,calendarMod});
-        this.campaignWasActive=['wix','audio','newspaper'].some(system=>this.campaign?.active(this.campaignConfig,system));this.campaignTimer=setInterval(()=>{this.campaign?.tick(this.shadowRoot);this.shadowRoot.querySelectorAll('[data-ys-mounted-christmas]').forEach(el=>{el.hidden=!this.ysMod?.ysMounted(this.ys||{})||!this.ysMod?.mountedChristmasOpen();});if(!this.catalogue&&this.snapshotWasUsable!==this.snapshotUsable()){this.snapshotWasUsable=this.snapshotUsable();this.skeletonModel=null;this.render();}const next=this.campaign?.active(this.campaignConfig,'wix')||this.campaign?.active(this.campaignConfig,'audio')||this.campaign?.active(this.campaignConfig,'newspaper');if(this.campaignWasActive&&!next){this.buildModel();this.request('catalog').catch(()=>{});}this.campaignWasActive=next;},1000);
-        this.campaignRefresh=setInterval(async()=>{if(!this.isConnected||this.busy||this.uncertain)return;try{const response=await fetch(asset('data/gift-week-202611.json'),{cache:'no-store',signal:AbortSignal.timeout(5000)});if(!response.ok)throw Error('CONFIG_UNAVAILABLE');const next=await response.json();if(!this.isConnected||next.id!=='gift-week-202611'||Date.parse(next.end)!==Date.parse('2026-11-08T23:59:00+01:00'))throw Error('CONFIG_INVALID');if(JSON.stringify(next.systems)!==JSON.stringify(this.campaignConfig?.systems)){this.campaignConfig=next;this.skeletonModel=null;this.render();await this.request('catalog');}}catch{if(!this.catalogue){this.priceSnapshot=null;this.skeletonModel=null;this.render();}}},15000);
+      try {const [layer,editorial,ysMod,definitions,presentation,bindings,external,funnel,navigation,gift,campaign,bf,campaignConfig,bfConfig,priceSnapshot,calendarMod]=await resources;
+        Object.assign(this,{layer,editorial,ysMod,definitions,presentation,bindings,external,funnel,navigation,gift,campaign,bf,campaignConfig,bfConfig,priceSnapshot,calendarMod});
+        this.bfWasActive=this.bfActive();this.campaignWasActive=['wix','audio','newspaper'].some(system=>this.campaign?.active(this.campaignConfig,system));this.campaignTimer=setInterval(()=>{this.campaign?.tick(this.shadowRoot);const bfNow=this.bfActive();if(bfNow!==this.bfWasActive){this.bfWasActive=bfNow;this.render();this.request('catalog').catch(()=>{});}this.shadowRoot.querySelectorAll('[data-ys-mounted-christmas]').forEach(el=>{el.hidden=!this.ysMod?.ysMounted(this.ys||{})||!this.ysMod?.mountedChristmasOpen();});if(!this.catalogue&&this.snapshotWasUsable!==this.snapshotUsable()){this.snapshotWasUsable=this.snapshotUsable();this.skeletonModel=null;this.render();}const next=this.campaign?.active(this.campaignConfig,'wix')||this.campaign?.active(this.campaignConfig,'audio')||this.campaign?.active(this.campaignConfig,'newspaper');if(this.campaignWasActive&&!next){this.buildModel();this.request('catalog').catch(()=>{});}this.campaignWasActive=next;},1000);
+        this.campaignRefresh=setInterval(async()=>{if(!this.isConnected||this.busy||this.uncertain)return;if(this.bfActive())this.request('catalog').catch(()=>{});try{const response=await fetch(asset('data/gift-week-202611.json'),{cache:'no-store',signal:AbortSignal.timeout(5000)});if(!response.ok)throw Error('CONFIG_UNAVAILABLE');const next=await response.json();if(!this.isConnected||next.id!=='gift-week-202611'||Date.parse(next.end)!==Date.parse('2026-11-08T23:59:00+01:00'))throw Error('CONFIG_INVALID');if(JSON.stringify(next.systems)!==JSON.stringify(this.campaignConfig?.systems)){this.campaignConfig=next;this.skeletonModel=null;this.render();await this.request('catalog');}}catch{if(!this.catalogue){this.priceSnapshot=null;this.skeletonModel=null;this.render();}}},15000);
         if(this.catalogue)this.buildModel();if(!this.model)this.render();await this.start();
       }catch(error){if(!this.layer&&!this.isConfiguredDigitalRoute())releaseNative();this.fail(error.message);}
     }
@@ -567,8 +569,13 @@
     cardType(product,model) {return model.getTwin(product)?this.campaignGerman()?`${/calendar/i.test(product.name)?'KALENDER':'POSTER'} · GEDRUCKT ODER ALS DATEI`:`${/calendar/i.test(product.name)?'CALENDAR':'POSTER'} · PRINTED OR AS A FILE`:product.typeLine;}
     cartGerman() {return this.campaignGerman()||(this.context?.mode==='cart'&&ysGermanTab());}
     campaignGerman() {return this.landing?.lang==='de'||this.navigation?.STORE_LANDINGS?.[this.skeletonRoute().categorySlug]?.lang==='de'||new URLSearchParams(location.search).get('lang')==='de';}
+    bfActive() {return this.bf?.bfActive(this.bfConfig)||false;}
     campaignNativeOn(id) {const row=(this.catalogue?.products||(!this.catalogue&&this.snapshotUsable()?this.priceSnapshot.products:[]))?.find(p=>p.productId===id),c=this.campaignConfig;return !!(c?.products?.[id]&&Date.now()>=Date.parse(c.start)&&Date.now()<Date.parse(c.end)&&row&&Math.round(row.discountedPrice*100)===Math.round(c.products[id].sale*100)&&Math.round(row.price*100)===Math.round(c.products[id].sale*100));}
     campaignPrice(product,amount,choices) {
+      if(this.bf?.BF_PRODUCT_IDS.includes(product.wixProductId)&&!this.campaign?.active(this.campaignConfig,'wix')){
+        const native=this.catalogue?.products?.find(p=>p.productId===product.wixProductId);
+        return this.bf.bfPriceHtml({config:this.bfConfig,id:product.wixProductId,native,amount:amount??product.priceCents/100,choices,de:this.campaignGerman(),from:!choices&&!!product.requiresOptions});
+      }
       const c=this.campaign,ref=c?.entry(this.campaignConfig,product),enabled=!!(ref&&(product.source==='wix'?this.campaignNativeOn(product.wixProductId):c.active(this.campaignConfig,c.systemOf(product))));
       const regular=choices?c?.reference(this.campaignConfig,product.wixProductId,choices):ref?.price;
       if(ref&&Date.now()>=Date.parse(this.campaignConfig.end)&&Date.now()<Date.parse(this.campaignConfig.end)+7200000){/* only while Wix may still hold the sale price after the end (12 Nov 2026: unlimited, it kept showing 34,90 after the 1928 price fell to 29,90) */const original=choices?ref.variants?.find(v=>Object.keys(v.choices).every(k=>v.choices[k]===choices[k]))?.price:ref.originalPrice??ref.price;if(Number.isFinite(original))amount=original;}
@@ -706,7 +713,7 @@
     product() {
       const alias=this.productAlias(),product=this.model.products.find(p=>p.wixProductId===this.productViewId())||(!alias?this.unavailableProduct():null);
       if(alias&&(!product||!this.ysMod||!this.ysEntryAvailable()))return this.configuredUnavailableBody();
-      if(this.context.productId===CALENDAR_PRODUCT_ID){if(!this.calendarMod||!product||!this.catalogue.products.some(p=>p.productId===this.calendarMod.CALENDAR_ID&&p.visible!==false))return this.configuredUnavailableBody();return this.calendarMod.calendarBody({german:this.campaignGerman(),price:money(product.currency,product.priceCents/100),asset,legal:this.legalLinks()+this.withdrawButton()});}
+      if(this.context.productId===CALENDAR_PRODUCT_ID){if(!this.calendarMod||!product||!this.catalogue.products.some(p=>p.productId===this.calendarMod.CALENDAR_ID&&p.visible!==false))return this.configuredUnavailableBody();return this.calendarMod.calendarBody({german:this.campaignGerman(),price:money(product.currency,product.priceCents/100),priceHtml:this.campaignPrice(product),bfActive:this.bfActive(),asset,legal:this.legalLinks()+this.withdrawButton()});}
       if(!product)return '';
       const german=this.campaignGerman()?this.navigation.GIFT_CARDS_DE?.[product.id]:null;if(german)Object.assign(product,{name:german.name,place:german.place});
       const native=this.catalogue.products.find(p=>p.productId===product.wixProductId);
@@ -794,9 +801,10 @@
       this.ysApi.variants=!!this.catalogue?.products?.find(row=>row.productId===this.ysMod.YS_PRODUCT_ID)?.requiresOptions;
       const digital=this.ysDigitalNative();this.ysApi.digital=!!digital;this.ysApi.digitalPrice=Number(this.ys.homesCount)>1?24.9:(digital?.price??null);
       this.ysApi.framed=!!this.ysMountedNative('framed');this.ysApi.canvas=!!this.ysMountedNative('canvas');
-      this.ysApi.variantPrice=state=>{if(this.ysMod.ysMounted(state))return this.ysVariant(state)?.price??null;if(Number(state.homesCount)>1)return this.ysMod.ysPrice(state);const ref=this.campaign?.reference(this.campaignConfig,this.ysMod.YS_PRODUCT_ID,this.ysMod.ysChoices(state));const base=Number.isFinite(ref)?ref:this.ysMod.ysPrice(state);return this.campaignNativeOn(this.ysMod.YS_PRODUCT_ID)?this.campaign.saleCents(Math.round(base*100))/100:this.ysMod.ysPrice(state);};
-      this.ysApi.priceHtml=(amount,state)=>{if(this.ysMod.ysMounted(state))return money('EUR',amount);if(Number(state.homesCount)>1)return money('EUR',amount);const isDigital=this.ysMod.ysDigital(state),id=isDigital?this.ysMod.YS_DIGITAL_ID:this.ysMod.YS_PRODUCT_ID;return this.campaignPrice({...this.model.products.find(p=>p.wixProductId===this.ysMod.YS_PRODUCT_ID),wixProductId:id},amount,isDigital?null:this.ysMod.ysChoices(state));};
+      this.ysApi.variantPrice=state=>{if(Number(state.homesCount)>1)return this.ysMod.ysPrice(state);return this.ysVariant(state)?.price??(this.ysMod.ysMounted(state)?null:this.ysMod.ysPrice(state));};
+      this.ysApi.priceHtml=(amount,state)=>{if(Number(state.homesCount)>1)return money('EUR',amount);const id=this.ysMod.ysProductId(state),isDigital=this.ysMod.ysDigital(state);return this.campaignPrice({source:'wix',currency:'EUR',wixProductId:id,priceCents:Math.round(amount*100)},amount,isDigital?null:this.ysMod.ysChoices(state));};
       this.ysApi.remount=()=>this.render();
+      this.ysApi.multiPaused=this.bfActive();
       this.ysMod.mountConfigurator(host,this.ys,this.ysApi);
       this.ysFocusSearch(host);
       if(this.cartRedirect===true)queueMicrotask(()=>{host.querySelectorAll('[data-ys-add],[data-ys-quickadd]').forEach(b=>{b.textContent='Added. Opening your cart…';b.disabled=true;});});
@@ -854,6 +862,7 @@
     ysHomesHref() {const data=this.ysLineData(this.ysMultiLines().at(-1));return YS_MULTI_PAGE+'?homes=2'+(data.lang==='de'||this.cartGerman()?'&lang=de':'');}
     // Under the 1928 lines in the cart page and the side cart.
     ysMoreHtml() {
+      if(this.bfActive())return '';
       const n=this.ysMultiCount();if(!n)return '';
       const other=this.cart?.coupon?.kind==='other',never="Saving with more prints can't be combined with other codes.";
       const top=other?(n>=2?`<p class="ys-more-progress ys-more-other"><span>Your code is used instead of the multi-print saving.</span> <span>${never}</span></p>`:`<p class="ys-more-progress ys-more-other">${never}</p>`):`<p class="ys-more-progress">${esc(ysMultiProgress(n))}</p>`;   // no saving promise while another code is in the cart
@@ -861,6 +870,7 @@
     }
     // 1928 page: the multi-buy advantage near the add button, plus what is already in the cart.
     ysMultiHtml() {
+      if(this.bfActive())return '';
       const n=this.ysMultiCount(),titles=this.ysMultiTitles(),on=k=>n>=k&&(k===4||n<k+1)?' class="is-on"':'';
       const list=titles.length?titles.slice(0,4).join(', ')+(titles.length>4?', …':''):(n===1?'1 print':n+' prints');
       return `<div class="ys-multi" data-ys-multi><p class="ys-multi-head">More homes, less each</p><ul class="ys-multi-tiers"><li${on(2)}><span>2 prints</span><strong>5% off</strong></li><li${on(3)}><span>3 prints</span><strong>10% off</strong></li><li${on(4)}><span>4 or more</span><strong>15% off</strong></li></ul><p class="ys-multi-note"><span>Mix posters and digital files. The discount comes off automatically.</span> <span>Framed and canvas prints do not count.</span> <span>Can't be combined with other codes.</span></p>${n?`<p class="ys-incart" data-ys-incart><span>In your cart: ${esc(list)}</span><span class="ys-incart-tier">${esc(this.cart?.coupon?.kind==='other'?(n>=2?'Your code is used instead of the multi-print saving.':"Saving with more prints can't be combined with other codes."):ysMultiProgress(n))}</span></p>`:''}</div>`;
@@ -904,7 +914,7 @@
     // A quote is wanted when the destination is complete, nothing is in flight or locked, no current quote exists and the same attempt has not just failed.
     autoQuoteWanted() {return this.context.mode==='cart'&&this.revealed&&this.cart?.count>0&&this.destinationReady()&&!this.busy&&!this.quoting&&!this.uncertain&&!this.quote&&this.failedKey!==this.attemptKey();}
     queueAutoQuote(immediate=false) {clearTimeout(this.quoteTimer);this.quoteTimer=0;if(!this.autoQuoteWanted())return;this.quoteTimer=setTimeout(()=>{this.quoteTimer=0;this.getQuote();},immediate?0:500);}
-    quoteErrorMessage() {return ({INVALID_DESTINATION:'Check your postal code and try again.',BRIDGE_DISABLED:'The shop is temporarily unavailable.',CART_CHANGED:'Your cart changed. Check delivery again.'})[this.quoteError]||(this.digitalOnly()?'Tax could not be checked for this country.':'Delivery could not be checked for this address.');}
+    quoteErrorMessage() {return ({BF_COUPON_CONFLICT:'Black Friday prices cannot be combined with a code. Remove the code from your cart, then check delivery again.',INVALID_DESTINATION:'Check your postal code and try again.',BRIDGE_DISABLED:'The shop is temporarily unavailable.',CART_CHANGED:'Your cart changed. Check delivery again.'})[this.quoteError]||(this.digitalOnly()?'Tax could not be checked for this country.':'Delivery could not be checked for this address.');}
     // Plain-words reason shown right above the checkout button while it is disabled. Empty string means checkout is ready.
     checkoutReason(wants,quote) {
       const cart=this.cart,country=this.destination.country;
@@ -1159,7 +1169,7 @@
       if(height>0&&height!==this.cartBarHeight){this.cartBarHeight=height;this.style.setProperty('--mobile-checkout-height',height+'px');}
       cart.classList.toggle('checkout-at-end',cart.getBoundingClientRect().bottom<=window.innerHeight+1);
     }
-    errorMessage() {if(this.uncertain)return 'The cart update could not be confirmed. Refresh the cart and check it before trying again.';return ({CART_UNAVAILABLE:'The cart could not be read. You can still open the original cart.',INVALID_DESTINATION:'Enter a valid destination.',NO_SHIPPING_AVAILABLE:'No delivery method is available for this address.',CART_CHANGED:'Your cart changed. Check delivery again.',BRIDGE_DISABLED:'The shop is temporarily unavailable.'})[this.error]||'This action could not be completed. Check your cart or try again.';}
+    errorMessage() {if(this.uncertain)return 'The cart update could not be confirmed. Refresh the cart and check it before trying again.';return ({BF_COUPON_CONFLICT:'Black Friday prices cannot be combined with a code. Remove the code from your cart, then check delivery again.',CART_UNAVAILABLE:'The cart could not be read. You can still open the original cart.',INVALID_DESTINATION:'Enter a valid destination.',NO_SHIPPING_AVAILABLE:'No delivery method is available for this address.',CART_CHANGED:'Your cart changed. Check delivery again.',BRIDGE_DISABLED:'The shop is temporarily unavailable.'})[this.error]||'This action could not be completed. Check your cart or try again.';}
     // Any address edit clears the visible quote, total and delivery choice at once and bumps quoteRevision, so a late quote response for the old address is discarded in receive().
     input(event) {const field=event.target;if(!field.closest?.('[data-address-form]')||!field.name)return;this.destination[field.name]=field.value;this.selection=null;this.quote=null;this.quoteError='';this.failedKey='';this.choiceList=null;this.quoteRevision++;this.refreshCartUi();}
     // A committed edit (blur, Enter, "Done" on a phone keyboard) skips the remaining debounce.

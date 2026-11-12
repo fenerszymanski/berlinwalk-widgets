@@ -5,6 +5,7 @@
 const pagePath = () => decodeURIComponent(location.pathname).replace(/^\/de(?=\/|$)/, '');
 const PRODUCT_PATH = '/product-page/your-berlin-street-in-1928-personalised-aerial-print-30-x-40-cm';
 const TEXT = new Map(Object.entries({
+  "Black Friday prices cannot be combined with a code. Remove the code from your cart, then check delivery again.": "Black-Friday-Preise sind nicht mit einem Code kombinierbar. Entferne den Code aus deinem Warenkorb und prüfe den Versand erneut.",
   "Your Berlin places": "Deine Berliner Orte",
   "Made to order · see each product for delivery destinations": "Auf Bestellung gefertigt · Versandziele stehen beim jeweiligen Produkt",
   "Dein Berlin 2027": "Dein Berlin 2027",
