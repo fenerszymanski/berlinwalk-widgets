@@ -1,0 +1,299 @@
+{
+ "note": "Dein Berlin 2027 wall calendar (Yusuf, 12 Nov 2026). Single source for the generator and the store preview. Geometry in mm on the TRIM (297 x 420); the PDF page adds 4 mm bleed on every side (305 x 428).",
+ "product": {
+  "wixId": "d35601ed-3b43-4269-afb9-32e7c3b1e128",
+  "gelatoUid": "wall-calendars_pf_a3_pt_250-gsm-coated-silk_cl_4-4_bt_wire-with-hook-top_ver",
+  "year": 2027,
+  "pages": 14
+ },
+ "fields": {
+  "first": "Calendar places (set by the map)",
+  "second": "Calendar details (set by the map)",
+  "maxLength": 500,
+  "maxLengthNote": "per field; set from the live cart measurement before release"
+ },
+ "limits": {
+  "places": 12,
+  "title": 24,
+  "area": 30,
+  "coverLine": 28
+ },
+ "geometry": {
+  "trim": [
+   297,
+   420
+  ],
+  "bleed": 4,
+  "safe": 4,
+  "safeWire": 12,
+  "ppi": 300,
+  "margin": {
+   "x": 16,
+   "top": 22,
+   "bottom": 16
+  },
+  "month": {
+   "photoW": 128.5,
+   "photoH": 158,
+   "photoGap": 8,
+   "photoY": 22,
+   "groundW": 260,
+   "captionY": 187,
+   "titleY": 202,
+   "titleEm": 12,
+   "areaY": 210.5,
+   "areaEm": 4.6,
+   "ruleY": 217,
+   "monthY": 239,
+   "monthEm": 20,
+   "yearEm": 7,
+   "weekdayY": 251,
+   "weekdayEm": 4.4,
+   "gridTop": 255,
+   "gridBottom": 404,
+   "dayEm": 8,
+   "holidayEm": 3.6
+  },
+  "cover": {
+   "photoW": 265,
+   "photoH": 250,
+   "photoY": 22,
+   "groundW": 440,
+   "captionY": 280,
+   "captionEm": 3.4,
+   "lineY": 326,
+   "lineEmMax": 26,
+   "yearY": 375,
+   "yearEm": 36,
+   "subY": 395,
+   "subEm": 6.5
+  },
+  "ringM": 34
+ },
+ "text": {
+  "de": {
+   "months": [
+    "Januar",
+    "Februar",
+    "März",
+    "April",
+    "Mai",
+    "Juni",
+    "Juli",
+    "August",
+    "September",
+    "Oktober",
+    "November",
+    "Dezember"
+   ],
+   "weekdays": [
+    "Mo",
+    "Di",
+    "Mi",
+    "Do",
+    "Fr",
+    "Sa",
+    "So"
+   ],
+   "today": "HEUTE",
+   "defaultLine": "Dein Berlin",
+   "sub": "Berlin 1928 und heute"
+  },
+  "en": {
+   "months": [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December"
+   ],
+   "weekdays": [
+    "Mon",
+    "Tue",
+    "Wed",
+    "Thu",
+    "Fri",
+    "Sat",
+    "Sun"
+   ],
+   "today": "TODAY",
+   "defaultLine": "My Berlin",
+   "sub": "Berlin in 1928 and today"
+  }
+ },
+ "holidays": {
+  "note": "Berlin public holidays 2027 (Feiertagsgesetz Berlin; Frauentag since 2019). Easter Sunday 28 March 2027. Checked by make_calendar.py --self-test.",
+  "days": [
+   [
+    "2027-01-01",
+    "Neujahr",
+    "New Year's Day"
+   ],
+   [
+    "2027-03-08",
+    "Frauentag",
+    "Women's Day"
+   ],
+   [
+    "2027-03-26",
+    "Karfreitag",
+    "Good Friday"
+   ],
+   [
+    "2027-03-29",
+    "Ostermontag",
+    "Easter Monday"
+   ],
+   [
+    "2027-05-01",
+    "Tag der Arbeit",
+    "Labour Day"
+   ],
+   [
+    "2027-05-06",
+    "Christi Himmelfahrt",
+    "Ascension Day"
+   ],
+   [
+    "2027-05-17",
+    "Pfingstmontag",
+    "Whit Monday"
+   ],
+   [
+    "2027-10-03",
+    "Tag der Deutschen Einheit",
+    "German Unity Day"
+   ],
+   [
+    "2027-12-25",
+    "1. Weihnachtstag",
+    "Christmas Day"
+   ],
+   [
+    "2027-12-26",
+    "2. Weihnachtstag",
+    "2nd Day of Christmas"
+   ]
+  ]
+ },
+ "fillers": {
+  "note": "Hand-picked well-known places for months without a buyer place; month n uses list[n-1] (January always holds the buyer's first place, so list[0] is only a reserve). Spares, in order, replace a filler within minDistanceM of a buyer place. Each passed the 1928 coverage check and a look check on 12 Nov 2026 (rejected for seams, scratches or burned-in marks: tempelhofer-feld, treptower-park, savignyplatz; alexanderplatz moved 100 m north to keep a burned-in survey cross out of the frame). fillers/INDEX.json.",
+  "list": [
+   {
+    "key": "schloss-charlottenburg",
+    "title": "Schloss Charlottenburg",
+    "area": "Charlottenburg",
+    "lat": 52.5207,
+    "lon": 13.2957
+   },
+   {
+    "key": "kollwitzplatz",
+    "title": "Kollwitzplatz",
+    "area": "Prenzlauer Berg",
+    "lat": 52.5365,
+    "lon": 13.4175
+   },
+   {
+    "key": "alexanderplatz",
+    "title": "Alexanderplatz",
+    "area": "Mitte",
+    "lat": 52.52282,
+    "lon": 13.41321
+   },
+   {
+    "key": "brandenburger-tor",
+    "title": "Brandenburger Tor",
+    "area": "Mitte",
+    "lat": 52.51628,
+    "lon": 13.3777
+   },
+   {
+    "key": "viktoriapark",
+    "title": "Viktoriapark",
+    "area": "Kreuzberg",
+    "lat": 52.4878,
+    "lon": 13.3818
+   },
+   {
+    "key": "oberbaumbruecke",
+    "title": "Oberbaumbrücke",
+    "area": "Friedrichshain-Kreuzberg",
+    "lat": 52.5019,
+    "lon": 13.4457
+   },
+   {
+    "key": "museumsinsel",
+    "title": "Museumsinsel",
+    "area": "Mitte",
+    "lat": 52.519,
+    "lon": 13.3995
+   },
+   {
+    "key": "breitscheidplatz",
+    "title": "Breitscheidplatz",
+    "area": "Charlottenburg",
+    "lat": 52.5048,
+    "lon": 13.335
+   },
+   {
+    "key": "reichstag",
+    "title": "Platz der Republik",
+    "area": "Tiergarten",
+    "lat": 52.51862,
+    "lon": 13.37618
+   },
+   {
+    "key": "potsdamer-platz",
+    "title": "Potsdamer Platz",
+    "area": "Tiergarten",
+    "lat": 52.509801,
+    "lon": 13.37559
+   },
+   {
+    "key": "anhalter-bahnhof",
+    "title": "Anhalter Bahnhof",
+    "area": "Kreuzberg",
+    "lat": 52.50303,
+    "lon": 13.38182
+   },
+   {
+    "key": "gendarmenmarkt",
+    "title": "Gendarmenmarkt",
+    "area": "Mitte",
+    "lat": 52.51375,
+    "lon": 13.3927
+   }
+  ],
+  "spares": [
+   {
+    "key": "hackescher-markt",
+    "title": "Hackescher Markt",
+    "area": "Mitte",
+    "lat": 52.5227,
+    "lon": 13.402
+   },
+   {
+    "key": "volkspark-friedrichshain",
+    "title": "Volkspark Friedrichshain",
+    "area": "Friedrichshain",
+    "lat": 52.5283,
+    "lon": 13.4333
+   },
+   {
+    "key": "rathaus-schoeneberg",
+    "title": "Rathaus Schöneberg",
+    "area": "Schöneberg",
+    "lat": 52.485,
+    "lon": 13.3443
+   }
+  ],
+  "minDistanceM": 400
+ }
+}

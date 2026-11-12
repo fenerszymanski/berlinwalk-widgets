@@ -102,6 +102,7 @@ export function pixel(kind, name, data, key) {
 const money = cents => Math.round(Number(cents) || 0) / 100;
 
 // Steps of the personalised print's designer: search, pick, preview (both photos loaded), seen (checkbox), noresult, photoerror.
+export function calendarStep(step) {if(['calendar-place','calendar-preview','calendar-add'].includes(step))count(step,'/product-page/dein-berlin-2027-personalised-wall-calendar');}
 export function ysStep(step) {
   count(step, YS_PATH);
   if(['search','preview'].includes(step))W.WobCampaignFunnel?.emit('interest',step==='search'?'street_search':'street_preview');

@@ -5,6 +5,46 @@
 const pagePath = () => decodeURIComponent(location.pathname).replace(/^\/de(?=\/|$)/, '');
 const PRODUCT_PATH = '/product-page/your-berlin-street-in-1928-personalised-aerial-print-30-x-40-cm';
 const TEXT = new Map(Object.entries({
+  "Your Berlin places": "Deine Berliner Orte",
+  "Made to order · see each product for delivery destinations": "Auf Bestellung gefertigt · Versandziele stehen beim jeweiligen Produkt",
+  "Dein Berlin 2027": "Dein Berlin 2027",
+  "A wall calendar of your Berlin places, from above in 1928 and today.": "Ein Wandkalender mit deinen Berliner Orten, von oben 1928 und heute.",
+  "Add one to twelve places. Months without a place of yours show a well-known Berlin place I picked.": "Füge einen bis zwölf Orte hinzu. Monate ohne eigenen Ort zeigen einen bekannten Berliner Ort, den ich ausgesucht habe.",
+  "A3 portrait, 29.7 x 42 cm, 250 g silk paper, wire bound at the top with a hook. Cover, then January to December 2027.": "A3 Hochformat, 29,7 x 42 cm, 250 g seidenmatt gestrichenes Papier, oben Drahtbindung mit Aufhänger. Deckblatt, dann Januar bis Dezember 2027.",
+  "With the Berlin public holidays.": "Mit den Berliner Feiertagen.",
+  "Your house number is never printed.": "Deine Hausnummer wird nie gedruckt.",
+  "Free delivery to Germany, the EU and the UK. Germany 5 to 8 working days, most of the EU and the UK 6 to 12. Exact days at checkout.": "Kostenloser Versand nach Deutschland, in die EU und nach Großbritannien. Deutschland 5 bis 8 Werktage, der Großteil der EU und UK 6 bis 12. Die genauen Tage siehst du an der Kasse.",
+  "For Christmas: order by 10 December (Germany) or 4 December (EU, UK).": "Für Weihnachten: bis 10. Dezember (Deutschland) oder 4. Dezember (EU, UK) bestellen.",
+  "Calendar language": "Sprache im Kalender",
+  "Your line on the cover": "Deine Zeile auf dem Deckblatt",
+  "Find a place in Berlin": "Finde einen Ort in Berlin",
+  "Your places": "Deine Orte",
+  "Add another place": "Weiteren Ort hinzufügen",
+  "Cover": "Deckblatt",
+  "Filler place": "Ergänzter Ort",
+  "Edit": "Bearbeiten",
+  "Move up": "Nach oben",
+  "Move down": "Nach unten",
+  "The calendar does not count towards the multi-print saving.": "Der Kalender zählt nicht zum Mengenrabatt für Drucke.",
+  "The character limit is reached. Shorten a title, area or cover line before adding another place.": "Die Zeichengrenze ist erreicht. Kürze einen Titel, einen Bezirk oder die Deckblattzeile, bevor du einen weiteren Ort hinzufügst.",
+  "Twelve places are added. You can edit or reorder them.": "Zwölf Orte sind hinzugefügt. Du kannst sie bearbeiten oder umordnen.",
+  "Add at least one place to continue.": "Füge mindestens einen Ort hinzu, um weiterzumachen.",
+  "Check the text and character limits.": "Prüfe den Text und die Zeichengrenzen.",
+  "There is no 1928 aerial photo for this spot": "Für diesen Ort gibt es kein Luftbild von 1928",
+  "1928 aerial photo found": "Luftbild von 1928 gefunden",
+  "Checking the aerial photos…": "Die Luftbilder werden geprüft…",
+  "The aerial photo could not load. Search for the place again to retry.": "Das Luftbild konnte nicht geladen werden. Suche den Ort erneut, um es noch einmal zu versuchen.",
+  "Searching…": "Suche läuft…",
+  "Tap your place:": "Tippe auf deinen Ort:",
+  "Illustrated preview": "Gezeichnete Vorschau",
+  "Preview all twelve months before adding to cart.": "Sieh dir vor dem Kauf alle zwölf Monate an.",
+  "Click or tap either photo to move the cross for this place.": "Klicke oder tippe auf eines der Fotos, um das Kreuz für diesen Ort zu verschieben.",
+  "Wall calendar 2027": "Wandkalender 2027",
+  "{count} of your places": "{count} deiner Orte",
+  "German": "Deutsch",
+  "English": "Englisch",
+  "Calendar details need checking.": "Die Kalenderangaben müssen geprüft werden.",
+  "Address search by Photon and OpenStreetMap contributors. Aerial photographs: Geoportal Berlin, dl-de/zero-2.0.": "Adresssuche von Photon und OpenStreetMap-Mitwirkenden. Luftbilder: Geoportal Berlin, dl-de/zero-2.0.",
   'All products': 'Alle Produkte', 'Posters': 'Poster', 'All posters': 'Alle Poster', 'Personalised prints': 'Personalisierte Drucke', 'Personalised': 'Personalisiert',
   '2027 Wall Calendar': 'Wandkalender 2027', 'Audio walks': 'Audio-Spaziergänge', 'Guides': 'Reiseführer', 'Store': 'Shop', 'Cart': 'Warenkorb',
   'Your Berlin Street in 1928': 'Deine Berliner Straße um 1928', '/ Your Berlin Street in 1928': '/ Deine Berliner Straße um 1928',
@@ -486,4 +526,5 @@ function start() {
   bind();
   setInterval(bind, 300);
 }
-start();
+export const calendarText=(s,german)=>german?(TEXT.get(s)||s):s;
+if(new URLSearchParams(location.search).get('lang')==='de'||/^\/de(?:\/|$)/.test(location.pathname)||(/^\/cart-page/.test(location.pathname)&&(()=>{try{const k=JSON.parse(sessionStorage.getItem('bwYsLastChoice')||'null');return k?.lang==='de'&&Date.now()-Number(k.at)<864e5}catch{return false}})()))start();
