@@ -1933,6 +1933,52 @@
     ]
   },
   {
+    "id": "dl-alexanderplatz-behrens-blocks",
+    "name": "Alexanderplatz Behrens Blocks Printable Poster",
+    "place": "Mitte · The two that stayed",
+    "image": "alexanderplatz-behrens-fullart.jpg",
+    "alt": "Textured illustration of Alexanderplatz with the two long Behrens office blocks, cream facades with window bands, a deep-blue sky, a terracotta square and the World Clock in front. The complete Alexanderplatz Berlin footer is visible.",
+    "typeLine": "DIGITAL DOWNLOAD · 30 × 40 CM",
+    "wixProductId": "15fc3a07-27bd-2013-839f-9751c8d01d93",
+    "kind": "digital",
+    "deliveryNote": "Digital download · 1 JPEG print file and a printing guide. No physical item.",
+    "deliveryDetails": "Your download includes one 3:4 sRGB JPEG at 300 dpi for 30 × 40 cm and a printing guide. The same file prints without cropping at 45 × 60 cm and 60 × 80 cm. No physical poster, frame or decor is included.",
+    "group": "stories",
+    "visualCreditsHtml": "<p>Visual references: my own photographs of Alexanderplatz, taken in August 2026. The buildings, colours, sky and paving were artistically reinterpreted; this is not a reproduction of a photograph. No endorsement is implied.</p>",
+    "sizeImages": {
+      "30x40 cm": "alexanderplatz-behrens-30x40.jpg"
+    },
+    "gallery": [
+      {
+        "image": "alexanderplatz-behrens-30x40.jpg",
+        "alt": "Complete artwork at 30 x 40 cm."
+      }
+    ]
+  },
+  {
+    "id": "dl-alexanderplatz-tram",
+    "name": "Alexanderplatz Tram Printable Poster",
+    "place": "Mitte · The tram returns",
+    "image": "alexanderplatz-tram-fullart.jpg",
+    "alt": "Textured illustration of a yellow articulated tram crossing violet-blue paving with curved rings on Alexanderplatz, seen from above, with warm lit windows and a stone facade strip at the top. The complete Alexanderplatz Berlin footer is visible.",
+    "typeLine": "DIGITAL DOWNLOAD · 30 × 40 CM",
+    "wixProductId": "48be1058-a606-6961-e9fa-4d3d92a72713",
+    "kind": "digital",
+    "deliveryNote": "Digital download · 1 JPEG print file and a printing guide. No physical item.",
+    "deliveryDetails": "Your download includes one 3:4 sRGB JPEG at 300 dpi for 30 × 40 cm and a printing guide. The same file prints without cropping at 45 × 60 cm and 60 × 80 cm. No physical poster, frame or decor is included.",
+    "group": "stories",
+    "visualCreditsHtml": "<p>Visual references: my own photographs of Alexanderplatz, taken in August 2026. The tram, paving, colours and facade were artistically reinterpreted; this is not a reproduction of a photograph. No endorsement is implied.</p>",
+    "sizeImages": {
+      "30x40 cm": "alexanderplatz-tram-30x40.jpg"
+    },
+    "gallery": [
+      {
+        "image": "alexanderplatz-tram-30x40.jpg",
+        "alt": "Complete artwork at 30 x 40 cm."
+      }
+    ]
+  },
+  {
     "id": "dl-karl-marx-allee-wide-band",
     "name": "Karl-Marx-Allee Printable Poster",
     "place": "Friedrichshain · The wide band",
@@ -1954,9 +2000,8 @@
         "alt": "Complete artwork at 30 x 40 cm."
       }
     ]
-  }
-,
-{
+  },
+  {
     "id": "ys-framed",
     "name": "Your Berlin Street in 1928, Framed print",
     "place": "Your home · c. 1928 and today",
@@ -1967,7 +2012,7 @@
     "group": "ys1928-mounted",
     "cardSummary": "One Berlin address, seen from above in 1928 and today."
   },
-{
+  {
     "id": "ys-canvas",
     "name": "Your Berlin Street in 1928, Canvas print",
     "place": "Your home · c. 1928 and today",
@@ -1978,15 +2023,15 @@
     "group": "ys1928-mounted",
     "cardSummary": "One Berlin address, seen from above in 1928 and today."
   },
-{
-  "id": "dein-berlin-2027",
-  "name": "Dein Berlin 2027",
-  "place": "Your Berlin places",
-  "image": "calendar-20261112/wall-cover.webp",
-  "alt": "Illustrated preview",
-  "typeLine": "Wall calendar 2027",
-  "wixProductId": "d35601ed-3b43-4269-afb9-32e7c3b1e128",
-  "group": "personalised-calendar",
-  "cardSummary": "A wall calendar of your Berlin places, from above in 1928 and today."
-}
+  {
+    "id": "dein-berlin-2027",
+    "name": "Dein Berlin 2027",
+    "place": "Your Berlin places",
+    "image": "calendar-20261112/wall-cover.webp",
+    "alt": "Illustrated preview",
+    "typeLine": "Wall calendar 2027",
+    "wixProductId": "d35601ed-3b43-4269-afb9-32e7c3b1e128",
+    "group": "personalised-calendar",
+    "cardSummary": "A wall calendar of your Berlin places, from above in 1928 and today."
+  }
 ]

@@ -831,25 +831,38 @@
     "nativeCategoryIds": [
       "02d24409-01f2-4b00-b24d-d762d74a4fb6"
     ]
+  },
+  {
+    "wixProductId": "33c1b670-fadc-4bcf-a1a5-82cc14b668ea",
+    "nativeProductType": "physical",
+    "nativeCategoryIds": [
+      "00000000-000000-000000-000000000001"
+    ]
+  },
+  {
+    "wixProductId": "6cf293bb-ae66-4cc0-a028-e6c08a15b325",
+    "nativeProductType": "physical",
+    "nativeCategoryIds": [
+      "00000000-000000-000000-000000000001"
+    ]
+  },
+  {
+    "wixProductId": "d35601ed-3b43-4269-afb9-32e7c3b1e128",
+    "nativeProductType": "physical",
+    "nativeCategoryIds": []
+  },
+  {
+    "wixProductId": "15fc3a07-27bd-2013-839f-9751c8d01d93",
+    "nativeProductType": "digital",
+    "nativeCategoryIds": [
+      "02d24409-01f2-4b00-b24d-d762d74a4fb6"
+    ]
+  },
+  {
+    "wixProductId": "48be1058-a606-6961-e9fa-4d3d92a72713",
+    "nativeProductType": "digital",
+    "nativeCategoryIds": [
+      "02d24409-01f2-4b00-b24d-d762d74a4fb6"
+    ]
   }
-,
-{
-  "wixProductId": "33c1b670-fadc-4bcf-a1a5-82cc14b668ea",
-  "nativeProductType": "physical",
-  "nativeCategoryIds": [
-    "00000000-000000-000000-000000000001"
-  ]
-},
-{
-  "wixProductId": "6cf293bb-ae66-4cc0-a028-e6c08a15b325",
-  "nativeProductType": "physical",
-  "nativeCategoryIds": [
-    "00000000-000000-000000-000000000001"
-  ]
-},
-{
-  "wixProductId": "d35601ed-3b43-4269-afb9-32e7c3b1e128",
-  "nativeProductType": "physical",
-  "nativeCategoryIds": []
-}
 ]
