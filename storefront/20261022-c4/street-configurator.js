@@ -243,11 +243,11 @@ export function buildCustomText(state, search) {
 // Wix charges its own variant price at checkout, these only label the choice.
 export const YS_SIZES = Object.freeze(['30 x 40 cm', '45 x 60 cm']);
 export const YS_PAPERS = Object.freeze([
-  {name: 'Premium Matte', note: '200 g matte paper, smooth and white. My pick.', price: [39.90, 54.90]},
-  {name: 'Classic Matte', note: '170 g matte paper, a little lighter.', price: [34.90, 49.90]},
+  {name: 'Premium Matte', note: '200 g matte paper, smooth and white. My pick.', price: [34.90, 47.90]},
+  {name: 'Classic Matte', note: '170 g matte paper, a little lighter.', price: [29.90, 44.90]},
   {name: 'Museum-Quality Matte', note: '250 g archival paper, warm off-white.', price: [49.90, 69.90]},
-  {name: 'Premium Semi-Gloss', note: '200 g paper with a soft sheen.', price: [39.90, 54.90]},
-  {name: 'Classic Semi-Gloss', note: '170 g paper with a soft sheen, a little lighter.', price: [34.90, 49.90]},
+  {name: 'Premium Semi-Gloss', note: '200 g paper with a soft sheen.', price: [34.90, 47.90]},
+  {name: 'Classic Semi-Gloss', note: '170 g paper with a soft sheen, a little lighter.', price: [29.90, 44.90]},
 ]);
 export const YS_FRAMED_ID = '33c1b670-fadc-4bcf-a1a5-82cc14b668ea';
 export const YS_CANVAS_ID = '6cf293bb-ae66-4cc0-a028-e6c08a15b325';
@@ -263,7 +263,9 @@ export const ysSize = state => (YS_SIZES.includes(state[sizeKey(state)]) ? state
 // The page opens on the cheapest poster, 30 x 40 Classic Matte (Yusuf, 26 Oct 2026: "default printed seçili ürün bence en ucuz olanı olmalı").
 const YS_DEFAULT_PAPER = 'Classic Matte';
 export const ysPaper = state => ysMounted(state) && state.format==='framed' ? YS_FRAMED_PAPERS.find(p=>p.name===state.framedPaper)||YS_FRAMED_PAPERS[0] : YS_PAPERS.find(p => p.name === state.paper) || YS_PAPERS.find(p => p.name === YS_DEFAULT_PAPER);
-export const ysPrice = state => ysPaper(state).price[YS_SIZES.indexOf(ysSize(state))] + (isHomes(state)?20:0);
+// Homes prices did not change on 12 Nov 2026 (single-poster prices fell for the Posterflow route), so they keep their own table.
+const HOMES_PRICES = Object.freeze({'Premium Matte': [59.90, 74.90], 'Classic Matte': [54.90, 69.90], 'Museum-Quality Matte': [69.90, 89.90], 'Premium Semi-Gloss': [59.90, 74.90], 'Classic Semi-Gloss': [54.90, 69.90]});
+export const ysPrice = state => isHomes(state) ? HOMES_PRICES[ysPaper(state).name][YS_SIZES.indexOf(ysSize(state))] : ysPaper(state).price[YS_SIZES.indexOf(ysSize(state))];
 export const ysChoices = state => ysMounted(state) ? state.format==='canvas' ? {Size:ysSize(state)} : {Size:ysSize(state),Frame:ysFrame(state),Paper:ysPaper(state).name} : ({Size: ysSize(state), Paper: ysPaper(state).name});
 export const euro = n => `€${n.toFixed(2)}`;
 // Digital file (Yusuf, 26 Oct 2026: a cheap print-it-yourself version next to the poster). A separate Wix digital product with the same two
