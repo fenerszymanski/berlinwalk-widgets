@@ -1,9 +1,26 @@
 {
-  "updatedAt": "2026-11-11T21:40:44.290Z",
+  "updatedAt": "2026-11-12T10:04:21.374Z",
   "source": "Wix Blog API",
-  "totalPosts": 458,
+  "totalPosts": 459,
   "bookingUrl": "https://www.walkofberlin.com/book-berlin-walking-tour/berlin-then-and-now",
   "allPosts": [
+    {
+      "title": "Berlin Districts: Which Bezirk You Live In and What It Actually Runs",
+      "slug": "berlin-districts",
+      "path": "/post/berlin-districts",
+      "url": "https://www.berlinwalk.com/post/berlin-districts",
+      "excerpt": "Twelve districts since 2001, made from twenty-three. Which one you live in, what its offices do for you, and which errands ignore district lines completely.",
+      "category": "Living in Berlin",
+      "categorySlug": "living-in-berlin",
+      "topic": "living-in-berlin",
+      "topicLabel": "Living in Berlin",
+      "readTime": "6 min read",
+      "publishedDate": "2026-11-12T10:01:55.909Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_d738807c776840c594da5bb477baa0d4~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_d738807c776840c594da5bb477baa0d4~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover.jpg",
+      "alt": "The red brick Rotes Rathaus with its clock tower and Berlin flag behind the Neptune Fountain in golden evening light",
+      "relatedToolSlug": "berlin-bezirk-finder"
+    },
     {
       "title": "Listening Under the Line: Where It Happened, Episode 5",
       "slug": "where-it-happened-spy-war",

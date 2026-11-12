@@ -467,6 +467,12 @@
       "figure": "16,332",
       "line": "gas lamps are left in the register, about 95 per cent of them in the former West, and only about 3,300 are meant to stay.",
       "tool": "berlin-gas-lamp-map"
+    },
+    "berlin-districts": {
+      "shelf": "geld",
+      "figure": "12 districts",
+      "line": "since 2001, made out of 23, and any B&uuml;rgeramt in the city can register your address.",
+      "tool": "berlin-bezirk-finder"
     }
   }
 }
