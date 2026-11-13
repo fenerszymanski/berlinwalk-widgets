@@ -62,6 +62,32 @@ export function count(step, base) {
 function analyticsAllowed() {
   try { return W.consentPolicyManager?.getCurrentConsentPolicy?.()?.policy?.analytics === true; } catch (e) { return false; }
 }
+// Google 1928 attribution: consented, tab-scoped, 30-minute session; no address contents.
+const GOOGLE_1928_KEY = 'wob-google-1928-session-v1';
+function google1928Context() {
+  try {
+    const policy = W.consentPolicyManager?.getCurrentConsentPolicy?.()?.policy || {};
+    if (!policy.analytics || !policy.advertising || W.navigator?.globalPrivacyControl) {
+      W.sessionStorage?.removeItem(GOOGLE_1928_KEY); return null;
+    }
+    const q = new URLSearchParams(W.location.search);
+    const incoming = q.get('utm_source') === 'google' && q.get('utm_medium') === 'display' && q.get('utm_campaign') === '1928_de_gdn_pilot';
+    let c; try { c = JSON.parse(W.sessionStorage.getItem(GOOGLE_1928_KEY) || 'null'); } catch {}
+    if (c && (c.expires <= Date.now() || c.utmCampaign !== '1928_de_gdn_pilot' || !/^[a-f0-9]{32}$/.test(c.sessionId))) c = null;
+    if (q.has('utm_campaign') && !incoming) { W.sessionStorage.removeItem(GOOGLE_1928_KEY); return null; }
+    if (!c && incoming) {
+      const bytes = new Uint8Array(16); W.crypto.getRandomValues(bytes);
+      c = {sessionId: Array.from(bytes, x => x.toString(16).padStart(2, '0')).join(''), utmSource: 'google', utmMedium: 'display', utmCampaign: '1928_de_gdn_pilot', utmContent: ['01-deine-strasse','02-dein-zuhause','03-geschenk'].includes(q.get('utm_content')) ? q.get('utm_content') : ''};
+    }
+    if (!c) return null;
+    c.expires = Date.now() + 30 * 60 * 1000;
+    W.sessionStorage.setItem(GOOGLE_1928_KEY, JSON.stringify(c));
+    return c;
+  } catch { return null; }
+}
+W.document?.addEventListener('consentPolicyChanged', () => google1928Context());
+W.document?.addEventListener('consentPolicyInitialized', () => google1928Context());
+google1928Context();
 function journeyId() {
   if (!W.__bwStoreJourney) {
     const bytes = new Uint8Array(9);
@@ -77,13 +103,14 @@ export function journey(eventName, path, payload = {}) {
   const why = skipReason();
   if (why) { log.skipped.push({journey: eventName, why}); return false; }
   if (!analyticsAllowed()) { log.skipped.push({journey: eventName, why: 'consent'}); return false; }
-  const id = journeyId(); if (!id) return false;
+  const google = google1928Context();
+  const id = google?.sessionId || journeyId(); if (!id) return false;
   done.add(k);
   W.__bwStoreJourneyRef = id;
   try {
     W.fetch(JOURNEY_ENDPOINT, {method: 'POST', mode: 'cors', credentials: 'omit', cache: 'no-store', keepalive: true, referrerPolicy: 'no-referrer',
       headers: {'content-type': 'application/json'}, body: JSON.stringify({eventName, eventId: `${id}:${eventName}:${Date.now().toString(36)}`, sessionId: id, journeyId: id,
-        consentGranted: true, analyticsConsent: true, pagePath: path, timestamp: new Date().toISOString(), payload})}).catch(() => {});
+        consentGranted: true, analyticsConsent: true, ...(google ? {advertisingConsent: true, utmSource: google.utmSource, utmMedium: google.utmMedium, utmCampaign: google.utmCampaign, utmContent: google.utmContent} : {}), pagePath: path, timestamp: new Date().toISOString(), payload})}).catch(() => {});
     (log.journey = log.journey || []).push(eventName);
     return true;
   } catch (e) { return false; }
