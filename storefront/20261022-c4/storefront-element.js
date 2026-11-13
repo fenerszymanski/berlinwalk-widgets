@@ -100,6 +100,7 @@
   // Neutral shimmer block used by the loading skeleton wherever a price, button or line of text will be.
   // room videos: product id (print and its printable twin) -> asset slug; value = how the video is described
   const ROOM_VIDEOS = {
+  "berlin-colln-1652-bauhaus": "The Berlin and Cölln 1652 print",
   "lietzensee-the-cut": "The Lietzensee print",
   "berliner-mauer-cyclist": "The Berliner Mauer print",
   "berlin-market-halls": "The Markthallen print",

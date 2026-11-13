@@ -2149,5 +2149,44 @@
         "alt": "Complete artwork at 30 x 40 cm. Digital file only."
       }
     ]
+  },
+  {
+    "place": "Historic Berlin · On the Spree",
+    "image": "berlin-colln-1652-bauhaus.jpg",
+    "alt": "Complete Bauhaus-inspired Berlin and Cölln poster in cream, red, cobalt blue and black, with the historic map composition and 1652 lettering.",
+    "group": "stories",
+    "roomImage": "berlin-colln-1652-bauhaus-room.jpg",
+    "roomVideoFit": "contain",
+    "roomCaption": "3D styling example · 50 × 70 cm · Frame and decor not included",
+    "roomAlt": "3D room visualization with the complete 50 x 70 cm Berlin and Cölln design. Frame, furniture and decor are not included.",
+    "visualCreditsHtml": "<p>AI-created artistic interpretation inspired by Johann Gregor Memhardt’s 1652 plan of Berlin and Cölln; visual reference: its 1888 colour reprint via Wikimedia Commons, public domain. Small labels and details are illustrative, not an exact archival reproduction. Enlarged using Adobe Firefly.</p>\n<p>Room imagery shows the 50 x 70 cm design as a digital styling visualisation; frames, furniture and decor are not included.</p>",
+    "id": "pr-berlin-colln-1652-bauhaus",
+    "name": "Berlin & Cölln 1652 — Bauhaus",
+    "wixProductId": "37456c3f-6153-4b4f-8f85-e760809bb5e1",
+    "typeLine": "PREMIUM MATTE · 200 GSM · UNFRAMED",
+    "sizeImages": {
+      "30x40 cm": "berlin-colln-1652-bauhaus-30x40.jpg",
+      "50x70 cm": "berlin-colln-1652-bauhaus.jpg"
+    },
+    "alternativeProductId": "89b2e91d-9f9f-e6af-175a-b305f8f0ccdb"
+  },
+  {
+    "place": "Historic Berlin · On the Spree",
+    "image": "berlin-colln-1652-bauhaus.jpg",
+    "alt": "Complete Bauhaus-inspired Berlin and Cölln poster in cream, red, cobalt blue and black, with the historic map composition and 1652 lettering.",
+    "group": "stories",
+    "roomImage": "berlin-colln-1652-bauhaus-room.jpg",
+    "roomVideoFit": "contain",
+    "roomCaption": "3D styling example · 50 × 70 cm · Frame and decor not included",
+    "roomAlt": "3D room visualization with the complete 50 x 70 cm Berlin and Cölln design. Frame, furniture and decor are not included.",
+    "visualCreditsHtml": "<p>AI-created artistic interpretation inspired by Johann Gregor Memhardt’s 1652 plan of Berlin and Cölln; visual reference: its 1888 colour reprint via Wikimedia Commons, public domain. Small labels and details are illustrative, not an exact archival reproduction. Enlarged using Adobe Firefly.</p>\n<p>Room imagery shows the 50 x 70 cm design as a digital styling visualisation; frames, furniture and decor are not included.</p>",
+    "id": "dl-berlin-colln-1652-bauhaus",
+    "name": "Berlin & Cölln 1652 Printable Poster",
+    "wixProductId": "89b2e91d-9f9f-e6af-175a-b305f8f0ccdb",
+    "typeLine": "DIGITAL DOWNLOAD · 5:7 JPEG",
+    "kind": "digital",
+    "deliveryNote": "Digital download · One JPEG print file and a printing guide. No physical item.",
+    "deliveryDetails": "One 5:7 sRGB JPEG, 5906 × 8268 px, exported at 300 dpi for 50 × 70 cm, plus a printing guide. Print at 50 × 70, 35 × 49 or 25 × 35 cm without cropping. Artwork enlarged with Adobe Firefly. For personal printing only. No physical poster, frame or decor is included.",
+    "alternativeProductId": "37456c3f-6153-4b4f-8f85-e760809bb5e1"
   }
 ]
