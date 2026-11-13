@@ -1,0 +1,2663 @@
+{
+ "id": "E06-bornholmer-9-november-1989",
+ "slug": "bornholmer",
+ "title": "The Night the Gate Opened",
+ "episodeUri": "",
+ "audioUrl": "https://anchor.fm/s/1186f4668/podcast/play/127498626/https%3A%2F%2Fd3ctxlq1ktw2nl.cloudfront.net%2Fstaging%2F2026-9-15%2Ffcda4b1f-0686-826e-867b-8a3b8df85ec4.mp3",
+ "audioBytes": 19565456,
+ "cover": "img/cover-360.jpg",
+ "show": {
+  "title": "Where It Happened",
+  "artist": "Walk of Berlin",
+  "spotifyUrl": "https://open.spotify.com/show/4hd8BvMRs7dwdogXr3mzzG",
+  "rssUrl": "https://anchor.fm/s/1186f4668/podcast/rss"
+ },
+ "duration": 1166.99,
+ "chapters": [
+  {
+   "title": "The paper in the press hall",
+   "t": 0
+  },
+  {
+   "title": "Leipzig, the Wall and a rushed draft",
+   "t": 88
+  },
+  {
+   "title": "The officer at Bornholmer Straße",
+   "t": 279
+  },
+  {
+   "title": "The barrier goes up",
+   "t": 446
+  },
+  {
+   "title": "The morning after",
+   "t": 696
+  },
+  {
+   "title": "The square today",
+   "t": 846
+  }
+ ],
+ "phrases": [
+  {
+   "t0": 0.3,
+   "t1": 2.7,
+   "text": "According to Orte der Einheit,",
+   "kind": "story",
+   "para": 0,
+   "part": "p01"
+  },
+  {
+   "t0": 2.78,
+   "t1": 7.02,
+   "text": "at six o’clock on the evening of 9 November 1989,",
+   "kind": "story",
+   "para": 0,
+   "part": "p01"
+  },
+  {
+   "t0": 7.1,
+   "t1": 9.42,
+   "text": "journalists were gathering in a press hall in",
+   "kind": "story",
+   "para": 0,
+   "part": "p01"
+  },
+  {
+   "t0": 9.5,
+   "t1": 13.02,
+   "text": "East Berlin for a statement by Günter Schabowski,",
+   "kind": "story",
+   "para": 0,
+   "part": "p01"
+  },
+  {
+   "t0": 13.06,
+   "t1": 15.5,
+   "text": "a member of the ruling party’s Politburo.",
+   "kind": "story",
+   "para": 0,
+   "part": "p01"
+  },
+  {
+   "t0": 16.14,
+   "t1": 18.38,
+   "text": "Schabowski had a sheet of paper with him.",
+   "kind": "story",
+   "para": 0,
+   "part": "p01"
+  },
+  {
+   "t0": 18.86,
+   "t1": 21.98,
+   "text": "He took it out of his papers and began to read,",
+   "kind": "story",
+   "para": 0,
+   "part": "p01"
+  },
+  {
+   "t0": 22.06,
+   "t1": 25.34,
+   "text": "and the paper set out a new regulation on travel.",
+   "kind": "story",
+   "para": 0,
+   "part": "p01"
+  },
+  {
+   "t0": 25.98,
+   "t1": 31.58,
+   "text": "Riccardo Ehrman, an Italian journalist, finally asked about the travel regulations,",
+   "kind": "story",
+   "para": 0,
+   "part": "p01"
+  },
+  {
+   "t0": 31.66,
+   "t1": 33.66,
+   "text": "according to Orte der Einheit.",
+   "kind": "story",
+   "para": 0,
+   "part": "p01"
+  },
+  {
+   "t0": 33.98,
+   "t1": 38.3,
+   "text": "Then another journalist asked when the new rule would take effect.",
+   "kind": "story",
+   "para": 0,
+   "part": "p01"
+  },
+  {
+   "t0": 38.62,
+   "t1": 42.86,
+   "text": "Schabowski’s answer, as the Federal Government’s transcript records it,",
+   "kind": "story",
+   "para": 0,
+   "part": "p01"
+  },
+  {
+   "t0": 42.94,
+   "t1": 49.02,
+   "text": "was that it applied immediately, without delay: “sofort, unverzüglich.”",
+   "kind": "story",
+   "para": 0,
+   "part": "p01"
+  },
+  {
+   "t0": 49.54,
+   "t1": 55.62,
+   "text": "According to Orte der Einheit, Peter Brinkmann asked the decisive follow-up questions.",
+   "kind": "story",
+   "para": 1,
+   "part": "p02"
+  },
+  {
+   "t0": 55.94,
+   "t1": 60.18,
+   "text": "The regulation the room was hearing was about private trips abroad.",
+   "kind": "story",
+   "para": 1,
+   "part": "p02"
+  },
+  {
+   "t0": 60.5,
+   "t1": 65.38,
+   "text": "Private trips could be applied for without any preconditions, the text said,",
+   "kind": "story",
+   "para": 1,
+   "part": "p02"
+  },
+  {
+   "t0": 65.46,
+   "t1": 68.42,
+   "text": "and permits would be granted at short notice.",
+   "kind": "story",
+   "para": 1,
+   "part": "p02"
+  },
+  {
+   "t0": 68.66,
+   "t1": 71.22,
+   "text": "Permanent departures could take place through all of",
+   "kind": "story",
+   "para": 1,
+   "part": "p02"
+  },
+  {
+   "t0": 71.26,
+   "t1": 74.74,
+   "text": "the GDR’s border crossings to the Federal Republic.",
+   "kind": "story",
+   "para": 1,
+   "part": "p02"
+  },
+  {
+   "t0": 74.78,
+   "t1": 79.86,
+   "text": "The rule was about applications and permits, not about an open gate.",
+   "kind": "story",
+   "para": 1,
+   "part": "p02"
+  },
+  {
+   "t0": 80.06,
+   "t1": 83.3,
+   "text": "Asked when it would take effect, Schabowski answered that,",
+   "kind": "story",
+   "para": 1,
+   "part": "p02"
+  },
+  {
+   "t0": 83.38,
+   "t1": 87.06,
+   "text": "as far as he knew, it applied at once, without delay.",
+   "kind": "story",
+   "para": 1,
+   "part": "p02"
+  },
+  {
+   "t0": 87.58,
+   "t1": 91.18,
+   "text": "The pressure had been building for weeks before that evening,",
+   "kind": "story",
+   "para": 2,
+   "part": "p03"
+  },
+  {
+   "t0": 91.22,
+   "t1": 93.5,
+   "text": "and the news from Leipzig was part of it.",
+   "kind": "story",
+   "para": 2,
+   "part": "p03"
+  },
+  {
+   "t0": 94.14,
+   "t1": 99.74,
+   "text": "Prayer services had been held regularly in the city’s Nikolaikirche since 1982,",
+   "kind": "story",
+   "para": 2,
+   "part": "p03"
+  },
+  {
+   "t0": 99.98,
+   "t1": 103.98,
+   "text": "according to bpb, the Federal Agency for Civic Education.",
+   "kind": "story",
+   "para": 2,
+   "part": "p03"
+  },
+  {
+   "t0": 104.62,
+   "t1": 106.38,
+   "text": "On Monday 2 October 1989,",
+   "kind": "story",
+   "para": 2,
+   "part": "p03"
+  },
+  {
+   "t0": 106.42,
+   "t1": 112.02,
+   "text": "20,000 people had already taken part in the demonstration.",
+   "kind": "story",
+   "para": 2,
+   "part": "p03"
+  },
+  {
+   "t0": 112.3,
+   "t1": 116.62,
+   "text": "On 9 October, at least 70,000 took to the streets,",
+   "kind": "story",
+   "para": 2,
+   "part": "p03"
+  },
+  {
+   "t0": 116.7,
+   "t1": 119.58,
+   "text": "and the security forces did not step in.",
+   "kind": "story",
+   "para": 2,
+   "part": "p03"
+  },
+  {
+   "t0": 119.9,
+   "t1": 124.54,
+   "text": "Rumours had spread beforehand that the protests would be crushed by force,",
+   "kind": "story",
+   "para": 2,
+   "part": "p03"
+  },
+  {
+   "t0": 124.62,
+   "t1": 126.7,
+   "text": "and the marchers went out anyway.",
+   "kind": "story",
+   "para": 2,
+   "part": "p03"
+  },
+  {
+   "t0": 127.02,
+   "t1": 129.66,
+   "text": "The march had shown that a crowd could gather",
+   "kind": "story",
+   "para": 2,
+   "part": "p03"
+  },
+  {
+   "t0": 129.94,
+   "t1": 133.18,
+   "text": "without the state stepping in. A month later,",
+   "kind": "story",
+   "para": 2,
+   "part": "p03"
+  },
+  {
+   "t0": 133.3,
+   "t1": 136.54,
+   "text": "the same kind of pressure had reached the Berlin border.",
+   "kind": "story",
+   "para": 2,
+   "part": "p03"
+  },
+  {
+   "t0": 137.06,
+   "t1": 140.18,
+   "text": "The border itself had a long story behind it.",
+   "kind": "story",
+   "para": 3,
+   "part": "p04"
+  },
+  {
+   "t0": 140.74,
+   "t1": 143.06,
+   "text": "Between the founding of the GDR in 1949",
+   "kind": "story",
+   "para": 3,
+   "part": "p04"
+  },
+  {
+   "t0": 143.22,
+   "t1": 147.22,
+   "text": "and the building of the Wall in 1961,",
+   "kind": "story",
+   "para": 3,
+   "part": "p04"
+  },
+  {
+   "t0": 147.42,
+   "t1": 152.74,
+   "text": "about 2.7 million people left for the Federal Republic, according to bpb.",
+   "kind": "story",
+   "para": 3,
+   "part": "p04"
+  },
+  {
+   "t0": 153.54,
+   "t1": 156.98,
+   "text": "The Wall went up in August 1961.",
+   "kind": "story",
+   "para": 3,
+   "part": "p04"
+  },
+  {
+   "t0": 157.06,
+   "t1": 161.22,
+   "text": "After that, a crossing point was set up at Bornholmer Straße,",
+   "kind": "story",
+   "para": 3,
+   "part": "p04"
+  },
+  {
+   "t0": 161.3,
+   "t1": 165.46,
+   "text": "and Berlin’s heritage office describes it as the crossing that linked Pankow",
+   "kind": "story",
+   "para": 3,
+   "part": "p04"
+  },
+  {
+   "t0": 165.54,
+   "t1": 168.02,
+   "text": "in the East with Wedding in the West.",
+   "kind": "story",
+   "para": 3,
+   "part": "p04"
+  },
+  {
+   "t0": 168.66,
+   "t1": 172.26,
+   "text": "The Stiftung Berliner Mauer, the memorial foundation,",
+   "kind": "story",
+   "para": 3,
+   "part": "p04"
+  },
+  {
+   "t0": 172.34,
+   "t1": 177.06,
+   "text": "says the checkpoint later ran from the Bösebrücke to Malmöer Straße,",
+   "kind": "story",
+   "para": 3,
+   "part": "p04"
+  },
+  {
+   "t0": 177.14,
+   "t1": 178.58,
+   "text": "and that it was meant for citizens",
+   "kind": "story",
+   "para": 3,
+   "part": "p04"
+  },
+  {
+   "t0": 178.62,
+   "t1": 181.78,
+   "text": "of the Federal Republic entering East Berlin.",
+   "kind": "story",
+   "para": 3,
+   "part": "p04"
+  },
+  {
+   "t0": 182.3,
+   "t1": 185.54,
+   "text": "The regulation had been drafted that same day.",
+   "kind": "story",
+   "para": 4,
+   "part": "p05"
+  },
+  {
+   "t0": 185.82,
+   "t1": 191.74,
+   "text": "According to bpb, representatives of the interior and state-security ministries worked",
+   "kind": "story",
+   "para": 4,
+   "part": "p05"
+  },
+  {
+   "t0": 191.78,
+   "t1": 193.98,
+   "text": "on it in the morning of 9 November.",
+   "kind": "story",
+   "para": 4,
+   "part": "p05"
+  },
+  {
+   "t0": 194.46,
+   "t1": 197.18,
+   "text": "It was meant to take effect on 10 November,",
+   "kind": "story",
+   "para": 4,
+   "part": "p05"
+  },
+  {
+   "t0": 197.26,
+   "t1": 199.9,
+   "text": "so that the border posts could be informed first.",
+   "kind": "story",
+   "para": 4,
+   "part": "p05"
+  },
+  {
+   "t0": 200.54,
+   "t1": 204.9,
+   "text": "In the afternoon, Egon Krenz read the draft to the Central Committee.",
+   "kind": "story",
+   "para": 4,
+   "part": "p05"
+  },
+  {
+   "t0": 205.18,
+   "t1": 206.54,
+   "text": "At half past five,",
+   "kind": "story",
+   "para": 4,
+   "part": "p05"
+  },
+  {
+   "t0": 206.62,
+   "t1": 211.34,
+   "text": "according to the Landeszentrale für politische Bildung in Baden-Württemberg,",
+   "kind": "story",
+   "para": 4,
+   "part": "p05"
+  },
+  {
+   "t0": 211.42,
+   "t1": 215.22,
+   "text": "Krenz handed the draft and a press release to Schabowski.",
+   "kind": "story",
+   "para": 4,
+   "part": "p05"
+  },
+  {
+   "t0": 215.58,
+   "t1": 218.94,
+   "text": "Schabowski had not been at the Central Committee discussion,",
+   "kind": "story",
+   "para": 4,
+   "part": "p05"
+  },
+  {
+   "t0": 218.98,
+   "t1": 220.86,
+   "text": "and he did not know the wording,",
+   "kind": "story",
+   "para": 4,
+   "part": "p05"
+  },
+  {
+   "t0": 221.02,
+   "t1": 222.86,
+   "text": "or when the rule would apply.",
+   "kind": "story",
+   "para": 4,
+   "part": "p05"
+  },
+  {
+   "t0": 223.18,
+   "t1": 225.98,
+   "text": "Orte der Einheit adds that Krenz pressed the",
+   "kind": "story",
+   "para": 4,
+   "part": "p05"
+  },
+  {
+   "t0": 226.06,
+   "t1": 228.86,
+   "text": "paper into his hand before the conference.",
+   "kind": "story",
+   "para": 4,
+   "part": "p05"
+  },
+  {
+   "t0": 229.38,
+   "t1": 233.3,
+   "text": "The press conference went out live on East German television, and the",
+   "kind": "story",
+   "para": 5,
+   "part": "p06"
+  },
+  {
+   "t0": 233.38,
+   "t1": 237.54,
+   "text": "Federal Government’s account says many East Germans followed it that evening.",
+   "kind": "story",
+   "para": 5,
+   "part": "p06"
+  },
+  {
+   "t0": 238.18,
+   "t1": 242.18,
+   "text": "The Federal Government’s archive describes the statement as made in front",
+   "kind": "story",
+   "para": 5,
+   "part": "p06"
+  },
+  {
+   "t0": 242.26,
+   "t1": 245.94,
+   "text": "of running cameras. Schabowski announced the new rules",
+   "kind": "story",
+   "para": 5,
+   "part": "p06"
+  },
+  {
+   "t0": 245.98,
+   "t1": 248.9,
+   "text": "for private trips a few minutes before seven.",
+   "kind": "story",
+   "para": 5,
+   "part": "p06"
+  },
+  {
+   "t0": 249.14,
+   "t1": 255.22,
+   "text": "The Berliner Zeitung gives 18:53 and bpb gives 18:57,",
+   "kind": "story",
+   "para": 5,
+   "part": "p06"
+  },
+  {
+   "t0": 255.3,
+   "t1": 257.22,
+   "text": "and the difference is small enough to leave",
+   "kind": "story",
+   "para": 5,
+   "part": "p06"
+  },
+  {
+   "t0": 257.3,
+   "t1": 259.22,
+   "text": "it at a few minutes before seven.",
+   "kind": "story",
+   "para": 5,
+   "part": "p06"
+  },
+  {
+   "t0": 259.78,
+   "t1": 264.58,
+   "text": "According to bpb, crowds gathered quickly at the checkpoints along the Wall,",
+   "kind": "story",
+   "para": 5,
+   "part": "p06"
+  },
+  {
+   "t0": 264.66,
+   "t1": 266.66,
+   "text": "which are normally deserted in the evening.",
+   "kind": "story",
+   "para": 5,
+   "part": "p06"
+  },
+  {
+   "t0": 267.14,
+   "t1": 270.26,
+   "text": "The memorial foundation says that at this crossing the",
+   "kind": "story",
+   "para": 5,
+   "part": "p06"
+  },
+  {
+   "t0": 270.34,
+   "t1": 273.94,
+   "text": "first East Germans could leave for West Berlin that night.",
+   "kind": "story",
+   "para": 5,
+   "part": "p06"
+  },
+  {
+   "t0": 274.26,
+   "t1": 278.34,
+   "text": "The Federal Government’s transcript gives the question and the answer.",
+   "kind": "story",
+   "para": 5,
+   "part": "p06"
+  },
+  {
+   "t0": 278.86,
+   "t1": 283.26,
+   "text": "At Bornholmer Straße, the officer in charge, Harald Jäger,",
+   "kind": "story",
+   "para": 6,
+   "part": "p07"
+  },
+  {
+   "t0": 283.34,
+   "t1": 287.74,
+   "text": "immediately asked for new instructions, according to Orte der Einheit.",
+   "kind": "story",
+   "para": 6,
+   "part": "p07"
+  },
+  {
+   "t0": 288.3,
+   "t1": 291.1,
+   "text": "German Wikipedia says he tried to learn more",
+   "kind": "story",
+   "para": 6,
+   "part": "p07"
+  },
+  {
+   "t0": 291.22,
+   "t1": 293.26,
+   "text": "about the new rule by phone,",
+   "kind": "story",
+   "para": 6,
+   "part": "p07"
+  },
+  {
+   "t0": 293.38,
+   "t1": 297.74,
+   "text": "and Orte der Einheit says his superiors knew nothing of any change.",
+   "kind": "story",
+   "para": 6,
+   "part": "p07"
+  },
+  {
+   "t0": 298.3,
+   "t1": 303.1,
+   "text": "German Wikipedia names his superior as Oberst Rudi Ziegenhorn,",
+   "kind": "story",
+   "para": 6,
+   "part": "p07"
+  },
+  {
+   "t0": 303.18,
+   "t1": 307.58,
+   "text": "and says that Ziegenhorn made clear the old rules still applied.",
+   "kind": "story",
+   "para": 6,
+   "part": "p07"
+  },
+  {
+   "t0": 307.9,
+   "t1": 310.46,
+   "text": "So the man at the barrier had a regulation",
+   "kind": "story",
+   "para": 6,
+   "part": "p07"
+  },
+  {
+   "t0": 310.54,
+   "t1": 312.86,
+   "text": "that had been read out at the press conference,",
+   "kind": "story",
+   "para": 6,
+   "part": "p07"
+  },
+  {
+   "t0": 312.98,
+   "t1": 316.06,
+   "text": "and a superior telling him that nothing had changed.",
+   "kind": "story",
+   "para": 6,
+   "part": "p07"
+  },
+  {
+   "t0": 316.62,
+   "t1": 319.02,
+   "text": "No new instructions reached the crossing,",
+   "kind": "story",
+   "para": 6,
+   "part": "p07"
+  },
+  {
+   "t0": 319.06,
+   "t1": 322.58,
+   "text": "and the people waiting at the barrier were getting more numerous.",
+   "kind": "story",
+   "para": 6,
+   "part": "p07"
+  },
+  {
+   "t0": 322.94,
+   "t1": 325.82,
+   "text": "That is the order of the evening so far:",
+   "kind": "story",
+   "para": 6,
+   "part": "p07"
+  },
+  {
+   "t0": 325.86,
+   "t1": 328.94,
+   "text": "a press hall, a paper, a phone call,",
+   "kind": "story",
+   "para": 6,
+   "part": "p07"
+  },
+  {
+   "t0": 329.02,
+   "t1": 331.98,
+   "text": "and a barrier with people still arriving at it.",
+   "kind": "story",
+   "para": 6,
+   "part": "p07"
+  },
+  {
+   "t0": 332.5,
+   "t1": 336.5,
+   "text": "At about twenty past nine, the first people were let through,",
+   "kind": "story",
+   "para": 7,
+   "part": "p08"
+  },
+  {
+   "t0": 336.66,
+   "t1": 339.86,
+   "text": "after their identity cards had been stamped invalid,",
+   "kind": "story",
+   "para": 7,
+   "part": "p08"
+  },
+  {
+   "t0": 340.06,
+   "t1": 341.86,
+   "text": "according to the Federal Government.",
+   "kind": "story",
+   "para": 7,
+   "part": "p08"
+  },
+  {
+   "t0": 342.26,
+   "t1": 346.98,
+   "text": "The Berliner Zeitung also gives 21:20 as the time the crossing at",
+   "kind": "story",
+   "para": 7,
+   "part": "p08"
+  },
+  {
+   "t0": 347.06,
+   "t1": 350.42,
+   "text": "Bornholmer Straße was first opened in the GDR.",
+   "kind": "story",
+   "para": 7,
+   "part": "p08"
+  },
+  {
+   "t0": 350.98,
+   "t1": 355.94,
+   "text": "Orte der Einheit says Jäger received the order at 9:20 to release",
+   "kind": "story",
+   "para": 7,
+   "part": "p08"
+  },
+  {
+   "t0": 356.02,
+   "t1": 359.46,
+   "text": "the most rebellious and to stamp their photographs.",
+   "kind": "story",
+   "para": 7,
+   "part": "p08"
+  },
+  {
+   "t0": 359.78,
+   "t1": 365.06,
+   "text": "German Wikipedia says supervisors allowed certain people, the loudest of them,",
+   "kind": "story",
+   "para": 7,
+   "part": "p08"
+  },
+  {
+   "t0": 365.1,
+   "t1": 368.58,
+   "text": "to leave from about 21:20, and that the stamp",
+   "kind": "story",
+   "para": 7,
+   "part": "p08"
+  },
+  {
+   "t0": 368.66,
+   "t1": 371.86,
+   "text": "sat half across the photo in the identity card,",
+   "kind": "story",
+   "para": 7,
+   "part": "p08"
+  },
+  {
+   "t0": 371.94,
+   "t1": 375.06,
+   "text": "so that the holder could not come back into the GDR.",
+   "kind": "story",
+   "para": 7,
+   "part": "p08"
+  },
+  {
+   "t0": 375.7,
+   "t1": 378.58,
+   "text": "The people were not told what the stamp meant.",
+   "kind": "story",
+   "para": 7,
+   "part": "p08"
+  },
+  {
+   "t0": 379.1,
+   "t1": 382.7,
+   "text": "The Stiftung Berliner Mauer speaks of passports,",
+   "kind": "story",
+   "para": 8,
+   "part": "p09"
+  },
+  {
+   "t0": 382.78,
+   "t1": 387.02,
+   "text": "and says the stamp expatriated the holders without their knowledge.",
+   "kind": "story",
+   "para": 8,
+   "part": "p09"
+  },
+  {
+   "t0": 387.58,
+   "t1": 390.78,
+   "text": "The Federal Government speaks of identity cards,",
+   "kind": "story",
+   "para": 8,
+   "part": "p09"
+  },
+  {
+   "t0": 390.9,
+   "t1": 393.34,
+   "text": "so here they are simply papers.",
+   "kind": "story",
+   "para": 8,
+   "part": "p09"
+  },
+  {
+   "t0": 393.66,
+   "t1": 398.7,
+   "text": "By half past nine, Das Parlament, the publication of the German Bundestag,",
+   "kind": "story",
+   "para": 8,
+   "part": "p09"
+  },
+  {
+   "t0": 398.78,
+   "t1": 402.86,
+   "text": "counts between 500 and 1,000 people at the crossing.",
+   "kind": "story",
+   "para": 8,
+   "part": "p09"
+  },
+  {
+   "t0": 403.34,
+   "t1": 408.22,
+   "text": "German Wikipedia gives nearly 1,000 by the moment the barrier opened,",
+   "kind": "story",
+   "para": 8,
+   "part": "p09"
+  },
+  {
+   "t0": 408.3,
+   "t1": 410.86,
+   "text": "citing the historian Hans-Hermann Hertle.",
+   "kind": "story",
+   "para": 8,
+   "part": "p09"
+  },
+  {
+   "t0": 411.34,
+   "t1": 414.3,
+   "text": "The first people had left with stamped papers,",
+   "kind": "story",
+   "para": 8,
+   "part": "p09"
+  },
+  {
+   "t0": 414.38,
+   "t1": 418.3,
+   "text": "the crowd was still growing, and the barrier was still down.",
+   "kind": "story",
+   "para": 8,
+   "part": "p09"
+  },
+  {
+   "t0": 418.54,
+   "t1": 419.66,
+   "text": "On the other side of it,",
+   "kind": "story",
+   "para": 8,
+   "part": "p09"
+  },
+  {
+   "t0": 419.74,
+   "t1": 422.14,
+   "text": "the officers had to decide what to do.",
+   "kind": "story",
+   "para": 8,
+   "part": "p09"
+  },
+  {
+   "t0": 422.38,
+   "t1": 425.26,
+   "text": "What orders did they have, and who would give them?",
+   "kind": "story",
+   "para": 8,
+   "part": "p09"
+  },
+  {
+   "t0": 426.38,
+   "t1": 430.14,
+   "text": "Quick break. I'm Yusuf, and this is Walk of Berlin.",
+   "kind": "spot",
+   "para": 9,
+   "part": "[[SPOT-A]]"
+  },
+  {
+   "t0": 430.54,
+   "t1": 432.46,
+   "text": "If you enjoy stories like this one,",
+   "kind": "spot",
+   "para": 9,
+   "part": "[[SPOT-A]]"
+  },
+  {
+   "t0": 432.54,
+   "t1": 433.9,
+   "text": "come and walk one with me.",
+   "kind": "spot",
+   "para": 9,
+   "part": "[[SPOT-A]]"
+  },
+  {
+   "t0": 434.14,
+   "t1": 436.18,
+   "text": "My walk, Berlin Then and Now,",
+   "kind": "spot",
+   "para": 9,
+   "part": "[[SPOT-A]]"
+  },
+  {
+   "t0": 436.3,
+   "t1": 439.9,
+   "text": "goes from the World Clock on Alexanderplatz to Hackescher Markt,",
+   "kind": "spot",
+   "para": 9,
+   "part": "[[SPOT-A]]"
+  },
+  {
+   "t0": 439.98,
+   "t1": 442.38,
+   "text": "with an archive photo at every stop.",
+   "kind": "spot",
+   "para": 9,
+   "part": "[[SPOT-A]]"
+  },
+  {
+   "t0": 442.42,
+   "t1": 445.02,
+   "text": "You'll find it at walk of berlin dot com.",
+   "kind": "spot",
+   "para": 9,
+   "part": "[[SPOT-A]]",
+   "display": "You'll find it at walkofberlin.com."
+  },
+  {
+   "t0": 446.18,
+   "t1": 450.58,
+   "text": "Harald Jäger was a lieutenant colonel, according to Das Parlament,",
+   "kind": "story",
+   "para": 10,
+   "part": "p10"
+  },
+  {
+   "t0": 450.7,
+   "t1": 453.46,
+   "text": "and the officer in charge of the crossing that night.",
+   "kind": "story",
+   "para": 10,
+   "part": "p10"
+  },
+  {
+   "t0": 454.18,
+   "t1": 457.94,
+   "text": "Around half past eleven, he gave the order to open the barrier.",
+   "kind": "story",
+   "para": 10,
+   "part": "p10"
+  },
+  {
+   "t0": 458.5,
+   "t1": 461.22,
+   "text": "Das Parlament says he did it because of the pressure",
+   "kind": "story",
+   "para": 10,
+   "part": "p10"
+  },
+  {
+   "t0": 461.26,
+   "t1": 464.66,
+   "text": "of the crowd. German Wikipedia says he acted",
+   "kind": "story",
+   "para": 10,
+   "part": "p10"
+  },
+  {
+   "t0": 464.74,
+   "t1": 467.94,
+   "text": "on his own initiative and against his orders.",
+   "kind": "story",
+   "para": 10,
+   "part": "p10"
+  },
+  {
+   "t0": 468.42,
+   "t1": 470.9,
+   "text": "So the gate that opened that night was opened",
+   "kind": "story",
+   "para": 10,
+   "part": "p10"
+  },
+  {
+   "t0": 470.98,
+   "t1": 473.86,
+   "text": "by an officer who had no answer from above,",
+   "kind": "story",
+   "para": 10,
+   "part": "p10"
+  },
+  {
+   "t0": 474.02,
+   "t1": 476.98,
+   "text": "and who decided at the barrier itself.",
+   "kind": "story",
+   "para": 10,
+   "part": "p10"
+  },
+  {
+   "t0": 477.14,
+   "t1": 480.82,
+   "text": "Orte der Einheit says that his superiors knew nothing,",
+   "kind": "story",
+   "para": 10,
+   "part": "p10"
+  },
+  {
+   "t0": 480.9,
+   "t1": 483.46,
+   "text": "and that the commanders had received no information",
+   "kind": "story",
+   "para": 10,
+   "part": "p10"
+  },
+  {
+   "t0": 483.62,
+   "t1": 485.62,
+   "text": "or orders from above on the matter.",
+   "kind": "story",
+   "para": 10,
+   "part": "p10"
+  },
+  {
+   "t0": 486.14,
+   "t1": 489.34,
+   "text": "Late that evening, the Tagesthemen was on the air,",
+   "kind": "story",
+   "para": 11,
+   "part": "p11"
+  },
+  {
+   "t0": 489.38,
+   "t1": 493.42,
+   "text": "and its presenter Hanns Joachim Friedrichs said: “Dieser 9.",
+   "kind": "story",
+   "para": 11,
+   "part": "p11"
+  },
+  {
+   "t0": 493.5,
+   "t1": 496.06,
+   "text": "November ist ein historischer Tag.”",
+   "kind": "story",
+   "para": 11,
+   "part": "p11"
+  },
+  {
+   "t0": 496.46,
+   "t1": 499.78,
+   "text": "This 9 November is a historic day.",
+   "kind": "story",
+   "para": 11,
+   "part": "p11"
+  },
+  {
+   "t0": 500.14,
+   "t1": 502.3,
+   "text": "The line is quoted in the Federal Government’s",
+   "kind": "story",
+   "para": 11,
+   "part": "p11"
+  },
+  {
+   "t0": 502.38,
+   "t1": 504.94,
+   "text": "archive and in German Wikipedia.",
+   "kind": "story",
+   "para": 11,
+   "part": "p11"
+  },
+  {
+   "t0": 505.5,
+   "t1": 509.5,
+   "text": "Three accounts give three minutes for the barrier: 11:14 p.m.",
+   "kind": "story",
+   "para": 11,
+   "part": "p11"
+  },
+  {
+   "t0": 509.66,
+   "t1": 514.06,
+   "text": "from the Federal Agency for Civic Education, 11:29 p.m.",
+   "kind": "story",
+   "para": 11,
+   "part": "p11"
+  },
+  {
+   "t0": 514.22,
+   "t1": 519.1,
+   "text": "from German Wikipedia, and half past eleven from Das Parlament.",
+   "kind": "story",
+   "para": 11,
+   "part": "p11"
+  },
+  {
+   "t0": 519.42,
+   "t1": 524.14,
+   "text": "German Wikipedia’s account of Jäger also cites 23:07.",
+   "kind": "story",
+   "para": 11,
+   "part": "p11"
+  },
+  {
+   "t0": 524.18,
+   "t1": 528.7,
+   "text": "The exact minute is open to argument. The evening is not.",
+   "kind": "story",
+   "para": 11,
+   "part": "p11"
+  },
+  {
+   "t0": 529.22,
+   "t1": 533.62,
+   "text": "Thousands pressed against the guards, according to the Berliner Zeitung,",
+   "kind": "story",
+   "para": 12,
+   "part": "p12"
+  },
+  {
+   "t0": 533.7,
+   "t1": 536.26,
+   "text": "and the guards stepped aside at a codeword.",
+   "kind": "story",
+   "para": 12,
+   "part": "p12"
+  },
+  {
+   "t0": 536.82,
+   "t1": 541.54,
+   "text": "The Berliner Zeitung describes the crowd as pressing the soldiers to finally",
+   "kind": "story",
+   "para": 12,
+   "part": "p12"
+  },
+  {
+   "t0": 541.7,
+   "t1": 545.34,
+   "text": "open the way to the West after the announcements on television.",
+   "kind": "story",
+   "para": 12,
+   "part": "p12"
+  },
+  {
+   "t0": 545.62,
+   "t1": 550.98,
+   "text": "The memorial foundation records the words “Wir fluten jetzt” at that moment,",
+   "kind": "story",
+   "para": 12,
+   "part": "p12"
+  },
+  {
+   "t0": 551.06,
+   "t1": 554.5,
+   "text": "which means something like “now the floodgates open”,",
+   "kind": "story",
+   "para": 12,
+   "part": "p12"
+  },
+  {
+   "t0": 554.58,
+   "t1": 557.34,
+   "text": "and says the barrier was raised after that.",
+   "kind": "story",
+   "para": 12,
+   "part": "p12"
+  },
+  {
+   "t0": 557.62,
+   "t1": 560.26,
+   "text": "The foundation counts two hours from the first",
+   "kind": "story",
+   "para": 12,
+   "part": "p12"
+  },
+  {
+   "t0": 560.34,
+   "t1": 562.74,
+   "text": "stamps to the moment the barrier rose.",
+   "kind": "story",
+   "para": 12,
+   "part": "p12"
+  },
+  {
+   "t0": 563.14,
+   "t1": 566.5,
+   "text": "The Berliner Zeitung places the opening late that evening,",
+   "kind": "story",
+   "para": 12,
+   "part": "p12"
+  },
+  {
+   "t0": 566.66,
+   "t1": 567.94,
+   "text": "around half past eleven.",
+   "kind": "story",
+   "para": 12,
+   "part": "p12"
+  },
+  {
+   "t0": 568.42,
+   "t1": 571.54,
+   "text": "Each of these minutes belongs to the same evening:",
+   "kind": "story",
+   "para": 12,
+   "part": "p12"
+  },
+  {
+   "t0": 571.62,
+   "t1": 573.94,
+   "text": "21:20 for the first stamps,",
+   "kind": "story",
+   "para": 12,
+   "part": "p12"
+  },
+  {
+   "t0": 573.98,
+   "t1": 576.5,
+   "text": "and around half past eleven for the barrier.",
+   "kind": "story",
+   "para": 12,
+   "part": "p12"
+  },
+  {
+   "t0": 577.02,
+   "t1": 580.3,
+   "text": "The barrier went up, and on the bridge the people who had",
+   "kind": "story",
+   "para": 13,
+   "part": "p13"
+  },
+  {
+   "t0": 580.38,
+   "t1": 584.02,
+   "text": "crossed were now heading into Wedding, on the western side.",
+   "kind": "story",
+   "para": 13,
+   "part": "p13"
+  },
+  {
+   "t0": 584.3,
+   "t1": 587.42,
+   "text": "The Stiftung says that in the hour that followed around",
+   "kind": "story",
+   "para": 13,
+   "part": "p13"
+  },
+  {
+   "t0": 587.5,
+   "t1": 591.54,
+   "text": "20,000 people crossed the Bösebrücke without a check.",
+   "kind": "story",
+   "para": 13,
+   "part": "p13"
+  },
+  {
+   "t0": 591.82,
+   "t1": 595.5,
+   "text": "The Berliner Zeitung gives more than 20,000 in the first hour.",
+   "kind": "story",
+   "para": 13,
+   "part": "p13"
+  },
+  {
+   "t0": 595.98,
+   "t1": 600.86,
+   "text": "German Wikipedia’s account of Jäger gives 23:30 to 00:15",
+   "kind": "story",
+   "para": 13,
+   "part": "p13"
+  },
+  {
+   "t0": 601.18,
+   "t1": 605.34,
+   "text": "for an estimated 20,000 people crossing into West Berlin,",
+   "kind": "story",
+   "para": 13,
+   "part": "p13"
+  },
+  {
+   "t0": 605.46,
+   "t1": 608.7,
+   "text": "and Orte der Einheit gives the same order of size in",
+   "kind": "story",
+   "para": 13,
+   "part": "p13"
+  },
+  {
+   "t0": 608.78,
+   "t1": 611.1,
+   "text": "the three quarters of an hour after the opening.",
+   "kind": "story",
+   "para": 13,
+   "part": "p13"
+  },
+  {
+   "t0": 611.58,
+   "t1": 613.82,
+   "text": "Those figures agree on the scale.",
+   "kind": "story",
+   "para": 13,
+   "part": "p13"
+  },
+  {
+   "t0": 614.14,
+   "t1": 618.46,
+   "text": "From here the night moves in minutes, and the minutes matter,",
+   "kind": "story",
+   "para": 13,
+   "part": "p13"
+  },
+  {
+   "t0": 618.58,
+   "t1": 621.42,
+   "text": "because the crowd at the barrier was still arriving.",
+   "kind": "story",
+   "para": 13,
+   "part": "p13"
+  },
+  {
+   "t0": 621.94,
+   "t1": 625.3,
+   "text": "At the Brandenburg Gate and on the Kurfürstendamm,",
+   "kind": "story",
+   "para": 14,
+   "part": "p14"
+  },
+  {
+   "t0": 625.38,
+   "t1": 630.74,
+   "text": "the Federal Government describes a large gathering, with people embracing one another.",
+   "kind": "story",
+   "para": 14,
+   "part": "p14"
+  },
+  {
+   "t0": 631.14,
+   "t1": 636.18,
+   "text": "The Federal Government’s photo series also carries a picture captioned “Sofort!",
+   "kind": "story",
+   "para": 14,
+   "part": "p14"
+  },
+  {
+   "t0": 636.34,
+   "t1": 641.14,
+   "text": "Unverzüglich!” and dated 9 November 1989.",
+   "kind": "story",
+   "para": 14,
+   "part": "p14"
+  },
+  {
+   "t0": 641.22,
+   "t1": 644.5,
+   "text": "The words are the ones Schabowski had used in the hall,",
+   "kind": "story",
+   "para": 14,
+   "part": "p14"
+  },
+  {
+   "t0": 644.58,
+   "t1": 647.78,
+   "text": "and the photo series gives no clock time for the caption.",
+   "kind": "story",
+   "para": 14,
+   "part": "p14"
+  },
+  {
+   "t0": 648.42,
+   "t1": 652.5,
+   "text": "The Brandenburg Gate was a different place from the Bornholmer crossing,",
+   "kind": "story",
+   "para": 14,
+   "part": "p14"
+  },
+  {
+   "t0": 652.58,
+   "t1": 656.1,
+   "text": "but on this evening the same news reached both of them.",
+   "kind": "story",
+   "para": 14,
+   "part": "p14"
+  },
+  {
+   "t0": 656.42,
+   "t1": 659.54,
+   "text": "Keep the Brandenburg Gate in mind beside the bridge,",
+   "kind": "story",
+   "para": 14,
+   "part": "p14"
+  },
+  {
+   "t0": 659.66,
+   "t1": 662.66,
+   "text": "because both places were part of the same night.",
+   "kind": "story",
+   "para": 14,
+   "part": "p14"
+  },
+  {
+   "t0": 663.18,
+   "t1": 667.26,
+   "text": "By midnight, the other border crossings in Berlin were also open,",
+   "kind": "story",
+   "para": 15,
+   "part": "p15"
+  },
+  {
+   "t0": 667.5,
+   "t1": 672.06,
+   "text": "according to Orte der Einheit. Berlin’s heritage office says Bornholmer",
+   "kind": "story",
+   "para": 15,
+   "part": "p15"
+  },
+  {
+   "t0": 672.22,
+   "t1": 674.62,
+   "text": "Straße was the first of them to open,",
+   "kind": "story",
+   "para": 15,
+   "part": "p15"
+  },
+  {
+   "t0": 674.7,
+   "t1": 676.86,
+   "text": "and that the rest followed during the night.",
+   "kind": "story",
+   "para": 15,
+   "part": "p15"
+  },
+  {
+   "t0": 677.34,
+   "t1": 680.14,
+   "text": "The Federal Government’s account says the guards opened",
+   "kind": "story",
+   "para": 15,
+   "part": "p15"
+  },
+  {
+   "t0": 680.18,
+   "t1": 682.78,
+   "text": "the crossing under the pressure of the crowd,",
+   "kind": "story",
+   "para": 15,
+   "part": "p15"
+  },
+  {
+   "t0": 682.86,
+   "t1": 685.1,
+   "text": "and Das Parlament says the officer did it",
+   "kind": "story",
+   "para": 15,
+   "part": "p15"
+  },
+  {
+   "t0": 685.22,
+   "t1": 687.34,
+   "text": "because of the crush at the barrier.",
+   "kind": "story",
+   "para": 15,
+   "part": "p15"
+  },
+  {
+   "t0": 687.46,
+   "t1": 690.62,
+   "text": "Both accounts put the crowd at the centre of the decision,",
+   "kind": "story",
+   "para": 15,
+   "part": "p15"
+  },
+  {
+   "t0": 690.7,
+   "t1": 692.46,
+   "text": "and both name the pressure of the",
+   "kind": "story",
+   "para": 15,
+   "part": "p15"
+  },
+  {
+   "t0": 692.74,
+   "t1": 695.02,
+   "text": "people as the reason the gate moved.",
+   "kind": "story",
+   "para": 15,
+   "part": "p15"
+  },
+  {
+   "t0": 695.54,
+   "t1": 697.94,
+   "text": "The next morning, 10 November,",
+   "kind": "story",
+   "para": 16,
+   "part": "p16"
+  },
+  {
+   "t0": 697.98,
+   "t1": 702.74,
+   "text": "the Federal Government’s photo series describes thousands of people gathered in front",
+   "kind": "story",
+   "para": 16,
+   "part": "p16"
+  },
+  {
+   "t0": 702.82,
+   "t1": 705.94,
+   "text": "of and on the Wall at the Brandenburg Gate.",
+   "kind": "story",
+   "para": 16,
+   "part": "p16"
+  },
+  {
+   "t0": 706.66,
+   "t1": 709.06,
+   "text": "The people who climbed onto the wall are called",
+   "kind": "story",
+   "para": 16,
+   "part": "p16"
+  },
+  {
+   "t0": 709.3,
+   "t1": 713.82,
+   "text": "Mauerspechte in that account, which means wall woodpeckers.",
+   "kind": "story",
+   "para": 16,
+   "part": "p16"
+  },
+  {
+   "t0": 714.18,
+   "t1": 718.02,
+   "text": "The East German People’s Police officers facing them are described as",
+   "kind": "story",
+   "para": 16,
+   "part": "p16"
+  },
+  {
+   "t0": 718.26,
+   "t1": 721.22,
+   "text": "at a loss, and the photo series speaks of",
+   "kind": "story",
+   "para": 16,
+   "part": "p16"
+  },
+  {
+   "t0": 721.3,
+   "t1": 723.62,
+   "text": "the many people on top of the wall.",
+   "kind": "story",
+   "para": 16,
+   "part": "p16"
+  },
+  {
+   "t0": 724.34,
+   "t1": 727.86,
+   "text": "The photo series adds that more and more people continued the",
+   "kind": "story",
+   "para": 16,
+   "part": "p16"
+  },
+  {
+   "t0": 727.94,
+   "t1": 730.98,
+   "text": "work the next day, and the photo series dates the",
+   "kind": "story",
+   "para": 16,
+   "part": "p16"
+  },
+  {
+   "t0": 731.06,
+   "t1": 733.7,
+   "text": "wall scene to the morning after the opening.",
+   "kind": "story",
+   "para": 16,
+   "part": "p16"
+  },
+  {
+   "t0": 734.26,
+   "t1": 736.74,
+   "text": "The photo series does not name the first",
+   "kind": "story",
+   "para": 16,
+   "part": "p16"
+  },
+  {
+   "t0": 736.82,
+   "t1": 738.74,
+   "text": "people who climbed onto the wall.",
+   "kind": "story",
+   "para": 16,
+   "part": "p16"
+  },
+  {
+   "t0": 739.26,
+   "t1": 741.26,
+   "text": "On the morning of 10 November,",
+   "kind": "story",
+   "para": 17,
+   "part": "p17"
+  },
+  {
+   "t0": 741.3,
+   "t1": 745.98,
+   "text": "the Bundesarchiv’s photo caption at Bornholmer Straße shows another scene.",
+   "kind": "story",
+   "para": 17,
+   "part": "p17"
+  },
+  {
+   "t0": 746.46,
+   "t1": 748.78,
+   "text": "The caption, dated 10 November 1989,",
+   "kind": "story",
+   "para": 17,
+   "part": "p17"
+  },
+  {
+   "t0": 748.82,
+   "t1": 753.98,
+   "text": "says that pupils from the West Berlin district of Wedding formed",
+   "kind": "story",
+   "para": 17,
+   "part": "p17"
+  },
+  {
+   "t0": 754.02,
+   "t1": 757.42,
+   "text": "a lane on the Böse-Brücke at Bornholmer Straße,",
+   "kind": "story",
+   "para": 17,
+   "part": "p17"
+  },
+  {
+   "t0": 757.5,
+   "t1": 760.78,
+   "text": "and gave the visitors from the GDR a first welcome.",
+   "kind": "story",
+   "para": 17,
+   "part": "p17"
+  },
+  {
+   "t0": 761.42,
+   "t1": 764.38,
+   "text": "Wedding lies on the western side of the old border.",
+   "kind": "story",
+   "para": 17,
+   "part": "p17"
+  },
+  {
+   "t0": 765.02,
+   "t1": 768.46,
+   "text": "The Bundesarchiv’s description of the photograph adds a crowd",
+   "kind": "story",
+   "para": 17,
+   "part": "p17"
+  },
+  {
+   "t0": 768.54,
+   "t1": 771.26,
+   "text": "with banners and a Trabant on the Böse-Brücke.",
+   "kind": "story",
+   "para": 17,
+   "part": "p17"
+  },
+  {
+   "t0": 771.74,
+   "t1": 775.66,
+   "text": "The photo agency credit on the picture is ADN,",
+   "kind": "story",
+   "para": 17,
+   "part": "p17"
+  },
+  {
+   "t0": 775.7,
+   "t1": 780.06,
+   "text": "and the Bundesarchiv notes that original captions can be outdated,",
+   "kind": "story",
+   "para": 17,
+   "part": "p17"
+  },
+  {
+   "t0": 780.14,
+   "t1": 783.74,
+   "text": "so the date and the words stay as the caption gives them.",
+   "kind": "story",
+   "para": 17,
+   "part": "p17"
+  },
+  {
+   "t0": 784.26,
+   "t1": 786.34,
+   "text": "The crossing had a place in the story",
+   "kind": "story",
+   "para": 18,
+   "part": "p18"
+  },
+  {
+   "t0": 786.42,
+   "t1": 788.78,
+   "text": "before the children formed their lane.",
+   "kind": "story",
+   "para": 18,
+   "part": "p18"
+  },
+  {
+   "t0": 789.06,
+   "t1": 792.66,
+   "text": "According to the district’s page, this crossing was the first",
+   "kind": "story",
+   "para": 18,
+   "part": "p18"
+  },
+  {
+   "t0": 792.7,
+   "t1": 795.3,
+   "text": "to open again for citizens of the GDR.",
+   "kind": "story",
+   "para": 18,
+   "part": "p18"
+  },
+  {
+   "t0": 795.86,
+   "t1": 798.9,
+   "text": "The Stiftung Berliner Mauer adds that the first East",
+   "kind": "story",
+   "para": 18,
+   "part": "p18"
+  },
+  {
+   "t0": 798.98,
+   "t1": 802.62,
+   "text": "Germans could leave for West Berlin here that night.",
+   "kind": "story",
+   "para": 18,
+   "part": "p18"
+  },
+  {
+   "t0": 803.06,
+   "t1": 806.34,
+   "text": "The bridge that carried the first people over is the same",
+   "kind": "story",
+   "para": 18,
+   "part": "p18"
+  },
+  {
+   "t0": 806.42,
+   "t1": 809.3,
+   "text": "bridge the children lined on the following morning,",
+   "kind": "story",
+   "para": 18,
+   "part": "p18"
+  },
+  {
+   "t0": 809.38,
+   "t1": 813.38,
+   "text": "and the crossing that had been built after 1961 became,",
+   "kind": "story",
+   "para": 18,
+   "part": "p18"
+  },
+  {
+   "t0": 813.46,
+   "t1": 817.38,
+   "text": "in those hours, the place where the border first gave way.",
+   "kind": "story",
+   "para": 18,
+   "part": "p18"
+  },
+  {
+   "t0": 818.26,
+   "t1": 821.14,
+   "text": "So the first night ends at a bridge,",
+   "kind": "story",
+   "para": 18,
+   "part": "p18"
+  },
+  {
+   "t0": 821.18,
+   "t1": 823.86,
+   "text": "and the next day begins with children lining it.",
+   "kind": "story",
+   "para": 18,
+   "part": "p18"
+  },
+  {
+   "t0": 824.42,
+   "t1": 827.86,
+   "text": "Was that the whole night, or only the opening move?",
+   "kind": "story",
+   "para": 18,
+   "part": "p18"
+  },
+  {
+   "t0": 828.98,
+   "t1": 832.5,
+   "text": "Yusuf again, one more thing before the story goes on.",
+   "kind": "spot",
+   "para": 19,
+   "part": "[[SPOT-B]]"
+  },
+  {
+   "t0": 832.74,
+   "t1": 834.58,
+   "text": "If you can't join me in person,",
+   "kind": "spot",
+   "para": 19,
+   "part": "[[SPOT-B]]"
+  },
+  {
+   "t0": 834.7,
+   "t1": 837.14,
+   "text": "my audio walks take you along the Berlin Wall at",
+   "kind": "spot",
+   "para": 19,
+   "part": "[[SPOT-B]]"
+  },
+  {
+   "t0": 837.22,
+   "t1": 840.42,
+   "text": "Bernauer Straße and through the medieval old town,",
+   "kind": "spot",
+   "para": 19,
+   "part": "[[SPOT-B]]"
+  },
+  {
+   "t0": 840.5,
+   "t1": 842.66,
+   "text": "at your own pace, on your phone.",
+   "kind": "spot",
+   "para": 19,
+   "part": "[[SPOT-B]]"
+  },
+  {
+   "t0": 842.7,
+   "t1": 844.9,
+   "text": "They're at walk of berlin dot com.",
+   "kind": "spot",
+   "para": 19,
+   "part": "[[SPOT-B]]",
+   "display": "They're at walkofberlin.com."
+  },
+  {
+   "t0": 846.06,
+   "t1": 849.18,
+   "text": "Now the place itself. The Platz des 9.",
+   "kind": "story",
+   "para": 20,
+   "part": "p19"
+  },
+  {
+   "t0": 849.34,
+   "t1": 854.7,
+   "text": "November 1989 sits at the Bösebrücke end of Bornholmer Straße,",
+   "kind": "story",
+   "para": 20,
+   "part": "p19"
+  },
+  {
+   "t0": 854.78,
+   "t1": 857.9,
+   "text": "right in front of the bridge where the crossing used to be.",
+   "kind": "story",
+   "para": 20,
+   "part": "p19"
+  },
+  {
+   "t0": 858.22,
+   "t1": 862.78,
+   "text": "The Bezirksamt Pankow describes metal reliefs set into the pavement.",
+   "kind": "story",
+   "para": 20,
+   "part": "p19"
+  },
+  {
+   "t0": 863.34,
+   "t1": 865.5,
+   "text": "They depict the events of that evening,",
+   "kind": "story",
+   "para": 20,
+   "part": "p19"
+  },
+  {
+   "t0": 865.62,
+   "t1": 870.62,
+   "text": "from Schabowski’s press conference to the first border opening forced by citizens.",
+   "kind": "story",
+   "para": 20,
+   "part": "p19"
+  },
+  {
+   "t0": 871.26,
+   "t1": 874.22,
+   "text": "The Stiftung Berliner Mauer calls the square an",
+   "kind": "story",
+   "para": 20,
+   "part": "p19"
+  },
+  {
+   "t0": 874.38,
+   "t1": 877.42,
+   "text": "open-air exhibition on the historic events.",
+   "kind": "story",
+   "para": 20,
+   "part": "p19"
+  },
+  {
+   "t0": 877.74,
+   "t1": 880.06,
+   "text": "So the place is more than a memorial.",
+   "kind": "story",
+   "para": 20,
+   "part": "p19"
+  },
+  {
+   "t0": 880.38,
+   "t1": 883.1,
+   "text": "It is a set of pieces you can read in order,",
+   "kind": "story",
+   "para": 20,
+   "part": "p19"
+  },
+  {
+   "t0": 883.18,
+   "t1": 885.66,
+   "text": "and each of them is about the same night.",
+   "kind": "story",
+   "para": 20,
+   "part": "p19"
+  },
+  {
+   "t0": 885.98,
+   "t1": 888.46,
+   "text": "Walk along the reliefs slowly, and you will see",
+   "kind": "story",
+   "para": 20,
+   "part": "p19"
+  },
+  {
+   "t0": 888.54,
+   "t1": 891.82,
+   "text": "the evening laid out from the press conference onward.",
+   "kind": "story",
+   "para": 20,
+   "part": "p19"
+  },
+  {
+   "t0": 892.14,
+   "t1": 895.5,
+   "text": "Take the reliefs in order from the first to the last,",
+   "kind": "story",
+   "para": 20,
+   "part": "p19"
+  },
+  {
+   "t0": 895.66,
+   "t1": 898.46,
+   "text": "then turn around and walk back slowly.",
+   "kind": "story",
+   "para": 20,
+   "part": "p19"
+  },
+  {
+   "t0": 898.98,
+   "t1": 902.42,
+   "text": "Three illuminated information boards on the square tell the",
+   "kind": "story",
+   "para": 21,
+   "part": "p20"
+  },
+  {
+   "t0": 902.5,
+   "t1": 904.82,
+   "text": "story of the Wall and of the crossing",
+   "kind": "story",
+   "para": 21,
+   "part": "p20"
+  },
+  {
+   "t0": 904.9,
+   "t1": 909.62,
+   "text": "point that stood here from 1961 to 1989.",
+   "kind": "story",
+   "para": 21,
+   "part": "p20"
+  },
+  {
+   "t0": 909.7,
+   "t1": 912.5,
+   "text": "Beside them stays the remnant of the inner wall,",
+   "kind": "story",
+   "para": 21,
+   "part": "p20"
+  },
+  {
+   "t0": 912.58,
+   "t1": 915.78,
+   "text": "called the Vorlandmauer, which framed the crossing.",
+   "kind": "story",
+   "para": 21,
+   "part": "p20"
+  },
+  {
+   "t0": 916.34,
+   "t1": 919.38,
+   "text": "The foundation of a guard tower is also still there.",
+   "kind": "story",
+   "para": 21,
+   "part": "p20"
+  },
+  {
+   "t0": 920.02,
+   "t1": 924.98,
+   "text": "Berlin’s heritage office describes the inner wall stretch as a listed monument,",
+   "kind": "story",
+   "para": 21,
+   "part": "p20"
+  },
+  {
+   "t0": 925.1,
+   "t1": 927.7,
+   "text": "under protection since 2001,",
+   "kind": "story",
+   "para": 21,
+   "part": "p20"
+  },
+  {
+   "t0": 927.78,
+   "t1": 930.62,
+   "text": "and it is a short stretch you can touch.",
+   "kind": "story",
+   "para": 21,
+   "part": "p20"
+  },
+  {
+   "t0": 930.9,
+   "t1": 934.74,
+   "text": "The boards swivel, so you can turn them to read each side,",
+   "kind": "story",
+   "para": 21,
+   "part": "p20"
+  },
+  {
+   "t0": 934.82,
+   "t1": 936.42,
+   "text": "and the remnant is the part of the",
+   "kind": "story",
+   "para": 21,
+   "part": "p20"
+  },
+  {
+   "t0": 936.5,
+   "t1": 938.5,
+   "text": "border that is still standing.",
+   "kind": "story",
+   "para": 21,
+   "part": "p20"
+  },
+  {
+   "t0": 939.02,
+   "t1": 942.26,
+   "text": "Eight Japanese cherry trees stand on the square.",
+   "kind": "story",
+   "para": 22,
+   "part": "p21"
+  },
+  {
+   "t0": 942.54,
+   "t1": 946.14,
+   "text": "The district says they symbolise the crowds of citizens and",
+   "kind": "story",
+   "para": 22,
+   "part": "p21"
+  },
+  {
+   "t0": 946.26,
+   "t1": 948.5,
+   "text": "their joy at the opening of the border.",
+   "kind": "story",
+   "para": 22,
+   "part": "p21"
+  },
+  {
+   "t0": 948.78,
+   "t1": 951.26,
+   "text": "The trees are part of a wider planting.",
+   "kind": "story",
+   "para": 22,
+   "part": "p21"
+  },
+  {
+   "t0": 951.5,
+   "t1": 956.3,
+   "text": "According to the same district page, Japan gave money in 1990 for",
+   "kind": "story",
+   "para": 22,
+   "part": "p21"
+  },
+  {
+   "t0": 956.38,
+   "t1": 961.02,
+   "text": "a green band of Japanese cherry trees along the former death strip,",
+   "kind": "story",
+   "para": 22,
+   "part": "p21"
+  },
+  {
+   "t0": 961.1,
+   "t1": 965.42,
+   "text": "and more cherry trees line the routes from the Mauerpark through Rosenthal.",
+   "kind": "story",
+   "para": 22,
+   "part": "p21"
+  },
+  {
+   "t0": 965.74,
+   "t1": 969.18,
+   "text": "The trees on the square are the ones that mark the crowd,",
+   "kind": "story",
+   "para": 22,
+   "part": "p21"
+  },
+  {
+   "t0": 969.26,
+   "t1": 971.62,
+   "text": "while the reliefs mark the evening.",
+   "kind": "story",
+   "para": 22,
+   "part": "p21"
+  },
+  {
+   "t0": 971.98,
+   "t1": 974.94,
+   "text": "Stand among the trees for a minute, and let the reliefs",
+   "kind": "story",
+   "para": 22,
+   "part": "p21"
+  },
+  {
+   "t0": 975.02,
+   "t1": 979.02,
+   "text": "and the trees tell you the same story from different sides.",
+   "kind": "story",
+   "para": 22,
+   "part": "p21"
+  },
+  {
+   "t0": 979.54,
+   "t1": 982.74,
+   "text": "The bridge itself has a longer history than the border.",
+   "kind": "story",
+   "para": 23,
+   "part": "p22"
+  },
+  {
+   "t0": 983.22,
+   "t1": 987.38,
+   "text": "The Bösebrücke was built in 1916 under another name,",
+   "kind": "story",
+   "para": 23,
+   "part": "p22"
+  },
+  {
+   "t0": 987.46,
+   "t1": 991.14,
+   "text": "the Hindenburgbrücke, according to Berlin’s district site,",
+   "kind": "story",
+   "para": 23,
+   "part": "p22"
+  },
+  {
+   "t0": 991.18,
+   "t1": 993.86,
+   "text": "and a second source gives the same name and date.",
+   "kind": "story",
+   "para": 23,
+   "part": "p22"
+  },
+  {
+   "t0": 994.42,
+   "t1": 998.42,
+   "text": "In 1948 it was renamed after Wilhelm Böse,",
+   "kind": "story",
+   "para": 23,
+   "part": "p22"
+  },
+  {
+   "t0": 998.5,
+   "t1": 1003.22,
+   "text": "a communist anti-fascist who was murdered in 1944.",
+   "kind": "story",
+   "para": 23,
+   "part": "p22"
+  },
+  {
+   "t0": 1003.26,
+   "t1": 1006.7,
+   "text": "The Wall ran close to it for twenty-eight years.",
+   "kind": "story",
+   "para": 23,
+   "part": "p22"
+  },
+  {
+   "t0": 1007.14,
+   "t1": 1012.02,
+   "text": "In November 2014, a temporary installation called Lichtgrenze,",
+   "kind": "story",
+   "para": 23,
+   "part": "p22"
+  },
+  {
+   "t0": 1012.06,
+   "t1": 1016.66,
+   "text": "a line of illuminated balloons, followed the old border through the city,",
+   "kind": "story",
+   "para": 23,
+   "part": "p22"
+  },
+  {
+   "t0": 1016.74,
+   "t1": 1019.78,
+   "text": "and the Böse-Brücke at Bornholmer Straße was one of",
+   "kind": "story",
+   "para": 23,
+   "part": "p22"
+  },
+  {
+   "t0": 1019.9,
+   "t1": 1022.66,
+   "text": "its planned sites for 7 to 9 November.",
+   "kind": "story",
+   "para": 23,
+   "part": "p22"
+  },
+  {
+   "t0": 1023.3,
+   "t1": 1026.74,
+   "text": "Between the bridge’s opening in 1916 and the Wall",
+   "kind": "story",
+   "para": 23,
+   "part": "p22"
+  },
+  {
+   "t0": 1026.82,
+   "t1": 1031.78,
+   "text": "in 1961 lie forty-five years of ordinary traffic.",
+   "kind": "story",
+   "para": 23,
+   "part": "p22"
+  },
+  {
+   "t0": 1032.3,
+   "t1": 1037.66,
+   "text": "Start at the S-Bahn station Bornholmer Straße, which sits at the Bösebrücke.",
+   "kind": "story",
+   "para": 24,
+   "part": "p23"
+  },
+  {
+   "t0": 1038.22,
+   "t1": 1040.7,
+   "text": "Walk out toward the bridge and the square,",
+   "kind": "story",
+   "para": 24,
+   "part": "p23"
+  },
+  {
+   "t0": 1040.78,
+   "t1": 1043.58,
+   "text": "and take your time before you reach the reliefs.",
+   "kind": "story",
+   "para": 24,
+   "part": "p23"
+  },
+  {
+   "t0": 1043.9,
+   "t1": 1046.22,
+   "text": "Read the reliefs one after another,",
+   "kind": "story",
+   "para": 24,
+   "part": "p23"
+  },
+  {
+   "t0": 1046.3,
+   "t1": 1049.1,
+   "text": "and let them show you the evening in order.",
+   "kind": "story",
+   "para": 24,
+   "part": "p23"
+  },
+  {
+   "t0": 1049.14,
+   "t1": 1052.78,
+   "text": "You do not need to read every line to understand the place.",
+   "kind": "story",
+   "para": 24,
+   "part": "p23"
+  },
+  {
+   "t0": 1052.82,
+   "t1": 1055.42,
+   "text": "The square is the right place to stand,",
+   "kind": "story",
+   "para": 24,
+   "part": "p23"
+  },
+  {
+   "t0": 1055.5,
+   "t1": 1058.54,
+   "text": "and the bridge is the thing you see while you do.",
+   "kind": "story",
+   "para": 24,
+   "part": "p23"
+  },
+  {
+   "t0": 1058.58,
+   "t1": 1060.3,
+   "text": "When you come up from the platform,",
+   "kind": "story",
+   "para": 24,
+   "part": "p23"
+  },
+  {
+   "t0": 1060.34,
+   "t1": 1062.7,
+   "text": "you are already close to the square.",
+   "kind": "story",
+   "para": 24,
+   "part": "p23"
+  },
+  {
+   "t0": 1062.78,
+   "t1": 1065.34,
+   "text": "Before you plan to cross the bridge on foot,",
+   "kind": "story",
+   "para": 24,
+   "part": "p23"
+  },
+  {
+   "t0": 1065.42,
+   "t1": 1068.86,
+   "text": "check whether its footpaths are open on the day you visit.",
+   "kind": "story",
+   "para": 24,
+   "part": "p23"
+  },
+  {
+   "t0": 1068.9,
+   "t1": 1072.38,
+   "text": "You can see the bridge from the square without walking onto it,",
+   "kind": "story",
+   "para": 24,
+   "part": "p23"
+  },
+  {
+   "t0": 1072.42,
+   "t1": 1075.86,
+   "text": "and the square gives you enough to picture the crossing that night.",
+   "kind": "story",
+   "para": 24,
+   "part": "p23"
+  },
+  {
+   "t0": 1076.14,
+   "t1": 1080.54,
+   "text": "Take a moment with the inner-wall remnant and the guard tower’s foundation,",
+   "kind": "story",
+   "para": 24,
+   "part": "p23"
+  },
+  {
+   "t0": 1080.62,
+   "t1": 1083.9,
+   "text": "which are part of the same border line that the crowd faced.",
+   "kind": "story",
+   "para": 24,
+   "part": "p23"
+  },
+  {
+   "t0": 1084.42,
+   "t1": 1089.14,
+   "text": "What is left today is a square, eight trees, three boards,",
+   "kind": "story",
+   "para": 25,
+   "part": "p24"
+  },
+  {
+   "t0": 1089.18,
+   "t1": 1092.74,
+   "text": "a piece of the inner wall and a guard tower’s foundation.",
+   "kind": "story",
+   "para": 25,
+   "part": "p24"
+  },
+  {
+   "t0": 1093.06,
+   "t1": 1095.54,
+   "text": "That is little for the length of one night.",
+   "kind": "story",
+   "para": 25,
+   "part": "p24"
+  },
+  {
+   "t0": 1096.18,
+   "t1": 1099.7,
+   "text": "The people who were stamped that evening went on with their lives,",
+   "kind": "story",
+   "para": 25,
+   "part": "p24"
+  },
+  {
+   "t0": 1099.78,
+   "t1": 1101.3,
+   "text": "and most of them do not appear in",
+   "kind": "story",
+   "para": 25,
+   "part": "p24"
+  },
+  {
+   "t0": 1101.38,
+   "t1": 1103.26,
+   "text": "the record past the crossing.",
+   "kind": "story",
+   "para": 25,
+   "part": "p24"
+  },
+  {
+   "t0": 1103.54,
+   "t1": 1107.54,
+   "text": "The square marks where those stories began, and it leaves the rest",
+   "kind": "story",
+   "para": 25,
+   "part": "p24"
+  },
+  {
+   "t0": 1107.58,
+   "t1": 1109.38,
+   "text": "of them to the people who lived them.",
+   "kind": "story",
+   "para": 25,
+   "part": "p24"
+  },
+  {
+   "t0": 1110.02,
+   "t1": 1112.5,
+   "text": "Stand in the one place where the wall,",
+   "kind": "story",
+   "para": 25,
+   "part": "p24"
+  },
+  {
+   "t0": 1112.54,
+   "t1": 1115.46,
+   "text": "the trees and the reliefs are close together,",
+   "kind": "story",
+   "para": 25,
+   "part": "p24"
+  },
+  {
+   "t0": 1115.54,
+   "t1": 1118.26,
+   "text": "and let the night come to you in order.",
+   "kind": "story",
+   "para": 25,
+   "part": "p24"
+  },
+  {
+   "t0": 1118.78,
+   "t1": 1121.82,
+   "text": "The place to stand is the square itself,",
+   "kind": "story",
+   "para": 26,
+   "part": "p25"
+  },
+  {
+   "t0": 1121.98,
+   "t1": 1124.62,
+   "text": "close to the reliefs, with the bridge in front of you.",
+   "kind": "story",
+   "para": 26,
+   "part": "p25"
+  },
+  {
+   "t0": 1125.26,
+   "t1": 1129.02,
+   "text": "Look back along Bornholmer Straße toward Prenzlauer Berg,",
+   "kind": "story",
+   "para": 26,
+   "part": "p25"
+  },
+  {
+   "t0": 1129.1,
+   "t1": 1132.54,
+   "text": "the side the crowd came from. Then turn and look at",
+   "kind": "story",
+   "para": 26,
+   "part": "p25"
+  },
+  {
+   "t0": 1132.62,
+   "t1": 1135.02,
+   "text": "the bridge that carried the first people over.",
+   "kind": "story",
+   "para": 26,
+   "part": "p25"
+  },
+  {
+   "t0": 1135.66,
+   "t1": 1138.54,
+   "text": "Stand there at about 9:20 in the evening,",
+   "kind": "story",
+   "para": 26,
+   "part": "p25"
+  },
+  {
+   "t0": 1138.58,
+   "t1": 1142.14,
+   "text": "the time the Federal Government gives for the first opening, and let",
+   "kind": "story",
+   "para": 26,
+   "part": "p25"
+  },
+  {
+   "t0": 1142.18,
+   "t1": 1145.82,
+   "text": "the reliefs show you what the evening looked like from that spot.",
+   "kind": "story",
+   "para": 26,
+   "part": "p25"
+  },
+  {
+   "t0": 1146.54,
+   "t1": 1149.98,
+   "text": "The night ended the next morning with children on the bridge,",
+   "kind": "story",
+   "para": 26,
+   "part": "p25"
+  },
+  {
+   "t0": 1150.02,
+   "t1": 1153.18,
+   "text": "and the square is where you can start that morning from.",
+   "kind": "story",
+   "para": 26,
+   "part": "p25"
+  },
+  {
+   "t0": 1154.3,
+   "t1": 1155.78,
+   "text": "That's this week's story.",
+   "kind": "spot",
+   "para": 27,
+   "part": "[[SPOT-C]]"
+  },
+  {
+   "t0": 1155.98,
+   "t1": 1159.1,
+   "text": "I'm Yusuf, and if you want to stand where it happened,",
+   "kind": "spot",
+   "para": 27,
+   "part": "[[SPOT-C]]"
+  },
+  {
+   "t0": 1159.18,
+   "t1": 1162.98,
+   "text": "my walks and audio walks are at walk of berlin dot com.",
+   "kind": "spot",
+   "para": 27,
+   "part": "[[SPOT-C]]",
+   "display": "my walks and audio walks are at walkofberlin.com."
+  },
+  {
+   "t0": 1163.26,
+   "t1": 1165.5,
+   "text": "Next week, another Berlin story.",
+   "kind": "spot",
+   "para": 27,
+   "part": "[[SPOT-C]]"
+  }
+ ]
+}
