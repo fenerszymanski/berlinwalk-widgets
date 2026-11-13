@@ -1,5 +1,9 @@
 // Design 2 UI dictionary, shared by the renderer and its coverage test.
 export const DESIGN2_TEXT = Object.freeze({
+ "Free":"Kostenlos",
+ "In English":"Auf Englisch",
+ "All in English":"Alle auf Englisch",
+ "My audio walks, guides and virtual tours are available in English.":"Meine Audiotouren, Guides und virtuellen Touren gibt es auf Englisch.",
   "No physical product is shipped. Your code and a printable card arrive by email, normally within the hour and no later than 24 hours after payment. You retain the 14-day consumer withdrawal right while the code is unused.": "Es wird kein physischer Artikel versendet. Dein Code und eine druckbare Karte kommen per E-Mail, normalerweise innerhalb einer Stunde und spätestens 24 Stunden nach der Zahlung. Solange der Code unbenutzt ist, bleibt dein 14-tägiges Verbraucher-Widerrufsrecht bestehen.",
   "Find your Berlin.": "Finde dein Berlin.",
   "Shop the prints": "Poster entdecken",

@@ -103,7 +103,7 @@ export const STORE_MENU_DESIGN2 = Object.freeze([
     {label:'Personal newspapers',de:'Persönliche Zeitungen',href:storeHref('newspapers')},
     {label:'1928 gift voucher',de:'1928-Gutschein',href:'https://walkofberlin.com/product-page/gift-your-berlin-street-in-1928-poster-gift'}
   ]},
-  {id:'explore',label:'Explore Berlin',de:'Berlin entdecken',href:storeHref('audio'),items:[
+  {id:'explore',label:'Explore Berlin',de:'Berlin entdecken',noteDe:'Alle auf Englisch',href:storeHref('audio'),items:[
     {label:'Audio walks',de:'Audiotouren',href:storeHref('audio')},
     {label:'Trip Planner',de:'Reiseplaner',href:'https://walkofberlin.com/berlin-trip-planner'},
     {label:'Guides & photo missions',de:'Guides & Foto-Missionen',href:storeHref('guides')},

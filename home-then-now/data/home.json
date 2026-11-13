@@ -1,5 +1,5 @@
 {
-  "release": "home-then-now-20261029",
+  "release": "home-then-now-20261113-slider",
   "hero": {
     "img1928": "assets/hero-1928.webp",
     "imgToday": "assets/hero-today.webp",
@@ -303,5 +303,183 @@
     "href": "https://www.walkofberlin.com/product-page/dein-berlin-2027-personalised-wall-calendar",
     "img": "assets/cal-feature.webp",
     "alt": "Illustrated preview of the Dein Berlin 2027 wall calendar on a wall, open at January with Chamissoplatz from above in 1928 and today"
-  }
+  },
+  "slides": [
+    {
+      "key": "1928",
+      "label": "1928",
+      "eyebrow": "OLD PHOTOS · TODAY'S STREETS",
+      "title": "Berlin, then and now.",
+      "lead": "Every reel I make starts with an old photograph and a place you can still stand on today. Your own street is in the 1928 aerial photos too.",
+      "cta": {
+        "text": "Find your street in 1928",
+        "href": "https://www.walkofberlin.com/product-page/your-berlin-street-in-1928-personalised-aerial-print-30-x-40-cm"
+      },
+      "visual": {
+        "type": "pair"
+      }
+    },
+    {
+      "key": "posters",
+      "label": "Posters",
+      "eyebrow": "POSTERS · PRINTED OR PRINT AT HOME",
+      "title": "Berlin on your wall.",
+      "lead": "Landmarks, districts and everyday Berlin corners. Printed and posted to you, or a file you print at home.",
+      "cta": {
+        "text": "Shop the posters",
+        "href": "https://www.walkofberlin.com/category/all-products?tab=print"
+      },
+      "cta2": {
+        "text": "See a few favourites",
+        "href": "#bwh-posters"
+      },
+      "visual": {
+        "type": "fan",
+        "items": [
+          {
+            "img": "assets/poster-siegessaeule.webp",
+            "alt": "Siegessäule poster in a room",
+            "w": 460,
+            "h": 575
+          },
+          {
+            "img": "assets/poster-berlin-in-pink.webp",
+            "alt": "Berlin in Pink poster in a room",
+            "w": 460,
+            "h": 575
+          },
+          {
+            "img": "assets/poster-kottbusser-tor.webp",
+            "alt": "Kottbusser Tor poster in a room",
+            "w": 460,
+            "h": 575
+          }
+        ]
+      }
+    },
+    {
+      "key": "calendars",
+      "label": "Calendars",
+      "eyebrow": "2027 WALL CALENDARS",
+      "title": "Your Berlin, month by month.",
+      "lead": "Dein Berlin 2027 shows your own places from above, about 1928 and today. The Berlin 2027 wall calendar brings one district a month.",
+      "cta": {
+        "text": "See the calendars",
+        "href": "https://www.walkofberlin.com/category/all-products?tab=calendar"
+      },
+      "cta2": {
+        "text": "Make your calendar",
+        "href": "https://www.walkofberlin.com/product-page/dein-berlin-2027-personalised-wall-calendar"
+      },
+      "visual": {
+        "type": "stack",
+        "items": [
+          {
+            "img": "assets/cal-feature.webp",
+            "alt": "Illustrated preview of the Dein Berlin 2027 wall calendar on a wall, open at January with Chamissoplatz from above in 1928 and today",
+            "w": 720,
+            "h": 720
+          },
+          {
+            "img": "assets/door-calendar.webp",
+            "alt": "Berlin 2027 wall calendar",
+            "w": 600,
+            "h": 420
+          }
+        ]
+      }
+    },
+    {
+      "key": "tour",
+      "label": "Walking tour",
+      "eyebrow": "BERLIN THEN AND NOW · WALKING TOUR",
+      "title": "Walk it with me.",
+      "lead": "About 2.5 hours from the World Clock on Alexanderplatz to Hackescher Markt, with an archive photo at every stop. Small groups of up to 10.",
+      "cta": {
+        "text": "See dates and book",
+        "href": "https://www.walkofberlin.com/book-berlin-walking-tour/berlin-then-and-now"
+      },
+      "visual": {
+        "type": "single",
+        "img": "assets/walk.webp",
+        "alt": "On my Berlin Then and Now walk",
+        "w": 1000,
+        "h": 800
+      }
+    },
+    {
+      "key": "audio",
+      "label": "Audio walks",
+      "eyebrow": "AUDIO WALKS · FOR YOUR PHONE",
+      "title": "Walk Berlin at your own pace.",
+      "lead": "Self-guided walks for your phone, from the Berlin Wall to medieval Berlin. Start when you like and pause whenever you want.",
+      "cta": {
+        "text": "See the audio walks",
+        "href": "https://www.walkofberlin.com/category/all-products?tab=audio"
+      },
+      "visual": {
+        "type": "player",
+        "img": "assets/slide-audio-walks.webp",
+        "alt": "Berlin Wall remnant with a hole chipped out, at Niederkirchnerstraße",
+        "w": 960,
+        "h": 656,
+        "kicker": "NOW PLAYING",
+        "title": "Berlin Wall Audio Walk"
+      }
+    },
+    {
+      "key": "blog",
+      "label": "Blog",
+      "eyebrow": "THE BLOG",
+      "title": "Berlin, explained by someone who lives here.",
+      "lead": "Practical posts on getting around, neighbourhoods, history and what is worth your evening this week.",
+      "cta": {
+        "text": "Read the blog",
+        "href": "https://www.walkofberlin.com/blog"
+      },
+      "visual": {
+        "type": "posts",
+        "items": [
+          {
+            "tag": "THIS SEASON",
+            "title": "Christmas markets: which ones are actually worth it",
+            "href": "https://www.walkofberlin.com/post/best-christmas-markets-berlin-2026",
+            "img": "assets/blog-best-christmas-markets-berlin-2026.webp"
+          },
+          {
+            "tag": "INTERACTIVE MAP",
+            "title": "Where was the Berlin Wall? East and West in 1989",
+            "href": "https://www.walkofberlin.com/post/where-was-the-berlin-wall-interactive-map",
+            "img": "assets/blog-where-was-the-berlin-wall-interactive-map.webp"
+          },
+          {
+            "tag": "GETTING AROUND",
+            "title": "Public transport: tickets, zones and validation",
+            "href": "https://www.walkofberlin.com/post/berlin-public-transport-explained-for-tourists-u-bahn-s-bahn-tram-bus",
+            "img": "assets/blog-berlin-public-transport-explained-for-tourists-u-bahn-s-bahn-tram-bus.webp"
+          }
+        ]
+      }
+    },
+    {
+      "key": "tools",
+      "label": "Free tools",
+      "eyebrow": "FREE BERLIN TOOLS",
+      "title": "Free tools for your Berlin days.",
+      "lead": "Maps, checkers and games, from the Christmas markets map to the Berghain Bouncer. The Trip Planner is free too.",
+      "cta": {
+        "text": "Open the tools",
+        "href": "https://www.walkofberlin.com/berlin-tools"
+      },
+      "cta2": {
+        "text": "Plan my trip",
+        "href": "https://www.walkofberlin.com/berlin-trip-planner"
+      },
+      "visual": {
+        "type": "tiles",
+        "from": "tools",
+        "count": 4
+      }
+    }
+  ]
 }

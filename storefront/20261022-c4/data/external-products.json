@@ -461,7 +461,7 @@
       },
       "offers": {
         "@type": "Offer",
-        "price": "7.99",
+        "price": "0",
         "priceCurrency": "EUR",
         "availability": "https://schema.org/InStock",
         "url": "https://www.walkofberlin.com/berlin-trip-planner"
@@ -475,7 +475,6 @@
       "alt": "Berlin Trip Planner cover card",
       "image": "guide-trip-planner.jpg",
       "imageFit": "cover",
-      "priceFrom": true,
       "wixProductId": null,
       "externalSourceKey": "berlin-trip-planner",
       "description": "A day-by-day Berlin plan for 1 to 7 days, built around your dates. Web and PDF itinerary."

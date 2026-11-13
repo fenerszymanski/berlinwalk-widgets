@@ -8,7 +8,7 @@
   'use strict';
 
   const DATA = {
-    "release": "home-then-now-20261029",
+    "release": "home-then-now-20261113-slider",
     "hero": {
       "img1928": "assets/hero-1928.webp",
       "imgToday": "assets/hero-today.webp",
@@ -312,7 +312,185 @@
       "href": "https://www.walkofberlin.com/product-page/dein-berlin-2027-personalised-wall-calendar",
       "img": "assets/cal-feature.webp",
       "alt": "Illustrated preview of the Dein Berlin 2027 wall calendar on a wall, open at January with Chamissoplatz from above in 1928 and today"
-    }
+    },
+    "slides": [
+      {
+        "key": "1928",
+        "label": "1928",
+        "eyebrow": "OLD PHOTOS · TODAY'S STREETS",
+        "title": "Berlin, then and now.",
+        "lead": "Every reel I make starts with an old photograph and a place you can still stand on today. Your own street is in the 1928 aerial photos too.",
+        "cta": {
+          "text": "Find your street in 1928",
+          "href": "https://www.walkofberlin.com/product-page/your-berlin-street-in-1928-personalised-aerial-print-30-x-40-cm"
+        },
+        "visual": {
+          "type": "pair"
+        }
+      },
+      {
+        "key": "posters",
+        "label": "Posters",
+        "eyebrow": "POSTERS · PRINTED OR PRINT AT HOME",
+        "title": "Berlin on your wall.",
+        "lead": "Landmarks, districts and everyday Berlin corners. Printed and posted to you, or a file you print at home.",
+        "cta": {
+          "text": "Shop the posters",
+          "href": "https://www.walkofberlin.com/category/all-products?tab=print"
+        },
+        "cta2": {
+          "text": "See a few favourites",
+          "href": "#bwh-posters"
+        },
+        "visual": {
+          "type": "fan",
+          "items": [
+            {
+              "img": "assets/poster-siegessaeule.webp",
+              "alt": "Siegessäule poster in a room",
+              "w": 460,
+              "h": 575
+            },
+            {
+              "img": "assets/poster-berlin-in-pink.webp",
+              "alt": "Berlin in Pink poster in a room",
+              "w": 460,
+              "h": 575
+            },
+            {
+              "img": "assets/poster-kottbusser-tor.webp",
+              "alt": "Kottbusser Tor poster in a room",
+              "w": 460,
+              "h": 575
+            }
+          ]
+        }
+      },
+      {
+        "key": "calendars",
+        "label": "Calendars",
+        "eyebrow": "2027 WALL CALENDARS",
+        "title": "Your Berlin, month by month.",
+        "lead": "Dein Berlin 2027 shows your own places from above, about 1928 and today. The Berlin 2027 wall calendar brings one district a month.",
+        "cta": {
+          "text": "See the calendars",
+          "href": "https://www.walkofberlin.com/category/all-products?tab=calendar"
+        },
+        "cta2": {
+          "text": "Make your calendar",
+          "href": "https://www.walkofberlin.com/product-page/dein-berlin-2027-personalised-wall-calendar"
+        },
+        "visual": {
+          "type": "stack",
+          "items": [
+            {
+              "img": "assets/cal-feature.webp",
+              "alt": "Illustrated preview of the Dein Berlin 2027 wall calendar on a wall, open at January with Chamissoplatz from above in 1928 and today",
+              "w": 720,
+              "h": 720
+            },
+            {
+              "img": "assets/door-calendar.webp",
+              "alt": "Berlin 2027 wall calendar",
+              "w": 600,
+              "h": 420
+            }
+          ]
+        }
+      },
+      {
+        "key": "tour",
+        "label": "Walking tour",
+        "eyebrow": "BERLIN THEN AND NOW · WALKING TOUR",
+        "title": "Walk it with me.",
+        "lead": "About 2.5 hours from the World Clock on Alexanderplatz to Hackescher Markt, with an archive photo at every stop. Small groups of up to 10.",
+        "cta": {
+          "text": "See dates and book",
+          "href": "https://www.walkofberlin.com/book-berlin-walking-tour/berlin-then-and-now"
+        },
+        "visual": {
+          "type": "single",
+          "img": "assets/walk.webp",
+          "alt": "On my Berlin Then and Now walk",
+          "w": 1000,
+          "h": 800
+        }
+      },
+      {
+        "key": "audio",
+        "label": "Audio walks",
+        "eyebrow": "AUDIO WALKS · FOR YOUR PHONE",
+        "title": "Walk Berlin at your own pace.",
+        "lead": "Self-guided walks for your phone, from the Berlin Wall to medieval Berlin. Start when you like and pause whenever you want.",
+        "cta": {
+          "text": "See the audio walks",
+          "href": "https://www.walkofberlin.com/category/all-products?tab=audio"
+        },
+        "visual": {
+          "type": "player",
+          "img": "assets/slide-audio-walks.webp",
+          "alt": "Berlin Wall remnant with a hole chipped out, at Niederkirchnerstraße",
+          "w": 960,
+          "h": 656,
+          "kicker": "NOW PLAYING",
+          "title": "Berlin Wall Audio Walk"
+        }
+      },
+      {
+        "key": "blog",
+        "label": "Blog",
+        "eyebrow": "THE BLOG",
+        "title": "Berlin, explained by someone who lives here.",
+        "lead": "Practical posts on getting around, neighbourhoods, history and what is worth your evening this week.",
+        "cta": {
+          "text": "Read the blog",
+          "href": "https://www.walkofberlin.com/blog"
+        },
+        "visual": {
+          "type": "posts",
+          "items": [
+            {
+              "tag": "THIS SEASON",
+              "title": "Christmas markets: which ones are actually worth it",
+              "href": "https://www.walkofberlin.com/post/best-christmas-markets-berlin-2026",
+              "img": "assets/blog-best-christmas-markets-berlin-2026.webp"
+            },
+            {
+              "tag": "INTERACTIVE MAP",
+              "title": "Where was the Berlin Wall? East and West in 1989",
+              "href": "https://www.walkofberlin.com/post/where-was-the-berlin-wall-interactive-map",
+              "img": "assets/blog-where-was-the-berlin-wall-interactive-map.webp"
+            },
+            {
+              "tag": "GETTING AROUND",
+              "title": "Public transport: tickets, zones and validation",
+              "href": "https://www.walkofberlin.com/post/berlin-public-transport-explained-for-tourists-u-bahn-s-bahn-tram-bus",
+              "img": "assets/blog-berlin-public-transport-explained-for-tourists-u-bahn-s-bahn-tram-bus.webp"
+            }
+          ]
+        }
+      },
+      {
+        "key": "tools",
+        "label": "Free tools",
+        "eyebrow": "FREE BERLIN TOOLS",
+        "title": "Free tools for your Berlin days.",
+        "lead": "Maps, checkers and games, from the Christmas markets map to the Berghain Bouncer. The Trip Planner is free too.",
+        "cta": {
+          "text": "Open the tools",
+          "href": "https://www.walkofberlin.com/berlin-tools"
+        },
+        "cta2": {
+          "text": "Plan my trip",
+          "href": "https://www.walkofberlin.com/berlin-trip-planner"
+        },
+        "visual": {
+          "type": "tiles",
+          "from": "tools",
+          "count": 4
+        }
+      }
+    ]
   };
 
   const BWH_SCRIPT_URL = (document.currentScript && document.currentScript.src)
@@ -508,32 +686,91 @@
 </section>`;
   }
 
-  function bwhHero(d) {
-    const h = d.hero;
-    const w = Number(h.w) || 1200;
-    const ht = Number(h.h) || 750;
-    return `
-    <section class="bwh-band bwh-hero" id="bwh-top">
-      <div class="bwh-hero__grid">
-        <span class="bwh-eyebrow">OLD PHOTOS · TODAY'S STREETS</span>
-        <h1 class="bwh-h1" id="bwh-title">Berlin, then and now.</h1>
-        <p class="bwh-lead bwh-hero__lead">Every reel I make starts with an old photograph and a place you can still stand on today. Take one home, follow along, or walk it with me.</p>
-        <figure class="bwh-hero__figure">
-          <div class="bwh-hero__pair">
-            <div class="bwh-hero__frame">
-              <img src="${bwhEsc(bwhSrc(h.img1928))}" alt="${bwhEsc(h.alt1928)}" width="${w}" height="${ht}" fetchpriority="high">
-              <span class="bwh-tag">1928</span>
+  // Hero slider (Yusuf, 13 Nov 2026: "burayı slider yapalım. 1928, posterler genel, takvimlar, canlı tur,
+  // audio walks, blog ve free tools"). Slide 1 keeps the page's only H1. Slides stack in one grid cell, so
+  // the band never changes height; images of slides 2+ are hydrated after load (data-bwh-src).
+  function bwhSlideImg(src, alt, w, h, mode) {
+    const url = bwhEsc(bwhSrc(src)), iw = Number(w) || '', ih = Number(h) || '';
+    if (mode === 'high') return `<img src="${url}" alt="${bwhEsc(alt)}" width="${iw}" height="${ih}" fetchpriority="high">`;
+    if (mode === 'eager') return `<img src="${url}" alt="${bwhEsc(alt)}" width="${iw}" height="${ih}" decoding="async">`;
+    return `<img data-bwh-src="${url}" alt="${bwhEsc(alt)}" width="${iw}" height="${ih}" loading="lazy" decoding="async">`;
+  }
+
+  function bwhSlideVisual(d, s, first) {
+    const v = s.visual || {};
+    if (v.type === 'pair') {
+      const h = d.hero, w = Number(h.w) || 1200, ht = Number(h.h) || 750;
+      return `<figure class="bwh-hero__figure bwh-slide__visual">
+            <div class="bwh-hero__pair">
+              <div class="bwh-hero__frame">${bwhSlideImg(h.img1928, h.alt1928, w, ht, first ? 'high' : 'defer')}<span class="bwh-tag">1928</span></div>
+              <div class="bwh-hero__frame">${bwhSlideImg(h.imgToday, h.altToday, w, ht, first ? 'eager' : 'defer')}<span class="bwh-tag">TODAY</span></div>
             </div>
-            <div class="bwh-hero__frame">
-              <img src="${bwhEsc(bwhSrc(h.imgToday))}" alt="${bwhEsc(h.altToday)}" width="${w}" height="${ht}">
-              <span class="bwh-tag">TODAY</span>
+            <figcaption class="bwh-caption">${bwhEsc(h.caption)}</figcaption>
+          </figure>`;
+    }
+    if (v.type === 'fan' || v.type === 'stack') {
+      return `<div class="bwh-slide__visual bwh-slide__visual--${v.type}">${(v.items || []).map((it, i) => `<div class="bwh-slide__item" data-bwh-item-n="${i + 1}">${bwhSlideImg(it.img, it.alt, it.w, it.h, 'defer')}</div>`).join('')}</div>`;
+    }
+    if (v.type === 'player') {
+      return `<div class="bwh-slide__visual bwh-slide__visual--single bwh-slide__visual--player">${bwhSlideImg(v.img, v.alt, v.w, v.h, 'defer')}
+            <div class="bwh-slide__player" aria-hidden="true"><span class="bwh-slide__player-kicker">${bwhEsc(v.kicker)}</span><span class="bwh-slide__player-title">${bwhEsc(v.title)}</span><span class="bwh-slide__player-row"><span class="bwh-slide__player-play"></span><span class="bwh-slide__player-line"><span class="bwh-slide__player-done"></span></span></span></div>
+          </div>`;
+    }
+    if (v.type === 'single') {
+      return `<div class="bwh-slide__visual bwh-slide__visual--single">${bwhSlideImg(v.img, v.alt, v.w, v.h, 'defer')}</div>`;
+    }
+    if (v.type === 'posts') {
+      const posts = Array.isArray(v.items) ? v.items : (d[v.from] || []).slice(0, v.count || 3);
+      return `<ul class="bwh-slide__visual bwh-slide__visual--posts">${posts.map((p, i) => `
+            <li><a class="bwh-slide__post" href="${bwhEsc(bwhHref(p.href))}" data-bwh-section="hero" data-bwh-item="slide-blog-post" data-bwh-position="${i + 1}">${bwhSlideImg(p.img, '', 240, 240, 'defer')}<span class="bwh-slide__post-copy">${p.tag ? `<span class="bwh-slide__post-tag">${bwhEsc(p.tag)}</span>` : ''}<span class="bwh-slide__post-title">${bwhEsc(p.title)}</span></span></a></li>`).join('')}
+          </ul>`;
+    }
+    if (v.type === 'tiles') {
+      const tools = (d[v.from] || []).slice(0, v.count || 4);
+      return `<ul class="bwh-slide__visual bwh-slide__visual--tiles">${tools.map((t, i) => `
+            <li><a class="bwh-slide__tile" href="${bwhEsc(bwhHref(t.href))}" style="--bwh-tile-bg:${bwhEsc(t.bg)};--bwh-tile-fg:${bwhEsc(t.fg)}" data-bwh-section="hero" data-bwh-item="slide-tool" data-bwh-position="${i + 1}"><span class="bwh-slide__tile-kind">${bwhEsc(t.kind)}</span><span class="bwh-slide__tile-name">${bwhEsc(t.name)}</span><span class="bwh-slide__tile-line">${bwhEsc(t.line)}</span></a></li>`).join('')}
+          </ul>`;
+    }
+    return '';
+  }
+
+  const BWH_CHEVRON = (dir) => `<svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="${dir === 'prev' ? 'M10 3 5 8l5 5' : 'M6 3l5 5-5 5'}" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>`;
+
+  function bwhHero(d) {
+    const slides = Array.isArray(d.slides) && d.slides.length ? d.slides : [];
+    const n = slides.length;
+    const slide = (s, i) => {
+      const first = i === 0;
+      const title = first
+        ? `<h1 class="bwh-h1" id="bwh-title">${bwhEsc(s.title)}</h1>`
+        : `<h2 class="bwh-h1 bwh-slide__title">${bwhEsc(s.title)}</h2>`;
+      const cta2 = s.cta2 ? `<a class="bwh-btn bwh-btn--outline" href="${bwhEsc(bwhHref(s.cta2.href))}" data-bwh-section="hero" data-bwh-item="slide-${bwhEsc(s.key)}-more" data-bwh-position="${i + 1}">${bwhEsc(s.cta2.text)}</a>` : '';
+      return `
+      <div class="bwh-slide" data-bwh-slide="${i}" data-bwh-current="${first ? 'true' : 'false'}" role="group" aria-roledescription="slide" aria-label="${i + 1} of ${n}: ${bwhEsc(s.label)}">
+        <div class="bwh-slide__grid">
+          <div class="bwh-slide__copy">
+            <span class="bwh-eyebrow">${bwhEsc(s.eyebrow)}</span>
+            ${title}
+            <p class="bwh-lead bwh-hero__lead">${bwhEsc(s.lead)}</p>
+            <div class="bwh-hero__ctas">
+              <a class="bwh-btn bwh-btn--yellow" href="${bwhEsc(bwhHref(s.cta.href))}" data-bwh-section="hero" data-bwh-item="slide-${bwhEsc(s.key)}" data-bwh-position="${i + 1}">${bwhEsc(s.cta.text)}</a>
+              ${cta2}
             </div>
           </div>
-          <figcaption class="bwh-caption">${bwhEsc(h.caption)}</figcaption>
-        </figure>
-        <div class="bwh-hero__ctas">
-          <a class="bwh-btn bwh-btn--yellow" href="${bwhEsc(bwhHref(h.streetHref))}" data-bwh-section="hero" data-bwh-item="find-your-street-1928">Find your street in 1928</a>
-          <a class="bwh-btn bwh-btn--outline" href="${bwhEsc(bwhHref(h.postersHref))}" data-bwh-section="hero" data-bwh-item="shop-the-posters">Shop the posters</a>
+          ${bwhSlideVisual(d, s, first)}
+        </div>
+      </div>`;
+    };
+    return `
+    <section class="bwh-band bwh-hero bwh-slider" id="bwh-top" aria-roledescription="carousel" aria-label="Walk of Berlin highlights">
+      <div class="bwh-slider__track" aria-live="off">${slides.map(slide).join('')}
+      </div>
+      <div class="bwh-slider__controls">
+        <div class="bwh-slider__nav" role="group" aria-label="Choose a slide">${slides.map((s, i) => `<button type="button" class="bwh-slider__pill" data-bwh-go="${i}" aria-current="${i === 0 ? 'true' : 'false'}" aria-label="${bwhEsc(s.label)}, slide ${i + 1} of ${n}"><span class="bwh-slider__label">${bwhEsc(s.label)}</span><span class="bwh-slider__bar" aria-hidden="true"></span></button>`).join('')}</div>
+        <div class="bwh-slider__buttons">
+          <button type="button" class="bwh-slider__btn" data-bwh-step="-1" aria-label="Previous slide">${BWH_CHEVRON('prev')}</button>
+          <button type="button" class="bwh-slider__btn bwh-slider__toggle" data-bwh-toggle="pause" aria-label="Pause slides"><span class="bwh-slider__pause" aria-hidden="true"></span></button>
+          <button type="button" class="bwh-slider__btn" data-bwh-step="1" aria-label="Next slide">${BWH_CHEVRON('next')}</button>
         </div>
       </div>
     </section>`;
@@ -783,16 +1020,117 @@
           this._bwhRows.set(row, { seen: false, max: 0, sent: false, nudged: false });
         });
         this._bwhBind();
+        this._bwhSliderInit();
       }
       window.__bwHomeCreditsHtml = bwhCreditsHtml(DATA);
       this._bwhGiftStart();
       this._bwhWatch();
+      if (this._bwhSliderVis) document.addEventListener('visibilitychange', this._bwhSliderVis);
     }
 
     disconnectedCallback() {
       if (!this.isConnected && location.pathname !== '/') window.__bwHomeCreditsHtml = '';
       this._bwhGiftStop();
       this._bwhStop();
+      if (this._bwhSliderVis) document.removeEventListener('visibilitychange', this._bwhSliderVis);
+    }
+
+    // ---- hero slider ----------------------------------------------------------------------
+    // Autoplay advances on the progress bar's animationend (7 s, CSS). It pauses while the pointer
+    // or focus is inside, and while the tab is hidden. Any manual step stops it for good (the
+    // play button restarts it). prefers-reduced-motion: no autoplay, no fade.
+    _bwhSliderInit() {
+      if (this._bwhSlider || !this.querySelector('.bwh-slider')) return;
+      const st = this._bwhSlider = { index: 0, playing: !bwhMatch('(prefers-reduced-motion: reduce)'), hover: false, focus: false, swipe: null, swiped: 0 };
+      const inSlider = (node) => !!(node && node.closest && node.closest('.bwh-slider') && this.contains(node));
+      this.addEventListener('click', (event) => {
+        if (Date.now() - st.swiped < 400 && inSlider(event.target)) { event.preventDefault(); event.stopPropagation(); return; }
+        const t = event.target.closest ? event.target.closest('[data-bwh-go],[data-bwh-step],[data-bwh-toggle]') : null;
+        if (!t || !inSlider(t)) return;
+        if (t.hasAttribute('data-bwh-toggle')) { st.playing = !st.playing; this._bwhSliderSync(); return; }
+        const n = this.querySelectorAll('.bwh-slide').length;
+        const to = t.hasAttribute('data-bwh-go') ? Number(t.dataset.bwhGo) : (st.index + Number(t.dataset.bwhStep) + n) % n;
+        st.playing = false;
+        this._bwhSliderGo(to);
+        bwhTrack('bw_home_tn_click', { section: 'hero-slider', item: 'go-' + ((DATA.slides[to] || {}).key || to), position: to + 1 });
+      }, true);
+      this.addEventListener('keydown', (event) => {
+        const pill = event.target.closest ? event.target.closest('[data-bwh-go]') : null;
+        if (!pill || !inSlider(pill)) return;
+        const pills = Array.from(this.querySelectorAll('[data-bwh-go]'));
+        let i = pills.indexOf(pill);
+        if (event.key === 'ArrowRight') i = (i + 1) % pills.length;
+        else if (event.key === 'ArrowLeft') i = (i - 1 + pills.length) % pills.length;
+        else if (event.key === 'Home') i = 0;
+        else if (event.key === 'End') i = pills.length - 1;
+        else return;
+        event.preventDefault();
+        st.playing = false;
+        this._bwhSliderGo(i);
+        pills[i].focus();
+      });
+      this.addEventListener('pointerover', (event) => { if (event.pointerType === 'mouse' && inSlider(event.target) && !st.hover) { st.hover = true; this._bwhSliderSync(); } });
+      this.addEventListener('pointerout', (event) => { if (event.pointerType === 'mouse' && st.hover && !inSlider(event.relatedTarget)) { st.hover = false; this._bwhSliderSync(); } });
+      this.addEventListener('focusin', (event) => { if (inSlider(event.target) && !st.focus) { st.focus = true; this._bwhSliderSync(); } });
+      this.addEventListener('focusout', (event) => { if (st.focus && !inSlider(event.relatedTarget)) { st.focus = false; this._bwhSliderSync(); } });
+      this.addEventListener('animationend', (event) => {
+        if (!event.target.classList || !event.target.classList.contains('bwh-slider__bar') || !inSlider(event.target)) return;
+        if (st.playing && event.target.closest('[aria-current="true"]')) this._bwhSliderGo(st.index + 1);
+      });
+      this.addEventListener('pointerdown', (event) => {
+        if (event.pointerType === 'mouse' || !(event.target.closest && event.target.closest('.bwh-slider__track')) || !inSlider(event.target)) return;
+        st.swipe = { x: event.clientX, y: event.clientY };
+      }, { passive: true });
+      this.addEventListener('pointerup', (event) => {
+        const s0 = st.swipe; st.swipe = null;
+        if (!s0) return;
+        const dx = event.clientX - s0.x, dy = event.clientY - s0.y;
+        if (Math.abs(dx) < 48 || Math.abs(dx) < 1.3 * Math.abs(dy)) return;
+        st.swiped = Date.now();
+        st.playing = false;
+        this._bwhSliderGo(st.index + (dx < 0 ? 1 : -1));
+      });
+      this.addEventListener('pointercancel', () => { st.swipe = null; });
+      this._bwhSliderVis = () => this._bwhSliderSync();
+      document.addEventListener('visibilitychange', this._bwhSliderVis);
+      const later = () => setTimeout(() => this._bwhSliderHydrateAll(), 800);
+      if (document.readyState === 'complete') later(); else window.addEventListener('load', later, { once: true });
+      this._bwhSliderSync();
+    }
+
+    _bwhSliderHydrate(slide) {
+      if (!slide) return;
+      slide.querySelectorAll('img[data-bwh-src]').forEach((img) => { img.src = img.dataset.bwhSrc; img.removeAttribute('data-bwh-src'); });
+    }
+
+    _bwhSliderHydrateAll() { this.querySelectorAll('.bwh-slide').forEach((slide) => this._bwhSliderHydrate(slide)); }
+
+    _bwhSliderGo(to) {
+      const slides = Array.from(this.querySelectorAll('.bwh-slide'));
+      if (!slides.length || !this._bwhSlider) return;
+      const i = ((to % slides.length) + slides.length) % slides.length;
+      this._bwhSliderHydrate(slides[i]);
+      this._bwhSliderHydrate(slides[(i + 1) % slides.length]);
+      slides.forEach((slide, k) => slide.setAttribute('data-bwh-current', k === i ? 'true' : 'false'));
+      this.querySelectorAll('.bwh-slider__pill').forEach((pill, k) => pill.setAttribute('aria-current', k === i ? 'true' : 'false'));
+      const nav = this.querySelector('.bwh-slider__nav'), pill = nav && nav.querySelector('[aria-current="true"]');
+      if (nav && pill && nav.scrollWidth > nav.clientWidth) {
+        const left = pill.offsetLeft - nav.offsetLeft, right = left + pill.offsetWidth;
+        if (left < nav.scrollLeft || right > nav.scrollLeft + nav.clientWidth) nav.scrollTo({ left: Math.max(0, left - 16), behavior: bwhMatch('(prefers-reduced-motion: reduce)') ? 'auto' : 'smooth' });
+      }
+      this._bwhSlider.index = i;
+      this._bwhSliderSync();
+    }
+
+    _bwhSliderSync() {
+      const section = this.querySelector('.bwh-slider'), st = this._bwhSlider;
+      if (!section || !st) return;
+      section.toggleAttribute('data-bwh-playing', st.playing);
+      section.toggleAttribute('data-bwh-paused', st.playing && (st.hover || st.focus || document.hidden));
+      const toggle = section.querySelector('[data-bwh-toggle]');
+      if (toggle) { toggle.setAttribute('aria-label', st.playing ? 'Pause slides' : 'Play slides'); toggle.setAttribute('data-bwh-toggle', st.playing ? 'pause' : 'play'); }
+      const track = section.querySelector('.bwh-slider__track');
+      if (track) track.setAttribute('aria-live', st.playing ? 'off' : 'polite');
     }
 
     _bwhGiftStart() {
@@ -818,6 +1156,7 @@
         const restoreFocus = hero.contains(document.activeElement);
         // Only the first band changes. Preserve every other node and listener.
         hero.outerHTML = active ? bwhGiftHero(DATA) : bwhHero(DATA);
+        if (this._bwhSlider) { this._bwhSlider.index = 0; this._bwhSliderHydrateAll(); this._bwhSliderSync(); }
         if (restoreFocus) this.querySelector('#bwh-top a')?.focus({preventScroll:true});
       }
       this._bwhGiftPrices(active);

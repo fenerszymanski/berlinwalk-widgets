@@ -9,7 +9,7 @@
   const design2Enabled = (()=>{let choice;try{const q=new URLSearchParams(location.search).get("design");if(q==="2"||q==="0"){choice=q;sessionStorage.setItem("bwStoreDesign",q);}else choice=sessionStorage.getItem("bwStoreDesign");}catch{}return choice==="2"?true:choice==="0"?false:STORE_DESIGN2;})();
   const CALENDAR_LISTED=true;   // Yusuf 13 Nov 2026: "şimdi bunu store'da, menüde vs nerede gerekli varsa koyalım" (12 Nov it was direct link only)
   const esc = value => String(value ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-  const asset = value => {if(value==='gift-week.js'&&/^[a-f0-9]{40}$/.test(window.__WOB_GIFT_WEEK_P22_REF||''))return 'https://cdn.jsdelivr.net/gh/fenerszymanski/berlinwalk-widgets@'+window.__WOB_GIFT_WEEK_P22_REF+'/storefront/20261022-c4/gift-week.js';const target=new URL(value,base);if(/\.(?:js|css|json)$/.test(target.pathname))target.searchParams.set('v',value==='design2.js'?'store-design2-fix5b-20261113-v1':'store-design2-fix5b-20261113-v1');return target.href;};
+  const asset = value => {if(value==='gift-week.js'&&/^[a-f0-9]{40}$/.test(window.__WOB_GIFT_WEEK_P22_REF||''))return 'https://cdn.jsdelivr.net/gh/fenerszymanski/berlinwalk-widgets@'+window.__WOB_GIFT_WEEK_P22_REF+'/storefront/20261022-c4/gift-week.js';const target=new URL(value,base);if(/\.(?:js|css|json)$/.test(target.pathname))target.searchParams.set('v',value==='design2.js'?'store-design2-fix6-20261113-v1':'store-design2-fix6-20261113-v1');return target.href;};
   // Chrome and Safari ignore @font-face inside shadow DOM, so the three faces are registered once on the document with absolute URLs from the element's own base.
   // Gift landing trials showed no LCP gain. Preserve their prior resource and font order.
   const legacyGiftPresentation = () => /^(?:\/de)?\/(?:category\/(?:berlin-christmas-gifts|berlin-geschenke)|gifts|geschenke)\/?$/.test(location.pathname);
@@ -233,7 +233,7 @@
     import(asset('catalog-layer.js')), import(asset('editorial-helpers.js')), import(asset('street-configurator.js')),
     ...['data/categories.json','data/presentation.json','data/native-bindings.json','data/external-products.json'].map(path => fetch(path==='data/presentation.json'?new URL('data/presentation.json?v=gallery-'+Date.now(),base).href:asset(path),path==='data/presentation.json'?{cache:'no-store'}:undefined)/* gallery-fresh-v1 */.then(response => {if (!response.ok) throw Error('CATALOGUE_METADATA_UNAVAILABLE');return response.json();})),
     import(asset('funnel.js')).then(m=>{import(asset('campaign-session.js')).catch(()=>{});return m;}).catch(() => null),   // measurement must never block the shop
-    import(new URL('../../js/store-navigation.js?v=store-design2-fix5b-20261113-v1',base).href),
+    import(new URL('../../js/store-navigation.js?v=store-design2-fix6-20261113-v1',base).href),
     import(asset('gift.js')).catch(()=>null),
     import(asset('gift-week.js')),
     import(asset('black-friday.js')),
@@ -468,9 +468,9 @@
         const rows=this.catalogue.products.filter(row=>(row.productId!==CALENDAR_PRODUCT_ID||(row.visible!==false&&(CALENDAR_LISTED||this.context?.productId===CALENDAR_PRODUCT_ID||/dein-berlin-2027-personalised-wall-calendar/.test(location.pathname))))&&(!PRODUCT_VIEW_ALIASES[row.productId]||['framed','canvas'].includes(PRODUCT_VIEW_ALIASES[row.productId].format))&&!this.gift?.isGiftId(row.productId)).map(row=>this.nativeProductRow(row));
         const products=[...this.layer.adaptWixProducts(rows,this.presentation),...this.layer.adaptExternalProducts(this.external)];
         products.sort((a,b)=>this.presentation.findIndex(item=>item.id===a.id)-this.presentation.findIndex(item=>item.id===b.id));
-        for(const product of products){const c=this.campaign,ref=c?.entry(this.campaignConfig,product);if(product.source==='external'&&ref&&c.active(this.campaignConfig,c.systemOf(product))){product.priceCents=c.saleCents(Math.round(ref.price*100));}if(ref&&(product.source==='wix'?this.campaignNativeOn(product.wixProductId):c.active(this.campaignConfig,c.systemOf(product)))){const target=new URL(product.productUrl);target.searchParams.set('utm_source','store');target.searchParams.set('utm_campaign','gift-week-202611');target.searchParams.set('utm_content','store-card-'+product.id);product.productUrl=target.href;}}
+        for(const product of products){if(this.isFreeExternal(product))continue;const c=this.campaign,ref=c?.entry(this.campaignConfig,product);if(product.source==='external'&&ref&&c.active(this.campaignConfig,c.systemOf(product))){product.priceCents=c.saleCents(Math.round(ref.price*100));}if(ref&&(product.source==='wix'?this.campaignNativeOn(product.wixProductId):c.active(this.campaignConfig,c.systemOf(product)))){const target=new URL(product.productUrl);target.searchParams.set('utm_source','store');target.searchParams.set('utm_campaign','gift-week-202611');target.searchParams.set('utm_content','store-card-'+product.id);product.productUrl=target.href;}}
         this.model=this.layer.createCatalogModel(products,this.definitions);
-        for(const product of this.model.products){const native=this.catalogue.products.find(row=>row.productId===product.wixProductId);product.priceLabel=money(native?native.currency:product.currency,native?(native.discountedPrice??native.price):product.priceCents/100);if(((product.wixProductId==='8aaf5412-7f21-42c7-acfb-85dd8417d68c'||native?.posterOptions)&&native?.requiresOptions)||product.priceFrom)product.priceLabel='From '+product.priceLabel;}
+        for(const product of this.model.products){const native=this.catalogue.products.find(row=>row.productId===product.wixProductId);product.priceLabel=this.isFreeExternal(product)?(this.campaignGerman()?'Kostenlos':'Free'):money(native?native.currency:product.currency,native?(native.discountedPrice??native.price):product.priceCents/100);if(!this.isFreeExternal(product)&&(((product.wixProductId==='8aaf5412-7f21-42c7-acfb-85dd8417d68c'||native?.posterOptions)&&native?.requiresOptions)||product.priceFrom))product.priceLabel='From '+product.priceLabel;}
         if(this.productAlias()){if(!this.model.products.some(p=>p.wixProductId===this.productViewId())||!this.ysEntryAvailable()){this.showConfiguredFailure('CONFIGURATOR_UNAVAILABLE');return;}this.configuredFailure=false;}
         this.applyContextCategory();this.render();this.signalReady();
       }catch(error){this.fail(error.message);}
@@ -585,7 +585,9 @@
     campaignGerman() {return this.landing?.lang==='de'||this.navigation?.STORE_LANDINGS?.[this.skeletonRoute().categorySlug]?.lang==='de'||new URLSearchParams(location.search).get('lang')==='de';}
     bfActive() {return this.bf?.bfActive(this.bfConfig)||false;}
     campaignNativeOn(id) {const row=(this.catalogue?.products||(!this.catalogue&&this.snapshotUsable()?this.priceSnapshot.products:[]))?.find(p=>p.productId===id),c=this.campaignConfig;return !!(c?.products?.[id]&&Date.now()>=Date.parse(c.start)&&Date.now()<Date.parse(c.end)&&row&&Math.round(row.discountedPrice*100)===Math.round(c.products[id].sale*100)&&Math.round(row.price*100)===Math.round(c.products[id].sale*100));}
+    isFreeExternal(product) {return product.source==='external'&&product.approvedForShop===true&&product.priceCents===0;}
     campaignPrice(product,amount,choices) {
+      if(this.isFreeExternal(product))return esc(this.d2text?.('Free')||(this.campaignGerman()?'Kostenlos':'Free'));
       if(this.bf?.BF_PRODUCT_IDS.includes(product.wixProductId)&&!this.campaign?.active(this.campaignConfig,'wix')){
         const native=this.catalogue?.products?.find(p=>p.productId===product.wixProductId);
         return this.bf.bfPriceHtml({config:this.bfConfig,id:product.wixProductId,native,amount:amount??product.priceCents/100,choices,de:this.campaignGerman(),from:!choices&&!!product.requiresOptions});
@@ -1060,7 +1062,7 @@
       const rows=this.priceSnapshot.products.filter(p=>p.visible&&!PRODUCT_VIEW_ALIASES[p.productId]&&!this.gift?.isGiftId(p.productId)).map(row=>this.nativeProductRow(row));
       const products=[...this.layer.adaptWixProducts(rows,this.presentation),...this.layer.adaptExternalProducts(this.external)];
       products.sort((a,b)=>this.presentation.findIndex(item=>item.id===a.id)-this.presentation.findIndex(item=>item.id===b.id));
-      for(const p of products){const ref=this.campaign.entry(this.campaignConfig,p);if(p.source==='external'&&ref&&this.campaign.active(this.campaignConfig,this.campaign.systemOf(p)))p.priceCents=this.campaign.saleCents(Math.round(ref.price*100));}
+      for(const p of products){if(this.isFreeExternal(p))continue;const ref=this.campaign.entry(this.campaignConfig,p);if(p.source==='external'&&ref&&this.campaign.active(this.campaignConfig,this.campaign.systemOf(p)))p.priceCents=this.campaign.saleCents(Math.round(ref.price*100));}
       return this.layer.createCatalogModel(products,this.definitions);
     }
     loadingAction(product,primary=false) {

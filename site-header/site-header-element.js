@@ -1,7 +1,7 @@
 (() => {
-const BW_HEADER_NAV_VERSION = 'store-design2-fix5b-20261113';
+const BW_HEADER_NAV_VERSION = 'store-design2-fix6-20261113';
 if (customElements.get('bw-site-header')?.navigationVersion === BW_HEADER_NAV_VERSION
-  || customElements.get('bw-site-header-design2-fix5b')?.navigationVersion === BW_HEADER_NAV_VERSION) return;
+  || customElements.get('bw-site-header-design2-fix6')?.navigationVersion === BW_HEADER_NAV_VERSION) return;
 
 const BW_HEADER_SCRIPT_URL = (document.currentScript && document.currentScript.src) || 'https://fenerszymanski.github.io/berlinwalk-widgets/site-header/site-header-element.js';
 // Walk of Berlin wordmark (A15a, live 2 October 2026). The old berlinwalk-wordmark-*
@@ -199,6 +199,7 @@ const BW_HEADER_STORE_DESIGN2_EN = [
     "id": "explore",
     "label": "Explore Berlin",
     "de": "Berlin entdecken",
+    "noteDe": "Alle auf Englisch",
     "href": "https://walkofberlin.com/category/all-products?tab=audio",
     "items": [
       {
@@ -316,6 +317,7 @@ const BW_HEADER_STORE_DESIGN2_DE = [
     "id": "explore",
     "label": "Berlin entdecken",
     "de": "Berlin entdecken",
+    "noteDe": "Alle auf Englisch",
     "href": "https://walkofberlin.com/de/category/all-products?tab=audio",
     "items": [
       {
@@ -338,7 +340,8 @@ const BW_HEADER_STORE_DESIGN2_DE = [
         "de": "Virtuelle Touren & Night In",
         "href": "https://walkofberlin.com/de/category/all-products?tab=guides&view=virtual"
       }
-    ]
+    ],
+    "note": "Alle auf Englisch"
   }
 ];
 // END GENERATED DESIGN2 STORE MENU
@@ -441,8 +444,8 @@ function bwHeaderNavigateLink(event,link) {
 const bwHeaderEscape = value => String(value).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const bwHeaderCommercePage = () => location.pathname.replace(/\/+$/,'') === '/products/berlin-landmarks-guide';
 const bwHeaderCommerceBridge = () => {const link=document.createElement('a');link.className='bw-header-book bw-header-commerce-bridge';link.href=BW_HEADER_BOOKING_URL;link.textContent=BW_HEADER_GERMAN?'Termine ansehen und buchen':'See dates and book';return link;};
-const bwHeaderItems = group => group.items.map(item=>item.items?`<li class="bw-header-store-group"><a class="bw-header-store-group-title" href="${bwHeaderEscape(item.href)}">${bwHeaderEscape(item.label)}</a><ul>${item.items.map(link=>`<li><a href="${bwHeaderEscape(link.href)}">${bwHeaderEscape(link.label)}</a></li>`).join('')}</ul></li>`:`<li><a href="${bwHeaderEscape(item.href)}">${bwHeaderEscape(item.label)}</a></li>`).join('');
-const bwHeaderMobileItems = group => group.items.map(item=>item.items?`<section class="bw-header-store-mobile-group"><a class="bw-header-store-group-title" href="${bwHeaderEscape(item.href)}">${bwHeaderEscape(item.label)}</a>${item.items.map(link=>`<a href="${bwHeaderEscape(link.href)}">${bwHeaderEscape(link.label)}</a>`).join('')}</section>`:`<a href="${bwHeaderEscape(item.href)}">${bwHeaderEscape(item.label)}</a>`).join('');
+const bwHeaderItems = group => group.items.map(item=>item.items?`<li class="bw-header-store-group"><a class="bw-header-store-group-title" href="${bwHeaderEscape(item.href)}">${bwHeaderEscape(item.label)}</a>${item.note?`<small class="bw-header-store-note">${bwHeaderEscape(item.note)}</small>`:''}<ul>${item.items.map(link=>`<li><a href="${bwHeaderEscape(link.href)}">${bwHeaderEscape(link.label)}</a></li>`).join('')}</ul></li>`:`<li><a href="${bwHeaderEscape(item.href)}">${bwHeaderEscape(item.label)}</a></li>`).join('');
+const bwHeaderMobileItems = group => group.items.map(item=>item.items?`<section class="bw-header-store-mobile-group"><a class="bw-header-store-group-title" href="${bwHeaderEscape(item.href)}">${bwHeaderEscape(item.label)}</a>${item.note?`<small class="bw-header-store-note">${bwHeaderEscape(item.note)}</small>`:''}${item.items.map(link=>`<a href="${bwHeaderEscape(link.href)}">${bwHeaderEscape(link.label)}</a>`).join('')}</section>`:`<a href="${bwHeaderEscape(item.href)}">${bwHeaderEscape(item.label)}</a>`).join('');
 
 const BW_HEADER_INSTANCES = new Set();
 let BW_HEADER_ACTIVE_INSTANCE = null;
@@ -1056,7 +1059,7 @@ class BWHeaderElement extends HTMLElement {
           src: url(${BW_HEADER_MENU_FONT_URL}) format('woff2');
         }
 
-        bw-site-header, bw-site-header-design2-fix5b {
+        bw-site-header, bw-site-header-design2-fix6 {
           display: block;
           width: 100%;
         }
@@ -1346,6 +1349,7 @@ class BWHeaderElement extends HTMLElement {
         .bw-header-submenu[data-bw-store-menu="design2"]{width:min(800px,calc(100vw - 24px));display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
         .bw-header-store-group{min-width:0;list-style:none}
         .bw-header-store-group ul{margin:0;padding:0;list-style:none}
+        .bw-header-store-note{display:block;padding:0 14px 8px;color:#526452;font-family:inherit;font-size:13px;font-weight:400;line-height:1.4}
         .bw-header-submenu .bw-header-store-group-title{font-weight:700;border-bottom:1px solid #c5e1a5}
         .bw-header-submenu .bw-header-store-group a{white-space:normal;overflow-wrap:anywhere}
         .bw-header-nav .bw-header-store-link{text-decoration:none;padding:12px 0 12px 11px;display:inline-block}
@@ -1934,16 +1938,16 @@ if (!customElements.get('bw-site-header')) {
   // Preserve the native tag (and product-adapter selectors) when an older
   // cached Wix script registered first. Its runtime is cleaned before mounting
   // the new element inside that host; do not mutate a registered prototype.
-  if(!customElements.get('bw-site-header-design2-fix5b'))customElements.define('bw-site-header-design2-fix5b', class extends BWHeaderElement {});
+  if(!customElements.get('bw-site-header-design2-fix6'))customElements.define('bw-site-header-design2-fix6', class extends BWHeaderElement {});
   const upgrade = () => {
     for (const host of document.querySelectorAll('bw-site-header')) {
-      if(host.constructor.navigationVersion===BW_HEADER_NAV_VERSION&&!host.querySelector('bw-site-header-unified,bw-site-header-design2,bw-site-header-design2-fix4,bw-site-header-design2-fix5'))continue;
-      if(host.querySelector('bw-site-header-design2-fix5b'))continue;
+      if(host.constructor.navigationVersion===BW_HEADER_NAV_VERSION&&!host.querySelector('bw-site-header-unified,bw-site-header-design2,bw-site-header-design2-fix4,bw-site-header-design2-fix5,bw-site-header-design2-fix5b'))continue;
+      if(host.querySelector('bw-site-header-design2-fix6'))continue;
       // Preserve older compatibility hosts: their observers use the direct
       // child tag as an upgrade guard. Removing it makes two builds fight.
-      const legacy=[host,...host.querySelectorAll('bw-site-header-unified,bw-site-header-design2,bw-site-header-design2-fix4,bw-site-header-design2-fix5')];
+      const legacy=[host,...host.querySelectorAll('bw-site-header-unified,bw-site-header-design2,bw-site-header-design2-fix4,bw-site-header-design2-fix5,bw-site-header-design2-fix5b')];
       const mount=legacy.at(-1);
-      const next=document.createElement('bw-site-header-design2-fix5b');
+      const next=document.createElement('bw-site-header-design2-fix6');
       next._preservedCommerceForm=host.querySelector('form[data-bw-landmarks-guide-header-checkout]');
       next._preservedCommerceForm?.remove();
       for(const previous of legacy)previous.disconnectedCallback?.();

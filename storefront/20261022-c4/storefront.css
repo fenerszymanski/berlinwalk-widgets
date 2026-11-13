@@ -748,3 +748,12 @@ button.ys-words-tag:focus-visible{outline:2px solid var(--green);outline-offset:
 :host([design2]) .d2-gifts-grid [data-gift-card]{grid-column:1/-1;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,2fr);gap:24px}
 @media(max-width:740px){:host([design2]) .d2-gifts-grid [data-gift-card]{grid-template-columns:1fr}}
 @media(min-width:741px){:host([design2]) .d2-picks>section{display:grid;grid-template-rows:auto 1fr}}
+
+/* Fix 6: English-only Explore editions and free lead magnet. */
+:host([design2]) .d2-picture{position:relative;container-type:inline-size}
+:host([design2]) .d2-language-badge{position:absolute;top:10px;left:10px;z-index:1;border-radius:999px;padding:5px 9px;background:#ffe600;color:#123d18;font:600 12px/1.2 'Space Grotesk','Space Grotesk Fallback',sans-serif;white-space:nowrap}
+:host([design2]) .d2-language-note{margin:-12px 0 20px;color:#526452;font:400 14px/1.4 'Space Grotesk','Space Grotesk Fallback',sans-serif}
+:host([design2]) .d2-language-intro{margin:-10px 0 24px;color:#526452;font:400 16px/1.5 'Space Grotesk','Space Grotesk Fallback',sans-serif}
+:host([design2]) .d2-menu-note{display:block;margin:0 0 6px;padding:0 12px;color:#526452;font:400 12px/1.3 'Space Grotesk','Space Grotesk Fallback',sans-serif}
+:host([design2]) .d2-language-badge{top:8px;left:8px}
+@container(max-width:160px){:host([design2]) .d2-language-badge{top:4px;left:4px;padding:4px 4px;font-size:11px}}
