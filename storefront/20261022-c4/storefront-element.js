@@ -9,7 +9,7 @@
   const design2Enabled = (()=>{let choice;try{const q=new URLSearchParams(location.search).get("design");if(q==="2"||q==="0"){choice=q;sessionStorage.setItem("bwStoreDesign",q);}else choice=sessionStorage.getItem("bwStoreDesign");}catch{}return choice==="2"?true:choice==="0"?false:STORE_DESIGN2;})();
   const CALENDAR_LISTED=true;   // Yusuf 13 Nov 2026: "şimdi bunu store'da, menüde vs nerede gerekli varsa koyalım" (12 Nov it was direct link only)
   const esc = value => String(value ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-  const asset = value => {if(value==='gift-week.js'&&/^[a-f0-9]{40}$/.test(window.__WOB_GIFT_WEEK_P22_REF||''))return 'https://cdn.jsdelivr.net/gh/fenerszymanski/berlinwalk-widgets@'+window.__WOB_GIFT_WEEK_P22_REF+'/storefront/20261022-c4/gift-week.js';const target=new URL(value,base);if(/\.(?:js|css|json)$/.test(target.pathname))target.searchParams.set('v','store-design2-20261113-v9');return target.href;};
+  const asset = value => {if(value==='gift-week.js'&&/^[a-f0-9]{40}$/.test(window.__WOB_GIFT_WEEK_P22_REF||''))return 'https://cdn.jsdelivr.net/gh/fenerszymanski/berlinwalk-widgets@'+window.__WOB_GIFT_WEEK_P22_REF+'/storefront/20261022-c4/gift-week.js';const target=new URL(value,base);if(/\.(?:js|css|json)$/.test(target.pathname))target.searchParams.set('v',value==='design2.js'?'store-design2-fix5b-20261113-v1':'store-design2-fix5b-20261113-v1');return target.href;};
   // Chrome and Safari ignore @font-face inside shadow DOM, so the three faces are registered once on the document with absolute URLs from the element's own base.
   // Gift landing trials showed no LCP gain. Preserve their prior resource and font order.
   const legacyGiftPresentation = () => /^(?:\/de)?\/(?:category\/(?:berlin-christmas-gifts|berlin-geschenke)|gifts|geschenke)\/?$/.test(location.pathname);
@@ -233,7 +233,7 @@
     import(asset('catalog-layer.js')), import(asset('editorial-helpers.js')), import(asset('street-configurator.js')),
     ...['data/categories.json','data/presentation.json','data/native-bindings.json','data/external-products.json'].map(path => fetch(path==='data/presentation.json'?new URL('data/presentation.json?v=gallery-'+Date.now(),base).href:asset(path),path==='data/presentation.json'?{cache:'no-store'}:undefined)/* gallery-fresh-v1 */.then(response => {if (!response.ok) throw Error('CATALOGUE_METADATA_UNAVAILABLE');return response.json();})),
     import(asset('funnel.js')).then(m=>{import(asset('campaign-session.js')).catch(()=>{});return m;}).catch(() => null),   // measurement must never block the shop
-    import(new URL('../../js/store-navigation.js?v=store-design2-20261113-v9',base).href),
+    import(new URL('../../js/store-navigation.js?v=store-design2-fix5b-20261113-v1',base).href),
     import(asset('gift.js')).catch(()=>null),
     import(asset('gift-week.js')),
     import(asset('black-friday.js')),
@@ -399,9 +399,19 @@
     async start() {
       if(!this.layer||this.started||this.getAttribute('shop-bridge-ready')!==CHANNEL)return;
       this.started=true;
-      const reads=await Promise.allSettled([this.request('catalog'),this.request('get')]);
+      const reads=await Promise.allSettled([this.request('catalog'),this.readInitialCart()]);
       for(let index=0;index<reads.length;index++)if(reads[index].status==='rejected'&&index===0)this.fail(reads[index].reason.message);
       this.render();this.signalReady();
+    }
+    async readInitialCart() {
+      this.cartReadState='loading';let failure;
+      for(const delay of [0,350,1000]) {
+        if(delay)await new Promise(resolve=>setTimeout(resolve,delay));
+        if(!this.isConnected)return;
+        try{await this.request('get');if(this.cart){this.cartReadState='ready';this.render();return;}}catch(error){failure=error;}
+      }
+      this.cartReadState='error';this.render();
+      if(this.context.mode==='cart'&&!this.cart)this.fail(failure?.message||'CART_UNAVAILABLE');
     }
     request(op, fields={}) {
       if(this.getAttribute('shop-bridge-ready')!==CHANNEL)return Promise.reject(Error('BRIDGE_NOT_READY'));
@@ -1011,6 +1021,7 @@
       return '';
     }
     cartPage() {
+      if(!this.cart&&this.cartReadState!=='error')return `<section class="wrap empty" role="status"><h1>${this.cartGerman()?'Warenkorb wird geladen…':'Loading your cart…'}</h1></section>`;
       if(!this.cart)return `<section class="wrap empty"><h1>Your cart could not be read.</h1><p>The original cart remains available.</p><button class="primary" data-action="native-fallback">Open original cart</button></section>`;
       if(!this.cart.count)return `<section class="wrap empty"><h1>Your cart is empty.</h1><p>Explore Berlin prints, or listen to a city walk.</p><a class="primary" href="https://walkofberlin.com/category/all-products">Browse the shop</a><div class="grid">${this.model.products.filter(p=>p.fulfilment.cartEligible).slice(0,3).map(p=>this.card(p)).join('')}</div></section>`;
       const form=this.cart.hasShippableItems===null?'<p>Delivery requirements have not been confirmed. Continue in the original cart.</p><button class="outline" data-action="native-fallback">Open original cart</button>':this.addressForm();
@@ -1136,6 +1147,8 @@
       this.previewPriceHeights=this.previewPriceHeights||new Map();
       for(const card of this.shadowRoot.querySelectorAll('.skeleton article[data-product]')){const height=card.querySelector('.price')?.getBoundingClientRect().height;if(height>0)this.previewPriceHeights.set(card.dataset.product,Math.max(height,this.previewPriceHeights.get(card.dataset.product)||0));}
       const skeleton=!this.revealed&&!this.hidden?this.renderSkeleton():false;
+      // Listings need no hidden second product tree while the bridge is loading.
+      if(skeleton&&this.design2Installed&&this.context.mode==='shop')return;
       if(!this.layer||!this.model){
         if(!skeleton){if(this.layer)this.shadowRoot.innerHTML=`<link rel="stylesheet" href="${esc(asset('storefront.css'))}"><div class="bridge-loading" role="status">Loading the store…</div>`;else this.ensureLink();}
         return;

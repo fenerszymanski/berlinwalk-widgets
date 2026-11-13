@@ -717,3 +717,34 @@ button.ys-words-tag:focus-visible{outline:2px solid var(--green);outline-offset:
  :host([design2]) [data-d2-recommendations=similar] .d2-card:nth-child(4){display:flex}
  :host([design2]) [data-d2-recommendations=similar] .d2-card:nth-child(3):last-child{display:none}
 }
+
+/* Fix 4: galleries follow normal document flow on every product shell. */
+:host([design2]) .gallery{position:static!important;top:auto!important}
+:host([design2]) .d2-recommendations[data-d2-recommendations] .d2-grid{max-width:none;grid-template-columns:repeat(var(--d2-row-columns,4),minmax(0,1fr))}
+:host([design2]) [data-d2-recommendations] .d2-card{display:flex!important}
+:host([design2]) .d2-view-all{display:inline-flex;align-items:center;min-height:44px;margin-top:20px;font-weight:600}
+@media(min-width:341px) and (max-width:740px){:host([design2]) .d2-recommendations[data-d2-recommendations] .d2-grid{grid-template-columns:repeat(2,minmax(0,1fr))}:host([design2]) [data-d2-recommendations] .d2-card:nth-child(odd):last-child:not(:first-child){display:none!important}}
+@media(max-width:340px){:host([design2]) .d2-recommendations[data-d2-recommendations] .d2-grid{grid-template-columns:minmax(0,1fr)}}
+/* Short text is provided by the existing language map; retain all input hooks. */
+:host([design2]) .ys-search-input,:host([design2]) [data-cal-search] input,:host([design2]) input[data-ys-address]{min-width:0;font-size:16px}
+
+/* All Explore placements share the same full-bleed 4:3 product photography. */
+:host([design2]) .d2-card .tile.d2-picture,:host([design2]) .tile.d2-picture{padding:0;aspect-ratio:4/3;background:#123d18}
+:host([design2]) .d2-card .tile.d2-picture img.tile-photo,:host([design2]) .tile.d2-picture img.tile-photo{inset:0;width:100%;height:100%;object-fit:cover}
+/* A genuinely single eligible recommendation uses one column, also on phones. */
+
+
+/* Fix 5: every product recommendation uses the same four/two-card grid. */
+:host([design2]) .d2-recommendations[data-d2-recommendations] .d2-grid{grid-template-columns:repeat(4,minmax(0,1fr));max-width:none}
+:host([design2]) .cal-preview{position:static}
+@media(max-width:740px){:host([design2]) .d2-recommendations[data-d2-recommendations] .d2-grid{grid-template-columns:repeat(2,minmax(0,1fr))}:host([design2]) .d2-hero-copy{flex-direction:column;align-items:flex-start}:host([design2]) .d2-hero-copy h1{max-width:100%}:host([design2]) .d2-hero-copy .primary{flex:none;max-width:100%}}
+@media(max-width:340px){:host([design2]) [data-d2-recommendations] .product-name{font-size:14px;line-height:1.25}}
+
+@media(max-width:340px){:host([design2]) [data-d2-recommendations] .d2-card:nth-child(odd):last-child:not(:first-child){display:none!important}}
+
+/* Fix 5B: the legacy gifts selection retains a common portrait frame. */
+:host([design2]) .d2-gifts-grid .d2-card .tile.d2-picture{aspect-ratio:3/4}
+:host([design2]) .d2-gifts-grid .d2-picture img.tile-photo{object-fit:cover}
+:host([design2]) .d2-gifts-grid [data-gift-card]{grid-column:1/-1;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,2fr);gap:24px}
+@media(max-width:740px){:host([design2]) .d2-gifts-grid [data-gift-card]{grid-template-columns:1fr}}
+@media(min-width:741px){:host([design2]) .d2-picks>section{display:grid;grid-template-rows:auto 1fr}}

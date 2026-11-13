@@ -96,7 +96,9 @@ export const STORE_MENU_DESIGN2 = Object.freeze([
   ]},
   {id:'gifts',label:'Gifts',de:'Geschenke',href:'https://walkofberlin.com/category/berlin-christmas-gifts',hrefDe:'https://walkofberlin.com/de/category/berlin-geschenke',items:[
     {label:'Your street in 1928',de:'Deine Straße 1928',href:STORE_PERSONALISED_PRODUCT},
-    {label:'Dein Berlin 2027',de:'Dein Berlin 2027',href:STORE_PERSONAL_CALENDAR_PRODUCT},
+    {label:'1928 digital file',de:'1928 als digitale Datei',href:'https://walkofberlin.com/product-page/your-berlin-street-in-1928-digital-file'},
+    {label:'Gift a digital file',de:'Digitale Datei verschenken',href:'https://walkofberlin.com/product-page/your-berlin-street-in-1928-digital-gift'},
+    {label:'Dein Berlin 2027 · personalised calendar',de:'Dein Berlin 2027 · persönlicher Kalender',href:STORE_PERSONAL_CALENDAR_PRODUCT},
     {label:'Berlin 2027 wall calendar',de:'Berlin Wandkalender 2027',href:STORE_CALENDAR_PRODUCT},
     {label:'Personal newspapers',de:'Persönliche Zeitungen',href:storeHref('newspapers')},
     {label:'1928 gift voucher',de:'1928-Gutschein',href:'https://walkofberlin.com/product-page/gift-your-berlin-street-in-1928-poster-gift'}

@@ -1,7 +1,7 @@
 (() => {
-const BW_HEADER_NAV_VERSION = 'store-design2-20261113';
+const BW_HEADER_NAV_VERSION = 'store-design2-fix5b-20261113';
 if (customElements.get('bw-site-header')?.navigationVersion === BW_HEADER_NAV_VERSION
-  || customElements.get('bw-site-header-design2')?.navigationVersion === BW_HEADER_NAV_VERSION) return;
+  || customElements.get('bw-site-header-design2-fix5b')?.navigationVersion === BW_HEADER_NAV_VERSION) return;
 
 const BW_HEADER_SCRIPT_URL = (document.currentScript && document.currentScript.src) || 'https://fenerszymanski.github.io/berlinwalk-widgets/site-header/site-header-element.js';
 // Walk of Berlin wordmark (A15a, live 2 October 2026). The old berlinwalk-wordmark-*
@@ -164,8 +164,18 @@ const BW_HEADER_STORE_DESIGN2_EN = [
         "href": "https://walkofberlin.com/product-page/your-berlin-street-in-1928-personalised-aerial-print-30-x-40-cm"
       },
       {
-        "label": "Dein Berlin 2027",
-        "de": "Dein Berlin 2027",
+        "label": "1928 digital file",
+        "de": "1928 als digitale Datei",
+        "href": "https://walkofberlin.com/product-page/your-berlin-street-in-1928-digital-file"
+      },
+      {
+        "label": "Gift a digital file",
+        "de": "Digitale Datei verschenken",
+        "href": "https://walkofberlin.com/product-page/your-berlin-street-in-1928-digital-gift"
+      },
+      {
+        "label": "Dein Berlin 2027 · personalised calendar",
+        "de": "Dein Berlin 2027 · persönlicher Kalender",
         "href": "https://walkofberlin.com/product-page/dein-berlin-2027-personalised-wall-calendar"
       },
       {
@@ -271,8 +281,18 @@ const BW_HEADER_STORE_DESIGN2_DE = [
         "href": "https://walkofberlin.com/de/product-page/your-berlin-street-in-1928-personalised-aerial-print-30-x-40-cm"
       },
       {
-        "label": "Dein Berlin 2027",
-        "de": "Dein Berlin 2027",
+        "label": "1928 als digitale Datei",
+        "de": "1928 als digitale Datei",
+        "href": "https://walkofberlin.com/de/product-page/your-berlin-street-in-1928-digital-file"
+      },
+      {
+        "label": "Digitale Datei verschenken",
+        "de": "Digitale Datei verschenken",
+        "href": "https://walkofberlin.com/de/product-page/your-berlin-street-in-1928-digital-gift"
+      },
+      {
+        "label": "Dein Berlin 2027 · persönlicher Kalender",
+        "de": "Dein Berlin 2027 · persönlicher Kalender",
         "href": "https://walkofberlin.com/de/product-page/dein-berlin-2027-personalised-wall-calendar"
       },
       {
@@ -325,7 +345,7 @@ const BW_HEADER_STORE_DESIGN2_DE = [
 
 // One menu model for desktop disclosures and mobile accordions.
 // The store's generated links remain owned by sync-store-navigation.mjs.
-const BW_HEADER_MENU_GROUPS = [
+const BW_HEADER_LEGACY_GROUPS = [
   {key:'posters',label:'Posters',items:[
     {label:'All posters',href:'https://walkofberlin.com/category/all-products?tab=print'},
     {label:'Berlin landmarks',href:BW_HEADER_LINKS.shopLandmarks},
@@ -384,11 +404,43 @@ const BW_HEADER_MENU_GROUPS = [
     {label:'Meet Yusuf',href:BW_HEADER_LINKS.guide},
     {label:'Reviews',href:BW_HEADER_LINKS.reviews},
   ]},
-  {key:'shop',label:BW_HEADER_STORE_DESIGN2&&(/^\/de(?:\/|$)/.test(location.pathname)||new URLSearchParams(location.search).get('lang')==='de')?'Shop':'Store',items:BW_HEADER_STORE_DESIGN2?((/^\/de(?:\/|$)/.test(location.pathname)||new URLSearchParams(location.search).get('lang')==='de')?BW_HEADER_STORE_DESIGN2_DE:BW_HEADER_STORE_DESIGN2_EN):BW_HEADER_STORE_LINKS},
+  {key:'shop',label:BW_HEADER_STORE_DESIGN2&&(bwHeaderGermanPage())?'Shop':'Store',items:BW_HEADER_STORE_DESIGN2?((bwHeaderGermanPage())?BW_HEADER_STORE_DESIGN2_DE:BW_HEADER_STORE_DESIGN2_EN):BW_HEADER_STORE_LINKS},
 ];
+// Keep the legacy switch available, but simplify the live navigation from one model.
+// Wix's German home alias loads /de and then navigates to /, retaining /de as
+// its same-origin referrer. Preserve that one German entry path in the header;
+// ordinary English home visits and links from other German pages stay English.
+function bwHeaderGermanPage(){
+ if(/^\/de(?:\/|$)/.test(location.pathname)||new URLSearchParams(location.search).get('lang')==='de')return true;
+ if(location.pathname!=='/')return false;
+ try{const ref=new URL(document.referrer);return ref.origin===location.origin&&ref.pathname.replace(/\/+$/,'')==='/de';}catch{return false;}
+}
+const BW_HEADER_GERMAN = bwHeaderGermanPage();
+const BW_HEADER_DE = {
+ 'Walk with me':'Mit mir durch Berlin','Free tools':'Kostenlose Tools','All posts':'Alle Beiträge',
+ 'Living in Berlin':'Leben in Berlin','Tourist tips':'Tipps für Besucher','Berlin history':'Berliner Geschichte',
+ 'Stories from the Route':'Geschichten von der Route','German language':'Deutsche Sprache','Berlin myths':'Berliner Mythen','Before & After':'Damals & heute',
+ 'All Berlin Tools':'Alle Berlin-Tools','Berlin Date Check':'Berlin-Termincheck','Transport Ticket Calculator':'Fahrkartenrechner',
+ "What's Open Today":'Was heute geöffnet ist','First-Day Planner':'Planer für den ersten Tag','Berlin games':'Berlin-Spiele','Embed these tools':'Tools einbetten',
+ 'Berlin Then and Now':'Berlin damals und heute','All tours':'Alle Touren','Private tours':'Private Touren','Virtual tours':'Virtuelle Touren',
+ 'Meeting point':'Treffpunkt','The route':'Die Route','Meet Yusuf':'Yusuf kennenlernen','Reviews':'Bewertungen'
+};
+const BW_HEADER_DESIGN2_HOME = 'https://walkofberlin.com'+(BW_HEADER_GERMAN?'/de':'')+'/category/all-products';
+const bwHeaderGermanHref = href => {const u=new URL(href);if(BW_HEADER_GERMAN&&/(^|\.)walkofberlin\.com$/.test(u.hostname)&&/^\/(?:blog(?:\/|$)|$)/.test(u.pathname)){u.pathname='/de'+u.pathname.replace(/\/$/,'');u.searchParams.set('lang','de');}return u.href;};
+if(BW_HEADER_STORE_DESIGN2)BW_HEADER_LINKS.home=bwHeaderGermanHref(BW_HEADER_LINKS.home);
+const BW_HEADER_MENU_GROUPS = BW_HEADER_STORE_DESIGN2?['shop','walk','blog','tools'].map(key=>{
+ const group=BW_HEADER_LEGACY_GROUPS.find(g=>g.key===key);
+ return {...group,label:key==='shop'?'Store':BW_HEADER_GERMAN?(BW_HEADER_DE[group.label]||group.label):group.label,
+ items:key==='shop'?group.items:group.items.map(i=>({...i,href:bwHeaderGermanHref(i.href),label:BW_HEADER_GERMAN?(BW_HEADER_DE[i.label]||i.label):i.label}))};
+}):BW_HEADER_LEGACY_GROUPS;
+function bwHeaderNavigateLink(event,link) {
+ if(event.button!==0||event.metaKey||event.ctrlKey||event.shiftKey||event.altKey||link.target==='_blank'||link.hasAttribute('download'))return;
+ // Explicit document navigation preserves query filters that Wix's router discards.
+ event.preventDefault();event.stopPropagation();location.assign(link.href);
+}
 const bwHeaderEscape = value => String(value).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const bwHeaderCommercePage = () => location.pathname.replace(/\/+$/,'') === '/products/berlin-landmarks-guide';
-const bwHeaderCommerceBridge = () => {const link=document.createElement('a');link.className='bw-header-book bw-header-commerce-bridge';link.href=BW_HEADER_BOOKING_URL;link.textContent='See dates and book';return link;};
+const bwHeaderCommerceBridge = () => {const link=document.createElement('a');link.className='bw-header-book bw-header-commerce-bridge';link.href=BW_HEADER_BOOKING_URL;link.textContent=BW_HEADER_GERMAN?'Termine ansehen und buchen':'See dates and book';return link;};
 const bwHeaderItems = group => group.items.map(item=>item.items?`<li class="bw-header-store-group"><a class="bw-header-store-group-title" href="${bwHeaderEscape(item.href)}">${bwHeaderEscape(item.label)}</a><ul>${item.items.map(link=>`<li><a href="${bwHeaderEscape(link.href)}">${bwHeaderEscape(link.label)}</a></li>`).join('')}</ul></li>`:`<li><a href="${bwHeaderEscape(item.href)}">${bwHeaderEscape(item.label)}</a></li>`).join('');
 const bwHeaderMobileItems = group => group.items.map(item=>item.items?`<section class="bw-header-store-mobile-group"><a class="bw-header-store-group-title" href="${bwHeaderEscape(item.href)}">${bwHeaderEscape(item.label)}</a>${item.items.map(link=>`<a href="${bwHeaderEscape(link.href)}">${bwHeaderEscape(link.label)}</a>`).join('')}</section>`:`<a href="${bwHeaderEscape(item.href)}">${bwHeaderEscape(item.label)}</a>`).join('');
 
@@ -554,6 +606,9 @@ class BWHeaderElement extends HTMLElement {
       || !this.querySelector('.bw-header-progress-bar')
       || !this.querySelector('.bw-header-mobile-close')) return false;
     if (!this.querySelector('[data-bw-unified-menu]')) return false;
+    // Ready-screen markup can carry English links on a German home page.
+    const store=this.querySelector('.bw-header-store-link');
+    if(BW_HEADER_STORE_DESIGN2&&store?.href!==BW_HEADER_DESIGN2_HOME)return false;
     const controls = [
       ['.bw-header-hamburger','mobile-menu','.bw-header-mobile'],
       ...BW_HEADER_MENU_GROUPS.map(group=>['.bw-header-dropdown-trigger',`${group.key}-menu`,'.bw-header-submenu']),
@@ -591,6 +646,7 @@ class BWHeaderElement extends HTMLElement {
     this._setupDropdown();
     this.querySelector('.bw-header-tour-link')?.addEventListener('click', event => bwHeaderNavigateTourLink(event, event.currentTarget));
     this._setupViewportMode();
+    this.querySelectorAll('a[href]').forEach(a=>a.addEventListener('click',e=>bwHeaderNavigateLink(e,a)));
   }
 
   _deactivateRuntime() {
@@ -754,6 +810,9 @@ class BWHeaderElement extends HTMLElement {
     this._mobileOverlay = overlay;
 
     const closeBtn = overlay.querySelector('.bw-header-mobile-close');
+    const storeExpand=overlay.querySelector('[data-bw-store-expand]');
+    const storeList=storeExpand&&overlay.querySelector('#'+storeExpand.getAttribute('aria-controls'));
+    storeExpand?.addEventListener('click',()=>{const open=storeExpand.getAttribute('aria-expanded')!=='true';storeExpand.setAttribute('aria-expanded',String(open));storeList.hidden=!open;});
     const mobileSections = Array.from(overlay.querySelectorAll('details.bw-header-mobile-section'));
     mobileSections.forEach((section) => {
       const summary = section.querySelector('summary');
@@ -776,6 +835,7 @@ class BWHeaderElement extends HTMLElement {
       btn.setAttribute('aria-expanded', String(open));
       overlay.setAttribute('aria-hidden', String(!open));
       overlay.toggleAttribute('inert', !open);
+      if(!open&&storeExpand){storeExpand.setAttribute('aria-expanded','false');storeList.hidden=true;}
       if (!open) mobileSections.forEach((section) => { section.open = false; });
       if (open) {
         this._closeDropdowns?.();
@@ -798,7 +858,7 @@ class BWHeaderElement extends HTMLElement {
     });
     overlay.querySelectorAll('a').forEach((a) => a.addEventListener('click', (event) => {
       setOpen(false);
-      if (!a.classList.contains('bw-header-mobile-section-link') && a.closest('details')?.querySelector('.bw-header-mobile-tour-label')) bwHeaderNavigateTourLink(event, a);
+      if (!a.classList.contains('bw-header-mobile-section-link') && a.closest('details')?.querySelector('.bw-header-mobile-tour-label')) bwHeaderNavigateTourLink(event, a);else bwHeaderNavigateLink(event,a);
     }));
     overlay.addEventListener('click', (e) => {
       if (e.target === overlay) {
@@ -938,12 +998,13 @@ class BWHeaderElement extends HTMLElement {
         if (!wrap.classList.contains('bw-header-dropdown-open')) openedByHover = true;
         setOpen(true);
       });
+      wrap.addEventListener('focusin',()=>{if(this._escapeClosing)return;cancelClose();closeAll(context);setOpen(true);});
       wrap.addEventListener('mouseleave', scheduleClose);
       menu.addEventListener('mouseenter', cancelClose);
       menu.addEventListener('mouseleave', scheduleClose);
       menu.querySelectorAll('a').forEach((link) => link.addEventListener('click', (event) => {
         closeAll();
-        if (wrap.classList.contains('bw-header-tours-dropdown')) bwHeaderNavigateTourLink(event, link);
+        if (wrap.classList.contains('bw-header-tours-dropdown')) bwHeaderNavigateTourLink(event, link);else bwHeaderNavigateLink(event,link);
       }));
       if (trigger.getBoundingClientRect().width > 0) positionMenu();
     });
@@ -963,7 +1024,7 @@ class BWHeaderElement extends HTMLElement {
       if (!openContext) return;
       event.preventDefault();
       closeAll();
-      openContext.trigger.focus();
+      this._escapeClosing=true;openContext.trigger.focus();this._escapeClosing=false;
     };
     document.addEventListener('keydown', this._dropdownKeyHandler);
     this._dropdownReposition = () => {
@@ -995,7 +1056,7 @@ class BWHeaderElement extends HTMLElement {
           src: url(${BW_HEADER_MENU_FONT_URL}) format('woff2');
         }
 
-        bw-site-header, bw-site-header-design2 {
+        bw-site-header, bw-site-header-design2-fix5b {
           display: block;
           width: 100%;
         }
@@ -1287,6 +1348,14 @@ class BWHeaderElement extends HTMLElement {
         .bw-header-store-group ul{margin:0;padding:0;list-style:none}
         .bw-header-submenu .bw-header-store-group-title{font-weight:700;border-bottom:1px solid #c5e1a5}
         .bw-header-submenu .bw-header-store-group a{white-space:normal;overflow-wrap:anywhere}
+        .bw-header-nav .bw-header-store-link{text-decoration:none;padding:12px 0 12px 11px;display:inline-block}
+        .bw-header-store-expand{padding:12px 0!important;min-width:20px;margin-left:4px}
+        .bw-header-nav button:focus:not(:focus-visible){outline:none;box-shadow:none}
+        .bw-header-store-row{display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,.12)}
+        .bw-header-mobile-section .bw-header-store-row>a{border:0;flex:1;padding-left:0;font-size:22px}
+        [data-bw-store-expand] .bw-header-caret{display:inline-block;transition:transform 160ms ease}
+        [data-bw-store-expand][aria-expanded=true] .bw-header-caret{transform:rotate(180deg)}
+        .bw-header-store-row button{background:transparent;border:1px solid currentColor;color:inherit;min-width:44px;min-height:44px;font-size:22px}
         .bw-header-store-mobile-group{padding:12px 0;border-top:1px solid #c5e1a555}
         .bw-header-store-mobile-group>.bw-header-store-group-title{font-weight:700}
 
@@ -1703,20 +1772,20 @@ class BWHeaderElement extends HTMLElement {
             </a>
 
             <nav class="bw-header-nav" aria-label="Primary" data-bw-unified-menu="${BW_HEADER_NAV_VERSION}">
-              <ul class="bw-header-nav-list" data-bw-home-nav>${BW_HEADER_MENU_GROUPS.filter(group=>group.key!=='shop').map(group=>`
+              <ul class="bw-header-nav-list" data-bw-home-nav>${BW_HEADER_MENU_GROUPS.filter(group=>BW_HEADER_STORE_DESIGN2||group.key!=='shop').map(group=>`
                 <li class="bw-header-dropdown ${group.key==='walk'?'bw-header-tours-dropdown':''}">
-                  <button class="bw-header-dropdown-trigger" type="button" aria-expanded="false" aria-controls="${this._instanceId}-${group.key}-menu">${bwHeaderEscape(group.label)} <span class="bw-header-caret" aria-hidden="true">⌄</span></button>
+                  ${group.key==='shop'?`<a class="bw-header-store-link" href="${BW_HEADER_DESIGN2_HOME}">Store</a><button class="bw-header-dropdown-trigger bw-header-store-expand" type="button" aria-label="${BW_HEADER_GERMAN?'Store-Menü öffnen':'Open Store menu'}" aria-expanded="false" aria-controls="${this._instanceId}-shop-menu"><span class="bw-header-caret" aria-hidden="true">⌄</span></button>`:`<button class="bw-header-dropdown-trigger" type="button" aria-expanded="false" aria-controls="${this._instanceId}-${group.key}-menu">${bwHeaderEscape(group.label)} <span class="bw-header-caret" aria-hidden="true">⌄</span></button>`}
                   <ul id="${this._instanceId}-${group.key}-menu" class="bw-header-submenu" aria-label="${bwHeaderEscape(group.label)}"${group.key==='shop'&&BW_HEADER_STORE_DESIGN2?' data-bw-store-menu="design2"':''} hidden inert>${bwHeaderItems(group)}</ul>
                 </li>`).join('')}</ul>
             </nav>
 
             <div class="bw-header-cta">
-              <div class="bw-header-dropdown bw-header-store-dropdown">
+              ${BW_HEADER_STORE_DESIGN2?'':`<div class="bw-header-dropdown bw-header-store-dropdown">
                 <button class="bw-header-home-store bw-header-dropdown-trigger" type="button" aria-expanded="false" aria-controls="${this._instanceId}-shop-menu">${bwHeaderEscape(BW_HEADER_MENU_GROUPS.find(group=>group.key==='shop').label)} <span class="bw-header-caret" aria-hidden="true">⌄</span></button>
                 <ul id="${this._instanceId}-shop-menu" class="bw-header-submenu" aria-label="Store" data-bw-store-menu="${BW_HEADER_STORE_DESIGN2?'design2':'legacy'}" hidden inert>${bwHeaderItems(BW_HEADER_MENU_GROUPS.find(group=>group.key==='shop'))}</ul>
-              </div>
-              <a class="bw-header-book bw-header-commerce-bridge" href="${BW_HEADER_BOOKING_URL}">See dates and book</a>
-              <button class="bw-header-hamburger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="${this._mobileMenuId}">
+              </div>`}
+              <a class="bw-header-book bw-header-commerce-bridge" href="${BW_HEADER_BOOKING_URL}">${BW_HEADER_GERMAN?'Termine ansehen und buchen':'See dates and book'}</a>
+              <button class="bw-header-hamburger" type="button" aria-label="${BW_HEADER_GERMAN?'Menü öffnen':'Open menu'}" aria-expanded="false" aria-controls="${this._mobileMenuId}">
                 <span></span><span></span><span></span>
               </button>
             </div>
@@ -1731,11 +1800,11 @@ class BWHeaderElement extends HTMLElement {
           <div class="bw-header-mobile-inner">
             <div class="bw-header-mobile-head">
               <img src="${BW_HEADER_LOGO_ON_GREEN_URL}" alt="Walk of Berlin" width="900" height="142">
-              <button class="bw-header-mobile-close" type="button" aria-label="Close menu">×</button>
+              <button class="bw-header-mobile-close" type="button" aria-label="${BW_HEADER_GERMAN?'Menü schließen':'Close menu'}">×</button>
             </div>
 
             <nav class="bw-header-mobile-nav" aria-label="Mobile primary">
-              ${BW_HEADER_MENU_GROUPS.map(group=>`<details class="bw-header-mobile-section" data-bw-menu-group="${group.key}">
+              ${BW_HEADER_MENU_GROUPS.map(group=>group.key==='shop'&&BW_HEADER_STORE_DESIGN2?`<div class="bw-header-mobile-section" data-bw-menu-group="shop"><div class="bw-header-store-row"><a href="${BW_HEADER_DESIGN2_HOME}">Store</a><button type="button" data-bw-store-expand aria-expanded="false" aria-controls="${this._instanceId}-mobile-store" aria-label="${BW_HEADER_GERMAN?'Store-Menü öffnen':'Open Store menu'}"><span class="bw-header-caret" aria-hidden="true">⌄</span></button></div><div id="${this._instanceId}-mobile-store" hidden><a href="${BW_HEADER_DESIGN2_HOME}">${BW_HEADER_GERMAN?'Zur Store-Startseite':'Store home'}</a>${bwHeaderMobileItems(group)}</div></div>`:`<details class="bw-header-mobile-section" data-bw-menu-group="${group.key}">
                 <summary class="bw-header-mobile-section-label ${group.key==='walk'?'bw-header-mobile-tour-label':''}">${bwHeaderEscape(group.label)}</summary>
                 ${bwHeaderMobileItems(group)}
               </details>`).join('')}
@@ -1758,7 +1827,7 @@ class BWHeaderElement extends HTMLElement {
 // in-site navigation.
 // /berlin-trip-planner and the Photo Missions page are store product pages since 29 Oct 2026 (trip-planner-store,
 // photo-missions-store elements).
-const BW_HEADER_STORE_ROUTE = /^\/(?:category|product-page|cart-page|thank-you-page|store|shop|berlin-trip-planner|products\/hidden-berlin-photo-missions)(?:\/|$)/;
+const BW_HEADER_STORE_ROUTE = /^\/(?:de\/)?(?:category|product-page|cart-page|thank-you-page|store|shop|berlin-trip-planner|products\/hidden-berlin-photo-missions)(?:\/|$)/;
 function bwHeaderStoreMode() {
   const store = BW_HEADER_STORE_ROUTE.test(location.pathname);
   const home = location.pathname === '/';
@@ -1860,19 +1929,25 @@ function bwHeaderStoreModeWatch() {
 BWHeaderElement.navigationVersion = BW_HEADER_NAV_VERSION;
 if (!customElements.get('bw-site-header')) {
   customElements.define('bw-site-header', BWHeaderElement);
-} else {
+}
+{
   // Preserve the native tag (and product-adapter selectors) when an older
   // cached Wix script registered first. Its runtime is cleaned before mounting
   // the new element inside that host; do not mutate a registered prototype.
-  customElements.define('bw-site-header-design2', BWHeaderElement);
+  if(!customElements.get('bw-site-header-design2-fix5b'))customElements.define('bw-site-header-design2-fix5b', class extends BWHeaderElement {});
   const upgrade = () => {
     for (const host of document.querySelectorAll('bw-site-header')) {
-      if(host.querySelector(':scope > bw-site-header-design2'))continue;
-      const next=document.createElement('bw-site-header-design2');
+      if(host.constructor.navigationVersion===BW_HEADER_NAV_VERSION&&!host.querySelector('bw-site-header-unified,bw-site-header-design2,bw-site-header-design2-fix4,bw-site-header-design2-fix5'))continue;
+      if(host.querySelector('bw-site-header-design2-fix5b'))continue;
+      // Preserve older compatibility hosts: their observers use the direct
+      // child tag as an upgrade guard. Removing it makes two builds fight.
+      const legacy=[host,...host.querySelectorAll('bw-site-header-unified,bw-site-header-design2,bw-site-header-design2-fix4,bw-site-header-design2-fix5')];
+      const mount=legacy.at(-1);
+      const next=document.createElement('bw-site-header-design2-fix5b');
       next._preservedCommerceForm=host.querySelector('form[data-bw-landmarks-guide-header-checkout]');
       next._preservedCommerceForm?.remove();
-      host.disconnectedCallback?.();
-      host.replaceChildren(next);
+      for(const previous of legacy)previous.disconnectedCallback?.();
+      mount.replaceChildren(next);
       host.dataset.bwNavigation='20260917';
       host.dataset.bwNavigationVersion=BW_HEADER_NAV_VERSION;
     }

@@ -18,30 +18,32 @@ export function matchesSearch(product,query,{family,translations={}}={}) {
 export function familyFor(data,id) {return data?.families?.find(f=>f.members.includes(id));}
 export function excludedFamilies(data,family) {return new Set([family?.id,...(data?.bundleContents?.[family?.id]||[])]);}
 // Choose all rows together: a family can occur only once across the whole page.
-export function recommendationRows(data,product,products,related=[],{similarLimit=3}={}) {
+export function recommendationRows(data,product,products,related=[],{similarLimit=3,hangLimit=2,exploreLimit=1}={}) {
  const family=familyFor(data,product.id),excluded=excludedFamilies(data,family);
  const digital=p=>p.kind==='digital'||p.nativeProductType==='digital';
  const key=p=>familyFor(data,p.id)?.id||p.id;
  const used=new Set([...excluded,key(product)]), rows={similar:[],'hang-together':[],explore:[]};
+ const personalSimilar=kind=>kind==='similar'&&Array.isArray(family?.similarOnly);
  const eligible=(p,kind)=>p&&p.id!==product.id&&p.visible!==false&&p.inStock===true&&p.status==='available'&&!used.has(key(p))&&
-  (kind==='explore'?p.action==='external':p.fulfilment?.cartEligible===true)&&
-  p.wixProductId!==product.alternativeProductId&&p.alternativeProductId!==product.wixProductId;
- const members=(id,kind)=>{const f=data.families.find(f=>f.id===id);return (kind==='explore'?f?.exploreMembers:f?.eligibleMembers)?.map(id=>products.find(p=>p.id===id)).filter(Boolean).sort((a,b)=>Number(digital(b)===digital(product))-Number(digital(a)===digital(product)))||[];};
+  (!personalSimilar(kind)||family.similarOnly.includes(key(p)))&&
+  (personalSimilar(kind)&&p.action==='external'?family.similarOnly.includes(key(p)):kind==='explore'?p.action==='external'&&!p.externalSourceKey?.startsWith('newspaper-'):product.action==='external'?p.action==='external'&&p.categoryIds?.some(c=>product.categoryIds?.includes(c)):p.fulfilment?.cartEligible===true)&&
+  (!product.alternativeProductId||p.wixProductId!==product.alternativeProductId)&&(!p.alternativeProductId||p.alternativeProductId!==product.wixProductId);
+ const members=(id,kind)=>{const f=data.families.find(f=>f.id===id);return (personalSimilar(kind)?f?.members:kind==='explore'?f?.exploreMembers:f?.eligibleMembers)?.map(id=>products.find(p=>p.id===id)).filter(Boolean).sort((a,b)=>Number(digital(b)===digital(product))-Number(digital(a)===digital(product)))||[];};
  const editorial=kind=>(family?.[{similar:'similar','hang-together':'hangTogether',explore:'explore'}[kind]]||[]).flatMap(id=>members(id,kind));
- // Same collection, then same format/kind, then today's related() order, then catalogue order.
+ // Editorial choices are filled first; related() leads the fallback order.
  const sameCollection=p=>(product.group&&p.group===product.group)||p.nativeCategoryIds?.some(id=>product.nativeCategoryIds?.includes(id))||familyFor(data,p.id)?.themes.some(t=>family?.themes.includes(t));
- const fallback=[...products.filter(sameCollection),...products.filter(p=>digital(p)===digital(product)),...related,...products];
+ const fallback=[...related,...products.filter(sameCollection),...products.filter(p=>digital(p)===digital(product)),...products];
  const fill=(kind,candidates,limit)=>{for(const p of candidates){if(rows[kind].length===limit)break;if(eligible(p,kind)){rows[kind].push(p);used.add(key(p));}}};
  // Reserve each row's editorial choices before filling gaps in either row.
- fill('similar',editorial('similar'),similarLimit);fill('hang-together',editorial('hang-together'),2);
- fill('similar',fallback,similarLimit);fill('hang-together',fallback,2);
- fill('explore',editorial('explore'),1);
+ fill('similar',editorial('similar'),similarLimit);fill('hang-together',editorial('hang-together'),hangLimit);
+ fill('similar',fallback,similarLimit);fill('hang-together',fallback,hangLimit);
+ fill('explore',[...editorial('explore'),...products],exploreLimit);
  return rows;
 }
 export function chooseRecommendations(data,product,products,kind) {return recommendationRows(data,product,products)[kind];}
-export function nativeRecommendationEligible(row) {
- if(!row||row.visible!==true||row.inStock!==true||!Number.isFinite(row.discountedPrice??row.price)||(row.discountedPrice??row.price)<0)return false;
+export function nativeRecommendationEligible(row,{trustedBridge=false}={}) {
+ if(!row||(trustedBridge?row.visible===false:row.visible!==true)||row.inStock!==true||!Number.isFinite(row.discountedPrice??row.price)||(row.discountedPrice??row.price)<0)return false;
  return row.requiresOptions===true
-  ? row.variants?.some(v=>v.visible===true&&v.inStock===true&&Number.isFinite(v.price)&&v.price>=0)===true
+  ? (trustedBridge&&row.posterOptions===true)||row.variants?.some(v=>v.visible===true&&v.inStock===true&&Number.isFinite(v.price)&&v.price>=0)===true
   : row.directAddAllowed===true;
 }

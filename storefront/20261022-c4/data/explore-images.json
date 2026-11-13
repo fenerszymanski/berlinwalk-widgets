@@ -1,0 +1,86 @@
+{
+  "trio": {
+    "image": "design2/explore/trio.webp?v=fix5b-1",
+    "width": 800,
+    "height": 600,
+    "alt": "Berlin skyline panorama",
+    "altDe": "Berliner Stadtpanorama"
+  },
+  "au-wall": {
+    "image": "design2/explore/au-wall.webp?v=fix5b-1",
+    "width": 800,
+    "height": 600,
+    "alt": "Berlin Wall remnant at Niederkirchnerstraße and the walk’s real sample player",
+    "altDe": "Mauerrest an der Niederkirchnerstraße und der echte Hörproben-Player"
+  },
+  "au-hidden": {
+    "image": "design2/explore/au-hidden.webp?v=fix5b-1",
+    "width": 800,
+    "height": 600,
+    "alt": "Hackescher Markt and the real Hidden Berlin Walk B route preview including Hackescher Markt",
+    "altDe": "Hackescher Markt und die echte Routenvorschau von Hidden Berlin, Walk B mit Hackeschem Markt"
+  },
+  "au-medieval": {
+    "image": "design2/explore/au-medieval.webp?v=fix5b-1",
+    "width": 800,
+    "height": 600,
+    "alt": "St Mary’s Church and the real Medieval Berlin sample player",
+    "altDe": "Marienkirche und der echte Hörproben-Player von Medieval Berlin"
+  },
+  "gd-rescue": {
+    "image": "design2/explore/gd-rescue.webp?v=fix5b-1",
+    "width": 800,
+    "height": 600,
+    "alt": "Friedrichstraße station and a real sample first-day plan",
+    "altDe": "Bahnhof Friedrichstraße und ein echter Beispielplan für den ersten Tag"
+  },
+  "gd-landmarks": {
+    "image": "design2/explore/gd-landmarks.webp?v=fix5b-1",
+    "width": 800,
+    "height": 600,
+    "alt": "Berliner Dom beside the Spree and a real page of the Landmarks Guide",
+    "altDe": "Berliner Dom an der Spree und eine echte Seite des Wahrzeichen-Guides"
+  },
+  "gd-photo": {
+    "image": "design2/explore/gd-photo.webp?v=fix5b-1",
+    "width": 800,
+    "height": 600,
+    "alt": "Anhalter Bahnhof portico and a real Photo Missions page",
+    "altDe": "Portal des Anhalter Bahnhofs und eine echte Seite der Foto-Missionen"
+  },
+  "gd-wall-virtual": {
+    "image": "design2/explore/gd-wall-virtual.webp?v=fix5b-1",
+    "width": 800,
+    "height": 600,
+    "alt": "Bernauer Straße Wall remnant and the Berlin Wall virtual tour’s real video preview",
+    "altDe": "Mauerrest an der Bernauer Straße und die echte Videovorschau der virtuellen Mauertour"
+  },
+  "gd-night-in": {
+    "image": "design2/explore/gd-night-in.webp?v=fix5b-1",
+    "width": 800,
+    "height": 600,
+    "alt": "Berlin railway tracks at sunset and the real Night In episode screen",
+    "altDe": "Berliner Bahngleise bei Sonnenuntergang und der echte Bildschirm der Night-In-Folge"
+  },
+  "au-third-reich": {
+    "image": "design2/explore/au-third-reich.webp?v=fix5b-1",
+    "width": 800,
+    "height": 600,
+    "alt": "Topography of Terror site and Wall remnant and the Third Reich walk’s real start screen and sample player",
+    "altDe": "Topographie des Terrors mit Mauerrest und der echte Startbildschirm mit Hörproben-Player der Tour zur NS-Zeit"
+  },
+  "gd-medieval-virtual": {
+    "image": "design2/explore/gd-medieval-virtual.webp?v=fix5b-1",
+    "width": 800,
+    "height": 600,
+    "alt": "Rotes Rathaus beside the TV Tower and the Medieval Berlin virtual tour’s real sample screen",
+    "altDe": "Rotes Rathaus neben dem Fernsehturm und der echte Beispielbildschirm der virtuellen Tour durch das mittelalterliche Berlin"
+  },
+  "gd-trip-planner": {
+    "image": "design2/explore/gd-trip-planner.webp?v=fix5b-1",
+    "width": 800,
+    "height": 600,
+    "alt": "Brandenburg Gate at blue hour and the Trip Planner’s real itinerary screen",
+    "altDe": "Brandenburger Tor zur blauen Stunde und der echte Reiseplan des Reiseplaners"
+  }
+}

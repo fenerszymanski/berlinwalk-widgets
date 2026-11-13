@@ -5,6 +5,8 @@ export const DESIGN2_TEXT = Object.freeze({
   "Shop the prints": "Poster entdecken",
   "Looking for a Christmas gift? Start here.": "Suchst du ein Weihnachtsgeschenk? Fang hier an.",
   "Search posters, districts…": "Poster, Bezirke und Motive suchen…",
+  "All products": "Alle Produkte",
+  "Search posters…": "Poster suchen…",
   "My picks": "Meine Auswahl",
   "Similar designs": "Ähnliche Motive",
   "Made to hang together": "Passt gut zusammen",
@@ -41,6 +43,7 @@ export const DESIGN2_TEXT = Object.freeze({
   "Sets": "Sets",
   "Print at home": "Zum Selbstdrucken",
   "Your street in 1928": "Deine Straße 1928",
+  "Dein Berlin 2027 · personalised calendar": "Dein Berlin 2027 · persönlicher Kalender",
   "Dein Berlin 2027": "Dein Berlin 2027",
   "Berlin 2027 wall calendar": "Berlin Wandkalender 2027",
   "Personal newspapers": "Persönliche Zeitungen",
@@ -58,7 +61,19 @@ export const DESIGN2_TEXT = Object.freeze({
   "Two Berlin prints in oak frames above a cabinet.": "Zwei Berlin-Poster in Eichenrahmen über einer Kommode.",
   "Size": "Größe",
   "Paper": "Papier",
-  "Add to cart": "In den Warenkorb"
+  "Add to cart": "In den Warenkorb",
+  "Berlin address": "Berliner Adresse",
+  "1928 digital file": "1928 als digitale Datei",
+  "Gift a digital file": "Digitale Datei verschenken",
+  "Explore all audio walks & guides": "Alle Audiotouren und Guides entdecken",
+  "All audio walks": "Alle Audiotouren",
+  "All guides": "Alle Guides",
+  "All gifts": "Alle Geschenke",
+  "All Everyday posters": "Alle Poster zum Berliner Alltag",
+  "All Landmarks posters": "Alle Wahrzeichen-Poster",
+  "All Berlin Stories posters": "Alle Poster mit Berliner Geschichten",
+  "All Districts posters": "Alle Bezirks-Poster",
+  "All poster sets": "Alle Poster-Sets"
 });
 // German layer for the 1928 page (30 Oct 2026, press launch). Loaded with ?lang=de (a /de/ page gets it too). It rewrites visible text inside the
 // storefront's shadow root and never touches cart, price or order logic, so a miss simply leaves that string in English.

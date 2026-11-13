@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "sourceSha256": "3122a584149086da4be357e702193cb2876897b7dda76ced0881f60650621968",
   "verifiedAt": "2026-11-13T09:44:46.965627+00:00",
-  "eligibility": "Current public JSON-LD InStock + enabled native binding; render also requires fresh bridge inStock, status and cartEligible. External products only in explore lane.",
+  "eligibility": "Current public JSON-LD InStock + enabled native binding; render also requires fresh bridge inStock, status and cartEligible. External products only in explore lane or explicitly curated personalised similar rows (verified newspapers).",
   "families": [
     {
       "id": "wc",
@@ -604,10 +604,23 @@
       "exploreMembers": [],
       "similar": [
         "dein-berlin-2027",
+        "np-birthday",
+        "np-big-day",
         "gift-ys-poster"
       ],
-      "hangTogether": [],
-      "explore": []
+      "hangTogether": [
+        "wc",
+        "tv",
+        "bu",
+        "pr-berolina-modernist"
+      ],
+      "explore": [],
+      "similarOnly": [
+        "dein-berlin-2027",
+        "np-birthday",
+        "np-big-day",
+        "gift-ys-poster"
+      ]
     },
     {
       "id": "ed-print-01-tempelhof",
@@ -948,10 +961,23 @@
       "exploreMembers": [],
       "similar": [
         "ys",
-        "dein-berlin-2027"
+        "dein-berlin-2027",
+        "np-birthday",
+        "np-big-day"
       ],
-      "hangTogether": [],
-      "explore": []
+      "hangTogether": [
+        "wc",
+        "tv",
+        "bu",
+        "pr-berolina-modernist"
+      ],
+      "explore": [],
+      "similarOnly": [
+        "ys",
+        "dein-berlin-2027",
+        "np-birthday",
+        "np-big-day"
+      ]
     },
     {
       "id": "pr-siegessaeule",
@@ -1395,12 +1421,24 @@
       ],
       "exploreMembers": [],
       "similar": [
-        "pr-berlin-2027-wall-calendar",
         "ys",
+        "np-birthday",
+        "np-big-day",
         "gift-ys-poster"
       ],
-      "hangTogether": [],
-      "explore": []
+      "hangTogether": [
+        "wc",
+        "tv",
+        "bu",
+        "pr-berolina-modernist"
+      ],
+      "explore": [],
+      "similarOnly": [
+        "ys",
+        "np-birthday",
+        "np-big-day",
+        "gift-ys-poster"
+      ]
     },
     {
       "id": "dl-berlin-twelve-districts",
