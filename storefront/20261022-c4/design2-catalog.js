@@ -18,7 +18,7 @@ export function matchesSearch(product,query,{family,translations={}}={}) {
 export function familyFor(data,id) {return data?.families?.find(f=>f.members.includes(id));}
 export function excludedFamilies(data,family) {return new Set([family?.id,...(data?.bundleContents?.[family?.id]||[])]);}
 // Choose all rows together: a family can occur only once across the whole page.
-export function recommendationRows(data,product,products,related=[]) {
+export function recommendationRows(data,product,products,related=[],{similarLimit=3}={}) {
  const family=familyFor(data,product.id),excluded=excludedFamilies(data,family);
  const digital=p=>p.kind==='digital'||p.nativeProductType==='digital';
  const key=p=>familyFor(data,p.id)?.id||p.id;
@@ -33,8 +33,8 @@ export function recommendationRows(data,product,products,related=[]) {
  const fallback=[...products.filter(sameCollection),...products.filter(p=>digital(p)===digital(product)),...related,...products];
  const fill=(kind,candidates,limit)=>{for(const p of candidates){if(rows[kind].length===limit)break;if(eligible(p,kind)){rows[kind].push(p);used.add(key(p));}}};
  // Reserve each row's editorial choices before filling gaps in either row.
- fill('similar',editorial('similar'),3);fill('hang-together',editorial('hang-together'),2);
- fill('similar',fallback,3);fill('hang-together',fallback,2);
+ fill('similar',editorial('similar'),similarLimit);fill('hang-together',editorial('hang-together'),2);
+ fill('similar',fallback,similarLimit);fill('hang-together',fallback,2);
  fill('explore',editorial('explore'),1);
  return rows;
 }

@@ -87,7 +87,7 @@ export const STORE_HOME_CARDS = Object.freeze([
 
 // Design 2 is additive: the legacy exports above remain byte-for-byte compatible.
 // The publication patch flips this together with STORE_DESIGN2 in the storefront.
-export const STORE_DESIGN2_MENU = false;
+export const STORE_DESIGN2_MENU = true;
 export const STORE_MENU_DESIGN2 = Object.freeze([
   {id:'posters',label:'Posters',de:'Poster',href:storeHref('print'),items:[
     {label:'All posters',de:'Alle Poster',href:storeHref('print')},

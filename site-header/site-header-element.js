@@ -106,7 +106,7 @@ const BW_HEADER_STORE_HOME = "https://walkofberlin.com/category/all-products?tab
 // END GENERATED STORE NAVIGATION
 
 // BEGIN GENERATED DESIGN2 STORE MENU
-const BW_HEADER_STORE_DESIGN2 = false;
+const BW_HEADER_STORE_DESIGN2 = true;
 const BW_HEADER_STORE_DESIGN2_EN = [
   {
     "id": "posters",
