@@ -751,3 +751,22 @@ bw-home-then-now .bwh-gw__note{margin:1em 0;position:absolute;left:0;right:0;bot
 
 bw-home-then-now .bwh-gw :focus-visible{outline:3px solid var(--bwh-yellow);outline-offset:4px}
 bw-home-then-now .bwh-gw__btn--yellow:focus-visible{outline-color:var(--bwh-cream)}
+
+/* Dein Berlin 2027 feature in the store band (13 Nov 2026) */
+bw-home-then-now .bwh-calfeature { display: grid; grid-template-columns: 1fr; gap: 14px; padding: 14px; border-radius: 12px; background: var(--bwh-sage); color: var(--bwh-ink); text-decoration: none; }
+bw-home-then-now .bwh-calfeature img { width: 100%; height: auto; aspect-ratio: 1 / 1; max-height: 300px; object-fit: cover; border-radius: 8px; background: var(--bwh-grey); }
+bw-home-then-now .bwh-calfeature__body { display: flex; flex-direction: column; align-items: flex-start; gap: 10px; }
+bw-home-then-now .bwh-calfeature .bwh-eyebrow { color: var(--bwh-green-2); }
+bw-home-then-now .bwh-calfeature__name { font-family: var(--bwh-serif); font-size: 28px; line-height: 1.12; font-weight: 600; color: var(--bwh-green); }
+bw-home-then-now .bwh-calfeature__line { font-size: 15px; line-height: 1.5; color: var(--bwh-ink); max-width: 56ch; }
+bw-home-then-now .bwh-calfeature__cta { min-height: 48px; padding: 0 22px; margin-top: 4px; }
+@media (min-width: 761px) {
+  bw-home-then-now .bwh-calfeature { grid-column: 1 / -1; grid-row: 2; grid-template-columns: minmax(0, 280px) minmax(0, 1fr); align-items: center; gap: 28px; padding: 18px; }
+  bw-home-then-now .bwh-calfeature img { max-height: none; }
+  bw-home-then-now .bwh-shop .bwh-doors { grid-row: 3; }
+}
+@media (min-width: 1100px) {
+  bw-home-then-now .bwh-calfeature { grid-template-columns: minmax(0, 340px) minmax(0, 1fr); gap: 40px; padding: 22px; }
+  bw-home-then-now .bwh-calfeature__name { font-size: 34px; }
+  bw-home-then-now .bwh-calfeature__line { font-size: 16px; }
+}

@@ -64,7 +64,7 @@ const TEXT = new Map(Object.entries({
   "Calendar details need checking.": "Die Kalenderangaben müssen geprüft werden.",
   "Address search by Photon and OpenStreetMap contributors. Aerial photographs: Geoportal Berlin, dl-de/zero-2.0.": "Adresssuche von Photon und OpenStreetMap-Mitwirkenden. Luftbilder: Geoportal Berlin, dl-de/zero-2.0.",
   'All products': 'Alle Produkte', 'Posters': 'Poster', 'All posters': 'Alle Poster', 'Personalised prints': 'Personalisierte Drucke', 'Personalised': 'Personalisiert',
-  '2027 Wall Calendar': 'Wandkalender 2027', 'Audio walks': 'Audio-Spaziergänge', 'Guides': 'Reiseführer', 'Store': 'Shop', 'Cart': 'Warenkorb',
+  '2027 Wall Calendar': 'Wandkalender 2027', '2027 Calendars': 'Kalender 2027', 'All 2027 calendars': 'Alle Kalender 2027', 'Two A3 wall calendars for 2027 · your own places, or one Berlin district a month · made to order': 'Zwei A3-Wandkalender für 2027 · deine eigenen Orte oder ein Berliner Bezirk pro Monat · auf Bestellung gefertigt', 'Audio walks': 'Audio-Spaziergänge', 'Guides': 'Reiseführer', 'Store': 'Shop', 'Cart': 'Warenkorb',
   'Your Berlin Street in 1928': 'Deine Berliner Straße um 1928', '/ Your Berlin Street in 1928': '/ Deine Berliner Straße um 1928',
   "Your home · c. 1928 and today": "Dein Zuhause · um 1928 und heute",
   'PERSONALISED PRINT · 30 × 40 OR 45 × 60 CM': 'PERSONALISIERTER DRUCK · 30 × 40 ODER 45 × 60 CM',

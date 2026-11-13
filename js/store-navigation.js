@@ -6,7 +6,7 @@ export const STORE_CALENDAR_PRODUCT = 'https://walkofberlin.com/product-page/ber
 // Dein Berlin 2027, the personalised calendar (listed 13 Nov 2026, Yusuf: "store'da, menüde vs nerede gerekli varsa koyalım. ana sayfa da olabilir").
 export const STORE_PERSONAL_CALENDAR_PRODUCT = 'https://walkofberlin.com/product-page/dein-berlin-2027-personalised-wall-calendar';
 export const STORE_AUDIO_HUB = 'https://walkofberlin.com/audio-tours';
-export const STORE_LABELS = Object.freeze({all:'All products',print:'Posters',personalised:'Personalised prints',newspapers:'Personal newspapers',calendar:'2027 Wall Calendar',audio:'Audio walks',guides:'Guides'});
+export const STORE_LABELS = Object.freeze({all:'All products',print:'Posters',personalised:'Personalised prints',newspapers:'Personal newspapers',calendar:'2027 Calendars',audio:'Audio walks',guides:'Guides'});
 const FILTERS = {all:['all'],print:['all','everyday','landmarks','stories','districts','sets'],personalised:['all'],newspapers:['all'],calendar:['all'],audio:['all'],guides:['all']};
 // Printed posters and their printable files share one category since 29 Oct 2026 (Yusuf: "bir potada eritebiliriz"). Old digital links
 // (menu, homepage, ads, bookmarks) land on the matching poster collection.
@@ -73,8 +73,8 @@ export const STORE_MENU = Object.freeze([
   {label:STORE_LABELS.all,href:storeHref()},
   {label:STORE_LABELS.print,href:storeHref('print')},
   {label:STORE_LABELS.personalised,href:STORE_PERSONALISED_PRODUCT},
-  {label:'Personalised calendar',href:STORE_PERSONAL_CALENDAR_PRODUCT},
-  {label:STORE_LABELS.calendar,href:STORE_CALENDAR_PRODUCT},
+  // 13 Nov 2026 (Yusuf: "menüden takvime bastığında sadece diğer takvim geliyor"): one line, the calendar tab with Dein Berlin 2027 first.
+  {label:STORE_LABELS.calendar,href:storeHref('calendar')},
   {label:STORE_LABELS.audio,href:storeHref('audio')},
   {label:STORE_LABELS.guides,href:storeHref('guides')}
 ]);

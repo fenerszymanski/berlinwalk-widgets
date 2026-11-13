@@ -132,10 +132,10 @@
         "img": "assets/door-1928.webp"
       },
       {
-        "name": "Dein Berlin 2027",
-        "line": "Your own places, 1928 and today",
-        "href": "https://www.walkofberlin.com/product-page/dein-berlin-2027-personalised-wall-calendar",
-        "img": "assets/door-dein-berlin-2027.webp"
+        "name": "2027 calendars",
+        "line": "Your own places, or one district a month",
+        "href": "https://www.walkofberlin.com/category/all-products?tab=calendar",
+        "img": "assets/door-calendar.webp"
       },
       {
         "name": "Audio walks",
@@ -290,13 +290,29 @@
         "url": "https://www.walkofberlin.com/post/berlin-club-dress-codes-by-venue"
       },
       {
+        "what": "Dein Berlin 2027 calendar preview: Chamissoplatz from above, about 1928 and 2026",
+        "creator": "Geoportal Berlin (aerial photographs), calendar design my own",
+        "source": "Cropped, shown on a drawn wall",
+        "licence": "Datenlizenz Deutschland Zero 2.0",
+        "url": ""
+      },
+      {
         "what": "Everything else",
         "creator": "My own photographs and designs, or pictures from the linked posts and product pages",
         "source": "",
         "licence": "",
         "url": ""
       }
-    ]
+    ],
+    "calFeature": {
+      "name": "Dein Berlin 2027",
+      "eyebrow": "NEW FOR 2027 · MADE WITH YOUR PLACES",
+      "line": "A wall calendar of your own Berlin places. Every month shows one of them from above, about 1928 and today. Preview all twelve months before you order.",
+      "cta": "Make your calendar",
+      "href": "https://www.walkofberlin.com/product-page/dein-berlin-2027-personalised-wall-calendar",
+      "img": "assets/cal-feature.webp",
+      "alt": "Illustrated preview of the Dein Berlin 2027 wall calendar on a wall, open at January with Chamissoplatz from above in 1928 and today"
+    }
   };
 
   const BWH_SCRIPT_URL = (document.currentScript && document.currentScript.src)
@@ -606,10 +622,27 @@
         </a>`;
   }
 
+  // Dein Berlin 2027 feature (13 Nov 2026, Yusuf: "ana sayfa?"): a wide card outside .bwh-doors, so the Gift Week decoration that fills the doors
+  // until 15 Nov 23:59 leaves it alone.
+  function bwhCalFeature(x) {
+    if (!x) return '';
+    return `
+      <a class="bwh-calfeature bwh-lift" href="${bwhEsc(bwhHref(x.href))}" data-bwh-section="shop" data-bwh-item="dein-berlin-2027-feature">
+        <img src="${bwhEsc(bwhSrc(x.img))}" alt="${bwhEsc(x.alt)}" width="720" height="720" loading="lazy" decoding="async">
+        <span class="bwh-calfeature__body">
+          <span class="bwh-eyebrow">${bwhEsc(x.eyebrow)}</span>
+          <span class="bwh-calfeature__name">${bwhEsc(x.name)}</span>
+          <span class="bwh-calfeature__line">${bwhEsc(x.line)}</span>
+          <span class="bwh-btn bwh-btn--green bwh-calfeature__cta">${bwhEsc(x.cta)} →</span>
+        </span>
+      </a>`;
+  }
+
   function bwhShop(d) {
     return `
     <section class="bwh-band bwh-shop" id="bwh-shop" aria-labelledby="bwh-shop-title">
       <h2 class="bwh-h2 bwh-shop__title" id="bwh-shop-title">More from the store</h2>
+      ${bwhCalFeature(d.calFeature)}
       <div class="bwh-doors">${d.doors.map(bwhDoor).join('')}</div>
       <a class="bwh-btn bwh-btn--outline bwh-shop__store" href="${bwhEsc(bwhHref(d.storeHref))}" data-bwh-section="shop" data-bwh-item="open-the-store">Open the store</a>
     </section>`;

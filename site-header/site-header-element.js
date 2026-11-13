@@ -90,12 +90,8 @@ const BW_HEADER_STORE_LINKS = [
     "href": "https://walkofberlin.com/category/all-products?tab=newspapers"
   },
   {
-    "label": "Personalised calendar",
-    "href": "https://walkofberlin.com/product-page/dein-berlin-2027-personalised-wall-calendar"
-  },
-  {
-    "label": "2027 Wall Calendar",
-    "href": "https://walkofberlin.com/product-page/berlin-2027-wall-calendar-a3"
+    "label": "2027 Calendars",
+    "href": "https://walkofberlin.com/category/all-products?tab=calendar"
   },
   {
     "label": "Audio walks",

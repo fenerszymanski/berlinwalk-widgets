@@ -123,10 +123,10 @@
       "img": "assets/door-1928.webp"
     },
     {
-      "name": "Dein Berlin 2027",
-      "line": "Your own places, 1928 and today",
-      "href": "https://www.walkofberlin.com/product-page/dein-berlin-2027-personalised-wall-calendar",
-      "img": "assets/door-dein-berlin-2027.webp"
+      "name": "2027 calendars",
+      "line": "Your own places, or one district a month",
+      "href": "https://www.walkofberlin.com/category/all-products?tab=calendar",
+      "img": "assets/door-calendar.webp"
     },
     {
       "name": "Audio walks",
@@ -281,11 +281,27 @@
       "url": "https://www.walkofberlin.com/post/berlin-club-dress-codes-by-venue"
     },
     {
+      "what": "Dein Berlin 2027 calendar preview: Chamissoplatz from above, about 1928 and 2026",
+      "creator": "Geoportal Berlin (aerial photographs), calendar design my own",
+      "source": "Cropped, shown on a drawn wall",
+      "licence": "Datenlizenz Deutschland Zero 2.0",
+      "url": ""
+    },
+    {
       "what": "Everything else",
       "creator": "My own photographs and designs, or pictures from the linked posts and product pages",
       "source": "",
       "licence": "",
       "url": ""
     }
-  ]
+  ],
+  "calFeature": {
+    "name": "Dein Berlin 2027",
+    "eyebrow": "NEW FOR 2027 · MADE WITH YOUR PLACES",
+    "line": "A wall calendar of your own Berlin places. Every month shows one of them from above, about 1928 and today. Preview all twelve months before you order.",
+    "cta": "Make your calendar",
+    "href": "https://www.walkofberlin.com/product-page/dein-berlin-2027-personalised-wall-calendar",
+    "img": "assets/cal-feature.webp",
+    "alt": "Illustrated preview of the Dein Berlin 2027 wall calendar on a wall, open at January with Chamissoplatz from above in 1928 and today"
+  }
 }
