@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Christmas Market Suitcase Test: Will Your Berlin Haul Fly Home?</title>
+<link rel="stylesheet" href="../css/brand.css">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { overflow-x: hidden; }
+  body { font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #FFFFFF; color: #24211b; padding: 12px; }
+  .st { border-radius: 16px; overflow: hidden; border: 1px solid #d8cdb4; background: #f6efdf; }
+  .st-head { padding: 18px 18px 8px; }
+  .st-kick { display: inline-block; font-size: 10.5px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; color: #123D18; background: #FFE600; padding: 3px 8px; border-radius: 4px; }
+  .st-head h1 { font-family: 'Merriweather', Georgia, serif; font-size: 21px; line-height: 1.3; margin-top: 9px; color: #1B5E20; }
+  .st-head p { font-size: 13px; line-height: 1.6; color: #4d463a; margin-top: 7px; max-width: 760px; }
+  .st-steps { display: flex; gap: 6px; margin: 10px 12px 0; }
+  .st-steps button { flex: 1 1 0; min-width: 0; font-family: inherit; font-size: 12px; font-weight: 800; padding: 9px 6px; border-radius: 10px; border: 2px solid #c9bc9f; background: #fffdf6; color: #6b604c; cursor: pointer; line-height: 1.25; }
+  .st-steps button[aria-current=step] { background: #1B5E20; border-color: #1B5E20; color: #fff; }
+  .st-steps button:focus-visible, .st-box button:focus-visible { outline: 3px solid #FFE600; outline-offset: 1px; }
+  .st-steps b { display: block; font-size: 10px; letter-spacing: .1em; text-transform: uppercase; opacity: .8; }
+  .st-box { margin: 12px 12px 0; background: #fffdf6; border: 1px solid #e3d8c0; border-radius: 14px; padding: 12px 14px; }
+  .st-box[hidden] { display: none; }
+  .st-lab { font-size: 10.5px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: #6b604c; margin-bottom: 8px; }
+  .st-bags { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+  .st-bags button { font-family: inherit; text-align: left; font-size: 12.5px; line-height: 1.45; padding: 10px 11px; border-radius: 12px; border: 2px solid #c9bc9f; background: #fff; color: #3b352b; cursor: pointer; }
+  .st-bags button strong { display: block; font-size: 13.5px; color: #123D18; margin-bottom: 2px; }
+  .st-bags button[aria-pressed=true] { border-color: #1B5E20; background: #E8F5E9; }
+  .st-shelf { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+  .it { display: grid; grid-template-columns: 1fr auto; gap: 4px 8px; align-items: center; padding: 9px 10px; border-radius: 12px; background: #fff; border: 1.5px solid #e3d8c0; }
+  .it.on { border-color: #1B5E20; background: #f3faf0; }
+  .it-n { font-size: 13px; font-weight: 800; color: #24211b; line-height: 1.3; }
+  .it-m { grid-column: 1 / -1; font-size: 11.5px; color: #6b604c; line-height: 1.45; }
+  .it-c { display: inline-flex; align-items: center; gap: 4px; }
+  .it-c button { width: 30px; height: 30px; border-radius: 8px; border: 2px solid #1B5E20; background: #fff; color: #1B5E20; font-family: inherit; font-size: 17px; font-weight: 800; line-height: 1; cursor: pointer; }
+  .it-c button:disabled { border-color: #d8cdb4; color: #c9bc9f; cursor: default; }
+  .it-c span { min-width: 18px; text-align: center; font-weight: 800; font-size: 14px; }
+  .tag { display: inline-block; font-size: 10px; font-weight: 800; letter-spacing: .04em; text-transform: uppercase; padding: 2px 6px; border-radius: 4px; margin-right: 4px; }
+  .t-liq { background: #f3dede; color: #6d1f1f; }
+  .t-fra { background: #FFF6BF; color: #4a3b00; }
+  .t-flat { background: #E8F5E9; color: #123D18; }
+  .st-next { display: flex; justify-content: space-between; gap: 8px; margin-top: 12px; }
+  .st-next button { font-family: inherit; font-size: 13px; font-weight: 800; padding: 10px 14px; border-radius: 10px; border: 2px solid #1B5E20; background: #1B5E20; color: #fff; cursor: pointer; }
+  .st-next button.ghost { background: #fff; color: #1B5E20; }
+  .st-viz { margin: 12px 12px 0; background: #fffdf6; border: 1px solid #e3d8c0; border-radius: 14px; padding: 10px; }
+  #bag { display: block; width: 100%; height: 260px; }
+  .st-key { display: flex; flex-wrap: wrap; gap: 4px 12px; font-size: 11px; color: #4d463a; margin: 6px 4px 0; }
+  .st-key span { display: inline-flex; align-items: center; gap: 5px; }
+  .st-key i { width: 12px; height: 12px; border-radius: 3px; display: inline-block; }
+  .st-sum { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; margin: 12px 12px 0; }
+  .st-sum div { background: #123D18; color: #f6efdf; border-radius: 12px; padding: 10px 12px; font-size: 11.5px; line-height: 1.4; }
+  .st-sum b { display: block; font-family: 'Merriweather', Georgia, serif; font-size: 19px; color: #FFE600; margin-bottom: 2px; }
+  .st-out { margin: 12px 12px 0; padding: 13px 15px; border-radius: 14px; background: #fff; border: 2px solid #1B5E20; font-size: 13px; line-height: 1.6; color: #2f2a22; }
+  .st-out h2 { font-family: 'Merriweather', Georgia, serif; font-size: 16px; color: #123D18; margin-bottom: 6px; }
+  .st-out ul { margin: 6px 0 0 18px; }
+  .st-out li + li { margin-top: 5px; }
+  .st-out .bad { color: #8a2b2b; font-weight: 800; }
+  .st-out .warn { color: #6a5200; font-weight: 800; }
+  .st-out .ok { color: #1B5E20; font-weight: 800; }
+  .st-foot { padding: 12px 16px 16px; font-size: 11px; line-height: 1.55; color: #6b604c; }
+  .st-foot a, .st-out a { color: #1B5E20; font-weight: 700; }
+  @media (max-width: 640px) {
+    body { padding: 6px; }
+    .st-head h1 { font-size: 18px; }
+    .st-bags { grid-template-columns: 1fr; }
+    .st-shelf { grid-template-columns: 1fr; }
+    .st-sum { grid-template-columns: 1fr 1fr 1fr; gap: 6px; }
+    .st-sum div { padding: 8px; font-size: 10.5px; }
+    .st-sum b { font-size: 16px; }
+    #bag { height: 220px; }
+  }
+</style>
+</head>
+<body>
+<div class="st">
+  <div class="st-head">
+    <span class="st-kick">Christmas market suitcase test</span>
+    <h1>Will your Christmas market haul fly home?</h1>
+    <p>Pick the bag you are flying with, add what you want to buy, and see how much space and weight it takes, what the airport will not let through the cabin, and what needs wrapping.</p>
+  </div>
+  <div class="st-steps" role="group" aria-label="Steps">
+    <button type="button" data-step="0"><b>Step 1</b>Your bag</button>
+    <button type="button" data-step="1"><b>Step 2</b>Your haul</button>
+    <button type="button" data-step="2"><b>Step 3</b>Will it fly?</button>
+  </div>
+  <div class="st-box" id="p0">
+    <div class="st-lab">What are you flying home with?</div>
+    <div class="st-bags" id="bags"></div>
+    <div class="st-next"><span></span><button type="button" data-go="1">Next: your haul</button></div>
+  </div>
+  <div class="st-box" id="p1" hidden>
+    <div class="st-lab">Add what you want to buy</div>
+    <div class="st-shelf" id="shelf"></div>
+    <div class="st-next"><button type="button" class="ghost" data-go="0">Back</button><button type="button" data-go="2">Next: will it fly?</button></div>
+  </div>
+  <div class="st-viz">
+    <canvas id="bag" role="img" aria-label="Diagram of your bag filling up"></canvas>
+    <div class="st-key">
+      <span><i style="background:#9CCC65"></i>Packs easily</span>
+      <span><i style="background:#FFD54F"></i>Fragile, wrap it</span>
+      <span><i style="background:#E57373"></i>Not allowed in the cabin</span>
+      <span><i style="background:repeating-linear-gradient(45deg,#8a2b2b 0 3px,#fff 3px 6px)"></i>Does not fit</span>
+    </div>
+  </div>
+  <div class="st-sum" id="sum"></div>
+  <div class="st-out" id="p2" hidden></div>
+  <div class="st-foot" id="foot"></div>
+</div>
+<script>
+(function () {
+  'use strict';
+  var CHECKED = '13 November 2026';
+  // Free space and weight left for shopping, not the bag's full size: a bag
+  // that left home full has only the gaps you leave in it.
+  var BAGS = [
+    { id: 'cabin', name: 'Cabin bag only', note: 'About 10 litres and 3 kg spare in a full carry-on. Liquids over 100 ml are out.', litres: 10, kg: 3, cabinOnly: true },
+    { id: 'cabin-under', name: 'Small underseat bag', note: 'Budget fares: about 4 litres spare. Liquids over 100 ml are out.', litres: 4, kg: 2, cabinOnly: true },
+    { id: 'checked', name: 'Checked suitcase too', note: 'About 18 litres and 5 kg spare on top of your clothes. Bottles can go in here.', litres: 18, kg: 5, cabinOnly: false }
+  ];
+  // litres = packed volume with wrapping, kg = packed weight. liquid = ml.
+  // fragile: 0 none, 1 wrap it, 2 wrap it and carry it. Prices are what the
+  // stalls and maker shops ask; see the footer for the check date.
+  var ITEMS = [
+    { id: 'mug', name: 'Glühwein mug you keep', short: 'Mug', litres: 0.6, kg: 0.35, fragile: 1, lo: 3, hi: 5, price: '&euro;3&ndash;5 deposit', meta: 'Not handing it back is how you buy it', tip: 'The mug costs you the deposit you do not collect. Rinse it at the stall before you wrap it.' },
+    { id: 'gluehwein', name: 'Bottle of Glühwein', short: 'Glühwein', litres: 1.3, kg: 1.5, fragile: 1, liquid: 1000, lo: 0, hi: 0, price: 'price not counted', meta: '1 litre bottle', tip: 'Any bottle over 100 ml goes in a checked bag. BER\'s newer scanner lanes take more, but you cannot choose your lane.' },
+    { id: 'stollen', name: 'Dresdner Stollen, 1 kg', short: 'Stollen', litres: 2.5, kg: 1.1, lo: 22, hi: 28, price: '&euro;22&ndash;28', meta: 'Card box or tin, keeps for weeks', tip: 'Real Dresdner Stollen carries a gold seal with August the Strong on horseback and the EU PGI logo.' },
+    { id: 'smoker', name: 'Incense smoker (Räuchermann)', short: 'Smoker', litres: 2, kg: 0.4, fragile: 1, lo: 36, hi: 100, price: '&euro;36&ndash;100', meta: 'Erzgebirge maker, about 15&ndash;20 cm', tip: 'Turn the figure over or check the box for the Echt Erzgebirge seal with the little rider on a rocking horse. At &euro;12 it was made somewhere else.' },
+    { id: 'nut-s', name: 'Small nutcracker, 11 cm', short: 'Nutcracker', litres: 0.8, kg: 0.2, fragile: 1, lo: 31, hi: 40, price: '&euro;31&ndash;40', meta: 'Erzgebirge maker', tip: 'A nutcracker sold as made in the Erzgebirge style is not from the Erzgebirge. The seal or the maker\'s name tells you.' },
+    { id: 'nut-l', name: 'Tall nutcracker, 40 cm', short: 'Tall nutcracker', litres: 9, kg: 1.3, fragile: 1, lo: 112, hi: 140, price: '&euro;112&ndash;140', meta: 'Erzgebirge maker, boxed', tip: 'A 40 cm nutcracker in its box takes most of a cabin bag. Ask the stall if the maker ships.' },
+    { id: 'arch', name: 'Candle arch (Schwibbogen)', short: 'Candle arch', litres: 12, kg: 1.5, fragile: 1, lo: 80, hi: 215, price: '&euro;80&ndash;215', meta: 'About 55 &times; 36 cm, boxed', tip: 'The arch is flat but wide: measure your suitcase before you pay. About 55 cm will not lie in most cabin bags.' },
+    { id: 'pyramid', name: 'Table pyramid, 26&ndash;28 cm', short: 'Pyramid', litres: 10, kg: 0.9, fragile: 2, lo: 64, hi: 94, price: '&euro;64&ndash;94', meta: 'Erzgebirge maker, boxed', tip: 'A pyramid has a thin propeller and spindle that snap in a checked bag. Carry it, or have it shipped.' },
+    { id: 'star-s', name: 'Herrnhut star, 13 cm', short: 'Star 13', litres: 1.2, kg: 0.15, lo: 20, hi: 22, price: '&euro;20&ndash;22', meta: 'Arrives assembled', tip: 'A genuine Herrnhut star has 25 points: 17 square and 8 triangular.' },
+    { id: 'star-l', name: 'Herrnhut star kit, 40 cm', short: 'Star kit', litres: 1.5, kg: 0.35, flat: true, lo: 35, hi: 53, price: '&euro;35&ndash;53', meta: 'Paper or plastic, you build it at home', tip: 'The 40 cm star comes as a flat kit. It is the biggest thing on this list that still fits a small bag.' },
+    { id: 'bauble', name: 'Mouth-blown glass bauble', short: 'Bauble', litres: 0.6, kg: 0.05, fragile: 2, lo: 14, hi: 25, price: '&euro;14&ndash;25 each', meta: 'Thuringia or Bavaria, boxed', tip: 'Ask for the bauble\'s own box and carry the glass in your cabin bag, never in the hold.' },
+    { id: 'kpm', name: 'KPM porcelain bauble', short: 'KPM', litres: 0.5, kg: 0.1, fragile: 2, lo: 105, hi: 105, price: '&euro;105', meta: 'Made in Berlin, from the KPM shop', tip: 'KPM is one of the few Christmas pieces actually made in Berlin. You buy it at the KPM shop, not at a market stall.' },
+    { id: 'globe', name: 'Ampelmann snow globe', short: 'Snow globe', litres: 0.4, kg: 0.3, fragile: 1, liquid: 115, lo: 15, hi: 15, price: '&euro;15', meta: 'Designed in Berlin, holds 115 ml', tip: 'A snow globe is a liquid. The Ampelmann one holds 115 ml, just over the 100 ml cabin limit.' }
+  ];
+  var state = { bag: 'cabin', haul: [] };
+  var currentStep = 0;
+  var byId = {};
+  ITEMS.forEach(function (it) { byId[it.id] = it; });
+
+  function count(id) { return state.haul.filter(function (h) { return h === id; }).length; }
+  function add(id) { state.haul.push(id); render(); }
+  function remove(id) { var i = state.haul.lastIndexOf(id); if (i > -1) state.haul.splice(i, 1); render(); }
+
+  var bagsEl = document.getElementById('bags');
+  BAGS.forEach(function (b) {
+    var el = document.createElement('button');
+    el.type = 'button'; el.dataset.bag = b.id;
+    el.innerHTML = '<strong>' + b.name + '</strong>' + b.note;
+    el.addEventListener('click', function () { state.bag = b.id; render(); });
+    bagsEl.appendChild(el);
+  });
+  var shelf = document.getElementById('shelf');
+  ITEMS.forEach(function (it) {
+    var row = document.createElement('div');
+    row.className = 'it'; row.dataset.id = it.id;
+    var tags = '';
+    if (it.liquid) tags += '<span class="tag t-liq">Liquid</span>';
+    if (it.fragile) tags += '<span class="tag t-fra">Fragile</span>';
+    if (it.flat) tags += '<span class="tag t-flat">Packs flat</span>';
+    row.innerHTML = '<div class="it-n">' + it.name + '</div>' +
+      '<div class="it-c"><button type="button" aria-label="Remove one ' + it.name + '">&minus;</button><span>0</span><button type="button" aria-label="Add one ' + it.name + '">+</button></div>' +
+      '<div class="it-m">' + tags + it.price + ' &middot; ' + it.meta + '</div>';
+    var btns = row.querySelectorAll('button');
+    btns[0].addEventListener('click', function () { remove(it.id); });
+    btns[1].addEventListener('click', function () { add(it.id); });
+    shelf.appendChild(row);
+  });
+  Array.prototype.forEach.call(document.querySelectorAll('[data-step],[data-go]'), function (b) {
+    b.addEventListener('click', function () { currentStep = Number(b.dataset.step != null ? b.dataset.step : b.dataset.go); render(); });
+  });
+
+  function totals() {
+    var bag = BAGS.filter(function (b) { return b.id === state.bag; })[0];
+    var t = { bag: bag, litres: 0, kg: 0, lo: 0, hi: 0, cabinBan: [], wrap: [], carry: [], hand: [] };
+    state.haul.forEach(function (id) {
+      var it = byId[id];
+      t.litres += it.litres; t.kg += it.kg; t.lo += it.lo; t.hi += it.hi;
+      if (it.liquid && it.liquid > 100 && bag.cabinOnly && t.cabinBan.indexOf(it) < 0) t.cabinBan.push(it);
+      if (it.fragile === 1 && t.wrap.indexOf(it) < 0) t.wrap.push(it);
+      if (it.fragile === 2 && t.carry.indexOf(it) < 0) t.carry.push(it);
+    });
+    return t;
+  }
+
+  var canvas = document.getElementById('bag');
+  function draw(t) {
+    var dpr = window.devicePixelRatio || 1;
+    var W = canvas.clientWidth, H = canvas.clientHeight;
+    if (!W || !H) return;
+    canvas.width = Math.round(W * dpr); canvas.height = Math.round(H * dpr);
+    var c = canvas.getContext('2d');
+    c.setTransform(dpr, 0, 0, dpr, 0, 0);
+    c.clearRect(0, 0, W, H);
+    // The bag is drawn as a box whose area is its spare litres; anything past
+    // the line spills out to the right, hatched, so overflow is visible.
+    var cap = t.bag.litres;
+    var need = Math.max(cap, t.litres);
+    var padX = 14, top = 40, bot = 44;
+    var fullW = W - padX * 2, h = H - top - bot;
+    var scale = fullW / (need * 1.08);
+    var bagW = cap * scale;
+    c.font = '700 12px Montserrat, sans-serif';
+    c.fillStyle = '#6b604c';
+    c.fillText('Your spare space: ' + cap + ' litres, ' + t.bag.kg + ' kg', padX, 14);
+    // bag outline
+    c.fillStyle = '#f2ecdd';
+    c.strokeStyle = '#123D18'; c.lineWidth = 3;
+    roundRect(c, padX, top, bagW, h, 10); c.fill(); c.stroke();
+    // handle
+    c.beginPath(); c.lineWidth = 3;
+    c.moveTo(padX + bagW * 0.38, top); c.lineTo(padX + bagW * 0.38, top - 10); c.lineTo(padX + bagW * 0.62, top - 10); c.lineTo(padX + bagW * 0.62, top); c.stroke();
+    // items as columns, width = litres
+    var x = padX;
+    state.haul.slice().sort(function (a, b) { return byId[b].litres - byId[a].litres; }).forEach(function (id) {
+      var it = byId[id];
+      var w = it.litres * scale;
+      var col = '#9CCC65';
+      if (it.fragile) col = '#FFD54F';
+      if (it.liquid > 100 && t.bag.cabinOnly) col = '#E57373';
+      var inside = x + w <= padX + bagW + 0.5;
+      c.fillStyle = col;
+      c.fillRect(x + 1, top + 4, Math.max(w - 2, 1), h - 8);
+      if (!inside) hatch(c, Math.max(x, padX + bagW), top + 4, x + w - Math.max(x, padX + bagW), h - 8);
+      if (w > 26) {
+        c.save(); c.translate(x + w / 2, top + h / 2); c.rotate(-Math.PI / 2);
+        c.font = '700 11px Montserrat, sans-serif'; c.textAlign = 'center'; c.lineWidth = 3; c.strokeStyle = 'rgba(255,255,255,.9)'; c.lineJoin = 'round'; c.fillStyle = '#1f1c17';
+        var label = it.short || it.name;
+        while (c.measureText(label).width > h - 16 && label.length > 4) label = label.slice(0, -2);
+        c.strokeText(label, 0, 4); c.fillText(label, 0, 4); c.restore();
+      }
+      x += w;
+    });
+    if (!state.haul.length) {
+      c.fillStyle = '#6b604c'; c.font = '600 13px Montserrat, sans-serif'; c.textAlign = 'center';
+      c.fillText('Empty so far. Add things in step 2.', padX + bagW / 2, top + h / 2 + 4); c.textAlign = 'left';
+    }
+    // weight bar under the bag
+    var wy = top + h + 12;
+    var wMax = Math.max(t.bag.kg, t.kg) * 1.08;
+    var ww = fullW * (t.kg / wMax), wcap = fullW * (t.bag.kg / wMax);
+    c.fillStyle = '#e3d8c0'; c.fillRect(padX, wy, fullW, 8);
+    c.fillStyle = t.kg > t.bag.kg ? '#8a2b2b' : '#1B5E20'; c.fillRect(padX, wy, ww, 8);
+    c.fillStyle = '#123D18'; c.fillRect(padX + wcap - 1, wy - 4, 3, 16);
+    c.fillStyle = '#6b604c'; c.font = '600 10.5px Montserrat, sans-serif';
+    c.fillText('weight: ' + (Math.round(t.kg * 10) / 10) + ' of ' + t.bag.kg + ' kg spare', padX, wy + 22);
+  }
+  function roundRect(c, x, y, w, h, r) {
+    c.beginPath(); c.moveTo(x + r, y); c.lineTo(x + w - r, y); c.quadraticCurveTo(x + w, y, x + w, y + r);
+    c.lineTo(x + w, y + h - r); c.quadraticCurveTo(x + w, y + h, x + w - r, y + h); c.lineTo(x + r, y + h);
+    c.quadraticCurveTo(x, y + h, x, y + h - r); c.lineTo(x, y + r); c.quadraticCurveTo(x, y, x + r, y); c.closePath();
+  }
+  function hatch(c, x, y, w, h) {
+    if (w <= 0) return;
+    c.save(); c.beginPath(); c.rect(x, y, w, h); c.clip();
+    c.strokeStyle = 'rgba(138,43,43,.75)'; c.lineWidth = 1.5;
+    for (var i = -h; i < w; i += 9) { c.beginPath(); c.moveTo(x + i, y + h); c.lineTo(x + i + h, y); c.stroke(); }
+    c.restore();
+  }
+  function euro(n) { return '&euro;' + Math.round(n); }
+
+  function verdict(t) {
+    var p2 = document.getElementById('p2');
+    if (!state.haul.length) { p2.innerHTML = '<h2>Nothing in the bag yet</h2><p>Go back to step 2 and add what you are thinking of buying.</p>'; return; }
+    var lines = [];
+    var fits = t.litres <= t.bag.litres, light = t.kg <= t.bag.kg;
+    if (t.cabinBan.length) lines.push('<li><span class="bad">Not through security in a cabin bag:</span> ' + t.cabinBan.map(function (i) { return i.name; }).join(', ') + '. Anything over 100 ml goes in a checked bag, or you drink it in Berlin.</li>');
+    if (!fits) lines.push('<li><span class="bad">It does not fit:</span> you need about ' + Math.ceil(t.litres - t.bag.litres) + ' more litres than you have spare. Take the biggest box out first; that is usually the pyramid or the arch.</li>');
+    else lines.push('<li><span class="ok">It fits:</span> ' + Math.round(t.litres * 10) / 10 + ' of ' + t.bag.litres + ' spare litres used.</li>');
+    if (!light) lines.push('<li><span class="bad">Over your spare weight</span> by about ' + (Math.round((t.kg - t.bag.kg) * 10) / 10) + ' kg. Stollen and bottles are the heavy things.</li>');
+    if (t.carry.length) lines.push('<li><span class="warn">Carry these by hand:</span> ' + t.carry.map(function (i) { return i.name; }).join(', ') + '. Thin glass rarely survives a checked suitcase.</li>');
+    if (t.wrap.length) lines.push('<li><span class="warn">Wrap these:</span> ' + t.wrap.map(function (i) { return i.name; }).join(', ') + '. Clothes around them work; keep the maker\'s box if it has one.</li>');
+    var tips = [];
+    state.haul.forEach(function (id) { var it = byId[id]; if (it.tip && tips.indexOf(it.tip) < 0) tips.push(it.tip); });
+    var head = (fits && light && !t.cabinBan.length) ? 'It flies home' : 'Not like this';
+    p2.innerHTML = '<h2>' + head + '</h2><ul>' + lines.join('') + '</ul>' + (tips.length ? '<p style="margin-top:8px"><b>Before you pay:</b></p><ul>' + tips.map(function (x) { return '<li>' + x + '</li>'; }).join('') + '</ul>' : '');
+  }
+
+  function render() {
+    Array.prototype.forEach.call(document.querySelectorAll('[data-step]'), function (b) {
+      if (Number(b.dataset.step) === currentStep) b.setAttribute('aria-current', 'step'); else b.removeAttribute('aria-current');
+    });
+    document.getElementById('p0').hidden = currentStep !== 0;
+    document.getElementById('p1').hidden = currentStep !== 1;
+    document.getElementById('p2').hidden = currentStep !== 2;
+    Array.prototype.forEach.call(bagsEl.children, function (b) { b.setAttribute('aria-pressed', b.dataset.bag === state.bag); });
+    Array.prototype.forEach.call(shelf.children, function (row) {
+      var n = count(row.dataset.id);
+      row.querySelector('span:not(.tag)').textContent = n;
+      row.querySelector('button').disabled = n === 0;
+      row.classList.toggle('on', n > 0);
+    });
+    var t = totals();
+    document.getElementById('sum').innerHTML =
+      '<div><b>' + (Math.round(t.litres * 10) / 10) + ' l</b>of ' + t.bag.litres + ' l spare</div>' +
+      '<div><b>' + (Math.round(t.kg * 10) / 10) + ' kg</b>of ' + t.bag.kg + ' kg spare</div>' +
+      '<div><b>' + (t.lo === t.hi ? euro(t.lo) : euro(t.lo) + '&ndash;' + Math.round(t.hi)) + '</b>at makers\' prices</div>';
+    draw(t);
+    verdict(t);
+  }
+  document.getElementById('foot').innerHTML = 'Prices are what the makers\' own shops and their resellers asked on ' + CHECKED + ': Erzgebirge makers (Zeidler, Christian Ulbricht, Seiffener Volkskunst, Taulin, Heinz Lorenz), Dresden Stollen bakeries, Herrnhut star resellers, <a href="https://www.kpm-berlin.com/" target="_blank" rel="noopener">KPM</a> and <a href="https://www.ampelmannshop.com/" target="_blank" rel="noopener">Ampelmann</a>. Market stalls can ask more. The mug deposit is a few euros; WeihnachtsZauber on Gendarmenmarkt took &euro;3 in 2025. Liquids: <a href="https://www.bundespolizei.de/sicher-auf-reisen/mit-dem-flugzeug/was-darf-ich-mitnehmen/fluessigkeiten-an-bord" target="_blank" rel="noopener">Bundespolizei</a> and <a href="https://ber.berlin-airport.de/en/flying/controls/security-control.html" target="_blank" rel="noopener">BER security control</a>. Bag space and packed sizes are my rough estimates for a bag that left home already packed.';
+  var lastW = 0;
+  if (window.ResizeObserver) new ResizeObserver(function () { var w = canvas.clientWidth; if (w && Math.abs(w - lastW) > 2) { lastW = w; draw(totals()); } }).observe(canvas);
+  render();
+})();
+</script>
+<script src="../js/brand.js"></script>
+</body>
+</html>
