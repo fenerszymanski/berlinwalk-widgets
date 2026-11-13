@@ -1008,6 +1008,8 @@
       return rows.length===1&&family.length===1&&rows[0]===family[0]&&rows[0].enabled!==false&&rows[0].kind==='digital'&&rows[0].artworkReuseLicence==='kottbusser-tor-cc-by-sa-4.0-v3'&&bindings.length===1&&bindings[0].nativeProductType==='digital'?KOTTI_ARTWORK_REUSE:'';
     }
     lineNotice(line) {
+      // Standard apparel choices do not make a product customer-personalised.
+      if((this.presentation||[]).some(row=>row.wixProductId===line.productId&&row.group==='apparel'))return '';
       if(this.legalGerman()){
         const box=(kind,title,body,more='')=>`<div class="line-legal bw-raw" lang="de" data-line-legal="${kind}"><strong>${esc(title)}</strong><p>${esc(body)}</p>${more}</div>`;
         if(this.gift?.isGiftId(line.productId))return box('gift',NOTICE_DE.giftTitle,NOTICE_DE.gift);
