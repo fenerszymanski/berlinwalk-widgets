@@ -8,7 +8,7 @@
   'use strict';
 
   const DATA = {
-    "release": "home-then-now-20261113-slider",
+    "release": "home-then-now-20261113-slider2",
     "hero": {
       "img1928": "assets/hero-1928.webp",
       "imgToday": "assets/hero-today.webp",
@@ -204,7 +204,8 @@
         "line": "Pick an outfit and face the door",
         "href": "https://www.walkofberlin.com/games/berghain-bouncer",
         "bg": "#102414",
-        "fg": "#FAFAF5"
+        "fg": "#FAFAF5",
+        "img": "assets/tile-berghain-bouncer.webp"
       },
       {
         "kind": "MAP",
@@ -212,7 +213,8 @@
         "line": "15 markets, filter by price and size",
         "href": "https://www.walkofberlin.com/tools/christmas-markets-map",
         "bg": "#FFE600",
-        "fg": "#102414"
+        "fg": "#102414",
+        "img": "assets/tile-christmas-markets.webp"
       },
       {
         "kind": "GUIDE",
@@ -220,15 +222,17 @@
         "line": "Neighbourhood by neighbourhood",
         "href": "https://www.walkofberlin.com/tools/berlin-safety",
         "bg": "#123D18",
-        "fg": "#FAFAF5"
+        "fg": "#FAFAF5",
+        "img": "assets/tile-berlin-safety.webp"
       },
       {
         "kind": "FINDER",
         "name": "Toilet Finder",
-        "line": "The nearest public toilet, free ones too",
+        "line": "Nearest public toilet, free ones too",
         "href": "https://www.walkofberlin.com/tools/berlin-public-toilets",
         "bg": "#EAF0E2",
-        "fg": "#123D18"
+        "fg": "#123D18",
+        "img": "assets/tile-toilet-finder.webp"
       }
     ],
     "toolsAllHref": "https://www.walkofberlin.com/berlin-tools",
@@ -283,7 +287,7 @@
         "url": "https://walkofberlin.com/post/gas-lamps-in-berlin"
       },
       {
-        "what": "Club dress codes preview",
+        "what": "Club dress codes preview and Berghain Bouncer tile",
         "creator": "Photo by Darkroomduck",
         "source": "Wikimedia Commons, cropped",
         "licence": "CC BY-SA 4.0",
@@ -295,6 +299,27 @@
         "source": "Cropped, shown on a drawn wall",
         "licence": "Datenlizenz Deutschland Zero 2.0",
         "url": ""
+      },
+      {
+        "what": "Christmas Markets tile: Gendarmenmarkt at dusk",
+        "creator": "Adobe Stock 311145723",
+        "source": "Cropped",
+        "licence": "Adobe Stock Standard licence",
+        "url": ""
+      },
+      {
+        "what": "Berlin Safety tile: Oberbaum Bridge",
+        "creator": "Adobe Stock 428386996",
+        "source": "Cropped",
+        "licence": "Adobe Stock Standard licence",
+        "url": ""
+      },
+      {
+        "what": "Toilet Finder tile",
+        "creator": "Unsplash, via the Wix media library",
+        "source": "Cropped",
+        "licence": "Unsplash licence",
+        "url": "https://www.walkofberlin.com/post/public-toilets-in-berlin"
       },
       {
         "what": "Everything else",
@@ -728,7 +753,7 @@
     if (v.type === 'tiles') {
       const tools = (d[v.from] || []).slice(0, v.count || 4);
       return `<ul class="bwh-slide__visual bwh-slide__visual--tiles">${tools.map((t, i) => `
-            <li><a class="bwh-slide__tile" href="${bwhEsc(bwhHref(t.href))}" style="--bwh-tile-bg:${bwhEsc(t.bg)};--bwh-tile-fg:${bwhEsc(t.fg)}" data-bwh-section="hero" data-bwh-item="slide-tool" data-bwh-position="${i + 1}"><span class="bwh-slide__tile-kind">${bwhEsc(t.kind)}</span><span class="bwh-slide__tile-name">${bwhEsc(t.name)}</span><span class="bwh-slide__tile-line">${bwhEsc(t.line)}</span></a></li>`).join('')}
+            <li><a class="bwh-slide__tile"${t.img ? ' data-bwh-photo' : ''} href="${bwhEsc(bwhHref(t.href))}" style="--bwh-tile-bg:${bwhEsc(t.bg)};--bwh-tile-fg:${bwhEsc(t.fg)}" data-bwh-section="hero" data-bwh-item="slide-tool" data-bwh-position="${i + 1}">${t.img ? bwhSlideImg(t.img, '', 960, 640, first ? 'eager' : 'defer') : ''}<span class="bwh-slide__tile-kind">${bwhEsc(t.kind)}</span><span class="bwh-slide__tile-name">${bwhEsc(t.name)}</span><span class="bwh-slide__tile-line">${bwhEsc(t.line)}</span></a></li>`).join('')}
           </ul>`;
     }
     return '';
@@ -1036,12 +1061,13 @@
     }
 
     // ---- hero slider ----------------------------------------------------------------------
-    // Autoplay advances on the progress bar's animationend (7 s, CSS). It pauses while the pointer
-    // or focus is inside, and while the tab is hidden. Any manual step stops it for good (the
-    // play button restarts it). prefers-reduced-motion: no autoplay, no fade.
+    // Autoplay advances on the progress bar's animationend (7 s, CSS) from the first slide on
+    // (Yusuf, 13 Nov 2026: "slider ilk slayttan itibaren otomatik kaysın"). A pill, arrow or swipe
+    // jumps there and the 7 s restart from that slide; only the pause button stops it. It waits
+    // while keyboard focus is inside and while the tab is hidden. prefers-reduced-motion: no fade.
     _bwhSliderInit() {
       if (this._bwhSlider || !this.querySelector('.bwh-slider')) return;
-      const st = this._bwhSlider = { index: 0, playing: !bwhMatch('(prefers-reduced-motion: reduce)'), hover: false, focus: false, swipe: null, swiped: 0 };
+      const st = this._bwhSlider = { index: 0, playing: true, focus: false, swipe: null, swiped: 0 };
       const inSlider = (node) => !!(node && node.closest && node.closest('.bwh-slider') && this.contains(node));
       this.addEventListener('click', (event) => {
         if (Date.now() - st.swiped < 400 && inSlider(event.target)) { event.preventDefault(); event.stopPropagation(); return; }
@@ -1050,7 +1076,6 @@
         if (t.hasAttribute('data-bwh-toggle')) { st.playing = !st.playing; this._bwhSliderSync(); return; }
         const n = this.querySelectorAll('.bwh-slide').length;
         const to = t.hasAttribute('data-bwh-go') ? Number(t.dataset.bwhGo) : (st.index + Number(t.dataset.bwhStep) + n) % n;
-        st.playing = false;
         this._bwhSliderGo(to);
         bwhTrack('bw_home_tn_click', { section: 'hero-slider', item: 'go-' + ((DATA.slides[to] || {}).key || to), position: to + 1 });
       }, true);
@@ -1065,13 +1090,11 @@
         else if (event.key === 'End') i = pills.length - 1;
         else return;
         event.preventDefault();
-        st.playing = false;
         this._bwhSliderGo(i);
         pills[i].focus();
       });
-      this.addEventListener('pointerover', (event) => { if (event.pointerType === 'mouse' && inSlider(event.target) && !st.hover) { st.hover = true; this._bwhSliderSync(); } });
-      this.addEventListener('pointerout', (event) => { if (event.pointerType === 'mouse' && st.hover && !inSlider(event.relatedTarget)) { st.hover = false; this._bwhSliderSync(); } });
-      this.addEventListener('focusin', (event) => { if (inSlider(event.target) && !st.focus) { st.focus = true; this._bwhSliderSync(); } });
+      // Pause only while keyboard focus is inside (a mouse click on a pill does not pause).
+      this.addEventListener('focusin', (event) => { let kb = false; try { kb = event.target.matches(':focus-visible'); } catch (e) {} if (kb && inSlider(event.target) && !st.focus) { st.focus = true; this._bwhSliderSync(); } });
       this.addEventListener('focusout', (event) => { if (st.focus && !inSlider(event.relatedTarget)) { st.focus = false; this._bwhSliderSync(); } });
       this.addEventListener('animationend', (event) => {
         if (!event.target.classList || !event.target.classList.contains('bwh-slider__bar') || !inSlider(event.target)) return;
@@ -1087,7 +1110,6 @@
         const dx = event.clientX - s0.x, dy = event.clientY - s0.y;
         if (Math.abs(dx) < 48 || Math.abs(dx) < 1.3 * Math.abs(dy)) return;
         st.swiped = Date.now();
-        st.playing = false;
         this._bwhSliderGo(st.index + (dx < 0 ? 1 : -1));
       });
       this.addEventListener('pointercancel', () => { st.swipe = null; });
@@ -1126,7 +1148,7 @@
       const section = this.querySelector('.bwh-slider'), st = this._bwhSlider;
       if (!section || !st) return;
       section.toggleAttribute('data-bwh-playing', st.playing);
-      section.toggleAttribute('data-bwh-paused', st.playing && (st.hover || st.focus || document.hidden));
+      section.toggleAttribute('data-bwh-paused', st.playing && (st.focus || document.hidden));
       const toggle = section.querySelector('[data-bwh-toggle]');
       if (toggle) { toggle.setAttribute('aria-label', st.playing ? 'Pause slides' : 'Play slides'); toggle.setAttribute('data-bwh-toggle', st.playing ? 'pause' : 'play'); }
       const track = section.querySelector('.bwh-slider__track');

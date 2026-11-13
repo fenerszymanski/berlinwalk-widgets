@@ -1,5 +1,5 @@
 {
-  "release": "home-then-now-20261113-slider",
+  "release": "home-then-now-20261113-slider2",
   "hero": {
     "img1928": "assets/hero-1928.webp",
     "imgToday": "assets/hero-today.webp",
@@ -195,7 +195,8 @@
       "line": "Pick an outfit and face the door",
       "href": "https://www.walkofberlin.com/games/berghain-bouncer",
       "bg": "#102414",
-      "fg": "#FAFAF5"
+      "fg": "#FAFAF5",
+      "img": "assets/tile-berghain-bouncer.webp"
     },
     {
       "kind": "MAP",
@@ -203,7 +204,8 @@
       "line": "15 markets, filter by price and size",
       "href": "https://www.walkofberlin.com/tools/christmas-markets-map",
       "bg": "#FFE600",
-      "fg": "#102414"
+      "fg": "#102414",
+      "img": "assets/tile-christmas-markets.webp"
     },
     {
       "kind": "GUIDE",
@@ -211,15 +213,17 @@
       "line": "Neighbourhood by neighbourhood",
       "href": "https://www.walkofberlin.com/tools/berlin-safety",
       "bg": "#123D18",
-      "fg": "#FAFAF5"
+      "fg": "#FAFAF5",
+      "img": "assets/tile-berlin-safety.webp"
     },
     {
       "kind": "FINDER",
       "name": "Toilet Finder",
-      "line": "The nearest public toilet, free ones too",
+      "line": "Nearest public toilet, free ones too",
       "href": "https://www.walkofberlin.com/tools/berlin-public-toilets",
       "bg": "#EAF0E2",
-      "fg": "#123D18"
+      "fg": "#123D18",
+      "img": "assets/tile-toilet-finder.webp"
     }
   ],
   "toolsAllHref": "https://www.walkofberlin.com/berlin-tools",
@@ -274,7 +278,7 @@
       "url": "https://walkofberlin.com/post/gas-lamps-in-berlin"
     },
     {
-      "what": "Club dress codes preview",
+      "what": "Club dress codes preview and Berghain Bouncer tile",
       "creator": "Photo by Darkroomduck",
       "source": "Wikimedia Commons, cropped",
       "licence": "CC BY-SA 4.0",
@@ -286,6 +290,27 @@
       "source": "Cropped, shown on a drawn wall",
       "licence": "Datenlizenz Deutschland Zero 2.0",
       "url": ""
+    },
+    {
+      "what": "Christmas Markets tile: Gendarmenmarkt at dusk",
+      "creator": "Adobe Stock 311145723",
+      "source": "Cropped",
+      "licence": "Adobe Stock Standard licence",
+      "url": ""
+    },
+    {
+      "what": "Berlin Safety tile: Oberbaum Bridge",
+      "creator": "Adobe Stock 428386996",
+      "source": "Cropped",
+      "licence": "Adobe Stock Standard licence",
+      "url": ""
+    },
+    {
+      "what": "Toilet Finder tile",
+      "creator": "Unsplash, via the Wix media library",
+      "source": "Cropped",
+      "licence": "Unsplash licence",
+      "url": "https://www.walkofberlin.com/post/public-toilets-in-berlin"
     },
     {
       "what": "Everything else",

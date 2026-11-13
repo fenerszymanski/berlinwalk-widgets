@@ -21,7 +21,7 @@
   if (!css) {
     css = document.createElement('link');
     css.rel = 'stylesheet';
-    css.href = new URL('home-then-now.css?release=home-then-now-20261113-slider', base).href;
+    css.href = new URL('home-then-now.css?release=home-then-now-20261113-slider2', base).href;
     css.dataset.bwHomeThenNowCss = 'true';
   }
   let cssReady = css.localName === 'style' || !!css.sheet;
@@ -30,7 +30,7 @@
   let script = document.head.querySelector('script[data-bw-home-then-now-script]');
   if (!script && !customElements.get('bw-home-then-now')) {
     script = document.createElement('script');
-    script.src = new URL('home-then-now-element.js?release=home-then-now-20261113-slider', base).href;
+    script.src = new URL('home-then-now-element.js?release=home-then-now-20261113-slider2', base).href;
     script.dataset.bwHomeThenNowScript = 'true';
   }
   if (script) {
