@@ -2080,5 +2080,51 @@
         "alt": "Complete artwork at 30 x 40 cm."
       }
     ]
+  },
+  {
+    "id": "dl-cafe-achteck-lamplight",
+    "name": "Café Achteck Lamplight Printable Poster",
+    "place": "Berlin · Snow and lamplight",
+    "image": "cafe-achteck-lamplight-fullart.jpg",
+    "alt": "Painterly illustration of a green octagonal cast-iron Café Achteck pavilion with two lit lamps, standing in snow at dusk under bare branches, with apartment houses behind. The footer reads Café Achteck, Berlin.",
+    "typeLine": "DIGITAL DOWNLOAD · 30 × 40 CM",
+    "wixProductId": "90039ae1-d2f6-7ea7-5154-fabbfab2a9e7",
+    "kind": "digital",
+    "deliveryNote": "Digital download · 1 JPEG print file and a printing guide. No physical item.",
+    "deliveryDetails": "Your download includes one 3:4 sRGB JPEG at 300 dpi for 30 × 40 cm and a printing guide. The same file prints without cropping at 45 × 60 cm and 60 × 80 cm. No physical poster, frame or decor is included.",
+    "group": "stories",
+    "visualCreditsHtml": "<p>Visual references: the type drawing of the cast-iron urinal in Berlin und seine Bauten (Wilhelm Ernst &amp; Sohn, 1896), public domain, and a photograph of the urinal on Rüdesheimer Platz by Leonhard Lenz, 8 September 2024, CC0, both via Wikimedia Commons. The pavilion, snow, lamplight and surroundings were artistically reinterpreted; this is not a reproduction of a photograph or a drawing. No endorsement is implied.</p>",
+    "sizeImages": {
+      "30x40 cm": "cafe-achteck-lamplight-30x40.jpg"
+    },
+    "gallery": [
+      {
+        "image": "cafe-achteck-lamplight-30x40.jpg",
+        "alt": "Complete artwork at 30 x 40 cm."
+      }
+    ]
+  },
+  {
+    "id": "dl-clayallee-outpost",
+    "name": "Clayallee Outpost Printable Poster",
+    "place": "Dahlem · Summer at the Outpost",
+    "image": "clayallee-outpost-fullart.jpg",
+    "alt": "Painterly illustration of a long, low cinema building with a narrow band of windows, tall flagpoles with plain cream and coral flags against a blue sky, and a summer crowd on the forecourt. The footer reads Clayallee, Berlin.",
+    "typeLine": "DIGITAL DOWNLOAD · 30 × 40 CM",
+    "wixProductId": "5f2d63f9-ecef-7fd3-ed24-e6931d88be22",
+    "kind": "digital",
+    "deliveryNote": "Digital download · 1 JPEG print file and a printing guide. No physical item.",
+    "deliveryDetails": "Your download includes one 3:4 sRGB JPEG at 300 dpi for 30 × 40 cm and a printing guide. The same file prints without cropping at 45 × 60 cm and 60 × 80 cm. No physical poster, frame or decor is included.",
+    "group": "stories",
+    "visualCreditsHtml": "<p>Visual reference: US Army Signal Corps film President John F. Kennedy Visits Berlin, Germany, 26 June 1963, National Archives (111-LC-47012), public domain. The building, crowd, flags and colours were artistically reinterpreted; this is not a reproduction of a film frame. No endorsement is implied.</p>",
+    "sizeImages": {
+      "30x40 cm": "clayallee-outpost-30x40.jpg"
+    },
+    "gallery": [
+      {
+        "image": "clayallee-outpost-30x40.jpg",
+        "alt": "Complete artwork at 30 x 40 cm."
+      }
+    ]
   }
 ]
