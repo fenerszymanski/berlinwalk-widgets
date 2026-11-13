@@ -171,13 +171,13 @@ const BW_HOME_TWO_DOORS_SHOP_PRODUCTS = [
     "cta": "See Berlin Everyday"
   },
   {
-    "label": "FOR YOUR WALL",
-    "title": "Berlin 2027 Wall Calendar",
-    "imageUrl": "https://static.wixstatic.com/media/5a08a3_de1802442ecc44c8afac5a2b5fbaeef9~mv2.jpg/v1/fit/w_640,h_480,q_85/file.jpg",
-    "alt": "Berlin 2027 A3 wall calendar open at January, with the TV Tower above the month grid",
-    "text": "One Berlin district for every month, with Berlin public holidays and school holidays. Check the product page for price and delivery dates.",
-    "href": "https://walkofberlin.com/product-page/berlin-2027-wall-calendar-a3",
-    "cta": "See the calendar"
+    "label": "MADE WITH YOUR PLACES",
+    "title": "Dein Berlin 2027",
+    "imageUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/calendar-20261112/wall-cover.webp",
+    "alt": "Illustrated preview of the Dein Berlin 2027 wall calendar on a wall, its cover showing a Berlin square from above",
+    "text": "A 2027 wall calendar of your own Berlin places, each month one of them from above in 1928 and today. Preview every month before you order.",
+    "href": "https://walkofberlin.com/product-page/dein-berlin-2027-personalised-wall-calendar",
+    "cta": "Make your calendar"
   },
   {
     "label": "PRINT AT HOME",

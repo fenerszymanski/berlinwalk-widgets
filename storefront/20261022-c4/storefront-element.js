@@ -5,7 +5,7 @@
   const base = new URL('.', script.src);
   const CHANNEL = 'wob:shop-cart:v1';
   const CALENDAR_PRODUCT_ID='d35601ed-3b43-4269-afb9-32e7c3b1e128';
-  const CALENDAR_LISTED=false;   // Yusuf 12 Nov 2026: page by direct link only, no card in any list until he says so
+  const CALENDAR_LISTED=true;   // Yusuf 13 Nov 2026: "şimdi bunu store'da, menüde vs nerede gerekli varsa koyalım" (12 Nov it was direct link only)
   const esc = value => String(value ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   const asset = value => {if(value==='gift-week.js'&&/^[a-f0-9]{40}$/.test(window.__WOB_GIFT_WEEK_P22_REF||''))return 'https://cdn.jsdelivr.net/gh/fenerszymanski/berlinwalk-widgets@'+window.__WOB_GIFT_WEEK_P22_REF+'/storefront/20261022-c4/gift-week.js';const target=new URL(value,base);if(/\.(?:js|css|json)$/.test(target.pathname))target.searchParams.set('v','ys-prices-bf-20261112d');return target.href;};
   // Chrome and Safari ignore @font-face inside shadow DOM, so the three faces are registered once on the document with absolute URLs from the element's own base.
@@ -792,7 +792,7 @@
       this.calendarCleanup=this.calendarMod.mountCalendar(host,this.calendarState,{german:this.campaignGerman(),asset,busy:()=>this.busy||this.uncertain,
         available:()=>this.catalogue?.products?.some(p=>p.productId===this.calendarMod.CALENDAR_ID&&p.visible!==false&&p.inStock===true),
         track:step=>this.measure('calendarStep',step),
-        add:async fields=>{if(!this.calendarMod.calendarReady(this.calendarState))throw Error('TAKVIM_HAZIR_DEGIL');if(this.busy||this.uncertain)throw Error('TAKVIM_BEKLIYOR');this.busy=true;try{await this.request('add',{productId:this.calendarMod.CALENDAR_ID,quantity:1,customTextFields:fields});this.measure('calendarStep','calendar-add');this.calendarState.added=true;this.notice='Added to your cart';}catch(error){this.error=error.message;throw error;}finally{this.busy=false;this.render();}}
+        add:async fields=>{if(!this.calendarMod.calendarReady(this.calendarState))throw Error('TAKVIM_HAZIR_DEGIL');if(this.busy||this.uncertain)throw Error('TAKVIM_BEKLIYOR');this.busy=true;try{await this.request('add',{productId:this.calendarMod.CALENDAR_ID,quantity:1,customTextFields:fields});this.measure('calendarStep','calendar-add');this.measure('added',this.model?.products?.find?.(p=>p.wixProductId===this.calendarMod.CALENDAR_ID)||{wixProductId:this.calendarMod.CALENDAR_ID,name:'Dein Berlin 2027',priceCents:3990,currency:'EUR'},1);this.calendarState.added=true;this.notice='Added to your cart';}catch(error){this.error=error.message;throw error;}finally{this.busy=false;this.render();}}
       });
     }
     mountYs() {

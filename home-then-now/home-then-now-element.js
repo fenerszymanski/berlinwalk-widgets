@@ -132,10 +132,10 @@
         "img": "assets/door-1928.webp"
       },
       {
-        "name": "2027 Wall Calendar",
-        "line": "One district for every month",
-        "href": "https://www.walkofberlin.com/product-page/berlin-2027-wall-calendar-a3",
-        "img": "assets/door-calendar.webp"
+        "name": "Dein Berlin 2027",
+        "line": "Your own places, 1928 and today",
+        "href": "https://www.walkofberlin.com/product-page/dein-berlin-2027-personalised-wall-calendar",
+        "img": "assets/door-dein-berlin-2027.webp"
       },
       {
         "name": "Audio walks",

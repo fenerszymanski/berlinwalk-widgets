@@ -102,7 +102,10 @@ export function pixel(kind, name, data, key) {
 const money = cents => Math.round(Number(cents) || 0) / 100;
 
 // Steps of the personalised print's designer: search, pick, preview (both photos loaded), seen (checkbox), noresult, photoerror.
-export function calendarStep(step) {if(['calendar-place','calendar-preview','calendar-add'].includes(step))count(step,'/product-page/dein-berlin-2027-personalised-wall-calendar');}
+// Calendar (13 Nov 2026, for the Dein Berlin 2027 ads): CalPlace goes to the pixel once per page load when the visitor adds their first
+// own place (the ad set optimises for it, like YSPreview for the 1928 print); its cart add sends AddToCart through added().
+const CAL_ID = 'd35601ed-3b43-4269-afb9-32e7c3b1e128';
+export function calendarStep(step) {if(['calendar-place','calendar-preview','calendar-add'].includes(step))count(step,'/product-page/dein-berlin-2027-personalised-wall-calendar');if(step==='calendar-place')pixel('trackCustom','CalPlace',{content_ids:[CAL_ID],content_type:'product'},step);}
 export function ysStep(step) {
   count(step, YS_PATH);
   if(['search','preview'].includes(step))W.WobCampaignFunnel?.emit('interest',step==='search'?'street_search':'street_preview');
