@@ -88,6 +88,9 @@ export const STORE_HOME_CARDS = Object.freeze([
 // Design 2 is additive: the legacy exports above remain byte-for-byte compatible.
 // The publication patch flips this together with STORE_DESIGN2 in the storefront.
 export const STORE_DESIGN2_MENU = true;
+// Apparel launch: preserve legacy exports; enable the new category only in current Design 2.
+FILTERS.apparel=['all'];
+LEGACY_ROUTES['berlin-t-shirts']=['apparel','all'];
 export const STORE_MENU_DESIGN2 = Object.freeze([
   {id:'posters',label:'Posters',de:'Poster',href:storeHref('print'),items:[
     {label:'All posters',de:'Alle Poster',href:storeHref('print')},
@@ -101,6 +104,7 @@ export const STORE_MENU_DESIGN2 = Object.freeze([
     {label:'Dein Berlin 2027 · personalised calendar',de:'Dein Berlin 2027 · persönlicher Kalender',href:STORE_PERSONAL_CALENDAR_PRODUCT},
     {label:'Berlin 2027 wall calendar',de:'Berlin Wandkalender 2027',href:STORE_CALENDAR_PRODUCT},
     {label:'Personal newspapers',de:'Persönliche Zeitungen',href:storeHref('newspapers')},
+    {label:'Berlin T-shirts',de:'Berlin T-Shirts',href:storeHref('apparel')},
     {label:'1928 gift voucher',de:'1928-Gutschein',href:'https://walkofberlin.com/product-page/gift-your-berlin-street-in-1928-poster-gift'}
   ]},
   {id:'explore',label:'Explore Berlin',de:'Berlin entdecken',noteDe:'Alle auf Englisch',href:storeHref('audio'),items:[

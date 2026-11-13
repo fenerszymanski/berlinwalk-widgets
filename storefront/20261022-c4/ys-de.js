@@ -1,5 +1,6 @@
 // Design 2 UI dictionary, shared by the renderer and its coverage test.
 export const DESIGN2_TEXT = Object.freeze({
+  "Berlin T-shirts": "Berlin T-Shirts",
  "Free":"Kostenlos",
  "In English":"Auf Englisch",
  "All in English":"Alle auf Englisch",
