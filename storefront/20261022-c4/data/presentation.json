@@ -2126,5 +2126,28 @@
         "alt": "Complete artwork at 30 x 40 cm."
       }
     ]
+  },
+  {
+    "id": "dl-red-castle-alexanderplatz",
+    "name": "Red Castle Alexanderplatz Printable Poster",
+    "place": "Alexanderplatz · The lost Red Castle",
+    "image": "red-castle-fullart.jpg",
+    "alt": "Imagined painted view of the lost Red Castle at Alexanderplatz, with a red facade, green roof and textured sky. The footer reads Alexanderplatz, Berlin.",
+    "typeLine": "DIGITAL DOWNLOAD · 30 × 40 CM",
+    "wixProductId": "f585b76c-981f-f7ef-13b2-bfb44c266cf0",
+    "kind": "digital",
+    "deliveryNote": "Digital download · 1 JPEG print file and a printing guide. No physical item.",
+    "deliveryDetails": "Your download includes one 3:4 sRGB JPEG, 3543 × 4724 px at 300 dpi for 30 × 40 cm, and a printing guide. The same file prints without cropping at 45 × 60 cm and 60 × 80 cm, with softer detail at larger sizes. No physical poster, frame or decor is included.",
+    "group": "stories",
+    "visualCreditsHtml": "<p>Visual reference: an Alexanderplatz postcard from around 1900, photographer unknown, public domain, via Wikimedia Commons (Berlin-Mitte Postkarte 012.jpg). The building was artistically reinterpreted in a simplified, imagined painted view. This is not a reproduction of the postcard or a measured reconstruction. No endorsement is implied.</p><p>Historical references: the checked research for my Alexanderplatz story, including Berliner Zeitung (2018), anderes.Berlin (2016) and the June 1953 aerial photograph.</p>",
+    "sizeImages": {
+      "30x40 cm": "red-castle-30x40.jpg"
+    },
+    "gallery": [
+      {
+        "image": "red-castle-30x40.jpg",
+        "alt": "Complete artwork at 30 x 40 cm. Digital file only."
+      }
+    ]
   }
 ]
