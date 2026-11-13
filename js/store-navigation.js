@@ -84,3 +84,35 @@ export const STORE_HOME_CARDS = Object.freeze([
   {label:'MADE WITH YOUR PLACES',title:'Dein Berlin 2027',imageUrl:'https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/calendar-20261112/wall-cover.webp',alt:'Illustrated preview of the Dein Berlin 2027 wall calendar on a wall, its cover showing a Berlin square from above',text:'A 2027 wall calendar of your own Berlin places, each month one of them from above in 1928 and today. Preview every month before you order.',href:STORE_PERSONAL_CALENDAR_PRODUCT,cta:'Make your calendar'},
   {label:'PRINT AT HOME',title:'Printable downloads',imageUrl:'https://static.wixstatic.com/media/5a08a3_e1ee5add72f44c8abc4f19f4a76035f5~mv2.jpg/v1/fit/w_640,h_480,q_85/file.jpg',alt:'Twelve Berlin district illustrations arranged in a grid of frames',text:'Berlin artwork and a 2027 calendar as downloadable files. Print them yourself; no physical item is shipped.',href:storeHref('digital'),cta:'Browse printable downloads'}
 ]);
+
+// Design 2 is additive: the legacy exports above remain byte-for-byte compatible.
+// The publication patch flips this together with STORE_DESIGN2 in the storefront.
+export const STORE_DESIGN2_MENU = false;
+export const STORE_MENU_DESIGN2 = Object.freeze([
+  {id:'posters',label:'Posters',de:'Poster',href:storeHref('print'),items:[
+    {label:'All posters',de:'Alle Poster',href:storeHref('print')},
+    ...[['everyday','Everyday','Berliner Alltag'],['landmarks','Landmarks','Wahrzeichen'],['stories','Berlin Stories','Berliner Geschichten'],['districts','Districts','Bezirke'],['sets','Sets','Sets']].map(([id,label,de])=>({label,de,href:storeHref('print',id)})),
+    {label:'Print at home',de:'Zum Selbstdrucken',href:storeHref('print')+'&format=digital'}
+  ]},
+  {id:'gifts',label:'Gifts',de:'Geschenke',href:'https://walkofberlin.com/category/berlin-christmas-gifts',hrefDe:'https://walkofberlin.com/de/category/berlin-geschenke',items:[
+    {label:'Your street in 1928',de:'Deine Straße 1928',href:STORE_PERSONALISED_PRODUCT},
+    {label:'Dein Berlin 2027',de:'Dein Berlin 2027',href:STORE_PERSONAL_CALENDAR_PRODUCT},
+    {label:'Berlin 2027 wall calendar',de:'Berlin Wandkalender 2027',href:STORE_CALENDAR_PRODUCT},
+    {label:'Personal newspapers',de:'Persönliche Zeitungen',href:storeHref('newspapers')},
+    {label:'1928 gift voucher',de:'1928-Gutschein',href:'https://walkofberlin.com/product-page/gift-your-berlin-street-in-1928-poster-gift'}
+  ]},
+  {id:'explore',label:'Explore Berlin',de:'Berlin entdecken',href:storeHref('audio'),items:[
+    {label:'Audio walks',de:'Audiotouren',href:storeHref('audio')},
+    {label:'Trip Planner',de:'Reiseplaner',href:'https://walkofberlin.com/berlin-trip-planner'},
+    {label:'Guides & photo missions',de:'Guides & Foto-Missionen',href:storeHref('guides')},
+    {label:'Virtual tours & Night In',de:'Virtuelle Touren & Night In',href:storeHref('guides')+'&view=virtual'}
+  ]}
+]);
+export function design2Href(href,german=false) {
+  const target=new URL(href,STORE_HOME);
+  if(german&&target.hostname.endsWith('walkofberlin.com')) {
+    if(/^\/(?:category|product-page|cart-page)(?:\/|$)/.test(target.pathname)){target.pathname='/de'+target.pathname;target.searchParams.delete('lang');}
+    else if(/^\/products\//.test(target.pathname))target.searchParams.set('lang','de');
+  }
+  return target.href;
+}

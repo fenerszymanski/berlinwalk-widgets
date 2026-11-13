@@ -1,3 +1,65 @@
+// Design 2 UI dictionary, shared by the renderer and its coverage test.
+export const DESIGN2_TEXT = Object.freeze({
+  "No physical product is shipped. Your code and a printable card arrive by email, normally within the hour and no later than 24 hours after payment. You retain the 14-day consumer withdrawal right while the code is unused.": "Es wird kein physischer Artikel versendet. Dein Code und eine druckbare Karte kommen per E-Mail, normalerweise innerhalb einer Stunde und spätestens 24 Stunden nach der Zahlung. Solange der Code unbenutzt ist, bleibt dein 14-tägiges Verbraucher-Widerrufsrecht bestehen.",
+  "Find your Berlin.": "Finde dein Berlin.",
+  "Shop the prints": "Poster entdecken",
+  "Looking for a Christmas gift? Start here.": "Suchst du ein Weihnachtsgeschenk? Fang hier an.",
+  "Search posters, districts…": "Poster, Bezirke und Motive suchen…",
+  "My picks": "Meine Auswahl",
+  "Similar designs": "Ähnliche Motive",
+  "Made to hang together": "Passt gut zusammen",
+  "Styling example · Frames not included": "Stylingbeispiel · Rahmen nicht enthalten",
+  "Printed poster": "Gedrucktes Poster",
+  "Digital file": "Digitale Datei",
+  "Printed / Digital": "Gedruckt / Digital",
+  "Browse categories": "Kategorien entdecken",
+  "Search the store": "Im Shop suchen",
+  "Close search": "Suche schließen",
+  "Search": "Suchen",
+  "Store home": "Shop-Startseite",
+  "Cart": "Warenkorb",
+  "Store categories": "Shop-Kategorien",
+  "Search results": "Suchergebnisse",
+  "No results found.": "Keine Ergebnisse gefunden.",
+  "Try one of these categories.": "Entdecke eine dieser Kategorien.",
+  "All": "Alle",
+  "Printed": "Gedruckt",
+  "Digital": "Digital",
+  "Format": "Format",
+  "Collections": "Kollektionen",
+  "Everyday": "Berliner Alltag",
+  "Landmarks": "Wahrzeichen",
+  "Berlin Stories": "Berliner Geschichten",
+  "Districts": "Bezirke",
+  "Find your street": "Finde deine Straße",
+  "Make your calendar": "Gestalte deinen Kalender",
+  "Personal Berlin gifts": "Persönliche Berlin-Geschenke",
+  "Explore Berlin": "Berlin entdecken",
+  "Posters": "Poster",
+  "Gifts": "Geschenke",
+  "All posters": "Alle Poster",
+  "Sets": "Sets",
+  "Print at home": "Zum Selbstdrucken",
+  "Your street in 1928": "Deine Straße 1928",
+  "Dein Berlin 2027": "Dein Berlin 2027",
+  "Berlin 2027 wall calendar": "Berlin Wandkalender 2027",
+  "Personal newspapers": "Persönliche Zeitungen",
+  "1928 gift voucher": "1928-Gutschein",
+  "Audio walks": "Audiotouren",
+  "Trip Planner": "Reiseplaner",
+  "Guides & photo missions": "Guides & Foto-Missionen",
+  "Virtual tours & Night In": "Virtuelle Touren & Night In",
+  "View all": "Alle ansehen",
+  "View design": "Motiv ansehen",
+  "Available products": "Verfügbare Produkte",
+  "Show all products": "Alle Produkte anzeigen",
+  "Search for a Berlin place or theme.": "Suche nach einem Berliner Ort oder Motiv.",
+  "Free delivery to Germany, the EU, the UK and the US. Usually 3 to 5 working days in Germany, 4 to 9 elsewhere. Frame not included.": "Kostenloser Versand nach Deutschland, in die EU, nach Großbritannien und in die USA. In Deutschland meist 3 bis 5 Werktage, sonst 4 bis 9. Rahmen nicht enthalten.",
+  "Two Berlin prints in oak frames above a cabinet.": "Zwei Berlin-Poster in Eichenrahmen über einer Kommode.",
+  "Size": "Größe",
+  "Paper": "Papier",
+  "Add to cart": "In den Warenkorb"
+});
 // German layer for the 1928 page (30 Oct 2026, press launch). Loaded with ?lang=de (a /de/ page gets it too). It rewrites visible text inside the
 // storefront's shadow root and never touches cart, price or order logic, so a miss simply leaves that string in English.
 // Legal notices stay in their reviewed English wording; only their heading says so.
@@ -550,3 +612,11 @@ function start() {
 }
 export const calendarText=(s,german)=>german?(TEXT.get(s)||s):s;
 if(new URLSearchParams(location.search).get('lang')==='de'||/^\/de(?:\/|$)/.test(location.pathname)||(/^\/cart-page/.test(location.pathname)&&(()=>{try{const k=JSON.parse(sessionStorage.getItem('bwYsLastChoice')||'null');return k?.lang==='de'&&Date.now()-Number(k.at)<864e5}catch{return false}})()))start();
+
+// The gated Design 2 renderer has its dictionary before first paint. Translate
+// synchronously in that render task, rather than waiting for the legacy watcher.
+let design2Dictionary;
+export function translateDesign2(root,map) {
+ if(map!==design2Dictionary){design2Dictionary=map;for(const [k,v] of Object.entries(map||{})){if(!v||k.startsWith('design2:'))continue;const attr=k.match(/^@(?:aria-label|alt|placeholder|title): ([\s\S]*)$/);if(attr){if(!ATTRS.has(attr[1]))ATTRS.set(attr[1],v);}else if(!TEXT.has(k))TEXT.set(k,v);}}
+ sweep(root);
+}

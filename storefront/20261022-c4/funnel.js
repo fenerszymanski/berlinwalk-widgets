@@ -141,3 +141,10 @@ function campaignGaEvent(name,data){
  if(!window.__wobCommerceGAConfigured){window.__wobCommerceGAConfigured=true;window.gtag('consent','update',{analytics_storage:'granted',ad_storage:policy.advertising===true?'granted':'denied'});window.gtag('js',new Date());window.gtag('config','G-4HWBTM07N2',{send_page_view:false,cookie_domain:'walkofberlin.com'});if(!document.querySelector('script[src*="googletagmanager.com/gtag/"]')){var tag=document.createElement('script');tag.async=true;tag.src='https://www.googletagmanager.com/gtag/js?id=G-4HWBTM07N2';document.head.append(tag);}}
  window.gtag('event',name,Object.assign({send_to:'G-4HWBTM07N2',transport_type:'beacon'},data));
 }
+
+// Design 2 navigation: aggregate counter only. No query or pixel events.
+export function design2Step(step) {
+ if(!['hero','menu-posters','menu-gifts','menu-explore','search','search-empty','recommendation-similar','recommendation-hang-together','recommendation-explore'].includes(step))return;
+ const lang=/^\/de(?:\/|$)/.test(W.location?.pathname||'')||/\/category\/(?:berlin-poster|berlin-geschenke|berlin-kalender-2027)\/?$/.test(W.location?.pathname||'')||new URLSearchParams(W.location?.search||'').get('lang')==='de'?'de':'en';
+ count('design2-'+step+'-'+lang,STORE_PATH);
+}

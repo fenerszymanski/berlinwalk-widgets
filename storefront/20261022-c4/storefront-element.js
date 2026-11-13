@@ -5,9 +5,11 @@
   const base = new URL('.', script.src);
   const CHANNEL = 'wob:shop-cart:v1';
   const CALENDAR_PRODUCT_ID='d35601ed-3b43-4269-afb9-32e7c3b1e128';
+  const STORE_DESIGN2 = false;
+  const design2Enabled = (()=>{let choice;try{const q=new URLSearchParams(location.search).get("design");if(q==="2"||q==="0"){choice=q;sessionStorage.setItem("bwStoreDesign",q);}else choice=sessionStorage.getItem("bwStoreDesign");}catch{}return choice==="2"?true:choice==="0"?false:STORE_DESIGN2;})();
   const CALENDAR_LISTED=true;   // Yusuf 13 Nov 2026: "şimdi bunu store'da, menüde vs nerede gerekli varsa koyalım" (12 Nov it was direct link only)
   const esc = value => String(value ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-  const asset = value => {if(value==='gift-week.js'&&/^[a-f0-9]{40}$/.test(window.__WOB_GIFT_WEEK_P22_REF||''))return 'https://cdn.jsdelivr.net/gh/fenerszymanski/berlinwalk-widgets@'+window.__WOB_GIFT_WEEK_P22_REF+'/storefront/20261022-c4/gift-week.js';const target=new URL(value,base);if(/\.(?:js|css|json)$/.test(target.pathname))target.searchParams.set('v','ys-rooms-20261113');return target.href;};
+  const asset = value => {if(value==='gift-week.js'&&/^[a-f0-9]{40}$/.test(window.__WOB_GIFT_WEEK_P22_REF||''))return 'https://cdn.jsdelivr.net/gh/fenerszymanski/berlinwalk-widgets@'+window.__WOB_GIFT_WEEK_P22_REF+'/storefront/20261022-c4/gift-week.js';const target=new URL(value,base);if(/\.(?:js|css|json)$/.test(target.pathname))target.searchParams.set('v','store-design2-20261113-v6');return target.href;};
   // Chrome and Safari ignore @font-face inside shadow DOM, so the three faces are registered once on the document with absolute URLs from the element's own base.
   // Gift landing trials showed no LCP gain. Preserve their prior resource and font order.
   const legacyGiftPresentation = () => /^(?:\/de)?\/(?:category\/(?:berlin-christmas-gifts|berlin-geschenke)|gifts|geschenke)\/?$/.test(location.pathname);
@@ -231,14 +233,15 @@
     import(asset('catalog-layer.js')), import(asset('editorial-helpers.js')), import(asset('street-configurator.js')),
     ...['data/categories.json','data/presentation.json','data/native-bindings.json','data/external-products.json'].map(path => fetch(path==='data/presentation.json'?new URL('data/presentation.json?v=gallery-'+Date.now(),base).href:asset(path),path==='data/presentation.json'?{cache:'no-store'}:undefined)/* gallery-fresh-v1 */.then(response => {if (!response.ok) throw Error('CATALOGUE_METADATA_UNAVAILABLE');return response.json();})),
     import(asset('funnel.js')).then(m=>{import(asset('campaign-session.js')).catch(()=>{});return m;}).catch(() => null),   // measurement must never block the shop
-    import(new URL('../../js/store-navigation.js?v=gift-week-20261101-p17-v2',base).href),
+    import(new URL('../../js/store-navigation.js?v=store-design2-20261113-v6',base).href),
     import(asset('gift.js')).catch(()=>null),
     import(asset('gift-week.js')),
     import(asset('black-friday.js')),
     fetch(asset('data/gift-week-202611.json'),{cache:'no-store',signal:AbortSignal.timeout(5000)}).then(r=>r.ok?r.json():null).catch(()=>null),
     fetch(asset('data/black-friday-202611.json'),{cache:'no-store',signal:AbortSignal.timeout(5000)}).then(r=>r.ok?r.json():null).catch(()=>null),
     fetch(asset('data/price-snapshot-202611.json'),{signal:AbortSignal.timeout(2500)}).then(r=>r.ok?r.json():null).catch(()=>null),
-    (/(?:dein-berlin-2027|cart-page)/.test(location.pathname)?import(asset('calendar-configurator.js')).catch(()=>null):Promise.resolve(null))
+    (/(?:dein-berlin-2027|cart-page)/.test(location.pathname)?import(asset('calendar-configurator.js')).catch(()=>null):Promise.resolve(null)),
+    design2Enabled?import(asset('design2.js')).catch(()=>null):Promise.resolve(null)   // a failed design 2 load falls back to the current store
   ]);
   // German layer for the press launch, only with ?lang=de; a failure leaves the English page (30 Oct 2026).
   if(new URLSearchParams(location.search).get('lang')==='de'||(/^\/cart-page/.test(location.pathname)&&ysGermanTab()))import(asset('ys-de.js')).catch(()=>{});
@@ -385,7 +388,8 @@
       if(name==='shop-bridge-ready')this.start();
     }
     async load() {
-      try {const [layer,editorial,ysMod,definitions,presentation,bindings,external,funnel,navigation,gift,campaign,bf,campaignConfig,bfConfig,priceSnapshot,calendarMod]=await resources;
+      try {const [layer,editorial,ysMod,definitions,presentation,bindings,external,funnel,navigation,gift,campaign,bf,campaignConfig,bfConfig,priceSnapshot,calendarMod,design2]=await resources;
+        if(design2){await design2.prepare;design2.install(BWStorefront,{asset,esc,STORE_LOGO,money,editionHref,isDigital,POSTER_DELIVERY_SHORT,NOTICE_GIFT,cartPageUrl,ysGermanTab});this.setAttribute("design2","");}
         Object.assign(this,{layer,editorial,ysMod,definitions,presentation,bindings,external,funnel,navigation,gift,campaign,bf,campaignConfig,bfConfig,priceSnapshot,calendarMod});
         this.bfWasActive=this.bfActive();this.campaignWasActive=['wix','audio','newspaper'].some(system=>this.campaign?.active(this.campaignConfig,system));this.campaignTimer=setInterval(()=>{this.campaign?.tick(this.shadowRoot);const bfNow=this.bfActive();if(bfNow!==this.bfWasActive){this.bfWasActive=bfNow;this.render();this.request('catalog').catch(()=>{});}this.shadowRoot.querySelectorAll('[data-ys-mounted-christmas]').forEach(el=>{el.hidden=!this.ysMod?.ysMounted(this.ys||{})||!this.ysMod?.mountedChristmasOpen();});if(!this.catalogue&&this.snapshotWasUsable!==this.snapshotUsable()){this.snapshotWasUsable=this.snapshotUsable();this.skeletonModel=null;this.render();}const next=this.campaign?.active(this.campaignConfig,'wix')||this.campaign?.active(this.campaignConfig,'audio')||this.campaign?.active(this.campaignConfig,'newspaper');if(this.campaignWasActive&&!next){this.buildModel();this.request('catalog').catch(()=>{});}this.campaignWasActive=next;},1000);
         this.campaignRefresh=setInterval(async()=>{if(!this.isConnected||this.busy||this.uncertain)return;if(this.bfActive())this.request('catalog').catch(()=>{});try{const response=await fetch(asset('data/gift-week-202611.json'),{cache:'no-store',signal:AbortSignal.timeout(5000)});if(!response.ok)throw Error('CONFIG_UNAVAILABLE');const next=await response.json();if(!this.isConnected||next.id!=='gift-week-202611'||Date.parse(next.end)!==Date.parse('2026-11-08T23:59:00+01:00'))throw Error('CONFIG_INVALID');if(JSON.stringify(next.systems)!==JSON.stringify(this.campaignConfig?.systems)){this.campaignConfig=next;this.skeletonModel=null;this.render();await this.request('catalog');}}catch{if(!this.catalogue){this.priceSnapshot=null;this.skeletonModel=null;this.render();}}},15000);

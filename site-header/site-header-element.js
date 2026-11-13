@@ -1,7 +1,7 @@
 (() => {
-const BW_HEADER_NAV_VERSION = 'unified-dropdowns-20261101';
+const BW_HEADER_NAV_VERSION = 'store-design2-20261113';
 if (customElements.get('bw-site-header')?.navigationVersion === BW_HEADER_NAV_VERSION
-  || customElements.get('bw-site-header-unified')?.navigationVersion === BW_HEADER_NAV_VERSION) return;
+  || customElements.get('bw-site-header-design2')?.navigationVersion === BW_HEADER_NAV_VERSION) return;
 
 const BW_HEADER_SCRIPT_URL = (document.currentScript && document.currentScript.src) || 'https://fenerszymanski.github.io/berlinwalk-widgets/site-header/site-header-element.js';
 // Walk of Berlin wordmark (A15a, live 2 October 2026). The old berlinwalk-wordmark-*
@@ -105,6 +105,224 @@ const BW_HEADER_STORE_LINKS = [
 const BW_HEADER_STORE_HOME = "https://walkofberlin.com/category/all-products?tab=all";
 // END GENERATED STORE NAVIGATION
 
+// BEGIN GENERATED DESIGN2 STORE MENU
+const BW_HEADER_STORE_DESIGN2 = false;
+const BW_HEADER_STORE_DESIGN2_EN = [
+  {
+    "id": "posters",
+    "label": "Posters",
+    "de": "Poster",
+    "href": "https://walkofberlin.com/category/all-products?tab=print",
+    "items": [
+      {
+        "label": "All posters",
+        "de": "Alle Poster",
+        "href": "https://walkofberlin.com/category/all-products?tab=print"
+      },
+      {
+        "label": "Everyday",
+        "de": "Berliner Alltag",
+        "href": "https://walkofberlin.com/category/all-products?tab=print&collection=everyday"
+      },
+      {
+        "label": "Landmarks",
+        "de": "Wahrzeichen",
+        "href": "https://walkofberlin.com/category/all-products?tab=print&collection=landmarks"
+      },
+      {
+        "label": "Berlin Stories",
+        "de": "Berliner Geschichten",
+        "href": "https://walkofberlin.com/category/all-products?tab=print&collection=stories"
+      },
+      {
+        "label": "Districts",
+        "de": "Bezirke",
+        "href": "https://walkofberlin.com/category/all-products?tab=print&collection=districts"
+      },
+      {
+        "label": "Sets",
+        "de": "Sets",
+        "href": "https://walkofberlin.com/category/all-products?tab=print&collection=sets"
+      },
+      {
+        "label": "Print at home",
+        "de": "Zum Selbstdrucken",
+        "href": "https://walkofberlin.com/category/all-products?tab=print&format=digital"
+      }
+    ]
+  },
+  {
+    "id": "gifts",
+    "label": "Gifts",
+    "de": "Geschenke",
+    "href": "https://walkofberlin.com/category/berlin-christmas-gifts",
+    "hrefDe": "https://walkofberlin.com/de/category/berlin-geschenke",
+    "items": [
+      {
+        "label": "Your street in 1928",
+        "de": "Deine Straße 1928",
+        "href": "https://walkofberlin.com/product-page/your-berlin-street-in-1928-personalised-aerial-print-30-x-40-cm"
+      },
+      {
+        "label": "Dein Berlin 2027",
+        "de": "Dein Berlin 2027",
+        "href": "https://walkofberlin.com/product-page/dein-berlin-2027-personalised-wall-calendar"
+      },
+      {
+        "label": "Berlin 2027 wall calendar",
+        "de": "Berlin Wandkalender 2027",
+        "href": "https://walkofberlin.com/product-page/berlin-2027-wall-calendar-a3"
+      },
+      {
+        "label": "Personal newspapers",
+        "de": "Persönliche Zeitungen",
+        "href": "https://walkofberlin.com/category/all-products?tab=newspapers"
+      },
+      {
+        "label": "1928 gift voucher",
+        "de": "1928-Gutschein",
+        "href": "https://walkofberlin.com/product-page/gift-your-berlin-street-in-1928-poster-gift"
+      }
+    ]
+  },
+  {
+    "id": "explore",
+    "label": "Explore Berlin",
+    "de": "Berlin entdecken",
+    "href": "https://walkofberlin.com/category/all-products?tab=audio",
+    "items": [
+      {
+        "label": "Audio walks",
+        "de": "Audiotouren",
+        "href": "https://walkofberlin.com/category/all-products?tab=audio"
+      },
+      {
+        "label": "Trip Planner",
+        "de": "Reiseplaner",
+        "href": "https://walkofberlin.com/berlin-trip-planner"
+      },
+      {
+        "label": "Guides & photo missions",
+        "de": "Guides & Foto-Missionen",
+        "href": "https://walkofberlin.com/category/all-products?tab=guides"
+      },
+      {
+        "label": "Virtual tours & Night In",
+        "de": "Virtuelle Touren & Night In",
+        "href": "https://walkofberlin.com/category/all-products?tab=guides&view=virtual"
+      }
+    ]
+  }
+];
+const BW_HEADER_STORE_DESIGN2_DE = [
+  {
+    "id": "posters",
+    "label": "Poster",
+    "de": "Poster",
+    "href": "https://walkofberlin.com/de/category/all-products?tab=print",
+    "items": [
+      {
+        "label": "Alle Poster",
+        "de": "Alle Poster",
+        "href": "https://walkofberlin.com/de/category/all-products?tab=print"
+      },
+      {
+        "label": "Berliner Alltag",
+        "de": "Berliner Alltag",
+        "href": "https://walkofberlin.com/de/category/all-products?tab=print&collection=everyday"
+      },
+      {
+        "label": "Wahrzeichen",
+        "de": "Wahrzeichen",
+        "href": "https://walkofberlin.com/de/category/all-products?tab=print&collection=landmarks"
+      },
+      {
+        "label": "Berliner Geschichten",
+        "de": "Berliner Geschichten",
+        "href": "https://walkofberlin.com/de/category/all-products?tab=print&collection=stories"
+      },
+      {
+        "label": "Bezirke",
+        "de": "Bezirke",
+        "href": "https://walkofberlin.com/de/category/all-products?tab=print&collection=districts"
+      },
+      {
+        "label": "Sets",
+        "de": "Sets",
+        "href": "https://walkofberlin.com/de/category/all-products?tab=print&collection=sets"
+      },
+      {
+        "label": "Zum Selbstdrucken",
+        "de": "Zum Selbstdrucken",
+        "href": "https://walkofberlin.com/de/category/all-products?tab=print&format=digital"
+      }
+    ]
+  },
+  {
+    "id": "gifts",
+    "label": "Geschenke",
+    "de": "Geschenke",
+    "href": "https://walkofberlin.com/de/category/berlin-geschenke",
+    "hrefDe": "https://walkofberlin.com/de/category/berlin-geschenke",
+    "items": [
+      {
+        "label": "Deine Straße 1928",
+        "de": "Deine Straße 1928",
+        "href": "https://walkofberlin.com/de/product-page/your-berlin-street-in-1928-personalised-aerial-print-30-x-40-cm"
+      },
+      {
+        "label": "Dein Berlin 2027",
+        "de": "Dein Berlin 2027",
+        "href": "https://walkofberlin.com/de/product-page/dein-berlin-2027-personalised-wall-calendar"
+      },
+      {
+        "label": "Berlin Wandkalender 2027",
+        "de": "Berlin Wandkalender 2027",
+        "href": "https://walkofberlin.com/de/product-page/berlin-2027-wall-calendar-a3"
+      },
+      {
+        "label": "Persönliche Zeitungen",
+        "de": "Persönliche Zeitungen",
+        "href": "https://walkofberlin.com/de/category/all-products?tab=newspapers"
+      },
+      {
+        "label": "1928-Gutschein",
+        "de": "1928-Gutschein",
+        "href": "https://walkofberlin.com/de/product-page/gift-your-berlin-street-in-1928-poster-gift"
+      }
+    ]
+  },
+  {
+    "id": "explore",
+    "label": "Berlin entdecken",
+    "de": "Berlin entdecken",
+    "href": "https://walkofberlin.com/de/category/all-products?tab=audio",
+    "items": [
+      {
+        "label": "Audiotouren",
+        "de": "Audiotouren",
+        "href": "https://walkofberlin.com/de/category/all-products?tab=audio"
+      },
+      {
+        "label": "Reiseplaner",
+        "de": "Reiseplaner",
+        "href": "https://walkofberlin.com/berlin-trip-planner"
+      },
+      {
+        "label": "Guides & Foto-Missionen",
+        "de": "Guides & Foto-Missionen",
+        "href": "https://walkofberlin.com/de/category/all-products?tab=guides"
+      },
+      {
+        "label": "Virtuelle Touren & Night In",
+        "de": "Virtuelle Touren & Night In",
+        "href": "https://walkofberlin.com/de/category/all-products?tab=guides&view=virtual"
+      }
+    ]
+  }
+];
+// END GENERATED DESIGN2 STORE MENU
+
 // One menu model for desktop disclosures and mobile accordions.
 // The store's generated links remain owned by sync-store-navigation.mjs.
 const BW_HEADER_MENU_GROUPS = [
@@ -166,12 +384,13 @@ const BW_HEADER_MENU_GROUPS = [
     {label:'Meet Yusuf',href:BW_HEADER_LINKS.guide},
     {label:'Reviews',href:BW_HEADER_LINKS.reviews},
   ]},
-  {key:'shop',label:'Store',items:BW_HEADER_STORE_LINKS},
+  {key:'shop',label:BW_HEADER_STORE_DESIGN2&&(/^\/de(?:\/|$)/.test(location.pathname)||new URLSearchParams(location.search).get('lang')==='de')?'Shop':'Store',items:BW_HEADER_STORE_DESIGN2?((/^\/de(?:\/|$)/.test(location.pathname)||new URLSearchParams(location.search).get('lang')==='de')?BW_HEADER_STORE_DESIGN2_DE:BW_HEADER_STORE_DESIGN2_EN):BW_HEADER_STORE_LINKS},
 ];
 const bwHeaderEscape = value => String(value).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const bwHeaderCommercePage = () => location.pathname.replace(/\/+$/,'') === '/products/berlin-landmarks-guide';
 const bwHeaderCommerceBridge = () => {const link=document.createElement('a');link.className='bw-header-book bw-header-commerce-bridge';link.href=BW_HEADER_BOOKING_URL;link.textContent='See dates and book';return link;};
-const bwHeaderItems = group => group.items.map(item=>`<li><a href="${bwHeaderEscape(item.href)}">${bwHeaderEscape(item.label)}</a></li>`).join('');
+const bwHeaderItems = group => group.items.map(item=>item.items?`<li class="bw-header-store-group"><a class="bw-header-store-group-title" href="${bwHeaderEscape(item.href)}">${bwHeaderEscape(item.label)}</a><ul>${item.items.map(link=>`<li><a href="${bwHeaderEscape(link.href)}">${bwHeaderEscape(link.label)}</a></li>`).join('')}</ul></li>`:`<li><a href="${bwHeaderEscape(item.href)}">${bwHeaderEscape(item.label)}</a></li>`).join('');
+const bwHeaderMobileItems = group => group.items.map(item=>item.items?`<section class="bw-header-store-mobile-group"><a class="bw-header-store-group-title" href="${bwHeaderEscape(item.href)}">${bwHeaderEscape(item.label)}</a>${item.items.map(link=>`<a href="${bwHeaderEscape(link.href)}">${bwHeaderEscape(link.label)}</a>`).join('')}</section>`:`<a href="${bwHeaderEscape(item.href)}">${bwHeaderEscape(item.label)}</a>`).join('');
 
 const BW_HEADER_INSTANCES = new Set();
 let BW_HEADER_ACTIVE_INSTANCE = null;
@@ -608,10 +827,10 @@ class BWHeaderElement extends HTMLElement {
   }
 
   _setupViewportMode() {
-    this._mobileMode = window.innerWidth <= 1100;
+    this._mobileMode = window.innerWidth <= (BW_HEADER_STORE_DESIGN2?980:1100);
     this._viewportModeHandler = () => {
       if (!this._runtimeActive) return;
-      const nextMobileMode = window.innerWidth <= 1100;
+      const nextMobileMode = window.innerWidth <= (BW_HEADER_STORE_DESIGN2?980:1100);
       if (nextMobileMode === this._mobileMode) return;
       this._mobileMode = nextMobileMode;
       if (this._closeDropdowns) this._closeDropdowns();
@@ -776,7 +995,7 @@ class BWHeaderElement extends HTMLElement {
           src: url(${BW_HEADER_MENU_FONT_URL}) format('woff2');
         }
 
-        bw-site-header, bw-site-header-unified {
+        bw-site-header, bw-site-header-design2 {
           display: block;
           width: 100%;
         }
@@ -1063,6 +1282,14 @@ class BWHeaderElement extends HTMLElement {
           z-index: 2147483647;
         }
         .bw-header-submenu * { box-sizing: border-box; }
+        .bw-header-submenu[data-bw-store-menu="design2"]{width:min(800px,calc(100vw - 24px));display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+        .bw-header-store-group{min-width:0;list-style:none}
+        .bw-header-store-group ul{margin:0;padding:0;list-style:none}
+        .bw-header-submenu .bw-header-store-group-title{font-weight:700;border-bottom:1px solid #c5e1a5}
+        .bw-header-submenu .bw-header-store-group a{white-space:normal;overflow-wrap:anywhere}
+        .bw-header-store-mobile-group{padding:12px 0;border-top:1px solid #c5e1a555}
+        .bw-header-store-mobile-group>.bw-header-store-group-title{font-weight:700}
+
         .bw-header-submenu a:focus-visible{outline:2px solid var(--green);outline-offset:-2px}
         .bw-header-submenu[hidden] {display:none!important}
         .bw-header-submenu a {
@@ -1104,14 +1331,14 @@ class BWHeaderElement extends HTMLElement {
 
         .bw-header-mobile-book { display: none; }
         .bw-header-nav-list[data-bw-home-nav], .bw-header-home-store { display: none; }
-        @media (min-width: 1101px) and (max-width: 1279px) {
+        @media (min-width: ${BW_HEADER_STORE_DESIGN2?981:1101}px) and (max-width: 1279px) {
           .bw-header-main { gap: 10px; padding-left: 16px; padding-right: 16px; }
           .bw-header-logo img { height: 28px; }
           .bw-header-nav a, .bw-header-dropdown-trigger { padding-left: 7px; padding-right: 7px; font-size: 16px; letter-spacing: 0; }
           .bw-header-nav .bw-header-tour-link { padding-right: 2px; }
           .bw-header-cta .bw-header-book { padding-left: 14px; padding-right: 14px; letter-spacing: .6px; font-size: 12px; }
         }
-        @media (min-width: 1101px) and (max-width: 1070px) {
+        @media (min-width: ${BW_HEADER_STORE_DESIGN2?981:1101}px) and (max-width: 1070px) {
           .bw-header-nav a, .bw-header-dropdown-trigger { padding-left: 5px; padding-right: 5px; font-size: 15px; white-space: nowrap; }
           .bw-header-cta .bw-header-book { padding-left: 12px; padding-right: 12px; letter-spacing: .3px; }
         }
@@ -1398,7 +1625,7 @@ class BWHeaderElement extends HTMLElement {
         }
 
         /* Compact breakpoint */
-        @media (max-width: 1100px) {
+        @media (max-width: ${BW_HEADER_STORE_DESIGN2?980:1100}px) {
           .bw-header-top {
             display: none !important;
           }
@@ -1479,14 +1706,14 @@ class BWHeaderElement extends HTMLElement {
               <ul class="bw-header-nav-list" data-bw-home-nav>${BW_HEADER_MENU_GROUPS.filter(group=>group.key!=='shop').map(group=>`
                 <li class="bw-header-dropdown ${group.key==='walk'?'bw-header-tours-dropdown':''}">
                   <button class="bw-header-dropdown-trigger" type="button" aria-expanded="false" aria-controls="${this._instanceId}-${group.key}-menu">${bwHeaderEscape(group.label)} <span class="bw-header-caret" aria-hidden="true">⌄</span></button>
-                  <ul id="${this._instanceId}-${group.key}-menu" class="bw-header-submenu" aria-label="${bwHeaderEscape(group.label)}" hidden inert>${bwHeaderItems(group)}</ul>
+                  <ul id="${this._instanceId}-${group.key}-menu" class="bw-header-submenu" aria-label="${bwHeaderEscape(group.label)}"${group.key==='shop'&&BW_HEADER_STORE_DESIGN2?' data-bw-store-menu="design2"':''} hidden inert>${bwHeaderItems(group)}</ul>
                 </li>`).join('')}</ul>
             </nav>
 
             <div class="bw-header-cta">
               <div class="bw-header-dropdown bw-header-store-dropdown">
-                <button class="bw-header-home-store bw-header-dropdown-trigger" type="button" aria-expanded="false" aria-controls="${this._instanceId}-shop-menu">Store <span class="bw-header-caret" aria-hidden="true">⌄</span></button>
-                <ul id="${this._instanceId}-shop-menu" class="bw-header-submenu" aria-label="Store" hidden inert>${bwHeaderItems(BW_HEADER_MENU_GROUPS.find(group=>group.key==='shop'))}</ul>
+                <button class="bw-header-home-store bw-header-dropdown-trigger" type="button" aria-expanded="false" aria-controls="${this._instanceId}-shop-menu">${bwHeaderEscape(BW_HEADER_MENU_GROUPS.find(group=>group.key==='shop').label)} <span class="bw-header-caret" aria-hidden="true">⌄</span></button>
+                <ul id="${this._instanceId}-shop-menu" class="bw-header-submenu" aria-label="Store" data-bw-store-menu="${BW_HEADER_STORE_DESIGN2?'design2':'legacy'}" hidden inert>${bwHeaderItems(BW_HEADER_MENU_GROUPS.find(group=>group.key==='shop'))}</ul>
               </div>
               <a class="bw-header-book bw-header-commerce-bridge" href="${BW_HEADER_BOOKING_URL}">See dates and book</a>
               <button class="bw-header-hamburger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="${this._mobileMenuId}">
@@ -1510,7 +1737,7 @@ class BWHeaderElement extends HTMLElement {
             <nav class="bw-header-mobile-nav" aria-label="Mobile primary">
               ${BW_HEADER_MENU_GROUPS.map(group=>`<details class="bw-header-mobile-section" data-bw-menu-group="${group.key}">
                 <summary class="bw-header-mobile-section-label ${group.key==='walk'?'bw-header-mobile-tour-label':''}">${bwHeaderEscape(group.label)}</summary>
-                ${group.items.map(item=>`<a href="${bwHeaderEscape(item.href)}">${bwHeaderEscape(item.label)}</a>`).join('')}
+                ${bwHeaderMobileItems(group)}
               </details>`).join('')}
             </nav>
           </div>
@@ -1637,11 +1864,11 @@ if (!customElements.get('bw-site-header')) {
   // Preserve the native tag (and product-adapter selectors) when an older
   // cached Wix script registered first. Its runtime is cleaned before mounting
   // the new element inside that host; do not mutate a registered prototype.
-  customElements.define('bw-site-header-unified', BWHeaderElement);
+  customElements.define('bw-site-header-design2', BWHeaderElement);
   const upgrade = () => {
     for (const host of document.querySelectorAll('bw-site-header')) {
-      if(host.querySelector(':scope > bw-site-header-unified'))continue;
-      const next=document.createElement('bw-site-header-unified');
+      if(host.querySelector(':scope > bw-site-header-design2'))continue;
+      const next=document.createElement('bw-site-header-design2');
       next._preservedCommerceForm=host.querySelector('form[data-bw-landmarks-guide-header-checkout]');
       next._preservedCommerceForm?.remove();
       host.disconnectedCallback?.();

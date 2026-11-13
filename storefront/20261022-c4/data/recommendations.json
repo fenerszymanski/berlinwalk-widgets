@@ -1,0 +1,2090 @@
+{
+  "schemaVersion": 1,
+  "sourceSha256": "3122a584149086da4be357e702193cb2876897b7dda76ced0881f60650621968",
+  "verifiedAt": "2026-11-13T09:44:46.965627+00:00",
+  "eligibility": "Current public JSON-LD InStock + enabled native binding; render also requires fresh bridge inStock, status and cartEligible. External products only in explore lane.",
+  "families": [
+    {
+      "id": "wc",
+      "members": [
+        "wc",
+        "dl-world-clock"
+      ],
+      "themes": [
+        "Alexanderplatz"
+      ],
+      "eligibleMembers": [
+        "wc",
+        "dl-world-clock"
+      ],
+      "exploreMembers": [],
+      "similar": [
+        "bu",
+        "tv",
+        "dl-alexanderplatz-behrens-blocks"
+      ],
+      "hangTogether": [
+        "tv",
+        "bu"
+      ],
+      "explore": [
+        "gd-landmarks"
+      ]
+    },
+    {
+      "id": "bu",
+      "members": [
+        "bu",
+        "dl-berlin-uhr"
+      ],
+      "themes": [
+        "Berlin details"
+      ],
+      "eligibleMembers": [
+        "bu",
+        "dl-berlin-uhr"
+      ],
+      "exploreMembers": [],
+      "similar": [
+        "wc",
+        "bp",
+        "pr-street-lights"
+      ],
+      "hangTogether": [
+        "wc",
+        "ca"
+      ],
+      "explore": [
+        "gd-landmarks"
+      ]
+    },
+    {
+      "id": "wt",
+      "members": [
+        "wt",
+        "dl-wasserturm"
+      ],
+      "themes": [],
+      "eligibleMembers": [
+        "wt",
+        "dl-wasserturm"
+      ],
+      "exploreMembers": [],
+      "similar": [
+        "pr-pankow",
+        "ca",
+        "ed-print-05-schoenhauser"
+      ],
+      "hangTogether": [
+        "ed-print-05-schoenhauser"
+      ],
+      "explore": [
+        "gd-photo"
+      ]
+    },
+    {
+      "id": "gs",
+      "members": [
+        "gs",
+        "dl-ghost-stations"
+      ],
+      "themes": [
+        "Divided Berlin"
+      ],
+      "eligibleMembers": [
+        "gs",
+        "dl-ghost-stations"
+      ],
+      "exploreMembers": [],
+      "similar": [
+        "tm",
+        "pr-berliner-mauer-cyclist",
+        "pr-u-bahn-two-sizes"
+      ],
+      "hangTogether": [
+        "tm"
+      ],
+      "explore": [
+        "au-wall"
+      ]
+    },
+    {
+      "id": "tv",
+      "members": [
+        "tv",
+        "dl-tv-tower"
+      ],
+      "themes": [
+        "Alexanderplatz"
+      ],
+      "eligibleMembers": [
+        "tv",
+        "dl-tv-tower"
+      ],
+      "exploreMembers": [],
+      "similar": [
+        "wc",
+        "dl-alexanderplatz-behrens-blocks",
+        "pr-berolina-modernist"
+      ],
+      "hangTogether": [
+        "wc"
+      ],
+      "explore": [
+        "gd-landmarks"
+      ]
+    },
+    {
+      "id": "tm",
+      "members": [
+        "tm",
+        "dl-berlin-tram-map"
+      ],
+      "themes": [
+        "Berlin in motion",
+        "Divided Berlin"
+      ],
+      "eligibleMembers": [
+        "tm",
+        "dl-berlin-tram-map"
+      ],
+      "exploreMembers": [],
+      "similar": [
+        "gs",
+        "dl-alexanderplatz-tram",
+        "pr-u-bahn-two-sizes"
+      ],
+      "hangTogether": [
+        "gs"
+      ],
+      "explore": [
+        "au-wall"
+      ]
+    },
+    {
+      "id": "bp",
+      "members": [
+        "bp",
+        "dl-bierpinsel"
+      ],
+      "themes": [],
+      "eligibleMembers": [
+        "bp",
+        "dl-bierpinsel"
+      ],
+      "exploreMembers": [],
+      "similar": [
+        "bu",
+        "pr-steglitz-zehlendorf",
+        "pr-street-lights"
+      ],
+      "hangTogether": [
+        "bu"
+      ],
+      "explore": [
+        "gd-photo"
+      ]
+    },
+    {
+      "id": "ok",
+      "members": [
+        "ok",
+        "dl-osman-kalin-treehouse"
+      ],
+      "themes": [
+        "Divided Berlin"
+      ],
+      "eligibleMembers": [
+        "ok",
+        "dl-osman-kalin-treehouse"
+      ],
+      "exploreMembers": [],
+      "similar": [
+        "pr-berliner-mauer-cyclist",
+        "pr-friedrichshain-kreuzberg",
+        "pr-kottbusser-tor"
+      ],
+      "hangTogether": [
+        "pr-berliner-mauer-cyclist"
+      ],
+      "explore": [
+        "au-wall"
+      ]
+    },
+    {
+      "id": "ca",
+      "members": [
+        "ca",
+        "dl-cafe-achteck"
+      ],
+      "themes": [
+        "Berlin details"
+      ],
+      "eligibleMembers": [
+        "ca",
+        "dl-cafe-achteck"
+      ],
+      "exploreMembers": [],
+      "similar": [
+        "pr-street-lights",
+        "pr-berlin-market-halls",
+        "wt"
+      ],
+      "hangTogether": [
+        "pr-street-lights"
+      ],
+      "explore": [
+        "gd-photo"
+      ]
+    },
+    {
+      "id": "pr-friedrichshain-kreuzberg",
+      "members": [
+        "pr-friedrichshain-kreuzberg",
+        "dl-friedrichshain-kreuzberg"
+      ],
+      "themes": [
+        "Berlin districts"
+      ],
+      "eligibleMembers": [
+        "pr-friedrichshain-kreuzberg",
+        "dl-friedrichshain-kreuzberg"
+      ],
+      "exploreMembers": [],
+      "similar": [
+        "pr-kottbusser-tor",
+        "pr-gleisdreieck",
+        "ok"
+      ],
+      "hangTogether": [
+        "pr-kottbusser-tor"
+      ],
+      "explore": [
+        "gd-photo"
+      ]
+    },
+    {
+      "id": "pr-pankow",
+      "members": [
+        "pr-pankow",
+        "dl-pankow"
+      ],
+      "themes": [
+        "Berlin districts"
+      ],
+      "eligibleMembers": [
+        "pr-pankow",
+        "dl-pankow"
+      ],
+      "exploreMembers": [],
+      "similar": [
+        "wt",
+        "ed-print-05-schoenhauser",
+        "ed-print-11-mauerpark"
+      ],
+      "hangTogether": [
+        "ed-print-05-schoenhauser"
+      ],
+      "explore": [
+        "gd-photo"
+      ]
+    },
+    {
+      "id": "pr-charlottenburg-wilmersdorf",
+      "members": [
+        "pr-charlottenburg-wilmersdorf",
+        "dl-charlottenburg-wilmersdorf"
+      ],
+      "themes": [
+        "Berlin districts"
+      ],
+      "eligibleMembers": [
+        "pr-charlottenburg-wilmersdorf",
+        "dl-charlottenburg-wilmersdorf"
+      ],
+      "exploreMembers": [],
+      "similar": [
+        "bu",
+        "pr-lietzensee-the-cut",
+        "ed-print-09-teufelsberg"
+      ],
+      "hangTogether": [
+        "pr-lietzensee-the-cut"
+      ],
+      "explore": [
+        "gd-photo"
+      ]
+    },
+    {
+      "id": "pr-spandau",
+      "members": [
+        "pr-spandau",
+        "dl-spandau"
+      ],
+      "themes": [
+        "Berlin districts"
+      ],
+      "eligibleMembers": [
+        "pr-spandau",
+        "dl-spandau"
+      ],
+      "exploreMembers": [],
+      "similar": [
+        "pr-steglitz-zehlendorf",
+        "pr-reinickendorf",
+        "dl-berlin-twelve-districts"
+      ],
+      "hangTogether": [],
+      "explore": []
+    },
+    {
+      "id": "pr-steglitz-zehlendorf",
+      "members": [
+        "pr-steglitz-zehlendorf",
+        "dl-steglitz-zehlendorf"
+      ],
+      "themes": [
+        "Berlin districts"
+      ],
+      "eligibleMembers": [
+        "pr-steglitz-zehlendorf",
+        "dl-steglitz-zehlendorf"
+      ],
+      "exploreMembers": [],
+      "similar": [
+        "bp",
+        "pr-steinstuecken",
+        "pr-charlottenburg-wilmersdorf"
+      ],
+      "hangTogether": [
+        "pr-steinstuecken"
+      ],
+      "explore": []
+    },
+    {
+      "id": "pr-tempelhof-schoeneberg",
+      "members": [
+        "pr-tempelhof-schoeneberg",
+        "dl-tempelhof-schoeneberg"
+      ],
+      "themes": [
+        "Berlin districts"
+      ],
+      "eligibleMembers": [
+        "pr-tempelhof-schoeneberg",
+        "dl-tempelhof-schoeneberg"
+      ],
+      "exploreMembers": [],
+      "similar": [
+        "ed-print-01-tempelhof",
+        "dl-wittenbergplatz-grenander-hall",
+        "pr-gleisdreieck"
+      ],
+      "hangTogether": [
+        "ed-print-01-tempelhof"
+      ],
+      "explore": [
+        "au-hidden"
+      ]
+    },
+    {
+      "id": "pr-neukoelln",
+      "members": [
+        "pr-neukoelln",
+        "dl-neukoelln"
+      ],
+      "themes": [
+        "Berlin districts"
+      ],
+      "eligibleMembers": [
+        "pr-neukoelln",
+        "dl-neukoelln"
+      ],
+      "exploreMembers": [],
+      "similar": [
+        "pr-friedrichshain-kreuzberg",
+        "pr-treptow-koepenick",
+        "dl-berlin-twelve-districts"
+      ],
+      "hangTogether": [],
+      "explore": []
+    },
+    {
+      "id": "pr-treptow-koepenick",
+      "members": [
+        "pr-treptow-koepenick",
+        "dl-treptow-koepenick"
+      ],
+      "themes": [
+        "Berlin districts"
+      ],
+      "eligibleMembers": [
+        "pr-treptow-koepenick",
+        "dl-treptow-koepenick"
+      ],
+      "exploreMembers": [],
+      "similar": [
+        "pr-neukoelln",
+        "pr-lichtenberg",
+        "dl-berlin-twelve-districts"
+      ],
+      "hangTogether": [],
+      "explore": []
+    },
+    {
+      "id": "pr-marzahn-hellersdorf",
+      "members": [
+        "pr-marzahn-hellersdorf",
+        "dl-marzahn-hellersdorf"
+      ],
+      "themes": [
+        "Berlin districts"
+      ],
+      "eligibleMembers": [
+        "pr-marzahn-hellersdorf",
+        "dl-marzahn-hellersdorf"
+      ],
+      "exploreMembers": [],
+      "similar": [
+        "ed-print-08-marzahn",
+        "pr-lichtenberg",
+        "dl-berlin-twelve-districts"
+      ],
+      "hangTogether": [
+        "ed-print-08-marzahn"
+      ],
+      "explore": []
+    },
+    {
+      "id": "pr-lichtenberg",
+      "members": [
+        "pr-lichtenberg",
+        "dl-lichtenberg"
+      ],
+      "themes": [
+        "Berlin districts"
+      ],
+      "eligibleMembers": [
+        "pr-lichtenberg",
+        "dl-lichtenberg"
+      ],
+      "exploreMembers": [],
+      "similar": [
+        "pr-marzahn-hellersdorf",
+        "pr-treptow-koepenick",
+        "dl-berlin-twelve-districts"
+      ],
+      "hangTogether": [],
+      "explore": []
+    },
+    {
+      "id": "pr-reinickendorf",
+      "members": [
+        "pr-reinickendorf",
+        "dl-reinickendorf"
+      ],
+      "themes": [
+        "Berlin districts"
+      ],
+      "eligibleMembers": [
+        "pr-reinickendorf",
+        "dl-reinickendorf"
+      ],
+      "exploreMembers": [],
+      "similar": [
+        "pr-spandau",
+        "pr-pankow",
+        "dl-berlin-twelve-districts"
+      ],
+      "hangTogether": [],
+      "explore": []
+    },
+    {
+      "id": "pr-berlin-2027-wall-calendar",
+      "members": [
+        "pr-berlin-2027-wall-calendar",
+        "dl-berlin-2027-printable-calendar"
+      ],
+      "themes": [],
+      "eligibleMembers": [
+        "pr-berlin-2027-wall-calendar",
+        "dl-berlin-2027-printable-calendar"
+      ],
+      "exploreMembers": [],
+      "similar": [
+        "dein-berlin-2027",
+        "dl-all-12-berlin-districts-set"
+      ],
+      "hangTogether": [],
+      "explore": []
+    },
+    {
+      "id": "trio",
+      "members": [
+        "trio"
+      ],
+      "themes": [],
+      "eligibleMembers": [],
+      "exploreMembers": [
+        "trio"
+      ],
+      "similar": [],
+      "hangTogether": [],
+      "explore": [
+        "gd-trip-planner"
+      ]
+    },
+    {
+      "id": "dl-all-12-berlin-districts-set",
+      "members": [
+        "dl-all-12-berlin-districts-set"
+      ],
+      "themes": [],
+      "eligibleMembers": [
+        "dl-all-12-berlin-districts-set"
+      ],
+      "exploreMembers": [],
+      "similar": [
+        "dl-berlin-landmarks-set-of-5",
+        "dl-berlin-icons-set-of-3",
+        "dl-berlin-twelve-districts"
+      ],
+      "hangTogether": [],
+      "explore": []
+    },
+    {
+      "id": "dl-berlin-landmarks-set-of-5",
+      "members": [
+        "dl-berlin-landmarks-set-of-5"
+      ],
+      "themes": [],
+      "eligibleMembers": [
+        "dl-berlin-landmarks-set-of-5"
+      ],
+      "exploreMembers": [],
+      "similar": [
+        "dl-berlin-icons-set-of-3",
+        "dl-all-12-berlin-districts-set",
+        "dl-berlin-twelve-districts"
+      ],
+      "hangTogether": [],
+      "explore": []
+    },
+    {
+      "id": "dl-berlin-icons-set-of-3",
+      "members": [
+        "dl-berlin-icons-set-of-3"
+      ],
+      "themes": [],
+      "eligibleMembers": [
+        "dl-berlin-icons-set-of-3"
+      ],
+      "exploreMembers": [],
+      "similar": [
+        "dl-berlin-landmarks-set-of-5",
+        "dl-all-12-berlin-districts-set",
+        "dl-berlin-twelve-districts"
+      ],
+      "hangTogether": [],
+      "explore": []
+    },
+    {
+      "id": "ys",
+      "members": [
+        "ys",
+        "ys-framed",
+        "ys-canvas"
+      ],
+      "themes": [],
+      "eligibleMembers": [
+        "ys",
+        "ys-framed",
+        "ys-canvas"
+      ],
+      "exploreMembers": [],
+      "similar": [
+        "dein-berlin-2027",
+        "gift-ys-poster"
+      ],
+      "hangTogether": [],
+      "explore": []
+    },
+    {
+      "id": "ed-print-01-tempelhof",
+      "members": [
+        "ed-print-01-tempelhof",
+        "ed-digital-01-tempelhof"
+      ],
+      "themes": [
+        "Everyday Berlin",
+        "Room to breathe"
+      ],
+      "eligibleMembers": [
+        "ed-print-01-tempelhof",
+        "ed-digital-01-tempelhof"
+      ],
+      "exploreMembers": [],
+      "similar": [
+        "ed-print-12-grunewald",
+        "ed-print-11-mauerpark",
+        "pr-tempelhof-schoeneberg"
+      ],
+      "hangTogether": [
+        "ed-print-12-grunewald"
+      ],
+      "explore": [
+        "au-hidden"
+      ]
+    },
+    {
+      "id": "ed-print-02-pink",
+      "members": [
+        "ed-print-02-pink",
+        "ed-digital-02-pink"
+      ],
+      "themes": [
+        "Everyday Berlin"
+      ],
+      "eligibleMembers": [
+        "ed-print-02-pink",
+        "ed-digital-02-pink"
+      ],
+      "exploreMembers": [],
+      "similar": [
+        "ed-print-06-up-close",
+        "ed-print-08-marzahn",
+        "pr-berlin-bear"
+      ],
+      "hangTogether": [
+        "ed-print-06-up-close"
+      ],
+      "explore": []
+    },
+    {
+      "id": "ed-print-03-courtyard",
+      "members": [
+        "ed-print-03-courtyard",
+        "ed-digital-03-courtyard"
+      ],
+      "themes": [
+        "Everyday Berlin"
+      ],
+      "eligibleMembers": [
+        "ed-print-03-courtyard",
+        "ed-digital-03-courtyard"
+      ],
+      "exploreMembers": [],
+      "similar": [
+        "ed-print-07-window",
+        "ed-print-04-spaeti",
+        "ed-print-06-up-close"
+      ],
+      "hangTogether": [
+        "ed-print-07-window"
+      ],
+      "explore": [
+        "gd-photo"
+      ]
+    },
+    {
+      "id": "ed-print-04-spaeti",
+      "members": [
+        "ed-print-04-spaeti",
+        "ed-digital-04-spaeti"
+      ],
+      "themes": [
+        "Everyday Berlin"
+      ],
+      "eligibleMembers": [
+        "ed-print-04-spaeti",
+        "ed-digital-04-spaeti"
+      ],
+      "exploreMembers": [],
+      "similar": [
+        "ed-print-07-window",
+        "ed-print-03-courtyard",
+        "ed-print-10-currywurst"
+      ],
+      "hangTogether": [
+        "ed-print-07-window"
+      ],
+      "explore": []
+    },
+    {
+      "id": "ed-print-05-schoenhauser",
+      "members": [
+        "ed-print-05-schoenhauser",
+        "ed-digital-05-schoenhauser"
+      ],
+      "themes": [
+        "Berlin in motion",
+        "Everyday Berlin"
+      ],
+      "eligibleMembers": [
+        "ed-print-05-schoenhauser",
+        "ed-digital-05-schoenhauser"
+      ],
+      "exploreMembers": [],
+      "similar": [
+        "pr-gleisdreieck",
+        "pr-u-bahn-two-sizes",
+        "pr-hackescher-markt-curve"
+      ],
+      "hangTogether": [
+        "pr-gleisdreieck",
+        "pr-u-bahn-two-sizes"
+      ],
+      "explore": []
+    },
+    {
+      "id": "ed-print-06-up-close",
+      "members": [
+        "ed-print-06-up-close",
+        "ed-digital-06-up-close"
+      ],
+      "themes": [
+        "Everyday Berlin",
+        "Berlin details"
+      ],
+      "eligibleMembers": [
+        "ed-print-06-up-close",
+        "ed-digital-06-up-close"
+      ],
+      "exploreMembers": [],
+      "similar": [
+        "ed-print-02-pink",
+        "ed-print-03-courtyard",
+        "pr-street-lights"
+      ],
+      "hangTogether": [
+        "ed-print-02-pink"
+      ],
+      "explore": []
+    },
+    {
+      "id": "ed-print-07-window",
+      "members": [
+        "ed-print-07-window",
+        "ed-digital-07-window"
+      ],
+      "themes": [
+        "Everyday Berlin"
+      ],
+      "eligibleMembers": [
+        "ed-print-07-window",
+        "ed-digital-07-window"
+      ],
+      "exploreMembers": [],
+      "similar": [
+        "ed-print-03-courtyard",
+        "ed-print-04-spaeti",
+        "ed-print-06-up-close"
+      ],
+      "hangTogether": [
+        "ed-print-03-courtyard",
+        "ed-print-04-spaeti"
+      ],
+      "explore": []
+    },
+    {
+      "id": "ed-print-08-marzahn",
+      "members": [
+        "ed-print-08-marzahn",
+        "ed-digital-08-marzahn"
+      ],
+      "themes": [
+        "Everyday Berlin"
+      ],
+      "eligibleMembers": [
+        "ed-print-08-marzahn",
+        "ed-digital-08-marzahn"
+      ],
+      "exploreMembers": [],
+      "similar": [
+        "pr-marzahn-hellersdorf",
+        "dl-karl-marx-allee-wide-band",
+        "ed-print-02-pink"
+      ],
+      "hangTogether": [
+        "dl-karl-marx-allee-wide-band"
+      ],
+      "explore": []
+    },
+    {
+      "id": "ed-print-09-teufelsberg",
+      "members": [
+        "ed-print-09-teufelsberg",
+        "ed-digital-09-teufelsberg"
+      ],
+      "themes": [
+        "Everyday Berlin",
+        "Room to breathe"
+      ],
+      "eligibleMembers": [
+        "ed-print-09-teufelsberg",
+        "ed-digital-09-teufelsberg"
+      ],
+      "exploreMembers": [],
+      "similar": [
+        "ed-print-12-grunewald",
+        "ed-print-01-tempelhof",
+        "pr-lietzensee-the-cut"
+      ],
+      "hangTogether": [
+        "ed-print-12-grunewald"
+      ],
+      "explore": []
+    },
+    {
+      "id": "ed-print-10-currywurst",
+      "members": [
+        "ed-print-10-currywurst",
+        "ed-digital-10-currywurst"
+      ],
+      "themes": [
+        "Everyday Berlin"
+      ],
+      "eligibleMembers": [
+        "ed-print-10-currywurst",
+        "ed-digital-10-currywurst"
+      ],
+      "exploreMembers": [],
+      "similar": [
+        "pr-berlin-market-halls",
+        "ed-print-04-spaeti",
+        "ed-print-11-mauerpark"
+      ],
+      "hangTogether": [
+        "pr-berlin-market-halls"
+      ],
+      "explore": []
+    },
+    {
+      "id": "ed-print-11-mauerpark",
+      "members": [
+        "ed-print-11-mauerpark",
+        "ed-digital-11-mauerpark"
+      ],
+      "themes": [
+        "Everyday Berlin"
+      ],
+      "eligibleMembers": [
+        "ed-print-11-mauerpark",
+        "ed-digital-11-mauerpark"
+      ],
+      "exploreMembers": [],
+      "similar": [
+        "ed-print-01-tempelhof",
+        "ed-print-12-grunewald",
+        "ed-print-05-schoenhauser"
+      ],
+      "hangTogether": [],
+      "explore": [
+        "gd-photo"
+      ]
+    },
+    {
+      "id": "ed-print-12-grunewald",
+      "members": [
+        "ed-print-12-grunewald",
+        "ed-digital-12-grunewald"
+      ],
+      "themes": [
+        "Everyday Berlin",
+        "Room to breathe"
+      ],
+      "eligibleMembers": [
+        "ed-print-12-grunewald",
+        "ed-digital-12-grunewald"
+      ],
+      "exploreMembers": [],
+      "similar": [
+        "ed-print-01-tempelhof",
+        "ed-print-09-teufelsberg",
+        "pr-lietzensee-the-cut"
+      ],
+      "hangTogether": [
+        "ed-print-01-tempelhof"
+      ],
+      "explore": []
+    },
+    {
+      "id": "pr-berolina-modernist",
+      "members": [
+        "pr-berolina-modernist",
+        "dl-berolina-modernist"
+      ],
+      "themes": [
+        "Alexanderplatz"
+      ],
+      "eligibleMembers": [
+        "pr-berolina-modernist",
+        "dl-berolina-modernist"
+      ],
+      "exploreMembers": [],
+      "similar": [
+        "pr-berlin-bear",
+        "tv",
+        "wc"
+      ],
+      "hangTogether": [
+        "pr-berlin-bear"
+      ],
+      "explore": [
+        "gd-landmarks"
+      ]
+    },
+    {
+      "id": "gift-ys-poster",
+      "members": [
+        "gift-ys-poster",
+        "gift-ys-digital"
+      ],
+      "themes": [],
+      "eligibleMembers": [
+        "gift-ys-poster",
+        "gift-ys-digital"
+      ],
+      "exploreMembers": [],
+      "similar": [
+        "ys",
+        "dein-berlin-2027"
+      ],
+      "hangTogether": [],
+      "explore": []
+    },
+    {
+      "id": "pr-siegessaeule",
+      "members": [
+        "pr-siegessaeule",
+        "dl-siegessaeule"
+      ],
+      "themes": [],
+      "eligibleMembers": [
+        "pr-siegessaeule",
+        "dl-siegessaeule"
+      ],
+      "exploreMembers": [],
+      "similar": [
+        "tv",
+        "pr-berolina-modernist",
+        "bu"
+      ],
+      "hangTogether": [],
+      "explore": [
+        "gd-landmarks"
+      ]
+    },
+    {
+      "id": "pr-kottbusser-tor",
+      "members": [
+        "pr-kottbusser-tor",
+        "dl-kottbusser-tor"
+      ],
+      "themes": [
+        "Berlin in motion"
+      ],
+      "eligibleMembers": [
+        "pr-kottbusser-tor",
+        "dl-kottbusser-tor"
+      ],
+      "exploreMembers": [],
+      "similar": [
+        "pr-gleisdreieck",
+        "ed-print-05-schoenhauser",
+        "pr-friedrichshain-kreuzberg"
+      ],
+      "hangTogether": [
+        "pr-gleisdreieck"
+      ],
+      "explore": [
+        "gd-photo"
+      ]
+    },
+    {
+      "id": "pr-mehringplatz",
+      "members": [
+        "pr-mehringplatz",
+        "dl-mehringplatz"
+      ],
+      "themes": [],
+      "eligibleMembers": [
+        "pr-mehringplatz",
+        "dl-mehringplatz"
+      ],
+      "exploreMembers": [],
+      "similar": [
+        "pr-leipziger-platz-octagon",
+        "pr-strausberger-platz",
+        "dl-karl-marx-allee-wide-band"
+      ],
+      "hangTogether": [
+        "pr-leipziger-platz-octagon"
+      ],
+      "explore": []
+    },
+    {
+      "id": "pr-strausberger-platz",
+      "members": [
+        "pr-strausberger-platz",
+        "dl-strausberger-platz"
+      ],
+      "themes": [],
+      "eligibleMembers": [
+        "pr-strausberger-platz",
+        "dl-strausberger-platz"
+      ],
+      "exploreMembers": [],
+      "similar": [
+        "dl-karl-marx-allee-wide-band",
+        "pr-mehringplatz",
+        "dl-alexanderplatz-behrens-blocks"
+      ],
+      "hangTogether": [
+        "dl-karl-marx-allee-wide-band"
+      ],
+      "explore": []
+    },
+    {
+      "id": "pr-gleisdreieck",
+      "members": [
+        "pr-gleisdreieck",
+        "dl-gleisdreieck"
+      ],
+      "themes": [
+        "Berlin in motion"
+      ],
+      "eligibleMembers": [
+        "pr-gleisdreieck",
+        "dl-gleisdreieck"
+      ],
+      "exploreMembers": [],
+      "similar": [
+        "ed-print-05-schoenhauser",
+        "pr-u-bahn-two-sizes",
+        "pr-kottbusser-tor"
+      ],
+      "hangTogether": [
+        "ed-print-05-schoenhauser",
+        "pr-u-bahn-two-sizes"
+      ],
+      "explore": [
+        "au-hidden"
+      ]
+    },
+    {
+      "id": "pr-steinstuecken",
+      "members": [
+        "pr-steinstuecken",
+        "dl-steinstuecken"
+      ],
+      "themes": [
+        "Divided Berlin"
+      ],
+      "eligibleMembers": [
+        "pr-steinstuecken",
+        "dl-steinstuecken"
+      ],
+      "exploreMembers": [],
+      "similar": [
+        "pr-berliner-mauer-cyclist",
+        "gs",
+        "tm"
+      ],
+      "hangTogether": [
+        "tm"
+      ],
+      "explore": [
+        "au-wall"
+      ]
+    },
+    {
+      "id": "pr-street-lights",
+      "members": [
+        "pr-street-lights",
+        "dl-street-lights"
+      ],
+      "themes": [
+        "Berlin details"
+      ],
+      "eligibleMembers": [
+        "pr-street-lights",
+        "dl-street-lights"
+      ],
+      "exploreMembers": [],
+      "similar": [
+        "ca",
+        "pr-u-bahn-two-sizes",
+        "bu"
+      ],
+      "hangTogether": [
+        "ca"
+      ],
+      "explore": [
+        "gd-photo"
+      ]
+    },
+    {
+      "id": "pr-u-bahn-two-sizes",
+      "members": [
+        "pr-u-bahn-two-sizes",
+        "dl-u-bahn-two-sizes"
+      ],
+      "themes": [
+        "Berlin in motion"
+      ],
+      "eligibleMembers": [
+        "pr-u-bahn-two-sizes",
+        "dl-u-bahn-two-sizes"
+      ],
+      "exploreMembers": [],
+      "similar": [
+        "ed-print-05-schoenhauser",
+        "pr-gleisdreieck",
+        "pr-hackescher-markt-curve"
+      ],
+      "hangTogether": [
+        "ed-print-05-schoenhauser",
+        "pr-gleisdreieck"
+      ],
+      "explore": []
+    },
+    {
+      "id": "pr-berlin-bear",
+      "members": [
+        "pr-berlin-bear",
+        "dl-berlin-bear"
+      ],
+      "themes": [],
+      "eligibleMembers": [
+        "pr-berlin-bear",
+        "dl-berlin-bear"
+      ],
+      "exploreMembers": [],
+      "similar": [
+        "pr-berolina-modernist",
+        "ed-print-02-pink",
+        "dl-berlin-twelve-districts"
+      ],
+      "hangTogether": [
+        "pr-berolina-modernist"
+      ],
+      "explore": []
+    },
+    {
+      "id": "pr-berliner-mauer-cyclist",
+      "members": [
+        "pr-berliner-mauer-cyclist",
+        "dl-berliner-mauer-cyclist"
+      ],
+      "themes": [
+        "Divided Berlin"
+      ],
+      "eligibleMembers": [
+        "pr-berliner-mauer-cyclist",
+        "dl-berliner-mauer-cyclist"
+      ],
+      "exploreMembers": [],
+      "similar": [
+        "gs",
+        "tm",
+        "ok"
+      ],
+      "hangTogether": [
+        "ok"
+      ],
+      "explore": [
+        "au-wall"
+      ]
+    },
+    {
+      "id": "pr-berlin-market-halls",
+      "members": [
+        "pr-berlin-market-halls",
+        "dl-berlin-market-halls"
+      ],
+      "themes": [
+        "Berlin details"
+      ],
+      "eligibleMembers": [
+        "pr-berlin-market-halls",
+        "dl-berlin-market-halls"
+      ],
+      "exploreMembers": [],
+      "similar": [
+        "ed-print-10-currywurst",
+        "ca",
+        "ed-print-11-mauerpark"
+      ],
+      "hangTogether": [
+        "ed-print-10-currywurst"
+      ],
+      "explore": []
+    },
+    {
+      "id": "pr-leipziger-platz-octagon",
+      "members": [
+        "pr-leipziger-platz-octagon",
+        "dl-leipziger-platz-octagon"
+      ],
+      "themes": [],
+      "eligibleMembers": [
+        "pr-leipziger-platz-octagon",
+        "dl-leipziger-platz-octagon"
+      ],
+      "exploreMembers": [],
+      "similar": [
+        "pr-mehringplatz",
+        "pr-strausberger-platz",
+        "dl-karl-marx-allee-wide-band"
+      ],
+      "hangTogether": [
+        "pr-mehringplatz"
+      ],
+      "explore": [
+        "au-hidden"
+      ]
+    },
+    {
+      "id": "pr-hackescher-markt-curve",
+      "members": [
+        "pr-hackescher-markt-curve",
+        "dl-hackescher-markt-curve"
+      ],
+      "themes": [
+        "Berlin in motion"
+      ],
+      "eligibleMembers": [
+        "pr-hackescher-markt-curve",
+        "dl-hackescher-markt-curve"
+      ],
+      "exploreMembers": [],
+      "similar": [
+        "pr-gleisdreieck",
+        "ed-print-05-schoenhauser",
+        "dl-alexanderplatz-tram"
+      ],
+      "hangTogether": [
+        "dl-alexanderplatz-tram"
+      ],
+      "explore": [
+        "gd-photo"
+      ]
+    },
+    {
+      "id": "pr-lietzensee-the-cut",
+      "members": [
+        "pr-lietzensee-the-cut",
+        "dl-lietzensee-the-cut"
+      ],
+      "themes": [
+        "Room to breathe"
+      ],
+      "eligibleMembers": [
+        "pr-lietzensee-the-cut",
+        "dl-lietzensee-the-cut"
+      ],
+      "exploreMembers": [],
+      "similar": [
+        "ed-print-12-grunewald",
+        "ed-print-09-teufelsberg",
+        "pr-charlottenburg-wilmersdorf"
+      ],
+      "hangTogether": [],
+      "explore": []
+    },
+    {
+      "id": "dl-wittenbergplatz-grenander-hall",
+      "members": [
+        "dl-wittenbergplatz-grenander-hall"
+      ],
+      "themes": [
+        "Berlin in motion"
+      ],
+      "eligibleMembers": [
+        "dl-wittenbergplatz-grenander-hall"
+      ],
+      "exploreMembers": [],
+      "similar": [
+        "pr-gleisdreieck",
+        "pr-u-bahn-two-sizes",
+        "bu"
+      ],
+      "hangTogether": [
+        "dl-alexanderplatz-behrens-blocks"
+      ],
+      "explore": []
+    },
+    {
+      "id": "dl-alexanderplatz-behrens-blocks",
+      "members": [
+        "dl-alexanderplatz-behrens-blocks"
+      ],
+      "themes": [
+        "Alexanderplatz"
+      ],
+      "eligibleMembers": [
+        "dl-alexanderplatz-behrens-blocks"
+      ],
+      "exploreMembers": [],
+      "similar": [
+        "dl-haus-des-lehrers",
+        "dl-alexanderplatz-tram",
+        "wc"
+      ],
+      "hangTogether": [
+        "dl-haus-des-lehrers",
+        "dl-alexanderplatz-tram"
+      ],
+      "explore": [
+        "gd-landmarks"
+      ]
+    },
+    {
+      "id": "dl-alexanderplatz-tram",
+      "members": [
+        "dl-alexanderplatz-tram"
+      ],
+      "themes": [
+        "Alexanderplatz",
+        "Berlin in motion"
+      ],
+      "eligibleMembers": [
+        "dl-alexanderplatz-tram"
+      ],
+      "exploreMembers": [],
+      "similar": [
+        "dl-alexanderplatz-behrens-blocks",
+        "dl-haus-des-lehrers",
+        "tm"
+      ],
+      "hangTogether": [
+        "dl-alexanderplatz-behrens-blocks",
+        "dl-haus-des-lehrers"
+      ],
+      "explore": []
+    },
+    {
+      "id": "dl-karl-marx-allee-wide-band",
+      "members": [
+        "dl-karl-marx-allee-wide-band"
+      ],
+      "themes": [],
+      "eligibleMembers": [
+        "dl-karl-marx-allee-wide-band"
+      ],
+      "exploreMembers": [],
+      "similar": [
+        "pr-strausberger-platz",
+        "dl-alexanderplatz-behrens-blocks",
+        "ed-print-08-marzahn"
+      ],
+      "hangTogether": [
+        "pr-strausberger-platz"
+      ],
+      "explore": []
+    },
+    {
+      "id": "dein-berlin-2027",
+      "members": [
+        "dein-berlin-2027"
+      ],
+      "themes": [],
+      "eligibleMembers": [
+        "dein-berlin-2027"
+      ],
+      "exploreMembers": [],
+      "similar": [
+        "pr-berlin-2027-wall-calendar",
+        "ys",
+        "gift-ys-poster"
+      ],
+      "hangTogether": [],
+      "explore": []
+    },
+    {
+      "id": "dl-berlin-twelve-districts",
+      "members": [
+        "dl-berlin-twelve-districts"
+      ],
+      "themes": [],
+      "eligibleMembers": [
+        "dl-berlin-twelve-districts"
+      ],
+      "exploreMembers": [],
+      "similar": [
+        "dl-all-12-berlin-districts-set",
+        "pr-berlin-2027-wall-calendar",
+        "dl-berlin-landmarks-set-of-5"
+      ],
+      "hangTogether": [],
+      "explore": []
+    },
+    {
+      "id": "dl-haus-des-lehrers",
+      "members": [
+        "dl-haus-des-lehrers"
+      ],
+      "themes": [
+        "Alexanderplatz"
+      ],
+      "eligibleMembers": [
+        "dl-haus-des-lehrers"
+      ],
+      "exploreMembers": [],
+      "similar": [
+        "dl-alexanderplatz-behrens-blocks",
+        "dl-alexanderplatz-tram",
+        "tv"
+      ],
+      "hangTogether": [
+        "dl-alexanderplatz-behrens-blocks",
+        "dl-alexanderplatz-tram"
+      ],
+      "explore": [
+        "gd-landmarks"
+      ]
+    },
+    {
+      "id": "au-wall",
+      "members": [
+        "au-wall"
+      ],
+      "themes": [],
+      "eligibleMembers": [],
+      "exploreMembers": [
+        "au-wall"
+      ],
+      "similar": [],
+      "hangTogether": [],
+      "explore": [
+        "gd-wall-virtual"
+      ]
+    },
+    {
+      "id": "au-hidden",
+      "members": [
+        "au-hidden"
+      ],
+      "themes": [],
+      "eligibleMembers": [],
+      "exploreMembers": [
+        "au-hidden"
+      ],
+      "similar": [],
+      "hangTogether": [],
+      "explore": [
+        "gd-photo"
+      ]
+    },
+    {
+      "id": "au-medieval",
+      "members": [
+        "au-medieval"
+      ],
+      "themes": [],
+      "eligibleMembers": [],
+      "exploreMembers": [
+        "au-medieval"
+      ],
+      "similar": [],
+      "hangTogether": [],
+      "explore": [
+        "gd-medieval-virtual"
+      ]
+    },
+    {
+      "id": "gd-rescue",
+      "members": [
+        "gd-rescue"
+      ],
+      "themes": [],
+      "eligibleMembers": [],
+      "exploreMembers": [
+        "gd-rescue"
+      ],
+      "similar": [],
+      "hangTogether": [],
+      "explore": [
+        "au-hidden"
+      ]
+    },
+    {
+      "id": "gd-landmarks",
+      "members": [
+        "gd-landmarks"
+      ],
+      "themes": [],
+      "eligibleMembers": [],
+      "exploreMembers": [
+        "gd-landmarks"
+      ],
+      "similar": [],
+      "hangTogether": [],
+      "explore": [
+        "au-medieval"
+      ]
+    },
+    {
+      "id": "gd-photo",
+      "members": [
+        "gd-photo"
+      ],
+      "themes": [],
+      "eligibleMembers": [],
+      "exploreMembers": [
+        "gd-photo"
+      ],
+      "similar": [],
+      "hangTogether": [],
+      "explore": [
+        "au-hidden"
+      ]
+    },
+    {
+      "id": "gd-wall-virtual",
+      "members": [
+        "gd-wall-virtual"
+      ],
+      "themes": [],
+      "eligibleMembers": [],
+      "exploreMembers": [
+        "gd-wall-virtual"
+      ],
+      "similar": [],
+      "hangTogether": [],
+      "explore": []
+    },
+    {
+      "id": "gd-night-in",
+      "members": [
+        "gd-night-in"
+      ],
+      "themes": [],
+      "eligibleMembers": [],
+      "exploreMembers": [
+        "gd-night-in"
+      ],
+      "similar": [],
+      "hangTogether": [],
+      "explore": []
+    },
+    {
+      "id": "au-third-reich",
+      "members": [
+        "au-third-reich"
+      ],
+      "themes": [],
+      "eligibleMembers": [],
+      "exploreMembers": [
+        "au-third-reich"
+      ],
+      "similar": [],
+      "hangTogether": [],
+      "explore": [
+        "gd-trip-planner"
+      ]
+    },
+    {
+      "id": "gd-medieval-virtual",
+      "members": [
+        "gd-medieval-virtual"
+      ],
+      "themes": [],
+      "eligibleMembers": [],
+      "exploreMembers": [
+        "gd-medieval-virtual"
+      ],
+      "similar": [],
+      "hangTogether": [],
+      "explore": [
+        "gd-landmarks"
+      ]
+    },
+    {
+      "id": "gd-trip-planner",
+      "members": [
+        "gd-trip-planner"
+      ],
+      "themes": [],
+      "eligibleMembers": [],
+      "exploreMembers": [
+        "gd-trip-planner"
+      ],
+      "similar": [],
+      "hangTogether": [],
+      "explore": [
+        "au-hidden"
+      ]
+    },
+    {
+      "id": "np-birthday",
+      "members": [
+        "np-birthday"
+      ],
+      "themes": [],
+      "eligibleMembers": [],
+      "exploreMembers": [
+        "np-birthday"
+      ],
+      "similar": [],
+      "hangTogether": [],
+      "explore": []
+    },
+    {
+      "id": "np-big-day",
+      "members": [
+        "np-big-day"
+      ],
+      "themes": [],
+      "eligibleMembers": [],
+      "exploreMembers": [
+        "np-big-day"
+      ],
+      "similar": [],
+      "hangTogether": [],
+      "explore": []
+    },
+    {
+      "id": "np-first-day",
+      "members": [
+        "np-first-day"
+      ],
+      "themes": [],
+      "eligibleMembers": [],
+      "exploreMembers": [
+        "np-first-day"
+      ],
+      "similar": [],
+      "hangTogether": [],
+      "explore": []
+    },
+    {
+      "id": "np-last-day",
+      "members": [
+        "np-last-day"
+      ],
+      "themes": [],
+      "eligibleMembers": [],
+      "exploreMembers": [
+        "np-last-day"
+      ],
+      "similar": [],
+      "hangTogether": [],
+      "explore": []
+    }
+  ],
+  "pairSelections": [
+    {
+      "id": "berlin-clocks",
+      "name": "Berlin’s two clocks",
+      "families": [
+        "wc",
+        "bu"
+      ],
+      "reason": "Aynı krem/yeşil/sarı grafik dil; iki farklı saat.",
+      "visualStatus": "REVIEWED_FROM_CURRENT_SOURCE_IMAGES",
+      "commercialStatus": "CURATED_SELECTION_ONLY_NO_BUNDLE_PRICE",
+      "formatRule": "Offer consistent matching physical or digital formats only when every item is available; digital-only members never imply a physical set."
+    },
+    {
+      "id": "alexanderplatz-icons",
+      "name": "Alexanderplatz icons",
+      "families": [
+        "wc",
+        "tv"
+      ],
+      "reason": "Yer ve grafik dil birliği.",
+      "visualStatus": "REVIEWED_FROM_CURRENT_SOURCE_IMAGES",
+      "commercialStatus": "CURATED_SELECTION_ONLY_NO_BUNDLE_PRICE",
+      "formatRule": "Offer consistent matching physical or digital formats only when every item is available; digital-only members never imply a physical set."
+    },
+    {
+      "id": "berlin-in-motion",
+      "name": "Berlin in motion",
+      "families": [
+        "ed-print-05-schoenhauser",
+        "pr-gleisdreieck",
+        "pr-u-bahn-two-sizes"
+      ],
+      "reason": "Sarı tren, koyu çelik ve krem zemin; ulaşım teması.",
+      "visualStatus": "REVIEWED_FROM_CURRENT_SOURCE_IMAGES",
+      "commercialStatus": "CURATED_SELECTION_ONLY_NO_BUNDLE_PRICE",
+      "formatRule": "Offer consistent matching physical or digital formats only when every item is available; digital-only members never imply a physical set."
+    },
+    {
+      "id": "berlin-after-dark",
+      "name": "Berlin after dark",
+      "families": [
+        "ed-print-04-spaeti",
+        "ed-print-07-window"
+      ],
+      "reason": "Yeşil gece ve sıcak pencere ışığı.",
+      "visualStatus": "REVIEWED_FROM_CURRENT_SOURCE_IMAGES",
+      "commercialStatus": "CURATED_SELECTION_ONLY_NO_BUNDLE_PRICE",
+      "formatRule": "Offer consistent matching physical or digital formats only when every item is available; digital-only members never imply a physical set."
+    },
+    {
+      "id": "courtyard-and-home",
+      "name": "Home in Berlin",
+      "families": [
+        "ed-print-03-courtyard",
+        "ed-print-07-window"
+      ],
+      "reason": "Avlu ve pencere; sakin ev teması.",
+      "visualStatus": "REVIEWED_FROM_CURRENT_SOURCE_IMAGES",
+      "commercialStatus": "CURATED_SELECTION_ONLY_NO_BUNDLE_PRICE",
+      "formatRule": "Offer consistent matching physical or digital formats only when every item is available; digital-only members never imply a physical set."
+    },
+    {
+      "id": "room-to-breathe",
+      "name": "Room to breathe",
+      "families": [
+        "ed-print-01-tempelhof",
+        "ed-print-12-grunewald"
+      ],
+      "reason": "Kentin açık alanları; gün ışığı ve doğa.",
+      "visualStatus": "REVIEWED_FROM_CURRENT_SOURCE_IMAGES",
+      "commercialStatus": "CURATED_SELECTION_ONLY_NO_BUNDLE_PRICE",
+      "formatRule": "Offer consistent matching physical or digital formats only when every item is available; digital-only members never imply a physical set."
+    },
+    {
+      "id": "street-furniture",
+      "name": "Small Berlin details",
+      "families": [
+        "ca",
+        "pr-street-lights"
+      ],
+      "reason": "Kent mobilyaları; daha sakin iki grafik.",
+      "visualStatus": "REVIEWED_FROM_CURRENT_SOURCE_IMAGES",
+      "commercialStatus": "CURATED_SELECTION_ONLY_NO_BUNDLE_PRICE",
+      "formatRule": "Offer consistent matching physical or digital formats only when every item is available; digital-only members never imply a physical set."
+    },
+    {
+      "id": "berlin-food",
+      "name": "Berlin food stories",
+      "families": [
+        "ed-print-10-currywurst",
+        "pr-berlin-market-halls"
+      ],
+      "reason": "Yemek ve pazar kültürü; sıcak renkler.",
+      "visualStatus": "REVIEWED_FROM_CURRENT_SOURCE_IMAGES",
+      "commercialStatus": "CURATED_SELECTION_ONLY_NO_BUNDLE_PRICE",
+      "formatRule": "Offer consistent matching physical or digital formats only when every item is available; digital-only members never imply a physical set."
+    },
+    {
+      "id": "city-shapes",
+      "name": "Berlin from above",
+      "families": [
+        "pr-mehringplatz",
+        "pr-leipziger-platz-octagon"
+      ],
+      "reason": "Meydan geometrileri; üstten bakış.",
+      "visualStatus": "REVIEWED_FROM_CURRENT_SOURCE_IMAGES",
+      "commercialStatus": "CURATED_SELECTION_ONLY_NO_BUNDLE_PRICE",
+      "formatRule": "Offer consistent matching physical or digital formats only when every item is available; digital-only members never imply a physical set."
+    },
+    {
+      "id": "alexanderplatz-digital",
+      "name": "Alexanderplatz, three views",
+      "families": [
+        "dl-alexanderplatz-behrens-blocks",
+        "dl-alexanderplatz-tram",
+        "dl-haus-des-lehrers"
+      ],
+      "reason": "Aynı bölge ve dokulu çizim ailesi; yalnız dijital.",
+      "visualStatus": "REVIEWED_FROM_CURRENT_SOURCE_IMAGES",
+      "commercialStatus": "CURATED_SELECTION_ONLY_NO_BUNDLE_PRICE",
+      "formatRule": "Offer consistent matching physical or digital formats only when every item is available; digital-only members never imply a physical set."
+    }
+  ],
+  "bundleContents": {
+    "trio": [
+      "au-wall",
+      "au-hidden",
+      "au-medieval"
+    ],
+    "dl-berlin-icons-set-of-3": [
+      "wc",
+      "tv",
+      "pr-friedrichshain-kreuzberg"
+    ],
+    "dl-berlin-landmarks-set-of-5": [
+      "wc",
+      "bp",
+      "ca",
+      "wt",
+      "tv"
+    ],
+    "dl-all-12-berlin-districts-set": [
+      "pr-friedrichshain-kreuzberg",
+      "pr-pankow",
+      "pr-charlottenburg-wilmersdorf",
+      "pr-spandau",
+      "pr-steglitz-zehlendorf",
+      "pr-tempelhof-schoeneberg",
+      "pr-neukoelln",
+      "pr-treptow-koepenick",
+      "pr-marzahn-hellersdorf",
+      "pr-lichtenberg",
+      "pr-reinickendorf"
+    ]
+  },
+  "dropped": [
+    {
+      "source": "ys",
+      "target": "np-first-day",
+      "reason": "not-cart-eligible"
+    },
+    {
+      "source": "gift-ys-poster",
+      "target": "np-first-day",
+      "reason": "not-cart-eligible"
+    },
+    {
+      "source": "au-wall",
+      "target": "au-hidden",
+      "reason": "not-cart-eligible"
+    },
+    {
+      "source": "au-wall",
+      "target": "au-third-reich",
+      "reason": "not-cart-eligible"
+    },
+    {
+      "source": "au-wall",
+      "target": "au-medieval",
+      "reason": "not-cart-eligible"
+    },
+    {
+      "source": "au-wall",
+      "target": "pr-berliner-mauer-cyclist",
+      "reason": "not-an-explore-product"
+    },
+    {
+      "source": "au-wall",
+      "target": "gs",
+      "reason": "not-an-explore-product"
+    },
+    {
+      "source": "au-hidden",
+      "target": "au-wall",
+      "reason": "not-cart-eligible"
+    },
+    {
+      "source": "au-hidden",
+      "target": "au-medieval",
+      "reason": "not-cart-eligible"
+    },
+    {
+      "source": "au-hidden",
+      "target": "au-third-reich",
+      "reason": "not-cart-eligible"
+    },
+    {
+      "source": "au-medieval",
+      "target": "au-hidden",
+      "reason": "not-cart-eligible"
+    },
+    {
+      "source": "au-medieval",
+      "target": "au-wall",
+      "reason": "not-cart-eligible"
+    },
+    {
+      "source": "au-medieval",
+      "target": "au-third-reich",
+      "reason": "not-cart-eligible"
+    },
+    {
+      "source": "gd-rescue",
+      "target": "gd-trip-planner",
+      "reason": "not-cart-eligible"
+    },
+    {
+      "source": "gd-rescue",
+      "target": "gd-landmarks",
+      "reason": "not-cart-eligible"
+    },
+    {
+      "source": "gd-landmarks",
+      "target": "gd-trip-planner",
+      "reason": "not-cart-eligible"
+    },
+    {
+      "source": "gd-landmarks",
+      "target": "gd-rescue",
+      "reason": "not-cart-eligible"
+    },
+    {
+      "source": "gd-landmarks",
+      "target": "gd-photo",
+      "reason": "not-cart-eligible"
+    },
+    {
+      "source": "gd-landmarks",
+      "target": "wc",
+      "reason": "not-an-explore-product"
+    },
+    {
+      "source": "gd-photo",
+      "target": "gd-landmarks",
+      "reason": "not-cart-eligible"
+    },
+    {
+      "source": "gd-photo",
+      "target": "gd-trip-planner",
+      "reason": "not-cart-eligible"
+    },
+    {
+      "source": "gd-wall-virtual",
+      "target": "gd-medieval-virtual",
+      "reason": "not-cart-eligible"
+    },
+    {
+      "source": "gd-wall-virtual",
+      "target": "gd-night-in",
+      "reason": "not-cart-eligible"
+    },
+    {
+      "source": "gd-wall-virtual",
+      "target": "pr-berliner-mauer-cyclist",
+      "reason": "not-an-explore-product"
+    },
+    {
+      "source": "gd-night-in",
+      "target": "gd-wall-virtual",
+      "reason": "not-cart-eligible"
+    },
+    {
+      "source": "gd-night-in",
+      "target": "gd-medieval-virtual",
+      "reason": "not-cart-eligible"
+    },
+    {
+      "source": "gd-night-in",
+      "target": "gs",
+      "reason": "not-an-explore-product"
+    },
+    {
+      "source": "au-third-reich",
+      "target": "au-wall",
+      "reason": "not-cart-eligible"
+    },
+    {
+      "source": "au-third-reich",
+      "target": "au-hidden",
+      "reason": "not-cart-eligible"
+    },
+    {
+      "source": "au-third-reich",
+      "target": "au-medieval",
+      "reason": "not-cart-eligible"
+    },
+    {
+      "source": "gd-medieval-virtual",
+      "target": "gd-wall-virtual",
+      "reason": "not-cart-eligible"
+    },
+    {
+      "source": "gd-medieval-virtual",
+      "target": "gd-night-in",
+      "reason": "not-cart-eligible"
+    },
+    {
+      "source": "gd-trip-planner",
+      "target": "gd-rescue",
+      "reason": "not-cart-eligible"
+    },
+    {
+      "source": "gd-trip-planner",
+      "target": "gd-landmarks",
+      "reason": "not-cart-eligible"
+    },
+    {
+      "source": "np-birthday",
+      "target": "np-big-day",
+      "reason": "not-cart-eligible"
+    },
+    {
+      "source": "np-birthday",
+      "target": "np-first-day",
+      "reason": "not-cart-eligible"
+    },
+    {
+      "source": "np-birthday",
+      "target": "np-last-day",
+      "reason": "not-cart-eligible"
+    },
+    {
+      "source": "np-birthday",
+      "target": "gift-ys-poster",
+      "reason": "not-an-explore-product"
+    },
+    {
+      "source": "np-big-day",
+      "target": "np-birthday",
+      "reason": "not-cart-eligible"
+    },
+    {
+      "source": "np-big-day",
+      "target": "np-first-day",
+      "reason": "not-cart-eligible"
+    },
+    {
+      "source": "np-big-day",
+      "target": "np-last-day",
+      "reason": "not-cart-eligible"
+    },
+    {
+      "source": "np-big-day",
+      "target": "ys",
+      "reason": "not-an-explore-product"
+    },
+    {
+      "source": "np-first-day",
+      "target": "np-last-day",
+      "reason": "not-cart-eligible"
+    },
+    {
+      "source": "np-first-day",
+      "target": "np-birthday",
+      "reason": "not-cart-eligible"
+    },
+    {
+      "source": "np-first-day",
+      "target": "np-big-day",
+      "reason": "not-cart-eligible"
+    },
+    {
+      "source": "np-first-day",
+      "target": "ys",
+      "reason": "not-an-explore-product"
+    },
+    {
+      "source": "np-first-day",
+      "target": "dein-berlin-2027",
+      "reason": "not-an-explore-product"
+    },
+    {
+      "source": "np-last-day",
+      "target": "np-first-day",
+      "reason": "not-cart-eligible"
+    },
+    {
+      "source": "np-last-day",
+      "target": "np-birthday",
+      "reason": "not-cart-eligible"
+    },
+    {
+      "source": "np-last-day",
+      "target": "np-big-day",
+      "reason": "not-cart-eligible"
+    },
+    {
+      "source": "np-last-day",
+      "target": "gift-ys-poster",
+      "reason": "not-an-explore-product"
+    }
+  ]
+}
