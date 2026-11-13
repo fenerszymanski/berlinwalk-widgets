@@ -1,7 +1,7 @@
 (() => {
-const BW_HEADER_NAV_VERSION = 'store-design2-fix6-20261113';
+const BW_HEADER_NAV_VERSION = 'header-desktop-align-20261113';
 if (customElements.get('bw-site-header')?.navigationVersion === BW_HEADER_NAV_VERSION
-  || customElements.get('bw-site-header-design2-fix6')?.navigationVersion === BW_HEADER_NAV_VERSION) return;
+  || customElements.get('bw-site-header-desktop-align')?.navigationVersion === BW_HEADER_NAV_VERSION) return;
 
 const BW_HEADER_SCRIPT_URL = (document.currentScript && document.currentScript.src) || 'https://fenerszymanski.github.io/berlinwalk-widgets/site-header/site-header-element.js';
 // Walk of Berlin wordmark (A15a, live 2 October 2026). The old berlinwalk-wordmark-*
@@ -1059,7 +1059,7 @@ class BWHeaderElement extends HTMLElement {
           src: url(${BW_HEADER_MENU_FONT_URL}) format('woff2');
         }
 
-        bw-site-header, bw-site-header-design2-fix6 {
+        bw-site-header, bw-site-header-desktop-align {
           display: block;
           width: 100%;
         }
@@ -1870,6 +1870,8 @@ function bwHeaderStoreMode() {
       `${fc} [data-bw-store-credits]>div p+p{margin-top:10px}`,
       `${fc} [data-bw-store-credits]>div a{color:inherit;display:inline;font:inherit;text-decoration:underline}`,
       // Shared navigation uses the approved homepage appearance on every normal route.
+      // The removed desktop CTA no longer owns a flex slot; the remaining menu ends at the right inset.
+      `@media(min-width:${BW_HEADER_STORE_DESIGN2?981:1101}px){html[data-bw-unified-navigation]:not([data-bw-header-commerce]) .bw-header-nav-list{justify-content:flex-end}html[data-bw-unified-navigation]:not([data-bw-header-commerce]) .bw-header-cta{display:none}}`,
       `html[data-bw-unified-navigation] .bw-header-top,html[data-bw-unified-navigation] [data-bw-header-tour-line],html[data-bw-unified-navigation] .bw-header-commerce-bridge{display:none!important}`,
       `html[data-bw-unified-navigation] .bw-header-nav-list[data-bw-home-nav]{display:flex!important}`,
       `html[data-bw-unified-navigation] .bw-header-home-store{display:inline-flex!important;align-items:center;justify-content:center;gap:6px;min-height:44px;padding:12px 22px;border-radius:999px;border:0;background:#123D18;color:#FAFAF5!important;font-family:Montserrat,Arial,sans-serif;font-size:13px;font-weight:800;letter-spacing:1px;line-height:1;text-transform:uppercase;text-decoration:none}`,
@@ -1938,16 +1940,16 @@ if (!customElements.get('bw-site-header')) {
   // Preserve the native tag (and product-adapter selectors) when an older
   // cached Wix script registered first. Its runtime is cleaned before mounting
   // the new element inside that host; do not mutate a registered prototype.
-  if(!customElements.get('bw-site-header-design2-fix6'))customElements.define('bw-site-header-design2-fix6', class extends BWHeaderElement {});
+  if(!customElements.get('bw-site-header-desktop-align'))customElements.define('bw-site-header-desktop-align', class extends BWHeaderElement {});
   const upgrade = () => {
     for (const host of document.querySelectorAll('bw-site-header')) {
-      if(host.constructor.navigationVersion===BW_HEADER_NAV_VERSION&&!host.querySelector('bw-site-header-unified,bw-site-header-design2,bw-site-header-design2-fix4,bw-site-header-design2-fix5,bw-site-header-design2-fix5b'))continue;
-      if(host.querySelector('bw-site-header-design2-fix6'))continue;
+      if(host.constructor.navigationVersion===BW_HEADER_NAV_VERSION&&!host.querySelector('bw-site-header-unified,bw-site-header-design2,bw-site-header-design2-fix4,bw-site-header-design2-fix5,bw-site-header-design2-fix5b,bw-site-header-design2-fix6'))continue;
+      if(host.querySelector('bw-site-header-desktop-align'))continue;
       // Preserve older compatibility hosts: their observers use the direct
       // child tag as an upgrade guard. Removing it makes two builds fight.
-      const legacy=[host,...host.querySelectorAll('bw-site-header-unified,bw-site-header-design2,bw-site-header-design2-fix4,bw-site-header-design2-fix5,bw-site-header-design2-fix5b')];
+      const legacy=[host,...host.querySelectorAll('bw-site-header-unified,bw-site-header-design2,bw-site-header-design2-fix4,bw-site-header-design2-fix5,bw-site-header-design2-fix5b,bw-site-header-design2-fix6')];
       const mount=legacy.at(-1);
-      const next=document.createElement('bw-site-header-design2-fix6');
+      const next=document.createElement('bw-site-header-desktop-align');
       next._preservedCommerceForm=host.querySelector('form[data-bw-landmarks-guide-header-checkout]');
       next._preservedCommerceForm?.remove();
       for(const previous of legacy)previous.disconnectedCallback?.();
