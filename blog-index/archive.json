@@ -1,9 +1,26 @@
 {
-  "updatedAt": "2026-11-12T10:04:21.374Z",
+  "updatedAt": "2026-11-13T07:15:12.126Z",
   "source": "Wix Blog API",
-  "totalPosts": 459,
+  "totalPosts": 460,
   "bookingUrl": "https://www.walkofberlin.com/book-berlin-walking-tour/berlin-then-and-now",
   "allPosts": [
+    {
+      "title": "The Night the Gate Opened: Where It Happened, Episode 6",
+      "slug": "where-it-happened-bornholmer",
+      "path": "/post/where-it-happened-bornholmer",
+      "url": "https://www.berlinwalk.com/post/where-it-happened-bornholmer",
+      "excerpt": "Episode 6 of Where It Happened: a press conference that said immediately, an officer with no new orders, and the barrier at Bornholmer Straße that went up around half past eleven on 9 November 1989.",
+      "category": "Where It Happened",
+      "categorySlug": "where-it-happened",
+      "topic": "when-to-visit",
+      "topicLabel": "Month-by-Month Berlin",
+      "readTime": "12 min read",
+      "publishedDate": "2026-11-13T07:10:56.266Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_17f88ddc91af4f9db96f8124f26e8718~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-bornholmer-bridge-10-november-1989-1600.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_17f88ddc91af4f9db96f8124f26e8718~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-bornholmer-bridge-10-november-1989-1600.jpg",
+      "alt": "Crowds and cars on the Bösebrücke at the Bornholmer Straße crossing on 10 November 1989, with a watchtower on the left",
+      "relatedToolSlug": ""
+    },
     {
       "title": "Berlin Districts: Which Bezirk You Live In and What It Actually Runs",
       "slug": "berlin-districts",

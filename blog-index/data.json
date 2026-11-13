@@ -1,8 +1,8 @@
 {
-  "updatedAt": "2026-11-12T10:04:21.374Z",
+  "updatedAt": "2026-11-13T07:15:12.126Z",
   "source": "Wix Blog API",
   "popularSource": "Wix Blog metrics.views lifetime sort",
-  "totalPosts": 459,
+  "totalPosts": 460,
   "toolsTotal": 384,
   "bookingUrl": "https://www.walkofberlin.com/book-berlin-walking-tour/berlin-then-and-now",
   "navTopics": [
@@ -1802,6 +1802,23 @@
   ],
   "latest": [
     {
+      "title": "The Night the Gate Opened: Where It Happened, Episode 6",
+      "slug": "where-it-happened-bornholmer",
+      "path": "/post/where-it-happened-bornholmer",
+      "url": "https://www.berlinwalk.com/post/where-it-happened-bornholmer",
+      "excerpt": "Episode 6 of Where It Happened: a press conference that said immediately, an officer with no new orders, and the barrier at Bornholmer Straße that went up around half past eleven on 9 November 1989.",
+      "category": "Where It Happened",
+      "categorySlug": "where-it-happened",
+      "topic": "when-to-visit",
+      "topicLabel": "Month-by-Month Berlin",
+      "readTime": "12 min read",
+      "publishedDate": "2026-11-13T07:10:56.266Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_17f88ddc91af4f9db96f8124f26e8718~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-bornholmer-bridge-10-november-1989-1600.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_17f88ddc91af4f9db96f8124f26e8718~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-bornholmer-bridge-10-november-1989-1600.jpg",
+      "alt": "Crowds and cars on the Bösebrücke at the Bornholmer Straße crossing on 10 November 1989, with a watchtower on the left",
+      "relatedToolSlug": ""
+    },
+    {
       "title": "Berlin Districts: Which Bezirk You Live In and What It Actually Runs",
       "slug": "berlin-districts",
       "path": "/post/berlin-districts",
@@ -1987,26 +2004,26 @@
       "thumb": "https://static.wixstatic.com/media/5a08a3_c802ea2e01b34f70a9c1af0a6c62edb9~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/worldclock.jpg",
       "alt": "The World Clock on Alexanderplatz at blue hour on 5 February 2026, with snow on the ground, a yellow tram and the TV Tower behind",
       "relatedToolSlug": "berlin-winter-feels-like-grid"
-    },
-    {
-      "title": "Fed From the Air: Where It Happened, Episode 4",
-      "slug": "where-it-happened-airlift",
-      "path": "/post/where-it-happened-airlift",
-      "url": "https://www.berlinwalk.com/post/where-it-happened-airlift",
-      "excerpt": "Episode 4 of Where It Happened: how the 1948 Berlin airlift fed a blockaded city from the air, and where to stand at Tempelhof today.",
-      "category": "Where It Happened",
-      "categorySlug": "where-it-happened",
-      "topic": "practical",
-      "topicLabel": "Practical Berlin",
-      "readTime": "14 min read",
-      "publishedDate": "2026-10-30T07:10:41.372Z",
-      "image": "https://static.wixstatic.com/media/5a08a3_664cb55b957940bdb4470ad4b7805e9c~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-airlift-c47-tempelhof-1948-1600.jpg",
-      "thumb": "https://static.wixstatic.com/media/5a08a3_664cb55b957940bdb4470ad4b7805e9c~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-airlift-c47-tempelhof-1948-1600.jpg",
-      "alt": "C-47 transport planes lined up on the Tempelhof apron during the 1948 airlift",
-      "relatedToolSlug": ""
     }
   ],
   "allPosts": [
+    {
+      "title": "The Night the Gate Opened: Where It Happened, Episode 6",
+      "slug": "where-it-happened-bornholmer",
+      "path": "/post/where-it-happened-bornholmer",
+      "url": "https://www.berlinwalk.com/post/where-it-happened-bornholmer",
+      "excerpt": "Episode 6 of Where It Happened: a press conference that said immediately, an officer with no new orders, and the barrier at Bornholmer Straße that went up around half past eleven on 9 November 1989.",
+      "category": "Where It Happened",
+      "categorySlug": "where-it-happened",
+      "topic": "when-to-visit",
+      "topicLabel": "Month-by-Month Berlin",
+      "readTime": "12 min read",
+      "publishedDate": "2026-11-13T07:10:56.266Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_17f88ddc91af4f9db96f8124f26e8718~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-bornholmer-bridge-10-november-1989-1600.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_17f88ddc91af4f9db96f8124f26e8718~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-bornholmer-bridge-10-november-1989-1600.jpg",
+      "alt": "Crowds and cars on the Bösebrücke at the Bornholmer Straße crossing on 10 November 1989, with a watchtower on the left",
+      "relatedToolSlug": ""
+    },
     {
       "title": "Berlin Districts: Which Bezirk You Live In and What It Actually Runs",
       "slug": "berlin-districts",
