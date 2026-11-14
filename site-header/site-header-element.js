@@ -1,5 +1,5 @@
 (() => {
-const BW_HEADER_NAV_VERSION = 'header-desktop-align-20261113';
+const BW_HEADER_NAV_VERSION = 'clothing-discovery-20261114';
 if (customElements.get('bw-site-header')?.navigationVersion === BW_HEADER_NAV_VERSION
   || customElements.get('bw-site-header-desktop-align')?.navigationVersion === BW_HEADER_NAV_VERSION) return;
 
@@ -152,6 +152,19 @@ const BW_HEADER_STORE_DESIGN2_EN = [
     ]
   },
   {
+    "id": "clothing",
+    "label": "Clothing",
+    "de": "Kleidung",
+    "href": "https://www.walkofberlin.com/category/berlin-t-shirts",
+    "items": [
+      {
+        "label": "All T-shirts",
+        "de": "Alle T-Shirts",
+        "href": "https://www.walkofberlin.com/category/berlin-t-shirts"
+      }
+    ]
+  },
+  {
     "id": "gifts",
     "label": "Gifts",
     "de": "Geschenke",
@@ -266,6 +279,19 @@ const BW_HEADER_STORE_DESIGN2_DE = [
         "label": "Zum Selbstdrucken",
         "de": "Zum Selbstdrucken",
         "href": "https://walkofberlin.com/de/category/all-products?tab=print&format=digital"
+      }
+    ]
+  },
+  {
+    "id": "clothing",
+    "label": "Kleidung",
+    "de": "Kleidung",
+    "href": "https://www.walkofberlin.com/de/category/berlin-t-shirts",
+    "items": [
+      {
+        "label": "Alle T-Shirts",
+        "de": "Alle T-Shirts",
+        "href": "https://www.walkofberlin.com/de/category/berlin-t-shirts"
       }
     ]
   },
@@ -813,9 +839,6 @@ class BWHeaderElement extends HTMLElement {
     this._mobileOverlay = overlay;
 
     const closeBtn = overlay.querySelector('.bw-header-mobile-close');
-    const storeExpand=overlay.querySelector('[data-bw-store-expand]');
-    const storeList=storeExpand&&overlay.querySelector('#'+storeExpand.getAttribute('aria-controls'));
-    storeExpand?.addEventListener('click',()=>{const open=storeExpand.getAttribute('aria-expanded')!=='true';storeExpand.setAttribute('aria-expanded',String(open));storeList.hidden=!open;});
     const mobileSections = Array.from(overlay.querySelectorAll('details.bw-header-mobile-section'));
     mobileSections.forEach((section) => {
       const summary = section.querySelector('summary');
@@ -838,7 +861,6 @@ class BWHeaderElement extends HTMLElement {
       btn.setAttribute('aria-expanded', String(open));
       overlay.setAttribute('aria-hidden', String(!open));
       overlay.toggleAttribute('inert', !open);
-      if(!open&&storeExpand){storeExpand.setAttribute('aria-expanded','false');storeList.hidden=true;}
       if (!open) mobileSections.forEach((section) => { section.open = false; });
       if (open) {
         this._closeDropdowns?.();
@@ -1346,20 +1368,16 @@ class BWHeaderElement extends HTMLElement {
           z-index: 2147483647;
         }
         .bw-header-submenu * { box-sizing: border-box; }
-        .bw-header-submenu[data-bw-store-menu="design2"]{width:min(800px,calc(100vw - 24px));display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+        .bw-header-submenu[data-bw-store-menu="design2"]{width:min(800px,calc(100vw - 24px));display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
         .bw-header-store-group{min-width:0;list-style:none}
         .bw-header-store-group ul{margin:0;padding:0;list-style:none}
         .bw-header-store-note{display:block;padding:0 14px 8px;color:#526452;font-family:inherit;font-size:13px;font-weight:400;line-height:1.4}
         .bw-header-submenu .bw-header-store-group-title{font-weight:700;border-bottom:1px solid #c5e1a5}
         .bw-header-submenu .bw-header-store-group a{white-space:normal;overflow-wrap:anywhere}
+        .bw-header-nav .bw-header-clothing-link{display:inline-block;text-decoration:none;white-space:nowrap}
         .bw-header-nav .bw-header-store-link{text-decoration:none;padding:12px 0 12px 11px;display:inline-block}
         .bw-header-store-expand{padding:12px 0!important;min-width:20px;margin-left:4px}
         .bw-header-nav button:focus:not(:focus-visible){outline:none;box-shadow:none}
-        .bw-header-store-row{display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,.12)}
-        .bw-header-mobile-section .bw-header-store-row>a{border:0;flex:1;padding-left:0;font-size:22px}
-        [data-bw-store-expand] .bw-header-caret{display:inline-block;transition:transform 160ms ease}
-        [data-bw-store-expand][aria-expanded=true] .bw-header-caret{transform:rotate(180deg)}
-        .bw-header-store-row button{background:transparent;border:1px solid currentColor;color:inherit;min-width:44px;min-height:44px;font-size:22px}
         .bw-header-store-mobile-group{padding:12px 0;border-top:1px solid #c5e1a555}
         .bw-header-store-mobile-group>.bw-header-store-group-title{font-weight:700}
 
@@ -1637,6 +1655,9 @@ class BWHeaderElement extends HTMLElement {
           text-transform: none;
         }
 
+        /* A direct leaf reserves the parent disclosure marker width without implying expansion. */
+        .bw-header-mobile[data-bw-navigation] .bw-header-mobile-nav > a.bw-header-mobile-section-label { padding: 14px 0 14px 14px !important; }
+
         .bw-header-mobile-section-label::marker {
           color: var(--yellow);
           font-size: 13px;
@@ -1776,7 +1797,7 @@ class BWHeaderElement extends HTMLElement {
             </a>
 
             <nav class="bw-header-nav" aria-label="Primary" data-bw-unified-menu="${BW_HEADER_NAV_VERSION}">
-              <ul class="bw-header-nav-list" data-bw-home-nav>${BW_HEADER_MENU_GROUPS.filter(group=>BW_HEADER_STORE_DESIGN2||group.key!=='shop').map(group=>`
+              <ul class="bw-header-nav-list" data-bw-home-nav>${BW_HEADER_MENU_GROUPS.filter(group=>BW_HEADER_STORE_DESIGN2||group.key!=='shop').map(group=>`${group.key==='walk'?`<li><a class="bw-header-clothing-link" href="https://www.walkofberlin.com/${BW_HEADER_GERMAN?'de/':''}category/berlin-t-shirts">${BW_HEADER_GERMAN?'Kleidung':'Clothing'}</a></li>`:''}
                 <li class="bw-header-dropdown ${group.key==='walk'?'bw-header-tours-dropdown':''}">
                   ${group.key==='shop'?`<a class="bw-header-store-link" href="${BW_HEADER_DESIGN2_HOME}">Store</a><button class="bw-header-dropdown-trigger bw-header-store-expand" type="button" aria-label="${BW_HEADER_GERMAN?'Store-Menü öffnen':'Open Store menu'}" aria-expanded="false" aria-controls="${this._instanceId}-shop-menu"><span class="bw-header-caret" aria-hidden="true">⌄</span></button>`:`<button class="bw-header-dropdown-trigger" type="button" aria-expanded="false" aria-controls="${this._instanceId}-${group.key}-menu">${bwHeaderEscape(group.label)} <span class="bw-header-caret" aria-hidden="true">⌄</span></button>`}
                   <ul id="${this._instanceId}-${group.key}-menu" class="bw-header-submenu" aria-label="${bwHeaderEscape(group.label)}"${group.key==='shop'&&BW_HEADER_STORE_DESIGN2?' data-bw-store-menu="design2"':''} hidden inert>${bwHeaderItems(group)}</ul>
@@ -1808,9 +1829,9 @@ class BWHeaderElement extends HTMLElement {
             </div>
 
             <nav class="bw-header-mobile-nav" aria-label="Mobile primary">
-              ${BW_HEADER_MENU_GROUPS.map(group=>group.key==='shop'&&BW_HEADER_STORE_DESIGN2?`<div class="bw-header-mobile-section" data-bw-menu-group="shop"><div class="bw-header-store-row"><a href="${BW_HEADER_DESIGN2_HOME}">Store</a><button type="button" data-bw-store-expand aria-expanded="false" aria-controls="${this._instanceId}-mobile-store" aria-label="${BW_HEADER_GERMAN?'Store-Menü öffnen':'Open Store menu'}"><span class="bw-header-caret" aria-hidden="true">⌄</span></button></div><div id="${this._instanceId}-mobile-store" hidden><a href="${BW_HEADER_DESIGN2_HOME}">${BW_HEADER_GERMAN?'Zur Store-Startseite':'Store home'}</a>${bwHeaderMobileItems(group)}</div></div>`:`<details class="bw-header-mobile-section" data-bw-menu-group="${group.key}">
+              ${BW_HEADER_MENU_GROUPS.map(group=>`${group.key==='walk'?`<a class="bw-header-mobile-section-label" href="https://www.walkofberlin.com/${BW_HEADER_GERMAN?'de/':''}category/berlin-t-shirts">${BW_HEADER_GERMAN?'Kleidung':'Clothing'}</a>`:''}<details class="bw-header-mobile-section" data-bw-menu-group="${group.key}">
                 <summary class="bw-header-mobile-section-label ${group.key==='walk'?'bw-header-mobile-tour-label':''}">${bwHeaderEscape(group.label)}</summary>
-                ${bwHeaderMobileItems(group)}
+                ${group.key==='shop'?`<a href="${BW_HEADER_DESIGN2_HOME}">${BW_HEADER_GERMAN?'Alle Produkte':'All products'}</a>`:''}${bwHeaderMobileItems(group)}
               </details>`).join('')}
             </nav>
           </div>
@@ -1910,6 +1931,9 @@ function bwHeaderStoreFooter() {
   // The strategy footer (29 Oct 2026) already carries Contact; add the store's own only to an older footer without one.
   if (store && !contact && !links.querySelector('a[href="/contact"]')) links.insertAdjacentHTML('afterbegin', '<a href="/contact" data-bw-store-contact>Contact</a>');
   if (!store && contact) contact.remove();
+  let clothing = links.querySelector('[data-bw-store-clothing]');
+  if (store && !clothing) links.insertAdjacentHTML('afterbegin', `<a data-bw-store-clothing href="https://www.walkofberlin.com/${BW_HEADER_GERMAN?'de/':''}category/berlin-t-shirts">${BW_HEADER_GERMAN?'Kleidung':'Clothing'}</a>`);
+  if (!store && clothing) clothing.remove();
   let details = links.querySelector('[data-bw-store-credits]');
   if (!credits) { if (details) details.remove(); return; }
   if (!details) {

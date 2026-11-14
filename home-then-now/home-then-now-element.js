@@ -515,7 +515,11 @@
           "count": 4
         }
       }
-    ]
+    ],
+    "clothingFeature": {
+      "img": "../storefront/20261022-c4/assets/gallery-6c5770b6568247a49550b74a.jpg",
+      "alt": "Berlin in Pink Premium unisex T-shirt in Ash worn by an adult woman and man. AI model visualization; actual colour, fit and print may vary slightly."
+    }
   };
 
   const BWH_SCRIPT_URL = (document.currentScript && document.currentScript.src)
@@ -900,11 +904,24 @@
       </a>`;
   }
 
+  function bwhClothingFeature(x) {
+    if (!x) return '';
+    const de = /^\/de(?:\/|$)/.test(location.pathname) || new URLSearchParams(location.search).get('lang') === 'de' || (() => {
+      if (location.pathname !== '/') return false;
+      try { const ref = new URL(document.referrer); return ref.origin === location.origin && ref.pathname.replace(/\/+$/, '') === '/de'; } catch { return false; }
+    })();
+    return `<a class="bwh-clothingfeature bwh-lift" href="https://www.walkofberlin.com/${de?'de/':''}category/berlin-t-shirts" data-bwh-section="shop" data-bwh-item="clothing-feature">
+      <img src="${bwhEsc(bwhSrc(x.img))}" alt="${bwhEsc(x.alt)}" width="1600" height="1066" loading="lazy" decoding="async">
+      <span class="bwh-clothingfeature__body"><span class="bwh-eyebrow">${de?'Kleidung':'Clothing'}</span><span class="bwh-calfeature__name">${de?'Berlin-T-Shirts':'Berlin T-shirts'}</span><span class="bwh-calfeature__line">${de?'Drei Berlin-Motive. Unisex-T-Shirts in Classic und Premium, auf Bestellung gefertigt.':'Three Berlin designs. Classic and Premium unisex T-shirts, made to order.'}</span><span class="bwh-btn bwh-btn--outline">${de?'Kleidung entdecken':'Shop Clothing'} →</span></span>
+    </a>`;
+  }
+
   function bwhShop(d) {
     return `
     <section class="bwh-band bwh-shop" id="bwh-shop" aria-labelledby="bwh-shop-title">
       <h2 class="bwh-h2 bwh-shop__title" id="bwh-shop-title">More from the store</h2>
       ${bwhCalFeature(d.calFeature)}
+      ${bwhClothingFeature(d.clothingFeature)}
       <div class="bwh-doors">${d.doors.map(bwhDoor).join('')}</div>
       <a class="bwh-btn bwh-btn--outline bwh-shop__store" href="${bwhEsc(bwhHref(d.storeHref))}" data-bwh-section="shop" data-bwh-item="open-the-store">Open the store</a>
     </section>`;

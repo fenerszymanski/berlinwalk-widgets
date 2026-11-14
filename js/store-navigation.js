@@ -97,6 +97,7 @@ export const STORE_MENU_DESIGN2 = Object.freeze([
     ...[['everyday','Everyday','Berliner Alltag'],['landmarks','Landmarks','Wahrzeichen'],['stories','Berlin Stories','Berliner Geschichten'],['districts','Districts','Bezirke'],['sets','Sets','Sets']].map(([id,label,de])=>({label,de,href:storeHref('print',id)})),
     {label:'Print at home',de:'Zum Selbstdrucken',href:storeHref('print')+'&format=digital'}
   ]},
+  {id:'clothing',label:'Clothing',de:'Kleidung',href:'https://www.walkofberlin.com/category/berlin-t-shirts',items:[{label:'All T-shirts',de:'Alle T-Shirts',href:'https://www.walkofberlin.com/category/berlin-t-shirts'}]},
   {id:'gifts',label:'Gifts',de:'Geschenke',href:'https://walkofberlin.com/category/berlin-christmas-gifts',hrefDe:'https://walkofberlin.com/de/category/berlin-geschenke',items:[
     {label:'Your street in 1928',de:'Deine Straße 1928',href:STORE_PERSONALISED_PRODUCT},
     {label:'1928 digital file',de:'1928 als digitale Datei',href:'https://walkofberlin.com/product-page/your-berlin-street-in-1928-digital-file'},
@@ -104,7 +105,6 @@ export const STORE_MENU_DESIGN2 = Object.freeze([
     {label:'Dein Berlin 2027 · personalised calendar',de:'Dein Berlin 2027 · persönlicher Kalender',href:STORE_PERSONAL_CALENDAR_PRODUCT},
     {label:'Berlin 2027 wall calendar',de:'Berlin Wandkalender 2027',href:STORE_CALENDAR_PRODUCT},
     {label:'Personal newspapers',de:'Persönliche Zeitungen',href:storeHref('newspapers')},
-    {label:'Berlin T-shirts',de:'Berlin T-Shirts',href:storeHref('apparel')},
     {label:'1928 gift voucher',de:'1928-Gutschein',href:'https://walkofberlin.com/product-page/gift-your-berlin-street-in-1928-poster-gift'}
   ]},
   {id:'explore',label:'Explore Berlin',de:'Berlin entdecken',noteDe:'Alle auf Englisch',href:storeHref('audio'),items:[

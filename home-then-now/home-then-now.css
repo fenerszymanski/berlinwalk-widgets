@@ -881,3 +881,9 @@ bw-home-then-now .bwh-slide__player-done { display: block; width: 34%; height: 1
   bw-home-then-now .bwh-slide__player { left: auto; right: 20px; bottom: 20px; width: 300px; padding: 16px 18px; gap: 6px; }
   bw-home-then-now .bwh-slide__player-title { font-size: 22px; }
 }
+
+/* Clothing is outside Gift Week's rotating doors. Keep both people and shirts visible. */
+bw-home-then-now .bwh-clothingfeature{display:grid;grid-column:1/-1;gap:18px;padding:18px;border-radius:12px;background:var(--bwh-cream);color:var(--bwh-ink);text-decoration:none}
+bw-home-then-now .bwh-clothingfeature img{width:100%;height:auto;border-radius:8px}
+bw-home-then-now .bwh-clothingfeature__body{display:flex;flex-direction:column;align-items:flex-start;gap:12px}
+@media(min-width:761px){bw-home-then-now .bwh-clothingfeature{grid-row:3;grid-template-columns:minmax(0,1fr) minmax(0,1fr);align-items:center}bw-home-then-now .bwh-shop .bwh-doors{grid-row:4}}
