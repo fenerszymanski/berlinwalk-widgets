@@ -62,32 +62,37 @@ export function count(step, base) {
 function analyticsAllowed() {
   try { return W.consentPolicyManager?.getCurrentConsentPolicy?.()?.policy?.analytics === true; } catch (e) { return false; }
 }
-// Google 1928 attribution: consented, tab-scoped, 30-minute session; no address contents.
-const GOOGLE_1928_KEY = 'wob-google-1928-session-v1';
-function google1928Context() {
-  try {
-    const policy = W.consentPolicyManager?.getCurrentConsentPolicy?.()?.policy || {};
-    if (!policy.analytics || !policy.advertising || W.navigator?.globalPrivacyControl) {
-      W.sessionStorage?.removeItem(GOOGLE_1928_KEY); return null;
-    }
-    const q = new URLSearchParams(W.location.search);
-    const incoming = q.get('utm_source') === 'google' && q.get('utm_medium') === 'display' && q.get('utm_campaign') === '1928_de_gdn_pilot';
-    let c; try { c = JSON.parse(W.sessionStorage.getItem(GOOGLE_1928_KEY) || 'null'); } catch {}
-    if (c && (c.expires <= Date.now() || c.utmCampaign !== '1928_de_gdn_pilot' || !/^[a-f0-9]{32}$/.test(c.sessionId))) c = null;
-    if (q.has('utm_campaign') && !incoming) { W.sessionStorage.removeItem(GOOGLE_1928_KEY); return null; }
-    if (!c && incoming) {
-      const bytes = new Uint8Array(16); W.crypto.getRandomValues(bytes);
-      c = {sessionId: Array.from(bytes, x => x.toString(16).padStart(2, '0')).join(''), utmSource: 'google', utmMedium: 'display', utmCampaign: '1928_de_gdn_pilot', utmContent: ['01-deine-strasse','02-dein-zuhause','03-geschenk'].includes(q.get('utm_content')) ? q.get('utm_content') : ''};
-    }
-    if (!c) return null;
-    c.expires = Date.now() + 30 * 60 * 1000;
-    W.sessionStorage.setItem(GOOGLE_1928_KEY, JSON.stringify(c));
-    return c;
-  } catch { return null; }
+// Paid store attribution: only named tests, both consents, tab scope and 30-minute inactivity.
+// No address/search/cover text or advertising click identifiers enter storage or event payloads.
+const PAID_STORE_KEY = 'wob-store-paid-session-v1';
+const LEGACY_GOOGLE_KEY = 'wob-google-1928-session-v1';
+const PAID_STORE_CAMPAIGNS = {
+ '1928_de_gdn_pilot': {source:'google',medium:'display',contents:['01-deine-strasse','02-dein-zuhause','03-geschenk']},
+ 'w46_1928_de': {source:'meta',medium:'paid_social',contents:['d1','d2','d3','d4']},
+ 'cal2027_de': {source:'meta',medium:'paid_social',contents:['k1','k2','k3','k4']},
+};
+function paidStoreContext() {
+ try {
+  const clear=()=>{W.sessionStorage?.removeItem(PAID_STORE_KEY);W.sessionStorage?.removeItem(LEGACY_GOOGLE_KEY);if(W.__bwStorePaidJourneyRef===W.__bwStoreJourneyRef)delete W.__bwStoreJourneyRef;delete W.__bwStorePaidJourneyRef;};
+  const policy=W.consentPolicyManager?.getCurrentConsentPolicy?.()?.policy||{};
+  if(!policy.analytics||!policy.advertising||W.navigator?.globalPrivacyControl){clear();return null;}
+  const q=new URLSearchParams(W.location.search),campaign=q.get('utm_campaign'),spec=PAID_STORE_CAMPAIGNS[campaign];
+  const qa=q.get('qa')==='1'||/^codex_/.test(q.get('utm_content')||'');
+  const incoming=spec&&q.get('utm_source')===spec.source&&q.get('utm_medium')===spec.medium;
+  const content=incoming&&(spec.contents.includes(q.get('utm_content'))||qa&&q.get('utm_content')==='codex_qa')?q.get('utm_content'):'';
+  let c;try{c=JSON.parse(W.sessionStorage.getItem(PAID_STORE_KEY)||W.sessionStorage.getItem(LEGACY_GOOGLE_KEY)||'null');}catch{}
+  const known=PAID_STORE_CAMPAIGNS[c?.utmCampaign];
+  if(c&&(!known||c.utmSource!==known.source||c.utmMedium!==known.medium||!Number.isFinite(c.expires)||c.expires<=Date.now()||!/^[a-f0-9]{32}$/.test(c.sessionId)||!(known.contents.includes(c.utmContent)||c.utmContent===''||c.isQa===true&&c.utmContent==='codex_qa')))c=null;
+  if((q.has('utm_campaign')||q.has('utm_source')||q.has('utm_medium'))&&!incoming){clear();return null;}
+  if(incoming&&c&&(c.utmCampaign!==campaign||c.utmContent!==content||Boolean(c.isQa)!==qa))c=null;
+  if(!c&&incoming){const bytes=new Uint8Array(16);W.crypto.getRandomValues(bytes);c={sessionId:Array.from(bytes,x=>x.toString(16).padStart(2,'0')).join(''),utmSource:spec.source,utmMedium:spec.medium,utmCampaign:campaign,utmContent:content,...(qa?{isQa:true}:{})};}
+  if(!c){clear();return null;}
+  c.expires=Date.now()+30*60*1000;W.sessionStorage.setItem(PAID_STORE_KEY,JSON.stringify(c));W.sessionStorage.removeItem(LEGACY_GOOGLE_KEY);return c;
+ }catch{return null;}
 }
-W.document?.addEventListener('consentPolicyChanged', () => google1928Context());
-W.document?.addEventListener('consentPolicyInitialized', () => google1928Context());
-google1928Context();
+W.document?.addEventListener('consentPolicyChanged',()=>paidStoreContext());
+W.document?.addEventListener('consentPolicyInitialized',()=>paidStoreContext());
+paidStoreContext();
 function journeyId() {
   if (!W.__bwStoreJourney) {
     const bytes = new Uint8Array(9);
@@ -103,20 +108,21 @@ export function journey(eventName, path, payload = {}) {
   const why = skipReason();
   if (why) { log.skipped.push({journey: eventName, why}); return false; }
   if (!analyticsAllowed()) { log.skipped.push({journey: eventName, why: 'consent'}); return false; }
-  const google = google1928Context();
-  const id = google?.sessionId || journeyId(); if (!id) return false;
+  const campaign = paidStoreContext();
+  const id = campaign?.sessionId || journeyId(); if (!id) return false;
   done.add(k);
   W.__bwStoreJourneyRef = id;
+  if(campaign)W.__bwStorePaidJourneyRef=id;
   try {
     W.fetch(JOURNEY_ENDPOINT, {method: 'POST', mode: 'cors', credentials: 'omit', cache: 'no-store', keepalive: true, referrerPolicy: 'no-referrer',
       headers: {'content-type': 'application/json'}, body: JSON.stringify({eventName, eventId: `${id}:${eventName}:${Date.now().toString(36)}`, sessionId: id, journeyId: id,
-        consentGranted: true, analyticsConsent: true, ...(google ? {advertisingConsent: true, utmSource: google.utmSource, utmMedium: google.utmMedium, utmCampaign: google.utmCampaign, utmContent: google.utmContent} : {}), pagePath: path, timestamp: new Date().toISOString(), payload})}).catch(() => {});
+        consentGranted: true, analyticsConsent: true, ...(campaign ? {advertisingConsent:true,utmSource:campaign.utmSource,utmMedium:campaign.utmMedium,utmCampaign:campaign.utmCampaign,utmContent:campaign.utmContent} : {}), pagePath: path, timestamp: new Date().toISOString(), payload:{...payload,...(campaign?.isQa?{isQa:true}:{})}})}).catch(() => {});
     (log.journey = log.journey || []).push(eventName);
     return true;
   } catch (e) { return false; }
 }
 function adsAllowed() {
-  try { return W.consentPolicyManager?.getCurrentConsentPolicy?.()?.policy?.advertising === true && typeof W.fbq === 'function'; } catch (e) { return false; }
+  try { return W.navigator?.globalPrivacyControl !== true && W.consentPolicyManager?.getCurrentConsentPolicy?.()?.policy?.advertising === true && typeof W.fbq === 'function'; } catch (e) { return false; }
 }
 // Not marked as sent while consent is missing, so a step after the visitor accepts the banner still reaches the pixel.
 export function pixel(kind, name, data, key) {
@@ -132,7 +138,13 @@ const money = cents => Math.round(Number(cents) || 0) / 100;
 // Calendar (13 Nov 2026, for the Dein Berlin 2027 ads): CalPlace goes to the pixel once per page load when the visitor adds their first
 // own place (the ad set optimises for it, like YSPreview for the 1928 print); its cart add sends AddToCart through added().
 const CAL_ID = 'd35601ed-3b43-4269-afb9-32e7c3b1e128';
-export function calendarStep(step) {if(['calendar-place','calendar-preview','calendar-add'].includes(step))count(step,'/product-page/dein-berlin-2027-personalised-wall-calendar');if(step==='calendar-place')pixel('trackCustom','CalPlace',{content_ids:[CAL_ID],content_type:'product'},step);}
+const CAL_PATH='/product-page/dein-berlin-2027-personalised-wall-calendar';
+let calendarPlaced=false;
+export function calendarStep(step) {
+ if(['calendar-place','calendar-preview','calendar-add'].includes(step))count(step,CAL_PATH);
+ if(step==='calendar-place'){calendarPlaced=true;journey('bw_store_calendar_place',CAL_PATH,{productId:CAL_ID});pixel('trackCustom','CalPlace',{content_ids:[CAL_ID],content_type:'product'},step);}
+ if(step==='calendar-preview'&&calendarPlaced)journey('bw_store_calendar_preview',CAL_PATH,{productId:CAL_ID});
+}
 export function ysStep(step) {
   count(step, YS_PATH);
   if(['search','preview'].includes(step))W.WobCampaignFunnel?.emit('interest',step==='search'?'street_search':'street_preview');
