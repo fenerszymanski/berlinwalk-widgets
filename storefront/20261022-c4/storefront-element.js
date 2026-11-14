@@ -672,7 +672,8 @@
         const requestedMedia=product.group==='apparel'&&requestedColor?this.layer?.apparelMedia(product,requestedColor):null;
         const validColor=!!requestedMedia?.lead&&requestedMedia.unavailable===false&&rows.some(row=>row.inStock&&row.choices.Color===requestedColor);
         const defaultColor=product.group==='apparel'?(validColor?requestedColor:product.apparelMedia?.defaultColor):null;
-        const defaultRow=defaultColor?rows.find(row=>row.inStock&&row.choices.Color===defaultColor)||rows.find(row=>row.choices.Color===defaultColor):null;
+        const sizedRow=product.group==='apparel'&&size&&defaultColor?rows.find(row=>row.inStock&&row.choices.Color===defaultColor&&row.choices.Size===size):null;
+        const defaultRow=defaultColor?sizedRow||rows.find(row=>row.inStock&&row.choices.Color===defaultColor)||rows.find(row=>row.choices.Color===defaultColor):null;
         const first=defaultColor?defaultRow:posterRefresh(product)
           ? requested || cheapest(rows.filter(row=>row.inStock&&/30\s*[x×]\s*40/i.test(row.choices.Size||''))) || cheapest(rows.filter(row=>row.inStock)) || rows[0]
           : linked||rows.find(row=>row.inStock&&/30\s*x\s*40/i.test(row.choices.Size||'')&&(!row.choices.Paper||row.choices.Paper==='Premium Matte'))||rows.find(row=>row.inStock)||rows[0];
