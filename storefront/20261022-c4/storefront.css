@@ -757,3 +757,14 @@ button.ys-words-tag:focus-visible{outline:2px solid var(--green);outline-offset:
 :host([design2]) .d2-menu-note{display:block;margin:0 0 6px;padding:0 12px;color:#526452;font:400 12px/1.3 'Space Grotesk','Space Grotesk Fallback',sans-serif}
 :host([design2]) .d2-language-badge{top:8px;left:8px}
 @container(max-width:160px){:host([design2]) .d2-language-badge{top:4px;left:4px;padding:4px 4px;font-size:11px}}
+
+/* Store discovery polish: real photograph categories and actual garment colour previews. */
+:host([design2]) .d2-kind-badge{position:absolute;left:12px;bottom:12px;display:inline-flex;align-items:center;gap:7px;max-width:calc(100% - 24px);padding:7px 10px;border-radius:5px;background:#fafaf5;color:#123d18;font:600 13px/1.2 'Space Grotesk',sans-serif;box-shadow:0 1px 8px #0002}
+:host([design2]) .d2-kind-badge svg{flex:none}
+:host([design2]) .d2-color-options{display:flex;align-items:center;flex-wrap:wrap;gap:2px;margin:8px -5px 0}
+:host([design2]) .d2-color-swatch{display:inline-grid;place-items:center;width:34px;height:36px;padding:5px;border:0;border-radius:0;background:transparent;cursor:pointer;color:#123d18}
+:host([design2]) .d2-color-swatch span{width:22px;height:22px;box-sizing:border-box;background:var(--swatch);border:1px solid #18281a55;box-shadow:0 0 0 2px #fafaf5}
+:host([design2]) .d2-color-swatch[aria-pressed=true] span{outline:2px solid #123d18;outline-offset:2px}
+:host([design2]) .d2-color-swatch:focus-visible{outline:2px solid #123d18;outline-offset:0}
+:host([design2]) .d2-color-name{margin-left:7px;color:#526452;font:400 12px/1.4 'Space Grotesk',sans-serif}
+@media(pointer:coarse){:host([design2]) .d2-color-swatch{width:44px;height:44px}}

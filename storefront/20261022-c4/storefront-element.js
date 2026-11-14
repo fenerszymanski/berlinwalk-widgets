@@ -9,7 +9,7 @@
   const design2Enabled = (()=>{let choice;try{const q=new URLSearchParams(location.search).get("design");if(q==="2"||q==="0"){choice=q;sessionStorage.setItem("bwStoreDesign",q);}else choice=sessionStorage.getItem("bwStoreDesign");}catch{}return choice==="2"?true:choice==="0"?false:STORE_DESIGN2;})();
   const CALENDAR_LISTED=true;   // Yusuf 13 Nov 2026: "şimdi bunu store'da, menüde vs nerede gerekli varsa koyalım" (12 Nov it was direct link only)
   const esc = value => String(value ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-  const asset = value => {if(value==='gift-week.js'&&/^[a-f0-9]{40}$/.test(window.__WOB_GIFT_WEEK_P22_REF||''))return 'https://cdn.jsdelivr.net/gh/fenerszymanski/berlinwalk-widgets@'+window.__WOB_GIFT_WEEK_P22_REF+'/storefront/20261022-c4/gift-week.js';const target=new URL(value,base);if(/\.(?:js|css|json)$/.test(target.pathname))target.searchParams.set('v',['data/native-bindings.json','data/categories.json'].includes(value)?'store-tshirts-20261113-v2':['funnel.js','calendar-configurator.js'].includes(value)?'store-paid-attribution-20261114-v3':['design2.js','data/de-store.json'].includes(value)?'clothing-discovery-20261114-v1':['ys-de.js','catalog-layer.js'].includes(value)?'store-apparel-colors-20261114-v3':'store-design2-fix6-20261113-v1');return target.href;};
+  const asset = value => {if(value==='gift-week.js'&&/^[a-f0-9]{40}$/.test(window.__WOB_GIFT_WEEK_P22_REF||''))return 'https://cdn.jsdelivr.net/gh/fenerszymanski/berlinwalk-widgets@'+window.__WOB_GIFT_WEEK_P22_REF+'/storefront/20261022-c4/gift-week.js';const target=new URL(value,base);if(/\.(?:js|css|json)$/.test(target.pathname))target.searchParams.set('v',['data/native-bindings.json','data/categories.json'].includes(value)?'store-tshirts-20261113-v2':['funnel.js','calendar-configurator.js'].includes(value)?'store-paid-attribution-20261114-v3':value==='design2.js'?'store-discovery-polish-20261114-v1':value==='data/de-store.json'?'clothing-discovery-20261114-v1':['ys-de.js','catalog-layer.js'].includes(value)?'store-apparel-colors-20261114-v3':'store-discovery-polish-20261114-v1');return target.href;};
   // Chrome and Safari ignore @font-face inside shadow DOM, so the three faces are registered once on the document with absolute URLs from the element's own base.
   // Gift landing trials showed no LCP gain. Preserve their prior resource and font order.
   const legacyGiftPresentation = () => /^(?:\/de)?\/(?:category\/(?:berlin-christmas-gifts|berlin-geschenke)|gifts|geschenke)\/?$/.test(location.pathname);
@@ -668,7 +668,10 @@
         const size = new URLSearchParams(location.search).get('size');
         const explicit = posterRefresh(product) && (wanted || size) ? rows.filter(row=>row.inStock&&(!wanted||row.choices.Paper===wanted)&&(!size||row.choices.Size===size)) : [];
         const requested = size ? explicit[0] : cheapest(explicit.filter(row=>/30\s*[x×]\s*40/i.test(row.choices.Size||''))) || cheapest(explicit);
-        const defaultColor=product.group==='apparel'?product.apparelMedia?.defaultColor:null;
+        const requestedColor=new URLSearchParams(location.search).get('color');
+        const requestedMedia=product.group==='apparel'&&requestedColor?this.layer?.apparelMedia(product,requestedColor):null;
+        const validColor=!!requestedMedia?.lead&&requestedMedia.unavailable===false&&rows.some(row=>row.inStock&&row.choices.Color===requestedColor);
+        const defaultColor=product.group==='apparel'?(validColor?requestedColor:product.apparelMedia?.defaultColor):null;
         const defaultRow=defaultColor?rows.find(row=>row.inStock&&row.choices.Color===defaultColor)||rows.find(row=>row.choices.Color===defaultColor):null;
         const first=defaultColor?defaultRow:posterRefresh(product)
           ? requested || cheapest(rows.filter(row=>row.inStock&&/30\s*[x×]\s*40/i.test(row.choices.Size||''))) || cheapest(rows.filter(row=>row.inStock)) || rows[0]

@@ -1,7 +1,7 @@
 (() => {
-const BW_HEADER_NAV_VERSION = 'clothing-discovery-20261114';
+const BW_HEADER_NAV_VERSION = 'store-discovery-polish-20261114';
 if (customElements.get('bw-site-header')?.navigationVersion === BW_HEADER_NAV_VERSION
-  || customElements.get('bw-site-header-clothing')?.navigationVersion === BW_HEADER_NAV_VERSION) return;
+  || customElements.get('bw-site-header-store-polish')?.navigationVersion === BW_HEADER_NAV_VERSION) return;
 
 const BW_HEADER_SCRIPT_URL = (document.currentScript && document.currentScript.src) || 'https://fenerszymanski.github.io/berlinwalk-widgets/site-header/site-header-element.js';
 // Walk of Berlin wordmark (A15a, live 2 October 2026). The old berlinwalk-wordmark-*
@@ -1856,6 +1856,17 @@ const BW_HEADER_STORE_ROUTE = /^\/(?:de\/)?(?:category|product-page|cart-page|th
 function bwHeaderStoreMode() {
   const store = BW_HEADER_STORE_ROUTE.test(location.pathname);
   const home = location.pathname === '/';
+  // Separate ownership: a cached older header watcher may replace its own store-mode stylesheet after SPA navigation.
+  if(!document.getElementById('bw-store-masthead-polish-css')){
+    const style=document.createElement('style');style.id='bw-store-masthead-polish-css';
+    const m='html[data-bw-store-mode][data-bw-store-mode]';
+    style.textContent=[
+      // Store has its own logo/navigation. Collapse the native masthead only on these routes.
+      `${m} bw-site-header,${m} header#SITE_HEADER,${m} #SITE_HEADER-placeholder{display:none!important;height:0!important;min-height:0!important;margin:0!important;padding:0!important}`,
+      `${m} [id$="_r_comp-kbgajy18"],${m} [id$="_r_comp-mpcjk2pf"],${m} [id$="_r_comp-mpcks8xv"]{display:none!important;height:0!important;min-height:0!important}`,
+
+    ].join('');document.head.append(style);
+  }
   if (document.getElementById('bw-header-store-mode-css')?.dataset.navigationVersion !== BW_HEADER_NAV_VERSION) {
     document.getElementById('bw-header-store-mode-css')?.remove();
     const style = document.createElement('style');
@@ -1872,7 +1883,6 @@ function bwHeaderStoreMode() {
       `${f} .bw-footer-col`, `${f} .bw-footer-note-grid`, `${f} .bw-footer-cta`, `${f} .bw-footer-brand > p`,
       `${h} .bw-header-top`, `${h} [data-bw-header-tour-line]`, `${h} a.bw-header-book`, `${h} .bw-header-cta a.bw-header-book`, `${h} .bw-header-cta a.bw-header-mobile-book`, `${h} .bw-header-cta a.bw-header-mobile-book:is(:hover, :focus, :active, :visited)`,
       `${h} .bw-header-nav-list:not([data-bw-home-nav])`].join(',') + '{display:none!important}' + [
-      // Wix sizes the header box for the tour band; let it shrink to the logo row.
       `${m} header[id] [class*="-container"]{grid-template-rows:minmax(0,auto)!important}`,
       `${m} header[id] bw-site-header,${m} header[id] [id$="_r_comp-mpcjk2pf"],${m} header[id] [id$="_r_comp-mpcks8xv"]{min-height:0!important;height:auto!important}`,
       `${m} .bw-header-main{padding-top:16px!important;padding-bottom:16px!important;min-height:0!important}`,
@@ -1922,6 +1932,8 @@ function bwHeaderStoreMode() {
 }
 // The footer is drawn by the separate footer-restore embed and may mount late or re-render, so the store items are re-checked every tick.
 function bwHeaderStoreFooter() {
+  const footerLogo=document.querySelector('#bw-site-footer-restore .bw-logo-link');
+  if(footerLogo){const de=/^\/de(?:\/|$)/.test(location.pathname)||new URLSearchParams(location.search).get('lang')==='de';footerLogo.href='https://www.walkofberlin.com/'+(de?'de':'');footerLogo.setAttribute('aria-label',de?'Walk of Berlin Startseite':'Walk of Berlin home');}
   const links = document.querySelector('#bw-site-footer-restore .bw-footer-bottom-links');
   if (!links) return;
   const store = BW_HEADER_STORE_ROUTE.test(location.pathname);
@@ -1966,16 +1978,16 @@ if (!customElements.get('bw-site-header')) {
   // the new element inside that host; do not mutate a registered prototype.
   // Keep the prior alias available as a compatibility shell if a cached older loader runs later.
   if(!customElements.get('bw-site-header-desktop-align'))customElements.define('bw-site-header-desktop-align', class extends BWHeaderElement {});
-  if(!customElements.get('bw-site-header-clothing'))customElements.define('bw-site-header-clothing', class extends BWHeaderElement {});
+  if(!customElements.get('bw-site-header-store-polish'))customElements.define('bw-site-header-store-polish', class extends BWHeaderElement {});
   const upgrade = () => {
     for (const host of document.querySelectorAll('bw-site-header')) {
-      if(host.constructor.navigationVersion===BW_HEADER_NAV_VERSION&&!host.querySelector('bw-site-header-unified,bw-site-header-design2,bw-site-header-design2-fix4,bw-site-header-design2-fix5,bw-site-header-design2-fix5b,bw-site-header-design2-fix6'))continue;
-      if(host.querySelector('bw-site-header-clothing'))continue;
+      if(host.constructor.navigationVersion===BW_HEADER_NAV_VERSION&&!host.querySelector('bw-site-header-unified,bw-site-header-design2,bw-site-header-design2-fix4,bw-site-header-design2-fix5,bw-site-header-design2-fix5b,bw-site-header-design2-fix6,bw-site-header-clothing'))continue;
+      if(host.querySelector('bw-site-header-store-polish'))continue;
       // Preserve older compatibility hosts: their observers use the direct
       // child tag as an upgrade guard. Removing it makes two builds fight.
-      const legacy=[host,...host.querySelectorAll('bw-site-header-unified,bw-site-header-design2,bw-site-header-design2-fix4,bw-site-header-design2-fix5,bw-site-header-design2-fix5b,bw-site-header-design2-fix6,bw-site-header-desktop-align')];
+      const legacy=[host,...host.querySelectorAll('bw-site-header-unified,bw-site-header-design2,bw-site-header-design2-fix4,bw-site-header-design2-fix5,bw-site-header-design2-fix5b,bw-site-header-design2-fix6,bw-site-header-desktop-align,bw-site-header-clothing')];
       const mount=legacy.at(-1);
-      const next=document.createElement('bw-site-header-clothing');
+      const next=document.createElement('bw-site-header-store-polish');
       next._preservedCommerceForm=host.querySelector('form[data-bw-landmarks-guide-header-checkout]');
       next._preservedCommerceForm?.remove();
       for(const previous of legacy)previous.disconnectedCallback?.();
