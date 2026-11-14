@@ -11720,6 +11720,38 @@
       "cmsItemId": "195469d5-df9c-4440-9f6d-3a1e3ee6a7c2",
       "iconStatus": "live-wix-media",
       "image": "https://static.wixstatic.com/media/5a08a3_a8ff554a995a42e19e47c5a2326520b2~mv2.png"
+    },
+    {
+      "slug": "altbau-age-reader",
+      "title": "Altbau Age Reader",
+      "lead": "Read your Berlin building from the street to your own hallway: pick what the facade, the stairwell, the courtyard and your flat show, and a timeline keeps only the years all clues agree on, with the Mietspiegel age band that applies.",
+      "category": "Discovery",
+      "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/altbau-age-reader/",
+      "embedHeight": 1350,
+      "hubCategory": "CultureLandmarks",
+      "type": "Planner",
+      "priority": 3,
+      "tags": [
+        "altbau",
+        "building age",
+        "mietspiegel",
+        "gruenderzeit",
+        "courtyard",
+        "living in berlin",
+        "architecture",
+        "timeline"
+      ],
+      "aliases": [
+        "how old is my berlin building",
+        "berlin altbau age",
+        "when was my building built berlin",
+        "altbau berlin baujahr",
+        "berlin tenement age",
+        "mietspiegel baualtersklasse"
+      ],
+      "cmsItemId": "33dcde8e-4a9b-4b16-8d56-099dd4768859",
+      "iconStatus": "live-wix-media",
+      "image": "https://static.wixstatic.com/media/5a08a3_bc45775a13a84243900bee2b6d705165~mv2.png"
     }
   ],
   "hubCategories": [

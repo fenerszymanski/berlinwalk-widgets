@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Altbau Age Reader: When Was Your Berlin Building Built?</title>
+<link rel="stylesheet" href="../css/brand.css">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { overflow-x: hidden; }
+  body { font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #FFFFFF; color: #22201c; padding: 12px; }
+  .ar { border-radius: 16px; overflow: hidden; border: 1px solid #cfd8c9; background: #f3f6ef; }
+  .ar-head { padding: 18px 18px 6px; }
+  .ar-kick { display: inline-block; font-size: 10.5px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; color: #123D18; background: #FFE600; padding: 3px 8px; border-radius: 4px; }
+  .ar-head h1 { font-family: 'Merriweather', Georgia, serif; font-size: 21px; line-height: 1.3; margin-top: 9px; color: #1B5E20; }
+  .ar-head p { font-size: 13px; line-height: 1.6; color: #45493f; margin-top: 7px; max-width: 760px; }
+  .ar-rail { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 5px; margin: 10px 12px 0; }
+  .ar-rail button { font-family: inherit; font-size: 11.5px; font-weight: 800; padding: 8px 4px; border-radius: 10px; border: 2px solid #c3cdbb; background: #fff; color: #5b6352; cursor: pointer; line-height: 1.2; min-width: 0; overflow-wrap: anywhere; }
+  .ar-rail button[aria-current=step] { background: #1B5E20; border-color: #1B5E20; color: #fff; }
+  .ar-rail button.done { border-color: #7CB342; color: #1B5E20; }
+  .ar-rail button:focus-visible, .ar-opt input:focus-visible + span, .ar-nav button:focus-visible { outline: 3px solid #FFE600; outline-offset: 1px; }
+  .ar-box { margin: 12px 12px 0; background: #fff; border: 1px solid #d9e1d2; border-radius: 14px; padding: 12px 14px; }
+  .ar-box[hidden] { display: none; }
+  .ar-q { font-family: 'Merriweather', Georgia, serif; font-size: 15px; color: #123D18; line-height: 1.4; }
+  .ar-hint { font-size: 12px; color: #5b6352; line-height: 1.5; margin: 4px 0 10px; }
+  .ar-opts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+  .ar-opt { display: block; position: relative; cursor: pointer; }
+  .ar-opt input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+  .ar-opt span { display: block; height: 100%; padding: 10px 11px; border-radius: 12px; border: 2px solid #d3dccb; background: #fbfcf9; font-size: 12.5px; line-height: 1.45; color: #393d33; }
+  .ar-opt span b { display: block; font-size: 13.5px; color: #123D18; margin-bottom: 2px; }
+  .ar-opt span i { display: block; font-style: normal; font-size: 11px; font-weight: 800; color: #5b6352; margin-top: 4px; letter-spacing: .02em; }
+  .ar-opt input:checked + span { border-color: #1B5E20; background: #E8F5E9; }
+  .ar-nav { display: flex; justify-content: space-between; gap: 8px; margin-top: 12px; }
+  .ar-nav button { font-family: inherit; font-size: 13px; font-weight: 800; padding: 10px 14px; border-radius: 10px; border: 2px solid #1B5E20; background: #1B5E20; color: #fff; cursor: pointer; }
+  .ar-nav button.ghost { background: #fff; color: #1B5E20; }
+  .ar-viz { margin: 12px 12px 0; background: #fff; border: 1px solid #d9e1d2; border-radius: 14px; padding: 10px; }
+  #tl { display: block; width: 100%; height: 250px; }
+  .ar-key { display: flex; flex-wrap: wrap; gap: 4px 14px; font-size: 11px; color: #45493f; margin: 6px 4px 0; }
+  .ar-key span { display: inline-flex; align-items: center; gap: 5px; }
+  .ar-key i { width: 14px; height: 10px; border-radius: 3px; display: inline-block; }
+  .ar-out { margin: 12px 12px 0; padding: 13px 15px; border-radius: 14px; background: #123D18; color: #eef3ea; font-size: 13px; line-height: 1.6; }
+  .ar-out h2 { font-family: 'Merriweather', Georgia, serif; font-size: 18px; color: #FFE600; margin-bottom: 4px; }
+  .ar-out p + p { margin-top: 7px; }
+  .ar-out strong { color: #fff; }
+  .ar-out a { color: #FFE600; }
+  .ar-foot { padding: 12px 16px 16px; font-size: 11px; line-height: 1.55; color: #5b6352; }
+  .ar-foot a { color: #1B5E20; }
+  @media (max-width: 560px) {
+    .ar-opts { grid-template-columns: 1fr; }
+    .ar-rail button { font-size: 10.5px; padding: 7px 2px; }
+    .ar-head h1 { font-size: 18.5px; }
+    #tl { height: 270px; }
+  }
+</style>
+</head>
+<body>
+<div class="ar">
+  <div class="ar-head">
+    <span class="ar-kick">Altbau Age Reader</span>
+    <h1>When was your Berlin building built?</h1>
+    <p>Stand on the pavement, then in the stairwell, the courtyard and your own hallway. Pick what you see at each stop. Every clue has a span of years when Berlin built that way, and the timeline keeps only the years all your clues agree on.</p>
+  </div>
+  <div class="ar-rail" id="rail"></div>
+  <div class="ar-box" id="stage"></div>
+  <div class="ar-viz">
+    <canvas id="tl" aria-label="Timeline of your clues from 1850 to 2000, with the years they share highlighted" role="img"></canvas>
+    <div class="ar-key">
+      <span><i style="background:#7CB342"></i>Years a clue points to</span>
+      <span><i style="background:#FFE600;border:1px solid #c9b400"></i>Years all clues share</span>
+      <span><i style="background:#c3cdbb"></i>Rent index age bands</span>
+    </div>
+  </div>
+  <div class="ar-out" id="out" aria-live="polite"></div>
+  <div class="ar-foot" id="foot"></div>
+</div>
+<script>
+(function () {
+  var FROM = 1850, TO = 2000;
+  var STOPS = [
+    { key: 'facade', label: 'Facade', q: 'Stand across the street. What does the front look like?',
+      hint: 'Look above the ground floor. Shop fronts were often rebuilt and tell you little.',
+      opts: [
+        { id: 'stucco', t: 'Heavy stucco', d: 'Window crowns, garlands, columns or carved heads on every floor.', r: [1865, 1905] },
+        { id: 'curves', t: 'Curves and plants', d: 'Flowing plant ornament, rounded bays, coloured tiles, a less symmetrical front.', r: [1896, 1914] },
+        { id: 'stripped', t: 'Smooth but tall', d: 'Plain render, yet high windows, five storeys and old proportions. Ornament knocked off later.', r: [1860, 1914], stripped: true },
+        { id: 'bands', t: 'Brick or plain bands', d: 'Clean horizontal lines, brick or smooth render, sometimes corner windows or a flat roof.', r: [1919, 1939] },
+        { id: 'gapfill', t: 'Plain, lower floors', d: 'Simple render, small balconies, lower storeys than the old neighbours on either side.', r: [1950, 1972] },
+        { id: 'panels', t: 'Concrete panels', d: 'Large slabs with visible joints between them.', r: [1962, 1990] }
+      ] },
+    { key: 'stairs', label: 'Stairs', q: 'Open the front door. What is in the entrance and stairwell?',
+      hint: 'The front house stair was the showpiece. Compare it with the back stair if there is one.',
+      opts: [
+        { id: 'woodstair', t: 'Wooden stair, painted hall', d: 'Turned wooden banisters, painted or stencilled walls, a stucco ceiling in the hall.', r: [1865, 1914] },
+        { id: 'tiles', t: 'Tiles and glass', d: 'Tiled dado or floor, coloured glass in the stair windows, curved metal rails.', r: [1895, 1914] },
+        { id: 'terrazzo', t: 'Stone or terrazzo', d: 'Hard stairs with a simple metal rail and plain painted walls.', r: [1920, 1975] },
+        { id: 'liftcore', t: 'Concrete stair and a lift', d: 'A lift that looks original to the building, concrete stairs, no ornament.', r: [1955, 1995] }
+      ] },
+    { key: 'yard', label: 'Courtyard', q: 'Walk through to the back. What does the courtyard do?',
+      hint: 'This is the hardest clue to fake, because a facade can be redone but nobody moves a wing.',
+      opts: [
+        { id: 'wings', t: 'Side wing and back house', d: 'A narrow yard closed by a side wing and a back house, sometimes a second yard behind.', r: [1860, 1914] },
+        { id: 'garden', t: 'Wide garden court', d: 'Wings set around a large green yard, often with its own gateway from the street.', r: [1900, 1932] },
+        { id: 'rows', t: 'Open rows', d: 'No back house at all. Buildings in lines with lawns between them.', r: [1920, 1990] },
+        { id: 'gap', t: 'Front house only', d: 'A courtyard that ends in open space or a car park where wings once stood.', r: [1860, 1990], soft: true }
+      ] },
+    { key: 'flat', label: 'Your flat', q: 'Back inside your own door. What does the flat have?',
+      hint: 'Measure the ceiling if you are not sure. A tape against the door frame is enough.',
+      opts: [
+        { id: 'berlinroom', t: 'A Berliner Zimmer', d: 'A large corner room joining front and side wing, lit by one window onto the yard.', r: [1860, 1914] },
+        { id: 'tall', t: 'Ceilings above 3 metres', d: 'Tall rooms, ceiling rosettes, double doors between rooms.', r: [1865, 1914] },
+        { id: 'mid', t: 'Ceilings near 2.6 to 2.8 metres', d: 'Medium rooms, a bathroom planned in from the start.', r: [1919, 1990] },
+        { id: 'low', t: 'Low ceilings, small kitchen', d: 'About 2.5 metres or less, compact rooms, a narrow kitchen.', r: [1955, 1990] }
+      ] }
+  ];
+  // Build-year bands of the Berlin rent index (Mietspiegel 2026, in force since
+  // 28 May 2026). It calls the first two bands Altbau. The rent check asks which
+  // band the flat falls into, not its exact year. 1973-1990 is split East/West.
+  var BANDS = [
+    { a: 1850, b: 1918, t: 'until 1918' },
+    { a: 1919, b: 1949, t: '1919-1949' },
+    { a: 1950, b: 1964, t: '1950-1964' },
+    { a: 1965, b: 1972, t: '1965-1972' },
+    { a: 1973, b: 1990, t: '1973-1990' },
+    { a: 1991, b: 2000, t: '1991-2001' }
+  ];
+  var picks = {}, currentStep = 0;
+  var rail = document.getElementById('rail'), stage = document.getElementById('stage');
+  var canvas = document.getElementById('tl'), out = document.getElementById('out');
+
+  function optOf(stop) { var id = picks[stop.key]; if (!id) return null; for (var i = 0; i < stop.opts.length; i++) if (stop.opts[i].id === id) return stop.opts[i]; return null; }
+  function chosen() { var a = []; STOPS.forEach(function (s) { var o = optOf(s); if (o) a[a.length] = { stop: s, o: o }; }); return a; }
+  function window_(list) {
+    var hard = list.filter(function (c) { return !c.o.soft; });
+    if (!hard.length) return null;
+    var lo = FROM, hi = TO;
+    hard.forEach(function (c) { lo = Math.max(lo, c.o.r[0]); hi = Math.min(hi, c.o.r[1]); });
+    return { lo: lo, hi: hi, ok: lo <= hi };
+  }
+
+  function drawRail() {
+    var html = '';
+    STOPS.forEach(function (s, i) {
+      html += '<button type="button" data-step="' + i + '"' + (i === currentStep ? ' aria-current="step"' : '') + (picks[s.key] ? ' class="done"' : '') + '>' + s.label + '</button>';
+    });
+    html += '<button type="button" data-step="4"' + (currentStep === 4 ? ' aria-current="step"' : '') + '>Verdict</button>';
+    rail.innerHTML = html;
+  }
+
+  function drawStage() {
+    if (currentStep === 4) {
+      stage.innerHTML = '<div class="ar-q">Your answers</div><div class="ar-hint">Change any stop with the buttons above. The timeline and the verdict below update as you go.</div>' +
+        '<div class="ar-nav"><button type="button" class="ghost" data-go="0">Start again</button></div>';
+      return;
+    }
+    var s = STOPS[currentStep];
+    var html = '<div class="ar-q">' + s.q + '</div><div class="ar-hint">' + s.hint + '</div><div class="ar-opts" role="radiogroup" aria-label="' + s.label + '">';
+    s.opts.forEach(function (o) {
+      html += '<label class="ar-opt"><input type="radio" name="' + s.key + '" value="' + o.id + '"' + (picks[s.key] === o.id ? ' checked' : '') + '><span><b>' + o.t + '</b>' + o.d + '<i>' + (o.soft ? 'Says little on its own' : o.r[0] + ' to ' + o.r[1]) + '</i></span></label>';
+    });
+    html += '<label class="ar-opt"><input type="radio" name="' + s.key + '" value=""' + (!picks[s.key] ? ' checked' : '') + '><span><b>Not sure / skip</b>Leave this stop out of the reading.</span></label>';
+    html += '</div><div class="ar-nav"><button type="button" class="ghost" data-go="' + Math.max(0, currentStep - 1) + '"' + (currentStep === 0 ? ' hidden' : '') + '>Back</button><button type="button" data-go="' + (currentStep + 1) + '">' + (currentStep === 3 ? 'See the verdict' : 'Next stop') + '</button></div>';
+    stage.innerHTML = html;
+  }
+
+  function draw() {
+    var dpr = window.devicePixelRatio || 1, w = canvas.clientWidth, h = canvas.clientHeight;
+    if (!w) return;
+    canvas.width = w * dpr; canvas.height = h * dpr;
+    var g = canvas.getContext('2d'); g.setTransform(dpr, 0, 0, dpr, 0, 0); g.clearRect(0, 0, w, h);
+    var narrow = w < 480, padL = narrow ? 70 : 104, padR = 10, top = 10, bandH = 26, axisY = h - 22;
+    var x = function (yr) { return padL + (yr - FROM) / (TO - FROM) * (w - padL - padR); };
+    var list = chosen(), win = window_(list);
+    var rowH = Math.min(34, (axisY - bandH - 18 - top) / 4);
+    // decade grid
+    g.font = '10px Montserrat, sans-serif'; g.textAlign = 'center';
+    for (var yr = FROM; yr <= TO; yr += 10) {
+      g.strokeStyle = yr % 50 === 0 ? '#c3cdbb' : '#e6ece1'; g.lineWidth = 1;
+      g.beginPath(); g.moveTo(x(yr) + .5, top); g.lineTo(x(yr) + .5, axisY); g.stroke();
+      if (yr % (narrow ? 50 : 25) === 0) { g.fillStyle = '#5b6352'; g.fillText(String(yr), x(yr), h - 8); }
+    }
+    // shared window
+    if (win && win.ok) {
+      g.fillStyle = 'rgba(255,230,0,.55)'; g.fillRect(x(win.lo), top, Math.max(3, x(win.hi + 1) - x(win.lo)), axisY - top);
+      g.strokeStyle = '#c9b400'; g.lineWidth = 1.5; g.strokeRect(x(win.lo) + .5, top + .5, Math.max(3, x(win.hi + 1) - x(win.lo)) - 1, axisY - top - 1);
+    }
+    // one row per stop
+    g.textAlign = 'left'; g.textBaseline = 'middle';
+    STOPS.forEach(function (s, i) {
+      var y = top + i * rowH, o = optOf(s), mid = y + rowH / 2;
+      g.fillStyle = '#22201c'; g.font = '700 11px Montserrat, sans-serif'; g.fillText(s.label, 4, mid);
+      if (!o) { g.fillStyle = '#9aa391'; g.font = '11px Montserrat, sans-serif'; g.fillText('no clue yet', padL + 6, mid); return; }
+      var x0 = x(o.r[0]), x1 = x(o.r[1] + 1);
+      g.fillStyle = o.soft ? '#d9e1d2' : '#7CB342'; roundRect(g, x0, y + 5, Math.max(4, x1 - x0), rowH - 10, 5); g.fill();
+      if (o.stripped) { g.strokeStyle = '#1B5E20'; g.setLineDash([4, 3]); g.lineWidth = 1.5; g.beginPath(); g.moveTo(x(1950), mid); g.lineTo(x(1970), mid); g.stroke(); g.setLineDash([]); }
+      g.fillStyle = '#123D18'; g.font = '700 10.5px Montserrat, sans-serif';
+      var tx = x0 + 6, label = o.t;
+      if (g.measureText(label).width > x1 - x0 - 10) { tx = x1 + 5; if (tx + g.measureText(label).width > w - 2) tx = Math.max(padL, x0 - g.measureText(label).width - 5); }
+      g.fillText(label, tx, mid);
+    });
+    // rent index bands
+    var by = axisY - bandH - 4;
+    BANDS.forEach(function (b, i) {
+      var hit = win && win.ok && win.lo <= b.b && win.hi >= b.a;
+      g.fillStyle = hit ? '#1B5E20' : (i % 2 ? '#d9e1d2' : '#c3cdbb');
+      g.fillRect(x(b.a) + 1, by, x(b.b + 1) - x(b.a) - 2, bandH);
+      g.fillStyle = hit ? '#fff' : '#22201c'; g.font = '700 ' + (narrow ? 8.5 : 10) + 'px Montserrat, sans-serif'; g.textAlign = 'center';
+      var bw = x(b.b + 1) - x(b.a);
+      if (g.measureText(b.t).width < bw - 4) g.fillText(b.t, (x(b.a) + x(b.b + 1)) / 2, by + bandH / 2);
+      g.textAlign = 'left';
+    });
+  }
+  function roundRect(g, x, y, w, h, r) { g.beginPath(); g.moveTo(x + r, y); g.arcTo(x + w, y, x + w, y + h, r); g.arcTo(x + w, y + h, x, y + h, r); g.arcTo(x, y + h, x, y, r); g.arcTo(x, y, x + w, y, r); g.closePath(); }
+
+  function era(lo, hi) {
+    var mid = (lo + hi) / 2;
+    if (hi <= 1918) return mid < 1896 ? 'a Gründerzeit tenement, from the decades when Berlin grew fastest' : 'a late tenement from the last building boom before 1914';
+    if (lo >= 1919 && hi <= 1939) return 'an interwar building, after the city stopped allowing new back houses';
+    if (lo >= 1945 && hi <= 1975) return 'a post-war building, often filling a gap the war left';
+    if (lo >= 1960) return 'a late post-war or prefab building';
+    return 'a building whose clues span more than one era';
+  }
+  function bandsFor(lo, hi) { return BANDS.filter(function (b) { return lo <= b.b && hi >= b.a; }).map(function (b) { return b.t; }); }
+
+  function verdict() {
+    var list = chosen(), win = window_(list), stripped = list.some(function (c) { return c.o.stripped; });
+    var move = '<p><strong>Your next move:</strong> look the address up in the Berlin monument database (Denkmaldatenbank). A listed building comes with its build years. If it is not listed, the district building office keeps the building file, and the city’s building-age map gives the age of your block.</p>';
+    if (!list.length) { out.innerHTML = '<h2>Pick your first clue</h2><p>Start with the facade, or skip straight to the courtyard if the front has been redone. The courtyard is the clue I trust most.</p>'; return; }
+    if (!win) { out.innerHTML = '<h2>Add one more clue</h2><p>A missing back house can mean many things. Pick something from the facade, the stairs or the flat.</p>' + move; return; }
+    if (!win.ok) {
+      out.innerHTML = '<h2>Your clues disagree</h2><p>That usually means the building was changed, not that you misread it: a stripped or rebuilt front on an old plan, a modernised stair, or a post-war house built onto old foundations. <strong>Trust the courtyard and the floor plan over the facade.</strong></p>' + move;
+      return;
+    }
+    var span = win.hi - win.lo, b = bandsFor(win.lo, win.hi);
+    var html = '<h2>Most likely built ' + (span < 3 ? 'around ' + win.lo : 'between ' + win.lo + ' and ' + win.hi) + '</h2>';
+    html += '<p>That reads as ' + era(win.lo, win.hi) + '. Mietspiegel age band: <strong>' + b.join(' or ') + '</strong>' + (win.hi <= 1949 ? ', which the rent index counts as Altbau' : '') + (b.length > 1 ? ', so check the exact year before you use it in a rent check.' : '.') + '</p>';
+    if (stripped) html += '<p>Your smooth front points to a facade stripped of its stucco after the war. The house is older than it looks from the street.</p>';
+    if (list.length < 3) html += '<p>Two clues still leave a wide window. Add the courtyard or the flat to narrow it.</p>';
+    out.innerHTML = html + move;
+  }
+
+  function render() { drawRail(); drawStage(); draw(); verdict(); }
+  rail.addEventListener('click', function (e) { var b = e.target.closest('[data-step]'); if (!b) return; currentStep = Number(b.dataset.step); render(); });
+  stage.addEventListener('click', function (e) { var b = e.target.closest('[data-go]'); if (!b) return; var n = Number(b.dataset.go); if (currentStep === 4 && n === 0) picks = {}; currentStep = Math.min(4, n); render(); });
+  stage.addEventListener('change', function (e) { if (e.target.type !== 'radio') return; var s = STOPS[currentStep]; if (e.target.value) picks[s.key] = e.target.value; else delete picks[s.key]; drawRail(); draw(); verdict(); });
+  document.getElementById('foot').innerHTML = 'Year spans are the usual Berlin building periods for each feature, checked on 14 November 2026 against the city’s planning history and rent index. Single buildings break the pattern, so treat the result as a first reading. Rent index bands: <a href="https://mietspiegel.berlin.de/" target="_blank" rel="noopener">Berliner Mietspiegel</a>. Listed buildings and their dates: <a href="https://denkmaldatenbank.berlin.de/" target="_blank" rel="noopener">Denkmaldatenbank Berlin</a>.';
+  var lastW = 0;
+  if (window.ResizeObserver) new ResizeObserver(function () { var w = canvas.clientWidth; if (w && Math.abs(w - lastW) > 2) { lastW = w; draw(); } }).observe(canvas);
+  render();
+})();
+</script>
+<script src="../js/brand.js"></script>
+</body>
+</html>
