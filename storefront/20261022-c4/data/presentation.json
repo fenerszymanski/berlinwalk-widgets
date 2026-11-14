@@ -2326,5 +2326,51 @@
         "alt": "Teufelsberg Premium unisex T-shirt in Black shown on an adult model. AI model visualization; actual color, fit and print may vary slightly."
       }
     ]
+  },
+  {
+    "id": "dl-moabit-water-ring",
+    "name": "Moabit Water Ring Printable Poster",
+    "place": "Moabit · The water ring",
+    "image": "moabit-water-ring-fullart.jpg",
+    "alt": "Simplified textured view of Moabit with a blue water ring, orange blocks and a cream background. The footer reads Moabit, Berlin.",
+    "typeLine": "DIGITAL DOWNLOAD · 30 × 40 CM",
+    "kind": "digital",
+    "deliveryNote": "Digital download · 1 JPEG print file and a printing guide. No physical item.",
+    "deliveryDetails": "Your download includes one 3:4 sRGB JPEG, 3543 × 4724 px at 300 dpi for 30 × 40 cm, and a printing guide. The same file prints without cropping at 45 × 60 cm and 60 × 80 cm, with softer detail at larger sizes. No physical poster, frame or decor is included.",
+    "group": "stories",
+    "visualCreditsHtml": "<p>Outline reference: © OpenStreetMap contributors, ODbL 1.0 (https://www.openstreetmap.org/copyright). I interpreted the outline as a textured painted composition. Blocks, water widths and bridge marks are simplified and not to scale. The artwork does not document individual streets, buildings or bridges.</p><p>Place reference: the checked research for my Moabit story, including Bezirksamt Mitte and WSA Spree-Havel.</p>",
+    "sizeImages": {
+      "30x40 cm": "moabit-water-ring-30x40.jpg"
+    },
+    "gallery": [
+      {
+        "image": "moabit-water-ring-30x40.jpg",
+        "alt": "Complete artwork at 30 x 40 cm. Digital file only."
+      }
+    ],
+    "wixProductId": "ab0842e0-aa33-97c2-64aa-27367d6c15e0"
+  },
+  {
+    "id": "dl-spichernstrasse-crossing",
+    "name": "Spichernstraße Crossing Printable Poster",
+    "place": "Spichernstraße · The crossing below",
+    "image": "spichernstrasse-crossing-fullart.jpg",
+    "alt": "Textured cutaway of Spichernstraße with a dark city silhouette, a yellow train on the upper level and a lower tunnel beneath. The footer reads Spichernstrasse, Berlin.",
+    "typeLine": "DIGITAL DOWNLOAD · 30 × 40 CM",
+    "kind": "digital",
+    "deliveryNote": "Digital download · 1 JPEG print file and a printing guide. No physical item.",
+    "deliveryDetails": "Your download includes one 3:4 sRGB JPEG, 3543 × 4724 px at 300 dpi for 30 × 40 cm, and a printing guide. The same file prints without cropping at 45 × 60 cm and 60 × 80 cm, with softer detail at larger sizes. No physical poster, frame or decor is included.",
+    "group": "stories",
+    "visualCreditsHtml": "<p>Visual reference: my own side-view diagram for my Spichernstraße story, by Yusuf Ucuz / Walk of Berlin. Line positions in that diagram were informed by © OpenStreetMap contributors, ODbL 1.0 (https://www.openstreetmap.org/copyright). The poster interprets the layer order with simplified buildings, passengers and a yellow train. Depths, platform shapes, vehicles and tunnel dimensions are not to scale.</p><p>Station references: the checked research for my Spichernstraße story, including Bezirksamt Charlottenburg-Wilmersdorf and UrbanRail. The upper and lower platforms opened in different years.</p>",
+    "sizeImages": {
+      "30x40 cm": "spichernstrasse-crossing-30x40.jpg"
+    },
+    "gallery": [
+      {
+        "image": "spichernstrasse-crossing-30x40.jpg",
+        "alt": "Complete artwork at 30 x 40 cm. Digital file only."
+      }
+    ],
+    "wixProductId": "aa559932-8166-dfa1-0bf1-98971df5373d"
   }
 ]
