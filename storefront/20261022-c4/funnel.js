@@ -103,13 +103,13 @@ function journeyId() {
 }
 // Consented journey event. Each step once per page load; nothing is sent (and no id made) without analytics consent.
 export function journey(eventName, path, payload = {}) {
-  const k = `journey:${eventName}:${path}`;
-  if (done.has(k)) return false;
   const why = skipReason();
   if (why) { log.skipped.push({journey: eventName, why}); return false; }
   if (!analyticsAllowed()) { log.skipped.push({journey: eventName, why: 'consent'}); return false; }
   const campaign = paidStoreContext();
   const id = campaign?.sessionId || journeyId(); if (!id) return false;
+  const k = `journey:${eventName}:${path}${campaign ? ':'+id : ''}`;
+  if (done.has(k)) return false;
   done.add(k);
   W.__bwStoreJourneyRef = id;
   if(campaign)W.__bwStorePaidJourneyRef=id;
@@ -140,10 +140,10 @@ const money = cents => Math.round(Number(cents) || 0) / 100;
 const CAL_ID = 'd35601ed-3b43-4269-afb9-32e7c3b1e128';
 const CAL_PATH='/product-page/dein-berlin-2027-personalised-wall-calendar';
 let calendarPlaced=false;
-export function calendarStep(step) {
+export function calendarStep(step,details={}) {
  if(['calendar-place','calendar-preview','calendar-add'].includes(step))count(step,CAL_PATH);
  if(step==='calendar-place'){calendarPlaced=true;journey('bw_store_calendar_place',CAL_PATH,{productId:CAL_ID});pixel('trackCustom','CalPlace',{content_ids:[CAL_ID],content_type:'product'},step);}
- if(step==='calendar-preview'&&calendarPlaced)journey('bw_store_calendar_preview',CAL_PATH,{productId:CAL_ID});
+ if(step==='calendar-preview'&&calendarPlaced&&details.ownPhotosReady===true)journey('bw_store_calendar_preview',CAL_PATH,{productId:CAL_ID});
 }
 export function ysStep(step) {
   count(step, YS_PATH);

@@ -9,7 +9,7 @@
   const design2Enabled = (()=>{let choice;try{const q=new URLSearchParams(location.search).get("design");if(q==="2"||q==="0"){choice=q;sessionStorage.setItem("bwStoreDesign",q);}else choice=sessionStorage.getItem("bwStoreDesign");}catch{}return choice==="2"?true:choice==="0"?false:STORE_DESIGN2;})();
   const CALENDAR_LISTED=true;   // Yusuf 13 Nov 2026: "şimdi bunu store'da, menüde vs nerede gerekli varsa koyalım" (12 Nov it was direct link only)
   const esc = value => String(value ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-  const asset = value => {if(value==='gift-week.js'&&/^[a-f0-9]{40}$/.test(window.__WOB_GIFT_WEEK_P22_REF||''))return 'https://cdn.jsdelivr.net/gh/fenerszymanski/berlinwalk-widgets@'+window.__WOB_GIFT_WEEK_P22_REF+'/storefront/20261022-c4/gift-week.js';const target=new URL(value,base);if(/\.(?:js|css|json)$/.test(target.pathname))target.searchParams.set('v',['data/native-bindings.json','data/categories.json','ys-de.js'].includes(value)?'store-tshirts-20261113-v2':value==='funnel.js'?'store-paid-attribution-20261114-v1':value==='design2.js'?'store-tshirts-20261113-v2':'store-design2-fix6-20261113-v1');return target.href;};
+  const asset = value => {if(value==='gift-week.js'&&/^[a-f0-9]{40}$/.test(window.__WOB_GIFT_WEEK_P22_REF||''))return 'https://cdn.jsdelivr.net/gh/fenerszymanski/berlinwalk-widgets@'+window.__WOB_GIFT_WEEK_P22_REF+'/storefront/20261022-c4/gift-week.js';const target=new URL(value,base);if(/\.(?:js|css|json)$/.test(target.pathname))target.searchParams.set('v',['data/native-bindings.json','data/categories.json','ys-de.js'].includes(value)?'store-tshirts-20261113-v2':['funnel.js','calendar-configurator.js'].includes(value)?'store-paid-attribution-20261114-v2':value==='design2.js'?'store-tshirts-20261113-v2':'store-design2-fix6-20261113-v1');return target.href;};
   // Chrome and Safari ignore @font-face inside shadow DOM, so the three faces are registered once on the document with absolute URLs from the element's own base.
   // Gift landing trials showed no LCP gain. Preserve their prior resource and font order.
   const legacyGiftPresentation = () => /^(?:\/de)?\/(?:category\/(?:berlin-christmas-gifts|berlin-geschenke)|gifts|geschenke)\/?$/.test(location.pathname);
@@ -811,7 +811,7 @@
       this.calendarState=this.calendarState||{};
       this.calendarCleanup=this.calendarMod.mountCalendar(host,this.calendarState,{german:this.campaignGerman(),asset,busy:()=>this.busy||this.uncertain,
         available:()=>this.catalogue?.products?.some(p=>p.productId===this.calendarMod.CALENDAR_ID&&p.visible!==false&&p.inStock===true),
-        track:step=>this.measure('calendarStep',step),
+        track:(step,details)=>this.measure('calendarStep',step,details),
         add:async fields=>{if(!this.calendarMod.calendarReady(this.calendarState))throw Error('TAKVIM_HAZIR_DEGIL');if(this.busy||this.uncertain)throw Error('TAKVIM_BEKLIYOR');this.busy=true;try{await this.request('add',{productId:this.calendarMod.CALENDAR_ID,quantity:1,customTextFields:fields});this.measure('calendarStep','calendar-add');this.measure('added',this.model?.products?.find?.(p=>p.wixProductId===this.calendarMod.CALENDAR_ID)||{wixProductId:this.calendarMod.CALENDAR_ID,name:'Dein Berlin 2027',priceCents:3990,currency:'EUR'},1);this.calendarState.added=true;this.notice='Added to your cart';}catch(error){this.error=error.message;throw error;}finally{this.busy=false;this.render();}}
       });
     }
