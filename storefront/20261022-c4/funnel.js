@@ -111,11 +111,13 @@ export function journey(eventName, path, payload = {}) {
   const k = `journey:${eventName}:${path}${campaign ? ':'+id : ''}`;
   if (done.has(k)) return false;
   done.add(k);
-  W.__bwStoreJourneyRef = id;
-  if(campaign)W.__bwStorePaidJourneyRef=id;
+  // Native 1928 cart Ref accepts at most 16 characters; keep the full paid session separate.
+  const orderJourneyId=campaign?id.slice(0,16):id;
+  W.__bwStoreJourneyRef = orderJourneyId;
+  if(campaign)W.__bwStorePaidJourneyRef=orderJourneyId;
   try {
     W.fetch(JOURNEY_ENDPOINT, {method: 'POST', mode: 'cors', credentials: 'omit', cache: 'no-store', keepalive: true, referrerPolicy: 'no-referrer',
-      headers: {'content-type': 'application/json'}, body: JSON.stringify({eventName, eventId: `${id}:${eventName}:${Date.now().toString(36)}`, sessionId: id, journeyId: id,
+      headers: {'content-type': 'application/json'}, body: JSON.stringify({eventName, eventId: `${id}:${eventName}:${Date.now().toString(36)}`, sessionId: id, journeyId: orderJourneyId,
         consentGranted: true, analyticsConsent: true, ...(campaign ? {advertisingConsent:true,utmSource:campaign.utmSource,utmMedium:campaign.utmMedium,utmCampaign:campaign.utmCampaign,utmContent:campaign.utmContent} : {}), pagePath: path, timestamp: new Date().toISOString(), payload:{...payload,...(campaign?.isQa?{isQa:true}:{})}})}).catch(() => {});
     (log.journey = log.journey || []).push(eventName);
     return true;
