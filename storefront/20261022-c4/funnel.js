@@ -169,6 +169,16 @@ function campaignGaEvent(name,data){
  window.gtag('event',name,Object.assign({send_to:'G-4HWBTM07N2',transport_type:'beacon'},data));
 }
 
+// Storefront fall back to Wix's own shop (14 Nov 2026, Yusuf: "yes, add it"): the cart BRIDGE_TIMEOUT of 13 Nov had no record at all.
+// Lane 1: one identifier-free count per page load under the page's own path (step-fallback-timeout / step-fallback-error).
+// GA4: bw_store_fallback with the reason code, only with analytics consent (campaignGaEvent). Nothing else.
+export function fallback(reason) {
+ const page=String(W.location?.pathname||'').replace(/^\/de(?=\/|$)/,'').replace(/\/+$/,'').toLowerCase()||'/';
+ const code=String(reason||'SHOP_UNAVAILABLE').replace(/[^A-Z0-9_]/gi,'').slice(0,40)||'SHOP_UNAVAILABLE';
+ count(code==='BRIDGE_TIMEOUT'?'fallback-timeout':'fallback-error',page);
+ try{campaignGaEvent('bw_store_fallback',{reason:code,page_path:page});}catch(e){}
+}
+
 // Design 2 navigation: aggregate counter only. No query or pixel events.
 export function design2Step(step) {
  if(!['hero','menu-posters','menu-gifts','menu-explore','search','search-empty','recommendation-similar','recommendation-hang-together','recommendation-explore'].includes(step))return;
