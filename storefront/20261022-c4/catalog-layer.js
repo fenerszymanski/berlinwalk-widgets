@@ -39,6 +39,40 @@ const majorToCents = value => {
 };
 const keyOf = product => product.source === 'wix' ? product.wixProductId : product.externalSourceKey;
 
+// Exact native Color strings are keys. An absent garment preview must never
+// fall back to another colour, the old main image or an AI model photograph.
+export function apparelMedia(product, color = product?.apparelMedia?.defaultColor) {
+  if (product?.group !== 'apparel' || !product.apparelMedia) return null;
+  const config = product.apparelMedia;
+  const media = item => item && typeof item.image === 'string' && item.image.trim() && typeof item.alt === 'string' && item.alt.trim();
+  const entry = config.version === 1 && Object.hasOwn(config.colors || {}, color) ? config.colors[color] : null;
+  const lead = media(entry?.lead) && entry.lead.kind === 'garmentPreview' ? entry.lead : null;
+  const seen = new Set(lead ? [lead.image] : []);
+  const gallery = lead ? [...list(config.sharedGallery), ...list(entry.gallery)].filter(item => {
+    if (!media(item) || seen.has(item.image)) return false;
+    seen.add(item.image); return true;
+  }) : [];
+  return {color, lead, gallery, unavailable: !lead};
+}
+
+// The current bridge projects native Size/Color description lines to customText.
+// Also accept raw/native option and variant identities when a caller retains them.
+// Missing or conflicting evidence is deliberately not the product's default Color.
+export function apparelCartMedia(product, line, native) {
+  if (product?.group !== 'apparel' || !product.apparelMedia) return null;
+  const colors = new Set();
+  const add = value => { if (typeof value === 'string' && value) colors.add(value); };
+  for (const field of list(line?.customText)) if (field?.title === 'Color') add(field.value);
+  for (const field of list(line?.descriptionLines)) if (field?.name?.original === 'Color') add(field.plainText?.original);
+  for (const choices of [line?.choices, line?.options?.choices, line?.catalogReference?.options?.choices]) add(choices?.Color);
+  const variantId = line?.catalogReference?.options?.variantId || line?.variantId;
+  if (variantId) {
+    const variant = list(native?.variants).find(row => [row.variantId, row.id, row._id].includes(variantId));
+    add(variant?.choices?.Color);
+  }
+  return apparelMedia(product, colors.size === 1 ? [...colors][0] : null);
+}
+
 export function validateDefinitions(definitions) {
   for (const section of ['categories', 'fulfilments']) {
     if (!Array.isArray(definitions?.[section])) throw new TypeError(`Missing ${section} definitions`);
@@ -71,6 +105,7 @@ export function adaptWixProducts(nativeProducts, presentation = []) {
   return list(nativeProducts).map(native => {
     const wixProductId = first(native.id, native._id);
     const item = meta.get(wixProductId) || {};
+    const defaultMedia = apparelMedia(item);
     const rawPrice = typeof native.price === 'object' ? native.price : null;
     const price = first(native.priceData, rawPrice);
     const major = first(price?.discountedPrice, native.discountedPrice, price?.price, typeof native.price === 'number' ? native.price : null);
@@ -82,6 +117,7 @@ export function adaptWixProducts(nativeProducts, presentation = []) {
     const nativeCategoryIds = first(native.collectionIds, native.categoryIds, []);
     return {
       ...item,
+      ...(defaultMedia ? {image: defaultMedia.lead?.image || '', alt: defaultMedia.lead?.alt || ''} : {}),
       id: item.id || wixProductId,
       source: 'wix',
       approvedForShop: Boolean(item.wixProductId) && item.enabled !== false,
