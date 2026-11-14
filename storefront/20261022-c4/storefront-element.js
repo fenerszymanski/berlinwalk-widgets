@@ -1206,6 +1206,12 @@
       if(height>0&&height!==this.cartBarHeight){this.cartBarHeight=height;this.style.setProperty('--mobile-checkout-height',height+'px');}
       cart.classList.toggle('checkout-at-end',cart.getBoundingClientRect().bottom<=window.innerHeight+1);
     }
+    apparelLocalDiagnostic(action,productId,stage) {
+      try {
+        if(new URLSearchParams(location.search).get('qa')!=='1'||action!=='poster-add'||!this.model?.products?.some(product=>product.wixProductId===productId&&product.group==='apparel'))return;
+        if(new Set(['PACK_MISSING','SELECTION_MISSING','STOCK_UNAVAILABLE','MEDIA_UNAVAILABLE','REQUEST_START']).has(stage))console.warn('WOB_APPAREL_LOCAL',stage);
+      }catch{/* Diagnostics never alter the existing guard or request. */}
+    }
     apparelAddDiagnostic(action,productId,error) {
       if(new URLSearchParams(location.search).get('qa')!=='1'||action!=='poster-add'||!this.model?.products?.some(product=>product.wixProductId===productId&&product.group==='apparel'))return '';
       const codes=new Set(['BRIDGE_NOT_READY','UPDATE_NOT_CONFIRMED','CART_ITEMS_UNAVAILABLE','INVALID_CUSTOM_TEXT','INVALID_CART_RESPONSE','CART_UNAVAILABLE','INVALID_QUANTITY','PRODUCT_NOT_ALLOWED','LINE_NOT_ALLOWED','BRIDGE_DISABLED','CATALOGUE_RESPONSE_INVALID']);
@@ -1280,7 +1286,8 @@
           const product=this.model.products.find(p=>p.wixProductId===button.dataset.product);
           const native=this.catalogue.products.find(p=>p.productId===button.dataset.product);
           const pack=this.posterPack(product,native);
-          if(!pack?.canAdd)throw Error('CART_ITEMS_UNAVAILABLE');
+          if(!pack?.canAdd){this.apparelLocalDiagnostic(action,product.wixProductId,!pack?'PACK_MISSING':!pack.selected?'SELECTION_MISSING':pack.selected.inStock!==true?'STOCK_UNAVAILABLE':'MEDIA_UNAVAILABLE');throw Error('CART_ITEMS_UNAVAILABLE');}
+          this.apparelLocalDiagnostic(action,product.wixProductId,'REQUEST_START');
           await this.request('add',{productId:product.wixProductId,quantity:this.quantity,choices:{...pack.choices}});
           this.lastAddedId=product.wixProductId;this.measure('added',{...product,priceCents:Math.round(pack.selected.price*100)},this.quantity);this.notice='Added to your cart';this.render();
           const dialog=this.shadowRoot.querySelector('dialog');if(this.revealed){dialog.showModal();dialog.querySelector('[data-action="close-drawer"]').focus();}
