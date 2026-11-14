@@ -767,4 +767,5 @@ button.ys-words-tag:focus-visible{outline:2px solid var(--green);outline-offset:
 :host([design2]) .d2-color-swatch[aria-pressed=true] span{outline:2px solid #123d18;outline-offset:2px}
 :host([design2]) .d2-color-swatch:focus-visible{outline:2px solid #123d18;outline-offset:0}
 :host([design2]) .d2-color-name{margin-left:7px;color:#526452;font:400 12px/1.4 'Space Grotesk',sans-serif}
-@media(pointer:coarse){:host([design2]) .d2-color-swatch{width:44px;height:44px}}
+@media(max-width:740px),(pointer:coarse){:host([design2]) .d2-color-swatch{width:44px;height:44px}}
+@media(max-width:740px){:host([design2]) .d2-color-options{gap:0}:host([design2]) .d2-color-name{flex-basis:100%;margin-left:5px}}

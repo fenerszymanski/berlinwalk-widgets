@@ -1863,6 +1863,7 @@ function bwHeaderStoreMode() {
     style.textContent=[
       // Store has its own logo/navigation. Collapse the native masthead only on these routes.
       `${m} bw-site-header,${m} header#SITE_HEADER,${m} #SITE_HEADER-placeholder{display:none!important;height:0!important;min-height:0!important;margin:0!important;padding:0!important}`,
+      `${m} header[id]:has(bw-site-header){display:none!important;height:0!important;min-height:0!important;max-height:0!important;margin:0!important;padding:0!important}`,
       `${m} [id$="_r_comp-kbgajy18"],${m} [id$="_r_comp-mpcjk2pf"],${m} [id$="_r_comp-mpcks8xv"]{display:none!important;height:0!important;min-height:0!important}`,
 
     ].join('');document.head.append(style);
