@@ -1,9 +1,26 @@
 {
-  "updatedAt": "2026-11-13T10:05:19.238Z",
+  "updatedAt": "2026-11-14T09:49:01.841Z",
   "source": "Wix Blog API",
-  "totalPosts": 461,
+  "totalPosts": 462,
   "bookingUrl": "https://www.walkofberlin.com/book-berlin-walking-tour/berlin-then-and-now",
   "allPosts": [
+    {
+      "title": "Berlin Altbau: How to Tell When Your Building Was Built",
+      "slug": "berlin-altbau",
+      "path": "/post/berlin-altbau",
+      "url": "https://www.berlinwalk.com/post/berlin-altbau",
+      "excerpt": "Side wing, back house, a corner room with one window: most of a Berlin building's age is in plain sight. How to read it, and why the rent index cares.",
+      "category": "Living in Berlin",
+      "categorySlug": "living-in-berlin",
+      "topic": "living-in-berlin",
+      "topicLabel": "Living in Berlin",
+      "readTime": "7 min read",
+      "publishedDate": "2026-11-14T09:46:03.270Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_d12935a5438e4407b84952199e3b4f8b~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_d12935a5438e4407b84952199e3b4f8b~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover.jpg",
+      "alt": "A row of restored late 19th-century Berlin apartment houses with pastel stucco facades, bay windows and balconies against a blue sky",
+      "relatedToolSlug": "altbau-age-reader"
+    },
     {
       "title": "Berlin Christmas Market Souvenirs: What Is Worth Carrying Home",
       "slug": "berlin-christmas-market-souvenirs",

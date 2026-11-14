@@ -1,5 +1,5 @@
 {
- "updatedAt": "2026-11-13T10:05:19.964Z",
+ "updatedAt": "2026-11-14T09:49:02.459Z",
  "source": "Wix Blog API + blog-category/categories.json",
  "slug": "living-in-berlin",
  "categoryId": "00af1018-ef7b-465a-93b6-916187609da4",
@@ -8,28 +8,28 @@
  "shelfMode": "curated",
  "shelfLegend": "By the part of life it hits",
  "shelfLegendSub": "Four shelves, because that is how the questions actually arrive",
- "totalPosts": 80,
- "toolCount": 80,
+ "totalPosts": 81,
+ "toolCount": 81,
  "lead": {
-  "title": "Berlin Districts: Which Bezirk You Live In and What It Actually Runs",
-  "slug": "berlin-districts",
-  "path": "/post/berlin-districts",
-  "excerpt": "Twelve districts since 2001, made from twenty-three. Which one you live in, what its offices do for you, and which errands ignore district lines completely.",
-  "minutes": 6,
-  "readTime": "6 min read",
-  "publishedDate": "2026-11-12T10:01:55.909Z",
-  "alt": "The red brick Rotes Rathaus with its clock tower and Berlin flag behind the Neptune Fountain in golden evening light",
-  "lead": "https://static.wixstatic.com/media/5a08a3_d738807c776840c594da5bb477baa0d4~mv2.jpg/v1/fill/w_1400,h_620,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
-  "thumb": "https://static.wixstatic.com/media/5a08a3_d738807c776840c594da5bb477baa0d4~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
-  "square": "https://static.wixstatic.com/media/5a08a3_d738807c776840c594da5bb477baa0d4~mv2.jpg/v1/fill/w_184,h_184,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
-  "shelf": "geld",
+  "title": "Berlin Altbau: How to Tell When Your Building Was Built",
+  "slug": "berlin-altbau",
+  "path": "/post/berlin-altbau",
+  "excerpt": "Side wing, back house, a corner room with one window: most of a Berlin building's age is in plain sight. How to read it, and why the rent index cares.",
+  "minutes": 7,
+  "readTime": "7 min read",
+  "publishedDate": "2026-11-14T09:46:03.270Z",
+  "alt": "A row of restored late 19th-century Berlin apartment houses with pastel stucco facades, bay windows and balconies against a blue sky",
+  "lead": "https://static.wixstatic.com/media/5a08a3_d12935a5438e4407b84952199e3b4f8b~mv2.jpg/v1/fill/w_1400,h_620,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+  "thumb": "https://static.wixstatic.com/media/5a08a3_d12935a5438e4407b84952199e3b4f8b~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+  "square": "https://static.wixstatic.com/media/5a08a3_d12935a5438e4407b84952199e3b4f8b~mv2.jpg/v1/fill/w_184,h_184,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+  "shelf": "wohnung",
   "topic": "living-in-berlin",
-  "figure": "12 districts",
-  "line": "since 2001, made out of 23, and any B&uuml;rgeramt in the city can register your address.",
-  "term": "",
-  "gloss": "",
-  "termCta": "",
-  "tool": "berlin-bezirk-finder"
+  "figure": "5.34 m",
+  "line": "square was all an 1853 courtyard needed to turn a fire engine, and a side wing still dates a house to before 1914.",
+  "term": "Altbau",
+  "gloss": "The old building. In the rent index it means two bands, until 1918 and 1919 to 1949, and the band is one of three things that place your flat in the table.",
+  "termCta": "How old your building is",
+  "tool": "altbau-age-reader"
  },
  "glossary": [
   {
@@ -152,6 +152,17 @@
    "term": "Briefwahl",
    "gloss": "The postal vote. The online form closes on the Tuesday before the election, written applications and walk-in voting at the Briefwahlstelle on the Friday at 15:00, and the red Wahlbrief has to be physically at the Bezirkswahlamt by 18:00 on election day. Postmarked is not there.",
    "termCta": "Which sheets and which deadline are yours"
+  },
+  {
+   "title": "Berlin Altbau: How to Tell When Your Building Was Built",
+   "slug": "berlin-altbau",
+   "path": "/post/berlin-altbau",
+   "readTime": "7 min read",
+   "alt": "A row of restored late 19th-century Berlin apartment houses with pastel stucco facades, bay windows and balconies against a blue sky",
+   "square": "https://static.wixstatic.com/media/5a08a3_d12935a5438e4407b84952199e3b4f8b~mv2.jpg/v1/fill/w_184,h_184,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+   "term": "Altbau",
+   "gloss": "The old building. In the rent index it means two bands, until 1918 and 1919 to 1949, and the band is one of three things that place your flat in the table.",
+   "termCta": "How old your building is"
   }
  ],
  "shelves": [
@@ -160,6 +171,17 @@
    "title": "Wohnung & Nebenkosten",
    "lead": "The flat, and what it costs to keep",
    "posts": [
+    {
+     "title": "Berlin Altbau: How to Tell When Your Building Was Built",
+     "slug": "berlin-altbau",
+     "path": "/post/berlin-altbau",
+     "minutes": 7,
+     "alt": "A row of restored late 19th-century Berlin apartment houses with pastel stucco facades, bay windows and balconies against a blue sky",
+     "thumb": "https://static.wixstatic.com/media/5a08a3_d12935a5438e4407b84952199e3b4f8b~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+     "line": "square was all an 1853 courtyard needed to turn a fire engine, and a side wing still dates a house to before 1914.",
+     "figure": "5.34 m",
+     "tool": "altbau-age-reader"
+    },
     {
      "title": "Berlin Address Books: How to Find Out Who Lived in Your Building",
      "slug": "berlin-address-books",

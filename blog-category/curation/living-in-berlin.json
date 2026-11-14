@@ -473,6 +473,15 @@
       "figure": "12 districts",
       "line": "since 2001, made out of 23, and any B&uuml;rgeramt in the city can register your address.",
       "tool": "berlin-bezirk-finder"
+    },
+    "berlin-altbau": {
+      "shelf": "wohnung",
+      "figure": "5.34 m",
+      "line": "square was all an 1853 courtyard needed to turn a fire engine, and a side wing still dates a house to before 1914.",
+      "term": "Altbau",
+      "gloss": "The old building. In the rent index it means two bands, until 1918 and 1919 to 1949, and the band is one of three things that place your flat in the table.",
+      "termCta": "How old your building is",
+      "tool": "altbau-age-reader"
     }
   }
 }
