@@ -1206,20 +1206,7 @@
       if(height>0&&height!==this.cartBarHeight){this.cartBarHeight=height;this.style.setProperty('--mobile-checkout-height',height+'px');}
       cart.classList.toggle('checkout-at-end',cart.getBoundingClientRect().bottom<=window.innerHeight+1);
     }
-    apparelLocalDiagnostic(action,productId,stage) {
-      try {
-        if(new URLSearchParams(location.search).get('qa')!=='1'||action!=='poster-add'||!this.model?.products?.some(product=>product.wixProductId===productId&&product.group==='apparel'))return;
-        if(new Set(['PACK_MISSING','SELECTION_MISSING','STOCK_UNAVAILABLE','MEDIA_UNAVAILABLE','REQUEST_START']).has(stage))console.warn('WOB_APPAREL_LOCAL',stage);
-      }catch{/* Diagnostics never alter the existing guard or request. */}
-    }
-    apparelAddDiagnostic(action,productId,error) {
-      if(new URLSearchParams(location.search).get('qa')!=='1'||action!=='poster-add'||!this.model?.products?.some(product=>product.wixProductId===productId&&product.group==='apparel'))return '';
-      const codes=new Set(['BRIDGE_NOT_READY','UPDATE_NOT_CONFIRMED','CART_ITEMS_UNAVAILABLE','INVALID_CUSTOM_TEXT','INVALID_CART_RESPONSE','CART_UNAVAILABLE','INVALID_QUANTITY','PRODUCT_NOT_ALLOWED','LINE_NOT_ALLOWED','BRIDGE_DISABLED','CATALOGUE_RESPONSE_INVALID']);
-      const code=typeof error?.message==='string'&&codes.has(error.message)?error.message:'';
-      if(code)console.warn('WOB_APPAREL_ADD_REJECTED',code);
-      return code;
-    }
-    errorMessage() {if(this.uncertain)return 'The cart update could not be confirmed. Refresh the cart and check it before trying again.';return ({BF_COUPON_CONFLICT:'Black Friday prices cannot be combined with a code. Remove the code from your cart, then check delivery again.',CART_UNAVAILABLE:'The cart could not be read. You can still open the original cart.',INVALID_DESTINATION:'Enter a valid destination.',NO_SHIPPING_AVAILABLE:'No delivery method is available for this address.',CART_CHANGED:'Your cart changed. Check delivery again.',BRIDGE_DISABLED:'The shop is temporarily unavailable.'})[this.error]||('This action could not be completed. Check your cart or try again.'+(this.errorDiagnostic&&new URLSearchParams(location.search).get('qa')==='1'?' ['+this.errorDiagnostic+']':''));}
+    errorMessage() {if(this.uncertain)return 'The cart update could not be confirmed. Refresh the cart and check it before trying again.';return ({BF_COUPON_CONFLICT:'Black Friday prices cannot be combined with a code. Remove the code from your cart, then check delivery again.',CART_UNAVAILABLE:'The cart could not be read. You can still open the original cart.',INVALID_DESTINATION:'Enter a valid destination.',NO_SHIPPING_AVAILABLE:'No delivery method is available for this address.',CART_CHANGED:'Your cart changed. Check delivery again.',BRIDGE_DISABLED:'The shop is temporarily unavailable.'})[this.error]||'This action could not be completed. Check your cart or try again.';}
     // Any address edit clears the visible quote, total and delivery choice at once and bumps quoteRevision, so a late quote response for the old address is discarded in receive().
     input(event) {const field=event.target;if(!field.closest?.('[data-address-form]')||!field.name)return;this.destination[field.name]=field.value;this.selection=null;this.quote=null;this.quoteError='';this.failedKey='';this.choiceList=null;this.quoteRevision++;this.refreshCartUi();}
     // A committed edit (blur, Enter, "Done" on a phone keyboard) skips the remaining debounce.
@@ -1276,7 +1263,7 @@
       if(action==='native-fallback'){releaseNative();this.request('native-fallback').catch(()=>{});return;}
       if(this.busy)return;
       if(this.uncertain&&action!=='refresh'){this.error='UPDATE_NOT_CONFIRMED';this.render();return;}
-      this.busy=true;this.error='';this.errorDiagnostic='';this.render();
+      this.busy=true;this.error='';this.render();
       try {
         if(action==='refresh')await this.request('get');
         if(action==='gift-add'){const offer=this.gift?.giftGateOpen()?this.giftOffersAll().find(item=>item.kind===button.dataset.giftKind):null;if(!offer)throw Error('CART_ITEMS_UNAVAILABLE');await this.request('add',{productId:offer.id,quantity:1});this.measure('added',{wixProductId:offer.id,name:offer.info.name,priceCents:Math.round(offer.price*100),currency:offer.row.currency},1);this.lastAddedId=offer.id;this.notice='Added to your cart';this.render();this.afterYsAdd(true);}
@@ -1286,8 +1273,7 @@
           const product=this.model.products.find(p=>p.wixProductId===button.dataset.product);
           const native=this.catalogue.products.find(p=>p.productId===button.dataset.product);
           const pack=this.posterPack(product,native);
-          if(!pack?.canAdd){this.apparelLocalDiagnostic(action,product.wixProductId,!pack?'PACK_MISSING':!pack.selected?'SELECTION_MISSING':pack.selected.inStock!==true?'STOCK_UNAVAILABLE':'MEDIA_UNAVAILABLE');throw Error('CART_ITEMS_UNAVAILABLE');}
-          this.apparelLocalDiagnostic(action,product.wixProductId,'REQUEST_START');
+          if(!pack?.canAdd)throw Error('CART_ITEMS_UNAVAILABLE');
           await this.request('add',{productId:product.wixProductId,quantity:this.quantity,choices:{...pack.choices}});
           this.lastAddedId=product.wixProductId;this.measure('added',{...product,priceCents:Math.round(pack.selected.price*100)},this.quantity);this.notice='Added to your cart';this.render();
           const dialog=this.shadowRoot.querySelector('dialog');if(this.revealed){dialog.showModal();dialog.querySelector('[data-action="close-drawer"]').focus();}
@@ -1296,7 +1282,7 @@
         if(action==='minus'||action==='plus'){const line=this.cart?.lines.find(line=>line.lineItemId===button.dataset.line);if(line)await this.request('update',{lineItemId:line.lineItemId,quantity:line.quantity+(action==='plus'?1:-1)});}
         if(action==='remove')await this.request('remove',{lineItemId:button.dataset.line});
         if(action==='checkout'&&this.quote?.state==='READY'){this.measure('checkout',this.cart);try{sessionStorage.setItem('bwStoreCheckout',JSON.stringify({at:Date.now(),lang:deCart(this.cartGerman())?'de':'en',digital:this.digitalOnly()}));}catch(e){}await this.request('checkout',{quoteInput:this.quoteInput()});}
-      }catch(error){this.error=error.message;this.errorDiagnostic=this.apparelAddDiagnostic(action,button.dataset.product,error);}finally{this.busy=false;this.render();}
+      }catch(error){this.error=error.message;}finally{this.busy=false;this.render();}
     }
   }
   customElements.define('bw-storefront', BWStorefront);
