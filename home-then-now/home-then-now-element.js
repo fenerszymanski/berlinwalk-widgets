@@ -180,8 +180,8 @@
     "live": [
       {
         "tag": "THIS SEASON",
-        "title": "Christmas markets: which ones are actually worth it",
-        "href": "https://www.walkofberlin.com/post/best-christmas-markets-berlin-2026",
+        "title": "Berlin Christmas market souvenirs: what fits in your bag",
+        "href": "https://walkofberlin.com/post/berlin-christmas-market-souvenirs",
         "img": "assets/blog-best-christmas-markets-berlin-2026.webp"
       },
       {
