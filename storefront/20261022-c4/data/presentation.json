@@ -2730,5 +2730,28 @@
       }
     ],
     "wixProductId": "aa559932-8166-dfa1-0bf1-98971df5373d"
+  },
+  {
+    "id": "dl-wedding-fields",
+    "name": "Wedding Fields Printable Poster",
+    "place": "Wedding · The name in the fields",
+    "image": "wedding-fields-fullart.jpg",
+    "alt": "Imagined painted landscape of a blue stream winding through green and golden fields towards a small mill and low farm buildings. The footer reads Wedding, Berlin.",
+    "typeLine": "DIGITAL DOWNLOAD · 30 × 40 CM",
+    "kind": "digital",
+    "deliveryNote": "Digital download · 1 JPEG print file and a printing guide. No physical item.",
+    "deliveryDetails": "Your download includes one 3:4 sRGB JPEG, 3543 × 4724 px at 300 dpi for 30 × 40 cm, and a printing guide. The same file prints without cropping at 45 × 60 cm and 60 × 80 cm, with softer detail at larger sizes. No physical poster, frame or decor is included.",
+    "group": "stories",
+    "visualCreditsHtml": "<p>Place and history references: the checked research for my Wedding story, including Bezirksamt Mitte and Markus G. Reitzig, Berlin-Wedding in der Zeit der Hochindustrialisierung (1885–1914), Humboldt-Universität zu Berlin, 2006.</p><p>Visual reference studies: J. F. Schneider, Plan von Berlin, 1802, public domain, via Wikimedia Commons; Fridolin freudenfett (Peter Kuley), Wedding Panke an der Chausseestraße, 2012, CC BY-SA 3.0; Ernst Müller von Sondermühlen, Weddinghof, around 1885, via Wikimedia Commons. Commons marks the drawing as public domain, but the artist's death date is not recorded there and the file also lists CC BY-SA 4.0.</p><p>I interpreted these references as an imagined painted landscape. The river bend, mill, farm buildings, fields and light are simplified. The poster does not reconstruct the village as it looked in 1251. No source photograph or drawing is reproduced in the artwork.</p>",
+    "sizeImages": {
+      "30x40 cm": "wedding-fields-30x40.jpg"
+    },
+    "gallery": [
+      {
+        "image": "wedding-fields-30x40.jpg",
+        "alt": "Complete artwork at 30 x 40 cm. Digital file only."
+      }
+    ],
+    "wixProductId": "cada2892-2286-d52d-f313-650c3719b0c7"
   }
 ]
