@@ -1,0 +1,105 @@
+{
+  "version": 1,
+  "families": [
+    {
+      "family": "berlin-in-pink",
+      "posters": [
+        "ed-print-02-pink"
+      ],
+      "tees": [
+        "shirt-berlin-in-pink-classic",
+        "shirt-berlin-in-pink-premium"
+      ]
+    },
+    {
+      "family": "berlin-uhr",
+      "posters": [
+        "bu"
+      ],
+      "tees": [
+        "shirt-berlin-uhr-classic",
+        "shirt-berlin-uhr-premium"
+      ]
+    },
+    {
+      "family": "teufelsberg",
+      "posters": [
+        "ed-print-09-teufelsberg"
+      ],
+      "tees": [
+        "shirt-teufelsberg-classic",
+        "shirt-teufelsberg-premium"
+      ]
+    },
+    {
+      "family": "tempelhof",
+      "posters": [
+        "ed-print-01-tempelhof"
+      ],
+      "tees": [
+        "shirt-tempelhof-classic",
+        "shirt-tempelhof-premium"
+      ]
+    },
+    {
+      "family": "berolina-modernist",
+      "posters": [
+        "pr-berolina-modernist"
+      ],
+      "tees": [
+        "shirt-berolina-modernist-classic",
+        "shirt-berolina-modernist-premium"
+      ]
+    },
+    {
+      "family": "spaeti",
+      "posters": [
+        "ed-print-04-spaeti"
+      ],
+      "tees": [
+        "shirt-spaeti-classic",
+        "shirt-spaeti-premium"
+      ]
+    },
+    {
+      "family": "currywurst",
+      "posters": [
+        "ed-print-10-currywurst"
+      ],
+      "tees": [
+        "shirt-currywurst-classic",
+        "shirt-currywurst-premium"
+      ]
+    },
+    {
+      "family": "marzahn",
+      "posters": [
+        "ed-print-08-marzahn"
+      ],
+      "tees": [
+        "shirt-marzahn-classic",
+        "shirt-marzahn-premium"
+      ]
+    },
+    {
+      "family": "a-window-in-berlin",
+      "posters": [
+        "ed-print-07-window"
+      ],
+      "tees": [
+        "shirt-a-window-in-berlin-classic",
+        "shirt-a-window-in-berlin-premium"
+      ]
+    },
+    {
+      "family": "schoenhauser-allee",
+      "posters": [
+        "ed-print-05-schoenhauser"
+      ],
+      "tees": [
+        "shirt-schoenhauser-allee-classic",
+        "shirt-schoenhauser-allee-premium"
+      ]
+    }
+  ]
+}

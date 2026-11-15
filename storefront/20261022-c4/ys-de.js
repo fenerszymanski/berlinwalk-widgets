@@ -80,7 +80,12 @@ export const DESIGN2_TEXT = Object.freeze({
   "All Landmarks posters": "Alle Wahrzeichen-Poster",
   "All Berlin Stories posters": "Alle Poster mit Berliner Geschichten",
   "All Districts posters": "Alle Bezirks-Poster",
-  "All poster sets": "Alle Poster-Sets"
+  "All poster sets": "Alle Poster-Sets",
+  "Search the store…": "Im Shop suchen…",
+  "Clothing": "Kleidung",
+  "Three Berlin designs. Classic and Premium unisex T-shirts, made to order.": "Drei Berlin-Motive. Classic- und Premium-Unisex-T-Shirts, auf Bestellung gefertigt.",
+  "Shop Clothing": "Kleidung ansehen",
+  "All T-shirts": "Alle T-Shirts"
 });
 // German layer for the 1928 page (30 Oct 2026, press launch). Loaded with ?lang=de (a /de/ page gets it too). It rewrites visible text inside the
 // storefront's shadow root and never touches cart, price or order logic, so a miss simply leaves that string in English.

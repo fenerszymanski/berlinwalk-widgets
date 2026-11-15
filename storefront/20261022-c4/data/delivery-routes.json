@@ -1,0 +1,138 @@
+{
+  "version": 2,
+  "checkedAt": "2026-11-15",
+  "validThrough": "2026-12-31",
+  "destination": "DE",
+  "timeZone": "Europe/Berlin",
+  "cutoffHour": 12,
+  "posterflowEnabled": true,
+  "christmas": {
+    "year": 2026,
+    "gelatoOrderBy": "2026-12-16",
+    "gelatoLatestArrival": "2026-12-16",
+    "posterflowLatestArrival": "2026-12-23",
+    "note": "Gelato published order-by deadline is 16 Dec Economy for all relevant DE categories. For the requested stricter tick, BOTH approval/processing date and latest arrival must be <= 16 Dec. Posterflow has no published 2026 cutoff found; fallback latest arrival <= 23 Dec, 1 calendar day before Christmas Eve. Tick is an estimate, never a guarantee. Calendar also retains its earlier 10 Dec store deadline."
+  },
+  "holidays": {
+    "policy": "Conservative union of German national and regional public holidays; also skip 24 and 31 Dec operational closures. German-destination estimate, not a claim of German manufacture. Gelato can route through PL/CZ; include their relevant public holidays too.",
+    "source": "https://www.bundesbank.de/resource/blob/764518/84d26dc9e3e0cc1e6e3042290df060ff/472B63F073F071307366337C94F8C870/feiertage-in-deutschland-1-data.pdf",
+    "additionalSources": [
+      "https://mzv.gov.cz/oslo/en/consular_and_visa_services/public_holidays_the_czech_republic/index.html",
+      "https://www.gov.pl/web/your-europe/working-time-setting-and-settlement"
+    ]
+  },
+  "sources": {
+    "gelatoDelivery": "https://support.gelato.com/en/articles/8996050-how-quickly-do-you-deliver",
+    "gelato2026": "https://www.gelato.com/de/last-order-dates",
+    "posterflow": "output/research/pod-providers-20261111/posterflow-reply/Posterflow Das Wichtigste in Kürze V2.txt (Sep 2026, production same/next day before noon, peak delays possible; no secrets copied)",
+    "posterflowReceipt": "content/products/your-street-1928/orders/posterflow/README.md: 12 Nov order, 13 Nov completed, 14 Nov delivered",
+    "routing": "scripts/ys1928-fulfil.mjs pfEligible + content/products/your-street-1928/orders/posterflow/route.json enabled=true",
+    "poster": "content/products/your-street-1928/RUNBOOK_TR.md: 26 Oct DE quote total 2-4 working days after manual approval",
+    "mounted": "output/production/ys1928-framed-20261111/gelato/quote-DE.json; live Wix DE profile 5-8 working days incl processing",
+    "tee": [
+      {
+        "source": "content/products/berlin-tshirts-launch-20261113/private/QUOTE_classic_black_ALL_SIZES.json",
+        "country": "DE",
+        "min": 5,
+        "max": 7
+      },
+      {
+        "source": "content/products/berlin-tshirts-launch-20261113/private/QUOTE_classic_natural_ALL_SIZES.json",
+        "country": "DE",
+        "min": 6,
+        "max": 10
+      },
+      {
+        "source": "content/products/berlin-tshirts-launch-20261113/private/QUOTE_prm_black_ALL_SIZES.json",
+        "country": "PL",
+        "min": 6,
+        "max": 7
+      }
+    ],
+    "shipping": "SHIPPING_AUDIT.json live read 15 Nov 2026; free rates in DE, tees DE-only",
+    "digital": "13 Nov 2026 operational receipt: ys1928-digital-watch every120s, triggers fulfilment; not a two-minute guarantee"
+  },
+  "routes": {
+    "gelato-poster": {
+      "provider": "Gelato",
+      "approvalBusinessDays": 0,
+      "bufferBusinessDays": 1,
+      "basis": "15 Nov individual Berlin quotes, normal shipping, production+delivery calendar total; +1 German delivery business day margin. Requote after7 days. See B2 QUOTE files.",
+      "productionShippingCalendarDays": [
+        2,
+        4
+      ],
+      "quotedAt": "2026-11-15",
+      "validThrough": "2026-11-22"
+    },
+    "gelato-tee": {
+      "provider": "Gelato",
+      "approvalBusinessDays": 0,
+      "bufferBusinessDays": 1,
+      "basis": "15 Nov individual Berlin quotes, normal shipping, production+delivery calendar total; +1 German delivery business day margin. Requote after7 days. See B2 QUOTE files.",
+      "productionShippingCalendarDays": [
+        4,
+        5
+      ],
+      "quotedAt": "2026-11-15",
+      "validThrough": "2026-11-22"
+    },
+    "gelato-mounted": {
+      "provider": "Gelato",
+      "productionShippingBusinessDays": [
+        4,
+        7
+      ],
+      "approvalBusinessDays": 1,
+      "bufferBusinessDays": 1,
+      "basis": "11 Nov DE quotes and live 5-8 business-day profile, plus 1 buffer. Production+shipping bundled; approval unbounded, range conditional."
+    },
+    "gelato-calendar": {
+      "provider": "Gelato",
+      "productionShippingBusinessDays": [
+        4,
+        7
+      ],
+      "approvalBusinessDays": 1,
+      "bufferBusinessDays": 1,
+      "basis": "Live Wix DE 5-8 working days includes approval; add 1 buffer. Manual approval unbounded, conditional."
+    },
+    "posterflow-poster": {
+      "provider": "Posterflow",
+      "productionBusinessDays": [
+        0,
+        2
+      ],
+      "shippingBusinessDays": [
+        1,
+        2
+      ],
+      "approvalBusinessDays": 1,
+      "bufferBusinessDays": 1,
+      "basis": "Provider same-day production before12, allow peak2; DHL sample next-day, conservative1-2 shipping +1buffer. Approval not SLA."
+    },
+    "posterflow-frame": {
+      "provider": "Posterflow",
+      "productionBusinessDays": [
+        1,
+        3
+      ],
+      "shippingBusinessDays": [
+        1,
+        2
+      ],
+      "approvalBusinessDays": 1,
+      "bufferBusinessDays": 1,
+      "basis": "Provider next-day production before12, allow peak3; DHL conservative1-2 +1buffer; framed sample not yet tested. Approval not SLA."
+    }
+  },
+  "shippingProfiles": {
+    "1fd70e94-72bc-4712-bf5e-a6265959c8b3": true,
+    "44b6f79a-b246-4219-a43a-365fdbf917a1": true,
+    "515d1f09-f233-4fd1-920a-c365ed2e8ddf": true,
+    "a42775b0-be4e-4ebc-995f-427efa385b3c": true,
+    "e14f5be8-effd-4d3b-ab67-2a8c1a077754": true,
+    "f277153c-6055-48aa-9052-79fc84cd09f5": true
+  },
+  "updatedAt": "2026-11-15"
+}

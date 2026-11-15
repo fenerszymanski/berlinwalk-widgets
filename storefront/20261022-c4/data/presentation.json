@@ -2841,5 +2841,769 @@
       }
     ],
     "wixProductId": "cada2892-2286-d52d-f313-650c3719b0c7"
+  },
+  {
+    "id": "shirt-tempelhof-classic",
+    "name": "Tempelhof Classic T-shirt",
+    "place": "Tempelhof · Berlin",
+    "image": "tshirts-20261115/garment-previews/tempelhof-classic-black.jpg",
+    "alt": "Tempelhof Classic T-shirt in Black, actual Gelato garment preview",
+    "typeLine": "CLASSIC UNISEX T-SHIRT · FRONT PRINT",
+    "wixProductId": "165ec826-3387-4b65-abb1-39ccd04e3ed5",
+    "group": "apparel",
+    "cardSummary": "I keep Tempelhof’s open runway in view, with cyclists crossing beneath the pale blue sky and a kite overhead.",
+    "deliveryNote": "Free shipping within Germany. Made to order.",
+    "deliveryDetails": "Made to order by Gelato. Check the size measurements before ordering.",
+    "gallery": [
+      {
+        "kind": "designDetail",
+        "image": "tshirts-20261115/design-artwork/tempelhof-front-25cm.jpg",
+        "alt": "Tempelhof original rectangular print artwork"
+      }
+    ],
+    "apparelMedia": {
+      "version": 1,
+      "defaultColor": "Black",
+      "sharedGallery": [
+        {
+          "kind": "designDetail",
+          "image": "tshirts-20261115/design-artwork/tempelhof-front-25cm.jpg",
+          "alt": "Tempelhof original rectangular print artwork"
+        }
+      ],
+      "colors": {
+        "Black": {
+          "lead": {
+            "kind": "garmentPreview",
+            "image": "tshirts-20261115/garment-previews/tempelhof-classic-black.jpg",
+            "alt": "Tempelhof Classic T-shirt in Black, actual Gelato garment preview"
+          },
+          "gallery": []
+        }
+      }
+    },
+    "enabled": true
+  },
+  {
+    "id": "shirt-tempelhof-premium",
+    "name": "Tempelhof Premium T-shirt",
+    "place": "Tempelhof · Berlin",
+    "image": "tshirts-20261115/garment-previews/tempelhof-premium-black.jpg",
+    "alt": "Tempelhof Premium T-shirt in Black, actual Gelato garment preview",
+    "typeLine": "PREMIUM UNISEX T-SHIRT · FRONT PRINT",
+    "wixProductId": "6f269552-6848-4219-b767-9d5926c964c0",
+    "group": "apparel",
+    "cardSummary": "I keep Tempelhof’s open runway in view, with cyclists crossing beneath the pale blue sky and a kite overhead.",
+    "deliveryNote": "Free shipping within Germany. Made to order.",
+    "deliveryDetails": "Made to order by Gelato. Check the size measurements before ordering.",
+    "gallery": [
+      {
+        "kind": "designDetail",
+        "image": "tshirts-20261115/design-artwork/tempelhof-front-25cm.jpg",
+        "alt": "Tempelhof original rectangular print artwork"
+      }
+    ],
+    "apparelMedia": {
+      "version": 1,
+      "defaultColor": "Black",
+      "sharedGallery": [
+        {
+          "kind": "designDetail",
+          "image": "tshirts-20261115/design-artwork/tempelhof-front-25cm.jpg",
+          "alt": "Tempelhof original rectangular print artwork"
+        }
+      ],
+      "colors": {
+        "Black": {
+          "lead": {
+            "kind": "garmentPreview",
+            "image": "tshirts-20261115/garment-previews/tempelhof-premium-black.jpg",
+            "alt": "Tempelhof Premium T-shirt in Black, actual Gelato garment preview"
+          },
+          "gallery": []
+        }
+      }
+    },
+    "enabled": true
+  },
+  {
+    "id": "shirt-berolina-modernist-classic",
+    "name": "Berolina — Modernist Classic T-shirt",
+    "place": "Alexanderplatz · Mitte",
+    "image": "tshirts-20261115/garment-previews/berolina-modernist-classic-black.jpg",
+    "alt": "Berolina — Modernist Classic T-shirt in Black, actual Gelato garment preview",
+    "typeLine": "CLASSIC UNISEX T-SHIRT · FRONT PRINT",
+    "wixProductId": "6f180d70-366b-4831-8a09-5236520a1051",
+    "group": "apparel",
+    "cardSummary": "I reimagine Berolina’s welcoming gesture. Unveiled at Alexanderplatz in 1895, she gave Berlin a human form; the copper statue disappeared during the Second World War.",
+    "deliveryNote": "Free shipping within Germany. Made to order.",
+    "deliveryDetails": "Made to order by Gelato. Check the size measurements before ordering.",
+    "gallery": [
+      {
+        "kind": "designDetail",
+        "image": "tshirts-20261115/design-artwork/berolina-modernist-front-25cm.jpg",
+        "alt": "Berolina — Modernist original rectangular print artwork"
+      }
+    ],
+    "apparelMedia": {
+      "version": 1,
+      "defaultColor": "Black",
+      "sharedGallery": [
+        {
+          "kind": "designDetail",
+          "image": "tshirts-20261115/design-artwork/berolina-modernist-front-25cm.jpg",
+          "alt": "Berolina — Modernist original rectangular print artwork"
+        }
+      ],
+      "colors": {
+        "Black": {
+          "lead": {
+            "kind": "garmentPreview",
+            "image": "tshirts-20261115/garment-previews/berolina-modernist-classic-black.jpg",
+            "alt": "Berolina — Modernist Classic T-shirt in Black, actual Gelato garment preview"
+          },
+          "gallery": []
+        }
+      }
+    },
+    "enabled": true
+  },
+  {
+    "id": "shirt-berolina-modernist-premium",
+    "name": "Berolina — Modernist Premium T-shirt",
+    "place": "Alexanderplatz · Mitte",
+    "image": "tshirts-20261115/garment-previews/berolina-modernist-premium-black.jpg",
+    "alt": "Berolina — Modernist Premium T-shirt in Black, actual Gelato garment preview",
+    "typeLine": "PREMIUM UNISEX T-SHIRT · FRONT PRINT",
+    "wixProductId": "059318ae-d56c-4a21-9180-1bdc9d306462",
+    "group": "apparel",
+    "cardSummary": "I reimagine Berolina’s welcoming gesture. Unveiled at Alexanderplatz in 1895, she gave Berlin a human form; the copper statue disappeared during the Second World War.",
+    "deliveryNote": "Free shipping within Germany. Made to order.",
+    "deliveryDetails": "Made to order by Gelato. Check the size measurements before ordering.",
+    "gallery": [
+      {
+        "kind": "designDetail",
+        "image": "tshirts-20261115/design-artwork/berolina-modernist-front-25cm.jpg",
+        "alt": "Berolina — Modernist original rectangular print artwork"
+      }
+    ],
+    "apparelMedia": {
+      "version": 1,
+      "defaultColor": "Black",
+      "sharedGallery": [
+        {
+          "kind": "designDetail",
+          "image": "tshirts-20261115/design-artwork/berolina-modernist-front-25cm.jpg",
+          "alt": "Berolina — Modernist original rectangular print artwork"
+        }
+      ],
+      "colors": {
+        "Black": {
+          "lead": {
+            "kind": "garmentPreview",
+            "image": "tshirts-20261115/garment-previews/berolina-modernist-premium-black.jpg",
+            "alt": "Berolina — Modernist Premium T-shirt in Black, actual Gelato garment preview"
+          },
+          "gallery": []
+        }
+      }
+    },
+    "enabled": true
+  },
+  {
+    "id": "shirt-spaeti-classic",
+    "name": "Späti Classic T-shirt",
+    "place": "Berlin · Späti",
+    "image": "tshirts-20261115/garment-previews/spaeti-classic-black.jpg",
+    "alt": "Späti Classic T-shirt in Black, actual Gelato garment preview",
+    "typeLine": "CLASSIC UNISEX T-SHIRT · FRONT PRINT",
+    "wixProductId": "90896b84-fa3a-42f2-8265-916ac810046b",
+    "group": "apparel",
+    "cardSummary": "I set a warmly lit Späti and a bicycle against a rainy, dark green Berlin street at night.",
+    "deliveryNote": "Free shipping within Germany. Made to order.",
+    "deliveryDetails": "Made to order by Gelato. Check the size measurements before ordering.",
+    "gallery": [
+      {
+        "kind": "designDetail",
+        "image": "tshirts-20261115/design-artwork/spaeti-front-25cm.jpg",
+        "alt": "Späti original rectangular print artwork"
+      }
+    ],
+    "apparelMedia": {
+      "version": 1,
+      "defaultColor": "Black",
+      "sharedGallery": [
+        {
+          "kind": "designDetail",
+          "image": "tshirts-20261115/design-artwork/spaeti-front-25cm.jpg",
+          "alt": "Späti original rectangular print artwork"
+        }
+      ],
+      "colors": {
+        "Black": {
+          "lead": {
+            "kind": "garmentPreview",
+            "image": "tshirts-20261115/garment-previews/spaeti-classic-black.jpg",
+            "alt": "Späti Classic T-shirt in Black, actual Gelato garment preview"
+          },
+          "gallery": [
+            {
+              "kind": "modelContext",
+              "image": "tshirts-20261115/street-models/spaeti-black.jpg",
+              "alt": "Späti Black T-shirt in Berlin, supporting visualisation"
+            }
+          ]
+        },
+        "White": {
+          "lead": {
+            "kind": "garmentPreview",
+            "image": "tshirts-20261115/garment-previews/spaeti-classic-white.jpg",
+            "alt": "Späti Classic T-shirt in White, actual Gelato garment preview"
+          },
+          "gallery": []
+        }
+      }
+    },
+    "enabled": true
+  },
+  {
+    "id": "shirt-spaeti-premium",
+    "name": "Späti Premium T-shirt",
+    "place": "Berlin · Späti",
+    "image": "tshirts-20261115/garment-previews/spaeti-premium-black.jpg",
+    "alt": "Späti Premium T-shirt in Black, actual Gelato garment preview",
+    "typeLine": "PREMIUM UNISEX T-SHIRT · FRONT PRINT",
+    "wixProductId": "eb5cc59f-6c39-496a-a6fe-35ec69362082",
+    "group": "apparel",
+    "cardSummary": "I set a warmly lit Späti and a bicycle against a rainy, dark green Berlin street at night.",
+    "deliveryNote": "Free shipping within Germany. Made to order.",
+    "deliveryDetails": "Made to order by Gelato. Check the size measurements before ordering.",
+    "gallery": [
+      {
+        "kind": "designDetail",
+        "image": "tshirts-20261115/design-artwork/spaeti-front-25cm.jpg",
+        "alt": "Späti original rectangular print artwork"
+      }
+    ],
+    "apparelMedia": {
+      "version": 1,
+      "defaultColor": "Black",
+      "sharedGallery": [
+        {
+          "kind": "designDetail",
+          "image": "tshirts-20261115/design-artwork/spaeti-front-25cm.jpg",
+          "alt": "Späti original rectangular print artwork"
+        }
+      ],
+      "colors": {
+        "Black": {
+          "lead": {
+            "kind": "garmentPreview",
+            "image": "tshirts-20261115/garment-previews/spaeti-premium-black.jpg",
+            "alt": "Späti Premium T-shirt in Black, actual Gelato garment preview"
+          },
+          "gallery": [
+            {
+              "kind": "modelContext",
+              "image": "tshirts-20261115/street-models/spaeti-black.jpg",
+              "alt": "Späti Black T-shirt in Berlin, supporting visualisation"
+            }
+          ]
+        },
+        "White": {
+          "lead": {
+            "kind": "garmentPreview",
+            "image": "tshirts-20261115/garment-previews/spaeti-premium-white.jpg",
+            "alt": "Späti Premium T-shirt in White, actual Gelato garment preview"
+          },
+          "gallery": []
+        }
+      }
+    },
+    "enabled": true
+  },
+  {
+    "id": "shirt-currywurst-classic",
+    "name": "Currywurst Classic T-shirt",
+    "place": "Berlin · Currywurst",
+    "image": "tshirts-20261115/garment-previews/currywurst-classic-natural.jpg",
+    "alt": "Currywurst Classic T-shirt in Natural, actual Gelato garment preview",
+    "typeLine": "CLASSIC UNISEX T-SHIRT · FRONT PRINT",
+    "wixProductId": "976e411d-bb30-44c1-a6f4-9d05f5f59e07",
+    "group": "apparel",
+    "cardSummary": "I frame Currywurst in its paper tray with a bread roll against bold yellow and red.",
+    "deliveryNote": "Free shipping within Germany. Made to order.",
+    "deliveryDetails": "Made to order by Gelato. Check the size measurements before ordering.",
+    "gallery": [
+      {
+        "kind": "designDetail",
+        "image": "tshirts-20261115/design-artwork/currywurst-front-25cm.jpg",
+        "alt": "Currywurst original rectangular print artwork"
+      }
+    ],
+    "apparelMedia": {
+      "version": 1,
+      "defaultColor": "Natural",
+      "sharedGallery": [
+        {
+          "kind": "designDetail",
+          "image": "tshirts-20261115/design-artwork/currywurst-front-25cm.jpg",
+          "alt": "Currywurst original rectangular print artwork"
+        }
+      ],
+      "colors": {
+        "Natural": {
+          "lead": {
+            "kind": "garmentPreview",
+            "image": "tshirts-20261115/garment-previews/currywurst-classic-natural.jpg",
+            "alt": "Currywurst Classic T-shirt in Natural, actual Gelato garment preview"
+          },
+          "gallery": [
+            {
+              "kind": "modelContext",
+              "image": "tshirts-20261115/street-models/currywurst-natural.jpg",
+              "alt": "Currywurst Natural T-shirt in Berlin, supporting visualisation"
+            }
+          ]
+        },
+        "Black": {
+          "lead": {
+            "kind": "garmentPreview",
+            "image": "tshirts-20261115/garment-previews/currywurst-classic-black.jpg",
+            "alt": "Currywurst Classic T-shirt in Black, actual Gelato garment preview"
+          },
+          "gallery": []
+        },
+        "White": {
+          "lead": {
+            "kind": "garmentPreview",
+            "image": "tshirts-20261115/garment-previews/currywurst-classic-white.jpg",
+            "alt": "Currywurst Classic T-shirt in White, actual Gelato garment preview"
+          },
+          "gallery": []
+        }
+      }
+    },
+    "enabled": true
+  },
+  {
+    "id": "shirt-currywurst-premium",
+    "name": "Currywurst Premium T-shirt",
+    "place": "Berlin · Currywurst",
+    "image": "tshirts-20261115/garment-previews/currywurst-premium-natural.jpg",
+    "alt": "Currywurst Premium T-shirt in Natural, actual Gelato garment preview",
+    "typeLine": "PREMIUM UNISEX T-SHIRT · FRONT PRINT",
+    "wixProductId": "37cd2f1e-c627-4af0-aac3-bff452e3533e",
+    "group": "apparel",
+    "cardSummary": "I frame Currywurst in its paper tray with a bread roll against bold yellow and red.",
+    "deliveryNote": "Free shipping within Germany. Made to order.",
+    "deliveryDetails": "Made to order by Gelato. Check the size measurements before ordering.",
+    "gallery": [
+      {
+        "kind": "designDetail",
+        "image": "tshirts-20261115/design-artwork/currywurst-front-25cm.jpg",
+        "alt": "Currywurst original rectangular print artwork"
+      }
+    ],
+    "apparelMedia": {
+      "version": 1,
+      "defaultColor": "Natural",
+      "sharedGallery": [
+        {
+          "kind": "designDetail",
+          "image": "tshirts-20261115/design-artwork/currywurst-front-25cm.jpg",
+          "alt": "Currywurst original rectangular print artwork"
+        }
+      ],
+      "colors": {
+        "Natural": {
+          "lead": {
+            "kind": "garmentPreview",
+            "image": "tshirts-20261115/garment-previews/currywurst-premium-natural.jpg",
+            "alt": "Currywurst Premium T-shirt in Natural, actual Gelato garment preview"
+          },
+          "gallery": [
+            {
+              "kind": "modelContext",
+              "image": "tshirts-20261115/street-models/currywurst-natural.jpg",
+              "alt": "Currywurst Natural T-shirt in Berlin, supporting visualisation"
+            }
+          ]
+        },
+        "Black": {
+          "lead": {
+            "kind": "garmentPreview",
+            "image": "tshirts-20261115/garment-previews/currywurst-premium-black.jpg",
+            "alt": "Currywurst Premium T-shirt in Black, actual Gelato garment preview"
+          },
+          "gallery": []
+        },
+        "White": {
+          "lead": {
+            "kind": "garmentPreview",
+            "image": "tshirts-20261115/garment-previews/currywurst-premium-white.jpg",
+            "alt": "Currywurst Premium T-shirt in White, actual Gelato garment preview"
+          },
+          "gallery": []
+        }
+      }
+    },
+    "enabled": true
+  },
+  {
+    "id": "shirt-marzahn-classic",
+    "name": "Marzahn Classic T-shirt",
+    "place": "Marzahn-Hellersdorf · Berlin",
+    "image": "tshirts-20261115/garment-previews/marzahn-classic-natural.jpg",
+    "alt": "Marzahn Classic T-shirt in Natural, actual Gelato garment preview",
+    "typeLine": "CLASSIC UNISEX T-SHIRT · FRONT PRINT",
+    "wixProductId": "27c518e0-e7e8-4ed8-9257-d88bcf28813e",
+    "group": "apparel",
+    "cardSummary": "I set coral, yellow and turquoise apartment blocks above leafy trees, with a cyclist under a blue sky.",
+    "deliveryNote": "Free shipping within Germany. Made to order.",
+    "deliveryDetails": "Made to order by Gelato. Check the size measurements before ordering.",
+    "gallery": [
+      {
+        "kind": "designDetail",
+        "image": "tshirts-20261115/design-artwork/marzahn-front-25cm.jpg",
+        "alt": "Marzahn original rectangular print artwork"
+      }
+    ],
+    "apparelMedia": {
+      "version": 1,
+      "defaultColor": "Natural",
+      "sharedGallery": [
+        {
+          "kind": "designDetail",
+          "image": "tshirts-20261115/design-artwork/marzahn-front-25cm.jpg",
+          "alt": "Marzahn original rectangular print artwork"
+        }
+      ],
+      "colors": {
+        "Natural": {
+          "lead": {
+            "kind": "garmentPreview",
+            "image": "tshirts-20261115/garment-previews/marzahn-classic-natural.jpg",
+            "alt": "Marzahn Classic T-shirt in Natural, actual Gelato garment preview"
+          },
+          "gallery": [
+            {
+              "kind": "modelContext",
+              "image": "tshirts-20261115/street-models/marzahn-natural.jpg",
+              "alt": "Marzahn Natural T-shirt in Berlin, supporting visualisation"
+            }
+          ]
+        },
+        "Black": {
+          "lead": {
+            "kind": "garmentPreview",
+            "image": "tshirts-20261115/garment-previews/marzahn-classic-black.jpg",
+            "alt": "Marzahn Classic T-shirt in Black, actual Gelato garment preview"
+          },
+          "gallery": []
+        },
+        "White": {
+          "lead": {
+            "kind": "garmentPreview",
+            "image": "tshirts-20261115/garment-previews/marzahn-classic-white.jpg",
+            "alt": "Marzahn Classic T-shirt in White, actual Gelato garment preview"
+          },
+          "gallery": []
+        }
+      }
+    },
+    "enabled": true
+  },
+  {
+    "id": "shirt-marzahn-premium",
+    "name": "Marzahn Premium T-shirt",
+    "place": "Marzahn-Hellersdorf · Berlin",
+    "image": "tshirts-20261115/garment-previews/marzahn-premium-natural.jpg",
+    "alt": "Marzahn Premium T-shirt in Natural, actual Gelato garment preview",
+    "typeLine": "PREMIUM UNISEX T-SHIRT · FRONT PRINT",
+    "wixProductId": "73efcc9b-5fb1-4bba-a941-9d699d8f9367",
+    "group": "apparel",
+    "cardSummary": "I set coral, yellow and turquoise apartment blocks above leafy trees, with a cyclist under a blue sky.",
+    "deliveryNote": "Free shipping within Germany. Made to order.",
+    "deliveryDetails": "Made to order by Gelato. Check the size measurements before ordering.",
+    "gallery": [
+      {
+        "kind": "designDetail",
+        "image": "tshirts-20261115/design-artwork/marzahn-front-25cm.jpg",
+        "alt": "Marzahn original rectangular print artwork"
+      }
+    ],
+    "apparelMedia": {
+      "version": 1,
+      "defaultColor": "Natural",
+      "sharedGallery": [
+        {
+          "kind": "designDetail",
+          "image": "tshirts-20261115/design-artwork/marzahn-front-25cm.jpg",
+          "alt": "Marzahn original rectangular print artwork"
+        }
+      ],
+      "colors": {
+        "Natural": {
+          "lead": {
+            "kind": "garmentPreview",
+            "image": "tshirts-20261115/garment-previews/marzahn-premium-natural.jpg",
+            "alt": "Marzahn Premium T-shirt in Natural, actual Gelato garment preview"
+          },
+          "gallery": [
+            {
+              "kind": "modelContext",
+              "image": "tshirts-20261115/street-models/marzahn-natural.jpg",
+              "alt": "Marzahn Natural T-shirt in Berlin, supporting visualisation"
+            }
+          ]
+        },
+        "Black": {
+          "lead": {
+            "kind": "garmentPreview",
+            "image": "tshirts-20261115/garment-previews/marzahn-premium-black.jpg",
+            "alt": "Marzahn Premium T-shirt in Black, actual Gelato garment preview"
+          },
+          "gallery": []
+        },
+        "White": {
+          "lead": {
+            "kind": "garmentPreview",
+            "image": "tshirts-20261115/garment-previews/marzahn-premium-white.jpg",
+            "alt": "Marzahn Premium T-shirt in White, actual Gelato garment preview"
+          },
+          "gallery": []
+        }
+      }
+    },
+    "enabled": true
+  },
+  {
+    "id": "shirt-a-window-in-berlin-classic",
+    "name": "A Window in Berlin Classic T-shirt",
+    "place": "Berlin · apartment facade",
+    "image": "tshirts-20261115/garment-previews/window-in-berlin-classic-natural.jpg",
+    "alt": "A Window in Berlin Classic T-shirt in Natural, actual Gelato garment preview",
+    "typeLine": "CLASSIC UNISEX T-SHIRT · FRONT PRINT",
+    "wixProductId": "7a3d7ddc-6736-4995-85eb-fa66072fb805",
+    "group": "apparel",
+    "cardSummary": "I show a quiet apartment facade at dusk, with one warmly lit window and a plant.",
+    "deliveryNote": "Free shipping within Germany. Made to order.",
+    "deliveryDetails": "Made to order by Gelato. Check the size measurements before ordering.",
+    "gallery": [
+      {
+        "kind": "designDetail",
+        "image": "tshirts-20261115/design-artwork/window-in-berlin-front-25cm.jpg",
+        "alt": "A Window in Berlin original rectangular print artwork"
+      }
+    ],
+    "apparelMedia": {
+      "version": 1,
+      "defaultColor": "Natural",
+      "sharedGallery": [
+        {
+          "kind": "designDetail",
+          "image": "tshirts-20261115/design-artwork/window-in-berlin-front-25cm.jpg",
+          "alt": "A Window in Berlin original rectangular print artwork"
+        }
+      ],
+      "colors": {
+        "Natural": {
+          "lead": {
+            "kind": "garmentPreview",
+            "image": "tshirts-20261115/garment-previews/window-in-berlin-classic-natural.jpg",
+            "alt": "A Window in Berlin Classic T-shirt in Natural, actual Gelato garment preview"
+          },
+          "gallery": [
+            {
+              "kind": "modelContext",
+              "image": "tshirts-20261115/street-models/window-in-berlin-natural.jpg",
+              "alt": "A Window in Berlin Natural T-shirt in Berlin, supporting visualisation"
+            }
+          ]
+        },
+        "Black": {
+          "lead": {
+            "kind": "garmentPreview",
+            "image": "tshirts-20261115/garment-previews/window-in-berlin-classic-black.jpg",
+            "alt": "A Window in Berlin Classic T-shirt in Black, actual Gelato garment preview"
+          },
+          "gallery": []
+        },
+        "White": {
+          "lead": {
+            "kind": "garmentPreview",
+            "image": "tshirts-20261115/garment-previews/window-in-berlin-classic-white.jpg",
+            "alt": "A Window in Berlin Classic T-shirt in White, actual Gelato garment preview"
+          },
+          "gallery": []
+        }
+      }
+    },
+    "enabled": true
+  },
+  {
+    "id": "shirt-a-window-in-berlin-premium",
+    "name": "A Window in Berlin Premium T-shirt",
+    "place": "Berlin · apartment facade",
+    "image": "tshirts-20261115/garment-previews/window-in-berlin-premium-natural.jpg",
+    "alt": "A Window in Berlin Premium T-shirt in Natural, actual Gelato garment preview",
+    "typeLine": "PREMIUM UNISEX T-SHIRT · FRONT PRINT",
+    "wixProductId": "553fe9ff-f874-4722-8985-471bd39e4e77",
+    "group": "apparel",
+    "cardSummary": "I show a quiet apartment facade at dusk, with one warmly lit window and a plant.",
+    "deliveryNote": "Free shipping within Germany. Made to order.",
+    "deliveryDetails": "Made to order by Gelato. Check the size measurements before ordering.",
+    "gallery": [
+      {
+        "kind": "designDetail",
+        "image": "tshirts-20261115/design-artwork/window-in-berlin-front-25cm.jpg",
+        "alt": "A Window in Berlin original rectangular print artwork"
+      }
+    ],
+    "apparelMedia": {
+      "version": 1,
+      "defaultColor": "Natural",
+      "sharedGallery": [
+        {
+          "kind": "designDetail",
+          "image": "tshirts-20261115/design-artwork/window-in-berlin-front-25cm.jpg",
+          "alt": "A Window in Berlin original rectangular print artwork"
+        }
+      ],
+      "colors": {
+        "Natural": {
+          "lead": {
+            "kind": "garmentPreview",
+            "image": "tshirts-20261115/garment-previews/window-in-berlin-premium-natural.jpg",
+            "alt": "A Window in Berlin Premium T-shirt in Natural, actual Gelato garment preview"
+          },
+          "gallery": [
+            {
+              "kind": "modelContext",
+              "image": "tshirts-20261115/street-models/window-in-berlin-natural.jpg",
+              "alt": "A Window in Berlin Natural T-shirt in Berlin, supporting visualisation"
+            }
+          ]
+        },
+        "Black": {
+          "lead": {
+            "kind": "garmentPreview",
+            "image": "tshirts-20261115/garment-previews/window-in-berlin-premium-black.jpg",
+            "alt": "A Window in Berlin Premium T-shirt in Black, actual Gelato garment preview"
+          },
+          "gallery": []
+        },
+        "White": {
+          "lead": {
+            "kind": "garmentPreview",
+            "image": "tshirts-20261115/garment-previews/window-in-berlin-premium-white.jpg",
+            "alt": "A Window in Berlin Premium T-shirt in White, actual Gelato garment preview"
+          },
+          "gallery": []
+        }
+      }
+    },
+    "enabled": true
+  },
+  {
+    "id": "shirt-schoenhauser-allee-classic",
+    "place": "Schönhauser Allee · Berlin",
+    "group": "apparel",
+    "typeLine": "CLASSIC UNISEX T-SHIRT · FRONT PRINT",
+    "name": "Schönhauser Allee Classic T-shirt",
+    "image": "tshirts-20261115/garment-previews/schoenhauser-allee-classic-black.jpg",
+    "alt": "Schönhauser Allee Classic T-shirt in Black, actual Gelato garment preview",
+    "wixProductId": "31ff8ee9-d597-4003-98ad-2cd9b1bc60ec",
+    "cardSummary": "I show a yellow train crossing a dark green elevated steel viaduct above the apartment buildings on Schönhauser Allee.",
+    "deliveryNote": "Free shipping within Germany. Made to order.",
+    "deliveryDetails": "Made to order by Gelato. Check the size measurements before ordering.",
+    "gallery": [
+      {
+        "kind": "designDetail",
+        "image": "tshirts-20261115/design-artwork/schoenhauser-allee-front-25cm.jpg",
+        "alt": "Schönhauser Allee original rectangular print artwork"
+      }
+    ],
+    "apparelMedia": {
+      "version": 1,
+      "defaultColor": "Black",
+      "sharedGallery": [
+        {
+          "kind": "designDetail",
+          "image": "tshirts-20261115/design-artwork/schoenhauser-allee-front-25cm.jpg",
+          "alt": "Schönhauser Allee original rectangular print artwork"
+        }
+      ],
+      "colors": {
+        "Black": {
+          "lead": {
+            "kind": "garmentPreview",
+            "image": "tshirts-20261115/garment-previews/schoenhauser-allee-classic-black.jpg",
+            "alt": "Schönhauser Allee Classic T-shirt in Black, actual Gelato garment preview"
+          },
+          "gallery": []
+        },
+        "White": {
+          "lead": {
+            "kind": "garmentPreview",
+            "image": "tshirts-20261115/garment-previews/schoenhauser-allee-classic-white.jpg",
+            "alt": "Schönhauser Allee Classic T-shirt in White, actual Gelato garment preview"
+          },
+          "gallery": []
+        }
+      }
+    },
+    "enabled": true
+  },
+  {
+    "id": "shirt-schoenhauser-allee-premium",
+    "place": "Schönhauser Allee · Berlin",
+    "group": "apparel",
+    "typeLine": "PREMIUM UNISEX T-SHIRT · FRONT PRINT",
+    "name": "Schönhauser Allee Premium T-shirt",
+    "image": "tshirts-20261115/garment-previews/schoenhauser-allee-premium-black.jpg",
+    "alt": "Schönhauser Allee Premium T-shirt in Black, actual Gelato garment preview",
+    "wixProductId": "19352c6a-0eb8-4fef-8078-5c5de1eb081f",
+    "cardSummary": "I show a yellow train crossing a dark green elevated steel viaduct above the apartment buildings on Schönhauser Allee.",
+    "deliveryNote": "Free shipping within Germany. Made to order.",
+    "deliveryDetails": "Made to order by Gelato. Check the size measurements before ordering.",
+    "gallery": [
+      {
+        "kind": "designDetail",
+        "image": "tshirts-20261115/design-artwork/schoenhauser-allee-front-25cm.jpg",
+        "alt": "Schönhauser Allee original rectangular print artwork"
+      }
+    ],
+    "apparelMedia": {
+      "version": 1,
+      "defaultColor": "Black",
+      "sharedGallery": [
+        {
+          "kind": "designDetail",
+          "image": "tshirts-20261115/design-artwork/schoenhauser-allee-front-25cm.jpg",
+          "alt": "Schönhauser Allee original rectangular print artwork"
+        }
+      ],
+      "colors": {
+        "Black": {
+          "lead": {
+            "kind": "garmentPreview",
+            "image": "tshirts-20261115/garment-previews/schoenhauser-allee-premium-black.jpg",
+            "alt": "Schönhauser Allee Premium T-shirt in Black, actual Gelato garment preview"
+          },
+          "gallery": []
+        },
+        "White": {
+          "lead": {
+            "kind": "garmentPreview",
+            "image": "tshirts-20261115/garment-previews/schoenhauser-allee-premium-white.jpg",
+            "alt": "Schönhauser Allee Premium T-shirt in White, actual Gelato garment preview"
+          },
+          "gallery": []
+        }
+      }
+    },
+    "enabled": true
   }
 ]
