@@ -19,6 +19,8 @@ export const DESIGN2_TEXT = Object.freeze({
   "Printed poster": "Gedrucktes Poster",
   "Digital file": "Digitale Datei",
   "Printed / Digital": "Gedruckt / Digital",
+  "Poster": "Poster",
+  "File": "Datei",
   "Browse categories": "Kategorien entdecken",
   "Search the store": "Im Shop suchen",
   "Close search": "Suche schließen",
