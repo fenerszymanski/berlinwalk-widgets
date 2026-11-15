@@ -2882,7 +2882,7 @@
         }
       }
     },
-    "enabled": true
+    "enabled": false
   },
   {
     "id": "shirt-tempelhof-premium",
@@ -2924,7 +2924,7 @@
         }
       }
     },
-    "enabled": true
+    "enabled": false
   },
   {
     "id": "shirt-berolina-modernist-classic",
@@ -2966,7 +2966,7 @@
         }
       }
     },
-    "enabled": true
+    "enabled": false
   },
   {
     "id": "shirt-berolina-modernist-premium",
@@ -3008,7 +3008,7 @@
         }
       }
     },
-    "enabled": true
+    "enabled": false
   },
   {
     "id": "shirt-spaeti-classic",
@@ -3064,7 +3064,7 @@
         }
       }
     },
-    "enabled": true
+    "enabled": false
   },
   {
     "id": "shirt-spaeti-premium",
@@ -3120,7 +3120,7 @@
         }
       }
     },
-    "enabled": true
+    "enabled": false
   },
   {
     "id": "shirt-currywurst-classic",
@@ -3184,7 +3184,7 @@
         }
       }
     },
-    "enabled": true
+    "enabled": false
   },
   {
     "id": "shirt-currywurst-premium",
@@ -3248,7 +3248,7 @@
         }
       }
     },
-    "enabled": true
+    "enabled": false
   },
   {
     "id": "shirt-marzahn-classic",
@@ -3312,7 +3312,7 @@
         }
       }
     },
-    "enabled": true
+    "enabled": false
   },
   {
     "id": "shirt-marzahn-premium",
@@ -3376,7 +3376,7 @@
         }
       }
     },
-    "enabled": true
+    "enabled": false
   },
   {
     "id": "shirt-a-window-in-berlin-classic",
@@ -3440,7 +3440,7 @@
         }
       }
     },
-    "enabled": true
+    "enabled": false
   },
   {
     "id": "shirt-a-window-in-berlin-premium",
@@ -3504,7 +3504,7 @@
         }
       }
     },
-    "enabled": true
+    "enabled": false
   },
   {
     "id": "shirt-schoenhauser-allee-classic",
@@ -3554,7 +3554,7 @@
         }
       }
     },
-    "enabled": true
+    "enabled": false
   },
   {
     "id": "shirt-schoenhauser-allee-premium",
@@ -3604,6 +3604,6 @@
         }
       }
     },
-    "enabled": true
+    "enabled": false
   }
 ]
