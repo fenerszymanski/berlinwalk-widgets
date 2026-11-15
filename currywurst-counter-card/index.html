@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Currywurst Counter Card: What to Say at a Berlin Imbiss</title>
+<link rel="stylesheet" href="../css/brand.css">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { overflow-x: hidden; }
+  body { font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #FFFFFF; color: #241f1a; padding: 12px; }
+  .cc { border-radius: 16px; overflow: hidden; border: 1px solid #e3d7c4; background: #fbf6ee; }
+  .cc-head { padding: 18px 18px 4px; }
+  .cc-kick { display: inline-block; font-size: 10.5px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; color: #123D18; background: #FFE600; padding: 3px 8px; border-radius: 4px; }
+  .cc-head h1 { font-family: 'Merriweather', Georgia, serif; font-size: 21px; line-height: 1.3; margin-top: 9px; color: #1B5E20; }
+  .cc-head p { font-size: 13px; line-height: 1.6; color: #4a4339; margin-top: 7px; max-width: 760px; }
+  .cc-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 12px; padding: 12px; }
+  .cc-panel { background: #fff; border: 1px solid #eadfcd; border-radius: 14px; padding: 12px 14px; min-width: 0; }
+  .cc-panel h2 { font-size: 11px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; color: #6b5f4f; margin-bottom: 8px; }
+  fieldset { border: 0; margin-bottom: 12px; }
+  legend { font-family: 'Merriweather', Georgia, serif; font-size: 14px; color: #123D18; margin-bottom: 6px; }
+  .opts { display: flex; flex-wrap: wrap; gap: 6px; }
+  .opt { position: relative; cursor: pointer; }
+  .opt input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+  .opt span { display: inline-block; padding: 7px 10px; border-radius: 999px; border: 2px solid #ddd0bb; background: #fffdf9; font-size: 12.5px; font-weight: 700; color: #4a4339; line-height: 1.2; }
+  .opt input:checked + span { border-color: #1B5E20; background: #1B5E20; color: #fff; }
+  .opt input:focus-visible + span, input[type=range]:focus-visible { outline: 3px solid #FFE600; outline-offset: 2px; }
+  .heat-row { display: flex; align-items: center; gap: 10px; }
+  input[type=range] { flex: 1; min-width: 0; accent-color: #c62828; height: 28px; }
+  .heat-val { min-width: 96px; font-size: 12.5px; font-weight: 800; color: #b71c1c; text-align: right; }
+  .heat-scale { display: flex; justify-content: space-between; font-size: 10.5px; color: #5f5344; margin-top: 2px; }
+  #tray { display: block; width: 100%; height: auto; }
+  .cc-say { margin: 0 12px; padding: 14px 16px; border-radius: 14px; background: #123D18; color: #eef3ea; }
+  .cc-say .lbl { font-size: 10.5px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; color: #FFE600; }
+  .cc-say .de { font-family: 'Merriweather', Georgia, serif; font-size: 18px; line-height: 1.45; color: #fff; margin-top: 6px; }
+  .cc-say .en { font-size: 12.5px; line-height: 1.55; color: #cfe0cc; margin-top: 6px; }
+  .cc-notes { margin: 10px 12px 0; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 10px; }
+  .note { background: #fff; border: 1px solid #eadfcd; border-radius: 12px; padding: 10px 12px; font-size: 12.5px; line-height: 1.55; color: #3f382f; min-width: 0; }
+  .note b { color: #123D18; }
+  .cc-foot { padding: 12px 16px 16px; font-size: 11.5px; line-height: 1.55; color: #574c3e; }
+  @media (max-width: 620px) {
+    .cc-grid, .cc-notes { grid-template-columns: 1fr; }
+    .cc-head h1 { font-size: 18.5px; }
+    .cc-say .de { font-size: 16px; }
+  }
+</style>
+</head>
+<body>
+<div class="cc">
+  <div class="cc-head">
+    <span class="cc-kick">Currywurst Counter Card</span>
+    <h1>Build your order before you reach the counter</h1>
+    <p>A Berlin Imbiss moves fast and the questions come in German. Pick the sausage, the cut, the heat and the side. The tray shows what you will get and the card gives you the sentence to say.</p>
+  </div>
+  <div class="cc-grid">
+    <div class="cc-panel" id="controls">
+      <h2>Your order</h2>
+      <fieldset>
+        <legend>Sausage</legend>
+        <div class="opts" data-name="skin">
+          <label class="opt"><input type="radio" name="skin" value="ohne" checked><span>Ohne Darm (no skin)</span></label>
+          <label class="opt"><input type="radio" name="skin" value="mit"><span>Mit Darm (with skin)</span></label>
+          <label class="opt"><input type="radio" name="skin" value="vegan"><span>Vegan</span></label>
+        </div>
+      </fieldset>
+      <fieldset>
+        <legend>Cut</legend>
+        <div class="opts">
+          <label class="opt"><input type="radio" name="cut" value="cut" checked><span>Sliced</span></label>
+          <label class="opt"><input type="radio" name="cut" value="whole"><span>Whole (am Stück)</span></label>
+        </div>
+      </fieldset>
+      <fieldset>
+        <legend>Heat</legend>
+        <div class="heat-row">
+          <input type="range" id="heat" min="0" max="4" step="1" value="0" aria-label="Heat level, from house normal to extra hot with chilli flakes">
+          <span class="heat-val" id="heatVal">House normal</span>
+        </div>
+        <div class="heat-scale"><span>normal</span><span>a bit hotter</span><span>hot</span><span>extra</span><span>+ flakes</span></div>
+      </fieldset>
+      <fieldset>
+        <legend>On the side</legend>
+        <div class="opts">
+          <label class="opt"><input type="radio" name="side" value="rw" checked><span>Fries, ketchup + mayo</span></label>
+          <label class="opt"><input type="radio" name="side" value="mayo"><span>Fries with mayo</span></label>
+          <label class="opt"><input type="radio" name="side" value="roll"><span>Bread roll</span></label>
+          <label class="opt"><input type="radio" name="side" value="none"><span>Nothing</span></label>
+        </div>
+      </fieldset>
+      <fieldset style="margin-bottom:0">
+        <legend>Eating</legend>
+        <div class="opts">
+          <label class="opt"><input type="radio" name="where" value="here" checked><span>Standing here</span></label>
+          <label class="opt"><input type="radio" name="where" value="go"><span>To take away</span></label>
+        </div>
+      </fieldset>
+    </div>
+    <div class="cc-panel">
+      <h2>What lands on the tray</h2>
+      <svg id="tray" viewBox="0 0 360 260" role="img" aria-labelledby="trayTitle">
+        <title id="trayTitle">Drawing of your currywurst order</title>
+        <g id="trayG"></g>
+      </svg>
+    </div>
+  </div>
+  <div class="cc-say" aria-live="polite">
+    <div class="lbl">Say this at the counter</div>
+    <div class="de" id="sayDe"></div>
+    <div class="en" id="sayEn"></div>
+  </div>
+  <div class="cc-notes">
+    <div class="note" id="noteSkin"></div>
+    <div class="note" id="noteAsk"></div>
+  </div>
+  <div class="cc-foot">Heat words are what Berlin stands usually understand; each stand labels its own levels, and some only serve one kind of sausage. Stand details checked on 15 November 2026.</div>
+</div>
+<script>
+(function () {
+  var HEAT = [
+    { de: '', en: 'house normal', label: 'House normal' },
+    { de: 'etwas schärfer', en: 'a bit hotter', label: 'A bit hotter' },
+    { de: 'scharf', en: 'hot', label: 'Hot' },
+    { de: 'extra scharf', en: 'extra hot', label: 'Extra hot' },
+    { de: 'extra scharf, mit Körnern', en: 'extra hot with chilli flakes', label: 'Extra + flakes' }
+  ];
+  var SAUCE = ['#c8452c', '#bd3824', '#ad2a1c', '#981d16', '#86140f'];
+  var SKIN = {
+    ohne: { de: 'Currywurst ohne Darm', en: 'a currywurst without skin', fill: '#e9c9a6', edge: '#c99c71',
+      note: '<b>Ohne Darm</b> is the soft, pale Berlin original: a scalded sausage made without a casing. It is the only kind at Konnopke\'s, and Curry 36 says it is how Berlin served the dish in the 1950s.' },
+    mit: { de: 'Currywurst mit Darm', en: 'a currywurst with skin', fill: '#b5703f', edge: '#8a4f28',
+      note: '<b>Mit Darm</b> has a pork casing, so it snaps when you bite and browns darker on the griddle. Curry 36 serves both; not every old stand does.' },
+    vegan: { de: 'vegane Currywurst', en: 'a vegan currywurst', fill: '#d4a978', edge: '#a87a4b',
+      note: '<b>Vegan</b> is on the board at Curry 36, Curry 61 and Witty\'s. Ask for the vegan mayo too if you want fries, because ordinary mayonnaise is made with egg.' }
+  };
+  var SIDE = {
+    rw: { de: 'Pommes rot-weiß', en: 'fries, ketchup and mayo' },
+    mayo: { de: 'Pommes mit Mayo', en: 'fries and mayo' },
+    roll: { de: 'einer Schrippe', en: 'a bread roll' },
+    none: { de: '', en: '' }
+  };
+  function val(name) { var el = document.querySelector('input[name=' + name + ']:checked'); return el ? el.value : ''; }
+  var NS = 'http://www.w3.org/2000/svg';
+  function el(tag, attrs) { var e = document.createElementNS(NS, tag); for (var k in attrs) e.setAttribute(k, attrs[k]); return e; }
+
+  function drawTray(o) {
+    var g = document.getElementById('trayG');
+    while (g.firstChild) g.removeChild(g.firstChild);
+    var s = SKIN[o.skin], sauce = SAUCE[o.heat];
+    g.appendChild(el('ellipse', { cx: 180, cy: 236, rx: 150, ry: 12, fill: '#000', opacity: .08 }));
+    g.appendChild(el('path', { d: 'M28 70 L332 70 L312 228 L48 228 Z', fill: '#f7f1e4', stroke: '#d8c9ab', 'stroke-width': 2 }));
+    g.appendChild(el('path', { d: 'M28 70 L332 70 L326 84 L34 84 Z', fill: '#efe5d0' }));
+    var sx = 52, sy = 112, len = 200, h = 34;
+    var bend = o.skin === 'mit' ? 7 : 2;
+    if (o.cut === 'whole') {
+      g.appendChild(el('path', { d: 'M' + sx + ' ' + (sy + h / 2) + ' Q' + (sx + len / 2) + ' ' + (sy + h / 2 + bend * 2) + ' ' + (sx + len) + ' ' + (sy + h / 2), stroke: s.fill, 'stroke-width': h, 'stroke-linecap': 'round', fill: 'none' }));
+      g.appendChild(el('path', { d: 'M' + sx + ' ' + (sy + h / 2) + ' Q' + (sx + len / 2) + ' ' + (sy + h / 2 + bend * 2) + ' ' + (sx + len) + ' ' + (sy + h / 2), stroke: s.edge, 'stroke-width': 2, 'stroke-dasharray': '0', fill: 'none', opacity: .35, transform: 'translate(0,-12)' }));
+      g.appendChild(el('path', { d: 'M' + (sx + 30) + ' ' + (sy + 10) + ' C' + (sx + 80) + ' ' + (sy + 36) + ' ' + (sx + 130) + ' ' + (sy + 4) + ' ' + (sx + len - 18) + ' ' + (sy + 22), stroke: sauce, 'stroke-width': 18, 'stroke-linecap': 'round', fill: 'none', opacity: .93 }));
+    } else {
+      var n = 7, w = 24, gap = 5;
+      for (var i = 0; i < n; i++) {
+        var x = sx + i * (w + gap), y = sy + Math.sin(i * 0.9) * 2;
+        g.appendChild(el('rect', { x: x, y: y, width: w, height: h, rx: 9, fill: s.fill, stroke: s.edge, 'stroke-width': o.skin === 'mit' ? 3 : 1.2 }));
+        g.appendChild(el('ellipse', { cx: x + w / 2, cy: y + h / 2, rx: w / 2 - 5, ry: h / 2 - 6, fill: '#f2dcc1', opacity: o.skin === 'mit' ? .55 : .35 }));
+      }
+      g.appendChild(el('path', { d: 'M' + (sx - 4) + ' ' + (sy + 8) + ' C' + (sx + 60) + ' ' + (sy + 30) + ' ' + (sx + 120) + ' ' + (sy - 4) + ' ' + (sx + 205) + ' ' + (sy + 18), stroke: sauce, 'stroke-width': 22, 'stroke-linecap': 'round', fill: 'none', opacity: .93 }));
+      g.appendChild(el('line', { x1: sx + 64, y1: sy + 6, x2: sx + 98, y2: sy - 40, stroke: '#d9b77e', 'stroke-width': 4, 'stroke-linecap': 'round' }));
+      g.appendChild(el('path', { d: 'M' + (sx + 94) + ' ' + (sy - 34) + ' l4 -10 l4 3 l-4 10 z', fill: '#d9b77e' }));
+    }
+    var seed = 7;
+    function rnd() { seed = (seed * 9301 + 49297) % 233280; return seed / 233280; }
+    var dust = 18 + o.heat * 10;
+    for (var d = 0; d < dust; d++) {
+      g.appendChild(el('circle', { cx: sx + 6 + rnd() * 196, cy: sy + 2 + rnd() * 30, r: 1.2 + rnd() * 1.1, fill: '#d99a1e', opacity: .85 }));
+    }
+    if (o.heat >= 4) {
+      for (var c = 0; c < 16; c++) {
+        var kx = sx + 10 + rnd() * 186, ky = sy + 4 + rnd() * 24;
+        g.appendChild(el('rect', { x: kx, y: ky, width: 4, height: 2.4, rx: 1, fill: '#e53935', transform: 'rotate(' + Math.round(rnd() * 180) + ' ' + (kx + 2) + ' ' + (ky + 1) + ')' }));
+      }
+    }
+    if (o.side === 'rw' || o.side === 'mayo') {
+      for (var f = 0; f < 15; f++) {
+        var fx = 66 + (f % 8) * 26 + rnd() * 6, fy = 172 + Math.floor(f / 8) * 18 + rnd() * 6;
+        g.appendChild(el('rect', { x: fx, y: fy, width: 30, height: 9, rx: 3, fill: '#f2c14e', stroke: '#d79f2b', 'stroke-width': 1, transform: 'rotate(' + Math.round(rnd() * 40 - 20) + ' ' + (fx + 15) + ' ' + (fy + 4) + ')' }));
+      }
+      g.appendChild(el('ellipse', { cx: o.side === 'rw' ? 150 : 180, cy: 186, rx: 26, ry: 13, fill: '#fffaf0', stroke: '#e8dfc8' }));
+      if (o.side === 'rw') g.appendChild(el('ellipse', { cx: 212, cy: 188, rx: 24, ry: 12, fill: '#c62828' }));
+    } else if (o.side === 'roll') {
+      g.appendChild(el('ellipse', { cx: 180, cy: 190, rx: 62, ry: 26, fill: '#d9a35a', stroke: '#b07a35', 'stroke-width': 2 }));
+      g.appendChild(el('path', { d: 'M128 188 Q180 172 232 188', stroke: '#f3d39a', 'stroke-width': 5, fill: 'none', 'stroke-linecap': 'round' }));
+    }
+    if (o.where === 'go') {
+      g.appendChild(el('rect', { x: 270, y: 92, width: 46, height: 26, rx: 4, fill: '#FFE600', stroke: '#c7b200' }));
+      var t = el('text', { x: 293, y: 109, 'text-anchor': 'middle', 'font-size': 10, 'font-weight': 800, fill: '#123D18' }); t.textContent = 'TO GO'; g.appendChild(t);
+    }
+  }
+
+  function update() {
+    var o = { skin: val('skin'), cut: val('cut'), heat: parseInt(document.getElementById('heat').value, 10), side: val('side'), where: val('where') };
+    var s = SKIN[o.skin], hv = HEAT[o.heat], sd = SIDE[o.side];
+    document.getElementById('heatVal').textContent = hv.label;
+    var partsDe = ['Einmal ' + s.de];
+    if (o.cut === 'whole') partsDe.push('am Stück');
+    if (hv.de) partsDe.push(hv.de);
+    var de = partsDe.join(', ');
+    if (sd.de) de += (partsDe.length > 1 ? ', mit ' : ' mit ') + sd.de;
+    de += o.where === 'go' ? ', zum Mitnehmen, bitte.' : ', bitte.';
+    en = 'One ' + s.en.replace(/^(a|an) /, '') + (o.cut === 'whole' ? ', whole' : ', sliced') + ', ' + hv.en + (sd.en ? ', with ' + sd.en : '') + (o.where === 'go' ? ', to take away' : '') + ', please.';
+    document.getElementById('sayDe').textContent = de;
+    document.getElementById('sayEn').textContent = en;
+    document.getElementById('noteSkin').innerHTML = s.note;
+    var ask = '<b>The question coming back:</b> ';
+    if (o.side === 'none') ask += '"Mit Pommes oder Brötchen?" (fries or a roll?). Say "ohne, danke" for neither.';
+    else if (o.where === 'here') ask += '"Hier oder zum Mitnehmen?" (here or to go?). You already answered it: you are eating at the counter.';
+    else ask += '"Normal oder scharf?" Curry 36 says its staff ask about heat, so answer with the word on your card.';
+    if (o.cut === 'whole') ask += ' A whole sausage is how Konnopke\'s served it until 1990; today it comes sliced there, so say am Stück clearly.';
+    document.getElementById('noteAsk').innerHTML = ask;
+    drawTray(o);
+  }
+  document.getElementById('controls').addEventListener('change', update);
+  document.getElementById('heat').addEventListener('input', update);
+  update();
+})();
+</script>
+<script src="../js/brand.js"></script>
+</body>
+</html>
