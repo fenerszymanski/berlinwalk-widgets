@@ -1,11 +1,7 @@
 // Pure date arithmetic. UTC noon is a date carrier; inputs always use Berlin's civil date.
-// Yusuf approved Release 1 now, except every 1928 product surface until Berlin midnight.
-export const RELEASE_1928_AT=Date.parse('2026-11-18T00:00:00+01:00');
-export function extrasAllowedFor(product,now=new Date()) {
- const id=product?.id||'';
- const is1928=id==='ys'||/^ys-(framed|canvas|digital)$/.test(id)||/^gift-ys(?:-|$)/.test(id)||product?.group==='ys1928-mounted';
- return !is1928||Number(now)>=RELEASE_1928_AT;
-}
+// Yusuf opened every 1928 surface on 16 Nov 2026. Keep the legacy timer boundary inert.
+export const RELEASE_1928_AT=0;
+export function extrasAllowedFor() { return true; }
 export function berlinParts(now=new Date()) {
  const p=Object.fromEntries(new Intl.DateTimeFormat('en-CA',{timeZone:'Europe/Berlin',year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',hourCycle:'h23'}).formatToParts(now).map(x=>[x.type,x.value]));
  return {date:`${p.year}-${p.month}-${p.day}`,hour:Number(p.hour)};
