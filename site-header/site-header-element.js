@@ -1,5 +1,5 @@
 (() => {
-const BW_HEADER_NAV_VERSION = 'clothing-in-store-20261115';
+const BW_HEADER_NAV_VERSION = 'hoodies-in-store-20261116';
 if (customElements.get('bw-site-header')?.navigationVersion === BW_HEADER_NAV_VERSION
   || customElements.get('bw-site-header-store-nav')?.navigationVersion === BW_HEADER_NAV_VERSION) return;
 
