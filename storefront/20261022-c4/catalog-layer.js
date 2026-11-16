@@ -52,7 +52,8 @@ export function apparelMedia(product, color = product?.apparelMedia?.defaultColo
     if (!media(item) || seen.has(item.image)) return false;
     seen.add(item.image); return true;
   }) : [];
-  return {color, lead, gallery, unavailable: !lead};
+  const video = lead && entry.video && ['file', 'poster', 'thumb', 'alt'].every(key => typeof entry.video[key] === 'string' && entry.video[key].trim()) && /\.mp4$/i.test(entry.video.file) ? entry.video : null;
+  return {color, lead, gallery, unavailable: !lead, ...(video ? {video} : {})};
 }
 
 // The current bridge projects native Size/Color description lines to customText.
