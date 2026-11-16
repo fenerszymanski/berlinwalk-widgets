@@ -1,6 +1,6 @@
 import {clothingCards,syncClothingSeo} from './clothing.js?v=clothing-page-20261116-v1';
 import {qualityOf,displayName,designName,designCards,designRepresentative,QUALITY_TEXT,installQuality} from './tshirt-designs.js?v=hoodies-20261116-v1';
-import {extrasEnabled,prepareExtras,installExtras} from './store-extras.js?v=hoodies-20261116-v1';
+import {extrasEnabled,prepareExtras,installExtras} from './store-extras.js?v=reviews-live-20261116-v1';
 import {COLOR_SWATCHES,apparelCardColors,apparelCardSelection,apparelCardProduct,colorName} from './apparel-card-colors.js?v=hoodies-20261116-v1';
 import {DESIGN2_TEXT,translateDesign2} from './ys-de.js?v=rw-release1-20261115-v1';
 import {matchesSearch,familyFor,recommendationRows,nativeRecommendationEligible} from './design2-catalog.js?v=hoodies-20261116-v1';

@@ -1,1 +1,1 @@
-{"version":1,"mode":"off","endpoint":"","maxPhotoBytes":5242880,"allowedPhotoTypes":["image/jpeg","image/png","image/webp"]}
+{"version":2,"mode":"live","endpoint":"https://app.berlinwalk.com/api/product-reviews","maxPhotoBytes":5242880,"allowedPhotoTypes":["image/jpeg","image/png","image/webp"],"moderation":"sidecar_owner_approval"}
