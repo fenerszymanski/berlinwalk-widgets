@@ -139,7 +139,7 @@
       },
       {
         "name": "Audio walks",
-        "line": "Three walks for your phone",
+        "line": "Five walks, one through the Christmas markets",
         "href": "https://www.walkofberlin.com/audio-tours",
         "img": "assets/door-audio-walks.webp"
       },
@@ -446,19 +446,19 @@
         "label": "Audio walks",
         "eyebrow": "AUDIO WALKS · FOR YOUR PHONE",
         "title": "Walk Berlin at your own pace.",
-        "lead": "Self-guided walks for your phone, from the Berlin Wall to medieval Berlin. Start when you like and pause whenever you want.",
+        "lead": "Self-guided walks for your phone, from the Berlin Wall to the Christmas markets of Mitte. Start when you like and pause whenever you want.",
         "cta": {
           "text": "See the audio walks",
           "href": "https://www.walkofberlin.com/category/all-products?tab=audio"
         },
         "visual": {
           "type": "player",
-          "img": "assets/slide-audio-walks.webp",
-          "alt": "Berlin Wall remnant with a hole chipped out, at Niederkirchnerstraße",
+          "img": "assets/slide-audio-christmas-mitte.webp",
+          "alt": "The Christmas market at Gendarmenmarkt at dusk, with a lit church tower and a Christmas tree",
           "w": 960,
           "h": 656,
           "kicker": "NOW PLAYING",
-          "title": "Berlin Wall Audio Walk"
+          "title": "Christmas Markets of Mitte"
         }
       },
       {

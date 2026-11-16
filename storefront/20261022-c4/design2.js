@@ -6,7 +6,7 @@ import {DESIGN2_TEXT,translateDesign2} from './ys-de.js?v=rw-release1-20261115-v
 import {matchesSearch,familyFor,recommendationRows,nativeRecommendationEligible} from './design2-catalog.js?v=hoodies-20261116-v1';
 import {languageUrl,navigateLanguageLink} from './language-navigation.js?v=store-design2-fix4b-20261113-v1';
 let recommendations,translations,exploreImages;
-export const prepare=Promise.all(['recommendations.json','de-store.json','explore-images.json'].map(file=>fetch(new URL('data/'+file+'?v='+(file==='explore-images.json'?'store-discovery-polish-20261114-v2':file==='de-store.json'?'clothing-page-20261116-v1':'hoodies-20261116-v1'),import.meta.url)).then(r=>{if(!r.ok)throw Error('DESIGN2_DATA_UNAVAILABLE');return r.json();}))).then(([r,t,i])=>{recommendations=r;translations=t;exploreImages=i;}).then(()=>extrasEnabled()?prepareExtras:undefined);
+export const prepare=Promise.all(['recommendations.json','de-store.json','explore-images.json'].map(file=>fetch(new URL('data/'+file+'?v='+(file==='explore-images.json'?'xmas-audio-20261116-v1':file==='de-store.json'?'xmas-audio-20261116-v1':'xmas-audio-20261116-v1'),import.meta.url)).then(r=>{if(!r.ok)throw Error('DESIGN2_DATA_UNAVAILABLE');return r.json();}))).then(([r,t,i])=>{recommendations=r;translations=t;exploreImages=i;}).then(()=>extrasEnabled()?prepareExtras:undefined);
 // The legacy page has two question groups. Keep every body and legal hook,
 // merge their accordions, and retain the contact sentence after the last item.
 export function mergeProductQuestions(root) {

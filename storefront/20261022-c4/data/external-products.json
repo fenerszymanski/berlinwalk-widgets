@@ -1,5 +1,40 @@
 [
   {
+    "sourceKey": "christmas-markets-mitte-audio-tour",
+    "verified": true,
+    "sourceUrl": "https://walkofberlin.com/products/christmas-markets-mitte-audio-tour",
+    "productSchema": {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": "Christmas Markets of Mitte: Audio Walk",
+      "description": "A self-guided walk through the Christmas markets of Mitte, from Gendarmenmarkt to the World Clock. 12 English audio chapters (23:50), MP3s and a PDF route card with a map. Sold until 3 January. €9.90.",
+      "image": "https://app.berlinwalk.com/assets/christmas-markets-mitte-audio-tour/photos/french-cathedral-christmas-market-1400.webp",
+      "brand": {
+        "@type": "Brand",
+        "name": "Walk of Berlin"
+      },
+      "offers": {
+        "@type": "Offer",
+        "price": "9.90",
+        "priceCurrency": "EUR",
+        "availability": "https://schema.org/InStock",
+        "url": "https://www.walkofberlin.com/products/christmas-markets-mitte-audio-tour"
+      }
+    },
+    "presentation": {
+      "id": "au-christmas-mitte",
+      "name": "Christmas Markets of Mitte Audio Walk",
+      "place": "Gendarmenmarkt to Alexanderplatz",
+      "typeLine": "AUDIO WALK · SELF-GUIDED",
+      "alt": "The Christmas market at Gendarmenmarkt at dusk, with a lit church tower and a Christmas tree",
+      "image": "https://app.berlinwalk.com/assets/christmas-markets-mitte-audio-tour/photos/french-cathedral-christmas-market-1400.webp",
+      "imageFit": "cover",
+      "wixProductId": null,
+      "externalSourceKey": "christmas-markets-mitte-audio-tour",
+      "description": "A self-guided walk through the Christmas markets of Mitte, from Gendarmenmarkt to the World Clock. 12 English audio chapters (23:50), MP3s and a PDF route card with a map. Sold until 3 January. €9.90."
+    }
+  },
+  {
     "sourceKey": "berlin-audio-trio-bundle",
     "verified": true,
     "sourceUrl": "https://walkofberlin.com/products/berlin-audio-trio-bundle",
