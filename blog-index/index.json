@@ -1,9 +1,9 @@
 {
-  "updatedAt": "2026-11-16T03:09:19.597Z",
+  "updatedAt": "2026-11-16T10:20:49.888Z",
   "source": "Wix Blog API",
   "popularSource": "Wix Blog metrics.views lifetime sort",
-  "totalPosts": 463,
-  "toolsTotal": 387,
+  "totalPosts": 464,
+  "toolsTotal": 388,
   "bookingUrl": "https://www.walkofberlin.com/book-berlin-walking-tour/berlin-then-and-now",
   "navTopics": [
     {
@@ -1802,6 +1802,23 @@
   ],
   "latest": [
     {
+      "title": "Marzahn Berlin: How the Plattenbau Town Was Built and How to Spend a Day There",
+      "slug": "marzahn-berlin",
+      "path": "/post/marzahn-berlin",
+      "url": "https://www.berlinwalk.com/post/marzahn-berlin",
+      "excerpt": "Most people only see Marzahn from the S7. How the panel-block town was built in fifteen years, the village it grew around, and a day out that ends on the Kienberg.",
+      "category": "Living in Berlin",
+      "categorySlug": "living-in-berlin",
+      "topic": "living-in-berlin",
+      "topicLabel": "Living in Berlin",
+      "readTime": "6 min read",
+      "publishedDate": "2026-11-16T10:17:15.798Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_265ae32bda504222afcada143cb5df02~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/marzahn-plattenbau-facades-jan-petersen-strasse.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_265ae32bda504222afcada143cb5df02~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/marzahn-plattenbau-facades-jan-petersen-strasse.jpg",
+      "alt": "Renovated panel blocks in Marzahn, Berlin, with coral, yellow and blue painted facades",
+      "relatedToolSlug": "marzahn-estate-walk"
+    },
+    {
       "title": "How to Order Currywurst in Berlin: Mit or Ohne Darm, and What to Say",
       "slug": "how-to-order-currywurst-in-berlin",
       "path": "/post/how-to-order-currywurst-in-berlin",
@@ -1987,23 +2004,6 @@
       "thumb": "https://static.wixstatic.com/media/5a08a3_b34dff03a04149ca94cab2ab1f4e9025~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover.jpg",
       "alt": "A white cast-iron Lustgarten street sign topped by the Berlin bear on a shield under a crown, the Berliner Dom behind it in golden light",
       "relatedToolSlug": "berlin-bear-hunt"
-    },
-    {
-      "title": "Wild Boar in Berlin: What to Do When You Meet One, and How to Keep Them Out",
-      "slug": "wild-boar-in-berlin",
-      "path": "/post/wild-boar-in-berlin",
-      "url": "https://www.berlinwalk.com/post/wild-boar-in-berlin",
-      "excerpt": "A boar walked into a Köpenick shopping centre in March 2026. Here is how to handle a meeting on the path, keep your dog and garden safe, and who to call in Berlin.",
-      "category": "Living in Berlin",
-      "categorySlug": "living-in-berlin",
-      "topic": "living-in-berlin",
-      "topicLabel": "Living in Berlin",
-      "readTime": "7 min read",
-      "publishedDate": "2026-11-02T09:49:40.819Z",
-      "image": "https://static.wixstatic.com/media/5a08a3_6ee4a549d4394c439930d0331995d3b1~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover.jpg",
-      "thumb": "https://static.wixstatic.com/media/5a08a3_6ee4a549d4394c439930d0331995d3b1~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover.jpg",
-      "alt": "A group of wild boar, grown animals and young, grazing on the lawn between blocks of flats and a fenced bin shelter in Hakenfelde, Spandau",
-      "relatedToolSlug": "berlin-boar-year"
     }
   ]
 }
