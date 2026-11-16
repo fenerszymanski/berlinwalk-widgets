@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Marzahn Estate Walk: Plan a Day Out in Marzahn, Stop by Stop</title>
+<link rel="stylesheet" href="../css/brand.css">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { overflow-x: hidden; }
+  body { font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #FFFFFF; color: #22261f; padding: 12px; }
+  .mw { border-radius: 16px; overflow: hidden; border: 1px solid #d9e2d2; background: #f6f8f2; }
+  .mw-head { padding: 18px 18px 6px; }
+  .mw-kick { display: inline-block; font-size: 10.5px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; color: #123D18; background: #FFE600; padding: 3px 8px; border-radius: 4px; }
+  .mw-head h1 { font-family: 'Merriweather', Georgia, serif; font-size: 21px; line-height: 1.3; margin-top: 9px; color: #1B5E20; }
+  .mw-head p { font-size: 13px; line-height: 1.6; color: #444b40; margin-top: 7px; max-width: 760px; }
+  .plans { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; padding: 10px 12px 4px; }
+  .plan { position: relative; cursor: pointer; display: block; }
+  .plan input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+  .plan span { display: block; height: 100%; padding: 10px 12px; border-radius: 12px; border: 2px solid #d3dccb; background: #fff; }
+  .plan b { display: block; font-size: 13px; color: #123D18; }
+  .plan small { display: block; font-size: 11.5px; line-height: 1.45; color: #555c50; margin-top: 3px; }
+  .plan input:checked + span { border-color: #1B5E20; background: #eef5e8; box-shadow: inset 0 0 0 1px #1B5E20; }
+  .plan input:focus-visible + span, .step-btn:focus-visible { outline: 3px solid #FFE600; outline-offset: 2px; }
+  .mw-body { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: 12px; padding: 12px; align-items: start; }
+  .mapbox { background: #fff; border: 1px solid #dfe6d8; border-radius: 14px; padding: 8px; min-width: 0; }
+  #map { display: block; width: 100%; height: auto; border-radius: 10px; }
+  .legend { display: flex; flex-wrap: wrap; gap: 10px; font-size: 11px; color: #555c50; padding: 6px 4px 2px; }
+  .legend i { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 4px; vertical-align: -1px; }
+  .stop { background: #fff; border: 1px solid #dfe6d8; border-radius: 14px; padding: 14px; min-width: 0; display: flex; flex-direction: column; }
+  .stop .count { font-size: 10.5px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; color: #6a7262; }
+  .stop h2 { font-family: 'Merriweather', Georgia, serif; font-size: 17px; line-height: 1.35; color: #123D18; margin-top: 6px; }
+  .stop .what { font-size: 13px; line-height: 1.6; color: #343a30; margin-top: 8px; }
+  .stop .tip { font-size: 12.5px; line-height: 1.55; color: #1B5E20; background: #eef5e8; border-radius: 10px; padding: 8px 10px; margin-top: 10px; }
+  .totals { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px; margin-top: 12px; }
+  .totals div { background: #123D18; color: #fff; border-radius: 10px; padding: 8px; text-align: center; }
+  .totals b { display: block; font-size: 17px; color: #FFE600; }
+  .totals small { font-size: 10.5px; color: #d6e4d2; }
+  .nav { display: flex; gap: 8px; margin-top: 14px; }
+  .step-btn { flex: 1; min-height: 42px; border: 0; border-radius: 999px; font-family: inherit; font-size: 13px; font-weight: 800; cursor: pointer; }
+  .step-btn.next { background: #FFE600; color: #123D18; }
+  .step-btn.back { background: #e7ede1; color: #123D18; }
+  .step-btn:disabled { cursor: default; background: #e7ede1; color: #5f675a; }
+  .mw-foot { padding: 4px 16px 16px; font-size: 11.5px; line-height: 1.55; color: #5a6155; }
+  @media (max-width: 640px) {
+    .plans { grid-template-columns: 1fr; }
+    .mw-body { grid-template-columns: 1fr; }
+    .mw-head h1 { font-size: 18.5px; }
+  }
+</style>
+</head>
+<body>
+<div class="mw">
+  <div class="mw-head">
+    <span class="mw-kick">Marzahn Estate Walk</span>
+    <h1>Walk Marzahn one stop at a time</h1>
+    <p>Most people only see Marzahn from the S7. Pick a day, then step through it: the map draws the walk so far and the counter adds up how far you have gone on foot.</p>
+  </div>
+  <div class="plans" role="radiogroup" aria-label="Choose a day out">
+    <label class="plan"><input type="radio" name="plan" value="november" checked><span><b>Short November day</b><small>Village, estate, Gardens and the Kienberg before dark.</small></span></label>
+    <label class="plan"><input type="radio" name="plan" value="history"><span><b>History first</b><small>Start at the 1936 camp memorial, then the village and the hill.</small></span></label>
+    <label class="plan"><input type="radio" name="plan" value="sunday"><span><b>Sunday with the museum flat</b><small>Village and hill, then a furnished WBS 70 flat, Sundays 14:00 to 16:00.</small></span></label>
+  </div>
+  <div class="mw-body">
+    <div class="mapbox">
+      <canvas id="map" width="640" height="470" style="aspect-ratio: 640 / 470" aria-label="Map of the chosen Marzahn walk"></canvas>
+      <div class="legend"><span><i style="background:#1B5E20"></i>walked so far</span><span><i style="background:#c9d3c1"></i>still ahead</span><span><i style="background:#E63946"></i>you are here</span></div>
+    </div>
+    <div class="stop" aria-live="polite">
+      <div class="count" id="count"></div>
+      <h2 id="name"></h2>
+      <p class="what" id="what"></p>
+      <p class="tip" id="tip"></p>
+      <div class="totals">
+        <div><b id="km">0</b><small>km on foot</small></div>
+        <div><b id="min">0</b><small>min walking</small></div>
+        <div><b id="left">0</b><small>stops to go</small></div>
+      </div>
+      <div class="nav">
+        <button type="button" class="step-btn back" id="back">Back</button>
+        <button type="button" class="step-btn next" id="next">Next stop</button>
+      </div>
+    </div>
+  </div>
+  <p class="mw-foot">Distances are straight lines between stops with a 30 percent allowance for real paths, at an easy 4.5 km/h. Checked on 16 November 2026: the Gardens of the World charge EUR 4 for adults from 1 November to 28 February and close at dusk; the cable car and the windmill are shut for the winter.</p>
+</div>
+<script>
+(function () {
+  var STOPS = {
+    smarzahn: { name: 'S Marzahn (S7)', lat: 52.54365, lon: 13.54135, what: 'You step out into the estate. Its first new block was topped out on 2 September 1977, and the first tenants moved in at the end of that year.', tip: 'About 20 minutes from Alexanderplatz on the S7. A normal AB ticket covers the whole day.' },
+    cemetery: { name: 'Parkfriedhof Marzahn', lat: 52.54803, lon: 13.54243, what: 'From 1936 the Nazis held Sinti and Roma in a forced camp next to this cemetery. In March 1943 almost all of the people held there were deported to Auschwitz-Birkenau. A memorial stone has stood here since 1986.', tip: 'This is a place to stand for a while, not a photo stop. Begin here if you want the day to start with what came before the estate.' },
+    church: { name: 'Dorfkirche Alt-Marzahn', lat: 52.54295, lon: 13.56173, what: 'The old village survived inside the new town. Its brick church was dedicated on 4 September 1871, and the eleven-storey blocks rise right behind the village green.', tip: 'Walk the green slowly. This is the one place where the farm village and the panel town share one view.' },
+    mill: { name: 'Bockwindmühle', lat: 52.54403, lon: 13.56354, what: 'A wooden post mill, the village\'s fourth, standing here since 1993. Inside visits are only on the first Sunday of the month from April to October.', tip: 'In November you see it from outside. It is two minutes from the church, so it costs you nothing.' },
+    gardens: { name: 'Gärten der Welt entrance', lat: 52.53810, lon: 13.56962, what: 'The park began as the Berliner Gartenschau of 1987 and grew for the IGA in 2017. In winter some gardens close, but the Chinese garden and the paths stay open until dusk.', tip: 'Adults pay EUR 4 until the end of February. Go in by 13:00 in November or you will be racing the light.' },
+    kienberg: { name: 'Wolkenhain on the Kienberg', lat: 52.53480, lon: 13.58080, what: 'The viewing platform on top of the hill, free to climb. From up here the estate reads as one plan: long rows of blocks between wide green gaps.', tip: 'The best view of Marzahn is from above it. Give the top ten minutes and look north-west towards the S-Bahn.' },
+    ukienberg: { name: 'U Kienberg (Gärten der Welt)', lat: 52.52862, lon: 13.59064, what: 'The U5 takes you back to Alexanderplatz without a change, so you do not have to walk back to the S7.', tip: 'If you still have light, the Wuhle valley path at the foot of the hill is the gentler way down.' },
+    museum: { name: 'Museumswohnung WBS 70', lat: 52.53430, lon: 13.59300, what: 'A furnished flat in a WBS 70 block at Hellersdorfer Straße 179, kept the way a family lived in it in the GDR. Entry is free.', tip: 'Open on Sundays from 14:00 to 16:00 only. U Cottbusser Platz on the U5 is a few minutes away.' },
+    ucottbusser: { name: 'U Cottbusser Platz (U5)', lat: 52.53430, lon: 13.59665, what: 'Straight back to Alexanderplatz on the U5 from here.', tip: 'Check the departures before you leave the flat; the walk to the platform is short.' }
+  };
+  var PLANS = {
+    november: ['smarzahn', 'church', 'mill', 'gardens', 'kienberg', 'ukienberg'],
+    history: ['smarzahn', 'cemetery', 'church', 'mill', 'kienberg', 'ukienberg'],
+    sunday: ['smarzahn', 'church', 'mill', 'kienberg', 'museum', 'ucottbusser']
+  };
+  var plan = 'november';
+  var currentStep = 0;
+  var canvas = document.getElementById('map');
+  var ctx = canvas.getContext('2d');
+
+  function haversine(a, b) {
+    var R = 6371, toRad = Math.PI / 180;
+    var dLat = (b.lat - a.lat) * toRad, dLon = (b.lon - a.lon) * toRad;
+    var h = Math.sin(dLat / 2) * Math.sin(dLat / 2) + Math.cos(a.lat * toRad) * Math.cos(b.lat * toRad) * Math.sin(dLon / 2) * Math.sin(dLon / 2);
+    return 2 * R * Math.asin(Math.sqrt(h));
+  }
+  function walkedKm(ids, upto) {
+    var total = 0;
+    for (var i = 1; i <= upto; i++) total += haversine(STOPS[ids[i - 1]], STOPS[ids[i]]) * 1.3;
+    return total;
+  }
+  var ALL = Object.keys(STOPS).map(function (k) { return STOPS[k]; });
+  var minLat = Math.min.apply(null, ALL.map(function (s) { return s.lat; })) - 0.004;
+  var maxLat = Math.max.apply(null, ALL.map(function (s) { return s.lat; })) + 0.004;
+  var minLon = Math.min.apply(null, ALL.map(function (s) { return s.lon; })) - 0.006;
+  var maxLon = Math.max.apply(null, ALL.map(function (s) { return s.lon; })) + 0.006;
+  var kx = Math.cos(52.54 * Math.PI / 180);
+  var W = 640, H = 470;
+  function size() {
+    var dpr = window.devicePixelRatio || 1, cw = canvas.clientWidth || 640;
+    W = cw; H = Math.round(cw * 470 / 640);
+    canvas.width = Math.round(W * dpr); canvas.height = Math.round(H * dpr);
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  }
+  function project(s) {
+    var pad = W < 420 ? 22 : 34;
+    var spanX = (maxLon - minLon) * kx, spanY = maxLat - minLat;
+    var scale = Math.min((W - 2 * pad) / spanX, (H - 2 * pad) / spanY);
+    var ox = (W - spanX * scale) / 2, oy = (H - spanY * scale) / 2;
+    return { x: ox + (s.lon - minLon) * kx * scale, y: oy + (maxLat - s.lat) * scale, scale: scale };
+  }
+  function hit(a, b) { return a.x < b.x + b.w && b.x < a.x + a.w && a.y < b.y + b.h && b.y < a.y + a.h; }
+
+  function draw() {
+    var ids = PLANS[plan], narrow = W < 420;
+    ctx.clearRect(0, 0, W, H);
+    ctx.fillStyle = '#f3f6ee'; ctx.fillRect(0, 0, W, H);
+    ctx.strokeStyle = '#e2e9db'; ctx.lineWidth = 1;
+    for (var gx = 0; gx < W; gx += 40) { ctx.beginPath(); ctx.moveTo(gx, 0); ctx.lineTo(gx, H); ctx.stroke(); }
+    for (var gy = 0; gy < H; gy += 40) { ctx.beginPath(); ctx.moveTo(0, gy); ctx.lineTo(W, gy); ctx.stroke(); }
+    var pts = ids.map(function (k) { return project(STOPS[k]); });
+    var r = narrow ? 7 : 8, rh = narrow ? 9 : 11;
+    ctx.lineCap = 'round'; ctx.lineJoin = 'round';
+    ctx.setLineDash([7, 7]); ctx.strokeStyle = '#c9d3c1'; ctx.lineWidth = narrow ? 4 : 5;
+    ctx.beginPath(); pts.forEach(function (p, i) { if (i === 0) ctx.moveTo(p.x, p.y); else ctx.lineTo(p.x, p.y); }); ctx.stroke();
+    ctx.setLineDash([]); ctx.strokeStyle = '#1B5E20'; ctx.lineWidth = narrow ? 5 : 6;
+    ctx.beginPath(); for (var i = 0; i <= currentStep; i++) { if (i === 0) ctx.moveTo(pts[i].x, pts[i].y); else ctx.lineTo(pts[i].x, pts[i].y); } ctx.stroke();
+    window.__mwLabels = []; window.__mwMarks = pts; var boxes = pts.map(function (p) { return { x: p.x - rh - 2, y: p.y - rh - 2, w: 2 * rh + 4, h: 2 * rh + 4 }; });
+    pts.forEach(function (p, i) {
+      var here = i === currentStep, done = i < currentStep;
+      ctx.beginPath(); ctx.arc(p.x, p.y, here ? rh : r, 0, Math.PI * 2);
+      ctx.fillStyle = here ? '#E63946' : (done ? '#1B5E20' : '#ffffff'); ctx.fill();
+      ctx.lineWidth = 3; ctx.strokeStyle = here ? '#ffffff' : '#1B5E20'; ctx.stroke();
+      ctx.fillStyle = (here || done) ? '#ffffff' : '#1B5E20'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+      ctx.font = '800 11px Montserrat, Arial, sans-serif'; ctx.fillText(String(i + 1), p.x, p.y + 0.5);
+    });
+    var order = [currentStep].concat(pts.map(function (_, i) { return i; }).filter(function (i) { return i !== currentStep; }));
+    order.forEach(function (i) {
+      if (narrow && i !== currentStep && i !== currentStep + 1) return;
+      var p = pts[i], here = i === currentStep, label = STOPS[ids[i]].name;
+      ctx.font = (here ? '800 ' : '600 ') + '12px Montserrat, Arial, sans-serif';
+      var tw = ctx.measureText(label).width + 8, th = 18, g = rh + 5;
+      var cands = [];
+      [1, 1.8, 2.8, 4].forEach(function (m) { var d = g * m; cands.push([p.x + d, p.y - th / 2], [p.x - d - tw, p.y - th / 2], [p.x - tw / 2, p.y - d - th], [p.x - tw / 2, p.y + d], [p.x + d * 0.7, p.y - d * 0.7 - th], [p.x - d * 0.7 - tw, p.y + d * 0.7], [p.x + d * 0.7, p.y + d * 0.7], [p.x - d * 0.7 - tw, p.y - d * 0.7 - th]); });
+      var best = null;
+      for (var c = 0; c < cands.length; c++) {
+        var bx = { x: cands[c][0], y: cands[c][1], w: tw, h: th };
+        if (bx.x < 4 || bx.y < 4 || bx.x + bx.w > W - 4 || bx.y + bx.h > H - 4) continue;
+        if (boxes.some(function (o) { return hit(o, bx); })) continue;
+        best = bx; break;
+      }
+      if (!best) { if (!here) return; best = { x: Math.min(Math.max(4, p.x - tw / 2), W - tw - 4), y: Math.max(4, p.y - g - th), w: tw, h: th }; }
+      boxes.push(best); window.__mwLabels.push({ i: i, b: best });
+      ctx.fillStyle = 'rgba(255,255,255,.92)'; ctx.fillRect(best.x, best.y, best.w, best.h);
+      ctx.fillStyle = here ? '#b3202c' : '#24301f'; ctx.textAlign = 'left'; ctx.textBaseline = 'middle';
+      ctx.fillText(label, best.x + 4, best.y + th / 2 + 0.5);
+    });
+    var bar = project(ALL[0]).scale / 111.32;
+    ctx.fillStyle = '#24301f'; ctx.fillRect(16, H - 18, bar, 4);
+    ctx.font = '600 11px Montserrat, Arial, sans-serif'; ctx.textAlign = 'left'; ctx.textBaseline = 'alphabetic'; ctx.fillText('1 km', 16, H - 24);
+    ctx.textAlign = 'right'; ctx.fillText('N ↑', W - 12, 18);
+  }
+
+  function render() {
+    var ids = PLANS[plan], s = STOPS[ids[currentStep]];
+    document.getElementById('count').textContent = 'Stop ' + (currentStep + 1) + ' of ' + ids.length;
+    document.getElementById('name').textContent = s.name;
+    document.getElementById('what').textContent = s.what;
+    document.getElementById('tip').textContent = s.tip;
+    var km = walkedKm(ids, currentStep);
+    document.getElementById('km').textContent = km.toFixed(1);
+    document.getElementById('min').textContent = String(Math.round(km / 4.5 * 60));
+    document.getElementById('left').textContent = String(ids.length - 1 - currentStep);
+    document.getElementById('back').disabled = currentStep === 0;
+    var nx = document.getElementById('next');
+    nx.disabled = currentStep === ids.length - 1;
+    nx.textContent = currentStep === ids.length - 1 ? 'Day done' : 'Next stop';
+    draw();
+  }
+
+  Array.prototype.forEach.call(document.querySelectorAll('input[name=plan]'), function (r) {
+    r.addEventListener('change', function () { plan = r.value; currentStep = 0; render(); });
+  });
+  document.getElementById('next').addEventListener('click', function () { if (currentStep < PLANS[plan].length - 1) { currentStep++; render(); } });
+  document.getElementById('back').addEventListener('click', function () { if (currentStep > 0) { currentStep--; render(); } });
+  window.addEventListener('resize', function () { size(); draw(); });
+  size();
+  render();
+})();
+</script>
+<script src="../js/brand.js"></script>
+</body>
+</html>
