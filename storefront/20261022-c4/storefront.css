@@ -770,3 +770,6 @@ button.ys-words-tag:focus-visible{outline:2px solid var(--green);outline-offset:
 :host([design2]) .d2-color-name{margin-left:7px;color:#526452;font:400 12px/1.4 'Space Grotesk',sans-serif}
 @media(max-width:740px),(pointer:coarse){:host([design2]) .d2-color-swatch{width:44px;height:44px}}
 @media(max-width:740px){:host([design2]) .d2-color-options{gap:0}:host([design2]) .d2-color-name{flex-basis:100%;margin-left:5px}}
+
+/* One design, two native garment qualities. */
+.tshirt-quality{border:0;padding:0;margin:0 0 20px;min-width:0}.tshirt-quality legend{font-size:14px;margin-bottom:9px;font-weight:600}.tshirt-quality-options{display:grid;gap:10px}.tshirt-quality button{display:block;width:100%;text-align:left;padding:13px 15px;min-height:78px;border:1px solid #82917e;border-radius:4px;background:#fff;color:#123d18;font:inherit;cursor:pointer}.tshirt-quality button[aria-pressed=true]{border:2px solid #123d18;padding:12px 14px;background:#f1f5ed}.tshirt-quality strong{display:flex;justify-content:space-between;gap:8px;font-size:15px}.tshirt-quality small{display:block;font-size:12px;line-height:1.5;margin-top:5px}.tshirt-quality button:focus-visible{outline:3px solid #7cb342;outline-offset:3px}.tshirt-quality button:disabled{opacity:.55;cursor:default}
