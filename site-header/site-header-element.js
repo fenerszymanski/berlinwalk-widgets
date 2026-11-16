@@ -161,6 +161,11 @@ const BW_HEADER_STORE_DESIGN2_EN = [
         "label": "All T-shirts",
         "de": "Alle T-Shirts",
         "href": "https://www.walkofberlin.com/category/berlin-t-shirts"
+      },
+      {
+        "label": "Berlin Hoodies",
+        "de": "Berlin Hoodies",
+        "href": "https://walkofberlin.com/category/berlin-hoodies"
       }
     ]
   },
@@ -292,6 +297,11 @@ const BW_HEADER_STORE_DESIGN2_DE = [
         "label": "Alle T-Shirts",
         "de": "Alle T-Shirts",
         "href": "https://www.walkofberlin.com/de/category/berlin-t-shirts"
+      },
+      {
+        "label": "Berlin Hoodies",
+        "de": "Berlin Hoodies",
+        "href": "https://walkofberlin.com/de/category/berlin-hoodies"
       }
     ]
   },

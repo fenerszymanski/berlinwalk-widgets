@@ -46,4 +46,8 @@ export function estimate(product,selection,config,now=new Date()){
  return {route,earliest,latest,personal,christmas,approval,provider:r.provider};
 }
 export function dateRange(a,b,de=false){const f=new Intl.DateTimeFormat(de?'de-DE':'en-GB',{weekday:'short',day:'numeric',month:'short',timeZone:'Europe/Berlin'});return f.format(day(a))+' – '+f.format(day(b));}
-export function crossFormats(config,product,products){const f=config.families.find(f=>[...f.posters,...f.tees].includes(product.id));return !f?[]:(f.tees.includes(product.id)?f.posters:f.tees).map(id=>products.find(p=>p.id===id)).filter(p=>p&&p.inStock!==false&&p.status!=='unavailable');}
+export function crossFormats(config,product,products){
+ const groups=['posters','tees','hoodies'],f=config.families.find(f=>groups.some(k=>(f[k]||[]).includes(product.id)));
+ if(!f)return [];const own=groups.find(k=>(f[k]||[]).includes(product.id));
+ return groups.filter(k=>k!==own).flatMap(k=>f[k]||[]).map(id=>products.find(p=>p.id===id)).filter(p=>p&&p.inStock!==false&&p.status!=='unavailable');
+}

@@ -3855,5 +3855,564 @@
       }
     ],
     "wixProductId": "e25e176e-e5b5-0dba-242a-2b3a78a58719"
+  },
+  {
+    "id": "hoodie-berlin-in-pink-sf500",
+    "name": "Berlin in Pink Hoodie",
+    "place": "Berlin utility pipes",
+    "image": "hoodies-20261116/berlin-in-pink-sf500-white.jpg",
+    "alt": "Berlin in Pink Hoodie in White, actual Gelato garment preview",
+    "typeLine": "GILDAN SF500 MIDWEIGHT FLEECE HOODIE · FRONT PRINT",
+    "wixProductId": "0180ca5a-fd5d-4553-8c01-128bc1bfa1bc",
+    "group": "apparel",
+    "cardSummary": "I show Berlin's pink pipes above the streets while construction sites move groundwater.",
+    "deliveryNote": "Made to order.",
+    "deliveryDetails": "I have this hoodie made to order by Gelato. Compare the size measurements with a hoodie that fits you.",
+    "gallery": [
+      {
+        "image": "tshirts-20261113/berlin-in-pink-design-detail.webp",
+        "alt": "Berlin in Pink original print artwork",
+        "kind": "designDetail"
+      }
+    ],
+    "apparelMedia": {
+      "version": 1,
+      "defaultColor": "White",
+      "sharedGallery": [
+        {
+          "image": "tshirts-20261113/berlin-in-pink-design-detail.webp",
+          "alt": "Berlin in Pink original print artwork",
+          "kind": "designDetail"
+        }
+      ],
+      "colors": {
+        "White": {
+          "lead": {
+            "kind": "garmentPreview",
+            "image": "hoodies-20261116/berlin-in-pink-sf500-white.jpg",
+            "sha256": "ddeee5adde1e92cb4a656bb27b64566b6fc676cee3073147b77290e67f1615fb",
+            "alt": "Berlin in Pink Hoodie in White, actual Gelato garment preview"
+          },
+          "gallery": []
+        },
+        "Sand": {
+          "lead": {
+            "kind": "garmentPreview",
+            "image": "hoodies-20261116/berlin-in-pink-sf500-sand.jpg",
+            "sha256": "fd792e1f503fa601b5c2371c818e2657f8f5cf38a2701c6dae1674c1f0e0380b",
+            "alt": "Berlin in Pink Hoodie in Sand, actual Gelato garment preview"
+          },
+          "gallery": []
+        },
+        "ring spun sports grey": {
+          "lead": {
+            "kind": "garmentPreview",
+            "image": "hoodies-20261116/berlin-in-pink-sf500-ring-spun-sports-grey.jpg",
+            "sha256": "0f7e582f223593443706437e57a3a9df4766ad580951e2ad1f0b2d83abc85870",
+            "alt": "Berlin in Pink Hoodie in Ring Spun Sports Grey, actual Gelato garment preview"
+          },
+          "gallery": []
+        }
+      }
+    },
+    "enabled": true,
+    "apparelKind": "hoodie",
+    "description": "<p>I show Berlin&#x27;s pink pipes above the streets while construction sites move groundwater.</p><p>Gildan Softstyle SF500 midweight fleece hoodie, 285 g/m², classic fit, brushed interior and cotton face. The fibre blend varies by colour. I have each hoodie made to order by Gelato.</p><h3>Size and care</h3><p>Available in S, M, L, XL, 2XL and 3XL. The measurements below are garment length and half-chest width, measured flat. Compare them with a hoodie that fits you.</p><p>S: length 71.1 cm; half-chest width 51.0 cm.</p><p>M: length 73.7 cm; half-chest width 56.0 cm.</p><p>L: length 76.2 cm; half-chest width 61.0 cm.</p><p>XL: length 78.7 cm; half-chest width 66.0 cm.</p><p>2XL: length 81.3 cm; half-chest width 71.0 cm.</p><p>3XL: length 83.8 cm; half-chest width 76.0 cm.</p><p></p><p>Machine wash warm, inside out, with similar colours. Use only non-chlorine bleach. Tumble dry at medium heat. Do not iron if decorated. Do not dry clean.</p>",
+    "descriptionOverride": true
+  },
+  {
+    "id": "hoodie-berlin-uhr-sf500",
+    "name": "Berlin-Uhr Hoodie",
+    "place": "Europa-Center · City West",
+    "image": "hoodies-20261116/berlin-uhr-sf500-white.jpg",
+    "alt": "Berlin-Uhr Hoodie in White, actual Gelato garment preview",
+    "typeLine": "GILDAN SF500 MIDWEIGHT FLEECE HOODIE · FRONT PRINT",
+    "wixProductId": "8332d620-4311-4c07-8f5b-7112656b028d",
+    "group": "apparel",
+    "cardSummary": "I show Dieter Binninger's 1975 Berlin-Uhr, where rows of red and yellow lights tell the time.",
+    "deliveryNote": "Made to order.",
+    "deliveryDetails": "I have this hoodie made to order by Gelato. Compare the size measurements with a hoodie that fits you.",
+    "gallery": [
+      {
+        "image": "tshirts-20261113/berlin-uhr-design-detail.webp",
+        "alt": "Berlin-Uhr original print artwork",
+        "kind": "designDetail"
+      }
+    ],
+    "apparelMedia": {
+      "version": 1,
+      "defaultColor": "White",
+      "sharedGallery": [
+        {
+          "image": "tshirts-20261113/berlin-uhr-design-detail.webp",
+          "alt": "Berlin-Uhr original print artwork",
+          "kind": "designDetail"
+        }
+      ],
+      "colors": {
+        "White": {
+          "lead": {
+            "kind": "garmentPreview",
+            "image": "hoodies-20261116/berlin-uhr-sf500-white.jpg",
+            "sha256": "77d32090970297a18f871c20ded8fcad030cfed72f970d54a7f11303acaf77e4",
+            "alt": "Berlin-Uhr Hoodie in White, actual Gelato garment preview"
+          },
+          "gallery": []
+        },
+        "Sand": {
+          "lead": {
+            "kind": "garmentPreview",
+            "image": "hoodies-20261116/berlin-uhr-sf500-sand.jpg",
+            "sha256": "21d128a44fb8d0d456c000bb184415ea76dd3b2fbb1d7bd11ef94e613d586b79",
+            "alt": "Berlin-Uhr Hoodie in Sand, actual Gelato garment preview"
+          },
+          "gallery": []
+        }
+      }
+    },
+    "enabled": true,
+    "apparelKind": "hoodie",
+    "description": "<p>I show Dieter Binninger&#x27;s 1975 Berlin-Uhr, where rows of red and yellow lights tell the time.</p><p>Gildan Softstyle SF500 midweight fleece hoodie, 285 g/m², classic fit, brushed interior and cotton face. The fibre blend varies by colour. I have each hoodie made to order by Gelato.</p><h3>Size and care</h3><p>Available in S, M, L, XL, 2XL and 3XL. The measurements below are garment length and half-chest width, measured flat. Compare them with a hoodie that fits you.</p><p>S: length 71.1 cm; half-chest width 51.0 cm.</p><p>M: length 73.7 cm; half-chest width 56.0 cm.</p><p>L: length 76.2 cm; half-chest width 61.0 cm.</p><p>XL: length 78.7 cm; half-chest width 66.0 cm.</p><p>2XL: length 81.3 cm; half-chest width 71.0 cm.</p><p>3XL: length 83.8 cm; half-chest width 76.0 cm.</p><p></p><p>Machine wash warm, inside out, with similar colours. Use only non-chlorine bleach. Tumble dry at medium heat. Do not iron if decorated. Do not dry clean.</p>",
+    "descriptionOverride": true
+  },
+  {
+    "id": "hoodie-teufelsberg-sf500",
+    "name": "Teufelsberg Hoodie",
+    "place": "Grunewald",
+    "image": "hoodies-20261116/teufelsberg-sf500-black.jpg",
+    "alt": "Teufelsberg Hoodie in Black, actual Gelato garment preview",
+    "typeLine": "GILDAN SF500 MIDWEIGHT FLEECE HOODIE · FRONT PRINT",
+    "wixProductId": "03f4ed01-fab5-4446-9e8f-cdca7e80317d",
+    "group": "apparel",
+    "cardSummary": "I show the former listening station's white radar domes rising above the trees on Teufelsberg.",
+    "deliveryNote": "Made to order.",
+    "deliveryDetails": "I have this hoodie made to order by Gelato. Compare the size measurements with a hoodie that fits you.",
+    "gallery": [
+      {
+        "image": "tshirts-20261113/teufelsberg-design-detail.webp",
+        "alt": "Teufelsberg original print artwork",
+        "kind": "designDetail"
+      }
+    ],
+    "apparelMedia": {
+      "version": 1,
+      "defaultColor": "Black",
+      "sharedGallery": [
+        {
+          "image": "tshirts-20261113/teufelsberg-design-detail.webp",
+          "alt": "Teufelsberg original print artwork",
+          "kind": "designDetail"
+        }
+      ],
+      "colors": {
+        "Black": {
+          "lead": {
+            "kind": "garmentPreview",
+            "image": "hoodies-20261116/teufelsberg-sf500-black.jpg",
+            "sha256": "a9758849d8ea97e36982821173b7f369097588313d598049065e495edc8ef0f0",
+            "alt": "Teufelsberg Hoodie in Black, actual Gelato garment preview"
+          },
+          "gallery": []
+        },
+        "Charcoal": {
+          "lead": {
+            "kind": "garmentPreview",
+            "image": "hoodies-20261116/teufelsberg-sf500-charcoal.jpg",
+            "sha256": "ebd00440b1d5d96042e3a10bfe4ff91642f6f3b6cd7b18fbba5b53d8076123d9",
+            "alt": "Teufelsberg Hoodie in Charcoal, actual Gelato garment preview"
+          },
+          "gallery": []
+        },
+        "Navy": {
+          "lead": {
+            "kind": "garmentPreview",
+            "image": "hoodies-20261116/teufelsberg-sf500-navy.jpg",
+            "sha256": "7b8deae68c4f6257423344d71ad3833a846a26744f1ce028cfd7593a65add4b2",
+            "alt": "Teufelsberg Hoodie in Navy, actual Gelato garment preview"
+          },
+          "gallery": []
+        }
+      }
+    },
+    "enabled": true,
+    "apparelKind": "hoodie",
+    "description": "<p>I show the former listening station&#x27;s white radar domes rising above the trees on Teufelsberg.</p><p>Gildan Softstyle SF500 midweight fleece hoodie, 285 g/m², classic fit, brushed interior and cotton face. The fibre blend varies by colour. I have each hoodie made to order by Gelato.</p><h3>Size and care</h3><p>Available in S, M, L, XL, 2XL and 3XL. The measurements below are garment length and half-chest width, measured flat. Compare them with a hoodie that fits you.</p><p>S: length 71.1 cm; half-chest width 51.0 cm.</p><p>M: length 73.7 cm; half-chest width 56.0 cm.</p><p>L: length 76.2 cm; half-chest width 61.0 cm.</p><p>XL: length 78.7 cm; half-chest width 66.0 cm.</p><p>2XL: length 81.3 cm; half-chest width 71.0 cm.</p><p>3XL: length 83.8 cm; half-chest width 76.0 cm.</p><p></p><p>Machine wash warm, inside out, with similar colours. Use only non-chlorine bleach. Tumble dry at medium heat. Do not iron if decorated. Do not dry clean.</p>",
+    "descriptionOverride": true
+  },
+  {
+    "id": "hoodie-tempelhof-sf500",
+    "name": "Tempelhof Hoodie",
+    "place": "Tempelhof · Berlin",
+    "image": "hoodies-20261116/tempelhof-sf500-black.jpg",
+    "alt": "Tempelhof Hoodie in Black, actual Gelato garment preview",
+    "typeLine": "GILDAN SF500 MIDWEIGHT FLEECE HOODIE · FRONT PRINT",
+    "wixProductId": "29a9827e-67a4-4a7e-8794-c6ebb65a716c",
+    "group": "apparel",
+    "cardSummary": "I keep Tempelhof's open runway in view, with cyclists crossing beneath the pale blue sky and a kite overhead.",
+    "deliveryNote": "Made to order.",
+    "deliveryDetails": "I have this hoodie made to order by Gelato. Compare the size measurements with a hoodie that fits you.",
+    "gallery": [
+      {
+        "kind": "designDetail",
+        "image": "tshirts-20261115/design-artwork/tempelhof-front-25cm.jpg",
+        "alt": "Tempelhof original print artwork"
+      }
+    ],
+    "apparelMedia": {
+      "version": 1,
+      "defaultColor": "Black",
+      "sharedGallery": [
+        {
+          "kind": "designDetail",
+          "image": "tshirts-20261115/design-artwork/tempelhof-front-25cm.jpg",
+          "alt": "Tempelhof original print artwork"
+        }
+      ],
+      "colors": {
+        "Black": {
+          "lead": {
+            "kind": "garmentPreview",
+            "image": "hoodies-20261116/tempelhof-sf500-black.jpg",
+            "sha256": "0377b927af1587b9b85c5660ed52832d38b2b5d485e84d65f952a9d292f60ed5",
+            "alt": "Tempelhof Hoodie in Black, actual Gelato garment preview"
+          },
+          "gallery": []
+        }
+      }
+    },
+    "enabled": true,
+    "apparelKind": "hoodie",
+    "description": "<p>I keep Tempelhof&#x27;s open runway in view, with cyclists crossing beneath the pale blue sky and a kite overhead.</p><p>Gildan Softstyle SF500 midweight fleece hoodie, 285 g/m², classic fit, brushed interior and cotton face. The fibre blend varies by colour. I have each hoodie made to order by Gelato.</p><h3>Size and care</h3><p>Available in S, M, L, XL, 2XL and 3XL. The measurements below are garment length and half-chest width, measured flat. Compare them with a hoodie that fits you.</p><p>S: length 71.1 cm; half-chest width 51.0 cm.</p><p>M: length 73.7 cm; half-chest width 56.0 cm.</p><p>L: length 76.2 cm; half-chest width 61.0 cm.</p><p>XL: length 78.7 cm; half-chest width 66.0 cm.</p><p>2XL: length 81.3 cm; half-chest width 71.0 cm.</p><p>3XL: length 83.8 cm; half-chest width 76.0 cm.</p><p></p><p>Machine wash warm, inside out, with similar colours. Use only non-chlorine bleach. Tumble dry at medium heat. Do not iron if decorated. Do not dry clean.</p>",
+    "descriptionOverride": true
+  },
+  {
+    "id": "hoodie-berolina-modernist-sf500",
+    "name": "Berolina Modernist Hoodie",
+    "place": "Alexanderplatz · Mitte",
+    "image": "hoodies-20261116/berolina-modernist-sf500-black.jpg",
+    "alt": "Berolina Modernist Hoodie in Black, actual Gelato garment preview",
+    "typeLine": "GILDAN SF500 MIDWEIGHT FLEECE HOODIE · FRONT PRINT",
+    "wixProductId": "59de9c19-bc45-4056-9446-a250c1341cd7",
+    "group": "apparel",
+    "cardSummary": "I reimagine Berolina's welcoming gesture. Unveiled at Alexanderplatz in 1895, she gave Berlin a human form; the copper statue disappeared during the Second World War.",
+    "deliveryNote": "Made to order.",
+    "deliveryDetails": "I have this hoodie made to order by Gelato. Compare the size measurements with a hoodie that fits you.",
+    "gallery": [
+      {
+        "kind": "designDetail",
+        "image": "tshirts-20261115/design-artwork/berolina-modernist-front-25cm.jpg",
+        "alt": "Berolina Modernist original print artwork"
+      }
+    ],
+    "apparelMedia": {
+      "version": 1,
+      "defaultColor": "Black",
+      "sharedGallery": [
+        {
+          "kind": "designDetail",
+          "image": "tshirts-20261115/design-artwork/berolina-modernist-front-25cm.jpg",
+          "alt": "Berolina Modernist original print artwork"
+        }
+      ],
+      "colors": {
+        "Black": {
+          "lead": {
+            "kind": "garmentPreview",
+            "image": "hoodies-20261116/berolina-modernist-sf500-black.jpg",
+            "sha256": "ff98d7a27a35105fb58318413708a5820b775caa7d5296c69b340af60e700163",
+            "alt": "Berolina Modernist Hoodie in Black, actual Gelato garment preview"
+          },
+          "gallery": []
+        }
+      }
+    },
+    "enabled": true,
+    "apparelKind": "hoodie",
+    "description": "<p>I reimagine Berolina&#x27;s welcoming gesture. Unveiled at Alexanderplatz in 1895, she gave Berlin a human form; the copper statue disappeared during the Second World War.</p><p>Gildan Softstyle SF500 midweight fleece hoodie, 285 g/m², classic fit, brushed interior and cotton face. The fibre blend varies by colour. I have each hoodie made to order by Gelato.</p><h3>Size and care</h3><p>Available in S, M, L, XL, 2XL and 3XL. The measurements below are garment length and half-chest width, measured flat. Compare them with a hoodie that fits you.</p><p>S: length 71.1 cm; half-chest width 51.0 cm.</p><p>M: length 73.7 cm; half-chest width 56.0 cm.</p><p>L: length 76.2 cm; half-chest width 61.0 cm.</p><p>XL: length 78.7 cm; half-chest width 66.0 cm.</p><p>2XL: length 81.3 cm; half-chest width 71.0 cm.</p><p>3XL: length 83.8 cm; half-chest width 76.0 cm.</p><p></p><p>Machine wash warm, inside out, with similar colours. Use only non-chlorine bleach. Tumble dry at medium heat. Do not iron if decorated. Do not dry clean.</p>",
+    "descriptionOverride": true
+  },
+  {
+    "id": "hoodie-spaeti-sf500",
+    "name": "Späti Hoodie",
+    "place": "Berlin · Späti",
+    "image": "hoodies-20261116/spaeti-sf500-white.jpg",
+    "alt": "Späti Hoodie in White, actual Gelato garment preview",
+    "typeLine": "GILDAN SF500 MIDWEIGHT FLEECE HOODIE · FRONT PRINT",
+    "wixProductId": "ff2f7415-6e80-4925-9255-b16f8392e14f",
+    "group": "apparel",
+    "cardSummary": "I set a warmly lit Späti and a bicycle against a rainy, dark green Berlin street at night.",
+    "deliveryNote": "Made to order.",
+    "deliveryDetails": "I have this hoodie made to order by Gelato. Compare the size measurements with a hoodie that fits you.",
+    "gallery": [
+      {
+        "kind": "designDetail",
+        "image": "tshirts-20261115/design-artwork/spaeti-front-25cm.jpg",
+        "alt": "Späti original print artwork"
+      }
+    ],
+    "apparelMedia": {
+      "version": 1,
+      "defaultColor": "White",
+      "sharedGallery": [
+        {
+          "kind": "designDetail",
+          "image": "tshirts-20261115/design-artwork/spaeti-front-25cm.jpg",
+          "alt": "Späti original print artwork"
+        }
+      ],
+      "colors": {
+        "White": {
+          "lead": {
+            "kind": "garmentPreview",
+            "image": "hoodies-20261116/spaeti-sf500-white.jpg",
+            "sha256": "86493ff1effb47baa1fd0427ecaf4bd7a7afdaeacdbec19d184561b5c642cbd6",
+            "alt": "Späti Hoodie in White, actual Gelato garment preview"
+          },
+          "gallery": []
+        }
+      }
+    },
+    "enabled": true,
+    "apparelKind": "hoodie",
+    "description": "<p>I set a warmly lit Späti and a bicycle against a rainy, dark green Berlin street at night.</p><p>Gildan Softstyle SF500 midweight fleece hoodie, 285 g/m², classic fit, brushed interior and cotton face. The fibre blend varies by colour. I have each hoodie made to order by Gelato.</p><h3>Size and care</h3><p>Available in S, M, L, XL, 2XL and 3XL. The measurements below are garment length and half-chest width, measured flat. Compare them with a hoodie that fits you.</p><p>S: length 71.1 cm; half-chest width 51.0 cm.</p><p>M: length 73.7 cm; half-chest width 56.0 cm.</p><p>L: length 76.2 cm; half-chest width 61.0 cm.</p><p>XL: length 78.7 cm; half-chest width 66.0 cm.</p><p>2XL: length 81.3 cm; half-chest width 71.0 cm.</p><p>3XL: length 83.8 cm; half-chest width 76.0 cm.</p><p></p><p>Machine wash warm, inside out, with similar colours. Use only non-chlorine bleach. Tumble dry at medium heat. Do not iron if decorated. Do not dry clean.</p>",
+    "descriptionOverride": true
+  },
+  {
+    "id": "hoodie-currywurst-sf500",
+    "name": "Currywurst Hoodie",
+    "place": "Berlin · Currywurst",
+    "image": "hoodies-20261116/currywurst-sf500-white.jpg",
+    "alt": "Currywurst Hoodie in White, actual Gelato garment preview",
+    "typeLine": "GILDAN SF500 MIDWEIGHT FLEECE HOODIE · FRONT PRINT",
+    "wixProductId": "5ec6aaee-6f5d-4e9c-8d20-9872f40b4534",
+    "group": "apparel",
+    "cardSummary": "I frame Currywurst in its paper tray with a bread roll against bold yellow and red.",
+    "deliveryNote": "Made to order.",
+    "deliveryDetails": "I have this hoodie made to order by Gelato. Compare the size measurements with a hoodie that fits you.",
+    "gallery": [
+      {
+        "kind": "designDetail",
+        "image": "tshirts-20261115/design-artwork/currywurst-front-25cm.jpg",
+        "alt": "Currywurst original print artwork"
+      }
+    ],
+    "apparelMedia": {
+      "version": 1,
+      "defaultColor": "White",
+      "sharedGallery": [
+        {
+          "kind": "designDetail",
+          "image": "tshirts-20261115/design-artwork/currywurst-front-25cm.jpg",
+          "alt": "Currywurst original print artwork"
+        }
+      ],
+      "colors": {
+        "White": {
+          "lead": {
+            "kind": "garmentPreview",
+            "image": "hoodies-20261116/currywurst-sf500-white.jpg",
+            "sha256": "732bb3a07bc9cb414142d22c1acad55e44714ef7977d020e54ba515590cda340",
+            "alt": "Currywurst Hoodie in White, actual Gelato garment preview"
+          },
+          "gallery": []
+        },
+        "Sand": {
+          "lead": {
+            "kind": "garmentPreview",
+            "image": "hoodies-20261116/currywurst-sf500-sand.jpg",
+            "sha256": "722fdd63f6368f30890e6391425f6940cf0224aafbe685a3bf8cb50e126d4b33",
+            "alt": "Currywurst Hoodie in Sand, actual Gelato garment preview"
+          },
+          "gallery": []
+        },
+        "Black": {
+          "lead": {
+            "kind": "garmentPreview",
+            "image": "hoodies-20261116/currywurst-sf500-black.jpg",
+            "sha256": "8f3a88efe8453b44f72cecbbfe95fcced19fa7171bfbbc5916599075d6c243c1",
+            "alt": "Currywurst Hoodie in Black, actual Gelato garment preview"
+          },
+          "gallery": []
+        }
+      }
+    },
+    "enabled": true,
+    "apparelKind": "hoodie",
+    "description": "<p>I frame Currywurst in its paper tray with a bread roll against bold yellow and red.</p><p>Gildan Softstyle SF500 midweight fleece hoodie, 285 g/m², classic fit, brushed interior and cotton face. The fibre blend varies by colour. I have each hoodie made to order by Gelato.</p><h3>Size and care</h3><p>Available in S, M, L, XL, 2XL and 3XL. The measurements below are garment length and half-chest width, measured flat. Compare them with a hoodie that fits you.</p><p>S: length 71.1 cm; half-chest width 51.0 cm.</p><p>M: length 73.7 cm; half-chest width 56.0 cm.</p><p>L: length 76.2 cm; half-chest width 61.0 cm.</p><p>XL: length 78.7 cm; half-chest width 66.0 cm.</p><p>2XL: length 81.3 cm; half-chest width 71.0 cm.</p><p>3XL: length 83.8 cm; half-chest width 76.0 cm.</p><p></p><p>Machine wash warm, inside out, with similar colours. Use only non-chlorine bleach. Tumble dry at medium heat. Do not iron if decorated. Do not dry clean.</p>",
+    "descriptionOverride": true
+  },
+  {
+    "id": "hoodie-marzahn-sf500",
+    "name": "Marzahn Hoodie",
+    "place": "Marzahn-Hellersdorf · Berlin",
+    "image": "hoodies-20261116/marzahn-sf500-white.jpg",
+    "alt": "Marzahn Hoodie in White, actual Gelato garment preview",
+    "typeLine": "GILDAN SF500 MIDWEIGHT FLEECE HOODIE · FRONT PRINT",
+    "wixProductId": "5e98f27e-2d27-4461-8ee2-734e73bcee8e",
+    "group": "apparel",
+    "cardSummary": "I set coral, yellow and turquoise apartment blocks above leafy trees, with a cyclist under a blue sky.",
+    "deliveryNote": "Made to order.",
+    "deliveryDetails": "I have this hoodie made to order by Gelato. Compare the size measurements with a hoodie that fits you.",
+    "gallery": [
+      {
+        "kind": "designDetail",
+        "image": "tshirts-20261115/design-artwork/marzahn-front-25cm.jpg",
+        "alt": "Marzahn original print artwork"
+      }
+    ],
+    "apparelMedia": {
+      "version": 1,
+      "defaultColor": "White",
+      "sharedGallery": [
+        {
+          "kind": "designDetail",
+          "image": "tshirts-20261115/design-artwork/marzahn-front-25cm.jpg",
+          "alt": "Marzahn original print artwork"
+        }
+      ],
+      "colors": {
+        "White": {
+          "lead": {
+            "kind": "garmentPreview",
+            "image": "hoodies-20261116/marzahn-sf500-white.jpg",
+            "sha256": "691ba362b97e5feb316734af2efe193b80e9492b9b4308c6e289bd184ababbc0",
+            "alt": "Marzahn Hoodie in White, actual Gelato garment preview"
+          },
+          "gallery": []
+        },
+        "Sand": {
+          "lead": {
+            "kind": "garmentPreview",
+            "image": "hoodies-20261116/marzahn-sf500-sand.jpg",
+            "sha256": "d38d762b7eed80933704a0a310004ab7e0d0f039f7f92841a48f0f13e5fcf5c6",
+            "alt": "Marzahn Hoodie in Sand, actual Gelato garment preview"
+          },
+          "gallery": []
+        },
+        "Black": {
+          "lead": {
+            "kind": "garmentPreview",
+            "image": "hoodies-20261116/marzahn-sf500-black.jpg",
+            "sha256": "610c89bdb65eb635d6809d66e6e46b3f472b5225fc2099b5277a0c822421c9ae",
+            "alt": "Marzahn Hoodie in Black, actual Gelato garment preview"
+          },
+          "gallery": []
+        }
+      }
+    },
+    "enabled": true,
+    "apparelKind": "hoodie",
+    "description": "<p>I set coral, yellow and turquoise apartment blocks above leafy trees, with a cyclist under a blue sky.</p><p>Gildan Softstyle SF500 midweight fleece hoodie, 285 g/m², classic fit, brushed interior and cotton face. The fibre blend varies by colour. I have each hoodie made to order by Gelato.</p><h3>Size and care</h3><p>Available in S, M, L, XL, 2XL and 3XL. The measurements below are garment length and half-chest width, measured flat. Compare them with a hoodie that fits you.</p><p>S: length 71.1 cm; half-chest width 51.0 cm.</p><p>M: length 73.7 cm; half-chest width 56.0 cm.</p><p>L: length 76.2 cm; half-chest width 61.0 cm.</p><p>XL: length 78.7 cm; half-chest width 66.0 cm.</p><p>2XL: length 81.3 cm; half-chest width 71.0 cm.</p><p>3XL: length 83.8 cm; half-chest width 76.0 cm.</p><p></p><p>Machine wash warm, inside out, with similar colours. Use only non-chlorine bleach. Tumble dry at medium heat. Do not iron if decorated. Do not dry clean.</p>",
+    "descriptionOverride": true
+  },
+  {
+    "id": "hoodie-a-window-in-berlin-sf500",
+    "name": "A Window in Berlin Hoodie",
+    "place": "Berlin · apartment facade",
+    "image": "hoodies-20261116/a-window-in-berlin-sf500-white.jpg",
+    "alt": "A Window in Berlin Hoodie in White, actual Gelato garment preview",
+    "typeLine": "GILDAN SF500 MIDWEIGHT FLEECE HOODIE · FRONT PRINT",
+    "wixProductId": "b932a33e-9db6-4b2d-99e3-d161a2b929de",
+    "group": "apparel",
+    "cardSummary": "I show a quiet apartment facade at dusk, with one warmly lit window and a plant.",
+    "deliveryNote": "Made to order.",
+    "deliveryDetails": "I have this hoodie made to order by Gelato. Compare the size measurements with a hoodie that fits you.",
+    "gallery": [
+      {
+        "kind": "designDetail",
+        "image": "tshirts-20261115/design-artwork/window-in-berlin-front-25cm.jpg",
+        "alt": "A Window in Berlin original print artwork"
+      }
+    ],
+    "apparelMedia": {
+      "version": 1,
+      "defaultColor": "White",
+      "sharedGallery": [
+        {
+          "kind": "designDetail",
+          "image": "tshirts-20261115/design-artwork/window-in-berlin-front-25cm.jpg",
+          "alt": "A Window in Berlin original print artwork"
+        }
+      ],
+      "colors": {
+        "White": {
+          "lead": {
+            "kind": "garmentPreview",
+            "image": "hoodies-20261116/a-window-in-berlin-sf500-white.jpg",
+            "sha256": "b4b1e3d3e11d53f4939c74da909745904398cdd1a188ea6238a2acbfcc6c1717",
+            "alt": "A Window in Berlin Hoodie in White, actual Gelato garment preview"
+          },
+          "gallery": []
+        },
+        "Black": {
+          "lead": {
+            "kind": "garmentPreview",
+            "image": "hoodies-20261116/a-window-in-berlin-sf500-black.jpg",
+            "sha256": "50aabc4c5b773dff44a14c7d0481dfb763d5dea3d0b7c40f0413c26ab17f7eb1",
+            "alt": "A Window in Berlin Hoodie in Black, actual Gelato garment preview"
+          },
+          "gallery": []
+        }
+      }
+    },
+    "enabled": true,
+    "apparelKind": "hoodie",
+    "description": "<p>I show a quiet apartment facade at dusk, with one warmly lit window and a plant.</p><p>Gildan Softstyle SF500 midweight fleece hoodie, 285 g/m², classic fit, brushed interior and cotton face. The fibre blend varies by colour. I have each hoodie made to order by Gelato.</p><h3>Size and care</h3><p>Available in S, M, L, XL, 2XL and 3XL. The measurements below are garment length and half-chest width, measured flat. Compare them with a hoodie that fits you.</p><p>S: length 71.1 cm; half-chest width 51.0 cm.</p><p>M: length 73.7 cm; half-chest width 56.0 cm.</p><p>L: length 76.2 cm; half-chest width 61.0 cm.</p><p>XL: length 78.7 cm; half-chest width 66.0 cm.</p><p>2XL: length 81.3 cm; half-chest width 71.0 cm.</p><p>3XL: length 83.8 cm; half-chest width 76.0 cm.</p><p></p><p>Machine wash warm, inside out, with similar colours. Use only non-chlorine bleach. Tumble dry at medium heat. Do not iron if decorated. Do not dry clean.</p>",
+    "descriptionOverride": true
+  },
+  {
+    "id": "hoodie-schoenhauser-allee-sf500",
+    "name": "Schönhauser Allee Hoodie",
+    "place": "Schönhauser Allee · Berlin",
+    "image": "hoodies-20261116/schoenhauser-allee-sf500-white.jpg",
+    "alt": "Schönhauser Allee Hoodie in White, actual Gelato garment preview",
+    "typeLine": "GILDAN SF500 MIDWEIGHT FLEECE HOODIE · FRONT PRINT",
+    "wixProductId": "a54dd446-4abe-4f2f-9ebe-c3ecfc96bc31",
+    "group": "apparel",
+    "cardSummary": "I show a yellow train crossing a dark green elevated steel viaduct above the apartment buildings on Schönhauser Allee.",
+    "deliveryNote": "Made to order.",
+    "deliveryDetails": "I have this hoodie made to order by Gelato. Compare the size measurements with a hoodie that fits you.",
+    "gallery": [
+      {
+        "kind": "designDetail",
+        "image": "tshirts-20261115/design-artwork/schoenhauser-allee-front-25cm.jpg",
+        "alt": "Schönhauser Allee original print artwork"
+      }
+    ],
+    "apparelMedia": {
+      "version": 1,
+      "defaultColor": "White",
+      "sharedGallery": [
+        {
+          "kind": "designDetail",
+          "image": "tshirts-20261115/design-artwork/schoenhauser-allee-front-25cm.jpg",
+          "alt": "Schönhauser Allee original print artwork"
+        }
+      ],
+      "colors": {
+        "White": {
+          "lead": {
+            "kind": "garmentPreview",
+            "image": "hoodies-20261116/schoenhauser-allee-sf500-white.jpg",
+            "sha256": "6d4f63a65bf3669b5f160a5cb813b222df445e265cecfb26b4ca68c7e1c3c045",
+            "alt": "Schönhauser Allee Hoodie in White, actual Gelato garment preview"
+          },
+          "gallery": []
+        },
+        "Black": {
+          "lead": {
+            "kind": "garmentPreview",
+            "image": "hoodies-20261116/schoenhauser-allee-sf500-black.jpg",
+            "sha256": "73f5a1fa310cb8363bbe1efd2887a5a0e44242568578a429dd2d8914072b3475",
+            "alt": "Schönhauser Allee Hoodie in Black, actual Gelato garment preview"
+          },
+          "gallery": []
+        }
+      }
+    },
+    "enabled": true,
+    "apparelKind": "hoodie",
+    "description": "<p>I show a yellow train crossing a dark green elevated steel viaduct above the apartment buildings on Schönhauser Allee.</p><p>Gildan Softstyle SF500 midweight fleece hoodie, 285 g/m², classic fit, brushed interior and cotton face. The fibre blend varies by colour. I have each hoodie made to order by Gelato.</p><h3>Size and care</h3><p>Available in S, M, L, XL, 2XL and 3XL. The measurements below are garment length and half-chest width, measured flat. Compare them with a hoodie that fits you.</p><p>S: length 71.1 cm; half-chest width 51.0 cm.</p><p>M: length 73.7 cm; half-chest width 56.0 cm.</p><p>L: length 76.2 cm; half-chest width 61.0 cm.</p><p>XL: length 78.7 cm; half-chest width 66.0 cm.</p><p>2XL: length 81.3 cm; half-chest width 71.0 cm.</p><p>3XL: length 83.8 cm; half-chest width 76.0 cm.</p><p></p><p>Machine wash warm, inside out, with similar colours. Use only non-chlorine bleach. Tumble dry at medium heat. Do not iron if decorated. Do not dry clean.</p>",
+    "descriptionOverride": true
   }
 ]

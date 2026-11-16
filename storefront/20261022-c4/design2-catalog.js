@@ -1,7 +1,7 @@
 // Presentation-only helpers. Native catalogue eligibility always wins.
 export const normaliseSearch = value => String(value||'').normalize('NFKD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/ß/g,'ss').replace(/[^a-z0-9]+/g,' ').trim();
 export const SEARCH_SYNONYMS = Object.freeze([
- ['fernsehturm','tv tower','television tower'],['mauer','wall','divided berlin'],['weltzeituhr','world clock'],
+ ['hoodie','hoodies','kapuzenpullover','kapuzenpulli'],['fernsehturm','tv tower','television tower'],['mauer','wall','divided berlin'],['weltzeituhr','world clock'],
  ['geisterbahnhofe','ghost stations'],['siegessaule','victory column'],['bezirk','district'],['bezirke','districts'],
  ['spati','spaeti','late shop'],['schonhauser','schoenhauser'],['neukolln','neukoelln'],['kopenick','koepenick'],
  ['markthallen','market halls'],['strassenbahn','tram'],['ubahn','u bahn','underground'],['flughafen','airport','tempelhof'],
