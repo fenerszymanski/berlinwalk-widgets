@@ -57,7 +57,7 @@
   const nativeImage = value => {if(typeof value!=='string')return '#';const match=/^wix:image:\/\/v1\/([^/#?]+)(?:\/|#|\?|$)/.exec(value);if(match&&/^[a-zA-Z0-9_.~%-]+$/.test(match[1]))return 'https://static.wixstatic.com/media/'+match[1];return url(value);};
   const json = value => {try{return JSON.parse(value || 'null');}catch{return null;}};
   // Native-widget guard release. The site-wide head snippet (wix/head-native-guard.html) hides the original Wix Stores widgets from first paint; this class lets them show again. Called only on terminal fallback paths: the bridge reports the native store restored or not collapsible, the visitor opens the original cart, the bridge times out, or the element's own files fail to load. A transient fail() alone does not release it.
-  const BRIDGE_RESEND_MS = Object.freeze([1500, 3500, 6500, 10500, 15000]);
+  const BRIDGE_RESEND_MS = Object.freeze([500, 1000, 1500, 2000, 2500, 3000, 3500, 4000, 5000, 6000, 7000, 8500, 10500, 13000, 16000]);
   const releaseNative = () => {try{document.documentElement.classList.add('bw-shop-native');}catch{}};
   // This native digital SKU uses the same required map configurator, never a generic product add.
   const PRODUCT_VIEW_ALIASES = Object.freeze({'33c1b670-fadc-4bcf-a1a5-82cc14b668ea':Object.freeze({productId:'8aaf5412-7f21-42c7-acfb-85dd8417d68c',format:'framed'}),'6cf293bb-ae66-4cc0-a028-e6c08a15b325':Object.freeze({productId:'8aaf5412-7f21-42c7-acfb-85dd8417d68c',format:'canvas'}),'9b6fbecf-32e4-27dc-f3e6-9c887fe7f495': Object.freeze({productId:'8aaf5412-7f21-42c7-acfb-85dd8417d68c',format:'digital'})});
