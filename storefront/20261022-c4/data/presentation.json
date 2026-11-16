@@ -3809,5 +3809,51 @@
       }
     },
     "enabled": true
+  },
+  {
+    "id": "dl-arkonaplatz-morning",
+    "name": "Arkonaplatz Morning Printable Poster",
+    "place": "Arkonaplatz · Morning under plane trees",
+    "image": "arkonaplatz-morning-fullart.jpg",
+    "alt": "Painted morning view under plane trees at Arkonaplatz, with a sandy path, tenement fronts and the Arkonaplatz, Berlin footer.",
+    "typeLine": "DIGITAL DOWNLOAD · 30 × 40 CM",
+    "kind": "digital",
+    "deliveryNote": "Digital download · 1 JPEG print file and a printing guide. No physical item.",
+    "deliveryDetails": "Your download includes one 3:4 sRGB JPEG, 3543 × 4724 px at 300 dpi for 30 × 40 cm, and a printing guide. The same file prints without cropping at 45 × 60 cm and 60 × 80 cm, with softer detail at larger sizes. No physical poster, frame or decor is included.",
+    "group": "stories",
+    "visualCreditsHtml": "<p>Place and history references: the checked research for my story about Berlin's street plan of 1862, including Kauperts, Arkonaplatz, and Felix Bentlin, Buildings and Cities, 2023, doi:10.5334/bc.242.</p><p>I interpreted the small green square as a painted morning view. The viewpoint, individual windows and roofs, fence, play equipment and light are imagined details. The poster is not a document of a specific building row or the current play equipment. No source photograph is reproduced in the artwork.</p>",
+    "sizeImages": {
+      "30x40 cm": "arkonaplatz-morning-30x40.jpg"
+    },
+    "gallery": [
+      {
+        "image": "arkonaplatz-morning-30x40.jpg",
+        "alt": "Complete artwork at 30 x 40 cm. Digital file only."
+      }
+    ],
+    "wixProductId": "690ab195-e08f-80d1-31e8-eb73b33e0758"
+  },
+  {
+    "id": "dl-tegel-runway",
+    "name": "Tegel Runway Printable Poster",
+    "place": "Tegel · Hands that built a runway",
+    "image": "tegel-runway-fullart.jpg",
+    "alt": "Painted reconstruction of women sweeping gravel and pushing a wheelbarrow during the 1948 Tegel runway work, with a propeller aircraft above and the Tegel, Berlin footer.",
+    "typeLine": "DIGITAL DOWNLOAD · 30 × 40 CM",
+    "kind": "digital",
+    "deliveryNote": "Digital download · 1 JPEG print file and a printing guide. No physical item.",
+    "deliveryDetails": "Your download includes one 3:4 sRGB JPEG, 3543 × 4724 px at 300 dpi for 30 × 40 cm, and a printing guide. The same file prints without cropping at 45 × 60 cm and 60 × 80 cm, with softer detail at larger sizes. No physical poster, frame or decor is included.",
+    "group": "stories",
+    "visualCreditsHtml": "<p>History references: the checked research for my Tegel story, including BER's Tegel airport history and the Berlin Senate's 2009 study of the site.</p><p>Visual reference studies: United States Army Signal Corps, German workers using broom to sweep fine gravel into asphalt, 28 September 1948, USACE archive 369; German women clearing portion of strip at Tegel, Berlin, 14 September 1948, USACE archive 354. Both photographs are public domain.</p><p>I interpreted this work as a painted reconstruction. The arrangement of people, wheelbarrow load, tree line, sky and passing propeller aircraft are imagined details. The photographs do not document this exact scene or an aircraft passing at that moment. No source photograph is reproduced in the artwork.</p>",
+    "sizeImages": {
+      "30x40 cm": "tegel-runway-30x40.jpg"
+    },
+    "gallery": [
+      {
+        "image": "tegel-runway-30x40.jpg",
+        "alt": "Complete artwork at 30 x 40 cm. Digital file only."
+      }
+    ],
+    "wixProductId": "e25e176e-e5b5-0dba-242a-2b3a78a58719"
   }
 ]
