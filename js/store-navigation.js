@@ -91,6 +91,9 @@ export const STORE_DESIGN2_MENU = true;
 // Apparel launch: preserve legacy exports; enable the new category only in current Design 2.
 FILTERS.apparel=['all'];
 FILTERS.hoodies=['all'];
+FILTERS.clothing=['all','t-shirts','hoodies'];
+LEGACY_ROUTES['berlin-clothing']=['clothing','all'];
+export function clothingHref(filter='all'){if(!FILTERS.clothing.includes(filter))throw new TypeError('Unknown clothing filter');const u=new URL('https://walkofberlin.com/category/berlin-clothing');if(filter!=='all')u.searchParams.set('collection',filter);return u.href;}
 LEGACY_ROUTES['berlin-hoodies']=['hoodies','all'];
 LEGACY_ROUTES['berlin-t-shirts']=['apparel','all'];
 export const STORE_MENU_DESIGN2 = Object.freeze([
@@ -99,7 +102,7 @@ export const STORE_MENU_DESIGN2 = Object.freeze([
     ...[['everyday','Everyday','Berliner Alltag'],['landmarks','Landmarks','Wahrzeichen'],['stories','Berlin Stories','Berliner Geschichten'],['districts','Districts','Bezirke'],['sets','Sets','Sets']].map(([id,label,de])=>({label,de,href:storeHref('print',id)})),
     {label:'Print at home',de:'Zum Selbstdrucken',href:storeHref('print')+'&format=digital'}
   ]},
-  {id:'clothing',label:'Clothing',de:'Kleidung',href:'https://www.walkofberlin.com/category/berlin-t-shirts',items:[{label:'All T-shirts',de:'Alle T-Shirts',href:'https://www.walkofberlin.com/category/berlin-t-shirts'},{label:'Berlin Hoodies',de:'Berlin Hoodies',href:'https://walkofberlin.com/category/berlin-hoodies'}]},
+  {id:'clothing',label:'Clothing',de:'Kleidung',href:clothingHref(),allLabel:'All clothing',allDe:'Alle Kleidung',items:[{label:'T-shirts',de:'T-Shirts',href:'https://walkofberlin.com/category/berlin-t-shirts'},{label:'Hoodies',de:'Hoodies',href:'https://walkofberlin.com/category/berlin-hoodies'}]},
   {id:'gifts',label:'Gifts',de:'Geschenke',href:'https://walkofberlin.com/category/berlin-christmas-gifts',hrefDe:'https://walkofberlin.com/de/category/berlin-geschenke',items:[
     {label:'Your street in 1928',de:'Deine Straße 1928',href:STORE_PERSONALISED_PRODUCT},
     {label:'1928 digital file',de:'1928 als digitale Datei',href:'https://walkofberlin.com/product-page/your-berlin-street-in-1928-digital-file'},

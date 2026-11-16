@@ -1,5 +1,5 @@
 (() => {
-const BW_HEADER_NAV_VERSION = 'hoodies-in-store-20261116';
+const BW_HEADER_NAV_VERSION = 'clothing-page-20261116';
 if (customElements.get('bw-site-header')?.navigationVersion === BW_HEADER_NAV_VERSION
   || customElements.get('bw-site-header-store-nav')?.navigationVersion === BW_HEADER_NAV_VERSION) return;
 
@@ -155,16 +155,18 @@ const BW_HEADER_STORE_DESIGN2_EN = [
     "id": "clothing",
     "label": "Clothing",
     "de": "Kleidung",
-    "href": "https://www.walkofberlin.com/category/berlin-t-shirts",
+    "href": "https://walkofberlin.com/category/berlin-clothing",
+    "allLabel": "All clothing",
+    "allDe": "Alle Kleidung",
     "items": [
       {
-        "label": "All T-shirts",
-        "de": "Alle T-Shirts",
-        "href": "https://www.walkofberlin.com/category/berlin-t-shirts"
+        "label": "T-shirts",
+        "de": "T-Shirts",
+        "href": "https://walkofberlin.com/category/berlin-t-shirts"
       },
       {
-        "label": "Berlin Hoodies",
-        "de": "Berlin Hoodies",
+        "label": "Hoodies",
+        "de": "Hoodies",
         "href": "https://walkofberlin.com/category/berlin-hoodies"
       }
     ]
@@ -291,16 +293,18 @@ const BW_HEADER_STORE_DESIGN2_DE = [
     "id": "clothing",
     "label": "Kleidung",
     "de": "Kleidung",
-    "href": "https://www.walkofberlin.com/de/category/berlin-t-shirts",
+    "href": "https://walkofberlin.com/de/category/berlin-clothing",
+    "allLabel": "Alle Kleidung",
+    "allDe": "Alle Kleidung",
     "items": [
       {
-        "label": "Alle T-Shirts",
-        "de": "Alle T-Shirts",
-        "href": "https://www.walkofberlin.com/de/category/berlin-t-shirts"
+        "label": "T-Shirts",
+        "de": "T-Shirts",
+        "href": "https://walkofberlin.com/de/category/berlin-t-shirts"
       },
       {
-        "label": "Berlin Hoodies",
-        "de": "Berlin Hoodies",
+        "label": "Hoodies",
+        "de": "Hoodies",
         "href": "https://walkofberlin.com/de/category/berlin-hoodies"
       }
     ]
@@ -480,8 +484,8 @@ function bwHeaderNavigateLink(event,link) {
 const bwHeaderEscape = value => String(value).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const bwHeaderCommercePage = () => location.pathname.replace(/\/+$/,'') === '/products/berlin-landmarks-guide';
 const bwHeaderCommerceBridge = () => {const link=document.createElement('a');link.className='bw-header-book bw-header-commerce-bridge';link.href=BW_HEADER_BOOKING_URL;link.textContent=BW_HEADER_GERMAN?'Termine ansehen und buchen':'See dates and book';return link;};
-const bwHeaderItems = group => group.items.map(item=>item.items?`<li class="bw-header-store-group"><a class="bw-header-store-group-title" href="${bwHeaderEscape(item.href)}">${bwHeaderEscape(item.label)}</a>${item.note?`<small class="bw-header-store-note">${bwHeaderEscape(item.note)}</small>`:''}<ul>${item.items.map(link=>`<li><a href="${bwHeaderEscape(link.href)}">${bwHeaderEscape(link.label)}</a></li>`).join('')}</ul></li>`:`<li><a href="${bwHeaderEscape(item.href)}">${bwHeaderEscape(item.label)}</a></li>`).join('');
-const bwHeaderMobileItems = group => group.items.map(item=>item.items?`<section class="bw-header-store-mobile-group"><a class="bw-header-store-group-title" href="${bwHeaderEscape(item.href)}">${bwHeaderEscape(item.label)}</a>${item.note?`<small class="bw-header-store-note">${bwHeaderEscape(item.note)}</small>`:''}${item.items.map(link=>`<a href="${bwHeaderEscape(link.href)}">${bwHeaderEscape(link.label)}</a>`).join('')}</section>`:`<a href="${bwHeaderEscape(item.href)}">${bwHeaderEscape(item.label)}</a>`).join('');
+const bwHeaderItems = group => group.items.map(item=>item.items?`<li class="bw-header-store-group"><a class="bw-header-store-group-title" href="${bwHeaderEscape(item.href)}">${bwHeaderEscape(item.label)}</a>${item.note?`<small class="bw-header-store-note">${bwHeaderEscape(item.note)}</small>`:''}<ul>${item.allLabel?`<li><a href="${bwHeaderEscape(item.href)}">${bwHeaderEscape(item.allLabel)}</a></li>`:''}${item.items.map(link=>`<li><a href="${bwHeaderEscape(link.href)}">${bwHeaderEscape(link.label)}</a></li>`).join('')}</ul></li>`:`<li><a href="${bwHeaderEscape(item.href)}">${bwHeaderEscape(item.label)}</a></li>`).join('');
+const bwHeaderMobileItems = group => group.items.map(item=>item.items?`<section class="bw-header-store-mobile-group"><a class="bw-header-store-group-title" href="${bwHeaderEscape(item.href)}">${bwHeaderEscape(item.label)}</a>${item.note?`<small class="bw-header-store-note">${bwHeaderEscape(item.note)}</small>`:''}${item.allLabel?`<a href="${bwHeaderEscape(item.href)}">${bwHeaderEscape(item.allLabel)}</a>`:''}${item.items.map(link=>`<a href="${bwHeaderEscape(link.href)}">${bwHeaderEscape(link.label)}</a>`).join('')}</section>`:`<a href="${bwHeaderEscape(item.href)}">${bwHeaderEscape(item.label)}</a>`).join('');
 
 const BW_HEADER_INSTANCES = new Set();
 let BW_HEADER_ACTIVE_INSTANCE = null;
@@ -1955,7 +1959,7 @@ function bwHeaderStoreFooter() {
   if (store && !contact && !links.querySelector('a[href="/contact"]')) links.insertAdjacentHTML('afterbegin', '<a href="/contact" data-bw-store-contact>Contact</a>');
   if (!store && contact) contact.remove();
   let clothing = links.querySelector('[data-bw-store-clothing]');
-  if (store && !clothing) links.insertAdjacentHTML('afterbegin', `<a data-bw-store-clothing href="https://www.walkofberlin.com/${BW_HEADER_GERMAN?'de/':''}category/berlin-t-shirts">${BW_HEADER_GERMAN?'Kleidung':'Clothing'}</a>`);
+  if (store && !clothing) links.insertAdjacentHTML('afterbegin', `<a data-bw-store-clothing href="https://www.walkofberlin.com/${BW_HEADER_GERMAN?'de/':''}category/berlin-clothing">${BW_HEADER_GERMAN?'Kleidung':'Clothing'}</a>`);
   if (!store && clothing) clothing.remove();
   let details = links.querySelector('[data-bw-store-credits]');
   if (!credits) { if (details) details.remove(); return; }
