@@ -57,6 +57,7 @@
   const nativeImage = value => {if(typeof value!=='string')return '#';const match=/^wix:image:\/\/v1\/([^/#?]+)(?:\/|#|\?|$)/.exec(value);if(match&&/^[a-zA-Z0-9_.~%-]+$/.test(match[1]))return 'https://static.wixstatic.com/media/'+match[1];return url(value);};
   const json = value => {try{return JSON.parse(value || 'null');}catch{return null;}};
   // Native-widget guard release. The site-wide head snippet (wix/head-native-guard.html) hides the original Wix Stores widgets from first paint; this class lets them show again. Called only on terminal fallback paths: the bridge reports the native store restored or not collapsible, the visitor opens the original cart, the bridge times out, or the element's own files fail to load. A transient fail() alone does not release it.
+  const BRIDGE_RESEND_MS = Object.freeze([1500, 3500, 6500, 10500, 15000]);
   const releaseNative = () => {try{document.documentElement.classList.add('bw-shop-native');}catch{}};
   // This native digital SKU uses the same required map configurator, never a generic product add.
   const PRODUCT_VIEW_ALIASES = Object.freeze({'33c1b670-fadc-4bcf-a1a5-82cc14b668ea':Object.freeze({productId:'8aaf5412-7f21-42c7-acfb-85dd8417d68c',format:'framed'}),'6cf293bb-ae66-4cc0-a028-e6c08a15b325':Object.freeze({productId:'8aaf5412-7f21-42c7-acfb-85dd8417d68c',format:'canvas'}),'9b6fbecf-32e4-27dc-f3e6-9c887fe7f495': Object.freeze({productId:'8aaf5412-7f21-42c7-acfb-85dd8417d68c',format:'digital'})});
@@ -420,7 +421,12 @@
       return new Promise((resolve,reject)=>{
         const timer=setTimeout(()=>{this.pending.delete(id);if(['add','update','remove','checkout'].includes(op))this.uncertain=true;reject(Error('UPDATE_NOT_CONFIRMED'));},20000);
         this.pending.set(id,{resolve,reject,timer,op,quoteRevision:this.quoteRevision});
-        this.dispatchEvent(new CustomEvent('shop-cart-request',{detail:{channel:CHANNEL,id,op,...fields},bubbles:true,composed:true}));
+        const detail={channel:CHANNEL,id,op,...fields};
+        const send=()=>this.dispatchEvent(new CustomEvent('shop-cart-request',{detail,bubbles:true,composed:true}));
+        send();
+        // 16 Nov 2026: Wix can show shop-bridge-ready before the page code listens, and then the first requests are lost
+        // (store fell back to Wix's own page after 20 s). Re-send the same id while unanswered; the page code runs one id once.
+        for(const wait of BRIDGE_RESEND_MS)setTimeout(()=>{if(this.pending.has(id))send();},wait);
       });
     }
     receive(response) {
