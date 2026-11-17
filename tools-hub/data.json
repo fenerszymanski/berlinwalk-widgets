@@ -11816,6 +11816,38 @@
       "cmsItemId": "1cadfa92-65eb-43e7-ac91-c96c65119dd0",
       "iconStatus": "live-wix-media",
       "image": "https://static.wixstatic.com/media/5a08a3_499e6ee5ed1548d2b1af67464a6e00b8~mv2.png"
+    },
+    {
+      "slug": "alexanderplatz-time-layers",
+      "title": "Alexanderplatz Time Layers",
+      "lead": "Step through Alexanderplatz from the 1805 cattle market to today on a real map of the square: what stood where, what is gone and what you can still see from the World Clock.",
+      "category": "Maps",
+      "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/alexanderplatz-time-layers/",
+      "embedHeight": 1000,
+      "hubCategory": "CultureLandmarks",
+      "type": "Map",
+      "priority": 3,
+      "tags": [
+        "alexanderplatz",
+        "berlin history",
+        "berolina",
+        "world clock",
+        "gdr",
+        "then and now",
+        "mitte",
+        "map"
+      ],
+      "aliases": [
+        "alexanderplatz history",
+        "what stood on alexanderplatz",
+        "berolina statue",
+        "alexanderplatz then and now",
+        "alexanderplatz gdr",
+        "alexanderplatz 1989"
+      ],
+      "cmsItemId": "5a4de489-7229-4bb6-8587-00082168ea0e",
+      "iconStatus": "live-wix-media",
+      "image": "https://static.wixstatic.com/media/5a08a3_bcd0fc75a4884c818a226cb28edbf3a3~mv2.png"
     }
   ],
   "hubCategories": [

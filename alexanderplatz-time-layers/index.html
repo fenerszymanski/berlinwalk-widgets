@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Alexanderplatz Time Layers: The Square Era by Era, From 1805 to Today</title>
+<meta name="description" content="Step through Alexanderplatz from the 1805 cattle market to today on a real map of the square: what stood where, what is gone and what you can still see.">
+<link rel="stylesheet" href="../css/brand.css">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { overflow-x: hidden; }
+  body { font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #FFFFFF; color: #22261f; padding: 12px; }
+  .tl { border-radius: 16px; overflow: hidden; border: 1px solid #d9e2d2; background: #f6f8f2; }
+  .tl-head { padding: 18px 18px 6px; }
+  .tl-kick { display: inline-block; font-size: 10.5px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; color: #123D18; background: #FFE600; padding: 3px 8px; border-radius: 4px; }
+  .tl-head h1 { font-family: 'Merriweather', Georgia, serif; font-size: 21px; line-height: 1.3; margin-top: 9px; color: #1B5E20; }
+  .tl-head p { font-size: 13px; line-height: 1.6; color: #444b40; margin-top: 7px; max-width: 760px; }
+  .years { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 6px; padding: 10px 12px 2px; }
+  .yr { min-width: 0; min-height: 40px; border: 2px solid #d3dccb; background: #fff; color: #123D18; border-radius: 999px; font-family: inherit; font-size: 13px; font-weight: 800; cursor: pointer; padding: 0 10px; }
+  .yr[aria-current="step"] { background: #123D18; border-color: #123D18; color: #FFE600; }
+  .yr:focus-visible, .nb:focus-visible { outline: 3px solid #FFE600; outline-offset: 2px; }
+  .tl-body { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); gap: 12px; padding: 12px; align-items: start; }
+  .mapbox { background: #fff; border: 1px solid #dfe6d8; border-radius: 14px; padding: 8px; min-width: 0; }
+  #plan { display: block; width: 100%; height: auto; border-radius: 10px; background: #f3f1ea; }
+  .legend { display: flex; flex-wrap: wrap; gap: 10px; font-size: 11px; color: #555c50; padding: 6px 4px 2px; }
+  .legend i { display: inline-block; width: 11px; height: 11px; border-radius: 3px; margin-right: 4px; vertical-align: -1px; }
+  .card { background: #fff; border: 1px solid #dfe6d8; border-radius: 14px; padding: 14px; min-width: 0; }
+  .card .count { font-size: 10.5px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; color: #6a7262; }
+  .card h2 { font-family: 'Merriweather', Georgia, serif; font-size: 17px; line-height: 1.35; color: #123D18; margin-top: 6px; }
+  .card .what { font-size: 13px; line-height: 1.6; color: #343a30; margin-top: 8px; }
+  .lists { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 12px; }
+  .lists div { border-radius: 10px; padding: 8px 10px; font-size: 12px; line-height: 1.5; }
+  .lists .keep { background: #eef5e8; color: #1B5E20; }
+  .lists .gone { background: #f4ede6; color: #6b3b1f; }
+  .lists b { display: block; font-size: 10.5px; letter-spacing: .1em; text-transform: uppercase; margin-bottom: 3px; }
+  .look { font-size: 12.5px; line-height: 1.55; color: #123D18; background: #FFE600; border-radius: 10px; padding: 8px 10px; margin-top: 10px; }
+  .nav { display: flex; gap: 8px; margin-top: 14px; }
+  .nb { flex: 1; min-height: 42px; border: 0; border-radius: 999px; font-family: inherit; font-size: 13px; font-weight: 800; cursor: pointer; }
+  .nb.next { background: #FFE600; color: #123D18; }
+  .nb.back { background: #e7ede1; color: #123D18; }
+  .nb:disabled { cursor: default; background: #e7ede1; color: #5f675a; }
+  .tl-foot { padding: 4px 16px 16px; font-size: 11.5px; line-height: 1.55; color: #5a6155; }
+  .tl-foot a { color: #1B5E20; }
+  @media (max-width: 640px) {
+    .tl-body { grid-template-columns: 1fr; }
+    .tl-head h1 { font-size: 18.5px; }
+    .lists { grid-template-columns: 1fr; }
+    .years { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  }
+</style>
+</head>
+<body>
+<div class="tl">
+  <div class="tl-head">
+    <span class="tl-kick">Alexanderplatz Time Layers</span>
+    <h1>Stand at the World Clock and step back in time</h1>
+    <p>The map is today's Alexanderplatz, drawn from OpenStreetMap. Pick a year: the buildings that already stood then turn green, the ones that came later stay grey, and the card tells you what has gone and what you can still see.</p>
+  </div>
+  <div class="years" id="years" aria-label="Choose a year"></div>
+  <div class="tl-body">
+    <div class="mapbox">
+      <svg id="plan" role="img" aria-labelledby="plan-title"><title id="plan-title">Plan of Alexanderplatz showing which of today's buildings stood in the chosen year</title></svg>
+      <div class="legend"><span><i style="background:#2e7d32"></i>Standing in that year</span><span><i style="background:#dcdcd4"></i>Built later</span><span><i style="background:#4a90c2"></i>Fountain, from 1970</span><span><i style="background:#d9541e;border-radius:50%"></i>Berolina, gone today</span><span><i style="background:#FFE600;border:2px solid #123D18;border-radius:50%"></i>You: World Clock</span></div>
+    </div>
+    <div class="card" aria-live="polite">
+      <div class="count" id="count"></div>
+      <h2 id="title"></h2>
+      <p class="what" id="what"></p>
+      <div class="lists"><div class="keep"><b>Still there</b><span id="keep"></span></div><div class="gone"><b>Gone</b><span id="gone"></span></div></div>
+      <p class="look" id="look"></p>
+      <div class="nav"><button class="nb back" id="back" type="button">Earlier</button><button class="nb next" id="next" type="button">Later</button></div>
+    </div>
+  </div>
+  <p class="tl-foot">Map data &copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a> contributors (ODbL), footprints as of November 2026. Lost buildings and the Berolina are placed approximately. Dates from berlin.de, visitBerlin and the Senate's urban development pages; where sources disagree, the card says so.</p>
+</div>
+<script>
+(function () {
+  var PLAN = {"w":720,"h":607,"S":52.5197,"W":13.409,"N":52.5236,"E":13.4166,"kx":0.608462,"s":155698.965,"b":[{"i":"bcc","y":1964,"d":"M656 461 667 446 686 421 696 408 697 405 703 409 702 409 705 411 712 416 715 419 719 421 723 424 726 427 730 429 733 432 740 437 742 439 743 439 747 442 751 445 755 447 754 448 755 448 720 497 715 504 706 498 697 491 685 482 671 472 656 461 Z"},{"i":"station","y":1882,"d":"M305 398 303 401 293 409 290 412 271 428 253 410 231 389 181 337 127 282 112 265 116 260 129 248 134 244 146 232 149 229 152 226 154 228 168 243 222 299 272 354 291 373 307 389 310 393 305 398 Z"},{"i":"berolinahaus","y":1932,"d":"M340 374 352 364 364 354 304 285 298 277 273 294 278 299 340 374 Z"},{"i":"galeria","y":1970,"d":"M177 198 181 194 202 172 173 144 222 94 224 96 226 94 252 120 305 171 318 183 316 185 329 198 257 273 248 264 244 260 243 262 235 255 209 229 177 198 Z"},{"i":"parkinn","y":1970,"d":"M308 33 313 37 345 60 346 58 356 63 353 67 400 101 400 99 403 101 403 100 404 99 405 99 406 99 407 99 408 99 408 100 409 100 409 101 409 102 409 103 408 104 408 105 407 105 406 106 430 123 444 132 456 141 449 150 416 195 411 202 403 197 358 165 356 164 330 144 300 123 288 114 276 105 270 101 267 99 262 96 308 33 Z"},{"i":null,"y":null,"d":"M252 120 263 108 265 106 270 101 276 105 288 114 300 123 330 144 318 156 305 171 252 120 Z"},{"i":null,"y":null,"d":"M54 -12 53 -13 48 -2 45 5 41 16 37 25 51 31 73 -21 101 -9 105 -16 108 -23 73 -39 72 -38 66 -41 54 -12 Z"},{"i":null,"y":null,"d":"M4 100 62 140 72 124 64 119 32 98 31 94 46 61 45 57 41 55 43 49 46 42 51 31 37 25 30 43 4 100 Z"},{"i":null,"y":null,"d":"M115 -7 150 24 100 76 89 87 83 94 86 97 80 103 76 107 64 119 72 124 92 103 94 105 95 104 94 103 98 100 99 100 111 87 114 83 115 83 128 70 127 69 132 65 132 66 144 53 144 52 148 48 149 49 161 36 160 36 164 32 165 32 165 31 176 19 186 9 192 2 188 0 190 -2 188 -4 186 -2 181 -8 165 8 160 13 148 2 147 3 142 -1 143 -2 130 -13 129 -13 125 -17 125 -18 120 -23 122 -25 116 -30 108 -23 105 -16 115 -7 Z"},{"i":null,"y":null,"d":"M51 31 46 42 53 45 62 109 76 107 80 103 79 95 72 43 73 40 69 39 61 35 51 31 Z"},{"i":null,"y":null,"d":"M-11 -78 -23 -50 -14 -46 -11 -54 0 -49 4 -48 5 -50 12 -67 9 -69 -11 -78 Z"},{"i":null,"y":null,"d":"M-31 -54 -34 -46 -38 -47 -38 -46 -39 -44 -41 -43 -40 -39 -44 -31 -45 -31 -45 -30 -42 -29 -45 -22 -49 -13 -46 -12 -33 -6 -32 -6 -25 -21 -18 -38 -14 -46 -23 -50 -31 -54 Z"},{"i":null,"y":null,"d":"M20 -65 19 -64 12 -67 5 -50 14 -45 13 -42 12 -42 -5 -4 -7 2 10 10 16 -4 17 -3 20 -8 18 -9 30 -35 31 -34 33 -39 32 -39 37 -52 39 -53 37 -57 36 -56 25 -62 25 -63 20 -65 Z"},{"i":null,"y":null,"d":"M-17 -2 -18 1 -20 6 -12 10 -20 27 -23 26 -27 33 -22 35 -5 43 -2 38 -1 38 2 33 0 32 1 30 5 21 7 22 9 16 8 16 10 10 -7 2 -17 -2 Z"},{"i":null,"y":null,"d":"M-22 35 -29 51 -27 52 -29 55 -60 35 -69 53 -58 60 -43 69 -32 76 -31 75 -29 76 -29 78 -22 83 -6 46 -5 43 -22 35 Z"},{"i":null,"y":null,"d":"M-66 -21 -72 -6 -52 3 -46 -12 -49 -13 -62 -19 -66 -21 Z"},{"i":null,"y":null,"d":"M797 564 779 555 782 550 779 548 776 547 774 552 755 543 758 538 755 536 752 535 750 540 741 536 733 551 805 587 812 572 803 567 806 562 803 560 800 559 797 564 Z"},{"i":"lehrer","y":1964,"d":"M723 350 687 398 685 400 677 393 668 387 706 337 723 350 Z"},{"i":"reisen","y":1971,"d":"M776 55 744 100 748 102 727 131 724 129 718 137 694 120 692 122 663 102 699 51 713 61 737 27 776 55 Z"},{"i":"mitte","y":2009,"d":"M631 293 567 389 551 378 538 345 532 332 530 325 522 305 545 286 555 278 559 274 579 258 631 293 Z"},{"i":null,"y":null,"d":"M6 716 19 732 57 780 66 791 83 777 200 686 223 667 262 637 270 630 226 573 246 558 231 539 162 593 148 604 119 627 89 651 81 657 76 661 6 716 Z"},{"i":null,"y":2001,"d":"M251 527 268 549 268 548 284 569 335 528 321 510 319 508 320 508 306 490 303 486 251 527 Z"},{"i":null,"y":null,"d":"M87 785 88 784 88 783 83 777 200 686 223 667 262 637 265 642 271 638 272 637 273 637 274 637 276 637 277 637 280 637 282 638 283 639 284 640 287 642 287 644 289 646 289 649 289 652 288 654 288 655 287 656 287 657 232 700 207 720 206 719 206 720 205 718 202 714 196 707 194 704 184 712 174 720 176 722 183 730 186 734 188 736 176 745 104 802 104 801 103 802 101 802 99 802 97 802 95 802 93 801 91 800 89 799 88 797 87 795 86 794 86 792 86 790 86 787 87 786 87 785 Z"},{"i":null,"y":null,"d":"M668 -14 677 -8 684 -2 696 -19 699 -17 701 -15 704 -19 687 -32 684 -35 680 -30 675 -23 670 -27 663 -18 668 -14 Z"},{"i":null,"y":null,"d":"M638 28 654 39 659 43 642 67 608 43 538 -7 531 2 525 10 517 4 507 -3 512 -10 519 -20 452 -68 428 -85 390 -112 407 -136 445 -109 638 28 Z"},{"i":null,"y":null,"d":"M314 463 318 460 325 453 328 450 334 444 338 441 430 546 434 550 430 553 427 556 423 560 418 563 415 567 409 561 349 495 333 479 314 463 Z"},{"i":null,"y":null,"d":"M590 886 583 860 576 823 569 794 556 756 538 719 524 695 513 679 492 651 466 623 457 614 460 611 465 607 470 603 473 600 476 597 485 607 517 642 528 656 549 688 562 711 573 734 585 764 592 787 601 819 608 853 611 872 613 879 625 917 627 923 630 930 634 940 639 950 643 960 639 961 634 963 629 966 623 968 619 970 614 959 604 932 593 901 590 886 Z"},{"i":null,"y":null,"d":"M60 211 64 208 74 199 79 195 86 190 89 188 100 195 149 229 146 232 134 244 129 248 116 260 112 265 60 211 Z"},{"i":null,"y":null,"d":"M19 177 -2 162 -17 151 -20 150 -23 148 -20 142 -16 135 -12 130 -9 126 -7 122 44 156 40 160 35 164 30 168 23 174 19 177 Z"},{"i":null,"y":null,"d":"M-23 157 -24 160 -18 165 -17 164 -11 171 -2 162 -17 151 -23 157 Z"},{"i":null,"y":2014,"d":"M136 453 162 480 184 510 187 508 189 510 215 486 249 460 246 456 197 396 178 413 134 445 139 451 136 453 Z"},{"i":null,"y":null,"d":"M275 319 277 318 289 331 288 332 275 319 Z"},{"i":null,"y":null,"d":"M267 328 279 341 278 342 266 329 267 328 Z"},{"i":null,"y":null,"d":"M-175 64 -167 41 -143 48 -119 57 -101 66 -65 86 -54 93 -36 106 -48 131 -56 125 -58 122 -65 114 -79 105 -98 95 -116 86 -134 79 -153 71 -164 68 -175 64 Z"},{"i":null,"y":null,"d":"M-34 -89 -41 -73 -43 -69 -40 -68 -28 -63 -31 -54 -23 -50 -11 -78 -32 -88 -34 -89 Z"},{"i":null,"y":null,"d":"M496 307 491 302 496 298 500 303 496 307 Z"},{"i":null,"y":null,"d":"M369 331 374 324 381 329 375 336 369 331 Z"},{"i":null,"y":null,"d":"M342 393 346 390 349 393 345 396 344 394 342 393 Z"},{"i":"alexa","y":2007,"d":"M490 576 545 535 550 539 561 547 575 559 576 558 583 553 588 550 589 549 617 588 641 570 650 563 676 598 700 632 715 655 720 663 739 696 753 722 750 724 752 728 754 732 757 730 783 780 792 803 796 812 792 815 778 823 723 855 718 858 694 872 680 881 675 873 683 869 677 857 677 858 675 854 671 846 667 835 669 834 671 833 668 825 665 826 664 824 658 825 652 827 655 840 631 846 625 821 621 804 619 793 616 781 607 754 602 757 596 736 599 734 590 714 577 688 563 664 557 656 550 646 549 645 551 644 547 640 544 637 547 634 549 631 551 630 527 612 505 591 495 581 490 576 Z"},{"i":null,"y":null,"d":"M632 -47 623 -53 635 -71 644 -65 632 -47 Z"},{"i":null,"y":null,"d":"M668 -14 658 -1 638 28 654 39 675 11 684 -2 677 -8 668 -14 Z"},{"i":null,"y":null,"d":"M365 529 368 527 371 530 368 533 365 529 Z"},{"i":null,"y":null,"d":"M82 557 85 559 88 556 87 553 84 552 81 554 82 557 Z"},{"i":null,"y":null,"d":"M349 495 347 497 341 503 310 467 314 463 333 479 349 495 Z"},{"i":null,"y":null,"d":"M400 101 400 99 413 83 418 75 420 73 375 40 362 56 361 55 359 59 360 60 357 64 356 63 353 67 400 101 Z"},{"i":null,"y":null,"d":"M262 96 259 94 294 46 305 31 308 33 262 96 Z"},{"i":null,"y":null,"d":"M687 398 697 384 764 434 755 447 751 445 747 442 743 439 742 439 740 437 733 432 730 429 726 427 723 424 719 421 715 419 712 416 705 411 702 409 703 409 697 405 687 398 Z"},{"i":null,"y":null,"d":"M735 366 746 375 755 382 748 390 744 396 723 381 735 366 Z"},{"i":"alexanderhaus","y":1932,"d":"M423 428 401 397 390 405 385 409 373 418 435 506 464 487 461 482 474 474 474 475 501 457 500 456 505 453 508 457 536 440 517 411 423 428 Z"},{"i":null,"y":null,"d":"M-14 -8 -17 -2 -7 2 -5 -4 -14 -8 Z"},{"i":null,"y":null,"d":"M105 -16 101 -9 113 -4 115 -7 105 -16 Z"},{"i":null,"y":null,"d":"M-18 -38 -25 -21 -11 -15 -3 -32 -18 -38 Z"},{"i":null,"y":null,"d":"M82 93 79 95 80 103 86 97 83 94 82 93 Z"},{"i":null,"y":null,"d":"M89 87 86 68 91 63 98 70 96 72 100 76 89 87 Z"},{"i":null,"y":null,"d":"M-56 -26 -59 -19 -62 -20 -62 -19 -49 -13 -45 -22 -56 -26 Z"},{"i":null,"y":null,"d":"M-33 -6 -37 1 -21 8 -20 6 -18 1 -32 -6 -33 -6 Z"},{"i":"clock","y":1969,"d":"M406 384 405 383 404 381 404 380 404 379 404 377 405 376 407 375 408 375 409 376 411 376 412 377 412 379 412 380 412 382 411 383 410 384 409 384 407 384 406 384 Z"},{"i":null,"y":2017,"d":"M400 327 408 336 400 345 391 336 400 327 Z"},{"i":"tvtower","y":1969,"d":"M42 412 45 412 49 414 52 415 55 418 57 420 59 423 60 426 61 430 61 433 61 437 60 440 58 444 56 447 53 449 50 451 47 453 44 454 40 454 36 454 33 453 29 451 26 449 24 447 22 444 20 440 19 437 19 433 19 430 20 426 21 423 23 420 26 417 28 415 32 413 35 412 38 412 42 412 Z"},{"i":null,"y":null,"d":"M311 643 380 588 378 586 347 546 333 557 278 601 291 619 309 640 311 643 Z"},{"i":null,"y":null,"d":"M393 546 396 549 392 553 389 549 393 546 Z"},{"i":null,"y":null,"d":"M64 28 61 35 69 39 72 32 64 28 Z"},{"i":null,"y":null,"d":"M113 -4 115 -7 150 24 83 94 82 93 80 91 86 86 80 44 69 39 72 32 64 28 61 35 51 31 73 -21 101 -9 113 -4 Z"},{"i":null,"y":null,"d":"M565 546 576 558 588 550 578 536 565 546 Z"},{"i":null,"y":null,"d":"M68 258 61 250 44 233 42 232 40 231 37 232 -41 296 -42 298 -42 300 -41 302 -40 304 12 337 12 336 19 327 8 320 11 316 9 313 -2 301 47 259 52 262 61 268 68 258 Z"},{"i":"berlinian","y":2020,"d":"M177 198 181 194 202 172 173 144 173 143 156 127 131 153 177 198 Z"},{"i":null,"y":null,"d":"M456 141 476 115 489 124 542 162 556 173 498 249 482 261 407 206 411 202 416 195 449 150 456 141 Z"},{"i":null,"y":null,"d":"M403 197 411 202 407 206 403 212 397 209 395 207 403 197 Z"},{"i":null,"y":null,"d":"M407 99 412 91 439 110 430 123 406 106 407 105 408 105 408 104 409 103 409 102 409 101 409 100 408 100 408 99 407 99 Z"},{"i":null,"y":null,"d":"M415 85 421 77 418 75 413 83 415 85 Z"},{"i":null,"y":null,"d":"M226 71 220 78 246 104 248 103 250 105 255 100 226 71 Z"},{"i":null,"y":null,"d":"M229 54 236 61 250 46 243 39 229 54 Z"},{"i":null,"y":null,"d":"M260 46 274 56 284 43 283 42 285 39 279 35 277 38 270 32 260 46 Z"},{"i":null,"y":null,"d":"M155 -28 158 -31 159 -29 157 -26 155 -28 Z"},{"i":null,"y":null,"d":"M173 143 156 127 205 75 226 94 224 96 222 94 173 144 173 143 Z"}],"st":["M259 -46 275 -46 281 -46 290 -46 299 -46","M13 -79 36 -65 41 -64 59 -60","M59 -60 76 -57 94 -56 163 -50","M754 155 651 318 613 383 589 422 581 435 574 443","M891 -64 870 -20 862 -6 754 155","M537 510 561 484 581 455 765 160","M275 -67 273 -64 259 -46","M275 -67 271 -66 244 -62 240 -62 234 -61","M376 624 370 627 361 632 352 636 340 641 333 645 318 650","M663 282 662 284 629 334","M571 424 593 453","M752 208 792 151 796 143 801 132","M603 437 608 429 612 421 614 417","M-26 263 -6 246 6 236 23 221 27 218 30 216 40 208 48 201","M-25 234 -99 295","M79 146 63 160","M64 -71 59 -60","M731 240 705 219","M714 266 721 269 732 275 735 276 740 278","M560 441 550 454 537 471 528 481","M385 633 439 593","M714 266 731 240","M705 219 692 208 689 206 639 167","M593 453 603 467 606 471","M581 409 571 424","M661 544 677 566","M705 606 715 620 721 630 725 636 728 640 735 653","M550 513 557 507 566 496 572 486 580 474","M603 437 581 409","M299 -46 318 -73","M299 -46 316 -41 318 -39 320 -38","M259 -46 246 -29 243 -26 236 -17 219 1 176 46 173 49","M173 49 138 87","M188 68 193 62 207 49 223 36","M577 158 582 163 587 166 590 169 593 171","M-319 507 -281 475 -277 472 -256 452 -155 368 -60 290 -44 278 -26 263","M748 134 742 142 739 149 737 157 735 164 732 173 728 181 720 195","M657 354 690 303 700 288","M595 385 591 391 587 398 581 409","M652 506 639 486","M48 201 54 196 77 179","M57 165 30 187","M30 187 26 191 19 197 15 200 -16 228 -25 234","M77 179 89 169 93 166 111 150 114 148","M451 550 441 557","M749 644 739 627 735 622","M402 -13 381 -32","M752 254 747 251 737 244 731 240","M354 657 369 656 377 653 385 649 418 625","M418 625 436 612 447 603","M477 579 526 535 544 519 550 513","M381 -32 341 -62 335 -67","M609 143 606 140 604 138 602 137 596 133 589 127","M466 35 462 32 449 22 402 -13","M593 171 594 172 606 181","M606 181 645 211","M645 211 670 230 675 233 684 240 688 244","M443 56 458 67 470 77 519 114","M549 137 565 149 573 155 577 158","M773 104 765 114 761 118 756 123 752 129 748 134","M509 500 481 525","M240 19 275 -18 280 -23 284 -28 294 -40 299 -46","M189 -48 222 -47 231 -47 259 -46","M616 454 615 453 612 450 603 437","M735 622 727 611 689 557 666 527","M666 527 652 506","M574 443 571 447 561 462 549 475 525 503","M525 503 493 534 479 546 450 568","M528 481 509 500","M127 131 188 68","M118 107 93 133","M63 160 57 165","M93 133 83 142 79 146","M149 -61 142 -62 111 -65 95 -66","M219 -61 170 -60 149 -61","M138 87 118 107","M420 573 408 581","M441 557 420 573","M468 587 477 579","M447 603 468 587","M439 593 459 577","M430 583 376 624","M450 568 430 583","M459 577 492 553 537 510","M467 537 451 550","M677 566 705 606","M481 525 467 537","M589 127 553 100 514 71","M519 114 549 137","M163 -50 189 -48","M223 36 240 19","M364 612 340 628 328 637 318 650","M731 240 735 234 745 219 747 216 752 208","M114 148 116 146 127 131","M720 195 719 197 717 200 705 219","M700 288 703 282 714 266","M688 244 675 264 673 267","M740 278 777 297","M809 283 752 254","M629 334 595 385","M614 417 657 354","M639 486 616 454","M606 471 643 524 661 544","M580 474 585 467 593 453","M571 424 562 437 560 441","M354 657 365 647 375 640 385 633","M672 269 663 282","M673 267 672 269","M356 -10 389 15 429 45 438 52 443 56","M234 -61 219 -61","M500 61 481 46 466 35","M514 71 500 61","M639 167 623 154","M623 154 613 146 609 143","M320 -38 349 -16 356 -10","M396 588 364 612","M408 581 396 588"],"rl":["M276 424 281 428 309 452 318 460","M418 563 460 611","M460 611 465 615 501 655 512 670 531 700 539 712 546 726 558 751 566 774 575 800 584 838 593 883 599 905 615 951 617 954 623 968","M465 607 423 560","M423 560 380 514 325 453","M629 966 622 952 612 927 605 905 595 866 588 830 579 797 571 771 561 743 537 696 521 672 504 651 469 611 465 607","M325 453 317 445 308 435 292 419 288 414","M288 414 275 400 209 331 129 248","M318 460 374 516 418 563","M-31 133 -20 142","M-20 142 23 174","M23 174 42 189 64 208","M64 208 90 234 116 260","M74 199 57 186 49 181 30 168","M30 168 -3 145 -16 135","M-16 135 -28 127","M-28 127 -38 121 -64 104 -78 95 -85 91 -94 86 -108 79 -112 77 -116 76 -124 72 -142 65 -160 59 -175 54","M-177 60 -162 64 -144 70 -126 77 -111 84 -95 92 -81 100 -66 109 -40 126 -31 133","M116 260 207 355 243 392 254 403 270 418 276 424","M129 248 116 235 103 222 74 199"],"tr":["M132 114 158 87 187 56 212 30 241 0 251 -11 264 -26 272 -36 281 -46 285 -52 288 -55 299 -70 310 -85 315 -92 332 -114 351 -138","M-58 278 -11 240 7 227 15 224 23 221 29 221 36 222 43 224","M698 18 714 -3 717 -7 732 -26 741 -38 797 -111 802 -117 810 -123 815 -126 819 -127 829 -129 838 -129 845 -127 851 -124","M809 -128 806 -127 802 -124 799 -121 792 -115 728 -30 699 9","M134 105 111 127 88 148 83 152 65 169","M159 341 167 350 172 355 185 368 238 423 243 429 256 442 264 446 269 448 271 449 277 450 285 450 290 450 295 448 303 444 313 436 326 425 342 413 354 402 379 383 394 371 465 312 476 303 485 295 487 293 491 289 498 282 506 271","M198 244 178 224 168 214 161 206 129 178 123 171 121 167 119 163 117 158 116 153 116 146 116 140 117 136 119 133 121 128 126 120 132 114","M138 101 134 105 122 118 118 124 115 129 113 134 112 140 111 145 111 150 112 156 113 161 115 166 118 171 122 177 139 193 157 209 165 217 167 219 180 232 195 248","M230 284 220 273 215 265 209 256 198 244","M195 248 204 256 213 264 215 265 222 271 225 273 233 281","M233 281 228 276 226 273 198 244","M195 248 225 279 230 284","M317 368 316 367 262 310 259 307","M255 311 290 347","M377 378 353 397 338 409 331 414 323 420 309 431 298 439 292 443 285 445 279 445 274 444 273 444 267 442 261 438 257 435 251 429 247 426 195 371 189 365 171 346 164 338","M43 224 50 228 57 233 67 244 86 265 102 281 116 297","M382 374 377 378","M377 378 369 383 363 385 355 387 349 387 346 387 343 385 339 384 333 381 327 377","M36 193 26 201 6 218","M71 173 88 159 93 154 103 144 113 134 132 114","M65 169 36 193","M-11 240 19 217 34 205 42 198","M42 198 56 186 69 176 71 173","M587 166 606 140 617 126 624 117","M620 113 613 123 602 137 582 163 575 173 571 178 563 188","M290 347 311 369","M327 377 322 373 317 368","M116 297 131 311","M62 233 59 230 55 226 49 221 47 220 43 218 33 216 30 216 24 216 19 217 17 217 10 219 4 222 -1 225 -20 241","M-20 241 -25 244 -61 274 -89 297","M230 284 239 294 245 301 255 311","M259 307 249 297 233 281","M694 15 690 21","M346 -140 329 -116 311 -93 306 -86 305 -85 293 -69 284 -58 282 -55 275 -46 268 -36 259 -27 238 -4 209 27 197 40 184 54 156 83 138 101","M563 188 516 249 510 258 508 260 506 263 502 269","M692 26 694 24 698 18","M567 191 575 181 578 177 579 176 587 166","M624 117 692 26","M164 338 163 338 134 307","M131 311 159 341","M699 9 694 15","M690 21 620 113","M502 269 496 275 490 282 488 285 483 290 474 299 459 311 396 362 391 367 382 374","M506 271 510 265 513 261 543 224 567 191","M6 218 -20 241","M134 307 120 293 75 246 71 242 62 233"],"sq":"M452 538 485 512 522 473 530 462 537 454 543 446 555 427 571 402 585 382 665 261 667 258 669 255 670 253 671 251 671 248 670 247 669 245 668 244 667 243 666 241 663 240 587 182 582 179 579 176 575 173 569 169 563 164 467 89 444 72 443 66 438 62 434 59 427 59 385 27 382 24 376 20 311 -30 309 -32 306 -33 301 -33 300 -32 298 -32 294 -28 292 -27 287 -22 282 -16 217 53 126 147 124 151 124 155 125 159 129 165 133 172 144 183 150 189 171 212 371 429 423 506 438 528 445 536 452 538 Z","fo":"M347 234 352 231 356 230 362 230 366 233 370 236 372 241 373 246 372 251 369 255 365 259 360 260 355 260 350 259 346 256 343 252 342 247 342 242 344 237 347 234 Z","cent":{"bcc":[52.52076,13.41655],"station":[52.5215,13.4113],"berolinahaus":[52.5215,13.41236],"galeria":[52.52239,13.41152],"parkinn":[52.52292,13.41294],"lehrer":[52.5212,13.41634],"reisen":[52.52301,13.41664],"mitte":[52.52157,13.41496],"alexa":[52.51902,13.4157],"alexanderhaus":[52.52073,13.41382],"clock":[52.52116,13.4133],"tvtower":[52.52082,13.40942],"berlinian":[52.52253,13.41081],"fountain":[52.52203,13.41277]}};
+  // Points that are not footprints: where the reader stands and what is gone.
+  var POINTS = {
+    you: { lat: 52.52116, lon: 13.41330 },
+    berolina1933: { lat: 52.52086, lon: 13.41398, label: 'Berolina, 1933 to 1942' }
+  };
+  var ERAS = [
+    { year: 1805, title: 'A cattle market gets a Tsar\'s name',
+      what: 'This was the Ochsenmarkt, a cattle market and parade ground outside the old city gate. When Tsar Alexander I visited Prussia in 1805, King Friedrich Wilhelm III renamed it Alexanderplatz. None of the buildings on today\'s map existed yet.',
+      keep: 'The name.', gone: 'The cattle market, the parade ground and the city gate.',
+      look: 'Nothing you can see from here is that old. The name is the only thing left from 1805.' },
+    { year: 1895, title: 'The Berolina arrives',
+      what: 'The Stadtbahn viaduct and the station had opened in 1882. On 17 December 1895 a copper Berolina by Emil Hundrieser, about 7.5 metres tall, was unveiled on the square, a crowned woman standing for the city. Trams and crowds filled the streets around her, and from 1904 the Hermann Tietz department store rose behind her.',
+      keep: 'The railway viaduct and the station on it.', gone: 'The Berolina and the Tietz store.',
+      look: 'Turn to the station: the brick arches of the viaduct are the oldest thing you can see from here.' },
+    { year: 1932, title: 'Behrens builds two office blocks',
+      what: 'Between 1929 and 1932 Peter Behrens built the Alexanderhaus and the Berolinahaus beside the station, eight storeys each on a steel frame. Alfred Döblin\'s novel Berlin Alexanderplatz came out in 1929. The Berolina had been taken down in 1927 for the U-Bahn works and came back in December 1933, now in front of the Alexanderhaus.',
+      keep: 'Both Behrens buildings, listed monuments today.', gone: 'The Berolina.',
+      look: 'The two pale office blocks beside the station are the Behrens houses. The Berolina stood roughly where the orange dot is.' },
+    { year: 1945, title: 'Fighting reaches the square',
+      what: 'The Berolina was dismantled in 1942 (some sources say 1944) and was probably melted down for the war. In April 1945 the battle for Berlin reached Alexanderplatz and most of the square was wrecked. The Behrens houses survived damaged and were repaired after the war.',
+      keep: 'The Behrens houses and the viaduct, both repaired.', gone: 'The Berolina, the Tietz store and most of the old square.',
+      look: 'A small model of the Berolina survives in the Märkisches Museum, not here.' },
+    { year: 1971, title: 'The GDR rebuilds it as a showcase',
+      what: 'After a competition in 1964 the GDR rebuilt the square as a huge pedestrian space. The Haus des Lehrers with its mural band was finished in 1964, the TV Tower opened on 3 October 1969 and the World Clock was handed over on 30 September 1969. The Fountain of Friendship of Peoples, the Hotel Stadt Berlin, the Centrum department store and the Haus des Reisens followed by 1971.',
+      keep: 'Almost all of it: tower, clock, fountain, hotel, store and the two tall office blocks.', gone: 'The trams that crossed the square, removed by 1969.',
+      look: 'Turn to the east: the mural on the Haus des Lehrers runs around its lower floors like a belt.' },
+    { year: 1989, title: '4 November 1989',
+      what: 'On 4 November 1989 East Berliners filled the square for one of the biggest demonstrations the GDR ever saw, called by East Berlin actors, artists and opposition groups. Estimates run from 500,000 to nearly a million. Five days later the Wall opened.',
+      keep: 'Everything you saw in the 1971 step.', gone: 'The state the crowd was protesting against.',
+      look: 'Stand still for a minute and picture the whole open space around you full of people, from the station to the Haus des Lehrers.' },
+    { year: 2026, title: 'Today: towers that are still coming',
+      what: 'A 1993 competition, won by Hans Kollhoff, planned a ring of high-rises. For years almost none were built. Trams came back across the square in 1998, the Alexa mall opened in 2007, and new towers are now rising at the edges, such as Covivio\'s 130-metre 030BLN, which the developer expects to finish in the second half of 2027.',
+      keep: 'Layers from 1882, 1932 and 1969 side by side.', gone: 'The Berolina, still. A society has campaigned for a copy since 2000.',
+      look: 'Count the layers from where you stand: viaduct, Behrens, the GDR ring, then the glass towers behind.' }
+  ];
+  var NS = 'http://www.w3.org/2000/svg';
+  var svg = document.getElementById('plan');
+  svg.setAttribute('viewBox', '0 0 ' + PLAN.w + ' ' + PLAN.h);
+  function proj(lat, lon) { return [ (lon - PLAN.W) * PLAN.kx * PLAN.s, (PLAN.N - lat) * PLAN.s ]; }
+  function el(name, attrs, parent) { var e = document.createElementNS(NS, name); for (var k in attrs) e.setAttribute(k, attrs[k]); (parent || svg).appendChild(e); return e; }
+  var gBase = el('g', {}), gB = el('g', {}), gTop = el('g', {});
+  if (PLAN.sq) el('path', { d: PLAN.sq, fill: '#ebe6d6', stroke: 'none' }, gBase);
+  PLAN.st.forEach(function (d) { el('path', { d: d, fill: 'none', stroke: '#ffffff', 'stroke-width': 9, 'stroke-linecap': 'round', 'stroke-linejoin': 'round' }, gBase); });
+  var rail = PLAN.rl.map(function (d) { return el('path', { d: d, fill: 'none', stroke: '#7a6a58', 'stroke-width': 3, 'stroke-dasharray': '7 4' }, gBase); });
+  var tram = PLAN.tr.map(function (d) { return el('path', { d: d, fill: 'none', stroke: '#c0392b', 'stroke-width': 1.6, opacity: .7 }, gBase); });
+  var shapes = PLAN.b.map(function (b) { return { y: b.y, i: b.i, node: el('path', { d: b.d, 'stroke-width': 1.2 }, gB) }; });
+  var fountain = PLAN.fo ? el('path', { d: PLAN.fo, 'stroke-width': 1.2 }, gB) : null;
+  var LABELS = { station: 'Station', berolinahaus: 'Berolinahaus', alexanderhaus: 'Alexanderhaus', lehrer: 'Haus des Lehrers', parkinn: 'Park Inn', galeria: 'Galeria', reisen: 'Haus des Reisens', tvtower: 'TV Tower', alexa: 'Alexa' };
+  var LABEL_OFFSET = { alexanderhaus: [6, 30], station: [-30, 26], berolinahaus: [40, -6], tvtower: [0, -14] };
+  var labelNodes = [];
+  Object.keys(LABELS).forEach(function (id) {
+    var c = PLAN.cent[id]; if (!c) return;
+    var p = proj(c[0], c[1]);
+    if (p[0] < 10 || p[0] > PLAN.w - 10 || p[1] < 10 || p[1] > PLAN.h - 10) return;
+    var off = LABEL_OFFSET[id] || [0, 0];
+    var anchor = p[0] > PLAN.w - 150 ? 'end' : (p[0] < 110 ? 'start' : 'middle');
+    var t = el('text', { x: Math.min(PLAN.w - 8, Math.max(8, p[0] + off[0])), y: p[1] + off[1], 'text-anchor': anchor, 'font-size': 19, 'font-weight': 700, 'font-family': 'Montserrat, sans-serif', fill: '#123D18', stroke: '#ffffff', 'stroke-width': 4, 'paint-order': 'stroke' }, gTop);
+    t.textContent = LABELS[id];
+    labelNodes.push({ id: id, node: t });
+  });
+  var bp = proj(POINTS.berolina1933.lat, POINTS.berolina1933.lon);
+  var berolina = el('circle', { cx: bp[0], cy: bp[1], r: 9, fill: '#d9541e', stroke: '#ffffff', 'stroke-width': 3 }, gTop);
+  var yp = proj(POINTS.you.lat, POINTS.you.lon);
+  el('circle', { cx: yp[0], cy: yp[1], r: 18, fill: 'none', stroke: '#123D18', 'stroke-width': 2, opacity: .35 }, gTop);
+  el('circle', { cx: yp[0], cy: yp[1], r: 9, fill: '#FFE600', stroke: '#123D18', 'stroke-width': 3 }, gTop);
+  var youLbl = el('text', { x: yp[0] + 14, y: yp[1] + 30, 'font-size': 14, 'font-weight': 800, 'font-family': 'Montserrat, sans-serif', fill: '#123D18', stroke: '#ffffff', 'stroke-width': 4, 'paint-order': 'stroke' }, gTop);
+  youLbl.textContent = 'You';
+
+  var currentStep = 4;
+  var yearsBox = document.getElementById('years');
+  var yearButtons = ERAS.map(function (era, i) {
+    var b = document.createElement('button');
+    b.type = 'button'; b.className = 'yr'; b.textContent = era.year === 2026 ? 'Today' : String(era.year);
+    b.addEventListener('click', function () { currentStep = i; render(); });
+    yearsBox.appendChild(b); return b;
+  });
+  function standing(y, year) { return y != null && y <= year; }
+  function render() {
+    var era = ERAS[currentStep], year = era.year;
+    yearButtons.forEach(function (b, i) { if (i === currentStep) b.setAttribute('aria-current', 'step'); else b.removeAttribute('aria-current'); });
+    shapes.forEach(function (s) {
+      var on = standing(s.y, year) || (year === 2026);
+      var unknownToday = s.y == null && year === 2026;
+      s.node.setAttribute('fill', on ? (unknownToday ? '#a5c99a' : '#2e7d32') : '#dcdcd4');
+      s.node.setAttribute('stroke', on ? '#1B5E20' : '#c4c4ba');
+      s.node.setAttribute('opacity', on ? 1 : .85);
+    });
+    if (fountain) { var fon = year >= 1970; fountain.setAttribute('fill', fon ? '#4a90c2' : '#dcdcd4'); fountain.setAttribute('stroke', fon ? '#1f5f8b' : '#c4c4ba'); }
+    rail.forEach(function (r) { r.setAttribute('opacity', year >= 1882 ? 1 : .15); });
+    tram.forEach(function (t) { t.setAttribute('opacity', year === 2026 ? .75 : 0); });
+    berolina.setAttribute('opacity', (year >= 1932 && year < 1971) ? 1 : 0);
+    labelNodes.forEach(function (l) { var s = shapes.filter(function (x) { return x.i === l.id; })[0]; var on = s && standing(s.y, year); l.node.setAttribute('fill', on ? '#123D18' : '#5f655a'); l.node.setAttribute('opacity', on ? 1 : .8); });
+    document.getElementById('count').textContent = 'Layer ' + (currentStep + 1) + ' of ' + ERAS.length + ' · ' + (year === 2026 ? 'today' : year);
+    document.getElementById('title').textContent = era.title;
+    document.getElementById('what').textContent = era.what;
+    document.getElementById('keep').textContent = era.keep;
+    document.getElementById('gone').textContent = era.gone;
+    document.getElementById('look').textContent = era.look;
+    document.getElementById('back').disabled = currentStep === 0;
+    document.getElementById('next').disabled = currentStep === ERAS.length - 1;
+  }
+  document.getElementById('next').addEventListener('click', function () { if (currentStep < ERAS.length - 1) { currentStep++; render(); } });
+  document.getElementById('back').addEventListener('click', function () { if (currentStep > 0) { currentStep--; render(); } });
+  render();
+})();
+</script>
+<script src="../js/brand.js"></script>
+</body>
+</html>
