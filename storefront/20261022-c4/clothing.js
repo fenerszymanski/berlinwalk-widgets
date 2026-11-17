@@ -8,7 +8,7 @@ export function clothingCards(rows,products=rows){
 }
 export function clothingSeo(german=false){
  const base='https://www.walkofberlin.com',path='/category/berlin-clothing';
- return {title:german?'Berlin Kleidung – T-Shirts & Hoodies | Walk of Berlin':'Berlin Clothing – T-shirts & Hoodies | Walk of Berlin',description:german?'Tempelhof, Späti, Weltzeituhr und sieben weitere Berlin-Motive auf T-Shirts und Hoodies. Wähle dein Motiv, dann Farbe und Größe.':'Tempelhof, the Späti, the World Clock and seven more Berlin designs on T-shirts and hoodies. Choose your design, then pick your colour and size.',canonical:base+(german?'/de':'')+path,en:base+path,de:base+'/de'+path};
+ return {title:german?'Berlin Kleidung – T-Shirts & Hoodies | Walk of Berlin':'Berlin Clothing – T-shirts & Hoodies | Walk of Berlin',description:german?'Berlin-Motive von Tempelhof und Späti bis zu alltäglichen Zugansagen auf T-Shirts und Hoodies. Wähle dein Motiv, dann Farbe und Größe.':'Berlin designs, from Tempelhof and the Späti to everyday train announcements on T-shirts and hoodies. Choose your design, then pick your colour and size.',canonical:base+(german?'/de':'')+path,en:base+path,de:base+'/de'+path};
 }
 // Native Wix SEO must carry the same values before release. This handles filters
 // and removes query parameters from the rendered canonical, without touching robots.

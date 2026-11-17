@@ -1192,5 +1192,57 @@
       "00000000-000000-000000-000000000001",
       "c2c6b083-d945-41f6-b93f-828446f4e03d"
     ]
+  },
+  {
+    "wixProductId": "14f414a1-7cae-4004-955c-3ba08f5e677b",
+    "nativeProductType": "physical",
+    "nativeCategoryIds": [
+      "c22f94d8-926b-452d-ad93-0b0aa18c3d2b",
+      "f6ce7197-7bf4-476e-a83e-b71707b28539"
+    ],
+    "forceNativeCategoryIds": true
+  },
+  {
+    "wixProductId": "16c4555b-2fcd-4a48-a57c-c9f56d4cea7b",
+    "nativeProductType": "physical",
+    "nativeCategoryIds": [
+      "c22f94d8-926b-452d-ad93-0b0aa18c3d2b",
+      "f6ce7197-7bf4-476e-a83e-b71707b28539"
+    ],
+    "forceNativeCategoryIds": true
+  },
+  {
+    "wixProductId": "bcd6e352-e848-4202-8039-5965a9e33e9a",
+    "nativeProductType": "physical",
+    "nativeCategoryIds": [
+      "c2c6b083-d945-41f6-b93f-828446f4e03d",
+      "f6ce7197-7bf4-476e-a83e-b71707b28539"
+    ]
+  },
+  {
+    "wixProductId": "0e2862e7-d9b0-4f5e-9ac4-7484009add6a",
+    "nativeProductType": "physical",
+    "nativeCategoryIds": [
+      "c22f94d8-926b-452d-ad93-0b0aa18c3d2b",
+      "f6ce7197-7bf4-476e-a83e-b71707b28539"
+    ],
+    "forceNativeCategoryIds": true
+  },
+  {
+    "wixProductId": "f059a071-1f86-4d8f-be41-b2b422f0069e",
+    "nativeProductType": "physical",
+    "nativeCategoryIds": [
+      "c22f94d8-926b-452d-ad93-0b0aa18c3d2b",
+      "f6ce7197-7bf4-476e-a83e-b71707b28539"
+    ],
+    "forceNativeCategoryIds": true
+  },
+  {
+    "wixProductId": "783d5296-6ab3-44bb-b2f8-be896f5b7899",
+    "nativeProductType": "physical",
+    "nativeCategoryIds": [
+      "c2c6b083-d945-41f6-b93f-828446f4e03d",
+      "f6ce7197-7bf4-476e-a83e-b71707b28539"
+    ]
   }
 ]

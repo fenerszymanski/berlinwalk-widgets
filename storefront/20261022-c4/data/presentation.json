@@ -4528,5 +4528,301 @@
     "apparelKind": "hoodie",
     "description": "<p>I show a yellow train crossing a dark green elevated steel viaduct above the apartment buildings on Schönhauser Allee.</p><p>Gildan Softstyle SF500 midweight fleece hoodie, 285 g/m², classic fit, brushed interior and cotton face. The fibre blend varies by colour. I have each hoodie made to order by Gelato.</p><h3>Size and care</h3><p>Available in S, M, L, XL, 2XL and 3XL. The measurements below are garment length and half-chest width, measured flat. Compare them with a hoodie that fits you.</p><p>S: length 71.1 cm; half-chest width 51.0 cm.</p><p>M: length 73.7 cm; half-chest width 56.0 cm.</p><p>L: length 76.2 cm; half-chest width 61.0 cm.</p><p>XL: length 78.7 cm; half-chest width 66.0 cm.</p><p>2XL: length 81.3 cm; half-chest width 71.0 cm.</p><p>3XL: length 83.8 cm; half-chest width 76.0 cm.</p><p></p><p>Machine wash warm, inside out, with similar colours. Use only non-chlorine bleach. Tumble dry at medium heat. Do not iron if decorated. Do not dry clean.</p>",
     "descriptionOverride": true
+  },
+  {
+    "id": "shirt-zurueckbleiben-bitte-classic",
+    "name": "Zurückbleiben bitte Classic T-shirt",
+    "place": "Berlin platforms",
+    "image": "berlin-cliches-20261117/zurueckbleiben-bitte-classic-t-shirt--white--71e7498c-0b58-45d9-a21f-0ecc6cba983e.jpg",
+    "alt": "White Gildan 64000 Classic T-shirt with the Zurückbleiben bitte design printed small on the left chest.",
+    "typeLine": "CLASSIC UNISEX T-SHIRT · FRONT PRINT",
+    "wixProductId": "14f414a1-7cae-4004-955c-3ba08f5e677b",
+    "group": "apparel",
+    "cardSummary": "A familiar Berlin platform announcement, set on one line with an italic ‘bitte.’",
+    "deliveryNote": "Free shipping within Germany. Made to order.",
+    "deliveryDetails": "Made to order by Gelato. Free shipping within Germany. Colour and fit are shown with the actual garment preview. Check the size measurements before ordering.",
+    "gallery": [],
+    "apparelMedia": {
+      "version": 1,
+      "defaultColor": "White",
+      "sharedGallery": [
+        {
+          "kind": "designDetail",
+          "image": "berlin-cliches-20261117/design-40-detail.png",
+          "sha256": "2f59aaa586e58fd3d2ceadebd3ccad38c61774fb87441b939a013ac82503c73e",
+          "alt": "Zurückbleiben bitte. on one line, with bitte in bold italic type."
+        }
+      ],
+      "colors": {
+        "White": {
+          "lead": {
+            "kind": "garmentPreview",
+            "image": "berlin-cliches-20261117/zurueckbleiben-bitte-classic-t-shirt--white--71e7498c-0b58-45d9-a21f-0ecc6cba983e.jpg",
+            "sha256": "a66efdbd4c890d823a8525a5fc0d1867a926be2cad3a88d645d40467144ea1e4",
+            "alt": "White Gildan 64000 Classic T-shirt with the Zurückbleiben bitte design printed small on the left chest."
+          },
+          "gallery": []
+        },
+        "Black": {
+          "lead": {
+            "kind": "garmentPreview",
+            "image": "berlin-cliches-20261117/zurueckbleiben-bitte-classic-t-shirt--black--45311d31-5fa5-4c78-8a33-f98f25acf118.jpg",
+            "sha256": "2319273a856cdce898f18f14169efc8697e3d3b99c56311e35ef2b5480f2715d",
+            "alt": "Black Gildan 64000 Classic T-shirt with the Zurückbleiben bitte design printed small on the left chest."
+          },
+          "gallery": []
+        }
+      }
+    },
+    "enabled": true,
+    "descriptionOverride": true,
+    "description": "<p>The Berlin platform announcement ‘Zurückbleiben bitte.’ appears on one line, with the last word in bold italic type. The design is printed small on the left chest. Choose a white garment with dark lettering or a black garment with white lettering.</p><p>Small left-chest print, approximately 8 cm wide.</p><p>Gildan 64000: 100% ring-spun cotton, tubular unisex fit and a seamless double-needle collar. Made to order by Gelato.</p><p>Free shipping within Germany. Made to order.</p><p>Size and care</p><p>Sizes S, M, L, XL, 2XL and 3XL. Check the size chart before ordering. Wash inside out with cold water and similar colours. Tumble dry low or hang dry. Do not iron directly on the print.</p><p>Size chart (cm)</p><p>Measured flat. Length from shoulder to hem; width across the chest.</p><p>S: length 71 cm; half chest 46 cm.</p><p>M: length 74 cm; half chest 51 cm.</p><p>L: length 76 cm; half chest 56 cm.</p><p>XL: length 79 cm; half chest 61 cm.</p><p>2XL: length 81 cm; half chest 66 cm.</p><p>3XL: length 85 cm; half chest 71 cm.</p><p>Also available in this design: <a href=\"https://walkofberlin.com/product-page/zurueckbleiben-bitte-premium-t-shirt\">Premium T-shirt</a> · <a href=\"https://walkofberlin.com/product-page/zurueckbleiben-bitte-hoodie\">Hoodie</a></p>"
+  },
+  {
+    "id": "shirt-zurueckbleiben-bitte-premium",
+    "name": "Zurückbleiben bitte Premium T-shirt",
+    "place": "Berlin platforms",
+    "image": "berlin-cliches-20261117/zurueckbleiben-bitte-premium-t-shirt--white--f5e5b982-7570-4569-b46f-00cbe9ec97c3.jpg",
+    "alt": "White Bella+Canvas 3001 Premium T-shirt with the Zurückbleiben bitte design printed small on the left chest.",
+    "typeLine": "PREMIUM UNISEX T-SHIRT · FRONT PRINT",
+    "wixProductId": "16c4555b-2fcd-4a48-a57c-c9f56d4cea7b",
+    "group": "apparel",
+    "cardSummary": "A familiar Berlin platform announcement, set on one line with an italic ‘bitte.’",
+    "deliveryNote": "Free shipping within Germany. Made to order.",
+    "deliveryDetails": "Made to order by Gelato. Free shipping within Germany. Colour and fit are shown with the actual garment preview. Check the size measurements before ordering.",
+    "gallery": [],
+    "apparelMedia": {
+      "version": 1,
+      "defaultColor": "White",
+      "sharedGallery": [
+        {
+          "kind": "designDetail",
+          "image": "berlin-cliches-20261117/design-40-detail.png",
+          "sha256": "2f59aaa586e58fd3d2ceadebd3ccad38c61774fb87441b939a013ac82503c73e",
+          "alt": "Zurückbleiben bitte. on one line, with bitte in bold italic type."
+        }
+      ],
+      "colors": {
+        "White": {
+          "lead": {
+            "kind": "garmentPreview",
+            "image": "berlin-cliches-20261117/zurueckbleiben-bitte-premium-t-shirt--white--f5e5b982-7570-4569-b46f-00cbe9ec97c3.jpg",
+            "sha256": "7980da2041d7c7d001626ab4c7b7e0b04d4a26812cd58e0368e0a992b4c51fbc",
+            "alt": "White Bella+Canvas 3001 Premium T-shirt with the Zurückbleiben bitte design printed small on the left chest."
+          },
+          "gallery": []
+        },
+        "Black": {
+          "lead": {
+            "kind": "garmentPreview",
+            "image": "berlin-cliches-20261117/zurueckbleiben-bitte-premium-t-shirt--black--b5b8d732-1e35-462a-88cf-0e69e8231ada.jpg",
+            "sha256": "1c704fc42fd3324e075a30c56aced49645c87db93c6d2151f777cf807314d8d1",
+            "alt": "Black Bella+Canvas 3001 Premium T-shirt with the Zurückbleiben bitte design printed small on the left chest."
+          },
+          "gallery": []
+        }
+      }
+    },
+    "enabled": true,
+    "descriptionOverride": true,
+    "description": "<p>The Berlin platform announcement ‘Zurückbleiben bitte.’ appears on one line, with the last word in bold italic type. The design is printed small on the left chest. Choose a white garment with dark lettering or a black garment with white lettering.</p><p>Small left-chest print, approximately 8 cm wide.</p><p>Bella+Canvas3001:100% Airlume combed and ring-spun cotton, with a side-seamed tailored unisex fit. Made to order by Gelato.</p><p>Free shipping within Germany. Made to order.</p><p>Size and care</p><p>Sizes S, M, L, XL, 2XL and 3XL. Check the size chart before ordering. Wash inside out with cold water and similar colours. Tumble dry low or hang dry. Do not iron directly on the print.</p><p>Size chart (cm)</p><p>Measured flat. Length from shoulder to hem; width across the chest.</p><p>S: length 71.1 cm; half chest 45.7 cm.</p><p>M: length 73.7 cm; half chest 50.8 cm.</p><p>L: length 76.2 cm; half chest 55.9 cm.</p><p>XL: length 78.7 cm; half chest 61 cm.</p><p>2XL: length 81.3 cm; half chest 66 cm.</p><p>3XL: length 83.8 cm; half chest 71.1 cm.</p><p>Also available in this design: <a href=\"https://walkofberlin.com/product-page/zurueckbleiben-bitte-classic-t-shirt\">Classic T-shirt</a> · <a href=\"https://walkofberlin.com/product-page/zurueckbleiben-bitte-hoodie\">Hoodie</a></p>"
+  },
+  {
+    "id": "hoodie-zurueckbleiben-bitte-sf500",
+    "name": "Zurückbleiben bitte Hoodie",
+    "place": "Berlin platforms",
+    "image": "berlin-cliches-20261117/zurueckbleiben-bitte-hoodie--white--b8831890-d9bc-4878-8743-36278400299a.jpg",
+    "alt": "White Gildan SF500 hoodie with the Zurückbleiben bitte design printed small on the left chest.",
+    "typeLine": "GILDAN SF500 MIDWEIGHT FLEECE HOODIE · FRONT PRINT",
+    "wixProductId": "bcd6e352-e848-4202-8039-5965a9e33e9a",
+    "group": "apparel",
+    "cardSummary": "A familiar Berlin platform announcement, set on one line with an italic ‘bitte.’",
+    "deliveryNote": "Made to order.",
+    "deliveryDetails": "I have this hoodie made to order by Gelato. Compare the size measurements with a hoodie that fits you.",
+    "gallery": [],
+    "apparelMedia": {
+      "version": 1,
+      "defaultColor": "White",
+      "sharedGallery": [
+        {
+          "kind": "designDetail",
+          "image": "berlin-cliches-20261117/design-40-detail.png",
+          "sha256": "2f59aaa586e58fd3d2ceadebd3ccad38c61774fb87441b939a013ac82503c73e",
+          "alt": "Zurückbleiben bitte. on one line, with bitte in bold italic type."
+        }
+      ],
+      "colors": {
+        "White": {
+          "lead": {
+            "kind": "garmentPreview",
+            "image": "berlin-cliches-20261117/zurueckbleiben-bitte-hoodie--white--b8831890-d9bc-4878-8743-36278400299a.jpg",
+            "sha256": "7194f7511c7a5baed2eff9768ceea9f7ea9bfdf8c232aabc23cf8842eb2f20bc",
+            "alt": "White Gildan SF500 hoodie with the Zurückbleiben bitte design printed small on the left chest."
+          },
+          "gallery": []
+        },
+        "Black": {
+          "lead": {
+            "kind": "garmentPreview",
+            "image": "berlin-cliches-20261117/zurueckbleiben-bitte-hoodie--black--fb2636b8-3e48-4013-b4eb-130b6f91fdaa.jpg",
+            "sha256": "4f68ad73301324b54db6b3b432142aea6d4ef4a54c84f6a129d9aa7815d1c56f",
+            "alt": "Black Gildan SF500 hoodie with the Zurückbleiben bitte design printed small on the left chest."
+          },
+          "gallery": []
+        }
+      }
+    },
+    "enabled": true,
+    "descriptionOverride": true,
+    "description": "<p>The Berlin platform announcement ‘Zurückbleiben bitte.’ appears on one line, with the last word in bold italic type. The design is printed small on the left chest. Choose a white garment with dark lettering or a black garment with white lettering.</p><p>Small left-chest print, approximately 4.5 cm wide.</p><p>Gildan SF500 fleece hoodie, with a classic fit, brushed interior and cotton face. Made to order by Gelato.</p><p>Free shipping within Germany. Made to order.</p><h3>Size and care</h3><p>Available in S, M, L, XL, 2XL and 3XL. The measurements below are garment length and half-chest width, measured flat. Compare them with a hoodie that fits you.</p><ul><li>S: length 71.1 cm; half-chest width 51.0 cm.</li><li>M: length 73.7 cm; half-chest width 56.0 cm.</li><li>L: length 76.2 cm; half-chest width 61.0 cm.</li><li>XL: length 78.7 cm; half-chest width 66.0 cm.</li><li>2XL: length 81.3 cm; half-chest width 71.0 cm.</li><li>3XL: length 83.8 cm; half-chest width 76.0 cm.</li></ul><p>Machine wash warm, inside out, with similar colours. Use only non-chlorine bleach. Tumble dry at medium heat. Do not iron if decorated. Do not dry clean.</p><p>Also available in this design: <a href=\"https://walkofberlin.com/product-page/zurueckbleiben-bitte-classic-t-shirt\">Classic T-shirt</a> · <a href=\"https://walkofberlin.com/product-page/zurueckbleiben-bitte-premium-t-shirt\">Premium T-shirt</a></p>",
+    "apparelKind": "hoodie"
+  },
+  {
+    "id": "shirt-zug-faellt-aus-classic",
+    "name": "Zug fällt aus Classic T-shirt",
+    "place": "Berlin platforms",
+    "image": "berlin-cliches-20261117/zug-faellt-aus-classic-t-shirt--white--adbcd199-009b-4c77-83ec-a3b3442bf8c4.jpg",
+    "alt": "White Gildan 64000 Classic T-shirt with the Zug fällt aus design printed small on the left chest.",
+    "typeLine": "CLASSIC UNISEX T-SHIRT · FRONT PRINT",
+    "wixProductId": "0e2862e7-d9b0-4f5e-9ac4-7484009add6a",
+    "group": "apparel",
+    "cardSummary": "ZUG / FÄLLT / AUS, stacked in bold condensed lettering: a familiar announcement for anyone waiting on a Berlin platform.",
+    "deliveryNote": "Free shipping within Germany. Made to order.",
+    "deliveryDetails": "Made to order by Gelato. Free shipping within Germany. Colour and fit are shown with the actual garment preview. Check the size measurements before ordering.",
+    "gallery": [],
+    "apparelMedia": {
+      "version": 1,
+      "defaultColor": "White",
+      "sharedGallery": [
+        {
+          "kind": "designDetail",
+          "image": "berlin-cliches-20261117/design-42-detail.png",
+          "sha256": "6dea46f98198c59b88d95493e090d9edd694101deb1c6787b527c870591fe7cf",
+          "alt": "ZUG FÄLLT AUS in three tightly stacked lines of bold condensed capitals."
+        }
+      ],
+      "colors": {
+        "White": {
+          "lead": {
+            "kind": "garmentPreview",
+            "image": "berlin-cliches-20261117/zug-faellt-aus-classic-t-shirt--white--adbcd199-009b-4c77-83ec-a3b3442bf8c4.jpg",
+            "sha256": "d5abdc74d81ec3fe10048d76ea988a958521fc859488283af5437874f7e5efaf",
+            "alt": "White Gildan 64000 Classic T-shirt with the Zug fällt aus design printed small on the left chest."
+          },
+          "gallery": []
+        },
+        "Black": {
+          "lead": {
+            "kind": "garmentPreview",
+            "image": "berlin-cliches-20261117/zug-faellt-aus-classic-t-shirt--black--a34ef02b-6591-425f-9f23-b79be3beda6c.jpg",
+            "sha256": "39c10deb84be4f587f255819344428b790be4145cfe8e345257e08bdbf752903",
+            "alt": "Black Gildan 64000 Classic T-shirt with the Zug fällt aus design printed small on the left chest."
+          },
+          "gallery": []
+        }
+      }
+    },
+    "enabled": true,
+    "descriptionOverride": true,
+    "description": "<p>ZUG / FÄLLT / AUS, stacked in bold condensed lettering: a familiar announcement for anyone waiting on a Berlin platform. The design is printed small on the left chest. Choose a white garment with dark lettering or a black garment with white lettering.</p><p>Small left-chest print, approximately 8 cm high.</p><p>Gildan 64000: 100% ring-spun cotton, tubular unisex fit and a seamless double-needle collar. Made to order by Gelato.</p><p>Free shipping within Germany. Made to order.</p><p>Size and care</p><p>Sizes S, M, L, XL, 2XL and 3XL. Check the size chart before ordering. Wash inside out with cold water and similar colours. Tumble dry low or hang dry. Do not iron directly on the print.</p><p>Size chart (cm)</p><p>Measured flat. Length from shoulder to hem; width across the chest.</p><p>S: length 71 cm; half chest 46 cm.</p><p>M: length 74 cm; half chest 51 cm.</p><p>L: length 76 cm; half chest 56 cm.</p><p>XL: length 79 cm; half chest 61 cm.</p><p>2XL: length 81 cm; half chest 66 cm.</p><p>3XL: length 85 cm; half chest 71 cm.</p><p>Also available in this design: <a href=\"https://walkofberlin.com/product-page/zug-faellt-aus-premium-t-shirt\">Premium T-shirt</a> · <a href=\"https://walkofberlin.com/product-page/zug-faellt-aus-hoodie\">Hoodie</a></p>"
+  },
+  {
+    "id": "shirt-zug-faellt-aus-premium",
+    "name": "Zug fällt aus Premium T-shirt",
+    "place": "Berlin platforms",
+    "image": "berlin-cliches-20261117/zug-faellt-aus-premium-t-shirt--white--dc0e3efa-5ff9-4c77-8bd3-30a635ed7635.jpg",
+    "alt": "White Bella+Canvas 3001 Premium T-shirt with the Zug fällt aus design printed small on the left chest.",
+    "typeLine": "PREMIUM UNISEX T-SHIRT · FRONT PRINT",
+    "wixProductId": "f059a071-1f86-4d8f-be41-b2b422f0069e",
+    "group": "apparel",
+    "cardSummary": "ZUG / FÄLLT / AUS, stacked in bold condensed lettering: a familiar announcement for anyone waiting on a Berlin platform.",
+    "deliveryNote": "Free shipping within Germany. Made to order.",
+    "deliveryDetails": "Made to order by Gelato. Free shipping within Germany. Colour and fit are shown with the actual garment preview. Check the size measurements before ordering.",
+    "gallery": [],
+    "apparelMedia": {
+      "version": 1,
+      "defaultColor": "White",
+      "sharedGallery": [
+        {
+          "kind": "designDetail",
+          "image": "berlin-cliches-20261117/design-42-detail.png",
+          "sha256": "6dea46f98198c59b88d95493e090d9edd694101deb1c6787b527c870591fe7cf",
+          "alt": "ZUG FÄLLT AUS in three tightly stacked lines of bold condensed capitals."
+        }
+      ],
+      "colors": {
+        "White": {
+          "lead": {
+            "kind": "garmentPreview",
+            "image": "berlin-cliches-20261117/zug-faellt-aus-premium-t-shirt--white--dc0e3efa-5ff9-4c77-8bd3-30a635ed7635.jpg",
+            "sha256": "0ba87ba493cda6c862d5a1ddd6c0094eae5f1956a0ae2f123e1e7994eb452598",
+            "alt": "White Bella+Canvas 3001 Premium T-shirt with the Zug fällt aus design printed small on the left chest."
+          },
+          "gallery": []
+        },
+        "Black": {
+          "lead": {
+            "kind": "garmentPreview",
+            "image": "berlin-cliches-20261117/zug-faellt-aus-premium-t-shirt--black--34703ca3-bec1-46d3-bf11-391db0172768.jpg",
+            "sha256": "54c9299c2973e65ed03b9f9d8611dde7d92fd33765623ba195e9cae6e4f9ab21",
+            "alt": "Black Bella+Canvas 3001 Premium T-shirt with the Zug fällt aus design printed small on the left chest."
+          },
+          "gallery": []
+        }
+      }
+    },
+    "enabled": true,
+    "descriptionOverride": true,
+    "description": "<p>ZUG / FÄLLT / AUS, stacked in bold condensed lettering: a familiar announcement for anyone waiting on a Berlin platform. The design is printed small on the left chest. Choose a white garment with dark lettering or a black garment with white lettering.</p><p>Small left-chest print, approximately 8 cm high.</p><p>Bella+Canvas3001:100% Airlume combed and ring-spun cotton, with a side-seamed tailored unisex fit. Made to order by Gelato.</p><p>Free shipping within Germany. Made to order.</p><p>Size and care</p><p>Sizes S, M, L, XL, 2XL and 3XL. Check the size chart before ordering. Wash inside out with cold water and similar colours. Tumble dry low or hang dry. Do not iron directly on the print.</p><p>Size chart (cm)</p><p>Measured flat. Length from shoulder to hem; width across the chest.</p><p>S: length 71.1 cm; half chest 45.7 cm.</p><p>M: length 73.7 cm; half chest 50.8 cm.</p><p>L: length 76.2 cm; half chest 55.9 cm.</p><p>XL: length 78.7 cm; half chest 61 cm.</p><p>2XL: length 81.3 cm; half chest 66 cm.</p><p>3XL: length 83.8 cm; half chest 71.1 cm.</p><p>Also available in this design: <a href=\"https://walkofberlin.com/product-page/zug-faellt-aus-classic-t-shirt\">Classic T-shirt</a> · <a href=\"https://walkofberlin.com/product-page/zug-faellt-aus-hoodie\">Hoodie</a></p>"
+  },
+  {
+    "id": "hoodie-zug-faellt-aus-sf500",
+    "name": "Zug fällt aus Hoodie",
+    "place": "Berlin platforms",
+    "image": "berlin-cliches-20261117/zug-faellt-aus-hoodie--white--c720bdd5-0631-4113-a412-ef221b88759a.jpg",
+    "alt": "White Gildan SF500 hoodie with the Zug fällt aus design printed small on the left chest.",
+    "typeLine": "GILDAN SF500 MIDWEIGHT FLEECE HOODIE · FRONT PRINT",
+    "wixProductId": "783d5296-6ab3-44bb-b2f8-be896f5b7899",
+    "group": "apparel",
+    "cardSummary": "ZUG / FÄLLT / AUS, stacked in bold condensed lettering: a familiar announcement for anyone waiting on a Berlin platform.",
+    "deliveryNote": "Made to order.",
+    "deliveryDetails": "I have this hoodie made to order by Gelato. Compare the size measurements with a hoodie that fits you.",
+    "gallery": [],
+    "apparelMedia": {
+      "version": 1,
+      "defaultColor": "White",
+      "sharedGallery": [
+        {
+          "kind": "designDetail",
+          "image": "berlin-cliches-20261117/design-42-detail.png",
+          "sha256": "6dea46f98198c59b88d95493e090d9edd694101deb1c6787b527c870591fe7cf",
+          "alt": "ZUG FÄLLT AUS in three tightly stacked lines of bold condensed capitals."
+        }
+      ],
+      "colors": {
+        "White": {
+          "lead": {
+            "kind": "garmentPreview",
+            "image": "berlin-cliches-20261117/zug-faellt-aus-hoodie--white--c720bdd5-0631-4113-a412-ef221b88759a.jpg",
+            "sha256": "19bb90a482e35a7b4c6e5c05c7654d2dbf9967747d3198f2f0fe7e81165e9a12",
+            "alt": "White Gildan SF500 hoodie with the Zug fällt aus design printed small on the left chest."
+          },
+          "gallery": []
+        },
+        "Black": {
+          "lead": {
+            "kind": "garmentPreview",
+            "image": "berlin-cliches-20261117/zug-faellt-aus-hoodie--black--058dd5f1-c4f0-40b0-9a46-8f4c41c8926f.jpg",
+            "sha256": "93fac338183d6a71e893519c522b8a26b98d2c3e4dbedfa1868b6f63bd1ed6da",
+            "alt": "Black Gildan SF500 hoodie with the Zug fällt aus design printed small on the left chest."
+          },
+          "gallery": []
+        }
+      }
+    },
+    "enabled": true,
+    "descriptionOverride": true,
+    "description": "<p>ZUG / FÄLLT / AUS, stacked in bold condensed lettering: a familiar announcement for anyone waiting on a Berlin platform. The design is printed small on the left chest. Choose a white garment with dark lettering or a black garment with white lettering.</p><p>Small left-chest print, approximately 8 cm high.</p><p>Gildan SF500 fleece hoodie, with a classic fit, brushed interior and cotton face. Made to order by Gelato.</p><p>Free shipping within Germany. Made to order.</p><h3>Size and care</h3><p>Available in S, M, L, XL, 2XL and 3XL. The measurements below are garment length and half-chest width, measured flat. Compare them with a hoodie that fits you.</p><ul><li>S: length 71.1 cm; half-chest width 51.0 cm.</li><li>M: length 73.7 cm; half-chest width 56.0 cm.</li><li>L: length 76.2 cm; half-chest width 61.0 cm.</li><li>XL: length 78.7 cm; half-chest width 66.0 cm.</li><li>2XL: length 81.3 cm; half-chest width 71.0 cm.</li><li>3XL: length 83.8 cm; half-chest width 76.0 cm.</li></ul><p>Machine wash warm, inside out, with similar colours. Use only non-chlorine bleach. Tumble dry at medium heat. Do not iron if decorated. Do not dry clean.</p><p>Also available in this design: <a href=\"https://walkofberlin.com/product-page/zug-faellt-aus-classic-t-shirt\">Classic T-shirt</a> · <a href=\"https://walkofberlin.com/product-page/zug-faellt-aus-premium-t-shirt\">Premium T-shirt</a></p>",
+    "apparelKind": "hoodie"
   }
 ]

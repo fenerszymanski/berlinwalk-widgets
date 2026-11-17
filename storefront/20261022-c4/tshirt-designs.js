@@ -11,7 +11,7 @@ export const QUALITY_TEXT=Object.freeze({
  'Quality':'Qualität',
  'Ring-spun cotton · tubular unisex fit.':'Ringgesponnene Baumwolle · schlauchförmiger Unisex-Schnitt.',
  'Airlume combed ring-spun cotton · side-seamed, tailored unisex fit.':'Gekämmte, ringgesponnene Airlume-Baumwolle · taillierter Unisex-Schnitt mit Seitennähten.',
- 'Ten Berlin designs. Choose Classic or Premium on the design page.':'Zehn Berlin-Motive. Wähle Classic oder Premium auf der Motivseite.',
+ 'Berlin designs. Choose Classic or Premium on the design page.':'Berlin-Motive. Wähle Classic oder Premium auf der Motivseite.',
  'UNISEX T-SHIRT · CLASSIC / PREMIUM':'UNISEX-T-SHIRT · CLASSIC / PREMIUM'
 });
 export function mergeDesignReviews(lists){return [...new Map(lists.flatMap(x=>x.reviews||[]).map(r=>[r.id,r])).values()];}
