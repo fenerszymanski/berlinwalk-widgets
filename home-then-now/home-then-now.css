@@ -399,6 +399,14 @@ bw-home-then-now .bwh-letter__consent a { color: var(--bwh-yellow); }
 bw-home-then-now .bwh-letter__msg { min-height: 1.4em; font-size: 13px; color: var(--bwh-yellow); }
 bw-home-then-now .bwh-letter__msg--err { color: #FFB4A9; }
 bw-home-then-now .bwh-letter__done { font-size: 15px; line-height: 1.5; color: var(--bwh-cream); }
+/* DOI inbox assist (17 Nov 2026): typed address + one button into the reader's mailbox. */
+bw-home-then-now .bwh-letter__addr { font-weight: 700; word-break: break-all; }
+bw-home-then-now a.bwh-letter__inbox, bw-home-then-now a.bwh-letter__inbox:visited, bw-home-then-now a.bwh-letter__inbox:hover, bw-home-then-now a.bwh-letter__inbox:focus {
+  display: flex; width: fit-content; max-width: 100%; box-sizing: border-box; align-items: center; gap: 8px; margin: 12px 0 4px; padding: 12px 20px;
+  border-radius: 10px; background: #FFE600 !important; color: #123D18 !important; font-weight: 800; font-size: 16px; line-height: 1.2; text-decoration: none !important;
+}
+bw-home-then-now a.bwh-letter__inbox:focus-visible { outline: 3px solid #FFE600; outline-offset: 3px; }
+bw-home-then-now .bwh-letter__note { display: block; margin-top: 6px; font-size: 13px; line-height: 1.5; opacity: .9; }
 bw-home-then-now .bwh-hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
 
 /* walk with me */

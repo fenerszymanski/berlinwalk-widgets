@@ -1482,7 +1482,7 @@
         const done = document.createElement('p');
         done.className = 'bwh-letter__done';
         done.setAttribute('role', 'status');
-        done.innerHTML = '<strong>Check your inbox.</strong> Click the link in my email to confirm, and the next letter reaches you on Monday morning. Not there in a minute? Look in your Spam or Promotions folder.';
+        bwhInboxAssist(done, email);
         form.replaceWith(done);
         bwhTrack('bw_home_tn_letter_submit', { placement: BWH_LETTER.placement });
       }).catch(() => {
@@ -1491,6 +1491,34 @@
       });
     }
   }
+
+  // DOI inbox assist (17 Nov 2026): most confirmations happen within minutes
+  // while the reader is still on the page, so the success state shows the
+  // typed address and one button into their own mailbox. Domain-only lookup;
+  // the address never goes into a URL. Same table as js/lead-form-direct-inject.js.
+  function bwhInboxLink(addr) {
+    const domain = String(addr || '').toLowerCase().split('@')[1] || '';
+    const gmail = 'https://mail.google.com/mail/u/0/#search/' + encodeURIComponent('from:info@berlinwalk.com in:anywhere newer_than:1d');
+    if (/^(gmail|googlemail)\.com$/.test(domain)) return { label: 'Open Gmail', url: gmail };
+    if (/^(outlook|hotmail|live|msn)\.[a-z.]{2,6}$/.test(domain)) return { label: 'Open Outlook', url: 'https://outlook.live.com/mail/0/' };
+    if (/^(yahoo|ymail|rocketmail)\.[a-z.]{2,6}$/.test(domain)) return { label: 'Open Yahoo Mail', url: 'https://mail.yahoo.com/' };
+    if (/^(icloud|me|mac)\.com$/.test(domain)) return { label: 'Open iCloud Mail', url: 'https://www.icloud.com/mail' };
+    if (/^gmx\.(de|net|at|ch|com)$/.test(domain)) return { label: 'Open GMX', url: 'https://www.gmx.net/' };
+    if (domain === 'web.de') return { label: 'Open WEB.DE', url: 'https://web.de/' };
+    if (domain === 't-online.de') return { label: 'Open t-online Mail', url: 'https://email.t-online.de/' };
+    if (/^(proton\.me|protonmail\.com|pm\.me)$/.test(domain)) return { label: 'Open Proton Mail', url: 'https://mail.proton.me/' };
+    return null;
+  }
+  function bwhInboxAssist(box, addr) {
+    const make = (tag, cls, text) => { const el = document.createElement(tag); if (cls) el.className = cls; if (text) el.textContent = text; return el; };
+    const nodes = [make('strong', '', 'One click left.'), document.createTextNode(' I just emailed '), make('span', 'bwh-letter__addr', addr),
+      document.createTextNode('. Tap the button in that email and the next letter reaches you on Monday morning.')];
+    const link = bwhInboxLink(addr);
+    if (link) { const a = make('a', 'bwh-letter__inbox', link.label + ' \u2192'); a.href = link.url; a.target = '_blank'; a.rel = 'noopener'; nodes.push(a); }
+    nodes.push(make('span', 'bwh-letter__note', 'It comes from Yusuf at Walk of Berlin (info@berlinwalk.com). Not there in a minute? Look in Promotions, Updates or Spam.'));
+    box.replaceChildren(...nodes);
+  }
+  if (window.BW_HOME_TN_TEST_HOOKS === true) window.__bwHomeTnTestHooks = { bwhInboxLink, bwhInboxAssist };
 
   if (!customElements.get('bw-home-then-now')) {
     customElements.define('bw-home-then-now', BWHomeThenNowElement);

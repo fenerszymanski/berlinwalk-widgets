@@ -53,6 +53,25 @@
     return new URL('./' + slug + '.json', BASE).href + '?v=' + DATA_VERSION;
   }
 
+  // DOI inbox assist (17 Nov 2026): one button into the reader's own mailbox after the
+  // letter form. Domain-only lookup; the address never goes into a URL.
+  function libInboxLink(addr) {
+    var domain = String(addr || '').toLowerCase().split('@')[1] || '';
+    var gmail = 'https://mail.google.com/mail/u/0/#search/' + encodeURIComponent('from:info@berlinwalk.com in:anywhere newer_than:1d');
+    if (/^(gmail|googlemail)\.com$/.test(domain)) return { label: 'Open Gmail', url: gmail };
+    if (/^(outlook|hotmail|live|msn)\.[a-z.]{2,6}$/.test(domain)) return { label: 'Open Outlook', url: 'https://outlook.live.com/mail/0/' };
+    if (/^(yahoo|ymail|rocketmail)\.[a-z.]{2,6}$/.test(domain)) return { label: 'Open Yahoo Mail', url: 'https://mail.yahoo.com/' };
+    if (/^(icloud|me|mac)\.com$/.test(domain)) return { label: 'Open iCloud Mail', url: 'https://www.icloud.com/mail' };
+    if (/^gmx\.(de|net|at|ch|com)$/.test(domain)) return { label: 'Open GMX', url: 'https://www.gmx.net/' };
+    if (domain === 'web.de') return { label: 'Open WEB.DE', url: 'https://web.de/' };
+    if (domain === 't-online.de') return { label: 'Open t-online Mail', url: 'https://email.t-online.de/' };
+    if (/^(proton\.me|protonmail\.com|pm\.me)$/.test(domain)) return { label: 'Open Proton Mail', url: 'https://mail.proton.me/' };
+    return null;
+  }
+  function libEscape(v) {
+    return String(v == null ? '' : v).replace(/[&<>"']/g, function (ch) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[ch]; });
+  }
+
   function esc(v) {
     return String(v == null ? '' : v);
   }
@@ -158,6 +177,9 @@
       '.bw-lib-letter .done{padding:26px 28px;}',
       '.bw-lib-letter .done h3{font-size:21px;margin:0 0 10px;color:var(--ink);}',
       '.bw-lib-letter .done p{margin:0;font-size:15px;color:#2F3729;max-width:52ch;}',
+      '.bw-lib-letter .done a.bw-lib-inbox,.bw-lib-letter .done a.bw-lib-inbox:visited,.bw-lib-letter .done a.bw-lib-inbox:hover,.bw-lib-letter .done a.bw-lib-inbox:focus{display:flex;width:fit-content;max-width:100%;box-sizing:border-box;align-items:center;gap:8px;margin:14px 0 4px;padding:12px 20px;border-radius:10px;background:#FFE600!important;color:#123D18!important;font-weight:800;font-size:16px;line-height:1.2;text-decoration:none!important;}',
+      '.bw-lib-letter .done a.bw-lib-inbox:focus-visible{outline:3px solid #123D18;outline-offset:2px;}',
+      '.bw-lib-letter .done .bw-lib-note{margin:8px 0 0;font-size:13px;color:#4A5444;max-width:52ch;}',
 
       /* closing note */
       '.bw-lib-note{margin-top:40px;border:2px solid var(--ink);background:#fff;display:grid;grid-template-columns:1.3fr 1fr;}',
@@ -590,11 +612,13 @@
         // The API answers the same way whatever it decides, so this only
         // reports that the request was taken, never that a list was joined.
         // The confirmation email is what actually subscribes the reader.
+        var inbox = libInboxLink(email);
         wrap.innerHTML =
-          '<div class="done"><h3 class="m">Check your inbox</h3>' +
-          '<p>I have sent one email to <strong>' + esc(email) + '</strong>. ' +
-          'Click the link in it to confirm, and the next letter reaches you on Monday morning. ' +
-          'If it is not there in a minute, look in the promotions or spam folder.</p></div>';
+          '<div class="done"><h3 class="m">One click left</h3>' +
+          '<p>I have sent one email to <strong>' + libEscape(email) + '</strong>. ' +
+          'Tap the button in it to confirm, and the next letter reaches you on Monday morning.</p>' +
+          (inbox ? '<a class="bw-lib-inbox" href="' + libEscape(inbox.url) + '" target="_blank" rel="noopener">' + libEscape(inbox.label) + ' <span aria-hidden="true">&rarr;</span></a>' : '') +
+          '<p class="bw-lib-note">It comes from Yusuf at Walk of Berlin (info@berlinwalk.com). Not there in a minute? Look in Promotions, Updates or Spam.</p></div>';
       }).catch(function () {
         button.disabled = false;
         msg.className = 'msg err';

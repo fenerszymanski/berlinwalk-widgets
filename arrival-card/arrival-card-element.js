@@ -195,7 +195,7 @@
         .description{font-size:16px;line-height:1.45;margin:0 0 14px;color:#fff}label{display:block;font-size:14px;line-height:1.4;font-weight:600;color:#e3f0dc;margin:0 0 7px}
         .row{display:flex;flex-wrap:wrap;gap:12px;align-items:stretch}input{flex:1 1 220px;font:inherit;font-size:16px;width:100%;min-width:0;border:2px solid transparent;border-radius:8px;background:#fff;color:#212121;min-height:54px;padding:13px 16px}input::placeholder{color:#6b707a;opacity:1}
         button{flex:0 0 auto;appearance:none;border:0;border-radius:999px;padding:15px 24px;min-height:54px;font:inherit;font-size:16px;font-weight:800;line-height:1.3;white-space:nowrap;cursor:pointer;background:var(--yellow);color:var(--ink)}button:hover{background:#ffef53;color:var(--ink)}button:active{background:#f1d900;color:var(--ink)}button:disabled{opacity:.75;cursor:wait;color:var(--ink)}input:focus-visible,button:focus-visible,a:focus-visible{outline:3px solid #fff;outline-offset:4px}input:focus-visible{border-color:var(--yellow)}
-        .consent{font-size:14px;line-height:1.45;margin:12px 0 0;color:#fff}.privacy{display:inline-block;margin-top:5px;font-size:14px;color:#fff;text-decoration:underline;text-underline-offset:3px}.status{font-size:14px;line-height:1.5;margin:14px 0 0;color:#fff}.status:empty{display:none}.success{padding:16px 0;font-size:17px;line-height:1.6;color:#fff}.success strong{display:block;font-size:24px;line-height:1.3;margin-bottom:10px}.trap{position:absolute;left:-10000px;width:1px;height:1px;overflow:hidden}
+        .consent{font-size:14px;line-height:1.45;margin:12px 0 0;color:#fff}.privacy{display:inline-block;margin-top:5px;font-size:14px;color:#fff;text-decoration:underline;text-underline-offset:3px}.status{font-size:14px;line-height:1.5;margin:14px 0 0;color:#fff}.status:empty{display:none}.success{padding:16px 0;font-size:17px;line-height:1.6;color:#fff}.success strong{display:block;font-size:24px;line-height:1.3;margin-bottom:10px}.success .addr{font-weight:700;word-break:break-all}.success a.inbox,.success a.inbox:visited,.success a.inbox:hover,.success a.inbox:focus{display:flex;width:fit-content;max-width:100%;box-sizing:border-box;align-items:center;gap:8px;margin:14px 0 4px;padding:12px 20px;border-radius:10px;background:#ffe600!important;color:#123d18!important;font-weight:800;font-size:16px;line-height:1.2;text-decoration:none!important}.success a.inbox:focus-visible{outline:3px solid #ffe600;outline-offset:3px}.success .note{display:block;margin-top:8px;font-size:13px;line-height:1.5;opacity:.92}.trap{position:absolute;left:-10000px;width:1px;height:1px;overflow:hidden}
         :host([compact]) .card{grid-template-columns:34% 66%}:host([compact]) .photo{min-height:400px}:host([compact]) .body{padding:28px}:host([compact]) h2{font-size:30px}:host([compact]) .description{font-size:16px}:host([compact]) .row{flex-wrap:wrap}:host([compact]) input{flex:1 1 210px}:host([compact]) button{flex:0 0 auto}
         @media(max-width:760px){.card,:host([compact]) .card{grid-template-columns:1fr}.photo,:host([compact]) .photo{height:180px;min-height:0;object-position:50% 44%}.body,:host([compact]) .body{padding:22px 20px}.badge{font-size:11px;margin-bottom:14px}h2,:host([compact]) h2{font-size:26px;line-height:1.16}.description,:host([compact]) .description{font-size:15px;margin-bottom:18px}.row,:host([compact]) .row{display:grid;grid-template-columns:1fr}button{width:100%}.consent{font-size:12px}.privacy{font-size:13px}}
       </style><section class="card" aria-labelledby="arrival-title"><img class="photo" src="${BASE}brandenburg-gate.jpg" width="3000" height="2000" alt="Brandenburg Gate in warm evening light" loading="lazy" decoding="async"><div class="body"><p class="badge">FREE BERLIN ARRIVAL CARD</p><h2 id="arrival-title">Arriving in Berlin?<span>Save my Arrival Card.</span></h2><p class="description">BER transport, ticket choices and late-arrival options in one card you can save on your phone.</p><form><label for="arrival-email">Email address</label><div class="row"><input id="arrival-email" name="email" type="email" inputmode="email" autocomplete="email" autocapitalize="none" spellcheck="false" placeholder="Your email address" required maxlength="320" aria-describedby="arrival-consent arrival-status"><button type="submit">Send me the card</button></div><div class="trap" aria-hidden="true"><label for="arrival-website">Website</label><input id="arrival-website" name="website" tabindex="-1" autocomplete="off"></div><p class="consent" id="arrival-consent">${CONSENT}</p><a class="privacy" href="https://walkofberlin.com/privacy-policy" target="_blank" rel="noopener">Privacy Policy</a></form><div class="success" hidden role="status" aria-live="polite"><strong>Check your inbox.</strong>Open the email link to get your Arrival Card. For a first request, that link also confirms your email. If it is missing, check your spam folder.</div><p class="status" id="arrival-status" role="status" aria-live="polite"></p></div></section>`;
@@ -213,11 +213,39 @@
           const response=await fetch(endpoint+'?action=submit',{method:'POST',credentials:'include',headers:{'content-type':'application/json'},body:JSON.stringify({email:email.value.trim().toLowerCase(),consent:true,consentVersion:VERSION,consentMethod:'submit_button_with_visible_disclosure',assetId:'berlin-arrival-card',assetVersion:'2026-10-v2',sourceSlug:location.pathname.split('/').filter(Boolean).pop()||'home',pagePath:location.pathname,sourceUrl:location.origin+location.pathname,placement:this.getAttribute('placement')||'pre-footer',variant:'brandenburg-split',analyticsConsentAtSubmit:false,advertisingConsent:false,website:root.querySelector('[name=website]').value,startedAt:this.startedAt,submittedAt})});
           const result=await response.json();
           if(!response.ok || result.ok===false) throw new Error('submit_failed');
-          form.hidden=true;root.querySelector('.success').hidden=false;
+          form.hidden=true;inboxAssist(root.querySelector('.success'),email.value.trim().toLowerCase());root.querySelector('.success').hidden=false;
         } catch {status.textContent='I could not send the confirmation email. Please try again.';this.sending=false;button.disabled=false;button.textContent='Send me the card';}
         finally {form.setAttribute('aria-busy','false');}
       });
     }
   }
+  // DOI inbox assist (17 Nov 2026): most confirmations happen within minutes
+  // while the reader is still on the page, so the success state shows the
+  // typed address and one button into their own mailbox. Domain-only lookup;
+  // the address never goes into a URL. Same table as js/lead-form-direct-inject.js.
+  function inboxLink(addr){
+    const domain=String(addr||'').toLowerCase().split('@')[1]||'';
+    const gmail='https://mail.google.com/mail/u/0/#search/'+encodeURIComponent('from:info@berlinwalk.com in:anywhere newer_than:1d');
+    if(/^(gmail|googlemail)\.com$/.test(domain))return{label:'Open Gmail',url:gmail};
+    if(/^(outlook|hotmail|live|msn)\.[a-z.]{2,6}$/.test(domain))return{label:'Open Outlook',url:'https://outlook.live.com/mail/0/'};
+    if(/^(yahoo|ymail|rocketmail)\.[a-z.]{2,6}$/.test(domain))return{label:'Open Yahoo Mail',url:'https://mail.yahoo.com/'};
+    if(/^(icloud|me|mac)\.com$/.test(domain))return{label:'Open iCloud Mail',url:'https://www.icloud.com/mail'};
+    if(/^gmx\.(de|net|at|ch|com)$/.test(domain))return{label:'Open GMX',url:'https://www.gmx.net/'};
+    if(domain==='web.de')return{label:'Open WEB.DE',url:'https://web.de/'};
+    if(domain==='t-online.de')return{label:'Open t-online Mail',url:'https://email.t-online.de/'};
+    if(/^(proton\.me|protonmail\.com|pm\.me)$/.test(domain))return{label:'Open Proton Mail',url:'https://mail.proton.me/'};
+    return null;
+  }
+  function inboxAssist(box,addr){
+    if(!box)return;
+    const make=(tag,cls,text)=>{const el=document.createElement(tag);if(cls)el.className=cls;if(text)el.textContent=text;return el;};
+    const addrEl=make('span','addr',addr);
+    const nodes=[make('strong','','One click left.'),document.createTextNode('I just emailed '),addrEl,document.createTextNode('. Tap the button in that email to get your Arrival Card. For a first request, that link also confirms your email.')];
+    const link=inboxLink(addr);
+    if(link){const a=make('a','inbox',link.label+' →');a.href=link.url;a.target='_blank';a.rel='noopener';nodes.push(a);}
+    nodes.push(make('span','note','It comes from Yusuf at Walk of Berlin (info@berlinwalk.com). Not there in a minute? Look in Promotions, Updates or Spam. Wrong address? Reload the page and send the form again.'));
+    box.replaceChildren(...nodes);
+  }
+  if(window.BW_ARRIVAL_TEST_HOOKS===true)window.__bwArrivalTestHooks={inboxLink,inboxAssist};
   customElements.define(TAG,ArrivalCard);
 })();
