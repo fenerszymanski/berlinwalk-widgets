@@ -828,3 +828,13 @@ button.ys-words-tag:focus-visible{outline:2px solid var(--green);outline-offset:
 :host([design2]) .d2-sort{display:flex;align-items:center;gap:10px;font-size:14px}
 :host([design2]) .d2-sort select{min-height:44px;padding:8px 40px 8px 14px;border:1px solid #aeb7a8;border-radius:24px;background:#fafaf5 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%23123d18' stroke-width='2'/%3E%3C/svg%3E") no-repeat right 16px center;-webkit-appearance:none;appearance:none;cursor:pointer;font-size:14px}
 :host([design2]) .d2-sort select:focus-visible{outline:2px solid var(--green);outline-offset:2px}
+
+/* Show the print while retaining the neckline and outer sleeve edges. */
+:host([design2]) .d2-standard .gallery-stage[data-upper-garment],
+.gallery-stage[data-upper-garment]{aspect-ratio:1.8;background:#fff}
+:host([design2]) .d2-standard .gallery-stage[data-upper-garment]>img:not(.extra),
+.gallery-stage[data-upper-garment]>img{width:100%;height:100%;max-width:none;max-height:none;object-fit:cover;object-position:center top;box-shadow:none}
+:host([design2]) .d2-card a.tile[data-upper-garment] img.tile-photo,
+.tile[data-upper-garment] img.tile-photo{position:absolute;inset:0;width:100%;height:auto;max-width:none;max-height:none;aspect-ratio:1.8;object-fit:cover;object-position:center top;box-shadow:none;transform:none}
+.tile[data-upper-garment],:host([design2]) .d2-card a.tile[data-upper-garment]{aspect-ratio:1.8;background:#fff;padding:0}
+.thumb[data-upper-garment]>img{object-fit:cover;object-position:center top}
