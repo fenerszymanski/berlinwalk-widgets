@@ -654,6 +654,20 @@ button.ys-words-tag:focus-visible{outline:2px solid var(--green);outline-offset:
  :host([design2]) .d2-listing{padding-block:24px 10px}
  :host([design2]) .d2-delivery{font-size:13px}
 }
+@media(max-width:740px){
+ :host([design2]) .d2-bar-row{position:relative}
+ :host([design2]) .d2-browse{display:none}
+ :host([design2]) .d2-bar-search,:host([design2]) .d2-bar-search.d2-compact-search{display:none;grid-row:3}
+ :host([design2]) .d2-bar-search.d2-open{display:block}
+ :host([design2]) .d2-search-toggle{grid-column:2;grid-row:1;display:flex;align-items:center;justify-content:center;width:30px;padding:4px;border:0;background:none}
+ :host([design2]) .d2-groups,:host([design2]) .d2-groups.d2-open{display:flex;grid-column:1/-1;grid-row:2;flex-direction:row;align-items:center;gap:18px;padding:2px 0 4px;border-top:0;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+ :host([design2]) .d2-groups::-webkit-scrollbar{display:none}
+ :host([design2]) .d2-group{position:static;flex:none}
+ :host([design2]) .d2-group>button{width:auto;font-size:17px;padding:8px 0}
+ :host([design2]) .d2-groups-de,:host([design2]) .d2-groups-de.d2-open{gap:10px}
+ :host([design2]) .d2-groups-de .d2-group>button{font-size:15px}
+ :host([design2]) .d2-menu{position:absolute;top:100%;left:0;right:0;min-width:0;max-width:none;max-height:70vh;overflow-y:auto;background:var(--cream);border:1px solid var(--line);border-width:1px 0;box-shadow:0 12px 24px #123d181c;padding:8px 16px 12px;z-index:50}
+}
 @media(max-width:340px){
  :host([design2]) .d2-bar-row{gap:0 7px;padding-inline:12px}
  :host([design2]) .d2-bar .store-logo{width:88px;height:33px}
