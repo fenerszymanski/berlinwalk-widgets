@@ -48,7 +48,12 @@ export function apparelMedia(product, color = product?.apparelMedia?.defaultColo
   const entry = config.version === 1 && Object.hasOwn(config.colors || {}, color) ? config.colors[color] : null;
   const lead = media(entry?.lead) && entry.lead.kind === 'garmentPreview' ? entry.lead : null;
   const seen = new Set(lead ? [lead.image] : []);
-  const gallery = lead ? [...list(config.sharedGallery), ...list(entry.gallery)].filter(item => {
+  const colorGallery = list(entry?.gallery);
+  const sharedGallery = list(config.sharedGallery);
+  const galleryItems = config.firstImageFraming === 'upper-garment'
+    ? [...colorGallery, ...sharedGallery]
+    : [...sharedGallery, ...colorGallery];
+  const gallery = lead ? galleryItems.filter(item => {
     if (!media(item) || seen.has(item.image)) return false;
     seen.add(item.image); return true;
   }) : [];
