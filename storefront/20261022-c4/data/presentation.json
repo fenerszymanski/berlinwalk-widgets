@@ -4924,6 +4924,24 @@
             "alt": "Black Gildan 64000 Classic T-shirt with the Döner Bear in the Queue design; A rear-facing bear holding a beer joins a queue at a döner counter."
           },
           "gallery": []
+        },
+        "Military Green": {
+          "lead": {
+            "kind": "garmentPreview",
+            "image": "berlin-cliches-20261117/expanded-colors/doner-bear-queue-classic-t-shirt--military-green--6c8cf178-d979-461e-9f60-6b6c1a09f183.jpg",
+            "sha256": "fc7a1d230a2048dde027cb07af56e0c7c4f1e58960fe357db6140096ca4433d8",
+            "alt": "Döner Bear in the Queue Classic T-shirt in Military Green. Gelato garment preview."
+          },
+          "gallery": []
+        },
+        "Sand": {
+          "lead": {
+            "kind": "garmentPreview",
+            "image": "berlin-cliches-20261117/expanded-colors/doner-bear-queue-classic-t-shirt--sand--0abc6eb7-9f12-4c49-85b3-a22f94c91e9c.jpg",
+            "sha256": "420a1995f475d8717e0a0895a276ebf501d6297f1d13e7471202e5c9c98904ae",
+            "alt": "Döner Bear in the Queue Classic T-shirt in Sand. Gelato garment preview."
+          },
+          "gallery": []
         }
       },
       "firstImageFraming": "upper-garment"
@@ -5602,6 +5620,29 @@
             {
               "image": "gallery-74c7245f1d7e53b82200b55d.jpg",
               "alt": "Pfand: You deserve better Classic T-shirt in Black, worn by an adult model on a Berlin canal path. AI model visualization."
+            }
+          ]
+        },
+        "Dark Heather": {
+          "lead": {
+            "kind": "garmentPreview",
+            "image": "berlin-cliches-20261117/expanded-colors/pfand-you-deserve-better-classic-t-shirt--dark-heather--d7ebe65e-b420-40fb-b968-f683c00adc3d.jpg",
+            "sha256": "777e46911e19ffae4523947d2594adb103fd6c25af2e773e308190f10b6142aa",
+            "alt": "Pfand: You deserve better Classic T-shirt in Dark Heather. Gelato garment preview."
+          },
+          "gallery": []
+        },
+        "Military Green": {
+          "lead": {
+            "kind": "garmentPreview",
+            "image": "berlin-cliches-20261117/expanded-colors/pfand-you-deserve-better-classic-t-shirt--military-green--9e44728d-7ac5-439f-b68d-b58fa642694c.jpg",
+            "sha256": "9c14d558f73c8de83d08b380d030b2c0ba1f55123fdae94673097f3093cf006c",
+            "alt": "Pfand: You deserve better Classic T-shirt in Military Green. Gelato garment preview."
+          },
+          "gallery": [
+            {
+              "image": "berlin-cliches-20261117/expanded-colors/pfand-you-deserve-better-classic-t-shirt--military-green--yusuf.png",
+              "alt": "Yusuf wearing the Pfand: You deserve better Classic T-shirt in Military Green in a Berlin street scene. AI model visualization."
             }
           ]
         }
