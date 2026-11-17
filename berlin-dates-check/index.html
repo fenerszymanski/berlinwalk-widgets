@@ -240,6 +240,15 @@
   #bw-date-check .gate-spam .gs-body { font-size: 13.5px; line-height: 1.5; color: var(--ink); font-weight: 400; }
   #bw-date-check .gate-spam b { font-weight: 600; }
   #bw-date-check .gate-spam .gs-tail { font-size: 12.5px; line-height: 1.45; color: var(--muted); font-weight: 400; }
+  /* DOI inbox assist (17 Nov 2026): most confirmations happen within minutes,
+     while the reader is still here, so the next step is one button away. */
+  #bw-date-check .gate-addr { font-weight: 700; word-break: break-all; }
+  #bw-date-check a.gate-inbox, #bw-date-check a.gate-inbox:visited, #bw-date-check a.gate-inbox:hover, #bw-date-check a.gate-inbox:focus {
+    display: flex; width: fit-content; max-width: 100%; align-items: center; gap: 8px; margin: 12px 0 2px; padding: 13px 22px;
+    background: var(--yellow) !important; color: #123D18 !important; border-radius: 2px; text-decoration: none !important;
+    font-family: var(--f-body); font-size: 16px; font-weight: 700; line-height: 1.2;
+  }
+  #bw-date-check a.gate-inbox:focus-visible { outline: 3px solid #123D18; outline-offset: 2px; }
   #bw-date-check .gate.is-complete .gate-row, #bw-date-check .gate.is-complete .consent { display: none; }
   #bw-date-check .gate.is-hydrated { gap: 0; }
   #bw-date-check .gate.is-hydrated h2 { max-width: 38ch; }
@@ -661,6 +670,33 @@
     + 'Look for a message from <b>info@berlinwalk.com</b>.</span>'
     + '<span class="gs-tail">If it asks you to confirm, click that link. Without it my emails cannot reach you.</span>'
     + '</span>';
+  // Domain-only mailbox lookup in the browser; the reader's address never goes
+  // into a URL. Same table as js/lead-form-direct-inject.js bwInboxLink().
+  var INBOX_FROM = 'info@berlinwalk.com';
+  function inboxLink(addr) {
+    var domain = String(addr || '').toLowerCase().split('@')[1] || '';
+    var gmailSearch = 'https://mail.google.com/mail/u/0/#search/' + encodeURIComponent('from:' + INBOX_FROM + ' in:anywhere newer_than:1d');
+    if (/^(gmail|googlemail)\.com$/.test(domain)) return { label: 'Open Gmail', url: gmailSearch };
+    if (/^(outlook|hotmail|live|msn)\.[a-z.]{2,6}$/.test(domain)) return { label: 'Open Outlook', url: 'https://outlook.live.com/mail/0/' };
+    if (/^(yahoo|ymail|rocketmail)\.[a-z.]{2,6}$/.test(domain)) return { label: 'Open Yahoo Mail', url: 'https://mail.yahoo.com/' };
+    if (/^(icloud|me|mac)\.com$/.test(domain)) return { label: 'Open iCloud Mail', url: 'https://www.icloud.com/mail' };
+    if (/^gmx\.(de|net|at|ch|com)$/.test(domain)) return { label: 'Open GMX', url: 'https://www.gmx.net/' };
+    if (domain === 'web.de') return { label: 'Open WEB.DE', url: 'https://web.de/' };
+    if (domain === 't-online.de') return { label: 'Open t-online Mail', url: 'https://email.t-online.de/' };
+    if (/^(proton\.me|protonmail\.com|pm\.me)$/.test(domain)) return { label: 'Open Proton Mail', url: 'https://mail.proton.me/' };
+    return null;
+  }
+  function gateSentHtml(addr) {
+    var link = inboxLink(addr);
+    return 'Your first email is on its way to <span class="gate-addr">' + escapeHtml(addr) + '</span>.'
+      + (link ? '<a class="gate-inbox" href="' + escapeHtml(link.url) + '" target="_blank" rel="noopener">' + escapeHtml(link.label) + ' <span aria-hidden="true">&rarr;</span></a>' : '')
+      + '<span class="gate-spam">'
+      + '<span class="gs-eyebrow">Not in your inbox?</span>'
+      + '<span class="gs-body">Gmail often files my email under <b>Promotions</b>, <b>Updates</b> or <b>Spam</b>. '
+      + 'Look for a message from <b>Yusuf at Walk of Berlin</b> (' + INBOX_FROM + ').</span>'
+      + '<span class="gs-tail">If it asks you to confirm, tap that button. Without it my emails cannot reach you. Wrong address? Reload the page and send it again.</span>'
+      + '</span>';
+  }
   var CONSENT_VERSION = 'berlin-date-check-pack-v2-2026-10-23';
   var SOURCE_SLUG = 'berlin-dates-check';
   var CARD_EXPERIMENT_ID = 'berlin_date_check_blog_card_ab_v2_2026_09';
@@ -1693,7 +1729,7 @@
         button.hidden = true;
         status.className = 'gate-status is-success';
         status.hidden = false;
-        status.innerHTML = GATE_SENT_HTML;
+        status.innerHTML = gateSentHtml(body.email);
         trackEvent('bw_lead_asset_submit', { placement: 'email_gate' });
       }).catch(function () {
         button.disabled = false;

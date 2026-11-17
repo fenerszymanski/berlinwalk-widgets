@@ -120,6 +120,45 @@
     return escapeHtml(value).replace(/`/g, '&#96;');
   }
 
+  // DOI inbox assist (17 Nov 2026). Of 53 confirmations to date, 39 came
+  // within 35 minutes of the form and most within ten; a reader who leaves
+  // the page without opening the mail rarely comes back. So the success state
+  // shows the address the reader typed (typos are visible at once) and one
+  // button straight into their own mailbox. Domain-only lookup in the browser;
+  // the reader's address is never put in a URL and nothing is sent anywhere.
+  var BW_INBOX_FROM = 'info@berlinwalk.com';
+  function bwInboxLink(email) {
+    var domain = String(email || '').toLowerCase().split('@')[1] || '';
+    var gmailSearch = 'https://mail.google.com/mail/u/0/#search/' + encodeURIComponent('from:' + BW_INBOX_FROM + ' in:anywhere newer_than:1d');
+    if (/^(gmail|googlemail)\.com$/.test(domain)) return { label: 'Open Gmail', url: gmailSearch };
+    if (/^(outlook|hotmail|live|msn)\.[a-z.]{2,6}$/.test(domain)) return { label: 'Open Outlook', url: 'https://outlook.live.com/mail/0/' };
+    if (/^(yahoo|ymail|rocketmail)\.[a-z.]{2,6}$/.test(domain)) return { label: 'Open Yahoo Mail', url: 'https://mail.yahoo.com/' };
+    if (/^(icloud|me|mac)\.com$/.test(domain)) return { label: 'Open iCloud Mail', url: 'https://www.icloud.com/mail' };
+    if (/^gmx\.(de|net|at|ch|com)$/.test(domain)) return { label: 'Open GMX', url: 'https://www.gmx.net/' };
+    if (domain === 'web.de') return { label: 'Open WEB.DE', url: 'https://web.de/' };
+    if (domain === 't-online.de') return { label: 'Open t-online Mail', url: 'https://email.t-online.de/' };
+    if (/^(proton\.me|protonmail\.com|pm\.me)$/.test(domain)) return { label: 'Open Proton Mail', url: 'https://mail.proton.me/' };
+    return null;
+  }
+  function bwInboxStyles() {
+    if (document.getElementById('bw-inbox-assist-style')) return;
+    var style = document.createElement('style');
+    style.id = 'bw-inbox-assist-style';
+    style.textContent = '.bw-inbox-assist{margin:12px 0 0}.bw-inbox-assist__addr{font-weight:700;word-break:break-all}a.bw-inbox-assist__btn,a.bw-inbox-assist__btn:visited,a.bw-inbox-assist__btn:hover,a.bw-inbox-assist__btn:focus{display:inline-flex;max-width:100%;box-sizing:border-box;align-items:center;gap:8px;margin:12px 0 4px;padding:12px 20px;border-radius:10px;background:#ffe600!important;color:#123d18!important;font:800 16px/1.2 Montserrat,Arial,sans-serif;text-decoration:none!important;border:0}a.bw-inbox-assist__btn:focus-visible{outline:3px solid #123d18;outline-offset:2px}.bw-inbox-assist__note{display:block;margin-top:8px;font-size:13px;line-height:1.5;opacity:.92}';
+    (document.head || document.documentElement).appendChild(style);
+  }
+  // Returns the markup for the inbox step. All interpolated values are escaped.
+  // `canRetry` is false where the form does not come back after a reload (the
+  // letter bar stays away once someone signs up).
+  function bwInboxAssistHtml(email, lead, canRetry) {
+    bwInboxStyles();
+    var link = bwInboxLink(email);
+    return '<span class="bw-inbox-assist">' + lead.replace('{email}', '<span class="bw-inbox-assist__addr">' + escapeHtml(email) + '</span>') +
+      (link ? '<br><a class="bw-inbox-assist__btn" href="' + escapeAttr(link.url) + '" target="_blank" rel="noopener">' + escapeHtml(link.label) + ' <span aria-hidden="true">&rarr;</span></a>' : '') +
+      '<span class="bw-inbox-assist__note">It comes from Yusuf at Walk of Berlin (' + BW_INBOX_FROM + '). Not there in a minute? Look in Promotions, Updates or Spam.' +
+      (canRetry === false ? '' : ' Wrong address? Reload the page and send the form again.') + '</span></span>';
+  }
+
   function cleanText(value) {
     return String(value || '').replace(/\u00a0/g, ' ').replace(/\s+/g, ' ').trim();
   }
@@ -790,7 +829,9 @@
         card.querySelector('.bw-date-check-blog-card__fields').hidden = true;
         button.hidden = true;
         card.querySelector('.bw-date-check-blog-card__consent').hidden = true;
-        card.querySelector('.bw-date-check-blog-card__success').hidden = false;
+        var success = card.querySelector('.bw-date-check-blog-card__success');
+        success.innerHTML = '<strong>One click left.</strong>' + bwInboxAssistHtml(payload.email, 'I just emailed {email}. Tap the yellow button in that email and Berlin Unlocked for your dates arrives straight away.');
+        success.hidden = false;
       } catch (err) {
         if (measurement) measurement.error(err.message === 'http' ? 'http' : 'network');
         status.textContent = 'I could not complete this request. Please try again.';
@@ -1536,8 +1577,9 @@
         // reports that the request was taken. The confirmation email is what
         // actually subscribes the reader.
         storageSet(LETTER_JOINED_KEY, Date.now());
-        form.innerHTML = '<p class="bw-lb-t" style="margin:0"><strong>Check your inbox.</strong> Click the link in my email to confirm, and the next letter reaches you on Monday morning. Not there in a minute? Look in your Spam or Promotions folder.</p>';
-        if (!bar.hasAttribute(RESIDENT_MARKER)) window.setTimeout(function () { closeLetterBar(bar, false); }, 15000);
+        form.innerHTML = '<p class="bw-lb-t" style="margin:0"><strong>One click left.</strong> ' + bwInboxAssistHtml(email, 'I just emailed {email}. Tap the button in that email and the next letter reaches you on Monday morning.', false) + '</p>';
+        // Long enough to tap the mailbox button; the bar still closes itself.
+        if (!bar.hasAttribute(RESIDENT_MARKER)) window.setTimeout(function () { closeLetterBar(bar, false); }, 60000);
       }).catch(function () {
         button.disabled = false;
         msg.className = 'bw-lb-msg bw-lb-err';
@@ -1615,7 +1657,9 @@
       ownMutation: ownMutation,
       placeSurface: placeSurface,
       resetPlacement: resetPlacement,
-      blockFingerprint: blockFingerprint
+      blockFingerprint: blockFingerprint,
+      bwInboxLink: bwInboxLink,
+      bwInboxAssistHtml: bwInboxAssistHtml
     };
     return;
   }
