@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Berlin Aerial Photo Finder: Every Old Flight Over Your Street</title>
+<meta name="description" content="Type a Berlin address and slide from 1928 to today through the city's own aerial photos of the ground around it.">
+<link rel="stylesheet" href="../css/brand.css">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: Montserrat, Arial, sans-serif; background: #FFFFFF; color: #212121; padding: 12px; }
+  .af { border: 1px solid #DCE8C8; border-radius: 18px; overflow: hidden; background: #FAFAF5; max-width: 760px; margin: 0 auto; }
+  .af-head { padding: 18px 18px 12px; }
+  .af-kick { display: inline-block; font-size: 10.5px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; color: #123D18; background: #FFE600; padding: 3px 8px; border-radius: 4px; }
+  .af-head h1 { font-family: Merriweather, Georgia, serif; font-size: 21px; line-height: 1.3; color: #123D18; margin-top: 9px; }
+  .af-head p { font-size: 13px; line-height: 1.6; color: #4E5A4E; margin-top: 7px; }
+
+  .af-find { padding: 0 18px 10px; }
+  .af-form { display: flex; gap: 8px; }
+  .af-form label { position: absolute; left: -9999px; }
+  .af-form input { flex: 1 1 auto; min-width: 0; font-family: inherit; font-size: 15px; padding: 10px 12px; border: 2px solid #1B5E20; border-radius: 12px; background: #FFFFFF; color: #212121; }
+  .af-form input:focus-visible, .af-btn:focus-visible, .af-spot:focus-visible, .af-tick:focus-visible, .af-links a:focus-visible { outline: 3px solid #7CB342; outline-offset: 2px; }
+  .af-btn { flex: 0 0 auto; font-family: inherit; font-size: 14px; font-weight: 800; padding: 10px 16px; border-radius: 12px; border: 2px solid #1B5E20; background: #FFE600; color: #123D18; cursor: pointer; }
+  .af-btn:hover, .af-btn:focus, .af-btn:active { color: #123D18; background: #FFF06A; }
+  .af-btn[disabled] { opacity: .6; cursor: wait; }
+  .af-spots { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 9px; }
+  .af-spot { font-family: inherit; font-size: 12px; font-weight: 700; padding: 6px 10px; border-radius: 999px; border: 1.5px solid #C5E1A5; background: #FFFFFF; color: #1B5E20; cursor: pointer; }
+  .af-spot[aria-pressed="true"] { background: #1B5E20; border-color: #1B5E20; color: #FFFFFF; }
+  .af-msg { font-size: 12.5px; line-height: 1.5; color: #8A3B12; margin-top: 7px; min-height: 0; }
+  .af-msg:empty { display: none; }
+
+  .af-stage { position: relative; margin: 0 18px; border-radius: 14px; overflow: hidden; background: #E9EFE1; aspect-ratio: 4 / 3; }
+  .af-stage img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity .12s linear; user-select: none; -webkit-user-drag: none; }
+  .af-pin { position: absolute; z-index: 30; left: 50%; top: 50%; width: 26px; height: 26px; transform: translate(-50%, -50%); border-radius: 50%; border: 3px solid #FFE600; box-shadow: 0 0 0 2px #1B5E20, inset 0 0 0 2px #1B5E20; pointer-events: none; }
+  .af-pin::after { content: ""; position: absolute; left: 50%; top: 50%; width: 6px; height: 6px; transform: translate(-50%, -50%); border-radius: 50%; background: #1B5E20; box-shadow: 0 0 0 1.5px #FFE600; }
+  .af-badge { position: absolute; z-index: 31; left: 10px; top: 10px; font-size: 13px; font-weight: 800; padding: 4px 9px; border-radius: 8px; background: #1B5E20; color: #FFFFFF; opacity: 1; box-shadow: 0 1px 3px rgba(0,0,0,.35); pointer-events: none; }
+  .af-scale { position: absolute; z-index: 31; right: 10px; bottom: 10px; font-size: 10.5px; font-weight: 800; color: #123D18; background: #FFFFFF; opacity: 1; padding: 4px 7px 5px; border-radius: 6px; box-shadow: 0 1px 3px rgba(0,0,0,.3); pointer-events: none; }
+  .af-scale i { display: block; width: var(--w, 64px); height: 5px; margin-top: 3px; border: 2px solid #123D18; border-top: 0; }
+  .af-veil { position: absolute; z-index: 40; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; padding: 18px; text-align: center; background: rgba(250,250,245,.86); font-size: 13px; font-weight: 600; line-height: 1.5; color: #123D18; }
+  .af-veil[hidden] { display: none; }
+  .af-spin { width: 28px; height: 28px; border-radius: 50%; border: 4px solid #C5E1A5; border-top-color: #1B5E20; animation: afspin .9s linear infinite; }
+  @keyframes afspin { to { transform: rotate(360deg); } }
+  .af-place { padding: 8px 18px 0; font-size: 12px; line-height: 1.45; color: #4E5A4E; }
+  .af-place b { color: #123D18; }
+
+  .af-ctrl { padding: 12px 18px 4px; }
+  .af-yrrow { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; }
+  .af-yr { font-family: Merriweather, Georgia, serif; font-size: 38px; font-weight: 700; line-height: 1; color: #1B5E20; min-width: 104px; }
+  .af-yrsub { font-size: 12.5px; font-weight: 700; color: #123D18; line-height: 1.4; background: #F2F8E8; border: 1px solid #C5E1A5; border-radius: 8px; padding: 4px 9px; }
+  .af-slide { position: relative; margin-top: 12px; }
+  .af-slide input[type=range] { -webkit-appearance: none; appearance: none; width: 100%; height: 28px; background: transparent; cursor: pointer; display: block; }
+  .af-slide input[type=range]:focus { outline: none; }
+  .af-slide input[type=range]:focus-visible { outline: 2px solid #7CB342; outline-offset: 2px; border-radius: 6px; }
+  .af-slide input[type=range]::-webkit-slider-runnable-track { height: 8px; border-radius: 999px; background: linear-gradient(90deg, #C5E1A5, #7CB342); }
+  .af-slide input[type=range]::-moz-range-track { height: 8px; border-radius: 999px; background: linear-gradient(90deg, #C5E1A5, #7CB342); }
+  .af-slide input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; width: 26px; height: 26px; margin-top: -9px; border-radius: 50%; background: #FFE600; border: 3px solid #1B5E20; box-shadow: 0 1px 4px rgba(0,0,0,.25); }
+  .af-slide input[type=range]::-moz-range-thumb { width: 20px; height: 20px; border-radius: 50%; background: #FFE600; border: 3px solid #1B5E20; }
+  .af-ticks { position: relative; height: 44px; margin: 2px 13px 0; }
+  .af-tick { position: absolute; top: 0; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 3px; background: none; border: 0; font-family: inherit; cursor: pointer; padding: 2px 3px; color: #123D18; }
+  .af-tick s { display: block; width: 3px; height: 9px; border-radius: 2px; background: #1B5E20; text-decoration: none; }
+  .af-tick span { font-size: 11.5px; font-weight: 800; }
+  .af-tick em { font-style: normal; font-size: 9.5px; font-weight: 700; color: #4E5A4E; line-height: 1; min-height: 10px; }
+  .af-tick.is-loading s { background: #C5E1A5; }
+  .af-tick.is-none { color: #9AA39A; }
+  .af-tick.is-none s { background: #CDD3CC; }
+  .af-tick.is-none span { text-decoration: line-through; }
+  .af-tick.is-error { color: #9AA39A; }
+  .af-tick.is-error s { background: #CDD3CC; }
+  .af-tick.is-near span { background: #FFE600; color: #123D18; border-radius: 4px; padding: 0 3px; }
+
+  .af-note { margin: 8px 18px 0; padding: 11px 13px; border-radius: 12px; background: #F2F8E8; border-left: 5px solid #7CB342; font-size: 13.5px; line-height: 1.55; color: #212121; }
+  .af-note b { color: #1B5E20; }
+  .af-cover { margin: 7px 18px 0; font-size: 12px; line-height: 1.5; color: #4E5A4E; }
+  .af-links { display: flex; flex-wrap: wrap; gap: 8px 16px; padding: 12px 18px 4px; }
+  .af-links a { font-size: 12.5px; font-weight: 800; color: #1B5E20; text-decoration: underline; text-underline-offset: 3px; }
+  .af-credit { padding: 6px 18px 16px; font-size: 10.5px; line-height: 1.5; color: #4E5A4E; }
+  @media (max-width: 560px) {
+    body { padding: 8px; }
+    .af-head h1 { font-size: 18px; }
+    .af-yr { font-size: 32px; min-width: 88px; }
+    .af-tick span { font-size: 10.5px; }
+    .af-tick em { font-size: 9px; }
+  }
+  @media (prefers-reduced-motion: reduce) { .af-stage img { transition: none; } .af-spin { animation-duration: 3s; } }
+</style>
+</head>
+<body>
+<div class="af">
+  <div class="af-head">
+    <span class="af-kick">Aerial photo finder</span>
+    <h1>Find your spot, then drag the year from 1928 to today.</h1>
+    <p>The city photographed Berlin from a plane in 1928 and kept flying. Type your street or tap a place, then drag slowly. Watch for the block that changes. That is usually where your street's story is. A crossed-out year did not photograph that spot.</p>
+  </div>
+
+  <div class="af-find">
+    <form class="af-form" id="form" autocomplete="off">
+      <label for="q">Berlin address or place</label>
+      <input type="text" id="q" name="q" placeholder="e.g. Oranienstraße 25" enterkeyhint="search">
+      <button type="submit" class="af-btn" id="go">Find</button>
+    </form>
+    <div class="af-spots" id="spots" aria-label="Example spots"></div>
+    <div class="af-msg" id="msg" role="status" aria-live="polite"></div>
+  </div>
+
+  <div class="af-stage" id="stage">
+    <div id="layers"></div>
+    <div class="af-pin" aria-hidden="true"></div>
+    <div class="af-badge" id="badge" aria-hidden="true">1928</div>
+    <div class="af-scale" aria-hidden="true">100 m<i id="scalebar"></i></div>
+    <div class="af-veil" id="veil"><div class="af-spin" aria-hidden="true"></div><div id="veiltext">Loading the 1928 flight from Geoportal Berlin.</div></div>
+  </div>
+  <div class="af-place" id="place"></div>
+
+  <div class="af-ctrl">
+    <div class="af-yrrow">
+      <div class="af-yr" id="yr" aria-hidden="true">1928</div>
+      <div class="af-yrsub" id="yrsub"></div>
+    </div>
+    <div class="af-slide">
+      <label for="slider" style="position:absolute;left:-9999px">Year of the aerial photo</label>
+      <input type="range" id="slider" min="0" max="500" step="1" value="0">
+      <div class="af-ticks" id="ticks"></div>
+    </div>
+  </div>
+
+  <div class="af-note" id="note" aria-live="polite"></div>
+  <div class="af-cover" id="cover"></div>
+
+  <div class="af-links">
+    <a id="cflink" href="https://luftbilder.berlin.codefor.de/" target="_blank" rel="noopener">Open this spot in the Luftbilder Berlin viewer (OK Lab Berlin)</a>
+    <a href="https://gdi.berlin.de/viewer/main/" target="_blank" rel="noopener">Open the Geoportal Berlin viewer</a>
+  </div>
+  <div class="af-credit">Aerial photographs: Geoportal Berlin, Datenlizenz Deutschland Zero 2.0. Address search: © OpenStreetMap contributors.</div>
+</div>
+
+<script>
+(function () {
+  'use strict';
+
+  var WMS = 'https://gdi.berlin.de/services/wms/';
+  var BOX_W = 500, BOX_H = 375, IMG_W = 800, IMG_H = 600;
+
+  var YEARS = [
+    { y: 1928, svc: 'luftbild_1928_04', layer: 'c_luftbilder_1928_04_raster', scale: '1:4,000, black and white',
+      note: '<b>1928.</b> Berlin before the war. Sharp enough to count the side wings around a courtyard and the trams on the street.' },
+    { y: 1938, svc: 'luftbild_1938_04', layer: 'c_luftbilder_1938_04_raster', scale: '1:4,000, black and white',
+      note: '<b>1938.</b> A second sharp flight, ten years on. It never covered the whole city, so check the timeline before you hunt for your house.' },
+    { y: 1953, svc: 'luftbild_1953_22', layer: 'c_luftbilder_1953_22_raster', scale: '1:22,000, black and white',
+      note: '<b>1953.</b> What the war left: cleared plots and the outlines of blocks. It was flown much higher, so read blocks here, not houses.' },
+    { y: 2004, svc: 'dop_2004', layer: 'dop_2004', scale: 'colour orthophoto',
+      note: '<b>2004.</b> The oldest colour photo in this set. Hold it against 1953 to see which gaps were built over and which stayed open.' },
+    { y: 2015, svc: 'dop_2015', layer: 'dop_2015_rgb', scale: 'colour orthophoto',
+      note: '<b>2015.</b> The step in between. If a building is here but not in 2004, it went up in those eleven years.' },
+    { y: 2026, svc: 'truedop_2026', layer: 'truedop_2026', scale: 'true orthophoto',
+      note: '<b>2026.</b> Today, photographed straight down, so towers do not lean over the street next to them.' }
+  ];
+  var SEG = 100;
+  var SPOTS = [
+    { name: 'Potsdamer Platz', lat: 52.50960, lon: 13.37590 },
+    { name: 'Kottbusser Tor', lat: 52.49905, lon: 13.41808 },
+    { name: 'Kollwitzplatz', lat: 52.53636, lon: 13.41733 },
+    { name: 'Anhalter Bahnhof', lat: 52.50335, lon: 13.38199 },
+    { name: 'Hansaplatz', lat: 52.51800, lon: 13.34190 }
+  ];
+
+  var $ = function (id) { return document.getElementById(id); };
+  var slider = $('slider'), layersEl = $('layers'), ticksEl = $('ticks'), veil = $('veil'), veilText = $('veiltext');
+
+  /* WGS84 to ETRS89 / UTM zone 33N (EPSG:25833), GRS80 ellipsoid. */
+  function toUTM33(lat, lon) {
+    var a = 6378137, f = 1 / 298.257222101, k0 = 0.9996, lon0 = 15 * Math.PI / 180;
+    var e2 = f * (2 - f), ep2 = e2 / (1 - e2), e4 = e2 * e2, e6 = e4 * e2;
+    var phi = lat * Math.PI / 180, lam = lon * Math.PI / 180;
+    var sin = Math.sin(phi), cos = Math.cos(phi), tan = Math.tan(phi);
+    var N = a / Math.sqrt(1 - e2 * sin * sin), T = tan * tan, C = ep2 * cos * cos, A = cos * (lam - lon0);
+    var M = a * ((1 - e2 / 4 - 3 * e4 / 64 - 5 * e6 / 256) * phi - (3 * e2 / 8 + 3 * e4 / 32 + 45 * e6 / 1024) * Math.sin(2 * phi)
+      + (15 * e4 / 256 + 45 * e6 / 1024) * Math.sin(4 * phi) - (35 * e6 / 3072) * Math.sin(6 * phi));
+    var x = k0 * N * (A + (1 - T + C) * Math.pow(A, 3) / 6 + (5 - 18 * T + T * T + 72 * C - 58 * ep2) * Math.pow(A, 5) / 120) + 500000;
+    var y = k0 * (M + N * tan * (A * A / 2 + (5 - T + 9 * C + 4 * C * C) * Math.pow(A, 4) / 24
+      + (61 - 58 * T + T * T + 600 * C - 330 * ep2) * Math.pow(A, 6) / 720));
+    return [x, y];
+  }
+
+  function mapUrl(yr, lat, lon) {
+    var p = toUTM33(lat, lon);
+    var bbox = [p[0] - BOX_W / 2, p[1] - BOX_H / 2, p[0] + BOX_W / 2, p[1] + BOX_H / 2].map(function (v) { return Math.round(v); }).join(',');
+    return WMS + yr.svc + '?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=' + yr.layer + '&STYLES=&CRS=EPSG:25833&BBOX=' + bbox
+      + '&WIDTH=' + IMG_W + '&HEIGHT=' + IMG_H + '&FORMAT=image/jpeg';
+  }
+
+  /* State */
+  var spot = { name: SPOTS[0].name, lat: SPOTS[0].lat, lon: SPOTS[0].lon };
+  var states = [];   // per year: { status: 'loading'|'ok'|'partial'|'none'|'error', url, white }
+  var imgs = [];
+  var ticks = [];
+  var controller = null;
+  var generation = 0;
+
+  YEARS.forEach(function (yr, i) {
+    var img = document.createElement('img');
+    img.decoding = 'async';
+    img.alt = '';
+    img.setAttribute('aria-hidden', 'true');
+    img.style.zIndex = String(i + 1);
+    layersEl.appendChild(img);
+    imgs.push(img);
+
+    var b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'af-tick is-loading';
+    b.style.left = (i / (YEARS.length - 1) * 100) + '%';
+    b.innerHTML = '<s></s><span>' + yr.y + '</span><em></em>';
+    b.setAttribute('aria-label', 'Jump to ' + yr.y);
+    b.addEventListener('click', function () { glideTo(i * SEG); });
+    ticksEl.appendChild(b);
+    ticks.push(b);
+  });
+  slider.max = String((YEARS.length - 1) * SEG);
+  function sizeScale() { $('scalebar').style.setProperty('--w', Math.round($('stage').clientWidth * 100 / BOX_W) + 'px'); }
+  sizeScale();
+  if (typeof ResizeObserver !== 'undefined') new ResizeObserver(sizeScale).observe($('stage'));
+  else window.addEventListener('resize', sizeScale);
+
+  SPOTS.forEach(function (s) {
+    var b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'af-spot';
+    b.textContent = s.name;
+    b.setAttribute('aria-pressed', s.name === spot.name ? 'true' : 'false');
+    b.addEventListener('click', function () { $('msg').textContent = ''; setSpot({ name: s.name, lat: s.lat, lon: s.lon }); });
+    $('spots').appendChild(b);
+  });
+
+  function markSpots() {
+    [].forEach.call($('spots').children, function (b) { b.setAttribute('aria-pressed', b.textContent === spot.name ? 'true' : 'false'); });
+  }
+
+  /* Coverage: the WMS answers a flight gap with plain white. Sample the decoded image. */
+  var probe = document.createElement('canvas');
+  probe.width = 40; probe.height = 30;
+  function whiteShare(img) {
+    try {
+      var ctx = probe.getContext('2d', { willReadFrequently: true });
+      ctx.clearRect(0, 0, 40, 30);
+      ctx.drawImage(img, 0, 0, 40, 30);
+      var d = ctx.getImageData(0, 0, 40, 30).data, w = 0;
+      for (var i = 0; i < d.length; i += 4) if (d[i + 3] < 20 || (d[i] >= 247 && d[i + 1] >= 247 && d[i + 2] >= 247)) w++;
+      return w / (d.length / 4);
+    } catch (e) { return null; }
+  }
+
+  function loadYear(i, gen, signal) {
+    var st = states[i];
+    var timer = setTimeout(function () { if (st.ctl) st.ctl.abort(); }, 25000);
+    st.ctl = new AbortController();
+    var onOuterAbort = function () { st.ctl.abort(); };
+    signal.addEventListener('abort', onOuterAbort);
+    return fetch(mapUrl(YEARS[i], spot.lat, spot.lon), { signal: st.ctl.signal, mode: 'cors' })
+      .then(function (r) {
+        if (!r.ok) throw new Error('http ' + r.status);
+        var type = r.headers.get('content-type') || '';
+        if (type.indexOf('image/') !== 0) return null; // a WMS exception: this flight has nothing here
+        return r.blob();
+      })
+      .then(function (blob) {
+        if (gen !== generation) return;
+        if (!blob) { st.status = 'none'; return; }
+        st.url = URL.createObjectURL(blob);
+        return new Promise(function (res, rej) {
+          var im = imgs[i];
+          im.onload = function () { res(); };
+          im.onerror = function () { rej(new Error('decode')); };
+          im.src = st.url;
+        }).then(function () {
+          if (gen !== generation) return;
+          var w = whiteShare(imgs[i]);
+          st.white = w;
+          st.status = w === null ? 'ok' : (w >= 0.9 ? 'none' : (w >= 0.2 ? 'partial' : 'ok'));
+        });
+      })
+      .catch(function () { if (gen === generation) st.status = 'error'; })
+      .then(function () {
+        clearTimeout(timer);
+        signal.removeEventListener('abort', onOuterAbort);
+        if (gen === generation) render();
+      });
+  }
+
+  function setSpot(s) {
+    spot = s;
+    markSpots();
+    if (controller) controller.abort();
+    controller = new AbortController();
+    generation++;
+    states.forEach(function (st) { if (st && st.url) URL.revokeObjectURL(st.url); });
+    states = YEARS.map(function () { return { status: 'loading' }; });
+    imgs.forEach(function (im) { im.removeAttribute('src'); im.style.opacity = '0'; });
+    $('cflink').href = 'https://luftbilder.berlin.codefor.de/#map=17/' + s.lat.toFixed(5) + '/' + s.lon.toFixed(5);
+    $('place').innerHTML = '<b>' + esc(s.name) + '</b>, about 500 m across, north at the top.';
+    loadAll();
+    render();
+  }
+
+  function loadAll() {
+    var gen = generation, signal = controller.signal;
+    var here = Math.round(Number(slider.value) / SEG);
+    var order = YEARS.map(function (_, i) { return i; }).sort(function (a, b) { return Math.abs(a - here) - Math.abs(b - here) || a - b; });
+    var next = 0;
+    function worker() {
+      if (gen !== generation || next >= order.length) return Promise.resolve();
+      var i = order[next++];
+      return loadYear(i, gen, signal).then(worker);
+    }
+    worker(); worker();
+  }
+
+  function usable(i) { var s = states[i]; return s && (s.status === 'ok' || s.status === 'partial'); }
+
+  function render() {
+    var v = Number(slider.value), pos = v / SEG;
+    var near = Math.round(pos);
+    var lo = -1, hi = -1;
+    for (var i = 0; i < YEARS.length; i++) {
+      if (!usable(i)) continue;
+      if (i <= pos) lo = i;
+      if (i > pos && hi < 0) hi = i;
+    }
+    var t = 0;
+    if (lo >= 0 && hi >= 0) t = (pos - lo) / (hi - lo);
+    else if (lo < 0 && hi >= 0) { lo = hi; hi = -1; }
+
+    imgs.forEach(function (im, i) {
+      var o = 0;
+      if (i === lo) o = 1;
+      if (i === hi) o = t;
+      im.style.opacity = String(o);
+      if (o > 0.5 || (i === lo && t <= 0.5)) {
+        im.removeAttribute('aria-hidden');
+        im.alt = 'Aerial photo from ' + YEARS[i].y + ' of the ground around ' + spot.name + ', about 500 metres across';
+      } else {
+        im.setAttribute('aria-hidden', 'true');
+        im.alt = '';
+      }
+    });
+
+    var yr = YEARS[near], st = states[near] || {};
+    $('yr').textContent = yr.y;
+    $('badge').textContent = yr.y;
+    var sub = yr.scale;
+    var shownLo = lo >= 0 ? YEARS[lo].y : null, shownHi = hi >= 0 ? YEARS[hi].y : null;
+    if (shownLo && shownHi && t > 0.12 && t < 0.88) sub = 'Fading from ' + shownLo + ' into ' + shownHi;
+    $('yrsub').textContent = sub;
+    slider.setAttribute('aria-valuetext', (shownLo && shownHi && t > 0.12 && t < 0.88)
+      ? 'Between ' + shownLo + ' and ' + shownHi + ', nearer ' + yr.y : String(yr.y));
+
+    var note = yr.note;
+    if (st.status === 'none') {
+      note = '<b>' + yr.y + '.</b> This flight has no photo of this spot.' + (shownLo ? ' You are looking at ' + (shownHi && t > 0.5 ? shownHi : shownLo) + ' instead.' : '');
+    } else if (st.status === 'partial') {
+      note += ' Here it only reaches part of the box; the white is where the flight stopped.';
+    }
+    $('note').innerHTML = note;
+
+    ticks.forEach(function (b, i) {
+      var s = (states[i] || {}).status || 'loading';
+      b.className = 'af-tick is-' + s + (i === near ? ' is-near' : '');
+      b.querySelector('em').textContent = s === 'none' ? 'no photo' : s === 'partial' ? 'part' : s === 'error' ? '' : s === 'loading' ? '...' : '';
+      b.setAttribute('aria-label', YEARS[i].y + (s === 'none' ? ', no photo of this spot' : s === 'partial' ? ', covers part of this spot' : s === 'error' ? ', did not load' : '') + '. Jump to it.');
+    });
+
+    var done = states.filter(function (s) { return s.status !== 'loading'; }).length;
+    var have = YEARS.filter(function (_, i) { return usable(i); }).map(function (y) { return y.y; });
+    var missing = YEARS.filter(function (_, i) { return states[i] && states[i].status === 'none'; }).map(function (y) { return y.y; });
+    var errs = states.filter(function (s) { return s.status === 'error'; }).length;
+    var cover = '';
+    if (done < YEARS.length) cover = 'Checking which flights reached this spot: ' + done + ' of ' + YEARS.length + ' answered.';
+    else {
+      cover = have.length + ' of ' + YEARS.length + ' flights photographed this spot: ' + (have.join(', ') || 'none') + '.';
+      if (missing.length) cover += ' No photo here from ' + missing.join(', ') + '.';
+      if (errs && have.length) cover += ' ' + errs + ' did not load; try again in a minute.';
+      if (errs && !have.length) cover = '';
+    }
+    $('cover').textContent = cover;
+
+    var curLoading = st.status === 'loading' && lo < 0;
+    var allFailed = done === YEARS.length && errs === YEARS.length - missing.length && have.length === 0 && errs > 0;
+    if (allFailed || (st.status === 'error' && lo < 0)) {
+      veil.hidden = false;
+      veil.querySelector('.af-spin').style.display = 'none';
+      veilText.innerHTML = 'The city\'s map server is not answering right now. Try again in a minute.<br><button type="button" class="af-btn" id="retry" style="margin-top:10px">Try again</button>';
+      $('retry').addEventListener('click', function () { setSpot(spot); });
+    } else if (curLoading) {
+      veil.hidden = false;
+      veil.querySelector('.af-spin').style.display = '';
+      veilText.textContent = 'Loading the ' + yr.y + ' flight from Geoportal Berlin.';
+    } else if (lo < 0 && done === YEARS.length) {
+      veil.hidden = false;
+      veil.querySelector('.af-spin').style.display = 'none';
+      veilText.textContent = 'None of these flights photographed this spot. Try a place inside the Berlin city limits.';
+    } else {
+      veil.hidden = true;
+    }
+  }
+
+  /* Slider: native drag plus keys that move a quarter year step, and Page keys that jump flights. */
+  slider.addEventListener('input', render);
+  slider.addEventListener('keydown', function (e) {
+    var v = Number(slider.value), max = Number(slider.max), step = null;
+    if (e.key === 'ArrowRight' || e.key === 'ArrowUp') step = v + SEG / 4;
+    else if (e.key === 'ArrowLeft' || e.key === 'ArrowDown') step = v - SEG / 4;
+    else if (e.key === 'PageUp') step = (Math.floor(v / SEG) + 1) * SEG;
+    else if (e.key === 'PageDown') step = (Math.ceil(v / SEG) - 1) * SEG;
+    if (step === null) return;
+    e.preventDefault();
+    slider.value = String(Math.max(0, Math.min(max, Math.round(step))));
+    render();
+  });
+
+  var glideRaf = 0;
+  function glideTo(target) {
+    cancelAnimationFrame(glideRaf);
+    var from = Number(slider.value), t0 = performance.now(), dur = Math.min(900, 250 + Math.abs(target - from) * 1.5);
+    if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) dur = 0;
+    (function step(now) {
+      var k = dur ? Math.min(1, (now - t0) / dur) : 1;
+      var e = k < 0.5 ? 2 * k * k : 1 - Math.pow(-2 * k + 2, 2) / 2;
+      slider.value = String(Math.round(from + (target - from) * e));
+      render();
+      if (k < 1) glideRaf = requestAnimationFrame(step);
+    })(t0);
+  }
+
+  /* Address search: OpenStreetMap Nominatim, one request per submit, never more than one a second. */
+  var lastQuery = 0, busy = false;
+  $('form').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var q = $('q').value.trim();
+    if (!q || busy) return;
+    var wait = Math.max(0, 1100 - (Date.now() - lastQuery));
+    busy = true;
+    $('go').disabled = true;
+    $('msg').textContent = 'Looking up ' + q + '...';
+    setTimeout(function () {
+      lastQuery = Date.now();
+      var url = 'https://nominatim.openstreetmap.org/search?format=jsonv2&limit=1&countrycodes=de&viewbox=13.08,52.68,13.77,52.33&bounded=1&q=' + encodeURIComponent(q);
+      fetch(url, { headers: { 'Accept': 'application/json' } })
+        .then(function (r) { if (!r.ok) throw new Error('http ' + r.status); return r.json(); })
+        .then(function (list) {
+          if (!list || !list.length) { $('msg').textContent = 'I could not find that inside Berlin. Try a street and house number, or a station name.'; return; }
+          var hit = list[0];
+          var name = q.replace(/,?\s*berlin\s*$/i, '').trim() || q;
+          $('msg').textContent = '';
+          setSpot({ name: name, lat: Number(hit.lat), lon: Number(hit.lon) });
+        })
+        .catch(function () { $('msg').textContent = 'The address search is not answering right now. Try one of the places above, or again in a minute.'; })
+        .then(function () { busy = false; $('go').disabled = false; });
+    }, wait);
+  });
+
+  function esc(s) { return String(s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
+
+  setSpot(spot);
+})();
+</script>
+<script src="../js/brand.js"></script>
+</body>
+</html>

@@ -1,0 +1,34 @@
+{
+  "title": "Historical Aerial Photos of Berlin - FAQ",
+  "subtitle": "Where to see old aerial photos of your Berlin street, and how to read them.",
+  "items": [
+    {
+      "q": "Where can I see historical aerial photos of Berlin for free?",
+      "a": "On **Geoportal Berlin**, the city's official map, and in the quicker **luftbilder.berlin.codefor.de** viewer that runs on the same open data. Both let you search for an address and switch between years."
+    },
+    {
+      "q": "Which year should I open for my street?",
+      "a": "**1928** shows Berlin before the war, sharp enough to count courtyard wings. **1953** shows what the war left: cleared plots and outlines of blocks. Compare both with the **newest colour photo** of today."
+    },
+    {
+      "q": "Why does my street look blurry in 1953?",
+      "a": "The 1953 flight was photographed at **1:22,000**, much smaller than the 1928 flight at 1:4,000. Zoom out a little and look at whole blocks rather than single houses."
+    },
+    {
+      "q": "Why is my street white in some years?",
+      "a": "Each flight covered a different area. **1928 is nearly complete**, but the flight around **1938 covers only parts of the city**, and many flights between **1954 and 1989 cover only West Berlin**. Check the neighbouring years when one is blank."
+    },
+    {
+      "q": "Is there a straight line through my block in 1928?",
+      "a": "The 1928 photos were taken as **separate sheets that do not overlap**. A sharp straight line where the grey tone jumps is usually a sheet edge, not a demolished row."
+    },
+    {
+      "q": "Can I use the photos, for example in a print or a school project?",
+      "a": "Yes. Geoportal Berlin publishes the old flights under the **Datenlizenz Deutschland Zero**, which allows any use without asking and without naming the source, although naming it is good practice."
+    },
+    {
+      "q": "Can an aerial photo tell me who lived in my house?",
+      "a": "No. It shows roofs, yards and streets. For residents, use the **Berlin address books**, which list every house and its tenants year by year until 1943."
+    }
+  ]
+}

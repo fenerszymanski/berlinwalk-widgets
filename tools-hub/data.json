@@ -11564,6 +11564,37 @@
       "image": "https://static.wixstatic.com/media/5a08a3_41d14d65e58f473b9166ef8786d312a4~mv2.png"
     },
     {
+      "slug": "berlin-aerial-photo-finder",
+      "title": "Berlin Aerial Photo Finder",
+      "lead": "Type your Berlin street and slide from 1928 to today through the city's own aerial photos of the ground around it. I show which flights reached your spot and which did not.",
+      "category": "Maps",
+      "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/berlin-aerial-photo-finder/",
+      "embedHeight": 1220,
+      "hubCategory": "CultureLandmarks",
+      "type": "Map",
+      "priority": 3,
+      "tags": [
+        "historical aerial photos",
+        "berlin 1928",
+        "berlin 1953",
+        "luftbilder berlin",
+        "house history",
+        "then and now",
+        "living in berlin"
+      ],
+      "aliases": [
+        "historical aerial photos berlin",
+        "berlin aerial photo 1928",
+        "luftbilder berlin 1928",
+        "berlin from above old photos",
+        "what did my street look like in 1928",
+        "berlin luftbild 1953",
+        "geoportal berlin luftbilder"
+      ],
+      "iconStatus": "live-wix-media",
+      "image": "https://static.wixstatic.com/media/5a08a3_e068449d50d041ad975f121065e10046~mv2.png"
+    },
+    {
       "slug": "tv-tower-sightline-map",
       "title": "TV Tower Sightline Map",
       "lead": "Pick a date and a time and see which free views of the Berlin TV Tower outside Mitte are lit from the front, which are backlit, and how big the tower looks from each one.",
