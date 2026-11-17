@@ -1,9 +1,9 @@
 {
-  "updatedAt": "2026-11-17T13:52:52.642Z",
+  "updatedAt": "2026-11-17T19:02:09.939Z",
   "source": "Wix Blog API",
   "popularSource": "Wix Blog metrics.views lifetime sort",
-  "totalPosts": 465,
-  "toolsTotal": 389,
+  "totalPosts": 466,
+  "toolsTotal": 390,
   "bookingUrl": "https://www.walkofberlin.com/book-berlin-walking-tour/berlin-then-and-now",
   "navTopics": [
     {
@@ -1802,6 +1802,23 @@
   ],
   "latest": [
     {
+      "title": "Historical Aerial Photos of Berlin: How to Find Your Street",
+      "slug": "historical-aerial-photos-berlin",
+      "path": "/post/historical-aerial-photos-berlin",
+      "url": "https://www.berlinwalk.com/post/historical-aerial-photos-berlin",
+      "excerpt": "Berlin photographed almost the whole city from a plane in 1928 and again after the war, and the photos are free online. How I find a street in them and what you can read from above.",
+      "category": "Living in Berlin",
+      "categorySlug": "living-in-berlin",
+      "topic": "living-in-berlin",
+      "topicLabel": "Living in Berlin",
+      "readTime": "6 min read",
+      "publishedDate": "2026-11-17T18:59:19.591Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_8acbb84536bd46b6ae19b2cdcef6b576~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/potsdamer-platz-pair.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_8acbb84536bd46b6ae19b2cdcef6b576~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/potsdamer-platz-pair.jpg",
+      "alt": "Potsdamer Platz and the octagon of Leipziger Platz from above in 1928 and 2026, side by side at the same scale",
+      "relatedToolSlug": ""
+    },
+    {
       "title": "Alexanderplatz History: What Stood on the Square and What to Look For Today",
       "slug": "alexanderplatz-history",
       "path": "/post/alexanderplatz-history",
@@ -1987,26 +2004,26 @@
       "thumb": "https://static.wixstatic.com/media/5a08a3_ab8fcb7342f2463a89dabe27e7ef19d3~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover.jpg",
       "alt": "Karl-Marx-Allee running straight west between GDR apartment blocks and old street lamps, with the Berlin TV Tower standing at the end of the road under evening clouds",
       "relatedToolSlug": "tv-tower-sightline-map"
-    },
+    }
+  ],
+  "allPosts": [
     {
-      "title": "Berlin Address Books: How to Find Out Who Lived in Your Building",
-      "slug": "berlin-address-books",
-      "path": "/post/berlin-address-books",
-      "url": "https://www.berlinwalk.com/post/berlin-address-books",
-      "excerpt": "Who lived in your flat in 1910? In Berlin you can usually find out, much of it free online. Here is the order I would search in, from the old address books to the building file.",
+      "title": "Historical Aerial Photos of Berlin: How to Find Your Street",
+      "slug": "historical-aerial-photos-berlin",
+      "path": "/post/historical-aerial-photos-berlin",
+      "url": "https://www.berlinwalk.com/post/historical-aerial-photos-berlin",
+      "excerpt": "Berlin photographed almost the whole city from a plane in 1928 and again after the war, and the photos are free online. How I find a street in them and what you can read from above.",
       "category": "Living in Berlin",
       "categorySlug": "living-in-berlin",
       "topic": "living-in-berlin",
       "topicLabel": "Living in Berlin",
       "readTime": "6 min read",
-      "publishedDate": "2026-11-08T10:26:54.105Z",
-      "image": "https://static.wixstatic.com/media/5a08a3_b4a52551ebb14c7eae1cab8b533e5031~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover.jpg",
-      "thumb": "https://static.wixstatic.com/media/5a08a3_b4a52551ebb14c7eae1cab8b533e5031~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover.jpg",
-      "alt": "A row of restored late-19th-century Berlin apartment houses with ornamented stucco facades in pastel green and pink under a blue sky",
-      "relatedToolSlug": "berlin-house-history-finder"
-    }
-  ],
-  "allPosts": [
+      "publishedDate": "2026-11-17T18:59:19.591Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_8acbb84536bd46b6ae19b2cdcef6b576~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/potsdamer-platz-pair.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_8acbb84536bd46b6ae19b2cdcef6b576~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/potsdamer-platz-pair.jpg",
+      "alt": "Potsdamer Platz and the octagon of Leipziger Platz from above in 1928 and 2026, side by side at the same scale",
+      "relatedToolSlug": ""
+    },
     {
       "title": "Alexanderplatz History: What Stood on the Square and What to Look For Today",
       "slug": "alexanderplatz-history",
