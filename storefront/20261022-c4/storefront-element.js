@@ -381,7 +381,7 @@
     }
     // The stylesheet and data load in parallel. Product/category previews get a bounded 20 s bridge window measured from connection. Cart timing retains its existing behavior; terminal errors still restore the native store.
     connectedCallback() {if(location.pathname.includes('your-berlin-street-in-1928')){this.ysPaintPending=true;this.style.visibility='hidden';}window.addEventListener('pointerdown',this.onCreditOutside);window.addEventListener('popstate',this.onStoreNavigation);this.context=json(this.getAttribute('shop-context'))||{};this.syncConfiguredGuard();this.holdNativeGuard();if(!this.revealed&&!this.hidden){this.style.display='block';this.style.minHeight='100vh';}window.addEventListener('scroll',this.onCartViewport,{passive:true});window.addEventListener('resize',this.onCartViewport,{passive:true});this.ensureLink();clearTimeout(this.watchdog);this.watchdog=setTimeout(()=>{if(!this.revealed&&!this.hidden){if(!this.isConfiguredDigitalRoute())releaseNative();this.fail('BRIDGE_TIMEOUT');}},/^(?:\/de)?\/(?:(?:category|product-page)\/|cart-page(?:\/|$))/.test(location.pathname)?20000:Math.max(1500,10500-(globalThis.performance?.now?.()||0))/* cart 20 s since 14 Nov 2026 (Yusuf: "yes, add it") */);this.load();}
-    disconnectedCallback() {this.calendarCleanup?.();clearInterval(this.campaignTimer);clearInterval(this.campaignRefresh);window.removeEventListener('pointerdown',this.onCreditOutside);window.removeEventListener('popstate',this.onStoreNavigation);clearTimeout(this.watchdog);clearTimeout(this.quoteTimer);this.sizeObserver?.disconnect();cancelAnimationFrame(this.sizeFrame);cancelAnimationFrame(this.cartBarFrame);window.removeEventListener('scroll',this.onCartViewport);window.removeEventListener('resize',this.onCartViewport);for(const pending of this.pending.values()){clearTimeout(pending.timer);pending.reject(Error('BRIDGE_DISCONNECTED'));}this.pending.clear();}
+    disconnectedCallback() {this.dropNativeGuardHold();this.calendarCleanup?.();clearInterval(this.campaignTimer);clearInterval(this.campaignRefresh);window.removeEventListener('pointerdown',this.onCreditOutside);window.removeEventListener('popstate',this.onStoreNavigation);clearTimeout(this.watchdog);clearTimeout(this.quoteTimer);this.sizeObserver?.disconnect();cancelAnimationFrame(this.sizeFrame);cancelAnimationFrame(this.cartBarFrame);window.removeEventListener('scroll',this.onCartViewport);window.removeEventListener('resize',this.onCartViewport);for(const pending of this.pending.values()){clearTimeout(pending.timer);pending.reject(Error('BRIDGE_DISCONNECTED'));}this.pending.clear();}
     attributeChangedCallback(name, oldValue, value) {
       if(oldValue===value)return;
       if(name==='shop-context') {const next=json(value)||{};if(next.path!==this.context.path){this.quantity=1;this.view='poster';this.readySent=false;this.revealed=false;this.quote=null;this.quoteRevision++;this.ysEntryProductId='';this.configuredFailure=false;this.previewPriceHeights=new Map();}this.context=next;this.syncConfiguredGuard();this.applyContextCategory();this.render();this.signalReady();}
@@ -508,18 +508,21 @@
       const path=String(this.context.path||location.pathname||'').split('?')[0].replace(/^\/de(?=\/|$)/,'').replace(/\/$/,'');
       return path==='/product-page/your-berlin-street-in-1928-digital-file'||!!this.productAlias();
     }
-    // Mobile phones can need more than the head guard's 12 s before the bridge answers; the Wix widget then flashed before this store (Yusuf, 17 Nov 2026). While this element is alive on a store route, the guard's timed release is held; the element's own 20 s watchdog and every terminal path still call releaseNative(). fail() drops the hold and keeps the old 12 s release time.
+    // Mobile phones can need more than the head guard's 12 s before the bridge answers; the Wix widget then flashed before this store (Yusuf, 17 Nov 2026). While a storefront element is alive on a store route, the guard's timed release is held; the 20 s watchdog and every terminal path still call releaseNative(). Holds are counted per element (Wix mounts a short-lived second element), and when the last one fails or disconnects the original 12 s release time is restored in CSS. No release is ever called from here.
     holdNativeGuard() {
-      if(!/^(?:\/de)?\/(?:(?:category|product-page)\/|cart-page(?:\/|$))/.test(location.pathname))return;
-      let style=document.getElementById('bw-shop-guard-hold');
-      if(!style){style=document.createElement('style');style.id='bw-shop-guard-hold';style.textContent='html.bw-shop-guard-hold:not(.bw-shop-native) #TPASection_mvawe10v,html.bw-shop-guard-hold:not(.bw-shop-native) #TPASection_mvaweahn,html.bw-shop-guard-hold:not(.bw-shop-native) #TPAMultiSection_lywou0i7{visibility:hidden!important;max-height:0!important;overflow:hidden!important;animation:none!important}';(document.head||document.documentElement).append(style);}
-      document.documentElement.classList.add('bw-shop-guard-hold');
+      if(this.guardHeld||!/^(?:\/de)?\/(?:(?:category|product-page)\/|cart-page(?:\/|$))/.test(location.pathname))return;
+      this.guardHeld=true;window.__bwShopGuardHolds=(window.__bwShopGuardHolds||0)+1;this.setGuardHold(true);
     }
     dropNativeGuardHold() {
-      const html=document.documentElement;if(!html.classList.contains('bw-shop-guard-hold'))return;
-      html.classList.remove('bw-shop-guard-hold');
-      if(this.isConfiguredDigitalRoute()||html.classList.contains('bw-shop-preview-p19'))return;
-      setTimeout(()=>{if(this.hidden&&!this.revealed)releaseNative();},Math.max(0,12000-(globalThis.performance?.now?.()||0)));
+      if(!this.guardHeld)return;this.guardHeld=false;
+      window.__bwShopGuardHolds=Math.max(0,(window.__bwShopGuardHolds||1)-1);if(!window.__bwShopGuardHolds)this.setGuardHold(false);
+    }
+    setGuardHold(on) {
+      const html=document.documentElement,sel=['#TPASection_mvawe10v','#TPASection_mvaweahn','#TPAMultiSection_lywou0i7'].map(id=>'html.bw-shop-guard-hold:not(.bw-shop-native) '+id).join(',');
+      let style=document.getElementById('bw-shop-guard-hold');
+      if(!style){style=document.createElement('style');style.id='bw-shop-guard-hold';(document.head||document.documentElement).append(style);}
+      style.textContent=on?sel+'{visibility:hidden!important;max-height:0!important;overflow:hidden!important;animation:none!important}':html.classList.contains('bw-shop-preview-p19')?'':sel+'{animation:bw-shop-native-release 0s '+Math.round(Math.max(0,12000-(globalThis.performance?.now?.()||0)))+'ms forwards!important}';
+      html.classList.add('bw-shop-guard-hold');
     }
     syncConfiguredGuard() {
       let style=document.getElementById('bw-configured-product-guard');
