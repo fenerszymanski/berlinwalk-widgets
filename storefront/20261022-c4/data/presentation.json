@@ -5511,6 +5511,24 @@
               "alt": "Zu verschenken Premium T-shirt in Black, worn by an adult model beside a brick apartment façade. AI model visualization."
             }
           ]
+        },
+        "Maroon": {
+          "lead": {
+            "kind": "garmentPreview",
+            "image": "berlin-cliches-20261117/expanded-colors/zu-verschenken-premium-t-shirt--maroon--6f2549d8-0d75-4dfc-a96e-eaf417f57d40.jpg",
+            "sha256": "5c2cae228129467c4715c5ca01f745adc4e5b5445ae1e76b1327c2da3992ad8a",
+            "alt": "Zu verschenken Premium T-shirt in Maroon. Gelato garment preview."
+          },
+          "gallery": []
+        },
+        "Heather Mint": {
+          "lead": {
+            "kind": "garmentPreview",
+            "image": "berlin-cliches-20261117/expanded-colors/zu-verschenken-premium-t-shirt--heather-mint--649ff14c-fee2-4f55-9cdf-d993b705dfd1.jpg",
+            "sha256": "f2a178387a37f89c0abcd03f351d8e03d4d01dd031d338c1d1bbfb5ce9ea3c7f",
+            "alt": "Zu verschenken Premium T-shirt in Heather Mint. Gelato garment preview."
+          },
+          "gallery": []
         }
       },
       "firstImageFraming": "upper-garment"
