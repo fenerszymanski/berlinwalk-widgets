@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Glienicke Border Corner Planner: Bridge of Spies and Steinstücken Half-Day</title>
+<meta name="description" content="Pick your stops and day and see how long the plan takes around Glienicke Bridge: the Steinstücken exclave, Villa Schöningen, Schloss Glienicke and Klein-Glienicke, drawn on the 1989 Wall line.">
+<link rel="stylesheet" href="../css/brand.css">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { overflow-x: hidden; }
+  body { font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #FFFFFF; color: #22261f; padding: 12px; }
+  .gp { border-radius: 16px; overflow: hidden; border: 1px solid #d9e2d2; background: #f6f8f2; }
+  .gp-head { padding: 18px 18px 8px; }
+  .gp-kick { display: inline-block; font-size: 10.5px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; color: #123D18; background: #FFE600; padding: 3px 8px; border-radius: 4px; }
+  .gp-head h1 { font-family: 'Merriweather', Georgia, serif; font-size: 21px; line-height: 1.3; margin-top: 9px; color: #1B5E20; }
+  .gp-head p { font-size: 13px; line-height: 1.6; color: #444b40; margin-top: 7px; max-width: 780px; }
+  .ctrl { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr) minmax(0, 1fr); gap: 12px; padding: 8px 14px 4px; }
+  .ctrl label, .ctrl .lab { display: block; font-size: 10.5px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; color: #5d6657; margin-bottom: 6px; }
+  .chips { display: flex; flex-wrap: wrap; gap: 6px; }
+  .chips button { min-height: 36px; border: 2px solid #d3dccb; background: #fff; color: #123D18; border-radius: 999px; font-family: inherit; font-size: 12.5px; font-weight: 800; cursor: pointer; padding: 0 11px; }
+  .chips button[aria-pressed="true"] { background: #1B5E20; border-color: #1B5E20; color: #fff; }
+  .chips button:focus-visible { outline: 3px solid #FFE600; outline-offset: 2px; }
+  .time-out { font-family: 'Merriweather', Georgia, serif; font-size: 22px; color: #123D18; font-weight: 700; }
+  input[type=range] { width: 100%; accent-color: #1B5E20; height: 28px; }
+  .seg { display: flex; gap: 4px; background: #e7ede1; border-radius: 999px; padding: 3px; }
+  .seg button { flex: 1; min-width: 0; min-height: 38px; border: 0; border-radius: 999px; background: transparent; font-family: inherit; font-size: 12.5px; font-weight: 800; color: #123D18; cursor: pointer; padding: 0 6px; }
+  .seg button[aria-pressed="true"] { background: #123D18; color: #FFE600; }
+  .seg button:focus-visible, input:focus-visible { outline: 3px solid #FFE600; outline-offset: 2px; }
+  .gp-body { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: 12px; padding: 12px; align-items: start; }
+  .mapbox { background: #fff; border: 1px solid #dfe6d8; border-radius: 14px; padding: 8px; min-width: 0; }
+  #map { display: block; width: 100%; height: auto; border-radius: 10px; background: #eef1e6; }
+  .legend { display: flex; flex-wrap: wrap; gap: 10px; font-size: 11px; color: #555c50; padding: 6px 4px 2px; }
+  .legend i { display: inline-block; width: 14px; height: 4px; border-radius: 2px; margin-right: 5px; vertical-align: 2px; }
+  .card { background: #fff; border: 1px solid #dfe6d8; border-radius: 14px; padding: 14px; min-width: 0; }
+  .verdict { font-family: 'Merriweather', Georgia, serif; font-size: 16px; line-height: 1.4; color: #123D18; }
+  .bar { display: flex; height: 14px; border-radius: 7px; overflow: hidden; background: #e7ede1; margin: 12px 0 4px; }
+  .bar span { display: block; height: 100%; }
+  .bar .s { background: #2e7d32; } .bar .t { background: #9fb894; } .bar .f { background: transparent; }
+  .barkey { font-size: 11px; color: #5d6657; }
+  ol.steps { list-style: none; margin-top: 12px; }
+  ol.steps li { display: grid; grid-template-columns: 26px minmax(0, 1fr) auto; gap: 8px; align-items: start; padding: 8px 0; border-top: 1px solid #eef1ea; font-size: 12.5px; line-height: 1.5; }
+  ol.steps li .n { width: 22px; height: 22px; border-radius: 50%; background: #123D18; color: #FFE600; font-weight: 800; font-size: 11.5px; display: flex; align-items: center; justify-content: center; }
+  ol.steps li.tr .n { background: #e7ede1; color: #123D18; }
+  ol.steps li b { color: #123D18; }
+  ol.steps li .m { font-weight: 800; color: #1B5E20; white-space: nowrap; }
+  .skip { margin-top: 10px; font-size: 12px; line-height: 1.55; color: #6b3b1f; background: #f4ede6; border-radius: 10px; padding: 8px 10px; }
+  .look { font-size: 12.5px; line-height: 1.55; color: #123D18; background: #FFE600; border-radius: 10px; padding: 8px 10px; margin-top: 10px; }
+  .gp-foot { padding: 4px 16px 16px; font-size: 11.5px; line-height: 1.55; color: #5a6155; }
+  .gp-foot a { color: #1B5E20; }
+  svg text { font-family: 'Montserrat', sans-serif; }
+  svg text.lb { font-size: 17px; }
+  svg text.num { font-size: 12px; }
+  @media (max-width: 680px) {
+    svg text.lb { font-size: 23px; }
+    svg text.num { font-size: 16px; }
+    .gp-body { grid-template-columns: 1fr; }
+    .ctrl { grid-template-columns: 1fr; }
+    .gp-head h1 { font-size: 18.5px; }
+  }
+</style>
+</head>
+<body>
+<div class="gp">
+  <div class="gp-head">
+    <span class="gp-kick">Glienicke Border Corner Planner</span>
+    <h1>How much of the border corner fits into your afternoon?</h1>
+    <p>Pick the stops you want and the day you are going. The map shows the Wall as it stood in 1989 and the water it followed, then draws your stops in the order that saves a bus ride and adds up the time on the ground. Tap a stop on the map to add or drop it.</p>
+  </div>
+  <div class="ctrl">
+    <div>
+      <span class="lab" id="pickLab">Stops you want (the bridge is always in)</span>
+      <div class="chips" role="group" aria-labelledby="pickLab" id="picks">
+        <button type="button" data-v="stein" aria-pressed="true">Steinstücken</button>
+        <button type="button" data-v="villa" aria-pressed="true">Villa Schöningen</button>
+        <button type="button" data-v="schloss" aria-pressed="true">Glienicke park</button>
+        <button type="button" data-v="tour" aria-pressed="false">Palace tour</button>
+        <button type="button" data-v="klein" aria-pressed="false">Klein-Glienicke</button>
+      </div>
+    </div>
+    <div>
+      <span class="lab" id="dayLab">Day</span>
+      <div class="seg" role="group" aria-labelledby="dayLab" id="day">
+        <button type="button" data-v="wk" aria-pressed="false">Mon-Thu</button>
+        <button type="button" data-v="fr" aria-pressed="false">Fri</button>
+        <button type="button" data-v="we" aria-pressed="true">Sat-Sun</button>
+      </div>
+    </div>
+    <div>
+      <span class="lab" id="fromLab">Arriving from</span>
+      <div class="seg" role="group" aria-labelledby="fromLab" id="from">
+        <button type="button" data-v="berlin" aria-pressed="true">Berlin</button>
+        <button type="button" data-v="potsdam" aria-pressed="false">Potsdam</button>
+      </div>
+    </div>
+  </div>
+  <div class="gp-body">
+    <div class="mapbox">
+      <svg id="map" viewBox="0 150 720 470" role="img" aria-label="Map of the Glienicke Bridge and Steinstücken area with the 1989 Wall line and the planned route; the stop circles can be clicked to add or drop a stop"></svg>
+      <div class="legend"><span>Stops next to the bridge are spread slightly for legibility.</span><span><i style="background:#c62828"></i>Wall, 1989</span><span><i style="background:#9cc3dc"></i>Water</span><span><i style="background:#123D18"></i>Your route</span><span>Steinstücken: West Berlin inside the red line</span><span>Tap a circle to add or drop a stop</span></div>
+    </div>
+    <div class="card" aria-live="polite">
+      <div class="verdict" id="verdict"></div>
+      <div class="bar" id="bar" aria-hidden="true"></div>
+      <div class="barkey" id="clock"></div>
+      <div class="barkey"><span style="color:#2e7d32">&#9632;</span> at the stops &nbsp; <span style="color:#7f9a74">&#9632;</span> on buses, trams and on foot</div>
+      <ol class="steps" id="steps"></ol>
+      <div class="skip" id="skip" hidden></div>
+      <div class="look" id="look"></div>
+    </div>
+  </div>
+  <div class="gp-foot">Bus and tram times from the live VBB timetable, checked on 18 November 2026; services run every 20 minutes on most of the day. Opening times: Villa Schöningen winter hours Fri-Sun 11:00-17:00; Schloss Glienicke Nov-Mar Sat-Sun 10:00-16:00 by guided tour. Check before you go. Wall line: <a href="https://daten.berlin.de/datensaetze/verlauf-der-berliner-mauer-1989-wfs-3dcda64c" target="_blank" rel="noopener">Verlauf der Berliner Mauer 1989</a>, Berlin Open Data, dl-de-zero-2.0. Water: &copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap contributors</a>, ODbL.</div>
+</div>
+<script>
+var MAP={"water": ["M747,258 L750,253 L751,248 L750,232 L751,223 L757,216 L770,211 L772,208 L778,206 L778,205 L780,206 L781,202 L789,199 L794,197 L801,197 L801,196 L821,194 L823,191 L831,187 L831,185 L834,184 L835,182 L850,174 L852,169 L856,165 L873,156 L888,142 L900,136 L903,136 L905,139 L915,140 L923,144 L922,148 L913,147 L913,149 L909,149 L902,156 L870,182 L862,184 L860,186 L855,184 L851,187 L842,189 L838,193 L836,193 L837,194 L831,196 L823,208 L816,210 L815,209 L814,210 L811,207 L809,208 L807,205 L805,205 L803,209 L797,213 L789,216 L769,232 L763,241 L757,260 L752,265 L751,269 L750,270 L746,260 L747,258Z", "M681,278 L669,279 L648,287 L648,283 L653,282 L673,275 L681,275 L681,278Z", "M648,287 L644,291 L638,309 L639,325 L638,333 L633,337 L629,337 L627,333 L622,335 L618,335 L610,326 L609,319 L618,289 L626,279 L629,277 L635,276 L638,276 L643,278 L648,283 L648,287Z", "M164,280 L159,266 L159,261 L163,253 L171,246 L171,238 L188,238 L189,246 L192,250 L201,256 L206,256 L211,258 L214,263 L216,272 L217,274 L219,274 L231,288 L234,289 L244,287 L246,288 L246,290 L247,292 L250,292 L251,295 L255,296 L265,304 L267,309 L266,312 L253,310 L249,311 L246,309 L241,309 L236,311 L232,309 L226,302 L223,300 L210,297 L203,294 L189,292 L164,280Z", "M633,337 L639,369 L640,376 L638,387 L636,393 L627,404 L625,402 L627,400 L630,395 L636,382 L635,367 L629,337 L633,337Z", "M300,323 L266,312 L267,309 L277,312 L300,320 L300,323Z", "M324,81 L320,87 L317,99 L319,109 L317,112 L324,112 L321,118 L312,118 L311,114 L314,113 L312,110 L304,101 L296,96 L288,95 L278,95 L271,90 L269,90 L264,92 L259,101 L257,108 L257,110 L255,113 L251,124 L251,127 L221,90 L226,90 L234,86 L234,81 L237,78 L236,76 L238,74 L238,68 L241,65 L249,60 L249,59 L253,57 L261,57 L282,66 L289,66 L299,63 L315,55 L321,48 L331,35 L337,27 L352,59 L350,59 L348,65 L342,71 L338,74 L333,75 L324,81Z", "M750,270 L748,276 L743,282 L737,284 L735,287 L730,288 L723,291 L712,284 L706,286 L700,286 L687,279 L681,278 L681,275 L682,274 L680,272 L681,271 L682,266 L688,259 L697,253 L704,251 L706,253 L711,251 L714,252 L734,262 L737,265 L740,266 L745,265 L746,260 L750,270Z", "M632,425 L637,428 L644,435 L648,438 L652,441 L653,443 L657,444 L669,455 L671,455 L698,475 L707,479 L746,487 L756,488 L776,489 L812,483 L813,488 L783,493 L769,493 L750,493 L723,487 L700,482 L686,473 L668,459 L665,455 L662,454 L655,449 L654,446 L645,441 L643,438 L629,431 L632,425Z", "M415,798 L417,794 L421,792 L428,792 L440,800 L442,803 L444,807 L443,809 L430,820 L426,819 L423,819 L425,814 L424,810 L423,809 L421,808 L416,811 L413,811 L411,809 L410,806 L413,804 L413,801 L415,798Z", "M154,324 L139,298 L134,301 L132,300 L105,295 L101,295 L95,298 L84,312 L80,315 L72,320 L63,321 L57,325 L52,333 L45,349 L42,360 L41,367 L55,386 L58,392 L58,395 L40,410 L35,407 L32,411 L36,415 L32,419 L32,420 L27,427 L28,427 L26,428 L23,437 L19,438 L17,444 L18,446 L17,448 L10,449 L17,452 L12,454 L10,454 L11,455 L10,483 L4,487 L1,491 L-3,502 L5,505 L11,502 L17,497 L23,491 L23,490 L38,478 L32,472 L30,466 L29,466 L33,455 L38,449 L54,432 L60,429 L61,428 L66,430 L72,430 L78,420 L80,420 L84,415 L95,408 L106,400 L111,394 L115,386 L117,385 L118,380 L127,363 L127,358 L144,340 L147,339 L152,331 L154,324Z", "M109,613 L109,607 L112,604 L127,618 L127,621 L125,625 L124,627 L116,631 L115,630 L107,622 L105,618 L105,616 L109,613Z", "M100,445 L107,433 L113,428 L115,421 L118,421 L121,417 L122,419 L118,428 L114,437 L115,438 L113,442 L109,445 L105,451 L103,451 L100,449 L100,445Z", "M-69,541 L-47,522 L-39,516 L0,493 L-3,502 L-37,521 L-65,545 L-69,541Z", "M313,-222 L306,-213 L293,-203 L281,-186 L279,-177 L279,-169 L273,-161 L269,-139 L267,-134 L262,-130 L255,-127 L249,-125 L245,-126 L241,-125 L235,-118 L236,-116 L234,-113 L238,-93 L237,-80 L234,-71 L229,-63 L209,-51 L206,-47 L209,-39 L211,-24 L209,-22 L203,-21 L198,-22 L189,-28 L186,-28 L184,-23 L184,-16 L185,-9 L190,-2 L192,-2 L200,4 L202,9 L197,13 L190,18 L186,19 L172,17 L165,14 L157,5 L147,-10 L146,-19 L147,-29 L151,-35 L157,-40 L167,-40 L178,-49 L174,-62 L174,-67 L178,-75 L178,-82 L180,-88 L186,-97 L197,-103 L200,-109 L201,-123 L203,-128 L208,-134 L222,-142 L221,-145 L218,-148 L212,-160 L207,-165 L201,-172 L200,-176 L195,-182 L194,-184 L192,-186 L186,-188 L184,-189 L185,-192 L192,-194 L194,-189 L210,-178 L218,-177 L223,-179 L225,-184 L243,-223 L250,-233 L257,-244 L263,-251 L264,-264 L266,-274 L265,-291 L261,-308 L262,-312 L267,-317 L272,-321 L278,-323 L284,-322 L288,-323 L292,-322 L296,-323 L308,-319 L311,-320 L316,-317 L325,-307 L326,-302 L323,-294 L325,-286 L324,-284 L326,-282 L325,-274 L323,-271 L323,-265 L322,-259 L317,-249 L315,-241 L316,-233 L313,-229 L312,-222 L313,-222Z", "M15,208 L17,205 L14,201 L20,198 L27,189 L32,176 L37,175 L41,175 L47,178 L56,195 L57,202 L59,203 L58,206 L55,211 L56,212 L53,215 L52,218 L53,223 L57,224 L59,228 L59,235 L57,242 L54,245 L51,245 L49,242 L45,242 L35,245 L32,252 L28,268 L26,270 L23,276 L20,279 L16,282 L15,299 L13,307 L5,315 L2,317 L-8,324 L-10,330 L-10,338 L-19,345 L-25,344 L-25,346 L-26,346 L-26,343 L-27,343 L-28,340 L-28,330 L-33,322 L-34,317 L-33,313 L-29,308 L-32,300 L-32,292 L-29,286 L-23,279 L-10,273 L-3,258 L-2,257 L2,249 L2,247 L6,223 L15,208Z", "M-40,496 L-48,499 L-54,504 L-60,512 L-59,514 L-60,515 L-68,526 L-76,533 L-77,537 L-82,532 L-78,530 L-73,525 L-74,524 L-70,518 L-56,502 L-47,493 L-30,489 L-10,486 L4,487 L1,491 L-5,490 L-13,490 L-15,491 L-14,494 L-17,495 L-19,493 L-40,496Z", "M498,475 L502,475 L507,472 L513,472 L514,472 L515,468 L526,462 L527,458 L531,456 L531,454 L536,453 L547,445 L550,438 L555,431 L574,414 L596,408 L603,408 L622,404 L625,402 L627,404 L621,411 L621,416 L622,420 L632,425 L629,431 L620,426 L609,424 L605,424 L605,426 L599,426 L593,431 L588,438 L582,451 L572,461 L556,472 L535,491 L524,497 L512,501 L494,499 L482,495 L478,492 L471,480 L465,476 L458,468 L451,464 L448,460 L445,447 L441,444 L438,436 L424,428 L416,413 L410,409 L394,405 L367,389 L359,378 L357,370 L344,349 L341,348 L331,341 L317,337 L306,332 L305,331 L300,323 L300,320 L307,320 L311,317 L331,316 L338,320 L349,322 L366,337 L376,352 L377,354 L375,370 L378,371 L383,372 L400,381 L410,388 L415,396 L421,398 L428,398 L435,402 L437,404 L439,411 L446,422 L450,434 L468,447 L479,452 L484,456 L498,475Z", "M160,307 L155,314 L154,324 L139,298 L143,298 L146,296 L147,298 L153,298 L162,290 L164,286 L164,280 L189,292 L188,293 L177,305 L177,308 L165,303 L161,304 L160,307Z", "M1,504 L5,505 L6,516 L2,521 L-4,525 L-4,527 L6,529 L29,532 L37,540 L52,547 L61,553 L70,556 L75,559 L88,561 L93,564 L97,569 L99,585 L104,592 L128,616 L169,653 L274,754 L317,804 L336,824 L342,844 L360,870 L365,885 L414,984 L436,1048 L447,1072 L465,1109 L463,1111 L444,1070 L413,987 L363,885 L356,867 L339,844 L333,825 L267,749 L137,626 L99,588 L96,582 L94,571 L91,565 L90,564 L80,563 L72,560 L50,548 L40,544 L27,534 L-2,531 L-7,528 L-7,525 L-5,523 L2,518 L4,514 L5,512 L1,504Z", "M317,-29 L324,-6 L324,12 L318,22 L309,27 L294,28 L292,32 L292,36 L291,38 L285,40 L266,39 L256,33 L254,32 L248,37 L237,34 L237,32 L251,28 L254,27 L256,29 L261,31 L265,29 L268,21 L269,15 L267,10 L269,9 L269,1 L272,-14 L283,-31 L294,-44 L299,-45 L309,-38 L317,-29Z", "M321,-15 L317,-29 L324,-38 L322,-42 L324,-45 L326,-45 L327,-68 L331,-73 L343,-80 L349,-82 L357,-83 L356,-104 L360,-110 L367,-116 L376,-120 L394,-132 L410,-138 L415,-141 L416,-150 L419,-153 L427,-159 L436,-162 L438,-162 L458,-173 L464,-174 L466,-173 L480,-175 L480,-178 L482,-179 L487,-175 L501,-176 L503,-180 L510,-179 L524,-180 L534,-184 L543,-186 L546,-191 L555,-211 L557,-213 L557,-215 L560,-222 L572,-241 L582,-244 L598,-237 L608,-236 L639,-236 L650,-237 L655,-240 L727,-148 L720,-143 L714,-134 L709,-129 L697,-121 L687,-110 L680,-106 L677,-103 L657,-71 L651,-63 L647,-55 L646,-47 L645,-45 L642,-41 L638,-40 L632,-35 L626,-34 L618,-37 L614,-37 L607,-41 L601,-22 L596,-14 L592,-11 L561,5 L541,8 L530,-0 L528,1 L527,7 L518,15 L504,19 L484,18 L479,21 L476,20 L470,17 L467,9 L467,7 L465,6 L464,9 L459,14 L459,16 L458,16 L460,19 L459,23 L443,35 L431,55 L418,66 L412,69 L409,70 L401,69 L392,66 L366,65 L358,62 L358,61 L352,59 L337,27 L337,24 L338,23 L338,17 L336,15 L336,13 L327,11 L324,12 L324,-6 L321,-15Z", "M73,129 L68,127 L53,136 L37,141 L22,135 L12,126 L4,117 L-2,113 L-1,112 L-4,107 L-7,95 L-3,75 L1,57 L0,55 L-1,56 L0,55 L-1,54 L-11,50 L-13,49 L-12,48 L-39,32 L-44,21 L-43,-0 L-45,-3 L-63,-14 L-69,-21 L-75,-26 L-80,-34 L-83,-37 L-87,-39 L-93,-49 L-96,-52 L-102,-52 L-104,-55 L-111,-69 L-124,-78 L-138,-85 L-136,-93 L-135,-93 L-136,-101 L-134,-110 L-136,-111 L-144,-109 L-149,-110 L-153,-114 L-168,-131 L-143,-142 L-134,-131 L-120,-121 L-122,-128 L-120,-132 L-117,-133 L-113,-132 L-106,-128 L-100,-122 L-91,-108 L-78,-102 L-73,-97 L-66,-83 L-62,-82 L-54,-81 L-48,-78 L-36,-64 L-28,-62 L-21,-57 L-20,-49 L-16,-44 L-8,-31 L6,-13 L8,-9 L9,-0 L10,3 L14,4 L10,13 L14,27 L17,36 L19,39 L19,41 L23,43 L34,65 L43,74 L51,76 L62,77 L76,86 L78,90 L85,93 L91,97 L96,96 L101,92 L107,81 L121,69 L127,67 L138,64 L145,63 L152,63 L159,66 L180,81 L190,86 L199,88 L206,87 L209,88 L220,87 L221,90 L253,130 L242,147 L206,203 L201,207 L200,213 L195,222 L195,225 L192,229 L188,238 L171,238 L170,234 L144,222 L136,215 L134,214 L133,216 L130,216 L130,211 L123,208 L122,205 L116,206 L102,200 L96,199 L94,200 L93,199 L94,197 L82,190 L75,180 L72,167 L72,159 L75,151 L74,143 L76,134 L75,133 L76,132 L73,129Z"], "holes": ["M626,-160 L635,-163 L640,-163 L641,-164 L644,-166 L644,-169 L641,-171 L639,-170 L626,-165 L624,-161 L624,-160 L626,-160Z", "M513,-16 L517,-17 L522,-23 L526,-27 L542,-34 L553,-41 L557,-43 L571,-44 L575,-46 L577,-50 L578,-53 L577,-59 L579,-62 L578,-65 L583,-83 L582,-93 L578,-104 L577,-109 L575,-115 L573,-116 L566,-136 L567,-142 L574,-149 L574,-155 L573,-157 L568,-155 L558,-143 L554,-140 L550,-141 L545,-144 L532,-148 L526,-147 L523,-145 L519,-140 L516,-139 L511,-141 L508,-143 L502,-146 L499,-147 L496,-143 L492,-135 L493,-131 L495,-128 L496,-125 L498,-123 L501,-114 L502,-113 L503,-115 L505,-115 L510,-123 L516,-127 L518,-127 L524,-121 L523,-119 L527,-111 L526,-108 L517,-98 L510,-98 L510,-89 L508,-85 L500,-80 L493,-78 L490,-75 L484,-72 L460,-57 L452,-43 L448,-33 L441,-27 L435,-15 L435,1 L438,6 L443,7 L447,5 L453,-2 L462,-5 L471,-5 L480,-4 L482,-6 L482,-5 L480,-3 L482,-2 L493,-1 L497,-9 L501,-13 L507,-16 L513,-16Z"], "wall": ["M88,95 L90,90 L85,88 L72,79 L52,69 L47,65", "M569,602 L539,577 L570,538 L580,528 L608,503 L625,492", "M562,623 L569,602", "M545,624 L562,623", "M242,310 L264,313 L274,316", "M171,242 L169,248 L164,250 L160,257 L158,266 L165,284 L162,289 L158,293", "M276,312 L268,309 L268,308", "M239,65 L247,59 L257,56", "M257,56 L267,57 L285,64 L290,65 L300,62 L319,52 L335,29", "M97,96 L94,89 L105,78", "M105,78 L116,68 L123,64 L137,59 L144,58 L154,58 L177,72 L196,79 L229,79 L235,74 L239,65", "M365,391 L375,398 L392,406 L411,412 L415,415 L421,427 L425,430 L436,437 L439,441 L443,449 L445,457 L454,467 L465,476 L478,492 L483,496 L491,499 L498,501", "M584,493 L598,493", "M610,496 L587,515 L571,531", "M625,492 L648,485 L656,494 L673,503 L703,508", "M703,508 L743,514 L789,526 L878,519 L906,500 L902,472 L911,469", "M14,131 L30,140 L42,142 L53,139 L70,130", "M70,130 L68,171 L70,178 L78,193 L92,199 L94,201 L105,204 L119,209 L132,218 L153,229 L157,229 L163,230 L169,235 L171,239", "M259,37 L257,54", "M335,29 L337,25", "M293,322 L302,327 L301,330 L306,333 L319,339 L322,339 L332,344 L338,348 L346,357 L356,382 L359,386 L365,391", "M513,610 L518,603 L540,623 L545,624", "M498,501 L504,502 L513,501 L523,496 L535,489 L577,457 L590,463 L605,469 L604,471 L580,474 L579,476 L584,493", "M542,557 L509,559 L504,589 L516,601 L512,608", "M249,293 L251,292 L255,286 L257,280 L257,275 L247,268 L236,247 L259,240 L269,238 L273,238 L272,245 L276,267 L275,284 L308,295 L313,293 L318,298 L321,299 L328,296 L330,292 L330,282 L333,260 L330,245 L332,243 L335,243 L352,249 L356,273 L368,272 L371,285 L359,286 L361,299 L342,302 L328,299 L321,316 L311,317 L302,321 L297,319", "M320,-80 L325,-70 L324,-45 L323,-42 L320,-39 L317,-37 L299,-47 L293,-43 L280,-25 L273,-13 L267,9 L264,24 L261,28 L259,37", "M268,308 L256,296 L249,293", "M548,557 L571,531"]};
+(function () {
+  var NS = 'http://www.w3.org/2000/svg';
+  // Real coordinates (OpenStreetMap / Nominatim), projected onto the same frame as the 1989 Wall data.
+  var BOX = [13.07, 52.43], K = Math.cos(52.4 * Math.PI / 180), SX = 800 / ((13.16 - 13.07) * K);
+  function proj(lat, lon) { return [Math.round((lon - BOX[0]) * K * SX * 10) / 10, Math.round((BOX[1] - lat) * SX * 10) / 10]; }
+  var GEO = {
+    griebnitzsee: [52.39407, 13.12886], steinstuecken: [52.39036, 13.12827], bridge: [52.41346, 13.09023], villa: [52.41359, 13.08770],
+    schloss: [52.41393, 13.09550], kleinglienicke: [52.41091, 13.09728], tram: [52.4097, 13.0809], wannsee: [52.4197, 13.1555]
+  };
+  var P = {}; Object.keys(GEO).forEach(function (k) { P[k] = proj(GEO[k][0], GEO[k][1]); });
+  // The four stops around the bridge lie within about 600 m of each other. On screen they are
+  // spread a little (at most about 40 px, roughly 250 m) so circles and labels stay readable.
+  P.villa = [115, 252]; P.bridge = [180, 232]; P.schloss = [250, 205]; P.kleinglienicke = [262, 292];
+  P.tram = [80, 330]; P.wannsee = [690, 175];
+  var LABEL = {
+    griebnitzsee: ['S Griebnitzsee', 14, -12, 'start'], steinstuecken: ['Steinstücken', 14, 22, 'start'], bridge: ['Glienicke Bridge', -12, -16, 'end'],
+    villa: ['Villa Schöningen', 0, 38, 'middle'], schloss: ['Schloss Glienicke', 14, 6, 'start'], kleinglienicke: ['Klein-Glienicke', 14, 8, 'start'],
+    wannsee: ['to S Wannsee', 0, 40, 'end'], tram: ['from Potsdam Hbf', -2, 34, 'start']
+  };
+  var map = document.getElementById('map');
+  function el(n, a) { var e = document.createElementNS(NS, n); for (var k in a) e.setAttribute(k, a[k]); return e; }
+  map.appendChild(el('rect', { x: -200, y: -400, width: 1300, height: 1600, fill: '#eef1e6' }));
+  MAP.water.forEach(function (d) { map.appendChild(el('path', { d: d, fill: '#9cc3dc', stroke: '#7fb0cf', 'stroke-width': .8 })); });
+  (MAP.holes || []).forEach(function (d) { map.appendChild(el('path', { d: d, fill: '#eef1e6', stroke: '#7fb0cf', 'stroke-width': .8 })); });
+  MAP.wall.forEach(function (d) { map.appendChild(el('path', { d: d, fill: 'none', stroke: '#c62828', 'stroke-width': 2.6, 'stroke-linecap': 'round', 'stroke-dasharray': '7 3' })); });
+  var route = el('polyline', { fill: 'none', stroke: '#123D18', 'stroke-width': 4, 'stroke-linejoin': 'round', 'stroke-linecap': 'round', opacity: .9 });
+  map.appendChild(route);
+  var dots = {};
+  Object.keys(LABEL).forEach(function (k) {
+    var g = el('g', {});
+    var c = el('circle', { cx: P[k][0], cy: P[k][1], r: 10, fill: '#fff', stroke: '#123D18', 'stroke-width': 2.4 });
+    var n = el('text', { x: P[k][0], y: P[k][1] + 4.5, 'class': 'num', 'text-anchor': 'middle', 'font-weight': 800, fill: '#123D18' });
+    var t = el('text', { x: P[k][0] + LABEL[k][1], y: P[k][1] + LABEL[k][2], 'class': 'lb', 'text-anchor': LABEL[k][3], 'font-weight': 700, fill: '#22261f', stroke: '#ffffff', 'stroke-width': 4, 'paint-order': 'stroke' });
+    t.textContent = LABEL[k][0];
+    g.appendChild(c); g.appendChild(n); g.appendChild(t); map.appendChild(g);
+    dots[k] = { c: c, n: n, t: t };
+  });
+
+  // Keep every label inside the frame and off the other labels, whatever the font size.
+  function fitLabels() {
+    var vb = map.viewBox.baseVal, placed = Object.keys(dots).map(function (k) { return dots[k].c.getBBox(); });
+    Object.keys(LABEL).forEach(function (k) {
+      var t = dots[k].t, L = LABEL[k];
+      t.setAttribute('x', P[k][0] + L[1]); t.setAttribute('y', P[k][1] + L[2]); t.setAttribute('text-anchor', L[3]);
+      var b = t.getBBox();
+      if (b.x < vb.x + 4) { t.setAttribute('text-anchor', 'start'); t.setAttribute('x', Math.max(vb.x + 4, P[k][0] - 4)); }
+      b = t.getBBox();
+      if (b.x + b.width > vb.x + vb.width - 4) { t.setAttribute('text-anchor', 'end'); t.setAttribute('x', vb.x + vb.width - 4); }
+      for (var tries = 0; tries < 5; tries++) {
+        b = t.getBBox();
+        var hit = placed.some(function (q) { return b.x < q.x + q.width && b.x + b.width > q.x && b.y < q.y + q.height && b.y + b.height > q.y; });
+        if (!hit) break;
+        t.setAttribute('y', +t.getAttribute('y') + b.height * 0.9);
+      }
+      placed.push(t.getBBox());
+    });
+  }
+  var STOPS = {
+    stein: { key: 'steinstuecken', name: 'Steinstücken helicopter memorial', stay: 20, open: function () { return true; }, look: 'Two rotor blades on the old landing pad at Am Landeplatz. Look at how close the houses sit to where the Wall stood.' },
+    bridge: { key: 'bridge', name: 'Glienicke Bridge and the border line', stay: 25, open: function () { return true; }, look: 'Find the metal strip in the middle of the deck, then look up: the two halves are painted in slightly different greens.' },
+    villa: { key: 'villa', name: 'Villa Schöningen (museum and café)', stay: 60, open: function (d) { return d !== 'wk'; }, closed: 'Villa Schöningen opens Fri-Sun only in winter.' },
+    schloss: { key: 'schloss', name: 'Schloss Glienicke park and bridge view', stay: 30, open: function () { return true; } },
+    tour: { key: 'schloss', name: 'Schloss Glienicke guided palace tour', stay: 60, open: function (d) { return d === 'we'; }, closed: 'The palace tour runs Sat-Sun only from November to March.' },
+    klein: { key: 'kleinglienicke', name: 'Klein-Glienicke, the GDR village inside West Berlin', stay: 30, open: function () { return true; } }
+  };
+  var state = { day: 'we', from: 'berlin', picks: new Set(['stein', 'villa', 'schloss']) };
+  var steinCost = 20 + 10 + 30 - 13;
+
+  function plan() {
+    var d = state.day, from = state.from, skipped = [], chosen = {};
+    function has(x) { return state.picks.has(x); }
+    ['villa', 'schloss', 'tour', 'klein'].forEach(function (x) {
+      if (!has(x)) return;
+      if (!STOPS[x].open(d)) { skipped.push(STOPS[x].closed); return; }
+      chosen[x] = true;
+    });
+    if (chosen.tour) chosen.schloss = true;
+    var wantStein = has('stein');
+    var seq = [];
+    function tr(t, m) { seq.push({ tr: true, text: t, m: m }); }
+    function st(id) { var s = STOPS[id]; seq.push({ id: id, key: s.key, text: s.name, m: s.stay }); }
+    if (from === 'berlin') {
+      if (wantStein) { tr('S7 to Griebnitzsee, then walk about 10 min', 10); st('stein'); tr('Bus 118 to Rathaus Wannsee, change to bus 316', 30); }
+      else tr('Bus 316 from S Wannsee (AB ticket: get off at Schloss Glienicke)', 13);
+      if (chosen.schloss) st(chosen.tour ? 'tour' : 'schloss');
+      if (chosen.klein) st('klein');
+      st('bridge');
+      if (chosen.villa) st('villa');
+      tr('Bus 316 back to S Wannsee', 14);
+    } else {
+      tr('Tram 93 from Potsdam Hauptbahnhof', 13);
+      if (chosen.villa) st('villa');
+      st('bridge');
+      if (chosen.schloss) st(chosen.tour ? 'tour' : 'schloss');
+      if (chosen.klein) st('klein');
+      if (wantStein) { tr('Bus 316 to Rathaus Wannsee, change to bus 118', 30); st('stein'); tr('Walk about 10 min to S Griebnitzsee for the S7', 10); }
+      else tr('Tram 93 back to Potsdam Hauptbahnhof', 13);
+    }
+    var used = seq.reduce(function (a, x) { return a + x.m; }, 0);
+    return { seq: seq, used: used, skipped: skipped };
+  }
+
+  function fmt(m) { var h = Math.floor(m / 60), r = m % 60; return (h ? h + ' h' : '') + (r ? (h ? ' ' : '') + r + ' min' : ''); }
+
+  function render() {
+    var r = plan();
+    var stops = r.seq.filter(function (x) { return !x.tr; });
+    document.getElementById('verdict').textContent = stops.length + (stops.length === 1 ? ' stop' : ' stops') + ', about ' + fmt(r.used) + ' on the ground.';
+    var latest = 16 * 60 - r.used, hh = Math.floor(latest / 60), mm = latest % 60;
+    document.getElementById('clock').textContent = latest >= 9 * 60 ? 'Winter tip: start by ' + hh + ':' + (mm < 10 ? '0' : '') + mm + ' to finish around 16:00, before it gets dark.' : 'This is a full day: start in the morning, and split it if the light goes.';
+    var bar = document.getElementById('bar'); bar.innerHTML = '';
+    r.seq.forEach(function (x) { var s = document.createElement('span'); s.className = x.tr ? 't' : 's'; s.style.width = (x.m / r.used * 100) + '%'; bar.appendChild(s); });
+    var ol = document.getElementById('steps'); ol.innerHTML = '';
+    var num = 0, order = {};
+    r.seq.forEach(function (x) {
+      var li = document.createElement('li'); if (x.tr) li.className = 'tr';
+      var n = document.createElement('span'); n.className = 'n'; n.textContent = x.tr ? '→' : String(++num);
+      if (!x.tr) order[x.key] = num;
+      var t = document.createElement('span'); if (x.tr) t.textContent = x.text; else { var b = document.createElement('b'); b.textContent = x.text; t.appendChild(b); }
+      var m = document.createElement('span'); m.className = 'm'; m.textContent = x.m + ' min';
+      li.appendChild(n); li.appendChild(t); li.appendChild(m); ol.appendChild(li);
+    });
+    var sk = document.getElementById('skip');
+    if (r.used <= 150) r.skipped.push('Short plan: with an extra hour, walk part of the Berlin Wall Trail along the old border near Griebnitzsee.');
+    if (r.skipped.length) { sk.hidden = false; sk.textContent = r.skipped.join(' '); } else sk.hidden = true;
+    document.getElementById('look').textContent = STOPS.bridge.look;
+    var pts = [];
+    if (state.from === 'berlin') { pts.push(order.steinstuecken ? P.griebnitzsee : P.wannsee); }
+    else pts.push(P.tram);
+    r.seq.forEach(function (x) { if (!x.tr) pts.push(P[x.key]); });
+    pts.push(state.from === 'berlin' ? P.wannsee : (order.steinstuecken ? P.griebnitzsee : P.tram));
+    route.setAttribute('points', pts.map(function (p) { return p[0] + ',' + p[1]; }).join(' '));
+    Object.keys(dots).forEach(function (k) {
+      var on = !!order[k] || (k === 'griebnitzsee' && !!order.steinstuecken) || (k === 'wannsee' && state.from === 'berlin') || (k === 'tram' && state.from === 'potsdam');
+      dots[k].c.setAttribute('fill', order[k] ? '#FFE600' : '#fff');
+      dots[k].c.setAttribute('opacity', on || k === 'bridge' ? 1 : .55);
+      dots[k].n.textContent = order[k] ? order[k] : '';
+      dots[k].t.setAttribute('opacity', on ? 1 : .55);
+    });
+    fitLabels();
+    if (window.BerlinWalkBrand && window.BerlinWalkBrand.resize) window.BerlinWalkBrand.resize();
+  }
+  var pickBox = document.getElementById('picks');
+  function setPick(v, on) {
+    if (on) state.picks.add(v); else state.picks.delete(v);
+    if (v === 'tour' && on) state.picks.add('schloss');
+    if (v === 'schloss' && !on) state.picks.delete('tour');
+    Array.prototype.forEach.call(pickBox.querySelectorAll('button'), function (x) { x.setAttribute('aria-pressed', state.picks.has(x.getAttribute('data-v')) ? 'true' : 'false'); });
+    render();
+  }
+  pickBox.addEventListener('click', function (e) { var b = e.target.closest('button'); if (!b) return; var v = b.getAttribute('data-v'); setPick(v, !state.picks.has(v)); });
+  var KEY2PICK = { steinstuecken: 'stein', villa: 'villa', schloss: 'schloss', kleinglienicke: 'klein', griebnitzsee: 'stein' };
+  Object.keys(KEY2PICK).forEach(function (k) {
+    var g = dots[k].c.parentNode; g.style.cursor = 'pointer';
+    g.addEventListener('click', function () { var v = KEY2PICK[k]; setPick(v, !state.picks.has(v)); });
+  });
+  [['day', 'day'], ['from', 'from']].forEach(function (p) {
+    var g = document.getElementById(p[0]);
+    g.addEventListener('click', function (e) {
+      var b = e.target.closest('button'); if (!b) return;
+      state[p[1]] = b.getAttribute('data-v');
+      Array.prototype.forEach.call(g.querySelectorAll('button'), function (x) { x.setAttribute('aria-pressed', x === b ? 'true' : 'false'); });
+      render();
+    });
+  });
+  render();
+  window.addEventListener('resize', fitLabels);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(fitLabels);
+})();
+</script>
+<script src="../js/brand.js"></script>
+</body>
+</html>
