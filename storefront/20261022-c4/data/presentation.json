@@ -4734,6 +4734,24 @@
               "modelColorDe": "Schwarz"
             }
           ]
+        },
+        "Charcoal": {
+          "lead": {
+            "kind": "garmentPreview",
+            "image": "berlin-cliches-20261117/expanded-colors/zurueckbleiben-bitte-hoodie--charcoal--ced59ac6-bff4-49dd-9440-4c327934181a.jpg",
+            "sha256": "f1506c1ab7037ae447631e0ed4285d262dac6d1829a736b7e041495d13005d1a",
+            "alt": "Zurückbleiben bitte Hoodie in Charcoal. Gelato garment preview."
+          },
+          "gallery": []
+        },
+        "Mustard": {
+          "lead": {
+            "kind": "garmentPreview",
+            "image": "berlin-cliches-20261117/expanded-colors/zurueckbleiben-bitte-hoodie--mustard--21b2dfbe-9f3d-4e2c-ae07-ca38db9f27c3.jpg",
+            "sha256": "482b91e6cbc53f0d23ceeeeee551290affa8d9dfc28636b50097408feb474358",
+            "alt": "Zurückbleiben bitte Hoodie in Mustard. Gelato garment preview."
+          },
+          "gallery": []
         }
       },
       "firstImageFraming": "upper-garment"
