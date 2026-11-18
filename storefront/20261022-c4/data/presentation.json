@@ -4664,6 +4664,32 @@
             "image": "berlin-cliches-20261117/garment-details/zurueckbleiben-bitte-classic-t-shirt--black.jpg",
             "alt": "Black classic T-shirt, centred chest print detail. Black Gildan 64000 Classic T-shirt with the Zurückbleiben bitte design printed large and centred across the chest.. Digital mockup."
           }
+        },
+        "Charcoal": {
+          "lead": {
+            "kind": "garmentPreview",
+            "image": "berlin-cliches-20261117/expanded-colors/zurueckbleiben-bitte-classic-t-shirt--charcoal--249d2b88-739a-4af5-b885-d2426dd1990f.jpg",
+            "sha256": "2bfc82953207d5614989b1dc922bd55f831870f5a5c4f046b274bdee11cc68c3",
+            "alt": "Zurückbleiben bitte Classic T-shirt in Charcoal. Gelato garment preview."
+          },
+          "printDetail": {
+            "image": "berlin-cliches-20261117/garment-details/zurueckbleiben-bitte-classic-t-shirt--charcoal.jpg",
+            "alt": "Charcoal classic T-shirt, centred chest print detail. Zurückbleiben bitte Classic T-shirt. Digital mockup."
+          },
+          "gallery": []
+        },
+        "Daisy": {
+          "lead": {
+            "kind": "garmentPreview",
+            "image": "berlin-cliches-20261117/expanded-colors/zurueckbleiben-bitte-classic-t-shirt--daisy--6c5930fb-4fa6-4e1c-b4a5-e42d35c589df.jpg",
+            "sha256": "382fecc038d8e4a0b4fe9a6f362905ac6b449e0e0950f5f0ac78dbcec989fa95",
+            "alt": "Zurückbleiben bitte Classic T-shirt in Daisy. Gelato garment preview."
+          },
+          "printDetail": {
+            "image": "berlin-cliches-20261117/garment-details/zurueckbleiben-bitte-classic-t-shirt--daisy.jpg",
+            "alt": "Daisy classic T-shirt, centred chest print detail. Zurückbleiben bitte Classic T-shirt. Digital mockup."
+          },
+          "gallery": []
         }
       },
       "firstImageFraming": "print-detail"
