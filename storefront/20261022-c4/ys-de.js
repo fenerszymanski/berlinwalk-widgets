@@ -44,6 +44,7 @@ export const DESIGN2_TEXT = Object.freeze({
   "Make your calendar": "Gestalte deinen Kalender",
   "Personal Berlin gifts": "Persönliche Berlin-Geschenke",
   "Explore Berlin": "Berlin entdecken",
+  "Explore": "Entdecken",
   "Posters": "Poster",
   "Gifts": "Geschenke",
   "All posters": "Alle Poster",

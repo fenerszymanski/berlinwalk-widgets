@@ -543,6 +543,12 @@ button.ys-words-tag:focus-visible{outline:2px solid var(--green);outline-offset:
 :host([design2]) .d2-personal-card .price{display:block;margin-bottom:12px}
 :host([design2]) .d2-personal-card .outline{font-size:14px;display:inline-flex;min-height:44px;align-items:center;justify-content:center}
 :host([design2]) .d2-shelf{padding-block:24px 34px}
+:host([design2]) .d2-clothing-head{display:flex;align-items:center;justify-content:space-between;gap:12px}
+:host([design2]) .d2-clothing-head .d2-section-title{margin-block:0}
+:host([design2]) .d2-clothing-head a{display:inline-flex;align-items:center;min-height:44px}
+:host([design2]) .d2-explore-compact{display:none}
+:host([design2]) .skeleton [data-d2-apparel-ready] a[href]{pointer-events:auto;cursor:pointer}
+:host([design2]) .d2-color-swatch:disabled{cursor:default;opacity:.55}
 :host([design2]) .d2-section-title{margin-bottom:24px;font-size:34px}
 :host([design2]) .d2-collections{display:flex;gap:12px 28px;border-bottom:1px solid #b7bfaf;flex-wrap:wrap;padding-bottom:14px;margin-bottom:26px}
 :host([design2]) .d2-collections a{font:500 19px/1.3 var(--serif);text-decoration:none;min-height:32px;display:flex;align-items:center}
@@ -663,10 +669,15 @@ button.ys-words-tag:focus-visible{outline:2px solid var(--green);outline-offset:
  :host([design2]) .d2-groups,:host([design2]) .d2-groups.d2-open{display:flex;grid-column:1/-1;grid-row:2;flex-direction:row;align-items:center;gap:18px;padding:2px 0 4px;border-top:0;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch}
  :host([design2]) .d2-groups::-webkit-scrollbar{display:none}
  :host([design2]) .d2-group{position:static;flex:none}
- :host([design2]) .d2-group>button{width:auto;font-size:17px;padding:8px 0}
+ :host([design2]) .d2-group>button{width:auto;min-height:44px;font-size:17px;padding:8px 0}
  :host([design2]) .d2-groups-de,:host([design2]) .d2-groups-de.d2-open{gap:10px}
  :host([design2]) .d2-groups-de .d2-group>button{font-size:15px}
  :host([design2]) .d2-menu{position:absolute;top:100%;left:0;right:0;min-width:0;max-width:none;max-height:70vh;overflow-y:auto;background:var(--cream);border:1px solid var(--line);border-width:1px 0;box-shadow:0 12px 24px #123d181c;padding:8px 16px 12px;z-index:50}
+}
+@media(max-width:380px){
+ :host([design2]) .d2-groups,:host([design2]) .d2-groups.d2-open{gap:8px;justify-content:space-between}
+ :host([design2]) .d2-explore-wide{display:none}
+ :host([design2]) .d2-explore-compact{display:inline}
 }
 @media(max-width:340px){
  :host([design2]) .d2-bar-row{gap:0 7px;padding-inline:12px}
@@ -674,6 +685,7 @@ button.ys-words-tag:focus-visible{outline:2px solid var(--green);outline-offset:
  :host([design2]) .d2-hero-copy{align-items:flex-start;flex-direction:column}
  :host([design2]) .d2-hero-copy h1{max-width:100%;font-size:38px}
  :host([design2]) .d2-grid,:host([design2]) .d2-recommendations[data-d2-recommendations] .d2-grid{grid-template-columns:minmax(0,1fr)}
+ :host([design2]) [data-d2-clothing] .d2-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
  :host([design2]) .d2-personal-card{grid-template-columns:35% 1fr;gap:12px}
  :host([design2]) .d2-personal-card h2{font-size:23px}
 }
