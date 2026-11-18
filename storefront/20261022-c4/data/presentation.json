@@ -6924,5 +6924,28 @@
       }
     ],
     "wixProductId": "d4539af9-3a96-a0e3-5cbd-97f7bf5146c5"
+  },
+  {
+    "id": "dl-hufeisensiedlung-horseshoe",
+    "name": "Hufeisensiedlung Printable Poster",
+    "place": "Hufeisensiedlung · A horseshoe around water",
+    "image": "hufeisensiedlung-horseshoe-fullart.jpg",
+    "alt": "Painted top-down view of the Hufeisensiedlung horseshoe around a blue pond, with green gardens, red-roofed homes and the Hufeisensiedlung, Berlin footer.",
+    "typeLine": "DIGITAL DOWNLOAD · 30 × 40 CM",
+    "kind": "digital",
+    "deliveryNote": "Digital download · 1 JPEG print file and a printing guide. No physical item.",
+    "deliveryDetails": "Your download includes one 3:4 sRGB JPEG, 3543 × 4724 px at 300 dpi for 30 × 40 cm, and a printing guide. The same file prints without cropping at 45 × 60 cm and 60 × 80 cm, with softer detail at larger sizes. No physical poster, frame or decor is included.",
+    "group": "stories",
+    "visualCreditsHtml": "<p>History references: Landesdenkmalamt Berlin, Großsiedlung Britz, and its Berlin Modernism housing estates overview, checked for my Hufeisensiedlung story.</p><p>Aerial reference: Geoportal Berlin / Senatsverwaltung, 2026 true orthophoto, truedop_2026, <a href=\"https://www.govdata.de/dl-de/zero-2-0\">Datenlizenz Deutschland Zero 2.0</a>. The building outline was checked against © OpenStreetMap contributors, <a href=\"https://www.openstreetmap.org/copyright\">Open Database Licence</a>; no measured outline was transferred into the artwork.</p><p>I interpreted the horseshoe as a painted top-down view. The pond is larger than in reality; the horseshoe, surrounding rows, paths, trees and colours are simplified. The artwork is not a map or a measured plan. It has no affiliation with UNESCO.</p>",
+    "sizeImages": {
+      "30x40 cm": "hufeisensiedlung-horseshoe-30x40.jpg"
+    },
+    "gallery": [
+      {
+        "image": "hufeisensiedlung-horseshoe-30x40.jpg",
+        "alt": "Complete artwork at 30 x 40 cm. Digital file only."
+      }
+    ],
+    "wixProductId": "684163ce-2c25-f8a9-9c7f-80a7f3038e05"
   }
 ]
