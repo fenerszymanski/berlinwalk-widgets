@@ -5631,6 +5631,24 @@
               "modelColorDe": "Schwarz"
             }
           ]
+        },
+        "Deep Teal": {
+          "lead": {
+            "kind": "garmentPreview",
+            "image": "berlin-cliches-20261117/expanded-colors/mit-karte-bitte-premium-t-shirt--deep-teal--26e8428c-6f63-49dd-8f8c-0ede9250ba34.jpg",
+            "sha256": "c6cc01d3877d7f9b04ee8117a2e6f90563e1c3a150e97a29e3006f397e544ded",
+            "alt": "Mit Karte bitte Premium T-shirt in Deep Teal. Gelato garment preview."
+          },
+          "gallery": []
+        },
+        "Asphalt": {
+          "lead": {
+            "kind": "garmentPreview",
+            "image": "berlin-cliches-20261117/expanded-colors/mit-karte-bitte-premium-t-shirt--asphalt--0f4a0d1b-8849-4919-9f99-cc68c11e2474.jpg",
+            "sha256": "7109f41e1c78d354cb74c123e65d886627e3e125247f005047a0d4d05060b0e0",
+            "alt": "Mit Karte bitte Premium T-shirt in Asphalt. Gelato garment preview."
+          },
+          "gallery": []
         }
       },
       "firstImageFraming": "upper-garment"
