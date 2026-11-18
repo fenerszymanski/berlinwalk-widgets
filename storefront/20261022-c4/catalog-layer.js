@@ -50,7 +50,7 @@ export function apparelMedia(product, color = product?.apparelMedia?.defaultColo
   const seen = new Set(lead ? [lead.image] : []);
   const colorGallery = list(entry?.gallery);
   const sharedGallery = list(config.sharedGallery);
-  const galleryItems = config.firstImageFraming === 'upper-garment'
+  const galleryItems = config.firstImageFraming === 'print-detail'
     ? [...colorGallery, ...sharedGallery]
     : [...sharedGallery, ...colorGallery];
   const gallery = lead ? galleryItems.filter(item => {
@@ -58,7 +58,8 @@ export function apparelMedia(product, color = product?.apparelMedia?.defaultColo
     seen.add(item.image); return true;
   }) : [];
   const video = lead && entry.video && ['file', 'poster', 'thumb', 'alt'].every(key => typeof entry.video[key] === 'string' && entry.video[key].trim()) && /\.mp4$/i.test(entry.video.file) ? entry.video : null;
-  return {color, lead, gallery, unavailable: !lead, ...(video ? {video} : {})};
+  const printDetail = lead && media(entry.printDetail) ? entry.printDetail : null;
+  return {color, lead, gallery, ...(printDetail ? {printDetail} : {}), unavailable: !lead, ...(video ? {video} : {})};
 }
 
 // The current bridge projects native Size/Color description lines to customText.

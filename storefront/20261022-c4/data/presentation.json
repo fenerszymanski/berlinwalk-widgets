@@ -4573,7 +4573,11 @@
             "sha256": "4b543e49de3f1f573151c58a14668f4b05e8e9c96a3562f6a782e7bfea2f9861",
             "alt": "White Gildan 64000 Classic T-shirt with the Zurückbleiben bitte design printed large and centred across the chest."
           },
-          "gallery": []
+          "gallery": [],
+          "printDetail": {
+            "image": "berlin-cliches-20261117/garment-details/zurueckbleiben-bitte-classic-t-shirt--white.jpg",
+            "alt": "White classic T-shirt, centred chest print detail. White Gildan 64000 Classic T-shirt with the Zurückbleiben bitte design printed large and centred across the chest.. Digital mockup."
+          }
         },
         "Black": {
           "lead": {
@@ -4595,10 +4599,14 @@
               "modelColor": "Black",
               "modelColorDe": "Schwarz"
             }
-          ]
+          ],
+          "printDetail": {
+            "image": "berlin-cliches-20261117/garment-details/zurueckbleiben-bitte-classic-t-shirt--black.jpg",
+            "alt": "Black classic T-shirt, centred chest print detail. Black Gildan 64000 Classic T-shirt with the Zurückbleiben bitte design printed large and centred across the chest.. Digital mockup."
+          }
         }
       },
-      "firstImageFraming": "upper-garment"
+      "firstImageFraming": "print-detail"
     },
     "enabled": true,
     "descriptionOverride": true,
@@ -4642,7 +4650,11 @@
             "sha256": "01765c348bdbbf042959a5b70e0712c3d7d8a7b18526294e701ab8bc537f9abb",
             "alt": "White Bella+Canvas 3001 Premium T-shirt with the Zurückbleiben bitte design printed large and centred across the chest."
           },
-          "gallery": []
+          "gallery": [],
+          "printDetail": {
+            "image": "berlin-cliches-20261117/garment-details/zurueckbleiben-bitte-premium-t-shirt--white.jpg",
+            "alt": "White premium T-shirt, centred chest print detail. White Bella+Canvas 3001 Premium T-shirt with the Zurückbleiben bitte design printed large and centred across the chest.. Digital mockup."
+          }
         },
         "Black": {
           "lead": {
@@ -4658,7 +4670,11 @@
               "modelColor": "Black",
               "modelColorDe": "Schwarz"
             }
-          ]
+          ],
+          "printDetail": {
+            "image": "berlin-cliches-20261117/garment-details/zurueckbleiben-bitte-premium-t-shirt--black.jpg",
+            "alt": "Black premium T-shirt, centred chest print detail. Black Bella+Canvas 3001 Premium T-shirt with the Zurückbleiben bitte design printed large and centred across the chest.. Digital mockup."
+          }
         },
         "Asphalt": {
           "lead": {
@@ -4667,7 +4683,11 @@
             "sha256": "06edefa5204d3698d1380b7c35ec0652ba21af80efc85b9b97148a103ad5c1c5",
             "alt": "Zurückbleiben bitte Premium T-shirt in Asphalt. Gelato garment preview."
           },
-          "gallery": []
+          "gallery": [],
+          "printDetail": {
+            "image": "berlin-cliches-20261117/garment-details/zurueckbleiben-bitte-premium-t-shirt--asphalt.jpg",
+            "alt": "Asphalt premium T-shirt, centred chest print detail. Zurückbleiben bitte Premium T-shirt. Digital mockup."
+          }
         },
         "Red": {
           "lead": {
@@ -4676,10 +4696,14 @@
             "sha256": "868f8e96ee2d8539a54412148d12855d13d3ab5adbe48bc27511f60d119ae404",
             "alt": "Zurückbleiben bitte Premium T-shirt in Red. Gelato garment preview."
           },
-          "gallery": []
+          "gallery": [],
+          "printDetail": {
+            "image": "berlin-cliches-20261117/garment-details/zurueckbleiben-bitte-premium-t-shirt--red.jpg",
+            "alt": "Red premium T-shirt, centred chest print detail. Zurückbleiben bitte Premium T-shirt. Digital mockup."
+          }
         }
       },
-      "firstImageFraming": "upper-garment"
+      "firstImageFraming": "print-detail"
     },
     "enabled": true,
     "descriptionOverride": true,
@@ -4729,7 +4753,11 @@
             "sha256": "c4caf70810dce68d5896e7946d4c27d066f5406e68f85882389a147bdba0b4f5",
             "alt": "White Gildan SF500 hoodie with the Zurückbleiben bitte design printed large and centred across the chest."
           },
-          "gallery": []
+          "gallery": [],
+          "printDetail": {
+            "image": "berlin-cliches-20261117/garment-details/zurueckbleiben-bitte-hoodie--white.jpg",
+            "alt": "White hoodie pullover, centred chest print detail. White Gildan SF500 hoodie with the Zurückbleiben bitte design printed large and centred across the chest.. Digital mockup."
+          }
         },
         "Black": {
           "lead": {
@@ -4751,7 +4779,11 @@
               "modelColor": "Black",
               "modelColorDe": "Schwarz"
             }
-          ]
+          ],
+          "printDetail": {
+            "image": "berlin-cliches-20261117/garment-details/zurueckbleiben-bitte-hoodie--black.jpg",
+            "alt": "Black hoodie pullover, centred chest print detail. Black Gildan SF500 hoodie with the Zurückbleiben bitte design printed large and centred across the chest.. Digital mockup."
+          }
         },
         "Charcoal": {
           "lead": {
@@ -4760,7 +4792,11 @@
             "sha256": "f1506c1ab7037ae447631e0ed4285d262dac6d1829a736b7e041495d13005d1a",
             "alt": "Zurückbleiben bitte Hoodie in Charcoal. Gelato garment preview."
           },
-          "gallery": []
+          "gallery": [],
+          "printDetail": {
+            "image": "berlin-cliches-20261117/garment-details/zurueckbleiben-bitte-hoodie--charcoal.jpg",
+            "alt": "Charcoal hoodie pullover, centred chest print detail. Zurückbleiben bitte Hoodie. Digital mockup."
+          }
         },
         "Mustard": {
           "lead": {
@@ -4769,10 +4805,14 @@
             "sha256": "482b91e6cbc53f0d23ceeeeee551290affa8d9dfc28636b50097408feb474358",
             "alt": "Zurückbleiben bitte Hoodie in Mustard. Gelato garment preview."
           },
-          "gallery": []
+          "gallery": [],
+          "printDetail": {
+            "image": "berlin-cliches-20261117/garment-details/zurueckbleiben-bitte-hoodie--mustard.jpg",
+            "alt": "Mustard hoodie pullover, centred chest print detail. Zurückbleiben bitte Hoodie. Digital mockup."
+          }
         }
       },
-      "firstImageFraming": "upper-garment"
+      "firstImageFraming": "print-detail"
     },
     "enabled": true,
     "descriptionOverride": true,
@@ -4817,7 +4857,11 @@
             "sha256": "69b63ee9f0be4873f5c669acdbf8d7d6cdb3710b126c60bbd4a4fc09b0fc9f10",
             "alt": "White Gildan 64000 Classic T-shirt with the Zug fällt aus design printed small on the left chest."
           },
-          "gallery": []
+          "gallery": [],
+          "printDetail": {
+            "image": "berlin-cliches-20261117/garment-details/zug-faellt-aus-classic-t-shirt--white.jpg",
+            "alt": "White classic T-shirt, left-chest print detail. White Gildan 64000 Classic T-shirt with the Zug fällt aus design printed small on the left chest.. Digital mockup."
+          }
         },
         "Black": {
           "lead": {
@@ -4833,7 +4877,11 @@
               "modelColor": "Black",
               "modelColorDe": "Schwarz"
             }
-          ]
+          ],
+          "printDetail": {
+            "image": "berlin-cliches-20261117/garment-details/zug-faellt-aus-classic-t-shirt--black.jpg",
+            "alt": "Black classic T-shirt, left-chest print detail. Black Gildan 64000 Classic T-shirt with the Zug fällt aus design printed small on the left chest.. Digital mockup."
+          }
         },
         "Maroon": {
           "lead": {
@@ -4842,7 +4890,11 @@
             "sha256": "4b3f667b1b54f428874e28f340f3026e95059c601a875d168e4d29a3d9642c36",
             "alt": "Zug fällt aus Classic T-shirt in Maroon. Gelato garment preview."
           },
-          "gallery": []
+          "gallery": [],
+          "printDetail": {
+            "image": "berlin-cliches-20261117/garment-details/zug-faellt-aus-classic-t-shirt--maroon.jpg",
+            "alt": "Maroon classic T-shirt, left-chest print detail. Zug fällt aus Classic T-shirt. Digital mockup."
+          }
         },
         "RS Sport Grey": {
           "lead": {
@@ -4851,10 +4903,14 @@
             "sha256": "e10a1e946c3a9c562be588afea9c1f823a6a3ba1083bea969a1d8ea4e6ee3876",
             "alt": "Zug fällt aus Classic T-shirt in RS Sport Grey. Gelato garment preview."
           },
-          "gallery": []
+          "gallery": [],
+          "printDetail": {
+            "image": "berlin-cliches-20261117/garment-details/zug-faellt-aus-classic-t-shirt--rs-sport-grey.jpg",
+            "alt": "RS Sport Grey classic T-shirt, left-chest print detail. Zug fällt aus Classic T-shirt. Digital mockup."
+          }
         }
       },
-      "firstImageFraming": "upper-garment"
+      "firstImageFraming": "print-detail"
     },
     "enabled": true,
     "descriptionOverride": true,
@@ -4917,7 +4973,11 @@
               "modelColor": "White",
               "modelColorDe": "Weiß"
             }
-          ]
+          ],
+          "printDetail": {
+            "image": "berlin-cliches-20261117/garment-details/zug-faellt-aus-premium-t-shirt--white.jpg",
+            "alt": "White premium T-shirt, left-chest print detail. White Bella+Canvas 3001 Premium T-shirt with the Zug fällt aus design printed small on the left chest.. Digital mockup."
+          }
         },
         "Black": {
           "lead": {
@@ -4926,7 +4986,11 @@
             "sha256": "80bee473cff8a9046438c938e796151f7f02c8aebd4e1ff487436e5d0c5dd7ac",
             "alt": "Black Bella+Canvas 3001 Premium T-shirt with the Zug fällt aus design printed small on the left chest."
           },
-          "gallery": []
+          "gallery": [],
+          "printDetail": {
+            "image": "berlin-cliches-20261117/garment-details/zug-faellt-aus-premium-t-shirt--black.jpg",
+            "alt": "Black premium T-shirt, left-chest print detail. Black Bella+Canvas 3001 Premium T-shirt with the Zug fällt aus design printed small on the left chest.. Digital mockup."
+          }
         },
         "Maroon": {
           "lead": {
@@ -4935,7 +4999,11 @@
             "sha256": "b78ebc3f732a820259e59eaca07558dd8ddf1e125df50e268ce39623ccfb84ad",
             "alt": "Zug fällt aus Premium T-shirt in Maroon. Gelato garment preview."
           },
-          "gallery": []
+          "gallery": [],
+          "printDetail": {
+            "image": "berlin-cliches-20261117/garment-details/zug-faellt-aus-premium-t-shirt--maroon.jpg",
+            "alt": "Maroon premium T-shirt, left-chest print detail. Zug fällt aus Premium T-shirt. Digital mockup."
+          }
         },
         "Deep Teal": {
           "lead": {
@@ -4944,10 +5012,14 @@
             "sha256": "80a869573960ef9fa5468c28fa0877d0c7eb53fbde4be9bfd19db68fbe36251c",
             "alt": "Zug fällt aus Premium T-shirt in Deep Teal. Gelato garment preview."
           },
-          "gallery": []
+          "gallery": [],
+          "printDetail": {
+            "image": "berlin-cliches-20261117/garment-details/zug-faellt-aus-premium-t-shirt--deep-teal.jpg",
+            "alt": "Deep Teal premium T-shirt, left-chest print detail. Zug fällt aus Premium T-shirt. Digital mockup."
+          }
         }
       },
-      "firstImageFraming": "upper-garment"
+      "firstImageFraming": "print-detail"
     },
     "enabled": true,
     "descriptionOverride": true,
@@ -4991,7 +5063,11 @@
             "sha256": "59621cae8c4b8ebdb45edad8299d4d49cca5f44662b80a7a7136ed1953b61ec4",
             "alt": "White Gildan SF500 hoodie with the Zug fällt aus design printed small on the left chest."
           },
-          "gallery": []
+          "gallery": [],
+          "printDetail": {
+            "image": "berlin-cliches-20261117/garment-details/zug-faellt-aus-hoodie--white.jpg",
+            "alt": "White hoodie pullover, left-chest print detail. White Gildan SF500 hoodie with the Zug fällt aus design printed small on the left chest.. Digital mockup."
+          }
         },
         "Black": {
           "lead": {
@@ -5007,7 +5083,11 @@
               "modelColor": "Black",
               "modelColorDe": "Schwarz"
             }
-          ]
+          ],
+          "printDetail": {
+            "image": "berlin-cliches-20261117/garment-details/zug-faellt-aus-hoodie--black.jpg",
+            "alt": "Black hoodie pullover, left-chest print detail. Black Gildan SF500 hoodie with the Zug fällt aus design printed small on the left chest.. Digital mockup."
+          }
         },
         "Maroon": {
           "lead": {
@@ -5016,7 +5096,11 @@
             "sha256": "ed014292555c3b20ca90f16ffeeb89169f3963f6dc9c6519326d371a6b10db52",
             "alt": "Zug fällt aus Hoodie in Maroon. Gelato garment preview."
           },
-          "gallery": []
+          "gallery": [],
+          "printDetail": {
+            "image": "berlin-cliches-20261117/garment-details/zug-faellt-aus-hoodie--maroon.jpg",
+            "alt": "Maroon hoodie pullover, left-chest print detail. Zug fällt aus Hoodie. Digital mockup."
+          }
         },
         "Sky": {
           "lead": {
@@ -5025,10 +5109,14 @@
             "sha256": "4ae4f0aad415c43ea4b0a1eaba56d647ea67eb921709ea5e9f6deb8c11416ae1",
             "alt": "Zug fällt aus Hoodie in Sky. Gelato garment preview."
           },
-          "gallery": []
+          "gallery": [],
+          "printDetail": {
+            "image": "berlin-cliches-20261117/garment-details/zug-faellt-aus-hoodie--sky.jpg",
+            "alt": "Sky hoodie pullover, left-chest print detail. Zug fällt aus Hoodie. Digital mockup."
+          }
         }
       },
-      "firstImageFraming": "upper-garment"
+      "firstImageFraming": "print-detail"
     },
     "enabled": true,
     "descriptionOverride": true,
@@ -5092,7 +5180,11 @@
               "modelColor": "White",
               "modelColorDe": "Weiß"
             }
-          ]
+          ],
+          "printDetail": {
+            "image": "berlin-cliches-20261117/garment-details/doner-bear-queue-classic-t-shirt--white.jpg",
+            "alt": "White classic T-shirt, left-chest print detail. White Gildan 64000 Classic T-shirt with the Döner Bear in the Queue design; A rear-facing bear holding a beer joins a queue at a döner counter.. Digital mockup."
+          }
         },
         "Black": {
           "lead": {
@@ -5101,7 +5193,11 @@
             "sha256": "06bf1a54c5323ad29e8a6981d820e5770cf634dd974a2a6691d83afb3f5a22f7",
             "alt": "Black Gildan 64000 Classic T-shirt with the Döner Bear in the Queue design; A rear-facing bear holding a beer joins a queue at a döner counter."
           },
-          "gallery": []
+          "gallery": [],
+          "printDetail": {
+            "image": "berlin-cliches-20261117/garment-details/doner-bear-queue-classic-t-shirt--black.jpg",
+            "alt": "Black classic T-shirt, left-chest print detail. Black Gildan 64000 Classic T-shirt with the Döner Bear in the Queue design; A rear-facing bear holding a beer joins a queue at a döner counter.. Digital mockup."
+          }
         },
         "Military Green": {
           "lead": {
@@ -5110,7 +5206,11 @@
             "sha256": "fc7a1d230a2048dde027cb07af56e0c7c4f1e58960fe357db6140096ca4433d8",
             "alt": "Döner Bear in the Queue Classic T-shirt in Military Green. Gelato garment preview."
           },
-          "gallery": []
+          "gallery": [],
+          "printDetail": {
+            "image": "berlin-cliches-20261117/garment-details/doner-bear-queue-classic-t-shirt--military-green.jpg",
+            "alt": "Military Green classic T-shirt, left-chest print detail. Döner Bear in the Queue Classic T-shirt. Digital mockup."
+          }
         },
         "Sand": {
           "lead": {
@@ -5119,10 +5219,14 @@
             "sha256": "420a1995f475d8717e0a0895a276ebf501d6297f1d13e7471202e5c9c98904ae",
             "alt": "Döner Bear in the Queue Classic T-shirt in Sand. Gelato garment preview."
           },
-          "gallery": []
+          "gallery": [],
+          "printDetail": {
+            "image": "berlin-cliches-20261117/garment-details/doner-bear-queue-classic-t-shirt--sand.jpg",
+            "alt": "Sand classic T-shirt, left-chest print detail. Döner Bear in the Queue Classic T-shirt. Digital mockup."
+          }
         }
       },
-      "firstImageFraming": "upper-garment"
+      "firstImageFraming": "print-detail"
     },
     "enabled": true,
     "descriptionOverride": true,
@@ -5172,7 +5276,11 @@
             "sha256": "17a0a55ae30700019de1925eeffbf734f4e6bb3d20e8f1f142ed9aaed6a03343",
             "alt": "White Bella + Canvas 3001 Premium T-shirt with the Döner Bear in the Queue design; A rear-facing bear holding a beer joins a queue at a döner counter."
           },
-          "gallery": []
+          "gallery": [],
+          "printDetail": {
+            "image": "berlin-cliches-20261117/garment-details/doner-bear-queue-premium-t-shirt--white.jpg",
+            "alt": "White premium T-shirt, left-chest print detail. White Bella + Canvas 3001 Premium T-shirt with the Döner Bear in the Queue design; A rear-facing bear holding a beer joins a queue at a döner counter.. Digital mockup."
+          }
         },
         "Black": {
           "lead": {
@@ -5194,7 +5302,11 @@
               "modelColor": "Black",
               "modelColorDe": "Schwarz"
             }
-          ]
+          ],
+          "printDetail": {
+            "image": "berlin-cliches-20261117/garment-details/doner-bear-queue-premium-t-shirt--black.jpg",
+            "alt": "Black premium T-shirt, left-chest print detail. Black Bella + Canvas 3001 Premium T-shirt with the Döner Bear in the Queue design; A rear-facing bear holding a beer joins a queue at a döner counter.. Digital mockup."
+          }
         },
         "Forest": {
           "lead": {
@@ -5203,7 +5315,11 @@
             "sha256": "4922fd3470dcf58c4074b5f817fab795fa61ca378d73f3a18bf80b5841f50b0d",
             "alt": "Döner Bear in the Queue Premium T-shirt in Forest. Gelato garment preview."
           },
-          "gallery": []
+          "gallery": [],
+          "printDetail": {
+            "image": "berlin-cliches-20261117/garment-details/doner-bear-queue-premium-t-shirt--forest.jpg",
+            "alt": "Forest premium T-shirt, left-chest print detail. Döner Bear in the Queue Premium T-shirt. Digital mockup."
+          }
         },
         "Heather Mint": {
           "lead": {
@@ -5212,10 +5328,14 @@
             "sha256": "61b1aa0d7c95059a170801794f86b329d1e113435da39ac659af20571bd06f8c",
             "alt": "Döner Bear in the Queue Premium T-shirt in Heather Mint. Gelato garment preview."
           },
-          "gallery": []
+          "gallery": [],
+          "printDetail": {
+            "image": "berlin-cliches-20261117/garment-details/doner-bear-queue-premium-t-shirt--heather-mint.jpg",
+            "alt": "Heather Mint premium T-shirt, left-chest print detail. Döner Bear in the Queue Premium T-shirt. Digital mockup."
+          }
         }
       },
-      "firstImageFraming": "upper-garment"
+      "firstImageFraming": "print-detail"
     },
     "enabled": true,
     "descriptionOverride": true,
@@ -5272,7 +5392,11 @@
               "modelColor": "White",
               "modelColorDe": "Weiß"
             }
-          ]
+          ],
+          "printDetail": {
+            "image": "berlin-cliches-20261117/garment-details/doner-bear-queue-hoodie--white.jpg",
+            "alt": "White hoodie pullover, left-chest print detail. White Gildan SF500 hoodie with the Döner Bear in the Queue design; A rear-facing bear holding a beer joins a queue at a döner counter.. Digital mockup."
+          }
         },
         "Black": {
           "lead": {
@@ -5281,7 +5405,11 @@
             "sha256": "f7e709ece6b91efa20fa136f280494a190fd090b244d939a3842d57e0e922421",
             "alt": "Black Gildan SF500 hoodie with the Döner Bear in the Queue design; A rear-facing bear holding a beer joins a queue at a döner counter."
           },
-          "gallery": []
+          "gallery": [],
+          "printDetail": {
+            "image": "berlin-cliches-20261117/garment-details/doner-bear-queue-hoodie--black.jpg",
+            "alt": "Black hoodie pullover, left-chest print detail. Black Gildan SF500 hoodie with the Döner Bear in the Queue design; A rear-facing bear holding a beer joins a queue at a döner counter.. Digital mockup."
+          }
         },
         "Military Green": {
           "lead": {
@@ -5290,7 +5418,11 @@
             "sha256": "cf40561c0d7c73efedd66da879277be0ed63ef365d64eac4a5ae94125c8ee30a",
             "alt": "Döner Bear in the Queue Hoodie in Military Green. Gelato garment preview."
           },
-          "gallery": []
+          "gallery": [],
+          "printDetail": {
+            "image": "berlin-cliches-20261117/garment-details/doner-bear-queue-hoodie--military-green.jpg",
+            "alt": "Military Green hoodie pullover, left-chest print detail. Döner Bear in the Queue Hoodie. Digital mockup."
+          }
         },
         "Sand": {
           "lead": {
@@ -5306,10 +5438,14 @@
               "modelColor": "Sand",
               "modelColorDe": "Sand"
             }
-          ]
+          ],
+          "printDetail": {
+            "image": "berlin-cliches-20261117/garment-details/doner-bear-queue-hoodie--sand.jpg",
+            "alt": "Sand hoodie pullover, left-chest print detail. Döner Bear in the Queue Hoodie. Digital mockup."
+          }
         }
       },
-      "firstImageFraming": "upper-garment"
+      "firstImageFraming": "print-detail"
     },
     "enabled": true,
     "descriptionOverride": true,
@@ -5354,7 +5490,11 @@
             "sha256": "91016cc0ce268295a00669634966b33b88c1c563feb4d811b85688a5a529195b",
             "alt": "White Gildan 64000 Classic T-shirt with the Döner Bear design; A seated bear holding and eating a döner."
           },
-          "gallery": []
+          "gallery": [],
+          "printDetail": {
+            "image": "berlin-cliches-20261117/garment-details/doner-bear-eating-classic-t-shirt--white.jpg",
+            "alt": "White classic T-shirt, left-chest print detail. White Gildan 64000 Classic T-shirt with the Döner Bear design; A seated bear holding and eating a döner.. Digital mockup."
+          }
         },
         "Black": {
           "lead": {
@@ -5370,7 +5510,11 @@
               "modelColor": "Black",
               "modelColorDe": "Schwarz"
             }
-          ]
+          ],
+          "printDetail": {
+            "image": "berlin-cliches-20261117/garment-details/doner-bear-eating-classic-t-shirt--black.jpg",
+            "alt": "Black classic T-shirt, left-chest print detail. Black Gildan 64000 Classic T-shirt with the Döner Bear design; A seated bear holding and eating a döner.. Digital mockup."
+          }
         },
         "Maroon": {
           "lead": {
@@ -5379,7 +5523,11 @@
             "sha256": "fb0bfc78b000259435e62e7498e1c440743bac084e9d0974c10323198b4272ab",
             "alt": "Döner Bear Classic T-shirt in Maroon. Gelato garment preview."
           },
-          "gallery": []
+          "gallery": [],
+          "printDetail": {
+            "image": "berlin-cliches-20261117/garment-details/doner-bear-eating-classic-t-shirt--maroon.jpg",
+            "alt": "Maroon classic T-shirt, left-chest print detail. Döner Bear Classic T-shirt. Digital mockup."
+          }
         },
         "Natural": {
           "lead": {
@@ -5388,10 +5536,14 @@
             "sha256": "71a9d231aa94ae7879ecb6e8d9dffd1f29e52d1db18253402542aee55b0a8177",
             "alt": "Döner Bear Classic T-shirt in Natural. Gelato garment preview."
           },
-          "gallery": []
+          "gallery": [],
+          "printDetail": {
+            "image": "berlin-cliches-20261117/garment-details/doner-bear-eating-classic-t-shirt--natural.jpg",
+            "alt": "Natural classic T-shirt, left-chest print detail. Döner Bear Classic T-shirt. Digital mockup."
+          }
         }
       },
-      "firstImageFraming": "upper-garment"
+      "firstImageFraming": "print-detail"
     },
     "enabled": true,
     "descriptionOverride": true,
@@ -5442,7 +5594,11 @@
               "modelColor": "White",
               "modelColorDe": "Weiß"
             }
-          ]
+          ],
+          "printDetail": {
+            "image": "berlin-cliches-20261117/garment-details/doner-bear-eating-premium-t-shirt--white.jpg",
+            "alt": "White premium T-shirt, left-chest print detail. White Bella + Canvas 3001 Premium T-shirt with the Döner Bear design; A seated bear holding and eating a döner.. Digital mockup."
+          }
         },
         "Black": {
           "lead": {
@@ -5451,10 +5607,14 @@
             "sha256": "d0e914edc69a55bd21bcb471cf4ab2d8e5632ee26cd48fbf00285e723a5cae1e",
             "alt": "Black Bella + Canvas 3001 Premium T-shirt with the Döner Bear design; A seated bear holding and eating a döner."
           },
-          "gallery": []
+          "gallery": [],
+          "printDetail": {
+            "image": "berlin-cliches-20261117/garment-details/doner-bear-eating-premium-t-shirt--black.jpg",
+            "alt": "Black premium T-shirt, left-chest print detail. Black Bella + Canvas 3001 Premium T-shirt with the Döner Bear design; A seated bear holding and eating a döner.. Digital mockup."
+          }
         }
       },
-      "firstImageFraming": "upper-garment"
+      "firstImageFraming": "print-detail"
     },
     "enabled": true,
     "descriptionOverride": true,
@@ -5504,7 +5664,11 @@
             "sha256": "921cd8d366ed57115d8bf423ca6181153a2ad76afe45e298b76b382fa0956c0f",
             "alt": "White Gildan SF500 hoodie with the Döner Bear design; A seated bear holding and eating a döner."
           },
-          "gallery": []
+          "gallery": [],
+          "printDetail": {
+            "image": "berlin-cliches-20261117/garment-details/doner-bear-eating-hoodie--white.jpg",
+            "alt": "White hoodie pullover, left-chest print detail. White Gildan SF500 hoodie with the Döner Bear design; A seated bear holding and eating a döner.. Digital mockup."
+          }
         },
         "Black": {
           "lead": {
@@ -5526,7 +5690,11 @@
               "modelColor": "Black",
               "modelColorDe": "Schwarz"
             }
-          ]
+          ],
+          "printDetail": {
+            "image": "berlin-cliches-20261117/garment-details/doner-bear-eating-hoodie--black.jpg",
+            "alt": "Black hoodie pullover, left-chest print detail. Black Gildan SF500 hoodie with the Döner Bear design; A seated bear holding and eating a döner.. Digital mockup."
+          }
         },
         "Cocoa": {
           "lead": {
@@ -5535,7 +5703,11 @@
             "sha256": "24b4c2d911d93ce232816545e2fc2bd2db2a4db54df34fb06e94f235007062db",
             "alt": "Döner Bear Hoodie in Cocoa. Gelato garment preview."
           },
-          "gallery": []
+          "gallery": [],
+          "printDetail": {
+            "image": "berlin-cliches-20261117/garment-details/doner-bear-eating-hoodie--cocoa.jpg",
+            "alt": "Cocoa hoodie pullover, left-chest print detail. Döner Bear Hoodie. Digital mockup."
+          }
         },
         "Cement": {
           "lead": {
@@ -5544,10 +5716,14 @@
             "sha256": "a153e303aa7b237eefe80c801e567535727679a0929507640e450ea7701eb30d",
             "alt": "Döner Bear Hoodie in Cement. Gelato garment preview."
           },
-          "gallery": []
+          "gallery": [],
+          "printDetail": {
+            "image": "berlin-cliches-20261117/garment-details/doner-bear-eating-hoodie--cement.jpg",
+            "alt": "Cement hoodie pullover, left-chest print detail. Döner Bear Hoodie. Digital mockup."
+          }
         }
       },
-      "firstImageFraming": "upper-garment"
+      "firstImageFraming": "print-detail"
     },
     "enabled": true,
     "descriptionOverride": true,
@@ -5605,7 +5781,11 @@
               "modelColor": "White",
               "modelColorDe": "Weiß"
             }
-          ]
+          ],
+          "printDetail": {
+            "image": "berlin-cliches-20261117/garment-details/mit-karte-bitte-classic-t-shirt--white.jpg",
+            "alt": "White classic T-shirt, left-chest print detail. White Gildan 64000 Classic T-shirt with the Mit Karte bitte design; A supermarket checkout with a banana, milk carton, card terminal and card above the handwritten words Mit Karte bitte.. Digital mockup."
+          }
         },
         "Black": {
           "lead": {
@@ -5614,7 +5794,11 @@
             "sha256": "2dbebdc24790475472cdcc4536455fd202ab9e05bcba08d2e2f1b9f418e0ae90",
             "alt": "Black Gildan 64000 Classic T-shirt with the Mit Karte bitte design; A supermarket checkout with a banana, milk carton, card terminal and card above the handwritten words Mit Karte bitte."
           },
-          "gallery": []
+          "gallery": [],
+          "printDetail": {
+            "image": "berlin-cliches-20261117/garment-details/mit-karte-bitte-classic-t-shirt--black.jpg",
+            "alt": "Black classic T-shirt, left-chest print detail. Black Gildan 64000 Classic T-shirt with the Mit Karte bitte design; A supermarket checkout with a banana, milk carton, card terminal and card above the handwritten words Mit Karte bitte.. Digital mockup."
+          }
         },
         "Navy": {
           "lead": {
@@ -5630,7 +5814,11 @@
               "modelColor": "Navy",
               "modelColorDe": "Marineblau"
             }
-          ]
+          ],
+          "printDetail": {
+            "image": "berlin-cliches-20261117/garment-details/mit-karte-bitte-classic-t-shirt--navy.jpg",
+            "alt": "Navy classic T-shirt, left-chest print detail. Mit Karte bitte Classic T-shirt. Digital mockup."
+          }
         },
         "RS Sport Grey": {
           "lead": {
@@ -5639,10 +5827,14 @@
             "sha256": "8703071df6c4db3464aa59955b93947111256b8706553e5f8d924994fe02c7ed",
             "alt": "Mit Karte bitte Classic T-shirt in RS Sport Grey. Gelato garment preview."
           },
-          "gallery": []
+          "gallery": [],
+          "printDetail": {
+            "image": "berlin-cliches-20261117/garment-details/mit-karte-bitte-classic-t-shirt--rs-sport-grey.jpg",
+            "alt": "RS Sport Grey classic T-shirt, left-chest print detail. Mit Karte bitte Classic T-shirt. Digital mockup."
+          }
         }
       },
-      "firstImageFraming": "upper-garment"
+      "firstImageFraming": "print-detail"
     },
     "enabled": true,
     "descriptionOverride": true,
@@ -5686,7 +5878,11 @@
             "sha256": "ac7fa18907388f1e2b87969049184fd894b7cf9d43559f510290a0225ff536ed",
             "alt": "White Bella + Canvas 3001 Premium T-shirt with the Mit Karte bitte design; A supermarket checkout with a banana, milk carton, card terminal and card above the handwritten words Mit Karte bitte."
           },
-          "gallery": []
+          "gallery": [],
+          "printDetail": {
+            "image": "berlin-cliches-20261117/garment-details/mit-karte-bitte-premium-t-shirt--white.jpg",
+            "alt": "White premium T-shirt, left-chest print detail. White Bella + Canvas 3001 Premium T-shirt with the Mit Karte bitte design; A supermarket checkout with a banana, milk carton, card terminal and card above the handwritten words Mit Karte bitte.. Digital mockup."
+          }
         },
         "Black": {
           "lead": {
@@ -5702,7 +5898,11 @@
               "modelColor": "Black",
               "modelColorDe": "Schwarz"
             }
-          ]
+          ],
+          "printDetail": {
+            "image": "berlin-cliches-20261117/garment-details/mit-karte-bitte-premium-t-shirt--black.jpg",
+            "alt": "Black premium T-shirt, left-chest print detail. Black Bella + Canvas 3001 Premium T-shirt with the Mit Karte bitte design; A supermarket checkout with a banana, milk carton, card terminal and card above the handwritten words Mit Karte bitte.. Digital mockup."
+          }
         },
         "Deep Teal": {
           "lead": {
@@ -5711,7 +5911,11 @@
             "sha256": "c6cc01d3877d7f9b04ee8117a2e6f90563e1c3a150e97a29e3006f397e544ded",
             "alt": "Mit Karte bitte Premium T-shirt in Deep Teal. Gelato garment preview."
           },
-          "gallery": []
+          "gallery": [],
+          "printDetail": {
+            "image": "berlin-cliches-20261117/garment-details/mit-karte-bitte-premium-t-shirt--deep-teal.jpg",
+            "alt": "Deep Teal premium T-shirt, left-chest print detail. Mit Karte bitte Premium T-shirt. Digital mockup."
+          }
         },
         "Asphalt": {
           "lead": {
@@ -5720,10 +5924,14 @@
             "sha256": "7109f41e1c78d354cb74c123e65d886627e3e125247f005047a0d4d05060b0e0",
             "alt": "Mit Karte bitte Premium T-shirt in Asphalt. Gelato garment preview."
           },
-          "gallery": []
+          "gallery": [],
+          "printDetail": {
+            "image": "berlin-cliches-20261117/garment-details/mit-karte-bitte-premium-t-shirt--asphalt.jpg",
+            "alt": "Asphalt premium T-shirt, left-chest print detail. Mit Karte bitte Premium T-shirt. Digital mockup."
+          }
         }
       },
-      "firstImageFraming": "upper-garment"
+      "firstImageFraming": "print-detail"
     },
     "enabled": true,
     "descriptionOverride": true,
@@ -5773,7 +5981,11 @@
             "sha256": "ffd2b17935477c8304a063ef468c38137f48db6064f840b995b5eb0aeb8f4587",
             "alt": "White Gildan SF500 hoodie with the Mit Karte bitte design; A supermarket checkout with a banana, milk carton, card terminal and card above the handwritten words Mit Karte bitte."
           },
-          "gallery": []
+          "gallery": [],
+          "printDetail": {
+            "image": "berlin-cliches-20261117/garment-details/mit-karte-bitte-hoodie--white.jpg",
+            "alt": "White hoodie pullover, left-chest print detail. White Gildan SF500 hoodie with the Mit Karte bitte design; A supermarket checkout with a banana, milk carton, card terminal and card above the handwritten words Mit Karte bitte.. Digital mockup."
+          }
         },
         "Black": {
           "lead": {
@@ -5795,7 +6007,11 @@
               "modelColor": "Black",
               "modelColorDe": "Schwarz"
             }
-          ]
+          ],
+          "printDetail": {
+            "image": "berlin-cliches-20261117/garment-details/mit-karte-bitte-hoodie--black.jpg",
+            "alt": "Black hoodie pullover, left-chest print detail. Black Gildan SF500 hoodie with the Mit Karte bitte design; A supermarket checkout with a banana, milk carton, card terminal and card above the handwritten words Mit Karte bitte.. Digital mockup."
+          }
         },
         "Stone Blue": {
           "lead": {
@@ -5804,7 +6020,11 @@
             "sha256": "d17a219f2fbe93c51d39b0f34b36cf6fcfc24b84b38fed256efbd9668023d5fc",
             "alt": "Mit Karte bitte Hoodie in Stone Blue. Gelato garment preview."
           },
-          "gallery": []
+          "gallery": [],
+          "printDetail": {
+            "image": "berlin-cliches-20261117/garment-details/mit-karte-bitte-hoodie--stone-blue.jpg",
+            "alt": "Stone Blue hoodie pullover, left-chest print detail. Mit Karte bitte Hoodie. Digital mockup."
+          }
         },
         "Ring Spun Sports Grey": {
           "lead": {
@@ -5813,10 +6033,14 @@
             "sha256": "3ac44b79dcb1a87e34a4297c5b182bafa11c7845e4eeb1889f4ff08015006bff",
             "alt": "Mit Karte bitte Hoodie in Ring Spun Sports Grey. Gelato garment preview."
           },
-          "gallery": []
+          "gallery": [],
+          "printDetail": {
+            "image": "berlin-cliches-20261117/garment-details/mit-karte-bitte-hoodie--ring-spun-sports-grey.jpg",
+            "alt": "Ring Spun Sports Grey hoodie pullover, left-chest print detail. Mit Karte bitte Hoodie. Digital mockup."
+          }
         }
       },
-      "firstImageFraming": "upper-garment"
+      "firstImageFraming": "print-detail"
     },
     "enabled": true,
     "descriptionOverride": true,
@@ -5880,7 +6104,11 @@
               "modelColor": "White",
               "modelColorDe": "Weiß"
             }
-          ]
+          ],
+          "printDetail": {
+            "image": "berlin-cliches-20261117/garment-details/zu-verschenken-classic-t-shirt--white.jpg",
+            "alt": "White classic T-shirt, left-chest print detail. White Gildan 64000 Classic T-shirt with the Zu verschenken design; A cardboard giveaway box with books, a lamp and a mug, and a taped handwritten Zu verschenken note.. Digital mockup."
+          }
         },
         "Black": {
           "lead": {
@@ -5889,10 +6117,14 @@
             "sha256": "4b77a72c0afd7b9f57d9de2f3544bfb2b54a67fe7077bd2dd4ce1fe229fd8cb0",
             "alt": "Black Gildan 64000 Classic T-shirt with the Zu verschenken design; A cardboard giveaway box with books, a lamp and a mug, and a taped handwritten Zu verschenken note."
           },
-          "gallery": []
+          "gallery": [],
+          "printDetail": {
+            "image": "berlin-cliches-20261117/garment-details/zu-verschenken-classic-t-shirt--black.jpg",
+            "alt": "Black classic T-shirt, left-chest print detail. Black Gildan 64000 Classic T-shirt with the Zu verschenken design; A cardboard giveaway box with books, a lamp and a mug, and a taped handwritten Zu verschenken note.. Digital mockup."
+          }
         }
       },
-      "firstImageFraming": "upper-garment"
+      "firstImageFraming": "print-detail"
     },
     "enabled": true,
     "descriptionOverride": true,
@@ -5936,7 +6168,11 @@
             "sha256": "1d50515dfd17c954e44fe1712c4c51566ef1b6dadc6ce6579892f68072e0f1f8",
             "alt": "White Bella + Canvas 3001 Premium T-shirt with the Zu verschenken design; A cardboard giveaway box with books, a lamp and a mug, and a taped handwritten Zu verschenken note."
           },
-          "gallery": []
+          "gallery": [],
+          "printDetail": {
+            "image": "berlin-cliches-20261117/garment-details/zu-verschenken-premium-t-shirt--white.jpg",
+            "alt": "White premium T-shirt, left-chest print detail. White Bella + Canvas 3001 Premium T-shirt with the Zu verschenken design; A cardboard giveaway box with books, a lamp and a mug, and a taped handwritten Zu verschenken note.. Digital mockup."
+          }
         },
         "Black": {
           "lead": {
@@ -5952,7 +6188,11 @@
               "modelColor": "Black",
               "modelColorDe": "Schwarz"
             }
-          ]
+          ],
+          "printDetail": {
+            "image": "berlin-cliches-20261117/garment-details/zu-verschenken-premium-t-shirt--black.jpg",
+            "alt": "Black premium T-shirt, left-chest print detail. Black Bella + Canvas 3001 Premium T-shirt with the Zu verschenken design; A cardboard giveaway box with books, a lamp and a mug, and a taped handwritten Zu verschenken note.. Digital mockup."
+          }
         },
         "Maroon": {
           "lead": {
@@ -5961,7 +6201,11 @@
             "sha256": "5c2cae228129467c4715c5ca01f745adc4e5b5445ae1e76b1327c2da3992ad8a",
             "alt": "Zu verschenken Premium T-shirt in Maroon. Gelato garment preview."
           },
-          "gallery": []
+          "gallery": [],
+          "printDetail": {
+            "image": "berlin-cliches-20261117/garment-details/zu-verschenken-premium-t-shirt--maroon.jpg",
+            "alt": "Maroon premium T-shirt, left-chest print detail. Zu verschenken Premium T-shirt. Digital mockup."
+          }
         },
         "Heather Mint": {
           "lead": {
@@ -5970,10 +6214,14 @@
             "sha256": "f2a178387a37f89c0abcd03f351d8e03d4d01dd031d338c1d1bbfb5ce9ea3c7f",
             "alt": "Zu verschenken Premium T-shirt in Heather Mint. Gelato garment preview."
           },
-          "gallery": []
+          "gallery": [],
+          "printDetail": {
+            "image": "berlin-cliches-20261117/garment-details/zu-verschenken-premium-t-shirt--heather-mint.jpg",
+            "alt": "Heather Mint premium T-shirt, left-chest print detail. Zu verschenken Premium T-shirt. Digital mockup."
+          }
         }
       },
-      "firstImageFraming": "upper-garment"
+      "firstImageFraming": "print-detail"
     },
     "enabled": true,
     "descriptionOverride": true,
@@ -6024,7 +6272,11 @@
               "modelColor": "White",
               "modelColorDe": "Weiß"
             }
-          ]
+          ],
+          "printDetail": {
+            "image": "berlin-cliches-20261117/garment-details/zu-verschenken-hoodie--white.jpg",
+            "alt": "White hoodie pullover, left-chest print detail. White Gildan SF500 hoodie with the Zu verschenken design; A cardboard giveaway box with books, a lamp and a mug, and a taped handwritten Zu verschenken note.. Digital mockup."
+          }
         },
         "Black": {
           "lead": {
@@ -6033,10 +6285,14 @@
             "sha256": "68714c9c6eca666762a637104942cde20b35f34a22ea74e85da4d72c86773c65",
             "alt": "Black Gildan SF500 hoodie with the Zu verschenken design; A cardboard giveaway box with books, a lamp and a mug, and a taped handwritten Zu verschenken note."
           },
-          "gallery": []
+          "gallery": [],
+          "printDetail": {
+            "image": "berlin-cliches-20261117/garment-details/zu-verschenken-hoodie--black.jpg",
+            "alt": "Black hoodie pullover, left-chest print detail. Black Gildan SF500 hoodie with the Zu verschenken design; A cardboard giveaway box with books, a lamp and a mug, and a taped handwritten Zu verschenken note.. Digital mockup."
+          }
         }
       },
-      "firstImageFraming": "upper-garment"
+      "firstImageFraming": "print-detail"
     },
     "enabled": true,
     "descriptionOverride": true,
@@ -6087,7 +6343,11 @@
             "sha256": "2a0299391d62996faa47d37c214eac918eb925aa94fad31ed45437aedcdeb593",
             "alt": "White Gildan 64000 Classic T-shirt with the Pfand: You deserve better design; A trash bin with YOU DESERVE BETTER. in three condensed lines, a bottle beside it and grass at its base."
           },
-          "gallery": []
+          "gallery": [],
+          "printDetail": {
+            "image": "berlin-cliches-20261117/garment-details/pfand-you-deserve-better-classic-t-shirt--white.jpg",
+            "alt": "White classic T-shirt, left-chest print detail. White Gildan 64000 Classic T-shirt with the Pfand: You deserve better design; A trash bin with YOU DESERVE BETTER. in three condensed lines, a bottle beside it and grass at its base.. Digital mockup."
+          }
         },
         "Black": {
           "lead": {
@@ -6103,7 +6363,11 @@
               "modelColor": "Black",
               "modelColorDe": "Schwarz"
             }
-          ]
+          ],
+          "printDetail": {
+            "image": "berlin-cliches-20261117/garment-details/pfand-you-deserve-better-classic-t-shirt--black.jpg",
+            "alt": "Black classic T-shirt, left-chest print detail. Black Gildan 64000 Classic T-shirt with the Pfand: You deserve better design; A trash bin with YOU DESERVE BETTER. in three condensed lines, a bottle beside it and grass at its base.. Digital mockup."
+          }
         },
         "Dark Heather": {
           "lead": {
@@ -6112,7 +6376,11 @@
             "sha256": "777e46911e19ffae4523947d2594adb103fd6c25af2e773e308190f10b6142aa",
             "alt": "Pfand: You deserve better Classic T-shirt in Dark Heather. Gelato garment preview."
           },
-          "gallery": []
+          "gallery": [],
+          "printDetail": {
+            "image": "berlin-cliches-20261117/garment-details/pfand-you-deserve-better-classic-t-shirt--dark-heather.jpg",
+            "alt": "Dark Heather classic T-shirt, left-chest print detail. Pfand: You deserve better Classic T-shirt. Digital mockup."
+          }
         },
         "Military Green": {
           "lead": {
@@ -6128,10 +6396,14 @@
               "modelColor": "Military Green",
               "modelColorDe": "Militärgrün"
             }
-          ]
+          ],
+          "printDetail": {
+            "image": "berlin-cliches-20261117/garment-details/pfand-you-deserve-better-classic-t-shirt--military-green.jpg",
+            "alt": "Military Green classic T-shirt, left-chest print detail. Pfand: You deserve better Classic T-shirt. Digital mockup."
+          }
         }
       },
-      "firstImageFraming": "upper-garment"
+      "firstImageFraming": "print-detail"
     },
     "enabled": true,
     "descriptionOverride": true,
@@ -6194,7 +6466,11 @@
               "modelColor": "White",
               "modelColorDe": "Weiß"
             }
-          ]
+          ],
+          "printDetail": {
+            "image": "berlin-cliches-20261117/garment-details/pfand-you-deserve-better-premium-t-shirt--white.jpg",
+            "alt": "White premium T-shirt, left-chest print detail. White Bella + Canvas 3001 Premium T-shirt with the Pfand: You deserve better design; A trash bin with YOU DESERVE BETTER. in three condensed lines, a bottle beside it and grass at its base.. Digital mockup."
+          }
         },
         "Black": {
           "lead": {
@@ -6203,7 +6479,11 @@
             "sha256": "2d7904254f5598deefb60ce4819b71d976bc6e82421685375839cfe9d4217969",
             "alt": "Black Bella + Canvas 3001 Premium T-shirt with the Pfand: You deserve better design; A trash bin with YOU DESERVE BETTER. in three condensed lines, a bottle beside it and grass at its base."
           },
-          "gallery": []
+          "gallery": [],
+          "printDetail": {
+            "image": "berlin-cliches-20261117/garment-details/pfand-you-deserve-better-premium-t-shirt--black.jpg",
+            "alt": "Black premium T-shirt, left-chest print detail. Black Bella + Canvas 3001 Premium T-shirt with the Pfand: You deserve better design; A trash bin with YOU DESERVE BETTER. in three condensed lines, a bottle beside it and grass at its base.. Digital mockup."
+          }
         },
         "Forest": {
           "lead": {
@@ -6212,7 +6492,11 @@
             "sha256": "d242fe7a0625c01f845c7143ba35ac6e4ada932c104d736354f5695dfffff45f",
             "alt": "Pfand: You deserve better Premium T-shirt in Forest. Gelato garment preview."
           },
-          "gallery": []
+          "gallery": [],
+          "printDetail": {
+            "image": "berlin-cliches-20261117/garment-details/pfand-you-deserve-better-premium-t-shirt--forest.jpg",
+            "alt": "Forest premium T-shirt, left-chest print detail. Pfand: You deserve better Premium T-shirt. Digital mockup."
+          }
         },
         "Asphalt": {
           "lead": {
@@ -6221,10 +6505,14 @@
             "sha256": "e9ef6f387a82378b1d122d3db62f9d5249f4ab392df1d60b69e71b06929050d3",
             "alt": "Pfand: You deserve better Premium T-shirt in Asphalt. Gelato garment preview."
           },
-          "gallery": []
+          "gallery": [],
+          "printDetail": {
+            "image": "berlin-cliches-20261117/garment-details/pfand-you-deserve-better-premium-t-shirt--asphalt.jpg",
+            "alt": "Asphalt premium T-shirt, left-chest print detail. Pfand: You deserve better Premium T-shirt. Digital mockup."
+          }
         }
       },
-      "firstImageFraming": "upper-garment"
+      "firstImageFraming": "print-detail"
     },
     "enabled": true,
     "descriptionOverride": true,
@@ -6268,7 +6556,11 @@
             "sha256": "fa548aaddb0557685bd8793aa61634d1b5a7825ded2b812c0115b4e712142433",
             "alt": "White Gildan SF500 hoodie with the Pfand: You deserve better design; A trash bin with YOU DESERVE BETTER. in three condensed lines, a bottle beside it and grass at its base."
           },
-          "gallery": []
+          "gallery": [],
+          "printDetail": {
+            "image": "berlin-cliches-20261117/garment-details/pfand-you-deserve-better-hoodie--white.jpg",
+            "alt": "White hoodie pullover, left-chest print detail. White Gildan SF500 hoodie with the Pfand: You deserve better design; A trash bin with YOU DESERVE BETTER. in three condensed lines, a bottle beside it and grass at its base.. Digital mockup."
+          }
         },
         "Black": {
           "lead": {
@@ -6284,10 +6576,14 @@
               "modelColor": "Black",
               "modelColorDe": "Schwarz"
             }
-          ]
+          ],
+          "printDetail": {
+            "image": "berlin-cliches-20261117/garment-details/pfand-you-deserve-better-hoodie--black.jpg",
+            "alt": "Black hoodie pullover, left-chest print detail. Black Gildan SF500 hoodie with the Pfand: You deserve better design; A trash bin with YOU DESERVE BETTER. in three condensed lines, a bottle beside it and grass at its base.. Digital mockup."
+          }
         }
       },
-      "firstImageFraming": "upper-garment"
+      "firstImageFraming": "print-detail"
     },
     "enabled": true,
     "descriptionOverride": true,
@@ -6339,7 +6635,11 @@
               "modelColor": "White",
               "modelColorDe": "Weiß"
             }
-          ]
+          ],
+          "printDetail": {
+            "image": "berlin-cliches-20261117/garment-details/wegbier-classic-t-shirt--white.jpg",
+            "alt": "White classic T-shirt, left-chest print detail. White Gildan 64000 Classic T-shirt with the Wegbier design; A hand holding a bottle above motion marks, two footprints and the handwritten word Wegbier.. Digital mockup."
+          }
         },
         "Black": {
           "lead": {
@@ -6348,7 +6648,11 @@
             "sha256": "98d094e3258d963e27f235df56fba84ce76b4f662c8941d6260249c0dadf9e04",
             "alt": "Black Gildan 64000 Classic T-shirt with the Wegbier design; A hand holding a bottle above motion marks, two footprints and the handwritten word Wegbier."
           },
-          "gallery": []
+          "gallery": [],
+          "printDetail": {
+            "image": "berlin-cliches-20261117/garment-details/wegbier-classic-t-shirt--black.jpg",
+            "alt": "Black classic T-shirt, left-chest print detail. Black Gildan 64000 Classic T-shirt with the Wegbier design; A hand holding a bottle above motion marks, two footprints and the handwritten word Wegbier.. Digital mockup."
+          }
         },
         "Heather Navy": {
           "lead": {
@@ -6357,7 +6661,11 @@
             "sha256": "01c0e44510da8edd204e3e65a7599ab8792a8c0968dbe506f1ed813d5b09450c",
             "alt": "Wegbier Classic T-shirt in Heather Navy. Gelato garment preview."
           },
-          "gallery": []
+          "gallery": [],
+          "printDetail": {
+            "image": "berlin-cliches-20261117/garment-details/wegbier-classic-t-shirt--heather-navy.jpg",
+            "alt": "Heather Navy classic T-shirt, left-chest print detail. Wegbier Classic T-shirt. Digital mockup."
+          }
         },
         "Daisy": {
           "lead": {
@@ -6366,10 +6674,14 @@
             "sha256": "6b8ad23af8bfe219d6f3c274f58b42387ac1ea5ea8888722c901aa538fecbdf6",
             "alt": "Wegbier Classic T-shirt in Daisy. Gelato garment preview."
           },
-          "gallery": []
+          "gallery": [],
+          "printDetail": {
+            "image": "berlin-cliches-20261117/garment-details/wegbier-classic-t-shirt--daisy.jpg",
+            "alt": "Daisy classic T-shirt, left-chest print detail. Wegbier Classic T-shirt. Digital mockup."
+          }
         }
       },
-      "firstImageFraming": "upper-garment"
+      "firstImageFraming": "print-detail"
     },
     "enabled": true,
     "descriptionOverride": true,
@@ -6419,7 +6731,11 @@
             "sha256": "92f49856c2adb3755da18bd29171eb86b9eae798855196089e6084ccf7a1d216",
             "alt": "White Bella + Canvas 3001 Premium T-shirt with the Wegbier design; A hand holding a bottle above motion marks, two footprints and the handwritten word Wegbier."
           },
-          "gallery": []
+          "gallery": [],
+          "printDetail": {
+            "image": "berlin-cliches-20261117/garment-details/wegbier-premium-t-shirt--white.jpg",
+            "alt": "White premium T-shirt, left-chest print detail. White Bella + Canvas 3001 Premium T-shirt with the Wegbier design; A hand holding a bottle above motion marks, two footprints and the handwritten word Wegbier.. Digital mockup."
+          }
         },
         "Black": {
           "lead": {
@@ -6441,10 +6757,14 @@
               "modelColor": "Black",
               "modelColorDe": "Schwarz"
             }
-          ]
+          ],
+          "printDetail": {
+            "image": "berlin-cliches-20261117/garment-details/wegbier-premium-t-shirt--black.jpg",
+            "alt": "Black premium T-shirt, left-chest print detail. Black Bella + Canvas 3001 Premium T-shirt with the Wegbier design; A hand holding a bottle above motion marks, two footprints and the handwritten word Wegbier.. Digital mockup."
+          }
         }
       },
-      "firstImageFraming": "upper-garment"
+      "firstImageFraming": "print-detail"
     },
     "enabled": true,
     "descriptionOverride": true,
@@ -6495,7 +6815,11 @@
               "modelColor": "White",
               "modelColorDe": "Weiß"
             }
-          ]
+          ],
+          "printDetail": {
+            "image": "berlin-cliches-20261117/garment-details/wegbier-hoodie--white.jpg",
+            "alt": "White hoodie pullover, left-chest print detail. White Gildan SF500 hoodie with the Wegbier design; A hand holding a bottle above motion marks, two footprints and the handwritten word Wegbier.. Digital mockup."
+          }
         },
         "Black": {
           "lead": {
@@ -6504,10 +6828,14 @@
             "sha256": "17c1bd81a096635c8c4b1378ac55abf512a9094b58fc79b8884c07d4208f78dd",
             "alt": "Black Gildan SF500 hoodie with the Wegbier design; A hand holding a bottle above motion marks, two footprints and the handwritten word Wegbier."
           },
-          "gallery": []
+          "gallery": [],
+          "printDetail": {
+            "image": "berlin-cliches-20261117/garment-details/wegbier-hoodie--black.jpg",
+            "alt": "Black hoodie pullover, left-chest print detail. Black Gildan SF500 hoodie with the Wegbier design; A hand holding a bottle above motion marks, two footprints and the handwritten word Wegbier.. Digital mockup."
+          }
         }
       },
-      "firstImageFraming": "upper-garment"
+      "firstImageFraming": "print-detail"
     },
     "enabled": true,
     "descriptionOverride": true,
