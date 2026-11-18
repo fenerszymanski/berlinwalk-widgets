@@ -193,6 +193,13 @@ export function fallback(reason) {
  try{campaignGaEvent('bw_store_fallback',{reason:code,page_path:page});}catch(e){}
 }
 
+// Own catalogue copy (18 Nov 2026): after the loading view showed prices from data/catalog-snapshot.json, the first live Velo
+// catalogue is compared once. One identifier-free count per page load: step-snapshot-match or step-snapshot-mismatch.
+export function snapshotCheck(match) {
+ const page=String(W.location?.pathname||'').replace(/^\/de(?=\/|$)/,'').replace(/\/+$/,'').toLowerCase()||'/';
+ count(match?'snapshot-match':'snapshot-mismatch',page);
+}
+
 // Design 2 navigation: aggregate counter only. No query or pixel events.
 export function design2Step(step) {
  if(!['hero','menu-posters','menu-gifts','menu-explore','search','search-empty','recommendation-similar','recommendation-hang-together','recommendation-explore'].includes(step))return;

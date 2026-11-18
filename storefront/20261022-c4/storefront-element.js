@@ -57,6 +57,8 @@
   const nativeImage = value => {if(typeof value!=='string')return '#';const match=/^wix:image:\/\/v1\/([^/#?]+)(?:\/|#|\?|$)/.exec(value);if(match&&/^[a-zA-Z0-9_.~%-]+$/.test(match[1]))return 'https://static.wixstatic.com/media/'+match[1];return url(value);};
   const json = value => {try{return JSON.parse(value || 'null');}catch{return null;}};
   // Native-widget guard release. The site-wide head snippet (wix/head-native-guard.html) hides the original Wix Stores widgets from first paint; this class lets them show again. Called only on terminal fallback paths: the bridge reports the native store restored or not collapsible, the visitor opens the original cart, the bridge times out, or the element's own files fail to load. A transient fail() alone does not release it.
+  // Own catalogue copy (data/catalog-snapshot.json, refreshed hourly by the Mac mini). Older than this, the loading view goes back to grey price bars.
+  const CATALOG_SNAPSHOT_MAX_AGE = 36*3600000;
   const BRIDGE_RESEND_MS = Object.freeze([500, 1000, 1500, 2000, 2500, 3000, 3500, 4000, 5000, 6000, 7000, 8500, 10500, 13000, 16000]);
   const releaseNative = () => {try{document.documentElement.classList.add('bw-shop-native');}catch{}};
   // This native digital SKU uses the same required map configurator, never a generic product add.
@@ -242,6 +244,8 @@
     fetch(asset('data/gift-week-202611.json'),{cache:'no-store',signal:AbortSignal.timeout(5000)}).then(r=>r.ok?r.json():null).catch(()=>null),
     fetch(asset('data/black-friday-202611.json'),{cache:'no-store',signal:AbortSignal.timeout(5000)}).then(r=>r.ok?r.json():null).catch(()=>null),
     fetch(asset('data/price-snapshot-202611.json'),{signal:AbortSignal.timeout(2500)}).then(r=>r.ok?r.json():null).catch(()=>null),
+    // 18 Nov 2026 (Yusuf: "Bunu yapalım evet"): prices from our own catalogue copy while the Velo bridge is still silent (~7-8 s on phones). Loading view only; the first Velo answer replaces every number.
+    fetch(asset('data/catalog-snapshot.json'),{signal:AbortSignal.timeout(2500)}).then(r=>r.ok?r.json():null).catch(()=>null),
     (/(?:dein-berlin-2027|cart-page)/.test(location.pathname)?import(asset('calendar-configurator.js')).catch(()=>null):Promise.resolve(null)),
     design2Enabled?import(asset('design2.js')).catch(()=>null):Promise.resolve(null)   // a failed design 2 load falls back to the current store
   ]);
@@ -390,9 +394,9 @@
       if(name==='shop-bridge-ready')this.start();
     }
     async load() {
-      try {const [layer,editorial,ysMod,definitions,presentation,bindings,external,funnel,navigation,gift,campaign,bf,campaignConfig,bfConfig,priceSnapshot,calendarMod,design2]=await resources;
+      try {const [layer,editorial,ysMod,definitions,presentation,bindings,external,funnel,navigation,gift,campaign,bf,campaignConfig,bfConfig,priceSnapshot,catalogSnapshot,calendarMod,design2]=await resources;
         if(design2){await design2.prepare;design2.install(BWStorefront,{asset,esc,STORE_LOGO,money,editionHref,isDigital,POSTER_DELIVERY_SHORT,NOTICE_GIFT,cartPageUrl,ysGermanTab});this.setAttribute("design2","");}
-        Object.assign(this,{layer,editorial,ysMod,definitions,presentation,bindings,external,funnel,navigation,gift,campaign,bf,campaignConfig,bfConfig,priceSnapshot,calendarMod});
+        Object.assign(this,{layer,editorial,ysMod,definitions,presentation,bindings,external,funnel,navigation,gift,campaign,bf,campaignConfig,bfConfig,priceSnapshot,catalogSnapshot,calendarMod});
         this.bfWasActive=this.bfActive();this.campaignWasActive=['wix','audio','newspaper'].some(system=>this.campaign?.active(this.campaignConfig,system));this.campaignTimer=setInterval(()=>{this.campaign?.tick(this.shadowRoot);const bfNow=this.bfActive();if(bfNow!==this.bfWasActive){this.bfWasActive=bfNow;this.render();this.request('catalog').catch(()=>{});}this.shadowRoot.querySelectorAll('[data-ys-mounted-christmas]').forEach(el=>{el.hidden=!this.ysMod?.ysMounted(this.ys||{})||!this.ysMod?.mountedChristmasOpen();});if(!this.catalogue&&this.snapshotWasUsable!==this.snapshotUsable()){this.snapshotWasUsable=this.snapshotUsable();this.skeletonModel=null;this.render();}const next=this.campaign?.active(this.campaignConfig,'wix')||this.campaign?.active(this.campaignConfig,'audio')||this.campaign?.active(this.campaignConfig,'newspaper');if(this.campaignWasActive&&!next){this.buildModel();this.request('catalog').catch(()=>{});}this.campaignWasActive=next;},1000);
         this.campaignRefresh=setInterval(async()=>{if(!this.isConnected||this.busy||this.uncertain)return;if(this.bfActive())this.request('catalog').catch(()=>{});try{const response=await fetch(asset('data/gift-week-202611.json'),{cache:'no-store',signal:AbortSignal.timeout(5000)});if(!response.ok)throw Error('CONFIG_UNAVAILABLE');const next=await response.json();if(!this.isConnected||next.id!=='gift-week-202611'||Date.parse(next.end)!==Date.parse('2026-11-08T23:59:00+01:00'))throw Error('CONFIG_INVALID');if(JSON.stringify(next.systems)!==JSON.stringify(this.campaignConfig?.systems)){this.campaignConfig=next;this.skeletonModel=null;this.render();await this.request('catalog');}}catch{if(!this.catalogue){this.priceSnapshot=null;this.skeletonModel=null;this.render();}}},15000);
         if(this.catalogue)this.buildModel();if(!this.model)this.render();await this.start();
@@ -479,7 +483,7 @@
         this.model=this.layer.createCatalogModel(products,this.definitions);
         for(const product of this.model.products){const native=this.catalogue.products.find(row=>row.productId===product.wixProductId);product.priceLabel=this.isFreeExternal(product)?(this.campaignGerman()?'Kostenlos':'Free'):money(native?native.currency:product.currency,native?(native.discountedPrice??native.price):product.priceCents/100);if(!this.isFreeExternal(product)&&(((product.wixProductId==='8aaf5412-7f21-42c7-acfb-85dd8417d68c'||native?.posterOptions)&&native?.requiresOptions)||product.priceFrom))product.priceLabel='From '+product.priceLabel;}
         if(this.productAlias()){if(!this.model.products.some(p=>p.wixProductId===this.productViewId())||!this.ysEntryAvailable()){this.showConfiguredFailure('CONFIGURATOR_UNAVAILABLE');return;}this.configuredFailure=false;}
-        this.applyContextCategory();this.render();this.signalReady();
+        this.applyContextCategory();this.render();this.signalReady();this.checkSnapshotPrices();
       }catch(error){this.fail(error.message);}
     }
     applyContextCategory() {
@@ -611,7 +615,7 @@
     cartGerman() {return this.campaignGerman()||(this.context?.mode==='cart'&&ysGermanTab());}
     campaignGerman() {return this.landing?.lang==='de'||this.navigation?.STORE_LANDINGS?.[this.skeletonRoute().categorySlug]?.lang==='de'||new URLSearchParams(location.search).get('lang')==='de';}
     bfActive() {return this.bf?.bfActive(this.bfConfig)||false;}
-    campaignNativeOn(id) {const row=(this.catalogue?.products||(!this.catalogue&&this.snapshotUsable()?this.priceSnapshot.products:[]))?.find(p=>p.productId===id),c=this.campaignConfig;return !!(c?.products?.[id]&&Date.now()>=Date.parse(c.start)&&Date.now()<Date.parse(c.end)&&row&&Math.round(row.discountedPrice*100)===Math.round(c.products[id].sale*100)&&Math.round(row.price*100)===Math.round(c.products[id].sale*100));}
+    campaignNativeOn(id) {const row=(this.catalogue?.products||(!this.catalogue?this.snapshotRows()||[]:[]))?.find(p=>p.productId===id),c=this.campaignConfig;return !!(c?.products?.[id]&&Date.now()>=Date.parse(c.start)&&Date.now()<Date.parse(c.end)&&row&&Math.round(row.discountedPrice*100)===Math.round(c.products[id].sale*100)&&Math.round(row.price*100)===Math.round(c.products[id].sale*100));}
     isFreeExternal(product) {return product.source==='external'&&product.approvedForShop===true&&product.priceCents===0;}
     campaignPrice(product,amount,choices) {
       if(this.isFreeExternal(product))return esc(this.d2text?.('Free')||(this.campaignGerman()?'Kostenlos':'Free'));
@@ -1099,11 +1103,35 @@
       let marker=-1;parts.forEach((part,index)=>{if(['product-page','cart-page','category'].includes(part))marker=index;});
       const route=marker>=0?parts[marker]:'',slug=marker>=0?parts[marker+1]||null:null;
       if(route==='cart-page')return {mode:'cart',productId:null,categorySlug:null};
-      if(route==='product-page')return {mode:'product',productId:SKELETON_PRODUCTS[slug]||null,categorySlug:null};
+      if(route==='product-page')return {mode:'product',productId:SKELETON_PRODUCTS[slug]||this.snapshotSlugId(slug),categorySlug:null};
       return {mode:'shop',productId:null,categorySlug:route==='category'?slug:null};
     }
     // The shared catalogue layer groups and orders the shelves. Its commercial fields are placeholders that only satisfy its validation; nothing from them is ever drawn.
-    snapshotUsable() {
+    snapshotUsable() {return this.giftSnapshotUsable()||this.catalogSnapshotUsable();}
+    snapshotRows() {return this.giftSnapshotUsable()?this.priceSnapshot.products:this.catalogSnapshotUsable()?this.catalogSnapshot.products:null;}
+    // Our own catalogue copy is drawn only in the loading view (buy buttons locked) and never during a sale window, whose prices follow their own rules.
+    catalogSnapshotUsable() {
+      const s=this.catalogSnapshot,now=Date.now(),at=Date.parse(s?.generatedAt),bf=this.bfConfig;
+      if(!s||s.schema!==2||s.kind!=='catalog-snapshot'||!Array.isArray(s.products)||!Number.isFinite(at)||at>now+300000||now-at>CATALOG_SNAPSHOT_MAX_AGE)return false;
+      if(this.bfActive()||this.campaign?.active(this.campaignConfig,'wix'))return false;
+      const start=Date.parse(bf?.start),end=Date.parse(bf?.end);
+      if(Number.isFinite(start)&&Number.isFinite(end)&&((now>=start-3600000&&now<end+3*3600000)||(at<start&&now>=start)))return false;
+      return true;
+    }
+    snapshotSlugId(slug) {if(!slug)return null;const row=this.catalogSnapshotUsable()?this.catalogSnapshot.products.find(p=>p.slug&&p.slug.normalize('NFC')===slug):null;return row?.productId||null;}
+    // First live Velo catalogue after the loading view showed our copy: compare the numbers and count the result once per page (step-snapshot-match / step-snapshot-mismatch).
+    checkSnapshotPrices() {
+      if(!this.snapshotShown||this.snapshotChecked||!Array.isArray(this.catalogue?.products)||!Array.isArray(this.catalogSnapshot?.products))return;
+      this.snapshotChecked=true;const diff=[],cents=n=>Number.isFinite(n)?Math.round(n*100):null;
+      for(const live of this.catalogue.products){
+        const ours=this.catalogSnapshot.products.find(p=>p.productId===live.productId);if(!ours)continue;
+        for(const key of ['price','discountedPrice'])if(cents(live[key])!==cents(ours[key]))diff.push({id:live.productId,field:key,ours:ours[key],live:live[key]});
+        if(live.inStock!==ours.inStock)diff.push({id:live.productId,field:'inStock',ours:ours.inStock,live:live.inStock});
+        for(const v of live.variants||[]){const o=(ours.variants||[]).find(x=>this.bf?.sameChoices?.(x.choices,v.choices));if(!o||cents(o.price)!==cents(v.price)||o.inStock!==v.inStock||o.visible!==v.visible)diff.push({id:live.productId,field:'variant',choices:v.choices,ours:o?[o.price,o.inStock,o.visible]:null,live:[v.price,v.inStock,v.visible]});}
+      }
+      this.snapshotDiff=diff;try{this.funnel?.snapshotCheck?.(!diff.length);}catch(e){}
+    }
+    giftSnapshotUsable() {
       const s=this.priceSnapshot,c=this.campaignConfig,now=Date.now();
       if(!s||!c||s.schema!==1||s.campaign!=='gift-week-202611'||s.referenceRevision!==c?.referenceRevision||s.start!==c.start||s.end!==c.end||c.end!=='2026-11-08T23:59:00+01:00'||!this.campaign?.active(c,'wix')||!Array.isArray(s.products)||now<Date.parse(s.generatedAt)||!Number.isFinite(Date.parse(s.generatedAt)))return false;
       if(this.snapshotValidatedConfig===c&&this.snapshotValidatedData===s)return this.snapshotValidation;
@@ -1113,7 +1141,7 @@
     previewModel() {
       if(this.catalogue)return this.model;
       if(!this.snapshotUsable())return null;
-      const rows=this.priceSnapshot.products.filter(p=>p.visible&&!PRODUCT_VIEW_ALIASES[p.productId]&&!this.gift?.isGiftId(p.productId)).map(row=>this.nativeProductRow(row));
+      const rows=this.snapshotRows().filter(p=>p.visible&&!PRODUCT_VIEW_ALIASES[p.productId]&&!this.gift?.isGiftId(p.productId)).map(row=>this.nativeProductRow(row));
       const products=[...this.layer.adaptWixProducts(rows,this.presentation),...this.layer.adaptExternalProducts(this.external)];
       products.sort((a,b)=>this.presentation.findIndex(item=>item.id===a.id)-this.presentation.findIndex(item=>item.id===b.id));
       for(const p of products){if(this.isFreeExternal(p))continue;const ref=this.campaign.entry(this.campaignConfig,p);if(p.source==='external'&&ref&&this.campaign.active(this.campaignConfig,this.campaign.systemOf(p)))p.priceCents=this.campaign.saleCents(Math.round(ref.price*100));}
@@ -1157,7 +1185,7 @@
       const products=(page.productIds?page.productIds.map(id=>model.products.find(product=>product.wixProductId===id||product.id===id)).filter(Boolean):view?.products||[]).map(product=>{const item={...product,...page.cards?.[product.id]};const target=new URL(item.productUrl);target.searchParams.set('utm_source','store');target.searchParams.set('utm_campaign','gift-week-202611');target.searchParams.set('utm_content','store-gifts-'+(page.lang||'de'));item.productUrl=target.href;return item;});
       const cards=products.map(product=>this.skeletonCard({...product,imageFit:product.imageFit||view?.imageFit||'contain'}));
       if(page.voucher){
-        const rows=this.catalogue?.products||(this.snapshotUsable()?this.priceSnapshot.products:null);
+        const rows=this.catalogue?.products||this.snapshotRows();
         const offers=rows?this.gift?.giftOffers({products:rows},this.presentation,money).map(o=>({...o,campaignHtml:this.campaignPrice({source:'wix',wixProductId:o.id,currency:o.row.currency,priceCents:Math.round(o.price*100)},o.price)})):[];
         const card=offers?.length?this.gift.giftCardHtml(offers,page.voucher,{assetUrl:asset,printUrl:url(this.navigation.STORE_PERSONALISED_PRODUCT)}).replace(/data-action="gift-add"/g,'data-action="preview-wait" aria-disabled="true" aria-busy="true"'):'';
         if(card)cards.splice(page.voucher.after,0,card);else if(page.voucher)cards.splice(page.voucher.after,0,this.gift?.giftCardHtml?.(this.giftOffersAll(),page.voucher,{assetUrl:asset,printUrl:url(this.navigation.STORE_PERSONALISED_PRODUCT),redirecting:this.cartRedirect==='gift'})||'');
@@ -1166,10 +1194,13 @@
     }
     skeletonProduct(route,model) {
       const meta=route.productId?this.presentation.find(entry=>entry.wixProductId===route.productId):null,baseProduct=model.products.find(p=>p.wixProductId===route.productId),configuredDigital=this.isConfiguredDigitalRoute();
-      const digitalRow=configuredDigital?(this.catalogue?.products||this.priceSnapshot?.products)?.find(p=>p.productId===this.ysMod?.YS_DIGITAL_ID):null;
+      const digitalRow=configuredDigital?(this.catalogue?.products||this.snapshotRows())?.find(p=>p.productId===this.ysMod?.YS_DIGITAL_ID):null;
       const priced=configuredDigital&&baseProduct&&digitalRow?{...baseProduct,wixProductId:digitalRow.productId,requiresOptions:false,priceFrom:false,priceCents:Math.round(digitalRow.discountedPrice*100)}:baseProduct,hasPrice=!!priced&&(!configuredDigital||!!digitalRow)&&(!!this.catalogue||this.snapshotUsable());
-      const german=this.campaignGerman()?this.navigation.GIFT_CARDS_DE?.[priced?.id]:null,item=german?{...meta,...german}:meta,digital=configuredDigital||item?.kind==='digital';
-      const row=hasPrice?(this.catalogue?.products||this.priceSnapshot.products).find(p=>p.productId===priced.wixProductId):null,pack=hasPrice?this.posterPack(priced,row):null;
+      const german=this.campaignGerman()?this.navigation.GIFT_CARDS_DE?.[priced?.id]:null;let item=german?{...meta,...german}:meta;
+      // German loading view uses the same name/place translation as the finished design 2 page (18 Nov 2026: clothing showed English first).
+      if(item&&this.campaignGerman()&&typeof this.d2product==='function')try{const d=this.d2product({...item,id:priced?.id||item.id});item={...item,name:d.name,place:d.place};}catch(e){}
+      const digital=configuredDigital||item?.kind==='digital';
+      const row=hasPrice?(this.catalogue?.products||this.snapshotRows()).find(p=>p.productId===priced.wixProductId):null,pack=hasPrice?this.posterPack(priced,row):null;
       const choices=!configuredDigital&&route.productId===this.ysMod?.YS_PRODUCT_ID?this.ysMod.ysChoices({}):pack?.selected?.choices;
       const selected=choices?row?.variants?.find(v=>Object.keys(choices).every(k=>v.choices[k]===choices[k])):null;
       const priceHtml=hasPrice?this.campaignPrice(priced,selected?.price,choices):sk('sk-price');
@@ -1195,6 +1226,7 @@
         const body=(route.mode==='cart'?this.skeletonCart(model):route.mode==='product'?this.skeletonProduct(route,model):this.skeletonShop(route,model)).replace('</aside>','</aside>'+this.campaignBanner());
         if(!box){this.ensureLink();box=document.createElement('div');box.className='skeleton';box.setAttribute('aria-busy','true');box.hidden=true;this.shadowRoot.append(box);}
         box.dataset.key=key;box.innerHTML=`<p class="sr-only" role="status">Loading the store</p><div>${body}</div>`;
+        if(!this.catalogue&&!this.giftSnapshotUsable()&&this.catalogSnapshotUsable()&&route.mode!=='cart')this.snapshotShown=true;
       }catch{box?.remove();return false;}
       this.showWhenStyled(box);this.watchSize(box);return true;
     }
