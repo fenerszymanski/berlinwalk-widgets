@@ -29,6 +29,23 @@
   .af-msg { font-size: 12.5px; line-height: 1.5; color: #8A3B12; margin-top: 7px; min-height: 0; }
   .af-msg:empty { display: none; }
 
+  /* 1928 print card (18 Nov 2026): shown right under the search box once an address is found. */
+  .af-buy { display: grid; grid-template-columns: 64px 1fr auto; align-items: center; gap: 12px; margin-top: 10px; padding: 10px 12px; border: 2px solid #1B5E20; border-radius: 14px; background: #FFFFFF; box-shadow: 0 2px 8px rgba(18,61,24,.12); }
+  .af-buy[hidden] { display: none; }
+  .af-buy img { display: block; width: 64px; height: 85px; object-fit: cover; border-radius: 6px; background: #E9EFE1; box-shadow: 0 1px 4px rgba(0,0,0,.25); }
+  .af-buy-kick { display: block; font-size: 10px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; color: #4E5A4E; }
+  .af-buy-line { font-family: Merriweather, Georgia, serif; font-size: 15px; font-weight: 700; line-height: 1.35; color: #123D18; margin-top: 3px; overflow-wrap: anywhere; }
+  .af-buy-sub { font-size: 11.5px; line-height: 1.45; color: #4E5A4E; margin-top: 4px; }
+  .af-buy-btn { display: inline-block; font-size: 14px; font-weight: 800; line-height: 1.2; text-align: center; text-decoration: none; padding: 11px 16px; border-radius: 12px; border: 2px solid #1B5E20; background: #FFE600; color: #123D18; white-space: nowrap; }
+  .af-buy-btn:hover, .af-buy-btn:focus, .af-buy-btn:active { color: #123D18; background: #FFF06A; }
+  .af-buy-btn:focus-visible { outline: 3px solid #7CB342; outline-offset: 2px; }
+  @media (max-width: 560px) {
+    .af-buy { grid-template-columns: 56px 1fr; gap: 10px; }
+    .af-buy img { width: 56px; height: 75px; }
+    .af-buy-line { font-size: 14px; }
+    .af-buy-btn { grid-column: 1 / -1; display: block; }
+  }
+
   .af-stage { position: relative; margin: 0 18px; border-radius: 14px; overflow: hidden; background: #E9EFE1; aspect-ratio: 4 / 3; }
   .af-stage img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity .12s linear; user-select: none; -webkit-user-drag: none; }
   .af-pin { position: absolute; z-index: 30; left: 50%; top: 50%; width: 26px; height: 26px; transform: translate(-50%, -50%); border-radius: 50%; border: 3px solid #FFE600; box-shadow: 0 0 0 2px #1B5E20, inset 0 0 0 2px #1B5E20; pointer-events: none; }
@@ -100,6 +117,15 @@
     </form>
     <div class="af-spots" id="spots" aria-label="Example spots"></div>
     <div class="af-msg" id="msg" role="status" aria-live="polite"></div>
+    <div class="af-buy" id="buy" hidden>
+      <img src="https://static.wixstatic.com/media/5a08a3_434eecbe3eae4805af00fac3e2283451~mv2.jpg/v1/fill/w_168,h_224,al_c,q_85/your-berlin-street-in-1928.jpg" width="64" height="85" alt="Your Berlin Street in 1928 aerial print" decoding="async">
+      <div>
+        <span class="af-buy-kick">Your Berlin Street in 1928</span>
+        <p class="af-buy-line" id="buyline">See your street as a 1928 print.</p>
+        <p class="af-buy-sub">I print it from this same 1928 flight. Type the address on the next page to see your preview.</p>
+      </div>
+      <a class="af-buy-btn" id="buylink" href="https://www.walkofberlin.com/product-page/your-berlin-street-in-1928-personalised-aerial-print-30-x-40-cm?utm_source=berlin-aerial-photo-finder&amp;utm_medium=tool&amp;utm_campaign=street-1928&amp;utm_content=search-card" target="_blank" rel="noopener">Preview my print</a>
+    </div>
   </div>
 
   <div class="af-stage" id="stage">
@@ -227,7 +253,7 @@
     b.className = 'af-spot';
     b.textContent = s.name;
     b.setAttribute('aria-pressed', s.name === spot.name ? 'true' : 'false');
-    b.addEventListener('click', function () { $('msg').textContent = ''; setSpot({ name: s.name, lat: s.lat, lon: s.lon }); });
+    b.addEventListener('click', function () { $('msg').textContent = ''; showBuy(null); setSpot({ name: s.name, lat: s.lat, lon: s.lon }); });
     $('spots').appendChild(b);
   });
 
@@ -381,6 +407,7 @@
       if (errs && !have.length) cover = '';
     }
     $('cover').textContent = cover;
+    if (buyFor) $('buy').hidden = !!(states[0] && states[0].status === 'none');
 
     var curLoading = st.status === 'loading' && lo < 0;
     var allFailed = done === YEARS.length && errs === YEARS.length - missing.length && have.length === 0 && errs > 0;
@@ -450,12 +477,23 @@
           var hit = list[0];
           var name = q.replace(/,?\s*berlin\s*$/i, '').trim() || q;
           $('msg').textContent = '';
+          showBuy(name);
           setSpot({ name: name, lat: Number(hit.lat), lon: Number(hit.lon) });
+          if (window.matchMedia && window.matchMedia('(max-width: 560px)').matches) $('q').blur();
         })
         .catch(function () { $('msg').textContent = 'The address search is not answering right now. Try one of the places above, or again in a minute.'; })
         .then(function () { busy = false; $('go').disabled = false; });
     }, wait);
   });
+
+  /* 1928 print card: the product page never takes the address in its URL (it runs analytics that record page URLs),
+     so the card names the searched street here and the visitor types it once more on the product page. */
+  var buyFor = null;
+  function showBuy(name) {
+    buyFor = name ? String(name).slice(0, 70) : null;
+    if (buyFor) $('buyline').innerHTML = 'See <b>' + esc(buyFor) + '</b> as a 1928 print for your wall.';
+    $('buy').hidden = !buyFor;
+  }
 
   function esc(s) { return String(s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
 
