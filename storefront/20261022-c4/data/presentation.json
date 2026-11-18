@@ -5317,6 +5317,24 @@
               "modelColorDe": "Schwarz"
             }
           ]
+        },
+        "Maroon": {
+          "lead": {
+            "kind": "garmentPreview",
+            "image": "berlin-cliches-20261117/expanded-colors/doner-bear-eating-classic-t-shirt--maroon--3b84556c-3556-42d7-b5ac-59e57f43d94a.jpg",
+            "sha256": "fb0bfc78b000259435e62e7498e1c440743bac084e9d0974c10323198b4272ab",
+            "alt": "Döner Bear Classic T-shirt in Maroon. Gelato garment preview."
+          },
+          "gallery": []
+        },
+        "Natural": {
+          "lead": {
+            "kind": "garmentPreview",
+            "image": "berlin-cliches-20261117/expanded-colors/doner-bear-eating-classic-t-shirt--natural--baa1dc6e-9293-46ac-ba4c-342bbdaa3b3b.jpg",
+            "sha256": "71a9d231aa94ae7879ecb6e8d9dffd1f29e52d1db18253402542aee55b0a8177",
+            "alt": "Döner Bear Classic T-shirt in Natural. Gelato garment preview."
+          },
+          "gallery": []
         }
       },
       "firstImageFraming": "upper-garment"
