@@ -4659,6 +4659,24 @@
               "modelColorDe": "Schwarz"
             }
           ]
+        },
+        "Asphalt": {
+          "lead": {
+            "kind": "garmentPreview",
+            "image": "berlin-cliches-20261117/expanded-colors/zurueckbleiben-bitte-premium-t-shirt--asphalt--52935dc4-f851-450f-8346-00920754474e.jpg",
+            "sha256": "06edefa5204d3698d1380b7c35ec0652ba21af80efc85b9b97148a103ad5c1c5",
+            "alt": "Zurückbleiben bitte Premium T-shirt in Asphalt. Gelato garment preview."
+          },
+          "gallery": []
+        },
+        "Red": {
+          "lead": {
+            "kind": "garmentPreview",
+            "image": "berlin-cliches-20261117/expanded-colors/zurueckbleiben-bitte-premium-t-shirt--red--c775dcd3-1840-4ee9-b461-bf72629fd859.jpg",
+            "sha256": "868f8e96ee2d8539a54412148d12855d13d3ab5adbe48bc27511f60d119ae404",
+            "alt": "Zurückbleiben bitte Premium T-shirt in Red. Gelato garment preview."
+          },
+          "gallery": []
         }
       },
       "firstImageFraming": "upper-garment"
