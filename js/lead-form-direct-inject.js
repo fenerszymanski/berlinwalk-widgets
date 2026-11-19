@@ -1,12 +1,11 @@
-/* lead-form-direct-inject.js — the two public inline surfaces on every BerlinWalk post.
+/* lead-form-direct-inject.js — inline offers and email forms on BerlinWalk posts.
  *
  * The compact Berlin Then and Now tour card keeps its existing placement.
  * Its date chips read live availability for the paid tour's Wix service and
  * stay hidden while that service has no bookable dates (booking not open yet).
- * The Date Check card requests the dated Berlin Unlocked emails directly in
- * the article, right after the intro (since 12 Oct 2026; before that it came
- * after the compact tour card). A dismissible Walk of Berlin Weekly bar slides
- * in from the bottom once a reader is a third of the way down. On the Berlin
+ * The Date Check and resident letter forms follow about 80% of the prose.
+ * The dismissible Walk of Berlin Weekly bar also opens at 80% scroll depth.
+ * Audio Walks and Berlin Gifts use the former early lead slots. On the Berlin
  * Wall and Cold War posts an East or West card links to the 1989 street
  * check landing page in mid-article (since 12 Oct 2026). Every inline
  * surface is placed once per page view and then stays put (see placeSurface).
@@ -40,6 +39,8 @@
   var BOOKING_MARKER = 'data-bw-blog-booking';
   var DATE_CHECK_MARKER = 'data-bw-date-check-card';
   var EAST_WEST_MARKER = 'data-bw-eastwest-card';
+  var POST_BANNER_MARKER = 'data-bw-post-banner';
+  var LEAD_DEPTH = 0.8;
   var EAST_WEST_STYLE_ID = 'bw-eastwest-card-style';
   var EAST_WEST_URL = 'https://www.walkofberlin.com/east-or-west';
   var EAST_WEST_IMAGE = 'https://fenerszymanski.github.io/berlinwalk-widgets/east-west-lp/img/brandenburg-gate-wall-1989.jpg';
@@ -81,25 +82,39 @@
   // category assignments and posts newer than the public archive as well.
   var RESIDENT_MARKER = 'data-bw-resident-letter';
   var residentSlugs = ["apple-picking-near-berlin","autumn-leaves-in-berlin","balcony-solar-berlin","berlin-bathing-season","berlin-bridge-days-2027","berlin-bulky-waste","berlin-election-2026","berlin-flat-notice-period","berlin-heating-season","berlin-hiking-trails","berlin-housing-cooperative","berlin-monthly-ticket","berlin-nebenkostenabrechnung","berlin-parking-zones","berlin-public-libraries","berlin-rent-increase","berlin-rental-deposit","berlin-school-registration","berlin-snow-clearing-rules","berlin-water-hardness","berlin-zoo-annual-pass","bike-lights-in-berlin","bike-theft-in-berlin","blood-donation-berlin","bouldering-in-berlin","buergeramt-berlin","cargo-bike-berlin","church-tax-berlin","cranes-near-berlin","dentist-in-berlin","doctor-appointment-berlin","dog-parks-in-berlin","electricity-provider-berlin","elterngeld-berlin","flu-shot-in-berlin","german-citizenship-berlin","german-courses-in-berlin","halteverbotszone-berlin","health-insurance-in-berlin","herbstferien-berlin","home-insurance-in-berlin","home-internet-berlin","ice-skating-in-berlin","indoor-playgrounds-in-berlin","kaeltehilfe-berlin","kindergeld-berlin","kita-place-berlin","kleingarten-berlin","mieterverein-berlin","milieuschutz-berlin","missed-parcel-in-berlin","mould-in-berlin-flats","mushroom-picking-berlin","pumpkin-patch-berlin","repair-cafe-berlin","rundfunkbeitrag-berlin","second-home-tax-berlin","sick-leave-in-berlin","stargazing-in-berlin","swimming-lessons-for-kids-in-berlin","tax-return-in-berlin","thermal-baths-near-berlin","urban-sports-club-vs-gym-berlin","vet-in-berlin","wbs-berlin","winter-swimming-in-berlin","winter-tyres-berlin","wohngeld-berlin"];
-  var residentArchiveRequested = false;
-  function isResidentPost() {
-    if (residentSlugs.indexOf(currentSlug()) !== -1) return true;
-    return !!document.querySelector('.bw-c-eyebrow a[href$="/living-in-berlin"],article [data-hook="category-link"][href$="/living-in-berlin"]');
+  var postCategories = {
+    'living-in-berlin': Object.create(null),
+    'tourist-tips': Object.create(null)
+  };
+  var blogTopicsRequested = false;
+  function hasPostCategory(category) {
+    if (postCategories[category][currentSlug()]) return true;
+    var suffix = '[href$="/' + category + '"]';
+    return !!document.querySelector('.bw-c-eyebrow a' + suffix + ',article [data-hook="category-link"]' + suffix);
   }
-  function refreshResidentTopics() {
-    if (residentArchiveRequested) return;
-    residentArchiveRequested = true;
-    // Reuse the redesign's identical cached archive URL; no new API/consent.
-    fetch('https://fenerszymanski.github.io/berlinwalk-widgets/blog-index/archive.json?v=blog-redesign-c-20260823', {cache:'force-cache'})
-      .then(function (r) { return r.ok ? r.json() : null; })
-      .then(function (data) {
-        if (!data || !Array.isArray(data.allPosts)) return;
-        var wasResident = isResidentPost();
-        data.allPosts.forEach(function (post) {
-          if (post.categorySlug === 'living-in-berlin' && residentSlugs.indexOf(post.slug) === -1) residentSlugs.push(post.slug);
-        });
-        if (!wasResident && isResidentPost()) scheduleInject(0);
-      }).catch(function () { /* verified category members remain covered offline */ });
+  function isResidentPost() {
+    return residentSlugs.indexOf(currentSlug()) !== -1 || hasPostCategory('living-in-berlin');
+  }
+  function isTouristPost() {
+    return hasPostCategory('tourist-tips');
+  }
+  function refreshBlogTopics() {
+    if (blogTopicsRequested) return;
+    blogTopicsRequested = true;
+    // The category feeds include secondary assignments and are refreshed with the blog index.
+    Object.keys(postCategories).forEach(function (category) {
+      fetch('https://fenerszymanski.github.io/berlinwalk-widgets/blog-category/' + category + '.json', { cache: 'no-cache' })
+        .then(function (r) { return r.ok ? r.json() : null; })
+        .then(function (data) {
+          if (!data || data.slug !== category) return;
+          var wasMember = hasPostCategory(category);
+          var posts = (data.shelves || []).reduce(function (items, shelf) {
+            return items.concat(shelf.posts || []);
+          }, data.flat || []);
+          posts.forEach(function (post) { postCategories[category][post.slug] = true; });
+          if (!wasMember && hasPostCategory(category)) scheduleInject(0);
+        }).catch(function () { /* native category links still work offline */ });
+    });
   }
 
 
@@ -176,7 +191,7 @@
 
   function hasSurfaceAncestor(el) {
     if (!el || !el.closest) return false;
-    if (el.closest('[' + BOOKING_MARKER + '],[' + DATE_CHECK_MARKER + '],[' + EAST_WEST_MARKER + '],[' + RESIDENT_MARKER + '],[data-bw-leadform],[data-bw-tourcta],[data-bw-blog-mobile-guide],[data-bw-blog-mobile-nav],[data-bw-blog-tool-prompt],[data-bw-blog-journey],[data-bw-blog-share-bar]')) return true;
+    if (el.closest('[' + BOOKING_MARKER + '],[' + DATE_CHECK_MARKER + '],[' + EAST_WEST_MARKER + '],[' + RESIDENT_MARKER + '],[' + POST_BANNER_MARKER + '],[data-bw-leadform],[data-bw-tourcta],[data-bw-blog-mobile-guide],[data-bw-blog-mobile-nav],[data-bw-blog-tool-prompt],[data-bw-blog-journey],[data-bw-blog-share-bar]')) return true;
     var container = el.closest('figure,li');
     return Boolean(container && container !== el);
   }
@@ -265,7 +280,7 @@
     return typeof container.contains === 'function' && container.contains(node);
   }
 
-  // Moved up on 12 Oct 2026 (Yusuf: the list is not growing). After the 2nd
+  // The former Date Check slot now holds the tourist Audio Walks banner. After the 2nd
   // tour-card anchor the card sat at about a third of the page, where few
   // readers ever arrive. It now follows the second real prose paragraph of the
   // intro ("Updated:" stamps and the "On this page" label are skipped). To
@@ -314,6 +329,25 @@
     if (laterIndex >= blocks.length) laterIndex = blocks.length - 1;
     if (laterIndex <= anchorIndex) return null;
     return pointAt(blocks[laterIndex], body, 'fallback');
+  }
+
+  // Count authored prose so the anchor stays the same across screen sizes
+  // and as lazy media and Wix modules expand around the article.
+  function findLateLeadPoint(body) {
+    var prose = Array.prototype.filter.call(body.querySelectorAll('p,blockquote,ul,ol'), function (block) {
+      var text = cleanText(block.textContent);
+      return text && isVisible(block) && !hasSurfaceAncestor(block) &&
+        !(block.tagName === 'P' && block.closest('blockquote')) && !/^(updated:|on this page$)/i.test(text);
+    });
+    var lengths = prose.map(function (block) { return cleanText(block.textContent).length; });
+    var target = lengths.reduce(function (total, length) { return total + length; }, 0) * LEAD_DEPTH;
+    var read = 0;
+    for (var i = 0; i < prose.length; i++) {
+      read += lengths[i];
+      if (read >= target) return pointAt(prose[i], body, 'late');
+    }
+    var blocks = dateCheckBlocks(body);
+    return blocks.length ? pointAt(blocks[blocks.length - 1], body, 'late') : null;
   }
 
   function bookingBlocks(body) {
@@ -1013,7 +1047,8 @@
 
   function isOwnSurface(el) {
     return !!(el && el.nodeType === 1 && el.hasAttribute &&
-      (el.hasAttribute(BOOKING_MARKER) || el.hasAttribute(DATE_CHECK_MARKER) || el.hasAttribute(EAST_WEST_MARKER)));
+      (el.hasAttribute(BOOKING_MARKER) || el.hasAttribute(DATE_CHECK_MARKER) || el.hasAttribute(EAST_WEST_MARKER) ||
+        el.hasAttribute(RESIDENT_MARKER) || el.hasAttribute(POST_BANNER_MARKER)));
   }
 
   function isAttached(node) {
@@ -1041,7 +1076,7 @@
 
   function findBlockByFingerprint(body, fingerprint) {
     if (!fingerprint || !body || !body.querySelectorAll) return null;
-    var nodes = body.querySelectorAll('h2,h3,p,blockquote');
+    var nodes = body.querySelectorAll('h2,h3,p,blockquote,ul,ol');
     for (var i = 0; i < nodes.length; i++) {
       if (hasSurfaceAncestor(nodes[i])) continue;
       if (blockFingerprint(nodes[i]) === fingerprint) return nodes[i];
@@ -1101,8 +1136,76 @@
     return card;
   }
 
+  var POST_BANNERS = {
+    'audio-walks': {
+      title: 'Audio Walks',
+      copy: 'Explore Berlin with my self-guided audio walks. Put on your headphones and start when you like.',
+      link: 'Explore the audio walks',
+      href: '/audio-tours'
+    },
+    'berlin-gifts': {
+      title: 'Berlin Gifts',
+      copy: 'A print of their street in 1928, a Tempelhof hoodie or a 2027 Berlin wall calendar.',
+      link: 'Shop gifts',
+      href: '/gifts'
+    }
+  };
 
-  function residentLetterPoint(body) {
+  function buildPostBanner(kind) {
+    if (!document.getElementById('bw-post-banner-style')) {
+      var style = document.createElement('style');
+      style.id = 'bw-post-banner-style';
+      style.textContent = [
+        '.bw-post-banner[data-bw-post-banner]{box-sizing:border-box;display:grid;grid-template-columns:1.04fr 1fr;width:100%;max-width:100%;margin:24px 0;border:1px solid #102414;border-radius:14px;overflow:hidden;background:#102414;color:#FAFAF5;font-family:Montserrat,Arial,sans-serif}',
+        '.bw-post-banner[data-bw-post-banner="berlin-gifts"]{background:#F2F5EB;color:#123D18;border-color:#D6E2CD}',
+        '.bw-post-banner .bw-post-banner__body{box-sizing:border-box;align-self:center;padding:22px 24px;min-width:0}',
+        '.bw-post-banner .bw-post-banner__title{display:block;margin:0 0 8px;color:inherit;font:700 clamp(24px,3.5vw,36px)/1.06 Fraunces,Georgia,serif;letter-spacing:-.02em}',
+        '.bw-post-banner .bw-post-banner__copy{margin:0 0 14px;color:inherit;font:500 14px/1.45 Montserrat,Arial,sans-serif}',
+        'aside.bw-post-banner[data-bw-post-banner] a.bw-post-banner__link,aside.bw-post-banner[data-bw-post-banner] a.bw-post-banner__link:visited{box-sizing:border-box;display:inline-flex;align-items:center;gap:8px;min-height:42px;padding:9px 13px;border-radius:8px;background:#FFE600!important;color:#123D18!important;font:800 12px/1.25 Montserrat,Arial,sans-serif;text-decoration:none!important}',
+        'aside.bw-post-banner[data-bw-post-banner] a.bw-post-banner__link:hover,aside.bw-post-banner[data-bw-post-banner] a.bw-post-banner__link:focus-visible{background:#C5E1A5!important;color:#123D18!important}',
+        '.bw-post-banner a.bw-post-banner__link:focus-visible{outline:2px solid currentColor;outline-offset:-4px}',
+        '.bw-post-banner .bw-post-banner__visual{min-width:0;position:relative;aspect-ratio:3/2;background:#D9DEC9}',
+        '.bw-post-banner .bw-post-banner__visual img{position:absolute;inset:0;display:block;width:100%;height:100%;object-fit:cover;margin:0}',
+        '@media(max-width:570px){.bw-post-banner[data-bw-post-banner]{grid-template-columns:1fr;margin:20px 0}.bw-post-banner .bw-post-banner__visual{grid-row:1;aspect-ratio:2/1}.bw-post-banner .bw-post-banner__body{padding:17px 18px}.bw-post-banner .bw-post-banner__title{font-size:28px}}'
+      ].join('');
+      document.head.appendChild(style);
+    }
+    var offer = POST_BANNERS[kind];
+    var card = document.createElement('aside');
+    card.className = 'bw-post-banner';
+    card.setAttribute(POST_BANNER_MARKER, kind);
+    card.setAttribute('aria-label', offer.title);
+    card.innerHTML = [
+      '<div class="bw-post-banner__body">',
+      '<strong class="bw-post-banner__title">' + escapeHtml(offer.title) + '</strong>',
+      '<div class="bw-post-banner__copy">' + escapeHtml(offer.copy) + '</div>',
+      '<a class="bw-post-banner__link" href="' + escapeAttr(offer.href) + '">' + escapeHtml(offer.link) + ' <span aria-hidden="true">→</span></a>',
+      '</div>',
+      '<div class="bw-post-banner__visual"><img src="https://fenerszymanski.github.io/berlinwalk-widgets/blog-hero/assets/blog-banner-' + kind + '-20261119.webp" width="840" height="560" alt="" loading="lazy" decoding="async"></div>'
+    ].join('');
+    return card;
+  }
+
+  function injectPostBanner(body, kind, find, upgrade) {
+    var existing = removeDuplicateSurfaces(POST_BANNER_MARKER);
+    var previous = existing || (placed.banner && placed.banner.node);
+    if (previous && previous.getAttribute(POST_BANNER_MARKER) !== kind) {
+      if (existing) existing.remove();
+      delete placed.banner;
+      existing = null;
+    }
+    var card = placeSurface('banner', body, {
+      existing: existing,
+      build: function () { return buildPostBanner(kind); },
+      find: find,
+      upgrade: upgrade
+    });
+    // The redesigned article already lays out the content column at 680 px.
+    if (card && document.documentElement.getAttribute('data-bw-redesign') !== '1') syncSurfaceGutters(card, body, false);
+    return card;
+  }
+
+  function residentIntroPoint(body) {
     var blocks = articleBlocks(body);
     for (var i = 0; i < blocks.length; i++) {
       if ((blocks[i].tagName || '').toUpperCase() === 'P' && cleanText(blocks[i].textContent).length >= 80) {
@@ -1139,7 +1242,7 @@
         bindLetterBar(node);
         return node;
       },
-      find: function () { return residentLetterPoint(body); }
+      find: function () { return findLateLeadPoint(body); }
     });
     if (card) syncSurfaceGutters(card, body, true);
     return !!card;
@@ -1149,7 +1252,10 @@
     if (!ENABLED || !isSurfacePath()) return false;
     var body = findPostBody();
     if (!body) return false;
-    if (isResidentPost()) return injectResidentLetter(body);
+    if (isResidentPost()) {
+      injectPostBanner(body, 'berlin-gifts', function () { return residentIntroPoint(body) || findLateLeadPoint(body); });
+      return injectResidentLetter(body);
+    }
     document.documentElement.removeAttribute('data-bw-resident-post');
     var bookingPoint = findBookingInsertionPoint(body);
     var booking = placeSurface('booking', body, {
@@ -1160,19 +1266,15 @@
     var dateCard = placeSurface('date', body, {
       existing: removeDuplicateSurfaces(DATE_CHECK_MARKER),
       build: function () { return buildDateCheckCard(currentSlug()); },
-      find: function () {
-        var point = findDateCheckInsertionPoint(body, bookingPoint);
-        if (point) return point;
-        return booking && booking.parentNode ? { parent: booking.parentNode, after: booking, block: null, kind: 'fallback' } : null;
-      },
-      // A card that had to take the fallback spot moves up to the intro once,
-      // only while it is still entirely below the fold and has never been seen.
-      upgrade: function (rec) {
-        if (rec.kind !== 'fallback') return null;
-        if (rec.node.getAttribute('data-bw-date-check-seen') === '1') return null;
-        if (rec.node.getBoundingClientRect().top <= (window.innerHeight || 0)) return null;
-        return findEarlyDateCheckPoint(body);
-      }
+      find: function () { return findLateLeadPoint(body); }
+    });
+    if (isTouristPost()) injectPostBanner(body, 'audio-walks', function () {
+      var point = findDateCheckInsertionPoint(body, bookingPoint);
+      if (point) return point;
+      return booking && booking.parentNode ? { parent: booking.parentNode, after: booking, block: null, kind: 'fallback' } : null;
+    }, function (rec) {
+      if (rec.node.getBoundingClientRect().top <= (window.innerHeight || 0)) return null;
+      return findEarlyDateCheckPoint(body);
     });
     if (booking) syncSurfaceGutters(booking, body, false);
     if (dateCard) syncSurfaceGutters(dateCard, body, true);
@@ -1202,7 +1304,7 @@
   function ownMutation(record) {
     var target = record && record.target;
     if (target && target.nodeType === 1 && typeof target.closest === 'function' &&
-        target.closest('[' + BOOKING_MARKER + '],[' + DATE_CHECK_MARKER + '],[' + EAST_WEST_MARKER + '],[' + RESIDENT_MARKER + '],#' + LETTER_BAR_ID)) return true;
+        target.closest('[' + BOOKING_MARKER + '],[' + DATE_CHECK_MARKER + '],[' + EAST_WEST_MARKER + '],[' + RESIDENT_MARKER + '],[' + POST_BANNER_MARKER + '],#' + LETTER_BAR_ID)) return true;
     if (!record || (record.removedNodes && record.removedNodes.length)) return false;
     var added = record.addedNodes || [];
     if (!added.length) return false;
@@ -1230,7 +1332,7 @@
   }
 
   function removeSurfaces() {
-    [BOOKING_MARKER, DATE_CHECK_MARKER, EAST_WEST_MARKER, RESIDENT_MARKER].forEach(function (marker) {
+    [BOOKING_MARKER, DATE_CHECK_MARKER, EAST_WEST_MARKER, RESIDENT_MARKER, POST_BANNER_MARKER].forEach(function (marker) {
       queryAll('[' + marker + ']').forEach(function (node) {
         if (node._bwDateCheckMeasurement) node._bwDateCheckMeasurement.dispose();
         if (node.parentNode) node.parentNode.removeChild(node);
@@ -1255,7 +1357,6 @@
   var LETTER_DISMISS_KEY = 'bwLetterBarDismissedUntil';
   var LETTER_JOINED_KEY = 'bwLetterBarJoined';
   var LETTER_DISMISS_MS = 14 * 24 * 60 * 60 * 1000;
-  var LETTER_SHOW_DEPTH = 0.33;
   var letterBarStarted = false;
 
   function storageGet(key) {
@@ -1529,7 +1630,7 @@
     var button = bar.querySelector('button[type="submit"]');
     var startedAt = new Date().toISOString();
     var closeButton = bar.querySelector('.bw-lb-close');
-    // The inline copy on resident posts is rendered with the page; the bar only after a third of the article.
+    // Keep the existing attribution for both the inline form and the scroll-triggered bar.
     bwLetterMeasure(bar, form, bar.hasAttribute(RESIDENT_MARKER) ? 'post_letter_inline' : 'post_letter_bar');
     if (closeButton) closeButton.addEventListener('click', function () { closeLetterBar(bar, true); });
     form.addEventListener('submit', function (event) {
@@ -1613,7 +1714,7 @@
       var active = document.activeElement;
       // Never interrupt a reader who is filling in the Date Check card.
       if (active && active.closest && active.closest('[' + DATE_CHECK_MARKER + ']')) return;
-      if (scrollDepth() < LETTER_SHOW_DEPTH) return;
+      if (scrollDepth() < LEAD_DEPTH) return;
       shown = true;
       window.removeEventListener('scroll', onScroll);
       showLetterBar();
@@ -1627,7 +1728,7 @@
   }
 
   function boot() {
-    refreshResidentTopics();
+    refreshBlogTopics();
     retries = 0;
     scheduleInject(0);
     startObserver();
@@ -1645,6 +1746,7 @@
       findContentColumn: findContentColumn,
       syncSurfaceGutters: syncSurfaceGutters,
       findDateCheckInsertionPoint: findDateCheckInsertionPoint,
+      findLateLeadPoint: findLateLeadPoint,
       findBookingInsertionPoint: findBookingInsertionPoint,
       letterBarSuppressed: letterBarSuppressed,
       buildLetterBar: buildLetterBar,
