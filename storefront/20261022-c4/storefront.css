@@ -875,3 +875,8 @@ button.ys-words-tag:focus-visible{outline:2px solid var(--green);outline-offset:
 @media(max-width:740px){
  :host([design2]) .d2-hero-holiday .d2-hero-copy h1{font-size:clamp(31px,8.8vw,39px)}
 }
+
+/* 19 Nov 2026 (Yusuf, from an ad on his phone: "Bizim store headerı neden kayıp?", then "Evet, sabitle"): the store bar scrolled away with the page, so a visitor a little way down saw no logo, menu or cart. It now stays at the top of the screen. */
+:host([design2]) .d2-bar{position:sticky;top:0}
+/* The parts that already stick while scrolling on wide screens (product gallery, cart summary, calendar preview) sit below the bar. */
+:host([design2]) .product-layout .gallery,:host([design2]) .order-summary,:host([design2]) .cal-preview{top:85px}
