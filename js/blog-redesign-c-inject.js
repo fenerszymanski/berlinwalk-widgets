@@ -12,6 +12,11 @@
   // Berlin Then and Now, the paid walking tour (Wix service 145cb27e).
   var BOOKING_URL = 'https://www.walkofberlin.com/book-berlin-walking-tour/berlin-then-and-now';
   var AUDIO_TOURS_URL = 'https://www.walkofberlin.com/audio-tours';
+  var RAIL_GIFTS = [
+    { label: '1928 street print', image: '5a08a3_434eecbe3eae4805af00fac3e2283451~mv2.jpg' },
+    { label: 'Tempelhof hoodie', image: '5a08a3_1d05740ef0104e718ea19a6d5e2159ce~mv2.png' },
+    { label: '2027 calendar', image: '5a08a3_de1802442ecc44c8afac5a2b5fbaeef9~mv2.jpg' }
+  ];
   var PORTRAIT_URL = BASE + 'blog-hero/assets/yusuf-guide-portrait.jpg';
   var TOUR_BAND_IMAGE = BASE + 'blog-hero/assets/tour-cta-yusuf-rathaus-solo.jpg';
   var state = { archive: null, tools: null, heroHighlights: null, timer: null, observer: null, until: 0, adviceObserver: null, adviceBody: null, adviceScheduled: false, rendering: false };
@@ -115,6 +120,15 @@
     if (document.getElementById(STYLE_ID)) return;
     var style = document.createElement('style'); style.id = STYLE_ID;
     style.textContent = [
+      'html[data-bw-redesign="1"] .bw-c-rail-gifts{background:#F4F7EE;border:1px solid #D6E2CD;border-radius:12px;box-sizing:border-box;color:#123D18!important;display:block;margin-top:26px;padding:12px;text-decoration:none!important;}',
+      'html[data-bw-redesign="1"] .bw-c-rail .bw-c-rail-gifts strong{font:800 16px/1.25 Montserrat,Arial,sans-serif;margin:0 0 9px;}',
+      'html[data-bw-redesign="1"] .bw-c-rail-gift-grid{display:grid;gap:6px;grid-template-columns:repeat(3,minmax(0,1fr));}',
+      'html[data-bw-redesign="1"] .bw-c-rail-gift-item{display:block;font:600 10px/1.25 Montserrat,Arial,sans-serif;}',
+      'html[data-bw-redesign="1"] .bw-c-rail-gift-item img{aspect-ratio:1/1;background:#E8EEE0;border-radius:5px;display:block;height:auto;margin-bottom:5px;object-fit:cover;width:100%;}',
+      'html[data-bw-redesign="1"] .bw-c-rail-gifts-cta{align-items:center;background:#FFE600;border-radius:6px;color:#123D18!important;display:flex;font:750 11px/1.25 Montserrat,Arial,sans-serif;justify-content:space-between;margin-top:10px;min-height:34px;padding:0 9px;}',
+      'html[data-bw-redesign="1"] .bw-c-rail-gifts:hover .bw-c-rail-gifts-cta,html[data-bw-redesign="1"] .bw-c-rail-gifts:focus-visible .bw-c-rail-gifts-cta{background:#C5E1A5;}',
+      'html[data-bw-redesign="1"] .bw-c-rail-gifts:focus-visible{outline:2px solid #1B5E20;outline-offset:-2px;}',
+      'html[data-bw-redesign="1"] .bw-c-rail-gifts + .bw-c-rail-tour{margin-top:12px;}',
       // Declare both Fraunces faces here rather than trusting the head embed:
       // the redesign must not depend on another surface for its own fonts, and a
       // family that carries only one style is worse than none, because the
@@ -492,6 +506,16 @@
     state.endHeightObserver.observe(node, { attributes: true, attributeFilter: ['style'], subtree: true });
   }
 
+  function railGifts() {
+    var gifts = RAIL_GIFTS.map(function (item) {
+      var imageUrl = 'https://static.wixstatic.com/media/' + item.image + '/v1/fill/w_144,h_144,al_c,q_82/' + item.image;
+      return '<span class="bw-c-rail-gift-item"><img src="' + escapeHtml(imageUrl) + '" alt="" width="144" height="144" loading="lazy" decoding="async">' + escapeHtml(item.label) + '</span>';
+    }).join('');
+    return '<a class="bw-c-rail-gifts" href="/gifts"><strong>Berlin Gifts</strong>' +
+      '<span class="bw-c-rail-gift-grid">' + gifts + '</span>' +
+      '<span class="bw-c-rail-gifts-cta">Shop gifts <span aria-hidden="true">↗</span></span></a>';
+  }
+
   function toc(items, body, post, tool) {
     var page = pageFor(body); if (!page) return;
     var links = items.map(function (item) { return '<a href="#' + item.id + '"><span class="bw-c-rail-number">' + item.number + '</span><span class="bw-c-rail-text">' + escapeHtml(shortTocTitle(item.title)) + '</span></a>'; }).join('');
@@ -511,7 +535,8 @@
     document.querySelectorAll('.bw-c-mobile-toc,.bw-c-rail').forEach(function (node) { node.remove(); });
     var mobile = document.createElement('nav'); mobile.className = 'bw-c-mobile-toc'; mobile.setAttribute(MARK, 'toc'); mobile.innerHTML = '<div class="bw-c-mobile-toc-scroll">' + links + '</div>'; body.before(mobile);
     var rail = document.createElement('aside'); rail.className = 'bw-c-rail'; rail.setAttribute(MARK, 'rail'); rail.setAttribute('data-bw-toc-signature', signature);
-    rail.innerHTML = '<span class="bw-c-rail-progress" aria-hidden="true"><i></i></span><p class="bw-c-rail-title">ON THIS PAGE</p><nav class="bw-c-rail-list">' + links + '</nav><div class="bw-c-rail-tour"><span class="bw-c-rail-label">EXPLORE BERLIN</span><strong>Walk at your pace or with me.</strong><a class="bw-c-rail-choice bw-c-rail-choice-audio" href="' + AUDIO_TOURS_URL + '"><span>AUDIO TOURS<small>Listen as you walk</small></span><span aria-hidden="true">↗</span></a><a class="bw-c-rail-choice bw-c-rail-choice-walk" href="' + BOOKING_URL + '"><span>BERLIN THEN AND NOW<small>With me · about 2.5 hours · €15</small></span><span aria-hidden="true">↗</span></a></div>' + (tool ? '<a class="bw-c-rail-tool" href="/tools/' + escapeHtml(tool.slug) + '"><span class="bw-c-rail-label">ARTICLE TOOL</span><strong>' + escapeHtml(tool.title) + '</strong><small>Open the tool →</small></a>' : '') + '<a class="bw-c-rail-all" href="/blog">← ALL GUIDES</a>';
+    rail.innerHTML = '<span class="bw-c-rail-progress" aria-hidden="true"><i></i></span><p class="bw-c-rail-title">ON THIS PAGE</p><nav class="bw-c-rail-list">' + links + '</nav>' + railGifts() +
+      '<div class="bw-c-rail-tour"><span class="bw-c-rail-label">EXPLORE BERLIN</span><strong>Walk at your pace or with me.</strong><a class="bw-c-rail-choice bw-c-rail-choice-audio" href="' + AUDIO_TOURS_URL + '"><span>AUDIO TOURS<small>Listen as you walk</small></span><span aria-hidden="true">↗</span></a><a class="bw-c-rail-choice bw-c-rail-choice-walk" href="' + BOOKING_URL + '"><span>BERLIN THEN AND NOW<small>With me · about 2.5 hours · €15</small></span><span aria-hidden="true">↗</span></a></div>' + (tool ? '<a class="bw-c-rail-tool" href="/tools/' + escapeHtml(tool.slug) + '"><span class="bw-c-rail-label">ARTICLE TOOL</span><strong>' + escapeHtml(tool.title) + '</strong><small>Open the tool →</small></a>' : '') + '<a class="bw-c-rail-all" href="/blog">← ALL GUIDES</a>';
     page.insertBefore(rail, page.firstChild);
     function followSection(event) {
       var link = event.target.closest('a[href^="#"]'); if (!link) return;
