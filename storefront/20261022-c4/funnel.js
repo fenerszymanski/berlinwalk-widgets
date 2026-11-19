@@ -206,3 +206,11 @@ export function design2Step(step) {
  const lang=/^\/de(?:\/|$)/.test(W.location?.pathname||'')||/\/category\/(?:berlin-poster|berlin-geschenke|berlin-kalender-2027)\/?$/.test(W.location?.pathname||'')||new URLSearchParams(W.location?.search||'').get('lang')==='de'?'de':'en';
  count('design2-'+step+'-'+lang,STORE_PATH);
 }
+
+// Early product view (19 Nov 2026): aggregate counter only. shown = the page drew sizes and the buy button from our own catalogue copy;
+// add = "Add to cart" tapped before the bridge was ready; sent = that add went to the cart; refused = the live catalogue said no.
+export function earlyStep(step) {
+ if(!['shown','add','sent','refused'].includes(step))return;
+ const page=String(W.location?.pathname||'').replace(/^\/de(?=\/|$)/,'').replace(/\/+$/,'').toLowerCase()||'/';
+ count('early-'+step,page);
+}

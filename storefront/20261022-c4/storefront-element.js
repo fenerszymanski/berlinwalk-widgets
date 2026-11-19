@@ -75,6 +75,8 @@
   // Own catalogue copy (data/catalog-snapshot.json, refreshed hourly by the Mac mini). Older than this, the loading view goes back to grey price bars.
   const CATALOG_SNAPSHOT_MAX_AGE = 36*3600000;
   const BRIDGE_RESEND_MS = Object.freeze([500, 1000, 1500, 2000, 2500, 3000, 3500, 4000, 5000, 6000, 7000, 8500, 10500, 13000, 16000]);
+  // Early product view (19 Nov 2026): what the visitor chose survives Wix swapping the server-rendered copy of this element for a new one.
+  let earlyCarry = null;
   const releaseNative = () => {try{document.documentElement.classList.add('bw-shop-native');}catch{}};
   // This native digital SKU uses the same required map configurator, never a generic product add.
   const PRODUCT_VIEW_ALIASES = Object.freeze({'33c1b670-fadc-4bcf-a1a5-82cc14b668ea':Object.freeze({productId:'8aaf5412-7f21-42c7-acfb-85dd8417d68c',format:'framed'}),'6cf293bb-ae66-4cc0-a028-e6c08a15b325':Object.freeze({productId:'8aaf5412-7f21-42c7-acfb-85dd8417d68c',format:'canvas'}),'9b6fbecf-32e4-27dc-f3e6-9c887fe7f495': Object.freeze({productId:'8aaf5412-7f21-42c7-acfb-85dd8417d68c',format:'digital'})});
@@ -399,14 +401,14 @@
       this.onCartViewport=()=>{cancelAnimationFrame(this.cartBarFrame);this.cartBarFrame=requestAnimationFrame(()=>this.syncMobileCheckout());};
     }
     // The stylesheet and data load in parallel. Product/category previews get a bounded 20 s bridge window measured from connection. Cart timing retains its existing behavior; terminal errors still restore the native store.
-    connectedCallback() {if(location.pathname.includes('your-berlin-street-in-1928')){this.ysPaintPending=true;this.style.visibility='hidden';}window.addEventListener('pointerdown',this.onCreditOutside);window.addEventListener('popstate',this.onStoreNavigation);this.context=json(this.getAttribute('shop-context'))||{};this.syncConfiguredGuard();this.holdNativeGuard();if(!this.revealed&&!this.hidden){this.style.display='block';this.style.minHeight='100vh';}window.addEventListener('scroll',this.onCartViewport,{passive:true});window.addEventListener('resize',this.onCartViewport,{passive:true});this.ensureLink();this.connectedAt=globalThis.performance?.now?.()||0;this.watchdogFired=false;this.armWatchdog(/^(?:\/de)?\/(?:(?:category|product-page)\/|cart-page(?:\/|$))/.test(location.pathname)?20000:Math.max(1500,10500-(globalThis.performance?.now?.()||0))/* cart 20 s since 14 Nov 2026 (Yusuf: "yes, add it") */);this.load();}
+    connectedCallback() {if(location.pathname.includes('your-berlin-street-in-1928')){this.ysPaintPending=true;this.style.visibility='hidden';}window.addEventListener('pointerdown',this.onCreditOutside);window.addEventListener('popstate',this.onStoreNavigation);this.context=json(this.getAttribute('shop-context'))||{};this.syncConfiguredGuard();this.holdNativeGuard();if(!this.revealed&&!this.hidden){this.style.display='block';this.style.minHeight='100vh';}this.adoptEarly();window.addEventListener('scroll',this.onCartViewport,{passive:true});window.addEventListener('resize',this.onCartViewport,{passive:true});this.ensureLink();this.connectedAt=globalThis.performance?.now?.()||0;this.watchdogFired=false;this.armWatchdog(/^(?:\/de)?\/(?:(?:category|product-page)\/|cart-page(?:\/|$))/.test(location.pathname)?20000:Math.max(1500,10500-(globalThis.performance?.now?.()||0))/* cart 20 s since 14 Nov 2026 (Yusuf: "yes, add it") */);this.load();}
     // Slow start (19 Nov 2026, Yusuf: "bunu hemen düzeltmeliyiz"). The copy of this element in Wix's server HTML cannot get a bridge answer: Wix swaps it for a new copy when its client render starts (performance mark "client_render started"), and only that copy is answered. On a slow phone connection that swap comes after the 20 s watchdog (measured at 1.6 Mbit/s: swap at 27 s, storefront ready at 31 s), so the fallback only flashed Wix's own page for a few seconds before the storefront came anyway. On store pages the watchdog therefore waits in 2 s steps while Wix's client render has not started, or started under 15 s ago; hard stop 60 s after this copy connected. A copy that connects after the mark (the swapped-in one, in-site navigation) keeps the plain 20 s.
     slowStartGrace() {const now=globalThis.performance?.now?.()||0;if(!/^(?:\/de)?\/(?:(?:category|product-page)\/|cart-page(?:\/|$))/.test(location.pathname)||now-(this.connectedAt||0)>=60000)return false;let mark;try{mark=performance.getEntriesByName('client_render started')[0];}catch{}return !mark||now-mark.startTime<15000;}
     armWatchdog(wait) {clearTimeout(this.watchdog);this.watchdog=setTimeout(()=>{if(this.revealed||this.hidden)return;if(this.slowStartGrace()){this.armWatchdog(2000);return;}this.watchdogFired=true;if(!this.isConfiguredDigitalRoute())releaseNative();this.fail('BRIDGE_TIMEOUT');},wait);}
     disconnectedCallback() {this.dropNativeGuardHold();this.calendarCleanup?.();clearInterval(this.campaignTimer);clearInterval(this.campaignRefresh);window.removeEventListener('pointerdown',this.onCreditOutside);window.removeEventListener('popstate',this.onStoreNavigation);clearTimeout(this.watchdog);clearTimeout(this.quoteTimer);this.sizeObserver?.disconnect();cancelAnimationFrame(this.sizeFrame);cancelAnimationFrame(this.cartBarFrame);window.removeEventListener('scroll',this.onCartViewport);window.removeEventListener('resize',this.onCartViewport);for(const pending of this.pending.values()){clearTimeout(pending.timer);pending.reject(Error('BRIDGE_DISCONNECTED'));}this.pending.clear();}
     attributeChangedCallback(name, oldValue, value) {
       if(oldValue===value)return;
-      if(name==='shop-context') {const next=json(value)||{};if(next.path!==this.context.path){this.quantity=1;this.view='poster';this.readySent=false;this.revealed=false;this.quote=null;this.quoteRevision++;this.ysEntryProductId='';this.configuredFailure=false;this.previewPriceHeights=new Map();}this.context=next;this.syncConfiguredGuard();this.applyContextCategory();this.render();this.signalReady();}
+      if(name==='shop-context') {const next=json(value)||{};if(next.path!==this.context.path){if(this.context.path){this.quantity=1;this.view='poster';this.earlyAdd=null;}this.readySent=false;this.revealed=false;this.quote=null;this.quoteRevision++;this.ysEntryProductId='';this.configuredFailure=false;this.previewPriceHeights=new Map();}this.context=next;this.syncConfiguredGuard();this.applyContextCategory();this.render();this.signalReady();}
       if(name==='shop-catalogue') {this.catalogue=json(value);this.buildModel();}
       if(name==='shop-cart-response')this.receive(json(value));
       if(name==='shop-bridge-ready')this.start();
@@ -459,7 +461,7 @@
       if(response.event==='render-state') {
         if(this.isConfiguredDigitalRoute()&&(!response.ok||response.nativeCollapsed!==true)){this.showConfiguredFailure(response.error||'CONFIGURATOR_UNAVAILABLE');return;}
         for(const [id,pending] of this.pending)if(pending.op==='native-fallback'){clearTimeout(pending.timer);pending.resolve(response);this.pending.delete(id);}
-        if(response.ok&&response.nativeCollapsed){clearTimeout(this.watchdog);this.hidden=false;this.revealed=true;this.style.minHeight='';this.style.display='';this.render();this.releaseHomePaint();}
+        if(response.ok&&response.nativeCollapsed){clearTimeout(this.watchdog);this.hidden=false;this.revealed=true;this.style.minHeight='';this.style.display='';this.render();this.releaseHomePaint();this.flushEarlyAdd();}
         else {releaseNative();this.revealed=false;this.hidden=true;this.style.minHeight='';this.style.display='';this.appliedHeight=0;this.style.height='0px';this.sizeObserver?.disconnect();if(!response.fallback)this.reportFallback(response.error||'RENDER_STATE_FAILED');if(!response.fallback)this.dispatchEvent(new CustomEvent('shop-render-failed',{detail:{channel:CHANNEL},bubbles:true,composed:true}));}
         return;
       }
@@ -766,8 +768,9 @@
       return `<section class="ys-faq poster-faq"><h2>Questions</h2><details><summary>What sizes and paper are available?</summary><div class="details-body">${sizes}${papers}</div></details><details><summary>Is a frame included?</summary><div class="details-body"><p>No, this is an unframed poster. Frames, furniture and decor in room visualisations are not included.</p></div></details><details><summary>Where do you deliver, and how long does it take?</summary><div class="details-body"><p>${esc(POSTER_DELIVERY)}</p></div></details><details><summary>Can I return it? What if it is faulty?</summary><div class="details-body"><p>As a consumer, you have a 14-day right of withdrawal. You pay the return postage for a change of mind.</p><p>If your print arrives faulty, damaged or different from your order, write to <a href="mailto:info@walkofberlin.com">info@walkofberlin.com</a>. Your statutory rights apply. See the <a href="${LEGAL.terms}" target="_blank" rel="noopener">Store Terms</a> and <a href="${LEGAL.withdrawalNotice}" target="_blank" rel="noopener">Withdrawal notices</a> for the full details.</p></div></details><p class="ys-contact">Something else? Write to <a href="mailto:info@walkofberlin.com">info@walkofberlin.com</a>.</p></section>`;
     }
     changePosterOption(field) {
-      const product=this.model.products.find(p=>p.wixProductId===field.dataset.posterProduct);
-      const native=this.catalogue.products.find(p=>p.productId===field.dataset.posterProduct);
+      const early=this.earlyData?.(),models=early?.model||this.model,rows=early?.catalogue||this.catalogue;if(!models||!rows)return;
+      const product=models.products.find(p=>p.wixProductId===field.dataset.posterProduct);
+      const native=rows.products.find(p=>p.productId===field.dataset.posterProduct);
       if(!product)return;
       const pack=this.posterPack(product,native),key=field.dataset.posterOption;
       if(!pack||!pack.keys.includes(key))return;
@@ -779,7 +782,7 @@
       if(product.group==='apparel'&&pack.choices.Color!==this.posterChoices[product.wixProductId].Color)this.view='poster';
       if(product.wixProductId==='52d20d32-021d-4024-875c-440d29784322')this.berolinaOptionsOpen=!!field.closest('[data-berolina-options]')?.open;
       this.render();
-      this.shadowRoot.querySelector(`[data-poster-option="${key}"]`)?.focus({preventScroll:true});
+      (this.viewRoot?.()||this.shadowRoot).querySelector(`[data-poster-option="${key}"]`)?.focus({preventScroll:true});
     }
 
     // Print and file are separate Wix products; the switch joins them on one page (posters merged, 29 Oct 2026).
@@ -1120,6 +1123,49 @@
       this.sizeObserver.observe(content);
     }
     // Page mode before the bridge has sent shop-context: the same routes the page code recognises (/category/..., /product-page/<slug>, /cart-page), read from the address only for this drawing.
+    // Early product view (19 Nov 2026, Yusuf: "Tamam ne gerekiyorsa yap, hızlandırmamız lazım bu deneyimi, yoksa boşa gider her şey"). Measured on a 4 Mbit/s phone: photo at 6 s, but size, colour and "Add to cart" only at 14 s, because the page waited for Wix's own start and the Velo catalogue. Clothing product pages now draw the finished product page inside the loading box from our own catalogue copy (sizes, colours, prices, stock; an hour old at most in practice), so the visitor can choose at once. "Add to cart" is remembered and sent as the normal add the moment the bridge has revealed the storefront; the live catalogue decides then (a size that sold out in between is refused with the usual message). Nothing is ever sent to the cart from the copy itself.
+    earlyData(route=this.skeletonRoute()) {
+      if(this.revealed||this.hidden||this.configuredFailure||!this.layer||!this.presentation||route.mode!=='product'||!route.productId||PRODUCT_VIEW_ALIASES[route.productId])return null;
+      let catalogue,model;const live=Array.isArray(this.catalogue?.products)&&!!this.model;
+      if(live){catalogue=this.catalogue;model=this.model;}
+      else{if(this.catalogue||this.giftSnapshotUsable()||!this.catalogSnapshotUsable())return null;model=this.skeletonCatalog();if(this.earlyCatalogueSource!==this.catalogSnapshot){this.earlyCatalogueSource=this.catalogSnapshot;this.earlyCatalogue={products:this.catalogSnapshot.products.filter(p=>p.visible===true)};}catalogue=this.earlyCatalogue;}
+      const product=model?.products.find(p=>p.wixProductId===route.productId),native=catalogue.products.find(p=>p.productId===route.productId);
+      if(!product||!native||product.group!=='apparel'||product.unavailable||native.requiresOptions!==true||!Array.isArray(native.variants)||!native.variants.length)return null;
+      return {catalogue,model,product,native,live,context:this.context?.mode==='product'&&this.context.productId===route.productId?this.context:{...this.context,mode:'product',productId:route.productId}};
+    }
+    earlyProductHtml(route) {
+      const data=this.earlyData(route);if(!data)return '';
+      const saved=[this.catalogue,this.model,this.context];let html='';
+      try{this.catalogue=data.catalogue;this.model=data.model;this.context=data.context;html=this.product()||'';}catch{html='';}finally{[this.catalogue,this.model,this.context]=saved;}
+      if(!html.includes('data-action="poster-add"'))return '';
+      const queued=this.earlyAdd?.productId===data.product.wixProductId,de=this.campaignGerman();
+      html=html.replace(/<button class="primary" data-action="poster-add"([^>]*)>([^<]*)<\/button>/,(match,attrs,label)=>queued?`<button class="primary" data-action="early-add"${attrs.replace(/\sdisabled(?=\s|$)/,'')} aria-disabled="true" aria-busy="true">${de?'Wird hinzugefügt …':'Adding to cart …'}</button>`:`<button class="primary" data-action="early-add"${attrs}>${label}</button>`);
+      if(queued)html=html.replace('<p class="delivery">',`<p class="delivery" role="status" data-early-note><strong>${de?'Einen Moment, der Warenkorb öffnet sich.':'One moment, the cart is opening.'}</strong> ${de?'Deine Auswahl ist gespeichert.':'Your choice is saved.'}</p><p class="delivery">`);
+      html=html.replace(/data-action="(?:add|gift-add|ys-add)"/g,'data-action="preview-wait" aria-disabled="true"');
+      // Only the photo on stage is downloaded while Wix is still starting: measured at 4 Mbit/s, the other pictures of the page (about 3 MB of thumbnails and recommendation cards) pushed Wix's own start from 12 s to 19.6 s. They load with the finished page.
+      const template=document.createElement('template');template.innerHTML=html;const stage=template.content.querySelector('.gallery-stage img')?.getAttribute('src')||'';
+      for(const image of template.content.querySelectorAll('img')){if(image.closest('.gallery-stage')||(stage&&image.getAttribute('src')===stage&&!image.hasAttribute('srcset')))continue;image.dataset.earlySrc=image.getAttribute('src')||'';image.removeAttribute('src');image.removeAttribute('srcset');}
+      for(const video of template.content.querySelectorAll('video')){if(video.closest('.gallery-stage'))continue;video.preload='none';video.removeAttribute('poster');video.removeAttribute('autoplay');}
+      html=template.innerHTML;
+      return `<style>.skeleton [data-early] a,.skeleton [data-early] .tile{pointer-events:auto;cursor:pointer}</style><div data-early>${html}</div>`;
+    }
+    viewRoot() {const box=this.shadowRoot.querySelector('.skeleton');return box&&!box.hidden&&!this.revealed&&!this.hidden?box:this.shadowRoot;}
+    saveEarly() {earlyCarry={path:location.pathname,at:Date.now(),posterChoices:this.posterChoices||{},view:this.view,quantity:this.quantity,add:this.earlyAdd||null,height:this.appliedHeight||0};}
+    adoptEarly() {
+      this.posterChoices=this.posterChoices||{};const carry=earlyCarry;
+      if(!carry||carry.path!==location.pathname||Date.now()-carry.at>180000)return;
+      Object.assign(this.posterChoices,carry.posterChoices);this.view=carry.view||'poster';this.quantity=carry.quantity||1;this.earlyAdd=carry.add||null;
+      // The swapped-in copy keeps the height the visitor was reading at, so the page does not jump to the top.
+      if(carry.height>0&&!this.revealed&&!this.hidden)this.style.minHeight=Math.max(carry.height,globalThis.innerHeight||0)+'px';
+    }
+    flushEarlyAdd() {
+      const queued=this.earlyAdd;if(!queued||!this.revealed||this.busy)return;
+      this.earlyAdd=null;this.saveEarly();
+      if(Date.now()-queued.at>180000||this.context.mode!=='product'||this.productViewId()!==queued.productId)return;
+      const button=this.shadowRoot.querySelector(`.surface [data-action="poster-add"][data-product="${queued.productId}"]`);
+      if(!button||button.disabled){this.measure('earlyStep','refused');this.error='CART_ITEMS_UNAVAILABLE';this.render();return;}
+      this.measure('earlyStep','sent');button.click();
+    }
     skeletonRoute() {
       const context=this.context||{};
       if(['shop','product','cart'].includes(context.mode))return {mode:context.mode,productId:this.productViewId()||null,categorySlug:context.categorySlug||null};
@@ -1217,6 +1263,7 @@
       return `${this.skeletonBar(model,category==='all'?'all':category)}<section class="wrap intro"><h1 class="lead">${esc(page.title)}</h1><p>${esc(page.text)}</p></section><section class="wrap shelf"><div class="grid category-grid">${cards.join('')}</div></section>`;
     }
     skeletonProduct(route,model) {
+      const early=this.earlyProductHtml(route);if(early)return this.skeletonBar(model,'all')+early;
       const meta=route.productId?this.presentation.find(entry=>entry.wixProductId===route.productId):null,baseProduct=model.products.find(p=>p.wixProductId===route.productId),configuredDigital=this.isConfiguredDigitalRoute();
       const digitalRow=configuredDigital?(this.catalogue?.products||this.snapshotRows())?.find(p=>p.productId===this.ysMod?.YS_DIGITAL_ID):null;
       const priced=configuredDigital&&baseProduct&&digitalRow?{...baseProduct,wixProductId:digitalRow.productId,requiresOptions:false,priceFrom:false,priceCents:Math.round(digitalRow.discountedPrice*100)}:baseProduct,hasPrice=!!priced&&(!configuredDigital||!!digitalRow)&&(!!this.catalogue||this.snapshotUsable());
@@ -1244,13 +1291,14 @@
       if(!this.layer||!this.presentation)return false;
       let box=this.shadowRoot.querySelector('.skeleton');
       try {
-        const route=this.skeletonRoute(),key=[route.mode,route.productId||'',route.categorySlug||'',this.catalogue?'live':this.snapshotUsable()?'snapshot':'loading',this.campaignGerman()].join('|');
+        const route=this.skeletonRoute(),key=[route.mode,route.productId||'',route.categorySlug||'',this.catalogue?'live':this.snapshotUsable()?'snapshot':'loading',this.campaignGerman(),this.earlyData(route)?JSON.stringify([this.posterChoices?.[route.productId]||null,this.view,this.quantity,!!this.earlyAdd]):''].join('|');
         if(box&&box.dataset.key===key)return true;
         const model=this.skeletonCatalog();
         const body=(route.mode==='cart'?this.skeletonCart(model):route.mode==='product'?this.skeletonProduct(route,model):this.skeletonShop(route,model)).replace('</aside>','</aside>'+this.campaignBanner());
         if(!box){this.ensureLink();box=document.createElement('div');box.className='skeleton';box.setAttribute('aria-busy','true');box.hidden=true;this.shadowRoot.append(box);}
         box.dataset.key=key;box.innerHTML=`<p class="sr-only" role="status">Loading the store</p><div>${body}</div>`;
         if(!this.catalogue&&!this.giftSnapshotUsable()&&this.catalogSnapshotUsable()&&route.mode!=='cart')this.snapshotShown=true;
+        const early=!!box.querySelector('[data-early]');box.setAttribute('aria-busy',early?'false':'true');if(early){box.querySelector(':scope > .sr-only')?.remove();this.saveEarly();if(!this.earlyCounted){this.earlyCounted=true;this.measure('earlyStep','shown');}}
       }catch{box?.remove();return false;}
       this.showWhenStyled(box);this.watchSize(box);return true;
     }
@@ -1342,12 +1390,13 @@
       if(filter){this.navigateStore(this.category,filter.dataset.filter,event);return;}
       const button=event.target.closest('[data-action]');if(!button)return;
       const action=button.dataset.action;
-      if(action==='buy-options'){const box=this.shadowRoot.querySelector('.buy-box');if(box){box.style.scrollMarginTop='100px';box.scrollIntoView({block:'start',behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'});(box.querySelector('select:not([disabled])')||box.querySelector('button:not([disabled]),a'))?.focus({preventScroll:true});}return;}
+      if(action==='early-add'){const data=this.earlyData();if(!data||this.earlyAdd||button.disabled||button.dataset.product!==data.product.wixProductId||!this.posterPack(data.product,data.native)?.canAdd)return;this.earlyAdd={productId:data.product.wixProductId,at:Date.now()};this.measure('earlyStep','add');this.render();return;}
+      if(action==='buy-options'){const box=this.viewRoot().querySelector('.buy-box');if(box){box.style.scrollMarginTop='100px';box.scrollIntoView({block:'start',behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'});(box.querySelector('select:not([disabled])')||box.querySelector('button:not([disabled]),a'))?.focus({preventScroll:true});}return;}
       if(action==='ys-add-another'){this.measure('ysAddAnother');return;}   // plain link: the 1928 page opens with the same options
       if(action==='close-drawer'){this.shadowRoot.querySelector('dialog').close();return;}
       if(action==='gift-toggle'||action==='gift-pick'){this.giftClick(action,button);return;}
       if(action==='show-legal'){const d=this.shadowRoot.querySelector('details[data-ys-legalfoot]');if(d){d.open=true;d.scrollIntoView({behavior:'smooth',block:'start'});}return;}
-      if(action==='show-guarantee'){const d=this.shadowRoot.querySelector('details.delivery-returns');if(d){d.open=true;d.querySelector('.eu-guarantee')?.scrollIntoView({behavior:'smooth',block:'start'});}return;}if(action==='poster'||action==='room'||action==='wall'||action==='video'||/^g\d+$/.test(action)){this.view=action;this.render();if(action==='video')this.shadowRoot.querySelector('video.room')?.play?.().catch(()=>{});return;}
+      if(action==='show-guarantee'){const d=this.viewRoot().querySelector('details.delivery-returns');if(d){d.open=true;d.querySelector('.eu-guarantee')?.scrollIntoView({behavior:'smooth',block:'start'});}return;}if(action==='poster'||action==='room'||action==='wall'||action==='video'||/^g\d+$/.test(action)){this.view=action;this.render();if(action==='video')this.viewRoot().querySelector('video.room')?.play?.().catch(()=>{});return;}
       if(action==='product-minus'||action==='product-plus'){this.quantity=Math.max(1,Math.min(99,this.quantity+(action==='product-plus'?1:-1)));this.render();return;}
       if(action==='shipping'){const choice=this.quote?.choices?.[Number(button.dataset.index)],same=!!choice&&!!this.selection&&choice.carrierId===this.selection.carrierId&&choice.code===this.selection.code;if(choice&&!same&&!this.busy&&!this.quoting&&!this.uncertain){this.choiceList={signature:this.cart.signature,choices:this.quote.choices};this.selection={carrierId:choice.carrierId,code:choice.code};this.quote=null;this.quoteError='';this.failedKey='';await this.getQuote(true);}return;}
       if(action==='retry-quote'){if(!this.busy&&!this.quoting&&!this.uncertain){this.quoteError='';this.failedKey='';await this.getQuote(true);}return;}
