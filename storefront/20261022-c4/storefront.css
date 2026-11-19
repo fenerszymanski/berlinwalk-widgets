@@ -880,3 +880,8 @@ button.ys-words-tag:focus-visible{outline:2px solid var(--green);outline-offset:
 :host([design2]) .d2-bar{position:sticky;top:0}
 /* The parts that already stick while scrolling on wide screens (product gallery, cart summary, calendar preview) sit below the bar. */
 :host([design2]) .product-layout .gallery,:host([design2]) .order-summary,:host([design2]) .cal-preview{top:85px}
+/* Phones (19 Nov 2026, Yusuf: "Evet, daralt"): two rows took about a sixth of the screen. Once the page is scrolled the menu row is put away and logo, search, language and cart stay; back at the top it returns. The freed height stays reserved under the bar so the page does not jump. */
+@media(max-width:740px){
+ :host([design2][bar-compact]) .d2-bar .d2-groups{display:none}
+ :host([design2][bar-compact]) .d2-bar{margin-bottom:var(--bw-bar-gap,0px)}
+}
