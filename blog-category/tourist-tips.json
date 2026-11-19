@@ -1,5 +1,5 @@
 {
- "updatedAt": "2026-11-18T09:59:30.912Z",
+ "updatedAt": "2026-11-19T10:07:04.338Z",
  "source": "Wix Blog API + blog-category/categories.json",
  "slug": "tourist-tips",
  "categoryId": "6da64e22-3360-42ec-a558-e906e4deeb19",
@@ -9,7 +9,7 @@
  "shelfLegend": "What the trip actually asks you",
  "shelfLegendSub": "Grouped by the moment the question turns up",
  "totalPosts": 312,
- "toolCount": 290,
+ "toolCount": 291,
  "lead": {
   "title": "Glienicke Bridge: How to Visit Berlin's Bridge of Spies and the Border Corner Around It",
   "slug": "glienicke-bridge-berlin",
@@ -29,7 +29,7 @@
   "term": "",
   "gloss": "",
   "termCta": "",
-  "tool": ""
+  "tool": "glienicke-border-corner-planner"
  },
  "glossary": [],
  "shelves": [
@@ -1274,7 +1274,8 @@
      "minutes": 8,
      "alt": "The green steel arches of Glienicke Bridge over the Havel, seen from the Potsdam shore on a clear day",
      "thumb": "https://static.wixstatic.com/media/5a08a3_2eb10ec3bd6741b4b9a2de6af498dd01~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
-     "line": "Most visitors photograph the green arches and leave."
+     "line": "Most visitors photograph the green arches and leave.",
+     "tool": "glienicke-border-corner-planner"
     },
     {
      "title": "Berlin Christmas Market Souvenirs: What Is Worth Carrying Home",

@@ -1,5 +1,5 @@
 {
- "updatedAt": "2026-11-18T09:59:29.051Z",
+ "updatedAt": "2026-11-19T10:07:01.972Z",
  "source": "Wix Blog API + blog-category/categories.json",
  "slug": "living-in-berlin",
  "categoryId": "00af1018-ef7b-465a-93b6-916187609da4",
@@ -8,28 +8,28 @@
  "shelfMode": "curated",
  "shelfLegend": "By the part of life it hits",
  "shelfLegendSub": "Four shelves, because that is how the questions actually arrive",
- "totalPosts": 83,
+ "totalPosts": 84,
  "toolCount": 83,
  "lead": {
-  "title": "Historical Aerial Photos of Berlin: How to Find Your Street",
-  "slug": "historical-aerial-photos-berlin",
-  "path": "/post/historical-aerial-photos-berlin",
-  "excerpt": "Berlin photographed almost the whole city from a plane in 1928 and again after the war, and the photos are free online. How I find a street in them and what you can read from above.",
+  "title": "Kottbusser Tor: Is Kotti Dangerous, and Why the Square Looks the Way It Does",
+  "slug": "kottbusser-tor-berlin",
+  "path": "/post/kottbusser-tor-berlin",
+  "excerpt": "Kotti has a reputation everyone in Berlin has heard. What the police figures actually say, why the square looks the way it does, and the habits that make Kottbusser Tor easy to use.",
   "minutes": 6,
   "readTime": "6 min read",
-  "publishedDate": "2026-11-17T18:59:19.591Z",
-  "alt": "Potsdamer Platz and the octagon of Leipziger Platz from above in 1928 and 2026, side by side at the same scale",
-  "lead": "https://static.wixstatic.com/media/5a08a3_8acbb84536bd46b6ae19b2cdcef6b576~mv2.jpg/v1/fill/w_1400,h_620,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
-  "thumb": "https://static.wixstatic.com/media/5a08a3_8acbb84536bd46b6ae19b2cdcef6b576~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
-  "square": "https://static.wixstatic.com/media/5a08a3_8acbb84536bd46b6ae19b2cdcef6b576~mv2.jpg/v1/fill/w_184,h_184,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
-  "shelf": "wohnung",
+  "publishedDate": "2026-11-19T10:03:02.281Z",
+  "alt": "Kottbusser Tor at night from above, with the lit Neues Kreuzberger Zentrum, the U-Bahn station on its viaduct and car light trails around the square",
+  "lead": "https://static.wixstatic.com/media/5a08a3_39cd6d06778847e8a9c050b50cc72e38~mv2.jpg/v1/fill/w_1400,h_620,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+  "thumb": "https://static.wixstatic.com/media/5a08a3_39cd6d06778847e8a9c050b50cc72e38~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+  "square": "https://static.wixstatic.com/media/5a08a3_39cd6d06778847e8a9c050b50cc72e38~mv2.jpg/v1/fill/w_184,h_184,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+  "shelf": "wege",
   "topic": "living-in-berlin",
-  "figure": "1928",
-  "line": "is the year a survey plane photographed almost every Berlin courtyard, and those photos are free to open for your own street.",
+  "figure": "26",
+  "line": "knife attacks were counted in the Kotti ban zone in 2025, down from 48 the year before.",
   "term": "",
   "gloss": "",
   "termCta": "",
-  "tool": "berlin-aerial-photo-finder"
+  "tool": ""
  },
  "glossary": [
   {
@@ -1017,6 +1017,16 @@
    "title": "Wege",
    "lead": "Getting around, and keeping the bike you got around on",
    "posts": [
+    {
+     "title": "Kottbusser Tor: Is Kotti Dangerous, and Why the Square Looks the Way It Does",
+     "slug": "kottbusser-tor-berlin",
+     "path": "/post/kottbusser-tor-berlin",
+     "minutes": 6,
+     "alt": "Kottbusser Tor at night from above, with the lit Neues Kreuzberger Zentrum, the U-Bahn station on its viaduct and car light trails around the square",
+     "thumb": "https://static.wixstatic.com/media/5a08a3_39cd6d06778847e8a9c050b50cc72e38~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+     "line": "knife attacks were counted in the Kotti ban zone in 2025, down from 48 the year before.",
+     "figure": "26"
+    },
     {
      "title": "Berlin Timetable Change: What Moves on 13 December and What Costs More on 1 January",
      "slug": "berlin-timetable-change",
