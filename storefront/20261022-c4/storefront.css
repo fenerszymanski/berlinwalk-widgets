@@ -150,6 +150,14 @@ h2>.sk-heading{width:55%}
 .ys-quick[hidden]{display:none}
 .ys-quick>.primary{width:100%}
 .ys-quick-spec{margin:0;font-size:13px;line-height:1.45;color:var(--muted);text-align:center}
+.ys-quick-formats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.ys-quick-formats button{display:grid;align-content:start;gap:4px;min-height:60px;padding:10px 8px;border:1px solid var(--line);border-radius:10px;background:#fff;color:var(--ink);font:inherit;font-size:14px;line-height:1.25;cursor:pointer}
+.ys-quick-formats button[aria-pressed="true"]{border-color:var(--leaf);box-shadow:inset 0 0 0 1px var(--leaf);background:#f4f8f2;color:var(--green)}
+.ys-quick-formats button:focus-visible{outline:2px solid var(--green);outline-offset:2px}
+.ys-quick-formats small,.ys-quick-delivery{font-size:12px;line-height:1.4;color:var(--muted)}
+.ys-quick-formats small span+span::before{content:" · ";white-space:pre}
+.ys-quick-delivery{margin:0;text-align:center}
+.ys-quick-with-formats [data-ys="quickspec"],.ys-quick-with-formats .ys-trust-compact[data-ys-legal="digital"] li:first-child{display:none}
 .ys-link{background:none;border:0;padding:0;font:inherit;color:var(--green);text-decoration:underline;text-underline-offset:3px;cursor:pointer}
 .ys-confirm{display:grid;gap:10px;padding:14px 16px;border:1.5px solid var(--leaf);border-radius:12px;background:#f4f8f2;font-size:14px;line-height:1.45;color:var(--ink);text-align:left}
 .ys-confirm[hidden]{display:none}

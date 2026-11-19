@@ -266,12 +266,16 @@ const PATTERNS = [
 ];
 const ATTRS = new Map(Object.entries({
   'e.g. Chamissoplatz': 'z. B. Chamissoplatz', 'you@example.com': 'E-Mail-Adresse', 'Address or place in Berlin': 'Adresse oder Ort in Berlin',
+  'Choose your format': 'Format auswählen',
   'Why you can buy with confidence': 'Darauf kannst du dich verlassen', 'Example print: Chamissoplatz in 1928 and today': 'Beispieldruck: Chamissoplatz um 1928 und heute',
   "Aerial photograph of your home in 1928, with a cross on your building": "Luftbild deines Zuhauses um 1928, mit einem Kreuz auf deinem Gebäude",
   'Aerial photograph of the same spot today, same ground and scale, with a cross on the same spot': 'Luftbild derselben Stelle heute, gleicher Ausschnitt und Maßstab, mit einem Kreuz an derselben Stelle',
   'Withdrawal notice and terms': 'Widerruf und Bedingungen',
   'Home since 2014': 'Zuhause seit 2014',
 }));
+TEXT.set('Physical print', 'Gedruckte Version');
+TEXT.set('Delivery in Germany in 3 to 5 working days', 'Lieferung in Deutschland in 3 bis 5 Werktagen');
+TEXT.set('Delivery in Germany in 5 to 8 working days', 'Lieferung in Deutschland in 5 bis 8 Werktagen');
 TEXT.set("How many homes?","Wie viele Adressen?");
 ATTRS.set("How many homes?","Wie viele Adressen?");
 TEXT.set("One home","1 Adresse");

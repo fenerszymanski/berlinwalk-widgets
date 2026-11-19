@@ -344,6 +344,10 @@ export function mountConfigurator(host, state, api) {
   const L = YS_LIMITS;
   const currentPrice=state=>api.variantPrice?api.variantPrice(state):ysPrice(state);
   const showPrice=(el,amount)=>{if(el)el.innerHTML=api.priceHtml?api.priceHtml(amount,state):euro(amount);};
+  const hasQuickFormats = api.variants && api.digital && Number.isFinite(api.digitalPrice);
+  const printFormat = () => ysDigital(state)
+    ? (api[state.lastPrintFormat] ? state.lastPrintFormat : 'poster')
+    : (state.format || 'poster');
   const visual = host.querySelector('[data-ys-slot="visual"]'), formSlot = host.querySelector('[data-ys-slot="form"]');
   visual.innerHTML = `<div class="ys-visual">
       <div class="ys-stage">
@@ -374,7 +378,12 @@ export function mountConfigurator(host, state, api) {
       </div>
       <div class="ys-mockups" data-ys-mockups hidden><p>Example rooms. Your print shows the address you choose.</p><div data-ys-picture="framed"><img data-ys-frame-image alt="Framed print in an example room" width="1200" height="1200" loading="lazy"><img data-ys-frame-sizes src="${new URL('./assets/framed-20261111/room-two-sizes.webp',import.meta.url).href}" alt="Framed prints at 30 x 40 cm and 45 x 60 cm side by side" width="1200" height="1200" loading="lazy"></div><div data-ys-picture="canvas"><img src="${new URL('./assets/framed-20261111/canvas-front.webp',import.meta.url).href}" alt="Illustrated canvas front" width="1200" height="1200" loading="lazy"><img src="${new URL('./assets/framed-20261111/canvas-angle.webp',import.meta.url).href}" alt="Illustrated canvas with a 2 cm edge" width="1200" height="1200" loading="lazy"></div></div>
       <p class="ys-caption" data-ys="caption">${captionFor(state, !!state.lat)}</p>
-      <div class="ys-quick" data-ys="quick" ${state.lat ? '' : 'hidden'}>
+      <div class="ys-quick${hasQuickFormats ? ' ys-quick-with-formats' : ''}" data-ys="quick" ${state.lat ? '' : 'hidden'}>
+        ${hasQuickFormats ? `<div class="ys-quick-formats" role="group" aria-label="Choose your format">
+          <button type="button" data-ys-quick-format="digital" aria-pressed="${ysDigital(state)}"><strong>Digital file</strong><small>JPG + PDF</small></button>
+          <button type="button" data-ys-quick-format="print" aria-pressed="${!ysDigital(state)}"><strong>Physical print</strong><small><span data-ys="quickprintkind"></span><span data-ys="quickprintsize"></span></small></button>
+        </div>
+        <p class="ys-quick-delivery" data-ys="quickdelivery"></p>` : ''}
         <button type="button" class="primary" data-ys-quickadd>Add to cart</button>
         <p class="ys-quick-spec"><span data-ys="quickspec">Personalised print</span><span class="ys-quick-sep"> · </span><button type="button" class="ys-link" data-ys-jump>Change size, paper or text</button></p>
         ${confirmHtml('quick')}
@@ -431,6 +440,7 @@ export function mountConfigurator(host, state, api) {
   const searchSlot = host.querySelector('[data-ys-slot="search"]');
   if (searchSlot) { searchSlot.innerHTML = searchHtml; formSlot.innerHTML = optionsHtml; } else formSlot.innerHTML = searchHtml + optionsHtml;
   const $ = name => host.querySelector(`[data-ys="${name}"]`);
+  const quickFormats = [...host.querySelectorAll('[data-ys-quick-format]')];
   // Size and paper: the price, caption and button follow the choice; Wix still charges its own variant price.
   const optSummary = text => { $('optsummary').textContent = text; };
   $('options').addEventListener('toggle', () => { state.optionsOpen = $('options').open; });
@@ -461,6 +471,16 @@ export function mountConfigurator(host, state, api) {
        // the digital product is not in the catalogue: poster only
     $('options').hidden = (!api.variants&&!mounted) || ysDigital(state);   // only the poster has sizes and papers; the format choice sits above the box
     host.querySelectorAll('[data-ys-format]').forEach(b => b.setAttribute('aria-checked', String(b.dataset.ysFormat === (state.format||'poster'))));
+    if (hasQuickFormats) {
+      const format = printFormat();
+      const printKind = {poster: 'Poster', framed: 'Framed print', canvas: 'Canvas print'};
+      quickFormats.forEach(button => button.setAttribute('aria-pressed', String((button.dataset.ysQuickFormat === 'digital') === ysDigital(state))));
+      $('quickprintkind').textContent = printKind[format];
+      $('quickprintsize').textContent = ysSize({...state, format});
+      $('quickdelivery').textContent = ysDigital(state) ? 'Sent by email within 24 hours'
+        : mounted ? 'Delivery in Germany in 5 to 8 working days'
+        : 'Delivery in Germany in 3 to 5 working days';
+    }
     $('variant').hidden = (!api.variants&&!mounted) || ysDigital(state);
     const delivery = host.querySelector('.ys-buy .delivery'); if (delivery) delivery.textContent = mounted ? MOUNTED_DELIVERY : ysDigital(state) ? DIGITAL_DELIVERY : POSTER_DELIVERY;
     (host.getRootNode().querySelectorAll ? host.getRootNode() : host).querySelectorAll('[data-ys-legal]').forEach(el => { el.hidden = el.dataset.ysLegal !== kind || (mounted&&el.hasAttribute('data-ys-poster-only'));  });
@@ -507,7 +527,18 @@ export function mountConfigurator(host, state, api) {
     $('caption').textContent = captionFor(state, !!state.lat);
   }
   host.querySelectorAll('[data-ys-size]').forEach(b => b.addEventListener('click', () => { state[sizeKey(state)] = b.dataset.ysSize; paintVariant(); }));
-  host.querySelectorAll('[data-ys-format]').forEach(b => b.addEventListener('click', () => { const was=state.format||'poster';state.format=b.dataset.ysFormat;if(state.format!==was&&['digital','framed','canvas'].includes(state.format))api.track?.(state.format); paintVariant(); }));
+  function chooseFormat(format) {
+    const previous = state.format || 'poster';
+    if (format === previous || api.busy()) return;
+    if (!ysDigital(state)) state.lastPrintFormat = previous;
+    state.format = format;
+    state.confirming = null;
+    if (['digital','framed','canvas'].includes(format)) api.track?.(format);
+    paintVariant();
+    refreshButton();
+  }
+  host.querySelectorAll('[data-ys-format]').forEach(button => button.addEventListener('click', () => chooseFormat(button.dataset.ysFormat)));
+  quickFormats.forEach(button => button.addEventListener('click', () => chooseFormat(button.dataset.ysQuickFormat === 'digital' ? 'digital' : printFormat())));
   $('paper').addEventListener('change', e => { state[ysMounted(state)?'framedPaper':'paper'] = e.target.value; paintVariant(); });
   host.querySelectorAll('[data-ys-frame]').forEach(b=>b.addEventListener('click',()=>{state.frame=b.dataset.ysFrame;paintVariant();}));
   queueMicrotask(paintVariant);
