@@ -11912,6 +11912,39 @@
       "cmsItemId": "7fcee26d-c36d-4d93-870d-ac88c61d6174",
       "iconStatus": "live-wix-media",
       "image": "https://static.wixstatic.com/media/5a08a3_a3c8ca39a2e74c678d70f24d36d7e0f5~mv2.png"
+    },
+    {
+      "slug": "kotti-square-reader",
+      "title": "Kotti Square Reader",
+      "lead": "Step around Kottbusser Tor on a real map, stop by stop: the old Cottbus gate, the 1902 U1 viaduct, the U8 below, the NKZ, the tenants' hut and the police post, with what to look at and why.",
+      "category": "Maps",
+      "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/kotti-square-reader/",
+      "embedHeight": 1000,
+      "hubCategory": "CultureLandmarks",
+      "type": "Map",
+      "priority": 3,
+      "tags": [
+        "kottbusser tor",
+        "kotti",
+        "kreuzberg",
+        "nkz",
+        "u-bahn",
+        "u1",
+        "u8",
+        "map",
+        "living in berlin"
+      ],
+      "aliases": [
+        "kottbusser tor",
+        "kotti",
+        "is kottbusser tor dangerous",
+        "neues kreuzberger zentrum",
+        "kotti wache",
+        "kottbusser tor history"
+      ],
+      "iconStatus": "live-wix-media",
+      "cmsItemId": "c92ccef1-fe9c-4792-a2fd-96710065434a",
+      "image": "https://static.wixstatic.com/media/5a08a3_e3278b2ab3614608b0e13ce079418950~mv2.png"
     }
   ],
   "hubCategories": [

@@ -14615,5 +14615,35 @@
         "a": "The bridge alone takes about **an hour** from Wannsee and back. With Steinstücken, the park at Schloss Glienicke and Villa Schöningen, plan **about three hours** on the ground, plus the S-Bahn from the centre."
       }
     ]
+  },
+  "kottbusser-tor-berlin": {
+    "title": "Kottbusser Tor - FAQ",
+    "subtitle": "Safety, the NKZ, the police post and getting around the square.",
+    "items": [
+      {
+        "q": "Is Kottbusser Tor dangerous?",
+        "a": "It is one of Berlin's official **crime hotspots**, with **4,067 offences in 2024** and **3,091 in 2025 up to 19 November** in the police hotspot area. Most risk is the big-station kind: pickpockets, drugs and fights at night. Walking straight through with ordinary care is fine for most people."
+      },
+      {
+        "q": "Can I carry a knife at Kottbusser Tor?",
+        "a": "No. Since **15 February 2025** the square and the U-Bahn station are a **weapons and knife ban zone**, and since **17 July 2025** the same ban applies on all Berlin buses, trams, U-Bahn and S-Bahn trains and at stations."
+      },
+      {
+        "q": "Where is the police station at Kottbusser Tor?",
+        "a": "The **Nebenwache am Kottbusser Tor** is on the first floor of the Neues Kreuzberger Zentrum at **Adalbertstraße 3**. It opened on **15 February 2023** and is staffed **around the clock**."
+      },
+      {
+        "q": "What is the big building at Kottbusser Tor?",
+        "a": "The **Neues Kreuzberger Zentrum (NKZ)**, finished in **1974**, a curved block of up to twelve storeys over Adalbertstraße with just under **300 flats**. The city-owned **Gewobag** has owned it since **1 August 2017**."
+      },
+      {
+        "q": "Which lines stop at Kottbusser Tor?",
+        "a": "The **U1 and U3** stop on the elevated platform, opened in **1902**, and the **U8** stops underground, opened in **1928**. Bus 140 and night buses stop at the square too."
+      },
+      {
+        "q": "Why is it called Kottbusser Tor?",
+        "a": "It is named after a gate in Berlin's **excise wall of the 1730s**, which faced the road to **Cottbus**. The wall and its gates were demolished between **1867 and 1870**; the name stayed."
+      }
+    ]
   }
 }
