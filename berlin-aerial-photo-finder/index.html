@@ -112,8 +112,8 @@
   <div class="af-find">
     <form class="af-form" id="form" autocomplete="off">
       <label for="q">Berlin address or place</label>
-      <input type="text" id="q" name="q" placeholder="e.g. Oranienstraße 25" enterkeyhint="search">
-      <button type="submit" class="af-btn" id="go">Find</button>
+      <input type="text" id="q" placeholder="e.g. Oranienstraße 25" enterkeyhint="search" disabled>
+      <button type="submit" class="af-btn" id="go" disabled>Find</button>
     </form>
     <div class="af-spots" id="spots" aria-label="Example spots"></div>
     <div class="af-msg" id="msg" role="status" aria-live="polite"></div>
@@ -569,6 +569,9 @@
   function esc(s) { return String(s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
 
   setSpot(spot);
+  // Keep search unavailable until the widget has installed its submit handler.
+  $('q').disabled = false;
+  $('go').disabled = false;
 })();
 </script>
 <script src="../js/brand.js"></script>
