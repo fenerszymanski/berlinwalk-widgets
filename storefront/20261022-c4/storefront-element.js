@@ -2,6 +2,21 @@
   'use strict';
   const script = document.currentScript;
   if (!script || !script.src || customElements.get('bw-storefront')) return;
+  const finderPreview = (() => {
+    if (!/^(?:\/de)?\/product-page\/your-berlin-street-in-1928-personalised-aerial-print-30-x-40-cm\/?$/.test(location.pathname)) return null;
+    const fragment = new URLSearchParams(location.hash.slice(1));
+    if (!fragment.has('fh')) return null;
+    const token = fragment.get('fh');
+    fragment.delete('fh');
+    const remaining = fragment.toString();
+    try { history.replaceState(history.state, '', location.pathname + location.search + (remaining ? '#' + remaining : '')); } catch {}
+    if (!/^[A-Za-z0-9_-]{50,512}$/.test(token)) return Promise.resolve(null);
+    return fetch('https://app.berlinwalk.com/api/download-lead?action=finderHandoff', {
+      method: 'POST', mode: 'cors', credentials: 'omit', cache: 'no-store', referrerPolicy: 'no-referrer',
+      headers: {'content-type': 'application/json'}, body: JSON.stringify({operation: 'resolve', token}),
+      signal: AbortSignal.timeout?.(8000),
+    }).then(response => response.ok ? response.json() : null).then(data => data?.preview || null).catch(() => null);
+  })();
   const base = new URL('.', script.src);
   const CHANNEL = 'wob:shop-cart:v1';
   const CALENDAR_PRODUCT_ID='d35601ed-3b43-4269-afb9-32e7c3b1e128';
@@ -9,7 +24,7 @@
   const design2Enabled = (()=>{let choice;try{const q=new URLSearchParams(location.search).get("design");if(q==="2"||q==="0"){choice=q;sessionStorage.setItem("bwStoreDesign",q);}else choice=sessionStorage.getItem("bwStoreDesign");}catch{}return choice==="2"?true:choice==="0"?false:STORE_DESIGN2;})();
   const CALENDAR_LISTED=true;   // Yusuf 13 Nov 2026: "şimdi bunu store'da, menüde vs nerede gerekli varsa koyalım" (12 Nov it was direct link only)
   const esc = value => String(value ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-  const asset = value => {if(value==='gift-week.js'&&/^[a-f0-9]{40}$/.test(window.__WOB_GIFT_WEEK_P22_REF||''))return 'https://cdn.jsdelivr.net/gh/fenerszymanski/berlinwalk-widgets@'+window.__WOB_GIFT_WEEK_P22_REF+'/storefront/20261022-c4/gift-week.js';const target=new URL(value,base);if(/\.(?:js|css|json)$/.test(target.pathname))target.searchParams.set('v',value==='storefront.css'?'ys-entry-order-20261119-v1':['street-configurator.js','ys-de.js'].includes(value)?'ys-quick-format-20261119-v1':value==='design2.js'?'holiday-hero-20261118-v1':['catalog-layer.js','data/presentation.json'].includes(value)?'garment-details-20261118-v1':['storefront.css','design2.js'].includes(value)?'mobile-cats-20261117-v1':['storefront.css','catalog-layer.js'].includes(value)?'cliches-chest-gallery-20261117-v1':value==='design2.js'?'zoom-sort-20261117-v1':['data/categories.json','data/native-bindings.json','data/presentation.json','data/de-store.json','design2.js','clothing.js','tshirt-designs.js'].includes(value)?'berlin-cliches-20261117-v3':value==='data/categories.json'?'xmas-audio-20261116-v1':value==='data/external-products.json'?'xmas-audio-20261116-v1':value==='data/native-bindings.json'?'hoodies-20261116-v1':['funnel.js','calendar-configurator.js'].includes(value)?'store-paid-attribution-20261114-v3':value==='design2.js'?'xmas-audio-20261116-v1':value==='storefront.css'?'hoodies-20261116-v1':value==='data/de-store.json'?'xmas-audio-20261116-v1':['ys-de.js','catalog-layer.js'].includes(value)?'store-apparel-colors-20261114-v3':'store-discovery-polish-20261114-v2');return target.href;};
+  const asset = value => {if(value==='gift-week.js'&&/^[a-f0-9]{40}$/.test(window.__WOB_GIFT_WEEK_P22_REF||''))return 'https://cdn.jsdelivr.net/gh/fenerszymanski/berlinwalk-widgets@'+window.__WOB_GIFT_WEEK_P22_REF+'/storefront/20261022-c4/gift-week.js';const target=new URL(value,base);if(/\.(?:js|css|json)$/.test(target.pathname))target.searchParams.set('v',value==='storefront.css'?'ys-entry-order-20261119-v1':value==='street-configurator.js'?'ys-finder-handoff-20261119-v1':value==='ys-de.js'?'ys-quick-format-20261119-v1':value==='design2.js'?'holiday-hero-20261118-v1':['catalog-layer.js','data/presentation.json'].includes(value)?'garment-details-20261118-v1':['storefront.css','design2.js'].includes(value)?'mobile-cats-20261117-v1':['storefront.css','catalog-layer.js'].includes(value)?'cliches-chest-gallery-20261117-v1':value==='design2.js'?'zoom-sort-20261117-v1':['data/categories.json','data/native-bindings.json','data/presentation.json','data/de-store.json','design2.js','clothing.js','tshirt-designs.js'].includes(value)?'berlin-cliches-20261117-v3':value==='data/categories.json'?'xmas-audio-20261116-v1':value==='data/external-products.json'?'xmas-audio-20261116-v1':value==='data/native-bindings.json'?'hoodies-20261116-v1':['funnel.js','calendar-configurator.js'].includes(value)?'store-paid-attribution-20261114-v3':value==='design2.js'?'xmas-audio-20261116-v1':value==='storefront.css'?'hoodies-20261116-v1':value==='data/de-store.json'?'xmas-audio-20261116-v1':['ys-de.js','catalog-layer.js'].includes(value)?'store-apparel-colors-20261114-v3':'store-discovery-polish-20261114-v2');return target.href;};
   // Chrome and Safari ignore @font-face inside shadow DOM, so the three faces are registered once on the document with absolute URLs from the element's own base.
   // Gift landing trials showed no LCP gain. Preserve their prior resource and font order.
   const legacyGiftPresentation = () => /^(?:\/de)?\/(?:category\/(?:berlin-christmas-gifts|berlin-geschenke)|gifts|geschenke)\/?$/.test(location.pathname);
@@ -874,6 +889,7 @@
       this.ysApi.priceHtml=(amount,state)=>{if(Number(state.homesCount)>1)return money('EUR',amount);const id=this.ysMod.ysProductId(state),isDigital=this.ysMod.ysDigital(state);return this.campaignPrice({source:'wix',currency:'EUR',wixProductId:id,priceCents:Math.round(amount*100)},amount,isDigital?null:this.ysMod.ysChoices(state));};
       this.ysApi.remount=()=>this.render();
       this.ysApi.multiPaused=this.bfActive();
+      this.ysApi.finderPreview=finderPreview;
       this.ysMod.mountConfigurator(host,this.ys,this.ysApi);
       this.ysFocusSearch(host);
       if(this.cartRedirect===true)queueMicrotask(()=>{host.querySelectorAll('[data-ys-add],[data-ys-quickadd]').forEach(b=>{b.textContent='Added. Opening your cart…';b.disabled=true;});});

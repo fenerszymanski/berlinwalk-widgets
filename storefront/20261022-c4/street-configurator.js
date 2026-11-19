@@ -622,8 +622,17 @@ export function mountConfigurator(host, state, api) {
     const valid = () => state.token === mine && host.isConnected;
     const loaded = new Set();
     const layers=ysLayout(state)==='1928-only'?['archive']:['archive','today'];
+    const fromFinder = state.finderPoint?.lat === state.lat && state.finderPoint?.lon === state.lon;
     rawPhotos.clear();host.querySelectorAll('.ys-photo canvas').forEach(c=>c.remove());paintOptions();
-    const both = layer => { if (valid()) { capturePhoto(layer);loaded.add(layer); if (loaded.size === layers.length) api.track?.('preview'); } };
+    const both = layer => {
+      if (!valid()) return;
+      capturePhoto(layer);
+      loaded.add(layer);
+      if (loaded.size === layers.length) {
+        api.track?.('preview');
+        if (fromFinder) api.track?.('finder-preview');
+      }
+    };
     const cancel = layers.map(layer => loadAerialPhoto({
       slot: $(layer === 'archive' ? 'photo-1928' : 'photo-today'),
       url: layer === 'archive' ? url1928(state.lat, state.lon, ysLayout(state)==='1928-only') : urlToday(state.lat, state.lon),
@@ -743,25 +752,39 @@ export function mountConfigurator(host, state, api) {
       else paintMail('error', mailMessage(response.status));
     } catch (e) { paintMail('error', mailMessage(0)); }
   });
-  // ---- Spot from the emailed link: ?p=<token> -> saved context -> the usual preview ----
-  // Once per page load. A banner hand-over must not replace the spot the visitor came back for, so it is switched off while a token is present.
-  async function restoreFromToken(token) {
-    const quiet = () => { api.track?.('restorefail'); if (host.isConnected && !state.lat) setNote('I could not reopen your saved preview. The link may be older than 30 days, so search your address to start again.'); };
+  // Both emailed links and the Finder use the same preview; the Finder transfers only the location.
+  async function restorePreview(context, fromFinder) {
+    const quiet = () => {
+      api.track?.(fromFinder ? 'finder-restorefail' : 'restorefail');
+      if (host.isConnected && !state.lat) setNote(fromFinder ? 'Search for your address to continue.' :
+        'I could not reopen your saved preview. The link may be older than 30 days, so search your address to start again.');
+    };
     try {
-      const response = await fetch(CONTEXT_ENDPOINT + token, {method: 'GET', mode: 'cors', credentials: 'omit', cache: 'no-store', referrerPolicy: 'no-referrer'});
-      if (!response.ok) return quiet();
-      const spot = spotFromPreview((await response.json()).preview);
+      const spot = spotFromPreview(await context);
       if (!spot) return quiet();
-      if (state.lat) return;                                   // the visitor already picked a spot while this was loading
-      Object.assign(state, {lat: spot.lat, lon: spot.lon, title: spot.title, area: spot.area, address: spot.address, query: spot.title, format: spot.format, layout:spot.layout,colour:spot.colour,size: spot.size || state.size, paper: spot.paper || state.paper});
-      api.track?.('restored');
-      if (!host.isConnected) return;                           // the storefront re-rendered meanwhile: the new mount builds from state
+      if (state.lat || isHomes(state) || (fromFinder && state.query)) return;
+      Object.assign(state, {lat: spot.lat, lon: spot.lon, title: spot.title, area: spot.area, address: spot.address, query: spot.title});
+      if (fromFinder) {
+        state.finderPoint = {lat: spot.lat, lon: spot.lon};
+        api.scrollSheet = Date.now();
+      } else {
+        Object.assign(state, {format: spot.format, layout: spot.layout, colour: spot.colour, size: spot.size || state.size, paper: spot.paper || state.paper});
+      }
+      api.track?.(fromFinder ? 'finder-restored' : 'restored');
+      if (!host.isConnected) { api.remount?.(); return; }
       $('title').value = state.title; $('area').value = state.area; input.value = state.query; $('paper').value = ysPaper(state).name;
       paintVariant(); showPoint(true); refreshButton();
+      if (fromFinder) scrollSheetSoon();
     } catch (e) { quiet(); }
   }
   const emailedToken = !state.lat && !api.restoreDone ? takePreviewToken() : '';
-  if (emailedToken) { api.restoreDone = true; api.handoffDone = true; restoreFromToken(emailedToken); }
+  if (!state.lat && !api.restoreDone && (emailedToken || api.finderPreview)) {
+    api.restoreDone = true;
+    api.handoffDone = true;
+    const context = emailedToken ? fetch(CONTEXT_ENDPOINT + emailedToken, {method: 'GET', mode: 'cors', credentials: 'omit', cache: 'no-store', referrerPolicy: 'no-referrer'})
+      .then(response => response.ok ? response.json() : null).then(data => data?.preview) : api.finderPreview;
+    restorePreview(context, !emailedToken);
+  }
   if (state.lat) showPoint(false);
   refreshButton();
   // After a handed-over address the poster scrolls into view once; the storefront may re-render (and remount) meanwhile, so retry on the live node.

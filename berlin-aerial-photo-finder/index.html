@@ -122,7 +122,7 @@
       <div>
         <span class="af-buy-kick">Your Berlin Street in 1928</span>
         <p class="af-buy-line" id="buyline">See your street as a 1928 print.</p>
-        <p class="af-buy-sub">I print it from this same 1928 flight. Type the address on the next page to see your preview.</p>
+        <p class="af-buy-sub">I print it from this same 1928 flight. Open this spot in your print preview.</p>
       </div>
       <a class="af-buy-btn" id="buylink" href="https://www.walkofberlin.com/product-page/your-berlin-street-in-1928-personalised-aerial-print-30-x-40-cm?utm_source=berlin-aerial-photo-finder&amp;utm_medium=tool&amp;utm_campaign=street-1928&amp;utm_content=search-card" target="_blank" rel="noopener">Preview my print</a>
     </div>
@@ -469,7 +469,7 @@
     $('msg').textContent = 'Looking up ' + q + '...';
     setTimeout(function () {
       lastQuery = Date.now();
-      var url = 'https://nominatim.openstreetmap.org/search?format=jsonv2&limit=1&countrycodes=de&viewbox=13.08,52.68,13.77,52.33&bounded=1&q=' + encodeURIComponent(q);
+      var url = 'https://nominatim.openstreetmap.org/search?format=jsonv2&addressdetails=1&limit=1&countrycodes=de&viewbox=13.08,52.68,13.77,52.33&bounded=1&q=' + encodeURIComponent(q);
       fetch(url, { headers: { 'Accept': 'application/json' } })
         .then(function (r) { if (!r.ok) throw new Error('http ' + r.status); return r.json(); })
         .then(function (list) {
@@ -477,8 +477,9 @@
           var hit = list[0];
           var name = q.replace(/,?\s*berlin\s*$/i, '').trim() || q;
           $('msg').textContent = '';
-          showBuy(name);
-          setSpot({ name: name, lat: Number(hit.lat), lon: Number(hit.lon) });
+          var found = { name: name, lat: Number(hit.lat), lon: Number(hit.lon) };
+          showBuy(name, previewPlace(hit, found));
+          setSpot(found);
           if (window.matchMedia && window.matchMedia('(max-width: 560px)').matches) $('q').blur();
         })
         .catch(function () { $('msg').textContent = 'The address search is not answering right now. Try one of the places above, or again in a minute.'; })
@@ -486,14 +487,84 @@
     }, wait);
   });
 
-  /* 1928 print card: the product page never takes the address in its URL (it runs analytics that record page URLs),
-     so the card names the searched street here and the visitor types it once more on the product page. */
-  var buyFor = null;
-  function showBuy(name) {
+  /* Only the selected spot and matched place labels enter the handoff on an explicit click. */
+  var handoffEndpoint = 'https://app.berlinwalk.com/api/download-lead?action=finderHandoff';
+  var buyLink = $('buylink'), buyFor = null, buyPlace = null, previewOpening = false;
+  function previewPlace(hit, found) {
+    var address = hit.address || {};
+    var title = address.road || address.pedestrian || address.residential || address.square || address.cycleway || address.footway || address.path;
+    if (!title && !address.house_number) title = hit.name;
+    title = String(title || '').trim().slice(0, 70);
+    var area = String(address.neighbourhood || address.quarter || address.suburb || address.city_district || address.borough || '').trim().slice(0, 70) || 'Berlin';
+    if (!/\p{L}/u.test(title) || !Number.isFinite(found.lat) || !Number.isFinite(found.lon)) return null;
+    return { lat: found.lat, lon: found.lon, title: title, area: area };
+  }
+
+  function showBuy(name, place) {
     buyFor = name ? String(name).slice(0, 70) : null;
+    buyPlace = buyFor ? place : null;
     if (buyFor) $('buyline').innerHTML = 'See <b>' + esc(buyFor) + '</b> as a 1928 print for your wall.';
     $('buy').hidden = !buyFor;
   }
+
+  buyLink.addEventListener('click', async function (event) {
+    if (event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+    if (previewOpening) { event.preventDefault(); return; }
+    if (!buyPlace) return;
+    var place = buyPlace;
+    var destination = buyLink.href, tab, followedFallback = false;
+    try {
+      // Open inside the click gesture. Keep a normal link in the new tab if navigation is interrupted.
+      tab = window.open('about:blank', '_blank');
+      if (!tab) return;
+      tab.opener = null;
+      var doc = tab.document;
+      doc.title = 'Opening your 1928 preview';
+      var message = doc.createElement('p');
+      message.textContent = 'Opening your 1928 preview…';
+      var fallback = doc.createElement('a');
+      fallback.href = destination;
+      fallback.referrerPolicy = 'no-referrer';
+      fallback.textContent = 'Continue to the product page';
+      fallback.addEventListener('click', function () { followedFallback = true; });
+      doc.body.append(message, fallback);
+    } catch (error) {
+      if (tab) tab.close();
+      return;
+    }
+
+    event.preventDefault();
+    previewOpening = true;
+    buyLink.setAttribute('aria-busy', 'true');
+    var request = new AbortController();
+    var timeout = setTimeout(function () { request.abort(); }, 3000);
+    try {
+      var response = await fetch(handoffEndpoint, {
+        method: 'POST', mode: 'cors', credentials: 'omit', referrerPolicy: 'no-referrer', signal: request.signal,
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ operation: 'create', place: place })
+      });
+      if (response.ok) {
+        var body = await response.json();
+        if (typeof body.token === 'string' && /^[A-Za-z0-9_-]{50,512}$/.test(body.token)) destination += '#fh=' + body.token;
+      }
+    } catch (error) {
+      // Open the usual product page if the handoff is unavailable.
+    } finally {
+      clearTimeout(timeout);
+      previewOpening = false;
+      buyLink.removeAttribute('aria-busy');
+      try {
+        if (!followedFallback && !tab.closed && tab.document === doc) {
+          // A sandboxed embed cannot asynchronously navigate a different tab in Chromium.
+          fallback.href = destination;
+          fallback.click();
+        }
+      } catch (error) {
+        // The visitor has already navigated away from the loading page.
+      }
+    }
+  });
 
   function esc(s) { return String(s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
 
