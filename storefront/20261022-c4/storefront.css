@@ -720,6 +720,7 @@ button.ys-words-tag:focus-visible{outline:2px solid var(--green);outline-offset:
  :host([design2]) .ys-wrap>.breadcrumb{order:-1}
  :host([design2]) .d2-ys-content .ys-faq,:host([design2]) .d2-ys-content .disclosures{order:5}
  :host([design2]) .ys-wrap>.legal-foot{order:6}
+ :host([design2]) .ys-wrap>.rw-reviews{order:6}
  :host([design2]) .ys-wrap>.d2-recommendations{order:7}
 }
 @media(max-width:740px){:host([design2]) .d2-card .tile img.tile-photo{inset:7px;width:calc(100% - 14px);height:calc(100% - 14px)}}
