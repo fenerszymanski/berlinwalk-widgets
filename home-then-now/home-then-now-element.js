@@ -8,7 +8,7 @@
   'use strict';
 
   const DATA = {
-    "release": "home-then-now-20261113-slider2",
+    "release": "home-then-now-20261120-black-week",
     "hero": {
       "img1928": "assets/hero-1928.webp",
       "imgToday": "assets/hero-today.webp",
@@ -520,6 +520,54 @@
     "clothingFeature": {
       "img": "../storefront/20261022-c4/assets/gallery-6c5770b6568247a49550b74a.jpg",
       "alt": "Berlin in Pink Premium unisex T-shirt in Ash worn by an adult woman and man. AI model visualization; actual colour, fit and print may vary slightly."
+    },
+    "blackWeek": {
+      "from": "2026-11-20T00:00:00+01:00",
+      "until": "2026-12-01T00:00:00+01:00",
+      "deHref": "https://www.walkofberlin.com/de/category/all-products",
+      "en": {
+        "label": "Black Week",
+        "name": "Black Week",
+        "eyebrow": "until 30 November",
+        "title": "Buy 2, get 25% off the cheaper one",
+        "keep": [
+          "25% off",
+          "the cheaper one"
+        ],
+        "lead": "T-shirts, hoodies and posters. Automatically applied in your cart.",
+        "cta": "Shop Black Week"
+      },
+      "de": {
+        "label": "Black Week",
+        "name": "Black Week",
+        "eyebrow": "bis 30. November",
+        "title": "2 kaufen, das günstigere 25 % reduziert",
+        "keep": [
+          "das günstigere",
+          "25 % reduziert"
+        ],
+        "lead": "T-Shirts, Hoodies und Poster. Der Rabatt kommt automatisch in den Warenkorb.",
+        "cta": "Zum Shop"
+      },
+      "visual": {
+        "type": "duo",
+        "items": [
+          {
+            "img": "assets/bw-clothing.webp",
+            "w": 640,
+            "h": 800,
+            "alt": "Tempelhof Classic T-shirt in black, worn by a smiling man outdoors.",
+            "altDe": "Tempelhof Classic T-Shirt in Schwarz, getragen von einem lächelnden Mann im Freien."
+          },
+          {
+            "img": "assets/bw-poster.webp",
+            "w": 640,
+            "h": 800,
+            "alt": "Tempelhof poster in an oak frame on a sunlit living-room wall.",
+            "altDe": "Tempelhof-Poster im Eichenrahmen an einer sonnigen Wohnzimmerwand."
+          }
+        ]
+      }
     }
   };
 
@@ -716,6 +764,40 @@
 </section>`;
   }
 
+  // Black Week slide (Yusuf, 20 Nov 2026): slide 1 from 20 Nov until 30 Nov 23:59:59 Berlin time (DATA.blackWeek.until is
+  // exclusive, 1 Dec 00:00:00+01:00). It is added while the markup is built, so DATA.slides stays the seven normal slides and
+  // from 1 Dec the slider is exactly what it was, with no release. The store hero (storefront/20261022-c4/black-week.js) carries
+  // the same two instants. The slide has no price and no strike-through; the discount itself is a Wix coupon the cart applies.
+  function bwhBlackWeekActive(now = Date.now()) {
+    const b = DATA.blackWeek;
+    return !!b && now >= Date.parse(b.from) && now < Date.parse(b.until);
+  }
+
+  // German visitor on the English home page: /de paths, ?lang=de, or the root page reached from /de.
+  function bwhGerman() {
+    return /^\/de(?:\/|$)/.test(location.pathname) || new URLSearchParams(location.search).get('lang') === 'de' || (() => {
+      if (location.pathname !== '/') return false;
+      try { const ref = new URL(document.referrer); return ref.origin === location.origin && ref.pathname.replace(/\/+$/, '') === '/de'; } catch { return false; }
+    })();
+  }
+
+  function bwhBlackWeekSlide(d) {
+    const b = d.blackWeek, de = bwhGerman(), t = de ? b.de : b.en;
+    return {
+      key: 'black-week', theme: 'bw', label: t.label, name: t.name, eyebrow: t.eyebrow, title: t.title, keep: t.keep, lead: t.lead,
+      cta: { text: t.cta, href: de ? b.deHref : d.storeHref },
+      visual: { type: b.visual.type, items: b.visual.items.map((it) => ({ img: it.img, w: it.w, h: it.h, alt: de ? it.altDe : it.alt })) }
+    };
+  }
+
+  // Slide title with optional no-break chunks (the "25 %" of the German headline must not split across lines).
+  function bwhTitle(s) {
+    return (Array.isArray(s.keep) ? s.keep : []).reduce((text, chunk) => {
+      const part = bwhEsc(chunk);
+      return text.includes(part) ? text.replace(part, () => `<span class="bwh-nb">${part}</span>`) : text;
+    }, bwhEsc(s.title));
+  }
+
   // Hero slider (Yusuf, 13 Nov 2026: "burayı slider yapalım. 1928, posterler genel, takvimlar, canlı tur,
   // audio walks, blog ve free tools"). Slide 1 keeps the page's only H1. Slides stack in one grid cell, so
   // the band never changes height; images of slides 2+ are hydrated after load (data-bwh-src).
@@ -749,6 +831,9 @@
     if (v.type === 'single') {
       return `<div class="bwh-slide__visual bwh-slide__visual--single">${bwhSlideImg(v.img, v.alt, v.w, v.h, 'defer')}</div>`;
     }
+    if (v.type === 'duo') {
+      return `<div class="bwh-slide__visual bwh-slide__visual--duo">${(v.items || []).map((it, i) => `<div class="bwh-slide__duo-item" data-bwh-item-n="${i + 1}">${bwhSlideImg(it.img, it.alt, it.w, it.h, first ? (i === 0 ? 'high' : 'eager') : 'defer')}</div>`).join('')}</div>`;
+    }
     if (v.type === 'posts') {
       const posts = Array.isArray(v.items) ? v.items : (d[v.from] || []).slice(0, v.count || 3);
       return `<ul class="bwh-slide__visual bwh-slide__visual--posts">${posts.map((p, i) => `
@@ -767,19 +852,21 @@
   const BWH_CHEVRON = (dir) => `<svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="${dir === 'prev' ? 'M10 3 5 8l5 5' : 'M6 3l5 5-5 5'}" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>`;
 
   function bwhHero(d) {
-    const slides = Array.isArray(d.slides) && d.slides.length ? d.slides : [];
+    const normal = Array.isArray(d.slides) && d.slides.length ? d.slides : [];
+    const bw = !!d.blackWeek && bwhBlackWeekActive();
+    const slides = bw ? [bwhBlackWeekSlide(d)].concat(normal) : normal;
     const n = slides.length;
     const slide = (s, i) => {
       const first = i === 0;
       const title = first
-        ? `<h1 class="bwh-h1" id="bwh-title">${bwhEsc(s.title)}</h1>`
-        : `<h2 class="bwh-h1 bwh-slide__title">${bwhEsc(s.title)}</h2>`;
+        ? `<h1 class="bwh-h1" id="bwh-title">${bwhTitle(s)}</h1>`
+        : `<h2 class="bwh-h1 bwh-slide__title">${bwhTitle(s)}</h2>`;
       const cta2 = s.cta2 ? `<a class="bwh-btn bwh-btn--outline" href="${bwhEsc(bwhHref(s.cta2.href))}" data-bwh-section="hero" data-bwh-item="slide-${bwhEsc(s.key)}-more" data-bwh-position="${i + 1}">${bwhEsc(s.cta2.text)}</a>` : '';
       return `
-      <div class="bwh-slide" data-bwh-slide="${i}" data-bwh-current="${first ? 'true' : 'false'}" role="group" aria-roledescription="slide" aria-label="${i + 1} of ${n}: ${bwhEsc(s.label)}">
+      <div class="bwh-slide" data-bwh-slide="${i}" data-bwh-key="${bwhEsc(s.key)}"${s.theme ? ` data-bwh-theme="${bwhEsc(s.theme)}"` : ''} data-bwh-current="${first ? 'true' : 'false'}" role="group" aria-roledescription="slide" aria-label="${i + 1} of ${n}: ${bwhEsc(s.label)}">
         <div class="bwh-slide__grid">
           <div class="bwh-slide__copy">
-            <span class="bwh-eyebrow">${bwhEsc(s.eyebrow)}</span>
+            <span class="bwh-eyebrow">${s.name ? `<b class="bwh-eyebrow__name">${bwhEsc(s.name)}</b> <span class="bwh-eyebrow__until"><span class="bwh-eyebrow__dot" aria-hidden="true">·</span> ${bwhEsc(s.eyebrow)}</span>` : bwhEsc(s.eyebrow)}</span>
             ${title}
             <p class="bwh-lead bwh-hero__lead">${bwhEsc(s.lead)}</p>
             <div class="bwh-hero__ctas">
@@ -792,7 +879,7 @@
       </div>`;
     };
     return `
-    <section class="bwh-band bwh-hero bwh-slider" id="bwh-top" aria-roledescription="carousel" aria-label="Walk of Berlin highlights">
+    <section class="bwh-band bwh-hero bwh-slider" id="bwh-top"${bw ? ' data-bwh-bw="true"' : ''} aria-roledescription="carousel" aria-label="Walk of Berlin highlights">
       <div class="bwh-slider__track" aria-live="off">${slides.map(slide).join('')}
       </div>
       <div class="bwh-slider__controls">
@@ -907,10 +994,7 @@
 
   function bwhClothingFeature(x) {
     if (!x) return '';
-    const de = /^\/de(?:\/|$)/.test(location.pathname) || new URLSearchParams(location.search).get('lang') === 'de' || (() => {
-      if (location.pathname !== '/') return false;
-      try { const ref = new URL(document.referrer); return ref.origin === location.origin && ref.pathname.replace(/\/+$/, '') === '/de'; } catch { return false; }
-    })();
+    const de = bwhGerman();
     return `<a class="bwh-clothingfeature bwh-lift" href="https://www.walkofberlin.com/${de?'de/':''}category/berlin-t-shirts" data-bwh-section="shop" data-bwh-item="clothing-feature">
       <img src="${bwhEsc(bwhSrc(x.img))}" alt="${bwhEsc(x.alt)}" width="1600" height="1066" loading="lazy" decoding="async">
       <span class="bwh-clothingfeature__body"><span class="bwh-eyebrow">${de?'Kleidung':'Clothing'}</span><span class="bwh-calfeature__name">${de?'Berlin-T-Shirts':'Berlin T-shirts'}</span><span class="bwh-calfeature__line">${de?'Drei Berlin-Motive. Unisex-T-Shirts in Classic und Premium, auf Bestellung gefertigt.':'Three Berlin designs. Classic and Premium unisex T-shirts, made to order.'}</span><span class="bwh-btn bwh-btn--outline">${de?'Kleidung entdecken':'Shop Clothing'} →</span></span>
@@ -1095,7 +1179,8 @@
         const n = this.querySelectorAll('.bwh-slide').length;
         const to = t.hasAttribute('data-bwh-go') ? Number(t.dataset.bwhGo) : (st.index + Number(t.dataset.bwhStep) + n) % n;
         this._bwhSliderGo(to);
-        bwhTrack('bw_home_tn_click', { section: 'hero-slider', item: 'go-' + ((DATA.slides[to] || {}).key || to), position: to + 1 });
+        const target = this.querySelectorAll('.bwh-slide')[to];
+        bwhTrack('bw_home_tn_click', { section: 'hero-slider', item: 'go-' + ((target && target.dataset.bwhKey) || to), position: to + 1 });
       }, true);
       this.addEventListener('keydown', (event) => {
         const pill = event.target.closest ? event.target.closest('[data-bwh-go]') : null;
@@ -1190,9 +1275,9 @@
     _bwhGiftTick() {
       clearTimeout(this._bwhGiftTimer);
       if (!this.isConnected) return;
-      const now = Date.now(), active = bwhGiftActive(now);
+      const now = Date.now(), active = bwhGiftActive(now), bw = !!DATA.blackWeek && bwhBlackWeekActive(now);
       const hero = this.querySelector('#bwh-top');
-      if (hero && hero.classList.contains('bwh-gw') !== active) {
+      if (hero && (hero.classList.contains('bwh-gw') !== active || (!active && hero.hasAttribute('data-bwh-bw') !== bw))) {
         const restoreFocus = hero.contains(document.activeElement);
         // Only the first band changes. Preserve every other node and listener.
         hero.outerHTML = active ? bwhGiftHero(DATA) : bwhHero(DATA);
@@ -1207,9 +1292,11 @@
           if (tile.textContent !== value) tile.textContent = value;
         });
       }
-      const boundary = [BWH_GW_START, BWH_GW_END].find(t => t > now);
-      // No timer after expiry. Reconnection/pageshow still recheck the clock.
-      if (boundary) this._bwhGiftTimer = setTimeout(() => this._bwhGiftTick(), Math.min(30000, boundary - now));
+      const edges = [BWH_GW_START, BWH_GW_END];
+      if (DATA.blackWeek) edges.push(Date.parse(DATA.blackWeek.from), Date.parse(DATA.blackWeek.until));
+      const boundary = edges.filter(t => t > now).sort((a, b) => a - b)[0];
+      // No timer after expiry. Reconnection/pageshow still recheck the clock. Only the Gift Week countdown needs the 30 s cadence.
+      if (boundary) this._bwhGiftTimer = setTimeout(() => this._bwhGiftTick(), active ? Math.min(30000, boundary - now) : Math.min(boundary - now, 2147000000));
     }
 
     _bwhGiftPrices(active) {
@@ -1519,7 +1606,7 @@
     nodes.push(make('span', 'bwh-letter__note', 'It comes from Yusuf at Walk of Berlin (info@berlinwalk.com). Not there in a minute? Look in Promotions, Updates or Spam.'));
     box.replaceChildren(...nodes);
   }
-  if (window.BW_HOME_TN_TEST_HOOKS === true) window.__bwHomeTnTestHooks = { bwhInboxLink, bwhInboxAssist };
+  if (window.BW_HOME_TN_TEST_HOOKS === true) window.__bwHomeTnTestHooks = { bwhInboxLink, bwhInboxAssist, bwhMarkup, bwhBlackWeekActive };
 
   if (!customElements.get('bw-home-then-now')) {
     customElements.define('bw-home-then-now', BWHomeThenNowElement);

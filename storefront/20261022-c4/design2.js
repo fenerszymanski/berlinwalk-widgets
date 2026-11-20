@@ -2,10 +2,11 @@ import {clothingCards,garmentDesign,syncClothingSeo} from './clothing.js?v=cloth
 import {qualityOf,displayName,designName,designCards,designRepresentative,QUALITY_TEXT,installQuality} from './tshirt-designs.js?v=hoodies-20261116-v1';
 import {extrasEnabled,prepareExtras,installExtras} from './store-extras.js?v=xmas-gifts-20261117-v1';
 import {COLOR_SWATCHES,apparelCardColors,apparelCardSelection,apparelCardProduct,colorName} from './apparel-card-colors.js?v=berlin-bear-black-20261120-v1';
-import {DESIGN2_TEXT,translateDesign2} from './ys-de.js?v=mobile-home-20261118-v1';
+import {DESIGN2_TEXT,translateDesign2} from './ys-de.js?v=black-week-20261120-v1';
 import {matchesSearch,familyFor,recommendationRows,nativeRecommendationEligible} from './design2-catalog.js?v=hoodies-20261116-v1';
 import {languageUrl,navigateLanguageLink} from './language-navigation.js?v=store-design2-fix4b-20261113-v1';
 import {installGalleryZoom} from './gallery-zoom.js?v=zoom-sort-20261117-v1';
+import {BLACK_WEEK,blackWeekActive} from './black-week.js?v=black-week-20261120-v1';
 let recommendations,translations,exploreImages,listingOrder=null;
 // Sort data for store listings (Yusuf, 17 Nov 2026). Built by scripts/store-listing-order.mjs; a missing file keeps the curated order.
 // Selections survive Wix replacing the loading element within the same document.
@@ -186,7 +187,20 @@ P.landingView=function(){if(this.xgGuide()){const t=document.createElement('temp
   const href=this.d2href(this.navigation.clothingHref());
   return `<section class="wrap d2-shelf" data-d2-clothing><div class="d2-clothing-head bw-raw"><h2 class="d2-section-title">${esc(this.d2text('Clothing'))}</h2><a href="${esc(href)}">${esc(this.d2text('All clothing'))} →</a></div><p class="bw-raw">${esc(this.d2text('Berlin designs on T-shirts and fleece hoodies.'))}</p><div class="grid category-grid d2-grid">${products.map(p=>this.d2Loading?this.skeletonCard(p):this.card(p)).join('')}</div></section>`;
  };
+ // Black Week hero (Yusuf, 20 Nov 2026): replaces the holiday or evergreen hero from 20 Nov until 30 Nov 23:59:59 Berlin time (black-week.js
+ // holds the gate); the code below it is untouched, so the holiday hero comes back by itself on 1 Dec. The button opens the poster tab, the
+ // same target as the evergreen hero, because this page already is the store landing.
+ P.d2blackWeekHero=function(){
+  const de=this.campaignGerman(),c=BLACK_WEEK.copy[de?'de':'en'];
+  const title=c.keep.reduce((text,chunk)=>text.replace(esc(chunk),`<span class="d2-bw-nb">${esc(chunk)}</span>`),esc(c.title));
+  const photo=(kind,alt,first)=>{const base=BLACK_WEEK.images[kind];return `<img src="${esc(asset(base+'-800.webp'))}" srcset="${esc(asset(base+'-480.webp'))} 480w, ${esc(asset(base+'-800.webp'))} 800w" sizes="(max-width:740px) 46vw, 330px" alt="${esc(alt)}" width="800" height="1000"${first?' fetchpriority="high"':''} decoding="async">`;};
+  return `<section class="d2-hero d2-hero-bw bw-raw" data-bw-campaign="${esc(BLACK_WEEK.id)}">
+   <div class="d2-hero-copy"><p class="d2-bw-kicker"><b>${esc(c.name)}</b> <span class="d2-bw-until"><span class="d2-bw-dot" aria-hidden="true">·</span> ${esc(c.until)}</span></p><h1>${title}</h1><p class="d2-bw-line">${esc(c.line)}</p><a class="primary" data-d2-hero href="${esc(this.storeHref('print'))}">${esc(c.cta)}</a></div>
+   <div class="d2-bw-visual">${photo('clothing',c.altClothing,true)}${photo('poster',c.altPoster,false)}</div>
+  </section>`;
+ };
  P.d2homeHero=function(){
+  if(blackWeekActive())return this.d2blackWeekHero();
   const holiday=Date.now()<Date.parse(GIFT_GUIDE.festiveUntil);
   const de=this.campaignGerman();
   const gifts=holiday?this.navigation.STORE_MENU_DESIGN2.find(group=>group.id==='gifts'):null;

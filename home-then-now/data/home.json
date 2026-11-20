@@ -1,5 +1,5 @@
 {
-  "release": "home-then-now-20261113-slider2",
+  "release": "home-then-now-20261120-black-week",
   "hero": {
     "img1928": "assets/hero-1928.webp",
     "imgToday": "assets/hero-today.webp",
@@ -511,5 +511,53 @@
   "clothingFeature": {
     "img": "../storefront/20261022-c4/assets/gallery-6c5770b6568247a49550b74a.jpg",
     "alt": "Berlin in Pink Premium unisex T-shirt in Ash worn by an adult woman and man. AI model visualization; actual colour, fit and print may vary slightly."
+  },
+  "blackWeek": {
+    "from": "2026-11-20T00:00:00+01:00",
+    "until": "2026-12-01T00:00:00+01:00",
+    "deHref": "https://www.walkofberlin.com/de/category/all-products",
+    "en": {
+      "label": "Black Week",
+      "name": "Black Week",
+      "eyebrow": "until 30 November",
+      "title": "Buy 2, get 25% off the cheaper one",
+      "keep": [
+        "25% off",
+        "the cheaper one"
+      ],
+      "lead": "T-shirts, hoodies and posters. Automatically applied in your cart.",
+      "cta": "Shop Black Week"
+    },
+    "de": {
+      "label": "Black Week",
+      "name": "Black Week",
+      "eyebrow": "bis 30. November",
+      "title": "2 kaufen, das günstigere 25 % reduziert",
+      "keep": [
+        "das günstigere",
+        "25 % reduziert"
+      ],
+      "lead": "T-Shirts, Hoodies und Poster. Der Rabatt kommt automatisch in den Warenkorb.",
+      "cta": "Zum Shop"
+    },
+    "visual": {
+      "type": "duo",
+      "items": [
+        {
+          "img": "assets/bw-clothing.webp",
+          "w": 640,
+          "h": 800,
+          "alt": "Tempelhof Classic T-shirt in black, worn by a smiling man outdoors.",
+          "altDe": "Tempelhof Classic T-Shirt in Schwarz, getragen von einem lächelnden Mann im Freien."
+        },
+        {
+          "img": "assets/bw-poster.webp",
+          "w": 640,
+          "h": 800,
+          "alt": "Tempelhof poster in an oak frame on a sunlit living-room wall.",
+          "altDe": "Tempelhof-Poster im Eichenrahmen an einer sonnigen Wohnzimmerwand."
+        }
+      ]
+    }
   }
 }

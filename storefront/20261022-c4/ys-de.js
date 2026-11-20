@@ -477,7 +477,7 @@ for (const [en, de] of [
   ['Digital file made from your spot: a JPG and a PDF, sent by email within 24 hours of payment. Nothing is shipped. You can keep the files for your permitted personal use. You retain the 14-day consumer withdrawal right.',
    'Digitale Datei von deinem Ort: ein JPG und ein PDF, per E-Mail innerhalb von 24 Stunden nach der Zahlung. Es wird nichts verschickt. Du darfst die Dateien für deinen erlaubten persönlichen Gebrauch behalten. Dein 14-tägiges Widerrufsrecht als Verbraucher bleibt bestehen.'],
   ['Withdraw from contract (Vertrag widerrufen)', 'Vertrag widerrufen (Withdraw from contract)'],
-  ['Multi-print saving', 'Mengenrabatt'], ["Can't be combined with other codes.", 'Nicht mit anderen Codes kombinierbar.'],
+  ['Multi-print saving', 'Mengenrabatt'], ['Black Week −25%', 'Black Week −25 %'], ["Can't be combined with other codes.", 'Nicht mit anderen Codes kombinierbar.'],
   ['Your code is used instead of the multi-print saving.', 'Dein Code gilt statt des Mengenrabatts.'],
   ["Saving with more prints can't be combined with other codes.", 'Der Rabatt für mehrere Drucke lässt sich nicht mit anderen Codes kombinieren.'],
   ['A code you enter there replaces the multi-print saving.', 'Ein Code, den du dort eingibst, ersetzt den Mengenrabatt.'],

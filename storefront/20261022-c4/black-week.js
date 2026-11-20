@@ -1,0 +1,42 @@
+// Black Week 2026 (Yusuf approved 20 Nov 2026). Date gate and copy for the store landing hero (design2.js), kept pure so tests can import it.
+// The offer: buy any 2 T-shirts, hoodies or posters and the cheaper one is 25% off; one discounted item per order. Personalised 1928 prints,
+// framed and canvas prints, calendars and digital printables are excluded. The discount is a Wix coupon the cart page applies by itself:
+// nothing in this file prices, applies or promises anything beyond that sentence, and no price appears in the hero.
+// Window: 20 Nov 2026 to Monday 30 Nov 2026 23:59:59 Berlin time. The end is exclusive (1 Dec 00:00:00+01:00), so from that second
+// d2homeHero() falls back to the holiday hero (until 27 Dec) or the evergreen hero without any release. home-then-now.json carries the
+// same two instants for the homepage slide (home-then-now/data/home.json); black-week.test.mjs keeps both copies equal.
+// keep: the chunks of the headline that must not break across lines (they read as one phrase each, and "25 %" never splits).
+export const BLACK_WEEK = Object.freeze({
+  id: 'black-week-202611',
+  from: '2026-11-20T00:00:00+01:00',
+  until: '2026-12-01T00:00:00+01:00',
+  copy: Object.freeze({
+    en: Object.freeze({
+      name: 'Black Week',
+      until: 'until 30 November',
+      title: 'Buy 2, get 25% off the cheaper one',
+      keep: Object.freeze(['25% off', 'the cheaper one']),
+      line: 'T-shirts, hoodies and posters. Automatically applied in your cart.',
+      cta: 'Shop Black Week',
+      altClothing: 'Tempelhof Classic T-shirt in black, worn by a smiling man outdoors.',
+      altPoster: 'Tempelhof poster in an oak frame on a sunlit living-room wall.'
+    }),
+    de: Object.freeze({
+      name: 'Black Week',
+      until: 'bis 30. November',
+      title: '2 kaufen, das günstigere 25 % reduziert',
+      keep: Object.freeze(['das günstigere', '25 % reduziert']),
+      line: 'T-Shirts, Hoodies und Poster. Der Rabatt kommt automatisch in den Warenkorb.',
+      cta: 'Zum Shop',
+      altClothing: 'Tempelhof Classic T-Shirt in Schwarz, getragen von einem lächelnden Mann im Freien.',
+      altPoster: 'Tempelhof-Poster im Eichenrahmen an einer sonnigen Wohnzimmerwand.'
+    })
+  }),
+  images: Object.freeze({
+    clothing: 'assets/design2/black-week-20261120-clothing',
+    poster: 'assets/design2/black-week-20261120-poster'
+  })
+});
+
+export const blackWeekActive = (now = Date.now()) =>
+  Number.isFinite(now) && now >= Date.parse(BLACK_WEEK.from) && now < Date.parse(BLACK_WEEK.until);

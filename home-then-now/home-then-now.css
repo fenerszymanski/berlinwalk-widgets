@@ -890,6 +890,38 @@ bw-home-then-now .bwh-slide__player-done { display: block; width: 34%; height: 1
   bw-home-then-now .bwh-slide__player-title { font-size: 22px; }
 }
 
+/* ---- Black Week slide (20 Nov 2026) ----------------------------------------------------------
+ * Slide 1 from 20 Nov until 30 Nov 23:59:59 Berlin time (DATA.blackWeek holds the window; the element builds the slide). A near-black
+ * card fills the slide's grid cell, so the band keeps the height the other slides set and the pills and arrows below do not move. */
+bw-home-then-now .bwh-nb { white-space: nowrap; }
+bw-home-then-now .bwh-slide[data-bwh-theme="bw"] { display: flex; }
+bw-home-then-now .bwh-slide[data-bwh-theme="bw"] .bwh-slide__grid { flex: 1 1 auto; justify-content: center; padding: 20px 16px 22px; border-radius: 14px; background: radial-gradient(80% 100% at 82% 30%, #1D2B20 0%, rgba(14, 18, 16, 0) 68%), #0E1210; color: var(--bwh-cream); }
+bw-home-then-now .bwh-slide[data-bwh-theme="bw"] .bwh-eyebrow { color: var(--bwh-yellow); text-transform: uppercase; font-size: 12px; }
+bw-home-then-now .bwh-eyebrow__name { display: inline-block; margin-right: 8px; padding: .5em .95em .42em; border-radius: 999px; background: var(--bwh-yellow); color: var(--bwh-green); font-size: 15px; font-weight: 700; letter-spacing: .1em; }
+bw-home-then-now .bwh-eyebrow__until { white-space: nowrap; }
+@media (max-width: 359px) { bw-home-then-now .bwh-eyebrow__dot { display: none; } }
+bw-home-then-now .bwh-slide[data-bwh-theme="bw"] .bwh-slide__copy { order: 1; }
+bw-home-then-now .bwh-slide[data-bwh-theme="bw"] .bwh-slide__visual { order: 2; }
+bw-home-then-now .bwh-slide[data-bwh-theme="bw"] .bwh-h1 { color: var(--bwh-cream); text-wrap: balance; }
+bw-home-then-now .bwh-slide[data-bwh-theme="bw"] .bwh-hero__lead { color: rgba(250, 250, 245, .88); text-wrap: balance; }
+bw-home-then-now .bwh-slide[data-bwh-theme="bw"] a:focus-visible { outline-color: var(--bwh-cream); }
+bw-home-then-now .bwh-slide__visual--duo { display: flex; justify-content: center; align-items: flex-start; height: var(--bwh-vis); }
+bw-home-then-now .bwh-slide__duo-item { flex: 0 0 auto; width: min(54%, calc(var(--bwh-vis) * .672)); aspect-ratio: 4 / 5; overflow: hidden; border-radius: 8px; background: #1A211B; box-shadow: 0 16px 36px rgba(0, 0, 0, .5); }
+bw-home-then-now .bwh-slide__duo-item img { width: 100%; height: 100%; object-fit: cover; }
+bw-home-then-now .bwh-slide__duo-item + .bwh-slide__duo-item { position: relative; z-index: 1; margin: calc(var(--bwh-vis) * .16) 0 0 calc(var(--bwh-vis) * -.07); outline: 3px solid #0E1210; }
+@media (min-width: 761px) {
+  bw-home-then-now .bwh-slide[data-bwh-theme="bw"] .bwh-eyebrow { font-size: 13px; }
+  bw-home-then-now .bwh-eyebrow__name { font-size: 17px; }
+  bw-home-then-now .bwh-slide[data-bwh-theme="bw"] { --bwh-vis: 250px; }
+  bw-home-then-now .bwh-slide[data-bwh-theme="bw"] .bwh-slide__grid { padding: 28px 28px 30px; border-radius: 16px; }
+}
+@media (min-width: 1100px) {
+  bw-home-then-now .bwh-slide[data-bwh-theme="bw"] { --bwh-vis: 360px; }
+  bw-home-then-now .bwh-eyebrow__name { font-size: 19px; }
+  bw-home-then-now .bwh-slide[data-bwh-theme="bw"] .bwh-slide__grid { padding: 36px 40px; border-radius: 18px; }
+  bw-home-then-now .bwh-slide[data-bwh-theme="bw"] .bwh-slide__copy { align-self: center; padding-top: 0; }
+}
+
 /* Clothing is outside Gift Week's rotating doors. Keep both people and shirts visible. */
 bw-home-then-now .bwh-clothingfeature{display:grid;grid-column:1/-1;gap:18px;padding:18px;border-radius:12px;background:var(--bwh-cream);color:var(--bwh-ink);text-decoration:none}
 bw-home-then-now .bwh-clothingfeature img{width:100%;height:auto;border-radius:8px}
