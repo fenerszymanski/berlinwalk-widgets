@@ -1,5 +1,5 @@
 {
- "updatedAt": "2026-11-19T10:07:04.850Z",
+ "updatedAt": "2026-11-20T10:06:56.095Z",
  "source": "Wix Blog API + blog-category/categories.json",
  "slug": "berlin-history",
  "categoryId": "5f58da11-347d-43f0-b3c3-2cb1cdeb7a79",
@@ -9,7 +9,7 @@
  "shelfLegend": "Where the story is standing",
  "shelfLegendSub": "Grouped by the kind of ground it covers",
  "totalPosts": 66,
- "toolCount": 59,
+ "toolCount": 60,
  "lead": {
   "title": "Kottbusser Tor: Is Kotti Dangerous, and Why the Square Looks the Way It Does",
   "slug": "kottbusser-tor-berlin",
@@ -29,7 +29,7 @@
   "term": "",
   "gloss": "",
   "termCta": "",
-  "tool": ""
+  "tool": "kotti-square-reader"
  },
  "glossary": [],
  "shelves": [
@@ -676,7 +676,8 @@
      "minutes": 6,
      "alt": "Kottbusser Tor at night from above, with the lit Neues Kreuzberger Zentrum, the U-Bahn station on its viaduct and car light trails around the square",
      "thumb": "https://static.wixstatic.com/media/5a08a3_39cd6d06778847e8a9c050b50cc72e38~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
-     "line": "Kotti has a reputation everyone in Berlin has heard."
+     "line": "Kotti has a reputation everyone in Berlin has heard.",
+     "tool": "kotti-square-reader"
     },
     {
      "title": "Historical Aerial Photos of Berlin: How to Find Your Street",

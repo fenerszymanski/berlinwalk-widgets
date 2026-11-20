@@ -1,5 +1,5 @@
 {
- "updatedAt": "2026-11-19T10:07:01.972Z",
+ "updatedAt": "2026-11-20T10:06:53.739Z",
  "source": "Wix Blog API + blog-category/categories.json",
  "slug": "living-in-berlin",
  "categoryId": "00af1018-ef7b-465a-93b6-916187609da4",
@@ -9,7 +9,7 @@
  "shelfLegend": "By the part of life it hits",
  "shelfLegendSub": "Four shelves, because that is how the questions actually arrive",
  "totalPosts": 84,
- "toolCount": 83,
+ "toolCount": 84,
  "lead": {
   "title": "Kottbusser Tor: Is Kotti Dangerous, and Why the Square Looks the Way It Does",
   "slug": "kottbusser-tor-berlin",
@@ -29,7 +29,7 @@
   "term": "",
   "gloss": "",
   "termCta": "",
-  "tool": ""
+  "tool": "kotti-square-reader"
  },
  "glossary": [
   {
@@ -1025,7 +1025,8 @@
      "alt": "Kottbusser Tor at night from above, with the lit Neues Kreuzberger Zentrum, the U-Bahn station on its viaduct and car light trails around the square",
      "thumb": "https://static.wixstatic.com/media/5a08a3_39cd6d06778847e8a9c050b50cc72e38~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
      "line": "knife attacks were counted in the Kotti ban zone in 2025, down from 48 the year before.",
-     "figure": "26"
+     "figure": "26",
+     "tool": "kotti-square-reader"
     },
     {
      "title": "Berlin Timetable Change: What Moves on 13 December and What Costs More on 1 January",
