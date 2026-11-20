@@ -1,7 +1,7 @@
 // Card previews only. Native variant stock and the existing cart resolver remain authoritative.
 export const COLOR_SWATCHES=Object.freeze({
  'ring spun sports grey':['#A9ACAB','Sportgrau'],
- White:['#FFFFFF','Weiß'],Natural:['#EFE6CF','Natur'],'Ice Grey':['#D9DDDC','Eisgrau'],'RS Sport Grey':['#A9ACAB','Sportgrau'],Ash:['#D2D3CF','Aschgrau'],Sand:['#CDBA94','Sand'],'Heather Dust':['#D9D1BC','Meliertes Beige'],Black:['#202020','Schwarz'],Charcoal:['#4B4F4E','Anthrazit'],'Dark Grey':['#414344','Dunkelgrau'],'Military Green':['#626A4D','Militärgrün'],Navy:['#252D3F','Marineblau']
+ White:['#FFFFFF','Weiß'],Natural:['#EFE6CF','Natur'],'Ice Grey':['#D9DDDC','Eisgrau'],'RS Sport Grey':['#A9ACAB','Sportgrau'],Ash:['#D2D3CF','Aschgrau'],Sand:['#CDBA94','Sand'],'Heather Dust':['#D9D1BC','Meliertes Beige'],Black:['#202020','Schwarz'],Charcoal:['#4B4F4E','Anthrazit'],'Dark Grey':['#414344','Dunkelgrau'],'Military Green':['#626A4D','Militärgrün'],Navy:['#252D3F','Marineblau'],Maroon:['#5B1E2A','Weinrot'],'Forest Green':['#234232','Waldgrün']
 });
 export function apparelCardColors(product,native){
  if(product?.group!=='apparel'||product.apparelMedia?.version!==1)return [];
