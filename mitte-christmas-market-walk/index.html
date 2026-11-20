@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mitte Christmas Market Walk: The Order That Works on Your Evening</title>
+<meta name="description" content="Pick your evening and the time you set off. The tool puts the Mitte Christmas markets in the order they close, from Sophienstraße and Alexanderplatz to the Rotes Rathaus, the Humboldt Forum and Gendarmenmarkt, with walking times and what each one costs.">
+<link rel="stylesheet" href="../css/brand.css">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { overflow-x: hidden; }
+  body { font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #FFFFFF; color: #20241d; padding: 12px; }
+  .mw { border-radius: 16px; overflow: hidden; border: 1px solid #d8dfd0; background: #fbfaf4; }
+  .mw-head { padding: 18px 18px 8px; }
+  .mw-kick { display: inline-block; font-size: 10.5px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; color: #123D18; background: #FFE600; padding: 3px 8px; border-radius: 4px; }
+  .mw-head h1 { font-family: 'Merriweather', Georgia, serif; font-size: 21px; line-height: 1.3; margin-top: 9px; color: #1B5E20; }
+  .mw-head p { font-size: 13px; line-height: 1.6; color: #43493f; margin-top: 7px; max-width: 760px; }
+  .controls { display: flex; flex-wrap: wrap; gap: 10px 14px; padding: 10px 18px 14px; align-items: end; }
+  .controls label { display: flex; flex-direction: column; gap: 5px; font-size: 11px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; color: #3c4437; }
+  .controls input, .controls select { font-family: inherit; font-size: 15px; font-weight: 700; color: #123D18; background: #fff; border: 2px solid #123D18; border-radius: 10px; padding: 8px 10px; min-height: 44px; min-width: 150px; }
+  .controls input:focus-visible, .controls select:focus-visible { outline: 3px solid #FFE600; outline-offset: 2px; }
+  .daynote { flex: 1 1 220px; font-size: 13px; line-height: 1.5; color: #123D18; background: #fff7b8; border-radius: 10px; padding: 9px 12px; min-height: 44px; display: flex; align-items: center; }
+  .mw-body { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr); gap: 12px; padding: 0 12px 12px; align-items: start; }
+  .mapbox { background: #fff; border: 1px solid #dfe5d8; border-radius: 14px; padding: 8px; min-width: 0; }
+  #map { width: 100%; height: 420px; border-radius: 10px; background: #efeee6; }
+  #map .leaflet-tile-pane { filter: saturate(.55) brightness(1.03); }
+  .pin { width: 30px; height: 30px; border-radius: 50%; background: #123D18; color: #FFE600; font-weight: 800; font-size: 14px; display: flex; align-items: center; justify-content: center; border: 3px solid #FFE600; box-shadow: 0 2px 6px rgba(0,0,0,.3); }
+  .pin.off { background: #9aa393; color: #fff; border-color: #fff; }
+  .legend { font-size: 11px; color: #555c50; padding: 7px 4px 2px; line-height: 1.5; }
+  .plan { min-width: 0; display: flex; flex-direction: column; gap: 8px; }
+  .verdict { background: #123D18; color: #fff; border-radius: 14px; padding: 14px 16px; }
+  .verdict b { color: #FFE600; }
+  .verdict p { font-size: 14px; line-height: 1.55; }
+  .stop { background: #fff; border: 1px solid #dfe5d8; border-radius: 14px; padding: 12px 14px; display: grid; grid-template-columns: 34px minmax(0, 1fr); gap: 10px; }
+  .stop .n { width: 30px; height: 30px; border-radius: 50%; background: #FFE600; color: #123D18; font-weight: 800; display: flex; align-items: center; justify-content: center; font-size: 14px; }
+  .stop.off { opacity: .62; }
+  .stop.off .n { background: #e3e7de; color: #555c50; }
+  .stop h2 { font-family: 'Merriweather', Georgia, serif; font-size: 15px; line-height: 1.35; color: #123D18; }
+  .stop .t { font-size: 12.5px; font-weight: 700; color: #1B5E20; margin-top: 3px; }
+  .stop .t.warn { color: #a12a33; }
+  .stop .d { font-size: 12.5px; line-height: 1.5; color: #4a5145; margin-top: 4px; }
+  .stop .walk { font-size: 11.5px; color: #6a7264; margin-top: 4px; }
+  .foot { font-size: 11px; color: #6a7264; padding: 0 18px 14px; line-height: 1.5; }
+  @media (max-width: 720px) {
+    .mw-body { grid-template-columns: minmax(0, 1fr); }
+    #map { height: 300px; }
+    .controls input, .controls select { min-width: 0; width: 100%; }
+    .controls label { flex: 1 1 140px; }
+  }
+</style>
+</head>
+<body>
+<div class="mw">
+  <div class="mw-head">
+    <span class="mw-kick">Mitte on foot</span>
+    <h1>Which Christmas market first? It depends on the evening.</h1>
+    <p>Most people walk the Mitte markets in the order they happen to reach them and arrive at the last one as the lights go off. Pick your evening and the time you set off. I put the markets in the order they close, with the walk between them.</p>
+  </div>
+  <div class="controls">
+    <label>Your evening <input type="date" id="day" min="2026-11-18" max="2027-01-03"></label>
+    <label>You set off at
+      <select id="start">
+        <option value="14">14:00</option><option value="15">15:00</option><option value="16">16:00</option>
+        <option value="17" selected>17:00</option><option value="18">18:00</option><option value="19">19:00</option><option value="20">20:00</option>
+      </select>
+    </label>
+    <label>Time at each market
+      <select id="stay">
+        <option value="30">30 minutes</option><option value="45" selected>45 minutes</option><option value="60">1 hour</option>
+      </select>
+    </label>
+    <div class="daynote" id="daynote"></div>
+  </div>
+  <div class="mw-body">
+    <div class="mapbox">
+      <div id="map" role="img" aria-label="Map of the Mitte Christmas markets with the walking order"></div>
+      <p class="legend">Numbers show the order for your evening. Grey pins are closed that day. Walking times assume an easy pace through the crowds.</p>
+    </div>
+    <div class="plan">
+      <div class="verdict" id="verdict"></div>
+      <div id="stops"></div>
+    </div>
+  </div>
+  <p class="foot" id="foot"></p>
+</div>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="markets.js"></script>
+<script>
+(function () {
+  var D = window.MITTE_MARKETS;
+  var dayEl = document.getElementById('day'), startEl = document.getElementById('start'), stayEl = document.getElementById('stay');
+  var WD = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+  var MO = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+
+  function iso(d) { return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0'); }
+  function parse(s) { var p = s.split('-'); return new Date(+p[0], +p[1] - 1, +p[2], 12); }
+  function hhmm(h) { var m = Math.round(h * 60); return String(Math.floor(m / 60)).padStart(2, '0') + ':' + String(m % 60).padStart(2, '0'); }
+  function walkMin(a, b) {
+    var R = 6371000, toR = Math.PI / 180;
+    var dl = (b.lat - a.lat) * toR, dn = (b.lng - a.lng) * toR;
+    var x = Math.sin(dl / 2) * Math.sin(dl / 2) + Math.cos(a.lat * toR) * Math.cos(b.lat * toR) * Math.sin(dn / 2) * Math.sin(dn / 2);
+    var metres = 2 * R * Math.asin(Math.sqrt(x)) * 1.3;
+    return Math.max(5, Math.round(metres / 75));
+  }
+  function hoursFor(m, s) {
+    var d = parse(s), wd = d.getDay();
+    if (s < m.from || s > m.to) return { closed: true, why: 'not open yet or already finished' };
+    if (m.onlyDates && m.onlyDates.indexOf(s) < 0) return { closed: true, why: 'Advent weekends only' };
+    if (m.special && Object.prototype.hasOwnProperty.call(m.special, s)) {
+      var sp = m.special[s];
+      if (!sp) return { closed: true, why: 'closed that day' };
+      return { open: sp[0], close: sp[1], special: true };
+    }
+    var h = m.hours, r;
+    if (h.all) r = h.all;
+    else if (h.sat) r = wd === 6 ? h.sat : h.sun;
+    else if (h.weekday) r = (wd === 0 || wd === 6) ? h.weekend : h.weekday;
+    else if (h.sunthu) r = (wd === 5 || wd === 6) ? h.frisat : h.sunthu;
+    return { open: r[0], close: r[1], unsure: !!(m.unsure && m.unsure.indexOf(s) >= 0) };
+  }
+
+  var map = L.map('map', { zoomControl: true, scrollWheelZoom: false, attributionControl: true }).setView([52.519, 13.403], 15);
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 18, attribution: '&copy; OpenStreetMap contributors' }).addTo(map);
+  var layer = L.layerGroup().addTo(map);
+
+  function render() {
+    var s = dayEl.value || D.season.first;
+    var start = +startEl.value, stay = +stayEl.value / 60;
+    var d = parse(s);
+    var rows = D.markets.map(function (m) { return { m: m, h: hoursFor(m, s) }; });
+    rows.forEach(function (r) { if (!r.h.closed && r.h.close <= start + 0.25) { r.h = { closed: true, why: 'it closes at ' + hhmm(r.h.close) + ', before you set off' }; } });
+    var open = rows.filter(function (r) { return !r.h.closed; });
+    var shut = rows.filter(function (r) { return r.h.closed; });
+    open.sort(function (a, b) { return (a.h.close - b.h.close) || (a.m.chain - b.m.chain); });
+
+    var clock = start, prev = null, late = 0;
+    open.forEach(function (r, i) {
+      r.walk = prev ? walkMin(prev.m, r.m) : 0;
+      clock += r.walk / 60;
+      if (clock < r.h.open) clock = r.h.open;
+      r.arrive = clock;
+      r.late = clock > r.h.close - 0.25;
+      if (r.late) late += 1;
+      clock += stay;
+      prev = r;
+      r.n = i + 1;
+    });
+
+    document.getElementById('daynote').textContent = WD[d.getDay()] + ' ' + d.getDate() + ' ' + MO[d.getMonth()] + ': ' + open.length + ' of ' + rows.length + ' markets open.';
+
+    var v = document.getElementById('verdict');
+    if (!open.length) {
+      v.innerHTML = '<p><b>Nothing in this walk is open that day.</b> Pick another evening, or check the Potsdamer Platz winter market, which keeps its own hours.</p>';
+    } else {
+      var first = open[0], last = open[open.length - 1];
+      var line;
+      if (open.length === 1) line = 'Only <b>' + first.m.short + '</b> is open on this walk, until ' + hhmm(first.h.close) + '.';
+      else if (first.h.close === last.h.close) line = (open.length === 2 ? 'Both' : 'All ' + open.length) + ' close at ' + hhmm(last.h.close) + ', so walk them in a line: start at <b>' + first.m.short + '</b>, finish at <b>' + last.m.short + '</b>.';
+      else line = 'Start at <b>' + first.m.short + '</b>, it closes earliest (' + hhmm(first.h.close) + '). Finish at <b>' + last.m.short + '</b>, open until ' + hhmm(last.h.close) + '.';
+      if (late) line += ' At this pace you reach ' + (late === 1 ? 'one market' : late + ' markets') + ' in its last 15 minutes or later. Set off earlier or drop one.';
+      else line += ' You finish around ' + hhmm(clock) + (open.length === 1 ? '.' : ', and every market is still open when you get there.');
+      v.innerHTML = '<p>' + line + '</p>';
+    }
+
+    var html = '';
+    open.forEach(function (r) {
+      var t = 'Open ' + hhmm(r.h.open) + ' to ' + hhmm(r.h.close) + (r.h.special ? ' (short day)' : '') + '. You arrive about ' + hhmm(r.arrive) + '.';
+      if (r.h.unsure) t += ' Holiday hours not published yet, check on the day.';
+      html += '<div class="stop"><div class="n">' + r.n + '</div><div><h2>' + r.m.name + '</h2>' +
+        '<div class="t' + (r.late ? ' warn' : '') + '">' + t + (r.late ? ' Closing as you arrive.' : '') + '</div>' +
+        '<div class="d">' + r.m.look + ' Entry: ' + r.m.fee + '.</div>' +
+        '<div class="walk">' + (r.walk ? 'About ' + r.walk + ' minutes on foot from the last market. ' : 'Nearest station: ') + (r.walk ? '' : r.m.station + '.') + '</div></div></div>';
+    });
+    shut.forEach(function (r) {
+      html += '<div class="stop off"><div class="n">&ndash;</div><div><h2>' + r.m.name + '</h2><div class="t">Not on your walk: ' + r.h.why + '.</div></div></div>';
+    });
+    document.getElementById('stops').innerHTML = html;
+
+    layer.clearLayers();
+    var line = open.map(function (r) { return [r.m.lat, r.m.lng]; });
+    if (line.length > 1) L.polyline(line, { color: '#1B5E20', weight: 4, opacity: .85, dashArray: '2 8', lineCap: 'round' }).addTo(layer);
+    rows.forEach(function (r) {
+      var lab = r.h.closed ? '&ndash;' : String(r.n);
+      L.marker([r.m.lat, r.m.lng], { icon: L.divIcon({ className: '', html: '<div class="pin' + (r.h.closed ? ' off' : '') + '">' + lab + '</div>', iconSize: [30, 30], iconAnchor: [15, 15] }), title: r.m.short }).addTo(layer);
+    });
+    document.getElementById('foot').textContent = 'Dates, hours and entry checked on ' + D.checked + ' against the organisers, berlin.de and visitBerlin. Hours can change at short notice, so look at the market’s own page on the day.';
+    if (window.BerlinWalkBrand && window.BerlinWalkBrand.resize) window.BerlinWalkBrand.resize();
+  }
+
+  var today = iso(new Date());
+  dayEl.value = (today >= '2026-11-23' && today <= D.season.last) ? today : '2026-11-28';
+  [dayEl, startEl, stayEl].forEach(function (el) { el.addEventListener('change', render); el.addEventListener('input', render); });
+  render();
+  window.addEventListener('resize', function () { map.invalidateSize(); });
+})();
+</script>
+<script src="../js/brand.js"></script>
+</body>
+</html>
