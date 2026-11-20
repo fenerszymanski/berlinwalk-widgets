@@ -24,7 +24,7 @@
   const design2Enabled = (()=>{let choice;try{const q=new URLSearchParams(location.search).get("design");if(q==="2"||q==="0"){choice=q;sessionStorage.setItem("bwStoreDesign",q);}else choice=sessionStorage.getItem("bwStoreDesign");}catch{}return choice==="2"?true:choice==="0"?false:STORE_DESIGN2;})();
   const CALENDAR_LISTED=true;   // Yusuf 13 Nov 2026: "şimdi bunu store'da, menüde vs nerede gerekli varsa koyalım" (12 Nov it was direct link only)
   const esc = value => String(value ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-  const asset = value => {if(value==='gift-week.js'&&/^[a-f0-9]{40}$/.test(window.__WOB_GIFT_WEEK_P22_REF||''))return 'https://cdn.jsdelivr.net/gh/fenerszymanski/berlinwalk-widgets@'+window.__WOB_GIFT_WEEK_P22_REF+'/storefront/20261022-c4/gift-week.js';const target=new URL(value,base);if(/\.(?:js|css|json)$/.test(target.pathname))target.searchParams.set('v',['data/categories.json','data/native-bindings.json','data/presentation.json','data/de-store.json','design2.js'].includes(value)?'berlin-bear-black-20261120-v1':value==='storefront.css'?'sticky-bar-20261119-v2':value==='street-configurator.js'?'ys-finder-handoff-20261119-v1':value==='ys-de.js'?'ys-quick-format-20261119-v1':value==='design2.js'?'holiday-hero-20261118-v1':['catalog-layer.js','data/presentation.json'].includes(value)?'garment-details-20261118-v1':['storefront.css','design2.js'].includes(value)?'mobile-cats-20261117-v1':['storefront.css','catalog-layer.js'].includes(value)?'cliches-chest-gallery-20261117-v1':value==='design2.js'?'zoom-sort-20261117-v1':['data/categories.json','data/native-bindings.json','data/presentation.json','data/de-store.json','design2.js','clothing.js','tshirt-designs.js'].includes(value)?'berlin-cliches-20261117-v3':value==='data/categories.json'?'xmas-audio-20261116-v1':value==='data/external-products.json'?'xmas-audio-20261116-v1':value==='data/native-bindings.json'?'hoodies-20261116-v1':value==='funnel.js'?'page-interest-20261120-v1':['funnel.js','calendar-configurator.js'].includes(value)?'store-paid-attribution-20261114-v3':value==='design2.js'?'xmas-audio-20261116-v1':value==='storefront.css'?'hoodies-20261116-v1':value==='data/de-store.json'?'xmas-audio-20261116-v1':['ys-de.js','catalog-layer.js'].includes(value)?'store-apparel-colors-20261114-v3':'store-discovery-polish-20261114-v2');return target.href;};
+  const asset = value => {if(value==='gift-week.js'&&/^[a-f0-9]{40}$/.test(window.__WOB_GIFT_WEEK_P22_REF||''))return 'https://cdn.jsdelivr.net/gh/fenerszymanski/berlinwalk-widgets@'+window.__WOB_GIFT_WEEK_P22_REF+'/storefront/20261022-c4/gift-week.js';const target=new URL(value,base);if(/\.(?:js|css|json)$/.test(target.pathname))target.searchParams.set('v',['data/categories.json','data/native-bindings.json','data/presentation.json','data/de-store.json','design2.js'].includes(value)?'berlin-bear-black-20261120-v1':value==='storefront.css'?'cart-path-20261120-v1':value==='street-configurator.js'?'ys-finder-handoff-20261119-v1':value==='ys-de.js'?'cart-path-20261120-v1':value==='design2.js'?'holiday-hero-20261118-v1':['catalog-layer.js','data/presentation.json'].includes(value)?'garment-details-20261118-v1':['storefront.css','design2.js'].includes(value)?'mobile-cats-20261117-v1':['storefront.css','catalog-layer.js'].includes(value)?'cliches-chest-gallery-20261117-v1':value==='design2.js'?'zoom-sort-20261117-v1':['data/categories.json','data/native-bindings.json','data/presentation.json','data/de-store.json','design2.js','clothing.js','tshirt-designs.js'].includes(value)?'berlin-cliches-20261117-v3':value==='data/categories.json'?'xmas-audio-20261116-v1':value==='data/external-products.json'?'xmas-audio-20261116-v1':value==='data/native-bindings.json'?'hoodies-20261116-v1':value==='funnel.js'?'cart-path-20261120-v1':['funnel.js','calendar-configurator.js'].includes(value)?'store-paid-attribution-20261114-v3':value==='design2.js'?'xmas-audio-20261116-v1':value==='storefront.css'?'hoodies-20261116-v1':value==='data/de-store.json'?'xmas-audio-20261116-v1':['ys-de.js','catalog-layer.js'].includes(value)?'store-apparel-colors-20261114-v3':'store-discovery-polish-20261114-v2');return target.href;};
   // Chrome and Safari ignore @font-face inside shadow DOM, so the three faces are registered once on the document with absolute URLs from the element's own base.
   // Gift landing trials showed no LCP gain. Preserve their prior resource and font order.
   const legacyGiftPresentation = () => /^(?:\/de)?\/(?:category\/(?:berlin-christmas-gifts|berlin-geschenke)|gifts|geschenke)\/?$/.test(location.pathname);
@@ -395,7 +395,7 @@
         for(const key of EDITION_UTMS){target.searchParams.delete(key);for(const value of original.searchParams.getAll(key))target.searchParams.append(key,value);}
         if(target.href!==saved.anchor.href)saved.anchor.href=target.href;
       },true);
-      this.shadowRoot.addEventListener('click', event => this.click(event));
+      this.shadowRoot.addEventListener('click', event => this.click(event));this.shadowRoot.addEventListener('close', () => this.onCartViewport(), true);   // cart drawer closed: the phone buy bar may come back (20 Nov 2026)
       // 20 Nov 2026: a section opened by the visitor (summary click while closed), counted once per page load in funnel.js.
       this.shadowRoot.addEventListener('click', event => {const d=event.target.closest?.('summary')?.parentElement;if(d?.tagName==='DETAILS'&&!d.open)this.measure('pageStep',d.matches('.delivery-returns')?'info-delivery':'info-other');}, true);
       this.shadowRoot.addEventListener('input', event => this.input(event));
@@ -405,7 +405,7 @@
       this.onCreditOutside=event=>{const d=this.shadowRoot.querySelector('.store-visual-credits');if(d?.open&&!event.composedPath().includes(d))d.open=false;};
       this.shadowRoot.addEventListener('keydown',event=>{const d=this.shadowRoot.querySelector('.store-visual-credits');if(event.key==='Escape'&&d?.open){d.open=false;d.querySelector('summary')?.focus();event.stopPropagation();}});
       this.onStoreNavigation=()=>{if(this.context.mode==='shop'){this.applyContextCategory();this.render();}};
-      this.onCartViewport=()=>{cancelAnimationFrame(this.cartBarFrame);this.cartBarFrame=requestAnimationFrame(()=>{this.syncMobileCheckout();this.syncBarCompact();});};
+      this.onCartViewport=()=>{cancelAnimationFrame(this.cartBarFrame);this.cartBarFrame=requestAnimationFrame(()=>{this.syncMobileCheckout();this.syncBarCompact();this.syncBuyBar();});};
     }
     // The stylesheet and data load in parallel. Product/category previews get a bounded 20 s bridge window measured from connection. Cart timing retains its existing behavior; terminal errors still restore the native store.
     connectedCallback() {if(location.pathname.includes('your-berlin-street-in-1928')){this.ysPaintPending=true;this.style.visibility='hidden';}window.addEventListener('pointerdown',this.onCreditOutside);window.addEventListener('popstate',this.onStoreNavigation);this.context=json(this.getAttribute('shop-context'))||{};this.syncConfiguredGuard();this.holdNativeGuard();if(!this.revealed&&!this.hidden){this.style.display='block';this.style.minHeight='100vh';}this.adoptEarly();window.addEventListener('scroll',this.onCartViewport,{passive:true});window.addEventListener('resize',this.onCartViewport,{passive:true});this.ensureLink();this.connectedAt=globalThis.performance?.now?.()||0;this.watchdogFired=false;this.armWatchdog(/^(?:\/de)?\/(?:(?:category|product-page)\/|cart-page(?:\/|$))/.test(location.pathname)?20000:Math.max(1500,10500-(globalThis.performance?.now?.()||0))/* cart 20 s since 14 Nov 2026 (Yusuf: "yes, add it") */);this.load();}
@@ -619,8 +619,9 @@
     }
     releaseHomePaint(){
       if(!this.ysPaintPending||this.ysPaintWait)return;this.ysPaintWait=true;
-      const fonts=Promise.all([document.fonts.load("600 24px 'Fraunces'"),document.fonts.load("400 16px 'Space Grotesk'"),document.fonts.load("400 40px 'DM Serif Display'")]);
-      fonts.catch(()=>{}).then(()=>requestAnimationFrame(()=>requestAnimationFrame(()=>{if(this.isConnected){this.style.visibility='';this.ysPaintPending=false;}})));
+      const fonts=Promise.race([Promise.all([document.fonts.load("600 24px 'Fraunces'"),document.fonts.load("400 16px 'Space Grotesk'"),document.fonts.load("400 40px 'DM Serif Display'")]),new Promise(resolve=>setTimeout(resolve,2500))]);
+      const show=()=>{if(this.isConnected&&this.ysPaintPending){this.style.visibility='';this.ysPaintPending=false;}};
+      fonts.catch(()=>{}).then(()=>{requestAnimationFrame(()=>requestAnimationFrame(show));setTimeout(show,400);});
     }
     // Every fall back to Wix's own shop is counted (14 Nov 2026): lane 1 path count + consented GA4 event, once per page load.
     reportFallback(reason) {if(this.fallbackReported||!this.isConnected||reason==='BRIDGE_DISCONNECTED')return;/* 19 Nov 2026: Wix swaps this element once while the page starts; the removed copy's pending reads end as BRIDGE_DISCONNECTED and were counted as step-fallback-error on almost every page load although the storefront was shown. A copy that is no longer in the page shows nothing, so it reports nothing. */this.fallbackReported=true;import(asset('funnel.js')).then(m=>m.fallback?.(reason)).catch(()=>{});}
@@ -1118,6 +1119,7 @@
       if(!this.cart&&this.cartReadState!=='error')return `<section class="wrap empty" role="status"><h1>${this.cartGerman()?'Warenkorb wird geladen…':'Loading your cart…'}</h1></section>`;
       if(!this.cart)return `<section class="wrap empty"><h1>Your cart could not be read.</h1><p>The original cart remains available.</p><button class="primary" data-action="native-fallback">Open original cart</button></section>`;
       if(!this.cart.count)return `<section class="wrap empty"><h1>Your cart is empty.</h1><p>Explore Berlin prints, or listen to a city walk.</p><a class="primary" href="https://walkofberlin.com/category/all-products">Browse the shop</a><div class="grid">${this.model.products.filter(p=>p.fulfilment.cartEligible).slice(0,3).map(p=>this.card(p)).join('')}</div></section>`;
+      this.guessDestination();
       const form=this.cart.hasShippableItems===null?'<p>Delivery requirements have not been confirmed. Continue in the original cart.</p><button class="outline" data-action="native-fallback">Open original cart</button>':this.addressForm();
       return `<section class="wrap cart-page cart-mode"><h1>Your cart <span class="meta">(${this.cart.count} ${this.cart.count===1?'item':'items'})</span></h1><div class="cart-layout"><div>${this.lines()}<details class="promo"><summary>Promo code</summary><div class="details-body"><span>You can enter a promo code in checkout.</span>${this.cart.coupon?.kind==='multi'?' <span>A code you enter there replaces the multi-print saving.</span>':''}</div></details></div><aside class="order-summary"><h2>Order summary</h2><div class="summary-row"><span>Subtotal</span><strong data-cart-subtotal>${esc(textMoney(this.shownSubtotal()))}</strong></div>${form}<p class="sr-only" role="status" aria-live="polite" data-quote-status></p><div class="quote-area">${this.quoteArea()}</div>${this.withdrawButton()}</aside></div></section>`;
     }
@@ -1337,7 +1339,7 @@
 
       // The <link> node stays in the shadow root across renders. Removing and re-inserting it drops the stylesheet for a frame (":host" display included), which showed as a one-frame layout jump when the real surface replaced the skeleton.
       const sheet=this.ensureLink(),surface=document.createElement('template');
-      surface.innerHTML=`<div class="surface" ${this.revealed?'':'hidden'}>${this.shopbar()}${this.campaignBanner()}${this.error?`<div class="native-error" role="alert">${esc(this.errorMessage())} <button class="text-button" data-action="refresh">Refresh cart</button></div>`:''}${this.context.mode==='product'?this.product():this.context.mode==='cart'?this.cartPage():this.shop()}<p class="sr-only" role="status" aria-live="polite">${esc(this.notice)}</p><dialog class="drawer" aria-label="Shopping cart"><div class="drawer-heading"><h2>Cart (${this.cart?this.cart.count:'—'})</h2><button class="icon-button" data-action="close-drawer" aria-label="Close cart">✕</button></div>${this.notice?`<p class="notice">${esc(this.notice)}</p>`:''}${this.cart?this.lines():''}<div class="drawer-subtotal summary-row"><span>Subtotal</span><strong>${esc(textMoney(this.cart?.subtotal))}</strong></div><p class="delivery">${this.digitalOnly()?'Nothing is shipped. Tax is confirmed after your billing country is entered.':'Delivery and tax are confirmed after your destination is entered.'}</p><div class="drawer-actions"><a class="primary" href="${cartPageUrl(this.cartGerman())}">View cart</a><button class="text-button" data-action="close-drawer">Continue shopping</button></div></dialog></div>`;
+      surface.innerHTML=`<div class="surface" ${this.revealed?'':'hidden'}>${this.shopbar()}${this.campaignBanner()}${this.error?`<div class="native-error" role="alert">${esc(this.errorMessage())} <button class="text-button" data-action="refresh">Refresh cart</button></div>`:''}${this.context.mode==='product'?this.product():this.context.mode==='cart'?this.cartPage():this.shop()}<p class="sr-only" role="status" aria-live="polite">${esc(this.notice)}</p><dialog class="drawer" aria-label="Shopping cart"><div class="drawer-heading"><h2>Cart (${this.cart?this.cart.count:'—'})</h2><button class="icon-button" data-action="close-drawer" aria-label="Close cart">✕</button></div>${this.notice?`<p class="notice">${esc(this.notice)}</p>`:''}${this.cart?this.lines():''}<div class="drawer-subtotal summary-row"><span>Subtotal</span><strong>${esc(textMoney(this.cart?.subtotal))}</strong></div><p class="delivery">${esc(this.drawerDeliveryNote())}</p><div class="drawer-actions"><a class="primary" href="${cartPageUrl(this.cartGerman())}" data-drawer-checkout>Checkout</a><button class="text-button" data-action="close-drawer">Continue shopping</button></div></dialog></div>`;
       for(const node of [...this.shadowRoot.childNodes])if(node!==sheet&&node!==keep)node.remove();
       for(const card of surface.content.querySelectorAll('article[data-product]')){const h=this.previewPriceHeights.get(card.dataset.product),price=card.querySelector('.price');if(h&&price)price.style.minHeight=h+'px';}
       sheet.after(surface.content);this.campaign?.tick(this.shadowRoot);
@@ -1359,6 +1361,54 @@
       const height=Math.ceil(bar.getBoundingClientRect().height);
       if(height>0&&height!==this.cartBarHeight){this.cartBarHeight=height;this.style.setProperty('--mobile-checkout-height',height+'px');}
       cart.classList.toggle('checkout-at-end',cart.getBoundingClientRect().bottom<=window.innerHeight+1);
+    }
+    // ---- Shorter path to checkout (Yusuf, 20 Nov 2026: "evet önerileri uygula") ----
+    // Every Wix delivery option is free (read 20 Nov 2026: 18 options, all 0 €). The 2027 calendar profile has no US region.
+    drawerDeliveryNote() {
+      if(this.digitalOnly())return 'Nothing is shipped. Tax is confirmed after your billing country is entered.';
+      const calendar=(this.cart?.lines||[]).some(line=>this.model?.products?.find(p=>p.wixProductId===line.productId)?.id==='dein-berlin-2027');
+      return calendar?'Free delivery to Germany, the EU and the UK.':'Free delivery to Germany, the EU, the UK and the US.';
+    }
+    // First cart visit: preselect one of the listed countries from the device time zone. Never overrides a choice; the visitor can change it.
+    guessDestination() {
+      if(this.destinationGuessed||this.destination.country)return;this.destinationGuessed=true;
+      let zone='';try{zone=Intl.DateTimeFormat().resolvedOptions().timeZone||'';}catch(e){}
+      const code=/^Europe\/(?:Berlin|Busingen)$/.test(zone)?'DE':zone==='Europe/Vienna'?'AT':zone==='Europe/Paris'?'FR':zone==='Europe/Amsterdam'?'NL':zone==='Europe/London'?'GB'
+        :/^(?:America\/(?:New_York|Chicago|Denver|Los_Angeles|Phoenix|Anchorage|Detroit|Boise|Juneau|Sitka|Nome|Adak|Yakutat|Metlakatla|Menominee|Indiana\/\w+|Kentucky\/\w+|North_Dakota\/\w+)|Pacific\/Honolulu)$/.test(zone)?'US':'';
+      if(code&&DESTINATIONS.some(item=>item.code===code))this.destination.country=code;
+    }
+    // Phone product pages: a bar fixed to the bottom while the real buy button is off screen. It never adds a choice the visitor has not
+    // seen: with an open option (size, colour, paper) it scrolls to the buy box and focuses that option; with none it presses the real button.
+    buyBarTarget() {
+      const box=this.shadowRoot.querySelector('.surface .buy-box'),real=box?.querySelector('.buy-row .primary');
+      if(!real)return null;const choice=box.querySelector('select:not([disabled])');
+      if(!choice&&real.disabled)return null;
+      const label=choice?(/size|größe/i.test(choice.closest('label')?.textContent||choice.name||'')?'Choose size':'Choose options'):(real.textContent.trim()||'Add to cart');
+      return {box,real,choice,label};
+    }
+    syncBuyBar() {
+      // A direct child of the shadow root (outside .surface, which every render replaces). ':scope' does not work on a shadow root.
+      let bar=[...this.shadowRoot.children].find(node=>node.classList?.contains('buy-bar'));
+      const target=this.revealed&&!this.hidden&&this.context.mode==='product'&&matchMedia('(max-width:740px)').matches?this.buyBarTarget():null;
+      let on=false;
+      if(target){
+        const r=target.real.getBoundingClientRect(),h=window.innerHeight||0,end=this.getBoundingClientRect().bottom;
+        on=r.height>0&&(r.top>h-8||r.bottom<0)&&end>h&&!this.shadowRoot.querySelector('dialog[open]');
+      }
+      if(!on){if(bar&&!bar.hidden){bar.hidden=true;bar.setAttribute('aria-hidden','true');}return;}
+      if(!bar){bar=document.createElement('div');bar.className='buy-bar';bar.hidden=true;bar.innerHTML='<div class="buy-bar-text"><strong data-buy-bar-name></strong><span data-buy-bar-price></span></div><button class="primary" type="button" data-action="buy-bar"></button>';this.shadowRoot.append(bar);this.buyBarText={};}
+      const name=this.shadowRoot.querySelector('.surface .product-title h1')?.textContent.trim()||'',price=this.shadowRoot.querySelector('.surface .product-title .price')?.textContent.trim()||'';
+      // Compare with what this code wrote last, not with the node: the German layer rewrites the text and must not be fought on every scroll.
+      const set=(key,node,value)=>{if(node&&this.buyBarText[key]!==value){this.buyBarText[key]=value;node.textContent=value;}};
+      set('name',bar.querySelector('[data-buy-bar-name]'),name);set('price',bar.querySelector('[data-buy-bar-price]'),price);set('label',bar.querySelector('[data-action="buy-bar"]'),target.label);
+      if(bar.hidden){bar.hidden=false;bar.removeAttribute('aria-hidden');}
+    }
+    buyBarTap() {
+      const target=this.buyBarTarget();if(!target)return;
+      this.measure('pageStep','buy-bar');
+      if(!target.choice&&!target.real.disabled){target.real.click();return;}
+      target.box.style.scrollMarginTop='90px';target.box.scrollIntoView({block:'start',behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'});
+      target.choice.focus({preventScroll:true});
     }
     errorMessage() {if(this.uncertain)return 'The cart update could not be confirmed. Refresh the cart and check it before trying again.';return ({BF_COUPON_CONFLICT:'Black Friday prices cannot be combined with a code. Remove the code from your cart, then check delivery again.',CART_UNAVAILABLE:'The cart could not be read. You can still open the original cart.',INVALID_DESTINATION:'Enter a valid destination.',NO_SHIPPING_AVAILABLE:'No delivery method is available for this address.',CART_CHANGED:'Your cart changed. Check delivery again.',BRIDGE_DISABLED:'The shop is temporarily unavailable.'})[this.error]||'This action could not be completed. Check your cart or try again.';}
     // Any address edit clears the visible quote, total and delivery choice at once and bumps quoteRevision, so a late quote response for the old address is discarded in receive().
@@ -1402,8 +1452,10 @@
       const category=event.target.closest('[data-category]'),filter=event.target.closest('[data-filter]');
       if(category){this.navigateStore(category.dataset.category,'all',event);return;}
       if(filter){this.navigateStore(this.category,filter.dataset.filter,event);return;}
+      if(event.target.closest?.('[data-drawer-checkout]'))this.measure('pageStep','drawer-checkout');
       const button=event.target.closest('[data-action]');if(!button)return;
       const action=button.dataset.action;
+      if(action==='buy-bar'){this.buyBarTap();return;}
       if(action==='early-add'){const data=this.earlyData();if(!data||this.earlyAdd||button.disabled||button.dataset.product!==data.product.wixProductId||!this.posterPack(data.product,data.native)?.canAdd)return;this.earlyAdd={productId:data.product.wixProductId,at:Date.now()};this.measure('earlyStep','add');this.render();return;}
       if(action==='buy-options'){const box=this.viewRoot().querySelector('.buy-box');if(box){box.style.scrollMarginTop='100px';box.scrollIntoView({block:'start',behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'});(box.querySelector('select:not([disabled])')||box.querySelector('button:not([disabled]),a'))?.focus({preventScroll:true});}return;}
       if(action==='ys-add-another'){this.measure('ysAddAnother');return;}   // plain link: the 1928 page opens with the same options

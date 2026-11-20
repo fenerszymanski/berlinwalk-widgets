@@ -218,7 +218,7 @@ export function earlyStep(step) {
 // Product page interest (20 Nov 2026, store-wide): aggregate counter only, once per page load under the product's own path.
 // option = a size, colour, paper or other option was changed; info-delivery = "Delivery & returns" opened; info-other = any other section opened.
 export function pageStep(step) {
- if(!['option','info-delivery','info-other'].includes(step))return;
+ if(!['option','info-delivery','info-other','buy-bar','drawer-checkout'].includes(step))return;   // buy-bar = phone bottom bar tapped, drawer-checkout = Checkout in the cart drawer (20 Nov 2026)
  const page=String(W.location?.pathname||'').replace(/^\/de(?=\/|$)/,'').replace(/\/+$/,'').toLowerCase()||'/';
  if(!page.startsWith('/product-page/'))return;
  count(step,page);

@@ -885,3 +885,13 @@ button.ys-words-tag:focus-visible{outline:2px solid var(--green);outline-offset:
  :host([design2][bar-compact]) .d2-bar .d2-groups{display:none}
  :host([design2][bar-compact]) .d2-bar{margin-bottom:var(--bw-bar-gap,0px)}
 }
+
+/* Phone product pages (20 Nov 2026): bottom bar while the buy button is off screen. Hidden by the hidden attribute until syncBuyBar shows it. */
+.buy-bar{display:none}
+@media(max-width:740px){
+  .buy-bar:not([hidden]){position:fixed;inset:auto 0 0;z-index:21;display:flex;align-items:center;gap:12px;padding:10px 16px calc(10px + env(safe-area-inset-bottom,0px));background:var(--cream,#FAFAF5);border-top:1px solid var(--line,#dae0d4);box-shadow:0 -5px 20px #123d1814}
+  .buy-bar-text{min-width:0;flex:1;display:flex;flex-direction:column;line-height:1.25}
+  .buy-bar-text strong{font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .buy-bar-text span{font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .buy-bar .primary{flex:none;min-height:44px;padding:0 18px;margin:0}
+}

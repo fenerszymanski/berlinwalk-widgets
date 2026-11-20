@@ -463,7 +463,12 @@ const CART_TEXT = {
  "View cart": "Warenkorb ansehen",
  "Added to your cart": "Im Warenkorb",
  "Nothing is shipped. Tax is confirmed after your billing country is entered.": "Es wird nichts verschickt. Die Steuer wird bestätigt, sobald du dein Rechnungsland eingibst.",
- "Delivery and tax are confirmed after your destination is entered.": "Versand und Steuer werden bestätigt, sobald du dein Lieferziel eingibst."
+ "Delivery and tax are confirmed after your destination is entered.": "Versand und Steuer werden bestätigt, sobald du dein Lieferziel eingibst.",
+ "Checkout": "Zur Kasse",
+ "Free delivery to Germany, the EU, the UK and the US.": "Kostenloser Versand nach Deutschland, in die EU, nach Großbritannien und in die USA.",
+ "Free delivery to Germany, the EU and the UK.": "Kostenloser Versand nach Deutschland, in die EU und nach Großbritannien.",
+ "Choose size": "Größe wählen",
+ "Choose options": "Optionen wählen"
 };
 for (const [en, de] of Object.entries(CART_TEXT)) TEXT.set(en, de);
 for (const [en, de] of [['Close cart', 'Warenkorb schließen'], ['Shopping cart', 'Warenkorb'], ['Decrease quantity', 'Menge verringern'], ['Increase quantity', 'Menge erhöhen'], ['Delivery method', 'Versandart']]) ATTRS.set(en, de);
