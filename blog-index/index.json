@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-19T10:07:01.349Z",
+  "updatedAt": "2026-11-20T04:32:54.982Z",
   "source": "Wix Blog API",
   "popularSource": "Wix Blog metrics.views lifetime sort",
   "totalPosts": 468,
@@ -49,23 +49,40 @@
   ],
   "hero": {
     "lead": {
-      "title": "Alexanderplatz History: What Stood on the Square and What to Look For Today",
-      "slug": "alexanderplatz-history",
-      "path": "/post/alexanderplatz-history",
-      "url": "https://www.berlinwalk.com/post/alexanderplatz-history",
-      "excerpt": "The World Clock is where most visitors stop. Here is what stood on Alexanderplatz before it, what was lost, and how to read the square's layers in 30 minutes.",
+      "title": "Glienicke Bridge: How to Visit Berlin's Bridge of Spies and the Border Corner Around It",
+      "slug": "glienicke-bridge-berlin",
+      "path": "/post/glienicke-bridge-berlin",
+      "url": "https://www.berlinwalk.com/post/glienicke-bridge-berlin",
+      "excerpt": "Most visitors photograph the green arches and leave. How to get to Glienicke Bridge, what to look for on it, and the strange border corner around it, from Klein-Glienicke to Steinstücken.",
       "category": "Tourist Tips",
       "categorySlug": "tourist-tips",
-      "topic": "first-day",
-      "topicLabel": "First Day in Berlin",
-      "readTime": "7 min read",
-      "publishedDate": "2026-11-17T13:50:06.863Z",
-      "image": "https://static.wixstatic.com/media/5a08a3_183b6997f36441aa8464ff02ab520344~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/tv-tower-over-alexanderplatz-viaduct-dusk.jpg",
-      "thumb": "https://static.wixstatic.com/media/5a08a3_183b6997f36441aa8464ff02ab520344~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/tv-tower-over-alexanderplatz-viaduct-dusk.jpg",
-      "alt": "The Berlin TV Tower above the yellow-brick Stadtbahn viaduct at Alexanderplatz at dusk",
-      "relatedToolSlug": "alexanderplatz-time-layers"
+      "topic": "practical",
+      "topicLabel": "Practical Berlin",
+      "readTime": "8 min read",
+      "publishedDate": "2026-11-18T09:56:30.658Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_2eb10ec3bd6741b4b9a2de6af498dd01~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-cover.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_2eb10ec3bd6741b4b9a2de6af498dd01~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-cover.jpg",
+      "alt": "The green steel arches of Glienicke Bridge over the Havel, seen from the Potsdam shore on a clear day",
+      "relatedToolSlug": "glienicke-border-corner-planner"
     },
     "secondary": [
+      {
+        "title": "Alexanderplatz History: What Stood on the Square and What to Look For Today",
+        "slug": "alexanderplatz-history",
+        "path": "/post/alexanderplatz-history",
+        "url": "https://www.berlinwalk.com/post/alexanderplatz-history",
+        "excerpt": "The World Clock is where most visitors stop. Here is what stood on Alexanderplatz before it, what was lost, and how to read the square's layers in 30 minutes.",
+        "category": "Tourist Tips",
+        "categorySlug": "tourist-tips",
+        "topic": "first-day",
+        "topicLabel": "First Day in Berlin",
+        "readTime": "7 min read",
+        "publishedDate": "2026-11-17T13:50:06.863Z",
+        "image": "https://static.wixstatic.com/media/5a08a3_183b6997f36441aa8464ff02ab520344~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/tv-tower-over-alexanderplatz-viaduct-dusk.jpg",
+        "thumb": "https://static.wixstatic.com/media/5a08a3_183b6997f36441aa8464ff02ab520344~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/tv-tower-over-alexanderplatz-viaduct-dusk.jpg",
+        "alt": "The Berlin TV Tower above the yellow-brick Stadtbahn viaduct at Alexanderplatz at dusk",
+        "relatedToolSlug": "alexanderplatz-time-layers"
+      },
       {
         "title": "How to Order Currywurst in Berlin: Mit or Ohne Darm, and What to Say",
         "slug": "how-to-order-currywurst-in-berlin",
@@ -99,23 +116,6 @@
         "thumb": "https://static.wixstatic.com/media/5a08a3_efd5ac3deff94b42bd4445d8b94305f3~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover.jpg",
         "alt": "The Christmas market on Alexanderplatz at night, with lit stalls around a tall wooden Christmas pyramid",
         "relatedToolSlug": "christmas-market-suitcase-test"
-      },
-      {
-        "title": "Marzahn Berlin: How the Plattenbau Town Was Built and How to Spend a Day There",
-        "slug": "marzahn-berlin",
-        "path": "/post/marzahn-berlin",
-        "url": "https://www.berlinwalk.com/post/marzahn-berlin",
-        "excerpt": "Most people only see Marzahn from the S7. How the panel-block town was built in fifteen years, the village it grew around, and a day out that ends on the Kienberg.",
-        "category": "Living in Berlin",
-        "categorySlug": "living-in-berlin",
-        "topic": "living-in-berlin",
-        "topicLabel": "Living in Berlin",
-        "readTime": "6 min read",
-        "publishedDate": "2026-11-16T10:17:15.798Z",
-        "image": "https://static.wixstatic.com/media/5a08a3_265ae32bda504222afcada143cb5df02~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/marzahn-plattenbau-facades-jan-petersen-strasse.jpg",
-        "thumb": "https://static.wixstatic.com/media/5a08a3_265ae32bda504222afcada143cb5df02~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/marzahn-plattenbau-facades-jan-petersen-strasse.jpg",
-        "alt": "Renovated panel blocks in Marzahn, Berlin, with coral, yellow and blue painted facades",
-        "relatedToolSlug": "marzahn-estate-walk"
       },
       {
         "title": "What to Wear in Berlin in Winter: Dress for Wind, Wet and Ice",
@@ -1816,7 +1816,7 @@
       "image": "https://static.wixstatic.com/media/5a08a3_39cd6d06778847e8a9c050b50cc72e38~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-cover.jpg",
       "thumb": "https://static.wixstatic.com/media/5a08a3_39cd6d06778847e8a9c050b50cc72e38~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-cover.jpg",
       "alt": "Kottbusser Tor at night from above, with the lit Neues Kreuzberger Zentrum, the U-Bahn station on its viaduct and car light trails around the square",
-      "relatedToolSlug": ""
+      "relatedToolSlug": "kotti-square-reader"
     },
     {
       "title": "Glienicke Bridge: How to Visit Berlin's Bridge of Spies and the Border Corner Around It",

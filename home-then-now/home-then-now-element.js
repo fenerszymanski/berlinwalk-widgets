@@ -185,9 +185,10 @@
         "img": "assets/blog-best-christmas-markets-berlin-2026.webp"
       },
       {
-        "title": "Gas lamps: a November evening at Chamissoplatz",
-        "href": "https://walkofberlin.com/post/gas-lamps-in-berlin",
-        "img": "https://static.wixstatic.com/media/5a08a3_a0b0477e057344bf92735258eb7765ba~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover.jpg"
+        "tag": "HALF-DAY TRIP",
+        "title": "Glienicke Bridge: walk the former border",
+        "href": "https://www.walkofberlin.com/post/glienicke-bridge-berlin",
+        "img": "https://static.wixstatic.com/media/5a08a3_2eb10ec3bd6741b4b9a2de6af498dd01~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-cover.jpg"
       },
       {
         "tag": "NIGHTS OUT",
@@ -280,11 +281,11 @@
         "url": "https://www.walkofberlin.com/product-page/siegessaeule-berlin-art-print"
       },
       {
-        "what": "Gas lamps preview: Berlin at night from the International Space Station, 6 April 2013",
-        "creator": "NASA Johnson Space Center, Earth Science and Remote Sensing Unit",
-        "source": "NASA, via the linked article",
-        "licence": "Public domain",
-        "url": "https://walkofberlin.com/post/gas-lamps-in-berlin"
+        "what": "Glienicke Bridge preview: the steel arches from the Potsdam shore",
+        "creator": "Loewenflausch",
+        "source": "Wikimedia Commons, cropped for the preview",
+        "licence": "CC BY-SA 4.0",
+        "url": "https://commons.wikimedia.org/wiki/File:Glienicke_Bridge_%282018%29.jpg"
       },
       {
         "what": "Club dress codes preview and Berghain Bouncer tile",
