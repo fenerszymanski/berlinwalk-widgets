@@ -31,22 +31,11 @@
     "mounted": "output/production/ys1928-framed-20261111/gelato/quote-DE.json; live Wix DE profile 5-8 working days incl processing",
     "tee": [
       {
-        "source": "content/products/berlin-tshirts-launch-20261113/private/QUOTE_classic_black_ALL_SIZES.json",
+        "source": "output/store/apparel-delivery-requote-20261120/QUOTES_20261120.json",
         "country": "DE",
-        "min": 5,
-        "max": 7
-      },
-      {
-        "source": "content/products/berlin-tshirts-launch-20261113/private/QUOTE_classic_natural_ALL_SIZES.json",
-        "country": "DE",
-        "min": 6,
-        "max": 10
-      },
-      {
-        "source": "content/products/berlin-tshirts-launch-20261113/private/QUOTE_prm_black_ALL_SIZES.json",
-        "country": "PL",
-        "min": 6,
-        "max": 7
+        "tees": "5-10",
+        "hoodies": "6-11",
+        "quotedAt": "2026-11-20"
       }
     ],
     "shipping": "SHIPPING_AUDIT.json live read 15 Nov 2026; free rates in DE, tees DE-only",
@@ -69,13 +58,13 @@
       "provider": "Gelato",
       "approvalBusinessDays": 0,
       "bufferBusinessDays": 1,
-      "basis": "15 Nov individual Berlin quotes, normal shipping, production+delivery calendar total; +1 German delivery business day margin. Requote after7 days. See B2 QUOTE files.",
+      "basis": "20 Nov Berlin quotes for all 45 live garment model x colour combinations (one size each), every offered method: tees 5-10, hoodies 6-11 calendar days (Kleinpaket 7-11 is the slowest common route); range 6-10 calendar days +1 German delivery business day margin covers it. Requote after 7 days. See output/store/apparel-delivery-requote-20261120/QUOTES_20261120.json.",
       "productionShippingCalendarDays": [
-        4,
-        5
+        6,
+        10
       ],
-      "quotedAt": "2026-11-15",
-      "validThrough": "2026-11-22"
+      "quotedAt": "2026-11-20",
+      "validThrough": "2026-11-27"
     },
     "gelato-mounted": {
       "provider": "Gelato",
@@ -134,5 +123,5 @@
     "e14f5be8-effd-4d3b-ab67-2a8c1a077754": true,
     "f277153c-6055-48aa-9052-79fc84cd09f5": true
   },
-  "updatedAt": "2026-11-15"
+  "updatedAt": "2026-11-20"
 }
