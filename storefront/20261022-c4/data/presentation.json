@@ -7687,5 +7687,51 @@
       }
     ],
     "wixProductId": "6cdf500f-6367-381f-faf1-6ab67c216e3e"
+  },
+  {
+    "id": "dl-shell-haus-travertine",
+    "name": "Shell-Haus Travertine Printable Poster",
+    "place": "Shell-Haus · Travertine rhythm",
+    "image": "shell-haus-travertine-fullart.jpg",
+    "alt": "Screen-print close view of the rounded Shell-Haus facade with pale travertine, dark window bands, coral shadows and a Shell-Haus, Berlin footer.",
+    "typeLine": "DIGITAL DOWNLOAD · 30 × 40 CM",
+    "kind": "digital",
+    "deliveryNote": "Digital download · 1 JPEG print file and a printing guide. No physical item.",
+    "deliveryDetails": "Your download includes one 3:4 sRGB JPEG, 3543 × 4724 px at 300 dpi for 30 × 40 cm, and a printing guide. The same file prints without cropping at 45 × 60 cm and 60 × 80 cm, with softer detail at larger sizes. No physical poster, frame or decor is included.",
+    "group": "stories",
+    "visualCreditsHtml": "<p>History references: Landesdenkmalamt Berlin, Denkmaldatenbank entry 09050287 (Shell-Haus); visitBerlin, Shell-Haus; Ingenieurbauführer Berlin 2020, entry 79.</p><p>Architectural reference: Matthias Süßen, Shell-HausBerlinmsu-2023-0I9A-8433-.jpg, 15 July 2023, Wikimedia Commons, <a href=\"https://commons.wikimedia.org/wiki/File:Shell-HausBerlinmsu-2023-0I9A-8433-.jpg\">original photograph</a>, <a href=\"https://creativecommons.org/licenses/by-sa/4.0/\">CC BY-SA 4.0</a>.</p><p>I interpreted the facade as a close screen-print view. The rounded corners and the pale stone against dark window bands follow the geometry of the photograph; the window divisions, storey heights, stone joints, recess depths and step spacing are simplified, and the coral shadows are imagined. The artwork does not document the building.</p>",
+    "sizeImages": {
+      "30x40 cm": "shell-haus-travertine-30x40.jpg"
+    },
+    "gallery": [
+      {
+        "image": "shell-haus-travertine-30x40.jpg",
+        "alt": "Complete artwork at 30 x 40 cm. Digital file only."
+      }
+    ],
+    "wixProductId": "d19175a9-aeb2-2463-9c91-155264c58f94"
+  },
+  {
+    "id": "dl-tiergarten-young-trees",
+    "name": "Tiergarten Young Trees Printable Poster",
+    "place": "Tiergarten · The young trees",
+    "image": "tiergarten-young-trees-fullart.jpg",
+    "alt": "Painted scene of rows of young saplings in open ground with small anonymous planting figures, a far tree line, the Victory Column in the distance and a Tiergarten, Berlin footer.",
+    "typeLine": "DIGITAL DOWNLOAD · 30 × 40 CM",
+    "kind": "digital",
+    "deliveryNote": "Digital download · 1 JPEG print file and a printing guide. No physical item.",
+    "deliveryDetails": "Your download includes one 3:4 sRGB JPEG, 3543 × 4724 px at 300 dpi for 30 × 40 cm, and a printing guide. The same file prints without cropping at 45 × 60 cm and 60 × 80 cm, with softer detail at larger sizes. No physical poster, frame or decor is included.",
+    "group": "stories",
+    "visualCreditsHtml": "<p>History references: Bezirksamt Mitte von Berlin, press release 128/2019 on the 70th anniversary of the replanting of the Tiergarten; Bezirksamt Mitte, monuments page for the Baumdank-Denkmal; Landesdenkmalamt Berlin, Denkmaldatenbank entry 09046318; Berliner Zeitung, 5 September 2017.</p><p>Visual reference for the Victory Column: Ivan Chumak, Twilight Traffic at Berlin's Victory Column, video 39889197, Pexels, <a href=\"https://www.pexels.com/video/twilight-traffic-at-berlin-s-victory-column-39889197/\">video page</a>, <a href=\"https://www.pexels.com/license/\">Pexels License</a>.</p><p>I interpreted the replanting as a painted scene. The saplings, people, stakes, bare earth, viewpoint and far tree line are imagined, the people are anonymous, and the sapling heights and column proportions are simplified. The artwork does not document a specific day or plot.</p>",
+    "sizeImages": {
+      "30x40 cm": "tiergarten-young-trees-30x40.jpg"
+    },
+    "gallery": [
+      {
+        "image": "tiergarten-young-trees-30x40.jpg",
+        "alt": "Complete artwork at 30 x 40 cm. Digital file only."
+      }
+    ],
+    "wixProductId": "1b022358-bcd0-3745-c986-1f03cdd3b0da"
   }
 ]
