@@ -8,7 +8,7 @@
   'use strict';
 
   const DATA = {
-    "release": "home-then-now-20261120-black-week",
+    "release": "home-then-now-20261121-black-week-cta",
     "hero": {
       "img1928": "assets/hero-1928.webp",
       "imgToday": "assets/hero-today.webp",
@@ -524,7 +524,8 @@
     "blackWeek": {
       "from": "2026-11-20T00:00:00+01:00",
       "until": "2026-12-01T00:00:00+01:00",
-      "deHref": "https://www.walkofberlin.com/de/category/all-products",
+      "href": "https://www.walkofberlin.com/category/berlin-clothing",
+      "deHref": "https://www.walkofberlin.com/de/category/berlin-clothing",
       "en": {
         "label": "Black Week",
         "name": "Black Week",
@@ -785,7 +786,7 @@
     const b = d.blackWeek, de = bwhGerman(), t = de ? b.de : b.en;
     return {
       key: 'black-week', theme: 'bw', label: t.label, name: t.name, eyebrow: t.eyebrow, title: t.title, keep: t.keep, lead: t.lead,
-      cta: { text: t.cta, href: de ? b.deHref : d.storeHref },
+      cta: { text: t.cta, href: de ? b.deHref : (b.href || d.storeHref) },
       visual: { type: b.visual.type, items: b.visual.items.map((it) => ({ img: it.img, w: it.w, h: it.h, alt: de ? it.altDe : it.alt })) }
     };
   }

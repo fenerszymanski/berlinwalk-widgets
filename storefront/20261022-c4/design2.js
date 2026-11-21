@@ -195,7 +195,7 @@ P.landingView=function(){if(this.xgGuide()){const t=document.createElement('temp
   const title=c.keep.reduce((text,chunk)=>text.replace(esc(chunk),`<span class="d2-bw-nb">${esc(chunk)}</span>`),esc(c.title));
   const photo=(kind,alt,first)=>{const base=BLACK_WEEK.images[kind];return `<img src="${esc(asset(base+'-800.webp'))}" srcset="${esc(asset(base+'-480.webp'))} 480w, ${esc(asset(base+'-800.webp'))} 800w" sizes="(max-width:740px) 46vw, 330px" alt="${esc(alt)}" width="800" height="1000"${first?' fetchpriority="high"':''} decoding="async">`;};
   return `<section class="d2-hero d2-hero-bw bw-raw" data-bw-campaign="${esc(BLACK_WEEK.id)}">
-   <div class="d2-hero-copy"><p class="d2-bw-kicker"><b>${esc(c.name)}</b> <span class="d2-bw-until"><span class="d2-bw-dot" aria-hidden="true">·</span> ${esc(c.until)}</span></p><h1>${title}</h1><p class="d2-bw-line">${esc(c.line)}</p><a class="primary" data-d2-hero href="${esc(this.storeHref('print'))}">${esc(c.cta)}</a></div>
+   <div class="d2-hero-copy"><p class="d2-bw-kicker"><b>${esc(c.name)}</b> <span class="d2-bw-until"><span class="d2-bw-dot" aria-hidden="true">·</span> ${esc(c.until)}</span></p><h1>${title}</h1><p class="d2-bw-line">${esc(c.line)}</p><a class="primary" data-d2-hero href="${esc(this.d2href(this.navigation.clothingHref()))}">${esc(c.cta)}</a></div>
    <div class="d2-bw-visual">${photo('clothing',c.altClothing,true)}${photo('poster',c.altPoster,false)}</div>
   </section>`;
  };
