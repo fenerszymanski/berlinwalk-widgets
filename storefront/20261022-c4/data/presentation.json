@@ -1921,6 +1921,7 @@
     "deliveryNote": "Digital download · 1 JPEG print file and a printing guide. No physical item.",
     "deliveryDetails": "Your download includes one 3:4 sRGB JPEG at 300 dpi for 30 × 40 cm and a printing guide. The same file prints without cropping at 45 × 60 cm and 60 × 80 cm. No physical poster, frame or decor is included.",
     "group": "stories",
+    "alternativeProductId": "76898232-91ee-45fb-83fd-f8377ba54610",
     "visualCreditsHtml": "<p>Photographic references: Jörg Zägel, Wittenbergplatz U-Bahn station, Wikimedia Commons, <a href=\"https://commons.wikimedia.org/wiki/File:Berlin,_Schoeneberg,_Wittenbergplatz,_U-Bahnhof_Wittenbergplatz.jpg\">original photograph</a>, <a href=\"https://creativecommons.org/licenses/by-sa/3.0/\">CC BY-SA 3.0</a>; Max Missmann, 1927, <a href=\"https://commons.wikimedia.org/wiki/File:Max_Missmann_08.jpg\">Wikimedia Commons</a>, public domain. The building, colours, sky and foreground were artistically reinterpreted; this is not a reproduction of either photograph. No endorsement is implied.</p>",
     "sizeImages": {
       "30x40 cm": "wittenbergplatz-30x40.jpg"
@@ -1930,7 +1931,14 @@
         "image": "wittenbergplatz-30x40.jpg",
         "alt": "Complete artwork at 30 x 40 cm."
       }
-    ]
+    ],
+    "roomImage": "wittenbergplatz-room-photo.jpg",
+    "roomVideoFit": "contain",
+    "roomCaption": "Styling example · 30 × 40 cm · Printable files only · Frame and decor not included",
+    "roomAlt": "The Wittenbergplatz print at 30 × 40 cm in an oak frame on a living-room wall. Frame and decor are not included.",
+    "roomVideoUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/room/wittenbergplatz-grenander-hall.mp4",
+    "roomVideoPosterUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/room/wittenbergplatz-grenander-hall-poster.jpg",
+    "roomVideoThumbnailUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/room/wittenbergplatz-grenander-hall-thumb.jpg"
   },
   {
     "id": "dl-alexanderplatz-behrens-blocks",
@@ -7799,5 +7807,34 @@
       }
     ],
     "wixProductId": "1b022358-bcd0-3745-c986-1f03cdd3b0da"
+  },
+  {
+    "id": "pr-wittenbergplatz-grenander-hall",
+    "name": "Wittenbergplatz",
+    "place": "Schöneberg · The Grenander hall",
+    "image": "wittenbergplatz-fullart.jpg",
+    "alt": "Textured illustration of the Wittenbergplatz U-Bahn entrance hall, with cream walls, a green roof, a blue sky and a terracotta foreground. The complete Wittenbergplatz Berlin footer is visible.",
+    "typeLine": "PREMIUM MATTE · 200 GSM · UNFRAMED",
+    "wixProductId": "76898232-91ee-45fb-83fd-f8377ba54610",
+    "group": "stories",
+    "alternativeProductId": "19c6ce43-c5e5-fde4-9046-c6165d4a9c26",
+    "visualCreditsHtml": "<p>Photographic references: Jörg Zägel, Wittenbergplatz U-Bahn station, Wikimedia Commons, <a href=\"https://commons.wikimedia.org/wiki/File:Berlin,_Schoeneberg,_Wittenbergplatz,_U-Bahnhof_Wittenbergplatz.jpg\">original photograph</a>, <a href=\"https://creativecommons.org/licenses/by-sa/3.0/\">CC BY-SA 3.0</a>; Max Missmann, 1927, <a href=\"https://commons.wikimedia.org/wiki/File:Max_Missmann_08.jpg\">Wikimedia Commons</a>, public domain. The building, colours, sky and foreground were artistically reinterpreted; this is not a reproduction of either photograph. No endorsement is implied.</p>",
+    "sizeImages": {
+      "30x40 cm": "wittenbergplatz-30x40.jpg",
+      "50x70 cm": "wittenbergplatz-50x70.jpg"
+    },
+    "gallery": [
+      {
+        "image": "wittenbergplatz-fullart.jpg",
+        "alt": "The complete selected Wittenbergplatz artwork and title, without cropping."
+      }
+    ],
+    "roomImage": "wittenbergplatz-room-photo.jpg",
+    "roomVideoFit": "contain",
+    "roomCaption": "Styling example · 30 × 40 cm · Frame and decor not included",
+    "roomAlt": "The Wittenbergplatz print at 30 × 40 cm in an oak frame on a living-room wall. Frame and decor are not included.",
+    "roomVideoUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/room/wittenbergplatz-grenander-hall.mp4",
+    "roomVideoPosterUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/room/wittenbergplatz-grenander-hall-poster.jpg",
+    "roomVideoThumbnailUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/room/wittenbergplatz-grenander-hall-thumb.jpg"
   }
 ]
