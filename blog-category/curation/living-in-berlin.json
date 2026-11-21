@@ -499,6 +499,12 @@
       "shelf": "wege",
       "figure": "26",
       "line": "knife attacks were counted in the Kotti ban zone in 2025, down from 48 the year before."
+    },
+    "christmas-shipping-deadlines-berlin": {
+      "shelf": "geld",
+      "figure": "26 November",
+      "line": "is the last day to post a parcel that leaves Europe. Inside Germany you have until 21 December.",
+      "tool": "christmas-post-send-by-line"
     }
   }
 }

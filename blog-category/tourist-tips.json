@@ -1,5 +1,5 @@
 {
- "updatedAt": "2026-11-20T10:06:55.590Z",
+ "updatedAt": "2026-11-21T10:13:29.940Z",
  "source": "Wix Blog API + blog-category/categories.json",
  "slug": "tourist-tips",
  "categoryId": "6da64e22-3360-42ec-a558-e906e4deeb19",
@@ -9,7 +9,7 @@
  "shelfLegend": "What the trip actually asks you",
  "shelfLegendSub": "Grouped by the moment the question turns up",
  "totalPosts": 313,
- "toolCount": 291,
+ "toolCount": 292,
  "lead": {
   "title": "Christmas Markets in Mitte: One Evening Walk, in the Order They Close",
   "slug": "christmas-markets-in-mitte",
@@ -29,7 +29,7 @@
   "term": "",
   "gloss": "",
   "termCta": "",
-  "tool": ""
+  "tool": "mitte-christmas-market-walk"
  },
  "glossary": [],
  "shelves": [
@@ -1274,7 +1274,8 @@
      "minutes": 6,
      "alt": "The Alexanderplatz Christmas market at night, with a lit wooden Christmas pyramid and stalls under strings of lights",
      "thumb": "https://static.wixstatic.com/media/5a08a3_1890d9d78f3f4bed8b19140dc3920437~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
-     "line": "Five Christmas markets sit on one 3 km line through Mitte, but they do not close at the same time."
+     "line": "Five Christmas markets sit on one 3 km line through Mitte, but they do not close at the same time.",
+     "tool": "mitte-christmas-market-walk"
     },
     {
      "title": "Glienicke Bridge: How to Visit Berlin's Bridge of Spies and the Border Corner Around It",

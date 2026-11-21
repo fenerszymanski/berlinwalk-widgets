@@ -1,5 +1,5 @@
 {
- "updatedAt": "2026-11-20T10:06:53.739Z",
+ "updatedAt": "2026-11-21T10:13:28.116Z",
  "source": "Wix Blog API + blog-category/categories.json",
  "slug": "living-in-berlin",
  "categoryId": "00af1018-ef7b-465a-93b6-916187609da4",
@@ -8,28 +8,28 @@
  "shelfMode": "curated",
  "shelfLegend": "By the part of life it hits",
  "shelfLegendSub": "Four shelves, because that is how the questions actually arrive",
- "totalPosts": 84,
- "toolCount": 84,
+ "totalPosts": 85,
+ "toolCount": 85,
  "lead": {
-  "title": "Kottbusser Tor: Is Kotti Dangerous, and Why the Square Looks the Way It Does",
-  "slug": "kottbusser-tor-berlin",
-  "path": "/post/kottbusser-tor-berlin",
-  "excerpt": "Kotti has a reputation everyone in Berlin has heard. What the police figures actually say, why the square looks the way it does, and the habits that make Kottbusser Tor easy to use.",
+  "title": "Christmas Shipping Deadlines From Berlin: The Last Day to Post, Country by Country",
+  "slug": "christmas-shipping-deadlines-berlin",
+  "path": "/post/christmas-shipping-deadlines-berlin",
+  "excerpt": "Inside Germany you have until 21 December. A parcel leaving Europe has to go by 26 November. The Deutsche Post and DHL dates country by country, and the customs points that slow a gift down.",
   "minutes": 6,
   "readTime": "6 min read",
-  "publishedDate": "2026-11-19T10:03:02.281Z",
-  "alt": "Kottbusser Tor at night from above, with the lit Neues Kreuzberger Zentrum, the U-Bahn station on its viaduct and car light trails around the square",
-  "lead": "https://static.wixstatic.com/media/5a08a3_39cd6d06778847e8a9c050b50cc72e38~mv2.jpg/v1/fill/w_1400,h_620,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
-  "thumb": "https://static.wixstatic.com/media/5a08a3_39cd6d06778847e8a9c050b50cc72e38~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
-  "square": "https://static.wixstatic.com/media/5a08a3_39cd6d06778847e8a9c050b50cc72e38~mv2.jpg/v1/fill/w_184,h_184,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
-  "shelf": "wege",
+  "publishedDate": "2026-11-21T10:09:49.858Z",
+  "alt": "Yellow DHL delivery van with snow on its roof and bonnet parked on a snowy street in Berlin-Weißensee",
+  "lead": "https://static.wixstatic.com/media/5a08a3_e3a96566150e409caef6688901451efd~mv2.jpg/v1/fill/w_1400,h_620,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+  "thumb": "https://static.wixstatic.com/media/5a08a3_e3a96566150e409caef6688901451efd~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+  "square": "https://static.wixstatic.com/media/5a08a3_e3a96566150e409caef6688901451efd~mv2.jpg/v1/fill/w_184,h_184,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+  "shelf": "geld",
   "topic": "living-in-berlin",
-  "figure": "26",
-  "line": "knife attacks were counted in the Kotti ban zone in 2025, down from 48 the year before.",
+  "figure": "26 November",
+  "line": "is the last day to post a parcel that leaves Europe. Inside Germany you have until 21 December.",
   "term": "",
   "gloss": "",
   "termCta": "",
-  "tool": "kotti-square-reader"
+  "tool": "christmas-post-send-by-line"
  },
  "glossary": [
   {
@@ -453,6 +453,17 @@
    "title": "Geld & Papiere",
    "lead": "Money, forms and the rules behind them",
    "posts": [
+    {
+     "title": "Christmas Shipping Deadlines From Berlin: The Last Day to Post, Country by Country",
+     "slug": "christmas-shipping-deadlines-berlin",
+     "path": "/post/christmas-shipping-deadlines-berlin",
+     "minutes": 6,
+     "alt": "Yellow DHL delivery van with snow on its roof and bonnet parked on a snowy street in Berlin-Weißensee",
+     "thumb": "https://static.wixstatic.com/media/5a08a3_e3a96566150e409caef6688901451efd~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+     "line": "is the last day to post a parcel that leaves Europe. Inside Germany you have until 21 December.",
+     "figure": "26 November",
+     "tool": "christmas-post-send-by-line"
+    },
     {
      "title": "Berlin Districts: Which Bezirk You Live In and What It Actually Runs",
      "slug": "berlin-districts",
