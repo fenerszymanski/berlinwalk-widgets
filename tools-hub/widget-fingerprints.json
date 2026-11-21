@@ -13774,10 +13774,10 @@
     },
     "christmas-post-send-by-line": {
       "slug": "christmas-post-send-by-line",
-      "addedAt": null,
+      "addedAt": "2026-11-21",
       "measuredBy": "rendered",
       "signals": {
-        "svgShapeNodes": 34,
+        "svgShapeNodes": 27,
         "svgCount": 1,
         "canvas": 0,
         "contentImages": 0,
@@ -13792,7 +13792,7 @@
         "ariaPressed": 0,
         "tables": 0,
         "details": 0,
-        "textLength": 1906
+        "textLength": 1957
       },
       "inputModel": "single-choice",
       "stateProgression": "replace-on-pick",
