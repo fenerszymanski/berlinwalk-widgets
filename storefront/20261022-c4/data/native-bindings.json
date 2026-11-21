@@ -1561,5 +1561,23 @@
       "3a0f16e1-49e5-42e1-a0bd-a79d1949e091",
       "c8d80bfb-7ec8-43c4-bcbf-62ef00ca0fa9"
     ]
+  },
+  {
+    "wixProductId": "bff3fa49-832f-4044-9175-08a60e0f4137",
+    "nativeProductType": "physical",
+    "nativeCategoryIds": [
+      "33ca6348-faae-4671-98d9-0221539b7cf2",
+      "112ecd5c-9ba8-41c7-b311-5901b9407526",
+      "c8d80bfb-7ec8-43c4-bcbf-62ef00ca0fa9"
+    ]
+  },
+  {
+    "wixProductId": "fc19d527-80fa-ecb0-7bce-683ef13011d0",
+    "nativeProductType": "digital",
+    "nativeCategoryIds": [
+      "02d24409-01f2-4b00-b24d-d762d74a4fb6",
+      "33ca6348-faae-4671-98d9-0221539b7cf2",
+      "00000000-000000-000000-000000000001"
+    ]
   }
 ]
