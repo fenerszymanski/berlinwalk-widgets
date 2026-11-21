@@ -40,3 +40,10 @@ export const BLACK_WEEK = Object.freeze({
 
 export const blackWeekActive = (now = Date.now()) =>
   Number.isFinite(now) && now >= Date.parse(BLACK_WEEK.from) && now < Date.parse(BLACK_WEEK.until);
+
+// Product pages (Yusuf approved 21 Nov 2026, clothing page boost, items 2 and 3): the approved sentence (copy.<lang>.title) next to the price and over the
+// second-item row. Eligibility is exactly the hidden Wix collection the coupon is scoped to (posters, T-shirts and hoodies; list in
+// output/store/black-week-20261120/eligible-products.json): a catalogue row carries it in collectionIds. No price, euro amount or crossed-out price is ever
+// drawn for the offer, and from the same instant as the hero (1 Dec 00:00:00+01:00) both surfaces are gone without a release.
+export const BLACK_WEEK_COLLECTION_ID = 'c8d80bfb-7ec8-43c4-bcbf-62ef00ca0fa9';
+export const blackWeekEligibleRow = row => Array.isArray(row?.collectionIds) && row.collectionIds.includes(BLACK_WEEK_COLLECTION_ID);

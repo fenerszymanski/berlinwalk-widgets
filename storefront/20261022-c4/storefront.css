@@ -923,3 +923,30 @@ button.ys-words-tag:focus-visible{outline:2px solid var(--green);outline-offset:
   .buy-bar-text span{font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
   .buy-bar .primary{flex:none;min-height:44px;padding:0 18px;margin:0}
 }
+
+/* Clothing page boost (21 Nov 2026): Black Week sentence next to the price, size guide above the buy button, second-item row under the buy box text.
+   Markup comes from clothing-boost.js; the sentence is black-week.js copy and disappears with the Black Week window (the row keeps a neutral heading). */
+:host([design2]) .product-title .bw-offer{display:inline-block;max-width:100%;margin:10px 0 0;padding:.45em .95em .4em;border-radius:999px;background:#FFE600;color:#123D18;font-size:14px;font-weight:600;line-height:1.35;letter-spacing:0}
+:host([design2]) .bw-offer-nb{white-space:nowrap}
+:host([design2]) .bw-size-guide{margin:16px 0 0;border:1px solid var(--line);border-radius:8px;background:#fff}
+:host([design2]) .bw-size-guide>summary{display:flex;align-items:center;justify-content:space-between;min-height:54px;padding:10px 44px 10px 14px;font:600 15px/1.35 'Space Grotesk','Space Grotesk Fallback',sans-serif;color:var(--green);background:none;border-radius:8px}
+:host([design2]) .bw-size-guide>summary:after{right:14px;top:50%;margin-top:-14px}
+:host([design2]) .bw-size-guide>summary:focus-visible{outline:3px solid var(--green);outline-offset:2px}
+:host([design2]) .bw-size-body{padding:0 14px 14px}
+:host([design2]) .bw-size-body table{width:100%;border-collapse:collapse;font-size:14px;font-variant-numeric:tabular-nums}
+:host([design2]) .bw-size-body th,:host([design2]) .bw-size-body td{padding:8px 6px;border-bottom:1px solid var(--line);text-align:right;font-weight:500}
+:host([design2]) .bw-size-body thead th{font-size:12px;color:var(--muted);font-weight:600;border-bottom-color:var(--ink)}
+:host([design2]) .bw-size-body th:first-child,:host([design2]) .bw-size-body td:first-child{text-align:left}
+:host([design2]) .bw-size-body tbody th{font-weight:700;color:var(--green)}
+:host([design2]) .bw-size-body p{margin:12px 0 0;font-size:13px;line-height:1.5;color:var(--muted)}
+:host([design2]) .bw-picks{margin:24px 0 0;padding-top:18px;border-top:1px solid var(--line)}
+:host([design2]) .bw-picks h2{margin:0 0 12px;font:600 18px/1.25 var(--serif);color:var(--green);text-wrap:balance}
+:host([design2]) .bw-pick-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;align-items:stretch}
+:host([design2]) .bw-pick{display:flex;flex-direction:column;gap:5px;min-width:0}
+:host([design2]) .bw-pick-name{flex:1 0 auto}
+:host([design2]) .bw-pick .tile{display:block;position:relative;aspect-ratio:3/4;width:100%;background:#edede5;border-radius:6px;overflow:hidden}
+:host([design2]) .bw-pick .tile img.tile-photo{position:absolute;inset:6px;width:calc(100% - 12px);height:calc(100% - 12px);max-width:none;max-height:none;object-fit:contain;transform:none}
+:host([design2]) .bw-pick-name{font-size:14px;font-weight:600;line-height:1.3;color:var(--green);text-decoration:none;overflow-wrap:anywhere}
+:host([design2]) .bw-pick-name:hover{text-decoration:underline}
+:host([design2]) .bw-pick-kind{font-size:12px;line-height:1.3;color:var(--muted)}
+@media(max-width:420px){:host([design2]) .bw-pick-grid{gap:8px}:host([design2]) .bw-pick-name{font-size:13px}:host([design2]) .product-title .bw-offer{font-size:13px}}

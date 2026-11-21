@@ -56,9 +56,29 @@ export function count(step, base) {
     W.fetch(ENDPOINT, {method: 'POST', mode: 'cors', credentials: 'omit', cache: 'no-store', keepalive: true, referrerPolicy: 'no-referrer',
       headers: {'content-type': 'text/plain'}, body: JSON.stringify({v: 1, p: path})}).catch(() => {});
     log.counted.push(path);
+    if (adTag && AD_STEPS.has(step) && !base.startsWith(AD_BASE)) count(step, AD_BASE + adTag);
     return true;
   } catch (e) { return false; }
 }
+// Ad tag (Yusuf approved 21 Nov 2026, Meta ad review item 6a). The utm_content of the URL a visitor arrived on, counted as an aggregate on this same page counter so
+// every ad's landing views (and the steps taken on that same page load) can be read next to Meta's link clicks. Path form /ad-tag/<tag>/step-<name>: three
+// segments (the counter's own contract), and step paths are already left out of the site totals. The tag is the lowercase utm_content, [a-z0-9._-] only, at most
+// 40 characters, and only when utm_source is one of our own channels. It is held in memory for this document only: no cookie, no storage, no identifier,
+// no query string leaves the browser, and the visitor is never joined to anything. A full page load without UTM (the store opens product pages from a
+// category page that way) starts untagged on purpose: carrying the tag further would need storage.
+const AD_BASE = '/ad-tag/';
+const AD_SOURCES = new Set(['meta', 'facebook', 'instagram', 'newsletter', 'whatsapp', 'short_link', 'store', 'google', 'blog', 'tool']);
+const AD_STEPS = new Set(['add', 'option', 'size-guide', 'checkout']);
+export function adTagOf(search) {
+  try {
+    const q = new URLSearchParams(search || '');
+    const tag = String(q.get('utm_content') || '').trim().toLowerCase();
+    return /^[a-z0-9][a-z0-9._-]{0,39}$/.test(tag) && AD_SOURCES.has(String(q.get('utm_source') || '').trim().toLowerCase()) ? tag : '';
+  } catch (e) { return ''; }
+}
+const adTag = adTagOf(W.location?.search);
+// Called by the storefront element once its data has loaded (never at import, so the privacy rules of count() apply at that moment); once per document and tag.
+export function adLanding() { if (adTag) count('landing', AD_BASE + adTag); }
 function analyticsAllowed() {
   try { return W.consentPolicyManager?.getCurrentConsentPolicy?.()?.policy?.analytics === true; } catch (e) { return false; }
 }
@@ -202,7 +222,7 @@ export function snapshotCheck(match) {
 
 // Design 2 navigation: aggregate counter only. No query or pixel events.
 export function design2Step(step) {
- if(!['hero','menu-posters','menu-gifts','menu-explore','search','search-empty','recommendation-similar','recommendation-hang-together','recommendation-explore'].includes(step))return;
+ if(!['hero','menu-posters','menu-gifts','menu-explore','search','search-empty','recommendation-similar','recommendation-hang-together','recommendation-explore','second-item'].includes(step))return;
  const lang=/^\/de(?:\/|$)/.test(W.location?.pathname||'')||/\/category\/(?:berlin-poster|berlin-geschenke|berlin-kalender-2027)\/?$/.test(W.location?.pathname||'')||new URLSearchParams(W.location?.search||'').get('lang')==='de'?'de':'en';
  count('design2-'+step+'-'+lang,STORE_PATH);
 }
@@ -218,7 +238,7 @@ export function earlyStep(step) {
 // Product page interest (20 Nov 2026, store-wide): aggregate counter only, once per page load under the product's own path.
 // option = a size, colour, paper or other option was changed; info-delivery = "Delivery & returns" opened; info-other = any other section opened.
 export function pageStep(step) {
- if(!['option','info-delivery','info-other','buy-bar','drawer-checkout'].includes(step))return;   // buy-bar = phone bottom bar tapped, drawer-checkout = Checkout in the cart drawer (20 Nov 2026)
+ if(!['option','info-delivery','info-other','buy-bar','drawer-checkout','size-guide'].includes(step))return;   // buy-bar = phone bottom bar tapped, drawer-checkout = Checkout in the cart drawer (20 Nov 2026)
  const page=String(W.location?.pathname||'').replace(/^\/de(?=\/|$)/,'').replace(/\/+$/,'').toLowerCase()||'/';
  if(!page.startsWith('/product-page/'))return;
  count(step,page);
