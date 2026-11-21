@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Christmas Post Send-By Line: The Last Day to Post From Berlin</title>
+<meta name="description" content="Pick the country and what you are sending. The line shows every Deutsche Post and DHL Christmas deadline between now and 24 December, the last safe day for your item, and what changes outside the EU.">
+<link rel="stylesheet" href="../css/brand.css">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { overflow-x: hidden; }
+  body { font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #FFFFFF; color: #20241d; padding: 12px; }
+  .sl { border-radius: 16px; overflow: hidden; border: 1px solid #d8dfd0; background: #fbfaf4; }
+  .sl-head { padding: 18px 18px 8px; }
+  .sl-kick { display: inline-block; font-size: 10.5px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; color: #123D18; background: #FFE600; padding: 3px 8px; border-radius: 4px; }
+  .sl-head h1 { font-family: 'Merriweather', Georgia, serif; font-size: 21px; line-height: 1.3; margin-top: 9px; color: #1B5E20; }
+  .sl-head p { font-size: 13px; line-height: 1.6; color: #43493f; margin-top: 7px; max-width: 760px; }
+  .controls { display: flex; flex-wrap: wrap; gap: 10px 14px; padding: 10px 18px 6px; align-items: end; }
+  .controls label.f { display: flex; flex-direction: column; gap: 5px; font-size: 11px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; color: #3c4437; flex: 1 1 220px; min-width: 0; }
+  .controls select { font-family: inherit; font-size: 15px; font-weight: 700; color: #123D18; background: #fff; border: 2px solid #123D18; border-radius: 10px; padding: 8px 10px; min-height: 44px; width: 100%; }
+  .controls select:focus-visible, .chk input:focus-visible { outline: 3px solid #FFE600; outline-offset: 2px; }
+  .chk { display: flex; align-items: center; gap: 9px; font-size: 13px; font-weight: 700; color: #123D18; padding: 0 18px 12px; cursor: pointer; }
+  .chk input { width: 20px; height: 20px; accent-color: #1B5E20; }
+  .verdict { margin: 0 12px; background: #123D18; color: #fff; border-radius: 14px; padding: 15px 16px; }
+  .verdict .big { font-family: 'Merriweather', Georgia, serif; font-size: 22px; line-height: 1.3; color: #FFE600; }
+  .verdict p { font-size: 14px; line-height: 1.55; margin-top: 6px; }
+  .verdict p b { color: #FFE600; }
+  .linebox { margin: 12px; background: #fff; border: 1px solid #dfe5d8; border-radius: 14px; padding: 10px 8px 6px; }
+  .linebox h2 { font-size: 11px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: #3c4437; padding: 2px 8px 6px; }
+  #line { width: 100%; height: auto; display: block; }
+  .key { display: flex; flex-wrap: wrap; gap: 6px 14px; font-size: 11.5px; color: #43493f; padding: 4px 8px 4px; }
+  .key span::before { content: ''; display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 5px; vertical-align: -1px; background: var(--c); }
+  .notes { margin: 0 12px 12px; display: grid; gap: 8px; }
+  .note { background: #fff; border: 1px solid #dfe5d8; border-radius: 12px; padding: 11px 13px; font-size: 13px; line-height: 1.55; color: #2f352b; }
+  .note.warn { background: #fff7b8; border-color: #f1df5a; color: #123D18; }
+  .note b { color: #123D18; }
+  .foot { font-size: 11px; line-height: 1.5; color: #5b6255; padding: 0 18px 16px; }
+  .foot a { color: #1B5E20; }
+  @media (max-width: 560px) {
+    .sl-head h1 { font-size: 18px; }
+    .verdict .big { font-size: 19px; }
+  }
+</style>
+</head>
+<body>
+<div class="sl">
+  <div class="sl-head">
+    <span class="sl-kick">Christmas post from Berlin</span>
+    <h1>The last day to post it, on one line</h1>
+    <p>Pick where it is going and what you are sending. The line runs from today to Christmas Eve and marks every Deutsche Post and DHL deadline for that country, with yours in yellow.</p>
+  </div>
+  <div class="controls">
+    <label class="f">Where is it going?
+      <select id="dest" aria-label="Destination country">
+        <optgroup label="Germany">
+          <option value="de">Somewhere in Germany</option>
+        </optgroup>
+        <optgroup label="Countries that border Germany">
+          <option value="at">Austria</option>
+          <option value="be">Belgium</option>
+          <option value="cz">Czech Republic</option>
+          <option value="dk">Denmark</option>
+          <option value="fr">France</option>
+          <option value="lu">Luxembourg</option>
+          <option value="nl">Netherlands</option>
+          <option value="pl">Poland</option>
+          <option value="ch">Switzerland (customs)</option>
+        </optgroup>
+        <optgroup label="The rest of the EU">
+          <option value="it">Italy</option>
+          <option value="es">Spain</option>
+          <option value="pt">Portugal</option>
+          <option value="ie">Ireland</option>
+          <option value="se">Sweden</option>
+          <option value="fi">Finland</option>
+          <option value="gr">Greece</option>
+          <option value="hu">Hungary</option>
+          <option value="ro">Romania</option>
+          <option value="bg">Bulgaria</option>
+          <option value="hr">Croatia</option>
+          <option value="sk">Slovakia or Slovenia</option>
+          <option value="bal">Estonia, Latvia or Lithuania</option>
+          <option value="mt">Malta or Cyprus</option>
+        </optgroup>
+        <optgroup label="Europe outside the EU">
+          <option value="uk">United Kingdom (customs)</option>
+          <option value="no">Norway (customs)</option>
+          <option value="tr">Turkey (customs)</option>
+          <option value="eo">Another European country outside the EU</option>
+        </optgroup>
+        <optgroup label="Outside Europe">
+          <option value="us">United States</option>
+          <option value="ca">Canada</option>
+          <option value="au">Australia or New Zealand</option>
+          <option value="in">India</option>
+          <option value="br">Brazil or Latin America</option>
+          <option value="as">East or South-East Asia</option>
+          <option value="me">Middle East or Africa</option>
+        </optgroup>
+      </select>
+    </label>
+    <label class="f">What are you sending?
+      <select id="kind" aria-label="What you are sending">
+        <option value="letter">A card or a letter</option>
+        <option value="parcel" selected>A gift in a parcel or Päckchen</option>
+        <option value="express">A gift by DHL Express</option>
+      </select>
+    </label>
+  </div>
+  <label class="chk"><input type="checkbox" id="online"> I frank it online (DHL website or the Post &amp; DHL app)</label>
+
+  <div class="verdict" id="verdict" aria-live="polite"></div>
+
+  <div class="linebox">
+    <h2 id="lineTitle">Deadlines between now and Christmas Eve</h2>
+    <svg id="line" viewBox="0 0 720 230" role="img" aria-labelledby="lineTitle"></svg>
+    <div class="key">
+      <span style="--c:#FFE600">Your item</span>
+      <span style="--c:#1B5E20">Other ways to send it</span>
+      <span style="--c:#c9cfc2">Deadline already gone</span>
+    </div>
+  </div>
+
+  <div class="notes" id="notes"></div>
+  <p class="foot" id="foot"></p>
+</div>
+
+<script>
+(function () {
+  'use strict';
+  // Deutsche Post / DHL private-customer Christmas deadlines 2026 (deutschepost.de/weihnachten, DHL Group press release 30 Oct 2026).
+  var D = {
+    checked: '21 November 2026',
+    xmas: '2026-12-24',
+    zones: {
+      de:   { name: 'Germany', letter: '2026-12-21', parcel: '2026-12-21', express: '2026-12-22', group: 'within Germany' },
+      nb:   { name: 'a country that borders Germany', letter: '2026-12-09', parcel: '2026-12-17', express: '2026-12-22', group: 'neighbouring country' },
+      eu:   { name: 'another European country', letter: '2026-12-09', parcel: '2026-12-14', express: '2026-12-22', group: 'other European country' },
+      out:  { name: 'outside Europe', letter: '2026-11-25', parcel: '2026-11-26', express: '2026-12-18', group: 'outside Europe' }
+    },
+    dest: {
+      de: ['de', 'Germany', 'none'], at: ['nb', 'Austria', 'eu'], be: ['nb', 'Belgium', 'eu'], cz: ['nb', 'the Czech Republic', 'eu'],
+      dk: ['nb', 'Denmark', 'eu'], fr: ['nb', 'France', 'eu'], lu: ['nb', 'Luxembourg', 'eu'], nl: ['nb', 'the Netherlands', 'eu'],
+      pl: ['nb', 'Poland', 'eu'], ch: ['nb', 'Switzerland', 'ch'],
+      it: ['eu', 'Italy', 'eu'], es: ['eu', 'Spain', 'eu'], pt: ['eu', 'Portugal', 'eu'], ie: ['eu', 'Ireland', 'eu'], se: ['eu', 'Sweden', 'eu'],
+      fi: ['eu', 'Finland', 'eu'], gr: ['eu', 'Greece', 'eu'], hu: ['eu', 'Hungary', 'eu'], ro: ['eu', 'Romania', 'eu'], bg: ['eu', 'Bulgaria', 'eu'],
+      hr: ['eu', 'Croatia', 'eu'], sk: ['eu', 'Slovakia or Slovenia', 'eu'], bal: ['eu', 'the Baltic states', 'eu'], mt: ['eu', 'Malta or Cyprus', 'eu'],
+      uk: ['eu', 'the United Kingdom', 'uk'], no: ['eu', 'Norway', 'cust'], tr: ['eu', 'Turkey', 'cust'], eo: ['eu', 'that country', 'cust'],
+      us: ['out', 'the United States', 'us'], ca: ['out', 'Canada', 'cust'], au: ['out', 'Australia or New Zealand', 'cust'], in: ['out', 'India', 'cust'],
+      br: ['out', 'Latin America', 'cust'], as: ['out', 'Asia', 'cust'], me: ['out', 'that country', 'cust']
+    }
+  };
+  var KINDS = { letter: 'Card or letter', parcel: 'Parcel or Päckchen', express: 'DHL Express' };
+  var PHRASE = { letter: 'a card or letter', parcel: 'a parcel or Päckchen', express: 'a gift by DHL Express' };
+  var WD = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+  var MO = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+  var MS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+  var destEl = document.getElementById('dest'), kindEl = document.getElementById('kind'), onlineEl = document.getElementById('online');
+  var svg = document.getElementById('line');
+  var NS = 'http://www.w3.org/2000/svg';
+
+  function parse(s) { var p = s.split('-'); return new Date(+p[0], +p[1] - 1, +p[2]); }
+  function todayLocal() { var n = new Date(); return new Date(n.getFullYear(), n.getMonth(), n.getDate()); }
+  function dayDiff(a, b) { return Math.round((b - a) / 86400000); }
+  function nice(d) { return WD[d.getDay()] + ' ' + d.getDate() + ' ' + MO[d.getMonth()]; }
+  function el(name, attrs, text) {
+    var e = document.createElementNS(NS, name);
+    Object.keys(attrs).forEach(function (k) { e.setAttribute(k, attrs[k]); });
+    if (text != null) e.textContent = text;
+    svg.appendChild(e);
+    return e;
+  }
+
+  function render() {
+    var key = destEl.value, kind = kindEl.value, online = onlineEl.checked;
+    var info = D.dest[key], zone = D.zones[info[0]], place = info[1], customs = info[2];
+    var today = todayLocal();
+    var start = parse('2026-11-21');
+    if (today > start) start = today;
+    var end = parse(D.xmas);
+    if (start > end) start = parse('2026-12-01');
+    var span = Math.max(1, dayDiff(start, end));
+    var dl = parse(zone[kind]);
+    var left = dayDiff(today, dl);
+    var intl = info[0] !== 'de';
+
+    // Verdict
+    var v = document.getElementById('verdict');
+    var big, line;
+    var usBlock = (customs === 'us' && kind === 'letter');
+    if (kind === 'letter' && intl) {
+      line = 'A letter abroad may hold documents and cards only. A gift, even a small one, has to go as a Päckchen or parcel.';
+    } else {
+      line = '';
+    }
+    if (left > 1) big = 'Post it by ' + nice(dl) + '. That is ' + left + ' days from today.';
+    else if (left === 1) big = 'Post it tomorrow, ' + nice(dl) + '.';
+    else if (left === 0) big = 'Today, ' + nice(dl) + ', is the last day. Get it in before the branch’s last collection.';
+    else big = 'The last date for ' + PHRASE[kind] + ' to ' + place + ' was ' + nice(dl) + '.';
+    var fallback = '';
+    if (left < 0) {
+      var later = ['letter', 'parcel', 'express'].filter(function (k) { return k !== kind && dayDiff(today, parse(zone[k])) >= 0; });
+      if (later.length) fallback = ' Still possible: <b>' + later.map(function (k) { return KINDS[k] + ' until ' + nice(parse(zone[k])); }).join('</b>, <b>') + '</b>.';
+      else fallback = ' Every Christmas date for ' + place + ' has passed. Send it so it arrives for New Year instead, or give something that does not travel.';
+    }
+    var onl = '';
+    if (online && intl && kind !== 'express') onl = ' Franked online, Deutsche Post says an international item can go in 1 to 2 days later than this. I treat that as a cushion, not a plan.';
+    if (online && !intl) onl = ' Online franking does not move the date inside Germany.';
+    if (online && kind === 'express') onl = ' Express runs on its own cut-off times, so online franking does not move this date.';
+    v.innerHTML = '<div class="big">' + big + '</div><p>' + (line ? line + ' ' : '') + 'Sending ' + PHRASE[kind] + ' to <b>' + place + '</b> (' + zone.group + ').' + fallback + onl + '</p>';
+
+    // Line
+    while (svg.firstChild) svg.removeChild(svg.firstChild);
+    var x0 = 36, x1 = 684, y = 118;
+    function X(d) { return x0 + (x1 - x0) * Math.min(1, Math.max(0, dayDiff(start, d) / span)); }
+    el('rect', { x: 0, y: 0, width: 720, height: 230, fill: '#ffffff' });
+    el('line', { x1: x0, y1: y, x2: x1, y2: y, stroke: '#123D18', 'stroke-width': 3, 'stroke-linecap': 'round' });
+    // week ticks (Mondays) and month labels
+    for (var i = 0; i <= span; i += 1) {
+      var d = new Date(start.getFullYear(), start.getMonth(), start.getDate() + i);
+      if (d.getDay() === 1 || i === 0) {
+        var x = X(d);
+        el('line', { x1: x, y1: y - 6, x2: x, y2: y + 6, stroke: '#7d8676', 'stroke-width': 1.5 });
+        el('text', { x: x, y: y + 24, 'text-anchor': 'middle', 'font-size': 11, fill: '#5b6255', 'font-family': 'Montserrat, sans-serif' }, d.getDate() + ' ' + MS[d.getMonth()]);
+      }
+    }
+    // weekends shading
+    for (var j = 0; j <= span; j += 1) {
+      var wd = new Date(start.getFullYear(), start.getMonth(), start.getDate() + j);
+      if (wd.getDay() === 0) {
+        var xs = X(wd);
+        el('rect', { x: xs - 4, y: y - 4, width: 8, height: 8, rx: 2, fill: '#e3e7de' });
+      }
+    }
+    // today and Christmas Eve
+    el('circle', { cx: X(start), cy: y, r: 7, fill: '#123D18' });
+    el('text', { x: X(start), y: 30, 'text-anchor': 'start', 'font-size': 12, 'font-weight': 800, fill: '#123D18', 'font-family': 'Montserrat, sans-serif' }, today > end ? 'Christmas has passed' : 'Today');
+    el('line', { x1: X(start), y1: 36, x2: X(start), y2: y - 8, stroke: '#123D18', 'stroke-width': 1, 'stroke-dasharray': '3 3' });
+    el('rect', { x: x1 - 6, y: y - 12, width: 12, height: 24, rx: 3, fill: '#c62828' });
+    el('text', { x: x1, y: 30, 'text-anchor': 'end', 'font-size': 12, 'font-weight': 800, fill: '#c62828', 'font-family': 'Montserrat, sans-serif' }, '24 Dec');
+    el('line', { x1: x1, y1: 36, x2: x1, y2: y - 14, stroke: '#c62828', 'stroke-width': 1, 'stroke-dasharray': '3 3' });
+
+    // deadline markers, staggered so labels do not collide
+    var marks = ['letter', 'parcel', 'express'].map(function (k) { return { k: k, d: parse(zone[k]) }; });
+    marks.forEach(function (m, idx) {
+      var past = dayDiff(today, m.d) < 0;
+      var mine = m.k === kind;
+      var mx = X(m.d);
+      var fill = past ? '#c9cfc2' : (mine ? '#FFE600' : '#1B5E20');
+      var stroke = mine ? '#123D18' : '#ffffff';
+      var labelY = 160 + idx * 22;
+      el('line', { x1: mx, y1: y + 9, x2: mx, y2: labelY - 12, stroke: past ? '#c9cfc2' : '#7d8676', 'stroke-width': 1 });
+      el('circle', { cx: mx, cy: y, r: mine ? 11 : 8, fill: fill, stroke: stroke, 'stroke-width': mine ? 3 : 2 });
+      var anchor = mx > 560 ? 'end' : (mx < 140 ? 'start' : 'middle');
+      el('text', { x: mx, y: labelY, 'text-anchor': anchor, 'font-size': mine ? 13 : 12, 'font-weight': mine ? 800 : 600, fill: past ? '#8b9284' : '#123D18', 'font-family': 'Montserrat, sans-serif' },
+        KINDS[m.k] + ': ' + m.d.getDate() + ' ' + MS[m.d.getMonth()] + (past ? ' (gone)' : ''));
+    });
+
+    // Notes
+    var n = [];
+    if (customs === 'us') n = n.concat(['<div class="note warn"><b>The United States takes gifts by post only up to 100 US dollars (85 euros) a parcel</b>, sent from one private person to another and declared as a gift, with the country of origin for every item. Anything worth more goes only by DHL Express. The customs form must be in English.</div>']);
+    if (customs === 'uk') n = n.concat(['<div class="note"><b>Customs form needed.</b> Since Brexit a parcel to the UK needs a CN22 or CN23 declaration. Online franking fills it in for you; at the counter you write it by hand.</div>']);
+    if (customs === 'ch') n = n.concat(['<div class="note"><b>Customs form needed.</b> Switzerland is outside the EU. A real gift from one private person to another stays free of Swiss duty and VAT up to 100 francs in goods value, alcohol and tobacco excluded.</div>']);
+    if (customs === 'cust') n = n.concat(['<div class="note"><b>Customs form needed.</b> ' + (place === 'that country' ? 'This destination' : place.charAt(0).toUpperCase() + place.slice(1)) + ' is outside the EU, so a parcel needs a CN22 or CN23 declaration. Wrong or missing details can send it back to you at your cost.</div>']);
+    if (customs === 'eu' && kind !== 'letter') n = n.concat(['<div class="note">Inside the EU a gift needs no customs form.</div>']);
+    if (info[0] === 'nb') n = n.concat(['<div class="note">Deutsche Post gives one parcel date for &ldquo;neighbouring countries&rdquo; without listing them. I read that as the nine countries that share a border with Germany. If you are unsure, use the 14 December date.</div>']);
+    if (kind === 'parcel') n = n.concat(['<div class="note">These dates are for parcels handed in before the branch or Packstation is emptied that day, not before it closes. A Päckchen and DHL Kleinpaket carry no delivery promise, so I post those a day or two earlier.</div>']);
+    if (kind === 'letter' && !intl) n = n.concat(['<div class="note">Registered letters (Einschreiben) inside Germany get one more day: 22 December.</div>']);
+    document.getElementById('notes').innerHTML = n.join('');
+    document.getElementById('foot').innerHTML = 'Dates are Deutsche Post and DHL recommendations for private customers, checked on ' + D.checked + '. They are not delivery guarantees. Hermes, DPD and GLS set their own dates.';
+    if (window.BerlinWalkBrand && window.BerlinWalkBrand.resize) window.BerlinWalkBrand.resize();
+  }
+  [destEl, kindEl, onlineEl].forEach(function (e) { e.addEventListener('change', render); });
+  destEl.value = 'us';
+  render();
+})();
+</script>
+<script src="../js/brand.js"></script>
+</body>
+</html>

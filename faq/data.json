@@ -14675,5 +14675,39 @@
         "a": "The rink around the Neptune Fountain costs **5 euros** to skate and **3 euros** for skate hire, in fixed sessions that cannot be booked ahead."
       }
     ]
+  },
+  "christmas-shipping-deadlines-berlin": {
+    "title": "Christmas Shipping Deadlines From Berlin - FAQ",
+    "subtitle": "Last posting days, customs and the dates people mix up.",
+    "items": [
+      {
+        "q": "What is the last day to post a Christmas parcel inside Germany?",
+        "a": "Deutsche Post and DHL recommend **Monday 21 December 2026** for parcels, cards and letters inside Germany. Registered letters and **DHL Express** can go in on Tuesday 22 December, before the branch's Express cut-off."
+      },
+      {
+        "q": "When do I have to send a Christmas parcel from Germany to the USA?",
+        "a": "By **Thursday 26 November 2026** for a normal parcel, and by **Wednesday 25 November** for a card. A gift by post may be worth up to **100 US dollars (85 euros)** and must be declared as a gift; anything worth more goes only by DHL Express, which runs until 18 December."
+      },
+      {
+        "q": "Which countries count as neighbouring countries for the 17 December date?",
+        "a": "Deutsche Post does not list them. I read it as the nine countries that border Germany: Austria, Belgium, the Czech Republic, Denmark, France, Luxembourg, the Netherlands, Poland and Switzerland. If you are unsure, post by **14 December**, the date for the rest of Europe."
+      },
+      {
+        "q": "Do I need a customs form for a gift to the UK or Switzerland?",
+        "a": "Yes. Both are outside the EU, so a parcel needs a **CN22 or CN23** declaration. If you frank it online with DHL, the form is filled in from your answers and printed with the label."
+      },
+      {
+        "q": "Can I send a small gift in a letter abroad?",
+        "a": "No. An international letter may only carry documents and cards. Any goods, even a small present, have to go as a **Päckchen or parcel**."
+      },
+      {
+        "q": "Does online franking give me more time?",
+        "a": "For items going abroad, Deutsche Post says online-franked parcels can be handed in **1 to 2 days later** than the published dates and cost up to 3 euros less. Inside Germany the dates stay the same."
+      },
+      {
+        "q": "What are the Hermes, DPD and GLS Christmas deadlines?",
+        "a": "**Hermes:** 19 December inside Germany, 14 December for the EU. **DPD:** 21 December at 12:00 inside Germany, 15 December at 12:00 abroad. **GLS:** 21 December at 12:00 inside Germany, 17 or 18 December for the EU."
+      }
+    ]
   }
 }
