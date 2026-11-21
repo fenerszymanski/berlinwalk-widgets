@@ -7896,5 +7896,365 @@
     "roomVideoUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/room/schlesisches-tor.mp4",
     "roomVideoPosterUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/room/schlesisches-tor-poster.jpg",
     "roomVideoThumbnailUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/room/schlesisches-tor-thumb.jpg"
+  },
+  {
+    "id": "ed-print-25-charlottenburg",
+    "name": "Charlottenburg",
+    "place": "Charlottenburg · The Else-Ury-Bogen",
+    "image": "charlottenburg-fullart.jpg",
+    "alt": "Illustrated street-level view down the Else-Ury-Bogen passage at Savignyplatz with awnings, potted trees, a few small figures, side light and the title Charlottenburg.",
+    "typeLine": "PREMIUM MATTE · 200 GSM · UNFRAMED",
+    "wixProductId": "e236bbb0-9f06-4921-a535-aa5ad8be3656",
+    "group": "everyday",
+    "alternativeProductId": "39d13cb5-3a4d-c52f-0803-b2b48763873f",
+    "visualCreditsHtml": "<p>Photographic reference: Fridolin freudenfett (Peter Kuley), <a href=\"https://commons.wikimedia.org/wiki/File:CharlottenburgElseUryBogen.JPG\">CharlottenburgElseUryBogen.JPG</a>, Wikimedia Commons, <a href=\"https://creativecommons.org/licenses/by-sa/3.0/\">CC BY-SA 3.0</a>. Changes: reinterpreted as an illustrated poster; the passage, awnings and light were artistically reinterpreted. This is not a reproduction of the photograph. No endorsement is implied.</p><p>Place facts: German Wikipedia, Savignyplatz, Bahnhof Berlin Savignyplatz and Else Ury.</p>",
+    "sizeImages": {
+      "30x40 cm": "charlottenburg-30x40.jpg",
+      "50x70 cm": "charlottenburg-50x70.jpg"
+    },
+    "gallery": [
+      {
+        "image": "charlottenburg-fullart.jpg",
+        "alt": "The complete Charlottenburg artwork and title, without cropping."
+      }
+    ],
+    "roomCaption": "Styling example · 30 × 40 cm · Frame and decor not included",
+    "roomImage": "charlottenburg-room-photo.jpg",
+    "roomVideoFit": "contain",
+    "roomAlt": "The Charlottenburg print at 30 × 40 cm in an oak frame on a living-room wall. Frame and decor are not included.",
+    "roomVideoUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/room/charlottenburg-savignyplatz.mp4",
+    "roomVideoPosterUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/room/charlottenburg-savignyplatz-poster.jpg",
+    "roomVideoThumbnailUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/room/charlottenburg-savignyplatz-thumb.jpg"
+  },
+  {
+    "id": "ed-digital-25-charlottenburg",
+    "name": "Charlottenburg Printable Poster",
+    "place": "Charlottenburg · The Else-Ury-Bogen",
+    "image": "charlottenburg-fullart.jpg",
+    "alt": "Illustrated street-level view down the Else-Ury-Bogen passage at Savignyplatz with awnings, potted trees, a few small figures, side light and the title Charlottenburg.",
+    "typeLine": "DIGITAL DOWNLOAD · 30 × 40 CM",
+    "wixProductId": "39d13cb5-3a4d-c52f-0803-b2b48763873f",
+    "kind": "digital",
+    "deliveryNote": "Digital download · 1 JPEG print file and a printing guide. No physical item.",
+    "deliveryDetails": "Your download includes one 3:4 sRGB JPEG, 3543 × 4724 px at 300 dpi for 30 × 40 cm, and a printing guide. The same file prints without cropping at 45 × 60 cm and 60 × 80 cm, with softer detail at larger sizes. No physical poster, frame or decor is included.",
+    "group": "everyday",
+    "alternativeProductId": "e236bbb0-9f06-4921-a535-aa5ad8be3656",
+    "visualCreditsHtml": "<p>Photographic reference: Fridolin freudenfett (Peter Kuley), <a href=\"https://commons.wikimedia.org/wiki/File:CharlottenburgElseUryBogen.JPG\">CharlottenburgElseUryBogen.JPG</a>, Wikimedia Commons, <a href=\"https://creativecommons.org/licenses/by-sa/3.0/\">CC BY-SA 3.0</a>. Changes: reinterpreted as an illustrated poster; the passage, awnings and light were artistically reinterpreted. This is not a reproduction of the photograph. No endorsement is implied.</p><p>Place facts: German Wikipedia, Savignyplatz, Bahnhof Berlin Savignyplatz and Else Ury.</p>",
+    "sizeImages": {
+      "30x40 cm": "charlottenburg-30x40.jpg"
+    },
+    "gallery": [
+      {
+        "image": "charlottenburg-30x40.jpg",
+        "alt": "Complete artwork at 30 x 40 cm."
+      }
+    ],
+    "roomCaption": "Styling example · 30 × 40 cm · Printable files only · Frame and decor not included",
+    "roomImage": "charlottenburg-room-photo.jpg",
+    "roomVideoFit": "contain",
+    "roomAlt": "The Charlottenburg print at 30 × 40 cm in an oak frame on a living-room wall. Frame and decor are not included.",
+    "roomVideoUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/room/charlottenburg-savignyplatz.mp4",
+    "roomVideoPosterUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/room/charlottenburg-savignyplatz-poster.jpg",
+    "roomVideoThumbnailUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/room/charlottenburg-savignyplatz-thumb.jpg"
+  },
+  {
+    "id": "ed-print-26-schoeneberg",
+    "name": "Schöneberg",
+    "place": "Schöneberg · Nollendorfplatz at night",
+    "image": "schoeneberg-fullart.jpg",
+    "alt": "Illustrated night view from below of the illuminated steel dome of Nollendorfplatz station with a blue U sign, a band of rainbow light and the title Schöneberg.",
+    "typeLine": "PREMIUM MATTE · 200 GSM · UNFRAMED",
+    "wixProductId": "bc489d9d-0d8e-4520-8ae5-14aa1b4c1c3a",
+    "group": "everyday",
+    "alternativeProductId": "181b85b2-0bfb-d1e1-71ea-ed2fe42aa0d1",
+    "visualCreditsHtml": "<p>Photographic reference: Standardizer, <a href=\"https://commons.wikimedia.org/wiki/File:Kuppel_U-Bahnhof-Nollendorfplatz.jpg\">Kuppel U-Bahnhof-Nollendorfplatz.jpg</a>, Wikimedia Commons, <a href=\"https://creativecommons.org/licenses/by-sa/3.0/\">CC BY-SA 3.0</a>. Changes: reinterpreted as an illustrated poster; the dome, light and facade were artistically reinterpreted. This is not a reproduction of the photograph. No endorsement is implied.</p><p>Place facts: German Wikipedia, U-Bahnhof Nollendorfplatz, and the Bezirksamt Tempelhof-Schöneberg on berlin.de.</p>",
+    "sizeImages": {
+      "30x40 cm": "schoeneberg-30x40.jpg",
+      "50x70 cm": "schoeneberg-50x70.jpg"
+    },
+    "gallery": [
+      {
+        "image": "schoeneberg-fullart.jpg",
+        "alt": "The complete Schöneberg artwork and title, without cropping."
+      }
+    ],
+    "roomCaption": "Styling example · 30 × 40 cm · Frame and decor not included",
+    "roomImage": "schoeneberg-room-photo.jpg",
+    "roomVideoFit": "contain",
+    "roomAlt": "The Schöneberg print at 30 × 40 cm in an oak frame on a living-room wall. Frame and decor are not included.",
+    "roomVideoUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/room/schoeneberg-nollendorfplatz.mp4",
+    "roomVideoPosterUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/room/schoeneberg-nollendorfplatz-poster.jpg",
+    "roomVideoThumbnailUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/room/schoeneberg-nollendorfplatz-thumb.jpg"
+  },
+  {
+    "id": "ed-digital-26-schoeneberg",
+    "name": "Schöneberg Printable Poster",
+    "place": "Schöneberg · Nollendorfplatz at night",
+    "image": "schoeneberg-fullart.jpg",
+    "alt": "Illustrated night view from below of the illuminated steel dome of Nollendorfplatz station with a blue U sign, a band of rainbow light and the title Schöneberg.",
+    "typeLine": "DIGITAL DOWNLOAD · 30 × 40 CM",
+    "wixProductId": "181b85b2-0bfb-d1e1-71ea-ed2fe42aa0d1",
+    "kind": "digital",
+    "deliveryNote": "Digital download · 1 JPEG print file and a printing guide. No physical item.",
+    "deliveryDetails": "Your download includes one 3:4 sRGB JPEG, 3543 × 4724 px at 300 dpi for 30 × 40 cm, and a printing guide. The same file prints without cropping at 45 × 60 cm and 60 × 80 cm, with softer detail at larger sizes. No physical poster, frame or decor is included.",
+    "group": "everyday",
+    "alternativeProductId": "bc489d9d-0d8e-4520-8ae5-14aa1b4c1c3a",
+    "visualCreditsHtml": "<p>Photographic reference: Standardizer, <a href=\"https://commons.wikimedia.org/wiki/File:Kuppel_U-Bahnhof-Nollendorfplatz.jpg\">Kuppel U-Bahnhof-Nollendorfplatz.jpg</a>, Wikimedia Commons, <a href=\"https://creativecommons.org/licenses/by-sa/3.0/\">CC BY-SA 3.0</a>. Changes: reinterpreted as an illustrated poster; the dome, light and facade were artistically reinterpreted. This is not a reproduction of the photograph. No endorsement is implied.</p><p>Place facts: German Wikipedia, U-Bahnhof Nollendorfplatz, and the Bezirksamt Tempelhof-Schöneberg on berlin.de.</p>",
+    "sizeImages": {
+      "30x40 cm": "schoeneberg-30x40.jpg"
+    },
+    "gallery": [
+      {
+        "image": "schoeneberg-30x40.jpg",
+        "alt": "Complete artwork at 30 x 40 cm."
+      }
+    ],
+    "roomCaption": "Styling example · 30 × 40 cm · Printable files only · Frame and decor not included",
+    "roomImage": "schoeneberg-room-photo.jpg",
+    "roomVideoFit": "contain",
+    "roomAlt": "The Schöneberg print at 30 × 40 cm in an oak frame on a living-room wall. Frame and decor are not included.",
+    "roomVideoUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/room/schoeneberg-nollendorfplatz.mp4",
+    "roomVideoPosterUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/room/schoeneberg-nollendorfplatz-poster.jpg",
+    "roomVideoThumbnailUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/room/schoeneberg-nollendorfplatz-thumb.jpg"
+  },
+  {
+    "id": "ed-print-29-lankwitz",
+    "name": "Lankwitz",
+    "place": "Lankwitz · The village church",
+    "image": "lankwitz-fullart.jpg",
+    "alt": "Illustrated eye-level view of the Lankwitz village church with a fieldstone nave, a dark tower with a steep pyramid roof, autumn trees and the title Lankwitz.",
+    "typeLine": "PREMIUM MATTE · 200 GSM · UNFRAMED",
+    "wixProductId": "f2c0c374-5e5e-4ec2-b6f0-7775331b3d66",
+    "group": "everyday",
+    "alternativeProductId": "ef0814ac-7264-c7f1-19e9-d8d42d04c42c",
+    "visualCreditsHtml": "<p>Photographic reference: Neuköllner, <a href=\"https://commons.wikimedia.org/wiki/File:Evangelische_Dorfkirche_Lankwitz,_Alt-Lankwitz_15,_Berlin.jpg\">Evangelische Dorfkirche Lankwitz, Alt-Lankwitz 15, Berlin.jpg</a>, Wikimedia Commons, <a href=\"https://creativecommons.org/licenses/by-sa/4.0/\">CC BY-SA 4.0</a>. Changes: reinterpreted as an illustrated poster; the church, trees and light were artistically reinterpreted. This is not a reproduction of the photograph. No endorsement is implied.</p><p>Place facts: German Wikipedia, Dorfkirche Lankwitz, and the Berlin Denkmaldatenbank.</p>",
+    "sizeImages": {
+      "30x40 cm": "lankwitz-30x40.jpg",
+      "50x70 cm": "lankwitz-50x70.jpg"
+    },
+    "gallery": [
+      {
+        "image": "lankwitz-fullart.jpg",
+        "alt": "The complete Lankwitz artwork and title, without cropping."
+      }
+    ],
+    "roomCaption": "Styling example · 30 × 40 cm · Frame and decor not included",
+    "roomImage": "lankwitz-room-photo.jpg",
+    "roomVideoFit": "contain",
+    "roomAlt": "The Lankwitz print at 30 × 40 cm in an oak frame on a living-room wall. Frame and decor are not included.",
+    "roomVideoUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/room/lankwitz-dorfkirche.mp4",
+    "roomVideoPosterUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/room/lankwitz-dorfkirche-poster.jpg",
+    "roomVideoThumbnailUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/room/lankwitz-dorfkirche-thumb.jpg"
+  },
+  {
+    "id": "ed-digital-29-lankwitz",
+    "name": "Lankwitz Printable Poster",
+    "place": "Lankwitz · The village church",
+    "image": "lankwitz-fullart.jpg",
+    "alt": "Illustrated eye-level view of the Lankwitz village church with a fieldstone nave, a dark tower with a steep pyramid roof, autumn trees and the title Lankwitz.",
+    "typeLine": "DIGITAL DOWNLOAD · 30 × 40 CM",
+    "wixProductId": "ef0814ac-7264-c7f1-19e9-d8d42d04c42c",
+    "kind": "digital",
+    "deliveryNote": "Digital download · 1 JPEG print file and a printing guide. No physical item.",
+    "deliveryDetails": "Your download includes one 3:4 sRGB JPEG, 3543 × 4724 px at 300 dpi for 30 × 40 cm, and a printing guide. The same file prints without cropping at 45 × 60 cm and 60 × 80 cm, with softer detail at larger sizes. No physical poster, frame or decor is included.",
+    "group": "everyday",
+    "alternativeProductId": "f2c0c374-5e5e-4ec2-b6f0-7775331b3d66",
+    "visualCreditsHtml": "<p>Photographic reference: Neuköllner, <a href=\"https://commons.wikimedia.org/wiki/File:Evangelische_Dorfkirche_Lankwitz,_Alt-Lankwitz_15,_Berlin.jpg\">Evangelische Dorfkirche Lankwitz, Alt-Lankwitz 15, Berlin.jpg</a>, Wikimedia Commons, <a href=\"https://creativecommons.org/licenses/by-sa/4.0/\">CC BY-SA 4.0</a>. Changes: reinterpreted as an illustrated poster; the church, trees and light were artistically reinterpreted. This is not a reproduction of the photograph. No endorsement is implied.</p><p>Place facts: German Wikipedia, Dorfkirche Lankwitz, and the Berlin Denkmaldatenbank.</p>",
+    "sizeImages": {
+      "30x40 cm": "lankwitz-30x40.jpg"
+    },
+    "gallery": [
+      {
+        "image": "lankwitz-30x40.jpg",
+        "alt": "Complete artwork at 30 x 40 cm."
+      }
+    ],
+    "roomCaption": "Styling example · 30 × 40 cm · Printable files only · Frame and decor not included",
+    "roomImage": "lankwitz-room-photo.jpg",
+    "roomVideoFit": "contain",
+    "roomAlt": "The Lankwitz print at 30 × 40 cm in an oak frame on a living-room wall. Frame and decor are not included.",
+    "roomVideoUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/room/lankwitz-dorfkirche.mp4",
+    "roomVideoPosterUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/room/lankwitz-dorfkirche-poster.jpg",
+    "roomVideoThumbnailUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/room/lankwitz-dorfkirche-thumb.jpg"
+  },
+  {
+    "id": "ed-print-30-dahlem",
+    "name": "Dahlem",
+    "place": "Dahlem · The thatched station",
+    "image": "dahlem-fullart.jpg",
+    "alt": "Illustrated twilight view of the thatched, half-timbered Dahlem-Dorf station with a glowing central doorway, lawns, trees and the title Dahlem.",
+    "typeLine": "PREMIUM MATTE · 200 GSM · UNFRAMED",
+    "wixProductId": "3ec962f4-b4a5-4cb1-858c-ddfc9af1c10d",
+    "group": "everyday",
+    "alternativeProductId": "55856388-e455-4e1c-648f-39fbc5207b4b",
+    "visualCreditsHtml": "<p>Photographic reference: A.Savin, <a href=\"https://commons.wikimedia.org/wiki/File:Berlin_U-Bf_Dahlem-Dorf_asv2023-06_img1.jpg\">Berlin U-Bf Dahlem-Dorf asv2023-06 img1.jpg</a>, Wikimedia Commons, <a href=\"http://artlibre.org/licence/lal/en\">Free Art License 1.3 (FAL 1.3)</a>. Changes: reinterpreted as an illustrated poster; the roof, doorway and light were artistically reinterpreted. This is not a reproduction of the photograph. No endorsement is implied.</p><p>Place facts: German Wikipedia, U-Bahnhof Dahlem-Dorf, and the Berlin Denkmaldatenbank.</p>",
+    "sizeImages": {
+      "30x40 cm": "dahlem-30x40.jpg",
+      "50x70 cm": "dahlem-50x70.jpg"
+    },
+    "gallery": [
+      {
+        "image": "dahlem-fullart.jpg",
+        "alt": "The complete Dahlem artwork and title, without cropping."
+      }
+    ],
+    "roomCaption": "Styling example · 30 × 40 cm · Frame and decor not included",
+    "roomImage": "dahlem-room-photo.jpg",
+    "roomVideoFit": "contain",
+    "roomAlt": "The Dahlem print at 30 × 40 cm in an oak frame on a living-room wall. Frame and decor are not included.",
+    "roomVideoUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/room/dahlem-dorf.mp4",
+    "roomVideoPosterUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/room/dahlem-dorf-poster.jpg",
+    "roomVideoThumbnailUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/room/dahlem-dorf-thumb.jpg"
+  },
+  {
+    "id": "ed-digital-30-dahlem",
+    "name": "Dahlem Printable Poster",
+    "place": "Dahlem · The thatched station",
+    "image": "dahlem-fullart.jpg",
+    "alt": "Illustrated twilight view of the thatched, half-timbered Dahlem-Dorf station with a glowing central doorway, lawns, trees and the title Dahlem.",
+    "typeLine": "DIGITAL DOWNLOAD · 30 × 40 CM",
+    "wixProductId": "55856388-e455-4e1c-648f-39fbc5207b4b",
+    "kind": "digital",
+    "deliveryNote": "Digital download · 1 JPEG print file and a printing guide. No physical item.",
+    "deliveryDetails": "Your download includes one 3:4 sRGB JPEG, 3543 × 4724 px at 300 dpi for 30 × 40 cm, and a printing guide. The same file prints without cropping at 45 × 60 cm and 60 × 80 cm, with softer detail at larger sizes. No physical poster, frame or decor is included.",
+    "group": "everyday",
+    "alternativeProductId": "3ec962f4-b4a5-4cb1-858c-ddfc9af1c10d",
+    "visualCreditsHtml": "<p>Photographic reference: A.Savin, <a href=\"https://commons.wikimedia.org/wiki/File:Berlin_U-Bf_Dahlem-Dorf_asv2023-06_img1.jpg\">Berlin U-Bf Dahlem-Dorf asv2023-06 img1.jpg</a>, Wikimedia Commons, <a href=\"http://artlibre.org/licence/lal/en\">Free Art License 1.3 (FAL 1.3)</a>. Changes: reinterpreted as an illustrated poster; the roof, doorway and light were artistically reinterpreted. This is not a reproduction of the photograph. No endorsement is implied.</p><p>Place facts: German Wikipedia, U-Bahnhof Dahlem-Dorf, and the Berlin Denkmaldatenbank.</p>",
+    "sizeImages": {
+      "30x40 cm": "dahlem-30x40.jpg"
+    },
+    "gallery": [
+      {
+        "image": "dahlem-30x40.jpg",
+        "alt": "Complete artwork at 30 x 40 cm."
+      }
+    ],
+    "roomCaption": "Styling example · 30 × 40 cm · Printable files only · Frame and decor not included",
+    "roomImage": "dahlem-room-photo.jpg",
+    "roomVideoFit": "contain",
+    "roomAlt": "The Dahlem print at 30 × 40 cm in an oak frame on a living-room wall. Frame and decor are not included.",
+    "roomVideoUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/room/dahlem-dorf.mp4",
+    "roomVideoPosterUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/room/dahlem-dorf-poster.jpg",
+    "roomVideoThumbnailUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/room/dahlem-dorf-thumb.jpg"
+  },
+  {
+    "id": "ed-print-31-frohnau",
+    "name": "Frohnau",
+    "place": "Frohnau · The Casinoturm",
+    "image": "frohnau-fullart.jpg",
+    "alt": "Illustrated wide view of the pale Casinoturm with its clock and green pyramid roof on Ludolfingerplatz in Frohnau, with red-tiled station buildings, a fountain and the title Frohnau.",
+    "typeLine": "PREMIUM MATTE · 200 GSM · UNFRAMED",
+    "wixProductId": "49b55612-78c3-4ae9-a449-daa94bee16e2",
+    "group": "everyday",
+    "alternativeProductId": "c9745096-1e42-6e82-ea18-621a79f05c33",
+    "visualCreditsHtml": "<p>Photographic reference: Fridolin freudenfett, <a href=\"https://commons.wikimedia.org/wiki/File:Frohnau_Ludolfingerplatz_S-Bahnhof_mit_Kasinoturm-001.JPG\">Frohnau Ludolfingerplatz S-Bahnhof mit Kasinoturm-001.JPG</a>, Wikimedia Commons, <a href=\"https://creativecommons.org/licenses/by-sa/4.0/\">CC BY-SA 4.0</a>. Changes: reinterpreted as an illustrated poster; the tower, square and light were artistically reinterpreted. This is not a reproduction of the photograph. No endorsement is implied.</p><p>Place facts: German Wikipedia, Berlin-Frohnau, and the Berlin Denkmaldatenbank.</p>",
+    "sizeImages": {
+      "30x40 cm": "frohnau-30x40.jpg",
+      "50x70 cm": "frohnau-50x70.jpg"
+    },
+    "gallery": [
+      {
+        "image": "frohnau-fullart.jpg",
+        "alt": "The complete Frohnau artwork and title, without cropping."
+      }
+    ],
+    "roomCaption": "Styling example · 30 × 40 cm · Frame and decor not included",
+    "roomImage": "frohnau-room-photo.jpg",
+    "roomVideoFit": "contain",
+    "roomAlt": "The Frohnau print at 30 × 40 cm in an oak frame on a living-room wall. Frame and decor are not included.",
+    "roomVideoUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/room/frohnau-casinoturm.mp4",
+    "roomVideoPosterUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/room/frohnau-casinoturm-poster.jpg",
+    "roomVideoThumbnailUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/room/frohnau-casinoturm-thumb.jpg"
+  },
+  {
+    "id": "ed-digital-31-frohnau",
+    "name": "Frohnau Printable Poster",
+    "place": "Frohnau · The Casinoturm",
+    "image": "frohnau-fullart.jpg",
+    "alt": "Illustrated wide view of the pale Casinoturm with its clock and green pyramid roof on Ludolfingerplatz in Frohnau, with red-tiled station buildings, a fountain and the title Frohnau.",
+    "typeLine": "DIGITAL DOWNLOAD · 30 × 40 CM",
+    "wixProductId": "c9745096-1e42-6e82-ea18-621a79f05c33",
+    "kind": "digital",
+    "deliveryNote": "Digital download · 1 JPEG print file and a printing guide. No physical item.",
+    "deliveryDetails": "Your download includes one 3:4 sRGB JPEG, 3543 × 4724 px at 300 dpi for 30 × 40 cm, and a printing guide. The same file prints without cropping at 45 × 60 cm and 60 × 80 cm, with softer detail at larger sizes. No physical poster, frame or decor is included.",
+    "group": "everyday",
+    "alternativeProductId": "49b55612-78c3-4ae9-a449-daa94bee16e2",
+    "visualCreditsHtml": "<p>Photographic reference: Fridolin freudenfett, <a href=\"https://commons.wikimedia.org/wiki/File:Frohnau_Ludolfingerplatz_S-Bahnhof_mit_Kasinoturm-001.JPG\">Frohnau Ludolfingerplatz S-Bahnhof mit Kasinoturm-001.JPG</a>, Wikimedia Commons, <a href=\"https://creativecommons.org/licenses/by-sa/4.0/\">CC BY-SA 4.0</a>. Changes: reinterpreted as an illustrated poster; the tower, square and light were artistically reinterpreted. This is not a reproduction of the photograph. No endorsement is implied.</p><p>Place facts: German Wikipedia, Berlin-Frohnau, and the Berlin Denkmaldatenbank.</p>",
+    "sizeImages": {
+      "30x40 cm": "frohnau-30x40.jpg"
+    },
+    "gallery": [
+      {
+        "image": "frohnau-30x40.jpg",
+        "alt": "Complete artwork at 30 x 40 cm."
+      }
+    ],
+    "roomCaption": "Styling example · 30 × 40 cm · Printable files only · Frame and decor not included",
+    "roomImage": "frohnau-room-photo.jpg",
+    "roomVideoFit": "contain",
+    "roomAlt": "The Frohnau print at 30 × 40 cm in an oak frame on a living-room wall. Frame and decor are not included.",
+    "roomVideoUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/room/frohnau-casinoturm.mp4",
+    "roomVideoPosterUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/room/frohnau-casinoturm-poster.jpg",
+    "roomVideoThumbnailUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/room/frohnau-casinoturm-thumb.jpg"
+  },
+  {
+    "id": "ed-print-33-westend",
+    "name": "Westend",
+    "place": "Westend · The villa on Ahornallee",
+    "image": "westend-fullart.jpg",
+    "alt": "Illustrated close street view of the villa at Ahornallee 33 in Westend, with a sloping red roof, dormers, a white portico, dark shutters, a garden fence and the title Westend.",
+    "typeLine": "PREMIUM MATTE · 200 GSM · UNFRAMED",
+    "wixProductId": "45b65a32-76e5-42c7-a4ba-c482d3a955ea",
+    "group": "everyday",
+    "alternativeProductId": "689bb424-5b55-721a-245b-149d160a6b29",
+    "visualCreditsHtml": "<p>Photographic reference: Bodo Kubrak, <a href=\"https://commons.wikimedia.org/wiki/File:Ahornallee_33_(Berlin-Westend).JPG\">Ahornallee 33 (Berlin-Westend).JPG</a>, Wikimedia Commons, <a href=\"https://creativecommons.org/publicdomain/zero/1.0/\">CC0</a> (no credit is required; mentioned as a courtesy). Changes: reinterpreted as an illustrated poster; the roof, portico and light were artistically reinterpreted. This is not a reproduction of the photograph. No endorsement is implied.</p><p>Place facts: berlin.de (Bezirksamt Charlottenburg-Wilmersdorf) and the Berlin Denkmaldatenbank.</p>",
+    "sizeImages": {
+      "30x40 cm": "westend-30x40.jpg",
+      "50x70 cm": "westend-50x70.jpg"
+    },
+    "gallery": [
+      {
+        "image": "westend-fullart.jpg",
+        "alt": "The complete Westend artwork and title, without cropping."
+      }
+    ],
+    "roomCaption": "Styling example · 30 × 40 cm · Frame and decor not included",
+    "roomImage": "westend-room-photo.jpg",
+    "roomVideoFit": "contain",
+    "roomAlt": "The Westend print at 30 × 40 cm in an oak frame on a living-room wall. Frame and decor are not included.",
+    "roomVideoUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/room/westend-ahornallee.mp4",
+    "roomVideoPosterUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/room/westend-ahornallee-poster.jpg",
+    "roomVideoThumbnailUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/room/westend-ahornallee-thumb.jpg"
+  },
+  {
+    "id": "ed-digital-33-westend",
+    "name": "Westend Printable Poster",
+    "place": "Westend · The villa on Ahornallee",
+    "image": "westend-fullart.jpg",
+    "alt": "Illustrated close street view of the villa at Ahornallee 33 in Westend, with a sloping red roof, dormers, a white portico, dark shutters, a garden fence and the title Westend.",
+    "typeLine": "DIGITAL DOWNLOAD · 30 × 40 CM",
+    "wixProductId": "689bb424-5b55-721a-245b-149d160a6b29",
+    "kind": "digital",
+    "deliveryNote": "Digital download · 1 JPEG print file and a printing guide. No physical item.",
+    "deliveryDetails": "Your download includes one 3:4 sRGB JPEG, 3543 × 4724 px at 300 dpi for 30 × 40 cm, and a printing guide. The same file prints without cropping at 45 × 60 cm and 60 × 80 cm, with softer detail at larger sizes. No physical poster, frame or decor is included.",
+    "group": "everyday",
+    "alternativeProductId": "45b65a32-76e5-42c7-a4ba-c482d3a955ea",
+    "visualCreditsHtml": "<p>Photographic reference: Bodo Kubrak, <a href=\"https://commons.wikimedia.org/wiki/File:Ahornallee_33_(Berlin-Westend).JPG\">Ahornallee 33 (Berlin-Westend).JPG</a>, Wikimedia Commons, <a href=\"https://creativecommons.org/publicdomain/zero/1.0/\">CC0</a> (no credit is required; mentioned as a courtesy). Changes: reinterpreted as an illustrated poster; the roof, portico and light were artistically reinterpreted. This is not a reproduction of the photograph. No endorsement is implied.</p><p>Place facts: berlin.de (Bezirksamt Charlottenburg-Wilmersdorf) and the Berlin Denkmaldatenbank.</p>",
+    "sizeImages": {
+      "30x40 cm": "westend-30x40.jpg"
+    },
+    "gallery": [
+      {
+        "image": "westend-30x40.jpg",
+        "alt": "Complete artwork at 30 x 40 cm."
+      }
+    ],
+    "roomCaption": "Styling example · 30 × 40 cm · Printable files only · Frame and decor not included",
+    "roomImage": "westend-room-photo.jpg",
+    "roomVideoFit": "contain",
+    "roomAlt": "The Westend print at 30 × 40 cm in an oak frame on a living-room wall. Frame and decor are not included.",
+    "roomVideoUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/room/westend-ahornallee.mp4",
+    "roomVideoPosterUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/room/westend-ahornallee-poster.jpg",
+    "roomVideoThumbnailUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/room/westend-ahornallee-thumb.jpg"
   }
 ]
