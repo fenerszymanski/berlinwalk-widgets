@@ -926,6 +926,7 @@ button.ys-words-tag:focus-visible{outline:2px solid var(--green);outline-offset:
 
 /* Clothing page boost (21 Nov 2026): Black Week sentence next to the price, size guide above the buy button, second-item row under the buy box text.
    Markup comes from clothing-boost.js; the sentence is black-week.js copy and disappears with the Black Week window (the row keeps a neutral heading). */
+:host([design2]) .d2-standard .gallery-stage>img.bw-person:not(.extra){width:100%;height:100%;max-width:100%;max-height:100%;object-fit:contain;box-shadow:none}
 :host([design2]) .product-title .bw-offer{display:inline-block;max-width:100%;margin:10px 0 0;padding:.45em .95em .4em;border-radius:999px;background:#FFE600;color:#123D18;font-size:14px;font-weight:600;line-height:1.35;letter-spacing:0}
 :host([design2]) .bw-offer-nb{white-space:nowrap}
 :host([design2]) .bw-size-guide{margin:16px 0 0;border:1px solid var(--line);border-radius:8px;background:#fff}

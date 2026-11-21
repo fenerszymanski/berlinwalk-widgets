@@ -275,8 +275,12 @@ P.landingView=function(){if(this.xgGuide()){const t=document.createElement('temp
  // Clothing page boost (Yusuf approved 21 Nov 2026; helpers and words in clothing-boost.js and black-week.js). d2boost adds, to a clothing product page only:
  // the Black Week sentence next to the price, a size guide above "Add to cart" and a row of up to three other Black Week items below the buy box text.
  // Eligibility is the Black Week collection id on the catalogue row (live Velo row, or our own hourly copy while the page is still loading).
- P.pageMedia=function(media){return pageMedia(media,media?.color);};
+ P.pageMedia=function(media){const shown=pageMedia(media,media?.color);this.bwPersonFirst=shown?.person?.image||null;return shown;};
  P.d2boost=function(root,product){
+  // A person photo on stage fills the stage (the stock rule leaves a product picture at the 260 px its srcset hint names, two thirds of a phone): same file, no extra bytes.
+  const person=this.bwPersonFirst;this.bwPersonFirst=null;
+  const stage=person?root.querySelector('.gallery-stage > img:not(.extra)'):null;
+  if(stage){stage.classList.add('bw-person');stage.setAttribute('sizes','(max-width:740px) 100vw, 50vw');}
   if(product.group!=='apparel'||product.unavailable)return;
   const de=this.campaignGerman(),native=this.d2cardNative(product),eligible=blackWeekEligibleRow(native),buy=root.querySelector('.buy-box'),row=buy?.querySelector(':scope > .buy-row');
   if(eligible&&blackWeekActive()){const price=root.querySelector('.product-title .price'),line=offerLineHtml({de,esc});if(price&&line){price.insertAdjacentHTML('afterend',line);armBlackWeekEnd(this);}}
