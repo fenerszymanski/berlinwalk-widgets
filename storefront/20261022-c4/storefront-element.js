@@ -318,7 +318,7 @@
     // 18 Nov 2026 (Yusuf: "Bunu yapalım evet"): prices from our own catalogue copy while the Velo bridge is still silent (~7-8 s on phones). Loading view only; the first Velo answer replaces every number.
     fetch(asset('data/catalog-snapshot.json'),{signal:AbortSignal.timeout(2500)}).then(r=>r.ok?r.json():null).catch(()=>null),
     (/(?:dein-berlin-2027|cart-page)/.test(location.pathname)?import(asset('calendar-configurator.js')).catch(()=>null):Promise.resolve(null)),
-    design2Enabled?import(asset('design2.js')).catch(()=>null):Promise.resolve(null),   // a failed design 2 load falls back to the current store
+    design2Enabled?import(new URL('design2.js?v=ys1979-store-home-20261122-v1',base).href).catch(()=>null):Promise.resolve(null),   // a failed design 2 load falls back to the current store
     legacyGiftPresentation()?Promise.resolve(null):fetch(new URL('data/sized-media.json?v=sized-20261119-v1',base).href,{signal:AbortSignal.timeout(2500)}).then(r=>r.ok?r.json():null).then(applySizedMedia).catch(()=>null)
   ]);
   // German layer for the press launch, only with ?lang=de; a failure leaves the English page (30 Oct 2026).
