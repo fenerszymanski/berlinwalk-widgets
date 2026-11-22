@@ -983,3 +983,4 @@ button.ys-words-tag:focus-visible{outline:2px solid var(--green);outline-offset:
 .ys-rec-tag[hidden],.ys-rec-band[hidden],.ys-choice-row[hidden]{display:none}
 .ys-sheet[data-rec] .ys-ptitle,.ys-sheet[data-rec] .ys-parea,.ys-sheet[data-rec] .ys-pcoords,.ys-sheet[data-rec] .ys-pline{visibility:hidden}
 .ys-sheet[data-rec] .ys-words-tag{display:none!important}
+.ys-fields[data-rec]{display:none!important}

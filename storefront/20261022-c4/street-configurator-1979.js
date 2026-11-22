@@ -424,6 +424,7 @@ export function createYs1979(base, profile) {
       if (on && tag.textContent !== r.tag) tag.textContent = r.tag;
       band.hidden = tag.hidden = !on;
       $('layoutrow').hidden = on;
+      $('fields').toggleAttribute('data-rec', on);   // title, area and words cannot be printed for this spot: out of sight too
     };
     const refreshButton = () => {
       const ready = readyToCheck(state), off = !ready || api.busy() || state.cover !== 'ok';
