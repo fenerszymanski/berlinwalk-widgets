@@ -677,16 +677,15 @@ button.ys-words-tag:focus-visible{outline:2px solid var(--green);outline-offset:
  :host([design2]) .d2-bar-search,:host([design2]) .d2-bar-search.d2-compact-search{display:none;grid-row:3}
  :host([design2]) .d2-bar-search.d2-open{display:block}
  :host([design2]) .d2-search-toggle{grid-column:2;grid-row:1;display:flex;align-items:center;justify-content:center;width:30px;padding:4px;border:0;background:none}
- :host([design2]) .d2-groups,:host([design2]) .d2-groups.d2-open{display:flex;grid-column:1/-1;grid-row:2;flex-direction:row;align-items:center;gap:18px;padding:2px 0 4px;border-top:0;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch}
- :host([design2]) .d2-groups::-webkit-scrollbar{display:none}
- :host([design2]) .d2-group{position:static;flex:none}
- :host([design2]) .d2-group>button{width:auto;min-height:44px;font-size:17px;padding:8px 0}
- :host([design2]) .d2-groups-de,:host([design2]) .d2-groups-de.d2-open{gap:10px}
+ :host([design2]) .d2-groups,:host([design2]) .d2-groups.d2-open{display:grid;grid-template-columns:repeat(4,max-content);grid-column:1/-1;grid-row:2;align-items:center;gap:0 18px;padding:2px 0 4px;border-top:0}
+ :host([design2]) .d2-group{display:contents}
+ :host([design2]) .d2-group>button{grid-row:1;width:auto;min-height:44px;font-size:17px;padding:8px 0}
+ :host([design2]) .d2-groups-de,:host([design2]) .d2-groups-de.d2-open{gap:0 10px}
  :host([design2]) .d2-groups-de .d2-group>button{font-size:15px}
- :host([design2]) .d2-menu{position:absolute;top:100%;left:0;right:0;min-width:0;max-width:none;max-height:70vh;overflow-y:auto;background:var(--cream);border:1px solid var(--line);border-width:1px 0;box-shadow:0 12px 24px #123d181c;padding:8px 16px 12px;z-index:50}
+ :host([design2]) .d2-menu{position:static;grid-column:1/-1;grid-row:2;min-width:0;max-width:none;max-height:50vh;overflow-y:auto;background:var(--cream);border:0;border-top:1px solid var(--line);box-shadow:none;padding:4px 0 8px}
 }
 @media(max-width:380px){
- :host([design2]) .d2-groups,:host([design2]) .d2-groups.d2-open{gap:8px;justify-content:space-between}
+ :host([design2]) .d2-groups,:host([design2]) .d2-groups.d2-open{gap:0 8px;justify-content:space-between}
  :host([design2]) .d2-explore-wide{display:none}
  :host([design2]) .d2-explore-compact{display:inline}
 }
@@ -913,7 +912,7 @@ button.ys-words-tag:focus-visible{outline:2px solid var(--green);outline-offset:
 :host([design2]) .product-layout .gallery,:host([design2]) .order-summary,:host([design2]) .cal-preview{top:85px}
 /* Compact the phone menu after scrolling. Reserve the difference so the page does not jump. */
 @media(max-width:740px){
- :host([design2][bar-compact]) .d2-bar .d2-groups{display:flex}
+ :host([design2][bar-compact]) .d2-bar .d2-groups{display:grid}
  :host([design2][bar-compact]) .d2-bar .d2-group>button{min-height:38px;padding-block:4px}
  :host([design2][bar-compact]) .d2-bar{margin-bottom:var(--bw-bar-gap,0px)}
 }
