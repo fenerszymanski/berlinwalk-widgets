@@ -43,7 +43,7 @@ const BW_HOME_PRODUCTS_SECONDARY = [
     title: 'Photo Missions',
     text: 'Small photo challenges that get you looking closer at Berlin.',
     cta: 'Start a mission',
-    href: 'https://www.berlinwalk.com/products/hidden-berlin-photo-missions',
+    href: 'https://www.walkofberlin.com/products/hidden-berlin-photo-missions',
     image: 'photo-missions.jpg',
     alt: 'The surviving entrance hall of Anhalter Bahnhof, the first Hidden Berlin photo mission',
   },

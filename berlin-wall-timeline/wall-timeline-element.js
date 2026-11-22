@@ -30,7 +30,7 @@
   var FINAL_URL = 'https://www.berlinwalk.com/berlin-wall-timeline';
   var HOME_URL = 'https://www.berlinwalk.com/?utm_source=berlin_wall_timeline&utm_medium=story&utm_campaign=berlinwalk&utm_content=brand';
   var BOOK_URL = 'https://www.walkofberlin.com/book-berlin-walking-tour/berlin-then-and-now?utm_source=berlin_wall_timeline&utm_medium=story&utm_campaign=berlinwalk&utm_content=book_cta';
-  var AUDIO_URL = 'https://www.berlinwalk.com/products/death-strip-audio-route?utm_source=berlin_wall_timeline&utm_medium=story&utm_campaign=berlinwalk&utm_content=audio_cta';
+  var AUDIO_URL = 'https://www.walkofberlin.com/products/death-strip-audio-route?utm_source=berlin_wall_timeline&utm_medium=story&utm_campaign=berlinwalk&utm_content=audio_cta';
   var COVER_URL = BASE_URL + 'assets/social/berlin-wall-timeline-1200x630.jpg';
 
   var SEO = {
