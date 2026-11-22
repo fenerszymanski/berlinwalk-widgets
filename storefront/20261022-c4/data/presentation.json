@@ -8256,5 +8256,845 @@
     "roomVideoUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/room/westend-ahornallee.mp4",
     "roomVideoPosterUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/room/westend-ahornallee-poster.jpg",
     "roomVideoThumbnailUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/room/westend-ahornallee-thumb.jpg"
+  },
+  {
+    "id": "ed-print-14-strandbad-wannsee",
+    "name": "Strandbad Wannsee",
+    "place": "Wannsee · The Strandkorb",
+    "image": "strandbad-wannsee-fullart.jpg",
+    "alt": "Illustrated low view from the sand at Strandbad Wannsee, with a white hooded wicker Strandkorb in the foreground, calm water, a small sail, the opposite tree line and the title Strandbad Wannsee.",
+    "typeLine": "PREMIUM MATTE · 200 GSM · UNFRAMED",
+    "wixProductId": "b681965b-308b-445f-bb89-b16b08ebb8ca",
+    "group": "everyday",
+    "alternativeProductId": "779f3d9f-bca0-86ac-0ad1-75299ca1c8a4",
+    "visualCreditsHtml": "<p>Visual reference: a photograph of Strandbad Wannsee (the berlin.de page on Strandbad Wannsee). The beach, baskets, water and light were artistically reinterpreted; this is not a reproduction of the photograph.</p><p>Place facts: German Wikipedia, Strandbad Wannsee.</p>",
+    "sizeImages": {
+      "30x40 cm": "strandbad-wannsee-30x40.jpg",
+      "50x70 cm": "strandbad-wannsee-50x70.jpg"
+    },
+    "gallery": [
+      {
+        "image": "strandbad-wannsee-fullart.jpg",
+        "alt": "The complete Strandbad Wannsee artwork and title, without cropping."
+      }
+    ],
+    "roomCaption": "Styling example · 30 × 40 cm · Frame and decor not included",
+    "roomImage": "strandbad-wannsee-room-photo.jpg",
+    "roomVideoFit": "contain",
+    "roomAlt": "The Strandbad Wannsee print at 30 × 40 cm in an oak frame on a living-room wall. Frame and decor are not included.",
+    "roomVideoUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/room/strandbad-wannsee.mp4",
+    "roomVideoPosterUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/room/strandbad-wannsee-poster.jpg",
+    "roomVideoThumbnailUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/room/strandbad-wannsee-thumb.jpg"
+  },
+  {
+    "id": "ed-digital-14-strandbad-wannsee",
+    "name": "Strandbad Wannsee Printable Poster",
+    "place": "Wannsee · The Strandkorb",
+    "image": "strandbad-wannsee-fullart.jpg",
+    "alt": "Illustrated low view from the sand at Strandbad Wannsee, with a white hooded wicker Strandkorb in the foreground, calm water, a small sail, the opposite tree line and the title Strandbad Wannsee.",
+    "typeLine": "DIGITAL DOWNLOAD · 30 × 40 CM",
+    "wixProductId": "779f3d9f-bca0-86ac-0ad1-75299ca1c8a4",
+    "kind": "digital",
+    "deliveryNote": "Digital download · 1 JPEG print file and a printing guide. No physical item.",
+    "deliveryDetails": "Your download includes one 3:4 sRGB JPEG, 3543 × 4724 px at 300 dpi for 30 × 40 cm, and a printing guide. The same file prints without cropping at 45 × 60 cm and 60 × 80 cm, with softer detail at larger sizes. No physical poster, frame or decor is included.",
+    "group": "everyday",
+    "alternativeProductId": "b681965b-308b-445f-bb89-b16b08ebb8ca",
+    "visualCreditsHtml": "<p>Visual reference: a photograph of Strandbad Wannsee (the berlin.de page on Strandbad Wannsee). The beach, baskets, water and light were artistically reinterpreted; this is not a reproduction of the photograph.</p><p>Place facts: German Wikipedia, Strandbad Wannsee.</p>",
+    "sizeImages": {
+      "30x40 cm": "strandbad-wannsee-30x40.jpg"
+    },
+    "gallery": [
+      {
+        "image": "strandbad-wannsee-30x40.jpg",
+        "alt": "Complete artwork at 30 x 40 cm."
+      }
+    ],
+    "roomCaption": "Styling example · 30 × 40 cm · Printable files only · Frame and decor not included",
+    "roomImage": "strandbad-wannsee-room-photo.jpg",
+    "roomVideoFit": "contain",
+    "roomAlt": "The Strandbad Wannsee print at 30 × 40 cm in an oak frame on a living-room wall. Frame and decor are not included.",
+    "roomVideoUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/room/strandbad-wannsee.mp4",
+    "roomVideoPosterUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/room/strandbad-wannsee-poster.jpg",
+    "roomVideoThumbnailUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/room/strandbad-wannsee-thumb.jpg"
+  },
+  {
+    "id": "ed-print-15-haus-der-kulturen-der-welt",
+    "name": "Haus der Kulturen der Welt",
+    "place": "Tiergarten · Beneath the shell",
+    "image": "hkw-fullart.jpg",
+    "alt": "Illustrated close view of the curved cream roof of the Haus der Kulturen der Welt over an orange wall, with a concrete stair, one small figure and the title Haus der Kulturen der Welt.",
+    "typeLine": "PREMIUM MATTE · 200 GSM · UNFRAMED",
+    "wixProductId": "1016e56b-e167-478a-b114-d036e7da40c3",
+    "group": "everyday",
+    "alternativeProductId": "3eff5963-0bde-2d0e-6013-da58ee1c44e4",
+    "visualCreditsHtml": "<p>Visual reference: a photograph of Haus der Kulturen der Welt (the building page on hkw.de). The roof, stair, wall and light were artistically reinterpreted; this is not a reproduction of the photograph.</p><p>Place facts: German and English Wikipedia, Haus der Kulturen der Welt.</p>",
+    "sizeImages": {
+      "30x40 cm": "hkw-30x40.jpg",
+      "50x70 cm": "hkw-50x70.jpg"
+    },
+    "gallery": [
+      {
+        "image": "hkw-fullart.jpg",
+        "alt": "The complete Haus der Kulturen der Welt artwork and title, without cropping."
+      }
+    ],
+    "roomCaption": "Styling example · 30 × 40 cm · Frame and decor not included",
+    "roomImage": "hkw-room-photo.jpg",
+    "roomVideoFit": "contain",
+    "roomAlt": "The Haus der Kulturen der Welt print at 30 × 40 cm in an oak frame on a living-room wall. Frame and decor are not included.",
+    "roomVideoUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/room/hkw.mp4",
+    "roomVideoPosterUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/room/hkw-poster.jpg",
+    "roomVideoThumbnailUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/room/hkw-thumb.jpg"
+  },
+  {
+    "id": "ed-digital-15-haus-der-kulturen-der-welt",
+    "name": "Haus der Kulturen der Welt Printable Poster",
+    "place": "Tiergarten · Beneath the shell",
+    "image": "hkw-fullart.jpg",
+    "alt": "Illustrated close view of the curved cream roof of the Haus der Kulturen der Welt over an orange wall, with a concrete stair, one small figure and the title Haus der Kulturen der Welt.",
+    "typeLine": "DIGITAL DOWNLOAD · 30 × 40 CM",
+    "wixProductId": "3eff5963-0bde-2d0e-6013-da58ee1c44e4",
+    "kind": "digital",
+    "deliveryNote": "Digital download · 1 JPEG print file and a printing guide. No physical item.",
+    "deliveryDetails": "Your download includes one 3:4 sRGB JPEG, 3543 × 4724 px at 300 dpi for 30 × 40 cm, and a printing guide. The same file prints without cropping at 45 × 60 cm and 60 × 80 cm, with softer detail at larger sizes. No physical poster, frame or decor is included.",
+    "group": "everyday",
+    "alternativeProductId": "1016e56b-e167-478a-b114-d036e7da40c3",
+    "visualCreditsHtml": "<p>Visual reference: a photograph of Haus der Kulturen der Welt (the building page on hkw.de). The roof, stair, wall and light were artistically reinterpreted; this is not a reproduction of the photograph.</p><p>Place facts: German and English Wikipedia, Haus der Kulturen der Welt.</p>",
+    "sizeImages": {
+      "30x40 cm": "hkw-30x40.jpg"
+    },
+    "gallery": [
+      {
+        "image": "hkw-30x40.jpg",
+        "alt": "Complete artwork at 30 x 40 cm."
+      }
+    ],
+    "roomCaption": "Styling example · 30 × 40 cm · Printable files only · Frame and decor not included",
+    "roomImage": "hkw-room-photo.jpg",
+    "roomVideoFit": "contain",
+    "roomAlt": "The Haus der Kulturen der Welt print at 30 × 40 cm in an oak frame on a living-room wall. Frame and decor are not included.",
+    "roomVideoUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/room/hkw.mp4",
+    "roomVideoPosterUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/room/hkw-poster.jpg",
+    "roomVideoThumbnailUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/room/hkw-thumb.jpg"
+  },
+  {
+    "id": "ed-print-16-bode-museum",
+    "name": "Bode-Museum",
+    "place": "Museum Island · The entrance bay",
+    "image": "bode-museum-fullart.jpg",
+    "alt": "Illustrated low view of the Bode-Museum entrance bay and dark dome from the Monbijou bridge approach, with warm stone, deep teal shadows and the title Bode-Museum.",
+    "typeLine": "PREMIUM MATTE · 200 GSM · UNFRAMED",
+    "wixProductId": "84f02433-e2fb-4e40-98c2-b6cfcc3a551f",
+    "group": "everyday",
+    "alternativeProductId": "0b292e54-c1de-1fc5-6075-080c9a1dc3ed",
+    "visualCreditsHtml": "<p>Visual reference: a photograph of Bode-Museum (the Staatliche Museen zu Berlin page on the Bode-Museum building). The entrance bay, dome and light were artistically reinterpreted; this is not a reproduction of the photograph.</p><p>Place facts: German Wikipedia, Bode-Museum, and the Staatliche Museen zu Berlin.</p>",
+    "sizeImages": {
+      "30x40 cm": "bode-museum-30x40.jpg",
+      "50x70 cm": "bode-museum-50x70.jpg"
+    },
+    "gallery": [
+      {
+        "image": "bode-museum-fullart.jpg",
+        "alt": "The complete Bode-Museum artwork and title, without cropping."
+      }
+    ],
+    "roomCaption": "Styling example · 30 × 40 cm · Frame and decor not included",
+    "roomImage": "bode-museum-room-photo.jpg",
+    "roomVideoFit": "contain",
+    "roomAlt": "The Bode-Museum print at 30 × 40 cm in an oak frame on a living-room wall. Frame and decor are not included.",
+    "roomVideoUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/room/bode-museum.mp4",
+    "roomVideoPosterUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/room/bode-museum-poster.jpg",
+    "roomVideoThumbnailUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/room/bode-museum-thumb.jpg"
+  },
+  {
+    "id": "ed-digital-16-bode-museum",
+    "name": "Bode-Museum Printable Poster",
+    "place": "Museum Island · The entrance bay",
+    "image": "bode-museum-fullart.jpg",
+    "alt": "Illustrated low view of the Bode-Museum entrance bay and dark dome from the Monbijou bridge approach, with warm stone, deep teal shadows and the title Bode-Museum.",
+    "typeLine": "DIGITAL DOWNLOAD · 30 × 40 CM",
+    "wixProductId": "0b292e54-c1de-1fc5-6075-080c9a1dc3ed",
+    "kind": "digital",
+    "deliveryNote": "Digital download · 1 JPEG print file and a printing guide. No physical item.",
+    "deliveryDetails": "Your download includes one 3:4 sRGB JPEG, 3543 × 4724 px at 300 dpi for 30 × 40 cm, and a printing guide. The same file prints without cropping at 45 × 60 cm and 60 × 80 cm, with softer detail at larger sizes. No physical poster, frame or decor is included.",
+    "group": "everyday",
+    "alternativeProductId": "84f02433-e2fb-4e40-98c2-b6cfcc3a551f",
+    "visualCreditsHtml": "<p>Visual reference: a photograph of Bode-Museum (the Staatliche Museen zu Berlin page on the Bode-Museum building). The entrance bay, dome and light were artistically reinterpreted; this is not a reproduction of the photograph.</p><p>Place facts: German Wikipedia, Bode-Museum, and the Staatliche Museen zu Berlin.</p>",
+    "sizeImages": {
+      "30x40 cm": "bode-museum-30x40.jpg"
+    },
+    "gallery": [
+      {
+        "image": "bode-museum-30x40.jpg",
+        "alt": "Complete artwork at 30 x 40 cm."
+      }
+    ],
+    "roomCaption": "Styling example · 30 × 40 cm · Printable files only · Frame and decor not included",
+    "roomImage": "bode-museum-room-photo.jpg",
+    "roomVideoFit": "contain",
+    "roomAlt": "The Bode-Museum print at 30 × 40 cm in an oak frame on a living-room wall. Frame and decor are not included.",
+    "roomVideoUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/room/bode-museum.mp4",
+    "roomVideoPosterUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/room/bode-museum-poster.jpg",
+    "roomVideoThumbnailUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/room/bode-museum-thumb.jpg"
+  },
+  {
+    "id": "ed-print-17-kulturbrauerei",
+    "name": "Kulturbrauerei",
+    "place": "Prenzlauer Berg · The Maschinenhaus",
+    "image": "kulturbrauerei-fullart.jpg",
+    "alt": "Illustrated low view of the red brick Maschinenhaus of the Kulturbrauerei with arched green-framed windows, a chimney behind and the title Kulturbrauerei.",
+    "typeLine": "PREMIUM MATTE · 200 GSM · UNFRAMED",
+    "wixProductId": "876c210a-788e-491f-930a-7602b9d3d0bf",
+    "group": "everyday",
+    "alternativeProductId": "71614b86-56e8-02b2-840d-43a09de3f883",
+    "visualCreditsHtml": "<p>Visual reference: a photograph of Kulturbrauerei (the site plan page on kulturbrauerei.de). The brickwork, arches and light were artistically reinterpreted; this is not a reproduction of the photograph.</p><p>Place facts: German Wikipedia, Kulturbrauerei.</p>",
+    "sizeImages": {
+      "30x40 cm": "kulturbrauerei-30x40.jpg",
+      "50x70 cm": "kulturbrauerei-50x70.jpg"
+    },
+    "gallery": [
+      {
+        "image": "kulturbrauerei-fullart.jpg",
+        "alt": "The complete Kulturbrauerei artwork and title, without cropping."
+      }
+    ],
+    "roomCaption": "Styling example · 30 × 40 cm · Frame and decor not included",
+    "roomImage": "kulturbrauerei-room-photo.jpg",
+    "roomVideoFit": "contain",
+    "roomAlt": "The Kulturbrauerei print at 30 × 40 cm in an oak frame on a living-room wall. Frame and decor are not included.",
+    "roomVideoUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/room/kulturbrauerei.mp4",
+    "roomVideoPosterUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/room/kulturbrauerei-poster.jpg",
+    "roomVideoThumbnailUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/room/kulturbrauerei-thumb.jpg"
+  },
+  {
+    "id": "ed-digital-17-kulturbrauerei",
+    "name": "Kulturbrauerei Printable Poster",
+    "place": "Prenzlauer Berg · The Maschinenhaus",
+    "image": "kulturbrauerei-fullart.jpg",
+    "alt": "Illustrated low view of the red brick Maschinenhaus of the Kulturbrauerei with arched green-framed windows, a chimney behind and the title Kulturbrauerei.",
+    "typeLine": "DIGITAL DOWNLOAD · 30 × 40 CM",
+    "wixProductId": "71614b86-56e8-02b2-840d-43a09de3f883",
+    "kind": "digital",
+    "deliveryNote": "Digital download · 1 JPEG print file and a printing guide. No physical item.",
+    "deliveryDetails": "Your download includes one 3:4 sRGB JPEG, 3543 × 4724 px at 300 dpi for 30 × 40 cm, and a printing guide. The same file prints without cropping at 45 × 60 cm and 60 × 80 cm, with softer detail at larger sizes. No physical poster, frame or decor is included.",
+    "group": "everyday",
+    "alternativeProductId": "876c210a-788e-491f-930a-7602b9d3d0bf",
+    "visualCreditsHtml": "<p>Visual reference: a photograph of Kulturbrauerei (the site plan page on kulturbrauerei.de). The brickwork, arches and light were artistically reinterpreted; this is not a reproduction of the photograph.</p><p>Place facts: German Wikipedia, Kulturbrauerei.</p>",
+    "sizeImages": {
+      "30x40 cm": "kulturbrauerei-30x40.jpg"
+    },
+    "gallery": [
+      {
+        "image": "kulturbrauerei-30x40.jpg",
+        "alt": "Complete artwork at 30 x 40 cm."
+      }
+    ],
+    "roomCaption": "Styling example · 30 × 40 cm · Printable files only · Frame and decor not included",
+    "roomImage": "kulturbrauerei-room-photo.jpg",
+    "roomVideoFit": "contain",
+    "roomAlt": "The Kulturbrauerei print at 30 × 40 cm in an oak frame on a living-room wall. Frame and decor are not included.",
+    "roomVideoUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/room/kulturbrauerei.mp4",
+    "roomVideoPosterUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/room/kulturbrauerei-poster.jpg",
+    "roomVideoThumbnailUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/room/kulturbrauerei-thumb.jpg"
+  },
+  {
+    "id": "ed-print-18-olympiastadion",
+    "name": "Olympiastadion",
+    "place": "Westend · The blue track",
+    "image": "olympiastadion-fullart.jpg",
+    "alt": "Illustrated very low view from the blue running track of the Olympiastadion, with three white lane lines, the oval stands in the distance and the title Olympiastadion.",
+    "typeLine": "PREMIUM MATTE · 200 GSM · UNFRAMED",
+    "wixProductId": "bf9e1d17-a768-4a18-a6e7-89567d31fca8",
+    "group": "everyday",
+    "alternativeProductId": "77c89873-6ece-ec49-5444-2acf29cc85e1",
+    "visualCreditsHtml": "<p>Visual reference: a photograph of Olympiastadion (the page on olympiastadion.berlin). The track, stands and light were artistically reinterpreted; this is not a reproduction of the photograph.</p><p>Place facts: German and English Wikipedia, Olympiastadion Berlin.</p>",
+    "sizeImages": {
+      "30x40 cm": "olympiastadion-30x40.jpg",
+      "50x70 cm": "olympiastadion-50x70.jpg"
+    },
+    "gallery": [
+      {
+        "image": "olympiastadion-fullart.jpg",
+        "alt": "The complete Olympiastadion artwork and title, without cropping."
+      }
+    ],
+    "roomCaption": "Styling example · 30 × 40 cm · Frame and decor not included",
+    "roomImage": "olympiastadion-room-photo.jpg",
+    "roomVideoFit": "contain",
+    "roomAlt": "The Olympiastadion print at 30 × 40 cm in an oak frame on a living-room wall. Frame and decor are not included.",
+    "roomVideoUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/room/olympiastadion.mp4",
+    "roomVideoPosterUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/room/olympiastadion-poster.jpg",
+    "roomVideoThumbnailUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/room/olympiastadion-thumb.jpg"
+  },
+  {
+    "id": "ed-digital-18-olympiastadion",
+    "name": "Olympiastadion Printable Poster",
+    "place": "Westend · The blue track",
+    "image": "olympiastadion-fullart.jpg",
+    "alt": "Illustrated very low view from the blue running track of the Olympiastadion, with three white lane lines, the oval stands in the distance and the title Olympiastadion.",
+    "typeLine": "DIGITAL DOWNLOAD · 30 × 40 CM",
+    "wixProductId": "77c89873-6ece-ec49-5444-2acf29cc85e1",
+    "kind": "digital",
+    "deliveryNote": "Digital download · 1 JPEG print file and a printing guide. No physical item.",
+    "deliveryDetails": "Your download includes one 3:4 sRGB JPEG, 3543 × 4724 px at 300 dpi for 30 × 40 cm, and a printing guide. The same file prints without cropping at 45 × 60 cm and 60 × 80 cm, with softer detail at larger sizes. No physical poster, frame or decor is included.",
+    "group": "everyday",
+    "alternativeProductId": "bf9e1d17-a768-4a18-a6e7-89567d31fca8",
+    "visualCreditsHtml": "<p>Visual reference: a photograph of Olympiastadion (the page on olympiastadion.berlin). The track, stands and light were artistically reinterpreted; this is not a reproduction of the photograph.</p><p>Place facts: German and English Wikipedia, Olympiastadion Berlin.</p>",
+    "sizeImages": {
+      "30x40 cm": "olympiastadion-30x40.jpg"
+    },
+    "gallery": [
+      {
+        "image": "olympiastadion-30x40.jpg",
+        "alt": "Complete artwork at 30 x 40 cm."
+      }
+    ],
+    "roomCaption": "Styling example · 30 × 40 cm · Printable files only · Frame and decor not included",
+    "roomImage": "olympiastadion-room-photo.jpg",
+    "roomVideoFit": "contain",
+    "roomAlt": "The Olympiastadion print at 30 × 40 cm in an oak frame on a living-room wall. Frame and decor are not included.",
+    "roomVideoUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/room/olympiastadion.mp4",
+    "roomVideoPosterUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/room/olympiastadion-poster.jpg",
+    "roomVideoThumbnailUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/room/olympiastadion-thumb.jpg"
+  },
+  {
+    "id": "ed-print-19-maerchenbrunnen",
+    "name": "Märchenbrunnen",
+    "place": "Friedrichshain · Gretel",
+    "image": "maerchenbrunnen-fullart.jpg",
+    "alt": "Illustrated low close view of the Gretel figure at the Märchenbrunnen, with the curved basin edge, white water, pale arches behind and the title Märchenbrunnen.",
+    "typeLine": "PREMIUM MATTE · 200 GSM · UNFRAMED",
+    "wixProductId": "4be10620-241f-4b76-9be1-2d5100730374",
+    "group": "everyday",
+    "alternativeProductId": "5d1624a6-5571-e5b4-b0ab-f97f067fb270",
+    "visualCreditsHtml": "<p>Visual reference: a photograph of Märchenbrunnen (the Landesdenkmalamt Berlin page on the Märchenbrunnen). The figure, basin and light were artistically reinterpreted; this is not a reproduction of the photograph.</p><p>Place facts: German Wikipedia, Märchenbrunnen im Volkspark Friedrichshain.</p>",
+    "sizeImages": {
+      "30x40 cm": "maerchenbrunnen-30x40.jpg",
+      "50x70 cm": "maerchenbrunnen-50x70.jpg"
+    },
+    "gallery": [
+      {
+        "image": "maerchenbrunnen-fullart.jpg",
+        "alt": "The complete Märchenbrunnen artwork and title, without cropping."
+      }
+    ],
+    "roomCaption": "Styling example · 30 × 40 cm · Frame and decor not included",
+    "roomImage": "maerchenbrunnen-room-photo.jpg",
+    "roomVideoFit": "contain",
+    "roomAlt": "The Märchenbrunnen print at 30 × 40 cm in an oak frame on a living-room wall. Frame and decor are not included.",
+    "roomVideoUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/room/maerchenbrunnen.mp4",
+    "roomVideoPosterUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/room/maerchenbrunnen-poster.jpg",
+    "roomVideoThumbnailUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/room/maerchenbrunnen-thumb.jpg"
+  },
+  {
+    "id": "ed-digital-19-maerchenbrunnen",
+    "name": "Märchenbrunnen Printable Poster",
+    "place": "Friedrichshain · Gretel",
+    "image": "maerchenbrunnen-fullart.jpg",
+    "alt": "Illustrated low close view of the Gretel figure at the Märchenbrunnen, with the curved basin edge, white water, pale arches behind and the title Märchenbrunnen.",
+    "typeLine": "DIGITAL DOWNLOAD · 30 × 40 CM",
+    "wixProductId": "5d1624a6-5571-e5b4-b0ab-f97f067fb270",
+    "kind": "digital",
+    "deliveryNote": "Digital download · 1 JPEG print file and a printing guide. No physical item.",
+    "deliveryDetails": "Your download includes one 3:4 sRGB JPEG, 3543 × 4724 px at 300 dpi for 30 × 40 cm, and a printing guide. The same file prints without cropping at 45 × 60 cm and 60 × 80 cm, with softer detail at larger sizes. No physical poster, frame or decor is included.",
+    "group": "everyday",
+    "alternativeProductId": "4be10620-241f-4b76-9be1-2d5100730374",
+    "visualCreditsHtml": "<p>Visual reference: a photograph of Märchenbrunnen (the Landesdenkmalamt Berlin page on the Märchenbrunnen). The figure, basin and light were artistically reinterpreted; this is not a reproduction of the photograph.</p><p>Place facts: German Wikipedia, Märchenbrunnen im Volkspark Friedrichshain.</p>",
+    "sizeImages": {
+      "30x40 cm": "maerchenbrunnen-30x40.jpg"
+    },
+    "gallery": [
+      {
+        "image": "maerchenbrunnen-30x40.jpg",
+        "alt": "Complete artwork at 30 x 40 cm."
+      }
+    ],
+    "roomCaption": "Styling example · 30 × 40 cm · Printable files only · Frame and decor not included",
+    "roomImage": "maerchenbrunnen-room-photo.jpg",
+    "roomVideoFit": "contain",
+    "roomAlt": "The Märchenbrunnen print at 30 × 40 cm in an oak frame on a living-room wall. Frame and decor are not included.",
+    "roomVideoUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/room/maerchenbrunnen.mp4",
+    "roomVideoPosterUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/room/maerchenbrunnen-poster.jpg",
+    "roomVideoThumbnailUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/room/maerchenbrunnen-thumb.jpg"
+  },
+  {
+    "id": "ed-print-20-mueggelturm",
+    "name": "Müggelturm",
+    "place": "Müggelberge · Above the forest",
+    "image": "mueggelturm-fullart.jpg",
+    "alt": "Illustrated distant view of the pale Müggelturm rising above pine forest and layered mist, with a wide pale sky and the title Müggelturm.",
+    "typeLine": "PREMIUM MATTE · 200 GSM · UNFRAMED",
+    "wixProductId": "b75a9e57-d01e-4828-8743-14185be8fd34",
+    "group": "everyday",
+    "alternativeProductId": "8ceab74c-02da-dc40-e083-d219d9879e7a",
+    "visualCreditsHtml": "<p>Visual reference: a photograph of Müggelturm (the berlin.de page on the Müggelturm). The tower, forest, mist and light were artistically reinterpreted; this is not a reproduction of the photograph.</p><p>Place facts: German Wikipedia, Müggelturm.</p>",
+    "sizeImages": {
+      "30x40 cm": "mueggelturm-30x40.jpg",
+      "50x70 cm": "mueggelturm-50x70.jpg"
+    },
+    "gallery": [
+      {
+        "image": "mueggelturm-fullart.jpg",
+        "alt": "The complete Müggelturm artwork and title, without cropping."
+      }
+    ],
+    "roomCaption": "Styling example · 30 × 40 cm · Frame and decor not included",
+    "roomImage": "mueggelturm-room-photo.jpg",
+    "roomVideoFit": "contain",
+    "roomAlt": "The Müggelturm print at 30 × 40 cm in an oak frame on a living-room wall. Frame and decor are not included.",
+    "roomVideoUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/room/mueggelturm.mp4",
+    "roomVideoPosterUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/room/mueggelturm-poster.jpg",
+    "roomVideoThumbnailUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/room/mueggelturm-thumb.jpg"
+  },
+  {
+    "id": "ed-digital-20-mueggelturm",
+    "name": "Müggelturm Printable Poster",
+    "place": "Müggelberge · Above the forest",
+    "image": "mueggelturm-fullart.jpg",
+    "alt": "Illustrated distant view of the pale Müggelturm rising above pine forest and layered mist, with a wide pale sky and the title Müggelturm.",
+    "typeLine": "DIGITAL DOWNLOAD · 30 × 40 CM",
+    "wixProductId": "8ceab74c-02da-dc40-e083-d219d9879e7a",
+    "kind": "digital",
+    "deliveryNote": "Digital download · 1 JPEG print file and a printing guide. No physical item.",
+    "deliveryDetails": "Your download includes one 3:4 sRGB JPEG, 3543 × 4724 px at 300 dpi for 30 × 40 cm, and a printing guide. The same file prints without cropping at 45 × 60 cm and 60 × 80 cm, with softer detail at larger sizes. No physical poster, frame or decor is included.",
+    "group": "everyday",
+    "alternativeProductId": "b75a9e57-d01e-4828-8743-14185be8fd34",
+    "visualCreditsHtml": "<p>Visual reference: a photograph of Müggelturm (the berlin.de page on the Müggelturm). The tower, forest, mist and light were artistically reinterpreted; this is not a reproduction of the photograph.</p><p>Place facts: German Wikipedia, Müggelturm.</p>",
+    "sizeImages": {
+      "30x40 cm": "mueggelturm-30x40.jpg"
+    },
+    "gallery": [
+      {
+        "image": "mueggelturm-30x40.jpg",
+        "alt": "Complete artwork at 30 x 40 cm."
+      }
+    ],
+    "roomCaption": "Styling example · 30 × 40 cm · Printable files only · Frame and decor not included",
+    "roomImage": "mueggelturm-room-photo.jpg",
+    "roomVideoFit": "contain",
+    "roomAlt": "The Müggelturm print at 30 × 40 cm in an oak frame on a living-room wall. Frame and decor are not included.",
+    "roomVideoUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/room/mueggelturm.mp4",
+    "roomVideoPosterUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/room/mueggelturm-poster.jpg",
+    "roomVideoThumbnailUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/room/mueggelturm-thumb.jpg"
+  },
+  {
+    "id": "ed-print-21-philharmonie",
+    "name": "Philharmonie",
+    "place": "Tiergarten · The golden hall",
+    "image": "philharmonie-fullart.jpg",
+    "alt": "Illustrated wide view of the gold-clad Berliner Philharmonie from its forecourt, with asymmetric roof peaks, a low white canopy, a powder blue sky and the title Philharmonie Berlin.",
+    "typeLine": "PREMIUM MATTE · 200 GSM · UNFRAMED",
+    "wixProductId": "53bdf281-5909-4785-b1a7-5e5d3dabcc62",
+    "group": "everyday",
+    "alternativeProductId": "b64d22c9-2596-8feb-87e2-b1d2beec3cc9",
+    "visualCreditsHtml": "<p>Visual reference: a photograph of Philharmonie Berlin (the Berliner Philharmoniker page on the Philharmonie). The roof, facade and light were artistically reinterpreted; this is not a reproduction of the photograph.</p><p>Place facts: German Wikipedia, Berliner Philharmonie.</p>",
+    "sizeImages": {
+      "30x40 cm": "philharmonie-30x40.jpg",
+      "50x70 cm": "philharmonie-50x70.jpg"
+    },
+    "gallery": [
+      {
+        "image": "philharmonie-fullart.jpg",
+        "alt": "The complete Philharmonie artwork and title, without cropping."
+      }
+    ],
+    "roomCaption": "Styling example · 30 × 40 cm · Frame and decor not included",
+    "roomImage": "philharmonie-room-photo.jpg",
+    "roomVideoFit": "contain",
+    "roomAlt": "The Philharmonie print at 30 × 40 cm in an oak frame on a living-room wall. Frame and decor are not included.",
+    "roomVideoUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/room/philharmonie.mp4",
+    "roomVideoPosterUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/room/philharmonie-poster.jpg",
+    "roomVideoThumbnailUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/room/philharmonie-thumb.jpg"
+  },
+  {
+    "id": "ed-digital-21-philharmonie",
+    "name": "Philharmonie Printable Poster",
+    "place": "Tiergarten · The golden hall",
+    "image": "philharmonie-fullart.jpg",
+    "alt": "Illustrated wide view of the gold-clad Berliner Philharmonie from its forecourt, with asymmetric roof peaks, a low white canopy, a powder blue sky and the title Philharmonie Berlin.",
+    "typeLine": "DIGITAL DOWNLOAD · 30 × 40 CM",
+    "wixProductId": "b64d22c9-2596-8feb-87e2-b1d2beec3cc9",
+    "kind": "digital",
+    "deliveryNote": "Digital download · 1 JPEG print file and a printing guide. No physical item.",
+    "deliveryDetails": "Your download includes one 3:4 sRGB JPEG, 3543 × 4724 px at 300 dpi for 30 × 40 cm, and a printing guide. The same file prints without cropping at 45 × 60 cm and 60 × 80 cm, with softer detail at larger sizes. No physical poster, frame or decor is included.",
+    "group": "everyday",
+    "alternativeProductId": "53bdf281-5909-4785-b1a7-5e5d3dabcc62",
+    "visualCreditsHtml": "<p>Visual reference: a photograph of Philharmonie Berlin (the Berliner Philharmoniker page on the Philharmonie). The roof, facade and light were artistically reinterpreted; this is not a reproduction of the photograph.</p><p>Place facts: German Wikipedia, Berliner Philharmonie.</p>",
+    "sizeImages": {
+      "30x40 cm": "philharmonie-30x40.jpg"
+    },
+    "gallery": [
+      {
+        "image": "philharmonie-30x40.jpg",
+        "alt": "Complete artwork at 30 x 40 cm."
+      }
+    ],
+    "roomCaption": "Styling example · 30 × 40 cm · Printable files only · Frame and decor not included",
+    "roomImage": "philharmonie-room-photo.jpg",
+    "roomVideoFit": "contain",
+    "roomAlt": "The Philharmonie print at 30 × 40 cm in an oak frame on a living-room wall. Frame and decor are not included.",
+    "roomVideoUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/room/philharmonie.mp4",
+    "roomVideoPosterUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/room/philharmonie-poster.jpg",
+    "roomVideoThumbnailUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/room/philharmonie-thumb.jpg"
+  },
+  {
+    "id": "ed-print-22-rummelsburger-bucht",
+    "name": "Rummelsburger Bucht",
+    "place": "Rummelsburg · Out on the water",
+    "image": "rummelsburger-bucht-fullart.jpg",
+    "alt": "Illustrated low view behind an orange-red kayak on rippling water in the Rummelsburger Bucht, with the opposite shore, trees, a small tower and the title Rummelsburger Bucht.",
+    "typeLine": "PREMIUM MATTE · 200 GSM · UNFRAMED",
+    "wixProductId": "92b66616-e550-4fe2-b267-8193d0e63603",
+    "group": "everyday",
+    "alternativeProductId": "bd1697e9-3bc4-a234-17f7-a49af527e71b",
+    "visualCreditsHtml": "<p>Visual reference: a photograph of Rummelsburger Bucht (the berlin.de page on the Rummelsburger See). The kayak, water, shore and light were artistically reinterpreted; this is not a reproduction of the photograph.</p><p>Place facts: German Wikipedia, Rummelsburger Bucht.</p>",
+    "sizeImages": {
+      "30x40 cm": "rummelsburger-bucht-30x40.jpg",
+      "50x70 cm": "rummelsburger-bucht-50x70.jpg"
+    },
+    "gallery": [
+      {
+        "image": "rummelsburger-bucht-fullart.jpg",
+        "alt": "The complete Rummelsburger Bucht artwork and title, without cropping."
+      }
+    ],
+    "roomCaption": "Styling example · 30 × 40 cm · Frame and decor not included",
+    "roomImage": "rummelsburger-bucht-room-photo.jpg",
+    "roomVideoFit": "contain",
+    "roomAlt": "The Rummelsburger Bucht print at 30 × 40 cm in an oak frame on a living-room wall. Frame and decor are not included.",
+    "roomVideoUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/room/rummelsburger-bucht.mp4",
+    "roomVideoPosterUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/room/rummelsburger-bucht-poster.jpg",
+    "roomVideoThumbnailUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/room/rummelsburger-bucht-thumb.jpg"
+  },
+  {
+    "id": "ed-digital-22-rummelsburger-bucht",
+    "name": "Rummelsburger Bucht Printable Poster",
+    "place": "Rummelsburg · Out on the water",
+    "image": "rummelsburger-bucht-fullart.jpg",
+    "alt": "Illustrated low view behind an orange-red kayak on rippling water in the Rummelsburger Bucht, with the opposite shore, trees, a small tower and the title Rummelsburger Bucht.",
+    "typeLine": "DIGITAL DOWNLOAD · 30 × 40 CM",
+    "wixProductId": "bd1697e9-3bc4-a234-17f7-a49af527e71b",
+    "kind": "digital",
+    "deliveryNote": "Digital download · 1 JPEG print file and a printing guide. No physical item.",
+    "deliveryDetails": "Your download includes one 3:4 sRGB JPEG, 3543 × 4724 px at 300 dpi for 30 × 40 cm, and a printing guide. The same file prints without cropping at 45 × 60 cm and 60 × 80 cm, with softer detail at larger sizes. No physical poster, frame or decor is included.",
+    "group": "everyday",
+    "alternativeProductId": "92b66616-e550-4fe2-b267-8193d0e63603",
+    "visualCreditsHtml": "<p>Visual reference: a photograph of Rummelsburger Bucht (the berlin.de page on the Rummelsburger See). The kayak, water, shore and light were artistically reinterpreted; this is not a reproduction of the photograph.</p><p>Place facts: German Wikipedia, Rummelsburger Bucht.</p>",
+    "sizeImages": {
+      "30x40 cm": "rummelsburger-bucht-30x40.jpg"
+    },
+    "gallery": [
+      {
+        "image": "rummelsburger-bucht-30x40.jpg",
+        "alt": "Complete artwork at 30 x 40 cm."
+      }
+    ],
+    "roomCaption": "Styling example · 30 × 40 cm · Printable files only · Frame and decor not included",
+    "roomImage": "rummelsburger-bucht-room-photo.jpg",
+    "roomVideoFit": "contain",
+    "roomAlt": "The Rummelsburger Bucht print at 30 × 40 cm in an oak frame on a living-room wall. Frame and decor are not included.",
+    "roomVideoUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/room/rummelsburger-bucht.mp4",
+    "roomVideoPosterUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/room/rummelsburger-bucht-poster.jpg",
+    "roomVideoThumbnailUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/room/rummelsburger-bucht-thumb.jpg"
+  },
+  {
+    "id": "ed-print-23-neue-nationalgalerie",
+    "name": "Neue Nationalgalerie",
+    "place": "Kulturforum · The steel roof",
+    "image": "neue-nationalgalerie-fullart.jpg",
+    "alt": "Illustrated corner view of the flat steel roof, glass pavilion and slim columns of the Neue Nationalgalerie in graphite and cream, with the title Neue Nationalgalerie.",
+    "typeLine": "PREMIUM MATTE · 200 GSM · UNFRAMED",
+    "wixProductId": "54340232-e832-487c-879f-f90c5b55addf",
+    "group": "everyday",
+    "alternativeProductId": "2c714cef-cc9b-4241-e9c2-8c1f332dfc03",
+    "visualCreditsHtml": "<p>Visual reference: a photograph of Neue Nationalgalerie (the Staatliche Museen zu Berlin page on the Neue Nationalgalerie). The roof, glass and columns were artistically reinterpreted; this is not a reproduction of the photograph.</p><p>Place facts: German Wikipedia, Neue Nationalgalerie.</p>",
+    "sizeImages": {
+      "30x40 cm": "neue-nationalgalerie-30x40.jpg",
+      "50x70 cm": "neue-nationalgalerie-50x70.jpg"
+    },
+    "gallery": [
+      {
+        "image": "neue-nationalgalerie-fullart.jpg",
+        "alt": "The complete Neue Nationalgalerie artwork and title, without cropping."
+      }
+    ],
+    "roomCaption": "Styling example · 30 × 40 cm · Frame and decor not included",
+    "roomImage": "neue-nationalgalerie-room-photo.jpg",
+    "roomVideoFit": "contain",
+    "roomAlt": "The Neue Nationalgalerie print at 30 × 40 cm in an oak frame on a living-room wall. Frame and decor are not included.",
+    "roomVideoUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/room/neue-nationalgalerie.mp4",
+    "roomVideoPosterUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/room/neue-nationalgalerie-poster.jpg",
+    "roomVideoThumbnailUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/room/neue-nationalgalerie-thumb.jpg"
+  },
+  {
+    "id": "ed-digital-23-neue-nationalgalerie",
+    "name": "Neue Nationalgalerie Printable Poster",
+    "place": "Kulturforum · The steel roof",
+    "image": "neue-nationalgalerie-fullart.jpg",
+    "alt": "Illustrated corner view of the flat steel roof, glass pavilion and slim columns of the Neue Nationalgalerie in graphite and cream, with the title Neue Nationalgalerie.",
+    "typeLine": "DIGITAL DOWNLOAD · 30 × 40 CM",
+    "wixProductId": "2c714cef-cc9b-4241-e9c2-8c1f332dfc03",
+    "kind": "digital",
+    "deliveryNote": "Digital download · 1 JPEG print file and a printing guide. No physical item.",
+    "deliveryDetails": "Your download includes one 3:4 sRGB JPEG, 3543 × 4724 px at 300 dpi for 30 × 40 cm, and a printing guide. The same file prints without cropping at 45 × 60 cm and 60 × 80 cm, with softer detail at larger sizes. No physical poster, frame or decor is included.",
+    "group": "everyday",
+    "alternativeProductId": "54340232-e832-487c-879f-f90c5b55addf",
+    "visualCreditsHtml": "<p>Visual reference: a photograph of Neue Nationalgalerie (the Staatliche Museen zu Berlin page on the Neue Nationalgalerie). The roof, glass and columns were artistically reinterpreted; this is not a reproduction of the photograph.</p><p>Place facts: German Wikipedia, Neue Nationalgalerie.</p>",
+    "sizeImages": {
+      "30x40 cm": "neue-nationalgalerie-30x40.jpg"
+    },
+    "gallery": [
+      {
+        "image": "neue-nationalgalerie-30x40.jpg",
+        "alt": "Complete artwork at 30 x 40 cm."
+      }
+    ],
+    "roomCaption": "Styling example · 30 × 40 cm · Printable files only · Frame and decor not included",
+    "roomImage": "neue-nationalgalerie-room-photo.jpg",
+    "roomVideoFit": "contain",
+    "roomAlt": "The Neue Nationalgalerie print at 30 × 40 cm in an oak frame on a living-room wall. Frame and decor are not included.",
+    "roomVideoUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/room/neue-nationalgalerie.mp4",
+    "roomVideoPosterUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/room/neue-nationalgalerie-poster.jpg",
+    "roomVideoThumbnailUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/room/neue-nationalgalerie-thumb.jpg"
+  },
+  {
+    "id": "ed-print-24-humboldthain",
+    "name": "Humboldthain",
+    "place": "Gesundbrunnen · Dusk on the hill",
+    "image": "humboldthain-fullart.jpg",
+    "alt": "Illustrated dusk view from the Humboldthain viewpoint with a dark angular metal fence, one small figure facing the setting sun, trees below and the title Humboldthain.",
+    "typeLine": "PREMIUM MATTE · 200 GSM · UNFRAMED",
+    "wixProductId": "9ed3ca8a-f262-48eb-978b-c40f1b46a984",
+    "group": "everyday",
+    "alternativeProductId": "3d83d0fd-d03d-ba85-583d-60df20bfdf4b",
+    "visualCreditsHtml": "<p>Visual reference: a photograph of Humboldthain (the berlin.de page on the Volkspark Humboldthain). The fence, sun and trees were artistically reinterpreted; this is not a reproduction of the photograph.</p><p>Place facts: German Wikipedia, Volkspark Humboldthain, and berlin.de.</p>",
+    "sizeImages": {
+      "30x40 cm": "humboldthain-30x40.jpg",
+      "50x70 cm": "humboldthain-50x70.jpg"
+    },
+    "gallery": [
+      {
+        "image": "humboldthain-fullart.jpg",
+        "alt": "The complete Humboldthain artwork and title, without cropping."
+      }
+    ],
+    "roomCaption": "Styling example · 30 × 40 cm · Frame and decor not included",
+    "roomImage": "humboldthain-room-photo.jpg",
+    "roomVideoFit": "contain",
+    "roomAlt": "The Humboldthain print at 30 × 40 cm in an oak frame on a living-room wall. Frame and decor are not included.",
+    "roomVideoUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/room/humboldthain.mp4",
+    "roomVideoPosterUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/room/humboldthain-poster.jpg",
+    "roomVideoThumbnailUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/room/humboldthain-thumb.jpg"
+  },
+  {
+    "id": "ed-digital-24-humboldthain",
+    "name": "Humboldthain Printable Poster",
+    "place": "Gesundbrunnen · Dusk on the hill",
+    "image": "humboldthain-fullart.jpg",
+    "alt": "Illustrated dusk view from the Humboldthain viewpoint with a dark angular metal fence, one small figure facing the setting sun, trees below and the title Humboldthain.",
+    "typeLine": "DIGITAL DOWNLOAD · 30 × 40 CM",
+    "wixProductId": "3d83d0fd-d03d-ba85-583d-60df20bfdf4b",
+    "kind": "digital",
+    "deliveryNote": "Digital download · 1 JPEG print file and a printing guide. No physical item.",
+    "deliveryDetails": "Your download includes one 3:4 sRGB JPEG, 3543 × 4724 px at 300 dpi for 30 × 40 cm, and a printing guide. The same file prints without cropping at 45 × 60 cm and 60 × 80 cm, with softer detail at larger sizes. No physical poster, frame or decor is included.",
+    "group": "everyday",
+    "alternativeProductId": "9ed3ca8a-f262-48eb-978b-c40f1b46a984",
+    "visualCreditsHtml": "<p>Visual reference: a photograph of Humboldthain (the berlin.de page on the Volkspark Humboldthain). The fence, sun and trees were artistically reinterpreted; this is not a reproduction of the photograph.</p><p>Place facts: German Wikipedia, Volkspark Humboldthain, and berlin.de.</p>",
+    "sizeImages": {
+      "30x40 cm": "humboldthain-30x40.jpg"
+    },
+    "gallery": [
+      {
+        "image": "humboldthain-30x40.jpg",
+        "alt": "Complete artwork at 30 x 40 cm."
+      }
+    ],
+    "roomCaption": "Styling example · 30 × 40 cm · Printable files only · Frame and decor not included",
+    "roomImage": "humboldthain-room-photo.jpg",
+    "roomVideoFit": "contain",
+    "roomAlt": "The Humboldthain print at 30 × 40 cm in an oak frame on a living-room wall. Frame and decor are not included.",
+    "roomVideoUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/room/humboldthain.mp4",
+    "roomVideoPosterUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/room/humboldthain-poster.jpg",
+    "roomVideoThumbnailUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/room/humboldthain-thumb.jpg"
+  },
+  {
+    "id": "ed-print-27-kreuzberg",
+    "name": "Kreuzberg",
+    "place": "Kreuzberg · The gas lamp",
+    "image": "kreuzberg-chamissoplatz-fullart.jpg",
+    "alt": "Illustrated street-level view of a cast-iron gas lamp at Chamissoplatz with a long stucco facade behind it, cobbles, one parked bicycle and the title Kreuzberg.",
+    "typeLine": "PREMIUM MATTE · 200 GSM · UNFRAMED",
+    "wixProductId": "368cfc38-c970-4c71-9ace-1f999e922213",
+    "group": "everyday",
+    "alternativeProductId": "dac91255-469c-5e8d-26ae-e7df2a7af794",
+    "visualCreditsHtml": "<p>Visual reference: a photograph of Kreuzberg (the berlin.de page on Chamissoplatz). The lamp, facade and cobbles were artistically reinterpreted; this is not a reproduction of the photograph.</p><p>Place facts: German Wikipedia, Chamissoplatz, and berlin.de.</p>",
+    "sizeImages": {
+      "30x40 cm": "kreuzberg-chamissoplatz-30x40.jpg",
+      "50x70 cm": "kreuzberg-chamissoplatz-50x70.jpg"
+    },
+    "gallery": [
+      {
+        "image": "kreuzberg-chamissoplatz-fullart.jpg",
+        "alt": "The complete Kreuzberg artwork and title, without cropping."
+      }
+    ],
+    "roomCaption": "Styling example · 30 × 40 cm · Frame and decor not included",
+    "roomImage": "kreuzberg-chamissoplatz-room-photo.jpg",
+    "roomVideoFit": "contain",
+    "roomAlt": "The Kreuzberg print at 30 × 40 cm in an oak frame on a living-room wall. Frame and decor are not included.",
+    "roomVideoUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/room/kreuzberg-chamissoplatz.mp4",
+    "roomVideoPosterUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/room/kreuzberg-chamissoplatz-poster.jpg",
+    "roomVideoThumbnailUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/room/kreuzberg-chamissoplatz-thumb.jpg"
+  },
+  {
+    "id": "ed-digital-27-kreuzberg",
+    "name": "Kreuzberg Printable Poster",
+    "place": "Kreuzberg · The gas lamp",
+    "image": "kreuzberg-chamissoplatz-fullart.jpg",
+    "alt": "Illustrated street-level view of a cast-iron gas lamp at Chamissoplatz with a long stucco facade behind it, cobbles, one parked bicycle and the title Kreuzberg.",
+    "typeLine": "DIGITAL DOWNLOAD · 30 × 40 CM",
+    "wixProductId": "dac91255-469c-5e8d-26ae-e7df2a7af794",
+    "kind": "digital",
+    "deliveryNote": "Digital download · 1 JPEG print file and a printing guide. No physical item.",
+    "deliveryDetails": "Your download includes one 3:4 sRGB JPEG, 3543 × 4724 px at 300 dpi for 30 × 40 cm, and a printing guide. The same file prints without cropping at 45 × 60 cm and 60 × 80 cm, with softer detail at larger sizes. No physical poster, frame or decor is included.",
+    "group": "everyday",
+    "alternativeProductId": "368cfc38-c970-4c71-9ace-1f999e922213",
+    "visualCreditsHtml": "<p>Visual reference: a photograph of Kreuzberg (the berlin.de page on Chamissoplatz). The lamp, facade and cobbles were artistically reinterpreted; this is not a reproduction of the photograph.</p><p>Place facts: German Wikipedia, Chamissoplatz, and berlin.de.</p>",
+    "sizeImages": {
+      "30x40 cm": "kreuzberg-chamissoplatz-30x40.jpg"
+    },
+    "gallery": [
+      {
+        "image": "kreuzberg-chamissoplatz-30x40.jpg",
+        "alt": "Complete artwork at 30 x 40 cm."
+      }
+    ],
+    "roomCaption": "Styling example · 30 × 40 cm · Printable files only · Frame and decor not included",
+    "roomImage": "kreuzberg-chamissoplatz-room-photo.jpg",
+    "roomVideoFit": "contain",
+    "roomAlt": "The Kreuzberg print at 30 × 40 cm in an oak frame on a living-room wall. Frame and decor are not included.",
+    "roomVideoUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/room/kreuzberg-chamissoplatz.mp4",
+    "roomVideoPosterUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/room/kreuzberg-chamissoplatz-poster.jpg",
+    "roomVideoThumbnailUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/room/kreuzberg-chamissoplatz-thumb.jpg"
+  },
+  {
+    "id": "ed-print-28-kudamm",
+    "name": "Ku’damm",
+    "place": "Kurfürstendamm · The rotunda",
+    "image": "kudamm-kranzler-fullart.jpg",
+    "alt": "Illustrated upward street view of the Café Kranzler corner pavilion with its round red and cream striped rooftop, a blue modern building behind and the title Ku’damm.",
+    "typeLine": "PREMIUM MATTE · 200 GSM · UNFRAMED",
+    "wixProductId": "78a644e1-00f3-44e4-8f1f-ea3092085637",
+    "group": "everyday",
+    "alternativeProductId": "df18ab5c-9483-7b3b-f288-73eb00868595",
+    "visualCreditsHtml": "<p>Visual reference: a photograph of Ku’damm (the berlin.de photo gallery on Café Kranzler). The pavilion, stripes and sky were artistically reinterpreted; this is not a reproduction of the photograph.</p><p>Place facts: German Wikipedia, Café Kranzler.</p>",
+    "sizeImages": {
+      "30x40 cm": "kudamm-kranzler-30x40.jpg",
+      "50x70 cm": "kudamm-kranzler-50x70.jpg"
+    },
+    "gallery": [
+      {
+        "image": "kudamm-kranzler-fullart.jpg",
+        "alt": "The complete Ku’damm artwork and title, without cropping."
+      }
+    ],
+    "roomCaption": "Styling example · 30 × 40 cm · Frame and decor not included",
+    "roomImage": "kudamm-kranzler-room-photo.jpg",
+    "roomVideoFit": "contain",
+    "roomAlt": "The Ku’damm print at 30 × 40 cm in an oak frame on a living-room wall. Frame and decor are not included.",
+    "roomVideoUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/room/kudamm-kranzler.mp4",
+    "roomVideoPosterUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/room/kudamm-kranzler-poster.jpg",
+    "roomVideoThumbnailUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/room/kudamm-kranzler-thumb.jpg"
+  },
+  {
+    "id": "ed-digital-28-kudamm",
+    "name": "Ku’damm Printable Poster",
+    "place": "Kurfürstendamm · The rotunda",
+    "image": "kudamm-kranzler-fullart.jpg",
+    "alt": "Illustrated upward street view of the Café Kranzler corner pavilion with its round red and cream striped rooftop, a blue modern building behind and the title Ku’damm.",
+    "typeLine": "DIGITAL DOWNLOAD · 30 × 40 CM",
+    "wixProductId": "df18ab5c-9483-7b3b-f288-73eb00868595",
+    "kind": "digital",
+    "deliveryNote": "Digital download · 1 JPEG print file and a printing guide. No physical item.",
+    "deliveryDetails": "Your download includes one 3:4 sRGB JPEG, 3543 × 4724 px at 300 dpi for 30 × 40 cm, and a printing guide. The same file prints without cropping at 45 × 60 cm and 60 × 80 cm, with softer detail at larger sizes. No physical poster, frame or decor is included.",
+    "group": "everyday",
+    "alternativeProductId": "78a644e1-00f3-44e4-8f1f-ea3092085637",
+    "visualCreditsHtml": "<p>Visual reference: a photograph of Ku’damm (the berlin.de photo gallery on Café Kranzler). The pavilion, stripes and sky were artistically reinterpreted; this is not a reproduction of the photograph.</p><p>Place facts: German Wikipedia, Café Kranzler.</p>",
+    "sizeImages": {
+      "30x40 cm": "kudamm-kranzler-30x40.jpg"
+    },
+    "gallery": [
+      {
+        "image": "kudamm-kranzler-30x40.jpg",
+        "alt": "Complete artwork at 30 x 40 cm."
+      }
+    ],
+    "roomCaption": "Styling example · 30 × 40 cm · Printable files only · Frame and decor not included",
+    "roomImage": "kudamm-kranzler-room-photo.jpg",
+    "roomVideoFit": "contain",
+    "roomAlt": "The Ku’damm print at 30 × 40 cm in an oak frame on a living-room wall. Frame and decor are not included.",
+    "roomVideoUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/room/kudamm-kranzler.mp4",
+    "roomVideoPosterUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/room/kudamm-kranzler-poster.jpg",
+    "roomVideoThumbnailUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/room/kudamm-kranzler-thumb.jpg"
+  },
+  {
+    "id": "ed-print-32-nikolassee",
+    "name": "Nikolassee",
+    "place": "Nikolassee · Morning on the meadow",
+    "image": "nikolassee-rehwiese-fullart.jpg",
+    "alt": "Illustrated low view across the Rehwiese meadow in Nikolassee with long grass, a winding path, trees, a light mist and the title Nikolassee.",
+    "typeLine": "PREMIUM MATTE · 200 GSM · UNFRAMED",
+    "wixProductId": "765cb574-8ed2-4149-b6da-7cbc1955958f",
+    "group": "everyday",
+    "alternativeProductId": "ebdf7d90-36a2-69cb-12ec-353077e0fc2e",
+    "visualCreditsHtml": "<p>Visual reference: a photograph of Nikolassee (the berlin.de page on Nikolassee). The meadow, mist and light were artistically reinterpreted; this is not a reproduction of the photograph.</p><p>Place facts: German Wikipedia, Rehwiese (Berlin).</p>",
+    "sizeImages": {
+      "30x40 cm": "nikolassee-rehwiese-30x40.jpg",
+      "50x70 cm": "nikolassee-rehwiese-50x70.jpg"
+    },
+    "gallery": [
+      {
+        "image": "nikolassee-rehwiese-fullart.jpg",
+        "alt": "The complete Nikolassee artwork and title, without cropping."
+      }
+    ],
+    "roomCaption": "Styling example · 30 × 40 cm · Frame and decor not included",
+    "roomImage": "nikolassee-rehwiese-room-photo.jpg",
+    "roomVideoFit": "contain",
+    "roomAlt": "The Nikolassee print at 30 × 40 cm in an oak frame on a living-room wall. Frame and decor are not included.",
+    "roomVideoUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/room/nikolassee-rehwiese.mp4",
+    "roomVideoPosterUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/room/nikolassee-rehwiese-poster.jpg",
+    "roomVideoThumbnailUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/room/nikolassee-rehwiese-thumb.jpg"
+  },
+  {
+    "id": "ed-digital-32-nikolassee",
+    "name": "Nikolassee Printable Poster",
+    "place": "Nikolassee · Morning on the meadow",
+    "image": "nikolassee-rehwiese-fullart.jpg",
+    "alt": "Illustrated low view across the Rehwiese meadow in Nikolassee with long grass, a winding path, trees, a light mist and the title Nikolassee.",
+    "typeLine": "DIGITAL DOWNLOAD · 30 × 40 CM",
+    "wixProductId": "ebdf7d90-36a2-69cb-12ec-353077e0fc2e",
+    "kind": "digital",
+    "deliveryNote": "Digital download · 1 JPEG print file and a printing guide. No physical item.",
+    "deliveryDetails": "Your download includes one 3:4 sRGB JPEG, 3543 × 4724 px at 300 dpi for 30 × 40 cm, and a printing guide. The same file prints without cropping at 45 × 60 cm and 60 × 80 cm, with softer detail at larger sizes. No physical poster, frame or decor is included.",
+    "group": "everyday",
+    "alternativeProductId": "765cb574-8ed2-4149-b6da-7cbc1955958f",
+    "visualCreditsHtml": "<p>Visual reference: a photograph of Nikolassee (the berlin.de page on Nikolassee). The meadow, mist and light were artistically reinterpreted; this is not a reproduction of the photograph.</p><p>Place facts: German Wikipedia, Rehwiese (Berlin).</p>",
+    "sizeImages": {
+      "30x40 cm": "nikolassee-rehwiese-30x40.jpg"
+    },
+    "gallery": [
+      {
+        "image": "nikolassee-rehwiese-30x40.jpg",
+        "alt": "Complete artwork at 30 x 40 cm."
+      }
+    ],
+    "roomCaption": "Styling example · 30 × 40 cm · Printable files only · Frame and decor not included",
+    "roomImage": "nikolassee-rehwiese-room-photo.jpg",
+    "roomVideoFit": "contain",
+    "roomAlt": "The Nikolassee print at 30 × 40 cm in an oak frame on a living-room wall. Frame and decor are not included.",
+    "roomVideoUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/room/nikolassee-rehwiese.mp4",
+    "roomVideoPosterUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/room/nikolassee-rehwiese-poster.jpg",
+    "roomVideoThumbnailUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/room/nikolassee-rehwiese-thumb.jpg"
   }
 ]
