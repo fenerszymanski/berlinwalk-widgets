@@ -167,11 +167,14 @@ export function calendarStep(step,details={}) {
  if(step==='calendar-place'){calendarPlaced=true;journey('bw_store_calendar_place',CAL_PATH,{productId:CAL_ID});pixel('trackCustom','CalPlace',{content_ids:[CAL_ID],content_type:'product'},step);}
  if(step==='calendar-preview'&&calendarPlaced&&details.ownPhotosReady===true)journey('bw_store_calendar_preview',CAL_PATH,{productId:CAL_ID});
 }
-export function ysStep(step) {
-  count(step, YS_PATH);
+// profile (22 Nov 2026): the sister product "Your Berlin Street in 1979" passes its own {path, posterId}; the steps then count under its page path and name
+// its product id, so the two prints stay apart in every lane. Called with one argument (the 1928 page) nothing changes.
+export function ysStep(step, profile) {
+  const path = profile?.path || YS_PATH, id = profile?.posterId || YS_ID;
+  count(step, path);
   if(['search','preview'].includes(step))W.WobCampaignFunnel?.emit('interest',step==='search'?'street_search':'street_preview');
-  if (JOURNEY_STEPS[step]) journey(JOURNEY_STEPS[step], YS_PATH, {productId: YS_ID});
-  if (PIXEL_STEPS[step]) pixel('trackCustom', PIXEL_STEPS[step], {content_ids: [YS_ID], content_type: 'product'}, step);
+  if (JOURNEY_STEPS[step]) journey(JOURNEY_STEPS[step], path, {productId: id});
+  if (PIXEL_STEPS[step]) pixel('trackCustom', PIXEL_STEPS[step], {content_ids: [id], content_type: 'product'}, profile ? step + ':' + id : step);
 }
 // "+ Add another address" under the 1928 lines in the cart page or side cart (9 Nov 2026): lane 1 only, a path under the 1928 page like its other
 // steps, once per page load. No journey or pixel event: the backend journey allowlist and the pixel have no such event.
@@ -187,13 +190,17 @@ export function added(product, quantity = 1) {
   pixel('track', 'AddToCart', {content_ids: [product.wixProductId], content_type: 'product', content_name: product.name, value: money(product.priceCents) * quantity, currency: product.currency || 'EUR'}, product.wixProductId+':'+(++successfulAddSequence));
 }
 // Consent-free count only: Wix's checkout page sends InitiateCheckout to the pixel itself.
-export function checkout(cart) {
+export function checkout(cart, profiles = []) {
   const lines = cart?.lines || [];
   count('checkout', STORE_PATH);
   W.WobCampaignFunnel?.emit('checkout','begin_checkout');
   journey('bw_store_checkout', STORE_PATH, {productIds: lines.map(line => line.productId).slice(0, 10), items: lines.length});
   if (lines.some(line => line.productId === YS_ID || line.productId === YS_DIGITAL_ID || YS_MOUNTED_IDS.includes(line.productId))) count('checkout', YS_PATH);
   if (lines.some(line => line.productId === YS_DIGITAL_ID)) count('checkout-digital', YS_PATH);
+  for (const profile of profiles) {   // sister products (1979): their own page path, counted once per page load like the 1928 ones
+    if (lines.some(line => line.productId === profile.posterId || line.productId === profile.digitalId)) count('checkout', profile.path);
+    if (lines.some(line => line.productId === profile.digitalId)) count('checkout-digital', profile.path);
+  }
 }
 
 function campaignGaEvent(name,data){

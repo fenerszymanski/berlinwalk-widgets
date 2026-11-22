@@ -960,3 +960,17 @@ button.ys-words-tag:focus-visible{outline:2px solid var(--green);outline-offset:
 :host([design2]) .bw-picks>.bw-offer-note{margin:0 0 10px}
 :host([design2]) .native-cart-bottom>.bw-offer{margin:4px 0 8px;font-size:13px}
 :host([design2]) .d2-listing>.bw-offer{margin:0 0 12px;font-size:14px}
+/* "Your Berlin Street in 1979" (22 Nov 2026): the coverage message under the preview. Quiet while the 1979 photo is being checked, Berlin red once there is none. */
+.ys-nocover{margin:10px 0 0;padding:12px 14px;border:1.5px solid var(--leaf);border-radius:12px;background:#f4f8f2;font-size:14px;line-height:1.45;color:var(--ink);text-align:left;overflow-wrap:anywhere}
+.ys-nocover.is-blocked{border-color:#E63946;background:#fdf1f2}
+.ys-nocover a{color:inherit;font-weight:600;text-decoration:underline;text-underline-offset:2px}
+.ys-nocover[hidden]{display:none}
+@media(max-width:740px){.ys-nocover{margin-left:7%;margin-right:7%}}   /* the same inset as the caption and the sheet on phones */
+/* "Your West Berlin Street in 1979": the recommendation card (22 Nov 2026), shown in place of the plain message when the 1928 photo of the same spot is on the sheet. */
+.ys-nocover.ys-recommend{display:grid;gap:6px;border-color:var(--leaf);background:#f4f8f2}
+.ys-nocover .ys-rec-head,.ys-nocover .ys-rec-line{margin:0}
+.ys-nocover .ys-rec-head{font-size:16px;line-height:1.35;color:var(--green)}
+.ys-nocover .ys-rec-go{display:flex;flex-wrap:wrap;align-items:center;gap:8px 14px;margin:6px 0 0}
+.ys-nocover .ys-rec-button{display:inline-flex;align-items:center;justify-content:center;min-height:48px;border:1.5px solid var(--yellow);padding:10px 22px;border-radius:40px;background:var(--yellow);color:var(--green);font-size:16px;font-weight:600;text-decoration:none;text-align:center}
+.ys-nocover .ys-rec-button:hover,.ys-nocover .ys-rec-button:focus-visible{border-color:var(--green)}
+.ys-nocover .ys-rec-price{font-family:var(--mono);font-size:13px;color:var(--muted)}

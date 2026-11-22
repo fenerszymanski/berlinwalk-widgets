@@ -95,6 +95,9 @@ export const DESIGN2_TEXT = Object.freeze({
 // Wix's German pages live under /de/ (only while German is visible); the path checks below read the page path without it.
 const pagePath = () => decodeURIComponent(location.pathname).replace(/^\/de(?=\/|$)/, '');
 const PRODUCT_PATH = '/product-page/your-berlin-street-in-1928-personalised-aerial-print-30-x-40-cm';
+// "Your West Berlin Street in 1979" (22 Nov 2026): its poster page and its digital-file page are ys pages like the 1928 one (same translation rules, own title).
+const YS1979_PATHS = ['/product-page/your-west-berlin-street-in-1979-personalised-aerial-print', '/product-page/your-west-berlin-street-in-1979-digital-file'];
+const onYs1979 = () => YS1979_PATHS.some(path => pagePath().startsWith(path));
 const TEXT = new Map(Object.entries({
   "Color": "Farbe",
   "Natural": "Natur",
@@ -351,6 +354,21 @@ PATTERNS.unshift(
   [/^Your poster, ([^:]+): 1928 above, today below, same ground and scale\. Click either photo to move the cross\.$/, 'Dein Poster, $1: oben um 1928, unten heute, gleicher Ausschnitt und Maßstab. Klicke auf ein Foto, um das Kreuz zu verschieben.'],
   [/^Your digital file: 1928 above, today below, same ground and scale\. (Click|Tap) either photo to move the cross\.$/, (_, verb) => 'Deine digitale Datei: oben um 1928, unten heute, gleicher Ausschnitt und Maßstab. '+(verb==='Click'?'Klicke':'Tippe')+' auf ein Foto, um das Kreuz zu verschieben.']
 );
+// "Your West Berlin Street in 1979" (22 Nov 2026): the words of its page that street-configurator-1979.js does not build in both languages itself (its own words, FAQ
+// and messages come from TEXT_1979 there). Same du-form as the 1928 page.
+for (const [en, de] of [
+  ['Your West Berlin Street in 1979', 'Deine West-Berliner Straße 1979'], ['May 1979 and today', 'Mai 1979 und heute'],
+  ['Your West Berlin Street in 1979, Digital File', 'Deine West-Berliner Straße 1979, digitale Datei'], ['Where we met · 1979', 'Wo wir uns trafen · 1979'],
+  ['1979 & today', '1979 und heute'], ['1979 only', 'Nur 1979'],
+  ['Type an address in West Berlin and see your street from above in May 1979, the way a survey plane photographed it, with the same spot today below it. The Wall still divided the city then. The flight was flown over West Berlin, and along the Wall it also caught a strip of East Berlin.',
+   'Gib eine Adresse in West-Berlin ein und sieh deine Straße von oben im Mai 1979, so wie ein Vermessungsflugzeug sie fotografiert hat, darunter dieselbe Stelle heute. Die Mauer teilte die Stadt damals noch. Der Bildflug ging über West-Berlin, und entlang der Mauer hat er auch einen Streifen Ost-Berlins erfasst.'],
+  ['If you lived in Kreuzberg, Schöneberg or Spandau then, or your parents did, you can often find your own courtyard, the street trees and the cars parked outside that spring. My advice: start with the building, then tap the photo to move the cross onto your own front door. If your address was further east in East Berlin, the preview tells you right away.',
+   'Wenn du damals in Kreuzberg, Schöneberg oder Spandau gewohnt hast, oder deine Eltern, findest du oft deinen eigenen Hof, die Straßenbäume und die Autos, die in jenem Frühling davor parkten. Mein Rat: Fang mit dem Haus an und tippe dann aufs Foto, um das Kreuz auf deine eigene Haustür zu setzen. Lag deine Adresse weiter östlich in Ost-Berlin, sagt dir die Vorschau das sofort.'],
+  ['The digital version of my print: your own spot in the May 1979 aerial photograph, with the same spot today below it, at the same scale, and your title, area line and coordinates.',
+   'Die digitale Version meines Drucks: dein Ort im Luftbild vom Mai 1979, darunter dieselbe Stelle heute im gleichen Maßstab, dazu Titel, Bezirkszeile und Koordinaten.'],
+]) { TEXT.set(en, de); ATTRS.set(en, de); }
+for (const [en, de] of [['e.g. Kurfürstendamm', 'z. B. Kurfürstendamm'], ['Home since 1979', 'Zuhause seit 1979'],
+  ['Example personalised aerial print: Spandauer Damm in West Berlin in 1979 and today', 'Beispiel für einen persönlichen Luftbild-Druck: Spandauer Damm in West-Berlin 1979 und heute']]) ATTRS.set(en, de);
 // 1928 multi-buy (9 Nov 2026).
 for (const [en, de] of [
   ['More homes, less each', 'Mehr Adressen, weniger pro Druck'], ['2 prints', '2 Drucke'], ['3 prints', '3 Drucke'], ['4 or more', 'ab 4'],
@@ -593,7 +611,7 @@ const translate = (value, node) => {
   if (!key) return null;
   if (CART_ONLY.has(key) && !pagePath().startsWith('/cart-page') && !node?.parentElement?.closest('dialog')) return null;
   if (TEXT.has(key)) return value.replace(value.trim(), germanMoney(TEXT.get(key)));
-  if (!pagePath().startsWith(PRODUCT_PATH) && !pagePath().startsWith('/cart-page') && POSTER_TEXT.has(key)) return value.replace(value.trim(), POSTER_TEXT.get(key));
+  if (!pagePath().startsWith(PRODUCT_PATH) && !onYs1979() && !pagePath().startsWith('/cart-page') && POSTER_TEXT.has(key)) return value.replace(value.trim(), POSTER_TEXT.get(key));
   for (const [pattern, to] of PATTERNS) if (pattern.test(key)) return value.replace(value.trim(), germanMoney(key.replace(pattern, to)));
   const formatted=germanMoney(value);
   return formatted!==value?formatted:null;
@@ -637,11 +655,11 @@ const loadStoreDe = () => storeDe || (storeDe = fetch(new URL('data/de-store.jso
   .catch(() => {}));
 // Wix can replace the element while the page settles, so the watch rebinds to whichever shadow root is current.
 function start() {
-  const ysPage = pagePath().startsWith(PRODUCT_PATH), cartPage = pagePath().startsWith('/cart-page');
+  const ysPage = pagePath().startsWith(PRODUCT_PATH) || onYs1979(), cartPage = pagePath().startsWith('/cart-page');
   // Wix's German product pages (/de/...) get the shop's own words in German on every product, not only posters (11 Nov 2026).
   const dePage = /^\/de(?:\/|$)/.test(decodeURIComponent(location.pathname));
   if (!ysPage && !cartPage && !dePage && !pagePath().startsWith('/product-page/')) return;
-  if (ysPage) document.title = 'Deine Berliner Straße um 1928 | Walk of Berlin';
+  if (ysPage) document.title = onYs1979() ? 'Deine West-Berliner Straße 1979 | Walk of Berlin' : 'Deine Berliner Straße um 1928 | Walk of Berlin';
   if (cartPage) document.title = 'Warenkorb | Walk of Berlin';
   let bound = null;
   const bind = () => {

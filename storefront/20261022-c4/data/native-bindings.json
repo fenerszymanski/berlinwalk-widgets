@@ -368,6 +368,14 @@
     "forceNativeCategoryIds": true
   },
   {
+    "wixProductId": "923c7a4c-93fe-460a-8e53-1ef546906021",
+    "nativeProductType": "physical",
+    "nativeCategoryIds": [
+      "bw-personalised-print"
+    ],
+    "forceNativeCategoryIds": true
+  },
+  {
     "wixProductId": "ed545698-4cbc-41dc-8f0d-5fb0a335d70d",
     "nativeProductType": "physical",
     "nativeCategoryIds": [
