@@ -56,6 +56,8 @@ export const TEXT_1979 = Object.freeze({
       hole: {head: 'There is no 1979 photo for this exact spot.', line: 'My 1928 print shows this exact spot, East and West.'},
       button: 'See this address in 1928',
       from: price => `from ${price}`,
+      // On the photo itself (the sheet shows a 1928 picture in the old-photo slot): a band across the picture and a large corner tag, so nobody mistakes it for the 1979 poster.
+      band: '1928 · This spot is not in the 1979 photo', tag: '1928',
     },
     photo: {loading: 'Loading the 1979 photo…', retrying: 'Retrying the 1979 photo…', down: 'The 1979 photo is not coming through. I keep trying here.', gaveUp: 'The 1979 photo could not load. Search for the place again later.'},
     // FAQ: {shared} items are the 1928 page's own question and answer (storefront-element.js YS_FAQ, found by question text; ys-de.js translates them);
@@ -97,6 +99,7 @@ export const TEXT_1979 = Object.freeze({
       hole: {head: 'Für genau diese Stelle gibt es kein Foto von 1979.', line: 'Mein Druck von 1928 zeigt genau diese Stelle, in Ost und West.'},
       button: 'Diese Adresse in 1928 ansehen',
       from: price => `ab ${price}`,
+      band: '1928 · Diese Stelle ist nicht auf dem Foto von 1979', tag: '1928',
     },
     photo: {loading: 'Das Foto von 1979 wird geladen…', retrying: 'Das Foto von 1979 wird erneut geladen…', down: 'Das Foto von 1979 kommt gerade nicht an. Ich versuche es hier weiter.', gaveUp: 'Das Foto von 1979 konnte nicht geladen werden. Suche den Ort später noch einmal.'},
     faq: [
@@ -175,6 +178,8 @@ export function createYs1979(base, profile) {
     return only ? {...box, h: box.w * 1592 / 1400, ph: Math.round(box.pw * 1592 / 1400)} : box;
   };
   const oldPhotoBlocked = state => state.cover === 'blocked';
+  // The recommendation card is on screen: blocked, and the 1928 photo of the same box is the picture on the sheet.
+  const recActive = state => oldPhotoBlocked(state) && !!state.rec;
   // Everything the print needs AND a verified 1979 photo: no add button works without it (the storefront's add handler asks this too).
   const readyToAdd = state => readyToCheck(state) && state.cover === 'ok';
   const noCoverHtml = (german, link) => T().noCover(label => `<a href="${escape(link)}" data-ys-1928-link>${escape(label)}</a>`);
@@ -215,6 +220,8 @@ export function createYs1979(base, profile) {
             ${CROSS_SVG}
             <span class="ys-wm" aria-hidden="true"></span>
             <span class="ys-status" data-ys="status" role="status"></span>
+            <span class="ys-rec-tag" data-ys="rectag" aria-hidden="true" hidden></span>
+            <span class="ys-rec-band" data-ys="recband" hidden></span>
           </div>
           <div class="ys-photo ys-photo-today" data-ys="photo-today">
             <img class="ys-todayimg" alt="Aerial photograph of the same spot today, same ground and scale, with a cross on the same spot" decoding="async">
@@ -263,7 +270,7 @@ export function createYs1979(base, profile) {
         <span class="ys-label" id="ys-format-l">What you get</span>
         <div class="ys-sizes ys-formats" role="radiogroup" aria-labelledby="ys-format-l">${[['poster', 'Poster', true], ['digital', 'Digital file', api.digital]].filter(([, , available]) => available).map(([key, label]) => `<button type="button" role="radio" class="ys-size" data-ys-format="${key}" aria-checked="${(state.format || 'poster') === key}"><span>${label}</span></button>`).join('')}</div>
       </div>
-      <div class="ys-choice-row" role="group" aria-label="Layout"><span class="ys-label">Layout</span><div class="ys-layouts" role="radiogroup" aria-label="Layout">${Object.keys(PRINT_OPTIONS.layouts).map(key => `<button type="button" role="radio" data-ys-layout="${key}" aria-checked="${key === ysLayout(state)}">${escape(layoutLabel(key))}</button>`).join('')}</div></div>
+      <div class="ys-choice-row" data-ys="layoutrow" role="group" aria-label="Layout"><span class="ys-label">Layout</span><div class="ys-layouts" role="radiogroup" aria-label="Layout">${Object.keys(PRINT_OPTIONS.layouts).map(key => `<button type="button" role="radio" data-ys-layout="${key}" aria-checked="${key === ysLayout(state)}">${escape(layoutLabel(key))}</button>`).join('')}</div></div>
       <div class="ys-choice-row" role="group" aria-label="Colour"><span class="ys-label">Colour <small data-ys="colourname">${escape(optionNames(state).colour)}</small></span><div class="ys-swatches" role="radiogroup" aria-label="Colour">${Object.entries(PRINT_OPTIONS.themes).map(([key, t]) => `<button type="button" role="radio" data-ys-colour="${key}" title="${escape(t.name)}" aria-label="${escape(t.name)}" aria-checked="${key === ysColour(state)}" style="--swatch:rgb(${t.mid.join(',')});--paper:rgb(${t.bg.join(',')})"><span aria-hidden="true"></span></button>`).join('')}</div></div>
       <details class="ys-options" data-ys="options" ${state.optionsOpen ? 'open' : ''} ${api.variants && !ysDigital(state) ? '' : 'hidden'}>
         <summary><span class="ys-options-t">Size and paper</span><span class="ys-options-v" data-ys="optsummary"></span></summary>
@@ -405,13 +412,25 @@ export function createYs1979(base, profile) {
       const html = blocked && state.rec ? cardHtml(de, state.rec.side, toLink1928(de, state), api.price1928) : blocked ? noCoverHtml(de, de ? profile.page1928.de : profile.page1928.en)
         : failed ? escape(T().errorBlock) : loading ? escape(T().checking) : null;
       if (html !== null && nocover._html !== html) { nocover._html = html; nocover.innerHTML = html; }
+      paintRec();
+    };
+    // While the 1928 photo stands in for the missing 1979 one, the sheet is a recommendation card, not the 1979 poster: band and corner tag on the picture, the print words
+    // and the layout choice out of sight. Everything comes back exactly when a covered spot is picked (state.rec is null again then). Idempotent: runs on every refresh.
+    const paintRec = () => {
+      const on = recActive(state), r = T().recommend;
+      $('sheet').toggleAttribute('data-rec', on);
+      const band = $('recband'), tag = $('rectag');
+      if (on && band.textContent !== r.band) band.textContent = r.band;
+      if (on && tag.textContent !== r.tag) tag.textContent = r.tag;
+      band.hidden = tag.hidden = !on;
+      $('layoutrow').hidden = on;
     };
     const refreshButton = () => {
       const ready = readyToCheck(state), off = !ready || api.busy() || state.cover !== 'ok';
       const b = host.getRootNode().querySelector?.('[data-ys-add]'); if (b) b.disabled = off;
       host.querySelector('[data-ys-quickadd]').disabled = off; $('quick').hidden = !state.lat;
       const why = host.getRootNode().querySelector?.('[data-ys-why]');
-      if (why) why.textContent = !ready ? (!state.lat ? (results.hidden ? 'Search for your address to continue.' : 'Tap one of the places under the search box.') : 'Fill in the title and area lines to continue.')
+      if (why) why.textContent = recActive(state) ? '' : !ready ? (!state.lat ? (results.hidden ? 'Search for your address to continue.' : 'Tap one of the places under the search box.') : 'Fill in the title and area lines to continue.')
         : state.cover === 'blocked' ? T().whyBlocked : state.cover === 'error' ? T().whyError : state.cover === 'loading' ? T().whyChecking : '';
       paintCover();
     };
@@ -543,5 +562,5 @@ export function createYs1979(base, profile) {
   }
 
   return Object.freeze({...base, YS_PRODUCT_ID: profile.posterId, YS_DIGITAL_ID: profile.digitalId, YS_FRAMED_ID: '', YS_CANVAS_ID: '', ysProductId, readyToAdd,
-    ysMounted: () => false, optionNames, mountConfigurator, oldBox, captionFor, EMPTY_LIMIT, profile, textFor, isGerman, classifySide, spotFragment, loadSides});
+    ysMounted: () => false, recActive, optionNames, mountConfigurator, oldBox, captionFor, EMPTY_LIMIT, profile, textFor, isGerman, classifySide, spotFragment, loadSides});
 }
