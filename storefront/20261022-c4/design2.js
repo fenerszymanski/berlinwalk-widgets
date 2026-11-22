@@ -166,7 +166,28 @@ P.landingView=function(){if(this.xgGuide()){const t=document.createElement('temp
   try{return this.card(p,feature,format,this.skeletonModel);}finally{this.d2Loading=before;}
  };
  P.d2collections=function(){return `<nav class="d2-collections bw-raw" aria-label="${esc(this.d2text('Collections'))}">${[['all','All posters'],['everyday','Everyday'],['landmarks','Landmarks'],['stories','Berlin Stories'],['districts','Districts'],['sets','Sets']].map(([id,label])=>`<a href="${esc((()=>{const u=new URL(this.storeHref('print',id)),format=new URLSearchParams(location.search).get('format');if(['printed','digital'].includes(format))u.searchParams.set('format',format);return u.href;})())}" ${this.category==='print'&&this.filter===id?'aria-current="page"':''}>${esc(this.d2text(label))}</a>`).join('')}</nav>`;};
- P.d2personal=function(model){return `<section class="wrap d2-personal"><h2 class="sr-only">${esc(this.d2text('Personal Berlin gifts'))}</h2><div class="d2-personal-grid">${[['ys','Find your street'],['dein-berlin-2027','Make your calendar']].map(([id,label])=>{const p=model.products.find(p=>p.id===id);if(!p)return '';const item=this.d2product(p);return `<article class="d2-personal-card bw-raw" data-product="${esc(id)}"><a class="d2-sample" href="${esc(item.productUrl)}"><img src="${esc(this.image(id==='dein-berlin-2027'?{...item,image:'design2/calendar-cover.webp?v=1'}:item))}" alt="${esc(item.alt||item.name)}" width="600" height="600" loading="lazy"></a><div><h2><a href="${esc(item.productUrl)}">${esc(item.name)}</a></h2><p>${esc(item.place)}</p><span class="price">${this.d2Loading?'<span class="sk-block sk-price"></span>':this.campaignPrice(p)}</span><a class="outline" href="${esc(item.productUrl)}">${esc(this.d2text(label))}</a></div></article>`;}).join('')}</div></section>`;};
+ P.d2personal=function(model){
+  const products=[['ys','Find your street'],['ys1979'],['dein-berlin-2027','Make your calendar']];
+  const show1979=model.products.some(p=>p.id==='ys1979'&&!p.unavailable&&p.priceCents>0&&p.productUrl);
+  const style=show1979?`<style>
+   @media(min-width:1100px){:host([design2]) .d2-personal-grid.d2-personal-three{grid-template-columns:repeat(3,minmax(0,1fr))}}
+   @media(max-width:740px){:host([design2]) .d2-personal-grid.d2-personal-three{grid-auto-rows:1fr}}
+  </style>`:'';
+  const cards=products.map(([id,label])=>{
+   const p=model.products.find(item=>item.id===id);
+   if(!p||(id==='ys1979'&&!show1979))return '';
+   const item=this.d2product(p),href=esc(item.productUrl);
+   const img=this.image(id==='dein-berlin-2027'?{...item,image:'design2/calendar-cover.webp?v=1'}:item);
+   const price=this.d2Loading?'<span class="sk-block sk-price"></span>':this.campaignPrice(p);
+   return `<article class="d2-personal-card bw-raw" data-product="${esc(id)}">
+    <a class="d2-sample" href="${href}"><img src="${esc(img)}" alt="${esc(item.alt||item.name)}" width="600" height="600" loading="lazy"></a>
+    <div><h2><a href="${href}">${esc(item.name)}</a></h2>${label?`<p>${esc(item.place)}</p>`:''}
+     <span class="price">${price}</span>${label?`<a class="outline" href="${href}">${esc(this.d2text(label))}</a>`:''}
+    </div>
+   </article>`;
+  }).join('');
+  return `${style}<section class="wrap d2-personal"><h2 class="sr-only">${esc(this.d2text('Personal Berlin gifts'))}</h2><div class="d2-personal-grid${show1979?' d2-personal-three':''}">${cards}</div></section>`;
+ };
  P.d2clothing=function(model){
   const cards=designCards(model.products.filter(p=>p.group==='apparel'));
   const key=p=>p.id.split('-')[0]+'-'+garmentDesign(p);
