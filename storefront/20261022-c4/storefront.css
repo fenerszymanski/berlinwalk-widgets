@@ -379,6 +379,19 @@ details.legal-foot>summary:after{top:50%;margin-top:-14px}
 .ys-sheet[data-layout="1928-only"] .ys-photo-1928{height:calc(var(--u)*1592)}
 .ys-photo[hidden]{display:none!important}
 .ys-sheet[data-colour="dark"] .ys-parea,.ys-sheet[data-colour="dark"] .ys-pline.ys-fallback{font-weight:400}
+}
+
+@media(max-width:740px){
+  :host([design2][data-bw-pdp="c"]) .gallery-stage,
+  :host([design2][data-bw-pdp="c"]) .ys-stage,
+  :host([design2][data-bw-pdp="c"]) .bw-ys-photo-view{touch-action:pan-y;overflow:hidden}
+  :host([design2][data-bw-pdp="c"]) .gallery-stage > img,
+  :host([design2][data-bw-pdp="c"]) .gallery-stage > video{position:absolute;inset:0;width:100%;height:100%;max-width:100%;max-height:100%;object-fit:contain}
+  :host([design2][data-bw-pdp="c"]) .ys-gallery :is(.ys-stage,.bw-ys-photo-view){height:calc(min(82vw,31svh) * 4 / 3 + 16px);aspect-ratio:auto;background:#EFECE5}
+  :host([design2][data-bw-pdp="c"]) .bw-dots{min-height:30px}
+  :host([design2][data-bw-pdp="c"]) .bw-dot::after{inset:-9px -4px}
+}
+
 @media(max-width:360px){.ys-choice-row{gap:6px}.ys-swatches{gap:5px}.ys-swatches button{width:34px}.ys-layouts{gap:5px}.ys-layouts button{font-size:11px}}
 
 .ys-layout-thumb{width:25px;height:34px;object-fit:cover;padding:0}
@@ -912,7 +925,8 @@ button.ys-words-tag:focus-visible{outline:2px solid var(--green);outline-offset:
 :host([design2]) .product-layout .gallery,:host([design2]) .order-summary,:host([design2]) .cal-preview{top:85px}
 /* Phones (19 Nov 2026, Yusuf: "Evet, daralt"): two rows took about a sixth of the screen. Once the page is scrolled the menu row is put away and logo, search, language and cart stay; back at the top it returns. The freed height stays reserved under the bar so the page does not jump. */
 @media(max-width:740px){
- :host([design2][bar-compact]) .d2-bar .d2-groups{display:none}
+ :host([design2][bar-compact]) .d2-bar .d2-groups{display:flex}
+ :host([design2][bar-compact]) .d2-bar .d2-group>button{min-height:38px;padding-block:4px}
  :host([design2][bar-compact]) .d2-bar{margin-bottom:var(--bw-bar-gap,0px)}
 }
 
@@ -1001,8 +1015,6 @@ button.ys-words-tag:focus-visible{outline:2px solid var(--green);outline-offset:
 :host([design2][data-bw-pdp="c"]) .product-title .place::before{content:'Walk of Berlin · ';font-weight:600;color:var(--green)}
 :host([design2][data-bw-pdp="c"]) .product-title h1{font:600 clamp(26px,2.3vw,32px)/1.15 var(--serif);color:var(--green);margin:0 0 6px}
 :host([design2][data-bw-pdp="c"]) .product-title .price{display:block;font-size:22px;font-weight:700;color:var(--green);margin:2px 0 0}
-:host([design2][data-bw-pdp="c"]) .product-title .bw-offer{display:block;background:transparent!important;color:var(--muted)!important;padding:0;margin:4px 0 0;border-radius:0;font-size:13px;font-weight:500;line-height:1.4}
-:host([design2][data-bw-pdp="c"]) .product-title .bw-offer .bw-offer-note{display:inline;margin:0 0 0 5px;font-size:12px;color:var(--muted)}
 
 :host([design2][data-bw-pdp="c"]) .bw-zalando-colors{margin:14px 0 0}
 :host([design2][data-bw-pdp="c"]) .bw-color-label{margin:0 0 8px;font-size:13px;color:var(--muted)}
@@ -1143,11 +1155,25 @@ button.ys-words-tag:focus-visible{outline:2px solid var(--green);outline-offset:
 }
 
 /* In apparel the visible photo sets the height. Video slides retain their stage ratio. */
+@media(min-width:741px){
 :host([design2][data-bw-pdp="c"]) .product-layout[data-bw-group="apparel"] .gallery-stage:has(> img){
   aspect-ratio:auto;max-height:none;border:0;
 }
 :host([design2][data-bw-pdp="c"]) .product-layout[data-bw-group="apparel"] .gallery-stage > img:not(.wall){
   position:static;inset:auto;margin:0;width:100%;height:auto;max-height:none;padding:0;
+}
+
+}
+
+@media(max-width:740px){
+  :host([design2][data-bw-pdp="c"]) .gallery-stage,
+  :host([design2][data-bw-pdp="c"]) .ys-stage,
+  :host([design2][data-bw-pdp="c"]) .bw-ys-photo-view{touch-action:pan-y;overflow:hidden}
+  :host([design2][data-bw-pdp="c"]) .gallery-stage > img,
+  :host([design2][data-bw-pdp="c"]) .gallery-stage > video{position:absolute;inset:0;width:100%;height:100%;max-width:100%;max-height:100%;object-fit:contain}
+  :host([design2][data-bw-pdp="c"]) .ys-gallery :is(.ys-stage,.bw-ys-photo-view){height:calc(min(82vw,31svh) * 4 / 3 + 16px);aspect-ratio:auto;background:#EFECE5}
+  :host([design2][data-bw-pdp="c"]) .bw-dots{min-height:30px}
+  :host([design2][data-bw-pdp="c"]) .bw-dot::after{inset:-9px -4px}
 }
 
 @media(max-width:360px){

@@ -391,6 +391,53 @@ for(const crumb of this.shadowRoot.querySelectorAll('.breadcrumb > a:first-child
   chevron:'<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>'
  };
 
+ const mobileGallery=()=>matchMedia('(max-width:740px)').matches;
+ const animateGallerySlide=(stage,from,to,count)=>{
+  if(!stage||from===to||!mobileGallery()||matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+  const media=stage.querySelector(':scope > img,:scope > video')||stage.querySelector('.ys-sheet:not([hidden])');
+  if(!media)return;
+  const offset=(to===0&&from===count-1?1:from===0&&to===count-1?-1:Math.sign(to-from))*28;
+  media.getAnimations().forEach(animation=>{if(animation.id==='bw-gallery-slide')animation.cancel();});
+  const animation=media.animate([{translate:offset+'px 0px',opacity:.35},{translate:'0px 0px',opacity:1}],{duration:230,easing:'cubic-bezier(.2,.65,.3,1)'});
+  animation.id='bw-gallery-slide';
+ };
+ const galleryButtons=gallery=>[...gallery.querySelectorAll('.thumbnails > button.thumb')];
+ const currentSlide=buttons=>Math.max(0,buttons.findIndex(button=>button.getAttribute('aria-pressed')==='true'));
+ const slideStage='.gallery-stage,.ys-stage,.bw-ys-photo-view';
+ const legacyGalleryClick=P.click;
+ P.click=function(event){
+  const thumb=event.target.closest?.('.thumbnails > .thumb[data-action]');
+  const buttons=thumb&&this.dataset.bwPdp==='c'?galleryButtons(thumb.closest('.gallery')):null;
+  const from=buttons&&currentSlide(buttons),to=buttons&&buttons.indexOf(thumb);
+  const result=legacyGalleryClick.call(this,event);
+  if(buttons&&to>=0)animateGallerySlide(this.shadowRoot.querySelector('.surface .gallery-stage'),from,to,buttons.length);
+  return result;
+ };
+
+ const bindGallerySwipe=gallery=>{
+  if(gallery.dataset.bwSwipeBound)return;
+  gallery.dataset.bwSwipeBound='1';
+  let start=null;
+  gallery.addEventListener('touchstart',event=>{
+   if(event.touches.length!==1||!event.target.closest?.(slideStage)){start=null;return;}
+   const touch=event.touches[0];
+   start={x:touch.clientX,y:touch.clientY};
+  },{passive:true});
+  gallery.addEventListener('touchcancel',()=>{start=null;},{passive:true});
+  gallery.addEventListener('touchend',event=>{
+   const point=start,touch=event.changedTouches[0];
+   start=null;
+   if(!point||!touch||!mobileGallery())return;
+   const dx=touch.clientX-point.x,dy=touch.clientY-point.y;
+   if(Math.abs(dx)<42||Math.abs(dx)<=Math.abs(dy)*1.2)return;
+   const buttons=galleryButtons(gallery);
+   if(buttons.length<2)return;
+   const next=(currentSlide(buttons)+(dx<0?1:-1)+buttons.length)%buttons.length;
+   if(event.cancelable)event.preventDefault();
+   buttons[next].click();
+  },{passive:false});
+ };
+
  P.bwSetupZalandoGallery=function(root,product){
   const gallery=root.querySelector('.surface .gallery');if(!gallery)return;
   const isYs=!!root.querySelector('.surface .ys-layout');
@@ -399,6 +446,7 @@ for(const crumb of this.shadowRoot.querySelectorAll('.breadcrumb > a:first-child
   else if(isYs)gallery.dataset.bwKind='ys';
   else gallery.dataset.bwKind='poster';
 
+  bindGallerySwipe(gallery);
   if(!isYs){
    const thumbs=gallery.querySelector('.thumbnails'),stage=gallery.querySelector('.gallery-stage');
    if(!thumbs||!stage)return;
@@ -420,18 +468,6 @@ for(const crumb of this.shadowRoot.querySelectorAll('.breadcrumb > a:first-child
     if(!dots){dots=document.createElement('div');dots.className='bw-dots bw-raw';dots.setAttribute('role','tablist');dots.setAttribute('aria-label',de?'Produktbilder':'Product images');stage.after(dots);}
     dots.innerHTML=buttons.map((b,i)=>`<button type="button" class="bw-dot" data-bw-dot="${i}" aria-label="${esc(b.getAttribute('aria-label')||`Image ${i+1}`)}" aria-current="${b.getAttribute('aria-pressed')==='true'?'true':'false'}"></button>`).join('');
     dots.querySelectorAll('[data-bw-dot]').forEach(d=>d.addEventListener('click',()=>{buttons[Number(d.dataset.bwDot)]?.click();}));
-   }
-   if(!this.bwSwipeBound){
-    this.bwSwipeBound=true;let sx=0,sy=0;
-    root.addEventListener('touchstart',e=>{if(!e.target.closest?.('.gallery-stage')||e.touches.length!==1)return;sx=e.touches[0].clientX;sy=e.touches[0].clientY;},{passive:true});
-    root.addEventListener('touchend',e=>{
-     if(!sx||!e.target.closest?.('.gallery-stage')||!e.changedTouches.length)return;
-     const dx=e.changedTouches[0].clientX-sx,dy=e.changedTouches[0].clientY-sy;sx=0;sy=0;
-     if(Math.abs(dx)<40||Math.abs(dx)<Math.abs(dy))return;
-     const bs=[...root.querySelectorAll('.surface .thumbnails > button.thumb')];if(bs.length<2)return;
-     const cur=Math.max(0,bs.findIndex(b=>b.getAttribute('aria-pressed')==='true'));
-     const next=(cur+(dx<0?1:-1)+bs.length)%bs.length;bs[next]?.click();
-    },{passive:true});
    }
    return;
   }
@@ -469,13 +505,15 @@ for(const crumb of this.shadowRoot.querySelectorAll('.breadcrumb > a:first-child
    dots.innerHTML=slides.map((s,i)=>`<button type="button" class="bw-dot" data-bw-ys-slide="${i}" aria-label="${esc(s.alt)}" aria-current="${i===0?'true':'false'}"></button>`).join('');
    photoView.after(dots);
   }
-  const selectSlide=idx=>{
+  const selectSlide=(idx,motion=false)=>{
    const i=Math.max(0,Math.min(slides.length-1,Number(idx)||0));
+   const from=currentSlide(galleryButtons(gallery));
    const live=i===0;
    stage.hidden=!live;photoView.hidden=live;
    if(!live&&photoImg){photoImg.src=slides[i].src;photoImg.alt=slides[i].alt;}
    gallery.querySelectorAll('.thumbnails [data-bw-ys-slide]').forEach(b=>b.setAttribute('aria-pressed',String(Number(b.dataset.bwYsSlide)===i)));
    gallery.querySelectorAll('.bw-dots [data-bw-ys-slide]').forEach(b=>b.setAttribute('aria-current',String(Number(b.dataset.bwYsSlide)===i)));
+   if(motion)animateGallerySlide(live?stage:photoView,from,i,slides.length);
   };
   if(!gallery.dataset.bwYsBound){
    gallery.dataset.bwYsBound='1';
@@ -487,7 +525,7 @@ for(const crumb of this.shadowRoot.querySelectorAll('.breadcrumb > a:first-child
    },true);
    gallery.addEventListener('click',e=>{
     const b=e.target.closest?.('[data-bw-ys-slide]');
-    if(b)selectSlide(b.dataset.bwYsSlide);
+    if(b)selectSlide(b.dataset.bwYsSlide,true);
    });
    const rightCol=root.querySelector('.bw-right-col');
    if(rightCol){
