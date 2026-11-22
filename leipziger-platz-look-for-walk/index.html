@@ -23,7 +23,7 @@
   .times .hint { flex: 1 1 220px; font-size: 12.5px; line-height: 1.5; color: #43493f; align-self: center; }
   .lp-body { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: 12px; padding: 0 12px 12px; align-items: start; }
   .mapbox { background: #fff; border: 1px solid #dfe5d8; border-radius: 14px; padding: 8px; min-width: 0; }
-  #map { width: 100%; height: 440px; border-radius: 10px; background: #efeee6; }
+  #map { width: 100%; height: 660px; border-radius: 10px; background: #efeee6; }
   #map .leaflet-tile-pane { filter: saturate(.45) brightness(1.04); }
   .pin { width: 28px; height: 28px; border-radius: 50%; background: #123D18; color: #FFE600; font-weight: 800; font-size: 13px; display: flex; align-items: center; justify-content: center; border: 3px solid #FFE600; box-shadow: 0 2px 6px rgba(0,0,0,.3); }
   .pin.skip { background: #b7bdb0; color: #fff; border-color: #fff; font-size: 10px; }
@@ -33,6 +33,7 @@
   .legend .wall { border-top: 3px dashed #E63946; }
   .legend .path { border-top: 3px dotted #123D18; }
   .plan { min-width: 0; display: flex; flex-direction: column; gap: 8px; }
+  .stops { display: flex; flex-direction: column; gap: 8px; max-height: 640px; overflow-y: auto; padding-right: 4px; overscroll-behavior: contain; }
   .verdict { background: #123D18; color: #fff; border-radius: 14px; padding: 14px 16px; font-size: 14px; line-height: 1.55; }
   .verdict b { color: #FFE600; }
   .stop { background: #fff; border: 1px solid #dfe5d8; border-radius: 14px; padding: 12px 14px; display: grid; grid-template-columns: 32px minmax(0, 1fr); gap: 10px; cursor: pointer; }
@@ -40,15 +41,21 @@
   .stop .n { width: 28px; height: 28px; border-radius: 50%; background: #FFE600; color: #123D18; font-weight: 800; display: flex; align-items: center; justify-content: center; font-size: 13px; }
   .stop h2 { font-family: 'Merriweather', Georgia, serif; font-size: 15px; line-height: 1.35; color: #123D18; }
   .stop .era { font-size: 11px; font-weight: 800; letter-spacing: .05em; text-transform: uppercase; color: #7a5a00; margin-top: 3px; }
-  .stop .d { font-size: 12.5px; line-height: 1.5; color: #4a5145; margin-top: 4px; }
+  .stop .d { font-size: 12.5px; line-height: 1.5; color: #4a5145; margin-top: 4px; display: none; }
+  .stop.open .d { display: block; }
+  .stop.open { border-color: #1B5E20; box-shadow: 0 0 0 2px #C5E1A5; }
   .stop .look { font-size: 12.5px; line-height: 1.5; color: #123D18; margin-top: 5px; }
   .stop .look b { color: #1B5E20; }
   .stop .m { font-size: 11.5px; color: #6a7264; margin-top: 4px; }
+  .scrollnote { font-size: 11.5px; font-weight: 700; color: #1B5E20; }
   .skipped { font-size: 12px; line-height: 1.5; color: #555c50; background: #eef0e9; border-radius: 12px; padding: 10px 12px; }
   .foot { font-size: 11px; color: #6a7264; padding: 0 18px 14px; line-height: 1.5; }
   @media (max-width: 720px) {
     .lp-body { grid-template-columns: minmax(0, 1fr); }
-    #map { height: 320px; }
+    #map { height: 300px; }
+    .stops { max-height: 280px; }
+    .times .hint { display: none; }
+    .lp-head h1 { font-size: 19px; }
     .times button { flex: 1 1 0; padding: 9px 8px; }
   }
 </style>
@@ -64,7 +71,7 @@
     <button type="button" data-min="15">15 min</button>
     <button type="button" data-min="30">30 min</button>
     <button type="button" data-min="45">45 min</button>
-    <span class="hint" id="hint">Pick a time. Tap a stop to find it on the map.</span>
+    <span class="hint" id="hint">Pick a time. Tap a stop to read it and find it on the map.</span>
   </div>
   <div class="lp-body">
     <div class="mapbox">
@@ -151,23 +158,28 @@
     var left = STOPS.filter(function (s) { return ids.indexOf(s.id) < 0; });
     var out = '<div class="verdict"><b>' + minutes + ' minutes, ' + res.chosen.length + ' stops.</b> About ' + res.used + ' minutes of walking and looking, starting from the S-Bahn and U2 exits at Potsdamer Platz. ' +
       (minutes === 15 ? 'This is the version for a change of trains: the shape, the Wall line and Wertheim.' : minutes === 30 ? 'This is the version I would do with a coffee in hand: every side of the octagon.' : 'This one adds the walk east to the old Prussian upper house on Leipziger Straße.') + '</div>';
-    out += res.chosen.map(function (s, i) {
-      return '<div class="stop" tabindex="0" data-id="' + s.id + '"><div class="n">' + (i + 1) + '</div><div><h2>' + s.name + '</h2><div class="era">' + s.era + '</div><p class="d">' + s.d + '</p><p class="look">' + s.look + '</p><p class="m">About ' + s.min + ' min</p></div></div>';
-    }).join('');
+    out += '<p class="scrollnote">' + res.chosen.length + ' stops below, in walking order. Scroll the list to see them all.</p><div class="stops">' + res.chosen.map(function (s, i) {
+      var first = i === 0 && window.innerWidth >= 720;
+      return '<div class="stop' + (first ? ' open' : '') + '" tabindex="0" aria-expanded="' + first + '" data-id="' + s.id + '"><div class="n">' + (i + 1) + '</div><div><h2>' + s.name + '</h2><div class="era">' + s.era + '</div><p class="d">' + s.d + '</p><p class="look">' + s.look + '</p><p class="m">About ' + s.min + ' min</p></div></div>';
+    }).join('') + '</div>';
     if (left.length) out += '<div class="skipped"><b>Left out at ' + minutes + ' minutes:</b> ' + left.map(function (s) { return s.name; }).join('; ') + '.</div>';
     plan.innerHTML = out;
     Array.prototype.forEach.call(plan.querySelectorAll('.stop'), function (el) {
-      function go() { var s = STOPS.filter(function (x) { return x.id === el.dataset.id; })[0]; map.setView(s.ll, 18); }
+      function go() {
+        Array.prototype.forEach.call(plan.querySelectorAll('.stop'), function (o) { o.classList.toggle('open', o === el); o.setAttribute('aria-expanded', String(o === el)); });
+        var s = STOPS.filter(function (x) { return x.id === el.dataset.id; })[0]; map.setView(s.ll, 18);
+        if (window.BWResize) window.BWResize();
+      }
       el.addEventListener('click', go);
       el.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); go(); } });
     });
-    document.getElementById('hint').textContent = minutes === 45 ? 'All the stops, with the walk to Leipziger Straße 3 and 4.' : 'Tap a stop to find it on the map.';
+    document.getElementById('hint').textContent = minutes === 45 ? 'All the stops, with the walk to Leipziger Straße 3 and 4.' : 'Tap a stop to read it and find it on the map.';
     if (window.BWResize) window.BWResize();
   }
 
   buttons.forEach(function (b) { b.addEventListener('click', function () { render(Number(b.dataset.min)); }); });
   render(30);
-  map.fitBounds(L.latLngBounds(OCTAGON).pad(0.35));
+  map.fitBounds(L.latLngBounds(OCTAGON.concat(STOPS.map(function (s) { return s.ll; }))).pad(0.12));
 })();
 </script>
 <script src="../js/brand.js"></script>
