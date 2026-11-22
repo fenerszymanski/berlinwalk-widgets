@@ -54,9 +54,14 @@ export function personFirst(media, color = media?.color) {
   return pool.reduce((best, item) => (!best || PERSON_PHOTOS[item.image] > PERSON_PHOTOS[best.image] ? item : best), null);
 }
 // media = layer.apparelMedia(product, color). Returns the first picture and the gallery behind it, in the order the thumbnails use.
-export function pageMedia(media, color = media?.color) {
+export function pageMedia(media, color = media?.color, garmentFirst = false) {
   if (!media?.lead) return null;
   const person = personFirst(media, color), garment = media.printDetail ? [media.printDetail, media.lead] : [media.lead];
+  if (garmentFirst) {
+    const paired = person ? media.gallery.filter(item => item.pairedWith === person.image) : [];
+    const models = person ? [person, ...paired, ...media.gallery.filter(item => item !== person && !paired.includes(item))] : media.gallery;
+    return {first: media.lead, gallery: [...models, ...(media.printDetail ? [media.printDetail] : [])], person: null};
+  }
   if (!person) return {first: media.printDetail || media.lead, gallery: media.printDetail ? [media.lead, ...media.gallery] : media.gallery, person: null};
   const paired = media.gallery.filter(item => item.pairedWith === person.image);
   return {first: person, gallery: [...paired, ...garment, ...media.gallery.filter(item => item !== person && !paired.includes(item))], person};

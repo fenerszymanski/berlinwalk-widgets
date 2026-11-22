@@ -7,7 +7,7 @@ import {matchesSearch,familyFor,recommendationRows,nativeRecommendationEligible}
 import {languageUrl,navigateLanguageLink} from './language-navigation.js?v=store-design2-fix4b-20261113-v1';
 import {installGalleryZoom} from './gallery-zoom.js?v=zoom-sort-20261117-v1';
 import {BLACK_WEEK,blackWeekActive,blackWeekEligibleRow} from './black-week.js?v=unisex-hoodies-20261122-v1';
-import {pageMedia,offerLineHtml,pickSecondItems,secondItemsHtml,sizeGuideHtml,armBlackWeekEnd} from './clothing-boost.js?v=unisex-hoodies-20261122-v1';
+import {pageMedia,offerLineHtml,pickSecondItems,secondItemsHtml,sizeGuideHtml,armBlackWeekEnd} from './clothing-boost.js?v=hoodie-garment-first-20261122-v1';
 let recommendations,translations,exploreImages,listingOrder=null;
 // Sort data for store listings (Yusuf, 17 Nov 2026). Built by scripts/store-listing-order.mjs; a missing file keeps the curated order.
 // Selections survive Wix replacing the loading element within the same document.
@@ -283,7 +283,7 @@ P.landingView=function(){if(this.xgGuide()){const t=document.createElement('temp
  // Clothing page boost (Yusuf approved 21 Nov 2026; helpers and words in clothing-boost.js and black-week.js). d2boost adds, to a clothing product page only:
  // the Black Week sentence next to the price, a size guide above "Add to cart" and a row of up to three other Black Week items below the buy box text.
  // Eligibility is the Black Week collection id on the catalogue row (live Velo row, or our own hourly copy while the page is still loading).
- P.pageMedia=function(media){const shown=pageMedia(media,media?.color);this.bwPersonFirst=shown?.person?.image||null;return shown;};
+ P.pageMedia=function(media,garmentFirst){const shown=pageMedia(media,media?.color,garmentFirst);this.bwPersonFirst=shown?.person?.image||null;return shown;};
  P.d2boost=function(root,product){
   // A person photo on stage fills the stage (the stock rule leaves a product picture at the 260 px its srcset hint names, two thirds of a phone): same file, no extra bytes.
   const person=this.bwPersonFirst;this.bwPersonFirst=null;
