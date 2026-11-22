@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-21T10:13:12.249Z",
+  "updatedAt": "2026-11-22T02:59:27.696Z",
   "source": "Wix Blog API",
   "popularSource": "Wix Blog metrics.views lifetime sort",
   "totalPosts": 471,
@@ -49,23 +49,40 @@
   ],
   "hero": {
     "lead": {
-      "title": "Glienicke Bridge: How to Visit Berlin's Bridge of Spies and the Border Corner Around It",
-      "slug": "glienicke-bridge-berlin",
-      "path": "/post/glienicke-bridge-berlin",
-      "url": "https://www.berlinwalk.com/post/glienicke-bridge-berlin",
-      "excerpt": "Most visitors photograph the green arches and leave. How to get to Glienicke Bridge, what to look for on it, and the strange border corner around it, from Klein-Glienicke to Steinstücken.",
+      "title": "Christmas Markets in Mitte: One Evening Walk, in the Order They Close",
+      "slug": "christmas-markets-in-mitte",
+      "path": "/post/christmas-markets-in-mitte",
+      "url": "https://www.berlinwalk.com/post/christmas-markets-in-mitte",
+      "excerpt": "Five Christmas markets sit on one 3 km line through Mitte, but they do not close at the same time. Which to start with on a weekday, a Saturday or Christmas Eve, and where to finish.",
       "category": "Tourist Tips",
       "categorySlug": "tourist-tips",
       "topic": "practical",
       "topicLabel": "Practical Berlin",
-      "readTime": "8 min read",
-      "publishedDate": "2026-11-18T09:56:30.658Z",
-      "image": "https://static.wixstatic.com/media/5a08a3_2eb10ec3bd6741b4b9a2de6af498dd01~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-cover.jpg",
-      "thumb": "https://static.wixstatic.com/media/5a08a3_2eb10ec3bd6741b4b9a2de6af498dd01~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-cover.jpg",
-      "alt": "The green steel arches of Glienicke Bridge over the Havel, seen from the Potsdam shore on a clear day",
-      "relatedToolSlug": "glienicke-border-corner-planner"
+      "readTime": "6 min read",
+      "publishedDate": "2026-11-20T10:04:52.195Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_1890d9d78f3f4bed8b19140dc3920437~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-cover-alexanderplatz-market-night.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_1890d9d78f3f4bed8b19140dc3920437~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-cover-alexanderplatz-market-night.jpg",
+      "alt": "The Alexanderplatz Christmas market at night, with a lit wooden Christmas pyramid and stalls under strings of lights",
+      "relatedToolSlug": "mitte-christmas-market-walk"
     },
     "secondary": [
+      {
+        "title": "Glienicke Bridge: How to Visit Berlin's Bridge of Spies and the Border Corner Around It",
+        "slug": "glienicke-bridge-berlin",
+        "path": "/post/glienicke-bridge-berlin",
+        "url": "https://www.berlinwalk.com/post/glienicke-bridge-berlin",
+        "excerpt": "Most visitors photograph the green arches and leave. How to get to Glienicke Bridge, what to look for on it, and the strange border corner around it, from Klein-Glienicke to Steinstücken.",
+        "category": "Tourist Tips",
+        "categorySlug": "tourist-tips",
+        "topic": "practical",
+        "topicLabel": "Practical Berlin",
+        "readTime": "8 min read",
+        "publishedDate": "2026-11-18T09:56:30.658Z",
+        "image": "https://static.wixstatic.com/media/5a08a3_2eb10ec3bd6741b4b9a2de6af498dd01~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-cover.jpg",
+        "thumb": "https://static.wixstatic.com/media/5a08a3_2eb10ec3bd6741b4b9a2de6af498dd01~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-cover.jpg",
+        "alt": "The green steel arches of Glienicke Bridge over the Havel, seen from the Potsdam shore on a clear day",
+        "relatedToolSlug": "glienicke-border-corner-planner"
+      },
       {
         "title": "Alexanderplatz History: What Stood on the Square and What to Look For Today",
         "slug": "alexanderplatz-history",
@@ -99,23 +116,6 @@
         "thumb": "https://static.wixstatic.com/media/5a08a3_35b6fcff1a844a2ab40c995fcd00e23c~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/konnopke-currywurst-tray.jpg",
         "alt": "A sliced currywurst in a paper tray at Konnopke's Imbiss in Berlin, covered in red sauce and curry powder",
         "relatedToolSlug": "currywurst-counter-card"
-      },
-      {
-        "title": "Berlin Christmas Market Souvenirs: What Is Worth Carrying Home",
-        "slug": "berlin-christmas-market-souvenirs",
-        "path": "/post/berlin-christmas-market-souvenirs",
-        "url": "https://www.berlinwalk.com/post/berlin-christmas-market-souvenirs",
-        "excerpt": "The mug you already paid for, the wooden smoker that is really from Saxony, the star that folds flat, and the bottle that will not get through security.",
-        "category": "Tourist Tips",
-        "categorySlug": "tourist-tips",
-        "topic": "practical",
-        "topicLabel": "Practical Berlin",
-        "readTime": "7 min read",
-        "publishedDate": "2026-11-13T10:03:14.057Z",
-        "image": "https://static.wixstatic.com/media/5a08a3_efd5ac3deff94b42bd4445d8b94305f3~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover.jpg",
-        "thumb": "https://static.wixstatic.com/media/5a08a3_efd5ac3deff94b42bd4445d8b94305f3~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover.jpg",
-        "alt": "The Christmas market on Alexanderplatz at night, with lit stalls around a tall wooden Christmas pyramid",
-        "relatedToolSlug": "christmas-market-suitcase-test"
       },
       {
         "title": "What to Wear in Berlin in Winter: Dress for Wind, Wet and Ice",
@@ -1816,7 +1816,7 @@
       "image": "https://static.wixstatic.com/media/5a08a3_e3a96566150e409caef6688901451efd~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/07-dhl-van-snow-weissensee-dec2021.jpg",
       "thumb": "https://static.wixstatic.com/media/5a08a3_e3a96566150e409caef6688901451efd~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/07-dhl-van-snow-weissensee-dec2021.jpg",
       "alt": "Yellow DHL delivery van with snow on its roof and bonnet parked on a snowy street in Berlin-Weißensee",
-      "relatedToolSlug": ""
+      "relatedToolSlug": "christmas-post-send-by-line"
     },
     {
       "title": "Christmas Markets in Mitte: One Evening Walk, in the Order They Close",
