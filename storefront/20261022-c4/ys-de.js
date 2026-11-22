@@ -472,6 +472,7 @@ const CART_TEXT = {
  "Free delivery to Germany, the EU, the UK and the US.": "Kostenloser Versand nach Deutschland, in die EU, nach Großbritannien und in die USA.",
  "Free delivery to Germany, the EU and the UK.": "Kostenloser Versand nach Deutschland, in die EU und nach Großbritannien.",
  "Choose size": "Größe wählen",
+ "Please choose a size": "Bitte wähle eine Größe",
  "Choose options": "Optionen wählen"
 };
 for (const [en, de] of Object.entries(CART_TEXT)) TEXT.set(en, de);
@@ -596,7 +597,7 @@ const translate = (value, node) => {
   const formatted=germanMoney(value);
   return formatted!==value?formatted:null;
 };
-const skip = node => ['STYLE', 'SCRIPT', 'TEXTAREA'].includes(node.parentElement?.tagName) || (node.parentElement?.tagName === 'OPTION' && !node.parentElement.closest('[data-address-form]')) || !!node.parentElement?.closest('.homes-type,.bw-raw');
+const skip = node => ['STYLE', 'SCRIPT', 'TEXTAREA'].includes(node.parentElement?.tagName) || (node.parentElement?.tagName === 'OPTION' && !node.parentElement.closest('[data-address-form], select[required][data-poster-option="Size"] > option[value=""]')) || !!node.parentElement?.closest('.homes-type,.bw-raw');
 // On Wix's German pages every store link stays German: /category/..., /product-page/... and /cart-page get the /de prefix (11 Nov 2026).
 const DE_PAGE = /^\/de(?:\/|$)/.test(decodeURIComponent(location.pathname));
 const STORE_LINK = /^\/(?:category|product-page|cart-page|store)(?:\/|$)/;
