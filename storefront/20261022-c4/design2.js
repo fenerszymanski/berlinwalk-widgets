@@ -414,28 +414,33 @@ for(const crumb of this.shadowRoot.querySelectorAll('.breadcrumb > a:first-child
   return result;
  };
 
- const bindGallerySwipe=gallery=>{
+ const bindGallerySwipe=(gallery,root)=>{
   if(gallery.dataset.bwSwipeBound)return;
   gallery.dataset.bwSwipeBound='1';
   let start=null;
-  gallery.addEventListener('touchstart',event=>{
-   if(event.touches.length!==1||!event.target.closest?.(slideStage)){start=null;return;}
-   const touch=event.touches[0];
-   start={x:touch.clientX,y:touch.clientY};
-  },{passive:true});
-  gallery.addEventListener('touchcancel',()=>{start=null;},{passive:true});
-  gallery.addEventListener('touchend',event=>{
+  const finish=event=>{
    const point=start,touch=event.changedTouches[0];
    start=null;
-   if(!point||!touch||!mobileGallery())return;
+   if(!point||!touch||!mobileGallery()||point.route!==location.href)return;
    const dx=touch.clientX-point.x,dy=touch.clientY-point.y;
    if(Math.abs(dx)<42||Math.abs(dx)<=Math.abs(dy)*1.2)return;
-   const buttons=galleryButtons(gallery);
+   const current=root.querySelector('.surface .gallery');
+   if(!current)return;
+   const buttons=galleryButtons(current);
    if(buttons.length<2)return;
    const next=(currentSlide(buttons)+(dx<0?1:-1)+buttons.length)%buttons.length;
    if(event.cancelable)event.preventDefault();
    buttons[next].click();
-  },{passive:false});
+  };
+  gallery.addEventListener('touchstart',event=>{
+   if(event.touches.length!==1||!event.target.closest?.(slideStage)){start=null;return;}
+   const touch=event.touches[0];
+   start={x:touch.clientX,y:touch.clientY,route:location.href};
+   // Keep the listener on the touch target when a catalogue refresh replaces the gallery.
+   event.target.addEventListener('touchend',finish,{once:true,passive:false});
+  },{passive:true});
+  gallery.addEventListener('touchcancel',()=>{start=null;},{passive:true});
+  gallery.addEventListener('touchend',finish,{passive:false});
  };
 
  P.bwSetupZalandoGallery=function(root,product){
@@ -446,7 +451,7 @@ for(const crumb of this.shadowRoot.querySelectorAll('.breadcrumb > a:first-child
   else if(isYs)gallery.dataset.bwKind='ys';
   else gallery.dataset.bwKind='poster';
 
-  bindGallerySwipe(gallery);
+  bindGallerySwipe(gallery,root);
   if(!isYs){
    const thumbs=gallery.querySelector('.thumbnails'),stage=gallery.querySelector('.gallery-stage');
    if(!thumbs||!stage)return;
@@ -505,9 +510,11 @@ for(const crumb of this.shadowRoot.querySelectorAll('.breadcrumb > a:first-child
    dots.innerHTML=slides.map((s,i)=>`<button type="button" class="bw-dot" data-bw-ys-slide="${i}" aria-label="${esc(s.alt)}" aria-current="${i===0?'true':'false'}"></button>`).join('');
    photoView.after(dots);
   }
+  const productId=this.productViewId();
   const selectSlide=(idx,motion=false)=>{
    const i=Math.max(0,Math.min(slides.length-1,Number(idx)||0));
    const from=currentSlide(galleryButtons(gallery));
+   this.bwPersonalSlide={productId,index:i};
    const live=i===0;
    stage.hidden=!live;photoView.hidden=live;
    if(!live&&photoImg){photoImg.src=slides[i].src;photoImg.alt=slides[i].alt;}
@@ -515,6 +522,7 @@ for(const crumb of this.shadowRoot.querySelectorAll('.breadcrumb > a:first-child
    gallery.querySelectorAll('.bw-dots [data-bw-ys-slide]').forEach(b=>b.setAttribute('aria-current',String(Number(b.dataset.bwYsSlide)===i)));
    if(motion)animateGallerySlide(live?stage:photoView,from,i,slides.length);
   };
+  if(this.bwPersonalSlide?.productId===productId&&this.bwPersonalSlide.index)selectSlide(this.bwPersonalSlide.index);
   if(!gallery.dataset.bwYsBound){
    gallery.dataset.bwYsBound='1';
    gallery.addEventListener('click',e=>{
@@ -952,8 +960,16 @@ for(const crumb of this.shadowRoot.querySelectorAll('.breadcrumb > a:first-child
 
  const prevCalmRender=P.render;
  P.render=function(){
+  const route=location.href;
+  const group=this.d2RenderedRoute===route?this.shadowRoot.querySelector('[data-d2-group][aria-expanded="true"]')?.dataset.d2Group:null;
   const res=prevCalmRender.apply(this,arguments);
+  this.d2RenderedRoute=route;
   this.bwCalmProductLayout?.();
+  if(group){
+   const button=this.shadowRoot.querySelector(`[data-d2-group="${CSS.escape(group)}"]`);
+   const menu=button&&this.shadowRoot.getElementById(button.getAttribute('aria-controls'));
+   if(menu){button.setAttribute('aria-expanded','true');menu.hidden=false;}
+  }
   return res;
  };
 }
