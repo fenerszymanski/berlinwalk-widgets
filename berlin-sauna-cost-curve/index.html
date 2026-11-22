@@ -91,12 +91,12 @@
 <div class="wrap">
   <p class="kicker">Berlin Tools</p>
   <h1>Berlin Sauna Day Board</h1>
-  <p class="lede">Three open saunas, three completely different products. One is a long open band, one stops admitting anybody ninety minutes before it closes, one only sells fixed two hour slots. Here they are on one day, priced on the same basket: a two hour visit with the sauna, starting at the hour you turn up.</p>
+  <p class="lede">Compare a typical two-hour sauna visit at Liquidrom, vabali and Stadtbad Oderberger. For public saunas and exact booking availability, check the operator links below.</p>
 
   <div class="bar">
     <div class="grp" role="group" aria-label="Day of the week">
-      <button type="button" id="btnWeekday" aria-pressed="true">Monday to Thursday</button>
-      <button type="button" id="btnWeekend" aria-pressed="false">Friday to Sunday and holidays</button>
+      <button type="button" id="btnWeekday" aria-pressed="true">Standard rates</button>
+      <button type="button" id="btnWeekend" aria-pressed="false">Weekend and holiday rates</button>
     </div>
     <button type="button" class="now" id="btnNow">Back to now</button>
   </div>
@@ -129,7 +129,8 @@
     </div>
   </details>
 
-  <p class="stamp">Opening hours, admission cutoffs and tariffs read from each operator's own pages and checked on 27 August 2026. Refundable deposits are not included: the public baths take 10 euros for the sauna chip, Stadtbad Oderberger takes 20 euros in cash for the key card.</p>
+  <p class="stamp">Check <a href="https://www.liquidrom-berlin.de/en/index.php" target="_blank" rel="noopener">Liquidrom’s hours</a> for late opening on Fridays and Saturdays, <a href="https://www.vabali.de/en/berlin/" target="_blank" rel="noopener">vabali’s current hours and rates</a> and <a href="https://pretix.eu/oderberger/oderberger/" target="_blank" rel="noopener">Oderberger’s live booking calendar</a>.</p>
+  <p class="stamp">Public sauna hours and tariffs checked on 22 November 2026. Check the operator for holiday hours and changes before you travel. Refundable deposits are not included: the public baths take 10 euros for the sauna chip, Stadtbad Oderberger takes 20 euros in cash for the key card.</p>
 </div>
 
 <script>
@@ -142,6 +143,12 @@
     if(hours>=4)    return { p: weekend?39.50:36.50, t:'4 hour ticket' };
     if(hours>=2)    return { p: weekend?29.50:27.50, t:'2 hour ticket' };
     return null;
+  }
+  function vabaliOpeningHour(){
+    var month = Number(new Intl.DateTimeFormat('en-GB', {
+      timeZone:'Europe/Berlin', month:'numeric'
+    }).format(new Date()));
+    return month >= 4 && month <= 9 ? 9 : 8;
   }
   function liquidromTariff(hours){
     var base, t;
@@ -163,9 +170,9 @@
       sub:'Seydlitzstr. 6, Moabit',
       openTo:function(){ return 24; },
       lastEntry:function(){ return 22; },
-      openFrom:9,
+      get openFrom(){ return vabaliOpeningHour(); },
       fits:function(hour, weekend){
-        if(hour<9 || hour+2>24) return null;
+        if(hour<this.openFrom || hour+2>24) return null;
         return vabaliTariff(2, weekend);
       },
       ladder:[2,4,6],
@@ -173,16 +180,16 @@
       clothing:'Textile free in the whole building, swimwear is not allowed at any time',
       getting:'Eight minutes on foot north of Hauptbahnhof',
       age:'From 12, under 18 with a legal guardian',
-      rows:[['2 hours','27,50 EUR Mon to Thu / 29,50 EUR Fri to Sun'],
-            ['4 hours','36,50 EUR Mon to Thu / 39,50 EUR Fri to Sun'],
-            ['6 hours','45,50 EUR Mon to Thu / 49,50 EUR Fri to Sun'],
-            ['Day pass','51,50 EUR Mon to Thu / 56,50 EUR Fri to Sun']]
+      rows:[['2 hours','27,50 EUR standard / 29,50 EUR weekends and holidays'],
+            ['4 hours','36,50 EUR standard / 39,50 EUR weekends and holidays'],
+            ['6 hours','45,50 EUR standard / 49,50 EUR weekends and holidays'],
+            ['Day pass','51,50 EUR standard / 56,50 EUR weekends and holidays']]
     },
     {
       id:'liquidrom', name:'Liquidrom', color:'#1D6FA3', kind:'band',
       sub:'Möckernstr. 10, Kreuzberg',
-      openTo:function(weekend){ return weekend?25:24; },
-      lastEntry:function(weekend){ return (weekend?25:24)-1.5; },
+      openTo:function(weekend){ return 24; },
+      lastEntry:function(){ return 22.5; },
       openFrom:9,
       fits:function(hour, weekend){
         if(hour<9) return null;
@@ -225,10 +232,10 @@
             ['Leaving late','10,00 EUR per 30 minutes']]
     },
     {
-      id:'public', name:'Public pool saunas', color:'#8A8F84', kind:'shut',
-      sub:'Twelve baths across the city',
+      id:'public', name:'Public pool saunas', color:'#8A8F84', kind:'schedule',
+      sub:'Hours vary by bath',
       clothing:'Textile free, the house rules say the sauna may only be used naked',
-      getting:'Stadtbad Neukölln, Schwimmhalle Fischerinsel and nine other baths',
+      getting:'Stadtbad Neukölln and Schwimmhalle Fischerinsel',
       age:'Under 14 in the sauna only with an adult',
       rows:[['3 hours, cheapest category','13,00 EUR'],
             ['Day ticket, cheapest category','15,00 EUR'],
@@ -268,7 +275,7 @@
     try{
       var f=new Intl.DateTimeFormat('en-GB',{timeZone:'Europe/Berlin',weekday:'short'});
       var d=f.format(new Date());
-      return d==='Fri'||d==='Sat'||d==='Sun';
+      return d==='Sat'||d==='Sun';
     }catch(e){ return false; }
   }
 
@@ -281,7 +288,7 @@
     while(svg.firstChild) svg.removeChild(svg.firstChild);
     var title=el('title',{id:'dayTitle'}); title.textContent='Berlin saunas plotted across one day';
     var desc=el('desc',{id:'dayDesc'});
-    desc.textContent='Four rows, one per venue, across a clock from 08:00 to 01:00. Every block is the price of a two hour sauna visit starting at that hour. vabali spa is a long band from 09:00 to a last two hour start at 22:00. Liquidrom is the same shape on a weekday but runs an hour later on Friday and Saturday, because it closes at 01:00. Stadtbad Oderberger is a run of fixed two hour slots, pale before 11:00 when the sauna is not yet bookable. The public pool saunas are a closed row until 1 November 2026.';
+    desc.textContent='Typical two-hour admission prices for three saunas, across a clock from 08:00 to 01:00. Stadtbad Oderberger has fixed booking slots, with sauna access from 11:00. Public sauna hours vary by bath and are linked below.';
     svg.appendChild(title); svg.appendChild(desc);
 
     for(var h=HFROM;h<=HTO;h++){
@@ -296,7 +303,7 @@
     ROWS.forEach(function(r,i){
       var y=Y0+i*ROWH, bh=ROWH-18, by=y+7;
 
-      var nm=el('text',{x:4,y:by+14,'class':'rowname',fill:r.kind==='shut'?'#5b6157':r.color});
+      var nm=el('text',{x:4,y:by+14,'class':'rowname',fill:r.kind==='schedule'?'#5b6157':r.color});
       nm.textContent=r.name; svg.appendChild(nm);
       var sb=el('text',{x:4,y:by+29,'class':'rowsub'});
       sb.textContent=r.sub; svg.appendChild(sb);
@@ -350,11 +357,11 @@
         }
       }
 
-      if(r.kind==='shut'){
+      if(r.kind==='schedule'){
         svg.appendChild(el('rect',{x:X0,y:by,width:X1-X0,height:bh,rx:5,fill:'#8A8F84','fill-opacity':.14,
           stroke:'#8A8F84','stroke-width':1.5,'stroke-dasharray':'5 4'}));
         var st=el('text',{x:(X0+X1)/2,y:by+bh/2+4,'text-anchor':'middle','class':'cut',fill:'#5b6157'});
-        st.textContent='Closed for the summer, back on 1 November 2026'; svg.appendChild(st);
+        st.textContent='Check each bath’s timetable'; svg.appendChild(st);
       }
     });
 
@@ -368,8 +375,8 @@
   function render(){
     draw();
     document.getElementById('readhead').innerHTML =
-      'If you turn up at <b>'+clock(state.hour)+'</b> on a <b>'+
-      (state.weekend?'Friday, Saturday, Sunday or public holiday':'Monday to Thursday')+'</b>:';
+      'Example prices at <b>'+clock(state.hour)+'</b> on <b>'+
+      (state.weekend?'a weekend or public holiday':'a standard-rate day')+'</b>:';
 
     var ul=document.getElementById('cards'); ul.innerHTML='';
     var openNames=[];
@@ -377,11 +384,11 @@
       var li=document.createElement('li');
       li.style.borderLeftColor=r.color;
 
-      if(r.kind==='shut'){
+      if(r.kind==='schedule'){
         li.className='shut';
-        li.innerHTML='<div class="ctop"><p class="vname">'+r.name+'</p><span class="vprice">closed</span></div>'+
-          '<p class="vticket">Back on 1 November 2026, then 13,00 EUR to 20,00 EUR for three hours. Tickets are sold at the counter and not online, and there is a refundable 10 euro deposit for the sauna chip.</p>'+
-          '<p class="vmeta">'+r.clothing+'. '+r.getting+'.</p>';
+        li.innerHTML='<div class="ctop"><p class="vname">'+r.name+'</p><span class="vprice">from 13,00 EUR</span></div>'+
+          '<p class="vticket">Fischerinsel charges €13 for three hours and opens on weekends. Stadtbad Neukölln charges €20 for three hours. Buy tickets at the counter and bring €10 for the refundable sauna chip deposit.</p>'+
+          '<p class="vmeta"><a href="https://www.berlinerbaeder.de/saunen/" target="_blank" rel="noopener">See official public sauna hours</a></p>';
         ul.appendChild(li); return;
       }
 
@@ -389,10 +396,10 @@
       if(!res){
         li.className='shut';
         var why = r.kind==='slots'
-          ? 'No slot starts at this hour. Two hour slots start on the hour from 08:00 to 19:00, and there is a late swim-only block at 22:00.'
+          ? 'Check the operator’s booking calendar for actual start times. The sauna is bookable from 11:00.'
           : (state.hour < r.openFrom
               ? 'Not open yet. Doors are at '+clock(r.openFrom)+'.'
-              : 'Too late. '+r.name+' admits nobody after '+clock(r.lastEntry(state.weekend)+1)+'.');
+              : 'This start falls outside the standard two-hour window. Check the operator for late and holiday hours.');
         li.innerHTML='<div class="ctop"><p class="vname">'+r.name+'</p><span class="vprice">no</span></div>'+
           '<p class="vticket">'+why+'</p><p class="vmeta">'+r.getting+'.</p>';
         ul.appendChild(li); return;
@@ -419,10 +426,10 @@
     });
 
     document.getElementById('crossnote').innerHTML =
-      '<b>The number worth carrying: three and a half hours.</b> Below it Liquidrom is cheaper, because two hours with the sauna is 24,50 EUR against vabali at 27,50 EUR. Above it the order flips, because Liquidrom keeps charging 5,00 EUR for every further half hour while vabali sells wider blocks. At six hours it is 62,00 EUR against 45,50 EUR.';
+      '<b>Compare the length of your visit.</b> Two hours with sauna costs €27 at Liquidrom and starts at €27.50 at vabali. At six hours, Liquidrom costs €62 and vabali starts at €45.50.';
 
     document.getElementById('live').textContent =
-      'At '+clock(state.hour)+', open to you: '+(openNames.length?openNames.join(', '):'none of them')+'.';
+      'At '+clock(state.hour)+', typical options with a two-hour window: '+(openNames.length?openNames.join(', '):'none of them')+'.';
   }
 
   (function(){
@@ -431,7 +438,7 @@
       '<span><i style="background:#2E7D32;opacity:.62"></i>A two hour sauna visit starting this hour</span>'+
       '<span><i style="background:#D8DED2"></i>Shut, or too late for two hours</span>'+
       '<span><i style="background:#C03A70;opacity:.22;border:1px solid #C03A70"></i>Slot without the sauna</span>'+
-      '<span><i style="background:#8A8F84;opacity:.25;border:1px dashed #8A8F84"></i>Closed until 1 November</span>';
+      '<span><i style="background:#8A8F84;opacity:.25;border:1px dashed #8A8F84"></i>Hours vary by public bath</span>';
   })();
 
   (function(){
