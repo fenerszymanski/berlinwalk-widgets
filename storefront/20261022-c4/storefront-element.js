@@ -38,7 +38,7 @@
   const design2Enabled = (()=>{let choice;try{const q=new URLSearchParams(location.search).get("design");if(q==="2"||q==="0"){choice=q;sessionStorage.setItem("bwStoreDesign",q);}else choice=sessionStorage.getItem("bwStoreDesign");}catch{}return choice==="2"?true:choice==="0"?false:STORE_DESIGN2;})();
   const CALENDAR_LISTED=true;   // Yusuf 13 Nov 2026: "şimdi bunu store'da, menüde vs nerede gerekli varsa koyalım" (12 Nov it was direct link only)
   const esc = value => String(value ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-  const asset = value => {if(value==='gift-week.js'&&/^[a-f0-9]{40}$/.test(window.__WOB_GIFT_WEEK_P22_REF||''))return 'https://cdn.jsdelivr.net/gh/fenerszymanski/berlinwalk-widgets@'+window.__WOB_GIFT_WEEK_P22_REF+'/storefront/20261022-c4/gift-week.js';const target=new URL(value,base);if(/\.(?:js|css|json)$/.test(target.pathname))target.searchParams.set('v',['storefront.css','street-configurator-1979.js'].includes(value)?'ys1979-card-20261122-v3':['design2.js','funnel.js','ys-de.js','storefront.css','street-configurator-1979.js','data/presentation.json','data/native-bindings.json','data/de-store.json'].includes(value)?'ys1979-20261122-v1':value==='design2.js'?'unisex-product-names-20261122-v1':['ys-de.js','storefront.css'].includes(value)?'unisex-hoodies-20261122-v1':value==='funnel.js'?'clothing-boost-20261121-v1':value==='design2.js'?'black-week-cta-20261121-v1':['design2.js','storefront.css','ys-de.js'].includes(value)?'black-week-20261120-v1':['data/categories.json','data/native-bindings.json','data/presentation.json','data/de-store.json','design2.js'].includes(value)?'berlin-everyday-fourteen-20261121-v1':value==='storefront.css'?'cart-path-20261120-v1':value==='street-configurator.js'?'ys-finder-handoff-20261119-v1':value==='ys-de.js'?'cart-path-20261120-v1':value==='design2.js'?'holiday-hero-20261118-v1':['catalog-layer.js','data/presentation.json'].includes(value)?'garment-details-20261118-v1':['storefront.css','design2.js'].includes(value)?'mobile-cats-20261117-v1':['storefront.css','catalog-layer.js'].includes(value)?'cliches-chest-gallery-20261117-v1':value==='design2.js'?'zoom-sort-20261117-v1':['data/categories.json','data/native-bindings.json','data/presentation.json','data/de-store.json','design2.js','clothing.js','tshirt-designs.js'].includes(value)?'berlin-cliches-20261117-v3':value==='data/categories.json'?'xmas-audio-20261116-v1':value==='data/external-products.json'?'xmas-audio-20261116-v1':value==='data/native-bindings.json'?'hoodies-20261116-v1':value==='funnel.js'?'cart-path-20261120-v1':['funnel.js','calendar-configurator.js'].includes(value)?'store-paid-attribution-20261114-v3':value==='design2.js'?'xmas-audio-20261116-v1':value==='storefront.css'?'hoodies-20261116-v1':value==='data/de-store.json'?'xmas-audio-20261116-v1':['ys-de.js','catalog-layer.js'].includes(value)?'store-apparel-colors-20261114-v3':'store-discovery-polish-20261114-v2');return target.href;};
+  const asset = value => {if(value==='gift-week.js'&&/^[a-f0-9]{40}$/.test(window.__WOB_GIFT_WEEK_P22_REF||''))return 'https://cdn.jsdelivr.net/gh/fenerszymanski/berlinwalk-widgets@'+window.__WOB_GIFT_WEEK_P22_REF+'/storefront/20261022-c4/gift-week.js';const target=new URL(value,base);if(/\.(?:js|css|json)$/.test(target.pathname))target.searchParams.set('v',['design2.js','storefront.css'].includes(value)?'pdp-zalando-20261122-v1':value==='street-configurator-1979.js'?'ys1979-card-20261122-v3':['design2.js','funnel.js','ys-de.js','storefront.css','street-configurator-1979.js','data/presentation.json','data/native-bindings.json','data/de-store.json'].includes(value)?'ys1979-20261122-v1':value==='design2.js'?'unisex-product-names-20261122-v1':['ys-de.js','storefront.css'].includes(value)?'unisex-hoodies-20261122-v1':value==='funnel.js'?'clothing-boost-20261121-v1':value==='design2.js'?'black-week-cta-20261121-v1':['design2.js','storefront.css','ys-de.js'].includes(value)?'black-week-20261120-v1':['data/categories.json','data/native-bindings.json','data/presentation.json','data/de-store.json','design2.js'].includes(value)?'berlin-everyday-fourteen-20261121-v1':value==='storefront.css'?'cart-path-20261120-v1':value==='street-configurator.js'?'ys-finder-handoff-20261119-v1':value==='ys-de.js'?'cart-path-20261120-v1':value==='design2.js'?'holiday-hero-20261118-v1':['catalog-layer.js','data/presentation.json'].includes(value)?'garment-details-20261118-v1':['storefront.css','design2.js'].includes(value)?'mobile-cats-20261117-v1':['storefront.css','catalog-layer.js'].includes(value)?'cliches-chest-gallery-20261117-v1':value==='design2.js'?'zoom-sort-20261117-v1':['data/categories.json','data/native-bindings.json','data/presentation.json','data/de-store.json','design2.js','clothing.js','tshirt-designs.js'].includes(value)?'berlin-cliches-20261117-v3':value==='data/categories.json'?'xmas-audio-20261116-v1':value==='data/external-products.json'?'xmas-audio-20261116-v1':value==='data/native-bindings.json'?'hoodies-20261116-v1':value==='funnel.js'?'cart-path-20261120-v1':['funnel.js','calendar-configurator.js'].includes(value)?'store-paid-attribution-20261114-v3':value==='design2.js'?'xmas-audio-20261116-v1':value==='storefront.css'?'hoodies-20261116-v1':value==='data/de-store.json'?'xmas-audio-20261116-v1':['ys-de.js','catalog-layer.js'].includes(value)?'store-apparel-colors-20261114-v3':'store-discovery-polish-20261114-v2');return target.href;};
   // Chrome and Safari ignore @font-face inside shadow DOM, so the three faces are registered once on the document with absolute URLs from the element's own base.
   // Gift landing trials showed no LCP gain. Preserve their prior resource and font order.
   const legacyGiftPresentation = () => /^(?:\/de)?\/(?:category\/(?:berlin-christmas-gifts|berlin-geschenke)|gifts|geschenke)\/?$/.test(location.pathname);
@@ -1294,6 +1294,10 @@
     syncBarCompact() {
       const bar=this.viewRoot().querySelector('.d2-bar');if(!bar)return;
       const y=window.scrollY||0,on=this.hasAttribute('bar-compact'),phone=window.matchMedia?.('(max-width:740px)').matches;
+      if(!phone&&this.dataset?.bwPdp==='c'){
+        const height=Math.ceil(bar.getBoundingClientRect().height)+'px';
+        if(this.style.getPropertyValue('--bw-pdp-header')!==height)this.style.setProperty('--bw-pdp-header',height);
+      }
       if(on&&(!phone||y<60)){this.removeAttribute('bar-compact');this.style.removeProperty('--bw-bar-gap');return;}
       if(!on&&phone&&y>220&&!bar.querySelector('[aria-expanded="true"]')){const before=bar.getBoundingClientRect().height;this.setAttribute('bar-compact','');const gap=Math.max(0,Math.round(before-bar.getBoundingClientRect().height));this.style.setProperty('--bw-bar-gap',gap+'px');}
     }
@@ -1535,6 +1539,17 @@
       const box=this.shadowRoot.querySelector('.surface .buy-box'),real=box?.querySelector('.buy-row .primary');
       if(!real)return null;
       const size=box.querySelector('select[data-poster-option="Size"][required]');
+      if(this.dataset?.bwPdp==='c'){
+        if(this.busy||this.uncertain||this.cartRedirect||!real.matches('[data-action="poster-add"],[data-action="add"],[data-action="ys-add"]'))return null;
+        let choice=size&&!size.value&&!size.disabled?size:null;
+        if(real.disabled&&real.hasAttribute('data-ys-add')){
+          const fields=box.querySelector('[data-ys="fields"]:not([hidden])');
+          choice=[...(fields?.querySelectorAll('[data-ys="title"],[data-ys="area"]')||[])].find(field=>!field.value.trim())
+            ||this.shadowRoot.querySelector('.ys-search-slot [data-ys="q"]');
+        }
+        if(real.disabled&&!choice)return null;
+        return {box,real,choice,size,label:real.textContent.trim().split(' · ')[0]};
+      }
       const choice=size?(size.value||size.disabled?null:size):box.querySelector('select:not([disabled])');
       if(!choice&&real.disabled)return null;
       const sizeChoice=choice&&(size||/size|größe/i.test(choice.closest('label')?.textContent||choice.name||''));
@@ -1548,7 +1563,16 @@
       let on=false;
       if(target){
         const r=target.real.getBoundingClientRect(),h=window.innerHeight||0,end=this.getBoundingClientRect().bottom;
-        on=r.height>0&&(r.top>h-8||r.bottom<0)&&end>h&&!this.shadowRoot.querySelector('dialog[open]');
+        const clearOfDialog=!this.shadowRoot.querySelector('dialog[open]');
+        if(this.dataset?.bwPdp==='c'){
+          const headerBottom=this.shadowRoot.querySelector('.d2-bar')?.getBoundingClientRect().bottom||0;
+          const accordionTop=this.shadowRoot.querySelector('.bw-accordions')?.getBoundingClientRect().top??end;
+          const confirming=target.box.querySelector('[data-ys-confirm="form"]:not([hidden])');
+          const choiceInUse=target.choice&&this.shadowRoot.activeElement===target.choice;
+          on=r.height>0&&(r.top>=h||r.bottom<=headerBottom)&&accordionTop>headerBottom&&end>h&&clearOfDialog&&!confirming&&!choiceInUse;
+        }else{
+          on=r.height>0&&(r.top>h-8||r.bottom<0)&&end>h&&clearOfDialog;
+        }
       }
       if(!on){if(bar&&!bar.hidden){bar.hidden=true;bar.setAttribute('aria-hidden','true');}return;}
       if(!bar){bar=document.createElement('div');bar.className='buy-bar';bar.hidden=true;bar.innerHTML='<div class="buy-bar-text"><strong data-buy-bar-name></strong><span data-buy-bar-price></span></div><button class="primary" type="button" data-action="buy-bar"></button>';this.shadowRoot.append(bar);this.buyBarText={};}
@@ -1562,7 +1586,15 @@
       const target=this.buyBarTarget();if(!target)return;
       this.measure('pageStep','buy-bar');
       if(!target.choice&&!target.real.disabled){target.real.click();return;}
-      if(target.choice===target.size){this.focusSize(target.size);return;}
+      if(target.choice===target.size){this.focusSize(target.size);this.onCartViewport();return;}
+      if(this.dataset?.bwPdp==='c'){
+        const more=target.choice?.closest('.bw-more-options');
+        if(more)more.open=true;
+        target.choice?.scrollIntoView({block:'center',behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'});
+        target.choice?.focus({preventScroll:true});
+        this.onCartViewport();
+        return;
+      }
       target.box.style.scrollMarginTop='90px';target.box.scrollIntoView({block:'start',behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'});
       target.choice.focus({preventScroll:true});
     }
