@@ -404,6 +404,7 @@ for(const crumb of this.shadowRoot.querySelectorAll('.breadcrumb > a:first-child
 
  const usesCompactProductLayout=()=>new URLSearchParams(location.search).get('design')!=='old';
  const ZALANDO_ICONS={
+  lock:'<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="10" width="14" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3M12 14v3"/></svg>',
   truck:'<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 5h12v11H2zM14 9h4l4 4v3h-8"/><circle cx="6.5" cy="18" r="2"/><circle cx="17.5" cy="18" r="2"/></svg>',
   box:'<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 2 9 4.5v11L12 22l-9-4.5v-11z"/><path d="M3 6.5 12 11l9-4.5M12 11v11"/></svg>',
   undo:'<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 14 4 9l5-5"/><path d="M4 9h10.5a5.5 5.5 0 0 1 0 11H11"/></svg>',
@@ -789,25 +790,27 @@ for(const crumb of this.shadowRoot.querySelectorAll('.breadcrumb > a:first-child
   const isYs=!!root.querySelector('.surface .ys-layout');
   const de=this.campaignGerman();
 
+  let rows='';
   if(strong){
    const returnLine=isYs
     ?(buyBox.querySelector('.ys-legalline[data-ys-legal="poster"]')?.textContent.replace(/\s*Terms\s*$/i,'').trim()||root.querySelector('.bw-acc-details .ys-legalline[data-ys-legal="poster"]')?.textContent.replace(/\s*Terms\s*$/i,'').trim()||(de?'Für dich gefertigt · Rückgabe nur bei Mängeln.':'Made for you, so no returns for a change of mind. Faulty prints replaced free.'))
     :(root.querySelector('.bw-acc-details .ys-trust li:last-child')?.textContent.trim()||buyBox.querySelector('.ys-trust li:last-child')?.textContent.trim()||(de?'14 Tage Widerrufsrecht für Verbraucher':'14-day right of withdrawal for consumers'));
    const subParts=[christmas,rwSub].filter(Boolean).join(' · ');
-   const rows=[
+   rows=[
     `<div class="bw-del-row">${ZALANDO_ICONS.truck}<div><strong>${esc(strong)}</strong>${subParts?`<span>${esc(subParts)}</span>`:''}</div></div>`,
     shipTile?`<div class="bw-del-row">${ZALANDO_ICONS.box}<div><span>${esc(shipTile)}</span></div></div>`:'',
     returnLine?`<div class="bw-del-row">${ZALANDO_ICONS.undo}<div><span>${esc(returnLine)}</span></div></div>`:''
    ].filter(Boolean).join('');
-   card.innerHTML=rows;
   }else if(rwDig){
    const txt=rwDig.textContent.trim();
    const shown=txt.length>90&&plain?plain:txt;
    rwDig.hidden=txt.length<=90;
-   card.innerHTML=`<div class="bw-del-row">${ZALANDO_ICONS.mail}<div><span>${esc(shown)}</span></div></div>`;
+   rows=`<div class="bw-del-row">${ZALANDO_ICONS.mail}<div><span>${esc(shown)}</span></div></div>`;
   }else if(plain){
-   card.innerHTML=`<div class="bw-del-row">${ZALANDO_ICONS.mail}<div><span>${esc(plain)}</span></div></div>`;
+   rows=`<div class="bw-del-row">${ZALANDO_ICONS.mail}<div><span>${esc(plain)}</span></div></div>`;
   }
+  const paymentLabel=de?'Sichere Kartenzahlung':'Secure card checkout';
+  card.innerHTML=`<div class="bw-del-row bw-payment-row">${ZALANDO_ICONS.lock}<div><strong>${paymentLabel}</strong><div class="bw-payment-marks">${this.bwPaymentChips(de)}</div></div></div>${rows}`;
  };
 
  P.bwCalmProductLayout=function(){
@@ -869,11 +872,13 @@ for(const crumb of this.shadowRoot.querySelectorAll('.breadcrumb > a:first-child
    accList.append(storyAcc.d);
   }
 
-  // 2. Details & paper / materials (includes spec mirror, paper note, trust/pay/maker, multi-buy, voucher, legalline, real-print, Black Week picks, cross-formats)
+  layout.querySelectorAll('.ys-pay').forEach(node=>node.remove());
+
+  // 2. Details & paper / materials (includes spec mirror, paper note, trust, maker, multi-buy, voucher, legalline, real-print, Black Week picks, cross-formats)
   const specEl=buyBox.querySelector('.spec');if(specEl)specEl.classList.add('bw-hidden-control');
   const paperNote=buyBox.querySelector('#poster-paper-note');
   const detailNodes=[];
-  for(const sel of ['.ys-multi','[data-ys-mounted-saving]','.ys-trust','[data-ys-gift]','.ys-pay','[data-ys-mounted-spec]','[data-ys-mounted-christmas]','.ys-legalline','.ys-maker']){
+  for(const sel of ['.ys-multi','[data-ys-mounted-saving]','.ys-trust','[data-ys-gift]','[data-ys-mounted-spec]','[data-ys-mounted-christmas]','.ys-legalline','.ys-maker']){
    for(const n of buyBox.querySelectorAll(`:scope > ${sel}`))detailNodes.push(n);
   }
   const realPrint=infoBox?.querySelector('.p12-real-print');

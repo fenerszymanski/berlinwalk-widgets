@@ -1060,6 +1060,10 @@ button.ys-words-tag:focus-visible{outline:2px solid var(--green);outline-offset:
 :host([design2][data-bw-pdp="c"]) .bw-del-row strong{display:block;font-weight:700;color:var(--green)}
 :host([design2][data-bw-pdp="c"]) .bw-del-row span{display:block;font-size:12.5px;color:var(--muted)}
 :host([design2][data-bw-pdp="c"]) .bw-del-row strong + span{margin-top:2px}
+:host([design2][data-bw-pdp="c"]) .bw-payment-marks{margin-top:7px}
+:host([design2][data-bw-pdp="c"]) .bw-payment-marks .ys-cards{display:flex}
+:host([design2][data-bw-pdp="c"]) .bw-payment-marks .ys-card{display:inline-flex;flex:none}
+:host([design2][data-bw-pdp="c"]) .ys-card-paypal img{display:block;width:54px;height:19px;object-fit:contain}
 
 :host([design2][data-bw-pdp="c"]) .bw-accordions{margin:18px 0 0;border-top:1px solid #E2E2DA}
 :host([design2][data-bw-pdp="c"]) .bw-accordions > details{border:0;border-bottom:1px solid #E2E2DA;background:transparent;border-radius:0;margin:0;padding:0}
