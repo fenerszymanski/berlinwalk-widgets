@@ -560,7 +560,7 @@ for(const crumb of this.shadowRoot.querySelectorAll('.breadcrumb > a:first-child
    const rightCol=root.querySelector('.bw-right-col');
    if(rightCol){
     rightCol.addEventListener('input',()=>selectSlide(0));
-    rightCol.addEventListener('click',e=>{if(e.target.closest?.('[data-ys-pick],[data-ys-go],[data-ys-format],[data-ys-size],[data-ys-layout],[data-ys-colour],[data-home-count],[data-bw-ys-format],[data-bw-ys-size]'))selectSlide(0);});
+    rightCol.addEventListener('click',e=>{if(e.target.closest?.('[data-ys-pick],[data-ys-go],[data-ys-format],[data-ys-size],[data-ys-layout],[data-ys-colour],[data-home-count]'))selectSlide(0);});
    }
   }
  };
@@ -708,9 +708,14 @@ for(const crumb of this.shadowRoot.querySelectorAll('.breadcrumb > a:first-child
 
    if(!buyBox.dataset.bwYsSyncBound){
     buyBox.dataset.bwYsSyncBound='1';
-    buyBox.addEventListener('click',()=>queueMicrotask(()=>this.bwSyncYsControls?.()));
-    buyBox.addEventListener('change',()=>queueMicrotask(()=>this.bwSyncYsControls?.()));
-    buyBox.addEventListener('input',()=>queueMicrotask(()=>this.bwSyncYsControls?.()));
+    const sync=()=>queueMicrotask(()=>this.bwSyncYsControls());
+    buyBox.addEventListener('click',event=>{
+     if(!event.target.closest('select'))sync();
+    });
+    buyBox.addEventListener('change',sync);
+    buyBox.addEventListener('input',event=>{
+     if(!event.target.matches('[data-bw-ys-format],[data-bw-ys-size]'))sync();
+    });
     root.querySelector('.surface .ys-search-slot')?.addEventListener('click',()=>queueMicrotask(()=>this.bwSyncYsControls?.()));
    }
    this.bwSyncYsControls();
@@ -734,8 +739,10 @@ for(const crumb of this.shadowRoot.querySelectorAll('.breadcrumb > a:first-child
     const b=btns.find(x=>x.dataset.ysSize===opt.value);
     if(!b)continue;
     const pr=b.querySelector('[data-ys-sizeprice]')?.textContent.trim()||'';
-    opt.textContent=pr?`${b.dataset.ysSize} · ${pr}`:b.dataset.ysSize;
-    if(b.getAttribute('aria-checked')==='true')sizeSel.value=b.dataset.ysSize;
+    const label=pr?`${b.dataset.ysSize} · ${pr}`:b.dataset.ysSize;
+    // Rewriting a native option can close Chrome's open select menu.
+    if(opt.textContent!==label)opt.textContent=label;
+    if(b.getAttribute('aria-checked')==='true'&&sizeSel.value!==opt.value)sizeSel.value=opt.value;
    }
   }
   const paperLbl=buyBox.querySelector('[data-ys="paperlabel"]'),paperSel=buyBox.querySelector('[data-ys="paper"]'),paperNote=buyBox.querySelector('[data-ys="papernote"]');
