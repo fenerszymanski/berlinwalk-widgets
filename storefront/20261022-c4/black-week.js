@@ -14,8 +14,9 @@ export const BLACK_WEEK = Object.freeze({
     en: Object.freeze({
       name: 'Black Week',
       until: 'until 30 November',
-      title: 'Buy 2, get 25% off the cheaper one',
-      keep: Object.freeze(['25% off', 'the cheaper one']),
+      title: 'Buy two, get the second one 25% off.',
+      keep: Object.freeze(['25% off']),
+      note: 'If the prices differ, the 25% comes off the cheaper item.',
       line: 'T-shirts, hoodies and posters. Automatically applied in your cart.',
       cta: 'Shop Black Week',
       altClothing: 'Tempelhof Classic T-shirt in black, worn by a smiling man outdoors.',
@@ -24,8 +25,9 @@ export const BLACK_WEEK = Object.freeze({
     de: Object.freeze({
       name: 'Black Week',
       until: 'bis 30. November',
-      title: '2 kaufen, das günstigere 25 % reduziert',
-      keep: Object.freeze(['das günstigere', '25 % reduziert']),
+      title: 'Zwei kaufen, das zweite 25 % günstiger.',
+      keep: Object.freeze(['25 % günstiger']),
+      note: 'Bei unterschiedlichen Preisen gilt der Rabatt für den günstigeren Artikel.',
       line: 'T-Shirts, Hoodies und Poster. Der Rabatt kommt automatisch in den Warenkorb.',
       cta: 'Zum Shop',
       altClothing: 'Tempelhof Classic T-Shirt in Schwarz, getragen von einem lächelnden Mann im Freien.',

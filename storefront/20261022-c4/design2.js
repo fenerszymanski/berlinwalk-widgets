@@ -2,12 +2,12 @@ import {clothingCards,garmentDesign,syncClothingSeo} from './clothing.js?v=cloth
 import {qualityOf,designKey,displayName,designName,designCards,designRepresentative,QUALITY_TEXT,installQuality} from './tshirt-designs.js?v=hoodies-20261116-v1';
 import {extrasEnabled,prepareExtras,installExtras} from './store-extras.js?v=xmas-gifts-20261117-v1';
 import {COLOR_SWATCHES,apparelCardColors,apparelCardSelection,apparelCardProduct,colorName} from './apparel-card-colors.js?v=berlin-bear-black-20261120-v1';
-import {DESIGN2_TEXT,translateDesign2} from './ys-de.js?v=size-required-20261122-v1';
+import {DESIGN2_TEXT,translateDesign2} from './ys-de.js?v=unisex-hoodies-20261122-v1';
 import {matchesSearch,familyFor,recommendationRows,nativeRecommendationEligible} from './design2-catalog.js?v=hoodies-20261116-v1';
 import {languageUrl,navigateLanguageLink} from './language-navigation.js?v=store-design2-fix4b-20261113-v1';
 import {installGalleryZoom} from './gallery-zoom.js?v=zoom-sort-20261117-v1';
-import {BLACK_WEEK,blackWeekActive,blackWeekEligibleRow} from './black-week.js?v=clothing-boost-20261121-v1';
-import {pageMedia,offerLineHtml,pickSecondItems,secondItemsHtml,sizeGuideHtml,armBlackWeekEnd} from './clothing-boost.js?v=clothing-boost-20261121-v1';
+import {BLACK_WEEK,blackWeekActive,blackWeekEligibleRow} from './black-week.js?v=unisex-hoodies-20261122-v1';
+import {pageMedia,offerLineHtml,pickSecondItems,secondItemsHtml,sizeGuideHtml,armBlackWeekEnd} from './clothing-boost.js?v=unisex-hoodies-20261122-v1';
 let recommendations,translations,exploreImages,listingOrder=null;
 // Sort data for store listings (Yusuf, 17 Nov 2026). Built by scripts/store-listing-order.mjs; a missing file keeps the curated order.
 // Selections survive Wix replacing the loading element within the same document.
@@ -196,12 +196,17 @@ P.landingView=function(){if(this.xgGuide()){const t=document.createElement('temp
   const title=c.keep.reduce((text,chunk)=>text.replace(esc(chunk),`<span class="d2-bw-nb">${esc(chunk)}</span>`),esc(c.title));
   const photo=(kind,alt,first)=>{const base=BLACK_WEEK.images[kind];return `<img src="${esc(asset(base+'-800.webp'))}" srcset="${esc(asset(base+'-480.webp'))} 480w, ${esc(asset(base+'-800.webp'))} 800w" sizes="(max-width:740px) 46vw, 330px" alt="${esc(alt)}" width="800" height="1000"${first?' fetchpriority="high"':''} decoding="async">`;};
   return `<section class="d2-hero d2-hero-bw bw-raw" data-bw-campaign="${esc(BLACK_WEEK.id)}">
-   <div class="d2-hero-copy"><p class="d2-bw-kicker"><b>${esc(c.name)}</b> <span class="d2-bw-until"><span class="d2-bw-dot" aria-hidden="true">·</span> ${esc(c.until)}</span></p><h1>${title}</h1><p class="d2-bw-line">${esc(c.line)}</p><a class="primary" data-d2-hero href="${esc(this.d2href(this.navigation.clothingHref()))}">${esc(c.cta)}</a></div>
+   <div class="d2-hero-copy"><p class="d2-bw-kicker"><b>${esc(c.name)}</b> <span class="d2-bw-until"><span class="d2-bw-dot" aria-hidden="true">·</span> ${esc(c.until)}</span></p><h1>${title}</h1><p class="bw-offer-note">${esc(c.note)}</p><p class="d2-bw-line">${esc(c.line)}</p><a class="primary" data-d2-hero href="${esc(this.d2href(this.navigation.clothingHref()))}">${esc(c.cta)}</a></div>
    <div class="d2-bw-visual">${photo('clothing',c.altClothing,true)}${photo('poster',c.altPoster,false)}</div>
   </section>`;
  };
+ P.bwCartOffer=function(){
+  const html=offerLineHtml({de:this.cartGerman(),esc});
+  if(html)armBlackWeekEnd(this);
+  return html;
+ };
  P.d2homeHero=function(){
-  if(blackWeekActive())return this.d2blackWeekHero();
+  if(blackWeekActive()){if(this.isConnected)armBlackWeekEnd(this);return this.d2blackWeekHero();}
   const holiday=Date.now()<Date.parse(GIFT_GUIDE.festiveUntil);
   const de=this.campaignGerman();
   const gifts=holiday?this.navigation.STORE_MENU_DESIGN2.find(group=>group.id==='gifts'):null;
@@ -240,7 +245,10 @@ P.landingView=function(){if(this.xgGuide()){const t=document.createElement('temp
  const cardFormat=this.category==='print'&&!search&&['digital','printed'].includes(format)?format:'all';
  products=this.d2sortCards(products,model,cardFormat);const keepSort=u=>{const s=new URLSearchParams(location.search).get('sort');if(s)u.searchParams.set('sort',s);return u;};
  const title=q.get('view')==='explore'?'Explore Berlin':search?'Search results':this.category==='print'?this.filter==='all'?'All posters':({everyday:'Everyday',landmarks:'Landmarks',stories:'Berlin Stories',districts:'Districts',sets:'Sets'}[this.filter]):selected?.title||'Available products';
- return `<section class="wrap d2-listing"><h1 class="d2-list-title bw-raw">${esc(this.d2text(this.category==='clothing'&&!search?'Berlin Clothing':title))}</h1>${this.category==='clothing'&&!search?this.d2clothingFilters():''}${this.campaignGerman()&&!search&&(['audio','guides'].includes(this.category)||['virtual','explore'].includes(q.get('view')))?`<p class="d2-language-intro bw-raw">${esc(this.d2text('My audio walks, guides and virtual tours are available in English.'))}</p>`:''}${search?`<p class="bw-raw d2-query">${esc(search)}</p>`:''}${this.category==='print'&&!search?this.d2collections()+`<nav class="d2-formats bw-raw" aria-label="${esc(this.d2text('Format'))}">${[['all','All'],['printed','Printed'],['digital','Digital']].map(([id,label])=>{const u=keepSort(new URL(this.storeHref('print',this.filter)));if(id!=='all')u.searchParams.set('format',id);return `<a href="${esc(u.href)}" ${format===id?'aria-current="page"':''}>${esc(this.d2text(label))}</a>`;}).join('')}</nav>`:''}${products.length>1?this.d2sortBar(products.length):''}<div class="grid category-grid d2-grid">${products.map(p=>this.d2Loading?this.skeletonCard(p,false,cardFormat):this.card(p,false,cardFormat,model)).join('')}</div>${!products.length?`<div class="d2-empty bw-raw"><h2>${esc(this.d2text('No results found.'))}</h2><p>${esc(this.d2text('Try one of these categories.'))}</p><nav>${this.d2groups().map(g=>`<a class="outline" href="${esc(g.href)}">${esc(g.label)}</a>`).join('')}</nav></div>`:''}</section>`;};
+ const hasOffer=!search&&blackWeekActive()&&products.some(p=>blackWeekEligibleRow(this.d2cardNative(p)));
+ const offer=hasOffer?offerLineHtml({de:this.campaignGerman(),esc}):'';
+ if(offer&&this.isConnected)armBlackWeekEnd(this);
+ return `<section class="wrap d2-listing"><h1 class="d2-list-title bw-raw">${esc(this.d2text(this.category==='clothing'&&!search?'Berlin Clothing':title))}</h1>${offer}${this.category==='clothing'&&!search?this.d2clothingFilters():''}${this.campaignGerman()&&!search&&(['audio','guides'].includes(this.category)||['virtual','explore'].includes(q.get('view')))?`<p class="d2-language-intro bw-raw">${esc(this.d2text('My audio walks, guides and virtual tours are available in English.'))}</p>`:''}${search?`<p class="bw-raw d2-query">${esc(search)}</p>`:''}${this.category==='print'&&!search?this.d2collections()+`<nav class="d2-formats bw-raw" aria-label="${esc(this.d2text('Format'))}">${[['all','All'],['printed','Printed'],['digital','Digital']].map(([id,label])=>{const u=keepSort(new URL(this.storeHref('print',this.filter)));if(id!=='all')u.searchParams.set('format',id);return `<a href="${esc(u.href)}" ${format===id?'aria-current="page"':''}>${esc(this.d2text(label))}</a>`;}).join('')}</nav>`:''}${products.length>1?this.d2sortBar(products.length):''}<div class="grid category-grid d2-grid">${products.map(p=>this.d2Loading?this.skeletonCard(p,false,cardFormat):this.card(p,false,cardFormat,model)).join('')}</div>${!products.length?`<div class="d2-empty bw-raw"><h2>${esc(this.d2text('No results found.'))}</h2><p>${esc(this.d2text('Try one of these categories.'))}</p><nav>${this.d2groups().map(g=>`<a class="outline" href="${esc(g.href)}">${esc(g.label)}</a>`).join('')}</nav></div>`:''}</section>`;};
  P.shop=function(){if(this.routeError)return old.shop.call(this);const model=this.model||this.skeletonModel;if(this.landing)return this.landingView();const q=new URLSearchParams(location.search);return this.category==='all'&&!q.get('q')&&!q.get('view')?this.d2home(model):this.d2listing(model);};
  P.skeletonShop=function(route,model){const routeState=this.navigation.resolveStoreRoute({categorySlug:route.categorySlug||'all-products',search:location.search});const saved={category:this.category,filter:this.filter,landing:this.landing,d2Loading:this.d2Loading};this.category=routeState.category||'all';this.filter=routeState.filter||'all';const q=new URLSearchParams(location.search);this.landing=!q.has('tab')&&!q.has('collection')?this.navigation.STORE_LANDINGS?.[route.categorySlug]||null:null;this.d2Loading=!this.catalogue&&!this.snapshotUsable();try{return this.skeletonBar(model,this.category)+(this.xgGuide()?this.d2giftGuide(this.landing,model,true):this.landing?old.skeletonShop.call(this,route,model).replace(/^.*?<\/aside>/s,''):this.shop());}finally{Object.assign(this,saved);}};
  P.skeletonProduct=function(route,model){const html=old.skeletonProduct.call(this,route,model),special=route.productId==='8aaf5412-7f21-42c7-acfb-85dd8417d68c'||route.productId==='d35601ed-3b43-4269-afb9-32e7c3b1e128';return special?html:html.replace('<div class="wrap">','<div class="wrap d2-standard">');};
@@ -284,6 +292,7 @@ P.landingView=function(){if(this.xgGuide()){const t=document.createElement('temp
   if(product.group!=='apparel'||product.unavailable)return;
   const de=this.campaignGerman(),native=this.d2cardNative(product),eligible=blackWeekEligibleRow(native),buy=root.querySelector('.buy-box'),row=buy?.querySelector(':scope > .buy-row');
   if(eligible&&blackWeekActive()){const price=root.querySelector('.product-title .price'),line=offerLineHtml({de,esc});if(price&&line){price.insertAdjacentHTML('afterend',line);armBlackWeekEnd(this);}}
+  if(row)row.insertAdjacentHTML('beforebegin',`<p class="bw-unisex bw-raw" data-bw-unisex>${esc(this.d2text('Unisex fit. Size up for a looser look.'))}</p>`);
   const guide=sizeGuideHtml({product,de,esc});if(guide&&row)row.insertAdjacentHTML('beforebegin',guide);
   if(eligible&&row){const picks=secondItemsHtml({de,esc,cards:this.d2secondItems(product)}),note=buy.querySelector(':scope > .delivery');if(picks){if(note)note.insertAdjacentHTML('afterend',picks);else row.insertAdjacentHTML('afterend',picks);armBlackWeekEnd(this);}}
  };

@@ -1,5 +1,5 @@
 {
-  "release": "home-then-now-20261121-black-week-cta",
+  "release": "home-then-now-20261122-black-week-copy",
   "hero": {
     "img1928": "assets/hero-1928.webp",
     "imgToday": "assets/hero-today.webp",
@@ -521,25 +521,25 @@
       "label": "Black Week",
       "name": "Black Week",
       "eyebrow": "until 30 November",
-      "title": "Buy 2, get 25% off the cheaper one",
+      "title": "Buy two, get the second one 25% off.",
       "keep": [
-        "25% off",
-        "the cheaper one"
+        "25% off"
       ],
       "lead": "T-shirts, hoodies and posters. Automatically applied in your cart.",
-      "cta": "Shop Black Week"
+      "cta": "Shop Black Week",
+      "note": "If the prices differ, the 25% comes off the cheaper item."
     },
     "de": {
       "label": "Black Week",
       "name": "Black Week",
       "eyebrow": "bis 30. November",
-      "title": "2 kaufen, das günstigere 25 % reduziert",
+      "title": "Zwei kaufen, das zweite 25 % günstiger.",
       "keep": [
-        "das günstigere",
-        "25 % reduziert"
+        "25 % günstiger"
       ],
       "lead": "T-Shirts, Hoodies und Poster. Der Rabatt kommt automatisch in den Warenkorb.",
-      "cta": "Zum Shop"
+      "cta": "Zum Shop",
+      "note": "Bei unterschiedlichen Preisen gilt der Rabatt für den günstigeren Artikel."
     },
     "visual": {
       "type": "duo",

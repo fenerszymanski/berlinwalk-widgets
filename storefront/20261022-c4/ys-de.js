@@ -1,5 +1,6 @@
 // Design 2 UI dictionary, shared by the renderer and its coverage test.
 export const DESIGN2_TEXT = Object.freeze({
+  "Unisex fit. Size up for a looser look.": "Unisex-Schnitt. Für einen lockereren Sitz eine Größe größer wählen.",
   "Berlin T-shirts": "Berlin T-Shirts",
  "Free":"Kostenlos",
  "In English":"Auf Englisch",

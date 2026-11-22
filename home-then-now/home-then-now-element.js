@@ -8,7 +8,7 @@
   'use strict';
 
   const DATA = {
-    "release": "home-then-now-20261121-black-week-cta",
+    "release": "home-then-now-20261122-black-week-copy",
     "hero": {
       "img1928": "assets/hero-1928.webp",
       "imgToday": "assets/hero-today.webp",
@@ -530,25 +530,25 @@
         "label": "Black Week",
         "name": "Black Week",
         "eyebrow": "until 30 November",
-        "title": "Buy 2, get 25% off the cheaper one",
+        "title": "Buy two, get the second one 25% off.",
         "keep": [
-          "25% off",
-          "the cheaper one"
+          "25% off"
         ],
         "lead": "T-shirts, hoodies and posters. Automatically applied in your cart.",
-        "cta": "Shop Black Week"
+        "cta": "Shop Black Week",
+        "note": "If the prices differ, the 25% comes off the cheaper item."
       },
       "de": {
         "label": "Black Week",
         "name": "Black Week",
         "eyebrow": "bis 30. November",
-        "title": "2 kaufen, das günstigere 25 % reduziert",
+        "title": "Zwei kaufen, das zweite 25 % günstiger.",
         "keep": [
-          "das günstigere",
-          "25 % reduziert"
+          "25 % günstiger"
         ],
         "lead": "T-Shirts, Hoodies und Poster. Der Rabatt kommt automatisch in den Warenkorb.",
-        "cta": "Zum Shop"
+        "cta": "Zum Shop",
+        "note": "Bei unterschiedlichen Preisen gilt der Rabatt für den günstigeren Artikel."
       },
       "visual": {
         "type": "duo",
@@ -785,7 +785,7 @@
   function bwhBlackWeekSlide(d) {
     const b = d.blackWeek, de = bwhGerman(), t = de ? b.de : b.en;
     return {
-      key: 'black-week', theme: 'bw', label: t.label, name: t.name, eyebrow: t.eyebrow, title: t.title, keep: t.keep, lead: t.lead,
+      key: 'black-week', theme: 'bw', label: t.label, name: t.name, eyebrow: t.eyebrow, title: t.title, keep: t.keep, lead: t.lead, note: t.note,
       cta: { text: t.cta, href: de ? b.deHref : (b.href || d.storeHref) },
       visual: { type: b.visual.type, items: b.visual.items.map((it) => ({ img: it.img, w: it.w, h: it.h, alt: de ? it.altDe : it.alt })) }
     };
@@ -869,6 +869,7 @@
           <div class="bwh-slide__copy">
             <span class="bwh-eyebrow">${s.name ? `<b class="bwh-eyebrow__name">${bwhEsc(s.name)}</b> <span class="bwh-eyebrow__until"><span class="bwh-eyebrow__dot" aria-hidden="true">·</span> ${bwhEsc(s.eyebrow)}</span>` : bwhEsc(s.eyebrow)}</span>
             ${title}
+            ${s.note ? `<p class="bwh-bw-note">${bwhEsc(s.note)}</p>` : ''}
             <p class="bwh-lead bwh-hero__lead">${bwhEsc(s.lead)}</p>
             <div class="bwh-hero__ctas">
               <a class="bwh-btn bwh-btn--yellow" href="${bwhEsc(bwhHref(s.cta.href))}" data-bwh-section="hero" data-bwh-item="slide-${bwhEsc(s.key)}" data-bwh-position="${i + 1}">${bwhEsc(s.cta.text)}</a>

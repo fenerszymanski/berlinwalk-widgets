@@ -5,7 +5,7 @@
 //  2. offerLineHtml: the approved Black Week sentence next to the price (black-week.js holds the words and the date gate).
 //  3. pickSecondItems / secondItemsHtml: up to three other items from the same Black Week collection, each a plain link to its product page.
 //  4. sizeChartFor / sizeGuideHtml: an expandable size guide with the manufacturer chart of the garment blank.
-import {BLACK_WEEK,blackWeekActive} from './black-week.js?v=clothing-boost-20261121-v1';
+import {BLACK_WEEK,blackWeekActive} from './black-week.js?v=unisex-hoodies-20261122-v1';
 
 // 1. Person photos. Every file below was checked by short-lived look agents on 21 Nov 2026 (contact sheets of all 144 apparel gallery photos, yes/no per
 // tile; a Sonnet look judged the five borderline ones). The number ranks a photo as a first picture: +2 when the print is readable, +1 when the photo is
@@ -58,7 +58,8 @@ export function pageMedia(media, color = media?.color) {
   if (!media?.lead) return null;
   const person = personFirst(media, color), garment = media.printDetail ? [media.printDetail, media.lead] : [media.lead];
   if (!person) return {first: media.printDetail || media.lead, gallery: media.printDetail ? [media.lead, ...media.gallery] : media.gallery, person: null};
-  return {first: person, gallery: [...garment, ...media.gallery.filter(item => item !== person)], person};
+  const paired = media.gallery.filter(item => item.pairedWith === person.image);
+  return {first: person, gallery: [...paired, ...garment, ...media.gallery.filter(item => item !== person && !paired.includes(item))], person};
 }
 
 // 2. Offer line. The sentence is BLACK_WEEK.copy.<lang>.title, unchanged; the chunks that must not break stay in one piece (same technique as the hero).
@@ -66,7 +67,7 @@ export function offerLineHtml({de = false, esc, now} = {}) {
   if (!blackWeekActive(now)) return '';
   const c = BLACK_WEEK.copy[de ? 'de' : 'en'];
   const text = c.keep.reduce((html, chunk) => html.replace(esc(chunk), `<span class="bw-offer-nb">${esc(chunk)}</span>`), esc(c.title));
-  return `<p class="bw-offer bw-raw" data-bw-offer data-bw-until="${esc(BLACK_WEEK.until)}">${text}</p>`;
+  return `<p class="bw-offer bw-raw" data-bw-offer data-bw-until="${esc(BLACK_WEEK.until)}">${text}<small class="bw-offer-note">${esc(c.note)}</small></p>`;
 }
 export const SECOND_HEADING = Object.freeze({en: 'You might also like', de: 'Das könnte dir auch gefallen'});
 export function secondHeading({de = false, now} = {}) {
@@ -95,7 +96,7 @@ export function secondItemsHtml({de = false, esc, cards, now} = {}) {
   if (!cards?.length) return '';
   const kind = {hoodie: 'Hoodie', tee: de ? 'T-Shirt' : 'T-shirt', poster: 'Poster'};
   const items = cards.map(card => `<article class="bw-pick" data-bw-pick>${card.tile}<a class="bw-pick-name" href="${esc(card.href)}">${esc(card.name)}</a><span class="bw-pick-kind">${esc(kind[card.kind] || '')}</span></article>`).join('');
-  return `<section class="bw-picks bw-raw" data-bw-picks aria-labelledby="bw-picks-h"><h2 id="bw-picks-h">${headingHtml({de, esc, now})}</h2><div class="bw-pick-grid">${items}</div></section>`;
+  return `<section class="bw-picks bw-raw" data-bw-picks aria-labelledby="bw-picks-h"><h2 id="bw-picks-h">${headingHtml({de, esc, now})}</h2>${blackWeekActive(now)?`<p class="bw-offer-note">${esc(BLACK_WEEK.copy[de ? 'de' : 'en'].note)}</p>`:''}<div class="bw-pick-grid">${items}</div></section>`;
 }
 
 // 4. Size guide. Numbers are the manufacturers' published charts converted from inches to cm at one decimal (Gildan 64000 spec sheet, Bella+Canvas 3001,
