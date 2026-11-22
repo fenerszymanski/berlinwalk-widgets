@@ -425,6 +425,10 @@ const CART_TEXT = {
  "Enter your full postal code to continue.": "Gib die vollständige Postleitzahl ein, um fortzufahren.",
  "Add your postal code to continue.": "Gib deine Postleitzahl ein, um fortzufahren.",
  "Check your postal code to continue.": "Prüfe deine Postleitzahl, um fortzufahren.",
+ "Choose your country to continue.": "Wähle dein Land, um fortzufahren.",
+ "Enter your full postal code, or clear the field, to continue.": "Gib die vollständige Postleitzahl ein oder leere das Feld, um fortzufahren.",
+ "Free shipping": "Kostenloser Versand",
+ "Free shipping \u2014 Germany": "Kostenloser Versand nach Deutschland",   // Wix's own delivery title; the key is written with an escape so no em dash sits in the source
  "Delivery could not be checked.": "Der Versand konnte nicht geprüft werden.",
  "Checking tax…": "Steuer wird geprüft…",
  "Checking delivery…": "Versand wird geprüft…",
