@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Leipziger Platz Look-For Walk: What to Spot in 15, 30 or 45 Minutes</title>
+<meta name="description" content="Choose how long you have at Leipziger Platz, the octagonal square next to Potsdamer Platz. The map puts what is worth looking for in walking order: the old gate opening, the Wall line across the octagon, the Wertheim site and the buildings that brought the shape back.">
+<link rel="stylesheet" href="../css/brand.css">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { overflow-x: hidden; }
+  body { font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #FFFFFF; color: #20241d; padding: 12px; }
+  .lp { border-radius: 16px; overflow: hidden; border: 1px solid #d8dfd0; background: #f7f6ef; }
+  .lp-head { padding: 18px 18px 6px; }
+  .lp-kick { display: inline-block; font-size: 10.5px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; color: #123D18; background: #FFE600; padding: 3px 8px; border-radius: 4px; }
+  .lp-head h1 { font-family: 'Merriweather', Georgia, serif; font-size: 21px; line-height: 1.3; margin-top: 9px; color: #1B5E20; }
+  .lp-head p { font-size: 13px; line-height: 1.6; color: #43493f; margin-top: 7px; max-width: 760px; }
+  .times { display: flex; flex-wrap: wrap; gap: 8px; padding: 10px 18px 14px; }
+  .times button { font-family: inherit; font-size: 15px; font-weight: 800; color: #123D18; background: #fff; border: 2px solid #123D18; border-radius: 999px; padding: 9px 18px; min-height: 44px; cursor: pointer; }
+  .times button[aria-current="true"] { background: #FFE600; color: #123D18; border-color: #123D18; }
+  .times button:focus-visible { outline: 3px solid #1B5E20; outline-offset: 2px; }
+  .times .hint { flex: 1 1 220px; font-size: 12.5px; line-height: 1.5; color: #43493f; align-self: center; }
+  .lp-body { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: 12px; padding: 0 12px 12px; align-items: start; }
+  .mapbox { background: #fff; border: 1px solid #dfe5d8; border-radius: 14px; padding: 8px; min-width: 0; }
+  #map { width: 100%; height: 440px; border-radius: 10px; background: #efeee6; }
+  #map .leaflet-tile-pane { filter: saturate(.45) brightness(1.04); }
+  .pin { width: 28px; height: 28px; border-radius: 50%; background: #123D18; color: #FFE600; font-weight: 800; font-size: 13px; display: flex; align-items: center; justify-content: center; border: 3px solid #FFE600; box-shadow: 0 2px 6px rgba(0,0,0,.3); }
+  .pin.skip { background: #b7bdb0; color: #fff; border-color: #fff; font-size: 10px; }
+  .legend { display: flex; flex-wrap: wrap; gap: 6px 14px; font-size: 11px; color: #555c50; padding: 8px 4px 2px; line-height: 1.4; }
+  .legend i { display: inline-block; width: 18px; height: 0; vertical-align: middle; margin-right: 5px; }
+  .legend .oct { border-top: 3px solid #1B5E20; }
+  .legend .wall { border-top: 3px dashed #E63946; }
+  .legend .path { border-top: 3px dotted #123D18; }
+  .plan { min-width: 0; display: flex; flex-direction: column; gap: 8px; }
+  .verdict { background: #123D18; color: #fff; border-radius: 14px; padding: 14px 16px; font-size: 14px; line-height: 1.55; }
+  .verdict b { color: #FFE600; }
+  .stop { background: #fff; border: 1px solid #dfe5d8; border-radius: 14px; padding: 12px 14px; display: grid; grid-template-columns: 32px minmax(0, 1fr); gap: 10px; cursor: pointer; }
+  .stop:focus-visible { outline: 3px solid #FFE600; outline-offset: 2px; }
+  .stop .n { width: 28px; height: 28px; border-radius: 50%; background: #FFE600; color: #123D18; font-weight: 800; display: flex; align-items: center; justify-content: center; font-size: 13px; }
+  .stop h2 { font-family: 'Merriweather', Georgia, serif; font-size: 15px; line-height: 1.35; color: #123D18; }
+  .stop .era { font-size: 11px; font-weight: 800; letter-spacing: .05em; text-transform: uppercase; color: #7a5a00; margin-top: 3px; }
+  .stop .d { font-size: 12.5px; line-height: 1.5; color: #4a5145; margin-top: 4px; }
+  .stop .look { font-size: 12.5px; line-height: 1.5; color: #123D18; margin-top: 5px; }
+  .stop .look b { color: #1B5E20; }
+  .stop .m { font-size: 11.5px; color: #6a7264; margin-top: 4px; }
+  .skipped { font-size: 12px; line-height: 1.5; color: #555c50; background: #eef0e9; border-radius: 12px; padding: 10px 12px; }
+  .foot { font-size: 11px; color: #6a7264; padding: 0 18px 14px; line-height: 1.5; }
+  @media (max-width: 720px) {
+    .lp-body { grid-template-columns: minmax(0, 1fr); }
+    #map { height: 320px; }
+    .times button { flex: 1 1 0; padding: 9px 8px; }
+  }
+</style>
+</head>
+<body>
+<div class="lp">
+  <div class="lp-head">
+    <span class="lp-kick">Next to Potsdamer Platz</span>
+    <h1>What to look for on Leipziger Platz, in the time you have</h1>
+    <p>Most people walk straight through the octagon on the way from Potsdamer Platz to the Mall of Berlin and miss everything it still tells you. Tell me how long you have. I put the things worth spotting in walking order, starting at the station side.</p>
+  </div>
+  <div class="times" role="group" aria-label="How long do you have?">
+    <button type="button" data-min="15">15 min</button>
+    <button type="button" data-min="30">30 min</button>
+    <button type="button" data-min="45">45 min</button>
+    <span class="hint" id="hint">Pick a time. Tap a stop to find it on the map.</span>
+  </div>
+  <div class="lp-body">
+    <div class="mapbox">
+      <div id="map" role="img" aria-label="Map of Leipziger Platz with the octagon outline, the approximate 1961 to 1989 inner Wall line and the numbered stops"></div>
+      <div class="legend"><span><i class="oct"></i>Octagon, laid out 1731 to 1734</span><span><i class="wall"></i>Inner Wall line 1961 to 1989 (approximate)</span><span><i class="path"></i>Your walk</span></div>
+    </div>
+    <div class="plan" id="plan" aria-live="polite"></div>
+  </div>
+  <p class="foot">Positions are approximate and taken from OpenStreetMap; the Wall line follows the Berlin monument authority's description of the inner wall across the square. The Mall of Berlin is closed on most Sundays, so the Wertheim stop is a look from outside then. Checked 22 November 2026.</p>
+</div>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+(function () {
+  var OCTAGON = [[52.50940,13.37745],[52.50990,13.37738],[52.51023,13.37786],[52.51023,13.37902],[52.50997,13.37943],[52.50935,13.37951],[52.50904,13.37907],[52.50898,13.37803]];
+  var WALL = [[52.50843,13.37857],[52.50910,13.37818],[52.51017,13.37873],[52.51120,13.37852]];
+  // order = walking order from the station side; rank = how much it earns its minutes (1 = must see)
+  var STOPS = [
+    { id: 'gate', order: 1, rank: 2, min: 4, ll: [52.50953,13.37735], name: 'The west opening: the old Potsdam Gate',
+      era: 'Gate 1730s to 20th century',
+      d: 'This gap towards Potsdamer Platz is where the city customs wall had its gate. In the 1820s Schinkel gave it two small gate houses. Nothing of them stands today.',
+      look: '<b>Look for:</b> how the octagon opens here and nowhere else on the west side. That opening is the old gate, still in the street plan.' },
+    { id: 'green', order: 2, rank: 1, min: 3, ll: [52.50969,13.37845], name: 'The middle green: count the corners',
+      era: 'Laid out 1731 to 1734',
+      d: 'Philipp Gerlach laid out an eight-sided square here for the new Friedrichstadt. It was called the Octogon and only became Leipziger Platz in 1814, after the Battle of Leipzig.',
+      look: '<b>Look for:</b> the eight corners. Turn on the spot and count them; the building fronts follow the old outline exactly.' },
+    { id: 'wallsouth', order: 3, rank: 1, min: 4, ll: [52.50910,13.37818], name: 'Wall pieces on the south side',
+      era: 'Border 1961 to 1989',
+      d: 'From August 1961 the square was death strip. The inner border wall ran diagonally across the octagon towards the Brandenburg Gate, so the middle of the square was no-man’s-land for 28 years.',
+      look: '<b>Look for:</b> the grey concrete slabs on the south side. They are pieces of the inner wall, the one that faced East Berlin.' },
+    { id: 'spy', order: 4, rank: 3, min: 3, ll: [52.50901,13.37929], name: 'South-east side: the new fronts',
+      era: 'Rebuilt after 1991',
+      d: 'After the 1991 competition the city rebuilt the octagon block by block. The museum fronts here, the Spy Museum at No. 9 among them, stand on plots that were empty for decades.',
+      look: '<b>Look for:</b> stone facades of similar height all round. The plan brought back the shape, not the old buildings.' },
+    { id: 'wertheim', order: 6, rank: 1, min: 6, ll: [52.51056,13.38040], name: 'The Wertheim site, now the Mall of Berlin',
+      era: 'Wertheim 1897 to 1944',
+      d: 'Alfred Messel’s Wertheim store opened here in 1897 and grew into one of the biggest department stores in Europe. The family lost it in 1938, bombs hit it in 1944 and the ruin was cleared in the 1950s. Its vaults survived and held the Tresor club from 1991 to 2005.',
+      look: '<b>Look for:</b> the long front on the north-east side and the covered passage through to Leipziger Straße. Closed on most Sundays.' },
+    { id: 'wallnorth', order: 7, rank: 2, min: 3, ll: [52.51017,13.37873], name: 'Wall pieces on the north side',
+      era: 'Border 1961 to 1989',
+      d: 'A second short stretch of the inner wall stands on the north side, on the line that crossed the square.',
+      look: '<b>Look for:</b> the line between the north and south pieces. That is the diagonal the Wall took through the octagon.' },
+    { id: 'embassy', order: 8, rank: 3, min: 3, ll: [52.51032,13.37749], name: 'North-west corner: the Canadian Embassy',
+      era: 'Opened April 2005',
+      d: 'One of the first big buildings to close the octagon again. The last gap, at the south-west corner, was only filled in 2021.',
+      look: '<b>Look for:</b> how the corner building is cut at an angle. The octagon dictates the shape of every plot.' },
+    { id: 'herrenhaus', order: 5, rank: 3, min: 9, ll: [52.50929,13.38126], name: 'A short walk east: the old Prussian upper house',
+      era: 'Finished 1904',
+      d: 'On Leipziger Straße, a few minutes east, the Prussian Herrenhaus survived. Since September 2000 it has been the seat of the Bundesrat.',
+      look: '<b>Look for:</b> the courtyard front behind the railings. It is one of the few buildings nearby that the square’s first visitors around 1900 would recognise.' }
+  ];
+
+  var map = L.map('map', { zoomControl: true, scrollWheelZoom: false, attributionControl: true }).setView([52.5098, 13.3790], 17);
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 19, attribution: '&copy; OpenStreetMap contributors' }).addTo(map);
+  L.polygon(OCTAGON, { color: '#1B5E20', weight: 3, fillColor: '#C5E1A5', fillOpacity: .28 }).addTo(map);
+  L.polyline(WALL, { color: '#E63946', weight: 3, dashArray: '8 6' }).addTo(map);
+  var layer = L.layerGroup().addTo(map);
+
+  var buttons = Array.prototype.slice.call(document.querySelectorAll('.times button'));
+  var plan = document.getElementById('plan');
+
+  function pick(minutes) {
+    // fill the time with the stops that earn it most, then walk them in street order
+    var byValue = STOPS.slice().sort(function (a, b) { return a.rank - b.rank || a.order - b.order; });
+    var used = 0;
+    var chosen = byValue.filter(function (s) {
+      if (used + s.min > minutes) return false;
+      used += s.min; return true;
+    });
+    chosen.sort(function (a, b) { return a.order - b.order; });
+    return { chosen: chosen, used: used };
+  }
+
+  function render(minutes) {
+    buttons.forEach(function (b) { b.setAttribute('aria-current', String(Number(b.dataset.min) === minutes)); });
+    var res = pick(minutes);
+    var ids = res.chosen.map(function (s) { return s.id; });
+    layer.clearLayers();
+    L.polyline(res.chosen.map(function (s) { return s.ll; }), { color: '#123D18', weight: 3, dashArray: '2 7', lineCap: 'round' }).addTo(layer);
+    STOPS.forEach(function (s) {
+      var idx = ids.indexOf(s.id);
+      var html = idx >= 0 ? '<div class="pin">' + (idx + 1) + '</div>' : '<div class="pin skip">·</div>';
+      L.marker(s.ll, { icon: L.divIcon({ className: '', html: html, iconSize: [28, 28], iconAnchor: [14, 14] }), title: s.name, keyboard: false }).addTo(layer);
+    });
+    var left = STOPS.filter(function (s) { return ids.indexOf(s.id) < 0; });
+    var out = '<div class="verdict"><b>' + minutes + ' minutes, ' + res.chosen.length + ' stops.</b> About ' + res.used + ' minutes of walking and looking, starting from the S-Bahn and U2 exits at Potsdamer Platz. ' +
+      (minutes === 15 ? 'This is the version for a change of trains: the shape, the Wall line and Wertheim.' : minutes === 30 ? 'This is the version I would do with a coffee in hand: every side of the octagon.' : 'This one adds the walk east to the old Prussian upper house on Leipziger Straße.') + '</div>';
+    out += res.chosen.map(function (s, i) {
+      return '<div class="stop" tabindex="0" data-id="' + s.id + '"><div class="n">' + (i + 1) + '</div><div><h2>' + s.name + '</h2><div class="era">' + s.era + '</div><p class="d">' + s.d + '</p><p class="look">' + s.look + '</p><p class="m">About ' + s.min + ' min</p></div></div>';
+    }).join('');
+    if (left.length) out += '<div class="skipped"><b>Left out at ' + minutes + ' minutes:</b> ' + left.map(function (s) { return s.name; }).join('; ') + '.</div>';
+    plan.innerHTML = out;
+    Array.prototype.forEach.call(plan.querySelectorAll('.stop'), function (el) {
+      function go() { var s = STOPS.filter(function (x) { return x.id === el.dataset.id; })[0]; map.setView(s.ll, 18); }
+      el.addEventListener('click', go);
+      el.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); go(); } });
+    });
+    document.getElementById('hint').textContent = minutes === 45 ? 'All the stops, with the walk to Leipziger Straße 3 and 4.' : 'Tap a stop to find it on the map.';
+    if (window.BWResize) window.BWResize();
+  }
+
+  buttons.forEach(function (b) { b.addEventListener('click', function () { render(Number(b.dataset.min)); }); });
+  render(30);
+  map.fitBounds(L.latLngBounds(OCTAGON).pad(0.35));
+})();
+</script>
+<script src="../js/brand.js"></script>
+</body>
+</html>
