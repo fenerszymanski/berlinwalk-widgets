@@ -16,7 +16,6 @@ const BW_SITE_FOOTER_LINKS = {
   whereInBerlin: 'https://www.berlinwalk.com/games/where-in-berlin',
   battle: 'https://www.berlinwalk.com/games/berlin-battle',
   daySurvival: 'https://www.berlinwalk.com/games/berlin-day-survival',
-  rewind: 'https://www.berlinwalk.com/games/berlin-rewind',
   bouncer: 'https://www.berlinwalk.com/games/berghain-bouncer',
   smile: 'https://www.berlinwalk.com/games/berlin-smile-challenge',
   tools: 'https://www.berlinwalk.com/berlin-tools',
@@ -475,7 +474,6 @@ class BWSiteFooterElement extends HTMLElement {
               ['Where in Berlin Do You Belong?', BW_SITE_FOOTER_LINKS.whereInBerlin],
               ['Berlin Battle', BW_SITE_FOOTER_LINKS.battle],
               ['Berlin Day Survival', BW_SITE_FOOTER_LINKS.daySurvival],
-              ['Berlin Rewind', BW_SITE_FOOTER_LINKS.rewind],
               ['Berghain Bouncer', BW_SITE_FOOTER_LINKS.bouncer],
               ['Berlin Smile Challenge', BW_SITE_FOOTER_LINKS.smile]
             ])}
