@@ -645,7 +645,8 @@ export function mountConfigurator(host, state, api) {
     refreshButton();
   }
   // ---- Search: Photon first (typo-tolerant, Berlin bbox), Nominatim when Photon fails or finds nothing (max one request per second, contact email). ----
-  let timer = 0, controller = null;
+  let timer = 0;
+  api.ysInput = input;
   const spacing = 1100;
   const PIN = '<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 0 0-7-7zm0 9.6A2.6 2.6 0 1 1 12 6.4a2.6 2.6 0 0 1 0 5.2z"/></svg>';
   async function photon(q, signal) {
@@ -672,24 +673,41 @@ export function mountConfigurator(host, state, api) {
     if (!response.ok) throw new Error('HTTP ' + response.status);
     return (await response.json()).map(r => ({...r, lat: Number(r.lat), lon: Number(r.lon)}));
   }
-  async function search(q) {
-    q = clean(q, 80);
-    if (q.length < 3) { results.hidden = true; setNote(q ? 'Keep typing (at least 3 letters).' : ''); refreshButton(); return; }
-    api.track?.('search');
-    controller?.abort(); controller = new AbortController(); const {signal} = controller;
-    setNote('Searching…');
+  // The storefront rebuilds this form now and then, once a few seconds after the page opens (seen 23 Nov 2026).
+  // The running search is kept on `api`, so the rebuilt form shows its answer instead of losing it.
+  async function lookup(q, signal) {
     let rows = [];
-    try { rows = await photon(q, signal); } catch (error) { if (error.name === 'AbortError') return; }
-    try { if (!rows.length && clean(input.value, 80) === q) rows = await nominatim(q, signal); } catch (error) { if (error.name === 'AbortError') return; if (!rows.length) { setNote('The address search did not answer. Try again in a moment.'); return; } }
-    if (clean(input.value, 80) !== q) return;
+    try { rows = await photon(q, signal); } catch (error) { if (error.name === 'AbortError') throw error; }
+    try { if (!rows.length && clean(api.ysInput.value, 80) === q) rows = await nominatim(q, signal); } catch (error) { throw error.name === 'AbortError' ? error : Object.assign(new Error('no answer'), {name: 'NoAnswer'}); }
+    return rows;
+  }
+  function show(job, rows) {
     const seen = new Set();
     rows = rows.filter(r => inBerlin(r.lat, r.lon)).filter(r => { const key = [placeLines(r)[0], r.address?.suburb || r.address?.city_district || ''].join('|').toLowerCase(); return !seen.has(key) && seen.add(key); }).slice(0, 5);
     state.results = rows;
     results.innerHTML = rows.map((r, i) => { const [main, sub] = placeLines(r); return `<li role="option"><button type="button" class="ys-pick" data-ys-pick="${i}">${PIN}<span class="ys-pick-text"><strong>${esc(main)}</strong><small>${esc(sub)}</small></span><span class="ys-pick-go" aria-hidden="true">›</span></button></li>`; }).join('');
     results.hidden = rows.length === 0;
     setNote(rows.length ? 'Tap your place to put it on the poster:' : 'Nothing found in Berlin. Check the spelling, or try the street name with a house number.', rows.length > 0);
-    if (!rows.length) api.track?.('noresult');
+    if (!rows.length && !job.counted) { job.counted = true; api.track?.('noresult'); }
+    if (job.autoPick && rows.length && !state.lat) { job.autoPick = false; results.querySelector('[data-ys-pick="0"]')?.click(); api.scrollSheet = Date.now(); scrollSheetSoon(); }
     refreshButton();
+  }
+  async function follow(job) {
+    let rows;
+    try { rows = await job.done; } catch (error) { if (error.name === 'NoAnswer' && api.ysSearch === job && input.isConnected) setNote('The address search did not answer. Try again in a moment.'); return; }
+    if (api.ysSearch !== job || !input.isConnected || clean(input.value, 80) !== job.q) return;
+    show(job, rows);
+  }
+  async function search(q) {
+    if (!input.isConnected) return;
+    q = clean(q, 80);
+    if (q.length < 3) { results.hidden = true; setNote(q ? 'Keep typing (at least 3 letters).' : ''); refreshButton(); return; }
+    api.track?.('search');
+    api.ysSearch?.controller.abort();
+    const job = api.ysSearch = {q, controller: new AbortController()};
+    job.done = lookup(q, job.controller.signal); job.done.catch(() => {});
+    setNote('Searching…');
+    await follow(job);
   }
   const schedule = () => { clearTimeout(timer); timer = setTimeout(() => search(input.value), 450); };
   input.addEventListener('input', () => { state.query = input.value; schedule(); });
@@ -698,6 +716,7 @@ export function mountConfigurator(host, state, api) {
   results.addEventListener('click', event => {
     const pick = event.target.closest('[data-ys-pick]'); if (!pick) return;
     const r = state.results?.[Number(pick.dataset.ysPick)]; if (!r) return;
+    if (api.ysSearch) api.ysSearch.picked = true;
     Object.assign(state, {lat: Math.round(Number(r.lat) * 1e5) / 1e5, lon: Math.round(Number(r.lon) * 1e5) / 1e5, address: addressLabel(r), title: titleFrom(r), area: areaFrom(r), query: input.value});
     host.querySelector('[data-ys="title"]').value = state.title; host.querySelector('[data-ys="area"]').value = state.area;
     results.hidden = true; setNote(''); showPoint(true); api.track?.('pick');
@@ -812,13 +831,15 @@ export function mountConfigurator(host, state, api) {
   if (api.scrollSheet && state.lat) scrollSheetSoon();
   // Address typed into the homepage banner (Yusuf, 25 Oct 2026): it arrives in sessionStorage (never in the URL, so it does not
   // reach analytics or the pixel), is used once, and runs the normal search; the first Berlin result goes straight onto the poster.
+  const pending = api.ysSearch;
+  if (pending && !pending.picked && pending.q === clean(input.value, 80)) { setNote('Searching…'); follow(pending); }
   if (!state.lat && !api.handoffDone) {
     api.handoffDone = true;
     let handed = '';
     try { const raw = JSON.parse(sessionStorage.getItem('bwYsStreet') || 'null'); sessionStorage.removeItem('bwYsStreet'); if (raw && Date.now() - raw.at < 10 * 60 * 1000) handed = clean(raw.q, 80); } catch (e) {}
     if (handed.length >= 3) {
       input.value = handed; state.query = handed;
-      search(handed).then(() => { if (state.results?.length && !state.lat) { results.querySelector('[data-ys-pick="0"]')?.click(); api.scrollSheet = Date.now(); scrollSheetSoon(); } });
+      search(handed); if (api.ysSearch?.q === handed) api.ysSearch.autoPick = true;
     }
   }
   countChoice(host,state,api,()=>mountConfigurator(host,state,api));
