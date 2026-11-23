@@ -649,10 +649,19 @@ export function mountConfigurator(host, state, api) {
   const spacing = 1100;
   const PIN = '<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 0 0-7-7zm0 9.6A2.6 2.6 0 1 1 12 6.4a2.6 2.6 0 0 1 0 5.2z"/></svg>';
   async function photon(q, signal) {
+    // Photon gets 6 seconds; a hanging answer must not block the Nominatim fallback (seen 12 Nov 2026).
     const url = `${PHOTON}?q=${encodeURIComponent(q)}&limit=10&lang=de&bbox=${BERLIN.west},${BERLIN.south},${BERLIN.east},${BERLIN.north}`;
-    const response = await fetch(url, {signal, headers: {Accept: 'application/json'}});
-    if (!response.ok) throw new Error('HTTP ' + response.status);
-    return ((await response.json()).features || []).map(fromPhoton).filter(r => r.city === 'Berlin');
+    const first = new AbortController(), stop = () => first.abort(), slow = setTimeout(stop, 6000);
+    signal.addEventListener('abort', stop);
+    try {
+      const response = await fetch(url, {signal: first.signal, headers: {Accept: 'application/json'}});
+      if (!response.ok) throw new Error('HTTP ' + response.status);
+      return ((await response.json()).features || []).map(fromPhoton).filter(r => r.city === 'Berlin');
+    } catch (error) {
+      if (signal.aborted) throw Object.assign(new Error('stopped'), {name: 'AbortError'});
+      if (error.name === 'AbortError') return [];
+      throw error;
+    } finally { clearTimeout(slow); signal.removeEventListener('abort', stop); }
   }
   async function nominatim(q, signal) {
     const wait = Math.max(0, (api.lastSearchAt || 0) + spacing - Date.now());
