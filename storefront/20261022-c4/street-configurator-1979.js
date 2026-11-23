@@ -578,9 +578,22 @@ export function createYs1979(base, profile) {
       Object.assign(state, {lat: Math.round(Number(r.lat) * 1e5) / 1e5, lon: Math.round(Number(r.lon) * 1e5) / 1e5, address: addressLabel(r), title: titleFrom(r), area: areaFrom(r), query: input.value});
       host.querySelector('[data-ys="title"]').value = state.title; host.querySelector('[data-ys="area"]').value = state.area;
       results.hidden = true; setNote(''); showPoint(true); api.track?.('pick');
-      const box = $('sheet').getBoundingClientRect();
-      if (box.bottom < 90 || box.top > innerHeight - 90) $('sheet').scrollIntoView({behavior: 'smooth', block: 'start'});
+      showSheet();
     });
+    // After a pick the poster must be in view (Yusuf, 23 Nov 2026). Side by side (desktop): only when it is almost off-screen.
+    // Stacked (phone, portrait iPad): whenever its top is cut off or less than 80 % of it shows between the store's sticky
+    // bar and the phone buy bar; it then lands just under the sticky bar. A touch keyboard is closed first.
+    function showSheet() {
+      if (matchMedia('(pointer: coarse)').matches) input.blur();
+      const sheet = $('sheet'), root = host.getRootNode(), box = sheet.getBoundingClientRect(), field = input.getBoundingClientRect();
+      const bar = selector => { const el = root.querySelector?.(selector), b = el?.getBoundingClientRect(); return b && b.height && b.bottom > 0 && b.top < innerHeight && /sticky|fixed/.test(getComputedStyle(el).position) ? b : null; };
+      const top = Math.max(0, bar('.shopbar')?.bottom || 0), bottom = Math.min(innerHeight, bar('.buy-bar:not([hidden])')?.top || innerHeight);
+      const stacked = box.left < field.right && box.right > field.left;
+      const seen = Math.min(box.bottom, bottom) - Math.max(box.top, top);
+      if (stacked ? box.top >= top && seen >= 0.8 * Math.min(box.height, bottom - top) : box.bottom >= 90 && box.top <= innerHeight - 90) return;
+      sheet.style.scrollMarginTop = Math.round(top + 12) + 'px';
+      sheet.scrollIntoView({behavior: 'smooth', block: 'start'});
+    }
     // Tap either photo: pixel offset -> metres -> new point (both photos show the same ground box).
     for (const name of ['photo-1928', 'photo-today']) {
       $(name).addEventListener('click', event => {
