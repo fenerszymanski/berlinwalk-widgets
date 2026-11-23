@@ -52,6 +52,15 @@
       cta: 'Survive the day'
     },
     {
+      id: 'berlin-rewind',
+      title: 'Berlin Rewind',
+      kicker: 'Archive game',
+      lead: 'Guess the year and district from real Berlin archive photos.',
+      image: 'berlin-rewind/assets/social/berlin-rewind-social-1200x630.jpg',
+      href: 'https://www.berlinwalk.com/games/berlin-rewind',
+      cta: 'Play Rewind'
+    },
+    {
       id: 'berlin-smile-challenge',
       title: 'Berlin Smile Challenge',
       kicker: 'Social puzzle',

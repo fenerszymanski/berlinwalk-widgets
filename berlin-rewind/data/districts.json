@@ -1,0 +1,66 @@
+{
+  "order": [
+    "mitte",
+    "pankow",
+    "friedrichshain-kreuzberg",
+    "charlottenburg-wilmersdorf",
+    "spandau",
+    "steglitz-zehlendorf",
+    "tempelhof-schoneberg",
+    "neukolln",
+    "treptow-kopenick",
+    "marzahn-hellersdorf",
+    "lichtenberg",
+    "reinickendorf"
+  ],
+  "districts": {
+    "mitte": {
+      "label": "Mitte",
+      "neighbors": ["pankow", "friedrichshain-kreuzberg", "charlottenburg-wilmersdorf", "tempelhof-schoneberg", "neukolln", "reinickendorf"]
+    },
+    "pankow": {
+      "label": "Pankow",
+      "neighbors": ["mitte", "friedrichshain-kreuzberg", "lichtenberg", "reinickendorf"]
+    },
+    "friedrichshain-kreuzberg": {
+      "label": "Friedrichshain-Kreuzberg",
+      "neighbors": ["mitte", "pankow", "neukolln", "treptow-kopenick", "lichtenberg"]
+    },
+    "charlottenburg-wilmersdorf": {
+      "label": "Charlottenburg-Wilmersdorf",
+      "neighbors": ["mitte", "spandau", "steglitz-zehlendorf", "tempelhof-schoneberg", "reinickendorf"]
+    },
+    "spandau": {
+      "label": "Spandau",
+      "neighbors": ["charlottenburg-wilmersdorf", "steglitz-zehlendorf", "reinickendorf"]
+    },
+    "steglitz-zehlendorf": {
+      "label": "Steglitz-Zehlendorf",
+      "neighbors": ["charlottenburg-wilmersdorf", "spandau", "tempelhof-schoneberg", "neukolln"]
+    },
+    "tempelhof-schoneberg": {
+      "label": "Tempelhof-Schoneberg",
+      "neighbors": ["mitte", "charlottenburg-wilmersdorf", "steglitz-zehlendorf", "neukolln", "friedrichshain-kreuzberg"]
+    },
+    "neukolln": {
+      "label": "Neukolln",
+      "neighbors": ["mitte", "tempelhof-schoneberg", "friedrichshain-kreuzberg", "treptow-kopenick"]
+    },
+    "treptow-kopenick": {
+      "label": "Treptow-Kopenick",
+      "neighbors": ["neukolln", "friedrichshain-kreuzberg", "lichtenberg", "marzahn-hellersdorf"]
+    },
+    "marzahn-hellersdorf": {
+      "label": "Marzahn-Hellersdorf",
+      "neighbors": ["lichtenberg", "treptow-kopenick"]
+    },
+    "lichtenberg": {
+      "label": "Lichtenberg",
+      "neighbors": ["pankow", "friedrichshain-kreuzberg", "treptow-kopenick", "marzahn-hellersdorf"]
+    },
+    "reinickendorf": {
+      "label": "Reinickendorf",
+      "neighbors": ["mitte", "pankow", "charlottenburg-wilmersdorf", "spandau"]
+    }
+  }
+}

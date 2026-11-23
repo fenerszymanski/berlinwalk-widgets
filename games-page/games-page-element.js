@@ -92,6 +92,20 @@
       accent: 'day'
     },
     {
+      id: 'berlin-rewind',
+      kicker: 'Archive game',
+      title: 'Berlin Rewind',
+      lead: 'Read old Berlin photos, name the year and district, and keep a daily streak alive.',
+      how: 'Use tiny visual clues from real archive images and test your Berlin memory.',
+      duration: 'Under 2 min',
+      difficulty: 'Photo clues',
+      player: 'Daily archive',
+      image: 'berlin-rewind/assets/social/berlin-rewind-social-1200x630.jpg',
+      href: 'https://www.berlinwalk.com/games/berlin-rewind',
+      button: 'Play Rewind',
+      accent: 'archive'
+    },
+    {
       id: 'berlin-smile-challenge',
       kicker: 'Social puzzle',
       title: 'Berlin Smile Challenge',

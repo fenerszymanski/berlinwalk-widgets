@@ -53,6 +53,16 @@ const BW_GAMES_HOME_ITEMS = [
     image: 'berlin-day-survival-v2/assets/social/berlin-day-survival-v2-social-1200x630.jpg'
   },
   {
+    id: 'berlin-rewind',
+    kicker: 'Archive game',
+    title: 'Berlin Rewind',
+    lead: 'Read old Berlin photos, guess the year and district, and keep a daily streak alive.',
+    meta: 'Daily photo set',
+    href: 'https://www.berlinwalk.com/games/berlin-rewind',
+    cta: 'Play Rewind',
+    image: 'berlin-rewind/assets/social/berlin-rewind-social-1200x630.jpg'
+  },
+  {
     id: 'berlin-smile-challenge',
     kicker: 'Social puzzle',
     title: 'Berlin Smile Challenge',
