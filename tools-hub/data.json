@@ -12042,6 +12042,37 @@
       "iconStatus": "live-wix-media",
       "cmsItemId": "4c1d6bfa-3a39-4063-9d77-3c58a50cfa21",
       "image": "https://static.wixstatic.com/media/5a08a3_3df250e9f3ab4840887c7973132f6a28~mv2.png"
+    },
+    {
+      "slug": "cafe-achteck-survivor-map",
+      "title": "Café Achteck Survivor Map",
+      "lead": "Map of all 13 surviving green cast-iron Café Achteck pavilions in Berlin. Pick your start or tap the map to rank the nearest ones by walking time and check which you can still use.",
+      "category": "Maps",
+      "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/cafe-achteck-survivor-map/",
+      "embedHeight": 920,
+      "hubCategory": "CultureLandmarks",
+      "type": "Map",
+      "priority": 3,
+      "tags": [
+        "cafe achteck",
+        "toilets",
+        "architecture",
+        "history",
+        "map",
+        "moabit",
+        "kreuzberg",
+        "schöneberg"
+      ],
+      "aliases": [
+        "cafe achteck",
+        "café achteck berlin",
+        "green toilets berlin",
+        "historic urinals berlin",
+        "rospatt pavilion"
+      ],
+      "iconStatus": "live-wix-media",
+      "cmsItemId": "32d41656-bf68-4ada-a06e-7c0884fa2d4a",
+      "image": "https://static.wixstatic.com/media/5a08a3_453dd38a8df14cb3ac29d2f600b94cba~mv2.png"
     }
   ],
   "hubCategories": [

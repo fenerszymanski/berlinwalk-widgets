@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Café Achteck Survivor Map: Berlin's Green Iron Toilets Near You</title>
+<meta name="description" content="A map of every green octagonal cast-iron Café Achteck still standing in Berlin. Pick where you start or tap the map, and the list ranks the nearest ones by walking time and shows which you can still use.">
+<link rel="stylesheet" href="../css/brand.css">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { overflow-x: hidden; }
+  body { font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #FFFFFF; color: #20241d; padding: 12px; }
+  .ca { border-radius: 16px; overflow: hidden; border: 1px solid #d8dfd0; background: #f4f6ef; }
+  .ca-head { padding: 18px 18px 8px; }
+  .ca-kick { display: inline-block; font-size: 10.5px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; color: #123D18; background: #FFE600; padding: 3px 8px; border-radius: 4px; }
+  .ca-head h1 { font-family: 'Merriweather', Georgia, serif; font-size: 21px; line-height: 1.3; margin-top: 9px; color: #1B5E20; }
+  .ca-head p { font-size: 13px; line-height: 1.6; color: #43493f; margin-top: 7px; max-width: 760px; }
+  .ctrl { display: flex; flex-wrap: wrap; gap: 10px 16px; align-items: end; padding: 8px 18px 14px; }
+  .ctrl label.sel { display: flex; flex-direction: column; gap: 5px; font-size: 11px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: #123D18; flex: 1 1 260px; }
+  .ctrl select { font-family: inherit; font-size: 15px; font-weight: 700; color: #123D18; background: #fff; border: 2px solid #123D18; border-radius: 10px; padding: 9px 10px; min-height: 44px; width: 100%; }
+  .ctrl select:focus-visible, .ctrl input:focus-visible { outline: 3px solid #FFE600; outline-offset: 2px; }
+  .ctrl .chk { display: flex; align-items: center; gap: 8px; font-size: 13.5px; font-weight: 700; color: #123D18; min-height: 44px; cursor: pointer; }
+  .ctrl .chk input { width: 20px; height: 20px; accent-color: #1B5E20; }
+  .ca-body { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); gap: 12px; padding: 0 12px 12px; align-items: start; }
+  .mapbox { background: #fff; border: 1px solid #dfe5d8; border-radius: 14px; padding: 8px; min-width: 0; }
+  #map { width: 100%; height: 560px; border-radius: 10px; background: #efeee6; cursor: crosshair; }
+  #map .leaflet-tile-pane { filter: saturate(.4) brightness(1.05); }
+  .oct { width: 22px; height: 22px; background: #1B5E20; clip-path: polygon(30% 0, 70% 0, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0 70%, 0 30%); display: flex; align-items: center; justify-content: center; color: #FFE600; font-size: 10px; font-weight: 800; }
+  .oct.off { background: #9aa192; color: #fff; }
+  .oct.top { background: #FFE600; color: #123D18; outline: none; }
+  .octwrap { filter: drop-shadow(0 1px 2px rgba(0,0,0,.45)); }
+  .me { width: 18px; height: 18px; border-radius: 50%; background: #E63946; border: 3px solid #fff; box-shadow: 0 0 0 2px #E63946; }
+  .legend { display: flex; flex-wrap: wrap; gap: 6px 14px; font-size: 11px; color: #555c50; padding: 8px 4px 2px; line-height: 1.4; align-items: center; }
+  .legend i { display: inline-block; width: 12px; height: 12px; vertical-align: middle; margin-right: 5px; clip-path: polygon(30% 0, 70% 0, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0 70%, 0 30%); }
+  .legend .l-on { background: #1B5E20; } .legend .l-off { background: #9aa192; } .legend .l-top { background: #FFE600; outline: 1px solid #123D18; }
+  .legend .l-me { border-radius: 50%; clip-path: none; background: #E63946; }
+  .plan { min-width: 0; display: flex; flex-direction: column; gap: 8px; }
+  .verdict { background: #123D18; color: #fff; border-radius: 14px; padding: 14px 16px; font-size: 14px; line-height: 1.55; }
+  .verdict b { color: #FFE600; }
+  .rank { display: flex; flex-direction: column; gap: 8px; max-height: 470px; overflow-y: auto; padding-right: 4px; overscroll-behavior: contain; }
+  .row { background: #fff; border: 1px solid #dfe5d8; border-radius: 14px; padding: 11px 13px; display: grid; grid-template-columns: 30px minmax(0, 1fr) auto; gap: 10px; align-items: start; cursor: pointer; }
+  .row:focus-visible { outline: 3px solid #FFE600; outline-offset: 2px; }
+  .row.sel { border-color: #1B5E20; box-shadow: 0 0 0 2px #C5E1A5; }
+  .row .n { width: 26px; height: 26px; background: #1B5E20; color: #FFE600; clip-path: polygon(30% 0, 70% 0, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0 70%, 0 30%); display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 12px; }
+  .row.off .n { background: #9aa192; color: #fff; }
+  .row h2 { font-family: 'Merriweather', Georgia, serif; font-size: 14.5px; line-height: 1.35; color: #123D18; }
+  .row .where { font-size: 12px; color: #5b6356; margin-top: 2px; }
+  .row .note { font-size: 12.5px; line-height: 1.5; color: #43493f; margin-top: 5px; }
+  .row .tag { display: inline-block; margin-top: 6px; font-size: 10.5px; font-weight: 800; letter-spacing: .05em; text-transform: uppercase; padding: 2px 7px; border-radius: 4px; }
+  .tag.on { background: #FFE600; color: #123D18; } .tag.off { background: #e4e7df; color: #4a5145; } .tag.unk { background: #fff1c2; color: #5a4300; }
+  .row .t { font-size: 13px; font-weight: 800; color: #123D18; text-align: right; white-space: nowrap; }
+  .row .t small { display: block; font-size: 10.5px; font-weight: 600; color: #6a7264; }
+  .scrollnote { font-size: 11.5px; font-weight: 700; color: #1B5E20; }
+  .foot { font-size: 11px; color: #6a7264; padding: 0 18px 14px; line-height: 1.5; }
+  @media (max-width: 720px) {
+    .ca-body { grid-template-columns: minmax(0, 1fr); }
+    #map { height: 320px; }
+    .rank { max-height: 330px; }
+    .ca-head h1 { font-size: 19px; }
+  }
+</style>
+</head>
+<body>
+<div class="ca">
+  <div class="ca-head">
+    <span class="ca-kick">Café Achteck map</span>
+    <h1>Where Berlin's green iron toilets still stand</h1>
+    <p>Pick where you start, or tap anywhere on the map. The list ranks every surviving Café Achteck by walking time from that spot and tells you which ones you can still use.</p>
+  </div>
+  <div class="ctrl">
+    <label class="sel" for="start">Start from
+      <select id="start"></select>
+    </label>
+    <label class="chk"><input type="checkbox" id="onlyOn"> Only ones I can use</label>
+  </div>
+  <div class="ca-body">
+    <div class="mapbox">
+      <div id="map" role="application" aria-label="Map of the surviving Café Achteck pavilions in Berlin. Tap to set your starting point."></div>
+      <div class="legend"><span><i class="l-top"></i>Nearest</span><span><i class="l-on"></i>In use</span><span><i class="l-off"></i>Closed or not confirmed</span><span><i class="l-me"></i>Your start</span></div>
+    </div>
+    <div class="plan" id="plan" aria-live="polite"></div>
+  </div>
+  <p class="foot" id="foot"></p>
+</div>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+(function () {
+  var SITES = [{"id":"chamissoplatz","name":"Chamissoplatz","address":"Chamissoplatz 1 / Arndtstraße","district":"Kreuzberg","lat":52.488528,"lon":13.390903,"inService":true,"menOnly":true,"note":"Listed monument from c. 1895 on the central island at Chamissoplatz. In 1995 this was the first historic Café Achteck Wall restored. Free, 24h, urinal only."},{"id":"senefelderplatz","name":"Senefelderplatz","address":"Senefelderplatz / Metzer Straße / Schönhauser Allee","district":"Prenzlauer Berg","lat":52.532444,"lon":13.412889,"inService":true,"menOnly":true,"note":"Directly behind U-Bahnhof Senefelderplatz on Metzer Straße. One of the easiest surviving units to spot from the U2 exit. Free, 24h, urinal only."},{"id":"leuthener-platz","name":"Leuthener Platz","address":"Leuthener Platz / Naumannstraße / Leuthener Straße","district":"Schöneberg","lat":52.481146,"lon":13.363288,"inService":true,"menOnly":true,"note":"Listed monument from c. 1905 on the Rote Insel corner of Naumannstraße and Leuthener Straße, restored between 2010 and 2013. Free, 24h, urinal only."},{"id":"friedenstrasse","name":"Friedenstraße (Alt-Mariendorf)","address":"Friedenstraße beside no. 16 / Mariendorfer Damm","district":"Mariendorf","lat":52.438695,"lon":13.386907,"inService":true,"menOnly":true,"note":"Listed monument built c. 1910 on Ringbahnstraße in Tempelhof and moved beside U-Bahnhof Alt-Mariendorf after restoration in 1999. Free, 24h, urinal only."},{"id":"stephanplatz","name":"Stephanplatz","address":"Stephanplatz / Stephanstraße / Havelberger Straße","district":"Moabit","lat":52.533528,"lon":13.347014,"inService":true,"menOnly":true,"note":"Built in 1899 in Moabit's Stephankiez and back in active operation since 2000. Listed monument. Free, 24h, urinal only."},{"id":"unionplatz","name":"Unionplatz","address":"Unionplatz / Siemensstraße / Oldenburger Straße","district":"Moabit","lat":52.533222,"lon":13.336778,"inService":true,"menOnly":true,"note":"Built in 1902 in Moabit, only a ten-minute walk west of Stephanplatz. Listed monument. Free, 24h, urinal only."},{"id":"pekinger-platz","name":"Pekinger Platz","address":"Pekinger Platz / Nordufer / Kiautschoustraße","district":"Wedding","lat":52.539903,"lon":13.35325,"inService":true,"menOnly":true,"note":"Built c. 1890 near the Berlin-Spandau Ship Canal in Wedding (borough Mitte). Listed monument. Free, 24h, urinal only."},{"id":"kirchhofstrasse","name":"Karl-Marx-Straße / Kirchhofstraße","address":"Kirchhofstraße / Karl-Marx-Straße (near no. 199)","district":"Neukölln","lat":52.471556,"lon":13.441389,"inService":true,"menOnly":true,"note":"Stands on the corner of Kirchhofstraße and Karl-Marx-Straße near U-Bahnhof Karl-Marx-Straße. Free, 24h, urinal only."},{"id":"alt-tegel","name":"Alt-Tegel (Schloßstraße)","address":"Berliner Straße 105–106 / Schloßstraße","district":"Tegel","lat":52.590697,"lon":13.283026,"inService":true,"menOnly":true,"note":"Built c. 1910 on Jean-Jaurès-Straße in Waidmannslust, dismantled in 1999, restored and reopened in Alt-Tegel in August 2000. Free, 24h, urinal only."},{"id":"ruedesheimer-platz","name":"Rüdesheimer Platz","address":"Rüdesheimer Platz 6 / Rüdesheimer Straße","district":"Wilmersdorf","lat":52.473363,"lon":13.314755,"inService":true,"menOnly":false,"note":"Rebuilt by Wall in 2006 using parts of an 1895 pavilion. One of only two Café Achtecks converted into two seated cabins for all genders. Free, 24h."},{"id":"fellbacher-platz","name":"Fellbacher Platz","address":"Fellbacher Platz / Heinsestraße / Fellbacher Straße","district":"Hermsdorf","lat":52.616139,"lon":13.307611,"inService":true,"menOnly":false,"note":"Originally stood c. 1900 on Alt-Reinickendorf Dorfanger, moved and rebuilt by Wall in November 2001 with two cabins for all genders. Free, 24h."},{"id":"huttenstrasse","name":"Huttenstraße / Wiebestraße","address":"Corner of Huttenstraße and Wiebestraße","district":"Moabit","lat":52.528249,"lon":13.319759,"inService":false,"menOnly":true,"note":"Listed monument from 1914 beside the former BEWAG power station site in Moabit. Not on Wall's active Berlin toilet list and kept locked."},{"id":"museum-reinickendorf","name":"Museum Reinickendorf Pavilion","address":"Alt-Hermsdorf 35","district":"Hermsdorf","lat":52.615457,"lon":13.318683,"inService":false,"menOnly":false,"note":"Saved from the 1970s Tegel-Center open-air street-furniture collection, restored and set up on the lawn of Museum Reinickendorf in 2022 as an info and exhibition pavilion."}];
+  var FOOT = "Sources: Berlin Open Data WFS (toiletten:toiletten, updated 6 October 2026), Berlin Senate Administration (SenMVKU), Landesdenkmalamt Berlin monument lists, Museum Reinickendorf, and OpenStreetMap; checked on 23 November 2026. All 11 active units are run by Wall GmbH, listed 24h and free (0 EUR), and are not wheelchair-accessible.";
+  var START_POINTS = [{"name":"Alexanderplatz","ll":[52.5219,13.4132]},{"name":"Berlin Hauptbahnhof","ll":[52.5251,13.3694]},{"name":"U Senefelderplatz (Prenzlauer Berg)","ll":[52.5326,13.4126]},{"name":"U Mehringdamm (Kreuzberg)","ll":[52.4945,13.3886]},{"name":"U Hermannplatz (Neukölln / Kreuzberg)","ll":[52.4871,13.4247]},{"name":"S+U Hermannstraße (Neukölln)","ll":[52.4675,13.4314]},{"name":"U Turmstraße (Moabit)","ll":[52.5258,13.3414]},{"name":"S+U Wedding","ll":[52.5425,13.366]},{"name":"S Südkreuz / Schöneberg","ll":[52.4751,13.3653]},{"name":"U Rüdesheimer Platz (Wilmersdorf)","ll":[52.4733,13.3143]},{"name":"U Alt-Mariendorf","ll":[52.4394,13.3875]},{"name":"U Alt-Tegel","ll":[52.5892,13.2836]},{"name":"S Hermsdorf","ll":[52.6177,13.3065]},{"name":"S+U Gesundbrunnen","ll":[52.5486,13.3887]},{"name":"S+U Zoologischer Garten","ll":[52.507,13.3326]}];
+  var startSel = document.getElementById('start');
+  var onlyOn = document.getElementById('onlyOn');
+  var plan = document.getElementById('plan');
+  document.getElementById('foot').textContent = FOOT;
+
+  START_POINTS.forEach(function (s, i) {
+    var o = document.createElement('option'); o.value = String(i); o.textContent = s.name; startSel.appendChild(o);
+  });
+  var tapOpt = document.createElement('option'); tapOpt.value = 'tap'; tapOpt.textContent = 'My spot on the map'; tapOpt.disabled = true; startSel.appendChild(tapOpt);
+
+  var map = L.map('map', { zoomControl: true, scrollWheelZoom: false, attributionControl: true }).setView([52.505, 13.40], 12);
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 19, attribution: '&copy; OpenStreetMap contributors' }).addTo(map);
+
+  function dist(a, b) {
+    var R = 6371000, toR = Math.PI / 180;
+    var dLat = (b[0] - a[0]) * toR, dLon = (b[1] - a[1]) * toR;
+    var h = Math.sin(dLat / 2) * Math.sin(dLat / 2) + Math.cos(a[0] * toR) * Math.cos(b[0] * toR) * Math.sin(dLon / 2) * Math.sin(dLon / 2);
+    return 2 * R * Math.asin(Math.sqrt(h));
+  }
+  function walkMin(m) { return Math.max(1, Math.round(m * 1.3 / 80)); }
+  function fmtKm(m) { return m < 1000 ? Math.round(m / 10) * 10 + ' m' : (m / 1000).toFixed(1) + ' km'; }
+  function usable(s) { return s.inService === true; }
+  function tag(s) {
+    if (s.inService === true) return '<span class="tag on">In use' + (s.menOnly ? ', urinal only' : '') + '</span>';
+    if (s.inService === false) return '<span class="tag off">Closed, look only</span>';
+    return '<span class="tag unk">Status not confirmed</span>';
+  }
+
+  var markers = {}, meMarker = null, start = START_POINTS[0].ll, selectedId = null;
+  SITES.forEach(function (s) {
+    var icon = L.divIcon({ className: 'octwrap', html: '<div class="oct' + (usable(s) ? '' : ' off') + '"></div>', iconSize: [22, 22], iconAnchor: [11, 11] });
+    var m = L.marker([s.lat, s.lon], { icon: icon, keyboard: false, title: s.name }).addTo(map);
+    m.on('click', function (e) { L.DomEvent.stopPropagation(e); select(s.id, true); });
+    markers[s.id] = m;
+  });
+
+  function setMe(ll) {
+    if (meMarker) map.removeLayer(meMarker);
+    meMarker = L.marker(ll, { icon: L.divIcon({ className: '', html: '<div class="me"></div>', iconSize: [18, 18], iconAnchor: [9, 9] }), interactive: false }).addTo(map);
+  }
+
+  function ranked() {
+    return SITES.filter(function (s) { return !onlyOn.checked || usable(s); })
+      .map(function (s) { return { s: s, d: dist(start, [s.lat, s.lon]) }; })
+      .sort(function (a, b) { return a.d - b.d; });
+  }
+
+  function select(id, pan) {
+    selectedId = id;
+    Array.prototype.forEach.call(plan.querySelectorAll('.row'), function (r) { r.classList.toggle('sel', r.dataset.id === id); r.setAttribute('aria-pressed', String(r.dataset.id === id)); });
+    var s = SITES.filter(function (x) { return x.id === id; })[0];
+    if (s && pan) map.setView([s.lat, s.lon], 16);
+    var row = plan.querySelector('.row[data-id="' + id + '"]');
+    if (row && row.scrollIntoView) row.scrollIntoView({ block: 'nearest' });
+  }
+
+  function render(fit) {
+    var list = ranked();
+    SITES.forEach(function (s) {
+      var el = markers[s.id].getElement(); if (!el) return;
+      var inner = el.querySelector('.oct');
+      var shown = !onlyOn.checked || usable(s);
+      el.style.display = shown ? '' : 'none';
+      inner.className = 'oct' + (usable(s) ? '' : ' off');
+      inner.textContent = '';
+    });
+    list.forEach(function (r, i) { var el = markers[r.s.id].getElement(); if (el && i < 3) { var inner = el.querySelector('.oct'); inner.className = 'oct top'; inner.textContent = String(i + 1); } });
+    var firstOn = list.filter(function (r) { return usable(r.s); })[0];
+    var top = list[0];
+    var out = '<div class="verdict">';
+    if (!top) out += 'Nothing to show with this filter.';
+    else {
+      out += 'Closest to you: <b>' + top.s.name + '</b>, about <b>' + walkMin(top.d) + ' min</b> on foot (' + fmtKm(top.d) + ').';
+      if (firstOn && firstOn !== top) out += ' The nearest one you can still use is <b>' + firstOn.s.name + '</b>, about ' + walkMin(firstOn.d) + ' min away.';
+      else if (firstOn) out += ' It is one you can still use.';
+      if (top.d > 3000) out += ' That is a walk, not a detour: these pavilions cluster in the old inner districts.';
+    }
+    out += '</div><p class="scrollnote">' + list.length + ' pavilions, nearest first. Tap one to find it on the map.</p><div class="rank">';
+    out += list.map(function (r, i) {
+      return '<div class="row' + (usable(r.s) ? '' : ' off') + '" tabindex="0" role="button" aria-pressed="false" data-id="' + r.s.id + '"><div class="n">' + (i + 1) + '</div><div><h2>' + r.s.name + '</h2><div class="where">' + r.s.address + ' · ' + r.s.district + '</div>' + (r.s.note ? '<p class="note">' + r.s.note + '</p>' : '') + tag(r.s) + '</div><div class="t">' + walkMin(r.d) + ' min<small>' + fmtKm(r.d) + '</small></div></div>';
+    }).join('') + '</div>';
+    plan.innerHTML = out;
+    Array.prototype.forEach.call(plan.querySelectorAll('.row'), function (el) {
+      el.addEventListener('click', function () { select(el.dataset.id, true); });
+      el.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); select(el.dataset.id, true); } });
+    });
+    if (fit && top) {
+      var pts = [start].concat(list.slice(0, 3).map(function (r) { return [r.s.lat, r.s.lon]; }));
+      map.fitBounds(L.latLngBounds(pts).pad(0.25), { maxZoom: 16 });
+    }
+    if (window.BWResize) window.BWResize();
+  }
+
+  startSel.addEventListener('change', function () {
+    if (startSel.value === 'tap') return;
+    start = START_POINTS[Number(startSel.value)].ll; setMe(start); render(true);
+  });
+  onlyOn.addEventListener('change', function () { render(true); });
+  map.on('click', function (e) {
+    start = [e.latlng.lat, e.latlng.lng]; tapOpt.disabled = false; startSel.value = 'tap'; setMe(start); render(true);
+  });
+
+  setMe(start);
+  render(true);
+})();
+</script>
+<script src="../js/brand.js"></script>
+</body>
+</html>
