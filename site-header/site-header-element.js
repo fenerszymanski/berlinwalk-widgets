@@ -50,7 +50,6 @@ const BW_HEADER_LINKS = {
   berghainBouncer: 'https://www.walkofberlin.com/games/berghain-bouncer',
   kitkatDoorTest: 'https://www.walkofberlin.com/games/kitkat-door-test',
   daySurvival: 'https://www.walkofberlin.com/games/berlin-day-survival',
-  berlinRewind: 'https://www.walkofberlin.com/games/berlin-rewind',
   smileChallenge: 'https://www.walkofberlin.com/games/berlin-smile-challenge',
   blog: 'https://www.walkofberlin.com/blog',
   // The blog menu points at the real Wix blog categories, each of which now

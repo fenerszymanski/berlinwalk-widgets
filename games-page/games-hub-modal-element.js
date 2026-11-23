@@ -121,27 +121,6 @@
       cta: 'Survive the day'
     },
     {
-      id: 'berlin-rewind',
-      title: 'Berlin Rewind',
-      short: 'Guess old Berlin photos.',
-      lane: 'Archive clue game',
-      image: 'berlin-rewind/assets/social/berlin-rewind-social-1200x630.jpg',
-      href: 'https://www.berlinwalk.com/games/berlin-rewind',
-      filters: ['quick', 'share'],
-      duration: 'Under 2 min',
-      start: 'Daily set',
-      bestFor: 'History eyes, repeat visits, photo clues',
-      score: 'Daily archive score',
-      lead: 'A daily Berlin archive game: read the photo, guess the year and district, and come back for the next set.',
-      rules: [
-        'Study the archive photo.',
-        'Guess the year and Berlin district.',
-        'Keep your daily streak alive.'
-      ],
-      tourBridge: 'Best for visitors who like then-and-now Berlin and want the city to feel layered before the walk.',
-      cta: 'Play Rewind'
-    },
-    {
       id: 'berlin-smile-challenge',
       title: 'Berlin Smile Challenge',
       short: 'Make Berlin almost smile.',
