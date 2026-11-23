@@ -531,14 +531,24 @@ export function createYs1979(base, profile) {
       refreshButton();
     }
     // ---- Search: Photon first, Nominatim when Photon fails or finds nothing (one request per second, contact email). ----
-    let timer = 0, controller = null;
+    let timer = 0;
+    api.ys1979Input = input;
     const spacing = 1100;
     const PIN = '<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 0 0-7-7zm0 9.6A2.6 2.6 0 1 1 12 6.4a2.6 2.6 0 0 1 0 5.2z"/></svg>';
     async function photon(q, signal) {
+      // Photon gets 6 seconds; a hanging answer must not block the Nominatim fallback (seen 12 Nov 2026).
       const url = `${PHOTON}?q=${encodeURIComponent(q)}&limit=10&lang=de&bbox=${BERLIN.west},${BERLIN.south},${BERLIN.east},${BERLIN.north}`;
-      const response = await fetch(url, {signal, headers: {Accept: 'application/json'}});
-      if (!response.ok) throw new Error('HTTP ' + response.status);
-      return ((await response.json()).features || []).map(fromPhoton).filter(r => r.city === 'Berlin');
+      const first = new AbortController(), stop = () => first.abort(), slow = setTimeout(stop, 6000);
+      signal.addEventListener('abort', stop);
+      try {
+        const response = await fetch(url, {signal: first.signal, headers: {Accept: 'application/json'}});
+        if (!response.ok) throw new Error('HTTP ' + response.status);
+        return ((await response.json()).features || []).map(fromPhoton).filter(r => r.city === 'Berlin');
+      } catch (error) {
+        if (signal.aborted) throw Object.assign(new Error('stopped'), {name: 'AbortError'});
+        if (error.name === 'AbortError') return [];
+        throw error;
+      } finally { clearTimeout(slow); signal.removeEventListener('abort', stop); }
     }
     async function nominatim(q, signal) {
       const wait = Math.max(0, (api.lastSearchAt || 0) + spacing - Date.now());
@@ -549,24 +559,40 @@ export function createYs1979(base, profile) {
       if (!response.ok) throw new Error('HTTP ' + response.status);
       return (await response.json()).map(r => ({...r, lat: Number(r.lat), lon: Number(r.lon)}));
     }
-    async function search(q) {
-      q = clean(q, 80);
-      if (q.length < 3) { results.hidden = true; setNote(q ? 'Keep typing (at least 3 letters).' : ''); refreshButton(); return; }
-      api.track?.('search');
-      controller?.abort(); controller = new AbortController(); const {signal} = controller;
-      setNote('Searching…');
+    // The storefront rebuilds this form now and then, once about a second after the page opens (seen 23 Nov 2026).
+    // The running search is kept on `api`, so the rebuilt form shows its answer instead of losing it.
+    async function lookup(q, signal) {
       let rows = [];
-      try { rows = await photon(q, signal); } catch (error) { if (error.name === 'AbortError') return; }
-      try { if (!rows.length && clean(input.value, 80) === q) rows = await nominatim(q, signal); } catch (error) { if (error.name === 'AbortError') return; if (!rows.length) { setNote('The address search did not answer. Try again in a moment.'); return; } }
-      if (clean(input.value, 80) !== q) return;
+      try { rows = await photon(q, signal); } catch (error) { if (error.name === 'AbortError') throw error; }
+      try { if (!rows.length && clean(api.ys1979Input.value, 80) === q) rows = await nominatim(q, signal); } catch (error) { throw error.name === 'AbortError' ? error : Object.assign(new Error('no answer'), {name: 'NoAnswer'}); }
+      return rows;
+    }
+    function show(job, rows) {
       const seen = new Set();
       rows = rows.filter(r => inBerlin(r.lat, r.lon)).filter(r => { const key = [placeLines(r)[0], r.address?.suburb || r.address?.city_district || ''].join('|').toLowerCase(); return !seen.has(key) && seen.add(key); }).slice(0, 5);
       state.results = rows;
       results.innerHTML = rows.map((r, i) => { const [main, sub] = placeLines(r); return `<li role="option"><button type="button" class="ys-pick" data-ys-pick="${i}">${PIN}<span class="ys-pick-text"><strong>${escape(main)}</strong><small>${escape(sub)}</small></span><span class="ys-pick-go" aria-hidden="true">›</span></button></li>`; }).join('');
       results.hidden = rows.length === 0;
       setNote(rows.length ? 'Tap your place to put it on the poster:' : 'Nothing found in Berlin. Check the spelling, or try the street name with a house number.', rows.length > 0);
-      if (!rows.length) api.track?.('noresult');
+      if (!rows.length && !job.counted) { job.counted = true; api.track?.('noresult'); }
       refreshButton();
+    }
+    async function follow(job) {
+      let rows;
+      try { rows = await job.done; } catch (error) { if (error.name === 'NoAnswer' && api.ys1979Search === job && input.isConnected) setNote('The address search did not answer. Try again in a moment.'); return; }
+      if (api.ys1979Search !== job || !input.isConnected || clean(input.value, 80) !== job.q) return;
+      show(job, rows);
+    }
+    async function search(q) {
+      if (!input.isConnected) return;
+      q = clean(q, 80);
+      if (q.length < 3) { results.hidden = true; setNote(q ? 'Keep typing (at least 3 letters).' : ''); refreshButton(); return; }
+      api.track?.('search');
+      api.ys1979Search?.controller.abort();
+      const job = api.ys1979Search = {q, controller: new AbortController()};
+      job.done = lookup(q, job.controller.signal); job.done.catch(() => {});
+      setNote('Searching…');
+      await follow(job);
     }
     const schedule = () => { clearTimeout(timer); timer = setTimeout(() => search(input.value), 450); };
     input.addEventListener('input', () => { state.query = input.value; schedule(); });
@@ -575,6 +601,7 @@ export function createYs1979(base, profile) {
     results.addEventListener('click', event => {
       const pick = event.target.closest('[data-ys-pick]'); if (!pick) return;
       const r = state.results?.[Number(pick.dataset.ysPick)]; if (!r) return;
+      if (api.ys1979Search) api.ys1979Search.picked = true;
       Object.assign(state, {lat: Math.round(Number(r.lat) * 1e5) / 1e5, lon: Math.round(Number(r.lon) * 1e5) / 1e5, address: addressLabel(r), title: titleFrom(r), area: areaFrom(r), query: input.value});
       host.querySelector('[data-ys="title"]').value = state.title; host.querySelector('[data-ys="area"]').value = state.area;
       results.hidden = true; setNote(''); showPoint(true); api.track?.('pick');
@@ -594,6 +621,8 @@ export function createYs1979(base, profile) {
       sheet.style.scrollMarginTop = Math.round(top + 12) + 'px';
       sheet.scrollIntoView({behavior: 'smooth', block: 'start'});
     }
+    const pending = api.ys1979Search;
+    if (pending && !pending.picked && pending.q === clean(input.value, 80)) { setNote('Searching…'); follow(pending); }
     // Tap either photo: pixel offset -> metres -> new point (both photos show the same ground box).
     for (const name of ['photo-1928', 'photo-today']) {
       $(name).addEventListener('click', event => {
