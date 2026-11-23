@@ -1,9 +1,9 @@
 {
-  "updatedAt": "2026-11-23T03:02:19.758Z",
+  "updatedAt": "2026-11-23T09:59:57.280Z",
   "source": "Wix Blog API",
   "popularSource": "Wix Blog metrics.views lifetime sort",
-  "totalPosts": 472,
-  "toolsTotal": 395,
+  "totalPosts": 473,
+  "toolsTotal": 396,
   "bookingUrl": "https://www.walkofberlin.com/book-berlin-walking-tour/berlin-then-and-now",
   "navTopics": [
     {
@@ -1802,6 +1802,23 @@
   ],
   "latest": [
     {
+      "title": "Café Achteck Berlin: Where the Green Cast-Iron Toilets Still Stand",
+      "slug": "cafe-achteck-berlin",
+      "path": "/post/cafe-achteck-berlin",
+      "url": "https://www.berlinwalk.com/post/cafe-achteck-berlin",
+      "excerpt": "Berliners still pass small green cast-iron octagons on squares in Moabit, Kreuzberg and Schöneberg. Here is how Café Achteck got its name, why only 13 remain standing and which 11 are open for free today.",
+      "category": "Living in Berlin",
+      "categorySlug": "living-in-berlin",
+      "topic": "living-in-berlin",
+      "topicLabel": "Living in Berlin",
+      "readTime": "6 min read",
+      "publishedDate": "2026-11-23T09:57:49.968Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_140ac51865f141adb16efe108f5b1a53~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-chamissoplatz-2025.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_140ac51865f141adb16efe108f5b1a53~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-chamissoplatz-2025.jpg",
+      "alt": "Green octagonal cast-iron Café Achteck pavilion standing on a cobblestone island at Chamissoplatz in Berlin-Kreuzberg under summer trees",
+      "relatedToolSlug": "berlin-public-toilets"
+    },
+    {
       "title": "Leipziger Platz Berlin: The Octagon Next to Potsdamer Platz and What to Look For",
       "slug": "leipziger-platz-berlin",
       "path": "/post/leipziger-platz-berlin",
@@ -1987,26 +2004,26 @@
       "thumb": "https://static.wixstatic.com/media/5a08a3_d12935a5438e4407b84952199e3b4f8b~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover.jpg",
       "alt": "A row of restored late 19th-century Berlin apartment houses with pastel stucco facades, bay windows and balconies against a blue sky",
       "relatedToolSlug": "altbau-age-reader"
-    },
-    {
-      "title": "Berlin Christmas Market Souvenirs: What Is Worth Carrying Home",
-      "slug": "berlin-christmas-market-souvenirs",
-      "path": "/post/berlin-christmas-market-souvenirs",
-      "url": "https://www.berlinwalk.com/post/berlin-christmas-market-souvenirs",
-      "excerpt": "The mug you already paid for, the wooden smoker that is really from Saxony, the star that folds flat, and the bottle that will not get through security.",
-      "category": "Tourist Tips",
-      "categorySlug": "tourist-tips",
-      "topic": "practical",
-      "topicLabel": "Practical Berlin",
-      "readTime": "7 min read",
-      "publishedDate": "2026-11-13T10:03:14.057Z",
-      "image": "https://static.wixstatic.com/media/5a08a3_efd5ac3deff94b42bd4445d8b94305f3~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover.jpg",
-      "thumb": "https://static.wixstatic.com/media/5a08a3_efd5ac3deff94b42bd4445d8b94305f3~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover.jpg",
-      "alt": "The Christmas market on Alexanderplatz at night, with lit stalls around a tall wooden Christmas pyramid",
-      "relatedToolSlug": "christmas-market-suitcase-test"
     }
   ],
   "allPosts": [
+    {
+      "title": "Café Achteck Berlin: Where the Green Cast-Iron Toilets Still Stand",
+      "slug": "cafe-achteck-berlin",
+      "path": "/post/cafe-achteck-berlin",
+      "url": "https://www.berlinwalk.com/post/cafe-achteck-berlin",
+      "excerpt": "Berliners still pass small green cast-iron octagons on squares in Moabit, Kreuzberg and Schöneberg. Here is how Café Achteck got its name, why only 13 remain standing and which 11 are open for free today.",
+      "category": "Living in Berlin",
+      "categorySlug": "living-in-berlin",
+      "topic": "living-in-berlin",
+      "topicLabel": "Living in Berlin",
+      "readTime": "6 min read",
+      "publishedDate": "2026-11-23T09:57:49.968Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_140ac51865f141adb16efe108f5b1a53~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-chamissoplatz-2025.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_140ac51865f141adb16efe108f5b1a53~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-chamissoplatz-2025.jpg",
+      "alt": "Green octagonal cast-iron Café Achteck pavilion standing on a cobblestone island at Chamissoplatz in Berlin-Kreuzberg under summer trees",
+      "relatedToolSlug": "berlin-public-toilets"
+    },
     {
       "title": "Leipziger Platz Berlin: The Octagon Next to Potsdamer Platz and What to Look For",
       "slug": "leipziger-platz-berlin",

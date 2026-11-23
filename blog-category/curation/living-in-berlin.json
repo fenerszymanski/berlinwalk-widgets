@@ -505,6 +505,12 @@
       "figure": "26 November",
       "line": "is the last day to post a parcel that leaves Europe. Inside Germany you have until 21 December.",
       "tool": "christmas-post-send-by-line"
+    },
+    "cafe-achteck-berlin": {
+      "shelf": "draussen",
+      "figure": "11",
+      "line": "green cast-iron Caf&eacute; Achtecks still operate as free public toilets across Berlin, out of 13 standing octagons.",
+      "tool": "cafe-achteck-survivor-map"
     }
   }
 }

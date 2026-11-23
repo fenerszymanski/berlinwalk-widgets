@@ -1,9 +1,26 @@
 {
-  "updatedAt": "2026-11-23T03:02:19.758Z",
+  "updatedAt": "2026-11-23T09:59:57.280Z",
   "source": "Wix Blog API",
-  "totalPosts": 472,
+  "totalPosts": 473,
   "bookingUrl": "https://www.walkofberlin.com/book-berlin-walking-tour/berlin-then-and-now",
   "allPosts": [
+    {
+      "title": "Café Achteck Berlin: Where the Green Cast-Iron Toilets Still Stand",
+      "slug": "cafe-achteck-berlin",
+      "path": "/post/cafe-achteck-berlin",
+      "url": "https://www.berlinwalk.com/post/cafe-achteck-berlin",
+      "excerpt": "Berliners still pass small green cast-iron octagons on squares in Moabit, Kreuzberg and Schöneberg. Here is how Café Achteck got its name, why only 13 remain standing and which 11 are open for free today.",
+      "category": "Living in Berlin",
+      "categorySlug": "living-in-berlin",
+      "topic": "living-in-berlin",
+      "topicLabel": "Living in Berlin",
+      "readTime": "6 min read",
+      "publishedDate": "2026-11-23T09:57:49.968Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_140ac51865f141adb16efe108f5b1a53~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-chamissoplatz-2025.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_140ac51865f141adb16efe108f5b1a53~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-chamissoplatz-2025.jpg",
+      "alt": "Green octagonal cast-iron Café Achteck pavilion standing on a cobblestone island at Chamissoplatz in Berlin-Kreuzberg under summer trees",
+      "relatedToolSlug": "berlin-public-toilets"
+    },
     {
       "title": "Leipziger Platz Berlin: The Octagon Next to Potsdamer Platz and What to Look For",
       "slug": "leipziger-platz-berlin",
