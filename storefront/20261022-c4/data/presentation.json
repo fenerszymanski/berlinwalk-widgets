@@ -556,6 +556,54 @@
     ]
   },
   {
+    "id": "ys1979-framed",
+    "name": "Your West Berlin Street in 1979, Framed Print",
+    "place": "May 1979 and today",
+    "group": "ys1979-mounted",
+    "cardSummary": "One West Berlin address, seen from above in May 1979 and today.",
+    "image": "ys1979-wall/01-altbau.webp",
+    "alt": "Framed 1979 aerial print of Potsdamer Platz in a West Berlin Altbau sitting room",
+    "typeLine": "Framed print",
+    "wixProductId": "c438afb4-ad5d-4e9e-a2b3-280c29eb80de",
+    "gallery": [
+      {
+        "image": "ys1979-wall/01-altbau.webp",
+        "alt": "Framed 1979 aerial print of Potsdamer Platz in a West Berlin Altbau sitting room"
+      },
+      {
+        "image": "ys1979-wall/02-teak.webp",
+        "alt": "Framed 1979 aerial print of Spandauer Damm in a living room with teak furniture"
+      },
+      {
+        "image": "ys1979-wall/03-hall.webp",
+        "alt": "Framed 1979 aerial print of Kottbusser Tor in a period entrance hall"
+      },
+      {
+        "image": "ys1979-wall/07-brandenburg-gate.webp",
+        "alt": "Close-up of the framed 1979 Pariser Platz print with the Brandenburg Gate"
+      },
+      {
+        "image": "ys1979-wall/05-modern-flat.webp",
+        "alt": "Framed 1979 aerial print of Kottbusser Tor in a modern Berlin apartment"
+      },
+      {
+        "image": "ys1979-wall/06-modern-office.webp",
+        "alt": "Framed 1979 aerial print of Spandauer Damm above a desk in a modern Berlin office"
+      }
+    ]
+  },
+  {
+    "id": "ys1979-canvas",
+    "name": "Your West Berlin Street in 1979, Canvas Print",
+    "place": "May 1979 and today",
+    "group": "ys1979-mounted",
+    "cardSummary": "One West Berlin address, seen from above in May 1979 and today.",
+    "image": "ys1979-sample.jpg",
+    "alt": "Example West Berlin aerial artwork from May 1979 and today",
+    "typeLine": "Canvas print",
+    "wixProductId": "0f55e7a9-de79-436e-8b57-bc5c8f2e1892"
+  },
+  {
     "id": "ys1979",
     "name": "Your West Berlin Street in 1979",
     "place": "May 1979 and today",

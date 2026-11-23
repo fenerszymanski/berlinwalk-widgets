@@ -368,6 +368,20 @@
     "forceNativeCategoryIds": true
   },
   {
+    "wixProductId": "c438afb4-ad5d-4e9e-a2b3-280c29eb80de",
+    "nativeProductType": "physical",
+    "nativeCategoryIds": [
+      "00000000-000000-000000-000000000001"
+    ]
+  },
+  {
+    "wixProductId": "0f55e7a9-de79-436e-8b57-bc5c8f2e1892",
+    "nativeProductType": "physical",
+    "nativeCategoryIds": [
+      "00000000-000000-000000-000000000001"
+    ]
+  },
+  {
     "wixProductId": "923c7a4c-93fe-460a-8e53-1ef546906021",
     "nativeProductType": "physical",
     "nativeCategoryIds": [

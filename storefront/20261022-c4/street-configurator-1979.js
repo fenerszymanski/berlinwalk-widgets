@@ -1,17 +1,4 @@
-// "Your West Berlin Street in 1979" (May 1979 aerial of West Berlin and the strip of East Berlin along the Wall): the sister of the 1928 configurator (22 Nov 2026, local candidate).
-//
-// The 1928 modules stay byte for byte as released: street-configurator.js and aerial-source.js are pinned by tests/design2.test.mjs
-// ("protected configurator UI/cart bytes"). So this module does not edit them. createYs1979(base, profile) takes the ALREADY LOADED 1928
-// module as `base`, reuses every helper from it (geocoding rows, titles, the print-details string, size and paper prices, geometry,
-// colour grading, the cart choices) and returns an object with the same exports the storefront reads from street-configurator.js, with
-// four things changed:
-//   1. ids: the 1979 poster and the 1979 digital file (passed in `profile`, defined once in storefront-element.js);
-//   2. the old photo: May 1979 tiles of WEST Berlin (aerial-1979.js) instead of the Geoportal 1928 WMS;
-//   3. the coverage gate: no 1979 photo (tile 404, or more than 2 % empty pixels) = no add to cart, with a clear message;
-//   4. what 1979 does not sell: no framed, canvas, Homes, multi-print tiers, gift voucher, preview-by-email, Finder handoff.
-// The print contract is untouched: buildCustomText, ysChoices, ysPrice and the layout/colour keys come straight from `base`, so the cart line
-// carries exactly the two custom text fields the 1928 poster carries and make_print.py (1979) parses them unchanged. The layout KEY for the
-// single large photo stays "1928-only" (the generator only knows that key); only its label says 1979.
+// May 1979 West Berlin imagery and coverage, with the shared street configurator's print choices.
 import {boxFromWmsUrl, loadAerialPhoto} from './aerial-source.js';
 import {loadOldPhoto, loadFrame, EMPTY_LIMIT} from './aerial-1979.js';
 
@@ -33,6 +20,7 @@ export const TEXT_1979 = Object.freeze({
     name: 'Your West Berlin Street in 1979', place: 'May 1979 and today',
     lead: 'The home you live in now, or one you left years ago, seen from above in May 1979 and today. West Berlin and the strip of East Berlin along the Wall.',
     leadDigital: 'Your Berlin home as a JPG and PDF. Nothing is shipped.',
+    wallStory: {"framed": "<p>Type your West Berlin address and see your street from above in May 1979, the way a survey plane photographed it, with the same spot today right below it, at the same scale. Move the cross onto your building, add a line of your own, and I print it for you.</p>\n<p>In 1979 the Wall still ran through the city. This flight was made over West Berlin, so you see your Kiez the way West Berliners knew it: the courtyards, the empty lots the war had left, the new estates of the 1960s and 70s. If your house is newer, you will see what stood there before it.</p>\n<p>A good gift for someone who grew up in West Berlin, for parents who moved to the city in the 1970s, or for anyone who wants to see their street before the Wall came down.</p>\n<p><strong>What you get</strong></p>\n<ul>\n<li>Your personalised print in 30 x 40 or 45 x 60 cm, in a black, white or natural wood frame with acrylic glazing. Choose Premium Matte or Fine Art paper. A hanging kit is included.</li>\n<li>Your street or square as the title, your district, the map coordinates of your spot, and your own line (optional, up to 40 characters).</li>\n<li>Your house number is never printed.</li>\n</ul>\n<p><strong>Before you order</strong></p>\n<ul>\n<li>The preview shows exactly what will be printed.</li>\n<li>West Berlin, plus a strip of East Berlin along the Wall (Pariser Platz, for example). Further east there is no 1979 photo; the preview tells you, and my 1928 print shows that spot instead.</li>\n<li>Each print is made for you, so it cannot be returned for a change of mind. If it arrives damaged or wrong, I replace it.</li>\n</ul>\n\n<p>Aerial photographs: Geoportal Berlin (May 1979 aerial survey of West Berlin and today's true orthophoto), Datenlizenz Deutschland Zero 2.0. Address search: © OpenStreetMap contributors.</p>", "canvas": "<p>Type your West Berlin address and see your street from above in May 1979, the way a survey plane photographed it, with the same spot today right below it, at the same scale. Move the cross onto your building, add a line of your own, and I print it for you.</p>\n<p>In 1979 the Wall still ran through the city. This flight was made over West Berlin, so you see your Kiez the way West Berliners knew it: the courtyards, the empty lots the war had left, the new estates of the 1960s and 70s. If your house is newer, you will see what stood there before it.</p>\n<p>A good gift for someone who grew up in West Berlin, for parents who moved to the city in the 1970s, or for anyone who wants to see their street before the Wall came down.</p>\n<p><strong>What you get</strong></p>\n<ul>\n<li>Your personalised canvas in 30 x 40 or 45 x 60 cm, stretched over a 2 cm wooden frame and ready to hang. The background colour of the print continues around the edges.</li>\n<li>Your street or square as the title, your district, the map coordinates of your spot, and your own line (optional, up to 40 characters).</li>\n<li>Your house number is never printed.</li>\n</ul>\n<p><strong>Before you order</strong></p>\n<ul>\n<li>The preview shows exactly what will be printed.</li>\n<li>West Berlin, plus a strip of East Berlin along the Wall (Pariser Platz, for example). Further east there is no 1979 photo; the preview tells you, and my 1928 print shows that spot instead.</li>\n<li>Each print is made for you, so it cannot be returned for a change of mind. If it arrives damaged or wrong, I replace it.</li>\n</ul>\n\n<p>Aerial photographs: Geoportal Berlin (May 1979 aerial survey of West Berlin and today's true orthophoto), Datenlizenz Deutschland Zero 2.0. Address search: © OpenStreetMap contributors.</p>"},
     altOld: 'Aerial photograph of your home in 1979, with a cross on your building',
     altRec: 'Aerial photograph of your home in 1928, with a cross on your building',
     sampleAlt: 'Example print: Spandauer Damm in 1979 and today',
@@ -67,7 +55,7 @@ export const TEXT_1979 = Object.freeze({
       {q: 'Why West Berlin?', a: link => `The May 1979 aerial survey I use was flown over West Berlin. Along the Wall it also caught a strip of East Berlin, so many streets near the border are in it too, Pariser Platz for example. Further east there is no 1979 photo; for those addresses <a href="${link}" data-ys-1928-link>my 1928 print</a> shows the spot.`},
       {q: 'How do I know if my address is covered?', a: () => 'Type it in. The preview loads the 1979 photo of your spot. If there is none, it tells you, and you cannot add the print to your cart.'},
       {shared: 'Which paper should I pick?'},
-      {q: 'Is a frame included?', a: () => 'No, the poster comes unframed.'},
+      {q: 'Is a frame included?', a: () => 'The poster comes unframed. Choose Framed if you would like a wooden frame with acrylic glazing and a hanging kit.'},
       {q: 'What if the 1979 photo is blank at my spot?', a: () => 'The 1979 survey did not cover every corner, even in West Berlin. The preview shows exactly what I print: if the top photo is blank or missing, it tells you and the print cannot go in your cart. Pick a place nearby.'},
       {shared: 'Can I change the text after I order?'},
       {shared: 'Where do you deliver, and how long does it take?'},
@@ -79,6 +67,7 @@ export const TEXT_1979 = Object.freeze({
     name: 'Deine West-Berliner Straße 1979', place: 'Mai 1979 und heute',
     lead: 'Gib die Adresse deines Zuhauses ein, heute oder von früher, und sieh es kostenlos von oben, im Mai 1979 und heute. West-Berlin und der Streifen Ost-Berlins entlang der Mauer. Als Poster bestellen kannst du es, musst du aber nicht.',
     leadDigital: 'Dein Berliner Zuhause als JPG und PDF. Kein Versand.',
+    wallStory: {"framed": "<p>Gib eine West-Berliner Adresse ein und sieh deine Straße aus der Luft im Mai 1979. Darunter siehst du denselben Ausschnitt heute im gleichen Maßstab. Setze das Fadenkreuz auf dein Haus und ergänze auf Wunsch eine eigene Zeile.</p>\n<p><strong>Das bekommst du</strong></p><ul><li>Dein personalisierter Druck in 30 × 40 oder 45 × 60 cm. Wähle einen schwarzen, weißen oder naturfarbenen Holzrahmen mit Acrylglas und Premium-Matt- oder Fine-Art-Papier. Eine Aufhängung liegt bei.</li><li>Der Name deiner Straße oder deines Platzes, der Ortsteil und die Koordinaten stehen auf dem Druck. Deine Hausnummer wird nie gedruckt.</li></ul>\n<p>Die Aufnahme zeigt West-Berlin und einen Streifen Ost-Berlins entlang der Mauer. Die Vorschau zeigt dir, ob dein Ort im Luftbild liegt. Weiter östlich kannst du meinen Druck von 1928 wählen.</p>\n<p>Ich fertige jeden Druck für dich an. Wenn er beschädigt oder falsch ankommt, ersetze ich ihn.</p>\n<p>Luftbilder aus dem Geoportal Berlin, Datenlizenz Deutschland Zero 2.0. Adresssuche © OpenStreetMap-Mitwirkende.</p>", "canvas": "<p>Gib eine West-Berliner Adresse ein und sieh deine Straße aus der Luft im Mai 1979. Darunter siehst du denselben Ausschnitt heute im gleichen Maßstab. Setze das Fadenkreuz auf dein Haus und ergänze auf Wunsch eine eigene Zeile.</p>\n<p><strong>Das bekommst du</strong></p><ul><li>Dein personalisierter Leinwanddruck in 30 × 40 oder 45 × 60 cm. Die Leinwand ist auf einen 2 cm tiefen Holzkeilrahmen gespannt und fertig zum Aufhängen. Die Hintergrundfarbe des Motivs läuft über die Kanten.</li><li>Der Name deiner Straße oder deines Platzes, der Ortsteil und die Koordinaten stehen auf dem Druck. Deine Hausnummer wird nie gedruckt.</li></ul>\n<p>Die Aufnahme zeigt West-Berlin und einen Streifen Ost-Berlins entlang der Mauer. Die Vorschau zeigt dir, ob dein Ort im Luftbild liegt. Weiter östlich kannst du meinen Druck von 1928 wählen.</p>\n<p>Ich fertige jeden Druck für dich an. Wenn er beschädigt oder falsch ankommt, ersetze ich ihn.</p>\n<p>Luftbilder aus dem Geoportal Berlin, Datenlizenz Deutschland Zero 2.0. Adresssuche © OpenStreetMap-Mitwirkende.</p>"},
     altOld: 'Luftbild deines Zuhauses von 1979, mit einem Kreuz auf deinem Gebäude',
     altRec: 'Luftbild deines Zuhauses von 1928, mit einem Kreuz auf deinem Gebäude',
     sampleAlt: 'Beispieldruck: Spandauer Damm 1979 und heute',
@@ -107,7 +96,7 @@ export const TEXT_1979 = Object.freeze({
       {q: 'Warum West-Berlin?', a: link => `Die Luftbildbefliegung vom Mai 1979, die ich verwende, wurde über West-Berlin geflogen. Entlang der Mauer hat sie auch einen Streifen Ost-Berlins erfasst, viele Straßen nahe der Grenze sind also dabei, zum Beispiel der Pariser Platz. Weiter östlich gibt es kein Foto von 1979; solche Adressen zeigt <a href="${link}" data-ys-1928-link>mein Druck von 1928</a>.`},
       {q: 'Woher weiß ich, ob meine Adresse dabei ist?', a: () => 'Gib sie ein. Die Vorschau lädt das Foto von 1979 für deine Stelle. Gibt es dort keins, sagt sie es dir, und du kannst den Druck nicht in den Warenkorb legen.'},
       {shared: 'Which paper should I pick?'},
-      {q: 'Ist ein Rahmen dabei?', a: () => 'Nein, das Poster wird ungerahmt geliefert.'},
+      {q: 'Ist ein Rahmen dabei?', a: () => 'Das Poster kommt ohne Rahmen. Mit der Option Gerahmt erhältst du einen Holzrahmen mit Acrylglas und Aufhängung.'},
       {q: 'Was, wenn das Foto von 1979 an meiner Stelle leer ist?', a: () => 'Die Befliegung von 1979 deckte nicht jede Ecke ab, auch in West-Berlin nicht. Die Vorschau zeigt genau, was ich drucke: Ist das obere Foto leer oder fehlt es, sagt sie es dir, und du kannst den Druck nicht in den Warenkorb legen. Wähle einen Ort in der Nähe.'},
       {shared: 'Can I change the text after I order?'},
       {shared: 'Where do you deliver, and how long does it take?'},
@@ -167,11 +156,17 @@ const escape = value => String(value ?? '').replace(/[&<>"']/g, c => ({'&': '&am
 
 export function createYs1979(base, profile) {
   const {PRINT_OPTIONS, ysLayout, ysColour, ysSize, ysPaper, ysPrice, ysDigital, readyToCheck, clean, coordsText, inBerlin, movePoint, utm33, urlToday, gradePixels,
-    titleFrom, areaFrom, fromPhoton, placeLines, addressLabel, titleSize, euro, YS_LIMITS, YS_SIZES, YS_PAPERS} = base;
+    titleFrom, areaFrom, fromPhoton, placeLines, addressLabel, titleSize, euro, YS_LIMITS, YS_SIZES, YS_PAPERS, ysMounted, ysFrame, YS_FRAMES, YS_FRAMED_PAPERS, MOUNTED_DELIVERY, FRAMED_SPEC, CANVAS_SPEC, mountedChristmasOpen} = base;
   const T = () => textFor(isGerman());
   const layoutLabel = key => T().layouts[key] || PRINT_OPTIONS.layouts[key];
   const optionNames = state => ({layout: layoutLabel(ysLayout(state)), colour: PRINT_OPTIONS.themes[ysColour(state)].name});
-  const ysProductId = state => ysDigital(state) ? profile.digitalId : profile.posterId;
+  const formatLabel = { poster: 'Poster', framed: 'Framed print', canvas: 'Canvas print' };
+  const ysProductId = state => {
+    if (ysDigital(state)) return profile.digitalId;
+    if (state.format === 'framed') return profile.framedId;
+    if (state.format === 'canvas') return profile.canvasId;
+    return profile.posterId;
+  };
   // The old photo covers the same ground box as today's photo (368 m wide, 746:1400 high; 1592:1400 for the single large photo); asking
   // urlToday for the box keeps the geometry in one place, the 1928 module.
   const oldBox = (lat, lon, only) => {
@@ -201,15 +196,22 @@ export function createYs1979(base, profile) {
     if (live && state.rec) return t.captionRec(verb);
     if (live && ysLayout(state) === '1928-only') return t.captionOnly;
     if (ysDigital(state)) return live ? t.captionDigital(verb) : 'Example file. Search an address to see your home, then add your own words.';
+    if (ysMounted(state)) {
+      const label = isGerman()
+        ? (state.format === 'framed' ? 'Gerahmter Druck' : 'Leinwanddruck')
+        : formatLabel[state.format];
+      return label + ' · ' + ysSize(state);
+    }
     return live ? t.captionPoster(ysSize(state), verb) : 'Example poster, SIZE. Search an address to see your home, then add your own words.'.replace('SIZE', ysSize(state));
   };
 
   function mountConfigurator(host, state, api) {
     api.homesCleanup?.(); api.cleanup1979?.();
     if (state.homesCount) state.homesCount = 0;
-    if (state.format !== 'digital') state.format = 'poster';
+    if (!['digital', 'framed', 'canvas'].includes(state.format) || !api[state.format]) state.format = 'poster';
     const L = YS_LIMITS, de = isGerman();
-    const currentPrice = s => api.variantPrice ? api.variantPrice(s) : ysPrice(s);
+    const currentPrice = s => api.variantPrice ? api.variantPrice(s) : ysMounted(s) ? null : ysPrice(s);
+    const priceLabel = amount => Number.isFinite(amount) ? euro(amount) : 'Currently unavailable';
     const showPrice = (el, amount) => { if (el) el.innerHTML = api.priceHtml ? api.priceHtml(amount, state) : euro(amount); };
     const hasQuickFormats = api.variants && api.digital && Number.isFinite(api.digitalPrice);
     const visual = host.querySelector('[data-ys-slot="visual"]'), formSlot = host.querySelector('[data-ys-slot="form"]');
@@ -267,9 +269,9 @@ export function createYs1979(base, profile) {
         <label>Your words on the print (optional)<input data-ys="line" maxlength="${L.line}" placeholder="Home since 1979" value="${escape(state.line || '')}"></label>
         <p class="ys-hint">The house number is never printed.</p>
       </div>
-      <div class="ys-format ys-format-top" data-ys="format" ${api.digital ? '' : 'hidden'}>
+      <div class="ys-format ys-format-top" data-ys="format" ${api.digital || api.framed || api.canvas ? '' : 'hidden'}>
         <span class="ys-label" id="ys-format-l">What you get</span>
-        <div class="ys-sizes ys-formats" role="radiogroup" aria-labelledby="ys-format-l">${[['poster', 'Poster', true], ['digital', 'Digital file', api.digital]].filter(([, , available]) => available).map(([key, label]) => `<button type="button" role="radio" class="ys-size" data-ys-format="${key}" aria-checked="${(state.format || 'poster') === key}"><span>${label}</span></button>`).join('')}</div>
+        <div class="ys-sizes ys-formats" role="radiogroup" aria-labelledby="ys-format-l">${[['poster', 'Poster', true], ['framed', 'Framed', api.framed], ['canvas', 'Canvas', api.canvas], ['digital', 'Digital file', api.digital]].filter(([, , available]) => available).map(([key, label]) => `<button type="button" role="radio" class="ys-size" data-ys-format="${key}" aria-checked="${(state.format || 'poster') === key}"><span>${label}</span></button>`).join('')}</div>
       </div>
       <div class="ys-choice-row" data-ys="layoutrow" role="group" aria-label="Layout"><span class="ys-label">Layout</span><div class="ys-layouts" role="radiogroup" aria-label="Layout">${Object.keys(PRINT_OPTIONS.layouts).map(key => `<button type="button" role="radio" data-ys-layout="${key}" aria-checked="${key === ysLayout(state)}">${escape(layoutLabel(key))}</button>`).join('')}</div></div>
       <div class="ys-choice-row" role="group" aria-label="Colour"><span class="ys-label">Colour <small data-ys="colourname">${escape(optionNames(state).colour)}</small></span><div class="ys-swatches" role="radiogroup" aria-label="Colour">${Object.entries(PRINT_OPTIONS.themes).map(([key, t]) => `<button type="button" role="radio" data-ys-colour="${key}" title="${escape(t.name)}" aria-label="${escape(t.name)}" aria-checked="${key === ysColour(state)}" style="--swatch:rgb(${t.mid.join(',')});--paper:rgb(${t.bg.join(',')})"><span aria-hidden="true"></span></button>`).join('')}</div></div>
@@ -279,6 +281,9 @@ export function createYs1979(base, profile) {
           <div class="ys-variant" data-ys="variant" ${api.variants && !ysDigital(state) ? '' : 'hidden'}>
             <span class="ys-label" id="ys-size-l">Size</span>
             <div class="ys-sizes" role="radiogroup" aria-labelledby="ys-size-l">${YS_SIZES.map(z => `<button type="button" role="radio" class="ys-size" data-ys-size="${escape(z)}" aria-checked="${z === ysSize(state)}">${escape(z)}<small data-ys-sizeprice="${escape(z)}"></small></button>`).join('')}</div>
+            <div data-ys="framechoices" hidden><span class="ys-label" id="ys-frame-l">Frame</span>
+              <div class="ys-frames" role="radiogroup" aria-labelledby="ys-frame-l">${YS_FRAMES.map((name, i) => `<button type="button" role="radio" class="ys-frame" data-ys-frame="${name}" aria-checked="${ysFrame(state) === name}"><span class="ys-frame-dot" style="--frame-colour:${['#242522', '#efeee9', '#b78961'][i]}"></span><span>${name}</span></button>`).join('')}</div>
+            </div>
             <label class="ys-label" for="ys-paper" data-ys="paperlabel">Paper</label>
             <select id="ys-paper" data-ys="paper">${YS_PAPERS.map(p => `<option value="${escape(p.name)}" ${p.name === ysPaper(state).name ? 'selected' : ''}>${escape(p.name)}</option>`).join('')}</select>
             <p class="ys-hint" data-ys="papernote"></p>
@@ -294,22 +299,46 @@ export function createYs1979(base, profile) {
     $('options').addEventListener('toggle', () => { state.optionsOpen = $('options').open; });
     function paintVariant() {
       if (!api.digital && ysDigital(state)) state.format = 'poster';
+      const mounted = ysMounted(state), framed = state.format === 'framed', canvas = state.format === 'canvas';
       const kind = ysDigital(state) ? 'digital' : 'poster';
-      $('paper').value = ysPaper(state).name;
+      const stage = host.querySelector('.ys-stage');
+      stage.dataset.format = mounted ? state.format : 'poster';
+      stage.dataset.frame = ysFrame(state);
+      stage.style.setProperty('--frame-ratio', String(12 / (ysSize(state) === YS_SIZES[1] ? 450 : 300)));
+      const picker = $('paper'), paperKind = framed ? 'framed' : 'poster';
+      if (picker.dataset.kind !== paperKind) {
+        picker.innerHTML = (framed ? YS_FRAMED_PAPERS : YS_PAPERS).map(p => `<option value="${escape(p.name)}">${escape(p.name)}</option>`).join('');
+        picker.dataset.kind = paperKind;
+      }
+      picker.value = ysPaper(state).name;
+      picker.hidden = canvas;
+      $('paperlabel').hidden = canvas;
+      $('papernote').hidden = canvas;
+      $('framechoices').hidden = !framed;
+      host.querySelector('.ys-options-t').textContent = canvas ? 'Size' : framed ? 'Size, frame and paper' : 'Size and paper';
+      if (mounted) $('options').open = true;
+      host.querySelectorAll('[data-ys-frame]').forEach(b => b.setAttribute('aria-checked', String(b.dataset.ysFrame === ysFrame(state))));
+
       host.querySelectorAll('[data-ys-format]').forEach(b => b.setAttribute('aria-checked', String(b.dataset.ysFormat === (state.format || 'poster'))));
       if (hasQuickFormats) {
         quickFormats.forEach(button => button.setAttribute('aria-pressed', String((button.dataset.ysQuickFormat === 'digital') === ysDigital(state))));
-        $('quickprintkind').textContent = 'Poster';
-        $('quickprintsize').textContent = ysSize(state);
-        $('quickdelivery').textContent = ysDigital(state) ? 'Sent by email within 24 hours' : 'Delivery in Germany in 3 to 5 working days';
+        const physical = ysDigital(state) ? state.lastPrintFormat || 'poster' : state.format;
+        $('quickprintkind').textContent = formatLabel[physical];
+        $('quickprintsize').textContent = ysSize({...state, format: physical});
+        $('quickdelivery').textContent = ysDigital(state) ? 'Sent by email within 24 hours' : mounted ? 'Delivery in Germany in 5 to 8 working days' : 'Delivery in Germany in 3 to 5 working days';
       }
-      $('options').hidden = !api.variants || ysDigital(state);
-      $('variant').hidden = !api.variants || ysDigital(state);
-      const delivery = host.querySelector('.ys-buy .delivery'); if (delivery) delivery.textContent = ysDigital(state) ? DIGITAL_DELIVERY : POSTER_DELIVERY;
+      $('options').hidden = (!api.variants && !mounted) || ysDigital(state);
+      $('variant').hidden = $('options').hidden;
+      const delivery = host.querySelector('.ys-buy .delivery'); if (delivery) delivery.textContent = mounted ? MOUNTED_DELIVERY : ysDigital(state) ? DIGITAL_DELIVERY : POSTER_DELIVERY;
       const root = host.getRootNode().querySelectorAll ? host.getRootNode() : host;
       root.querySelectorAll('[data-ys-legal]').forEach(el => { el.hidden = el.dataset.ysLegal !== kind; });
-      root.querySelectorAll('[data-ys-shipping]').forEach(el => { el.hidden = ysDigital(state); });
-      host.querySelector('[data-ys-jump]').textContent = ysDigital(state) ? 'Change format or text' : 'Change size, paper or text';
+      root.querySelectorAll('[data-ys-shipping]').forEach(el => { el.hidden = mounted || ysDigital(state); });
+      root.querySelectorAll('[data-ys-mounted-delivery]').forEach(el => { el.hidden = !mounted; });
+      root.querySelectorAll('[data-ys-mounted-christmas]').forEach(el => { el.hidden = !mounted || !mountedChristmasOpen(); });
+      root.querySelectorAll('[data-ys-story]').forEach(el => { el.hidden = el.dataset.ysStory !== state.format; });
+      const wallGallery = root.querySelector('.bw-acc-wall');
+      if (wallGallery) wallGallery.hidden = !wallGallery.querySelector('.p12-real-print:not([hidden])');
+      host.querySelector('[data-ys-jump]').textContent = ysDigital(state) ? 'Change format or text' : mounted ? 'Change options or text' : 'Change size, paper or text';
       if (ysDigital(state)) {
         if (!Number.isFinite(api.digitalPrice)) return;
         const label = euro(api.digitalPrice);
@@ -319,6 +348,25 @@ export function createYs1979(base, profile) {
         const add = host.querySelector('[data-ys-add]'); if (add) add.textContent = `Add to cart · ${label}`;
         host.querySelector('[data-ys-quickadd]').textContent = `Add to cart · ${label}`;
         $('quickspec').textContent = 'Digital file · JPG + PDF';
+        $('caption').textContent = captionFor(state, !!state.lat);
+        return;
+      }
+      if (mounted) {
+        const amount = currentPrice(state), label = priceLabel(amount), size = ysSize(state);
+        const parts = [formatLabel[state.format], size, ...(framed ? [ysFrame(state) + ' frame', ysPaper(state).name + ' paper'] : [])];
+        host.querySelectorAll('[data-ys-size]').forEach(b => b.setAttribute('aria-checked', String(b.dataset.ysSize === size)));
+        host.querySelectorAll('[data-ys-sizeprice]').forEach(el => {
+          el.textContent = priceLabel(currentPrice({...state, [state.format + 'Size']: el.dataset.ysSizeprice}));
+        });
+        $('papernote').textContent = ysPaper(state).note;
+        optSummary([...parts.slice(1), label].join(' · '));
+        const price = host.querySelector('.product-title .price');
+        if (Number.isFinite(amount)) showPrice(price, amount);
+        else if (price) price.textContent = label;
+        const spec = host.querySelector('.ys-buy .spec');
+        if (spec) spec.textContent = framed ? FRAMED_SPEC : CANVAS_SPEC;
+        host.querySelectorAll('[data-ys-add],[data-ys-quickadd]').forEach(b => { b.textContent = 'Add to cart · ' + label; });
+        $('quickspec').textContent = parts.join(' · ');
         $('caption').textContent = captionFor(state, !!state.lat);
         return;
       }
@@ -335,19 +383,20 @@ export function createYs1979(base, profile) {
       $('quickspec').textContent = `${ysSize(state)} · ${paper.name}`;
       $('caption').textContent = captionFor(state, !!state.lat);
     }
-    host.querySelectorAll('[data-ys-size]').forEach(b => b.addEventListener('click', () => { state.size = b.dataset.ysSize; paintVariant(); }));
+    host.querySelectorAll('[data-ys-size]').forEach(b => b.addEventListener('click', () => { state[ysMounted(state) ? state.format + 'Size' : 'size'] = b.dataset.ysSize; paintVariant(); refreshButton(); }));
     function chooseFormat(format) {
       const previous = state.format || 'poster';
       if (format === previous || api.busy()) return;
       if (!ysDigital(state)) state.lastPrintFormat = previous;
       state.format = format;
-      if (format === 'digital') api.track?.('digital');
+      if (format !== 'poster') api.track?.(format);
       paintVariant();
       refreshButton();
     }
     host.querySelectorAll('[data-ys-format]').forEach(button => button.addEventListener('click', () => chooseFormat(button.dataset.ysFormat)));
-    quickFormats.forEach(button => button.addEventListener('click', () => chooseFormat(button.dataset.ysQuickFormat === 'digital' ? 'digital' : 'poster')));
-    $('paper').addEventListener('change', e => { state.paper = e.target.value; paintVariant(); });
+    quickFormats.forEach(button => button.addEventListener('click', () => chooseFormat(button.dataset.ysQuickFormat === 'digital' ? 'digital' : state.lastPrintFormat || 'poster')));
+    $('paper').addEventListener('change', e => { state[ysMounted(state) ? 'framedPaper' : 'paper'] = e.target.value; paintVariant(); refreshButton(); });
+    host.querySelectorAll('[data-ys-frame]').forEach(b => b.addEventListener('click', () => { state.frame = b.dataset.ysFrame; paintVariant(); refreshButton(); }));
     queueMicrotask(paintVariant);
     api.cancelPhotos?.();
     const ptitle = $('ptitle'), parea = $('parea'), pcoords = $('pcoords'), pline = $('pline');
@@ -428,13 +477,14 @@ export function createYs1979(base, profile) {
       $('fields').toggleAttribute('data-rec', on);   // title, area and words cannot be printed for this spot: out of sight too
     };
     const refreshButton = () => {
-      const ready = readyToCheck(state), off = !ready || api.busy() || state.cover !== 'ok';
+      const ready = readyToCheck(state), off = !ready || api.busy() || state.cover !== 'ok' || (ysMounted(state) && !Number.isFinite(currentPrice(state)));
       const b = host.getRootNode().querySelector?.('[data-ys-add]'); if (b) b.disabled = off;
       host.querySelector('[data-ys-quickadd]').disabled = off; $('quick').hidden = !state.lat;
       const why = host.getRootNode().querySelector?.('[data-ys-why]');
       if (why) why.textContent = recActive(state) ? '' : !ready ? (!state.lat ? (results.hidden ? 'Search for your address to continue.' : 'Tap one of the places under the search box.') : 'Fill in the title and area lines to continue.')
         : state.cover === 'blocked' ? T().whyBlocked : state.cover === 'error' ? T().whyError : state.cover === 'loading' ? T().whyChecking : '';
       paintCover();
+      api.refreshBuyBar?.();
     };
     api.refresh = refreshButton;
     const onOldPhoto = ({kind, share, alt}) => {
@@ -563,6 +613,6 @@ export function createYs1979(base, profile) {
     refreshButton();
   }
 
-  return Object.freeze({...base, YS_PRODUCT_ID: profile.posterId, YS_DIGITAL_ID: profile.digitalId, YS_FRAMED_ID: '', YS_CANVAS_ID: '', ysProductId, readyToAdd,
-    ysMounted: () => false, recActive, optionNames, mountConfigurator, oldBox, captionFor, EMPTY_LIMIT, profile, textFor, isGerman, classifySide, spotFragment, loadSides});
+  return Object.freeze({...base, YS_PRODUCT_ID: profile.posterId, YS_DIGITAL_ID: profile.digitalId, YS_FRAMED_ID: profile.framedId, YS_CANVAS_ID: profile.canvasId, ysProductId, readyToAdd,
+     recActive, optionNames, mountConfigurator, oldBox, captionFor, EMPTY_LIMIT, profile, textFor, isGerman, classifySide, spotFragment, loadSides});
 }

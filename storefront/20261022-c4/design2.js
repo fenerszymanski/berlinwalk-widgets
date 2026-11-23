@@ -14,7 +14,7 @@ let recommendations,translations,exploreImages,listingOrder=null;
 const apparelSelections=new Map();
 const HOME_APPAREL=['shirt-berlin-in-pink','shirt-berlin-uhr','hoodie-tempelhof','hoodie-teufelsberg'];
 const listingOrderReady=fetch(new URL('data/listing-order.json?v=zoom-sort-20261117-v1',import.meta.url)).then(r=>r.ok?r.json():null).catch(()=>null).then(j=>{if(j&&Array.isArray(j.popular)&&j.created&&typeof j.created==='object')listingOrder=j;});
-export const prepare=Promise.all(['recommendations.json','de-store.json','explore-images.json'].map(file=>fetch(new URL('data/'+file+'?v='+(file==='explore-images.json'?'xmas-audio-20261116-v1':file==='de-store.json'?'ys1979-20261122-v1':'xmas-audio-20261116-v1'),import.meta.url)).then(r=>{if(!r.ok)throw Error('DESIGN2_DATA_UNAVAILABLE');return r.json();}))).then(([r,t,i])=>{recommendations=r;translations=t;exploreImages=i;}).then(()=>listingOrderReady).then(()=>extrasEnabled()?prepareExtras:undefined);
+export const prepare=Promise.all(['recommendations.json','de-store.json','explore-images.json'].map(file=>fetch(new URL('data/'+file+'?v='+(file==='explore-images.json'?'xmas-audio-20261116-v1':file==='de-store.json'?'ys1979-wall-20261123-v1':'xmas-audio-20261116-v1'),import.meta.url)).then(r=>{if(!r.ok)throw Error('DESIGN2_DATA_UNAVAILABLE');return r.json();}))).then(([r,t,i])=>{recommendations=r;translations=t;exploreImages=i;}).then(()=>listingOrderReady).then(()=>extrasEnabled()?prepareExtras:undefined);
 // The legacy page has two question groups. Keep every body and legal hook,
 // merge their accordions, and retain the contact sentence after the last item.
 export function mergeProductQuestions(root) {
@@ -766,6 +766,7 @@ for(const crumb of this.shadowRoot.querySelectorAll('.breadcrumb > a:first-child
   const specText=buyBox.querySelector('.spec')?.textContent.trim()||'';
   const specMirror=root.querySelector('.bw-spec-copy');
   if(specMirror&&specText)specMirror.textContent=specText;
+  if(this.ysIs1979())this.bwSyncDeliveryCard();
  };
 
  P.bwSyncDeliveryCard=function(){
@@ -798,8 +799,14 @@ for(const crumb of this.shadowRoot.querySelectorAll('.breadcrumb > a:first-child
   const isYs=!!root.querySelector('.surface .ys-layout');
   const de=this.campaignGerman();
 
+  const mounted1979=this.ysIs1979()&&this.ysMod?.ysMounted(this.ys||{});
   let rows='';
-  if(strong){
+  if(mounted1979){
+   const delivery=de?'Kostenloser Versand. Deutschland 5 bis 8 Werktage, fast die ganze EU und UK 6 bis 12, USA 8 bis 14. Genaue Tage an der Kasse.':this.ysMod.MOUNTED_DELIVERY;
+   const cutoff=de?'Für Weihnachten: gerahmt oder auf Leinwand bis 8. Dezember (Deutschland), 4. Dezember (fast die ganze EU, UK) oder 1. Dezember (USA) bestellen.':this.ysMod.MOUNTED_CHRISTMAS;
+   const deadline=this.ysMod.mountedChristmasOpen()?`<span data-ys1979-christmas>${esc(cutoff)}</span>`:'';
+   rows=`<div class="bw-del-row" data-ys1979-delivery>${ZALANDO_ICONS.truck}<div><strong>${esc(delivery)}</strong>${deadline}</div></div>`;
+  }else if(strong){
    const returnLine=isYs
     ?(buyBox.querySelector('.ys-legalline[data-ys-legal="poster"]')?.textContent.replace(/\s*Terms\s*$/i,'').trim()||root.querySelector('.bw-acc-details .ys-legalline[data-ys-legal="poster"]')?.textContent.replace(/\s*Terms\s*$/i,'').trim()||(de?'Für dich gefertigt · Rückgabe nur bei Mängeln.':'Made for you, so no returns for a change of mind. Faulty prints replaced free.'))
     :(root.querySelector('.bw-acc-details .ys-trust li:last-child')?.textContent.trim()||buyBox.querySelector('.ys-trust li:last-child')?.textContent.trim()||(de?'14 Tage Widerrufsrecht für Verbraucher':'14-day right of withdrawal for consumers'));
@@ -867,7 +874,8 @@ for(const crumb of this.shadowRoot.querySelectorAll('.breadcrumb > a:first-child
   const stories=[...layout.querySelectorAll('.story'),...wrap.querySelectorAll(':scope > .product-info > .story')];
   const clockBox=infoBox?.querySelector('.clock-box'),mapCard=infoBox?.querySelector('.map-card');
   if(stories.length||ysLead||clockBox||mapCard){
-   const heading=stories.find(st=>!st.hidden)?.querySelector('h2')?.textContent.trim()||stories[0]?.querySelector('h2')?.textContent.trim()||(de?'Beschreibung':'Description');
+   const genericHeading=de?'Beschreibung':'Description';
+   const heading=this.ysIs1979()?genericHeading:(stories.find(st=>!st.hidden)?.querySelector('h2')?.textContent.trim()||stories[0]?.querySelector('h2')?.textContent.trim()||genericHeading);
    const storyAcc=makeAcc('bw-acc-story',heading);
    if(ysLead)storyAcc.body.append(ysLead);
    for(const st of stories){
@@ -889,7 +897,8 @@ for(const crumb of this.shadowRoot.querySelectorAll('.breadcrumb > a:first-child
   for(const sel of ['.ys-multi','[data-ys-mounted-saving]','.ys-trust','[data-ys-gift]','[data-ys-mounted-spec]','[data-ys-mounted-christmas]','.ys-legalline','.ys-maker']){
    for(const n of buyBox.querySelectorAll(`:scope > ${sel}`))detailNodes.push(n);
   }
-  const realPrint=infoBox?.querySelector('.p12-real-print');
+  const wallPhotos=this.ysIs1979()?[...(infoBox?.querySelectorAll('.p12-real-print')||[])]:[];
+  const realPrint=this.ysIs1979()?null:infoBox?.querySelector('.p12-real-print');
   const captions=galleryEl.querySelectorAll('.gallery-caption,.ys-caption,.ys-quick');
   const bwPicks=buyBox.querySelector('.bw-picks'),uniqueCross=[...new Set([...buyBox.querySelectorAll(':scope > .rw-cross'),...layout.querySelectorAll('.rw-cross')])];
   if(specEl||paperNote||detailNodes.length||realPrint||captions.length||bwPicks||uniqueCross.length){
@@ -903,6 +912,16 @@ for(const crumb of this.shadowRoot.querySelectorAll('.breadcrumb > a:first-child
    if(bwPicks)dtAcc.body.append(bwPicks);
    for(const cr of uniqueCross)dtAcc.body.append(cr);
    accList.append(dtAcc.d);
+  }
+
+  if(wallPhotos.length){
+   const wall=makeAcc('bw-acc-wall',de?'Dein Druck an der Wand':'Your print on the wall');
+   wall.d.hidden=wallPhotos.every(photo=>photo.hidden);
+   for(const photo of wallPhotos){
+    photo.querySelector(':scope > h2')?.remove();
+    wall.body.append(photo);
+   }
+   accList.append(wall.d);
   }
 
   // 3. Size guide (apparel)
