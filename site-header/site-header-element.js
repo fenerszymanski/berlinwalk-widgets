@@ -1,7 +1,7 @@
 (() => {
-const BW_HEADER_NAV_VERSION = 'walking-tours-20261122';
+const BW_HEADER_NAV_VERSION = 'west-berlin-menu-20261123';
 if (customElements.get('bw-site-header')?.navigationVersion === BW_HEADER_NAV_VERSION
-  || customElements.get('bw-site-header-walking-tours')?.navigationVersion === BW_HEADER_NAV_VERSION) return;
+  || customElements.get('bw-site-header-west-berlin')?.navigationVersion === BW_HEADER_NAV_VERSION) return;
 
 const BW_HEADER_SCRIPT_URL = (document.currentScript && document.currentScript.src) || 'https://fenerszymanski.github.io/berlinwalk-widgets/site-header/site-header-element.js';
 // Walk of Berlin wordmark (A15a, live 2 October 2026). The old berlinwalk-wordmark-*
@@ -184,6 +184,11 @@ const BW_HEADER_STORE_DESIGN2_EN = [
         "href": "https://walkofberlin.com/product-page/your-berlin-street-in-1928-personalised-aerial-print-30-x-40-cm"
       },
       {
+        "label": "Your West Berlin street in 1979",
+        "de": "Deine West-Berliner Straße 1979",
+        "href": "https://walkofberlin.com/product-page/your-west-berlin-street-in-1979-personalised-aerial-print"
+      },
+      {
         "label": "1928 digital file",
         "de": "1928 als digitale Datei",
         "href": "https://walkofberlin.com/product-page/your-berlin-street-in-1928-digital-file"
@@ -320,6 +325,11 @@ const BW_HEADER_STORE_DESIGN2_DE = [
         "label": "Deine Straße 1928",
         "de": "Deine Straße 1928",
         "href": "https://walkofberlin.com/de/product-page/your-berlin-street-in-1928-personalised-aerial-print-30-x-40-cm"
+      },
+      {
+        "label": "Deine West-Berliner Straße 1979",
+        "de": "Deine West-Berliner Straße 1979",
+        "href": "https://walkofberlin.com/de/product-page/your-west-berlin-street-in-1979-personalised-aerial-print"
       },
       {
         "label": "1928 als digitale Datei",
@@ -1095,7 +1105,7 @@ class BWHeaderElement extends HTMLElement {
           src: url(${BW_HEADER_MENU_FONT_URL}) format('woff2');
         }
 
-        bw-site-header, bw-site-header-desktop-align, bw-site-header-clothing, bw-site-header-store-polish, bw-site-header-store-nav, bw-site-header-clothing-page, bw-site-header-walking-tours {
+        bw-site-header, bw-site-header-desktop-align, bw-site-header-clothing, bw-site-header-store-polish, bw-site-header-store-nav, bw-site-header-clothing-page, bw-site-header-walking-tours, bw-site-header-west-berlin {
           display: block;
           width: 100%;
         }
@@ -1345,9 +1355,23 @@ class BWHeaderElement extends HTMLElement {
         }
 
         .bw-header-dropdown-trigger .bw-header-caret {
-          font-size: 10px;
-          line-height: 1;
+          align-items: center;
+          display: inline-flex;
+          flex: 0 0 auto;
+          height: 8px;
+          justify-content: center;
           transition: transform 160ms ease;
+          width: 8px;
+        }
+
+        .bw-header-caret::before {
+          border-bottom: 1.5px solid currentColor;
+          border-right: 1.5px solid currentColor;
+          box-sizing: border-box;
+          content: "";
+          height: 5px;
+          transform: translateY(-1px) rotate(45deg);
+          width: 5px;
         }
 
         .bw-header-dropdown-open .bw-header-dropdown-trigger .bw-header-caret {
@@ -1813,14 +1837,14 @@ class BWHeaderElement extends HTMLElement {
             <nav class="bw-header-nav" aria-label="Primary" data-bw-unified-menu="${BW_HEADER_NAV_VERSION}">
               <ul class="bw-header-nav-list" data-bw-home-nav>${BW_HEADER_MENU_GROUPS.filter(group=>BW_HEADER_STORE_DESIGN2||group.key!=='shop').map(group=>`
                 <li class="bw-header-dropdown ${group.key==='walk'?'bw-header-tours-dropdown':''}">
-                  ${group.key==='shop'?`<a class="bw-header-store-link" href="${BW_HEADER_DESIGN2_HOME}">Store</a><button class="bw-header-dropdown-trigger bw-header-store-expand" type="button" aria-label="${BW_HEADER_GERMAN?'Store-Menü öffnen':'Open Store menu'}" aria-expanded="false" aria-controls="${this._instanceId}-shop-menu"><span class="bw-header-caret" aria-hidden="true">⌄</span></button>`:`<button class="bw-header-dropdown-trigger" type="button" aria-expanded="false" aria-controls="${this._instanceId}-${group.key}-menu">${bwHeaderEscape(group.label)} <span class="bw-header-caret" aria-hidden="true">⌄</span></button>`}
+                  ${group.key==='shop'?`<a class="bw-header-store-link" href="${BW_HEADER_DESIGN2_HOME}">Store</a><button class="bw-header-dropdown-trigger bw-header-store-expand" type="button" aria-label="${BW_HEADER_GERMAN?'Store-Menü öffnen':'Open Store menu'}" aria-expanded="false" aria-controls="${this._instanceId}-shop-menu"><span class="bw-header-caret" aria-hidden="true"></span></button>`:`<button class="bw-header-dropdown-trigger" type="button" aria-expanded="false" aria-controls="${this._instanceId}-${group.key}-menu">${bwHeaderEscape(group.label)} <span class="bw-header-caret" aria-hidden="true"></span></button>`}
                   <ul id="${this._instanceId}-${group.key}-menu" class="bw-header-submenu" aria-label="${bwHeaderEscape(group.label)}"${group.key==='shop'&&BW_HEADER_STORE_DESIGN2?' data-bw-store-menu="design2"':''} hidden inert>${bwHeaderItems(group)}</ul>
                 </li>`).join('')}</ul>
             </nav>
 
             <div class="bw-header-cta">
               ${BW_HEADER_STORE_DESIGN2?'':`<div class="bw-header-dropdown bw-header-store-dropdown">
-                <button class="bw-header-home-store bw-header-dropdown-trigger" type="button" aria-expanded="false" aria-controls="${this._instanceId}-shop-menu">${bwHeaderEscape(BW_HEADER_MENU_GROUPS.find(group=>group.key==='shop').label)} <span class="bw-header-caret" aria-hidden="true">⌄</span></button>
+                <button class="bw-header-home-store bw-header-dropdown-trigger" type="button" aria-expanded="false" aria-controls="${this._instanceId}-shop-menu">${bwHeaderEscape(BW_HEADER_MENU_GROUPS.find(group=>group.key==='shop').label)} <span class="bw-header-caret" aria-hidden="true"></span></button>
                 <ul id="${this._instanceId}-shop-menu" class="bw-header-submenu" aria-label="Store" data-bw-store-menu="${BW_HEADER_STORE_DESIGN2?'design2':'legacy'}" hidden inert>${bwHeaderItems(BW_HEADER_MENU_GROUPS.find(group=>group.key==='shop'))}</ul>
               </div>`}
               <a class="bw-header-book bw-header-commerce-bridge" href="${BW_HEADER_BOOKING_URL}">${BW_HEADER_GERMAN?'Termine ansehen und buchen':'See dates and book'}</a>
@@ -1997,15 +2021,16 @@ if (!customElements.get('bw-site-header')) {
   if(!customElements.get('bw-site-header-store-nav'))customElements.define('bw-site-header-store-nav', class extends BWHeaderElement {});
   if(!customElements.get('bw-site-header-clothing-page'))customElements.define('bw-site-header-clothing-page', class extends BWHeaderElement {});
   if(!customElements.get('bw-site-header-walking-tours'))customElements.define('bw-site-header-walking-tours', class extends BWHeaderElement {});
+  if(!customElements.get('bw-site-header-west-berlin'))customElements.define('bw-site-header-west-berlin', class extends BWHeaderElement {});
   const upgrade = () => {
     for (const host of document.querySelectorAll('bw-site-header')) {
-      if(host.constructor.navigationVersion===BW_HEADER_NAV_VERSION&&!host.querySelector('bw-site-header-unified,bw-site-header-design2,bw-site-header-design2-fix4,bw-site-header-design2-fix5,bw-site-header-design2-fix5b,bw-site-header-design2-fix6,bw-site-header-clothing,bw-site-header-store-polish,bw-site-header-store-nav,bw-site-header-clothing-page'))continue;
-      if(host.querySelector('bw-site-header-walking-tours'))continue;
+      if(host.constructor.navigationVersion===BW_HEADER_NAV_VERSION&&!host.querySelector('bw-site-header-unified,bw-site-header-design2,bw-site-header-design2-fix4,bw-site-header-design2-fix5,bw-site-header-design2-fix5b,bw-site-header-design2-fix6,bw-site-header-clothing,bw-site-header-store-polish,bw-site-header-store-nav,bw-site-header-clothing-page,bw-site-header-walking-tours'))continue;
+      if(host.querySelector('bw-site-header-west-berlin'))continue;
       // Preserve older compatibility hosts: their observers use the direct
       // child tag as an upgrade guard. Removing it makes two builds fight.
-      const legacy=[host,...host.querySelectorAll('bw-site-header-unified,bw-site-header-design2,bw-site-header-design2-fix4,bw-site-header-design2-fix5,bw-site-header-design2-fix5b,bw-site-header-design2-fix6,bw-site-header-desktop-align,bw-site-header-clothing,bw-site-header-store-polish,bw-site-header-store-nav,bw-site-header-clothing-page')];
+      const legacy=[host,...host.querySelectorAll('bw-site-header-unified,bw-site-header-design2,bw-site-header-design2-fix4,bw-site-header-design2-fix5,bw-site-header-design2-fix5b,bw-site-header-design2-fix6,bw-site-header-desktop-align,bw-site-header-clothing,bw-site-header-store-polish,bw-site-header-store-nav,bw-site-header-clothing-page,bw-site-header-walking-tours')];
       const mount=legacy.at(-1);
-      const next=document.createElement('bw-site-header-walking-tours');
+      const next=document.createElement('bw-site-header-west-berlin');
       next._preservedCommerceForm=host.querySelector('form[data-bw-landmarks-guide-header-checkout]');
       next._preservedCommerceForm?.remove();
       for(const previous of legacy)previous.disconnectedCallback?.();

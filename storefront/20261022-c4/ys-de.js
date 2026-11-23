@@ -52,6 +52,7 @@ export const DESIGN2_TEXT = Object.freeze({
   "Sets": "Sets",
   "Print at home": "Zum Selbstdrucken",
   "Your street in 1928": "Deine Straße 1928",
+  "Your West Berlin street in 1979": "Deine West-Berliner Straße 1979",
   "Dein Berlin 2027 · personalised calendar": "Dein Berlin 2027 · persönlicher Kalender",
   "Dein Berlin 2027": "Dein Berlin 2027",
   "Berlin 2027 wall calendar": "Berlin Wandkalender 2027",

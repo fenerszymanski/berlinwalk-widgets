@@ -105,6 +105,7 @@ export const STORE_MENU_DESIGN2 = Object.freeze([
   {id:'clothing',label:'Clothing',de:'Kleidung',href:clothingHref(),allLabel:'All clothing',allDe:'Alle Kleidung',items:[{label:'T-shirts',de:'T-Shirts',href:'https://walkofberlin.com/category/berlin-t-shirts'},{label:'Hoodies',de:'Hoodies',href:'https://walkofberlin.com/category/berlin-hoodies'}]},
   {id:'gifts',label:'Gifts',de:'Geschenke',href:'https://walkofberlin.com/category/berlin-christmas-gifts',hrefDe:'https://walkofberlin.com/de/category/berlin-geschenke',items:[
     {label:'Your street in 1928',de:'Deine Straße 1928',href:STORE_PERSONALISED_PRODUCT},
+    {label:'Your West Berlin street in 1979',de:'Deine West-Berliner Straße 1979',href:'https://walkofberlin.com/product-page/your-west-berlin-street-in-1979-personalised-aerial-print'},
     {label:'1928 digital file',de:'1928 als digitale Datei',href:'https://walkofberlin.com/product-page/your-berlin-street-in-1928-digital-file'},
     {label:'Gift a digital file',de:'Digitale Datei verschenken',href:'https://walkofberlin.com/product-page/your-berlin-street-in-1928-digital-gift'},
     {label:'Dein Berlin 2027 · personalised calendar',de:'Dein Berlin 2027 · persönlicher Kalender',href:STORE_PERSONAL_CALENDAR_PRODUCT},
