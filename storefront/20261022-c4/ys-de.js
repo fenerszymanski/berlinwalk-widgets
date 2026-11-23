@@ -170,6 +170,8 @@ const TEXT = new Map(Object.entries({
   "The home you live in now, or one you left years ago, seen from above in 1928 and today.": "Gib die Adresse deines Zuhauses ein, heute oder von früher, und sieh es kostenlos von oben, um 1928 und heute. Als Poster bestellen kannst du es, musst du aber nicht.",
   "Find your home in 1928": "Finde dein Zuhause um 1928", 'Search': 'Suchen',
   "Type the address of a home, yours now or one from years ago, then tap it. The preview is free.": "Gib die Adresse eines Zuhauses ein, heute oder von früher, und tippe sie an. Die Vorschau ist kostenlos.",
+  "Type the address of a home, yours now or one from years ago, then tap it.": "Gib die Adresse eines Zuhauses ein, heute oder von früher, und tippe sie an.",
+  "The preview is free.": "Die Vorschau ist kostenlos.",
   'Tap your place to put it on the poster:': 'Tippe auf deinen Ort, um ihn aufs Poster zu setzen:', 'Tap your place…': 'Tippe auf deinen Ort…',
   'Matching places': 'Passende Orte', 'Keep typing (at least 3 letters).': 'Schreib weiter (mindestens 3 Buchstaben).',
   'Nothing found in Berlin. Check the spelling, or try the street name with a house number.': 'In Berlin nichts gefunden. Prüfe die Schreibweise oder versuche es mit Straße und Hausnummer.',

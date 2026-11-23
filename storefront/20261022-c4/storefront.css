@@ -261,9 +261,11 @@ h2>.sk-heading{width:55%}
 /* The suggestions float over what is below the box: they appear and go without moving the poster. The note line above them always holds one line. */
 .ys-resultswrap{position:relative;height:0}
 .ys-resultswrap .ys-results{position:absolute;left:0;right:0;top:0;z-index:6;padding:8px;border-radius:14px;background:var(--cream);box-shadow:0 0 0 1px var(--line),0 14px 30px -8px #123d1855}
-.ys-searchform .ys-note{min-height:20px;line-height:20px}
+.ys-searchform .ys-note{min-height:20px;line-height:1.5;margin:4px 0 0}
 .ys-searchform .ys-note:empty{display:block}
 .ys-note.ys-note-hint{color:var(--muted);font-weight:400;font-size:13px}
+.ys-note-free{display:inline-block;padding:1px 7px;border-radius:4px;background:#FFE600;color:#123D18;font-weight:600;white-space:nowrap}
+#home-panel .ys-note{margin:8px 0 0;line-height:1.5}
 .ys-caption{min-height:3em}
 /* Size, paper and format: one collapsed row that shows the default. */
 .ys-optform{margin-bottom:0}
@@ -1034,7 +1036,7 @@ button.ys-words-tag:focus-visible{outline:2px solid var(--green);outline-offset:
 :host([design2][data-bw-pdp="c"]) .ys-search input{min-height:42px;border-radius:4px;border:1px solid #8A9486;padding:7px 12px;font-size:15px}
 :host([design2][data-bw-pdp="c"]) .ys-search .outline{min-height:42px;border-radius:4px}
 :host([design2][data-bw-pdp="c"]) .ys-searchform{gap:5px}
-:host([design2][data-bw-pdp="c"]) .ys-searchform .ys-note{font-size:12px;min-height:16px;line-height:1.35}
+:host([design2][data-bw-pdp="c"]) .ys-searchform .ys-note{font-size:12px;min-height:16px;line-height:1.5;margin:6px 0 2px}
 :host([design2][data-bw-pdp="c"]) .ys-form{gap:0;margin-bottom:0}
 :host([design2][data-bw-pdp="c"]) .bw-more-options{border-top:1px solid #E2E2DA;border-bottom:1px solid #E2E2DA;margin:2px 0 8px}
 :host([design2][data-bw-pdp="c"]) .bw-more-options > summary{display:flex;align-items:center;justify-content:space-between;min-height:40px;padding:8px 4px;font:600 14px/1.3 'Space Grotesk','Space Grotesk Fallback',sans-serif;color:var(--green);cursor:pointer;list-style:none}

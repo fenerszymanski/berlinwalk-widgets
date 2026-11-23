@@ -327,6 +327,7 @@ const trustItems = kind => TRUST[kind].map(([icon, text]) => `<li>${TRUST_ICON[i
 export const trustHtml = (secure = false, cls = '') => ['poster', 'digital'].map(kind => `<ul class="ys-trust ${cls}" data-ys-legal="${kind}" ${kind === 'digital' ? 'hidden' : ''} aria-label="Why you can buy with confidence">${trustItems(kind)}${secure ? `<li>${TRUST_ICON.lock}<span>Secure checkout</span></li>` : ''}</ul>`).join('');
 // The line under the search box reads as a hint until a search runs (it keeps one line of height, so nothing below it moves).
 const SEARCH_HINT = 'Type the address of a home, yours now or one from years ago, then tap it. The preview is free.';
+const SEARCH_HINT_HTML = 'Type the address of a home, yours now or one from years ago, then tap it. <span class="ys-note-free">The preview is free.</span>';
 // Yusuf, 25 Oct 2026: only 4 of the first 174 previews got past the old "I can see the 1928 photo" checkbox, which kept the add button grey two
 // screens below the poster. Now an add button sits right under the poster and both add buttons are live; tapping one asks the same question
 // once, in place, and "Yes" adds to the cart. `where` is "quick" (under the poster) or "form" (the buy box).
@@ -407,7 +408,7 @@ export function mountConfigurator(host, state, api) {
   const searchHtml = `<div class="ys-form ys-searchform">
       <label class="ys-label ys-find" for="ys-q">Find your home in 1928</label>
       <div class="ys-search"><input id="ys-q" data-ys="q" type="search" autocomplete="off" enterkeyhint="search" maxlength="${L.address}" placeholder="e.g. Chamissoplatz" value="${esc(state.query || '')}"><button type="button" class="outline" data-ys="go">Search</button></div>
-      <p class="ys-note ys-note-hint" data-ys="searchnote" role="status">${SEARCH_HINT}</p>
+      <p class="ys-note ys-note-hint" data-ys="searchnote" role="status">${SEARCH_HINT_HTML}</p>
       <div class="ys-resultswrap"><ul class="ys-results" data-ys="results" role="listbox" aria-label="Matching places" hidden></ul></div>
     </div>`;
   const optionsHtml = `<div class="ys-form ys-optform">
@@ -594,7 +595,7 @@ export function mountConfigurator(host, state, api) {
   };
   const status = $('status'), statusToday = $('status-today'), results = $('results'), note = $('searchnote'), input = $('q');
   // The note line always holds a line of text (hint, "Searching…", "Tap your place…", an error), so its height never changes.
-  const setNote = (text, choose = false) => { note.textContent = text || SEARCH_HINT; note.classList.toggle('ys-choose', !!text && choose); note.classList.toggle('ys-note-hint', !text); };
+  const setNote = (text, choose = false) => { if (text) note.textContent = text; else note.innerHTML = SEARCH_HINT_HTML; note.classList.toggle('ys-choose', !!text && choose); note.classList.toggle('ys-note-hint', !text); };
   const setStatus = text => { status.textContent = text; status.hidden = !text; };
   const setStatusToday = text => { statusToday.textContent = text; statusToday.hidden = !text; };
   // The confirm panel shows under the button that opened it (state.confirming = "quick" | "form"); it survives storefront re-renders.

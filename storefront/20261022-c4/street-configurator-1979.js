@@ -20,6 +20,7 @@ const TX = {cx: 900, capOld: 990, capToday: 1836, title: 2011, area: 2083, coord
 const BERLIN = {west: 13.0884, east: 13.7612, north: 52.6755, south: 52.3383};
 const NOMINATIM = 'https://nominatim.openstreetmap.org/search', PHOTON = 'https://photon.komoot.io/api/';
 const SEARCH_HINT = 'Type the address of a home, yours now or one from years ago, then tap it. The preview is free.';
+const SEARCH_HINT_HTML = 'Type the address of a home, yours now or one from years ago, then tap it. <span class="ys-note-free">The preview is free.</span>';
 const DIGITAL_SPEC = 'Digital file · JPG + PDF · 45 x 60 cm at 300 ppi';
 const DIGITAL_DELIVERY = 'Prints cleanly at 30 x 40 cm too. Nothing is shipped, so it works anywhere.';
 const POSTER_DELIVERY = 'Arrives in 3 to 5 working days in Germany, 4 to 9 elsewhere. Frame not included.';
@@ -257,7 +258,7 @@ export function createYs1979(base, profile) {
     const searchHtml = `<div class="ys-form ys-searchform">
       <label class="ys-label ys-find" for="ys-q">${escape(T().find)}</label>
       <div class="ys-search"><input id="ys-q" data-ys="q" type="search" autocomplete="off" enterkeyhint="search" maxlength="${L.address}" placeholder="e.g. Kurfürstendamm" value="${escape(state.query || '')}"><button type="button" class="outline" data-ys="go">Search</button></div>
-      <p class="ys-note ys-note-hint" data-ys="searchnote" role="status">${SEARCH_HINT}</p>
+      <p class="ys-note ys-note-hint" data-ys="searchnote" role="status">${SEARCH_HINT_HTML}</p>
       <div class="ys-resultswrap"><ul class="ys-results" data-ys="results" role="listbox" aria-label="Matching places" hidden></ul></div>
     </div>`;
     const optionsHtml = `<div class="ys-form ys-optform">
@@ -397,7 +398,7 @@ export function createYs1979(base, profile) {
       return fontsReady;
     };
     const status = $('status'), statusToday = $('status-today'), results = $('results'), note = $('searchnote'), input = $('q'), nocover = $('nocover');
-    const setNote = (text, choose = false) => { note.textContent = text || SEARCH_HINT; note.classList.toggle('ys-choose', !!text && choose); note.classList.toggle('ys-note-hint', !text); };
+    const setNote = (text, choose = false) => { if (text) note.textContent = text; else note.innerHTML = SEARCH_HINT_HTML; note.classList.toggle('ys-choose', !!text && choose); note.classList.toggle('ys-note-hint', !text); };
     const setStatus = text => { status.textContent = text; status.hidden = !text; };
     const setStatusToday = text => { statusToday.textContent = text; statusToday.hidden = !text; };
     // The message under the preview: the gate's reason in words, with the link to my 1928 print when the spot has no 1979 photo.

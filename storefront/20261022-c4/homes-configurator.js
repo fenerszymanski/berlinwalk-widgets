@@ -1,5 +1,6 @@
 import {HOMES_CONFIG,encodeHomes,checkedText} from './homes-encoding.js';
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const SEARCH_HINT_HTML='Type the address of a home, yours now or one from years ago, then tap it. <span class="ys-note-free">The preview is free.</span>';
 export const isHomes=s=>[2,3].includes(Number(s.homesCount));
 export function homesReady(s) {
   if(!isHomes(s)||s.homes?.length<Number(s.homesCount))return false;
@@ -50,7 +51,7 @@ export function mountHomes(host,state,api,H) {
     for(const key of ['title','area','line','heading']){const el=$(key),v=el.value;host.querySelector(`[data-home-counter="${key}"]`).textContent=`${v.length}/${L[key]}`;try{checkedText(v,L[key],key!=='line');el.setCustomValidity('')}catch{el.setCustomValidity('Check the text and character limits.')}}
   }
   api.refresh=refresh;
-  function fields(){for(const key of ['title','area','line'])$(key).value=home()[key]||'';$('heading').value=state.heading;$('search').value=home().query||'';$('paper').value=H.ysPaper(state).name;$('status').textContent='Type the address of a home, yours now or one from years ago, then tap it. The preview is free.';refresh()}
+  function fields(){for(const key of ['title','area','line'])$(key).value=home()[key]||'';$('heading').value=state.heading;$('search').value=home().query||'';$('paper').value=H.ysPaper(state).name;$('status').classList.add('ys-note-hint');$('status').innerHTML=SEARCH_HINT_HTML;refresh()}
   const photoKey=h=>[count,h.lat,h.lon].join(':');
   const cache=new Map();
   state.homes.slice(0,count).forEach((h,i)=>{if(h.photoKey===photoKey(h)&&h.rawPhotos)h.rawPhotos.forEach((raw,j)=>{if(raw)cache.set(i+'-'+j,raw)})}); // Yalnız bu açılışta, adresler tarayıcıda kalıcı tutulmaz.
@@ -90,17 +91,17 @@ export function mountHomes(host,state,api,H) {
     const raw=await Promise.allSettled(urls.map(photo));if(disposed||h.token!==token)return;
     raw.forEach((r,j)=>{if(r.status==='fulfilled'){cache.set(i+'-'+j,r.value);h.rawPhotos[j]=r.value}});
     if(raw[0].status==='fulfilled'){const d=raw[0].value.data;let empty=0;for(let p=0;p<d.length;p+=4)if(d[p+3]<10||(d[p]>=250&&d[p+1]>=250&&d[p+2]>=250))empty++;h.emptyShare=empty/(d.length/4);h.coverage=h.emptyShare>.02?'blank':'ok'}else h.coverage='error';
-    h.todayLoaded=raw[1].status==='fulfilled';if(h.coverage==='ok'&&h.todayLoaded)api.track?.('preview');if(h.coverage==='error'||!h.todayLoaded)$('status').textContent='The aerial photo could not load. Search for the place again to retry.';
+    h.todayLoaded=raw[1].status==='fulfilled';if(h.coverage==='ok'&&h.todayLoaded)api.track?.('preview');if(h.coverage==='error'||!h.todayLoaded){$('status').classList.remove('ys-note-hint');$('status').textContent='The aerial photo could not load. Search for the place again to retry.';}
     draw();
   }
   async function search(){
     controller?.abort();controller=new AbortController();const seq=++searchSeq,i=active,q=$('search').value.trim();home().query=q;if(q.length<3)return;
-    $('status').textContent='Searching…';api.track?.('search');
+    $('status').classList.remove('ys-note-hint');$('status').textContent='Searching…';api.track?.('search');
     try{const url='https://photon.komoot.io/api/?q='+encodeURIComponent(q)+'&limit=10&lang=de&bbox=13.0884,52.3383,13.7612,52.6755';let rows=[];try{const r=await fetch(url,{signal:controller.signal});if(!r.ok)throw Error();rows=(await r.json()).features.map(H.fromPhoton).filter(h=>h.city==='Berlin'&&H.inBerlin(h.lat,h.lon)).slice(0,5)}catch(e){if(e.name==='AbortError')throw e;}
       if(!rows.length){const wait=Math.max(0,(api.lastSearchAt||0)+1100-Date.now());if(wait)await new Promise(r=>setTimeout(r,wait));api.lastSearchAt=Date.now();const r=await fetch('https://nominatim.openstreetmap.org/search?format=jsonv2&addressdetails=1&limit=5&countrycodes=de&bounded=1&viewbox=13.0884,52.6755,13.7612,52.3383&q='+encodeURIComponent(q+', Berlin'),{signal:controller.signal});if(!r.ok)throw Error();rows=(await r.json()).map(r=>({...r,lat:Number(r.lat),lon:Number(r.lon)})).filter(h=>H.inBerlin(h.lat,h.lon));}if(disposed||i!==active||seq!==searchSeq)return;
-      $('results').innerHTML=rows.map((r,n)=>`<li><button type="button" class="ys-pick" data-homes-pick="${n}">${esc(H.addressLabel(r))}</button></li>`).join('');$('results').hidden=!rows.length;$('status').textContent=rows.length?'Tap your place to put it on the poster:':'Nothing found in Berlin. Check the spelling, or try the street name with a house number.';
+      $('results').innerHTML=rows.map((r,n)=>`<li><button type="button" class="ys-pick" data-homes-pick="${n}">${esc(H.addressLabel(r))}</button></li>`).join('');$('results').hidden=!rows.length;$('status').classList.remove('ys-note-hint');$('status').textContent=rows.length?'Tap your place to put it on the poster:':'Nothing found in Berlin. Check the spelling, or try the street name with a house number.';
       $('results').querySelectorAll('[data-homes-pick]').forEach(b=>b.onclick=()=>{const r=rows[Number(b.dataset.homesPick)],h=state.homes[i];Object.assign(h,{lat:Number(r.lat.toFixed(5)),lon:Number(r.lon.toFixed(5)),title:H.titleFrom(r),area:H.areaFrom(r),query:q});$('results').hidden=true;fields();api.track?.('pick');load(i)});
-    }catch(e){if(e.name!=='AbortError'&&seq===searchSeq)$('status').textContent='The address search did not answer. Try again in a moment.'}
+    }catch(e){if(e.name!=='AbortError'&&seq===searchSeq){$('status').classList.remove('ys-note-hint');$('status').textContent='The address search did not answer. Try again in a moment.';}}
   }
   $('go').onclick=search;$('search').oninput=()=>{clearTimeout(timer);timer=setTimeout(search,450)};$('search').onkeydown=e=>{if(e.key==='Enter'){e.preventDefault();clearTimeout(timer);search()}};
   host.querySelectorAll('[data-home-tab]').forEach(b=>b.onclick=()=>{controller?.abort();clearTimeout(timer);searchSeq++;active=Number(b.dataset.homeTab);state.activeHome=active;$('results').hidden=true;host.querySelector('#home-panel').setAttribute('aria-labelledby','home-tab-'+active);fields()});
