@@ -27,7 +27,16 @@
     "posterflow": "output/research/pod-providers-20261111/posterflow-reply/Posterflow Das Wichtigste in Kürze V2.txt (Sep 2026, production same/next day before noon, peak delays possible; no secrets copied)",
     "posterflowReceipt": "content/products/your-street-1928/orders/posterflow/README.md: 12 Nov order, 13 Nov completed, 14 Nov delivered",
     "routing": "scripts/ys1928-fulfil.mjs pfEligible + content/products/your-street-1928/orders/posterflow/route.json enabled=true",
-    "poster": "content/products/your-street-1928/RUNBOOK_TR.md: 26 Oct DE quote total 2-4 working days after manual approval",
+    "poster": [
+      "content/products/your-street-1928/RUNBOOK_TR.md: 26 Oct DE quote total 2-4 working days after manual approval",
+      {
+        "source": "output/store/delivery-requote-20261124/QUOTES_20261124.json",
+        "country": "DE",
+        "prints30x40": "3-6 (PL, four papers) / 2-3 (DE, Classic Matte)",
+        "prints45x60and50x70": "2-3",
+        "quotedAt": "2026-11-24"
+      }
+    ],
     "mounted": "output/production/ys1928-framed-20261111/gelato/quote-DE.json; live Wix DE profile 5-8 working days incl processing",
     "tee": [
       {
@@ -36,6 +45,14 @@
         "tees": "5-10",
         "hoodies": "6-11",
         "quotedAt": "2026-11-20"
+      },
+      {
+        "source": "output/store/delivery-requote-20261124/QUOTES_20261124.json",
+        "country": "DE",
+        "tees": "3-10",
+        "hoodies": "6-9",
+        "totes": "6-8",
+        "quotedAt": "2026-11-24"
       }
     ],
     "shipping": "SHIPPING_AUDIT.json live read 15 Nov 2026; free rates in DE, tees DE-only",
@@ -46,25 +63,25 @@
       "provider": "Gelato",
       "approvalBusinessDays": 0,
       "bufferBusinessDays": 1,
-      "basis": "15 Nov individual Berlin quotes, normal shipping, production+delivery calendar total; +1 German delivery business day margin. Requote after7 days. See B2 QUOTE files.",
+      "basis": "24 Nov Berlin quotes for all 11 live print formats (30x40, 45x60, 50x70 cm; five papers), every offered method: 30x40 Premium Matte, both Semi-Gloss papers and Museum-Quality are now printed in Poland and sent as Kleinpaket, 3-6 calendar days; 30x40 Classic Matte and every 45x60 and 50x70 print come from Germany by DHL Parcel, 2-3 days. Range 3-6 calendar days covers the slowest common route (the standard 30x40 poster), +1 German delivery business day margin. Requote after 7 days. See output/store/delivery-requote-20261124/QUOTES_20261124.json.",
       "productionShippingCalendarDays": [
-        2,
-        4
+        3,
+        6
       ],
-      "quotedAt": "2026-11-15",
-      "validThrough": "2026-11-22"
+      "quotedAt": "2026-11-24",
+      "validThrough": "2026-12-01"
     },
     "gelato-tee": {
       "provider": "Gelato",
       "approvalBusinessDays": 0,
       "bufferBusinessDays": 1,
-      "basis": "20 Nov Berlin quotes for all 45 live garment model x colour combinations (one size each), every offered method: tees 5-10, hoodies 6-11 calendar days (Kleinpaket 7-11 is the slowest common route); range 6-10 calendar days +1 German delivery business day margin covers it. Requote after 7 days. See output/store/apparel-delivery-requote-20261120/QUOTES_20261120.json.",
+      "basis": "24 Nov Berlin quotes for all 45 live garment model x colour combinations (one size each) and both tote bag colours, every offered method: tees 3-10, hoodies 6-9, tote bags 6-8 calendar days (cheapest route per item: Kleinpaket 6-8, DHL Parcel 7-8, Standard delivery 5-10); range 6-10 calendar days +1 German delivery business day margin covers it, unchanged from 20 Nov. Requote after 7 days. See output/store/delivery-requote-20261124/QUOTES_20261124.json.",
       "productionShippingCalendarDays": [
         6,
         10
       ],
-      "quotedAt": "2026-11-20",
-      "validThrough": "2026-11-27"
+      "quotedAt": "2026-11-24",
+      "validThrough": "2026-12-01"
     },
     "gelato-mounted": {
       "provider": "Gelato",
@@ -123,5 +140,5 @@
     "e14f5be8-effd-4d3b-ab67-2a8c1a077754": true,
     "f277153c-6055-48aa-9052-79fc84cd09f5": true
   },
-  "updatedAt": "2026-11-20"
+  "updatedAt": "2026-11-24"
 }
