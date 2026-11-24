@@ -55,9 +55,10 @@ export function install(Store,{asset,esc,STORE_LOGO,money,editionHref,isDigital,
  // Christmas gift guide (Yusuf, 17 Nov 2026: "şu sayfayı elden geçirelim, şu an çok kısıtlı kaldı ... gifty ve christmasy look"):
 // the two gift landings draw four themed shelves instead of one grid (d2giftGuide). Kept here, not in js/store-navigation.js, which may only grow at its end.
 const GIFT_GUIDE_SECTIONS = Object.freeze([
-  {id:'personal',ids:['ys','ys-framed','ys-canvas','dein-berlin-2027','ys1979','ys1979-framed','np-birthday','np-big-day'],voucher:true,
-   en:{title:'Their own Berlin',text:'Made from their address, their places or their big day.'},
-   de:{title:'Ihr eigenes Berlin',text:'Aus ihrer Adresse, ihren Orten oder ihrem großen Tag gemacht.'}},
+  // One row since 24 Nov 2026 (Yusuf: "bu gazete işi anlaşılmıyor burada ... tek satıra çevirebiliriz ... 1928, 1979, 1928 framed ve takvimi koyabiliriz"). The newspapers, the 1928 canvas and the framed 1979 print stay on sale; they left this shelf only.
+  {id:'personal',ids:['ys','ys1979','ys-framed','dein-berlin-2027'],voucher:true,
+   en:{title:'Their own Berlin',text:'Made from their address or their places.'},
+   de:{title:'Ihr eigenes Berlin',text:'Aus ihrer Adresse oder ihren Orten gemacht.'}},
   {id:'wear',offer:true,ids:['hoodie-tempelhof-sf500','shirt-berlin-in-pink-classic','hoodie-schoenhauser-allee-sf500','shirt-currywurst-classic','hoodie-spaeti-sf500','tote-berlin-in-pink','hoodie-berlin-uhr-sf500','tote-zurueckbleiben-bitte'],more:'clothing',
    en:{title:'Wear Berlin',text:'My Berlin designs on T-shirts, fleece hoodies and tote bags. Free shipping to Germany, the EU, the UK and the US.',more:'All clothing'},
    de:{title:'Berlin zum Anziehen',text:'Meine Berliner Motive auf T-Shirts, Fleece-Hoodies und Stoffbeuteln. Kostenloser Versand nach Deutschland, in die EU, nach Großbritannien und in die USA.',more:'Alle Kleidung'}},
