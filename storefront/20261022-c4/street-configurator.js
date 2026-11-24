@@ -212,18 +212,58 @@ export function spotFromPreview(preview) {
 export const mailPreview = state => ({lat: Number(state.lat), lon: Number(state.lon), title: clean(state.title, YS_LIMITS.title).toUpperCase(), area: clean(state.area, YS_LIMITS.area),layout:ysLayout(state),colour:ysColour(state),
   format: ysDigital(state) ? 'digital' : 'poster', size: ysDigital(state) ? '' : ysSize(state), paper: ysDigital(state) ? '' : ysPaper(state).name});
 export const MAIL_ENDPOINT = 'https://app.berlinwalk.com/api/download-lead?action=previewSubmit';
-export const MAIL_ASSET = {assetId: 'street-1928-preview', consentVersion: 'street-1928-preview-letter-v1-2026-10-27', consentMethod: 'optional_unticked_checkbox_with_doi'};
-// Shown next to the unticked box. Must stay word for word the registry's consentText (lead-asset-registry.js), which is what gets stored.
-export const MAIL_CONSENT = 'Also send me a few emails about my street print, and Walk of Berlin Weekly, the Monday letter about Berlin. I can unsubscribe from any email with one click. Read the';
-export const mailMessage = (status, marketing) => {
-  if (status === 200) return marketing === 'pending' ? 'Sent. Two emails are on their way: your preview, and one asking you to confirm the extra emails.'
-    : marketing === 'already_confirmed' ? 'Sent. You already confirmed my emails, so nothing more to do. Check your inbox in a minute.'
-    : marketing === 'failed' ? 'Your preview is on its way. I could not start the extra emails just now, so tick the box and send again later if you still want them.'
-    : 'Sent. Check your inbox in a minute (and the spam folder).';
+// "Keep this picture" (24 Nov 2026). Button A, "Send me the picture", is the free service email and the main action (the solid button): nothing is stored for
+// marketing and nothing else follows. Button B, "Send it and remind me once before Christmas" (the outline button, same size, equally easy to press), is the consent
+// to ONE reminder email before the last order day for Christmas; its confirm button sits in the first email. The sentence under the buttons is what the server stores
+// for B, word for word, so it must stay equal to the registry's text (street-1928-reminder.js, lead-asset-registry.js) and to its German twin in ys-de.js. Nothing
+// is ticked or pre-selected: there is no checkbox any more.
+export const MAIL_ASSET_A = Object.freeze({assetId: 'street-1928-preview'});
+export const MAIL_REMIND = Object.freeze({assetId: 'street-1928-reminder', consentMethod: 'second_button_one_reminder_with_doi_in_first_email',
+  versions: Object.freeze({en: 'street-1928-reminder-en-v1-2026-11-24', de: 'street-1928-reminder-de-v1-2026-11-24'})});
+// "You confirm it in the first email" (not "with one click"): the button in that email opens a page with a second button, and only that button confirms (round 3).
+export const MAIL_REMIND_CONSENT = 'With the second button I also send you one reminder email before the last order day for Christmas. You confirm it in the first email, and you can unsubscribe at any time.';
+// What the visitor reads under the buttons in English: the sentence, then "Read the" and the Privacy Policy link ("Privacy Policy."). Equal to the registry's English consent text.
+export const MAIL_REMIND_TEXT_EN = `${MAIL_REMIND_CONSENT} Read the Privacy Policy.`;
+// Button B leaves the page after 20 Dec 2026 23:59 Berlin (CET); the server closes it at the same moment for pages that stay open in a tab.
+export const MAIL_REMIND_UNTIL = Date.parse('2026-12-20T23:59:59.999+01:00');
+export const mailRemindOpen = (now = Date.now()) => now <= MAIL_REMIND_UNTIL;
+// The language the page is showing, from the very test ys-de.js uses to translate it: ?lang=de, or a /de/ path (the press short link /deine-strasse-1928 lands on the
+// product page with ?lang=de and no /de/ in the path). The server sends the German picture email for button A when this says "de" or the path starts with /de/.
+export const mailLocale = (search = location.search, pathname = location.pathname) => (new URLSearchParams(search).get('lang') === 'de' || /^\/de(?:\/|$)/.test(pathname) ? 'de' : 'en');
+// The body of one send. `shown` is the consent sentence exactly as it is on screen (English, or German after ys-de.js translated it); the version follows it.
+export const mailRequest = ({remind, shown = '', email, preview, pagePath, locale = 'en', utm, website, startedAt, submittedAt, idempotencyKey}) => ({
+  ...(remind ? {assetId: MAIL_REMIND.assetId, consentVersion: shown === MAIL_REMIND_TEXT_EN ? MAIL_REMIND.versions.en : MAIL_REMIND.versions.de, consentMethod: MAIL_REMIND.consentMethod, consentText: shown} : MAIL_ASSET_A),
+  email, consent: !!remind, preview, pagePath, locale: locale === 'de' ? 'de' : 'en', utm, website, startedAt, submittedAt, idempotencyKey});
+export const mailMessage = (status, marketing, remind = false) => {
+  if (status === 200) {
+    if (!remind) return 'Sent. Check your inbox in a minute (and the spam folder).';
+    return marketing === 'pending' ? 'Sent. Open the email and press “Yes, remind me” to switch the reminder on.'
+      : marketing === 'already_confirmed' ? 'Sent. Your reminder is already switched on, so there is nothing more to press.'
+      : marketing === 'closed' ? 'Sent. The Christmas reminder is closed for this year, so you get the picture only.'
+      : marketing === 'failed' ? 'Your picture is on its way. I could not switch the reminder on just now. Press the second button again later if you still want it.'
+      : 'Sent. Check your inbox in a minute (and the spam folder).';
+  }
   if (status === 400) return 'That did not work. Check the email address and that a spot is picked, then try again.';
   if (status === 429) return 'Too many tries from here. Please wait a few minutes and try again.';
   return 'I could not send it just now. Please try again in a minute, or write to info@walkofberlin.com.';
 };
+// The "Keep this picture" box under the poster. Order: heading and text, label and email field (its own full-width row), button A, button B, status line, consent
+// sentence. A is the solid button and the form's own submit (first in the DOM, so Enter in the email field sends A); B is a plain outline button of the same size, a
+// second choice of equal weight. Never ticked, never pre-selected. `remind` false leaves B and its sentence out (after 20 Dec 23:59 Berlin).
+export const mailBoxHtml = ({hidden = false, remind = true} = {}) => `<form class="ys-mail" data-ys="mail" novalidate ${hidden ? 'hidden' : ''}>
+        <p class="ys-mail-t"><strong>Keep this picture</strong> I email you this picture of your street in 1928, free, with a link back to your preview and the print options.</p>
+        <div class="ys-mail-field">
+          <label class="ys-mail-l" for="ys-mail-email">Your email</label>
+          <input id="ys-mail-email" data-ys="mailemail" type="email" inputmode="email" autocomplete="email" autocapitalize="none" maxlength="120" placeholder="you@example.com" required>
+        </div>
+        <div class="ys-mail-actions">
+          <button type="submit" class="ys-mail-send" data-ys="mailgo">Send me the picture</button>
+          ${remind ? '<button type="button" class="ys-mail-remind" data-ys="mailremind" aria-describedby="ys-mail-consent">Send it and remind me once before Christmas</button>' : ''}
+        </div>
+        <input class="ys-hp" data-ys="mailhp" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <p class="ys-mail-status" data-ys="mailstatus" role="status" aria-live="polite"></p>
+        ${remind ? `<p class="ys-mail-consent" id="ys-mail-consent" data-ys="mailconsenttext">${esc(MAIL_REMIND_CONSENT)} Read the <a href="https://walkofberlin.com/privacy-policy" target="_blank" rel="noopener">Privacy Policy</a>.</p>` : ''}
+      </form>`;
 export function buildCustomText(state, search) {
   if(isHomes(state))return encodeHomes({homes:state.homes.slice(0,Number(state.homesCount)),heading:state.heading,colour:ysColour(state),lang:new URLSearchParams(search??location.search).get('lang')==='de'?'de':'en',ref:adRef(search).slice(0,24)});
   const title = clean(state.title, YS_LIMITS.title).toUpperCase(), area = clean(state.area, YS_LIMITS.area), line = clean(state.line, YS_LIMITS.line);
@@ -390,18 +430,7 @@ export function mountConfigurator(host, state, api) {
         ${confirmHtml('quick')}
         ${trustHtml(true, 'ys-trust-compact')}
       </div>
-      <form class="ys-mail" data-ys="mail" novalidate ${state.lat ? '' : 'hidden'}>
-        <p class="ys-mail-t"><strong>Not ready yet?</strong> Send this preview to your inbox and come back to it later.</p>
-        <div class="ys-mail-row">
-          <label class="ys-mail-l" for="ys-mail-email">Your email</label>
-          <input id="ys-mail-email" data-ys="mailemail" type="email" inputmode="email" autocomplete="email" autocapitalize="none" maxlength="120" placeholder="you@example.com" required>
-          <button type="submit" class="outline" data-ys="mailgo">Send it to me</button>
-        </div>
-        <input class="ys-hp" data-ys="mailhp" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
-        <label class="ys-mail-check"><input type="checkbox" data-ys="mailconsent"><span>${esc(MAIL_CONSENT)} <a href="https://walkofberlin.com/privacy-policy" target="_blank" rel="noopener">Privacy Policy</a>.</span></label>
-        <p class="ys-mail-fine">Leave the box unticked and I send this one email and nothing else.</p>
-        <p class="ys-mail-status" data-ys="mailstatus" role="status" aria-live="polite"></p>
-      </form>
+      ${mailBoxHtml({hidden: !state.lat, remind: mailRemindOpen()})}
     </div>`;
   // Address search first (own slot, top of the page on a phone and top of the right column on desktop). The suggestions list floats over the
   // content below the box, so it never pushes the poster down while it fills in.
@@ -768,32 +797,41 @@ export function mountConfigurator(host, state, api) {
     if (panel.getBoundingClientRect().bottom > innerHeight - 16) panel.scrollIntoView({behavior: 'smooth', block: 'nearest'});
     panel.querySelector('[data-ys-yes]').focus({preventScroll: true});
   });
-  // ---- Send this preview to my inbox: success and error states under the poster ----
-  function paintMail(kind, text = '') {
+  // ---- "Keep this picture": success and error states under the poster ----
+  // `which` names the button that was pressed: only its label shows "Sending…", and after a successful send only that button's label changes ("Send again" for the
+  // picture button, "Send again with reminder" for the reminder button). The other button keeps its normal label. The status line is empty (and takes no space) until
+  // there is something to say.
+  function paintMail(kind, text = '', which = 'picture') {
     const status = $('mailstatus'); status.textContent = text; status.dataset.kind = kind || '';
-    $('mailgo').disabled = kind === 'busy'; $('mailgo').textContent = kind === 'busy' ? 'Sending…' : (kind === 'ok' ? 'Send again' : 'Send it to me');
+    const busy = kind === 'busy', sent = kind === 'ok';
+    $('mailgo').disabled = busy; $('mailgo').textContent = busy && which === 'picture' ? 'Sending…' : (sent && which === 'picture' ? 'Send again' : 'Send me the picture');
+    const remind = $('mailremind');
+    if (remind) { remind.disabled = busy; remind.textContent = busy && which === 'remind' ? 'Sending…' : (sent && which === 'remind' ? 'Send again with reminder' : 'Send it and remind me once before Christmas'); }
   }
   const mailForm = $('mail');
   mailForm.addEventListener('focusin', () => { if (!state.mailStartedAt || Date.now() - Date.parse(state.mailStartedAt) > 12 * 3600e3) state.mailStartedAt = new Date().toISOString(); });
-  mailForm.addEventListener('submit', async event => {
-    event.preventDefault();
+  // One send for both buttons. B (`remind`) sends the sentence that is on screen as its consent text; A sends no consent at all.
+  async function sendMail(remind) {
     if (!readyToCheck(state) || $('mailgo').disabled) return;
     const email = $('mailemail').value.trim();
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) { paintMail('error', 'Please enter a valid email address.'); $('mailemail').focus(); return; }
-    paintMail('busy', 'Sending…');
-    const consent = $('mailconsent').checked, q = new URLSearchParams(location.search), preview = mailPreview(state);
+    const which = remind ? 'remind' : 'picture', q = new URLSearchParams(location.search);
+    paintMail('busy', 'Sending…', which);
     const startedAt = state.mailStartedAt || new Date(Date.now() - 5000).toISOString();
+    const shown = remind ? String($('mailconsenttext')?.textContent || '').replace(/\s+/g, ' ').trim() : '';
     try {
-      const response = await fetch(MAIL_ENDPOINT, {method: 'POST', mode: 'cors', credentials: 'omit', headers: {'content-type': 'application/json'}, body: JSON.stringify({
-        ...(consent ? MAIL_ASSET : {assetId: MAIL_ASSET.assetId}), email, consent, preview,
-        pagePath: location.pathname, utm: {source: q.get('utm_source') || '', medium: q.get('utm_medium') || '', campaign: q.get('utm_campaign') || '', content: q.get('utm_content') || '', term: q.get('utm_term') || ''},
+      const response = await fetch(MAIL_ENDPOINT, {method: 'POST', mode: 'cors', credentials: 'omit', headers: {'content-type': 'application/json'}, body: JSON.stringify(mailRequest({
+        remind, shown, email, preview: mailPreview(state), pagePath: location.pathname, locale: mailLocale(),
+        utm: {source: q.get('utm_source') || '', medium: q.get('utm_medium') || '', campaign: q.get('utm_campaign') || '', content: q.get('utm_content') || '', term: q.get('utm_term') || ''},
         website: host.querySelector('[data-ys="mailhp"]').value, startedAt, submittedAt: new Date().toISOString(),
-        idempotencyKey: `ys-${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 10)}`})});
+        idempotencyKey: `ys-${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 10)}`}))});
       const body = await response.json().catch(() => ({}));
-      if (response.ok) { paintMail('ok', mailMessage(200, body.marketing)); api.track?.('mailsend'); if (consent && body.marketing === 'pending') api.track?.('mailconsent'); }
-      else paintMail('error', mailMessage(response.status));
-    } catch (e) { paintMail('error', mailMessage(0)); }
-  });
+      if (response.ok) { paintMail('ok', mailMessage(200, body.marketing, remind), which); api.track?.('mailsend'); if (remind) api.track?.('mailremind'); }
+      else paintMail('error', mailMessage(response.status, '', remind), which);
+    } catch (e) { paintMail('error', mailMessage(0, '', remind), which); }
+  }
+  mailForm.addEventListener('submit', event => { event.preventDefault(); sendMail(false); });
+  $('mailremind')?.addEventListener('click', () => sendMail(true));
   // Both emailed links and the Finder use the same preview; the Finder transfers only the location.
   async function restorePreview(context, fromFinder) {
     const quiet = () => {
