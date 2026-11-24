@@ -1106,13 +1106,6 @@ class BWHeaderElement extends HTMLElement {
           font-display: swap;
           src: url(${BW_HEADER_MONO_URL}) format('woff2');
         }
-        @font-face {
-          font-family: BWMenuFraunces;
-          font-style: normal;
-          font-weight: 100 900;
-          font-display: swap;
-          src: url(${BW_HEADER_MENU_FONT_URL}) format('woff2');
-        }
 
         bw-site-header, bw-site-header-desktop-align, bw-site-header-clothing, bw-site-header-store-polish, bw-site-header-store-nav, bw-site-header-clothing-page, bw-site-header-walking-tours, bw-site-header-west-berlin {
           display: block;
@@ -1903,6 +1896,13 @@ const BW_HEADER_STORE_ROUTE = /^\/(?:de\/)?(?:category|product-page|cart-page|th
 function bwHeaderStoreMode() {
   const store = BW_HEADER_STORE_ROUTE.test(location.pathname);
   const home = location.pathname === '/';
+  // The menu font is registered only where the masthead shows (24 Nov 2026). It used to sit in the header's own stylesheet, and Safari fetched it
+  // (144 KB) on store pages too, where the whole masthead is hidden. A visitor who moves from the store to another page gets it then.
+  if(!store&&!document.getElementById('bw-header-menu-font')){
+    const font=document.createElement('style');font.id='bw-header-menu-font';
+    font.textContent=`@font-face{font-family:BWMenuFraunces;font-style:normal;font-weight:100 900;font-display:swap;src:url(${BW_HEADER_MENU_FONT_URL}) format('woff2')}`;
+    document.head.appendChild(font);
+  }
   // Separate ownership: a cached older header watcher may replace its own store-mode stylesheet after SPA navigation.
   if(!document.getElementById('bw-store-masthead-polish-css')){
     const style=document.createElement('style');style.id='bw-store-masthead-polish-css';
