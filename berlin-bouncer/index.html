@@ -992,6 +992,20 @@
       return Math.floor(random() * length);
     }
 
+    /* Answer order is shuffled per question (24 Nov 2026): in data.json the best answer is always
+       listed first, so showing the data order made every correct answer "A". Daily and shared
+       challenges use the run's seeded random, so friends on one challenge see the same order.
+       choiceIndex in telemetry stays the data index; displayIndex is the on-screen position. */
+    function shuffledOptionOrder(length) {
+      const order = Array.from({ length }, (_, index) => index);
+      const random = runRandom || Math.random;
+      for (let i = order.length - 1; i > 0; i -= 1) {
+        const j = Math.floor(random() * (i + 1));
+        [order[i], order[j]] = [order[j], order[i]];
+      }
+      return order;
+    }
+
     function isPaidAttribution(utmMedium, utmCampaign) {
       const medium = String(utmMedium || '').toLowerCase();
       const campaign = String(utmCampaign || '').toLowerCase();
@@ -1488,10 +1502,12 @@
       
       const grid = document.getElementById('options-grid');
       grid.innerHTML = '';
+      const optionOrder = shuffledOptionOrder(q.options.length);
       
       if (q.viewType === 'cards' || phase.viewType === 'cards') {
         grid.className = 'options-grid cards-view';
-        q.options.forEach((opt, optionIndex) => {
+        optionOrder.forEach((optionIndex, displayIndex) => {
+          const opt = q.options[optionIndex];
           const btn = document.createElement('button');
           btn.type = 'button';
           btn.className = 'card-btn';
@@ -1499,9 +1515,10 @@
           btn.onclick = () => selectOption(opt.score, opt.next, {
             choice: opt.text,
             choiceId: opt.id || '',
-            choiceIndex: optionIndex
+            choiceIndex: optionIndex,
+            displayIndex
           });
-          appendResponsiveImage(btn, opt.image, `${opt.text} choice`, optionIndex === 0 ? 'eager' : 'lazy');
+          appendResponsiveImage(btn, opt.image, `${opt.text} choice`, displayIndex === 0 ? 'eager' : 'lazy');
           const label = document.createElement('div');
           label.className = 'card-label';
           label.textContent = opt.text;
@@ -1510,7 +1527,8 @@
         });
       } else {
         grid.className = 'options-grid';
-        q.options.forEach((opt, optionIndex) => {
+        optionOrder.forEach((optionIndex, displayIndex) => {
+          const opt = q.options[optionIndex];
           const btn = document.createElement('button');
           btn.type = 'button';
           btn.className = 'option-btn';
@@ -1518,7 +1536,8 @@
           btn.onclick = () => selectOption(opt.score, opt.next, {
             choice: opt.text,
             choiceId: opt.id || '',
-            choiceIndex: optionIndex
+            choiceIndex: optionIndex,
+            displayIndex
           });
           grid.appendChild(btn);
         });
