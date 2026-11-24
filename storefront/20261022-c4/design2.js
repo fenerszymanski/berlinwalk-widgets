@@ -405,6 +405,7 @@ for(const crumb of this.shadowRoot.querySelectorAll('.breadcrumb > a:first-child
  installGalleryZoom(Store);
 
  const usesCompactProductLayout=()=>new URLSearchParams(location.search).get('design')!=='old';
+ const LOADING_VIEW='.skeleton ';
  const ZALANDO_ICONS={
   lock:'<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="10" width="14" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3M12 14v3"/></svg>',
   truck:'<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 5h12v11H2zM14 9h4l4 4v3h-8"/><circle cx="6.5" cy="18" r="2"/><circle cx="17.5" cy="18" r="2"/></svg>',
@@ -438,7 +439,7 @@ for(const crumb of this.shadowRoot.querySelectorAll('.breadcrumb > a:first-child
   return result;
  };
 
- const bindGallerySwipe=(gallery,root)=>{
+ const bindGallerySwipe=(gallery,root,at='.surface ')=>{
   if(gallery.dataset.bwSwipeBound)return;
   gallery.dataset.bwSwipeBound='1';
   let start=null;
@@ -448,7 +449,7 @@ for(const crumb of this.shadowRoot.querySelectorAll('.breadcrumb > a:first-child
    if(!point||!touch||!mobileGallery()||point.route!==location.href)return;
    const dx=touch.clientX-point.x,dy=touch.clientY-point.y;
    if(Math.abs(dx)<42||Math.abs(dx)<=Math.abs(dy)*1.2)return;
-   const current=root.querySelector('.surface .gallery');
+   const current=root.querySelector(at+'.gallery');
    if(!current)return;
    const buttons=galleryButtons(current);
    if(buttons.length<2)return;
@@ -467,15 +468,15 @@ for(const crumb of this.shadowRoot.querySelectorAll('.breadcrumb > a:first-child
   gallery.addEventListener('touchend',finish,{passive:false});
  };
 
- P.bwSetupZalandoGallery=function(root,product){
-  const gallery=root.querySelector('.surface .gallery');if(!gallery)return;
-  const isYs=!!root.querySelector('.surface .ys-layout');
+ P.bwSetupZalandoGallery=function(root,product,at='.surface '){
+  const gallery=root.querySelector(at+'.gallery');if(!gallery)return;
+  const isYs=!!root.querySelector(at+'.ys-layout');
   const de=this.campaignGerman();
   if(product?.group==='apparel')gallery.dataset.bwKind='apparel';
   else if(isYs)gallery.dataset.bwKind='ys';
   else gallery.dataset.bwKind='poster';
 
-  bindGallerySwipe(gallery,root);
+  bindGallerySwipe(gallery,root,at);
   if(!isYs){
    const thumbs=gallery.querySelector('.thumbnails'),stage=gallery.querySelector('.gallery-stage');
    if(!thumbs||!stage)return;
@@ -497,6 +498,9 @@ for(const crumb of this.shadowRoot.querySelectorAll('.breadcrumb > a:first-child
     if(!dots){dots=document.createElement('div');dots.className='bw-dots bw-raw';dots.setAttribute('role','tablist');dots.setAttribute('aria-label',de?'Produktbilder':'Product images');stage.after(dots);}
     dots.innerHTML=buttons.map((b,i)=>`<button type="button" class="bw-dot" data-bw-dot="${i}" aria-label="${esc(b.getAttribute('aria-label')||`Image ${i+1}`)}" aria-current="${b.getAttribute('aria-pressed')==='true'?'true':'false'}"></button>`).join('');
     dots.querySelectorAll('[data-bw-dot]').forEach(d=>d.addEventListener('click',()=>{buttons[Number(d.dataset.bwDot)]?.click();}));
+   }else if(at===LOADING_VIEW&&!buttons.length&&!gallery.querySelector('.bw-dots')){
+    // The loading placeholder has one picture and no buttons yet; keep the phone's dot row so the title does not move when the pictures arrive.
+    const dots=document.createElement('div');dots.className='bw-dots bw-raw';dots.setAttribute('aria-hidden','true');stage.after(dots);
    }
    return;
   }
@@ -567,16 +571,16 @@ for(const crumb of this.shadowRoot.querySelectorAll('.breadcrumb > a:first-child
   }
  };
 
- P.bwSetupApparelSwatches=function(root,product){
+ P.bwSetupApparelSwatches=function(root,product,at='.surface '){
   if(!product||product.group!=='apparel')return;
-  const buyBox=root.querySelector('.surface .buy-box'),titleEl=root.querySelector('.surface .product-title');
+  const buyBox=root.querySelector(at+'.buy-box'),titleEl=root.querySelector(at+'.product-title');
   if(!buyBox||!titleEl)return;
   const colorSel=buyBox.querySelector('select[data-poster-option="Color"]');
   const de=this.campaignGerman();
   if(colorSel&&product.apparelMedia?.colors){
    colorSel.closest('label')?.classList.add('bw-hidden-control');
    const active=colorSel.value,opts=[...colorSel.options].filter(o=>!o.disabled&&product.apparelMedia.colors[o.value]?.lead?.image);
-   let box=root.querySelector('.bw-zalando-colors');
+   let box=root.querySelector(at+'.bw-zalando-colors');
    if(!box&&opts.length){
     box=document.createElement('div');box.className='bw-zalando-colors bw-raw';
     titleEl.after(box);
@@ -584,9 +588,11 @@ for(const crumb of this.shadowRoot.querySelectorAll('.breadcrumb > a:first-child
    if(box&&opts.length){
     const labelName=colorName(active,de)||active;
     box.innerHTML=`<p class="bw-color-label">${de?'Farbe':'Colour'}: <strong>${esc(labelName)}</strong></p><div class="bw-color-thumbs" role="group" aria-label="${de?'Verfügbare Farben':'Available colours'}">${opts.map(o=>{
-     const img=this.productMedia(product.apparelMedia.colors[o.value].lead.image);
+     const img=this.thumbnailMedia(product.apparelMedia.colors[o.value].lead.image);
      const nm=colorName(o.value,de)||o.value;
-     return `<button type="button" class="bw-color-thumb" data-bw-color-pick="${esc(o.value)}" aria-pressed="${o.value===active}" aria-label="${esc(nm)}" title="${esc(nm)}"><img src="${esc(img)}" alt="" decoding="async"></button>`;
+     // While Wix is still starting only the small copies are fetched (see earlyProductHtml); a colour without one shows its picture with the finished page.
+     const later=at!=='.surface '&&!/-thumb\.webp(?:\?|$)/.test(img);
+     return `<button type="button" class="bw-color-thumb" data-bw-color-pick="${esc(o.value)}" aria-pressed="${o.value===active}" aria-label="${esc(nm)}" title="${esc(nm)}"><img ${later?'data-early-src':'src'}="${esc(img)}" alt="" decoding="async"></button>`;
     }).join('')}</div>`;
     box.querySelectorAll('[data-bw-color-pick]').forEach(btn=>btn.addEventListener('click',()=>{
      if(btn.dataset.bwColorPick===colorSel.value)return;
@@ -597,20 +603,20 @@ for(const crumb of this.shadowRoot.querySelectorAll('.breadcrumb > a:first-child
   }
   const unisex=buyBox.querySelector('.bw-unisex');
   if(unisex){
-   let bar=root.querySelector('.bw-info-bar');
+   let bar=root.querySelector(at+'.bw-info-bar');
    if(!bar){
     bar=document.createElement('div');bar.className='bw-info-bar bw-raw';
     bar.innerHTML=ZALANDO_ICONS.info;
-    const afterEl=root.querySelector('.bw-zalando-colors')||titleEl;
+    const afterEl=root.querySelector(at+'.bw-zalando-colors')||titleEl;
     afterEl.after(bar);
    }
    if(!bar.contains(unisex))bar.append(unisex);
   }
  };
 
- P.bwSetupChoiceDropdowns=function(root,product){
-  const buyBox=root.querySelector('.surface .buy-box');if(!buyBox)return;
-  const de=this.campaignGerman(),isYs=!!root.querySelector('.surface .ys-layout');
+ P.bwSetupChoiceDropdowns=function(root,product,at='.surface '){
+  const buyBox=root.querySelector(at+'.buy-box');if(!buyBox)return;
+  const de=this.campaignGerman(),isYs=!!root.querySelector(at+'.ys-layout');
 
   // Poster & Digital format switch -> single clean dropdown
   const fmtSwitch=buyBox.querySelector('.format-switch');
@@ -770,9 +776,10 @@ for(const crumb of this.shadowRoot.querySelectorAll('.breadcrumb > a:first-child
   if(this.ysIs1979())this.bwSyncDeliveryCard();
  };
 
- P.bwSyncDeliveryCard=function(){
+ P.bwSyncDeliveryCard=function(at){
   const root=this.shadowRoot;if(!root)return;
-  const buyBox=root.querySelector('.surface .buy-box');if(!buyBox)return;
+  if(at!==LOADING_VIEW)at='.surface ';
+  const buyBox=root.querySelector(at+'.buy-box');if(!buyBox)return;
   const buyRow=buyBox.querySelector('.buy-row');if(!buyRow)return;
   const confirmBox=buyBox.querySelector('[data-ys-confirm="form"]');
   if(confirmBox&&!(buyRow.compareDocumentPosition(confirmBox)&Node.DOCUMENT_POSITION_FOLLOWING))buyRow.after(confirmBox);
@@ -782,8 +789,8 @@ for(const crumb of this.shadowRoot.querySelectorAll('.breadcrumb > a:first-child
   let card=buyBox.querySelector('.bw-delivery-card');
   if(!card){card=document.createElement('div');card.className='bw-delivery-card bw-raw';anchor.after(card);}
 
-  const rw=root.querySelector('[data-rw-delivery]');
-  const delBody=root.querySelector('.surface details.delivery-returns .details-body');
+  const rw=root.querySelector(at+'[data-rw-delivery]');
+  const delBody=root.querySelector(at+'details.delivery-returns .details-body');
   if(rw&&delBody&&!delBody.contains(rw))delBody.prepend(rw);
 
   const strong=rw?.querySelector('.rw-delivery strong')?.textContent.trim()||'';
@@ -797,7 +804,7 @@ for(const crumb of this.shadowRoot.querySelectorAll('.breadcrumb > a:first-child
    plainNote.hidden=!plain||(!strong&&!rwDig)||Array.from(delBody.querySelectorAll('p:not(.bw-plain-delivery)')).some(node=>node.textContent.trim()===plain);
    if(plainNote.textContent!==plain)plainNote.textContent=plain;
   }
-  const isYs=!!root.querySelector('.surface .ys-layout');
+  const isYs=!!root.querySelector(at+'.ys-layout');
   const de=this.campaignGerman();
 
   const mounted1979=this.ysIs1979()&&this.ysMod?.ysMounted(this.ys||{});
@@ -809,8 +816,8 @@ for(const crumb of this.shadowRoot.querySelectorAll('.breadcrumb > a:first-child
    rows=`<div class="bw-del-row" data-ys1979-delivery>${ZALANDO_ICONS.truck}<div><strong>${esc(delivery)}</strong>${deadline}</div></div>`;
   }else if(strong){
    const returnLine=isYs
-    ?(buyBox.querySelector('.ys-legalline[data-ys-legal="poster"]')?.textContent.replace(/\s*Terms\s*$/i,'').trim()||root.querySelector('.bw-acc-details .ys-legalline[data-ys-legal="poster"]')?.textContent.replace(/\s*Terms\s*$/i,'').trim()||(de?'Für dich gefertigt · Rückgabe nur bei Mängeln.':'Made for you, so no returns for a change of mind. Faulty prints replaced free.'))
-    :(root.querySelector('.bw-acc-details .ys-trust li:last-child')?.textContent.trim()||buyBox.querySelector('.ys-trust li:last-child')?.textContent.trim()||(de?'14 Tage Widerrufsrecht für Verbraucher':'14-day right of withdrawal for consumers'));
+    ?(buyBox.querySelector('.ys-legalline[data-ys-legal="poster"]')?.textContent.replace(/\s*Terms\s*$/i,'').trim()||root.querySelector(at+'.bw-acc-details .ys-legalline[data-ys-legal="poster"]')?.textContent.replace(/\s*Terms\s*$/i,'').trim()||(de?'Für dich gefertigt · Rückgabe nur bei Mängeln.':'Made for you, so no returns for a change of mind. Faulty prints replaced free.'))
+    :(root.querySelector(at+'.bw-acc-details .ys-trust li:last-child')?.textContent.trim()||buyBox.querySelector('.ys-trust li:last-child')?.textContent.trim()||(de?'14 Tage Widerrufsrecht für Verbraucher':'14-day right of withdrawal for consumers'));
    const subParts=[christmas,rwSub].filter(Boolean).join(' · ');
    rows=[
     `<div class="bw-del-row">${ZALANDO_ICONS.truck}<div><strong>${esc(strong)}</strong>${subParts?`<span>${esc(subParts)}</span>`:''}</div></div>`,
@@ -829,18 +836,35 @@ for(const crumb of this.shadowRoot.querySelectorAll('.breadcrumb > a:first-child
   card.innerHTML=`<div class="bw-del-row bw-payment-row">${ZALANDO_ICONS.lock}<div><strong>${paymentLabel}</strong><div class="bw-payment-marks">${this.bwPaymentChips(de)}</div></div></div>${rows}`;
  };
 
- P.bwCalmProductLayout=function(){
-  const root=this.shadowRoot;
-  const wrap=root?.querySelector('.surface > .wrap'),layout=wrap?.querySelector('.product-layout');
-  const eligible=layout&&(layout.classList.contains('ys-layout')||wrap.classList.contains('d2-standard'));
-  if(!eligible||!usesCompactProductLayout()||this.context.mode!=='product'){
-   this.removeAttribute('data-bw-pdp');
-   return;
+ // The loading box gets the same layout as the finished page (24 Nov 2026, Yusuf: "ilk açılışta eski tasarım geliyor ve birkaç saniye sonra yeni tasarıma geçiyoruz").
+ // Measured before: the box showed the previous product layout for 2 s on a desktop and 9 s on a 4 Mbit/s phone, then the page rearranged itself when the bridge revealed the storefront.
+ P.bwCalmTargets=function(){
+  const root=this.shadowRoot,targets=[];
+  if(!root||!usesCompactProductLayout())return targets;
+  const box=this.revealed||this.hidden?null:root.querySelector('.skeleton');
+  if(box){
+   let route=null;try{route=this.skeletonRoute();}catch{}
+   const wrap=route?.mode==='product'?box.querySelector(':scope > div > .wrap,:scope > div > [data-early] > .wrap'):null,layout=wrap?.querySelector('.product-layout');
+   if(layout&&wrap.classList.contains('d2-standard'))targets.push({at:LOADING_VIEW,wrap,layout,product:(this.model||this.skeletonModel)?.products?.find(p=>p.wixProductId===route.productId)});
   }
+  const wrap=this.context?.mode==='product'?root.querySelector('.surface > .wrap'):null,layout=wrap?.querySelector('.product-layout');
+  if(layout&&(layout.classList.contains('ys-layout')||wrap.classList.contains('d2-standard')))targets.push({at:'.surface ',wrap,layout,product:this.model?.products?.find(p=>p.wixProductId===this.productViewId())});
+  return targets;
+ };
+ P.bwCalmProductLayout=function(){
+  const targets=this.bwCalmTargets();
+  if(!targets.length){this.removeAttribute('data-bw-pdp');return;}
   this.setAttribute('data-bw-pdp','c');
-  if(layout.dataset.bwCalm==='c'){this.bwSyncDeliveryCard();this.bwSyncYsControls?.();return;}
+  for(const target of targets){
+   // A fault while arranging the loading box must never keep the finished page from being arranged.
+   if(target.at===LOADING_VIEW){try{this.bwCalmArrange(target);}catch{}}
+   else this.bwCalmArrange(target);
+  }
+ };
+ P.bwCalmArrange=function({at,wrap,layout,product}){
+  const root=this.shadowRoot,page=at==='.surface ';
+  if(layout.dataset.bwCalm==='c'){this.bwSyncDeliveryCard(at);if(page)this.bwSyncYsControls?.();return;}
   layout.dataset.bwCalm='c';
-  const product=this.model?.products?.find(p=>p.wixProductId===this.productViewId());
   layout.dataset.bwGroup=product?.group||'';
   const de=this.campaignGerman(),isYs=layout.classList.contains('ys-layout');
   const titleEl=layout.querySelector('.product-title'),galleryEl=layout.querySelector('.gallery'),searchSlot=layout.querySelector('.ys-search-slot'),buyBox=layout.querySelector('.buy-box'),infoBox=layout.querySelector('.product-info');
@@ -852,9 +876,9 @@ for(const crumb of this.shadowRoot.querySelectorAll('.breadcrumb > a:first-child
   if(searchSlot)rightCol.append(searchSlot);
   rightCol.append(buyBox);
 
-  this.bwSetupZalandoGallery(root,product);
-  this.bwSetupApparelSwatches(root,product);
-  this.bwSetupChoiceDropdowns(root,product);
+  this.bwSetupZalandoGallery(root,product,at);
+  this.bwSetupApparelSwatches(root,product,at);
+  this.bwSetupChoiceDropdowns(root,product,at);
 
   const accList=document.createElement('div');accList.className='bw-accordions';
   const makeAcc=(cls,titleText,attrs={})=>{
@@ -1006,7 +1030,7 @@ for(const crumb of this.shadowRoot.querySelectorAll('.breadcrumb > a:first-child
    infoBox.remove();
   }
   rightCol.append(accList);
-  this.bwSyncDeliveryCard();
+  this.bwSyncDeliveryCard(at);
  };
 
  const prevRw=P.rwRefreshDelivery;

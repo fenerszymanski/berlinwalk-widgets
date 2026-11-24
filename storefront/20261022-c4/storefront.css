@@ -991,9 +991,10 @@ button.ys-words-tag:focus-visible{outline:2px solid var(--green);outline-offset:
 /* ---- Option C: Faithful Zalando PDP layout (22 Nov 2026) ---- */
 :host([design2][data-bw-pdp="c"]),
 :host([design2][data-bw-pdp="c"]) .surface,
+:host([design2][data-bw-pdp="c"]) .skeleton,
 :host([design2][data-bw-pdp="c"]) .d2-bar{background:#FFFFFF}
 :host([design2][data-bw-pdp="c"]) .bw-hidden-control,
-:host([design2][data-bw-pdp="c"]) .buy-box > .delivery,
+:host([design2][data-bw-pdp="c"]) .buy-box > .delivery:not([data-early-note]),
 :host([design2][data-bw-pdp="c"]) .product-title .p12-buy-jump,
 :host([design2][data-bw-pdp="c"]) .gallery .gallery-caption,
 :host([design2][data-bw-pdp="c"]) [data-ys-quickadd]{display:none!important}
@@ -1123,7 +1124,9 @@ button.ys-words-tag:focus-visible{outline:2px solid var(--green);outline-offset:
 }
 
 @media(max-width:899px){
-  :host([design2][data-bw-pdp="c"]) .surface > .wrap > .breadcrumb{padding-top:6px;margin-bottom:6px;line-height:1.35}
+  :host([design2][data-bw-pdp="c"]) .surface > .wrap > .breadcrumb,
+  :host([design2][data-bw-pdp="c"]) .skeleton > div > .wrap > .breadcrumb,
+  :host([design2][data-bw-pdp="c"]) .skeleton [data-early] > .wrap > .breadcrumb{padding-top:6px;margin-bottom:6px;line-height:1.35}
   :host([design2][data-bw-pdp="c"]) .buy-bar:not([hidden]){padding-block:7px calc(7px + env(safe-area-inset-bottom,0px));background:#fff}
   :host([design2][data-bw-pdp="c"]) .buy-bar .primary{flex-shrink:1;min-width:0;max-width:100%;overflow-wrap:anywhere;font-size:14px}
   :host([design2][data-bw-pdp="c"]) .product-layout{display:flex;flex-direction:column;gap:0}
