@@ -19,8 +19,8 @@ export const BLACK_WEEK = Object.freeze({
       note: 'If the prices differ, the 25% comes off the cheaper item.',
       line: 'T-shirts, hoodies and posters. Automatically applied in your cart.',
       cta: 'Shop Black Week',
-      altClothing: 'Tempelhof Classic T-shirt in black, worn by a smiling man outdoors.',
-      altPoster: 'Tempelhof poster in an oak frame on a sunlit living-room wall.'
+      altWoman: 'Tempelhof Classic T-shirt in black, worn by a woman sitting outdoors.',
+      altMan: 'Tempelhof Classic T-shirt in black, worn by a smiling man outdoors.'
     }),
     de: Object.freeze({
       name: 'Black Week',
@@ -30,13 +30,15 @@ export const BLACK_WEEK = Object.freeze({
       note: 'Bei unterschiedlichen Preisen gilt der Rabatt für den günstigeren Artikel.',
       line: 'T-Shirts, Hoodies und Poster. Der Rabatt kommt automatisch in den Warenkorb.',
       cta: 'Zum Shop',
-      altClothing: 'Tempelhof Classic T-Shirt in Schwarz, getragen von einem lächelnden Mann im Freien.',
-      altPoster: 'Tempelhof-Poster im Eichenrahmen an einer sonnigen Wohnzimmerwand.'
+      altWoman: 'Tempelhof Classic T-Shirt in Schwarz, getragen von einer Frau, die im Freien sitzt.',
+      altMan: 'Tempelhof Classic T-Shirt in Schwarz, getragen von einem lächelnden Mann im Freien.'
     })
   }),
+  // 24 Nov 2026 (Yusuf: the man alone made the clothing look men-only): a woman and a man in the same black Tempelhof tee, both the
+  // store's own paired gallery photos. The 20 Nov poster files stay in the repo but are no longer shown.
   images: Object.freeze({
-    clothing: 'assets/design2/black-week-20261120-clothing',
-    poster: 'assets/design2/black-week-20261120-poster'
+    woman: 'assets/design2/black-week-20261124-woman',
+    man: 'assets/design2/black-week-20261120-clothing'
   })
 });
 

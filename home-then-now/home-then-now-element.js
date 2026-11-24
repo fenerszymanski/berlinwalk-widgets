@@ -8,7 +8,7 @@
   'use strict';
 
   const DATA = {
-    "release": "home-then-now-20261122-black-week-copy",
+    "release": "home-then-now-20261124-bw-hero-pair",
     "hero": {
       "img1928": "assets/hero-1928.webp",
       "imgToday": "assets/hero-today.webp",
@@ -554,18 +554,18 @@
         "type": "duo",
         "items": [
           {
+            "img": "assets/bw-woman.webp",
+            "w": 640,
+            "h": 800,
+            "alt": "Tempelhof Classic T-shirt in black, worn by a woman sitting outdoors.",
+            "altDe": "Tempelhof Classic T-Shirt in Schwarz, getragen von einer Frau, die im Freien sitzt."
+          },
+          {
             "img": "assets/bw-clothing.webp",
             "w": 640,
             "h": 800,
             "alt": "Tempelhof Classic T-shirt in black, worn by a smiling man outdoors.",
             "altDe": "Tempelhof Classic T-Shirt in Schwarz, getragen von einem lächelnden Mann im Freien."
-          },
-          {
-            "img": "assets/bw-poster.webp",
-            "w": 640,
-            "h": 800,
-            "alt": "Tempelhof poster in an oak frame on a sunlit living-room wall.",
-            "altDe": "Tempelhof-Poster im Eichenrahmen an einer sonnigen Wohnzimmerwand."
           }
         ]
       }
