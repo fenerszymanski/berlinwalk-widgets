@@ -1,9 +1,26 @@
 {
-  "updatedAt": "2026-11-24T03:06:55.610Z",
+  "updatedAt": "2026-11-24T10:13:10.601Z",
   "source": "Wix Blog API",
-  "totalPosts": 473,
+  "totalPosts": 474,
   "bookingUrl": "https://www.walkofberlin.com/book-berlin-walking-tour/berlin-then-and-now",
   "allPosts": [
+    {
+      "title": "Gleisdreieck Berlin: The Station Where Two Lines Cross and the Park on Old Rail Land",
+      "slug": "gleisdreieck-berlin",
+      "path": "/post/gleisdreieck-berlin",
+      "url": "https://www.berlinwalk.com/post/gleisdreieck-berlin",
+      "excerpt": "Most visitors only see Gleisdreieck through a train window. Here is why two U-Bahn lines cross there on two levels, how the rail yards became a park, and the walk I would do in under an hour.",
+      "category": "Tourist Tips",
+      "categorySlug": "tourist-tips",
+      "topic": "when-to-visit",
+      "topicLabel": "Month-by-Month Berlin",
+      "readTime": "6 min read",
+      "publishedDate": "2026-11-24T10:09:47.399Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_1583d03d9eb243bcaa9493414dd45ceb~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-gleisdreieck-station-u2-viaduct-cover.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_1583d03d9eb243bcaa9493414dd45ceb~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-gleisdreieck-station-u2-viaduct-cover.jpg",
+      "alt": "Yellow U2 train on a steel viaduct at Gleisdreieck station in Berlin, with the station hall and a church spire behind",
+      "relatedToolSlug": "gleisdreieck-rail-relic-walk"
+    },
     {
       "title": "Café Achteck Berlin: Where the Green Cast-Iron Toilets Still Stand",
       "slug": "cafe-achteck-berlin",
