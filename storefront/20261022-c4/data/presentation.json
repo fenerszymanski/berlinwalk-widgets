@@ -8108,7 +8108,15 @@
             "sha256": "3d740b91d53d182295e672df6a4fca7694b7c8cd2d7c515b0640dcfcb5b7076a",
             "alt": "Berlin Bear Map Hoodie in Black, actual Gelato garment preview"
           },
-          "gallery": []
+          "gallery": [],
+          "video": {
+            "file": "hoodies-20261124/cafe-video/berlin-bear-map-black-hoodie-cafe.mp4",
+            "poster": "hoodies-20261124/cafe-video/berlin-bear-map-black-hoodie-cafe-poster.jpg",
+            "thumb": "hoodies-20261124/cafe-video/berlin-bear-map-black-hoodie-cafe-thumb.jpg",
+            "alt": "Berlin Bear Map Hoodie in Black, worn at a café table, short looping video.",
+            "fit": "cover",
+            "position": "50% 20%"
+          }
         }
       }
     },
