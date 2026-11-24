@@ -2124,6 +2124,7 @@
     "deliveryNote": "Digital download · 1 JPEG print file and a printing guide. No physical item.",
     "deliveryDetails": "Your download includes one 3:4 sRGB JPEG at 300 dpi for 30 × 40 cm and a printing guide. The same file prints without cropping at 45 × 60 cm and 60 × 80 cm. No physical poster, frame or decor is included.",
     "group": "stories",
+    "alternativeProductId": "dc3c8b2c-852a-48ec-aa3f-fa3ad72686e1",
     "visualCreditsHtml": "<p>Map data: ALKIS Berlin Bezirke (Geoportal Berlin) and Gewässerverzeichnis, Gewässer Flächen (Senatsverwaltung für Mobilität, Verkehr, Klimaschutz und Umwelt Berlin), both under the <a href=\"https://www.govdata.de/dl-de/zero-2-0\" target=\"_blank\">Datenlizenz Deutschland Zero 2.0</a>. Area: Amt für Statistik Berlin-Brandenburg, 2025. No endorsement is implied.</p>",
     "sizeImages": {
       "30x40 cm": "berlin-twelve-districts-30x40.jpg"
@@ -2133,7 +2134,14 @@
         "image": "berlin-twelve-districts-30x40.jpg",
         "alt": "Complete artwork at 30 x 40 cm."
       }
-    ]
+    ],
+    "roomImage": "berlin-twelve-districts-room-photo.jpg",
+    "roomVideoFit": "contain",
+    "roomCaption": "Styling example · 30 × 40 cm · Printable files only · Frame and decor not included",
+    "roomAlt": "The Berlin Twelve Districts map print at 30 × 40 cm in an oak frame on a living-room wall. Frame and decor are not included.",
+    "roomVideoUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/room/berlin-twelve-districts.mp4",
+    "roomVideoPosterUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/room/berlin-twelve-districts-poster.jpg",
+    "roomVideoThumbnailUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/room/berlin-twelve-districts-thumb.jpg"
   },
   {
     "id": "dl-haus-des-lehrers",
@@ -9536,5 +9544,34 @@
     "roomVideoUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/room/nikolassee-rehwiese.mp4",
     "roomVideoPosterUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/room/nikolassee-rehwiese-poster.jpg",
     "roomVideoThumbnailUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/room/nikolassee-rehwiese-thumb.jpg"
+  },
+  {
+    "id": "pr-berlin-twelve-districts",
+    "name": "Berlin Twelve Districts Map",
+    "place": "Citywide · Twelve districts",
+    "image": "berlin-twelve-districts-fullart.jpg",
+    "alt": "Map of Berlin's twelve districts in warm, close tones on a cream background, with the rivers, canals and lakes in deep blue. The footer reads Berlin, 891 km².",
+    "typeLine": "PREMIUM MATTE · 200 GSM · UNFRAMED",
+    "wixProductId": "dc3c8b2c-852a-48ec-aa3f-fa3ad72686e1",
+    "group": "stories",
+    "alternativeProductId": "aec7c580-f556-adcd-f1e6-e49fa1e05026",
+    "visualCreditsHtml": "<p>Map data: ALKIS Berlin Bezirke (Geoportal Berlin) and Gewässerverzeichnis, Gewässer Flächen (Senatsverwaltung für Mobilität, Verkehr, Klimaschutz und Umwelt Berlin), both under the <a href=\"https://www.govdata.de/dl-de/zero-2-0\" target=\"_blank\">Datenlizenz Deutschland Zero 2.0</a>. Area: Amt für Statistik Berlin-Brandenburg, 2025. No endorsement is implied.</p>",
+    "sizeImages": {
+      "30x40 cm": "berlin-twelve-districts-30x40.jpg",
+      "50x70 cm": "berlin-twelve-districts-50x70.jpg"
+    },
+    "gallery": [
+      {
+        "image": "berlin-twelve-districts-fullart.jpg",
+        "alt": "The complete Berlin twelve districts map, without cropping."
+      }
+    ],
+    "roomImage": "berlin-twelve-districts-room-photo.jpg",
+    "roomVideoFit": "contain",
+    "roomCaption": "Styling example · 30 × 40 cm · Frame and decor not included",
+    "roomAlt": "The Berlin Twelve Districts map print at 30 × 40 cm in an oak frame on a living-room wall. Frame and decor are not included.",
+    "roomVideoUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/room/berlin-twelve-districts.mp4",
+    "roomVideoPosterUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/room/berlin-twelve-districts-poster.jpg",
+    "roomVideoThumbnailUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/room/berlin-twelve-districts-thumb.jpg"
   }
 ]
