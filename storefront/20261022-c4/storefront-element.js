@@ -360,7 +360,7 @@
     }
     return {intro:intro.join(''),sections};
   }
-  // Cart destinations. The page-code bridge (quoteInput in wix/shop-page-custom-element.js) needs only a two-letter country and treats postalCode, subdivision, city and addressLine1 as optional, so the cart asks for country + postal code (22 Nov 2026: the postal code is optional for a cart with something to ship, see postalOptional()). `pattern` decides when a postal code looks complete enough to use it in the quote.
+  // Cart destinations. The page-code bridge (quoteInput in wix/shop-page-custom-element.js) needs only a two-letter country and treats postalCode, subdivision, city and addressLine1 as optional, so the cart asks for the country and takes a postal code only when the visitor types one (optional for a cart with something to ship since 22 Nov 2026 and for a download-only cart since 24 Nov 2026, see postalOptional()). `pattern` decides when a postal code looks complete enough to use it in the quote.
   const DESTINATIONS = [['DE','Germany','Postal code','10115',/^\d{5}$/,'numeric'],['AT','Austria','Postal code','1010',/^\d{4}$/,'numeric'],['FR','France','Postal code','75001',/^\d{5}$/,'numeric'],['NL','Netherlands','Postal code','1012 AB',/^\d{4} ?[A-Za-z]{2}$/,'text'],['GB','United Kingdom','Postcode','SW1A 1AA',/^[A-Za-z]{1,2}\d[A-Za-z\d]? ?\d[A-Za-z]{2}$/,'text'],['US','United States','ZIP code','10001',/^\d{5}(?:-\d{4})?$/,'numeric']].map(([code,label,postal,example,pattern,mode])=>({code,label,postal,example,pattern,mode}));
   // Digital downloads (kind "digital" in presentation.json, or a native digital product type): no shipping, quantity 1, own delivery copy. Rows may override both texts with deliveryNote / deliveryDetails.
   const isDigital = product => product?.kind === 'digital' || product?.nativeProductType === 'digital';
@@ -1169,9 +1169,12 @@
     postalValue() {return String(this.destination.postalCode??'').trim();}
     // 22 Nov 2026 (Yusuf: "hemen uygula"): a cart with something to ship opens on Germany and asks for no postal code. The six listed countries all ship free, the quote bridge
     // (quoteInput in the page code) needs only the two-letter country, and Wix checkout asks for the full address anyway. A postal code the visitor does type is still sent
-    // when it is complete; an unfinished one blocks until it is finished or cleared. Downloads (billing country for the tax check) keep country + postal code as before.
+    // when it is complete; an unfinished one blocks until it is finished or cleared.
+    // 24 Nov 2026 (Yusuf: "bunu da değiştirelim o zaman"): a download-only cart works the same way. Its billing-country quote came back READY with the same tax and total with and
+    // without a postal code for all six countries (live probe, output/store/digital-cart-postal-20261124/qa/probe-quote-digital.json), so the old "tax check" reason for asking
+    // is gone. The one difference stays: a download-only cart gets no default country (guessDestination), because the country is the billing country for tax.
     shippedCart() {return this.cart?.hasShippableItems===true;}
-    postalOptional() {return this.shippedCart()&&!!this.destinationInfo();}
+    postalOptional() {return (this.shippedCart()||this.digitalOnly())&&!!this.destinationInfo();}
     postalOk() {const info=this.destinationInfo();if(!info)return false;const value=this.postalValue();return value?info.pattern.test(value):this.postalOptional();}
     destinationReady() {return !!this.cart&&this.cart.hasShippableItems!==null&&this.postalOk();}
     attemptKey() {return JSON.stringify([this.cart?.signature,this.destination.country,this.postalValue()]);}
@@ -1187,8 +1190,8 @@
       if(this.uncertain)return 'Refresh your cart to continue.';
       if(cart.hasShippableItems===null)return 'Open the original cart to continue.';
       if(country==='OTHER')return 'Continue in the original cart for this destination.';
-      if(!country)return this.shippedCart()?'Choose your country to continue.':'Add your country and postal code to continue.';
-      if(!this.postalOk())return this.postalValue()?(this.postalOptional()?'Enter your full postal code, or clear the field, to continue.':'Enter your full postal code to continue.'):'Add your postal code to continue.';
+      if(!country)return 'Choose your country to continue.';
+      if(!this.postalOk())return this.postalValue()?'Enter your full postal code, or clear the field, to continue.':'Open the original cart to continue.';   // an empty field never blocks a cart of known kind, so the postal sentence needs a typed code
       if(this.quoteError)return this.quoteError==='INVALID_DESTINATION'?'Check your postal code to continue.':'Delivery could not be checked.';
       if(this.quoting||wants)return this.digitalOnly()?'Checking tax…':'Checking delivery…';
       if(this.busy&&!quote)return 'Updating your cart…';
@@ -1546,6 +1549,7 @@
       return calendar?'Free delivery to Germany, the EU and the UK.':'Free delivery to Germany, the EU, the UK and the US.';
     }
     // First cart visit: preselect one of the listed countries from the device time zone, Germany for a cart with something to ship when the zone says nothing. Never overrides a choice; the visitor can change it.
+    // A download-only cart gets no default country (24 Nov 2026): its country is the billing country for tax, so when the zone says nothing the cart asks "Choose your country to continue."
     guessDestination() {
       if(this.destinationGuessed||this.destination.country)return;this.destinationGuessed=true;
       let zone='';try{zone=Intl.DateTimeFormat().resolvedOptions().timeZone||'';}catch(e){}
@@ -1640,7 +1644,7 @@
     errorMessage() {if(this.uncertain)return 'The cart update could not be confirmed. Refresh the cart and check it before trying again.';return ({BF_COUPON_CONFLICT:'Black Friday prices cannot be combined with a code. Remove the code from your cart, then check delivery again.',CART_UNAVAILABLE:'The cart could not be read. You can still open the original cart.',INVALID_DESTINATION:'Enter a valid destination.',NO_SHIPPING_AVAILABLE:'No delivery method is available for this address.',CART_CHANGED:'Your cart changed. Check delivery again.',BRIDGE_DISABLED:'The shop is temporarily unavailable.'})[this.error]||'This action could not be completed. Check your cart or try again.';}
     // Any address edit clears the visible quote, total and delivery choice at once and bumps quoteRevision, so a late quote response for the old address is discarded in receive().
     input(event) {const field=event.target;if(!field.closest?.('[data-address-form]')||!field.name)return;this.destination[field.name]=field.value;
-      // 22 Nov 2026: with an optional postal code, one typed for another country must not block the new country (shipped carts only; downloads keep it as before).
+      // 22 Nov 2026 (shipped carts), 24 Nov 2026 (downloads too): with an optional postal code, one typed for another country must not block the new country.
       if(field.name==='country'&&this.postalOptional()&&this.postalValue()&&!this.postalOk()){this.destination.postalCode='';const typed=field.closest('[data-address-form]').querySelector('[name="postalCode"]');if(typed)typed.value='';}
       this.selection=null;this.quote=null;this.quoteError='';this.failedKey='';this.choiceList=null;this.quoteRevision++;this.refreshCartUi();}
     // A committed edit (blur, Enter, "Done" on a phone keyboard) skips the remaining debounce.
