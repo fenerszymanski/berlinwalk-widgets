@@ -1656,6 +1656,19 @@
       window.setTimeout(() => titleEl.focus({ preventScroll: true }), 0);
     }
     
+    function fetchReadOnlyDoorStats() {
+      try {
+        return window.fetch(TRACKING_ENDPOINT_PROD, {
+          method: 'POST',
+          mode: 'cors',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ action: 'bouncerStats' })
+        }).then(response => (response.ok ? response.json().catch(() => null) : null)).catch(() => null);
+      } catch (error) {
+        return Promise.resolve(null);
+      }
+    }
+
     function fetchGlobalStats(isSuccess, completionReason = 'choice') {
       document.getElementById('global-stats').style.display = 'block';
       if (!timedMode) {
@@ -1674,12 +1687,18 @@
         timedMode,
         timed: timedMode
       }, { returnStats: timedMode }).then(data => {
+        if (!timedMode) return null;
+        // No event is sent without analytics consent, so there is no stats answer. Ask the
+        // read-only stats path instead: it stores nothing and returns today's totals.
+        if (data && data.stats) return data;
+        return fetchReadOnlyDoorStats();
+      }).then(data => {
         if (!timedMode) return;
         const stats = data && data.stats;
         if (!stats || !stats.total) {
           document.getElementById('stats-text').innerHTML = isSuccess
             ? 'Live stats just started today.<br>You are one of the first to get in.'
-            : 'Live stats just started today.<br>Your rejection has been recorded.';
+            : 'Live stats just started today.<br>You are one of the first at the door.';
           return;
         }
         const rate = Number(stats.rejectionRate || 0).toFixed(1);
