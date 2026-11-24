@@ -1,0 +1,400 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Berlin Club Night Rescue Plan: free sample | Walk of Berlin</title>
+<meta name="description" content="A free sample of my Berlin Club Night Rescue Plan: one door card and one Plan B.">
+<style>
+@font-face{font-family:"Fraunces";src:url("fonts/Fraunces-Variable.ttf") format("truetype-variations");font-weight:100 900;font-display:swap}
+@font-face{font-family:"Space Grotesk";src:url("fonts/SpaceGrotesk-Variable.ttf") format("truetype-variations");font-weight:300 700;font-display:swap}
+@font-face{font-family:"IBM Plex Mono";src:url("fonts/IBMPlexMono-Regular.ttf") format("truetype");font-weight:400;font-display:swap}
+@font-face{font-family:"IBM Plex Mono";src:url("fonts/IBMPlexMono-SemiBold.ttf") format("truetype");font-weight:600;font-display:swap}
+:root{--night:#0C1A0F;--panel:#132A18;--panel2:#1A3620;--line:rgba(250,250,245,.16);--cream:#FAFAF5;--muted:rgba(250,250,245,.78);
+--yellow:#FFE600;--ink:#123D18;--lime:#9CCC65;--red:#FF6B76;
+--display:"Fraunces",Georgia,serif;--sans:"Space Grotesk",Arial,sans-serif;--mono:"IBM Plex Mono",ui-monospace,Menlo,monospace}
+*{box-sizing:border-box}html{-webkit-text-size-adjust:100%}
+body{margin:0;background:#060D08;color:var(--cream);font-family:var(--sans);font-size:16px;line-height:1.45}
+.note{max-width:860px;margin:0 auto;padding:20px 16px 4px;font-family:var(--mono);font-size:12.5px;line-height:1.55;color:var(--muted)}
+.note b{color:var(--cream);font-weight:600}
+.stage{display:flex;flex-wrap:wrap;gap:28px;justify-content:center;align-items:flex-start;padding:16px 16px 48px}
+.col{width:390px;max-width:100%}
+.cap{font-family:var(--mono);font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);padding:0 4px 8px}
+.phone{background:var(--night);border:1px solid var(--line);border-radius:28px;overflow:hidden}
+.screen{padding:18px 16px 24px}
+.ic{width:22px;height:22px;flex:none}
+.eyebrow{font-family:var(--mono);font-size:11.5px;font-weight:600;letter-spacing:.09em;text-transform:uppercase;color:var(--lime)}
+h2{font-family:var(--mono);font-size:12px;font-weight:600;letter-spacing:.09em;text-transform:uppercase;color:var(--cream);margin:24px 0 10px;display:flex;align-items:center;gap:8px}
+h2 .ic{color:var(--lime);width:18px;height:18px}
+/* hero */
+.hero{position:relative;height:250px;background:#111 center/cover no-repeat}
+.hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(12,26,15,.2) 0%,rgba(12,26,15,.15) 30%,rgba(12,26,15,.92) 68%,rgba(12,26,15,1) 100%)}
+.hero .eyebrow{color:var(--cream)}
+.hero .in{position:absolute;left:16px;right:16px;bottom:12px;z-index:1}
+.hero h1{font-family:var(--display);font-weight:600;font-size:52px;line-height:1;margin:6px 0 8px;letter-spacing:-.01em}
+.stamp{display:inline-block;font-family:var(--mono);font-size:11.5px;color:var(--cream);background:rgba(12,26,15,.7);border:1px solid var(--line);border-radius:999px;padding:4px 10px}
+/* fact tiles */
+.facts{display:grid;grid-template-columns:1fr 1fr;grid-auto-rows:1fr;gap:8px}
+.fact{border:1.5px solid rgba(250,250,245,.55);border-radius:14px;padding:11px 12px 10px;background:var(--panel);min-height:86px;display:flex;flex-direction:column;justify-content:space-between}
+.fact.np{border-style:dashed;background:transparent}
+.fact .ic{color:var(--lime);width:24px;height:24px}
+.fact b{display:block;font-family:var(--display);font-weight:600;font-size:21px;line-height:1.05;margin-top:8px;white-space:nowrap}
+.duo .fact b{white-space:normal}
+.fact i{display:block;font-style:normal;font-family:var(--mono);font-size:11.5px;letter-spacing:.04em;text-transform:uppercase;color:var(--muted);margin-top:4px;white-space:nowrap}
+.legend{display:flex;gap:14px;flex-wrap:wrap;font-family:var(--mono);font-size:11.5px;color:var(--muted);margin-top:10px}
+.legend span{display:flex;align-items:center;gap:6px}
+.legend u{width:22px;height:0;border-top:2px solid rgba(250,250,245,.7);text-decoration:none;display:inline-block}
+.legend u.d{border-top-style:dashed}
+/* route strip */
+.strip{display:flex;align-items:center;gap:8px;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:12px}
+.strip .end{display:flex;flex-direction:column;align-items:center;gap:4px;font-family:var(--mono);font-size:11px;letter-spacing:.04em;text-transform:uppercase;text-align:center;width:84px;flex:none}
+.strip .end .ic{color:var(--cream)}
+.strip .mid{flex:1;text-align:center;border-top:2px dashed rgba(250,250,245,.5);position:relative;height:0}
+.strip .mid b{position:absolute;left:50%;top:-14px;transform:translateX(-50%);background:var(--panel);padding:0 8px;font-family:var(--display);font-size:22px;font-weight:600;white-space:nowrap}
+.strip .mid i{position:absolute;left:50%;top:14px;transform:translateX(-50%);font-style:normal;font-family:var(--mono);font-size:11px;color:var(--muted);white-space:nowrap}
+/* checklist */
+.todo{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.todo li{display:flex;gap:10px;align-items:center;background:var(--panel2);border-radius:14px;padding:11px 12px;font-weight:600;font-size:15.5px}
+.todo .ic{color:var(--ink);background:var(--yellow);border-radius:50%;padding:4px;width:28px;height:28px}
+/* details blocks */
+details.fold{background:var(--panel);border:1px solid var(--line);border-radius:14px;margin-top:8px}
+details.fold summary{list-style:none;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:10px;min-height:48px;padding:10px 14px;font-weight:600;font-size:15px}
+details.fold summary::-webkit-details-marker{display:none}
+details.fold summary .ic{color:var(--lime);transition:transform .15s}
+details.fold[open] summary .ic{transform:rotate(45deg)}
+.rows{margin:0;padding:0 14px 12px;list-style:none}
+.rows li{display:grid;grid-template-columns:78px 1fr;gap:10px;padding:9px 0;border-top:1px solid var(--line);font-size:14.5px}
+.rows .k{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--lime);padding-top:3px}
+.rows small{display:block;color:var(--muted);font-size:13px;margin-top:2px}
+.quote{border:1px dashed rgba(250,250,245,.45);border-radius:14px;padding:12px 14px;margin-top:8px}
+.quote .tag{font-family:var(--mono);font-size:11px;letter-spacing:.07em;text-transform:uppercase;color:var(--red);font-weight:600}
+.quote p{margin:6px 0 0;font-size:14.5px;color:var(--muted)}
+.btn{display:flex;align-items:center;justify-content:center;gap:8px;min-height:54px;padding:12px 16px;border-radius:16px;font-weight:700;font-size:17px;text-decoration:none;text-align:center}
+.btn.primary{background:var(--yellow);color:var(--ink);margin-top:20px}
+.foot{margin-top:22px;padding-top:12px;border-top:1px solid var(--line);font-family:var(--mono);font-size:11px;line-height:1.6;color:var(--muted)}
+/* screen 2 */
+.no h1{font-family:var(--display);font-style:italic;font-weight:500;font-size:40px;line-height:1.02;margin:8px 0 6px}
+.no .sub{font-size:16.5px;margin:0;font-weight:600}
+.no .sub span{color:var(--muted);font-weight:400}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:16px}
+.step{background:var(--panel2);border-radius:14px;padding:10px 8px 11px;text-align:center}
+.step .n{display:inline-flex;width:24px;height:24px;border-radius:50%;background:var(--yellow);color:var(--ink);font-family:var(--mono);font-weight:600;font-size:12.5px;align-items:center;justify-content:center}
+.step .ic{display:block;margin:8px auto 6px;width:28px;height:28px;color:var(--cream)}
+.step b{display:block;font-size:14.5px;line-height:1.2}
+.step i{display:block;font-style:normal;font-size:12.5px;color:var(--muted);margin-top:3px;line-height:1.25}
+.tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:8px}
+.tiles a{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;min-height:66px;border-radius:14px;border:1.5px solid rgba(250,250,245,.5);color:var(--cream);text-decoration:none;font-weight:600;font-size:13.5px}
+.tiles a .ic{color:var(--lime)}
+.map{display:block;width:100%;height:auto;border:1px solid var(--line);border-radius:14px}
+.map text{paint-order:stroke;stroke:#0F2113;stroke-width:3px;stroke-linejoin:round}
+.map .pin{stroke:none}
+.map .st{font-family:var(--mono);font-size:8.5px;fill:rgba(250,250,245,.9)}
+.map .you{font-family:var(--mono);font-size:9.5px;font-weight:600;fill:#FF9AA2}
+.map .rv{font-family:var(--display);font-style:italic;font-size:11px;fill:#7CC4E4}
+.map .pin{font-family:var(--mono);font-size:11px;font-weight:600;fill:#0C1A0F}
+.key{display:flex;gap:14px;font-family:var(--mono);font-size:11.5px;color:var(--muted);margin:8px 0 12px;flex-wrap:wrap}
+.key span{display:flex;align-items:center;gap:6px}
+.key u{width:12px;height:12px;border-radius:50%;display:inline-block;text-decoration:none}
+details.opt{background:var(--panel);border:1px solid var(--line);border-radius:16px;margin-top:8px}
+details.opt summary{list-style:none;cursor:pointer;display:grid;grid-template-columns:34px 1fr auto;column-gap:10px;row-gap:10px;align-items:center;padding:12px}
+details.opt summary::-webkit-details-marker{display:none}
+.opt .num{width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-weight:600;font-size:15px;color:var(--night);background:var(--lime)}
+.opt.ride .num{background:var(--yellow)}
+.opt .who b{display:block;font-family:var(--display);font-weight:600;font-size:23px;line-height:1.05}
+.opt .who i{display:block;font-style:normal;font-family:var(--mono);font-size:11.5px;color:var(--muted);margin-top:3px}
+.opt .time{text-align:right;display:grid;grid-template-columns:auto auto;column-gap:6px;align-items:center;justify-content:end}
+.opt .time .ic{width:22px;height:22px;color:var(--lime)}
+.opt.ride .time .ic{color:var(--yellow)}
+.opt .time b{display:block;font-family:var(--display);font-weight:600;font-size:32px;line-height:.95;color:var(--lime)}
+.opt.ride .time b{color:var(--yellow)}
+.opt .time i{grid-column:1/-1}
+.opt .time i{display:block;font-style:normal;font-family:var(--mono);font-size:10.5px;letter-spacing:.02em;text-transform:uppercase;color:var(--muted);margin-top:3px;white-space:nowrap}
+.opt .chips{grid-column:1/-1;display:flex;flex-wrap:wrap;gap:6px}
+.chip{display:inline-flex;align-items:center;gap:6px;border:1.5px solid rgba(250,250,245,.5);border-radius:999px;padding:5px 10px 5px 8px;font-size:13.5px;font-weight:600;line-height:1.2}
+.chip .ic{width:17px;height:17px;color:var(--lime)}
+.chip.np{border-style:dashed;font-weight:500;color:var(--muted)}
+.opt .more{grid-column:1/-1;display:flex;align-items:center;gap:6px;font-family:var(--mono);font-size:11.5px;color:var(--muted)}
+.opt .more .ic{width:16px;height:16px;color:var(--lime);transition:transform .15s}
+.opt[open] .more .ic{transform:rotate(45deg)}
+.opt .body{padding:0 12px 12px}
+.opt .body .chips{display:flex;flex-wrap:wrap;gap:6px}
+.opt .body p{margin:10px 0 0;font-size:14.5px;color:var(--muted)}
+.mini{display:flex;gap:8px;margin-top:10px}
+.mini a{flex:1;display:flex;align-items:center;justify-content:center;min-height:46px;border-radius:12px;border:1.5px solid rgba(250,250,245,.5);color:var(--cream);text-decoration:none;font-size:14.5px;font-weight:600;padding:8px 10px;text-align:center}
+.mini a:first-child{background:var(--cream);color:var(--night);border-color:var(--cream)}
+.box{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:12px 14px}
+.box .line{display:flex;gap:10px;align-items:flex-start;font-size:15px}
+.box .line + .line{margin-top:10px}
+.box .line .ic{color:var(--lime);margin-top:1px}
+.box .line b{font-weight:600}
+.box small{display:block;color:var(--muted);font-size:13px;margin-top:2px}
+.todoflag{color:var(--red)!important}
+.duo{display:grid;grid-template-columns:1fr 1fr;grid-auto-rows:1fr;gap:8px}
+.duo .fact{justify-content:flex-start}
+.duo .fact b{font-size:21px}
+.duo .fact i{white-space:normal;text-transform:none;letter-spacing:0;font-family:var(--sans);font-size:13px;line-height:1.3}
+.sos{display:flex;align-items:center;gap:10px;margin-top:20px;border:1.5px solid var(--red);border-radius:14px;padding:11px 12px;font-weight:600;font-size:15px}
+.sos .ic{color:var(--red)}
+.sos b{font-family:var(--display);font-size:22px;font-weight:600}
+.sos small{display:block;font-weight:400;color:var(--muted);font-size:13px}
+.step{display:flex;flex-direction:column;align-items:center}
+.photo{height:120px;border-radius:12px;background:#111 center/cover no-repeat;margin-bottom:10px}
+@media (max-width:440px){.stage{padding:12px 8px 36px;gap:22px}.phone{border-radius:20px}}
+
+.app{width:430px;max-width:100%;margin:0 auto;background:var(--night);min-height:100vh}
+.view{display:none}
+.view.on{display:block}
+.back{display:flex;align-items:center;gap:6px;min-height:46px;padding:0 16px;font-family:var(--mono);font-size:12.5px;font-weight:600;letter-spacing:.04em;color:var(--cream);text-decoration:none;border-bottom:1px solid var(--line);background:var(--night);position:sticky;top:0;z-index:5}
+.hero.plain{height:132px;overflow:hidden;background:linear-gradient(135deg,#1A3620 0%,#0C1A0F 70%);background-size:auto}
+.hero.plain::after{background:repeating-linear-gradient(90deg,rgba(250,250,245,.05) 0 1px,transparent 1px 34px),repeating-linear-gradient(0deg,rgba(250,250,245,.05) 0 1px,transparent 1px 34px)}
+.h-home{font-family:var(--display);font-weight:600;font-size:40px;line-height:1.02;margin:8px 0 6px}
+#home .sub{font-size:16.5px;margin:0;font-weight:600}
+#home .sub span{color:var(--muted);font-weight:400}
+.doorrow{display:grid;grid-template-columns:34px 1fr 18px;column-gap:10px;row-gap:8px;align-items:center;background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:12px;margin-top:8px;color:var(--cream);text-decoration:none}
+.doorrow .num{width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-weight:600;font-size:15px;color:var(--night);background:var(--lime)}
+.doorrow .who b{display:block;font-family:var(--display);font-weight:600;font-size:23px;line-height:1.05}
+.doorrow .who i{display:block;font-style:normal;font-family:var(--mono);font-size:11.5px;color:var(--muted);margin-top:3px}
+.doorrow .chips{grid-column:1/3;display:flex;flex-wrap:wrap;gap:6px}
+.doorrow .go{grid-row:1;grid-column:3;font-size:26px;color:var(--lime);line-height:1}
+.tiles{grid-template-columns:repeat(auto-fit,minmax(70px,1fr))}
+.tiles.big a{min-height:84px;background:var(--panel);font-size:14px;text-align:center;padding:6px}
+.tiles.big a .ic{width:26px;height:26px}
+.matrix{border:1px solid var(--line);border-radius:16px;overflow:hidden;margin-top:16px}
+.mrow{display:grid;grid-template-columns:1.25fr repeat(4,1fr);gap:6px;align-items:center;padding:9px 10px;border-top:1px solid var(--line);color:var(--cream);text-decoration:none;min-height:50px}
+.mrow.head{border-top:0;background:var(--panel2);min-height:0;padding:8px 10px}
+.mrow.head span{display:flex;flex-direction:column;align-items:center;gap:3px;font-family:var(--mono);font-size:10.5px;text-transform:uppercase;letter-spacing:.04em}
+.mrow.head .ic{color:var(--lime);width:20px;height:20px}
+.mrow b{font-family:var(--display);font-weight:600;font-size:17px;line-height:1.1}
+.mrow .c{display:flex;align-items:center;justify-content:center;text-align:center;min-height:32px;border:1.5px solid rgba(250,250,245,.55);border-radius:10px;font-size:12.5px;font-weight:600;line-height:1.1;padding:2px 3px}
+.mrow .c{background:var(--panel2)}
+.mrow .c.np{border:1px dashed rgba(250,250,245,.28);background:none;color:rgba(250,250,245,.4);font-weight:400}
+.facts{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+.rows li:first-child{border-top:0}
+.facts .fact b{white-space:normal;font-size:20px;overflow-wrap:anywhere}
+.facts .fact i{white-space:normal}
+.rows.wide li{grid-template-columns:112px 1fr}
+.doorrow .go{background:none;border:1.5px solid var(--cream);color:var(--cream)}
+.phr{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:11px 12px;margin-top:8px}
+.phr b{display:block;font-family:var(--display);font-weight:600;font-size:22px;line-height:1.1}
+.phr i{display:block;font-style:normal;color:var(--muted);font-size:14.5px;margin-top:3px}
+.phr span{display:flex;gap:8px;align-items:flex-start;margin-top:8px;font-size:14.5px;font-weight:600}
+.phr span .ic{color:var(--lime);width:18px;height:18px;margin-top:1px}
+.say{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.say .phr{margin-top:0}
+.phr.small b{font-size:17px}
+.phr.small i{font-size:13px}
+.signs{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.sign{border:2px solid var(--cream);border-radius:10px;padding:9px 10px;text-align:center}
+.sign b{display:block;font-family:var(--mono);font-weight:600;font-size:14px;letter-spacing:.05em;text-transform:uppercase}
+.sign i{display:block;font-style:normal;color:var(--muted);font-size:13px;margin-top:2px}
+.strip{align-items:flex-start}
+.strip .mid{margin-top:12px}
+.strip .end{width:104px;font-size:10px;letter-spacing:0;line-height:1.25;overflow-wrap:anywhere}
+.ghost{position:absolute;right:10px;top:-22px;font-family:var(--display);font-weight:700;font-size:150px;line-height:1;color:rgba(250,250,245,.09);z-index:1}
+.hero::after{background:linear-gradient(180deg,rgba(12,26,15,.45) 0%,rgba(12,26,15,.35) 30%,rgba(12,26,15,.92) 68%,rgba(12,26,15,1) 100%)}
+.map .st{font-size:9.5px}
+.map .you{font-size:10.5px}
+.opt.ride .num{border-radius:8px}
+.todo .ic{background:none;border:2px solid var(--yellow);color:transparent}
+.doorrow .go{width:28px;height:28px;border-radius:50%;background:var(--lime);color:var(--night);display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:700}
+.doorrow{grid-template-columns:34px 1fr 28px}
+.samplebar{background:var(--yellow);color:var(--ink);font-family:var(--mono);font-size:11.5px;font-weight:600;text-align:center;padding:7px 10px}</style>
+</head>
+<body>
+<div class="app">
+<div class="samplebar">Free sample · 3 of 18 screens · the full plan is not on sale yet</div>
+<section class="view" id="home">
+  <div class="screen">
+  <div class="eyebrow">Berlin Club Night Rescue Plan</div>
+  <h1 class="h-home">Which door tonight?</h1>
+  <p class="sub">Tap a door. <span>Every card has a Plan B for the night it says no.</span></p>
+  <h2><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18V5l11-2v13"/><circle cx="6.5" cy="18" r="2.5"/><circle cx="17.5" cy="16" r="2.5"/></svg> Seven doors</h2>
+  <svg class="map" viewBox="0 0 354 192" role="img" aria-label="Map of seven club doors, the Spree and the S-Bahn"><rect width="354" height="192" rx="12" fill="#0F2113"/><polyline points="56.5,26.6 73.4,37.2 100.6,57.0 131.8,77.4 161.2,99.7 205.2,134.4 278.7,185.8" fill="none" stroke="#3E97BD" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" opacity=".8"/><text x="92" y="84" class="rv">Spree</text><polyline points="120.2,47.2 173.2,78.7 246.4,96.4 280.7,108.2" fill="none" stroke="#FAFAF5" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" opacity=".75"/><text x="190" y="75" class="st">S-Bahn</text><line x1="246.4" y1="96.4" x2="234.6" y2="127.6" stroke="#FAFAF5" stroke-width="1.8" stroke-dasharray="2 3.5" stroke-linecap="round" opacity=".7"/><line x1="280.7" y1="108.2" x2="334.8" y2="152.8" stroke="#FAFAF5" stroke-width="1.8" stroke-dasharray="2 3.5" stroke-linecap="round" opacity=".7"/><circle cx="120.2" cy="47.2" r="3.6" fill="#0F2113" stroke="#FAFAF5" stroke-width="1.8"/><text x="111.2" y="35.2" text-anchor="middle" class="st">Ostbahnhof</text><circle cx="173.2" cy="78.7" r="3.6" fill="#0F2113" stroke="#FAFAF5" stroke-width="1.8"/><circle cx="246.4" cy="96.4" r="3.6" fill="#0F2113" stroke="#FAFAF5" stroke-width="1.8"/><text x="246.4" y="88.4" text-anchor="middle" class="st">Ostkreuz</text><circle cx="280.7" cy="108.2" r="3.6" fill="#0F2113" stroke="#FAFAF5" stroke-width="1.8"/><text x="287.7" y="102.2" text-anchor="start" class="st">Rummelsburg</text><rect x="140.8" y="39.1" width="20" height="20" rx="10" fill="#9CCC65" stroke="#0F2113" stroke-width="2"/><text x="150.8" y="53.3" text-anchor="middle" class="pin">1</text><rect x="61.2" y="6.8" width="20" height="20" rx="10" fill="#9CCC65" stroke="#0F2113" stroke-width="2"/><text x="71.2" y="21.0" text-anchor="middle" class="pin">2</text><rect x="43.1" y="42.3" width="30" height="20" rx="10" fill="#9CCC65" stroke="#0F2113" stroke-width="2"/><text x="58.1" y="56.5" text-anchor="middle" class="pin">3·4</text><rect x="224.6" y="117.6" width="20" height="20" rx="10" fill="#9CCC65" stroke="#0F2113" stroke-width="2"/><text x="234.6" y="131.8" text-anchor="middle" class="pin">5</text><rect x="324.8" y="142.8" width="20" height="20" rx="10" fill="#9CCC65" stroke="#0F2113" stroke-width="2"/><text x="334.8" y="157.0" text-anchor="middle" class="pin">6</text><rect x="11.3" y="82.8" width="20" height="20" rx="10" fill="#9CCC65" stroke="#0F2113" stroke-width="2"/><text x="21.3" y="97.0" text-anchor="middle" class="pin">7</text></svg>
+  <a class="doorrow" href="#d-bgh"><span class="num">1</span><span class="who"><b>Berghain</b><i>Friedrichshain · Am Wriezener Bahnhof</i></span><span class="chips"><span class="chip"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="3.6"/><path d="M4.8 20.5c1.2-5.4 13.2-5.4 14.4 0"/></svg><span>18+</span></span><span class="chip"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.2 2"/></svg><span>Sat 23:59</span></span></span><span class="go">›</span></a>
+  <a class="doorrow" href="#locked"><span class="num">2</span><span class="who"><b>Kater</b><i>Friedrichshain · Holzmarktstraße 25</i></span><span class="chips"><span class="chip"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.2 2"/></svg><span>Check tonight</span></span><span class="chip np"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="8.5" cy="11" r="2"/><path d="M5.6 16c.7-1.7 5.1-1.7 5.8 0M14 10h4M14 14h4"/></svg><span>Bring ID + cash</span></span></span><span class="go">›</span></a>
+  <a class="doorrow" href="#locked"><span class="num">3</span><span class="who"><b>Tresor</b><i>Mitte · Köpenicker Straße 70</i></span><span class="chips"><span class="chip"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.2 2"/></svg><span>Check tonight</span></span><span class="chip"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8a2 2 0 012-2h14a2 2 0 012 2v2a2 2 0 000 4v2a2 2 0 01-2 2H5a2 2 0 01-2-2v-2a2 2 0 000-4z"/><path d="M14.5 6.5v11" stroke-dasharray="2 2"/></svg><span>Ticket ≠ entry</span></span></span><span class="go">›</span></a>
+  <a class="doorrow" href="#locked"><span class="num">4</span><span class="who"><b>OHM</b><i>Mitte · Köpenicker Straße 70</i></span><span class="chips"><span class="chip"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.2 2"/></svg><span>Check tonight</span></span><span class="chip np"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="8.5" cy="11" r="2"/><path d="M5.6 16c.7-1.7 5.1-1.7 5.8 0M14 10h4M14 14h4"/></svg><span>Bring ID + cash</span></span></span><span class="go">›</span></a>
+  <a class="doorrow" href="#locked"><span class="num">5</span><span class="who"><b>Renate</b><i>Friedrichshain · Alt-Stralau 70</i></span><span class="chips"><span class="chip"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="3.6"/><path d="M4.8 20.5c1.2-5.4 13.2-5.4 14.4 0"/></svg><span>21+</span></span><span class="chip"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M3 10h18M7 15h3"/></svg><span>Card only</span></span></span><span class="go">›</span></a>
+  <a class="doorrow" href="#locked"><span class="num">6</span><span class="who"><b>Sisyphos</b><i>Rummelsburg · Hauptstraße 15</i></span><span class="chips"><span class="chip"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="3.6"/><path d="M4.8 20.5c1.2-5.4 13.2-5.4 14.4 0"/></svg><span>21+</span></span><span class="chip"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 3L3 7l2 3 3-2v13h8V8l3 2 2-3-5-4c-1 2-7 2-8 0z"/></svg><span>No camouflage</span></span></span><span class="go">›</span></a>
+  <a class="doorrow" href="#locked"><span class="num">7</span><span class="who"><b>Ritter Butzke</b><i>Kreuzberg · Ritterstraße 26</i></span><span class="chips"><span class="chip"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="3.6"/><path d="M4.8 20.5c1.2-5.4 13.2-5.4 14.4 0"/></svg><span>18+</span></span><span class="chip"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.2 2"/></svg><span>Check tonight</span></span></span><span class="go">›</span></a>
+  <h2><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7"/></svg> Before you queue</h2>
+  <ul class="todo">
+    <li><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7"/></svg> Second door picked</li>
+    <li><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7"/></svg> Both programmes screenshotted</li>
+    <li><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7"/></svg> Phone charged, friends know the meeting point</li>
+  </ul>
+  <div class="sos"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3.5l9.5 16.5h-19z"/><path d="M12 10v4.5M12 17.4v.01"/></svg><div><b>112</b> ambulance · <b>110</b> police<small>Stay with your friends. Nobody waits outside alone.</small></div></div>
+  <div class="foot">Independent guide. Not affiliated with any venue. Nobody can promise you a door.<br>Checked on 24&nbsp;Nov&nbsp;2026 · walkofberlin.com</div>
+  </div>
+</section>
+<section class="view" id="d-bgh">
+  <a class="back" href="#home">← All doors</a>
+  <div class="hero" style="background-image:url('img/berghain-entrance.jpg')"><div class="in"><div class="eyebrow">Door 01 · Friedrichshain</div><h1>Berghain</h1><span class="stamp">Checked on 24&nbsp;Nov&nbsp;2026</span></div></div>
+  <div class="screen">
+  <div class="facts"><div class="fact"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="3.6"/><path d="M4.8 20.5c1.2-5.4 13.2-5.4 14.4 0"/></svg><div><b>18+</b><i>Age</i></div></div><div class="fact"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.2 2"/></svg><div><b>Sat 23:59</b><i>Klubnacht starts</i></div></div><div class="fact"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8a2 2 0 012-2h14a2 2 0 012 2v2a2 2 0 000 4v2a2 2 0 01-2 2H5a2 2 0 01-2-2v-2a2 2 0 000-4z"/><path d="M14.5 6.5v11" stroke-dasharray="2 2"/></svg><div><b>€20 online</b><i>Friday ticket</i></div></div><div class="fact"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3c4 5 6 8 6 11a6 6 0 01-12 0c0-3 2-6 6-11z"/></svg><div><b>Free water</b><i>On tap inside</i></div></div><div class="fact np"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="8.5" cy="11" r="2"/><path d="M5.6 16c.7-1.7 5.1-1.7 5.8 0M14 10h4M14 14h4"/></svg><div><b>Photo ID</b><i>The real one</i></div></div><div class="fact np"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="6.5" width="19" height="11" rx="1.6"/><circle cx="12" cy="12" r="2.6"/><path d="M5.6 9.6v.01M18.4 14.4v.01"/></svg><div><b>Cash + card</b><i>Bring both</i></div></div><div class="fact np"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 8h3l2-2h6l2 2h3v11H4z"/><circle cx="12" cy="13.2" r="3"/><path d="M3.5 3.5l17 17"/></svg><div><b>No photos</b><i>Phone stays away</i></div></div><div class="fact np"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 3L3 7l2 3 3-2v13h8V8l3 2 2-3-5-4c-1 2-7 2-8 0z"/></svg><div><b>Dance wear</b><i>No code published</i></div></div></div>
+  <div class="legend"><span><u></u>The club says so</span><span><u class="d"></u>Not published. Do it anyway.</span></div>
+
+  <h2><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="13" cy="4.2" r="1.8"/><path d="M9 21l2.2-6.2L9 12l1.2-4.6 3.6 1.2 2.4 3 2.6.8M11.4 15l3.2 2.2.9 3.8M10.2 7.6L7 9.6l-.8 3"/></svg> Get there</h2>
+  <div class="strip">
+    <div class="end"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="3" width="14" height="14" rx="3"/><path d="M5 11h14M8 17l-2 4M16 17l2 4"/><circle cx="9" cy="14" r=".6"/><circle cx="15" cy="14" r=".6"/></svg> Ostbahnhof</div>
+    <div class="mid"><b>8 min</b><i>620&nbsp;m on foot</i></div>
+    <div class="end"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 21V4.5A1.5 1.5 0 017.5 3h9A1.5 1.5 0 0118 4.5V21M3.5 21h17"/><path d="M14.4 12.2v.01"/></svg> The door</div>
+  </div>
+  <div class="mini"><a href="https://www.google.com/maps/dir/?api=1&origin=Ostbahnhof+Berlin&destination=Am+Wriezener+Bahnhof%2C+10243+Berlin&travelmode=walking" target="_blank" rel="noopener">Walking route</a><a href="https://www.berghain.berlin/en/program/" target="_blank" rel="noopener">Programme</a></div>
+
+  <h2><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/></svg> The small print</h2>
+  <details class="fold"><summary>Everything the club publishes <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></summary><ul class="rows"><li><span class="k">Age</span><span><b>18+</b><small>&ldquo;18+ / x-rated&rdquo; on the contact page.</small></span></li><li><span class="k">Starts</span><span><b>Klubnacht: Saturday 23:59</b><small>Friday nights in Panorama Bar start at 22:00.</small></span></li><li><span class="k">Tickets</span><span><b>Fridays: €20 online, €22 at the door</b><small>On the Friday listings I checked. Klubnacht listings show no ticket and no price.</small></span></li><li><span class="k">Water</span><span><b>Free cold drinking water</b><small>On tap in the restroom areas, says the awareness page.</small></span></li><li><span class="k">Help</span><span><b>Any member of staff</b><small>Afterwards by email. The address is on the club's awareness page.</small></span></li><li><span class="k">Lost</span><span><b>By email, then pick-up</b><small>Wednesdays, 14:00 to 18:00. The address is on the club's contact page.</small></span></li></ul></details>
+  <details class="fold"><summary>What nobody publishes <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></summary><ul class="rows">
+    <li><span class="k">The door</span><span><b>No checklist, no right answer, no magic hour</b><small>Everything you read about that is a story, including the confident ones.</small></span></li>
+    <li><span class="k">Missing</span><span><b>ID, payment, dress, re-entry and the photo rule are not on the club's own pages.</b></span></li></ul></details>
+  <div class="quote"><span class="tag">People say · not a rule</span><p>Phone cameras get a sticker at the door. I could not find this on the club's own pages. Plan as if it is true.</p></div>
+
+  <a class="btn primary" href="#no-bgh"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9 9l6 6M15 9l-6 6"/></svg> This door said no</a>
+  <div class="foot">Am Wriezener Bahnhof, 10243 Berlin<br>Photo: Michael Mayer, CC BY 2.0, via Wikimedia Commons (cropped)<br>Independent guide. Not affiliated with any venue.</div>
+  </div>
+</section>
+<section class="view no" id="no-bgh">
+  <a class="back" href="#d-bgh">← Berghain door card</a>
+  <div class="screen">
+  <div class="eyebrow">Plan B · from the Berghain door</div>
+  <h1>&ldquo;Heute leider nicht.&rdquo;</h1>
+  <p class="sub">Not today, sorry. <span>Final for tonight. Not a verdict on you.</span></p>
+  <div class="steps">
+    <div class="step"><span class="n">1</span><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5.5h16v10.5h-8.5L7 20v-4H4z"/></svg><b>Say thanks</b><i>Leave the line.</i></div>
+    <div class="step"><span class="n">2</span><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="13" cy="4.2" r="1.8"/><path d="M9 21l2.2-6.2L9 12l1.2-4.6 3.6 1.2 2.4 3 2.6.8M11.4 15l3.2 2.2.9 3.8M10.2 7.6L7 9.6l-.8 3"/></svg><b>Step away</b><i>Out of the queue's sight.</i></div>
+    <div class="step"><span class="n">3</span><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/></svg><b>Check first</b><i>Then go.</i></div>
+  </div>
+  <h2><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 14A8 8 0 0110 4a8 8 0 1010 10z"/></svg> What now?</h2>
+  <div class="tiles"><a href="#dance-bgh"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18V5l11-2v13"/><circle cx="6.5" cy="18" r="2.5"/><circle cx="17.5" cy="16" r="2.5"/></svg>Dance</a><a href="#home-bgh"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11l9-8 9 8M5 10v10h14V10M10 20v-6h4v6"/></svg>Home</a><a href="#again-bgh"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 14A8 8 0 0110 4a8 8 0 1010 10z"/></svg>Try again</a></div>
+
+  <h2 id="dance-bgh"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18V5l11-2v13"/><circle cx="6.5" cy="18" r="2.5"/><circle cx="17.5" cy="16" r="2.5"/></svg> Six other doors</h2>
+  <svg class="map" viewBox="0 0 354 192" role="img" aria-label="Map: you at the Berghain door and six other doors"><rect width="354" height="192" rx="12" fill="#0F2113"/><polyline points="56.5,26.6 73.4,37.2 100.6,57.0 131.8,77.4 161.2,99.7 205.2,134.4 278.7,185.8" fill="none" stroke="#3E97BD" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" opacity=".8"/><text x="92" y="84" class="rv">Spree</text><polyline points="120.2,47.2 173.2,78.7 246.4,96.4 280.7,108.2" fill="none" stroke="#FAFAF5" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" opacity=".75"/><text x="190" y="75" class="st">S-Bahn</text><line x1="246.4" y1="96.4" x2="234.6" y2="127.6" stroke="#FAFAF5" stroke-width="1.8" stroke-dasharray="2 3.5" stroke-linecap="round" opacity=".7"/><line x1="280.7" y1="108.2" x2="334.8" y2="152.8" stroke="#FAFAF5" stroke-width="1.8" stroke-dasharray="2 3.5" stroke-linecap="round" opacity=".7"/><line x1="143.8" y1="42.1" x2="120.2" y2="47.2" stroke="#FF6B76" stroke-width="2" stroke-dasharray="2 3.5" stroke-linecap="round"/><circle cx="120.2" cy="47.2" r="3.6" fill="#0F2113" stroke="#FAFAF5" stroke-width="1.8"/><text x="111.2" y="35.2" text-anchor="middle" class="st">Ostbahnhof</text><circle cx="173.2" cy="78.7" r="3.6" fill="#0F2113" stroke="#FAFAF5" stroke-width="1.8"/><circle cx="246.4" cy="96.4" r="3.6" fill="#0F2113" stroke="#FAFAF5" stroke-width="1.8"/><text x="246.4" y="88.4" text-anchor="middle" class="st">Ostkreuz</text><circle cx="280.7" cy="108.2" r="3.6" fill="#0F2113" stroke="#FAFAF5" stroke-width="1.8"/><text x="287.7" y="102.2" text-anchor="start" class="st">Rummelsburg</text><rect x="61.2" y="6.8" width="20" height="20" rx="10" fill="#9CCC65" stroke="#0F2113" stroke-width="2"/><text x="71.2" y="21.0" text-anchor="middle" class="pin">1</text><rect x="43.1" y="42.3" width="30" height="20" rx="10" fill="#9CCC65" stroke="#0F2113" stroke-width="2"/><text x="58.1" y="56.5" text-anchor="middle" class="pin">2·3</text><rect x="224.6" y="117.6" width="20" height="20" rx="4" fill="#FFE600" stroke="#0F2113" stroke-width="2"/><text x="234.6" y="131.8" text-anchor="middle" class="pin">4</text><rect x="11.3" y="82.8" width="20" height="20" rx="4" fill="#FFE600" stroke="#0F2113" stroke-width="2"/><text x="21.3" y="97.0" text-anchor="middle" class="pin">5</text><rect x="324.8" y="142.8" width="20" height="20" rx="4" fill="#FFE600" stroke="#0F2113" stroke-width="2"/><text x="334.8" y="157.0" text-anchor="middle" class="pin">6</text><circle cx="150.8" cy="49.1" r="9" fill="#FF6B76" opacity=".25"/><circle cx="150.8" cy="49.1" r="6" fill="#FF6B76" stroke="#0F2113" stroke-width="2"/><text x="161.8" y="46.1" text-anchor="start" class="you">YOU</text></svg>
+  <div class="key"><span><u style="background:#FF6B76"></u>You</span><span><u style="background:#9CCC65"></u>On foot</span><span><u style="background:#FFE600;border-radius:3px"></u>Ride</span></div>
+  <details class="opt foot">
+    <summary>
+      <span class="num">1</span>
+      <span class="who"><b>Kater</b><i>Holzmarktstraße 25</i></span>
+      <span class="time"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="13" cy="4.2" r="1.8"/><path d="M9 21l2.2-6.2L9 12l1.2-4.6 3.6 1.2 2.4 3 2.6.8M11.4 15l3.2 2.2.9 3.8M10.2 7.6L7 9.6l-.8 3"/></svg><b>19</b><i>min on foot</i></span>
+      <span class="chips"><span class="chip"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.2 2"/></svg><span>Check tonight</span></span><span class="chip np"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="8.5" cy="11" r="2"/><path d="M5.6 16c.7-1.7 5.1-1.7 5.8 0M14 10h4M14 14h4"/></svg><span>Bring ID + cash</span></span></span>
+      <span class="more"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg><span>Details and route</span></span>
+    </summary>
+    <div class="body">
+      <div class="chips"><span class="chip"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 8h3l2-2h6l2 2h3v11H4z"/><circle cx="12" cy="13.2" r="3"/><path d="M3.5 3.5l17 17"/></svg><span>No recording</span></span></div>
+      <p>The riverside club at Holzmarkt, called Kater Blau until 2025.</p>
+      <div class="mini"><a href="https://www.google.com/maps/dir/?api=1&origin=Am+Wriezener+Bahnhof%2C+10243+Berlin&destination=Holzmarktstra%C3%9Fe+25%2C+10243+Berlin&travelmode=walking" target="_blank" rel="noopener">Walking route</a><a href="#locked">Door card</a></div>
+    </div>
+  </details>
+  <details class="opt foot">
+    <summary>
+      <span class="num">2</span>
+      <span class="who"><b>Tresor</b><i>Köpenicker Straße 70</i></span>
+      <span class="time"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="13" cy="4.2" r="1.8"/><path d="M9 21l2.2-6.2L9 12l1.2-4.6 3.6 1.2 2.4 3 2.6.8M11.4 15l3.2 2.2.9 3.8M10.2 7.6L7 9.6l-.8 3"/></svg><b>27</b><i>min on foot</i></span>
+      <span class="chips"><span class="chip"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.2 2"/></svg><span>Check tonight</span></span><span class="chip"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8a2 2 0 012-2h14a2 2 0 012 2v2a2 2 0 000 4v2a2 2 0 01-2 2H5a2 2 0 01-2-2v-2a2 2 0 000-4z"/><path d="M14.5 6.5v11" stroke-dasharray="2 2"/></svg><span>Ticket ≠ entry</span></span></span>
+      <span class="more"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg><span>Details and route</span></span>
+    </summary>
+    <div class="body">
+      <div class="chips"><span class="chip"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 8h3l2-2h6l2 2h3v11H4z"/><circle cx="12" cy="13.2" r="3"/><path d="M3.5 3.5l17 17"/></svg><span>No photos</span></span><span class="chip"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="7" y="2.5" width="10" height="19" rx="2"/><path d="M11 18h2"/></svg><span>NFC phone for lockers</span></span></div>
+      <p>Techno in the old power station. Tickets on Resident Advisor or at the Kasse. Tresor says plainly that a ticket does not guarantee entry.</p>
+      <div class="mini"><a href="https://www.google.com/maps/dir/?api=1&origin=Am+Wriezener+Bahnhof%2C+10243+Berlin&destination=K%C3%B6penicker+Stra%C3%9Fe+70%2C+10179+Berlin&travelmode=walking" target="_blank" rel="noopener">Walking route</a><a href="#locked">Door card</a></div>
+    </div>
+  </details>
+  <details class="opt foot">
+    <summary>
+      <span class="num">3</span>
+      <span class="who"><b>OHM</b><i>Köpenicker Straße 70</i></span>
+      <span class="time"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="13" cy="4.2" r="1.8"/><path d="M9 21l2.2-6.2L9 12l1.2-4.6 3.6 1.2 2.4 3 2.6.8M11.4 15l3.2 2.2.9 3.8M10.2 7.6L7 9.6l-.8 3"/></svg><b>27</b><i>min on foot</i></span>
+      <span class="chips"><span class="chip"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.2 2"/></svg><span>Check tonight</span></span><span class="chip np"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="8.5" cy="11" r="2"/><path d="M5.6 16c.7-1.7 5.1-1.7 5.8 0M14 10h4M14 14h4"/></svg><span>Bring ID + cash</span></span></span>
+      <span class="more"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg><span>Details and route</span></span>
+    </summary>
+    <div class="body">
+      <div class="chips"><span class="chip"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 21V4.5A1.5 1.5 0 017.5 3h9A1.5 1.5 0 0118 4.5V21M3.5 21h17"/><path d="M14.4 12.2v.01"/></svg><span>Same building as Tresor</span></span></div>
+      <p>A separate club in the same building as Tresor, with its own programme. OHM publishes no door rules on its site.</p>
+      <div class="mini"><a href="https://www.google.com/maps/dir/?api=1&origin=Am+Wriezener+Bahnhof%2C+10243+Berlin&destination=K%C3%B6penicker+Stra%C3%9Fe+70%2C+10179+Berlin&travelmode=walking" target="_blank" rel="noopener">Walking route</a><a href="#locked">Door card</a></div>
+    </div>
+  </details>
+  <details class="opt ride">
+    <summary>
+      <span class="num">4</span>
+      <span class="who"><b>Renate</b><i>Alt-Stralau 70</i></span>
+      <span class="time"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="3" width="14" height="14" rx="3"/><path d="M5 11h14M8 17l-2 4M16 17l2 4"/><circle cx="9" cy="14" r=".6"/><circle cx="15" cy="14" r=".6"/></svg><b>2</b><i>stops + 12 min walk</i></span>
+      <span class="chips"><span class="chip"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="3.6"/><path d="M4.8 20.5c1.2-5.4 13.2-5.4 14.4 0"/></svg><span>21+</span></span><span class="chip"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M3 10h18M7 15h3"/></svg><span>Card only</span></span></span>
+      <span class="more"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg><span>Details and route</span></span>
+    </summary>
+    <div class="body">
+      <div class="chips"><span class="chip"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="8.5" cy="11" r="2"/><path d="M5.6 16c.7-1.7 5.1-1.7 5.8 0M14 10h4M14 14h4"/></svg><span>Government ID</span></span><span class="chip"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17.5 6.5A6.5 6.5 0 007 12a6.5 6.5 0 0010.5 5.5M4.5 10.5h8M4.5 13.5h8"/></svg><span>About €20</span></span><span class="chip"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 8h3l2-2h6l2 2h3v11H4z"/><circle cx="12" cy="13.2" r="3"/><path d="M3.5 3.5l17 17"/></svg><span>No photos</span></span><span class="chip"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.2 2"/></svg><span>Thu to Sat 23:00–09:00</span></span></div>
+      <p>House, techno and disco. The club's own FAQ answers almost everything, which is rare. A Resident Advisor ticket is refunded if the door says no.</p>
+      <div class="mini"><a href="https://www.google.com/maps/dir/?api=1&origin=Am+Wriezener+Bahnhof%2C+10243+Berlin&destination=Alt-Stralau+70%2C+10245+Berlin&travelmode=transit" target="_blank" rel="noopener">Route</a><a href="#locked">Door card</a></div>
+    </div>
+  </details>
+  <details class="opt ride">
+    <summary>
+      <span class="num">5</span>
+      <span class="who"><b>Ritter Butzke</b><i>Ritterstraße 26</i></span>
+      <span class="time"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="3" width="14" height="14" rx="3"/><path d="M5 11h14M8 17l-2 4M16 17l2 4"/><circle cx="9" cy="14" r=".6"/><circle cx="15" cy="14" r=".6"/></svg><b>Ride</b><i>42 min on foot</i></span>
+      <span class="chips"><span class="chip"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="3.6"/><path d="M4.8 20.5c1.2-5.4 13.2-5.4 14.4 0"/></svg><span>18+</span></span><span class="chip"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.2 2"/></svg><span>Check tonight</span></span></span>
+      <span class="more"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg><span>Details and route</span></span>
+    </summary>
+    <div class="body">
+      <div class="chips"><span class="chip"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="8.5" cy="11" r="2"/><path d="M5.6 16c.7-1.7 5.1-1.7 5.8 0M14 10h4M14 14h4"/></svg><span>Photo ID</span></span><span class="chip"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8a2 2 0 012-2h14a2 2 0 012 2v2a2 2 0 000 4v2a2 2 0 01-2 2H5a2 2 0 01-2-2v-2a2 2 0 000-4z"/><path d="M14.5 6.5v11" stroke-dasharray="2 2"/></svg><span>One ticket, all floors</span></span></div>
+      <p>A Kreuzberg club with an online ticket shop and several floors.</p>
+      <div class="mini"><a href="https://www.google.com/maps/dir/?api=1&origin=Am+Wriezener+Bahnhof%2C+10243+Berlin&destination=Ritterstra%C3%9Fe+26%2C+10969+Berlin&travelmode=transit" target="_blank" rel="noopener">Route</a><a href="#locked">Door card</a></div>
+    </div>
+  </details>
+  <details class="opt ride">
+    <summary>
+      <span class="num">6</span>
+      <span class="who"><b>Sisyphos</b><i>Hauptstraße 15</i></span>
+      <span class="time"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="3" width="14" height="14" rx="3"/><path d="M5 11h14M8 17l-2 4M16 17l2 4"/><circle cx="9" cy="14" r=".6"/><circle cx="15" cy="14" r=".6"/></svg><b>3</b><i>stops + 18 min walk</i></span>
+      <span class="chips"><span class="chip"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="3.6"/><path d="M4.8 20.5c1.2-5.4 13.2-5.4 14.4 0"/></svg><span>21+</span></span><span class="chip"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 3L3 7l2 3 3-2v13h8V8l3 2 2-3-5-4c-1 2-7 2-8 0z"/></svg><span>No camouflage</span></span></span>
+      <span class="more"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg><span>Details and route</span></span>
+    </summary>
+    <div class="body">
+      <div class="chips"><span class="chip"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 3L3 7l2 3 3-2v13h8V8l3 2 2-3-5-4c-1 2-7 2-8 0z"/></svg><span>No football shirts</span></span><span class="chip"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 8h12l1 13H5zM9 8V6a3 3 0 016 0v2"/></svg><span>No big bags</span></span><span class="chip"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 8h3l2-2h6l2 2h3v11H4z"/><circle cx="12" cy="13.2" r="3"/><path d="M3.5 3.5l17 17"/></svg><span>No photos in the queue</span></span></div>
+      <p>A club in Rummelsburg with a published entry policy. The door can pause entry when the club is full. Check the programme before you ride out.</p>
+      <div class="mini"><a href="https://www.google.com/maps/dir/?api=1&origin=Am+Wriezener+Bahnhof%2C+10243+Berlin&destination=Hauptstra%C3%9Fe+15%2C+10317+Berlin&travelmode=transit" target="_blank" rel="noopener">Route</a><a href="#locked">Door card</a></div>
+    </div>
+  </details>
+
+  <h2 id="again-bgh"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 14A8 8 0 0110 4a8 8 0 1010 10z"/></svg> Try again another night</h2>
+  <div class="duo">
+    <div class="fact"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8a2 2 0 012-2h14a2 2 0 012 2v2a2 2 0 000 4v2a2 2 0 01-2 2H5a2 2 0 01-2-2v-2a2 2 0 000-4z"/><path d="M14.5 6.5v11" stroke-dasharray="2 2"/></svg><div><b>Fri · €20</b><i>Panorama Bar nights from 22:00. Online price, €22 at the door.</i></div></div>
+    <div class="fact"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.2 2"/></svg><div><b>Sat · 23:59</b><i>Klubnacht, every Saturday on the programme.</i></div></div>
+  </div>
+  <h2 id="home-bgh"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11l9-8 9 8M5 10v10h14V10M10 20v-6h4v6"/></svg> Get home</h2>
+  <div class="duo">
+    <div class="fact"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="3" width="14" height="14" rx="3"/><path d="M5 11h14M8 17l-2 4M16 17l2 4"/><circle cx="9" cy="14" r=".6"/><circle cx="15" cy="14" r=".6"/></svg><div><b>Fri + Sat</b><i>Trains all night. S‑Bahn every 15 to 20&nbsp;min.</i></div></div>
+    <div class="fact"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="3.5" width="16" height="14" rx="2.4"/><path d="M4 11h16M4 7h16"/><circle cx="8" cy="19.2" r="1.5"/><circle cx="16" cy="19.2" r="1.5"/></svg><div><b>Sun to Thu</b><i>Night buses replace the U‑Bahn. Check the BVG app.</i></div></div>
+  </div>
+  <div class="strip" style="margin-top:8px">
+    <div class="end"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 21V4.5A1.5 1.5 0 017.5 3h9A1.5 1.5 0 0118 4.5V21M3.5 21h17"/><path d="M14.4 12.2v.01"/></svg> The door</div>
+    <div class="mid"><b>8 min</b><i>620&nbsp;m on foot</i></div>
+    <div class="end"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="3" width="14" height="14" rx="3"/><path d="M5 11h14M8 17l-2 4M16 17l2 4"/><circle cx="9" cy="14" r=".6"/><circle cx="15" cy="14" r=".6"/></svg> Ostbahnhof</div>
+  </div>
+  <div class="sos"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3.5l9.5 16.5h-19z"/><path d="M12 10v4.5M12 17.4v.01"/></svg><div><b>112</b> ambulance · <b>110</b> police<small>Stay with your friends. Nobody waits outside alone.</small></div></div>
+  <div class="foot">Walking minutes: OpenStreetMap routes. Checked on 24&nbsp;Nov&nbsp;2026.</div>
+  </div>
+</section>
+<section class="view" id="locked">
+  <a class="back" href="#home">← Back to the sample</a>
+  <div class="screen">
+  <div class="eyebrow">In the full plan</div>
+  <h1 class="h-home">This part is not in the free sample.</h1>
+  <p class="sub">The full plan is not on sale yet. <span>I am still photographing every door.</span></p>
+  <div class="facts" style="margin-top:16px">
+    <div class="fact"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 21V4.5A1.5 1.5 0 017.5 3h9A1.5 1.5 0 0118 4.5V21M3.5 21h17"/><path d="M14.4 12.2v.01"/></svg><div><b>7 door cards</b><i>One per club</i></div></div><div class="fact"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9 9l6 6M15 9l-6 6"/></svg><div><b>7 Plan Bs</b><i>From every door</i></div></div><div class="fact"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/></svg><div><b>All door rules</b><i>On one screen</i></div></div><div class="fact"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5.5h16v10.5h-8.5L7 20v-4H4z"/></svg><div><b>Door German</b><i>20 words</i></div></div>
+  </div>
+  <a class="btn primary" href="#d-bgh"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 21V4.5A1.5 1.5 0 017.5 3h9A1.5 1.5 0 0118 4.5V21M3.5 21h17"/><path d="M14.4 12.2v.01"/></svg> Open the Berghain card</a>
+  <div class="foot">Berlin Club Night Rescue Plan · walkofberlin.com</div>
+  </div>
+</section>
+</div>
+<script>
+(function(){function show(){var h=(location.hash||'#home').slice(1),t=document.getElementById(h),v=t&&t.closest('.view');
+if(!v){v=document.getElementById('home');t=null}
+document.querySelectorAll('.view').forEach(function(s){s.classList.toggle('on',s===v)});
+if(t&&t!==v){t.scrollIntoView()}else{window.scrollTo(0,0)}}
+window.addEventListener('hashchange',show);show()})();
+</script>
+</body>
+</html>

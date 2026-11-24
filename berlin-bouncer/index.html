@@ -624,7 +624,7 @@
         <button class="restart-btn share-btn" id="share-result-btn" type="button" onclick="shareResult()">CHALLENGE A FRIEND</button>
         <button class="restart-btn" type="button" onclick="replayGame()">TRY AGAIN</button>
       </div>
-      <a class="result-next-step" id="result-next-step" href="https://www.walkofberlin.com/book-berlin-walking-tour/berlin-then-and-now" onclick="trackResultTourClick()">My walking tour starts at Alexanderplatz and shows you where Berlin's old city stood, with an archive photo at every stop.</a>
+      <a class="result-next-step" id="result-next-step" target="_blank" rel="noopener" href="https://www.walkofberlin.com/book-berlin-walking-tour/berlin-then-and-now" onclick="trackResultNextStepClick()">My walking tour starts at Alexanderplatz and shows you where Berlin's old city stood, with an archive photo at every stop.</a>
     </div>
     <div class="share-toast" id="share-toast" role="status" aria-live="polite"></div>
   </main>
@@ -1103,6 +1103,28 @@
       } catch (error) {
         return `https://www.berlinwalk.com/games/berghain-bouncer?challenge=${encodeURIComponent(activeChallengeId || challengeIdFromUrl())}`;
       }
+    }
+
+    /* Club guide demand test (24 Nov 2026): the result link points to the free sample of the
+       Club Night Rescue Plan. Remove this block and the call in showResult to restore the tour link. */
+    const CLUB_GUIDE_SAMPLE_URL = 'https://fenerszymanski.github.io/berlinwalk-widgets/club-night-rescue-plan/';
+    let resultNextStepKind = 'tour';
+    function setClubGuideNextStep(isSuccess) {
+      const link = document.getElementById('result-next-step');
+      if (!link) return;
+      resultNextStepKind = isSuccess ? 'club_guide_passed' : 'club_guide_rejected';
+      link.href = CLUB_GUIDE_SAMPLE_URL + '?from=' + (isSuccess ? 'bouncer-passed' : 'bouncer-rejected');
+      link.textContent = isSuccess
+        ? 'The real doors are harder. My Club Night Rescue Plan covers seven of them, with a Plan B for each. Open the free sample.'
+        : 'Turned away? My Club Night Rescue Plan shows seven real Berlin doors and your next move when one says no. Open the free sample.';
+    }
+    function trackResultNextStepClick() {
+      if (resultNextStepKind === 'tour') return trackResultTourClick();
+      sendBouncerEvent('bw_berlin_bouncer_tour_cta_click', {
+        ctaName: resultNextStepKind,
+        targetPath: '/berlinwalk-widgets/club-night-rescue-plan/',
+        href: CLUB_GUIDE_SAMPLE_URL
+      });
     }
 
     function trackResultTourClick() {
@@ -1610,6 +1632,7 @@
       // Save endingKey globally for sharing
       window.currentEnding = endingKey;
 
+      setClubGuideNextStep(endingKey === 'success' || endingKey === 'vip');
       fetchGlobalStats(endingKey === 'success' || endingKey === 'vip', runCompletionReason);
       window.setTimeout(() => titleEl.focus({ preventScroll: true }), 0);
     }
