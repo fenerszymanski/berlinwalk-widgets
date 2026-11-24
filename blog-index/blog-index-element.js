@@ -2,7 +2,7 @@ const BW_BLOG_INDEX_BASE_URL = (() => {
   const script = document.currentScript;
   return script && script.src ? script.src : window.location.href;
 })();
-const BW_BLOG_INDEX_DATA_VERSION = '20261122-mitte-markets-lead';
+const BW_BLOG_INDEX_DATA_VERSION = '20261124-leipziger-platz-lead';
 const BW_BLOG_INDEX_DATA_URL = `${new URL('./index.json', BW_BLOG_INDEX_BASE_URL).href}?v=${BW_BLOG_INDEX_DATA_VERSION}`;
 const BW_BLOG_INDEX_ARCHIVE_URL = `${new URL('./archive.json', BW_BLOG_INDEX_BASE_URL).href}?v=${BW_BLOG_INDEX_DATA_VERSION}`;
 const BW_BLOG_INDEX_LEGACY_DATA_URL = `${new URL('./data.json', BW_BLOG_INDEX_BASE_URL).href}?v=${BW_BLOG_INDEX_DATA_VERSION}`;

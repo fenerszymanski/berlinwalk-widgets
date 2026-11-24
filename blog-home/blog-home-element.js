@@ -1,7 +1,7 @@
 const BW_BLOG_HOME_DATA_URL = (() => {
   const script = document.currentScript;
   const base = script && script.src ? script.src : window.location.href;
-  return new URL('./data.json?v=20261122-mitte-markets-lead', base).href;
+  return new URL('./data.json?v=20261124-leipziger-platz-lead', base).href;
 })();
 const BW_BLOG_HOME_FALLBACK = {
   "featured": {
