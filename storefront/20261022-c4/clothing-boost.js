@@ -46,8 +46,12 @@ export const PERSON_PHOTOS = Object.freeze({
  'gallery-e118ebe7a594dbc321856123.jpg':4,'gallery-e126b8ab75d9e18e4528164a.jpg':3,'gallery-e192ec6996bf383cdc4a0349.jpg':4,'gallery-ee9ba8dbf56158827c12690d.jpg':4,
  'gallery-eea8a15de3a3ecd1f70ee02f.jpg':4,'gallery-f1c6911458d37970957156f5.jpg':4,'gallery-f33a4fa615f3d7262aecb1e0.jpg':2,'gallery-f471013834209b8efb710b93.jpg':4,
  'gallery-f65cc3e16f4982b13e481ce1.jpg':4,'gallery-fa564aa3bfa503acc8bb120e.jpg':4,'gallery-fb23dcfb7c0702e5a3e9a505.jpg':4,'gallery-fb544115d348950a9ba1cbe6.jpg':4,
- 'gallery-fb7594c94be0555d75340335.jpg':2,'gallery-ff56041a62e2af206d2100ca.jpg':3,'gallery-ff9fb4fc4483f7ee0d146cb8.jpg':4,'tshirts-20261115/street-models/currywurst-natural.jpg':4,
- 'tshirts-20261115/street-models/marzahn-natural.jpg':4,'tshirts-20261115/street-models/spaeti-black.jpg':4,'tshirts-20261115/street-models/window-in-berlin-natural.jpg':4
+ 'gallery-fb7594c94be0555d75340335.jpg':2,'gallery-ff56041a62e2af206d2100ca.jpg':3,'gallery-ff9fb4fc4483f7ee0d146cb8.jpg':4,
+ // 24 Nov 2026: seven street-model photos were replaced by one photo per Gelato variant (commit 9269eec3), plus the Späti Classic Black photo of the same day.
+ // Haiku look of all eight: a person wears the shirt, the colour matches, no flaw; the print is readable on six, and on the two A Window in Berlin photos the
+ // building reads but the thin title does not, so those rank lower. All are 4:5 portrait.
+ 'gallery-c4e3c3fd11e548a5291bd36b-1250px-q76.jpg':4,'gallery-0e2abd148110a3946b19440d-1250px-q76.jpg':4,'gallery-59cdf79a1c5be62ead457b67-1250px-q76.jpg':4,'gallery-5d68c53327e23d660504d3cb-1250px-q76.jpg':4,
+ 'gallery-de7c5869c62cdacd984d11dc-1250px-q76.jpg':4,'gallery-d90cb0d95246568fe8776ba2-1250px-q76.jpg':4,'gallery-6ada493e7daf52e676280b45-1250px-q76.jpg':2,'gallery-0583cc1d4c9fca4d845dc711-1250px-q76.jpg':2
 });
 export function personFirst(media, color = media?.color) {
   const pool = (media?.gallery || []).filter(item => PERSON_PHOTOS[item?.image] && (!item.modelColor || item.modelColor === color));
