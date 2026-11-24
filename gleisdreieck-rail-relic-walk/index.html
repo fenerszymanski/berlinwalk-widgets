@@ -197,7 +197,10 @@
   STOPS.forEach(function (s, i) { run += (i === 0 ? 0 : (s.minutesFromPrev || 0)); elapsed[i] = run; });
   var walkMinutes = run;
 
-  var map = L.map('map', { scrollWheelZoom: false, zoomControl: true });
+  // Start on Gleisdreieck, never on the whole world: inside Wix the iframe can
+  // load at zero height, and a fitBounds measured then zooms out to the globe.
+  var map = L.map('map', { scrollWheelZoom: false, zoomControl: true, center: [52.4955, 13.3745], zoom: 15 });
+  var userMoved = false;
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 19, attribution: '&copy; OpenStreetMap contributors' }).addTo(map);
   var small = window.innerWidth < 600;
   var R = small ? 6 : 8, RH = small ? 9 : 11;
@@ -205,7 +208,14 @@
   L.polyline(line, { color: '#1B5E20', weight: 4, opacity: .85, dashArray: '7 7' }).addTo(map);
   var walked = L.polyline([], { color: '#FFE600', weight: 6, opacity: .95 }).addTo(map);
   var walker = L.circleMarker(line[0], { radius: 7, color: '#fff', weight: 3, fillColor: '#E63946', fillOpacity: 1 }).addTo(map);
-  map.fitBounds(L.latLngBounds(line).pad(0.12));
+  var routeBounds = L.latLngBounds(line).pad(0.12);
+  function fitRoute() {
+    var sz = map.getSize();
+    if (sz.x < 120 || sz.y < 120) return false;
+    map.fitBounds(routeBounds, { animate: false, maxZoom: 17 });
+    if (map.getZoom() < 13) map.setView([52.4955, 13.3745], 15, { animate: false });
+    return true;
+  }
 
   var dots = STOPS.map(function (s, i) {
     var m = L.circleMarker([s.lat, s.lon], { radius: R, color: '#1B5E20', weight: 3, fillColor: '#fff', fillOpacity: 1 }).addTo(map);
@@ -250,6 +260,7 @@
     document.getElementById('barFill').style.width = (walkMinutes ? (min / walkMinutes) * 100 : 0) + '%';
   });
 
+  var init = true;
   function go(i, fromSlider) {
     currentStep = Math.max(0, Math.min(STOPS.length - 1, i));
     var s = STOPS[currentStep];
@@ -279,7 +290,8 @@
       walker.setLatLng([s.lat, s.lon]);
       slider.value = String(elapsed[currentStep]);
     }
-    map.setView([s.lat, s.lon], Math.max(map.getZoom(), 16), { animate: true });
+    if (!init) userMoved = true;
+    map.setView([s.lat, s.lon], Math.max(map.getZoom() || 0, 16), { animate: !init });
     document.getElementById('prevBtn').disabled = currentStep === 0;
     document.getElementById('nextBtn').disabled = currentStep === STOPS.length - 1;
     if (typeof window.__bwRequestEmbedResize === "function") window.__bwRequestEmbedResize();
@@ -289,7 +301,22 @@
   document.getElementById('nextBtn').addEventListener('click', function () { go(currentStep + 1); });
   document.getElementById('foot').innerHTML = FOOT;
   go(0);
-  map.fitBounds(L.latLngBounds(line).pad(0.12), { animate: false });
+  init = false;
+  map.invalidateSize();
+  fitRoute();
+  // When the embed gets its real size, measure again; stop once the reader has moved the map.
+  map.getContainer().addEventListener('pointerdown', function () { userMoved = true; });
+  var lastW = 0, lastH = 0;
+  function remeasure() {
+    var el = map.getContainer(), w = el.clientWidth, h = el.clientHeight;
+    if (w === lastW && h === lastH) return;
+    lastW = w; lastH = h;
+    map.invalidateSize();
+    if (!userMoved) fitRoute();
+  }
+  if (typeof ResizeObserver !== 'undefined') new ResizeObserver(remeasure).observe(map.getContainer());
+  window.addEventListener('resize', remeasure);
+  document.addEventListener('visibilitychange', remeasure);
 })();
 </script>
 <script src="../js/brand.js"></script>
