@@ -12,10 +12,13 @@ export function easter(y){const a=y%19,b=Math.floor(y/100),c=y%100,d=Math.floor(
 export function holidays(y){const fixed=['01-01','01-06','03-08','05-01','08-08','08-15','09-20','10-03','10-31','11-01','12-24','12-25','12-26','12-31','05-03','05-08','10-28','07-05','07-06','09-28','11-11','11-17'];const set=new Set(fixed.map(x=>`${y}-${x}`));for(const offset of [-2,1,39,50,60]){const d=day(easter(y));d.setUTCDate(d.getUTCDate()+offset);set.add(iso(d));}const repent=day(`${y}-11-22`);while(repent.getUTCDay()!==3)repent.setUTCDate(repent.getUTCDate()-1);set.add(iso(repent));return set;}
 export const isBusinessDay=s=>![0,6].includes(day(s).getUTCDay())&&!holidays(Number(s.slice(0,4))).has(s);
 export function addBusinessDays(s,n){const d=day(s);while(n>0){d.setUTCDate(d.getUTCDate()+1);if(isBusinessDay(iso(d)))n--;}return iso(d);}
+// The 1979 print (ys1979, ys1979-framed, ys1979-canvas) is made by the same job as the 1928 print (scripts/ys1928-fulfil.mjs, same Posterflow rule),
+// so it takes the same routes and the same approval day. Yusuf, 24 Nov 2026: "Evet, düzelt".
+const STREET_POSTER=/^ys(?:1979)?$/,STREET_MOUNTED=/^ys(?:1979)?-(framed|canvas)$/;
 export function routeFor(product,selection={},config){
  if(selection.digital||product.nativeProductType==='digital'||product.categoryIds?.includes('digital')||/^dl-|^ed-digital-/.test(product.id))return null;
  if(product.group==='apparel'||product.id.startsWith('shirt-'))return 'gelato-tee';
- const personal=product.id==='ys'||product.group==='ys1928-mounted'||/^ys-(framed|canvas)$/.test(product.id);
+ const personal=STREET_POSTER.test(product.id)||['ys1928-mounted','ys1979-mounted'].includes(product.group)||STREET_MOUNTED.test(product.id);
  if(product.id==='dein-berlin-2027'||/calendar/i.test(product.typeLine||''))return 'gelato-calendar';
  if(personal){const format=selection.format||(/canvas/.test(product.id)?'canvas':/framed/.test(product.id)?'framed':'poster'),paper=selection.Paper||'Premium Matte',size=String(selection.Size||'30x40').replace(/\s|cm/g,'').replace('×','x');
   if(config.posterflowEnabled&&!selection.homes&&((format==='poster'&&['Classic Matte','Premium Matte','Premium Semi-Gloss','Classic Semi-Gloss'].includes(paper))||(format==='framed'&&size==='30x40'&&paper==='Premium Matte'&&['Black','White','Natural wood'].includes(selection.Frame||'Black'))))return format==='poster'?'posterflow-poster':'posterflow-frame';
@@ -32,7 +35,7 @@ export function estimate(product,selection,config,now=new Date()){
  const {date,hour}=berlinParts(now);if(date>config.validThrough)return {expired:true,route};
  const r=config.routes[route];if(r.validThrough&&date>r.validThrough)return {expired:true,route};let start=date;
  if(!isBusinessDay(start)){while(!isBusinessDay(start))start=addBusinessDays(start,1);}else if(hour>=config.cutoffHour)start=addBusinessDays(start,1);
- const personal=product.id==='ys'||/^ys-/.test(product.id)||product.id==='dein-berlin-2027';
+ const personal=STREET_POSTER.test(product.id)||/^ys(?:1979)?-/.test(product.id)||product.id==='dein-berlin-2027';
  const approval=personal?Math.max(1,r.approvalBusinessDays):r.approvalBusinessDays;
  const phase=r.productionShippingCalendarDays||r.productionShippingBusinessDays||r.productionBusinessDays.map((n,i)=>n+r.shippingBusinessDays[i]);
  // Quote calendar totals already contain production, weekends and origin holidays.
