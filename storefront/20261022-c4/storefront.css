@@ -839,6 +839,12 @@ button.ys-words-tag:focus-visible{outline:2px solid var(--green);outline-offset:
 .xg-post .xg-star{flex:0 0 22px;width:22px;height:22px;fill:var(--xg-red);margin-top:1px}
 .xg-post p{margin:0;font:400 15px/1.5 'Space Grotesk',Arial,sans-serif;color:#212121}
 .xg-post strong{font-weight:600;color:#123D18}
+.xg-post-copy{flex:1;min-width:0}
+.xg-dates{list-style:none;margin:8px 0;padding:0;display:flex;flex-wrap:wrap;gap:8px}
+.xg-dates li{font:400 14px/1.35 'Space Grotesk',Arial,sans-serif;color:#212121;background:#fff;border:1px solid #d8dfd2;border-radius:999px;padding:6px 12px}
+.xg-dates b{font-weight:600;color:var(--xg-red);margin-right:4px}
+.xg-offer{margin:14px 0 18px;padding:10px 14px;border-radius:8px;background:#111;color:#fff;font:400 14px/1.45 'Space Grotesk',Arial,sans-serif}
+.xg-offer strong{font-weight:600;color:#fff}
 .xg-shelf{padding-top:44px;scroll-margin-top:64px}
 .xg-head{display:flex;gap:14px;align-items:flex-start;border-top:3px solid var(--xg-pine);padding-top:18px;margin-bottom:18px;position:relative}
 .xg-festive .xg-head{border-image:repeating-linear-gradient(90deg,var(--xg-red) 0 18px,var(--xg-cream) 18px 22px,var(--xg-pine) 22px 40px,var(--xg-cream) 40px 44px) 1}
@@ -847,11 +853,12 @@ button.ys-words-tag:focus-visible{outline:2px solid var(--green);outline-offset:
 .xg-head h2{margin:0 0 4px;font-family:'DM Serif Display',Georgia,serif;font-weight:400;font-size:clamp(26px,3.4vw,36px);line-height:1.1;color:#123D18}
 .xg-head p{margin:0;font:400 15px/1.5 'Space Grotesk',Arial,sans-serif;color:#42523d;max-width:620px}
 .xg-more{align-self:center;white-space:nowrap;font:600 14px/1.2 'Space Grotesk',Arial,sans-serif;color:#123D18;text-decoration:underline;text-underline-offset:3px}
-@media(max-width:740px){.xg-hero-inner{grid-template-columns:1fr;padding-top:32px;padding-bottom:44px;gap:8px}.xg-gift{position:absolute;top:10px;right:12px;width:70px;height:56px;overflow:visible}.xg-box{width:70px;background:none;box-shadow:none;transform:rotate(8deg)}.xg-box::before,.xg-ribbon-v,.xg-ribbon-h{display:none}.xg-bow{top:0;width:70px}.xg-hero-copy>p{font-size:16px}.xg-post{margin-top:-18px;padding:12px 14px}.xg-post p{font-size:14px}.xg-shelf{padding-top:34px}.xg-head{flex-wrap:wrap}.xg-more{flex-basis:100%;padding-left:52px}.xg-orn{flex-basis:34px;width:34px;height:34px;padding:7px}}
+@media(max-width:740px){.xg-hero-inner{grid-template-columns:1fr;padding-top:32px;padding-bottom:44px;gap:8px}.xg-dates{display:grid;grid-template-columns:1fr 1fr;gap:4px 12px;margin:6px 0}.xg-dates li{border:0;border-radius:0;background:none;padding:0;font-size:13px}.xg-dates b{display:block;margin:0}.xg-post .xg-mail{display:none}.xg-offer{font-size:13px}.xg-gift{position:absolute;top:10px;right:12px;width:70px;height:56px;overflow:visible}.xg-box{width:70px;background:none;box-shadow:none;transform:rotate(8deg)}.xg-box::before,.xg-ribbon-v,.xg-ribbon-h{display:none}.xg-bow{top:0;width:70px}.xg-hero-copy>p{font-size:16px}.xg-post{margin-top:-18px;padding:12px 14px}.xg-post p{font-size:14px}.xg-shelf{padding-top:34px}.xg-head{flex-wrap:wrap}.xg-more{flex-basis:100%;padding-left:52px}.xg-orn{flex-basis:34px;width:34px;height:34px;padding:7px}}
 :host([design2]) .xg-shelf[data-xg-section="wear"] .d2-card .tile{aspect-ratio:1/1;background:#fff;padding:0}
-:host([design2]) .xg-shelf[data-xg-section="wear"] .d2-card img.tile-photo{object-fit:contain;width:100%;height:100%;padding:0}
+:host([design2]) .xg-shelf[data-xg-section="wear"] .d2-card img.tile-photo{object-fit:contain;width:100%;height:100%;padding:0;inset:0}
 :host([design2]) .xg-shelf[data-xg-section="email"] .d2-card .tile{aspect-ratio:3/4}
 :host([design2]) .xg-shelf[data-xg-section="email"] .d2-card img.tile-photo{object-fit:cover;width:100%;height:100%}
+:host([design2]) .xg-shelf[data-xg-section="email"] .d2-card[data-product$="-digital-file"] img.tile-photo{object-fit:contain;inset:14px;width:calc(100% - 28px);height:calc(100% - 28px)}
 .xg-festive .xg-snow{-webkit-mask-image:linear-gradient(90deg,rgba(0,0,0,.25) 0,rgba(0,0,0,.25) 45%,#000 75%);mask-image:linear-gradient(90deg,rgba(0,0,0,.25) 0,rgba(0,0,0,.25) 45%,#000 75%)}
 @media(max-width:740px){.xg-festive .xg-snow{opacity:.6;-webkit-mask-image:linear-gradient(180deg,#000 0,rgba(0,0,0,.2) 30%,rgba(0,0,0,.2) 85%,#000 100%);mask-image:linear-gradient(180deg,#000 0,rgba(0,0,0,.2) 30%,rgba(0,0,0,.2) 85%,#000 100%)}}
 /* iPhone Safari (WebKit) did not resolve the % max-height of a flex child inside the aspect-ratio stage: the photo grew to

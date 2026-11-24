@@ -55,25 +55,47 @@ export function install(Store,{asset,esc,STORE_LOGO,money,editionHref,isDigital,
  // Christmas gift guide (Yusuf, 17 Nov 2026: "şu sayfayı elden geçirelim, şu an çok kısıtlı kaldı ... gifty ve christmasy look"):
 // the two gift landings draw four themed shelves instead of one grid (d2giftGuide). Kept here, not in js/store-navigation.js, which may only grow at its end.
 const GIFT_GUIDE_SECTIONS = Object.freeze([
-  {id:'personal',ids:['ys','ys-framed','dein-berlin-2027','np-birthday'],voucher:true,
+  {id:'personal',ids:['ys','ys-framed','ys-canvas','dein-berlin-2027','ys1979','ys1979-framed','np-birthday','np-big-day'],voucher:true,
    en:{title:'Their own Berlin',text:'Made from their address, their places or their big day.'},
    de:{title:'Ihr eigenes Berlin',text:'Aus ihrer Adresse, ihren Orten oder ihrem großen Tag gemacht.'}},
-  {id:'wear',ids:['hoodie-tempelhof-sf500','shirt-tempelhof-classic','hoodie-teufelsberg-sf500','shirt-teufelsberg-classic','hoodie-berlin-uhr-sf500','shirt-berlin-uhr-classic','hoodie-spaeti-sf500','shirt-spaeti-classic'],more:'clothing',
-   en:{title:'Wear Berlin',text:'My Berlin designs on T-shirts and fleece hoodies. Free shipping to Germany, the EU, the UK and the US.',more:'All clothing'},
-   de:{title:'Berlin zum Anziehen',text:'Meine Berliner Motive auf T-Shirts und Fleece-Hoodies. Kostenloser Versand nach Deutschland, in die EU, nach Großbritannien und in die USA.',more:'Alle Kleidung'}},
-  {id:'wall',ids:['tv','wc','pr-berolina-modernist','ed-print-01-tempelhof','ed-print-09-teufelsberg','pr-siegessaeule','pr-gleisdreieck','pr-berlin-2027-wall-calendar'],more:'print',
+  {id:'wear',offer:true,ids:['hoodie-tempelhof-sf500','shirt-berlin-in-pink-classic','hoodie-schoenhauser-allee-sf500','shirt-currywurst-classic','hoodie-spaeti-sf500','tote-berlin-in-pink','hoodie-berlin-uhr-sf500','tote-zurueckbleiben-bitte'],more:'clothing',
+   en:{title:'Wear Berlin',text:'My Berlin designs on T-shirts, fleece hoodies and tote bags. Free shipping to Germany, the EU, the UK and the US.',more:'All clothing'},
+   de:{title:'Berlin zum Anziehen',text:'Meine Berliner Motive auf T-Shirts, Fleece-Hoodies und Stoffbeuteln. Kostenloser Versand nach Deutschland, in die EU, nach Großbritannien und in die USA.',more:'Alle Kleidung'}},
+  {id:'wall',offer:true,ids:['pr-berlin-2027-wall-calendar','ed-print-02-pink','ed-print-01-tempelhof','ed-print-09-teufelsberg','ed-print-04-spaeti','pr-kottbusser-tor','wc','pr-berolina-modernist'],more:'print',
    en:{title:'For their wall',text:'Posters of places they know, printed to order. Frames not included.',more:'All posters'},
    de:{title:'Für ihre Wand',text:'Poster von Orten, die sie kennen, auf Bestellung gedruckt. Ohne Rahmen.',more:'Alle Poster'}},
-  {id:'email',ids:['au-christmas-mitte','trio','dl-berlin-landmarks-set-of-5','dl-berlin-icons-set-of-3'],chip:{de:'Per E-Mail'},
-   en:{title:'Last-minute, by email',text:'These arrive by email, so they still work on Christmas Eve. The audio walks are in English.'},
-   de:{title:'Last Minute per E-Mail',text:'Diese Geschenke kommen per E-Mail und klappen deshalb auch noch an Heiligabend. Die Audio-Spaziergänge sind auf Englisch.'}}
+  {id:'email',ids:['ys-digital-file','ys1979-digital-file','au-christmas-mitte','trio'],chip:{de:'Per E-Mail'},
+   en:{title:'Last-minute, by email',text:'These arrive by email, so there is no post to wait for. A street file reaches you within 24 hours, so order it by 23 December. The audio walks are in English.'},
+   de:{title:'Last Minute per E-Mail',text:'Diese Geschenke kommen per E-Mail, ganz ohne Postweg. Eine Straßen-Datei kommt innerhalb von 24 Stunden, bestelle sie also bis zum 23. Dezember. Die Audio-Spaziergänge sind auf Englisch.'}}
 ]);
+// Gift guide refresh (24 Nov 2026, Yusuf: "gifts sayfası güncel mi baksana ... Evet, hazırla"): the 1979 family, the tote bags and the two digital street
+// files join the shelves, the clothing and poster shelves follow the last 30 days of product page views, and the one "16 December" line becomes
+// dated steps that drop out by themselves. Sources of the dates: the product pages' own Christmas lines (framed and canvas 8 Dec, calendar 10 Dec)
+// and delivery-engine.mjs with data/delivery-routes.json as of 24 Nov, latest arrival 23 Dec (clothing and tote bags 12 Dec, 1928 print 15 Dec,
+// posters 16 Dec; the shared step uses the earlier 15 Dec). Each `until` is the first instant after that day in Berlin.
+// The digital street files have no row in presentation.json (their page is the print's page in its digital format), so each card borrows its
+// print's picture and takes its id and price from the catalogue row with that page address (the 1979 ids may live only in storefront-element.js,
+// ys1979.test.mjs). No row, or a hidden one, and the card is left out.
+const XG_FILES = Object.freeze({
+  'ys-digital-file':{from:'ys',slug:'your-berlin-street-in-1928-digital-file',
+   en:{name:'Your Berlin Street in 1928, Digital File',place:'By email within 24 hours',type:'DIGITAL FILE · JPG + PDF'},
+   de:{name:'Deine Berliner Straße um 1928, digitale Datei',place:'Per E-Mail innerhalb von 24 Stunden',type:'DIGITALE DATEI · JPG + PDF'}},
+  'ys1979-digital-file':{from:'ys1979',slug:'your-west-berlin-street-in-1979-digital-file',
+   en:{name:'Your West Berlin Street in 1979, Digital File',place:'By email within 24 hours',type:'DIGITAL FILE · JPG + PDF'},
+   de:{name:'Deine West-Berliner Straße 1979, digitale Datei',place:'Per E-Mail innerhalb von 24 Stunden',type:'DIGITALE DATEI · JPG + PDF'}}
+});
 const GIFT_GUIDE = Object.freeze({
-  en:{kicker:'Christmas gifts',title:'Berlin gifts for Christmas',text:'I picked these for people and their places in the city: their street in 1928, a hoodie with their corner of Berlin, a poster for the wall or an audio walk for the holidays.',jump:'Jump to',
-      post:'Most printed gifts: order by 16 December for delivery in Germany before Christmas. Each product page shows its own date.',email:'Digital gifts and vouchers arrive by email.',late:'Too late for the post? Digital gifts and vouchers still arrive by email.'},
-  de:{kicker:'Weihnachtsgeschenke',title:'Berlin-Geschenke zu Weihnachten',text:'Ich habe sie für Menschen und ihre Orte in der Stadt ausgesucht: ihre Straße im Luftbild von 1928, ein Hoodie mit ihrer Ecke von Berlin, ein Poster für die Wand oder ein Audio-Spaziergang für die Feiertage.',jump:'Direkt zu',
-      post:'Die meisten gedruckten Geschenke: bis 16. Dezember bestellen, damit sie vor Weihnachten in Deutschland ankommen. Jede Produktseite zeigt ihr eigenes Datum.',email:'Digitale Geschenke und Gutscheine kommen per E-Mail.',late:'Zu spät für die Post? Digitale Geschenke und Gutscheine kommen trotzdem per E-Mail.'},
-  postUntil:'2026-12-17T00:00:00+01:00',festiveUntil:'2026-12-27T00:00:00+01:00',sections:GIFT_GUIDE_SECTIONS
+  en:{kicker:'Christmas gifts',title:'Berlin gifts for Christmas',text:'I picked these for people and their places in the city: their street in 1928 or 1979, a hoodie or tote bag with their corner of Berlin, a poster for the wall or an audio walk for the holidays.',jump:'Jump to',
+      by:'Christmas delivery in Germany: order by',abroad:'Outside Germany, order earlier.',own:'Each product page shows its own date.',email:'Digital gifts and vouchers arrive by email.',late:'Too late for the post? Digital gifts and vouchers still arrive by email.'},
+  de:{kicker:'Weihnachtsgeschenke',title:'Berlin-Geschenke zu Weihnachten',text:'Ich habe sie für Menschen und ihre Orte in der Stadt ausgesucht: ihre Straße im Luftbild von 1928 oder 1979, ein Hoodie oder Stoffbeutel mit ihrer Ecke von Berlin, ein Poster für die Wand oder ein Audio-Spaziergang für die Feiertage.',jump:'Direkt zu',
+      by:'Lieferung vor Weihnachten in Deutschland: bestellen bis',abroad:'Ins Ausland bitte früher bestellen.',own:'Jede Produktseite zeigt ihr eigenes Datum.',email:'Digitale Geschenke und Gutscheine kommen per E-Mail.',late:'Zu spät für die Post? Digitale Geschenke und Gutscheine kommen trotzdem per E-Mail.'},
+  deadlines:Object.freeze([
+    {until:'2026-12-09T00:00:00+01:00',en:['8 December','framed and canvas prints'],de:['8. Dezember','gerahmte Drucke, Leinwände']},
+    {until:'2026-12-11T00:00:00+01:00',en:['10 December','2027 calendars'],de:['10. Dezember','Kalender für 2027']},
+    {until:'2026-12-13T00:00:00+01:00',en:['12 December','clothing and tote bags'],de:['12. Dezember','Kleidung und Stoffbeutel']},
+    {until:'2026-12-16T00:00:00+01:00',en:['15 December','posters and street prints'],de:['15. Dezember','Poster und Straßen-Drucke']}
+  ]),
+  festiveUntil:'2026-12-27T00:00:00+01:00',sections:GIFT_GUIDE_SECTIONS
 });
 const XG_SLUGS=['berlin-christmas-gifts','berlin-geschenke'];
 // Christmas gift guide (17 Nov 2026): themed shelves, a dated post line and festive styling for the two gift landings.
@@ -83,17 +105,20 @@ const XG_ORN={personal:'M12 3h0a2 2 0 0 1 2 2v1h-4V5a2 2 0 0 1 2-2zm-7 7a7 7 0 1
 // Jump chips live in the shadow root; a capture listener on the document scrolls to the shelf before Wix's router sees the hash link.
 if(!window.__xgJump){window.__xgJump=true;document.addEventListener('click',event=>{const path=event.composedPath?.()||[];const a=path.find(n=>n?.dataset?.xgJump);if(!a)return;const root=a.getRootNode?.();const target=root?.getElementById?.('xg-'+a.dataset.xgJump);if(!target)return;event.preventDefault();event.stopPropagation();target.scrollIntoView({block:'start',behavior:window.matchMedia?.('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'});},true);}
 P.d2giftGuide=function(page,model,skeleton){
- const de=page.lang==='de',g=GIFT_GUIDE,t=g[de?'de':'en'],now=Date.now(),festive=now<Date.parse(g.festiveUntil),post=now<Date.parse(g.postUntil);
+ const de=page.lang==='de',lang=de?'de':'en',g=GIFT_GUIDE,t=g[lang],now=Date.now(),festive=now<Date.parse(g.festiveUntil),dates=g.deadlines.filter(d=>now<Date.parse(d.until));
  const render=p=>skeleton||this.d2Loading?this.skeletonCard(p):this.card(p);
- const find=id=>model.products.find(p=>p.wixProductId===id||p.id===id);
+ const listed=id=>model.products.find(p=>p.wixProductId===id||p.id===id);
+ const find=id=>{const file=XG_FILES[id];if(!file)return listed(id);const print=listed(file.from),native=(this.catalogue?.products||this.snapshotRows()||[]).find(row=>String(row.productPageUrl||'').split(/[?#]/)[0].endsWith('/product-page/'+file.slug)),price=native?.discountedPrice??native?.price;if(!print||!native||native.visible===false||native.inStock===false||!Number.isFinite(price)||price<=0)return null;const l=file[lang];return {...print,id,wixProductId:native.productId,productUrl:'https://www.walkofberlin.com/product-page/'+file.slug,name:l.name,place:l.place,typeLine:l.type,priceCents:Math.round(price*100),requiresOptions:false,priceFrom:false,group:undefined,gallery:undefined};};
  const item=(product,section)=>{const o={...product,...page.cards?.[product.id]};try{const u=new URL(o.productUrl);u.searchParams.set('utm_source','store');u.searchParams.set('utm_campaign','xmas-gifts-202611');u.searchParams.set('utm_content','gifts-'+section+'-'+(de?'de':'en'));o.productUrl=u.href;}catch{}return {...o,cardSummary:this.layer.cardSummary(o.cardSummary||o.description),imageFit:section==='wear'?'cover':(o.imageFit||'contain')};};
  let voucher='';
  if(page.voucher){try{voucher=this.gift?.giftCardHtml?.(this.giftOffersAll(),page.voucher,{assetUrl:asset,printUrl:this.navigation.STORE_PERSONALISED_PRODUCT,redirecting:this.cartRedirect==='gift'})||'';if(skeleton)voucher=voucher.replace(/data-action="gift-add"/g,'data-action="preview-wait" aria-disabled="true" aria-busy="true"');}catch{voucher='';}}
+ const offer=blackWeekActive(now)?BLACK_WEEK.copy[lang]:null;
+ const offerLine=offer?`<p class="xg-offer bw-raw" data-xg-offer><strong>${esc(offer.name)} ${esc(offer.until)}:</strong> ${esc(offer.title)} ${esc(offer.line)}</p>`:'';
  const more=s=>s.more==='clothing'?this.navigation.clothingHref():s.more==='print'?this.navigation.storeHref('print'):'';
  const sections=g.sections.map(s=>{const rows=s.ids.map(find).filter(Boolean);const cards=(s.id==='wear'?designCards(rows,model.products):rows).map(p=>render(item(p,s.id)));if(s.voucher&&voucher)cards.push(voucher);if(!cards.length)return '';const st=s[de?'de':'en'],href=more(s);
-  return `<section class="wrap xg-shelf" id="xg-${s.id}" data-xg-section="${s.id}"><div class="xg-head"><svg class="xg-orn" viewBox="0 0 24 24" aria-hidden="true"><path d="${XG_ORN[s.id]||XG_ORN.personal}"/></svg><div><h2 class="bw-raw">${esc(st.title)}</h2><p class="bw-raw">${esc(st.text)}</p></div>${href?`<a class="xg-more bw-raw" href="${esc(href)}">${esc(st.more)} →</a>`:''}</div><div class="grid category-grid d2-grid${s.voucher?' d2-gifts-grid':''}">${cards.join('')}</div></section>`;}).join('');
+  return `<section class="wrap xg-shelf" id="xg-${s.id}" data-xg-section="${s.id}"><div class="xg-head"><svg class="xg-orn" viewBox="0 0 24 24" aria-hidden="true"><path d="${XG_ORN[s.id]||XG_ORN.personal}"/></svg><div><h2 class="bw-raw">${esc(st.title)}</h2><p class="bw-raw">${esc(st.text)}</p></div>${href?`<a class="xg-more bw-raw" href="${esc(href)}">${esc(st.more)} →</a>`:''}</div>${s.offer?offerLine:''}<div class="grid category-grid d2-grid${s.voucher?' d2-gifts-grid':''}">${cards.join('')}</div></section>`;}).join('');
  const jump=g.sections.filter(s=>s.ids.some(find)).map(s=>`<a href="#xg-${s.id}" data-xg-jump="${s.id}">${esc((de&&s.chip?.de)||s[de?'de':'en'].title)}</a>`).join('');
- const strip=festive?`<div class="wrap xg-post bw-raw" role="note">${XG_STAR}<p><strong>${esc(post?t.post:t.late)}</strong>${post?` <span>${esc(t.email)}</span>`:''}</p></div>`:'';
+ const strip=festive?`<div class="wrap xg-post bw-raw" role="note">${XG_STAR}<div class="xg-post-copy">${dates.length?`<p><strong>${esc(t.by)}</strong></p><ul class="xg-dates">${dates.map(d=>`<li><b>${esc(d[lang][0])}</b> ${esc(d[lang][1])}</li>`).join('')}</ul><p><span>${esc(t.abroad)}</span> <span class="xg-mail">${esc(t.own)} ${esc(t.email)}</span></p>`:`<p><strong>${esc(t.late)}</strong></p>`}</div></div>`:'';
  return `<div class="xg${festive?' xg-festive':''}" lang="${de?'de':'en'}"><section class="xg-hero"><div class="xg-snow" aria-hidden="true"></div><div class="wrap xg-hero-inner"><div class="xg-hero-copy"><span class="xg-kicker bw-raw">${XG_STAR}${esc(t.kicker)}</span><h1 class="lead bw-raw">${esc(t.title)}</h1><p class="bw-raw">${esc(t.text)}</p><nav class="xg-jump bw-raw" aria-label="${esc(t.jump)}">${jump}</nav></div><div class="xg-gift" aria-hidden="true"><div class="xg-box"><span class="xg-ribbon-v"></span><span class="xg-ribbon-h"></span>${XG_BOW}</div></div></div></section>${strip}${sections}${this.credits?this.credits():''}</div>`;
 };
 P.xgGuide=function(){return this.landing?.voucher&&XG_SLUGS.includes(this.skeletonRoute?.().categorySlug)?GIFT_GUIDE:null;};
