@@ -507,6 +507,27 @@
         "order": 22
       },
       "detailLabel": "Product details"
+    },
+    {
+      "id": "tote-bags",
+      "label": "Berlin Tote Bags",
+      "order": 30,
+      "match": {
+        "productKeys": [
+          "92b79915-b3df-422e-a13e-3015382861dd",
+          "cdd7fbf3-2b1d-41de-84b3-d37beee82787"
+        ]
+      },
+      "description": "Berlin designs on heavy cotton tote bags, printed front and back. Made to order.",
+      "filters": [],
+      "shelf": {
+        "previewLimit": 2,
+        "featureBelowCount": 3,
+        "moreLabel": "All tote bags",
+        "imageFit": "contain",
+        "order": 23
+      },
+      "detailLabel": "Tote bag details"
     }
   ],
   "fulfilments": [

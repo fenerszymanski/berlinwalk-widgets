@@ -8211,6 +8211,122 @@
     "descriptionOverride": true
   },
   {
+    "id": "tote-berlin-in-pink",
+    "name": "Berlin in Pink Premium Tote Bag",
+    "place": "Berlin utility pipes",
+    "typeLine": "PREMIUM COTTON TOTE BAG · PRINTED FRONT AND BACK",
+    "group": "apparel",
+    "apparelKind": "tote",
+    "deliveryNote": "Made to order. Free shipping to Germany, the EU, the UK and the US.",
+    "deliveryDetails": "I have this tote bag made to order by Gelato. Free shipping to Germany, the EU, the UK and the US.",
+    "gallery": [],
+    "enabled": true,
+    "descriptionOverride": true,
+    "image": "tote-bags-20261124/berlin-in-pink-premium-tote-bag--natural.jpg",
+    "alt": "Berlin in Pink Premium Tote Bag in Natural, actual Gelato product preview",
+    "wixProductId": "92b79915-b3df-422e-a13e-3015382861dd",
+    "cardSummary": "Berlin’s pink pipes over Altbau houses, printed large on a heavy natural cotton tote.",
+    "apparelMedia": {
+      "version": 1,
+      "defaultColor": "Natural",
+      "sharedGallery": [],
+      "colors": {
+        "Natural": {
+          "lead": {
+            "kind": "garmentPreview",
+            "image": "tote-bags-20261124/berlin-in-pink-premium-tote-bag--natural.jpg",
+            "sha256": "068c15536d3a322a590d35ede0ac32c62f0f4f57da2aaa1e314015845ea4b709",
+            "alt": "Berlin in Pink Premium Tote Bag in Natural, actual Gelato product preview"
+          },
+          "gallery": [
+            {
+              "kind": "designDetail",
+              "image": "tote-bags-20261124/berlin-in-pink-premium-tote-bag-front-detail.jpg",
+              "sha256": "851928002b8b8a41219f7deb1aaa56698f1fe6744cc730ede71c0bc64a9ce3d0",
+              "alt": "Close-up of the Berlin in Pink front print: pink pipes above Altbau houses, trees and a parked bike on natural cotton"
+            },
+            {
+              "kind": "designDetail",
+              "image": "tote-bags-20261124/tote-bag-back-wordmark-natural.jpg",
+              "sha256": "3b397b2fd15ecd52fea3ab27b4a8b4ca36b0e05283f1b1ae80edd2c1b3877a35",
+              "alt": "Back of the natural tote bag: small Walk of Berlin wordmark in dark ink"
+            }
+          ]
+        }
+      }
+    },
+    "description": "<p>Berlin’s pink pipes carry groundwater away from building sites and run above the streets for months. I set them over a row of Altbau houses, trees and a parked bike, printed large on the front of a heavy natural cotton tote. A small Walk of Berlin wordmark sits on the back.</p><p>Front print about 19 cm wide and 25 cm high.</p><p>Premium tote bag: 100% cotton, 310 to 400 g/m², 38 × 42 cm with 67 cm handles, about 10 litres. I have each bag made to order by Gelato.</p><p>Free shipping to Germany, the EU, the UK and the US. Made to order.</p><h3>Care</h3><p>Hand wash lukewarm. Do not iron directly on the print.</p>"
+  },
+  {
+    "id": "tote-zurueckbleiben-bitte",
+    "name": "Zurückbleiben bitte Premium Tote Bag",
+    "place": "U-Bahn platform",
+    "typeLine": "PREMIUM COTTON TOTE BAG · PRINTED FRONT AND BACK",
+    "group": "apparel",
+    "apparelKind": "tote",
+    "deliveryNote": "Made to order. Free shipping to Germany, the EU, the UK and the US.",
+    "deliveryDetails": "I have this tote bag made to order by Gelato. Free shipping to Germany, the EU, the UK and the US.",
+    "gallery": [],
+    "enabled": true,
+    "descriptionOverride": true,
+    "image": "tote-bags-20261124/zurueckbleiben-bitte-premium-tote-bag--natural.jpg",
+    "alt": "Zurückbleiben bitte Premium Tote Bag in Natural, actual Gelato product preview",
+    "wixProductId": "cdd7fbf3-2b1d-41de-84b3-d37beee82787",
+    "cardSummary": "The U-Bahn line before the doors close, on a heavy cotton tote in natural or black.",
+    "apparelMedia": {
+      "version": 1,
+      "defaultColor": "Natural",
+      "sharedGallery": [],
+      "colors": {
+        "Natural": {
+          "lead": {
+            "kind": "garmentPreview",
+            "image": "tote-bags-20261124/zurueckbleiben-bitte-premium-tote-bag--natural.jpg",
+            "sha256": "6a5c284bf06daf51d0b170dd587c54d4b17077c896a7216696ba2c5568e06036",
+            "alt": "Zurückbleiben bitte Premium Tote Bag in Natural, actual Gelato product preview"
+          },
+          "gallery": [
+            {
+              "kind": "designDetail",
+              "image": "tote-bags-20261124/zurueckbleiben-bitte-premium-tote-bag-front-detail-natural.jpg",
+              "sha256": "8d9feccbe221c6215473ff9230ac04ffac1fe08b38cc9717233722eb1d9be265",
+              "alt": "Close-up of the front print: Zurückbleiben bitte. in dark lettering on natural cotton"
+            },
+            {
+              "kind": "designDetail",
+              "image": "tote-bags-20261124/tote-bag-back-wordmark-natural.jpg",
+              "sha256": "3b397b2fd15ecd52fea3ab27b4a8b4ca36b0e05283f1b1ae80edd2c1b3877a35",
+              "alt": "Back of the natural tote bag: small Walk of Berlin wordmark in dark ink"
+            }
+          ]
+        },
+        "Black": {
+          "lead": {
+            "kind": "garmentPreview",
+            "image": "tote-bags-20261124/zurueckbleiben-bitte-premium-tote-bag--black.jpg",
+            "sha256": "d7ee0ee31e731909d7abac02d609694c1e44873618113a6c5e401a6360695ccc",
+            "alt": "Zurückbleiben bitte Premium Tote Bag in Black, actual Gelato product preview"
+          },
+          "gallery": [
+            {
+              "kind": "designDetail",
+              "image": "tote-bags-20261124/zurueckbleiben-bitte-premium-tote-bag-front-detail-black.jpg",
+              "sha256": "e5196d0c9f76a77d3f20470d6c0215296d403e3696f596a77b0bbd1a3762aa02",
+              "alt": "Close-up of the front print: Zurückbleiben bitte. in white lettering on black cotton"
+            },
+            {
+              "kind": "designDetail",
+              "image": "tote-bags-20261124/tote-bag-back-wordmark-black.jpg",
+              "sha256": "f779a23882b2189484329536c6e64381dc4114e281f7d064724d596c4c0c76ab",
+              "alt": "Back of the black tote bag: small Walk of Berlin wordmark in white ink"
+            }
+          ]
+        }
+      }
+    },
+    "description": "<p>‘Zurückbleiben bitte.’ is the line you hear on the U-Bahn platform just before the doors close. I set it on one line, the last word in bold italic, across the front of a heavy cotton tote. Choose a natural bag with dark lettering or a black bag with white lettering. A small Walk of Berlin wordmark sits on the back.</p><p>Front print about 22 cm wide.</p><p>Premium tote bag: 100% cotton, 310 to 400 g/m², 38 × 42 cm with 67 cm handles, about 10 litres. I have each bag made to order by Gelato.</p><p>Free shipping to Germany, the EU, the UK and the US. Made to order.</p><h3>Care</h3><p>Hand wash lukewarm. Do not iron directly on the print.</p>"
+  },
+  {
     "id": "dl-staaken-church",
     "name": "Staaken Church Printable Poster",
     "place": "Alt-Staaken · Winter light at the church",

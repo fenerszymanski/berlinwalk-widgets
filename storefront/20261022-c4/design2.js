@@ -3,7 +3,7 @@ import {qualityOf,designKey,displayName,designName,designCards,designRepresentat
 import {extrasEnabled,prepareExtras,installExtras} from './store-extras.js?v=xmas-gifts-20261117-v1';
 import {COLOR_SWATCHES,apparelCardColors,apparelCardSelection,apparelCardProduct,colorName} from './apparel-card-colors.js?v=berlin-bear-black-20261120-v1';
 import {DESIGN2_TEXT,translateDesign2} from './ys-de.js?v=west-berlin-menu-20261123-v1';
-import {matchesSearch,familyFor,recommendationRows,nativeRecommendationEligible} from './design2-catalog.js?v=hoodies-20261116-v1';
+import {matchesSearch,familyFor,recommendationRows,nativeRecommendationEligible} from './design2-catalog.js?v=premium-totes-20261124-v1';
 import {languageUrl,navigateLanguageLink} from './language-navigation.js?v=store-design2-fix4b-20261113-v1';
 import {installGalleryZoom} from './gallery-zoom.js?v=zoom-sort-20261117-v1';
 import {BLACK_WEEK,blackWeekActive,blackWeekEligibleRow} from './black-week.js?v=bw-hero-pair-20261124-v1';
@@ -190,7 +190,7 @@ P.landingView=function(){if(this.xgGuide()){const t=document.createElement('temp
   return `${style}<section class="wrap d2-personal"><h2 class="sr-only">${esc(this.d2text('Personal Berlin gifts'))}</h2><div class="d2-personal-grid${show1979?' d2-personal-three':''}">${cards}</div></section>`;
  };
  P.d2clothing=function(model){
-  const cards=designCards(model.products.filter(p=>p.group==='apparel'));
+  const cards=designCards(model.products.filter(p=>p.group==='apparel'&&p.apparelKind!=='tote'));
   const key=p=>p.id.split('-')[0]+'-'+garmentDesign(p);
   const preferred=HOME_APPAREL.map(id=>cards.find(p=>key(p)===id)).filter(Boolean);
   const candidates=[...preferred,...cards],used=new Set();
@@ -314,7 +314,8 @@ P.landingView=function(){if(this.xgGuide()){const t=document.createElement('temp
   if(product.group!=='apparel'||product.unavailable)return;
   const de=this.campaignGerman(),native=this.d2cardNative(product),eligible=blackWeekEligibleRow(native),buy=root.querySelector('.buy-box'),row=buy?.querySelector(':scope > .buy-row');
   if(eligible&&blackWeekActive()){const price=root.querySelector('.product-title .price'),line=offerLineHtml({de,esc});if(price&&line){price.insertAdjacentHTML('afterend',line);armBlackWeekEnd(this);}}
-  if(row)row.insertAdjacentHTML('beforebegin',`<p class="bw-unisex bw-raw" data-bw-unisex>${esc(this.d2text('Unisex fit. Size up for a looser look.'))}</p>`);
+  // Tote bags (24 Nov 2026): one size, colour only, so no fit line and no size guide.
+  if(row&&product.apparelKind!=='tote')row.insertAdjacentHTML('beforebegin',`<p class="bw-unisex bw-raw" data-bw-unisex>${esc(this.d2text('Unisex fit. Size up for a looser look.'))}</p>`);
   const guide=sizeGuideHtml({product,de,esc});if(guide&&row)row.insertAdjacentHTML('beforebegin',guide);
   if(eligible&&row){const picks=secondItemsHtml({de,esc,cards:this.d2secondItems(product)}),note=buy.querySelector(':scope > .delivery');if(picks){if(note)note.insertAdjacentHTML('afterend',picks);else row.insertAdjacentHTML('afterend',picks);armBlackWeekEnd(this);}}
  };

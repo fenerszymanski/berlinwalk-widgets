@@ -208,6 +208,11 @@ const BW_HEADER_STORE_DESIGN2_EN = [
         "href": "https://walkofberlin.com/product-page/berlin-2027-wall-calendar-a3"
       },
       {
+        "label": "Tote bags",
+        "de": "Stoffbeutel",
+        "href": "https://walkofberlin.com/category/berlin-tote-bags"
+      },
+      {
         "label": "Personal newspapers",
         "de": "Persönliche Zeitungen",
         "href": "https://walkofberlin.com/category/all-products?tab=newspapers"
@@ -349,6 +354,11 @@ const BW_HEADER_STORE_DESIGN2_DE = [
         "label": "Berlin Wandkalender 2027",
         "de": "Berlin Wandkalender 2027",
         "href": "https://walkofberlin.com/de/product-page/berlin-2027-wall-calendar-a3"
+      },
+      {
+        "label": "Stoffbeutel",
+        "de": "Stoffbeutel",
+        "href": "https://walkofberlin.com/de/category/berlin-tote-bags"
       },
       {
         "label": "Persönliche Zeitungen",
