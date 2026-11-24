@@ -13,8 +13,10 @@ let recommendations,translations,exploreImages,listingOrder=null;
 // Selections survive Wix replacing the loading element within the same document.
 const apparelSelections=new Map();
 const HOME_APPAREL=['shirt-berlin-in-pink','shirt-berlin-uhr','hoodie-tempelhof','hoodie-teufelsberg'];
-const listingOrderReady=fetch(new URL('data/listing-order.json?v=zoom-sort-20261117-v1',import.meta.url)).then(r=>r.ok?r.json():null).catch(()=>null).then(j=>{if(j&&Array.isArray(j.popular)&&j.created&&typeof j.created==='object')listingOrder=j;});
-export const prepare=Promise.all(['recommendations.json','de-store.json','explore-images.json'].map(file=>fetch(new URL('data/'+file+'?v='+(file==='explore-images.json'?'xmas-audio-20261116-v1':file==='de-store.json'?'twelve-districts-20261124-v1':'xmas-audio-20261116-v1'),import.meta.url)).then(r=>{if(!r.ok)throw Error('DESIGN2_DATA_UNAVAILABLE');return r.json();}))).then(([r,t,i])=>{recommendations=r;translations=t;exploreImages=i;}).then(()=>listingOrderReady).then(()=>extrasEnabled()?prepareExtras:undefined);
+// storefront-element.js asks for these files as soon as it runs; take that answer where there is one (each answer is used once).
+const earlyFetch=url=>{const store=globalThis.__bwStoreEarly,hit=store?.[url.href];if(hit){delete store[url.href];return hit.catch(()=>fetch(url));}return fetch(url);};
+const listingOrderReady=earlyFetch(new URL('data/listing-order.json?v=zoom-sort-20261117-v1',import.meta.url)).then(r=>r.ok?r.json():null).catch(()=>null).then(j=>{if(j&&Array.isArray(j.popular)&&j.created&&typeof j.created==='object')listingOrder=j;});
+export const prepare=Promise.all(['recommendations.json','de-store.json','explore-images.json'].map(file=>earlyFetch(new URL('data/'+file+'?v='+(file==='explore-images.json'?'xmas-audio-20261116-v1':file==='de-store.json'?'twelve-districts-20261124-v1':'xmas-audio-20261116-v1'),import.meta.url)).then(r=>{if(!r.ok)throw Error('DESIGN2_DATA_UNAVAILABLE');return r.json();}))).then(([r,t,i])=>{recommendations=r;translations=t;exploreImages=i;}).then(()=>listingOrderReady).then(()=>extrasEnabled()?prepareExtras:undefined);
 // The legacy page has two question groups. Keep every body and legal hook,
 // merge their accordions, and retain the contact sentence after the last item.
 export function mergeProductQuestions(root) {
