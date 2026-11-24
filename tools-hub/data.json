@@ -12073,6 +12073,38 @@
       "iconStatus": "live-wix-media",
       "cmsItemId": "32d41656-bf68-4ada-a06e-7c0884fa2d4a",
       "image": "https://static.wixstatic.com/media/5a08a3_453dd38a8df14cb3ac29d2f600b94cba~mv2.png"
+    },
+    {
+      "slug": "gleisdreieck-rail-relic-walk",
+      "title": "Gleisdreieck Rail Relic Walk",
+      "lead": "Walk Park am Gleisdreieck stop by stop on a real map: the two-level U-Bahn crossing, the train through a house, rail relics in the grass and the Candy Bomber, with what stood there and what to look for now.",
+      "category": "Maps",
+      "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/gleisdreieck-rail-relic-walk/",
+      "embedHeight": 980,
+      "hubCategory": "CultureLandmarks",
+      "type": "Map",
+      "priority": 3,
+      "tags": [
+        "gleisdreieck",
+        "u-bahn",
+        "park",
+        "railway",
+        "history",
+        "map",
+        "kreuzberg",
+        "schöneberg",
+        "technikmuseum"
+      ],
+      "aliases": [
+        "gleisdreieck",
+        "park am gleisdreieck",
+        "gleisdreieck walk",
+        "u-bahn through a house berlin",
+        "gleisdreieck station"
+      ],
+      "iconStatus": "live-wix-media",
+      "image": "https://static.wixstatic.com/media/5a08a3_bfb2889ee7fe4a09babde4da032590b8~mv2.png",
+      "cmsItemId": "03a47cef-464c-40dc-bfd1-d11f611a3df4"
     }
   ],
   "hubCategories": [

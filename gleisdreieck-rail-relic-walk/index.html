@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gleisdreieck Rail Relic Walk: Stop by Stop Through the Park on Old Rail Land</title>
+<meta name="description" content="Walk Park am Gleisdreieck stop by stop on a real map: the two-level U-Bahn crossing, the rail relics in the grass and the old railway buildings, with what stood there and what to look for today.">
+<link rel="stylesheet" href="../css/brand.css">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { overflow-x: hidden; }
+  body { font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #FFFFFF; color: #20241d; padding: 12px; }
+  .gw { border-radius: 16px; overflow: hidden; border: 1px solid #d8dfd0; background: #f4f6ef; }
+  .gw-head { padding: 18px 18px 10px; }
+  .gw-kick { display: inline-block; font-size: 10.5px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; color: #123D18; background: #FFE600; padding: 3px 8px; border-radius: 4px; }
+  .gw-head h1 { font-family: 'Merriweather', Georgia, serif; font-size: 21px; line-height: 1.3; margin-top: 9px; color: #1B5E20; }
+  .gw-head p { font-size: 13px; line-height: 1.6; color: #43493f; margin-top: 7px; max-width: 760px; }
+  .gw-body { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: 12px; padding: 0 12px 12px; align-items: start; }
+  .mapbox { background: #fff; border: 1px solid #dfe5d8; border-radius: 14px; padding: 8px; min-width: 0; }
+  #map { width: 100%; height: 640px; border-radius: 10px; background: #efeee6; }
+  #map .leaflet-tile-pane { filter: saturate(.35) brightness(1.06); }
+  .legend { display: flex; flex-wrap: wrap; gap: 6px 14px; font-size: 11px; color: #555c50; padding: 8px 4px 2px; line-height: 1.4; align-items: center; }
+  .legend i { display: inline-block; width: 12px; height: 12px; border-radius: 50%; vertical-align: middle; margin-right: 5px; }
+  .legend .l-done { background: #1B5E20; } .legend .l-next { background: #fff; border: 2px solid #1B5E20; } .legend .l-here { background: #FFE600; border: 2px solid #123D18; }
+  .legend .l-route { width: 18px; height: 0; border-radius: 0; border-top: 3px dashed #1B5E20; }
+  .panel { min-width: 0; display: flex; flex-direction: column; gap: 10px; }
+  .prog { background: #fff; border: 1px solid #dfe5d8; border-radius: 14px; padding: 12px 14px; }
+  .prog-top { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; font-size: 12px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; color: #123D18; }
+  .prog-top span:last-child { font-weight: 700; letter-spacing: 0; text-transform: none; color: #5b6356; }
+  .bar { height: 8px; border-radius: 6px; background: #e4e9dc; margin-top: 8px; overflow: hidden; }
+  .bar b { display: block; height: 100%; width: 0; background: #1B5E20; border-radius: 6px; transition: width .25s ease; }
+  .scrub { background: #fff; border: 1px solid #dfe5d8; border-radius: 14px; padding: 12px 14px; }
+  .scrub label { display: block; font-size: 11px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: #123D18; margin-bottom: 6px; }
+  .scrub input[type=range] { width: 100%; accent-color: #1B5E20; height: 28px; cursor: pointer; }
+  .scrub input[type=range]:focus-visible { outline: 3px solid #FFE600; outline-offset: 2px; }
+  .scrub .ends { display: flex; justify-content: space-between; font-size: 11px; color: #5b6356; margin-top: 2px; }
+  .card { background: #123D18; color: #fff; border-radius: 14px; padding: 16px 16px 14px; }
+  .card .num { display: inline-flex; align-items: center; justify-content: center; width: 30px; height: 30px; border-radius: 50%; background: #FFE600; color: #123D18; font-weight: 800; font-size: 14px; }
+  .card h2 { font-family: 'Merriweather', Georgia, serif; font-size: 18px; line-height: 1.35; margin-top: 9px; color: #fff; }
+  .card .lab { font-size: 10.5px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; color: #C5E1A5; margin-top: 12px; }
+  .card p { font-size: 13.5px; line-height: 1.6; margin-top: 3px; color: #eef3e8; }
+  .card .look { background: #FFE600; color: #123D18; border-radius: 10px; padding: 10px 12px; margin-top: 12px; font-size: 13.5px; line-height: 1.55; }
+  .card .look strong { display: block; font-size: 10.5px; letter-spacing: .12em; text-transform: uppercase; margin-bottom: 2px; }
+  .nav { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .nav button { font-family: inherit; font-size: 15px; font-weight: 800; min-height: 46px; border-radius: 12px; border: 2px solid #123D18; cursor: pointer; }
+  .nav .prev { background: #fff; color: #123D18; }
+  .nav .next { background: #FFE600; color: #123D18; }
+  .nav button:disabled { opacity: .45; cursor: default; }
+  .nav button:focus-visible, .stops button:focus-visible { outline: 3px solid #FFE600; outline-offset: 2px; }
+  .stops { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 6px; }
+  .stops button { font-family: inherit; width: 100%; height: 40px; border-radius: 20px; border: 2px solid #1B5E20; background: #fff; color: #123D18; font-weight: 800; font-size: 13px; cursor: pointer; }
+  .stops button.done { background: #1B5E20; color: #FFE600; }
+  .stops button[aria-current="step"] { background: #FFE600; color: #123D18; border-color: #123D18; }
+  .foot { font-size: 11px; color: #6a7264; padding: 0 18px 14px; line-height: 1.5; }
+  .foot a { color: #1B5E20; }
+  @media (max-width: 720px) {
+    .gw-body { grid-template-columns: minmax(0, 1fr); }
+    #map { height: 300px; }
+    .gw-head h1 { font-size: 19px; }
+    .card h2 { font-size: 17px; }
+  }
+</style>
+</head>
+<body>
+<div class="gw" id="gw">
+  <div class="gw-head">
+    <span class="gw-kick">Gleisdreieck walk</span>
+    <h1>Walk the old rail land stop by stop</h1>
+    <p>Drag the slider along the walk or go from stop to stop with Next. The map moves with you, the card tells you what stood here when this was one of the biggest rail yards in Berlin, and the yellow box tells you exactly what to look for now.</p>
+  </div>
+  <div class="gw-body">
+    <div class="mapbox">
+      <div id="map" role="region" aria-label="Map of the Gleisdreieck walk"></div>
+      <div class="legend"><span><i class="l-here"></i>You are here</span><span><i class="l-done"></i>Seen</span><span><i class="l-next"></i>Still ahead</span><span><i class="l-route"></i>Walking line</span></div>
+    </div>
+    <div class="panel">
+      <div class="scrub"><label for="minute">Drag along the walk (minutes)</label><input type="range" id="minute" min="0" max="60" step="1" value="0"><div class="ends"><span>Start: U Gleisdreieck</span><span id="endLabel">End</span></div></div>
+      <div class="prog"><div class="prog-top"><span id="stepLabel">Stop 1</span><span id="timeLabel"></span></div><div class="bar"><b id="barFill"></b></div></div>
+      <div class="card" id="card" aria-live="polite"></div>
+      <div class="nav"><button type="button" class="prev" id="prevBtn">&larr; Back</button><button type="button" class="next" id="nextBtn">Next stop &rarr;</button></div>
+      <div class="stops" id="stops" aria-label="Jump to a stop"></div>
+    </div>
+  </div>
+  <div class="foot" id="foot"></div>
+</div>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+(function () {
+  var STOPS = [
+ {
+  "id": "crossing-station",
+  "name": "U Gleisdreieck: two stations stacked crosswise",
+  "lat": 52.49953,
+  "lon": 13.37403,
+  "then": "Until 1912 three Hochbahn lines met here in a flat triangle of tracks, and on 26 September 1908 two trains collided on it and a car fell from the viaduct.",
+  "now": "Since the rebuild of 1912 to 1913 it is a two-level crossing station: U1 and U3 use the upper steel hall, U2 the lower one.",
+  "look": "The staircase cross that joins the two halls, with the upper hall lying crosswise over the lower one.",
+  "minutesFromPrev": 0
+ },
+ {
+  "id": "viaduct-lawn",
+  "name": "Relief-line viaduct over the Westpark lawn",
+  "lat": 52.4996,
+  "lon": 13.37184,
+  "then": "This iron viaduct carried the relief line across the old Potsdamer freight yard and opened on 24 October 1926, before that, trains from the east ended at Gleisdreieck.",
+  "now": "The Westpark's Schöneberger Wiese lies on both sides of the viaduct, and U1 and U3 trains pass overhead.",
+  "look": "Stand under the girders and watch a yellow U1 or U3 train cross over the lawn.",
+  "minutesFromPrev": 5
+ },
+ {
+  "id": "house-passage",
+  "name": "The train that runs through a house, Dennewitzstraße 2",
+  "lat": 52.49962,
+  "lon": 13.36997,
+  "then": "In 1925 to 1926 the tenement of 1877 at Dennewitzstraße 2 was rebuilt so the relief line could run through it, with offices beside the passage and flats above it.",
+  "now": "U1 and U3 trains still run through the house and then cross Dennewitzstraße on a closed concrete bridge designed by Alfred Grenander.",
+  "look": "The opening in the corner building and, from Pohlstraße, the walled ramp where the track climbs.",
+  "minutesFromPrev": 2
+ },
+ {
+  "id": "stadtwildnis",
+  "name": "Stadtwildnis: the patch left to grow wild",
+  "lat": 52.49679,
+  "lon": 13.3704,
+  "then": "After the freight yards fell silent the site grew over, and a survey in 1980 counted 413 plant species on it.",
+  "now": "The Westpark keeps a patch of woodland left to grow, called Stadtwildnis (urban wilderness), with information boards along its edge.",
+  "look": "The boards that name the robinia and birch-poplar young woods, and the gravel and sea buckthorn patches beside them.",
+  "minutesFromPrev": 5
+ },
+ {
+  "id": "poststellwerk",
+  "name": "Stellwerk Plw: the old signal box",
+  "lat": 52.49591,
+  "lon": 13.37333,
+  "then": "This signal box, called Plw, belonged to the Postbahnhof on Luckenwalder Straße, built 1908 to 1913 and regarded as Germany's largest parcel transfer point.",
+  "now": "It is now the park's supervision and first-aid post with a kiosk, and a new accessible toilet container stands beside it.",
+  "look": "The signal-box tower itself and, nearby, the rusty buffer stops and track pieces the park left in place.",
+  "minutesFromPrev": 8
+ },
+ {
+  "id": "yorckbruecken",
+  "name": "Yorckbrücken: rail bridges that became paths",
+  "lat": 52.49199,
+  "lon": 13.3743,
+  "then": "Yorckstraße ran under 45 rail bridges built between 1883 and 1935, and the street itself was bent south only after the railways were nationalised in 1882.",
+  "now": "26 historic bridges survive, and the walkable ones opened in two steps: Nos. 10, 11, 14 and 17 on 3 July 2020, No. 5 on 20 September 2023.",
+  "look": "Bridge No. 15 beside No. 14, a restored monument bridge you can look at but not walk on.",
+  "minutesFromPrev": 8
+ },
+ {
+  "id": "dora-duncker",
+  "name": "Dora-Duncker-Park, the old Flaschenhalspark",
+  "lat": 52.49035,
+  "lon": 13.37349,
+  "then": "South of Yorckstraße the rail land narrowed into a bottleneck, the Flaschenhals, and stayed closed wasteland until the park opened on 21 March 2014.",
+  "now": "The district named it Dora-Duncker-Park in 2021, and old tracks still run through its young woodland beside the north-south cycle route.",
+  "look": "Old rails running through the young trees beside the path.",
+  "minutesFromPrev": 5
+ },
+ {
+  "id": "depot-sheds",
+  "name": "Anhalter engine sheds and water tower (Technikmuseum)",
+  "lat": 52.49774,
+  "lon": 13.37637,
+  "then": "The two roundhouses of 1874 served the engine depot of the Anhalter freight yard, and the ground lay unused from the late 1950s until the museum moved in.",
+  "now": "The sheds hold the museum's rail exhibition, entered through the Anhalter station's Fürstenportal, with the turntable and water tower out in the Museum Park.",
+  "look": "The round brick engine sheds from the outside. The turntable and water tower stand in the Museum Park, which belongs to the museum visit.",
+  "minutesFromPrev": 14
+ },
+ {
+  "id": "candy-bomber",
+  "name": "The Candy Bomber above the museum terrace",
+  "lat": 52.49908,
+  "lon": 13.37815,
+  "then": "In 1948 and 1949 the Berlin Airlift's candy bombers supplied the western sectors during the Soviet blockade.",
+  "now": "A Douglas C-47B Skytrain hangs above the terrace of the museum's New Building of 2001 and has become the museum's symbol.",
+  "look": "The aircraft's underside seen from the canal side, with the U1 and U3 viaduct a few steps away.",
+  "minutesFromPrev": 4
+ },
+ {
+  "id": "canal-viaduct",
+  "name": "Viaduct over the Landwehrkanal",
+  "lat": 52.49938,
+  "lon": 13.37878,
+  "then": "In the last days of the war the S-Bahn tunnel under the canal was blasted and this Hochbahn bridge sank about a metre, yet the old lattice bridge kept carrying trains until a new one replaced it in 1990.",
+  "now": "U1 and U3 trains cross the canal on the 1990 bridge between Gleisdreieck and Möckernbrücke stations.",
+  "look": "A yellow train crossing the canal, with the Candy Bomber in the same view.",
+  "minutesFromPrev": 2
+ }
+];
+  var FOOT = "Stops, dates and lines checked on 24 November 2026 against the Berlin heritage database, Gr&uuml;n Berlin, BVG and the Deutsches Technikmuseum. Walking times are my own estimates. The park is open day and night; the Technikmuseum is closed on Mondays and its Museum Park closes at 16:00 until 28 March 2027.";
+
+  var currentStep = 0;
+  var elapsed = [];
+  var run = 0;
+  STOPS.forEach(function (s, i) { run += (i === 0 ? 0 : (s.minutesFromPrev || 0)); elapsed[i] = run; });
+  var walkMinutes = run;
+
+  var map = L.map('map', { scrollWheelZoom: false, zoomControl: true });
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 19, attribution: '&copy; OpenStreetMap contributors' }).addTo(map);
+  var small = window.innerWidth < 600;
+  var R = small ? 6 : 8, RH = small ? 9 : 11;
+  var line = STOPS.map(function (s) { return [s.lat, s.lon]; });
+  L.polyline(line, { color: '#1B5E20', weight: 4, opacity: .85, dashArray: '7 7' }).addTo(map);
+  var walked = L.polyline([], { color: '#FFE600', weight: 6, opacity: .95 }).addTo(map);
+  var walker = L.circleMarker(line[0], { radius: 7, color: '#fff', weight: 3, fillColor: '#E63946', fillOpacity: 1 }).addTo(map);
+  map.fitBounds(L.latLngBounds(line).pad(0.12));
+
+  var dots = STOPS.map(function (s, i) {
+    var m = L.circleMarker([s.lat, s.lon], { radius: R, color: '#1B5E20', weight: 3, fillColor: '#fff', fillOpacity: 1 }).addTo(map);
+    m.bindTooltip(String(i + 1) + '. ' + s.name, { direction: 'top', offset: [0, -8] });
+    m.on('click', function () { go(i); });
+    return m;
+  });
+
+  var stopsBox = document.getElementById('stops');
+  var stopBtns = STOPS.map(function (s, i) {
+    var b = document.createElement('button');
+    b.type = 'button';
+    b.textContent = String(i + 1);
+    b.setAttribute('aria-label', 'Stop ' + (i + 1) + ': ' + s.name);
+    b.addEventListener('click', function () { go(i); });
+    stopsBox.appendChild(b);
+    return b;
+  });
+
+  function esc(t) { return String(t).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
+
+  var slider = document.getElementById('minute');
+  slider.max = String(walkMinutes);
+  document.getElementById('endLabel').textContent = 'End: about ' + walkMinutes + ' min';
+
+  function pointAt(min) {
+    for (var k = 1; k < STOPS.length; k++) {
+      if (min <= elapsed[k]) {
+        var span = elapsed[k] - elapsed[k - 1] || 1, f = (min - elapsed[k - 1]) / span;
+        return { idx: f >= 0.5 ? k : k - 1, ll: [line[k - 1][0] + (line[k][0] - line[k - 1][0]) * f, line[k - 1][1] + (line[k][1] - line[k - 1][1]) * f], seg: k };
+      }
+    }
+    return { idx: STOPS.length - 1, ll: line[line.length - 1], seg: STOPS.length };
+  }
+
+  slider.addEventListener('input', function () {
+    var min = Number(slider.value), p = pointAt(min);
+    walker.setLatLng(p.ll);
+    if (p.idx !== currentStep) go(p.idx, true);
+    walked.setLatLngs(line.slice(0, p.seg).concat([p.ll]));
+    document.getElementById('timeLabel').textContent = 'Minute ' + min + ' of about ' + walkMinutes;
+    document.getElementById('barFill').style.width = (walkMinutes ? (min / walkMinutes) * 100 : 0) + '%';
+  });
+
+  function go(i, fromSlider) {
+    currentStep = Math.max(0, Math.min(STOPS.length - 1, i));
+    var s = STOPS[currentStep];
+    document.getElementById('card').innerHTML =
+      '<span class="num">' + (currentStep + 1) + '</span>' +
+      '<h2>' + esc(s.name) + '</h2>' +
+      '<div class="lab">Then</div><p>' + esc(s.then) + '</p>' +
+      '<div class="lab">Now</div><p>' + esc(s.now) + '</p>' +
+      '<div class="look"><strong>Look for</strong>' + esc(s.look) + '</div>';
+    document.getElementById('stepLabel').textContent = 'Stop ' + (currentStep + 1) + ' of ' + STOPS.length;
+    var left = walkMinutes - elapsed[currentStep];
+    document.getElementById('timeLabel').textContent = currentStep === STOPS.length - 1
+      ? 'End of the walk, about ' + walkMinutes + ' min on foot'
+      : 'About ' + elapsed[currentStep] + ' min in, ' + left + ' min to go';
+    document.getElementById('barFill').style.width = (walkMinutes ? (elapsed[currentStep] / walkMinutes) * 100 : 0) + '%';
+    dots.forEach(function (m, k) {
+      var here = k === currentStep, seen = k < currentStep;
+      m.setStyle({ radius: here ? RH : R, fillColor: here ? '#FFE600' : (seen ? '#1B5E20' : '#fff'), color: here ? '#123D18' : '#1B5E20' });
+      if (here) m.bringToFront();
+    });
+    stopBtns.forEach(function (b, k) {
+      b.classList.toggle('done', k < currentStep);
+      if (k === currentStep) b.setAttribute('aria-current', 'step'); else b.setAttribute('aria-current', 'false');
+    });
+    if (!fromSlider) {
+      walked.setLatLngs(line.slice(0, currentStep + 1));
+      walker.setLatLng([s.lat, s.lon]);
+      slider.value = String(elapsed[currentStep]);
+    }
+    map.setView([s.lat, s.lon], Math.max(map.getZoom(), 16), { animate: true });
+    document.getElementById('prevBtn').disabled = currentStep === 0;
+    document.getElementById('nextBtn').disabled = currentStep === STOPS.length - 1;
+    if (typeof window.__bwRequestEmbedResize === "function") window.__bwRequestEmbedResize();
+  }
+
+  document.getElementById('prevBtn').addEventListener('click', function () { go(currentStep - 1); });
+  document.getElementById('nextBtn').addEventListener('click', function () { go(currentStep + 1); });
+  document.getElementById('foot').innerHTML = FOOT;
+  go(0);
+  map.fitBounds(L.latLngBounds(line).pad(0.12), { animate: false });
+})();
+</script>
+<script src="../js/brand.js"></script>
+</body>
+</html>
