@@ -321,7 +321,7 @@
     fetch(asset('data/catalog-snapshot.json'),{signal:AbortSignal.timeout(2500)}).then(r=>r.ok?r.json():null).catch(()=>null),
     (/(?:dein-berlin-2027|cart-page)/.test(location.pathname)?import(asset('calendar-configurator.js')).catch(()=>null):Promise.resolve(null)),
     design2Enabled?import(asset('design2.js')).catch(()=>null):Promise.resolve(null),   // a failed design 2 load falls back to the current store
-    legacyGiftPresentation()?Promise.resolve(null):fetch(new URL('data/sized-media.json?v=sized-20261119-v1',base).href,{signal:AbortSignal.timeout(2500)}).then(r=>r.ok?r.json():null).then(applySizedMedia).catch(()=>null)
+    legacyGiftPresentation()?Promise.resolve(null):fetch(new URL('data/sized-media.json?v=sized-20261124-v1',base).href,{signal:AbortSignal.timeout(2500)}).then(r=>r.ok?r.json():null).then(applySizedMedia).catch(()=>null)
   ]);
   // German layer for the press launch, only with ?lang=de; a failure leaves the English page (30 Oct 2026).
   if(new URLSearchParams(location.search).get('lang')==='de'||(/^\/cart-page/.test(location.pathname)&&ysGermanTab()))import(asset('ys-de.js')).catch(()=>{});
