@@ -8,10 +8,11 @@
   "posterflowEnabled": true,
   "christmas": {
     "year": 2026,
-    "gelatoOrderBy": "2026-12-16",
-    "gelatoLatestArrival": "2026-12-16",
+    "gelatoOrderBy": "2026-12-15",
+    "gelatoLatestArrival": "2026-12-23",
     "posterflowLatestArrival": "2026-12-23",
-    "note": "Gelato published order-by deadline is 16 Dec Economy for all relevant DE categories. For the requested stricter tick, BOTH approval/processing date and latest arrival must be <= 16 Dec. Posterflow has no published 2026 cutoff found; fallback latest arrival <= 23 Dec, 1 calendar day before Christmas Eve. Tick is an estimate, never a guarantee. Calendar also retains its earlier 10 Dec store deadline."
+    "mountedOrderBy": "2026-12-08",
+    "note": "The tick follows the order-by dates published on the gift guide (design2.js deadlines, approved 24 Nov 2026): framed and canvas 8 Dec (mountedOrderBy, both providers), calendars 10 Dec, clothing and tote bags 12 Dec, posters and street prints 15 Dec (gelatoOrderBy; Gelato's own published DE deadline is 16 Dec Economy). Latest estimated arrival <= 23 Dec, 1 calendar day before Christmas Eve, for Gelato and Posterflow alike. Until 24 Nov Gelato used a stricter latest arrival of 16 Dec, which removed the tick about a week before those published dates (Yusuf, 24 Nov 2026: fix the open gaps). Posterflow has no published 2026 cutoff found. Tick is an estimate, never a guarantee."
   },
   "holidays": {
     "policy": "Conservative union of German national and regional public holidays; also skip 24 and 31 Dec operational closures. German-destination estimate, not a claim of German manufacture. Gelato can route through PL/CZ; include their relevant public holidays too.",
@@ -55,7 +56,7 @@
         "quotedAt": "2026-11-24"
       }
     ],
-    "shipping": "SHIPPING_AUDIT.json live read 15 Nov 2026; free rates in DE, tees DE-only",
+    "shipping": "SHIPPING_AUDIT.json live read 15 Nov 2026 (free rates in DE); output/store/apparel-shipping-check-20261120/READ_20261120.json: tee profile 44b6f79a and General profile e14f5be8 (hoodies, tote bags) also ship free to the EU, UK and US",
     "digital": "13 Nov 2026 operational receipt: ys1928-digital-watch every120s, triggers fulfilment; not a two-minute guarantee"
   },
   "routes": {

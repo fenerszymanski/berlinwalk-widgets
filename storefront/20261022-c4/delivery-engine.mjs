@@ -45,7 +45,9 @@ export function estimate(product,selection,config,now=new Date()){
  const earliest=r.productionShippingCalendarDays?deliveryDay(addCalendarDays(quotedApproval,phase[0])):addBusinessDays(start,approval+phase[0]);
  const latest=r.productionShippingCalendarDays?deliveryDay(addCalendarDays(quotedApproval,phase[1]),r.bufferBusinessDays):addBusinessDays(start,approval+phase[1]+r.bufferBusinessDays);
  const c=config.christmas,gelato=route.startsWith('gelato'),processing=addBusinessDays(start,approval),limit=gelato?c.gelatoLatestArrival:c.posterflowLatestArrival;
- const christmas=Number(date.slice(0,4))===c.year&&latest<=limit&&(!gelato||processing<=c.gelatoOrderBy)&&(product.id!=='dein-berlin-2027'||date<='2026-12-10');
+ // Framed and canvas prints carry their own published order-by date (page text and gift guide), whichever provider makes them.
+ const mounted=route==='gelato-mounted'||route==='posterflow-frame';
+ const christmas=Number(date.slice(0,4))===c.year&&latest<=limit&&(!gelato||processing<=c.gelatoOrderBy)&&(product.id!=='dein-berlin-2027'||date<='2026-12-10')&&(!mounted||!c.mountedOrderBy||date<=c.mountedOrderBy);
  return {route,earliest,latest,personal,christmas,approval,provider:r.provider};
 }
 export function dateRange(a,b,de=false){const f=new Intl.DateTimeFormat(de?'de-DE':'en-GB',{weekday:'short',day:'numeric',month:'short',timeZone:'Europe/Berlin'});return f.format(day(a))+' – '+f.format(day(b));}

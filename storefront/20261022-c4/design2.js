@@ -826,7 +826,11 @@ for(const crumb of this.shadowRoot.querySelectorAll('.breadcrumb > a:first-child
   const rwSub=rw?.querySelector('.rw-delivery p:nth-of-type(2)')?.textContent.trim()||'';
   const shipTile=rw?.querySelector('.rw-tile')?.textContent.trim()||'';
   const rwDig=rw?.querySelector('.rw-digital');
-  const plain=buyBox.querySelector(':scope > .delivery')?.textContent.trim()||'';
+  const plainEl=buyBox.querySelector(':scope > .delivery');
+  const plain=plainEl?.textContent.trim()||'';
+  // The configurator can rewrite this line after the click that changed the format (1928: poster -> digital file left the poster line in the card).
+  // Redraw the card whenever the line changes. The card never writes to this element, so this cannot loop.
+  if(plainEl&&at==='.surface '&&!plainEl.bwCardWatch&&typeof MutationObserver==='function'){plainEl.bwCardWatch=new MutationObserver(()=>this.bwSyncDeliveryCard());plainEl.bwCardWatch.observe(plainEl,{childList:true,characterData:true,subtree:true});}
   const plainNote=delBody?.querySelector('.bw-plain-delivery');
   if(plainNote){
    plainNote.hidden=!plain||(!strong&&!rwDig)||Array.from(delBody.querySelectorAll('p:not(.bw-plain-delivery)')).some(node=>node.textContent.trim()===plain);
