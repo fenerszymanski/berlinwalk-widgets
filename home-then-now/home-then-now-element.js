@@ -8,7 +8,7 @@
   'use strict';
 
   const DATA = {
-    "release": "home-then-now-20261124-audio-title",
+    "release": "home-then-now-20261124-glienicke-local",
     "hero": {
       "img1928": "assets/hero-1928.webp",
       "imgToday": "assets/hero-today.webp",
@@ -188,7 +188,7 @@
         "tag": "HALF-DAY TRIP",
         "title": "Glienicke Bridge: walk the former border",
         "href": "https://www.walkofberlin.com/post/glienicke-bridge-berlin",
-        "img": "https://static.wixstatic.com/media/5a08a3_2eb10ec3bd6741b4b9a2de6af498dd01~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-cover.jpg"
+        "img": "assets/blog-glienicke-bridge-berlin.webp"
       },
       {
         "tag": "NIGHTS OUT",
