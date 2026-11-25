@@ -14807,5 +14807,39 @@
         "a": "It is a **Douglas C-47**, one of the Candy Bombers that flew supplies into West Berlin during the **1948 to 1949** blockade. It hangs above the museum terrace near the Landwehrkanal, and you can see it from the street without a ticket."
       }
     ]
+  },
+  "berlin-u-bahn-lines": {
+    "title": "Berlin U-Bahn Lines - FAQ",
+    "subtitle": "Narrow trains, wide trains, the boards on the U5 and the new trains.",
+    "items": [
+      {
+        "q": "Which Berlin U-Bahn lines have the narrow trains?",
+        "a": "The **U1, U2, U3 and U4** run on the narrow **Kleinprofil** network. Their cars are about **2.30 m** wide on the classic design and about **2.40 m** on newer trains."
+      },
+      {
+        "q": "Which lines have the wide trains?",
+        "a": "The **U5, U6, U7, U8 and U9** run on the wide **Grossprofil** network, with cars about **2.65 m** wide and about **3.4 m** high."
+      },
+      {
+        "q": "Why does Berlin have two widths of U-Bahn train?",
+        "a": "The first line opened in **1902** with cars close to tram width, and the lines built until **1913** kept that size. The Nord-Süd-Bahn, today's **U6**, opened wide on **30 January 1923**, and every line after it followed."
+      },
+      {
+        "q": "Can a U2 train run on the U7?",
+        "a": "Not in service. Besides the width, the two networks take power differently: narrow trains press their shoe **on top** of the third rail, wide trains **from below**, with reversed polarity. Two track links exist only for moving trains."
+      },
+      {
+        "q": "What are the boards under the doors on the U5?",
+        "a": "Some U5 trains are **IK** cars, a narrow-network design with a raised body. Since **October 2017** they carry boards along the lower body that bridge about **17.5 cm** to the wide platforms. Berliners call them **Blumenbretter**."
+      },
+      {
+        "q": "Where do the new J and JK trains run?",
+        "a": "The narrow **JK** carried its first passengers on the **U2** on **8 September 2025**. The wide **J** entered regular service on the **U5** on **18 May 2026** and has run on the **U9** since early **October 2026**."
+      },
+      {
+        "q": "Which U-Bahn line is the busiest?",
+        "a": "The **U7**, with about **463,100** riders on an average weekday in 2024 according to the Berlin Senate, ahead of the **U8** and the **U6**. All three are wide lines."
+      }
+    ]
   }
 }

@@ -1,0 +1,135 @@
+{
+ "gaugeMm": 1435,
+ "profiles": {
+  "klein": {
+   "label": "Kleinprofil, the narrow trains",
+   "widthMm": 2300,
+   "widthLabel": "about 2.3 m wide",
+   "widthText": "About 2.30 m on the classic design, about 2.40 m on newer trains",
+   "heightMm": 3100,
+   "floorMm": 850,
+   "platformHeightMm": 850,
+   "platformEdgeMm": 1240,
+   "powerRailOffsetMm": 1560,
+   "contact": "top",
+   "clearanceWidthMm": 3300,
+   "clearanceHeightMm": 3900
+  },
+  "gross": {
+   "label": "Grossprofil, the wide trains",
+   "widthMm": 2650,
+   "widthLabel": "about 2.65 m wide",
+   "widthText": "About 2.65 m",
+   "heightMm": 3400,
+   "floorMm": 925,
+   "platformHeightMm": 925,
+   "platformEdgeMm": 1415,
+   "powerRailOffsetMm": 1760,
+   "contact": "bottom",
+   "clearanceWidthMm": 3700,
+   "clearanceHeightMm": 4200
+  }
+ },
+ "lines": [
+  {
+   "line": "U1",
+   "profile": "klein",
+   "color": "#7DAD4C",
+   "textDark": false,
+   "termini": "Uhlandstraße to Warschauer Straße",
+   "opened": "1902, part of the first line",
+   "trains": "Older yellow Kleinprofil cars",
+   "length": "8.8 km, 13 stations",
+   "note": "The oldest stretch in the city and the quietest of the narrow lines in 2024, at about 55,900 riders a weekday. Expect a narrow car, a short train and a lot of viaduct east of Gleisdreieck."
+  },
+  {
+   "line": "U2",
+   "profile": "klein",
+   "color": "#DA421E",
+   "textDark": false,
+   "termini": "Pankow to Ruhleben",
+   "opened": "1902, part of the first line",
+   "trains": "New JK trains since 8 September 2025, plus older cars",
+   "length": "20.7 km, 29 stations",
+   "note": "The new JK trains started here. It is also the slowest line on average, 25.6 km/h in 2024, because the stations sit close together on the old route. Narrow cars fill fast at Alexanderplatz and Potsdamer Platz."
+  },
+  {
+   "line": "U3",
+   "profile": "klein",
+   "color": "#16683D",
+   "textDark": false,
+   "termini": "Warschauer Straße to Krumme Lanke",
+   "opened": "1913",
+   "trains": "IK18 trains and older cars moved over from the U2",
+   "length": "18.7 km, 24 stations",
+   "note": "A narrow line through the south-west with about 165,300 riders a weekday in 2024. Since the December 2025 timetable trains run with up to eight cars."
+  },
+  {
+   "line": "U4",
+   "profile": "klein",
+   "color": "#F0D722",
+   "textDark": true,
+   "termini": "Nollendorfplatz to Innsbrucker Platz",
+   "opened": "1910, built by the town of Schöneberg",
+   "trains": "Short narrow trains",
+   "length": "2.9 km, 5 stations",
+   "note": "The shortest line, with about 14,200 riders a weekday in 2024. It opened in 1910 as the first municipal U-Bahn in Germany. If a narrow car feels empty anywhere, it is here."
+  },
+  {
+   "line": "U5",
+   "profile": "gross",
+   "color": "#7E5330",
+   "textDark": false,
+   "termini": "Hauptbahnhof to Hönow",
+   "opened": "1930",
+   "trains": "New J trains since 18 May 2026, plus IK cars with gap boards",
+   "length": "22.1 km, 26 stations",
+   "note": "A wide line that still runs some narrow-based IK cars. They carry bolted-on boards along the lower body to close the gap to the wide platforms, so watch the step on those. The new J trains took over regular service here first."
+  },
+  {
+   "line": "U6",
+   "profile": "gross",
+   "color": "#8C6DAB",
+   "textDark": false,
+   "termini": "Alt-Tegel to Alt-Mariendorf",
+   "opened": "1923, the first wide line",
+   "trains": "Wide Grossprofil trains",
+   "length": "19.9 km, 29 stations",
+   "note": "The first line built wide, opened on 30 January 1923. About 324,000 riders a weekday in 2024. The wider car means more room in the doorways at Friedrichstraße and Hallesches Tor."
+  },
+  {
+   "line": "U7",
+   "profile": "gross",
+   "color": "#528DBA",
+   "textDark": false,
+   "termini": "Rathaus Spandau to Rudow",
+   "opened": "1924",
+   "trains": "Wide Grossprofil trains",
+   "length": "31.8 km, 40 stations",
+   "note": "The longest and busiest line: about 463,100 riders a weekday in 2024, and the fastest on average at 32.9 km/h. Wide cars, long trains, long distances."
+  },
+  {
+   "line": "U8",
+   "profile": "gross",
+   "color": "#224F86",
+   "textDark": false,
+   "termini": "Wittenau to Hermannstraße",
+   "opened": "1927",
+   "trains": "Wide Grossprofil trains",
+   "length": "18.0 km, 24 stations",
+   "note": "About 331,400 riders a weekday in 2024, the second busiest. Wide cars through Kottbusser Tor, Hermannplatz and Alexanderplatz."
+  },
+  {
+   "line": "U9",
+   "profile": "gross",
+   "color": "#F3791D",
+   "textDark": false,
+   "termini": "Osloer Straße to Rathaus Steglitz",
+   "opened": "1961",
+   "trains": "New J trains since October 2026, plus older wide trains",
+   "length": "12.5 km, 18 stations",
+   "note": "The youngest of these lines, opened in 1961 in West Berlin. About 258,400 riders a weekday in 2024, and since October 2026 you can catch one of the new J trains here."
+  }
+ ],
+ "foot": "Car widths and heights from BVG and published train data; rider numbers are 2024 weekday averages from the Berlin Senate's answer 19/24551. The tunnel opening is drawn as a schematic, not to a survey."
+}

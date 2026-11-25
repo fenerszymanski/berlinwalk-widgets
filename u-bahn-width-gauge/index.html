@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>U-Bahn Width Gauge: Which Berlin Line Runs the Narrow Trains</title>
+<meta name="description" content="Pick a Berlin U-Bahn line and see its train drawn to scale: the narrow Kleinprofil cars of U1 to U4 or the wide Grossprofil cars of U5 to U9, with the rails, the power rail and a person for scale.">
+<link rel="stylesheet" href="../css/brand.css">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { overflow-x: hidden; }
+  body { font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #FFFFFF; color: #20241d; padding: 12px; }
+  .wg { border-radius: 16px; overflow: hidden; border: 1px solid #d8dfd0; background: #f4f6ef; }
+  .wg-head { padding: 18px 18px 10px; }
+  .wg-kick { display: inline-block; font-size: 10.5px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; color: #123D18; background: #FFE600; padding: 3px 8px; border-radius: 4px; }
+  .wg-head h1 { font-family: 'Merriweather', Georgia, serif; font-size: 21px; line-height: 1.3; margin-top: 9px; color: #1B5E20; }
+  .wg-head p { font-size: 13px; line-height: 1.6; color: #43493f; margin-top: 7px; max-width: 760px; }
+  .lines { display: flex; flex-wrap: wrap; gap: 8px; padding: 4px 18px 12px; }
+  .lines button { font-family: inherit; font-size: 15px; font-weight: 800; min-width: 52px; height: 40px; border-radius: 8px; border: 3px solid transparent; cursor: pointer; color: #fff; box-shadow: 0 1px 0 rgba(0,0,0,.08); }
+  .lines button.dark { color: #20241d; }
+  .lines button[aria-current="true"] { border-color: #20241d; outline: 3px solid #FFE600; outline-offset: 1px; }
+  .lines button:focus-visible { outline: 3px solid #1B5E20; outline-offset: 2px; }
+  .wg-body { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); gap: 12px; padding: 0 12px 12px; align-items: start; }
+  .stage { background: #fff; border: 1px solid #dfe5d8; border-radius: 14px; padding: 10px; min-width: 0; }
+  canvas { display: block; width: 100%; height: auto; border-radius: 10px; background: #f7f8f3; }
+  .cap { font-size: 13px; font-weight: 800; color: #123D18; padding: 2px 4px 8px; line-height: 1.4; }
+  .legend { display: flex; flex-wrap: wrap; gap: 6px 14px; font-size: 11px; color: #555c50; padding: 8px 4px 2px; line-height: 1.4; align-items: center; }
+  .legend i { display: inline-block; width: 14px; height: 10px; border-radius: 2px; vertical-align: middle; margin-right: 5px; }
+  .legend .l-car { background: #FFE600; border: 1px solid #8a7d00; }
+  .legend .l-ghost { border: 2px dashed #1B5E20; background: transparent; }
+  .legend .l-power { background: #E63946; }
+  .compare { margin: 8px 4px 2px; font-family: inherit; font-size: 12.5px; font-weight: 700; color: #123D18; background: #fff; border: 2px solid #1B5E20; border-radius: 8px; padding: 7px 12px; cursor: pointer; }
+  .compare:focus-visible { outline: 3px solid #FFE600; outline-offset: 2px; }
+  .panel { min-width: 0; display: flex; flex-direction: column; gap: 10px; }
+  .card { background: #fff; border: 1px solid #dfe5d8; border-radius: 14px; padding: 14px 16px; }
+  .card .badge { display: inline-block; font-size: 15px; font-weight: 800; color: #fff; border-radius: 6px; padding: 2px 9px; margin-right: 8px; vertical-align: middle; }
+  .card .badge.dark { color: #20241d; }
+  .card h2 { display: inline; font-size: 15px; font-weight: 800; color: #123D18; vertical-align: middle; }
+  .card .route { font-size: 12.5px; color: #5b6356; margin-top: 8px; line-height: 1.5; }
+  .card dl { display: grid; grid-template-columns: auto 1fr; gap: 6px 12px; margin-top: 12px; font-size: 13px; line-height: 1.45; }
+  .card dt { font-weight: 800; color: #123D18; }
+  .card dd { color: #30352d; }
+  .means { background: #FFE600; color: #20241d; border-radius: 14px; padding: 13px 16px; font-size: 13.5px; line-height: 1.55; }
+  .means b { display: block; font-size: 11px; letter-spacing: .1em; text-transform: uppercase; margin-bottom: 4px; color: #123D18; }
+  .nav { display: flex; gap: 8px; }
+  .nav button { flex: 1; font-family: inherit; font-size: 13px; font-weight: 800; padding: 11px 12px; border-radius: 10px; cursor: pointer; }
+  .nav .prev { background: #fff; color: #1B5E20; border: 2px solid #1B5E20; }
+  .nav .next { background: #1B5E20; color: #fff; border: 2px solid #1B5E20; }
+  .nav button:focus-visible { outline: 3px solid #FFE600; outline-offset: 2px; }
+  .foot { font-size: 11px; color: #6a7165; line-height: 1.5; padding: 0 18px 16px; }
+  .foot a { color: #1B5E20; }
+  @media (max-width: 760px) {
+    .wg-body { grid-template-columns: 1fr; }
+    .wg-head h1 { font-size: 19px; }
+    .lines { padding: 4px 12px 12px; gap: 6px; }
+    .lines button { min-width: 44px; height: 38px; font-size: 14px; }
+  }
+</style>
+</head>
+<body>
+<div class="wg" id="wg">
+  <div class="wg-head">
+    <span class="wg-kick">U-Bahn width gauge</span>
+    <h1>How wide is the train on your line?</h1>
+    <p>Pick your line. The drawing shows its train to scale in the opening it runs through, with the rails, the power rail and a person 1.75 m tall for scale. Turn on the comparison to see the other width as a dashed outline.</p>
+  </div>
+  <div class="lines" id="lines" role="group" aria-label="Pick a U-Bahn line"></div>
+  <div class="wg-body">
+    <div class="stage">
+      <p class="cap" id="cap" aria-live="polite"></p>
+      <canvas id="gauge" width="900" height="960" role="img" aria-label="Scale drawing of the selected train"></canvas>
+      <div class="legend"><span><i class="l-car"></i>This line's car body</span><span><i class="l-ghost"></i>The other width</span><span><i class="l-power"></i>Power rail and contact shoe</span></div>
+      <button type="button" class="compare" id="compareBtn">Show the other width</button>
+    </div>
+    <div class="panel">
+      <div class="card" id="card" aria-live="polite"></div>
+      <div class="means" id="means"></div>
+      <div class="nav"><button type="button" class="prev" id="prevBtn">&larr; Previous line</button><button type="button" class="next" id="nextBtn">Next line &rarr;</button></div>
+    </div>
+  </div>
+  <div class="foot" id="foot"></div>
+</div>
+<script>
+(function () {
+  var DATA = null;
+  var currentStep = 0;
+  var showOther = false;
+  var canvas = document.getElementById('gauge');
+  var ctx = canvas.getContext('2d');
+
+  function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
+
+  function profileOf(line) { return DATA.profiles[line.profile]; }
+
+  function drawPerson(x, floorY, s) {
+    var h = 1750 * s, headR = 115 * s, shoulder = 230 * s, hip = 170 * s;
+    ctx.fillStyle = '#123D18'; ctx.strokeStyle = '#ffffff'; ctx.lineWidth = 3;
+    var headY = floorY - h + headR;
+    ctx.beginPath(); ctx.arc(x, headY, headR, 0, Math.PI * 2); ctx.fill(); ctx.stroke();
+    var neck = headY + headR + 20 * s;
+    ctx.beginPath();
+    ctx.moveTo(x - shoulder, neck + 60 * s);
+    ctx.quadraticCurveTo(x - shoulder, neck, x - shoulder * 0.5, neck);
+    ctx.lineTo(x + shoulder * 0.5, neck);
+    ctx.quadraticCurveTo(x + shoulder, neck, x + shoulder, neck + 60 * s);
+    ctx.lineTo(x + hip, floorY - 820 * s);
+    ctx.lineTo(x + 120 * s, floorY);
+    ctx.lineTo(x + 20 * s, floorY);
+    ctx.lineTo(x, floorY - 760 * s);
+    ctx.lineTo(x - 20 * s, floorY);
+    ctx.lineTo(x - 120 * s, floorY);
+    ctx.lineTo(x - hip, floorY - 820 * s);
+    ctx.closePath(); ctx.fill(); ctx.stroke();
+  }
+
+  function carPath(cx, base, p, s) {
+    var w = p.widthMm * s, h = p.heightMm * s, r = 240 * s;
+    var left = cx - w / 2, top = base - h;
+    ctx.beginPath();
+    ctx.moveTo(left, base);
+    ctx.lineTo(left, top + r * 1.5);
+    ctx.quadraticCurveTo(left + 15 * s, top, left + r * 1.5, top);
+    ctx.lineTo(left + w - r * 1.5, top);
+    ctx.quadraticCurveTo(left + w - 15 * s, top, left + w, top + r * 1.5);
+    ctx.lineTo(left + w, base);
+    ctx.closePath();
+  }
+
+  function label(text, x, y, align) {
+    ctx.font = '800 30px Montserrat, Arial, sans-serif';
+    ctx.textAlign = align || 'center'; ctx.textBaseline = 'middle';
+    var m = ctx.measureText(text).width;
+    var bx = align === 'left' ? x - 6 : align === 'right' ? x - m - 6 : x - m / 2 - 6;
+    ctx.fillStyle = 'rgba(255,255,255,.94)'; ctx.fillRect(bx, y - 20, m + 12, 40);
+    ctx.fillStyle = '#123D18'; ctx.fillText(text, x, y);
+  }
+
+  function arrow(x1, y1, x2, y2) {
+    ctx.strokeStyle = '#123D18'; ctx.fillStyle = '#123D18'; ctx.lineWidth = 3;
+    ctx.beginPath(); ctx.moveTo(x1, y1); ctx.lineTo(x2, y2); ctx.stroke();
+    [[x1, y1, x2, y2], [x2, y2, x1, y1]].forEach(function (a) {
+      var ang = Math.atan2(a[3] - a[1], a[2] - a[0]);
+      ctx.beginPath(); ctx.moveTo(a[0], a[1]);
+      ctx.lineTo(a[0] + 16 * Math.cos(ang - 0.45), a[1] + 16 * Math.sin(ang - 0.45));
+      ctx.lineTo(a[0] + 16 * Math.cos(ang + 0.45), a[1] + 16 * Math.sin(ang + 0.45));
+      ctx.closePath(); ctx.fill();
+    });
+  }
+
+  function draw() {
+    var line = DATA.lines[currentStep];
+    var p = profileOf(line);
+    var other = DATA.profiles[line.profile === 'klein' ? 'gross' : 'klein'];
+    var W = canvas.width, H = canvas.height;
+    ctx.clearRect(0, 0, W, H);
+    ctx.fillStyle = '#f7f8f3'; ctx.fillRect(0, 0, W, H);
+    var s = 0.19; // pixels per millimetre, the same for every line
+    var cx = 400, railTop = 860;
+    var base = railTop - 120 * s; // underside of the car body
+    // tunnel opening, schematic
+    var cw = p.clearanceWidthMm * s, chh = p.clearanceHeightMm * s;
+    ctx.fillStyle = '#e3e7dc';
+    ctx.beginPath();
+    ctx.moveTo(cx - cw / 2, railTop + 20);
+    ctx.lineTo(cx - cw / 2, railTop - chh + 90);
+    ctx.quadraticCurveTo(cx, railTop - chh - 60, cx + cw / 2, railTop - chh + 90);
+    ctx.lineTo(cx + cw / 2, railTop + 20);
+    ctx.closePath(); ctx.fill();
+    ctx.strokeStyle = '#b9c2ad'; ctx.lineWidth = 3; ctx.stroke();
+    // ground, sleeper, rails at standard gauge
+    ctx.fillStyle = '#cfd5c4'; ctx.fillRect(0, railTop + 16, W, H - railTop);
+    ctx.fillStyle = '#8d7b62'; ctx.fillRect(cx - 1300 * s, railTop + 4, 2600 * s, 22);
+    var g = DATA.gaugeMm * s;
+    ctx.fillStyle = '#3d423a';
+    ctx.fillRect(cx - g / 2 - 40 * s, railTop - 26, 80 * s, 30);
+    ctx.fillRect(cx + g / 2 - 40 * s, railTop - 26, 80 * s, 30);
+    // platform on the right
+    var platX = cx + p.platformEdgeMm * s, platTop = railTop - p.platformHeightMm * s;
+    ctx.fillStyle = '#9aa48d'; ctx.fillRect(platX, platTop, W - platX, railTop + 16 - platTop);
+    ctx.fillStyle = '#FFE600'; ctx.fillRect(platX, platTop, 26, 10);
+    // power rail on the left, with the contact shoe reaching from the car
+    var w = p.widthMm * s, h = p.heightMm * s, left = cx - w / 2, top = base - h;
+    var prX = cx - p.powerRailOffsetMm * s;
+    var railY = railTop - 40;
+    ctx.fillStyle = '#E63946'; ctx.fillRect(prX - 60 * s, railY, 120 * s, 26);
+    var shoeY = p.contact === 'top' ? railY - 12 : railY + 26;
+    ctx.fillStyle = '#20241d';
+    ctx.fillRect(prX - 50 * s, shoeY, 100 * s, 12);
+    ctx.strokeStyle = '#20241d'; ctx.lineWidth = 5;
+    ctx.beginPath(); ctx.moveTo(left + 20, base); ctx.lineTo(left + 20, shoeY + 6); ctx.lineTo(prX, shoeY + 6); ctx.stroke();
+    label('Power rail', 18, railTop + 70, 'left');
+    // car body
+    carPath(cx, base, p, s);
+    ctx.fillStyle = '#FFE600'; ctx.fill();
+    ctx.lineWidth = 4; ctx.strokeStyle = '#8a7d00'; ctx.stroke();
+    ctx.fillStyle = '#d9e6cf';
+    ctx.fillRect(left + w * 0.1, top + h * 0.17, w * 0.8, h * 0.3);
+    var floorY = railTop - p.floorMm * s;
+    ctx.strokeStyle = 'rgba(0,0,0,.35)'; ctx.lineWidth = 3;
+    ctx.beginPath(); ctx.moveTo(left + 6, floorY); ctx.lineTo(left + w - 6, floorY); ctx.stroke();
+    drawPerson(cx + w * 0.12, floorY, s);
+    // the other width, dashed, drawn on top so it always shows
+    if (showOther) {
+      ctx.save(); ctx.setLineDash([16, 10]); ctx.lineWidth = 5; ctx.strokeStyle = '#1B5E20';
+      var ob = railTop - 120 * s;
+      carPath(cx, ob, other, s); ctx.stroke(); ctx.restore();
+      label(other.widthLabel.replace('about ', 'other: '), cx, ob - other.heightMm * s - 26);
+    }
+    // dimensions
+    var dimY = showOther ? Math.min(top, base - other.heightMm * s) - 80 : top - 40;
+    arrow(left, dimY, left + w, dimY);
+    label(p.widthLabel, cx, dimY - 30);
+    arrow(left + w + 34, top, left + w + 34, base);
+    label((p.heightMm / 1000).toFixed(2) + ' m', left + w + 52, top + h * 0.35, 'left');
+    label(DATA.gaugeMm + ' mm track', cx, railTop + 70);
+  }
+
+  function render() {
+    var line = DATA.lines[currentStep];
+    var p = profileOf(line);
+    var btns = document.querySelectorAll('#lines button');
+    for (var i = 0; i < btns.length; i++) btns[i].setAttribute('aria-current', i === currentStep ? 'true' : 'false');
+    var dark = line.textDark ? ' dark' : '';
+    document.getElementById('card').innerHTML =
+      '<span class="badge' + dark + '" style="background:' + line.color + '">' + esc(line.line) + '</span><h2>' + esc(p.label) + '</h2>' +
+      '<p class="route">' + esc(line.termini) + '</p>' +
+      '<dl><dt>Car width</dt><dd>' + esc(p.widthText) + '</dd>' +
+      '<dt>First section</dt><dd>' + esc(line.opened) + '</dd>' +
+      '<dt>Trains</dt><dd>' + esc(line.trains) + '</dd>' +
+      '<dt>Length</dt><dd>' + esc(line.length) + '</dd></dl>';
+    document.getElementById('means').innerHTML = '<b>What it means on this line</b>' + esc(line.note);
+    document.getElementById('cap').textContent = line.line + ': ' + p.label + ', drawn to scale. ' + (p.contact === 'top' ? 'The contact shoe presses down on top of the power rail.' : 'The contact shoe presses up under the power rail.');
+    document.getElementById('compareBtn').textContent = showOther ? 'Hide the other width' : 'Show the other width';
+    draw();
+  }
+
+  function go(i) {
+    var n = DATA.lines.length;
+    currentStep = (i + n) % n;
+    render();
+  }
+
+  function build() {
+    var wrap = document.getElementById('lines');
+    DATA.lines.forEach(function (line, i) {
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.textContent = line.line;
+      b.style.background = line.color;
+      if (line.textDark) b.className = 'dark';
+      b.setAttribute('aria-label', line.line + ', ' + DATA.profiles[line.profile].label);
+      b.addEventListener('click', function () { go(i); });
+      wrap.appendChild(b);
+    });
+    document.getElementById('prevBtn').addEventListener('click', function () { go(currentStep - 1); });
+    document.getElementById('nextBtn').addEventListener('click', function () { go(currentStep + 1); });
+    document.getElementById('compareBtn').addEventListener('click', function () { showOther = !showOther; render(); });
+    document.getElementById('foot').innerHTML = DATA.foot;
+    render();
+  }
+
+  fetch('data.json', { cache: 'no-cache' })
+    .then(function (r) { return r.json(); })
+    .then(function (d) { DATA = d; build(); })
+    .catch(function () { document.getElementById('card').textContent = 'The line data did not load. Please reload the page.'; });
+})();
+</script>
+<script src="../js/brand.js"></script>
+</body>
+</html>
