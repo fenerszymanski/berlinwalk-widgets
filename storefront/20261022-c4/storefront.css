@@ -1184,3 +1184,21 @@ button.ys-words-tag:focus-visible{outline:2px solid var(--green);outline-offset:
 @media(max-width:360px){
   :host([design2][data-bw-pdp="c"]) .product-layout:not([data-bw-group="apparel"]) .gallery-stage{max-height:48svh}
 }
+
+/* ===== Wobby headings (25 Nov 2026) =====
+   Yusuf, 25 Nov 2026: "hadi hepsini yapalim, gecisi yapalim". Wobby is the brand headline face: one weight (400), no italic, about 30 % narrower than Fraunces, so
+   every switched heading sets weight 400, normal style and no letter-spacing (italic emphasis would be colour only). HEADINGS ONLY: nav, prices, buttons, size
+   pickers, the delivery card, forms, legal text and the mono labels keep their faces. The face is registered once on the document by storefront-element.js and
+   design2.js waits for it before a box is shown, so the loading box and the finished page draw the same headings. Fallback = the previous heading face.
+   Three blocks, one per step: 1 shop home and listings, 2 gift guide, 3 product pages. Rollback of a step = delete its block. */
+:host{--head:"Wobby",Fraunces,'Fraunces Fallback',Georgia,serif}
+
+/* wobby step 1: shop home and listings (hero, shelf and section titles, personal cards, picks, list titles, product names on cards) */
+:host([design2]) .d2-hero-copy h1,
+:host([design2]) .d2-hero-bw .d2-hero-copy h1,
+:host([design2]) :is(.d2-personal,.d2-shelf,.d2-picks,.d2-explore,.d2-listing) :is(h1,h2,h3),
+:host([design2]) :is(.d2-personal,.d2-shelf,.d2-picks,.d2-explore,.d2-listing) .product-name,
+:host([design2]) :is(.d2-shelf,.d2-picks,.d2-explore,.d2-listing) .d2-card .product-name{font-family:var(--head);font-weight:400;font-style:normal;font-kerning:normal;letter-spacing:0}
+/* Wobby is narrower, so a two-line heading can leave a lone word ("Your Berlin Street in / 1928" on a phone): balance the lines of the headings. */
+:host([design2]) .d2-hero-copy h1,
+:host([design2]) :is(.d2-personal,.d2-shelf,.d2-picks,.d2-explore,.d2-listing) :is(h1,h2,h3){text-wrap:balance}
