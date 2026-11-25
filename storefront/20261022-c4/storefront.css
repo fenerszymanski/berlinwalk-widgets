@@ -1239,3 +1239,47 @@ button.ys-words-tag:focus-visible{outline:2px solid var(--green);outline-offset:
 :host([design2]) .product-layout h2,
 :host([design2]) .d2-recommendations h2,
 :host([design2]) .cal-heading h1{text-wrap:balance}
+
+/* wobby step 4: the store's own menu and the collection tabs (25 Nov 2026).
+   Yusuf, 25 Nov 2026: "ana menu itemleri (bold olabilir) alt menu itemleri regular olabilir ... store menusu de". TOP LEVEL = Wobby Bold, a real 700 face registered by
+   storefront-element.js (font-synthesis none: if the file is missing the next family draws its own bold, nothing is smeared). SUB LEVEL = Wobby Regular.
+   Left as they were on purpose: prices, buttons and pills (.outline, .primary, .xg-jump, .d2-formats), language switch, cart link, search box, breadcrumb,
+   accordion summaries, Plex Mono labels, body text. Rollback of this step = delete this block. */
+:host([design2]) .d2-group>button,
+:host([design2]) .d2-browse{font-family:var(--head);font-weight:700;font-style:normal;font-synthesis:none;font-kerning:normal;letter-spacing:0}
+:host([design2]) .d2-menu a,
+:host([design2]) .d2-collections a{font-family:var(--head);font-weight:400;font-style:normal;font-synthesis:none;font-kerning:normal;letter-spacing:0}
+/* "View all" / "All clothing" at the top of a dropdown was bold in Space Grotesk; here it is a sub item like the rest, the divider line under it stays (look check: one bold row next to a bold top level read as a glitch). */
+:host([design2]) .d2-menu .d2-all{font-weight:400}
+/* Wobby is about 30 % narrower than the faces it replaces (Fraunces, Space Grotesk), so the same point size looks smaller: every level gets 2 px more (look check, 25 Nov 2026). Gaps between the top-level items grow with the bold face. */
+:host([design2]) .d2-group>button{font-size:19px}
+:host([design2]) .d2-menu a{font-size:17px}
+:host([design2]) .d2-collections a{font-size:21px}
+@media(min-width:741px) and (max-width:1100px){
+ :host([design2]) .d2-groups{gap:16px}
+ :host([design2]) .d2-group>button{font-size:18px}
+}
+@media(max-width:740px){
+ :host([design2]) .d2-group>button{font-size:19px}
+ :host([design2]) .d2-groups-de .d2-group>button{font-size:17px}
+ :host([design2]) .d2-menu a{font-size:19px}
+ :host([design2]) .d2-collections a{font-size:19px}
+}
+
+/* wobby step 4b: cart page, cart drawer, empty cart and the EU legal guarantee heading (25 Nov 2026).
+   Yusuf, 25 Nov 2026: these stayed in Fraunces on purpose in the morning switch; now they are Wobby Regular like every other store heading. Rollback of this step = delete this block. */
+:host([design2]) .cart-page h1,
+:host([design2]) .cart-group h2,
+:host([design2]) .order-summary h2,
+:host([design2]) .empty h1,
+:host([design2]) .empty .product-name,
+:host([design2]) .drawer h2,
+:host([design2]) .cart-line .line-main h3,
+:host([design2]) .eu-guarantee h3{font-family:var(--head);font-weight:400;font-style:normal;font-kerning:normal;letter-spacing:0}
+:host([design2]) .cart-page h1,
+:host([design2]) .cart-group h2,
+:host([design2]) .order-summary h2,
+:host([design2]) .empty h1,
+:host([design2]) .drawer h2{text-wrap:balance}
+/* The EU notice heading was a 16 px label in Fraunces; in the narrower Wobby it needs 20 px to read as a heading next to the 15-16 px notice text (look check, 25 Nov 2026). */
+:host([design2]) .eu-guarantee h3{font-size:20px;line-height:1.2}
