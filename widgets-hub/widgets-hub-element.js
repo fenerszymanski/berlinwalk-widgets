@@ -380,7 +380,7 @@ class BWWidgetsHubElement extends HTMLElement {
           line-height: 1.2;
           min-width: 0;
           overflow-wrap: anywhere;
-          text-wrap: pretty;
+          text-wrap: balance;
         }
 
         .bw-widgets-hub .bw-category-section { margin-bottom: 44px; }
