@@ -877,8 +877,9 @@
             width: min(100%, calc(100vw - 36px));
           }
 
-          /* Phones: "BerlinWalk Games" can never fit one line at this size, so it always stacks as two lines (BerlinWalk / Games). The Custom Embed "BerlinWalk Games
-             Page Hub" sets its own !important size for this rule; the :not(#bw-w) boost wins over it by specificity. */
+          /* Phones: below about 560 px "BerlinWalk Games" cannot fit one line at this size, so it stacks as two lines (BerlinWalk / Games); from about 570 px up to
+             this breakpoint it fits one line at the 84 px cap. The Custom Embed "BerlinWalk Games Page Hub" sets its own !important size for this rule; the
+             :not(#bw-w) boost wins over it by specificity. */
           .bw-games-hero h1:not(#bw-w) {
             font-size: clamp(46px, 17vw, 84px) !important;
             max-width: 100%;
