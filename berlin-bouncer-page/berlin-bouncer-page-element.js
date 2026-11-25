@@ -8,6 +8,34 @@ const BOUNCER_CONTEXT_MESSAGE = 'bw-berghain-bouncer-context';
 const BOUNCER_READY_MESSAGE = 'bw-berghain-bouncer-ready';
 const BOUNCER_VISIBLE_MESSAGE = 'bw-berghain-bouncer-visible';
 const BOUNCER_TRACK_MESSAGE = 'bw-berghain-bouncer-track';
+const BOUNCER_RESULT_MESSAGE = 'bw-berghain-bouncer-result';
+/* Club guide demand test v2 (25 Nov 2026): the box beside the game replaces the tour box and follows
+   the game result. Clicks count as bw_berlin_bouncer_tour_cta_click, ctaName club_guide_box_<state>. */
+const CLUB_GUIDE_SAMPLE_URL = 'https://fenerszymanski.github.io/berlinwalk-widgets/club-night-rescue-plan/';
+const CLUB_GUIDE_BOX_COPY = {
+  before: {
+    title: 'Going clubbing in Berlin?',
+    text: '7 real doors. A Plan B for each. Free sample.',
+    button: 'Open the free guide \u2192',
+    hash: '#home',
+  },
+  passed: {
+    title: 'You got in. Real doors are harder.',
+    text: 'What 7 Berlin clubs really publish. Free sample.',
+    button: 'See the 7 doors \u2192',
+    hash: '#home',
+  },
+  rejected: {
+    title: 'Turned away? Don\u2019t go home.',
+    text: 'Your next move when the door says no. Free sample.',
+    button: 'Your Plan B for tonight \u2192',
+    hash: '#no-bgh',
+  },
+};
+function clubGuideBoxHref(state) {
+  const copy = CLUB_GUIDE_BOX_COPY[state] || CLUB_GUIDE_BOX_COPY.before;
+  return `${CLUB_GUIDE_SAMPLE_URL}?from=bouncer-box-${state}${copy.hash}`;
+}
 const BOUNCER_PAGE_SESSION_KEY = 'bw_berghain_bouncer_page_session_id';
 const BOUNCER_LOCAL_HOSTS = new Set(['localhost', '127.0.0.1']);
 const BOUNCER_IFRAME_ORIGINS = new Set([
@@ -247,9 +275,9 @@ class BwBerlinBouncerPage extends HTMLElement {
     }
     if (this._visibilityChangeHandler) document.removeEventListener('visibilitychange', this._visibilityChangeHandler);
     if (this._iframeLoadHandler && this._iframe) this._iframe.removeEventListener('load', this._iframeLoadHandler);
-    if (this._tourClickHandler) {
-      const link = this.querySelector('.bw-bouncer-tour-cta a');
-      if (link) link.removeEventListener('click', this._tourClickHandler);
+    if (this._guideClickHandler) {
+      const link = this.querySelector('.bw-bouncer-guide-cta a');
+      if (link) link.removeEventListener('click', this._guideClickHandler);
     }
     if (this._gamesPreviewClickHandler) {
       const preview = this.querySelector('[data-bw-games-preview]');
@@ -362,7 +390,7 @@ class BwBerlinBouncerPage extends HTMLElement {
           max-width: 500px;
         }
 
-        .bw-bouncer-tour-cta a:focus-visible,
+        .bw-bouncer-guide-cta a:focus-visible,
         .bw-bouncer-games-preview a:focus-visible {
           outline: 3px solid var(--bw-neon);
           outline-offset: 4px;
@@ -389,12 +417,13 @@ class BwBerlinBouncerPage extends HTMLElement {
           font-size: 12px;
         }
 
-        .bw-bouncer-tour-cta {
+        .bw-bouncer-guide-cta {
           grid-area: cta;
           background: #111;
-          padding: 24px;
+          padding: 22px 22px 24px;
           border-radius: 16px;
-          border-left: 4px solid var(--bw-neon);
+          border: 2px solid var(--bw-neon);
+          box-shadow: 0 0 36px rgba(230, 255, 0, 0.18);
           align-self: start;
         }
 
@@ -410,30 +439,36 @@ class BwBerlinBouncerPage extends HTMLElement {
           color: #102414 !important;
         }
         
-        .bw-bouncer-tour-cta h3 {
-          margin: 0 0 8px 0;
-          font-size: 18px;
+        .bw-bouncer-guide-cta h3 {
+          color: var(--bw-neon);
+          margin: 0 0 6px 0;
+          font-size: clamp(22px, 2.4vw, 28px);
+          line-height: 1.05;
+          text-transform: uppercase;
         }
-        
-        .bw-bouncer-tour-cta p {
-          font-size: 14px;
+
+        .bw-bouncer-guide-cta p {
+          color: #D5D5D5;
+          font-size: 15px;
+          line-height: 1.4;
           margin: 0 0 16px 0;
         }
-        
-        .bw-bouncer-tour-cta a {
+
+        .bw-bouncer-guide-cta a {
           color: var(--bw-dark);
           background: var(--bw-neon);
           text-decoration: none;
-          padding: 12px 20px;
-          border-radius: 6px;
-          font-weight: 800;
-          font-size: 14px;
+          padding: 14px 20px;
+          border-radius: 8px;
+          font-weight: 900;
+          font-size: 17px;
           text-transform: uppercase;
-          display: inline-block;
+          display: block;
+          text-align: center;
           transition: background 0.2s, transform 0.2s;
         }
 
-        .bw-bouncer-tour-cta a:hover {
+        .bw-bouncer-guide-cta a:hover {
           background: #CCFF00;
           transform: translateY(-2px);
         }
@@ -522,8 +557,8 @@ class BwBerlinBouncerPage extends HTMLElement {
               "content"
               "features"
               "game"
-              "seo"
               "cta"
+              "seo"
               "more";
             padding: 48px 20px 20px;
             gap: 40px;
@@ -542,8 +577,10 @@ class BwBerlinBouncerPage extends HTMLElement {
             max-width: 400px;
           }
 
-          .bw-bouncer-tour-cta {
+          .bw-bouncer-guide-cta {
             text-align: left;
+            width: min(100%, 420px);
+            margin: -16px auto 0;
           }
 
           .bw-bouncer-device {
@@ -583,10 +620,10 @@ class BwBerlinBouncerPage extends HTMLElement {
           </iframe>
         </div>
 
-        <div class="bw-bouncer-tour-cta">
-          <h3>Survived the door?</h3>
-          <p>My walking tour starts at Alexanderplatz and shows you where Berlin's old city stood, with an archive photo at every stop.</p>
-          <a href="https://www.walkofberlin.com/book-berlin-walking-tour/berlin-then-and-now">Book the Walking Tour</a>
+        <div class="bw-bouncer-guide-cta" data-state="before">
+          <h3 data-guide-title>${CLUB_GUIDE_BOX_COPY.before.title}</h3>
+          <p data-guide-text>${CLUB_GUIDE_BOX_COPY.before.text}</p>
+          <a data-guide-link href="${clubGuideBoxHref('before')}" target="_blank" rel="noopener">${CLUB_GUIDE_BOX_COPY.before.button}</a>
         </div>
 
         <section class="bw-bouncer-seo-support" aria-labelledby="bouncer-how-title">
@@ -631,6 +668,9 @@ class BwBerlinBouncerPage extends HTMLElement {
       if (!data) return;
       if (data.type === BOUNCER_READY_MESSAGE) {
         this._sendBouncerContext();
+      }
+      if (data.type === BOUNCER_RESULT_MESSAGE) {
+        this._setGuideBoxState(data.passed === true ? 'passed' : 'rejected');
       }
     };
     window.addEventListener('message', this._handleBouncerMessage);
@@ -696,16 +736,35 @@ class BwBerlinBouncerPage extends HTMLElement {
     }
   }
 
+  _setGuideBoxState(state) {
+    const copy = CLUB_GUIDE_BOX_COPY[state];
+    const box = this.querySelector('.bw-bouncer-guide-cta');
+    if (!copy || !box) return;
+    box.dataset.state = state;
+    const title = box.querySelector('[data-guide-title]');
+    const text = box.querySelector('[data-guide-text]');
+    const link = box.querySelector('[data-guide-link]');
+    if (title) title.textContent = copy.title;
+    if (text) text.textContent = copy.text;
+    if (link) {
+      link.textContent = copy.button;
+      link.href = clubGuideBoxHref(state);
+    }
+  }
+
   _bindParentClicks() {
-    const tourLink = this.querySelector('.bw-bouncer-tour-cta a');
-    if (tourLink) {
-      this._tourClickHandler = () => {
+    const guideLink = this.querySelector('.bw-bouncer-guide-cta a');
+    if (guideLink) {
+      this._guideClickHandler = () => {
+        const box = this.querySelector('.bw-bouncer-guide-cta');
+        const state = box && box.dataset.state ? box.dataset.state : 'before';
         this._sendBouncerTrack('bw_berlin_bouncer_tour_cta_click', {
-          ctaName: 'walking_tour',
-          href: this._safeClickPath(tourLink.href),
+          ctaName: `club_guide_box_${state}`,
+          targetPath: '/berlinwalk-widgets/club-night-rescue-plan/',
+          href: CLUB_GUIDE_SAMPLE_URL,
         });
       };
-      tourLink.addEventListener('click', this._tourClickHandler);
+      guideLink.addEventListener('click', this._guideClickHandler);
     }
 
     const preview = this.querySelector('[data-bw-games-preview]');

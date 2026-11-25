@@ -414,16 +414,49 @@
       text-transform: uppercase;
     }
 
+    /* Club guide demand test v2 (25 Nov 2026): a large button high on the result screen. */
     .result-next-step {
-      color: var(--bw-yellow);
-      display: inline-block;
+      align-items: center;
+      background: var(--bw-yellow);
+      border-radius: 12px;
+      box-shadow: 0 0 0 2px rgba(0,0,0,0.65), 0 0 26px rgba(255,255,0,0.45);
+      color: #070707;
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+      margin: 2px auto 16px;
+      max-width: 340px;
+      padding: 12px 16px 13px;
+      text-decoration: none;
+      width: 100%;
+      animation: bw-next-step-glow 2.2s ease-in-out 0.8s 2;
+    }
+
+    .result-next-step:hover {
+      background: #F2FF3D;
+    }
+
+    .result-next-kicker {
       font-size: 12px;
       font-weight: 800;
-      line-height: 1.4;
-      margin-top: 18px;
-      max-width: 360px;
-      text-decoration: underline;
-      text-underline-offset: 3px;
+      letter-spacing: 0.5px;
+      line-height: 1.2;
+      text-transform: uppercase;
+    }
+
+    .result-next-label {
+      font-size: 19px;
+      font-weight: 900;
+      line-height: 1.1;
+    }
+
+    @keyframes bw-next-step-glow {
+      0%, 100% { box-shadow: 0 0 0 2px rgba(0,0,0,0.65), 0 0 26px rgba(255,255,0,0.45); }
+      50% { box-shadow: 0 0 0 2px rgba(0,0,0,0.65), 0 0 44px rgba(255,255,0,0.85); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .result-next-step { animation: none; }
     }
 
     .bw-visually-hidden {
@@ -568,8 +601,13 @@
       }
 
       .result-next-step {
-        margin-top: 10px;
+        margin: 0 auto 10px;
         max-width: 330px;
+        padding: 10px 14px 11px;
+      }
+
+      .result-next-label {
+        font-size: 18px;
       }
     }
     
@@ -610,6 +648,7 @@
       <p class="result-persona" id="result-persona"></p>
       <p class="result-msg" id="result-msg"></p>
       <p class="result-score" id="result-score"></p>
+      <a class="result-next-step" id="result-next-step" target="_blank" rel="noopener" href="https://fenerszymanski.github.io/berlinwalk-widgets/club-night-rescue-plan/?from=bouncer-passed#home" onclick="trackResultNextStepClick()"><span class="result-next-kicker" id="result-next-kicker">You got in. Real doors are harder.</span><span class="result-next-label" id="result-next-label">See 7 real Berlin doors &rarr;</span></a>
       <picture>
         <source id="result-art-avif" type="image/avif">
         <source id="result-art-webp" type="image/webp">
@@ -624,7 +663,6 @@
         <button class="restart-btn share-btn" id="share-result-btn" type="button" onclick="shareResult()">CHALLENGE A FRIEND</button>
         <button class="restart-btn" type="button" onclick="replayGame()">TRY AGAIN</button>
       </div>
-      <a class="result-next-step" id="result-next-step" target="_blank" rel="noopener" href="https://www.walkofberlin.com/book-berlin-walking-tour/berlin-then-and-now" onclick="trackResultNextStepClick()">My walking tour starts at Alexanderplatz and shows you where Berlin's old city stood, with an archive photo at every stop.</a>
     </div>
     <div class="share-toast" id="share-toast" role="status" aria-live="polite"></div>
   </main>
@@ -1119,33 +1157,39 @@
       }
     }
 
-    /* Club guide demand test (24 Nov 2026): the result link points to the free sample of the
-       Club Night Rescue Plan. Remove this block and the call in showResult to restore the tour link. */
+    /* Club guide demand test (24 Nov 2026, v2 25 Nov 2026): the result button opens the free sample
+       of the Club Night Rescue Plan; the tour link is gone from the result screen. Passed runs open the
+       seven doors, rejected runs open the Berghain Plan B screen. The wrapper page hears the result
+       (CLUB_GUIDE_RESULT_MESSAGE) and switches its own guide box to the same wording. */
     const CLUB_GUIDE_SAMPLE_URL = 'https://fenerszymanski.github.io/berlinwalk-widgets/club-night-rescue-plan/';
-    let resultNextStepKind = 'tour';
+    const CLUB_GUIDE_RESULT_MESSAGE = 'bw-berghain-bouncer-result';
+    let resultNextStepKind = 'club_guide_passed';
     function setClubGuideNextStep(isSuccess) {
       const link = document.getElementById('result-next-step');
       if (!link) return;
       resultNextStepKind = isSuccess ? 'club_guide_passed' : 'club_guide_rejected';
-      link.href = CLUB_GUIDE_SAMPLE_URL + '?from=' + (isSuccess ? 'bouncer-passed' : 'bouncer-rejected');
-      link.textContent = isSuccess
-        ? 'The real doors are harder. My Club Night Rescue Plan covers seven of them, with a Plan B for each. Open the free sample.'
-        : 'Turned away? My Club Night Rescue Plan shows seven real Berlin doors and your next move when one says no. Open the free sample.';
+      link.href = CLUB_GUIDE_SAMPLE_URL + (isSuccess ? '?from=bouncer-passed#home' : '?from=bouncer-rejected#no-bgh');
+      const kicker = document.getElementById('result-next-kicker');
+      const label = document.getElementById('result-next-label');
+      if (kicker) kicker.textContent = isSuccess ? 'You got in. Real doors are harder.' : 'Turned away? Don’t go home.';
+      if (label) label.textContent = isSuccess ? 'See 7 real Berlin doors →' : 'Your Plan B for tonight →';
+      postParentResult(isSuccess);
+    }
+    function postParentResult(isSuccess) {
+      if (!window.parent || window.parent === window) return;
+      const targetOrigin = parentOriginFromReferrer();
+      try {
+        /* Same target rule as postParentReady; the message carries only passed true/false. */
+        window.parent.postMessage({ type: CLUB_GUIDE_RESULT_MESSAGE, passed: Boolean(isSuccess) }, allowedParentOrigin(targetOrigin) ? targetOrigin : '*');
+      } catch (error) {
+        /* The wrapper box is optional outside the Wix page. */
+      }
     }
     function trackResultNextStepClick() {
-      if (resultNextStepKind === 'tour') return trackResultTourClick();
       sendBouncerEvent('bw_berlin_bouncer_tour_cta_click', {
         ctaName: resultNextStepKind,
         targetPath: '/berlinwalk-widgets/club-night-rescue-plan/',
         href: CLUB_GUIDE_SAMPLE_URL
-      });
-    }
-
-    function trackResultTourClick() {
-      sendBouncerEvent('bw_berlin_bouncer_tour_cta_click', {
-        ctaName: 'historic_centre_tour',
-        targetPath: '/book-berlin-walking-tour/berlin-then-and-now',
-        href: 'https://www.walkofberlin.com/book-berlin-walking-tour/berlin-then-and-now'
       });
     }
 
