@@ -1,9 +1,26 @@
 {
-  "updatedAt": "2026-11-24T10:13:10.601Z",
+  "updatedAt": "2026-11-25T09:41:40.663Z",
   "source": "Wix Blog API",
-  "totalPosts": 474,
+  "totalPosts": 475,
   "bookingUrl": "https://www.walkofberlin.com/book-berlin-walking-tour/berlin-then-and-now",
   "allPosts": [
+    {
+      "title": "Berlin U-Bahn Lines: Why the U1 to U4 Run Narrower Trains",
+      "slug": "berlin-u-bahn-lines",
+      "path": "/post/berlin-u-bahn-lines",
+      "url": "https://www.berlinwalk.com/post/berlin-u-bahn-lines",
+      "excerpt": "Ever noticed the U2 feels smaller than the U8? It is. Berlin runs two sizes of U-Bahn train, and once you know which lines take which, the rush hour, the boards on the U5 and the new trains all make sense.",
+      "category": "Living in Berlin",
+      "categorySlug": "living-in-berlin",
+      "topic": "living-in-berlin",
+      "topicLabel": "Living in Berlin",
+      "readTime": "6 min read",
+      "publishedDate": "2026-11-25T09:39:12.577Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_a2636967db0343e7973ae8236b304366~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-bulowstrasse-u2-viaduct.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_a2636967db0343e7973ae8236b304366~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-bulowstrasse-u2-viaduct.jpg",
+      "alt": "Yellow U2 train on the elevated viaduct at Bülowstraße in Berlin, between stone pylons with traffic below",
+      "relatedToolSlug": "u-bahn-width-gauge"
+    },
     {
       "title": "Gleisdreieck Berlin: The Station Where Two Lines Cross and the Park on Old Rail Land",
       "slug": "gleisdreieck-berlin",

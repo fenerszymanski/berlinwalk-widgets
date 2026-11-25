@@ -1,5 +1,5 @@
 {
- "updatedAt": "2026-11-24T10:13:11.282Z",
+ "updatedAt": "2026-11-25T09:42:06.614Z",
  "source": "Wix Blog API + blog-category/categories.json",
  "slug": "living-in-berlin",
  "categoryId": "00af1018-ef7b-465a-93b6-916187609da4",
@@ -8,28 +8,28 @@
  "shelfMode": "curated",
  "shelfLegend": "By the part of life it hits",
  "shelfLegendSub": "Four shelves, because that is how the questions actually arrive",
- "totalPosts": 86,
- "toolCount": 86,
+ "totalPosts": 87,
+ "toolCount": 87,
  "lead": {
-  "title": "Café Achteck Berlin: Where the Green Cast-Iron Toilets Still Stand",
-  "slug": "cafe-achteck-berlin",
-  "path": "/post/cafe-achteck-berlin",
-  "excerpt": "Berliners still pass small green cast-iron octagons on squares in Moabit, Kreuzberg and Schöneberg. Here is how Café Achteck got its name, why only 13 remain standing and which 11 are open for free today.",
+  "title": "Berlin U-Bahn Lines: Why the U1 to U4 Run Narrower Trains",
+  "slug": "berlin-u-bahn-lines",
+  "path": "/post/berlin-u-bahn-lines",
+  "excerpt": "Ever noticed the U2 feels smaller than the U8? It is. Berlin runs two sizes of U-Bahn train, and once you know which lines take which, the rush hour, the boards on the U5 and the new trains all make sense.",
   "minutes": 6,
   "readTime": "6 min read",
-  "publishedDate": "2026-11-23T09:57:49.968Z",
-  "alt": "Green octagonal cast-iron Café Achteck pavilion standing on a cobblestone island at Chamissoplatz in Berlin-Kreuzberg under summer trees",
-  "lead": "https://static.wixstatic.com/media/5a08a3_140ac51865f141adb16efe108f5b1a53~mv2.jpg/v1/fill/w_1400,h_620,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
-  "thumb": "https://static.wixstatic.com/media/5a08a3_140ac51865f141adb16efe108f5b1a53~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
-  "square": "https://static.wixstatic.com/media/5a08a3_140ac51865f141adb16efe108f5b1a53~mv2.jpg/v1/fill/w_184,h_184,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
-  "shelf": "draussen",
+  "publishedDate": "2026-11-25T09:39:12.577Z",
+  "alt": "Yellow U2 train on the elevated viaduct at Bülowstraße in Berlin, between stone pylons with traffic below",
+  "lead": "https://static.wixstatic.com/media/5a08a3_a2636967db0343e7973ae8236b304366~mv2.jpg/v1/fill/w_1400,h_620,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+  "thumb": "https://static.wixstatic.com/media/5a08a3_a2636967db0343e7973ae8236b304366~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+  "square": "https://static.wixstatic.com/media/5a08a3_a2636967db0343e7973ae8236b304366~mv2.jpg/v1/fill/w_184,h_184,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+  "shelf": "wege",
   "topic": "living-in-berlin",
-  "figure": "11",
-  "line": "green cast-iron Caf&eacute; Achtecks still operate as free public toilets across Berlin, out of 13 standing octagons.",
+  "figure": "2.65 m",
+  "line": "is the width of a car on the U5 to U9, against about 2.30 to 2.40 m on the U1 to U4.",
   "term": "",
   "gloss": "",
   "termCta": "",
-  "tool": "cafe-achteck-survivor-map"
+  "tool": "u-bahn-width-gauge"
  },
  "glossary": [
   {
@@ -1039,6 +1039,17 @@
    "title": "Wege",
    "lead": "Getting around, and keeping the bike you got around on",
    "posts": [
+    {
+     "title": "Berlin U-Bahn Lines: Why the U1 to U4 Run Narrower Trains",
+     "slug": "berlin-u-bahn-lines",
+     "path": "/post/berlin-u-bahn-lines",
+     "minutes": 6,
+     "alt": "Yellow U2 train on the elevated viaduct at Bülowstraße in Berlin, between stone pylons with traffic below",
+     "thumb": "https://static.wixstatic.com/media/5a08a3_a2636967db0343e7973ae8236b304366~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+     "line": "is the width of a car on the U5 to U9, against about 2.30 to 2.40 m on the U1 to U4.",
+     "figure": "2.65 m",
+     "tool": "u-bahn-width-gauge"
+    },
     {
      "title": "Kottbusser Tor: Is Kotti Dangerous, and Why the Square Looks the Way It Does",
      "slug": "kottbusser-tor-berlin",
