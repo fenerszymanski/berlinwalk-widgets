@@ -1202,3 +1202,11 @@ button.ys-words-tag:focus-visible{outline:2px solid var(--green);outline-offset:
 /* Wobby is narrower, so a two-line heading can leave a lone word ("Your Berlin Street in / 1928" on a phone): balance the lines of the headings. */
 :host([design2]) .d2-hero-copy h1,
 :host([design2]) :is(.d2-personal,.d2-shelf,.d2-picks,.d2-explore,.d2-listing) :is(h1,h2,h3){text-wrap:balance}
+
+/* wobby step 2: gift guide (hero title, shelf titles, card titles including the voucher card) */
+:host([design2]) .xg-hero h1.lead,
+:host([design2]) .xg-head h2,
+:host([design2]) .xg .product-name,
+:host([design2]) .xg .card .product-name{font-family:var(--head);font-weight:400;font-style:normal;font-kerning:normal;letter-spacing:0}
+:host([design2]) .xg-hero h1.lead,
+:host([design2]) .xg-head h2{text-wrap:balance}
