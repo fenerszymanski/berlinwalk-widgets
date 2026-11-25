@@ -1219,3 +1219,23 @@ button.ys-words-tag:focus-visible{outline:2px solid var(--green);outline-offset:
 @media(min-width:741px){
 :host([design2]) .xg-hero-inner{min-height:420px}
 }
+
+/* wobby step 3: product pages (product title, section titles in the accordions, similar-designs shelf and its card titles, reviews, the calendar page headings).
+   Left as they were on purpose: the EU legal guarantee heading (legal text), the accordion summaries, the nav and the cart. */
+:host([design2]) .d2-standard .product-title h1,
+:host([design2][data-bw-pdp="c"]) .product-title h1,
+:host([design2]) .product-layout .product-title h1,
+:host([design2]) .product-layout h2,
+:host([design2]) .bw-picks h2,
+:host([design2]) .rw-cross h2,
+:host([design2]) .rw-reviews h2,
+:host([design2]) .d2-recommendations h2,
+:host([design2]) .d2-recommendations .product-name,
+:host([design2]) .d2-recommendations .d2-card .product-name,
+:host([design2]) .cal-heading h1,
+:host([design2]) .cal-wrap .cal-step h2,
+:host([design2]) .cal-wrap .cal-spec h2{font-family:var(--head);font-weight:400;font-style:normal;font-kerning:normal;letter-spacing:0}
+:host([design2]) .product-layout .product-title h1,
+:host([design2]) .product-layout h2,
+:host([design2]) .d2-recommendations h2,
+:host([design2]) .cal-heading h1{text-wrap:balance}
