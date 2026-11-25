@@ -164,3 +164,24 @@ html, body {
     flex: 0 0 16px;
   }
 }
+
+/* Wobby, the brand headline face (Yusuf, 25 Nov 2026): widget headings (h1-h3 and .bw-title) in every widget that links this file.
+   One weight (400), no italic, no tracking, so weight and letter-spacing are fixed here. Wix-hosted woff2, CORS *.
+   Surveyed on 491 widgets at 1024 and 375 px before shipping: no heading wraps further, none newly overflows. */
+@font-face {
+  font-family: "Wobby";
+  src: url("https://static.wixstatic.com/ufonts/5a08a3_53d3fadb4e6e4aadb41345f23354ae47/woff2/file.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+h1,
+h2,
+h3,
+.bw-title {
+  font-family: "Wobby", Montserrat, Arial, sans-serif !important;
+  font-weight: 400 !important;
+  font-synthesis: none;
+  letter-spacing: 0 !important;
+}

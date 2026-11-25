@@ -189,10 +189,10 @@ html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozc935g3 #comp-mozch2i3 h2,
 html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozc935g3 #comp-mozch2i3 h3,
 html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozc935g3 #comp-mozch2i3 span {
   color: #FFFFFF !important;
-  font-family: Fraunces, Merriweather, Georgia, serif !important;
+  font-family: Wobby, Fraunces, Merriweather, Georgia, serif !important;
   font-size: clamp(44px, 6.2vw, 82px) !important;
-  font-weight: 500 !important;
-  letter-spacing: -.045em !important;
+  font-weight: 400 !important;
+  letter-spacing: 0 !important;
   line-height: .94 !important;
   margin: 0 !important;
   max-width: 720px !important;
@@ -369,8 +369,8 @@ html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozc935g3 .bw-tools-shell-v2-s
 html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozc935g3 .bw-tools-shell-v2-summary-head strong {
   color: #FFFFFF !important;
   display: block !important;
-  font: 600 clamp(20px, 2.5vw, 30px)/1.05 Fraunces, Merriweather, Georgia, serif !important;
-  letter-spacing: -.025em !important;
+  font: 400 clamp(20px, 2.5vw, 30px)/1.05 Wobby, Fraunces, Merriweather, Georgia, serif !important;
+  letter-spacing: 0 !important;
 }
 
 html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozc935g3 .bw-tools-shell-v2-summary-facts {
@@ -723,8 +723,8 @@ html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozmt2at[data-bw-shell-v2-toc-
 html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozmt2at[data-bw-shell-v2-toc-host="1"] .bw-tools-shell-v2-tour-rail-title {
   color: #FFFFFF !important;
   display: block !important;
-  font: 650 23px/1.05 Fraunces, Merriweather, Georgia, serif !important;
-  letter-spacing: -.025em !important;
+  font: 400 23px/1.05 Wobby, Fraunces, Merriweather, Georgia, serif !important;
+  letter-spacing: 0 !important;
   margin: 8px 0 5px !important;
 }
 
@@ -999,8 +999,8 @@ html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozmgdoo.bw-tools-shell-v2-tou
 html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozmgdoo.bw-tools-shell-v2-tour-band #comp-mozmi7u3 h3,
 html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozmgdoo.bw-tools-shell-v2-tour-band #comp-mozmi7u3 span {
   color: #FFFFFF !important;
-  font: 500 clamp(42px, 5.2vw, 67px)/.99 Fraunces, Merriweather, Georgia, serif !important;
-  letter-spacing: -.045em !important;
+  font: 400 clamp(42px, 5.2vw, 67px)/.99 Wobby, Fraunces, Merriweather, Georgia, serif !important;
+  letter-spacing: 0 !important;
   margin: 12px 0 20px !important;
   text-align: left !important;
   white-space: normal !important;
@@ -1133,13 +1133,13 @@ html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozp1zlv [data-bw-shell-v2-rel
 
 html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozp1zlv #comp-mozpfm6g {
   color: var(--bw-shell-ink) !important;
-  font: 650 42px/1 Fraunces, Merriweather, Georgia, serif !important;
+  font: 400 42px/1 Wobby, Fraunces, Merriweather, Georgia, serif !important;
   grid-area: head !important;
   height: auto !important;
   margin: 0 !important;
   min-height: 0 !important;
   text-align: left !important;
-  letter-spacing: -.035em !important;
+  letter-spacing: 0 !important;
   padding-right: 210px !important;
   width: 100% !important;
 }
@@ -1160,8 +1160,8 @@ html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozp1zlv #comp-mozpfm6g h3,
 html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozp1zlv #comp-mozpfm6g h4,
 html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozp1zlv #comp-mozpfm6g span {
   color: var(--bw-shell-ink) !important;
-  font: 650 42px/1 Fraunces, Merriweather, Georgia, serif !important;
-  letter-spacing: -.035em !important;
+  font: 400 42px/1 Wobby, Fraunces, Merriweather, Georgia, serif !important;
+  letter-spacing: 0 !important;
   margin: 0 !important;
   text-align: left !important;
 }
@@ -1456,6 +1456,12 @@ html.bw-tools-detail.bw-tools-shell-v2 body .bw-tool-bridge p {
   color: #FFFFFF !important;
   font-family: Fraunces, Merriweather, Georgia, serif !important;
   margin-top: 0 !important;
+}
+
+html.bw-tools-detail.bw-tools-shell-v2 body .bw-tool-bridge h2 {
+  font-family: Wobby, Fraunces, Merriweather, Georgia, serif !important;
+  font-weight: 400 !important;
+  letter-spacing: 0 !important;
 }
 
 html.bw-tools-detail.bw-tools-shell-v2 body .bw-tool-bridge .bw-tool-bridge-book {
@@ -1939,4 +1945,13 @@ html.bw-tools-shell-v2[data-bw-host-repair="pilot"].bw-host-repair-pilot body #c
 html.bw-tools-shell-v2[data-bw-host-repair="all"].bw-host-repair-all body #comp-mozco5et > div:has(iframe) > div:has(iframe) > div:has(iframe) {
   height: auto !important;
 }
+}
+
+/* Wobby, the brand headline face (Yusuf, 25 Nov 2026): tool page headings. One weight (400), no italic, no tracking. Wix-hosted woff2, CORS *. */
+@font-face {
+  font-family: Wobby;
+  src: url("https://static.wixstatic.com/ufonts/5a08a3_53d3fadb4e6e4aadb41345f23354ae47/woff2/file.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
 }

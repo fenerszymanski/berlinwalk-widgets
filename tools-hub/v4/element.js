@@ -5,6 +5,15 @@
   font-display: swap;
 }
 
+/* Wobby, the brand headline face (Yusuf, 25 Nov 2026): page title and section headings. One weight (400), no tracking. */
+@font-face {
+  font-family: Wobby;
+  src: url('https://static.wixstatic.com/ufonts/5a08a3_53d3fadb4e6e4aadb41345f23354ae47/woff2/file.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
 .bw-hub-v4 {
   --green: #1b5e20;
   --ink: #123d18;
@@ -73,20 +82,21 @@
 
 .bw-hub-v4 h1,
 .bw-hub-v4 h2 {
-  font-family: Fraunces, serif;
+  font-family: Wobby, Fraunces, serif;
+  font-synthesis: none;
 }
 
 .bw-hub-v4 h1 {
   font-size: clamp(40px, 5.5vw, 72px);
-  font-weight: 650;
+  font-weight: 400;
   line-height: 1.05;
-  letter-spacing: -2px;
+  letter-spacing: 0;
 }
 
 .bw-hub-v4 h2 {
   font-size: 32px;
   line-height: 1.15;
-  font-weight: 600;
+  font-weight: 400;
 }
 
 .bw-hub-v4 .sr-only {
@@ -586,8 +596,10 @@
 }
 
 .bw-hub-v4 .empty h3 {
-  font-family: Fraunces, serif;
+  font-family: Wobby, Fraunces, serif;
   font-size: 26px;
+  font-weight: 400;
+  font-synthesis: none;
   line-height: 1.2;
 }
 
@@ -703,7 +715,7 @@
   }
   .bw-hub-v4 h1 {
     font-size: 36px;
-    letter-spacing: -1px;
+    letter-spacing: 0;
   }
   .bw-hub-v4 h2 {
     font-size: 24px;
