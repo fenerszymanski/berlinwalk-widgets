@@ -6,6 +6,16 @@
   src: url("../home-products/assets/fonts/Fraunces-Variable.ttf") format("truetype");
 }
 
+/* Wobby, the brand headline face (Yusuf, 25 Nov 2026): headings only. One weight (400), no italic, so the heading rules
+   below use weight 400 and letter-spacing 0. Numerals and ratings keep BW Fraunces. Wix-hosted woff2, CORS *. */
+@font-face {
+  font-display: swap;
+  font-family: "Wobby";
+  font-style: normal;
+  font-weight: 400;
+  src: url("https://static.wixstatic.com/ufonts/5a08a3_53d3fadb4e6e4aadb41345f23354ae47/woff2/file.woff2") format("woff2");
+}
+
 /*
  * BerlinWalk four-page editorial system.
  *
@@ -34,6 +44,7 @@
   --bw-ed-line: rgba(16, 36, 20, 0.2);
   --bw-ed-line-soft: rgba(16, 36, 20, 0.12);
   --bw-ed-display: "BW Fraunces", Georgia, serif;
+  --bw-ed-heading: "Wobby", "BW Fraunces", Georgia, serif;
   --bw-ed-body-font: Montserrat, Arial, sans-serif;
   --bw-ed-quote: Merriweather, Georgia, serif;
 }
@@ -76,10 +87,11 @@
 :is(#comp-mpljwtm6, #comp-mpljz1bj):has(.bw-page-editorial) :is(h1, h2),
 :is(#comp-mp6nj8g4, #comp-mp6njhlp):has(.bw-page-editorial) :is(h1, h2),
 :is(#comp-mpbpkb541, #comp-mpbplddk):has(.bw-page-editorial) :is(h1, h2) {
-  font-family: var(--bw-ed-display);
-  font-variation-settings: "opsz" 72, "SOFT" 20, "WONK" 0;
-  font-weight: 650;
-  letter-spacing: -0.035em;
+  font-family: var(--bw-ed-heading);
+  font-variation-settings: normal;
+  font-synthesis: none;
+  font-weight: 400;
+  letter-spacing: 0;
 }
 
 :is(#comp-mpbnpbye, #comp-mpbnyd6v):has(.bw-page-editorial) :is(.bw-mp-eyebrow, .bw-mp-wayfinder-top, .bw-mp-board-label),
@@ -386,10 +398,12 @@
 
 :is(#comp-mpbnpbye, #comp-mpbnyd6v):has(.bw-page-editorial) .bw-mp-route-stop h3 {
   color: var(--bw-ed-ink);
-  font-family: var(--bw-ed-display);
+  font-family: var(--bw-ed-heading);
   font-size: 28px;
-  font-variation-settings: "opsz" 42, "SOFT" 20;
-  font-weight: 650;
+  font-variation-settings: normal;
+  font-synthesis: none;
+  font-weight: 400;
+  letter-spacing: 0;
 }
 
 :is(#comp-mpbnpbye, #comp-mpbnyd6v):has(.bw-page-editorial) .bw-mp-route-stop p {
@@ -824,10 +838,12 @@
 
 :is(#comp-mpbpkb541, #comp-mpbplddk):has(.bw-page-editorial) .bw-guide-belief h3 {
   color: var(--bw-ed-ink);
-  font-family: var(--bw-ed-display);
+  font-family: var(--bw-ed-heading);
   font-size: 28px;
-  font-variation-settings: "opsz" 42, "SOFT" 20;
-  font-weight: 650;
+  font-variation-settings: normal;
+  font-synthesis: none;
+  font-weight: 400;
+  letter-spacing: 0;
 }
 
 :is(#comp-mpbpkb541, #comp-mpbplddk):has(.bw-page-editorial) .bw-guide-belief p {
@@ -1193,10 +1209,12 @@
 
 :is(#comp-mpljwtm6, #comp-mpljz1bj):has(.bw-page-editorial) .bw-rs-stop h3 {
   color: var(--bw-ed-ink);
-  font-family: var(--bw-ed-display);
+  font-family: var(--bw-ed-heading);
   font-size: 34px;
-  font-variation-settings: "opsz" 48, "SOFT" 20;
-  font-weight: 650;
+  font-variation-settings: normal;
+  font-synthesis: none;
+  font-weight: 400;
+  letter-spacing: 0;
 }
 
 :is(#comp-mpljwtm6, #comp-mpljz1bj):has(.bw-page-editorial) .bw-rs-location {
