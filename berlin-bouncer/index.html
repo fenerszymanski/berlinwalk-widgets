@@ -1034,6 +1034,13 @@
        listed first, so showing the data order made every correct answer "A". Daily and shared
        challenges use the run's seeded random, so friends on one challenge see the same order.
        choiceIndex in telemetry stays the data index; displayIndex is the on-screen position. */
+    function drawDoorMood() {
+      const max = Math.max(0, Math.floor(Number(gameData && gameData.doorMoodMax) || 0));
+      if (!max) return 0;
+      const random = activeChallengeSeed ? seededRandom(`${activeChallengeSeed}:door-mood`) : Math.random;
+      return Math.floor(random() * (max + 1));
+    }
+
     function shuffledOptionOrder(length) {
       const order = Array.from({ length }, (_, index) => index);
       const random = runRandom || Math.random;
@@ -1642,15 +1649,18 @@
       
       let endingKey = 'fail';
       const isTimeoutRun = runCompletionReason === 'timeout';
+      /* Door mood (25 Nov 2026): a hidden 0..doorMoodMax penalty per night, so a good run can still be
+         turned away. Daily and shared challenges get the same mood for everyone; shame uses the raw score. */
+      const doorScore = score - drawDoorMood();
       if (isTimeoutRun) {
         endingKey = score < Number(gameData.shameThreshold ?? -100) ? 'shame' : 'fail';
       } else if (score < Number(gameData.shameThreshold ?? -100)) {
         endingKey = 'shame';
-      } else if (score < gameData.threshold) {
+      } else if (doorScore < gameData.threshold) {
         endingKey = 'fail';
-      } else if (score >= gameData.vipThreshold) {
+      } else if (doorScore >= gameData.vipThreshold) {
         endingKey = 'vip';
-      } else if (score >= gameData.threshold) {
+      } else if (doorScore >= gameData.threshold) {
         endingKey = 'success';
       }
       
@@ -1668,7 +1678,14 @@
             reason: 'You hesitated at the door while the 10-second clock ran out.',
             scoreLine: 'Timed out at the door'
           }
-        : (personaPool[personaIndex] || null);
+        : (endingKey === 'fail' && score >= gameData.threshold
+          ? {
+              id: 'door-mood',
+              title: 'Not Your Night',
+              reason: 'Your calls were good. Tonight the door just said no.',
+              scoreLine: 'Door mood'
+            }
+          : (personaPool[personaIndex] || null));
       
       // Handle ending music / audio
       if (bgmAudio) bgmAudio.pause();

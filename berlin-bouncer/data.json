@@ -2,9 +2,10 @@
   "version": "3.0",
   "title": "Can You Get Into Berghain?",
   "lead": "Test a fictional Berlin club-door night with outfit, queue and timed decisions.",
-  "threshold": -2,
+  "threshold": 8,
   "shameThreshold": -9,
-  "vipThreshold": 7,
+  "vipThreshold": 13,
+  "doorMoodMax": 10,
   "timerSeconds": 10,
   "phases": {
     "outfit": {
