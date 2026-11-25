@@ -10,7 +10,13 @@ const BW_HEADER_SCRIPT_URL = (document.currentScript && document.currentScript.s
 const BW_HEADER_LOGO_URL = new URL('../assets/walkofberlin-wordmark-green.png', BW_HEADER_SCRIPT_URL).href;
 const BW_HEADER_LOGO_ON_GREEN_URL = new URL('../assets/walkofberlin-wordmark-yellow.png', BW_HEADER_SCRIPT_URL).href;
 const BW_HEADER_MONO_URL = new URL('../brand/fonts/editorial-v2/IBMPlexMono-SemiBold.woff2', BW_HEADER_SCRIPT_URL).href;
-const BW_HEADER_MENU_FONT_URL = new URL('../home-two-doors/assets/fonts/Fraunces-Variable-latin.woff2', BW_HEADER_SCRIPT_URL).href;
+// Menu font: Wobby, the brand headline face (Yusuf, 25 Nov 2026: "ana menu itemleri (bold olabilir) alt menu itemleri regular olabilir").
+// Top-level items are Wobby Bold 700, dropdown and mobile sub-items Wobby Regular 400; both are real faces (font-synthesis:none, no faux bold).
+// Regular is the Wix-hosted site font every other Wobby heading on the site already loads (shared cache). Bold has no Wix address, so it is
+// served from this repo next to the other brand fonts. Private font: all rights reserved, see brand/fonts/wobby/README.txt.
+const BW_HEADER_MENU_REGULAR_URL = 'https://static.wixstatic.com/ufonts/5a08a3_53d3fadb4e6e4aadb41345f23354ae47/woff2/file.woff2';
+const BW_HEADER_MENU_BOLD_URL = new URL('../brand/fonts/wobby/Wobby-Bold.woff2', BW_HEADER_SCRIPT_URL).href;
+const BW_HEADER_MENU_FAMILY = 'Wobby, Montserrat, Arial, sans-serif';
 // Berlin Then and Now (service 145cb27e). The legacy booking path stays
 // reachable for guests who booked before 30 September, but nothing links to it.
 const BW_HEADER_BUILD = BW_HEADER_NAV_VERSION;
@@ -1278,9 +1284,10 @@ class BWHeaderElement extends HTMLElement {
           border-radius: 8px;
           color: var(--green);
           cursor: pointer;
-          font-family: BWMenuFraunces, Georgia, serif;
+          font-family: ${BW_HEADER_MENU_FAMILY};
           font-size: 17px;
-          font-weight: 500;
+          font-synthesis: none;
+          font-weight: 700;
           letter-spacing: 0;
           line-height: 1.2;
           padding: 12px 11px;
@@ -1400,7 +1407,8 @@ class BWHeaderElement extends HTMLElement {
           border: 1px solid var(--light-green);
           border-radius: 10px;
           box-shadow: 0 18px 44px rgba(27, 94, 32, 0.16);
-          font-family: BWMenuFraunces, Georgia, serif;
+          font-family: ${BW_HEADER_MENU_FAMILY};
+          font-synthesis: none;
           left: 0;
           list-style: none;
           margin: 0;
@@ -1422,14 +1430,15 @@ class BWHeaderElement extends HTMLElement {
         .bw-header-store-group{min-width:0;list-style:none}
         .bw-header-store-group ul{margin:0;padding:0;list-style:none}
         .bw-header-store-note{display:block;padding:0 14px 8px;color:#526452;font-family:inherit;font-size:13px;font-weight:400;line-height:1.4}
-        .bw-header-submenu .bw-header-store-group-title{font-weight:700;border-bottom:1px solid #c5e1a5}
+        /* Group titles stay Wobby Regular like every sub-menu item (Yusuf: sub-menu items Regular); they keep their rank through size, the dark green and a 2 px rule. */
+        .bw-header-submenu .bw-header-store-group-title{font-size:19px;font-weight:400;color:var(--green-dark);border-bottom:2px solid #c5e1a5}
         .bw-header-submenu .bw-header-store-group a{white-space:normal;overflow-wrap:anywhere}
         .bw-header-nav .bw-header-clothing-link{display:inline-block;text-decoration:none;white-space:nowrap}
         .bw-header-nav .bw-header-store-link{text-decoration:none;padding:12px 0 12px 11px;display:inline-block}
         .bw-header-store-expand{padding:12px 0!important;min-width:20px;margin-left:4px}
         .bw-header-nav button:focus:not(:focus-visible){outline:none;box-shadow:none}
         .bw-header-store-mobile-group{padding:12px 0;border-top:1px solid #c5e1a555}
-        .bw-header-store-mobile-group>.bw-header-store-group-title{font-weight:700}
+        .bw-header-store-mobile-group>.bw-header-store-group-title{font-size:22px;font-weight:400;color:var(--light-green)}
 
         .bw-header-submenu a:focus-visible{outline:2px solid var(--green);outline-offset:-2px}
         .bw-header-submenu[hidden] {display:none!important}
@@ -1450,7 +1459,7 @@ class BWHeaderElement extends HTMLElement {
           color: var(--green);
           display: block;
           font-size: 17px;
-          font-weight: 500;
+          font-weight: 400;
           letter-spacing: 0;
           line-height: 1.3;
           padding: 12px 14px;
@@ -1679,9 +1688,10 @@ class BWHeaderElement extends HTMLElement {
           border-bottom: 1px solid rgba(255, 255, 255, 0.12);
           color: #FFFFFF;
           display: block;
-          font-family: BWMenuFraunces, Georgia, serif;
+          font-family: ${BW_HEADER_MENU_FAMILY};
           font-size: 22px;
-          font-weight: 500;
+          font-synthesis: none;
+          font-weight: 400;
           letter-spacing: 0;
           line-height: 1.2;
           padding: 14px 0;
@@ -1696,14 +1706,18 @@ class BWHeaderElement extends HTMLElement {
           border-bottom: 1px solid rgba(255, 255, 255, 0.12);
           color: #FFFFFF;
           cursor: pointer;
-          font-family: BWMenuFraunces, Georgia, serif;
+          font-family: ${BW_HEADER_MENU_FAMILY};
           font-size: 22px;
-          font-weight: 500;
+          font-synthesis: none;
+          font-weight: 700;
           letter-spacing: 0;
           line-height: 1.2;
           padding: 14px 0;
           text-transform: none;
         }
+
+        /* A direct leaf is a top-level item too: Bold, even though it is an anchor (.bw-header-mobile-nav a above sets Regular for sub-items). */
+        .bw-header-mobile-nav > a.bw-header-mobile-section-label { font-weight: 700; }
 
         /* A direct leaf reserves the parent disclosure marker width without implying expansion. */
         .bw-header-mobile[data-bw-navigation] .bw-header-mobile-nav > a.bw-header-mobile-section-label { padding: 14px 0 14px 14px !important; }
@@ -1910,7 +1924,7 @@ function bwHeaderStoreMode() {
   // (144 KB) on store pages too, where the whole masthead is hidden. A visitor who moves from the store to another page gets it then.
   if(!store&&!document.getElementById('bw-header-menu-font')){
     const font=document.createElement('style');font.id='bw-header-menu-font';
-    font.textContent=`@font-face{font-family:BWMenuFraunces;font-style:normal;font-weight:100 900;font-display:swap;src:url(${BW_HEADER_MENU_FONT_URL}) format('woff2')}`;
+    font.textContent=`@font-face{font-family:Wobby;font-style:normal;font-weight:400;font-display:swap;src:url(${BW_HEADER_MENU_REGULAR_URL}) format('woff2')}@font-face{font-family:Wobby;font-style:normal;font-weight:700;font-display:swap;src:url(${BW_HEADER_MENU_BOLD_URL}) format('woff2')}`;
     document.head.appendChild(font);
   }
   // Separate ownership: a cached older header watcher may replace its own store-mode stylesheet after SPA navigation.
