@@ -146,6 +146,18 @@ h2>.sk-heading{width:55%}
 .ys-mail-status[data-kind=ok]{color:var(--leaf);background:#eaf3e4}
 .ys-mail-status[data-kind=error]{color:#632d1b;background:#fbeee8}
 .ys-mail .ys-mail-consent{margin-top:10px;font-size:13px;color:var(--muted);text-wrap:balance}
+/* "Send this to someone who lived here" (25 Nov 2026): a secondary outline action between the Add to cart button and the mail box. Same 7 % inset as .ys-quick on a phone. */
+.ys-share{display:grid;gap:8px;margin-top:12px;text-align:left}
+.ys-share[hidden]{display:none}
+.ys-share p{margin:0}
+.ys-share-t{font-size:13px;font-weight:600;line-height:1.4;color:var(--ink)}
+.ys-share-actions{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.ys-share-main,.ys-share-btn{display:flex;align-items:center;justify-content:center;width:100%;min-height:48px;padding:8px 6px;border:1.5px solid var(--green);border-radius:30px;background:transparent;color:var(--green);font-size:13px;font-weight:600;letter-spacing:.04em;line-height:1.3;text-align:center;text-wrap:balance;text-decoration:none;cursor:pointer}
+.ys-share-main{padding:10px 16px}
+.ys-share-main:hover,.ys-share-btn:hover{background:#f4f8f2;color:var(--green)}
+.ys-share-status{position:absolute;width:1px;height:1px;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap}
+.ys-share-status[data-kind=error]{position:static;width:auto;height:auto;margin:0;overflow:visible;clip:auto;white-space:normal;padding:10px 12px;border-radius:8px;font-size:14px;font-weight:600;color:#632d1b;background:#fbeee8}
+@media(max-width:740px){.ys-share{padding:0 7%}}
 .ys-hp{position:absolute;left:-9999px;width:1px;height:1px;opacity:0;pointer-events:none}
 .ys-quick{display:grid;gap:8px}
 .ys-quick[hidden]{display:none}

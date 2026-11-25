@@ -189,6 +189,8 @@ const TEXT = new Map(Object.entries({
   'Free delivery to Germany, the EU, the UK and the US': 'Kostenloser Versand nach Deutschland, in die EU, nach UK und in die USA',
   'Printed in Europe': 'Gedruckt in Europa', 'Misprinted or damaged? Reprinted free': 'Fehldruck oder beschädigt? Kostenloser Neudruck', 'Secure checkout': 'Sichere Bezahlung',
   'Sent by email within 24 hours': 'Per E-Mail innerhalb von 24 Stunden', 'JPG and PDF, 45 x 60 cm at 300 ppi': 'JPG und PDF, 45 x 60 cm mit 300 ppi', 'Something wrong with the file? I fix it': 'Stimmt etwas mit der Datei nicht? Ich korrigiere es',
+  'Send this to someone who lived here': 'An jemanden schicken, der hier gewohnt hat', 'Email': 'E-Mail', 'Copy link': 'Link kopieren', 'Link copied': 'Link kopiert',
+  'Sharing did not open. Please try again.': 'Das Teilen hat sich nicht geöffnet. Versuche es bitte noch einmal.', 'I could not copy the link. Use WhatsApp or email instead.': 'Ich konnte den Link nicht kopieren. Nimm WhatsApp oder E-Mail.',
   'Keep this picture': 'Behalte dieses Bild', 'I email you this picture of your street in 1928, free, with a link back to your preview and the print options.': 'Ich schicke dir dieses Bild deiner Straße von 1928 per E-Mail, kostenlos, mit einem Link zurück zu deiner Vorschau und zu den Druckoptionen.',
   'Your email': 'Deine E-Mail', 'Send me the picture': 'Schick mir das Bild', 'Send it and remind me once before Christmas': 'Schick es und erinnere mich einmal vor Weihnachten',
   'Send again': 'Noch einmal senden', 'Send again with reminder': 'Noch einmal mit Erinnerung senden', 'Sending…': 'Wird gesendet…', 'Please enter a valid email address.': 'Bitte gib eine gültige E-Mail-Adresse ein.',

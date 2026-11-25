@@ -162,8 +162,10 @@ const SOURCE_HOSTS = [[/(^|\.)instagram\.com$/, 'instagram'], [/(^|\.)(facebook\
   [/(^|\.)(linkedin\.com|lnkd\.in)$/, 'linkedin'], [/(^|\.)reddit\.com$/, 'reddit'], [/(^|\.)pinterest\.[a-z.]+$/, 'pinterest'],
   [/(^|\.)(chatgpt\.com|openai\.com)$/, 'chatgpt'], [/(^|\.)perplexity\.ai$/, 'perplexity'],
   [/(^|\.)(walkofberlin\.com|walksofberlin\.com|berlinwalk\.com)$/, 'site']];
-export function sourceLabel(search = '', referrer = '') {
+export function sourceLabel(search = '', referrer = '', via = '') {
   const q = new URLSearchParams(search || ''), tidy = v => String(v || '').toLowerCase().replace(/[^a-z0-9_.-]+/g, '').slice(0, 24);
+  // A link made by "Send this to someone who lived here" carries `via=share` in its FRAGMENT (storefront-element.js reads it once and hands it over as `via`); it wins over the referrer, which a chat app does not send anyway.
+  if (via === 'share') return 'share';
   let host = ''; try { host = new URL(referrer).hostname.toLowerCase().replace(/^www\./, ''); } catch (e) { host = ''; }
   const known = SOURCE_HOSTS.find(([re]) => re.test(host))?.[1] || '';
   if (q.get('utm_source')) return tidy(q.get('utm_source'));
@@ -172,7 +174,7 @@ export function sourceLabel(search = '', referrer = '') {
   if (known) return known;
   return host ? tidy(host) : 'direct';
 }
-const LANDING_SOURCE = typeof location !== 'undefined' ? sourceLabel(location.search, typeof document !== 'undefined' ? document.referrer : '') : '';
+const LANDING_SOURCE = typeof location !== 'undefined' ? sourceLabel(location.search, typeof document !== 'undefined' ? document.referrer : '', typeof window !== 'undefined' ? window.__bwYsVia : '') : '';
 // Spot restored from the "send this preview to my inbox" email (27 Oct 2026). The mail links to the product page with #p=<token>: an opaque
 // 32-character random token in the URL FRAGMENT, which is never sent in an HTTP request or a Referer header. The spot itself never appears in
 // a URL (this page runs the Meta pixel and analytics, which record page URLs). The token is read from location.hash, removed from the address
@@ -264,6 +266,64 @@ export const mailBoxHtml = ({hidden = false, remind = true} = {}) => `<form clas
         <p class="ys-mail-status" data-ys="mailstatus" role="status" aria-live="polite"></p>
         ${remind ? `<p class="ys-mail-consent" id="ys-mail-consent" data-ys="mailconsenttext">${esc(MAIL_REMIND_CONSENT)} Read the <a href="https://walkofberlin.com/privacy-policy" target="_blank" rel="noopener">Privacy Policy</a>.</p>` : ''}
       </form>`;
+// ---- "Send this to someone who lived here" (25 Nov 2026) ----
+// One secondary action under the Add to cart button once a preview is showing: the visitor sends the SAME spot to a parent, a neighbour, an old flatmate. The link
+// is the clean short path plus the spot in the address FRAGMENT (the 1979 page's spot link, read once by storefront-element.js): a fragment goes to no server, pixel
+// or analytics request, and it carries the spot to four decimals (about 11 m). `via=share` in that fragment makes the landing source label "share", so an order carries Ref src.share. The house number never travels
+// (no `q`), the personal line and the print options do not either. Texts: the message is the sender's own voice; the button labels are English here and translated
+// by ys-de.js like the rest of the box. No price, no discount, no exclamation mark, no emoji.
+export const SHARE_BASE = Object.freeze({en: 'https://walkofberlin.com/1928', de: 'https://walkofberlin.com/de/1928'});
+export const SHARE_TEXT = Object.freeze({
+  en: Object.freeze({title: place => `${place} around 1928, seen from above`, text: place => `This is what ${place} looked like from above around 1928, next to today. I thought of you.`}),
+  de: Object.freeze({title: place => `${place} um 1928, von oben`, text: place => `${place}, um 1928 von oben, daneben heute. Ich musste an dich denken.`}),   // no article: the name decides der, die or das, so the sentence starts with the name
+});
+const SMALL_WORDS = new Set(['der', 'die', 'das', 'den', 'dem', 'des', 'am', 'an', 'im', 'in', 'zur', 'zum', 'von', 'vom', 'und', 'auf', 'bei', 'unter', 'ohne']);
+// The print title is upper case ("KARL-MARX-STRASSE": toUpperCase turned the ß into SS). For a sentence it becomes "Karl-Marx-Straße" again.
+export function niceCase(upper) {
+  const words = String(upper || '').toLowerCase().split(' ').map((word, i) => (i > 0 && SMALL_WORDS.has(word)) ? word : word.replace(/(^|[-.'’])(\p{L})/gu, (m, a, b) => a + b.toUpperCase())).join(' ');
+  return words.replace(/(\p{L})strasse\b/gu, '$1straße').replace(/\bStrasse\b/g, 'Straße');
+}
+// The name that goes into the sentence: the street or place as the search gave it (without house number, postcode, city) when it matches the print title, else the title in sentence case.
+export function shareStreetName(state) {
+  const title = clean(state?.title, YS_LIMITS.title * 2), first = clean(String(state?.address || '').split(',')[0], 80).replace(/\s+\d+\s?[a-zA-Z]?(?:[-\u2013/]\d+\s?[a-zA-Z]?)?$/, '').trim();
+  if (first && title && first.toUpperCase().slice(0, title.length) === title) return first;
+  return niceCase(title);
+}
+// The address everyone gets. `german` picks the short path (/1928 or /de/1928; both 301 to the product page and the fragment survives that hop, checked in Chromium and WebKit).
+export function shareUrl(state, german = false) {
+  const lat = Number(state?.lat), lon = Number(state?.lon);
+  const parts = [`ys=${lat.toFixed(4)},${lon.toFixed(4)}`];   // four decimals, about 11 m: the same street spot and picture, not the exact door
+  for (const [key, value] of [['t', clean(state?.title, YS_LIMITS.title)], ['a', clean(state?.area, YS_LIMITS.area)]]) if (value) parts.push(`${key}=${encodeURIComponent(value)}`);
+  parts.push('via=share');
+  return `${german ? SHARE_BASE.de : SHARE_BASE.en}#${parts.join('&')}`;
+}
+// Everything the three ways need, from one state: the native sheet payload, the WhatsApp and mailto addresses, the plain link.
+export function shareLinks(state, german = false) {
+  const lang = german ? 'de' : 'en', place = shareStreetName(state) || (german ? 'diese Straße' : 'this street'), url = shareUrl(state, german);
+  const title = SHARE_TEXT[lang].title(place), text = SHARE_TEXT[lang].text(place);
+  return {url, title, text, native: {title, text, url},
+    whatsapp: `https://wa.me/?text=${encodeURIComponent(`${text}\n${url}`)}`,
+    mailto: `mailto:?subject=${encodeURIComponent(title)}&body=${encodeURIComponent(`${text}\n\n${url}`)}`};
+}
+export const SHARE_LABEL = 'Send this to someone who lived here';
+// `native` true (a phone that has the share sheet): one outline button. Otherwise (desktop, or no sheet): the line, then WhatsApp, Email and Copy link, equal outline buttons.
+// The status line is read aloud (role=status) and stays invisible until something went wrong; "Link copied" shows on the Copy button itself so nothing moves.
+export const shareBoxHtml = ({hidden = false, native = false} = {}) => native
+  ? `<div class="ys-share ys-share-native" data-ys="share" ${hidden ? 'hidden' : ''}>
+        <button type="button" class="ys-share-main" data-ys="sharego">${SHARE_LABEL}</button>
+        <p class="ys-share-status" data-ys="sharestatus" role="status" aria-live="polite"></p>
+      </div>`
+  : `<div class="ys-share" data-ys="share" ${hidden ? 'hidden' : ''}>
+        <p class="ys-share-t">${SHARE_LABEL}</p>
+        <div class="ys-share-actions">
+          <a class="ys-share-btn" data-ys="sharewa" href="https://wa.me/" target="_blank" rel="noopener">WhatsApp</a>
+          <a class="ys-share-btn" data-ys="sharemail" href="mailto:">Email</a>
+          <button type="button" class="ys-share-btn" data-ys="sharecopy">Copy link</button>
+        </div>
+        <p class="ys-share-status" data-ys="sharestatus" role="status" aria-live="polite"></p>
+      </div>`;
+// Phones with the system share sheet use it; a desktop browser that has navigator.share (Safari, Edge) still gets the three buttons, because there the sheet is a poor menu.
+export const shareNativeAvailable = () => typeof navigator !== 'undefined' && typeof navigator.share === 'function' && !!globalThis.matchMedia?.('(pointer: coarse)')?.matches;
 export function buildCustomText(state, search) {
   if(isHomes(state))return encodeHomes({homes:state.homes.slice(0,Number(state.homesCount)),heading:state.heading,colour:ysColour(state),lang:new URLSearchParams(search??location.search).get('lang')==='de'?'de':'en',ref:adRef(search).slice(0,24)});
   const title = clean(state.title, YS_LIMITS.title).toUpperCase(), area = clean(state.area, YS_LIMITS.area), line = clean(state.line, YS_LIMITS.line);
@@ -430,6 +490,7 @@ export function mountConfigurator(host, state, api) {
         ${confirmHtml('quick')}
         ${trustHtml(true, 'ys-trust-compact')}
       </div>
+      ${shareBoxHtml({hidden: !state.lat || state.blank === true, native: shareNativeAvailable()})}
       ${mailBoxHtml({hidden: !state.lat, remind: mailRemindOpen()})}
     </div>`;
   // Address search first (own slot, top of the page on a phone and top of the right column on desktop). The suggestions list floats over the
@@ -643,6 +704,8 @@ export function mountConfigurator(host, state, api) {
     if (!state.lat) return;
     $('sheet').hidden = false; $('example').hidden = true; $('fields').hidden = false;
     $('mail').hidden = ysMounted(state);
+    if (fresh) state.blank = false;   // a new spot starts without the "It is blank" verdict
+    paintShare();   // the share block is there whenever a spot is, also on framed and canvas; gone after "It is blank" (the 1928 survey did not reach that spot)
     if (!api.mailboxSeen) { api.mailboxSeen = true; api.track?.('mailbox'); }   // funnel: the preview exists and the mail box is on screen
     if (fresh) paintMail('');
     $('caption').textContent = captionFor(state, true);
@@ -786,7 +849,7 @@ export function mountConfigurator(host, state, api) {
   host.addEventListener('click', event => {
     const t = event.target.closest?.('[data-ys-quickadd], [data-ys-add], [data-ys-yes], [data-ys-no], [data-ys-jump]'); if (!t) return;
     if (t.matches('[data-ys-jump]')) { if (!$('options').hidden) { $('options').open = true; state.optionsOpen = true; } $('fields').scrollIntoView({behavior: 'smooth', block: 'start'}); return; }
-    if (t.matches('[data-ys-no]')) { t.closest('[data-ys-confirm]').querySelector('[data-ys-noinfo]').hidden = false; api.track?.('blank'); return; }
+    if (t.matches('[data-ys-no]')) { t.closest('[data-ys-confirm]').querySelector('[data-ys-noinfo]').hidden = false; state.blank = true; paintShare(); api.track?.('blank'); return; }
     if (t.matches('[data-ys-yes]')) { if (!readyToCheck(state) || api.busy()) return; state.seen = true; state.confirming = null; api.track?.('seen'); refreshButton(); realAdd()?.click(); return; }
     if (!readyToCheck(state)) return;
     api.track?.('addtap');
@@ -832,6 +895,39 @@ export function mountConfigurator(host, state, api) {
   }
   mailForm.addEventListener('submit', event => { event.preventDefault(); sendMail(false); });
   $('mailremind')?.addEventListener('click', () => sendMail(true));
+  // ---- "Send this to someone who lived here": native sheet on a phone, else WhatsApp, Email and Copy link. Counts (consent-free path counts, no id): share-shown once the block is on screen,
+  // share-send plus share-native / share-whatsapp / share-email / share-copy when a visitor actually sends or copies. The link is built from the state at the moment of the tap. ----
+  const shareGerman = () => mailLocale() === 'de';
+  const shareStatus = (kind, text) => { const el = $('sharestatus'); if (!el) return; el.textContent = text; el.dataset.kind = kind || ''; };
+  const paintShare = () => {   // visible with a spot, hidden when the visitor said the 1928 photo is blank (nothing worth sending)
+    const box = $('share'); if (!box) return;
+    box.hidden = !state.lat || state.blank === true;
+    if (!box.hidden) { sharePaint(); if (!api.shareSeen) { api.shareSeen = true; api.track?.('share-shown'); } }
+  };
+  const sharePaint = () => {   // keeps the two addresses current, so a long press or "open in a new tab" works too
+    if (!state.lat) return;
+    const links = shareLinks(state, shareGerman()), wa = $('sharewa'), mail = $('sharemail');
+    if (wa) wa.href = links.whatsapp; if (mail) mail.href = links.mailto;
+  };
+  const shareCount = method => { api.track?.('share-send'); api.track?.('share-' + method); };
+  $('sharego')?.addEventListener('click', async () => {
+    if (!state.lat) return;
+    try { await navigator.share(shareLinks(state, shareGerman()).native); shareStatus('', ''); shareCount('native'); }
+    catch (e) { if (e?.name !== 'AbortError') shareStatus('error', 'Sharing did not open. Please try again.'); }
+  });
+  for (const [name, method] of [['sharewa', 'whatsapp'], ['sharemail', 'email']]) $(name)?.addEventListener('click', () => { sharePaint(); shareCount(method); });
+  const copyText = async text => {
+    try { await navigator.clipboard.writeText(text); return true; } catch (e) { /* fall through to the old way */ }
+    try { const area = document.createElement('textarea'); area.value = text; area.setAttribute('readonly', ''); area.style.cssText = 'position:fixed;top:0;left:0;opacity:0'; host.append(area); area.select(); area.setSelectionRange(0, text.length); const ok = document.execCommand('copy'); area.remove(); return ok; } catch (e) { return false; }
+  };
+  let copiedTimer = 0;
+  $('sharecopy')?.addEventListener('click', async () => {
+    if (!state.lat) return;
+    const button = $('sharecopy');
+    if (!await copyText(shareLinks(state, shareGerman()).url)) { shareStatus('error', 'I could not copy the link. Use WhatsApp or email instead.'); return; }
+    shareStatus('ok', 'Link copied'); button.textContent = 'Link copied'; shareCount('copy');
+    clearTimeout(copiedTimer); copiedTimer = setTimeout(() => { if (button.isConnected) button.textContent = 'Copy link'; shareStatus('', ''); }, 2500);
+  });
   // Both emailed links and the Finder use the same preview; the Finder transfers only the location.
   async function restorePreview(context, fromFinder) {
     const quiet = () => {
