@@ -120,10 +120,14 @@
     if (document.getElementById(STYLE_ID)) return;
     var style = document.createElement('style'); style.id = STYLE_ID;
     style.textContent = [
-      'html[data-bw-redesign="1"] .bw-c-rail-gifts{background:#F4F7EE;border:1px solid #D6E2CD;border-radius:12px;box-sizing:border-box;color:#123D18!important;display:block;margin-top:26px;padding:12px;text-decoration:none!important;}',
+      // Wobby step 8 (25 Nov 2026): a gift label never breaks inside a word. Wix's blog CSS inherits overflow-wrap:break-word into
+      // the rail, and a 10 px label such as "Tempelhof" (56 px) sat in a 57 px column, so any browser whose Montserrat ran a pixel wider
+      // split it ("Tempelho / f hoodie"). Words stay whole (overflow-wrap/word-break/hyphens), the columns may grow to the longest word
+      // (minmax(min-content,1fr)), and the box gives the grid 4 px more width (side padding 10, gap 5).
+      'html[data-bw-redesign="1"] .bw-c-rail-gifts{background:#F4F7EE;border:1px solid #D6E2CD;border-radius:12px;box-sizing:border-box;color:#123D18!important;display:block;margin-top:26px;padding:12px 10px;text-decoration:none!important;}',
       'html[data-bw-redesign="1"] .bw-c-rail .bw-c-rail-gifts strong{font:800 16px/1.25 Montserrat,Arial,sans-serif;margin:0 0 9px;}',
-      'html[data-bw-redesign="1"] .bw-c-rail-gift-grid{display:grid;gap:6px;grid-template-columns:repeat(3,minmax(0,1fr));}',
-      'html[data-bw-redesign="1"] .bw-c-rail-gift-item{display:block;font:600 10px/1.25 Montserrat,Arial,sans-serif;}',
+      'html[data-bw-redesign="1"] .bw-c-rail-gift-grid{display:grid;gap:5px;grid-template-columns:repeat(3,minmax(min-content,1fr));}',
+      'html[data-bw-redesign="1"] .bw-c-rail-gift-item{display:block;font:600 10px/1.25 Montserrat,Arial,sans-serif;hyphens:none;overflow-wrap:normal;word-break:normal;text-wrap:balance;}',
       'html[data-bw-redesign="1"] .bw-c-rail-gift-item img{aspect-ratio:1/1;background:#E8EEE0;border-radius:5px;display:block;height:auto;margin-bottom:5px;object-fit:cover;width:100%;}',
       'html[data-bw-redesign="1"] .bw-c-rail-gifts-cta{align-items:center;background:#FFE600;border-radius:6px;color:#123D18!important;display:flex;font:750 11px/1.25 Montserrat,Arial,sans-serif;justify-content:space-between;margin-top:10px;min-height:34px;padding:0 9px;}',
       'html[data-bw-redesign="1"] .bw-c-rail-gifts:hover .bw-c-rail-gifts-cta,html[data-bw-redesign="1"] .bw-c-rail-gifts:focus-visible .bw-c-rail-gifts-cta{background:#C5E1A5;}',
