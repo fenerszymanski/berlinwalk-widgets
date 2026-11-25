@@ -1146,7 +1146,8 @@ button.ys-words-tag:focus-visible{outline:2px solid var(--green);outline-offset:
 @media(max-width:899px){
   :host([design2][data-bw-pdp="c"]) .surface > .wrap > .breadcrumb,
   :host([design2][data-bw-pdp="c"]) .skeleton > div > .wrap > .breadcrumb,
-  :host([design2][data-bw-pdp="c"]) .skeleton [data-early] > .wrap > .breadcrumb{padding-top:6px;margin-bottom:6px;line-height:1.35}
+  :host([design2][data-bw-pdp="c"]) .skeleton [data-early] > .wrap > .breadcrumb,
+  :host([design2][data-bw-pdp="c"]) .skeleton [data-early-ys] > .wrap > .breadcrumb{padding-top:6px;margin-bottom:6px;line-height:1.35}
   :host([design2][data-bw-pdp="c"]) .buy-bar:not([hidden]){padding-block:7px calc(7px + env(safe-area-inset-bottom,0px));background:#fff}
   :host([design2][data-bw-pdp="c"]) .buy-bar .primary{flex-shrink:1;min-width:0;max-width:100%;overflow-wrap:anywhere;font-size:14px}
   :host([design2][data-bw-pdp="c"]) .product-layout{display:flex;flex-direction:column;gap:0}
@@ -1301,3 +1302,29 @@ button.ys-words-tag:focus-visible{outline:2px solid var(--green);outline-offset:
    placeholder cards) also switched off the bar's own links: the store logo, the dropdown links, EN/DE and the cart link did nothing while the box was on screen (about
    3 to 15 s on a slow phone or a busy Chrome). The bar is real, so its links are real. Placeholders elsewhere in the box stay inert. Rollback = delete this block. */
 :host([design2]) .skeleton .d2-bar a{pointer-events:auto;cursor:pointer}
+
+/* ys-picture: the loading view of the street pages (1928, 1979; 25 Nov 2026, Yusuf: "1928 yap"). A picture of the finished page: the real template with grey blocks where the configurator will be, sized like the
+   configurator's own content so the live page replaces it without moving the page (storefront-element.js earlyYsHtml). Links in it work, the add button is locked. The sizes below were measured on the finished
+   page at 25 widths in English and German (the search line and the three delivery lines wrap differently with the column width). Rollback = delete this block. */
+:host([design2]) .skeleton [data-early-ys] a,:host([design2]) .skeleton [data-early-ys] .tile{pointer-events:auto;cursor:pointer}
+:host([design2]) .skeleton [data-early-ys] .ys-sk{display:block;background:#e8eadf;border-radius:8px}
+:host([design2]) .skeleton [data-early-ys] .ys-sk-search{min-height:105px}
+:host([design2]) .skeleton [data-early-ys] .ys-sk-form{min-height:200px}
+@media(min-width:580px) and (max-width:899px){:host([design2]) .skeleton [data-early-ys="en"] .ys-sk-search{min-height:87px}}
+@media(min-width:670px) and (max-width:899px){:host([design2]) .skeleton [data-early-ys="de"] .ys-sk-search{min-height:87px}}
+/* The delivery card under the button: the payment line is real; the three delivery lines need the delivery dates, so they are a grey stand-in of the same height (the old "Arrives in 3 to 5 working days" line is not shown). */
+:host([design2]) .skeleton [data-early-ys] .bw-delivery-card .bw-del-row:not(.bw-payment-row){display:none}
+:host([design2]) .skeleton [data-early-ys] .bw-delivery-card::after{content:'';display:block;height:var(--ys-rows,198px);background:linear-gradient(#e8eadf,#e8eadf) 16px 10%/58% 12px no-repeat,linear-gradient(#e8eadf,#e8eadf) 16px 50%/44% 12px no-repeat,linear-gradient(#e8eadf,#e8eadf) 16px 90%/52% 12px no-repeat}
+:host([design2]) .skeleton [data-early-ys="en"]{--ys-rows:198px}
+@media(min-width:460px){:host([design2]) .skeleton [data-early-ys="en"]{--ys-rows:180px}}
+@media(min-width:540px){:host([design2]) .skeleton [data-early-ys="en"]{--ys-rows:166px}}
+@media(min-width:900px){:host([design2]) .skeleton [data-early-ys="en"]{--ys-rows:198px}}
+@media(min-width:1000px){:host([design2]) .skeleton [data-early-ys="en"]{--ys-rows:180px}}
+:host([design2]) .skeleton [data-early-ys="de"]{--ys-rows:247px}
+@media(min-width:380px){:host([design2]) .skeleton [data-early-ys="de"]{--ys-rows:216px}}
+@media(min-width:420px){:host([design2]) .skeleton [data-early-ys="de"]{--ys-rows:198px}}
+@media(min-width:540px){:host([design2]) .skeleton [data-early-ys="de"]{--ys-rows:180px}}
+@media(min-width:720px){:host([design2]) .skeleton [data-early-ys="de"]{--ys-rows:166px}}
+@media(min-width:900px){:host([design2]) .skeleton [data-early-ys="de"]{--ys-rows:198px}}
+/* The "Delivery & returns" and "Product reviews" accordions of the box hold nothing yet: they are placeholder rows, not something to open. */
+:host([design2]) .skeleton [data-early-ys] :is(.bw-acc-delivery,.bw-acc-reviews){pointer-events:none}

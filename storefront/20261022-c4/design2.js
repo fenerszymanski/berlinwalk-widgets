@@ -876,8 +876,8 @@ for(const crumb of this.shadowRoot.querySelectorAll('.breadcrumb > a:first-child
   const box=this.revealed||this.hidden?null:root.querySelector('.skeleton');
   if(box){
    let route=null;try{route=this.skeletonRoute();}catch{}
-   const wrap=route?.mode==='product'?box.querySelector(':scope > div > .wrap,:scope > div > [data-early] > .wrap'):null,layout=wrap?.querySelector('.product-layout');
-   if(layout&&wrap.classList.contains('d2-standard'))targets.push({at:LOADING_VIEW,wrap,layout,product:(this.model||this.skeletonModel)?.products?.find(p=>p.wixProductId===route.productId)});
+   const wrap=route?.mode==='product'?box.querySelector(':scope > div > .wrap,:scope > div > [data-early] > .wrap,:scope > div > [data-early-ys] > .wrap'):null,layout=wrap?.querySelector('.product-layout');
+   if(layout&&(wrap.classList.contains('d2-standard')||layout.classList.contains('ys-layout')))targets.push({at:LOADING_VIEW,wrap,layout,product:(this.model||this.skeletonModel)?.products?.find(p=>p.wixProductId===route.productId)});
   }
   const wrap=this.context?.mode==='product'?root.querySelector('.surface > .wrap'):null,layout=wrap?.querySelector('.product-layout');
   if(layout&&(layout.classList.contains('ys-layout')||wrap.classList.contains('d2-standard')))targets.push({at:'.surface ',wrap,layout,product:this.model?.products?.find(p=>p.wixProductId===this.productViewId())});
