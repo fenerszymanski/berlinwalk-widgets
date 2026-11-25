@@ -384,7 +384,7 @@ P.landingView=function(){if(this.xgGuide()){const t=document.createElement('temp
  const menu=event.target?.closest?.('.d2-group')?.querySelector('[data-d2-group]');
  if(menu)this.measure('design2Step','menu-'+menu.dataset.d2Group);
  this.d2closeMenus();
- if(target.pathname===location.pathname&&this.context.mode==='shop'){
+ if(target.pathname===location.pathname&&this.context.mode==='shop'&&!event.target?.closest?.('.skeleton')){
   const next=new URL(location.href);next.search=target.search;next.hash=target.hash;
   if(next.href!==location.href)history.pushState({...history.state},'',next);
   this.applyContextCategory();this.render();this.scrollIntoView({block:'start',behavior:'instant'});

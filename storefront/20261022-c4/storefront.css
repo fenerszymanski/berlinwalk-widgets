@@ -1295,3 +1295,9 @@ button.ys-words-tag:focus-visible{outline:2px solid var(--green);outline-offset:
 :host([design2]) .drawer h2{text-wrap:balance}
 /* The EU notice heading was a 16 px label in Fraunces; in the narrower Wobby it needs 20 px to read as a heading next to the 15-16 px notice text (look check, 25 Nov 2026). */
 :host([design2]) .eu-guarantee h3{font-size:20px;line-height:1.2}
+
+/* bar-click: the store bar in the loading box (25 Nov 2026, Yusuf: "bu store logosu calismiyor chrome mac'te").
+   The loading box is drawn with the real bar (design2.js skeletonBar = shopbar), but the old rule ".skeleton a,.skeleton .tile{pointer-events:none}" (22 Oct 2026, made for
+   placeholder cards) also switched off the bar's own links: the store logo, the dropdown links, EN/DE and the cart link did nothing while the box was on screen (about
+   3 to 15 s on a slow phone or a busy Chrome). The bar is real, so its links are real. Placeholders elsewhere in the box stay inert. Rollback = delete this block. */
+:host([design2]) .skeleton .d2-bar a{pointer-events:auto;cursor:pointer}
