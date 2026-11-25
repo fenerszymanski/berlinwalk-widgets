@@ -530,7 +530,7 @@
           });
           var blob = await new Promise(function (resolve) { canvas.toBlob(resolve, 'image/png'); });
           if (blob) {
-            var file = new File([blob], 'berlinwalk-' + result.district.id + '-match.png', { type: 'image/png' });
+            var file = new File([blob], 'walkofberlin-match-DISTRICT.png'.replace('DISTRICT', result.district.id), { type: 'image/png' });
             await navigator.share({ title: 'Where in Berlin Do You Belong?', text: text, url: url, files: [file] });
             method = 'native_card';
           } else {

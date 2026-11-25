@@ -628,13 +628,13 @@ class BwKitkatDoorTestPage extends HTMLElement {
           </div>
 
           <nav class="kkp-links" aria-label="Related pages">
-            <a href="https://www.berlinwalk.com/games">All BerlinWalk games</a>
+            <a href="https://www.berlinwalk.com/games">All Walk of Berlin games</a>
             <a href="https://www.berlinwalk.com/post/what-to-wear-to-berlin-clubs">Full Berlin club dress-code guide</a>
           </nav>
 
         </section>
 
-        <section class="kkp-games-preview" data-bw-games-preview aria-label="More BerlinWalk games"></section>
+        <section class="kkp-games-preview" data-bw-games-preview aria-label="More Walk of Berlin games"></section>
 
       </main>
     `;

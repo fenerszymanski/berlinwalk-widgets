@@ -164,7 +164,7 @@
             <div class="bw-games-hero-shade" aria-hidden="true"></div>
             <div class="bw-games-hero-inner">
               <p class="bw-games-kicker">Playable Berlin</p>
-              <h1 id="bw-games-title">BerlinWalk Games</h1>
+              <h1 id="bw-games-title"><span class="bw-games-brand">Walk of Berlin</span> Games</h1>
               <p class="bw-games-hero-lead">Playable Berlin for the moment before you go outside and test the real city. Find your borough, pick a winner, survive the first day, rewind an old photo, pass the door, or try to make Berlin smile.</p>
             </div>
           </section>
@@ -440,8 +440,13 @@
           letter-spacing: 0;
           line-height: 0.9;
           margin-top: 12px;
-          max-width: 880px;
+          max-width: 1100px;
           text-shadow: 0.04em 0.04em 0 var(--cream), 0.08em 0.08em 0 rgba(52, 214, 180, 0.82);
+        }
+
+        /* The brand name never breaks inside: "Walk of Berlin" stays on one line and only "Games" may drop to the next. */
+        .bw-games-hero h1 .bw-games-brand {
+          white-space: nowrap;
         }
 
         .bw-games-hero-lead {
@@ -877,11 +882,11 @@
             width: min(100%, calc(100vw - 36px));
           }
 
-          /* Phones: below about 560 px "BerlinWalk Games" cannot fit one line at this size, so it stacks as two lines (BerlinWalk / Games); from about 570 px up to
-             this breakpoint it fits one line at the 84 px cap. The Custom Embed "BerlinWalk Games Page Hub" sets its own !important size for this rule; the
-             :not(#bw-w) boost wins over it by specificity. */
+          /* Phones: "Walk of Berlin Games" stacks as two lines (Walk of Berlin / Games) at every width up to this 640 px breakpoint. The size follows the free width, so the unbroken
+             "Walk of Berlin" (4.86 em in Wobby Bold) always fits (about 90 % of the column on every phone from 320 px). The Custom Embed 34cdf9b0 (Games Page
+             Hub) sets its own !important size for this rule; the :not(#bw-w) boost wins over it by specificity. */
           .bw-games-hero h1:not(#bw-w) {
-            font-size: clamp(46px, 17vw, 84px) !important;
+            font-size: clamp(40px, calc((100vw - 36px) / 5.3), 84px) !important;
             max-width: 100%;
             text-shadow: 3px 3px 0 var(--cream), 6px 6px 0 rgba(52, 214, 180, 0.82);
           }

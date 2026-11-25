@@ -80,7 +80,7 @@
         limit: 5,
         theme: 'district',
         kicker: 'Other games',
-        title: 'Five more BerlinWalk games',
+        title: 'Five more Walk of Berlin games',
         showAllLink: false
       });
     }

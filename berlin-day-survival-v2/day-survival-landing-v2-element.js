@@ -25,7 +25,7 @@
   var FINAL_URL = 'https://www.berlinwalk.com/games/berlin-day-survival';
   var SEO = {
     title: 'Berlin Day Survival Game | Free Berlin Budget Game',
-    description: 'Play Berlin Day Survival by BerlinWalk. Pick €10, €15 or €20, make six first-day Berlin choices, and see if your wallet and energy survive.',
+    description: 'Play Berlin Day Survival by Walk of Berlin. Pick €10, €15 or €20, make six first-day Berlin choices, and see if your wallet and energy survive.',
     socialTitle: 'Berlin Day Survival Game',
     socialDescription: 'Can you get through one Berlin day on €10, €15 or €20 without the city eating your wallet first?',
     image: BASE_URL + 'assets/social/berlin-day-survival-v2-social-1200x630.jpg',
@@ -94,7 +94,7 @@
     var isOldSiteHost = /(^|\.)berlinwalk\.com$/i.test(location.hostname);
     var isFinal = (isOldSiteHost || /^(www\.)?walkofberlin\.com$/i.test(location.hostname)) && path === '/games/berlin-day-survival';
     var canonical = isFinal && isOldSiteHost ? FINAL_URL : location.origin + path;
-    document.title = isFinal ? SEO.title : 'Day Survival Test | BerlinWalk';
+    document.title = isFinal ? SEO.title : 'Day Survival Test | Walk of Berlin';
     upsertMeta('name', 'description', SEO.description);
     upsertMeta('name', 'robots', isFinal ? 'index, follow, max-image-preview:large' : 'noindex, nofollow');
     upsertMeta('property', 'og:type', 'website');
@@ -103,7 +103,7 @@
     upsertMeta('property', 'og:description', SEO.socialDescription);
     upsertMeta('property', 'og:image', SEO.image);
     upsertMeta('property', 'og:image:alt', SEO.imageAlt);
-    upsertMeta('property', 'og:site_name', 'BerlinWalk');
+    upsertMeta('property', 'og:site_name', 'Walk of Berlin');
     upsertMeta('name', 'twitter:card', 'summary_large_image');
     upsertMeta('name', 'twitter:title', SEO.socialTitle);
     upsertMeta('name', 'twitter:description', SEO.socialDescription);
@@ -112,7 +112,8 @@
     upsertLink('canonical', canonical);
     var old = document.getElementById('bw-day-survival-landing-jsonld');
     if (old) old.remove();
-    if (isFinal) {
+    // The page's Custom Embed 1c658a4d (Berlin Day Survival Page) writes the same WebApplication JSON-LD with the live host; keep one block on the page.
+    if (isFinal && !document.getElementById('bw-day-survival-final-jsonld')) {
       var script = document.createElement('script');
       script.id = 'bw-day-survival-landing-jsonld';
       script.type = 'application/ld+json';
@@ -123,10 +124,10 @@
         applicationCategory: 'GameApplication',
         operatingSystem: 'Web',
         url: FINAL_URL,
-        description: 'A free BerlinWalk game where visitors pick a small Berlin budget, make six first-day choices, and see whether their wallet and energy survive.',
+        description: 'A free Walk of Berlin game where visitors pick a small Berlin budget, make six first-day choices, and see whether their wallet and energy survive.',
         image: SEO.image,
         offers: { '@type': 'Offer', price: '0', priceCurrency: 'EUR' },
-        publisher: { '@type': 'Organization', name: 'BerlinWalk', url: 'https://www.berlinwalk.com' }
+        publisher: { '@type': 'Organization', name: 'Walk of Berlin', url: 'https://www.walkofberlin.com' }
       });
       document.head.appendChild(script);
     }
@@ -170,7 +171,7 @@
         '<section class="bw-dslp-hero">',
           '<div class="bw-dslp-wrap bw-dslp-grid">',
             '<div class="bw-dslp-copy">',
-              '<p class="bw-dslp-kicker">Free BerlinWalk game</p>',
+              '<p class="bw-dslp-kicker">Free Walk of Berlin game</p>',
               '<h1 id="bw-day-survival-title">Berlin Day Survival</h1>',
               '<p class="bw-dslp-lead">Can you get through one Berlin day on €10, €15 or €20 without the city eating your wallet first?</p>',
               '<p class="bw-dslp-note">Berlin can feel cheap until the tiny decisions stack up: water at the wrong place, lunch on the square, one tired cafe stop too many. I built this as a quick budget instinct test before you try the real city.</p>',
@@ -229,8 +230,8 @@
             '<div>',
               '<h2>The game is quick. The real walk is better.</h2>',
               '<p>On my Berlin walking tour, I help you read the city the same way: what to ignore, where to slow down, and which Berlin details actually change how the day feels.</p>',
-              '<div class="bw-dslp-more" aria-label="More BerlinWalk games">',
-                '<a class="bw-dslp-chip" href="' + GAMES_URL + '">All BerlinWalk games</a>',
+              '<div class="bw-dslp-more" aria-label="More Walk of Berlin games">',
+                '<a class="bw-dslp-chip" href="' + GAMES_URL + '">All Walk of Berlin games</a>',
                 '<a class="bw-dslp-chip" href="https://www.berlinwalk.com/games/berlin-battle?utm_source=day_survival&utm_medium=game_landing&utm_campaign=berlinwalk_games&utm_content=more_games">Berlin Battle</a>',
                 '<a class="bw-dslp-chip" href="https://www.berlinwalk.com/games/berghain-bouncer?utm_source=day_survival&utm_medium=game_landing&utm_campaign=berlinwalk_games&utm_content=more_games">Berghain Bouncer</a>',
                 '<a class="bw-dslp-chip" href="https://www.berlinwalk.com/games/berlin-smile-challenge?utm_source=day_survival&utm_medium=game_landing&utm_campaign=berlinwalk_games&utm_content=more_games">Berlin Smile Challenge</a>',

@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Can You Make a Berliner Smile? | BerlinWalk</title>
+  <title>Can You Make a Berliner Smile? | Walk of Berlin</title>
   <meta name="description" content="A tiny Berlin social survival game. Pick the right tone and see if you can make a Berliner almost smile.">
   <link rel="stylesheet" href="../css/brand.css">
   <script defer src="../js/brand.js"></script>
@@ -1315,7 +1315,7 @@
 
         ctx.fillStyle = '#102E38';
         ctx.font = '900 42px Montserrat, Arial';
-        ctx.fillText('BERLINWALK GAME', 80, 130);
+        ctx.fillText('WALK OF BERLIN GAME', 80, 130);
         ctx.fillStyle = '#E63946';
         ctx.font = '900 66px Montserrat, Arial';
         wrapText(ctx, state.result.title, 80, 220, 560, 70);
@@ -1327,7 +1327,7 @@
         ctx.fillText(`Smile ${state.smile}/100`, 80, 540);
         ctx.fillStyle = '#FAFAF5';
         ctx.font = '900 25px Montserrat, Arial';
-        ctx.fillText('berlinwalk.com/games/berlin-smile-challenge', 80, 610);
+        ctx.fillText('walkofberlin.com/games/berlin-smile-challenge', 80, 610);
         return canvas;
       }
 
@@ -1458,7 +1458,7 @@
       function topbarHtml() {
         return `
           <div class="bw-smile-topbar">
-            <span>BerlinWalk Games</span>
+            <span>Walk of Berlin Games</span>
             <span hidden data-build="${escapeAttr(BUILD)}"></span>
             <button class="bw-sound-toggle" type="button" data-action="sound">${state.soundOn ? 'Sound on' : 'Sound off'}</button>
           </div>

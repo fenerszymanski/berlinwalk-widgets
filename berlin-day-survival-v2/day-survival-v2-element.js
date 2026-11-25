@@ -492,7 +492,7 @@
   Proto._renderResult = function () {
     var st = this.state;
     var r = computeResult(st);
-    var shareText = 'Berlin Day Survival: I am a ' + r.title + '. Play free at berlinwalk.com/games';
+    var shareText = 'Berlin Day Survival: I am a ' + r.title + '. Play free at walkofberlin.com/games';
     var heroHtml = r.img
       ? '<div class="bw-dsv-r-photo" data-rphoto><img alt="" data-rphoto-img src="' + this._assetBase + 'assets/results/' + r.img + '"></div>'
       : '<div class="bw-dsv-r-emoji">' + r.emoji + '</div>';

@@ -68,12 +68,12 @@
   function createCard({
     width = 1080,
     height = 1350,
-    title = 'BerlinWalk Game',
+    title = 'Walk of Berlin Game',
     subtitle = 'Daily result',
     score = '',
     meta = '',
     lines = [],
-    footer = 'berlinwalk.com/games',
+    footer = 'walkofberlin.com/games',
     cta = 'Play the next Berlin set tomorrow',
     image = null,
     palette = {},
@@ -168,7 +168,7 @@
     return canvas;
   }
 
-  function download(canvas, filename = 'berlinwalk-share-card.png') {
+  function download(canvas, filename = 'walkofberlin-share-card.png') {
     const link = document.createElement('a');
     link.href = canvas.toDataURL('image/png');
     link.download = filename;

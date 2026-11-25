@@ -332,7 +332,7 @@ class BwBerlinSmileChallengePage extends HTMLElement {
             <li>Watch the Smile score move with every answer</li>
             <li>Leave with a shareable almost-smile result</li>
           </ul>
-          <div class="bw-smile-more" aria-label="More BerlinWalk games">
+          <div class="bw-smile-more" aria-label="More Walk of Berlin games">
             <a href="https://www.berlinwalk.com/games/berlin-battle">Berlin Battle</a>
             <a href="https://www.berlinwalk.com/games/berghain-bouncer">Berghain Bouncer</a>
           </div>
@@ -354,7 +354,7 @@ class BwBerlinSmileChallengePage extends HTMLElement {
           <a href="https://www.walkofberlin.com/book-berlin-walking-tour/berlin-then-and-now">Book the walking tour</a>
         </aside>
 
-        <section class="bw-smile-games-preview" data-bw-games-preview aria-label="More BerlinWalk games"></section>
+        <section class="bw-smile-games-preview" data-bw-games-preview aria-label="More Walk of Berlin games"></section>
       </main>
     `;
   }

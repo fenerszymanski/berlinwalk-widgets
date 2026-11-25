@@ -214,7 +214,7 @@
                 </div>
                 <div class="bw-hub-note">
                   <strong>Best first pick</strong>
-                  <span>Use Berlin Battle when someone has never played a BerlinWalk game before.</span>
+                  <span>Use Berlin Battle when someone has never played a Walk of Berlin game before.</span>
                 </div>
               </aside>
 

@@ -641,7 +641,7 @@ class BwBerlinBouncerPage extends HTMLElement {
             </div>
             <div>
               <dt>Is this an official Berghain game?</dt>
-              <dd>No. It is an independent BerlinWalk entertainment game.</dd>
+              <dd>No. It is an independent Walk of Berlin entertainment game.</dd>
             </div>
             <div>
               <dt>How long does the game take?</dt>
@@ -650,7 +650,7 @@ class BwBerlinBouncerPage extends HTMLElement {
           </dl>
         </section>
 
-        <section class="bw-bouncer-games-preview" data-bw-games-preview aria-label="More BerlinWalk games"></section>
+        <section class="bw-bouncer-games-preview" data-bw-games-preview aria-label="More Walk of Berlin games"></section>
 
       </main>
     `;

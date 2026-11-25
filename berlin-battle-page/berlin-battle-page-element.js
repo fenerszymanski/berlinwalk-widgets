@@ -135,7 +135,7 @@
 
               <div class="bw-battle-device" id="battle-game">
                 <div class="bw-battle-device-label" aria-hidden="true">
-                  <span>BerlinWalk</span>
+                  <span>Walk of Berlin</span>
                   <strong>${deviceLabel}</strong>
                 </div>
                 <div class="bw-battle-screen">
@@ -154,7 +154,7 @@
                 <a href="${BOOKING_URL}">Book the Walking Tour</a>
               </div>
             </div>
-            <section class="bw-battle-games-preview" data-bw-games-preview aria-label="More BerlinWalk games"></section>
+            <section class="bw-battle-games-preview" data-bw-games-preview aria-label="More Walk of Berlin games"></section>
           </section>
         </main>
       `;
