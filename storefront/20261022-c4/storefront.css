@@ -1210,3 +1210,12 @@ button.ys-words-tag:focus-visible{outline:2px solid var(--green);outline-offset:
 :host([design2]) .xg .card .product-name{font-family:var(--head);font-weight:400;font-style:normal;font-kerning:normal;letter-spacing:0}
 :host([design2]) .xg-hero h1.lead,
 :host([design2]) .xg-head h2{text-wrap:balance}
+
+/* wobby step 2b: polish after the look checks of steps 1 and 2 */
+/* Wobby is narrower, so a card title can leave a lone last word ("Your West Berlin Street in / 1979" on a phone): balance the card titles too (home, listings, gift guide). */
+:host([design2]) :is(.d2-personal,.d2-shelf,.d2-picks,.d2-explore,.d2-listing) .product-name,
+:host([design2]) .xg .product-name{text-wrap:balance}
+/* The gift hero's title is one line now, 65 px shorter than the old two-line title, and the bow above the gift box touched the top edge. Keep the old hero height on wide screens. */
+@media(min-width:741px){
+:host([design2]) .xg-hero-inner{min-height:420px}
+}
