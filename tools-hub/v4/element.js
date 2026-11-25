@@ -333,10 +333,12 @@
 }
 
 .bw-hub-v4 h3 {
-  font-family: Montserrat, sans-serif;
-  font-size: 15px;
-  font-weight: 700;
-  line-height: 1.3;
+  font-family: Wobby, Montserrat, sans-serif;
+  font-size: 17px;
+  font-synthesis: none;
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: 1.25;
   color: var(--ink);
 }
 
@@ -692,7 +694,7 @@
     height: 36px;
   }
   .bw-hub-v4 .row-heading h3 {
-    font-size: 14px;
+    font-size: 16px;
   }
   .bw-hub-v4 .tool-row > .ui-icon {
     display: none;
@@ -807,8 +809,8 @@
     gap: 3px 6px;
   }
   .bw-hub-v4 h3 {
-    font-size: 14px;
-    line-height: 1.28;
+    font-size: 16px;
+    line-height: 1.25;
   }
   .bw-hub-v4 .row-copy p {
     font-size: 14px;

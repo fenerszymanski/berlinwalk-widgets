@@ -777,10 +777,11 @@ html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozn18up #comp-mozn27df h3,
 html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozn18up #comp-mozn27df h4 {
   border-top: 3px solid var(--bw-shell-green) !important;
   color: var(--bw-shell-ink) !important;
-  font-family: 'Space Grotesk', Montserrat, Arial, sans-serif !important;
-  font-weight: 750 !important;
-  letter-spacing: -.04em !important;
-  line-height: 1.04 !important;
+  font-family: Wobby, Fraunces, Merriweather, Georgia, serif !important; /* Wobby (Yusuf, 25 Nov 2026): the body section headings too */
+  font-synthesis: none !important;
+  font-weight: 400 !important;
+  letter-spacing: 0 !important;
+  line-height: 1.08 !important;
   margin: 86px 0 22px !important;
   padding-top: 14px !important;
   text-align: left !important;
