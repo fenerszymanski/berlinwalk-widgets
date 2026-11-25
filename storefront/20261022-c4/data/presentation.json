@@ -2917,6 +2917,7 @@
     "deliveryNote": "Digital download · 1 JPEG print file and a printing guide. No physical item.",
     "deliveryDetails": "Your download includes one 3:4 sRGB JPEG, 3543 × 4724 px at 300 dpi for 30 × 40 cm, and a printing guide. The same file prints without cropping at 45 × 60 cm and 60 × 80 cm, with softer detail at larger sizes. No physical poster, frame or decor is included.",
     "group": "stories",
+    "alternativeProductId": "b0e49888-d1b1-4bc3-be8d-e827b3ca57a9",
     "visualCreditsHtml": "<p>Outline reference: © OpenStreetMap contributors, ODbL 1.0 (https://www.openstreetmap.org/copyright). I interpreted the outline as a textured painted composition. Blocks, water widths and bridge marks are simplified and not to scale. The artwork does not document individual streets, buildings or bridges.</p><p>Place reference: the checked research for my Moabit story, including Bezirksamt Mitte and WSA Spree-Havel.</p>",
     "sizeImages": {
       "30x40 cm": "moabit-water-ring-30x40.jpg"
@@ -2927,6 +2928,13 @@
         "alt": "Complete artwork at 30 x 40 cm. Digital file only."
       }
     ],
+    "roomImage": "moabit-water-ring-room-photo.jpg",
+    "roomVideoFit": "contain",
+    "roomCaption": "Styling example · 30 × 40 cm · Printable files only · Frame and decor not included",
+    "roomAlt": "The Moabit Water Ring print at 30 × 40 cm in an oak frame on a living-room wall. Frame and decor are not included.",
+    "roomVideoUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/room/moabit-water-ring.mp4",
+    "roomVideoPosterUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/room/moabit-water-ring-poster.jpg",
+    "roomVideoThumbnailUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/room/moabit-water-ring-thumb.jpg",
     "wixProductId": "ab0842e0-aa33-97c2-64aa-27367d6c15e0"
   },
   {
@@ -9795,5 +9803,34 @@
     "roomVideoUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/room/berlin-twelve-districts.mp4",
     "roomVideoPosterUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/room/berlin-twelve-districts-poster.jpg",
     "roomVideoThumbnailUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/room/berlin-twelve-districts-thumb.jpg"
+  },
+  {
+    "id": "pr-moabit-water-ring",
+    "name": "Moabit Water Ring",
+    "place": "Moabit · The water ring",
+    "image": "moabit-water-ring-fullart.jpg",
+    "alt": "Simplified textured view of Moabit with a blue water ring, orange blocks and a cream background. The footer reads Moabit, Berlin.",
+    "typeLine": "PREMIUM MATTE · 200 GSM · UNFRAMED",
+    "wixProductId": "b0e49888-d1b1-4bc3-be8d-e827b3ca57a9",
+    "group": "stories",
+    "alternativeProductId": "ab0842e0-aa33-97c2-64aa-27367d6c15e0",
+    "visualCreditsHtml": "<p>Outline reference: © OpenStreetMap contributors, ODbL 1.0 (https://www.openstreetmap.org/copyright). I interpreted the outline as a textured painted composition. Blocks, water widths and bridge marks are simplified and not to scale. The artwork does not document individual streets, buildings or bridges.</p><p>Place reference: the checked research for my Moabit story, including Bezirksamt Mitte and WSA Spree-Havel.</p>",
+    "sizeImages": {
+      "30x40 cm": "moabit-water-ring-30x40.jpg",
+      "50x70 cm": "moabit-water-ring-50x70.jpg"
+    },
+    "gallery": [
+      {
+        "image": "moabit-water-ring-fullart.jpg",
+        "alt": "The complete Moabit water ring artwork, without cropping."
+      }
+    ],
+    "roomImage": "moabit-water-ring-room-photo.jpg",
+    "roomVideoFit": "contain",
+    "roomCaption": "Styling example · 30 × 40 cm · Frame and decor not included",
+    "roomAlt": "The Moabit Water Ring print at 30 × 40 cm in an oak frame on a living-room wall. Frame and decor are not included.",
+    "roomVideoUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/room/moabit-water-ring.mp4",
+    "roomVideoPosterUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/room/moabit-water-ring-poster.jpg",
+    "roomVideoThumbnailUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/room/moabit-water-ring-thumb.jpg"
   }
 ]
