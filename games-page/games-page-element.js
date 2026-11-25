@@ -4,6 +4,9 @@
     ? new URL('../', SCRIPT_URL).toString()
     : 'https://fenerszymanski.github.io/berlinwalk-widgets/';
   const ASSET_VERSION = 'games-page-kitkat-photo-cover-20260826';
+  // Wobby Bold (25 Nov 2026): the brand headline face for the hub headings and the game card titles. The same repo file the site header loads for the menu
+  // (no ?v= query, so the browser cache entry is shared). Private font, all rights reserved: see brand/fonts/wobby/README.txt.
+  const WOBBY_BOLD_URL = new URL('brand/fonts/wobby/Wobby-Bold.woff2', BASE_URL).toString();
   const GAMES = [
     {
       id: 'berlin-time-detective',
@@ -292,6 +295,14 @@
 
     _styles() {
       return `
+        @font-face {
+          font-family: Wobby;
+          font-style: normal;
+          font-weight: 700;
+          font-display: swap;
+          src: url(${WOBBY_BOLD_URL}) format('woff2');
+        }
+
         bw-games-page {
           display: block;
           width: 100%;
@@ -417,15 +428,20 @@
           padding: 0 12px;
         }
 
+        /* Wobby step 9 (Yusuf, 25 Nov 2026: "/games ... headings and game card titles -> Wobby"): the retro display lines are Wobby Bold 700 (a real face,
+           font-synthesis:none). Wobby is about 35 % narrower than Montserrat at the same size, so the sizes grow about 25 % and the hard shadow scales with the
+           letters (em units). Kickers, body text, meta rows and buttons keep their faces. */
         .bw-games-hero h1 {
           color: var(--green);
-          font-size: clamp(54px, 8vw, 118px);
-          font-weight: 950;
+          font-family: Wobby, Montserrat, Arial, sans-serif;
+          font-size: clamp(54px, 10.2vw, 134px);
+          font-synthesis: none;
+          font-weight: 700;
           letter-spacing: 0;
-          line-height: 0.88;
+          line-height: 0.9;
           margin-top: 12px;
           max-width: 880px;
-          text-shadow: 5px 5px 0 var(--cream), 10px 10px 0 rgba(52, 214, 180, 0.82);
+          text-shadow: 0.04em 0.04em 0 var(--cream), 0.08em 0.08em 0 rgba(52, 214, 180, 0.82);
         }
 
         .bw-games-hero-lead {
@@ -530,11 +546,14 @@
         .bw-games-section-head h2,
         .bw-games-board-copy h2 {
           color: var(--green);
-          font-size: clamp(34px, 5vw, 68px);
-          font-weight: 950;
+          font-family: Wobby, Montserrat, Arial, sans-serif;
+          font-size: clamp(38px, 5.6vw, 76px);
+          font-synthesis: none;
+          font-weight: 700;
           letter-spacing: 0;
-          line-height: 0.96;
+          line-height: 1;
           margin-top: 8px;
+          text-wrap: balance;
         }
 
         .bw-games-section-head p:last-child,
@@ -627,11 +646,21 @@
 
         .bw-game-card h3 {
           color: var(--ink);
-          font-size: clamp(25px, 2.4vw, 36px);
-          font-weight: 950;
+          font-family: Wobby, Montserrat, Arial, sans-serif;
+          font-size: clamp(28px, 2.7vw, 40px);
+          font-synthesis: none;
+          font-weight: 700;
           letter-spacing: 0;
           line-height: 1;
           margin-top: 8px;
+          text-wrap: balance;
+        }
+
+        /* Three cards side by side: every title gets two lines of room so the text under the titles lines up across the row. */
+        @media (min-width: 981px) {
+          .bw-game-card h3 {
+            min-height: 2em;
+          }
         }
 
         .bw-game-lead {
@@ -771,9 +800,12 @@
 
         .bw-games-status-list strong {
           color: var(--white);
-          font-size: 20px;
-          font-weight: 950;
+          font-family: Wobby, Montserrat, Arial, sans-serif;
+          font-size: 22px;
+          font-synthesis: none;
+          font-weight: 700;
           line-height: 1.1;
+          text-wrap: balance;
         }
 
         .bw-games-status-list em {
@@ -845,8 +877,10 @@
             width: min(100%, calc(100vw - 36px));
           }
 
-          .bw-games-hero h1 {
-            font-size: clamp(43px, 14.2vw, 62px);
+          /* Phones: "BerlinWalk Games" can never fit one line at this size, so it always stacks as two lines (BerlinWalk / Games). The Custom Embed "BerlinWalk Games
+             Page Hub" sets its own !important size for this rule; the :not(#bw-w) boost wins over it by specificity. */
+          .bw-games-hero h1:not(#bw-w) {
+            font-size: clamp(46px, 17vw, 84px) !important;
             max-width: 100%;
             text-shadow: 3px 3px 0 var(--cream), 6px 6px 0 rgba(52, 214, 180, 0.82);
           }

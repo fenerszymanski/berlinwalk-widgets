@@ -265,13 +265,17 @@ class BWSiteFooterElement extends HTMLElement {
           text-align: center;
         }
 
+        /* Wobby step 9 (Yusuf, 25 Nov 2026: footer column headings in the brand face): Wobby Bold 700, sentence case, 20 px, the same as the live
+           "BerlinWalk Site Footer Restore" embed. A real face (font-synthesis:none). The @font-face for Wobby 400/700 is registered by the site header. */
         .bw-site-footer .bw-footer-col h3 {
           color: var(--yellow);
-          font-size: 13px;
-          font-weight: 800;
-          letter-spacing: 1.2px;
-          margin-bottom: 15px;
-          text-transform: uppercase;
+          font-family: Wobby, Montserrat, Arial, sans-serif;
+          font-size: 20px;
+          font-synthesis: none;
+          font-weight: 700;
+          letter-spacing: 0;
+          line-height: 1.15;
+          margin-bottom: 13px;
         }
 
         .bw-site-footer .bw-footer-links {

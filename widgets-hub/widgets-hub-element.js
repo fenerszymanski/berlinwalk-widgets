@@ -17,6 +17,9 @@
 
 const BW_WIDGETS_HUB_DATA_URL = 'https://fenerszymanski.github.io/berlinwalk-widgets/tools-hub/data.json?v=20260914-featured-listings';
 const BW_EMBED_RESIZE_URL = 'https://fenerszymanski.github.io/berlinwalk-widgets/embed-resize.js';
+// Wobby, the brand headline face (25 Nov 2026): the Wix-hosted site font, the same file every other Wobby heading on the site loads.
+// Used only for this gallery's own page headings and widget card titles. The embed snippets that visitors copy stay Arial (third-party sites do not have Wobby).
+const BW_WIDGETS_HUB_WOBBY_URL = 'https://static.wixstatic.com/ufonts/5a08a3_53d3fadb4e6e4aadb41345f23354ae47/woff2/file.woff2';
 
 const BW_WIDGETS_THEMES = {
   standard: {
@@ -98,6 +101,14 @@ class BWWidgetsHubElement extends HTMLElement {
     this.innerHTML = `
       <style>
         ${nativeGalleryHeight}
+        @font-face {
+          font-family: Wobby;
+          font-style: normal;
+          font-weight: 400;
+          font-display: swap;
+          src: url(${BW_WIDGETS_HUB_WOBBY_URL}) format('woff2');
+        }
+
         bw-widgets-hub {
           display: block;
           width: 100%;
@@ -149,12 +160,19 @@ class BWWidgetsHubElement extends HTMLElement {
         .bw-widgets-hub h3,
         .bw-widgets-hub p { margin-top: 0; }
 
+        /* Wobby step 9 (Yusuf, 25 Nov 2026: "/widgets gallery ... bunlari da degistir"): page headings and widget card titles are Wobby Regular 400
+           (font-synthesis:none). Wobby is about 35 % narrower and lighter than Montserrat ExtraBold, so the sizes grow a little. Descriptions (Merriweather),
+           mono-style labels, chips and buttons keep their faces. */
         .bw-widgets-hub h1 {
           color: #FFFFFF;
-          font-size: 36px;
-          font-weight: 800;
-          line-height: 1.14;
+          font-family: Wobby, Montserrat, Arial, sans-serif;
+          font-size: 40px;
+          font-synthesis: none;
+          font-weight: 400;
+          letter-spacing: 0;
+          line-height: 1.12;
           margin-bottom: 14px;
+          text-wrap: balance;
         }
 
         .bw-widgets-hub .bw-highlight { color: #FFE600; }
@@ -300,8 +318,11 @@ class BWWidgetsHubElement extends HTMLElement {
 
         .bw-widgets-hub .bw-start-here h2 {
           color: #FFE600;
-          font-size: 22px;
-          font-weight: 800;
+          font-family: Wobby, Montserrat, Arial, sans-serif;
+          font-size: 25px;
+          font-synthesis: none;
+          font-weight: 400;
+          letter-spacing: 0;
           line-height: 1.2;
           margin: 0 0 6px;
         }
@@ -351,8 +372,15 @@ class BWWidgetsHubElement extends HTMLElement {
         }
 
         .bw-widgets-hub .bw-start-card span {
+          font-family: Wobby, Montserrat, Arial, sans-serif;
+          font-size: 17px;
+          font-synthesis: none;
+          font-weight: 400;
+          letter-spacing: 0;
+          line-height: 1.2;
           min-width: 0;
           overflow-wrap: anywhere;
+          text-wrap: pretty;
         }
 
         .bw-widgets-hub .bw-category-section { margin-bottom: 44px; }
@@ -362,12 +390,16 @@ class BWWidgetsHubElement extends HTMLElement {
           align-items: center;
           color: #1B5E20;
           display: flex;
-          font-size: 26px;
-          font-weight: 800;
+          font-family: Wobby, Montserrat, Arial, sans-serif;
+          font-size: 30px;
+          font-synthesis: none;
+          font-weight: 400;
           gap: 10px;
-          line-height: 1.2;
+          letter-spacing: 0;
+          line-height: 1.15;
           margin-bottom: 8px;
           scroll-margin-top: 80px;
+          text-wrap: balance;
         }
 
         .bw-widgets-hub .bw-category-icon {
@@ -437,10 +469,14 @@ class BWWidgetsHubElement extends HTMLElement {
 
         .bw-widgets-hub .bw-widget-title {
           color: #1B5E20;
-          font-size: 20px;
-          font-weight: 800;
-          line-height: 1.25;
+          font-family: Wobby, Montserrat, Arial, sans-serif;
+          font-size: 23px;
+          font-synthesis: none;
+          font-weight: 400;
+          letter-spacing: 0;
+          line-height: 1.2;
           margin: 0 0 6px;
+          text-wrap: pretty;
         }
 
         .bw-widgets-hub .bw-widget-meta {
@@ -695,10 +731,14 @@ class BWWidgetsHubElement extends HTMLElement {
 
         .bw-widgets-hub .bw-hub-footer h2 {
           color: #FFFFFF;
-          font-size: 26px;
-          font-weight: 800;
-          line-height: 1.2;
+          font-family: Wobby, Montserrat, Arial, sans-serif;
+          font-size: 30px;
+          font-synthesis: none;
+          font-weight: 400;
+          letter-spacing: 0;
+          line-height: 1.15;
           margin-bottom: 10px;
+          text-wrap: balance;
         }
 
         .bw-widgets-hub .bw-hub-footer p {
@@ -725,13 +765,14 @@ class BWWidgetsHubElement extends HTMLElement {
         .bw-widgets-hub .bw-btn-primary:hover { background: #fff04a; }
 
         @media (max-width: 700px) {
-          .bw-widgets-hub h1 { font-size: 28px; }
+          .bw-widgets-hub h1 { font-size: 32px; }
           .bw-widgets-hub .bw-hero-lead { font-size: 15px; }
           .bw-widgets-hub .bw-hub-main { padding: 28px 16px 36px; }
           .bw-widgets-hub .bw-terms-card { padding: 16px 18px; font-size: 14px; }
           .bw-widgets-hub .bw-start-here { padding: 18px; }
           .bw-widgets-hub .bw-start-grid { grid-template-columns: 1fr; }
-          .bw-widgets-hub .bw-category-heading { font-size: 22px; }
+          .bw-widgets-hub .bw-category-heading { font-size: 25px; }
+          .bw-widgets-hub .bw-widget-title { font-size: 22px; }
           .bw-widgets-hub .bw-category-icon { font-size: 26px; }
           .bw-widgets-hub .bw-widget-head { padding: 16px 18px 12px; }
           .bw-widgets-hub .bw-widget-actions { padding: 12px 18px; }
