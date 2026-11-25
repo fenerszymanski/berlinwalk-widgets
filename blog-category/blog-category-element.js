@@ -23,6 +23,8 @@
   })();
   var DATA_VERSION = '20260914-aushang-2';
   var MONO_URL = new URL('../brand/fonts/editorial-v2/IBMPlexMono-SemiBold.woff2', BASE).href;
+  // Wobby, the brand headline face (25 Nov 2026): the Wix-hosted site font that every other Wobby heading on the site loads.
+  var WOBBY_URL = 'https://static.wixstatic.com/ufonts/5a08a3_53d3fadb4e6e4aadb41345f23354ae47/woff2/file.woff2';
   // Walk of Berlin wordmark (A15a). Green on the light --pa paper; 140 px is the brand minimum width.
   var WORDMARK = new URL('../assets/walkofberlin-wordmark-green.png', BASE).href;
   var PORTRAIT = new URL('./assets/yusuf-portrait.jpg', BASE).href;
@@ -217,6 +219,29 @@
       '.bw-lib-meta span{padding-right:14px;margin-right:14px;font-size:10.5px;}',
       '.bw-lib-note .l{grid-template-columns:76px minmax(0,1fr);gap:14px;}',
       '.bw-lib-face{width:76px;height:76px;}',
+      '}',
+
+      /* Wobby (Yusuf, 25 Nov 2026: headings and titles in the brand face, plain text unchanged). The masthead, the section and shelf headings, the lead
+         story title, the post row titles and the letter and note headings are Wobby Regular in sentence case (they were IBM Plex Mono caps and
+         Montserrat Bold). Mono kickers, the meta strip, figures, the German terms, excerpts and buttons keep their faces. Wobby is narrower and
+         lighter than both, so the sizes go up; font-synthesis:none, so nothing is faux bold. */
+      '@font-face{font-family:Wobby;font-style:normal;font-weight:400;font-display:swap;src:url(' + WOBBY_URL + ") format('woff2');}",
+      '.bw-lib .bw-lib-mast h1.m,.bw-lib .bw-lib-legend h2.m,.bw-lib .bw-lib-shelf-h h3.m,.bw-lib .bw-lib-lead h3,.bw-lib .bw-lib-row .tx b,',
+      '.bw-lib .bw-lib-letter .l h3.m,.bw-lib .bw-lib-letter .done h3.m,.bw-lib .bw-lib-note .l h3.m{font-family:Wobby,Montserrat,Arial,sans-serif;',
+      'font-weight:400;font-synthesis:none;font-variant-numeric:normal;letter-spacing:0;text-transform:none;}',
+      '.bw-lib .bw-lib-mast h1.m{font-size:clamp(44px,5.6vw,64px);line-height:1.04;text-wrap:balance;}',
+      '.bw-lib .bw-lib-legend h2.m{font-size:24px;line-height:1.15;padding-right:14px;}',
+      '.bw-lib .bw-lib-shelf-h h3.m{font-size:21px;line-height:1.2;}',
+      '.bw-lib .bw-lib-lead h3{font-size:29px;line-height:1.14;text-wrap:balance;}',
+      '.bw-lib .bw-lib-row .tx b{font-size:17.5px;line-height:1.24;text-wrap:pretty;}',
+      '.bw-lib .bw-lib-letter .l h3.m,.bw-lib .bw-lib-letter .done h3.m{font-size:26px;line-height:1.15;text-wrap:balance;}',
+      '.bw-lib .bw-lib-note .l h3.m{font-size:24px;line-height:1.15;}',
+      /* phones: the grey subline sits under the heading instead of squeezing beside it */
+      '@media (max-width:640px){',
+      '.bw-lib .bw-lib-legend{flex-wrap:wrap;row-gap:2px;}',
+      '.bw-lib .bw-lib-legend .s{flex:1 1 100%;transform:none;}',
+      '.bw-lib .bw-lib-shelf-h{flex-wrap:wrap;row-gap:2px;}',
+      '.bw-lib .bw-lib-shelf-h span{flex:1 1 100%;}',
       '}',
     ].join('');
   }

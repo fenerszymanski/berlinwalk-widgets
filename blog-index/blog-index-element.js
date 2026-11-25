@@ -17,6 +17,8 @@ const BW_BLOG_INDEX_TOURBAND_IMAGE_URL = new URL('../blog-hero/assets/tour-cta-y
 const BW_BLOG_INDEX_FRAUNCES_URL = new URL('../brand/fonts/editorial-v2/Fraunces-Variable.woff2', BW_BLOG_INDEX_BASE_URL).href;
 const BW_BLOG_INDEX_FRAUNCES_ITALIC_URL = new URL('../brand/fonts/editorial-v2/Fraunces-Italic-Variable.woff2', BW_BLOG_INDEX_BASE_URL).href;
 const BW_BLOG_INDEX_PLEX_MONO_URL = new URL('../brand/fonts/editorial-v2/IBMPlexMono-SemiBold.woff2', BW_BLOG_INDEX_BASE_URL).href;
+// Wobby, the brand headline face (25 Nov 2026): the Wix-hosted site font, the same file every other Wobby heading on the site loads.
+const BW_BLOG_INDEX_WOBBY_URL = 'https://static.wixstatic.com/ufonts/5a08a3_53d3fadb4e6e4aadb41345f23354ae47/woff2/file.woff2';
 // Berlin Then and Now, the paid walking tour.
 const BW_BLOG_INDEX_BOOKING_URL = 'https://www.walkofberlin.com/book-berlin-walking-tour/berlin-then-and-now';
 const BW_BLOG_INDEX_TOPIC_TAGS = {
@@ -2215,6 +2217,29 @@ class BWBlogIndexElement extends HTMLElement {
         @media (prefers-reduced-motion: reduce) {
           .bw-ci a, .bw-ci button { transition: none !important; }
         }
+
+        /* Wobby step 8 (Yusuf, 25 Nov 2026: headings and titles in the brand face, plain text unchanged). Wobby Regular replaces Fraunces and
+           Montserrat ExtraBold on the headline, the feature and band headings and on every post, card, tool and topic title. Mono labels
+           (eyebrows, section labels, dates, counts), buttons, chips, excerpts and the advice quote keep their faces. Wobby is about 35 % narrower and
+           lighter than Montserrat ExtraBold with a smaller x-height, so the small titles are about 2 px bigger; the headings keep their size.
+           font-synthesis:none, so nothing is faux bold or slanted (the yellow "History" keeps its colour, upright). */
+        @font-face { font-family: Wobby; font-style: normal; font-weight: 400; font-display: swap; src: url(${BW_BLOG_INDEX_WOBBY_URL}) format('woff2'); }
+        .bw-ci .bw-ci-h1, .bw-ci .bw-ci-h1 em, .bw-ci .bw-ci-f-title, .bw-ci .bw-ci-tourband-copy h2 {
+          font-family: Wobby, Fraunces, Merriweather, Georgia, serif; font-weight: 400; font-style: normal; font-synthesis: none; letter-spacing: 0; text-wrap: balance;
+        }
+        .bw-ci .bw-ci-second .bw-ci-t, .bw-ci .bw-ci-rc-title, .bw-ci .bw-ci-compact-link b, .bw-ci .bw-ci-pop .bw-ci-t, .bw-ci .bw-ci-pop .bw-ci-n,
+        .bw-ci .bw-ci-st, .bw-ci .bw-ci-w-title, .bw-ci .bw-ci-tt, .bw-ci .bw-ci-rt-title, .bw-ci .bw-ci-rl-title {
+          font-family: Wobby, Montserrat, Arial, sans-serif; font-weight: 400; font-style: normal; font-synthesis: none; letter-spacing: 0; text-wrap: pretty;
+        }
+        .bw-ci .bw-ci-second .bw-ci-t { font-size: 17px; }
+        .bw-ci .bw-ci-rc-title { font-size: 17px; }
+        .bw-ci .bw-ci-compact-link b { font-size: 16px; }
+        .bw-ci .bw-ci-pop .bw-ci-t { font-size: 16.5px; }
+        .bw-ci .bw-ci-st { font-size: 17.5px; }
+        .bw-ci .bw-ci-w-title { font-size: 19px; }
+        .bw-ci .bw-ci-tt { font-size: 16.5px; }
+        .bw-ci .bw-ci-rt-title { font-size: 16.5px; }
+        .bw-ci .bw-ci-rl-title { font-size: 15.5px; }
       </style>
 
       <section class="bw-ci" aria-labelledby="bw-ci-title">
