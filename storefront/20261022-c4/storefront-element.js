@@ -1349,13 +1349,14 @@
     // the option slots as grey blocks of the same size, no price (sale windows and formats decide it), the add button locked, no other picture downloaded. It never mounts the configurator and never touches the cart; the
     // live page replaces it in the render that reveals the store. Measured: every block above the accordions sits within 1 px of where the finished page puts it (390, 768, 1024, 1440 px; English and German).
     // The module of the street product the address names (1928 poster, or the 1979 sister once its module has loaded); null for every other page and for the alias pages (framed, canvas, digital file).
+    // The two digital-file addresses draw the poster's product id in the loading route (SKELETON_PRODUCTS), but their finished page is another layout (a shorter form, other words, no delivery), so they keep the old hold.
     ysEarlyModule(route) {
-      if(route.mode!=='product'||!route.productId||PRODUCT_VIEW_ALIASES[route.productId])return null;
+      if(route.mode!=='product'||!route.productId||PRODUCT_VIEW_ALIASES[route.productId]||this.isConfiguredDigitalRoute())return null;
       if(this.ysMod1928&&route.productId===this.ysMod1928.YS_PRODUCT_ID)return this.ysMod1928;
       return this.ysMod1979&&route.productId===YS1979.posterId?this.ysMod1979:null;
     }
     // The 1979 module is normally fetched once the page context names the 1979 print (after Wix's start); its loading view needs it at once, so the address alone is enough here.
-    ysEarly1979() {try{const route=this.skeletonRoute();return !this.revealed&&!this.hidden&&route.mode==='product'&&route.productId===YS1979.posterId&&!PRODUCT_VIEW_ALIASES[route.productId];}catch{return false;}}
+    ysEarly1979() {try{const route=this.skeletonRoute();return !this.revealed&&!this.hidden&&route.mode==='product'&&route.productId===YS1979.posterId&&!PRODUCT_VIEW_ALIASES[route.productId]&&!this.isConfiguredDigitalRoute();}catch{return false;}}
     earlyYsHtml(route) {
       if(this.revealed||this.hidden||this.configuredFailure||!this.layer||!this.presentation||!this.ysEarlyModule(route))return '';
       const live=Array.isArray(this.catalogue?.products)&&!!this.model,saved=[this.catalogue,this.model,this.context];let html='';
