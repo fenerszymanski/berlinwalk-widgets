@@ -96,6 +96,7 @@ LEGACY_ROUTES['berlin-clothing']=['clothing','all'];
 export function clothingHref(filter='all'){if(!FILTERS.clothing.includes(filter))throw new TypeError('Unknown clothing filter');const u=new URL('https://walkofberlin.com/category/berlin-clothing');if(filter!=='all')u.searchParams.set('collection',filter);return u.href;}
 LEGACY_ROUTES['berlin-hoodies']=['hoodies','all'];
 LEGACY_ROUTES['berlin-t-shirts']=['apparel','all'];
+LEGACY_ROUTES['berliner-sprueche']=['apparel','all'];   // not 'clothing': syncClothingSeo would rewrite title and canonical to /category/berlin-clothing
 // Premium tote bags (24 Nov 2026): their own category, listed under Gifts in the menu.
 FILTERS['tote-bags']=['all'];
 LEGACY_ROUTES['berlin-tote-bags']=['tote-bags','all'];
@@ -105,7 +106,7 @@ export const STORE_MENU_DESIGN2 = Object.freeze([
     ...[['everyday','Everyday','Berliner Alltag'],['landmarks','Landmarks','Wahrzeichen'],['stories','Berlin Stories','Berliner Geschichten'],['districts','Districts','Bezirke'],['sets','Sets','Sets']].map(([id,label,de])=>({label,de,href:storeHref('print',id)})),
     {label:'Print at home',de:'Zum Selbstdrucken',href:storeHref('print')+'&format=digital'}
   ]},
-  {id:'clothing',label:'Clothing',de:'Kleidung',href:clothingHref(),allLabel:'All clothing',allDe:'Alle Kleidung',items:[{label:'T-shirts',de:'T-Shirts',href:'https://walkofberlin.com/category/berlin-t-shirts'},{label:'Hoodies',de:'Hoodies',href:'https://walkofberlin.com/category/berlin-hoodies'}]},
+  {id:'clothing',label:'Clothing',de:'Kleidung',href:clothingHref(),allLabel:'All clothing',allDe:'Alle Kleidung',items:[{label:'T-shirts',de:'T-Shirts',href:'https://walkofberlin.com/category/berlin-t-shirts'},{label:'Hoodies',de:'Hoodies',href:'https://walkofberlin.com/category/berlin-hoodies'},{label:'Berliner Sprüche',de:'Berliner Sprüche',href:'https://walkofberlin.com/category/berliner-sprueche'}]},
   {id:'gifts',label:'Gifts',de:'Geschenke',href:'https://walkofberlin.com/category/berlin-christmas-gifts',hrefDe:'https://walkofberlin.com/de/category/berlin-geschenke',items:[
     {label:'Your street in 1928',de:'Deine Straße 1928',href:STORE_PERSONALISED_PRODUCT},
     {label:'Your West Berlin street in 1979',de:'Deine West-Berliner Straße 1979',href:'https://walkofberlin.com/product-page/your-west-berlin-street-in-1979-personalised-aerial-print'},
@@ -132,3 +133,10 @@ export function design2Href(href,german=false) {
   }
   return target.href;
 }
+
+// Berliner Sprüche (Store SEO step 3, Yusuf 25 Nov 2026: "Hepsini yap"): native Wix collection dfc86900, 19 slogan pieces. The landing lists 13 cards in design order
+// (hoodie, T-shirt, Zurückbleiben bitte also the tote): the T-shirt card is the design card and carries Classic and Premium, so the Premium ids stay out (they drew a second, identical card). STORE_LANDINGS above is frozen and the legacy part of this file is append-only,
+// so new landings live here; the storefront merges both. German text on both URLs like berlin-poster; utm:false keeps the product links clean.
+export const STORE_LANDINGS_EXTRA = Object.freeze({
+  'berliner-sprueche':{title:'Berliner Sprüche auf T-Shirts und Hoodies',text:'Das sind Sätze, die man in Berlin jeden Tag hört: Zurückbleiben bitte in der U-Bahn, Mit Karte bitte an der Kasse, Zug fällt aus auf der Anzeige am Bahnsteig. Ich habe sie auf T-Shirts und Hoodies gesetzt, Zurückbleiben bitte auch auf einen Stoffbeutel. Unisex in S bis 3XL, jedes Stück wird auf Bestellung gedruckt. Die Produktseiten sind auf Englisch.',productIds:["bcd6e352-e848-4202-8039-5965a9e33e9a", "14f414a1-7cae-4004-955c-3ba08f5e677b", "cdd7fbf3-2b1d-41de-84b3-d37beee82787", "b01a9cf1-d970-4dc5-a03c-50b0f93a00cb", "4050130b-5e00-4cb2-99f5-90181cca1806", "783d5296-6ab3-44bb-b2f8-be896f5b7899", "0e2862e7-d9b0-4f5e-9ac4-7484009add6a", "a26d87cd-5947-4f7f-b6e1-f2c6d42849c3", "83e81dbe-8819-44f1-abdc-50f6ccc0c9e2", "6ecba539-d756-4181-8f66-f680b6d36929", "78a2b015-49e6-4d46-a4a2-9137198f33f1", "d0d4e797-61fa-4476-990a-3b7cd14de889", "07e2a2e4-84d9-4853-9521-f06339691506"],utm:false}
+});

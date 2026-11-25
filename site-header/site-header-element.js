@@ -167,6 +167,11 @@ const BW_HEADER_STORE_DESIGN2_EN = [
         "label": "Hoodies",
         "de": "Hoodies",
         "href": "https://walkofberlin.com/category/berlin-hoodies"
+      },
+      {
+        "label": "Berliner Sprüche",
+        "de": "Berliner Sprüche",
+        "href": "https://walkofberlin.com/category/berliner-sprueche"
       }
     ]
   },
@@ -315,6 +320,11 @@ const BW_HEADER_STORE_DESIGN2_DE = [
         "label": "Hoodies",
         "de": "Hoodies",
         "href": "https://walkofberlin.com/de/category/berlin-hoodies"
+      },
+      {
+        "label": "Berliner Sprüche",
+        "de": "Berliner Sprüche",
+        "href": "https://walkofberlin.com/de/category/berliner-sprueche"
       }
     ]
   },

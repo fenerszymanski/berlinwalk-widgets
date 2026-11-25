@@ -315,7 +315,7 @@
     import(asset('catalog-layer.js')), import(asset('editorial-helpers.js')), import(asset('street-configurator.js')),
     ...['data/categories.json','data/presentation.json','data/native-bindings.json','data/external-products.json'].map(path => fetch(path==='data/presentation.json'?new URL('data/presentation.json',base).href:asset(path),path==='data/presentation.json'?{cache:'no-cache'}:undefined)/* gallery-fresh-v2 (24 Nov 2026): one fixed address that the browser re-checks on every page view; an unchanged file answers 304 with no body instead of 73 KB, a changed one is fetched at once. v1 used a new address each time and could never be reused. */.then(response => {if (!response.ok) throw Error('CATALOGUE_METADATA_UNAVAILABLE');return response.json();})),
     import(asset('funnel.js')).then(m=>{import(asset('campaign-session.js')).catch(()=>{});return m;}).catch(() => null),   // measurement must never block the shop
-    import(new URL('../../js/store-navigation.js?v=premium-totes-20261124-v1',base).href),
+    import(new URL('../../js/store-navigation.js?v=berliner-sprueche-20261125-v1',base).href),
     import(asset('gift.js')).catch(()=>null),
     import(asset('gift-week.js')),
     import(asset('black-friday.js')),
@@ -487,8 +487,9 @@
       if(name==='shop-bridge-ready')this.start();
     }
     async load() {
-      try {const [layer,editorial,ysMod,definitions,presentation,bindings,external,funnel,navigation,gift,campaign,bf,campaignConfig,bfConfig,priceSnapshot,catalogSnapshot,calendarMod,design2]=await resources;
+      try {const [layer,editorial,ysMod,definitions,presentation,bindings,external,funnel,navigationModule,gift,campaign,bf,campaignConfig,bfConfig,priceSnapshot,catalogSnapshot,calendarMod,design2]=await resources;
         if(design2){await design2.prepare;design2.install(BWStorefront,{asset,esc,STORE_LOGO,money,editionHref,isDigital,POSTER_DELIVERY_SHORT,NOTICE_GIFT,cartPageUrl,ysGermanTab});this.setAttribute("design2","");}
+        const navigation=navigationModule?.STORE_LANDINGS_EXTRA?{...navigationModule,STORE_LANDINGS:Object.freeze({...navigationModule.STORE_LANDINGS,...navigationModule.STORE_LANDINGS_EXTRA})}:navigationModule;   // 25 Nov 2026: landings added after the frozen legacy list (Berliner Sprüche)
         Object.assign(this,{layer,editorial,ysMod,definitions,presentation,bindings,external,funnel,navigation,gift,campaign,bf,campaignConfig,bfConfig,priceSnapshot,catalogSnapshot,calendarMod});
         await this.ensureYs1979();
         this.measure('adLanding');   // 21 Nov 2026: the utm_content of this landing, counted as an identifier-free aggregate (funnel.js)
@@ -795,7 +796,7 @@
     shopTitle(selected,filter) {return filter?(filter.id==='sets'?filter.label:`${filter.label} posters`):selected?.title||this.lead();}
     landingView() {
       const page=this.landing,view=page.category?this.model.getCategoryView(page.category,'all'):null;
-      const products=(page.productIds?page.productIds.map(id=>this.model.products.find(product=>product.wixProductId===id||product.id===id)).filter(Boolean):view?.products||[]).map(product=>{const item={...product,...page.cards?.[product.id]};const target=new URL(item.productUrl);target.searchParams.set('utm_source','store');target.searchParams.set('utm_campaign','gift-week-202611');target.searchParams.set('utm_content','store-gifts-'+(page.lang||'de'));item.productUrl=target.href;return item;});
+      const products=(page.productIds?page.productIds.map(id=>this.model.products.find(product=>product.wixProductId===id||product.id===id)).filter(Boolean):view?.products||[]).map(product=>{const item={...product,...page.cards?.[product.id]};if(page.utm!==false){const target=new URL(item.productUrl);target.searchParams.set('utm_source','store');target.searchParams.set('utm_campaign','gift-week-202611');target.searchParams.set('utm_content','store-gifts-'+(page.lang||'de'));item.productUrl=target.href;}return item;});
       const cards=products.map(product=>this.card({...product,cardSummary:this.layer.cardSummary(product.cardSummary||product.description),imageFit:product.imageFit||view?.imageFit||'contain'}));
       if(page.voucher)cards.splice(page.voucher.after,0,this.gift?.giftCardHtml?.(this.giftOffersAll(),page.voucher,{assetUrl:asset,printUrl:url(this.navigation.STORE_PERSONALISED_PRODUCT),redirecting:this.cartRedirect==='gift'})||'');
       return `<section class="wrap intro" lang="${esc(page.lang||'de')}"><h1 class="lead">${esc(page.title)}</h1><p>${esc(page.text)}</p></section><section class="wrap shelf"><div class="grid category-grid">${cards.join('')}</div></section>`;
@@ -1434,7 +1435,7 @@
     }
     skeletonLanding(page,model,category) {
       const view=page.category?model.getCategoryView(page.category,'all'):null;
-      const products=(page.productIds?page.productIds.map(id=>model.products.find(product=>product.wixProductId===id||product.id===id)).filter(Boolean):view?.products||[]).map(product=>{const item={...product,...page.cards?.[product.id]};const target=new URL(item.productUrl);target.searchParams.set('utm_source','store');target.searchParams.set('utm_campaign','gift-week-202611');target.searchParams.set('utm_content','store-gifts-'+(page.lang||'de'));item.productUrl=target.href;return item;});
+      const products=(page.productIds?page.productIds.map(id=>model.products.find(product=>product.wixProductId===id||product.id===id)).filter(Boolean):view?.products||[]).map(product=>{const item={...product,...page.cards?.[product.id]};if(page.utm!==false){const target=new URL(item.productUrl);target.searchParams.set('utm_source','store');target.searchParams.set('utm_campaign','gift-week-202611');target.searchParams.set('utm_content','store-gifts-'+(page.lang||'de'));item.productUrl=target.href;}return item;});
       const cards=products.map(product=>this.skeletonCard({...product,imageFit:product.imageFit||view?.imageFit||'contain'}));
       if(page.voucher){
         const rows=this.catalogue?.products||this.snapshotRows();
