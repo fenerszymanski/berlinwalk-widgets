@@ -9832,5 +9832,74 @@
     "roomVideoUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/room/moabit-water-ring.mp4",
     "roomVideoPosterUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/room/moabit-water-ring-poster.jpg",
     "roomVideoThumbnailUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/room/moabit-water-ring-thumb.jpg"
+  },
+  {
+    "id": "dl-ostbahnhof-seven-arches",
+    "name": "Ostbahnhof Printable Poster",
+    "place": "Ostbahnhof · Seven arches behind glass",
+    "image": "ostbahnhof-seven-arches-fullart.jpg",
+    "alt": "Layered screen print of the glass front of Berlin Ostbahnhof on Stralauer Platz, in orange and teal tones, with seven faint round-headed arches of the old entrance showing through above it and the OSTBAHNHOF, BERLIN footer.",
+    "typeLine": "DIGITAL DOWNLOAD · 30 × 40 CM",
+    "kind": "digital",
+    "deliveryNote": "Digital download · 1 JPEG print file and a printing guide. No physical item.",
+    "deliveryDetails": "Your download includes one 3:4 sRGB JPEG, 3543 × 4724 px at 300 dpi for 30 × 40 cm, and a printing guide. The same file prints without cropping at 45 × 60 cm and 60 × 80 cm, with softer detail at larger sizes. No physical poster, frame or decor is included.",
+    "group": "stories",
+    "visualCreditsHtml": "<p>Photographic references: Gerd Danigel, <a href=\"https://commons.wikimedia.org/wiki/File:Berlin_Ostbahnhof_1977.jpg\">Berlin Ostbahnhof 1977.jpg</a>, 1977, Wikimedia Commons, <a href=\"https://creativecommons.org/licenses/by-sa/4.0/\">CC BY-SA 4.0</a>; Tony Webster, <a href=\"https://commons.wikimedia.org/wiki/File:Berlin_Ostbahnhof_Train_Station_(54182706650).jpg\">Berlin Ostbahnhof Train Station</a>, 21 September 2014, Wikimedia Commons, <a href=\"https://creativecommons.org/licenses/by/2.0/\">CC BY 2.0</a>. Changes: reinterpreted as a layered screen print; the old entrance front is shown as a faint layer over today's glass front, and the scale, alignment, colours and light were artistically adapted. This is not a reproduction of either photograph. No endorsement is implied.</p><p>Place facts: Berliner Zeitung (15 June 2018), stadtschnellbahn-berlin.de, Chronik der Mauer and Deutsche Bahn on the 2006 opening of the Hauptbahnhof.</p>",
+    "sizeImages": {
+      "30x40 cm": "ostbahnhof-seven-arches-30x40.jpg"
+    },
+    "gallery": [
+      {
+        "image": "ostbahnhof-seven-arches-30x40.jpg",
+        "alt": "Complete artwork at 30 x 40 cm. Digital file only."
+      }
+    ],
+    "wixProductId": "77d4a24b-a6ab-9481-e6ff-ca015fe6192d"
+  },
+  {
+    "id": "dl-tempelhofer-feld-kites",
+    "name": "Tempelhofer Feld Kites Printable Poster",
+    "place": "Tempelhofer Feld · Kites at golden hour",
+    "image": "tempelhofer-feld-kites-fullart.jpg",
+    "alt": "Gouache view from the edge of a runway at Tempelhofer Feld in the evening, with a dark asphalt strip crossing the frame, two kites in an apricot sky, small figures, a Nord 262 aircraft far off on the meadow and the TEMPELHOFER FELD, BERLIN footer.",
+    "typeLine": "DIGITAL DOWNLOAD · 30 × 40 CM",
+    "kind": "digital",
+    "deliveryNote": "Digital download · 1 JPEG print file and a printing guide. No physical item.",
+    "deliveryDetails": "Your download includes one 3:4 sRGB JPEG, 3543 × 4724 px at 300 dpi for 30 × 40 cm, and a printing guide. The same file prints without cropping at 45 × 60 cm and 60 × 80 cm, with softer detail at larger sizes. No physical poster, frame or decor is included.",
+    "group": "stories",
+    "visualCreditsHtml": "<p>Photographic references: Karlunun, <a href=\"https://commons.wikimedia.org/wiki/File:Berlin_Tempelhofer_Feld_noerdl_Bahn_85_P1050855_20200801.jpg\">Berlin Tempelhofer Feld noerdl Bahn 85 P1050855 20200801.jpg</a>, 1 August 2020, <a href=\"https://creativecommons.org/licenses/by-sa/4.0/\">CC BY-SA 4.0</a>; Orderinchaos, <a href=\"https://commons.wikimedia.org/wiki/File:Tempelhof_E_plane_on_feld.jpg\">Tempelhof E plane on feld.jpg</a>, 15 May 2015, <a href=\"https://creativecommons.org/licenses/by-sa/4.0/\">CC BY-SA 4.0</a>; Kevin M, <a href=\"https://commons.wikimedia.org/wiki/File:Drachen_auf_dem_Tempelhofer_Feld.jpg\">Drachen auf dem Tempelhofer Feld.jpg</a>, 8 October 2016, <a href=\"https://creativecommons.org/licenses/by/3.0/\">CC BY 3.0</a>; all Wikimedia Commons. Changes: reinterpreted as a gouache painting; the kite fabrics are drawn as flat colour blocks, and the runway markings, horizon, figures, light and meadow were artistically adapted. This is not a reproduction of any photograph. No endorsement is implied.</p><p>Place facts: Grün Berlin (tempelhoferfeld.de), visitBerlin and the Berlin Senate's Tempelhofer Feld pages.</p>",
+    "sizeImages": {
+      "30x40 cm": "tempelhofer-feld-kites-30x40.jpg"
+    },
+    "gallery": [
+      {
+        "image": "tempelhofer-feld-kites-30x40.jpg",
+        "alt": "Complete artwork at 30 x 40 cm. Digital file only."
+      }
+    ],
+    "wixProductId": "8df4e292-d1af-5841-ae3a-aaf48bee4779"
+  },
+  {
+    "id": "dl-yorckbruecken-bridge-row",
+    "name": "Yorckbrücken Printable Poster",
+    "place": "Yorckbrücken · Under the bridge row",
+    "image": "yorckbruecken-bridge-row-fullart.jpg",
+    "alt": "Gouache view along Yorckstraße in Schöneberg from the middle of the road, under a row of railway bridges with riveted plate girders, brick walls, slim columns at the kerb, two cyclists and the YORCKBRÜCKEN, BERLIN footer.",
+    "typeLine": "DIGITAL DOWNLOAD · 30 × 40 CM",
+    "kind": "digital",
+    "deliveryNote": "Digital download · 1 JPEG print file and a printing guide. No physical item.",
+    "deliveryDetails": "Your download includes one 3:4 sRGB JPEG, 3543 × 4724 px at 300 dpi for 30 × 40 cm, and a printing guide. The same file prints without cropping at 45 × 60 cm and 60 × 80 cm, with softer detail at larger sizes. No physical poster, frame or decor is included.",
+    "group": "stories",
+    "visualCreditsHtml": "<p>Photographic references: Michael.F.H.Barth, <a href=\"https://commons.wikimedia.org/wiki/File:Berlin_Sch%C3%B6neberg_Yorckbr%C3%BCcken_%28S02_0447%29.jpg\">Berlin Schöneberg Yorckbrücken (S02 0447).jpg</a>, 1 May 2024, <a href=\"https://creativecommons.org/licenses/by-sa/4.0/\">CC BY-SA 4.0</a>; Flocci Nivis, <a href=\"https://commons.wikimedia.org/wiki/File:20220807_Yorckbr%C3%BCcken_02.jpg\">20220807 Yorckbrücken 02.jpg</a>, 7 August 2022, <a href=\"https://creativecommons.org/licenses/by/4.0/\">CC BY 4.0</a>; both Wikimedia Commons. Monument record: Landesdenkmalamt Berlin, <a href=\"https://denkmaldatenbank.berlin.de/daobj.php?obj_dok_nr=09066749\">Yorckbrücken, 09066749</a>. Changes: reinterpreted as a gouache painting; the number and spacing of the spans, the column ornament, the skyline and the cyclists were artistically adapted, and traffic, signs and wall writing were left out. This is not a reproduction of either photograph. No endorsement is implied.</p><p>Place facts: Landesdenkmalamt Berlin and the Geschichtsparcours Yorckbrücken of the Bezirksamt Tempelhof-Schöneberg.</p>",
+    "sizeImages": {
+      "30x40 cm": "yorckbruecken-bridge-row-30x40.jpg"
+    },
+    "gallery": [
+      {
+        "image": "yorckbruecken-bridge-row-30x40.jpg",
+        "alt": "Complete artwork at 30 x 40 cm. Digital file only."
+      }
+    ],
+    "wixProductId": "cc308541-6743-9407-15a2-edad27318ffd"
   }
 ]
