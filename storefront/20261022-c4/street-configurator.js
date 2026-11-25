@@ -277,10 +277,10 @@ export const SHARE_TEXT = Object.freeze({
   en: Object.freeze({title: place => `${place} around 1928, seen from above`, text: place => `This is what ${place} looked like from above around 1928, next to today. I thought of you.`}),
   de: Object.freeze({title: place => `${place} um 1928, von oben`, text: place => `${place}, um 1928 von oben, daneben heute. Ich musste an dich denken.`}),   // no article: the name decides der, die or das, so the sentence starts with the name
 });
-const SMALL_WORDS = new Set(['der', 'die', 'das', 'den', 'dem', 'des', 'am', 'an', 'im', 'in', 'zur', 'zum', 'von', 'vom', 'und', 'auf', 'bei', 'unter', 'ohne']);
+const SMALL_WORDS = new Set(['der', 'die', 'das', 'des', 'dem', 'den', 'und', 'am', 'an', 'im', 'in', 'zum', 'zur', 'vom', 'von', 'bei']);
 // The print title is upper case ("KARL-MARX-STRASSE": toUpperCase turned the ß into SS). For a sentence it becomes "Karl-Marx-Straße" again.
 export function niceCase(upper) {
-  const words = String(upper || '').toLowerCase().split(' ').map((word, i) => (i > 0 && SMALL_WORDS.has(word)) ? word : word.replace(/(^|[-.'’])(\p{L})/gu, (m, a, b) => a + b.toUpperCase())).join(' ');
+  const words = String(upper || '').toLowerCase().split(' ').map((word, i) => (i > 0 && SMALL_WORDS.has(word)) ? word : word.replace(/(^|[-.'’\/(\[])(\p{L})/gu, (m, a, b) => a + b.toUpperCase())).join(' ');
   return words.replace(/(\p{L})strasse\b/gu, '$1straße').replace(/\bStrasse\b/g, 'Straße');
 }
 // The name that goes into the sentence: the street or place as the search gave it (without house number, postcode, city) when it matches the print title, else the title in sentence case.
