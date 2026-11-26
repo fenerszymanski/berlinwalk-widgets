@@ -2178,6 +2178,7 @@
     "deliveryNote": "Digital download · 1 JPEG print file and a printing guide. No physical item.",
     "deliveryDetails": "Your download includes one 3:4 sRGB JPEG at 300 dpi for 30 × 40 cm and a printing guide. The same file prints without cropping at 45 × 60 cm and 60 × 80 cm. No physical poster, frame or decor is included.",
     "group": "stories",
+    "alternativeProductId": "e09c84e5-cc48-434d-adc0-e9d9be484689",
     "visualCreditsHtml": "<p>Visual references: the type drawing of the cast-iron urinal in Berlin und seine Bauten (Wilhelm Ernst &amp; Sohn, 1896), public domain, and a photograph of the urinal on Rüdesheimer Platz by Leonhard Lenz, 8 September 2024, CC0, both via Wikimedia Commons. The pavilion, snow, lamplight and surroundings were artistically reinterpreted; this is not a reproduction of a photograph or a drawing. No endorsement is implied.</p>",
     "sizeImages": {
       "30x40 cm": "cafe-achteck-lamplight-30x40.jpg"
@@ -2187,7 +2188,14 @@
         "image": "cafe-achteck-lamplight-30x40.jpg",
         "alt": "Complete artwork at 30 x 40 cm."
       }
-    ]
+    ],
+    "roomImage": "cafe-achteck-lamplight-room-photo.jpg",
+    "roomVideoFit": "contain",
+    "roomCaption": "Styling example · 30 × 40 cm · Printable files only · Frame and decor not included",
+    "roomAlt": "The Café Achteck Lamplight print at 30 × 40 cm in an oak frame on a living-room wall. Frame and decor are not included.",
+    "roomVideoUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/room/cafe-achteck-lamplight.mp4",
+    "roomVideoPosterUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/room/cafe-achteck-lamplight-poster.jpg",
+    "roomVideoThumbnailUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/room/cafe-achteck-lamplight-thumb.jpg"
   },
   {
     "id": "dl-clayallee-outpost",
@@ -2971,6 +2979,7 @@
     "deliveryNote": "Digital download · 1 JPEG print file and a printing guide. No physical item.",
     "deliveryDetails": "Your download includes one 3:4 sRGB JPEG, 3543 × 4724 px at 300 dpi for 30 × 40 cm, and a printing guide. The same file prints without cropping at 45 × 60 cm and 60 × 80 cm, with softer detail at larger sizes. No physical poster, frame or decor is included.",
     "group": "stories",
+    "alternativeProductId": "51521a23-5d4c-43a7-aca7-62c174da77ee",
     "visualCreditsHtml": "<p>Place and history references: the checked research for my Wedding story, including Bezirksamt Mitte and Markus G. Reitzig, Berlin-Wedding in der Zeit der Hochindustrialisierung (1885–1914), Humboldt-Universität zu Berlin, 2006.</p><p>Visual reference studies: J. F. Schneider, Plan von Berlin, 1802, public domain, via Wikimedia Commons; Fridolin freudenfett (Peter Kuley), Wedding Panke an der Chausseestraße, 2012, CC BY-SA 3.0; Ernst Müller von Sondermühlen, Weddinghof, around 1885, via Wikimedia Commons. Commons marks the drawing as public domain, but the artist's death date is not recorded there and the file also lists CC BY-SA 4.0.</p><p>I interpreted these references as an imagined painted landscape. The river bend, mill, farm buildings, fields and light are simplified. The poster does not reconstruct the village as it looked in 1251. No source photograph or drawing is reproduced in the artwork.</p>",
     "sizeImages": {
       "30x40 cm": "wedding-fields-30x40.jpg"
@@ -2981,6 +2990,13 @@
         "alt": "Complete artwork at 30 x 40 cm. Digital file only."
       }
     ],
+    "roomImage": "wedding-fields-room-photo.jpg",
+    "roomVideoFit": "contain",
+    "roomCaption": "Styling example · 30 × 40 cm · Printable files only · Frame and decor not included",
+    "roomAlt": "The Wedding Fields print at 30 × 40 cm in an oak frame on a living-room wall. Frame and decor are not included.",
+    "roomVideoUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/room/wedding-fields.mp4",
+    "roomVideoPosterUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/room/wedding-fields-poster.jpg",
+    "roomVideoThumbnailUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/room/wedding-fields-thumb.jpg",
     "wixProductId": "cada2892-2286-d52d-f313-650c3719b0c7"
   },
   {
@@ -9901,5 +9917,63 @@
       }
     ],
     "wixProductId": "cc308541-6743-9407-15a2-edad27318ffd"
+  },
+  {
+    "id": "pr-cafe-achteck-lamplight",
+    "name": "Café Achteck Lamplight",
+    "place": "Berlin · Snow and lamplight",
+    "image": "cafe-achteck-lamplight-fullart.jpg",
+    "alt": "Painterly illustration of a green octagonal cast-iron Café Achteck pavilion with two lit lamps, standing in snow at dusk under bare branches, with apartment houses behind. The footer reads Café Achteck, Berlin.",
+    "typeLine": "PREMIUM MATTE · 200 GSM · UNFRAMED",
+    "wixProductId": "e09c84e5-cc48-434d-adc0-e9d9be484689",
+    "group": "stories",
+    "alternativeProductId": "90039ae1-d2f6-7ea7-5154-fabbfab2a9e7",
+    "visualCreditsHtml": "<p>Visual references: the type drawing of the cast-iron urinal in Berlin und seine Bauten (Wilhelm Ernst &amp; Sohn, 1896), public domain, and a photograph of the urinal on Rüdesheimer Platz by Leonhard Lenz, 8 September 2024, CC0, both via Wikimedia Commons. The pavilion, snow, lamplight and surroundings were artistically reinterpreted; this is not a reproduction of a photograph or a drawing. No endorsement is implied.</p>",
+    "sizeImages": {
+      "30x40 cm": "cafe-achteck-lamplight-30x40.jpg",
+      "50x70 cm": "cafe-achteck-lamplight-50x70.jpg"
+    },
+    "gallery": [
+      {
+        "image": "cafe-achteck-lamplight-fullart.jpg",
+        "alt": "The complete Café Achteck Lamplight artwork, without cropping."
+      }
+    ],
+    "roomImage": "cafe-achteck-lamplight-room-photo.jpg",
+    "roomVideoFit": "contain",
+    "roomCaption": "Styling example · 30 × 40 cm · Frame and decor not included",
+    "roomAlt": "The Café Achteck Lamplight print at 30 × 40 cm in an oak frame on a living-room wall. Frame and decor are not included.",
+    "roomVideoUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/room/cafe-achteck-lamplight.mp4",
+    "roomVideoPosterUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/room/cafe-achteck-lamplight-poster.jpg",
+    "roomVideoThumbnailUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/room/cafe-achteck-lamplight-thumb.jpg"
+  },
+  {
+    "id": "pr-wedding-fields",
+    "name": "Wedding Fields",
+    "place": "Wedding · The name in the fields",
+    "image": "wedding-fields-fullart.jpg",
+    "alt": "Imagined painted landscape of a blue stream winding through green and golden fields towards a small mill and low farm buildings. The footer reads Wedding, Berlin.",
+    "typeLine": "PREMIUM MATTE · 200 GSM · UNFRAMED",
+    "wixProductId": "51521a23-5d4c-43a7-aca7-62c174da77ee",
+    "group": "stories",
+    "alternativeProductId": "cada2892-2286-d52d-f313-650c3719b0c7",
+    "visualCreditsHtml": "<p>Place and history references: the checked research for my Wedding story, including Bezirksamt Mitte and Markus G. Reitzig, Berlin-Wedding in der Zeit der Hochindustrialisierung (1885–1914), Humboldt-Universität zu Berlin, 2006.</p><p>Visual reference studies: J. F. Schneider, Plan von Berlin, 1802, public domain, via Wikimedia Commons; Fridolin freudenfett (Peter Kuley), Wedding Panke an der Chausseestraße, 2012, CC BY-SA 3.0; Ernst Müller von Sondermühlen, Weddinghof, around 1885, via Wikimedia Commons. Commons marks the drawing as public domain, but the artist's death date is not recorded there and the file also lists CC BY-SA 4.0.</p><p>I interpreted these references as an imagined painted landscape. The river bend, mill, farm buildings, fields and light are simplified. The poster does not reconstruct the village as it looked in 1251. No source photograph or drawing is reproduced in the artwork.</p>",
+    "sizeImages": {
+      "30x40 cm": "wedding-fields-30x40.jpg",
+      "50x70 cm": "wedding-fields-50x70.jpg"
+    },
+    "gallery": [
+      {
+        "image": "wedding-fields-fullart.jpg",
+        "alt": "The complete Wedding Fields artwork, without cropping."
+      }
+    ],
+    "roomImage": "wedding-fields-room-photo.jpg",
+    "roomVideoFit": "contain",
+    "roomCaption": "Styling example · 30 × 40 cm · Frame and decor not included",
+    "roomAlt": "The Wedding Fields print at 30 × 40 cm in an oak frame on a living-room wall. Frame and decor are not included.",
+    "roomVideoUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/room/wedding-fields.mp4",
+    "roomVideoPosterUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/room/wedding-fields-poster.jpg",
+    "roomVideoThumbnailUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/storefront/20261022-c4/assets/room/wedding-fields-thumb.jpg"
   }
 ]
