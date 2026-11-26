@@ -143,6 +143,47 @@ export function addressLabel(result) {
   const street = [a.road || result?.name, a.house_number].filter(Boolean).join(' ');
   return clean([street, a.postcode, 'Berlin'].filter(Boolean).join(', '), YS_LIMITS.address) || clean(result?.display_name, YS_LIMITS.address);
 }
+const ADDRESS_LIST_URL = 'https://app.berlinwalk.com/api?route=ys1928-address-list';
+
+function addressListFields(result) {
+  const { road: street, house_number: houseNumber, postcode } = result?.address || {};
+  if (!street || !/^\d{1,3}\s*[a-z]?$/i.test(houseNumber || '') || !/^1[0-4]\d{3}$/.test(postcode || '')) return null;
+  return { street, houseNumber: String(houseNumber), postcode: String(postcode) };
+}
+
+function exactAddressMatch(query, result) {
+  const address = addressListFields(result);
+  if (!address) return false;
+  const normalise = value => value.normalize('NFC').toLowerCase().replace(/[,\s]+/g, '').replace(/ß/g, 'ss');
+  const typed = normalise(query).replace(/berlin$/, '');
+  const full = normalise(address.street + address.houseNumber);
+  return typed === full || typed === full + address.postcode;
+}
+
+function submitAddressList(result, state) {
+  if (state.addressListConsent !== true) return;
+  const address = addressListFields(result);
+  if (!address) return;
+  fetch(ADDRESS_LIST_URL, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    credentials: 'omit',
+    referrerPolicy: 'no-referrer',
+    keepalive: true,
+    body: JSON.stringify({ ...address, consent: true }),
+  }).catch(() => {});
+}
+
+function addressListConsentHtml(german, checked) {
+  const label = german
+    ? 'Meine bestätigte Adresse für interne Statistiken speichern (optional)'
+    : 'Save my verified address for internal statistics (optional)';
+  const detail = german
+    ? 'Straße, Hausnummer und Postleitzahl werden ohne Verbindung zu deiner Sitzung oder Bestellung bis zu 90 Tage gespeichert.'
+    : 'Street, house number and postcode are kept for up to 90 days without a link to your session or order.';
+  return `<div class="ys-address-list"><label><input type="checkbox" data-ys="address-list-consent" aria-describedby="ys-address-list-detail" ${checked ? 'checked' : ''}> <span>${label}</span></label><small id="ys-address-list-detail">${detail} <a href="${german ? '/de/privacy-policy' : '/privacy-policy'}#ys1928-address-statistics">${german ? 'Datenschutz' : 'Privacy policy'}</a></small></div>`;
+}
+
 // The two values the cart line carries. Exact keys = the product's custom text field titles.
 // Ad reference for the order (24 Oct 2026, Meta test bw_ys_oct2026 and the walkofberlin.com/1928 short link): read from this page's
 // own address at add time, nothing is stored on the device. "Ref:" sits before "Line:", so make_print.py's parser is unchanged (the
@@ -499,6 +540,7 @@ export function mountConfigurator(host, state, api) {
       <label class="ys-label ys-find" for="ys-q">Find your home in 1928</label>
       <div class="ys-search"><input id="ys-q" data-ys="q" type="search" autocomplete="off" enterkeyhint="search" maxlength="${L.address}" placeholder="e.g. Chamissoplatz" value="${esc(state.query || '')}"><button type="button" class="outline" data-ys="go">Search</button></div>
       <p class="ys-note ys-note-hint" data-ys="searchnote" role="status">${SEARCH_HINT_HTML}</p>
+      ${api.addressListEnabled ? addressListConsentHtml(api.addressListGerman, state.addressListConsent === true) : ''}
       <div class="ys-resultswrap"><ul class="ys-results" data-ys="results" role="listbox" aria-label="Matching places" hidden></ul></div>
     </div>`;
   const optionsHtml = `<div class="ys-form ys-optform">
@@ -739,6 +781,9 @@ export function mountConfigurator(host, state, api) {
   // ---- Search: Photon first (typo-tolerant, Berlin bbox), Nominatim when Photon fails or finds nothing (max one request per second, contact email). ----
   let timer = 0;
   api.ysInput = input;
+  $('address-list-consent')?.addEventListener('change', event => {
+    state.addressListConsent = event.currentTarget.checked;
+  });
   const spacing = 1100;
   const PIN = '<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 0 0-7-7zm0 9.6A2.6 2.6 0 1 1 12 6.4a2.6 2.6 0 0 1 0 5.2z"/></svg>';
   async function photon(q, signal) {
@@ -789,26 +834,34 @@ export function mountConfigurator(host, state, api) {
     try { rows = await job.done; } catch (error) { if (error.name === 'NoAnswer' && api.ysSearch === job && input.isConnected) setNote('The address search did not answer. Try again in a moment.'); return; }
     if (api.ysSearch !== job || !input.isConnected || clean(input.value, 80) !== job.q) return;
     show(job, rows);
+    if (api.addressListEnabled && job.submitted && !job.addressListHandled && state.addressListConsent === true) {
+      const matches = state.results.filter(result => exactAddressMatch(job.q, result));
+      if (matches.length === 1) {
+        job.addressListHandled = true;
+        submitAddressList(matches[0], state);
+      }
+    }
   }
-  async function search(q) {
+  async function search(q, submitted = false) {
     if (!input.isConnected) return;
     q = clean(q, 80);
     if (q.length < 3) { results.hidden = true; setNote(q ? 'Keep typing (at least 3 letters).' : ''); refreshButton(); return; }
     api.track?.('search');
     api.ysSearch?.controller.abort();
-    const job = api.ysSearch = {q, controller: new AbortController()};
+    const job = api.ysSearch = {q, submitted, controller: new AbortController()};
     job.done = lookup(q, job.controller.signal); job.done.catch(() => {});
     setNote('Searching…');
     await follow(job);
   }
   const schedule = () => { clearTimeout(timer); timer = setTimeout(() => search(input.value), 450); };
   input.addEventListener('input', () => { state.query = input.value; schedule(); });
-  input.addEventListener('keydown', event => { if (event.key === 'Enter') { event.preventDefault(); clearTimeout(timer); search(input.value); } });
-  $('go').addEventListener('click', () => { clearTimeout(timer); search(input.value); });
+  input.addEventListener('keydown', event => { if (event.key === 'Enter') { event.preventDefault(); clearTimeout(timer); search(input.value, true); } });
+  $('go').addEventListener('click', () => { clearTimeout(timer); search(input.value, true); });
   results.addEventListener('click', event => {
     const pick = event.target.closest('[data-ys-pick]'); if (!pick) return;
     const r = state.results?.[Number(pick.dataset.ysPick)]; if (!r) return;
     if (api.ysSearch) api.ysSearch.picked = true;
+    if (api.addressListEnabled && event.isTrusted && !api.ysSearch?.addressListHandled) submitAddressList(r, state);
     Object.assign(state, {lat: Math.round(Number(r.lat) * 1e5) / 1e5, lon: Math.round(Number(r.lon) * 1e5) / 1e5, address: addressLabel(r), title: titleFrom(r), area: areaFrom(r), query: input.value});
     host.querySelector('[data-ys="title"]').value = state.title; host.querySelector('[data-ys="area"]').value = state.area;
     results.hidden = true; setNote(''); showPoint(true); api.track?.('pick');
