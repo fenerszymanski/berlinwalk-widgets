@@ -10512,5 +10512,28 @@
     },
     "description": "<p>A Santa bear pedals a yellow cargo bike full of gifts past the Marienkirche.</p><p>Front print on a Ring Spun Sports Grey Gildan Softstyle SF500 hoodie with brushed fleece and a classic fit. I have this hoodie made to order.</p><p>Material: 75% cotton, 25% polyester.</p><h3>Size and care</h3><p>Garment length × half-chest width, measured flat. Compare these measurements with a hoodie you wear.</p><ul><li>S · 71.1 × 51.0 cm</li><li>M · 73.7 × 56.0 cm</li><li>L · 76.2 × 61.0 cm</li><li>XL · 78.7 × 66.0 cm</li><li>2XL · 81.3 × 71.0 cm</li></ul><p>Machine wash warm, inside out, with similar colours. Use non-chlorine bleach only. Tumble dry at medium heat. Avoid ironing the print and dry cleaning.</p>",
     "descriptionOverride": true
+  },
+  {
+    "id": "dl-schlossplatz-three-layers",
+    "name": "Schlossplatz Printable Poster",
+    "place": "Schlossplatz · Three layers, one square",
+    "image": "schlossplatz-three-layers-fullart.jpg",
+    "alt": "Layered screen print of Schlossplatz in dark petrol green, bronze and stone tones: the old palace portal and dome, the flat bronze glass front of the Palast der Republik and the rebuilt west front of the palace in one view, with the SCHLOSSPLATZ, BERLIN footer.",
+    "typeLine": "DIGITAL DOWNLOAD · 30 × 40 CM",
+    "kind": "digital",
+    "deliveryNote": "Digital download · 1 JPEG print file and a printing guide. No physical item.",
+    "deliveryDetails": "Your download includes one 3:4 sRGB JPEG, 3543 × 4724 px at 300 dpi for 30 × 40 cm, and a printing guide. The same file prints without cropping at 45 × 60 cm and 60 × 80 cm, with softer detail at larger sizes. No physical poster, frame or decor is included.",
+    "group": "stories",
+    "visualCreditsHtml": "<p>Photographic references: abbilder, <a href=\"https://commons.wikimedia.org/wiki/File:Humboldtforum_und_Schlo%C3%9Fbr%C3%BCcke.jpg\">Humboldtforum und Schloßbrücke.jpg</a>, 4 July 2022, Wikimedia Commons, <a href=\"https://creativecommons.org/licenses/by/2.0/\">CC BY 2.0</a>; Königlich Preußische Messbildanstalt, <a href=\"https://commons.wikimedia.org/wiki/File:Berlin-Mitte-Ehemaliges_Berliner_Schloss-ZI-0136-06-Th176313.jpg\">Berlin-Mitte-Ehemaliges Berliner Schloss-ZI-0136-06-Th176313.jpg</a>, about 1890 to 1894, ZI-Photothek, Wikimedia Commons, <a href=\"https://creativecommons.org/publicdomain/mark/1.0/\">Public Domain Mark 1.0</a>; Istvan, <a href=\"https://commons.wikimedia.org/wiki/File:Palast_der_Republik_DDR_1977.jpg\">Palast der Republik DDR 1977.jpg</a>, 1977, Wikimedia Commons, <a href=\"https://creativecommons.org/licenses/by-sa/3.0/\">CC BY-SA 3.0</a>. Changes: reinterpreted as a layered screen print; the old palace portal, the Palast der Republik glass band and the present west front are laid over one facade, and the scale, layer positions, window rhythm, glass grid and colours were artistically adapted. This is not a reproduction of any photograph. No endorsement is implied.</p><p>Place facts: Humboldt Forum, <a href=\"https://www.humboldtforum.org/en/programm/feature/history-of-the-site-74591/\">history of the site</a> and <a href=\"https://www.humboldtforum.org/en/building-site/reconstruction/\">reconstruction</a>.</p>",
+    "sizeImages": {
+      "30x40 cm": "schlossplatz-three-layers-30x40.jpg"
+    },
+    "gallery": [
+      {
+        "image": "schlossplatz-three-layers-30x40.jpg",
+        "alt": "Complete artwork at 30 x 40 cm. Digital file only."
+      }
+    ],
+    "wixProductId": "28159971-ea62-eb7b-3fa2-d8d6ded8837e"
   }
 ]
