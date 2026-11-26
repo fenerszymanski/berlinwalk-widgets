@@ -12,6 +12,48 @@ const DIGITAL_SPEC = 'Digital file · JPG + PDF · 45 x 60 cm at 300 ppi';
 const DIGITAL_DELIVERY = 'Prints cleanly at 30 x 40 cm too. Nothing is shipped, so it works anywhere.';
 const POSTER_DELIVERY = 'Arrives in 3 to 5 working days in Germany, 4 to 9 elsewhere. Frame not included.';
 
+// ---- Allied places (26 Nov 2026, Yusuf: "Evet, ekle"). Veterans coming from the "Where did you serve?" Facebook series type a barracks name, and the address
+// services find nothing for it ("Andrews Barracks", "RAF Gatow": 0 results in Photon and Nominatim, tested 26 Nov). These rows answer first, from this fixed list.
+// Points: de.wikipedia "Liste der alliierten Einrichtungen in den West-Sektoren Berlins" (NS/EW), read 26 Nov 2026; Tempelhof, Checkpoint Charlie, Truman Plaza
+// (the list's EW is a typo there), Teufelsberg and Tegel from the Photon/OSM building or the place's own Wikipedia article. Patton Barracks is in Heidelberg: not here.
+export const PLACES_1979 = Object.freeze([
+  {name: 'Andrews Barracks', aka: ['andrews kaserne', 'hauptkadettenanstalt'], lat: 52.43084, lon: 13.29912, road: 'Finckensteinallee', suburb: 'Lichterfelde', chip: true},
+  {name: 'McNair Barracks', aka: ['mcnair kaserne', 'telefunken werk'], lat: 52.42013, lon: 13.28653, road: 'Goerzallee', suburb: 'Lichterfelde', chip: true},
+  {name: 'Roosevelt Barracks', aka: ['roosevelt kaserne'], lat: 52.44482, lon: 13.30523, road: 'Gardeschützenweg', suburb: 'Lichterfelde'},
+  {name: 'Turner Barracks', aka: ['turner kaserne'], lat: 52.45744, lon: 13.26159, road: 'Hüttenweg', suburb: 'Dahlem'},
+  {name: 'Clay Headquarters', aka: ['clay compound', 'clay hq', 'us headquarters', 'us mission berlin', 'berlin brigade headquarters'], lat: 52.45145, lon: 13.27354, road: 'Clayallee', suburb: 'Dahlem', chip: true},
+  {name: 'Truman Plaza', aka: [], lat: 52.45185, lon: 13.27024, road: 'Clayallee', suburb: 'Dahlem'},
+  {name: 'Tempelhof Airport', de: 'Flughafen Tempelhof', aka: ['tempelhof air base', 'tempelhof central airport', 'flughafen tempelhof', 'platz der luftbrucke'], lat: 52.48065, lon: 13.38892, road: 'Platz der Luftbrücke', suburb: 'Tempelhof', chip: true},
+  {name: 'Checkpoint Charlie', aka: [], lat: 52.50743, lon: 13.39038, road: 'Friedrichstraße', suburb: 'Kreuzberg', chip: true},
+  {name: 'Teufelsberg', aka: ['field station berlin', 'teufelsberg field station'], lat: 52.49737, lon: 13.24116, road: 'Teufelsseechaussee', suburb: 'Grunewald'},
+  {name: 'RAF Gatow', aka: ['royal air force gatow', 'flugplatz gatow', 'gatow airfield'], lat: 52.47444, lon: 13.13806, road: 'Kladower Damm', suburb: 'Gatow', chip: true},
+  {name: 'Brooke Barracks', aka: ['seeckt kaserne'], lat: 52.52327, lon: 13.18811, road: 'Schmidt-Knobelsdorf-Straße', suburb: 'Wilhelmstadt', chip: true},
+  {name: 'Wavell Barracks', aka: ['schmidt knobelsdorf kaserne'], lat: 52.52327, lon: 13.18811, road: 'Schmidt-Knobelsdorf-Straße', suburb: 'Wilhelmstadt'},
+  {name: 'Smuts Barracks', aka: [], lat: 52.52018, lon: 13.18289, road: 'Wilhelmstraße', suburb: 'Wilhelmstadt'},
+  {name: 'Spandau Prison', de: 'Gefängnis Spandau', aka: ['spandau allied prison', 'kriegsverbrechergefangnis spandau'], lat: 52.52111, lon: 13.18528, road: 'Wilhelmstraße', suburb: 'Wilhelmstadt'},
+  {name: 'Montgomery Barracks', aka: ['blucher kaserne'], lat: 52.44659, lon: 13.12138, road: 'Sakrower Landstraße', suburb: 'Kladow'},
+  {name: 'Quartier Napoléon', aka: ['quartier napoleon', 'julius leber kaserne'], lat: 52.55598, lon: 13.31723, road: 'Kurt-Schumacher-Damm', suburb: 'Wedding', chip: true},
+  {name: 'Tegel Airport', de: 'Flughafen Tegel', aka: ['flughafen tegel', 'base aerienne 165'], lat: 52.55972, lon: 13.28778, road: '', suburb: 'Tegel'},
+].map(Object.freeze));
+const fold = value => String(value ?? '').normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase().replaceAll('ß', 'ss').replace(/[^a-z0-9]+/g, ' ').trim();
+// A row in the shape the search helpers read (Nominatim-like); osm 'historic' makes titleFrom print the place's own name.
+export const placeRow = (place, german = false) => ({lat: place.lat, lon: place.lon, name: german && place.de ? place.de : place.name, city: 'Berlin', osm: ['historic', 'military'], fixed: true,
+  address: {road: place.road, house_number: '', postcode: '', suburb: place.suburb, square: ''}});
+// The fixed places that answer a typed text: at least 4 letters, the start of a name or of one of its words, or the whole name inside a longer text
+// ("andrews barracks berlin"). Best first, at most 3, so the address results still have room. exact: the text is the name itself (no address search then).
+export function matchPlaces1979(q, german = false) {
+  const t = fold(q); if (t.length < 4) return [];
+  const scored = [];
+  for (const place of PLACES_1979) {
+    const names = [place.name, place.de, ...place.aka].filter(Boolean).map(fold);
+    let score = 0;
+    for (const n of names) score = Math.max(score, n === t ? 4 : n.startsWith(t) ? 3 : (' ' + n).includes(' ' + t) ? 2 : t.includes(n) && n.length >= 6 ? 1 : 0);
+    if (score) scored.push({place, score});
+  }
+  scored.sort((a, b) => b.score - a.score);
+  return scored.slice(0, 3).map(({place, score}) => Object.assign(placeRow(place, german), {exact: score === 4}));
+}
+
 // ---- Words (English and German, one table). Strings shared with the 1928 page stay English here and go through ys-de.js like on the 1928 page. ----
 // What the flight covers (Yusuf, 22 Nov 2026): West Berlin, and along the Wall also a strip of East Berlin on the other side (Pariser Platz is in it). Further east
 // there is no 1979 photo; the page then recommends my 1928 print for the same spot.
@@ -25,6 +67,7 @@ export const TEXT_1979 = Object.freeze({
     altRec: 'Aerial photograph of your home in 1928, with a cross on your building',
     sampleAlt: 'Example print: Spandauer Damm in 1979 and today',
     find: 'Find your home in 1979',
+    places: 'Stationed in West Berlin? Start from your base:',
     captionPoster: (size, verb) => `Your poster, ${size}: 1979 above, today below, same ground and scale. ${verb} either photo to move the cross.`,
     captionDigital: verb => `Your digital file: 1979 above, today below, same ground and scale. ${verb} either photo to move the cross.`,
     captionOnly: 'Your home in 1979. One large aerial photograph, with your building marked.',
@@ -72,6 +115,7 @@ export const TEXT_1979 = Object.freeze({
     altRec: 'Luftbild deines Zuhauses von 1928, mit einem Kreuz auf deinem Gebäude',
     sampleAlt: 'Beispieldruck: Spandauer Damm 1979 und heute',
     find: 'Finde dein Zuhause 1979',
+    places: 'In West-Berlin stationiert? Starte bei deinem Standort:',
     captionPoster: (size, verb) => `Dein Poster, ${size}: oben 1979, unten heute, gleicher Ausschnitt und Maßstab. ${verb} auf ein Foto, um das Kreuz zu verschieben.`,
     captionDigital: verb => `Deine digitale Datei: oben 1979, unten heute, gleicher Ausschnitt und Maßstab. ${verb} auf ein Foto, um das Kreuz zu verschieben.`,
     captionOnly: 'Dein Zuhause 1979. Ein großes Luftbild, dein Gebäude ist markiert.',
@@ -263,6 +307,7 @@ export function createYs1979(base, profile) {
       <p class="ys-note ys-note-hint" data-ys="searchnote" role="status">${SEARCH_HINT_HTML}</p>
       ${base.addressListConsentHtml?.(api.addressListGerman ?? isGerman(), state.addressListConsent === true) ?? ''}
       <div class="ys-resultswrap"><ul class="ys-results" data-ys="results" role="listbox" aria-label="Matching places" hidden></ul></div>
+      <div class="ys-places" data-ys="places" role="group" aria-labelledby="ys-places-l"><p class="ys-places-l" id="ys-places-l">${escape(T().places)}</p><div class="ys-places-row">${PLACES_1979.map((p, i) => p.chip ? `<button type="button" class="ys-place" data-ys-place="${i}">${escape(de && p.de ? p.de : p.name)}</button>` : '').join('')}</div></div>
     </div>`;
     const optionsHtml = `<div class="ys-form ys-optform">
       <div class="ys-fields" data-ys="fields" ${state.lat ? '' : 'hidden'}>
@@ -585,9 +630,10 @@ export function createYs1979(base, profile) {
       let rows;
       try { rows = await job.done; } catch (error) { if (error.name === 'NoAnswer' && api.ys1979Search === job && input.isConnected) setNote('The address search did not answer. Try again in a moment.'); return; }
       if (api.ys1979Search !== job || !input.isConnected || clean(input.value, 80) !== job.q) return;
+      if (job.early && rows.length === job.early && results.querySelectorAll('[data-ys-pick]').length === job.early) return;   // the fixed rows already on screen are the whole answer: no rebuild under the finger
       show(job, rows);
       if (job.submitted && !job.addressListHandled && state.addressListConsent === true) {
-        const matches = state.results.filter(result => base.exactAddressMatch(job.q, result));
+        const matches = state.results.filter(result => !result.fixed && base.exactAddressMatch(job.q, result));
         if (matches.length === 1) {
           job.addressListHandled = true;
           base.submitAddressList(matches[0], state, '1979');
@@ -601,23 +647,40 @@ export function createYs1979(base, profile) {
       api.track?.('search');
       api.ys1979Search?.controller.abort();
       const job = api.ys1979Search = {q, submitted, controller: new AbortController()};
-      job.done = lookup(q, job.controller.signal); job.done.catch(() => {});
-      setNote('Searching…');
+      // The fixed Allied places answer first: on screen at once, the address results join under them. The exact name needs no address search.
+      const fixed = matchPlaces1979(q, de);
+      job.done = fixed[0]?.exact ? Promise.resolve(fixed) : lookup(q, job.controller.signal).then(rows => [...fixed, ...rows], error => { if (error.name !== 'AbortError' && fixed.length) return fixed; throw error; });
+      job.done.catch(() => {});
+      if (fixed.length) { show(job, fixed); job.early = fixed.length; } else setNote('Searching…');
       await follow(job);
     }
     const schedule = () => { clearTimeout(timer); timer = setTimeout(() => search(input.value), 450); };
     input.addEventListener('input', () => { state.query = input.value; schedule(); });
     input.addEventListener('keydown', event => { if (event.key === 'Enter') { event.preventDefault(); clearTimeout(timer); search(input.value, true); } });
     $('go').addEventListener('click', () => { clearTimeout(timer); search(input.value, true); });
-    results.addEventListener('click', event => {
-      const pick = event.target.closest('[data-ys-pick]'); if (!pick) return;
-      const r = state.results?.[Number(pick.dataset.ysPick)]; if (!r) return;
+    // trusted: a real press on a search result (the opted-in address list takes only those; a fixed Allied place is not a home address and never goes there).
+    function pickRow(r, trusted = false) {
       if (api.ys1979Search) api.ys1979Search.picked = true;
-      if (event.isTrusted && !api.ys1979Search?.addressListHandled) base.submitAddressList?.(r, state, '1979');
+      if (trusted && !r.fixed && !api.ys1979Search?.addressListHandled) base.submitAddressList?.(r, state, '1979');
       Object.assign(state, {lat: Math.round(Number(r.lat) * 1e5) / 1e5, lon: Math.round(Number(r.lon) * 1e5) / 1e5, address: addressLabel(r), title: titleFrom(r), area: areaFrom(r), query: input.value});
       host.querySelector('[data-ys="title"]').value = state.title; host.querySelector('[data-ys="area"]').value = state.area;
       results.hidden = true; setNote(''); showPoint(true); api.track?.('pick');
       showSheet();
+    }
+    results.addEventListener('click', event => {
+      const pick = event.target.closest('[data-ys-pick]'); if (!pick) return;
+      const r = state.results?.[Number(pick.dataset.ysPick)]; if (!r) return;
+      if (r.fixed) api.track?.('place-list');
+      pickRow(r, event.isTrusted);
+    });
+    // A chip under the search box puts that place on the poster in one tap (its name goes into the search box too).
+    $('places').addEventListener('click', event => {
+      const chip = event.target.closest('[data-ys-place]'); if (!chip) return;
+      const place = PLACES_1979[Number(chip.dataset.ysPlace)]; if (!place) return;
+      clearTimeout(timer); api.ys1979Search?.controller.abort(); api.ys1979Search = null;
+      const r = placeRow(place, de); input.value = r.name;
+      api.track?.('place-chip');
+      pickRow(r);
     });
     // After a pick the poster must be in view (Yusuf, 23 Nov 2026). Side by side (desktop): only when it is almost off-screen.
     // Stacked (phone, portrait iPad): whenever its top is cut off or less than 80 % of it shows between the store's sticky
