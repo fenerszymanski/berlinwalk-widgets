@@ -1,5 +1,5 @@
 {
-  "release": "home-then-now-20261124-glienicke-local",
+  "release": "home-then-now-20261126-bw-hoodie-pair",
   "hero": {
     "img1928": "assets/hero-1928.webp",
     "imgToday": "assets/hero-today.webp",
@@ -552,18 +552,18 @@
       "type": "duo",
       "items": [
         {
-          "img": "assets/bw-woman.webp",
+          "img": "assets/bw-hoodie-woman.webp",
           "w": 640,
           "h": 800,
-          "alt": "Tempelhof Classic T-shirt in black, worn by a woman sitting outdoors.",
-          "altDe": "Tempelhof Classic T-Shirt in Schwarz, getragen von einer Frau, die im Freien sitzt."
+          "alt": "Marzahn Hoodie in sand, worn by a woman walking between apartment blocks in Marzahn.",
+          "altDe": "Marzahn Hoodie in Sand, getragen von einer Frau zwischen den Wohnblöcken in Marzahn."
         },
         {
-          "img": "assets/bw-clothing.webp",
+          "img": "assets/bw-hoodie-man.webp",
           "w": 640,
           "h": 800,
-          "alt": "Tempelhof Classic T-shirt in black, worn by a smiling man outdoors.",
-          "altDe": "Tempelhof Classic T-Shirt in Schwarz, getragen von einem lächelnden Mann im Freien."
+          "alt": "Marzahn Hoodie in sand, worn by a man sitting in a park in Marzahn.",
+          "altDe": "Marzahn Hoodie in Sand, getragen von einem Mann in einem Park in Marzahn."
         }
       ]
     }

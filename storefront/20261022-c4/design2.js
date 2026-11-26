@@ -6,8 +6,8 @@ import {DESIGN2_TEXT,translateDesign2} from './ys-de.js?v=ys-share-20261125-v1';
 import {matchesSearch,familyFor,recommendationRows,nativeRecommendationEligible} from './design2-catalog.js?v=premium-totes-20261124-v1';
 import {languageUrl,navigateLanguageLink} from './language-navigation.js?v=store-design2-fix4b-20261113-v1';
 import {installGalleryZoom} from './gallery-zoom.js?v=zoom-sort-20261117-v1';
-import {BLACK_WEEK,blackWeekActive,blackWeekEligibleRow} from './black-week.js?v=bw-hero-pair-20261124-v1';
-import {pageMedia,offerLineHtml,pickSecondItems,secondItemsHtml,sizeGuideHtml,armBlackWeekEnd} from './clothing-boost.js?v=bw-hero-pair-20261124-v1';
+import {BLACK_WEEK,blackWeekActive,blackWeekEligibleRow} from './black-week.js?v=bw-hoodie-pair-20261126-v1';
+import {pageMedia,offerLineHtml,pickSecondItems,secondItemsHtml,sizeGuideHtml,armBlackWeekEnd} from './clothing-boost.js?v=bw-hoodie-pair-20261126-v1';
 let recommendations,translations,exploreImages,listingOrder=null;
 // Sort data for store listings (Yusuf, 17 Nov 2026). Built by scripts/store-listing-order.mjs; a missing file keeps the curated order.
 // Selections survive Wix replacing the loading element within the same document.

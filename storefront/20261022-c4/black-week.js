@@ -19,8 +19,8 @@ export const BLACK_WEEK = Object.freeze({
       note: 'If the prices differ, the 25% comes off the cheaper item.',
       line: 'T-shirts, hoodies and posters. Automatically applied in your cart.',
       cta: 'Shop Black Week',
-      altWoman: 'Tempelhof Classic T-shirt in black, worn by a woman sitting outdoors.',
-      altMan: 'Tempelhof Classic T-shirt in black, worn by a smiling man outdoors.'
+      altWoman: 'Marzahn Hoodie in sand, worn by a woman walking between apartment blocks in Marzahn.',
+      altMan: 'Marzahn Hoodie in sand, worn by a man sitting in a park in Marzahn.'
     }),
     de: Object.freeze({
       name: 'Black Week',
@@ -30,15 +30,17 @@ export const BLACK_WEEK = Object.freeze({
       note: 'Bei unterschiedlichen Preisen gilt der Rabatt für den günstigeren Artikel.',
       line: 'T-Shirts, Hoodies und Poster. Der Rabatt kommt automatisch in den Warenkorb.',
       cta: 'Zum Shop',
-      altWoman: 'Tempelhof Classic T-Shirt in Schwarz, getragen von einer Frau, die im Freien sitzt.',
-      altMan: 'Tempelhof Classic T-Shirt in Schwarz, getragen von einem lächelnden Mann im Freien.'
+      altWoman: 'Marzahn Hoodie in Sand, getragen von einer Frau zwischen den Wohnblöcken in Marzahn.',
+      altMan: 'Marzahn Hoodie in Sand, getragen von einem Mann in einem Park in Marzahn.'
     })
   }),
+  // 26 Nov 2026 (Yusuf: "şu blackweekteki görselleri de değiştirelim", picked the hoodie woman + man): the Marzahn Hoodie in sand, the
+  // store's own paired gallery photos (gallery-abecfe6c woman, gallery-91c7be48 man). Earlier files stay in the repo, unused.
   // 24 Nov 2026 (Yusuf: the man alone made the clothing look men-only): a woman and a man in the same black Tempelhof tee, both the
   // store's own paired gallery photos. The 20 Nov poster files stay in the repo but are no longer shown.
   images: Object.freeze({
-    woman: 'assets/design2/black-week-20261124-woman',
-    man: 'assets/design2/black-week-20261120-clothing'
+    woman: 'assets/design2/black-week-20261126-hoodie-woman',
+    man: 'assets/design2/black-week-20261126-hoodie-man'
   })
 });
 
