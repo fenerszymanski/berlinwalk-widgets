@@ -261,6 +261,7 @@ export function createYs1979(base, profile) {
       <label class="ys-label ys-find" for="ys-q">${escape(T().find)}</label>
       <div class="ys-search"><input id="ys-q" data-ys="q" type="search" autocomplete="off" enterkeyhint="search" maxlength="${L.address}" placeholder="e.g. Kurfürstendamm" value="${escape(state.query || '')}"><button type="button" class="outline" data-ys="go">Search</button></div>
       <p class="ys-note ys-note-hint" data-ys="searchnote" role="status">${SEARCH_HINT_HTML}</p>
+      ${base.addressListConsentHtml?.(api.addressListGerman ?? isGerman(), state.addressListConsent === true) ?? ''}
       <div class="ys-resultswrap"><ul class="ys-results" data-ys="results" role="listbox" aria-label="Matching places" hidden></ul></div>
     </div>`;
     const optionsHtml = `<div class="ys-form ys-optform">
@@ -533,6 +534,9 @@ export function createYs1979(base, profile) {
     // ---- Search: Photon first, Nominatim when Photon fails or finds nothing (one request per second, contact email). ----
     let timer = 0;
     api.ys1979Input = input;
+    $('address-list-consent')?.addEventListener('change', event => {
+      state.addressListConsent = event.currentTarget.checked;
+    });
     const spacing = 1100;
     const PIN = '<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 0 0-7-7zm0 9.6A2.6 2.6 0 1 1 12 6.4a2.6 2.6 0 0 1 0 5.2z"/></svg>';
     async function photon(q, signal) {
@@ -582,26 +586,34 @@ export function createYs1979(base, profile) {
       try { rows = await job.done; } catch (error) { if (error.name === 'NoAnswer' && api.ys1979Search === job && input.isConnected) setNote('The address search did not answer. Try again in a moment.'); return; }
       if (api.ys1979Search !== job || !input.isConnected || clean(input.value, 80) !== job.q) return;
       show(job, rows);
+      if (job.submitted && !job.addressListHandled && state.addressListConsent === true) {
+        const matches = state.results.filter(result => base.exactAddressMatch(job.q, result));
+        if (matches.length === 1) {
+          job.addressListHandled = true;
+          base.submitAddressList(matches[0], state, '1979');
+        }
+      }
     }
-    async function search(q) {
+    async function search(q, submitted = false) {
       if (!input.isConnected) return;
       q = clean(q, 80);
       if (q.length < 3) { results.hidden = true; setNote(q ? 'Keep typing (at least 3 letters).' : ''); refreshButton(); return; }
       api.track?.('search');
       api.ys1979Search?.controller.abort();
-      const job = api.ys1979Search = {q, controller: new AbortController()};
+      const job = api.ys1979Search = {q, submitted, controller: new AbortController()};
       job.done = lookup(q, job.controller.signal); job.done.catch(() => {});
       setNote('Searching…');
       await follow(job);
     }
     const schedule = () => { clearTimeout(timer); timer = setTimeout(() => search(input.value), 450); };
     input.addEventListener('input', () => { state.query = input.value; schedule(); });
-    input.addEventListener('keydown', event => { if (event.key === 'Enter') { event.preventDefault(); clearTimeout(timer); search(input.value); } });
-    $('go').addEventListener('click', () => { clearTimeout(timer); search(input.value); });
+    input.addEventListener('keydown', event => { if (event.key === 'Enter') { event.preventDefault(); clearTimeout(timer); search(input.value, true); } });
+    $('go').addEventListener('click', () => { clearTimeout(timer); search(input.value, true); });
     results.addEventListener('click', event => {
       const pick = event.target.closest('[data-ys-pick]'); if (!pick) return;
       const r = state.results?.[Number(pick.dataset.ysPick)]; if (!r) return;
       if (api.ys1979Search) api.ys1979Search.picked = true;
+      if (event.isTrusted && !api.ys1979Search?.addressListHandled) base.submitAddressList?.(r, state, '1979');
       Object.assign(state, {lat: Math.round(Number(r.lat) * 1e5) / 1e5, lon: Math.round(Number(r.lon) * 1e5) / 1e5, address: addressLabel(r), title: titleFrom(r), area: areaFrom(r), query: input.value});
       host.querySelector('[data-ys="title"]').value = state.title; host.querySelector('[data-ys="area"]').value = state.area;
       results.hidden = true; setNote(''); showPoint(true); api.track?.('pick');

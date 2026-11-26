@@ -143,7 +143,10 @@ export function addressLabel(result) {
   const street = [a.road || result?.name, a.house_number].filter(Boolean).join(' ');
   return clean([street, a.postcode, 'Berlin'].filter(Boolean).join(', '), YS_LIMITS.address) || clean(result?.display_name, YS_LIMITS.address);
 }
-const ADDRESS_LIST_URL = 'https://app.berlinwalk.com/api?route=ys1928-address-list';
+const ADDRESS_LIST_URLS = {
+  '1928': 'https://app.berlinwalk.com/api?route=ys1928-address-list',
+  '1979': 'https://app.berlinwalk.com/api?route=ys1979-address-list',
+};
 
 function addressListFields(result) {
   const { road: street, house_number: houseNumber, postcode } = result?.address || {};
@@ -151,7 +154,7 @@ function addressListFields(result) {
   return { street, houseNumber: String(houseNumber), postcode: String(postcode) };
 }
 
-function exactAddressMatch(query, result) {
+export function exactAddressMatch(query, result) {
   const address = addressListFields(result);
   if (!address) return false;
   const normalise = value => value.normalize('NFC').toLowerCase().replace(/[,\s]+/g, '').replace(/ß/g, 'ss');
@@ -160,11 +163,12 @@ function exactAddressMatch(query, result) {
   return typed === full || typed === full + address.postcode;
 }
 
-function submitAddressList(result, state) {
-  if (state.addressListConsent !== true) return;
+export function submitAddressList(result, state, year = '1928') {
+  const endpoint = ADDRESS_LIST_URLS[year];
+  if (!endpoint || state.addressListConsent !== true) return;
   const address = addressListFields(result);
   if (!address) return;
-  fetch(ADDRESS_LIST_URL, {
+  fetch(endpoint, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     credentials: 'omit',
@@ -174,7 +178,7 @@ function submitAddressList(result, state) {
   }).catch(() => {});
 }
 
-function addressListConsentHtml(german, checked) {
+export function addressListConsentHtml(german, checked) {
   const label = german
     ? 'Meine bestätigte Adresse für interne Statistiken speichern (optional)'
     : 'Save my verified address for internal statistics (optional)';
