@@ -281,10 +281,7 @@ h2>.sk-heading{width:55%}
 .ys-places{display:grid;gap:6px;margin-top:4px}.ys-places-l{margin:0;font-size:13px;line-height:1.4;color:var(--muted)}
 .ys-places-row{display:flex;flex-wrap:wrap;gap:6px}.ys-place{background:#fff;color:#123D18;border:1px solid #b9b9b0;border-radius:999px;padding:7px 12px;font:inherit;font-size:13px;line-height:1.2;min-height:36px;cursor:pointer}
 .ys-place:hover{border-color:#123D18}.ys-place:focus-visible{outline:2px solid #123D18;outline-offset:2px}
-.ys-address-list { color: var(--muted); font-size: 12px; line-height: 1.5; }
-.ys-searchform .ys-address-list label { display: flex; align-items: start; gap: 6px; font-size: inherit; }
-.ys-address-list input[type="checkbox"] { flex: none; width: auto; margin: 3px 0 0; }
-.ys-address-list small { display: block; font-size: inherit; padding-inline-start: 20px; }
+.ys-address-list { color: var(--muted); font-size: 12px; line-height: 1.5; margin: 0; }
 .ys-note-free{display:inline-block;padding:1px 7px;border-radius:4px;background:#FFE600;color:#123D18;font-weight:600;white-space:nowrap}
 #home-panel .ys-note{margin:8px 0 0;line-height:1.5}
 .ys-caption{min-height:3em}
