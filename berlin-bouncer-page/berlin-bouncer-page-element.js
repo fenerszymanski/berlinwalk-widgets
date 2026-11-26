@@ -11,7 +11,7 @@ const BOUNCER_TRACK_MESSAGE = 'bw-berghain-bouncer-track';
 const BOUNCER_RESULT_MESSAGE = 'bw-berghain-bouncer-result';
 /* Club guide demand test v2 (25 Nov 2026): the box beside the game replaces the tour box and follows
    the game result. Clicks count as bw_berlin_bouncer_tour_cta_click, ctaName club_guide_box_<state>. */
-const CLUB_GUIDE_SAMPLE_URL = 'https://fenerszymanski.github.io/berlinwalk-widgets/club-night-rescue-plan/';
+const CLUB_GUIDE_SAMPLE_URL = 'https://app.berlinwalk.com/products/club-night-rescue-plan/'; /* sales page since 26 Nov 2026: guide on sale, EUR 4.99 */
 const CLUB_GUIDE_BOX_COPY = {
   before: {
     title: 'Going clubbing in Berlin?',
@@ -760,7 +760,7 @@ class BwBerlinBouncerPage extends HTMLElement {
         const state = box && box.dataset.state ? box.dataset.state : 'before';
         this._sendBouncerTrack('bw_berlin_bouncer_tour_cta_click', {
           ctaName: `club_guide_box_${state}`,
-          targetPath: '/berlinwalk-widgets/club-night-rescue-plan/',
+          targetPath: '/products/club-night-rescue-plan/',
           href: CLUB_GUIDE_SAMPLE_URL,
         });
       };
