@@ -163,6 +163,23 @@ export function exactAddressMatch(query, result) {
   return typed === full || typed === full + address.postcode;
 }
 
+// The geocoder can return a building and several businesses at the same address.
+export function singleSubmittedAddress(query, results) {
+  let match = null;
+  for (const result of results) {
+    if (result.fixed || !exactAddressMatch(query, result)) continue;
+    const { street, houseNumber, postcode } = addressListFields(result);
+    const key = JSON.stringify([
+      street.normalize('NFC').trim().replace(/\s+/g, ' ').toLowerCase(),
+      houseNumber.replace(/\s+/g, '').toUpperCase(),
+      postcode,
+    ]);
+    if (match && match.key !== key) return null;
+    match ??= { key, result };
+  }
+  return match?.result ?? null;
+}
+
 export function submitAddressList(result, year = '1928') {
   const endpoint = ADDRESS_LIST_URLS[year];
   if (!endpoint) return;
@@ -834,10 +851,10 @@ export function mountConfigurator(host, state, api) {
     if (api.ysSearch !== job || !input.isConnected || clean(input.value, 80) !== job.q) return;
     show(job, rows);
     if (api.addressListEnabled && job.submitted && !job.addressListHandled) {
-      const matches = state.results.filter(result => exactAddressMatch(job.q, result));
-      if (matches.length === 1) {
+      const match = singleSubmittedAddress(job.q, state.results);
+      if (match) {
         job.addressListHandled = true;
-        submitAddressList(matches[0]);
+        submitAddressList(match);
       }
     }
   }

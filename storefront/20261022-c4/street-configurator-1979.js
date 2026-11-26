@@ -630,10 +630,10 @@ export function createYs1979(base, profile) {
       if (job.early && rows.length === job.early && results.querySelectorAll('[data-ys-pick]').length === job.early) return;   // the fixed rows already on screen are the whole answer: no rebuild under the finger
       show(job, rows);
       if (job.submitted && !job.addressListHandled) {
-        const matches = state.results.filter(result => !result.fixed && base.exactAddressMatch(job.q, result));
-        if (matches.length === 1) {
+        const match = base.singleSubmittedAddress?.(job.q, state.results);
+        if (match) {
           job.addressListHandled = true;
-          base.submitAddressList(matches[0], '1979');
+          base.submitAddressList(match, '1979');
         }
       }
     }
