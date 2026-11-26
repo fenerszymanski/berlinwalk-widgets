@@ -1,9 +1,9 @@
 {
-  "updatedAt": "2026-11-26T03:02:28.240Z",
+  "updatedAt": "2026-11-26T09:40:07.022Z",
   "source": "Wix Blog API",
   "popularSource": "Wix Blog metrics.views lifetime sort",
-  "totalPosts": 475,
-  "toolsTotal": 398,
+  "totalPosts": 476,
+  "toolsTotal": 399,
   "bookingUrl": "https://www.walkofberlin.com/book-berlin-walking-tour/berlin-then-and-now",
   "navTopics": [
     {
@@ -1802,6 +1802,23 @@
   ],
   "latest": [
     {
+      "title": "Schönhauser Allee Berlin: Walk Under the U2 Viaduct, or Ride Above It",
+      "slug": "schonhauser-allee-berlin",
+      "path": "/post/schonhauser-allee-berlin",
+      "url": "https://www.berlinwalk.com/post/schonhauser-allee-berlin",
+      "excerpt": "Most visitors cross Schönhauser Allee on the way to Mauerpark and never look up. Here is the walk I would do under the U2 viaduct, from a quiet cemetery to a currywurst stand and a brewery Christmas market.",
+      "category": "Tourist Tips",
+      "categorySlug": "tourist-tips",
+      "topic": "food-nightlife",
+      "topicLabel": "Food & Nightlife",
+      "readTime": "7 min read",
+      "publishedDate": "2026-11-26T09:37:31.050Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_5581d58cefe14fd4b8ad116bfe8a22bf~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-konnopke-viaduct-cover.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_5581d58cefe14fd4b8ad116bfe8a22bf~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-konnopke-viaduct-cover.jpg",
+      "alt": "A yellow U-Bahn train on a green steel viaduct above the yellow Konnopke's Imbiss stand under a blue sky in Prenzlauer Berg",
+      "relatedToolSlug": "schonhauser-viaduct-walk"
+    },
+    {
       "title": "Berlin U-Bahn Lines: Why the U1 to U4 Run Narrower Trains",
       "slug": "berlin-u-bahn-lines",
       "path": "/post/berlin-u-bahn-lines",
@@ -1987,23 +2004,6 @@
       "thumb": "https://static.wixstatic.com/media/5a08a3_183b6997f36441aa8464ff02ab520344~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/tv-tower-over-alexanderplatz-viaduct-dusk.jpg",
       "alt": "The Berlin TV Tower above the yellow-brick Stadtbahn viaduct at Alexanderplatz at dusk",
       "relatedToolSlug": "alexanderplatz-time-layers"
-    },
-    {
-      "title": "Marzahn Berlin: How the Plattenbau Town Was Built and How to Spend a Day There",
-      "slug": "marzahn-berlin",
-      "path": "/post/marzahn-berlin",
-      "url": "https://www.berlinwalk.com/post/marzahn-berlin",
-      "excerpt": "Most people only see Marzahn from the S7. How the panel-block town was built in fifteen years, the village it grew around, and a day out that ends on the Kienberg.",
-      "category": "Living in Berlin",
-      "categorySlug": "living-in-berlin",
-      "topic": "living-in-berlin",
-      "topicLabel": "Living in Berlin",
-      "readTime": "6 min read",
-      "publishedDate": "2026-11-16T10:17:15.798Z",
-      "image": "https://static.wixstatic.com/media/5a08a3_265ae32bda504222afcada143cb5df02~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/marzahn-plattenbau-facades-jan-petersen-strasse.jpg",
-      "thumb": "https://static.wixstatic.com/media/5a08a3_265ae32bda504222afcada143cb5df02~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/marzahn-plattenbau-facades-jan-petersen-strasse.jpg",
-      "alt": "Renovated panel blocks in Marzahn, Berlin, with coral, yellow and blue painted facades",
-      "relatedToolSlug": "marzahn-estate-walk"
     }
   ]
 }

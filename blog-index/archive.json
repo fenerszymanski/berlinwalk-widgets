@@ -1,9 +1,26 @@
 {
-  "updatedAt": "2026-11-25T09:41:40.663Z",
+  "updatedAt": "2026-11-26T09:40:07.022Z",
   "source": "Wix Blog API",
-  "totalPosts": 475,
+  "totalPosts": 476,
   "bookingUrl": "https://www.walkofberlin.com/book-berlin-walking-tour/berlin-then-and-now",
   "allPosts": [
+    {
+      "title": "Schönhauser Allee Berlin: Walk Under the U2 Viaduct, or Ride Above It",
+      "slug": "schonhauser-allee-berlin",
+      "path": "/post/schonhauser-allee-berlin",
+      "url": "https://www.berlinwalk.com/post/schonhauser-allee-berlin",
+      "excerpt": "Most visitors cross Schönhauser Allee on the way to Mauerpark and never look up. Here is the walk I would do under the U2 viaduct, from a quiet cemetery to a currywurst stand and a brewery Christmas market.",
+      "category": "Tourist Tips",
+      "categorySlug": "tourist-tips",
+      "topic": "food-nightlife",
+      "topicLabel": "Food & Nightlife",
+      "readTime": "7 min read",
+      "publishedDate": "2026-11-26T09:37:31.050Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_5581d58cefe14fd4b8ad116bfe8a22bf~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-konnopke-viaduct-cover.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_5581d58cefe14fd4b8ad116bfe8a22bf~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-konnopke-viaduct-cover.jpg",
+      "alt": "A yellow U-Bahn train on a green steel viaduct above the yellow Konnopke's Imbiss stand under a blue sky in Prenzlauer Berg",
+      "relatedToolSlug": "schonhauser-viaduct-walk"
+    },
     {
       "title": "Berlin U-Bahn Lines: Why the U1 to U4 Run Narrower Trains",
       "slug": "berlin-u-bahn-lines",
