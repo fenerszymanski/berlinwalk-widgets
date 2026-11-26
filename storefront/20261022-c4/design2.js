@@ -54,11 +54,31 @@ export function install(Store,{asset,esc,STORE_LOGO,money,editionHref,isDigital,
  P.campaignGerman=function(){return /^\/de(?:\/|$)/.test(location.pathname)||old.campaignGerman.call(this)||(this.skeletonRoute().mode==='cart'&&ysGermanTab())||/\/category\/(?:berlin-poster|berlin-geschenke|berlin-kalender-2027)\/?$/.test(location.pathname);};
  // Christmas gift guide (Yusuf, 17 Nov 2026: "şu sayfayı elden geçirelim, şu an çok kısıtlı kaldı ... gifty ve christmasy look"):
 // the two gift landings draw four themed shelves instead of one grid (d2giftGuide). Kept here, not in js/store-navigation.js, which may only grow at its end.
+// Christmas hoodies (Yusuf, 26 Nov 2026: "Yeni christmas temalı hoodiler satışta. Hem store ana sayfaya hem de gift sayfasına uygun bir şekilde o ürünleri koyar mısın"):
+// the six Berlin winter hoodies of 26 Nov get their own shelf on the store home page and on the two gift landings, three across on desktop, until the
+// festive end. Their own shelf, not the "Wear Berlin" one: that shelf promises free shipping to the EU, the UK and the US, these hoodies ship free
+// within Germany (their deliveryNote). XMAS_HOODIE_PHOTOS swaps a card's picture for its model photo (asset path) once one is on the product.
+const XMAS_HOODIES = Object.freeze(['hoodie-neptunbrunnen-on-ice-sf500','hoodie-fernsehturm-sleigh-sf500','hoodie-berlin-christmas-ornaments-sf500','hoodie-gift-bundle-santa-bear-sf500','hoodie-marienkirche-cargo-bike-sf500','hoodie-berlin-lebkuchen-sf500']);
+const XMAS_HOODIE_PHOTOS = Object.freeze({ // the first model photo of each product gallery (Codex, 26 Nov 2026, commits da222fbe + a83bd086)
+  'hoodie-neptunbrunnen-on-ice-sf500':'gallery-29d32e1a1277bfd0aa9f02c9-1000px-q70.jpg',
+  'hoodie-fernsehturm-sleigh-sf500':'gallery-2cc160ca0d9bf4cb9b06d9c5-1000px-q70.jpg',
+  'hoodie-berlin-christmas-ornaments-sf500':'gallery-5e1c8cf1127421b10476be38-1000px-q70.jpg',
+  'hoodie-gift-bundle-santa-bear-sf500':'gallery-5f3dd1e6234c79a8104995b9-1000px-q70.jpg',
+  'hoodie-marienkirche-cargo-bike-sf500':'gallery-6967b5a3f97ca297b3ea72bd-1000px-q70.jpg',
+  'hoodie-berlin-lebkuchen-sf500':'gallery-72c1972e6fc0798e018ec593-1000px-q70.jpg'
+});
+// Apparel cards draw apparelMedia's printDetail (else the colour lead), not product.image, so the card copy gets the model photo as its printDetail.
+const xmasPhoto=p=>{const image=XMAS_HOODIE_PHOTOS[p?.id],am=p?.apparelMedia,c=am?.defaultColor,entry=am?.colors?.[c];if(!image||!entry)return {};const g=(am.sharedGallery||[]).find(x=>x.image===image);return g?{apparelMedia:{...am,colors:{...am.colors,[c]:{...entry,printDetail:{image,alt:g.alt}}}}}:{};};
+const XMAS_HOODIE_TEXT = Object.freeze({
+  en:{title:'Christmas hoodies',text:'Berlin at Christmas on fleece hoodies: the Neptune Fountain on ice, a sleigh round the TV Tower, Lebkuchen and a Santa bear. Made to order, free shipping within Germany.',more:'All hoodies'},
+  de:{title:'Weihnachts-Hoodies',text:'Berlin zu Weihnachten auf Fleece-Hoodies: der Neptunbrunnen auf dem Eis, ein Schlitten um den Fernsehturm, Lebkuchen und ein Weihnachtsbär. Auf Bestellung gefertigt, kostenloser Versand innerhalb Deutschlands.',more:'Alle Hoodies'}
+});
 const GIFT_GUIDE_SECTIONS = Object.freeze([
   // One row since 24 Nov 2026 (Yusuf: "bu gazete işi anlaşılmıyor burada ... tek satıra çevirebiliriz ... 1928, 1979, 1928 framed ve takvimi koyabiliriz"). The newspapers, the 1928 canvas and the framed 1979 print stay on sale; they left this shelf only.
   {id:'personal',ids:['ys','ys1979','ys-framed','dein-berlin-2027'],voucher:true,
    en:{title:'Their own Berlin',text:'Made from their address or their places.'},
    de:{title:'Ihr eigenes Berlin',text:'Aus ihrer Adresse oder ihren Orten gemacht.'}},
+  {id:'xmas',ids:XMAS_HOODIES,more:'hoodies',en:XMAS_HOODIE_TEXT.en,de:XMAS_HOODIE_TEXT.de},
   {id:'wear',offer:true,ids:['hoodie-tempelhof-sf500','shirt-berlin-in-pink-classic','hoodie-schoenhauser-allee-sf500','shirt-currywurst-classic','hoodie-spaeti-sf500','tote-berlin-in-pink','hoodie-berlin-uhr-sf500','tote-zurueckbleiben-bitte'],more:'clothing',
    en:{title:'Wear Berlin',text:'My Berlin designs on T-shirts, fleece hoodies and tote bags. Free shipping to Germany, the EU, the UK and the US.',more:'All clothing'},
    de:{title:'Berlin zum Anziehen',text:'Meine Berliner Motive auf T-Shirts, Fleece-Hoodies und Stoffbeuteln. Kostenloser Versand nach Deutschland, in die EU, nach Großbritannien und in die USA.',more:'Alle Kleidung'}},
@@ -102,7 +122,7 @@ const XG_SLUGS=['berlin-christmas-gifts','berlin-geschenke'];
 // Christmas gift guide (17 Nov 2026): themed shelves, a dated post line and festive styling for the two gift landings.
 const XG_BOW='<svg class="xg-bow" viewBox="0 0 120 80" aria-hidden="true"><path d="M60 40C44 14 14 6 10 22s24 26 50 18" fill="#E63946"/><path d="M60 40c16-26 46-34 50-18s-24 26-50 18" fill="#c62f3b"/><path d="M60 40l-22 34 12-2 6 8 4-40zM60 40l22 34-12-2-6 8-4-40z" fill="#E63946"/><circle cx="60" cy="40" r="9" fill="#a8222d"/></svg>';
 const XG_STAR='<svg class="xg-star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l2.6 6.9 7.4.3-5.8 4.6 2 7.2L12 16.3l-6.2 4.2 2-7.2L2 8.7l7.4-.3z"/></svg>';
-const XG_ORN={personal:'M12 3h0a2 2 0 0 1 2 2v1h-4V5a2 2 0 0 1 2-2zm-7 7a7 7 0 1 0 14 0 7 7 0 0 0-14 0z',wear:'M8 3l-5 3 2 5 2-1v11h10V10l2 1 2-5-5-3c-.5 1.5-2 2.5-4 2.5S8.5 4.5 8 3z',wall:'M3 4h18v14H3zM6 15l4-5 3 3 2-2 3 4z',email:'M3 6h18v12H3zm0 0l9 7 9-7'};
+const XG_ORN={personal:'M12 3h0a2 2 0 0 1 2 2v1h-4V5a2 2 0 0 1 2-2zm-7 7a7 7 0 1 0 14 0 7 7 0 0 0-14 0z',wear:'M8 3l-5 3 2 5 2-1v11h10V10l2 1 2-5-5-3c-.5 1.5-2 2.5-4 2.5S8.5 4.5 8 3z',xmas:'M12 2l2 4h-4zM12 6l5 8h-3l4 6H6l4-6H7z',wall:'M3 4h18v14H3zM6 15l4-5 3 3 2-2 3 4z',email:'M3 6h18v12H3zm0 0l9 7 9-7'};
 // Jump chips live in the shadow root; a capture listener on the document scrolls to the shelf before Wix's router sees the hash link.
 if(!window.__xgJump){window.__xgJump=true;document.addEventListener('click',event=>{const path=event.composedPath?.()||[];const a=path.find(n=>n?.dataset?.xgJump);if(!a)return;const root=a.getRootNode?.();const target=root?.getElementById?.('xg-'+a.dataset.xgJump);if(!target)return;event.preventDefault();event.stopPropagation();target.scrollIntoView({block:'start',behavior:window.matchMedia?.('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'});},true);}
 P.d2giftGuide=function(page,model,skeleton){
@@ -110,12 +130,12 @@ P.d2giftGuide=function(page,model,skeleton){
  const render=p=>skeleton||this.d2Loading?this.skeletonCard(p):this.card(p);
  const listed=id=>model.products.find(p=>p.wixProductId===id||p.id===id);
  const find=id=>{const file=XG_FILES[id];if(!file)return listed(id);const print=listed(file.from),native=(this.catalogue?.products||this.snapshotRows()||[]).find(row=>String(row.productPageUrl||'').split(/[?#]/)[0].endsWith('/product-page/'+file.slug)),price=native?.discountedPrice??native?.price;if(!print||!native||native.visible===false||native.inStock===false||!Number.isFinite(price)||price<=0)return null;const l=file[lang];return {...print,id,wixProductId:native.productId,productUrl:'https://www.walkofberlin.com/product-page/'+file.slug,name:l.name,place:l.place,typeLine:l.type,priceCents:Math.round(price*100),requiresOptions:false,priceFrom:false,group:undefined,gallery:undefined};};
- const item=(product,section)=>{const o={...product,...page.cards?.[product.id]};try{const u=new URL(o.productUrl);u.searchParams.set('utm_source','store');u.searchParams.set('utm_campaign','xmas-gifts-202611');u.searchParams.set('utm_content','gifts-'+section+'-'+(de?'de':'en'));o.productUrl=u.href;}catch{}return {...o,cardSummary:this.layer.cardSummary(o.cardSummary||o.description),imageFit:section==='wear'?'cover':(o.imageFit||'contain')};};
+ const item=(product,section)=>{const o={...product,...page.cards?.[product.id]};try{const u=new URL(o.productUrl);u.searchParams.set('utm_source','store');u.searchParams.set('utm_campaign','xmas-gifts-202611');u.searchParams.set('utm_content','gifts-'+section+'-'+(de?'de':'en'));o.productUrl=u.href;}catch{}return {...o,cardSummary:this.layer.cardSummary(o.cardSummary||o.description),imageFit:section==='wear'||section==='xmas'?'cover':(o.imageFit||'contain'),...(section==='xmas'?xmasPhoto(product):{})};};
  let voucher='';
  if(page.voucher){try{voucher=this.gift?.giftCardHtml?.(this.giftOffersAll(),page.voucher,{assetUrl:asset,printUrl:this.navigation.STORE_PERSONALISED_PRODUCT,redirecting:this.cartRedirect==='gift'})||'';if(skeleton)voucher=voucher.replace(/data-action="gift-add"/g,'data-action="preview-wait" aria-disabled="true" aria-busy="true"');}catch{voucher='';}}
  const offer=blackWeekActive(now)?BLACK_WEEK.copy[lang]:null;
  const offerLine=offer?`<p class="xg-offer bw-raw" data-xg-offer><strong>${esc(offer.name)} ${esc(offer.until)}:</strong> ${esc(offer.title)} ${esc(offer.line)}</p>`:'';
- const more=s=>s.more==='clothing'?this.navigation.clothingHref():s.more==='print'?this.navigation.storeHref('print'):'';
+ const more=s=>s.more==='hoodies'?this.navigation.clothingHref('hoodies'):s.more==='clothing'?this.navigation.clothingHref():s.more==='print'?this.navigation.storeHref('print'):'';
  const sections=g.sections.map(s=>{const rows=s.ids.map(find).filter(Boolean);const cards=(s.id==='wear'?designCards(rows,model.products):rows).map(p=>render(item(p,s.id)));if(s.voucher&&voucher)cards.push(voucher);if(!cards.length)return '';const st=s[de?'de':'en'],href=more(s);
   return `<section class="wrap xg-shelf" id="xg-${s.id}" data-xg-section="${s.id}"><div class="xg-head"><svg class="xg-orn" viewBox="0 0 24 24" aria-hidden="true"><path d="${XG_ORN[s.id]||XG_ORN.personal}"/></svg><div><h2 class="bw-raw">${esc(st.title)}</h2><p class="bw-raw">${esc(st.text)}</p></div>${href?`<a class="xg-more bw-raw" href="${esc(href)}">${esc(st.more)} →</a>`:''}</div>${s.offer?offerLine:''}<div class="grid category-grid d2-grid${s.voucher?' d2-gifts-grid':''}">${cards.join('')}</div></section>`;}).join('');
  const jump=g.sections.filter(s=>s.ids.some(find)).map(s=>`<a href="#xg-${s.id}" data-xg-jump="${s.id}">${esc((de&&s.chip?.de)||s[de?'de':'en'].title)}</a>`).join('');
@@ -217,6 +237,14 @@ P.landingView=function(){if(this.xgGuide()){const t=document.createElement('temp
   }).join('');
   return `${style}<section class="wrap d2-personal"><h2 class="sr-only">${esc(this.d2text('Personal Berlin gifts'))}</h2><div class="d2-personal-grid${show1979?' d2-personal-three':''}">${cards}</div></section>`;
  };
+ P.d2xmas=function(model){
+  if(Date.now()>=Date.parse(GIFT_GUIDE.festiveUntil))return '';
+  const products=XMAS_HOODIES.map(id=>model.products.find(p=>p.id===id)).filter(Boolean);
+  if(products.length<3)return '';
+  const t=XMAS_HOODIE_TEXT[this.campaignGerman()?'de':'en'],href=this.d2href(this.navigation.clothingHref('hoodies'));
+  const cards=products.slice(0,products.length-products.length%3).map(p=>{const o={...p,imageFit:'cover',...xmasPhoto(p)};return this.d2Loading?this.skeletonCard(o):this.card(o);});
+  return `<section class="wrap d2-shelf" data-d2-xmas><div class="d2-clothing-head bw-raw"><h2 class="d2-section-title">${esc(t.title)}</h2><a href="${esc(href)}">${esc(t.more)} →</a></div><p class="bw-raw">${esc(t.text)}</p><div class="grid category-grid d2-grid">${cards.join('')}</div></section>`;
+ };
  P.d2clothing=function(model){
   const cards=designCards(model.products.filter(p=>p.group==='apparel'&&p.apparelKind!=='tote'));
   const key=p=>p.id.split('-')[0]+'-'+garmentDesign(p);
@@ -272,7 +300,7 @@ P.landingView=function(){if(this.xgGuide()){const t=document.createElement('temp
    <div class="d2-hero-copy"><h1>${esc(copy.title)}</h1><a class="primary" data-d2-hero href="${esc(href)}">${esc(copy.cta)}<span aria-hidden="true">→</span></a></div>
   </section>${holiday?'':`<div class="wrap d2-hero-notes bw-raw"><small>${esc(this.d2text('Styling example · Frames not included'))}</small></div>`}`;
  };
- P.d2home=function(model){const render=p=>this.d2Loading?this.skeletonCard(p):this.card(p);const posters=model.getCategoryView('print')?.products.slice(0,8)||[];return `${this.d2homeHero()}${this.d2personal(model)}${this.d2clothing(model)}<section class="wrap d2-shelf">${this.d2collections()}<div class="grid category-grid d2-grid">${posters.map(render).join('')}</div></section><section class="wrap d2-shelf"><h2 class="d2-section-title bw-raw">${esc(this.d2text('My picks'))}</h2><div class="d2-picks">${['berlin-after-dark','room-to-breathe','berlin-clocks'].map(id=>{const pick=recommendations.pairSelections.find(p=>p.id===id);if(!pick)return '';const ps=pick.families.map(id=>recommendations.families.find(f=>f.id===id)).map(f=>f?.members.map(id=>model.products.find(p=>p.id===id)).find(p=>p?.fulfilment?.cartEligible&&!isDigital(p))).filter(Boolean);if(ps.length<2)return '';return `<section><h3 class="bw-raw">${esc(this.d2text(pick.name))}</h3><div class="d2-pair">${ps.slice(0,2).map(render).join('')}</div></section>`;}).join('')}</div></section><section class="wrap d2-shelf"><h2 class="d2-section-title bw-raw">${esc(this.d2text('Explore Berlin'))}</h2>${this.d2languageNote()}<div class="d2-explore">${['trio','gd-trip-planner','gd-landmarks'].map(id=>model.products.find(p=>p.id===id)).filter(Boolean).map(render).join('')}</div></section><p class="wrap d2-delivery bw-raw">${esc(this.d2text(POSTER_DELIVERY_SHORT))}</p>${this.credits()}`;};
+ P.d2home=function(model){const render=p=>this.d2Loading?this.skeletonCard(p):this.card(p);const posters=model.getCategoryView('print')?.products.slice(0,8)||[];return `${this.d2homeHero()}${this.d2personal(model)}${this.d2xmas(model)}${this.d2clothing(model)}<section class="wrap d2-shelf">${this.d2collections()}<div class="grid category-grid d2-grid">${posters.map(render).join('')}</div></section><section class="wrap d2-shelf"><h2 class="d2-section-title bw-raw">${esc(this.d2text('My picks'))}</h2><div class="d2-picks">${['berlin-after-dark','room-to-breathe','berlin-clocks'].map(id=>{const pick=recommendations.pairSelections.find(p=>p.id===id);if(!pick)return '';const ps=pick.families.map(id=>recommendations.families.find(f=>f.id===id)).map(f=>f?.members.map(id=>model.products.find(p=>p.id===id)).find(p=>p?.fulfilment?.cartEligible&&!isDigital(p))).filter(Boolean);if(ps.length<2)return '';return `<section><h3 class="bw-raw">${esc(this.d2text(pick.name))}</h3><div class="d2-pair">${ps.slice(0,2).map(render).join('')}</div></section>`;}).join('')}</div></section><section class="wrap d2-shelf"><h2 class="d2-section-title bw-raw">${esc(this.d2text('Explore Berlin'))}</h2>${this.d2languageNote()}<div class="d2-explore">${['trio','gd-trip-planner','gd-landmarks'].map(id=>model.products.find(p=>p.id===id)).filter(Boolean).map(render).join('')}</div></section><p class="wrap d2-delivery bw-raw">${esc(this.d2text(POSTER_DELIVERY_SHORT))}</p>${this.credits()}`;};
  P.d2clothingFilters=function(){return `<p class="bw-raw">${esc(this.d2text('Berlin designs on T-shirts and hoodies. Choose a garment, then pick your colour and size.'))}</p><nav class="d2-formats bw-raw" data-clothing-filters aria-label="${esc(this.d2text('Garment'))}">${[['all','All'],['t-shirts','T-shirts'],['hoodies','Hoodies']].map(([id,label])=>`<a href="${esc(this.d2href(this.navigation.clothingHref(id)))}" ${this.filter===id?'aria-current="page"':''}>${esc(this.d2text(label))}</a>`).join('')}</nav>`;};
  // Store listing sort (Yusuf, 17 Nov 2026: Most popular default, Newest, Cheapest). A card stands for its
  // printed/digital twin and every colour/quality member of the same design, so it ranks by its best member.
