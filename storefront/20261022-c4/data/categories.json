@@ -249,6 +249,7 @@
         "externalSourceKeys": [
           "berlin-trip-planner",
           "berlin-first-day-rescue-plan",
+          "club-night-rescue-plan",
           "berlin-landmarks-guide",
           "hidden-berlin-photo-missions",
           "berlin-wall-virtual-tour",
@@ -259,7 +260,7 @@
       "description": "A trip plan, digital guides, virtual tours and an evening at home",
       "filters": [],
       "shelf": {
-        "previewLimit": 7,
+        "previewLimit": 8,
         "featureBelowCount": 3,
         "moreLabel": "All guides",
         "imageFit": "cover",

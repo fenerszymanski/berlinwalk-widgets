@@ -247,6 +247,41 @@
     }
   },
   {
+    "sourceKey": "club-night-rescue-plan",
+    "verified": true,
+    "sourceUrl": "https://app.berlinwalk.com/products/club-night-rescue-plan/",
+    "productSchema": {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": "Berlin Club Night Rescue Plan",
+      "description": "A phone guide to seven Berlin club doors: what to bring, which station exit, the German you need, and a Plan B for each door if you are turned away. Opens in your browser right after payment. €4.99.",
+      "image": "https://app.berlinwalk.com/assets/club-night-rescue-plan/img/berghain-door.webp",
+      "brand": {
+        "@type": "Brand",
+        "name": "Walk of Berlin"
+      },
+      "offers": {
+        "@type": "Offer",
+        "price": "4.99",
+        "priceCurrency": "EUR",
+        "availability": "https://schema.org/InStock",
+        "url": "https://app.berlinwalk.com/products/club-night-rescue-plan/"
+      }
+    },
+    "presentation": {
+      "id": "gd-club-night",
+      "name": "Berlin Club Night Rescue Plan",
+      "place": "Seven Berlin club doors",
+      "typeLine": "PHONE GUIDE · INSTANT ACCESS",
+      "alt": "The Berghain building seen from the street",
+      "image": "https://app.berlinwalk.com/assets/club-night-rescue-plan/img/berghain-door.webp",
+      "imageFit": "cover",
+      "wixProductId": null,
+      "externalSourceKey": "club-night-rescue-plan",
+      "description": "A phone guide to seven Berlin club doors: what to bring, which station exit, the German you need, and a Plan B for each door if you are turned away. Opens in your browser right after payment. €4.99."
+    }
+  },
+  {
     "sourceKey": "berlin-landmarks-guide",
     "verified": true,
     "sourceUrl": "https://walkofberlin.com/products/berlin-landmarks-guide",
