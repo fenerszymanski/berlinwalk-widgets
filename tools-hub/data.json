@@ -12135,6 +12135,36 @@
       "iconStatus": "live-wix-media",
       "image": "https://static.wixstatic.com/media/5a08a3_c8aafda049594718b021a5175c473979~mv2.png",
       "cmsItemId": "43246ca2-13dd-493e-8714-fd4b2aae4795"
+    },
+    {
+      "slug": "schonhauser-viaduct-walk",
+      "title": "Schönhauser Allee Viaduct Walk",
+      "lead": "Drag along Schönhauser Allee and see where the U2 runs in the tunnel, up the ramp and on its 1913 viaduct, what to stop for at street level, and how long your walk takes.",
+      "category": "Maps",
+      "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/schonhauser-viaduct-walk/",
+      "embedHeight": 1100,
+      "hubCategory": "CultureLandmarks",
+      "type": "Calculator",
+      "priority": 3,
+      "tags": [
+        "u-bahn",
+        "u2",
+        "prenzlauer-berg",
+        "walk",
+        "viaduct",
+        "christmas-market",
+        "history"
+      ],
+      "aliases": [
+        "schönhauser allee berlin",
+        "schonhauser allee walk",
+        "u2 viaduct berlin",
+        "magistratsschirm",
+        "konnopke eberswalder strasse"
+      ],
+      "iconStatus": "live-wix-media",
+      "image": "https://static.wixstatic.com/media/5a08a3_83260ba5672047f796ca7b012afbddb3~mv2.png",
+      "cmsItemId": "510670c1-b9f1-4f8c-a36d-356ba1f4fabf"
     }
   ],
   "hubCategories": [

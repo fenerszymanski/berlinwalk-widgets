@@ -1,0 +1,36 @@
+{
+  "checked": "26 November 2026",
+  "lengthM": 1900,
+  "walkMetresPerMinute": 75,
+  "track": [
+    { "fromM": 0, "toM": 460, "level": "tunnel" },
+    { "fromM": 460, "toM": 700, "level": "ramp" },
+    { "fromM": 700, "toM": 1900, "level": "viaduct" }
+  ],
+  "ringbahnAtM": 1860,
+  "levelText": {
+    "tunnel": "The U2 runs in a tunnel under your feet here.",
+    "ramp": "The U2 is climbing out of the ground in the middle of the street. Approximate position.",
+    "viaduct": "The U2 runs over your head on the green steel viaduct of 1913."
+  },
+  "stops": [
+    { "id": "senefelderplatz", "name": "U Senefelderplatz", "atM": 0, "detourM": 0, "dwellMin": 0, "side": "start",
+      "here": "The last underground station before the line comes up. In late November 2026 trains towards Pankow were not stopping here (checked 26 November); start at Eberswalder Straße or check the BVG app on the day." },
+    { "id": "cemetery", "name": "Jewish Cemetery Schönhauser Allee", "atM": 190, "detourM": 0, "dwellMin": 25, "side": "east",
+      "here": "Laid out in 1827. Max Liebermann and Giacomo Meyerbeer are buried here. Mon to Thu 8:00 to 16:00, Fri 7:30 to 13:00, closed Saturday, Sunday and Jewish holidays (berlin.de)." },
+    { "id": "ramp", "name": "Where the train comes up", "atM": 500, "detourM": 0, "dwellMin": 3, "side": "middle",
+      "here": "Stand at the edge of the middle strip and wait for a yellow train to rise out of the ground and onto the viaduct. Approximate position." },
+    { "id": "kulturbrauerei", "name": "Kulturbrauerei (Lucia Christmas market)", "atM": 620, "detourM": 120, "dwellMin": 30, "side": "east",
+      "here": "The old Schultheiss brewery, red brick from 1878 on. The Lucia Christmas market runs in its courtyards from 23 November to 22 December 2026, free, weekdays 15:00 to 22:00, weekends 13:00 to 22:00." },
+    { "id": "konnopke", "name": "Konnopke's Imbiss", "atM": 880, "detourM": 0, "dwellMin": 15, "side": "middle",
+      "here": "Currywurst stand under the tracks since 1930, ohne Darm since 1960. Tue to Fri 11:00 to 18:00, Sat 12:00 to 19:00, closed Sunday and Monday." },
+    { "id": "eberswalder", "name": "U Eberswalder Straße", "atM": 935, "detourM": 0, "dwellMin": 5, "side": "middle",
+      "here": "The elevated station of 1913, opened as Danziger Straße. Climb to the platform and look down the street both ways." },
+    { "id": "mauerpark", "name": "Mauerpark", "atM": 935, "detourM": 860, "dwellMin": 30, "side": "west",
+      "here": "About 430 m west along Eberswalder Straße, on the former border strip. Busiest on a Sunday, when the flea market runs." },
+    { "id": "gethsemane", "name": "Gethsemanekirche", "atM": 1600, "detourM": 400, "dwellMin": 10, "side": "east",
+      "here": "Down Stargarder Straße. From 2 October 1989 people held a vigil here for arrested protesters, weeks before the Wall fell." },
+    { "id": "schoenhauser", "name": "S+U Schönhauser Allee", "atM": 1860, "detourM": 0, "dwellMin": 5, "side": "end",
+      "here": "The U2 platform sits above the Ringbahn cutting. The north entrance is closed for bridge works since 13 November 2026, until about spring 2027; the other entrances are open." }
+  ]
+}

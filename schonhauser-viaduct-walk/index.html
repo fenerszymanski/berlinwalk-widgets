@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Schönhauser Allee Viaduct Walk: Where the U2 Is and What to Stop For</title>
+<meta name="description" content="Drag along Schönhauser Allee from Senefelderplatz to the Ringbahn, see where the U2 runs in a tunnel, on a ramp and on the viaduct, add the stops you want and get your walking time.">
+<link rel="stylesheet" href="../css/brand.css">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { overflow-x: hidden; }
+  body { font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #FFFFFF; color: #20241d; padding: 12px; }
+  .wg { border-radius: 16px; overflow: hidden; border: 1px solid #d8dfd0; background: #f4f6ef; }
+  .wg-head { padding: 18px 18px 10px; }
+  .wg-kick { display: inline-block; font-size: 10.5px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; color: #20241d; background: #FFE600; padding: 3px 8px; border-radius: 4px; }
+  .wg-head h1 { font-family: 'Merriweather', Georgia, serif; font-size: 21px; line-height: 1.3; margin-top: 9px; color: #1B5E20; }
+  .wg-head p { font-size: 13px; line-height: 1.6; color: #43493f; margin-top: 7px; max-width: 760px; }
+  .stage { background: #fff; border: 1px solid #dfe5d8; border-radius: 14px; padding: 10px; margin: 6px 12px 12px; min-width: 0; }
+  canvas { display: block; width: 100%; height: 220px; border-radius: 10px; background: #f7f8f3; cursor: pointer; touch-action: pan-y; }
+  .slider-lab { display: block; font-size: 12px; font-weight: 800; color: #123D18; padding: 10px 2px 4px; }
+  input[type=range] { width: 100%; height: 36px; background: transparent; cursor: pointer; accent-color: #1B5E20; }
+  input[type=range]::-webkit-slider-runnable-track { height: 8px; border-radius: 4px; background: #C5E1A5; }
+  input[type=range]::-moz-range-track { height: 8px; border-radius: 4px; background: #C5E1A5; }
+  input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 32px; height: 32px; margin-top: -12px; border-radius: 50%; background: #FFE600; border: 3px solid #123D18; }
+  input[type=range]::-moz-range-thumb { width: 26px; height: 26px; border-radius: 50%; background: #FFE600; border: 3px solid #123D18; }
+  input[type=range]:focus-visible { outline: 3px solid #1B5E20; outline-offset: 3px; border-radius: 6px; }
+  .legend { display: flex; flex-wrap: wrap; gap: 6px 14px; font-size: 11px; color: #555c50; padding: 4px 2px 2px; line-height: 1.4; align-items: center; }
+  .legend i { display: inline-block; width: 22px; height: 0; border-top: 3px solid #1B5E20; vertical-align: middle; margin-right: 5px; }
+  .legend i.t { border-top: 3px dashed #6b7a63; }
+  .legend i.r { border-top: 3px solid #7aa35c; transform: rotate(-20deg); }
+  .legend i.w { width: 12px; height: 12px; border: 0; border-radius: 50%; background: #FFE600; box-shadow: 0 0 0 2px #123D18; }
+  .legend { margin-top: 2px; }
+  .lower { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 12px; padding: 0 12px 12px; align-items: start; }
+  .panel { background: #fff; border: 1px solid #dfe5d8; border-radius: 14px; padding: 14px; min-width: 0; }
+  .panel h2 { font-size: 11px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; color: #1B5E20; margin-bottom: 8px; }
+  .card-name { font-family: 'Merriweather', Georgia, serif; font-size: 17px; line-height: 1.3; color: #123D18; }
+  .card-track { font-size: 12.5px; line-height: 1.55; color: #43493f; margin-top: 8px; padding: 8px 10px; border-left: 4px solid #1B5E20; background: #f4f6ef; border-radius: 0 8px 8px 0; }
+  .card-here { font-size: 13px; line-height: 1.6; color: #20241d; margin-top: 10px; }
+  .btn { font-family: inherit; font-size: 13px; font-weight: 800; min-height: 44px; padding: 0 16px; border-radius: 10px; border: 2px solid #123D18; background: #FFE600; color: #20241d; cursor: pointer; margin-top: 12px; }
+  .btn.rem { background: #fff; }
+  .btn:focus-visible, .rm:focus-visible, .stopbtn:focus-visible { outline: 3px solid #1B5E20; outline-offset: 2px; }
+  #walk { list-style: none; }
+  #walk li { display: flex; align-items: center; gap: 8px; padding: 6px 0; border-bottom: 1px solid #e6ebdf; font-size: 13px; }
+  #walk li:last-child { border-bottom: 0; }
+  .stopbtn { flex: 1; text-align: left; font-family: inherit; font-size: 13px; font-weight: 600; color: #20241d; background: none; border: 0; cursor: pointer; padding: 6px 2px; min-height: 36px; line-height: 1.35; }
+  .num { display: inline-block; min-width: 20px; height: 20px; border-radius: 10px; background: #1B5E20; color: #fff; font-size: 11px; font-weight: 800; text-align: center; line-height: 20px; margin-right: 6px; }
+  .rm { font-family: inherit; font-size: 12px; font-weight: 700; min-width: 44px; min-height: 36px; padding: 0 10px; border-radius: 8px; border: 1px solid #d8dfd0; background: #f4f6ef; color: #E63946; cursor: pointer; }
+  .empty { font-size: 13px; color: #555c50; padding: 6px 0; }
+  .total { margin-top: 10px; padding: 10px 12px; background: #FFE600; color: #20241d; border-radius: 10px; font-size: 13px; font-weight: 800; line-height: 1.45; }
+  .foot { font-size: 11px; color: #555c50; padding: 0 18px 14px; line-height: 1.5; }
+  @media (max-width: 760px) {
+    .lower { grid-template-columns: minmax(0, 1fr); }
+    canvas { height: 200px; }
+    .wg-head h1 { font-size: 18px; }
+  }
+</style>
+</head>
+<body>
+<div class="wg">
+  <div class="wg-head">
+    <span class="wg-kick">BerlinTools</span>
+    <h1>Walk under the U2: where the train is, and what to stop for</h1>
+    <p>Drag along Schönhauser Allee from Senefelderplatz to the Ringbahn. Add the stops you want, and see how long your walk takes.</p>
+  </div>
+  <div class="stage">
+    <canvas id="profile" role="img" aria-label="Side view of Schönhauser Allee showing the U2 in a tunnel, on a ramp and on the viaduct, with numbered stops"></canvas>
+    <div class="legend"><span><i class="t"></i>Tunnel</span><span><i class="r"></i>Ramp</span><span><i></i>Viaduct</span><span><i class="w"></i>Your position</span></div>
+    <label class="slider-lab" for="pos">Your position on Schönhauser Allee</label>
+    <input type="range" id="pos" min="0" max="1900" step="10" value="0">
+  </div>
+  <div class="lower">
+    <div class="panel"><h2>Here</h2><div id="card" aria-live="polite"></div></div>
+    <div class="panel"><h2>My walk</h2><ul id="walk"></ul><div class="total" id="total" aria-live="polite"></div></div>
+  </div>
+  <p class="foot" id="foot"></p>
+</div>
+<script>
+(function () {
+  var data = null, stops = [], walk = [], focusId = null;
+  var cv = document.getElementById('profile'), ctx = cv.getContext('2d');
+  var pos = document.getElementById('pos');
+  var W = 0, H = 0, PAD = 28, dots = [];
+  var GREEN = '#1B5E20', DEEP = '#123D18', YEL = '#FFE600';
+
+  function xOf(m) { return PAD + (W - 2 * PAD) * m / data.lengthM; }
+  function levelAt(m) {
+    for (var i = 0; i < data.track.length; i++) { var t = data.track[i]; if (m >= t.fromM && m <= t.toM) return t; }
+    return data.track[data.track.length - 1];
+  }
+  function stopIdx(id) { for (var i = 0; i < stops.length; i++) if (stops[i].id === id) return i; return -1; }
+  function inWalk(id) { return walk.indexOf(id) >= 0; }
+
+  function size() {
+    var r = cv.getBoundingClientRect(), d = window.devicePixelRatio || 1;
+    W = r.width; H = r.height;
+    cv.width = Math.round(W * d); cv.height = Math.round(H * d);
+    ctx.setTransform(d, 0, 0, d, 0, 0);
+  }
+
+  function draw() {
+    if (!data || !W) return;
+    var sy = Math.round(H * 0.52), vy = sy - H * 0.27, ty = sy + H * 0.2, cur = +pos.value;
+    ctx.clearRect(0, 0, W, H);
+    ctx.fillStyle = '#f7f8f3'; ctx.fillRect(0, 0, W, sy);
+    ctx.fillStyle = '#e4dccb'; ctx.fillRect(0, sy, W, H - sy);
+    var small = W < 480, fs = small ? 10 : 11;
+    ctx.font = '700 ' + fs + 'px Montserrat, sans-serif';
+    // Ringbahn cutting
+    var rx = xOf(data.ringbahnAtM), cw = small ? 18 : 26, cd = H * 0.2;
+    ctx.fillStyle = '#c9c1ae';
+    ctx.beginPath(); ctx.moveTo(rx - cw, sy); ctx.lineTo(rx - cw + 5, sy + cd); ctx.lineTo(rx + cw - 5, sy + cd); ctx.lineTo(rx + cw, sy); ctx.closePath(); ctx.fill();
+    ctx.strokeStyle = '#6b6552'; ctx.lineWidth = 2; ctx.beginPath(); ctx.moveTo(rx - cw + 6, sy + cd - 3); ctx.lineTo(rx + cw - 6, sy + cd - 3); ctx.stroke();
+    ctx.fillStyle = '#43493f'; ctx.textAlign = 'center'; ctx.textBaseline = 'top';
+    ctx.fillText('Ringbahn', Math.min(rx, W - 30), sy + cd + 4);
+    // street
+    ctx.strokeStyle = '#20241d'; ctx.lineWidth = 3; ctx.beginPath(); ctx.moveTo(PAD - 10, sy); ctx.lineTo(rx - cw, sy); ctx.moveTo(rx + cw, sy); ctx.lineTo(W - PAD + 10, sy); ctx.stroke();
+    // track
+    var tr = data.track, i, t;
+    for (i = 0; i < tr.length; i++) {
+      t = tr[i]; var x1 = xOf(t.fromM), x2 = xOf(t.toM);
+      if (t.level === 'tunnel') {
+        ctx.strokeStyle = '#6b7a63'; ctx.lineWidth = 3; ctx.setLineDash([7, 5]);
+        ctx.beginPath(); ctx.moveTo(x1, ty); ctx.lineTo(x2, ty); ctx.stroke(); ctx.setLineDash([]);
+      } else if (t.level === 'ramp') {
+        ctx.strokeStyle = '#7aa35c'; ctx.lineWidth = 3.5;
+        ctx.beginPath(); ctx.moveTo(x1, ty); ctx.lineTo(x2, vy); ctx.stroke();
+      } else {
+        ctx.fillStyle = '#4a6b45';
+        var step = small ? 34 : 46;
+        for (var cx = x1 + 6; cx < x2; cx += step) ctx.fillRect(cx - 1.5, vy, 3, sy - vy);
+        ctx.strokeStyle = GREEN; ctx.lineWidth = 5; ctx.beginPath(); ctx.moveTo(x1, vy); ctx.lineTo(x2, vy); ctx.stroke();
+      }
+    }
+    // stops
+    dots = [];
+    var prevX = -99, lift = 0;
+    ctx.textAlign = 'center';
+    for (i = 0; i < stops.length; i++) {
+      var s = stops[i], sx = xOf(s.atM), detour = s.detourM > 0, dy = detour ? sy + 22 : sy;
+      if (detour) {
+        ctx.strokeStyle = '#20241d'; ctx.lineWidth = 2; ctx.beginPath(); ctx.moveTo(sx, sy); ctx.lineTo(sx, dy); ctx.stroke();
+      }
+      var on = inWalk(s.id), r = small ? 6 : 7;
+      ctx.beginPath(); ctx.arc(sx, dy, r, 0, 7); ctx.fillStyle = on ? GREEN : '#fff'; ctx.fill();
+      ctx.lineWidth = 2; ctx.strokeStyle = on ? DEEP : GREEN; ctx.stroke();
+      var close = !detour && Math.abs(sx - prevX) < 22;
+      if (!detour) { lift = close ? lift + 1 : 0; prevX = sx; }
+      var ly = detour ? dy + r + 3 : sy - r - 4 - lift * 12;
+      ctx.fillStyle = '#20241d'; ctx.textBaseline = detour ? 'top' : 'bottom';
+      ctx.fillText(String(i + 1), sx, ly);
+      dots.push({ x: sx, y: dy, i: i });
+    }
+    // train + walker
+    var px = xOf(cur), lv = levelAt(cur), tyy = lv.level === 'tunnel' ? ty : lv.level === 'viaduct' ? vy : ty + (vy - ty) * (cur - lv.fromM) / (lv.toM - lv.fromM);
+    ctx.strokeStyle = '#20241d'; ctx.lineWidth = 1.5; ctx.setLineDash([3, 3]);
+    ctx.beginPath(); ctx.moveTo(px, 6); ctx.lineTo(px, H - 22); ctx.stroke(); ctx.setLineDash([]);
+    ctx.fillStyle = YEL; ctx.strokeStyle = '#20241d'; ctx.lineWidth = 2;
+    ctx.beginPath(); ctx.rect(px - 12, tyy - 11, 24, 10); ctx.fill(); ctx.stroke();
+    ctx.beginPath(); ctx.arc(px, sy - 9, 8, 0, 7); ctx.fill(); ctx.stroke();
+    ctx.fillStyle = '#20241d'; ctx.fillRect(px - 1.5, sy - 3, 3, 3);
+    // scale
+    var bottom = H - 8; ctx.fillStyle = '#555c50'; ctx.textBaseline = 'bottom';
+    ctx.strokeStyle = '#8d9585'; ctx.lineWidth = 1; ctx.beginPath(); ctx.moveTo(xOf(0), H - 20); ctx.lineTo(xOf(data.lengthM), H - 20); ctx.stroke();
+    for (var m = 0; m <= data.lengthM; m += 500) {
+      ctx.beginPath(); ctx.moveTo(xOf(m), H - 24); ctx.lineTo(xOf(m), H - 16); ctx.stroke();
+      ctx.textAlign = m === 0 ? 'left' : 'center'; ctx.fillText(m + ' m', xOf(m), bottom);
+    }
+    ctx.textAlign = 'right'; ctx.fillText((data.lengthM / 1000).toFixed(1) + ' km', xOf(data.lengthM) + 8, bottom);
+  }
+
+  function nearest(cur) {
+    var best = null, bd = 61;
+    for (var i = 0; i < stops.length; i++) {
+      if (focusId && stops[i].id === focusId && stops[i].atM === cur) return stops[i];
+      var d = Math.abs(stops[i].atM - cur);
+      if (d < bd) { bd = d; best = stops[i]; }
+    }
+    return best;
+  }
+
+  function esc(s) { var d = document.createElement('div'); d.textContent = s; return d.innerHTML; }
+
+  function renderCard() {
+    var cur = +pos.value, s = nearest(cur), lv = levelAt(cur), h = '';
+    h += '<div class="card-name">' + (s ? esc(s.name) : 'Between stops') + '</div>';
+    h += '<div class="card-track">' + esc(data.levelText[lv.level]) + '</div>';
+    if (s) {
+      h += '<div class="card-here">' + esc(s.here) + '</div>';
+      var on = inWalk(s.id);
+      h += '<button type="button" class="btn' + (on ? ' rem' : '') + '" id="toggle">' + (on ? 'Remove from my walk' : 'Add to my walk') + '</button>';
+    } else {
+      h += '<div class="card-here">Keep dragging, or tap a numbered dot on the street.</div>';
+    }
+    var c = document.getElementById('card'); c.innerHTML = h;
+    var b = document.getElementById('toggle');
+    if (b) b.onclick = function () { toggle(s.id); };
+  }
+
+  function total() {
+    var list = stops.filter(function (s) { return inWalk(s.id); });
+    if (!list.length) return null;
+    var dist = list[list.length - 1].atM - list[0].atM, dwell = 0;
+    list.forEach(function (s) { dist += s.detourM; dwell += s.dwellMin; });
+    var foot = Math.round(dist / data.walkMetresPerMinute);
+    return { min: foot + dwell, km: (dist / 1000).toFixed(1), dwell: dwell, foot: foot };
+  }
+
+  function renderWalk() {
+    var ul = document.getElementById('walk'), h = '';
+    stops.forEach(function (s, i) {
+      if (!inWalk(s.id)) return;
+      h += '<li><button type="button" class="stopbtn" data-go="' + s.id + '"><span class="num">' + (i + 1) + '</span>' + esc(s.name) + '</button><button type="button" class="rm" data-rm="' + s.id + '" aria-label="Remove ' + esc(s.name) + '">Remove</button></li>';
+    });
+    ul.innerHTML = h || '<li class="empty">No stops yet. Add one from the card.</li>';
+    var t = total(), el = document.getElementById('total');
+    el.textContent = t ? 'Total: ' + t.min + ' min (' + t.km + ' km on foot + ' + t.dwell + ' min at stops)' : 'Total: add a stop to see your time.';
+    Array.prototype.forEach.call(ul.querySelectorAll('[data-go]'), function (b) { b.onclick = function () { goTo(b.getAttribute('data-go')); }; });
+    Array.prototype.forEach.call(ul.querySelectorAll('[data-rm]'), function (b) { b.onclick = function () { toggle(b.getAttribute('data-rm')); }; });
+  }
+
+  function toggle(id) {
+    var k = walk.indexOf(id);
+    if (k >= 0) walk.splice(k, 1); else walk.push(id);
+    refresh();
+  }
+  function goTo(id) {
+    var s = stops[stopIdx(id)]; if (!s) return;
+    focusId = id; pos.value = s.atM; refresh();
+  }
+  function refresh() { renderCard(); renderWalk(); draw(); if (window.BW && BW.resize) { try { BW.resize(); } catch (e) {} } }
+
+  pos.addEventListener('input', function () { focusId = null; refresh(); });
+  cv.addEventListener('click', function (e) {
+    var r = cv.getBoundingClientRect(), x = e.clientX - r.left, y = e.clientY - r.top, best = null, bd = 18;
+    dots.forEach(function (d) { var dd = Math.hypot(d.x - x, d.y - y); if (dd < bd) { bd = dd; best = d; } });
+    if (best) goTo(stops[best.i].id);
+  });
+  window.addEventListener('resize', function () { size(); draw(); });
+
+  fetch('./data.json').then(function (r) { return r.json(); }).then(function (d) {
+    data = d;
+    stops = d.stops.slice().sort(function (a, b) { return a.atM - b.atM; });
+    pos.max = d.lengthM;
+    walk.push('senefelderplatz'); walk.push('konnopke'); walk.push('schoenhauser');
+    document.getElementById('foot').textContent = 'Positions are approximate. Opening hours checked on ' + d.checked + '.';
+    size(); refresh();
+  });
+})();
+</script>
+<script src="../js/brand.js"></script>
+</body>
+</html>
