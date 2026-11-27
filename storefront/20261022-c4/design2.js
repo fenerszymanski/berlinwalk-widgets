@@ -80,7 +80,7 @@ const GIFT_GUIDE_SECTIONS = Object.freeze([
   {id:'personal',ids:['ys','ys1979','ys-framed','dein-berlin-2027'],voucher:true,
    en:{title:'Their own Berlin',text:'Made from their address or their places.'},
    de:{title:'Ihr eigenes Berlin',text:'Aus ihrer Adresse oder ihren Orten gemacht.'}},
-  {id:'xmas',ids:XMAS_HOODIES,more:'hoodies',en:XMAS_HOODIE_TEXT.en,de:XMAS_HOODIE_TEXT.de},
+  {id:'xmas',offer:true,ids:XMAS_HOODIES,more:'hoodies',en:XMAS_HOODIE_TEXT.en,de:XMAS_HOODIE_TEXT.de},
   {id:'wear',offer:true,ids:['hoodie-tempelhof-sf500','shirt-berlin-in-pink-classic','hoodie-schoenhauser-allee-sf500','shirt-currywurst-classic','hoodie-spaeti-sf500','tote-berlin-in-pink','hoodie-berlin-uhr-sf500','tote-zurueckbleiben-bitte'],more:'clothing',
    en:{title:'Wear Berlin',text:'My Berlin designs on T-shirts, fleece hoodies and tote bags. Free shipping to Germany, the EU, the UK and the US.',more:'All clothing'},
    de:{title:'Berlin zum Anziehen',text:'Meine Berliner Motive auf T-Shirts, Fleece-Hoodies und Stoffbeuteln. Kostenloser Versand nach Deutschland, in die EU, nach Großbritannien und in die USA.',more:'Alle Kleidung'}},
@@ -247,10 +247,16 @@ P.landingView=function(){if(this.xgGuide()){const t=document.createElement('temp
   const cards=products.slice(0,products.length-products.length%3).map(p=>{const o={...p,imageFit:'cover',...xmasPhoto(p)};return this.d2Loading?this.skeletonCard(o):this.card(o);});
   // 27 Nov 2026 (Yusuf: "bu vitrindeki ürünler için %25 ikinciyi al kampanyamızın da bilgisi olsa mı daha iyi olmaz mı"): all six hoodies sit in the
   // Black Week collection (Wix query, 27 Nov), so the shelf carries the Black Week line while the offer runs and every shown hoodie is eligible.
-  const offer=blackWeekActive()&&cards.length&&products.slice(0,cards.length).every(p=>blackWeekEligibleRow(this.d2cardNative(p)))?offerLineHtml({de:this.campaignGerman(),esc}):'';
-  if(offer&&this.isConnected)armBlackWeekEnd(this);
-  const offerStyle=offer?'<style>:host([design2]) [data-d2-xmas]>.bw-offer{display:inline-block;max-width:100%;margin:2px 0 18px;padding:.5em 1em .45em;border-radius:12px;background:#FFE600;color:#123D18;font-size:15px;font-weight:600;line-height:1.35}</style>':'';
-  return `<section class="wrap d2-shelf" data-d2-xmas>${offerStyle}<div class="d2-clothing-head bw-raw"><h2 class="d2-section-title">${esc(t.title)}</h2><a href="${esc(href)}">${esc(t.more)} →</a></div><p class="bw-raw">${esc(t.text)}</p>${offer}<div class="grid category-grid d2-grid">${cards.join('')}</div></section>`;
+  const offer=this.d2bwShelfLine(products.slice(0,cards.length));
+  return `<section class="wrap d2-shelf" data-d2-xmas><div class="d2-clothing-head bw-raw"><h2 class="d2-section-title">${esc(t.title)}</h2><a href="${esc(href)}">${esc(t.more)} →</a></div><p class="bw-raw">${esc(t.text)}</p>${offer}<div class="grid category-grid d2-grid">${cards.join('')}</div></section>`;
+ };
+ // Black Week on every store home shelf in its scope (Yusuf, 27 Nov 2026: "sadece onlar değil, kapsam dahilindeki hepsi"): a shelf with at least one printed
+ // item from the Black Week collection carries the Black Week line (offerLineHtml names the offer and its scope). Digital cards never count.
+ P.d2bwShelfLine=function(products){
+  if(!blackWeekActive()||!products.some(p=>p&&!isDigital(p)&&blackWeekEligibleRow(this.d2cardNative(p))))return '';
+  const line=offerLineHtml({de:this.campaignGerman(),esc});if(!line)return '';
+  if(this.isConnected)armBlackWeekEnd(this);
+  return '<style>:host([design2]) .d2-shelf>.bw-offer{display:inline-block;max-width:100%;margin:2px 0 18px;padding:.5em 1em .45em;border-radius:12px;background:#FFE600;color:#123D18;font-size:15px;font-weight:600;line-height:1.35}</style>'+line;
  };
  P.d2clothing=function(model){
   const cards=designCards(model.products.filter(p=>p.group==='apparel'&&p.apparelKind!=='tote'));
@@ -271,7 +277,7 @@ P.landingView=function(){if(this.xgGuide()){const t=document.createElement('temp
   }
   if(!products.length)return '';
   const href=this.d2href(this.navigation.clothingHref());
-  return `<section class="wrap d2-shelf" data-d2-clothing><div class="d2-clothing-head bw-raw"><h2 class="d2-section-title">${esc(this.d2text('Clothing'))}</h2><a href="${esc(href)}">${esc(this.d2text('All clothing'))} →</a></div><p class="bw-raw">${esc(this.d2text('Berlin designs on T-shirts and fleece hoodies.'))}</p><div class="grid category-grid d2-grid">${products.map(p=>this.d2Loading?this.skeletonCard(p):this.card(p)).join('')}</div></section>`;
+  return `<section class="wrap d2-shelf" data-d2-clothing><div class="d2-clothing-head bw-raw"><h2 class="d2-section-title">${esc(this.d2text('Clothing'))}</h2><a href="${esc(href)}">${esc(this.d2text('All clothing'))} →</a></div><p class="bw-raw">${esc(this.d2text('Berlin designs on T-shirts and fleece hoodies.'))}</p>${this.d2bwShelfLine(products)}<div class="grid category-grid d2-grid">${products.map(p=>this.d2Loading?this.skeletonCard(p):this.card(p)).join('')}</div></section>`;
  };
  // Black Week hero (Yusuf, 20 Nov 2026): replaces the holiday or evergreen hero from 20 Nov until 30 Nov 23:59:59 Berlin time (black-week.js
  // holds the gate); the code below it is untouched, so the holiday hero comes back by itself on 1 Dec. The button opens the poster tab, the
@@ -310,7 +316,7 @@ P.landingView=function(){if(this.xgGuide()){const t=document.createElement('temp
    <div class="d2-hero-copy"><h1>${esc(copy.title)}</h1><a class="primary" data-d2-hero href="${esc(href)}">${esc(copy.cta)}<span aria-hidden="true">→</span></a></div>
   </section>${holiday?'':`<div class="wrap d2-hero-notes bw-raw"><small>${esc(this.d2text('Styling example · Frames not included'))}</small></div>`}`;
  };
- P.d2home=function(model){const render=p=>this.d2Loading?this.skeletonCard(p):this.card(p);const all=model.getCategoryView('print')?.products||[],picked=HOME_POSTERS.map(id=>all.find(p=>p.id===id)).filter(Boolean),posters=[...picked,...all.filter(p=>!picked.includes(p))].slice(0,8);return `${this.d2homeHero()}${this.d2personal(model)}${this.d2xmas(model)}${this.d2clothing(model)}<section class="wrap d2-shelf">${this.d2collections()}<div class="grid category-grid d2-grid">${posters.map(render).join('')}</div></section><section class="wrap d2-shelf"><h2 class="d2-section-title bw-raw">${esc(this.d2text('My picks'))}</h2><div class="d2-picks">${['berlin-after-dark','room-to-breathe','berlin-clocks'].map(id=>{const pick=recommendations.pairSelections.find(p=>p.id===id);if(!pick)return '';const ps=pick.families.map(id=>recommendations.families.find(f=>f.id===id)).map(f=>f?.members.map(id=>model.products.find(p=>p.id===id)).find(p=>p?.fulfilment?.cartEligible&&!isDigital(p))).filter(Boolean);if(ps.length<2)return '';return `<section><h3 class="bw-raw">${esc(this.d2text(pick.name))}</h3><div class="d2-pair">${ps.slice(0,2).map(render).join('')}</div></section>`;}).join('')}</div></section><section class="wrap d2-shelf"><h2 class="d2-section-title bw-raw">${esc(this.d2text('Explore Berlin'))}</h2>${this.d2languageNote()}<div class="d2-explore">${['trio','gd-trip-planner','gd-landmarks'].map(id=>model.products.find(p=>p.id===id)).filter(Boolean).map(render).join('')}</div></section><p class="wrap d2-delivery bw-raw">${esc(this.d2text(POSTER_DELIVERY_SHORT))}</p>${this.credits()}`;};
+ P.d2home=function(model){const render=p=>this.d2Loading?this.skeletonCard(p):this.card(p);const all=model.getCategoryView('print')?.products||[],picked=HOME_POSTERS.map(id=>all.find(p=>p.id===id)).filter(Boolean),posters=[...picked,...all.filter(p=>!picked.includes(p))].slice(0,8);return `${this.d2homeHero()}${this.d2personal(model)}${this.d2xmas(model)}${this.d2clothing(model)}<section class="wrap d2-shelf">${this.d2collections()}${this.d2bwShelfLine(posters)}<div class="grid category-grid d2-grid">${posters.map(render).join('')}</div></section><section class="wrap d2-shelf"><h2 class="d2-section-title bw-raw">${esc(this.d2text('My picks'))}</h2>${this.d2bwShelfLine(['berlin-after-dark','room-to-breathe','berlin-clocks'].flatMap(id=>recommendations.pairSelections.find(p=>p.id===id)?.families||[]).map(id=>recommendations.families.find(f=>f.id===id)).map(f=>f?.members.map(id=>model.products.find(p=>p.id===id)).find(p=>p?.fulfilment?.cartEligible&&!isDigital(p))).filter(Boolean))}<div class="d2-picks">${['berlin-after-dark','room-to-breathe','berlin-clocks'].map(id=>{const pick=recommendations.pairSelections.find(p=>p.id===id);if(!pick)return '';const ps=pick.families.map(id=>recommendations.families.find(f=>f.id===id)).map(f=>f?.members.map(id=>model.products.find(p=>p.id===id)).find(p=>p?.fulfilment?.cartEligible&&!isDigital(p))).filter(Boolean);if(ps.length<2)return '';return `<section><h3 class="bw-raw">${esc(this.d2text(pick.name))}</h3><div class="d2-pair">${ps.slice(0,2).map(render).join('')}</div></section>`;}).join('')}</div></section><section class="wrap d2-shelf"><h2 class="d2-section-title bw-raw">${esc(this.d2text('Explore Berlin'))}</h2>${this.d2languageNote()}<div class="d2-explore">${['trio','gd-trip-planner','gd-landmarks'].map(id=>model.products.find(p=>p.id===id)).filter(Boolean).map(render).join('')}</div></section><p class="wrap d2-delivery bw-raw">${esc(this.d2text(POSTER_DELIVERY_SHORT))}</p>${this.credits()}`;};
  P.d2clothingFilters=function(){return `<p class="bw-raw">${esc(this.d2text('Berlin designs on T-shirts and hoodies. Choose a garment, then pick your colour and size.'))}</p><nav class="d2-formats bw-raw" data-clothing-filters aria-label="${esc(this.d2text('Garment'))}">${[['all','All'],['t-shirts','T-shirts'],['hoodies','Hoodies']].map(([id,label])=>`<a href="${esc(this.d2href(this.navigation.clothingHref(id)))}" ${this.filter===id?'aria-current="page"':''}>${esc(this.d2text(label))}</a>`).join('')}</nav>`;};
  // Store listing sort (Yusuf, 17 Nov 2026: Most popular default, Newest, Cheapest). A card stands for its
  // printed/digital twin and every colour/quality member of the same design, so it ranks by its best member.
@@ -391,6 +397,8 @@ P.landingView=function(){if(this.xgGuide()){const t=document.createElement('temp
   const person=this.bwPersonFirst;this.bwPersonFirst=null;
   const stage=person?root.querySelector('.gallery-stage > img:not(.extra)'):null;
   if(stage){stage.classList.add('bw-person');stage.setAttribute('sizes','(max-width:740px) 100vw, 50vw');}
+  // 27 Nov 2026 (Yusuf: "kapsam dahilindeki hepsi"): printed posters in the Black Week collection get the same line next to the price.
+  if(product.group!=='apparel'&&!product.unavailable&&!isDigital(product)&&blackWeekActive()&&blackWeekEligibleRow(this.d2cardNative(product))){const price=root.querySelector('.product-title .price'),line=offerLineHtml({de:this.campaignGerman(),esc});if(price&&line){price.insertAdjacentHTML('afterend',line);armBlackWeekEnd(this);}}
   if(product.group!=='apparel'||product.unavailable)return;
   const de=this.campaignGerman(),native=this.d2cardNative(product),eligible=blackWeekEligibleRow(native),buy=root.querySelector('.buy-box'),row=buy?.querySelector(':scope > .buy-row');
   if(eligible&&blackWeekActive()){const price=root.querySelector('.product-title .price'),line=offerLineHtml({de,esc});if(price&&line){price.insertAdjacentHTML('afterend',line);armBlackWeekEnd(this);}}
