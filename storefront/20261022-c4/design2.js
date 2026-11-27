@@ -245,7 +245,12 @@ P.landingView=function(){if(this.xgGuide()){const t=document.createElement('temp
   if(products.length<3)return '';
   const t=XMAS_HOODIE_TEXT[this.campaignGerman()?'de':'en'],href=this.d2href(this.navigation.clothingHref('hoodies'));
   const cards=products.slice(0,products.length-products.length%3).map(p=>{const o={...p,imageFit:'cover',...xmasPhoto(p)};return this.d2Loading?this.skeletonCard(o):this.card(o);});
-  return `<section class="wrap d2-shelf" data-d2-xmas><div class="d2-clothing-head bw-raw"><h2 class="d2-section-title">${esc(t.title)}</h2><a href="${esc(href)}">${esc(t.more)} →</a></div><p class="bw-raw">${esc(t.text)}</p><div class="grid category-grid d2-grid">${cards.join('')}</div></section>`;
+  // 27 Nov 2026 (Yusuf: "bu vitrindeki ürünler için %25 ikinciyi al kampanyamızın da bilgisi olsa mı daha iyi olmaz mı"): all six hoodies sit in the
+  // Black Week collection (Wix query, 27 Nov), so the shelf carries the Black Week line while the offer runs and every shown hoodie is eligible.
+  const offer=blackWeekActive()&&cards.length&&products.slice(0,cards.length).every(p=>blackWeekEligibleRow(this.d2cardNative(p)))?offerLineHtml({de:this.campaignGerman(),esc}):'';
+  if(offer&&this.isConnected)armBlackWeekEnd(this);
+  const offerStyle=offer?'<style>:host([design2]) [data-d2-xmas]>.bw-offer{display:inline-block;max-width:100%;margin:2px 0 18px;padding:.5em 1em .45em;border-radius:12px;background:#FFE600;color:#123D18;font-size:15px;font-weight:600;line-height:1.35}</style>':'';
+  return `<section class="wrap d2-shelf" data-d2-xmas>${offerStyle}<div class="d2-clothing-head bw-raw"><h2 class="d2-section-title">${esc(t.title)}</h2><a href="${esc(href)}">${esc(t.more)} →</a></div><p class="bw-raw">${esc(t.text)}</p>${offer}<div class="grid category-grid d2-grid">${cards.join('')}</div></section>`;
  };
  P.d2clothing=function(model){
   const cards=designCards(model.products.filter(p=>p.group==='apparel'&&p.apparelKind!=='tote'));
