@@ -1,5 +1,5 @@
 {
- "updatedAt": "2026-11-27T09:37:54.648Z",
+ "updatedAt": "2026-11-27T20:15:33.853Z",
  "source": "Wix Blog API + blog-category/categories.json",
  "slug": "living-in-berlin",
  "categoryId": "00af1018-ef7b-465a-93b6-916187609da4",
@@ -8,28 +8,28 @@
  "shelfMode": "curated",
  "shelfLegend": "By the part of life it hits",
  "shelfLegendSub": "Four shelves, because that is how the questions actually arrive",
- "totalPosts": 88,
+ "totalPosts": 89,
  "toolCount": 88,
  "lead": {
-  "title": "Wasserturm Prenzlauer Berg: What the Hill Above Kollwitzplatz Is Hiding",
-  "slug": "wasserturm-prenzlauer-berg",
-  "path": "/post/wasserturm-prenzlauer-berg",
-  "excerpt": "Most people who use the park by Kollwitzplatz every week have never been told what is under their feet. Here is the hill as I read it: the first waterworks, the flats in the tower, the reservoirs and the camp of 1933.",
+  "title": "Berlin Street Signs: How to Read the Name, the Numbers and the Plaque Underneath",
+  "slug": "berlin-street-signs",
+  "path": "/post/berlin-street-signs",
+  "excerpt": "You walk past hundreds of Berlin street signs every week. Here is how to read all of one: the house-number plate, the two alphabets, the plaque underneath and the crossed-out old names. And how to get one with your own name on it.",
   "minutes": 7,
   "readTime": "7 min read",
-  "publishedDate": "2026-11-27T09:35:34.688Z",
-  "alt": "The round brick Wasserturm in Prenzlauer Berg with its ringed top, seen through autumn trees on its hill",
-  "lead": "https://static.wixstatic.com/media/5a08a3_76af6186d6124564a19c2159bd7372b3~mv2.jpg/v1/fill/w_1400,h_620,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
-  "thumb": "https://static.wixstatic.com/media/5a08a3_76af6186d6124564a19c2159bd7372b3~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
-  "square": "https://static.wixstatic.com/media/5a08a3_76af6186d6124564a19c2159bd7372b3~mv2.jpg/v1/fill/w_184,h_184,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
-  "shelf": "draussen",
+  "publishedDate": "2026-11-27T20:12:08.874Z",
+  "alt": "The ornate street sign for Pariser Platz with the Berlin bear crest, with the Brandenburg Gate blurred behind it",
+  "lead": "https://static.wixstatic.com/media/5a08a3_b8a059a02d9947c0a091bc956aa7c071~mv2.jpg/v1/fill/w_1400,h_620,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+  "thumb": "https://static.wixstatic.com/media/5a08a3_b8a059a02d9947c0a091bc956aa7c071~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+  "square": "https://static.wixstatic.com/media/5a08a3_b8a059a02d9947c0a091bc956aa7c071~mv2.jpg/v1/fill/w_184,h_184,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+  "shelf": "wege",
   "topic": "living-in-berlin",
-  "figure": "1856",
-  "line": "is when Berlin&rsquo;s first public waterworks opened on the hill by Kollwitzplatz, under the park you climb today.",
+  "figure": "6 months",
+  "line": "is how long Berlin leaves the old sign up, struck through in red, after a street is renamed.",
   "term": "",
   "gloss": "",
   "termCta": "",
-  "tool": "wasserturm-hill-section"
+  "tool": ""
  },
  "glossary": [
   {
@@ -1050,6 +1050,16 @@
    "title": "Wege",
    "lead": "Getting around, and keeping the bike you got around on",
    "posts": [
+    {
+     "title": "Berlin Street Signs: How to Read the Name, the Numbers and the Plaque Underneath",
+     "slug": "berlin-street-signs",
+     "path": "/post/berlin-street-signs",
+     "minutes": 7,
+     "alt": "The ornate street sign for Pariser Platz with the Berlin bear crest, with the Brandenburg Gate blurred behind it",
+     "thumb": "https://static.wixstatic.com/media/5a08a3_b8a059a02d9947c0a091bc956aa7c071~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+     "line": "is how long Berlin leaves the old sign up, struck through in red, after a street is renamed.",
+     "figure": "6 months"
+    },
     {
      "title": "Berlin U-Bahn Lines: Why the U1 to U4 Run Narrower Trains",
      "slug": "berlin-u-bahn-lines",

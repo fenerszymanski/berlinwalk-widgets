@@ -1,5 +1,5 @@
 {
- "updatedAt": "2026-11-27T09:37:57.174Z",
+ "updatedAt": "2026-11-27T20:15:36.469Z",
  "source": "Wix Blog API + blog-category/categories.json",
  "slug": "berlin-history",
  "categoryId": "5f58da11-347d-43f0-b3c3-2cb1cdeb7a79",
@@ -8,28 +8,28 @@
  "shelfMode": "topic",
  "shelfLegend": "Where the story is standing",
  "shelfLegendSub": "Grouped by the kind of ground it covers",
- "totalPosts": 72,
+ "totalPosts": 73,
  "toolCount": 66,
  "lead": {
-  "title": "Wasserturm Prenzlauer Berg: What the Hill Above Kollwitzplatz Is Hiding",
-  "slug": "wasserturm-prenzlauer-berg",
-  "path": "/post/wasserturm-prenzlauer-berg",
-  "excerpt": "Most people who use the park by Kollwitzplatz every week have never been told what is under their feet. Here is the hill as I read it: the first waterworks, the flats in the tower, the reservoirs and the camp of 1933.",
+  "title": "Berlin Street Signs: How to Read the Name, the Numbers and the Plaque Underneath",
+  "slug": "berlin-street-signs",
+  "path": "/post/berlin-street-signs",
+  "excerpt": "You walk past hundreds of Berlin street signs every week. Here is how to read all of one: the house-number plate, the two alphabets, the plaque underneath and the crossed-out old names. And how to get one with your own name on it.",
   "minutes": 7,
   "readTime": "7 min read",
-  "publishedDate": "2026-11-27T09:35:34.688Z",
-  "alt": "The round brick Wasserturm in Prenzlauer Berg with its ringed top, seen through autumn trees on its hill",
-  "lead": "https://static.wixstatic.com/media/5a08a3_76af6186d6124564a19c2159bd7372b3~mv2.jpg/v1/fill/w_1400,h_620,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
-  "thumb": "https://static.wixstatic.com/media/5a08a3_76af6186d6124564a19c2159bd7372b3~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
-  "square": "https://static.wixstatic.com/media/5a08a3_76af6186d6124564a19c2159bd7372b3~mv2.jpg/v1/fill/w_184,h_184,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+  "publishedDate": "2026-11-27T20:12:08.874Z",
+  "alt": "The ornate street sign for Pariser Platz with the Berlin bear crest, with the Brandenburg Gate blurred behind it",
+  "lead": "https://static.wixstatic.com/media/5a08a3_b8a059a02d9947c0a091bc956aa7c071~mv2.jpg/v1/fill/w_1400,h_620,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+  "thumb": "https://static.wixstatic.com/media/5a08a3_b8a059a02d9947c0a091bc956aa7c071~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+  "square": "https://static.wixstatic.com/media/5a08a3_b8a059a02d9947c0a091bc956aa7c071~mv2.jpg/v1/fill/w_184,h_184,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
   "shelf": "",
   "topic": "living-in-berlin",
   "figure": "",
-  "line": "Most people who use the park by Kollwitzplatz every week have never been told what is under their feet.",
+  "line": "You walk past hundreds of Berlin street signs every week.",
   "term": "",
   "gloss": "",
   "termCta": "",
-  "tool": "wasserturm-hill-section"
+  "tool": ""
  },
  "glossary": [],
  "shelves": [
@@ -679,6 +679,15 @@
    "title": "More in this category",
    "lead": "Everything else filed here",
    "posts": [
+    {
+     "title": "Berlin Street Signs: How to Read the Name, the Numbers and the Plaque Underneath",
+     "slug": "berlin-street-signs",
+     "path": "/post/berlin-street-signs",
+     "minutes": 7,
+     "alt": "The ornate street sign for Pariser Platz with the Berlin bear crest, with the Brandenburg Gate blurred behind it",
+     "thumb": "https://static.wixstatic.com/media/5a08a3_b8a059a02d9947c0a091bc956aa7c071~mv2.jpg/v1/fill/w_176,h_132,fp_0.50_0.50,q_85,enc_avif,quality_auto/image.jpg",
+     "line": "You walk past hundreds of Berlin street signs every week."
+    },
     {
      "title": "Wasserturm Prenzlauer Berg: What the Hill Above Kollwitzplatz Is Hiding",
      "slug": "wasserturm-prenzlauer-berg",

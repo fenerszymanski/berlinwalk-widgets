@@ -1,8 +1,8 @@
 {
-  "updatedAt": "2026-11-27T09:37:54.017Z",
+  "updatedAt": "2026-11-27T20:15:33.167Z",
   "source": "Wix Blog API",
   "popularSource": "Wix Blog metrics.views lifetime sort",
-  "totalPosts": 478,
+  "totalPosts": 479,
   "toolsTotal": 400,
   "bookingUrl": "https://www.walkofberlin.com/book-berlin-walking-tour/berlin-then-and-now",
   "navTopics": [
@@ -1802,6 +1802,23 @@
   ],
   "latest": [
     {
+      "title": "Berlin Street Signs: How to Read the Name, the Numbers and the Plaque Underneath",
+      "slug": "berlin-street-signs",
+      "path": "/post/berlin-street-signs",
+      "url": "https://www.berlinwalk.com/post/berlin-street-signs",
+      "excerpt": "You walk past hundreds of Berlin street signs every week. Here is how to read all of one: the house-number plate, the two alphabets, the plaque underneath and the crossed-out old names. And how to get one with your own name on it.",
+      "category": "Living in Berlin",
+      "categorySlug": "living-in-berlin",
+      "topic": "living-in-berlin",
+      "topicLabel": "Living in Berlin",
+      "readTime": "7 min read",
+      "publishedDate": "2026-11-27T20:12:08.874Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_b8a059a02d9947c0a091bc956aa7c071~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-pariser-platz-sign-cover.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_b8a059a02d9947c0a091bc956aa7c071~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-pariser-platz-sign-cover.jpg",
+      "alt": "The ornate street sign for Pariser Platz with the Berlin bear crest, with the Brandenburg Gate blurred behind it",
+      "relatedToolSlug": ""
+    },
+    {
       "title": "Wasserturm Prenzlauer Berg: What the Hill Above Kollwitzplatz Is Hiding",
       "slug": "wasserturm-prenzlauer-berg",
       "path": "/post/wasserturm-prenzlauer-berg",
@@ -1987,26 +2004,26 @@
       "thumb": "https://static.wixstatic.com/media/5a08a3_39cd6d06778847e8a9c050b50cc72e38~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-cover.jpg",
       "alt": "Kottbusser Tor at night from above, with the lit Neues Kreuzberger Zentrum, the U-Bahn station on its viaduct and car light trails around the square",
       "relatedToolSlug": "kotti-square-reader"
-    },
-    {
-      "title": "Glienicke Bridge: How to Visit Berlin's Bridge of Spies and the Border Corner Around It",
-      "slug": "glienicke-bridge-berlin",
-      "path": "/post/glienicke-bridge-berlin",
-      "url": "https://www.berlinwalk.com/post/glienicke-bridge-berlin",
-      "excerpt": "Most visitors photograph the green arches and leave. How to get to Glienicke Bridge, what to look for on it, and the strange border corner around it, from Klein-Glienicke to Steinstücken.",
-      "category": "Tourist Tips",
-      "categorySlug": "tourist-tips",
-      "topic": "practical",
-      "topicLabel": "Practical Berlin",
-      "readTime": "8 min read",
-      "publishedDate": "2026-11-18T09:56:30.658Z",
-      "image": "https://static.wixstatic.com/media/5a08a3_2eb10ec3bd6741b4b9a2de6af498dd01~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-cover.jpg",
-      "thumb": "https://static.wixstatic.com/media/5a08a3_2eb10ec3bd6741b4b9a2de6af498dd01~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-cover.jpg",
-      "alt": "The green steel arches of Glienicke Bridge over the Havel, seen from the Potsdam shore on a clear day",
-      "relatedToolSlug": "glienicke-border-corner-planner"
     }
   ],
   "allPosts": [
+    {
+      "title": "Berlin Street Signs: How to Read the Name, the Numbers and the Plaque Underneath",
+      "slug": "berlin-street-signs",
+      "path": "/post/berlin-street-signs",
+      "url": "https://www.berlinwalk.com/post/berlin-street-signs",
+      "excerpt": "You walk past hundreds of Berlin street signs every week. Here is how to read all of one: the house-number plate, the two alphabets, the plaque underneath and the crossed-out old names. And how to get one with your own name on it.",
+      "category": "Living in Berlin",
+      "categorySlug": "living-in-berlin",
+      "topic": "living-in-berlin",
+      "topicLabel": "Living in Berlin",
+      "readTime": "7 min read",
+      "publishedDate": "2026-11-27T20:12:08.874Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_b8a059a02d9947c0a091bc956aa7c071~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-pariser-platz-sign-cover.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_b8a059a02d9947c0a091bc956aa7c071~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-pariser-platz-sign-cover.jpg",
+      "alt": "The ornate street sign for Pariser Platz with the Berlin bear crest, with the Brandenburg Gate blurred behind it",
+      "relatedToolSlug": ""
+    },
     {
       "title": "Wasserturm Prenzlauer Berg: What the Hill Above Kollwitzplatz Is Hiding",
       "slug": "wasserturm-prenzlauer-berg",

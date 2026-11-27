@@ -1,9 +1,26 @@
 {
-  "updatedAt": "2026-11-27T09:37:54.017Z",
+  "updatedAt": "2026-11-27T20:15:33.167Z",
   "source": "Wix Blog API",
-  "totalPosts": 478,
+  "totalPosts": 479,
   "bookingUrl": "https://www.walkofberlin.com/book-berlin-walking-tour/berlin-then-and-now",
   "allPosts": [
+    {
+      "title": "Berlin Street Signs: How to Read the Name, the Numbers and the Plaque Underneath",
+      "slug": "berlin-street-signs",
+      "path": "/post/berlin-street-signs",
+      "url": "https://www.berlinwalk.com/post/berlin-street-signs",
+      "excerpt": "You walk past hundreds of Berlin street signs every week. Here is how to read all of one: the house-number plate, the two alphabets, the plaque underneath and the crossed-out old names. And how to get one with your own name on it.",
+      "category": "Living in Berlin",
+      "categorySlug": "living-in-berlin",
+      "topic": "living-in-berlin",
+      "topicLabel": "Living in Berlin",
+      "readTime": "7 min read",
+      "publishedDate": "2026-11-27T20:12:08.874Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_b8a059a02d9947c0a091bc956aa7c071~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-pariser-platz-sign-cover.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_b8a059a02d9947c0a091bc956aa7c071~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-pariser-platz-sign-cover.jpg",
+      "alt": "The ornate street sign for Pariser Platz with the Berlin bear crest, with the Brandenburg Gate blurred behind it",
+      "relatedToolSlug": ""
+    },
     {
       "title": "Wasserturm Prenzlauer Berg: What the Hill Above Kollwitzplatz Is Hiding",
       "slug": "wasserturm-prenzlauer-berg",
