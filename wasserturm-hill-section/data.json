@@ -1,0 +1,352 @@
+{
+  "checked": "27 November 2026",
+  "footer": "Schematic, not to scale. Sources: Landesdenkmalamt Berlin, Bezirksamt Pankow, Gedenktafeln in Berlin. Checked 27 November 2026.",
+  "years": [
+    {
+      "id": "1856",
+      "label": "1856",
+      "title": "First waterworks",
+      "blurb": "The first public waterworks on the Windmühlenberg opened on 1 January 1856: a machine and boiler house, a standpipe tower and a reservoir. The big tower does not exist yet."
+    },
+    {
+      "id": "1877",
+      "label": "1877",
+      "title": "Big tower finished",
+      "blurb": "The big tower was built from 1875 to 1877. The city had bought the plant in 1874. The hill now carries the tower, the machine house and the buried reservoirs."
+    },
+    {
+      "id": "1933",
+      "label": "1933",
+      "title": "SA early camp",
+      "blurb": "In spring 1933 the SA ran an early camp in the cellars of Maschinenhaus I, until about mid-June. The waterworks machines had been shut down in 1914."
+    },
+    {
+      "id": "today",
+      "label": "Today",
+      "title": "Park, flats, art",
+      "blurb": "The machine house was blown up in June 1935 and the park opened on 1 May 1937. Today the hill has a park with a playground, a memorial wall, flats in the tower and art in the reservoirs since 1994."
+    }
+  ],
+  "layers": [
+    {
+      "id": "large",
+      "n": 1,
+      "name": "Large reservoir",
+      "short": "Large reservoir",
+      "band": [
+        0,
+        15
+      ],
+      "anchor": [
+        0.5,
+        12
+      ],
+      "label": true,
+      "built": "Part of the complex dated 1852 to 1877",
+      "what": "A buried clean-water reservoir under the hill, built as ring-shaped nested barrel vaults.",
+      "today": "Used for art since 1994: the KrypTonale sound and light festival, concerts and exhibitions, coordinated by Förderband e.V. for the Bezirksamt Pankow. You can only get inside during events or exhibitions; I found no regular opening hours. visitBerlin lists an echo of about 18 seconds, so wear warm clothes.",
+      "byYear": {
+        "1856": {
+          "state": "faint",
+          "tag": "Not drawn yet",
+          "note": "The complex is dated 1852 to 1877 and I found no year for this reservoir, so I show it from 1877."
+        },
+        "1877": {
+          "state": "solid",
+          "tag": "Shown from 1877",
+          "note": "Drawn as part of the finished plant. The city later added a second machine house and a second ground reservoir in 1888."
+        },
+        "1933": {
+          "state": "solid",
+          "tag": "Standing",
+          "note": "Water use ended in 1914. The vaults then served other purposes until the art use began in 1994."
+        },
+        "today": {
+          "state": "solid",
+          "tag": "Standing",
+          "note": "Still there, now an event and exhibition space."
+        }
+      }
+    },
+    {
+      "id": "small",
+      "n": 2,
+      "name": "Small reservoir",
+      "short": "Small reservoir",
+      "band": [
+        15,
+        27
+      ],
+      "anchor": [
+        0.065,
+        24.6
+      ],
+      "label": true,
+      "built": "Part of the complex dated 1852 to 1877",
+      "what": "A second, smaller buried reservoir, listed together with the large one as part of the same ensemble.",
+      "today": "An art venue at Diedenhofer Straße 20. Galerie Parterre showed an exhibition there from 1 May to 28 June 2026, Tuesday to Sunday, 12:00 to 20:00. I found no current programme, so check before you go; outside exhibitions I found no regular opening hours.",
+      "byYear": {
+        "1856": {
+          "state": "faint",
+          "tag": "Year not known",
+          "note": "The ensemble is dated 1852 to 1877. I did not find the year this smaller reservoir was built, so it is shown as an outline here."
+        },
+        "1877": {
+          "state": "solid",
+          "tag": "Standing",
+          "note": "Part of the plant around the new tower."
+        },
+        "1933": {
+          "state": "solid",
+          "tag": "Standing",
+          "note": "No longer used for water. I found no detail on its use in 1933."
+        },
+        "today": {
+          "state": "solid",
+          "tag": "Standing",
+          "note": "Art venue since 1994."
+        }
+      }
+    },
+    {
+      "id": "cellars",
+      "n": 3,
+      "name": "Cellars of Maschinenhaus I",
+      "short": "Cellars",
+      "band": [
+        27,
+        42
+      ],
+      "anchor": [
+        0.34,
+        38.2
+      ],
+      "label": true,
+      "built": "With the first machine house, 1856",
+      "what": "The cellars under the machine house, about 1,000 m² of floor.",
+      "today": "Maschinenhaus I was blown up in June 1935 and I found no source on what remains underground. There is nothing to visit here. The site above is a children's playground.",
+      "byYear": {
+        "1856": {
+          "state": "solid",
+          "tag": "Standing",
+          "note": "The machine and boiler house of the first waterworks stood here."
+        },
+        "1877": {
+          "state": "solid",
+          "tag": "Standing",
+          "note": "Still the original machine house; the city added a second one in 1888."
+        },
+        "1933": {
+          "state": "solid",
+          "tag": "SA early camp",
+          "note": "An early SA camp ran in these cellars from spring until about mid-June 1933. The total number of prisoners is unknown; I found no surviving records. A local memorial group has documented the names of 19 of them. The building was then used as an SA home."
+        },
+        "today": {
+          "state": "faint",
+          "tag": "Gone",
+          "note": "Blown up in June 1935. Shown as an outline only."
+        }
+      }
+    },
+    {
+      "id": "park",
+      "n": 4,
+      "name": "Park surface and playground",
+      "short": "Park",
+      "band": [
+        42,
+        47
+      ],
+      "anchor": [
+        0.16,
+        46.5
+      ],
+      "label": true,
+      "built": "Park laid out from 1915, redesigned 1937",
+      "what": "The hilltop park around the tower. Entrances, paths, trees and the playground position still follow the 1937 design.",
+      "today": "Open park with steep steps up from the street, benches and a playground on the site of Maschinenhaus I. It was renovated from 2000 to 2006, with a circular path and a rose slope. I did not find a step-free route, so check before you bring a pram or a wheelchair.",
+      "byYear": {
+        "1856": {
+          "state": "faint",
+          "tag": "Not there yet",
+          "note": "The hill was a waterworks site. The first park was laid out from 1915."
+        },
+        "1877": {
+          "state": "faint",
+          "tag": "Not there yet",
+          "note": "Still a technical site. The first park was laid out from 1915."
+        },
+        "1933": {
+          "state": "faint",
+          "tag": "Earlier layout",
+          "note": "An earlier park existed, but the present layout and the playground date from 1937."
+        },
+        "today": {
+          "state": "solid",
+          "tag": "Standing",
+          "note": "The park has been open since 1937."
+        }
+      }
+    },
+    {
+      "id": "wall",
+      "n": 5,
+      "name": "Memorial wall",
+      "short": "Memorial wall",
+      "band": [
+        47,
+        52
+      ],
+      "anchor": [
+        0.489,
+        58
+      ],
+      "label": false,
+      "built": "Memorial stone 1950, memorial wall 1981",
+      "what": "A red-brick memorial wall beneath the tower, at the corner of Knaackstraße and Kolmarer Straße, remembering the people held in the 1933 camp.",
+      "today": "It stands in public space, so you can read the plaque at any time. A glass commentary panel unveiled in December 2005 was deliberately destroyed in February 2024, and I did not find whether it has been replaced.",
+      "byYear": {
+        "1856": {
+          "state": "faint",
+          "tag": "Not there yet",
+          "note": "No memorial. The camp was still decades away."
+        },
+        "1877": {
+          "state": "faint",
+          "tag": "Not there yet",
+          "note": "No memorial yet."
+        },
+        "1933": {
+          "state": "faint",
+          "tag": "Not there yet",
+          "note": "The first memorial stone came in 1950, the wall in 1981."
+        },
+        "today": {
+          "state": "solid",
+          "tag": "Standing",
+          "note": "The plaque was renewed in 2011."
+        }
+      }
+    },
+    {
+      "id": "standpipe",
+      "n": 6,
+      "name": "Standpipe tower of 1856",
+      "short": "Standpipe",
+      "band": [
+        52,
+        62
+      ],
+      "anchor": [
+        0.87,
+        57
+      ],
+      "label": false,
+      "built": "1856, vaulted over in 1890",
+      "what": "The small riser tower of the first waterworks, about 3.5 m across. The big tower later took over its job.",
+      "today": "The machines and the standpipe were shut down in 1914. The listed ensemble still names a riser-pipe tower, but I did not confirm what of it you can see from the park today.",
+      "byYear": {
+        "1856": {
+          "state": "solid",
+          "tag": "Standing",
+          "note": "The only tower on the hill until the big one was built."
+        },
+        "1877": {
+          "state": "solid",
+          "tag": "Standing",
+          "note": "Now stands beside the new big tower."
+        },
+        "1933": {
+          "state": "solid",
+          "tag": "Standing",
+          "note": "Shut down in 1914."
+        },
+        "today": {
+          "state": "solid",
+          "tag": "Listed ensemble",
+          "note": "Named in the listing; what is visible today is unconfirmed."
+        }
+      }
+    },
+    {
+      "id": "flats",
+      "n": 7,
+      "name": "Flats under the tank",
+      "short": "Flats",
+      "band": [
+        62,
+        80
+      ],
+      "anchor": [
+        0.565,
+        73
+      ],
+      "label": true,
+      "built": "1875 to 1877, clinker brick",
+      "what": "The lower floors of the big tower held workshops, offices and flats.",
+      "today": "Still lived in. The Bezirksamt Pankow says ten flats beneath the reservoir are occupied after the renovation of 2000. You cannot go in; you see the tower from the park.",
+      "byYear": {
+        "1856": {
+          "state": "faint",
+          "tag": "Not built yet",
+          "note": "The first tower on the hill was the small standpipe."
+        },
+        "1877": {
+          "state": "solid",
+          "tag": "New",
+          "note": "Finished in 1877 with workshops, offices and flats."
+        },
+        "1933": {
+          "state": "solid",
+          "tag": "Standing",
+          "note": "The residential floors stayed in use when the tower was taken out of service as a water tower in 1952."
+        },
+        "today": {
+          "state": "solid",
+          "tag": "Standing",
+          "note": "Renovated in 2000 and lived in."
+        }
+      }
+    },
+    {
+      "id": "tank",
+      "n": 8,
+      "name": "Tank floor and roof",
+      "short": "Tank",
+      "band": [
+        80,
+        100
+      ],
+      "anchor": [
+        0.65,
+        88
+      ],
+      "label": true,
+      "built": "1875 to 1877",
+      "what": "The water tank on top of the tower, under a flat conical roof. Water was stored up here to keep pressure in the pipes. Locals call the tower Dicker Hermann.",
+      "today": "The tower was taken out of service in May 1952. I found no public access to the tank floor; you see it from outside. The whole ensemble is a listed monument.",
+      "byYear": {
+        "1856": {
+          "state": "faint",
+          "tag": "Not built yet",
+          "note": "The big tower was still two decades away."
+        },
+        "1877": {
+          "state": "solid",
+          "tag": "New",
+          "note": "Newly finished, with the tank above the flats."
+        },
+        "1933": {
+          "state": "solid",
+          "tag": "Standing",
+          "note": "Since 1914 the tank only served as a pressure indicator, until 1952."
+        },
+        "today": {
+          "state": "solid",
+          "tag": "Standing",
+          "note": "Out of service since 1952."
+        }
+      }
+    }
+  ]
+}

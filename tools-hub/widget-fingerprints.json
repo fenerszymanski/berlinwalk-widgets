@@ -13857,6 +13857,34 @@
       },
       "slug": "schonhauser-viaduct-walk",
       "addedAt": "2026-11-26"
+    },
+    "wasserturm-hill-section": {
+      "inputModel": "continuous-scrub",
+      "stateProgression": "continuous-scrub",
+      "outputModel": "time-position",
+      "visualGrammar": "canvas",
+      "hasVisualLayer": true,
+      "flatChipCard": false,
+      "signals": {
+        "svgShapeNodes": 0,
+        "svgCount": 0,
+        "canvas": 1,
+        "contentImages": 0,
+        "mapLibrary": false,
+        "range": 1,
+        "dateInput": 0,
+        "radio": 4,
+        "checkbox": 0,
+        "select": 0,
+        "textInput": 0,
+        "buttons": 8,
+        "ariaPressed": 0,
+        "tables": 0,
+        "details": 0,
+        "textLength": 1633
+      },
+      "slug": "wasserturm-hill-section",
+      "addedAt": "2026-11-27"
     }
   }
 }

@@ -12165,6 +12165,35 @@
       "iconStatus": "live-wix-media",
       "image": "https://static.wixstatic.com/media/5a08a3_83260ba5672047f796ca7b012afbddb3~mv2.png",
       "cmsItemId": "510670c1-b9f1-4f8c-a36d-356ba1f4fabf"
+    },
+    {
+      "slug": "wasserturm-hill-section",
+      "title": "Wasserturm Hill Section",
+      "lead": "Drag a probe through a cutaway of the Wasserturm hill in Prenzlauer Berg, from the brick reservoirs inside the slope to the old tank, and switch between 1856, 1877, 1933 and today.",
+      "category": "Maps",
+      "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/wasserturm-hill-section/",
+      "embedHeight": 1300,
+      "hubCategory": "CultureLandmarks",
+      "type": "Map",
+      "priority": 3,
+      "tags": [
+        "prenzlauer-berg",
+        "water-tower",
+        "history",
+        "living in berlin",
+        "park",
+        "1933"
+      ],
+      "aliases": [
+        "wasserturm prenzlauer berg",
+        "wasserturm berlin",
+        "wasserturmplatz",
+        "wasserspeicher prenzlauer berg",
+        "dicker hermann berlin"
+      ],
+      "iconStatus": "live-wix-media",
+      "image": "https://static.wixstatic.com/media/5a08a3_491be1928ce943d4b9a7fdd5fa4adf61~mv2.png",
+      "cmsItemId": "b9b55ea1-c438-415d-a00d-8056d4464427"
     }
   ],
   "hubCategories": [

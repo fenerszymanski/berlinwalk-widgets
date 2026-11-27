@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wasserturm Hill Section</title>
+<meta name="description" content="A cutaway of the Wasserturm hill in Prenzlauer Berg. Move the probe from the reservoir floor up to the tank and switch between 1856, 1877, 1933 and today.">
+<link rel="stylesheet" href="../css/brand.css">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { overflow-x: hidden; }
+  body { font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #FFFFFF; color: #20241d; padding: 12px; }
+  .wg { border-radius: 16px; overflow: hidden; border: 1px solid #d8dfd0; background: #f4f6ef; }
+  .wg-head { padding: 18px 18px 8px; }
+  .wg-kick { display: inline-block; font-size: 10.5px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; color: #20241d; background: #FFE600; padding: 3px 8px; border-radius: 4px; }
+  .wg-head h1 { font-family: 'Merriweather', Georgia, serif; font-size: 21px; line-height: 1.3; margin-top: 9px; color: #1B5E20; }
+  .wg-head p { font-size: 13px; line-height: 1.6; color: #43493f; margin-top: 7px; max-width: 760px; }
+  .stage { background: #fff; border: 1px solid #dfe5d8; border-radius: 14px; padding: 10px; margin: 6px 12px 12px; min-width: 0; }
+  fieldset.years { border: 0; display: flex; flex-wrap: wrap; gap: 8px; padding: 0 0 10px; min-width: 0; }
+  fieldset.years legend { font-size: 12px; font-weight: 800; color: #123D18; padding: 0 0 6px; }
+  .yr { position: relative; }
+  .yr input { position: absolute; opacity: 0; inset: 0; width: 100%; height: 100%; cursor: pointer; margin: 0; }
+  .yr span { display: flex; align-items: center; justify-content: center; min-height: 44px; min-width: 76px; padding: 0 16px; border-radius: 10px; border: 2px solid #123D18; background: #fff; color: #20241d; font-weight: 800; font-size: 14px; }
+  .yr input:checked + span { background: #FFE600; color: #20241d; box-shadow: 0 0 0 2px #FFE600, 0 0 0 4px #123D18; }
+  .yr input:focus-visible + span { outline: 3px solid #1B5E20; outline-offset: 4px; }
+  .probewrap { display: flex; gap: 6px; align-items: flex-start; min-width: 0; }
+  .vcol { flex: 0 0 44px; display: flex; flex-direction: column; align-items: center; min-width: 0; }
+  input.vr { writing-mode: vertical-lr; direction: rtl; -webkit-appearance: slider-vertical; appearance: slider-vertical; width: 44px; background: transparent; cursor: pointer; accent-color: #1B5E20; }
+  input.vr:focus-visible { outline: 3px solid #1B5E20; outline-offset: 2px; border-radius: 6px; }
+  .cwrap { flex: 1 1 auto; min-width: 0; }
+  canvas { display: block; width: 100%; height: 400px; border-radius: 10px; background: #FBF8EC; cursor: ns-resize; }
+  .cap { font-size: 11px; color: #555c50; padding: 6px 2px 0; line-height: 1.45; }
+  .lower { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: 12px; padding: 0 12px 12px; align-items: start; }
+  .panel { background: #fff; border: 1px solid #dfe5d8; border-radius: 14px; padding: 14px; min-width: 0; }
+  .panel h2 { font-size: 11px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; color: #1B5E20; margin-bottom: 8px; }
+  .card-name { font-family: 'Merriweather', Georgia, serif; font-size: 17px; line-height: 1.3; color: #123D18; }
+  .tag { display: inline-block; font-size: 11px; font-weight: 800; background: #FFE600; color: #20241d; padding: 2px 8px; border-radius: 4px; margin-top: 8px; }
+  .tag.off { background: #e6ebdf; }
+  .card-note { font-size: 13px; line-height: 1.6; margin-top: 10px; padding: 8px 10px; border-left: 4px solid #1B5E20; background: #f4f6ef; border-radius: 0 8px 8px 0; color: #20241d; }
+  .card-row { font-size: 13px; line-height: 1.6; color: #20241d; margin-top: 10px; }
+  .card-row b { display: block; font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: #1B5E20; margin-bottom: 1px; }
+  .yearbox { font-size: 13px; line-height: 1.6; color: #20241d; margin-bottom: 10px; padding-bottom: 10px; border-bottom: 1px solid #e6ebdf; }
+  .yearbox b { font-family: 'Merriweather', Georgia, serif; color: #123D18; font-size: 15px; }
+  #list { list-style: none; }
+  #list li { border-bottom: 1px solid #e6ebdf; }
+  #list li:last-child { border-bottom: 0; }
+  .lbtn { width: 100%; display: flex; align-items: center; gap: 8px; text-align: left; font-family: inherit; font-size: 13px; font-weight: 600; color: #20241d; background: none; border: 0; cursor: pointer; padding: 6px 2px; min-height: 40px; line-height: 1.3; }
+  .lbtn:focus-visible { outline: 3px solid #1B5E20; outline-offset: 2px; }
+  .lbtn.on { font-weight: 800; }
+  .num { flex: 0 0 24px; height: 24px; border-radius: 12px; background: #1B5E20; color: #fff; font-size: 12px; font-weight: 800; text-align: center; line-height: 24px; }
+  .lbtn.on .num { background: #FFE600; color: #20241d; box-shadow: 0 0 0 2px #123D18; }
+  .lbtn.ghost { color: #4d5547; }
+  .lbtn.ghost .num { background: #6f7b68; }
+  .foot { font-size: 11px; color: #555c50; padding: 0 18px 14px; line-height: 1.5; }
+  @media (max-width: 760px) {
+    .lower { grid-template-columns: minmax(0, 1fr); }
+    canvas { height: 400px; }
+    .wg-head h1 { font-size: 18px; }
+    .stage { margin-left: 8px; margin-right: 8px; padding: 8px; }
+    .lower { padding-left: 8px; padding-right: 8px; }
+    .yr span { min-width: 68px; padding: 0 12px; }
+    fieldset.years { gap: 6px; }
+  }
+</style>
+</head>
+<body>
+<div class="wg">
+  <div class="wg-head">
+    <span class="wg-kick">BerlinTools</span>
+    <h1>Wasserturm Hill Section</h1>
+    <p>A cutaway of the hill at Knaackstraße and Belforter Straße in Prenzlauer Berg. Move the probe from the reservoir floor up to the tank, then switch the year to see what stood on the hill then.</p>
+  </div>
+  <div class="stage">
+    <fieldset class="years" id="years"><legend>Year</legend></fieldset>
+    <div class="probewrap">
+      <div class="vcol"><input type="range" class="vr" id="probe" min="0" max="100" step="1" value="8" aria-label="Probe height, from the reservoir floor up to the tank" aria-orientation="vertical"></div>
+      <div class="cwrap">
+        <canvas id="cv" role="img" aria-label="Schematic cutaway of the Wasserturm hill with the tower, park, memorial wall and two buried reservoirs"></canvas>
+        <p class="cap">Drag the probe, press the arrow keys on the vertical slider, or tap the drawing. Dashed outlines did not exist in that year, or are gone. Schematic, not to scale.</p>
+      </div>
+    </div>
+  </div>
+  <div class="lower">
+    <div class="panel"><h2>Under the probe</h2><div id="card" aria-live="polite"></div></div>
+    <div class="panel"><div class="yearbox" id="yearbox" aria-live="polite"></div><h2>Layers, bottom to top</h2><ol id="list"></ol></div>
+  </div>
+  <p class="foot" id="foot"></p>
+</div>
+<script>
+(function () {
+  var data = null, year = 'today', level = 8;
+  var cv = document.getElementById('cv'), ctx = cv.getContext('2d');
+  var probe = document.getElementById('probe');
+  var W = 0, H = 0, TOP = 12, BOT = 12;
+  var GREEN = '#1B5E20', DEEP = '#123D18', YEL = '#FFE600', CREAM = '#FBF8EC';
+  var EARTH = '#E6DCBC', VOID = '#F7F1DA', BRICK = '#B4553D', BRICKD = '#8E3B2C', WATER = '#BFE0E6', GREY = '#6b7a63';
+  var byId = {};
+
+  function yL(l) { return TOP + (100 - l) / 100 * (H - TOP - BOT); }
+  function ss(t) { t = Math.max(0, Math.min(1, t)); return t * t * (3 - 2 * t); }
+  function gy(x) {
+    var g = yL(42), a = 0.42 * W, b = 0.86 * W;
+    if (x < a) return g + 22 * (1 - ss(x / a));
+    if (x <= b) return g;
+    return g + 14 * ss((x - b) / (W - b));
+  }
+  function layerAt(l) {
+    var L = data.layers;
+    for (var i = 0; i < L.length; i++) { if (l >= L[i].band[0] && (l < L[i].band[1] || (i === L.length - 1 && l <= L[i].band[1]))) return L[i]; }
+    return L[L.length - 1];
+  }
+  function stateOf(id) { return byId[id].byYear[year].state; }
+  function active() { return layerAt(level); }
+
+  function size() {
+    var r = cv.getBoundingClientRect(), d = window.devicePixelRatio || 1;
+    W = r.width; H = r.height;
+    cv.width = Math.round(W * d); cv.height = Math.round(H * d);
+    ctx.setTransform(d, 0, 0, d, 0, 0);
+    var th = 32, inner = H - TOP - BOT;
+    probe.style.height = (inner + th) + 'px';
+    probe.style.marginTop = (TOP - th / 2) + 'px';
+  }
+
+  // Draw one layer shape: solid fill, or dashed outline when absent that year; highlight when under the probe.
+  function shape(id, build, fill, stroke, details) {
+    var p = new Path2D(); build(p);
+    var s = stateOf(id), on = active().id === id;
+    ctx.save();
+    if (s === 'solid') {
+      ctx.fillStyle = fill; ctx.fill(p);
+      if (details) details();
+      ctx.lineWidth = 1.5; ctx.strokeStyle = stroke; ctx.stroke(p);
+    } else {
+      ctx.setLineDash([4, 4]); ctx.lineWidth = 1.3; ctx.strokeStyle = GREY; ctx.globalAlpha = 0.75; ctx.stroke(p);
+    }
+    ctx.restore();
+    if (on) {
+      ctx.save();
+      ctx.lineWidth = 7; ctx.strokeStyle = DEEP; ctx.stroke(p);
+      ctx.lineWidth = 4; ctx.strokeStyle = YEL; ctx.stroke(p);
+      ctx.restore();
+    }
+    return p;
+  }
+
+  function arches(x0, x1, yb, yt, n, lit) {
+    var w = (x1 - x0) / n, g = Math.min(4, w * 0.12);
+    for (var i = 0; i < n; i++) {
+      var ax = x0 + i * w + g, aw = w - 2 * g, r = aw / 2;
+      ctx.beginPath(); ctx.moveTo(ax, yb); ctx.lineTo(ax, yt + r); ctx.arc(ax + r, yt + r, r, Math.PI, 0); ctx.lineTo(ax + aw, yb); ctx.closePath();
+      ctx.fillStyle = lit ? '#F3E58A' : '#E9E0BE'; ctx.fill();
+      ctx.lineWidth = 1; ctx.strokeStyle = '#a99f7a'; ctx.stroke();
+    }
+  }
+
+  function badge(n, x, y, on) {
+    ctx.save();
+    ctx.beginPath(); ctx.arc(x, y, 10, 0, Math.PI * 2);
+    ctx.fillStyle = on ? YEL : GREEN; ctx.fill();
+    ctx.lineWidth = 2; ctx.strokeStyle = on ? DEEP : '#fff'; ctx.stroke();
+    ctx.fillStyle = on ? '#20241d' : '#fff'; ctx.font = '800 11px Montserrat, sans-serif';
+    ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.fillText(String(n), x, y + 0.5);
+    ctx.restore();
+  }
+  function pill(text, x, y, align, fill, color) {
+    ctx.save();
+    ctx.font = '700 11px Montserrat, sans-serif'; ctx.textBaseline = 'middle';
+    var w = ctx.measureText(text).width + 12, h = 18, px = align === 'left' ? x : x - w;
+    ctx.fillStyle = fill; ctx.globalAlpha = 0.92;
+    ctx.beginPath(); ctx.roundRect ? ctx.roundRect(px, y - h / 2, w, h, 5) : ctx.rect(px, y - h / 2, w, h); ctx.fill();
+    ctx.globalAlpha = 1; ctx.fillStyle = color; ctx.textAlign = 'left'; ctx.fillText(text, px + 6, y + 0.5);
+    ctx.restore();
+  }
+
+  function draw() {
+    if (!data) return;
+    ctx.clearRect(0, 0, W, H);
+    ctx.fillStyle = CREAM; ctx.fillRect(0, 0, W, H);
+    var yG = yL(42), x, i;
+
+    // soil
+    ctx.beginPath(); ctx.moveTo(0, gy(0));
+    for (x = 0; x <= W; x += 4) ctx.lineTo(x, gy(x));
+    ctx.lineTo(W, H); ctx.lineTo(0, H); ctx.closePath();
+    ctx.fillStyle = EARTH; ctx.fill();
+
+    // large reservoir
+    var lx0 = 0.42 * W, lx1 = 0.88 * W;
+    var art = year === 'today';
+    shape('large', function (p) { p.roundRect ? p.roundRect(lx0, yL(15), lx1 - lx0, yL(0) - yL(15) - 2, 5) : p.rect(lx0, yL(15), lx1 - lx0, yL(0) - yL(15) - 2); }, VOID, '#7d7352', function () {
+      var wet = (year === '1877');
+      if (wet) { ctx.fillStyle = WATER; ctx.fillRect(lx0, yL(8), lx1 - lx0, yL(0) - yL(8) - 2); }
+      arches(lx0 + 6, lx1 - 6, yL(0) - 4, yL(9), W < 520 ? 5 : 7, art);
+    });
+    // small reservoir
+    var sx0 = 0.03 * W, sx1 = 0.30 * W;
+    shape('small', function (p) { p.roundRect ? p.roundRect(sx0, yL(27), sx1 - sx0, yL(15) - yL(27), 5) : p.rect(sx0, yL(27), sx1 - sx0, yL(15) - yL(27)); }, VOID, '#7d7352', function () {
+      if (year === '1856' || year === '1877') { ctx.fillStyle = WATER; ctx.fillRect(sx0, yL(20), sx1 - sx0, yL(15) - yL(20)); }
+      arches(sx0 + 5, sx1 - 5, yL(15) - 3, yL(21.5), 3, art);
+    });
+    // cellars
+    var cx0 = 0.32 * W, cx1 = 0.48 * W;
+    shape('cellars', function (p) { p.rect(cx0, yL(42) + 5, cx1 - cx0, yL(27) - yL(42) - 5); }, VOID, '#7d7352', function () {
+      arches(cx0 + 4, cx1 - 4, yL(27) - 3, yL(38), 2, false);
+      if (year === '1933') {
+        ctx.save(); ctx.beginPath(); ctx.rect(cx0, yL(42) + 5, cx1 - cx0, yL(27) - yL(42) - 5); ctx.clip();
+        ctx.strokeStyle = 'rgba(18,61,24,.28)'; ctx.lineWidth = 1.5;
+        for (i = -200; i < 200; i += 7) { ctx.beginPath(); ctx.moveTo(cx0 + i + 120, yL(27)); ctx.lineTo(cx0 + i + 220, yL(42)); ctx.stroke(); }
+        ctx.restore();
+      }
+    });
+
+    // machine house on the surface
+    var mh = new Path2D(); var mx0 = 0.32 * W, mx1 = 0.45 * W, mb = yG + 5, mt = yL(52);
+    mh.moveTo(mx0, mb); mh.lineTo(mx0, mt); mh.lineTo((mx0 + mx1) / 2, mt - 10); mh.lineTo(mx1, mt); mh.lineTo(mx1, mb); mh.closePath();
+    var mhOn = stateOf('cellars') === 'solid';
+    ctx.save();
+    if (mhOn) { ctx.fillStyle = '#C9B48A'; ctx.fill(mh); ctx.lineWidth = 1.5; ctx.strokeStyle = '#7d6a45'; ctx.stroke(mh);
+      ctx.fillStyle = '#7d6a45'; ctx.fillRect(mx0 + (mx1 - mx0) * 0.72, mt - 16, 6, 18); }
+    else if (year === 'today') { ctx.setLineDash([4, 4]); ctx.lineWidth = 1.3; ctx.strokeStyle = GREY; ctx.globalAlpha = 0.75; ctx.stroke(mh); }
+    ctx.restore();
+
+    // tower body (flats)
+    var tx0 = 0.52 * W, tx1 = 0.78 * W;
+    shape('flats', function (p) { p.rect(tx0, yL(80), tx1 - tx0, yG + 6 - yL(80)); }, BRICK, BRICKD, function () {
+      var cols = W < 520 ? 3 : 4, rows = 4, cw = (tx1 - tx0) / (cols + 1);
+      ctx.fillStyle = '#F6E7A4';
+      for (var r = 0; r < rows; r++) for (var c = 0; c < cols; c++) {
+        var wx = tx0 + cw * (c + 1) - 3.5, wy = yL(64) + r * ((yG - 8 - yL(64)) / rows);
+        ctx.fillRect(wx, wy, 7, 9);
+      }
+    });
+    // tank and roof
+    var kx0 = 0.50 * W, kx1 = 0.80 * W;
+    shape('tank', function (p) {
+      p.moveTo(kx0, yL(80)); p.lineTo(kx0, yL(94)); p.lineTo(tx0 + 4, yL(100)); p.lineTo(tx1 - 4, yL(100)); p.lineTo(kx1, yL(94)); p.lineTo(kx1, yL(80)); p.closePath();
+    }, BRICKD, '#5e2619', function () {
+      ctx.fillStyle = year === '1877' ? WATER : '#F3EBD0'; ctx.fillRect(kx0 + 5, yL(92), kx1 - kx0 - 10, yL(83) - yL(92));
+      ctx.fillStyle = '#F6E7A4'; ctx.fillRect(kx0 + 8, yL(97) + 2, 5, 5); ctx.fillRect(kx1 - 13, yL(97) + 2, 5, 5);
+    });
+
+    // standpipe tower
+    var sp0 = 0.845 * W, sp1 = 0.89 * W;
+    shape('standpipe', function (p) { p.moveTo(sp0, yG + 6); p.lineTo(sp0, yL(66)); p.lineTo((sp0 + sp1) / 2, yL(70)); p.lineTo(sp1, yL(66)); p.lineTo(sp1, yG + 6); p.closePath(); }, '#C9805F', BRICKD);
+
+    // memorial wall
+    var wx0 = 0.466 * W, wx1 = 0.512 * W;
+    shape('wall', function (p) { p.rect(wx0, yL(50), wx1 - wx0, yG + 6 - yL(50)); }, '#8E3B2C', '#5e2619', function () {
+      ctx.strokeStyle = 'rgba(255,255,255,.25)'; ctx.lineWidth = 1;
+      for (var k = yL(50) + 5; k < yG; k += 5) { ctx.beginPath(); ctx.moveTo(wx0, k); ctx.lineTo(wx1, k); ctx.stroke(); }
+      ctx.fillStyle = '#F6E7A4'; ctx.fillRect((wx0 + wx1) / 2 - 3, yL(48.6), 6, 4);
+    });
+
+    // park: ground line, path, trees, playground
+    var parkSolid = stateOf('park') === 'solid', parkOn = active().id === 'park';
+    ctx.save();
+    ctx.beginPath(); ctx.moveTo(0, gy(0)); for (x = 0; x <= W; x += 4) ctx.lineTo(x, gy(x));
+    if (parkSolid) { ctx.lineWidth = 5; ctx.strokeStyle = '#7aa35c'; ctx.stroke(); ctx.lineWidth = 1.5; ctx.setLineDash([5, 4]); ctx.strokeStyle = '#FBF8EC'; ctx.translate(0, 1); ctx.stroke(); }
+    else { ctx.lineWidth = 2; ctx.strokeStyle = '#8f9a7f'; ctx.stroke(); }
+    ctx.restore();
+    if (parkOn) {
+      ctx.save(); ctx.beginPath(); ctx.moveTo(0, gy(0)); for (x = 0; x <= W; x += 4) ctx.lineTo(x, gy(x));
+      ctx.lineWidth = 9; ctx.strokeStyle = DEEP; ctx.stroke(); ctx.lineWidth = 6; ctx.strokeStyle = YEL; ctx.stroke(); ctx.restore();
+    }
+    if (parkSolid) {
+      [0.045, 0.105, 0.915].forEach(function (f) { var tx = f * W, ty = gy(tx); ctx.fillStyle = '#6b4f2f'; ctx.fillRect(tx - 1.5, ty - 12, 3, 12); ctx.beginPath(); ctx.arc(tx, ty - 17, 8, 0, Math.PI * 2); ctx.fillStyle = '#4d8a3a'; ctx.fill(); });
+      // playground: swing frame and slide
+      var k = Math.max(0.55, Math.min(1, W / 640)), px = 0.33 * W, py = yG;
+      ctx.save(); ctx.translate(px, py); ctx.scale(k, k); px = 0; py = 0;
+      ctx.strokeStyle = '#20241d'; ctx.lineWidth = 2; ctx.beginPath();
+      ctx.moveTo(px, py); ctx.lineTo(px + 6, py - 20); ctx.lineTo(px + 24, py - 20); ctx.lineTo(px + 30, py);
+      ctx.moveTo(px + 15, py - 20); ctx.lineTo(px + 15, py - 8); ctx.stroke();
+      ctx.fillStyle = '#20241d'; ctx.fillRect(px + 11, py - 9, 8, 3);
+      ctx.beginPath(); ctx.moveTo(px + 40, py - 18); ctx.lineTo(px + 56, py); ctx.stroke();
+      ctx.beginPath(); ctx.moveTo(px + 40, py); ctx.lineTo(px + 40, py - 18); ctx.stroke();
+      ctx.restore();
+    }
+
+    // 1933 label
+    if (year === '1933' && W >= 520) pill('SA camp 1933', cx0 + 4, yL(30.8), 'left', YEL, '#20241d');
+
+    // probe line
+    var py2 = yL(level);
+    ctx.save();
+    ctx.setLineDash([]); ctx.lineWidth = 5; ctx.strokeStyle = DEEP; ctx.beginPath(); ctx.moveTo(0, py2); ctx.lineTo(W, py2); ctx.stroke();
+    ctx.lineWidth = 2.5; ctx.strokeStyle = YEL; ctx.beginPath(); ctx.moveTo(0, py2); ctx.lineTo(W, py2); ctx.stroke();
+    ctx.restore();
+
+    // labels
+    for (i = 0; i < data.layers.length; i++) {
+      var Ly = data.layers[i], ax = Ly.anchor[0] * W, ay = yL(Ly.anchor[1]), on = Ly.id === active().id;
+      if (Ly.id === 'park') ay = gy(ax) - 16;
+      badge(Ly.n, ax, ay, on);
+      if (Ly.label && W >= 520) {
+        var text = Ly.short;
+        pill(text, ax + 14, ay, 'left', on ? YEL : 'rgba(255,255,255,.9)', '#20241d');
+      }
+    }
+
+
+
+  }
+
+  function fillCard() {
+    var L = active(), y = L.byYear[year], yr = data.years.filter(function (q) { return q.id === year; })[0];
+    var el = document.getElementById('card');
+    el.innerHTML = '';
+    function add(tag, cls, txt) { var n = document.createElement(tag); if (cls) n.className = cls; n.textContent = txt; el.appendChild(n); return n; }
+    add('div', 'card-name', L.n + '. ' + L.name);
+    add('span', 'tag' + (y.state === 'solid' ? '' : ' off'), (yr.label === 'Today' ? 'Today' : yr.label) + ': ' + y.tag);
+    add('p', 'card-note', y.note);
+    var r = add('p', 'card-row'); r.innerHTML = '<b></b><span></span>'; r.firstChild.textContent = 'What it was'; r.lastChild.textContent = L.what + ' ' + L.built + '.';
+    var t = add('p', 'card-row'); t.innerHTML = '<b></b><span></span>'; t.firstChild.textContent = 'What you can do there today'; t.lastChild.textContent = L.today;
+    cv.setAttribute('aria-label', 'Schematic cutaway of the Wasserturm hill, ' + yr.label + '. Probe is at layer ' + L.n + ', ' + L.name + '.');
+    probe.setAttribute('aria-valuetext', L.n + ' of ' + data.layers.length + ', ' + L.name);
+  }
+  function fillYear() {
+    var yr = data.years.filter(function (q) { return q.id === year; })[0], el = document.getElementById('yearbox');
+    el.innerHTML = '<b></b><br><span></span>'; el.firstChild.textContent = yr.label + ': ' + yr.title; el.lastChild.textContent = yr.blurb;
+  }
+  function fillList() {
+    var ul = document.getElementById('list'); ul.innerHTML = '';
+    data.layers.forEach(function (L) {
+      var li = document.createElement('li'), b = document.createElement('button'), n = document.createElement('span');
+      b.type = 'button'; b.className = 'lbtn' + (L.id === active().id ? ' on' : '') + (stateOf(L.id) === 'solid' ? '' : ' ghost');
+      n.className = 'num'; n.textContent = L.n; b.appendChild(n);
+      var tx = document.createElement('span'); tx.textContent = L.name + (stateOf(L.id) === 'solid' ? '' : ' (outline)'); b.appendChild(tx);
+      b.addEventListener('click', function () { setLevel((L.band[0] + Math.min(L.band[1], 99.9)) / 2); });
+      li.appendChild(b); ul.appendChild(li);
+    });
+  }
+  var lastId = null;
+  function refresh(force) {
+    draw();
+    var id = active().id;
+    if (force || id !== lastId) { fillCard(); fillList(); lastId = id; }
+  }
+  function setLevel(v) {
+    level = Math.max(0, Math.min(100, Math.round(v)));
+    probe.value = level; refresh(false);
+  }
+  function setYear(y) { year = y; fillYear(); lastId = null; refresh(true); }
+
+  function levelFromEvent(e) {
+    var r = cv.getBoundingClientRect(), y = e.clientY - r.top;
+    return 100 - (y - TOP) / (H - TOP - BOT) * 100;
+  }
+  var dragging = false;
+  cv.addEventListener('pointerdown', function (e) { if (e.pointerType === 'mouse') { dragging = true; cv.setPointerCapture(e.pointerId); setLevel(levelFromEvent(e)); } });
+  cv.addEventListener('pointermove', function (e) { if (dragging) setLevel(levelFromEvent(e)); });
+  cv.addEventListener('pointerup', function () { dragging = false; });
+  cv.addEventListener('click', function (e) { if (e.pointerType !== 'mouse' && e.detail !== 0) setLevel(levelFromEvent(e)); });
+  probe.addEventListener('input', function () { setLevel(+probe.value); });
+
+  function build() {
+    var fs = document.getElementById('years');
+    data.years.forEach(function (y) {
+      var lab = document.createElement('label'), inp = document.createElement('input'), sp = document.createElement('span');
+      lab.className = 'yr'; inp.type = 'radio'; inp.name = 'yr'; inp.value = y.id; inp.checked = (y.id === year);
+      sp.textContent = y.label; lab.appendChild(inp); lab.appendChild(sp); fs.appendChild(lab);
+      inp.addEventListener('change', function () { if (inp.checked) setYear(y.id); });
+    });
+    document.getElementById('foot').textContent = data.footer;
+    data.layers.forEach(function (L) { byId[L.id] = L; });
+    size(); fillYear(); setLevel(level); refresh(true);
+  }
+
+  fetch('data.json').then(function (r) { return r.json(); }).then(function (d) { data = d; build(); })
+    .catch(function () { document.getElementById('card').textContent = 'The data could not be loaded.'; });
+  window.addEventListener('resize', function () { size(); refresh(false); });
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { if (data) draw(); });
+})();
+</script>
+<script src="../js/brand.js"></script>
+</body>
+</html>
