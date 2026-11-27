@@ -1,5 +1,5 @@
 import {HOMES_CONFIG,encodeHomes,decodeHomes} from './homes-encoding.js';
-import {mountHomes,countChoice,isHomes,homesReady} from './homes-configurator.js?v=ys-framed-20261111';
+import {mountHomes,countChoice,isHomes,homesReady} from './homes-configurator.js?v=bf-digital-20261127-v1';
 import {loadAerialPhoto,loadAerialImage} from './aerial-source.js';
 export {HOMES_CONFIG,decodeHomes};
 // Palette file is byte-identical to generator/print-options.json; no independent CSS colour approximation.
