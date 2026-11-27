@@ -200,6 +200,12 @@
  * Runs in both standalone and iframe contexts.
  */
 (function () {
+  // OFF since 27 Nov 2026 (Yusuf: "ikisini de kaldır"): no "Next Berlin Then
+  // and Now walk" row and no "by @walkofberlin" badge in any widget, first- or
+  // third-party. Flip to true to bring both back; the code below is unchanged.
+  var WIDGET_FOOTER_ENABLED = false;
+  if (!WIDGET_FOOTER_ENABLED) return;
+
   // Berlin Then and Now, the paid walking tour (Wix service 145cb27e). The CTA
   // row only appears when that service has a live bookable date; the old
   // hard-coded weekday/start-time schedule is never used for a label.
