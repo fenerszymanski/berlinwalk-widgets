@@ -100,6 +100,8 @@ LEGACY_ROUTES['berliner-sprueche']=['apparel','all'];   // not 'clothing': syncC
 // Premium tote bags (24 Nov 2026): their own category, listed under Gifts in the menu.
 FILTERS['tote-bags']=['all'];
 LEGACY_ROUTES['berlin-tote-bags']=['tote-bags','all'];
+FILTERS['berlin-mugs']=['all'];
+LEGACY_ROUTES['berlin-mugs']=['berlin-mugs','all'];
 export const STORE_MENU_DESIGN2 = Object.freeze([
   {id:'posters',label:'Posters',de:'Poster',href:storeHref('print'),items:[
     {label:'All posters',de:'Alle Poster',href:storeHref('print')},
@@ -116,6 +118,7 @@ export const STORE_MENU_DESIGN2 = Object.freeze([
     {label:'Dein Berlin 2027 · personalised calendar',de:'Dein Berlin 2027 · persönlicher Kalender',href:STORE_PERSONAL_CALENDAR_PRODUCT},
     {label:'Berlin 2027 wall calendar',de:'Berlin Wandkalender 2027',href:STORE_CALENDAR_PRODUCT},
     {label:'Tote bags',de:'Stoffbeutel',href:'https://walkofberlin.com/category/berlin-tote-bags'},
+    {label:'Berlin mugs',de:'Berlin-Tassen',href:'https://walkofberlin.com/category/berlin-mugs'},
     {label:'Personal newspapers',de:'Persönliche Zeitungen',href:storeHref('newspapers')},
     {label:'1928 gift voucher',de:'1928-Gutschein',href:'https://walkofberlin.com/product-page/gift-your-berlin-street-in-1928-poster-gift'}
   ]},
