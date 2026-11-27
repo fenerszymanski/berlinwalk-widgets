@@ -14925,5 +14925,43 @@
         "a": "The hill is steep and the main way up is by **steps**, including two stair accesses on the south slope. I could not confirm a step-free route, so plan for stairs."
       }
     ]
+  },
+  "berlin-street-signs": {
+    "title": "Berlin Street Signs - FAQ",
+    "subtitle": "The rules, the numbers, the plaques and the renamings.",
+    "items": [
+      {
+        "q": "Why do Berlin street signs look the way they do?",
+        "a": "Berlin's regulation on street naming, the **AV Benennung**, fixes the design: **black letters on a light, reflective panel**, Berlin's **own typeface** rather than DIN 1451, and a **cast aluminium frame** with a field for a house-number plate."
+      },
+      {
+        "q": "What does the small plate with numbers mean?",
+        "a": "It shows the **house numbers on that stretch of the street**, so you can see before you walk whether your number is on this block. Berlin calls them **Grundstücksnummern**, because empty plots are numbered too."
+      },
+      {
+        "q": "How are house numbers ordered in Berlin?",
+        "a": "Two systems are still in use. Older streets often use **horseshoe numbering**: up one side and back down the other, so the highest number faces number 1. Since the **1975** ordinance, new numbering is **odd on the left, even on the right**, rising away from the old centre."
+      },
+      {
+        "q": "What is the plaque under some street signs?",
+        "a": "An **Erläuterungsschild**, an explanatory plaque. It is optional and usually tells you in up to **three lines** who the street is named after, sometimes with three more about their work."
+      },
+      {
+        "q": "Why is there a crossed-out sign under the new name?",
+        "a": "After a renaming, Berlin leaves the old sign up for **six months**, struck through in red but readable, so everyone can get used to the new name."
+      },
+      {
+        "q": "When did Mohrenstraße become Anton-Wilhelm-Amo-Straße?",
+        "a": "On **23 August 2025**. The district assembly of Mitte had decided it in August 2020, and court cases delayed it until the day before the ceremony."
+      },
+      {
+        "q": "Can I buy a real Berlin street sign?",
+        "a": "Not off a pole: a street sign belongs to the city, and taking one is **theft**. I found no official sale of old Berlin signs. What you can buy is a sign **in the style** of a Berlin street sign with your own name, made for an indoor wall."
+      },
+      {
+        "q": "How many streets does Berlin have?",
+        "a": "About **11,480**, counting squares, bridges and private streets, according to the **Amt für Statistik Berlin-Brandenburg**. The most common name is **Waldstraße**, eleven times."
+      }
+    ]
   }
 }
