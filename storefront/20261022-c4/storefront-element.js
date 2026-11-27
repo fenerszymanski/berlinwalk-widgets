@@ -38,6 +38,8 @@
   const base = new URL('.', script.src);
   const CHANNEL = 'wob:shop-cart:v1';
   const CALENDAR_PRODUCT_ID='d35601ed-3b43-4269-afb9-32e7c3b1e128';
+  // Berlin street sign with your name (27 Nov 2026; Wix product 47769d05, page /product-page/berlin-street-sign-with-your-name): sign-configurator.js, loaded on its page and the cart.
+  const SIGN_PAGE=/(?:berlin-street-sign|berliner-strassenschild|cart-page)/;
   const STORE_DESIGN2 = true;
   const design2Enabled = (()=>{let choice;try{const q=new URLSearchParams(location.search).get("design");if(q==="2"||q==="0"){choice=q;sessionStorage.setItem("bwStoreDesign",q);}else choice=sessionStorage.getItem("bwStoreDesign");}catch{}return choice==="2"?true:choice==="0"?false:STORE_DESIGN2;})();
   const CALENDAR_LISTED=true;   // Yusuf 13 Nov 2026: "şimdi bunu store'da, menüde vs nerede gerekli varsa koyalım" (12 Nov it was direct link only)
@@ -354,7 +356,8 @@
     fetch(asset('data/catalog-snapshot.json'),{signal:AbortSignal.timeout(2500)}).then(r=>r.ok?r.json():null).catch(()=>null),
     (/(?:dein-berlin-2027|cart-page)/.test(location.pathname)?import(asset('calendar-configurator.js')).catch(()=>null):Promise.resolve(null)),
     design2Enabled?import(asset('design2.js')).catch(()=>null):Promise.resolve(null),   // a failed design 2 load falls back to the current store
-    legacyGiftPresentation()?Promise.resolve(null):fetch(new URL('data/sized-media.json?v=sized-20261124-v1',base).href,{signal:AbortSignal.timeout(2500)}).then(r=>r.ok?r.json():null).then(applySizedMedia).catch(()=>null)
+    legacyGiftPresentation()?Promise.resolve(null):fetch(new URL('data/sized-media.json?v=sized-20261124-v1',base).href,{signal:AbortSignal.timeout(2500)}).then(r=>r.ok?r.json():null).then(applySizedMedia).catch(()=>null),
+    (SIGN_PAGE.test(location.pathname)?import(asset('sign-configurator.js')).catch(()=>null):Promise.resolve(null))
   ]);
   // German layer for the press launch, only with ?lang=de; a failure leaves the English page (30 Oct 2026).
   if(new URLSearchParams(location.search).get('lang')==='de'||(/^\/cart-page/.test(location.pathname)&&ysGermanTab()))import(asset('ys-de.js')).catch(()=>{});
@@ -513,7 +516,7 @@
     // Slow start (19 Nov 2026, Yusuf: "bunu hemen düzeltmeliyiz"). The copy of this element in Wix's server HTML cannot get a bridge answer: Wix swaps it for a new copy when its client render starts (performance mark "client_render started"), and only that copy is answered. On a slow phone connection that swap comes after the 20 s watchdog (measured at 1.6 Mbit/s: swap at 27 s, storefront ready at 31 s), so the fallback only flashed Wix's own page for a few seconds before the storefront came anyway. On store pages the watchdog therefore waits in 2 s steps while Wix's client render has not started, or started under 15 s ago; hard stop 60 s after this copy connected. A copy that connects after the mark (the swapped-in one, in-site navigation) keeps the plain 20 s.
     slowStartGrace() {const now=globalThis.performance?.now?.()||0;if(!/^(?:\/de)?\/(?:(?:category|product-page)\/|cart-page(?:\/|$))/.test(location.pathname)||now-(this.connectedAt||0)>=60000)return false;let mark;try{mark=performance.getEntriesByName('client_render started')[0];}catch{}return !mark||now-mark.startTime<15000;}
     armWatchdog(wait) {clearTimeout(this.watchdog);this.watchdog=setTimeout(()=>{if(this.revealed||this.hidden)return;if(this.slowStartGrace()){this.armWatchdog(2000);return;}this.watchdogFired=true;if(!this.isConfiguredDigitalRoute())releaseNative();this.fail('BRIDGE_TIMEOUT');},wait);}
-    disconnectedCallback() {this.dropNativeGuardHold();this.calendarCleanup?.();clearInterval(this.campaignTimer);clearInterval(this.campaignRefresh);window.removeEventListener('pointerdown',this.onCreditOutside);window.removeEventListener('popstate',this.onStoreNavigation);clearTimeout(this.watchdog);clearTimeout(this.quoteTimer);this.sizeObserver?.disconnect();cancelAnimationFrame(this.sizeFrame);this.stageVideoObserver?.disconnect();if(this.stageVideoVisibility){document.removeEventListener('visibilitychange',this.stageVideoVisibility);this.stageVideoVisibility=null;}cancelAnimationFrame(this.cartBarFrame);window.removeEventListener('scroll',this.onCartViewport);window.removeEventListener('resize',this.onCartViewport);for(const pending of this.pending.values()){clearTimeout(pending.timer);pending.reject(Error('BRIDGE_DISCONNECTED'));}this.pending.clear();}
+    disconnectedCallback() {this.dropNativeGuardHold();this.calendarCleanup?.();this.signCleanup?.();clearInterval(this.campaignTimer);clearInterval(this.campaignRefresh);window.removeEventListener('pointerdown',this.onCreditOutside);window.removeEventListener('popstate',this.onStoreNavigation);clearTimeout(this.watchdog);clearTimeout(this.quoteTimer);this.sizeObserver?.disconnect();cancelAnimationFrame(this.sizeFrame);this.stageVideoObserver?.disconnect();if(this.stageVideoVisibility){document.removeEventListener('visibilitychange',this.stageVideoVisibility);this.stageVideoVisibility=null;}cancelAnimationFrame(this.cartBarFrame);window.removeEventListener('scroll',this.onCartViewport);window.removeEventListener('resize',this.onCartViewport);for(const pending of this.pending.values()){clearTimeout(pending.timer);pending.reject(Error('BRIDGE_DISCONNECTED'));}this.pending.clear();}
     attributeChangedCallback(name, oldValue, value) {
       if(oldValue===value)return;
       if(name==='shop-context') {const next=json(value)||{};if(next.path!==this.context.path){if(this.context.path){this.quantity=1;this.view='poster';this.earlyAdd=null;this.sizeWarningProduct=null;}this.readySent=false;this.revealed=false;this.quote=null;this.quoteRevision++;this.ysEntryProductId='';this.configuredFailure=false;this.previewPriceHeights=new Map();}this.context=next;this.syncConfiguredGuard();this.applyContextCategory();this.ensureYs1979().then(()=>{if(this.isConnected&&this.ysMod1979&&this.ysIs1979())this.render();},()=>this.fail('YS1979_UNAVAILABLE'));this.render();this.signalReady();}
@@ -522,10 +525,10 @@
       if(name==='shop-bridge-ready')this.start();
     }
     async load() {
-      try {const [layer,editorial,ysMod,definitions,presentation,bindings,external,funnel,navigationModule,gift,campaign,bf,campaignConfig,bfConfig,priceSnapshot,catalogSnapshot,calendarMod,design2]=await resources;
+      try {const [layer,editorial,ysMod,definitions,presentation,bindings,external,funnel,navigationModule,gift,campaign,bf,campaignConfig,bfConfig,priceSnapshot,catalogSnapshot,calendarMod,design2,,signMod]=await resources;
         if(design2){await design2.prepare;design2.install(BWStorefront,{asset,esc,STORE_LOGO,money,editionHref,isDigital,POSTER_DELIVERY_SHORT,NOTICE_GIFT,cartPageUrl,ysGermanTab});this.setAttribute("design2","");}
         const navigation=navigationModule?.STORE_LANDINGS_EXTRA?{...navigationModule,STORE_LANDINGS:Object.freeze({...navigationModule.STORE_LANDINGS,...navigationModule.STORE_LANDINGS_EXTRA})}:navigationModule;   // 25 Nov 2026: landings added after the frozen legacy list (Berliner Sprüche)
-        Object.assign(this,{layer,editorial,ysMod,definitions,presentation,bindings,external,funnel,navigation,gift,campaign,bf,campaignConfig,bfConfig,priceSnapshot,catalogSnapshot,calendarMod});
+        Object.assign(this,{layer,editorial,ysMod,definitions,presentation,bindings,external,funnel,navigation,gift,campaign,bf,campaignConfig,bfConfig,priceSnapshot,catalogSnapshot,calendarMod,signMod});
         await this.ensureYs1979(true);
         this.measure('adLanding');   // 21 Nov 2026: the utm_content of this landing, counted as an identifier-free aggregate (funnel.js)
         this.bfWasActive=this.bfActive();this.campaignWasActive=['wix','audio','newspaper'].some(system=>this.campaign?.active(this.campaignConfig,system));this.campaignTimer=setInterval(()=>{this.campaign?.tick(this.shadowRoot);const bfNow=this.bfActive();if(bfNow!==this.bfWasActive){this.bfWasActive=bfNow;this.render();this.request('catalog').catch(()=>{});}this.shadowRoot.querySelectorAll('[data-ys-mounted-christmas]').forEach(el=>{el.hidden=!this.ysMod?.ysMounted(this.ys||{})||!this.ysMod?.mountedChristmasOpen();});if(!this.catalogue&&this.snapshotWasUsable!==this.snapshotUsable()){this.snapshotWasUsable=this.snapshotUsable();this.skeletonModel=null;this.render();}const next=this.campaign?.active(this.campaignConfig,'wix')||this.campaign?.active(this.campaignConfig,'audio')||this.campaign?.active(this.campaignConfig,'newspaper');if(this.campaignWasActive&&!next){this.buildModel();this.request('catalog').catch(()=>{});}this.campaignWasActive=next;},1000);
@@ -980,6 +983,7 @@
       if(this.ysIs1979?.()&&!this.ysMod1979)return '';
       const alias=this.productAlias();let product=this.model.products.find(p=>p.wixProductId===this.productViewId())||(!alias?this.unavailableProduct():null);
       if(alias&&(!product||!this.ysMod||!this.ysEntryAvailable()))return this.configuredUnavailableBody();
+      if(this.signMod&&this.context.productId===this.signMod.SIGN_ID){if(!product||!this.catalogue.products.some(p=>p.productId===this.signMod.SIGN_ID&&p.visible!==false))return this.configuredUnavailableBody();return this.signMod.signBody({german:this.campaignGerman(),price:money(product.currency,product.priceCents/100),priceHtml:this.campaignPrice(product),legal:this.legalLinks()+this.withdrawButton()});}
       if(this.context.productId===CALENDAR_PRODUCT_ID){if(!this.calendarMod||!product||!this.catalogue.products.some(p=>p.productId===this.calendarMod.CALENDAR_ID&&p.visible!==false))return this.configuredUnavailableBody();return this.calendarMod.calendarBody({german:this.campaignGerman(),price:money(product.currency,product.priceCents/100),priceHtml:this.campaignPrice(product),bfActive:this.bfActive(),asset,legal:this.legalLinks()+this.withdrawButton()});}
       if(!product)return '';
       const german=this.campaignGerman()?this.navigation.GIFT_CARDS_DE?.[product.id]:null;if(german)Object.assign(product,{name:german.name,place:german.place});
@@ -1094,6 +1098,16 @@
         add:async fields=>{if(!this.calendarMod.calendarReady(this.calendarState))throw Error('TAKVIM_HAZIR_DEGIL');if(this.busy||this.uncertain)throw Error('TAKVIM_BEKLIYOR');this.busy=true;try{await this.request('add',{productId:this.calendarMod.CALENDAR_ID,quantity:1,customTextFields:fields});this.measure('calendarStep','calendar-add');this.measure('added',this.model?.products?.find?.(p=>p.wixProductId===this.calendarMod.CALENDAR_ID)||{wixProductId:this.calendarMod.CALENDAR_ID,name:'Dein Berlin 2027',priceCents:3990,currency:'EUR'},1);this.calendarState.added=true;this.notice='Added to your cart';}catch(error){this.error=error.message;throw error;}finally{this.busy=false;this.render();}}
       });
     }
+    mountSign() {
+      this.signCleanup?.();this.signCleanup=null;
+      const host=this.shadowRoot.querySelector('[data-sign-host]');if(!host||!this.signMod)return;
+      this.signState=this.signState||{};
+      this.signCleanup=this.signMod.mountSign(host,this.signState,{german:this.campaignGerman(),busy:()=>this.busy||this.uncertain,
+        available:()=>this.catalogue?.products?.some(p=>p.productId===this.signMod.SIGN_ID&&p.visible!==false&&p.inStock===true),
+        track:(step,details)=>this.measure('signStep',step,details),
+        add:async fields=>{if(this.busy||this.uncertain)throw Error('SCHILD_BEKLIYOR');this.busy=true;try{await this.request('add',{productId:this.signMod.SIGN_ID,quantity:1,customTextFields:fields});this.measure('added',this.model?.products?.find?.(p=>p.wixProductId===this.signMod.SIGN_ID)||{wixProductId:this.signMod.SIGN_ID,name:'Berlin street sign',priceCents:6490,currency:'EUR'},1);this.notice='Added to your cart';}catch(error){this.error=error.message;throw error;}finally{this.busy=false;this.render();}}
+      });
+    }
     mountYs() {
       const host=this.shadowRoot.querySelector('[data-ys-host]');if(!host||!this.ysMod)return;
       this.ys=this.ys||{};if(this.ysEntryProductId!==this.context.productId){this.ysEntryProductId=this.context.productId;this.ys.format=this.productAlias()?.format||'poster';this.ysApplyPreset();}const p1979=this.ysIs1979();this.ysApi=this.ysApi||{sample:this.productMedia(p1979?'ys1979-sample.jpg':this.campaignGerman()?'ys-sample-de.jpg':'ys-sample.jpg'),busy:()=>this.busy||this.uncertain,track:step=>{try{if(p1979)this.funnel?.ysStep(step,YS1979);else this.funnel?.ysStep(step);}catch(e){}}};
@@ -1123,6 +1137,7 @@
     // "Map point <lat>, <lon> // Title: <T> | Area: <A> // Ref: <r> // Line: <L>" from it. The map point is shown as the rounded coordinates the print carries; the ad Ref stays internal.
     // Anything that does not look like that format is shown as before, field by field.
     ysLineSpec(line,product) {
+      if(this.signMod&&line.productId===this.signMod.SIGN_ID)return this.signMod.signSummary(Object.fromEntries((line.customText||[]).map(f=>[f.title,f.value])),this.cartGerman());
       if(line.productId===CALENDAR_PRODUCT_ID)return this.calendarMod?this.calendarMod.calendarSummary(Object.fromEntries((line.customText||[]).map(f=>[f.title,f.value])),this.cartGerman()):'';
       const framed=line.productId===this.ysMod?.YS_FRAMED_ID||line.productId===YS1979.framedId,canvas=line.productId===this.ysMod?.YS_CANVAS_ID||line.productId===YS1979.canvasId;
       if(!framed&&!canvas)return product?.typeLine||line.itemType||'';
@@ -1130,6 +1145,7 @@
       return [framed?'Framed print':'Canvas print',choices.Size,...(framed?[choices.Frame&&choices.Frame+' frame',choices.Paper&&choices.Paper+' paper']:[])].filter(Boolean).join(' · ');
     }
     lineCustom(line) {
+      if(this.signMod&&line.productId===this.signMod.SIGN_ID)return this.signMod.signLineHtml(Object.fromEntries((line.customText||[]).map(f=>[f.title,f.value])),this.cartGerman());
       if(line.productId===CALENDAR_PRODUCT_ID){try{const d=this.calendarMod.decodeCalendar(Object.fromEntries((line.customText||[]).map(f=>[f.title,f.value])));return (d.line?`<p class="meta bw-raw">${esc(d.line)}</p>`:'')+d.places.map((p,i)=>`<p class="meta bw-raw">${esc(this.calendarMod.C.text[d.lang].months[i])}: ${esc(p.title)} · ${esc(p.area)}</p>`).join('');}catch{return '';}}
       if(this.ysMod?.decodeHomes && line.customText?.some(f=>f.title===this.ysMod.HOMES_CONFIG.fields.first)){
         try{const data=this.ysMod.decodeHomes(Object.fromEntries(line.customText.map(f=>[f.title,f.value])));return `<p class="meta line-custom bw-raw"><strong>${esc(data.heading)}</strong></p>`+data.homes.map((h,i)=>`<p class="meta line-custom bw-raw">${i+1}. ${esc(h.title)} · ${esc(h.area)}${h.line?' · '+esc(h.line):''}</p>`).join('');}catch{return '<p class="meta line-custom">Print details need checking.</p>'}
@@ -1612,7 +1628,7 @@
       dialog.addEventListener('close',()=>{this.shadowRoot.querySelector(`[data-action="add"][data-product="${this.lastAddedId||''}"]`)?.focus({preventScroll:true});});
       if(open&&this.revealed)dialog.showModal();
       if(focusAction)this.shadowRoot.querySelector(`[data-action="${focusAction}"]${focusLine?`[data-line="${CSS.escape(focusLine)}"]`:''}`)?.focus({preventScroll:true});
-      this.mountCalendar();this.mountYs();this.onCartViewport();this.queueAutoQuote();this.watchStageVideo();
+      this.mountCalendar();this.mountSign();this.mountYs();this.onCartViewport();this.queueAutoQuote();this.watchStageVideo();
     }
     // A data-inview video plays muted only while half of it is on screen and the tab is visible; it pauses when scrolled away or the tab is hidden.
     watchStageVideo() {

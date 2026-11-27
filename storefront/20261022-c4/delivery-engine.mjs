@@ -19,6 +19,7 @@ export function routeFor(product,selection={},config){
  if(selection.digital||product.nativeProductType==='digital'||product.categoryIds?.includes('digital')||/^dl-|^ed-digital-/.test(product.id))return null;
  if(product.group==='apparel'||product.id.startsWith('shirt-'))return 'gelato-tee';
  const personal=STREET_POSTER.test(product.id)||['ys1928-mounted','ys1979-mounted'].includes(product.group)||STREET_MOUNTED.test(product.id);
+ if(product.id==='berlin-street-sign'||product.wixProductId==='47769d05-a3fa-4e22-8b0b-ae9cd3cc67e3')return 'gelato-metal';
  if(product.id==='dein-berlin-2027'||/calendar/i.test(product.typeLine||''))return 'gelato-calendar';
  if(personal){const format=selection.format||(/canvas/.test(product.id)?'canvas':/framed/.test(product.id)?'framed':'poster'),paper=selection.Paper||'Premium Matte',size=String(selection.Size||'30x40').replace(/\s|cm/g,'').replace('×','x');
   if(config.posterflowEnabled&&!selection.homes&&((format==='poster'&&['Classic Matte','Premium Matte','Premium Semi-Gloss','Classic Semi-Gloss'].includes(paper))||(format==='framed'&&size==='30x40'&&paper==='Premium Matte'&&['Black','White','Natural wood'].includes(selection.Frame||'Black'))))return format==='poster'?'posterflow-poster':'posterflow-frame';

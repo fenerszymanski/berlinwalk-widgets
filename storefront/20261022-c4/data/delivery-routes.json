@@ -94,7 +94,19 @@
       "bufferBusinessDays": 1,
       "basis": "11 Nov DE quotes and live 5-8 business-day profile, plus 1 buffer. Production+shipping bundled; approval unbounded, range conditional."
     },
-    "gelato-calendar": {
+    "gelato-metal": {
+   "provider": "Gelato",
+   "approvalBusinessDays": 1,
+   "bufferBusinessDays": 1,
+   "productionShippingCalendarDays": [
+    5,
+    6
+   ],
+   "basis": "27 Nov 2026 read-only Gelato orders:quote for metallic_12x18-inch-300x450-mm_3-mm_4-0_hor (the Berlin street sign, 45.7 x 30.5 cm white aluminium), Berlin 10178 and Munich 80331: printed in Germany, DHL Parcel 5-6 calendar days (UPS Express Saver 5, DHL Express 5-6). Approval 1 business day: every sign is a Gelato DRAFT that Yusuf places by hand after checking the proof. +1 German delivery business day margin. AT, NL, PL also print in Germany (DHL Global Parcel 6-10 days); FR, GB and US print locally (FR 5-7, GB 5-7, US 10-11 with the standard method). Requote after 7 days. See output/production/berlin-sign-20261127/route/QUOTES_20261127.json.",
+   "quotedAt": "2026-11-27",
+   "validThrough": "2026-12-04"
+  },
+  "gelato-calendar": {
       "provider": "Gelato",
       "productionShippingBusinessDays": [
         4,
