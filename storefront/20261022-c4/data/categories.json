@@ -548,6 +548,26 @@
         "order": 23
       },
       "detailLabel": "Tote bag details"
+    },
+    {
+      "id": "berlin-mugs",
+      "label": "Berlin Mugs",
+      "order": 26,
+      "match": {
+        "nativeCategoryIds": [
+          "42fd303a-19f0-4b9e-a2bf-51b970cd5ab6"
+        ]
+      },
+      "description": "Six Berlin places illustrated on 11 oz ceramic mugs.",
+      "allFilterLabel": "All mugs",
+      "filters": [],
+      "shelf": {
+        "previewLimit": 3,
+        "featureBelowCount": 3,
+        "moreLabel": "All mugs",
+        "imageFit": "contain",
+        "order": 19
+      }
     }
   ],
   "fulfilments": [

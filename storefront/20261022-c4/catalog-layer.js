@@ -143,7 +143,7 @@ export function adaptWixProducts(nativeProducts, presentation = []) {
       cardSummary: cardSummary(item.cardSummary || item.description || native.description),
       nativeAdditionalInfo: first(native.additionalInfoSections, native.additionalInfo, []),
       options: first(native.productOptions, native.options, []),
-      requiresOptions: list(first(native.productOptions, native.options, [])).length > 0
+      requiresOptions: item.group !== 'berlin-mugs' && list(first(native.productOptions, native.options, [])).length > 0
     };
   });
 }
