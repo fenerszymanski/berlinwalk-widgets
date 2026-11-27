@@ -8,7 +8,7 @@
   'use strict';
 
   const DATA = {
-    "release": "home-then-now-20261126-bw-hoodie-pair",
+    "release": "home-then-now-20261127-black-friday",
     "hero": {
       "img1928": "assets/hero-1928.webp",
       "imgToday": "assets/hero-today.webp",
@@ -576,6 +576,56 @@
           }
         ]
       }
+    },
+    "blackFriday": {
+      "note": "27 Nov 2026 (Yusuf): from 27 Nov the Black Week slide shows Black Friday; same end. Copy = storefront black-week.js BLACK_FRIDAY.",
+      "from": "2026-11-27T00:00:00+01:00",
+      "until": "2026-12-01T00:00:00+01:00",
+      "href": "https://www.walkofberlin.com/category/all-products",
+      "deHref": "https://www.walkofberlin.com/de/category/all-products",
+      "en": {
+        "label": "Black Friday",
+        "name": "Black Friday",
+        "eyebrow": "until Monday 30 November",
+        "title": "Digital files up to 50% off.",
+        "keep": [
+          "50% off"
+        ],
+        "lead": "T-shirts, hoodies and posters: buy two, the cheaper one is 25% off in your cart.",
+        "cta": "See the Black Friday offers",
+        "note": "Your street in 1928 as a print from €24.90."
+      },
+      "de": {
+        "label": "Black Friday",
+        "name": "Black Friday",
+        "eyebrow": "bis Montag, 30. November",
+        "title": "Digitale Dateien bis zu 50 % günstiger.",
+        "keep": [
+          "50 % günstiger"
+        ],
+        "lead": "T-Shirts, Hoodies und Poster: zwei kaufen, das günstigere ist im Warenkorb 25 % reduziert.",
+        "cta": "Zu den Angeboten",
+        "note": "Deine Straße um 1928 als Druck ab 24,90 €."
+      },
+      "visual": {
+        "type": "duo",
+        "items": [
+          {
+            "img": "assets/bf-print1928.webp",
+            "w": 640,
+            "h": 800,
+            "alt": "Sample print of a Berlin street from above, in 1928 and today.",
+            "altDe": "Beispieldruck einer Berliner Straße von oben, 1928 und heute."
+          },
+          {
+            "img": "assets/bf-printable.webp",
+            "w": 640,
+            "h": 800,
+            "alt": "Berlin in Pink printable poster.",
+            "altDe": "Poster Berlin in Pink zum Selbstdrucken."
+          }
+        ]
+      }
     }
   };
 
@@ -790,7 +840,9 @@
   }
 
   function bwhBlackWeekSlide(d) {
-    const b = d.blackWeek, de = bwhGerman(), t = de ? b.de : b.en;
+    // 27 Nov 2026: from DATA.blackFriday.from the same slide shows the Black Friday copy, photos and link (same end instant).
+    const bf = d.blackFriday && Date.now() >= Date.parse(d.blackFriday.from) && Date.now() < Date.parse(d.blackFriday.until);
+    const b = bf ? d.blackFriday : d.blackWeek, de = bwhGerman(), t = de ? b.de : b.en;
     return {
       key: 'black-week', theme: 'bw', label: t.label, name: t.name, eyebrow: t.eyebrow, title: t.title, keep: t.keep, lead: t.lead, note: t.note,
       cta: { text: t.cta, href: de ? b.deHref : (b.href || d.storeHref) },

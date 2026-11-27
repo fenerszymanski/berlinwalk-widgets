@@ -53,3 +53,47 @@ export const blackWeekActive = (now = Date.now()) =>
 // drawn for the offer, and from the same instant as the hero (1 Dec 00:00:00+01:00) both surfaces are gone without a release.
 export const BLACK_WEEK_COLLECTION_ID = 'c8d80bfb-7ec8-43c4-bcbf-62ef00ca0fa9';
 export const blackWeekEligibleRow = row => Array.isArray(row?.collectionIds) && row.collectionIds.includes(BLACK_WEEK_COLLECTION_ID);
+
+// Black Friday 2026 (Yusuf, 27 Nov 2026: "Ana sayfaya ve store ana sayfadaki black week tanıtımını black friday'e çevirelim", "up to %50
+// denebilir"). From 27 Nov the store hero and the homepage slide use this copy; the window ends with Black Week (1 Dec 00:00:00+01:00).
+// "Up to 50% off" is tied to digital files only: 64 of the 112 files are exactly 50% below their lowest price of the last 30 days
+// (output/production/digital-bf-20261127/config.json). The 1928 line is a plain "from" price, no reduction claim. The Black Week sentence
+// on product pages (BLACK_WEEK.copy.title) is unchanged.
+export const BLACK_FRIDAY = Object.freeze({
+  id: 'black-friday-202611',
+  from: '2026-11-27T00:00:00+01:00',
+  until: '2026-12-01T00:00:00+01:00',
+  copy: Object.freeze({
+    en: Object.freeze({
+      name: 'Black Friday',
+      until: 'until Monday 30 November',
+      title: 'Digital files up to 50% off.',
+      keep: Object.freeze(['50% off']),
+      note: 'Your street in 1928 as a print from €24.90.',
+      line: 'T-shirts, hoodies and posters: buy two, the cheaper one is 25% off in your cart.',
+      cta: 'Shop digital files',
+      homeCta: 'See the Black Friday offers',
+      altWoman: 'Sample print of a Berlin street from above, in 1928 and today.',
+      altMan: 'Berlin in Pink printable poster.'
+    }),
+    de: Object.freeze({
+      name: 'Black Friday',
+      until: 'bis Montag, 30. November',
+      title: 'Digitale Dateien bis zu 50 % günstiger.',
+      keep: Object.freeze(['50 % günstiger']),
+      note: 'Deine Straße um 1928 als Druck ab 24,90 €.',
+      line: 'T-Shirts, Hoodies und Poster: zwei kaufen, das günstigere ist im Warenkorb 25 % reduziert.',
+      cta: 'Zu den Dateien',
+      homeCta: 'Zu den Angeboten',
+      altWoman: 'Beispieldruck einer Berliner Straße von oben, 1928 und heute.',
+      altMan: 'Poster Berlin in Pink zum Selbstdrucken.'
+    })
+  }),
+  images: Object.freeze({
+    woman: 'assets/design2/black-friday-20261127-print1928',
+    man: 'assets/design2/black-friday-20261127-printable'
+  })
+});
+
+export const blackFridayActive = (now = Date.now()) =>
+  Number.isFinite(now) && now >= Date.parse(BLACK_FRIDAY.from) && now < Date.parse(BLACK_FRIDAY.until);

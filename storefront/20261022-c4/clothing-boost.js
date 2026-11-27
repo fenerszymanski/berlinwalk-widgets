@@ -5,7 +5,7 @@
 //  2. offerLineHtml: the approved Black Week sentence next to the price (black-week.js holds the words and the date gate).
 //  3. pickSecondItems / secondItemsHtml: up to three other items from the same Black Week collection, each a plain link to its product page.
 //  4. sizeChartFor / sizeGuideHtml: an expandable size guide with the manufacturer chart of the garment blank.
-import {BLACK_WEEK,blackWeekActive} from './black-week.js?v=bw-hoodie-pair-20261126-v1';
+import {BLACK_WEEK,blackWeekActive} from './black-week.js?v=bf-hero-20261127-v1';
 
 // 1. Person photos. Every file below was checked by short-lived look agents on 21 Nov 2026 (contact sheets of all 144 apparel gallery photos, yes/no per
 // tile; a Sonnet look judged the five borderline ones). The number ranks a photo as a first picture: +2 when the print is readable, +1 when the photo is
