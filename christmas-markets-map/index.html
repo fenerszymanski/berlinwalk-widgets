@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Berlin Christmas Markets Map | BerlinWalk</title>
+  <title>Berlin Christmas Markets Map | Walk of Berlin</title>
   <link rel="stylesheet" href="../css/brand.css">
   <script defer src="../js/brand.js"></script>
 </head>
@@ -311,6 +311,51 @@
       #bw-christmas-markets-map .bw-popup-row { font-size: 11px; }
     }
     #bw-christmas-markets-map .leaflet-popup-content { max-width: calc(100vw - 50px); overflow-wrap: anywhere; }
+
+    /* Christmas walk banner under the map (Yusuf, 27 Nov 2026). Shown only on the tool page (?surface=tool-page);
+       the blog embed keeps the map alone. Remove after 3 Jan 2027 with RETIREMENT_STEPS step 12. */
+    #bw-christmas-markets-map .bw-xwalk[hidden] { display: none; }
+    #bw-christmas-markets-map .bw-xwalk {
+      margin-top: 16px;
+      display: grid;
+      grid-template-columns: minmax(0, 42%) minmax(0, 1fr);
+      background: var(--bw-green-dark);
+      border-radius: 14px;
+      overflow: hidden;
+      color: var(--bw-white);
+      text-decoration: none;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.10);
+    }
+    #bw-christmas-markets-map .bw-xwalk-img { position: relative; min-height: 220px; background: #0f3312; }
+    #bw-christmas-markets-map .bw-xwalk-img img {
+      position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block;
+    }
+    #bw-christmas-markets-map .bw-xwalk-text { padding: 22px 24px; display: flex; flex-direction: column; justify-content: center; gap: 10px; }
+    #bw-christmas-markets-map .bw-xwalk-kicker {
+      color: var(--bw-yellow); font-size: 11px; font-weight: 800; letter-spacing: 2.5px; text-transform: uppercase;
+    }
+    #bw-christmas-markets-map .bw-xwalk .bw-title { margin: 0; font-size: 28px; line-height: 1.12; color: var(--bw-white); }
+    #bw-christmas-markets-map .bw-xwalk-lead { margin: 0; font-size: 14px; line-height: 1.55; color: #E8F1E0; }
+    #bw-christmas-markets-map .bw-xwalk-meta { margin: 0; font-size: 12px; line-height: 1.5; color: #C5D8BC; }
+    #bw-christmas-markets-map .bw-xwalk-btn {
+      align-self: flex-start;
+      margin-top: 4px;
+      display: inline-flex; align-items: center; min-height: 44px;
+      padding: 11px 18px;
+      background: var(--bw-yellow); color: #1a1a1a;
+      border-radius: 999px;
+      font-size: 14px; font-weight: 800;
+    }
+    #bw-christmas-markets-map .bw-xwalk:hover .bw-xwalk-btn,
+    #bw-christmas-markets-map .bw-xwalk:focus-visible .bw-xwalk-btn { background: #fff27a; }
+    #bw-christmas-markets-map .bw-xwalk:focus-visible { outline: 3px solid var(--bw-yellow); outline-offset: 3px; }
+    @media (max-width: 600px) {
+      #bw-christmas-markets-map .bw-xwalk { grid-template-columns: 1fr; }
+      #bw-christmas-markets-map .bw-xwalk-img { min-height: 170px; }
+      #bw-christmas-markets-map .bw-xwalk-text { padding: 18px 18px 20px; }
+      #bw-christmas-markets-map .bw-xwalk .bw-title { font-size: 24px; }
+      #bw-christmas-markets-map .bw-xwalk-btn { align-self: stretch; justify-content: center; }
+    }
   </style>
 
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
@@ -369,6 +414,32 @@
       </div>
     </div>
   </div>
+
+  <a class="bw-xwalk" id="bw-xwalk" hidden
+     href="https://www.walkofberlin.com/products/christmas-markets-mitte-audio-tour?utm_source=berlintools&amp;utm_medium=banner&amp;utm_campaign=store_bridge&amp;utm_content=christmas-markets-map"
+     target="_top" rel="noopener">
+    <span class="bw-xwalk-img">
+      <img src="https://app.berlinwalk.com/assets/christmas-markets-mitte-audio-tour/photos/french-cathedral-christmas-market-640.webp"
+           alt="The Christmas market at Gendarmenmarkt at dusk, with a lit church tower and a Christmas tree"
+           width="640" height="427" loading="lazy" decoding="async">
+    </span>
+    <span class="bw-xwalk-text">
+      <span class="bw-xwalk-kicker">Christmas walk · Self-guided audio</span>
+      <h2 class="bw-title">Walk the Mitte Christmas markets with me</h2>
+      <p class="bw-xwalk-lead">Several of the big central markets sit on one line. I recorded a walk from Gendarmenmarkt past the Humboldt Forum, the Lustgarten and the Rotes Rathaus to the World Clock on Alexanderplatz. Start when you like and stop for a Glühwein whenever you want.</p>
+      <p class="bw-xwalk-meta">About 3.3 km · 12 chapters in my voice · route card with a map</p>
+      <span class="bw-xwalk-btn">Try the first two chapters free →</span>
+    </span>
+  </a>
+  <script>
+    (function () {
+      try {
+        if (new URLSearchParams(location.search).get('surface') === 'tool-page') {
+          document.getElementById('bw-xwalk').hidden = false;
+        }
+      } catch (e) { /* old browser: banner stays hidden */ }
+    })();
+  </script>
 
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script>
