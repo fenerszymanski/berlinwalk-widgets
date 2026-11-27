@@ -105,6 +105,7 @@
     return g + 14 * ss((x - b) / (W - b));
   }
   function layerAt(l) {
+    if (!data) return null;
     var L = data.layers;
     for (var i = 0; i < L.length; i++) { if (l >= L[i].band[0] && (l < L[i].band[1] || (i === L.length - 1 && l <= L[i].band[1]))) return L[i]; }
     return L[L.length - 1];
@@ -147,7 +148,7 @@
   function arches(x0, x1, yb, yt, n, lit) {
     var w = (x1 - x0) / n, g = Math.min(4, w * 0.12);
     for (var i = 0; i < n; i++) {
-      var ax = x0 + i * w + g, aw = w - 2 * g, r = aw / 2;
+      var ax = x0 + i * w + g, aw = Math.max(0, w - 2 * g), r = aw / 2;
       ctx.beginPath(); ctx.moveTo(ax, yb); ctx.lineTo(ax, yt + r); ctx.arc(ax + r, yt + r, r, Math.PI, 0); ctx.lineTo(ax + aw, yb); ctx.closePath();
       ctx.fillStyle = lit ? '#F3E58A' : '#E9E0BE'; ctx.fill();
       ctx.lineWidth = 1; ctx.strokeStyle = '#a99f7a'; ctx.stroke();
@@ -174,7 +175,7 @@
   }
 
   function draw() {
-    if (!data) return;
+    if (!data || W < 40) return;
     ctx.clearRect(0, 0, W, H);
     ctx.fillStyle = CREAM; ctx.fillRect(0, 0, W, H);
     var yG = yL(42), x, i;
@@ -316,6 +317,7 @@
     probe.setAttribute('aria-valuetext', L.n + ' of ' + data.layers.length + ', ' + L.name);
   }
   function fillYear() {
+    if (!data) return;
     var yr = data.years.filter(function (q) { return q.id === year; })[0], el = document.getElementById('yearbox');
     el.innerHTML = '<b></b><br><span></span>'; el.firstChild.textContent = yr.label + ': ' + yr.title; el.lastChild.textContent = yr.blurb;
   }
@@ -332,11 +334,13 @@
   }
   var lastId = null;
   function refresh(force) {
+    if (!data) return;
     draw();
     var id = active().id;
     if (force || id !== lastId) { fillCard(); fillList(); lastId = id; }
   }
   function setLevel(v) {
+    if (!data) return;
     level = Math.max(0, Math.min(100, Math.round(v)));
     probe.value = level; refresh(false);
   }
@@ -368,7 +372,7 @@
 
   fetch('data.json').then(function (r) { return r.json(); }).then(function (d) { data = d; build(); })
     .catch(function () { document.getElementById('card').textContent = 'The data could not be loaded.'; });
-  window.addEventListener('resize', function () { size(); refresh(false); });
+  window.addEventListener('resize', function () { if (!data) return; size(); refresh(false); });
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { if (data) draw(); });
 })();
 </script>
