@@ -1,8 +1,8 @@
 {
-  "updatedAt": "2026-11-26T09:40:07.022Z",
+  "updatedAt": "2026-11-27T07:15:34.450Z",
   "source": "Wix Blog API",
   "popularSource": "Wix Blog metrics.views lifetime sort",
-  "totalPosts": 476,
+  "totalPosts": 477,
   "toolsTotal": 399,
   "bookingUrl": "https://www.walkofberlin.com/book-berlin-walking-tour/berlin-then-and-now",
   "navTopics": [
@@ -1802,6 +1802,23 @@
   ],
   "latest": [
     {
+      "title": "The Hill Made of a City: Where It Happened, Episode 8",
+      "slug": "where-it-happened-teufelsberg",
+      "path": "/post/where-it-happened-teufelsberg",
+      "url": "https://www.berlinwalk.com/post/where-it-happened-teufelsberg",
+      "excerpt": "Episode 8 of Where It Happened: an unfinished Nazi-era college buried under the rubble of bombed-out Berlin, the American and British listening station on the summit, and why the whole Teufelsberg is now a listed monument.",
+      "category": "Where It Happened",
+      "categorySlug": "where-it-happened",
+      "topic": "history-myths",
+      "topicLabel": "Berlin History & Myths",
+      "readTime": "13 min read",
+      "publishedDate": "2026-11-27T07:12:23.728Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_e93440ae028b4bbf8dfca41890e8bd27~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-teufelsberg-station-1600.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_e93440ae028b4bbf8dfca41890e8bd27~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/cover-teufelsberg-station-1600.jpg",
+      "alt": "The tower and radar domes of the former listening station on the Teufelsberg above autumn trees",
+      "relatedToolSlug": "berlin-viewpoint-finder"
+    },
+    {
       "title": "Schönhauser Allee Berlin: Walk Under the U2 Viaduct, or Ride Above It",
       "slug": "schonhauser-allee-berlin",
       "path": "/post/schonhauser-allee-berlin",
@@ -1987,23 +2004,6 @@
       "thumb": "https://static.wixstatic.com/media/5a08a3_8acbb84536bd46b6ae19b2cdcef6b576~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/potsdamer-platz-pair.jpg",
       "alt": "Potsdamer Platz and the octagon of Leipziger Platz from above in 1928 and 2026, side by side at the same scale",
       "relatedToolSlug": ""
-    },
-    {
-      "title": "Alexanderplatz History: What Stood on the Square and What to Look For Today",
-      "slug": "alexanderplatz-history",
-      "path": "/post/alexanderplatz-history",
-      "url": "https://www.berlinwalk.com/post/alexanderplatz-history",
-      "excerpt": "The World Clock is where most visitors stop. Here is what stood on Alexanderplatz before it, what was lost, and how to read the square's layers in 30 minutes.",
-      "category": "Tourist Tips",
-      "categorySlug": "tourist-tips",
-      "topic": "first-day",
-      "topicLabel": "First Day in Berlin",
-      "readTime": "7 min read",
-      "publishedDate": "2026-11-17T13:50:06.863Z",
-      "image": "https://static.wixstatic.com/media/5a08a3_183b6997f36441aa8464ff02ab520344~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/tv-tower-over-alexanderplatz-viaduct-dusk.jpg",
-      "thumb": "https://static.wixstatic.com/media/5a08a3_183b6997f36441aa8464ff02ab520344~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/tv-tower-over-alexanderplatz-viaduct-dusk.jpg",
-      "alt": "The Berlin TV Tower above the yellow-brick Stadtbahn viaduct at Alexanderplatz at dusk",
-      "relatedToolSlug": "alexanderplatz-time-layers"
     }
   ]
 }
