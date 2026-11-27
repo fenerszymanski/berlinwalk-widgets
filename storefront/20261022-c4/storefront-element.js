@@ -345,7 +345,7 @@
     import(asset('catalog-layer.js')), import(asset('editorial-helpers.js')), import(asset('street-configurator.js')),
     ...['data/categories.json','data/presentation.json','data/native-bindings.json','data/external-products.json'].map(path => fetch(path==='data/presentation.json'?new URL('data/presentation.json',base).href:asset(path),path==='data/presentation.json'?{cache:'no-cache'}:undefined)/* gallery-fresh-v2 (24 Nov 2026): one fixed address that the browser re-checks on every page view; an unchanged file answers 304 with no body instead of 73 KB, a changed one is fetched at once. v1 used a new address each time and could never be reused. */.then(response => {if (!response.ok) throw Error('CATALOGUE_METADATA_UNAVAILABLE');return response.json();})),
     import(asset('funnel.js')).then(m=>{import(asset('campaign-session.js')).catch(()=>{});return m;}).catch(() => null),   // measurement must never block the shop
-    import(new URL('../../js/store-navigation.js?v=berliner-sprueche-20261125-v1',base).href),
+    import(new URL('../../js/store-navigation.js?v=berlin-sign-20261127-v1',base).href),
     import(asset('gift.js')).catch(()=>null),
     import(asset('gift-week.js')),
     import(asset('black-friday.js')),

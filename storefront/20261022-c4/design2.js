@@ -84,7 +84,7 @@ const GIFT_GUIDE_SECTIONS = Object.freeze([
   {id:'wear',offer:true,ids:['hoodie-tempelhof-sf500','shirt-berlin-in-pink-classic','hoodie-schoenhauser-allee-sf500','shirt-currywurst-classic','hoodie-spaeti-sf500','tote-berlin-in-pink','hoodie-berlin-uhr-sf500','tote-zurueckbleiben-bitte'],more:'clothing',
    en:{title:'Wear Berlin',text:'My Berlin designs on T-shirts, fleece hoodies and tote bags. Free shipping to Germany, the EU, the UK and the US.',more:'All clothing'},
    de:{title:'Berlin zum Anziehen',text:'Meine Berliner Motive auf T-Shirts, Fleece-Hoodies und Stoffbeuteln. Kostenloser Versand nach Deutschland, in die EU, nach Großbritannien und in die USA.',more:'Alle Kleidung'}},
-  {id:'wall',offer:true,ids:['pr-berlin-2027-wall-calendar','ed-print-02-pink','ed-print-01-tempelhof','ed-print-09-teufelsberg','ed-print-04-spaeti','pr-kottbusser-tor','wc','pr-berolina-modernist'],more:'print',
+  {id:'wall',offer:true,ids:['berlin-street-sign','pr-berlin-2027-wall-calendar','ed-print-02-pink','ed-print-01-tempelhof','ed-print-09-teufelsberg','ed-print-04-spaeti','pr-kottbusser-tor','wc'],more:'print',   // 27 Nov 2026 (Yusuf: "hediye rehberine de ekle"): the street sign leads the shelf; Berolina left it (still on sale)
    en:{title:'For their wall',text:'Posters of places they know, printed to order. Frames not included.',more:'All posters'},
    de:{title:'Für ihre Wand',text:'Poster von Orten, die sie kennen, auf Bestellung gedruckt. Ohne Rahmen.',more:'Alle Poster'}},
   {id:'email',ids:['ys-digital-file','ys1979-digital-file','au-christmas-mitte','trio'],chip:{de:'Per E-Mail'},
@@ -116,6 +116,7 @@ const GIFT_GUIDE = Object.freeze({
     {until:'2026-12-09T00:00:00+01:00',en:['8 December','framed and canvas prints'],de:['8. Dezember','gerahmte Drucke, Leinwände']},
     {until:'2026-12-11T00:00:00+01:00',en:['10 December','2027 calendars'],de:['10. Dezember','Kalender für 2027']},
     {until:'2026-12-13T00:00:00+01:00',en:['12 December','clothing and tote bags'],de:['12. Dezember','Kleidung und Stoffbeutel']},
+    {until:'2026-12-15T00:00:00+01:00',en:['14 December','street signs'],de:['14. Dezember','Straßenschilder']},   // gelato-metal route, latest arrival 23 Dec (27 Nov 2026)
     {until:'2026-12-16T00:00:00+01:00',en:['15 December','posters and street prints'],de:['15. Dezember','Poster und Straßen-Drucke']}
   ]),
   festiveUntil:'2026-12-27T00:00:00+01:00',sections:GIFT_GUIDE_SECTIONS

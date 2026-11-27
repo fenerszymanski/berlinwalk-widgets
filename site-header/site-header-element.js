@@ -199,6 +199,11 @@ const BW_HEADER_STORE_DESIGN2_EN = [
         "href": "https://walkofberlin.com/product-page/your-west-berlin-street-in-1979-personalised-aerial-print"
       },
       {
+        "label": "Your name on a street sign",
+        "de": "Dein Name als Straßenschild",
+        "href": "https://walkofberlin.com/product-page/berlin-street-sign-with-your-name"
+      },
+      {
         "label": "1928 digital file",
         "de": "1928 als digitale Datei",
         "href": "https://walkofberlin.com/product-page/your-berlin-street-in-1928-digital-file"
@@ -350,6 +355,11 @@ const BW_HEADER_STORE_DESIGN2_DE = [
         "label": "Deine West-Berliner Straße 1979",
         "de": "Deine West-Berliner Straße 1979",
         "href": "https://walkofberlin.com/de/product-page/your-west-berlin-street-in-1979-personalised-aerial-print"
+      },
+      {
+        "label": "Dein Name als Straßenschild",
+        "de": "Dein Name als Straßenschild",
+        "href": "https://walkofberlin.com/de/product-page/berlin-street-sign-with-your-name"
       },
       {
         "label": "1928 als digitale Datei",
