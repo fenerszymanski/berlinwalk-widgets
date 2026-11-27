@@ -92,14 +92,15 @@ const XMAS_HOODIE_TEXT = Object.freeze({
 });
 const GIFT_GUIDE_SECTIONS = Object.freeze([
   // One row since 24 Nov 2026 (Yusuf: "bu gazete işi anlaşılmıyor burada ... tek satıra çevirebiliriz ... 1928, 1979, 1928 framed ve takvimi koyabiliriz"). The newspapers, the 1928 canvas and the framed 1979 print stay on sale; they left this shelf only.
-  {id:'personal',ids:['ys','ys1979','ys-framed','dein-berlin-2027'],voucher:true,
+  // 27 Nov 2026 (Yusuf chose A: "5 columns"): the street sign is card 5 after his four; storefront.css gives this shelf 5 columns above 1100 px.
+  {id:'personal',ids:['ys','ys1979','ys-framed','dein-berlin-2027','berlin-street-sign'],voucher:true,
    en:{title:'Their own Berlin',text:'Made from their address or their places.'},
    de:{title:'Ihr eigenes Berlin',text:'Aus ihrer Adresse oder ihren Orten gemacht.'}},
   {id:'xmas',offer:true,ids:XMAS_HOODIES,more:'hoodies',en:XMAS_HOODIE_TEXT.en,de:XMAS_HOODIE_TEXT.de},
   {id:'wear',offer:true,ids:['hoodie-tempelhof-sf500','shirt-berlin-in-pink-classic','hoodie-schoenhauser-allee-sf500','shirt-currywurst-classic','hoodie-spaeti-sf500','tote-berlin-in-pink','hoodie-berlin-uhr-sf500','tote-zurueckbleiben-bitte'],more:'clothing',
    en:{title:'Wear Berlin',text:'My Berlin designs on T-shirts, fleece hoodies and tote bags. Free shipping to Germany, the EU, the UK and the US.',more:'All clothing'},
    de:{title:'Berlin zum Anziehen',text:'Meine Berliner Motive auf T-Shirts, Fleece-Hoodies und Stoffbeuteln. Kostenloser Versand nach Deutschland, in die EU, nach Großbritannien und in die USA.',more:'Alle Kleidung'}},
-  {id:'wall',offer:true,ids:['berlin-street-sign','pr-berlin-2027-wall-calendar','ed-print-02-pink','ed-print-01-tempelhof','ed-print-09-teufelsberg','ed-print-04-spaeti','pr-kottbusser-tor','wc'],more:'print',   // 27 Nov 2026 (Yusuf: "hediye rehberine de ekle"): the street sign leads the shelf; Berolina left it (still on sale)
+  {id:'wall',offer:true,ids:['pr-berlin-2027-wall-calendar','ed-print-02-pink','ed-print-01-tempelhof','ed-print-09-teufelsberg','ed-print-04-spaeti','pr-kottbusser-tor','wc','pr-berolina-modernist'],more:'print',
    en:{title:'For their wall',text:'Posters of places they know, printed to order. Frames not included.',more:'All posters'},
    de:{title:'Für ihre Wand',text:'Poster von Orten, die sie kennen, auf Bestellung gedruckt. Ohne Rahmen.',more:'Alle Poster'}},
   {id:'email',ids:['ys-digital-file','ys1979-digital-file','au-christmas-mitte','trio'],chip:{de:'Per E-Mail'},

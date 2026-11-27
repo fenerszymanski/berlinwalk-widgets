@@ -878,6 +878,8 @@ button.ys-words-tag:focus-visible{outline:2px solid var(--green);outline-offset:
 :host([design2]) .xg-shelf[data-xg-section="wear"] .d2-card img.tile-photo{object-fit:contain;width:100%;height:100%;padding:0;inset:0}
 :host([design2]) .xg-shelf[data-xg-section="email"] .d2-card .tile{aspect-ratio:3/4}
 :host([design2]) .xg-shelf[data-xg-section="email"] .d2-card img.tile-photo{object-fit:cover;width:100%;height:100%}
+/* Personal gift shelf: five product cards in one row on desktop (27 Nov 2026, Yusuf chose option A); 3 and 2 columns below as before. The voucher card keeps its full-width row. */
+@media(min-width:1101px){:host([design2]) .xg-shelf[data-xg-section="personal"] .d2-grid{grid-template-columns:repeat(5,minmax(0,1fr));gap:32px 18px}}
 /* Christmas hoodies shelf (26 Nov 2026): six cards, three across above phone width, two on phones; model photos (4:5) fill the tile. */
 :host([design2]) [data-d2-xmas] .d2-grid,:host([design2]) .xg-shelf[data-xg-section="xmas"] .d2-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
 :host([design2]) [data-d2-xmas] .d2-card .tile,:host([design2]) .xg-shelf[data-xg-section="xmas"] .d2-card .tile{aspect-ratio:4/5;background:#fff;padding:0}
