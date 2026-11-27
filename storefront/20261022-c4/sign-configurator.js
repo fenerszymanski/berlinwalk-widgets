@@ -207,6 +207,8 @@ export function mountSign(host, s, api) {
   }
   const update = () => { refresh(); draw(); };
   fields();
+  // The store re-renders the page after an add: keep the confirmation and the cart link until the buyer edits the sign again.
+  if (s.added) { $('[data-sg-added]').textContent = t('Added to your cart'); $('[data-sg-cart]').hidden = false; }
   host.querySelectorAll('[data-sg]').forEach(el => el.addEventListener('input', () => { const k = el.dataset.sg; set(k, el.value); s.touched[k] = true; s.added = false; $('[data-sg-added]').textContent = ''; update(); }));
   host.querySelectorAll('[data-sg-arrow]').forEach(el => el.addEventListener('change', () => { s[el.dataset.sgArrow].arrow = el.value; s.touched[el.dataset.sgArrow] = true; update(); }));
   host.querySelectorAll('[data-sg-occasion]').forEach(b => b.addEventListener('click', () => { occasion(b.dataset.sgOccasion); fields(); update(); api.track?.('sign-occasion', {occasion: s.occasion}); }));
