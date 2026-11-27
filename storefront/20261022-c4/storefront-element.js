@@ -1016,7 +1016,11 @@
       if(this.ysIs1979?.()&&!this.ysMod1979)return '';
       const alias=this.productAlias();let product=this.model.products.find(p=>p.wixProductId===this.productViewId())||(!alias?this.unavailableProduct():null);
       if(alias&&(!product||!this.ysMod||!this.ysEntryAvailable()))return this.configuredUnavailableBody();
-      if(this.signMod&&this.context.productId===this.signMod.SIGN_ID){if(!product||!this.catalogue.products.some(p=>p.productId===this.signMod.SIGN_ID&&p.visible!==false))return this.configuredUnavailableBody();return this.signMod.signBody({german:this.campaignGerman(),price:money(product.currency,product.priceCents/100),priceHtml:this.campaignPrice(product),legal:this.legalLinks()+this.withdrawButton()});}
+      if(this.signMod&&this.context.productId===this.signMod.SIGN_ID){
+        if(!product||!this.catalogue.products.some(p=>p.productId===this.signMod.SIGN_ID&&p.visible!==false))return this.configuredUnavailableBody();
+        const photos=(product.gallery||[]).map(({image,alt})=>({src:this.productMedia(image),alt}));
+        return this.signMod.signBody({german:this.campaignGerman(),price:money(product.currency,product.priceCents/100),priceHtml:this.campaignPrice(product),legal:this.legalLinks()+this.withdrawButton(),photos});
+      }
       if(this.context.productId===CALENDAR_PRODUCT_ID){if(!this.calendarMod||!product||!this.catalogue.products.some(p=>p.productId===this.calendarMod.CALENDAR_ID&&p.visible!==false))return this.configuredUnavailableBody();return this.calendarMod.calendarBody({german:this.campaignGerman(),price:money(product.currency,product.priceCents/100),priceHtml:this.campaignPrice(product),bfActive:this.bfActive(),asset,legal:this.legalLinks()+this.withdrawButton()});}
       if(!product)return '';
       const german=this.campaignGerman()?this.navigation.GIFT_CARDS_DE?.[product.id]:null;if(german)Object.assign(product,{name:german.name,place:german.place});

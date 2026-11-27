@@ -24,6 +24,8 @@ const DE = new Map(Object.entries({
     'Bis zu drei Zeilen, wie die Legendentafeln unter Berliner Straßenschildern. Alle drei leer lassen für ein Schild ohne Tafel.',
   'Line': 'Zeile', 'Your sign': 'Dein Schild', 'Add to cart': 'In den Warenkorb', 'View cart': 'Zum Warenkorb', 'Added to your cart': 'Im Warenkorb',
   'On the wall': 'An der Wand', 'Close up': 'Nah', 'Illustrated preview': 'Gezeichnete Vorschau',
+  'Product examples': 'Produktbeispiele', 'Example image': 'Beispielbild',
+  'Styling example · AI visualization': 'Gestaltungsbeispiel · KI-Visualisierung',
   'Drawn to scale: 45.7 x 30.5 cm.': 'Maßstabsgetreu gezeichnet: 45,7 x 30,5 cm.',
   'Type the name for your sign.': 'Schreib den Namen für dein Schild.',
   'The name is too long for the sign. Shorten it or leave out the street word.': 'Der Name ist zu lang für das Schild. Kürz ihn oder lass das Straßenwort weg.',
@@ -110,6 +112,12 @@ const CSS = `.sg-wrap{padding-block:28px 40px}.sg-layout{display:grid;grid-templ
 .sg-heading .lead{margin:0 0 10px;font-size:17px;line-height:1.45}.sg-price{font-size:24px;font-weight:500;color:var(--green,#123d18)}
 .sg-preview{grid-column:1;grid-row:1/span 6;position:sticky;top:12px}.sg-stage{background:#e4dfd4;border-radius:6px;overflow:hidden}
 .sg-stage canvas{display:block;width:100%;height:auto}.sg-views{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap;align-items:center}
+.sg-stage .sg-photo{display:block;width:100%;aspect-ratio:16/11;object-fit:contain}
+.sg-stage [hidden]{display:none}.sg-photos{display:flex;gap:8px;margin-top:10px}
+.sg-photos button{padding:2px;border:2px solid transparent;border-radius:6px;background:transparent}
+.sg-photos button[aria-pressed=true]{border-color:var(--green,#123d18)}
+.sg-photos img{display:block;width:60px;height:60px;border-radius:3px}
+.sg-photo-note{font-size:12px;color:var(--muted,#5a6455);margin:6px 0 0}
 .sg-views button{min-height:40px;border:1.5px solid var(--green,#123d18);background:transparent;border-radius:30px;padding:6px 14px;font-size:13px;font-weight:600}
 .sg-views button[aria-pressed=true]{background:var(--green,#123d18);color:var(--cream,#fafaf5)}.sg-note{font-size:12px;color:var(--muted,#5a6455);margin:6px 0 0}
 .sg-step{grid-column:2;border-top:1px solid var(--line,#e2e2da);padding-top:18px;margin-top:10px}
@@ -130,16 +138,17 @@ const CSS = `.sg-wrap{padding-block:28px 40px}.sg-layout{display:grid;grid-templ
 .sg-mini{display:block;position:sticky;top:0;z-index:3;margin:0 -16px;padding:6px 16px;background:#fafaf5;border-bottom:1px solid var(--line,#e2e2da);box-shadow:0 8px 14px -12px #123d1855;visibility:hidden;height:0;overflow:hidden}.sg-mini.is-on{visibility:visible;height:auto;margin-bottom:10px}
 .sg-mini canvas{display:block;width:min(48vw,190px);height:auto;margin:0 auto}.sg-field input,.sg-row input{scroll-margin-top:160px}}`;
 
-export function signBody({german, price, priceHtml, legal = ''}) {
+export function signBody({german, price, priceHtml, legal = '', photos = []}) {
   const t = s => esc(signText(s, german));
   if (german) price = String(price).replace(/^€([0-9]+)\.([0-9]{2})$/, '$1,$2 €');
   const input = (id, label, key, max, extra = '') => `<label class="sg-field" for="${id}">${t(label)}<span class="sg-count" data-sg-count="${key}"></span><input id="${id}" data-sg="${key}" maxlength="${max + 8}" autocomplete="off" spellcheck="false" ${extra}></label>`;
   const corner = side => `<div class="sg-corner"><label class="sg-field" for="sg-${side}">${t(side === 'left' ? 'Bottom left' : 'Bottom right')}<span class="sg-count" data-sg-count="${side}"></span></label><div class="sg-row"><input id="sg-${side}" data-sg="${side}" maxlength="${L.corner + 8}" autocomplete="off" spellcheck="false"><select aria-label="${t('Arrow')} · ${t(side === 'left' ? 'Bottom left' : 'Bottom right')}" data-sg-arrow="${side}"><option value="none">${t('no arrow')}</option><option value="left">${t('← left')}</option><option value="right">${t('right →')}</option></select></div></div>`;
   return `<div class="wrap sg-wrap bw-raw" lang="${german ? 'de' : 'en'}" data-sign-host><style>${CSS}</style><div class="sg-layout">
 <div class="sg-heading"><p class="sg-kicker">${t('PERSONALISED BERLIN STREET SIGN · 45 x 30 CM')}</p><h1>${t('Your name on a Berlin street sign')}</h1><p class="lead">${t('White aluminium, black letters, and the plaque below for your story.')}</p><span class="sg-price">${priceHtml || esc(price)}</span></div>
-<div class="sg-mini" data-sg-mini aria-hidden="true"><canvas data-sg-mini-canvas width="780" height="530"></canvas></div><section class="sg-preview" aria-label="${t('Illustrated preview')}"><div class="sg-stage"><canvas data-sg-canvas width="1600" height="1100" role="img" aria-label="${t('Illustrated preview')}"></canvas></div>
+<div class="sg-mini" data-sg-mini aria-hidden="true"><canvas data-sg-mini-canvas width="780" height="530"></canvas></div><section class="sg-preview" aria-label="${t('Illustrated preview')}"><div class="sg-stage"><canvas data-sg-canvas width="1600" height="1100" role="img" aria-label="${t('Illustrated preview')}"></canvas>${photos.length ? '<img class="sg-photo" data-sg-photo alt="" hidden>' : ''}</div>
 <div class="sg-views"><button type="button" data-sg-view="wall" aria-pressed="true">${t('On the wall')}</button><button type="button" data-sg-view="close" aria-pressed="false">${t('Close up')}</button><span class="sg-note" data-sg-example hidden>${t('Example name in grey. Type yours.')}</span></div>
-<p class="sg-note">${t('Illustrated preview')} · ${t('Drawn to scale: 45.7 x 30.5 cm.')}</p></section>
+<p class="sg-note" data-sg-preview-note>${t('Illustrated preview')} · ${t('Drawn to scale: 45.7 x 30.5 cm.')}</p>
+${photos.length ? `<div class="sg-photos" role="group" aria-label="${t('Product examples')}">${photos.map(({src,alt}, i) => `<button type="button" data-sg-photo-alt="${esc(alt)}" aria-label="${t('Example image')} ${i + 1}" aria-pressed="false"><img src="${esc(src)}" alt="" width="60" height="60" loading="lazy" decoding="async"></button>`).join('')}</div><p class="sg-photo-note" data-sg-photo-note hidden>${t('Styling example · AI visualization')}</p>` : ''}</section>
 <section class="sg-step"><h2><span class="sg-num">1</span>${t('What is it for?')}</h2><p class="sg-help">${t('Pick one and I fill in an example. You can change every word.')}</p><div class="sg-occasions" role="radiogroup" aria-label="${t('What is it for?')}">${Object.entries(OCCASIONS).map(([k, o]) => `<button type="button" role="radio" aria-checked="false" data-sg-occasion="${k}">${t(o.label)}</button>`).join('')}</div></section>
 <section class="sg-step"><h2><span class="sg-num">2</span>${t('The sign')}</h2>${input('sg-name', 'Name on the sign', 'name', L.name)}<div class="sg-chips"><span>${t('Add a street word')}</span>${STREET_WORDS.map(w => `<button type="button" data-sg-word="${w}">-${w}</button>`).join('')}</div>
 ${input('sg-ortsteil', 'Ortsteil (the small line at the top)', 'ortsteil', L.ortsteil, 'list="sg-ortsteile"')}<datalist id="sg-ortsteile">${ORTSTEILE.map(o => `<option value="${esc(o)}">`).join('')}</datalist><p class="sg-help">${t('Leave it empty for no line.')}</p>
@@ -153,6 +162,8 @@ ${input('sg-ortsteil', 'Ortsteil (the small line at the top)', 'ortsteil', L.ort
 
 export function mountSign(host, s, api) {
   const german = !!api.german, t = x => signText(x, german), $ = q => host.querySelector(q);
+  const photo = $('[data-sg-photo]'), photoButtons = [...host.querySelectorAll('[data-sg-photo-alt]')];
+  let selectedPhoto = null;
   let disposed = false, frame = 0;
   s.lang ??= german ? 'de' : 'en';
   s.left ??= {text: '', arrow: 'none'}; s.right ??= {text: '', arrow: 'none'}; s.caption ??= ['', '', '']; s.name ??= ''; s.ortsteil ??= '';
@@ -180,7 +191,7 @@ export function mountSign(host, s, api) {
     const why = !c.ok ? t(c.why).replace('{chars}', c.chars || '').replace('{field}', t({name: 'name', ortsteil: 'Ortsteil', 'left.text': 'bottom left', 'right.text': 'bottom right'}[c.field] || 'plaque line')) : api.available() ? '' : t('This sign is not on sale yet.');
     const box = $('[data-sg-why]'); box.textContent = why; box.classList.toggle('is-error', !c.ok && !c.wait && c.why !== 'Type the name for your sign.');
     host.querySelectorAll('[data-sg-occasion]').forEach(b => b.setAttribute('aria-checked', String(b.dataset.sgOccasion === s.occasion)));
-    host.querySelectorAll('[data-sg-view]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.sgView === s.view)));
+    host.querySelectorAll('[data-sg-view]').forEach(b => b.setAttribute('aria-pressed', String(!selectedPhoto && b.dataset.sgView === s.view)));
     for (const k of keys) {
       const v = cleanSignText(get(k)), el = $(`[data-sg="${k}"]`);
       $(`[data-sg-count="${k}"]`).textContent = `${v.length}/${max[k]}`;
@@ -189,7 +200,7 @@ export function mountSign(host, s, api) {
     }
     const shown = cleanSignText(s.name) || OCCASIONS[s.occasion]?.name || '';
     $('[data-sg-summary]').textContent = [t('Street sign 45 x 30 cm'), shown].filter(Boolean).join(' · ');
-    $('[data-sg-example]').hidden = !!cleanSignText(s.name);
+    $('[data-sg-example]').hidden = !!selectedPhoto || !!cleanSignText(s.name);
   }
   function draw() {
     cancelAnimationFrame(frame);
@@ -206,17 +217,32 @@ export function mountSign(host, s, api) {
     });
   }
   const update = () => { refresh(); draw(); };
+  function showPhoto(button = null) {
+    if (!photo || button === selectedPhoto) return;
+    selectedPhoto = button;
+    if (button) {
+      photo.src = button.querySelector('img').src;
+      photo.alt = button.dataset.sgPhotoAlt;
+    }
+    photo.hidden = !button;
+    $('[data-sg-canvas]').hidden = !!button;
+    $('[data-sg-preview-note]').hidden = !!button;
+    $('[data-sg-photo-note]').hidden = !button;
+    photoButtons.forEach(b => b.setAttribute('aria-pressed', String(b === button)));
+  }
+  const edit = () => { showPhoto(); update(); };
   fields();
   // The store re-renders the page after an add: keep the confirmation and the cart link until the buyer edits the sign again.
   if (s.added) { $('[data-sg-added]').textContent = t('Added to your cart'); $('[data-sg-cart]').hidden = false; }
-  host.querySelectorAll('[data-sg]').forEach(el => el.addEventListener('input', () => { const k = el.dataset.sg; set(k, el.value); s.touched[k] = true; s.added = false; $('[data-sg-added]').textContent = ''; update(); }));
-  host.querySelectorAll('[data-sg-arrow]').forEach(el => el.addEventListener('change', () => { s[el.dataset.sgArrow].arrow = el.value; s.touched[el.dataset.sgArrow] = true; update(); }));
-  host.querySelectorAll('[data-sg-occasion]').forEach(b => b.addEventListener('click', () => { occasion(b.dataset.sgOccasion); fields(); update(); api.track?.('sign-occasion', {occasion: s.occasion}); }));
-  host.querySelectorAll('[data-sg-view]').forEach(b => b.addEventListener('click', () => { s.view = b.dataset.sgView; update(); }));
+  host.querySelectorAll('[data-sg]').forEach(el => el.addEventListener('input', () => { const k = el.dataset.sg; set(k, el.value); s.touched[k] = true; s.added = false; $('[data-sg-added]').textContent = ''; edit(); }));
+  host.querySelectorAll('[data-sg-arrow]').forEach(el => el.addEventListener('change', () => { s[el.dataset.sgArrow].arrow = el.value; s.touched[el.dataset.sgArrow] = true; edit(); }));
+  host.querySelectorAll('[data-sg-occasion]').forEach(b => b.addEventListener('click', () => { occasion(b.dataset.sgOccasion); fields(); edit(); api.track?.('sign-occasion', {occasion: s.occasion}); }));
+  host.querySelectorAll('[data-sg-view]').forEach(b => b.addEventListener('click', () => { s.view = b.dataset.sgView; edit(); }));
+  photoButtons.forEach(b => b.addEventListener('click', () => { showPhoto(b); refresh(); }));
   host.querySelectorAll('[data-sg-word]').forEach(b => b.addEventListener('click', () => {
     const base = cleanSignText(s.name).replace(new RegExp(`[- ](${STREET_WORDS.join('|')})$`, 'i'), '').replace(/ /g, '-');
     if (!base) { $('[data-sg="name"]').focus(); return; }
-    s.name = `${base}-${b.dataset.sgWord}`; s.touched.name = true; $('[data-sg="name"]').value = s.name; update();
+    s.name = `${base}-${b.dataset.sgWord}`; s.touched.name = true; $('[data-sg="name"]').value = s.name; edit();
   }));
   $('[data-sg-add]').addEventListener('click', async () => {
     const c = signCheck(s);
