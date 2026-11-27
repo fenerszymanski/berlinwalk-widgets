@@ -1,0 +1,2923 @@
+{
+  "id": "E08-teufelsberg",
+  "slug": "teufelsberg",
+  "title": "The Hill Made of a City",
+  "episodeUri": "spotify:episode:629AvgAtl3a6VkIlMR00JT",
+  "audioUrl": "https://anchor.fm/s/1186f4668/podcast/play/128337877/https%3A%2F%2Fd3ctxlq1ktw2nl.cloudfront.net%2Fstaging%2F2026-9-29%2F0bd50005-6101-0e0a-915d-b5544392a25e.mp3",
+  "audioBytes": 21957852,
+  "cover": "img/cover-360.jpg",
+  "show": {
+    "title": "Where It Happened",
+    "artist": "Walk of Berlin",
+    "spotifyUrl": "https://open.spotify.com/show/4hd8BvMRs7dwdogXr3mzzG",
+    "rssUrl": "https://anchor.fm/s/1186f4668/podcast/rss"
+  },
+  "duration": 1316.52,
+  "chapters": [
+    {
+      "title": "Climb the Teufelsberg",
+      "t": 0
+    },
+    {
+      "title": "The faculty that was never finished",
+      "t": 91
+    },
+    {
+      "title": "Twenty-two years of rubble",
+      "t": 169
+    },
+    {
+      "title": "A tunnel and a new site",
+      "t": 391
+    },
+    {
+      "title": "Field Station Berlin",
+      "t": 469
+    },
+    {
+      "title": "After the listening",
+      "t": 908
+    },
+    {
+      "title": "Investors, forest and a university plan",
+      "t": 953
+    },
+    {
+      "title": "A monument in three layers",
+      "t": 1101
+    },
+    {
+      "title": "Where to stand today",
+      "t": 1223
+    }
+  ],
+  "phrases": [
+    {
+      "t0": 0.3,
+      "t1": 2.78,
+      "text": "Climb to the top of the Teufelsberg,",
+      "kind": "story",
+      "para": 0,
+      "part": "p01"
+    },
+    {
+      "t0": 2.86,
+      "t1": 7.42,
+      "text": "a hill in the Grunewald forest in the district of Charlottenburg-Wilmersdorf,",
+      "kind": "story",
+      "para": 0,
+      "part": "p01"
+    },
+    {
+      "t0": 7.46,
+      "t1": 9.1,
+      "text": "in the western part of Berlin.",
+      "kind": "story",
+      "para": 0,
+      "part": "p01"
+    },
+    {
+      "t0": 9.74,
+      "t1": 13.74,
+      "text": "At the summit stand the domes of a Cold War listening station.",
+      "kind": "story",
+      "para": 0,
+      "part": "p01"
+    },
+    {
+      "t0": 14.38,
+      "t1": 16.7,
+      "text": "Stand there for a moment and think about what",
+      "kind": "story",
+      "para": 0,
+      "part": "p01"
+    },
+    {
+      "t0": 16.78,
+      "t1": 19.58,
+      "text": "the ground is made of. It is rubble.",
+      "kind": "story",
+      "para": 0,
+      "part": "p01"
+    },
+    {
+      "t0": 20.14,
+      "t1": 23.18,
+      "text": "The hill is the wreckage of bombed houses,",
+      "kind": "story",
+      "para": 0,
+      "part": "p01"
+    },
+    {
+      "t0": 23.22,
+      "t1": 26.7,
+      "text": "tipped here in the years after the Second World War, and since",
+      "kind": "story",
+      "para": 0,
+      "part": "p01"
+    },
+    {
+      "t0": 26.82,
+      "t1": 30.42,
+      "text": "then it has been shaped into a green area with trees.",
+      "kind": "story",
+      "para": 0,
+      "part": "p01"
+    },
+    {
+      "t0": 30.78,
+      "t1": 33.66,
+      "text": "Deep inside the hill, under all that rubble,",
+      "kind": "story",
+      "para": 0,
+      "part": "p01"
+    },
+    {
+      "t0": 33.74,
+      "t1": 35.9,
+      "text": "lies a building that was never finished.",
+      "kind": "story",
+      "para": 0,
+      "part": "p01"
+    },
+    {
+      "t0": 36.38,
+      "t1": 38.38,
+      "text": "From the top you cannot see it.",
+      "kind": "story",
+      "para": 0,
+      "part": "p01"
+    },
+    {
+      "t0": 38.62,
+      "t1": 41.26,
+      "text": "The state heritage office says it is there,",
+      "kind": "story",
+      "para": 0,
+      "part": "p01"
+    },
+    {
+      "t0": 41.3,
+      "t1": 44.54,
+      "text": "and the story of this hill starts with that building,",
+      "kind": "story",
+      "para": 0,
+      "part": "p01"
+    },
+    {
+      "t0": 44.62,
+      "t1": 46.14,
+      "text": "not with the domes.",
+      "kind": "story",
+      "para": 0,
+      "part": "p01"
+    },
+    {
+      "t0": 46.66,
+      "t1": 49.7,
+      "text": "The hill takes its name from the Teufelssee,",
+      "kind": "story",
+      "para": 1,
+      "part": "p02"
+    },
+    {
+      "t0": 49.74,
+      "t1": 52.34,
+      "text": "a lake that lies to its south in the forest.",
+      "kind": "story",
+      "para": 1,
+      "part": "p02"
+    },
+    {
+      "t0": 52.9,
+      "t1": 55.7,
+      "text": "Teufelsberg means Devil's Mountain.",
+      "kind": "story",
+      "para": 1,
+      "part": "p02"
+    },
+    {
+      "t0": 56.18,
+      "t1": 59.26,
+      "text": "Before the name was settled, German Wikipedia says,",
+      "kind": "story",
+      "para": 1,
+      "part": "p02"
+    },
+    {
+      "t0": 59.46,
+      "t1": 62.98,
+      "text": "the place was known as the rubble hill by the lake,",
+      "kind": "story",
+      "para": 1,
+      "part": "p02"
+    },
+    {
+      "t0": 63.02,
+      "t1": 67.62,
+      "text": "and the official name came only in 1972, when the tipping ended.",
+      "kind": "story",
+      "para": 1,
+      "part": "p02"
+    },
+    {
+      "t0": 68.26,
+      "t1": 71.94,
+      "text": "Its summit sits about 120 metres above sea level.",
+      "kind": "story",
+      "para": 1,
+      "part": "p02"
+    },
+    {
+      "t0": 72.42,
+      "t1": 77.46,
+      "text": "The state heritage office's newsletter calls the hill the highest artificially made",
+      "kind": "story",
+      "para": 1,
+      "part": "p02"
+    },
+    {
+      "t0": 77.5,
+      "t1": 79.94,
+      "text": "elevation in the western part of the city.",
+      "kind": "story",
+      "para": 1,
+      "part": "p02"
+    },
+    {
+      "t0": 80.58,
+      "t1": 82.82,
+      "text": "The building under it came first, though.",
+      "kind": "story",
+      "para": 1,
+      "part": "p02"
+    },
+    {
+      "t0": 83.22,
+      "t1": 87.62,
+      "text": "Its foundation stone was laid in 1937, in the years when",
+      "kind": "story",
+      "para": 1,
+      "part": "p02"
+    },
+    {
+      "t0": 87.66,
+      "t1": 90.82,
+      "text": "the Nazi state had big plans for the city.",
+      "kind": "story",
+      "para": 1,
+      "part": "p02"
+    },
+    {
+      "t0": 91.34,
+      "t1": 96.3,
+      "text": "The building was the Wehrtechnische Fakultät, a military technical faculty.",
+      "kind": "story",
+      "para": 2,
+      "part": "p03"
+    },
+    {
+      "t0": 96.86,
+      "t1": 100.38,
+      "text": "Its name means a faculty of defence technology,",
+      "kind": "story",
+      "para": 2,
+      "part": "p03"
+    },
+    {
+      "t0": 100.5,
+      "t1": 103.26,
+      "text": "and that is the first clue to its purpose.",
+      "kind": "story",
+      "para": 2,
+      "part": "p03"
+    },
+    {
+      "t0": 103.58,
+      "t1": 107.5,
+      "text": "In the office's own words it was National Socialist,",
+      "kind": "story",
+      "para": 2,
+      "part": "p03"
+    },
+    {
+      "t0": 107.54,
+      "t1": 109.02,
+      "text": "and it was never completed.",
+      "kind": "story",
+      "para": 2,
+      "part": "p03"
+    },
+    {
+      "t0": 109.66,
+      "t1": 113.1,
+      "text": "The Berlin newspaper taz ties it to Hitler's plan to",
+      "kind": "story",
+      "para": 2,
+      "part": "p03"
+    },
+    {
+      "t0": 113.18,
+      "t1": 116.54,
+      "text": "rebuild the city as the world capital Germania.",
+      "kind": "story",
+      "para": 2,
+      "part": "p03"
+    },
+    {
+      "t0": 117.18,
+      "t1": 119.18,
+      "text": "In that plan the faculty was meant to",
+      "kind": "story",
+      "para": 2,
+      "part": "p03"
+    },
+    {
+      "t0": 119.26,
+      "t1": 121.98,
+      "text": "stand in a future university town,",
+      "kind": "story",
+      "para": 2,
+      "part": "p03"
+    },
+    {
+      "t0": 122.06,
+      "t1": 125.26,
+      "text": "and the work began in the middle of the Grunewald forest.",
+      "kind": "story",
+      "para": 2,
+      "part": "p03"
+    },
+    {
+      "t0": 125.82,
+      "t1": 128.78,
+      "text": "Even the name of the man who planned it is disputed.",
+      "kind": "story",
+      "para": 2,
+      "part": "p03"
+    },
+    {
+      "t0": 129.3,
+      "t1": 133.3,
+      "text": "The state heritage office names the planner as Hans Malwitz,",
+      "kind": "story",
+      "para": 3,
+      "part": "p04"
+    },
+    {
+      "t0": 133.34,
+      "t1": 136.14,
+      "text": "a building official of the Prussian administration.",
+      "kind": "story",
+      "para": 3,
+      "part": "p04"
+    },
+    {
+      "t0": 136.42,
+      "t1": 140.1,
+      "text": "English Wikipedia credits Albert Speer with the design,",
+      "kind": "story",
+      "para": 3,
+      "part": "p04"
+    },
+    {
+      "t0": 140.18,
+      "t1": 142.42,
+      "text": "and the two sources disagree.",
+      "kind": "story",
+      "para": 3,
+      "part": "p04"
+    },
+    {
+      "t0": 142.5,
+      "t1": 146.9,
+      "text": "In 1940 the building work stopped, and it stayed unfinished through",
+      "kind": "story",
+      "para": 3,
+      "part": "p04"
+    },
+    {
+      "t0": 146.98,
+      "t1": 149.46,
+      "text": "the rest of the war and after it.",
+      "kind": "story",
+      "para": 3,
+      "part": "p04"
+    },
+    {
+      "t0": 149.54,
+      "t1": 153.62,
+      "text": "The taz says the remains still lie deep inside the hill.",
+      "kind": "story",
+      "para": 3,
+      "part": "p04"
+    },
+    {
+      "t0": 153.74,
+      "t1": 156.9,
+      "text": "Who did the building work, and how many people worked on it,",
+      "kind": "story",
+      "para": 3,
+      "part": "p04"
+    },
+    {
+      "t0": 156.98,
+      "t1": 159.78,
+      "text": "the sources consulted here do not say.",
+      "kind": "story",
+      "para": 3,
+      "part": "p04"
+    },
+    {
+      "t0": 160.1,
+      "t1": 163.38,
+      "text": "So the building sat half-built in the forest,",
+      "kind": "story",
+      "para": 3,
+      "part": "p04"
+    },
+    {
+      "t0": 163.46,
+      "t1": 166.18,
+      "text": "a shell of a college in the middle of the war,",
+      "kind": "story",
+      "para": 3,
+      "part": "p04"
+    },
+    {
+      "t0": 166.46,
+      "t1": 168.5,
+      "text": "waiting for whatever came next.",
+      "kind": "story",
+      "para": 3,
+      "part": "p04"
+    },
+    {
+      "t0": 169.02,
+      "t1": 171.58,
+      "text": "After the war, Berlin had to get rid",
+      "kind": "story",
+      "para": 4,
+      "part": "p05"
+    },
+    {
+      "t0": 171.66,
+      "t1": 173.74,
+      "text": "of the rubble of its bombed houses.",
+      "kind": "story",
+      "para": 4,
+      "part": "p05"
+    },
+    {
+      "t0": 174.38,
+      "t1": 178.78,
+      "text": "The city split in 1948, Berlin's own history pages say,",
+      "kind": "story",
+      "para": 4,
+      "part": "p05"
+    },
+    {
+      "t0": 179.18,
+      "t1": 181.22,
+      "text": "when its council was divided.",
+      "kind": "story",
+      "para": 4,
+      "part": "p05"
+    },
+    {
+      "t0": 181.5,
+      "t1": 185.1,
+      "text": "English Wikipedia says that from then on West Berlin's",
+      "kind": "story",
+      "para": 4,
+      "part": "p05"
+    },
+    {
+      "t0": 185.18,
+      "t1": 187.9,
+      "text": "debris had to stay within its own boundary.",
+      "kind": "story",
+      "para": 4,
+      "part": "p05"
+    },
+    {
+      "t0": 188.14,
+      "t1": 192.14,
+      "text": "The same article gives June 1950 as the month the West",
+      "kind": "story",
+      "para": 4,
+      "part": "p05"
+    },
+    {
+      "t0": 192.22,
+      "t1": 196.3,
+      "text": "Berlin authorities decided to open this site as a rubble dump.",
+      "kind": "story",
+      "para": 4,
+      "part": "p05"
+    },
+    {
+      "t0": 196.62,
+      "t1": 201.18,
+      "text": "From 1950 to 1972 the tipping went on,",
+      "kind": "story",
+      "para": 4,
+      "part": "p05"
+    },
+    {
+      "t0": 201.26,
+      "t1": 205.74,
+      "text": "over a period the Berliner Zeitung describes as twenty-two years.",
+      "kind": "story",
+      "para": 4,
+      "part": "p05"
+    },
+    {
+      "t0": 205.98,
+      "t1": 209.34,
+      "text": "The taz, the Berliner Zeitung and German Wikipedia",
+      "kind": "story",
+      "para": 4,
+      "part": "p05"
+    },
+    {
+      "t0": 209.74,
+      "t1": 213.5,
+      "text": "give about 26 million cubic metres in total,",
+      "kind": "story",
+      "para": 4,
+      "part": "p05"
+    },
+    {
+      "t0": 213.58,
+      "t1": 216.94,
+      "text": "while the city's sightseeing page says 25 million.",
+      "kind": "story",
+      "para": 4,
+      "part": "p05"
+    },
+    {
+      "t0": 217.5,
+      "t1": 221.5,
+      "text": "The rubble went over the college, and the hill rose above it.",
+      "kind": "story",
+      "para": 4,
+      "part": "p05"
+    },
+    {
+      "t0": 222.02,
+      "t1": 226.98,
+      "text": "Between June 1948 and May 1949 the blockade",
+      "kind": "story",
+      "para": 5,
+      "part": "p06"
+    },
+    {
+      "t0": 227.14,
+      "t1": 229.94,
+      "text": "cut West Berlin off from its supply routes.",
+      "kind": "story",
+      "para": 5,
+      "part": "p06"
+    },
+    {
+      "t0": 230.42,
+      "t1": 234.1,
+      "text": "English Wikipedia says that fuel shortages during the blockade",
+      "kind": "story",
+      "para": 5,
+      "part": "p06"
+    },
+    {
+      "t0": 234.34,
+      "t1": 237.06,
+      "text": "halted the hauling of rubble to this site,",
+      "kind": "story",
+      "para": 5,
+      "part": "p06"
+    },
+    {
+      "t0": 237.14,
+      "t1": 239.54,
+      "text": "and that once the shortages had eased,",
+      "kind": "story",
+      "para": 5,
+      "part": "p06"
+    },
+    {
+      "t0": 239.7,
+      "t1": 243.14,
+      "text": "about 600 lorries a day brought rubble to the hill.",
+      "kind": "story",
+      "para": 5,
+      "part": "p06"
+    },
+    {
+      "t0": 243.78,
+      "t1": 248.58,
+      "text": "That article cites a 1999 study by Gerhard Keiderling,",
+      "kind": "story",
+      "para": 5,
+      "part": "p06"
+    },
+    {
+      "t0": 248.66,
+      "t1": 252.98,
+      "text": "and it gives the planned volume as about 12 million cubic metres.",
+      "kind": "story",
+      "para": 5,
+      "part": "p06"
+    },
+    {
+      "t0": 253.22,
+      "t1": 257.06,
+      "text": "It also gives 14 November 1957 as the",
+      "kind": "story",
+      "para": 5,
+      "part": "p06"
+    },
+    {
+      "t0": 257.14,
+      "t1": 260.02,
+      "text": "day the ten millionth cubic metre arrived.",
+      "kind": "story",
+      "para": 5,
+      "part": "p06"
+    },
+    {
+      "t0": 260.66,
+      "t1": 265.06,
+      "text": "These figures rest on that one source, so they are attributed here,",
+      "kind": "story",
+      "para": 5,
+      "part": "p06"
+    },
+    {
+      "t0": 265.14,
+      "t1": 267.46,
+      "text": "and the picture they give is clear enough.",
+      "kind": "story",
+      "para": 5,
+      "part": "p06"
+    },
+    {
+      "t0": 267.98,
+      "t1": 270.18,
+      "text": "Who did the clearing in the city?",
+      "kind": "story",
+      "para": 6,
+      "part": "p07"
+    },
+    {
+      "t0": 270.62,
+      "t1": 274.14,
+      "text": "The Federal Agency for Civic Education, the bpb,",
+      "kind": "story",
+      "para": 6,
+      "part": "p07"
+    },
+    {
+      "t0": 274.54,
+      "t1": 277.26,
+      "text": "has an essay on the figure of the rubble woman.",
+      "kind": "story",
+      "para": 6,
+      "part": "p07"
+    },
+    {
+      "t0": 277.74,
+      "t1": 281.42,
+      "text": "In Berlin and in the Soviet zone, it says, women",
+      "kind": "story",
+      "para": 6,
+      "part": "p07"
+    },
+    {
+      "t0": 281.5,
+      "t1": 287.18,
+      "text": "were in the majority among the clearing crews in 1945 and 1946,",
+      "kind": "story",
+      "para": 6,
+      "part": "p07"
+    },
+    {
+      "t0": 287.26,
+      "t1": 290.38,
+      "text": "and women cleared rubble in every sector of the city.",
+      "kind": "story",
+      "para": 6,
+      "part": "p07"
+    },
+    {
+      "t0": 291.02,
+      "t1": 293.98,
+      "text": "In the American and French zones, by contrast,",
+      "kind": "story",
+      "para": 6,
+      "part": "p07"
+    },
+    {
+      "t0": 294.06,
+      "t1": 298.06,
+      "text": "the use of women for clearing was explicitly rejected, and in the",
+      "kind": "story",
+      "para": 6,
+      "part": "p07"
+    },
+    {
+      "t0": 298.14,
+      "t1": 304.54,
+      "text": "British zone very few women were used between 1945 and 1947.",
+      "kind": "story",
+      "para": 6,
+      "part": "p07"
+    },
+    {
+      "t0": 304.62,
+      "t1": 308.46,
+      "text": "The essay treats the rubble woman as a myth, and it concludes",
+      "kind": "story",
+      "para": 6,
+      "part": "p07"
+    },
+    {
+      "t0": 308.86,
+      "t1": 313.58,
+      "text": "that across the whole clearance women played a clearly subordinate role.",
+      "kind": "story",
+      "para": 6,
+      "part": "p07"
+    },
+    {
+      "t0": 314.1,
+      "t1": 317.46,
+      "text": "From the summer of 1945, the essay says,",
+      "kind": "story",
+      "para": 7,
+      "part": "p08"
+    },
+    {
+      "t0": 317.94,
+      "t1": 322.02,
+      "text": "city administrations in Berlin and in the towns of the Soviet zone",
+      "kind": "story",
+      "para": 7,
+      "part": "p08"
+    },
+    {
+      "t0": 322.26,
+      "t1": 326.34,
+      "text": "tried to speed up the clearing by putting the unemployed to work.",
+      "kind": "story",
+      "para": 7,
+      "part": "p08"
+    },
+    {
+      "t0": 326.66,
+      "t1": 328.5,
+      "text": "In the Nazi years, it says,",
+      "kind": "story",
+      "para": 7,
+      "part": "p08"
+    },
+    {
+      "t0": 328.9,
+      "t1": 331.86,
+      "text": "most clearing work fell to civilian workers,",
+      "kind": "story",
+      "para": 7,
+      "part": "p08"
+    },
+    {
+      "t0": 331.9,
+      "t1": 334.98,
+      "text": "prisoners of war and concentration-camp inmates.",
+      "kind": "story",
+      "para": 7,
+      "part": "p08"
+    },
+    {
+      "t0": 335.7,
+      "t1": 338.9,
+      "text": "It gives the whole of Germany about 400 million",
+      "kind": "story",
+      "para": 7,
+      "part": "p08"
+    },
+    {
+      "t0": 338.98,
+      "t1": 341.86,
+      "text": "cubic metres of rubble, though it gives no year.",
+      "kind": "story",
+      "para": 7,
+      "part": "p08"
+    },
+    {
+      "t0": 342.5,
+      "t1": 344.58,
+      "text": "The essay does not name this hill,",
+      "kind": "story",
+      "para": 7,
+      "part": "p08"
+    },
+    {
+      "t0": 344.66,
+      "t1": 347.46,
+      "text": "and no source consulted here says which crews",
+      "kind": "story",
+      "para": 7,
+      "part": "p08"
+    },
+    {
+      "t0": 347.54,
+      "t1": 349.62,
+      "text": "carried the rubble that ended up on it.",
+      "kind": "story",
+      "para": 7,
+      "part": "p08"
+    },
+    {
+      "t0": 350.14,
+      "t1": 353.42,
+      "text": "By 1972 the tipping had stopped,",
+      "kind": "story",
+      "para": 8,
+      "part": "p09"
+    },
+    {
+      "t0": 353.5,
+      "t1": 355.9,
+      "text": "and the hill was shaped into a green area.",
+      "kind": "story",
+      "para": 8,
+      "part": "p09"
+    },
+    {
+      "t0": 356.46,
+      "t1": 361.18,
+      "text": "English Wikipedia says the Senate then decided to landscape it.",
+      "kind": "story",
+      "para": 8,
+      "part": "p09"
+    },
+    {
+      "t0": 361.5,
+      "t1": 364.58,
+      "text": "The top was already in use long before that.",
+      "kind": "story",
+      "para": 8,
+      "part": "p09"
+    },
+    {
+      "t0": 364.86,
+      "t1": 368.46,
+      "text": "The state heritage office says the British had been watching the airspace",
+      "kind": "story",
+      "para": 8,
+      "part": "p09"
+    },
+    {
+      "t0": 368.54,
+      "t1": 372.38,
+      "text": "from this site since the 1950s, using mobile equipment.",
+      "kind": "story",
+      "para": 8,
+      "part": "p09"
+    },
+    {
+      "t0": 373.02,
+      "t1": 376.78,
+      "text": "In 1961 the American and British allies agreed",
+      "kind": "story",
+      "para": 8,
+      "part": "p09"
+    },
+    {
+      "t0": 376.86,
+      "t1": 379.54,
+      "text": "by contract how they would share the site.",
+      "kind": "story",
+      "para": 8,
+      "part": "p09"
+    },
+    {
+      "t0": 379.82,
+      "t1": 383.1,
+      "text": "So while the lorries were still tipping rubble on the hill,",
+      "kind": "story",
+      "para": 8,
+      "part": "p09"
+    },
+    {
+      "t0": 383.18,
+      "t1": 386.46,
+      "text": "someone had begun watching the sky from its summit,",
+      "kind": "story",
+      "para": 8,
+      "part": "p09"
+    },
+    {
+      "t0": 386.54,
+      "t1": 390.54,
+      "text": "and the rubble and the watching overlapped for more than a decade.",
+      "kind": "story",
+      "para": 8,
+      "part": "p09"
+    },
+    {
+      "t0": 391.06,
+      "t1": 394.9,
+      "text": "In April 1956, the Alliierte museum says,",
+      "kind": "story",
+      "para": 9,
+      "part": "p10"
+    },
+    {
+      "t0": 395.38,
+      "t1": 399.7,
+      "text": "Soviet army units stationed in East Germany found a tunnel that the",
+      "kind": "story",
+      "para": 9,
+      "part": "p10"
+    },
+    {
+      "t0": 400.02,
+      "t1": 402.9,
+      "text": "Americans and British had dug under East Berlin.",
+      "kind": "story",
+      "para": 9,
+      "part": "p10"
+    },
+    {
+      "t0": 403.46,
+      "t1": 406.02,
+      "text": "It ran about 450 metres,",
+      "kind": "story",
+      "para": 9,
+      "part": "p10"
+    },
+    {
+      "t0": 406.1,
+      "t1": 410.18,
+      "text": "from the American sector to the Soviet one, and its target was",
+      "kind": "story",
+      "para": 9,
+      "part": "p10"
+    },
+    {
+      "t0": 410.26,
+      "t1": 414.58,
+      "text": "the telephone lines between a Soviet military headquarters and Moscow.",
+      "kind": "story",
+      "para": 9,
+      "part": "p10"
+    },
+    {
+      "t0": 415.22,
+      "t1": 420.5,
+      "text": "Its first collection of material came on 11 May 1955, the CIA",
+      "kind": "story",
+      "para": 9,
+      "part": "p10"
+    },
+    {
+      "t0": 420.58,
+      "t1": 426.1,
+      "text": "says, and the museum gives a figure of some 440,000 calls.",
+      "kind": "story",
+      "para": 9,
+      "part": "p10"
+    },
+    {
+      "t0": 426.74,
+      "t1": 430.82,
+      "text": "The Bundesarchiv says the British built the tunnel and the Americans paid",
+      "kind": "story",
+      "para": 9,
+      "part": "p10"
+    },
+    {
+      "t0": 430.9,
+      "t1": 436.1,
+      "text": "for it, while the CIA describes a joint American and British operation.",
+      "kind": "story",
+      "para": 9,
+      "part": "p10"
+    },
+    {
+      "t0": 436.74,
+      "t1": 440.42,
+      "text": "German Wikipedia says that once the tunnel was exposed,",
+      "kind": "story",
+      "para": 9,
+      "part": "p10"
+    },
+    {
+      "t0": 440.46,
+      "t1": 443.82,
+      "text": "the American army began looking for a new site.",
+      "kind": "story",
+      "para": 9,
+      "part": "p10"
+    },
+    {
+      "t0": 444.26,
+      "t1": 448.82,
+      "text": "So why this hill, and what could anyone hear from its top?",
+      "kind": "story",
+      "para": 9,
+      "part": "p10"
+    },
+    {
+      "t0": 449.94,
+      "t1": 453.7,
+      "text": "Quick break. I'm Yusuf, and this is Walk of Berlin.",
+      "kind": "spot",
+      "para": 10,
+      "part": "[[SPOT-A]]"
+    },
+    {
+      "t0": 454.1,
+      "t1": 456.02,
+      "text": "If you enjoy stories like this one,",
+      "kind": "spot",
+      "para": 10,
+      "part": "[[SPOT-A]]"
+    },
+    {
+      "t0": 456.1,
+      "t1": 457.46,
+      "text": "come and walk one with me.",
+      "kind": "spot",
+      "para": 10,
+      "part": "[[SPOT-A]]"
+    },
+    {
+      "t0": 457.7,
+      "t1": 459.74,
+      "text": "My walk, Berlin Then and Now,",
+      "kind": "spot",
+      "para": 10,
+      "part": "[[SPOT-A]]"
+    },
+    {
+      "t0": 459.86,
+      "t1": 463.46,
+      "text": "goes from the World Clock on Alexanderplatz to Hackescher Markt,",
+      "kind": "spot",
+      "para": 10,
+      "part": "[[SPOT-A]]"
+    },
+    {
+      "t0": 463.54,
+      "t1": 465.94,
+      "text": "with an archive photo at every stop.",
+      "kind": "spot",
+      "para": 10,
+      "part": "[[SPOT-A]]"
+    },
+    {
+      "t0": 465.98,
+      "t1": 468.58,
+      "text": "You'll find it at walk of berlin dot com.",
+      "kind": "spot",
+      "para": 10,
+      "part": "[[SPOT-A]]",
+      "display": "You'll find it at walkofberlin.com."
+    },
+    {
+      "t0": 469.74,
+      "t1": 473.02,
+      "text": "German Wikipedia gives a reason for the choice:",
+      "kind": "story",
+      "para": 11,
+      "part": "p11"
+    },
+    {
+      "t0": 473.1,
+      "t1": 476.7,
+      "text": "at that time the hill was the highest elevation in Berlin,",
+      "kind": "story",
+      "para": 11,
+      "part": "p11"
+    },
+    {
+      "t0": 476.78,
+      "t1": 477.9,
+      "text": "and it seemed ideal.",
+      "kind": "story",
+      "para": 11,
+      "part": "p11"
+    },
+    {
+      "t0": 478.46,
+      "t1": 482.06,
+      "text": "English Wikipedia dates the start of operations by mobile",
+      "kind": "story",
+      "para": 11,
+      "part": "p11"
+    },
+    {
+      "t0": 482.14,
+      "t1": 487.26,
+      "text": "Allied listening units on Teufelsberg to July 1961.",
+      "kind": "story",
+      "para": 11,
+      "part": "p11"
+    },
+    {
+      "t0": 487.34,
+      "t1": 489.9,
+      "text": "The taz reports that in military slang the",
+      "kind": "story",
+      "para": 11,
+      "part": "p11"
+    },
+    {
+      "t0": 489.98,
+      "t1": 493.06,
+      "text": "place was called the Field Station Berlin.",
+      "kind": "story",
+      "para": 11,
+      "part": "p11"
+    },
+    {
+      "t0": 493.34,
+      "t1": 496.06,
+      "text": "It is a plain name for a plain job:",
+      "kind": "story",
+      "para": 11,
+      "part": "p11"
+    },
+    {
+      "t0": 496.14,
+      "t1": 499.98,
+      "text": "a field station on a hill, listening to the other side.",
+      "kind": "story",
+      "para": 11,
+      "part": "p11"
+    },
+    {
+      "t0": 500.02,
+      "t1": 504.66,
+      "text": "The taz also calls the post a Horchposten, a listening post.",
+      "kind": "story",
+      "para": 11,
+      "part": "p11"
+    },
+    {
+      "t0": 504.94,
+      "t1": 508.22,
+      "text": "The sources describe those first units as mobile,",
+      "kind": "story",
+      "para": 11,
+      "part": "p11"
+    },
+    {
+      "t0": 508.3,
+      "t1": 513.82,
+      "text": "and say that permanent buildings followed from 1962 or 1963.",
+      "kind": "story",
+      "para": 11,
+      "part": "p11"
+    },
+    {
+      "t0": 513.9,
+      "t1": 516.54,
+      "text": "Nothing in the name hints at the rubble around",
+      "kind": "story",
+      "para": 11,
+      "part": "p11"
+    },
+    {
+      "t0": 516.58,
+      "t1": 519.18,
+      "text": "the summit or at the college under it.",
+      "kind": "story",
+      "para": 11,
+      "part": "p11"
+    },
+    {
+      "t0": 519.7,
+      "t1": 524.18,
+      "text": "Then came August. In the early hours of 13 August 1961,",
+      "kind": "story",
+      "para": 12,
+      "part": "p12"
+    },
+    {
+      "t0": 524.26,
+      "t1": 530.18,
+      "text": "East German security forces sealed the sector border in Berlin,",
+      "kind": "story",
+      "para": 12,
+      "part": "p12"
+    },
+    {
+      "t0": 530.38,
+      "t1": 533.7,
+      "text": "according to the Bundesarchiv, the German federal archive.",
+      "kind": "story",
+      "para": 12,
+      "part": "p12"
+    },
+    {
+      "t0": 534.34,
+      "t1": 538.58,
+      "text": "The bpb says the closure began that night with tank barriers,",
+      "kind": "story",
+      "para": 12,
+      "part": "p12"
+    },
+    {
+      "t0": 538.7,
+      "t1": 540.58,
+      "text": "barbed wire and walls,",
+      "kind": "story",
+      "para": 12,
+      "part": "p12"
+    },
+    {
+      "t0": 540.66,
+      "t1": 543.54,
+      "text": "and that the ring of troops ran around West Berlin.",
+      "kind": "story",
+      "para": 12,
+      "part": "p12"
+    },
+    {
+      "t0": 544.18,
+      "t1": 548.18,
+      "text": "Police, militia and army barricaded every access to the",
+      "kind": "story",
+      "para": 12,
+      "part": "p12"
+    },
+    {
+      "t0": 548.26,
+      "t1": 551.18,
+      "text": "western part of the city, the bpb adds.",
+      "kind": "story",
+      "para": 12,
+      "part": "p12"
+    },
+    {
+      "t0": 551.46,
+      "t1": 555.46,
+      "text": "Whole streets were cut through by provisional border installations,",
+      "kind": "story",
+      "para": 12,
+      "part": "p12"
+    },
+    {
+      "t0": 555.54,
+      "t1": 558.3,
+      "text": "which were later fortified much more heavily.",
+      "kind": "story",
+      "para": 12,
+      "part": "p12"
+    },
+    {
+      "t0": 558.66,
+      "t1": 562.1,
+      "text": "The bpb names the People's Police, the border police,",
+      "kind": "story",
+      "para": 12,
+      "part": "p12"
+    },
+    {
+      "t0": 562.42,
+      "t1": 565.38,
+      "text": "members of the workers' combat groups and the National",
+      "kind": "story",
+      "para": 12,
+      "part": "p12"
+    },
+    {
+      "t0": 565.54,
+      "t1": 568.9,
+      "text": "People's Army as the forces that sealed the ring.",
+      "kind": "story",
+      "para": 12,
+      "part": "p12"
+    },
+    {
+      "t0": 569.42,
+      "t1": 574.3,
+      "text": "Construction work that had been organised in secret beforehand then began under",
+      "kind": "story",
+      "para": 13,
+      "part": "p13"
+    },
+    {
+      "t0": 574.34,
+      "t1": 577.42,
+      "text": "the protection of those forces, the bpb says.",
+      "kind": "story",
+      "para": 13,
+      "part": "p13"
+    },
+    {
+      "t0": 577.98,
+      "t1": 582.06,
+      "text": "In the days after 13 August a wall two metres high",
+      "kind": "story",
+      "para": 13,
+      "part": "p13"
+    },
+    {
+      "t0": 582.14,
+      "t1": 584.78,
+      "text": "began to go up, according to the Bundesarchiv.",
+      "kind": "story",
+      "para": 13,
+      "part": "p13"
+    },
+    {
+      "t0": 585.42,
+      "t1": 589.66,
+      "text": "The hill stood inside the ring that had closed around West Berlin,",
+      "kind": "story",
+      "para": 13,
+      "part": "p13"
+    },
+    {
+      "t0": 589.7,
+      "t1": 591.58,
+      "text": "on the western side of the city.",
+      "kind": "story",
+      "para": 13,
+      "part": "p13"
+    },
+    {
+      "t0": 591.9,
+      "t1": 595.18,
+      "text": "English Wikipedia says its listening units had already",
+      "kind": "story",
+      "para": 13,
+      "part": "p13"
+    },
+    {
+      "t0": 595.26,
+      "t1": 597.3,
+      "text": "started work there in July.",
+      "kind": "story",
+      "para": 13,
+      "part": "p13"
+    },
+    {
+      "t0": 597.66,
+      "t1": 601.18,
+      "text": "The state heritage office says that Berlin's position in the middle",
+      "kind": "story",
+      "para": 13,
+      "part": "p13"
+    },
+    {
+      "t0": 601.26,
+      "t1": 604.06,
+      "text": "of the Eastern Bloc and the hill's height,",
+      "kind": "story",
+      "para": 13,
+      "part": "p13"
+    },
+    {
+      "t0": 604.14,
+      "t1": 607.9,
+      "text": "the highest artificial elevation in the western part of the city,",
+      "kind": "story",
+      "para": 13,
+      "part": "p13"
+    },
+    {
+      "t0": 607.98,
+      "t1": 611.66,
+      "text": "were used to listen far into the socialist states.",
+      "kind": "story",
+      "para": 13,
+      "part": "p13"
+    },
+    {
+      "t0": 612.18,
+      "t1": 615.78,
+      "text": "The state heritage office describes what the station did.",
+      "kind": "story",
+      "para": 14,
+      "part": "p14"
+    },
+    {
+      "t0": 616.1,
+      "t1": 621.3,
+      "text": "Its staff intercepted the information from telecommunications and radio traffic in West",
+      "kind": "story",
+      "para": 14,
+      "part": "p14"
+    },
+    {
+      "t0": 621.38,
+      "t1": 626.42,
+      "text": "Berlin and across the whole of the German Democratic Republic, the GDR.",
+      "kind": "story",
+      "para": 14,
+      "part": "p14"
+    },
+    {
+      "t0": 626.74,
+      "t1": 631.06,
+      "text": "The reach of the station extended into Poland and into Czechoslovakia.",
+      "kind": "story",
+      "para": 14,
+      "part": "p14"
+    },
+    {
+      "t0": 631.7,
+      "t1": 636.5,
+      "text": "According to some sources, it reached deeper, into the Soviet Union,",
+      "kind": "story",
+      "para": 14,
+      "part": "p14"
+    },
+    {
+      "t0": 636.58,
+      "t1": 640.1,
+      "text": "and the office gives that only as a claim from some sources,",
+      "kind": "story",
+      "para": 14,
+      "part": "p14"
+    },
+    {
+      "t0": 640.18,
+      "t1": 641.7,
+      "text": "not as its own finding.",
+      "kind": "story",
+      "para": 14,
+      "part": "p14"
+    },
+    {
+      "t0": 642.34,
+      "t1": 648.02,
+      "text": "The office's own title for the place is Abhörstation, listening station.",
+      "kind": "story",
+      "para": 14,
+      "part": "p14"
+    },
+    {
+      "t0": 648.54,
+      "t1": 650.62,
+      "text": "The station was part of a network of",
+      "kind": "story",
+      "para": 15,
+      "part": "p15"
+    },
+    {
+      "t0": 650.7,
+      "t1": 654.3,
+      "text": "early-warning and listening posts along the Iron Curtain,",
+      "kind": "story",
+      "para": 15,
+      "part": "p15"
+    },
+    {
+      "t0": 654.34,
+      "t1": 657.66,
+      "text": "the office says, and the phrase is the office's own.",
+      "kind": "story",
+      "para": 15,
+      "part": "p15"
+    },
+    {
+      "t0": 658.22,
+      "t1": 663.02,
+      "text": "On the summit it describes several cuboid buildings with three towers,",
+      "kind": "story",
+      "para": 15,
+      "part": "p15"
+    },
+    {
+      "t0": 663.1,
+      "t1": 665.42,
+      "text": "and radar domes covered in plastic.",
+      "kind": "story",
+      "para": 15,
+      "part": "p15"
+    },
+    {
+      "t0": 666.06,
+      "t1": 669.82,
+      "text": "In 2018 the office said that the individual buildings,",
+      "kind": "story",
+      "para": 15,
+      "part": "p15"
+    },
+    {
+      "t0": 669.86,
+      "t1": 672.7,
+      "text": "the towers and the domes still exist,",
+      "kind": "story",
+      "para": 15,
+      "part": "p15"
+    },
+    {
+      "t0": 672.78,
+      "t1": 676.62,
+      "text": "and that the site was then exposed to uncontrolled change.",
+      "kind": "story",
+      "para": 15,
+      "part": "p15"
+    },
+    {
+      "t0": 677.26,
+      "t1": 678.54,
+      "text": "The domes you can see from the",
+      "kind": "story",
+      "para": 15,
+      "part": "p15"
+    },
+    {
+      "t0": 678.7,
+      "t1": 681.1,
+      "text": "top are radar domes of the station.",
+      "kind": "story",
+      "para": 15,
+      "part": "p15"
+    },
+    {
+      "t0": 681.58,
+      "t1": 687.26,
+      "text": "German Wikipedia says new radar equipment was fitted right after 1991,",
+      "kind": "story",
+      "para": 15,
+      "part": "p15"
+    },
+    {
+      "t0": 687.34,
+      "t1": 692.22,
+      "text": "and English Wikipedia says the buildings and the radomes remain in place.",
+      "kind": "story",
+      "para": 15,
+      "part": "p15"
+    },
+    {
+      "t0": 692.82,
+      "t1": 697.54,
+      "text": "The permanent station took shape from 1962, the office says.",
+      "kind": "story",
+      "para": 16,
+      "part": "p16"
+    },
+    {
+      "t0": 697.86,
+      "t1": 703.94,
+      "text": "English Wikipedia dates the start of permanent construction to October 1963,",
+      "kind": "story",
+      "para": 16,
+      "part": "p16"
+    },
+    {
+      "t0": 704.02,
+      "t1": 706.18,
+      "text": "so the sources differ on the start.",
+      "kind": "story",
+      "para": 16,
+      "part": "p16"
+    },
+    {
+      "t0": 706.74,
+      "t1": 710.3,
+      "text": "The National Security Agency of the United States and the",
+      "kind": "story",
+      "para": 16,
+      "part": "p16"
+    },
+    {
+      "t0": 710.34,
+      "t1": 715.54,
+      "text": "British Government Communications Headquarters, GCHQ, ran the site.",
+      "kind": "story",
+      "para": 16,
+      "part": "p16"
+    },
+    {
+      "t0": 715.86,
+      "t1": 720.74,
+      "text": "German Wikipedia also names units that served there, among them the American",
+      "kind": "story",
+      "para": 16,
+      "part": "p16"
+    },
+    {
+      "t0": 720.9,
+      "t1": 725.42,
+      "text": "Army Security Agency and two Royal Air Force signal units.",
+      "kind": "story",
+      "para": 16,
+      "part": "p16"
+    },
+    {
+      "t0": 725.7,
+      "t1": 727.7,
+      "text": "The office calls the station the most",
+      "kind": "story",
+      "para": 16,
+      "part": "p16"
+    },
+    {
+      "t0": 727.78,
+      "t1": 730.98,
+      "text": "important listening post of the Western Allies.",
+      "kind": "story",
+      "para": 16,
+      "part": "p16"
+    },
+    {
+      "t0": 731.5,
+      "t1": 738.06,
+      "text": "At its peak, the office says, about 1,000 to 1,200 American staff",
+      "kind": "story",
+      "para": 17,
+      "part": "p17"
+    },
+    {
+      "t0": 738.3,
+      "t1": 742.22,
+      "text": "and about 200 to 300 British staff worked at the station.",
+      "kind": "story",
+      "para": 17,
+      "part": "p17"
+    },
+    {
+      "t0": 742.86,
+      "t1": 748.86,
+      "text": "German Wikipedia gives about 1,500 military personnel for the 1970s.",
+      "kind": "story",
+      "para": 17,
+      "part": "p17"
+    },
+    {
+      "t0": 749.5,
+      "t1": 752.14,
+      "text": "The office does not date its peak figures,",
+      "kind": "story",
+      "para": 17,
+      "part": "p17"
+    },
+    {
+      "t0": 752.22,
+      "t1": 754.62,
+      "text": "so the two cannot be checked against each other.",
+      "kind": "story",
+      "para": 17,
+      "part": "p17"
+    },
+    {
+      "t0": 755.26,
+      "t1": 758.86,
+      "text": "Those are large numbers for one hill in a forest.",
+      "kind": "story",
+      "para": 17,
+      "part": "p17"
+    },
+    {
+      "t0": 759.18,
+      "t1": 762.14,
+      "text": "The hill was a rubble dump and a listening post at the",
+      "kind": "story",
+      "para": 17,
+      "part": "p17"
+    },
+    {
+      "t0": 762.26,
+      "t1": 768.38,
+      "text": "same time, from the early 1960s until the tipping stopped in 1972.",
+      "kind": "story",
+      "para": 17,
+      "part": "p17"
+    },
+    {
+      "t0": 768.46,
+      "t1": 771.74,
+      "text": "The office gives these staff figures for the peak only,",
+      "kind": "story",
+      "para": 17,
+      "part": "p17"
+    },
+    {
+      "t0": 771.86,
+      "t1": 773.34,
+      "text": "not for the whole period.",
+      "kind": "story",
+      "para": 17,
+      "part": "p17"
+    },
+    {
+      "t0": 773.86,
+      "t1": 776.58,
+      "text": "Picture the summit in the 1960s.",
+      "kind": "story",
+      "para": 18,
+      "part": "p18"
+    },
+    {
+      "t0": 776.82,
+      "t1": 779.7,
+      "text": "On top, the towers of a listening station.",
+      "kind": "story",
+      "para": 18,
+      "part": "p18"
+    },
+    {
+      "t0": 780.18,
+      "t1": 784.02,
+      "text": "On the slopes, lorries still tipping the rubble of the city,",
+      "kind": "story",
+      "para": 18,
+      "part": "p18"
+    },
+    {
+      "t0": 784.1,
+      "t1": 786.34,
+      "text": "as they would until 1972.",
+      "kind": "story",
+      "para": 18,
+      "part": "p18"
+    },
+    {
+      "t0": 786.9,
+      "t1": 790.1,
+      "text": "Deep inside, the college that was never finished.",
+      "kind": "story",
+      "para": 18,
+      "part": "p18"
+    },
+    {
+      "t0": 790.58,
+      "t1": 793.46,
+      "text": "Three layers already lay one on top of the other.",
+      "kind": "story",
+      "para": 18,
+      "part": "p18"
+    },
+    {
+      "t0": 794.18,
+      "t1": 797.38,
+      "text": "The office places the hill in the western part of the city,",
+      "kind": "story",
+      "para": 18,
+      "part": "p18"
+    },
+    {
+      "t0": 797.46,
+      "t1": 799.62,
+      "text": "on the West Berlin side of the border,",
+      "kind": "story",
+      "para": 18,
+      "part": "p18"
+    },
+    {
+      "t0": 799.7,
+      "t1": 803.86,
+      "text": "inside the ring that had closed in August 1961.",
+      "kind": "story",
+      "para": 18,
+      "part": "p18"
+    },
+    {
+      "t0": 803.9,
+      "t1": 806.5,
+      "text": "The daily life of the people who worked up there,",
+      "kind": "story",
+      "para": 18,
+      "part": "p18"
+    },
+    {
+      "t0": 806.62,
+      "t1": 809.54,
+      "text": "their shifts, their rooms and their routines,",
+      "kind": "story",
+      "para": 18,
+      "part": "p18"
+    },
+    {
+      "t0": 809.62,
+      "t1": 812.42,
+      "text": "is not described in the sources consulted here,",
+      "kind": "story",
+      "para": 18,
+      "part": "p18"
+    },
+    {
+      "t0": 812.58,
+      "t1": 814.66,
+      "text": "so it stays out of this story.",
+      "kind": "story",
+      "para": 18,
+      "part": "p18"
+    },
+    {
+      "t0": 815.18,
+      "t1": 818.62,
+      "text": "The listening went on until East Germany fell apart,",
+      "kind": "story",
+      "para": 19,
+      "part": "p19"
+    },
+    {
+      "t0": 818.7,
+      "t1": 822.22,
+      "text": "according to English Wikipedia. The Wall came down,",
+      "kind": "story",
+      "para": 19,
+      "part": "p19"
+    },
+    {
+      "t0": 822.3,
+      "t1": 826.86,
+      "text": "and on the night of 9 November 1989 the border was opened,",
+      "kind": "story",
+      "para": 19,
+      "part": "p19"
+    },
+    {
+      "t0": 826.9,
+      "t1": 830.98,
+      "text": "the bpb says. After that, English Wikipedia says,",
+      "kind": "story",
+      "para": 19,
+      "part": "p19"
+    },
+    {
+      "t0": 831.18,
+      "t1": 834.38,
+      "text": "the station was closed and its equipment removed.",
+      "kind": "story",
+      "para": 19,
+      "part": "p19"
+    },
+    {
+      "t0": 834.86,
+      "t1": 838.62,
+      "text": "The towers and domes stayed on the summit, and the state heritage",
+      "kind": "story",
+      "para": 19,
+      "part": "p19"
+    },
+    {
+      "t0": 838.7,
+      "t1": 843.7,
+      "text": "office confirmed in 2018 that the individual buildings still exist.",
+      "kind": "story",
+      "para": 19,
+      "part": "p19"
+    },
+    {
+      "t0": 843.98,
+      "t1": 847.02,
+      "text": "The college stayed under the rubble, out of sight.",
+      "kind": "story",
+      "para": 19,
+      "part": "p19"
+    },
+    {
+      "t0": 847.58,
+      "t1": 849.74,
+      "text": "The sources show no settled use for",
+      "kind": "story",
+      "para": 19,
+      "part": "p19"
+    },
+    {
+      "t0": 849.78,
+      "t1": 851.74,
+      "text": "the hill in the years that followed.",
+      "kind": "story",
+      "para": 19,
+      "part": "p19"
+    },
+    {
+      "t0": 852.26,
+      "t1": 857.86,
+      "text": "For about thirty years, from the early 1960s to the early 1990s,",
+      "kind": "story",
+      "para": 20,
+      "part": "p20"
+    },
+    {
+      "t0": 857.9,
+      "t1": 860.34,
+      "text": "the hill had listened to the other side.",
+      "kind": "story",
+      "para": 20,
+      "part": "p20"
+    },
+    {
+      "t0": 860.98,
+      "t1": 862.98,
+      "text": "Now the other side was gone.",
+      "kind": "story",
+      "para": 20,
+      "part": "p20"
+    },
+    {
+      "t0": 863.46,
+      "t1": 867.22,
+      "text": "The towers were still standing, the domes were still on top,",
+      "kind": "story",
+      "para": 20,
+      "part": "p20"
+    },
+    {
+      "t0": 867.26,
+      "t1": 869.86,
+      "text": "and the college was still buried underneath.",
+      "kind": "story",
+      "para": 20,
+      "part": "p20"
+    },
+    {
+      "t0": 870.1,
+      "t1": 872.18,
+      "text": "The hill was a rubble hill,",
+      "kind": "story",
+      "para": 20,
+      "part": "p20"
+    },
+    {
+      "t0": 872.26,
+      "t1": 875.78,
+      "text": "a former field station and a forest all at once,",
+      "kind": "story",
+      "para": 20,
+      "part": "p20"
+    },
+    {
+      "t0": 875.86,
+      "t1": 877.54,
+      "text": "and it was not yet a monument.",
+      "kind": "story",
+      "para": 20,
+      "part": "p20"
+    },
+    {
+      "t0": 878.1,
+      "t1": 882.18,
+      "text": "Those three ways of seeing it would soon pull in different directions,",
+      "kind": "story",
+      "para": 20,
+      "part": "p20"
+    },
+    {
+      "t0": 882.26,
+      "t1": 884.78,
+      "text": "through a string of owners and plans.",
+      "kind": "story",
+      "para": 20,
+      "part": "p20"
+    },
+    {
+      "t0": 885.14,
+      "t1": 887.62,
+      "text": "So what do you do with a listening post when",
+      "kind": "story",
+      "para": 20,
+      "part": "p20"
+    },
+    {
+      "t0": 887.7,
+      "t1": 890.1,
+      "text": "the thing it was listening to has gone?",
+      "kind": "story",
+      "para": 20,
+      "part": "p20"
+    },
+    {
+      "t0": 891.22,
+      "t1": 894.74,
+      "text": "Yusuf again, one more thing before the story goes on.",
+      "kind": "spot",
+      "para": 21,
+      "part": "[[SPOT-B]]"
+    },
+    {
+      "t0": 894.98,
+      "t1": 896.82,
+      "text": "If you can't join me in person,",
+      "kind": "spot",
+      "para": 21,
+      "part": "[[SPOT-B]]"
+    },
+    {
+      "t0": 896.94,
+      "t1": 899.38,
+      "text": "my audio walks take you along the Berlin Wall at",
+      "kind": "spot",
+      "para": 21,
+      "part": "[[SPOT-B]]"
+    },
+    {
+      "t0": 899.46,
+      "t1": 902.66,
+      "text": "Bernauer Straße and through the medieval old town,",
+      "kind": "spot",
+      "para": 21,
+      "part": "[[SPOT-B]]"
+    },
+    {
+      "t0": 902.74,
+      "t1": 904.9,
+      "text": "at your own pace, on your phone.",
+      "kind": "spot",
+      "para": 21,
+      "part": "[[SPOT-B]]"
+    },
+    {
+      "t0": 904.94,
+      "t1": 907.14,
+      "text": "They're at walk of berlin dot com.",
+      "kind": "spot",
+      "para": 21,
+      "part": "[[SPOT-B]]",
+      "display": "They're at walkofberlin.com."
+    },
+    {
+      "t0": 908.3,
+      "t1": 913.74,
+      "text": "The American and British forces left in 1991, the taz reports.",
+      "kind": "story",
+      "para": 22,
+      "part": "p21"
+    },
+    {
+      "t0": 914.06,
+      "t1": 918.7,
+      "text": "The state heritage office says the site was handed over in 1992,",
+      "kind": "story",
+      "para": 22,
+      "part": "p21"
+    },
+    {
+      "t0": 918.86,
+      "t1": 923.82,
+      "text": "after all its technical equipment had been removed, to Berlin's finance directorate.",
+      "kind": "story",
+      "para": 22,
+      "part": "p21"
+    },
+    {
+      "t0": 924.14,
+      "t1": 926.14,
+      "text": "The taz says the site went back to",
+      "kind": "story",
+      "para": 22,
+      "part": "p21"
+    },
+    {
+      "t0": 926.18,
+      "t1": 928.46,
+      "text": "the state of Berlin that year.",
+      "kind": "story",
+      "para": 22,
+      "part": "p21"
+    },
+    {
+      "t0": 928.5,
+      "t1": 931.34,
+      "text": "The handover came a year after the withdrawal,",
+      "kind": "story",
+      "para": 22,
+      "part": "p21"
+    },
+    {
+      "t0": 931.42,
+      "t1": 934.46,
+      "text": "so the two dates belong to two different steps.",
+      "kind": "story",
+      "para": 22,
+      "part": "p21"
+    },
+    {
+      "t0": 934.78,
+      "t1": 938.06,
+      "text": "The Berliner Zeitung describes what came next:",
+      "kind": "story",
+      "para": 22,
+      "part": "p21"
+    },
+    {
+      "t0": 938.18,
+      "t1": 940.46,
+      "text": "once the Americans and British had gone,",
+      "kind": "story",
+      "para": 22,
+      "part": "p21"
+    },
+    {
+      "t0": 940.5,
+      "t1": 942.78,
+      "text": "the decline of the grounds began.",
+      "kind": "story",
+      "para": 22,
+      "part": "p21"
+    },
+    {
+      "t0": 943.1,
+      "t1": 948.7,
+      "text": "German Wikipedia says the buildings stood empty and decayed for years afterwards,",
+      "kind": "story",
+      "para": 22,
+      "part": "p21"
+    },
+    {
+      "t0": 948.78,
+      "t1": 950.3,
+      "text": "and that for a time the site",
+      "kind": "story",
+      "para": 22,
+      "part": "p21"
+    },
+    {
+      "t0": 950.38,
+      "t1": 953.42,
+      "text": "served as a civil air-traffic radar station.",
+      "kind": "story",
+      "para": 22,
+      "part": "p21"
+    },
+    {
+      "t0": 953.94,
+      "t1": 958.02,
+      "text": "In 1996 the city sold the grounds to private investors.",
+      "kind": "story",
+      "para": 23,
+      "part": "p22"
+    },
+    {
+      "t0": 958.127,
+      "t1": 962.772,
+      "text": "The Berliner Zeitung says they paid 5.2 million marks,",
+      "kind": "story",
+      "para": 23,
+      "part": "p22"
+    },
+    {
+      "t0": 962.868,
+      "t1": 965.7,
+      "text": "and German Wikipedia gives the same sum.",
+      "kind": "story",
+      "para": 23,
+      "part": "p22"
+    },
+    {
+      "t0": 965.807,
+      "t1": 970.308,
+      "text": "English Wikipedia says the buyers planned hotels and apartments,",
+      "kind": "story",
+      "para": 23,
+      "part": "p22"
+    },
+    {
+      "t0": 970.372,
+      "t1": 973.108,
+      "text": "and that a spy museum was discussed.",
+      "kind": "story",
+      "para": 23,
+      "part": "p22"
+    },
+    {
+      "t0": 973.172,
+      "t1": 976.34,
+      "text": "German Wikipedia adds a restaurant to the list,",
+      "kind": "story",
+      "para": 23,
+      "part": "p22"
+    },
+    {
+      "t0": 976.42,
+      "t1": 981.14,
+      "text": "and dates the planning to 1998. Those plans failed.",
+      "kind": "story",
+      "para": 23,
+      "part": "p22"
+    },
+    {
+      "t0": 981.22,
+      "t1": 986.54,
+      "text": "The Berliner Zeitung calls them failed investors, and it reports that the",
+      "kind": "story",
+      "para": 23,
+      "part": "p22"
+    },
+    {
+      "t0": 986.58,
+      "t1": 989.3,
+      "text": "owners are considered to be at odds with one another.",
+      "kind": "story",
+      "para": 23,
+      "part": "p22"
+    },
+    {
+      "t0": 989.78,
+      "t1": 994.9,
+      "text": "English Wikipedia says the site has been privately owned since 1996,",
+      "kind": "story",
+      "para": 23,
+      "part": "p22"
+    },
+    {
+      "t0": 994.98,
+      "t1": 999.22,
+      "text": "and a Berlin tourism page updated in January 2026",
+      "kind": "story",
+      "para": 23,
+      "part": "p22"
+    },
+    {
+      "t0": 999.62,
+      "t1": 1002.9,
+      "text": "still describes it as sold to a private investor.",
+      "kind": "story",
+      "para": 23,
+      "part": "p22"
+    },
+    {
+      "t0": 1003.42,
+      "t1": 1005.98,
+      "text": "The planning rules were the next obstacle.",
+      "kind": "story",
+      "para": 24,
+      "part": "p23"
+    },
+    {
+      "t0": 1006.3,
+      "t1": 1010.62,
+      "text": "German Wikipedia says that from April 2006 the site",
+      "kind": "story",
+      "para": 24,
+      "part": "p23"
+    },
+    {
+      "t0": 1010.74,
+      "t1": 1014.3,
+      "text": "was zoned as forest in Berlin's land-use plan,",
+      "kind": "story",
+      "para": 24,
+      "part": "p23"
+    },
+    {
+      "t0": 1014.38,
+      "t1": 1017.34,
+      "text": "and that the building permit had lapsed, because no",
+      "kind": "story",
+      "para": 24,
+      "part": "p23"
+    },
+    {
+      "t0": 1017.5,
+      "t1": 1021.34,
+      "text": "further building work had been carried out by the end of 2004.",
+      "kind": "story",
+      "para": 24,
+      "part": "p23"
+    },
+    {
+      "t0": 1022.06,
+      "t1": 1026.46,
+      "text": "English Wikipedia also gives a 2006 land-use plan that",
+      "kind": "story",
+      "para": 24,
+      "part": "p23"
+    },
+    {
+      "t0": 1026.54,
+      "t1": 1030.54,
+      "text": "classes the hilltop as forest. So, on paper,",
+      "kind": "story",
+      "para": 24,
+      "part": "p23"
+    },
+    {
+      "t0": 1030.58,
+      "t1": 1033.5,
+      "text": "the hill had become a wood where you cannot build.",
+      "kind": "story",
+      "para": 24,
+      "part": "p23"
+    },
+    {
+      "t0": 1034.14,
+      "t1": 1038.7,
+      "text": "The Tagesspiegel described it in exactly those terms two years later,",
+      "kind": "story",
+      "para": 24,
+      "part": "p23"
+    },
+    {
+      "t0": 1038.78,
+      "t1": 1042.9,
+      "text": "as forest and therefore land that could not be built on.",
+      "kind": "story",
+      "para": 24,
+      "part": "p23"
+    },
+    {
+      "t0": 1043.26,
+      "t1": 1045.34,
+      "text": "The sources do not say what the owners",
+      "kind": "story",
+      "para": 24,
+      "part": "p23"
+    },
+    {
+      "t0": 1045.42,
+      "t1": 1049.26,
+      "text": "did with the land between 2006 and 2008.",
+      "kind": "story",
+      "para": 24,
+      "part": "p23"
+    },
+    {
+      "t0": 1049.78,
+      "t1": 1054.82,
+      "text": "In January 2008 the Tagesspiegel reported a new plan.",
+      "kind": "story",
+      "para": 25,
+      "part": "p24"
+    },
+    {
+      "t0": 1055.14,
+      "t1": 1058.66,
+      "text": "The paper said that a foundation built around Maharishi,",
+      "kind": "story",
+      "para": 25,
+      "part": "p24"
+    },
+    {
+      "t0": 1058.7,
+      "t1": 1062.26,
+      "text": "whom it names as the founder of Transcendental Meditation,",
+      "kind": "story",
+      "para": 25,
+      "part": "p24"
+    },
+    {
+      "t0": 1062.38,
+      "t1": 1064.66,
+      "text": "had bought the site from the investor group,",
+      "kind": "story",
+      "para": 25,
+      "part": "p24"
+    },
+    {
+      "t0": 1064.86,
+      "t1": 1066.74,
+      "text": "according to its own statements,",
+      "kind": "story",
+      "para": 25,
+      "part": "p24"
+    },
+    {
+      "t0": 1066.82,
+      "t1": 1069.54,
+      "text": "and that it wanted to build a university on the hill.",
+      "kind": "story",
+      "para": 25,
+      "part": "p24"
+    },
+    {
+      "t0": 1070.18,
+      "t1": 1072.9,
+      "text": "The paper names the film director David Lynch",
+      "kind": "story",
+      "para": 25,
+      "part": "p24"
+    },
+    {
+      "t0": 1072.98,
+      "t1": 1075.38,
+      "text": "as a prominent supporter of the movement,",
+      "kind": "story",
+      "para": 25,
+      "part": "p24"
+    },
+    {
+      "t0": 1075.46,
+      "t1": 1077.22,
+      "text": "and says he had shown a model of the",
+      "kind": "story",
+      "para": 25,
+      "part": "p24"
+    },
+    {
+      "t0": 1077.3,
+      "t1": 1080.74,
+      "text": "planned building at the American forces' listening post.",
+      "kind": "story",
+      "para": 25,
+      "part": "p24"
+    },
+    {
+      "t0": 1081.06,
+      "t1": 1084.66,
+      "text": "The district's building councillor, Klaus-Dieter Gröhler,",
+      "kind": "story",
+      "para": 25,
+      "part": "p24"
+    },
+    {
+      "t0": 1084.78,
+      "t1": 1088.5,
+      "text": "said the district had no reason to grant a building permit.",
+      "kind": "story",
+      "para": 25,
+      "part": "p24"
+    },
+    {
+      "t0": 1088.9,
+      "t1": 1093.7,
+      "text": "German Wikipedia reports that in December 2008 the foundation",
+      "kind": "story",
+      "para": 25,
+      "part": "p24"
+    },
+    {
+      "t0": 1093.9,
+      "t1": 1097.46,
+      "text": "reportedly passed the project on to the Federal Chancellery,",
+      "kind": "story",
+      "para": 25,
+      "part": "p24"
+    },
+    {
+      "t0": 1097.54,
+      "t1": 1100.66,
+      "text": "which could not confirm receiving letters on the matter.",
+      "kind": "story",
+      "para": 25,
+      "part": "p24"
+    },
+    {
+      "t0": 1101.18,
+      "t1": 1105.1,
+      "text": "On 30 October 2018 the state heritage office",
+      "kind": "story",
+      "para": 26,
+      "part": "p25"
+    },
+    {
+      "t0": 1105.18,
+      "t1": 1108.86,
+      "text": "placed the whole Teufelsberg under monument protection,",
+      "kind": "story",
+      "para": 26,
+      "part": "p25"
+    },
+    {
+      "t0": 1108.94,
+      "t1": 1112.38,
+      "text": "as a monument area on the northern edge of the Grunewald.",
+      "kind": "story",
+      "para": 26,
+      "part": "p25"
+    },
+    {
+      "t0": 1112.7,
+      "t1": 1116.5,
+      "text": "The office describes three layers, one above the other.",
+      "kind": "story",
+      "para": 26,
+      "part": "p25"
+    },
+    {
+      "t0": 1116.78,
+      "t1": 1121.02,
+      "text": "At the bottom is the never-completed National Socialist faculty,",
+      "kind": "story",
+      "para": 26,
+      "part": "p25"
+    },
+    {
+      "t0": 1121.1,
+      "t1": 1125.1,
+      "text": "under the rubble hill. Above it is the postwar rubble hill.",
+      "kind": "story",
+      "para": 26,
+      "part": "p25"
+    },
+    {
+      "t0": 1125.66,
+      "t1": 1129.9,
+      "text": "On top is the American and British NSA Field Station,",
+      "kind": "story",
+      "para": 26,
+      "part": "p25"
+    },
+    {
+      "t0": 1129.98,
+      "t1": 1135.74,
+      "text": "the Cold War listening station, dated from 1962 to 1992.",
+      "kind": "story",
+      "para": 26,
+      "part": "p25"
+    },
+    {
+      "t0": 1135.78,
+      "t1": 1139.1,
+      "text": "The taz says the whole mountain is listed so that every",
+      "kind": "story",
+      "para": 26,
+      "part": "p25"
+    },
+    {
+      "t0": 1139.26,
+      "t1": 1142.54,
+      "text": "one of these historical layers is taken into account.",
+      "kind": "story",
+      "para": 26,
+      "part": "p25"
+    },
+    {
+      "t0": 1143.06,
+      "t1": 1146.98,
+      "text": "The reasons, the office says, are historical ones and the",
+      "kind": "story",
+      "para": 27,
+      "part": "p26"
+    },
+    {
+      "t0": 1147.06,
+      "t1": 1149.46,
+      "text": "hill's importance for the planning of the city.",
+      "kind": "story",
+      "para": 27,
+      "part": "p26"
+    },
+    {
+      "t0": 1150.1,
+      "t1": 1152.58,
+      "text": "The taz adds that the listing is not about",
+      "kind": "story",
+      "para": 27,
+      "part": "p26"
+    },
+    {
+      "t0": 1152.62,
+      "t1": 1155.62,
+      "text": "the place's morbid charm as a rotten place.",
+      "kind": "story",
+      "para": 27,
+      "part": "p26"
+    },
+    {
+      "t0": 1156.58,
+      "t1": 1161.62,
+      "text": "Senator for Culture and Europe Klaus Lederer, quoted in the office's announcement,",
+      "kind": "story",
+      "para": 27,
+      "part": "p26"
+    },
+    {
+      "t0": 1161.7,
+      "t1": 1166.98,
+      "text": "called the Teufelsberg a unique and many-layered monument of the twentieth century.",
+      "kind": "story",
+      "para": 27,
+      "part": "p26"
+    },
+    {
+      "t0": 1167.78,
+      "t1": 1170.1,
+      "text": "Many layers, in his phrase,",
+      "kind": "story",
+      "para": 27,
+      "part": "p26"
+    },
+    {
+      "t0": 1170.14,
+      "t1": 1173.38,
+      "text": "and the layers are exactly what the listing protects.",
+      "kind": "story",
+      "para": 27,
+      "part": "p26"
+    },
+    {
+      "t0": 1173.94,
+      "t1": 1178.74,
+      "text": "The office's own term is Denkmalbereich, a monument area,",
+      "kind": "story",
+      "para": 27,
+      "part": "p26"
+    },
+    {
+      "t0": 1178.78,
+      "t1": 1182.02,
+      "text": "and the whole hill is listed as one such area.",
+      "kind": "story",
+      "para": 27,
+      "part": "p26"
+    },
+    {
+      "t0": 1182.34,
+      "t1": 1187.54,
+      "text": "The reasons given are history and urban planning, not the hill's looks.",
+      "kind": "story",
+      "para": 27,
+      "part": "p26"
+    },
+    {
+      "t0": 1188.06,
+      "t1": 1189.82,
+      "text": "What does the listing change?",
+      "kind": "story",
+      "para": 28,
+      "part": "p27"
+    },
+    {
+      "t0": 1190.3,
+      "t1": 1193.42,
+      "text": "For now, nothing at all, according to the taz,",
+      "kind": "story",
+      "para": 28,
+      "part": "p27"
+    },
+    {
+      "t0": 1193.54,
+      "t1": 1195.9,
+      "text": "which quotes the monument office on the point.",
+      "kind": "story",
+      "para": 28,
+      "part": "p27"
+    },
+    {
+      "t0": 1196.22,
+      "t1": 1201.66,
+      "text": "Building work, a redesign or a demolition would first need official approval,",
+      "kind": "story",
+      "para": 28,
+      "part": "p27"
+    },
+    {
+      "t0": 1201.74,
+      "t1": 1204.78,
+      "text": "and the monument office would have a say in any alteration.",
+      "kind": "story",
+      "para": 28,
+      "part": "p27"
+    },
+    {
+      "t0": 1205.42,
+      "t1": 1208.78,
+      "text": "It is unclear, the taz writes, whether artists,",
+      "kind": "story",
+      "para": 28,
+      "part": "p27"
+    },
+    {
+      "t0": 1208.94,
+      "t1": 1212.74,
+      "text": "parties and film crews can keep using the site as they have.",
+      "kind": "story",
+      "para": 28,
+      "part": "p27"
+    },
+    {
+      "t0": 1213.02,
+      "t1": 1217.02,
+      "text": "So the listing matters mainly when someone wants to change the hill.",
+      "kind": "story",
+      "para": 28,
+      "part": "p27"
+    },
+    {
+      "t0": 1217.5,
+      "t1": 1220.22,
+      "text": "The paper's own verdict is that the Teufelsberg",
+      "kind": "story",
+      "para": 28,
+      "part": "p27"
+    },
+    {
+      "t0": 1220.3,
+      "t1": 1222.78,
+      "text": "seems to be a kind of grey zone.",
+      "kind": "story",
+      "para": 28,
+      "part": "p27"
+    },
+    {
+      "t0": 1223.3,
+      "t1": 1226.66,
+      "text": "What is left today is a hill in three layers,",
+      "kind": "story",
+      "para": 29,
+      "part": "p28"
+    },
+    {
+      "t0": 1226.74,
+      "t1": 1228.74,
+      "text": "and you can see two of them from the top.",
+      "kind": "story",
+      "para": 29,
+      "part": "p28"
+    },
+    {
+      "t0": 1229.3,
+      "t1": 1232.18,
+      "text": "The college lies under the rubble, out of sight.",
+      "kind": "story",
+      "para": 29,
+      "part": "p28"
+    },
+    {
+      "t0": 1232.74,
+      "t1": 1235.46,
+      "text": "The rubble has been shaped into a green area,",
+      "kind": "story",
+      "para": 29,
+      "part": "p28"
+    },
+    {
+      "t0": 1235.54,
+      "t1": 1238.98,
+      "text": "and the domes of the listening station still stand on the summit.",
+      "kind": "story",
+      "para": 29,
+      "part": "p28"
+    },
+    {
+      "t0": 1239.7,
+      "t1": 1243.62,
+      "text": "English Wikipedia says the landlord opened the site to visitors in the",
+      "kind": "story",
+      "para": 29,
+      "part": "p28"
+    },
+    {
+      "t0": 1243.7,
+      "t1": 1247.38,
+      "text": "summer of 2016, and German Wikipedia puts the",
+      "kind": "story",
+      "para": 29,
+      "part": "p28"
+    },
+    {
+      "t0": 1247.46,
+      "t1": 1250.46,
+      "text": "opening in the second half of the 2010s.",
+      "kind": "story",
+      "para": 29,
+      "part": "p28"
+    },
+    {
+      "t0": 1250.82,
+      "t1": 1253.62,
+      "text": "The site now offers public guided visits,",
+      "kind": "story",
+      "para": 29,
+      "part": "p28"
+    },
+    {
+      "t0": 1253.7,
+      "t1": 1257.14,
+      "text": "a 360 degree viewing platform at the top,",
+      "kind": "story",
+      "para": 29,
+      "part": "p28"
+    },
+    {
+      "t0": 1257.22,
+      "t1": 1262.58,
+      "text": "the Declassified exhibition and a museum called Alliierte in Berlin.",
+      "kind": "story",
+      "para": 29,
+      "part": "p28"
+    },
+    {
+      "t0": 1263.1,
+      "t1": 1265.02,
+      "text": "So here is the place to stand.",
+      "kind": "story",
+      "para": 30,
+      "part": "p29"
+    },
+    {
+      "t0": 1265.1,
+      "t1": 1268.06,
+      "text": "Go up to the viewing platform at the top and",
+      "kind": "story",
+      "para": 30,
+      "part": "p29"
+    },
+    {
+      "t0": 1268.14,
+      "t1": 1270.86,
+      "text": "look out over the trees and across Berlin.",
+      "kind": "story",
+      "para": 30,
+      "part": "p29"
+    },
+    {
+      "t0": 1271.42,
+      "t1": 1274.7,
+      "text": "Then think about the three layers under your feet.",
+      "kind": "story",
+      "para": 30,
+      "part": "p29"
+    },
+    {
+      "t0": 1275.26,
+      "t1": 1277.34,
+      "text": "The college at the bottom was planned for a",
+      "kind": "story",
+      "para": 30,
+      "part": "p29"
+    },
+    {
+      "t0": 1277.42,
+      "t1": 1282.14,
+      "text": "future university town in a capital the Nazi state wanted to build.",
+      "kind": "story",
+      "para": 30,
+      "part": "p29"
+    },
+    {
+      "t0": 1282.38,
+      "t1": 1285.9,
+      "text": "The rubble in the middle is the wreckage of bombed houses,",
+      "kind": "story",
+      "para": 30,
+      "part": "p29"
+    },
+    {
+      "t0": 1285.98,
+      "t1": 1288.22,
+      "text": "tipped here for twenty-two years.",
+      "kind": "story",
+      "para": 30,
+      "part": "p29"
+    },
+    {
+      "t0": 1288.46,
+      "t1": 1292.06,
+      "text": "The top is the station that listened to the other side,",
+      "kind": "story",
+      "para": 30,
+      "part": "p29"
+    },
+    {
+      "t0": 1292.1,
+      "t1": 1296.26,
+      "text": "and the state now protects all three layers as one monument.",
+      "kind": "story",
+      "para": 30,
+      "part": "p29"
+    },
+    {
+      "t0": 1296.54,
+      "t1": 1299.82,
+      "text": "The hill took twenty-two years of tipping to make,",
+      "kind": "story",
+      "para": 30,
+      "part": "p29"
+    },
+    {
+      "t0": 1299.9,
+      "t1": 1302.7,
+      "text": "so give it a few minutes before you go back down.",
+      "kind": "story",
+      "para": 30,
+      "part": "p29"
+    },
+    {
+      "t0": 1303.82,
+      "t1": 1305.3,
+      "text": "That's this week's story.",
+      "kind": "spot",
+      "para": 31,
+      "part": "[[SPOT-C]]"
+    },
+    {
+      "t0": 1305.5,
+      "t1": 1308.62,
+      "text": "I'm Yusuf, and if you want to stand where it happened,",
+      "kind": "spot",
+      "para": 31,
+      "part": "[[SPOT-C]]"
+    },
+    {
+      "t0": 1308.7,
+      "t1": 1312.5,
+      "text": "my walks and audio walks are at walk of berlin dot com.",
+      "kind": "spot",
+      "para": 31,
+      "part": "[[SPOT-C]]",
+      "display": "my walks and audio walks are at walkofberlin.com."
+    },
+    {
+      "t0": 1312.78,
+      "t1": 1315.02,
+      "text": "Next week, another Berlin story.",
+      "kind": "spot",
+      "para": 31,
+      "part": "[[SPOT-C]]"
+    }
+  ]
+}
