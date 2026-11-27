@@ -3845,12 +3845,11 @@
             }
           ],
           "video": {
-            "file": "tshirts-20261115/model-videos/a-window-in-berlin-classic-black.mp4",
-            "poster": "tshirts-20261115/model-videos/a-window-in-berlin-classic-black-poster.jpg",
-            "thumb": "tshirts-20261115/model-videos/a-window-in-berlin-classic-black-thumb.jpg",
-            "alt": "A Window in Berlin Classic T-shirt in Black worn by an adult model, short looping video. AI model visualization; actual colour, fit and print may vary.",
-            "fit": "cover",
-            "position": "65% 45%"
+            "file": "apparel-samples-20261127/a-window-in-berlin-classic-black.mp4",
+            "poster": "apparel-samples-20261127/a-window-in-berlin-classic-black-poster.jpg",
+            "thumb": "apparel-samples-20261127/a-window-in-berlin-classic-black-thumb.jpg",
+            "alt": "Close-up of the city building print on a black A Window in Berlin Classic T-shirt.",
+            "fit": "contain"
           }
         },
         "White": {
@@ -8225,7 +8224,14 @@
             "sha256": "dc8db8360e1c67e281c7133af0ef9ec316201991c918ec9acbb6aace20615b33",
             "alt": "Berlin & Cölln 1652 Hoodie in Black, actual Gelato garment preview"
           },
-          "gallery": []
+          "gallery": [],
+          "video": {
+            "file": "apparel-samples-20261127/berlin-colln-1652-hoodie-black.mp4",
+            "poster": "apparel-samples-20261127/berlin-colln-1652-hoodie-black-poster.jpg",
+            "thumb": "apparel-samples-20261127/berlin-colln-1652-hoodie-black-thumb.jpg",
+            "alt": "Close-up of the Berlin & Cölln 1652 map print and front pocket on a black hoodie.",
+            "fit": "contain"
+          }
         }
       }
     },
