@@ -369,7 +369,7 @@
     (/(?:dein-berlin-2027|cart-page)/.test(location.pathname)?importStoreModule(asset('calendar-configurator.js')).catch(()=>null):Promise.resolve(null)),
     design2Enabled?importStoreModule(asset('design2.js')).catch(()=>null):Promise.resolve(null),   // a failed design 2 load falls back to the current store
     legacyGiftPresentation()?Promise.resolve(null):fetch(new URL('data/sized-media.json?v=sized-20261124-v1',base).href,{signal:AbortSignal.timeout(2500)}).then(r=>r.ok?r.json():null).then(applySizedMedia).catch(()=>null),
-    (SIGN_PAGE.test(location.pathname)?importStoreModule(asset('sign-configurator.js')).catch(()=>null):Promise.resolve(null))
+    (SIGN_PAGE.test(location.pathname)?importStoreModule(new URL('sign-configurator.js?v=sign-product-photos-20261127-v1',base).href).catch(()=>null):Promise.resolve(null))
   ])));
   // Start reads in parallel with Wix hydration. A replacement mount may recover from a rejected batch.
   getResources.then(load => load()).catch(() => {});
