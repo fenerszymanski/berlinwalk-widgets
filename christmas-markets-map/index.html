@@ -312,8 +312,8 @@
     }
     #bw-christmas-markets-map .leaflet-popup-content { max-width: calc(100vw - 50px); overflow-wrap: anywhere; }
 
-    /* Christmas walk banner under the map (Yusuf, 27 Nov 2026). Shown only on the tool page (?surface=tool-page);
-       the blog embed keeps the map alone. Remove after 3 Jan 2027 with RETIREMENT_STEPS step 12. */
+    /* Christmas walk banner under the map (Yusuf, 27 Nov 2026). Shown on the tool page (?surface=tool-page)
+       and, since 27 Nov (Yusuf: "blog yazısındaki haritaya da ekle"), in the blog embed too; utm_content tells them apart. Remove after 3 Jan 2027 with RETIREMENT_STEPS step 12. */
     #bw-christmas-markets-map .bw-xwalk[hidden] { display: none; }
     #bw-christmas-markets-map .bw-xwalk {
       margin-top: 16px;
@@ -434,9 +434,11 @@
   <script>
     (function () {
       try {
-        if (new URLSearchParams(location.search).get('surface') === 'tool-page') {
-          document.getElementById('bw-xwalk').hidden = false;
+        var el = document.getElementById('bw-xwalk');
+        if (new URLSearchParams(location.search).get('surface') !== 'tool-page') {
+          el.href = el.href.replace('utm_content=christmas-markets-map', 'utm_content=christmas-markets-map-blog');
         }
+        el.hidden = false;
       } catch (e) { /* old browser: banner stays hidden */ }
     })();
   </script>
