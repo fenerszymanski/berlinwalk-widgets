@@ -319,7 +319,18 @@
       <span class="bw-kicker">Sunday Shopping Map</span>
     </div>
     <div class="bw-body">
-      <p class="bw-hint">Tap any pin to see opening hours and store details. Official 2026 city-wide shopping Sundays confirmed so far: 25 January and 21 June; some shopping centres list separate dates. On normal Sundays, use the map for station and airport options.</p>
+      <p class="bw-hint" id="shopping-sundays" hidden><span></span> <a href="https://www.berlin.de/sen/wirtschaft/branchen/handel/verkaufsoffene-sonntage/verkaufsoffene-sonntage-596428.php" target="_blank" rel="noopener">Official Berlin dates</a></p>
+      <script>
+        (() => {
+          const berlinDate = new Intl.DateTimeFormat('sv-SE', { timeZone: 'Europe/Berlin' }).format(new Date());
+          if (berlinDate > '2026-12-20') return;
+          const notice = document.getElementById('shopping-sundays');
+          const dates = berlinDate <= '2026-12-06' ? '6 and 20 December 2026' : '20 December 2026';
+          notice.querySelector('span').textContent = 'Shopping Sundays: ' + dates + ' (participating shops only).';
+          notice.hidden = false;
+        })();
+      </script>
+      <p class="bw-hint">Tap any pin to see opening hours and store details. On normal Sundays, use the map for station and airport options.</p>
 
       <div class="bw-filters">
         <button class="bw-filter active" type="button" data-filter="all">All (10)</button>

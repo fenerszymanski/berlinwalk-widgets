@@ -122,10 +122,10 @@
       note: 'Closed all day on 24 December. Last entry 21:45; you need a booked slot.' },
     { g: 1, n: 'TV Tower', s: 'observation deck',
       d24: ['set', 10, 16], d25: ['usual', 9, 23], d26: ['usual', 9, 23], d27: ['usual', 9, 23],
-      note: 'The tower explicitly lists 10:00 to 16:00 on 24 December. Its general opening blocks differ on the normal start time, so check your ticket for 25 to 27 December.' },
+      note: 'The tower explicitly lists 10:00 to 16:00 on 24 December. Its general opening blocks differ on the normal start time, so check your ticket for 25 to 27 December. <a href="https://tv-turm.de/en/faqs/" target="_blank" rel="noopener">TV Tower FAQ</a>.' },
     { g: 1, n: 'Berliner Dom', s: 'cathedral',
       d24: ['unclear'], d25: ['unclear'], d26: ['unclear'], d27: ['usual', 12, 17],
-      note: 'Holiday services, not sightseeing. On 24 December 2025 it held five services (14:00, 16:00, 18:00, 22:00, midnight). The 2026 plan is not out yet.' },
+      note: 'Public Christmas Eve services: 14:00, 16:00, 18:00, 22:00 and midnight (00:00 on 25 December). Sightseeing hours are listed separately. <a href="https://www.berlinerdom.de/termine/" target="_blank" rel="noopener">Berliner Dom calendar</a>.' },
     { g: 1, n: 'Zoo Berlin', s: 'Hardenbergplatz',
       d24: ['set', 9, 14], d25: ['set', 9, 16.5], d26: ['set', 9, 16.5], d27: ['set', 9, 16.5],
       note: 'Open every day of the year; on the 24th it shuts at 14:00. Last entry an hour before closing.' },
@@ -250,7 +250,7 @@
     el('shutlist').innerHTML = shut.map(function (r) {
       var v = r[day], why;
       if (v[0] === 'shut') why = 'closed all day';
-      else if (v[0] === 'unclear') why = 'hours not published yet';
+      else if (v[0] === 'unclear') why = r.n === 'Berliner Dom' && day === 'd24' ? 'sightseeing hours unconfirmed' : 'hours not published yet';
       else if (hour < v[1]) why = 'opens at ' + hm(v[1]);
       else why = 'closed at ' + hm(v[2]);
       return '<li class="' + (v[0] === 'unclear' ? 'q' : 'off') + '"><b>' + r.n + '</b> ' + why + '<small>' + r.note + '</small></li>';
