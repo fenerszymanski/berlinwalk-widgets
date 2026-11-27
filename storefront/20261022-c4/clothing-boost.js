@@ -76,7 +76,10 @@ export function offerLineHtml({de = false, esc, now} = {}) {
   if (!blackWeekActive(now)) return '';
   const c = BLACK_WEEK.copy[de ? 'de' : 'en'];
   const text = c.keep.reduce((html, chunk) => html.replace(esc(chunk), `<span class="bw-offer-nb">${esc(chunk)}</span>`), esc(c.title));
-  return `<p class="bw-offer bw-raw" data-bw-offer data-bw-until="${esc(BLACK_WEEK.until)}">${text}<small class="bw-offer-note">${esc(c.note)}</small></p>`;
+  // 27 Nov 2026 (Yusuf: the sentence stood on the poster list next to digital files without saying which offer it was): the line names
+  // Black Week and its scope (printed posters, T-shirts, hoodies), so it never reads as if digital files were included.
+  const scope = de ? 'Gedruckte Poster, T-Shirts und Hoodies.' : 'Printed posters, T-shirts and hoodies.';
+  return `<p class="bw-offer bw-raw" data-bw-offer data-bw-until="${esc(BLACK_WEEK.until)}"><b class="bw-offer-name">${esc(c.name)}:</b> ${text}<small class="bw-offer-note">${esc(scope + ' ' + c.note)}</small></p>`;
 }
 export const SECOND_HEADING = Object.freeze({en: 'You might also like', de: 'Das könnte dir auch gefallen'});
 export function secondHeading({de = false, now} = {}) {

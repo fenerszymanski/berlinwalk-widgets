@@ -912,6 +912,10 @@ bw-home-then-now .bwh-nb { white-space: nowrap; }
 bw-home-then-now .bwh-slide[data-bwh-theme="bw"] { display: flex; }
 bw-home-then-now .bwh-slide[data-bwh-theme="bw"] .bwh-slide__grid { flex: 1 1 auto; justify-content: center; padding: 20px 16px 22px; border-radius: 14px; background: radial-gradient(80% 100% at 82% 30%, #1D2B20 0%, rgba(14, 18, 16, 0) 68%), #0E1210; color: var(--bwh-cream); }
 bw-home-then-now .bwh-slide[data-bwh-theme="bw"] .bwh-eyebrow { color: var(--bwh-yellow); text-transform: uppercase; font-size: 12px; }
+/* 27 Nov 2026: "Black Friday" is longer than "Black Week"; pill and date sit in a wrapping row with real gaps, no orphan dot (as in the store hero). */
+bw-home-then-now .bwh-slide[data-bwh-theme="bw"] .bwh-eyebrow { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 14px; }
+bw-home-then-now .bwh-slide[data-bwh-theme="bw"] .bwh-eyebrow__name { margin-right: 0; }
+@media (max-width: 740px) { bw-home-then-now .bwh-slide[data-bwh-theme="bw"] .bwh-eyebrow__dot { display: none; } }
 bw-home-then-now .bwh-eyebrow__name { display: inline-block; margin-right: 8px; padding: .5em .95em .42em; border-radius: 999px; background: var(--bwh-yellow); color: var(--bwh-green); font-size: 15px; font-weight: 700; letter-spacing: .1em; }
 bw-home-then-now .bwh-eyebrow__until { white-space: nowrap; }
 @media (max-width: 359px) { bw-home-then-now .bwh-eyebrow__dot { display: none; } }

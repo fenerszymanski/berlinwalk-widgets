@@ -8,7 +8,7 @@
   'use strict';
 
   const DATA = {
-    "release": "home-then-now-20261127-black-friday",
+    "release": "home-then-now-20261127-black-friday-2",
     "hero": {
       "img1928": "assets/hero-1928.webp",
       "imgToday": "assets/hero-today.webp",
