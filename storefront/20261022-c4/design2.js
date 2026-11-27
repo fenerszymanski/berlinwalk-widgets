@@ -23,7 +23,7 @@ function earlyJson(url) {
 const listingOrderReady=earlyJson(new URL('data/listing-order.json?v=zoom-sort-20261117-v1',import.meta.url)).catch(()=>null).then(j=>{if(j&&Array.isArray(j.popular)&&j.created&&typeof j.created==='object')listingOrder=j;});
 export const prepareDesign=shareSuccessful(async ()=>{
  const files=['recommendations.json','de-store.json','explore-images.json'];
- const data=files.map(file=>earlyJson(new URL('data/'+file+'?v='+(file==='explore-images.json'?'reel-posters-digital-20261127-v1':file==='de-store.json'?'reel-posters-digital-20261127-v1':'reel-posters-digital-20261127-v1'),import.meta.url)));
+ const data=files.map(file=>earlyJson(new URL('data/'+file+'?v='+(file==='explore-images.json'?'reel-posters-digital-20261127-v1':file==='de-store.json'?'berlin-mugs-20261127-v1':'reel-posters-digital-20261127-v1'),import.meta.url)));
  [recommendations,translations,exploreImages]=await Promise.all([...data,listingOrderReady,extrasEnabled()?loadExtras():undefined]);
 });
 export const prepare=prepareDesign();
