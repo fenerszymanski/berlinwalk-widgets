@@ -1036,7 +1036,8 @@ for(const crumb of this.shadowRoot.querySelectorAll('.breadcrumb > a:first-child
   const captions=galleryEl.querySelectorAll('.gallery-caption,.ys-caption,.ys-quick');
   const bwPicks=buyBox.querySelector('.bw-picks'),uniqueCross=[...new Set([...buyBox.querySelectorAll(':scope > .rw-cross'),...layout.querySelectorAll('.rw-cross')])];
   if(specEl||paperNote||detailNodes.length||realPrint||captions.length||bwPicks||uniqueCross.length){
-   const dtTitle=product?.group==='apparel'?(de?'Details & Material':'Details & material'):(de?'Details & Papier':'Details & paper');
+   const hasMaterial=product?.group==='apparel'||product?.group==='berlin-mugs';
+   const dtTitle=hasMaterial?(de?'Details & Material':'Details & material'):(de?'Details & Papier':'Details & paper');
    const dtAcc=makeAcc('bw-acc-details',dtTitle);
    if(specEl){const p=document.createElement('p');p.className='bw-spec-copy meta';p.textContent=specEl.textContent.trim();dtAcc.body.append(p);}
    if(paperNote){paperNote.classList.add('bw-moved-note');dtAcc.body.append(paperNote);}

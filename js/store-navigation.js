@@ -118,7 +118,7 @@ export const STORE_MENU_DESIGN2 = Object.freeze([
     {label:'Dein Berlin 2027 · personalised calendar',de:'Dein Berlin 2027 · persönlicher Kalender',href:STORE_PERSONAL_CALENDAR_PRODUCT},
     {label:'Berlin 2027 wall calendar',de:'Berlin Wandkalender 2027',href:STORE_CALENDAR_PRODUCT},
     {label:'Tote bags',de:'Stoffbeutel',href:'https://walkofberlin.com/category/berlin-tote-bags'},
-    {label:'Berlin mugs',de:'Berlin-Tassen',href:'https://walkofberlin.com/category/berlin-mugs'},
+    {label:'Berlin Mugs',de:'Berlin-Tassen',href:'https://walkofberlin.com/category/berlin-mugs'},
     {label:'Personal newspapers',de:'Persönliche Zeitungen',href:storeHref('newspapers')},
     {label:'1928 gift voucher',de:'1928-Gutschein',href:'https://walkofberlin.com/product-page/gift-your-berlin-street-in-1928-poster-gift'}
   ]},
