@@ -17,7 +17,9 @@ export function bfSelection(config,id,native,choices,amount) {
   const rows=config?.products?.[id]?.variants||[];
   let selected;
   if(choices)selected=native.variants?.find(v=>v.visible===true&&v.inStock===true&&sameChoices(v.choices,choices));
-  else if(native.requiresOptions)selected=(native.variants||[]).filter(v=>v.visible===true&&v.inStock===true&&cents(v.price)===cents(amount)).find(v=>rows.some(r=>sameChoices(r.choices,v.choices)));
+  // 27 Nov 2026: a "From" price is the cheapest sellable Black Friday variant (it matched the product's base price before,
+  // which after the price switch is no longer the cheapest one, e.g. the framed print showed 69,90 instead of 59,90).
+  else if(native.requiresOptions)selected=(native.variants||[]).filter(v=>v.visible===true&&v.inStock===true&&Number.isFinite(v.price)&&rows.some(r=>sameChoices(r.choices,v.choices))).sort((a,b)=>a.price-b.price)[0];
   const picked=choices||selected?.choices||{};
   const row=rows.find(r=>sameChoices(r.choices,picked));
   const actual=selected?.price??(!native.requiresOptions&&!choices?(native.discountedPrice??native.price):null);
@@ -35,4 +37,24 @@ export function bfPriceHtml({config,id,native,amount,choices,de=false,from=false
   const label=de?'Black Friday · bis Montag, 30. November':'Black Friday · until Monday 30 November';
   const note=de?'Niedrigster Preis der letzten 30 Tage:':'Lowest price in the last 30 days:';
   return `<span class="gw-prices bf-prices" data-bf-price><span class="gw-badge">${esc(label)}</span> <del>${esc(prefix+money(row.reference,de))}</del> <strong>${esc(prefix+money(row.sale,de))}</strong><small>${esc(note+' '+money(row.reference,de)+'.')}</small></span>`;
+}
+// 27 Nov 2026: the product page code reads the size x paper variants only for its own poster products and the framed/canvas
+// prints, so the 1928 poster reached the store without variants and its Black Friday price never showed (the page drew its
+// fixed table, 29,90). During the window only, a BF product that needs options but came without variants takes them from our
+// hourly Wix catalogue copy, and only from a copy made after the window opened and at most 3 hours old. Display only: the cart
+// looks the variant up by its names and Wix charges its own price.
+export const BF_COPY_MAX_AGE=3*3600000;
+export function bfFillVariants(config,catalogue,copy,now=Date.now()) {
+  if(!bfActive(config,now)||!Array.isArray(catalogue?.products))return [];
+  const at=Date.parse(copy?.generatedAt),start=Date.parse(config.start);
+  if(copy?.schema!==2||copy?.kind!=='catalog-snapshot'||!Array.isArray(copy.products)||!Number.isFinite(at)||at<start||at>now+300000||now-at>BF_COPY_MAX_AGE)return [];
+  const filled=[];
+  for(const id of BF_PRODUCT_IDS){
+    const live=catalogue.products.find(p=>p?.productId===id);
+    if(!live||live.requiresOptions!==true||(Array.isArray(live.variants)&&live.variants.length))continue;
+    const rows=(copy.products.find(p=>p?.productId===id)?.variants||[]).filter(v=>v&&v.choices&&typeof v.choices==='object'&&Number.isFinite(v.price))
+      .map(v=>({choices:{...v.choices},price:v.price,visible:v.visible===true,inStock:v.inStock===true,source:'catalog-copy'}));
+    if(rows.length){live.variants=rows;filled.push(id);}
+  }
+  return filled;
 }

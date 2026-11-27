@@ -10577,5 +10577,51 @@
         "alt": "Complete The Wrapped Corner Shop artwork shown on a neutral paper border."
       }
     ]
+  },
+  {
+    "id": "dl-berlin-bear-in-the-marsh",
+    "name": "Berlin Bear in the Marsh Printable Poster",
+    "place": "Berlin-Cölln · The bear in the marsh",
+    "image": "berlin-bear-in-the-marsh-fullart.jpg",
+    "alt": "Top-down screen print of a walking bear formed by petrol-blue water channels, golden reeds, sand and dark peat patches, with the BERLIN-CÖLLN, BERLIN footer.",
+    "typeLine": "DIGITAL DOWNLOAD · 30 × 40 CM",
+    "kind": "digital",
+    "deliveryNote": "Digital download · 1 JPEG print file and a printing guide. No physical item.",
+    "deliveryDetails": "Your download includes one 3:4 sRGB JPEG, 3543 × 4724 px at 300 dpi for 30 × 40 cm, and a printing guide. The same file prints without cropping at 45 × 60 cm and 60 × 80 cm, with softer detail at larger sizes. No physical poster, frame or decor is included.",
+    "group": "stories",
+    "visualCreditsHtml": "<p>No photograph or third-party picture is reproduced in this artwork. The bear, the water channels and the colours are my own interpretation and do not follow a geological legend.</p><p>Place facts: Berlin Senate, <a href=\"https://www.berlin.de/geschichte/8476760-3689745-die-mittelalterliche-handelsstadt.html\">Die mittelalterliche Handelsstadt</a> and <a href=\"https://www.berlin.de/kunst-und-kultur-mitte/geschichte/erinnerungskultur/berlin-mitte-codes/artikel.1295500.php\">Südliche Spreeinsel und Inselbrücke</a>; Abgeordnetenhaus Berlin, <a href=\"https://www.parlament-berlin.de/media/download/480\">Berlin und die Geschichte seiner Verfassung</a>; Berlin Umweltatlas, <a href=\"https://www.berlin.de/umweltatlas/boden/geologische-skizze/2007/zusammenfassung/\">Geologische Skizze</a> (open data, dl-de-zero-2.0), as a background for the wet valley ground.</p>",
+    "sizeImages": {
+      "30x40 cm": "berlin-bear-in-the-marsh-30x40.jpg"
+    },
+    "gallery": [
+      {
+        "image": "berlin-bear-in-the-marsh-30x40.jpg",
+        "alt": "Complete artwork at 30 x 40 cm. Digital file only."
+      }
+    ],
+    "wixProductId": "8ee6f556-55e6-6c46-8035-98eab94f526f"
+  },
+  {
+    "id": "dl-hauptbahnhof-winter-light",
+    "name": "Hauptbahnhof Printable Poster",
+    "place": "Hauptbahnhof · Winter light at Humboldthafen",
+    "image": "hauptbahnhof-winter-light-fullart.jpg",
+    "alt": "Gouache-style winter view of Berlin Hauptbahnhof from Humboldthafen: the low curved glass hall, a red train on the viaduct and the two office bridges reflected in the harbour, with the HAUPTBAHNHOF, BERLIN footer.",
+    "typeLine": "DIGITAL DOWNLOAD · 30 × 40 CM",
+    "kind": "digital",
+    "deliveryNote": "Digital download · 1 JPEG print file and a printing guide. No physical item.",
+    "deliveryDetails": "Your download includes one 3:4 sRGB JPEG, 3543 × 4724 px at 300 dpi for 30 × 40 cm, and a printing guide. The same file prints without cropping at 45 × 60 cm and 60 × 80 cm, with softer detail at larger sizes. No physical poster, frame or decor is included.",
+    "group": "stories",
+    "visualCreditsHtml": "<p>Photographic references (form only): Ansgar Koreng, <a href=\"https://commons.wikimedia.org/wiki/File:Berlin_Hauptbahnhof,_Ostseite,_170430,_ako.jpg\">Berlin Hauptbahnhof, Ostseite, 170430, ako.jpg</a>, 30 April 2017, Wikimedia Commons, <a href=\"https://creativecommons.org/licenses/by-sa/4.0/\">CC BY-SA 4.0</a>; Ansgar Koreng, <a href=\"https://commons.wikimedia.org/wiki/File:Berlin_Hauptbahnhof_und_Humboldthafen,_170402,_ako.jpg\">Berlin Hauptbahnhof und Humboldthafen, 170402, ako.jpg</a>, 2 April 2017, Wikimedia Commons, <a href=\"https://creativecommons.org/licenses/by-sa/3.0/de/\">CC BY-SA 3.0 DE</a>; DimiTalen, <a href=\"https://commons.wikimedia.org/wiki/File:View_of_Berlin_Hauptbahnhof_from_Moltkebr%C3%BCcke,_Berlin,_2017.jpg\">View of Berlin Hauptbahnhof from Moltkebrücke, Berlin, 2017.jpg</a>, 2017, Wikimedia Commons, <a href=\"https://creativecommons.org/publicdomain/zero/1.0/\">CC0 1.0</a>. Changes: reinterpreted as a gouache-style winter view; the glass hall, the viaduct, the office bridges and the harbour basin are arranged for the composition, and the light, reflection, window grid, shore plants and train position are artistic interpretation. This is not a reproduction of any photograph. No endorsement is implied.</p><p>Place facts: gmp Architekten, <a href=\"https://www.gmp.de/de/projekte/463/hauptbahnhof-berlin\">Hauptbahnhof Berlin</a>; Deutsche Bahn, <a href=\"https://www.deutschebahn.com/de/presse/presse-regional/pr-berlin-de/hintergrund/Berlin-Hauptbahnhof-Markantes-Eingangstor-zur-Stadt-8860186\">Berlin Hauptbahnhof background note</a>.</p>",
+    "sizeImages": {
+      "30x40 cm": "hauptbahnhof-winter-light-30x40.jpg"
+    },
+    "gallery": [
+      {
+        "image": "hauptbahnhof-winter-light-30x40.jpg",
+        "alt": "Complete artwork at 30 x 40 cm. Digital file only."
+      }
+    ],
+    "wixProductId": "9b6730fb-aa0f-9b20-b820-c9501d37f4f8"
   }
 ]
