@@ -24,7 +24,7 @@ const DE = new Map(Object.entries({
     'Bis zu drei Zeilen, wie die Legendentafeln unter Berliner Straßenschildern. Alle drei leer lassen für ein Schild ohne Tafel.',
   'Line': 'Zeile', 'Your sign': 'Dein Schild', 'Add to cart': 'In den Warenkorb', 'View cart': 'Zum Warenkorb', 'Added to your cart': 'Im Warenkorb',
   'On the wall': 'An der Wand', 'Close up': 'Nah', 'Illustrated preview': 'Gezeichnete Vorschau',
-  'Product examples': 'Produktbeispiele', 'Example image': 'Beispielbild',
+  'Product examples': 'Produktbeispiele', 'Example image': 'Beispielbild', 'Product images': 'Produktbilder', 'Live preview of your sign': 'Live-Vorschau deines Schilds', '← Back to your sign': '← Zurück zu deinem Schild',
   'Styling example · AI visualization': 'Gestaltungsbeispiel · KI-Visualisierung',
   'Drawn to scale: 45.7 x 30.5 cm.': 'Maßstabsgetreu gezeichnet: 45,7 x 30,5 cm.',
   'Type the name for your sign.': 'Schreib den Namen für dein Schild.',
@@ -112,11 +112,21 @@ const CSS = `.sg-wrap{padding-block:28px 40px}.sg-layout{display:grid;grid-templ
 .sg-heading .lead{margin:0 0 10px;font-size:17px;line-height:1.45}.sg-price{font-size:24px;font-weight:500;color:var(--green,#123d18)}
 .sg-preview{grid-column:1;grid-row:1/span 6;position:sticky;top:12px}.sg-stage{background:#e4dfd4;border-radius:6px;overflow:hidden}
 .sg-stage canvas{display:block;width:100%;height:auto}.sg-views{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap;align-items:center}
-.sg-stage .sg-photo{display:block;width:100%;aspect-ratio:16/11;object-fit:contain}
-.sg-stage [hidden]{display:none}.sg-photos{display:flex;gap:8px;margin-top:10px}
-.sg-photos button{padding:2px;border:2px solid transparent;border-radius:6px;background:transparent}
-.sg-photos button[aria-pressed=true]{border-color:var(--green,#123d18)}
-.sg-photos img{display:block;width:60px;height:60px;border-radius:3px}
+.sg-stage .sg-photo{display:block;width:100%;height:auto;background:#fff}
+.sg-stage{position:relative}.sg-stage [hidden]{display:none}.sg-back{position:absolute;left:12px;top:12px;min-height:40px;padding:6px 14px;border:0;border-radius:30px;background:var(--green,#123d18);color:var(--cream,#fafaf5);font-size:13px;font-weight:600;box-shadow:0 4px 12px #123d1833}
+/* Gallery (28 Nov 2026, Yusuf: the live preview must never get lost behind the example photos): the same left thumbnail rail as the
+   1928 page (.bw-thumb-rail / .thumbnails / .thumb, 86 x 124, styled by storefront.css), the live preview always first; on phones the
+   rail is hidden (as on the 1928 page) and dots under the stage switch the images, swipe too. Fallback looks for the rail below. */
+.sg-gallery.has-photos{display:grid;grid-template-columns:86px minmax(0,1fr);gap:0 18px;align-items:start}
+.sg-gallery .bw-thumb-rail{grid-column:1;grid-row:1}.sg-gallery .sg-main{grid-column:2;grid-row:1;min-width:0}
+.sg-gallery .thumbnails{display:flex;flex-direction:column;gap:14px;padding:0;max-height:none!important;overflow:visible!important}
+.sg-gallery .thumb{width:86px;height:124px;padding:3px;border:1px solid #E2E2DA;border-radius:6px;background:#F4F4EE;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.sg-gallery .thumb[aria-pressed=true]{border:2px solid var(--green,#123d18);padding:2px}
+.sg-gallery .thumb img,.sg-gallery .thumb canvas{width:100%;height:100%;object-fit:contain;border-radius:3px;display:block}
+.sg-gallery .thumb canvas{height:auto}
+.sg-dots{display:none}
+.sg-dot{width:8px;height:8px;min-width:8px;min-height:8px;padding:0;border-radius:50%;border:0;background:#C8CEC3;cursor:pointer;position:relative}
+.sg-dot::after{content:'';position:absolute;inset:-10px}.sg-dot[aria-current=true]{background:var(--green,#123d18);width:20px;border-radius:999px}
 .sg-photo-note{font-size:12px;color:var(--muted,#5a6455);margin:6px 0 0}
 .sg-views button{min-height:40px;border:1.5px solid var(--green,#123d18);background:transparent;border-radius:30px;padding:6px 14px;font-size:13px;font-weight:600}
 .sg-views button[aria-pressed=true]{background:var(--green,#123d18);color:var(--cream,#fafaf5)}.sg-note{font-size:12px;color:var(--muted,#5a6455);margin:6px 0 0}
@@ -134,7 +144,7 @@ const CSS = `.sg-wrap{padding-block:28px 40px}.sg-layout{display:grid;grid-templ
 .sg-buy .primary{width:100%}.sg-points{font-size:14px;line-height:1.55;padding-left:18px;margin:14px 0 0}.sg-points li{margin-bottom:6px}
 .sg-summary{display:flex;justify-content:space-between;gap:12px;font-size:15px;margin:0 0 6px}.sg-summary>span:last-child{white-space:nowrap}.sg-added{font-size:14px;margin:8px 0}
 .sg-mini{display:none}
-@media(max-width:899px){.sg-layout{display:block}.sg-preview{position:static}.sg-heading{margin-bottom:12px}.sg-occasions{grid-template-columns:repeat(2,minmax(0,1fr))}.sg-note{display:none}
+@media(max-width:899px){.sg-layout{display:flex;flex-direction:column}.sg-preview{position:static;order:0;margin:0 -16px 8px}.sg-preview .sg-stage{border-radius:0}.sg-preview .sg-views,.sg-preview .sg-photo-note{padding-inline:16px}.sg-heading{order:1}.sg-mini{order:2}.sg-step{order:3}.sg-gallery.has-photos{display:block}.sg-gallery .bw-thumb-rail{display:none!important}.sg-dots{display:flex;align-items:center;justify-content:center;gap:8px;padding:10px 16px 2px;min-height:30px}.sg-heading{margin-bottom:12px}.sg-occasions{grid-template-columns:repeat(2,minmax(0,1fr))}.sg-note{display:none}
 .sg-mini{display:block;position:sticky;top:0;z-index:3;margin:0 -16px;padding:6px 16px;background:#fafaf5;border-bottom:1px solid var(--line,#e2e2da);box-shadow:0 8px 14px -12px #123d1855;visibility:hidden;height:0;overflow:hidden}.sg-mini.is-on{visibility:visible;height:auto;margin-bottom:10px}
 .sg-mini canvas{display:block;width:min(48vw,190px);height:auto;margin:0 auto}.sg-field input,.sg-row input{scroll-margin-top:160px}}`;
 
@@ -145,10 +155,13 @@ export function signBody({german, price, priceHtml, legal = '', photos = []}) {
   const corner = side => `<div class="sg-corner"><label class="sg-field" for="sg-${side}">${t(side === 'left' ? 'Bottom left' : 'Bottom right')}<span class="sg-count" data-sg-count="${side}"></span></label><div class="sg-row"><input id="sg-${side}" data-sg="${side}" maxlength="${L.corner + 8}" autocomplete="off" spellcheck="false"><select aria-label="${t('Arrow')} · ${t(side === 'left' ? 'Bottom left' : 'Bottom right')}" data-sg-arrow="${side}"><option value="none">${t('no arrow')}</option><option value="left">${t('← left')}</option><option value="right">${t('right →')}</option></select></div></div>`;
   return `<div class="wrap sg-wrap bw-raw" lang="${german ? 'de' : 'en'}" data-sign-host><style>${CSS}</style><div class="sg-layout">
 <div class="sg-heading"><p class="sg-kicker">${t('PERSONALISED BERLIN STREET SIGN · 45 x 30 CM')}</p><h1>${t('Your name on a Berlin street sign')}</h1><p class="lead">${t('White aluminium, black letters, and the plaque below for your story.')}</p><span class="sg-price">${priceHtml || esc(price)}</span></div>
-<div class="sg-mini" data-sg-mini aria-hidden="true"><canvas data-sg-mini-canvas width="780" height="530"></canvas></div><section class="sg-preview" aria-label="${t('Illustrated preview')}"><div class="sg-stage"><canvas data-sg-canvas width="1600" height="1100" role="img" aria-label="${t('Illustrated preview')}"></canvas>${photos.length ? '<img class="sg-photo" data-sg-photo alt="" hidden>' : ''}</div>
+<div class="sg-mini" data-sg-mini aria-hidden="true"><canvas data-sg-mini-canvas width="780" height="530"></canvas></div><section class="sg-preview" aria-label="${t('Illustrated preview')}"><div class="sg-gallery${photos.length ? ' has-photos' : ''}">
+${photos.length ? `<div class="bw-thumb-rail"><div class="thumbnails" role="group" aria-label="${t('Product images')}"><button type="button" class="thumb" data-sg-slide="0" aria-label="${t('Live preview of your sign')}" aria-pressed="true"><canvas data-sg-thumb-canvas width="430" height="296" aria-hidden="true"></canvas></button>${photos.map(({src}, i) => `<button type="button" class="thumb" data-sg-slide="${i + 1}" aria-label="${t('Example image')} ${i + 1}" aria-pressed="false"><img src="${esc(src)}" alt="" loading="lazy" decoding="async"></button>`).join('')}</div></div>` : ''}
+<div class="sg-main"><div class="sg-stage" data-sg-stage><canvas data-sg-canvas width="1600" height="1100" role="img" aria-label="${t('Illustrated preview')}"></canvas>${photos.length ? `<img class="sg-photo" data-sg-photo alt="" hidden><button type="button" class="sg-back" data-sg-back hidden>${t('← Back to your sign')}</button>` : ''}</div>
+${photos.length ? `<div class="sg-dots" role="tablist" aria-label="${t('Product images')}">${[{alt: t('Live preview of your sign')}, ...photos.map((x, i) => ({alt: t('Example image') + ' ' + (i + 1)}))].map((x, i) => `<button type="button" class="sg-dot" data-sg-slide="${i}" aria-label="${x.alt}" aria-current="${i === 0}"></button>`).join('')}</div>` : ''}
 <div class="sg-views"><button type="button" data-sg-view="wall" aria-pressed="true">${t('On the wall')}</button><button type="button" data-sg-view="close" aria-pressed="false">${t('Close up')}</button><span class="sg-note" data-sg-example hidden>${t('Example name in grey. Type yours.')}</span></div>
 <p class="sg-note" data-sg-preview-note>${t('Illustrated preview')} · ${t('Drawn to scale: 45.7 x 30.5 cm.')}</p>
-${photos.length ? `<div class="sg-photos" role="group" aria-label="${t('Product examples')}">${photos.map(({src,alt}, i) => `<button type="button" data-sg-photo-alt="${esc(alt)}" aria-label="${t('Example image')} ${i + 1}" aria-pressed="false"><img src="${esc(src)}" alt="" width="60" height="60" loading="lazy" decoding="async"></button>`).join('')}</div><p class="sg-photo-note" data-sg-photo-note hidden>${t('Styling example · AI visualization')}</p>` : ''}</section>
+${photos.length ? `<p class="sg-photo-note" data-sg-photo-note hidden>${t('Styling example · AI visualization')}</p><script type="application/json" data-sg-photo-list>${JSON.stringify(photos.map(({src, alt}) => ({src, alt}))).replace(/</g, '\\u003c')}</script>` : ''}</div></div></section>
 <section class="sg-step"><h2><span class="sg-num">1</span>${t('What is it for?')}</h2><p class="sg-help">${t('Pick one and I fill in an example. You can change every word.')}</p><div class="sg-occasions" role="radiogroup" aria-label="${t('What is it for?')}">${Object.entries(OCCASIONS).map(([k, o]) => `<button type="button" role="radio" aria-checked="false" data-sg-occasion="${k}">${t(o.label)}</button>`).join('')}</div></section>
 <section class="sg-step"><h2><span class="sg-num">2</span>${t('The sign')}</h2>${input('sg-name', 'Name on the sign', 'name', L.name)}<div class="sg-chips"><span>${t('Add a street word')}</span>${STREET_WORDS.map(w => `<button type="button" data-sg-word="${w}">-${w}</button>`).join('')}</div>
 ${input('sg-ortsteil', 'Ortsteil (the small line at the top)', 'ortsteil', L.ortsteil, 'list="sg-ortsteile"')}<datalist id="sg-ortsteile">${ORTSTEILE.map(o => `<option value="${esc(o)}">`).join('')}</datalist><p class="sg-help">${t('Leave it empty for no line.')}</p>
@@ -162,8 +175,11 @@ ${input('sg-ortsteil', 'Ortsteil (the small line at the top)', 'ortsteil', L.ort
 
 export function mountSign(host, s, api) {
   const german = !!api.german, t = x => signText(x, german), $ = q => host.querySelector(q);
-  const photo = $('[data-sg-photo]'), photoButtons = [...host.querySelectorAll('[data-sg-photo-alt]')];
-  let selectedPhoto = null;
+  const photo = $('[data-sg-photo]'), slideButtons = [...host.querySelectorAll('[data-sg-slide]')];
+  let photoList = [];
+  try { photoList = JSON.parse($('[data-sg-photo-list]')?.textContent || '[]'); } catch {}
+  let slide = 0;   // 0 = the live preview, 1.. = example photos
+  const selectedPhoto = () => slide > 0;
   let disposed = false, frame = 0;
   s.lang ??= german ? 'de' : 'en';
   s.left ??= {text: '', arrow: 'none'}; s.right ??= {text: '', arrow: 'none'}; s.caption ??= ['', '', '']; s.name ??= ''; s.ortsteil ??= '';
@@ -191,7 +207,7 @@ export function mountSign(host, s, api) {
     const why = !c.ok ? t(c.why).replace('{chars}', c.chars || '').replace('{field}', t({name: 'name', ortsteil: 'Ortsteil', 'left.text': 'bottom left', 'right.text': 'bottom right'}[c.field] || 'plaque line')) : api.available() ? '' : t('This sign is not on sale yet.');
     const box = $('[data-sg-why]'); box.textContent = why; box.classList.toggle('is-error', !c.ok && !c.wait && c.why !== 'Type the name for your sign.');
     host.querySelectorAll('[data-sg-occasion]').forEach(b => b.setAttribute('aria-checked', String(b.dataset.sgOccasion === s.occasion)));
-    host.querySelectorAll('[data-sg-view]').forEach(b => b.setAttribute('aria-pressed', String(!selectedPhoto && b.dataset.sgView === s.view)));
+    host.querySelectorAll('[data-sg-view]').forEach(b => b.setAttribute('aria-pressed', String(!selectedPhoto() && b.dataset.sgView === s.view)));
     for (const k of keys) {
       const v = cleanSignText(get(k)), el = $(`[data-sg="${k}"]`);
       $(`[data-sg-count="${k}"]`).textContent = `${v.length}/${max[k]}`;
@@ -200,7 +216,7 @@ export function mountSign(host, s, api) {
     }
     const shown = cleanSignText(s.name) || OCCASIONS[s.occasion]?.name || '';
     $('[data-sg-summary]').textContent = [t('Street sign 45 x 30 cm'), shown].filter(Boolean).join(' · ');
-    $('[data-sg-example]').hidden = !!selectedPhoto || !!cleanSignText(s.name);
+    $('[data-sg-example]').hidden = selectedPhoto() || !!cleanSignText(s.name);
   }
   function draw() {
     cancelAnimationFrame(frame);
@@ -214,23 +230,24 @@ export function mountSign(host, s, api) {
       }
       drawScene($('[data-sg-canvas]'), f, {view: s.view, exampleName: example, labels: german ? ['45,7 cm', '30,5 cm'] : ['45.7 cm', '30.5 cm']});
       if ($('[data-sg-mini]').classList.contains('is-on')) drawScene($('[data-sg-mini-canvas]'), f, {view: 'mini', exampleName: example});
+      const thumb = $('[data-sg-thumb-canvas]'); if (thumb) drawScene(thumb, f, {view: 'mini', exampleName: example});   // first thumbnail = the live preview
     });
   }
   const update = () => { refresh(); draw(); };
-  function showPhoto(button = null) {
-    if (!photo || button === selectedPhoto) return;
-    selectedPhoto = button;
-    if (button) {
-      photo.src = button.querySelector('img').src;
-      photo.alt = button.dataset.sgPhotoAlt;
-    }
-    photo.hidden = !button;
-    $('[data-sg-canvas]').hidden = !!button;
-    $('[data-sg-preview-note]').hidden = !!button;
-    $('[data-sg-photo-note]').hidden = !button;
-    photoButtons.forEach(b => b.setAttribute('aria-pressed', String(b === button)));
+  function showSlide(i = 0) {
+    i = Math.max(0, Math.min(photoList.length, i));
+    if (!photo || i === slide) return;
+    slide = i;
+    const item = photoList[i - 1];
+    if (item) { photo.src = item.src; photo.alt = item.alt || ''; }
+    photo.hidden = !item;
+    $('[data-sg-canvas]').hidden = !!item;
+    $('[data-sg-preview-note]').hidden = !!item;
+    $('[data-sg-photo-note]').hidden = !item;
+    $('[data-sg-back]').hidden = !item;
+    slideButtons.forEach(b => { const on = Number(b.dataset.sgSlide) === i; b.setAttribute(b.classList.contains('sg-dot') ? 'aria-current' : 'aria-pressed', String(on)); });
   }
-  const edit = () => { showPhoto(); update(); };
+  const edit = () => { showSlide(0); update(); };   // any edit brings the live preview back
   fields();
   // The store re-renders the page after an add: keep the confirmation and the cart link until the buyer edits the sign again.
   if (s.added) { $('[data-sg-added]').textContent = t('Added to your cart'); $('[data-sg-cart]').hidden = false; }
@@ -238,7 +255,13 @@ export function mountSign(host, s, api) {
   host.querySelectorAll('[data-sg-arrow]').forEach(el => el.addEventListener('change', () => { s[el.dataset.sgArrow].arrow = el.value; s.touched[el.dataset.sgArrow] = true; edit(); }));
   host.querySelectorAll('[data-sg-occasion]').forEach(b => b.addEventListener('click', () => { occasion(b.dataset.sgOccasion); fields(); edit(); api.track?.('sign-occasion', {occasion: s.occasion}); }));
   host.querySelectorAll('[data-sg-view]').forEach(b => b.addEventListener('click', () => { s.view = b.dataset.sgView; edit(); }));
-  photoButtons.forEach(b => b.addEventListener('click', () => { showPhoto(b); refresh(); }));
+  slideButtons.forEach(b => b.addEventListener('click', () => { showSlide(Number(b.dataset.sgSlide)); refresh(); }));
+  $('[data-sg-back]')?.addEventListener('click', () => { showSlide(0); refresh(); });
+  // Phones: swipe the stage left/right through the live preview and the photos (the 1928 page swipes too).
+  { const stage = $('[data-sg-stage]'); let x0 = null;
+    stage?.addEventListener('pointerdown', e => { if (e.pointerType !== 'mouse') x0 = e.clientX; }, {passive: true});
+    stage?.addEventListener('pointerup', e => { if (x0 === null) return; const dx = e.clientX - x0; x0 = null; if (Math.abs(dx) > 40 && photoList.length) { showSlide(slide + (dx < 0 ? 1 : -1)); refresh(); } }, {passive: true});
+    stage?.addEventListener('pointercancel', () => { x0 = null; }, {passive: true}); }
   host.querySelectorAll('[data-sg-word]').forEach(b => b.addEventListener('click', () => {
     const base = cleanSignText(s.name).replace(new RegExp(`[- ](${STREET_WORDS.join('|')})$`, 'i'), '').replace(/ /g, '-');
     if (!base) { $('[data-sg="name"]').focus(); return; }
