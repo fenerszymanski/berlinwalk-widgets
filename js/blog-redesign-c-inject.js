@@ -19,6 +19,24 @@
   ];
   var PORTRAIT_URL = BASE + 'blog-hero/assets/yusuf-guide-portrait.jpg';
   var TOUR_BAND_IMAGE = BASE + 'blog-hero/assets/tour-cta-yusuf-rathaus-solo.jpg';
+  // Category offer (Yusuf, 27 Nov 2026: "her yazının kategorisine göre değişen offer kuralım"). The closing band and one card
+  // inside the article follow the post's category. Tourist Tips holds about 75 % of blog views, so its topic and a few slug or
+  // title words pick the offer there. History, myths, tour-route and before/after posts keep the Berlin Then and Now tour.
+  // Views and clicks go to the identifier-free counter as /blog-offer/<offer>/step-<mid|end>-<seen|click> (path only: no
+  // cookie, no id) and, with analytics consent, to GA4 as bw_blog_offer_seen / bw_blog_offer_click.
+  var OFFER_IMAGES = BASE + 'blog-hero/assets/offers/';
+  var GIFT_IMAGES = BASE + 'storefront/20261022-c4/assets/gift-week-';
+  var COUNTER_URL = 'https://app.berlinwalk.com/api/traffic-count';
+  var CHRISTMAS_OFFER_UNTIL = Date.parse('2026-12-24T23:59:00+01:00');
+  var OFFERS = {
+    'club-night': { kicker: 'CLUB NIGHT RESCUE PLAN · €4.99', title: 'Turned away at the door? Have tonight’s Plan B ready.', text: 'Seven Berlin club doors, what to bring, the station exit for each, and a Plan B for tonight if the door says no.', cta: 'See the plan', href: 'https://app.berlinwalk.com/products/club-night-rescue-plan', image: OFFER_IMAGES + 'club-night-dj-controller_AdobeStock_519006631.webp', alt: 'A DJ mixer glowing blue and orange in a dark club' },
+    'wall-audio': { kicker: 'BERLIN WALL AUDIO WALK · €9.90', title: 'Follow the Wall on foot, with me in your ears.', text: 'From Nordbahnhof to Mauerpark: ten outdoor stops, English audio, MP3s and a PDF route guide. Listen to a sample first.', cta: 'Listen to a sample', href: '/products/death-strip-audio-route', image: OFFER_IMAGES + 'wall-chapel-of-reconciliation-koreng-cc-by-3-de.webp', alt: 'The wooden Chapel of Reconciliation on the former death strip at Bernauer Straße', credit: { text: 'Photo: Ansgar Koreng, CC BY 3.0 DE', href: 'https://commons.wikimedia.org/wiki/File:Kapelle_der_Vers%C3%B6hnung.jpg' } },
+    'first-day': { kicker: 'FIRST-DAY RESCUE PLAN · €4.99', title: 'Land in Berlin with your first hour already planned.', text: 'Transport, bags, food, one easy first stop and a backup, built for your stay, your group and your landing time.', cta: 'Build my plan', href: '/products/berlin-first-day-rescue-plan', image: OFFER_IMAGES + 'first-day-tv-tower-s-bahn_AdobeStock_281368074.webp', alt: 'An S-Bahn train crossing a brick viaduct below the TV Tower at dusk' },
+    gifts: { kicker: 'BERLIN CHRISTMAS GIFTS', title: 'A Berlin gift for someone who loves the city.', text: 'Their street from above in 1928, Berlin posters, hoodies, the 2027 calendar and my audio walks.', cta: 'See the gifts', href: '/gifts', image: GIFT_IMAGES + 'gifts.webp', alt: 'A framed 1928 street print beside gift wrap' },
+    'street-1928': { kicker: 'YOUR STREET IN 1928', title: 'See your Berlin street from above, almost a hundred years ago.', text: 'Type your Berlin address and see your street from above in 1928, with the same spot today right below it. A personalised print for your wall.', cta: 'Find my street', href: '/product-page/your-berlin-street-in-1928-personalised-aerial-print-30-x-40-cm', image: GIFT_IMAGES + '1928.webp', alt: 'A 1928 street print in a wooden frame on a dark green wall' },
+    sprueche: { kicker: 'BERLINER SPRÜCHE', title: 'Wear the German you hear every day in Berlin.', text: 'Zurückbleiben bitte, Mit Karte bitte, Zug fällt aus, Wegbier, Pfand: Berlin sayings on T-shirts, hoodies and tote bags.', cta: 'See the sayings', href: '/category/berliner-sprueche', image: 'https://static.wixstatic.com/media/5a08a3_e9620aafceeb4265a3defe7fc5325b16~mv2.jpg/v1/fill/w_960,h_840,al_c,q_82/file.jpg', alt: 'Someone in a black Zug fällt aus hoodie on a train platform bench' },
+    posters: { kicker: 'BERLIN EVERYDAY POSTERS', title: 'The Späti, the Currywurst, the U-Bahn: Berlin for your wall.', text: 'Everyday Berlin as art prints, from the Späti at night to the Currywurst stand. Printed posters or printable downloads.', cta: 'See the posters', href: '/category/berlin-everyday-posters', image: GIFT_IMAGES + 'poster.webp', alt: 'The Späti poster in a wooden frame on a light wall' }
+  };
   var state = { archive: null, tools: null, heroHighlights: null, timer: null, observer: null, until: 0, adviceObserver: null, adviceBody: null, adviceScheduled: false, rendering: false };
 
   function enabled() {
@@ -29,14 +47,15 @@
   }
 
   function postPage() { return location.pathname.indexOf('/post/') === 0; }
-  function slug() { return location.pathname.replace(/^\/post\//, '').replace(/\/+$/, ''); }
+  // Decoded and NFC: a slug such as "5-best-döner-..." arrives percent-encoded in the path and never matched the archive.
+  function slug() { var raw = location.pathname.replace(/^\/post\//, '').replace(/\/+$/, ''); try { raw = decodeURIComponent(raw); } catch (error) {} return raw.normalize ? raw.normalize('NFC') : raw; }
   function text(value) { return String(value || '').replace(/\s+/g, ' ').trim(); }
   function escapeHtml(value) { return String(value || '').replace(/[&<>"']/g, function (c) { return ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]; }); }
   function safeUrl(value) { try { return new URL(value, location.href).toString(); } catch (error) { return ''; } }
   function visible(node) { return !!(node && node.isConnected && getComputedStyle(node).display !== 'none' && getComputedStyle(node).visibility !== 'hidden'); }
   function findBody() { return document.querySelector('[data-hook="post-description"], [data-hook="post-content"], [data-hook="rich-content-viewer"], [data-hook="rich-content"], .blog-post-page-content'); }
   function findTitle() { return document.querySelector('.bw-c-hero h1') || Array.prototype.find.call(document.querySelectorAll('h1'), function (node) { return visible(node) && !node.closest('[' + MARK + ']'); }) || null; }
-  function postMeta() { return state.archive && (state.archive.allPosts || []).find(function (post) { return post.slug === slug(); }) || null; }
+  function postMeta() { return state.archive && (state.archive.allPosts || []).find(function (post) { var current = slug(); return post.slug === current || String(post.slug || '').normalize('NFC') === current; }) || null; }
   function toolFor(post) { return post && state.tools && (state.tools.tools || []).find(function (tool) { return tool.slug === post.relatedToolSlug; }) || null; }
   function meta(property) { var node = document.querySelector('meta[property="' + property + '"]'); return node ? text(node.getAttribute('content')) : ''; }
 
@@ -97,8 +116,8 @@
       fetch(TOOLS_URL, { cache: 'force-cache' }).then(function (r) { return r.ok ? r.json() : null; }),
       fetch(HERO_HIGHLIGHTS_URL, { cache: 'force-cache' }).then(function (r) { return r.ok ? r.json() : null; })
     ]).then(function (result) {
-      state.archive = result[0]; state.tools = result[1]; state.heroHighlights = result[2] || {}; schedule(0); return result;
-    }).catch(function () { return null; });
+      state.archive = result[0]; state.tools = result[1]; state.heroHighlights = result[2] || {}; state.dataSettled = true; schedule(0); return result;
+    }).catch(function () { state.dataSettled = true; schedule(0); return null; });
     return state.dataPromise;
   }
 
@@ -168,7 +187,28 @@
       'html[data-bw-redesign="1"] .bw-c-rail-list{border-left:0;padding-left:0;}html[data-bw-redesign="1"] .bw-c-rail-progress{background:#DDE4D6;bottom:8px;left:-18px;position:absolute;top:34px;width:1px;}html[data-bw-redesign="1"] .bw-c-rail-progress i{background:#1B5E20;border-radius:2px;display:block;height:0;margin-left:-1px;transition:height .16s linear;width:3px;}html[data-bw-redesign="1"] .bw-c-rail-list a{display:flex;gap:12px;padding:6px 0;}html[data-bw-redesign="1"] .bw-c-rail-list a[data-active="1"] .bw-c-rail-text{background:linear-gradient(transparent 62%,rgba(255,230,0,.55) 62%);}html[data-bw-redesign="1"] .bw-c-rail-list a[data-active="1"]:before{display:none;}html[data-bw-redesign="1"] .bw-c-rail-number{flex:0 0 auto;margin-right:0;}html[data-bw-redesign="1"] .bw-c-rail-tour strong{font-size:14.5px;line-height:1.35;}html[data-bw-redesign="1"] .bw-c-rail-schedule{margin-top:0;}html[data-bw-redesign="1"] .bw-c-rail-rating{margin-top:2px;}',
       'html[data-bw-redesign="1"] .bw-c-rail-tour .bw-c-rail-choice{align-items:center;border:1px solid rgba(250,250,245,.55);border-radius:9px;box-sizing:border-box;color:#FAFAF5!important;display:flex;font:700 11px/1.25 Montserrat,Arial,sans-serif;gap:7px;justify-content:space-between;margin-top:9px;min-height:52px;padding:10px;text-decoration:none!important;}html[data-bw-redesign="1"] .bw-c-rail-choice span:first-child{min-width:0;}html[data-bw-redesign="1"] .bw-c-rail-choice small{color:inherit;display:block;font:500 9.5px/1.4 "IBM Plex Mono",monospace;margin-top:3px;}html[data-bw-redesign="1"] .bw-c-rail-choice span:last-child{font-size:15px;}html[data-bw-redesign="1"] .bw-c-rail-tour .bw-c-rail-choice-audio,html[data-bw-redesign="1"] .bw-c-rail-tour .bw-c-rail-choice-audio:visited{background:#FFE600;border-color:#FFE600;color:#123D18!important;}html[data-bw-redesign="1"] .bw-c-rail-tour .bw-c-rail-choice-audio:hover,html[data-bw-redesign="1"] .bw-c-rail-tour .bw-c-rail-choice-audio:focus-visible{background:#C5E1A5;border-color:#C5E1A5;color:#123D18!important;}html[data-bw-redesign="1"] .bw-c-rail-tour .bw-c-rail-choice-walk:hover,html[data-bw-redesign="1"] .bw-c-rail-tour .bw-c-rail-choice-walk:focus-visible{border-color:#FFE600;color:#FFE600!important;}html[data-bw-redesign="1"] .bw-c-rail-choice:focus-visible{outline:2px solid #FFE600;outline-offset:3px;}',
       'html[data-bw-redesign="1"] .bw-c-end{background:#FAFAF5;color:#212121;margin:20px 0 0;padding:0;}html[data-bw-redesign="1"] .bw-c-tourband{background-color:#102414;background-image:linear-gradient(rgba(250,250,245,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(250,250,245,.05) 1px,transparent 1px);background-size:34px 34px;color:#FAFAF5;padding:0;}html[data-bw-redesign="1"] .bw-c-tourband-inner{display:grid;grid-template-columns:minmax(320px,44%) minmax(0,1fr);margin:0 auto;max-width:1120px;min-height:430px;}html[data-bw-redesign="1"] .bw-c-tourband-photo{margin:0;min-height:430px;overflow:hidden;}html[data-bw-redesign="1"] .bw-c-tourband-photo img{display:block;height:100%;object-fit:cover;object-position:54% center;width:100%;}html[data-bw-redesign="1"] .bw-c-tourband-copy{align-self:center;padding:54px clamp(34px,5vw,70px);text-align:left;}html[data-bw-redesign="1"] .bw-c-end .bw-c-tourband h2{color:#FAFAF5!important;font:400 clamp(34px,4vw,46px)/1.1 "Wobby",Fraunces,Merriweather,Georgia,serif!important;font-synthesis:none!important;letter-spacing:0!important;margin:0 0 18px!important;max-width:620px;}html[data-bw-redesign="1"] .bw-c-tourband-sub{color:rgba(250,250,245,.72);font:500 13px/1.8 "IBM Plex Mono",monospace;text-transform:uppercase;}html[data-bw-redesign="1"] .bw-c-tourband-div{border-top:2px dashed #FFE600;margin:26px 0 0;width:120px;}html[data-bw-redesign="1"] .bw-c-tourband .bw-c-book{margin:28px 0 0;padding:16px 34px;}html[data-bw-redesign="1"] .bw-c-bottom{box-sizing:border-box;margin:0 auto;max-width:1016px;padding:56px 28px 72px;}html[data-bw-redesign="1"] .bw-c-section-label{align-items:center;color:#5C665A;display:flex;font:600 11px/1 "IBM Plex Mono",monospace;gap:14px;letter-spacing:.22em;margin:0 0 24px;text-transform:uppercase;}html[data-bw-redesign="1"] .bw-c-section-label:after{background:#DDE4D6;content:"";flex:1;height:1px;}html[data-bw-redesign="1"] .bw-c-related{gap:18px;margin:0 0 52px;}html[data-bw-redesign="1"] .bw-c-related a{border:1px solid #E4E9DF;border-radius:14px;}html[data-bw-redesign="1"] .bw-c-related img{height:130px;}html[data-bw-redesign="1"] .bw-c-related-copy{padding:14px 16px 18px;}html[data-bw-redesign="1"] .bw-c-faq-slot{margin-bottom:8px;}html[data-bw-redesign="1"] .bw-c-faq-slot [data-hook="html-component"],html[data-bw-redesign="1"] .bw-c-faq-slot iframe{display:block!important;margin:0!important;max-width:none!important;width:100%!important;}html[data-bw-redesign="1"] .bw-c-share{align-items:center;gap:12px;margin-top:44px;}html[data-bw-redesign="1"] .bw-c-share .bw-c-share-label{color:#5C665A;font:600 10.5px/1 "IBM Plex Mono",monospace;letter-spacing:.2em;margin-right:8px;}html[data-bw-redesign="1"] .bw-c-share a,html[data-bw-redesign="1"] .bw-c-share button{background:#fff;border:1.5px solid #DDE4D6;color:#123D18;font:700 12.5px/1 Montserrat,Arial,sans-serif;padding:10px 18px;}',
-      '@media (min-width:1001px) and (max-width:1239px){html[data-bw-redesign="1"] .bw-c-page{display:block!important;padding:0!important;}html[data-bw-redesign="1"] .bw-c-rail{display:none!important;}html[data-bw-redesign="1"] .bw-c-mobile-toc{display:block!important;}}@media (max-width:1000px){html[data-bw-redesign="1"] .bw-c-date-card .bw-date-check-blog-card__fields{display:grid!important;grid-template-columns:1fr 1fr!important;}html[data-bw-redesign="1"] .bw-c-bottom{padding:40px 16px 56px;}html[data-bw-redesign="1"] .bw-c-tourband-inner{grid-template-columns:minmax(260px,42%) minmax(0,1fr);}html[data-bw-redesign="1"] .bw-c-tourband-copy{padding:44px 32px;}}@media (max-width:700px){html[data-bw-redesign="1"] .bw-c-tourband-inner{display:block;min-height:0;}html[data-bw-redesign="1"] .bw-c-tourband-photo{height:250px;min-height:0;}html[data-bw-redesign="1"] .bw-c-tourband-photo img{object-position:54% 42%;}html[data-bw-redesign="1"] .bw-c-tourband-copy{padding:38px 22px 44px;}html[data-bw-redesign="1"] .bw-c-end .bw-c-tourband h2{font-size:36px!important;}}@media (max-width:520px){html[data-bw-redesign="1"] .bw-c-date-card .bw-date-check-blog-card__form{padding:22px 18px 24px!important;}html[data-bw-redesign="1"] .bw-c-date-card .bw-date-check-blog-card__fields{grid-template-columns:1fr!important;}html[data-bw-redesign="1"] .bw-c-date-card .bw-date-check-blog-card__submit{width:100%!important;}html[data-bw-redesign="1"] .bw-c-related{grid-template-columns:1fr!important;}}'
+      '@media (min-width:1001px) and (max-width:1239px){html[data-bw-redesign="1"] .bw-c-page{display:block!important;padding:0!important;}html[data-bw-redesign="1"] .bw-c-rail{display:none!important;}html[data-bw-redesign="1"] .bw-c-mobile-toc{display:block!important;}}@media (max-width:1000px){html[data-bw-redesign="1"] .bw-c-date-card .bw-date-check-blog-card__fields{display:grid!important;grid-template-columns:1fr 1fr!important;}html[data-bw-redesign="1"] .bw-c-bottom{padding:40px 16px 56px;}html[data-bw-redesign="1"] .bw-c-tourband-inner{grid-template-columns:minmax(260px,42%) minmax(0,1fr);}html[data-bw-redesign="1"] .bw-c-tourband-copy{padding:44px 32px;}}@media (max-width:700px){html[data-bw-redesign="1"] .bw-c-tourband-inner{display:block;min-height:0;}html[data-bw-redesign="1"] .bw-c-tourband-photo{height:250px;min-height:0;}html[data-bw-redesign="1"] .bw-c-tourband-photo img{object-position:54% 42%;}html[data-bw-redesign="1"] .bw-c-tourband-copy{padding:38px 22px 44px;}html[data-bw-redesign="1"] .bw-c-end .bw-c-tourband h2{font-size:36px!important;}}@media (max-width:520px){html[data-bw-redesign="1"] .bw-c-date-card .bw-date-check-blog-card__form{padding:22px 18px 24px!important;}html[data-bw-redesign="1"] .bw-c-date-card .bw-date-check-blog-card__fields{grid-template-columns:1fr!important;}html[data-bw-redesign="1"] .bw-c-date-card .bw-date-check-blog-card__submit{width:100%!important;}html[data-bw-redesign="1"] .bw-c-related{grid-template-columns:1fr!important;}}',
+      // Category offer: the card inside the article and the offer version of the closing band. The tour booking card that the
+      // offer card replaces is hidden, not removed, so its own script keeps working and comes back for tour posts.
+      'html[data-bw-redesign="1"] [data-bw-c-offer-replaced="1"]{display:none!important;}',
+      'html[data-bw-redesign="1"] .bw-c-offer-card{display:block!important;margin:38px 0 42px!important;max-width:100%;}',
+      'html[data-bw-redesign="1"] .bw-c-offer-card a.bw-c-offer-card-link{background:#102414!important;border-radius:14px;color:#FAFAF5!important;display:grid!important;grid-template-columns:190px minmax(0,1fr);overflow:hidden;text-decoration:none!important;}',
+      'html[data-bw-redesign="1"] .bw-c-offer-card .bw-c-offer-card-media{display:block;min-height:214px;overflow:hidden;position:relative;}',
+      'html[data-bw-redesign="1"] .bw-c-offer-card .bw-c-offer-card-media img{display:block!important;height:100%!important;left:0;margin:0!important;max-width:none!important;object-fit:cover;position:absolute;top:0;width:100%!important;}',
+      'html[data-bw-redesign="1"] .bw-c-offer-card .bw-c-offer-card-copy{display:flex;flex-direction:column;gap:9px;padding:22px 24px;}',
+      'html[data-bw-redesign="1"] .bw-c-offer-card .bw-c-offer-card-kicker{color:#C5E1A5!important;font:600 10.5px/1.35 "IBM Plex Mono",monospace!important;letter-spacing:.13em!important;}',
+      'html[data-bw-redesign="1"] .bw-c-offer-card .bw-c-offer-card-title{color:#FAFAF5!important;font:400 25px/1.15 "Wobby",Montserrat,Arial,sans-serif!important;font-synthesis:none!important;letter-spacing:0!important;}',
+      'html[data-bw-redesign="1"] .bw-c-offer-card .bw-c-offer-card-text{color:rgba(250,250,245,.82)!important;font:400 14.5px/1.55 Montserrat,Arial,sans-serif!important;}',
+      'html[data-bw-redesign="1"] .bw-c-offer-card .bw-c-offer-card-cta{align-self:flex-start;background:#FFE600;border-radius:999px;color:#123D18!important;font:800 13px/1 Montserrat,Arial,sans-serif!important;margin-top:5px;padding:13px 20px;}',
+      'html[data-bw-redesign="1"] .bw-c-offer-card a.bw-c-offer-card-link:hover .bw-c-offer-card-cta,html[data-bw-redesign="1"] .bw-c-offer-card a.bw-c-offer-card-link:focus-visible .bw-c-offer-card-cta{background:#C5E1A5;}',
+      'html[data-bw-redesign="1"] .bw-c-offer-card a.bw-c-offer-card-link:focus-visible{outline:3px solid #1B5E20;outline-offset:3px;}',
+      'html[data-bw-redesign="1"] .bw-c-offer-card .bw-c-offer-card-credit{display:block;font:500 10.5px/1.4 Montserrat,Arial,sans-serif!important;margin-top:7px;}',
+      'html[data-bw-redesign="1"] .bw-c-offer-card .bw-c-offer-card-credit a{color:#5C665A!important;}',
+      'html[data-bw-redesign="1"] .bw-c-end .bw-c-offer-desc{color:rgba(250,250,245,.82);font:400 16px/1.6 Montserrat,Arial,sans-serif;margin:0;max-width:560px;}',
+      'html[data-bw-redesign="1"] .bw-c-offerband .bw-c-tourband-photo{position:relative;}',
+      'html[data-bw-redesign="1"] .bw-c-offerband .bw-c-offer-credit{bottom:0;left:0;margin:0;position:absolute;}',
+      'html[data-bw-redesign="1"] .bw-c-offerband .bw-c-offer-credit a{background:rgba(16,36,20,.74);color:#FAFAF5!important;display:block;font:500 10.5px/1.3 Montserrat,Arial,sans-serif;padding:6px 9px;text-decoration:none!important;}',
+      '@media (max-width:600px){html[data-bw-redesign="1"] .bw-c-offer-card a.bw-c-offer-card-link{grid-template-columns:1fr;}html[data-bw-redesign="1"] .bw-c-offer-card .bw-c-offer-card-media{height:180px;min-height:0;}html[data-bw-redesign="1"] .bw-c-offer-card .bw-c-offer-card-copy{padding:20px;}html[data-bw-redesign="1"] .bw-c-offer-card .bw-c-offer-card-title{font-size:23px!important;}}'
     ].join(''); document.head.appendChild(style);
     if (!state.bleedListener) { state.bleedListener = true; addEventListener('resize', function () { document.querySelectorAll('.bw-c-stage,.bw-c-end').forEach(fitStage); document.querySelectorAll('.bw-c-page').forEach(fitPage); }, { passive: true }); }
   }
@@ -381,7 +421,7 @@
     });
     Array.prototype.forEach.call(body.querySelectorAll('p'), formatAdvice);
     observeAdvice(body);
-    var first = Array.prototype.find.call(body.querySelectorAll('p'), function (p) { return text(p.textContent).length > 35 && !p.closest('iframe,[data-bw-leadform]'); });
+    var first = Array.prototype.find.call(body.querySelectorAll('p'), function (p) { return text(p.textContent).length > 35 && !p.closest('iframe,[data-bw-leadform],[data-bw-c-offer-card]'); });
     if (first) {
       first.classList.add('bw-c-dropcap');
       var gutter = first.parentElement;
@@ -643,6 +683,138 @@
     }
   }
 
+  // Slug and title words win over the category, because they name the reader's real intent: a club post filed under
+  // Tourist Tips wants the club plan, a Wall post in any category wants the Wall walk. Christmas words count until 24 Dec.
+  function offerIdFor(post, slugValue) {
+    // Slug and title only: the topic label of every food post says "Food & Nightlife", which is not a club post.
+    var words = [slugValue === undefined ? slug() : slugValue, post && post.title].join(' ').toLowerCase();
+    var category = post && post.categorySlug || '', topic = post && post.topic || '';
+    if (!/football|hertha|stadium|matchday|bundesliga|basketball|sports[- ]club/.test(words) && /\bclubs?\b|clubbing|clubkultur|berghain|kitkat|techno|\brave\b|tresor|sisyphos|nightlife|dress[- ]codes?|bouncer/.test(words)) return 'club-night';
+    if (/berlin[- ]wall|\bthe[- ]wall\b|\bwall[- ](?:trace|remains|trail|memorial|map|museum|in[- ]mitte)|mauerweg|\bmauer\b|death[- ]strip|checkpoint|east[- ]side[- ]gallery|east[- ]vs\.?[- ]west|divided/.test(words)) return 'wall-audio';
+    if (Date.now() <= CHRISTMAS_OFFER_UNTIL && /christmas|\badvent\b|xmas|weihnacht|gl(?:ü|ue)hwein|\bgifts?\b|souvenirs?/.test(words)) return 'gifts';
+    if (category === 'living-in-berlin') return 'street-1928';
+    if (category === 'german-language') return 'sprueche';
+    if (category === 'tourist-tips' && topic === 'food-nightlife') return 'posters';
+    if (category === 'tourist-tips' && /^(?:first-day|practical|when-to-visit|free-budget)$/.test(topic)) return 'first-day';
+    return 'tour';
+  }
+
+  function offerAttrs(id, slotName) { return ' data-bw-offer-link="1" data-bw-offer="' + id + '" data-bw-slot="' + slotName + '"'; }
+
+  function tourBandHtml() {
+    var bandSub = 'ABOUT 2.5 HOURS · 11 STOPS, 16 PLACES · MAX 10 · €15' + '.<br> STARTS AT THE WORLD CLOCK · ENDS AT HACKESCHER MARKT';
+    return '<div class="bw-c-tourband" data-bw-offer="tour"><div class="bw-c-tourband-inner"><figure class="bw-c-tourband-photo"><img src="' + TOUR_BAND_IMAGE + '" alt="Yusuf guiding in front of Berlin’s Rotes Rathaus" loading="lazy" decoding="async"></figure><div class="bw-c-tourband-copy"><p class="bw-c-end-kicker">BERLIN THEN AND NOW · AN ARCHIVE PHOTO AT EVERY STOP</p><h2>Walk the Berlin that disappeared, with me.</h2><p class="bw-c-tourband-sub">' + bandSub + '</p><div class="bw-c-tourband-div"></div><a class="bw-c-book" href="' + BOOKING_URL + '"' + offerAttrs('tour', 'end') + '>See dates and book</a></div></div></div>';
+  }
+
+  function bandHtml(id) {
+    var offer = OFFERS[id];
+    if (!offer) return tourBandHtml();
+    var credit = offer.credit ? '<figcaption class="bw-c-offer-credit"><a href="' + escapeHtml(offer.credit.href) + '" target="_blank" rel="noopener">' + escapeHtml(offer.credit.text) + '</a></figcaption>' : '';
+    return '<div class="bw-c-tourband bw-c-offerband" data-bw-offer="' + id + '"><div class="bw-c-tourband-inner"><figure class="bw-c-tourband-photo"><img src="' + escapeHtml(offer.image) + '" alt="' + escapeHtml(offer.alt) + '" loading="lazy" decoding="async">' + credit + '</figure><div class="bw-c-tourband-copy"><p class="bw-c-end-kicker">' + escapeHtml(offer.kicker) + '</p><h2>' + escapeHtml(offer.title) + '</h2><p class="bw-c-offer-desc">' + escapeHtml(offer.text) + '</p><div class="bw-c-tourband-div"></div><a class="bw-c-book" href="' + escapeHtml(offer.href) + '"' + offerAttrs(id, 'end') + '>' + escapeHtml(offer.cta) + '</a></div></div></div>';
+  }
+
+  // The archive arrives after the first paint, so a band drawn from the slug alone is swapped in place once the category is
+  // known. Only the band changes: rebuilding the whole end module would reload the FAQ iframe.
+  function syncBand(node, id) {
+    var band = node && node.querySelector('.bw-c-tourband');
+    if (!band) return;
+    if (band.getAttribute('data-bw-offer') !== id) {
+      var holder = document.createElement('div'); holder.innerHTML = bandHtml(id);
+      band.replaceWith(holder.firstChild); band = node.querySelector('.bw-c-tourband');
+    }
+    watchOffer(band, id, 'end');
+  }
+
+  function midCardHtml(id) {
+    var offer = OFFERS[id];
+    return '<a class="bw-c-offer-card-link" href="' + escapeHtml(offer.href) + '"' + offerAttrs(id, 'mid') + '><span class="bw-c-offer-card-media"><img src="' + escapeHtml(offer.image) + '" alt="' + escapeHtml(offer.alt) + '" loading="lazy" decoding="async"></span><span class="bw-c-offer-card-copy"><span class="bw-c-offer-card-kicker">' + escapeHtml(offer.kicker) + '</span><strong class="bw-c-offer-card-title">' + escapeHtml(offer.title) + '</strong><span class="bw-c-offer-card-text">' + escapeHtml(offer.text) + '</span><span class="bw-c-offer-card-cta">' + escapeHtml(offer.cta) + ' <span aria-hidden="true">→</span></span></span></a>' +
+      (offer.credit ? '<span class="bw-c-offer-card-credit"><a href="' + escapeHtml(offer.credit.href) + '" target="_blank" rel="noopener">' + escapeHtml(offer.credit.text) + '</a></span>' : '');
+  }
+
+  // One card inside the article: it takes the place of the tour booking card (hidden, not removed), or, on a post without
+  // one, sits before the heading about a third of the way down. Tour posts keep the booking card as it is.
+  function midOffer(body, items, id) {
+    var card = document.querySelector('[data-bw-c-offer-card]');
+    var bookings = body.querySelectorAll('[data-bw-blog-booking]');
+    if (!OFFERS[id]) {
+      if (card) card.remove();
+      Array.prototype.forEach.call(document.querySelectorAll('[data-bw-c-offer-replaced]'), function (node) { node.removeAttribute('data-bw-c-offer-replaced'); });
+      if (bookings[0]) watchOffer(bookings[0], 'tour', 'mid');
+      return;
+    }
+    Array.prototype.forEach.call(bookings, function (node) { if (node.getAttribute('data-bw-c-offer-replaced') !== '1') node.setAttribute('data-bw-c-offer-replaced', '1'); });
+    var anchor = bookings[0] || null;
+    if (!anchor) {
+      var heading = items.length >= 2 ? items[Math.max(1, Math.floor(items.length * 0.3))] : null;
+      anchor = heading && heading.node;
+    }
+    if (!anchor || !anchor.parentNode) { if (card) card.remove(); return; }
+    if (!card || card.getAttribute('data-bw-offer') !== id) {
+      if (card) card.remove();
+      card = document.createElement('aside'); card.className = 'bw-c-offer-card';
+      card.setAttribute('data-bw-c-offer-card', '1'); card.setAttribute('data-bw-offer', id); card.setAttribute('aria-label', OFFERS[id].kicker);
+      card.innerHTML = midCardHtml(id);
+    }
+    if (anchor.previousElementSibling !== card) anchor.parentNode.insertBefore(card, anchor);
+    watchOffer(card, id, 'mid');
+  }
+
+  function counterAllowed() {
+    try {
+      if (location.hostname !== 'www.walkofberlin.com' || window.top !== window.self) return false;
+      if (navigator.webdriver === true || navigator.globalPrivacyControl === true) return false;
+      if (new URLSearchParams(location.search).get('bwqa') === '1') return false;
+    } catch (error) { return false; }
+    try { if (localStorage.getItem('bwTrafficCountOptOut') === '1') return false; } catch (error) { /* storage blocked: still count */ }
+    return true;
+  }
+
+  function countOffer(id, slotName, action) {
+    if (!id || !slotName) return;
+    state.offerSent = state.offerSent || {};
+    var key = id + '|' + slotName + '|' + action;
+    if (state.offerSent[key]) return;
+    state.offerSent[key] = true;
+    try {
+      var measurement = window.BWDateCheckMeasurement;
+      if (measurement && measurement.analyticsAllowed && measurement.analyticsAllowed() && typeof window.gtag === 'function') window.gtag('event', 'bw_blog_offer_' + action, { offer_id: id, offer_slot: slotName, post_slug: slug().slice(0, 90) });
+    } catch (error) {}
+    if (!counterAllowed()) return;
+    try {
+      fetch(COUNTER_URL, { method: 'POST', mode: 'cors', credentials: 'omit', cache: 'no-store', keepalive: true, referrerPolicy: 'no-referrer', headers: { 'content-type': 'text/plain' }, body: JSON.stringify({ v: 1, p: '/blog-offer/' + id + '/step-' + slotName + '-' + action }) }).catch(function () {});
+    } catch (error) {}
+  }
+
+  // Seen = at least half of the box on screen. A box drawn before the archive arrived only counts once the offer is final.
+  function watchOffer(node, id, slotName) {
+    if (!node || node.__bwOfferWatch === id + '|' + slotName || !('IntersectionObserver' in window)) return;
+    node.__bwOfferWatch = id + '|' + slotName;
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting || entry.intersectionRatio < 0.5) return;
+        function settle() {
+          if (!node.isConnected || node.__bwOfferWatch !== id + '|' + slotName) { observer.disconnect(); return; }
+          if (!state.dataSettled) { setTimeout(settle, 400); return; }
+          var rect = node.getBoundingClientRect(), shown = Math.min(rect.bottom, innerHeight) - Math.max(rect.top, 0);
+          if (rect.height && shown / Math.min(rect.height, innerHeight) >= 0.5 && getComputedStyle(node).display !== 'none') { countOffer(id, slotName, 'seen'); observer.disconnect(); }
+        }
+        settle();
+      });
+    }, { threshold: [0.5] });
+    observer.observe(node);
+  }
+
+  function listenOfferClicks() {
+    if (state.offerClicks) return;
+    state.offerClicks = true;
+    document.addEventListener('click', function (event) {
+      var link = event.target && event.target.closest && event.target.closest('a[href]');
+      if (!link) return;
+      if (link.hasAttribute('data-bw-offer-link')) { countOffer(link.getAttribute('data-bw-offer'), link.getAttribute('data-bw-slot'), 'click'); return; }
+      if (link.closest('[data-bw-blog-booking]') && !link.closest('[data-bw-c-offer-replaced]') && /berlin-then-and-now/.test(link.getAttribute('href') || '')) countOffer('tour', 'mid', 'click');
+    }, true);
+  }
+
   function endModule(body, post) {
     var old = document.querySelector('[data-bw-redesign-end]');
     var faqFrame = Array.prototype.find.call(document.querySelectorAll('iframe[src*="/faq/"]'), function (candidate) { return candidate.isConnected; });
@@ -666,6 +838,7 @@
     // between the empty shell and the loaded content the whole time. A module
     // that is already in the right place and already owns the FAQ host is done.
     if (old && old.isConnected && anchor.nextElementSibling === old && (!faqHost || faqHost.parentElement === currentSlot)) {
+      syncBand(old, offerIdFor(post));
       unlockEndHeights(old);
       return;
     }
@@ -680,17 +853,18 @@
     var node = document.createElement('section'); node.className = 'bw-c-end'; node.setAttribute('data-bw-redesign-end', '1');
     var cards = post ? related(post).map(function (item) { return '<a href="' + escapeHtml(item.path || '/post/' + item.slug) + '">' + (item.thumb || item.image ? '<img src="' + escapeHtml(item.thumb || item.image) + '" alt="' + escapeHtml(item.alt || '') + '">' : '') + '<div class="bw-c-related-copy"><span class="bw-c-related-kicker">' + escapeHtml(item.category || 'Guide') + '</span><strong>' + escapeHtml(item.title) + '</strong></div></a>'; }).join('') : '';
     var shareUrl = encodeURIComponent(location.href.split('#')[0]), title = encodeURIComponent(document.title);
-    var bandSub = 'ABOUT 2.5 HOURS · 11 STOPS, 16 PLACES · MAX 10 · €15' + '.<br> STARTS AT THE WORLD CLOCK · ENDS AT HACKESCHER MARKT';
-    node.innerHTML = '<div class="bw-c-tourband"><div class="bw-c-tourband-inner"><figure class="bw-c-tourband-photo"><img src="' + TOUR_BAND_IMAGE + '" alt="Yusuf guiding in front of Berlin’s Rotes Rathaus" loading="lazy" decoding="async"></figure><div class="bw-c-tourband-copy"><p class="bw-c-end-kicker">BERLIN THEN AND NOW · AN ARCHIVE PHOTO AT EVERY STOP</p><h2>Walk the Berlin that disappeared, with me.</h2><p class="bw-c-tourband-sub">' + bandSub + '</p><div class="bw-c-tourband-div"></div><a class="bw-c-book" href="' + BOOKING_URL + '">See dates and book</a></div></div></div><div class="bw-c-bottom">' + (cards ? '<p class="bw-c-section-label">RELATED GUIDES</p><div class="bw-c-related">' + cards + '</div>' : '') + (faqHost ? '<p class="bw-c-section-label">QUESTIONS PEOPLE ACTUALLY ASK</p><div class="bw-c-faq-slot"></div>' : '') + '<div class="bw-c-share"><span class="bw-c-share-label">SHARE THIS GUIDE</span><a target="_blank" rel="noopener" href="https://wa.me/?text=' + shareUrl + '">WhatsApp</a><a target="_blank" rel="noopener" href="https://www.facebook.com/sharer/sharer.php?u=' + shareUrl + '">Facebook</a><a target="_blank" rel="noopener" href="https://twitter.com/intent/tweet?url=' + shareUrl + '&text=' + title + '">X</a><button type="button" data-bw-c-copy>Copy link</button></div></div>';
+    var offerId = offerIdFor(post);
+    node.innerHTML = bandHtml(offerId) + '<div class="bw-c-bottom">' + (cards ? '<p class="bw-c-section-label">RELATED GUIDES</p><div class="bw-c-related">' + cards + '</div>' : '') + (faqHost ? '<p class="bw-c-section-label">QUESTIONS PEOPLE ACTUALLY ASK</p><div class="bw-c-faq-slot"></div>' : '') + '<div class="bw-c-share"><span class="bw-c-share-label">SHARE THIS GUIDE</span><a target="_blank" rel="noopener" href="https://wa.me/?text=' + shareUrl + '">WhatsApp</a><a target="_blank" rel="noopener" href="https://www.facebook.com/sharer/sharer.php?u=' + shareUrl + '">Facebook</a><a target="_blank" rel="noopener" href="https://twitter.com/intent/tweet?url=' + shareUrl + '&text=' + title + '">X</a><button type="button" data-bw-c-copy>Copy link</button></div></div>';
     node.addEventListener('click', function (event) { if (!event.target.matches('[data-bw-c-copy]')) return; copyArticleLink(event.target, event.target.closest('.bw-c-share')); }); var pageNode = body.closest('.bw-c-page'); (pageNode || body).after(node); fitStage(node);
     var faqSlot = node.querySelector('.bw-c-faq-slot');
     if (faqSlot && faqHost) faqSlot.appendChild(faqFragment);
+    watchOffer(node.querySelector('.bw-c-tourband'), offerId, 'end');
     unlockEndHeights(node);
   }
 
   function paint() {
     document.documentElement.setAttribute('data-bw-redesign', '1'); injectStyle(); var body = findBody(), title = findTitle(); if (!body || !title) return;
-    markBody(body); var post = postMeta(), heroNode = hero(title, post, body); cover(heroNode, post); var items = headings(body); toc(items, body, post, toolFor(post)); fitInlineSurfaces(body); keepQuickSummaryInBody(); retagFaq(); hideNativeShare(); endModule(body, post);
+    markBody(body); var post = postMeta(), heroNode = hero(title, post, body); cover(heroNode, post); var items = headings(body); toc(items, body, post, toolFor(post)); fitInlineSurfaces(body); midOffer(body, items, offerIdFor(post)); listenOfferClicks(); keepQuickSummaryInBody(); retagFaq(); hideNativeShare(); endModule(body, post);
     // Change the commercial band only, preserving the FAQ iframe and related guides.
     if (window.BWGiftWeek202611) window.BWGiftWeek202611.scan();
   }
@@ -734,5 +908,6 @@
     });
     state.observer.observe(document.documentElement, { childList: true, subtree: true });
   }
+  window.BWBlogOffers = { idFor: offerIdFor, offers: OFFERS };
   boot();
 })();
