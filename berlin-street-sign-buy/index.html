@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Berlin Street Sign with Your Name</title>
+<!--
+  In-post buy box for the Berlin street sign (27 Nov 2026, Yusuf: "yazının içine de direkt bu ürünü yerleştirelim, yazının
+  içinden satın alma tamamlanabilsin"). Same configurator, preview and text rules as the product page
+  (storefront/20261022-c4/sign-configurator.js + sign-encoding.js). "Buy now" sends the sign to
+  https://app.berlinwalk.com/api/sign-checkout, which checks it again and creates a Wix checkout with both custom text fields.
+  The Wix blog iframe is sandboxed without top navigation, so the widget asks the host page (custom embed
+  "Walk of Berlin Sign Checkout Bridge 20261127") to open walkofberlin.com/checkout in the same tab; without an answer it
+  shows a "Continue to checkout" link.
+-->
+<style>
+@font-face{font-family:"Wobby";src:url("https://static.wixstatic.com/ufonts/5a08a3_53d3fadb4e6e4aadb41345f23354ae47/woff2/file.woff2") format("woff2");font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:"Fraunces";src:url("../storefront/20261022-c4/fonts/Fraunces-Variable-latin.woff2") format("woff2");font-weight:100 900;font-display:swap}
+@font-face{font-family:"Space Grotesk";src:url("../storefront/20261022-c4/fonts/SpaceGrotesk-Variable-latin.woff2") format("woff2");font-weight:300 700;font-display:swap}
+@font-face{font-family:"IBM Plex Mono";src:url("../storefront/20261022-c4/fonts/IBMPlexMono-Regular-latin.woff2") format("woff2");font-weight:400;font-display:swap}
+:root{--green:#123d18;--cream:#fafaf5;--ink:#2b3128;--muted:#5a6455;--line:#e2e2da;--yellow:#ffe600;--head:"Wobby","Fraunces",Georgia,serif;--serif:"Fraunces",Georgia,serif;--mono:"IBM Plex Mono",ui-monospace,monospace}
+*{box-sizing:border-box}
+html,body{margin:0;background:#fafaf5;color:var(--ink);font:400 16px/1.5 "Space Grotesk",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+body{padding:14px 16px 6px}
+button,input,select{font:inherit;color:inherit}
+button{cursor:pointer}
+.buy-frame{max-width:980px;margin:0 auto;border:1.5px solid var(--green);border-radius:14px;background:#fafaf5;padding:4px 18px 10px}
+.wrap{padding:0}
+.sg-wrap{padding-block:14px 8px}
+.sg-heading .sg-title{font-family:var(--head);font-weight:400;font-size:clamp(28px,5vw,40px);line-height:1.08;margin:0 0 10px;color:var(--green)}
+.primary{display:block;min-height:54px;border:0;border-radius:12px;background:var(--green);color:var(--cream);font-weight:700;font-size:17px;padding:12px 18px}
+.primary:disabled{opacity:.45;cursor:not-allowed}
+.primary:not(:disabled):hover{background:#0b2b10}
+.outline{display:inline-flex;align-items:center;justify-content:center;min-height:48px;border:1.5px solid var(--green);border-radius:12px;color:var(--green);text-decoration:none;font-weight:700;padding:10px 18px}
+.go-checkout{display:block;text-align:center;background:var(--yellow);color:#20241d;border-color:#20241d;margin:8px 0 0}
+[data-sg-cart]{display:none!important}
+.legal-links{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:13px;margin:12px 0 0}.legal-links a{color:var(--green)}
+.buy-note{font-size:13px;color:var(--muted);margin:10px 0 0;line-height:1.5}
+.pay-row{font-size:14px;margin:8px 0 0;color:var(--ink)}
+@media(max-width:520px){body{padding:10px 8px 4px}.buy-frame{padding:2px 12px 8px}}
+</style>
+</head>
+<body>
+<div class="buy-frame"><div id="host" aria-live="polite"><p class="buy-note">Loading the sign preview…</p></div></div>
+<script type="module">
+import {signBody, mountSign} from '../storefront/20261022-c4/sign-configurator.js';
+const ENDPOINT = 'https://app.berlinwalk.com/api/sign-checkout';
+const PRODUCT_URL = 'https://www.walkofberlin.com/product-page/berlin-street-sign-with-your-name';
+const params = new URLSearchParams(location.search);
+const ref = (params.get('ref') || 'blog').replace(/[^a-z0-9/_-]/gi, '').slice(0, 80);
+const host = document.getElementById('host');
+const esc = s => String(s).replace(/[&<>"']/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'}[c]));
+
+let price = 64.9;
+try {
+  const r = await fetch('../storefront/20261022-c4/data/catalog-snapshot.json', {cache: 'no-cache'});
+  const p = (await r.json()).products.find(x => x.productId === '47769d05-a3fa-4e22-8b0b-ae9cd3cc67e3');
+  if (p && p.visible !== false && Number.isFinite(p.discountedPrice || p.price)) price = p.discountedPrice || p.price;
+} catch {}
+const priceText = '€' + price.toFixed(2);
+const legal = `<p class="pay-row">You pay on my shop's own checkout page at walkofberlin.com. Shipping to Germany, the EU, the UK and the US is included.</p>
+<p class="buy-note">Each sign is made for you, so it cannot be returned for a change of mind. If it arrives damaged or wrong, I replace it.</p>
+<p class="legal-links"><a href="https://app.berlinwalk.com/store-terms" target="_blank" rel="noopener">Store Terms</a><a href="https://app.berlinwalk.com/store-withdrawal" target="_blank" rel="noopener">Withdrawal notices and model form</a><a href="${PRODUCT_URL}" target="_blank" rel="noopener">Full product page</a></p>`;
+host.innerHTML = signBody({german: false, price: priceText, legal});
+
+// Inside an article the page already has its own H1: the box title becomes a styled paragraph.
+const h1 = host.querySelector('.sg-heading h1');
+if (h1) { const p = document.createElement('p'); p.className = 'sg-title'; p.textContent = h1.textContent; h1.replaceWith(p); }
+const add = host.querySelector('[data-sg-add]'), added = host.querySelector('[data-sg-added]'), cart = host.querySelector('[data-sg-cart]');
+add.textContent = 'Buy now';
+cart.setAttribute('aria-hidden', 'true');
+
+let busy = false, waitingAck = null;
+const state = {};
+function postToHost(msg) { try { window.parent.postMessage(msg, 'https://www.walkofberlin.com'); } catch {} }
+window.addEventListener('message', e => {
+  if (e.origin !== 'https://www.walkofberlin.com' || !e.data || e.data.type !== 'bw-sign-checkout-ack') return;
+  if (waitingAck) { waitingAck(true); waitingAck = null; }
+});
+function showLink(url) {
+  let a = host.querySelector('.go-checkout');
+  if (!a) { a = document.createElement('a'); a.className = 'outline go-checkout'; a.target = '_blank'; a.rel = 'noopener'; added.after(a); }
+  a.href = url; a.textContent = 'Continue to checkout →';
+}
+async function openCheckout(url) {
+  if (window.top === window) { location.href = url; return 'self'; }
+  const acked = await new Promise(resolve => { waitingAck = resolve; postToHost({type: 'bw-sign-checkout', url}); setTimeout(() => resolve(false), 1500); });
+  waitingAck = null;
+  if (!acked) showLink(url);
+  return acked ? 'host' : 'link';
+}
+
+mountSign(host, state, {
+  german: false,
+  busy: () => busy,
+  available: () => true,
+  track: () => {},
+  add: async fields => {
+    busy = true; add.textContent = 'Opening checkout…';
+    try {
+      const s = state;
+      const body = {ref, sign: {lang: 'en', occasion: s.occasion, name: s.name, ortsteil: s.ortsteil, left: s.left, right: s.right, caption: s.caption}};
+      const r = await fetch(ENDPOINT, {method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(body)});
+      const j = await r.json().catch(() => ({}));
+      if (!r.ok || !j.ok || !j.checkoutUrl) throw new Error(j.error === 'RATE' ? 'Too many tries in a short time. Please wait a few minutes.' : 'The checkout could not open. Please try again, or order on the full product page.');
+      const how = await openCheckout(j.checkoutUrl);
+      setTimeout(() => { added.textContent = how === 'link' ? 'Your sign is ready. Tap the button to pay.' : 'Opening the checkout…'; }, 0);
+    } finally { busy = false; add.textContent = 'Buy now'; }
+  },
+});
+</script>
+<script src="../js/brand.js"></script>
+</body>
+</html>
