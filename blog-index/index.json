@@ -1,9 +1,9 @@
 {
-  "updatedAt": "2026-11-27T07:15:34.450Z",
+  "updatedAt": "2026-11-27T09:37:54.017Z",
   "source": "Wix Blog API",
   "popularSource": "Wix Blog metrics.views lifetime sort",
-  "totalPosts": 477,
-  "toolsTotal": 399,
+  "totalPosts": 478,
+  "toolsTotal": 400,
   "bookingUrl": "https://www.walkofberlin.com/book-berlin-walking-tour/berlin-then-and-now",
   "navTopics": [
     {
@@ -1802,6 +1802,23 @@
   ],
   "latest": [
     {
+      "title": "Wasserturm Prenzlauer Berg: What the Hill Above Kollwitzplatz Is Hiding",
+      "slug": "wasserturm-prenzlauer-berg",
+      "path": "/post/wasserturm-prenzlauer-berg",
+      "url": "https://www.berlinwalk.com/post/wasserturm-prenzlauer-berg",
+      "excerpt": "Most people who use the park by Kollwitzplatz every week have never been told what is under their feet. Here is the hill as I read it: the first waterworks, the flats in the tower, the reservoirs and the camp of 1933.",
+      "category": "Living in Berlin",
+      "categorySlug": "living-in-berlin",
+      "topic": "living-in-berlin",
+      "topicLabel": "Living in Berlin",
+      "readTime": "7 min read",
+      "publishedDate": "2026-11-27T09:35:34.688Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_76af6186d6124564a19c2159bd7372b3~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-wasserturm-cover.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_76af6186d6124564a19c2159bd7372b3~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-wasserturm-cover.jpg",
+      "alt": "The round brick Wasserturm in Prenzlauer Berg with its ringed top, seen through autumn trees on its hill",
+      "relatedToolSlug": "wasserturm-hill-section"
+    },
+    {
       "title": "The Hill Made of a City: Where It Happened, Episode 8",
       "slug": "where-it-happened-teufelsberg",
       "path": "/post/where-it-happened-teufelsberg",
@@ -1987,23 +2004,6 @@
       "thumb": "https://static.wixstatic.com/media/5a08a3_2eb10ec3bd6741b4b9a2de6af498dd01~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-cover.jpg",
       "alt": "The green steel arches of Glienicke Bridge over the Havel, seen from the Potsdam shore on a clear day",
       "relatedToolSlug": "glienicke-border-corner-planner"
-    },
-    {
-      "title": "Historical Aerial Photos of Berlin: How to Find Your Street",
-      "slug": "historical-aerial-photos-berlin",
-      "path": "/post/historical-aerial-photos-berlin",
-      "url": "https://www.berlinwalk.com/post/historical-aerial-photos-berlin",
-      "excerpt": "Berlin photographed almost the whole city from a plane in 1928 and again after the war, and the photos are free online. How I find a street in them and what you can read from above.",
-      "category": "Living in Berlin",
-      "categorySlug": "living-in-berlin",
-      "topic": "living-in-berlin",
-      "topicLabel": "Living in Berlin",
-      "readTime": "6 min read",
-      "publishedDate": "2026-11-17T18:59:19.591Z",
-      "image": "https://static.wixstatic.com/media/5a08a3_8acbb84536bd46b6ae19b2cdcef6b576~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/potsdamer-platz-pair.jpg",
-      "thumb": "https://static.wixstatic.com/media/5a08a3_8acbb84536bd46b6ae19b2cdcef6b576~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/potsdamer-platz-pair.jpg",
-      "alt": "Potsdamer Platz and the octagon of Leipziger Platz from above in 1928 and 2026, side by side at the same scale",
-      "relatedToolSlug": ""
     }
   ]
 }

@@ -1,9 +1,26 @@
 {
-  "updatedAt": "2026-11-27T07:15:34.450Z",
+  "updatedAt": "2026-11-27T09:37:54.017Z",
   "source": "Wix Blog API",
-  "totalPosts": 477,
+  "totalPosts": 478,
   "bookingUrl": "https://www.walkofberlin.com/book-berlin-walking-tour/berlin-then-and-now",
   "allPosts": [
+    {
+      "title": "Wasserturm Prenzlauer Berg: What the Hill Above Kollwitzplatz Is Hiding",
+      "slug": "wasserturm-prenzlauer-berg",
+      "path": "/post/wasserturm-prenzlauer-berg",
+      "url": "https://www.berlinwalk.com/post/wasserturm-prenzlauer-berg",
+      "excerpt": "Most people who use the park by Kollwitzplatz every week have never been told what is under their feet. Here is the hill as I read it: the first waterworks, the flats in the tower, the reservoirs and the camp of 1933.",
+      "category": "Living in Berlin",
+      "categorySlug": "living-in-berlin",
+      "topic": "living-in-berlin",
+      "topicLabel": "Living in Berlin",
+      "readTime": "7 min read",
+      "publishedDate": "2026-11-27T09:35:34.688Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_76af6186d6124564a19c2159bd7372b3~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-wasserturm-cover.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_76af6186d6124564a19c2159bd7372b3~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-wasserturm-cover.jpg",
+      "alt": "The round brick Wasserturm in Prenzlauer Berg with its ringed top, seen through autumn trees on its hill",
+      "relatedToolSlug": "wasserturm-hill-section"
+    },
     {
       "title": "The Hill Made of a City: Where It Happened, Episode 8",
       "slug": "where-it-happened-teufelsberg",
@@ -2547,7 +2564,7 @@
       "categorySlug": "tourist-tips",
       "topic": "first-day",
       "topicLabel": "First Day in Berlin",
-      "readTime": "7 min read",
+      "readTime": "6 min read",
       "publishedDate": "2026-08-29T09:18:39.378Z",
       "image": "https://static.wixstatic.com/media/5a08a3_a53293c313ba42ec9d036922af43aa54~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/00-cover-brandenburg-gate-fireworks.jpg",
       "thumb": "https://static.wixstatic.com/media/5a08a3_a53293c313ba42ec9d036922af43aa54~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/00-cover-brandenburg-gate-fireworks.jpg",
