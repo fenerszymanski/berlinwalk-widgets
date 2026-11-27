@@ -1,7 +1,7 @@
 (() => {
-const BW_HEADER_NAV_VERSION = 'west-berlin-menu-20261123';
+const BW_HEADER_NAV_VERSION = 'menu-size-20261127';
 if (customElements.get('bw-site-header')?.navigationVersion === BW_HEADER_NAV_VERSION
-  || customElements.get('bw-site-header-west-berlin')?.navigationVersion === BW_HEADER_NAV_VERSION) return;
+  || customElements.get('bw-site-header-menu-size')?.navigationVersion === BW_HEADER_NAV_VERSION) return;
 
 const BW_HEADER_SCRIPT_URL = (document.currentScript && document.currentScript.src) || 'https://fenerszymanski.github.io/berlinwalk-widgets/site-header/site-header-element.js';
 // Walk of Berlin wordmark (A15a, live 2 October 2026). The old berlinwalk-wordmark-*
@@ -1123,7 +1123,7 @@ class BWHeaderElement extends HTMLElement {
           src: url(${BW_HEADER_MONO_URL}) format('woff2');
         }
 
-        bw-site-header, bw-site-header-desktop-align, bw-site-header-clothing, bw-site-header-store-polish, bw-site-header-store-nav, bw-site-header-clothing-page, bw-site-header-walking-tours, bw-site-header-west-berlin {
+        bw-site-header, bw-site-header-desktop-align, bw-site-header-clothing, bw-site-header-store-polish, bw-site-header-store-nav, bw-site-header-clothing-page, bw-site-header-walking-tours, bw-site-header-west-berlin, bw-site-header-menu-size {
           display: block;
           width: 100%;
         }
@@ -1274,6 +1274,7 @@ class BWHeaderElement extends HTMLElement {
 
         .bw-header-nav-list > li > a,
         .bw-header-nav-list > li > .bw-header-dropdown-trigger {
+          font-size: var(--bw-header-menu-size, 19px);
           white-space: nowrap;
         }
 
@@ -1482,6 +1483,7 @@ class BWHeaderElement extends HTMLElement {
         .bw-header-mobile-book { display: none; }
         .bw-header-nav-list[data-bw-home-nav], .bw-header-home-store { display: none; }
         @media (min-width: ${BW_HEADER_STORE_DESIGN2?981:1101}px) and (max-width: 1279px) {
+          .bw-header-nav { --bw-header-menu-size: 18px; }
           .bw-header-main { gap: 10px; padding-left: 16px; padding-right: 16px; }
           .bw-header-logo img { height: 28px; }
           .bw-header-nav a, .bw-header-dropdown-trigger { padding-left: 7px; padding-right: 7px; font-size: 16px; letter-spacing: 0; }
@@ -1489,6 +1491,7 @@ class BWHeaderElement extends HTMLElement {
           .bw-header-cta .bw-header-book { padding-left: 14px; padding-right: 14px; letter-spacing: .6px; font-size: 12px; }
         }
         @media (min-width: ${BW_HEADER_STORE_DESIGN2?981:1101}px) and (max-width: 1070px) {
+          .bw-header-nav { --bw-header-menu-size: 17px; }
           .bw-header-nav a, .bw-header-dropdown-trigger { padding-left: 5px; padding-right: 5px; font-size: 15px; white-space: nowrap; }
           .bw-header-cta .bw-header-book { padding-left: 12px; padding-right: 12px; letter-spacing: .3px; }
         }
@@ -2055,15 +2058,16 @@ if (!customElements.get('bw-site-header')) {
   if(!customElements.get('bw-site-header-clothing-page'))customElements.define('bw-site-header-clothing-page', class extends BWHeaderElement {});
   if(!customElements.get('bw-site-header-walking-tours'))customElements.define('bw-site-header-walking-tours', class extends BWHeaderElement {});
   if(!customElements.get('bw-site-header-west-berlin'))customElements.define('bw-site-header-west-berlin', class extends BWHeaderElement {});
+  if(!customElements.get('bw-site-header-menu-size'))customElements.define('bw-site-header-menu-size', class extends BWHeaderElement {});
   const upgrade = () => {
     for (const host of document.querySelectorAll('bw-site-header')) {
-      if(host.constructor.navigationVersion===BW_HEADER_NAV_VERSION&&!host.querySelector('bw-site-header-unified,bw-site-header-design2,bw-site-header-design2-fix4,bw-site-header-design2-fix5,bw-site-header-design2-fix5b,bw-site-header-design2-fix6,bw-site-header-clothing,bw-site-header-store-polish,bw-site-header-store-nav,bw-site-header-clothing-page,bw-site-header-walking-tours'))continue;
-      if(host.querySelector('bw-site-header-west-berlin'))continue;
+      if(host.constructor.navigationVersion===BW_HEADER_NAV_VERSION&&!host.querySelector('bw-site-header-unified,bw-site-header-design2,bw-site-header-design2-fix4,bw-site-header-design2-fix5,bw-site-header-design2-fix5b,bw-site-header-design2-fix6,bw-site-header-clothing,bw-site-header-store-polish,bw-site-header-store-nav,bw-site-header-clothing-page,bw-site-header-walking-tours,bw-site-header-west-berlin'))continue;
+      if(host.querySelector('bw-site-header-menu-size'))continue;
       // Preserve older compatibility hosts: their observers use the direct
       // child tag as an upgrade guard. Removing it makes two builds fight.
-      const legacy=[host,...host.querySelectorAll('bw-site-header-unified,bw-site-header-design2,bw-site-header-design2-fix4,bw-site-header-design2-fix5,bw-site-header-design2-fix5b,bw-site-header-design2-fix6,bw-site-header-desktop-align,bw-site-header-clothing,bw-site-header-store-polish,bw-site-header-store-nav,bw-site-header-clothing-page,bw-site-header-walking-tours')];
+      const legacy=[host,...host.querySelectorAll('bw-site-header-unified,bw-site-header-design2,bw-site-header-design2-fix4,bw-site-header-design2-fix5,bw-site-header-design2-fix5b,bw-site-header-design2-fix6,bw-site-header-desktop-align,bw-site-header-clothing,bw-site-header-store-polish,bw-site-header-store-nav,bw-site-header-clothing-page,bw-site-header-walking-tours,bw-site-header-west-berlin')];
       const mount=legacy.at(-1);
-      const next=document.createElement('bw-site-header-west-berlin');
+      const next=document.createElement('bw-site-header-menu-size');
       next._preservedCommerceForm=host.querySelector('form[data-bw-landmarks-guide-header-checkout]');
       next._preservedCommerceForm?.remove();
       for(const previous of legacy)previous.disconnectedCallback?.();
