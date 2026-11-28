@@ -885,6 +885,11 @@ button.ys-words-tag:focus-visible{outline:2px solid var(--green);outline-offset:
 :host([design2]) [data-d2-xmas] .d2-card .tile,:host([design2]) .xg-shelf[data-xg-section="xmas"] .d2-card .tile{aspect-ratio:4/5;background:#fff;padding:0}
 :host([design2]) [data-d2-xmas] .d2-card img.tile-photo,:host([design2]) .xg-shelf[data-xg-section="xmas"] .d2-card img.tile-photo{object-fit:cover;width:100%;height:100%;padding:0;inset:0}
 @media(max-width:740px){:host([design2]) [data-d2-xmas] .d2-grid,:host([design2]) .xg-shelf[data-xg-section="xmas"] .d2-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+/* Berlin mugs shelf (28 Nov 2026): six cards, three across above phone width, two on phones; the mug photo sits whole on white (contain, inset:0 so the picture is not shifted). */
+:host([design2]) [data-d2-mugs] .d2-grid,:host([design2]) .xg-shelf[data-xg-section="mugs"] .d2-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+:host([design2]) [data-d2-mugs] .d2-card .tile,:host([design2]) .xg-shelf[data-xg-section="mugs"] .d2-card .tile{aspect-ratio:1/1;background:#fff;padding:0}
+:host([design2]) [data-d2-mugs] .d2-card img.tile-photo,:host([design2]) .xg-shelf[data-xg-section="mugs"] .d2-card img.tile-photo{object-fit:contain;width:100%;height:100%;padding:0;inset:0}
+@media(max-width:740px){:host([design2]) [data-d2-mugs] .d2-grid,:host([design2]) .xg-shelf[data-xg-section="mugs"] .d2-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 :host([design2]) .xg-shelf[data-xg-section="email"] .d2-card[data-product$="-digital-file"] img.tile-photo{object-fit:contain;inset:14px;width:calc(100% - 28px);height:calc(100% - 28px)}
 .xg-festive .xg-snow{-webkit-mask-image:linear-gradient(90deg,rgba(0,0,0,.25) 0,rgba(0,0,0,.25) 45%,#000 75%);mask-image:linear-gradient(90deg,rgba(0,0,0,.25) 0,rgba(0,0,0,.25) 45%,#000 75%)}
 @media(max-width:740px){.xg-festive .xg-snow{opacity:.6;-webkit-mask-image:linear-gradient(180deg,#000 0,rgba(0,0,0,.2) 30%,rgba(0,0,0,.2) 85%,#000 100%);mask-image:linear-gradient(180deg,#000 0,rgba(0,0,0,.2) 30%,rgba(0,0,0,.2) 85%,#000 100%)}}

@@ -108,19 +108,15 @@ export const STORE_MENU_DESIGN2 = Object.freeze([
     ...[['everyday','Everyday','Berliner Alltag'],['landmarks','Landmarks','Wahrzeichen'],['stories','Berlin Stories','Berliner Geschichten'],['districts','Districts','Bezirke'],['sets','Sets','Sets']].map(([id,label,de])=>({label,de,href:storeHref('print',id)})),
     {label:'Print at home',de:'Zum Selbstdrucken',href:storeHref('print')+'&format=digital'}
   ]},
-  {id:'clothing',label:'Clothing',de:'Kleidung',href:clothingHref(),allLabel:'All clothing',allDe:'Alle Kleidung',items:[{label:'T-shirts',de:'T-Shirts',href:'https://walkofberlin.com/category/berlin-t-shirts'},{label:'Hoodies',de:'Hoodies',href:'https://walkofberlin.com/category/berlin-hoodies'},{label:'Berliner Sprüche',de:'Berliner Sprüche',href:'https://walkofberlin.com/category/berliner-sprueche'}]},
+  {id:'clothing',label:'Clothing',de:'Kleidung',href:clothingHref(),allLabel:'All clothing',allDe:'Alle Kleidung',items:[{label:'T-shirts',de:'T-Shirts',href:'https://walkofberlin.com/category/berlin-t-shirts'},{label:'Hoodies',de:'Hoodies',href:'https://walkofberlin.com/category/berlin-hoodies'},{label:'Tote bags',de:'Stoffbeutel',href:'https://walkofberlin.com/category/berlin-tote-bags'},{label:'Berliner Sprüche',de:'Berliner Sprüche',href:'https://walkofberlin.com/category/berliner-sprueche'}]},
   {id:'gifts',label:'Gifts',de:'Geschenke',href:'https://walkofberlin.com/category/berlin-christmas-gifts',hrefDe:'https://walkofberlin.com/de/category/berlin-geschenke',items:[
+    // Six items since 28 Nov 2026 (Yusuf: the Gifts menu had become too crowded). Newspapers, the two calendars, the digital file, the digital gift and the voucher left the list as separate lines (all still on sale and on the gift page); the calendars share one line, the mugs have their own.
     {label:'Your street in 1928',de:'Deine Straße 1928',href:STORE_PERSONALISED_PRODUCT},
     {label:'Your West Berlin street in 1979',de:'Deine West-Berliner Straße 1979',href:'https://walkofberlin.com/product-page/your-west-berlin-street-in-1979-personalised-aerial-print'},
     {label:'Your name on a street sign',de:'Dein Name als Straßenschild',href:'https://walkofberlin.com/product-page/berlin-street-sign-with-your-name'},
-    {label:'1928 digital file',de:'1928 als digitale Datei',href:'https://walkofberlin.com/product-page/your-berlin-street-in-1928-digital-file'},
-    {label:'Gift a digital file',de:'Digitale Datei verschenken',href:'https://walkofberlin.com/product-page/your-berlin-street-in-1928-digital-gift'},
-    {label:'Dein Berlin 2027 · personalised calendar',de:'Dein Berlin 2027 · persönlicher Kalender',href:STORE_PERSONAL_CALENDAR_PRODUCT},
-    {label:'Berlin 2027 wall calendar',de:'Berlin Wandkalender 2027',href:STORE_CALENDAR_PRODUCT},
-    {label:'Tote bags',de:'Stoffbeutel',href:'https://walkofberlin.com/category/berlin-tote-bags'},
+    {label:'2027 Calendars',de:'Kalender 2027',href:storeHref('calendar')},
     {label:'Berlin Mugs',de:'Berlin-Tassen',href:'https://walkofberlin.com/category/berlin-mugs'},
-    {label:'Personal newspapers',de:'Persönliche Zeitungen',href:storeHref('newspapers')},
-    {label:'1928 gift voucher',de:'1928-Gutschein',href:'https://walkofberlin.com/product-page/gift-your-berlin-street-in-1928-poster-gift'}
+    {label:'Gifts by email',de:'Geschenke per E-Mail',href:'https://walkofberlin.com/category/berlin-christmas-gifts#xg-email',hrefDe:'https://walkofberlin.com/de/category/berlin-geschenke#xg-email'}
   ]},
   {id:'explore',label:'Explore Berlin',de:'Berlin entdecken',noteDe:'Alle auf Englisch',href:storeHref('audio'),items:[
     {label:'Audio walks',de:'Audiotouren',href:storeHref('audio')},

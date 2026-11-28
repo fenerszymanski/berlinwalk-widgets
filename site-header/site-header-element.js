@@ -175,6 +175,11 @@ const BW_HEADER_STORE_DESIGN2_EN = [
         "href": "https://walkofberlin.com/category/berlin-hoodies"
       },
       {
+        "label": "Tote bags",
+        "de": "Stoffbeutel",
+        "href": "https://walkofberlin.com/category/berlin-tote-bags"
+      },
+      {
         "label": "Berliner Sprüche",
         "de": "Berliner Sprüche",
         "href": "https://walkofberlin.com/category/berliner-sprueche"
@@ -204,39 +209,20 @@ const BW_HEADER_STORE_DESIGN2_EN = [
         "href": "https://walkofberlin.com/product-page/berlin-street-sign-with-your-name"
       },
       {
-        "label": "1928 digital file",
-        "de": "1928 als digitale Datei",
-        "href": "https://walkofberlin.com/product-page/your-berlin-street-in-1928-digital-file"
+        "label": "2027 Calendars",
+        "de": "Kalender 2027",
+        "href": "https://walkofberlin.com/category/all-products?tab=calendar"
       },
       {
-        "label": "Gift a digital file",
-        "de": "Digitale Datei verschenken",
-        "href": "https://walkofberlin.com/product-page/your-berlin-street-in-1928-digital-gift"
+        "label": "Berlin Mugs",
+        "de": "Berlin-Tassen",
+        "href": "https://walkofberlin.com/category/berlin-mugs"
       },
       {
-        "label": "Dein Berlin 2027 · personalised calendar",
-        "de": "Dein Berlin 2027 · persönlicher Kalender",
-        "href": "https://walkofberlin.com/product-page/dein-berlin-2027-personalised-wall-calendar"
-      },
-      {
-        "label": "Berlin 2027 wall calendar",
-        "de": "Berlin Wandkalender 2027",
-        "href": "https://walkofberlin.com/product-page/berlin-2027-wall-calendar-a3"
-      },
-      {
-        "label": "Tote bags",
-        "de": "Stoffbeutel",
-        "href": "https://walkofberlin.com/category/berlin-tote-bags"
-      },
-      {
-        "label": "Personal newspapers",
-        "de": "Persönliche Zeitungen",
-        "href": "https://walkofberlin.com/category/all-products?tab=newspapers"
-      },
-      {
-        "label": "1928 gift voucher",
-        "de": "1928-Gutschein",
-        "href": "https://walkofberlin.com/product-page/gift-your-berlin-street-in-1928-poster-gift"
+        "label": "Gifts by email",
+        "de": "Geschenke per E-Mail",
+        "href": "https://walkofberlin.com/category/berlin-christmas-gifts#xg-email",
+        "hrefDe": "https://walkofberlin.com/de/category/berlin-geschenke#xg-email"
       }
     ]
   },
@@ -333,6 +319,11 @@ const BW_HEADER_STORE_DESIGN2_DE = [
         "href": "https://walkofberlin.com/de/category/berlin-hoodies"
       },
       {
+        "label": "Stoffbeutel",
+        "de": "Stoffbeutel",
+        "href": "https://walkofberlin.com/de/category/berlin-tote-bags"
+      },
+      {
         "label": "Berliner Sprüche",
         "de": "Berliner Sprüche",
         "href": "https://walkofberlin.com/de/category/berliner-sprueche"
@@ -362,39 +353,20 @@ const BW_HEADER_STORE_DESIGN2_DE = [
         "href": "https://walkofberlin.com/de/product-page/berlin-street-sign-with-your-name"
       },
       {
-        "label": "1928 als digitale Datei",
-        "de": "1928 als digitale Datei",
-        "href": "https://walkofberlin.com/de/product-page/your-berlin-street-in-1928-digital-file"
+        "label": "Kalender 2027",
+        "de": "Kalender 2027",
+        "href": "https://walkofberlin.com/de/category/all-products?tab=calendar"
       },
       {
-        "label": "Digitale Datei verschenken",
-        "de": "Digitale Datei verschenken",
-        "href": "https://walkofberlin.com/de/product-page/your-berlin-street-in-1928-digital-gift"
+        "label": "Berlin-Tassen",
+        "de": "Berlin-Tassen",
+        "href": "https://walkofberlin.com/de/category/berlin-mugs"
       },
       {
-        "label": "Dein Berlin 2027 · persönlicher Kalender",
-        "de": "Dein Berlin 2027 · persönlicher Kalender",
-        "href": "https://walkofberlin.com/de/product-page/dein-berlin-2027-personalised-wall-calendar"
-      },
-      {
-        "label": "Berlin Wandkalender 2027",
-        "de": "Berlin Wandkalender 2027",
-        "href": "https://walkofberlin.com/de/product-page/berlin-2027-wall-calendar-a3"
-      },
-      {
-        "label": "Stoffbeutel",
-        "de": "Stoffbeutel",
-        "href": "https://walkofberlin.com/de/category/berlin-tote-bags"
-      },
-      {
-        "label": "Persönliche Zeitungen",
-        "de": "Persönliche Zeitungen",
-        "href": "https://walkofberlin.com/de/category/all-products?tab=newspapers"
-      },
-      {
-        "label": "1928-Gutschein",
-        "de": "1928-Gutschein",
-        "href": "https://walkofberlin.com/de/product-page/gift-your-berlin-street-in-1928-poster-gift"
+        "label": "Geschenke per E-Mail",
+        "de": "Geschenke per E-Mail",
+        "href": "https://walkofberlin.com/de/category/berlin-geschenke#xg-email",
+        "hrefDe": "https://walkofberlin.com/de/category/berlin-geschenke#xg-email"
       }
     ]
   },
