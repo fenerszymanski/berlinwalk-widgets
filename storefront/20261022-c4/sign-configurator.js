@@ -25,7 +25,7 @@ const DE = new Map(Object.entries({
   'Line': 'Zeile', 'Your sign': 'Dein Schild', 'Add to cart': 'In den Warenkorb', 'View cart': 'Zum Warenkorb', 'Added to your cart': 'Im Warenkorb',
   'On the wall': 'An der Wand', 'Close up': 'Nah', 'Illustrated preview': 'Gezeichnete Vorschau',
   'Product examples': 'Produktbeispiele', 'Example image': 'Beispielbild', 'Product images': 'Produktbilder', 'Live preview of your sign': 'Live-Vorschau deines Schilds', '← Back to your sign': '← Zurück zu deinem Schild',
-  'Styling example · AI visualization': 'Gestaltungsbeispiel · KI-Visualisierung',
+  'Styling example': 'Gestaltungsbeispiel',
   'Drawn to scale: 45.7 x 30.5 cm.': 'Maßstabsgetreu gezeichnet: 45,7 x 30,5 cm.',
   'Type the name for your sign.': 'Schreib den Namen für dein Schild.',
   'The name is too long for the sign. Shorten it or leave out the street word.': 'Der Name ist zu lang für das Schild. Kürz ihn oder lass das Straßenwort weg.',
@@ -161,7 +161,7 @@ ${photos.length ? `<div class="bw-thumb-rail"><div class="thumbnails" role="grou
 ${photos.length ? `<div class="sg-dots" role="tablist" aria-label="${t('Product images')}">${[{alt: t('Live preview of your sign')}, ...photos.map((x, i) => ({alt: t('Example image') + ' ' + (i + 1)}))].map((x, i) => `<button type="button" class="sg-dot" data-sg-slide="${i}" aria-label="${x.alt}" aria-current="${i === 0}"></button>`).join('')}</div>` : ''}
 <div class="sg-views"><button type="button" data-sg-view="wall" aria-pressed="true">${t('On the wall')}</button><button type="button" data-sg-view="close" aria-pressed="false">${t('Close up')}</button><span class="sg-note" data-sg-example hidden>${t('Example name in grey. Type yours.')}</span></div>
 <p class="sg-note" data-sg-preview-note>${t('Illustrated preview')} · ${t('Drawn to scale: 45.7 x 30.5 cm.')}</p>
-${photos.length ? `<p class="sg-photo-note" data-sg-photo-note hidden>${t('Styling example · AI visualization')}</p><script type="application/json" data-sg-photo-list>${JSON.stringify(photos.map(({src, alt}) => ({src, alt}))).replace(/</g, '\\u003c')}</script>` : ''}</div></div></section>
+${photos.length ? `<p class="sg-photo-note" data-sg-photo-note hidden>${t('Styling example')}</p><script type="application/json" data-sg-photo-list>${JSON.stringify(photos.map(({src, alt}) => ({src, alt}))).replace(/</g, '\\u003c')}</script>` : ''}</div></div></section>
 <section class="sg-step"><h2><span class="sg-num">1</span>${t('What is it for?')}</h2><p class="sg-help">${t('Pick one and I fill in an example. You can change every word.')}</p><div class="sg-occasions" role="radiogroup" aria-label="${t('What is it for?')}">${Object.entries(OCCASIONS).map(([k, o]) => `<button type="button" role="radio" aria-checked="false" data-sg-occasion="${k}">${t(o.label)}</button>`).join('')}</div></section>
 <section class="sg-step"><h2><span class="sg-num">2</span>${t('The sign')}</h2>${input('sg-name', 'Name on the sign', 'name', L.name)}<div class="sg-chips"><span>${t('Add a street word')}</span>${STREET_WORDS.map(w => `<button type="button" data-sg-word="${w}">-${w}</button>`).join('')}</div>
 ${input('sg-ortsteil', 'Ortsteil (the small line at the top)', 'ortsteil', L.ortsteil, 'list="sg-ortsteile"')}<datalist id="sg-ortsteile">${ORTSTEILE.map(o => `<option value="${esc(o)}">`).join('')}</datalist><p class="sg-help">${t('Leave it empty for no line.')}</p>
