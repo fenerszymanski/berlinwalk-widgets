@@ -32,11 +32,58 @@
     'club-night': { kicker: 'CLUB NIGHT RESCUE PLAN · €4.99', title: 'Turned away at the door? Have tonight’s Plan B ready.', text: 'Seven Berlin club doors, what to bring, the station exit for each, and a Plan B for tonight if the door says no.', cta: 'See the plan', href: 'https://app.berlinwalk.com/products/club-night-rescue-plan', image: OFFER_IMAGES + 'club-night-dj-controller_AdobeStock_519006631.webp', alt: 'A DJ mixer glowing blue and orange in a dark club' },
     'wall-audio': { kicker: 'BERLIN WALL AUDIO WALK · €9.90', title: 'Follow the Wall on foot, with me in your ears.', text: 'From Nordbahnhof to Mauerpark: ten outdoor stops, English audio, MP3s and a PDF route guide. Listen to a sample first.', cta: 'Listen to a sample', href: '/products/death-strip-audio-route', image: OFFER_IMAGES + 'wall-chapel-of-reconciliation-koreng-cc-by-3-de.webp', alt: 'The wooden Chapel of Reconciliation on the former death strip at Bernauer Straße', credit: { text: 'Photo: Ansgar Koreng, CC BY 3.0 DE', href: 'https://commons.wikimedia.org/wiki/File:Kapelle_der_Vers%C3%B6hnung.jpg' } },
     'first-day': { kicker: 'FIRST-DAY RESCUE PLAN · €4.99', title: 'Land in Berlin with your first hour already planned.', text: 'Transport, bags, food, one easy first stop and a backup, built for your stay, your group and your landing time.', cta: 'Build my plan', href: '/products/berlin-first-day-rescue-plan', image: OFFER_IMAGES + 'first-day-tv-tower-s-bahn_AdobeStock_281368074.webp', alt: 'An S-Bahn train crossing a brick viaduct below the TV Tower at dusk' },
+    'xmas-audio': { kicker: 'CHRISTMAS MARKETS OF MITTE AUDIO WALK · €9.90', title: 'Walk the Mitte markets with me in your ears.', text: 'From Gendarmenmarkt to the World Clock: twelve English chapters, about 3.3 km, MP3s and a PDF route card with a map. Listen to the first two chapters before you buy.', cta: 'Listen to a sample', href: '/products/christmas-markets-mitte-audio-tour', image: 'https://app.berlinwalk.com/assets/christmas-markets-mitte-audio-tour/photos/french-cathedral-christmas-market-1400.webp', alt: 'The Christmas market at Gendarmenmarkt at dusk, with a lit church tower and a Christmas tree' },
     gifts: { kicker: 'BERLIN CHRISTMAS GIFTS', title: 'A Berlin gift for someone who loves the city.', text: 'Their street from above in 1928, Berlin posters, hoodies, the 2027 calendar and my audio walks.', cta: 'See the gifts', href: '/gifts', image: GIFT_IMAGES + 'gifts.webp', alt: 'A framed 1928 street print beside gift wrap' },
     'street-1928': { kicker: 'YOUR STREET IN 1928', title: 'See your Berlin street from above, almost a hundred years ago.', text: 'Type your Berlin address and see your street from above in 1928, with the same spot today right below it. A personalised print for your wall.', cta: 'Find my street', href: '/product-page/your-berlin-street-in-1928-personalised-aerial-print-30-x-40-cm', image: GIFT_IMAGES + '1928.webp', alt: 'A 1928 street print in a wooden frame on a dark green wall' },
     sprueche: { kicker: 'BERLINER SPRÜCHE', title: 'Wear the German you hear every day in Berlin.', text: 'Zurückbleiben bitte, Mit Karte bitte, Zug fällt aus, Wegbier, Pfand: Berlin sayings on T-shirts, hoodies and tote bags.', cta: 'See the sayings', href: '/category/berliner-sprueche', image: 'https://static.wixstatic.com/media/5a08a3_e9620aafceeb4265a3defe7fc5325b16~mv2.jpg/v1/fill/w_960,h_840,al_c,q_82/file.jpg', alt: 'Someone in a black Zug fällt aus hoodie on a train platform bench' },
     posters: { kicker: 'BERLIN EVERYDAY POSTERS', title: 'The Späti, the Currywurst, the U-Bahn: Berlin for your wall.', text: 'Everyday Berlin as art prints, from the Späti at night to the Currywurst stand. Printed posters or printable downloads.', cta: 'See the posters', href: '/category/berlin-everyday-posters', image: GIFT_IMAGES + 'poster.webp', alt: 'The Späti poster in a wooden frame on a light wall' }
   };
+  // Christmas posts (Yusuf, 28 Nov 2026: "bu yazıların içindeki diğer bannerları bulalım. Bu Christmas sesli yürüyüş hariç diğerlerini
+  // çıkaralım. Sonra bu yazıya bizim Christmas ürünlerimizi entegre edelim ... oradan mı geliyorsunuz, evinize yollayalım"). On these posts
+  // the gift card, the Date Check card, the rail gift and tour boxes and the gift band go; one Christmas product box takes the card's
+  // place (its shipping line follows the reader's country, guessed from the browser language and time zone, nothing sent anywhere) and
+  // the closing band sells the Christmas Markets of Mitte audio walk, on sale until 3 Jan 2027. Checkout was verified on 28 Nov 2026:
+  // hoodies free to DE, EU, UK, US; mugs free to DE, UK, US and EUR 4.90 to the rest of the EU (output/store/mug-shipping-eu-us-20261128).
+  var XMAS_POSTS = { 'best-christmas-markets-berlin-2026': true, 'berlin-in-december-2026': true, 'christmas-in-berlin-what-is-open': true, 'berlin-christmas-market-souvenirs': true, 'christmas-markets-near-berlin': true, 'christmas-markets-in-mitte': true, 'christmas-garden-berlin': true, 'berlin-christmas-events-beyond-markets': true, 'christmas-shipping-deadlines-berlin': true };
+  var XMAS_UNTIL = Date.parse('2027-01-03T23:59:00+01:00');
+  var XMAS_POST_BY = Date.parse('2026-12-12T23:59:00+01:00');
+  var XMAS_IMG = 'https://static.wixstatic.com/media/';
+  var XMAS_ITEMS = [
+    { id: 'hoodie', name: 'Christmas ornaments hoodie', price: '€59.90', href: '/product-page/berlin-christmas-ornaments-hoodie', image: '5a08a3_177fe780a7b645779276c5a20ef4b063~mv2.png', alt: 'A forest green hoodie with the Berlin bear and the TV Tower as Christmas ornaments' },
+    { id: 'mug', name: 'Berlin mugs, six places', price: '€21.90', href: '/category/berlin-mugs', image: '5a08a3_6669a6797e0747cdba46ebb50e37d31d~mv2.jpg', alt: 'A white mug with the Brandenburg Gate in red' },
+    { id: 'print', name: 'Christmas ornaments printable', price: '€3.95', href: '/product-page/berlin-christmas-ornaments-printable-berlin-poster', image: '5a08a3_a8a0527da07e47a18ba1a48371eb3c94~mv2.jpg', alt: 'A poster of the Berlin bear and the TV Tower as ornaments among fir branches' },
+    { id: 'print', name: 'Breite Straße market printable', price: '€3.95', href: '/product-page/breite-strasse-christmas-market-printable-berlin-poster', image: '5a08a3_42cbd57957224fd08ff7284a33aa5468~mv2.jpg', alt: 'A poster of Berlin’s old Christmas market on Breite Straße, after a 1796 engraving' }
+  ];
+  var EU_NAMES = { AT: 'Austria', BE: 'Belgium', BG: 'Bulgaria', HR: 'Croatia', CY: 'Cyprus', CZ: 'the Czech Republic', DK: 'Denmark', EE: 'Estonia', FI: 'Finland', FR: 'France', GR: 'Greece', HU: 'Hungary', IE: 'Ireland', IT: 'Italy', LV: 'Latvia', LT: 'Lithuania', LU: 'Luxembourg', MT: 'Malta', NL: 'the Netherlands', PL: 'Poland', PT: 'Portugal', RO: 'Romania', SK: 'Slovakia', SI: 'Slovenia', ES: 'Spain', SE: 'Sweden' };
+  var ZONE_COUNTRY = { 'Europe/Vienna': 'AT', 'Europe/Brussels': 'BE', 'Europe/Sofia': 'BG', 'Europe/Zagreb': 'HR', 'Asia/Nicosia': 'CY', 'Europe/Nicosia': 'CY', 'Europe/Prague': 'CZ', 'Europe/Copenhagen': 'DK', 'Europe/Tallinn': 'EE', 'Europe/Helsinki': 'FI', 'Europe/Paris': 'FR', 'Europe/Athens': 'GR', 'Europe/Budapest': 'HU', 'Europe/Dublin': 'IE', 'Europe/Rome': 'IT', 'Europe/Riga': 'LV', 'Europe/Vilnius': 'LT', 'Europe/Luxembourg': 'LU', 'Europe/Malta': 'MT', 'Europe/Amsterdam': 'NL', 'Europe/Warsaw': 'PL', 'Europe/Lisbon': 'PT', 'Europe/Bucharest': 'RO', 'Europe/Bratislava': 'SK', 'Europe/Ljubljana': 'SI', 'Europe/Madrid': 'ES', 'Europe/Stockholm': 'SE', 'Europe/London': 'GB', 'Europe/Berlin': 'DE', 'Europe/Zurich': 'CH', 'Europe/Oslo': 'NO', 'Europe/Istanbul': 'TR' };
+  function xmasPost(slugValue) { return Date.now() <= XMAS_UNTIL && XMAS_POSTS[slugValue === undefined ? slug() : slugValue] === true; }
+  // A phone keeps its home language in Berlin, so a Berlin time zone defers to the language's region; any other zone wins over
+  // the language, because "en-US" is the default English of many European browsers.
+  function readerCountry(zone, languages) {
+    var fromZone = ZONE_COUNTRY[zone] || (/^America\/(?:New_York|Chicago|Denver|Los_Angeles|Phoenix|Anchorage|Detroit|Boise|Indiana|Kentucky|North_Dakota|Juneau|Sitka|Nome|Yakutat|Metlakatla|Adak|Menominee)/.test(zone || '') || zone === 'Pacific/Honolulu' ? 'US' : '');
+    var fromLanguage = '';
+    (languages || []).some(function (tag) { var m = /^[a-z]{2,3}[-_]([A-Za-z]{2})\b/.exec(String(tag || '')); if (m) { fromLanguage = m[1].toUpperCase(); return true; } return false; });
+    if (fromZone && fromZone !== 'DE') return fromZone;
+    if (fromZone === 'DE') return fromLanguage && fromLanguage !== 'DE' && (fromLanguage === 'US' || fromLanguage === 'GB' || EU_NAMES[fromLanguage]) ? fromLanguage : 'DE';
+    return fromLanguage || '';
+  }
+  function xmasShipping(country, now) {
+    var bucket = country === 'DE' ? 'de' : country === 'US' || country === 'GB' ? 'us-uk' : EU_NAMES[country] ? 'eu' : 'other';
+    var where = country === 'US' ? 'the US' : country === 'GB' ? 'the UK' : EU_NAMES[country] || '';
+    var line, hoodie = 'Free shipping', mug = 'Free shipping';
+    if (bucket === 'de') line = (now || Date.now()) <= XMAS_POST_BY ? 'Free delivery in Germany. Order the hoodie or a mug by 12 December to have it for Christmas.' : 'Too late for the post? The printables arrive by email a minute after you pay.';
+    else if (bucket === 'us-uk') line = 'Visiting from ' + where + '? The hoodie and the mugs ship free to your home, and the printables are a download you can print tonight.';
+    else if (bucket === 'eu') { line = 'Visiting from ' + where + '? The hoodie ships free to your home, a mug costs €4.90 to send, and the printables are a download.'; mug = '€4.90 shipping'; }
+    else { line = 'I ship to Germany, the EU, the UK and the US. From anywhere else, the printables are a download you can print at home.'; hoodie = 'DE, EU, UK, US'; mug = 'DE, EU, UK, US'; }
+    return { bucket: bucket, line: line, meta: { hoodie: hoodie, mug: mug, print: 'Instant download' } };
+  }
+  function xmasCardHtml(id, ship) {
+    var tiles = XMAS_ITEMS.map(function (item) {
+      var src = XMAS_IMG + item.image + '/v1/fit/w_320,h_320,q_80/' + item.image.replace(/~mv2\.(png|jpg)$/, '.$1');
+      return '<a class="bw-c-xmas-item" href="' + escapeHtml(item.href) + '"' + offerAttrs(id, 'mid') + '><span class="bw-c-xmas-media"><img src="' + escapeHtml(src) + '" alt="' + escapeHtml(item.alt) + '" width="320" height="320" loading="lazy" decoding="async"></span><span class="bw-c-xmas-name">' + escapeHtml(item.name) + '</span><span class="bw-c-xmas-meta">' + escapeHtml(item.price) + ' · ' + escapeHtml(ship.meta[item.id]) + '</span></a>';
+    }).join('');
+    return '<div class="bw-c-xmas-kicker">TAKE BERLIN’S CHRISTMAS HOME</div><strong class="bw-c-xmas-title">The market mug goes back for the Pfand. These stay with you.</strong><div class="bw-c-xmas-geo">' + escapeHtml(ship.line) + '</div><div class="bw-c-xmas-grid">' + tiles + '</div><a class="bw-c-xmas-all" href="/category/berlin-christmas-gifts"' + offerAttrs(id, 'mid') + '>See all my Christmas gifts <span aria-hidden="true">→</span></a>';
+  }
   var state = { archive: null, tools: null, heroHighlights: null, timer: null, observer: null, until: 0, adviceObserver: null, adviceBody: null, adviceScheduled: false, rendering: false };
 
   function enabled() {
@@ -208,6 +255,21 @@
       'html[data-bw-redesign="1"] .bw-c-offerband .bw-c-tourband-photo{position:relative;}',
       'html[data-bw-redesign="1"] .bw-c-offerband .bw-c-offer-credit{bottom:0;left:0;margin:0;position:absolute;}',
       'html[data-bw-redesign="1"] .bw-c-offerband .bw-c-offer-credit a{background:rgba(16,36,20,.74);color:#FAFAF5!important;display:block;font:500 10.5px/1.3 Montserrat,Arial,sans-serif;padding:6px 9px;text-decoration:none!important;}',
+      'html[data-bw-xmas-post="1"][data-bw-redesign="1"] [data-bw-date-check-card].bw-c-date-card,html[data-bw-xmas-post="1"] [data-bw-date-check-card],html[data-bw-xmas-post="1"] [data-bw-leadform],html[data-bw-xmas-post="1"] [data-bw-tourcta],html[data-bw-xmas-post="1"] .bw-c-rail-gifts,html[data-bw-xmas-post="1"] .bw-c-rail-tour,html[data-bw-xmas-post="1"] [id^="viewer-"]:has(iframe[src*="2b2e4b_d767b483cae16e027c4ea8ac7906fbf4"]){display:none!important;}',
+      'html[data-bw-redesign="1"] .bw-c-xmas-card{background:#102414;border-radius:14px;box-sizing:border-box;color:#FAFAF5;display:block!important;margin:38px 0 42px!important;max-width:100%;padding:24px 24px 20px;}',
+      'html[data-bw-redesign="1"] .bw-c-xmas-card .bw-c-xmas-kicker{color:#C5E1A5!important;display:block;font:600 10.5px/1.35 "IBM Plex Mono",monospace!important;letter-spacing:.13em!important;margin:0 0 8px!important;}',
+      'html[data-bw-redesign="1"] .bw-c-xmas-card .bw-c-xmas-title{color:#FAFAF5!important;display:block;font:400 25px/1.15 "Wobby",Montserrat,Arial,sans-serif!important;font-synthesis:none!important;letter-spacing:0!important;}',
+      'html[data-bw-redesign="1"] .bw-c-xmas-card .bw-c-xmas-geo{background:rgba(255,230,0,.14);border-left:3px solid #FFE600;display:block;border-radius:4px;color:#FAFAF5!important;font:600 14.5px/1.5 Montserrat,Arial,sans-serif!important;margin:14px 0 16px!important;padding:9px 12px;}',
+      'html[data-bw-redesign="1"] .bw-c-xmas-card .bw-c-xmas-grid{display:grid;gap:10px;grid-template-columns:repeat(4,minmax(0,1fr));}',
+      'html[data-bw-redesign="1"] .bw-c-xmas-card a.bw-c-xmas-item{background:#FAFAF5;border-radius:10px;color:#123D18!important;display:flex;flex-direction:column;overflow:hidden;text-decoration:none!important;}',
+      'html[data-bw-redesign="1"] .bw-c-xmas-card .bw-c-xmas-media{aspect-ratio:1/1;background:#fff;display:block;overflow:hidden;}',
+      'html[data-bw-redesign="1"] .bw-c-xmas-card .bw-c-xmas-media img{display:block!important;height:100%!important;margin:0!important;max-width:none!important;object-fit:contain;width:100%!important;}',
+      'html[data-bw-redesign="1"] .bw-c-xmas-card .bw-c-xmas-name{display:block;font:750 12.5px/1.3 Montserrat,Arial,sans-serif!important;padding:9px 10px 2px;}',
+      'html[data-bw-redesign="1"] .bw-c-xmas-card .bw-c-xmas-meta{color:#3D5A3F!important;display:block;font:500 11.5px/1.35 Montserrat,Arial,sans-serif!important;padding:0 10px 10px;}',
+      'html[data-bw-redesign="1"] .bw-c-xmas-card a.bw-c-xmas-item:hover,html[data-bw-redesign="1"] .bw-c-xmas-card a.bw-c-xmas-item:focus-visible{outline:2px solid #FFE600;outline-offset:2px;}',
+      'html[data-bw-redesign="1"] .bw-c-xmas-card a.bw-c-xmas-all{align-items:center;background:#FFE600;border-radius:999px;color:#123D18!important;display:inline-flex;font:800 13px/1 Montserrat,Arial,sans-serif!important;gap:6px;margin-top:16px;padding:13px 20px;text-decoration:none!important;}',
+      'html[data-bw-redesign="1"] .bw-c-xmas-card a.bw-c-xmas-all:hover,html[data-bw-redesign="1"] .bw-c-xmas-card a.bw-c-xmas-all:focus-visible{background:#C5E1A5;}',
+      '@media (max-width:600px){html[data-bw-redesign="1"] .bw-c-xmas-card{padding:20px 16px 16px;}html[data-bw-redesign="1"] .bw-c-xmas-card .bw-c-xmas-grid{grid-template-columns:repeat(2,minmax(0,1fr));}html[data-bw-redesign="1"] .bw-c-xmas-card .bw-c-xmas-title{font-size:22px!important;}}',
       '@media (max-width:600px){html[data-bw-redesign="1"] .bw-c-offer-card a.bw-c-offer-card-link{grid-template-columns:1fr;}html[data-bw-redesign="1"] .bw-c-offer-card .bw-c-offer-card-media{height:180px;min-height:0;}html[data-bw-redesign="1"] .bw-c-offer-card .bw-c-offer-card-copy{padding:20px;}html[data-bw-redesign="1"] .bw-c-offer-card .bw-c-offer-card-title{font-size:23px!important;}}'
     ].join(''); document.head.appendChild(style);
     if (!state.bleedListener) { state.bleedListener = true; addEventListener('resize', function () { document.querySelectorAll('.bw-c-stage,.bw-c-end').forEach(fitStage); document.querySelectorAll('.bw-c-page').forEach(fitPage); }, { passive: true }); }
@@ -688,6 +750,7 @@
   function offerIdFor(post, slugValue) {
     // Slug and title only: the topic label of every food post says "Food & Nightlife", which is not a club post.
     var words = [slugValue === undefined ? slug() : slugValue, post && post.title].join(' ').toLowerCase();
+    if (xmasPost(slugValue)) return 'xmas-audio';
     var category = post && post.categorySlug || '', topic = post && post.topic || '';
     if (!/football|hertha|stadium|matchday|bundesliga|basketball|sports[- ]club/.test(words) && /\bclubs?\b|clubbing|clubkultur|berghain|kitkat|techno|\brave\b|tresor|sisyphos|nightlife|dress[- ]codes?|bouncer/.test(words)) return 'club-night';
     if (/berlin[- ]wall|\bthe[- ]wall\b|\bwall[- ](?:trace|remains|trail|memorial|map|museum|in[- ]mitte)|mauerweg|\bmauer\b|death[- ]strip|checkpoint|east[- ]side[- ]gallery|east[- ]vs\.?[- ]west|divided/.test(words)) return 'wall-audio';
@@ -736,7 +799,8 @@
   function midOffer(body, items, id) {
     var card = document.querySelector('[data-bw-c-offer-card]');
     var bookings = body.querySelectorAll('[data-bw-blog-booking]');
-    if (!OFFERS[id]) {
+    var xmasId = /^xmas-products-/.test(id);
+    if (!OFFERS[id] && !xmasId) {
       if (card) card.remove();
       Array.prototype.forEach.call(document.querySelectorAll('[data-bw-c-offer-replaced]'), function (node) { node.removeAttribute('data-bw-c-offer-replaced'); });
       if (bookings[0]) watchOffer(bookings[0], 'tour', 'mid');
@@ -751,9 +815,9 @@
     if (!anchor || !anchor.parentNode) { if (card) card.remove(); return; }
     if (!card || card.getAttribute('data-bw-offer') !== id) {
       if (card) card.remove();
-      card = document.createElement('aside'); card.className = 'bw-c-offer-card';
-      card.setAttribute('data-bw-c-offer-card', '1'); card.setAttribute('data-bw-offer', id); card.setAttribute('aria-label', OFFERS[id].kicker);
-      card.innerHTML = midCardHtml(id);
+      card = document.createElement('aside'); card.className = xmasId ? 'bw-c-xmas-card' : 'bw-c-offer-card';
+      card.setAttribute('data-bw-c-offer-card', '1'); card.setAttribute('data-bw-offer', id); card.setAttribute('aria-label', xmasId ? 'Christmas gifts from Walk of Berlin' : OFFERS[id].kicker);
+      card.innerHTML = xmasId ? xmasCardHtml(id, state.xmasShip) : midCardHtml(id);
     }
     if (anchor.previousElementSibling !== card) anchor.parentNode.insertBefore(card, anchor);
     watchOffer(card, id, 'mid');
@@ -862,9 +926,24 @@
     unlockEndHeights(node);
   }
 
+  // The country guess is made once a page view; the counter path carries only its bucket (de, us-uk, eu, other).
+  function xmasMidId(post) {
+    if (!xmasPost()) { document.documentElement.removeAttribute('data-bw-xmas-post'); return offerIdFor(post); }
+    document.documentElement.setAttribute('data-bw-xmas-post', '1');
+    if (!state.xmasShip) {
+      var zone = ''; try { zone = Intl.DateTimeFormat().resolvedOptions().timeZone || ''; } catch (error) {}
+      state.xmasShip = xmasShipping(readerCountry(zone, navigator.languages && navigator.languages.length ? navigator.languages : [navigator.language]));
+    }
+    // The Date Check card styles itself with !important rules of the same weight, so it is hidden on the node as well.
+    Array.prototype.forEach.call(document.querySelectorAll('[data-bw-date-check-card],[data-bw-leadform],[data-bw-tourcta]'), function (node) {
+      if (node.style.getPropertyValue('display') !== 'none') node.style.setProperty('display', 'none', 'important');
+    });
+    return 'xmas-products-' + state.xmasShip.bucket;
+  }
+
   function paint() {
     document.documentElement.setAttribute('data-bw-redesign', '1'); injectStyle(); var body = findBody(), title = findTitle(); if (!body || !title) return;
-    markBody(body); var post = postMeta(), heroNode = hero(title, post, body); cover(heroNode, post); var items = headings(body); toc(items, body, post, toolFor(post)); fitInlineSurfaces(body); midOffer(body, items, offerIdFor(post)); listenOfferClicks(); keepQuickSummaryInBody(); retagFaq(); hideNativeShare(); endModule(body, post);
+    markBody(body); var post = postMeta(), heroNode = hero(title, post, body); cover(heroNode, post); var items = headings(body); toc(items, body, post, toolFor(post)); fitInlineSurfaces(body); midOffer(body, items, xmasMidId(post)); listenOfferClicks(); keepQuickSummaryInBody(); retagFaq(); hideNativeShare(); endModule(body, post);
     // Change the commercial band only, preserving the FAQ iframe and related guides.
     if (window.BWGiftWeek202611) window.BWGiftWeek202611.scan();
   }
@@ -908,6 +987,6 @@
     });
     state.observer.observe(document.documentElement, { childList: true, subtree: true });
   }
-  window.BWBlogOffers = { idFor: offerIdFor, offers: OFFERS };
+  window.BWBlogOffers = { idFor: offerIdFor, offers: OFFERS, xmasPost: xmasPost, readerCountry: readerCountry, xmasShipping: xmasShipping };
   boot();
 })();
