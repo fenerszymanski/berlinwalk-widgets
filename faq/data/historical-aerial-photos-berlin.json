@@ -1,34 +1,161 @@
 {
-  "title": "Historical Aerial Photos of Berlin - FAQ",
-  "subtitle": "Where to see old aerial photos of your Berlin street, and how to read them.",
-  "items": [
-    {
-      "q": "Where can I see historical aerial photos of Berlin for free?",
-      "a": "On **Geoportal Berlin**, the city's official map, and in the quicker **luftbilder.berlin.codefor.de** viewer that runs on the same open data. Both let you search for an address and switch between years."
-    },
-    {
-      "q": "Which year should I open for my street?",
-      "a": "**1928** shows Berlin before the war, sharp enough to count courtyard wings. **1953** shows what the war left: cleared plots and outlines of blocks. Compare both with the **newest colour photo** of today."
-    },
-    {
-      "q": "Why does my street look blurry in 1953?",
-      "a": "The 1953 flight was photographed at **1:22,000**, much smaller than the 1928 flight at 1:4,000. Zoom out a little and look at whole blocks rather than single houses."
-    },
-    {
-      "q": "Why is my street white in some years?",
-      "a": "Each flight covered a different area. **1928 is nearly complete**, but the flight around **1938 covers only parts of the city**, and many flights between **1954 and 1989 cover only West Berlin**. Check the neighbouring years when one is blank."
-    },
-    {
-      "q": "Is there a straight line through my block in 1928?",
-      "a": "The 1928 photos were taken as **separate sheets that do not overlap**. A sharp straight line where the grey tone jumps is usually a sheet edge, not a demolished row."
-    },
-    {
-      "q": "Can I use the photos, for example in a print or a school project?",
-      "a": "Yes. Geoportal Berlin publishes the old flights under the **Datenlizenz Deutschland Zero**, which allows any use without asking and without naming the source, although naming it is good practice."
-    },
-    {
-      "q": "Can an aerial photo tell me who lived in my house?",
-      "a": "No. It shows roofs, yards and streets. For residents, use the **Berlin address books**, which list every house and its tenants year by year until 1943."
-    }
-  ]
+  "version": 1,
+  "slug": "historical-aerial-photos-berlin",
+  "key": "historical-aerial-photos-berlin",
+  "config": {
+    "title": "Historical Aerial Photos of Berlin - FAQ",
+    "subtitle": "Where to see old aerial photos of your Berlin street, how the 1928 and 1979 flights differ, and how to read them.",
+    "items": [
+      {
+        "q": "Where can I see historical aerial photos of Berlin for free?",
+        "a": "On **Geoportal Berlin**, the city's official map, and in the quicker **luftbilder.berlin.codefor.de** viewer that runs on the same open data. Both let you search for an address and switch between years."
+      },
+      {
+        "q": "Where can I see Berlin from above in 1928?",
+        "a": "In three free places: **Geoportal Berlin** (layer \"Luftbilder 1928\"), the **luftbilder.berlin.codefor.de** viewer, and the Tagesspiegel's interactive **Berlin 1928 und heute**, which sets 1928 against 2015. All three use the city's 1928 survey photos."
+      },
+      {
+        "q": "Is there a historical aerial photo of my house?",
+        "a": "Most likely, if it is in Berlin. The **1928** survey covers almost the whole city, with gaps at the far eastern edge, and **1979** covers West Berlin. You will see your roof, courtyard and street, but not the residents or the facade."
+      },
+      {
+        "q": "Which year should I open for my street?",
+        "a": "**1928** shows Berlin before the war, sharp enough to count courtyard wings. **1953** shows what the war left: cleared plots and outlines of blocks. Compare both with the **newest colour photo** of today."
+      },
+      {
+        "q": "Why does my street look blurry in 1953?",
+        "a": "The 1953 flight was photographed at **1:22,000**, much smaller than the 1928 flight at 1:4,000. Zoom out a little and look at whole blocks rather than single houses."
+      },
+      {
+        "q": "Why is my street white in some years?",
+        "a": "Each flight covered a different area. **1928 is nearly complete**, but the flight around **1938 covers only parts of the city**, and many flights between **1954 and 1989 cover only West Berlin**. Check the neighbouring years when one is blank."
+      },
+      {
+        "q": "Is there a straight line through my block in 1928?",
+        "a": "The 1928 photos were taken as **separate sheets that do not overlap**. A sharp straight line where the grey tone jumps is usually a sheet edge, not a demolished row."
+      },
+      {
+        "q": "Can I use the photos, for example in a print or a school project?",
+        "a": "Yes. Geoportal Berlin publishes the old flights under the **Datenlizenz Deutschland Zero**, which allows any use without asking and without naming the source, although naming it is good practice."
+      },
+      {
+        "q": "Can an aerial photo tell me who lived in my house?",
+        "a": "No. It shows roofs, yards and streets. For residents, use the **Berlin address books**, which list every house and its tenants year by year until 1943."
+      },
+      {
+        "q": "What did Berlin look like in 1928?",
+        "a": "Mostly **closed blocks with side wings and back houses** around courtyards, busy tram junctions such as **Potsdamer Platz**, and huge rail sites such as the **Anhalter Bahnhof** shed. All of it is before the bombing, the Wall and the 1960s clearances."
+      },
+      {
+        "q": "What is the difference between the 1928 and the 1979 flight?",
+        "a": "**1928** is 156 sheets at **1:4,000** without overlap, covering almost all of Berlin. **1979** is 717 photos at **1:10,000** with overlapping frames, flown in May over **West Berlin only**. 1928 shows the city before the destruction, 1979 the divided city."
+      },
+      {
+        "q": "Can I get my street as a print?",
+        "a": "Yes. My **Your Berlin Street in 1928** print shows the 1928 photo of your spot with today's photo of the same ground below it, made to order. **Your West Berlin Street in 1979** does the same for West Berlin addresses. Your house number is never printed."
+      }
+    ]
+  },
+  "schema": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Where can I see historical aerial photos of Berlin for free?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "On Geoportal Berlin, the city's official map, and in the quicker luftbilder.berlin.codefor.de viewer that runs on the same open data. Both let you search for an address and switch between years."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Where can I see Berlin from above in 1928?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "In three free places: Geoportal Berlin (layer \"Luftbilder 1928\"), the luftbilder.berlin.codefor.de viewer, and the Tagesspiegel's interactive Berlin 1928 und heute, which sets 1928 against 2015. All three use the city's 1928 survey photos."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is there a historical aerial photo of my house?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Most likely, if it is in Berlin. The 1928 survey covers almost the whole city, with gaps at the far eastern edge, and 1979 covers West Berlin. You will see your roof, courtyard and street, but not the residents or the facade."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Which year should I open for my street?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "1928 shows Berlin before the war, sharp enough to count courtyard wings. 1953 shows what the war left: cleared plots and outlines of blocks. Compare both with the newest colour photo of today."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Why does my street look blurry in 1953?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The 1953 flight was photographed at 1:22,000, much smaller than the 1928 flight at 1:4,000. Zoom out a little and look at whole blocks rather than single houses."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Why is my street white in some years?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Each flight covered a different area. 1928 is nearly complete, but the flight around 1938 covers only parts of the city, and many flights between 1954 and 1989 cover only West Berlin. Check the neighbouring years when one is blank."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is there a straight line through my block in 1928?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The 1928 photos were taken as separate sheets that do not overlap. A sharp straight line where the grey tone jumps is usually a sheet edge, not a demolished row."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I use the photos, for example in a print or a school project?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. Geoportal Berlin publishes the old flights under the Datenlizenz Deutschland Zero, which allows any use without asking and without naming the source, although naming it is good practice."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can an aerial photo tell me who lived in my house?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. It shows roofs, yards and streets. For residents, use the Berlin address books, which list every house and its tenants year by year until 1943."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What did Berlin look like in 1928?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Mostly closed blocks with side wings and back houses around courtyards, busy tram junctions such as Potsdamer Platz, and huge rail sites such as the Anhalter Bahnhof shed. All of it is before the bombing, the Wall and the 1960s clearances."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the difference between the 1928 and the 1979 flight?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "1928 is 156 sheets at 1:4,000 without overlap, covering almost all of Berlin. 1979 is 717 photos at 1:10,000 with overlapping frames, flown in May over West Berlin only. 1928 shows the city before the destruction, 1979 the divided city."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I get my street as a print?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. My Your Berlin Street in 1928 print shows the 1928 photo of your spot with today's photo of the same ground below it, made to order. Your West Berlin Street in 1979 does the same for West Berlin addresses. Your house number is never printed."
+        }
+      }
+    ]
+  }
 }
