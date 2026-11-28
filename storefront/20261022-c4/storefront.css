@@ -158,6 +158,37 @@ h2>.sk-heading{width:55%}
 .ys-share-status{position:absolute;width:1px;height:1px;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap}
 .ys-share-status[data-kind=error]{position:static;width:auto;height:auto;margin:0;overflow:visible;clip:auto;white-space:normal;padding:10px 12px;border-radius:8px;font-size:14px;font-weight:600;color:#632d1b;background:#fbeee8}
 @media(max-width:740px){.ys-share{padding:0 7%}}
+/* "Your home on the wall" (A/B test 1, arm B, 28 Nov 2026): a strip under the preview, phone layout only. Left the room photo of the gallery with a live copy
+   of the visitor's sheet on the photo's own print (x 273 to 677, y 366 to 919 of 900 x 1200; that print is 2.59 % taller than 3 : 4, so the copy is stretched
+   by it). The photo is 1.5 times as wide as the picture box and centred on the frame (centre 52.78 % / 53.54 % of the photo), so the frame keeps a margin of
+   wall whatever height the row gets. Right the heading, the price, the page's delivery estimate and the add button; the frame note runs under both columns. */
+.ys-wall{display:none}
+@media(max-width:740px){
+.ys-wall{display:grid;grid-template-columns:minmax(0,132fr) minmax(0,191fr);gap:8px 12px;align-items:stretch;margin-top:-4px;padding:0 7%;text-align:left}
+.ys-wall[hidden]{display:none}
+.ys-wall-pic{position:relative;display:block;width:100%;min-height:0;padding:0;border:0;border-radius:8px;overflow:hidden;background:#28301f;cursor:zoom-in}
+.ys-wall-pic::before{content:'';display:block;padding-top:113.6%}
+.ys-wall-pic:focus-visible{outline:2px solid var(--green);outline-offset:2px}
+.ys-wall-scene{position:absolute;display:block;left:50%;top:50%;width:150%;height:0;padding-bottom:200%;transform:translate(-52.78%,-53.54%)}
+.ys-wall-scene>img{position:absolute;inset:0;display:block;width:100%;height:100%}
+.ys-wall-print{position:absolute;display:block;left:30.333%;top:30.5%;width:45%;height:46.167%;overflow:hidden;pointer-events:none;background:#fff}
+.ys-wall-print::after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,rgba(0,0,0,0),rgba(0,0,0,.06));box-shadow:inset 0 1px 2px rgba(0,0,0,.28)}
+.ys-wall-print .ys-sheet{width:100%!important;max-width:none;box-shadow:none;outline:0;transform-origin:0 0;transform:scaleY(1.0259)}
+.ys-wall-text{display:flex;flex-direction:column;gap:5px;min-width:0}
+.ys-wall p{margin:0}
+.ys-wall-t{margin-top:-2px;font-size:16px;font-weight:700;line-height:1.25;color:var(--green);text-wrap:balance}
+.ys-wall-price{font-size:14px;font-weight:600;line-height:1.35;color:var(--ink);overflow:hidden}
+.ys-wall-parts{display:flex;flex-wrap:wrap;margin-left:-1em}
+.ys-wall-parts>span{position:relative;padding-left:1em;white-space:nowrap}
+.ys-wall-parts>span::before{content:'·';position:absolute;left:0;width:1em;text-align:center}
+.ys-wall-delivery{margin-bottom:5px;font-size:13px;line-height:1.35;color:var(--ink)}
+.ys-wall-delivery[hidden]{display:none}
+.ys-wall-text>.primary{width:100%;min-width:0;min-height:46px;margin-top:auto;padding:8px 12px;font-size:15px}
+.ys-wall-note{grid-column:1/-1;font-size:12px;line-height:1.4;color:var(--muted);text-wrap:balance}
+.ys-wall>.ys-confirm{grid-column:1/-1}
+.ys-wall.ys-wall-open{grid-template-columns:minmax(0,1fr)}
+.ys-wall.ys-wall-open .ys-wall-pic{cursor:zoom-out}
+}
 .ys-hp{position:absolute;left:-9999px;width:1px;height:1px;opacity:0;pointer-events:none}
 .ys-quick{display:grid;gap:8px}
 .ys-quick[hidden]{display:none}

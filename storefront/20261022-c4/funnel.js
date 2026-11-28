@@ -181,9 +181,70 @@ export function ysStep(step, profile) {
 export function ysAddAnother() {
   count('add-another', YS_PATH);
 }
+// ---- A/B test 1 on the 1928 product page (28 Nov 2026; plan: content/products/your-street-1928/marketing/AB_TEST_1_PLAN_20261128_TR.md) ----
+// Arm A is the page as it is. Arm B adds the "Your home on the wall" strip under the preview (street-configurator.js). Phone layout only,
+// the plain 1928 page only (not the 1979 page, not the 2 to 3 homes preset, not the framed or canvas entry pages).
+// The arm is one coin flip per document, kept in this module's memory: no cookie, no storage, no identifier. A reload or a later visit can
+// land in the other arm; that is the price of storing nothing. Counting stays on lane 1 and under the same rules as count(): the steps of
+// ysStep are counted once more as /step-t1a-<step> or /step-t1b-<step> under the 1928 page path. Nothing goes to the pixel or the journey lane.
+// A cart line carries the arm as "t1a" / "t1b" in its Ref (window.__bwYsT1Ref, read by buildCustomText), so a paid order shows its arm and
+// the cart page, a new document without the coin flip, can count its checkout step from the line itself.
+// The switch is data/ab-tests.json ({"t1":{"on":true,"start":"<ISO>","end":"<ISO>"}}): outside that window, with "on" false, or when the
+// file cannot be read, nobody enters and every visitor gets A.
+// ?t1=a or ?t1=b in the address shows that arm for a look (QA, Yusuf). A forced arm is never counted and never written into an order.
+const T1_STEPS = new Set(['preview', 'mailbox', 'mailsend', 'mailremind', 'addtap', 'seen', 'blank', 'add', 'wallshown', 'walltap', 'wallzoom']);
+export function t1Open(config, now = Date.now()) {
+  const test = config?.t1;
+  if (!test || test.on !== true) return false;
+  const start = Date.parse(test.start), end = Date.parse(test.end);
+  return Number.isFinite(start) && Number.isFinite(end) && now >= start && now < end;
+}
+export function t1Forced(search) {
+  try { const value = new URLSearchParams(search || '').get('t1'); return value === 'a' || value === 'b' ? value : ''; } catch (e) { return ''; }
+}
+// Pure: {arm: 'a' | 'b' | '', forced}. `phone` = the page is in its phone layout, `plain` = the plain single-home 1928 page.
+export function t1Decide({config = null, phone = false, plain = false, search = '', now = Date.now(), random = Math.random} = {}) {
+  const forced = t1Forced(search);
+  if (forced) return {arm: forced, forced: true};
+  if (phone && plain && t1Open(config, now)) return {arm: random() < 0.5 ? 'a' : 'b', forced: false};
+  return {arm: '', forced: false};
+}
+let t1 = null;            // null until the switch file has been read; decided once per document
+const t1Waiting = [];     // steps that happened before that
+export function t1Enter(input) {
+  if (t1) return t1;
+  t1 = t1Decide(input);
+  if (t1.arm && !t1.forced) W.__bwYsT1Ref = 't1' + t1.arm;
+  (log.t1 = log.t1 || []).push({arm: t1.arm, forced: t1.forced});
+  for (const step of t1Waiting.splice(0)) t1Step(step);
+  return t1;
+}
+export const t1Arm = () => t1?.arm || '';
+export function t1Step(step) {
+  if (!T1_STEPS.has(step)) return false;
+  if (!t1) { if (t1Waiting.length < 40) t1Waiting.push(step); return false; }
+  if (!t1.arm) return false;
+  const name = `t1${t1.arm}-${step}`;
+  if (t1.forced) { const path = `${YS_PATH}/step-${name}`; if (!done.has(path)) { done.add(path); log.skipped.push({path, why: 't1-forced'}); } return false; }
+  return count(name, YS_PATH);
+}
+// The arms found in a cart's 1928 lines: "…//Ref:src.instagram~t1b~j…" -> ['b'].
+export function t1ArmsOf(lines = []) {
+  const arms = new Set();
+  for (const line of lines) {
+    if (![YS_ID, YS_DIGITAL_ID, ...YS_MOUNTED_IDS].includes(line?.productId)) continue;
+    for (const field of line.customText || []) {
+      const ref = /(?:^|\/\/)\s*Ref:\s*([^/|]*)/i.exec(String(field?.value || ''))?.[1] || '';
+      const arm = /(?:^|~)t1([ab])(?:~|$)/.exec(ref.trim())?.[1];
+      if (arm) arms.add(arm);
+    }
+  }
+  return [...arms].sort();
+}
 export function added(product, quantity = 1) {
   if (!product?.wixProductId) return;
   count('add', pathOf(product));
+  if ([YS_ID, YS_DIGITAL_ID, ...YS_MOUNTED_IDS].includes(product.wixProductId)) t1Step('add');
   W.WobCampaignFunnel?.emit('cart','add_to_cart');
   campaignGaEvent('add_to_cart',{currency:product.currency||'EUR',value:money(product.priceCents)*quantity,items:[{item_id:product.wixProductId,item_name:product.name,price:money(product.priceCents),quantity}]});
   journey('bw_store_add', pathOf(product), {productId: product.wixProductId, quantity});
@@ -197,6 +258,7 @@ export function checkout(cart, profiles = []) {
   journey('bw_store_checkout', STORE_PATH, {productIds: lines.map(line => line.productId).slice(0, 10), items: lines.length});
   if (lines.some(line => line.productId === YS_ID || line.productId === YS_DIGITAL_ID || YS_MOUNTED_IDS.includes(line.productId))) count('checkout', YS_PATH);
   if (lines.some(line => line.productId === YS_DIGITAL_ID)) count('checkout-digital', YS_PATH);
+  for (const arm of t1ArmsOf(lines)) count(`t1${arm}-checkout`, YS_PATH);   // A/B test 1: the arm travels in the cart line's Ref
   for (const profile of profiles) {   // sister products (1979): their own page path, counted once per page load like the 1928 ones
     if (lines.some(line => line.productId === profile.posterId || line.productId === profile.digitalId)) count('checkout', profile.path);
     if (lines.some(line => line.productId === profile.digitalId)) count('checkout-digital', profile.path);

@@ -382,6 +382,40 @@ export const shareBoxHtml = ({hidden = false, native = false} = {}) => native
         </div>
         <p class="ys-share-status" data-ys="sharestatus" role="status" aria-live="polite"></p>
       </div>`;
+// ---- "Your home on the wall" (A/B test 1, arm B only; 28 Nov 2026; plan: content/products/your-street-1928/marketing/AB_TEST_1_PLAN_20261128_TR.md) ----
+// A strip right under the preview on a phone: the room photo of the gallery (dark green wall) with the visitor's OWN print in its frame, next to the price, the
+// page's own delivery estimate and an add button. Previewers ask for the picture by mail (about 11 in 100) far more often than they tap an add button (1 to 2 in
+// 100); the wall photos of the gallery show an example address and sit behind a swipe. The strip is in the DOM for everyone and stays hidden unless the storefront
+// says this document is in arm B (api.t1 === 'b', decided in funnel.js). It shows for the poster format only, because its note says the poster has no frame.
+// The print in the frame is a live copy of the sheet above (the sheet scales itself by its own width), placed on the photo's print: x 273 to 677 and y 366 to 919
+// of 900 x 1200, measured on the file. The photo's print is 2.6 % taller than 3 : 4, so the copy is stretched by that much.
+// The note sits under both columns, so the picture, the price and the button stay together above the phone's buy bar in German and on narrow phones too.
+// German is written here and not in ys-de.js: these words exist only while the test runs.
+export const WALL_ROOM = 'assets/gallery-d486bd3e07810916dc69f3ac.jpg';
+export const WALL_TEXT = Object.freeze({
+  en: Object.freeze({title: 'Your home on the wall', spec: size => `${size} poster`, note: 'Shown in a frame. The poster comes without one; the framed version is below.', add: 'Add to cart',
+    larger: 'Show the room picture larger', smaller: 'Show the room picture smaller'}),
+  de: Object.freeze({title: 'Dein Zuhause an der Wand', spec: size => `Poster ${size}`, note: 'Gerahmt gezeigt. Das Poster kommt ohne Rahmen; die gerahmte Version findest du unten.', add: 'In den Warenkorb',
+    larger: 'Raumbild größer zeigen', smaller: 'Raumbild kleiner zeigen'}),
+});
+export const wallBoxHtml = ({german = false, confirm = ''} = {}) => { const t = WALL_TEXT[german ? 'de' : 'en']; return `<div class="ys-wall" data-ys="wall" hidden>
+        <button type="button" class="ys-wall-pic" data-ys="wallpic" aria-expanded="false" aria-label="${t.larger}">
+          <span class="ys-wall-scene"><img src="${new URL('./' + WALL_ROOM, import.meta.url).href}" alt="" width="900" height="1200" loading="lazy" decoding="async"><span class="ys-wall-print" data-ys="wallprint" aria-hidden="true"></span></span>
+        </button>
+        <div class="ys-wall-text">
+          <p class="ys-wall-t">${t.title}</p>
+          <p class="ys-wall-price"><span class="ys-wall-parts"><span data-ys="wallspec"></span><span data-ys="wallprice"></span></span></p>
+          <p class="ys-wall-delivery" data-ys="walldelivery" hidden></p>
+          <button type="button" class="primary" data-ys-walladd>${t.add}</button>
+        </div>
+        <p class="ys-wall-note">${t.note}</p>
+        ${confirm}
+      </div>`; };
+// The page's estimate is two dates joined by an en dash (U+2013), like "Arrives Wed 2 Dec [dash] Tue 8 Dec". It may break only after the dash, so a narrow column
+// never leaves "8 Dec" alone on a line.
+export const wallDeliveryText = text => { const parts = String(text || '').split(' \u2013 '); return parts.length === 2 ? `${parts[0]}\u00a0\u2013 ${parts[1].replace(/ /g, '\u00a0')}` : String(text || ''); };
+// When the strip may show. `arm` is the document's test arm, `broken` says a photo of this spot gave up loading.
+export const wallVisible = (state, arm, broken = false) => arm === 'b' && !!state.lat && !isHomes(state) && !ysMounted(state) && !ysDigital(state) && broken !== true;
 // Phones with the system share sheet use it; a desktop browser that has navigator.share (Safari, Edge) still gets the three buttons, because there the sheet is a poor menu.
 export const shareNativeAvailable = () => typeof navigator !== 'undefined' && typeof navigator.share === 'function' && !!globalThis.matchMedia?.('(pointer: coarse)')?.matches;
 export function buildCustomText(state, search) {
@@ -392,7 +426,8 @@ export function buildCustomText(state, search) {
   const parts = [`Map point ${lat.toFixed(5)},${lon.toFixed(5)}`, `Title:${title}|Area:${area}`, ...(line ? [`Line:${line}`] : []), `Layout:${ysLayout(state)}`, `Colour:${ysColour(state)}`];
   if(new URLSearchParams(search??(typeof location!=='undefined'?location.search:'')).get('lang')==='de')parts.push('Lang:de');
   const journeyRef = typeof window !== 'undefined' && /^[a-z0-9]{6,16}$/.test(window.__bwStoreJourneyRef || '') ? `j${window.__bwStoreJourneyRef}` : '';
-  const ref = [LANDING_SOURCE && `src.${LANDING_SOURCE}`, journeyRef, adRef(search)].filter(Boolean).join('~');   // source first, so a short room keeps it
+  const t1Ref = typeof window !== 'undefined' && /^t1[ab]$/.test(window.__bwYsT1Ref || '') ? window.__bwYsT1Ref : '';   // A/B test 1 arm (funnel.js); never set for a forced look
+  const ref = [LANDING_SOURCE && `src.${LANDING_SOURCE}`, t1Ref, journeyRef, adRef(search)].filter(Boolean).join('~');   // source first, so a short room keeps it
   const room = YS_LIMITS.details - parts.join('//').length - '//Ref:'.length;
   if (ref && room >= 6) parts.push(`Ref:${ref.slice(0,room)}`);
   const details=parts.join('//');
@@ -550,6 +585,7 @@ export function mountConfigurator(host, state, api) {
         ${confirmHtml('quick')}
         ${trustHtml(true, 'ys-trust-compact')}
       </div>
+      ${wallBoxHtml({german: mailLocale() === 'de', confirm: confirmHtml('wall')})}
       ${shareBoxHtml({hidden: !state.lat || state.blank === true, native: shareNativeAvailable()})}
       ${mailBoxHtml({hidden: !state.lat, remind: mailRemindOpen()})}
     </div>`;
@@ -677,7 +713,46 @@ export function mountConfigurator(host, state, api) {
     $('quickspec').textContent = `${ysSize(state)} · ${paper.name}`;
     host.querySelectorAll('[data-ys-yes]').forEach(b => { b.textContent = `Yes, add to cart · ${euro(currentPrice(state))}`; });
     $('caption').textContent = captionFor(state, !!state.lat);
+    paintWall();
   }
+  // ---- "Your home on the wall" strip (A/B test 1, arm B): see wallBoxHtml ----
+  // The framed print is a copy of the sheet as it is right now; a copied canvas starts empty, so its pixels are drawn across.
+  function paintWallPrint() {
+    const slot = $('wallprint'), sheet = $('sheet'), box = $('wall');
+    if (!slot || !sheet || !box || box.hidden) return;
+    const copy = sheet.cloneNode(true);
+    copy.hidden = false; copy.removeAttribute('data-ys');
+    copy.querySelectorAll('[data-ys]').forEach(el => el.removeAttribute('data-ys'));
+    copy.querySelectorAll('.ys-status, .ys-words-tag').forEach(el => el.remove());
+    const from = sheet.querySelectorAll('.ys-photo'), to = copy.querySelectorAll('.ys-photo');
+    from.forEach((photo, i) => { const a = photo.querySelector('canvas'), b = to[i]?.querySelector('canvas'); if (a && b) { try { b.getContext('2d').drawImage(a, 0, 0); } catch (e) {} } });
+    slot.replaceChildren(copy);
+  }
+  function paintWall() {
+    const box = $('wall'); if (!box) return;
+    const on = wallVisible(state, api.t1, api.wallBroken);
+    box.hidden = !on;
+    const add = host.querySelector('[data-ys-walladd]');
+    if (add) add.disabled = !readyToCheck(state) || api.busy();
+    if (!on) return;
+    const t = WALL_TEXT[mailLocale() === 'de' ? 'de' : 'en'], root = host.getRootNode();
+    $('wallspec').textContent = t.spec(ysSize(state).replace(' x ', ' × '));
+    showPrice($('wallprice'), currentPrice(state));
+    // The delivery line is the page's own dated estimate (store-extras.js writes it after each render), already in the page's language.
+    const source = root.querySelector?.('[data-rw-delivery]'), line = $('walldelivery'), text = source?.querySelector('.rw-delivery strong')?.textContent.trim() || '';
+    line.textContent = wallDeliveryText(text); line.hidden = !text;
+    if (source && api.wallDeliveryNode !== source && typeof MutationObserver === 'function') {
+      api.wallDeliveryWatch?.disconnect(); api.wallDeliveryNode = source;
+      api.wallDeliveryWatch = new MutationObserver(() => api.t1Paint?.());
+      api.wallDeliveryWatch.observe(source, {childList: true, characterData: true, subtree: true});
+    }
+    const open = state.wallOpen === true, pic = $('wallpic');
+    box.classList.toggle('ys-wall-open', open); pic.setAttribute('aria-expanded', String(open)); pic.setAttribute('aria-label', open ? t.smaller : t.larger);
+    paintWallPrint();
+    if (!api.wallSeen) { api.wallSeen = true; api.t1Track?.('wallshown'); }
+  }
+  api.t1Paint = () => { if (host.isConnected) paintWall(); };   // the storefront calls this when the test arm is known
+  $('wallpic')?.addEventListener('click', () => { state.wallOpen = state.wallOpen !== true; if (state.wallOpen) api.t1Track?.('wallzoom'); paintWall(); });
   host.querySelectorAll('[data-ys-size]').forEach(b => b.addEventListener('click', () => { state[sizeKey(state)] = b.dataset.ysSize; paintVariant(); }));
   function chooseFormat(format) {
     const previous = state.format || 'poster';
@@ -707,6 +782,7 @@ export function mountConfigurator(host, state, api) {
     ptitle.style.setProperty('--fs', size);
     const width = () => { try { return ptitle.getComputedTextLength(); } catch { return 0; } };   // 0 while the sheet is not rendered
     while (size > 48 && width() > PHOTO.w) { size -= 4; ptitle.style.setProperty('--fs', size); }
+    paintWallPrint();
   }
   const rawPhotos=new Map();
   function paintPhoto(layer) {
@@ -733,6 +809,7 @@ export function mountConfigurator(host, state, api) {
     for(const layer of rawPhotos.keys())paintPhoto(layer);
     $('caption').textContent=captionFor(state,!!state.lat);
     if(!state.lat)$('example').querySelector('img').src=ysColour(state)==='sepia'&&ysLayout(state)==='then-now'?api.sample:new URL(`./assets/options/${ysColour(state)}-${ysLayout(state)}${new URLSearchParams(location.search).get('lang')==='de'?'-de':''}.jpg`,import.meta.url).href;
+    paintWallPrint();
   }
   host.querySelectorAll('[data-ys-layout]').forEach(b=>b.addEventListener('click',()=>{if(state.layout===b.dataset.ysLayout)return;state.layout=b.dataset.ysLayout;state.seen=false;state.confirming=null;api.track?.('layout-'+state.layout);paintOptions();if(state.lat)showPoint(true);}));
   host.querySelectorAll('[data-ys-colour]').forEach(b=>b.addEventListener('click',()=>{if(state.colour===b.dataset.ysColour)return;state.colour=b.dataset.ysColour;api.track?.('colour-'+state.colour);paintOptions();}));
@@ -758,6 +835,7 @@ export function mountConfigurator(host, state, api) {
     host.querySelectorAll('[data-ys-yes]').forEach(y => { y.disabled = off; });
     const why = host.getRootNode().querySelector?.('[data-ys-why]'); if (why) why.textContent = ready ? '' : (!state.lat ? (results.hidden ? 'Search for your address to continue.' : 'Tap one of the places under the search box.') : 'Fill in the title and area lines to continue.');
     paintConfirm();
+    paintWall();
   };
   api.refresh = refreshButton;
 
@@ -766,6 +844,7 @@ export function mountConfigurator(host, state, api) {
     $('sheet').hidden = false; $('example').hidden = true; $('fields').hidden = false;
     $('mail').hidden = ysMounted(state);
     if (fresh) state.blank = false;   // a new spot starts without the "It is blank" verdict
+    if (fresh) api.wallBroken = false;   // and the strip of A/B test 1 starts without a failed photo
     paintShare();   // the share block is there whenever a spot is, also on framed and canvas; gone after "It is blank" (the 1928 survey did not reach that spot)
     if (!api.mailboxSeen) { api.mailboxSeen = true; api.track?.('mailbox'); }   // funnel: the preview exists and the mail box is on screen
     if (fresh) paintMail('');
@@ -782,6 +861,7 @@ export function mountConfigurator(host, state, api) {
       if (!valid()) return;
       capturePhoto(layer);
       loaded.add(layer);
+      if (api.wallBroken) { api.wallBroken = false; paintWall(); } else paintWallPrint();
       if (loaded.size === layers.length) {
         api.track?.('preview');
         if (fromFinder) api.track?.('finder-preview');
@@ -790,7 +870,7 @@ export function mountConfigurator(host, state, api) {
     const cancel = layers.map(layer => loadAerialPhoto({
       slot: $(layer === 'archive' ? 'photo-1928' : 'photo-today'),
       url: layer === 'archive' ? url1928(state.lat, state.lon, ysLayout(state)==='1928-only') : urlToday(state.lat, state.lon),
-      layer, valid, track: step => api.track?.(step), status: layer === 'archive' ? setStatus : setStatusToday,
+      layer, valid, track: step => { if (/^photo(?:archive|today)failed$/.test(step) && valid()) { api.wallBroken = true; paintWall(); } api.track?.(step); }, status: layer === 'archive' ? setStatus : setStatusToday,
       loaded: () => both(layer),
     }));
     api.cancelPhotos = () => cancel.forEach(stop => stop());
@@ -916,15 +996,16 @@ export function mountConfigurator(host, state, api) {
   // Funnel: addtap = an add button tapped with a printable spot, seen = "Yes" in the panel, blank = "It is blank", add = the cart took it (storefront).
   const realAdd = () => host.getRootNode().querySelector?.('[data-ys-add]');
   host.addEventListener('click', event => {
-    const t = event.target.closest?.('[data-ys-quickadd], [data-ys-add], [data-ys-yes], [data-ys-no], [data-ys-jump]'); if (!t) return;
+    const t = event.target.closest?.('[data-ys-quickadd], [data-ys-walladd], [data-ys-add], [data-ys-yes], [data-ys-no], [data-ys-jump]'); if (!t) return;
     if (t.matches('[data-ys-jump]')) { if (!$('options').hidden) { $('options').open = true; state.optionsOpen = true; } $('fields').scrollIntoView({behavior: 'smooth', block: 'start'}); return; }
     if (t.matches('[data-ys-no]')) { t.closest('[data-ys-confirm]').querySelector('[data-ys-noinfo]').hidden = false; state.blank = true; paintShare(); api.track?.('blank'); return; }
     if (t.matches('[data-ys-yes]')) { if (!readyToCheck(state) || api.busy()) return; state.seen = true; state.confirming = null; api.track?.('seen'); refreshButton(); realAdd()?.click(); return; }
     if (!readyToCheck(state)) return;
     api.track?.('addtap');
-    if (state.seen === true) { if (t.matches('[data-ys-quickadd]')) realAdd()?.click(); return; }
+    const wall = t.matches('[data-ys-walladd]'); if (wall) api.t1Track?.('walltap');   // A/B test 1: the strip's own button
+    if (state.seen === true) { if (wall || t.matches('[data-ys-quickadd]')) realAdd()?.click(); return; }
     event.stopPropagation();
-    state.confirming = t.matches('[data-ys-quickadd]') ? 'quick' : 'form'; paintConfirm();
+    state.confirming = t.matches('[data-ys-quickadd]') ? 'quick' : wall ? 'wall' : 'form'; paintConfirm();
     const panel = host.querySelector(`[data-ys-confirm="${state.confirming}"]`);
     if (panel.getBoundingClientRect().bottom > innerHeight - 16) panel.scrollIntoView({behavior: 'smooth', block: 'nearest'});
     panel.querySelector('[data-ys-yes]').focus({preventScroll: true});
