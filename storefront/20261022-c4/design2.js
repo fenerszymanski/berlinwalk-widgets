@@ -23,7 +23,7 @@ function earlyJson(url) {
 const listingOrderReady=earlyJson(new URL('data/listing-order.json?v=zoom-sort-20261117-v1',import.meta.url)).catch(()=>null).then(j=>{if(j&&Array.isArray(j.popular)&&j.created&&typeof j.created==='object')listingOrder=j;});
 export const prepareDesign=shareSuccessful(async ()=>{
  const files=['recommendations.json','de-store.json','explore-images.json'];
- const data=files.map(file=>earlyJson(new URL('data/'+file+'?v='+(file==='explore-images.json'?'u8-digital-20261128-v1':file==='de-store.json'?'u8-digital-20261128-v1':'u8-digital-20261128-v1'),import.meta.url)));
+ const data=files.map(file=>earlyJson(new URL('data/'+file+'?v='+(file==='explore-images.json'?'u8-digital-20261128-v1':file==='de-store.json'?'mug-ship-20261128-v1':'u8-digital-20261128-v1'),import.meta.url)));
  [recommendations,translations,exploreImages]=await Promise.all([...data,listingOrderReady,extrasEnabled()?loadExtras():undefined]);
 });
 export const prepare=prepareDesign();
@@ -71,8 +71,8 @@ export function install(Store,{asset,esc,STORE_LOGO,money,editionHref,isDigital,
 // the two gift landings draw four themed shelves instead of one grid (d2giftGuide). Kept here, not in js/store-navigation.js, which may only grow at its end.
 // Christmas hoodies (Yusuf, 26 Nov 2026: "Yeni christmas temalı hoodiler satışta. Hem store ana sayfaya hem de gift sayfasına uygun bir şekilde o ürünleri koyar mısın"):
 // the six Berlin winter hoodies of 26 Nov get their own shelf on the store home page and on the two gift landings, three across on desktop, until the
-// festive end. Their own shelf, not the "Wear Berlin" one: that shelf promises free shipping to the EU, the UK and the US, these hoodies ship free
-// within Germany (their deliveryNote). XMAS_HOODIE_PHOTOS swaps a card's picture for its model photo (asset path) once one is on the product.
+// festive end. Their own shelf, not the "Wear Berlin" one: that shelf promises free shipping to the EU, the UK and the US, these hoodies shipped free
+// within Germany only (their deliveryNote); since 28 Nov 2026 they check out free to the EU, the UK and the US too and the shelf says so. XMAS_HOODIE_PHOTOS swaps a card's picture for its model photo (asset path) once one is on the product.
 // Store home poster shelf (Yusuf, 26 Nov 2026: "store anasayfadaki poster seçkisini değiştirelim. daha renkli full posterleri koyalım"): colourful full-sheet artworks first; a missing id is skipped and the shelf fills from the poster list.
 const HOME_POSTERS = Object.freeze(['ed-print-09-teufelsberg','ed-print-10-currywurst','ed-print-02-pink','ed-print-11-mauerpark','ed-print-05-schoenhauser','ed-print-08-marzahn','pr-berolina-modernist','ed-print-12-grunewald','gs','ed-print-01-tempelhof','ed-print-07-window','ed-print-03-courtyard']);
 const XMAS_HOODIES = Object.freeze(['hoodie-neptunbrunnen-on-ice-sf500','hoodie-fernsehturm-sleigh-sf500','hoodie-berlin-christmas-ornaments-sf500','hoodie-gift-bundle-santa-bear-sf500','hoodie-marienkirche-cargo-bike-sf500','hoodie-berlin-lebkuchen-sf500']);
@@ -87,16 +87,16 @@ const XMAS_HOODIE_PHOTOS = Object.freeze({ // the first model photo of each prod
 // Apparel cards draw apparelMedia's printDetail (else the colour lead), not product.image, so the card copy gets the model photo as its printDetail.
 const xmasPhoto=p=>{const image=XMAS_HOODIE_PHOTOS[p?.id],am=p?.apparelMedia,c=am?.defaultColor,entry=am?.colors?.[c];if(!image||!entry)return {};const g=(am.sharedGallery||[]).find(x=>x.image===image);return g?{apparelMedia:{...am,colors:{...am.colors,[c]:{...entry,printDetail:{image,alt:g.alt}}}}}:{};};
 const XMAS_HOODIE_TEXT = Object.freeze({
-  en:{title:'Christmas hoodies',text:'Berlin at Christmas on fleece hoodies: the Neptune Fountain on ice, a sleigh round the TV Tower, Lebkuchen and a Santa bear. Made to order, free shipping within Germany.',more:'All hoodies'},
-  de:{title:'Weihnachts-Hoodies',text:'Berlin zu Weihnachten auf Fleece-Hoodies: der Neptunbrunnen auf dem Eis, ein Schlitten um den Fernsehturm, Lebkuchen und ein Weihnachtsbär. Auf Bestellung gefertigt, kostenloser Versand innerhalb Deutschlands.',more:'Alle Hoodies'}
+  en:{title:'Christmas hoodies',text:'Berlin at Christmas on fleece hoodies: the Neptune Fountain on ice, a sleigh round the TV Tower, Lebkuchen and a Santa bear. Made to order. Free shipping to Germany, the EU, the UK and the US.',more:'All hoodies'},
+  de:{title:'Weihnachts-Hoodies',text:'Berlin zu Weihnachten auf Fleece-Hoodies: der Neptunbrunnen auf dem Eis, ein Schlitten um den Fernsehturm, Lebkuchen und ein Weihnachtsbär. Auf Bestellung gefertigt. Kostenloser Versand nach Deutschland, in die EU, nach Großbritannien und in die USA.',more:'Alle Hoodies'}
 });
 // Berlin mugs (Yusuf, 28 Nov 2026: "yeni mug kategorisini store ana sayfasına ve gifts sayfasına koyalım"): the six ceramic mugs of 27 Nov get their own shelf on the store home page
-// (after the Christmas hoodies) and on the two gift landings (after the hoodie shelf), three across on desktop. Their own shelf, not part of "Wear Berlin": the mugs ship within Germany only.
+// (after the Christmas hoodies) and on the two gift landings (after the hoodie shelf), three across on desktop. Their own shelf, not part of "Wear Berlin": the mugs have their own delivery profile (28 Nov 2026: Germany, the UK and the US free, EUR 4.90 to the rest of the EU).
 const MUG_IDS = Object.freeze(['mug-kotti','mug-mauerpark','mug-wannsee','mug-gaerten-der-welt','mug-brandenburg-gate','mug-tiergarten']);
 const MUG_HREF = 'https://walkofberlin.com/category/berlin-mugs';
 const MUG_TEXT = Object.freeze({
-  en:{title:'For their morning coffee',homeTitle:'Berlin mugs',text:'Six Berlin places on white ceramic mugs, 325 ml, each with a coloured handle. Made to order, free shipping within Germany.',more:'All mugs'},
-  de:{title:'Für ihren Morgenkaffee',homeTitle:'Berlin-Tassen',text:'Sechs Berliner Orte auf weißen Keramiktassen, 325 ml, jede mit farbigem Henkel. Auf Bestellung gefertigt, kostenloser Versand innerhalb Deutschlands.',more:'Alle Tassen'}
+  en:{title:'For their morning coffee',homeTitle:'Berlin mugs',text:'Six Berlin places on white ceramic mugs, 325 ml, each with a coloured handle. Made to order. Free shipping to Germany, the UK and the US, €4.90 to the rest of the EU.',more:'All mugs'},
+  de:{title:'Für ihren Morgenkaffee',homeTitle:'Berlin-Tassen',text:'Sechs Berliner Orte auf weißen Keramiktassen, 325 ml, jede mit farbigem Henkel. Auf Bestellung gefertigt. Kostenloser Versand nach Deutschland, Großbritannien und in die USA, 4,90 € in die übrige EU.',more:'Alle Tassen'}
 });
 const GIFT_GUIDE_SECTIONS = Object.freeze([
   // One row since 24 Nov 2026 (Yusuf: "bu gazete işi anlaşılmıyor burada ... tek satıra çevirebiliriz ... 1928, 1979, 1928 framed ve takvimi koyabiliriz"). The newspapers, the 1928 canvas and the framed 1979 print stay on sale; they left this shelf only.
