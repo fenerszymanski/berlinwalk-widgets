@@ -1,6 +1,6 @@
 import {clothingCards,garmentDesign,syncClothingSeo} from './clothing.js?v=clothing-page-20261116-v1';
 import {qualityOf,designKey,displayName,designName,designCards,designRepresentative,QUALITY_TEXT,installQuality} from './tshirt-designs.js?v=unisex-product-names-20261122-v1';
-import {extrasEnabled,loadExtras,installExtras} from './store-extras.js?v=mug-ship-20261128-v2';
+import {extrasEnabled,loadExtras,installExtras} from './store-extras.js?v=mug-ship-20261128-v3';
 import {readStoreJson,shareSuccessful} from './store-data.js';
 import {COLOR_SWATCHES,apparelCardColors,apparelCardSelection,apparelCardProduct,colorName} from './apparel-card-colors.js?v=berlin-bear-black-20261120-v1';
 import {DESIGN2_TEXT,translateDesign2} from './ys-de.js?v=ys-share-20261125-v1';
@@ -23,7 +23,7 @@ function earlyJson(url) {
 const listingOrderReady=earlyJson(new URL('data/listing-order.json?v=zoom-sort-20261117-v1',import.meta.url)).catch(()=>null).then(j=>{if(j&&Array.isArray(j.popular)&&j.created&&typeof j.created==='object')listingOrder=j;});
 export const prepareDesign=shareSuccessful(async ()=>{
  const files=['recommendations.json','de-store.json','explore-images.json'];
- const data=files.map(file=>earlyJson(new URL('data/'+file+'?v='+(file==='explore-images.json'?'u8-digital-20261128-v1':file==='de-store.json'?'mug-ship-20261128-v2':'u8-digital-20261128-v1'),import.meta.url)));
+ const data=files.map(file=>earlyJson(new URL('data/'+file+'?v='+(file==='explore-images.json'?'u8-digital-20261128-v1':file==='de-store.json'?'mug-ship-20261128-v3':'u8-digital-20261128-v1'),import.meta.url)));
  [recommendations,translations,exploreImages]=await Promise.all([...data,listingOrderReady,extrasEnabled()?loadExtras():undefined]);
 });
 export const prepare=prepareDesign();
