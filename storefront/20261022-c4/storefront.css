@@ -1253,15 +1253,24 @@ button.ys-words-tag:focus-visible{outline:2px solid var(--green);outline-offset:
 
 /* iPhone Safari zooms into a focused field whose text is under 16 px and leaves the page zoomed (Yusuf, 28 Nov 2026: after the address search on a phone the
    screen overflows and has to be pinched back). The compact product page had set the address search and the Format / Size boxes to 15 px, and the review form
-   inherits 14 px from its labels. On phones these fields are 16 px; nothing else about them changes. It sits after the rules it overrides (it wins by order) and before the blocks at the end of this file that tests read to the last line. */
+   inherits 14 px from its labels. On phones these fields are 16 px; nothing else about them changes. Same day, the rest of the store's fields under 16 px:
+   the store search, the sort box of a listing, the arrow boxes of the street sign and the paper box of the 2 to 3 homes print. It sits after the rules it overrides (it wins by order) and before the blocks at the end of this file that tests read to the last line. */
 @media(max-width:740px){
 :host([design2][data-bw-pdp="c"]) .ys-search input,
 :host([design2][data-bw-pdp="c"]) .bw-field-line select,
 :host([design2][data-bw-pdp="c"]) .poster-options select,
 :host .rw-reviews input:not([type=checkbox]):not([type=file]),
 :host .rw-reviews textarea,
-:host .rw-reviews select{font-size:16px}
+:host .rw-reviews select,
+:host([design2]) .d2-search input,
+:host([design2]) .d2-sort select,
+:host .sg-row select,
+:host .homes-form select{font-size:16px}
 }
+/* The street sign's corner rows on a narrow phone (28 Nov 2026): a text field has a built-in width of about 20 characters, so the row could not get narrower
+   than 337 px and the whole form ran 33 px past a 320 px screen (9 px into the right margin at 360 px). The field now starts from nothing and takes the room
+   that is left next to the arrow box. */
+@media(max-width:740px){:host .sg-row input{width:0}}
 /* ===== Wobby headings (25 Nov 2026) =====
    Yusuf, 25 Nov 2026: "hadi hepsini yapalim, gecisi yapalim". Wobby is the brand headline face: one weight (400), no italic, about 30 % narrower than Fraunces, so
    every switched heading sets weight 400, normal style and no letter-spacing (italic emphasis would be colour only). HEADINGS ONLY: nav, prices, buttons, size
