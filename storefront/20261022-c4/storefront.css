@@ -1271,6 +1271,9 @@ button.ys-words-tag:focus-visible{outline:2px solid var(--green);outline-offset:
    than 337 px and the whole form ran 33 px past a 320 px screen (9 px into the right margin at 360 px). The field now starts from nothing and takes the room
    that is left next to the arrow box. */
 @media(max-width:740px){:host .sg-row input{width:0}}
+/* The phone buy bar in German (28 Nov 2026): "Deine Berliner Straße um 1928" needs 202 px and had 190 next to the wider "In den Warenkorb" button, so it
+   ended in "…". A little less button padding and gap gives the name 204 px; the button keeps its 44 px height. */
+@media(max-width:740px){:host([design2][data-bw-pdp="c"]) .buy-bar .primary{padding-inline:12px}:host([design2][data-bw-pdp="c"]) .buy-bar:not([hidden]){gap:10px}}
 /* ===== Wobby headings (25 Nov 2026) =====
    Yusuf, 25 Nov 2026: "hadi hepsini yapalim, gecisi yapalim". Wobby is the brand headline face: one weight (400), no italic, about 30 % narrower than Fraunces, so
    every switched heading sets weight 400, normal style and no letter-spacing (italic emphasis would be colour only). HEADINGS ONLY: nav, prices, buttons, size
