@@ -10794,5 +10794,51 @@
       }
     ],
     "mediaCaption": "Illustrated product preview. The print is centred opposite the handle."
+  },
+  {
+    "id": "dl-u8-weinmeisterstrasse",
+    "name": "U8 Weinmeisterstraße Printable Poster",
+    "place": "U8 Weinmeisterstraße · Looking up from the paper",
+    "image": "u8-weinmeisterstrasse-fullart.jpg",
+    "alt": "Blue risograph-style print of the tiled platform hall at U8 Weinmeisterstraße: a small passenger on a bench looks up from a newspaper between square columns and round lamps, with a yellow train arriving on the right and the U8 WEINMEISTERSTRASSE, BERLIN footer.",
+    "typeLine": "DIGITAL DOWNLOAD · 30 × 40 CM",
+    "kind": "digital",
+    "deliveryNote": "Digital download · 1 JPEG print file and a printing guide. No physical item.",
+    "deliveryDetails": "Your download includes one 3:4 sRGB JPEG, 3543 × 4724 px at 300 dpi for 30 × 40 cm, and a printing guide. The same file prints without cropping at 45 × 60 cm and 60 × 80 cm, with softer detail at larger sizes. No physical poster, frame or decor is included.",
+    "group": "stories",
+    "visualCreditsHtml": "<p>Photographic reference (form only): Lukas Beck, <a href=\"https://commons.wikimedia.org/wiki/File:Berlin_Weinmeisterstra%C3%9Fe_station_lub_2021-12-18.jpg\">Berlin Weinmeisterstraße station lub 2021-12-18.jpg</a>, 18 December 2021, Wikimedia Commons, <a href=\"https://creativecommons.org/licenses/by/4.0/\">CC BY 4.0</a>. Changes: reinterpreted as a blue risograph-style print; the hall, the bench, the passenger, the light and the train are arranged for the composition and are my interpretation. This is not a reproduction of the photograph. No endorsement is implied.</p><p>Place facts: Landesdenkmalamt Berlin, Denkmaldatenbank, <a href=\"https://denkmaldatenbank.berlin.de/daobj.php?obj_dok_nr=09080170\">U-Bahnhof Weinmeisterstraße</a> and <a href=\"https://denkmaldatenbank.berlin.de/daobj.php?obj_dok_nr=09080134\">U-Bahnhof Rosenthaler Platz</a>; ICOMOS Germany, <a href=\"https://www.icomos.de/data/pdf/lxxiv-0420-1826-21.pdf\">Hefte des Deutschen Nationalkomitees LXXIV (2021)</a>.</p>",
+    "sizeImages": {
+      "30x40 cm": "u8-weinmeisterstrasse-30x40.jpg"
+    },
+    "gallery": [
+      {
+        "image": "u8-weinmeisterstrasse-30x40.jpg",
+        "alt": "Complete artwork at 30 x 40 cm. Digital file only."
+      }
+    ],
+    "wixProductId": "113e5031-b177-19e2-19dd-720e1dfe6c1e"
+  },
+  {
+    "id": "dl-u8-blue-above-orange",
+    "name": "U8 Blue Above Orange Printable Poster",
+    "place": "U8 · Blue above orange",
+    "image": "u8-blue-above-orange-fullart.jpg",
+    "alt": "Cut-paper collage of two U8 station walls on one plane, blue tiles above and orange tiles below, with a single yellow train stripe between them and the U8 WEINMEISTERSTRASSE, BERLIN footer.",
+    "typeLine": "DIGITAL DOWNLOAD · 30 × 40 CM",
+    "kind": "digital",
+    "deliveryNote": "Digital download · 1 JPEG print file and a printing guide. No physical item.",
+    "deliveryDetails": "Your download includes one 3:4 sRGB JPEG, 3543 × 4724 px at 300 dpi for 30 × 40 cm, and a printing guide. The same file prints without cropping at 45 × 60 cm and 60 × 80 cm, with softer detail at larger sizes. No physical poster, frame or decor is included.",
+    "group": "stories",
+    "visualCreditsHtml": "<p>Photographic references (form only): Lukas Beck, <a href=\"https://commons.wikimedia.org/wiki/File:Berlin_Weinmeisterstra%C3%9Fe_station_lub_2021-12-18.jpg\">Berlin Weinmeisterstraße station lub 2021-12-18.jpg</a> and <a href=\"https://commons.wikimedia.org/wiki/File:Berlin_Rosenthaler_Platz_station_lub_2021-12-18_img01.jpg\">Berlin Rosenthaler Platz station lub 2021-12-18 img01.jpg</a>, both 18 December 2021, Wikimedia Commons, <a href=\"https://creativecommons.org/licenses/by/4.0/\">CC BY 4.0</a>. Changes: reinterpreted as a cut-paper collage; the two walls are stacked on one plane, and the tile shades and the train stripe are my interpretation. This is not a reproduction of either photograph. No endorsement is implied.</p><p>Place facts: Landesdenkmalamt Berlin, Denkmaldatenbank, <a href=\"https://denkmaldatenbank.berlin.de/daobj.php?obj_dok_nr=09080170\">U-Bahnhof Weinmeisterstraße</a> and <a href=\"https://denkmaldatenbank.berlin.de/daobj.php?obj_dok_nr=09080134\">U-Bahnhof Rosenthaler Platz</a>; ICOMOS Germany, <a href=\"https://www.icomos.de/data/pdf/lxxiv-0420-1826-21.pdf\">Hefte des Deutschen Nationalkomitees LXXIV (2021)</a>.</p>",
+    "sizeImages": {
+      "30x40 cm": "u8-blue-above-orange-30x40.jpg"
+    },
+    "gallery": [
+      {
+        "image": "u8-blue-above-orange-30x40.jpg",
+        "alt": "Complete artwork at 30 x 40 cm. Digital file only."
+      }
+    ],
+    "wixProductId": "fe07550b-11f4-24fd-6ad7-8b6a15c66bbd"
   }
 ]
