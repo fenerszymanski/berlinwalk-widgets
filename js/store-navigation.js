@@ -116,7 +116,7 @@ export const STORE_MENU_DESIGN2 = Object.freeze([
     {label:'Your name on a street sign',de:'Dein Name als Straßenschild',href:'https://walkofberlin.com/product-page/berlin-street-sign-with-your-name'},
     {label:'2027 Calendars',de:'Kalender 2027',href:storeHref('calendar')},
     {label:'Berlin Mugs',de:'Berlin-Tassen',href:'https://walkofberlin.com/category/berlin-mugs'},
-    {label:'Gifts by email',de:'Geschenke per E-Mail',href:'https://walkofberlin.com/category/berlin-christmas-gifts#xg-email',hrefDe:'https://walkofberlin.com/de/category/berlin-geschenke#xg-email'}
+    {label:'Digital gifts & vouchers',de:'Digitale Geschenke & Gutscheine',href:'https://walkofberlin.com/category/berlin-christmas-gifts#xg-email',hrefDe:'https://walkofberlin.com/de/category/berlin-geschenke#xg-email'}
   ]},
   {id:'explore',label:'Explore Berlin',de:'Berlin entdecken',noteDe:'Alle auf Englisch',href:storeHref('audio'),items:[
     {label:'Audio walks',de:'Audiotouren',href:storeHref('audio')},

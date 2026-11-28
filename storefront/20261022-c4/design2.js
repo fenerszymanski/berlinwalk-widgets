@@ -23,7 +23,7 @@ function earlyJson(url) {
 const listingOrderReady=earlyJson(new URL('data/listing-order.json?v=zoom-sort-20261117-v1',import.meta.url)).catch(()=>null).then(j=>{if(j&&Array.isArray(j.popular)&&j.created&&typeof j.created==='object')listingOrder=j;});
 export const prepareDesign=shareSuccessful(async ()=>{
  const files=['recommendations.json','de-store.json','explore-images.json'];
- const data=files.map(file=>earlyJson(new URL('data/'+file+'?v='+(file==='explore-images.json'?'reel-posters-digital-20261127-v1':file==='de-store.json'?'mug-shelves-20261128-v1':'reel-posters-digital-20261127-v1'),import.meta.url)));
+ const data=files.map(file=>earlyJson(new URL('data/'+file+'?v='+(file==='explore-images.json'?'reel-posters-digital-20261127-v1':file==='de-store.json'?'mug-shelves-20261128-v2':'reel-posters-digital-20261127-v1'),import.meta.url)));
  [recommendations,translations,exploreImages]=await Promise.all([...data,listingOrderReady,extrasEnabled()?loadExtras():undefined]);
 });
 export const prepare=prepareDesign();
@@ -112,9 +112,9 @@ const GIFT_GUIDE_SECTIONS = Object.freeze([
   {id:'wall',offer:true,ids:['pr-berlin-2027-wall-calendar','ed-print-02-pink','ed-print-01-tempelhof','ed-print-09-teufelsberg','ed-print-04-spaeti','pr-kottbusser-tor','wc','pr-berolina-modernist'],more:'print',
    en:{title:'For their wall',text:'Posters of places they know, printed to order. Frames not included.',more:'All posters'},
    de:{title:'Für ihre Wand',text:'Poster von Orten, die sie kennen, auf Bestellung gedruckt. Ohne Rahmen.',more:'Alle Poster'}},
-  {id:'email',ids:['ys-digital-file','ys1979-digital-file','au-christmas-mitte','trio'],chip:{de:'Per E-Mail'},
-   en:{title:'Last-minute, by email',text:'These arrive by email, so there is no post to wait for. A street file reaches you within 24 hours, so order it by 23 December. The audio walks are in English.'},
-   de:{title:'Last Minute per E-Mail',text:'Diese Geschenke kommen per E-Mail, ganz ohne Postweg. Eine Straßen-Datei kommt innerhalb von 24 Stunden, bestelle sie also bis zum 23. Dezember. Die Audio-Spaziergänge sind auf Englisch.'}}
+  {id:'email',ids:['ys-digital-file','ys1979-digital-file','au-christmas-mitte','trio'],voucher:true,chip:{de:'Per E-Mail'},   // 28 Nov 2026 (Yusuf: "Ekle"): the 1928 voucher card also sits at the end of this shelf, so the menu line "Digital gifts & vouchers" lands on it; the personal shelf keeps its own voucher card
+   en:{title:'Digital gifts & vouchers',text:'These arrive by email, so there is no post to wait for. A street file reaches you within 24 hours, so order it by 23 December. The voucher comes with a printable card. The audio walks are in English.'},
+   de:{title:'Digitale Geschenke & Gutscheine',text:'Diese Geschenke kommen per E-Mail, ganz ohne Postweg. Eine Straßen-Datei kommt innerhalb von 24 Stunden, bestelle sie also bis zum 23. Dezember. Der Gutschein kommt mit einer Karte zum Ausdrucken. Die Audio-Spaziergänge sind auf Englisch.'}}
 ]);
 // Gift guide refresh (24 Nov 2026, Yusuf: "gifts sayfası güncel mi baksana ... Evet, hazırla"): the 1979 family, the tote bags and the two digital street
 // files join the shelves, the clothing and poster shelves follow the last 30 days of product page views, and the one "16 December" line becomes

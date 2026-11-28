@@ -219,8 +219,8 @@ const BW_HEADER_STORE_DESIGN2_EN = [
         "href": "https://walkofberlin.com/category/berlin-mugs"
       },
       {
-        "label": "Gifts by email",
-        "de": "Geschenke per E-Mail",
+        "label": "Digital gifts & vouchers",
+        "de": "Digitale Geschenke & Gutscheine",
         "href": "https://walkofberlin.com/category/berlin-christmas-gifts#xg-email",
         "hrefDe": "https://walkofberlin.com/de/category/berlin-geschenke#xg-email"
       }
@@ -363,8 +363,8 @@ const BW_HEADER_STORE_DESIGN2_DE = [
         "href": "https://walkofberlin.com/de/category/berlin-mugs"
       },
       {
-        "label": "Geschenke per E-Mail",
-        "de": "Geschenke per E-Mail",
+        "label": "Digitale Geschenke & Gutscheine",
+        "de": "Digitale Geschenke & Gutscheine",
         "href": "https://walkofberlin.com/de/category/berlin-geschenke#xg-email",
         "hrefDe": "https://walkofberlin.com/de/category/berlin-geschenke#xg-email"
       }
