@@ -181,6 +181,10 @@ h2>.sk-heading{width:55%}
 .ys-wall-parts{display:flex;flex-wrap:wrap;margin-left:-1em}
 .ys-wall-parts>span{position:relative;padding-left:1em;white-space:nowrap}
 .ys-wall-parts>span::before{content:'·';position:absolute;left:0;width:1em;text-align:center}
+/* A sale price arrives as a block (badge, old price, new price, 30-day note). The strip shows only the price that is charged, with no claim of a reduction; the full sale line stays on the title price and the buy bar. */
+.ys-wall-price .gw-prices{display:inline;gap:0}
+.ys-wall-price .gw-prices :is(.gw-badge,del,small){display:none}
+.ys-wall-price .gw-prices strong{font-weight:inherit}
 .ys-wall-delivery{margin-bottom:5px;font-size:13px;line-height:1.35;color:var(--ink)}
 .ys-wall-delivery[hidden]{display:none}
 .ys-wall-text>.primary{width:100%;min-width:0;min-height:46px;margin-top:auto;padding:8px 12px;font-size:15px}
