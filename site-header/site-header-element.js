@@ -150,6 +150,11 @@ const BW_HEADER_STORE_DESIGN2_EN = [
         "href": "https://walkofberlin.com/category/all-products?tab=print&collection=sets"
       },
       {
+        "label": "U-Bahn posters",
+        "de": "U-Bahn-Poster",
+        "href": "https://walkofberlin.com/category/berlin-u-bahn-poster"
+      },
+      {
         "label": "Print at home",
         "de": "Zum Selbstdrucken",
         "href": "https://walkofberlin.com/category/all-products?tab=print&format=digital"
@@ -292,6 +297,11 @@ const BW_HEADER_STORE_DESIGN2_DE = [
         "label": "Sets",
         "de": "Sets",
         "href": "https://walkofberlin.com/de/category/all-products?tab=print&collection=sets"
+      },
+      {
+        "label": "U-Bahn-Poster",
+        "de": "U-Bahn-Poster",
+        "href": "https://walkofberlin.com/de/category/berlin-u-bahn-poster"
       },
       {
         "label": "Zum Selbstdrucken",
